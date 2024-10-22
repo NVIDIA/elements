@@ -1,5 +1,4 @@
 import { html } from 'lit';
-import { when } from 'lit/directives/when.js';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
@@ -8,76 +7,37 @@ import '@nvidia-elements/core/tabs/define.js';
 
 export default {
   title: 'Elements/Card/Examples',
-  component: 'nve-card',
-  argTypes: {
-    width: {
-      control: { type: 'range', min: 200, max: 500 }
-    },
-    height: {
-      control: { type: 'range', min: 50, max: 500 }
-    }
-  }
+  component: 'nve-card'
 };
 
-interface ArgTypes {
-  width?: number;
-  height?: number;
-  content?: string;
-  showFooter?: boolean;
-  showHeader?: boolean;
-  showAction?: boolean;
-}
-
 export const Default = {
-  render: (args: ArgTypes) => html`
-    <div>
-      <nve-card style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
-        ${when(
-          args.showHeader,
-          () => html`
-          <nve-card-header>
-            <div slot="title">Title</div>
-            <div slot="subtitle">Sub Title</div>
-
-
-            ${when(
-              args.showAction,
-              () => html`
-                <nve-icon-button slot="header-action" icon-name="more-actions" container="flat"></nve-icon-button>
-              `)}
-          </nve-card-header>
-          `
-        )}
-
-        <nve-card-content>
-          ${args.content}
-        </nve-card-content>
-
-        ${when(
-          args.showFooter,
-          () => html`
-            <nve-card-footer>
-              <nve-button style="margin-left: auto">Action</nve-button>
-            </nve-card-footer>
-          `
-        )}
-      </nve-card>
-    </div>
-  `,
-  args: { width: 300, height: 150, content: 'Card Content' }
+  render: () => html`
+  <nve-card>
+    <nve-card-header>
+      <div slot="title">Title</div>
+      <div slot="subtitle">Sub Title</div>
+    </nve-card-header>
+    <nve-card-content>
+      <p>card content</p>
+    </nve-card-content>
+    <nve-card-footer>
+      <nve-button style="margin-left: auto">Action</nve-button>
+    </nve-card-footer>
+  </nve-card>
+  `
 };
 
 export const CardWithContentLayout = {
   render: () => html`
-  <div>
-    <nve-card style="width: 400px; height: 300px;">
-      <nve-card-content nve-layout="row align:space-around">
+  <nve-card>
+    <nve-card-content>
+      <div nve-layout="row align:space-around">
         <div>Item 1</div>
         <div>Item 2</div>
         <div>Item 3</div>
-      </nve-card-content>
-    </nve-card>
-  </div>
+      </div>
+    </nve-card-content>
+  </nve-card>
   `
 }
 
@@ -102,23 +62,21 @@ export const MediaCard = {
 
 export const CardWithMultipleContentsAndDivider = {
   render: () => html`
-    <div>
-      <nve-card style="width: 400px; height: 300px;">
-        <nve-card-content nve-layout="row align:space-around">
-          <div>Item 1</div>
-          <div>Item 2</div>
-          <div>Item 3</div>
-        </nve-card-content>
+    <nve-card style="width: 400px; height: 300px;">
+      <nve-card-content nve-layout="row align:space-around">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </nve-card-content>
 
-        <hr style="width: 100%">
+      <hr style="width: 100%">
 
-        <nve-card-content nve-layout="row align:center gap:md">
-          <div>Item 1</div>
-          <div>Item 2</div>
-          <div>Item 3</div>
-        </nve-card-content>
-      </nve-card>
-    </div>
+      <nve-card-content nve-layout="row align:center gap:md">
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </nve-card-content>
+    </nve-card>
   `
 }
 
@@ -147,7 +105,6 @@ export const CardWithHeaderAndFooter = {
 
 export const DescriptionList = {
   render: () => html`
-<div>
   <nve-card style="width: 650px">
     <nve-card-header>
       <h2 slot="title">Nautical Terms</h2>
@@ -165,13 +122,11 @@ export const DescriptionList = {
       </dl>
     </nve-card-content>
   </nve-card>
-</div>
   `
 }
 
 export const Tabs = {
   render: () => html`
-<div>
   <nve-card style="width:400px; height:200px">
     <nve-card-header>
       <div slot="title">Title</div>
@@ -184,31 +139,26 @@ export const Tabs = {
 
     <nve-card-content> Card Content </nve-card-content>
   </nve-card>
-</div>
   `
 }
 
 export const ContainerFill = {
   render: () => html`
-    <div>
-      <nve-card container="full">
-        <nve-card-content>
-          Container Fill
-        </nve-card-content>
-      </nve-card>
-    </div>
+  <nve-card container="full">
+    <nve-card-content>
+      Container Fill
+    </nve-card-content>
+  </nve-card>
   `
 }
 
 export const ContainerFlat = {
   render: () => html`
-    <div>
-      <nve-card container="flat">
-        <nve-card-content>
-          Container Flat
-        </nve-card-content>
-      </nve-card>
-    </div>
+  <nve-card container="flat">
+    <nve-card-content>
+      Container Flat
+    </nve-card-content>
+  </nve-card>
   `
 }
 

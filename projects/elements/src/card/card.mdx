@@ -1,4 +1,5 @@
-import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Meta, Story } from '@storybook/addon-docs';
+import { Canvas } from '@nve-internals/storybook/blocks';
 import { Default, MediaCard, CardWithHeader, CardWithHeaderAndAction, Tabs, DescriptionList, CardWithHeaderAndFooter, CardWithMultipleContentsAndDivider, CardWithContentLayout, ContainerFill } from './card.stories';
 
 <Meta title="Elements/Card/Documentation" />
@@ -53,23 +54,13 @@ to the bottom of the card.
 
 <Canvas of={CardWithHeaderAndFooter} />
 
-## Card With Multiple Content Containers and Full-bleed Divider
+## Multiple Content Containers and Full-bleed Divider
 
 <Canvas of={CardWithMultipleContentsAndDivider} />
 
-## Card with Content Layout
+## Content Layout
 
 Layout system is supported when `nve-layout` attribute is used on the `card-content` element:
-
-```html
-<nve-card>
-  <nve-card-content nve-layout="row align:space-around">
-    <div>Item 1</div>
-    <div>Item 2</div>
-    <div>Item 3</div>
-  </nve-card-content>
-</nve-card>
-```
 
 <Canvas of={CardWithContentLayout} />
 

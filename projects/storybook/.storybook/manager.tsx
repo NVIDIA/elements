@@ -88,25 +88,8 @@ const ThemePicker = () => {
             </nve-switch>
           </nve-switch-group>
         </nve-drawer-content>
-        <nve-divider style={{'width': '100%'}}></nve-divider>
-        <nve-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
-          <nve-switch-group>
-            <label>API <nve-icon-button slot="label" id="api-hint-btn" container="flat" icon-name="information-circle-stroke" size="sm" style={{'--height': '12px'}}></nve-icon-button></label>
-            <nve-switch>
-              <label>React</label>
-              <input type="checkbox" value="sourceType" defaultChecked={globals.sourceType === 'react'} onChange={e => updateGlobals({ sourceType: e.target.checked ? 'react' : 'html' })} />
-            </nve-switch>
-            <nve-switch>
-              <label>Maglev Scope (pre v1.0)</label>
-              <input type="checkbox" value="scope" defaultChecked={globals.scope === 'mlv'} onChange={e => updateGlobals({ scope: e.target.checked ? 'mlv' : 'nve' })} />
-            </nve-switch>
-          </nve-switch-group>
-        </nve-drawer-content>
       </nve-drawer>
       <nve-tooltip behavior-trigger anchor="data-hint-btn" trigger="data-hint-btn" hidden>Demo data to be displayed in examples (see datagrid)</nve-tooltip>
-      <nve-tooltip behavior-trigger anchor="api-hint-btn" trigger="api-hint-btn" hidden style={{'--width': '280px'}}>
-        Preview code blocks with @nvidia-elements/react components or the nve namespace.
-      </nve-tooltip>
     </div>) : ''
   );
 }
