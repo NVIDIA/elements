@@ -201,10 +201,10 @@ export const MenuItemTooltip = {
   render: () => html`
   <nve-menu>
     <nve-menu-item>item 1</nve-menu-item>
-    <nve-menu-item id="menu-item-2">
+    <nve-menu-item popovertarget="menu-tooltip" id="menu-item-2">
       item 2
-      <nve-icon id="warning-icon" size="md" name="exclamation-triangle" style="margin-left: auto"></nve-icon>
-      <nve-tooltip trigger="warning-icon" behavior-trigger hidden>This is a warning tooltip</nve-tooltip>
+      <nve-icon id="menu-anchor" size="md" name="exclamation-triangle" style="margin-left: auto"></nve-icon>
+      <nve-tooltip anchor="menu-anchor" open-delay="2000" id="menu-tooltip">This is a warning tooltip</nve-tooltip>
     </nve-menu-item>
     <nve-menu-item>item 3</nve-menu-item>
   </nve-menu>

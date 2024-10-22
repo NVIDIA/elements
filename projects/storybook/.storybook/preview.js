@@ -19,9 +19,8 @@ import brandDarkTheme from '@nvidia-elements/themes/brand-dark.css?inline';
 import fontNvidiaSans from '@nvidia-elements/themes/fonts/nvidia-sans.css?inline';
 import '@nvidia-elements/core/button/define.js';
 
-import { playground } from './playground-url.js';
+import { H1, H2, H3, H4, P, UL, OL, PRE, CODE } from '@internals/storybook/blocks';
 import { updateScope } from './utils.js';
-import { H1, H2, H3, H4, P, UL, OL, PRE, CODE } from './markdown.jsx';
 
 const customElements = await import('@nvidia-elements/core/custom-elements.json');
 
@@ -48,7 +47,8 @@ export const parameters = {
       ul: UL,
       ol: OL,
       pre: PRE,
-      code: CODE
+      code: CODE,
+      canvas: PRE
     },
     theme: themes.dark,
     source: {
@@ -385,7 +385,7 @@ export const decorators = [(story, { globals }) => {
   window.document.querySelector('html').setAttribute('nve-theme', themes.trim());
   window.NVE_SB_GLOBALS = globals;
   return story();
-}, playground];
+}];
 
 function excludePrivateFields(manifest) {
   return {
