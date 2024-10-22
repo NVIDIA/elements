@@ -1,30 +1,19 @@
 import { html } from 'lit';
-import type { AlertGroup } from '@nvidia-elements/core/alert';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/divider/define.js';
 
 export default {
   title: 'Elements/Alert/Examples',
-  component: 'nve-alert-group',
-  argTypes: {
-    status: {
-      control: 'inline-radio',
-      options: ['', 'accent', 'warning', 'danger', 'success']
-    }
-  }
+  component: 'nve-alert-group'
 };
 
-type ArgTypes = AlertGroup;
-
 export const AlertGroupDefault = {
-  render: (args: ArgTypes) =>
-    html`
-    <nve-alert-group .status=${args.status}>
-      <nve-alert>alert message</nve-alert>
-    </nve-alert-group>
-    `,
-    args: { status: undefined }
+  render: () => html`
+  <nve-alert-group>
+    <nve-alert>alert message</nve-alert>
+  </nve-alert-group>
+  `
 };
 
 export const AlertGroupStatus = {

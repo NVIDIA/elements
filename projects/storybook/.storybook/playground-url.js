@@ -1,66 +1,13 @@
 import { gzipSync } from 'fflate';
-import { html } from 'lit';
 import format from 'html-format';
 import packageFile from '@nvidia-elements/core/package.json';
 import { ELEMENTS_VERSION } from './version.js';
 import metrics from '../../internals/metadata/metadata.json';
 
-export function playground(Story, context) {
-  const story = Story();
-  // if story is using lit dynamic templating and or args skip generating playground url
-  const usesDynamicArgs = Object.keys(context.unmappedArgs).length && story.values?.length;
-  const usesIframe = context.viewMode === 'story';
-  if (usesDynamicArgs || context.id === 'internal-integration--empty' || context.id.includes('metrics') || context.id.includes('foundations-tokens') || context.id.includes('foundations-i18n') || context.id.includes('foundations-typography') ||context.id.includes('elements-data-grid-examples--performance')) {
-    return story;
-  } else {
-    let source = story;
-
-    try {
-      source = getRenderString(story);
-      // prettier 3.0 is async and Storybook decorators cannot be async, temporary workaround using html-format package https://github.com/storybookjs/storybook/issues/10467
-      // const formattedSource = prettier.default.format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), { parser: 'html', plugins: [parserHTML.default], singleAttributePerLine: false, printWidth: 120 });
-      const formattedSource = format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), ' '.repeat(2), 120);
-      const files = serialize(addCssContent(createDefaultFiles(formattedSource, context), context));
-      const url = `https://elements-stage.nvidia.com/ui/elements-playground/?story=${context.id}&files=${files}&version=1`;
-      
-      if (usesIframe) {
-        const buttonList = parent.document.querySelector(`.docs-story:has(#iframe--${context.id}) *:has(.docblock-code-toggle)`);
-        const playground = parent.document.createElement('div');
-        playground.innerHTML = `<nve-button class="playground-btn" size="sm"><a href="${url}" target="_blank">Playground</a></nve-button>`;
-        buttonList.prepend(playground);
-      } else {
-        const buttonList = document.querySelector(`.docs-story:has(#story--${context.id}) *:has(.docblock-code-toggle)`);
-        const playground = document.createElement('div');
-        playground.innerHTML = `<nve-button class="playground-btn" size="sm"><a href="${url}" target="_blank">Playground</a></nve-button>`;
-        buttonList.prepend(playground);
-      }
-
-      return story;
-    } catch {
-      return source;
-    }
-  }
-}
-
-// https://stackoverflow.com/questions/70657298/render-lit-lit-html-templateresult-as-string
-function getRenderString(data) {
-  const { strings, values } = data;
-  const value_list = [...values, ''];
-  let output = '';
-  for (let i = 0; i < strings.length; i++) {
-    let v = value_list[i];
-    if (v._$litType$ !== undefined) {
-      v = getRenderString(v);
-    } else if (v instanceof Array) {
-      let new_v = '';
-      for (const inner_v of [...v]) {
-        new_v += getRenderString(inner_v);
-      }
-      v = new_v;
-    }
-    output += strings[i] + v;
-  }
-  return output;
+export function getPlaygroundURL(source, context) {
+  const formattedSource = format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), ' '.repeat(2), 120);
+  const files = serialize(addCssContent(createDefaultFiles(formattedSource, context), context));
+  return `https://elements-stage.nvidia.com/ui/elements-playground/?story=${context.id}&files=${files}&version=1`;
 }
 
 function serialize(data, compress = true) {
@@ -157,20 +104,14 @@ function addCssContent(defaultFiles, context) {
   if (context.id.includes('foundations-layout')) {
     defaultFiles['index.css'] = {
       content:
-`section.layout-example {
-  border: var(--nve-ref-border-width-lg) solid var(--nve-ref-border-color-emphasis);
-  margin-block: var(--nve-ref-space-sm) var(--nve-ref-space-xl) !important;
-  min-height: 200px !important;
-}
+`section {
+  height: 95vh;
+  width: 95vw;
 
-section.layout-example[mlv-layout~='column'] {
-  height: 400px;
-}
-
-section.layout-example > mlv-card {
-  min-width: 60px !important;
-  min-height: 60px !important;
-  --background: var(--nve-sys-layer-overlay-background);
+  nve-card {
+    min-width: 60px;
+    min-height: 60px;
+  }
 }`
     }
     return defaultFiles;
