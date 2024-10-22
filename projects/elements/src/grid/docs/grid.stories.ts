@@ -342,7 +342,7 @@ export const ColumnAction = {
     </nve-grid-row>
   `)}
 </nve-grid>
-<nve-dropdown anchor="column-0-btn" arrow>
+<nve-dropdown anchor="column-0-btn">
   <nve-search rounded>
     <input type="search" placeholder="search column" aria-label="search apps" />
   </nve-search>
