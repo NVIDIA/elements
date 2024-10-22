@@ -13,6 +13,7 @@ const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package
  */
 export const libraryBundleConfig = {
   build: {
+    cssMinify: 'esbuild',
     minify: false, // https://github.com/vitejs/vite/issues/8848
     outDir: 'dist/bundles/',
     emptyOutDir: false,
