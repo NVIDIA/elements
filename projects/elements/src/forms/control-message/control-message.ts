@@ -1,22 +1,15 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
-import { Alert } from '@nvidia-elements/core/alert';
 import styles from './control-message.css?inline';
 
-const alertStatus: AlertStatus = {
-  error: 'danger',
-  warning: 'warning',
-  success: 'success',
-  disabled: undefined
+const statusIcons = {
+  undefined: 'information-circle-stroke',
+  disabled: 'information-circle-stroke',
+  warning: 'exclamation-triangle',
+  success: 'checkmark-circle',
+  error: 'exclamation-circle'
 };
-
-interface AlertStatus {
-  error: 'danger';
-  warning: 'warning';
-  success: 'success';
-  disabled: undefined;
-}
 
 /**
  * @element nve-control-message
@@ -51,26 +44,11 @@ export class ControlMessage extends LitElement {
     version: '0.0.0'
   };
 
-  get alertStatus() {
-    if (this.status) {
-      return alertStatus[this.status];
-    } else if (this.error) {
-      return alertStatus.error;
-    } else {
-      return undefined;
-    }
-  }
-
-  static elementDefinitions = {
-    [Alert.metadata.tag]: Alert
-  };
-
   render() {
     return html`
       <div internal-host>
-        <nve-alert .status=${this.alertStatus}>
-          <slot></slot>
-        </nve-alert>
+        <nve-icon name=${statusIcons[this.status] as any}></nve-icon>
+        <slot></slot>
       </div>
     `;
   }

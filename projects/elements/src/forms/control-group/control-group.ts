@@ -8,7 +8,7 @@ import {
   associateControlGroup,
   tagSelector
 } from '@nvidia-elements/core/internal';
-import { ControlMessage } from '../control-message/control-message.js';
+import type { ControlMessage } from '../control-message/control-message.js';
 import { setupControlStatusStates, setupControlGroupStates, inputQuery } from '../utils/states.js';
 import { setupControlLayoutStates } from '../utils/layout.js';
 import styles from './control-group.css?inline';
@@ -44,7 +44,7 @@ export class ControlGroup extends LitElement {
 
   get #messages() {
     return this.querySelectorAll
-      ? Array.from(this.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)))
+      ? Array.from(this.querySelectorAll<ControlMessage>(tagSelector('nve-control-message')))
       : [];
   }
 
@@ -96,7 +96,7 @@ export class ControlGroup extends LitElement {
     this.#assignLabel();
     associateAriaLabel(this.label, this);
     associateAriaDescribedBy(
-      Array.from(this.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag))),
+      Array.from(this.querySelectorAll<ControlMessage>(tagSelector('nve-control-message'))),
       this
     );
     associateControlGroup(Array.from(this.inputs));

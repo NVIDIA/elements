@@ -2,26 +2,31 @@
   --color: var(--nve-sys-text-muted-color);
   --font-weight: var(--nve-ref-font-weight-regular);
   --font-size: var(--nve-ref-font-size-100);
-  --text-transform: initial;
-  --_alert-text-tranform: var(--text-transform);
-  --_alert-font-weight: var(--font-weight);
-  --_alert-font-size: var(--font-size);
-  --_alert-color: var(--color, initial);
+  --gap: var(--nve-ref-space-xs);
+  --_icon-color: var(--color);
 }
 
-nve-alert {
-  --color: var(--_alert-color);
-  --font-weight: var(--_alert-font-weight);
-  --font-size: var(--_alert-font-size);
-  --text-transform: var(--_alert-text-tranform);
+[internal-host] {
   --icon-color: var(--color);
+  gap: var(--gap);
+  color: var(--color);
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+  display: flex;
+}
+
+nve-icon {
+  --color: var(--_icon-color);
 }
 
 :host([status='success']) {
-  --_alert-color: var(--nve-sys-support-success-emphasis-color);
+  --color: var(--nve-sys-support-success-emphasis-color);
 }
 
-:host([status='error']),
-:host([error]) {
-  --_alert-color: var(--nve-sys-support-danger-emphasis-color);
+:host([status='warning']) {
+  --color: var(--nve-sys-support-warning-emphasis-color);
+}
+
+:host([status='error']) {
+  --color: var(--nve-sys-support-danger-emphasis-color);
 }

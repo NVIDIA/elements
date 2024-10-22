@@ -11,13 +11,13 @@ describe('app-header lighthouse report', () => {
         <nve-icon-button icon-name="person" slot="nav-actions" aria-label="profile"></nve-icon-button>
       </nve-app-header>
       <script type="module">
-        import '@nvidia-elements/core/alert/define.js';
+        import '@nvidia-elements/core/app-header/define.js';
       </script>
     `);
 
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(20);
+    expect(report.payload.javascript.kb).toBeLessThan(18.5);
   });
 });
