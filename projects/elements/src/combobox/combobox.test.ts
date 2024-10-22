@@ -104,6 +104,13 @@ describe(Combobox.metadata.tag, () => {
     expect(dropdown.matches(':popover-open')).toBe(true);
   });
 
+  it('should assign trigger and anchor to inner input container', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    const inputContainer = element.shadowRoot.querySelector<HTMLDivElement>('[input]');
+    expect(dropdown.anchor).toBe(inputContainer);
+    expect(dropdown.trigger).toBe(inputContainer);
+  });
+
   it('should hide options on escape keypress', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.matches(':popover-open')).toBe(false);
