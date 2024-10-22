@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.9.19](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.18...@nvidia-elements/core-v1.9.19) (2024-10-22)
+
+
+### Bug Fixes
+
+* **elements:** combobox trigger ([bd744f0](https://github.com/NVIDIA/elements/commit/bd744f05d97e9ae29c450e45b7daadb2233ddf79))
+
 ## [@nvidia-elements/core-v1.9.18](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.17...@nvidia-elements/core-v1.9.18) (2024-10-22)
 
 
