@@ -1,3 +1,12 @@
+## [@nvidia-elements/core-v1.9.17](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.16...@nvidia-elements/core-v1.9.17) (2024-10-22)
+
+
+### Bug Fixes
+
+* **elements:** alert group content padding ([26f0dee](https://github.com/NVIDIA/elements/commit/26f0dee683efc756aba9384d02d361b989d2513a))
+* **elements:** form control message with alert dep ([284ad0f](https://github.com/NVIDIA/elements/commit/284ad0f44902c061afc9c53263ebe5555df5332c))
+* **elements:** icon path bundle improvement ([6389ec9](https://github.com/NVIDIA/elements/commit/6389ec913cea97a1241a2f15ad7da41ab7a3bf72))
+
 ## [@nvidia-elements/core-v1.9.16](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.15...@nvidia-elements/core-v1.9.16) (2024-10-18)
 
 
