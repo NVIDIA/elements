@@ -11,9 +11,8 @@ pnpm-lock.yaml
 projects/labs/code/index.html
 projects/elements/src/css/*.css
 projects/elements/src/icon/server.ts
+projects/internals/metadata/*.json
 projects/starters/remix/build
-# right now we store genereated assets from the script in the build directory in the src directory, this should be changed
 projects/elements-react/src/**/*
-# this is a test artifact we should exclude
 coverage
 vite.*.ts.timestamp*

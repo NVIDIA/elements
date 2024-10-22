@@ -1,5 +1,5 @@
 {
-  "created": "2024-10-21T16:57:29.630Z",
+  "created": "2024-10-22T15:04:37.146Z",
   "types": {
     "props": [
       {
@@ -322,15 +322,15 @@
           },
           "functions": {
             "total": 24,
-            "covered": 22,
+            "covered": 23,
             "skipped": 0,
-            "pct": 91.66
+            "pct": 95.83
           },
           "statements": {
             "total": 112,
-            "covered": 108,
+            "covered": 109,
             "skipped": 0,
-            "pct": 96.42
+            "pct": 97.32
           },
           "branches": {
             "total": 76,
@@ -2872,9 +2872,9 @@
           },
           "branches": {
             "total": 6,
-            "covered": 6,
+            "covered": 5,
             "skipped": 0,
-            "pct": 100
+            "pct": 83.33
           }
         },
         {
@@ -3582,26 +3582,26 @@
         {
           "file": "forms/control-message/control-message.ts",
           "lines": {
-            "total": 15,
-            "covered": 15,
+            "total": 9,
+            "covered": 9,
             "skipped": 0,
             "pct": 100
           },
           "functions": {
-            "total": 4,
-            "covered": 4,
+            "total": 3,
+            "covered": 3,
             "skipped": 0,
             "pct": 100
           },
           "statements": {
-            "total": 16,
-            "covered": 16,
+            "total": 10,
+            "covered": 10,
             "skipped": 0,
             "pct": 100
           },
           "branches": {
-            "total": 4,
-            "covered": 4,
+            "total": 0,
+            "covered": 0,
             "skipped": 0,
             "pct": 100
           }
@@ -4933,28 +4933,28 @@
       "coverageTotal": {
         "file": "total",
         "lines": {
-          "total": 2523,
-          "covered": 2505,
+          "total": 2517,
+          "covered": 2499,
           "skipped": 0,
           "pct": 99.28
         },
         "statements": {
-          "total": 2947,
-          "covered": 2925,
+          "total": 2941,
+          "covered": 2920,
           "skipped": 0,
-          "pct": 99.25
+          "pct": 99.28
         },
         "functions": {
-          "total": 850,
+          "total": 849,
           "covered": 840,
           "skipped": 0,
-          "pct": 98.82
+          "pct": 98.93
         },
         "branches": {
-          "total": 1222,
-          "covered": 1143,
+          "total": 1218,
+          "covered": 1138,
           "skipped": 0,
-          "pct": 93.53
+          "pct": 93.43
         },
         "branchesTrue": {
           "total": 0,
@@ -5092,10 +5092,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.754,
+              "kb": 18.83,
               "requests": {
                 "index.js": {
-                  "kb": 19.17,
+                  "kb": 18.246,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -5216,10 +5216,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.669,
+              "kb": 19.754,
               "requests": {
                 "index.js": {
-                  "kb": 19.085,
+                  "kb": 19.17,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -5310,10 +5310,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.669,
+              "kb": 19.754,
               "requests": {
                 "index.js": {
-                  "kb": 19.085,
+                  "kb": 19.17,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -5376,10 +5376,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.669,
+              "kb": 19.754,
               "requests": {
                 "index.js": {
-                  "kb": 19.085,
+                  "kb": 19.17,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -5458,7 +5458,7 @@
             {
               "name": "status",
               "type": {
-                "text": "'accent' | 'warning' | 'success' | 'danger' | 'running' | 'scheduled' | 'queued' | 'pending' | 'starting' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored' | 'muted' | default"
+                "text": "'accent' | 'warning' | 'success' | 'danger' | 'scheduled' | 'queued' | 'pending' | 'starting' | 'running' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored' | 'muted' | default"
               },
               "description": "Defines the visual treatment to represent a interaction status. (tasks, support, trends)",
               "fieldName": "status"
@@ -5523,10 +5523,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.638,
+              "kb": 19.049,
               "requests": {
                 "index.js": {
-                  "kb": 18.864,
+                  "kb": 18.275,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -5707,10 +5707,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.553,
+              "kb": 19.638,
               "requests": {
                 "index.js": {
-                  "kb": 18.779,
+                  "kb": 18.864,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -5840,10 +5840,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.642,
+              "kb": 19.052,
               "requests": {
                 "index.js": {
-                  "kb": 18.868,
+                  "kb": 18.278,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -5957,15 +5957,11 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.624,
+              "kb": 10.304,
               "requests": {
                 "index.js": {
-                  "kb": 18.867,
+                  "kb": 10.304,
                   "name": "index.js"
-                },
-                "person.svg.js": {
-                  "kb": 0.757,
-                  "name": "person.svg.js"
                 }
               }
             },
@@ -6065,7 +6061,7 @@
             {
               "name": "status",
               "type": {
-                "text": "'running' | 'scheduled' | 'queued' | 'pending' | 'starting' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored' | 'accent' | 'warning' | 'success' | 'danger' | 'trend-down' | 'trend-up' | 'trend-neutral'"
+                "text": "'scheduled' | 'queued' | 'pending' | 'starting' | 'running' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored' | 'accent' | 'warning' | 'success' | 'danger' | 'trend-down' | 'trend-up' | 'trend-neutral'"
               },
               "description": "Defines the visual treatment to represent a interaction status. (tasks, support, trends)",
               "fieldName": "status"
@@ -6136,10 +6132,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 15.14,
+              "kb": 14.566,
               "requests": {
                 "index.js": {
-                  "kb": 15.14,
+                  "kb": 14.566,
                   "name": "index.js"
                 }
               }
@@ -6263,10 +6259,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 15.957,
+              "kb": 15.377,
               "requests": {
                 "index.js": {
-                  "kb": 15.309,
+                  "kb": 14.729,
                   "name": "index.js"
                 },
                 "chevron.svg.js": {
@@ -7434,10 +7430,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.634,
+              "kb": 18.072,
               "requests": {
                 "index.js": {
-                  "kb": 23.634,
+                  "kb": 18.072,
                   "name": "index.js"
                 }
               }
@@ -7570,10 +7566,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.518,
+              "kb": 23.634,
               "requests": {
                 "index.js": {
-                  "kb": 23.518,
+                  "kb": 23.634,
                   "name": "index.js"
                 }
               }
@@ -7786,10 +7782,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 24.493,
+              "kb": 22.358,
               "requests": {
                 "index.js": {
-                  "kb": 23.439,
+                  "kb": 21.304,
                   "name": "index.js"
                 },
                 "dropper.svg.js": {
@@ -8078,10 +8074,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 33.275,
+              "kb": 31.338,
               "requests": {
                 "index.js": {
-                  "kb": 32.501,
+                  "kb": 30.564,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -8317,10 +8313,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.495,
+              "kb": 17.876,
               "requests": {
                 "index.js": {
-                  "kb": 22.721,
+                  "kb": 17.102,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -8401,10 +8397,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.37,
+              "kb": 23.495,
               "requests": {
                 "index.js": {
-                  "kb": 22.596,
+                  "kb": 22.721,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -8499,10 +8495,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.37,
+              "kb": 23.495,
               "requests": {
                 "index.js": {
-                  "kb": 22.596,
+                  "kb": 22.721,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -8919,10 +8915,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 24.706,
+              "kb": 23.797,
               "requests": {
                 "index.js": {
-                  "kb": 23.227,
+                  "kb": 22.318,
                   "name": "index.js"
                 },
                 "copy.svg.js": {
@@ -9179,10 +9175,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 24.169,
+              "kb": 22.023,
               "requests": {
                 "index.js": {
-                  "kb": 23.276,
+                  "kb": 21.13,
                   "name": "index.js"
                 },
                 "calendar.svg.js": {
@@ -9420,10 +9416,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 24.173,
+              "kb": 22.021,
               "requests": {
                 "index.js": {
-                  "kb": 23.28,
+                  "kb": 21.128,
                   "name": "index.js"
                 },
                 "calendar.svg.js": {
@@ -9649,10 +9645,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.864,
+              "kb": 21.981,
               "requests": {
                 "index.js": {
-                  "kb": 22.052,
+                  "kb": 21.169,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -9777,16 +9773,16 @@
         "lighthouse": {
           "name": "nve-dialog",
           "scores": {
-            "performance": 100,
+            "performance": 98,
             "accessibility": 100,
             "bestPractices": 100
           },
           "payload": {
             "javascript": {
-              "kb": 22.753,
+              "kb": 22.864,
               "requests": {
                 "index.js": {
-                  "kb": 21.941,
+                  "kb": 22.052,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -9835,16 +9831,16 @@
         "lighthouse": {
           "name": "nve-dialog",
           "scores": {
-            "performance": 100,
+            "performance": 98,
             "accessibility": 100,
             "bestPractices": 100
           },
           "payload": {
             "javascript": {
-              "kb": 22.753,
+              "kb": 22.864,
               "requests": {
                 "index.js": {
-                  "kb": 21.941,
+                  "kb": 22.052,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -10015,7 +10011,7 @@
             {
               "name": "status",
               "type": {
-                "text": "'accent' | 'warning' | 'success' | 'danger' | 'running' | 'scheduled' | 'queued' | 'pending' | 'starting' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored'"
+                "text": "'accent' | 'warning' | 'success' | 'danger' | 'scheduled' | 'queued' | 'pending' | 'starting' | 'running' | 'restarting' | 'stopping' | 'finished' | 'failed' | 'unknown' | 'ignored'"
               },
               "description": "Defines the visual treatment to represent a interaction status. (tasks, support, trends)",
               "fieldName": "status"
@@ -10317,10 +10313,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.527,
+              "kb": 21.652,
               "requests": {
                 "index.js": {
-                  "kb": 21.715,
+                  "kb": 20.84,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -10441,10 +10437,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.426,
+              "kb": 22.527,
               "requests": {
                 "index.js": {
-                  "kb": 21.614,
+                  "kb": 21.715,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -10499,10 +10495,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.426,
+              "kb": 22.527,
               "requests": {
                 "index.js": {
-                  "kb": 21.614,
+                  "kb": 21.715,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -10557,10 +10553,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.426,
+              "kb": 22.527,
               "requests": {
                 "index.js": {
-                  "kb": 21.614,
+                  "kb": 21.715,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -10768,10 +10764,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.166,
+              "kb": 22.306,
               "requests": {
                 "index.js": {
-                  "kb": 22.354,
+                  "kb": 21.494,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -10915,10 +10911,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.044,
+              "kb": 23.166,
               "requests": {
                 "index.js": {
-                  "kb": 22.232,
+                  "kb": 22.354,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -10973,10 +10969,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.044,
+              "kb": 23.166,
               "requests": {
                 "index.js": {
-                  "kb": 22.232,
+                  "kb": 22.354,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -11193,10 +11189,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.929,
+              "kb": 17.401,
               "requests": {
                 "index.js": {
-                  "kb": 22.929,
+                  "kb": 17.401,
                   "name": "index.js"
                 }
               }
@@ -11318,10 +11314,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.696,
+              "kb": 20.927,
               "requests": {
                 "index.js": {
-                  "kb": 21.696,
+                  "kb": 20.927,
                   "name": "index.js"
                 }
               }
@@ -11410,10 +11406,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.677,
+              "kb": 21.696,
               "requests": {
                 "index.js": {
-                  "kb": 21.677,
+                  "kb": 21.696,
                   "name": "index.js"
                 }
               }
@@ -11544,10 +11540,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.677,
+              "kb": 21.696,
               "requests": {
                 "index.js": {
-                  "kb": 21.677,
+                  "kb": 21.696,
                   "name": "index.js"
                 }
               }
@@ -11612,10 +11608,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.677,
+              "kb": 21.696,
               "requests": {
                 "index.js": {
-                  "kb": 21.677,
+                  "kb": 21.696,
                   "name": "index.js"
                 }
               }
@@ -11677,10 +11673,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.677,
+              "kb": 21.696,
               "requests": {
                 "index.js": {
-                  "kb": 21.677,
+                  "kb": 21.696,
                   "name": "index.js"
                 }
               }
@@ -11739,10 +11735,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.677,
+              "kb": 21.696,
               "requests": {
                 "index.js": {
-                  "kb": 21.677,
+                  "kb": 21.696,
                   "name": "index.js"
                 }
               }
@@ -11816,10 +11812,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 21.677,
+              "kb": 21.696,
               "requests": {
                 "index.js": {
-                  "kb": 21.677,
+                  "kb": 21.696,
                   "name": "index.js"
                 }
               }
@@ -11900,7 +11896,7 @@
             {
               "name": "name",
               "type": {
-                "text": "'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'ancestors' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'color-palette' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'inspect' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'outline' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'running' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'start' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out' | default"
+                "text": "IconName | default"
               },
               "description": "The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name",
               "fieldName": "name"
@@ -11927,10 +11923,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 13.84,
+              "kb": 13.412,
               "requests": {
                 "index.js": {
-                  "kb": 13.083,
+                  "kb": 12.655,
                   "name": "index.js"
                 },
                 "person.svg.js": {
@@ -12128,7 +12124,7 @@
             {
               "name": "icon-name",
               "type": {
-                "text": "'academic-cap' | 'add-asset' | 'add-comment' | 'add-grid' | 'add-user' | 'add' | 'ancestors' | 'archive' | 'arrow-angle' | 'arrow-both' | 'arrow-path-rounded-square' | 'arrow-stop' | 'arrow' | 'at-symbol' | 'backspace' | 'bar-pill-stack' | 'bars-3-bottom-left' | 'bars-3-bottom-right' | 'bars-3-center-left' | 'bars-4' | 'beaker' | 'bell-slash' | 'bell-stroke' | 'bell' | 'bold' | 'book' | 'bookmark-stroke' | 'bookmark' | 'bounding-box' | 'branch' | 'briefcase' | 'browser' | 'bug' | 'calendar' | 'camera' | 'cancel' | 'caret' | 'carets-closed-square' | 'carousel' | 'category-list' | 'chart-bar' | 'chat-bubble' | 'chat-bubbles' | 'check-badge' | 'check' | 'checklist' | 'checkmark-circle' | 'chevron' | 'chip' | 'circle-angled-line' | 'circle-dash' | 'circle-dot-arrows' | 'circle-dot' | 'circle-half' | 'circle-rule' | 'circle-tick' | 'circle' | 'clipboard' | 'clock-circle-arrow' | 'clock' | 'cloud-download' | 'cloud-upload' | 'cloud' | 'code' | 'collapse-all' | 'collapse-details' | 'color-palette' | 'columns' | 'compare' | 'computer' | 'connect-node' | 'connected-blocks' | 'copy' | 'cross-hairs' | 'cursor-rays' | 'cursor-ripples' | 'data-management' | 'delete-node' | 'delete' | 'doc-checkmark' | 'document-clipboard' | 'dot-stroke' | 'dot' | 'double-chevron' | 'download' | 'drag' | 'dropper' | 'duplicate' | 'edit' | 'ellipses' | 'envelope' | 'exclamation-circle' | 'exclamation-triangle' | 'expand-all' | 'expand-details' | 'expression' | 'eye-hidden' | 'eye' | 'face-frown' | 'face-smile' | 'fast-forward-10' | 'fast-forward' | 'film' | 'filter-stroke' | 'filter' | 'flag-stroke' | 'flag' | 'fold' | 'folder' | 'fork' | 'gear' | 'globe-alt-stroke' | 'globe' | 'group-boxes' | 'group' | 'hand' | 'heading' | 'home' | 'horizontal-rule' | 'hourglass-end' | 'hourglass-mid' | 'hourglass-start' | 'hourglass' | 'identification' | 'image' | 'inbox' | 'infinity' | 'information-circle-stroke' | 'inspect' | 'italic' | 'key' | 'laptop-phone' | 'layers' | 'lifebuoy' | 'lightbulb' | 'lightning-bolt' | 'link' | 'lock' | 'login' | 'logout' | 'looping-off' | 'looping' | 'map-drives' | 'map-pin' | 'map' | 'markdown' | 'maximize' | 'megaphone' | 'menu' | 'merge' | 'meter' | 'minimize' | 'minus-circle' | 'minus' | 'moon' | 'more-actions' | 'music-note' | 'newspaper' | 'not-allowed' | 'numbers' | 'office-building' | 'outline' | 'paper-airplane' | 'paper-clip' | 'pause' | 'pencil-square' | 'person-2' | 'person-3' | 'person-circle' | 'person' | 'phone' | 'picture-in-picture' | 'pie-chart' | 'pin' | 'pizza-slice' | 'placeholder' | 'play' | 'plug' | 'plus-circle' | 'plus-minus' | 'priority-high' | 'priority-low' | 'priority-medium' | 'projector' | 'pull-close' | 'pull-draft' | 'pull-open' | 'pulse' | 'puzzle-piece' | 'question-mark-circle-stroke' | 'question-mark-circle' | 'rectangle-group' | 'rectangle-stack-horizontal' | 'rectangle-stack-vertical' | 'redo' | 'refresh' | 'reply' | 'rewind-10' | 'rewind' | 'rocketship' | 'running' | 'scale' | 'scissors' | 'search' | 'sensor' | 'server-stack' | 'server' | 'shapes' | 'share' | 'signal-slash' | 'signal' | 'signpost' | 'sort-ascending' | 'sort-descending' | 'soundwave' | 'sparkles' | 'split-horizontal' | 'split-none' | 'split-vertical' | 'star-stroke' | 'star' | 'start' | 'status-offline' | 'status-online' | 'stop-sign' | 'strikethrough' | 'sun' | 'swatch' | 'switch-apps' | 'switch' | 'table' | 'tag' | 'telescope' | 'template' | 'terminal' | 'thumb-stroke' | 'thumb' | 'traffic-cone' | 'transparent-box' | 'trend-down' | 'trend-up' | 'trophy' | 'truck' | 'typography' | 'undo' | 'unlock' | 'upload' | 'video-camera' | 'view-as-grid' | 'volume-muted' | 'volume' | 'wifi' | 'wrench' | 'x-circle' | 'zoom-in' | 'zoom-out'"
+                "text": "IconName"
               },
               "description": "Sets the icon name, which determines which icon to display.",
               "fieldName": "iconName"
@@ -12431,10 +12427,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 16.811,
+              "kb": 15.993,
               "requests": {
                 "index.js": {
-                  "kb": 16.811,
+                  "kb": 15.993,
                   "name": "index.js"
                 }
               }
@@ -12772,10 +12768,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.563,
+              "kb": 18.023,
               "requests": {
                 "index.js": {
-                  "kb": 23.563,
+                  "kb": 18.023,
                   "name": "index.js"
                 }
               }
@@ -12898,10 +12894,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.432,
+              "kb": 23.563,
               "requests": {
                 "index.js": {
-                  "kb": 23.432,
+                  "kb": 23.563,
                   "name": "index.js"
                 }
               }
@@ -13550,10 +13546,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 11.774,
+              "kb": 11.793,
               "requests": {
                 "index.js": {
-                  "kb": 11.774,
+                  "kb": 11.793,
                   "name": "index.js"
                 }
               }
@@ -13766,10 +13762,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 24.169,
+              "kb": 22.02,
               "requests": {
                 "index.js": {
-                  "kb": 23.276,
+                  "kb": 21.127,
                   "name": "index.js"
                 },
                 "calendar.svg.js": {
@@ -14015,10 +14011,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.225,
+              "kb": 21.61,
               "requests": {
                 "index.js": {
-                  "kb": 21.451,
+                  "kb": 20.836,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -14165,10 +14161,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.091,
+              "kb": 22.225,
               "requests": {
                 "index.js": {
-                  "kb": 21.317,
+                  "kb": 21.451,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -14229,10 +14225,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 17.408,
+              "kb": 16.894,
               "requests": {
                 "index.js": {
-                  "kb": 17.408,
+                  "kb": 16.894,
                   "name": "index.js"
                 }
               }
@@ -14459,10 +14455,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 35.833,
+              "kb": 33.249,
               "requests": {
                 "index.js": {
-                  "kb": 33.951,
+                  "kb": 31.367,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -14684,10 +14680,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.428,
+              "kb": 18.535,
               "requests": {
                 "index.js": {
-                  "kb": 18.643,
+                  "kb": 17.75,
                   "name": "index.js"
                 },
                 "double-chevron.svg.js": {
@@ -14801,10 +14797,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.387,
+              "kb": 19.428,
               "requests": {
                 "index.js": {
-                  "kb": 18.602,
+                  "kb": 18.643,
                   "name": "index.js"
                 },
                 "double-chevron.svg.js": {
@@ -14870,10 +14866,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.387,
+              "kb": 19.428,
               "requests": {
                 "index.js": {
-                  "kb": 18.602,
+                  "kb": 18.643,
                   "name": "index.js"
                 },
                 "double-chevron.svg.js": {
@@ -14944,10 +14940,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 19.387,
+              "kb": 19.428,
               "requests": {
                 "index.js": {
-                  "kb": 18.602,
+                  "kb": 18.643,
                   "name": "index.js"
                 },
                 "double-chevron.svg.js": {
@@ -15164,10 +15160,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 24.278,
+              "kb": 22.131,
               "requests": {
                 "index.js": {
-                  "kb": 23.337,
+                  "kb": 21.19,
                   "name": "index.js"
                 },
                 "eye.svg.js": {
@@ -15452,10 +15448,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 14.703,
+              "kb": 14.202,
               "requests": {
                 "index.js": {
-                  "kb": 14.703,
+                  "kb": 14.202,
                   "name": "index.js"
                 }
               }
@@ -15588,10 +15584,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 35.816,
+              "kb": 33.728,
               "requests": {
                 "index.js": {
-                  "kb": 33.689,
+                  "kb": 31.601,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -15858,10 +15854,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.035,
+              "kb": 17.455,
               "requests": {
                 "index.js": {
-                  "kb": 23.035,
+                  "kb": 17.455,
                   "name": "index.js"
                 }
               }
@@ -15958,10 +15954,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.922,
+              "kb": 23.035,
               "requests": {
                 "index.js": {
-                  "kb": 22.922,
+                  "kb": 23.035,
                   "name": "index.js"
                 }
               }
@@ -16174,10 +16170,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.218,
+              "kb": 17.639,
               "requests": {
                 "index.js": {
-                  "kb": 23.218,
+                  "kb": 17.639,
                   "name": "index.js"
                 }
               }
@@ -16441,10 +16437,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 24.02,
+              "kb": 21.874,
               "requests": {
                 "index.js": {
-                  "kb": 23.331,
+                  "kb": 21.185,
                   "name": "index.js"
                 },
                 "search.svg.js": {
@@ -16717,10 +16713,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 33.373,
+              "kb": 31.142,
               "requests": {
                 "index.js": {
-                  "kb": 32.139,
+                  "kb": 29.908,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -17102,10 +17098,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 16.611,
+              "kb": 16.057,
               "requests": {
                 "index.js": {
-                  "kb": 15.719,
+                  "kb": 15.165,
                   "name": "index.js"
                 },
                 "sort-ascending.svg.js": {
@@ -17223,10 +17219,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 20.614,
+              "kb": 19.773,
               "requests": {
                 "index.js": {
-                  "kb": 20.614,
+                  "kb": 19.773,
                   "name": "index.js"
                 }
               }
@@ -17555,10 +17551,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 20.563,
+              "kb": 20.614,
               "requests": {
                 "index.js": {
-                  "kb": 20.563,
+                  "kb": 20.614,
                   "name": "index.js"
                 }
               }
@@ -17795,10 +17791,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.139,
+              "kb": 17.589,
               "requests": {
                 "index.js": {
-                  "kb": 23.139,
+                  "kb": 17.589,
                   "name": "index.js"
                 }
               }
@@ -18264,10 +18260,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 11.751,
+              "kb": 11.771,
               "requests": {
                 "index.js": {
-                  "kb": 11.751,
+                  "kb": 11.771,
                   "name": "index.js"
                 }
               }
@@ -18585,10 +18581,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 16.327,
+              "kb": 15.713,
               "requests": {
                 "index.js": {
-                  "kb": 16.327,
+                  "kb": 15.713,
                   "name": "index.js"
                 }
               }
@@ -18871,10 +18867,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.981,
+              "kb": 17.391,
               "requests": {
                 "index.js": {
-                  "kb": 22.981,
+                  "kb": 17.391,
                   "name": "index.js"
                 }
               }
@@ -19113,10 +19109,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.897,
+              "kb": 21.728,
               "requests": {
                 "index.js": {
-                  "kb": 23.277,
+                  "kb": 21.108,
                   "name": "index.js"
                 },
                 "clock.svg.js": {
@@ -19337,10 +19333,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 22.958,
+              "kb": 22.077,
               "requests": {
                 "index.js": {
-                  "kb": 22.184,
+                  "kb": 21.303,
                   "name": "index.js"
                 },
                 "information-circle-stroke.svg.js": {
@@ -19575,10 +19571,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.184,
+              "kb": 22.323,
               "requests": {
                 "index.js": {
-                  "kb": 22.372,
+                  "kb": 21.511,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -19689,10 +19685,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.062,
+              "kb": 23.184,
               "requests": {
                 "index.js": {
-                  "kb": 22.25,
+                  "kb": 22.372,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -19754,10 +19750,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 23.062,
+              "kb": 23.184,
               "requests": {
                 "index.js": {
-                  "kb": 22.25,
+                  "kb": 22.372,
                   "name": "index.js"
                 },
                 "cancel.svg.js": {
@@ -19903,10 +19899,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 16.624,
+              "kb": 15.966,
               "requests": {
                 "index.js": {
-                  "kb": 14.838,
+                  "kb": 14.18,
                   "name": "index.js"
                 },
                 "add.svg.js": {
@@ -20334,10 +20330,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 27.875,
+              "kb": 25.344,
               "requests": {
                 "index.js": {
-                  "kb": 27.291,
+                  "kb": 24.76,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -20567,10 +20563,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 27.681,
+              "kb": 27.875,
               "requests": {
                 "index.js": {
-                  "kb": 27.097,
+                  "kb": 27.291,
                   "name": "index.js"
                 },
                 "caret.svg.js": {
@@ -20787,10 +20783,10 @@
           },
           "payload": {
             "javascript": {
-              "kb": 24.167,
+              "kb": 22,
               "requests": {
                 "index.js": {
-                  "kb": 23.274,
+                  "kb": 21.107,
                   "name": "index.js"
                 },
                 "calendar.svg.js": {

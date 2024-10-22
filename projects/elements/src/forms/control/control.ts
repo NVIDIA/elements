@@ -11,7 +11,7 @@ import {
   I18nController,
   hostAttr
 } from '@nvidia-elements/core/internal';
-import { ControlMessage } from '../control-message/control-message.js';
+import type { ControlMessage } from '../control-message/control-message.js';
 import {
   setupControlValidationStates,
   setupControlStates,
