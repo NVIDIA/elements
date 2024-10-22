@@ -1,5 +1,5 @@
 {
-  "created": "2024-10-15T13:28:01.946Z",
+  "created": "2024-10-22T13:22:17.208Z",
   "projects": [
     {
       "name": "@elements/ddb-dump-roadcast-frontend",
@@ -27,7 +27,7 @@
         },
         {
           "name": "nve-button",
-          "instanceTotal": 12
+          "instanceTotal": 13
         },
         {
           "name": "nve-card",
@@ -51,11 +51,11 @@
         },
         {
           "name": "nve-icon-button",
-          "instanceTotal": 14
+          "instanceTotal": 15
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 16
+          "instanceTotal": 17
         },
         {
           "name": "nve-logo",
@@ -79,7 +79,7 @@
         },
         {
           "name": "nve-select",
-          "instanceTotal": 4
+          "instanceTotal": 5
         },
         {
           "name": "nve-textarea",
@@ -98,24 +98,28 @@
           "instanceTotal": 1
         },
         {
+          "name": "nve-page-loader",
+          "instanceTotal": 2
+        },
+        {
           "name": "nve-dropdown",
-          "instanceTotal": 3
+          "instanceTotal": 4
         },
         {
           "name": "nve-menu-item",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-menu",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-range",
-          "instanceTotal": 1
+          "instanceTotal": 2
         },
         {
           "name": "nve-tag",
-          "instanceTotal": 2
+          "instanceTotal": 4
         },
         {
           "name": "nve-toast",
@@ -155,10 +159,6 @@
         },
         {
           "name": "nve-breadcrumb",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-page-loader",
           "instanceTotal": 1
         },
         {
@@ -226,7 +226,7 @@
           "instanceTotal": 2
         }
       ],
-      "instanceTotal": 165
+      "instanceTotal": 176
     },
     {
       "name": "workflows",
@@ -1048,15 +1048,15 @@
         },
         {
           "name": "nve-accordion-header",
-          "instanceTotal": 3
+          "instanceTotal": 2
         },
         {
           "name": "nve-accordion-content",
-          "instanceTotal": 3
+          "instanceTotal": 2
         },
         {
           "name": "nve-accordion",
-          "instanceTotal": 3
+          "instanceTotal": 2
         },
         {
           "name": "nve-badge",
@@ -1068,11 +1068,11 @@
         },
         {
           "name": "nve-icon-button",
-          "instanceTotal": 8
+          "instanceTotal": 9
         },
         {
           "name": "nve-icon",
-          "instanceTotal": 8
+          "instanceTotal": 9
         },
         {
           "name": "nve-alert-group",
@@ -1183,7 +1183,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 88
+      "instanceTotal": 87
     },
     {
       "name": "@elements/vehicle-management",
@@ -1410,7 +1410,7 @@
     {
       "name": "occupancy-labeler",
       "path": "src/ui/labeling/apps/occupancy-labeler",
-      "elementsVersion": "1.3.9",
+      "elementsVersion": "1.9.16",
       "elements": [
         {
           "name": "nve-alert-group",
@@ -1493,6 +1493,22 @@
           "instanceTotal": 1
         },
         {
+          "name": "nve-divider",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-dropdown",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-menu-item",
+          "instanceTotal": 1
+        },
+        {
+          "name": "nve-menu",
+          "instanceTotal": 1
+        },
+        {
           "name": "nve-progress-ring",
           "instanceTotal": 3
         },
@@ -1521,7 +1537,7 @@
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 48
+      "instanceTotal": 52
     },
     {
       "name": "static-4dgt-labeler",
@@ -2116,60 +2132,31 @@
       "instanceTotal": 222
     },
     {
-      "name": "ide",
-      "path": "src/ui/platform/apps/home",
+      "name": "account",
+      "path": "src/ui/platform/apps/account",
       "elementsVersion": "0.11.0",
+      "elements": [],
+      "instanceTotal": 0
+    },
+    {
+      "name": "platform/apps/drivedev-hub",
+      "path": "src/ui/platform/apps/drivedev-hub",
+      "elementsVersion": "0.37.10",
       "elements": [
-        {
-          "name": "nve-icon",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-button",
-          "instanceTotal": 3
-        },
-        {
-          "name": "nve-alert",
-          "instanceTotal": 2
-        },
-        {
-          "name": "nve-dropdown",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-control-message",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-control",
-          "instanceTotal": 1
-        },
         {
           "name": "nve-icon-button",
           "instanceTotal": 1
         },
         {
-          "name": "nve-input",
+          "name": "nve-icon",
           "instanceTotal": 1
         },
         {
-          "name": "nve-notification",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-textarea",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-tooltip",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-alert-banner",
+          "name": "nve-logo",
           "instanceTotal": 1
         }
       ],
-      "instanceTotal": 16
+      "instanceTotal": 3
     },
     {
       "name": "redash",
@@ -2494,46 +2481,6 @@
         }
       ],
       "instanceTotal": 12
-    },
-    {
-      "name": "@elements/ide",
-      "path": "src/ui/platform/libs/ide",
-      "elementsVersion": "0.11.0",
-      "elements": [
-        {
-          "name": "nve-icon",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-breadcrumb",
-          "instanceTotal": 1
-        }
-      ],
-      "instanceTotal": 2
-    },
-    {
-      "name": "@elements/ide-shell",
-      "path": "src/ui/platform/libs/ide-shell",
-      "elementsVersion": "0.11.0",
-      "elements": [
-        {
-          "name": "nve-icon-button",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-icon",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-logo",
-          "instanceTotal": 1
-        },
-        {
-          "name": "nve-breadcrumb",
-          "instanceTotal": 1
-        }
-      ],
-      "instanceTotal": 4
     },
     {
       "name": "@elements/web-utils",
