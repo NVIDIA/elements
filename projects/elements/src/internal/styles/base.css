@@ -24,7 +24,7 @@
 
 /* https://developers.google.com/web/fundamentals/web-components/best-practices#add-a-:host-display-style-that-respects-the-hidden-attribute */
 [hidden],
-:host([hidden]) {
+:host([hidden]:not([nve-popover])) {
   display: none !important;
 }
 

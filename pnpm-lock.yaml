@@ -933,6 +933,9 @@ importers:
 
   projects/storybook:
     dependencies:
+      '@lit/react':
+        specifier: 1.0.6
+        version: 1.0.6(@types/react@18.3.3)
       '@nvidia-elements/behaviors-alpine':
         specifier: workspace:*
         version: link:../labs/behaviors-alpine
