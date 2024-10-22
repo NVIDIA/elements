@@ -1,5 +1,6 @@
-import { Canvas, Meta, Story } from '@storybook/addon-docs';
-import { GridSpan2, GridSpan6, GridAlignTop, GridAlignVerticalCenter, GridAlignBottom, GridAlignHorizontalCenter, GridAlignCenter, GridAlignCenterAndBottom, GridAlignTopAndRight, GridAlignCenterAndRight, GridAlignBottomAndRight, GridAlignHorizontalStretch, GridAlignVerticalStretch, GridAlignFullStretch } from './layout.stories';
+import { Meta, Story } from '@storybook/addon-docs';
+import { Canvas } from '@nve-internals/storybook/blocks';
+import { GridSpan2, GridSpan6, GridVariableSpans, GridAlignTop, GridAlignVerticalCenter, GridAlignBottom, GridAlignHorizontalCenter, GridAlignCenter, GridAlignCenterAndBottom, GridAlignTopAndRight, GridAlignCenterAndRight, GridAlignBottomAndRight, GridAlignHorizontalStretch, GridAlignVerticalStretch, GridAlignFullStretch } from './layout.stories';
 
 <Meta title="Foundations/Layout/Grid" />
 
@@ -68,30 +69,62 @@ Similar to the Horizontal and Vertical _Flexbox_ based system you can also add a
 </section>
 ```
 
+### Span Items 2
+
 <Canvas of={GridSpan2} />
+
+### Span Items 6
 
 <Canvas of={GridSpan6} />
 
+### Span Item
+
+<Canvas of={GridVariableSpans} />
+
+### Align Top
+
 <Canvas of={GridAlignTop} />
+
+### Align Vertical Center
 
 <Canvas of={GridAlignVerticalCenter} />
 
+### Align Bottom
+
 <Canvas of={GridAlignBottom} />
+
+### Align Horizontal Center
 
 <Canvas of={GridAlignHorizontalCenter} />
 
+### Align Center
+
 <Canvas of={GridAlignCenter} />
+
+### Align Center and Bottom
 
 <Canvas of={GridAlignCenterAndBottom} />
 
+### Align Top and Right
+
 <Canvas of={GridAlignTopAndRight} />
+
+### Align Center and Right
 
 <Canvas of={GridAlignCenterAndRight} />
 
+### Align Bottom and Right
+
 <Canvas of={GridAlignBottomAndRight} />
+
+### Align Horizontal Stretch
 
 <Canvas of={GridAlignHorizontalStretch} />
 
+### Align Vertical Stretch
+
 <Canvas of={GridAlignVerticalStretch} />
+
+### Align Full Stretch
 
 <Canvas of={GridAlignFullStretch} />

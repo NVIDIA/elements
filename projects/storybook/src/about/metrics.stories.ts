@@ -193,7 +193,6 @@ class ElementStatus extends LitElement {
     <div className="status-summary" nve-layout="column gap:md align:stretch">
       <div nve-layout="column gap:xs align:stretch pad-top:xl">
         <h2 id="stability" nve-text="heading xl">Release Status</h2>
-        <nve-divider></nve-divider>
       </div>
       <p nve-text="body">All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
       <div nve-layout="column gap:sm">

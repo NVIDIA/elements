@@ -10,11 +10,8 @@ export default {
 const generateLayoutStory = (name, layoutValue, numCards) => {
   return {
     render: () => html`
-<h3 nve-text="section">${name}</h3>
-
-<section class="layout-example" nve-layout="${layoutValue}">
-  ${new Array(numCards).fill(html`<nve-card></nve-card>`)}
-</section>
+<section nve-layout="${layoutValue}">
+${new Array(numCards).fill(html`  <nve-card></nve-card>\n`)}</section>
     `
   }
 }
@@ -69,40 +66,34 @@ export const GapXxxl = generateLayoutStory('Gap Xxxl', 'row gap:xxxl', 5);
 /* Responsive Layout */
 export const GapResponsive = {
   render: () => html`
-    <div>
-      <section class="layout-example" nve-layout="row pad:md align:center gap@xs:xxxs gap@sm:xxs gap@md:md gap@lg:xl gap@xl:xxxl">
-        <nve-card></nve-card>
-        <nve-card></nve-card>
-        <nve-card></nve-card>
-        <nve-card></nve-card>
-        <nve-card></nve-card>
-      </section>
-    </div>
+    <section nve-layout="row pad:md align:center gap@xs:xxxs gap@sm:xxs gap@md:md gap@lg:xl gap@xl:xxxl">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+    </section>
   `
 }
 
 export const PadResponsive = {
   render: () => html`
-    <div>
-      <section class="layout-example" nve-layout="row pad@xs:xs pad@sm:sm pad@md:md pad@lg:lg pad@xl:xxxl">
-        <nve-card nve-layout="full"></nve-card>
-      </section>
-    </div>
+    <section nve-layout="row pad@xs:xs pad@sm:sm pad@md:md pad@lg:lg pad@xl:xxxl">
+      <nve-card nve-layout="full"></nve-card>
+    </section>
   `
 }
 
 
 export const HideResponsive = {
   render: () => html`
-    <div>
-      <section class="layout-example" nve-layout="row gap:lg">
-        <nve-card></nve-card>
-        <nve-card></nve-card>
-        <nve-card nve-layout="hide@md"></nve-card>
-        <nve-card nve-layout="hide@md"></nve-card>
-        <nve-card nve-layout="hide@lg"></nve-card>
-      </section>
-    </div>
+    <section nve-layout="row gap:lg">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card nve-layout="hide@md"></nve-card>
+      <nve-card nve-layout="hide@md"></nve-card>
+      <nve-card nve-layout="hide@lg"></nve-card>
+    </section>
   `
 }
 
@@ -144,7 +135,6 @@ export const GridAlignFullStretch = generateLayoutStory('Grid Align Full Stretch
 
 export const GridVariableSpans = {
   render: () => html`
-    <h3 nve-text="section">Grid with variable spans (<code>span:...</code>) on the children</h3>
     <section nve-layout="grid gap:md">
       ${new Array(12).fill(html`<nve-card></nve-card>`)}
 
@@ -211,7 +201,6 @@ export const ResponsiveGrid = {
 
 export const Full = {
   render: () => html`
-      <h3 nve-text="section">Full Container</h3>
-      <section nve-layout="row full"></section>
+    <section nve-layout="row full"></section>
   `
 }
