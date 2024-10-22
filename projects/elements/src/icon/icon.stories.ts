@@ -2,7 +2,7 @@ import { css, html, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import layout from '@nvidia-elements/styles/layout.css?inline';
 import typography from '@nvidia-elements/styles/typography.css?inline';
-import type { Icon, IconName} from '@nvidia-elements/core/icon';
+import type { IconName} from '@nvidia-elements/core/icon';
 import { ICON_NAMES } from '@nvidia-elements/core/icon';
 import type { Size  as IconSize} from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/button/define.js';
@@ -16,31 +16,11 @@ import '@nvidia-elements/core/notification/define.js';
 
 export default {
   title: 'Elements/Icon/Examples',
-  component: 'nve-icon',
-  argTypes: {
-    name: {
-      control: 'inline-radio',
-      options: ICON_NAMES
-    },
-    status: {
-      control: 'inline-radio',
-      options: ['default', 'success', 'warning', 'danger', 'accent']
-    },
-  }
+  component: 'nve-icon'
 };
 
-interface ArgTypes {
-  status: Icon['status'];
-  name: IconName;
-}
-
 export const Default = {
-  render: (args: ArgTypes) =>
-    html`<nve-icon
-      .name=${args.name}
-      .status=${args.status}
-    ></nve-icon>`,
-  args: { name: 'user' }
+  render: () => html`<nve-icon name="person"></nve-icon>`
 };
 
 export const IconCatalog = {

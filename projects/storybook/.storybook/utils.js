@@ -1,3 +1,23 @@
+// https://stackoverflow.com/questions/70657298/render-lit-lit-html-templateresult-as-string
+export function getRenderString(data) {
+  const { strings, values } = data;
+  const value_list = [...values, ''];
+  let output = '';
+  for (let i = 0; i < strings.length; i++) {
+    let v = value_list[i];
+    if (v._$litType$ !== undefined) {
+      v = getRenderString(v);
+    } else if (v instanceof Array) {
+      let new_v = '';
+      for (const inner_v of [...v]) {
+        new_v += getRenderString(inner_v);
+      }
+      v = new_v;
+    }
+    output += strings[i] + v;
+  }
+  return output;
+}
 
 const camelCase = str => str.replace(/\s*-\s*\w/g, parts => parts[parts.length - 1].toUpperCase());
 
