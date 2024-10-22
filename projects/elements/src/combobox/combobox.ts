@@ -120,7 +120,7 @@ export class Combobox extends Control implements ContainerElement {
   protected get suffixContent() {
     return !isServer
       ? html`
-    <nve-dropdown .popoverType=${'manual'} .modal=${false} @open=${e => (e.target.hidden = false)} @close=${this.#closeDropdown} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.input as HTMLElement} position="bottom">
+    <nve-dropdown .popoverType=${'manual'} .modal=${false} @open=${e => (e.target.hidden = false)} @close=${this.#closeDropdown} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
       <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
         ${this.#options
           .filter(o => !o.disabled)
