@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.9.18](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.17...@nvidia-elements/core-v1.9.18) (2024-10-22)
+
+
+### Bug Fixes
+
+* **elements:** default accordion animation timing ([98496c7](https://github.com/NVIDIA/elements/commit/98496c7f089058d61714b2e1bf2ef03771bd465b))
+* **elements:** popover default hidden visbility animation ([a95477b](https://github.com/NVIDIA/elements/commit/a95477b45cff2aa1bea99e1433f6b37c50a0d80c))
+
 ## [@nvidia-elements/core-v1.9.17](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.16...@nvidia-elements/core-v1.9.17) (2024-10-22)
 
 
