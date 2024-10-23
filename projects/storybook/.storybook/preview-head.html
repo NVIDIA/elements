@@ -53,7 +53,7 @@
       display: flex !important;
       flex-direction: column !important;
       gap: 24px !important;
-      max-width: 1100px !important;
+      max-width: 1120px !important;
     }
 
     .sbdocs-content:has(#getting-started-img) {
@@ -289,9 +289,10 @@
       [nve-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
         background-position: center 15vh !important;
       }
-
+      
       .sbdocs.sbdocs-wrapper {
         padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl) !important;
+        gap: 5rem !important;
       }
     }
 
@@ -328,6 +329,50 @@
     [scale='1'] {
       transform: none !important;
       width: 100% !important;
+    }
+
+    [nve-text='list sb'] {
+      padding: 0;
+      height: fit-content;
+      list-style: none !important;
+      margin: 50px 0 0 0 !important;
+      position: sticky !important;
+      display: none;
+      top: 50px;
+
+      li {
+        padding-bottom: 14px;
+      }
+
+      a {
+        text-decoration: none !important;
+        color: var(--nve-sys-text-muted-color) !important;
+        text-wrap: nowrap !important;
+        min-width: 150px;
+        max-width: 150px;
+        display: block;
+
+        &:hover {
+          text-decoration: underline !important;
+        }
+
+        &:visited {
+          color: var(--nve-sys-text-muted-color) !important;
+        }
+      }
+    }
+
+    .sbdocs.sbdocs-wrapper:has(element-metrics):not(:has([nve-text='list sb']))::after {
+      display: block;
+      content: ' ';
+      width: 150px;
+      height: 1px;
+    }
+
+    @media (min-width: 1320px) {
+      [nve-text='list sb'] {
+        display: block;
+      }
     }
 </style>
 <div hidden style="display: none !important">
