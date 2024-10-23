@@ -229,9 +229,14 @@ class ElementStatus extends LitElement {
   createRenderRoot() {
     return this;
   }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.id = 'element-status';
+  }
 }
 
-define(ElementStatus)
+define(ElementStatus);
 
 class ElementMetrics extends LitElement {
   @property({ type: String }) tag = '';
@@ -252,7 +257,7 @@ class ElementMetrics extends LitElement {
     return html`
       <section nve-layout="column gap:lg">
         <div nve-layout="row gap:xs align:center full">
-          <div nve-layout="row gap:sm">
+          <div nve-layout="row gap:xs">
             ${getStatusBadge(element.status, ` ${ELEMENTS_VERSION}`, '')}
             ${getCoverageStatus(element.tests.coverageTotal, 'coverage: ', '')}
             ${element.lighthouse?.payload ? getPayloadSize(element.lighthouse?.payload, '') : nothing}
@@ -382,6 +387,13 @@ class ElementAPI extends LitElement {
         </div>
       ` : nothing}
     `;
+  }
+
+  updated(props) {
+    super.updated(props);
+    if (!this.type) {
+      this.id = `element-api`;
+    }
   }
 }
 
