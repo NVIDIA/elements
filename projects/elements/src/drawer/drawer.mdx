@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, Visual, Events, Small, Large, Scroll, NonClosable, Position, } from './drawer.stories';
+import { Default, Visual, Events, Small, Large, Scroll, NonClosable, Position } from './drawer.stories';
 
 <Meta title="Elements/Drawer/Documentation" />
 
@@ -32,9 +32,9 @@ import '@nvidia-elements/core/drawer/define.js';
 
 ## Standard
 
-<Canvas of={Visual} story={{ inline: false, height: 700 }} />
+<Canvas of={Default} />
 
-<Canvas of={Default} story={{ inline: false, height: 700 }} />
+<Canvas of={Visual} story={{ inline: false, height: 700 }} />
 
 ## Size
 
