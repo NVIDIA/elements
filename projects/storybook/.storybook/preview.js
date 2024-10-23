@@ -259,11 +259,13 @@ export const parameters = {
   }
 };
 
+const storedGlobals = JSON.parse(localStorage.getItem('elements-sb-globals')) || {};
+
 export const globalTypes = {
   theme: {
     name: 'Themes',
     description: 'Themes',
-    defaultValue: 'dark',
+    defaultValue: storedGlobals?.theme ?? 'dark',
     toolbar: {
       title: 'Themes',
       showName: true,
@@ -280,7 +282,7 @@ export const globalTypes = {
   font: {
     name: 'Font',
     description: 'Fonts',
-    defaultValue: '',
+    defaultValue: storedGlobals?.font ?? '',
     toolbar: {
       title: 'Font',
       showName: true,
@@ -294,7 +296,7 @@ export const globalTypes = {
   scale: {
     name: 'Scale',
     description: 'Scale',
-    defaultValue: '',
+    defaultValue: storedGlobals?.scale ?? '',
     toolbar: {
       title: 'Scale',
       showName: true,
@@ -307,7 +309,7 @@ export const globalTypes = {
   debug: {
     name: 'Debug',
     description: 'Debug',
-    defaultValue: '',
+    defaultValue: storedGlobals?.debug ?? '',
     toolbar: {
       title: 'Debug',
       showName: true,
@@ -320,7 +322,7 @@ export const globalTypes = {
   animation: {
     name: 'Animation',
     description: 'Animation',
-    defaultValue: '',
+    defaultValue: storedGlobals?.animation ?? '',
     toolbar: {
       title: 'Animation',
       showName: true,
@@ -333,7 +335,7 @@ export const globalTypes = {
   dataTheme: {
     name: 'Data',
     description: 'Data',
-    defaultValue: '',
+    defaultValue: storedGlobals?.dataTheme ?? '',
     toolbar: {
       title: 'Data',
       showName: true,
@@ -347,7 +349,7 @@ export const globalTypes = {
   scope: {
     name: 'Scope',
     description: 'Scope',
-    defaultValue: 'nve',
+    defaultValue: storedGlobals?.scope ?? 'nve',
     toolbar: {
       icon: 'beaker',
       showName: false,
@@ -360,7 +362,7 @@ export const globalTypes = {
   sourceType: {
     name: 'Source Type',
     description: 'Source Type',
-    defaultValue: 'html',
+    defaultValue: storedGlobals?.sourceType ?? 'html',
     toolbar: {
       icon: 'beaker',
       showName: false,
@@ -385,7 +387,46 @@ export const decorators = [(story, { globals }) => {
   window.document.querySelector('html').setAttribute('nve-theme', themes.trim());
   window.NVE_SB_GLOBALS = globals;
   return story();
+},
+(story) => {
+  const listId = `${document.title}-list`;
+  const docsWrapper = document.querySelector('.sbdocs-wrapper');
+  const elementMetrics = document.querySelector('element-metrics');
+
+  if (docsWrapper && elementMetrics && !document.querySelector(`#${listId}`)) {
+    const headings = [
+      ...Array.from(document.querySelectorAll('h1, h2, h3, h4')).filter(h => h.className === 'dynamic-anchor'),
+      document.querySelector('#element-status') ? { textContent: 'Status', id: 'element-status'} : null,
+      document.querySelector('#element-api') ? { textContent: 'API', id: 'element-api'} : null
+    ].filter(i => !!i);
+  
+    if (headings.length > 2) {
+      const list = headingsToUL(headings);
+      list.id = listId;
+      docsWrapper.appendChild(list);
+    }
+  }
+  return story();
 }];
+
+function headingsToUL(headings) {
+  const ul = document.createElement('ul');
+  ul.setAttribute('nve-text', 'list sb');
+  for (const heading of headings) {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.setAttribute('nve-text', 'link truncate');
+    a.href = `./?path=/docs/${document.title}#${heading.id}`;
+    a.textContent = heading.textContent;
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.querySelector(`#${heading.id}`).scrollIntoView();
+    });
+    li.appendChild(a);
+    ul.appendChild(li);
+  }
+  return ul;
+}
 
 function excludePrivateFields(manifest) {
   return {
