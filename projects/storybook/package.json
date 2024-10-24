@@ -65,6 +65,7 @@
         "src/**",
         "package.json",
         "tsconfig.json",
+        "../**/coverage/size/index.html",
         "../elements/src/**/*.mdx",
         "../elements/src/**/*.stories.ts",
         "../elements-react/docs/**/*.mdx",
