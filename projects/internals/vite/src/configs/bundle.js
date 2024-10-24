@@ -3,6 +3,7 @@ import process from 'process';
 import terser from '@rollup/plugin-terser';
 import { minifyHTML } from '../plugins/minify-html.js';
 import { resolve } from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package.json')));
 
@@ -36,7 +37,14 @@ export const libraryBundleConfig = {
       },
       plugins: [
         minifyHTML(),
-        terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
+        terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } }),
+        visualizer({
+          filename: 'coverage/size/index.html',
+          gzipSize: true,
+          brotliSize: true,
+          sourcemap: false,
+          template: 'treemap'
+        })
       ]
     }
   }
