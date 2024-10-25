@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.19...@nvidia-elements/core-v1.10.0) (2024-10-25)
+
+
+### Features
+
+* **elements:** styling for slotted nve-icon in nve-logo ([a5abf9e](https://github.com/NVIDIA/elements/commit/a5abf9ed552039d796cd37635926390518ce7dc2))
+
 ## [@nvidia-elements/core-v1.9.19](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.18...@nvidia-elements/core-v1.9.19) (2024-10-22)
 
 
