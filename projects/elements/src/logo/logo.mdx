@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
 import { Canvas } from '@internals/storybook/blocks';
-import { Default, Size, Color } from './logo.stories';
+import { Default, Size, Color, SlottedIcons } from './logo.stories';
 
 <Meta title="Elements/Logo/Documentation" />
 
@@ -33,6 +33,12 @@ import '@nvidia-elements/core/logo/define.js';
 <element-api tag="nve-logo" type="property" value="color"></element-api>
 
 <Canvas of={Color} />
+
+## Slotted Icon
+
+Slotted icon in logo will inherit logo color and size
+
+<Canvas of={SlottedIcons} />
 
 <element-status tag="nve-logo"></element-status>
 
