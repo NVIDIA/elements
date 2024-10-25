@@ -177,7 +177,7 @@ export class Accordion extends LitElement implements ContainerElement {
 
           <slot name="icon-button">
             <nve-icon-button
-              container="flat"
+              container="inline"
               icon-name="caret"
               direction=${this.expanded ? (this.#hasAction ? 'down' : 'up') : this.#hasAction ? 'right' : 'down'}
               ?disabled=${this.disabled}
