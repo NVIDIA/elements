@@ -27,6 +27,31 @@ export const Size = {
   `
 };
 
+export const SlottedIcons = {
+  render: () => html`
+<div nve-layout="row gap:xs">
+  <nve-logo color="pink-rose" aria-label="pink rose large" size="lg">
+    <nve-icon name="star"></nve-icon>
+  </nve-logo>
+  <nve-logo color="pink-rose" aria-label="pink rose medium" size="md">
+    <nve-icon name="star"></nve-icon>
+  </nve-logo>
+  <nve-logo color="pink-rose" aria-label="pink rose small" size="sm">
+    <nve-icon name="star"></nve-icon>
+  </nve-logo>
+  <nve-logo color="red-cardinal" aria-label="red cardinal">
+    <nve-icon name="star"></nve-icon>
+  </nve-logo>
+  <nve-logo color="green-grass" aria-label="green grass">
+    <nve-icon name="star"></nve-icon>
+  </nve-logo>
+  <nve-logo color="blue-cobalt" aria-label="blue cobalt">
+    <nve-icon name="star"></nve-icon>
+  </nve-logo>
+</div>
+  `
+};
+
 export const Color = {
   render: () => html`
 <div nve-layout="row gap:xs align:wrap">
