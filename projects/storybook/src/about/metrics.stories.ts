@@ -491,7 +491,20 @@ class ElementsMetrics extends LitElement {
         <h3 nve-text="body bold">Summary:</h3>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Total Available Web Components</span>
-          <span nve-text="body sm bold"><nve-badge status="scheduled">${metrics['@nvidia-elements/core'].elements.length}</nve-badge></span>
+          <span nve-text="body sm bold">
+            <nve-badge color="yellow-amber">
+              <nve-icon name="carets-closed-square" slot="prefix-icon"></nve-icon>
+              ${metrics['@nvidia-elements/core'].elements.length}
+            </nve-badge>
+          </span>
+          /
+          <span nve-text="body sm muted">Total Available Parent Elements</span>
+          <span nve-text="body sm bold">
+            <nve-badge prominence="emphasis" color="brand-green">
+              <nve-icon name="rectangle-group" slot="prefix-icon"></nve-icon>
+              ${[...new Set(metrics['@nvidia-elements/core'].elements.map(el => el.name.split('-')[1]))].length + 2}
+            </nve-badge>
+          </span>
         </section>
       </div>
       <nve-grid style="--scroll-height: calc(100vh - 290px)">
