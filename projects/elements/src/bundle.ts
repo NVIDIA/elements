@@ -7,6 +7,7 @@ import '@nvidia-elements/themes/debug.css';
 import '@nvidia-elements/styles/layout.css';
 import '@nvidia-elements/styles/typography.css';
 
+import '@nvidia-elements/core/polyfills';
 import '@nvidia-elements/core/accordion/define.js';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/app-header/define.js';
