@@ -38,6 +38,12 @@
   color: inherit !important;
 }
 
+::slotted(nve-icon) {
+  --color: var(--state-color);
+  --width: var(--font-size);
+  --height: var(--font-size);
+}
+
 :host([size='sm']) {
   --width: var(--nve-ref-size-600);
   --height: var(--nve-ref-size-600);
