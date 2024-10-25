@@ -743,9 +743,16 @@ define(TestMetrics);
 class MetricDemo extends LitElement {
   @state() rawData: '' | 'elements' | 'projects' | 'versions' | 'tests' = '';
 
-  @state() tab: 'metrics' | 'test' | 'lighthouse' | 'elements' | 'metadata' = 'metrics';
+  @state() tab: 'metrics' | 'test' | 'lighthouse' | 'elements' | 'metadata' | 'bundle' = 'metrics';
 
-  static styles = [unsafeCSS(`${typography}${layout}`)];
+  static styles = [unsafeCSS(`${typography}${layout}`), css`
+  .bundle {
+    border: 0;
+    height: calc(100vh - 175px);
+    width: 100%;
+    margin-top: -24px;
+  }
+  `];
 
   static metadata = {
     tag: 'metrics-demo',
@@ -768,6 +775,7 @@ class MetricDemo extends LitElement {
           <nve-tabs>
             <nve-tabs-item .selected=${this.tab === 'metrics'} @click=${() => this.tab = 'metrics'} selected>Metrics</nve-tabs-item>
             <nve-tabs-item .selected=${this.tab === 'test'} @click=${() => this.tab = 'test'}>Testing &amp; Performance</nve-tabs-item>
+            <nve-tabs-item .selected=${this.tab === 'bundle'} @click=${() => this.tab = 'bundle'}>Bundle Explorer</nve-tabs-item>
             <nve-tabs-item .selected=${this.tab === 'elements'} @click=${() => this.tab = 'elements'}>Maglev</nve-tabs-item>
             <nve-tabs-item .selected=${this.tab === 'metadata'} @click=${() => this.tab = 'metadata'}>Raw Metadata</nve-tabs-item>
           </nve-tabs>
@@ -779,6 +787,7 @@ class MetricDemo extends LitElement {
           <test-metrics></test-metrics>
           <lighthouse-metrics style="margin-top: 26px;"></lighthouse-metrics>
         </div>` : nothing}
+        ${this.tab === 'bundle' ? html`<iframe id="bundle" class="bundle" src="iframe.html?viewMode=story&id=internal-bundle-sizes--elements"></iframe>` : nothing}
         ${this.tab === 'elements' ? html`<project-metrics></project-metrics>` : nothing}
         ${this.tab === 'metadata' ? html`<metrics-data></metrics-data>` : nothing}
       </section>
