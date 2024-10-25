@@ -16,6 +16,7 @@ describe('logo visual', () => {
 function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
+    import '@nvidia-elements/core/icon/define.js';
     import '@nvidia-elements/core/logo/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
@@ -30,6 +31,27 @@ function template(theme: '' | 'dark' = '') {
     <nve-logo size="sm" color="green-mint" aria-label="green mint">•︎•︎</nve-logo>
     <nve-logo color="green-mint" aria-label="green mint">•︎•︎</nve-logo>
     <nve-logo size="lg" color="green-mint" aria-label="green mint">•︎•︎</nve-logo>
+  </div>
+
+  <div nve-layout="row gap:xs">
+    <nve-logo color="pink-rose" aria-label="pink rose large" size="lg">
+      <nve-icon name="star"></nve-icon>
+    </nve-logo>
+    <nve-logo color="pink-rose" aria-label="pink rose medium" size="md">
+      <nve-icon name="star"></nve-icon>
+    </nve-logo>
+    <nve-logo color="pink-rose" aria-label="pink rose small" size="sm">
+      <nve-icon name="star"></nve-icon>
+    </nve-logo>
+    <nve-logo color="red-cardinal" aria-label="red cardinal">
+      <nve-icon name="star"></nve-icon>
+    </nve-logo>
+    <nve-logo color="green-grass" aria-label="green grass">
+      <nve-icon name="star"></nve-icon>
+    </nve-logo>
+    <nve-logo color="blue-cobalt" aria-label="blue cobalt">
+      <nve-icon name="star"></nve-icon>
+    </nve-logo>
   </div>
 
   <div nve-layout="row gap:xs align:wrap">
