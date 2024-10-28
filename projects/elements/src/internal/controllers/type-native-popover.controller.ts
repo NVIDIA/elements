@@ -11,6 +11,7 @@ export interface NativePopover extends ReactiveElement {
   openDelay?: number;
   popoverType?: PopoverType;
   modal?: boolean;
+  popoverDismissible?: boolean;
   _activeTrigger?: HTMLElement;
   _internals?: ElementInternals;
   /** @deprecated */
@@ -91,7 +92,12 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   #setupModalLightDismiss() {
     this.host.addEventListener('pointerup', e => {
-      if (this.host.modal && this.host.matches(':popover-open') && clickOutsideElementBounds(e, this.host)) {
+      if (
+        this.host.popoverDismissible &&
+        this.host.modal &&
+        this.host.matches(':popover-open') &&
+        clickOutsideElementBounds(e, this.host)
+      ) {
         this.host.hidePopover();
       }
     });
