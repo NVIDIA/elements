@@ -24,6 +24,7 @@ export * from './controllers/type-native-popover-trigger.controller.js';
 export * from './controllers/type-native-popover.controller.js';
 export * from './controllers/type-ssr.controller.js';
 export * from './controllers/type-submit.controller.js';
+export * from './controllers/type-touch.controller.js';
 export * from './controllers/type-native-popover.controller.js';
 export * from './decorators/host-attr.js';
 export * from './styles/index.js';
