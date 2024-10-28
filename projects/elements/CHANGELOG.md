@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.13.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.12.0...@nvidia-elements/core-v1.13.0) (2024-10-28)
+
+
+### Features
+
+* **elements:** added document svg ([ea58f38](https://github.com/NVIDIA/elements/commit/ea58f3858929515a84935c123f2d0f1e589cc83e))
+
 ## [@nvidia-elements/core-v1.12.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.11.1...@nvidia-elements/core-v1.12.0) (2024-10-28)
 
 
