@@ -84,21 +84,14 @@ export const Large = {
 
 export const NonClosable = {
   render: () => html`
-<nve-button id="open-btn">open</nve-button>
-<nve-dialog hidden modal>
+<nve-button popovertarget="dialog">open</nve-button>
+<nve-dialog id="dialog" modal>
   <h3 nve-text="heading">Non-Closable Dialog</h3>
   <p nve-text="body">escape key and light dismiss will not work here</p>
   <nve-dialog-footer>
-    <nve-button id="cancel-btn">cancel</nve-button>
+    <nve-button popovertarget="dialog" popovertargetaction="hide">cancel</nve-button>
   </nve-dialog-footer>
 </nve-dialog>
-<script type="module">
-  const dialog = document.querySelector('nve-dialog');
-  const open = document.querySelector('#open-btn');
-  const cancel = document.querySelector('#cancel-btn');
-  open.addEventListener('click', () => dialog.hidden = false);
-  cancel.addEventListener('click', () => dialog.hidden = true);
-</script>
   `
 };
 
