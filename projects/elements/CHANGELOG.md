@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.13.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.0...@nvidia-elements/core-v1.13.1) (2024-10-28)
+
+
+### Bug Fixes
+
+* **elements:** prevent backdrop dismiss on non-dismissable popover states ([cf7d850](https://github.com/NVIDIA/elements/commit/cf7d8505a800a7036741adb3c3556eb01d2ddd2d))
+
 ## [@nvidia-elements/core-v1.13.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.12.0...@nvidia-elements/core-v1.13.0) (2024-10-28)
 
 
