@@ -34,3 +34,7 @@ export function parseVersion(version: string) {
 export function formatStandardNumber(number: number) {
   return new Intl.NumberFormat().format(number);
 }
+
+export function getDifference(minuend: number, subtrahend: number) {
+  return Math.sign(subtrahend - minuend) * Math.abs(minuend - subtrahend);
+}
