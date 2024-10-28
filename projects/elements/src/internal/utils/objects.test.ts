@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deepMerge, formatStandardNumber, parseVersion } from '@nvidia-elements/core/internal';
+import { deepMerge, formatStandardNumber, getDifference, parseVersion } from '@nvidia-elements/core/internal';
 
 describe('deepMerge', () => {
   const obj1 = {
@@ -55,5 +55,24 @@ describe('parseVersion', () => {
 describe('formatStandardNumber', () => {
   it('it should format number to standard locale', () => {
     expect(formatStandardNumber(1000000)).toBe('1,000,000');
+  });
+});
+
+describe('getDifference', () => {
+  it('should return the difference of two numbers', () => {
+    expect(getDifference(1, 3)).toBe(2);
+    expect(getDifference(3, 1)).toBe(-2);
+  });
+
+  it('should return the difference of two negative numbers', () => {
+    expect(getDifference(-1, -3)).toBe(-2);
+    expect(getDifference(-3, -1)).toBe(2);
+  });
+
+  it('should return the difference negative and positive numbers', () => {
+    expect(getDifference(1, -3)).toBe(-4);
+    expect(getDifference(3, -1)).toBe(-4);
+    expect(getDifference(-3, 1)).toBe(4);
+    expect(getDifference(-1, 3)).toBe(4);
   });
 });
