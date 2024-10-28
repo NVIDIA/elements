@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.11.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.11.0...@nvidia-elements/core-v1.11.1) (2024-10-28)
+
+
+### Bug Fixes
+
+* **elements:** update accordion caret trigger to container="inline" ([abdc371](https://github.com/NVIDIA/elements/commit/abdc371b4fa1c42929c25c2a6fef7f5b7c33f811))
+
 ## [@nvidia-elements/core-v1.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.10.0...@nvidia-elements/core-v1.11.0) (2024-10-28)
 
 
