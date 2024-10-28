@@ -277,3 +277,13 @@ declare global {
     'nve-layout': string;
   }
 }
+
+export interface Point {
+  x: number;
+  y: number;
+}
+
+export interface OffsetPoint {
+  offsetX: number;
+  offsetY: number;
+}
