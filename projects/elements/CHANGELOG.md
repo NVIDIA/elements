@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.10.0...@nvidia-elements/core-v1.11.0) (2024-10-28)
+
+
+### Features
+
+* **elements:** add status='danger' for destructive styling for nve-menu-item ([5c91474](https://github.com/NVIDIA/elements/commit/5c91474305d93341c487c5d234d76ec2cbf94e18))
+
 ## [@nvidia-elements/core-v1.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.9.19...@nvidia-elements/core-v1.10.0) (2024-10-25)
 
 
