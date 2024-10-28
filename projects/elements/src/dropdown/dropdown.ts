@@ -99,6 +99,11 @@ export class Dropdown extends LitElement {
 
   protected typeNativeAnchorController = new TypeNativeAnchorController<Dropdown>(this);
 
+  /** @private */
+  get popoverDismissible() {
+    return this.modal;
+  }
+
   /**
    * Enables internal string values to be updated for internationalization.
    */
