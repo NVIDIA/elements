@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.12.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.11.1...@nvidia-elements/core-v1.12.0) (2024-10-28)
+
+
+### Features
+
+* **elements:** add keyboard, pointer, pointer-stroke icons ([ec84849](https://github.com/NVIDIA/elements/commit/ec84849eb2563d87d7b12d031bfd4887469d0aee))
+
 ## [@nvidia-elements/core-v1.11.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.11.0...@nvidia-elements/core-v1.11.1) (2024-10-28)
 
 
