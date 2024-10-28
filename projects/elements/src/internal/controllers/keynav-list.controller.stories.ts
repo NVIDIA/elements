@@ -1,9 +1,6 @@
 import { css, html, LitElement } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { keyNavigationGrid, keyNavigationList, KeynavListConfig } from '@nvidia-elements/core/internal';
-import '@nvidia-elements/core/card/define.js';
-import '@nvidia-elements/core/button/define.js';
-import '@nvidia-elements/core/icon-button/define.js';
+import { keyNavigationList, KeynavListConfig } from '@nvidia-elements/core/internal';
 
 export default {
   title: 'Internal/Controllers'
@@ -38,41 +35,7 @@ const styles = css`
   }
 `;
 
-export function keyNavigationGridController() {
-  @keyNavigationGrid<DemoKeyNavigationGridController>()
-  class DemoKeyNavigationGridController extends LitElement {
-    get keynavGridConfig() {
-      return {
-        rows: this.shadowRoot.querySelectorAll<HTMLElement>('.row'),
-        cells: this.shadowRoot.querySelectorAll<HTMLElement>('.cell')
-      }
-    }
-
-    @state() private selected = '0,0';
-    @state() private active = '';
-
-    static styles = [styles];
-
-    render() {
-      return html`
-        <p>Selected: ${this.selected}</p>
-        <p>Active: ${this.active}</p>
-        <section @nve-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
-          ${Array.from(Array(10).keys()).map(() => Array.from(Array(10).keys())).map((r, ri) => html`<div class="row">
-            ${r.map(c => html`<div class="cell">
-              <button ?selected=${this.selected === `${ri}-${c}`} @click=${(e: any) => (this.selected = e.target.innerText)}>${ri}-${c}</button>
-            </div>`)}
-          </div>`)}
-        </section>
-      `;
-    }
-  }
-
-  customElements.get('demo-key-navigation-grid') || customElements.define('demo-key-navigation-grid', DemoKeyNavigationGridController);
-  return html`<demo-key-navigation-grid></demo-key-navigation-grid>`;
-}
-
-export function keyNavigationListController() {
+export function KeyNavigationListControllerDemo() {
   @keyNavigationList<DemoKeyNavigationList>()
   class DemoKeyNavigationList extends LitElement {
     get keynavListConfig() {
@@ -101,7 +64,7 @@ export function keyNavigationListController() {
   return html`<demo-key-navigation-list></demo-key-navigation-list>`;
 }
 
-export function keyNavigationListControllerVertical() {
+export function KeyNavigationListControllerVerticalDemo() {
   @keyNavigationList<DemoKeyNavigationListVertical>()
   class DemoKeyNavigationListVertical extends LitElement {
     get keynavListConfig(): KeynavListConfig {
@@ -132,7 +95,7 @@ export function keyNavigationListControllerVertical() {
   return html`<demo-key-navigation-list-vertical></demo-key-navigation-list-vertical>`;
 }
 
-export function keyNavigationListLoopController() {
+export function KeyNavigationListLoopControllerDemo() {
   @keyNavigationList<DemoKeyNavigationListLoop>()
   class DemoKeyNavigationListLoop extends LitElement {
     get keynavListConfig(): KeynavListConfig {
