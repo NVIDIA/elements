@@ -147,6 +147,21 @@ describe('type-popover.controller', () => {
     expect(element.matches(':popover-open')).toBe(false);
   });
 
+  it('should not close popover if modal type reports popover is not dismissable', async () => {
+    element.modal = true;
+    element.popoverDismissible = false;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    emulateClick(button);
+    expect((await open).target).toBe(element);
+    expect(element.matches(':popover-open')).toBe(true);
+
+    element.dispatchEvent(new PointerEvent('pointerup', { clientX: 0, clientY: 0 }));
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+
   it('if popover is open it should not be inert', async () => {
     expect(element.inert).toBe(true);
     const event = untilEvent(element, 'open');
