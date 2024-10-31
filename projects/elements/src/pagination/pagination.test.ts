@@ -151,21 +151,34 @@ describe(Pagination.metadata.tag, () => {
     expect(element.step).toBe(20);
   });
 
-  it('should emit step-change, input and change events when step changes', async () => {
+  it('should emit step-change when step changes', async () => {
     const stepChange = untilEvent(element, 'step-change');
-    const input = untilEvent(element, 'input');
-    const change = untilEvent(element, 'change');
     const select = element.shadowRoot.querySelector<HTMLSelectElement>('select');
 
     expect(element.step).toBe(10);
     select.value = '20';
     select.dispatchEvent(new Event('change'));
 
-    await input;
-    await change;
     const { detail } = (await stepChange) as CustomEvent;
     expect(element.step).toBe(20);
     expect(detail).toBe(20);
+  });
+
+  it('should not emit input or change if value has not changed', async () => {
+    const stepChange = untilEvent(element, 'step-change');
+    const select = element.shadowRoot.querySelector<HTMLSelectElement>('select');
+
+    expect(element.step).toBe(10);
+    select.value = '20';
+    select.dispatchEvent(new Event('change'));
+
+    let input = 0;
+    let change = 0;
+    element.addEventListener('input', () => input++);
+    element.addEventListener('change', () => change++);
+    await stepChange;
+    expect(input).toBe(0);
+    expect(change).toBe(0);
   });
 
   it('should emit last-page when the last page is active', async () => {
