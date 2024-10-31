@@ -239,10 +239,12 @@ export class Pagination extends LitElement {
   }
 
   #setValue(value: number) {
-    this.value = value;
-    this._internals.setFormValue(`${this.value}`);
-    this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, data: `${this.value}` }));
-    this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    if (this.value !== value) {
+      this.value = value;
+      this._internals.setFormValue(`${this.value}`);
+      this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, data: `${this.value}` }));
+      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    }
 
     if (this.#isLastPage) {
       this.dispatchEvent(new CustomEvent('last-page', { bubbles: true, composed: true }));
