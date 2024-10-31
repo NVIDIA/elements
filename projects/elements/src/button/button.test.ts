@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, emulateClick, removeFixture } from '@nvidia-elements/testing';
 import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/button/define.js';
 
@@ -54,5 +54,32 @@ describe(Button.metadata.tag, () => {
     element.container = 'inline';
     await elementIsStable(element);
     expect(element.getAttribute('container')).toBe('inline');
+  });
+});
+
+describe(`${Button.metadata.tag} - submit`, () => {
+  let fixture;
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should submit the form when clicked', async () => {
+    fixture = await createFixture(html`
+      <form method="post" action=".">
+        <nve-button type="submit">Submit</nve-button>
+      </form>
+    `);
+    const element = fixture.querySelector(Button.metadata.tag);
+    await elementIsStable(element);
+
+    let called = false;
+    fixture.querySelector('form').addEventListener('submit', e => {
+      e.preventDefault();
+      called = true;
+    });
+
+    emulateClick(element);
+
+    expect(called).toBe(true);
   });
 });
