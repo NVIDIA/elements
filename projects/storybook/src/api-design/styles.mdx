@@ -6,6 +6,28 @@ import { Responsive } from '../../../elements/src/forms/control/control.stories'
 
 # Styles
 
+## Strategies
+
+The look and feel of the system can be controlled or adjusted via three primary strategies, each with various trade-offs.
+
+**Automatic (system)**: Can adjust look/feel based on browser conditions with high confidence. Example, CSS container or style queries which can report accurate states of the current UI.
+
+- relative scales
+- responsive elements
+
+**Explicit (consumer dev/designer)**: Low confidence the system can predict precise usage but high confidence by the consumer developer/designer. These cases
+are conext specific. Example, when to use a small button in a toolbar vs a large button for a call to action.
+
+- size properties/variants
+- status properties/variants
+- CSS custom property overrides
+
+**Theme (user)**: System nor the consumer dev/designer can predict users preferences. Example, user has system OS defined preferences or overrides for
+light and dark themes or zoom/typography sizing.
+
+- compact theme
+- light/dark theme
+
 ## Custom Properties
 
 Elements expose custom CSS properties that typically correspond to their native CSS properties, as shown in the table below. Some custom properties have no direct mappings to their native counterparts and are indicated in the table by the absence of MDN documentation references.
