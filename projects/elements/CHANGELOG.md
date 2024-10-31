@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.13.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.1...@nvidia-elements/core-v1.13.2) (2024-10-31)
+
+
+### Bug Fixes
+
+* **elements:** fix button form issue ([cd46b1e](https://github.com/NVIDIA/elements/commit/cd46b1e49b0528b6c6055bce7a17fe00ce77b016))
+
 ## [@nvidia-elements/core-v1.13.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.0...@nvidia-elements/core-v1.13.1) (2024-10-28)
 
 
