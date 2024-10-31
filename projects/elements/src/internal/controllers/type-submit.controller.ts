@@ -52,7 +52,11 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
     this.#button.value = this.host.value;
     this.#button.name = this.host.name;
     this.#button.type = this.host.type;
-    this.#button.setAttribute('form', this.host.form);
+    if (this.host.form !== undefined) {
+      this.#button.setAttribute('form', this.host.form);
+    } else {
+      this.#button.removeAttribute('form');
+    }
   }
 
   #setupNativeButtonBehavior() {
