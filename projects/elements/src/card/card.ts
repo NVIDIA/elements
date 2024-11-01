@@ -13,7 +13,6 @@ import cardFooterStyleSheet from './card-footer.css?inline';
  * @since 0.1.3
  * @slot - This is a default/unnamed slot for card content
  * @slot header - header element (Use `card-header` or custom content)
- * @slot content - content element (Use `card-content` or custom content)
  * @slot footer - footer element (Use `card-footer` or custom content)
  * @cssprop --background
  * @cssprop --color
