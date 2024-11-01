@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.13.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.2...@nvidia-elements/core-v1.13.3) (2024-11-01)
+
+
+### Bug Fixes
+
+* **elements:** pagination step-change event ([bd0fcaa](https://github.com/NVIDIA/elements/commit/bd0fcaa05fadda885a4816337b2ed9b34d2189c4))
+
 ## [@nvidia-elements/core-v1.13.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.1...@nvidia-elements/core-v1.13.2) (2024-10-31)
 
 
