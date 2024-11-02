@@ -1,0 +1,168 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { Canvas } from '@internals/storybook/blocks';
+import { Default, Content, KitchenSink, PagePanelClosable, PagePanelExpandable, SlotBanner, SlotBottom, SlotFooter, SlotLeft, SlotLeftAside, SlotRight, SlotRightAside, SlotSubfooter, SlotSubheader, SlotSubheaderLarge, PagePanelTabs, PagePanelHeadings, InteractionDrawer, InteractionPanel, InteractionPanelNavigation, DocumentScroll } from './page.stories';
+
+<Meta title="Elements/Page/Documentation" />
+
+# Page
+
+<element-metrics tag="nve-page"></element-metrics>
+
+## Installation
+
+<nve-alert status="accent">To enable smooth transitions between page view, see our [View Transition API](./?path=/docs/foundations-view-transitions-documentation--docs) documentation.</nve-alert>
+
+```typescript
+import '@nvidia-elements/core/page/define.js';
+```
+
+```html
+<nve-page>
+  <div slot="header">header</div>
+  <div slot="subheader">subheader</div>
+  <div slot="left-aside">left-aside</div>
+  <div slot="left">left</div>
+  <div>main</div>
+  <div slot="bottom">bottom</div>
+  <div slot="right">right</div>
+  <div slot="right-aside">right-aside</div>
+  <div slot="subfooter">subfooter</div>
+  <div slot="footer">footer</div>
+</nve-page>
+```
+
+<Canvas of={Content} story={{ height: '480px', padding: 0 }} />
+
+## Header
+
+<element-api tag="nve-page" type="slot" value=""></element-api>
+
+<nve-alert status="accent">It's recommended to leverage the new [nve-page-header](./?path=/docs/elements-page-header-documentation--docs) instead of `nve-app-header` when using the `nve-page` Element.</nve-alert>
+
+<Canvas of={Default} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Subheader
+
+<element-api tag="nve-page" type="slot" value="subheader"></element-api>
+
+<Canvas of={SlotSubheader} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Subheader Large
+
+<element-api tag="nve-page" type="slot" value="subheader"></element-api>
+
+<Canvas of={SlotSubheaderLarge} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Banner
+
+<Canvas of={SlotBanner} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Left Aside
+
+<element-api tag="nve-page" type="slot" value="left-aside"></element-api>
+
+<Canvas of={SlotLeftAside} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Right Aside
+
+<element-api tag="nve-page" type="slot" value="right-aside"></element-api>
+
+<Canvas of={SlotRightAside} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Footer
+
+<element-api tag="nve-page" type="slot" value="footer"></element-api>
+
+<Canvas of={SlotFooter} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Sub Footer
+
+<element-api tag="nve-page" type="slot" value="subfooter"></element-api>
+
+<Canvas of={SlotSubfooter} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Panels
+
+### Left Panel
+
+<element-api tag="nve-page" type="slot" value="left"></element-api>
+
+<Canvas of={SlotLeft} story={{ inline: false, height: '480px', padding: 0 }} />
+
+### Right Panel
+
+<element-api tag="nve-page" type="slot" value="right"></element-api>
+
+<Canvas of={SlotRight} story={{ inline: false, height: '480px', padding: 0 }} />
+
+### Bottom Panel
+
+<element-api tag="nve-page" type="slot" value="bottom"></element-api>
+
+<Canvas of={SlotBottom} story={{ inline: false, height: '480px', padding: 0 }} />
+
+### Expandable Panel
+
+<element-api tag="nve-page-panel" type="property" value="expandable"></element-api>
+
+<Canvas of={PagePanelExpandable} story={{ inline: false, height: '480px', padding: 0 }} />
+
+### Closable Panel
+
+<element-api tag="nve-page-panel" type="property" value="closable"></element-api>
+
+<Canvas of={PagePanelClosable} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Page Panel Tabs
+
+<element-api tag="nve-page" type="story" value="PagePanelTabs"></element-api>
+
+<Canvas of={PagePanelTabs} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Page Panel Headings
+
+<element-api tag="nve-page" type="story" value="PagePanelHeadings"></element-api>
+
+<Canvas of={PagePanelHeadings} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Interaction Panel
+
+<element-api tag="nve-page" type="story" value="InteractionPanel"></element-api>
+
+<Canvas of={InteractionPanel} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Interaction Panel Navigation
+
+<element-api tag="nve-page" type="story" value="InteractionPanelNavigation"></element-api>
+
+<Canvas of={InteractionPanelNavigation} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Interaction Drawer
+
+<element-api tag="nve-page" type="story" value="InteractionDrawer"></element-api>
+
+<Canvas of={InteractionDrawer} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Document Scroll
+
+<element-api tag="nve-page" type="story" value="DocumentScroll"></element-api>
+
+<Canvas of={DocumentScroll} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Kitchen Sink
+
+<element-api tag="nve-page" type="story" value="KitchenSink"></element-api>
+
+<Canvas of={KitchenSink} story={{ inline: false, height: '780px', padding: 0 }} />
+
+<element-status tag="nve-page"></element-status>
+
+<element-api tag="nve-page"></element-api>
+
+<element-api tag="nve-page-panel"></element-api>
+
+<element-api tag="nve-page-panel-header"></element-api>
+
+<element-api tag="nve-page-panel-content"></element-api>
+
+<element-api tag="nve-page-panel-footer"></element-api>

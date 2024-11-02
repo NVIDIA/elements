@@ -10,7 +10,6 @@ import layout from '@nvidia-elements/styles/layout.css?inline';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/tag/define.js';
-import '@nvidia-elements/core/tabs/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/sort-button/define.js';
@@ -256,7 +255,8 @@ class ElementMetrics extends LitElement {
     const element = this.#element;
     return html`
       <section nve-layout="column gap:lg">
-        <div nve-layout="row gap:xs align:center full">
+        ${element.description ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml(element.description).replace('<p>', '<p nve-text="heading muted sm">')}></div>` : nothing}
+        <div nve-layout="row gap:xxs align:center full">
           <div nve-layout="row gap:xs">
             ${getStatusBadge(element.status, ` ${ELEMENTS_VERSION}`, '')}
             ${getCoverageStatus(element.tests.coverageTotal, 'coverage: ', '')}
@@ -268,7 +268,6 @@ class ElementMetrics extends LitElement {
           ${element.figma ? html`<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href=${element.figma}>Figma</a></nve-button>` : nothing}
           <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages">Released ${element.since}</a></nve-button>
         </div>
-        ${element.description ? html`<div .innerHTML=${new showdown.Converter(showdownOptions).makeHtml(element.description).replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       </section>
     `;
   }
@@ -279,7 +278,7 @@ define(ElementMetrics);
 class ElementAPI extends LitElement {
   @property({ type: String }) tag = '';
 
-  @property({ type: String }) type: 'property' | 'event' | 'slot';
+  @property({ type: String }) type: 'property' | 'event' | 'slot' | 'story';
 
   @property({ type: String }) value: string;
 
@@ -305,6 +304,7 @@ class ElementAPI extends LitElement {
       ${this.type === 'event' ? html`<div .innerHTML=${this.#markdown.makeHtml((`<code nve-text="code">${this.value}</code>: ` + this.#element.schema.events?.find(m => m.name === this.value)?.description))?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.properties?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.schema.slots?.find(m => m.name === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
+      ${this.type === 'story' ? html`<div .innerHTML=${this.#markdown.makeHtml((this.#element.stories?.find(m => m.id === this.value)?.description) ?? '')?.replace('<p>', '<p nve-text="body">')}></div>` : nothing}
       ${!this.type ? html`
         <div nve-layout="column gap:xs pad-top:xl pad-bottom:lg align:stretch">
           <h3 nve-text="heading xl">API - ${this.tag}</h3>

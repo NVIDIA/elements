@@ -151,7 +151,6 @@ Create a base template for lighthouse to run tests in `vitest.lighthouse.html`
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="view-transition" content="same-origin" />
     <meta name="description" content="about page" />
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
     <title>Lighthouse</title>

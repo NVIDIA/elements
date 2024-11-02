@@ -5,9 +5,8 @@
   "private": true,
   "scripts": {
     "ci": "wireit",
-    "dev": "wireit",
     "build": "wireit",
-    "start": "wireit",
+    "preview": "wireit",
     "lint": "wireit"
   },
   "dependencies": {
@@ -23,13 +22,14 @@
   "devDependencies": {
     "typescript": "catalog:",
     "@types/react": "18.3.3",
-    "@types/react-dom": " 18.3.0"
+    "@types/react-dom": " 18.3.0",
+    "vite": "catalog:"
   },
   "wireit": {
-    "dev": {
-      "command": "next dev",
+    "preview": {
+      "command": "cd dist && pnpm exec vite preview --base=elements/starters/nextjs",
       "dependencies": [
-        "../../elements-react:build"
+        "build"
       ]
     },
     "ci": {
@@ -42,6 +42,12 @@
     },
     "start": {
       "command": "next start",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "dev": {
+      "command": "next dev",
       "dependencies": [
         "build"
       ]

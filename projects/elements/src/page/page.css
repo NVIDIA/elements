@@ -1,0 +1,145 @@
+:host {
+  --padding: var(--nve-ref-space-lg);
+  --background: var(--nve-sys-layer-canvas-background);
+  --color: var(--nve-sys-layer-canvas-color);
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+}
+
+:host([document-scroll]) {
+  height: auto !important;
+}
+
+[internal-host] {
+  background: var(--background);
+  color: var(--color);
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto auto;
+  grid-template-columns: auto auto 1fr auto auto;
+  grid-template-areas:
+    'header header header header header'
+    'left-aside subheader subheader subheader right-aside'
+    'left-aside left main right right-aside'
+    'left-aside left bottom right right-aside'
+    'left-aside subfooter subfooter subfooter right-aside'
+    'footer footer footer footer footer';
+}
+
+slot {
+  display: block;
+  scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
+  scrollbar-width: thin;
+}
+
+[name='header'] {
+  grid-area: header;
+  margin-bottom: var(--nve-ref-border-width-sm);
+}
+
+[name='subheader'] {
+  grid-area: subheader;
+}
+
+[name='left'] {
+  grid-area: left;
+  height: 100%;
+}
+
+[name='right'] {
+  grid-area: right;
+  height: 100%;
+}
+
+[name='bottom'] {
+  grid-area: bottom;
+  height: fit-content;
+}
+
+/** ensures sliding panels transition "under" aside slot */
+[name='left-aside'],
+[name='right-aside'] {
+  position: relative;
+  z-index: 1;
+}
+
+[name='left-aside'] {
+  grid-area: left-aside;
+  height: 100%;
+}
+
+[name='right-aside'] {
+  grid-area: right-aside;
+  height: 100%;
+}
+
+[name='subfooter'] {
+  grid-area: subfooter;
+}
+
+[name='footer'] {
+  grid-area: footer;
+}
+
+::slotted(nve-page-panel) {
+  --border: 0;
+}
+
+::slotted(nve-toolbar[slot='footer']),
+::slotted(nve-toolbar[slot='subfooter']),
+::slotted(nve-page-panel[slot='footer']),
+::slotted(nve-page-panel[slot='subfooter']) {
+  border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+}
+
+::slotted(nve-page-panel[slot='left']),
+::slotted(nve-page-panel[slot='left-aside']),
+::slotted(nve-toolbar[slot='left-aside']) {
+  border-right: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+}
+
+::slotted(nve-page-panel[slot='right']),
+::slotted(nve-page-panel[slot='right-aside']),
+::slotted(nve-toolbar[slot='right-aside']) {
+  border-left: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+}
+
+::slotted(nve-page-panel[slot='bottom']) {
+  border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+}
+
+::slotted(nve-page-panel[slot='subheader']),
+::slotted(nve-toolbar[slot='subheader']) {
+  border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+}
+
+::slotted(nve-toolbar) {
+  --border-radius: 0;
+  --box-shadow: none;
+  height: 100%;
+}
+
+::slotted(nve-toolbar[slot='left-aside']),
+::slotted(nve-toolbar[slot='right-aside']) {
+  --min-height: 100%;
+}
+
+slot:not([name]) {
+  gap: var(--nve-ref-space-md);
+  padding: var(--padding);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  overflow: auto;
+  overflow: auto;
+
+  slot {
+    display: contents;
+  }
+}
+
+::slotted(main) {
+  width: 100%;
+  height: 100%;
+}

@@ -3,6 +3,7 @@ import {
   getCrossShadowRootAnchorWarning,
   getExcessiveInstanceLimitWarning,
   getIdMatchNotFoundWarning,
+  getInvalidParentWarning,
   getInvalidSlotsWarning,
   getSSRMismatchWarning
 } from './audit.js';
@@ -19,6 +20,14 @@ describe('getInvalidSlotsWarning', () => {
   it('should return warning message for invalid slotted elements', () => {
     expect(getInvalidSlotsWarning('test-element', ['test-element-one', 'test-element-two'])).toBe(
       'Invalid slotted elements detected in test-element. Allowed: test-element-one, test-element-two'
+    );
+  });
+});
+
+describe('getInvalidParentWarning', () => {
+  it('should return warning message for invalid parent element', () => {
+    expect(getInvalidParentWarning('test-element', 'test-element-parent')).toBe(
+      'Element test-element can only be used as a direct child of test-element-parent.'
     );
   });
 });

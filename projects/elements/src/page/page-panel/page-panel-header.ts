@@ -1,0 +1,38 @@
+import { html, LitElement } from 'lit';
+import { useStyles } from '@nvidia-elements/core/internal';
+import styles from './page-panel-header.css?inline';
+
+/**
+ * @element nve-page-panel-header
+ * @entrypoint \@nvidia-elements/core/page
+ * @since 1.15.0
+ * @slot - default slot for the page panel header
+ * @cssprop --border-bottom
+ * @cssprop --min-height
+ * @cssprop --padding
+ * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-page-documentation--docs
+ * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=30-54&node-type=canvas&t=MpkuCQK1YGf307s2-0
+ * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/region_role
+ * @stable false
+ */
+export class PagePanelHeader extends LitElement {
+  static styles = useStyles([styles]);
+
+  static readonly metadata = {
+    tag: 'nve-page-panel-header',
+    version: '0.0.0'
+  };
+
+  render() {
+    return html`
+      <div internal-host>
+        <slot></slot>
+      </div>
+    `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.slot = 'header';
+  }
+}

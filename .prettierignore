@@ -19,3 +19,4 @@ projects/elements/src/icon/server.ts
 projects/internals/metadata/dist/*.json
 projects/starters/remix/build
 projects/elements-react/src/**/*
+.vscode/*.json.code-snippets

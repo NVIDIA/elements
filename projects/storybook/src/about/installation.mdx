@@ -45,6 +45,7 @@ overall application performance.
 /* optional CSS utilities */
 @import '@nvidia-elements/styles/typography.css';
 @import '@nvidia-elements/styles/layout.css';
+@import '@nvidia-elements/styles/view-transitions.css';
 ```
 
 ```javascript
@@ -55,5 +56,11 @@ import '@nvidia-elements/core/dot/define.js';
 ```
 
 ```html
+<!-- set global theme -->
+<html nve-theme="dark" nve-transition="auto">
+```
+
+```html
+<!-- use component in HTML template -->
 <nve-button>hello there</nve-button>
 ```
