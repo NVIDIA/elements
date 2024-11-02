@@ -1,0 +1,39 @@
+<template name="Page" prefix="page" description="Basic page layout." type="pattern">
+  <nve-page> $0 </nve-page>
+</template>
+
+<template name="Page Panel" prefix="page-panel" description="Basic page panel layout." type="pattern">
+  <nve-page-panel slot="${1|left,right,bottom|}">
+    <nve-page-panel-header>
+      <h3 nve-text="heading medium sm">${2:Panel Header}</h3>
+    </nve-page-panel-header>
+    <nve-page-panel-content>
+      ${3:
+      <p nve-text="body">Panel Content</p>
+      }
+    </nve-page-panel-content>
+  </nve-page-panel>
+</template>
+
+<template name="Page Aside" prefix="page-aside" description="Basic page aside using toolbar." type="pattern">
+  <nve-toolbar slot="${1|left-aside,right-aside|}" orientation="vertical"> $2 </nve-toolbar>
+</template>
+
+<template name="Page Footer" prefix="page-footer" description="Basic page footer using toolbar." type="pattern">
+  <nve-toolbar slot="${1|footer,sub-footer|}">
+    <a href="#" nve-text="link sm">link</a>
+    <a href="#" nve-text="link sm">link</a>
+    <a href="#" nve-text="link sm">link</a>
+  </nve-toolbar>
+</template>
+
+<template
+  name="Page Subheader"
+  prefix="page-subheader"
+  description="Basic page subheader using toolbar."
+  type="pattern">
+  <nve-toolbar slot="subheader">
+    <nve-icon-button icon-name="arrow" direction="left" size="sm" aria-label="back"></nve-icon-button>
+    <h2 nve-text="heading sm">${1:Subheader}</h2>
+  </nve-toolbar>
+</template>

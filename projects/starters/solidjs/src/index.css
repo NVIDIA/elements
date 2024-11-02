@@ -3,11 +3,4 @@
 @import '@nvidia-elements/themes/dark.css';
 @import '@nvidia-elements/styles/layout.css';
 @import '@nvidia-elements/styles/typography.css';
-
-body:has(:not(:defined)) {
-  visibility: hidden;
-}
-
-@view-transition {
-  navigation: auto;
-}
+@import '@nvidia-elements/styles/view-transitions.css';

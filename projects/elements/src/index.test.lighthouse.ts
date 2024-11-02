@@ -24,7 +24,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(120.5); // @nvidia-elements/core/bundles/index.VERSION.js
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(122.5); // @nvidia-elements/core/bundles/index.VERSION.js
   });
 
   test('JS imports should remain within compressed bundle limits', async () => {
@@ -59,6 +59,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/menu/define.js';
         import '@nvidia-elements/core/month/define.js';
         import '@nvidia-elements/core/notification/define.js';
+        import '@nvidia-elements/core/page/define.js';
         import '@nvidia-elements/core/page-loader/define.js';
         import '@nvidia-elements/core/pagination/define.js';
         import '@nvidia-elements/core/panel/define.js';
@@ -89,6 +90,6 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(62);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(64.5);
   });
 });

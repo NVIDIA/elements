@@ -1,12 +1,12 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, useRouteLoaderData } from '@remix-run/react';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteLoaderData } from '@remix-run/react';
 import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
-
 import nveLayoutStyles from '@nvidia-elements/styles/layout.css?url';
 import nveTypographyStyles from '@nvidia-elements/styles/typography.css?url';
 import nveCompactStyles from '@nvidia-elements/themes/compact.css?url';
 import nveDarkStyles from '@nvidia-elements/themes/dark.css?url';
 import nveFontStyles from '@nvidia-elements/themes/fonts/nvidia-sans.css?url';
 import nveIndexStyles from '@nvidia-elements/themes/index.css?url';
+import nveViewTransitionStyles from '@nvidia-elements/styles/view-transitions.css?url';
 
 export const links: LinksFunction = () => [
   {
@@ -19,7 +19,8 @@ export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: nveCompactStyles },
   { rel: 'stylesheet', href: nveDarkStyles },
   { rel: 'stylesheet', href: nveTypographyStyles },
-  { rel: 'stylesheet', href: nveLayoutStyles }
+  { rel: 'stylesheet', href: nveLayoutStyles },
+  { rel: 'stylesheet', href: nveViewTransitionStyles }
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

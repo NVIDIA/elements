@@ -10,12 +10,21 @@ export function auditSlots(host: HTMLElement) {
   return [invalidElements, validElements];
 }
 
+export function auditParentElement(host: HTMLElement) {
+  const validParentTag = (host.constructor as any).metadata.parent;
+  return [host.parentElement.localName === validParentTag, validParentTag];
+}
+
 export function getExcessiveInstanceLimitWarning(count: number, localName: string) {
   return `Excessive rendering of ${count} ${localName} were detected in DOM. Recycle/reuse elements when possible to improve application performance.`;
 }
 
 export function getInvalidSlotsWarning(localName: string, allowed: Array<string>) {
   return `Invalid slotted elements detected in ${localName}. Allowed: ${allowed.join(', ')}`;
+}
+
+export function getInvalidParentWarning(localName: string, allowedParent: string) {
+  return `Element ${localName} can only be used as a direct child of ${allowedParent}.`;
 }
 
 export function getIdMatchNotFoundWarning(id: string) {

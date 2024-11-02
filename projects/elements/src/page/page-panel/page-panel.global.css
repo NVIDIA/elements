@@ -1,0 +1,14 @@
+nve-page-panel:has(nve-page-panel-header) {
+  &::part(_header) {
+    border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
+    padding-right: var(--nve-ref-size-200);
+  }
+
+  &::part(_close-btn) {
+    position: relative;
+  }
+}
+
+nve-page-panel-header:has(nve-tabs) {
+  --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
+}

@@ -1,7 +1,7 @@
 export function render(data) {
   return /* html */ `
     <!DOCTYPE html>
-      <html lang="en" nve-theme="dark">
+      <html lang="en" nve-theme="dark" nve-transition="auto">
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,27 +11,26 @@ export function render(data) {
           <link rel="stylesheet" type="text/css" href="./index.css" />
         </head>
         <body>
-          <nve-app-header>
-            <nve-logo></nve-logo>
-            <h2 slot="title">Elements</h2>
-            <nve-button slot="nav-items" selected><a href="/elements/starters/buildless/">Starters</a></nve-button>
-            <nve-button slot="nav-items"
-              ><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></nve-button
-            >
-            <nve-button slot="nav-items"
-              ><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button
-            >
-            <nve-button slot="nav-items"
-              ><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button
-            >
-            <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
-          </nve-app-header>
-          <div nve-layout="row" style="height: 100%">
-            <nve-drawer inline size="sm" style="--top: 48px; display: block">
-              <nve-drawer-header>
+          <nve-page>
+            <nve-app-header slot="header">
+              <nve-logo></nve-logo>
+              <h2 slot="title">Elements</h2>
+              <nve-button slot="nav-items" selected><a href="/elements/starters/buildless/">Starters</a></nve-button>
+              <nve-button slot="nav-items"
+                ><a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a></nve-button
+              >
+              <nve-button slot="nav-items"
+                ><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button
+              >
+              <nve-button slot="nav-items"
+                ><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button
+              >
+            </nve-app-header>
+            <nve-page-panel slot="left" size="sm">
+              <nve-page-panel-header>
                 <div nve-layout="row gap:xs align:vertical-center">Starters</div>
-              </nve-drawer-header>
-              <nve-drawer-content>
+              </nve-page-panel-header>
+              <nve-page-panel-content>
                 <nve-menu>
                   <nve-menu-item>
                     <a href="/elements/starters/buildless/">
@@ -80,9 +79,9 @@ export function render(data) {
                     <a href="/elements/starters/mpa/">MPA</a>
                   </nve-menu-item>
                 </nve-menu>
-              </nve-drawer-content>
-            </nve-drawer>
-            <main nve-layout="column gap:lg pad-x:xl pad-y:md align:stretch full">
+              </nve-page-panel-content>
+            </nve-page-panel>
+            <main nve-layout="column gap:lg">
               <nve-breadcrumb>
                 <nve-button><a href="/elements/starters/buildless/">Elements</a></nve-button>
                 <nve-button><a href="/elements/starters/buildless/" target="_self">Starters</a></nve-button>
@@ -97,7 +96,7 @@ export function render(data) {
               </nve-breadcrumb>
               ${data.content}
             </main>
-          </div>
+          </nve-page>
           <script type="module" src="/_layouts/index.ts"></script>
           <script type="module" src="./index.ts"></script>
         </body>

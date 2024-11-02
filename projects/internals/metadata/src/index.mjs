@@ -190,7 +190,7 @@ function getElementMetadata(packageFile, customElementsManifest, testCoverage, l
         tests: {
           coverageTotal
         },
-        stories: stories.find(s => s.element.startsWith(name))?.stories ?? []
+        stories: stories.find(s => s.element === name)?.stories ?? []
       };
 
       metadata.behavior = getBehaviorCategory(manifest);

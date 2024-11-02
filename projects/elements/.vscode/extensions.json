@@ -1,3 +1,3 @@
 {
-  "recommendations": ["runem.lit-plugin", "phoenisx.cssvar", "google.wireit"]
+  "recommendations": ["runem.lit-plugin", "google.wireit", "esbenp.prettier-vscode", "bierner.comment-tagged-templates"]
 }

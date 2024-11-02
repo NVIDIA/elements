@@ -324,6 +324,10 @@
   }
 }
 
+[nve-text~='nowrap'] {
+  text-wrap: nowrap;
+}
+
 [nve-text~='code'] {
   background: var(--nve-sys-interaction-field-background) !important;
   border-radius: var(--nve-ref-border-radius-xs) !important;
