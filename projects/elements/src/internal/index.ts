@@ -2,6 +2,7 @@
  * @internal private common utilities for Elements
  */
 export * from './base/button.js';
+export * from './controllers/audit-parent.controller.js';
 export * from './controllers/audit.controller.js';
 export * from './controllers/i18n.controller.js';
 export * from './controllers/keynav-grid.controller.js';
@@ -32,6 +33,7 @@ export * from './styles/popover.js';
 export * from './services/global.service.js';
 export * from './services/i18n.service.js';
 export * from './services/log.service.js';
+export * from './services/transition.service.js';
 export * from './docs.js';
 export * from './types/index.js';
 export * from './utils/a11y.js';

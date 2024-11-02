@@ -28,6 +28,7 @@
     "./layout.css": "./dist/layout.css",
     "./responsive.css": "./dist/responsive.css",
     "./typography.css": "./dist/typography.css",
+    "./view-transitions.css": "./dist/view-transitions.css",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"

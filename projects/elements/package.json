@@ -455,6 +455,30 @@
       "types": "./dist/notification/define.d.ts",
       "default": "./dist/notification/define.js"
     },
+    "./page": {
+      "types": "./dist/page/index.d.ts",
+      "default": "./dist/page/index.js"
+    },
+    "./page/index.js": {
+      "types": "./dist/page/index.d.ts",
+      "default": "./dist/page/index.js"
+    },
+    "./page/define.js": {
+      "types": "./dist/page/define.d.ts",
+      "default": "./dist/page/define.js"
+    },
+    "./page-header": {
+      "types": "./dist/page-header/index.d.ts",
+      "default": "./dist/page-header/index.js"
+    },
+    "./page-header/index.js": {
+      "types": "./dist/page-header/index.d.ts",
+      "default": "./dist/page-header/index.js"
+    },
+    "./page-header/define.js": {
+      "types": "./dist/page-header/define.d.ts",
+      "default": "./dist/page-header/define.js"
+    },
     "./page-loader": {
       "types": "./dist/page-loader/index.d.ts",
       "default": "./dist/page-loader/index.js"
@@ -806,6 +830,7 @@
     "@typescript/lib-dom": "npm:@types/web@0.0.169",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
+    "cpy-cli": "catalog:",
     "emoji-picker-element": "1.22.8",
     "eslint": "catalog:",
     "lit-analyzer": "2.0.3",

@@ -61,7 +61,7 @@ export class AuditController<T extends Audit> implements ReactiveController {
   }
 
   #auditExcessiveInstanceLimit() {
-    if (this.options.excessiveInstanceLimit) {
+    if (this.options.excessiveInstanceLimit !== undefined) {
       if (
         this.#hostAuditState.count > this.options.excessiveInstanceLimit &&
         !this.#hostAuditState.excessiveInstanceLimitAudited

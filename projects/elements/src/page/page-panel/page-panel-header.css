@@ -1,0 +1,13 @@
+:host {
+  --padding: var(--nve-ref-size-300);
+  display: block;
+  width: 100%;
+}
+
+[internal-host] {
+  background: var(--background);
+  padding: var(--padding);
+  color: var(--color);
+  display: flex;
+  align-items: center;
+}
