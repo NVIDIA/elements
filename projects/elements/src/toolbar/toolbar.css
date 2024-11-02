@@ -90,11 +90,12 @@
 [name='suffix'] {
   display: none;
   gap: var(--gap);
-  align-items: end;
+  align-items: center;
+  justify-content: start;
 }
 
 [name='suffix'] {
-  align-items: end;
+  justify-content: end;
 }
 
 :host(:state(has-prefix)) [name='prefix'],

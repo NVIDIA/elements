@@ -1,0 +1,71 @@
+:host {
+  --background: var(--nve-sys-layer-shell-background);
+  --padding: var(--nve-ref-space-xs) var(--nve-ref-space-lg);
+  --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  contain: initial;
+  height: 48px;
+  width: 100%;
+}
+
+[internal-host] {
+  background: var(--background);
+  padding: var(--padding);
+  border-bottom: var(--border-bottom);
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 0;
+  height: 100%;
+}
+
+slot {
+  display: flex;
+  flex-direction: row;
+  justify-items: flex-start;
+  align-items: center;
+  margin: 0;
+  min-height: 0;
+}
+
+slot:not([name]) {
+  width: 100%;
+  margin-inline: var(--nve-ref-space-lg);
+}
+
+::slotted(h1[slot='prefix']),
+::slotted(h2[slot='prefix']) {
+  font-size: var(--nve-ref-font-size-200) !important;
+  font-weight: var(--nve-ref-font-weight-semibold) !important;
+  color: var(--nve-sys-text-muted-color) !important;
+  margin: 0 !important;
+}
+
+::slotted(h1[slot='prefix'])::before,
+::slotted(h2[slot='prefix'])::before,
+::slotted(h1[slot='prefix'])::after,
+::slotted(h2[slot='prefix'])::after {
+  display: none !important;
+}
+
+/* gap spacing, not API exposed yet as this is still stabilizing */
+[internal-host] {
+  --gap: var(--nve-ref-space-xxs);
+}
+
+slot {
+  gap: var(--gap);
+}
+
+::slotted([slot='prefix']:not([container='flat'])) {
+  margin-right: var(--gap) !important;
+}
+
+::slotted([slot='suffix']:not([container='flat'])) {
+  margin-left: var(--gap) !important;
+}
+
+::slotted(nve-icon-button[interaction][slot='suffix']:last-child) {
+  margin-left: var(--nve-ref-space-md) !important;
+}

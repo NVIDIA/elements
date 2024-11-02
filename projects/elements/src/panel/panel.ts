@@ -40,6 +40,7 @@ export class PanelHeader extends LitElement {
         <div id="titles">
           <slot name="title"></slot>
           <slot name="subtitle"></slot>
+          <slot></slot>
         </div>
 
         <slot name="action-icon"></slot>

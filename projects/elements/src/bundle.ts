@@ -37,6 +37,8 @@ import '@nvidia-elements/core/logo/define.js';
 import '@nvidia-elements/core/menu/define.js';
 import '@nvidia-elements/core/month/define.js';
 import '@nvidia-elements/core/notification/define.js';
+import '@nvidia-elements/core/page/define.js';
+import '@nvidia-elements/core/page-header/define.js';
 import '@nvidia-elements/core/page-loader/define.js';
 import '@nvidia-elements/core/pagination/define.js';
 import '@nvidia-elements/core/panel/define.js';

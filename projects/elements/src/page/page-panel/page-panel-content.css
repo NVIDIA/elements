@@ -1,0 +1,27 @@
+:host {
+  --padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
+  --gap: var(--nve-ref-space-sm);
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  justify-content: stretch;
+  flex-direction: column;
+  display: flex;
+  flex-grow: 1;
+  overflow: auto;
+  gap: var(--gap);
+  contain: none;
+}
+
+[internal-host] {
+  background: var(--background);
+  padding: var(--padding);
+  height: 100%;
+  width: 100%;
+  flex: 1;
+}
+
+::slotted(nve-menu),
+::slotted(nve-menu) {
+  --width: 100%;
+}

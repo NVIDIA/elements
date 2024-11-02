@@ -18,6 +18,7 @@ import('@nvidia-elements/code/codeblock/languages/json.js');
 import('@nvidia-elements/code/codeblock/languages/markdown.js');
 import('@nvidia-elements/code/codeblock/languages/typescript.js');
 import('@nvidia-elements/code/codeblock/languages/xml.js');
+import metrics from '../../internals/metadata/dist/index.json';
 
 export const H1 = ({ children }) => (
   <Unstyled>
@@ -173,6 +174,7 @@ class DocsCanvas extends LitElement {
 
     .code {
       position: relative;
+      margin-top: 1px;
     }
 
     nve-copy-button {
@@ -241,8 +243,8 @@ export const Canvas = ({ of, story }) => {
   const updateSource = (sourceType) => setUpdatedSource(updateScope(source, { scope, sourceType }));
 
   return (
-    <NveDocsCanvas source={updatedSource} playground={playground} onsourceTypeChange={e => updateSource(e.detail)}>
-      <div slot="story"><Story of={of} inline={story?.inline} width={story?.width} height={story?.height} /></div>
+    <NveDocsCanvas source={updatedSource} playground={playground} style={{ '--padding': story?.padding }} onsourceTypeChange={e => updateSource(e.detail)}>
+      <div slot="story" style={{ height: story?.height ?? '', width: story?.width, overflow: 'hidden' }}><Story of={of} inline={story?.inline} height={story?.height} /></div>
     </NveDocsCanvas>
   );
 };

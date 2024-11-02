@@ -1,0 +1,19 @@
+<template name="Page Header" prefix="page-header" description="Basic page-header layout." type="pattern">
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <h2 slot="prefix">${1:NVIDIA}</h2>
+  </nve-page-header>
+</template>
+
+<template
+  name="Page Header with Links"
+  prefix="page-header-with-links"
+  description="Basic page-header layout with links."
+  type="pattern">
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <h2 slot="prefix">${1:NVIDIA}</h2>
+    <nve-button selected container="flat"><a href="#">${2:Link 1}</a></nve-button>
+    <nve-button container="flat"><a href="#">${3:Link 2}</a></nve-button>
+  </nve-page-header>
+</template>

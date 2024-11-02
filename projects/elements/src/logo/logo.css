@@ -7,6 +7,8 @@
   --font-size: calc(var(--width) / 2);
   --border-radius: calc(var(--height) * 0.2);
   --font-weight: var(--nve-ref-font-weight-bold);
+  width: var(--width);
+  height: var(--height);
   display: inline-block;
 }
 
@@ -56,8 +58,4 @@
 
 :host([color]) [internal-host] {
   background: var(--background);
-}
-
-svg {
-  height: var(--height);
 }

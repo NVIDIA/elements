@@ -1,0 +1,45 @@
+/* https://developer.chrome.com/docs/web-platform/view-transitions/cross-document */
+
+@view-transition {
+  navigation: auto;
+}
+
+@layer nve-transitions {
+  nve-page:not(:defined) {
+    visibility: hidden;
+  }
+
+  ::view-transition-group(*) {
+    animation-duration: var(--nve-ref-animation-duration-300);
+  }
+
+  [nve-transition='auto']:active-view-transition-type(forwards, backwards) {
+    :root {
+      view-transition-name: none;
+    }
+
+    nve-page > *:not([slot]) {
+      view-transition-name: page-content;
+    }
+
+    &::view-transition-old(page-content) {
+      animation-name: _nve-fade-out;
+    }
+
+    &::view-transition-new(page-content) {
+      animation-name: _nve-fade-in;
+    }
+  }
+
+  @keyframes _nve-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes _nve-fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+}
