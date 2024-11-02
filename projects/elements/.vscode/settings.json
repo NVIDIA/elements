@@ -1,10 +1,7 @@
 {
-  "cssvar.files": ["elements/dist/**/*.css"],
-  "cssvar.extensions": ["css", "ts", "js"],
-  "cssvar.ignore": ["**/node_modules/**", "**/public/**", "**/dist-storybook/**", "**/demos/**/dist/**"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "html.customData": ["./dist/data.html.json"],
   "[html]": {
-    "customData": ["./dist/elements.html-data.json"],
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[css]": {

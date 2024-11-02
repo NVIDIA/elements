@@ -306,6 +306,7 @@ export function createGhostElement(sourceElement: HTMLElement) {
   ghost.style.minWidth = `${width}px`;
   ghost.style.maxWidth = `${width}px`;
   ghost.style.height = '1px';
+  ghost.slot = sourceElement.slot;
   return ghost;
 }
 

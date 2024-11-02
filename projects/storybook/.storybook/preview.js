@@ -134,8 +134,9 @@ export const parameters = {
             'Examples'
           ],
           'Popovers',
+          'I18n',
           'Visualization',
-          'I18n'
+          'View Transitions'
         ],
         'Elements',
         [
@@ -196,6 +197,8 @@ export const parameters = {
           'Menu',
           'Month',
           'Notification',
+          'Page',
+          'Page Header',
           'Page Loader',
           'Pagination',
           'Panel',
@@ -224,12 +227,14 @@ export const parameters = {
         'Patterns',
         [
           'Documentation',
-          'Header',
+          'Browse',
+          'Editor',
+          'Subheader',
           'Panel',
-          'Layout',
-          'Row',
           'Trend',
           'Keyboard Shortcut',
+          'Media',
+          'Onboarding',
           'Button Row',
           'Examples'
         ],

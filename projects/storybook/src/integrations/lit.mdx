@@ -1,9 +1,7 @@
 import { Meta, Story } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/checkbox/define.js';
 import { LitForms } from '../../../elements/src/forms/validation.stories';
-import { Lit } from './integration.stories';
 
 <Meta title="Integrations/Lit" />
 
@@ -37,8 +35,6 @@ Elements provides [layout](?path=/docs/foundations-layout-documentation--docs) a
 These utilities are global CSS attributes that can be applied to any element. To
 use these utilities within a Lit element, you need to import the styles, so they
 are available in your elements Shadow DOM.
-
-<Canvas of={Lit} />
 
 <nve-alert status="accent">
   Import the needed style files via CSS or Typescript:
