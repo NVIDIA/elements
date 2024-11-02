@@ -4,7 +4,4 @@
 @import '@nvidia-elements/themes/dark.css';
 @import '@nvidia-elements/styles/layout.css';
 @import '@nvidia-elements/styles/typography.css';
-
-@view-transition {
-  navigation: auto;
-}
+@import '@nvidia-elements/styles/view-transitions.css';

@@ -1,4 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
+import '@nvidia-elements/core/card/define.js';
+import '@nvidia-elements/core/logo/define.js';
 
 <Meta title="Patterns/Documentation" />
 
@@ -10,10 +12,122 @@ different parts of the platform to streamline development and ensure consistency
 grouping components into patterns, we can create a more organized and maintainable UI,
 as well as provide a unified look and feel for our users.
 
-- [Header Patterns]('./?path=/docs/patterns-header--docs)
-- [Panel Patterns]('./?path=/docs/patterns-panel--docs)
-- [Layout Patterns]('./?path=/docs/patterns-layout--docs)
-- [Row Patterns]('./?path=/docs/patterns-row--docs)
-- [Trend Patterns]('./?path=/docs/patterns-trend--docs)
-- [Keyboard Shortcut Patterns]('./?path=/docs/patterns-keyboard-shortcut--docs)
-- [Button Row Patterns]('./?path=/docs/patterns-button-row--docs)
+<section className="pattern-links" nve-layout="grid gap:md span-items:4 pad-top:lg">
+  <a href="./?path=/docs/patterns-browse--docs">
+    <nve-card style={{ '--border-radius': 'var(--nve-ref-border-radius-md)'}}>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style={{ '--border-radius': '0' }}>
+          <nve-icon name="browser"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs">
+          <h2 nve-text="label medium">Browse</h2>
+          <p nve-text="body sm muted">Browse collections or lists of content</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="./?path=/docs/patterns-button-row--docs">
+    <nve-card style={{ '--border-radius': 'var(--nve-ref-border-radius-md)'}}>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style={{ '--border-radius': '0' }}>
+          <nve-icon name="more-actions"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs">
+          <h2 nve-text="label medium">Button Row</h2>
+          <p nve-text="body sm muted">Common button and action layouts</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="./?path=/docs/patterns-editor--docs">
+    <nve-card style={{ '--border-radius': 'var(--nve-ref-border-radius-md)'}}>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style={{ '--border-radius': '0' }}>
+          <nve-icon name="carets-closed-square"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs">
+          <h2 nve-text="label medium">Editor</h2>
+          <p nve-text="body sm muted">Code and Content Editing Patterns</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="./?path=/docs/patterns-keyboard-shortcut--docs">
+    <nve-card style={{ '--border-radius': 'var(--nve-ref-border-radius-md)'}}>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style={{ '--border-radius': '0' }}>
+          <nve-icon name="keyboard"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs">
+          <h2 nve-text="label medium">Keyboard Shortcuts</h2>
+          <p nve-text="body sm muted">Common keyboard shortcut patterns</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="./?path=/docs/patterns-panel--docs">
+    <nve-card style={{ '--border-radius': 'var(--nve-ref-border-radius-md)'}}>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style={{ '--border-radius': '0' }}>
+          <nve-icon name="columns"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs">
+          <h2 nve-text="label medium">Panel</h2>
+          <p nve-text="body sm muted">In view context details and actions</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="./?path=/docs/patterns-subheader--docs">
+    <nve-card style={{ '--border-radius': 'var(--nve-ref-border-radius-md)'}}>
+      <div nve-layout="row gap:xs align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style={{ '--border-radius': '0' }}>
+          <nve-icon name="heading"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs">
+          <h2 nve-text="label medium">Subheader</h2>
+          <p nve-text="body sm muted">Common subheader navigation and actions</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="./?path=/docs/patterns-trend--docs">
+    <nve-card style={{ '--border-radius': 'var(--nve-ref-border-radius-md)'}}>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style={{ '--border-radius': '0' }}>
+          <nve-icon name="trend-up"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs">
+          <h2 nve-text="label medium">Trend</h2>
+          <p nve-text="body sm muted">Simple data trend representations</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="./?path=/docs/patterns-media--docs">
+    <nve-card style={{ '--border-radius': 'var(--nve-ref-border-radius-md)'}}>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style={{ '--border-radius': '0' }}>
+          <nve-icon name="video-camera"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs">
+          <h2 nve-text="label medium">Media</h2>
+          <p nve-text="body sm muted">Media content patterns and layouts</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="./?path=/docs/patterns-onboarding--docs">
+    <nve-card style={{ '--border-radius': 'var(--nve-ref-border-radius-md)'}}>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style={{ '--border-radius': '0' }}>
+          <nve-icon name="shapes"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs">
+          <h2 nve-text="label medium">Onboarding</h2>
+          <p nve-text="body sm muted">Guided UX steps and processes</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+</section>

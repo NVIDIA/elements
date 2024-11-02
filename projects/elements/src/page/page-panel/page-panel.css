@@ -1,0 +1,109 @@
+:host {
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-200);
+  --animation-duration: var(--nve-ref-animation-duration-200);
+  --background: var(--nve-sys-layer-container-background);
+  --border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  --color: var(--nve-sys-layer-overlay-color);
+  --gap: var(--nve-ref-space-sm);
+  --padding: 0;
+  --height: 100%;
+  --width: 100%;
+  --max-width: 100%;
+  --max-height: 100%;
+  height: var(--height);
+  width: var(--width);
+  max-width: var(--max-width);
+  max-height: var(--max-height);
+}
+
+[internal-host] {
+  border: var(--border);
+  background: var(--background);
+  color: var(--color);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  height: 100%;
+  width: 100%;
+}
+
+:host([slot='left-aside']),
+:host([slot='right-aside']) {
+  width: fit-content;
+}
+
+:host([slot='left']),
+:host([slot='right']) {
+  --width: 100vw;
+  --max-width: 340px;
+}
+
+:host([slot='left'][size='sm']),
+:host([slot='right'][size='sm']) {
+  --max-width: 240px;
+}
+
+:host([slot='left'][size='lg']),
+:host([slot='right'][size='lg']) {
+  --max-width: 400px;
+}
+
+:host([slot='bottom']) {
+  --height: 100vw;
+  --max-height: 320px;
+}
+
+:host([slot='bottom'][size='sm']) {
+  --max-height: 220px;
+}
+
+:host([slot='bottom'][size='lg']) {
+  --max-height: 380px;
+}
+
+[part='_header'] {
+  display: flex;
+  align-items: center;
+}
+
+nve-icon-button {
+  margin-left: auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 99;
+}
+
+.content {
+  padding: var(--padding);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  overflow: auto;
+  flex: 1;
+}
+
+/* animations */
+:host([slot='left'][hidden]),
+:host([slot='right'][hidden]) {
+  pointer-events: none;
+  display: block !important;
+}
+
+:host([slot='left']) {
+  transition: margin-left var(--animation-duration) ease-in-out;
+  margin-left: 0;
+}
+
+:host([slot='left'][hidden]) {
+  margin-left: calc(-1 * var(--max-width));
+}
+
+:host([slot='right']) {
+  transition: margin-right var(--animation-duration) ease-in-out;
+  margin-right: 0;
+}
+
+:host([slot='right'][hidden]) {
+  margin-right: calc(-1 * var(--max-width));
+}

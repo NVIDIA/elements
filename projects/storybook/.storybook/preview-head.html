@@ -36,7 +36,8 @@
       font-size: var(--nve-ref-font-size-200);
     }
 
-    .sb-show-main.sb-main-centered #storybook-root {
+    .sb-show-main.sb-main-centered #storybook-root,
+    body:has(nve-page) {
       padding: 0 !important;
     }
 
@@ -372,6 +373,23 @@
     @media (min-width: 1320px) {
       [nve-text='list sb'] {
         display: block;
+      }
+    }
+
+    #root-inner > nve-page {
+      height: 100%;
+    }
+
+    #storybook-root:has(nve-page),
+    #root-inner:has(nve-page),
+    [id*='story--']:has(nve-page) {
+      height: 100%;
+    }
+
+    .pattern-links {
+      nve-card,
+      h2 {
+        cursor: pointer;
       }
     }
 </style>

@@ -18,6 +18,7 @@ import {
   NveAccordionContent
 } from '@nvidia-elements/core-react/accordion';
 import { NveAlert, NveAlertGroup } from '@nvidia-elements/core-react/alert';
+import { NvePageHeader } from '@nvidia-elements/core-react/page-header';
 import { NveAppHeader } from '@nvidia-elements/core-react/app-header';
 import { NveButton } from '@nvidia-elements/core-react/button';
 import { NveIconButton } from '@nvidia-elements/core-react/icon-button';
@@ -43,6 +44,7 @@ import { Link, useRouteLoaderData } from '@remix-run/react';
 import { NveTabs, NveTabsItem } from '@nvidia-elements/core-react/tabs';
 import { NveDot } from '@nvidia-elements/core-react/dot';
 import { loader } from '../root.js';
+import { NvePage } from '@nvidia-elements/core-react/page';
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
 
@@ -51,14 +53,26 @@ const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffec
 export default function Home() {
   return (
     <NonSSRRerenderable name="Full Page" fullPage>
-      <NonSSRRerenderable name="Icon">
-        <NveIcon name="person"></NveIcon>
+      <NonSSRRerenderable name="PageHeader">
+        <NvePageHeader>
+          <NveLogo slot="prefix" size="sm" />
+          <h2 slot="prefix">Remix</h2>
+          <NveButton selected container="flat">
+            Link 1
+          </NveButton>
+          <NveButton container="flat">Link 2</NveButton>
+          <NveIconButton icon-name="search" container="flat" slot="suffix"></NveIconButton>
+          <NveIconButton icon-name="switch-apps" container="flat" slot="suffix"></NveIconButton>
+          <NveIconButton interaction="emphasis" slot="suffix" size="sm">
+            EL
+          </NveIconButton>
+        </NvePageHeader>
       </NonSSRRerenderable>
 
       <NonSSRRerenderable name="AppHeader">
         <NveAppHeader>
           <NveLogo size="sm" />
-          <h2 slot="title">NextJS</h2>
+          <h2 slot="title">Remix</h2>
           <NveButton slot="nav-items" container="flat">
             Link 1
           </NveButton>
@@ -71,6 +85,10 @@ export default function Home() {
             EL
           </NveIconButton>
         </NveAppHeader>
+      </NonSSRRerenderable>
+
+      <NonSSRRerenderable name="Icon">
+        <NveIcon name="person"></NveIcon>
       </NonSSRRerenderable>
 
       <NonSSRRerenderable name="Tabs">
