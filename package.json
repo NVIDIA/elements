@@ -10,7 +10,7 @@
   },
   "scripts": {
     "ci": "wireit",
-    "ci:all": "pnpm run ci && pnpm run lighthouse && node ./projects/internals/gitlab/cache-validate.js ci && node ./projects/internals/gitlab/cache-validate.js lighthouse",
+    "ci:all": "pnpm run ci && node ./projects/internals/gitlab/cache-validate.js ci && pnpm run lighthouse && node ./projects/internals/gitlab/cache-validate.js lighthouse",
     "ci:reset": "pnpm run clean && pnpm i --frozen-lockfile --prefer-offline",
     "lighthouse": "wireit",
     "clean": "git clean -dfX",
@@ -168,17 +168,19 @@
         "./**/*.cjs",
         "./**/*.mjs",
         "./**/*.json",
-        "!projects/elements/src/icon/{icons,server}.ts",
-        "!projects/elements-react/src/**/*",
-        "!projects/starters/nextjs/next-env.d.ts",
-        "!projects/starters/remix/build/**/*",
         "!**/vite.*.ts.timestamp*",
+        "!**/_site/**",
         "!**/dist/**",
         "!**/.wireit/**",
         "!**/.next/**",
         "!**/__screenshots__/**",
         "!**/coverage/**",
-        "!**/node_modules/**"
+        "!**/node_modules/**",
+        "!projects/elements/src/icon/{icons,server}.ts",
+        "!projects/internals/metadata/dist/**",
+        "!projects/elements-react/src/**/*",
+        "!projects/starters/nextjs/next-env.d.ts",
+        "!projects/starters/remix/build/**/*"
       ],
       "output": []
     },

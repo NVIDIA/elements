@@ -48,7 +48,7 @@ async function getSourceFiles(src) {
 
 function getManifest() {
   const elementsSchemaJSON = JSON.parse(
-    readFileSync(new URL('../../elements/dist/custom-elements.json', import.meta.url))
+    readFileSync(new URL('../../../elements/dist/custom-elements.json', import.meta.url))
   );
   return Array.from(
     new Set(
@@ -118,4 +118,4 @@ async function getProjects() {
 const projects = await getProjects();
 const created = new Date().toISOString();
 
-writeFileSync('./elements.json', JSON.stringify({ created, projects }, null, 2));
+writeFileSync('./dist/elements.json', JSON.stringify({ created, projects }, null, 2));
