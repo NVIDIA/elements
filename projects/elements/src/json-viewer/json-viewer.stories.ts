@@ -27,7 +27,7 @@ class DyanamicJSONDemo extends LitElement {
 
   async connectedCallback() {
     super.connectedCallback();
-    this.metrics = await import('../../../internals/metadata/metadata.json');
+    this.metrics = await import('../../../internals/metadata/dist/index.json');
   }
 
   render() {
