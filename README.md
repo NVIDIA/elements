@@ -36,27 +36,35 @@ Examples of projects include:
 
 ### Setup
 
-To setup repository dependencies and run the full build, run the following commands at the root repository:
+To setup repository dependencies and run the full build, run the following commands at the **root** of the repository:
 
 ```shell
-brew install git-lfs #  https://git-lfs.com if not yet installed
-git lfs install # run this command at the root of the repository
+# required only if https://git-lfs.com not already installed on system
+brew install git-lfs
+git lfs install
 git lfs pull
 ```
 
 ```shell
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+# install required dependencies
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 . ~/.nvm/nvm.sh
 nvm install
 corepack enable
 corepack prepare --activate
 pnpm i --frozen-lockfile --prefer-offline
-pnpm run ci # if you need to change or update your version of node, the error will happen here
+```
+
+```shell
+# run ci pipeline locally (lint, build, test)
+pnpm run ci
 ```
 
 #### Troubleshooting
 
-If you are coming from development from a different repository (such as the Maglev monorepo), you may need to install a new version of node in `nvm`. If you see an error message to this effect, [refer to the nvm docs](https://github.com/nvm-sh/nvm?tab=readme-ov-file#usage) for installing the missing node version and for directions on switching between versions of `node` using `nvm`. Note that pnpm may also need to be updated after installing a new version of `node`. See [the pnpm docs](https://pnpm.io/installation) for help there as well. After all of these updates, you will want to start back on the `corepack enable` line in the above list of shell commands.
+If you are coming from development from a different repository, you may need to install a new version of node in `nvm`. If you see an error message to this effect, [refer to the nvm docs](https://github.com/nvm-sh/nvm?tab=readme-ov-file#usage) for installing the missing node version and for directions on switching between versions of `node` using `nvm`. Once `nvm` is installed you can switch to the repository defined node and pnpm verisons by re-running the [setup/install step](#setup) above.
+
+If you actively work/switch between different repositories run `nvm use && corepack prepare --activate` in the root of the project to ensure use of the correct node/pnpm version.
 
 ### Building
 
