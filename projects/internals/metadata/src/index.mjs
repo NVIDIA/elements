@@ -4,7 +4,7 @@ import { Project, SyntaxKind } from 'ts-morph';
 import { getStories } from './stories.mjs';
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
-const INITIAL_METADATA = JSON.parse(readFileSync(new URL('./metadata.json', import.meta.url), 'utf8'));
+const INITIAL_METADATA = JSON.parse(readFileSync(new URL('../dist/index.json', import.meta.url), 'utf8'));
 
 const stories = await getStories(['../../elements/src/**/*.stories.ts', '../../elements/docs/patterns/*.stories.ts']);
 
@@ -237,11 +237,11 @@ async function getProjectMetadata(basePath) {
 const metadata = {
   created: new Date().toISOString(),
   types: getElementsStandardAPIProperties(),
-  '@nvidia-elements/core': await getProjectMetadata('../../elements'),
-  '@nvidia-elements/core-react': await getProjectMetadata('../../elements-react'),
-  '@nvidia-elements/testing': await getProjectMetadata('../../testing'),
-  '@nvidia-elements/code': await getProjectMetadata('../../labs/code'),
-  '@nvidia-elements/behaviors-alpine': await getProjectMetadata('../../labs/behaviors-alpine')
+  '@nvidia-elements/core': await getProjectMetadata('../../../elements'),
+  '@nvidia-elements/core-react': await getProjectMetadata('../../../elements-react'),
+  '@nvidia-elements/testing': await getProjectMetadata('../../../testing'),
+  '@nvidia-elements/code': await getProjectMetadata('../../../labs/code'),
+  '@nvidia-elements/behaviors-alpine': await getProjectMetadata('../../../labs/behaviors-alpine')
 };
 
-writeFileSync('./metadata.json', JSON.stringify(metadata, null, 2));
+writeFileSync('./dist/index.json', JSON.stringify(metadata, null, 2));

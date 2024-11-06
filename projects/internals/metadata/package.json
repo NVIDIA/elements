@@ -15,13 +15,13 @@
     },
     "build": {
       "clean": false,
-      "command": "node ./metadata.mjs",
+      "command": "node ./src/index.mjs",
       "files": [
-        "metadata.mjs",
-        "build/stories.mjs"
+        "src/index.mjs",
+        "src/stories.mjs"
       ],
       "output": [
-        "metadata.json"
+        "dist/index.json"
       ],
       "dependencies": [
         "../../elements:ci",
@@ -32,9 +32,9 @@
       ]
     },
     "build:elements": {
-      "command": "node ./elements.mjs",
+      "command": "node ./src/elements.mjs",
       "files": [
-        "elements.mjs"
+        "src/elements.mjs"
       ],
       "dependencies": [
         "../../elements:build"
