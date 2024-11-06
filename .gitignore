@@ -15,3 +15,4 @@ projects/elements/src/icon/icons.ts
 v8-compile-cache-0
 __screenshots__
 vite.bundle.ts.timestamp-*.mjs
+!projects/internals/metadata/dist

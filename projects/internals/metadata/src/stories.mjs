@@ -8,6 +8,7 @@ export async function getStories(paths) {
 }
 
 async function getStoriesFromFile(filePath) {
+  const path = filePath.replace(process.cwd(), '').replace('/src/', './').replace('.ts', '.json');
   const project = new Project();
   const file = project.addSourceFileAtPath(filePath);
   const stories = file.getChildrenOfKind(SyntaxKind.VariableStatement);
@@ -20,14 +21,15 @@ async function getStoriesFromFile(filePath) {
     ?.replace(/'/g, '');
 
   const formattedStories = stories.map(async story => {
-    const id = story.getDescendantsOfKind(SyntaxKind.Identifier)[0].getText();
+    const id = story.getDescendantsOfKind(SyntaxKind.VariableDeclaration)[0].getName();
     const file = story.getSourceFile().getBaseName();
     let template = story
       .getDescendantsOfKind(SyntaxKind.TaggedTemplateExpression)[0]
       ?.getDescendants()[1]
       ?.getText()
-      ?.replace(/`/g, '')
       .trim();
+
+    template = template?.substring(1, template?.length - 1);
 
     if (template) {
       if (template.includes('nve-theme')) {
@@ -44,11 +46,18 @@ async function getStoriesFromFile(filePath) {
       } catch {}
     }
 
-    return { id, file, template };
+    const description = story
+      .getJsDocs()
+      .flatMap(doc => doc.getTags())
+      .filter(tag => tag.getTagName() === 'description')
+      .map(tag => tag.getCommentText())[0];
+
+    return { id, file, template, description };
   });
 
   return {
     element,
+    path,
     stories: await Promise.all(formattedStories)
   };
 }

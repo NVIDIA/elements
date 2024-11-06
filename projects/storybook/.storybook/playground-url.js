@@ -2,7 +2,7 @@ import { gzipSync } from 'fflate';
 import format from 'html-format';
 import packageFile from '@nvidia-elements/core/package.json';
 import { ELEMENTS_VERSION } from './version.js';
-import metrics from '../../internals/metadata/metadata.json';
+import metrics from '../../internals/metadata/dist/index.json';
 
 export function getPlaygroundURL(source, context) {
   const formattedSource = format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), ' '.repeat(2), 120);
