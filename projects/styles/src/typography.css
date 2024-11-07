@@ -117,6 +117,7 @@
   }
 }
 
+/* eyebrow - Marked for Deprecation? */
 [nve-text~='eyebrow'] {
   font-size: var(--nve-ref-font-size-100) !important;
   font-weight: var(--nve-ref-font-weight-semibold) !important;
@@ -241,11 +242,6 @@
   line-height: inherit !important;
   width: initial !important;
 
-  &:hover,
-  &[nve-text~='hover'] {
-    color: var(--nve-sys-text-link-hover-color) !important;
-  }
-
   &[nve-text~='disabled'] {
     color: var(--nve-sys-text-link-disabled-color) !important;
   }
@@ -264,12 +260,12 @@
     color: var(--nve-sys-text-link-color) !important;
   }
 
-  &[nve-text~='no-visit']:hover {
-    color: var(--nve-sys-text-link-hover-color) !important;
-  }
-
   &[nve-text~='no-underline'] {
     text-decoration: none !important;
+  }
+
+  &[nve-text~='xl'] {
+    font-size: var(--nve-ref-font-size-400) !important;
   }
 
   &[nve-text~='lg'] {
@@ -278,6 +274,15 @@
 
   &[nve-text~='sm'] {
     font-size: var(--nve-ref-font-size-100) !important;
+  }
+
+  &[nve-text~='emphasis'] {
+    color: var(--nve-sys-text-link-emphasis-color) !important;
+  }
+
+  &:hover,
+  &[nve-text~='hover'] {
+    color: var(--nve-sys-text-link-hover-color) !important;
   }
 }
 
