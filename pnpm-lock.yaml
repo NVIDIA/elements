@@ -90,8 +90,8 @@ importers:
         specifier: 10.0.1
         version: 10.0.1(semantic-release@22.0.12(typescript@5.6.3))
       '@semantic-release/gitlab':
-        specifier: 13.0.3
-        version: 13.0.3(semantic-release@22.0.12(typescript@5.6.3))
+        specifier: 13.2.1
+        version: 13.2.1(semantic-release@22.0.12(typescript@5.6.3))
       '@semantic-release/npm':
         specifier: 12.0.0
         version: 12.0.0(semantic-release@22.0.12(typescript@5.6.3))
@@ -201,7 +201,7 @@ importers:
         version: 2.1.2(@vitest/spy@2.1.2)(playwright@1.48.0)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(less@4.2.0)(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))(vitest@2.1.2)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 2.1.2(vitest@2.1.2(@types/node@22.7.5)(@vitest/browser@2.1.2)(jsdom@25.0.1)(less@4.2.0)(msw@2.4.9(typescript@5.6.3))(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))
+        version: 2.1.2(vitest@2.1.2)
       emoji-picker-element:
         specifier: 1.22.8
         version: 1.22.8
@@ -253,7 +253,7 @@ importers:
         version: 2.1.2(@vitest/spy@2.1.2)(playwright@1.48.0)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(less@4.2.0)(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))(vitest@2.1.2)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 2.1.2(vitest@2.1.2(@types/node@22.7.5)(@vitest/browser@2.1.2)(jsdom@25.0.1)(less@4.2.0)(msw@2.4.9(typescript@5.6.3))(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))
+        version: 2.1.2(vitest@2.1.2)
       eslint:
         specifier: 'catalog:'
         version: 9.12.0(jiti@1.21.6)
@@ -331,7 +331,7 @@ importers:
         version: 2.1.2(@vitest/spy@2.1.2)(playwright@1.48.0)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(less@4.2.0)(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))(vitest@2.1.2)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 2.1.2(vitest@2.1.2(@types/node@22.7.5)(@vitest/browser@2.1.2)(jsdom@25.0.1)(less@4.2.0)(msw@2.4.9(typescript@5.6.3))(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))
+        version: 2.1.2(vitest@2.1.2)
       custom-element-vs-code-integration:
         specifier: 1.4.1
         version: 1.4.1(prettier@3.2.5)
@@ -406,7 +406,7 @@ importers:
         version: 2.1.2(@vitest/spy@2.1.2)(playwright@1.48.0)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(less@4.2.0)(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))(vitest@2.1.2)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 2.1.2(vitest@2.1.2(@types/node@22.7.5)(@vitest/browser@2.1.2)(jsdom@25.0.1)(less@4.2.0)(msw@2.4.9(typescript@5.6.3))(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))
+        version: 2.1.2(vitest@2.1.2)
       alpinejs:
         specifier: ^3.14.1
         version: 3.14.1
@@ -458,7 +458,7 @@ importers:
         version: 2.1.2(@vitest/spy@2.1.2)(playwright@1.48.0)(typescript@5.6.3)(vite@5.4.8(@types/node@22.7.5)(less@4.2.0)(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))(vitest@2.1.2)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 2.1.2(vitest@2.1.2(@types/node@22.7.5)(@vitest/browser@2.1.2)(jsdom@25.0.1)(less@4.2.0)(msw@2.4.9(typescript@5.6.3))(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))
+        version: 2.1.2(vitest@2.1.2)
       eslint:
         specifier: 'catalog:'
         version: 9.12.0(jiti@1.21.6)
@@ -3535,8 +3535,8 @@ packages:
     peerDependencies:
       semantic-release: '>=20.1.0'
 
-  '@semantic-release/gitlab@13.0.3':
-    resolution: {integrity: sha512-tup9XW+c3TAQ01l7snBroEXVBaSmXydmLVTmsSeCZ+AN+D60AuA4aSqAF8YdMLQLiYLXrGNZkq+vdBxR/rQm6A==}
+  '@semantic-release/gitlab@13.2.1':
+    resolution: {integrity: sha512-uvajKL3RbvouunvF6rWCEWmvYFW5tCq8irXvb2tW40cdI5rK22q9Uma1m/PxPtUTjggqfap86G0gst1hgeFuow==}
     engines: {node: '>=20.8.1'}
     peerDependencies:
       semantic-release: '>=20.1.0'
@@ -14258,7 +14258,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@semantic-release/gitlab@13.0.3(semantic-release@22.0.12(typescript@5.6.3))':
+  '@semantic-release/gitlab@13.2.1(semantic-release@22.0.12(typescript@5.6.3))':
     dependencies:
       '@semantic-release/error': 4.0.0
       aggregate-error: 5.0.0
@@ -15300,7 +15300,7 @@ snapshots:
       - utf-8-validate
       - vite
 
-  '@vitest/coverage-istanbul@2.1.2(vitest@2.1.2(@types/node@22.7.5)(@vitest/browser@2.1.2)(jsdom@25.0.1)(less@4.2.0)(msw@2.4.9(typescript@5.6.3))(sass@1.77.6)(sugarss@4.0.1(postcss@8.4.47))(terser@5.34.1))':
+  '@vitest/coverage-istanbul@2.1.2(vitest@2.1.2)':
     dependencies:
       '@istanbuljs/schema': 0.1.3
       debug: 4.3.7
