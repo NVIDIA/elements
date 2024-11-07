@@ -30,22 +30,23 @@ export const Headings = {
 export const Size = {
   render: () => html`
 <div nve-layout="column gap:lg">
-  <p nve-text="display xl">display</p>
-  <p nve-text="display lg">display</p>
+  <p nve-text="display xl">display xl</p>
+  <p nve-text="display lg">display lg</p>
   <p nve-text="display">display</p>
-  <p nve-text="display sm">display</p>
-  <p nve-text="heading xl">heading</p>
-  <p nve-text="heading lg">heading</p>
+  <p nve-text="display sm">display sm</p>
+  <p nve-text="heading xl">heading xl</p>
+  <p nve-text="heading lg">heading lg</p>
   <p nve-text="heading">heading</p>
-  <p nve-text="heading sm">heading</p>
-  <p nve-text="body xl">body</p>
-  <p nve-text="body lg">body</p>
+  <p nve-text="heading sm">heading sm</p>
+  <p nve-text="heading xs">heading xs</p>
+  <p nve-text="body xl">body xl</p>
+  <p nve-text="body lg">body lg</p>
   <p nve-text="body">body</p>
-  <p nve-text="body sm">body</p>
-  <p nve-text="label xl">label</p>
-  <p nve-text="label lg">label</p>
+  <p nve-text="body sm">body sm</p>
+  <p nve-text="label xl">label xl</p>
+  <p nve-text="label lg">label lg</p>
   <p nve-text="label">label</p>
-  <p nve-text="label sm">label</p>
+  <p nve-text="label sm">label sm</p>
 </div>
   `
 }
@@ -111,9 +112,23 @@ export const UnstyledList = {
 export const Link = {
   render: () => html`
 <div nve-layout="column gap:lg">
-  <a nve-text="body link" href="#">link (default)</a>
+  <a nve-text="body link" href="#">link</a>
   <a nve-text="body link hover" href="#">link (hover)</a>
   <a nve-text="body link visited" href="#">link (visited)</a>
+
+  ----------------------------------
+
+  <a nve-text="link" href="#">link</a>
+  <a nve-text="link muted" href="#">link muted</a>
+  <a nve-text="link emphasis" href="#">link emphasis</a>
+
+  ----------------------------------
+  
+  <a nve-text="link sm" href="#">link sm</a>
+  <a nve-text="link" href="#">link</a>
+  <a nve-text="link lg" href="#">link lg</a>
+  <a nve-text="link xl" href="#">link xl</a>
+
 </div>
   `
 }
