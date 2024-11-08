@@ -1,5 +1,5 @@
 :host {
-  --gap: var(--nve-ref-space-xxxs);
+  --gap: 1px;
   --border-radius: var(--nve-ref-border-radius-sm);
   --background: color-mix(
     in oklab,
