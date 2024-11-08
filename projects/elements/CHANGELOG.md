@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.13.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.3...@nvidia-elements/core-v1.13.4) (2024-11-08)
+
+
+### Bug Fixes
+
+* **elements:** reduce progressive filter gap ([a2b2205](https://github.com/NVIDIA/elements/commit/a2b2205e70ba9f81a8a90a7c1bd4643ea0b9ff97))
+
 ## [@nvidia-elements/core-v1.13.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.2...@nvidia-elements/core-v1.13.3) (2024-11-01)
 
 
