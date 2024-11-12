@@ -1,3 +1,11 @@
+## [@nvidia-elements/styles-v1.2.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.2.3...@nvidia-elements/styles-v1.2.4) (2024-11-12)
+
+
+### Bug Fixes
+
+* **elements:** default nve-divider to span 100% width ([67916a8](https://github.com/NVIDIA/elements/commit/67916a89768e9002c034b71f2d45ac85503ce7a7))
+* **styles:** nve-text link attribute bugs ([d480874](https://github.com/NVIDIA/elements/commit/d480874b74c9473cccbb76d0e0cbfd69d73b7e0e))
+
 ## [@nvidia-elements/styles-v1.2.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.2.2...@nvidia-elements/styles-v1.2.3) (2024-10-14)
 
 
