@@ -116,13 +116,13 @@ export const Link = {
   <a nve-text="body link hover" href="#">link (hover)</a>
   <a nve-text="body link visited" href="#">link (visited)</a>
 
-  ----------------------------------
+  <nve-divider></nve-divider>
 
   <a nve-text="link" href="#">link</a>
   <a nve-text="link muted" href="#">link muted</a>
   <a nve-text="link emphasis" href="#">link emphasis</a>
 
-  ----------------------------------
+  <nve-divider></nve-divider>
   
   <a nve-text="link sm" href="#">link sm</a>
   <a nve-text="link" href="#">link</a>
