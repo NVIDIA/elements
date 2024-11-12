@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.13.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.4...@nvidia-elements/core-v1.13.5) (2024-11-12)
+
+
+### Bug Fixes
+
+* **elements:** default nve-divider to span 100% width ([67916a8](https://github.com/NVIDIA/elements/commit/67916a89768e9002c034b71f2d45ac85503ce7a7))
+
 ## [@nvidia-elements/core-v1.13.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.3...@nvidia-elements/core-v1.13.4) (2024-11-08)
 
 
