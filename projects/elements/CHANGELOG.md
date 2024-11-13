@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.14.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.5...@nvidia-elements/core-v1.14.0) (2024-11-13)
+
+
+### Features
+
+* **elements:** tab item border color ([c80f118](https://github.com/NVIDIA/elements/commit/c80f118d8fda3296bddd98337933bb7698897a04))
+
 ## [@nvidia-elements/core-v1.13.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.4...@nvidia-elements/core-v1.13.5) (2024-11-12)
 
 
