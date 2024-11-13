@@ -61,6 +61,22 @@ export const BorderlessTabs = {
   `
 };
 
+export const BorderBackground = {
+  render: () => html`
+  <nve-tabs>
+    <nve-tabs-item selected style="--border-background: var(--nve-ref-color-brand-green-900);">
+      Tab 1
+    </nve-tabs-item>
+    <nve-tabs-item>
+      Tab 2
+    </nve-tabs-item>
+    <nve-tabs-item>
+      Tab 3
+    </nve-tabs-item>
+  </nve-tabs>
+  `
+};
+
 export const TabsWithDots = {
   render: () => html`
   <nve-tabs behavior-select>
