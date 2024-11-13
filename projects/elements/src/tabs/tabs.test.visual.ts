@@ -66,5 +66,17 @@ function template(theme: '' | 'dark' = '') {
       <a href="#">•︎•︎•︎•︎•︎•︎</a>
     </nve-tabs-item>
   </nve-tabs>
+
+  <nve-tabs>
+    <nve-tabs-item selected style="--border-background: var(--nve-ref-color-brand-green-900);">
+      <a href="#">•︎•︎•︎•︎•︎•︎</a>
+    </nve-tabs-item>
+    <nve-tabs-item>
+      <a href="#">•︎•︎•︎•︎•︎•︎</a>
+    </nve-tabs-item>
+    <nve-tabs-item>
+      <a href="#">•︎•︎•︎•︎•︎•︎</a>
+    </nve-tabs-item>
+  </nve-tabs>
   `;
 }
