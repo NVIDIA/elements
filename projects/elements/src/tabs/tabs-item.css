@@ -2,6 +2,7 @@
   --border-width: 100%;
   --border-height: var(--nve-ref-border-width-xl);
   --border-top: auto;
+  --border-background: var(--nve-sys-accent-secondary-background);
   --width: 100%;
   --font-size: var(--nve-ref-font-size-100);
   --font-weight: var(--nve-ref-font-weight-medium);
@@ -49,7 +50,7 @@
   width: var(--border-width);
   height: var(--border-height);
   border-radius: var(--border-radius);
-  background: var(--nve-sys-accent-secondary-background);
+  background: var(--border-background);
   top: var(--border-top);
   content: '';
   display: block;

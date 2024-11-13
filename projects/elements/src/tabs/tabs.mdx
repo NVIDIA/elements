@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
 import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, BorderlessTabs, TabsWithDots, VerticalTabs, BorderlessVerticalTabs, StatelessTabs, Links } from './tabs.stories';
+import { Default, BorderlessTabs, TabsWithDots, VerticalTabs, BorderlessVerticalTabs, StatelessTabs, Links, BorderBackground } from './tabs.stories';
 
 <Meta title="Elements/Tabs/Documentation" />
 
@@ -42,6 +42,12 @@ import '@nvidia-elements/core/tabs/define.js';
 By default Tabs will show a blue border on the selected item. You can disable the border by setting `borderless` on the parent `<nve-tabs>`
 
 <Canvas of={BorderlessTabs} />
+
+## Border Background
+
+By default Tabs will show a blue border on the selected item. You can change the border color by setting `--border-background` on the `<nve-tabs-item>`
+
+<Canvas of={BorderBackground} />
 
 ## Tabs with Dot Indicators
 
