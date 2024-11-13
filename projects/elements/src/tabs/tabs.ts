@@ -15,6 +15,7 @@ import tabsStyleSheet from './tabs.css?inline';
  * @cssprop --border-width
  * @cssprop --border-height
  * @cssprop --border-top
+ * @cssprop --border-background
  * @cssprop --width
  * @cssprop --font-size
  * @cssprop --font-weight
