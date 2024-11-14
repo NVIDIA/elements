@@ -42,28 +42,19 @@
 }
 
 @media (hover: hover) {
-  ::slotted(nve-icon-button),
   ::slotted(nve-sort-button),
-  ::slotted(nve-icon-button),
   ::slotted(nve-sort-button) {
     opacity: 0;
   }
 
-  :host(:focus-within) ::slotted(nve-icon-button),
+  ::slotted(nve-sort-button[sort='ascending']),
+  ::slotted(nve-sort-button[sort='descending']),
+  ::slotted(nve-sort-button[sort='ascending']),
+  ::slotted(nve-sort-button[sort='descending']),
   :host(:focus-within) ::slotted(nve-sort-button),
-  :host(:hover) ::slotted(nve-icon-button),
   :host(:hover) ::slotted(nve-sort-button),
-  :host(:focus-within) ::slotted(nve-icon-button),
   :host(:focus-within) ::slotted(nve-sort-button),
-  :host(:hover) ::slotted(nve-icon-button),
   :host(:hover) ::slotted(nve-sort-button) {
     opacity: 1;
   }
-}
-
-::slotted(nve-icon-button:state(anchor-active)),
-::slotted(nve-sort-button:state(anchor-active)),
-::slotted(nve-icon-button:state(anchor-active)),
-::slotted(nve-sort-button:state(anchor-active)) {
-  opacity: 1;
 }
