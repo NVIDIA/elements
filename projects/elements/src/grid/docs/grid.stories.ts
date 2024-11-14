@@ -1179,3 +1179,27 @@ export const Audit = {
 </nve-grid>
   `
 };
+
+export const ColumnSortButtonVisibility = {
+  render: () => html `
+  <nve-grid>
+  <nve-grid-header>
+    <nve-grid-column>
+      Column 1 <nve-sort-button sort="none"></nve-sort-button>
+    </nve-grid-column>
+    <nve-grid-column>
+      Column 2 <nve-sort-button sort="ascending"></nve-sort-button>
+    </nve-grid-column>
+    <nve-grid-column>
+      Column 3 <nve-sort-button sort="descending"></nve-sort-button>
+    </nve-grid-column>
+    <nve-grid-column>Column 4</nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell>cell 1-1</nve-grid-cell>
+    <nve-grid-cell>cell 1-2</nve-grid-cell>
+    <nve-grid-cell>cell 1-3</nve-grid-cell>
+    <nve-grid-cell>cell 1-4</nve-grid-cell>
+  </nve-grid-row>
+</nve-grid>`
+}
