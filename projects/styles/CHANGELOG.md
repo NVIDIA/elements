@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.2.4...@nvidia-elements/styles-v1.3.0) (2024-11-15)
+
+
+### Features
+
+* **elements:** page ([59d25db](https://github.com/NVIDIA/elements/commit/59d25dba77db2a96ee84839cf357636ee8755138))
+
 ## [@nvidia-elements/styles-v1.2.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.2.3...@nvidia-elements/styles-v1.2.4) (2024-11-12)
 
 
