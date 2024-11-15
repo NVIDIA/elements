@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.15.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.14.0...@nvidia-elements/core-v1.15.0) (2024-11-15)
+
+
+### Features
+
+* **elements:** page ([59d25db](https://github.com/NVIDIA/elements/commit/59d25dba77db2a96ee84839cf357636ee8755138))
+
 ## [@nvidia-elements/core-v1.14.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.13.5...@nvidia-elements/core-v1.14.0) (2024-11-13)
 
 
