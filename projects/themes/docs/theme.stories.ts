@@ -221,8 +221,8 @@ class ThemeGeneratorDemo extends LitElement {
     <h2 slot="title">Theme Generator</h2>
     <nve-button slot="nav-items" active>Link 1</nve-button>
     <nve-button slot="nav-items">Link 2</nve-button>
-    <nve-icon-button icon-name="assist" slot="nav-actions"></nve-icon-button>
-    <nve-icon-button icon-name="app-switcher" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button icon-name="chat-bubble" slot="nav-actions"></nve-icon-button>
+    <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
     <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
   </nve-app-header>
 
