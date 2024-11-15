@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.3.0...@nvidia-elements/styles-v1.4.0) (2024-11-15)
+
+
+### Features
+
+* **elements:** add icons ([099bf86](https://github.com/NVIDIA/elements/commit/099bf864e892de758d89ce6b8142cfdf08b0b916))
+
 ## [@nvidia-elements/styles-v1.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.2.4...@nvidia-elements/styles-v1.3.0) (2024-11-15)
 
 
