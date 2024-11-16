@@ -1,4 +1,4 @@
-import type { AppHeader } from '@nvidia-elements/core/app-header';
+import type { PageHeader } from '@nvidia-elements/core/page-header';
 import type { Breadcrumb } from '@nvidia-elements/core/breadcrumb';
 import type { Button } from '@nvidia-elements/core/button';
 import type { IconButton } from '@nvidia-elements/core/icon-button';
@@ -13,7 +13,7 @@ type CustomElement<T, K extends string = ''> = Partial<T & { children: any } & C
 declare module 'solid-js' {
   namespace JSX {
     interface IntrinsicElements {
-      ['nve-app-header']: CustomElement<AppHeader>;
+      ['nve-page-header']: CustomElement<PageHeader>;
       ['nve-breadcrumb']: CustomElement<Breadcrumb>;
       ['nve-button']: CustomElement<Button>;
       ['nve-icon-button']: CustomElement<IconButton>;
