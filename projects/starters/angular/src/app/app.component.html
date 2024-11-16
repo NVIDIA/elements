@@ -1,20 +1,20 @@
 <nve-page>
-  <nve-app-header slot="header">
-    <nve-logo></nve-logo>
-    <h2 slot="title">Elements</h2>
-    <nve-button slot="nav-items" selected>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <h2 slot="prefix">Elements</h2>
+    <nve-button selected container="flat">
       <a href="/elements/starters/buildless/">Starters</a>
     </nve-button>
-    <nve-button slot="nav-items">
+    <nve-button container="flat">
       <a href="https://NVIDIA.github.io/elements/api/" target="_blank">API</a>
     </nve-button>
-    <nve-button slot="nav-items">
+    <nve-button container="flat">
       <a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a>
     </nve-button>
-    <nve-button slot="nav-items">
+    <nve-button container="flat">
       <a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button
     >
-  </nve-app-header>
+  </nve-page-header>
   <nve-page-panel slot="left" size="sm">
     <nve-page-panel-header>
       <div nve-layout="row gap:xs align:vertical-center">Starters</div>
