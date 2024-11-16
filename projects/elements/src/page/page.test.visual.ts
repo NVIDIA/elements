@@ -17,7 +17,7 @@ function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
     import '@nvidia-elements/core/page/define.js';
-    import '@nvidia-elements/core/app-header/define.js';
+    import '@nvidia-elements/core/page-header/define.js';
     import '@nvidia-elements/core/icon-button/define.js';
     import '@nvidia-elements/core/button-group/define.js';
     import '@nvidia-elements/core/toolbar/define.js';
@@ -32,10 +32,10 @@ function template(theme: '' | 'dark' = '') {
     }
   </style>
   <nve-page>
-    <nve-app-header slot="header">
-      <nve-logo></nve-logo>
-      <h2 slot="title">•︎•︎•︎•︎•︎•︎</h2>
-    </nve-app-header>
+    <nve-page-header slot="header">
+      <nve-logo slot="prefix" size="sm"></nve-logo>
+      <h2 slot="prefix">•︎•︎•︎•︎•︎•︎</h2>
+    </nve-page-header>
 
     <nve-page-panel slot="subheader">
       <nve-page-panel-content>•︎•︎•︎•︎•︎•︎</nve-page-panel-content>
