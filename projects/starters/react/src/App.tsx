@@ -1,5 +1,5 @@
 import React from 'react';
-import { NveAppHeader } from '@nvidia-elements/core-react/app-header';
+import { NvePageHeader } from '@nvidia-elements/core-react/page-header';
 import { NveButton } from '@nvidia-elements/core-react/button';
 import { NveIcon } from '@nvidia-elements/core-react/icon';
 import { NveLogo } from '@nvidia-elements/core-react/logo';
@@ -10,28 +10,28 @@ import { NveMenu, NveMenuItem } from '@nvidia-elements/core-react/menu';
 function App() {
   return (
     <NvePage>
-      <NveAppHeader slot="header">
-        <NveLogo></NveLogo>
-        <h2 slot="title">Elements</h2>
-        <NveButton slot="nav-items" selected>
+      <NvePageHeader slot="header">
+        <NveLogo slot="prefix" size="sm"></NveLogo>
+        <h2 slot="prefix">Elements</h2>
+        <NveButton selected container="flat">
           <a href="/elements/starters/buildless/">Starters</a>
         </NveButton>
-        <NveButton slot="nav-items">
+        <NveButton container="flat">
           <a href="https://NVIDIA.github.io/elements/api/" target="_blank">
             API
           </a>
         </NveButton>
-        <NveButton slot="nav-items">
+        <NveButton container="flat">
           <a href="https://github.com/NVIDIA/elements/" target="_blank">
             Gitlab
           </a>
         </NveButton>
-        <NveButton slot="nav-items">
+        <NveButton container="flat">
           <a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">
             Playground
           </a>
         </NveButton>
-      </NveAppHeader>
+      </NvePageHeader>
       <NvePagePanel slot="left" size="sm">
         <NvePagePanelHeader>
           <div nve-layout="row gap:xs align:vertical-center">Starters</div>
