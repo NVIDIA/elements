@@ -82,6 +82,20 @@ export const Large = {
   `
 };
 
+export const TextWrap = {
+  render: () => html`
+<nve-dialog size="md" closable>
+  <h3 nve-text="heading">Text Wrap</h3>
+  <p nve-text="body">
+    Some text wrapped content in a small dialog.  Some text wrapped content in a small dialog.  Some text wrapped content in a small dialog.
+    Some text wrapped content in a small dialog.  Some text wrapped content in a small dialog.  Some text wrapped content in a small dialog.
+    Some text wrapped content in a small dialog.  Some text wrapped content in a small dialog.  Some text wrapped content in a small dialog.
+    Some text wrapped content in a small dialog.  Some text wrapped content in a small dialog.  Some text wrapped content in a small dialog.
+  </p>
+</nve-dialog>
+  `
+};
+
 export const NonClosable = {
   render: () => html`
 <nve-button popovertarget="dialog">open</nve-button>
