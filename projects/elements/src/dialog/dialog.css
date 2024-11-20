@@ -18,7 +18,6 @@
   max-width: var(--max-width);
   min-height: var(--min-height);
   height: max-content;
-  min-width: max-content;
 }
 
 :host([size='sm']) {
