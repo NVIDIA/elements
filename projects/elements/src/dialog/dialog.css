@@ -13,7 +13,6 @@
   --gap: var(--nve-ref-space-sm);
   --max-width: 600px;
   --min-height: 250px;
-  --width: 100%;
   width: 100%;
   max-width: var(--max-width);
   min-height: var(--min-height);
