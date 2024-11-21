@@ -84,7 +84,7 @@ export const Large = {
 
 export const TextWrap = {
   render: () => html`
-<nve-dialog size="md" closable>
+<nve-dialog  closable>
   <h3 nve-text="heading">Text Wrap</h3>
   <p nve-text="body">
     Some text wrapped content in a small dialog.  Some text wrapped content in a small dialog.  Some text wrapped content in a small dialog.
