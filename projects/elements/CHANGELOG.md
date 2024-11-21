@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.16.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.0...@nvidia-elements/core-v1.16.1) (2024-11-21)
+
+
+### Bug Fixes
+
+* **elements:** nve-dialog does not support text wrapping content ([40bd064](https://github.com/NVIDIA/elements/commit/40bd064f827340ea0010c4ecb9e9735d33a8ee2a))
+
 ## [@nvidia-elements/core-v1.16.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.15.0...@nvidia-elements/core-v1.16.0) (2024-11-15)
 
 
