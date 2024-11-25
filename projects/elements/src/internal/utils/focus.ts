@@ -1,19 +1,24 @@
 export function isFocusable(element: Element) {
-  return element.matches(
-    [
-      'a[href]',
-      'area[href]',
-      'input:not([disabled])',
-      'button:not([disabled])',
-      'select:not([disabled])',
-      'textarea:not([disabled])',
-      'iframe',
-      'object',
-      'embed',
-      '*[tabindex]',
-      '*[contenteditable=true]',
-      '[role=button]:not([disabled])'
-    ].join(',')
+  return (
+    element.matches(
+      [
+        'a[href]',
+        'area[href]',
+        'input',
+        'button',
+        'select',
+        'textarea',
+        'iframe',
+        'object',
+        'embed',
+        '*[tabindex]',
+        '*[contenteditable=true]',
+        '[role=button]'
+      ].join(',')
+    ) &&
+    element.matches(':not([disabled], [inert])') &&
+    !element.closest(`[inert]`) &&
+    !element.closest('[popover]')?.matches(':not(:popover-open)')
   );
 }
 
