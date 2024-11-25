@@ -29,6 +29,9 @@ describe('isFocusable', () => {
       <select disabled false></select>
       <textarea>true</textarea>
       <textarea disabled>false</textarea>
+      <button inert>false</button>
+      <div inert><button>false</button></div>
+      <div popover><button>false</button></div>
     `);
     /* eslint-enable */
   });
@@ -40,7 +43,7 @@ describe('isFocusable', () => {
   it('should mark focusable elements as true', () => {
     const elements = Array.from(fixture.querySelectorAll('*')).map(e => isFocusable(e));
     expect(elements.filter(i => i === true).length).toBe(12);
-    expect(elements.filter(i => i === false).length).toBe(7);
+    expect(elements.filter(i => i === false).length).toBe(12);
   });
 });
 
