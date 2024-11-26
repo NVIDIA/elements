@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.16.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.1...@nvidia-elements/core-v1.16.2) (2024-11-26)
+
+
+### Bug Fixes
+
+* **elements:** focus ignore inert elements ([35054bd](https://github.com/NVIDIA/elements/commit/35054bd6640612031b9f34b74c2296abf5cc5e88))
+
 ## [@nvidia-elements/core-v1.16.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.0...@nvidia-elements/core-v1.16.1) (2024-11-21)
 
 
