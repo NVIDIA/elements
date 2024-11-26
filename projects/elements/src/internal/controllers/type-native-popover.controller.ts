@@ -2,7 +2,7 @@ import { ReactiveController, ReactiveElement } from 'lit';
 import { clickOutsideElementBounds, generateId, getAttributeListChanges } from '../utils/dom.js';
 import { attachInternals } from '../utils/a11y.js';
 import { focusElement } from '../utils/focus.js';
-import { getHostTrigger } from './type-native-popover.utils.js';
+import { getHostTrigger, hasOpenPopover } from './type-native-popover.utils.js';
 import type { PopoverType } from '../types/index.js';
 
 export interface NativePopover extends ReactiveElement {
@@ -96,6 +96,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
         this.host.popoverDismissible &&
         this.host.modal &&
         this.host.matches(':popover-open') &&
+        !hasOpenPopover(this.host) &&
         clickOutsideElementBounds(e, this.host)
       ) {
         this.host.hidePopover();
