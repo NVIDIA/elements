@@ -171,6 +171,7 @@ nve-tag {
 
 nve-dropdown {
   --padding: var(--nve-ref-size-200);
+  position-area: bottom span-right;
 }
 
 nve-menu {

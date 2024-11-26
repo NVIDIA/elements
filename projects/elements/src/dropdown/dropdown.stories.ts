@@ -12,6 +12,7 @@ import '@nvidia-elements/core/checkbox/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/menu/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
+import '@nvidia-elements/core/select/define.js';
 
 export default {
   title: 'Elements/Dropdown/Examples',
@@ -190,6 +191,25 @@ export const Alignment = {
 
   <nve-card id="card" style="width: 450px; height: 300px; margin-top: 50px;"></nve-card>
 </div>
+  `
+};
+
+export const NestedDropdownShadowRoots = {
+  render: () => html`
+<nve-button popovertarget="dropdown">open</nve-button>
+<nve-dropdown id="dropdown">
+  <nve-select style="--width: 300px">
+    <label>label</label>
+    <select multiple>
+      <option value="1">Option 1</option>
+      <option value="2" selected>Option 2</option>
+      <option value="3" selected>Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
+</nve-dropdown>
   `
 };
 
