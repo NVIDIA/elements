@@ -270,7 +270,7 @@
   }
 
   :host(:not(:state(anchor-body))) {
-    inset: revert;
+    inset: unset !important;
   }
 
   :host([popover]) {
