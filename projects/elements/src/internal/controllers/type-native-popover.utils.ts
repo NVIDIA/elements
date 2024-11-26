@@ -1,6 +1,6 @@
 import { LogService } from '../services/log.service.js';
 import { getIdMatchNotFoundWarning } from '../utils/audit.js';
-import { generateId, getFlatDOMTree } from '../utils/dom.js';
+import { generateId, getFlatDOMTree, getFlattenedDOMTree } from '../utils/dom.js';
 
 export function associateAnchor(host: HTMLElement, anchor: HTMLElement) {
   if (!(anchor.style as any).anchorName) {
@@ -41,4 +41,8 @@ export function getHostAnchor(host: HTMLElement & { anchor?: HTMLElement | strin
   } else {
     return globalThis.document.body;
   }
+}
+
+export function hasOpenPopover(host: HTMLElement) {
+  return !!getFlattenedDOMTree(host).filter(e => e.popover && e.matches(':popover-open')).length;
 }

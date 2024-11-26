@@ -23,6 +23,10 @@ class TypeNativePopoverControllerTestElement extends LitElement {
 
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
+  @property({ type: Number }) openDelay: number;
+
+  @property({ type: Number }) closeTimeout: number;
+
   @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger = false;
 
   @property({ type: String, reflect: true }) popoverType: 'auto' | 'manual' | 'hint' = 'auto';
@@ -157,6 +161,31 @@ describe('type-popover.controller', () => {
     expect((await open).target).toBe(element);
     expect(element.matches(':popover-open')).toBe(true);
 
+    element.dispatchEvent(new PointerEvent('pointerup', { clientX: 0, clientY: 0 }));
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+
+  it('should not close popover if modal type and nested child popover is open', async () => {
+    element.modal = true;
+    element.popoverDismissible = true;
+
+    const childPopover = document.createElement('div');
+    childPopover.popover = 'auto';
+    element.appendChild(childPopover);
+
+    // open parent popover
+    const open = untilEvent(element, 'open');
+    emulateClick(button);
+    expect((await open).target).toBe(element);
+    expect(element.matches(':popover-open')).toBe(true);
+
+    // open child popover
+    childPopover.showPopover();
+    expect(element.matches(':popover-open')).toBe(true);
+    expect(childPopover.matches(':popover-open')).toBe(true);
+
+    // close child popover, parent remains open
     element.dispatchEvent(new PointerEvent('pointerup', { clientX: 0, clientY: 0 }));
     await elementIsStable(element);
     expect(element.matches(':popover-open')).toBe(true);
@@ -316,6 +345,8 @@ describe('type-popover.controller explicit trigger', () => {
   });
 
   it('should show popover if hidden attribute is removed', async () => {
+    await new Promise(r => requestAnimationFrame(r));
+    await elementIsStable(element);
     const open = untilEvent(element, 'open');
     element.removeAttribute('hidden');
     expect((await open).target).toBe(element);
@@ -498,5 +529,75 @@ describe('type-popover.controller legacy behavior-trigger', () => {
     await cancel;
     await elementIsStable(element);
     expect(element.hidden).toBe(false);
+  });
+});
+
+describe('type-popover.controller - hint', () => {
+  let element: TypeNativePopoverControllerTestElement;
+  let button: Button;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-button popovertarget="popover">anchor</nve-button>
+      <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    element.popoverType = 'hint';
+    button = fixture.querySelector(Button.metadata.tag);
+    await element.updateComplete;
+    await button.updateComplete;
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should open hint popover type when focused', async () => {
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    button.focus();
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+
+  it('should close hint popover type when blured', async () => {
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    button.focus();
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(true);
+
+    button.blur();
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should open with delay when openDelay is set', async () => {
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    element.openDelay = 5;
+    button.focus();
+
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    await new Promise(r => setTimeout(() => r(null), 10));
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+
+  it('should close with delay when a closeTimeout is set', async () => {
+    await elementIsStable(element);
+    element.closeTimeout = 5;
+    button.focus();
+    expect(element.matches(':popover-open')).toBe(true);
+
+    await new Promise(r => setTimeout(() => r(null), 10));
+    expect(element.matches(':popover-open')).toBe(false);
   });
 });

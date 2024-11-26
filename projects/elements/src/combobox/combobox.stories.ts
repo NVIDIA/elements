@@ -295,7 +295,7 @@ export const Reset = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </select>
-    <nve-icon-button id="combobox-reset" aria-label="clear selection" icon-name="cancel" container="flat"></nve-icon-button>
+    <nve-icon-button id="combobox-reset" aria-label="clear selection" icon-name="cancel" container="inline"></nve-icon-button>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
   <script type="module">

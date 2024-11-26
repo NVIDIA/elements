@@ -1,5 +1,5 @@
 import { beforeEach, afterEach, vi, describe, expect, it } from 'vitest';
-import { associateAnchor, getHostAnchor, getHostTrigger } from './type-native-popover.utils.js';
+import { associateAnchor, getHostAnchor, getHostTrigger, hasOpenPopover } from './type-native-popover.utils.js';
 import { LogService } from '../services/log.service.js';
 
 describe('associateAnchor', () => {
@@ -123,5 +123,24 @@ describe('getHostAnchor', () => {
     document.body.appendChild(anchor);
     anchor.id = 'body';
     expect(getHostAnchor(host)).toBe(document.body);
+  });
+});
+
+describe('hasOpenPopover', () => {
+  it('determines if host element contains an open popover', () => {
+    const host = document.createElement('div');
+    const popover = document.createElement('div');
+    popover.popover = 'auto';
+
+    document.body.appendChild(host);
+    expect(hasOpenPopover(host)).toBe(false);
+
+    host.appendChild(popover);
+    expect(hasOpenPopover(host)).toBe(false);
+
+    popover.showPopover();
+    expect(hasOpenPopover(host)).toBe(true);
+
+    host.remove();
   });
 });
