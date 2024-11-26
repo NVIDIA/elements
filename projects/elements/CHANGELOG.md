@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.16.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.2...@nvidia-elements/core-v1.16.3) (2024-11-26)
+
+
+### Bug Fixes
+
+* **elements:** column sort button visibility ([669a2e8](https://github.com/NVIDIA/elements/commit/669a2e8e8234183dc49a5d2f021d754d0fa29c57))
+
 ## [@nvidia-elements/core-v1.16.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.1...@nvidia-elements/core-v1.16.2) (2024-11-26)
 
 
