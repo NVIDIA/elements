@@ -353,6 +353,11 @@ describe(Select.metadata.tag, () => {
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].hidden).toBe(true);
     expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1].hidden).toBe(false);
   });
+
+  it('should default the dropdown to align bottom center with position-area "bottom span-right" ensure wide selection options span to the right of the input', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect((getComputedStyle(dropdown) as any).positionArea).toBe('span-right bottom');
+  });
 });
 
 describe(`${Select.metadata.tag}: size`, () => {
