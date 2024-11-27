@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.16.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.3...@nvidia-elements/core-v1.16.4) (2024-11-27)
+
+
+### Bug Fixes
+
+* **elements:** popovers nested light dismiss ([7d0cd34](https://github.com/NVIDIA/elements/commit/7d0cd342c883eeeae9dcfe7b11daf143e95dbcc8))
+
 ## [@nvidia-elements/core-v1.16.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.2...@nvidia-elements/core-v1.16.3) (2024-11-26)
 
 
