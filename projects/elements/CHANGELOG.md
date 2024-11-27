@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.16.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.4...@nvidia-elements/core-v1.16.5) (2024-11-27)
+
+
+### Bug Fixes
+
+* **elements:** selection value state ([d8a4217](https://github.com/NVIDIA/elements/commit/d8a4217dc21348ae55b85c0b7f2e7fd18c4c11e6))
+
 ## [@nvidia-elements/core-v1.16.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.3...@nvidia-elements/core-v1.16.4) (2024-11-27)
 
 
