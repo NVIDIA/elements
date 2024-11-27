@@ -8,8 +8,8 @@ import {
   useStyles,
   i18n,
   I18nController,
-  getAttributeListChanges,
-  onChildListMutation
+  onChildListMutation,
+  getElementUpdate
 } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { Icon } from '@nvidia-elements/core/icon';
@@ -82,10 +82,6 @@ export class Select extends Control {
     return this.shadowRoot.querySelector('.tags');
   }
 
-  get #numberOfSelectedItems() {
-    return this.#options.filter(o => o.selected).length;
-  }
-
   get #placeholderOption() {
     return this.#options.find(o => o.selected && o.hidden && o.disabled);
   }
@@ -94,7 +90,9 @@ export class Select extends Control {
 
   get #multipleSelectLabel() {
     const option = this.#placeholderOption;
-    const label = option ? this.#placeholderOption.innerText : `${this.#numberOfSelectedItems} ${this.i18n.selected}`;
+    const label = option
+      ? this.#placeholderOption.innerText
+      : `${this.#select.selectedOptions.length} ${this.i18n.selected}`;
     return html`<div class="tags-label ${this.#placeholderOption ? 'placeholder' : ''}" aria-hidden="true">${label}</div>`;
   }
 
@@ -144,10 +142,10 @@ export class Select extends Control {
     await this.updateComplete;
     this.#setupCustomSelectUI();
     this.#setupOverflowListener();
-
     this.#observers.push(
-      getAttributeListChanges(this.#select, ['value'], () => this.requestUpdate()),
-      onChildListMutation(this.#select, () => this.requestUpdate(), { attributes: true, subtree: true })
+      onChildListMutation(this.#select, () => this.requestUpdate(), { attributes: true, subtree: true }),
+      getElementUpdate(this.#select, 'value', () => this.requestUpdate()),
+      ...this.#options.map(o => getElementUpdate(o, 'selected', () => this.requestUpdate()))
     );
   }
 
@@ -208,7 +206,7 @@ export class Select extends Control {
   }
 
   #updateMultipleOverflow(width: number) {
-    if (this.#select?.multiple && this.#tags.getBoundingClientRect().width > width - 24) {
+    if (this.#select?.multiple && this.#tags.getBoundingClientRect().width > width - 48) {
       this._internals.states.add('multiple-overflow');
     } else {
       this._internals.states.delete('multiple-overflow');

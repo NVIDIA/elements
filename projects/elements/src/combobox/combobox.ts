@@ -3,7 +3,14 @@ import { html, isServer, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
-import { createLightDismiss, focusElementTimeout, getDisplayValue, useStyles } from '@nvidia-elements/core/internal';
+import {
+  createLightDismiss,
+  focusElementTimeout,
+  getDisplayValue,
+  getElementUpdate,
+  onChildListMutation,
+  useStyles
+} from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { inputStyles } from '@nvidia-elements/core/input';
 import { Menu, MenuItem } from '@nvidia-elements/core/menu';
@@ -174,6 +181,7 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupSingleSelect() {
     if (this.#select && !this.#select.multiple && !this.input.value) {
+      this.#setupSelect();
       const selected = this.#options.find(o => o.hasAttribute('selected'));
       this.input.value = getDisplayValue(selected);
     }
@@ -181,8 +189,17 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupMultipleSelect() {
     if (this.#select?.multiple) {
+      this.#setupSelect();
       this._internals.states.add('multiple');
     }
+  }
+
+  #setupSelect() {
+    this.#observers.push(
+      onChildListMutation(this.#select, () => this.requestUpdate(), { attributes: true, subtree: true }),
+      getElementUpdate(this.#select, 'value', () => this.requestUpdate()),
+      ...this.#options.map(o => getElementUpdate(o, 'selected', () => this.requestUpdate()))
+    );
   }
 
   #setupAutoCompleteKeyEvents() {
