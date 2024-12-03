@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.16.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.5...@nvidia-elements/core-v1.16.6) (2024-12-03)
+
+
+### Bug Fixes
+
+* **elements:** page-loader position ([bdbc06f](https://github.com/NVIDIA/elements/commit/bdbc06fcd3d77b754514b0dd28f79fa288801188)), closes [#79](https://github.com/NVIDIA/elements/issues/79)
+
 ## [@nvidia-elements/core-v1.16.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.4...@nvidia-elements/core-v1.16.5) (2024-11-27)
 
 
