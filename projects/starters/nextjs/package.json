@@ -15,14 +15,14 @@
     "@nvidia-elements/core-react": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "next": "14.2.5"
   },
   "devDependencies": {
     "typescript": "catalog:",
-    "@types/react": "18.3.3",
-    "@types/react-dom": " 18.3.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "vite": "catalog:"
   },
   "wireit": {

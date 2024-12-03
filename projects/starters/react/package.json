@@ -14,12 +14,13 @@
     "@nvidia-elements/core-react": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@types/react": "18.2.18",
-    "@vitejs/plugin-react": "4.2.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "4.3.4",
     "vite": "catalog:"
   },
   "browserslist": {

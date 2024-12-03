@@ -6,7 +6,11 @@ export const libraryLitSSRTestConfig = {
     bail: 2,
     isolate: false,
     fileParallelism: false,
-    reporters: ['basic', 'junit'],
+    reporters: ['basic', 'junit', 'json'],
+    outputFile: {
+      json: './coverage/ssr/summary.json',
+      junit: './coverage/ssr/junit.xml'
+    },
     server: {
       deps: {
         external: ['**/node_modules/**']

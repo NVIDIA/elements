@@ -25,8 +25,14 @@ export default {
   ],
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-mdx-gfm'
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        'actions': false,
+        'controls': false,
+        'backgrounds': false
+      }
+    }
   ],
   framework: {
     name: '@storybook/web-components-vite',
@@ -45,7 +51,12 @@ export default {
       },
       build: {
         target: 'esnext', // https://github.com/storybookjs/storybook/issues/22223
-        minify: 'esnext'
+        minify: 'esbuild'
+      },
+      optimizeDeps: {
+        esbuildOptions: {
+          target: "esnext",
+        },
       },
       resolve: {
         alias: {
