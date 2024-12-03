@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import { Canvas } from '@internals/storybook/blocks';
 import '@nvidia-elements/core/button/define.js';
-import { Type, Color, Weights, Transforms, Link, List, OrderedList, UnstyledList, Headings, Size, LeadingTrim, LineHeightFixed, LineHeightRelative } from './typography.stories';
+import { Type, Color, Weights, Transforms, Link, List, OrderedList, UnstyledList, NavList, Headings, Size, LeadingTrim, LineHeightFixed, LineHeightRelative } from './typography.stories';
 import { Text } from '../../themes/docs/tokens.stories';
 
 <Meta title="Foundations/Typography/Documentation" />
@@ -71,6 +71,19 @@ Some frameworks and libraries may require additional configuration to use the `n
 ## Unstyled List
 
 <Canvas of={UnstyledList} />
+
+## Navigation List
+
+<Canvas of={NavList} />
+
+```html
+<!-- Navigation List -->
+<ul nve-text="list nav">
+  ...
+  <li></li>
+  ...
+</ul>
+```
 
 ## Headings
 
