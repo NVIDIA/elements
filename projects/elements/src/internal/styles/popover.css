@@ -269,7 +269,8 @@
     inset: 0 0 auto auto;
   }
 
-  :host(:not(:state(anchor-body))) {
+  /* if not relative to body and not floating-ui fallback */
+  :host(:not(:state(anchor-body)):not([style*='left'][style*='top'])) {
     inset: unset !important;
   }
 
