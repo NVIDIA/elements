@@ -35,6 +35,9 @@ export class PageLoader extends LitElement {
     [ProgressRing.metadata.tag]: ProgressRing
   };
 
+  /** @private */
+  declare _internals: ElementInternals;
+
   render() {
     return html`
       <div internal-host>
@@ -42,5 +45,10 @@ export class PageLoader extends LitElement {
         <slot></slot>
       </div>
     `;
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._internals.states.add('anchor-body');
   }
 }
