@@ -10,7 +10,7 @@
     "outDir": "dist/",
     "baseUrl": "./",
     "rootDir": "./",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,

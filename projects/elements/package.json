@@ -35,8 +35,7 @@
     "test:coverage": "wireit",
     "test:lighthouse": "wireit",
     "test:visual": "wireit",
-    "lint": "wireit",
-    "prepublishonly": "wireit"
+    "lint": "wireit"
   },
   "files": [
     "README.md",
@@ -1021,7 +1020,8 @@
         "vitest.visual.ts"
       ],
       "output": [
-        ".visual/*.png"
+        ".visual/*.png",
+        "coverage/visual/**"
       ],
       "dependencies": [
         "build",
@@ -1095,12 +1095,6 @@
         "!src/**/__screenshots__/**"
       ],
       "output": []
-    },
-    "prepublishonly": {
-      "dependencies": [
-        "ci",
-        "../internals/metadata:ci"
-      ]
     }
   }
 }
