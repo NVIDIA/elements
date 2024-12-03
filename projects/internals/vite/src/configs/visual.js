@@ -7,7 +7,11 @@ export const libraryVisualTestConfig = {
     bail: 2,
     isolate: false,
     fileParallelism: false,
-    reporters: ['basic', 'junit'],
+    reporters: ['basic', 'junit', 'json'],
+    outputFile: {
+      json: './coverage/visual/summary.json',
+      junit: './coverage/visual/junit.xml'
+    },
     testTimeout: 60000,
     server: {
       deps: {

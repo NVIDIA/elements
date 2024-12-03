@@ -18,7 +18,6 @@ import('@nvidia-elements/code/codeblock/languages/json.js');
 import('@nvidia-elements/code/codeblock/languages/markdown.js');
 import('@nvidia-elements/code/codeblock/languages/typescript.js');
 import('@nvidia-elements/code/codeblock/languages/xml.js');
-import metrics from '../../internals/metadata/dist/index.json';
 
 export const H1 = ({ children }) => (
   <Unstyled>
