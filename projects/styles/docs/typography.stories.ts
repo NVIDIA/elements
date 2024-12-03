@@ -108,6 +108,45 @@ export const UnstyledList = {
 </ul>
   `
 }
+export const NavList = {
+  render: () => html`
+<ul nve-text="list nav">
+  <li>
+    <a nve-text="link" aria-current="page">Quick Start</a>
+
+    <ul>
+      <li><a nve-text="link" href="#navigation-list">Installing Dependencies</a></li>
+      <li><a nve-text="link" href="#navigation-list">Configure Library</a></li>
+    </ul>
+  </li>
+  <li>
+    <a nve-text="link" href="#navigation-list">Basic Usage</a>
+
+    <ul>
+      <li><a nve-text="link" href="#navigation-list">Architecture</a></li>
+      <li><a nve-text="link" href="#navigation-list">Reference</a></li>
+      <li><a nve-text="link" href="#navigation-list">API</a></li>
+    </ul>
+  </li>
+  <li>
+    External Links
+
+    <ul>
+      <li><a nve-text="link" href="#navigation-list">Join the Community</a></li>
+
+      <li>
+        Submit an Issue
+
+        <ul>
+          <li><a nve-text="link" href="#navigation-list">Feature</a></li>
+          <li><a nve-text="link" href="#navigation-list">Fix</a></li>
+      </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+  `
+}
 
 export const Link = {
   render: () => html`
