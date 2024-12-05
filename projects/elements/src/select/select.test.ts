@@ -176,6 +176,27 @@ describe(Select.metadata.tag, () => {
     expect(element.shadowRoot.querySelector('.tags-label').textContent).toBe('1 selected');
   });
 
+  it('should render collapsed label when dynamically added option selected state updates', async () => {
+    element.style.setProperty('--width', '100px');
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.tags-label').textContent).toBe('2 selected');
+
+    const option = document.createElement('option');
+    option.value = '4';
+    option.textContent = 'Option 4';
+    select.appendChild(option);
+
+    await elementIsStable(element);
+    option.selected = true;
+    await elementIsStable(element);
+
+    expect(element.shadowRoot.querySelector('.tags-label').textContent).toBe('3 selected');
+  });
+
   it('should render tags when using multiple select', async () => {
     select.multiple = true;
     select.options[0].selected = true;
@@ -200,6 +221,27 @@ describe(Select.metadata.tag, () => {
     select.value = '3';
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(1);
+  });
+
+  it('should update tags when using multiple select and dynamically added option selected state changes', async () => {
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(2);
+
+    const option = document.createElement('option');
+    option.value = '4';
+    option.textContent = 'Option 4';
+    select.appendChild(option);
+
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(2);
+
+    option.selected = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(3);
   });
 
   it('should update tags when using multiple select and options change', async () => {

@@ -1,5 +1,4 @@
 import { html, css, LitElement, unsafeCSS } from 'lit';
-import { state } from 'lit/decorators/state.js';
 import layout from '../../styles/dist/layout.css?inline';
 import typography from '../../styles/dist/typography.css?inline';
 import '@nvidia-elements/core/alert/define.js';
@@ -203,15 +202,31 @@ class ThemeGeneratorDemo extends LitElement {
     }
   `];
 
-  @state() private formValues = {
-    'sys-accent-primary-background': '#63a600',
-    'sys-accent-secondary-background': '#006adc',
-    'ref-scale-border-radius': 1,
-    'ref-scale-border-width': 1,
-    'ref-scale-space': 1,
-    'ref-scale-size': 1,
-    'ref-scale-text': 1,
-  };
+  static properties = {
+    formValues: {
+      state: {
+        'sys-accent-primary-background': '#63a600',
+        'sys-accent-secondary-background': '#006adc',
+        'ref-scale-border-radius': 1,
+        'ref-scale-border-width': 1,
+        'ref-scale-space': 1,
+        'ref-scale-size': 1,
+        'ref-scale-text': 1,
+      }
+    }
+  }
+
+  formValues = {
+    state: {
+      'sys-accent-primary-background': '#63a600',
+      'sys-accent-secondary-background': '#006adc',
+      'ref-scale-border-radius': 1,
+      'ref-scale-border-width': 1,
+      'ref-scale-space': 1,
+      'ref-scale-size': 1,
+      'ref-scale-text': 1,
+    }
+  }
 
   render() {
     return html`

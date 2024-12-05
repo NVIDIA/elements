@@ -142,11 +142,26 @@ export class Select extends Control {
     await this.updateComplete;
     this.#setupCustomSelectUI();
     this.#setupOverflowListener();
+    this.#syncSelectValueStates();
+    this.#syncOptionSelectedStates();
+  }
+
+  #syncSelectValueStates() {
     this.#observers.push(
-      onChildListMutation(this.#select, () => this.requestUpdate(), { attributes: true, subtree: true }),
       getElementUpdate(this.#select, 'value', () => this.requestUpdate()),
-      ...this.#options.map(o => getElementUpdate(o, 'selected', () => this.requestUpdate()))
+      onChildListMutation(this.#select, () => this.requestUpdate(), { attributes: true, subtree: true }),
+      onChildListMutation(this.#select, () => this.#syncOptionSelectedStates(), { subtree: true })
     );
+  }
+
+  #trackedOptions = new Set();
+  #syncOptionSelectedStates() {
+    this.#options.forEach(o => {
+      if (!this.#trackedOptions.has(o)) {
+        this.#trackedOptions.add(o);
+        this.#observers.push(getElementUpdate(o, 'selected', () => this.requestUpdate()));
+      }
+    });
   }
 
   disconnectedCallback() {

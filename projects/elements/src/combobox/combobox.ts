@@ -181,7 +181,8 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupSingleSelect() {
     if (this.#select && !this.#select.multiple && !this.input.value) {
-      this.#setupSelect();
+      this.#syncSelectValueStates();
+      this.#syncOptionSelectedStates();
       const selected = this.#options.find(o => o.hasAttribute('selected'));
       this.input.value = getDisplayValue(selected);
     }
@@ -189,17 +190,28 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupMultipleSelect() {
     if (this.#select?.multiple) {
-      this.#setupSelect();
+      this.#syncSelectValueStates();
+      this.#syncOptionSelectedStates();
       this._internals.states.add('multiple');
     }
   }
 
-  #setupSelect() {
+  #syncSelectValueStates() {
     this.#observers.push(
-      onChildListMutation(this.#select, () => this.requestUpdate(), { attributes: true, subtree: true }),
       getElementUpdate(this.#select, 'value', () => this.requestUpdate()),
-      ...this.#options.map(o => getElementUpdate(o, 'selected', () => this.requestUpdate()))
+      onChildListMutation(this.#select, () => this.requestUpdate(), { attributes: true, subtree: true }),
+      onChildListMutation(this.#select, () => this.#syncOptionSelectedStates(), { subtree: true })
     );
+  }
+
+  #trackedOptions = new Set();
+  #syncOptionSelectedStates() {
+    this.#options.forEach(o => {
+      if (!this.#trackedOptions.has(o)) {
+        this.#trackedOptions.add(o);
+        this.#observers.push(getElementUpdate(o, 'selected', () => this.requestUpdate()));
+      }
+    });
   }
 
   #setupAutoCompleteKeyEvents() {
