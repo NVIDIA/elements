@@ -6,6 +6,6 @@ define(ProgressBar);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-progress-bar': ProgressBar;
-    'mlv-progress-bar': ProgressBar /** @depreacated */;
+    'mlv-progress-bar': ProgressBar /** @deprecated */;
   }
 }

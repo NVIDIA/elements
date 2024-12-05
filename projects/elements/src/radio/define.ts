@@ -9,7 +9,7 @@ declare global {
   interface HTMLElementTagNameMap {
     'nve-radio': Radio;
     'nve-radio-group': RadioGroup;
-    'mlv-radio': Radio /** @depreacated */;
-    'mlv-radio-group': RadioGroup /** @depreacated */;
+    'mlv-radio': Radio /** @deprecated */;
+    'mlv-radio-group': RadioGroup /** @deprecated */;
   }
 }
