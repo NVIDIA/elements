@@ -566,6 +566,18 @@
       "types": "./dist/progressive-filter-chip/define.d.ts",
       "default": "./dist/progressive-filter-chip/define.js"
     },
+    "./pulse": {
+      "types": "./dist/pulse/index.d.ts",
+      "default": "./dist/pulse/index.js"
+    },
+    "./pulse/index.js": {
+      "types": "./dist/pulse/index.d.ts",
+      "default": "./dist/pulse/index.js"
+    },
+    "./pulse/define.js": {
+      "types": "./dist/pulse/define.d.ts",
+      "default": "./dist/pulse/define.js"
+    },
     "./radio": {
       "types": "./dist/radio/index.d.ts",
       "default": "./dist/radio/index.js"
