@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.4.0...@nvidia-elements/styles-v1.5.0) (2024-12-05)
+
+
+### Features
+
+* **styles:** nve-text nav list ([5081ac2](https://github.com/NVIDIA/elements/commit/5081ac240130e686e81300df53dc42a6d45a18d5))
+
 ## [@nvidia-elements/styles-v1.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.3.0...@nvidia-elements/styles-v1.4.0) (2024-11-15)
 
 
