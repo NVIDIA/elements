@@ -7,6 +7,6 @@ define(ProgressRing);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-progress-ring': ProgressRing;
-    'nve-progress-ring': ProgressRing /** @depreacated */;
+    'nve-progress-ring': ProgressRing /** @deprecated */;
   }
 }
