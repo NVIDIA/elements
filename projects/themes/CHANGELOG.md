@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.3.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.4...@nvidia-elements/themes-v1.3.5) (2024-12-05)
+
+
+### Bug Fixes
+
+* **elements:** dynamic options selected state ([d944f49](https://github.com/NVIDIA/elements/commit/d944f496703a911151a607a516c98ffa7dca1ad0)), closes [#80](https://github.com/NVIDIA/elements/issues/80)
+
 ## [@nvidia-elements/themes-v1.3.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.3...@nvidia-elements/themes-v1.3.4) (2024-10-14)
 
 
