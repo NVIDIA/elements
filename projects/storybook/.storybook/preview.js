@@ -203,6 +203,7 @@ export const parameters = {
           'Progress Bar',
           'Progress Ring',
           'Password',
+          'Pulse',
           'Radio',
           'Range',
           'Search',
