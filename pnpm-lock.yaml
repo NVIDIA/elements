@@ -510,6 +510,9 @@ importers:
 
   projects/labs/snippets:
     dependencies:
+      chokidar:
+        specifier: 4.0.1
+        version: 4.0.1
       glob:
         specifier: 'catalog:'
         version: 11.0.0
