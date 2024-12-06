@@ -28,6 +28,7 @@
     "build": "wireit",
     "build:icons": "wireit",
     "build:snippets": "wireit",
+    "build:snippets:watch": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
     "test:axe": "wireit",
@@ -938,6 +939,12 @@
       "output": [
         "dist/data.snippets.json"
       ],
+      "dependencies": [
+        "../labs/snippets:ci"
+      ]
+    },
+    "build:snippets:watch": {
+      "command": "@nve-snippets --watch",
       "dependencies": [
         "../labs/snippets:ci"
       ]
