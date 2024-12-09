@@ -9,6 +9,9 @@ import { Meta } from '@storybook/addon-docs';
     <a href="https://NVIDIA.github.io/elements/starters/solidjs/"><svg width="18" height="18"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#solidjs-svg"></use></svg> Demo</a>
   </nve-button>
   <nve-button>
+    <nve-icon name="download" size="sm"></nve-icon> <a href="https://NVIDIA.github.io/elements/starters/download/solidjs.zip">Download</a>
+  </nve-button>
+  <nve-button>
     <nve-icon name="code"></nve-icon> <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/solidjs">Source</a>
   </nve-button>
 </div>
@@ -32,21 +35,15 @@ Once added, properties and events can be used via the standard template syntax.
 </nve-alert-group>
 ```
 
-To add TypeScript types to your TSX files add the element to the `IntrinsicElements` interface.
+To add TypeScript types to your TSX files add the elements interface to the [IntrinsicElements](https://react.dev/blog/2024/04/25/react-19-upgrade-guide#the-jsx-namespace-in-typescript) interface.
 
 ```typescript
-// types.d.ts
-import type { Alert, AlertGroup } from '@nvidia-elements/core/alert';
-
-type CustomEvents<K extends string> = { [key in K]: (event: CustomEvent) => void; };
-type CustomElement<T, K extends string = ""> = Partial<T & { children: any } & CustomEvents<`on${K}`>>;
+// global.d.ts
+import type { CustomElements } from '@nvidia-elements/core/custom-elements-jsx';
 
 declare module 'solid-js' {
   namespace JSX {
-    interface IntrinsicElements {
-      ['nve-alert']: CustomElement<Alert>;
-      ['nve-alert-group']: CustomElement<AlertGroup>;
-    }
+    interface IntrinsicElements extends CustomElements { }
   }
 }
 ```
