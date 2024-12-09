@@ -1,13 +1,14 @@
 import React from 'react';
 import { addons, types, useGlobals } from '@storybook/manager-api';
 
+import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/drawer/define.js';
 import '@nvidia-elements/core/forms/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/switch/define.js';
-import '@nvidia-elements/core/icon/define.js';
-import '@nvidia-elements/core/button/define.js';
-import '@nvidia-elements/core/drawer/define.js';
-import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/page-header/define.js';
@@ -133,18 +134,18 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       ['nve-button']: any;
-      ['nve-icon-button']: any;
-      ['nve-tooltip']: any;
       ['nve-divider']: any;
+      ['nve-drawer']: any;
+      ['nve-drawer-content']: any;
+      ['nve-drawer-header']: any;
+      ['nve-icon-button']: any;
+      ['nve-logo']: any;
+      ['nve-page-header']: any;
       ['nve-select']: any;
       ['nve-switch']: any;
       ['nve-switch-group']: any;
-      ['nve-drawer']: any;
-      ['nve-drawer-header']: any;
-      ['nve-drawer-content']: any;
       ['nve-theme']: any;
-      ['nve-page-header']: any;
-      ['nve-logo']: any;
+      ['nve-tooltip']: any;
     }
   }
 }

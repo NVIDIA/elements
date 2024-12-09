@@ -27,6 +27,9 @@ export interface I18nStrings {
   up: string;
   neutral: string;
   of: string;
+  theme: string;
+  scale: string;
+  reducedMotion: string;
 }
 
 const i18nRegistry = {
@@ -55,7 +58,10 @@ const i18nRegistry = {
   down: 'down',
   up: 'up',
   neutral: 'neutral',
-  of: 'of'
+  of: 'of',
+  theme: 'theme',
+  scale: 'scale',
+  reducedMotion: 'reduced motion'
 };
 
 export class I18nService_ {

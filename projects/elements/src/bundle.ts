@@ -59,6 +59,7 @@ import '@nvidia-elements/core/toast/define.js';
 import '@nvidia-elements/core/toolbar/define.js';
 import '@nvidia-elements/core/time/define.js';
 import '@nvidia-elements/core/textarea/define.js';
+import '@nvidia-elements/core/preferences-input/define.js';
 import '@nvidia-elements/core/tree/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
 import '@nvidia-elements/core/week/define.js';

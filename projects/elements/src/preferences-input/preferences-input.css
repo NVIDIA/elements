@@ -1,0 +1,19 @@
+:host {
+  --color: var(--nve-sys-interaction-color);
+  display: block;
+  width: fit-content;
+}
+
+[internal-host] {
+  color: var(--color);
+  display: flex;
+  gap: var(--nve-ref-size-300);
+  flex-direction: column;
+}
+
+/*
+ * NOTE: here be dragons
+ */
+nve-menu-item {
+  --nve-sys-interaction-state-base: var(--background, var(--nve-sys-interaction-background));
+}
