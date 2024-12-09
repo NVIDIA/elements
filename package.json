@@ -180,7 +180,9 @@
         "!projects/internals/metadata/dist/**",
         "!projects/elements-react/src/**/*",
         "!projects/starters/nextjs/next-env.d.ts",
-        "!projects/starters/remix/build/**/*"
+        "!projects/starters/nextjs-react-18/next-env.d.ts",
+        "!projects/starters/remix/build/**/*",
+        "!projects/starters/remix-react-18/build/**/*"
       ],
       "output": []
     },
