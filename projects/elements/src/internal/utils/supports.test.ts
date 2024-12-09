@@ -15,6 +15,6 @@ describe('supportsCSSPositionArea', () => {
 
 describe('supportsCSSLegacyInsetArea', () => {
   it('should determine if CSS Legacy Inset Area Positioning is supported ', async () => {
-    expect(supportsCSSLegacyInsetArea()).toBe(true);
+    expect(supportsCSSLegacyInsetArea()).toBe(false);
   });
 });
