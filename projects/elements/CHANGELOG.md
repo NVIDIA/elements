@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.17.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.7...@nvidia-elements/core-v1.17.0) (2024-12-09)
+
+
+### Features
+
+* **elements:** improved jsx types support ([aa6956d](https://github.com/NVIDIA/elements/commit/aa6956db723787642cc668ad3b84b7eb38235787))
+
 ## [@nvidia-elements/core-v1.16.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.6...@nvidia-elements/core-v1.16.7) (2024-12-05)
 
 
