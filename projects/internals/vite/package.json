@@ -18,6 +18,7 @@
     "@lit-labs/ssr": "3.2.2",
     "@custom-elements-manifest/analyzer": "0.10.3",
     "@rollup/plugin-terser": "catalog:",
+    "custom-element-jsx-integration": "1.5.4",
     "custom-element-vs-code-integration": "1.4.1",
     "glob": "catalog:",
     "lighthouse": "catalog:",
