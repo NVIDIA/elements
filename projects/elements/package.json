@@ -90,6 +90,9 @@
     "./bundles/*": {
       "default": "./dist/bundles/*"
     },
+    "./custom-elements-jsx": {
+      "types": "./dist/custom-elements-jsx.d.ts"
+    },
     "./accordion": {
       "types": "./dist/accordion/index.d.ts",
       "default": "./dist/accordion/index.js"
