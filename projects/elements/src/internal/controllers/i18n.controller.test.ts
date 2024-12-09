@@ -60,7 +60,10 @@ describe('i18n.controller', () => {
       neutral: 'neutral',
       copy: 'copy',
       copied: 'copied',
-      of: 'of'
+      of: 'of',
+      theme: 'theme',
+      scale: 'scale',
+      reducedMotion: 'reduced motion'
     });
   });
 
@@ -95,7 +98,10 @@ describe('i18n.controller', () => {
       neutral: 'neutral',
       copy: 'copy',
       copied: 'copied',
-      of: 'of'
+      of: 'of',
+      theme: 'theme',
+      scale: 'scale',
+      reducedMotion: 'reduced motion'
     });
   });
 });
