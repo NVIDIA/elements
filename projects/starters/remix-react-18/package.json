@@ -1,0 +1,70 @@
+{
+  "name": "remix-starter",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "start": "wireit"
+  },
+  "dependencies": {
+    "@lit-labs/ssr-react": "0.3.0",
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/core-react": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
+    "@remix-run/node": "2.12.1",
+    "@remix-run/react": "2.12.1",
+    "isbot": "5.1.17",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@remix-run/serve": "2.12.1",
+    "@remix-run/dev": "2.12.1",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "wireit": {
+    "dev": {
+      "command": "remix vite:dev",
+      "dependencies": [
+        "../../elements-react:build"
+      ]
+    },
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "start": {
+      "command": "remix-serve build/server/index.js",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build": {
+      "command": "remix vite:build",
+      "dependencies": [
+        "../../elements-react:build"
+      ],
+      "output": [
+        "build/**"
+      ],
+      "files": [
+        "app/**",
+        "public/**",
+        "package.json",
+        "vite.config.ts",
+        "tsconfig.json"
+      ]
+    }
+  }
+}

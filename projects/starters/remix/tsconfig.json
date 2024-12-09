@@ -1,12 +1,10 @@
 {
-  "include": ["env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"],
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "types": ["@remix-run/node", "vite/client"],
     "module": "ESNext",
     "target": "ES2021",
-    "jsxImportSource": "@lit-labs/ssr-react",
     "isolatedModules": true,
     "esModuleInterop": true,
     "moduleResolution": "bundler",

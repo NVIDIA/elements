@@ -9,12 +9,13 @@ import '@nvidia-elements/core/alert/define.js';
   <nve-button>
     <nve-icon name="code"></nve-icon> <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/remix">Source</a>
   </nve-button>
+  <nve-button>
+    <nve-icon name="download" size="sm"></nve-icon> <a href="https://NVIDIA.github.io/elements/starters/download/remix.zip">Download</a>
+  </nve-button>
 </div>
 
-To use Elements in [Remix](https://remix.run/) follow the [instalation](?path=/docs/integrations-react--docs) steps. Once complete
-elements can be imported and used within React jsx and tsx files.
-
-A experimental [@lit-labs/ssr-react](https://github.com/lit/lit/tree/main/packages/labs/ssr-react) package exists for rendering
+To use Elements in [Remix](https://remix.run/) follow the [installation](?path=/docs/integrations-react--docs) steps. Once complete
+elements can be imported and used within React jsx and tsx files. An experimental [@lit-labs/ssr-react](https://github.com/lit/lit/tree/main/packages/labs/ssr-react) package exists for rendering
 elements with Remix SSR.
 
 ```javascript
@@ -24,11 +25,15 @@ import '@lit-labs/ssr-react/enable-lit-ssr.js';
 // the rest of your app
 ```
 
-```json
-// tsconfig.json
-{
-  "compilerOptions": {
-    "jsxImportSource": "@lit-labs/ssr-react",
+To add TypeScript types to your TSX files add the elements interface to the [IntrinsicElements](https://react.dev/blog/2024/04/25/react-19-upgrade-guide#the-jsx-namespace-in-typescript) interface.
+
+```typescript
+// global.d.ts
+import type { CustomElements } from '@nvidia-elements/core/custom-elements-jsx';
+
+declare module 'react/jsx-runtime' {
+  namespace JSX {
+    interface IntrinsicElements extends CustomElements { }
   }
 }
 ```
