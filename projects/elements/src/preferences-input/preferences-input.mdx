@@ -1,0 +1,37 @@
+import { Meta } from '@storybook/addon-docs';
+import { Canvas } from '@internals/storybook/blocks';
+import { Default, Dropdown, Forms } from './preferences-input.stories';
+
+<Meta title="Elements/Preferences Input/Documentation" />
+
+# Preferences Input
+
+<element-metrics tag="nve-preferences-input"></element-metrics>
+
+## Installation
+
+```typescript
+import '@nvidia-elements/core/preferences-input/define.js';
+```
+
+```html
+<nve-preferences-input name="theme" value="{ 'theme': 'dark' }"></<nve-preferences-input>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Forms
+
+Preferences Input is [form associated component](https://web.dev/more-capable-form-controls/#defining-a-form-associated-custom-element) and can be used within FormData.
+
+<Canvas of={Forms} story={{ inline: false, height: 240 }} />
+
+## Dropdown
+
+<Canvas of={Dropdown} story={{ inline: false, height: 600 }} />
+
+<element-status tag="nve-preferences-input"></element-status>
+
+<element-api tag="nve-preferences-input"></element-api>
