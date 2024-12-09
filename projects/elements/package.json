@@ -766,6 +766,18 @@
       "types": "./dist/textarea/define.d.ts",
       "default": "./dist/textarea/define.js"
     },
+    "./preferences-input": {
+      "types": "./dist/preferences-input/index.d.ts",
+      "default": "./dist/preferences-input/index.js"
+    },
+    "./preferences-input/index.js": {
+      "types": "./dist/preferences-input/index.d.ts",
+      "default": "./dist/preferences-input/index.js"
+    },
+    "./preferences-input/define.js": {
+      "types": "./dist/preferences-input/define.d.ts",
+      "default": "./dist/preferences-input/define.js"
+    },
     "./toolbar": {
       "types": "./dist/toolbar/index.d.ts",
       "default": "./dist/toolbar/index.js"
