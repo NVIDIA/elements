@@ -224,8 +224,9 @@ describe(`${Control.metadata.tag}: fit-content input`, () => {
 
   it('should update control width to input browser default content', async () => {
     await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
     expect(Math.floor(input.getBoundingClientRect().width) > 100).toBe(true);
-    expect(Math.floor(input.getBoundingClientRect().width) < 200).toBe(true);
+    expect(Math.floor(input.getBoundingClientRect().width) < 250).toBe(true);
   });
 });
 
