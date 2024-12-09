@@ -9,14 +9,13 @@ import '@nvidia-elements/core/alert/define.js';
   <nve-button>
     <nve-icon name="code"></nve-icon> <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nextjs">Source</a>
   </nve-button>
+  <nve-button>
+    <nve-icon name="download" size="sm"></nve-icon> <a href="https://NVIDIA.github.io/elements/starters/download/nextjs.zip">Download</a>
+  </nve-button>
 </div>
 
-<nve-alert status="warning">
-  While Elements can be used in React we recommend alternatives such as <a nve-text="link" href="https://preactjs.com">Preact</a> due to <a nve-text="link" href="https://custom-elements-everywhere.com/">React incompatibilities</a> with standard Web APIs.
-</nve-alert>
-
-To use Elements in [NextJS](https://nextjs.org/) follow the [instalation](?path=/docs/integrations-react--docs) steps. Once complete
-elements can be imported and used within React jsx and tsx files. A experimental [@lit-labs/nextjs](https://github.com/lit/lit/tree/main/packages/labs/nextjs) package exists for rendering
+To use Elements in [NextJS](https://nextjs.org/) follow the [installation](?path=/docs/integrations-react--docs) steps. Once complete
+elements can be imported and used within React jsx and tsx files. An experimental [@lit-labs/nextjs](https://github.com/lit/lit/tree/main/packages/labs/nextjs) package exists for rendering
 elements with NextJS SSR.
 
 ```javascript
@@ -30,30 +29,15 @@ const nextConfig = {
 export default withLitSSR({})(nextConfig);
 ```
 
-The `Dialog` React component can now be used within a the NextJS application.
+To add TypeScript types to your TSX files add the elements interface to the [IntrinsicElements](https://react.dev/blog/2024/04/25/react-19-upgrade-guide#the-jsx-namespace-in-typescript) interface.
 
-```tsx
-import { Dialog } from '@nvidia-elements/core-react';
+```typescript
+// global.d.ts
+import type { CustomElements } from '@nvidia-elements/core/custom-elements-jsx';
 
-// - closable - HTML attribute
-// - hidden - can update via attributes or JavaScript property binding
-// - onclose - event listener binding for 'close' custom event
-
-<NveDialog closable modal hidden={!showDialog} onclose={() => setShowDialog(false)}>
-  ...
-</NveDialog>
-```
-
-## Dynamic Components
-
-To use the components but avoid using the experimental `@lit-labs/nextjs` package, the components can be rendered client-side only using the `next/dynamic` package.
-
-```tsx
-import React from 'react';
-import dynamic from 'next/dynamic';
-
-export const NveDialog = dynamic(async () => {
-  const { Dialog } = await import('@nvidia-elements/core-react');
-  return Dialog;
-}, { ssr: false });
+declare module 'react' {
+  namespace JSX {
+    interface IntrinsicElements extends CustomElements { }
+  }
+}
 ```
