@@ -34,7 +34,10 @@ describe('GlobalStateService', () => {
       down: 'down',
       up: 'up',
       neutral: 'neutral',
-      of: 'of'
+      of: 'of',
+      theme: 'theme',
+      scale: 'scale',
+      reducedMotion: 'reduced motion'
     });
   });
 
@@ -67,7 +70,10 @@ describe('GlobalStateService', () => {
       down: 'vers le bas',
       up: 'en haut',
       neutral: 'neutre',
-      of: 'de'
+      of: 'de',
+      theme: 'thème',
+      scale: 'échelle',
+      reducedMotion: 'mouvement réduit'
     });
 
     expect(I18nService.i18n).toStrictEqual({
@@ -96,7 +102,10 @@ describe('GlobalStateService', () => {
       down: 'vers le bas',
       up: 'en haut',
       neutral: 'neutre',
-      of: 'de'
+      of: 'de',
+      theme: 'thème',
+      scale: 'échelle',
+      reducedMotion: 'mouvement réduit'
     });
 
     I18nService.update(original);
