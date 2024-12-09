@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import { Project, SyntaxKind } from 'ts-morph';
+import { customElementJsxPlugin } from 'custom-element-jsx-integration';
 
 const resolve = rel => path.resolve(process.cwd(), rel);
 const pkg = JSON.parse(fs.readFileSync(resolve('./package.json'), 'utf-8'));
@@ -122,9 +123,30 @@ function orderPlugin() {
   };
 }
 
-// Leverage the TypeScript compiler to evaluate exported string literal (union) types to their compiled type values.
-// Note: https://ts-ast-viewer.com/ is helpful for understanding the TypeScript AST and type checker return values.
+function jsxTypesPlugin() {
+  return customElementJsxPlugin({
+    outdir: resolve('dist'),
+    fileName: 'custom-elements-jsx.d.ts',
+    globalEvents: `
+      onClick?: (event: MouseEvent) => void;
+      onKeyDown?: (event: KeyboardEvent) => void;
+      onKeyUp?: (event: KeyboardEvent) => void;
+      onKeyPressed?: (event: KeyboardEvent) => void;
+      onFocus?: (event: FocusEvent) => void;
+      onBlur?: (event: FocusEvent) => void;
+      onMouseEnter?: (event: MouseEvent) => void;
+      onMouseLeave?: (event: FocusEvent) => void;
+      onMouseMove?: (event: FocusEvent) => void;
+      onPointerDown?: (event: PointerEvent) => void;
+      onPointerUp?: (event: PointerEvent) => void;
+      onPointerMove?: (event: PointerEvent) => void;
+    `
+  });
+}
+
 function rewriteExportedStringLiteralTypeAliasesPlugin() {
+  // Leverage the TypeScript compiler to evaluate exported string literal (union) types to their compiled type values.
+  // Note: https://ts-ast-viewer.com/ is helpful for understanding the TypeScript AST and type checker return values.
   function quoteWrap(string) {
     return `'${string}'`;
   }
@@ -258,7 +280,8 @@ export default {
     extensionPlugin(),
     orderPlugin(),
     metadataPlugin(),
-    rewriteExportedStringLiteralTypeAliasesPlugin()
+    rewriteExportedStringLiteralTypeAliasesPlugin(),
+    jsxTypesPlugin()
   ],
   overrideModuleCreation: ({ ts, globs }) => {
     const configFile = ts.findConfigFile(process.cwd(), ts.sys.fileExists, resolve('tsconfig.json'));
