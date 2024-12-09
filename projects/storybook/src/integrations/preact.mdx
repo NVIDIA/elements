@@ -23,21 +23,17 @@ Once added, properties and events can be used via the standard Preact template s
 </nve-alert-group>
 ```
 
-To add TypeScript types to your TSX files add the element to the `IntrinsicElements` interface.
+To add TypeScript types to your TSX files add the elements interface to the [IntrinsicElements](https://preactjs.com/guide/v10/typescript/#extending-intrinsicelements) interface.
 
 ```typescript
-// types.d.ts
-import type { Alert, AlertGroup } from '@nvidia-elements/core/alert';
-
-type CustomEvents<K extends string> = { [key in K] : (event: CustomEvent) => void };
-type CustomElement<T, K extends string = ''> = Partial<T & { children: any } & CustomEvents<`on${K}`>>;
+// global.d.ts
+import type { CustomElements } from '@nvidia-elements/core/custom-elements-jsx';
 
 declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      ['nve-alert']: CustomElement<Alert>;
-      ['nve-alert-group']: CustomElement<AlertGroup>;
-    }
+  namespace preact.JSX {
+    interface IntrinsicElements extends CustomElements { }
   }
 }
+
+export {}
 ```

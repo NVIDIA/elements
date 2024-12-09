@@ -36,6 +36,7 @@
         "./nextjs:build",
         "./remix:build",
         "./react:build",
+        "./react-18:build",
         "./scoped-registry:build",
         "./solidjs:build",
         "./typescript:build",

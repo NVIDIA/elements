@@ -1,0 +1,71 @@
+{
+  "name": "nextjs-starter",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "ci": "wireit",
+    "build": "wireit",
+    "preview": "wireit",
+    "lint": "wireit"
+  },
+  "dependencies": {
+    "@lit-labs/nextjs": "0.2.0",
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/core-react": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "next": "14.2.5"
+  },
+  "devDependencies": {
+    "typescript": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "vite": "catalog:"
+  },
+  "wireit": {
+    "preview": {
+      "command": "cd dist && pnpm exec vite preview --base=elements/starters/nextjs",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "lint": {
+      "command": "next lint"
+    },
+    "start": {
+      "command": "next start",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "dev": {
+      "command": "next dev",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build": {
+      "command": "next build",
+      "dependencies": [
+        "../../elements-react:build"
+      ],
+      "output": [
+        ".next/**"
+      ],
+      "files": [
+        "src/**",
+        "package.json",
+        "next.config.mjs",
+        "tsconfig.json"
+      ]
+    }
+  }
+}

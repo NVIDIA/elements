@@ -12,20 +12,19 @@
   "dependencies": {
     "@lit-labs/ssr-react": "0.3.0",
     "@nvidia-elements/core": "workspace:*",
-    "@nvidia-elements/core-react": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "@remix-run/node": "2.12.1",
-    "@remix-run/react": "2.12.1",
+    "@remix-run/node": "2.15.0",
+    "@remix-run/react": "2.15.0",
     "isbot": "5.1.17",
-    "react": "catalog:",
-    "react-dom": "catalog:"
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
-    "@remix-run/serve": "2.12.1",
-    "@remix-run/dev": "2.12.1",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
+    "@remix-run/serve": "2.15.0",
+    "@remix-run/dev": "2.15.0",
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0",
     "typescript": "catalog:",
     "vite": "catalog:"
   },
@@ -36,7 +35,7 @@
     "dev": {
       "command": "remix vite:dev",
       "dependencies": [
-        "../../elements-react:build"
+        "../../elements:build"
       ]
     },
     "ci": {
@@ -53,7 +52,7 @@
     "build": {
       "command": "remix vite:build",
       "dependencies": [
-        "../../elements-react:build"
+        "../../elements:build"
       ],
       "output": [
         "build/**"
