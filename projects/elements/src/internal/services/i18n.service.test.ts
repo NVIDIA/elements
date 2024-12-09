@@ -8,7 +8,6 @@ describe('GlobalStateService', () => {
   });
 
   it('should provide an intial i18n state', () => {
-    console.log(I18nService.i18n);
     expect(I18nService.i18n).toStrictEqual({
       close: 'close',
       copy: 'copy',
