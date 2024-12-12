@@ -6,7 +6,7 @@ import { Default, Visual, Status, Events, InteractiveGroup, Drawer, Alignment, P
 
 # Notification Snackbar
 
-<element-metrics tag="nve-notification"></element-metrics>
+<nve-api-summary tag="nve-notification"></nve-api-summary>
 
 ## Installation
 
@@ -30,15 +30,15 @@ import '@nvidia-elements/core/notification/define.js';
 
 ## Events
 
-<element-api tag="nve-notification" type="event" value="open"></element-api>
+<nve-api-detail tag="nve-notification" type="event" value="open"></nve-api-detail>
 
-<element-api tag="nve-notification" type="event" value="close"></element-api>
+<nve-api-detail tag="nve-notification" type="event" value="close"></nve-api-detail>
 
 <Canvas of={Events} story={{ inline: false, height: 400 }} />
 
 ## Status
 
-<element-api tag="nve-notification" type="property" value="status"></element-api>
+<nve-api-detail tag="nve-notification" type="property" value="status"></nve-api-detail>
 
 <Canvas of={Status} story={{ inline: false, height: 450 }} />
 
@@ -48,25 +48,25 @@ import '@nvidia-elements/core/notification/define.js';
 
 ## Drawer
 
-<element-api tag="nve-notification" type="property" value="container"></element-api>
+<nve-api-detail tag="nve-notification" type="property" value="container"></nve-api-detail>
 
 <Canvas of={Drawer} story={{ inline: false, height: 900 }} />
 
 ## Alignment
 
-<element-api tag="nve-notification-group" type="property" value="alignment"></element-api>
+<nve-api-detail tag="nve-notification-group" type="property" value="alignment"></nve-api-detail>
 
 <Canvas of={Alignment} story={{ inline: false, height: 700 }} />
 
 ## Position
 
-<element-api tag="nve-notification-group" type="property" value="position"></element-api>
+<nve-api-detail tag="nve-notification-group" type="property" value="position"></nve-api-detail>
 
 <Canvas of={Position} story={{ inline: false, height: 700 }} />
 
 ## Position Group
 
-<element-api tag="nve-notification-group" type="property" value="position"></element-api>
+<nve-api-detail tag="nve-notification-group" type="property" value="position"></nve-api-detail>
 
 <Canvas of={PositionGroup} story={{ inline: false, height: 700 }} />
 
@@ -74,8 +74,8 @@ import '@nvidia-elements/core/notification/define.js';
 
 <Canvas of={ContentWrap} story={{ inline: false, height: 700 }} />
 
-<element-status tag="nve-notification"></element-status>
+<nve-api-status tag="nve-notification"></nve-api-status>
 
-<element-api tag="nve-notification"></element-api>
+<nve-api-table tag="nve-notification"></nve-api-table>
 
-<element-api tag="nve-notification-group"></element-api>
+<nve-api-table tag="nve-notification-group"></nve-api-table>
