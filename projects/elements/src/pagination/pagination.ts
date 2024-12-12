@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
@@ -123,7 +123,7 @@ export class Pagination extends LitElement {
   }
 
   get #label() {
-    return html`<label>of ${formatStandardNumber(this.items)}</label>`;
+    return this.items ? html`<label>${this.i18n.of} ${formatStandardNumber(this.items)}</label>` : nothing;
   }
 
   get #previousButton() {
@@ -194,7 +194,7 @@ export class Pagination extends LitElement {
     return html`
       <div internal-host role="presentation">
         ${
-          this.skippable
+          this.skippable && this.items
             ? html`
               ${this.#startButton} ${this.#previousButton} ${this.#select} ${this.#label} ${this.#nextButton}
               ${this.#endButton}

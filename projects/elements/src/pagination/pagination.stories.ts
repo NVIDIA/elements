@@ -72,6 +72,25 @@ export const Forms = {
   `
 };
 
+export const NoItemsCount = {
+  render: () => html`
+    <form id="pagination-form" nve-layout="column gap:md">
+      <nve-pagination name="page" value="1" step="10" aria-label="pagination controls"></nve-pagination>
+      <pre></pre>
+    </form>
+    <script type="module">
+      const form = document.querySelector('form');
+      const pre = document.querySelector('form pre');
+      form.addEventListener('input', updateValues);
+      form.addEventListener('step-change', updateValues);
+      function updateValues(e) {
+        e.preventDefault();
+        pre.innerText = JSON.stringify({ ...Object.fromEntries(new FormData(form)), step: form.elements.page.step }, null, 2);
+      }
+    </script>
+  `
+};
+
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light pad:md">

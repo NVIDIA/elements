@@ -33,7 +33,8 @@ describe('GlobalStateService', () => {
       trend: 'trend',
       down: 'down',
       up: 'up',
-      neutral: 'neutral'
+      neutral: 'neutral',
+      of: 'of'
     });
   });
 
@@ -65,7 +66,8 @@ describe('GlobalStateService', () => {
       trend: "s'orienter",
       down: 'vers le bas',
       up: 'en haut',
-      neutral: 'neutre'
+      neutral: 'neutre',
+      of: 'de'
     });
 
     expect(I18nService.i18n).toStrictEqual({
@@ -93,7 +95,8 @@ describe('GlobalStateService', () => {
       trend: "s'orienter",
       down: 'vers le bas',
       up: 'en haut',
-      neutral: 'neutre'
+      neutral: 'neutre',
+      of: 'de'
     });
 
     I18nService.update(original);
