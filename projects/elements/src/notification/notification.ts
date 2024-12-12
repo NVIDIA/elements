@@ -155,11 +155,27 @@ export class Notification extends LitElement {
     }
   }
 
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    this.#setupCloseTimeout();
+  }
+
   hidePopover(): void {
     if (this.popoverInline) {
       this.dispatchEvent(new CustomEvent('close'));
     } else {
       super.hidePopover();
+    }
+  }
+
+  /**
+   * The popover controller provides this functionality.
+   * However when the notification is in inline mode the
+   * controller is not run so we must manually set this up here.
+   */
+  #setupCloseTimeout() {
+    if (this.popoverInline && this.closeTimeout && !this.hidden) {
+      setTimeout(() => this.hidePopover(), this.closeTimeout);
     }
   }
 }
