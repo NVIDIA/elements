@@ -3,7 +3,9 @@ import * as path from 'path';
 const resolve = (rel) => path.resolve(process.cwd(), rel);
 
 export default {
-  staticDirs: ['../.storybook/assets'],
+  staticDirs: [
+    '../.storybook/assets'
+  ],
   stories: [
     '../src/**/*.mdx',
     '../src/**/*.stories.ts',
@@ -21,7 +23,8 @@ export default {
     '../../testing/docs/**/*.mdx',
     '../../testing/docs/**/*.stories.ts',
     '../../themes/docs/**/*.mdx',
-    '../../themes/docs/**/*.stories.ts'
+    '../../themes/docs/**/*.stories.ts',
+    '../../internals/elements-api/src/**/*.stories.ts'
   ],
   addons: [
     '@storybook/addon-links',

@@ -4,8 +4,10 @@
   "private": true,
   "scripts": {
     "ci": "wireit",
+    "ci:all": "wireit",
     "build": "wireit",
-    "build:elements": "wireit"
+    "build:elements": "wireit",
+    "build:lighthouse": "wireit"
   },
   "wireit": {
     "ci": {
@@ -13,12 +15,18 @@
         "build"
       ]
     },
+    "ci:all": {
+      "dependencies": [
+        "build",
+        "build:lighthouse",
+        "build:elements"
+      ]
+    },
     "build": {
       "clean": false,
       "command": "node ./src/index.mjs",
       "files": [
-        "src/index.mjs",
-        "src/stories.mjs"
+        "src/index.mjs"
       ],
       "output": [
         "dist/index.json"
@@ -27,14 +35,28 @@
         "../../elements:ci",
         "../../elements-react:ci",
         "../../testing:ci",
-        "../../labs/code:ci",
-        "../../labs/behaviors-alpine:ci"
+        "../../labs/code:ci"
+      ]
+    },
+    "build:lighthouse": {
+      "command": "node ./src/lighthouse.mjs",
+      "files": [
+        "src/lighthouse.mjs"
+      ],
+      "output": [
+        "static/lighthouse.json"
+      ],
+      "dependencies": [
+        "../../../:lighthouse"
       ]
     },
     "build:elements": {
       "command": "node ./src/elements.mjs",
       "files": [
         "src/elements.mjs"
+      ],
+      "output": [
+        "static/elements.json"
       ],
       "dependencies": [
         "../../elements:build"

@@ -18,7 +18,7 @@
     "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/behaviors-alpine": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
-    "fflate": "0.8.2",
+    "@nve-internals/elements-api": "workspace:*",
     "html-format": "1.1.7",
     "lit": "catalog:",
     "showdown": "2.1.0"
@@ -89,7 +89,8 @@
         "../labs/code:build",
         "../styles:build",
         "../themes:build",
-        "../starters/lit-library:build"
+        "../starters/lit-library:build",
+        "../internals/elements-api:build"
       ]
     },
     "lint": {

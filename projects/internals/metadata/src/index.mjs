@@ -1,30 +1,15 @@
 import { resolve } from 'node:path';
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { Project, SyntaxKind } from 'ts-morph';
-import { getStories } from './stories.mjs';
+import { globSync } from 'glob';
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
-const INITIAL_METADATA = JSON.parse(readFileSync(new URL('../dist/index.json', import.meta.url), 'utf8'));
 
-const stories = await getStories(['../../elements/src/**/*.stories.ts', '../../elements/docs/patterns/*.stories.ts']);
-
-const ariaSpecs = {
-  navigation: [
-    'https://www.w3.org/WAI/ARIA/apg/patterns/tabs/',
-    'https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/',
-    'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/',
-    'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/examples/menubar-navigation/',
-    'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/examples/menubar-editor/',
-    'https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/',
-    'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav'
-  ],
-  list: ['https://www.w3.org/WAI/ARIA/apg/patterns/grid/', 'https://www.w3.org/WAI/ARIA/apg/patterns/treeview/'],
-  feedback: ['https://www.w3.org/WAI/ARIA/apg/patterns/alert/'],
-  container: [
-    'https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/',
-    'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/group_role'
-  ]
-};
+const stories = globSync(`${resolve('../../elements')}/dist/**/*.stories.json`)
+  .map(path => {
+    return JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
+  })
+  .reduce((prev, next) => [...prev, next], []);
 
 /** projects/../dist/custom-elements.json */
 function getManifestDeclarations(customElementsManifest) {
@@ -35,100 +20,111 @@ function getManifestDeclarations(customElementsManifest) {
         return module.declarations;
       })
     )
-  )
-    .filter(d => d.tagName)
-    .filter(
-      d =>
-        !d.tagName.includes('demo') &&
-        !d.tagName.includes('i18n') &&
-        !d.tagName.includes('ui-') &&
-        !d.tagName.includes('my-')
-    )
-    .map(d => {
-      d.tagName = d.tagName.replace('nve-', 'nve-');
-      return d;
-    });
+  ).filter(d => d.tagName);
 }
 
 /** projects/../coverage/unit/coverage-summary.json */
-function getTestCoverage(path) {
-  const coverageJSON = JSON.parse(readFileSync(path));
-  const coverage = Object.entries(coverageJSON)
-    .map(([file, coverage]) => ({
-      file: file.includes('/src/') ? file.split('/src/')[1] : file,
-      ...coverage
-    }))
-    .sort((a, b) => (a.lines.pct > b.lines.pct ? 1 : -1))
-    .filter(c => !c.file.includes('polyfills'));
+function getTestCoverage(basePath) {
+  const coverageReportPath = new URL(basePath + '/coverage/unit/coverage-summary.json', import.meta.url);
+  if (existsSync(coverageReportPath)) {
+    const coverageJSON = JSON.parse(readFileSync(coverageReportPath));
+    const coverage = Object.entries(coverageJSON)
+      .map(([file, coverage]) => ({
+        file: file.includes('/src/') ? file.split('/src/')[1] : file,
+        ...coverage
+      }))
+      .sort((a, b) => (a.lines.pct > b.lines.pct ? 1 : -1))
+      .filter(c => !c.file.includes('polyfills'));
 
-  const coverageTotal = coverage.splice(
-    coverage.findIndex(c => c.file === 'total'),
-    1
-  )[0];
+    const coverageTotal = coverage.splice(
+      coverage.findIndex(c => c.file === 'total'),
+      1
+    )[0];
 
-  return { coverage, coverageTotal };
+    return { coverage, coverageTotal };
+  } else {
+    return null;
+  }
 }
 
-/** determine the element stability based on metadata provided */
-function getElementStability(metadata) {
-  let status = 'unknown';
-  const preRelease = metadata.apiReview && metadata.storybook?.length;
-  const beta = metadata.unitTests && metadata.apiReview && metadata.vqa && metadata.package;
-  const stable = metadata.stable && metadata.performance && metadata.aria?.length;
-
-  if (preRelease) {
-    status = 'pre-release';
-  }
-
-  if (preRelease && beta) {
-    status = 'beta';
-  }
-
-  if (preRelease && beta && stable) {
-    status = 'stable';
-  }
-
-  return status;
+function getPackageFile(basePath) {
+  return JSON.parse(readFileSync(new URL(basePath + '/package.json', import.meta.url), 'utf8'));
 }
 
-/** determine behavior category based on functional API behavior when possible or aria behavior spec */
-function getBehaviorCategory(classDeclaration) {
-  if (classDeclaration.superclass?.name === 'BaseButton' || classDeclaration.superclass?.name === 'Button') {
-    return 'button';
-  }
+function getChangelog(basePath) {
+  return readFileSync(new URL(basePath + '/CHANGELOG.md', import.meta.url), 'utf8');
+}
 
-  if (
-    classDeclaration.superclass?.name === 'Control' ||
-    classDeclaration.superclass?.name === 'ControlGroup' ||
-    classDeclaration.name.startsWith('Control')
-  ) {
-    return 'form';
-  }
+function getReadMe(basePath) {
+  return readFileSync(new URL(basePath + '/README.md', import.meta.url), 'utf8');
+}
 
-  if (
-    JSON.stringify(classDeclaration.members).includes('TypePopoverController') ||
-    classDeclaration.name.startsWith('Dialog')
-  ) {
-    return 'popover';
-  }
+function getCustomElementsManifest(basePath) {
+  const customElementsManifestPath = new URL(basePath + '/dist/custom-elements.json', import.meta.url);
+  return existsSync(customElementsManifestPath)
+    ? JSON.parse(readFileSync(new URL(customElementsManifestPath, import.meta.url), 'utf8'))
+    : null;
+}
 
-  if (ariaSpecs.feedback.find(i => i === classDeclaration.metadata.aria)) {
-    return 'feedback';
-  }
+function getLighthouseReport() {
+  return JSON.parse(readFileSync(new URL('../static/lighthouse.json', import.meta.url), 'utf8'));
+}
 
-  if (ariaSpecs.navigation.find(i => i === classDeclaration.metadata.aria)) {
-    return 'navigation';
-  }
+function getSSRReport(basePath) {
+  const ssrReportPath = new URL(basePath + '/coverage/ssr/summary.json', import.meta.url);
+  const ssrProjectReport = existsSync(ssrReportPath)
+    ? JSON.parse(readFileSync(new URL(ssrReportPath, import.meta.url), 'utf8'))
+    : null;
+  return (
+    ssrProjectReport?.testResults
+      ?.flatMap(i => i.assertionResults)
+      .map(r => {
+        r.name = r.ancestorTitles[0];
+        return r;
+      }) ?? []
+  );
+}
 
-  if (ariaSpecs.list.find(i => i === classDeclaration.metadata.aria)) {
-    return 'list';
-  }
+function getElementMetadata(packageName, customElementsManifest, testCoverage, lighthouseReport, ssrReport) {
+  const elementDeclarations = customElementsManifest ? getManifestDeclarations(customElementsManifest) : [];
+  const coverage = testCoverage?.coverage ? testCoverage?.coverage : [];
 
-  if (ariaSpecs.container.find(i => i === classDeclaration.metadata.aria) || classDeclaration.name.startsWith('Card')) {
-    return 'container';
-  }
+  return elementDeclarations
+    .map(d => d.tagName)
+    .reduce((elements, name) => {
+      const manifest = elementDeclarations.find(e => e.tagName === name);
+      const lighthouse =
+        lighthouseReport[packageName][
+          Object.keys(lighthouseReport[packageName]).find(key => name === 'key' || name.startsWith(key))
+        ] ?? {};
+      const cov = coverage.find(c => c.file.replace('.ts', '.js') === manifest.path.replace('/src/', ''));
+      const unit = {
+        coverageTotal: cov ? (cov.statements.pct + cov.functions.pct + cov.branches.pct + cov.lines.pct) / 4 : 0
+      };
 
-  return classDeclaration.metadata.category ?? 'content';
+      if (name.includes('nve-grid')) {
+        lighthouse.scores.accessibility = 100; // workaround false reporting for grid, manually tested
+      }
+
+      const ssr = {
+        baseline: ssrReport?.find(i => i.name === name || name.startsWith(i.name))?.status === 'passed',
+        hydration: false
+      };
+
+      const metadata = {
+        name,
+        manifest,
+        tests: {
+          unit,
+          lighthouse,
+          ssr
+        },
+        stories: stories.find(s => s.element === name)?.stories ?? []
+      };
+
+      return [...elements, metadata];
+    }, [])
+    .sort((a, b) => (a.name < b.name ? -1 : 1));
 }
 
 function getElementsStandardAPIProperties() {
@@ -141,88 +137,14 @@ function getElementsStandardAPIProperties() {
   return { props };
 }
 
-function getElementLighthouseScore(packageFile, tagName, lighthouseReport) {
-  let lighthouse = lighthouseReport[tagName];
-  const priorLighthouse = INITIAL_METADATA[packageFile.name].elements.find(i => tagName.startsWith(i.name))?.lighthouse;
-
-  if (!lighthouse) {
-    lighthouse = priorLighthouse ? priorLighthouse : null;
-  }
-
-  if (tagName.includes('nve-grid') && lighthouse?.scores) {
-    lighthouse.scores.accessibility = 100; // workaround false reporting for grid, manually tested
-  }
-
-  return lighthouse;
-}
-
-function getElementMetadata(packageFile, customElementsManifest, testCoverage, lighthouseReport) {
-  const elementDeclarations = customElementsManifest ? getManifestDeclarations(customElementsManifest) : [];
-  const coverage = testCoverage?.coverage ? testCoverage?.coverage : [];
-
-  return elementDeclarations
-    .map(d => d.tagName)
-    .reduce((elements, name) => {
-      const manifest = elementDeclarations.find(e => e.tagName === name);
-      const superclassManifest = elementDeclarations.find(e => e.name === manifest.superclass?.name) ?? {};
-      const cov = coverage.find(
-        c => c.file.replace('elements/src/', '') === manifest.path.replace('/src/', '').replace('.js', '.ts')
-      );
-      const aria = manifest.metadata.aria ? manifest.metadata.aria : superclassManifest.metadata?.aria;
-      const coverageTotal = cov ? (cov.statements.pct + cov.functions.pct + cov.branches.pct + cov.lines.pct) / 4 : 0;
-      const lighthouse = getElementLighthouseScore(packageFile, manifest.tagName, lighthouseReport);
-
-      const metadata = {
-        name,
-        ...(superclassManifest.metadata ?? {}),
-        ...manifest.metadata,
-        aria,
-        schema: {
-          properties: manifest.members
-            .filter(m => m.description)
-            .map(m => ({ name: m.name, description: m.description })),
-          slots: manifest.slots,
-          attributes: manifest.attributes,
-          events: manifest.events,
-          cssProperties: manifest.cssProperties
-        },
-        lighthouse,
-        tests: {
-          coverageTotal
-        },
-        stories: stories.find(s => s.element === name)?.stories ?? []
-      };
-
-      metadata.behavior = getBehaviorCategory(manifest);
-      metadata.status = getElementStability(metadata);
-
-      return [...elements, metadata];
-    }, [])
-    .sort((a, b) => (a.name < b.name ? -1 : 1));
-}
-
-function getChangelog(path) {
-  return existsSync(path) ? readFileSync(path, 'utf8') : '# Changelog';
-}
-
-function getReadme(path) {
-  return existsSync(path) ? readFileSync(path, 'utf8') : '# Readme';
-}
-
 async function getProjectMetadata(basePath) {
-  const coverageReportPath = new URL(basePath + '/coverage/unit/coverage-summary.json', import.meta.url);
-  const lighthouseReportPath = new URL(basePath + '/.lighthouse/report.json', import.meta.url);
-  const customElementsManifestPath = new URL(basePath + '/dist/custom-elements.json', import.meta.url);
-
-  const packageFile = JSON.parse(readFileSync(new URL(basePath + '/package.json', import.meta.url), 'utf8'));
-  packageFile.name = packageFile.name.replace('@elements', '@nve');
-  const readme = getReadme(new URL(basePath + '/README.md', import.meta.url));
-  const changelog = getChangelog(new URL(basePath + '/CHANGELOG.md', import.meta.url));
-  const customElementsManifest = existsSync(customElementsManifestPath)
-    ? JSON.parse(readFileSync(new URL(customElementsManifestPath, import.meta.url), 'utf8'))
-    : null;
-  const tests = existsSync(coverageReportPath) ? getTestCoverage(coverageReportPath) : null;
-  const lighthouseReport = existsSync(lighthouseReportPath) ? JSON.parse(readFileSync(lighthouseReportPath)) : null;
+  const packageFile = getPackageFile(basePath);
+  const changelog = getChangelog(basePath);
+  const readme = getReadMe(basePath);
+  const customElementsManifest = getCustomElementsManifest(basePath);
+  const tests = getTestCoverage(basePath);
+  const ssrReport = getSSRReport(basePath);
+  const lighthouseReport = getLighthouseReport();
 
   return {
     name: packageFile.name,
@@ -230,7 +152,7 @@ async function getProjectMetadata(basePath) {
     readme,
     changelog,
     tests,
-    elements: getElementMetadata(packageFile, customElementsManifest, tests, lighthouseReport)
+    elements: getElementMetadata(packageFile.name, customElementsManifest, tests, lighthouseReport, ssrReport)
   };
 }
 
@@ -243,5 +165,9 @@ const metadata = {
   '@nvidia-elements/code': await getProjectMetadata('../../../labs/code'),
   '@nvidia-elements/behaviors-alpine': await getProjectMetadata('../../../labs/behaviors-alpine')
 };
+
+if (!existsSync('./dist')) {
+  mkdirSync('./dist');
+}
 
 writeFileSync('./dist/index.json', JSON.stringify(metadata, null, 2));

@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nve-ref-space-md);
+}
+
+p {
+  font-size: var(--nve-ref-font-size-300);
+  color: var(--nve-sys-text-muted-color);
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.group {
+  display: flex;
+  gap: var(--nve-ref-space-xxs);
+}
