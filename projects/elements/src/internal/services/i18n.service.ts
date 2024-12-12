@@ -26,6 +26,7 @@ export interface I18nStrings {
   down: string;
   up: string;
   neutral: string;
+  of: string;
 }
 
 const i18nRegistry = {
@@ -53,7 +54,8 @@ const i18nRegistry = {
   trend: 'trend',
   down: 'down',
   up: 'up',
-  neutral: 'neutral'
+  neutral: 'neutral',
+  of: 'of'
 };
 
 export class I18nService_ {
