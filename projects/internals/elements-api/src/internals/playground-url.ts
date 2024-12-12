@@ -1,11 +1,30 @@
 import { gzipSync } from 'fflate';
 import format from 'html-format';
 import packageFile from '@nvidia-elements/core/package.json';
-import { ELEMENTS_VERSION } from './version.js';
-import metrics from '../../internals/metadata/dist/index.json';
+import { ESM_ELEMENTS_VERSION } from '../internals/version.js';
+import { MetadataService } from '../internals/metadata.service.js';
 
-export function getPlaygroundURL(source, context) {
-  const formattedSource = format(source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''), ' '.repeat(2), 120);
+const metrics = await MetadataService.getMetadata();
+
+export function createPlaygroundURLFromStorySource(
+  source,
+  context: {
+    id: string;
+    globals: {
+      theme: string;
+      scale: string;
+      debug: string;
+      animation: string;
+      experimental: string;
+      systemOptions: string;
+    };
+  }
+) {
+  const formattedSource = format(
+    source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''),
+    ' '.repeat(2),
+    120
+  );
   const files = serialize(addCssContent(createDefaultFiles(formattedSource, context), context));
   return `https://elements-stage.nvidia.com/ui/elements-playground/?story=${context.id}&files=${files}&version=1`;
 }
@@ -21,7 +40,17 @@ function serialize(data, compress = true) {
 function createDefaultFiles(content, context) {
   const CDN_MODULES_URL = `https://esm.nvidia.com`;
   const { globals } = context;
-  const themes = [globals.theme, globals.scale, globals.debug, globals.animation, globals.experimental, globals.systemOptions].filter(i => i !== '').join(' ').trim();
+  const themes = [
+    globals.theme,
+    globals.scale,
+    globals.debug,
+    globals.animation,
+    globals.experimental,
+    globals.systemOptions
+  ]
+    .filter(i => i !== '')
+    .join(' ')
+    .trim();
 
   const mlvTemplate = {
     'index.html': {
@@ -80,8 +109,8 @@ ${content}
     'importmap.json': {
       content: `{
   "imports": {
-    "@nvidia-elements/core": "${CDN_MODULES_URL}/@nvidia-elements/core@${ELEMENTS_VERSION}",
-    "@nvidia-elements/core/": "${CDN_MODULES_URL}/@nvidia-elements/core@${ELEMENTS_VERSION}/",
+    "@nvidia-elements/core": "${CDN_MODULES_URL}/@nvidia-elements/core@${ESM_ELEMENTS_VERSION}",
+    "@nvidia-elements/core/": "${CDN_MODULES_URL}/@nvidia-elements/core@${ESM_ELEMENTS_VERSION}/",
     "@nvidia-elements/styles/": "${CDN_MODULES_URL}/@nvidia-elements/styles@latest/",
     "@nvidia-elements/themes/": "${CDN_MODULES_URL}/@nvidia-elements/themes@latest/"
   }
@@ -103,8 +132,7 @@ function getImports(scope) {
 function addCssContent(defaultFiles, context) {
   if (context.id.includes('foundations-layout')) {
     defaultFiles['index.css'] = {
-      content:
-`section {
+      content: `section {
   height: 95vh;
   width: 95vw;
 
@@ -113,10 +141,9 @@ function addCssContent(defaultFiles, context) {
     min-height: 60px;
   }
 }`
-    }
+    };
     return defaultFiles;
-  }
-  else {
+  } else {
     return defaultFiles;
   }
 }

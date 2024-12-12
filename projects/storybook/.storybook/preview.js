@@ -1,5 +1,4 @@
 import '@nvidia-elements/core/polyfills';
-import { setCustomElementsManifest } from '@storybook/web-components';
 import format from 'html-format';
 import { themes } from '@storybook/theming';
 
@@ -17,16 +16,14 @@ import ddbTheme from '@nvidia-elements/themes/ddb-dark.css?inline';
 import brandTheme from '@nvidia-elements/themes/brand.css?inline';
 import brandDarkTheme from '@nvidia-elements/themes/brand-dark.css?inline';
 import fontNvidiaSans from '@nvidia-elements/themes/fonts/nvidia-sans.css?inline';
-import '@nvidia-elements/core/button/define.js';
-
 import { H1, H2, H3, H4, P, UL, OL, PRE, CODE } from '@internals/storybook/blocks';
-import { updateScope } from './utils.js';
+import { setSourcePackageScope } from '@internals/elements-api';
 
-const customElements = await import('@nvidia-elements/core/custom-elements.json');
-
-import('../src/about/metrics.stories');
-
-setCustomElementsManifest(excludePrivateFields(customElements));
+import '@nvidia-elements/core/button/define.js';
+import '@internals/elements-api/table/define.js';
+import '@internals/elements-api/detail/define.js';
+import '@internals/elements-api/status/define.js';
+import '@internals/elements-api/summary/define.js';
 
 export const parameters = {
   badges: ['stable'],
@@ -58,7 +55,7 @@ export const parameters = {
           source = format(source.replaceAll('=""', ''), ' '.repeat(2), 120); // https://github.com/storybookjs/storybook/issues/10467
         }
 
-        return updateScope(source, { scope: context.globals.scope, sourceType: context.globals.sourceType  });
+        return setSourcePackageScope(source, { scope: context.globals.scope, sourceType: context.globals.sourceType  });
       }
     }
   },
@@ -242,7 +239,8 @@ export const parameters = {
         'Labs',
         [
           'About',
-          'Testing Lighthouse'
+          'Code',
+          'Behaviors Alpine'
         ],
         'API Design',
         [
@@ -396,13 +394,13 @@ export const decorators = [(story, { globals }) => {
 (story) => {
   const listId = `${document.title}-list`;
   const docsWrapper = document.querySelector('.sbdocs-wrapper');
-  const elementMetrics = document.querySelector('element-metrics');
+  const elementMetrics = document.querySelector('nve-api-summary');
 
   if (docsWrapper && elementMetrics && !document.querySelector(`#${listId}`)) {
     const headings = [
       ...Array.from(document.querySelectorAll('h1, h2, h3, h4')).filter(h => h.className === 'dynamic-anchor'),
-      document.querySelector('#element-status') ? { textContent: 'Status', id: 'element-status'} : null,
-      document.querySelector('#element-api') ? { textContent: 'API', id: 'element-api'} : null
+      document.querySelector('nve-api-status') ? { textContent: 'Status', id: 'element-status'} : null,
+      document.querySelector('nve-api-table[type="all"]') ? { textContent: 'API', id: 'element-api'} : null
     ].filter(i => !!i);
   
     if (headings.length > 2) {
@@ -431,23 +429,4 @@ function headingsToUL(headings) {
     ul.appendChild(li);
   }
   return ul;
-}
-
-function excludePrivateFields(manifest) {
-  return {
-    ...manifest,
-    ...(manifest.modules && {
-      modules: manifest.modules?.map((module) => ({
-        ...module,
-        ...(module.declarations && {
-          declarations: module.declarations?.map((declaration) => ({
-            ...declaration,
-            ...(declaration.members && {
-              members: declaration.members?.filter((members) => members.privacy !== 'private' && !members.static && members.name !== 'i18n' && members.name !== '_internals')
-            })
-          }))
-        })
-      }))
-    })
-  };
 }

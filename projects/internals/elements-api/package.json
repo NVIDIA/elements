@@ -1,0 +1,257 @@
+{
+  "name": "@internals/elements-api",
+  "version": "0.0.0",
+  "description": "Elements API and Documentation components",
+  "homepage": "https://NVIDIA.github.io/elements/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git"
+  },
+  "type": "module",
+  "customElements": "custom-elements.json",
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./custom-elements.json": "./dist/custom-elements.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./badge-axe": {
+      "types": "./dist/badge-axe/index.d.ts",
+      "default": "./dist/badge-axe/index.js"
+    },
+    "./badge-axe/index.js": {
+      "types": "./dist/badge-axe/index.d.ts",
+      "default": "./dist/badge-axe/index.js"
+    },
+    "./badge-axe/define.js": {
+      "types": "./dist/badge-axe/define.d.ts",
+      "default": "./dist/badge-axe/define.js"
+    },
+    "./badge-bundle": {
+      "types": "./dist/badge-bundle/index.d.ts",
+      "default": "./dist/badge-bundle/index.js"
+    },
+    "./badge-bundle/index.js": {
+      "types": "./dist/badge-bundle/index.d.ts",
+      "default": "./dist/badge-bundle/index.js"
+    },
+    "./badge-bundle/define.js": {
+      "types": "./dist/badge-bundle/define.d.ts",
+      "default": "./dist/badge-bundle/define.js"
+    },
+    "./badge-coverage": {
+      "types": "./dist/badge-coverage/index.d.ts",
+      "default": "./dist/badge-coverage/index.js"
+    },
+    "./badge-coverage/index.js": {
+      "types": "./dist/badge-coverage/index.d.ts",
+      "default": "./dist/badge-coverage/index.js"
+    },
+    "./badge-coverage/define.js": {
+      "types": "./dist/badge-coverage/define.d.ts",
+      "default": "./dist/badge-coverage/define.js"
+    },
+    "./badge-lighthouse": {
+      "types": "./dist/badge-lighthouse/index.d.ts",
+      "default": "./dist/badge-lighthouse/index.js"
+    },
+    "./badge-lighthouse/index.js": {
+      "types": "./dist/badge-lighthouse/index.d.ts",
+      "default": "./dist/badge-lighthouse/index.js"
+    },
+    "./badge-lighthouse/define.js": {
+      "types": "./dist/badge-lighthouse/define.d.ts",
+      "default": "./dist/badge-lighthouse/define.js"
+    },
+    "./badge-status": {
+      "types": "./dist/badge-status/index.d.ts",
+      "default": "./dist/badge-status/index.js"
+    },
+    "./badge-status/index.js": {
+      "types": "./dist/badge-status/index.d.ts",
+      "default": "./dist/badge-status/index.js"
+    },
+    "./badge-status/define.js": {
+      "types": "./dist/badge-status/define.d.ts",
+      "default": "./dist/badge-status/define.js"
+    },
+    "./canvas": {
+      "types": "./dist/canvas/index.d.ts",
+      "default": "./dist/canvas/index.js"
+    },
+    "./canvas/index.js": {
+      "types": "./dist/canvas/index.d.ts",
+      "default": "./dist/canvas/index.js"
+    },
+    "./canvas/define.js": {
+      "types": "./dist/canvas/define.d.ts",
+      "default": "./dist/canvas/define.js"
+    },
+    "./detail": {
+      "types": "./dist/detail/index.d.ts",
+      "default": "./dist/detail/index.js"
+    },
+    "./detail/index.js": {
+      "types": "./dist/detail/index.d.ts",
+      "default": "./dist/detail/index.js"
+    },
+    "./detail/define.js": {
+      "types": "./dist/detail/define.d.ts",
+      "default": "./dist/detail/define.js"
+    },
+    "./status": {
+      "types": "./dist/status/index.d.ts",
+      "default": "./dist/status/index.js"
+    },
+    "./status/index.js": {
+      "types": "./dist/status/index.d.ts",
+      "default": "./dist/status/index.js"
+    },
+    "./status/define.js": {
+      "types": "./dist/status/define.d.ts",
+      "default": "./dist/status/define.js"
+    },
+    "./summary": {
+      "types": "./dist/summary/index.d.ts",
+      "default": "./dist/summary/index.js"
+    },
+    "./summary/index.js": {
+      "types": "./dist/summary/index.d.ts",
+      "default": "./dist/summary/index.js"
+    },
+    "./summary/define.js": {
+      "types": "./dist/summary/define.d.ts",
+      "default": "./dist/summary/define.js"
+    },
+    "./table": {
+      "types": "./dist/table/index.d.ts",
+      "default": "./dist/table/index.js"
+    },
+    "./table/index.js": {
+      "types": "./dist/table/index.d.ts",
+      "default": "./dist/table/index.js"
+    },
+    "./table/define.js": {
+      "types": "./dist/table/define.d.ts",
+      "default": "./dist/table/define.js"
+    }
+  },
+  "sideEffects": [
+    "./**/define.js"
+  ],
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "build:watch": "wireit",
+    "lint": "wireit"
+  },
+  "dependencies": {
+    "lit": "catalog:",
+    "showdown": "2.1.0"
+  },
+  "peerDependencies": {
+    "@nvidia-elements/core": "workspace:^",
+    "@nvidia-elements/code": "workspace:^"
+  },
+  "devDependencies": {
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/testing": "workspace:*",
+    "@internals/eslint": "workspace:*",
+    "@internals/vite": "workspace:*",
+    "@vitest/browser": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
+    "eslint": "catalog:",
+    "fflate": "0.8.2",
+    "html-format": "1.1.7",
+    "publint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  },
+  "wireit": {
+    "dev": {
+      "command": "vite",
+      "dependencies": [
+        "build",
+        "build:watch",
+        "../../storybook:dev"
+      ]
+    },
+    "ci": {
+      "dependencies": [
+        "build",
+        "lint",
+        "publint"
+      ]
+    },
+    "publint": {
+      "dependencies": [
+        "build"
+      ],
+      "command": "publint",
+      "files": [
+        "package.json"
+      ],
+      "output": []
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build",
+      "files": [
+        "src/**",
+        "!src/**/*.stories.ts",
+        "!src/**/*.mdx",
+        "!src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/*.test.axe.ts",
+        "!src/**/*.test.ssr.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../../elements:build",
+        "../../labs/code:build",
+        "../../internals/vite:ci",
+        "../metadata:ci"
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../internals/eslint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix ./src/**/*.ts"
+    }
+  }
+}

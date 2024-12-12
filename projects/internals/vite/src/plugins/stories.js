@@ -1,8 +1,41 @@
+import fs from 'fs';
+import path from 'path';
 import { globSync } from 'glob';
 import { Project, SyntaxKind } from 'ts-morph';
 import * as prettier from 'prettier';
 
-export async function getStories(paths) {
+const resolve = rel => path.join(process.cwd(), rel);
+
+/**
+ * Outputs *.stories.ts files to *.stories.json metadata format
+ */
+export function storiesToJSON() {
+  return {
+    name: 'stories',
+    apply: 'build',
+    async buildEnd() {
+      if (process.env.VITE_INITIAL_BUILD) {
+        const storyFiles = await getStories([resolve('./src/**/*.stories.ts'), resolve('./docs/**/*.stories.ts')]);
+        storyFiles.forEach(story => {
+          const outPath = path.join(process.cwd(), 'dist', story.path);
+          story.path = undefined;
+          createDirectoryIfNotExists(outPath);
+          fs.writeFileSync(outPath, JSON.stringify(story, null, 2));
+        });
+      }
+    }
+  };
+}
+
+function createDirectoryIfNotExists(filePath) {
+  const directoryPath = path.dirname(filePath);
+
+  if (!fs.existsSync(directoryPath)) {
+    fs.mkdirSync(directoryPath, { recursive: true });
+  }
+}
+
+async function getStories(paths) {
   const filePaths = paths.flatMap(p => globSync(p));
   return (await Promise.all(filePaths.map(async p => await getStoriesFromFile(p)))).filter(story => story.element);
 }

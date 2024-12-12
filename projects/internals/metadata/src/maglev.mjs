@@ -118,4 +118,4 @@ async function getProjects() {
 const projects = await getProjects();
 const created = new Date().toISOString();
 
-writeFileSync('./dist/elements.json', JSON.stringify({ created, projects }, null, 2));
+writeFileSync('./static/elements.json', JSON.stringify({ created, projects }, null, 2));

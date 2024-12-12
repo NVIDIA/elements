@@ -18,6 +18,7 @@ import '@nvidia-elements/core/steps/define.js';
 import '@nvidia-elements/core/page-header/define.js';
 import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/panel/define.js';
+import '@nvidia-elements/core/tabs/define.js';
 
 export default {
   title: 'Elements/Page/Examples',

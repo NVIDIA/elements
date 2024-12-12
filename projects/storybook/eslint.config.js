@@ -1,4 +1,4 @@
 import js from '@eslint/js';
-import { libraryConfig, browserTypescriptConfig } from '@internals/eslint';
+import { browserTypescriptConfig } from '@internals/eslint';
 
-export default [js.configs.recommended, ...browserTypescriptConfig, ...libraryConfig];
+export default [js.configs.recommended, ...browserTypescriptConfig];

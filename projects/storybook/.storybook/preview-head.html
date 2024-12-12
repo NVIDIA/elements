@@ -287,6 +287,7 @@
     }
 
     .sbdocs.sbdocs-wrapper {
+      margin-top: var(--nve-ref-space-sm) !important;
       padding: var(--nve-ref-space-xl) !important;
     }
 
@@ -294,7 +295,7 @@
       [nve-theme*='dark'] .sbdocs-wrapper:has(#getting-started-img) {
         background-position: center 15vh !important;
       }
-      
+    
       .sbdocs.sbdocs-wrapper {
         padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl) !important;
         gap: 5rem !important;
@@ -367,7 +368,7 @@
       }
     }
 
-    .sbdocs.sbdocs-wrapper:has(element-metrics):not(:has([nve-text='list sb']))::after {
+    .sbdocs.sbdocs-wrapper:has(nve-api-summary):not(:has([nve-text='list sb']))::after {
       display: block;
       content: ' ';
       width: 150px;
