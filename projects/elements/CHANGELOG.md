@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.18.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.17.0...@nvidia-elements/core-v1.18.0) (2024-12-12)
+
+
+### Features
+
+* **elements-react:** pulse component ([dd082cf](https://github.com/NVIDIA/elements/commit/dd082cfe2ac9527f3f30aa60c07267f8b7cb6e22))
+* **elements:** pulse component ([9345257](https://github.com/NVIDIA/elements/commit/93452579282f26c150d938c59f035a42600632bd))
+
 ## [@nvidia-elements/core-v1.17.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.16.7...@nvidia-elements/core-v1.17.0) (2024-12-09)
 
 
