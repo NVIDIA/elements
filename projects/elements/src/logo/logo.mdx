@@ -6,7 +6,7 @@ import { Default, Size, Color, SlottedIcons } from './logo.stories';
 
 # Logo
 
-<element-metrics tag="nve-logo"></element-metrics>
+<nve-api-summary tag="nve-logo"></nve-api-summary>
 
 ## Installation
 
@@ -24,13 +24,13 @@ import '@nvidia-elements/core/logo/define.js';
 
 ## Size
 
-<element-api tag="nve-logo" type="property" value="size"></element-api>
+<nve-api-detail tag="nve-logo" type="property" value="size"></nve-api-detail>
 
 <Canvas of={Size} />
 
 ## Color
 
-<element-api tag="nve-logo" type="property" value="color"></element-api>
+<nve-api-detail tag="nve-logo" type="property" value="color"></nve-api-detail>
 
 <Canvas of={Color} />
 
@@ -40,6 +40,6 @@ Slotted icon in logo will inherit logo color and size
 
 <Canvas of={SlottedIcons} />
 
-<element-status tag="nve-logo"></element-status>
+<nve-api-status tag="nve-logo"></nve-api-status>
 
-<element-api tag="nve-logo"></element-api>
+<nve-api-table tag="nve-logo"></nve-api-table>

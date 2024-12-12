@@ -6,7 +6,7 @@ import { Default, Visual, Content, Position, Events, Wrap, Hint, Status, OpenDel
 
 # Tooltip
 
-<element-metrics tag="nve-tooltip"></element-metrics>
+<nve-api-summary tag="nve-tooltip"></nve-api-summary>
 
 ## Installation
 
@@ -27,21 +27,21 @@ import '@nvidia-elements/core/tooltip/define.js';
 
 ## Position
 
-<element-api tag="nve-tooltip" type="property" value="position"></element-api>
+<nve-api-detail tag="nve-tooltip" type="property" value="position"></nve-api-detail>
 
 <Canvas of={Position} story={{ inline: false, height: 280 }} />
 
 ## Alignment
 
-<element-api tag="nve-tooltip" type="property" value="alignment"></element-api>
+<nve-api-detail tag="nve-tooltip" type="property" value="alignment"></nve-api-detail>
 
 <Canvas of={Alignment} story={{ inline: false, height: 350 }} />
 
 ## Events
 
-<element-api tag="nve-tooltip" type="event" value="open"></element-api>
+<nve-api-detail tag="nve-tooltip" type="event" value="open"></nve-api-detail>
 
-<element-api tag="nve-tooltip" type="event" value="close"></element-api>
+<nve-api-detail tag="nve-tooltip" type="event" value="close"></nve-api-detail>
 
 <Canvas of={Events} story={{ inline: false, height: 280 }} />
 
@@ -99,6 +99,6 @@ class DynamicAnchorPositionDemo extends LitElement {
 }
 ```
 
-<element-status tag="nve-tooltip"></element-status>
+<nve-api-status tag="nve-tooltip"></nve-api-status>
 
-<element-api tag="nve-tooltip"></element-api>
+<nve-api-table tag="nve-tooltip"></nve-api-table>

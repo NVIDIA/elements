@@ -7,7 +7,7 @@ import { AlertGroupDefault, AlertGroupStatus, Closable, Actions, Prominence, Mul
 
 # Alert
 
-<element-metrics tag="nve-alert"></element-metrics>
+<nve-api-summary tag="nve-alert"></nve-api-summary>
 
 ## Installation
 
@@ -25,7 +25,7 @@ import '@nvidia-elements/core/alert/define.js';
 
 ## Status
 
-<element-api tag="nve-alert" type="property" value="status"></element-api>
+<nve-api-detail tag="nve-alert" type="property" value="status"></nve-api-detail>
 
 <Canvas of={Status} />
 
@@ -37,25 +37,25 @@ An alert group is an element that displays a group of related and important mess
 
 ## Alert Group Status
 
-<element-api tag="nve-alert-group" type="property" value="status"></element-api>
+<nve-api-detail tag="nve-alert-group" type="property" value="status"></nve-api-detail>
 
 <Canvas of={AlertGroupStatus} />
 
 ## Closable
 
-<element-api tag="nve-alert" type="property" value="closable"></element-api>
+<nve-api-detail tag="nve-alert" type="property" value="closable"></nve-api-detail>
 
 <Canvas of={Closable} />
 
 ## Actions
 
-<element-api tag="nve-alert" type="slot" value="actions"></element-api>
+<nve-api-detail tag="nve-alert" type="slot" value="actions"></nve-api-detail>
 
 <Canvas of={Actions} />
 
 ## Prominence
 
-<element-api tag="nve-alert-group" type="property" value="prominence"></element-api>
+<nve-api-detail tag="nve-alert-group" type="property" value="prominence"></nve-api-detail>
 
 <Canvas of={Prominence} />
 
@@ -63,8 +63,8 @@ An alert group is an element that displays a group of related and important mess
 
 <Canvas of={Multiline} />
 
-<element-status tag="nve-alert"></element-status>
+<nve-api-status tag="nve-alert"></nve-api-status>
 
-<element-api tag="nve-alert"></element-api>
+<nve-api-table tag="nve-alert"></nve-api-table>
 
-<element-api tag="nve-alert-group"></element-api>
+<nve-api-table tag="nve-alert-group"></nve-api-table>
