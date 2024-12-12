@@ -1,0 +1,32 @@
+.status-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nve-ref-space-md);
+}
+
+.status-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nve-ref-space-sm);
+}
+
+.alerts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nve-ref-space-xs);
+}
+
+h2,
+p {
+  color: var(--nve-sys-text-color);
+  font-weight: var(--nve-ref-font-weight-regular);
+  margin: 0;
+}
+
+h2 {
+  font-size: var(--nve-ref-font-size-600);
+}
+
+p {
+  font-size: var(--nve-ref-font-size-200);
+}

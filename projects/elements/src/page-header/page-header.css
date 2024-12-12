@@ -40,6 +40,7 @@ slot:not([name]) {
   font-weight: var(--nve-ref-font-weight-semibold) !important;
   color: var(--nve-sys-text-muted-color) !important;
   margin: 0 !important;
+  text-wrap: nowrap !important;
 }
 
 ::slotted(h1[slot='prefix'])::before,

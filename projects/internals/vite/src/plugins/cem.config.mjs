@@ -84,11 +84,88 @@ function metadataPlugin() {
             };
 
             classDeclaration.metadata.entrypoint = classDeclaration.metadata.entrypoint.replace('\\', '');
+            classDeclaration.metadata.status = getElementStability(classDeclaration.metadata);
+            classDeclaration.metadata.behavior = getBehaviorCategory(classDeclaration);
           }
           break;
       }
     }
   };
+}
+
+function getElementStability(metadata) {
+  let status = 'unknown';
+  const preRelease = metadata.apiReview && metadata.storybook?.length;
+  const beta = metadata.unitTests && metadata.apiReview && metadata.vqa && metadata.package;
+  const stable = metadata.stable && metadata.performance && metadata.aria?.length;
+
+  if (preRelease) {
+    status = 'pre-release';
+  }
+
+  if (preRelease && beta) {
+    status = 'beta';
+  }
+
+  if (preRelease && beta && stable) {
+    status = 'stable';
+  }
+
+  return status;
+}
+
+function getBehaviorCategory(classDeclaration) {
+  const ariaSpecs = {
+    navigation: [
+      'https://www.w3.org/WAI/ARIA/apg/patterns/tabs/',
+      'https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/',
+      'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/',
+      'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/examples/menubar-navigation/',
+      'https://www.w3.org/WAI/ARIA/apg/patterns/menubar/examples/menubar-editor/',
+      'https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/',
+      'https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav'
+    ],
+    list: ['https://www.w3.org/WAI/ARIA/apg/patterns/grid/', 'https://www.w3.org/WAI/ARIA/apg/patterns/treeview/'],
+    feedback: ['https://www.w3.org/WAI/ARIA/apg/patterns/alert/'],
+    container: [
+      'https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/',
+      'https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/group_role'
+    ]
+  };
+
+  if (classDeclaration.superclass?.name === 'BaseButton' || classDeclaration.superclass?.name === 'Button') {
+    return 'button';
+  }
+
+  if (
+    classDeclaration.superclass?.name === 'Control' ||
+    classDeclaration.superclass?.name === 'ControlGroup' ||
+    classDeclaration.name.startsWith('Control')
+  ) {
+    return 'form';
+  }
+
+  if (JSON.stringify(classDeclaration.members).includes('TypeNativePopoverController')) {
+    return 'popover';
+  }
+
+  if (ariaSpecs.feedback.find(i => i === classDeclaration.metadata.aria)) {
+    return 'feedback';
+  }
+
+  if (ariaSpecs.navigation.find(i => i === classDeclaration.metadata.aria)) {
+    return 'navigation';
+  }
+
+  if (ariaSpecs.list.find(i => i === classDeclaration.metadata.aria)) {
+    return 'list';
+  }
+
+  if (ariaSpecs.container.find(i => i === classDeclaration.metadata.aria) || classDeclaration.name.startsWith('Card')) {
+    return 'container';
+  }
+
+  return classDeclaration.metadata.category ?? 'content';
 }
 
 function basePathPlugin() {
@@ -262,6 +339,47 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
   };
 }
 
+/** filter subset of all default members to exclude private and non documented APIs/properties */
+function publicPropertiesPlugin() {
+  return {
+    name: 'public-properties-plugin',
+    packageLinkPhase({ customElementsManifest }) {
+      for (const module of customElementsManifest.modules) {
+        for (const declaration of module.declarations) {
+          if (declaration.tagName) {
+            declaration.members = declaration.members.filter(
+              m => m.kind === 'field' && !m.name.startsWith('_') && !m.readonly && !m.static && m.privacy !== 'private'
+            );
+          }
+        }
+      }
+    }
+  };
+}
+
+/** ensures elements inherit parent super class metadata */
+function superClassMetadataPlugin() {
+  return {
+    name: 'super-class-metadata-plugin',
+    analyzePhase({ ts, node, moduleDoc }) {
+      switch (node.kind) {
+        case ts.SyntaxKind.ClassDeclaration:
+          const classDeclaration = moduleDoc.declarations.find(
+            declaration => declaration.name === node.name?.getText()
+          );
+
+          if (classDeclaration.tagName) {
+            const superclassManifest = moduleDoc.declarations.find(
+              e => e.name === classDeclaration.superclass?.name
+            ) ?? { metadata: {} };
+            classDeclaration.metadata = { ...superclassManifest.metadata, ...classDeclaration.metadata };
+          }
+          break;
+      }
+    }
+  };
+}
+
 export default {
   globs: [resolve('./src')],
   exclude: [
@@ -281,6 +399,8 @@ export default {
     orderPlugin(),
     metadataPlugin(),
     rewriteExportedStringLiteralTypeAliasesPlugin(),
+    publicPropertiesPlugin(),
+    superClassMetadataPlugin(),
     jsxTypesPlugin()
   ],
   overrideModuleCreation: ({ ts, globs }) => {

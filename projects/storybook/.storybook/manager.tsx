@@ -10,6 +10,8 @@ import '@nvidia-elements/core/drawer/define.js';
 import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/page-header/define.js';
+import '@nvidia-elements/core/logo/define.js';
 
 function updateTheme(themes) {
   const previewIframe = document.querySelector('#storybook-preview-iframe');
@@ -21,7 +23,7 @@ function updateTheme(themes) {
   }
 }
 
-const ThemePicker = () => {
+const PageHeader = () => {
   const [globals, updateGlobals] = useGlobals();
   const themes = [globals.theme, globals.font, globals.scale, globals.debug, globals.animation, globals.experimental, globals.systemOptions].filter(i => i !== '').join(' ').trim();
   updateTheme(themes);
@@ -37,11 +39,15 @@ const ThemePicker = () => {
 
   return (
     globals.theme || globals.theme === '' ?
-    (<div style={{ 'display': 'flex', 'width': '100%'}}>
-      <nve-button container="flat"><a target="_blank" href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html">Playground</a></nve-button>
-      <nve-button container="flat"><a target="_blank" href="https://NVIDIA.github.io/elements/starters/">Starters</a></nve-button>
-      <nve-button container="flat"><a target="_blank" href="https://github.com/NVIDIA/elements">Gitlab</a></nve-button>
-      <nve-button popovertarget="system-options-drawer" container="flat" id="dropdown-btn" style={{ marginLeft: 'auto' }}>System Themes</nve-button>
+    <>
+      <nve-page-header style={{ position: 'fixed', inset: '0 0 auto 0', zIndex: 999 }}>
+        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <h2 slot="prefix" nve-text="heading sm">Elements</h2>
+        <nve-button container="flat"><a target="_blank" href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html">Playground</a></nve-button>
+        <nve-button container="flat"><a target="_blank" href="https://NVIDIA.github.io/elements/starters/">Starters</a></nve-button>
+        <nve-button container="flat"><a target="_blank" href="https://github.com/NVIDIA/elements">Gitlab</a></nve-button>
+        <nve-button slot="suffix" popovertarget="system-options-drawer" container="flat" id="dropdown-btn">System Themes</nve-button>
+      </nve-page-header>
       <nve-drawer id="system-options-drawer" position="right" size="sm" closable style={{'--top': '47px', '--box-shadow': '0'}}>
         <nve-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
           <nve-select style={{'--background': 'transparent', '--min-width': '180px'}}>
@@ -60,7 +66,7 @@ const ThemePicker = () => {
         <nve-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
           <nve-select style={{'--background': 'transparent', '--min-width': '170px'}}>
             <label>Data</label>
-            <nve-icon-button slot="label" id="data-hint-btn" size="sm" container="flat" icon-name="information-circle-stroke" style={{'--height': '12px'}}></nve-icon-button>
+            <nve-icon-button slot="label" popovertarget="demo-data-tooltip" size="sm" container="flat" icon-name="information-circle-stroke" style={{'--height': '12px'}}></nve-icon-button>
             <select size={3} defaultValue={globals.dataTheme} onChange={e => writeGlobals({ dataTheme: e.target.value })}>
               <option value="models">AI/ML</option>
               <option value="">Infra</option>
@@ -98,8 +104,8 @@ const ThemePicker = () => {
           </nve-switch-group>
         </nve-drawer-content>
       </nve-drawer>
-      <nve-tooltip behavior-trigger anchor="data-hint-btn" trigger="data-hint-btn" hidden>Demo data to be displayed in examples (see datagrid)</nve-tooltip>
-    </div>) : ''
+      <nve-tooltip id="demo-data-tooltip">Demo data to be displayed in examples (see datagrid)</nve-tooltip>
+    </> : ''
   );
 }
 
@@ -107,10 +113,10 @@ addons.register('my-addon', () => {
   addons.add('my-addon/toolbar', {
     title: 'Theme Sync',
     type: types.TOOL,
-    render: () => <ThemePicker />,
+    render: () => <PageHeader />,
   });
 });
-  
+
 addons.setConfig({
   sidebar: {
     showRoots: true,
@@ -131,7 +137,9 @@ declare global {
       ['nve-drawer']: any;
       ['nve-drawer-header']: any;
       ['nve-drawer-content']: any;
-      ['nvx-theme']: any;
+      ['nve-theme']: any;
+      ['nve-page-header']: any;
+      ['nve-logo']: any;
     }
   }
 }

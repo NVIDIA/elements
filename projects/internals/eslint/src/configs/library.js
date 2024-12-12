@@ -27,8 +27,6 @@ export const libraryConfig = [
           patterns: [
             {
               group: [
-                '@elements/elements/**/*.css',
-                '@elements/elements/**/*.css?inline',
                 '@nvidia-elements/core/**/*.css',
                 '@nvidia-elements/core/**/*.css?inline',
                 '@nvidia-elements/styles/**/*.css',
@@ -36,6 +34,10 @@ export const libraryConfig = [
               ],
               message:
                 'Inline CSS utils are not allowed in library APIs to prevent performance issues, use shadow DOM encapsulated CSS instead'
+            },
+            {
+              group: ['@nve-internals/'],
+              message: 'Repository internal utilities and libraries cannot be used in published packages.'
             }
           ]
         }

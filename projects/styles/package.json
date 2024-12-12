@@ -101,7 +101,7 @@
         "dist/**"
       ],
       "dependencies": [
-        "../themes:ci",
+        "../themes:build",
         "../internals/vite:ci"
       ]
     },
