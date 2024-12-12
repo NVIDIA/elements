@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
 import { Canvas } from '@internals/storybook/blocks';
-import { Default, Skippable, Disabled, Flat, Inline, DisableStep, DynamicItems, DynamicStepSize, Forms } from './pagination.stories';
+import { Default, Skippable, Disabled, Flat, Inline, DisableStep, DynamicItems, DynamicStepSize, Forms, NoItemsCount } from './pagination.stories';
 
 <Meta title="Elements/Pagination/Documentation" />
 
@@ -60,6 +60,10 @@ When custom step is provided, the select options dynamically adapt to the step a
 Pagination is [form associated component](https://web.dev/more-capable-form-controls/#defining-a-form-associated-custom-element) and can be used within FormData.
 
 <Canvas of={Forms} story={{ inline: false, height: 240 }} />
+
+## No Provided Items Count
+
+<Canvas of={NoItemsCount} story={{ inline: false, height: 200 }} />
 
 <nve-api-status tag="nve-pagination"></nve-api-status>
 
