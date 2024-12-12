@@ -5,7 +5,7 @@ import { Default, LeftSidePanel, RightSidePanel, PanelWithTrigger, ClosablePanel
 
 # Panels
 
-<element-metrics tag="nve-panel"></element-metrics>
+<nve-api-summary tag="nve-panel"></nve-api-summary>
 
 Panels provide a way to make additional content available alongside the primary page layout,
 in a way that is accessible and minimizable.
@@ -37,7 +37,7 @@ import '@nvidia-elements/core/panel/define.js';
 
 ## Left / Right Side Panels
 
-<element-api tag="nve-panel" type="property" value="side"></element-api>
+<nve-api-detail tag="nve-panel" type="property" value="side"></nve-api-detail>
 
 <Canvas of={LeftSidePanel} />
 
@@ -51,7 +51,7 @@ An external trigger can be used to expand/collapse or hide/show a panel. In this
 
 ## Closable Panel with External Trigger
 
-<element-api tag="nve-panel" type="property" value="closable"></element-api>
+<nve-api-detail tag="nve-panel" type="property" value="closable"></nve-api-detail>
 
 <Canvas of={ClosablePanel} />
 
@@ -69,12 +69,12 @@ In this example `panel-header` is further slotted with elements for `slot="title
 
 <Canvas of={PanelWithFooter} />
 
-<element-status tag="nve-panel"></element-status>
+<nve-api-status tag="nve-panel"></nve-api-status>
 
-<element-api tag="nve-panel"></element-api>
+<nve-api-table tag="nve-panel"></nve-api-table>
 
-<element-api tag="nve-panel-header"></element-api>
+<nve-api-table tag="nve-panel-header"></nve-api-table>
 
-<element-api tag="nve-panel-content"></element-api>
+<nve-api-table tag="nve-panel-content"></nve-api-table>
 
-<element-api tag="nve-panel-footer"></element-api>
+<nve-api-table tag="nve-panel-footer"></nve-api-table>

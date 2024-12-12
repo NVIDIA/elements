@@ -6,7 +6,7 @@ import { Default, AppBadge, NavItems, NavActions, Dropdown } from './app-header.
 
 # App Header
 
-<element-metrics tag="nve-app-header"></element-metrics>
+<nve-api-summary tag="nve-app-header"></nve-api-summary>
 
 ## Installation
 
@@ -34,19 +34,19 @@ import '@nvidia-elements/core/app-header/define.js';
 
 ## App Branding
 
-<element-api tag="nve-app-header" type="slot" value=""></element-api>
+<nve-api-detail tag="nve-app-header" type="slot" value=""></nve-api-detail>
 
 <Canvas of={AppBadge} />
 
 ## Nav Items
 
-<element-api tag="nve-app-header" type="slot" value="nav-items"></element-api>
+<nve-api-detail tag="nve-app-header" type="slot" value="nav-items"></nve-api-detail>
 
 <Canvas of={NavItems} />
 
 ## Nav Actions
 
-<element-api tag="nve-app-header" type="slot" value="nav-actions"></element-api>
+<nve-api-detail tag="nve-app-header" type="slot" value="nav-actions"></nve-api-detail>
 
 <Canvas of={NavActions} />
 
@@ -54,6 +54,6 @@ import '@nvidia-elements/core/app-header/define.js';
 
 <Canvas of={Dropdown} />
 
-<element-status tag="nve-app-header"></element-status>
+<nve-api-status tag="nve-app-header"></nve-api-status>
 
-<element-api tag="nve-app-header"></element-api>
+<nve-api-table tag="nve-app-header"></nve-api-table>
