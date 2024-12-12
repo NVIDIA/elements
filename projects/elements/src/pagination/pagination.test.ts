@@ -52,6 +52,13 @@ describe(Pagination.metadata.tag, () => {
     expect(element.shadowRoot.querySelector('label').textContent).toBe('of 10,000');
   });
 
+  it('should not show formatted items label if no items are provided', async () => {
+    expect(element.shadowRoot.querySelector('label').textContent).toBe('of 100');
+    element.items = 0;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('label')).toBe(null);
+  });
+
   it('should apply aria labels to buttons and select', async () => {
     element.skippable = true;
     await elementIsStable(element);
