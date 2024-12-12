@@ -1,0 +1,63 @@
+:host {
+  --padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
+  display: block;
+  width: 100%;
+}
+
+nve-codeblock {
+  --padding: var(--nve-ref-space-lg);
+  --border-radius: 0;
+  font-size: 14px;
+}
+
+nve-toolbar {
+  --border-radius: 0;
+  --padding: 0 var(--nve-ref-space-xxs);
+  --border-bottom: 0;
+  overflow: hidden;
+  border-bottom-right-radius: var(--nve-ref-border-radius-md);
+  border-bottom-left-radius: var(--nve-ref-border-radius-md);
+  border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+}
+
+slot:not([name]) {
+  padding: var(--padding);
+  display: block;
+  resize: horizontal;
+  overflow: auto;
+  width: 100%;
+}
+
+slot[name='suffix'] {
+  margin-left: auto;
+  display: block;
+  gap: 8px;
+  display: flex;
+}
+
+.resizer {
+  display: flex;
+  align-items: stretch;
+}
+
+.preview-backdrop {
+  background: var(--nve-ref-color-neutral-200);
+  min-height: 100%;
+  flex: 1;
+}
+
+[internal-host] {
+  border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  border-radius: var(--nve-ref-border-radius-md);
+}
+
+.code {
+  position: relative;
+  margin-top: 1px;
+}
+
+nve-copy-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}

@@ -6,6 +6,8 @@ import { Default, Code, Flat, Theme, LineNumbers, Highlight, Overflow } from './
 
 # Codeblock
 
+<nve-api-summary tag="nve-codeblock"></nve-api-summary>
+
 ## Installation
 
 Note: language must be imported before codeblock
@@ -38,11 +40,13 @@ function getTime(): number {
 
 ## Code
 
-Code can be set via the `code` attribute of the component.
+<nve-api-detail tag="nve-codeblock" type="property" value="code"></nve-api-detail>
 
 <Canvas of={Code} />
 
 ## Container
+
+<nve-api-detail tag="nve-codeblock" type="property" value="container"></nve-api-detail>
 
 <Canvas of={Flat} />
 
@@ -54,12 +58,20 @@ A Theme can be set independant of the global theme using the `nve-theme` attribu
 
 ## Line Numbers
 
+<nve-api-detail tag="nve-codeblock" type="property" value="lineNumbers"></nve-api-detail>
+
 <Canvas of={LineNumbers} />
 
 ## Highlight
+
+<nve-api-detail tag="nve-codeblock" type="property" value="highlight"></nve-api-detail>
 
 <Canvas of={Highlight} />
 
 ## Overflow
 
 <Canvas of={Overflow} />
+
+<nve-api-status tag="nve-codeblock"></nve-api-status>
+
+<nve-api-table tag="nve-codeblock"></nve-api-table>
