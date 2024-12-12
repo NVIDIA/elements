@@ -24,7 +24,8 @@
       ],
       "dependencies": [
         "../storybook:build",
-        "../starters:build"
+        "../starters:build",
+        "../internals/metadata:build"
       ]
     },
     "preview": {

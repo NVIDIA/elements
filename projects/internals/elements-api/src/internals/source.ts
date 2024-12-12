@@ -23,14 +23,17 @@ const camelCase = str => str.replace(/\s*-\s*\w/g, parts => parts[parts.length -
 
 const pascalCase = str => camelCase(str).replace(/^\w/, s => s.toUpperCase());
 
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+const capitalize = str => str.charAt(0).toUpperCase() + str.slice(1);
 
-export function updateScope(source, config) {
+export function setSourcePackageScope(source: string, config: { scope: string; sourceType: string }) {
   const { scope, sourceType } = config;
 
-  if (source.includes('@nve-labs') || source.includes('nve-codeblock') || window.location.href.includes('internal') || window.location.href.includes('migration')) {
+  if (
+    source.includes('@nve-labs') ||
+    source.includes('nve-codeblock') ||
+    window.location.href.includes('internal') ||
+    window.location.href.includes('migration')
+  ) {
     return source;
   }
 
@@ -47,8 +50,8 @@ export function updateScope(source, config) {
     })
     .replaceAll(/(@elements\/elements\/[\w-]*|@nve\/elements\/[\w-]*)/g, (_, value) => {
       const scopeImports = {
-        'mlv': '@elements',
-        'nve': '@nve'
+        mlv: '@elements',
+        nve: '@nve'
       };
 
       value = value.replaceAll('@elements', scopeImports[scope]).replaceAll('@nve', scopeImports[scope]);

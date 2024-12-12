@@ -81,7 +81,8 @@
         "./projects/storybook:ci",
         "./projects/styles:ci",
         "./projects/testing:ci",
-        "./projects/themes:ci"
+        "./projects/themes:ci",
+        "./projects/internals/metadata:ci"
       ],
       "files": []
     },
@@ -180,7 +181,7 @@
         "!**/coverage/**",
         "!**/node_modules/**",
         "!projects/elements/src/icon/{icons,server}.ts",
-        "!projects/internals/metadata/dist/**",
+        "!projects/internals/metadata/static/**",
         "!projects/elements-react/src/**/*",
         "!projects/starters/nextjs/next-env.d.ts",
         "!projects/starters/nextjs-react-18/next-env.d.ts",
