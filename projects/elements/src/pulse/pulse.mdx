@@ -6,7 +6,7 @@ import { Default, Status, Size, Inline } from './pulse.stories';
 
 # Pulse
 
-<element-metrics tag="nve-pulse"></element-metrics>
+<nve-api-summary tag="nve-pulse"></nve-api-summary>
 
 ## Installation
 
@@ -24,13 +24,13 @@ import '@nvidia-elements/core/pulse/define.js';
 
 ## Status
 
-<element-api tag="nve-pulse" type="property" value="status"></element-api>
+<nve-api-detail tag="nve-pulse" type="property" value="status"></nve-api-detail>
 
 <Canvas of={Status} />
 
 ## Size
 
-<element-api tag="nve-pulse" type="property" value="size"></element-api>
+<nve-api-detail tag="nve-pulse" type="property" value="size"></nve-api-detail>
 
 <Canvas of={Size} />
 
@@ -38,6 +38,6 @@ import '@nvidia-elements/core/pulse/define.js';
 
 <Canvas of={Inline} />
 
-<element-status tag="nve-pulse"></element-status>
+<nve-api-status tag="nve-pulse"></nve-api-status>
 
-<element-api tag="nve-pulse"></element-api>
+<nve-api-table tag="nve-pulse"></nve-api-table>
