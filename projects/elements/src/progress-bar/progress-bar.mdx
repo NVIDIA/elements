@@ -6,7 +6,7 @@ import { Default, Max, Labeled, Indeterminate, IndeterminateStatusColors, Indete
 
 # Progress Bar
 
-<element-metrics tag="nve-progress-bar"></element-metrics>
+<nve-api-summary tag="nve-progress-bar"></nve-api-summary>
 
 ## Installation
 
@@ -16,7 +16,7 @@ import '@nvidia-elements/core/progress-bar/define.js';
 
 ## Setting the Value
 
-<element-api tag="nve-progress-bar" type="property" value="value"></element-api>
+<nve-api-detail tag="nve-progress-bar" type="property" value="value"></nve-api-detail>
 
 ```html
 <nve-progress-bar status="accent" value="25"></nve-progress-bar>
@@ -34,7 +34,7 @@ import '@nvidia-elements/core/progress-bar/define.js';
 
 ## Max Value
 
-<element-api tag="nve-progress-bar" type="property" value="max"></element-api>
+<nve-api-detail tag="nve-progress-bar" type="property" value="max"></nve-api-detail>
 
 <Canvas of={Max} />
 
@@ -60,6 +60,6 @@ Alternatively, set the `--accent-color` css property for a branded progress bar 
 
 <Canvas of={IndeterminateCustomColor} />
 
-<element-status tag="nve-progress-bar"></element-status>
+<nve-api-status tag="nve-progress-bar"></nve-api-status>
 
-<element-api tag="nve-progress-bar"></element-api>
+<nve-api-table tag="nve-progress-bar"></nve-api-table>

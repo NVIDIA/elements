@@ -6,7 +6,7 @@ import { Default, Selected, Current, Disabled, Icons, Scroll, Dropdown, Vertical
 
 # Menu
 
-<element-metrics tag="nve-menu"></element-metrics>
+<nve-api-summary tag="nve-menu"></nve-api-summary>
 
 ## Installation
 
@@ -29,19 +29,19 @@ import '@nvidia-elements/core/menu/define.js';
 
 ## Selected
 
-<element-api tag="nve-menu-item" type="property" value="selected"></element-api>
+<nve-api-detail tag="nve-menu-item" type="property" value="selected"></nve-api-detail>
 
 <Canvas of={Selected} />
 
 ## Current
 
-<element-api tag="nve-menu-item" type="property" value="current"></element-api>
+<nve-api-detail tag="nve-menu-item" type="property" value="current"></nve-api-detail>
 
 <Canvas of={Current} />
 
 ## Disabled
 
-<element-api tag="nve-menu-item" type="property" value="disabled"></element-api>
+<nve-api-detail tag="nve-menu-item" type="property" value="disabled"></nve-api-detail>
 
 <Canvas of={Disabled} />
 
@@ -94,8 +94,8 @@ Menu item features a default slot for content, along with a suffix slot for disp
 
 <Canvas of={DangerStatus} />
 
-<element-status tag="nve-menu"></element-status>
+<nve-api-status tag="nve-menu"></nve-api-status>
 
-<element-api tag="nve-menu"></element-api>
+<nve-api-table tag="nve-menu"></nve-api-table>
 
-<element-api tag="nve-menu-item"></element-api>
+<nve-api-table tag="nve-menu-item"></nve-api-table>

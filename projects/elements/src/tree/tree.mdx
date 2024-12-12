@@ -6,7 +6,7 @@ import { Default, Border, DynamicTree, Selectable, Highlight, Links, NodeContent
 
 # Tree View
 
-<element-metrics tag="nve-tree"></element-metrics>
+<nve-api-summary tag="nve-tree"></nve-api-summary>
 
 ## Installation
 
@@ -35,19 +35,19 @@ import '@nvidia-elements/core/tree/define.js';
 
 ## Border
 
-<element-api tag="nve-tree" type="property" value="border"></element-api>
+<nve-api-detail tag="nve-tree" type="property" value="border"></nve-api-detail>
 
 <Canvas of={Border} />
 
 ## Selectable
 
-<element-api tag="nve-tree-node" type="property" value="selectable"></element-api>
+<nve-api-detail tag="nve-tree-node" type="property" value="selectable"></nve-api-detail>
 
 <Canvas of={Selectable} />
 
 ## Selectable Multi
 
-<element-api tag="nve-tree-node" type="property" value="selectable"></element-api>
+<nve-api-detail tag="nve-tree-node" type="property" value="selectable"></nve-api-detail>
 
 <Canvas of={SelectableMultiple} />
 
@@ -57,7 +57,7 @@ import '@nvidia-elements/core/tree/define.js';
 
 ## Highlight
 
-<element-api tag="nve-tree-node" type="property" value="highlighted"></element-api>
+<nve-api-detail tag="nve-tree-node" type="property" value="highlighted"></nve-api-detail>
 
 <Canvas of={Highlight} />
 
@@ -96,8 +96,8 @@ If the tree expands past its container, use overflow on the parent to enable scr
 
 <Canvas of={Overflow} />
 
-<element-status tag="nve-tree"></element-status>
+<nve-api-status tag="nve-tree"></nve-api-status>
 
-<element-api tag="nve-tree"></element-api>
+<nve-api-table tag="nve-tree"></nve-api-table>
 
-<element-api tag="nve-tree-node"></element-api>
+<nve-api-table tag="nve-tree-node"></nve-api-table>
