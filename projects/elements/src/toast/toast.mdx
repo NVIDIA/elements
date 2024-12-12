@@ -6,7 +6,7 @@ import { Default, Visual, Status, Actions, Events, Alignment, Position } from '.
 
 # Toast
 
-<element-metrics tag="nve-toast"></element-metrics>
+<nve-api-summary tag="nve-toast"></nve-api-summary>
 
 ## Installation
 
@@ -27,21 +27,21 @@ import '@nvidia-elements/core/toast/define.js';
 
 ## Status
 
-<element-api tag="nve-toast" type="property" value="status"></element-api>
+<nve-api-detail tag="nve-toast" type="property" value="status"></nve-api-detail>
 
 <Canvas of={Status} story={{ inline: false, height: 300 }} />
 
 ## Close Timeout
 
-<element-api tag="nve-toast" type="property" value="closeTimeout"></element-api>
+<nve-api-detail tag="nve-toast" type="property" value="closeTimeout"></nve-api-detail>
 
 <Canvas of={Default} story={{ inline: false, height: 200 }} />
 
 ## Events
 
-<element-api tag="nve-toast" type="event" value="open"></element-api>
+<nve-api-detail tag="nve-toast" type="event" value="open"></nve-api-detail>
 
-<element-api tag="nve-toast" type="event" value="close"></element-api>
+<nve-api-detail tag="nve-toast" type="event" value="close"></nve-api-detail>
 
 <Canvas of={Events} story={{ inline: false, height: 200 }} />
 
@@ -51,16 +51,16 @@ import '@nvidia-elements/core/toast/define.js';
 
 ## Position
 
-<element-api tag="nve-toast" type="property" value="position"></element-api>
+<nve-api-detail tag="nve-toast" type="property" value="position"></nve-api-detail>
 
 <Canvas of={Position} story={{ inline: false, height: 200 }} />
 
 ## Alignment
 
-<element-api tag="nve-toast" type="property" value="alignment"></element-api>
+<nve-api-detail tag="nve-toast" type="property" value="alignment"></nve-api-detail>
 
 <Canvas of={Alignment} story={{ inline: false, height: 600 }} />
 
-<element-status tag="nve-toast"></element-status>
+<nve-api-status tag="nve-toast"></nve-api-status>
 
-<element-api tag="nve-toast"></element-api>
+<nve-api-table tag="nve-toast"></nve-api-table>

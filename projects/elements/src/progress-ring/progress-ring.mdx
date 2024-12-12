@@ -6,7 +6,7 @@ import { Default, Values, Max, Status, ZeroValueStatus, WithText, Sizing, Slotte
 
 # Progress Ring
 
-<element-metrics tag="nve-progress-ring"></element-metrics>
+<nve-api-summary tag="nve-progress-ring"></nve-api-summary>
 
 ## Installation
 
@@ -24,19 +24,19 @@ import '@nvidia-elements/core/progress-ring/define.js';
 
 ## Value
 
-<element-api tag="nve-progress-ring" type="property" value="value"></element-api>
+<nve-api-detail tag="nve-progress-ring" type="property" value="value"></nve-api-detail>
 
 <Canvas of={Values} />
 
 ## Max Value
 
-<element-api tag="nve-progress-ring" type="property" value="max"></element-api>
+<nve-api-detail tag="nve-progress-ring" type="property" value="max"></nve-api-detail>
 
 <Canvas of={Max} />
 
 ## Indicating Status
 
-<element-api tag="nve-progress-ring" type="property" value="status"></element-api>
+<nve-api-detail tag="nve-progress-ring" type="property" value="status"></nve-api-detail>
 
 <Canvas of={Status} />
 
@@ -50,7 +50,7 @@ When used with text, please set `size="xs"`.
 
 ## Sizing
 
-<element-api tag="nve-progress-ring" type="property" value="size"></element-api>
+<nve-api-detail tag="nve-progress-ring" type="property" value="size"></nve-api-detail>
 
 <Canvas of={Sizing} />
 
@@ -66,6 +66,6 @@ When `nve-progress-ring` is used within a `nve-button` the `status` should be se
 
 <Canvas of={WithButton} />
 
-<element-status tag="nve-progress-ring"></element-status>
+<nve-api-status tag="nve-progress-ring"></nve-api-status>
 
-<element-api tag="nve-progress-ring"></element-api>
+<nve-api-table tag="nve-progress-ring"></nve-api-table>
