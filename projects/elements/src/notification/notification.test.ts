@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
-import { Notification } from '@nvidia-elements/core/notification';
+import { Notification, NotificationGroup } from '@nvidia-elements/core/notification';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/notification/define.js';
@@ -129,5 +129,32 @@ describe(Notification.metadata.tag, () => {
     const event = untilEvent(element, 'close');
     element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
+  });
+});
+
+describe(`${Notification.metadata.tag} - inline`, () => {
+  let fixture: HTMLElement;
+  let element: NotificationGroup;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-notification-group></nve-notification-group>
+    `);
+    element = fixture.querySelector(NotificationGroup.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should setup close timeout when in inline mode', async () => {
+    const notification = document.createElement('nve-notification');
+    notification.closeTimeout = 10;
+
+    const close = untilEvent(notification, 'close');
+    element.appendChild(notification);
+    await elementIsStable(notification);
+    expect(await close).toBeDefined();
   });
 });
