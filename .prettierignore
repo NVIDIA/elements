@@ -16,7 +16,7 @@ tsconfig.*.tsbuildinfo
 projects/labs/code/index.html
 projects/elements/src/css/*.css
 projects/elements/src/icon/server.ts
-projects/internals/metadata/dist/*.json
+projects/internals/metadata/static/*.json
 projects/starters/remix/build
 projects/starters/remix-react-18/build
 projects/elements-react/src/**/*

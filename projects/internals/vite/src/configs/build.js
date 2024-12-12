@@ -10,6 +10,7 @@ import { cem } from '../plugins/cem.js';
 import { dts } from '../plugins/dts.js';
 import { bundle } from '../plugins/bundle.js';
 import { initial } from '../plugins/initial.js';
+import { storiesToJSON } from '../plugins/stories.js';
 
 const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
@@ -22,7 +23,7 @@ const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package
  * @type {import('vite').UserConfig}
  */
 export const libraryBuildConfig = {
-  plugins: [initial(), tsc(), cem(), dts(), bundle()],
+  plugins: [initial(), tsc(), cem(), dts(), bundle(), storiesToJSON()],
   build: {
     cssMinify: 'esbuild',
     cssCodeSplit: true,

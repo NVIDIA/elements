@@ -2,38 +2,46 @@
 
 This is an outline of the tooling that runs the Elements monorepo. This tooling powers a fully automated continuous deployment of multiple NPM/Artifactory packages as well as documentation. This configuration enables:
 
-- Building 25+ demos and libraries
-- 1000+ unit tests, visual regressions tets and performance lighthouse tests
-- Automated deployment and publishing of libraries and documentation
+- Building 30+ libraries, packages and starter projects
+- 1300+ unit tests, visual regressions tets and performance lighthouse tests
+- Fully automated deployment, versioning and publishing of packages and documentation
 
 The **CI pipeline takes an average of [~10 minutes](https://github.com/NVIDIA/elements/-/pipelines/12762390)** from the moment a MR is merged to being deployed and available to end users. The average clone, install and build of the **CI pipeline locally takes about ~1-2 mins** on a Macbook M1.
 
-The local CI job is the same CI job run in the Gitlab Pipeline, this ensures that if it passes locally, there is a very high probability it will pass in CI without issue.
+The local CI job is the same CI job run in the GitLab Pipeline, this ensures that if it passes locally, there is a very high probability it will pass in CI without issue.
 
-## Gitlab Features and Integrations
+## GitLab Features and Integrations
 
-The Elements repo uses standard Gitlab tooling to run its CI/CD pipeline.
+The Elements repo uses standard GitLab tooling to run its CI/CD pipeline.
 The configuration for the entire pipeline can be found in the root [.github/workflows/ci.yml](https://github.com/NVIDIA/elements/-/blob/main/.github/workflows/ci.yml?ref_type=heads).
 
 - [NV Code Critic](https://confluence.nvidia.com/display/APE/CodeCritic)
 
   Internal Nvidia LLM code review bot to provided feedback on pull requests.
 
-- [Gitlab Slack Notifications](https://docs.gitlab.com/ee/user/project/integrations/slack.html)
+- [GitLab Pages Hosting / MR Previews](https://gitlab.com/gitlab-org/gitlab/-/issues/422145)
+
+  Deploy static site hosting and MR previews with CI/MR pipelines.
+
+- [GitLab Page Redirects](https://docs.gitlab.com/ee/user/project/pages/redirects.html)
+
+  Gitlab Page redirects for redirecting urls between deployment URLs.
+
+- [GitLab Slack Notifications](https://docs.gitlab.com/ee/user/project/integrations/slack.html)
 
   This provides notifications any time a release is published to the support slack.
 
 - [Unit Test Reporting](https://docs.gitlab.com/ee/ci/testing/unit_test_reports.html)
 
-  When opening MRs a test report is generated in the Gitlab UI to quickly see any potential issues.
+  When opening MRs a test report is generated in the GitLab UI to quickly see any potential issues.
 
 - [Code Coverage Reporting](https://docs.gitlab.com/ee/ci/testing/code_coverage.html)
 
-  When opening MRs a test report is generated in the Gitlab UI to quickly see uncovered branches.
+  When opening MRs a test report is generated in the GitLab UI to quickly see uncovered branches.
 
 - [CI Caching](https://docs.gitlab.com/ee/ci/caching/)
 
-  We leverage Gitlab CI Cache to cache our PNPM installations between jobs, this drastically improves our CI speed.
+  We leverage GitLab CI Cache to cache our PNPM installations between jobs, this drastically improves our CI speed.
 
 - [Issue Templates](https://docs.gitlab.com/ee/user/project/description_templates.html)
 
@@ -49,7 +57,39 @@ The configuration for the entire pipeline can be found in the root [.github/work
 
 - [Git LFS (Large File System)](https://docs.gitlab.com/ee/topics/git/lfs/)
 
-  Standardized way to source control large files without bloading git histroy. Useful for visual regression baseline images.
+  Standardized way to source control large files without bloating git histroy. Useful for visual regression baseline images.
+
+- [GitLab Runners/Docker Containers](https://docs.gitlab.com/ee/ci/docker/using_docker_images.html)
+
+  Standardized Docker Containers and NV provided containers for GitLab Runners.
+
+- [GitLab Container Registry](https://docs.gitlab.com/ee/user/packages/container_registry/)
+
+  Upload [prebuilt containers](https://github.com/NVIDIA/elements/container_registry) for use in CI jobs.
+
+- [GitLab Job Artifacts](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
+
+  Ability to upload job [build artifacts](https://github.com/NVIDIA/elements/-/artifacts) and outputs to be referenced in other jobs or CI jobs.
+
+- [Gitlab Releases](https://docs.gitlab.com/ee/user/project/releases/)
+
+  Tag artifacts with specific Git tags for standardized release aritfact [history and tracking](https://github.com/NVIDIA/elements/-/releases).
+
+- [GitLab Env Variables](https://github.com/help/ci/variables/index) + [NVault](https://confluence.nvidia.com/pages/viewpage.action?spaceKey=IPPSEC&title=GitLab+Secrets+using+Vault+Plugin+for+GitLab) (wip)
+
+  Standardized way to store API keys/secrets.
+
+- [GitLab Runners](https://docs.gitlab.com/runner/)
+
+  Spin up [self managed VMs](https://confluence.nvidia.com/pages/viewpage.action?pageId=1227431373) for creating GitLab Runners. Perflab provides basic shared [managed runners](https://confluence.nvidia.com/display/PERFLABGRP/Perflab+GitLab+Runner+Tagging+Standard). There is a initiative for a [company wide managed GitLab Runner farm](https://docs.google.com/document/d/1UJE_bHzGgAn9KZZlXh7uQnd7gFz2h-igC0xLyypFZqo/edit?tab=t.0).
+
+- [GitLab Analytics](https://docs.gitlab.com/ee/user/analytics/)
+
+  Provided analytics dashboards covering [CI/CD status](https://github.com/NVIDIA/elements/-/pipelines/charts), [code coverage](https://github.com/NVIDIA/elements/-/graphs/main/charts), [merge requests](https://github.com/NVIDIA/elements/-/analytics/merge_request_analytics), and [contributors](https://github.com/NVIDIA/elements/-/graphs/main?ref_type=heads).
+
+- [Gitlab Usage Quotas](https://github.com/NVIDIA/elements/-/usage_quotas)
+
+  Easily track/triage artifacts and resource usage on GitLab instance.
 
 ## Build
 
@@ -89,7 +129,7 @@ The following are the repo wide tools that apply to all source code and projects
 
 ## Repo Configuration
 
-The following Gitlab settings are configured for optimal code quality and stability within the repo.
+The following GitLab settings are configured for optimal code quality and stability within the repo.
 
 - [Protected Tags](https://github.com/help/user/project/protected_tags)
 
@@ -98,6 +138,10 @@ The following Gitlab settings are configured for optimal code quality and stabil
 - [Protected Branches](https://github.com/help/user/project/protected_branches)
 
   Ensures the `main` branch is protected and must go through the MR Review/CI Pipeline process.
+
+- [Push Rules](https://github.com/help/user/project/repository/push_rules)
+
+  Enforce rules such as topic branch names, commit message formats and Git tag stability.
 
 - [Fast Forward Merge (Enforced Rebase)](https://github.com/help/user/project/merge_requests/methods/index#fast-forward-merge)
 
@@ -119,33 +163,33 @@ The following Gitlab settings are configured for optimal code quality and stabil
 
   If a Git fetch is not possible then a shallow clone occurs with the latest 10 commits. This improves the overall CI job speed.
 
-- [Gitlab Pages](https://docs.gitlab.com/ee/user/project/pages/)
+- [GitLab Pages](https://docs.gitlab.com/ee/user/project/pages/)
 
   Provides an easy to deploy static host for documentation and UI applications.
 
-- [Gitlab Scheduled Pipelines](https://docs.gitlab.com/ee/ci/pipelines/schedules.html)
+- [GitLab Scheduled Pipelines](https://docs.gitlab.com/ee/ci/pipelines/schedules.html)
 
   We use scheduled pipelines to run nightly builds of the documentation as well as full runs of [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) against [each of the 50+ components](https://github.com/NVIDIA/elements/-/jobs/82739890) in the Elements library.
 
 ## Semantic Release
 
-[Semantic Release](https://github.com/semantic-release/semantic-release) is a open source tool for managing automatic publishing and deployment of libraries and packages following [SEMVER](https://semver.org/). This enables a fix or feature to be available in Artifactory within minutes of it merging and passing the CI automated tests. To integrate into Gitlab the following must be completed:
+[Semantic Release](https://github.com/semantic-release/semantic-release) is a open source tool for managing automatic publishing and deployment of libraries and packages following [SEMVER](https://semver.org/). This enables a fix or feature to be available in Artifactory within minutes of it merging and passing the CI automated tests. To integrate into GitLab the following must be completed:
 
-- Create `GITLAB_TOKEN` with maintainer permissions using a Gitlab service account
+- Create `GITLAB_TOKEN` with maintainer permissions using a GitLab service account
 - Generate Artifactory Identity Token via a service account named `NPM_TOKEN`
 - Add tokens `GITLAB_TOKEN` and `NPM_TOKEN` to the [repo variables](https://github.com/help/ci/variables/index)
-- Note, the bot name ran by Semantic Release will be the [name of your provided Gitlab Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#bot-users-for-projects) (`GITLAB_TOKEN`) you can change this default if desired.
+- Note, the bot name ran by Semantic Release will be the [name of your provided GitLab Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#bot-users-for-projects) (`GITLAB_TOKEN`) you can change this default if desired.
 - Follow standard [Semantic Release](https://github.com/semantic-release/semantic-release) tooling/configuration. To see an example of this look at the Elements [.releaserc.cjs](https://github.com/NVIDIA/elements/-/blob/main/.releaserc.cjs?ref_type=heads) file.
 
 ### Resources
 
-- [Publishing a Package by Using a Gitlab CI/CD Pipeline](https://github.com/help/user/packages/npm_registry/index.md#publishing-a-package-by-using-a-cicd-pipeline)
+- [Publishing a Package by Using a GitLab CI/CD Pipeline](https://github.com/help/user/packages/npm_registry/index.md#publishing-a-package-by-using-a-cicd-pipeline)
 - [Publishing with existing Git Tags with Semantic Release](https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md#existing-version-tags)
-- [Semantic Release Gitlab Example](https://docs.gitlab.com/ee/ci/examples/semantic-release.html)
+- [Semantic Release GitLab Example](https://docs.gitlab.com/ee/ci/examples/semantic-release.html)
 
-## Migrating to Gitlab
+## Migrating to GitLab
 
-Below are the steps taken to migrate to Gitlab from a larger mono-repo. If your existing repo is moved in its entirety to Gitlab then this process is not needed.
+Below are the steps taken to migrate to GitLab from a larger mono-repo. If your existing repo is moved in its entirety to GitLab then this process is not needed.
 
 1. Clone repo to be migrated
 2. Install [git-filter-repo](https://github.com/newren/git-filter-repo) (Install via brew)
@@ -164,7 +208,7 @@ echo "Creating copy of repo..."
 cp -R ./original ./migrated
 cd ./migrated
 
-# Filter out the sub directory to move to the migrated Gitlab repo
+# Filter out the sub directory to move to the migrated GitLab repo
 echo "Filtering history..."
 git filter-repo --subdirectory-filter src/your-project-directory
 
@@ -186,7 +230,3 @@ echo "Migration complete! 🎉"
 ### Resources
 
 - [Splitting a Subfolder Out Into a New Repository (Github)](https://docs.github.com/en/get-started/using-git/splitting-a-subfolder-out-into-a-new-repository)
-
-## Pending Features
-
-- [Gitlab Preview/Multi Page Deploys](https://gitlab.com/gitlab-org/gitlab/-/issues/422145)
