@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs';
+import { Canvas } from '@internals/storybook/blocks';
+import { Default, Icon, Size, Color, AvatarGroup, Image } from './avatar.stories';
+
+<Meta title="Elements/Avatar/Documentation" />
+
+# Avatar
+
+<nve-api-summary tag="nve-avatar"></nve-api-summary>
+
+## Installation
+
+```typescript
+import '@nvidia-elements/core/avatar/define.js';
+```
+
+```html
+<nve-avatar></nve-avatar>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Image
+
+<Canvas of={Image} />
+
+## Icon
+
+<Canvas of={Icon} />
+
+## Size
+
+<nve-api-detail tag="nve-avatar" type="property" value="size"></nve-api-detail>
+
+<Canvas of={Size} />
+
+## Color
+
+<Canvas of={Color} />
+
+## Avatar Group
+
+An avatar group displays a collection of user avatars in a compact and organized layout, showcasing multiple participants or contributors in a space-efficient way.
+
+<Canvas of={AvatarGroup} />
+
+<nve-api-status tag="nve-avatar"></nve-api-status>
+
+<nve-api-table tag="nve-avatar"></nve-api-table>

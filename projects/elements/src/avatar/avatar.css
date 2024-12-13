@@ -1,0 +1,49 @@
+:host {
+  --background: var(--state-color);
+  --color: var(--nve-sys-contrast-mute-color);
+  --border-radius: var(--nve-ref-border-radius-full);
+  --height: var(--nve-ref-size-800);
+  --width: var(--nve-ref-size-800);
+  --font-size: calc(var(--width) / 2.5);
+  --font-weight: var(--nve-ref-font-weight-medium);
+  --state-color-base: var(--nve-ref-color-gray-slate-1100);
+  --border: 0;
+  display: block;
+  overflow: hidden;
+}
+
+[internal-host] {
+  --_icon-color: var(--color);
+  background: var(--background);
+  color: var(--color);
+  border-radius: var(--border-radius);
+  width: var(--width);
+  height: var(--height);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  border: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+::slotted(nve-icon) {
+  --color: var(--_icon-color);
+}
+
+::slotted(img) {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+:host([size='sm']) {
+  --height: var(--nve-ref-size-700);
+  --width: var(--nve-ref-size-700);
+}
+
+:host([size='lg']) {
+  --width: var(--nve-ref-size-1000);
+  --height: var(--nve-ref-size-1000);
+}
