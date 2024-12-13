@@ -1,0 +1,12 @@
+:host {
+  display: block;
+}
+
+[internal-host] {
+  display: flex;
+}
+
+::slotted(nve-avatar) {
+  margin: -6px;
+  --border: 1px solid var(--nve-sys-contrast-mute-color);
+}
