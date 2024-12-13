@@ -130,6 +130,18 @@
       "types": "./dist/app-header/define.d.ts",
       "default": "./dist/app-header/define.js"
     },
+    "./avatar": {
+      "types": "./dist/avatar/index.d.ts",
+      "default": "./dist/avatar/index.js"
+    },
+    "./avatar/index.js": {
+      "types": "./dist/avatar/index.d.ts",
+      "default": "./dist/avatar/index.js"
+    },
+    "./avatar/define.js": {
+      "types": "./dist/avatar/define.d.ts",
+      "default": "./dist/avatar/define.js"
+    },
     "./badge": {
       "types": "./dist/badge/index.d.ts",
       "default": "./dist/badge/index.js"
