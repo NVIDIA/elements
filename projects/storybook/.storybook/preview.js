@@ -141,6 +141,7 @@ export const parameters = {
           'Accordion',
           'Alert',
           'App Header',
+          'Avatar',
           'Badge',
           'Breadcrumb',
           'Button',
