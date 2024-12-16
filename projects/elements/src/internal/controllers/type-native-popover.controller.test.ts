@@ -1,4 +1,4 @@
-import { css, html, LitElement } from 'lit';
+import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
@@ -594,10 +594,13 @@ describe('type-popover.controller - hint', () => {
   it('should close with delay when a closeTimeout is set', async () => {
     await elementIsStable(element);
     element.closeTimeout = 5;
-    button.focus();
+    element.showPopover();
+    await elementIsStable(element);
     expect(element.matches(':popover-open')).toBe(true);
 
+    const close = await untilEvent(element, 'close');
     await new Promise(r => setTimeout(() => r(null), 10));
+    expect(await close).toBeDefined();
     expect(element.matches(':popover-open')).toBe(false);
   });
 });
