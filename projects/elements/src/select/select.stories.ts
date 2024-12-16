@@ -375,6 +375,26 @@ export const Disabled = {
 </nve-select>`
 };
 
+export const ViewportOverflow = {
+  render: () => html`
+<nve-select layout="horizontal-inline" style="margin: 30vh 0 0 60vw; max-width: 500px">
+  <label>label</label>
+  <select>
+    <option value="1">Option 1 asfd asdf asdf asdf asdf asdf asdfasdf asdf asdf asdf asdf asdf asdf asdf</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </select>
+</nve-select>
+<nve-select layout="horizontal-inline" style="margin: 55vh 0 0 60vw; max-width: 500px">
+  <label>label</label>
+  <select>
+    <option value="1">Option 1 asfd asdf asdf asdf asdf asdf asdfasdf asdf asdf asdf asdf asdf asdf asdf</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </select>
+</nve-select>`
+};
+
 export const Performance = {
   render: () => html`<nve-select-performance-demo></nve-select-performance-demo>`
 }

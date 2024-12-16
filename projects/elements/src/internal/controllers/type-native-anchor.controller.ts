@@ -67,7 +67,6 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
   #updatePositioning() {
     this.host._internals.states.delete('anchor-positioning-fallback');
     this.#associateAnchors();
-    this.#calculateDimensions();
   }
 
   #associateAnchors() {
@@ -79,14 +78,6 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
       this.host._internals.states.delete('anchor-body');
       associateAnchor(this.host, anchor);
     }
-  }
-
-  async #calculateDimensions() {
-    await new Promise(r => requestAnimationFrame(r));
-    await new Promise(r => setTimeout(() => r(null), 0));
-    const { width, height } = this.host.getBoundingClientRect();
-    this.host.style.setProperty('--_width', `${Math.floor(width)}px`);
-    this.host.style.setProperty('--_height', `${Math.floor(height)}px`);
   }
 
   #renderFallbackPositioning() {

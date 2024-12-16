@@ -1,7 +1,5 @@
 :host {
   --animation-duration: var(--nve-ref-animation-duration-200);
-  --_width: 0px;
-  --_height: 0px;
   margin: calc(var(--nve-sys-layer-popover-offset) + calc(var(--nve-sys-layer-popover-arrow-offset) * 2));
   border: 0;
   padding: 0;
@@ -148,27 +146,6 @@
     position-area: center;
   }
 
-  /* offset calculation by anchor controller, can't use transforms with anchoring https://github.com/w3c/csswg-drafts/issues/8584 */
-  :host([position='top'][alignment='start']),
-  :host([position='bottom'][alignment='start']) {
-    margin-right: calc(-1 * calc(var(--_width) + var(--nve-sys-layer-popover-offset)));
-  }
-
-  :host([position='top'][alignment='end']),
-  :host([position='bottom'][alignment='end']) {
-    margin-left: calc(-1 * calc(var(--_width) + var(--nve-sys-layer-popover-offset)));
-  }
-
-  :host([position='left'][alignment='start']),
-  :host([position='right'][alignment='start']) {
-    margin-bottom: calc(-1 * calc(var(--_height) + var(--nve-sys-layer-popover-offset)));
-  }
-
-  :host([position='left'][alignment='end']),
-  :host([position='right'][alignment='end']) {
-    margin-top: calc(-1 * calc(var(--_height) + var(--nve-sys-layer-popover-offset)));
-  }
-
   :host(:state(anchor-body)) {
     margin: auto;
   }
@@ -214,11 +191,11 @@
   }
 
   :host([position='top'][alignment='start']) {
-    position-area: top left;
+    position-area: top span-right;
   }
 
   :host([position='top'][alignment='end']) {
-    position-area: top right;
+    position-area: top span-left;
   }
 
   /** bottom */
@@ -228,12 +205,12 @@
   }
 
   :host([position='bottom'][alignment='start']) {
-    position-area: bottom left;
+    position-area: bottom span-right;
     inset: auto auto 0 0;
   }
 
   :host([position='bottom'][alignment='end']) {
-    position-area: bottom right;
+    position-area: bottom span-left;
     inset: auto 0 0 auto;
   }
 
@@ -244,12 +221,12 @@
   }
 
   :host([position='left'][alignment='end']) {
-    position-area: bottom left;
+    position-area: left span-top;
     inset: auto auto 0 0;
   }
 
   :host([position='left'][alignment='start']) {
-    position-area: top left;
+    position-area: left span-bottom;
     inset: 0 auto auto 0;
   }
 
@@ -260,12 +237,12 @@
   }
 
   :host([position='right'][alignment='end']) {
-    position-area: bottom right;
+    position-area: right span-top;
     inset: auto 0 0 auto;
   }
 
   :host([position='right'][alignment='start']) {
-    position-area: top right;
+    position-area: right span-bottom;
     inset: 0 0 auto auto;
   }
 
@@ -275,8 +252,14 @@
   }
 
   :host([popover]) {
-    position-try-fallbacks: flip-block, flip-inline;
-    position-try: flip-block, flip-inline;
+    position-try-fallbacks:
+      flip-block,
+      flip-inline,
+      flip-block flip-inline;
+    position-try:
+      flip-block,
+      flip-inline,
+      flip-block flip-inline;
   }
 }
 
