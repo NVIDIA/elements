@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.18.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.0...@nvidia-elements/core-v1.18.1) (2024-12-17)
+
+
+### Bug Fixes
+
+* **elements:** notification close timeout ([7bf59c6](https://github.com/NVIDIA/elements/commit/7bf59c6e5b1f147bbb9d1a97051d38af676b4294))
+
 ## [@nvidia-elements/core-v1.18.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.17.0...@nvidia-elements/core-v1.18.0) (2024-12-12)
 
 
