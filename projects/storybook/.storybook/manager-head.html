@@ -151,9 +151,13 @@
     display: none !important;
   }
 
-  .css-17k9ygk {
-    margin-top: 48px;
+  div:has(> nav.sidebar-container) {
+    margin-top: 48px !important;
     border-right: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted) !important;
+  }
+
+  main:has(#storybook-preview-iframe) {
+    padding-top: 48px !important;
   }
 
   [title='Storybook'] svg {
