@@ -118,6 +118,9 @@ addons.register('my-addon', () => {
 });
 
 addons.setConfig({
+  navSize: 300,
+  showToolbar: false,
+  enableShortcuts: false,
   sidebar: {
     showRoots: true,
     collapsedRoots: ['about', 'integrations', 'foundations', 'elements', 'patterns', 'testing', 'labs', 'api-design', 'internal', 'deprecated'],
