@@ -153,14 +153,14 @@
   }
 
   /* Fixed Width Layout Gap Spacing */
-  @each $gap-size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+  @each $gap-size in none, xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
     &[nve-layout~='gap:$(gap-size)'] {
       gap: var(--nve-ref-space-$(gap-size));
     }
   }
 
   /* Fixed Width Container Padding */
-  @each $size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+  @each $size in none, xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
     &[nve-layout~='pad:$(size)'] {
       padding: var(--nve-ref-space-$(size));
     }
