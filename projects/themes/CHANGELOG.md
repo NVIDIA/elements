@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.5...@nvidia-elements/themes-v1.4.0) (2024-12-19)
+
+
+### Features
+
+* **themes:** adds none to spacing ([ef4431a](https://github.com/NVIDIA/elements/commit/ef4431a71cdc2fd3765520b07bc0c6de31c85c41))
+
 ## [@nvidia-elements/themes-v1.3.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.4...@nvidia-elements/themes-v1.3.5) (2024-12-05)
 
 
