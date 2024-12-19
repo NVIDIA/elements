@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.18.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.2...@nvidia-elements/core-v1.18.3) (2024-12-19)
+
+
+### Bug Fixes
+
+* **elements:** improve fallback positioning for popover anchors ([59bccb0](https://github.com/NVIDIA/elements/commit/59bccb07ee6ebfce2c3f07a653904cb9f8a61735))
+
 ## [@nvidia-elements/core-v1.18.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.1...@nvidia-elements/core-v1.18.2) (2024-12-19)
 
 
