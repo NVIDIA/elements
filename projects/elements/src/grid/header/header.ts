@@ -18,7 +18,7 @@ import { GridCell } from '../cell/cell.js';
 /**
  * @element nve-grid-header
  * @since 0.11.0
- * @slot - default slot for content
+ * @slot - default slot for `nve-grid-column`
  * @cssprop --background
  * @cssprop --border-bottom
  * @cssprop --padding
