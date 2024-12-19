@@ -1,3 +1,11 @@
+## [@nvidia-elements/styles-v1.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.5.0...@nvidia-elements/styles-v1.6.0) (2024-12-19)
+
+
+### Features
+
+* **docs:** includes docs for none ([c452342](https://github.com/NVIDIA/elements/commit/c452342f47bee2af5c5be75cabc525391e2622c1))
+* **styles:** adds none to gap-size and pad ([bf37afe](https://github.com/NVIDIA/elements/commit/bf37afe81e78cbde914b413f7ff35fbfdd39d94f))
+
 ## [@nvidia-elements/styles-v1.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.4.0...@nvidia-elements/styles-v1.5.0) (2024-12-05)
 
 
