@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
 import { Canvas } from '@internals/storybook/blocks';
-import { GapResponsive, PadResponsive, HideResponsive, ResponsiveGrid } from './layout.stories';
+import { GapResponsive, PadResponsive, HideResponsive, ResponsiveGrid, ResponsiveGridItems } from './layout.stories';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/icon/define.js';
@@ -25,7 +25,7 @@ with `nve-layout` attributes. Currently it supports `gap`, `padding`, and `hide`
 The set of container `breakpoint-sizes` are defined as:
 
 - `xs < 150px`
-- `sm >= 9150px`
+- `sm >= 150px`
 - `md >= 300px`
 - `lg >= 600px`
 - `xl >= 900px`
@@ -37,7 +37,7 @@ The size value after the `:` is the standard size value for the [spacing](./?pat
 
 ```html
 <div>
-  <section class="layout-example" nve-layout="row gap@xs:xxxs gap@sm:xxs gap@md:md gap@lg:xl gap@xl:xxxl">
+  <section nve-layout="row gap@xs:xxxs gap@sm:xxs gap@md:md gap@lg:xl gap@xl:xxxl">
     <nve-card></nve-card>
     <nve-card></nve-card>
     <nve-card></nve-card>
@@ -93,3 +93,7 @@ Note that elments will hide at all breakpoints equal to and smaller then the spe
 ## Responsive Grid
 
 <Canvas of={ResponsiveGrid} />
+
+## Responsive Grid Items
+
+<Canvas of={ResponsiveGridItems} />
