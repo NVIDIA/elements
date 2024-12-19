@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.18.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.1...@nvidia-elements/core-v1.18.2) (2024-12-19)
+
+
+### Bug Fixes
+
+* **elements:** correct deprecated comments spelling ([6c69313](https://github.com/NVIDIA/elements/commit/6c69313c76bc6e41ec35cd77b7c0ea9aafa5d253))
+* **elements:** pagination label fallback ([5611a1e](https://github.com/NVIDIA/elements/commit/5611a1e0a9bb50299b9be3196e4bc473394e85e0))
+
 ## [@nvidia-elements/core-v1.18.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.0...@nvidia-elements/core-v1.18.1) (2024-12-17)
 
 
