@@ -101,7 +101,7 @@ export const NonClosable = {
 <nve-button popovertarget="dialog">open</nve-button>
 <nve-dialog id="dialog" modal>
   <h3 nve-text="heading">Non-Closable Dialog</h3>
-  <p nve-text="body">escape key and light dismiss will not work here</p>
+  <p nve-text="body">Clicking the background to dismiss will not work here</p>
   <nve-dialog-footer>
     <nve-button popovertarget="dialog" popovertargetaction="hide">cancel</nve-button>
   </nve-dialog-footer>
