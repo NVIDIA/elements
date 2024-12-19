@@ -11,7 +11,7 @@ import styles from './icon-button.css?inline';
  * @element nve-icon-button
  * @description An icon button is a button that displays only an icon without a visual label.
  * @since 0.2.1
- * @slot - default
+ * @slot - default slot for custom icons
  * @cssprop --border-radius
  * @cssprop --padding
  * @cssprop --line-height

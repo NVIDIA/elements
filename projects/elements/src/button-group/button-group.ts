@@ -13,7 +13,7 @@ import styles from './button-group.css?inline';
  * @element nve-button-group
  * @description A button group is a control that enables users to choose between two or more distinct mutually exclusive options.
  * @since 0.16.0
- * @slot - slotted `button` or `icon-button`
+ * @slot - default slot for `nve-button` or `nve-icon-button`
  * @cssprop --background
  * @cssprop --border-radius
  * @cssprop --padding
