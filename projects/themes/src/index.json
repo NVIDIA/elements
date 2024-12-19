@@ -76,6 +76,10 @@
       }
     },
     "space": {
+      "none": {
+        "value": "{ref.scale.space} * 0px",
+        "type": "spacing"
+      },
       "xxxs": {
         "value": "{ref.scale.space} * 2px",
         "type": "spacing"
