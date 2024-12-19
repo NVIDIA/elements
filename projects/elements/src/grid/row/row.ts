@@ -7,7 +7,7 @@ import styles from './row.css?inline';
 /**
  * @element nve-grid-row
  * @since 0.11.0
- * @slot - default slot for content
+ * @slot - default slot for `nve-grid-cell`
  * @cssprop --background
  * @cssprop --border-bottom
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-grid-documentation--docs
