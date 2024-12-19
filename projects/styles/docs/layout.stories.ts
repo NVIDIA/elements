@@ -53,6 +53,7 @@ export const VerticalAlignStretchVertical = generateLayoutStory('Align Stretch V
 export const VerticalAlignFullStretch = generateLayoutStory('Align Full Stretch', 'column gap:sm align:stretch', 3);
 
 
+export const GapNone = generateLayoutStory('Gap None', 'row gap:none', 5);
 export const GapXxxs = generateLayoutStory('Gap Xxxs', 'row gap:xxxs', 5);
 export const GapXxs = generateLayoutStory('Gap Xxs', 'row gap:xxs', 5);
 export const GapXs = generateLayoutStory('Gap Xs', 'row gap:xs', 5);
@@ -98,6 +99,7 @@ export const HideResponsive = {
 }
 
 
+export const PadNone = generateLayoutStory('Padding None', 'row gap:sm align:stretch pad:none', 3);
 export const PadXxxs = generateLayoutStory('Padding Xxxs', 'row gap:sm align:stretch pad:xxxs', 3);
 export const PadXxs = generateLayoutStory('Padding Xxs', 'row gap:sm align:stretch pad:xxs', 3);
 export const PadXs = generateLayoutStory('Padding Xs', 'row gap:sm align:stretch pad:xs', 3);

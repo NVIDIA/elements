@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import { Canvas } from '@nve-internals/storybook/blocks';
 import '@nvidia-elements/core/button/define.js';
-import { GapXxxs, GapXxs, GapXs, GapSm, GapMd, GapLg, GapXl, GapXxl, GapXxxl, PadTop, PadLeft, PadRight, PadBottom, PadX, PadY, PadXxxs, PadXxs, PadXs, PadSm, PadMd, PadLg, PadXl, PadXxl, PadXxxl, Full } from './layout.stories';
+import { GapNone, GapXxxs, GapXxs, GapXs, GapSm, GapMd, GapLg, GapXl, GapXxl, GapXxxl, PadTop, PadLeft, PadRight, PadBottom, PadX, PadY, PadNone, PadXxxs, PadXxs, PadXs, PadSm, PadMd, PadLg, PadXl, PadXxl, PadXxxl, Full } from './layout.stories';
 
 <Meta title="Foundations/Layout/Documentation" />
 
@@ -41,6 +41,7 @@ Add the `gap` value to `nve-layout` to set spacing between elements. For example
 
 The following "t-shirt" spacing values are available:
 
+- `gap:none`
 - `gap:xxxs`
 - `gap:xxs`
 - `gap:xs`
@@ -50,6 +51,10 @@ The following "t-shirt" spacing values are available:
 - `gap:xl`
 - `gap:xxl`
 - `gap:xxxl`
+
+### Gap None
+
+<Canvas of={GapNone} />
 
 ### Gap xxxs
 
@@ -99,6 +104,7 @@ Add the `pad` value to `nve-layout` to set spacing between elements. For example
 
 The following "t-shirt" spacing values are available:
 
+- `pad:none`
 - `pad:xxxs`
 - `pad:xxs`
 - `pad:xs`
@@ -148,6 +154,10 @@ Or alternatively use the short hand to just pad the x and y axes.
 ### Padding Y
 
 <Canvas of={PadY} />
+
+### Padding none
+
+<Canvas of={PadNone} />
 
 ### Padding xxxs
 
