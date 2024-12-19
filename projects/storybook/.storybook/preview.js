@@ -121,6 +121,7 @@ export const parameters = {
             'Horizontal Flex',
             'Vertical Flex',
             'Grid',
+            'Responsive'
           ],
           'Forms',
           [
@@ -379,11 +380,11 @@ export const globalTypes = {
 }
 
 const styleSheet = new CSSStyleSheet();
-styleSheet.replaceSync(theme + dark + fontInter + fontNvidiaSans + highContrastTheme + reducedMotionTheme + compactTheme + debugTheme + brandTheme + brandDarkTheme + ddbTheme + layoutStyles + typographyStyles);
+styleSheet.replaceSync(theme + dark + fontInter + fontNvidiaSans + highContrastTheme + reducedMotionTheme + compactTheme + debugTheme + brandTheme + brandDarkTheme + ddbTheme + layoutStyles + responsiveStyles + typographyStyles);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
 
 const parentStyle = document.createElement('style');
-parentStyle.innerText = theme + dark + fontInter + fontNvidiaSans + highContrastTheme + reducedMotionTheme + compactTheme + debugTheme + brandTheme + brandDarkTheme + ddbTheme + responsiveStyles + layoutStyles + typographyStyles;
+parentStyle.innerText = theme + dark + fontInter + fontNvidiaSans + highContrastTheme + reducedMotionTheme + compactTheme + debugTheme + brandTheme + brandDarkTheme + ddbTheme + layoutStyles + responsiveStyles + typographyStyles;
 window.parent.document.head.appendChild(parentStyle);
 
 export const decorators = [(story, { globals }) => {

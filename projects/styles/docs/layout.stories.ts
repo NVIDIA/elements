@@ -179,27 +179,29 @@ export const GridVariableSpans = {
 
 export const ResponsiveGrid = {
   render: () => html`
-    <section nve-layout="grid gap:md span-items@xs:12 span-items@sm:6 span-items@md:4 span-items@lg:3 span-items@xl:2" class="layout-example">
+    <section nve-layout="grid gap:md span-items:12 span-items@sm:6 span-items@md:4 span-items@lg:3">
       <nve-card></nve-card>
       <nve-card></nve-card>
       <nve-card></nve-card>
       <nve-card></nve-card>
       <nve-card></nve-card>
       <nve-card></nve-card>
-    </section>
-        
-    <section nve-layout="grid gap:md" class="layout-example">
-      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
-      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
-      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
-      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
-      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
-      <nve-card nve-layout="span@xs:12 span@sm:6 span@md:4 span@lg:3 span@xl:2"></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
     </section>
   `
 }
 
-
+export const ResponsiveGridItems = {
+  render: () => html`        
+    <section nve-layout="grid gap:md">
+      <nve-card nve-layout="span-items:12 span@sm:4 span@md:6 span@lg:8"></nve-card>
+      <nve-card nve-layout="span-items:12 span@sm:8 span@md:6 span@lg:4"></nve-card>
+      <nve-card nve-layout="span-items:12 span@sm:8 span@md:6 span@lg:4"></nve-card>
+      <nve-card nve-layout="span-items:12 span@sm:4 span@md:6 span@lg:8"></nve-card>
+    </section>
+  `
+}
 
 export const Full = {
   render: () => html`
