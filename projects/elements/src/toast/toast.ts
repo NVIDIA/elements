@@ -23,6 +23,7 @@ import styles from './toast.css?inline';
  * @event open - Dispatched when the toast is opened.
  * @event close - Dispatched when the toast is closed.
  * @slot default content slot
+ * @slot prefix - custom status icon slot
  * @cssprop --padding
  * @cssprop --background
  * @cssprop --border-radius
