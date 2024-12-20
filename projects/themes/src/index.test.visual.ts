@@ -1,4 +1,4 @@
-import { expect, test, describe, beforeEach } from 'vitest';
+import { expect, test, describe } from 'vitest';
 import { visualRunner } from '@internals/vite';
 import tokenJSON from '@nvidia-elements/themes/index.json';
 
