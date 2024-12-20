@@ -15,7 +15,7 @@ export const libraryTestConfig = {
         external: ['**/node_modules/**']
       }
     },
-    reporters: ['basic', 'junit'],
+    reporters: ['default', 'junit'],
     outputFile: {
       junit: './coverage/unit/junit.xml'
     },
@@ -25,13 +25,17 @@ export const libraryTestConfig = {
     },
     setupFiles: ['@internals/vite/setup/library.js'],
     browser: {
-      isolate: coverage,
-      slowHijackESM: false,
       enabled: true,
-      headless: !watch,
       provider: 'playwright',
-      name: 'chromium',
-      strictPort: true
+      headless: !watch,
+      instances: [
+        {
+          browser: 'chromium',
+          isolate: coverage,
+          slowHijackESM: false,
+          strictPort: true
+        }
+      ]
     },
     coverage: {
       extension: ['.ts'],

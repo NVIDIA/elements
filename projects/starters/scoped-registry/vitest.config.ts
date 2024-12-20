@@ -19,9 +19,13 @@ export default defineConfig({
     },
     browser: {
       enabled: true,
-      headless: !watch,
       provider: 'playwright',
-      name: 'chromium'
+      headless: !watch,
+      instances: [
+        {
+          browser: 'chromium'
+        }
+      ]
     }
   }
 });

@@ -12,7 +12,7 @@ export const libraryLighthouseTestConfig = {
         return false;
       }
     },
-    reporters: ['basic', 'junit'],
+    reporters: ['default', 'junit'],
     globalSetup: ['@internals/vite/setup/lighthouse.js'],
     testTimeout: 60000,
     server: {
