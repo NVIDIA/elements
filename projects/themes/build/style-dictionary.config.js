@@ -1,7 +1,7 @@
 import StyleDictionary from 'style-dictionary';
+import { formattedVariables } from 'style-dictionary/utils';
 import { globSync } from 'glob';
 
-const { fileHeader, formattedVariables } = StyleDictionary.formatHelpers;
 const buildPath = 'dist/';
 const sourcePath = 'src/';
 const baseReset = `
@@ -31,13 +31,13 @@ body:has([nve-popover]:popover-open) {
 
 StyleDictionary.registerFormat({
   name: 'custom/schema',
-  formatter: dictionary => {
+  format: dictionary => {
     const schema = {
       $schema: 'http://json-schema.org/draft-07/schema',
       definitions: {
         reference: {
           type: 'string',
-          enum: dictionary.allProperties.map(property => `{${property.path.join('.')}.value}`)
+          enum: dictionary.allTokens.map(property => `{${property.path.join('.')}.value}`)
         }
       },
       type: 'object',
@@ -69,7 +69,7 @@ StyleDictionary.registerTransform({
   name: 'custom/validate',
   type: 'value',
   transitive: true,
-  transformer: obj => {
+  transform: obj => {
     const { value, type, name, original, filePath } = obj;
     const isHighContrast = filePath.includes('high-contrast');
     const isReferenceToken = name.includes('nve-ref');
@@ -102,43 +102,37 @@ StyleDictionary.registerTransform({
   }
 });
 
-StyleDictionary.registerTransform({
-  name: 'custom/css-calc',
-  type: 'value',
-  transitive: true,
-  matcher: ({ value }) => typeof value === 'string' && value?.includes('*'),
-  transformer: ({ value, attributes }) => {
-    if (attributes.type === 'font') {
-      const [scale, base] = value.split('*').map(i => i.trim().replace('px', ''));
-      return `calc(${scale} * ${parseInt(base, 10) / 16}rem)`;
-    } else {
-      return `calc(${value})`;
-    }
-  }
-});
-
 StyleDictionary.registerFormat({
   name: 'custom/css',
-  formatter: ({ dictionary, file, options }) => {
+  format: async ({ dictionary, options }) => {
     const experimental = dictionary.allTokens.find(t => t.name.includes('experimental')) ? '/** @experimental */' : '';
     const selector =
       options.theme !== 'index'
         ? `[nve-theme*='${options.theme}'], [nve-theme*='${options.theme}']`
         : `:root, [nve-theme~='light'], [nve-theme~='light']`;
-    return `${fileHeader({ file })}${experimental}\n${options.theme === 'index' ? `${baseReset}\n` : ''}${selector} {\n${formattedVariables(
-      {
-        format: 'css',
-        dictionary,
-        outputReferences: options.outputReferences
-      }
-    )}\n}`;
+    const formatted = formattedVariables({ format: 'css', dictionary, outputReferences: options.outputReferences })
+      .split('\n')
+      .map(line => {
+        // https://github.com/amzn/style-dictionary/issues/1055
+        if (line.includes('ref-font') && line.includes(' * ') && line.includes('px')) {
+          const [ref, base] = line.split('*').map(i => i.trim().replace('px;', ''));
+          return `  ${ref.replace(': ', ': calc(')} * ${parseInt(base, 10) / 16}rem);`; // convert font types to use scaled rem
+        } else if (line.includes(' * ')) {
+          return line.replace(': ', ': calc(').replace(';', ');'); // convert '*' to use CSS calc
+        } else {
+          return line;
+        }
+      })
+      .join('\n');
+
+    return `${experimental}\n${options.theme === 'index' ? `${baseReset}\n` : ''}${selector} {\n${formatted}\n}`;
   }
 });
 
 StyleDictionary.registerFormat({
   name: 'custom/json',
   transformGroup: 'web',
-  formatter: ({ dictionary }) => {
+  format: ({ dictionary }) => {
     const content = formattedVariables({ format: 'json', dictionary, outputReferences: true })
       .replaceAll(';', '')
       .split('\n')
@@ -152,30 +146,36 @@ StyleDictionary.registerFormat({
   }
 });
 
-function buildTokens() {
+async function buildTokens() {
   const themes = globSync(`${sourcePath}*.json`).filter(path => !path.includes('index'));
-  console.log(themes);
-  StyleDictionary.extend({
+
+  const sd = new StyleDictionary({
     source: [`${sourcePath}index.json`],
     platforms: {
       css: cssOutput(`${buildPath}index.css`),
       json: jsonOutput(`${buildPath}index.json`),
       schema: schemaOutput(`${buildPath}schema.json`)
     }
-  }).buildAllPlatforms();
-
-  themes.forEach(path => {
-    const theme = getTheme(path);
-
-    StyleDictionary.extend({
-      include: [`${sourcePath}index.json`],
-      source: [`${sourcePath}${theme}.json`],
-      platforms: {
-        css: cssOutput(`${buildPath}${theme}.css`),
-        json: jsonOutput(`${buildPath}${theme}.json`)
-      }
-    }).buildAllPlatforms();
   });
+  await sd.hasInitialized;
+  sd.buildAllPlatforms();
+
+  await Promise.all(
+    themes.map(async path => {
+      const theme = getTheme(path);
+
+      const sdTheme = new StyleDictionary({
+        include: [`${sourcePath}index.json`],
+        source: [`${sourcePath}${theme}.json`],
+        platforms: {
+          css: cssOutput(`${buildPath}${theme}.css`),
+          json: jsonOutput(`${buildPath}${theme}.json`)
+        }
+      });
+      await sdTheme.hasInitialized;
+      sdTheme.buildAllPlatforms();
+    })
+  );
 }
 
 function cssOutput(destination) {
@@ -183,7 +183,7 @@ function cssOutput(destination) {
 
   return {
     prefix: 'nve',
-    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
+    transforms: ['attribute/cti', 'name/kebab', 'size/px', 'color/css', 'custom/validate'],
     files: [
       {
         format: 'custom/css',
@@ -203,7 +203,7 @@ function jsonOutput(destination) {
   return {
     prefix: 'nve',
     transformGroup: 'web',
-    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
+    transforms: ['attribute/cti', 'name/kebab', 'size/px', 'color/css', 'custom/validate'],
     files: [
       {
         format: 'custom/json',
@@ -222,7 +222,7 @@ function schemaOutput(destination) {
   return {
     prefix: 'nve',
     transformGroup: 'web',
-    transforms: ['attribute/cti', 'name/cti/kebab', 'size/px', 'color/css', 'custom/css-calc', 'custom/validate'],
+    transforms: ['attribute/cti', 'name/kebab', 'size/px', 'color/css', 'custom/validate'],
     files: [
       {
         format: 'custom/schema',
@@ -236,7 +236,6 @@ function schemaOutput(destination) {
 }
 
 function getTheme(path) {
-  // console.log(path.replace('dist/', '').replace(`src/`, '').split('.'))
   return path.replace('dist/', '').replace(`src/`, '').split('.')[0];
 }
 
