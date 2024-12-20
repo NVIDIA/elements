@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.18.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.3...@nvidia-elements/core-v1.18.4) (2024-12-20)
+
+
+### Bug Fixes
+
+* **elements:** header slot width ([1defada](https://github.com/NVIDIA/elements/commit/1defada627f3944e1b672c904c7b63777a61baca))
+
 ## [@nvidia-elements/core-v1.18.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.2...@nvidia-elements/core-v1.18.3) (2024-12-19)
 
 
