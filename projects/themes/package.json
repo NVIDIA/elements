@@ -35,7 +35,7 @@
     "lit": "catalog:",
     "postcss": "8.4.31",
     "publint": "catalog:",
-    "style-dictionary": "3.8.0",
+    "style-dictionary": "4.3.0",
     "vite": "catalog:",
     "vitest": "catalog:"
   },
