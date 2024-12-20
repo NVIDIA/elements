@@ -6,7 +6,8 @@ export default defineConfig(() => {
     base: '/elements/starters/typescript',
     publicDir: '../assets',
     build: {
-      outDir: '../dist'
+      outDir: '../dist',
+      emptyOutDir: true
     }
   };
 });

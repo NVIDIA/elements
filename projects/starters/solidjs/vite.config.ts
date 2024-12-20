@@ -7,8 +7,9 @@ export default defineConfig({
   base: '/elements/starters/solidjs',
   publicDir: '../assets',
   build: {
+    target: 'esnext',
     outDir: '../dist',
-    target: 'esnext'
+    emptyOutDir: true
   },
   plugins: [
     /* 

@@ -8,6 +8,7 @@ export default defineConfig({
   publicDir: '../assets',
   plugins: [react()],
   build: {
-    outDir: '../dist'
+    outDir: '../dist',
+    emptyOutDir: true
   }
 });
