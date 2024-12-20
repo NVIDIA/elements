@@ -30,12 +30,17 @@
   background: none;
 }
 
+:host(:not([closable]):not(:state(expanded))) {
+  pointer-events: none;
+}
+
 :host(:not([closable]):not(:state(expanded))) slot {
   display: none;
 }
 
 :host(:not([closable]):not(:state(expanded))) nve-icon-button {
   position: initial;
+  pointer-events: auto;
 }
 
 :host([closable]:not(:state(expanded))) {
