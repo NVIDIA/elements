@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.18.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.4...@nvidia-elements/core-v1.18.5) (2024-12-20)
+
+
+### Bug Fixes
+
+* **elements:** accordion header when disabled should not have hover icon color ([dc200f9](https://github.com/NVIDIA/elements/commit/dc200f994e95968ca138fba2c3af30dc1f79e6d1))
+* **elements:** nve-panel capturing pointer-events even when collapsed ([63bdc45](https://github.com/NVIDIA/elements/commit/63bdc45eb65a546b0007408638a8346b87bd7574))
+
 ## [@nvidia-elements/core-v1.18.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.3...@nvidia-elements/core-v1.18.4) (2024-12-20)
 
 
