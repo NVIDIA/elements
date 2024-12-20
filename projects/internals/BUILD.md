@@ -3,7 +3,7 @@
 This is an outline of the tooling that runs the Elements monorepo. This tooling powers a fully automated continuous deployment of multiple NPM/Artifactory packages as well as documentation. This configuration enables:
 
 - Building 30+ libraries, packages and starter projects
-- 1300+ unit tests, visual regressions tets and performance lighthouse tests
+- 1400+ unit tests, visual regressions tests and performance lighthouse tests
 - Fully automated deployment, versioning and publishing of packages and documentation
 
 The **CI pipeline takes an average of [~10 minutes](https://github.com/NVIDIA/elements/-/pipelines/12762390)** from the moment a MR is merged to being deployed and available to end users. The average clone, install and build of the **CI pipeline locally takes about ~1-2 mins** on a Macbook M1.
@@ -95,10 +95,6 @@ The configuration for the entire pipeline can be found in the root [.github/work
 
 The following are the repo wide tools that apply to all source code and projects.
 
-- [Semantic Release](https://github.com/semantic-release/semantic-release)
-
-  A open source tool for managing automatic publishing and deployment of libraries and packages following semver. Executes a release in the CI environment after every successful build. No human is directly involved in the release process and the releases are guaranteed to be unromantic and unsentimental.
-
 - [NodeJS/Corepack](https://nodejs.org/api/corepack.html)
 
   Corepack is a tool to help with managing versions of your package managers. It identifies the package manager is configured for the repo, transparently install it if needed, and run it without requiring explicit user interactions. This ensures that everyone will use exactly the same package manager version without them having to manually synchronize it each time an update is made.
@@ -110,6 +106,16 @@ The following are the repo wide tools that apply to all source code and projects
 - [Wireit](https://github.com/google/wireit)
 
   Wireit provides a way to unify node based build tooling across the repo, enabling build caching and dependency based build systems similar to Bazel.
+
+- [Semantic Release](https://github.com/semantic-release/semantic-release)
+
+  A open source tool for managing automatic publishing and deployment of libraries and packages following semver. Executes a release in the CI environment after every successful build. No human is directly involved in the release process and the releases are guaranteed to be unromantic and unsentimental.
+
+- [Vite](https://vite.dev/)
+
+  A open source tool for compiling and building web applications. Built on Rollup and ESBuild to provide a large plugin ecosystem and fast builds.
+
+## Linting/Formatting
 
 - [Husky](https://github.com/typicode/husky)
 
@@ -123,9 +129,19 @@ The following are the repo wide tools that apply to all source code and projects
 
   Ensures consistent code formatting for the entire repo.
 
+## Testing
+
 - [Playwright](https://playwright.dev/)
 
   Used for real browser unit testing and visual regression testing.
+
+- [Vitest](https://vitest.dev/)
+
+  Built on Vite, Vitest provides testing tools and runners to execute automated tests. These tests can be unit tests, e2e tests or visual snapshots.
+
+- [Lighthouse](https://github.com/GoogleChrome/lighthouse)
+
+  An open source project providing a suite of e2e tests for performance, accessibility and general best practices for web development.
 
 ## Repo Configuration
 
@@ -171,7 +187,7 @@ The following GitLab settings are configured for optimal code quality and stabil
 
   We use scheduled pipelines to run nightly builds of the documentation as well as full runs of [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) against [each of the 50+ components](https://github.com/NVIDIA/elements/-/jobs/82739890) in the Elements library.
 
-## Semantic Release
+## Release
 
 [Semantic Release](https://github.com/semantic-release/semantic-release) is a open source tool for managing automatic publishing and deployment of libraries and packages following [SEMVER](https://semver.org/). This enables a fix or feature to be available in Artifactory within minutes of it merging and passing the CI automated tests. To integrate into GitLab the following must be completed:
 
