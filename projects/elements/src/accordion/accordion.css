@@ -68,6 +68,6 @@
   --cursor: not-allowed;
 }
 
-#header:hover nve-icon-button {
+:host(:not([disabled])) #header:hover nve-icon-button {
   --color: var(--nve-sys-text-emphasis-color);
 }
