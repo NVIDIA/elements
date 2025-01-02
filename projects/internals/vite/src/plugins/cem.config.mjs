@@ -296,6 +296,20 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
                 stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
               }
             }
+
+            // remove any @deprecated types
+            if (
+              (node.type.kind === ts.SyntaxKind.LiteralType &&
+                node.type.literal.kind === ts.SyntaxKind.StringLiteral) ||
+              node.type.kind === ts.SyntaxKind.UnionType
+            ) {
+              const deprecated = node.jsDoc
+                ?.flatMap(doc => doc.tags?.find(tag => tag.tagName.escapedText === 'deprecated'))
+                ?.filter(i => i !== undefined);
+              if (deprecated?.length) {
+                stringLiteralsByTypeAlias.set(node.name.escapedText, '');
+              }
+            }
           }
           break;
         case ts.SyntaxKind.TypeReference:
