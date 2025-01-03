@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.18.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.5...@nvidia-elements/core-v1.18.6) (2025-01-03)
+
+
+### Bug Fixes
+
+* **elements:** combobox resize overflow ([eba9d14](https://github.com/NVIDIA/elements/commit/eba9d1402952acc91a711ecf535b2171844a9833))
+* **elements:** tree node width offset ([914390d](https://github.com/NVIDIA/elements/commit/914390dc718dbcfc79c6e064823f42beb64064ab))
+
 ## [@nvidia-elements/core-v1.18.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.4...@nvidia-elements/core-v1.18.5) (2024-12-20)
 
 
