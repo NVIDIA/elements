@@ -5,6 +5,7 @@ import { MetadataService } from '../internals/metadata.service.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './status.css?inline';
 import typography from '@nvidia-elements/styles/typography.css?inline';
+import layout from '@nvidia-elements/styles/layout.css?inline';
 
 export class Status extends LitElement {
   @property({ type: String }) tag = '';
@@ -16,7 +17,7 @@ export class Status extends LitElement {
     version: '0.0.0'
   };
 
-  static styles = useStyles([styles, typography]);
+  static styles = useStyles([styles, typography, layout]);
 
   openNewTab() {
     const newUrl = new URL(window.parent.location.href);
@@ -28,7 +29,7 @@ export class Status extends LitElement {
     return this.metadata
       ? html`
     <div class="status-summary">
-      <h2 nve-text="heading xl" class="dynamic-anchor">
+      <h2 nve-text="heading xl" nve-layout="pad-top:lg" class="dynamic-anchor">
         <a @click=${() => this.openNewTab()}><nve-icon name="link"></nve-icon></a>
         Release Status
       </h2>
