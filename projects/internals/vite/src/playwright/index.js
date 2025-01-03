@@ -17,7 +17,9 @@ const path = resolve(import.meta.dirname, './index.js');
 
 const timerId = setInterval(() => {
   lockFile
-    .lock(path)
+    .lock(path, {
+      stale: 30000
+    })
     .then(async release => {
       clearInterval(timerId);
       await new Promise(r => {
