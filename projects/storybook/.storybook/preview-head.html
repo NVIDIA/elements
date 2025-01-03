@@ -581,12 +581,16 @@
 
 <script>
   const scrollToAnchor = () => {
-    document.getElementById(window.parent.location.hash?.substring(1))?.scrollIntoView({
-      behavior: 'smooth'
+    const anchorId = new URL(window.parent.location.href).searchParams.get('anchor');
+    
+    document.getElementById(anchorId)?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
     });
   };
 
+  setTimeout(() => scrollToAnchor(), 0);
+  setTimeout(() => scrollToAnchor(), 500);
   setTimeout(() => scrollToAnchor(), 1500);
-  setTimeout(() => scrollToAnchor(), 3500);
-  setTimeout(() => scrollToAnchor(), 5000);
+  setTimeout(() => scrollToAnchor(), 2000);
 </script>
