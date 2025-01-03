@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/core",
-  "version": "1.18.5",
+  "version": "1.18.6",
   "description": "The Design Language for AI/ML Factories Building at the Speed of Light",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
