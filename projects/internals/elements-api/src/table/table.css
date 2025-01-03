@@ -1,0 +1,62 @@
+:host {
+  gap: var(--nve-ref-space-lg);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+h2,
+h3,
+h4 {
+  color: var(--nve-sys-text-color);
+  font-size: var(--nve-ref-font-size-600);
+  font-weight: var(--nve-ref-font-weight-regular);
+  margin: 0;
+}
+
+h2 {
+  margin: var(--nve-ref-space-md) 0 0 0;
+}
+
+h3 {
+  color: var(--nve-sys-text-muted-color);
+  font-size: var(--nve-ref-font-size-400);
+  margin: 0 0 var(--nve-ref-space-sm) 0;
+}
+
+h4 {
+  color: var(--nve-sys-text-muted-color);
+  font-size: var(--nve-ref-font-size-300);
+  margin: var(--nve-ref-space-lg) 0 var(--nve-ref-space-md) 0;
+}
+
+nve-grid {
+  min-height: 100px;
+}
+
+.tags {
+  display: flex;
+  gap: var(--nve-ref-space-xs);
+  flex-wrap: wrap;
+}
+
+.dynamic-anchor {
+  border: 0 !important;
+
+  & a {
+    opacity: 0;
+    margin-left: -24px;
+    padding-right: 8px;
+    cursor: pointer;
+  }
+
+  & nve-icon {
+    cursor: pointer;
+    opacity: 1;
+  }
+
+  &:hover a,
+  &:hover nve-icon {
+    opacity: 1;
+  }
+}
