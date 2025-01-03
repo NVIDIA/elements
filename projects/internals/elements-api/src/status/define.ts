@@ -3,6 +3,8 @@ import { Status } from './status.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/alert/define.js';
+import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/icon/define.js';
 
 define(Status);
 
