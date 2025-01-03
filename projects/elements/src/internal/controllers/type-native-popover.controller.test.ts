@@ -598,8 +598,10 @@ describe('type-popover.controller - hint', () => {
     await elementIsStable(element);
     expect(element.matches(':popover-open')).toBe(true);
 
+    const toggle = await untilEvent(element, 'toggle');
     const close = await untilEvent(element, 'close');
     await new Promise(r => setTimeout(() => r(null), 10));
+    expect(await toggle).toBeDefined();
     expect(await close).toBeDefined();
     expect(element.matches(':popover-open')).toBe(false);
   });

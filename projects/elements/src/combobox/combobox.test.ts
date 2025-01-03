@@ -397,7 +397,6 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
     element = fixture.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('input');
     select = fixture.querySelector('select');
-    await elementIsStable(element);
   });
 
   afterEach(() => {
@@ -455,10 +454,11 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
 
   it('should hide tags and display label when multiple is used and tags overflow container', async () => {
     expect(element.matches(':state(multiple-overflow)')).toBe(false);
+    element.style.setProperty('--width', '100px');
     select.multiple = true;
     select.options[0].selected = true;
     select.options[1].selected = true;
-    element.style.setProperty('--width', '50px');
+    select.options[2].selected = true;
 
     element.requestUpdate();
     await elementIsStable(element);
@@ -497,10 +497,13 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
 
   it('should remove overflow if additional space is available', async () => {
     expect(element.matches(':state(multiple-overflow)')).toBe(false);
-    select.multiple = true;
+    element.style.setProperty('--width', '110px');
     select.options[0].selected = true;
     select.options[1].selected = true;
-    element.style.setProperty('--width', '50px');
+    select.options[2].selected = true;
+    select.multiple = true;
+    element.requestUpdate();
+    await elementIsStable(element);
 
     element.requestUpdate();
     await elementIsStable(element);
@@ -510,6 +513,7 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
 
     select.options[0].selected = false;
     select.options[1].selected = false;
+    select.options[2].selected = false;
     element.style.setProperty('--width', 'initial');
 
     element.requestUpdate();
