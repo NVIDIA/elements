@@ -337,6 +337,7 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupOverflowListener() {
     if (this.#select?.multiple) {
+      this.#updateMultipleOverflow(this.#tags.getBoundingClientRect().width);
       const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0].contentRect.width));
       this.#observers.push(observer);
       observer.observe(this.#tags);
