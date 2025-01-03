@@ -1,8 +1,12 @@
-import { html, css, nothing, LitElement } from 'lit';
+import { html, nothing, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import showdown from 'showdown';
 import { MetadataService } from '../internals/metadata.service.js';
+import { useStyles } from '@nvidia-elements/core/internal';
+import styles from './table.css?inline';
+import typography from '@nvidia-elements/styles/typography.css?inline';
+import layout from '@nvidia-elements/styles/layout.css?inline';
 
 export class Table extends LitElement {
   @property({ type: String }) tag = '';
@@ -16,51 +20,15 @@ export class Table extends LitElement {
     version: '0.0.0'
   };
 
-  static styles = [
-    css`
-    :host {
-      gap: var(--nve-ref-space-lg);
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    h2, h3, h4 {
-      color: var(--nve-sys-text-color);
-      font-size: var(--nve-ref-font-size-600);
-      font-weight: var(--nve-ref-font-weight-regular);
-      margin: 0;
-    }
-
-    h2 {
-      margin: var(--nve-ref-space-md) 0 0 0;
-    }
-
-    h3 {
-      color: var(--nve-sys-text-muted-color);
-      font-size: var(--nve-ref-font-size-400);
-      margin: 0 0 var(--nve-ref-space-sm) 0;
-    }
-
-    h4 {
-      color: var(--nve-sys-text-muted-color);
-      font-size: var(--nve-ref-font-size-300);
-      margin: var(--nve-ref-space-lg) 0 var(--nve-ref-space-md) 0;
-    }
-
-    nve-grid {
-      min-height: 100px;
-    }
-
-    .tags {
-      display: flex;
-      gap: var(--nve-ref-space-xs);
-      flex-wrap: wrap;
-    }
-  `
-  ];
+  static styles = useStyles([styles, typography, layout]);
 
   #markdown = new showdown.Converter({ simplifiedAutoLink: true });
+
+  openNewTab() {
+    const newUrl = new URL(window.parent.location.href);
+    newUrl.searchParams.set('anchor', 'element-api');
+    window.open(newUrl, '_blank').focus();
+  }
 
   render() {
     return this.manifest
@@ -68,8 +36,11 @@ export class Table extends LitElement {
       ${
         this.type === 'all'
           ? html`
-      <div>
-        <h2>API - ${this.tag}</h2>
+      <div nve-layout="column gap:md">
+        <h2 nve-text="heading xl" nve-layout="pad-top:lg" class="dynamic-anchor">
+          <a @click=${() => this.openNewTab()}><nve-icon name="link"></nve-icon></a>
+          API - ${this.tag}
+        </h2>
         <nve-divider></nve-divider>
       </div>`
           : nothing
@@ -77,8 +48,8 @@ export class Table extends LitElement {
       ${
         this.type === 'properties' || this.type === 'all'
           ? html`
-        <div>
-          ${this.type === 'all' ? html`<h3>Properties</h3>` : nothing}
+        <div nve-layout="column gap:md">
+          ${this.type === 'all' ? html`<h3 nve-text="heading md">Properties</h3>` : nothing}
           <nve-grid>
             <nve-grid-header>
               <nve-grid-column width="120px">Property</nve-grid-column>
@@ -111,8 +82,8 @@ export class Table extends LitElement {
       ${
         this.type === 'events' || this.type === 'all'
           ? html`
-        <div>
-          ${this.type === 'all' ? html`<h3>Events</h3>` : nothing}
+        <div nve-layout="column gap:md">
+          ${this.type === 'all' ? html`<h3 nve-text="heading md">Events</h3>` : nothing}
           <nve-grid>
             <nve-grid-header>
               <nve-grid-column>Event</nve-grid-column>
@@ -134,8 +105,8 @@ export class Table extends LitElement {
       ${
         this.type === 'slots' || this.type === 'all'
           ? html`
-        <div>
-          ${this.type === 'all' ? html`<h3>Slots</h3>` : nothing}
+        <div nve-layout="column gap:md">
+          ${this.type === 'all' ? html`<h3 nve-text="heading md">Slots</h3>` : nothing}
           <nve-grid>
             <nve-grid-header>
               <nve-grid-column>Slot</nve-grid-column>
@@ -157,8 +128,8 @@ export class Table extends LitElement {
       ${
         this.type === 'css-properties' || this.type === 'all'
           ? html`
-        <div>
-          ${this.type === 'all' ? html`<h3>CSS Properties</h3>` : nothing}
+        <div nve-layout="column gap:md">
+          ${this.type === 'all' ? html`<h3 nve-text="heading md">CSS Properties</h3>` : nothing}
           <nve-grid>
             <nve-grid-header>
               <nve-grid-column>Name</nve-grid-column>
