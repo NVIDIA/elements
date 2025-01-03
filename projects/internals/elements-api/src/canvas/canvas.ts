@@ -1,13 +1,12 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { state } from 'lit/decorators/state.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './canvas.css?inline';
 
 export class Canvas extends LitElement {
   @property({ type: String }) private source: string;
 
-  @state() private showSource = false;
+  @property() private showSource = false;
 
   static metadata = {
     tag: 'nve-api-canvas',

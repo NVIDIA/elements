@@ -23,7 +23,7 @@ export const H2 = (args) => {
   <Unstyled>
     <div nve-layout="column gap:xs align:stretch pad-top:xl">
       <h2 nve-text="heading xl" id={args.id} className="dynamic-anchor">
-        <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
+        <a href={`./?path=/docs/${id}&anchor=${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
         {args.children}
       </h2>
       <nve-divider></nve-divider>
@@ -36,8 +36,8 @@ export const H3 = (args) => {
   const id = new URLSearchParams(window.location.search).get('id');
   return (
   <Unstyled>
-    <h3 id={args.id} nve-text="heading lg"  nve-layout="pad-top:lg" className="dynamic-anchor">
-      <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
+    <h3 id={args.id} nve-text="heading lg" nve-layout="pad-top:lg" className="dynamic-anchor">
+      <a href={`./?path=/docs/${id}&anchor=${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
       {args.children}
     </h3>
   </Unstyled>
@@ -48,8 +48,8 @@ export const H4 = (args) => {
   const id = new URLSearchParams(window.location.search).get('id');
   return (
   <Unstyled>
-    <h4 id={args.id} nve-text="heading md"  nve-layout="pad-top:lg" className="dynamic-anchor">
-      <a href={`./?path=/docs/${id}#${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
+    <h4 id={args.id} nve-text="heading md" nve-layout="pad-top:lg" className="dynamic-anchor">
+      <a href={`./?path=/docs/${id}&anchor=${args.id}`} target="_blank"><nve-icon name="link"></nve-icon></a>
       {args.children}
     </h4>
   </Unstyled>
@@ -123,15 +123,17 @@ export const Canvas = ({ of, story }) => {
   const playground = createPlaygroundURLFromStorySource(source, { globals, id: resolvedOf.story.id });
   const [sourceType, setSourceType] = useState(globals?.sourceType ?? '');
   const [updatedSource, setUpdatedSource] = useState(source, { scope, sourceType });
+  const [updatedShowSource, setUpdatedShowSource] = useState(false);
   const updateSource = (sourceType) => {
+    setUpdatedShowSource(true);
     setSourceType(sourceType);
     setUpdatedSource(setSourcePackageScope(source, { scope, sourceType }));
   };
 
   return (
-    <NveApiCanvas source={updatedSource}>
+    <NveApiCanvas source={updatedSource}  showSource={updatedShowSource} >
       <div style={{ height: story?.height ?? '', width: story?.width, overflow: 'hidden' }}><Story of={of} inline={story?.inline} height={story?.height} /></div>
-      <NveButton selected={sourceType !== 'react'} container="flat" slot="suffix" onClick={() => updateSource('html')}>HTML </NveButton>
+      <NveButton selected={sourceType !== 'react'} container="flat" slot="suffix" onClick={() => updateSource('html')}>HTML</NveButton>
       <NveButton selected={sourceType === 'react'} container="flat" slot="suffix" onClick={() => updateSource('react')}>React</NveButton>
       <NveButton container="flat" slot="suffix">
         <a href={playground} target="_blank">Playground</a>
