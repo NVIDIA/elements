@@ -4,6 +4,7 @@ import { state } from 'lit/decorators/state.js';
 import { MetadataService } from '../internals/metadata.service.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './status.css?inline';
+import typography from '@nvidia-elements/styles/typography.css?inline';
 
 export class Status extends LitElement {
   @property({ type: String }) tag = '';
@@ -15,13 +16,24 @@ export class Status extends LitElement {
     version: '0.0.0'
   };
 
-  static styles = useStyles([styles]);
+  static styles = useStyles([styles, typography]);
+
+  openNewTab() {
+    const newUrl = new URL(window.parent.location.href);
+    newUrl.searchParams.set('anchor', 'element-status');
+    window.open(newUrl, '_blank').focus();
+  }
 
   render() {
     return this.metadata
       ? html`
     <div class="status-summary">
-      <h2>Release Status</h2>
+      <h2 nve-text="heading xl" class="dynamic-anchor">
+        <a @click=${() => this.openNewTab()}><nve-icon name="link"></nve-icon></a>
+        Release Status
+      </h2>
+      <nve-divider></nve-divider>
+
       <p>All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
       <div class="status-group">
         <nve-badge .status=${this.metadata.status === 'pre-release' ? 'warning' : 'pending'}>pre-release <nve-icon name="exclamation-triangle"></nve-icon></nve-badge>
