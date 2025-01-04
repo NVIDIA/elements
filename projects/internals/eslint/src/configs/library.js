@@ -1,7 +1,15 @@
 import js from '@eslint/js';
+import { config } from '@weiran.zsd/multi-eslint-rule-config'; // https://github.com/eslint/eslint/issues/19013
 
 const source = ['**/src/**/*.ts', '**/src/**/*.js', '**/src/**/*.tsx', '**/src/**/*.d.ts'];
-const tests = ['**/src/test/*.ts', '**/*.test.ts', '**/*.test.axe.ts', '**/*.test.ssr.ts'];
+const tests = [
+  '**/src/test/*.ts',
+  '**/*.test.ts',
+  '**/*.test.visual.ts',
+  '**/*.test.lighthouse.ts',
+  '**/*.test.axe.ts',
+  '**/*.test.ssr.ts'
+];
 const stories = ['**/*.stories.ts'];
 const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**'];
 
@@ -20,29 +28,41 @@ export const libraryConfig = [
         { name: 'window', message: 'Use globalThis instead.' },
         { name: 'location', message: 'Use globalThis.location instead.' },
         { name: 'document', message: 'Use globalThis.document instead.' }
-      ],
-      'no-restricted-imports': [
-        'error',
+      ]
+    }
+  },
+  {
+    files: [...source],
+    ignores: [...ignores, ...tests, ...stories],
+    ...config(
+      [
         {
-          patterns: [
+          rule: 'no-restricted-imports',
+          ruleConfig: [
+            'error',
             {
-              group: [
-                '@nvidia-elements/core/**/*.css',
-                '@nvidia-elements/core/**/*.css?inline',
-                '@nvidia-elements/styles/**/*.css',
-                '@nvidia-elements/styles/**/*.css?inline'
-              ],
-              message:
-                'Inline CSS utils are not allowed in library APIs to prevent performance issues, use shadow DOM encapsulated CSS instead'
-            },
-            {
-              group: ['@nve-internals/'],
-              message: 'Repository internal utilities and libraries cannot be used in published packages.'
+              patterns: [
+                {
+                  group: [
+                    '@nvidia-elements/core/**/*.css',
+                    '@nvidia-elements/core/**/*.css?inline',
+                    '@nvidia-elements/styles/**/*.css',
+                    '@nvidia-elements/styles/**/*.css?inline'
+                  ],
+                  message:
+                    'Inline CSS utils are not allowed in library APIs to prevent performance issues, use shadow DOM encapsulated CSS instead'
+                },
+                {
+                  group: ['@nve-internals/'],
+                  message: 'Repository internal utilities and libraries cannot be used in published packages.'
+                }
+              ]
             }
           ]
         }
-      ]
-    }
+      ],
+      'no-inline-css'
+    )
   },
   {
     files: [...source],
@@ -55,18 +75,24 @@ export const libraryConfig = [
       ...stories,
       ...ignores
     ],
-    rules: {
-      'no-restricted-imports': [
-        'error',
+    ...config(
+      [
         {
-          patterns: [
+          rule: 'no-restricted-imports',
+          ruleConfig: [
+            'error',
             {
-              group: ['@nvidia-elements/core/**/define.js'],
-              message: 'Side effect imports should only exist in "define.js" entrypoints'
+              patterns: [
+                {
+                  group: ['@nvidia-elements/core/**/define.js'],
+                  message: 'Side effect imports should only exist in "define.js" entrypoints'
+                }
+              ]
             }
           ]
         }
-      ]
-    }
+      ],
+      'no-side-effect-imports'
+    )
   }
 ];

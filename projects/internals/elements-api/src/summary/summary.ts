@@ -9,6 +9,8 @@ import styles from './summary.css?inline';
 
 const showdownOptions = { simplifiedAutoLink: true };
 
+const PACKAGE_URL = 'https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages';
+
 export class Summary extends LitElement {
   @property({ type: String }) tag = '';
 
@@ -37,7 +39,7 @@ export class Summary extends LitElement {
           <div class="group">
             <nve-button size="sm" style="margin-left: auto"><nve-icon name="checklist" size="sm"></nve-icon><a href=${this.element.aria}>API Spec</a></nve-button>
             ${this.element.manifest.metadata.figma ? html`<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href=${this.element.manifest.metadata.figma}>Figma</a></nve-button>` : nothing}
-            <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages">Released ${this.element.manifest.metadata.since}</a></nve-button>
+            <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href=${PACKAGE_URL}>Released ${this.element.manifest.metadata.since}</a></nve-button>
           </div>
         </div>
       </section>
