@@ -5,8 +5,6 @@ import showdown from 'showdown';
 import { MetadataService } from '../internals/metadata.service.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './table.css?inline';
-import typography from '@nvidia-elements/styles/typography.css?inline';
-import layout from '@nvidia-elements/styles/layout.css?inline';
 
 export class Table extends LitElement {
   @property({ type: String }) tag = '';
@@ -20,14 +18,14 @@ export class Table extends LitElement {
     version: '0.0.0'
   };
 
-  static styles = useStyles([styles, typography, layout]);
+  static styles = useStyles([styles]);
 
   #markdown = new showdown.Converter({ simplifiedAutoLink: true });
 
-  openNewTab() {
-    const newUrl = new URL(window.parent.location.href);
+  get #anchor() {
+    const newUrl = new URL(globalThis.parent.location.href);
     newUrl.searchParams.set('anchor', 'element-api');
-    window.open(newUrl, '_blank').focus();
+    return newUrl.toString();
   }
 
   render() {
@@ -36,9 +34,9 @@ export class Table extends LitElement {
       ${
         this.type === 'all'
           ? html`
-      <div nve-layout="column gap:md">
-        <h2 nve-text="heading xl" nve-layout="pad-top:lg" class="dynamic-anchor">
-          <a @click=${() => this.openNewTab()}><nve-icon name="link"></nve-icon></a>
+      <div>
+        <h2 class="dynamic-anchor">
+          <a href=${this.#anchor} target="_blank" aria-label="copy link"><nve-icon name="link"></nve-icon></a>
           API - ${this.tag}
         </h2>
         <nve-divider></nve-divider>
@@ -48,8 +46,8 @@ export class Table extends LitElement {
       ${
         this.type === 'properties' || this.type === 'all'
           ? html`
-        <div nve-layout="column gap:md">
-          ${this.type === 'all' ? html`<h3 nve-text="heading md">Properties</h3>` : nothing}
+        <div>
+          ${this.type === 'all' ? html`<h3>Properties</h3>` : nothing}
           <nve-grid>
             <nve-grid-header>
               <nve-grid-column width="120px">Property</nve-grid-column>
@@ -82,8 +80,8 @@ export class Table extends LitElement {
       ${
         this.type === 'events' || this.type === 'all'
           ? html`
-        <div nve-layout="column gap:md">
-          ${this.type === 'all' ? html`<h3 nve-text="heading md">Events</h3>` : nothing}
+        <div>
+          ${this.type === 'all' ? html`<h3>Events</h3>` : nothing}
           <nve-grid>
             <nve-grid-header>
               <nve-grid-column>Event</nve-grid-column>
@@ -105,8 +103,8 @@ export class Table extends LitElement {
       ${
         this.type === 'slots' || this.type === 'all'
           ? html`
-        <div nve-layout="column gap:md">
-          ${this.type === 'all' ? html`<h3 nve-text="heading md">Slots</h3>` : nothing}
+        <div>
+          ${this.type === 'all' ? html`<h3>Slots</h3>` : nothing}
           <nve-grid>
             <nve-grid-header>
               <nve-grid-column>Slot</nve-grid-column>
@@ -128,8 +126,8 @@ export class Table extends LitElement {
       ${
         this.type === 'css-properties' || this.type === 'all'
           ? html`
-        <div nve-layout="column gap:md">
-          ${this.type === 'all' ? html`<h3 nve-text="heading md">CSS Properties</h3>` : nothing}
+        <div>
+          ${this.type === 'all' ? html`<h3>CSS Properties</h3>` : nothing}
           <nve-grid>
             <nve-grid-header>
               <nve-grid-column>Name</nve-grid-column>

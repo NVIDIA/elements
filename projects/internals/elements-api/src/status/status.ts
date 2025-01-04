@@ -4,8 +4,6 @@ import { state } from 'lit/decorators/state.js';
 import { MetadataService } from '../internals/metadata.service.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './status.css?inline';
-import typography from '@nvidia-elements/styles/typography.css?inline';
-import layout from '@nvidia-elements/styles/layout.css?inline';
 
 export class Status extends LitElement {
   @property({ type: String }) tag = '';
@@ -17,20 +15,20 @@ export class Status extends LitElement {
     version: '0.0.0'
   };
 
-  static styles = useStyles([styles, typography, layout]);
+  static styles = useStyles([styles]);
 
-  openNewTab() {
-    const newUrl = new URL(window.parent.location.href);
+  get #anchor() {
+    const newUrl = new URL(globalThis.parent.location.href);
     newUrl.searchParams.set('anchor', 'element-status');
-    window.open(newUrl, '_blank').focus();
+    return newUrl.toString();
   }
 
   render() {
     return this.metadata
       ? html`
     <div class="status-summary">
-      <h2 nve-text="heading xl" nve-layout="pad-top:lg" class="dynamic-anchor">
-        <a @click=${() => this.openNewTab()}><nve-icon name="link"></nve-icon></a>
+      <h2 class="dynamic-anchor">
+        <a href=${this.#anchor} target="_blank" aria-label="copy link"><nve-icon name="link"></nve-icon></a>
         Release Status
       </h2>
       <nve-divider></nve-divider>

@@ -16,12 +16,12 @@ h4 {
 
 h2 {
   margin: var(--nve-ref-space-md) 0 0 0;
+  font-size: var(--nve-ref-font-size-600);
 }
 
 h3 {
   color: var(--nve-sys-text-muted-color);
   font-size: var(--nve-ref-font-size-400);
-  margin: 0 0 var(--nve-ref-space-sm) 0;
 }
 
 h4 {
@@ -59,4 +59,10 @@ nve-grid {
   &:hover nve-icon {
     opacity: 1;
   }
+}
+
+div:has(h3, nve-grid) {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nve-ref-space-md);
 }

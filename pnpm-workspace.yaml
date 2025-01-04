@@ -42,7 +42,7 @@ catalog:
   '@vitest/coverage-istanbul': 3.0.0-beta.3
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
   cpy-cli: 5.0.0
-  eslint: 9.12.0
+  eslint: 9.17.0
   glob: 11.0.0
   lighthouse: 11.4.0
   lit: ^3.2.1
