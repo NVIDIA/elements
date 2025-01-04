@@ -33,7 +33,7 @@ function serialize(data, compress = true) {
   const json = JSON.stringify(data);
   const encoded = new TextEncoder().encode(json);
   const array = compress ? gzipSync(encoded) : encoded;
-  const base64 = window.btoa(String.fromCharCode(...array));
+  const base64 = globalThis.btoa(String.fromCharCode(...array));
   return encodeURIComponent(base64);
 }
 

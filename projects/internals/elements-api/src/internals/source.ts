@@ -31,8 +31,8 @@ export function setSourcePackageScope(source: string, config: { scope: string; s
   if (
     source.includes('@nve-labs') ||
     source.includes('nve-codeblock') ||
-    window.location.href.includes('internal') ||
-    window.location.href.includes('migration')
+    globalThis.location.href.includes('internal') ||
+    globalThis.location.href.includes('migration')
   ) {
     return source;
   }
