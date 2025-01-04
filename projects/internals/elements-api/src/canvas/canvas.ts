@@ -4,9 +4,9 @@ import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './canvas.css?inline';
 
 export class Canvas extends LitElement {
-  @property({ type: String }) private source: string;
+  @property({ type: String }) source: string;
 
-  @property() private showSource = false;
+  @property({ type: Boolean }) showSource = false;
 
   static metadata = {
     tag: 'nve-api-canvas',
@@ -28,7 +28,7 @@ export class Canvas extends LitElement {
         </div>
         <div style="width: 100%">
           <nve-toolbar container="flat">
-            <nve-button container="flat" @click=${() => (this.showSource = !this.showSource)}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
+            <nve-button container="flat" @click=${() => (this['showSource'] = !this.showSource)}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
             <slot name="suffix"></slot>
           </nve-toolbar>
         </div>

@@ -46,6 +46,7 @@ p {
 
 h2 {
   font-size: var(--nve-ref-font-size-600);
+  padding-top: var(--nve-ref-space-lg);
 }
 
 p {
