@@ -430,6 +430,33 @@ export const Overflow = {
   `
 };
 
+export const BulkCreation = {
+  render: () => html`
+    <nve-tree>
+      <nve-tree-node id="root" expandable>Test</nve-tree-node>
+    </nve-tree>
+    <script type="module">
+    const rootEl = document.querySelector('nve-tree-node#root');
+
+    rootEl.addEventListener('open', () => {
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < 400; i++) {
+        rootEl.expanded = true;
+        const childEl = document.createElement('nve-tree-node');
+        childEl.innerText = 'Child ' + i;
+        fragment.append(childEl);
+      }
+      rootEl.append(fragment);
+    });
+
+    rootEl.addEventListener('close', () => {
+      rootEl.expanded = false;
+      rootEl.replaceChildren(document.createTextNode('Test'));
+    });
+  </script>
+  `
+};
+
 export class TestDynamicTree extends LitElement {
   @state() nodes = createTree();
 
