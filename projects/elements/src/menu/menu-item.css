@@ -1,5 +1,6 @@
 :host {
   --border-radius: var(--nve-ref-border-radius-xs);
+  --border-background: var(--nve-sys-accent-secondary-background);
   --font-size: var(--nve-ref-font-size-100);
   --font-weight: var(--nve-ref-font-weight-medium);
   --color: var(--nve-sys-interaction-color);
@@ -66,7 +67,7 @@
 :host([status='danger']) {
   --nve-sys-interaction-state-base: var(--nve-sys-support-danger-muted-color);
   --nve-sys-interaction-selected-color: var(--nve-sys-support-danger-emphasis-color);
-  --nve-sys-accent-secondary-background: var(--nve-sys-support-danger-emphasis-color);
+  --border-background: var(--nve-sys-support-danger-emphasis-color);
   --color: var(--nve-sys-support-danger-emphasis-color);
 }
 
@@ -77,7 +78,7 @@
 :host(:state(current)) [internal-host]:after {
   width: var(--nve-ref-border-width-xl);
   border-radius: var(--border-radius);
-  background: var(--nve-sys-accent-secondary-background);
+  background: var(--border-background);
   content: '';
   display: block;
   position: absolute;
