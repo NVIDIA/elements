@@ -143,7 +143,7 @@ describe(`${Tree.metadata.tag} slots`, () => {
     expect(node1.selected).toBe(false);
     expect(node2.selected).toBe(true);
 
-    const event = untilEvent(element, '_node-update');
+    const event = untilEvent(node0.shadowRoot as any, 'slotchange');
     node2.remove();
     await event;
     await elementIsStable(element);
@@ -158,7 +158,7 @@ describe(`${Tree.metadata.tag} slots`, () => {
     expect(node0.shadowRoot.querySelector('nve-icon-button')).toBeTruthy();
     await elementIsStable(element);
 
-    const event = untilEvent(element, '_node-update');
+    const event = untilEvent(node0.shadowRoot as any, 'slotchange');
     node1.remove();
     node2.remove();
     await event;

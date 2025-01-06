@@ -32,8 +32,11 @@ class CustomStateSetPolyfill extends Set {
 
   delete(state: string) {
     super.delete(state);
-    this._stateSet?.delete(state);
-    this._element.removeAttribute(`state--${state.replace('--', '')}`);
+    try {
+      this._stateSet?.delete(state);
+    } catch {
+      this._element.removeAttribute(`state--${state.replace('--', '')}`);
+    }
     return true;
   }
 

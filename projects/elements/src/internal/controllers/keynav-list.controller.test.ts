@@ -58,7 +58,9 @@ describe('keynav-list.controller', () => {
 
   it('should set activate a item on click', async () => {
     await elementIsStable(element);
-    element.keynavListConfig.items[2].dispatchEvent(new MouseEvent('mouseup', { bubbles: true, buttons: 1 }));
+    element.keynavListConfig.items[2].dispatchEvent(
+      new PointerEvent('pointerup', { bubbles: true, composed: true, buttons: 1 })
+    );
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
@@ -68,10 +70,10 @@ describe('keynav-list.controller', () => {
   it('should support horizontal arrow key navigation', async () => {
     await elementIsStable(element);
     element.keynavListConfig.items[0].dispatchEvent(
-      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true })
     );
     element.keynavListConfig.items[1].dispatchEvent(
-      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true })
     );
 
     await elementIsStable(element);
@@ -79,8 +81,12 @@ describe('keynav-list.controller', () => {
     expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[2].tabIndex).toBe(0);
 
-    element.keynavListConfig.items[2].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
-    element.keynavListConfig.items[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
+    element.keynavListConfig.items[2].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true, composed: true })
+    );
+    element.keynavListConfig.items[1].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true, composed: true })
+    );
     await elementIsStable(element);
 
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
@@ -93,10 +99,10 @@ describe('keynav-list.controller', () => {
 
     await elementIsStable(element);
     element.keynavListConfig.items[0].dispatchEvent(
-      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true })
     );
     element.keynavListConfig.items[1].dispatchEvent(
-      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true })
     );
 
     await elementIsStable(element);
@@ -104,8 +110,12 @@ describe('keynav-list.controller', () => {
     expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[2].tabIndex).toBe(-1);
 
-    element.keynavListConfig.items[2].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
-    element.keynavListConfig.items[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true }));
+    element.keynavListConfig.items[2].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true, composed: true })
+    );
+    element.keynavListConfig.items[1].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowLeft', bubbles: true, composed: true })
+    );
     await elementIsStable(element);
 
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
@@ -116,16 +126,24 @@ describe('keynav-list.controller', () => {
   it('should support vertical arrow key navigation', async () => {
     element.layout = 'vertical';
     await elementIsStable(element);
-    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true }));
-    element.keynavListConfig.items[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true }));
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true })
+    );
+    element.keynavListConfig.items[1].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true })
+    );
 
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[2].tabIndex).toBe(0);
 
-    element.keynavListConfig.items[2].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowUp', bubbles: true }));
-    element.keynavListConfig.items[1].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowUp', bubbles: true }));
+    element.keynavListConfig.items[2].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowUp', bubbles: true, composed: true })
+    );
+    element.keynavListConfig.items[1].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowUp', bubbles: true, composed: true })
+    );
     await elementIsStable(element);
 
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
@@ -136,7 +154,9 @@ describe('keynav-list.controller', () => {
   it('should support vertical End shortcut', async () => {
     element.layout = 'vertical';
     await elementIsStable(element);
-    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'End', bubbles: true }));
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'End', bubbles: true, composed: true })
+    );
 
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
@@ -147,7 +167,9 @@ describe('keynav-list.controller', () => {
   it('should support vertical Home shortcut', async () => {
     element.layout = 'vertical';
     await elementIsStable(element);
-    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'Home', bubbles: true }));
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'Home', bubbles: true, composed: true })
+    );
 
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
@@ -158,7 +180,9 @@ describe('keynav-list.controller', () => {
   it('should support PageDown shortcut', async () => {
     element.layout = 'vertical';
     await elementIsStable(element);
-    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'PageDown', bubbles: true }));
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'PageDown', bubbles: true, composed: true })
+    );
 
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
@@ -168,13 +192,17 @@ describe('keynav-list.controller', () => {
   it('should support PageUp shortcut', async () => {
     element.layout = 'vertical';
     await elementIsStable(element);
-    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'PageDown', bubbles: true }));
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'PageDown', bubbles: true, composed: true })
+    );
 
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[4].tabIndex).toBe(0);
 
-    element.keynavListConfig.items[4].dispatchEvent(new KeyboardEvent('keydown', { code: 'PageUp', bubbles: true }));
+    element.keynavListConfig.items[4].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'PageUp', bubbles: true, composed: true })
+    );
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
     expect(element.keynavListConfig.items[4].tabIndex).toBe(-1);
@@ -184,13 +212,17 @@ describe('keynav-list.controller', () => {
     element.layout = 'vertical';
     element.loop = true;
     await elementIsStable(element);
-    element.keynavListConfig.items[0].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowUp', bubbles: true }));
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowUp', bubbles: true, composed: true })
+    );
 
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
     expect(element.keynavListConfig.items[5].tabIndex).toBe(0);
 
-    element.keynavListConfig.items[5].dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true }));
+    element.keynavListConfig.items[5].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true })
+    );
     await elementIsStable(element);
     expect(element.keynavListConfig.items[0].tabIndex).toBe(0);
     expect(element.keynavListConfig.items[5].tabIndex).toBe(-1);
@@ -201,10 +233,10 @@ describe('keynav-list.controller', () => {
 
     await elementIsStable(element);
     element.keynavListConfig.items[0].dispatchEvent(
-      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true })
     );
     element.keynavListConfig.items[1].dispatchEvent(
-      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true })
     );
 
     await elementIsStable(element);
@@ -316,7 +348,7 @@ describe('disabled behaviors keynav-list.controller', () => {
   it('should skip disabled items', async () => {
     await elementIsStable(element);
     element.keynavListConfig.items[0].dispatchEvent(
-      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true })
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true })
     );
 
     await elementIsStable(element);
