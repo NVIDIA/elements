@@ -150,11 +150,6 @@ export class TreeNode extends LitElement {
     this.#nodeUpdate();
   }
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    this.#nodeUpdate();
-  }
-
   /** opens and sets the expanded state automatically if behaviorExpand is true */
   open() {
     this.#typeExpandableController.open();
@@ -168,7 +163,6 @@ export class TreeNode extends LitElement {
   #nodeUpdate() {
     this.requestUpdate();
     this.#toggleExpandableState();
-    this.dispatchEvent(new CustomEvent('_node-update', { bubbles: true }));
   }
 
   #toggleExpandableState() {
