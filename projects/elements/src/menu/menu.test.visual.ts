@@ -37,14 +37,14 @@ function template(theme: '' | 'dark' = '') {
 
   <nve-menu>
     <nve-menu-item>•︎•︎•</nve-menu-item>
-    <nve-menu-item selected>•︎•︎•</nve-menu-item>
+    <nve-menu-item current="page">•︎•︎•</nve-menu-item>
     <nve-menu-item>•︎•︎•</nve-menu-item>
     <nve-menu-item>•︎•︎•</nve-menu-item>
   </nve-menu>
 
   <nve-menu>
     <nve-menu-item>•︎•︎•</nve-menu-item>
-    <nve-menu-item current="page">•︎•︎•</nve-menu-item>
+    <nve-menu-item selected>•︎•︎•</nve-menu-item>
     <nve-menu-item>•︎•︎•</nve-menu-item>
     <nve-menu-item>•︎•︎•</nve-menu-item>
   </nve-menu>
