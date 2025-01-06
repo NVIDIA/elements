@@ -63,6 +63,17 @@ export const Current = {
   `
 };
 
+export const BorderBackground = {
+  render: () => html`
+  <nve-menu>
+    <nve-menu-item>item 1</nve-menu-item>
+    <nve-menu-item current="page" style="--border-background: var(--nve-ref-color-brand-green-900);">item 2</nve-menu-item>
+    <nve-menu-item>item 3</nve-menu-item>
+    <nve-menu-item>item 4</nve-menu-item>
+  </nve-menu>
+  `
+};
+
 export const Disabled = {
   render: () => html`
   <nve-menu>
