@@ -10,6 +10,7 @@ import styles from './menu-item.css?inline';
  * @slot suffix - slot for suffix icon
  * @cssprop --background
  * @cssprop --border-radius
+ * @cssprop --border-background
  * @cssprop --font-size
  * @cssprop --color
  * @cssprop --padding
