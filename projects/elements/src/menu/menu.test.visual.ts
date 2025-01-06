@@ -78,5 +78,12 @@ function template(theme: '' | 'dark' = '') {
     <nve-menu-item status="danger"><nve-icon name="gear"></nve-icon> •︎•︎•</nve-menu-item>
     <nve-menu-item status="danger">•︎•︎• <nve-icon id="warning-icon" size="md" name="exclamation-triangle" style="margin-left: auto"></nve-icon></nve-menu-item>
   </nve-menu>
+
+  <nve-menu>
+    <nve-menu-item>•︎•︎•</nve-menu-item>
+    <nve-menu-item current="page" style="--border-background: var(--nve-ref-color-brand-green-900);">•︎•︎•</nve-menu-item>
+    <nve-menu-item>•︎•︎•</nve-menu-item>
+    <nve-menu-item>•︎•︎•</nve-menu-item>
+  </nve-menu>
   `;
 }

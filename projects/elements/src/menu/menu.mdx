@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
 import { Canvas } from '@internals/storybook/blocks';
-import { Default, Selected, Current, Disabled, Icons, Scroll, Dropdown, VerticalNavigationDrawer, VerticalNavigationPanel, MenuItemTooltip, Complex, Links, Suffix, DangerStatus } from './menu.stories';
+import { Default, Selected, Current, Disabled, Icons, Scroll, Dropdown, VerticalNavigationDrawer, VerticalNavigationPanel, MenuItemTooltip, Complex, Links, Suffix, DangerStatus, BorderBackground } from './menu.stories';
 
 <Meta title="Elements/Menu/Documentation" />
 
@@ -38,6 +38,12 @@ import '@nvidia-elements/core/menu/define.js';
 <nve-api-detail tag="nve-menu-item" type="property" value="current"></nve-api-detail>
 
 <Canvas of={Current} />
+
+## Border Background
+
+By default Menu will show a blue border on the selected item. You can change the border color by setting `--border-background` on the `<nve-menu-item>`
+
+<Canvas of={BorderBackground} />
 
 ## Disabled
 
