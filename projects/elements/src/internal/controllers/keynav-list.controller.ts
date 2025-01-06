@@ -21,7 +21,7 @@ export function keyNavigationList<T extends ReactiveElement & KeynavListElement>
 }
 
 export class KeyNavigationListController<T extends ReactiveElement & KeynavListElement> implements ReactiveController {
-  get #config(): KeynavListConfig {
+  get #config(): KeynavListConfig & { items: HTMLElement[] } {
     return {
       layout: 'horizontal',
       manageFocus: true,
@@ -45,20 +45,19 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
   async hostConnected() {
     await this.host.updateComplete;
     this.#initializeTabIndex();
-    this.host.shadowRoot?.addEventListener('mouseup', (e: MouseEvent) => this.#clickItem(e));
-    this.host.shadowRoot?.addEventListener('keydown', (e: KeyboardEvent) => this.#focusItem(e));
-    this.host.addEventListener('mouseup', (e: MouseEvent) => this.#clickItem(e));
+    this.host.addEventListener('pointerup', (e: PointerEvent) => this.#clickItem(e));
     this.host.addEventListener('keydown', (e: KeyboardEvent) => this.#focusItem(e));
   }
 
   #initializeTabIndex() {
-    if (this.#config.manageFocus && this.#config.manageTabindex && !this.#keynavDisabled) {
-      initializeKeyListItems(this.#config.items);
+    const { manageFocus, manageTabindex, items } = this.#config;
+    if (manageFocus && manageTabindex && !this.#keynavDisabled) {
+      initializeKeyListItems(items);
     }
   }
 
   #clickItem(e: Event) {
-    const item = this.#getActiveItem(e);
+    const item = this.#getActiveItem(e, this.#config.items);
     if (item) {
       this.#setActiveItem(e, item);
     }
@@ -66,10 +65,10 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
 
   #focusItem(e: KeyboardEvent) {
     if (validKeyNavigationCode(e) && !this.#keynavDisabled) {
-      const activeItem = this.#getActiveItem(e);
+      const { loop, layout, dir, items } = this.#config;
+      const activeItem = this.#getActiveItem(e, items);
       if (activeItem) {
-        const { loop, layout, dir } = this.#config;
-        const { next, previous } = getNextKeyListItem(activeItem, Array.from(this.#config.items), {
+        const { next, previous } = getNextKeyListItem(activeItem, Array.from(items), {
           loop,
           layout,
           dir,
@@ -77,24 +76,24 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
         });
 
         if (next !== previous) {
-          this.#setActiveItem(e, this.#config.items[next], this.#config.items[previous]);
+          this.#setActiveItem(e, items[next], items[previous]);
         }
       }
     }
   }
 
-  #getActiveItem(e: Event) {
-    return e.composedPath().find(i => Array.from(this.#config.items).find(c => c === i)) as HTMLElement;
+  #getActiveItem(e: Event, items: HTMLElement[]) {
+    return e.composedPath().find(i => items.find(c => c === i)) as HTMLElement;
   }
 
   #setActiveItem(e: any, activeItem: HTMLElement, previousItem?: HTMLElement) {
-    if (this.#config.manageFocus) {
-      if (this.#config.manageTabindex) {
-        setActiveKeyListItem(this.#config.items, activeItem);
+    const { manageFocus, manageTabindex, items } = this.#config;
+    if (manageFocus) {
+      if (manageTabindex) {
+        setActiveKeyListItem(items, activeItem);
       }
 
-      const items = getFlattenedFocusableItems(activeItem);
-      focusElement(items[0] ?? activeItem);
+      focusElement(getFlattenedFocusableItems(activeItem)[0] ?? activeItem);
       e.preventDefault();
     }
 
@@ -103,7 +102,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
       previousItem,
       code: e.code,
       metaKey: e.ctrlKey || e.metaKey,
-      items: this.#config.items
+      items
     };
     activeItem.dispatchEvent(new CustomEvent('nve-key-change', { bubbles: true, detail }));
   }

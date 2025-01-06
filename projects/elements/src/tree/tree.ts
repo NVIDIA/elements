@@ -7,6 +7,7 @@ import {
   attachInternals,
   getFlattenedFocusableItems,
   keyNavigationList,
+  onChildListMutation,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { updateNodeSelection } from './utils.js';
@@ -80,12 +81,28 @@ export class Tree extends LitElement {
     `;
   }
 
+  #observers: MutationObserver[] = [];
+
   connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
     this._internals.role = 'tree';
-    this.addEventListener('_node-update', () => this.#syncNodes());
+
+    this.#observers.push(
+      onChildListMutation(
+        this,
+        () => {
+          this.#syncNodes();
+        },
+        { subtree: true }
+      )
+    );
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.#observers.forEach(o => o.disconnect());
   }
 
   async updated(props: PropertyValues<this>) {
