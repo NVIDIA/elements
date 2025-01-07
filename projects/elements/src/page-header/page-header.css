@@ -35,18 +35,22 @@ slot:not([name]) {
 }
 
 ::slotted(h1[slot='prefix']),
-::slotted(h2[slot='prefix']) {
+::slotted(h2[slot='prefix']),
+::slotted(a[slot='prefix']) {
   font-size: var(--nve-ref-font-size-200) !important;
   font-weight: var(--nve-ref-font-weight-semibold) !important;
   color: var(--nve-sys-text-muted-color) !important;
   margin: 0 !important;
   text-wrap: nowrap !important;
+  text-decoration: none !important;
 }
 
 ::slotted(h1[slot='prefix'])::before,
 ::slotted(h2[slot='prefix'])::before,
+::slotted(a[slot='prefix'])::before,
 ::slotted(h1[slot='prefix'])::after,
-::slotted(h2[slot='prefix'])::after {
+::slotted(h2[slot='prefix'])::after,
+::slotted(a[slot='prefix'])::after {
   display: none !important;
 }
 
