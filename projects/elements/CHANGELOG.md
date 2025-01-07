@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.18.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.6...@nvidia-elements/core-v1.18.7) (2025-01-07)
+
+
+### Bug Fixes
+
+* **elements:** tree performance ([a7d20f8](https://github.com/NVIDIA/elements/commit/a7d20f85d25def5bff2d06e49cdc8ad7e22c6256))
+
 ## [@nvidia-elements/core-v1.18.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.5...@nvidia-elements/core-v1.18.6) (2025-01-03)
 
 
