@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.19.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.7...@nvidia-elements/core-v1.19.0) (2025-01-07)
+
+
+### Features
+
+* **elements:** menu-item border color ([e247da3](https://github.com/NVIDIA/elements/commit/e247da37a57cbc9dce037be3fc765aa9f3a80dda))
+
 ## [@nvidia-elements/core-v1.18.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.6...@nvidia-elements/core-v1.18.7) (2025-01-07)
 
 
