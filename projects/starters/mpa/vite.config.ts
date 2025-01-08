@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { join } from 'node:path';
 
 export default defineConfig({
   root: './src',
-  base: '/elements/starters/mpa',
+  base: join('/elements', process.env.PAGES_SITE_PREFIX ?? '', 'starters', 'mpa'),
   publicDir: '../assets',
   build: {
     sourcemap: true,

@@ -1,0 +1,63 @@
+{
+  "name": "site",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "preview": "wireit"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "dev": {
+      "command": "eleventy --serve",
+      "dependencies": []
+    },
+    "build": {
+      "command": "pnpm exec eleventy",
+      "files": [
+        "src",
+        "assets",
+        "./eleventy.config.js"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "clean",
+        "../elements:build"
+      ]
+    },
+    "preview": {
+      "command": "vite preview",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "clean": {
+      "command": "rm -rf dist",
+      "files": [],
+      "output": [],
+      "dependencies": []
+    }
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.0.0",
+    "@11ty/eleventy-plugin-vite": "6.0.0-alpha.4",
+    "@lit-labs/eleventy-plugin-lit": "1.0.3",
+    "@lit-labs/ssr-client": "1.1.7",
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
+    "markdown-it": "14.1.0",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

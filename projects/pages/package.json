@@ -24,12 +24,13 @@
       ],
       "dependencies": [
         "../storybook:build",
+        "../site:build",
         "../starters:build",
         "../internals/metadata:build"
       ]
     },
     "preview": {
-      "command": "cd dist && pnpm exec vite preview --base=elements",
+      "command": "cd dist && pnpm exec vite preview --base=/elements",
       "dependencies": [
         "ci"
       ],
