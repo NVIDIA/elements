@@ -6,7 +6,7 @@ if (!existsSync('./dist')) {
 }
 
 cpSync('./_redirects', './dist/_redirects');
-cpSync('./robots.txt', './dist/robots.txt');
+cpSync('../site/dist/', './dist/', { recursive: true });
 cpSync('../storybook/dist/', './dist/api/', { recursive: true });
 cpSync('../internals/metadata/dist/', './dist/metadata/', { recursive: true });
 
