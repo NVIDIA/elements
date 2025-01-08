@@ -17,6 +17,7 @@ function updateTheme(themes) {
   const previewIframe = document.querySelector('#storybook-preview-iframe');
   const manager = document.querySelector('html') as HTMLElement;
   manager.setAttribute('nve-theme', themes);
+  manager.setAttribute('nve-transition', 'auto');
 
   if (previewIframe) {
     previewIframe.contentDocument.querySelector('html')?.setAttribute('nve-theme', themes);
@@ -42,10 +43,11 @@ const PageHeader = () => {
     <>
       <nve-page-header style={{ position: 'fixed', inset: '0 0 auto 0', zIndex: 999 }}>
         <nve-logo slot="prefix" size="sm"></nve-logo>
-        <h2 slot="prefix" nve-text="heading sm">Elements</h2>
-        <nve-button container="flat"><a target="_blank" href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html">Playground</a></nve-button>
-        <nve-button container="flat"><a target="_blank" href="https://NVIDIA.github.io/elements/starters/">Starters</a></nve-button>
-        <nve-button container="flat"><a target="_blank" href="https://github.com/NVIDIA/elements">Gitlab</a></nve-button>
+        <a slot="prefix" href="/elements/">Elements</a>
+        <nve-button container="flat"><a href="/elements/api/?path=/docs/about-installation--docs">Get Started</a></nve-button>
+        <nve-button container="flat"><a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>
+        <nve-button container="flat"><a href="/elements/starters/buildless/">Starters</a></nve-button>
+        <nve-button container="flat"><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button>
         <nve-button slot="suffix" popovertarget="system-options-drawer" container="flat" id="dropdown-btn">System Themes</nve-button>
       </nve-page-header>
       <nve-drawer id="system-options-drawer" position="right" size="sm" closable style={{'--top': '47px', '--box-shadow': '0'}}>

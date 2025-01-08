@@ -16,6 +16,7 @@ import ddbTheme from '@nvidia-elements/themes/ddb-dark.css?inline';
 import brandTheme from '@nvidia-elements/themes/brand.css?inline';
 import brandDarkTheme from '@nvidia-elements/themes/brand-dark.css?inline';
 import fontNvidiaSans from '@nvidia-elements/themes/fonts/nvidia-sans.css?inline';
+import viewTransitionStyles from '@nvidia-elements/styles/view-transitions.css?inline';
 import { H1, H2, H3, H4, P, UL, OL, PRE, CODE } from '@internals/storybook/blocks';
 import { setSourcePackageScope } from '@internals/elements-api';
 
@@ -381,11 +382,11 @@ export const globalTypes = {
 }
 
 const styleSheet = new CSSStyleSheet();
-styleSheet.replaceSync(theme + dark + fontInter + fontNvidiaSans + highContrastTheme + reducedMotionTheme + compactTheme + debugTheme + brandTheme + brandDarkTheme + ddbTheme + layoutStyles + responsiveStyles + typographyStyles);
+styleSheet.replaceSync(theme + dark + fontInter + fontNvidiaSans + highContrastTheme + reducedMotionTheme + compactTheme + debugTheme + brandTheme + brandDarkTheme + ddbTheme + layoutStyles + responsiveStyles + typographyStyles + viewTransitionStyles);
 document.adoptedStyleSheets = [...document.adoptedStyleSheets, styleSheet];
 
 const parentStyle = document.createElement('style');
-parentStyle.innerText = theme + dark + fontInter + fontNvidiaSans + highContrastTheme + reducedMotionTheme + compactTheme + debugTheme + brandTheme + brandDarkTheme + ddbTheme + layoutStyles + responsiveStyles + typographyStyles;
+parentStyle.innerText = theme + dark + fontInter + fontNvidiaSans + highContrastTheme + reducedMotionTheme + compactTheme + debugTheme + brandTheme + brandDarkTheme + ddbTheme + layoutStyles + responsiveStyles + typographyStyles + viewTransitionStyles;
 window.parent.document.head.appendChild(parentStyle);
 
 export const decorators = [(story, { globals }) => {

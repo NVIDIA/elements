@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite';
-import { resolve } from 'path';
+import { join, resolve } from 'node:path';
 
 export default defineConfig(() => {
   return {
     root: './_site',
-    base: '/elements/starters/eleventy/',
+    base: join('/elements', process.env.PAGES_SITE_PREFIX ?? '', 'starters', 'eleventy'),
     build: {
       outDir: '../dist',
       emptyOutDir: true,
