@@ -16,6 +16,7 @@ packages:
   - 'projects/starters/static'
   - 'projects/starters/typescript'
   - 'projects/starters/vue'
+  - 'projects/site'
   - 'projects/labs/behaviors-alpine'
   - 'projects/labs/code'
   - 'projects/labs/snippets'
