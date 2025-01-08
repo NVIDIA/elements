@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.20.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.19.0...@nvidia-elements/core-v1.20.0) (2025-01-08)
+
+
+### Features
+
+* **elements:** avatar component ([7cdf594](https://github.com/NVIDIA/elements/commit/7cdf594ec23d1bbce90e40eba5ddb7d7f61bb610))
+
 ## [@nvidia-elements/core-v1.19.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.18.7...@nvidia-elements/core-v1.19.0) (2025-01-07)
 
 
