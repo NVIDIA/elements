@@ -13,23 +13,23 @@ export default function Home() {
     <NvePage>
       <NvePageHeader slot="header">
         <NveLogo slot="prefix"></NveLogo>
-        <h2 slot="prefix">Elements</h2>
-        <NveButton container="flat" selected>
-          <a href="/elements/starters/buildless/">Starters</a>
-        </NveButton>
+        <a slot="prefix" href="/elements/">
+          Elements
+        </a>
         <NveButton container="flat">
-          <a href="https://NVIDIA.github.io/elements/api/" target="_blank">
-            API
-          </a>
-        </NveButton>
-        <NveButton container="flat">
-          <a href="https://github.com/NVIDIA/elements/" target="_blank">
-            Gitlab
-          </a>
+          <a href="/elements/api/?path=/docs/about-installation--docs">Get Started</a>
         </NveButton>
         <NveButton container="flat">
           <a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">
             Playground
+          </a>
+        </NveButton>
+        <NveButton container="flat" selected>
+          <a href="/elements/starters/buildless/">Starters</a>
+        </NveButton>
+        <NveButton container="flat">
+          <a href="https://github.com/NVIDIA/elements/" target="_blank">
+            Gitlab
           </a>
         </NveButton>
       </NvePageHeader>
