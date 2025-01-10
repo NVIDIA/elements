@@ -12,6 +12,7 @@ dist-storybook
 *.diff.png
 coverage
 projects/elements/src/icon/icons.ts
+projects/elements/index.html
 v8-compile-cache-0
 __screenshots__
 vite.*.ts.timestamp*
