@@ -33,7 +33,13 @@
       ],
       "dependencies": [
         "../../elements:build"
-      ]
+      ],
+      "env": {
+        "PAGES_SITE_PREFIX": {
+          "external": true,
+          "default": ""
+        }
+      }
     },
     "preview": {
       "command": "vite preview",

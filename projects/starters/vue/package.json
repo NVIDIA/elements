@@ -27,7 +27,13 @@
       ],
       "dependencies": [
         "../../elements:build"
-      ]
+      ],
+      "env": {
+        "PAGES_SITE_PREFIX": {
+          "external": true,
+          "default": ""
+        }
+      }
     }
   },
   "dependencies": {
