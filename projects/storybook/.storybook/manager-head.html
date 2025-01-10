@@ -20,8 +20,9 @@
     border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted) !important;
     box-shadow: none !important;
   }
-
-  .css-1yedr2a {
+  
+  /* only show subnav toolbar when viewing storymode. Hide when viewing docs/mdx views. */
+  main:has(a[href*='--docs'][title='Skip to sidebar']) [data-test-id='sb-preview-toolbar'] {
     height: 0 !important;
   }
 
