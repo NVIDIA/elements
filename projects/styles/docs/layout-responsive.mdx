@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
 import { Canvas } from '@internals/storybook/blocks';
-import { GapResponsive, PadResponsive, HideResponsive, ResponsiveGrid, ResponsiveGridItems } from './layout.stories';
+import { GapResponsive, PadResponsive, HideResponsive, FlexDirectionResponsive, ResponsiveGrid, ResponsiveGridItems } from './layout-responsive.stories';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/icon/define.js';
@@ -12,32 +12,34 @@ import '@nvidia-elements/core/icon/define.js';
 # Responsive Layout System
 
 You may be able to achieve fluid page layouts by simply leveraging the abstracted `flexbox` and `grid` APIs.
-You will notice that pages using Elements with `nve-layout` will result in layouts that already grown and shrink with respect to the browser size.
+You will notice that pages built with Elements `nve-layout` attributes will result in pages that grow and shrink with respect to browser viewport width.
 
-However, we introduced an addition to the layout system that uses [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container)
-under the hood for true next-gen responsive design!
+However, we introduced an addition to the layout system that leverages [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container)
+for even more adaptive responsive design, based on the width of container elements rather than just browser width.
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about container queries in this Google <a href="https://web.dev/articles/new-responsive#using_container_queries_today" target="_blank" nve-text="link">web.dev</a> video and article.</nve-alert>
 
 This addition to the layout API gives you the ability to apply conditional layout styling based on the width of the parent element containing an element
-with `nve-layout` attributes. Currently it supports `gap`, `padding`, and `hide` across a set of 5 contianer size breakpoints.
+with `nve-layout` attributes. Currently it supports `gap`, `padding`, `row vs column` and `hiding / showing` content across nine pixel width breakpoints.
 
-The set of container `breakpoint-sizes` are defined as:
+The set of container `breakpoint-values` are defined as:
 
-- `xs < 150px`
-- `sm >= 150px`
-- `md >= 300px`
-- `lg >= 600px`
-- `xl >= 900px`
+- `xs = 160px`
+- `sm = 320px`
+- `md = 480px`
+- `lg = 640px`
+- `xl = 800px`
+- `2xl = 960px`
+- `3xl = 1200px`
 
-The `@breakpoint-size:...` API is introduced where the breakpoint size is added before the spacing value.
+The `@breakpoint-size:...` API is introduced where the breakpoint size is added before the layout modifier.
 
-For example, you can add conitional based gap sizing using `nve-layout="row gap@xs:xxxs gap@md:md gap@lg:xxxl"`.
-The size value after the `:` is the standard size value for the [spacing](./?path=/docs/foundations-layout-documentation--docs#layout-gap-spacing)/[padding](./?path=/docs/foundations-layout-documentation--docs#layout-padding) system.
+For example, you can add conditional based gap sizing using `nve-layout="row gap@sm:xxxs gap@md:md gap@lg:xxxl"`.
+The size value after the `:` is one of the nine size values for the [spacing](./?path=/docs/foundations-layout-documentation--docs&anchor=layout-gap-spacing)/[padding](./?path=/docs/foundations-layout-documentation--docs&anchor=layout-padding) system.
 
 ```html
 <div>
-  <section nve-layout="row gap@xs:xxxs gap@sm:xxs gap@md:md gap@lg:xl gap@xl:xxxl">
+  <section nve-layout="row gap@sm:xxs gap@md:md gap@lg:xl gap@xl:xxxl">
     <nve-card></nve-card>
     <nve-card></nve-card>
     <nve-card></nve-card>
@@ -47,53 +49,126 @@ The size value after the `:` is the standard size value for the [spacing](./?pat
 </div>
 ```
 
-<nve-alert status="warning">
-  Warning: Notice the inclusion of an extra `div` element wrapping the `nve-layout` element. <br/>
-  This is to ensure that the parent element that receives the container query is the size of the elements size and not a grid/page.
+<nve-alert status="accent">
+  Note the inclusion of an extra `div` element wrapping the `nve-layout` element to ensure the parent element that receives the container query not the page.
  </nve-alert>
 
-## Responsive Gap Breakpoints
+## Responsive Gap Sizing
 
-The following container query breakpoints are available for gap, replace `...` with one of the 9 gap [spacing](./?path=/docs/foundations-layout-documentation--docs#layout-gap-spacing) values:
+The following container query breakpoints are available for gap, replace `...` with one of the 9 gap [spacing](./?path=/docs/foundations-layout-documentation--docs&anchor=layout-gap-spacing) values:
 
 - `gap@xs:...`
 - `gap@sm:...`
 - `gap@md:...`
 - `gap@lg:...`
 - `gap@xl:...`
+- `gap@2xl:...`
+- `gap@3xl:...`
 
 <Canvas of={GapResponsive} />
 
-## Responsive Padding Breakpoints
+## Responsive Padding
 
-The following container query breakpoints are available for padding, replace `...` with one of the 9 padding [padding](./?path=/docs/foundations-layout-documentation--docs#layout-padding) values:
+The following container query breakpoints are available for padding, replace `...` with one of the 9 padding [padding](./?path=/docs/foundations-layout-documentation--docs&anchor=layout-padding) values:
 
 - `pad@xs:...`
 - `pad@sm:...`
 - `pad@md:...`
 - `pad@lg:...`
 - `pad@xl:...`
+- `pad@2xl:...`
+- `pad@3xl:...`
 
 <Canvas of={PadResponsive} />
 
-## Breakpoints for Hiding Elements
+## Hiding Elements Based on Container Size
 
 The following container query breakpoints are available for hiding:
 
+- `hide`
 - `hide@xs`
 - `hide@sm`
 - `hide@md`
 - `hide@lg`
 - `hide@xl`
+- `hide@2xl`
+- `hide@3xl`
 
-Note that elments will hide at all breakpoints equal to and smaller then the specefied size to begin hiding at.
+You can subsequently reverse the hiding of elements with the `show@` attribute.
+
+- `show@xs`
+- `show@sm`
+- `show@md`
+- `show@lg`
+- `show@xl`
+- `show@2xl`
+- `show@3xl`
+
+**Note that this responsive layout system is _minimum width based_ and takes an "upward" mobile-first approach.
+You will likely need to combine `hide@` and `show@` to hide elements at smaller container sizes.**
+
+The `show@...` attribute will reverse setting of `display: none` back to `display: initial`.
 
 <Canvas of={HideResponsive} />
 
+## Breakpoints for Switching Flexbox Layout Direction
+
+The following container query breakpoints are available for swapping flex direction:
+
+### Horizontally
+
+- `row@xs`
+- `row@sm`
+- `row@md`
+- `row@lg`
+- `row@xl`
+- `row@2xl`
+- `row@3xl`
+
+### Vertically:
+
+- `column@xs`
+- `column@sm`
+- `column@md`
+- `column@lg`
+- `column@xl`
+- `column@2xl`
+- `column@3xl`
+
+<Canvas of={FlexDirectionResponsive} />
+
 ## Responsive Grid
+
+Lastly, you can use the following syntax for having a `nve-layout=grid...` vary based on container size.
+
+```html
+<section nve-layout="grid gap:md span-items:12 span-items@sm:6 span-items@md:4 span-items@lg:3">
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+  <nve-card></nve-card>
+</section>
+```
+
+Or:
+
+```html
+<section nve-layout="grid gap:md">
+  <nve-card nve-layout="span-items:12 span@sm:4 span@md:6 span@lg:8"></nve-card>
+  <nve-card nve-layout="span-items:12 span@sm:8 span@md:6 span@lg:4"></nve-card>
+  <nve-card nve-layout="span-items:12 span@sm:8 span@md:6 span@lg:4"></nve-card>
+  <nve-card nve-layout="span-items:12 span@sm:4 span@md:6 span@lg:8"></nve-card>
+</section>
+```
+
+### Responsive Grid Parent
 
 <Canvas of={ResponsiveGrid} />
 
-## Responsive Grid Items
+### Responsive Grid Items
 
 <Canvas of={ResponsiveGridItems} />
