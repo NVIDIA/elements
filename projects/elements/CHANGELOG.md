@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.20.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.20.0...@nvidia-elements/core-v1.20.1) (2025-01-10)
+
+
+### Bug Fixes
+
+* **elements:** page-header prefix link ([a734e34](https://github.com/NVIDIA/elements/commit/a734e342162afc83bcb32df4e6ba8b943b7fbdeb))
+
 ## [@nvidia-elements/core-v1.20.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.19.0...@nvidia-elements/core-v1.20.0) (2025-01-08)
 
 
