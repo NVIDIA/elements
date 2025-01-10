@@ -1,3 +1,10 @@
+---js
+const IS_MR_PREVIEW = process.env.PAGES_SITE_PREFIX;
+const IS_DEV_MODE = process.env.ELEVENTY_RUN_MODE === 'serve';
+const PROD_REDIRECT = !IS_MR_PREVIEW && !IS_DEV_MODE ? '<meta http-equiv="refresh" content="0; url=/elements/api/" />' : '';
+const DEV_REDIRECT = IS_DEV_MODE ? `<script type="module">globalThis.location?.hostname === 'localhost' && globalThis.location.pathname === '/' ? globalThis.location?.replace('/elements/') : ''</script>` : '';
+---
+
 <!doctype html>
 <html lang="en" nve-theme="dark" nve-transition="auto">
   <head>
@@ -6,6 +13,7 @@
     <link rel="icon" href="/assets/favicon.svg" />
     <title>Elements</title>
     <link rel="stylesheet" href="./index.css" />
+    {{ PROD_REDIRECT }} {{ DEV_REDIRECT }}
   </head>
   <body>
     <nve-page>
