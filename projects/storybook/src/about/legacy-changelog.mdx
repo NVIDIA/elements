@@ -983,7 +983,7 @@ import '@nvidia-elements/core/grid/define.js';
 ### Features
 
 - Add inline multiselect support for select element
-- Experimental custom select options migrated from `<template>` to `slot` based API. [Read More](./?path=/docs/elements-select-documentation--docs#custom-option-render)
+- Experimental custom select options migrated from `<template>` to `slot` based API. [Read More](./?path=/docs/elements-select-documentation--docs&anchor=custom-option-render)
 - Add support for icon name aliases. Allows icon fallbacks and easier migration paths
 - Add support for form control reset and form element resets
 
@@ -1094,7 +1094,7 @@ import '@nvidia-elements/core/grid/define.js';
 
 ### Fixes
 
-- Updated [--nve-ref-font-size-xxx](./?path=/docs/foundations-tokens-documentation--docs#text) tokens scale
+- Updated [--nve-ref-font-size-xxx](./?path=/docs/foundations-tokens-documentation--docs&anchor=text) tokens scale
 - Above change impacts `nve-text="heading"` and `nve-text="display"` on the [font sizing](./?path=/docs/foundations-typography-examples--size) system
 - Fix banner alert alignment
 - Fix prevent exception for early disconnect on popover controllers
@@ -1431,9 +1431,9 @@ import '@nvidia-elements/core/grid/define.js';
 
 ### Features
 
-- Add internal [support for scoped registries](./?path=/docs/about-extensions--docs#scoped-registry).
+- Add internal [support for scoped registries](./?path=/docs/about-extensions--docs&anchor=scoped-registry).
 - Add [i18n support](./?path=/docs/foundations-i18n-documentation--docs) for accessibility and internal aria strings
-- Add version [debugger](http://localhost:7789/?path=/docs/about-changelog--docs#versioning)
+- Add version [debugger](http://localhost:7789/?path=/docs/about-changelog--docs&anchor=versioning)
   ```javascript
   window.MLV_ELEMENTS.debug();
   ```
@@ -1503,7 +1503,7 @@ import '@nvidia-elements/core/grid/define.js';
 ### <nve-icon name="warning" status="warning"></nve-icon> Breaking
 
 - Removal of interaction state tokens. Interaction background and color tokens remain however the alternate states (hover, active) are removed.
-  Background contrast is now used to determine the interaction state. See [Interaction states](./?path=/docs/foundations-tokens-interactions--docs#interactions) for more information.
+  Background contrast is now used to determine the interaction state. See [Interaction states](./?path=/docs/foundations-tokens-interactions--docs&anchor=interactions) for more information.
 - Fix: Theme base styles such as font and background colors are only applied when `nve-theme` attr is placed on the `html`, `body` element or with `nve-theme="root"`.
   This allows for more flexibility when using testing themes without overiding the nested element style properties.
 - Rename internals and `--nve-sys-layer-popup-*` to `--nve-sys-layer-popover-*` to align with [popover spec](https://github.com/openui/open-ui/issues/627#issuecomment-1293918937)

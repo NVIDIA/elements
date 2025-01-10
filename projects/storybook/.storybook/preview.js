@@ -122,7 +122,7 @@ export const parameters = {
             'Horizontal Flex',
             'Vertical Flex',
             'Grid',
-            'Responsive'
+            'Examples'
           ],
           'Forms',
           [
