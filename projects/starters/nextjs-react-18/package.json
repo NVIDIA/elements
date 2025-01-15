@@ -10,19 +10,19 @@
     "lint": "wireit"
   },
   "dependencies": {
-    "@lit-labs/nextjs": "0.2.0",
+    "@lit-labs/nextjs": "0.2.1",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/core-react": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "react": "catalog:",
-    "react-dom": "catalog:",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "next": "14.2.5"
   },
   "devDependencies": {
     "typescript": "catalog:",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
+    "@types/react": "18.3.12",
+    "@types/react-dom": "18.3.1",
     "vite": "catalog:"
   },
   "wireit": {
