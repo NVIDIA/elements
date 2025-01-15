@@ -15,8 +15,8 @@
     "./setup/*.js": "./src/setup/*.js"
   },
   "dependencies": {
-    "@lit-labs/ssr": "3.2.2",
-    "@custom-elements-manifest/analyzer": "0.10.3",
+    "@lit-labs/ssr": "catalog:",
+    "@custom-elements-manifest/analyzer": "catalog:",
     "@rollup/plugin-terser": "catalog:",
     "custom-element-jsx-integration": "1.5.4",
     "custom-element-vs-code-integration": "1.4.1",
@@ -24,13 +24,13 @@
     "lighthouse": "catalog:",
     "pixelmatch": "6.0.0",
     "pngjs": "7.0.0",
-    "rollup": "4.24.0",
+    "rollup": "4.30.1",
     "rollup-plugin-minify-html-literals": "catalog:",
-    "rollup-plugin-visualizer": "5.12.0",
-    "terser": "5.34.1",
+    "rollup-plugin-visualizer": "5.14.0",
+    "terser": "5.37.0",
     "ts-morph": "20.0.0",
     "vite-plugin-dts": "catalog:",
-    "vite-plugin-virtual-html": "1.2.2"
+    "vite-plugin-virtual-html": "1.2.3"
   },
   "peerDependencies": {
     "@vitest/browser": "catalog:",
