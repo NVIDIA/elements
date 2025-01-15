@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.21.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.20.1...@nvidia-elements/core-v1.21.0) (2025-01-15)
+
+
+### Features
+
+* **styles:** revamp responsive layout module with additional features ([73f226f](https://github.com/NVIDIA/elements/commit/73f226f97207f070f6b724c64fc150fb323410b2))
+
 ## [@nvidia-elements/core-v1.20.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.20.0...@nvidia-elements/core-v1.20.1) (2025-01-10)
 
 
