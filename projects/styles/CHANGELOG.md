@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.6.0...@nvidia-elements/styles-v1.7.0) (2025-01-15)
+
+
+### Features
+
+* **styles:** revamp responsive layout module with additional features ([73f226f](https://github.com/NVIDIA/elements/commit/73f226f97207f070f6b724c64fc150fb323410b2))
+
 ## [@nvidia-elements/styles-v1.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.5.0...@nvidia-elements/styles-v1.6.0) (2024-12-19)
 
 
