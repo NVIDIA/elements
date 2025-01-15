@@ -120,6 +120,27 @@ describe(Notification.metadata.tag, () => {
     element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
   });
+});
+
+describe(`${Notification.metadata.tag} - inline`, () => {
+  let fixture: HTMLElement;
+  let element: Notification;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-notification>hello</nve-notification>
+    `);
+    element = fixture.querySelector(Notification.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get(Notification.metadata.tag)).toBeDefined();
+  });
 
   it('should emit close event when closed and inline mode', async () => {
     element.closable = true;
@@ -132,7 +153,7 @@ describe(Notification.metadata.tag, () => {
   });
 });
 
-describe(`${Notification.metadata.tag} - inline`, () => {
+describe(`${Notification.metadata.tag} - inline group`, () => {
   let fixture: HTMLElement;
   let element: NotificationGroup;
 
