@@ -590,6 +590,30 @@ describe('type-popover.controller - hint', () => {
     await new Promise(r => setTimeout(() => r(null), 10));
     expect(element.matches(':popover-open')).toBe(true);
   });
+});
+
+describe('type-popover.controller - close timeout', () => {
+  let element: TypeNativePopoverControllerTestElement;
+  let button: Button;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-button popovertarget="popover">anchor</nve-button>
+      <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    element.popoverType = 'hint';
+    button = fixture.querySelector(Button.metadata.tag);
+    await element.updateComplete;
+    await button.updateComplete;
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
 
   it('should close with delay when a closeTimeout is set', async () => {
     await elementIsStable(element);
