@@ -848,7 +848,6 @@
   },
   "devDependencies": {
     "@nvidia-elements/styles": "workspace:^",
-    "@lit-labs/ssr": "3.2.2",
     "@lit-labs/virtualizer": "catalog:",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
