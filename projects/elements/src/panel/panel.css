@@ -1,5 +1,6 @@
 :host {
   --background: var(--nve-sys-layer-container-background);
+  --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --color: var(--nve-sys-layer-canvas-color);
   --box-shadow: var(--nve-ref-shadow-300);
   overflow: hidden;
@@ -53,6 +54,12 @@
 
 .header {
   min-height: var(--nve-ref-size-900);
+  display: flex;
+  align-items: start;
+}
+
+:host(:state(expanded)) .header {
+  border-bottom: var(--border-bottom);
 }
 
 .content {
@@ -63,8 +70,8 @@
 }
 
 nve-icon-button {
-  position: absolute;
-  top: var(--nve-ref-size-100);
-  right: var(--nve-ref-size-100);
+  margin-top: var(--nve-ref-size-100); /* not nve-ref-size-300 */
+  margin-right: var(--nve-ref-size-100);
+  margin-left: auto;
   z-index: 99;
 }
