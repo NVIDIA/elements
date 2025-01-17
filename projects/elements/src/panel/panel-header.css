@@ -1,16 +1,18 @@
 :host {
   --padding: var(--nve-ref-size-300) 0 var(--nve-ref-size-300) var(--nve-ref-size-400);
   --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+
+  flex-grow: 1;
 }
 
 [internal-host] {
   padding: var(--padding);
-  border-bottom: var(--border-bottom);
   color: var(--color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  flex-grow: 1;
 }
 
 ::slotted([slot='title']) {
@@ -27,8 +29,7 @@
 }
 
 ::slotted([slot='action-icon']) {
-  position: absolute;
-  top: 14px;
-  right: 48px;
+  margin-top: calc((var(--nve-ref-size-300) * -1) + var(--nve-ref-size-100)); /* not nve-ref-size-300 */
+  align-self: self-start;
   z-index: 99;
 }
