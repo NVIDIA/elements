@@ -50,7 +50,7 @@ catalog:
   cpy-cli: 5.0.0
   eslint: 9.18.0
   glob: 11.0.1
-  lighthouse: 11.4.0
+  lighthouse: 12.3.0
   lit: ^3.2.1
   lit-html: ^3.2.1
   publint: 0.3.2

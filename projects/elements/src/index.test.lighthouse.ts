@@ -33,6 +33,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/accordion/define.js';
         import '@nvidia-elements/core/alert/define.js';
         import '@nvidia-elements/core/app-header/define.js';
+        import '@nvidia-elements/core/avatar/define.js';
         import '@nvidia-elements/core/badge/define.js';
         import '@nvidia-elements/core/breadcrumb/define.js';
         import '@nvidia-elements/core/button/define.js';
@@ -60,6 +61,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/month/define.js';
         import '@nvidia-elements/core/notification/define.js';
         import '@nvidia-elements/core/page/define.js';
+        import '@nvidia-elements/core/page-header/define.js';
         import '@nvidia-elements/core/page-loader/define.js';
         import '@nvidia-elements/core/pagination/define.js';
         import '@nvidia-elements/core/panel/define.js';
@@ -90,6 +92,6 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(64.5);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(65);
   });
 });
