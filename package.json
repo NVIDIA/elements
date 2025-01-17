@@ -18,7 +18,6 @@
     "format:fix": "wireit",
     "playwright": "wireit",
     "prepare": "wireit",
-    "publint": "wireit",
     "release": "wireit",
     "commitlint": "commitlint --edit"
   },
@@ -87,16 +86,6 @@
         "./projects/internals/elements-api:ci"
       ],
       "files": []
-    },
-    "publint": {
-      "dependencies": [
-        "./projects/elements:publint",
-        "./projects/elements-react:publint",
-        "./projects/labs/behaviors-alpine:publint",
-        "./projects/labs/code:publint",
-        "./projects/themes:publint",
-        "./projects/styles:publint"
-      ]
     },
     "lighthouse": {
       "command": "node ./projects/internals/gitlab/metrics.lighthouse.js",

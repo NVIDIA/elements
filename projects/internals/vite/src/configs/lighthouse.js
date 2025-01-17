@@ -2,7 +2,6 @@
 export const libraryLighthouseTestConfig = {
   logLevel: 'info',
   test: {
-    pool: 'forks', // https://github.com/vitest-dev/vitest/issues/3077
     retry: 1,
     bail: 2,
     isolate: false,
@@ -12,8 +11,12 @@ export const libraryLighthouseTestConfig = {
         return false;
       }
     },
-    reporters: ['default', 'junit'],
+    reporters: ['default', 'junit', 'json'],
     globalSetup: ['@internals/vite/setup/lighthouse.js'],
+    outputFile: {
+      json: './coverage/lighthouse/summary.json',
+      junit: './coverage/lighthouse/junit.xml'
+    },
     testTimeout: 60000,
     server: {
       deps: {
