@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.22.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.21.0...@nvidia-elements/core-v1.22.0) (2025-01-17)
+
+
+### Features
+
+* **elements:** add snippet for search ([7c5abd5](https://github.com/NVIDIA/elements/commit/7c5abd5532bf93650c434e897a804d225262be84))
+
 ## [@nvidia-elements/core-v1.21.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.20.1...@nvidia-elements/core-v1.21.0) (2025-01-15)
 
 
