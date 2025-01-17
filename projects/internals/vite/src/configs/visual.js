@@ -2,12 +2,12 @@
 export const libraryVisualTestConfig = {
   logLevel: 'info',
   test: {
-    pool: 'forks', // https://github.com/vitest-dev/vitest/issues/3077
     retry: 1,
     bail: 2,
     isolate: false,
     fileParallelism: false,
     reporters: ['default', 'junit', 'json'],
+    setupFiles: ['@nve-internals/vite/setup/visual.js'],
     outputFile: {
       json: './coverage/visual/summary.json',
       junit: './coverage/visual/junit.xml'

@@ -10,7 +10,7 @@ const scores = {
 };
 
 function getLighthouseScores(basePath) {
-  const lighthouseReportPath = new URL(basePath + '/.lighthouse/report.json', import.meta.url);
+  const lighthouseReportPath = new URL(basePath + '/.lighthouse/dist/report.json', import.meta.url);
   return existsSync(lighthouseReportPath) ? JSON.parse(readFileSync(lighthouseReportPath)) : null;
 }
 

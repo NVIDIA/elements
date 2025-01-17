@@ -622,9 +622,8 @@ describe('type-popover.controller - close timeout', () => {
     await elementIsStable(element);
     expect(element.matches(':popover-open')).toBe(true);
 
-    const toggle = await untilEvent(element, 'toggle');
-    const close = await untilEvent(element, 'close');
-    await new Promise(r => setTimeout(() => r(null), 10));
+    const toggle = untilEvent(element, 'toggle');
+    const close = untilEvent(element, 'close');
     expect(await toggle).toBeDefined();
     expect(await close).toBeDefined();
     expect(element.matches(':popover-open')).toBe(false);
