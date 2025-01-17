@@ -6,7 +6,6 @@ const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
 /** @type {import('vite').UserConfig} */
 export const libraryTestConfig = {
   test: {
-    pool: 'forks', // https://github.com/vitest-dev/vitest/issues/3077
     retry: 1,
     isolate: coverage,
     bail: !watch && !coverage ? 2 : 0,
@@ -32,7 +31,6 @@ export const libraryTestConfig = {
         {
           browser: 'chromium',
           isolate: coverage,
-          slowHijackESM: false,
           strictPort: true
         }
       ]

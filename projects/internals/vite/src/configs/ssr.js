@@ -1,7 +1,6 @@
 /** @type {import('vite').UserConfig} */
 export const libraryLitSSRTestConfig = {
   test: {
-    pool: 'forks', // https://github.com/vitest-dev/vitest/issues/3077
     retry: 1,
     bail: 2,
     isolate: false,
