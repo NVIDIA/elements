@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.23.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.22.1...@nvidia-elements/core-v1.23.0) (2025-01-21)
+
+
+### Features
+
+* **elements:** add top to nve-drawer position ([d877196](https://github.com/NVIDIA/elements/commit/d877196938a5404941be7d9ca49b3eaee5d56cbb))
+
 ## [@nvidia-elements/core-v1.22.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.22.0...@nvidia-elements/core-v1.22.1) (2025-01-21)
 
 
