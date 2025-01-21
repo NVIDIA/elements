@@ -1,6 +1,6 @@
 ---js
 const IS_MR_PREVIEW = !!process.env.PAGES_SITE_PREFIX;
-const IS_DEV_MODE = process.env.ELEVENTY_RUN_MODE === 'serve';
+const IS_DEV_MODE = process.env.ELEVENTY_RUN_MODE === 'serve' || process.env.DEV_PREVIEW === 'true';
 const IS_PROD = !IS_MR_PREVIEW && !IS_DEV_MODE;
 const PROD_REDIRECT = IS_PROD ? '<meta http-equiv="refresh" content="0; url=/elements/api/" />' : `<!-- IS_PROD: ${IS_PROD}, IS_MR_PREVIEW: ${IS_MR_PREVIEW}, IS_DEV_MODE: ${IS_DEV_MODE} -->`;
 const DEV_REDIRECT = IS_DEV_MODE ? `<script type="module">globalThis.location?.hostname === 'localhost' && globalThis.location.pathname === '/' ? globalThis.location?.replace('/elements/') : ''</script>` : '';
