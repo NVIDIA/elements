@@ -37,7 +37,7 @@ export class Drawer extends LitElement {
    * Sets the side position of the popover relative to the provided anchor element.
    * For drawer the anchor defaults to the document body.
    */
-  @property({ type: String, reflect: true }) position: 'left' | 'right' | 'bottom' = 'left';
+  @property({ type: String, reflect: true }) position: 'left' | 'right' | 'bottom' | 'top' = 'left';
 
   /**
    * Sets the maximum size of the drawer.
