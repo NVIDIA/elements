@@ -91,11 +91,13 @@ nve-icon-button {
   z-index: 99;
 }
 
-:host([position='bottom']) {
+:host([position='bottom']),
+:host([position='top']) {
   min-width: 100%;
   height: max-content;
 }
 
-:host([position='bottom']) [internal-host] {
+:host([position='bottom']) [internal-host],
+:host([position='top']) [internal-host] {
   height: min-content;
 }
