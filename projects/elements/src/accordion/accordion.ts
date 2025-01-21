@@ -9,7 +9,8 @@ import {
   TypeExpandableController,
   useStyles,
   attachInternals,
-  generateId
+  generateId,
+  isFocusable
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
@@ -157,12 +158,10 @@ export class Accordion extends LitElement implements ContainerElement {
     return this.shadowRoot?.querySelector<HTMLSlotElement>('slot[name=header]')?.assignedElements()[0];
   }
 
-  #toggle(element: HTMLElement): void {
-    if (element.slot === 'actions' || this.disabled) {
-      return;
+  #toggle(element: HTMLElement) {
+    if (!this.disabled && (!isFocusable(element) || element.id === 'internal-trigger')) {
+      this.#typeExpandableController.toggle();
     }
-
-    this.#typeExpandableController.toggle();
   }
 
   render() {
@@ -177,6 +176,7 @@ export class Accordion extends LitElement implements ContainerElement {
 
           <slot name="icon-button">
             <nve-icon-button
+              id="internal-trigger"
               container="inline"
               icon-name="caret"
               direction=${this.expanded ? (this.#hasAction ? 'down' : 'up') : this.#hasAction ? 'right' : 'down'}
