@@ -140,10 +140,23 @@ export const Position = {
   inline: false,
   render: () => html`
 <div nve-layout="row align:center gap:md">
+  <nve-button popovertarget="popover-top">open top</nve-button>
   <nve-button popovertarget="popover-left">open left</nve-button>
   <nve-button popovertarget="popover-right">open right</nve-button>
   <nve-button popovertarget="popover-bottom">open bottom</nve-button>
 </div>
+
+<nve-drawer id="popover-top" closable modal position="top">
+  <nve-drawer-header>
+    <h3 nve-text="heading">Drawer Header Top</h3>
+  </nve-drawer-header>
+  <nve-drawer-content>
+    <p nve-text="body" style="height: 200px">some text content in a top closable drawer</p>
+  </nve-drawer-content>
+  <nve-drawer-footer>
+    <p nve-text="body">some text footer content</p>
+  </nve-drawer-footer>
+</nve-drawer>
 
 <nve-drawer id="popover-left" closable modal position="left">
   <nve-drawer-header>
