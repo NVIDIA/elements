@@ -194,3 +194,69 @@ describe(`${Accordion.metadata.tag} - Actions`, () => {
     expect(element.shadowRoot.querySelector('.has-action')).toBeTruthy();
   });
 });
+
+describe(`${Accordion.metadata.tag} - inline interactive`, () => {
+  let fixture: HTMLElement;
+  let element: Accordion;
+  let button: HTMLButtonElement;
+  let span: HTMLSpanElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-accordion behavior-expand>
+        <nve-accordion-header>
+          <span>heading</span> <button>button</button> 
+          <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
+        </nve-accordion-header>
+        <nve-accordion-content>content</nve-accordion-content>
+      </nve-accordion>
+    `);
+    element = fixture.querySelector<Accordion>(Accordion.metadata.tag);
+    button = fixture.querySelector<HTMLButtonElement>('button');
+    span = fixture.querySelector<HTMLSpanElement>('span');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should not toggle accordion on slotted interactive elements', async () => {
+    emulateClick(button);
+    await elementIsStable(element);
+    expect(element.expanded).toBe(false);
+  });
+
+  it('should toggle accordion on slotted interactive elements that are disabled', async () => {
+    button.disabled = true;
+    emulateClick(button);
+    await elementIsStable(element);
+    expect(element.expanded).toBe(true);
+  });
+
+  it('should not toggle accordion if disabled', async () => {
+    element.disabled = true;
+    emulateClick(button);
+    await elementIsStable(element);
+    expect(element.expanded).toBe(false);
+  });
+
+  it('should toggle accordion for non interactive elements', async () => {
+    emulateClick(span);
+    await elementIsStable(element);
+    expect(element.expanded).toBe(true);
+  });
+
+  it('should toggle if internal toggle trigger is clicked', async () => {
+    emulateClick(element.shadowRoot.querySelector('#internal-trigger'));
+    await elementIsStable(element);
+    expect(element.expanded).toBe(true);
+  });
+
+  it('should not toggle if internal toggle trigger is clicked and accordion is disabled', async () => {
+    element.disabled = true;
+    emulateClick(element.shadowRoot.querySelector('#internal-trigger'));
+    await elementIsStable(element);
+    expect(element.expanded).toBe(false);
+  });
+});
