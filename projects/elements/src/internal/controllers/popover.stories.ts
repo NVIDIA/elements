@@ -130,3 +130,12 @@ export const LegacyInteractive = {
     </div>
   `
 }
+
+export const Closable = {
+  render: () => html`
+    <nve-button popovertarget="popover">open dialog</nve-button>
+    <nve-dialog id="popover" modal>
+      <p nve-text="body">Press "escape" key to close.</p>
+    </nve-dialog>
+  `
+}
