@@ -181,8 +181,14 @@
   --color: var(--nve-sys-interaction-destructive-background);
 }
 
-:host([container*='inline']) {
+:host([container*='inline']:not([icon-name])) {
   --padding: 0;
+  --height: fit-content;
+  --line-height: 0.8;
+
+  [internal-host] {
+    overflow: initial;
+  }
 }
 
 :host([interaction*='flat']:hover), /* deprecated */
