@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import { Canvas } from '@nve-internals/storybook/blocks';
 import '@nvidia-elements/core/alert/define.js';
-import { Interactive, Anchor, Nested } from './popover.stories';
+import { Interactive, Anchor, Nested, Closable } from './popover.stories';
 import { Default as Tooltip, Events as TooltipEvents, Alignment as TooltipAlignment, CrossShadowRootAnchorPosition } from '../../tooltip/tooltip.stories';
 
 <Meta title="Foundations/Popovers/Documentation" />
@@ -83,6 +83,19 @@ popover will use the trigger to determine its anchor by default.
 For elements like tooltips this is often the same as anchor however the anchor and trigger are not always
 the same as UX patterns such as guided tours may have trigger elements that are not the anchored position.
 Both `anchor` and `trigger` can take a string idref or a DOM Element reference.
+
+## Closable
+
+{/* https://github.com/NVIDIA/elements/-/issues/86#note_27211667 */}
+Many of the popovers provide a closable property option. This will enable a close button on the popover.
+When using native HTML popover APIs, it's important to understand how they handle closure via the escape key.
+Unlike some third-party solutions, browser-native popovers are designed to disable escape key prevention for
+closure, ensuring a seamless user experience. Similarly, native dialogs follow a similar
+pattern (chromium): only the first press of the escape key can be prevented from closing the dialog,
+while subsequent presses have no effect. This behavior is for accessibility, preventing a popover
+from closing can prevent the user from navigating the page and block functionality completely.
+
+<Story of={Closable} inline={false} height={400} />
 
 ## Nested
 
