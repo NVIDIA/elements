@@ -31,11 +31,13 @@ function template(theme: '' | 'dark' = '') {
     <nve-button container="flat" interaction="destructive">•︎•︎•︎•︎•︎•︎</nve-button>
     <nve-button container="flat" disabled>•︎•︎•︎•︎•︎•︎</nve-button>
   </div>
-  <div nve-layout="row gap:xs">
+  <div style="line-height: 1; font-size: 14px">
+    •︎•︎•︎•︎•︎•︎
     <nve-button container="inline">•︎•︎•︎•︎•︎•︎</nve-button>
     <nve-button container="inline" interaction="emphasis">•︎•︎•︎•︎•︎•︎</nve-button>
     <nve-button container="inline" interaction="destructive">•︎•︎•︎•︎•︎•︎</nve-button>
     <nve-button container="inline" disabled>•︎•︎•︎•︎•︎•︎</nve-button>
+    •︎•︎•︎•︎•︎•︎
   </div>
   <div nve-layout="row gap:xs">
     <nve-button size="sm">•︎•︎•︎•︎•︎•︎</nve-button>
