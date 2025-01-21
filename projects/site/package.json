@@ -41,11 +41,19 @@
       }
     },
     "preview": {
-      "command": "vite preview",
+      "command": "DEV_PREVIEW=true pnpm run build && vite preview --base=/elements",
       "service": true,
-      "dependencies": [
-        "build"
-      ]
+      "files": [
+        "src",
+        "assets",
+        "./eleventy.config.js"
+      ],
+      "env": {
+        "DEV_PREVIEW": {
+          "external": true,
+          "default": ""
+        }
+      }
     },
     "clean": {
       "command": "rm -rf dist",
