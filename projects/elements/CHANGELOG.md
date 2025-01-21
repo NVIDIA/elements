@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.22.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.22.0...@nvidia-elements/core-v1.22.1) (2025-01-21)
+
+
+### Bug Fixes
+
+* **elements:** accordion slotted interactive elements ([d4a13b0](https://github.com/NVIDIA/elements/commit/d4a13b0e61023ffc6907af8a5ef525b9605ae682))
+* **elements:** inline button line-height ([e8f2404](https://github.com/NVIDIA/elements/commit/e8f2404243f91c8157566011e1cccbc8b318a592))
+
 ## [@nvidia-elements/core-v1.22.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.21.0...@nvidia-elements/core-v1.22.0) (2025-01-17)
 
 
