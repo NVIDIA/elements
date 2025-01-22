@@ -22,19 +22,19 @@ function template(theme: '' | 'dark' = '') {
   <nve-accordion-group style="min-width: 768px">
     <nve-accordion>
       <nve-accordion-header>
-        <div slot="title">•︎•︎•︎</div>
+        <div slot="prefix">•︎•︎•︎</div>
       </nve-accordion-header>
       <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
     </nve-accordion>
     <nve-accordion>
       <nve-accordion-header>
-        <div slot="title">•︎•︎•︎</div>
+        <div slot="prefix">•︎•︎•︎</div>
       </nve-accordion-header>
       <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
     </nve-accordion>
     <nve-accordion>
       <nve-accordion-header>
-        <div slot="title">•︎•︎•︎</div>
+        <div slot="prefix">•︎•︎•︎</div>
       </nve-accordion-header>
       <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
     </nve-accordion>
@@ -43,19 +43,19 @@ function template(theme: '' | 'dark' = '') {
   <nve-accordion-group container="inset" style="min-width: 768px">
     <nve-accordion>
       <nve-accordion-header>
-        <div slot="title">•︎•︎•︎</div>
+        <div slot="prefix">•︎•︎•︎</div>
       </nve-accordion-header>
       <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
     </nve-accordion>
     <nve-accordion>
       <nve-accordion-header>
-        <div slot="title">•︎•︎•︎</div>
+        <div slot="prefix">•︎•︎•︎</div>
       </nve-accordion-header>
       <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
     </nve-accordion>
     <nve-accordion>
       <nve-accordion-header>
-        <div slot="title">•︎•︎•︎</div>
+        <div slot="prefix">•︎•︎•︎</div>
       </nve-accordion-header>
       <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
     </nve-accordion>
@@ -63,17 +63,22 @@ function template(theme: '' | 'dark' = '') {
 
   <nve-accordion behavior-expand>
     <nve-accordion-header>
-      <div slot="title">•︎•︎•︎</div>
-      <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
-      <nve-icon-button container="flat" icon-name="delete" size="sm" slot="actions"></nve-icon-button>
+      <div slot="prefix">•︎•︎•︎</div>
+      •︎•︎•︎
+      <nve-icon-button container="flat" icon-name="add" size="sm" slot="suffix"></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="delete" size="sm" slot="suffix"></nve-icon-button>
     </nve-accordion-header>
     <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
   </nve-accordion>
 
-  <nve-accordion behavior-expand>
-    <nve-icon-button slot="icon-button" icon-name="add" size="sm" container="flat"></nve-icon-button>
+  <hr />
+
+  <nve-accordion>
     <nve-accordion-header>
       <div slot="title">•︎•︎•︎</div>
+      <div slot="subtitle">•︎•︎•︎</div>
+      <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="delete" size="sm" slot="actions"></nve-icon-button>
     </nve-accordion-header>
     <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
   </nve-accordion>
