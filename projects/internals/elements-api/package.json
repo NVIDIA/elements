@@ -133,6 +133,18 @@
       "types": "./dist/summary/define.d.ts",
       "default": "./dist/summary/define.js"
     },
+    "./system-settings": {
+      "types": "./dist/system-settings/index.d.ts",
+      "default": "./dist/system-settings/index.js"
+    },
+    "./system-settings/index.js": {
+      "types": "./dist/system-settings/index.d.ts",
+      "default": "./dist/system-settings/index.js"
+    },
+    "./system-settings/define.js": {
+      "types": "./dist/system-settings/define.d.ts",
+      "default": "./dist/system-settings/define.js"
+    },
     "./table": {
       "types": "./dist/table/index.d.ts",
       "default": "./dist/table/index.js"
