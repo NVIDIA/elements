@@ -1,4 +1,4 @@
-import { EleventyRenderPlugin } from '@11ty/eleventy';
+import { EleventyRenderPlugin, IdAttributePlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 // import litPlugin from '@lit-labs/eleventy-plugin-lit';
 import markdownIt from 'markdown-it';
@@ -6,12 +6,16 @@ import { BASE_URL } from './src/_layouts/common.js';
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
+  eleventyConfig.addPlugin(IdAttributePlugin);
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
-      base: BASE_URL
+      base: BASE_URL,
+      build: {
+        target: 'esnext'
+      }
     }
   });
 
@@ -39,7 +43,7 @@ export default function (eleventyConfig) {
     linkify: true,
     // highlight: function (/*str, lang*/) { return ''; }
     highlight: function (str, lang) {
-      return /* html */ `<nve-codeblock language="${lang}">${markdown.utils.escapeHtml(str)}</nve-codeblock>`;
+      return /* html */ `<nve-codeblock language="${lang}" style="--padding: var(--nve-ref-space-lg)">${markdown.utils.escapeHtml(str)}</nve-codeblock>`;
     }
   });
 
@@ -77,6 +81,17 @@ export default function (eleventyConfig) {
   markdown.renderer.rules.bullet_list_open = renderer;
 
   eleventyConfig.setLibrary('md', markdown);
+
+  eleventyConfig.addAsyncShortcode('story', async function (tag, storyName) {
+    const name = tag.replace('nve-', '');
+    const storybook = await import(`../elements/dist/${name}/${name}.stories.json`, { with: { type: 'json' } });
+    const story = storybook.default.stories.find(s => s.id === storyName);
+    return /* html */ `<div><nve-api-canvas source="${markdown.utils.escapeHtml(story.template)}">${story.template}</nve-api-canvas></div>`;
+  });
+
+  eleventyConfig.addAsyncShortcode('api', async function (tag, type, value) {
+    return /* html */ `<nve-api-detail tag="${tag}" type="${type}" value="${value}"></nve-api-detail>`;
+  });
 
   return {
     dir: {
