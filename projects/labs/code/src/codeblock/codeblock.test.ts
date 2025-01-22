@@ -138,4 +138,21 @@ function getTime(): number {
     expect(element.shadowRoot.querySelector('.hljs-title')).toBeTruthy();
     expect(element.shadowRoot.querySelector('nve-icon-button')).toBeFalsy();
   });
+
+  it('should not assign a language classname if no language was set or provided', async () => {
+    element.language = 'typescript';
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('code').className).toBe('typescript');
+
+    element.language = undefined;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('code').className).toBe('');
+  });
+
+  it('should not run highlight logic if no source was provided', async () => {
+    element.language = 'typescript';
+    element.code = '';
+    await elementIsStable(element);
+    expect((element as any).formattedCode).toBe(undefined);
+  });
 });

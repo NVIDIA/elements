@@ -125,7 +125,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
 
     // apply line highlights
     if (this.highlight) {
-      const linesToHighlight = this.getLinesToHighlight();
+      const linesToHighlight = this.#getLinesToHighlight();
       const lines = this.formattedCode.split('\n').map((line, index) => {
         let span = `${line}`;
         if (linesToHighlight.includes(index + 1)) {
@@ -143,21 +143,19 @@ export class CodeBlock extends LitElement implements ContainerElement {
     this.requestUpdate();
   }
 
-  private getLinesToHighlight() {
+  #getLinesToHighlight() {
     const range = [];
-    if (this.highlight) {
-      const lines = this.highlight.split(',');
-      for (let l in lines) {
-        const [startStr, endStr] = lines[l].split('-');
-        const start = parseInt(startStr);
-        let end = parseInt(endStr);
-        if (!end) {
-          end = start;
-        }
+    const lines = this.highlight.split(',');
+    for (let l in lines) {
+      const [startStr, endStr] = lines[l].split('-');
+      const start = parseInt(startStr);
+      let end = parseInt(endStr);
+      if (!end) {
+        end = start;
+      }
 
-        for (let i = start; i <= end; i++) {
-          range.push(i);
-        }
+      for (let i = start; i <= end; i++) {
+        range.push(i);
       }
     }
 
