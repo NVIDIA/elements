@@ -11,6 +11,8 @@
   overflow: auto;
   gap: var(--gap);
   contain: none;
+  scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
+  scrollbar-width: thin;
 }
 
 [internal-host] {
