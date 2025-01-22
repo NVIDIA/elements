@@ -1,6 +1,46 @@
 @import '@nvidia-elements/themes/fonts/inter.css';
 @import '@nvidia-elements/themes/index.css';
 @import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/themes/debug.css';
 @import '@nvidia-elements/styles/layout.css';
+@import '@nvidia-elements/styles/responsive.css';
 @import '@nvidia-elements/styles/typography.css';
 @import '@nvidia-elements/styles/view-transitions.css';
+
+#main-slot {
+  width: 100%;
+}
+
+main {
+  width: 1600px;
+}
+
+.feature {
+  max-width: 360px;
+}
+
+.white-gradient {
+  background: linear-gradient(45deg, rgba(161, 161, 170, 0.5) 0%, #fff 50%, rgba(255, 255, 255, 0.6) 100%);
+}
+
+.pink-gradient {
+  background: linear-gradient(90deg, #f583ff 18%, #9671ff 50%, #77c6ff 82%);
+}
+
+.orange-gradient {
+  background: linear-gradient(90deg, #fb9191 25%, #f3e56b 75%);
+}
+
+.green-gradient {
+  background: linear-gradient(90deg, #ffc46c 0%, #83ff81 100%);
+}
+
+.nv-brand-gradient {
+  background: linear-gradient(88deg, #9edb65 6.43%, #69b027 15.46%);
+}
+
+.gradient-txt {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
