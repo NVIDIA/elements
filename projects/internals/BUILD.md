@@ -67,6 +67,10 @@ The configuration for the entire pipeline can be found in the root [.github/work
 
   Upload [prebuilt containers](https://github.com/NVIDIA/elements/container_registry) for use in CI jobs.
 
+- [GitLab Container Registry Automated Cleanup](https://github.com/NVIDIA/elements/-/settings/packages_and_registries)
+
+  Automate cleanup and deletion of stale containers in the registry.
+
 - [GitLab Job Artifacts](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
 
   Ability to upload job [build artifacts](https://github.com/NVIDIA/elements/-/artifacts) and outputs to be referenced in other jobs or CI jobs.
@@ -197,7 +201,21 @@ The following GitLab settings are configured for optimal code quality and stabil
 - Note, the bot name ran by Semantic Release will be the [name of your provided GitLab Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#bot-users-for-projects) (`GITLAB_TOKEN`) you can change this default if desired.
 - Follow standard [Semantic Release](https://github.com/semantic-release/semantic-release) tooling/configuration. To see an example of this look at the Elements [.releaserc.cjs](https://github.com/NVIDIA/elements/-/blob/main/.releaserc.cjs?ref_type=heads) file.
 
-### Resources
+## Git LFS
+
+To add large static assets such as images and video use Git LFS.
+
+1. Add the asset paths to the `.gitattributes` file. Be sure to commit the update to `.gitattributes` first.
+
+```shell
+# example path
+projects/site/assets/**/*.webm filter=lfs diff=lfs merge=lfs -text
+projects/site/assets/**/*.webp filter=lfs diff=lfs merge=lfs -text
+```
+
+2. Once `.gitattributes` is committed, add the assets as a followup commit to ensure they are stored via Git LFS.
+
+## Resources
 
 - [Publishing a Package by Using a GitLab CI/CD Pipeline](https://github.com/help/user/packages/npm_registry/index.md#publishing-a-package-by-using-a-cicd-pipeline)
 - [Publishing with existing Git Tags with Semantic Release](https://github.com/semantic-release/semantic-release/blob/master/docs/usage/configuration.md#existing-version-tags)
