@@ -21,9 +21,11 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
 /**
  * @element nve-accordion-header
  * @since 0.12.0
- * @slot title - Title heading
- * @slot subtitle - Subtitle Text
- * @slot actions - Extra Action Button (use `icon-button`)
+ * @slot prefix
+ * @slot suffix
+ * @slot title - (deprecated)
+ * @slot subtitle - (deprecated)
+ * @slot actions - (deprecated)
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
@@ -42,15 +44,16 @@ export class AccordionHeader extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot></slot>
+        <slot name="prefix"></slot>
         <div id="titles">
           <slot name="title"></slot>
           <slot name="subtitle"></slot>
         </div>
-
+        <slot></slot>
         <div id="actions">
           <slot name="actions"></slot>
         </div>
+        <slot name="suffix"></slot>
       </div>
     `;
   }
