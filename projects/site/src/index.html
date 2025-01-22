@@ -35,7 +35,214 @@ const DEV_REDIRECT = IS_DEV_MODE ? `<script type="module">globalThis.location?.h
         >
       </nve-page-header>
 
-      <h1 nve-text="heading lg">Elements Landing Page</h1>
+      <div id="main-slot" nve-layout="row align:horizontal-center">
+        <main nve-layout="column align:horizontal-stretch pad:none pad@md:xxxl gap:xxxl">
+          <!-- Headline and Background Hero -->
+          <!-- <section></section> -->
+
+          <!-- Section 1 | "Work how you want" -->
+          <section nve-layout="column align:center gap:xxxl pad-y:xxxl">
+            <!-- Heading -->
+            <div nve-text="semibold display center">
+              <span class="white-gradient gradient-txt">Work how you want</span>
+              <br />
+              <span class="green-gradient gradient-txt">to work</span>
+            </div>
+
+            <!-- Features Row-->
+            <div nve-layout="column align:space-between row@lg gap:lg gap@xl:xxxl">
+              <div nve-layout="row gap:lg" class="feature">
+                <nve-logo color="gray-slate">
+                  <nve-icon name="terminal"></nve-icon>
+                </nve-logo>
+
+                <div nve-layout="column gap:sm">
+                  <div nve-text="emphasis heading medium">Any Framework</div>
+                  <div nve-text="muted md regular">
+                    Standards-based Web Components are compatible with almost any modern web framework.
+                  </div>
+                </div>
+              </div>
+
+              <div nve-layout="row gap:lg" class="feature">
+                <nve-logo color="gray-slate">
+                  <nve-icon name="cursor-ripples"></nve-icon>
+                </nve-logo>
+
+                <div nve-layout="column gap:sm">
+                  <div nve-text="emphasis heading medium">Stateless Flexibility</div>
+                  <div nve-text="muted md regular">
+                    Adapt seamlessly to your needs without constraints or roadfeatures.
+                  </div>
+                </div>
+              </div>
+
+              <div nve-layout="row gap:lg" class="feature">
+                <nve-logo color="gray-slate">
+                  <nve-icon name="clock"></nve-icon>
+                </nve-logo>
+
+                <div nve-layout="column gap:sm">
+                  <div nve-text="emphasis heading medium">Future Proof</div>
+                  <div nve-text="muted md regular">
+                    Standards-based Web Components are compatible with almost any modern web framework.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!--  Section 2 | Frameworks Widget -->
+          <!-- <section></section> -->
+
+          <!--  Section 3 | Theme Widget -->
+          <!-- <section></section> -->
+
+          <!--  Section 4 | Metrics Highlights -->
+          <!-- <section></section> -->
+
+          <!--  Section 5 | "Skip the hassles of CSS" + Layout/Typography Video -->
+          <section nve-layout="column align:horizontal-stretch gap:xxxl pad-y:xxl">
+            <div nve-layout="column align:space-between row@lg gap:lg gap@xl:xxl">
+              <div nve-layout="column gap:lg" class="feature">
+                <!-- Heading -->
+                <div nve-text="semibold display">
+                  <span class="orange-gradient gradient-txt">Skip the hassle</span>
+                  <br />
+                  <span class="white-gradient gradient-txt">of CSS</span>
+                </div>
+
+                <nve-button container="inline" size="lg">
+                  Learn more about our attribute system
+                  <nve-icon name="arrow" direction="right"></nve-icon>
+                </nve-button>
+              </div>
+
+              <div nve-layout="column gap:lg pad-top:md" class="feature">
+                <nve-logo color="gray-slate">
+                  <nve-icon name="typography"></nve-icon>
+                </nve-logo>
+
+                <div nve-layout="column gap:sm">
+                  <div nve-text="emphasis heading medium">Typography</div>
+                  <div nve-text="muted md regular">
+                    The Typography utilities provides a flexible API to apply typography styles explicitly to elements.
+                  </div>
+                </div>
+              </div>
+
+              <div nve-layout="column gap:lg pad-top:md" class="feature">
+                <nve-logo color="gray-slate">
+                  <nve-icon name="outline"></nve-icon>
+                </nve-logo>
+
+                <div nve-layout="column gap:sm">
+                  <div nve-text="emphasis heading medium">Layout</div>
+                  <div nve-text="muted md regular">
+                    Grid, horizontal and vertical based layouts can be achieved with little to no CSS using the
+                    nve-layout attribute.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video Row -->
+            <video loop autoplay muted nve-layout="full">
+              <source
+                src="https://web.dev/static/patterns/layout/deconstructed-pancake/assets/02-deconstructed-pancake-2.mp4"
+                type="video/webm" />
+              Your browser does not support the video tag or WebM format.
+            </video>
+          </section>
+
+          <!--  Section 6 | "Turn your ideas into reality" + Snippets Video -->
+          <section nve-layout="column align:center gap:xxxl pad-y:xxxl">
+            <!-- Heading -->
+            <div nve-text="semibold display center">
+              <span class="white-gradient gradient-txt">Turn your ideas</span>
+              <br />
+              <span class="pink-gradient gradient-txt">into reality</span>
+            </div>
+
+            <!-- Features Row-->
+            <div nve-layout="column align:space-between row@lg gap:lg gap@xl:xxxl">
+              <div nve-layout="row gap:lg" class="feature">
+                <nve-logo color="gray-slate">
+                  <nve-icon name="shapes"></nve-icon>
+                </nve-logo>
+
+                <div nve-layout="column gap:sm">
+                  <div nve-text="emphasis heading medium">Buildless Prototyping</div>
+                  <div nve-text="muted md regular">
+                    Accelerate innovation by enabling rapid iteration and testing without complex setup.
+                  </div>
+                </div>
+              </div>
+
+              <div nve-layout="row gap:lg" class="feature">
+                <nve-logo color="gray-slate">
+                  <nve-icon name="scissors"></nve-icon>
+                </nve-logo>
+
+                <div nve-layout="column gap:sm">
+                  <div nve-text="emphasis heading medium">Snippet Templates</div>
+                  <div nve-text="muted md regular">
+                    Reusing common content and UX patterns without inheriting breaking changes.
+                  </div>
+                </div>
+              </div>
+
+              <div nve-layout="row gap:lg" class="feature">
+                <nve-logo color="gray-slate">
+                  <nve-icon name="refresh"></nve-icon>
+                </nve-logo>
+
+                <div nve-layout="column gap:sm">
+                  <div nve-text="emphasis heading medium">Infinite Remixes</div>
+                  <div nve-text="muted md regular">
+                    Endless possibilities emerge from exploration. We try things, we pivot, in a low-cost system.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Video Row -->
+            <video loop autoplay muted nve-layout="full">
+              <source src="https://web.dev/static/patterns/layout/aspect-ratio-image-card/demo.mp4" type="video/webm" />
+              Your browser does not support the video tag or WebM format.
+            </video>
+          </section>
+
+          <!--  Section 7 | "Build together as one team" -->
+          <section nve-layout="column gap:xl pad-y:xxxl">
+            <!-- Heading -->
+            <div nve-text="semibold display">
+              <span class="white-gradient gradient-txt"
+                >Build together <br />
+                as</span
+              >
+              <span class="nv-brand-gradient gradient-txt">one team</span>
+            </div>
+
+            <!-- Subheading -->
+            <div nve-text="muted md regular">
+              Elements follow WCAG 2.1, are W3C spec-compliant and use the W3C interaction models when available.
+            </div>
+
+            <!-- Buttons -->
+            <div nve-layout="column row@sm gap:sm align:stretch">
+              <nve-button size="lg">View our community</nve-button>
+              <nve-button interaction="emphasis" size="lg">Start building</nve-button>
+            </div>
+          </section>
+
+          <!--  Section 8 | Starters Section -->
+          <!-- <section></section> -->
+
+          <!--  Section 9 | "Stay in the loop" -->
+          <!-- <section></section> -->
+        </main>
+      </div>
     </nve-page>
     <script type="module">
       import './index.ts';
