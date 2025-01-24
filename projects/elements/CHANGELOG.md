@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.23.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.0...@nvidia-elements/core-v1.23.1) (2025-01-24)
+
+
+### Bug Fixes
+
+* **elements:** tree node keynav focus ([cce43f6](https://github.com/NVIDIA/elements/commit/cce43f6a46ca3e1e2c9b2133cb510fee5ce10fb5)), closes [#100](https://github.com/NVIDIA/elements/issues/100)
+
 ## [@nvidia-elements/core-v1.23.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.22.1...@nvidia-elements/core-v1.23.0) (2025-01-21)
 
 
