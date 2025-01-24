@@ -9,6 +9,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/button-group/define.js';
 import '@nvidia-elements/core/drawer/define.js';
 import '@nvidia-elements/core/toolbar/define.js';
+import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/tree/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/range/define.js';
@@ -19,6 +20,7 @@ import '@nvidia-elements/core/page-header/define.js';
 import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/panel/define.js';
 import '@nvidia-elements/core/tabs/define.js';
+import '@nvidia-elements/core/resize-handle/define.js';
 
 export default {
   title: 'Elements/Page/Examples',
@@ -1241,5 +1243,102 @@ export const PageLayoutSteps = {
     </nve-page-panel-content>
   </nve-page-panel>
 </nve-page>
+  `
+};
+
+export const Resize = {
+  render: () => html`
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
+
+  <nve-page-panel style="width: 200px" slot="left">
+    <nve-page-panel-content>left</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-resize-handle slot="left" min="100" max="400" value="200" step="20" orientation="vertical"></nve-resize-handle>
+</nve-page>
+
+<script type="module">
+  const handle = document.querySelector('nve-resize-handle');
+  const panel = document.querySelector('nve-page-panel');
+  handle.addEventListener('input', e => panel.style.width = e.target.value + 'px');
+</script>
+  `
+};
+
+export const ResizeMulti = {
+  render: () => html`
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
+
+  <nve-page-panel style="width: 320px" slot="left">
+    <nve-page-panel-content>left</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-resize-handle slot="left" orientation="vertical" min="100" max="480" value="320" step="20"></nve-resize-handle>
+
+  <nve-resize-handle slot="bottom" min="100" max="480" value="320" step="20"></nve-resize-handle>
+  <nve-page-panel style="height: 320px" slot="bottom">
+    <nve-page-panel-content>bottom</nve-page-panel-content>
+  </nve-page-panel>
+
+  <nve-resize-handle slot="right" dir="rtl" orientation="vertical" min="100" max="480" value="320" step="20"></nve-resize-handle>
+  <nve-page-panel style="width: 320px" slot="right">
+    <nve-page-panel-content>right</nve-page-panel-content>
+  </nve-page-panel>
+</nve-page>
+
+<script type="module">
+  const leftHandle = document.querySelector('nve-resize-handle[slot=left]');
+  const leftPanel = document.querySelector('nve-page-panel[slot=left]');
+  leftHandle.addEventListener('input', e => leftPanel.style.width = e.target.value + 'px');
+
+  const rightHandle = document.querySelector('nve-resize-handle[slot=right]');
+  const rightPanel = document.querySelector('nve-page-panel[slot=right]');
+  rightHandle.addEventListener('input', e => rightPanel.style.width = e.target.value + 'px');
+
+  const bottomHandle = document.querySelector('nve-resize-handle[slot=bottom]');
+  const bottomPanel = document.querySelector('nve-page-panel[slot=bottom]');
+  bottomHandle.addEventListener('input', e => bottomPanel.style.height = e.target.value + 'px');
+</script>
+  `
+};
+
+export const ResizeSnap = {
+  render: () => html`
+<nve-page style="--padding: var(--nve-ref-space-lg)">
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
+
+  <p nve-text="body">Double click the resize handle to snap to the min or max.</p>
+
+  <nve-resize-handle slot="right" dir="rtl" min="2" max="900" value="320" orientation="vertical"></nve-resize-handle>
+  <nve-page-panel style="width: 320px" slot="right">
+    <nve-page-panel-content></nve-page-panel-content>
+  </nve-page-panel>
+</nve-page>
+
+<script type="module">
+  const handle = document.querySelector('nve-resize-handle');
+  const panel = document.querySelector('nve-page-panel');
+  handle.addEventListener('input', e => {
+    panel.style.width = e.target.value + 'px';
+  });
+</script>
   `
 };

@@ -75,7 +75,7 @@ export function render(data) {
             list-style: none !important;
             margin: 50px 0 0 0 !important;
             position: sticky !important;
-            display: block;
+            display: none;
             top: 50px;
             right: 50px;
 
@@ -92,18 +92,28 @@ export function render(data) {
               padding-bottom: 14px;
             }
           }
+
+          @media (min-width: 1600px) {
+            #doc-sidenav[nve-text='list mkd'] {
+              display: block;
+            }
+          }
         </style>
         <script type="module">
           const systemOptionsPanel = document.querySelector('#system-options-panel');
           const systemOptionsPanelBtn = document.querySelector('#system-options-panel-btn');
           systemOptionsPanel.addEventListener('close', () => systemOptionsPanel.hidden = true);
           systemOptionsPanelBtn.addEventListener('click', () => systemOptionsPanel.hidden = !systemOptionsPanel.hidden);
+
+          const handle = document.querySelector('nve-resize-handle[slot="left"]');
+          const panel = document.querySelector('nve-page-panel[slot="left"]');
+          handle.addEventListener('input', e => panel.style.width = e.target.value + 'px');
         </script>
         <script type="module">
           const headings = [
             ...Array.from(document.querySelectorAll('h2[nve-text*="mkd"], h3[nve-text*="mkd"], h4[nve-text*="mkd"]')),
             document.querySelector('nve-api-status') ? { textContent: 'Status', id: 'element-status'} : null,
-            document.querySelector('nve-api-table[type="all"]') ? { textContent: 'API', id: 'element-api'} : null
+            document.querySelector('nve-api-table') ? { textContent: 'API', id: 'element-api'} : null
           ].filter(i => !!i);
 
           if (headings.length > 2) {
@@ -139,8 +149,9 @@ export function render(data) {
               ${renderDocsNav(data)}
             </nve-page-panel-content>
           </nve-page-panel>
+          <nve-resize-handle slot="left" min="3" max="300" value="300" step="20" orientation="vertical"></nve-resize-handle>
           <main nve-layout="column align:center">
-            <div nve-layout="row gap:xxl align:horizontal-center full">
+            <div nve-layout="row align:horizontal-center full" style="gap: 5rem;">
               <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl">
                 ${
                   data.tag

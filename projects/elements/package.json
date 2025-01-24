@@ -627,6 +627,18 @@
       "types": "./dist/range/define.d.ts",
       "default": "./dist/range/define.js"
     },
+    "./resize-handle": {
+      "types": "./dist/resize-handle/index.d.ts",
+      "default": "./dist/resize-handle/index.js"
+    },
+    "./resize-handle/index.js": {
+      "types": "./dist/resize-handle/index.d.ts",
+      "default": "./dist/resize-handle/index.js"
+    },
+    "./resize-handle/define.js": {
+      "types": "./dist/resize-handle/define.d.ts",
+      "default": "./dist/resize-handle/define.js"
+    },
     "./scoped": {
       "types": "./dist/scoped/index.d.ts",
       "default": "./dist/scoped/index.js"
