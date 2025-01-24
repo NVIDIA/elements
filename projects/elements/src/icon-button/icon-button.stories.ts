@@ -1,35 +1,16 @@
 import { html } from 'lit';
-import type { IconButton } from '@nvidia-elements/core/icon-button';
-import { spread } from '@nvidia-elements/core/internal';
-import { ICON_NAMES } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Elements/Icon Button/Examples',
-  component: 'nve-icon-button',
-  argTypes: {
-    interaction: {
-      control: 'inline-radio',
-      options: ['emphasis', 'destructive', 'flat']
-    },
-    iconName: {
-      control: 'inline-radio',
-      options: ICON_NAMES
-    }
-  }
+  component: 'nve-icon-button'
 };
-
-type ArgTypes = IconButton;
 
 export const Default = {
-  render: (args: ArgTypes) => html`<nve-icon-button ${spread(args)}></nve-icon-button>`,
-  args: { disabled: false, iconName: 'menu', interaction: '' }
+  render: () => html`
+    <nve-icon-button icon-name="menu"></nve-icon-button>
+  `
 };
-
-export const Emphasize = { ...Default, args: { iconName: 'menu', interaction: 'emphasis' } };
-export const Destructive = { ...Default, args: {  iconName: 'menu', interaction: 'destructive' } };
-export const Flat = { ...Default, args: {  iconName: 'menu', interaction: 'flat' } };
-export const Disabled = { ...Default, args: {  iconName: 'menu', disabled: true } };
 
 export const Interactions = {
   render: () => html`

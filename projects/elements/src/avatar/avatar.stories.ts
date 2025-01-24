@@ -20,36 +20,34 @@ export const Image = {
 `};
 
 export const Icon = {
-    render: () => html`
+  render: () => html`
     <div nve-layout="row gap:sm align:wrap">
+      <nve-avatar>
+        <nve-icon name="star"></nve-icon>
+      </nve-avatar>
         <nve-avatar>
-            <nve-icon name="star"></nve-icon>
-        </nve-avatar>
-         <nve-avatar>
-            <nve-icon name="person"></nve-icon>
-        </nve-avatar>
+        <nve-icon name="person"></nve-icon>
+      </nve-avatar>
     </div>
 `};
 
 export const Size = {
-    render: () => html`
+  render: () => html`
     <div nve-layout="row gap:sm align:wrap">
-        <nve-avatar size="sm">AV</nve-avatar>
-        <nve-avatar>AV</nve-avatar>
-        <nve-avatar size="lg">AV</nve-avatar>
+      <nve-avatar size="sm">AV</nve-avatar>
+      <nve-avatar>AV</nve-avatar>
+      <nve-avatar size="lg">AV</nve-avatar>
     </div>
 `};
 
 export const AvatarGroup = {
   render: () => html`
-  <div nve-layout="column gap:sm pad:sm">
-  <nve-avatar-group>
+    <nve-avatar-group>
       <nve-avatar color="red-cardinal">AV</nve-avatar>
       <nve-avatar color="blue-cobalt">AV</nve-avatar>
       <nve-avatar color="green-grass">AV</nve-avatar>
       <nve-avatar>+3</nve-avatar>
-  </nve-avatar-group>
-  </div>
+    </nve-avatar-group>
 `};
 
 export const Color = {

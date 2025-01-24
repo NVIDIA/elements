@@ -9,7 +9,6 @@ export default {
 
 export const Default = {
   render: () => html`
-  <div>
     <nve-accordion>
       <nve-accordion-header>
         <div slot="title">Heading</div>
@@ -17,13 +16,11 @@ export const Default = {
 
       <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
     </nve-accordion>
-  </div>
   `
 };
 
 export const Full = {
   render: () => html`
-  <div>
     <nve-accordion behavior-expand>
       <nve-accordion-header>
         <div slot="title">Heading</div>
@@ -31,13 +28,11 @@ export const Full = {
 
       <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
     </nve-accordion>
-  </div>
   `
 };
 
 export const Animated = {
   render: () => html`
-  <div>
     <nve-accordion behavior-expand style="--transition: height 0.3s ease-in-out">
       <nve-accordion-header>
         <div slot="title">Heading</div>
@@ -45,13 +40,11 @@ export const Animated = {
 
       <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
     </nve-accordion>
-  </div>
   `
 };
 
 export const Disabled = {
   render: () => html`
-  <div>
     <nve-accordion behavior-expand disabled>
       <nve-accordion-header>
         <div slot="title">Heading</div>
@@ -59,13 +52,11 @@ export const Disabled = {
 
       <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
     </nve-accordion>
-  </div>
   `
 };
 
 export const Inset = {
   render: () => html`
-  <div>
     <nve-accordion behavior-expand container="inset">
       <nve-accordion-header>
         <div slot="title">Heading</div>
@@ -74,22 +65,19 @@ export const Inset = {
 
       <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
     </nve-accordion>
-  </div>
 `
 };
 
 export const Flat = {
   render: () => html`
-  <div>
     <nve-accordion behavior-expand container="flat">
-        <nve-accordion-header>
-          <div slot="title">Heading</div>
-          <div slot="subtitle">Subheading</div>
-        </nve-accordion-header>
+      <nve-accordion-header>
+        <div slot="title">Heading</div>
+        <div slot="subtitle">Subheading</div>
+      </nve-accordion-header>
 
-        <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
-      </nve-accordion>
-  </div>
+      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+    </nve-accordion>
 `
 };
 
@@ -125,24 +113,20 @@ export const CustomIconButtonInteractive = {
 
 export const WithActions = {
   render: () => html`
-  <div>
-      <nve-accordion behavior-expand>
-        <nve-accordion-header>
-          <div slot="title">Heading</div>
+    <nve-accordion behavior-expand>
+      <nve-accordion-header>
+        <div slot="title">Heading</div>
+        <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
+        <nve-icon-button container="flat" icon-name="delete" size="sm" slot="actions"></nve-icon-button>
+      </nve-accordion-header>
 
-          <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
-          <nve-icon-button container="flat" icon-name="delete" size="sm" slot="actions"></nve-icon-button>
-        </nve-accordion-header>
-
-        <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
-      </nve-accordion>
-  </div>
+      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+    </nve-accordion>
   `
 };
 
 export const AccordionGroupFull = {
   render: () => html`
-  <div>
     <nve-accordion-group behavior-expand>
       <nve-accordion>
         <nve-accordion-header>
@@ -168,13 +152,11 @@ export const AccordionGroupFull = {
         <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
       </nve-accordion>
     </nve-accordion-group>
-  </div>
   `
 };
 
 export const AccordionGroupInset = {
   render: () => html`
-  <div>
     <nve-accordion-group container="inset" behavior-expand>
       <nve-accordion>
         <nve-accordion-header>
@@ -200,13 +182,11 @@ export const AccordionGroupInset = {
         <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
       </nve-accordion>
     </nve-accordion-group>
-  </div>
   `
 };
 
 export const AccordionGroupFlat = {
   render: () => html`
-  <div>
     <nve-accordion-group container="flat" behavior-expand>
       <nve-accordion>
         <nve-accordion-header>
@@ -232,13 +212,11 @@ export const AccordionGroupFlat = {
         <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
       </nve-accordion>
     </nve-accordion-group>
-  </div>
   `
 };
 
 export const AccordionGroupExpandSingle = {
   render: () => html`
-  <div>
     <nve-accordion-group behavior-expand-single>
       <nve-accordion>
         <nve-accordion-header>
@@ -264,6 +242,5 @@ export const AccordionGroupExpandSingle = {
         <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
       </nve-accordion>
     </nve-accordion-group>
-  </div>
   `
 };
