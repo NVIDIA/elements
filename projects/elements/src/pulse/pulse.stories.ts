@@ -8,36 +8,36 @@ export default {
 
 export const Default = {
   render: () => html`
-  <div nve-layout="row align:center">
+    <div nve-layout="row align:center">
       <nve-pulse aria-label="pulse component"></nve-pulse>
-  </div>
+    </div>
 `};
 
 export const Status = {
-    render: () => html`
-      <div nve-layout="row gap:sm pad:md">
-        <nve-pulse></nve-pulse>
-        <nve-pulse status="accent"></nve-pulse>
-        <nve-pulse status="warning"></nve-pulse>
-        <nve-pulse status="danger"></nve-pulse>
-      </div>
+  render: () => html`
+    <div nve-layout="row gap:sm pad:md">
+      <nve-pulse></nve-pulse>
+      <nve-pulse status="accent"></nve-pulse>
+      <nve-pulse status="warning"></nve-pulse>
+      <nve-pulse status="danger"></nve-pulse>
+    </div>
 `};
 
 export const Size = {
-    render: () => html`
-      <div nve-layout="row align:center">
-        <nve-pulse size="xs"></nve-pulse>
-        <nve-pulse size="sm"></nve-pulse>
-        <nve-pulse size="md"></nve-pulse>
-        <nve-pulse size="lg"></nve-pulse>
-      </div>
+  render: () => html`
+    <div nve-layout="row align:center">
+      <nve-pulse size="xs"></nve-pulse>
+      <nve-pulse size="sm"></nve-pulse>
+      <nve-pulse size="md"></nve-pulse>
+      <nve-pulse size="lg"></nve-pulse>
+    </div>
 `};
 
 export const Inline = {
   render: () => html`
-  <div nve-layout="row gap:xs align:center">
-    <nve-pulse status="danger"></nve-pulse>
-    Live Status
-  </div>
+    <div nve-layout="row gap:xs align:center">
+      <nve-pulse status="danger"></nve-pulse>
+      Live Status
+    </div>
   `
 }
