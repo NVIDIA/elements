@@ -5,7 +5,6 @@ import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   appendRootNodeStyle,
   attachInternals,
-  getFlattenedFocusableItems,
   keyNavigationList,
   onChildListMutation,
   useStyles
@@ -63,14 +62,16 @@ export class Tree extends LitElement {
   /** @private */
   get keynavListConfig(): KeynavListConfig {
     return {
-      items: this.openNodes,
+      items: this.openNodes.map(node => node.shadowRoot.querySelector('[part="node-header"]')),
       layout: 'vertical'
     };
   }
 
   /** @private */
-  get openNodes() {
-    return getFlattenedFocusableItems(this).filter(n => n.getAttribute('part') === 'node-header');
+  get openNodes(): TreeNode[] {
+    return this.nodes.filter(
+      node => node.expanded || (node.parentNode as any).expanded || (node.parentNode as any) === this
+    );
   }
 
   render() {
