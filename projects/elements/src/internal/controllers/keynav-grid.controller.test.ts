@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { keyNavigationGrid } from '@nvidia-elements/core/internal';
-import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable, emulateClick } from '@nvidia-elements/testing';
 
 @keyNavigationGrid<GridKeyNavigationControllerTestElement>()
 @customElement('grid-key-navigation-controller-test-element')
@@ -306,7 +306,7 @@ describe('grid-key-navigation.controller', () => {
     expect(element.shadowRoot.activeElement).toEqual(element.keynavGridConfig.cells[15]);
   });
 
-  it('should ignore any key navigation inputs when a interactive element is active wihtin a cell', async () => {
+  it('should ignore any key navigation inputs when a interactive element is active within a cell', async () => {
     await elementIsStable(element);
     element.keynavGridConfig.grid.dispatchEvent(
       new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true })
@@ -325,5 +325,35 @@ describe('grid-key-navigation.controller', () => {
     await elementIsStable(element);
     expect(element.keynavGridConfig.cells[15].tabIndex).toBe(0);
     expect(element.shadowRoot.activeElement).toEqual(element.keynavGridConfig.cells[15].querySelectorAll('input')[0]);
+  });
+
+  it('should allow focus on complex input types if clicked', async () => {
+    await elementIsStable(element);
+    const input = element.keynavGridConfig.cells[15].querySelector('input');
+    expect(input.matches(':focus')).toBe(false);
+    input.focus();
+    emulateClick(input);
+    await elementIsStable(element);
+    expect(input.matches(':focus')).toBe(true);
+  });
+
+  it('should allow focus on simple focus type if clicked', async () => {
+    await elementIsStable(element);
+    const button = element.keynavGridConfig.cells[16].querySelector('button');
+    expect(button.matches(':focus')).toBe(false);
+    button.focus();
+    emulateClick(button);
+    await elementIsStable(element);
+    expect(button.matches(':focus')).toBe(true);
+  });
+
+  it('should allow focus on simple focus type if clicked in cell with multiple focus targets', async () => {
+    await elementIsStable(element);
+    const button = element.keynavGridConfig.cells[17].querySelectorAll('button')[1];
+    expect(button.matches(':focus')).toBe(false);
+    button.focus();
+    emulateClick(button);
+    await elementIsStable(element);
+    expect(button.matches(':focus')).toBe(true);
   });
 });
