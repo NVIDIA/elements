@@ -157,6 +157,8 @@
     "lint": "wireit"
   },
   "dependencies": {
+    "fflate": "0.8.2",
+    "html-format": "1.1.7",
     "lit": "catalog:",
     "showdown": "2.1.0"
   },
@@ -173,8 +175,6 @@
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "eslint": "catalog:",
-    "fflate": "0.8.2",
-    "html-format": "1.1.7",
     "publint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",

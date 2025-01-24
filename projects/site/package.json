@@ -17,7 +17,15 @@
     },
     "dev": {
       "command": "eleventy --serve",
-      "dependencies": []
+      "dependencies": [
+        "build"
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     },
     "build": {
       "command": "pnpm exec eleventy",
@@ -31,17 +39,18 @@
       ],
       "dependencies": [
         "clean",
-        "../elements:build"
+        "../elements:build",
+        "../internals/elements-api:build"
       ],
       "env": {
-        "PAGES_SITE_PREFIX": {
+        "PAGES_BASE_URL": {
           "external": true,
-          "default": ""
+          "default": "/elements/"
         }
       }
     },
     "preview": {
-      "command": "DEV_PREVIEW=true pnpm run build && vite preview --base=/elements",
+      "command": "pnpm run build && vite preview --base=$PAGES_BASE_URL",
       "service": true,
       "files": [
         "src",
@@ -49,9 +58,9 @@
         "./eleventy.config.js"
       ],
       "env": {
-        "DEV_PREVIEW": {
+        "PAGES_BASE_URL": {
           "external": true,
-          "default": ""
+          "default": "/elements/preview/"
         }
       }
     },
@@ -70,6 +79,7 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
+    "@internals/elements-api": "workspace:*",
     "markdown-it": "14.1.0",
     "typescript": "catalog:",
     "vite": "catalog:"

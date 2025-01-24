@@ -1,35 +1,30 @@
 ---js
-const IS_MR_PREVIEW = !!process.env.PAGES_SITE_PREFIX;
-const IS_DEV_MODE = process.env.ELEVENTY_RUN_MODE === 'serve' || process.env.DEV_PREVIEW === 'true';
-const IS_PROD = !IS_MR_PREVIEW && !IS_DEV_MODE;
-const PROD_REDIRECT = IS_PROD ? '<meta http-equiv="refresh" content="0; url=/elements/api/" />' : `<!-- IS_PROD: ${IS_PROD}, IS_MR_PREVIEW: ${IS_MR_PREVIEW}, IS_DEV_MODE: ${IS_DEV_MODE} -->`;
-const DEV_REDIRECT = IS_DEV_MODE ? `<script type="module">globalThis.location?.hostname === 'localhost' && globalThis.location.pathname === '/' ? globalThis.location?.replace('/elements/') : ''</script>` : '';
+import { renderBaseHead, PROD_REDIRECT } from './src/_layouts/common.js';
+const title = 'The Design Language for AI/ML Factories Building at the Speed of Light';
+const BASE_HEAD = renderBaseHead({ title })
 ---
 
 <!doctype html>
-<html lang="en" nve-theme="dark" nve-transition="auto">
+<html lang="en" nve-theme="" nve-transition="auto">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/assets/favicon.svg" />
-    <title>Elements</title>
+    {{ PROD_REDIRECT }} {{ BASE_HEAD }}
     <link rel="stylesheet" href="./index.css" />
-    {{ PROD_REDIRECT }} {{ DEV_REDIRECT }}
+    <script type="module">
+      import './index.ts';
+    </script>
   </head>
   <body>
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm"></nve-logo>
-        <a slot="prefix" href="/elements/">Elements</a>
-        <nve-button container="flat"
-          ><a href="/elements/api/?path=/docs/about-installation--docs">Get Started</a></nve-button
-        >
+        <a slot="prefix" href=".">Elements</a>
+        <nve-button container="flat"><a href="api/?path=/docs/about-installation--docs">Get Started</a></nve-button>
         <nve-button container="flat"
           ><a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank"
             >Playground</a
           ></nve-button
         >
-        <nve-button container="flat"><a href="/elements/starters/buildless/">Starters</a></nve-button>
+        <nve-button container="flat"><a href="starters/">Starters</a></nve-button>
         <nve-button container="flat"
           ><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button
         >
@@ -244,8 +239,5 @@ const DEV_REDIRECT = IS_DEV_MODE ? `<script type="module">globalThis.location?.h
         </main>
       </div>
     </nve-page>
-    <script type="module">
-      import './index.ts';
-    </script>
   </body>
 </html>

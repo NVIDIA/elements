@@ -311,6 +311,12 @@ importers:
       '@nvidia-elements/code':
         specifier: workspace:^
         version: link:../../labs/code
+      fflate:
+        specifier: 0.8.2
+        version: 0.8.2
+      html-format:
+        specifier: 1.1.7
+        version: 1.1.7
       lit:
         specifier: 'catalog:'
         version: 3.2.1
@@ -342,12 +348,6 @@ importers:
       eslint:
         specifier: 'catalog:'
         version: 9.18.0(jiti@1.21.6)
-      fflate:
-        specifier: 0.8.2
-        version: 0.8.2
-      html-format:
-        specifier: 1.1.7
-        version: 1.1.7
       publint:
         specifier: 'catalog:'
         version: 0.3.2
@@ -605,6 +605,9 @@ importers:
       '@lit-labs/ssr-client':
         specifier: 'catalog:'
         version: 1.1.7
+      '@internals/elements-api':
+        specifier: workspace:*
+        version: link:../internals/elements-api
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../elements

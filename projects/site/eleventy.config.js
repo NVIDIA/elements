@@ -1,7 +1,7 @@
-import { join } from 'node:path';
 import { EleventyRenderPlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import markdownIt from 'markdown-it';
+import { BASE_URL } from './src/_layouts/common.js';
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
@@ -10,23 +10,38 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/**/*.css');
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
-      base: join('/elements', process.env.PAGES_SITE_PREFIX ?? '')
+      base: BASE_URL
+    }
+  });
+
+  eleventyConfig.setServerOptions({
+    onRequest: {
+      '/': () => ({
+        status: 307,
+        headers: {
+          Location: BASE_URL
+        }
+      })
     }
   });
 
   const markdown = markdownIt({
     html: true,
     breaks: true,
-    linkify: true
+    linkify: true,
+    // highlight: function (/*str, lang*/) { return ''; }
+    highlight: function (str, lang) {
+      return /* html */ `<nve-codeblock language="${lang}">${markdown.utils.escapeHtml(str)}</nve-codeblock>`;
+    }
   });
 
   const formats = {
-    h1: 'heading xl',
-    h2: 'heading lg',
-    h3: 'heading md',
-    h4: 'heading sm',
+    h1: 'display',
+    h2: 'heading xl',
+    h3: 'heading lg',
+    h4: 'heading',
     h5: 'heading',
-    h6: 'heading',
+    h6: 'heading sm',
     p: 'body',
     a: 'link'
   };
@@ -37,11 +52,11 @@ export default function (eleventyConfig) {
       tokens[idx].type === 'link_open' ||
       tokens[idx].type === 'paragraph_open'
     ) {
-      tokens[idx].attrSet('nve-text', formats[tokens[idx].tag]);
+      tokens[idx].attrSet('nve-text', `${formats[tokens[idx].tag]} mkd`);
     }
 
     if (tokens[idx].type === 'bullet_list_open') {
-      tokens[idx].attrSet('nve-text', 'list');
+      tokens[idx].attrSet('nve-text', 'list mkd');
       tokens[idx].attrSet('nve-layout', 'column gap:xs');
     }
 
