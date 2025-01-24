@@ -1,10 +1,15 @@
-import { Meta, Story } from '@storybook/addon-docs';
-import '@nvidia-elements/core/alert/define.js';
-import { Responsive } from '../../../elements/src/forms/control/control.stories';
+---
+{
+  title: 'Styles',
+  layout: 'docs.11ty.js'
+}
+---
 
-<Meta title="API Design/Styles" />
+<script type="module">
+  import '@nvidia-elements/core/grid/define.js';
+</script>
 
-# Styles
+# {{ title }}
 
 ## Strategies
 
@@ -55,10 +60,7 @@ Elements expose custom CSS properties that typically correspond to their native 
   </nve-grid-row>
 </nve-grid>
 
-Prefer exposing shorthand values. `border: var(--border)` rather than `border-color: var(--border-color)`
-as this gives more flexibility to the user without expanding the public API surface. When possible keep
-CSS Custom Property names simple and map them 1:1 to the native CSS property. This lowers the learning
-curve of the API and makes it consistent between other components within the library.
+Prefer exposing shorthand values. `border: var(--border)` rather than `border-color: var(--border-color)` as this gives more flexibility to the user without expanding the public API surface. When possible keep CSS Custom Property names simple and map them 1:1 to the native CSS property. This lowers the learning curve of the API and makes it consistent between other components within the library.
 
 <nve-alert status="success">Do:</nve-alert>
 
@@ -84,10 +86,7 @@ curve of the API and makes it consistent between other components within the lib
 
 #***REMOVED*** Host
 
-The internal host element is a pattern that provides an API guard on the element. When styling
-a custom element, avoid applying styles other than basic display properties and custom properties
-to the host element. The more styles applied to the host, the easier it is for a consumer to
-override and change the styles in unexpected ways.
+The internal host element is a pattern that provides an API guard on the element. When styling a custom element, avoid applying styles other than basic display properties and custom properties to the host element. The more styles applied to the host, the easier it is for a consumer to override and change the styles in unexpected ways.
 
 <nve-alert status="danger">Don't:</nve-alert>
 
@@ -120,12 +119,9 @@ override and change the styles in unexpected ways.
 </style>
 ```
 
-In this example, the element is at risk of being styled by the app in unsupported or
-unpredictable ways. Custom style leaks like this make visual changes or migrations
-difficult for both the library authors and consumers.
+In this example, the element is at risk of being styled by the app in unsupported or unpredictable ways. Custom style leaks like this make visual changes or migrations difficult for both the library authors and consumers.
 
-To prevent internal style leakage, leverage a internal host element to apply styles
-and expose only the styles as needed to the public facing API.
+To prevent internal style leakage, leverage a internal host element to apply styles and expose only the styles as needed to the public facing API.
 
 <nve-alert status="success">Do:</nve-alert>
 
@@ -155,14 +151,11 @@ and expose only the styles as needed to the public facing API.
 </style>
 ```
 
-By scoping the background and color to the internal-host element we guarantee the look and
-feel of the element can only be changed via the public API of our exposed CSS Custom Properties.
+By scoping the background and color to the internal-host element we guarantee the look and feel of the element can only be changed via the public API of our exposed CSS Custom Properties.
 
 ## State Properties
 
-Leverage host selectors to customize the element visual state. This avoids expanding the public API
-of the element and enabling a single CSS representation of the component. Each visual variant
-is solely responsible for modifying the public API to reflect the appropriate state.
+Leverage host selectors to customize the element visual state. This avoids expanding the public API of the element and enabling a single CSS representation of the component. Each visual variant is solely responsible for modifying the public API to reflect the appropriate state.
 
 <nve-alert status="success">Do:</nve-alert>
 
@@ -200,11 +193,9 @@ is solely responsible for modifying the public API to reflect the appropriate st
 }
 ```
 
-By modifying only a single set of Custom Properties we keep the CSS specificity low
-and ensure that any combination visual states can be themed within the predictable public API.
+By modifying only a single set of Custom Properties we keep the CSS specificity low and ensure that any combination visual states can be themed within the predictable public API.
 
-With custom elements, the element tag is the scope for the design tokens. Element-specific design
-tokens are unnecessary and increase the surface area of the API and number of tokens to maintain.
+With custom elements, the element tag is the scope for the design tokens. Element-specific design tokens are unnecessary and increase the surface area of the API and number of tokens to maintain.
 
 ```css
 nve-alert.product-custom:hover {
@@ -245,18 +236,11 @@ Visual customizations and theming are now fully compatible throughout the public
 }
 ```
 
-In this example the subtle change of not assigning to the default host properties
-not only increase the CSS specificity but also make certain customizations/theming
-impossible without exposing additional CSS custom properties.
+In this example the subtle change of not assigning to the default host properties not only increase the CSS specificity but also make certain customizations/theming impossible without exposing additional CSS custom properties.
 
 ## Design Tokens Usage
 
-CSS Custom Properties defined on the host should use Design Tokens that appropriately
-describe the system's intent. CSS Custom Properties should not be explicitly named
-with the element name as this encourages inconsistency between elements rather than
-using the system's intent/purpose tokens. Leveraging State Properties for CSS custom
-properties, element specific design tokens are unnecessary and increase the surface
-area of the API and number of tokens to maintain. (see State Properties for more information)
+CSS Custom Properties defined on the host should use Design Tokens that appropriately describe the system's intent. CSS Custom Properties should not be explicitly named with the element name as this encourages inconsistency between elements rather than using the system's intent/purpose tokens. Leveraging State Properties for CSS custom properties, element specific design tokens are unnecessary and increase the surface area of the API and number of tokens to maintain. (see State Properties for more information)
 
 <nve-alert status="success">Do:</nve-alert>
 
@@ -312,9 +296,7 @@ nve-accordion-panel[expanded] {
 
 ## Margins & Whitespace
 
-Elements should not have any external margins or whitespace outside the bounds of the host element.
-Margins on a host element make assumptions about the layout that is external to their responsibility.
-Using a design token/layout system, designers and developers should be able to layout elements/utilities
+Elements should not have any external margins or whitespace outside the bounds of the host element. Margins on a host element make assumptions about the layout that is external to their responsibility. Using a design token/layout system, designers and developers should be able to layout elements/utilities
 consistently and with explicit intent and constraint.
 
 <nve-alert><nve-icon slot="icon">🏁</nve-icon> Performance: Avoiding margins enables &nbsp;<a href="https://developer.chrome.com/blog/css-containment/">CSS containment for better performance</a></nve-alert>
@@ -323,8 +305,7 @@ consistently and with explicit intent and constraint.
 
 ## Logical Properties
 
-Use CSS Logical Properties when the styles are applied to text content that may be inverted with reading style.
-By using logical properties the styles will follow the reading direction of the element. This is needed for i18n
+Use CSS Logical Properties when the styles are applied to text content that may be inverted with reading style. By using logical properties the styles will follow the reading direction of the element. This is needed for i18n
 support when the reading order is reversed by the user preferences in the browser.
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: &nbsp;<a href="https://web.dev/logical-property-shorthands/">CSS Logical Properties</a></nve-alert>
@@ -348,13 +329,9 @@ CSS Parts enable elements to expose DOM elements to consumers that typically wou
 
 <nve-alert status="warning">Warning: avoid using: CSS Parts can drastically increase the API surface area of a element and can cause significant costs when updating visual changes in future versions.</nve-alert>
 
-CSS Parts give full control to the application developer however, this comes with a significant
-tradeoff. As more internal elements are exposed they become part of the public API of the element.
-Over time increases the difficulty of maintaining the API and making visual changes of the
-element without causing unexpected visual breaking changes to the consumer.
+CSS Parts give full control to the application developer however, this comes with a significant tradeoff. As more internal elements are exposed they become part of the public API of the element.Over time increases the difficulty of maintaining the API and making visual changes of the element without causing unexpected visual breaking changes to the consumer.
 
-Elements that are part of the library's public API can more safely be exposed as it has
-its own well defined and versioned API.
+Elements that are part of the library's public API can more safely be exposed as it has its own well defined and versioned API.
 
 ```html
 <!-- nve-dialog internal template -->
@@ -372,12 +349,7 @@ This enables safely giving more control to the application developer while preve
 
 ## Responsive
 
-Elements should be responsive to support a wide variety of use cases. While not all apps are responsive,
-elements should be responsive to their parent element. This ensures that the element properly renders in
-any context, regardless if the element is in a datagrid, dashboard or article content. This can be
-accomplished by leveraging APIs like ResizeObserver and in the future Container Queries.
-
-<Story of={Responsive} />
+Elements should be responsive to support a wide variety of use cases. While not all apps are responsive, elements should be responsive to their parent element. This ensures that the element properly renders in any context, regardless if the element is in a datagrid, dashboard or article content. This can be accomplished by leveraging APIs like ResizeObserver and in the future Container Queries.
 
 ## Performance &amp; Imports
 
@@ -394,9 +366,7 @@ export class Badge extends LitElement {
 }
 ```
 
-Components should not import theme files or text/layout utilities. These stylesheets are
-designed for global application level styles. Imports will cause the styles to be inlined
-at runtime and create severe performance penalties to consumers of the component.
+Components should not import theme files or text/layout utilities. These stylesheets are designed for global application level styles. Imports will cause the styles to be inlined at runtime and create severe performance penalties to consumers of the component.
 
 <nve-alert status="danger">Don't:</nve-alert>
 

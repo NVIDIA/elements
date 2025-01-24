@@ -1,6 +1,5 @@
 import { html, css, LitElement, nothing, unsafeCSS } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import showdown from 'showdown';
 import { compareVersions } from 'compare-versions';
 
 import { define } from '@nvidia-elements/core/internal';
@@ -25,7 +24,6 @@ import { MetadataService, ESM_ELEMENTS_VERSION } from '@nve-internals/elements-a
 const metrics = await MetadataService.getMetadata();
 const metricsMaglev = await MetadataService.getMaglevMetadata();
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(new Date(metrics.created));
-const showdownOptions = { simplifiedAutoLink: true };
 
 export default {
   title: 'Internal/Metrics'
@@ -97,44 +95,6 @@ export const RawMetadata = {
     </script>
   `
 }
-
-class ElementsGlossary extends LitElement {
-  static metadata = {
-    tag: 'elements-glossary',
-    version: 'demo'
-  }
-
-  static styles = [unsafeCSS(`${typography}${layout}`)];
-
-  #markdown = new showdown.Converter(showdownOptions);
-
-  render() {
-    return html`
-      <section nve-layout="column gap:md">
-        <h3 nve-text="heading">Properties</h3>
-        <nve-grid>
-          <nve-grid-header>
-            <nve-grid-column width="150px">Property</nve-grid-column>
-            <nve-grid-column>Description</nve-grid-column>
-            <nve-grid-column width="350px">Type</nve-grid-column>
-          </nve-grid-header>
-          ${metrics.types.props?.map(prop => html`
-          <nve-grid-row>
-            <nve-grid-cell><code nve-text="code">${prop.name}</code></nve-grid-cell>
-            <nve-grid-cell .innerHTML=${this.#markdown.makeHtml(prop.description ?? '')}></nve-grid-cell>
-            <nve-grid-cell>
-              <div nve-layout="row gap:xs align:wrap">
-                ${prop.type ? html`${prop.type?.split('|').map(i => i.trim()).filter(i => i.length).map(i => html`<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)}` : nothing}
-              </div>
-            </nve-grid-cell>
-          </nve-grid-row>`)}
-        </nve-grid>
-      </section>
-    `;
-  }
-}
-
-define(ElementsGlossary);
 
 interface MetricColumn {
   sort: 'ascending' | 'descending' | 'none',
@@ -548,8 +508,4 @@ export const Metrics = {
 
 export const Maglev = {
   render: () => html`<project-metrics></project-metrics>`
-};
-
-export const Glossary = {
-  render: () => html`<elements-glossary></elements-glossary>`
 };

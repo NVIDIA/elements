@@ -4,7 +4,8 @@ import { join } from 'node:path';
 
 export default defineConfig({
   root: './src',
-  base: join('/elements', process.env.PAGES_SITE_PREFIX ?? '', 'starters', 'mpa'),
+  envDir: '../',
+  base: join('/', process.env.PAGES_BASE_URL ?? '', 'starters', 'mpa'),
   publicDir: '../assets',
   build: {
     sourcemap: true,

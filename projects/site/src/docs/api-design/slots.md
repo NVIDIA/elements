@@ -1,8 +1,11 @@
-import { Meta } from '@storybook/addon-docs';
+---
+{
+  title: 'Slots',
+  layout: 'docs.11ty.js'
+}
+---
 
-<Meta title="API Design/Slots" />
-
-# Slots
+# {{ title }}
 
 Slots enable dynamic content to be rendered into the template of a given element.
 
@@ -12,8 +15,7 @@ Slots enable dynamic content to be rendered into the template of a given element
 
 ## Flexibility
 
-Slots provide flexibility for content that is controlled by the host application and cannot be
-guaranteed to be represented accurately through a specific element API.
+Slots provide flexibility for content that is controlled by the host application and cannot be guaranteed to be represented accurately through a specific element API.
 
 ```html
 <nve-alert status="success">
@@ -23,9 +25,7 @@ guaranteed to be represented accurately through a specific element API.
 
 ## Composition
 
-Slots enable an easy way for component composition and decoupling from precise use cases that
-are application specific. This also decouples layout behaviors such as icon and button placement,
-giving the application control on DOM ordering.
+Slots enable an easy way for component composition and decoupling from precise use cases that are application specific. This also decouples layout behaviors such as icon and button placement, giving the application control on DOM ordering.
 
 ```html
 <nve-card>
@@ -42,8 +42,7 @@ giving the application control on DOM ordering.
 </nve-card>
 ```
 
-Avoid exposing slot APIs as part of the public API. Rather than requiring the consumer to set a
-slot name on elements, have the element assign its own slot automatically.
+Avoid exposing slot APIs as part of the public API. Rather than requiring the consumer to set a slot name on elements, have the element assign its own slot automatically.
 
 ```typescript
 class Modal {
@@ -63,16 +62,13 @@ class ModalFooter {
 }
 ```
 
-If the footer element assigns its own slot it prevents the consumer from having to know or remember
-the underlying slot names reducing the API surface area.
+If the footer element assigns its own slot it prevents the consumer from having to know or remember the underlying slot names reducing the API surface area.
 
 🎓 Case Study: example of automatic slot assignment
 
 ## Rendering
 
-Composition based APIs also provide flexibility for the host application to choose the most appropriate
-render strategy for large lists of elements. For example, a tree view component can have hundreds or thousands
-of potential nodes of varying complexity.
+Composition based APIs also provide flexibility for the host application to choose the most appropriate render strategy for large lists of elements. For example, a tree view component can have hundreds or thousands of potential nodes of varying complexity.
 
 ```html
 <nve-tree>
