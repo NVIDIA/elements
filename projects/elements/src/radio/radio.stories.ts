@@ -4,7 +4,7 @@ import '@nvidia-elements/core/radio/define.js';
 
 export default {
   title: 'Elements/Radio/Examples',
-  component: 'nve-input',
+  component: 'nve-radio',
 };
 
 export const Radio = {

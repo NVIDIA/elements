@@ -61,6 +61,11 @@
   --max-height: 380px;
 }
 
+:host([style*='width']) {
+  --width: 100%;
+  --max-width: 100%;
+}
+
 [part='_header'] {
   display: flex;
   align-items: center;

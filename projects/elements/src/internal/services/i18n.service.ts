@@ -31,6 +31,7 @@ export interface I18nStrings {
   scale: string;
   reducedMotion: string;
   colorScheme: string;
+  resize: string;
 }
 
 const i18nRegistry = {
@@ -63,7 +64,8 @@ const i18nRegistry = {
   theme: 'theme',
   scale: 'scale',
   reducedMotion: 'reduced motion',
-  colorScheme: 'color scheme'
+  colorScheme: 'color scheme',
+  resize: 'resize'
 };
 
 export class I18nService_ {
