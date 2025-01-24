@@ -304,7 +304,7 @@ describe('skip behaviors keynav-list.controller', () => {
 });
 
 @customElement('disabled-keynav-list-test-element')
-@keyNavigationList<KeynavListControllerTestElement>()
+@keyNavigationList<DisabledKeynavListControllerTestElement>()
 class DisabledKeynavListControllerTestElement extends LitElement {
   @property({ type: String }) layout: 'horizontal' | 'vertical' = 'horizontal';
 
@@ -353,5 +353,101 @@ describe('disabled behaviors keynav-list.controller', () => {
 
     await elementIsStable(element);
     expect(element.keynavListConfig.items[2].tabIndex).toBe(0);
+  });
+});
+
+@customElement('nested-interactive-keynav-list-test-element')
+@keyNavigationList<NestedInteractiveKeynavListControllerTestElement>()
+class NestedInteractiveKeynavListControllerTestElement extends LitElement {
+  get keynavListConfig() {
+    return {
+      layout: 'vertical' as const,
+      items: this.shadowRoot.querySelectorAll<HTMLElement>('div')
+    };
+  }
+
+  render() {
+    return html`
+      <section>
+        <div><span>0</span></div>
+        <div><button>1</button></div>
+        <div><input /></div>
+        <div><span>3</span></div>
+      </section>
+    `;
+  }
+}
+
+describe('nested interactive keynav-list.controller', () => {
+  let fixture: HTMLElement;
+  let element: NestedInteractiveKeynavListControllerTestElement;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(
+      html`<nested-interactive-keynav-list-test-element></nested-interactive-keynav-list-test-element>`
+    );
+    element = fixture.querySelector<NestedInteractiveKeynavListControllerTestElement>(
+      'nested-interactive-keynav-list-test-element'
+    );
+    input = element.shadowRoot.querySelector<HTMLInputElement>('input');
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].focus();
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should focus nodes skipping complex nested items when using arrow navigation', async () => {
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true })
+    );
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[2].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[3].tabIndex).toBe(-1);
+
+    element.keynavListConfig.items[1].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true })
+    );
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[2].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[3].tabIndex).toBe(-1);
+
+    element.keynavListConfig.items[2].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true })
+    );
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[2].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[3].tabIndex).toBe(0);
+  });
+
+  it('should not focus next node if current focus is on a focusable element not provided to keynav list', async () => {
+    await elementIsStable(element);
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true })
+    );
+    await elementIsStable(element);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[2].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[3].tabIndex).toBe(-1);
+
+    input.focus();
+    input.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true, composed: true }));
+
+    await elementIsStable(element);
+    expect(input.matches(':focus')).toBe(true);
+    expect(element.keynavListConfig.items[0].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[1].tabIndex).toBe(0);
+    expect(element.keynavListConfig.items[2].tabIndex).toBe(-1);
+    expect(element.keynavListConfig.items[3].tabIndex).toBe(-1);
   });
 });
