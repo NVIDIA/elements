@@ -28,18 +28,20 @@
 }
 
 slot {
-  display: block;
+  display: flex;
   scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
   scrollbar-width: thin;
 }
 
 [name='header'] {
   grid-area: header;
+  flex-direction: column;
   margin-bottom: var(--nve-ref-border-width-sm);
 }
 
 [name='subheader'] {
   grid-area: subheader;
+  flex-direction: column;
 }
 
 [name='left'] {
@@ -55,6 +57,7 @@ slot {
 [name='bottom'] {
   grid-area: bottom;
   height: fit-content;
+  flex-direction: column;
 }
 
 /** ensures sliding panels transition "under" aside slot */
@@ -91,6 +94,7 @@ slot {
 ::slotted(nve-page-panel[slot='footer']),
 ::slotted(nve-page-panel[slot='subfooter']) {
   border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  width: 100%;
 }
 
 ::slotted(nve-page-panel[slot='left']),
@@ -123,6 +127,18 @@ slot {
 ::slotted(nve-toolbar[slot='left-aside']),
 ::slotted(nve-toolbar[slot='right-aside']) {
   --min-height: 100%;
+}
+
+::slotted(nve-resize-handle[slot]) {
+  --background: transparent;
+}
+
+::slotted(nve-resize-handle[slot='left']) {
+  margin-left: calc(-1 * var(--nve-ref-border-width-md));
+}
+
+::slotted(nve-resize-handle[slot='right']) {
+  margin-right: calc(-1 * var(--nve-ref-border-width-md));
 }
 
 slot:not([name]) {

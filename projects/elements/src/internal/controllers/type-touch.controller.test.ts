@@ -47,7 +47,7 @@ describe('touch.controller', () => {
   it('should trigger nve-touch-start on pointerdown', async () => {
     await elementIsStable(element);
     const event = untilEvent(element, 'nve-touch-start');
-    element.dispatchEvent(new PointerEvent('pointerdown'));
+    element.dispatchEvent(new PointerEvent('pointerdown', { pointerId: 1 }));
     expect(await event).toBeTruthy();
   });
 
@@ -56,10 +56,10 @@ describe('touch.controller', () => {
     const startEvent = untilEvent(element, 'nve-touch-start');
     const endEvent = untilEvent(element, 'nve-touch-end');
 
-    element.dispatchEvent(new PointerEvent('pointerdown'));
+    element.dispatchEvent(new PointerEvent('pointerdown', { pointerId: 1 }));
     expect(await startEvent).toBeTruthy();
 
-    document.dispatchEvent(new PointerEvent('pointerup'));
+    document.dispatchEvent(new PointerEvent('pointerup', { pointerId: 1 }));
     expect(await endEvent).toBeTruthy();
   });
 
@@ -67,7 +67,7 @@ describe('touch.controller', () => {
     await elementIsStable(element);
     const event = untilEvent<NveTouchEvent>(element, 'nve-touch-start');
 
-    element.dispatchEvent(new PointerEvent('pointerdown'));
+    element.dispatchEvent(new PointerEvent('pointerdown', { pointerId: 1 }));
     const touchEvent = await event;
     expect(touchEvent.x).toBe(0);
     expect(touchEvent.y).toBe(0);
@@ -78,8 +78,8 @@ describe('touch.controller', () => {
   it('should return coordinates of touchmove event', async () => {
     await elementIsStable(element);
     const event = untilEvent<NveTouchEvent>(element, 'nve-touch-move');
-    element.dispatchEvent(new PointerEvent('pointerdown', { clientX: 0, clientY: 0 }));
-    document.dispatchEvent(new PointerEvent('pointermove', { clientX: 75, clientY: 75 }));
+    element.dispatchEvent(new PointerEvent('pointerdown', { clientX: 0, clientY: 0, pointerId: 1 }));
+    document.dispatchEvent(new PointerEvent('pointermove', { clientX: 75, clientY: 75, pointerId: 1 }));
 
     const touchEvent = await event;
     expect(touchEvent.x).toEqual(75);
@@ -92,8 +92,8 @@ describe('touch.controller', () => {
     await elementIsStable(element);
     const event = untilEvent<NveTouchEvent>(element, 'nve-touch-end');
 
-    element.dispatchEvent(new PointerEvent('pointerdown'));
-    document.dispatchEvent(new PointerEvent('pointerup'));
+    element.dispatchEvent(new PointerEvent('pointerdown', { pointerId: 1 }));
+    document.dispatchEvent(new PointerEvent('pointerup', { pointerId: 1 }));
     const touchEvent = await event;
     expect(touchEvent.x).toBe(0);
     expect(touchEvent.y).toBe(0);
@@ -104,8 +104,8 @@ describe('touch.controller', () => {
   it('should return offset value from initial starting point of touchstart', async () => {
     await elementIsStable(element);
     const event = untilEvent<NveTouchEvent>(element, 'nve-touch-end');
-    element.dispatchEvent(new PointerEvent('pointerdown', { clientX: 20, clientY: 10 }));
-    document.dispatchEvent(new PointerEvent('pointerup', { clientX: 40, clientY: 20 }));
+    element.dispatchEvent(new PointerEvent('pointerdown', { clientX: 20, clientY: 10, pointerId: 1 }));
+    document.dispatchEvent(new PointerEvent('pointerup', { clientX: 40, clientY: 20, pointerId: 1 }));
 
     const touchEvent = await event;
     expect(touchEvent.x).toEqual(40);
