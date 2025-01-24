@@ -82,7 +82,8 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
 
   #clickCell(e: MouseEvent) {
     if (!isContextMenuClick(e)) {
-      const activeCell = e.composedPath().find(i => this.#hostCells.find(c => c === i));
+      const focusedElement = e.composedPath()[0] as HTMLElement;
+      const activeCell = !!this.#hostCells.find(i => i === focusedElement) ? focusedElement : null;
       if (activeCell) {
         this.#setActiveCell(e, activeCell as HTMLElement);
       }
