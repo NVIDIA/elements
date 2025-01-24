@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import { Canvas } from '@internals/storybook/blocks';
-import { Default, Content, KitchenSink, PagePanelClosable, PagePanelExpandable, SlotBanner, SlotBottom, SlotFooter, SlotLeft, SlotLeftAside, SlotRight, SlotRightAside, SlotSubfooter, SlotSubheader, SlotSubheaderLarge, PagePanelTabs, PagePanelHeadings, InteractionDrawer, InteractionPanel, InteractionPanelNavigation, DocumentScroll } from './page.stories';
+import { Default, Content, KitchenSink, PagePanelClosable, PagePanelExpandable, SlotBanner, SlotBottom, SlotFooter, SlotLeft, SlotLeftAside, SlotRight, SlotRightAside, SlotSubfooter, SlotSubheader, SlotSubheaderLarge, PagePanelTabs, PagePanelHeadings, InteractionDrawer, InteractionPanel, InteractionPanelNavigation, DocumentScroll, Resize, ResizeMulti, ResizeSnap } from './page.stories';
 
 <Meta title="Elements/Page/Documentation" />
 
@@ -144,6 +144,18 @@ import '@nvidia-elements/core/page/define.js';
 <nve-api-detail tag="nve-page" type="story" value="InteractionDrawer"></nve-api-detail>
 
 <Canvas of={InteractionDrawer} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Panel Resize
+
+<Canvas of={Resize} story={{ inline: false, height: '480px', padding: 0 }} />
+
+## Panel Resize Multi
+
+<Canvas of={ResizeMulti} story={{ inline: false, height: '560px', padding: 0 }} />
+
+## Panel Resize Snap
+
+<Canvas of={ResizeSnap} story={{ inline: false, height: '560px', padding: 0 }} />
 
 ## Document Scroll
 

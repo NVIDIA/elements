@@ -212,6 +212,7 @@ export const parameters = {
           'Pulse',
           'Radio',
           'Range',
+          'Resize Handle',
           'Search',
           'Select',
           'Sort Button',

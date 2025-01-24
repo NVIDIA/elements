@@ -1,0 +1,101 @@
+:host {
+  --background: var(--nve-ref-border-color);
+  --line-width: var(--nve-ref-border-width-sm);
+  display: block;
+  width: 100%;
+  contain: layout;
+  cursor: row-resize;
+  z-index: 99;
+}
+
+[internal-host] {
+  width: 100%;
+  height: 100%;
+
+  ::before,
+  ::after {
+    display: block;
+    content: ' ';
+    width: 100%;
+    height: var(--line-width);
+    position: absolute;
+    cursor: row-resize;
+  }
+}
+
+.line {
+  height: var(--line-width);
+  transition: background-color 200ms ease-in;
+  background: var(--background);
+}
+
+:host([orientation='horizontal']) {
+  height: var(--nve-ref-size-50);
+
+  input {
+    writing-mode: vertical-lr;
+    direction: rtl;
+  }
+}
+
+:host([orientation='vertical']) {
+  height: 100%;
+  width: var(--nve-ref-size-50);
+  cursor: col-resize;
+
+  [internal-host] {
+    ::before,
+    ::after {
+      height: 100%;
+      width: calc(2 * var(--line-width));
+      cursor: col-resize;
+    }
+
+    ::before {
+      left: calc(-1 * var(--line-width));
+    }
+
+    ::after {
+      right: calc(-1 * var(--line-width));
+    }
+  }
+
+  .line {
+    height: 100%;
+    width: var(--line-width);
+  }
+}
+
+:host([dir='rtl']) {
+  input {
+    direction: rtl;
+  }
+}
+
+[internal-host]:hover,
+[internal-host]:has(input:focus),
+:host(:state(active)) [internal-host] {
+  --line-width: var(--nve-ref-border-width-md);
+  --background: var(--nve-sys-accent-secondary-background);
+}
+
+input {
+  opacity: 0;
+  height: 0;
+  width: 0;
+  position: absolute;
+}
+
+:host(:state(active)) {
+  --background: var(--nve-sys-accent-secondary-background);
+
+  [internal-host] {
+    ::before,
+    ::after {
+      height: 100vh;
+      width: 100vw;
+      left: -50vw;
+      top: -50vh;
+    }
+  }
+}
