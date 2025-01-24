@@ -1,6 +1,6 @@
 import { ReactiveController, ReactiveElement } from 'lit';
 import { focusElement, initializeKeyListItems, setActiveKeyListItem } from '../utils/focus.js';
-import { getFlattenedFocusableItems, KeynavCode, validKeyNavigationCode } from '../utils/dom.js';
+import { KeynavCode, validKeyNavigationCode } from '../utils/dom.js';
 
 export interface KeynavListConfig {
   items: NodeListOf<HTMLElement> | HTMLElement[];
@@ -83,7 +83,8 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
   }
 
   #getActiveItem(e: Event, items: HTMLElement[]) {
-    return e.composedPath().find(i => items.find(c => c === i)) as HTMLElement;
+    const focusedElement = e.composedPath()[0] as HTMLElement;
+    return !!items.find(i => i === focusedElement) ? focusedElement : null;
   }
 
   #setActiveItem(e: any, activeItem: HTMLElement, previousItem?: HTMLElement) {
@@ -93,7 +94,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
         setActiveKeyListItem(items, activeItem);
       }
 
-      focusElement(getFlattenedFocusableItems(activeItem)[0] ?? activeItem);
+      focusElement(activeItem);
       e.preventDefault();
     }
 
