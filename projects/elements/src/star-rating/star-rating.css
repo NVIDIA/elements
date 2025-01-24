@@ -1,0 +1,34 @@
+:host {
+  --star-size: 20px;
+}
+
+:host(:state(disabled)) .stars {
+  pointer-events: none;
+}
+
+[input] {
+  position: relative;
+}
+
+[name='star'] {
+  --color: var(--nve-ref-color-yellow-amber-900);
+}
+
+nve-icon {
+  --width: var(--star-size);
+  --height: var(--star-size);
+}
+
+.stars {
+  display: flex;
+  gap: var(--nve-ref-space-xxxs);
+  height: var(--nve-ref-size-800);
+}
+
+::slotted(input) {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  margin: 0;
+}
