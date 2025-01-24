@@ -1,9 +1,11 @@
-import { Meta } from '@storybook/addon-docs';
-import '@nvidia-elements/core/alert/define.js';
+---
+{
+  title: 'API Design Guidelines',
+  layout: 'docs.11ty.js'
+}
+---
 
-<Meta title="API Design/Getting Started" />
-
-# API Design Guidelines
+# {{ title }}
 
 ## What this document is
 
@@ -17,19 +19,12 @@ This document is not intended to define the best practices and API design of hig
 
 <div nve-layout="column gap:xs">
   <nve-alert status="success">Do: a best practice to follow</nve-alert>
-
-<nve-alert status="danger">Don't: a practice to avoid</nve-alert>
-
-<nve-alert status="accent">Tip: helpful details on rationale for a given guideline</nve-alert>
-
-<nve-alert status="warning">details on the risks of not following a guideline</nve-alert>
-
-<nve-alert><nve-icon slot="icon">🏁</nve-icon> Performance: detail about how a guideline impacts performance</nve-alert>
-
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: resource to learn more about a guideline topic</nve-alert>
-
-<nve-alert><nve-icon slot="icon">🚧</nve-icon> WIP: details on any work in progress guidance</nve-alert>
-
+  <nve-alert status="danger">Don't: a practice to avoid</nve-alert>
+  <nve-alert status="accent">Tip: helpful details on rationale for a given guideline</nve-alert>
+  <nve-alert status="warning">details on the risks of not following a guideline</nve-alert>
+  <nve-alert><nve-icon slot="icon">🏁</nve-icon> Performance: detail about how a guideline impacts performance</nve-alert>
+  <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: resource to learn more about a guideline topic</nve-alert>
+  <nve-alert><nve-icon slot="icon">🚧</nve-icon> WIP: details on any work in progress guidance</nve-alert>
 </div>
 
 ## Terminology

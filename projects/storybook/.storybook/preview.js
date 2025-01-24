@@ -249,6 +249,7 @@ export const parameters = {
         ],
         'API Design',
         [
+          'NOPE',
           'Getting Started',
           'Properties & Attributes',
           'Slots',

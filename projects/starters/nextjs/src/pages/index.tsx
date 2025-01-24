@@ -25,7 +25,7 @@ export default function Home() {
           </a>
         </nve-button>
         <nve-button container="flat" selected>
-          <a href="/elements/starters/buildless/">Starters</a>
+          <a href="/elements/starters/">Starters</a>
         </nve-button>
         <nve-button container="flat">
           <a href="https://github.com/NVIDIA/elements/" target="_blank">
@@ -39,12 +39,6 @@ export default function Home() {
         </nve-page-panel-header>
         <nve-page-panel-content>
           <nve-menu>
-            <nve-menu-item>
-              <a href="/elements/starters/buildless/">
-                <img src="/elements/starters/nextjs/javascript.svg" width="18px" height="18px" alt="javascript logo" />
-                Buildless
-              </a>
-            </nve-menu-item>
             <nve-menu-item>
               <a href="/elements/starters/typescript/">
                 <img src="/elements/starters/nextjs/typescript.svg" width="18px" height="18px" alt="typescript logo" />
@@ -88,6 +82,12 @@ export default function Home() {
               </a>
             </nve-menu-item>
             <nve-menu-item>
+              <a href="/elements/starters/buildless/">
+                <img src="/elements/starters/nextjs/javascript.svg" width="18px" height="18px" alt="javascript logo" />
+                Buildless
+              </a>
+            </nve-menu-item>
+            <nve-menu-item>
               <nve-icon name="template"></nve-icon>
               <a href="/elements/starters/mpa/">MPA</a>
             </nve-menu-item>
@@ -97,10 +97,10 @@ export default function Home() {
       <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
         <nve-breadcrumb>
           <nve-button container="inline">
-            <a href="/elements/starters/buildless/">Elements</a>
+            <a href="/elements/">Elements</a>
           </nve-button>
           <nve-button container="inline">
-            <a href="/elements/starters/buildless/" target="_self">
+            <a href="/elements/starters/" target="_self">
               Starters
             </a>
           </nve-button>
