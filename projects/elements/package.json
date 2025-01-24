@@ -658,6 +658,18 @@
       "types": "./dist/sort-button/define.d.ts",
       "default": "./dist/sort-button/define.js"
     },
+    "./star-rating": {
+      "types": "./dist/star-rating/index.d.ts",
+      "default": "./dist/star-rating/index.js"
+    },
+    "./star-rating/index.js": {
+      "types": "./dist/star-rating/index.d.ts",
+      "default": "./dist/star-rating/index.js"
+    },
+    "./star-rating/define.js": {
+      "types": "./dist/star-rating/define.d.ts",
+      "default": "./dist/star-rating/define.js"
+    },
     "./steps": {
       "types": "./dist/steps/index.d.ts",
       "default": "./dist/steps/index.js"
