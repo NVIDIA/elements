@@ -28,6 +28,7 @@ export function typeTouch<T extends ReactiveElement>(): ClassDecorator {
 
 export class TypeTouchController<T extends ReactiveElement> implements ReactiveController {
   #startPosition: Point;
+  #pointerId: number;
   #moveFn = this.#move.bind(this);
   #endFn = this.#end.bind(this);
 
@@ -36,14 +37,16 @@ export class TypeTouchController<T extends ReactiveElement> implements ReactiveC
   }
 
   hostConnected() {
-    this.host.addEventListener('pointerdown', e => this.#start(e), { passive: true });
+    this.host.addEventListener('pointerdown', e => this.#start(e));
   }
 
   #start(e: PointerEvent) {
     if (e.composedPath().find(el => el === this.host)) {
       this.#startPosition = { x: e.clientX, y: e.clientY };
-      globalThis.document.addEventListener('pointerup', this.#endFn, { passive: true });
-      globalThis.document.addEventListener('pointermove', this.#moveFn, { passive: true });
+      this.#pointerId = e.pointerId;
+      this.host.setPointerCapture(this.#pointerId);
+      globalThis.document.addEventListener('pointerup', this.#endFn);
+      globalThis.document.addEventListener('pointermove', this.#moveFn);
       this.host.dispatchEvent(new NveTouchEvent('nve-touch-start', { ...this.#startPosition, offsetX: 0, offsetY: 0 }));
     }
   }
@@ -51,8 +54,8 @@ export class TypeTouchController<T extends ReactiveElement> implements ReactiveC
   #move(e: PointerEvent) {
     requestAnimationFrame(() => {
       const point = this.#getCoordinatesFromPointerEvent(e);
-      this.#startPosition = { x: e.clientX, y: e.clientY };
       this.host.dispatchEvent(new NveTouchEvent('nve-touch-move', point));
+      this.#startPosition = { x: e.clientX, y: e.clientY };
     });
   }
 
@@ -61,15 +64,18 @@ export class TypeTouchController<T extends ReactiveElement> implements ReactiveC
       globalThis.document.removeEventListener('pointerup', this.#endFn, false);
       globalThis.document.removeEventListener('pointermove', this.#moveFn, false);
       this.host.dispatchEvent(new NveTouchEvent('nve-touch-end', this.#getCoordinatesFromPointerEvent(e)));
+      this.host.releasePointerCapture(this.#pointerId);
+      this.#pointerId = null;
     }
   }
 
   #getCoordinatesFromPointerEvent(e: PointerEvent) {
-    return {
+    const value = {
       offsetX: getDifference(this.#startPosition.x, e.clientX),
       offsetY: getDifference(this.#startPosition.y, e.clientY),
       x: e.clientX,
       y: e.clientY
     };
+    return value;
   }
 }

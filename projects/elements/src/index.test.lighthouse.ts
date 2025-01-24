@@ -39,6 +39,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/button/define.js';
         import '@nvidia-elements/core/button-group/define.js';
         import '@nvidia-elements/core/card/define.js';
+        import '@nvidia-elements/core/chat-message/define.js';
         import '@nvidia-elements/core/checkbox/define.js';
         import '@nvidia-elements/core/color/define.js';
         import '@nvidia-elements/core/combobox/define.js';
@@ -50,8 +51,8 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/dot/define.js';
         import '@nvidia-elements/core/drawer/define.js';
         import '@nvidia-elements/core/dropdown/define.js';
-        import '@nvidia-elements/core/forms/define.js';
         import '@nvidia-elements/core/file/define.js';
+        import '@nvidia-elements/core/forms/define.js';
         import '@nvidia-elements/core/grid/define.js';
         import '@nvidia-elements/core/icon/define.js';
         import '@nvidia-elements/core/icon-button/define.js';
@@ -66,11 +67,13 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/pagination/define.js';
         import '@nvidia-elements/core/panel/define.js';
         import '@nvidia-elements/core/password/define.js';
+        import '@nvidia-elements/core/preferences-input/define.js';
         import '@nvidia-elements/core/progress-bar/define.js';
         import '@nvidia-elements/core/progress-ring/define.js';
         import '@nvidia-elements/core/progressive-filter-chip/define.js';
         import '@nvidia-elements/core/radio/define.js';
         import '@nvidia-elements/core/range/define.js';
+        import '@nvidia-elements/core/resize-handle/define.js';
         import '@nvidia-elements/core/search/define.js';
         import '@nvidia-elements/core/select/define.js';
         import '@nvidia-elements/core/sort-button/define.js';
@@ -79,7 +82,6 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/tabs/define.js';
         import '@nvidia-elements/core/tag/define.js';
         import '@nvidia-elements/core/textarea/define.js';
-        import '@nvidia-elements/core/preferences-input/define.js';
         import '@nvidia-elements/core/time/define.js';
         import '@nvidia-elements/core/toast/define.js';
         import '@nvidia-elements/core/toggletip/define.js';
@@ -93,6 +95,6 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(66);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(68);
   });
 });

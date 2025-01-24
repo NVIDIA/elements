@@ -38,7 +38,8 @@ describe('GlobalStateService', () => {
       theme: 'theme',
       scale: 'scale',
       reducedMotion: 'reduced motion',
-      colorScheme: 'color scheme'
+      colorScheme: 'color scheme',
+      resize: 'resize'
     });
   });
 
@@ -75,7 +76,8 @@ describe('GlobalStateService', () => {
       theme: 'thème',
       scale: 'échelle',
       reducedMotion: 'mouvement réduit',
-      colorScheme: 'schéma de couleur'
+      colorScheme: 'schéma de couleur',
+      resize: 'redimensionner'
     });
 
     expect(I18nService.i18n).toStrictEqual({
@@ -108,7 +110,8 @@ describe('GlobalStateService', () => {
       theme: 'thème',
       scale: 'échelle',
       reducedMotion: 'mouvement réduit',
-      colorScheme: 'schéma de couleur'
+      colorScheme: 'schéma de couleur',
+      resize: 'redimensionner'
     });
 
     I18nService.update(original);

@@ -19,7 +19,7 @@ export class Canvas extends LitElement {
     return html`
       <div internal-host>
         <div class="resizer">
-          <slot @slotchange=${() => this.requestUpdate()}></slot>
+          <slot @slotchange=${() => this.#updateSource()}></slot>
           <div class="preview-backdrop"></div>
         </div>
         <div class="code" .hidden=${!this.showSource}>
@@ -35,4 +35,26 @@ export class Canvas extends LitElement {
       </div>
     `;
   }
+
+  get #template() {
+    return this.shadowRoot
+      .querySelector('slot')
+      .assignedNodes()
+      .find(node => (node as HTMLElement).tagName === 'TEMPLATE') as HTMLTemplateElement;
+  }
+
+  #updateSource() {
+    const template = this.#template;
+    // eslint-disable-next-line rulesdir/stateless-property
+    this.source = template ? unescapeHtml(template.innerHTML) : this.source;
+  }
+}
+
+function unescapeHtml(str) {
+  return str
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, "'");
 }

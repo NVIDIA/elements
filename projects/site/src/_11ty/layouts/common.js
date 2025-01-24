@@ -182,7 +182,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node><a href="api/?path=/docs/elements-dialog-documentation--docs">Dialog</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/elements-divider-documentation--docs">Divider</a></nve-tree-node>
     <!-- <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'highlighted' : ''}><a href="docs/elements/dot/">Dot</a></nve-tree-node> -->
-    <nve-tree-node><a href="api/?path=/docs/elements-dot-documentation--docs">Dot</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'highlighted' : ''}><a href="api/?path=/docs/elements-dot-documentation--docs">Dot</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/elements-drawer-documentation--docs">Drawer</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/elements-dropdown-documentation--docs">Dropdown</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/elements-file-documentation--docs">File</a></nve-tree-node>
