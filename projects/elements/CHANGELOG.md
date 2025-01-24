@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.23.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.1...@nvidia-elements/core-v1.23.2) (2025-01-24)
+
+
+### Bug Fixes
+
+* **elements:** grid focus ([e4c2476](https://github.com/NVIDIA/elements/commit/e4c247648a34cdf1bf48d0848bacbd4f9c75c282)), closes [#101](https://github.com/NVIDIA/elements/issues/101)
+
 ## [@nvidia-elements/core-v1.23.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.0...@nvidia-elements/core-v1.23.1) (2025-01-24)
 
 
