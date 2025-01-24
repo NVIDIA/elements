@@ -851,6 +851,34 @@ export const Flat = {
   `
 };
 
+export const FocusTypes = {
+  render: () => html`
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column>span</nve-grid-column>
+    <nve-grid-column>button</nve-grid-column>
+    <nve-grid-column>2x buttons</nve-grid-column>
+    <nve-grid-column>input</nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <span>span</span>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <button>button</button>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <button>button</button>
+      <button>button</button>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <input />
+    </nve-grid-cell>
+  </nve-grid-row>
+</nve-grid>
+  `
+};
+
 export const PanelDetail = {
   render: () => html`
 <div id="grid-detail-panel" nve-layout="row gap:md align:stretch">
