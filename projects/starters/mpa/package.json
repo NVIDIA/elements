@@ -26,7 +26,13 @@
     },
     "dev": {
       "command": "vite",
-      "service": true
+      "service": true,
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     },
     "build": {
       "command": "tsc && vite build",
@@ -43,9 +49,9 @@
         "vite.config.ts"
       ],
       "env": {
-        "PAGES_SITE_PREFIX": {
+        "PAGES_BASE_URL": {
           "external": true,
-          "default": ""
+          "default": "/elements/"
         }
       }
     },
@@ -53,7 +59,13 @@
       "command": "vite preview",
       "dependencies": [
         "build"
-      ]
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     }
   }
 }

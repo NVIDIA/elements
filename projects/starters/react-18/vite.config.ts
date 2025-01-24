@@ -5,7 +5,8 @@ import { join } from 'node:path';
 // https://vitejs.dev/config/
 export default defineConfig({
   root: './src',
-  base: join('/elements', process.env.PAGES_SITE_PREFIX ?? '', 'starters', 'react-18'),
+  envDir: '../',
+  base: join('/', process.env.PAGES_BASE_URL ?? '', 'starters', 'react-18'),
   publicDir: '../assets',
   plugins: [react()],
   build: {

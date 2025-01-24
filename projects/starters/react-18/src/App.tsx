@@ -24,7 +24,7 @@ function App() {
           </a>
         </NveButton>
         <NveButton selected container="flat">
-          <a href="/elements/starters/buildless/">Starters</a>
+          <a href="/elements/starters/">Starters</a>
         </NveButton>
         <NveButton container="flat">
           <a href="https://github.com/NVIDIA/elements/" target="_blank">
@@ -38,12 +38,6 @@ function App() {
         </NvePagePanelHeader>
         <NvePagePanelContent>
           <NveMenu>
-            <NveMenuItem>
-              <a href="/elements/starters/buildless/">
-                <img src="/elements/starters/react/javascript.svg" width="18px" height="18px" alt="javascript logo" />
-                Buildless
-              </a>
-            </NveMenuItem>
             <NveMenuItem>
               <a href="/elements/starters/typescript/">
                 <img src="/elements/starters/react/typescript.svg" width="18px" height="18px" alt="typescript logo" />
@@ -81,6 +75,12 @@ function App() {
               </a>
             </NveMenuItem>
             <NveMenuItem>
+              <a href="/elements/starters/buildless/">
+                <img src="/elements/starters/react/javascript.svg" width="18px" height="18px" alt="javascript logo" />
+                Buildless
+              </a>
+            </NveMenuItem>
+            <NveMenuItem>
               <NveIcon name="template"></NveIcon>
               <a href="/elements/starters/mpa/">MPA</a>
             </NveMenuItem>
@@ -90,10 +90,10 @@ function App() {
       <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
         <NveBreadcrumb>
           <NveButton>
-            <a href="/elements/starters/buildless/">Elements</a>
+            <a href="/elements/">Elements</a>
           </NveButton>
           <NveButton>
-            <a href="/elements/starters/buildless/" target="_self">
+            <a href="/elements/starters/" target="_self">
               Starters
             </a>
           </NveButton>

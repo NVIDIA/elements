@@ -19,7 +19,13 @@
       "command": "pnpm exec eleventy --watch & vite build --watch & vite preview",
       "dependencies": [
         "build"
-      ]
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     },
     "build": {
       "dependencies": [
@@ -40,7 +46,13 @@
       "dependencies": [
         "clean",
         "../../elements:build"
-      ]
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     },
     "build:vite": {
       "command": "vite build",
@@ -57,9 +69,9 @@
         "build:11ty"
       ],
       "env": {
-        "PAGES_SITE_PREFIX": {
+        "PAGES_BASE_URL": {
           "external": true,
-          "default": ""
+          "default": "/elements/"
         }
       }
     },
@@ -68,7 +80,13 @@
       "service": true,
       "dependencies": [
         "build"
-      ]
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     },
     "clean": {
       "command": "rm -rf dist && rm -rf _site",

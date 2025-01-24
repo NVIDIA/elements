@@ -144,7 +144,6 @@ export const Canvas = ({ of, story }) => {
   );
 };
 
-
 export const Redirect = ({ path }) => {
   useEffect(() => {
     globalThis.parent.location.replace(`${window.location.pathname.split( '/api/' )[0]}/${path}`);

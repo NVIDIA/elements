@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "ci": "wireit",
-    "start": "ng serve",
+    "start": "wireit",
     "build": "wireit",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -21,7 +21,7 @@
       "service": true
     },
     "build": {
-      "command": "ng build --base-href /elements/starters/angular/",
+      "command": "ng build --base-href ${PAGES_BASE_URL}starters/angular/",
       "files": [
         "src/**",
         "angular.json",
@@ -34,7 +34,13 @@
       ],
       "dependencies": [
         "../../elements:build"
-      ]
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     }
   },
   "dependencies": {

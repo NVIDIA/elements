@@ -51,7 +51,13 @@
       "clean": false,
       "dependencies": [
         "build"
-      ]
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     },
     "ci": {
       "dependencies": [
@@ -91,7 +97,13 @@
         "../themes:build",
         "../starters/lit-library:build",
         "../internals/elements-api:build"
-      ]
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     },
     "lint": {
       "command": "eslint -c ./eslint.config.js ./src/**/*.ts",

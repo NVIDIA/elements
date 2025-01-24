@@ -8,11 +8,6 @@
   },
   "wireit": {
     "ci": {
-      "dependencies": [
-        "build"
-      ]
-    },
-    "build": {
       "command": "node ./index.js",
       "files": [
         "index.js",
@@ -27,14 +22,23 @@
         "../site:build",
         "../starters:build",
         "../internals/metadata:build"
-      ]
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/preview/"
+        }
+      }
     },
     "preview": {
-      "command": "cd dist && pnpm exec vite preview --base=/elements",
-      "dependencies": [
-        "ci"
-      ],
-      "files": []
+      "command": "pnpm run ci && vite preview --base=$PAGES_BASE_URL",
+      "service": true,
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/preview/"
+        }
+      }
     }
   },
   "dependencies": {

@@ -5,7 +5,8 @@ import { join } from 'node:path';
 
 export default defineConfig({
   root: './src',
-  base: join('/elements', process.env.PAGES_SITE_PREFIX ?? '', 'starters', 'solidjs'),
+  envDir: '../',
+  base: join('/', process.env.PAGES_BASE_URL ?? '', 'starters', 'solidjs'),
   publicDir: '../assets',
   build: {
     target: 'esnext',

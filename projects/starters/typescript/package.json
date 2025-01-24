@@ -17,7 +17,13 @@
     },
     "dev": {
       "command": "vite",
-      "service": true
+      "service": true,
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     },
     "build": {
       "command": "vite build",
@@ -35,17 +41,24 @@
         "../../elements:build"
       ],
       "env": {
-        "PAGES_SITE_PREFIX": {
+        "PAGES_BASE_URL": {
           "external": true,
-          "default": ""
+          "default": "/elements/"
         }
       }
     },
     "preview": {
       "command": "vite preview",
+      "service": true,
       "dependencies": [
         "build"
-      ]
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
     }
   },
   "dependencies": {

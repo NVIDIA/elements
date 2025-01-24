@@ -1,23 +1,22 @@
-import { Meta, Story } from '@storybook/addon-docs';
-import '@nvidia-elements/core/alert/define.js';
+---
+{
+  title: 'Packaging',
+  layout: 'docs.11ty.js'
+}
+---
 
-<Meta title="API Design/Packaging" />
-
-# Packaging
+# {{ title }}
 
 ## Dependencies
 
-Dependencies should be carefully considered as they impose the cost onto all consumers.
-Before dependencies are added the following should be considered,
+Dependencies should be carefully considered as they impose the cost onto all consumers. Before dependencies are added the following should be considered,
 
 - Could this be done with the Web Platform today?
 - Could this be done with something that will be on the Web Platform + Polyfill?
 - Is this dependency tree-shakable and has minimal performance impact?
 - Does this dependency avoid polluting globals and prototypes?
 
-Dependencies should be listed within the published package.json and not bundled with the library.
-Bundling dependencies is handled by the host application and enables the host application
-build pipeline to tree-shake and de-duplicate dependencies.
+Dependencies should be listed within the published package.json and not bundled with the library. Bundling dependencies is handled by the host application and enables the host application build pipeline to tree-shake and de-duplicate dependencies.
 
 ```json
 {
@@ -39,13 +38,9 @@ If a dependency is a feature or optional it should be listed under the optional 
 
 ## Build Output
 
-Element libraries should not bundle elements or dependencies. This prevents the host application
-build from being able to tree-shake or construct an accurate representation of the dependency
-tree. However minification can still be applied to each module independently.
+Element libraries should not bundle elements or dependencies. This prevents the host application build from being able to tree-shake or construct an accurate representation of the dependency tree. However minification can still be applied to each module independently.
 
-Build outputs should target the latest ES2020+. Build outputs should not compile to ES5 and
-only ship standard ESM modules. Host applications can always compile dependencies down
-to an older version of ES.
+Build outputs should target the latest ES2020+. Build outputs should not compile to ES5 and only ship standard ESM modules. Host applications can always compile dependencies down to an older version of ES.
 
 <nve-alert status="warning">Warning: Avoid alternate build targets as it increases complexity and is unnecessary with modern build tools and browsers.</nve-alert>
 
@@ -53,8 +48,7 @@ to an older version of ES.
 
 ## Entrypoints
 
-Each element should provide a standalone entrypoint for consumption. This enables
-consumers to choose which elements to load/import, improving performance and API stability.
+Each element should provide a standalone entrypoint for consumption. This enables consumers to choose which elements to load/import, improving performance and API stability.
 
 ```typescript
 import  { Button } from '@nvidia-elements/core/button';
@@ -75,22 +69,18 @@ import { Dialog } from './dialog.js';
 customElements.get('nve-dialog') || customElements.define('nve-dialog', MlvDialog);
 ```
 
-If an element depends on other elements then those elements should be included in
-the registration file as well to ensure a proper dependency tree is constructed.
+If an element depends on other elements then those elements should be included in the registration file as well to ensure a proper dependency tree is constructed.
 
 ```typescript
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/dialog/define.js';
 ```
 
-Isolated registration allows the consumer to control when an element should be loaded.
-This future proofs the API to allow scoped element registries.
+Isolated registration allows the consumer to control when an element should be loaded. This future proofs the API to allow scoped element registries.
 
 <nve-alert status="warning">Warning: Isolated side-effects are critical for certain micro-frontend use cases.</nve-alert>
 
-The `package.json` should have the `sideEffects` entry set to `false` and list any
-element registrations to the explicit sideEffects entry. This enables tools like Webpack
-and Rollup to properly define dependency graphs and tree-shake.
+The `package.json` should have the `sideEffects` entry set to `false` and list any element registrations to the explicit sideEffects entry. This enables tools like Webpack and Rollup to properly define dependency graphs and tree-shake.
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: <a href="./?path=/docs/about-extensions--docs&anchor=scoped-registry">Elements Documentation</a></nve-alert>
 

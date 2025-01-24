@@ -11,11 +11,11 @@ const App: Component = () => {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm"></nve-logo>
-        <a slot="prefix" href="/elements/">
+        <a slot="prefix" href=".">
           Elements
         </a>
         <nve-button container="flat">
-          <a href="/elements/api/?path=/docs/about-installation--docs">Get Started</a>
+          <a href="api/?path=/docs/about-installation--docs">Get Started</a>
         </nve-button>
         <nve-button container="flat">
           <a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">
@@ -23,7 +23,7 @@ const App: Component = () => {
           </a>
         </nve-button>
         <nve-button selected container="flat">
-          <a href="/elements/starters/buildless/">Starters</a>
+          <a href="starters/">Starters</a>
         </nve-button>
         <nve-button container="flat">
           <a href="https://github.com/NVIDIA/elements/" target="_blank">
@@ -38,50 +38,50 @@ const App: Component = () => {
         <nve-page-panel-content>
           <nve-menu>
             <nve-menu-item>
-              <a href="/elements/starters/buildless/">
-                <img src="/elements/starters/solidjs/javascript.svg" width="18px" height="18px" alt="javascript logo" />
-                Buildless
-              </a>
-            </nve-menu-item>
-            <nve-menu-item>
-              <a href="/elements/starters/typescript/">
-                <img src="/elements/starters/solidjs/typescript.svg" width="18px" height="18px" alt="typescript logo" />
+              <a href="starters/typescript/">
+                <img src="starters/solidjs/typescript.svg" width="18px" height="18px" alt="typescript logo" />
                 TypeScript
               </a>
             </nve-menu-item>
             <nve-menu-item>
-              <a href="/elements/starters/eleventy/">
-                <img src="/elements/starters/solidjs/eleventy.svg" width="18px" height="18px" alt="eleventy logo" />
+              <a href="starters/eleventy/">
+                <img src="starters/solidjs/eleventy.svg" width="18px" height="18px" alt="eleventy logo" />
                 Eleventy
               </a>
             </nve-menu-item>
             <nve-menu-item>
-              <a href="/elements/starters/angular/">
-                <img src="/elements/starters/solidjs/angular.svg" width="18px" height="18px" alt="angular logo" />
+              <a href="starters/angular/">
+                <img src="starters/solidjs/angular.svg" width="18px" height="18px" alt="angular logo" />
                 Angular
               </a>
             </nve-menu-item>
             <nve-menu-item>
-              <a href="/elements/starters/vue/">
-                <img src="/elements/starters/solidjs/vue.svg" width="18px" height="18px" alt="vue logo" />
+              <a href="starters/vue/">
+                <img src="starters/solidjs/vue.svg" width="18px" height="18px" alt="vue logo" />
                 Vue
               </a>
             </nve-menu-item>
             <nve-menu-item>
-              <a href="/elements/starters/react/">
-                <img src="/elements/starters/solidjs/react.svg" width="18px" height="18px" alt="react logo" />
+              <a href="starters/react/">
+                <img src="starters/solidjs/react.svg" width="18px" height="18px" alt="react logo" />
                 React
               </a>
             </nve-menu-item>
             <nve-menu-item current="page">
-              <a href="/elements/starters/solidjs/">
-                <img src="/elements/starters/solidjs/solidjs.svg" width="18px" height="18px" alt="solidjs logo" />
+              <a href="starters/solidjs/">
+                <img src="starters/solidjs/solidjs.svg" width="18px" height="18px" alt="solidjs logo" />
                 SolidJS
               </a>
             </nve-menu-item>
             <nve-menu-item>
+              <a href="starters/buildless/">
+                <img src="starters/solidjs/javascript.svg" width="18px" height="18px" alt="javascript logo" />
+                Buildless
+              </a>
+            </nve-menu-item>
+            <nve-menu-item>
               <nve-icon name="template"></nve-icon>
-              <a href="/elements/starters/mpa/">MPA</a>
+              <a href="starters/mpa/">MPA</a>
             </nve-menu-item>
           </nve-menu>
         </nve-page-panel-content>
@@ -89,10 +89,10 @@ const App: Component = () => {
       <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
         <nve-breadcrumb>
           <nve-button>
-            <a href="/elements/starters/buildless/">Elements</a>
+            <a href=".">Elements</a>
           </nve-button>
           <nve-button>
-            <a href="/elements/starters/buildless/" target="_self">
+            <a href="starters/" target="_self">
               Starters
             </a>
           </nve-button>
