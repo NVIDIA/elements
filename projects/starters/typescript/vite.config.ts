@@ -4,7 +4,8 @@ import { join } from 'node:path';
 export default defineConfig(() => {
   return {
     root: './src',
-    base: join('/elements', process.env.PAGES_SITE_PREFIX ?? '', 'starters', 'typescript'),
+    envDir: '../',
+    base: join('/', process.env.PAGES_BASE_URL ?? '', 'starters', 'typescript'),
     publicDir: '../assets',
     build: {
       outDir: '../dist',

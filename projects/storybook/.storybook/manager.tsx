@@ -43,10 +43,10 @@ const PageHeader = () => {
     <>
       <nve-page-header style={{ position: 'fixed', inset: '0 0 auto 0', zIndex: 999 }}>
         <nve-logo slot="prefix" size="sm"></nve-logo>
-        <a slot="prefix" href="/elements/">Elements</a>
-        <nve-button container="flat"><a href="/elements/api/?path=/docs/about-installation--docs">Get Started</a></nve-button>
+        <a slot="prefix" href="../">Elements</a>
+        <nve-button container="flat"><a href="./?path=/docs/about-installation--docs">Get Started</a></nve-button>
         <nve-button container="flat"><a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>
-        <nve-button container="flat"><a href="/elements/starters/buildless/">Starters</a></nve-button>
+        <nve-button container="flat"><a href="../starters/">Starters</a></nve-button>
         <nve-button container="flat"><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button>
         <nve-button slot="suffix" popovertarget="system-options-drawer" container="flat" id="dropdown-btn">System Themes</nve-button>
       </nve-page-header>
