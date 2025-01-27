@@ -9,6 +9,12 @@
   --font-size: calc(var(--width) / 2.3);
 }
 
+/* override base button inline style */
+:host([container*='inline']) {
+  --height: var(--nve-ref-size-800);
+  --line-height: 0;
+}
+
 :host([size='sm']) {
   --padding: 0;
   --height: var(--nve-ref-size-700);

@@ -96,7 +96,7 @@ ${content.replaceAll('nve-', 'nve-')}
   <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/layout.css" />
   <script type="module" src="./index.js"></script>${context.id.includes('foundations-layout') ? `<link rel="stylesheet" href="./index.css">` : ''}
 </head>
-<body nve-text="body" nve-layout="${content.split('\n')[0].includes('full') ? '' : 'pad:lg'}">
+<body nve-text="body" nve-layout="${content.split('\n')[0].includes('full') || content.includes('nve-page') ? '' : 'pad:lg'}">
 
 ${content}
 
