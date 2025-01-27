@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.23.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.2...@nvidia-elements/core-v1.23.3) (2025-01-27)
+
+
+### Bug Fixes
+
+* **elements:** inline icon button style ([1ac8209](https://github.com/NVIDIA/elements/commit/1ac8209a930d7850d11c873d9b902937c4374577))
+
 ## [@nvidia-elements/core-v1.23.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.1...@nvidia-elements/core-v1.23.2) (2025-01-24)
 
 
