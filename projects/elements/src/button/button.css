@@ -181,7 +181,7 @@
   --color: var(--nve-sys-interaction-destructive-background);
 }
 
-:host([container*='inline']:not([icon-name])) {
+:host([container*='inline']) {
   --padding: 0;
   --height: fit-content;
   --line-height: 0.8;
