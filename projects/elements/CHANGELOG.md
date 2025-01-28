@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.23.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.3...@nvidia-elements/core-v1.23.4) (2025-01-28)
+
+
+### Bug Fixes
+
+* **elements:** nve panel actions alignment ([8340a37](https://github.com/NVIDIA/elements/commit/8340a37b144634e1c88169edbf0854745b36ff41))
+
 ## [@nvidia-elements/core-v1.23.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.2...@nvidia-elements/core-v1.23.3) (2025-01-27)
 
 
