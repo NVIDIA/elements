@@ -51,7 +51,9 @@ function template(theme: '' | 'dark' = '') {
       <nve-page-panel-content>•︎•︎•︎•︎•︎•︎</nve-page-panel-content>
     </nve-page-panel>
 
-    <h1 nve-text="heading">•︎•︎•︎•︎•︎•︎</h1>
+    <main nve-layout="pad:lg">
+      <h1 nve-text="heading">•︎•︎•︎•︎•︎•︎</h1>
+    </main>
 
     <nve-page-panel slot="bottom" size="sm" closable>
       <nve-page-panel-content>•︎•︎•︎•︎•︎•︎</nve-page-panel-content>
