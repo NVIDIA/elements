@@ -88,8 +88,10 @@ export const Default = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 </nve-page>
   `
 };
@@ -110,8 +112,10 @@ export const SlotBanner = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 </nve-page>
   `
 };
@@ -132,8 +136,10 @@ export const SlotSubheader = {
     <h2 nve-text="heading sm">Subheader</h2>
   </nve-toolbar>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 </nve-page>
   `
 };
@@ -180,8 +186,10 @@ export const SlotSubheaderLarge = {
     </nve-page-panel-content>
   </nve-page-panel>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 </nve-page>
   `
 };
@@ -215,8 +223,10 @@ export const SlotRight = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 
   <nve-page-panel slot="right" size="sm">
     <nve-page-panel-content>right</nve-page-panel-content>
@@ -236,8 +246,10 @@ export const SlotBottom = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 
   <nve-page-panel slot="bottom" size="sm">
     <nve-page-panel-content>bottom</nve-page-panel-content>
@@ -265,8 +277,10 @@ export const SlotLeftAside = {
     </nve-button-group>
   </nve-toolbar>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 </nve-page>
   `
 };
@@ -290,8 +304,10 @@ export const SlotRightAside = {
     </nve-button-group>
   </nve-toolbar>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 </nve-page>
   `
 };
@@ -307,8 +323,10 @@ export const SlotSubfooter = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 
   <nve-toolbar slot="right-aside" orientation="vertical">
     <nve-button-group>
@@ -337,8 +355,10 @@ export const SlotFooter = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 
   <nve-toolbar slot="right-aside" orientation="vertical">
     <nve-button-group>
@@ -372,8 +392,10 @@ export const PagePanelExpandable = {
     <nve-page-panel-content>left</nve-page-panel-content>
   </nve-page-panel>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 
   <nve-page-panel expandable slot="right" size="sm">
     <nve-page-panel-content>right</nve-page-panel-content>
@@ -401,8 +423,10 @@ export const PagePanelClosable = {
     <nve-page-panel-content>left</nve-page-panel-content>
   </nve-page-panel>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 
   <nve-page-panel closable slot="right" size="sm">
     <nve-page-panel-content>right</nve-page-panel-content>
@@ -481,8 +505,10 @@ export const DocumentScroll = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body" style="min-height: 110vh">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body" style="min-height: 110vh">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 
   <nve-toolbar slot="footer">
     <a href="#" nve-text="link sm">docmentation</a>
@@ -517,8 +543,10 @@ export const InteractionPanel = {
     </nve-page-panel-content>
   </nve-page-panel>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 </nve-page>
 <script type="module">
   const button = document.querySelector('[aria-label="menu"]');
@@ -575,8 +603,10 @@ export const InteractionPanelNavigation = {
     </nve-page-panel-content>
   </nve-page-panel>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 </nve-page>
 <script type="module">
   const toolbar = document.querySelector('nve-toolbar');
@@ -613,8 +643,10 @@ export const InteractionDrawer = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 
   <nve-drawer id="drawer" slot="left-aside" position="left" size="sm" closable style="--top: 48px">
     <nve-drawer-header>
@@ -724,9 +756,11 @@ export const KitchenSink = {
     </nve-page-panel-content>
   </nve-page-panel>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  <div style="min-height: 100vh; width: 1px;"></div>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div style="min-height: 100vh; width: 1px;"></div>
+  </main>
 
   <nve-page-panel closable slot="bottom" size="sm">
     <nve-page-panel-content>bottom</nve-page-panel-content>
@@ -770,18 +804,19 @@ export const PageLayoutCardGrid = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <nve-search container="flat">
-    <input type="search" aria-label="search drives" />
-  </nve-search>
+  <main nve-layout="column gap:lg pad:lg align:stretch-horizontal">
+    <nve-search container="flat">
+      <input type="search" aria-label="search drives" />
+    </nve-search>
 
-  <nve-button-group container="rounded" behavior-select="single" orientation="horizontal">
-    <nve-icon-button icon-name="view-as-grid" pressed></nve-icon-button>
-    <nve-icon-button icon-name="table"></nve-icon-button>
-    <nve-icon-button icon-name="map"></nve-icon-button>
-  </nve-button-group>
+    <nve-button-group container="rounded" behavior-select="single" orientation="horizontal">
+      <nve-icon-button icon-name="view-as-grid" pressed></nve-icon-button>
+      <nve-icon-button icon-name="table"></nve-icon-button>
+      <nve-icon-button icon-name="map"></nve-icon-button>
+    </nve-button-group>
 
-  <section nve-layout="grid span-items:3 gap:md">
-    ${new Array(24).fill('').map(() => html`
+    <section nve-layout="grid span-items:3 gap:md">
+      ${new Array(24).fill('').map(() => html`
       <nve-card style="height: 100%; width: 100%;">
         <img src="images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
         <nve-card-content>
@@ -795,7 +830,8 @@ export const PageLayoutCardGrid = {
         </nve-card-footer>
       </nve-card>
       `)}
-  </section>
+    </section>
+  </main>
 </nve-page>
   `
 };
@@ -1150,8 +1186,10 @@ export const PageLayoutEditor = {
     </nve-page-panel-content>
   </nve-page-panel>
 
-  <h1 nve-text="heading">main</h1>
-  <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </main>
 
   <nve-page-panel closable slot="bottom" size="sm">
     <nve-page-panel-content>console output</nve-page-panel-content>
