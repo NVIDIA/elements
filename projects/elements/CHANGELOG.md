@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.23.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.6...@nvidia-elements/core-v1.23.7) (2025-01-29)
+
+
+### Bug Fixes
+
+* **elements:** accordion slot alignment ([0e410d8](https://github.com/NVIDIA/elements/commit/0e410d87826a0d4bfff3f8af7d887ac0a83ce99c))
+
 ## [@nvidia-elements/core-v1.23.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.5...@nvidia-elements/core-v1.23.6) (2025-01-29)
 
 
