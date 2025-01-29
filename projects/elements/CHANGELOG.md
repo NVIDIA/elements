@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.23.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.5...@nvidia-elements/core-v1.23.6) (2025-01-29)
+
+
+### Bug Fixes
+
+* **elements:** update card snippet with s3 img url ([404c1c8](https://github.com/NVIDIA/elements/commit/404c1c8a77f6ebf3bcd062066efff182c4161678))
+
 ## [@nvidia-elements/core-v1.23.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.4...@nvidia-elements/core-v1.23.5) (2025-01-28)
 
 
