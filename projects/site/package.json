@@ -23,7 +23,7 @@
       "command": "pnpm exec eleventy",
       "files": [
         "src",
-        "assets",
+        "public",
         "./eleventy.config.js"
       ],
       "output": [
@@ -45,7 +45,7 @@
       "service": true,
       "files": [
         "src",
-        "assets",
+        "public",
         "./eleventy.config.js"
       ],
       "env": {

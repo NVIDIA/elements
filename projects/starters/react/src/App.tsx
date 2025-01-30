@@ -87,7 +87,7 @@ function App() {
           </nve-menu>
         </nve-page-panel-content>
       </nve-page-panel>
-      <main nve-layout="column gap:lg">
+      <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
         <nve-breadcrumb>
           <nve-button>
             <a href="/elements/starters/buildless/">Elements</a>
