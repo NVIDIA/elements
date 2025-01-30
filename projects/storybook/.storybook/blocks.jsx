@@ -143,3 +143,11 @@ export const Canvas = ({ of, story }) => {
     </nve-api-canvas>
   );
 };
+
+
+export const Redirect = ({ path }) => {
+  useEffect(() => {
+    globalThis.parent.location.replace(`${window.location.pathname.split( '/api/' )[0]}/${path}`);
+  });
+  return <p>You will be redirected.</p>
+};
