@@ -94,7 +94,7 @@ export default function Home() {
           </NveMenu>
         </NvePagePanelContent>
       </NvePagePanel>
-      <main nve-layout="column gap:lg">
+      <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
         <NveBreadcrumb>
           <NveButton container="inline">
             <a href="/elements/starters/buildless/">Elements</a>
