@@ -3,8 +3,8 @@ import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import showdown from 'showdown';
 import { useStyles } from '@nvidia-elements/core/internal';
-import { MetadataService } from '../internals/metadata.service.js';
-import { ESM_ELEMENTS_VERSION } from '../internals/version.js';
+import { MetadataService } from '../internal/metadata.service.js';
+import { ESM_ELEMENTS_VERSION } from '../internal/version.js';
 import styles from './summary.css?inline';
 
 const showdownOptions = { simplifiedAutoLink: true };
