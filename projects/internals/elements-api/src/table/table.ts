@@ -2,7 +2,7 @@ import { html, nothing, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import showdown from 'showdown';
-import { MetadataService } from '../internals/metadata.service.js';
+import { MetadataService } from '../internal/metadata.service.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './table.css?inline';
 
