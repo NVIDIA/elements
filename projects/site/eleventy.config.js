@@ -6,8 +6,6 @@ import markdownIt from 'markdown-it';
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
-  eleventyConfig.addPassthroughCopy('assets');
-  eleventyConfig.addPassthroughCopy('robots.txt');
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
   eleventyConfig.addPlugin(EleventyPluginVite, {
