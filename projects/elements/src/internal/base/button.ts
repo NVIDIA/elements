@@ -70,7 +70,7 @@ export class BaseButton extends LitElement {
    * Defines the button behavior when associated within an <form> element.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type
    */
-  @property({ type: String, reflect: true }) type: 'button' | 'submit';
+  @property({ type: String, reflect: true }) type: 'button' | 'submit' | 'reset';
 
   /**
    * This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.
