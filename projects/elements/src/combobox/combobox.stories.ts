@@ -359,6 +359,53 @@ export const SelectAll = () => {
   `
 };
 
+export const Form = () => {
+  return html`
+<form nve-layout="column gap:lg align:stretch">
+  <nve-combobox style="--scroll-height: 220px">
+    <label>label</label>
+    <input type="search" name="input">
+    <select multiple name="select" value="priority">
+      <option value="status"></option>
+      <option selected value="priority"></option>
+      <option selected value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+
+  <div nve-layout="row gap:xs">
+    <nve-button type="button">set</nve-button>
+    <nve-button type="reset">reset</nve-button>
+    <nve-button type="submit">submit</nve-button>
+  </div>
+</form>
+
+<script type="module">
+  const form = document.querySelector('form');
+  const select = document.querySelector('select');
+  const input = document.querySelector('input');
+  const btn = document.querySelector('[type=button]');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    console.log('input: ', formData.get('input'));
+    console.log('select: ', formData.get('select'));
+    console.log('selectedOptions: ', Array.from(select.selectedOptions).map(o => o.value));
+  });
+
+  btn.addEventListener('click', () => {
+    select.value = 'status';
+    select.options[0].selected = true;
+    input.value = 'test';
+  });
+</script>
+  `
+};
+
 export const Performance = () => {
   return html`<nve-combobox-performance-demo></nve-combobox-performance-demo>`
 }
