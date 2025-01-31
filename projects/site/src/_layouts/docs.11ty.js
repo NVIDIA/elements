@@ -63,6 +63,10 @@ export function render(data) {
               padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl) !important;
             }
           }
+
+          main:has([docs-full-width]) {
+            max-width: 100%;
+          }
         </style>
         <script type="module">
           import '@nvidia-elements/core/tree/define.js';
@@ -87,7 +91,7 @@ export function render(data) {
           <nve-page-panel slot="left">
             <nve-page-panel-content>
               <nve-tree behavior-expand>
-                <nve-tree-node>
+                <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'expanded' : ''}>
                   About
                   <nve-tree-node><a href="api/?path=/docs/about-getting-started--docs">Getting Started</a></nve-tree-node>
                   <nve-tree-node><a href="api/?path=/docs/about-installation--docs">Installation</a></nve-tree-node>
