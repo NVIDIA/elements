@@ -54,11 +54,15 @@ export class LighthouseRunner {
   }
 }
 
+function round(num) {
+  return Math.round((num + Number.EPSILON) * 100) / 100;
+}
+
 function getPayload(lighthouseRequests) {
   const requests = lighthouseRequests
     .filter(r => r.mimeType === 'text/javascript' || r.mimeType === 'text/css')
     .map(r => ({
-      kb: r.transferSize / 1000,
+      kb: round(r.transferSize / 1000),
       name: r.url
         .split('/assets/')[1]
         .replace(/-\w+\.css$/, '.css')
@@ -70,11 +74,11 @@ function getPayload(lighthouseRequests) {
 
   return {
     javascript: {
-      kb: js.reduce((p, n) => p + n.kb, 0) / 1000,
+      kb: round(js.reduce((p, n) => p + n.kb, 0)),
       requests: js.reduce((p, n) => ({ ...p, [n.name]: n }), {})
     },
     css: {
-      kb: css.reduce((p, n) => p + n.kb, 0) / 1000,
+      kb: round(css.reduce((p, n) => p + n.kb, 0)),
       requests: css.reduce((p, n) => ({ ...p, [n.name]: n }), {})
     }
   };
