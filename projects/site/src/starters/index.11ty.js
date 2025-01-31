@@ -34,7 +34,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/assets/integrations/typescript.svg" width="36px" height="36px" alt="typescript logo" />
+          <img src="/static/images/integrations/typescript.svg" width="36px" height="36px" alt="typescript logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">TypeScript</h2>
@@ -47,7 +47,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/assets/integrations/vite.svg" width="36px" height="36px" alt="vite logo" />
+          <img src="/static/images/integrations/vite.svg" width="36px" height="36px" alt="vite logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Multi Page Application</h2>
@@ -60,7 +60,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/assets/integrations/angular.svg" width="36px" height="36px" alt="angular logo" />
+          <img src="/static/images/integrations/angular.svg" width="36px" height="36px" alt="angular logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Angular</h2>
@@ -73,7 +73,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/assets/integrations/eleventy.svg" width="48px" height="48px" alt="eleventy logo" />
+          <img src="/static/images/integrations/eleventy.svg" width="48px" height="48px" alt="eleventy logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Eleventy</h2>
@@ -86,7 +86,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/assets/integrations/vue.svg" width="36px" height="36px" alt="vue logo" />
+          <img src="/static/images/integrations/vue.svg" width="36px" height="36px" alt="vue logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Vue</h2>
@@ -99,7 +99,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/assets/integrations/solidjs.svg" width="36px" height="36px" alt="solidjs logo" />
+          <img src="/static/images/integrations/solidjs.svg" width="36px" height="36px" alt="solidjs logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">SolidJS</h2>
@@ -112,7 +112,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/assets/integrations/react.svg" width="36px" height="36px" alt="react logo" />
+          <img src="/static/images/integrations/react.svg" width="36px" height="36px" alt="react logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">React</h2>
@@ -125,7 +125,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/assets/integrations/remix.svg" width="24px" height="24px" alt="remix logo" />
+          <img src="/static/images/integrations/remix.svg" width="24px" height="24px" alt="remix logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Remix</h2>
@@ -138,7 +138,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/assets/integrations/nextjs.svg" width="28px" height="28px" alt="react logo" />
+          <img src="/static/images/integrations/nextjs.svg" width="28px" height="28px" alt="react logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">NextJS</h2>
@@ -151,7 +151,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/assets/integrations/javascript.svg" width="36px" height="36px" alt="javascript logo" />
+          <img src="/static/images/integrations/javascript.svg" width="36px" height="36px" alt="javascript logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Buildless</h2>
