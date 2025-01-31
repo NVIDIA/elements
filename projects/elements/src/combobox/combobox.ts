@@ -157,6 +157,7 @@ export class Combobox extends Control implements ContainerElement {
     this.#setupSlotStates();
     await this.#setupLightDismiss();
     this.input.setAttribute('list', '');
+    this.input.autocomplete = 'off';
   }
 
   disconnectedCallback() {

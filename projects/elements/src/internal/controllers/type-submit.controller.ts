@@ -13,18 +13,14 @@ export function typeSubmit<T extends Submit>(): ClassDecorator {
 export type Submit = ReactiveElement &
   HTMLElement & {
     name: string;
-    form: string;
     value: string;
     disabled: boolean;
-    type: 'button' | 'submit';
+    type: 'button' | 'submit' | 'reset';
     readonly: boolean;
+    _internals: ElementInternals;
   };
 
-type InnerSubmitButton = HTMLButtonElement & { inert: boolean; form: string };
-
 export class TypeSubmitController<T extends Submit> implements ReactiveController {
-  #button: InnerSubmitButton;
-
   constructor(private host: T) {
     this.host.addController(this);
   }
@@ -32,30 +28,12 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
   async hostUpdated() {
     await this.host.updateComplete;
     this.#setButtonType();
-    this.#setupSubmitButton();
     this.#setupNativeButtonBehavior();
   }
 
   #setButtonType() {
     if (!this.host.type && !this.host.hasAttribute('type') && this.host.closest('form')) {
       this.host.type = 'submit';
-    }
-  }
-
-  #setupSubmitButton() {
-    if (!this.#button) {
-      this.#button = globalThis.document.createElement('button') as InnerSubmitButton;
-      this.#button.hidden = true;
-      this.#button.inert = true;
-    }
-
-    this.#button.value = this.host.value;
-    this.#button.name = this.host.name;
-    this.#button.type = this.host.type;
-    if (this.host.form !== undefined) {
-      this.#button.setAttribute('form', this.host.form);
-    } else {
-      this.#button.removeAttribute('form');
     }
   }
 
@@ -78,13 +56,21 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
   }
 
   #triggerNativeButtonBehavior(event: Event) {
-    /* istanbul ignore next -- @preserve */
     if (this.host.disabled) {
       stopEvent(event);
-    } else if (!event.defaultPrevented) {
-      this.host.appendChild(this.#button);
-      this.#button.dispatchEvent(new PointerEvent('click', { relatedTarget: this.host, composed: true }));
-      this.#button.remove();
+      return;
+    }
+
+    if (this.host.type === 'submit') {
+      const e = new SubmitEvent('submit', { cancelable: true });
+      this.host._internals.form?.dispatchEvent(e);
+
+      /* istanbul ignore next -- @preserve */
+      if (!e.defaultPrevented) {
+        this.host._internals.form?.submit();
+      }
+    } else if (this.host.type === 'reset') {
+      this.host._internals.form?.reset();
     }
   }
 }
