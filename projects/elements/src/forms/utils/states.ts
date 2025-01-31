@@ -113,6 +113,7 @@ export function setupControlStates(control: Control) {
     control._internals.states.delete('dirty');
     control._internals.states.delete('error');
     control._internals.states.delete('success');
+    control.requestUpdate();
   });
 
   observers.push(

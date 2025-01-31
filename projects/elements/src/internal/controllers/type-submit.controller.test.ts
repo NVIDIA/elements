@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { typeSubmit } from '@nvidia-elements/core/internal';
+import { attachInternals, typeSubmit } from '@nvidia-elements/core/internal';
 import { elementIsStable, createFixture, removeFixture, emulateClick, untilEvent } from '@nvidia-elements/testing';
 
 @typeSubmit<TypeSubmitControllerTestElement>()
@@ -11,14 +11,24 @@ class TypeSubmitControllerTestElement extends LitElement {
   @property({ type: String }) name: string;
   @property({ type: String }) value: string;
   @property({ type: Boolean }) disabled: boolean;
-  @property({ type: String }) type: 'button' | 'submit';
+  @property({ type: String }) type: 'button' | 'submit' | 'reset';
   @property({ type: Boolean }) readonly: boolean;
+
+  static formAssociated = true;
+
+  _internals: ElementInternals;
+
+  connectedCallback() {
+    super.connectedCallback();
+    attachInternals(this);
+  }
 }
 
 describe('type-submit.controller', () => {
   let button: TypeSubmitControllerTestElement;
   let buttonInForm: TypeSubmitControllerTestElement;
   let submitButtonInForm: TypeSubmitControllerTestElement;
+  let resetButtonInForm: TypeSubmitControllerTestElement;
   let fixture: HTMLElement;
   let form: HTMLFormElement;
 
@@ -27,6 +37,7 @@ describe('type-submit.controller', () => {
       <type-submit-controller-test-element></type-submit-controller-test-element>
       <form>
         <type-submit-controller-test-element type="button"></type-submit-controller-test-element>
+        <type-submit-controller-test-element type="reset"></type-submit-controller-test-element>
         <type-submit-controller-test-element></type-submit-controller-test-element>
       </form>
     `);
@@ -34,9 +45,12 @@ describe('type-submit.controller', () => {
     form = fixture.querySelector('form');
     button = fixture.querySelectorAll<TypeSubmitControllerTestElement>('type-submit-controller-test-element')[0];
     buttonInForm = fixture.querySelectorAll<TypeSubmitControllerTestElement>('type-submit-controller-test-element')[1];
-    submitButtonInForm = fixture.querySelectorAll<TypeSubmitControllerTestElement>(
+    resetButtonInForm = fixture.querySelectorAll<TypeSubmitControllerTestElement>(
       'type-submit-controller-test-element'
     )[2];
+    submitButtonInForm = fixture.querySelectorAll<TypeSubmitControllerTestElement>(
+      'type-submit-controller-test-element'
+    )[3];
     form.addEventListener('submit', e => e.preventDefault());
     buttonInForm.type = 'button';
   });
@@ -88,9 +102,32 @@ describe('type-submit.controller', () => {
     submitButtonInForm.type = 'submit';
     await elementIsStable(submitButtonInForm);
     const event = untilEvent(form, 'submit');
-    form.dispatchEvent(new Event('submit')); // todo: happy-dom mock does not properly emulate form submit behavior, this should not be needed
     emulateClick(submitButtonInForm);
     expect((await event).type).toBe('submit');
+  });
+
+  it('should NOT trigger submit event when host exists within a form element and disabled', async () => {
+    submitButtonInForm.type = 'submit';
+    let count = 0;
+    form.addEventListener('submit', () => count++);
+
+    const event = untilEvent(form, 'submit');
+    emulateClick(submitButtonInForm);
+    expect((await event).type).toBe('submit');
+    expect(count).toBe(1);
+
+    submitButtonInForm.disabled = true;
+    emulateClick(submitButtonInForm);
+    await elementIsStable(submitButtonInForm);
+    expect(count).toBe(1);
+  });
+
+  it('should trigger reset event when host exists within a form element', async () => {
+    resetButtonInForm.type = 'reset';
+    await elementIsStable(resetButtonInForm);
+    const event = untilEvent(form, 'reset');
+    emulateClick(resetButtonInForm);
+    expect((await event).type).toBe('reset');
   });
 
   it('should not ineract with form elements if type button', async () => {
@@ -153,9 +190,8 @@ describe('type-submit.controller', () => {
     form.addEventListener('submit', o.f);
     expect(o.f).not.toHaveBeenCalled();
 
-    // happy-dom does not properly emulate the relatedTarget/composed event options
-    // emulateClick(submitButtonInForm);
-    // await elementIsStable(submitButtonInForm);
-    // expect(o.f).toHaveBeenCalledTimes(1);
+    emulateClick(submitButtonInForm);
+    await elementIsStable(submitButtonInForm);
+    expect(o.f).toHaveBeenCalledTimes(1);
   });
 });

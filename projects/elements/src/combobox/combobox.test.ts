@@ -51,6 +51,10 @@ describe(Combobox.metadata.tag, () => {
     expect(input.getAttribute('list')).toBe('');
   });
 
+  it('should disable auto complete on input', async () => {
+    expect(input.autocomplete).toBe('off');
+  });
+
   it('should render a menu item for each provided option', async () => {
     emulateClick(input);
     await elementIsStable(element);
