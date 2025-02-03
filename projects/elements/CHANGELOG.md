@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.24.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.7...@nvidia-elements/core-v1.24.0) (2025-02-03)
+
+
+### Features
+
+* **elements:** star rating component ([0fc31df](https://github.com/NVIDIA/elements/commit/0fc31df310ca351d4c477203978e27ed8e044c6d))
+
 ## [@nvidia-elements/core-v1.23.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.6...@nvidia-elements/core-v1.23.7) (2025-01-29)
 
 
