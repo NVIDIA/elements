@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.24.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.24.0...@nvidia-elements/core-v1.24.1) (2025-02-03)
+
+
+### Bug Fixes
+
+* **elements:** base button form association ([9a725aa](https://github.com/NVIDIA/elements/commit/9a725aae3c370ccb5c2bc6a7e19a7377625d0fd1))
+
 ## [@nvidia-elements/core-v1.24.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.23.7...@nvidia-elements/core-v1.24.0) (2025-02-03)
 
 
