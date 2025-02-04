@@ -1,12 +1,11 @@
 import { defineConfig } from 'vite';
 import solidPlugin from 'vite-plugin-solid';
-import { join } from 'node:path';
 // import devtools from 'solid-devtools/vite';
 
 export default defineConfig({
   root: './src',
   envDir: '../',
-  base: join('/', process.env.PAGES_BASE_URL ?? '', 'starters', 'solidjs'),
+  base: './',
   publicDir: '../assets',
   build: {
     target: 'esnext',

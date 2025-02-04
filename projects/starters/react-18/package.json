@@ -45,13 +45,7 @@
       "command": "vite",
       "dependencies": [
         "../../elements-react:build"
-      ],
-      "env": {
-        "PAGES_BASE_URL": {
-          "external": true,
-          "default": "/elements/"
-        }
-      }
+      ]
     },
     "build": {
       "command": "vite build",
@@ -64,23 +58,11 @@
       "files": [
         "src/**",
         "package.json"
-      ],
-      "env": {
-        "PAGES_BASE_URL": {
-          "external": true,
-          "default": "/elements/"
-        }
-      }
+      ]
     },
     "preview": {
       "command": "vite preview",
-      "service": true,
-      "env": {
-        "PAGES_BASE_URL": {
-          "external": true,
-          "default": "/elements/"
-        }
-      }
+      "service": true
     }
   }
 }

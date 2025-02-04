@@ -26,13 +26,7 @@
     },
     "dev": {
       "command": "vite",
-      "service": true,
-      "env": {
-        "PAGES_BASE_URL": {
-          "external": true,
-          "default": "/elements/"
-        }
-      }
+      "service": true
     },
     "build": {
       "command": "tsc && vite build",
@@ -47,25 +41,13 @@
         "package.json",
         "tsconfig.json",
         "vite.config.ts"
-      ],
-      "env": {
-        "PAGES_BASE_URL": {
-          "external": true,
-          "default": "/elements/"
-        }
-      }
+      ]
     },
     "preview": {
       "command": "vite preview",
       "dependencies": [
         "build"
-      ],
-      "env": {
-        "PAGES_BASE_URL": {
-          "external": true,
-          "default": "/elements/"
-        }
-      }
+      ]
     }
   }
 }

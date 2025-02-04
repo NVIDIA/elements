@@ -6,7 +6,7 @@ import { join } from 'node:path';
 export default defineConfig({
   root: './src',
   envDir: '../',
-  base: join('/', process.env.PAGES_BASE_URL ?? '', 'starters', 'react-18'),
+  base: './',
   publicDir: '../assets',
   plugins: [react()],
   build: {

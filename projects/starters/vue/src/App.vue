@@ -11,12 +11,12 @@ import '@nvidia-elements/core/logo/define.js';
   <nve-page>
     <nve-page-header slot="header">
       <nve-logo slot="prefix" size="sm"></nve-logo>
-      <a slot="prefix" href=".">Elements</a>
-      <nve-button container="flat"><a href="api/?path=/docs/about-installation--docs">Get Started</a></nve-button>
+      <a slot="prefix" href="../../">Elements</a>
+      <nve-button container="flat"><a href="../../api/?path=/docs/about-installation--docs">Get Started</a></nve-button>
       <nve-button container="flat"
         ><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button
       >
-      <nve-button selected=" " container="flat"><a href="starters/">Starters</a></nve-button>
+      <nve-button selected=" " container="flat"><a href="../">Starters</a></nve-button>
       <nve-button container="flat"
         ><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button
       >
@@ -28,58 +28,58 @@ import '@nvidia-elements/core/logo/define.js';
       <nve-page-panel-content>
         <nve-menu>
           <nve-menu-item>
-            <a href="starters/typescript/">
+            <a href="../typescript/">
               <img src="/typescript.svg" width="18px" height="18px" alt="typescript logo" />
               TypeScript
             </a>
           </nve-menu-item>
           <nve-menu-item>
-            <a href="starters/eleventy/">
+            <a href="../eleventy/">
               <img src="/eleventy.svg" width="18px" height="18px" alt="eleventy logo" />
               Eleventy
             </a>
           </nve-menu-item>
           <nve-menu-item>
-            <a href="starters/angular/">
+            <a href="../angular/">
               <img src="/angular.svg" width="18px" height="18px" alt="angular logo" />
               Angular
             </a>
           </nve-menu-item>
           <nve-menu-item current="page">
-            <a href="starters/vue/">
+            <a href="../vue/">
               <img src="/vue.svg" width="18px" height="18px" alt="vue logo" />
               Vue
             </a>
           </nve-menu-item>
           <nve-menu-item>
-            <a href="starters/react/">
+            <a href="../react/">
               <img src="/react.svg" width="18px" height="18px" alt="react logo" />
               React
             </a>
           </nve-menu-item>
           <nve-menu-item>
-            <a href="starters/solidjs/">
+            <a href="../solidjs/">
               <img src="/solidjs.svg" width="18px" height="18px" alt="solidjs logo" />
               SolidJS
             </a>
           </nve-menu-item>
           <nve-menu-item>
-            <a href="starters/buildless/">
+            <a href="../buildless/">
               <img src="/javascript.svg" width="18px" height="18px" alt="javascript logo" />
               Buildless
             </a>
           </nve-menu-item>
           <nve-menu-item>
             <nve-icon name="template"></nve-icon>
-            <a href="starters/mpa/">MPA</a>
+            <a href="../mpa/">MPA</a>
           </nve-menu-item>
         </nve-menu>
       </nve-page-panel-content>
     </nve-page-panel>
     <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
       <nve-breadcrumb>
-        <nve-button><a href=".">Elements</a></nve-button>
-        <nve-button><a href="starters/" target="_self">Starters</a></nve-button>
+        <nve-button><a href="../../">Elements</a></nve-button>
+        <nve-button><a href="../" target="_self">Starters</a></nve-button>
         <span>Vue</span>
       </nve-breadcrumb>
       <h1 nve-text="heading xl">Vue</h1>
