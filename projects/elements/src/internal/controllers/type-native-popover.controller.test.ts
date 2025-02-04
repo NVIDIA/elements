@@ -549,6 +549,7 @@ describe('type-popover.controller - hint', () => {
     button = fixture.querySelector(Button.metadata.tag);
     await element.updateComplete;
     await button.updateComplete;
+    element.hidePopover();
   });
 
   afterEach(() => {
