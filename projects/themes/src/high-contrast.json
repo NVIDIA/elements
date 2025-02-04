@@ -1,5 +1,10 @@
 {
   "$schema": "../dist/schema.json",
+  "config": {
+    "high-contrast": {
+      "value": "true"
+    }
+  },
   "ref": {
     "border": {
       "color": {
