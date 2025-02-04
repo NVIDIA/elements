@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.25.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.24.1...@nvidia-elements/core-v1.25.0) (2025-02-04)
+
+
+### Features
+
+* **elements:** preferences-input component ([b8ea409](https://github.com/NVIDIA/elements/commit/b8ea409a95fad3c660228d5d6031f27904be022c))
+
 ## [@nvidia-elements/core-v1.24.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.24.0...@nvidia-elements/core-v1.24.1) (2025-02-03)
 
 
