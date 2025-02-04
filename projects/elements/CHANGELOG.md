@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.25.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.25.0...@nvidia-elements/core-v1.25.1) (2025-02-04)
+
+
+### Bug Fixes
+
+* **elements:** update padding for page snippet ([b4a1d20](https://github.com/NVIDIA/elements/commit/b4a1d208ffc4013d00b1315239a8c86f176576d9))
+
 ## [@nvidia-elements/core-v1.25.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.24.1...@nvidia-elements/core-v1.25.0) (2025-02-04)
 
 
