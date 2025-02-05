@@ -5,6 +5,7 @@ const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
 
 /** @type {import('vite').UserConfig} */
 export const libraryTestConfig = {
+  testTimeout: 5_000,
   test: {
     retry: 1,
     isolate: coverage,

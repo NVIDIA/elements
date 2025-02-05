@@ -1,3 +1,4 @@
+import type { PropertyValues } from 'lit';
 import { LitElement, html } from 'lit';
 import { attachInternals, I18nController, useStyles } from '@nvidia-elements/core/internal';
 import styles from './preferences-input.css?inline';
@@ -199,9 +200,12 @@ export class PreferencesInput extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-
     this.setAttribute('nve-control', '');
-    this.activeThemes = getActiveThemes();
+  }
+
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    this.#updateTheme();
   }
 
   checkValidity() {
@@ -210,6 +214,13 @@ export class PreferencesInput extends LitElement {
 
   reportValidity() {
     this._internals.reportValidity();
+  }
+
+  #updateTheme() {
+    const themes = getActiveThemes();
+    if (JSON.stringify(this.activeThemes) !== JSON.stringify(themes)) {
+      this.activeThemes = themes;
+    }
   }
 
   #ensureFormValue(value: FormData) {

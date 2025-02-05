@@ -70,6 +70,7 @@ describe(CopyButton.metadata.tag, () => {
     // Simulate hover event
     const tooltip = element.shadowRoot.querySelector<Tooltip>(Tooltip.metadata.tag);
     const button = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
+    tooltip.hidePopover();
 
     const open = untilEvent(tooltip, 'open');
     emulateMouseEnter(button);

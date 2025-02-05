@@ -90,6 +90,7 @@ describe(Toggletip.metadata.tag, () => {
   });
 
   it('should emit close event when close button clicked', async () => {
+    element.hidePopover();
     element.closable = true;
     await elementIsStable(element);
 

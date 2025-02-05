@@ -15,6 +15,7 @@ describe(Toast.metadata.tag, () => {
       <nve-toast>hello</nve-toast>
     `);
     element = fixture.querySelector(Toast.metadata.tag);
+    element.hidePopover();
     await elementIsStable(element);
   });
 

@@ -15,6 +15,7 @@ describe(Dialog.metadata.tag, () => {
       <button popovertarget="dialog">button</button>
     `);
     element = fixture.querySelector(Dialog.metadata.tag);
+    element.hidePopover();
     await elementIsStable(element);
   });
 
