@@ -14,6 +14,7 @@ describe(Drawer.metadata.tag, () => {
       <nve-drawer>hello</nve-drawer>
     `);
     element = fixture.querySelector(Drawer.metadata.tag);
+    element.hidePopover();
     await elementIsStable(element);
   });
 
