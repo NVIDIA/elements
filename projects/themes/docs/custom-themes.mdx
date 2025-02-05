@@ -1,0 +1,34 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { Canvas } from '@nve-internals/storybook/blocks';
+import { ThemeGenerator } from './theme.stories';
+
+<Meta title="Foundations/Themes/Custom" />
+
+# Custom Themes
+
+Custom themes can be created by overriding the global CSS properties.
+
+```css
+:root {
+  --nve-sys-support-success-emphasis-color: var(--nve-ref-color-brand-green-1000);
+}
+```
+
+When creating a custom theme the theme should apply ONE of the following configuration flags.
+These flags help the system determine which types of themse are available for the user to set or apply.
+
+```css
+:root {
+  --nve-config-light: true;
+  --nve-config-dark: true;
+  --nve-config-high-contrast: true;
+  --nve-config-compact: true;
+  --nve-config-reduced-motion: true;
+}
+```
+
+## Theme Generator
+
+The demo below demonstrates how only a few tokens adjusted can drastically change the look and feel of the system.
+
+<Canvas of={ThemeGenerator} story={{ inline: false, height: 980 }} />
