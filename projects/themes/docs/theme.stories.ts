@@ -8,8 +8,6 @@ import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/input/define.js';
-import '@nvidia-elements/core/app-header/define.js';
-import '@nvidia-elements/core/panel/define.js';
 import '@nvidia-elements/core/color/define.js';
 import '@nvidia-elements/core/range/define.js';
 import '@nvidia-elements/core/radio/define.js';
@@ -21,6 +19,9 @@ import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/password/define.js';
 import '@nvidia-elements/core/progress-ring/define.js';
 import '@nvidia-elements/core/dot/define.js';
+import '@nvidia-elements/core/page/define.js';
+import '@nvidia-elements/core/page-header/define.js';
+import '@nvidia-elements/core/logo/define.js';
 
 export default {
   title: 'Foundations/Themes/Examples'
@@ -192,14 +193,6 @@ class ThemeGeneratorDemo extends LitElement {
     :host {
       display: contents;
     }
-
-    nve-panel {
-      min-width: 360px;
-      z-index: 99;
-      height: 100vh;
-      position: sticky;
-      top: 0;
-    }
   `];
 
   static properties = {
@@ -230,177 +223,159 @@ class ThemeGeneratorDemo extends LitElement {
 
   render() {
     return html`
-<div nve-layout="column" style="height: 100%">
-  <nve-app-header>
-    <nve-logo></nve-logo>
-    <h2 slot="title">Theme Generator</h2>
-    <nve-button slot="nav-items" active>Link 1</nve-button>
-    <nve-button slot="nav-items">Link 2</nve-button>
-    <nve-icon-button icon-name="chat-bubble" slot="nav-actions"></nve-icon-button>
-    <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
-    <nve-icon-button interaction="emphasis" slot="nav-actions" size="sm">EL</nve-icon-button>
-  </nve-app-header>
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
 
-  <nve-alert-group status="accent" prominence="emphasis" container="full">
+  <nve-alert-group slot="header" status="accent" prominence="emphasis" container="full">
     <nve-alert closable>banner message</nve-alert>
   </nve-alert-group>
 
-  <div nve-layout="row" style="width: 100%;">
-    <nve-panel expanded>
-      <nve-panel-header>
-        <h2 slot="title">Theme Options</h2>
-      </nve-panel-header>
-      <nve-panel-content>
-        <form @input=${this.#input} nve-layout="column gap:lg">
-          <nve-color>
-            <label>Color</label>
-            <input type="color" name="sys-accent-secondary-background" .value=${this.formValues['sys-accent-secondary-background']} />
-          </nve-color>
+  <nve-page-panel slot="left" expanded size="sm">
+    <nve-page-panel-header>
+      <h3 nve-text="heading medium sm">Theme Options</h3>
+    </nve-page-panel-header>
+    <nve-page-panel-content>
+      <form @input=${this.#input} nve-layout="column gap:lg">
+        <nve-color>
+          <label>Color</label>
+          <input type="color" name="sys-accent-secondary-background" .value=${this.formValues['sys-accent-secondary-background']} />
+        </nve-color>
 
-          <nve-range>
-            <label>Space Scale</label>
-            <input type="range" name="ref-scale-space" .value=${this.formValues['ref-space-scale']} min="0.5" max="2" step="0.1" />
-          </nve-range>
+        <nve-range>
+          <label>Space Scale</label>
+          <input type="range" name="ref-scale-space" .value=${this.formValues['ref-space-scale']} min="0.5" max="2" step="0.1" />
+        </nve-range>
 
-          <nve-range>
-            <label>Size Scale</label>
-            <input type="range" name="ref-scale-size" .value=${this.formValues['ref-size-scale']} min="0.5" max="1.5" step="0.1" />
-          </nve-range>
+        <nve-range>
+          <label>Size Scale</label>
+          <input type="range" name="ref-scale-size" .value=${this.formValues['ref-size-scale']} min="0.5" max="1.5" step="0.1" />
+        </nve-range>
 
-          <nve-range>
-            <label>Text Scale</label>
-            <input type="range" name="ref-scale-text" .value=${this.formValues['ref-text-scale']} min="0.5" max="1.5" step="0.1" />
-          </nve-range>
+        <nve-range>
+          <label>Text Scale</label>
+          <input type="range" name="ref-scale-text" .value=${this.formValues['ref-text-scale']} min="0.5" max="1.5" step="0.1" />
+        </nve-range>
 
-          <nve-range>
-            <label>Border Radius Scale</label>
-            <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-scale-border-radius']} min="0" max="1.5" step="0.1" />
-          </nve-range>
+        <nve-range>
+          <label>Border Radius Scale</label>
+          <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-scale-border-radius']} min="0" max="1.5" step="0.1" />
+        </nve-range>
 
-          <nve-range>
-            <label>Border Width Scale</label>
-            <input type="range" name="ref-scale-border-width" .value=${this.formValues['ref-scale-border-width']} min="0.5" max="3" step="0.5" />
-          </nve-range>
+        <nve-range>
+          <label>Border Width Scale</label>
+          <input type="range" name="ref-scale-border-width" .value=${this.formValues['ref-scale-border-width']} min="0.5" max="3" step="0.5" />
+        </nve-range>
 
-          <nve-button type="button" @click=${this.#random} style="position: fixed; bottom: 24px;">random</nve-button>
-        </form>
-      </nve-panel-content>
-    </nve-panel>
+        <nve-button type="button" @click=${this.#random} style="position: fixed; bottom: 24px;">random</nve-button>
+      </form>
+    </nve-page-panel-content>
+  </nve-page-panel>
 
-    <main nve-layout="column gap:lg pad:lg full align:horizontal-stretch">
-      <h1 nve-text="heading lg">Heading</h1>
-        <nve-card>
-          <nve-card-header>
-            <div slot="title">Title</div>
-          </nve-card-header>
-          <nve-card-content>
-            <div nve-layout="column gap:lg">
-              <div nve-layout="row gap:lg align:vertical-center">
-                <nve-alert status="accent">alert message</nve-alert>
-                <nve-icon status="accent" name="person"></nve-icon>
-                <nve-dot status="accent"></nve-dot>
-                <nve-progress-ring status="accent" size="sm"></nve-progress-ring>
-              </div>
-              <nve-input layout="horizontal-inline">
-                <label>text label</label>
-                <input />
-                <nve-control-message>message</nve-control-message>
-              </nve-input>
-
-              <nve-password layout="horizontal-inline">
-                <label>password label</label>
-                <input type="password" value="123456" autocomplete="off" />
-                <nve-control-message>message</nve-control-message>
-              </nve-password>
-
-              <nve-select layout="horizontal-inline">
-                <label>select label</label>
-                <select>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                </select>
-                <nve-control-message>message</nve-control-message>
-              </nve-select>
-
-              <nve-checkbox-group layout="horizontal-inline">
-                <label>checkbox group label</label>
-                <nve-checkbox>
-                  <label>checkbox 1</label>
-                  <input type="checkbox" checked />
-                </nve-checkbox>
-
-                <nve-checkbox>
-                  <label>checkbox 2</label>
-                  <input type="checkbox" />
-                </nve-checkbox>
-
-                <nve-checkbox>
-                  <label>checkbox 3</label>
-                  <input type="checkbox" />
-                </nve-checkbox>
-              </nve-checkbox-group>
-
-              <nve-radio-group layout="horizontal-inline">
-                <label>radio group label</label>
-                <nve-radio>
-                  <label>radio 1</label>
-                  <input type="radio" checked />
-                </nve-radio>
-
-                <nve-radio>
-                  <label>radio 2</label>
-                  <input type="radio" />
-                </nve-radio>
-
-                <nve-radio>
-                  <label>radio 3</label>
-                  <input type="radio" />
-                </nve-radio>
-              </nve-radio-group>
-
-              <nve-switch-group layout="horizontal-inline">
-                <label>switch group label</label>
-                <nve-switch>
-                  <label>switch 1</label>
-                  <input type="checkbox" />
-                </nve-switch>
-
-                <nve-switch>
-                  <label>switch 2</label>
-                  <input type="checkbox" checked />
-                </nve-switch>
-              </nve-switch-group>
-
-              <nve-select layout="horizontal-inline">
-                <label>select multiple label</label>
-                <select multiple>
-                  <option value="1">Option 1</option>
-                  <option selected value="2">Option 2</option>
-                  <option selected value="3">Option 3</option>
-                  <option selected value="3">Option 3</option>
-                  <option value="4">Option 4</option>
-                  <option value="5">Option 5</option>
-                </select>
-                <nve-control-message>message</nve-control-message>
-              </nve-select>
-
-              <nve-textarea layout="horizontal-inline">
-                <label>textarea label</label>
-                <textarea></textarea>
-                <nve-control-message>message</nve-control-message>
-              </nve-textarea>
+  <main nve-layout="column gap:lg pad:lg full align:horizontal-stretch">
+      <nve-card>
+        <nve-card-header>
+          <div slot="title">Title</div>
+        </nve-card-header>
+        <nve-card-content>
+          <div nve-layout="column gap:lg">
+            <div nve-layout="row gap:lg align:vertical-center">
+              <nve-alert status="accent">alert message</nve-alert>
+              <nve-icon status="accent" name="person"></nve-icon>
+              <nve-dot status="accent"></nve-dot>
+              <nve-progress-ring status="accent" size="sm"></nve-progress-ring>
             </div>
-          </nve-card-content>
-          <nve-card-footer>
-            <div nve-layout="row gap:xs full">
-              <nve-button style="margin-left: auto">button</nve-button>
-            </div>
-          </nve-card-footer>
-        </nve-card>
-    </main>
-  </div>
-</div>
+            <nve-input layout="horizontal-inline">
+              <label>text label</label>
+              <input />
+              <nve-control-message>message</nve-control-message>
+            </nve-input>
+
+            <nve-password layout="horizontal-inline">
+              <label>password label</label>
+              <input type="password" value="123456" autocomplete="off" />
+              <nve-control-message>message</nve-control-message>
+            </nve-password>
+
+            <nve-select layout="horizontal-inline">
+              <label>select label</label>
+              <select>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+              <nve-control-message>message</nve-control-message>
+            </nve-select>
+
+            <nve-checkbox-group layout="horizontal-inline">
+              <label>checkbox group label</label>
+              <nve-checkbox>
+                <label>checkbox 1</label>
+                <input type="checkbox" checked />
+              </nve-checkbox>
+
+              <nve-checkbox>
+                <label>checkbox 2</label>
+                <input type="checkbox" />
+              </nve-checkbox>
+
+              <nve-checkbox>
+                <label>checkbox 3</label>
+                <input type="checkbox" />
+              </nve-checkbox>
+            </nve-checkbox-group>
+
+            <nve-radio-group layout="horizontal-inline">
+              <label>radio group label</label>
+              <nve-radio>
+                <label>radio 1</label>
+                <input type="radio" checked />
+              </nve-radio>
+
+              <nve-radio>
+                <label>radio 2</label>
+                <input type="radio" />
+              </nve-radio>
+
+              <nve-radio>
+                <label>radio 3</label>
+                <input type="radio" />
+              </nve-radio>
+            </nve-radio-group>
+
+            <nve-switch-group layout="horizontal-inline">
+              <label>switch group label</label>
+              <nve-switch>
+                <label>switch 1</label>
+                <input type="checkbox" />
+              </nve-switch>
+
+              <nve-switch>
+                <label>switch 2</label>
+                <input type="checkbox" checked />
+              </nve-switch>
+            </nve-switch-group>
+
+            <nve-textarea layout="horizontal-inline">
+              <label>textarea label</label>
+              <textarea></textarea>
+              <nve-control-message>message</nve-control-message>
+            </nve-textarea>
+          </div>
+        </nve-card-content>
+        <nve-card-footer>
+          <div nve-layout="row gap:xs full">
+            <nve-button style="margin-left: auto">button</nve-button>
+          </div>
+        </nve-card-footer>
+      </nve-card>
+  </main>
+</nve-page>
     `;
   }
 

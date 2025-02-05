@@ -132,6 +132,7 @@ export function render(data) {
                     <nve-tree-node><a href="api/?path=/docs/foundations-themes-color--docs">Color</a></nve-tree-node>
                     <nve-tree-node><a href="api/?path=/docs/foundations-themes-animation--docs">Animation</a></nve-tree-node>
                     <nve-tree-node><a href="api/?path=/docs/foundations-themes-fonts--docs">Fonts</a></nve-tree-node>
+                    <nve-tree-node><a href="api/?path=/docs/foundations-themes-custom-themes--docs">Custom</a></nve-tree-node>
                   </nve-tree-node>
                   <nve-tree-node><a href="api/?path=/docs/foundations-typography-documentation--docs">Typography</a></nve-tree-node>
                   <nve-tree-node><a href="api/?path=/docs/foundations-iconography-documentation--docs">Iconography</a></nve-tree-node>
