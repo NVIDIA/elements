@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.4.0...@nvidia-elements/themes-v1.5.0) (2025-02-05)
+
+
+### Features
+
+* **themes:** add preferences css properties to themes ([f63c6ef](https://github.com/NVIDIA/elements/commit/f63c6ef3b9eb1472f180631d7ef598a4a7370bbe))
+
 ## [@nvidia-elements/themes-v1.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.3.5...@nvidia-elements/themes-v1.4.0) (2024-12-19)
 
 
