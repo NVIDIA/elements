@@ -105,6 +105,7 @@ export const parameters = {
             'Color',
             'Animation',
             'Fonts',
+            'Custom',
             'Examples'
           ],
           'Typography',
