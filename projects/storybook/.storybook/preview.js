@@ -150,6 +150,7 @@ export const parameters = {
           'Button Group',
           'Bulk Actions',
           'Card',
+          'Chat Message',
           'Checkbox',
           'Color',
           'Combobox',

@@ -1,0 +1,4 @@
+nve-chat-message:has([slot='prefix'])::part(_message),
+nve-chat-message:has([slot='suffix'])::part(_message) {
+  margin-top: var(--top-offset);
+}

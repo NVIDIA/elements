@@ -1,0 +1,62 @@
+:host {
+  --background: var(--nve-sys-interaction-background);
+  --color: var(--nve-sys-text-color);
+  --padding: var(--nve-ref-size-300);
+  --gap: var(--nve-ref-space-xs);
+  --border-radius: var(--nve-ref-border-radius-md);
+  --font-size: var(--nve-ref-font-size-200);
+  --line-height: var(--nve-ref-font-line-height-tight);
+  --top-offset: 0;
+  --display: flex;
+  --overflow: hidden;
+}
+
+[internal-host] {
+  gap: var(--gap);
+  font-size: var(--font-size);
+  display: var(--display);
+  overflow: var(--overflow);
+}
+
+slot:not([name]) {
+  padding: var(--padding);
+  background: var(--background);
+  color: var(--color);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  gap: var(--gap);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+::slotted(nve-avatar) {
+  flex-shrink: 0;
+}
+
+:host([container='flat']) {
+  --background: transparent;
+  --padding: 0 var(--nve-ref-size-200);
+}
+
+:host([color]) {
+  --background: var(--state-color);
+  --color: var(--nve-sys-contrast-mute-color);
+}
+
+:host([arrow-position='top-start']) slot:not([name]) {
+  border-top-left-radius: 0;
+}
+
+:host([arrow-position='top-end']) slot:not([name]) {
+  border-top-right-radius: 0;
+}
+
+:host([arrow-position='bottom-start']) slot:not([name]) {
+  border-bottom-left-radius: 0;
+}
+
+:host([arrow-position='bottom-end']) slot:not([name]) {
+  border-bottom-right-radius: 0;
+}
