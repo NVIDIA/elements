@@ -15,6 +15,7 @@ describe(Notification.metadata.tag, () => {
       <nve-notification>hello</nve-notification>
     `);
     element = fixture.querySelector(Notification.metadata.tag);
+    element.hidePopover();
     await elementIsStable(element);
   });
 
