@@ -203,6 +203,18 @@
       "types": "./dist/card/define.d.ts",
       "default": "./dist/card/define.js"
     },
+    "./chat-message": {
+      "types": "./dist/chat-message/index.d.ts",
+      "default": "./dist/chat-message/index.js"
+    },
+    "./chat-message/index.js": {
+      "types": "./dist/chat-message/index.d.ts",
+      "default": "./dist/chat-message/index.js"
+    },
+    "./chat-message/define.js": {
+      "types": "./dist/chat-message/define.d.ts",
+      "default": "./dist/chat-message/define.js"
+    },
     "./checkbox": {
       "types": "./dist/checkbox/index.d.ts",
       "default": "./dist/checkbox/index.js"
