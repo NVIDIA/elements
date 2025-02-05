@@ -18,6 +18,7 @@ describe(Tooltip.metadata.tag, () => {
     `);
     element = fixture.querySelector('#tooltip');
     trigger = fixture.querySelector(Button.metadata.tag);
+    element.hidePopover();
   });
 
   afterEach(() => {
