@@ -1,12 +1,9 @@
 import { html } from 'lit';
 import '@nvidia-elements/core/button/define.js';
-import '@nvidia-elements/core/card/define.js';
-import '@nvidia-elements/core/card/define.js';
-import '@nvidia-elements/core/dropdown/define.js';
-import '@nvidia-elements/core/logo/define.js';
-import '@nvidia-elements/core/menu/define.js';
+import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/page-header/define.js';
-import '@nvidia-elements/core/switch/define.js';
+import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/preferences-input/define.js';
 
 export default {
@@ -17,18 +14,7 @@ export default {
 export const Default = {
   render: () => {
     return html`
-      <style>
-        :root {
-          --nve-config-light: true;
-          --nve-config-dark: true;
-          --nve-config-high-contrast: true;
-          --nve-config-compact: true;
-          --nve-config-reduced-motion: true;
-        }
-      </style>
-      <div>
-        <nve-preferences-input name="theme" value='{ "theme": "dark", "scale": "compact", "reduced-motion": "true" }'></nve-preferences-input>
-      </div>
+      <nve-preferences-input name="theme" value='{ "theme": "dark", "scale": "compact", "reduced-motion": "true" }'></nve-preferences-input>
     `
   }
 };
