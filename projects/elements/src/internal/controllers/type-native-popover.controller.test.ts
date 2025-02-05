@@ -35,6 +35,8 @@ class TypeNativePopoverControllerTestElement extends LitElement {
 
   @property({ type: Boolean, reflect: true }) modal = false;
 
+  @property({ type: Boolean, reflect: true }) hidden = false;
+
   get popoverArrow() {
     return this.shadowRoot.querySelector<HTMLElement>('.arrow');
   }
@@ -235,25 +237,22 @@ describe('type-popover.controller escaped id selectors', () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-button>anchor</nve-button>
-      <type-native-popover-controller-test-element></type-native-popover-controller-test-element>
+      <nve-button popovertarget=":popover">anchor</nve-button>
+      <type-native-popover-controller-test-element id=":popover"></type-native-popover-controller-test-element>
     `);
     element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
       'type-native-popover-controller-test-element'
     );
     button = fixture.querySelector(Button.metadata.tag);
-    await element.updateComplete;
-    await button.updateComplete;
+    await elementIsStable(element);
+    await elementIsStable(button);
   });
 
   afterEach(() => {
     removeFixture(fixture);
   });
 
-  it('should not show popover by default due to correct id matching of escaped characters', async () => {
-    button.popovertarget = ':popover';
-    element.id = ':popover';
-    await elementIsStable(element);
+  it('should not show popover by default due to correct id matching of escaped characters', () => {
     expect(element.matches(':popover-open')).toBe(false);
   });
 });
@@ -398,16 +397,16 @@ describe('type-popover.controller explicit dynamic trigger', () => {
   it('should not open popover when previous trigger is removed', async () => {
     element.trigger = buttons[1];
     element.anchor = buttons[1];
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.hidden).toBe(true);
 
     emulateClick(buttons[0]);
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.hidden).toBe(true);
   });
 
   it('should use the recently updated trigger', async () => {
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.hidden).toBe(true);
 
     element.trigger = buttons[1];
@@ -417,27 +416,27 @@ describe('type-popover.controller explicit dynamic trigger', () => {
     const open = untilEvent(element, 'open');
     emulateClick(buttons[1]);
     await open;
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.hidden).toBe(false);
   });
 
   it('should allow dynamic triggers', async () => {
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.hidden).toBe(true);
     expect(element.behaviorTrigger).toBe(true);
 
     const open = untilEvent(element, 'open');
     emulateClick(buttons[0]);
-    await element.updateComplete;
     await open;
+    await elementIsStable(element);
     expect(element.hidden).toBe(false);
 
     element.trigger = buttons[1];
     element.anchor = buttons[1];
-    await element.updateComplete;
+    await elementIsStable(element);
 
     emulateClick(buttons[0]);
-    await element.updateComplete;
+    await elementIsStable(element);
     expect(element.hidden).toBe(false);
     expect(buttons[0].popoverTargetElement).toBe(null);
     expect(buttons[0].hasAttribute('popovertarget')).toBe(false);
@@ -447,6 +446,7 @@ describe('type-popover.controller explicit dynamic trigger', () => {
     const event = untilEvent(element, 'close');
     emulateClick(buttons[1]);
     expect((await event).target).toBe(element);
+    await elementIsStable(element);
     expect(element.hidden).toBe(true);
   });
 });
@@ -489,6 +489,7 @@ describe('type-popover.controller legacy behavior-trigger', () => {
     const event = untilEvent(element, 'open');
     emulateClick(button);
     expect((await event).target).toBe(element);
+    await elementIsStable(element);
     expect(element.hidden).toBe(false);
   });
 
@@ -497,11 +498,13 @@ describe('type-popover.controller legacy behavior-trigger', () => {
     const open = untilEvent(element, 'open');
     element.showPopover();
     expect((await open).target).toBe(element);
+    await elementIsStable(element);
     expect(element.hidden).toBe(false);
 
     const close = untilEvent(element, 'close');
     element.hidePopover();
     expect((await close).target).toBe(element);
+    await elementIsStable(element);
     expect(element.hidden).toBe(true);
   });
 
