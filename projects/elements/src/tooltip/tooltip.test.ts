@@ -19,6 +19,7 @@ describe(Tooltip.metadata.tag, () => {
     element = fixture.querySelector('#tooltip');
     trigger = fixture.querySelector(Button.metadata.tag);
     element.hidePopover();
+    await elementIsStable(element);
   });
 
   afterEach(() => {
@@ -56,6 +57,7 @@ describe(Tooltip.metadata.tag, () => {
   });
 
   it('if open-delay set, display tooltip after waiting for delayed time', async () => {
+    element.hidePopover();
     element.openDelay = 500;
     element.trigger = trigger;
     await elementIsStable(element);

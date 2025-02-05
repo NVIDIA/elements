@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@nvidia-elements/testing';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Dropdown } from '@nvidia-elements/core/dropdown';
 import '@nvidia-elements/core/dropdown/define.js';
@@ -14,6 +14,7 @@ describe(Dropdown.metadata.tag, () => {
       <nve-dropdown>hello</nve-dropdown>
     `);
     element = fixture.querySelector(Dropdown.metadata.tag);
+    element.hidePopover();
     await elementIsStable(element);
   });
 
@@ -74,6 +75,7 @@ describe(Dropdown.metadata.tag, () => {
   });
 
   it('should emit close event when hidePopover is called', async () => {
+    element.hidePopover();
     element.closable = true;
     await elementIsStable(element);
 
@@ -95,7 +97,7 @@ describe(Dropdown.metadata.tag, () => {
     expect(await open).toBeDefined();
 
     const event = untilEvent(element, 'close');
-    element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
+    emulateClick(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag));
     expect(await event).toBeDefined();
   });
 });

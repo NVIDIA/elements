@@ -97,6 +97,9 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
       --nve-config-reduced-motion: true;
     }`);
 
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const form = fixture.querySelector('form');
     const colorMenu = element.shadowRoot.querySelectorAll<Control>('nve-control')[0];
     const scaleMenu = element.shadowRoot.querySelectorAll<Control>('nve-control')[1];
@@ -139,6 +142,9 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
       --nve-config-reduced-motion: true;
     }`);
 
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const form = fixture.querySelector('form');
     const colorMenu = element.shadowRoot.querySelectorAll<Control>('nve-control')[0];
     const scaleMenu = element.shadowRoot.querySelectorAll<Control>('nve-control')[1];
@@ -173,29 +179,39 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
   /**
    * Test visibility of color controls
    */
-  it('should show color controls when "true"', () => {
+  it('should show color controls when "true"', async () => {
     const styles = mockCSSProperties(`:root {
       --nve-config-light: true;
       --nve-config-dark: true;
     }`);
+
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const node = element.shadowRoot.querySelectorAll<Control>('nve-control')[0];
     expect(node.checkVisibility()).toBe(true);
     styles.remove();
     styles.remove();
   });
 
-  it('should show color controls when "false"', () => {
+  it('should show color controls when "false"', async () => {
     const styles = mockCSSProperties(`:root {
       --nve-config-light: false;
       --nve-config-dark: false;
     }`);
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const node = element.shadowRoot.querySelectorAll<Control>('nve-control')[0];
     expect(node.checkVisibility()).toBe(true);
     styles.remove();
   });
 
-  it('should show color controls when "null"', () => {
+  it('should show color controls when "null"', async () => {
     const styles = mockCSSProperties(`:root {}`);
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const node = element.shadowRoot.querySelectorAll<Control>('nve-control')[0];
     expect(node.checkVisibility()).toBe(true);
     styles.remove();
@@ -204,22 +220,31 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
   /**
    * Test visibility of scale controls
    */
-  it('should show scale controls when "true"', () => {
+  it('should show scale controls when "true"', async () => {
     const styles = mockCSSProperties(`:root { --nve-config-compact: true; }`);
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const node = element.shadowRoot.querySelectorAll<Control>('nve-control')[1];
     expect(node.checkVisibility()).toBe(true);
     styles.remove();
   });
 
-  it('should hide scale controls when "false"', () => {
+  it('should hide scale controls when "false"', async () => {
     const styles = mockCSSProperties(`:root { --nve-config-compact: false; }`);
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const node = element.shadowRoot.querySelectorAll<Control>('nve-control')[1];
     expect(node).toBe(undefined);
     styles.remove();
   });
 
-  it('should hide scale controls when "null"', () => {
+  it('should hide scale controls when "null"', async () => {
     const styles = mockCSSProperties(`:root {}`);
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const node = element.shadowRoot.querySelectorAll<Control>('nve-control')[1];
     expect(node).toBe(undefined);
     styles.remove();
@@ -228,22 +253,31 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
   /**
    * Test visibility of motion controls
    */
-  it('should show motion controls when "true"', () => {
+  it('should show motion controls when "true"', async () => {
     const styles = mockCSSProperties(`:root { --nve-config-reduced-motion: true; }`);
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const node = element.shadowRoot.querySelector<Switch>('nve-switch');
     expect(node.checkVisibility()).toBe(true);
     styles.remove();
   });
 
-  it('should hide motion controls when "false"', () => {
+  it('should hide motion controls when "false"', async () => {
     const styles = mockCSSProperties(`:root { --nve-config-reduced-motion: false; }`);
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const node = element.shadowRoot.querySelector<Switch>('nve-switch');
     expect(node).toBe(null);
     styles.remove();
   });
 
-  it('should hide motion controls when "null"', () => {
+  it('should hide motion controls when "null"', async () => {
     const styles = mockCSSProperties(`:root {}`);
+    element.requestUpdate();
+    await elementIsStable(element);
+
     const node = element.shadowRoot.querySelector<Switch>('nve-switch');
     expect(node).toBe(null);
     styles.remove();
