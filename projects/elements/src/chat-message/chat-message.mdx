@@ -1,0 +1,51 @@
+import { Meta } from '@storybook/addon-docs';
+import { Canvas } from '@nve-internals/storybook/blocks';
+import { Default, ArrowPosition, Flat, PrefixSuffix, TopOffset, Color, Codeblock } from './chat-message.stories';
+
+<Meta title="Elements/Chat Message/Documentation" />
+
+# Chat Message
+
+<nve-api-summary tag="nve-chat-message"></nve-api-summary>
+
+## Installation
+
+```typescript
+import '@nvidia-elements/core/chat-message/define.js';
+```
+
+```html
+<nve-chat-message></nve-chat-message>
+```
+
+## Standard
+
+<Canvas of={Default} />
+
+## Arrow Position
+
+<Canvas of={ArrowPosition} />
+
+## Flat
+
+<Canvas of={Flat} />
+
+## Prefix/Suffix
+
+<Canvas of={PrefixSuffix} />
+
+## Codeblock
+
+<Canvas of={Codeblock} />
+
+## Top Offset
+
+<Canvas of={TopOffset} />
+
+## Color
+
+<Canvas of={Color} />
+
+<nve-api-status tag="nve-chat-message"></nve-api-status>
+
+<nve-api-table tag="nve-chat-message"></nve-api-table>
