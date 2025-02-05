@@ -67,7 +67,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
       }
 
       this.host.dispatchEvent(
-        new CustomEvent(e.newState === 'open' ? 'open' : 'close', {
+        new CustomEvent(e.newState === 'open' && e.oldState !== 'open' ? 'open' : 'close', {
           bubbles: true,
           detail: { trigger: this.host._activeTrigger }
         })
