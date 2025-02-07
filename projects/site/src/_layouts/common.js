@@ -12,7 +12,7 @@ export const renderBaseHead = data => /* html */ `
   <base href="${BASE_URL}" />
   <title>${data.title}</title>
   <meta name="description" content="Elements - ${data.title}">
-  <link rel="icon" href="/assets/favicon.svg"> 
+  <link rel="icon" href="/favicon.svg"> 
   <style>
     @import '@nvidia-elements/themes/fonts/inter.css';
     @import '@nvidia-elements/themes/index.css';
@@ -31,17 +31,8 @@ export const renderBaseHead = data => /* html */ `
     *:not(:defined) {
       visibility: hidden;
     }
-
-    * {
-      --_transition: background-color 200ms linear;
-    }
   </style>
   <script type="module">
-    import '@nvidia-elements/core/page-header/define.js';
-    import '@nvidia-elements/core/page/define.js';
-    import '@nvidia-elements/core/button/define.js';
-    import '@nvidia-elements/core/logo/define.js';
-
     const SB_GLOBALS = { theme: 'dark', font: '',  scale: '', debug: '', animation: '', sourceType: 'html', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
     document.documentElement.setAttribute('nve-theme', SB_GLOBALS.theme);
   </script>
@@ -67,7 +58,7 @@ export const renderBaseHead = data => /* html */ `
 
     getCurrentScope().setClient(client);
     client.init();
-    // setTimeout(() => NOTFOUND_5(), 2000) // test error
+    // setTimeout(() => NOTFOUND(), 2000) // test error
   </script>
 `;
 
@@ -78,7 +69,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node><a href="api/?path=/docs/about-getting-started--docs">Getting Started</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/about-installation--docs">Installation</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/about-changelog--docs">Changelog</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/about-metrics--docs">Metrics</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted' : ''}><a href="docs/metrics/">Metrics</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/about-support--docs">Support</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/about-accessibility--docs">Accessibility</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/about-contributions--docs">Contributions</a></nve-tree-node>
@@ -180,8 +171,8 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node><a href="api/?path=/docs/elements-datetime-documentation--docs">Datetime</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/elements-dialog-documentation--docs">Dialog</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/elements-divider-documentation--docs">Divider</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'highlighted' : ''}><a href="docs/elements/dot/">Dot</a></nve-tree-node>
-    <!-- <nve-tree-node><a href="api/?path=/docs/elements-dot-documentation--docs">Dot</a></nve-tree-node> -->
+    <!-- <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'highlighted' : ''}><a href="docs/elements/dot/">Dot</a></nve-tree-node> -->
+    <nve-tree-node><a href="api/?path=/docs/elements-dot-documentation--docs">Dot</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/elements-drawer-documentation--docs">Drawer</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/elements-dropdown-documentation--docs">Dropdown</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/elements-file-documentation--docs">File</a></nve-tree-node>

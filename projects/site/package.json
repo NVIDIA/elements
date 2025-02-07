@@ -16,7 +16,7 @@
       ]
     },
     "dev": {
-      "command": "eleventy --serve --port=8080",
+      "command": "eleventy --serve --port=8082",
       "service": true,
       "dependencies": [
         "build"
@@ -82,6 +82,7 @@
     "@nvidia-elements/themes": "workspace:*",
     "@nve-internals/elements-api": "workspace:*",
     "@sentry/browser": "catalog:",
+    "compare-versions": "6.1.1",
     "markdown-it": "14.1.0",
     "typescript": "catalog:",
     "vite": "catalog:"

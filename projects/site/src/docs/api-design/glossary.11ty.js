@@ -10,12 +10,6 @@ export const data = {
 export function render(data) {
   return this.renderTemplate(
     /* markdown */ `
-
-<script type="module">
-  import '@nvidia-elements/core/grid/define.js';
-  import '@nvidia-elements/core/tag/define.js';
-</script>
-
 # ${data.title}
 
 Below are the common base properties that define the consistent API definition and language for all components, based on the [W3C](https://developer.mozilla.org/en-US/docs/Web/Web_Components) and [ARIA Patterns](https://www.w3.org/WAI/ARIA/apg/patterns/) specifications.

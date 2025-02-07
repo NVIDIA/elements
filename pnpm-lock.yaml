@@ -623,6 +623,9 @@ importers:
       '@sentry/browser':
         specifier: 'catalog:'
         version: 7.120.3
+      compare-versions:
+        specifier: 6.1.1
+        version: 6.1.1
       markdown-it:
         specifier: 14.1.0
         version: 14.1.0
@@ -1298,9 +1301,6 @@ importers:
       '@storybook/web-components-vite':
         specifier: 8.5.0
         version: 8.5.0(lit@3.2.1)(storybook@8.5.0(prettier@3.4.2))(vite@6.0.7(@types/node@22.7.5)(jiti@1.21.6)(less@4.2.0)(sass@1.80.7)(sugarss@4.0.1(postcss@8.4.49))(terser@5.37.0)(yaml@2.6.1))(webpack-sources@3.2.3)
-      compare-versions:
-        specifier: 6.1.1
-        version: 6.1.1
       eslint:
         specifier: 'catalog:'
         version: 9.18.0(jiti@1.21.6)
