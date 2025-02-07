@@ -19,7 +19,7 @@ function getLighthouseScoreStatus(score: number) {
 
 export class BadgeLighthouse extends LitElement {
   /* eslint rulesdir/primitive-property: 0 */
-  @property({ type: Object }) value: { performance?: number; accessibility?: number; bestPractices?: number };
+  @property({ type: Object }) value: { performance?: number; accessibility?: number; bestPractices?: number } = {};
 
   @property({ type: String }) container: 'flat';
 
@@ -31,8 +31,8 @@ export class BadgeLighthouse extends LitElement {
   static styles = useStyles([styles]);
 
   get #average() {
-    const values = Object.keys(this.value)
-      .map(key => this.value[key])
+    const values = Object.keys(this.value ?? {})
+      .map(key => (this.value ?? {})[key])
       .filter(value => value !== undefined);
     return values.length ? Math.floor(values.reduce((prev, next) => prev + next, 0) / values.length) : null;
   }
