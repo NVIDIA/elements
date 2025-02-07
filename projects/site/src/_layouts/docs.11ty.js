@@ -22,7 +22,7 @@ export function render(data) {
           [nve-text='heading xl mkd'],
           [nve-text='heading lg mkd'] {
             padding-top: var(--nve-ref-space-xl);
-            padding-bottom: 2px;
+            padding-bottom: 4px;
             border-bottom: 1px solid var(--nve-ref-border-color);
           }
 
@@ -57,15 +57,19 @@ export function render(data) {
 
           @media (min-width: 1920px) {
             main {
-              padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl) !important;
+              padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl);
             }
           }
 
           main:has([docs-full-width]) {
-            max-width: 100%;
+            padding: var(--nve-ref-space-lg) var(--nve-ref-space-md);
+
+            #doc-content {
+              max-width: 100%;
+            }
           }
 
-          [nve-text='list mkd'] {
+          #doc-sidenav[nve-text='list mkd'] {
             padding: 0;
             height: fit-content;
             list-style: none !important;
@@ -90,44 +94,21 @@ export function render(data) {
           }
         </style>
         <script type="module">
-          import '@nvidia-elements/core/tree/define.js';
-          import '@nvidia-elements/core/alert/define.js';
-          import '@nvidia-elements/core/select/define.js';
-          import '@nvidia-elements/core/switch/define.js';
-
-          import '@internals/elements-api/table/define.js';
-          import '@internals/elements-api/detail/define.js';
-          import '@internals/elements-api/status/define.js';
-          import '@internals/elements-api/summary/define.js';
-          import '@internals/elements-api/canvas/define.js';
-          import('@internals/elements-api/system-settings/define.js');
-          
-          import '@nvidia-elements/code/codeblock/languages/html.js';
-          import '@nvidia-elements/code/codeblock/languages/css.js';
-          import '@nvidia-elements/code/codeblock/languages/json.js';
-          import '@nvidia-elements/code/codeblock/languages/typescript.js';
-          import('@nvidia-elements/code/codeblock/define.js');
-
           const systemOptionsPanel = document.querySelector('#system-options-panel');
           const systemOptionsPanelBtn = document.querySelector('#system-options-panel-btn');
-
-          systemOptionsPanel.addEventListener('close', () => {
-            systemOptionsPanel.hidden = true;
-          });
-
-          systemOptionsPanelBtn.addEventListener('click', () => {
-            systemOptionsPanel.hidden = !systemOptionsPanel.hidden;
-          });
+          systemOptionsPanel.addEventListener('close', () => systemOptionsPanel.hidden = true);
+          systemOptionsPanelBtn.addEventListener('click', () => systemOptionsPanel.hidden = !systemOptionsPanel.hidden);
         </script>
         <script type="module">
           const headings = [
-            ...Array.from(document.querySelectorAll('h2, h3, h4')),
+            ...Array.from(document.querySelectorAll('h2[nve-text*="mkd"], h3[nve-text*="mkd"], h4[nve-text*="mkd"]')),
             document.querySelector('nve-api-status') ? { textContent: 'Status', id: 'element-status'} : null,
             document.querySelector('nve-api-table[type="all"]') ? { textContent: 'API', id: 'element-api'} : null
           ].filter(i => !!i);
 
           if (headings.length > 2) {
             const ul = document.createElement('ul');
+            ul.id = 'doc-sidenav';
             ul.setAttribute('nve-text', 'list mkd');
             for (const heading of headings) {
               const li = document.createElement('li');
@@ -138,7 +119,7 @@ export function render(data) {
               li.appendChild(a);
               ul.appendChild(li);
             }
-            document.querySelector('#doc-sidebar').appendChild(ul);
+            document.querySelector('#doc-content').insertAdjacentElement('afterend', ul);
           }
         </script>
       </head>
@@ -177,7 +158,6 @@ export function render(data) {
                     : ''
                 }
               </div>
-              <div id="doc-sidebar"></div>
             </div>
           </main>
           <nve-page-panel closable hidden slot="right" size="sm" id="system-options-panel">

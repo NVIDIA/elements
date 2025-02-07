@@ -65,9 +65,13 @@ Boolean property/attribute type behave the same as native HTML element boolean t
 <nve-alert closable>hello there</nve-alert>
 ```
 
-<nve-alert status="warning"><p nve-text="body">Warning: avoid double negations on attributes as this breaks the default expectations of native HTML elements, examples (<code nve-text="code">disable-closable</code>, <code nve-text="code">not-closable</code>, <code nve-text="code">closable=”false”</code>)</p></nve-alert>
+<nve-alert status="warning">
+  Warning: avoid double negations on attributes as this breaks the default expectations of native HTML elements, examples (<code nve-text="code">disable-closable</code>, <code nve-text="code">not-closable</code>, <code nve-text="code">closable=”false”</code>)
+</nve-alert>
 
-<nve-alert status="warning"><p nve-text="body">Warning: a custom coercion function is needed for react support which will set boolean attributes to a value of “false” <a href="https://github.com/vmware-clarity/core/blob/main/projects/core/src/internal/utils/dom.ts#L268" nve-text="link">example</a> <a href="https://github.com/facebook/react/issues/9230" nve-text="link">react issue</a>.</p></nve-alert>
+<nve-alert status="warning">
+  Warning: a custom coercion function is needed for react support which will set boolean attributes to a value of “false” <a href="https://github.com/vmware-clarity/core/blob/main/projects/core/src/internal/utils/dom.ts#L268" nve-text="link">example</a> <a href="https://github.com/facebook/react/issues/9230" nve-text="link">react issue</a>.
+</nve-alert>
 
 ## Primitive Types
 
@@ -75,12 +79,20 @@ Boolean property/attribute type behave the same as native HTML element boolean t
 
 While Lit keeps both properties and attributes in sync, do not use complex types like `object` and `array` on the API. Since HTML cannot represent JavaScript objects, Lit must JSON parse attributes and reflect them anytime there is a change to ensure the JavaScript property and HTML attribute are in sync. This can be expensive to parse when using an object or array and cause unexpected behaviors such as lost object references for the user.
 
-<nve-alert status="success"><p nve-text="body">Use <code>string | number | boolean</code></p></nve-alert>
-&nbsp;
-<nve-alert status="danger"><p nve-text="body">Avoid <code>object | array</code></p></nve-alert>
+<nve-alert status="success">
+  Use <code>string | number | boolean</code>
+</nve-alert>
+
+<nve-alert status="danger">
+  Avoid <code>object | array</code>
+</nve-alert>
 
 Complex types cause compatibility and usability issues as it can require the developer to use JavaScript to render content. This can make it difficult for user-generated content like CMS systems or SSR (Server Side Rendering) to easily render static HTML.
 
-<nve-alert status="warning"><p nve-text="body">Warning: avoid using <code>@property</code> on built in properties/attributes on the <code>HTMLElement</code> as the decorator overrides the getter/setter and can cause unexpected behavior.&nbsp;<a href="https://github.com/vmware-clarity/core/blob/main/projects/core/build/eslint-rules/reserved-property-names.js" nve-text="link">read more</a></p></nve-alert>
+<nve-alert status="warning">
+  Warning: avoid using <code>@property</code> on built in properties/attributes on the <code>HTMLElement</code> as the decorator overrides the getter/setter and can cause unexpected behavior.&nbsp;<a href="https://github.com/vmware-clarity/core/blob/main/projects/core/build/eslint-rules/reserved-property-names.js" nve-text="link">read more</a>
+</nve-alert>
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> <p nve-text="body">Learn: <a href="https://developers.google.com/web/fundamentals/web-components/best-practices#attributes-properties" nve-text="link">Web Fundamentals Attributes vs Properties</a></p></nve-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon>
+Learn: <a href="https://developers.google.com/web/fundamentals/web-components/best-practices#attributes-properties" nve-text="link">Web Fundamentals Attributes vs Properties</a>
+</nve-alert>
