@@ -5,10 +5,6 @@
 }
 ---
 
-<script type="module">
-  import '@nvidia-elements/core/grid/define.js';
-</script>
-
 # {{ title }}
 
 ## Strategies

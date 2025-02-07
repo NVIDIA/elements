@@ -20,7 +20,6 @@
 *::before,
 *::after {
   box-sizing: inherit;
-  transition: var(--_transition);
 }
 
 /* https://developers.google.com/web/fundamentals/web-components/best-practices#add-a-:host-display-style-that-respects-the-hidden-attribute */

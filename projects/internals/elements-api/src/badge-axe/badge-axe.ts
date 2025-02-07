@@ -19,7 +19,7 @@ export class BadgeAxe extends LitElement {
   render() {
     return html`
       ${this.container !== 'flat' ? html`<nve-tooltip id="tooltip" position="bottom" status="muted">Score/issues reported via AXE Core tests</nve-tooltip>` : nothing}
-      ${this.value === undefined ? html`<nve-badge popovertarget="tooltip" .container=${this.container as any} status="success" style="--text-transform: none"><a href="https://github.com/dequelabs/axe-core" target="_blank">axe-core</a></nve-badge>` : nothing}
+      ${this.value === undefined || this.value === '' ? html`<nve-badge popovertarget="tooltip" .container=${this.container as any} status="success" style="--text-transform: none"><a href="https://github.com/dequelabs/axe-core" target="_blank">axe-core</a></nve-badge>` : nothing}
       ${this.value === false ? html`<nve-badge popovertarget="tooltip" .container=${this.container as any} status="pending">Pending</nve-badge>` : nothing}
       ${this.value ? html`<nve-badge popovertarget="tooltip" .container=${this.container as any} status="warning" style="--text-transform: none"><a href="https://dequeuniversity.com/rules/axe/4.8/${this.value}?application=axeAPI" target="_blank">${this.value}</a></nve-badge>` : nothing}
     `;

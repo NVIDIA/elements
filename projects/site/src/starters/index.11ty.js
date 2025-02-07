@@ -23,9 +23,6 @@ export function render(data) {
     }
   }
 </style>
-<script type="module">
-  import '@nvidia-elements/core/card/define.js';
-</script>
 
 # ${data.title}
 
