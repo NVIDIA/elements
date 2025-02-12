@@ -9,6 +9,13 @@
   --top-offset: 0;
   --display: flex;
   --overflow: hidden;
+  contain: content;
+}
+
+@media (max-width: 350px) {
+  [internal-host] {
+    flex-direction: column; /*Stack vertically*/
+  }
 }
 
 [internal-host] {
