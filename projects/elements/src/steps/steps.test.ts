@@ -39,9 +39,14 @@ describe(Steps.metadata.tag, () => {
     expect(customElements.get(StepsItem.metadata.tag)).toBeDefined();
   });
 
-  it('should have correct a18y roles', async () => {
+  it('should have correct a11y roles', async () => {
     expect(parentElement._internals.role).toBe('tablist');
     expect(childElement._internals.role).toBe('tab');
+  });
+
+  it('should have a type default of button', async () => {
+    await elementIsStable(childElement);
+    expect(childElement.type).toBe('button');
   });
 
   it('should have proper defaults on parent', () => {
