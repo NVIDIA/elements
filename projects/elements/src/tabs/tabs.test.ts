@@ -34,9 +34,14 @@ describe(Tabs.metadata.tag, () => {
     expect(customElements.get(TabsItem.metadata.tag)).toBeDefined();
   });
 
-  it('should have correct a18y roles', async () => {
+  it('should have correct a11y roles', async () => {
     expect(parentElement._internals.role).toBe('tablist');
     expect(childElement._internals.role).toBe('tab');
+  });
+
+  it('should have a type default of button for the tab item', async () => {
+    await elementIsStable(childElement);
+    expect(childElement.type).toBe('button');
   });
 
   it('should have proper defaults on parent', () => {

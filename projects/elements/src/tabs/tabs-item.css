@@ -10,7 +10,7 @@
   --color: var(--nve-sys-text-muted-color);
   --height: var(--nve-ref-size-800);
   --cursor: pointer;
-  --text-transform: capitalize;
+  --text-transform: initial;
   --nve-sys-interaction-state-ratio: 0;
 }
 

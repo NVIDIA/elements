@@ -29,6 +29,11 @@ describe(MenuItem.metadata.tag, () => {
     expect(element._internals.role).toBe('menuitem');
   });
 
+  it('should have a type default of button', async () => {
+    await elementIsStable(element);
+    expect(element.type).toBe('button');
+  });
+
   it('should initialize tabindex 0 for focus behavior', async () => {
     await elementIsStable(element);
     expect(element.tabIndex).toBe(0);

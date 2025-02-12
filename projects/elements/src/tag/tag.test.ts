@@ -48,6 +48,11 @@ describe(Tag.metadata.tag, () => {
     expect(element._internals.role).toBe('button');
   });
 
+  it('should have a type default of button', async () => {
+    await elementIsStable(element);
+    expect(element.type).toBe('button');
+  });
+
   it('should emit close event when close button clicked', async () => {
     element.closable = true;
     await elementIsStable(element);

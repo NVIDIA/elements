@@ -33,6 +33,11 @@ describe(SortButton.metadata.tag, () => {
     expect(element._internals.role).toBe('spinbutton');
   });
 
+  it('should have a type default of button', async () => {
+    await elementIsStable(element);
+    expect(element.type).toBe('button');
+  });
+
   it('should use aria-hidden for decorative non-semantic icons', async () => {
     await elementIsStable(element);
     expect(icon.getAttribute('aria-hidden')).toBe('true');

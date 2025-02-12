@@ -51,6 +51,11 @@ export class TabsItem extends BaseButton {
     `;
   }
 
+  constructor() {
+    super();
+    this.type = 'button';
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this._internals.role = 'tab';
