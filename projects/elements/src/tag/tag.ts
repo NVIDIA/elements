@@ -64,4 +64,9 @@ export class Tag extends BaseButton {
       </div>
     `;
   }
+
+  constructor() {
+    super();
+    this.type = 'button';
+  }
 }
