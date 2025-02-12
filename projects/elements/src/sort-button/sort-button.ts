@@ -54,6 +54,11 @@ export class SortButton extends BaseButton {
     `;
   }
 
+  constructor() {
+    super();
+    this.type = 'button';
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this._internals.role = 'spinbutton';

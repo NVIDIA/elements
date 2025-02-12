@@ -44,9 +44,13 @@ export class MenuItem extends BaseButton {
     `;
   }
 
+  constructor() {
+    super();
+    this.type = 'button';
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this._internals.role = 'menuitem';
-    this.type = 'button';
   }
 }
