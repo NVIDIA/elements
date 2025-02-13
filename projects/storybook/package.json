@@ -23,6 +23,7 @@
     "showdown": "2.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "catalog:",
     "@nve-internals/eslint": "workspace:*",
     "@storybook/core-events": "8.5.0",
     "@storybook/addon-docs": "8.5.0",
