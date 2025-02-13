@@ -8,6 +8,7 @@ import globalStyles from './file.global.css?inline';
  * @element nve-file
  * @description A file picker is a control that enables users to choose a file value.
  * @since 0.3.0
+ * @entrypoint \@nvidia-elements/core/file
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-file-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  */

@@ -18,6 +18,7 @@ import styles from './dropdown.css?inline';
  * @element nve-dropdown
  * @description Generic dropdown element for rendering a variety of different content within a dropdown container.
  * @since 0.6.0
+ * @entrypoint \@nvidia-elements/core/dropdown
  * @event open - Dispatched when the dropdown is opened.
  * @event close - Dispatched when the dropdown is closed.
  * @slot - default slot for dropdown content

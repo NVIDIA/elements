@@ -9,6 +9,7 @@ import styles from './progress-bar.css?inline';
  * @element nve-progress-bar
  * @description A progress bar is a visual indicator of the status of a running task. Under the hood the native HTML `progress` element is used to achieve proper a11y concerns.
  * @since 0.16.0
+ * @entrypoint \@nvidia-elements/core/progress-bar
  * @cssprop --height
  * @cssprop --opacity
  * @cssprop --accent-color

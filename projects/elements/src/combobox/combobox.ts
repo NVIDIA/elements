@@ -23,6 +23,7 @@ import styles from './combobox.css?inline';
  * @element nve-combobox
  * @description An editable combobox with autocomplete behavior from a given datalist.
  * @since 0.17.0
+ * @entrypoint \@nvidia-elements/core/combobox
  * @slot - default slot for input
  * @slot prefix-icon - slot for icon to be placed before the input
  * @slot footer - slot for dropdown footer content

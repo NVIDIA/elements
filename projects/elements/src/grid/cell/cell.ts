@@ -5,6 +5,7 @@ import styles from './cell.css?inline';
 /**
  * @element nve-grid-cell
  * @since 0.11.0
+ * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --color
