@@ -8,6 +8,7 @@ import styles from './dot.css?inline';
  * @element nve-dot
  * @description A visual indicator that communicates a status or notification of an associated component.
  * @since 0.10.0
+ * @entrypoint \@nvidia-elements/core/dot
  * @slot - default content
  * @cssprop --gap
  * @cssprop --font-size

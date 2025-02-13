@@ -6,6 +6,7 @@ import styles from './menu-item.css?inline';
 /**
  * @element nve-menu-item
  * @since 0.11.0
+ * @entrypoint \@nvidia-elements/core/menu
  * @slot - default slot for content
  * @slot suffix - slot for suffix icon
  * @cssprop --background

@@ -14,6 +14,7 @@ export type { IconName, IconNames, IconSVG } from './icons.js';
 /**
  * @element nve-icon
  * @since 0.1.3
+ * @entrypoint \@nvidia-elements/core/icon
  * @description An icon is a graphic symbol designed to visually indicate the purpose of an interface element.
  * @cssprop --color
  * @cssprop --width

@@ -16,6 +16,7 @@ hljs.registerLanguage('shell', shell);
  * @element nve-codeblock
  * @description A container for content representing programming languages.
  * @since 0.1.0
+ * @entrypoint \@nvidia-elements/code/codeblock
  * @slot actions - slot for action bar
  * @cssprop --background
  * @cssprop --padding
