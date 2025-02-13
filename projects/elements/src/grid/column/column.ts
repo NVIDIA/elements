@@ -13,6 +13,7 @@ import styles from './column.css?inline';
 /**
  * @element nve-grid-column
  * @since 0.11.0
+ * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for content
  * @slot actions - slot for column actions
  * @cssprop --color

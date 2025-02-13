@@ -5,6 +5,7 @@ import styles from './footer.css?inline';
 /**
  * @element nve-grid-footer
  * @since 0.11.0
+ * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --color

@@ -19,6 +19,7 @@ import styles from './notification.css?inline';
  * @element nve-notification
  * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status.
  * @since 0.6.0
+ * @entrypoint \@nvidia-elements/core/notification
  * @event open - Dispatched when the notification is opened.
  * @event close - Dispatched when the notification is closed.
  * @slot default content slot
