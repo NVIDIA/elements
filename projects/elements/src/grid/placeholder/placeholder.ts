@@ -5,6 +5,7 @@ import styles from './placeholder.css?inline';
 /**
  * @element nve-grid-placeholder
  * @since 0.11.0
+ * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for content
  * @cssprop --color
  * @cssprop --padding

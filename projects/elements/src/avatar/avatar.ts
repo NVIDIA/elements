@@ -8,7 +8,8 @@ import styles from './avatar.css?inline';
 /**
  * @element nve-avatar
  * @description Avatar represents a user/bot within a UI. Typically with text or image content.
- * @since 1.18.0
+ * @since 1.20.0
+ * @entrypoint \@nvidia-elements/core/avatar
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --width

@@ -22,6 +22,7 @@ import styles from './select.css?inline';
  * @element nve-select
  * @description A select is a control that enables users to select an option from a list of options.
  * @since 0.3.0
+ * @entrypoint \@nvidia-elements/core/select
  * @cssprop --padding
  * @cssprop --font-size
  * @cssprop --height

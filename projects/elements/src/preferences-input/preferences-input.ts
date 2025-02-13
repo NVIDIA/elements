@@ -39,6 +39,7 @@ function getActiveThemes(element = globalThis.document.documentElement) {
  * @element nve-preferences-input
  * @description A preferences input is a widget for controlling apperance. Stylesheets register to the preferences input by including a css-property, see Standard for an example.
  * @since 1.23.7
+ * @entrypoint \@nvidia-elements/core/preferences-input
  * @event input emits when the value has changed
  * @event change emits when the value has changed
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-preferences-input-documentation--docs

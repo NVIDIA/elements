@@ -8,6 +8,7 @@ import styles from './logo.css?inline';
  * @element nve-logo
  * @description A visual indicator for a brand or application.
  * @since 0.10.0
+ * @entrypoint \@nvidia-elements/core/logo
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --gap

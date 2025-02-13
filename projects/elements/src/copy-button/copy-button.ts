@@ -10,6 +10,7 @@ import styles from './copy-button.css?inline';
  * @element nve-copy-button
  * @description A copy button is a button that easily enables the copy to clipboard pattern.
  * @since 1.1.4
+ * @entrypoint \@nvidia-elements/core/copy-button
  * @slot - default
  * @slot icon - slot for custom icon
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-copy-button-documentation--docs

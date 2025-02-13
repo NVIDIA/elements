@@ -11,6 +11,7 @@ export const inputStyles = styles;
  * @element nve-input
  * @description An input is a control that enables users to enter text.
  * @since 0.3.0
+ * @entrypoint \@nvidia-elements/core/input
  * @cssprop --padding
  * @cssprop --font-size
  * @cssprop --height

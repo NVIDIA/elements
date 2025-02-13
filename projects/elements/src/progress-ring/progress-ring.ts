@@ -10,6 +10,7 @@ import styles from './progress-ring.css?inline';
  * @element nve-progress-ring
  * @description The `progress-ring` component is used to indicate the status of a pending task. It also serves the basis of the page loading element.
  * @since 0.17.0
+ * @entrypoint \@nvidia-elements/core/progress-ring
  * @slot status-icon
  * @cssprop --background-color
  * @cssprop --ring-color

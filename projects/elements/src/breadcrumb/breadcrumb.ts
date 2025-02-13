@@ -10,6 +10,7 @@ import type { Button } from '@nvidia-elements/core/button';
  * @element nve-breadcrumb
  * @description Breadcrumb is a component that can help users establish their location while navigating a website with complex URLs and navigation paths.
  * @since 0.11.0
+ * @entrypoint \@nvidia-elements/core/breadcrumb
  * @cssprop --breadcrumb-height
  * @cssprop --item-text-size
  * @cssprop --item-color

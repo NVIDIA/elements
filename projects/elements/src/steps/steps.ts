@@ -14,6 +14,7 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 /**
  * @element nve-steps-item
  * @since 0.30.0
+ * @entrypoint \@nvidia-elements/core/steps
  * @slot - default slot for step text
  * @slot status-icon - custom slotted step icon
  * @cssprop --font-size
@@ -91,6 +92,7 @@ export class StepsItem extends BaseButton {
  * @element nve-steps
  * @description Steps enables a multi-step workflow allowing a user to complete a goal in a specific sequence.
  * @since 0.30.0
+ * @entrypoint \@nvidia-elements/core/steps
  * @slot - default slot for steps-item
  * @cssprop --gap
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-steps-documentation--docs
