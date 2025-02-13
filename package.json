@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "description": "",
-  "packageManager": "pnpm@9.12.3",
+  "packageManager": "pnpm@10.3.0",
   "engines": {
-    "node": "22.11.0"
+    "node": "22.13.1"
   },
   "scripts": {
     "ci": "wireit",
@@ -24,11 +24,11 @@
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
     "@commitlint/config-conventional": "19.5.0",
+    "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/core-react": "workspace:*",
-    "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
-    "@nvidia-elements/code": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "12.0.0",
     "@semantic-release/exec": "6.0.3",
@@ -43,9 +43,9 @@
     "glob": "catalog:",
     "husky": "9.1.7",
     "lint-staged": "15.3.0",
-    "proper-lockfile": "4.1.2",
     "playwright": "1.49.0",
     "prettier": "3.4.2",
+    "proper-lockfile": "4.1.2",
     "semantic-release": "22.0.12",
     "semantic-release-monorepo": "8.0.2",
     "semantic-release-replace-plugin": "1.2.7",
@@ -198,5 +198,19 @@
     "prepare": {
       "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs)"
     }
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher",
+      "lmdb",
+      "msgpackr-extract",
+      "msw"
+    ],
+    "onlyBuiltDependencies": [
+      "@bundled-es-modules/glob",
+      "esbuild",
+      "sharp",
+      "style-dictionary"
+    ]
   }
 }
