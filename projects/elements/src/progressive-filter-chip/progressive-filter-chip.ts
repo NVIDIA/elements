@@ -20,6 +20,7 @@ import styles from './progressive-filter-chip.css?inline';
  * @element nve-progressive-filter-chip
  * @description A filter chip is a control that enables users to select multiple options from a set of choices.
  * @since 0.16.0
+ * @entrypoint \@nvidia-elements/core/progressive-filter-chip
  * @slot - default slot for content
  * @event close - Dispatched when the filter chip is closed.
  * @cssprop --background

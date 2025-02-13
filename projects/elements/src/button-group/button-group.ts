@@ -13,6 +13,7 @@ import styles from './button-group.css?inline';
  * @element nve-button-group
  * @description A button group is a control that enables users to choose between two or more distinct mutually exclusive options.
  * @since 0.16.0
+ * @entrypoint \@nvidia-elements/core/button-group
  * @slot - default slot for `nve-button` or `nve-icon-button`
  * @cssprop --background
  * @cssprop --border-radius

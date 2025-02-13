@@ -10,6 +10,7 @@ import styles from './password.css?inline';
  * @element nve-password
  * @description A password is a control that enables users to enter password text.
  * @since 0.3.0
+ * @entrypoint \@nvidia-elements/core/password
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-password-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password
  */

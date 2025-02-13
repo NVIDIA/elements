@@ -10,6 +10,7 @@ import styles from './star-rating.css?inline';
  * @element nve-star-rating
  * @description A star rating component lets users rate something using stars, providing a quick visual representation of feedback
  * @since 1.23.1
+ * @entrypoint \@nvidia-elements/core/star-rating
  * @cssprop --star-size
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-star-rating-documentation--docs
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=10779-25920&p=f&t=jDJwFKeFLq5vTuCH-0

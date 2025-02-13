@@ -9,6 +9,7 @@ import styles from './pulse.css?inline';
  * @element nve-pulse
  * @description Pulse component is used for signaling/attention for a particular area of a UI. This is helpful for tutorial/getting started guides for new users.
  * @since 1.16.3
+ * @entrypoint \@nvidia-elements/core/pulse
  * @cssprop --background
  * @cssprop --width
  * @cssprop --height

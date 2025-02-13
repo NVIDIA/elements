@@ -18,6 +18,7 @@ import { GridCell } from '../cell/cell.js';
 /**
  * @element nve-grid-header
  * @since 0.11.0
+ * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for `nve-grid-column`
  * @cssprop --background
  * @cssprop --border-bottom

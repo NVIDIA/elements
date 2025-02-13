@@ -7,6 +7,7 @@ import styles from './row.css?inline';
 /**
  * @element nve-grid-row
  * @since 0.11.0
+ * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for `nve-grid-cell`
  * @cssprop --background
  * @cssprop --border-bottom

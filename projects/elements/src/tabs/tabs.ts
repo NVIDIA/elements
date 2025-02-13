@@ -10,6 +10,7 @@ import tabsStyleSheet from './tabs.css?inline';
 /**
  * @element nve-tabs-item
  * @since 0.10.0
+ * @entrypoint \@nvidia-elements/core/tabs
  * @slot - default slot for content
  * @cssprop --font-size
  * @cssprop --border-width
@@ -66,6 +67,7 @@ export class TabsItem extends BaseButton {
  * @element nve-tabs
  * @description Tabs provide a selection UX, typically used for swapping content shown on a page, or within a navigation context.
  * @since 0.10.0
+ * @entrypoint \@nvidia-elements/core/tabs
  * @slot - default slot for tab-item
  * @cssprop --gap
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-tabs-documentation--docs
