@@ -34,6 +34,7 @@ packages:
 
 catalog:
   '@custom-elements-manifest/analyzer': 0.10.4
+  '@eslint/js': 9.18.0
   '@lit-labs/scoped-registry-mixin': ^1.0.3
   '@lit-labs/ssr': ^3.3.0
   '@lit-labs/ssr-client': ^1.1.7

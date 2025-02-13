@@ -871,6 +871,7 @@
     "formdata-polyfill": "^4.0.10"
   },
   "devDependencies": {
+    "@eslint/js": "catalog:",
     "@nvidia-elements/styles": "workspace:^",
     "@lit-labs/virtualizer": "catalog:",
     "@nve-internals/eslint": "workspace:*",
