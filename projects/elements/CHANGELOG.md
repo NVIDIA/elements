@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.25.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.25.1...@nvidia-elements/core-v1.25.2) (2025-02-13)
+
+
+### Bug Fixes
+
+* **elements:** default button type ([3fd1a48](https://github.com/NVIDIA/elements/commit/3fd1a4803a5cbb99103af163522c80ca516d4dee))
+
 ## [@nvidia-elements/core-v1.25.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.25.0...@nvidia-elements/core-v1.25.1) (2025-02-04)
 
 
