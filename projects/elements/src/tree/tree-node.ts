@@ -24,6 +24,7 @@ import { updateNodeSelection } from './utils.js';
  * @element nve-tree-node
  * @description A tree view widget presents a hierarchical list. Any item in the hierarchy may have child items, and items that have children may be expanded or collapsed to show or hide the children.
  * @since 1.2.0
+ * @entrypoint \@nvidia-elements/core/tree
  * @event open - Dispatched when the node is opened.
  * @event close - Dispatched when the node is closed.
  * @slot - node content and tree nodes

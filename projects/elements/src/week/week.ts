@@ -9,6 +9,7 @@ import styles from './week.css?inline';
  * @element nve-week
  * @description A week picker is a control that enables users to choose a week value.
  * @since 0.3.0
+ * @entrypoint \@nvidia-elements/core/week
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-week-documentation--docs
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week
  * @themes false

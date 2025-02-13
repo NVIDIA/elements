@@ -19,6 +19,7 @@ import styles from './toggletip.css?inline';
  * @element nve-toggletip
  * @description Generic toggletip element for rendering a variety of different content within a toggletip container.
  * @since 0.38.0
+ * @entrypoint \@nvidia-elements/core/toggletip
  * @event open - Dispatched when the toggletip is opened.
  * @event close - Dispatched when the toggletip is closed.
  * @slot - default slot for toggletip content

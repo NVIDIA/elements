@@ -21,6 +21,7 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
 /**
  * @element nve-accordion-header
  * @since 0.12.0
+ * @entrypoint \@nvidia-elements/core/accordion
  * @slot prefix
  * @slot suffix
  * @slot title - (deprecated)
@@ -70,6 +71,7 @@ export class AccordionHeader extends LitElement {
 /**
  * @element nve-accordion-content
  * @since 0.12.0
+ * @entrypoint \@nvidia-elements/core/accordion
  * @slot - This is a default/unnamed slot for accordion content content
  * @cssprop --padding
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
@@ -95,6 +97,7 @@ export class AccordionContent extends LitElement {
  * @element nve-accordion
  * @description An accordion is a vertical stack of interactive headings used to toggle the display of further information.
  * @since 0.12.0
+ * @entrypoint \@nvidia-elements/core/accordion
  * @slot - This is a default/unnamed slot for accordion content
  * @slot icon-button - icon elements to display for expand/collapse
  * @slot header - header element (Use `accordion-header` or custom content)
@@ -217,6 +220,7 @@ export class Accordion extends LitElement implements ContainerElement {
 /**
  * @element nve-accordion-group
  * @since 0.12.0
+ * @entrypoint \@nvidia-elements/core/accordion
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/

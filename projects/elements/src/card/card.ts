@@ -11,6 +11,7 @@ import cardFooterStyleSheet from './card-footer.css?inline';
  * @element nve-card
  * @description A container for content representing a single entity.
  * @since 0.1.3
+ * @entrypoint \@nvidia-elements/core/card
  * @slot - This is a default/unnamed slot for card content
  * @slot header - header element (Use `card-header` or custom content)
  * @slot footer - footer element (Use `card-footer` or custom content)
@@ -49,6 +50,7 @@ export class Card extends LitElement implements ContainerElement {
 /**
  * @element nve-card-header
  * @since 0.1.3
+ * @entrypoint \@nvidia-elements/core/card
  * @slot - default slot
  * @slot title - Title Text
  * @slot subtitle - Subtitle Text
@@ -91,6 +93,7 @@ export class CardHeader extends LitElement {
 /**
  * @element nve-card-content
  * @since 0.1.3
+ * @entrypoint \@nvidia-elements/core/card
  * @slot - This is a default/unnamed slot for card content content
  * @cssprop --padding
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-card-documentation--docs
@@ -115,6 +118,7 @@ export class CardContent extends LitElement {
 /**
  * @element nve-card-footer
  * @since 0.1.3
+ * @entrypoint \@nvidia-elements/core/card
  * @slot - This is a default/unnamed slot for card footer content
  * @cssprop --padding
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-card-documentation--docs

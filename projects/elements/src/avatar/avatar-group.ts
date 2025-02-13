@@ -5,6 +5,8 @@ import styles from './avatar-group.css?inline';
 /**
  * @element nve-avatar-group
  * @description An avatar group displays a collection of user avatars in a compact and organized layout, showcasing multiple participants or contributors in a space-efficient way.
+ * @since 1.20.0
+ * @entrypoint \@nvidia-elements/core/avatar
  * @slot - default slot for content
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-avatar-documentation--docs
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=29-13&t=lPkYCkCgnoVaRSbI-0

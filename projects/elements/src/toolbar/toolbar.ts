@@ -22,6 +22,7 @@ import styles from './toolbar.css?inline';
  * @element nve-toolbar
  * @description A toolbar is a container for grouping a set of controls, such as buttons, icon buttons and combobox search.
  * @since 0.19.0
+ * @entrypoint \@nvidia-elements/core/toolbar
  * @slot - default slot for content
  * @slot prefix - slot for prefix content
  * @slot suffix - slot for suffix content

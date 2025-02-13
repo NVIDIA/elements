@@ -8,6 +8,7 @@ import styles from './button.css?inline';
  * @element nve-button
  * @description A button is a widget that enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
  * @since 0.1.3
+ * @entrypoint \@nvidia-elements/core/button
  * @slot - slot for button text content or icon, icon placement determined by whether `icon` is inserted before or after text content.
  * @cssprop --color
  * @cssprop --background

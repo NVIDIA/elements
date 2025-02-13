@@ -13,6 +13,7 @@ import styles from './notification-group.css?inline';
  * @element nve-notification-group
  * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status.
  * @since 0.6.0
+ * @entrypoint \@nvidia-elements/core/notification
  * @slot default slot for `nve-notification`
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-notification-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0

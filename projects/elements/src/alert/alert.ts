@@ -21,6 +21,7 @@ import styles from './alert.css?inline';
  * @element nve-alert
  * @description Alert is an element that displays a brief, important message in a way that attracts the user's attention without interrupting the user's task.
  * @since 0.3.0
+ * @entrypoint \@nvidia-elements/core/alert
  * @event close - Dispatched when the alert is closed within a alert group.
  * @slot icon - Icon slot is placed on the left side of the alert. Icons are typically used to represent the alert's status.
  * @slot prefix - Prefix slot is placed between the icon and the content. Prefixes are typically used to represent the alert's status.

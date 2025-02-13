@@ -5,6 +5,7 @@ import styles from './toggletip-header.css?inline';
 /**
  * @element nve-toggletip-header
  * @since 0.38.0
+ * @entrypoint \@nvidia-elements/core/toggletip
  * @slot - default slot for the toggletip header
  * @cssprop --border-bottom
  * @cssprop --padding

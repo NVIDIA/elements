@@ -8,6 +8,7 @@ import styles from './page-loader.css?inline';
  * @element nve-page-loader
  * @description Page Loader is a full-screen version of the `progress-ring` component, for use when the page should remain unusable as the loader is displayed.
  * @since 0.19.0
+ * @entrypoint \@nvidia-elements/core/page-loader
  * @slot - default slot for content
  * @cssprop --gap
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-page-loader-documentation--docs
