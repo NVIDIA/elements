@@ -157,6 +157,7 @@
     "@nvidia-elements/core": "workspace:^"
   },
   "devDependencies": {
+    "@eslint/js": "catalog:",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
