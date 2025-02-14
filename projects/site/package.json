@@ -7,11 +7,13 @@
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
+    "lint": "wireit",
     "preview": "wireit"
   },
   "wireit": {
     "ci": {
       "dependencies": [
+        "lint",
         "build"
       ]
     },
@@ -70,19 +72,37 @@
       "files": [],
       "output": [],
       "dependencies": []
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js",
+      "files": [
+        "src/**/*.js",
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/eslint:ci"
+      ]
     }
   },
+  "dependencies": {
+    "lit": "catalog:"
+  },
   "devDependencies": {
+    "@eslint/js": "catalog:",
     "@11ty/eleventy": "3.0.1-alpha.4",
     "@11ty/eleventy-plugin-vite": "6.0.0-alpha.4",
     "@lit-labs/eleventy-plugin-lit": "1.0.3",
     "@lit-labs/ssr-client": "catalog:",
+    "@internals/eslint": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@internals/elements-api": "workspace:*",
     "@sentry/browser": "catalog:",
     "compare-versions": "6.1.1",
+    "eslint": "catalog:",
     "markdown-it": "14.1.0",
     "typescript": "catalog:",
     "vite": "catalog:"

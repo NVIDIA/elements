@@ -613,6 +613,10 @@ importers:
         version: 6.0.7(@types/node@22.7.5)(jiti@2.4.2)(less@4.2.0)(sass@1.80.7)(sugarss@4.0.1(postcss@8.5.2))(terser@5.37.0)(yaml@2.7.0)
 
   projects/site:
+    dependencies:
+      lit:
+        specifier: 'catalog:'
+        version: 3.2.1
     devDependencies:
       '@11ty/eleventy':
         specifier: 3.0.1-alpha.4
@@ -620,6 +624,9 @@ importers:
       '@11ty/eleventy-plugin-vite':
         specifier: 6.0.0-alpha.4
         version: 6.0.0-alpha.4(@types/node@22.7.5)(jiti@2.4.2)(less@4.2.0)(sass@1.80.7)(sugarss@4.0.1(postcss@8.5.2))(terser@5.37.0)(yaml@2.7.0)
+      '@eslint/js':
+        specifier: 'catalog:'
+        version: 9.18.0
       '@lit-labs/eleventy-plugin-lit':
         specifier: 1.0.3
         version: 1.0.3
@@ -629,6 +636,9 @@ importers:
       '@internals/elements-api':
         specifier: workspace:*
         version: link:../internals/elements-api
+      '@internals/eslint':
+        specifier: workspace:*
+        version: link:../internals/eslint
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../elements
@@ -644,6 +654,9 @@ importers:
       compare-versions:
         specifier: 6.1.1
         version: 6.1.1
+      eslint:
+        specifier: 'catalog:'
+        version: 9.18.0(jiti@2.4.2)
       markdown-it:
         specifier: 14.1.0
         version: 14.1.0
