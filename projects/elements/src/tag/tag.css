@@ -11,6 +11,7 @@
   --cursor: pointer;
   --height: var(--nve-ref-size-600);
   --width: initial;
+  --max-width: initial;
   display: inline-flex;
   user-select: none;
 }
@@ -26,6 +27,7 @@
   cursor: var(--cursor);
   height: var(--height);
   width: var(--width);
+  max-width: var(--max-width);
   display: inline-flex;
   align-items: center;
   line-height: 1.1em;
