@@ -11,12 +11,16 @@ const tests = [
   '**/*.test.ssr.ts'
 ];
 const stories = ['**/*.stories.ts'];
-const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**'];
+const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**', '**/.wireit/**'];
 
 export const libraryConfig = [
   {
     files: [...source],
-    rules: js.configs.recommended.rules
+    ignores: [...ignores],
+    rules: {
+      ...js.configs.recommended.rules,
+      'no-unused-vars': ['error', { varsIgnorePattern: 'Demo|Test|T' }]
+    }
   },
   {
     files: [...source],
@@ -33,7 +37,7 @@ export const libraryConfig = [
   },
   {
     files: [...source],
-    ignores: [...ignores, ...tests, ...stories],
+    ignores: ['**/src/**/bundle.ts', ...ignores, ...tests, ...stories],
     ...config(
       [
         {
@@ -71,6 +75,7 @@ export const libraryConfig = [
       '**/src/**/define.js',
       '**/src/**/define.tsx',
       '**/src/**/define.d.ts',
+      '**/src/**/bundle.ts',
       ...tests,
       ...stories,
       ...ignores
