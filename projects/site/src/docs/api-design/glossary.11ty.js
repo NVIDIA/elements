@@ -38,7 +38,7 @@ Below are the common base properties that define the consistent API definition a
                 .filter(i => i.length)
                 .map(i => /* html */ `<nve-tag readonly color="gray-slate">${i.replaceAll("'", '')}</nve-tag>`)
                 .join('')}`
-            : nothing
+            : ''
         }
       </div>
     </nve-grid-cell>

@@ -1,9 +1,9 @@
 import { EleventyRenderPlugin, IdAttributePlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
-import { BASE_URL } from './src/_layouts/common.js';
-import { elementLoaderTransform } from './src/_internals/transforms.js';
-import { apiShortcode, storyShortcode } from './src/_internals/shortcodes.js';
-import markdown from './src/_internals/markdown.js';
+import { BASE_URL } from './src/_11ty/layouts/common.js';
+import { elementLoaderTransform } from './src/_11ty/transforms/index.js';
+import { apiShortcode, storyShortcode } from './src/_11ty/shortcodes/index.js';
+import markdown from './src/_11ty/libraries/markdown.js';
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
@@ -40,7 +40,7 @@ export default function (eleventyConfig) {
     dir: {
       input: 'src',
       output: 'dist',
-      layouts: '_layouts'
+      layouts: '_11ty/layouts'
     }
   };
 }
