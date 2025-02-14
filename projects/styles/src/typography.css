@@ -262,6 +262,7 @@
 
       > a[aria-current='page'] {
         color: var(--nve-sys-text-link-hover-color) !important;
+        font-weight: var(--nve-ref-font-weight-semibold) !important;
       }
     }
   }
