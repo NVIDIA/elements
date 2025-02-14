@@ -358,7 +358,7 @@ export const ColumnWidth = {
   render: () => html`
 <nve-grid style="--scroll-height: 402px">
   <nve-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column width="${i !== 4 ? '300px' : ''}">${column.label}</nve-grid-column> `)}
+    ${Object.entries(getItems()[0]).map(([, column], i) => html`<nve-grid-column width=${i !== 4 ? '300px' : ''}>${column.label}</nve-grid-column> `)}
   </nve-grid-header>
   ${getItems().map(row => html`
     <nve-grid-row>

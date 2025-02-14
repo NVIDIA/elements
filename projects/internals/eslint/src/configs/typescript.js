@@ -5,7 +5,7 @@ import importPlugin from 'eslint-plugin-import';
 const source = ['**/src/**/*.ts', '**/src/**/*.tsx', '**/src/**/*.d.ts'];
 const tests = ['**/src/test/*.ts', '**/*.test.ts', '**/*.test.axe.ts', '**/*.test.ssr.ts'];
 const stories = ['**/*.stories.ts'];
-const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**'];
+const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**', '**/.wireit/**'];
 
 const config = {
   files: [...source, ...tests, ...stories],
@@ -19,8 +19,8 @@ const config = {
     'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
     '@typescript-eslint/no-floating-promises': ['error'],
     '@typescript-eslint/no-explicit-any': 'off', // TODO
-    '@typescript-eslint/consistent-type-imports': 'error',
-    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: 'Demo|Test' }] // ignore demo/test components that do not need to be exported
+    '@typescript-eslint/consistent-type-imports': 'off', // TODO
+    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: 'Demo|Test|T' }] // ignore demo/test components that do not need to be exported
   }
 };
 

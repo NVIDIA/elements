@@ -229,7 +229,9 @@ export function getThemeTokens(element = globalThis.document.querySelector(':roo
   // check for parent iframe, same domain iframes change how style sheets are accessed
   try {
     parent = Array.from(globalThis.parent.document.styleSheets);
-  } catch {}
+  } catch {
+    // if not accessible, skip
+  }
 
   return [...parent, ...Array.from(globalThis.document.styleSheets)]
     .reduce((finalArr, sheet) => {
@@ -314,6 +316,6 @@ export function sameRenderRoot(element1: HTMLElement, element2: HTMLElement) {
   const root1 = element1.getRootNode();
   const root2 = element2.getRootNode();
   const sameShadowRoot = root1 instanceof ShadowRoot && root2 instanceof ShadowRoot && root1 === root2;
-  const sameDocumentRoot = root1 === document && root2 === document;
+  const sameDocumentRoot = root1 === globalThis.document && root2 === globalThis.document;
   return sameShadowRoot || sameDocumentRoot;
 }
