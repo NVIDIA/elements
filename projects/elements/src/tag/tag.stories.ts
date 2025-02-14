@@ -181,8 +181,23 @@ export const DarkTheme = {
   `
 }
 
-export const Overflow = {
+export const OverflowSingle = {
   render: () => html`
   <nve-tag style="--width: 150px">some really long content</nve-tag>
+  `
+};
+
+
+export const OverflowMaxWidth= {
+  render: () => html`
+  <style>
+    .limit-width {
+      --max-width: 100px;
+    }
+  </style>
+
+  <nve-tag class="limit-width">two words</nve-tag>
+  <nve-tag class="limit-width">three words here</nve-tag>
+  <nve-tag class="limit-width">four words long here</nve-tag>
   `
 };
