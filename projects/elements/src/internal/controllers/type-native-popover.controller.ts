@@ -45,9 +45,9 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.#updatePopoverType();
     await this.host.updateComplete;
     this.host.setAttribute('nve-popover', '');
-    this.#setupHiddenUpdates();
+    this.#setupHiddenUpdates(); // eslint-disable-line @typescript-eslint/no-floating-promises
     this.#updateTriggers();
-    this.#setupDefaultHiddenState();
+    this.#setupDefaultHiddenState(); // eslint-disable-line @typescript-eslint/no-floating-promises
     this.#setupModalLightDismiss();
     this.host.inert = this.host.matches(':not(:popover-open)') && !!this.#triggers.length;
 
@@ -131,7 +131,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.#updateExplicitTrigger();
     this.#removeTriggerInteractions();
     this.#addTriggerInteractions();
-    this.#updateTriggerState();
+    this.#updateTriggerState(); // eslint-disable-line @typescript-eslint/no-floating-promises
   }
 
   #explicitTrigger: any;
@@ -160,7 +160,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #_close = () => this.#close();
   #_open = e => this.#open(e);
   #_pointerdown = (e: Event) => (this.host._activeTrigger = e.target as HTMLElement);
-  #_focus = () => (this.host._activeTrigger = document.activeElement as HTMLElement);
+  #_focus = () => (this.host._activeTrigger = globalThis.document.activeElement as HTMLElement);
 
   #addTriggerInteractions() {
     this.#triggers.forEach(t => t.addEventListener('pointerdown', this.#_pointerdown));
