@@ -27,7 +27,7 @@ class TypeTouchControllerTestElement extends LitElement {
   ];
 
   render() {
-    return html`<button></button>`;
+    return html`<button aria-label="touch button"></button>`;
   }
 }
 

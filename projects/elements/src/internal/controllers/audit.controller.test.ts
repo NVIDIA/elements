@@ -26,7 +26,7 @@ describe('audit.controller instance tracking', () => {
     globalThis.NVE_ELEMENTS.state.env = 'development';
     console.warn = () => null;
     vi.spyOn(console, 'warn');
-    fixture = await createFixture(html``);
+    fixture = await createFixture(html` `);
   });
 
   afterEach(() => {

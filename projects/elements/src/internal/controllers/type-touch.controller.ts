@@ -42,8 +42,8 @@ export class TypeTouchController<T extends ReactiveElement> implements ReactiveC
   #start(e: PointerEvent) {
     if (e.composedPath().find((el: any) => el === this.host)) {
       this.#startPosition = { x: e.clientX, y: e.clientY };
-      document.addEventListener('pointerup', this.#endFn, { passive: true });
-      document.addEventListener('pointermove', this.#moveFn, { passive: true });
+      globalThis.document.addEventListener('pointerup', this.#endFn, { passive: true });
+      globalThis.document.addEventListener('pointermove', this.#moveFn, { passive: true });
       this.host.dispatchEvent(new NveTouchEvent('nve-touch-start', { ...this.#startPosition, offsetX: 0, offsetY: 0 }));
     }
   }
@@ -58,8 +58,8 @@ export class TypeTouchController<T extends ReactiveElement> implements ReactiveC
 
   #end(e: PointerEvent) {
     if (this.#startPosition) {
-      document.removeEventListener('pointerup', this.#endFn, false);
-      document.removeEventListener('pointermove', this.#moveFn, false);
+      globalThis.document.removeEventListener('pointerup', this.#endFn, false);
+      globalThis.document.removeEventListener('pointermove', this.#moveFn, false);
       this.host.dispatchEvent(new NveTouchEvent('nve-touch-end', this.#getCoordinatesFromPointerEvent(e)));
     }
   }

@@ -9,7 +9,7 @@ class HostAttrTestElement extends LitElement {
   @hostAttr() slot = 'test';
 
   render() {
-    return html``;
+    return html` `;
   }
 }
 

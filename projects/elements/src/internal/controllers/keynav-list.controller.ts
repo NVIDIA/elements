@@ -84,7 +84,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
 
   #getActiveItem(e: Event, items: HTMLElement[]) {
     const focusedElement = e.composedPath()[0] as HTMLElement;
-    return !!items.find(i => i === focusedElement) ? focusedElement : null;
+    return items.find(i => i === focusedElement) ? focusedElement : null;
   }
 
   #setActiveItem(e: any, activeItem: HTMLElement, previousItem?: HTMLElement) {

@@ -90,7 +90,7 @@ export class BaseButton extends LitElement {
    */
   @property({ type: String, reflect: true }) current: 'page' | 'step';
 
-  @property({ type: Object }) popoverTargetElement: HTMLElement;
+  @property({ type: Object }) popoverTargetElement: HTMLElement; // eslint-disable-line rulesdir/primitive-property
 
   @property({ type: String, attribute: 'popovertarget', reflect: true }) popovertarget: string;
 

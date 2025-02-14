@@ -14,7 +14,7 @@ export default {
   component: 'nve-breadcrumb',
 };
 
-/* eslint-disable */
+ 
 export const Default = {
   render: () => html`
     <div nve-layout="row align:center">
@@ -100,4 +100,4 @@ export const DarkTheme = {
     </div>
   `
 }
-/* eslint-enable */
+ 

@@ -75,8 +75,7 @@ export class I18nService_ {
     }
   }
 
-  update(i18nRegistry: Partial<typeof window.NVE_ELEMENTS.state.i18nRegistry>) {
-    // eslint-disable-line no-restricted-globals
+  update(i18nRegistry: Partial<typeof globalThis.window.NVE_ELEMENTS.state.i18nRegistry>) {
     GlobalStateService.dispatch('NVE_ELEMENTS_I18N_UPDATE', { i18nRegistry });
   }
 }

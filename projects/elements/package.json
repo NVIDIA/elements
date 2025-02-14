@@ -36,7 +36,8 @@
     "test:coverage": "wireit",
     "test:lighthouse": "wireit",
     "test:visual": "wireit",
-    "lint": "wireit"
+    "lint": "wireit",
+    "lint:fix": "wireit"
   },
   "files": [
     "README.md",
@@ -1129,7 +1130,7 @@
       ]
     },
     "lint:eslint": {
-      "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
+      "command": "eslint -c ./eslint.config.js",
       "files": [
         "src/**/*.ts",
         "eslint.config.js",
@@ -1142,7 +1143,7 @@
       ]
     },
     "lint:fix": {
-      "command": "eslint -c ./eslint.config.js --fix ./src/**/*.ts"
+      "command": "eslint -c ./eslint.config.js --fix"
     },
     "lint:analyzer": {
       "command": "lit-analyzer src/**/*.ts --strict --rules.no-unknown-slot off",
