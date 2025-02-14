@@ -60,6 +60,16 @@ export const renderBaseHead = data => /* html */ `
     client.init();
     // setTimeout(() => NOTFOUND(), 2000) // test error
   </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-723T2ZTKVT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-723T2ZTKVT');
+    gtag('set', 'content_group', 'elements');
+  </script>
 `;
 
 export const renderDocsNav = data => /* html */ `
