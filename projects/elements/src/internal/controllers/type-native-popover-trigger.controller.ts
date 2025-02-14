@@ -1,5 +1,5 @@
 import { ReactiveElement, ReactiveController } from 'lit';
-import { getFlattenedDOMTree } from '../utils/dom';
+import { getFlattenedDOMTree } from '../utils/dom.js';
 
 export interface NativePopoverTrigger extends ReactiveElement {
   disabled: boolean;

@@ -54,7 +54,7 @@ describe('audit-parent.controller production', () => {
     globalThis.NVE_ELEMENTS.state.env = 'production';
     console.warn = () => null;
     vi.spyOn(console, 'warn');
-    fixture = await createFixture(html``);
+    fixture = await createFixture(html` `);
   });
 
   afterEach(() => {

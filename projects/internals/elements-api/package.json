@@ -253,7 +253,7 @@
       ]
     },
     "lint": {
-      "command": "eslint -c ./eslint.config.js ./src/**/*.ts",
+      "command": "eslint -c ./eslint.config.js",
       "files": [
         "src/**/*.ts",
         "eslint.config.js"
@@ -264,7 +264,7 @@
       ]
     },
     "lint:fix": {
-      "command": "eslint -c ./eslint.config.js --fix ./src/**/*.ts"
+      "command": "eslint -c ./eslint.config.js --fix"
     }
   }
 }

@@ -575,7 +575,7 @@ describe('sameRenderRoot', () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <render-root-test-element></render-root-test-element>
-      <button id="btn-root"></button>
+      <button id="btn-root" aria-label="root button"></button>
     `);
 
     element = fixture.querySelector('render-root-test-element');
