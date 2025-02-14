@@ -1,6 +1,6 @@
 import { ReactiveController, ReactiveElement, render } from 'lit';
-import { LogService } from '../services/log.service';
-import { getSSRMismatchWarning } from '../utils/audit';
+import { LogService } from '../services/log.service.js';
+import { getSSRMismatchWarning } from '../utils/audit.js';
 
 /**
  * Catch and manage hydration related fallbacks for SSR
@@ -24,6 +24,7 @@ export class TypeSSRController<T extends ReactiveElement> implements ReactiveCon
           try {
             (updateOriginal as any).call(host, args);
           } catch (e) {
+            console.log(e);
             LogService.warn(getSSRMismatchWarning(host.localName));
             (host.renderRoot as any).innerHTML = (host.renderRoot as any).innerHTML.split('<!--lit-part ')[0];
             render((host as any).render(), host.renderRoot, (host as any).renderOptions);

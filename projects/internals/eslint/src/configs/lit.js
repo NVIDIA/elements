@@ -10,12 +10,14 @@ import * as url from 'url';
 const source = ['**/src/**/*.ts', '**/src/**/*.tsx', '**/src/**/*.d.ts'];
 const tests = ['**/src/test/*.ts', '**/*.test.ts', '**/*.test.axe.ts', '**/*.test.ssr.ts'];
 const stories = ['**/*.stories.ts'];
-const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**'];
+const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**', '**/.wireit/**'];
 
 rulesdir.RULES_DIR = resolve(url.fileURLToPath(new URL('.', import.meta.url)), '../plugins');
 
 export const litConfig = [
   {
+    // files: [...source],
+    // ignores: [...ignores, ...tests, ...stories],
     files: [...source, ...tests, ...stories],
     ignores,
     plugins: {
