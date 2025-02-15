@@ -29,6 +29,7 @@ export default {
         'themes',
         'labs-behaviors-alpine',
         'labs-code',
+        'labs-playwright-screencast',
         'labs-snippets'
       ]
     ]
