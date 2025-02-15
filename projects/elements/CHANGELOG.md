@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.26.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.25.2...@nvidia-elements/core-v1.26.0) (2025-02-15)
+
+
+### Features
+
+* **elements:** add --max-width to nve-tag ([eda2a64](https://github.com/NVIDIA/elements/commit/eda2a64524190757b9a8fb4d626b8719c1ca3059))
+
 ## [@nvidia-elements/core-v1.25.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.25.1...@nvidia-elements/core-v1.25.2) (2025-02-13)
 
 
