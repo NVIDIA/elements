@@ -92,71 +92,73 @@ const BASE_HEAD = renderBaseHead({ title })
           <!-- <section></section> -->
 
           <!--  Section 3 | Theme Widget -->
-          <section nve-layout="grid span-items:6">
+          <section nve-layout="grid span-items:12 span-items@xl:6">
             <!-- Left Column - Floating Elements -->
-            <div class="floating-element-container">
-              <nve-button-group class="floating-element" container="rounded" behavior-select="single">
-                <nve-button pressed>All Time</nve-button>
-                <nve-button>30 Days</nve-button>
-                <nve-button>90 Days</nve-button>
-              </nve-button-group>
-              <nve-progress-ring class="floating-element" status="accent"></nve-progress-ring>
-              <nve-pulse size="lg" status="accent" class="floating-element"></nve-pulse>
-              <nve-card class="floating-element">
-                <img
-                  src="https://cdn-stage.nvidia.com/assets/elements/test-image-2.webp"
-                  alt="example visualization for media card demo"
-                  loading="lazy"
-                  style="width: 100%; height: 100%; object-fit: cover;" />
-                <nve-card-content nve-layout="column gap:sm align:stretch align-items:stretch">
-                  <div nve-layout="column gap:sm align:stretch align-items:stretch">
-                    <div nve-text="label semibold md emphasis">Session ID</div>
-                    <div nve-layout="row align:space-between">
-                      <div nve-text="label medium muted sm">Created</div>
-                      <div nve-text="label medium emphasis sm">03/14/2025</div>
+            <aside>
+              <div class="floating-element-container">
+                <nve-button-group class="floating-element" container="rounded" behavior-select="single">
+                  <nve-button pressed>All Time</nve-button>
+                  <nve-button>30 Days</nve-button>
+                  <nve-button>90 Days</nve-button>
+                </nve-button-group>
+                <nve-progress-ring class="floating-element" status="accent"></nve-progress-ring>
+                <nve-pulse size="lg" status="accent" class="floating-element"></nve-pulse>
+                <nve-card class="floating-element">
+                  <img
+                    src="https://cdn-stage.nvidia.com/assets/elements/test-image-2.webp"
+                    alt="example visualization for media card demo"
+                    loading="lazy"
+                    style="width: 100%; height: 100%; object-fit: cover;" />
+                  <nve-card-content nve-layout="column gap:sm align:stretch align-items:stretch">
+                    <div nve-layout="column gap:sm align:stretch align-items:stretch">
+                      <div nve-text="label semibold md emphasis">Session ID</div>
+                      <div nve-layout="row align:space-between">
+                        <div nve-text="label medium muted sm">Created</div>
+                        <div nve-text="label medium emphasis sm">03/14/2025</div>
+                      </div>
+                      <div nve-layout="row align:space-between">
+                        <div nve-text="label medium muted sm">Modified</div>
+                        <div nve-text="label medium emphasis sm">15m ago</div>
+                      </div>
+                      <div nve-layout="row align:space-between">
+                        <div nve-text="label medium muted sm">Validation</div>
+                        <div nve-text="label medium emphasis sm">isKPI</div>
+                      </div>
                     </div>
-                    <div nve-layout="row align:space-between">
-                      <div nve-text="label medium muted sm">Modified</div>
-                      <div nve-text="label medium emphasis sm">15m ago</div>
+                  </nve-card-content>
+                  <nve-card-footer>
+                    <div nve-layout="grid span-items:12 gap:xs">
+                      <nve-button>Add to Dataset</nve-button>
                     </div>
-                    <div nve-layout="row align:space-between">
-                      <div nve-text="label medium muted sm">Validation</div>
-                      <div nve-text="label medium emphasis sm">isKPI</div>
-                    </div>
-                  </div>
-                </nve-card-content>
-                <nve-card-footer>
-                  <div nve-layout="grid span-items:12 gap:xs">
-                    <nve-button>Add to Dataset</nve-button>
-                  </div>
-                </nve-card-footer>
-              </nve-card>
+                  </nve-card-footer>
+                </nve-card>
 
-              <div class="floating-element stat" nve-layout="column gap:xs">
-                <div nve-layout="column gap:sm">
-                  <label nve-text="label medium sm muted">Label</label>
-                  <h3 nve-text="heading semibold lg">198,298</h3>
+                <div class="floating-element stat" nve-layout="column gap:xs">
+                  <div nve-layout="column gap:sm">
+                    <label nve-text="label medium sm muted">Label</label>
+                    <h3 nve-text="heading semibold lg">198,298</h3>
+                  </div>
+                  <div nve-layout="row gap:sm align:vertical-center">
+                    <label nve-text="label medium sm muted">Since last week</label>
+                    <nve-badge status="trend-up">+15%</nve-badge>
+                  </div>
                 </div>
-                <div nve-layout="row gap:sm align:vertical-center">
-                  <label nve-text="label medium sm muted">Since last week</label>
-                  <nve-badge status="trend-up">+15%</nve-badge>
-                </div>
+
+                <nve-alert-group status="accent" class="floating-element">
+                  <nve-alert>Accent</nve-alert>
+                </nve-alert-group>
+
+                <nve-select fit-text class="floating-element">
+                  <label>label</label>
+                  <select>
+                    <option value="1">Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3">Option 3</option>
+                  </select>
+                  <nve-control-message>message</nve-control-message>
+                </nve-select>
               </div>
-
-              <nve-alert-group status="accent" class="floating-element">
-                <nve-alert>Accent</nve-alert>
-              </nve-alert-group>
-
-              <nve-select fit-text class="floating-element">
-                <label>label</label>
-                <select>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                </select>
-                <nve-control-message>message</nve-control-message>
-              </nve-select>
-            </div>
+            </aside>
 
             <!-- Right Column - Content and Inputs -->
             <div nve-layout="column gap:lg align:left align:stretch align-items:stretch">
@@ -210,7 +212,7 @@ const BASE_HEAD = renderBaseHead({ title })
           </section>
 
           <!--  Section 4 | Metrics Highlights -->
-          <section class="metrics-highlights" nve-layout="grid span-items:6">
+          <section class="metrics-highlights" nve-layout="column align:space-between row@lg gap:lg gap@xl:xxxl">
             <!-- Left Column -->
             <div nve-layout="column gap:lg align:left align:stretch">
               <!-- Title -->
@@ -256,8 +258,8 @@ const BASE_HEAD = renderBaseHead({ title })
                 ></nve-button>
               </div>
             </div>
-            <!-- Right Column -->
-            <!-- Carousel -->
+
+            <!-- Right Column (Carousel) -->
             <div class="carousel-container">
               <div class="carousel-track">
                 <a
@@ -513,9 +515,7 @@ const BASE_HEAD = renderBaseHead({ title })
 
             <!-- Video Row -->
             <video loop autoplay muted nve-layout="full">
-              <source
-                src="https://web.dev/static/patterns/layout/deconstructed-pancake/assets/02-deconstructed-pancake-2.mp4"
-                type="video/webm" />
+              <source src="https://cdn-stage.nvidia.com/assets/elements/browse-pattern.webm" type="video/webm" />
               Your browser does not support the video tag or WebM format.
             </video>
           </section>
@@ -600,10 +600,10 @@ const BASE_HEAD = renderBaseHead({ title })
               <nve-button interaction="emphasis" size="lg">Start building</nve-button>
             </div>
             <!--  Starters  -->
-            <div nve-layout="grid gap:md align-items:stretch">
+            <div nve-layout="grid gap:md align-items:stretch span-items:12 span-items@md:6 span-items@lg:4">
               <div
                 class="glassmorphic"
-                nve-layout="column gap:lg align:stretch span:4"
+                nve-layout="column gap:lg align:stretch"
                 style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg'); 
               background: linear-gradient(180deg, rgba(240, 116, 144, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);">
                 <div nve-layout="row align:center">
@@ -620,7 +620,7 @@ const BASE_HEAD = renderBaseHead({ title })
               </div>
               <div
                 class="glassmorphic"
-                nve-layout="column gap:lg align:stretch span:4"
+                nve-layout="column gap:lg align:stretch"
                 style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg'); 
              background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(221, 0, 49, 0.10) 0%, rgba(221, 0, 49, 0.10) 100%), rgba(255, 255, 255, 0.05);
     
@@ -639,7 +639,7 @@ const BASE_HEAD = renderBaseHead({ title })
               </div>
               <div
                 class="glassmorphic"
-                nve-layout="column gap:lg align:stretch span:4"
+                nve-layout="column gap:lg align:stretch"
                 style="--before-bg: url('https://nextjs.org/static/favicon/favicon-32x32.png'); 
                         background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05);
     ">
@@ -655,7 +655,7 @@ const BASE_HEAD = renderBaseHead({ title })
               </div>
               <div
                 class="glassmorphic"
-                nve-layout="column gap:lg align:stretch span:4"
+                nve-layout="column gap:lg align:stretch"
                 style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg'); 
              background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(97, 218, 251, 0.10) 0%, rgba(97, 218, 251, 0.10) 100%), rgba(255, 255, 255, 0.05);
     
@@ -672,7 +672,7 @@ const BASE_HEAD = renderBaseHead({ title })
               </div>
               <div
                 class="glassmorphic"
-                nve-layout="column gap:lg align:stretch span:4"
+                nve-layout="column gap:lg align:stretch"
                 style="--before-bg: url('https://www.11ty.dev/img/logo-github.svg'); 
               background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05);
     
