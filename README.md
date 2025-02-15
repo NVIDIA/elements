@@ -117,19 +117,20 @@ git commit -a -m "fix(core): disabled multi-select"
 | `feat`  | new features, components, APIs                                  |
 | `chore` | non production code modifications, build tooling, documentation |
 
-| Scopes                  | Description                |
-| ----------------------- | -------------------------- |
-| `ci`                    | `/projects/internals`      |
-| `starters`              | `/projects/starters`       |
-| `elements`              | `/projects/elements`       |
-| `elements-react`        | `/projects/elements-react` |
-| `pages`                 | `/projects/pages`          |
-| `playground`            | `/projects/playground`     |
-| `testing`               | `/projects/testing`        |
-| `themes`                | `/projects/themes`         |
-| `labs`                  | `/projects/labs`           |
-| `labs-behaviors-alpine` | `/labs/behaviors-alpine`   |
-| `labs-code`             | `/labs/code`               |
+| Scopes                       | Description                   |
+| ---------------------------- | ----------------------------- |
+| `ci`                         | `/projects/internals`         |
+| `starters`                   | `/projects/starters`          |
+| `elements`                   | `/projects/elements`          |
+| `elements-react`             | `/projects/elements-react`    |
+| `pages`                      | `/projects/pages`             |
+| `playground`                 | `/projects/playground`        |
+| `testing`                    | `/projects/testing`           |
+| `themes`                     | `/projects/themes`            |
+| `labs`                       | `/projects/labs`              |
+| `labs-behaviors-alpine`      | `/labs/behaviors-alpine`      |
+| `labs-playwright-screencast` | `/labs/playwright-screencast` |
+| `labs-code`                  | `/labs/code`                  |
 
 Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
 
