@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.7.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.7.0...@nvidia-elements/styles-v1.7.1) (2025-02-15)
+
+
+### Bug Fixes
+
+* **styles:** set selected link style in nav-list typography to semi-bold ([1653bb1](https://github.com/NVIDIA/elements/commit/1653bb14eee93849354c67cb814441651973f83c))
+
 ## [@nvidia-elements/styles-v1.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.6.0...@nvidia-elements/styles-v1.7.0) (2025-01-15)
 
 
