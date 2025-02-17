@@ -20,13 +20,17 @@ const BASE_HEAD = renderBaseHead({ title })
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm"></nve-logo>
         <a slot="prefix" href=".">Elements</a>
+
         <nve-button container="flat"><a href="api/?path=/docs/about-installation--docs">Get Started</a></nve-button>
+
         <nve-button container="flat"
           ><a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank"
             >Playground</a
           ></nve-button
         >
+
         <nve-button container="flat"><a href="starters/">Starters</a></nve-button>
+
         <nve-button container="flat"
           ><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button
         >
@@ -34,9 +38,6 @@ const BASE_HEAD = renderBaseHead({ title })
 
       <div id="main-slot" nve-layout="row align:horizontal-center">
         <main nve-layout="column align:horizontal-stretch pad:none pad@md:xxxl gap:xxxl">
-          <!-- Headline and Background Hero -->
-          <!-- <section></section> -->
-
           <!-- Section 1 | "Work how you want" -->
           <section nve-layout="column align:center gap:xxxl pad-y:xxxl">
             <!-- Heading -->
@@ -45,6 +46,7 @@ const BASE_HEAD = renderBaseHead({ title })
               <br />
               <span class="lime-green-gradient gradient-txt">to work</span>
             </div>
+
             <!-- Features Row-->
             <div nve-layout="column align:space-between row@lg gap:lg gap@xl:xxxl">
               <div nve-layout="row gap:lg" class="feature">
@@ -54,6 +56,7 @@ const BASE_HEAD = renderBaseHead({ title })
 
                 <div nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Any Framework</div>
+
                   <div nve-text="muted md regular">
                     Standards-based Web Components are compatible with almost any modern web framework.
                   </div>
@@ -67,9 +70,8 @@ const BASE_HEAD = renderBaseHead({ title })
 
                 <div nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Stateless Flexibility</div>
-                  <div nve-text="muted md regular">
-                    Adapt seamlessly to your needs without constraints or roadfeatures.
-                  </div>
+
+                  <div nve-text="muted md regular">Adapt seamlessly to your needs without constraints.</div>
                 </div>
               </div>
 
@@ -80,6 +82,7 @@ const BASE_HEAD = renderBaseHead({ title })
 
                 <div nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Future Proof</div>
+
                   <div nve-text="muted md regular">
                     Standards-based Web Components are compatible with almost any modern web framework.
                   </div>
@@ -88,11 +91,10 @@ const BASE_HEAD = renderBaseHead({ title })
             </div>
           </section>
 
-          <!--  Section 2 | Frameworks Widget -->
-          <!-- <section></section> -->
+          <!--  Section 2 | Frameworks Widget - TODO: John Y Add Widget -->
 
           <!--  Section 3 | Theme Widget -->
-          <section nve-layout="grid span-items:12 span-items@xl:6">
+          <section nve-layout="grid span-items:12 span-items@xl:6 pad-y:xxl">
             <!-- Left Column - Floating Elements -->
             <aside>
               <div class="floating-element-container">
@@ -101,14 +103,18 @@ const BASE_HEAD = renderBaseHead({ title })
                   <nve-button>30 Days</nve-button>
                   <nve-button>90 Days</nve-button>
                 </nve-button-group>
+
                 <nve-progress-ring class="floating-element" status="accent"></nve-progress-ring>
+
                 <nve-pulse size="lg" status="accent" class="floating-element"></nve-pulse>
+
                 <nve-card class="floating-element">
                   <img
                     src="https://cdn-stage.nvidia.com/assets/elements/test-image-2.webp"
                     alt="example visualization for media card demo"
                     loading="lazy"
                     style="width: 100%; height: 100%; object-fit: cover;" />
+
                   <nve-card-content nve-layout="column gap:sm align:stretch align-items:stretch">
                     <div nve-layout="column gap:sm align:stretch align-items:stretch">
                       <div nve-text="label semibold md emphasis">Session ID</div>
@@ -116,16 +122,19 @@ const BASE_HEAD = renderBaseHead({ title })
                         <div nve-text="label medium muted sm">Created</div>
                         <div nve-text="label medium emphasis sm">03/14/2025</div>
                       </div>
+
                       <div nve-layout="row align:space-between">
                         <div nve-text="label medium muted sm">Modified</div>
                         <div nve-text="label medium emphasis sm">15m ago</div>
                       </div>
+
                       <div nve-layout="row align:space-between">
                         <div nve-text="label medium muted sm">Validation</div>
                         <div nve-text="label medium emphasis sm">isKPI</div>
                       </div>
                     </div>
                   </nve-card-content>
+
                   <nve-card-footer>
                     <div nve-layout="grid span-items:12 gap:xs">
                       <nve-button>Add to Dataset</nve-button>
@@ -138,6 +147,7 @@ const BASE_HEAD = renderBaseHead({ title })
                     <label nve-text="label medium sm muted">Label</label>
                     <h3 nve-text="heading semibold lg">198,298</h3>
                   </div>
+
                   <div nve-layout="row gap:sm align:vertical-center">
                     <label nve-text="label medium sm muted">Since last week</label>
                     <nve-badge status="trend-up">+15%</nve-badge>
@@ -169,10 +179,12 @@ const BASE_HEAD = renderBaseHead({ title })
                 <span>Ready to</span>
                 <span class="blue-purple-gradient gradient-txt"> customize </span>
               </div>
+
               <!-- Subheading -->
               <div nve-text="muted md regular">
                 Customize and adapt Elements to match your design system needs with our powerful theming engine.
               </div>
+
               <!--  Form -->
               <form nve-layout="column gap:md align:stretch">
                 <nve-color layout="horizontal">
@@ -212,7 +224,9 @@ const BASE_HEAD = renderBaseHead({ title })
           </section>
 
           <!--  Section 4 | Metrics Highlights -->
-          <section class="metrics-highlights" nve-layout="column align:space-between row@lg gap:lg gap@xl:xxxl">
+          <section
+            class="metrics-highlights"
+            nve-layout="column align:space-between row@lg gap:lg gap@xl:xxxl pad-y:xxxl">
             <!-- Left Column -->
             <div nve-layout="column gap:lg align:left align:stretch">
               <!-- Title -->
@@ -222,10 +236,12 @@ const BASE_HEAD = renderBaseHead({ title })
                 <br />
                 <span class="silver-gradient gradient-txt"> out of the box. </span>
               </div>
+
               <!-- Subheading -->
               <div nve-text="muted md regular">
                 Elements follow WCAG 2.1, are W3C spec-compliant and use the W3C interaction models when available.
               </div>
+
               <div nve-layout="column gap:lg">
                 <div class="features-grid-container">
                   <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
@@ -253,6 +269,7 @@ const BASE_HEAD = renderBaseHead({ title })
                     <div nve-text="label semibold md">Automated Axe Testing</div>
                   </div>
                 </div>
+
                 <nve-button container="inline" size="lg"
                   >Learn more about our Best Practices<nve-icon name="arrow" direction="right"></nve-icon
                 ></nve-button>
@@ -270,22 +287,6 @@ const BASE_HEAD = renderBaseHead({ title })
                     <div class="big-number">96</div>
                     <div class="text-container">
                       <div class="title">Total Components</div>
-                      <div class="label">
-                        Browse our component offeringsBrowse our component offeringsBrowse our component offerings
-                      </div>
-                    </div>
-                    <nve-icon-button class="arrow-button" icon-name="arrow-angle" size="sm"></nve-icon-button>
-                  </div>
-                </a>
-
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
                       <div class="label">Browse our component offerings</div>
                     </div>
                     <nve-icon-button class="arrow-button" icon-name="arrow-angle" size="sm"></nve-icon-button>
@@ -310,7 +311,6 @@ const BASE_HEAD = renderBaseHead({ title })
                   </div>
                 </a>
 
-                <!-- Duplicate cards for seamless loop -->
                 <a
                   href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
                   target="_blank"
@@ -328,6 +328,7 @@ const BASE_HEAD = renderBaseHead({ title })
                       container="inline"></nve-icon-button>
                   </div>
                 </a>
+
                 <a
                   href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
                   target="_blank"
@@ -345,108 +346,7 @@ const BASE_HEAD = renderBaseHead({ title })
                       container="inline"></nve-icon-button>
                   </div>
                 </a>
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
-                    </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
-                    </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
-                    </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
-                    </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
-                    </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
-                    </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
+
                 <a
                   href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
                   target="_blank"
@@ -579,7 +479,7 @@ const BASE_HEAD = renderBaseHead({ title })
           </section>
 
           <!--  Section 7 | "Build together as one team" -->
-          <section nve-layout="column gap:xl pad-top:xxxl">
+          <section nve-layout="column gap:xl pad-top:xl">
             <!-- Heading -->
             <div nve-text="semibold display">
               <span class="silver-gradient gradient-txt"
@@ -605,7 +505,7 @@ const BASE_HEAD = renderBaseHead({ title })
                 class="glassmorphic"
                 nve-layout="column gap:lg align:stretch"
                 style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg'); 
-              background: linear-gradient(180deg, rgba(240, 116, 144, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);">
+                  background: linear-gradient(180deg, rgba(240, 116, 144, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);">
                 <div nve-layout="row align:center">
                   <div class="entity-logo">
                     <img
@@ -622,9 +522,9 @@ const BASE_HEAD = renderBaseHead({ title })
                 class="glassmorphic"
                 nve-layout="column gap:lg align:stretch"
                 style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg'); 
-             background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(221, 0, 49, 0.10) 0%, rgba(221, 0, 49, 0.10) 100%), rgba(255, 255, 255, 0.05);
-    
-    ;">
+                background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(221, 0, 49, 0.10) 0%, rgba(221, 0, 49, 0.10) 100%), rgba(255, 255, 255, 0.05);
+        
+        ;">
                 <div nve-layout="row align:center">
                   <div class="entity-logo">
                     <img
@@ -641,8 +541,8 @@ const BASE_HEAD = renderBaseHead({ title })
                 class="glassmorphic"
                 nve-layout="column gap:lg align:stretch"
                 style="--before-bg: url('https://nextjs.org/static/favicon/favicon-32x32.png'); 
-                        background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05);
-    ">
+                            background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05);
+        ">
                 <div nve-layout="row align:center">
                   <div class="entity-logo">
                     <img src="https://nextjs.org/static/favicon/favicon-32x32.png" alt="Next.js Logo" />
@@ -657,9 +557,9 @@ const BASE_HEAD = renderBaseHead({ title })
                 class="glassmorphic"
                 nve-layout="column gap:lg align:stretch"
                 style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg'); 
-             background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(97, 218, 251, 0.10) 0%, rgba(97, 218, 251, 0.10) 100%), rgba(255, 255, 255, 0.05);
-    
-    ;">
+                background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(97, 218, 251, 0.10) 0%, rgba(97, 218, 251, 0.10) 100%), rgba(255, 255, 255, 0.05);
+        
+        ;">
                 <div nve-layout="row align:center">
                   <div class="entity-logo">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React Logo" />
@@ -674,9 +574,9 @@ const BASE_HEAD = renderBaseHead({ title })
                 class="glassmorphic"
                 nve-layout="column gap:lg align:stretch"
                 style="--before-bg: url('https://www.11ty.dev/img/logo-github.svg'); 
-              background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05);
-    
-    ">
+                  background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05);
+        
+        ">
                 <div nve-layout="row align:center">
                   <div class="entity-logo">
                     <img src="https://www.11ty.dev/img/logo-github.svg" alt="Eleventy Logo" />
@@ -691,9 +591,9 @@ const BASE_HEAD = renderBaseHead({ title })
                 class="glassmorphic"
                 nve-layout="column gap:lg align:stretch span:4"
                 style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg'); 
-             background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(65, 184, 131, 0.10) 0%, rgba(65, 184, 131, 0.10) 100%), rgba(255, 255, 255, 0.05);
-    
-    ">
+                background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(65, 184, 131, 0.10) 0%, rgba(65, 184, 131, 0.10) 100%), rgba(255, 255, 255, 0.05);
+        
+        ">
                 <div nve-layout="row align:center">
                   <div class="entity-logo">
                     <img
@@ -710,7 +610,7 @@ const BASE_HEAD = renderBaseHead({ title })
           </section>
 
           <!--  Section 8 | "Stay in the loop" -->
-          <section nve-layout="column align:center gap:xxxl pad-top:xl pad-bottom:xxl">
+          <section nve-layout="column align:center gap:xxxl pad-top:xxxl pad-bottom:xxl">
             <!-- Heading -->
             <div nve-text="semibold emphasis display center">
               Stay in the
