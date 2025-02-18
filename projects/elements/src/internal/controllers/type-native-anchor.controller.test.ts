@@ -3,7 +3,8 @@ import { property } from 'lit/decorators/property.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { PopoverAlign, PopoverPosition, TypeNativeAnchorController } from '@nvidia-elements/core/internal';
+import type { PopoverAlign, PopoverPosition } from '@nvidia-elements/core/internal';
+import { TypeNativeAnchorController } from '@nvidia-elements/core/internal';
 
 @customElement('type-native-anchor-controller-test-element')
 class TypeNativeAnchorControllerTestElement extends LitElement {

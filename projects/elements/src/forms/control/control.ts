@@ -1,4 +1,5 @@
-import { LitElement, html, nothing, isServer, TemplateResult } from 'lit';
+import type { TemplateResult } from 'lit';
+import { LitElement, html, nothing, isServer } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import {
   attachInternals,
