@@ -1,4 +1,5 @@
 import { html, LitElement } from 'lit';
+import type { PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -80,7 +81,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
     const textContent = this.shadowRoot
       ?.querySelector('slot')
       ?.assignedNodes()
-      .reduce((p: any, n: any) => {
+      .reduce((p, n: HTMLElement) => {
         // if innerHTML its an HTMLElement instance or Template tag
         // if not then its a TextNode type and should use textContent instead
         return [...p, n.innerHTML ?? n.textContent];
@@ -99,7 +100,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
     `;
   }
 
-  update(changedProperties: Map<string, any>) {
+  update(changedProperties: PropertyValues<this>) {
     if (changedProperties.has('code')) {
       this.#updateCode();
     }

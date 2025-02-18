@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
@@ -6,7 +7,8 @@ import { attachInternals } from '../utils/a11y.js';
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
  */
 export function stateHighlighted<T extends Highlighted>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new StateHighlightedController(instance));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer((instance: T) => new StateHighlightedController(instance));
 }
 
 export type Highlighted = ReactiveElement & { highlighted: boolean; _internals?: ElementInternals };

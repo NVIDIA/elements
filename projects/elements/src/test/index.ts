@@ -60,6 +60,7 @@ async function waitForAllElementsToBeDefined() {
  * @deprecated
  * Awaits until Lit element has rendered and has no pending updates
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function elementIsStable(element: any) {
   if (element.updateComplete) {
     return retry(async () =>
@@ -70,6 +71,7 @@ export async function elementIsStable(element: any) {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function retry(fn: () => Promise<any>, maxTries = 10) {
   return fn().catch(() => (maxTries > 0 ? retry(fn, maxTries--) : Promise.reject('Max attempts reached')));
 }
@@ -94,5 +96,5 @@ export function emulateClick(component: HTMLElement | Element) {
  * @deprecated
  */
 export function untilEvent(element: HTMLElement | Document, event: string) {
-  return new Promise<any>(resolve => element.addEventListener(event, e => resolve(e)));
+  return new Promise<any>(resolve => element.addEventListener(event, e => resolve(e))); // eslint-disable-line @typescript-eslint/no-explicit-any
 }

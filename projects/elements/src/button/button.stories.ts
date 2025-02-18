@@ -48,7 +48,7 @@ export const Inline = {
 
 export const Deprecated = {
   render: () => html`
-    <nve-button interaction=${'emphasize' as any}>emphasize</nve-button>
+    <nve-button interaction=${'emphasize' as unknown as 'emphasis'}>emphasize</nve-button>
     <nve-button interaction="flat">flat</nve-button>
     <nve-button interaction="flat-emphasize">flat-emphasize</nve-button>
     <nve-button interaction="flat-destructive">flat-destructive</nve-button>

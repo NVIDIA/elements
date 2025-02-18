@@ -102,8 +102,8 @@ export function setupControlStates(control: Control) {
     control._internals.states.delete('focus');
   });
 
-  control.input.getRootNode().addEventListener('change', (e: any) => {
-    if (e.target.name === control.input?.name) {
+  control.input.getRootNode().addEventListener('change', (e: Event) => {
+    if ((e.target as HTMLInputElement).name === control.input?.name) {
       control.input.checked ? states.add('checked') : states.delete('checked');
     }
   });

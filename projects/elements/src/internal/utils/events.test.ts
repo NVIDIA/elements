@@ -37,24 +37,26 @@ describe('onChildListMutation', () => {
   });
 
   it('should notify of additions in child list', async () => {
-    const mutation = new Promise(r => onChildListMutation(list, m => r(m)));
+    const mutation = new Promise<MutationRecord>(r => onChildListMutation(list, m => r(m)));
     const li = document.createElement('li');
     list.appendChild(li);
     expect(list.querySelectorAll('li').length).toBe(2);
-    expect(((await mutation) as any).type).toBe('childList');
+    expect((await mutation).type).toBe('childList');
   });
 
   it('should notify of removal in child list', async () => {
-    const mutation = new Promise(r => onChildListMutation(list, m => r(m)));
+    const mutation = new Promise<MutationRecord>(r => onChildListMutation(list, m => r(m)));
     list.querySelector('li').remove();
     expect(list.querySelectorAll('li').length).toBe(0);
-    expect(((await mutation) as any).type).toBe('childList');
+    expect((await mutation).type).toBe('childList');
   });
 
   it('should notify of child attribute change', async () => {
-    const mutation = new Promise(r => onChildListMutation(list, m => r(m), { attributes: true, subtree: true }));
+    const mutation = new Promise<MutationRecord>(r =>
+      onChildListMutation(list, m => r(m), { attributes: true, subtree: true })
+    );
     list.querySelector('li').setAttribute('title', 'test');
-    expect(((await mutation) as any).type).toBe('attributes');
+    expect((await mutation).type).toBe('attributes');
   });
 });
 

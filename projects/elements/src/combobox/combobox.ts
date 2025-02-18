@@ -258,7 +258,7 @@ export class Combobox extends Control implements ContainerElement {
         this.#openListBox();
       }
 
-      if (e?.code === 'ArrowDown' && (this.getRootNode() as any).activeElement === this.input) {
+      if (e?.code === 'ArrowDown' && (this.getRootNode() as ShadowRoot).activeElement === this.input) {
         this.#dropdown.tabIndex = 0;
         this.#items[0]?.focus();
         e.preventDefault();

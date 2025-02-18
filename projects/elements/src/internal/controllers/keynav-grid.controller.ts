@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { onChildListMutation, throttle } from '../utils/events.js';
 import {
   validKeyNavigationCode,
@@ -31,7 +32,8 @@ export interface KeynavGridElement {
  * https://w3c.github.io/aria-practices/#gridNav_focus
  */
 export function keyNavigationGrid<T extends ReactiveElement & KeynavGridElement>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new KeyNavigationGridController(instance));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer((instance: T) => new KeyNavigationGridController(instance));
 }
 
 export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridElement> implements ReactiveController {
@@ -106,7 +108,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
     }
   }
 
-  #setActiveCell(e: any, activeCell: HTMLElement) {
+  #setActiveCell(e: KeyboardEvent | MouseEvent, activeCell: HTMLElement) {
     setActiveKeyListItem(this.#hostCells, activeCell);
 
     const items = getFlattenedFocusableItems(activeCell);
@@ -118,7 +120,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
       focusElement(activeCell);
     }
 
-    const detail = { code: e.code, shiftKey: e.shiftKey, activeItem: activeCell };
+    const detail = { code: e instanceof KeyboardEvent ? e.code : null, shiftKey: e.shiftKey, activeItem: activeCell };
     activeCell.dispatchEvent(new CustomEvent('nve-key-change', { bubbles: true, detail }));
   }
 

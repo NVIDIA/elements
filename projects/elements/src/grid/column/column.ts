@@ -117,9 +117,9 @@ export class GridColumn extends LitElement {
       const leftStyle = position.left - gridPosition.left;
       const rightStyle = rightColumns.reduce((width, c) => width + c.getBoundingClientRect().width, 0);
       const isLastLeft =
-        this.position && side === 'left' && (this.nextElementSibling as any)?.position !== this.position;
+        this.position && side === 'left' && (this.nextElementSibling as GridColumn)?.position !== this.position;
       const isLastRight =
-        this.position && side === 'right' && (this.previousElementSibling as any)?.position !== this.position;
+        this.position && side === 'right' && (this.previousElementSibling as GridColumn)?.position !== this.position;
 
       const positionStyle = `
         [id='${this.#grid.id}'] mlv-grid-column:nth-child(${this.ariaColIndex}),

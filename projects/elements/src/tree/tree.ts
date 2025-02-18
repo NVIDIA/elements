@@ -71,7 +71,7 @@ export class Tree extends LitElement {
   /** @private */
   get openNodes(): TreeNode[] {
     return this.nodes.filter(
-      node => node.expanded || (node.parentNode as any).expanded || (node.parentNode as any) === this
+      node => node.expanded || (node.parentNode as TreeNode).expanded || (node.parentNode as Tree) === this
     );
   }
 
