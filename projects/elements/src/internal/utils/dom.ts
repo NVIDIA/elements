@@ -9,23 +9,23 @@ import { isFocusable } from './focus.js';
  */
 export function getFlatDOMTree(node: Node, depth = 10): HTMLElement[] {
   return (
-    Array.from(getChildren(node)).reduce((prev: any[], next: any) => {
-      const nextChild = Array.from(getChildren(next)).map((i: any) => [i, getFlatDOMTree(i, depth)]);
+    Array.from(getChildren(node)).reduce((prev: Node[], next: Node) => {
+      const nextChild = Array.from(getChildren(next)).map(i => [i, getFlatDOMTree(i, depth)]);
       return [...prev, [next, [...nextChild]]];
-    }, []) as any[]
+    }, []) as HTMLElement[]
   ).flat(depth);
 }
 
-export function getChildren(node: any): NodeListOf<HTMLElement> {
-  if (node.documentElement) {
-    return node.documentElement.children; // root document children
-  } else if (node.shadowRoot) {
-    return node.shadowRoot.children; // shadow root direct children
-  } else if (node.assignedElements) {
+export function getChildren(node: Document | Node | HTMLElement): Element[] {
+  if (node instanceof Document && node.documentElement) {
+    return Array.from(node.documentElement.children); // root document children
+  } else if (node instanceof HTMLElement && node.shadowRoot) {
+    return Array.from(node.shadowRoot.children); // shadow root direct children
+  } else if (node instanceof HTMLSlotElement && node.assignedElements) {
     const slotted = node.assignedElements(); // slotted elements
-    return slotted.length ? slotted : node.children; // slot fallback
+    return slotted.length ? slotted : Array.from(node.children); // slot fallback
   } else {
-    return node.children; // light DOM direct children
+    return Array.from((node as HTMLElement).children); // light DOM direct children
   }
 }
 
@@ -34,7 +34,7 @@ export function generateId() {
   return `_${uint32.toString(16)}`;
 }
 
-export function getAttributeChanges(element: HTMLElement, attr: string, fn: (attrValue: string) => any) {
+export function getAttributeChanges(element: HTMLElement, attr: string, fn: (attrValue: string) => void) {
   fn(element.getAttribute(attr));
   const observer = new MutationObserver(mutations => {
     mutations.forEach(mutation => {
@@ -67,7 +67,7 @@ export function getAttributeListChanges(element: HTMLElement, attrs: string[], f
 export function appendRootNodeStyle(host: HTMLElement, styles: string) {
   const stylesheet = new CSSStyleSheet();
   stylesheet.replaceSync(styles);
-  const root = host.getRootNode() as any;
+  const root = host.getRootNode() as Document | ShadowRoot;
   if (root.adoptedStyleSheets) {
     const hasStyleSheet = root.adoptedStyleSheets
       .map(s => styleSheetToString(s))
@@ -88,14 +88,14 @@ export function styleSheetToString(stylesheet: CSSStyleSheet) {
 }
 
 /* used for cases of needing to know a property update outside of lit, example a native input value prop change */
-export function getElementUpdate(element: HTMLElement, key: string, callback: (value: any) => void) {
+export function getElementUpdate(element: HTMLElement, key: string, callback: (value) => void) {
   if (element.hasAttribute(key)) {
     callback(element.getAttribute(key));
-  } else if ((element as any)[key] !== undefined) {
-    callback((element as any)[key]);
+  } else if (element[key] !== undefined) {
+    callback(element[key]);
   }
 
-  const updatedProp = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element), key) as any;
+  const updatedProp = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element), key);
   if (updatedProp) {
     try {
       Object.defineProperty(element, key, {
@@ -215,7 +215,7 @@ export function endOfScrollBox(element: HTMLElement, offset = 0) {
 }
 
 export async function openEyeDropper(): Promise<string> {
-  return await new (globalThis as any).EyeDropper().open().then(color => color.sRGBHex);
+  return await new globalThis.EyeDropper().open().then(color => color.sRGBHex);
 }
 
 /**
@@ -257,7 +257,7 @@ export function getThemeTokens(element = globalThis.document.querySelector(':roo
 
 export function removeEmptySlotWhitespace(slot: HTMLSlotElement) {
   if (slotContainsOnlyWhitespace(slot)) {
-    slot.assignedNodes().forEach((node: any) => node.remove());
+    slot.assignedNodes().forEach((node: HTMLElement) => node.remove());
   }
 }
 

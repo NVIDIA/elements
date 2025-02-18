@@ -64,7 +64,7 @@ describe(Control.metadata.tag, () => {
   });
 
   it('should NOT associate datalist to input if child class disables _associateDatalist', async () => {
-    (element as any)._associateDatalist = false;
+    element['_associateDatalist'] = false;
     input.setAttribute('list', '');
     element.shadowRoot.dispatchEvent(new Event('slotchange'));
     element.requestUpdate();

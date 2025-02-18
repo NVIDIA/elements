@@ -153,6 +153,6 @@ function getTime(): number {
     element.language = 'typescript';
     element.code = '';
     await elementIsStable(element);
-    expect((element as any).formattedCode).toBe(undefined);
+    expect(element['formattedCode']).toBe(undefined);
   });
 });

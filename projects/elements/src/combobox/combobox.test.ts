@@ -73,7 +73,9 @@ describe(Combobox.metadata.tag, () => {
 
   it('should default the dropdown to align bottom center with position-area "bottom span-right" ensure wide selection options span to the right of the input', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
-    expect((getComputedStyle(dropdown) as any).positionArea).toBe('span-right bottom');
+    expect((getComputedStyle(dropdown) as CSSStyleDeclaration & { positionArea: string }).positionArea).toBe(
+      'span-right bottom'
+    );
   });
 
   it('should set width of dropdown when opened', async () => {

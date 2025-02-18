@@ -40,7 +40,7 @@ describe('type-native-anchor.controller', () => {
 
   it('should create a anchor fallback controller if browser does not support native css anchor positioning', async () => {
     const supports = globalThis.CSS?.supports;
-    (globalThis.CSS as any).supports = () => false;
+    globalThis.CSS.supports = () => false;
 
     const element = document.createElement(
       'type-native-anchor-controller-test-element'
@@ -52,17 +52,21 @@ describe('type-native-anchor.controller', () => {
     await elementIsStable(element);
 
     expect(element._internals.states.has('anchor-positioning-fallback')).toBe(true);
-    expect((element._typeNativeAnchorController as any).typeNativeAnchorFallbackController).toBeTruthy();
-    (globalThis.CSS as any).supports = supports;
+    expect(element['_typeNativeAnchorController']['typeNativeAnchorFallbackController']).toBeTruthy();
+    globalThis.CSS.supports = supports;
   });
 
   it('should associate anchor name to popover and anchor elements', async () => {
     await elementIsStable(element);
     element.anchor = anchor;
     await elementIsStable(element);
-    expect((anchor.style as any).anchorName.startsWith('--')).toBe(true);
-    expect((element.style as any).positionAnchor.startsWith('--')).toBe(true);
-    expect((element.style as any).positionAnchor).toBe((anchor.style as any).anchorName);
+    expect((anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName.startsWith('--')).toBe(true);
+    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor.startsWith('--')).toBe(
+      true
+    );
+    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe(
+      (anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName
+    );
   });
 
   it('should set anchor-body state selector if element is anchored to body element', async () => {

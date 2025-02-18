@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
@@ -7,7 +8,8 @@ import { attachInternals } from '../utils/a11y.js';
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected
  */
 export function stateSelected<T extends Selected>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new StateSelectedController(instance));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer((instance: T) => new StateSelectedController(instance));
 }
 
 export type Selected = ReactiveElement & { selected: boolean; readonly?: boolean; _internals?: ElementInternals };

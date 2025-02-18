@@ -176,7 +176,7 @@ export class AppLogin extends LitElement {
   }
 
   #input() {
-    this.formValues = Object.fromEntries(new FormData(this.form)) as any;
+    this.formValues = Object.fromEntries(new FormData(this.form)) as unknown as { email: string, password: string, remember: boolean };
   }
 
   #submit(e) {

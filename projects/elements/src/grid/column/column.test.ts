@@ -52,21 +52,21 @@ describe(GridColumn.metadata.tag, () => {
   });
 
   it('should dispatch nve-grid-column-resize event if column width changes', async () => {
-    const event = untilEvent(columns[0], 'nve-grid-column-resize');
+    const event = untilEvent<CustomEvent>(columns[0], 'nve-grid-column-resize');
     columns[0].width = '100px';
-    expect(((await event) as any).target.width).toBe('100px');
+    expect(((await event).target as GridColumn).width).toBe('100px');
   });
 
   it('should update column alignments when changed', async () => {
     columns[0].columnAlign = 'center';
     await elementIsStable(columns[0]);
-    const sheets = (grid.getRootNode() as any).adoptedStyleSheets;
+    const sheets = (grid.getRootNode() as Document).adoptedStyleSheets;
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('--justify-content: center')).toBe(true);
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('nve-grid-column:nth-child(1)')).toBe(true);
   });
 
   it('should update fixed left column position', async () => {
-    let sheets = (grid.getRootNode() as any).adoptedStyleSheets;
+    let sheets = (grid.getRootNode() as Document).adoptedStyleSheets;
 
     // position
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('position: sticky')).toBe(false);
@@ -86,7 +86,7 @@ describe(GridColumn.metadata.tag, () => {
     columns[0].position = 'fixed';
     await elementIsStable(columns[0]);
     await elementIsStable(grid);
-    sheets = (grid.getRootNode() as any).adoptedStyleSheets;
+    sheets = (grid.getRootNode() as Document).adoptedStyleSheets;
 
     // position
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('position: sticky')).toBe(true);
@@ -108,7 +108,7 @@ describe(GridColumn.metadata.tag, () => {
     columns[3].position = 'fixed';
     await elementIsStable(columns[0]);
     await elementIsStable(grid);
-    const sheets = (grid.getRootNode() as any).adoptedStyleSheets;
+    const sheets = (grid.getRootNode() as Document).adoptedStyleSheets;
 
     // position
     expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('position: sticky')).toBe(true);
@@ -130,7 +130,7 @@ describe(GridColumn.metadata.tag, () => {
     columns[3].position = 'fixed';
     await elementIsStable(columns[0]);
     await elementIsStable(grid);
-    const sheets = (grid.getRootNode() as any).adoptedStyleSheets;
+    const sheets = (grid.getRootNode() as Document).adoptedStyleSheets;
 
     // position
     expect(columns[3].hasAttribute('right')).toBe(true);

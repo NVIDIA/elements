@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
@@ -6,7 +7,7 @@ import { attachInternals } from '../utils/a11y.js';
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
  */
 export function stateActive<T extends Active>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new StateActiveController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new StateActiveController(instance));
 }
 
 type Active = ReactiveElement & { disabled: boolean; _internals?: ElementInternals };
@@ -19,19 +20,19 @@ export class StateActiveController<T extends Active> implements ReactiveControll
   async hostConnected() {
     attachInternals(this.host);
     await this.host.updateComplete;
-    this.host.addEventListener('keypress', (e: any) => this.#emulateActive(e));
-    this.host.addEventListener('mousedown', (e: any) => this.#emulateActive(e));
+    this.host.addEventListener('keypress', (e: KeyboardEvent) => this.#emulateActive(e));
+    this.host.addEventListener('mousedown', (e: PointerEvent) => this.#emulateActive(e));
     this.host.addEventListener('keyup', () => this.#emulateInactive());
     this.host.addEventListener('blur', () => this.#emulateInactive());
     this.host.addEventListener('mouseup', () => this.#emulateInactive());
   }
 
-  #emulateActive(e: any) {
+  #emulateActive(e: KeyboardEvent | PointerEvent) {
     if (!this.host.disabled && this.#isValidKeyEvent(e)) {
       this.host._internals.states.add('active');
     }
 
-    if (e.code === 'Space' && e.target === this.host) {
+    if (e instanceof KeyboardEvent && e.code === 'Space' && e.target === this.host) {
       e.preventDefault(); // prevent space bar scroll with standard button behavior
     }
   }
@@ -40,7 +41,7 @@ export class StateActiveController<T extends Active> implements ReactiveControll
     this.host._internals.states.delete('active');
   }
 
-  #isValidKeyEvent(e: KeyboardEvent) {
-    return e.code ? e.code === 'Space' || e.code === 'Enter' : true;
+  #isValidKeyEvent(e: KeyboardEvent | PointerEvent) {
+    return e instanceof KeyboardEvent ? e.code === 'Space' || e.code === 'Enter' : true;
   }
 }

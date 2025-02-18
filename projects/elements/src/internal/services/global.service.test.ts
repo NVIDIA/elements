@@ -82,7 +82,7 @@ describe('GlobalStateService', () => {
     console.log = () => null;
 
     vi.spyOn(console, 'log');
-    (window as any).NVE_ELEMENTS.debug();
+    (window as any).NVE_ELEMENTS.debug(); // eslint-disable-line @typescript-eslint/no-explicit-any
     expect(console.log).toHaveBeenCalled();
 
     console.log = original;

@@ -55,7 +55,8 @@ describe(Color.metadata.tag, () => {
   });
 
   it('should update the color value if EyeDropper is used', async () => {
-    const original = (window as any).EyeDropper;
+    const original = (window as any).EyeDropper; // eslint-disable-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).EyeDropper = class {
       open() {
         return Promise.resolve({ sRGBHex: '#2d2d2d' });
@@ -73,6 +74,6 @@ describe(Color.metadata.tag, () => {
     expect(await change).toBeDefined();
     expect(fixture.querySelector('input').value).toBe('#2d2d2d');
 
-    (window as any).EyeDropper = original;
+    (window as any).EyeDropper = original; // eslint-disable-line @typescript-eslint/no-explicit-any
   });
 });

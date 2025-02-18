@@ -96,6 +96,6 @@ describe(ProgressiveFilterChip.metadata.tag, () => {
     const el = document.createElement('div');
     element.appendChild(el);
     await elementIsStable(element);
-    expect((element as any).inputs.length).toBe(3);
+    expect(element['inputs'].length).toBe(3);
   });
 });

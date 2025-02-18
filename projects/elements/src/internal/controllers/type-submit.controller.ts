@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { stopEvent } from '../utils/events.js';
 import { onKeys } from '../utils/keynav.js';
 
@@ -7,7 +8,7 @@ import { onKeys } from '../utils/keynav.js';
  * https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
  */
 export function typeSubmit<T extends Submit>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new TypeSubmitController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new TypeSubmitController(instance));
 }
 
 export type Submit = ReactiveElement &
