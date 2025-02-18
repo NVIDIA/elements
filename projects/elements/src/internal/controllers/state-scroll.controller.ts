@@ -1,11 +1,12 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { attachInternals, endOfScrollBox } from '@nvidia-elements/core/internal';
 
 /**
  * Adds active scroll state detection
  */
 export function stateScroll<T extends Scroll>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new StateScrollController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new StateScrollController(instance));
 }
 
 export interface StateScrollConfig {

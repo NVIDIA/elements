@@ -7,7 +7,8 @@ import { parseTokenNumber } from '../utils/dom.js';
 import type { PopoverAlign, PopoverPosition, PopoverSides } from '../types/index.js';
 
 if (!globalThis.process) {
-  (globalThis.process as any) = { env: { NODE_ENV: 'production' } }; // floating-ui
+  // floating-ui
+  (globalThis.process as any) = { env: { NODE_ENV: 'production' } }; // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
 export interface PopoverConfig {
@@ -58,7 +59,7 @@ export function setArrowStyles(config: PopoverConfig, position: ComputePositionR
   }
 }
 
-export function popoverRenderUpdate(config: PopoverConfig, fn: () => any) {
+export function popoverRenderUpdate(config: PopoverConfig, fn: () => void) {
   return autoUpdate(config.anchor, config.popover, () => fn());
 }
 

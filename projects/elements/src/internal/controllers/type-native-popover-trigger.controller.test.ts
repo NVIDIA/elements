@@ -29,7 +29,7 @@ describe('type-native-popover-trigger.controller', () => {
     element = fixture.querySelector<TypeNativePopoverTriggerControllerTestElement>(
       'type-native-popover-trigger-controller-test-element'
     );
-    popover = fixture.querySelector<any>('[popover]');
+    popover = fixture.querySelector<HTMLElement>('[popover]');
     await elementIsStable(element);
   });
 

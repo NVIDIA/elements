@@ -1,3 +1,4 @@
+import type { TemplateResult } from 'lit';
 import type { IconName } from '@nvidia-elements/core/icon';
 import type { I18nStrings } from '../services/i18n.service.js';
 
@@ -209,7 +210,7 @@ export interface NveElement {
   /** @private A instance of `ElementInternals` that is set dynamically by the applied decorators/controllers */
   _internals: ElementInternals;
 
-  render: any;
+  render: TemplateResult;
 }
 
 export type SlotName = 'default' | 'prefix' | 'suffix' | 'header' | 'footer' | 'actions' | 'icon';
@@ -286,3 +287,8 @@ export interface OffsetPoint {
   offsetX: number;
   offsetY: number;
 }
+
+/** https://github.com/tc39/proposal-decorators */
+export type LegacyDecoratorTarget = Function & {
+  addInitializer?: (initializer: (instance: any) => void) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
+};

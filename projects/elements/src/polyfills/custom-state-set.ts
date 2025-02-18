@@ -9,10 +9,10 @@ const SUPPORTS_CUSTOM_STATES = CSS.supports('selector(:state(test))');
 
 class CustomStateSetPolyfill extends Set {
   // not using native private fields due to terser bug
-  private _stateSet: any;
+  private _stateSet: CustomStateSet;
   private _element: HTMLElement;
 
-  constructor(stateSet: any, element: HTMLElement) {
+  constructor(stateSet: CustomStateSet, element: HTMLElement) {
     super();
     this._stateSet = stateSet;
     this._element = element;
@@ -50,8 +50,8 @@ customStateSetPolyfill();
 function customStateSetPolyfill() {
   const attachInternals = HTMLElement.prototype.attachInternals;
   Object.defineProperty(HTMLElement.prototype, 'attachInternals', {
-    value: function (...args: any) {
-      const internals = (attachInternals as any).call(this, args);
+    value: function (...args) {
+      const internals = attachInternals.call(this, args) as ElementInternals;
       Object.defineProperty(internals, 'states', { value: new CustomStateSetPolyfill(internals.states, this) });
       return internals;
     }

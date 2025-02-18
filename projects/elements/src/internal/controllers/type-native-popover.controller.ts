@@ -134,7 +134,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.#updateTriggerState(); // eslint-disable-line @typescript-eslint/no-floating-promises
   }
 
-  #explicitTrigger: any;
+  #explicitTrigger: HTMLButtonElement;
   #updateExplicitTrigger() {
     // reset trigger to query for latest explicit trigger
     if (this.#explicitTrigger && this.host.id === this.#explicitTrigger.popoverTargetElement?.id) {
@@ -231,7 +231,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #toggleFocus(open: boolean) {
     if (open) {
       // only focus popover if it is not the active element and it does not contain the active element already
-      if ((this.host.getRootNode() as any).activeElement !== this.host && !this.host.shadowRoot.activeElement) {
+      if ((this.host.getRootNode() as Document).activeElement !== this.host && !this.host.shadowRoot.activeElement) {
         focusElement(this.host);
       }
     } else {

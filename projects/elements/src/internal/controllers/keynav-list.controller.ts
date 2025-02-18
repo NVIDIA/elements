@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { focusElement, initializeKeyListItems, setActiveKeyListItem } from '../utils/focus.js';
 import { KeynavCode, validKeyNavigationCode } from '../utils/dom.js';
 
@@ -17,7 +18,8 @@ export interface KeynavListElement {
 
 /** https://webaim.org/techniques/keyboard/ */
 export function keyNavigationList<T extends ReactiveElement & KeynavListElement>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new KeyNavigationListController(instance));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer((instance: T) => new KeyNavigationListController(instance));
 }
 
 export class KeyNavigationListController<T extends ReactiveElement & KeynavListElement> implements ReactiveController {
@@ -29,7 +31,9 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
       loop: false,
       dir: this.host.getAttribute('rtl'),
       ...this.host.keynavListConfig,
-      items: Array.from(this.host.keynavListConfig.items).filter((i: any) => !i.disabled)
+      items: Array.from(this.host.keynavListConfig.items).filter(
+        (i: HTMLElement & { disabled?: boolean }) => !i.disabled
+      )
     };
   }
 
@@ -56,7 +60,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     }
   }
 
-  #clickItem(e: Event) {
+  #clickItem(e: PointerEvent) {
     const item = this.#getActiveItem(e, this.#config.items);
     if (item) {
       this.#setActiveItem(e, item);
@@ -87,7 +91,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     return items.find(i => i === focusedElement) ? focusedElement : null;
   }
 
-  #setActiveItem(e: any, activeItem: HTMLElement, previousItem?: HTMLElement) {
+  #setActiveItem(e: KeyboardEvent | PointerEvent, activeItem: HTMLElement, previousItem?: HTMLElement) {
     const { manageFocus, manageTabindex, items } = this.#config;
     if (manageFocus) {
       if (manageTabindex) {
@@ -101,7 +105,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
     const detail = {
       activeItem,
       previousItem,
-      code: e.code,
+      code: e instanceof KeyboardEvent ? e.code : null,
       metaKey: e.ctrlKey || e.metaKey,
       items
     };

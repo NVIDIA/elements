@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
@@ -7,7 +8,8 @@ import { attachInternals } from '../utils/a11y.js';
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled
  */
 export function stateDisabled<T extends Disabled>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new StateDisabledController(instance));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer((instance: T) => new StateDisabledController(instance));
 }
 
 export type Disabled = ReactiveElement & { disabled: boolean; readonly?: boolean; _internals?: ElementInternals };
