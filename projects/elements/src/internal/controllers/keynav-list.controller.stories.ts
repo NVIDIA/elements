@@ -1,6 +1,7 @@
 import { css, html, LitElement } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { keyNavigationList, KeynavListConfig } from '@nvidia-elements/core/internal';
+import type { KeynavListConfig } from '@nvidia-elements/core/internal';
+import { keyNavigationList } from '@nvidia-elements/core/internal';
 
 export default {
   title: 'Internal/Controllers'

@@ -1,5 +1,5 @@
-import { ControlGroup } from '../control-group/control-group.js';
-import { Control } from '../control/control.js';
+import type { ControlGroup } from '../control-group/control-group.js';
+import type { Control } from '../control/control.js';
 
 export const breakpoints = {
   vertical: 300,

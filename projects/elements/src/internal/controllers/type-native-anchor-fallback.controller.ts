@@ -1,6 +1,6 @@
 /* istanbul ignore file -- @preserve */
 // ignoring as this is a temporary polyfill until CSS Anchor Positioning is stable in Firefox and Safari
-import { ReactiveController, ReactiveElement } from 'lit';
+import type { ReactiveController, ReactiveElement } from 'lit';
 import type { PopoverAlign, PopoverPosition } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 import { getHostAnchor } from './type-native-popover.utils.js';

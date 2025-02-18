@@ -1,4 +1,4 @@
-import { ReactiveElement, ReactiveController } from 'lit';
+import type { ReactiveElement, ReactiveController } from 'lit';
 import { getDifference } from '../utils/objects.js';
 import type { OffsetPoint, Point } from '../types/index.js';
 

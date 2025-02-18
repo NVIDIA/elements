@@ -1,9 +1,9 @@
-import js from '@eslint/js';
 import { config } from '@weiran.zsd/multi-eslint-rule-config'; // https://github.com/eslint/eslint/issues/19013
 
 const source = ['**/src/**/*.ts', '**/src/**/*.d.ts'];
 const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**', '**/.wireit/**'];
 
+/** @type {import('eslint').Linter.Config[]} */
 export const appConfig = [
   {
     files: [...source],
