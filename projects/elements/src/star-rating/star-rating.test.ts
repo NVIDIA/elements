@@ -49,7 +49,7 @@ describe(StarRating.metadata.tag, () => {
     await element.updateComplete;
     const stars = element.shadowRoot.querySelectorAll('nve-icon');
     const filledStars = Array.from(stars).filter(star => star.getAttribute('name') === 'star');
-    expect((element as any).value).toBe(4);
+    expect(element['value']).toBe(4);
     expect(filledStars.length).toBe(4); // four stars should be filled
   });
 
@@ -68,7 +68,7 @@ describe(StarRating.metadata.tag, () => {
     starToClick.dispatchEvent(new MouseEvent('click'));
     await element.updateComplete;
     // The value should be 4 (since we clicked on the 4th star)
-    expect((element as any).value).toBe(4);
+    expect(element['value']).toBe(4);
   });
 
   it('should highlight the correct star on hover', async () => {
@@ -76,14 +76,14 @@ describe(StarRating.metadata.tag, () => {
     const starToHover = starIcons[2];
     starToHover.dispatchEvent(new MouseEvent('mouseout'));
     await element.updateComplete;
-    expect((element as any).active).toBe(0);
+    expect(element['active']).toBe(0);
   });
 
   it('should update max value', async () => {
-    expect((element2 as any).max).toBe(3);
+    expect(element2['max']).toBe(3);
   });
 
   it('should update min value', async () => {
-    expect((element2 as any).min).toBe(1);
+    expect(element2['min']).toBe(1);
   });
 });

@@ -1,6 +1,6 @@
 import type { ReactiveElement, ReactiveController } from 'lit';
+import type { LegacyDecoratorTarget, OffsetPoint, Point } from '../types/index.js';
 import { getDifference } from '../utils/objects.js';
-import type { OffsetPoint, Point } from '../types/index.js';
 
 export class NveTouchEvent extends Event {
   x: number;
@@ -23,7 +23,7 @@ export class NveTouchEvent extends Event {
  * @event nve-touch-end
  */
 export function typeTouch<T extends ReactiveElement>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new TypeTouchController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new TypeTouchController(instance));
 }
 
 export class TypeTouchController<T extends ReactiveElement> implements ReactiveController {
@@ -36,11 +36,11 @@ export class TypeTouchController<T extends ReactiveElement> implements ReactiveC
   }
 
   hostConnected() {
-    this.host.addEventListener('pointerdown', (e: any) => this.#start(e), { passive: true });
+    this.host.addEventListener('pointerdown', e => this.#start(e), { passive: true });
   }
 
   #start(e: PointerEvent) {
-    if (e.composedPath().find((el: any) => el === this.host)) {
+    if (e.composedPath().find(el => el === this.host)) {
       this.#startPosition = { x: e.clientX, y: e.clientY };
       globalThis.document.addEventListener('pointerup', this.#endFn, { passive: true });
       globalThis.document.addEventListener('pointermove', this.#moveFn, { passive: true });

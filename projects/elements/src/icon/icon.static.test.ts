@@ -4,11 +4,11 @@ import { Icon, mergeIcons } from '@nvidia-elements/core/icon';
 describe(`${Icon.metadata.tag}: static`, () => {
   it('should merge conflicting icon versions to latest', async () => {
     class Registered {
-      static metadata: any = {
+      static metadata = {
         version: '0.0.0'
       };
 
-      static _icons: any = {
+      static _icons: Record<string, { svg: () => string }> = {
         'merge-svg': { svg: () => '<svg id="merge-svg"><path d=""/></svg>' }
       };
     }

@@ -99,8 +99,9 @@ export class SystemSettings extends LitElement {
 
     this.#globals = globals;
     globalThis.document.documentElement.setAttribute('nve-theme', themes);
-    (globalThis.document.querySelector('#storybook-preview-iframe') as any)?.contentDocument
-      ?.querySelector('html')
+    globalThis.document
+      .querySelector<HTMLIFrameElement>('#storybook-preview-iframe')
+      ?.contentDocument?.querySelector('html')
       ?.setAttribute('nve-theme', themes);
   }
 }

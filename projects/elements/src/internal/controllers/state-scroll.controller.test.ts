@@ -2,6 +2,7 @@ import { html, LitElement, css } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import type { StateScrollConfig } from '@nvidia-elements/core/internal';
 import { stateScroll } from '@nvidia-elements/core/internal';
 
 @stateScroll<StateScrollControllerTestElement>()
@@ -15,7 +16,7 @@ class StateScrollControllerTestElement extends LitElement {
   stateScrollConfig = {
     scrollOffset: 0,
     target: this
-  };
+  } as StateScrollConfig;
 
   render() {
     return html`<div style="width: 100px; height: 100px;"></div>`;
@@ -79,7 +80,7 @@ describe('state-scroll.controller', () => {
   });
 
   it('should add scrolling state on scroll for custom target', async () => {
-    element.stateScrollConfig.target = element.shadowRoot.querySelector('div') as any;
+    element.stateScrollConfig.target = element.shadowRoot.querySelector<HTMLElement>('div');
     const event = untilEvent(element, 'scroll');
     element.scrollLeft = 10;
     element.dispatchEvent(new Event('scroll', { bubbles: true }));

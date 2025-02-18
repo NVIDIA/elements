@@ -18,9 +18,10 @@ const config = {
   rules: {
     ...tseslint.configs.recommended.rules,
     'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
-    '@typescript-eslint/no-floating-promises': ['error'],
+    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T' }],
     '@typescript-eslint/consistent-type-imports': ['error'],
-    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T' }]
+    '@typescript-eslint/no-floating-promises': ['error'],
+    '@typescript-eslint/no-explicit-any': ['error']
   }
 };
 
@@ -40,18 +41,6 @@ export const browserTypescriptConfig = [
       }
     }
   }
-  // todo: enable this config for all source ts files
-  // {
-  //   files: [...source],
-  //   ignores: [...ignores],
-  //   plugins: {
-  //     '@typescript-eslint': tseslint.plugin,
-  //     import: importPlugin
-  //   },
-  //   rules: {
-  //     '@typescript-eslint/no-explicit-any': ['error']
-  //   }
-  // }
 ];
 
 /** @type {import('eslint').Linter.Config[]} */

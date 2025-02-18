@@ -1,4 +1,5 @@
 import type { ReactiveElement, ReactiveController } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { getFlattenedDOMTree } from '../utils/dom.js';
 
 export interface NativePopoverTrigger extends ReactiveElement {
@@ -9,7 +10,8 @@ export interface NativePopoverTrigger extends ReactiveElement {
 }
 
 export function typeNativePopoverTrigger<T extends NativePopoverTrigger>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new TypeNativePopoverTriggerController(instance));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer((instance: T) => new TypeNativePopoverTriggerController(instance));
 }
 
 export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> implements ReactiveController {
@@ -22,7 +24,7 @@ export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> 
       const id = this.host.popovertarget?.length ? this.host.popovertarget : this.host.popoverTargetElement?.id;
 
       if (id && !this.host.disabled) {
-        const popover = getFlattenedDOMTree(this.host.getRootNode()).find(e => e.id === id) as any;
+        const popover = getFlattenedDOMTree(this.host.getRootNode()).find(e => e.id === id);
 
         if (this.host.popoverTargetAction === 'hide') {
           popover?.hidePopover();

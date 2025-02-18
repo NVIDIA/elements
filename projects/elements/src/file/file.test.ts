@@ -28,6 +28,6 @@ describe(File.metadata.tag, () => {
   });
 
   it('should append global styles needed for file pseudo selectors', () => {
-    expect((element as any).getRootNode().adoptedStyleSheets).toBeTruthy();
+    expect((element.getRootNode() as Document).adoptedStyleSheets).toBeTruthy();
   });
 });

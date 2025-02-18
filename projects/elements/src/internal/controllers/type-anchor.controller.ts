@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { removeEmptyTextNode } from '../utils/dom.js';
 import { attachInternals } from '../utils/a11y.js';
 
@@ -6,7 +7,7 @@ import { attachInternals } from '../utils/a11y.js';
  * Adds anchor/link support for interactive custom elements.
  */
 export function typeAnchor<T extends Anchor>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new TypeAnchorController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new TypeAnchorController(instance));
 }
 
 export interface Anchor extends ReactiveElement {
@@ -25,7 +26,7 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
     return this.host.shadowRoot
       .querySelector<HTMLSlotElement>('slot, slot[name=anchor]')
       ?.assignedElements()
-      ?.find((e: any) => e?.tagName === 'A');
+      ?.find(e => e?.tagName === 'A');
   }
 
   get #parentAnchor() {

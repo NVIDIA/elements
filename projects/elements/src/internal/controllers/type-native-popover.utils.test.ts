@@ -7,9 +7,13 @@ describe('associateAnchor', () => {
     const element = document.createElement('div');
     const anchor = document.createElement('div');
     associateAnchor(element, anchor);
-    expect((anchor.style as any).anchorName.startsWith('--')).toBe(true);
-    expect((element.style as any).positionAnchor.startsWith('--')).toBe(true);
-    expect((element.style as any).positionAnchor).toBe((anchor.style as any).anchorName);
+    expect((anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName.startsWith('--')).toBe(true);
+    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor.startsWith('--')).toBe(
+      true
+    );
+    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe(
+      (anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName
+    );
   });
 
   it('should not recreate new anchor name if one already provided', async () => {
@@ -17,11 +21,11 @@ describe('associateAnchor', () => {
     const anchor = document.createElement('div');
     associateAnchor(element, anchor);
 
-    const originalAnchorName = (anchor.style as any).anchorName;
-    expect((element.style as any).positionAnchor).toBe((anchor.style as any).anchorName);
+    const originalAnchorName = (anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName;
+    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe(originalAnchorName);
 
     associateAnchor(element, anchor);
-    expect((element.style as any).positionAnchor).toBe(originalAnchorName);
+    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe(originalAnchorName);
   });
 
   it('should create a CSS Anchor Position association between two elements with the default id if provided', async () => {
@@ -31,8 +35,8 @@ describe('associateAnchor', () => {
     anchor.id = 'test';
     associateAnchor(element, anchor);
     expect(anchor.id.startsWith('_')).toBe(false);
-    expect((anchor.style as any).anchorName).toBe('--test');
-    expect((element.style as any).positionAnchor).toBe('--test');
+    expect((anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName).toBe('--test');
+    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe('--test');
   });
 
   // https://github.com/facebook/react/issues/26839#issuecomment-2277253506
@@ -41,11 +45,17 @@ describe('associateAnchor', () => {
     const anchor = document.createElement('div');
     anchor.id = ':test';
     associateAnchor(element, anchor);
-    expect((anchor.style as any).anchorName.includes('test')).toBe(false);
-    expect((anchor.style as any).positionAnchor.includes('test')).toBe(false);
-    expect((anchor.style as any).anchorName.startsWith('--')).toBe(true);
-    expect((element.style as any).positionAnchor.startsWith('--')).toBe(true);
-    expect((element.style as any).positionAnchor).toBe((anchor.style as any).anchorName);
+    expect((anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName.includes('test')).toBe(false);
+    expect((anchor.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor.includes('test')).toBe(
+      false
+    );
+    expect((anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName.startsWith('--')).toBe(true);
+    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor.startsWith('--')).toBe(
+      true
+    );
+    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe(
+      (anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName
+    );
   });
 });
 
@@ -83,7 +93,7 @@ describe('getHostTrgger', () => {
 type TestHost = HTMLElement & { anchor?: HTMLElement | string; _activeTrigger?: HTMLElement };
 
 describe('getHostAnchor', () => {
-  let logSpy: any;
+  let logSpy;
   beforeEach(() => {
     logSpy = vi.spyOn(LogService, 'warn');
   });
