@@ -1,4 +1,5 @@
-import { ReactiveController, ReactiveElement, render } from 'lit';
+import type { ReactiveController, ReactiveElement } from 'lit';
+import { render } from 'lit';
 import { LogService } from '../services/log.service.js';
 import { getSSRMismatchWarning } from '../utils/audit.js';
 

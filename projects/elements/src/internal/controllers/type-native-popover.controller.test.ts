@@ -3,13 +3,8 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@nvidia-elements/testing';
-import {
-  PopoverAlign,
-  PopoverPosition,
-  popoverStyles,
-  TypeNativePopoverController,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import type { PopoverAlign, PopoverPosition } from '@nvidia-elements/core/internal';
+import { popoverStyles, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
 import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/button/define.js';
 

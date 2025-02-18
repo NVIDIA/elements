@@ -1,11 +1,4 @@
-import js from '@eslint/js';
-import { browserTypescriptConfig, appConfig } from '@internals/eslint';
+import { browserJavaScriptConfig, browserTypescriptConfig, appConfig } from '@internals/eslint';
 
-export default [
-  {
-    files: ['./src/**/*.ts'],
-    rules: js.configs.recommended.rules
-  },
-  ...browserTypescriptConfig,
-  ...appConfig
-];
+/** @type {import('eslint').Linter.Config[]} */
+export default [...browserJavaScriptConfig, ...browserTypescriptConfig, ...appConfig];

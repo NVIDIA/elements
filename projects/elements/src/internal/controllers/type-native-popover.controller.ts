@@ -1,4 +1,4 @@
-import { ReactiveController, ReactiveElement } from 'lit';
+import type { ReactiveController, ReactiveElement } from 'lit';
 import { clickOutsideElementBounds, generateId, getAttributeListChanges } from '../utils/dom.js';
 import { attachInternals } from '../utils/a11y.js';
 import { focusElement } from '../utils/focus.js';

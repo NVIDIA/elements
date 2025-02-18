@@ -75,8 +75,8 @@ function customStateSetPolyfill() {
 function replaceToLegacyState(value: string) {
   // if the browser does not support :state(*) selectors replace any CSS state selectors with attribute fallbacks [state-*]
   if (!SUPPORTS_CUSTOM_STATES) {
-    return value.replace(/:--([^\)]+)/g, '[state--$1]').replace(/:state\(([^\)]+)\)/g, '[state--$1]'); // eslint-disable-line
+    return value.replace(/:--([^\)]+)/g, '[state--$1]').replace(/:state\(([^\)]+)\)/g, '[state--$1]');
   } else {
-    return value.replace(/:--([^\)]+)/g, ':state($1)'); // eslint-disable-line
+    return value.replace(/:--([^\)]+)/g, ':state($1)');
   }
 }
