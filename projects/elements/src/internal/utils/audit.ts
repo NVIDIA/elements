@@ -2,17 +2,21 @@ function createDocLink(subpath = '') {
   return `https://NVIDIA.github.io/elements/api/${subpath}`;
 }
 
-export function auditSlots(host: HTMLElement) {
-  const validElements = ['template', ...(host.constructor as any).metadata.children];
+export function auditSlots(
+  host: HTMLElement & { constructor: { metadata?: { children?: string[] } } }
+): [Element[], string[]] {
+  const validElements = ['template', ...host.constructor.metadata.children];
   const invalidElements = Array.from(host.shadowRoot.querySelectorAll('slot')).flatMap(slot =>
     slot.assignedElements().filter(e => !validElements.map(i => i).includes(e.localName))
   );
   return [invalidElements, validElements];
 }
 
-export function auditParentElement(host: HTMLElement) {
-  const validParentTag = (host.constructor as any).metadata.parent;
-  return [host.parentElement.localName === validParentTag, validParentTag];
+export function auditParentElement(
+  host: HTMLElement & { constructor: { metadata?: { parent?: string } } }
+): [boolean, string] {
+  const validParentTag = host.constructor.metadata?.parent ?? 'unknown';
+  return [host.parentElement?.localName === validParentTag, validParentTag];
 }
 
 export function getExcessiveInstanceLimitWarning(count: number, localName: string) {

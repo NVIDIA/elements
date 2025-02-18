@@ -34,7 +34,6 @@ export * from './services/global.service.js';
 export * from './services/i18n.service.js';
 export * from './services/log.service.js';
 export * from './services/transition.service.js';
-export * from './docs.js';
 export * from './types/index.js';
 export * from './utils/a11y.js';
 export * from './utils/audit.js';

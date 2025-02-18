@@ -8,7 +8,7 @@ const statuses = {
   beta: 'accent',
   stable: 'success',
   undefined: 'unknown'
-};
+} as const;
 
 export class BadgeStatus extends LitElement {
   /** Axe test result */
@@ -25,8 +25,8 @@ export class BadgeStatus extends LitElement {
 
   render() {
     return html`
-      <nve-badge .container=${this.container as any} .status=${statuses[this.value] as any}>
-        ${this.value ? (this.value as any) : 'unknown'}&nbsp;<slot></slot>
+      <nve-badge .container=${this.container} .status=${statuses[this.value]}>
+        ${this.value ? this.value : 'unknown'}&nbsp;<slot></slot>
       </nve-badge>
     `;
   }

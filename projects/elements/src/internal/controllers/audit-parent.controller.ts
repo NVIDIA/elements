@@ -1,11 +1,12 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { GlobalStateService } from '../services/global.service.js';
 import { LogService } from '../services/log.service.js';
 import { auditParentElement, getInvalidParentWarning } from '../utils/audit.js';
 
 /** Determines if element is assigned to valid parent element */
 export function auditParent<T extends AuditParent>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new AuditParentController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new AuditParentController(instance));
 }
 
 export type AuditParent = ReactiveElement;
