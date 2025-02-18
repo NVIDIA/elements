@@ -1,7 +1,8 @@
 import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
-import { PopoverPosition, PopoverAlign, popoverStyles, TypeNativePopoverController, useStyles, TypeNativeAnchorController, PopoverType } from '@nvidia-elements/core/internal';
+import type { PopoverPosition, PopoverAlign, PopoverType } from '@nvidia-elements/core/internal';
+import { popoverStyles, TypeNativePopoverController, useStyles, TypeNativeAnchorController } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';

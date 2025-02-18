@@ -1,4 +1,4 @@
-import { ReactiveController, ReactiveElement } from 'lit';
+import type { ReactiveController, ReactiveElement } from 'lit';
 import { onChildListMutation, throttle } from '../utils/events.js';
 import {
   validKeyNavigationCode,

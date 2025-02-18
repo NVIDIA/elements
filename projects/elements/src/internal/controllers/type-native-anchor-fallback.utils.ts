@@ -1,15 +1,7 @@
 /* istanbul ignore file -- @preserve */
 // ignoring as this is a temporary polyfill until CSS Anchor Positioning is stable in Firefox and Safari
-import {
-  arrow,
-  autoUpdate,
-  computePosition,
-  ComputePositionReturn,
-  flip,
-  Middleware,
-  offset,
-  platform
-} from '@floating-ui/dom';
+import type { ComputePositionReturn, Middleware } from '@floating-ui/dom';
+import { arrow, autoUpdate, computePosition, flip, offset, platform } from '@floating-ui/dom';
 import { offsetParent } from 'composed-offset-position';
 import { parseTokenNumber } from '../utils/dom.js';
 import type { PopoverAlign, PopoverPosition, PopoverSides } from '../types/index.js';

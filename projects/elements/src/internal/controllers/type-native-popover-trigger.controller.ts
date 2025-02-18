@@ -1,4 +1,4 @@
-import { ReactiveElement, ReactiveController } from 'lit';
+import type { ReactiveElement, ReactiveController } from 'lit';
 import { getFlattenedDOMTree } from '../utils/dom.js';
 
 export interface NativePopoverTrigger extends ReactiveElement {

@@ -1,4 +1,4 @@
-import { ReactiveController, ReactiveElement } from 'lit';
+import type { ReactiveController, ReactiveElement } from 'lit';
 import type { PopoverAlign, PopoverPosition } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 import { supportsNativeCSSAnchorPosition } from '../utils/supports.js';
