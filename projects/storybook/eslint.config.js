@@ -1,4 +1,4 @@
-import js from '@eslint/js';
-import { browserTypescriptConfig } from '@nve-internals/eslint';
+import { browserJavaScriptConfig, browserTypescriptConfig } from '@nve-internals/eslint';
 
-export default [js.configs.recommended, ...browserTypescriptConfig];
+/** @type {import('eslint').Linter.Config[]} */
+export default [...browserJavaScriptConfig, ...browserTypescriptConfig];

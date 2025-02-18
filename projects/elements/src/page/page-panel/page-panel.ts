@@ -1,11 +1,11 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import type { Size } from '@nvidia-elements/core/internal';
 import {
   appendRootNodeStyle,
   attachInternals,
   auditParent,
   I18nController,
-  Size,
   TypeExpandableController,
   useStyles
 } from '@nvidia-elements/core/internal';

@@ -1,4 +1,4 @@
-import { ReactiveController, ReactiveElement } from 'lit';
+import type { ReactiveController, ReactiveElement } from 'lit';
 import { GlobalStateService } from '../services/global.service.js';
 import { LogService } from '../services/log.service.js';
 import { auditParentElement, getInvalidParentWarning } from '../utils/audit.js';

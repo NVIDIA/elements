@@ -1,4 +1,4 @@
-import { ReactiveController, ReactiveElement } from 'lit';
+import type { ReactiveController, ReactiveElement } from 'lit';
 import { focusElement, initializeKeyListItems, setActiveKeyListItem } from '../utils/focus.js';
 import { KeynavCode, validKeyNavigationCode } from '../utils/dom.js';
 

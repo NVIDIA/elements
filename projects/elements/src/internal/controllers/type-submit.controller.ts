@@ -1,4 +1,4 @@
-import { ReactiveController, ReactiveElement } from 'lit';
+import type { ReactiveController, ReactiveElement } from 'lit';
 import { stopEvent } from '../utils/events.js';
 import { onKeys } from '../utils/keynav.js';
 

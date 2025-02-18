@@ -1,4 +1,5 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import {
   useStyles,

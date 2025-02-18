@@ -1,4 +1,5 @@
-import { html, LitElement, PropertyValues } from 'lit';
+import type { PropertyValues } from 'lit';
+import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import {
   useStyles,
@@ -11,7 +12,7 @@ import {
 } from '@nvidia-elements/core/internal';
 import styles from './header.css?inline';
 import { GridColumn } from '../column/column.js';
-import { Grid } from '../grid.js';
+import type { Grid } from '../grid.js';
 import { GridRow } from '../row/row.js';
 import { GridCell } from '../cell/cell.js';
 
