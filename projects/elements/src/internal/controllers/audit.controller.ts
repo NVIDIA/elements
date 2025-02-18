@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { GlobalStateService } from '../services/global.service.js';
 import { LogService } from '../services/log.service.js';
 import { auditSlots, getInvalidSlotsWarning, getExcessiveInstanceLimitWarning } from '../utils/audit.js';
@@ -18,7 +19,8 @@ interface AuditRegistry {
 }
 
 export function audit<T extends Audit>(options: AuditOptions): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new AuditController(instance, options));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer((instance: T) => new AuditController(instance, options));
 }
 
 export type Audit = ReactiveElement;

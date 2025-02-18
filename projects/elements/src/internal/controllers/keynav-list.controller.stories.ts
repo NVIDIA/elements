@@ -54,9 +54,9 @@ export function KeyNavigationListControllerDemo() {
       return html`
         <p>Selected: ${this.selected}</p>
         <p>Active: ${this.active}</p>
-        <section @nve-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
+        <section @nve-key-change=${e => (this.active = e.detail.activeItem.textContent)}>
           ${Array.from(Array(10).keys()).map(i => html`<div>
-            <button ?selected=${this.selected === `${i}`} @click=${(e: any) => (this.selected = e.target.innerText)}>${i}</button>
+            <button ?selected=${this.selected === `${i}`} @click=${e => (this.selected = e.target.innerText)}>${i}</button>
           </div>`)}
         </section>`;
     }
@@ -84,9 +84,9 @@ export function KeyNavigationListControllerVerticalDemo() {
       return html`
         <p>Selected: ${this.selected}</p>
         <p>Active: ${this.active}</p>
-        <section class="vertical" @nve-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
+        <section class="vertical" @nve-key-change=${e => (this.active = e.detail.activeItem.textContent)}>
           ${Array.from(Array(10).keys()).map(i => html`<div>
-            <button ?selected=${this.selected === `${i}`} @click=${(e: any) => (this.selected = e.target.innerText)}>${i}</button>
+            <button ?selected=${this.selected === `${i}`} @click=${e => (this.selected = e.target.innerText)}>${i}</button>
           </div>`)}
         </section>
       `;
@@ -116,9 +116,9 @@ export function KeyNavigationListLoopControllerDemo() {
       return html`
         <p>Selected: ${this.selected}</p>
         <p>Active: ${this.active}</p>
-        <section class="vertical" @nve-key-change=${(e: any) => (this.active = e.detail.activeItem.textContent)}>
+        <section class="vertical" @nve-key-change=${e => (this.active = e.detail.activeItem.textContent)}>
           ${Array.from(Array(10).keys()).map(i => html`<div>
-            <button ?selected=${this.selected === `${i}`} @click=${(e: any) => (this.selected = e.target.innerText)}>${i}</button>
+            <button ?selected=${this.selected === `${i}`} @click=${e => (this.selected = e.target.innerText)}>${i}</button>
           </div>`)}
         </section>`;
     }

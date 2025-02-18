@@ -1,6 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import type { IconName } from '@nvidia-elements/core/icon';
 import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/icon/define.js';
 
@@ -141,27 +142,27 @@ describe(Icon.metadata.tag, () => {
     });
 
     await elementIsStable(element);
-    expect((customElements.get(Icon.metadata.tag) as any)._iconsRegistry['chevron-up']).toStrictEqual(
-      (customElements.get(Icon.metadata.tag) as any)._iconsRegistry['chevron']
+    expect((customElements.get(Icon.metadata.tag) as typeof Icon)['_iconsRegistry']['chevron-up']).toStrictEqual(
+      (customElements.get(Icon.metadata.tag) as typeof Icon)['_iconsRegistry']['chevron']
     );
   });
 
   it('should allow icons to be registered', async () => {
-    await (customElements.get(Icon.metadata.tag) as any).add({
+    await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
       'test-svg': { svg: () => '<svg id="test-svg"><path d=""/></svg>' }
     });
 
-    expect((customElements.get(Icon.metadata.tag) as any)._icons['test-svg']).toBeDefined();
+    expect((customElements.get(Icon.metadata.tag) as typeof Icon)._icons['test-svg']).toBeDefined();
   });
 
   it('should requestUpdate when new icon is registered', async () => {
     const spy = vi.spyOn(element, 'requestUpdate');
-    element.name = 'test-svg-request-update' as any;
+    element.name = 'test-svg-request-update' as IconName;
     await elementIsStable(element);
 
     const event = untilEvent(document, 'nve-icon-test-svg-request-update');
 
-    (customElements.get(Icon.metadata.tag) as any).add({
+    await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
       'test-svg-request-update': { svg: () => '<svg id="test-svg-request-update"><path d=""/></svg>' }
     });
 
@@ -175,7 +176,7 @@ describe(Icon.metadata.tag, () => {
       .fn()
       .mockImplementation(() => new Promise(r => r({ text: () => '<svg id="test.svg"><path d=""/></svg>' })));
 
-    element.name = 'test.svg' as any;
+    element.name = 'test.svg' as IconName;
     await elementIsStable(element);
     expect(window.fetch).toHaveBeenCalled();
     window.fetch = original;

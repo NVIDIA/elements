@@ -9,7 +9,7 @@ const statusIcons = {
   warning: 'exclamation-triangle',
   success: 'checkmark-circle',
   error: 'exclamation-circle'
-};
+} as const;
 
 /**
  * @element nve-control-message
@@ -47,7 +47,7 @@ export class ControlMessage extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <nve-icon name=${statusIcons[this.status] as any}></nve-icon>
+        <nve-icon name=${statusIcons[this.status]}></nve-icon>
         <slot></slot>
       </div>
     `;

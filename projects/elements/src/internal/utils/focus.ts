@@ -77,11 +77,11 @@ export function onListboxActivate(
 ) {
   const validKey = e => e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'ArrowDown';
 
-  element.addEventListener('pointerdown', (e: any) => {
+  element.addEventListener('pointerdown', (e: PointerEvent) => {
     e.preventDefault();
   });
 
-  element.addEventListener('pointerup', (e: any) => {
+  element.addEventListener('pointerup', (e: PointerEvent) => {
     e.preventDefault();
 
     if (!element.disabled) {
@@ -89,13 +89,13 @@ export function onListboxActivate(
     }
   });
 
-  element.addEventListener('keyup', (e: any) => {
+  element.addEventListener('keyup', (e: KeyboardEvent) => {
     if (validKey(e) && !element.disabled) {
       fn(e);
     }
   });
 
-  element.addEventListener('keydown', (e: any) => {
+  element.addEventListener('keydown', (e: KeyboardEvent) => {
     if (validKey(e) && !element.disabled) {
       e.preventDefault();
     }

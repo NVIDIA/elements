@@ -105,7 +105,11 @@ class IconDemo extends LitElement {
   }
 
   #input() {
-    this.values = Object.fromEntries(new FormData(this.#form)) as any;
+    this.values = Object.fromEntries(new FormData(this.#form)) as unknown as {
+      size: string;
+      outline: boolean;
+      direction: string;
+    };
   }
 
   async #copyIcon(iconName: string) {
@@ -190,8 +194,8 @@ export const Themes = {
 
 export const Registration = {
   render: () => html`
-    <nve-icon name=${'inference-ai-posters' as any} style="--width: 75px; --height: 75px;"></nve-icon>
-    <nve-icon name=${'automotive-vehicles-autonomous-car-side' as any} style="--width: 75px; --height: 75px;"></nve-icon>
+    <nve-icon name=${'inference-ai-posters' as unknown as IconName} style="--width: 75px; --height: 75px;"></nve-icon>
+    <nve-icon name=${'automotive-vehicles-autonomous-car-side' as unknown as IconName} style="--width: 75px; --height: 75px;"></nve-icon>
 
     <script type="module">
       customElements.get('nve-icon').add({
@@ -209,7 +213,7 @@ export const Registration = {
 export const Alias = {
   render: () => html`
     <nve-icon name="chevron"></nve-icon>
-    <nve-icon name=${'chevron-up' as any}></nve-icon>
+    <nve-icon name=${'chevron-up' as unknown as IconName}></nve-icon>
 
     <script type="module">
       customElements.get('nve-icon').alias({
@@ -221,7 +225,7 @@ export const Alias = {
 
 export const Source = {
   render: () => html`
-    <nve-icon name=${'https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg' as any} style="--width: 75px; --height: 75px;"></nve-icon>
+    <nve-icon name=${'https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg' as unknown as IconName} style="--width: 75px; --height: 75px;"></nve-icon>
   `
 }
 
@@ -798,11 +802,11 @@ export const Branding = {
   render: () => html`
     <div nve-layout="column gap:md">
       <div nve-layout="row align:wrap gap:xs">
-        ${GUI_NAMES.map(name => html`<nve-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/line/${name}.svg` as any} size="xl"></nve-icon>`)}
+        ${GUI_NAMES.map(name => html`<nve-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/line/${name}.svg` as unknown as IconName} size="xl"></nve-icon>`)}
       </div>
       <nve-divider></nve-divider>
       <div nve-layout="row align:wrap gap:xs">
-        ${GUI_NAMES.map(name => html`<nve-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/fill/${name}.svg` as any} size="xl"></nve-icon>`)}
+        ${GUI_NAMES.map(name => html`<nve-icon name=${`https://brand-assets.cne.ngc.nvidia.com/assets/icons/2.1.1/fill/${name}.svg` as unknown as IconName} size="xl"></nve-icon>`)}
       </div>
     </div>
   `

@@ -198,7 +198,7 @@ describe('appendRootNodeStyle', () => {
   it('should append stylesheet to shadow root if element is rendered in a shadow root', async () => {
     await elementIsStable(testTwo);
     await elementIsStable(testOne);
-    expect((testOne as any).shadowRoot.adoptedStyleSheets.length).toBe(1);
+    expect(testOne.shadowRoot.adoptedStyleSheets.length).toBe(1);
   });
 });
 

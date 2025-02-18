@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
@@ -6,7 +7,7 @@ import { attachInternals } from '../utils/a11y.js';
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role
  */
 export function typeButton<T extends Button>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new TypeButtonController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new TypeButtonController(instance));
 }
 
 export interface Button extends ReactiveElement {

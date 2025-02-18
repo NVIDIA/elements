@@ -1,7 +1,7 @@
 import { generateId } from '@nvidia-elements/core/internal';
 
 export interface DemoItem {
-  field1: { label: string; value: string | number };
+  field1: { label: string; value: string };
   field2: { label: string; value: string | number };
   field3: { label: string; value: string | number };
   field4: { label: string; value: string | number };
@@ -109,7 +109,7 @@ const data = {
  * demo data for stories only, provides a set of demo object that sync with the storybook data option
  */
 export function getItems(rows = 10): DemoItem[] {
-  const type = ((window as any).NVE_SB_GLOBALS?.dataTheme as '' | 'models' | 'hardware') ?? '';
+  const type = ((window as any).NVE_SB_GLOBALS?.dataTheme as '' | 'models' | 'hardware') ?? ''; // eslint-disable-line @typescript-eslint/no-explicit-any
 
   if (data[type][rows]) {
     return [...data[type][rows]];

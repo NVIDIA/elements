@@ -553,11 +553,11 @@ export const RowSort = {
 
 export function sortStringKeys<T>(list: T[], key: string, sortType: 'none' | 'ascending' | 'descending') {
   if (sortType === 'ascending') {
-    return list.sort((a: any, b: any) => a[key].localeCompare(b[key]));
+    return list.sort((a: {}, b: {}) => a[key].localeCompare(b[key]));
   }
 
   if (sortType === 'descending') {
-    return list.sort((a: any, b: any) => a[key].localeCompare(b[key])).reverse();
+    return list.sort((a: {}, b: {}) => a[key].localeCompare(b[key])).reverse();
   }
 
   return list;
@@ -570,11 +570,11 @@ class RowSortDemo extends LitElement {
 
   get items() {
     if (this.sort === 'ascending') {
-      return getItems().sort((a: any, b: any) => a.field1.value.localeCompare(b.field1.value));
+      return getItems().sort((a: { field1: { value: string } }, b: { field1: { value: string } }) => a.field1.value.localeCompare(b.field1.value));
     }
 
     if (this.sort === 'descending') {
-      return getItems().sort((a: any, b: any) => a.field1.value.localeCompare(b.field1.value)).reverse();
+      return getItems().sort((a: { field1: { value: string } }, b: { field1: { value: string } }) => a.field1.value.localeCompare(b.field1.value)).reverse();
     }
 
     return getItems();
@@ -633,7 +633,7 @@ class InfiniteScrollDemo extends LitElement {
     this.#loadGroup();
   }
 
-  #group(items: any[], size: number) {
+  #group(items: {}[], size: number) {
     return [...Array(Math.ceil(items.length / size))].map((_, i) => items.slice(size * i, size + size * i));
   }
 

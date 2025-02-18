@@ -34,7 +34,7 @@ describe(Breadcrumb.metadata.tag, () => {
 
   it('should assign elements to defined slot', async () => {
     const slot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
-    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as CustomEventInit<HTMLSlotElement>));
     await elementIsStable(element);
 
     expect(element.querySelector(IconButton.metadata.tag).slot.includes('_')).toBe(true);
@@ -44,7 +44,7 @@ describe(Breadcrumb.metadata.tag, () => {
 
   it('should decorate clickable elements with inline', async () => {
     const slot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
-    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as CustomEventInit<HTMLSlotElement>));
     await elementIsStable(element);
 
     expect(element.querySelector<IconButton>(IconButton.metadata.tag).container.includes('inline')).toBe(true);
@@ -53,7 +53,7 @@ describe(Breadcrumb.metadata.tag, () => {
 
   it('should remove wrapper slot if a child is removed', async () => {
     const slot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
-    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as CustomEventInit<HTMLSlotElement>));
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('li').length).toBe(3);
 
@@ -64,13 +64,13 @@ describe(Breadcrumb.metadata.tag, () => {
 
   it('should add wrapper slot if a child is added', async () => {
     const slot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
-    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as CustomEventInit<HTMLSlotElement>));
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('li').length).toBe(3);
 
     const button = document.createElement(Button.metadata.tag);
     element.append(button);
-    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as any));
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as CustomEventInit<HTMLSlotElement>));
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll('li').length).toBe(4);
   });

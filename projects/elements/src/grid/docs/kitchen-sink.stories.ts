@@ -42,7 +42,7 @@ interface Workflow {
 interface WorkflowColumn {
   visible: boolean;
   width?: string;
-  position?: string;
+  position?: 'fixed' | 'sticky';
 }
 
 function workflowData(rows = 100) {
@@ -84,7 +84,7 @@ class KitchenSinkDemo extends LitElement {
 
   @state() private showCreateWorkflowDialog = false;
 
-  @state() private workflowNotification: { status: string; title: string, message: string; } = null;
+  @state() private workflowNotification: { status: 'danger' | 'success'; title: string; message: string; } = null;
 
   @state() private columns: { [key: string]: WorkflowColumn } = {
     workflow: { visible: true, width: '150px', position: 'fixed' },
@@ -297,7 +297,7 @@ class KitchenSinkDemo extends LitElement {
 
   get #notification() {
     return html`
-    <nve-notification .hidden=${!this.workflowNotification} @close=${() => this.workflowNotification = null} status=${this.workflowNotification?.status as any} close-timeout="4000" position="top">
+    <nve-notification .hidden=${!this.workflowNotification} @close=${() => this.workflowNotification = null} status=${this.workflowNotification?.status} close-timeout="4000" position="top">
       <h3 nve-text="label">${this.workflowNotification?.title}</h3>
       <p nve-text="body">${this.workflowNotification?.message}</p>
     </nve-notification>`
@@ -329,7 +329,7 @@ class KitchenSinkDemo extends LitElement {
                     <input type="checkbox" aria-label="select all rows" @change=${e => this.#selectAll(e.target.checked)} />
                   </nve-checkbox>
                 </nve-grid-column>
-                ${Object.entries(this.columns).map(([name, column]) => column.visible ? html`<nve-grid-column .position=${column.position as any} .width=${column.width as any}>${name}</nve-grid-column>` : '')}
+                ${Object.entries(this.columns).map(([name, column]) => column.visible ? html`<nve-grid-column .position=${column.position} .width=${column.width}>${name}</nve-grid-column>` : '')}
                 <nve-grid-column position="fixed" width="max-content"></nve-grid-column>
               </nve-grid-header>
               ${this.filteredWorkflows.map(workflow => html`

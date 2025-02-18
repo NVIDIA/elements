@@ -523,7 +523,7 @@ class ProgressiveFilterDemo extends LitElement {
     this.#valueChange();
   }
 
-  #updateFilter(value: any, filter: { name: string, value: string }) {
+  #updateFilter(value: string, filter: { name: string, value: string }) {
     this.value = this.value.map(v => v.name === filter.name ? { ...filter, value } : v);
     this.#valueChange();
   }

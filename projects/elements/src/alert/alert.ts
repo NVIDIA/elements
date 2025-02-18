@@ -67,9 +67,9 @@ export class Alert extends LitElement {
   /** Enables internal string values to be updated for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
-  @queryAssignedElements({ slot: 'prefix', flatten: true }) private prefixItems!: any[];
+  @queryAssignedElements({ slot: 'prefix', flatten: true }) private prefixItems!: HTMLElement[];
 
-  @queryAssignedElements({ slot: 'actions', flatten: true }) private actionItems!: any[];
+  @queryAssignedElements({ slot: 'actions', flatten: true }) private actionItems!: HTMLElement[];
 
   /** @private */
   declare _internals: ElementInternals;

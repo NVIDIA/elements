@@ -1,4 +1,5 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
+import type { LegacyDecoratorTarget } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
@@ -6,7 +7,8 @@ import { attachInternals } from '../utils/a11y.js';
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current
  */
 export function stateCurrent<T extends Current>(): ClassDecorator {
-  return (target: any) => target.addInitializer((instance: T) => new StateCurrentController(instance));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer((instance: T) => new StateCurrentController(instance));
 }
 
 export type Current = ReactiveElement & { current: 'page' | 'step'; readonly?: boolean; _internals?: ElementInternals };
