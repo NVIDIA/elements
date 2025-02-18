@@ -1,4 +1,4 @@
-import { ReactiveController, ReactiveElement } from 'lit';
+import type { ReactiveController, ReactiveElement } from 'lit';
 import { removeEmptyTextNode } from '../utils/dom.js';
 import { attachInternals } from '../utils/a11y.js';
 

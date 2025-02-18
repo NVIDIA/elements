@@ -14,6 +14,7 @@ const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.ligh
 
 rulesdir.RULES_DIR = resolve(url.fileURLToPath(new URL('.', import.meta.url)), '../plugins');
 
+/** @type {import('eslint').Linter.Config[]} */
 export const litConfig = [
   {
     // files: [...source],

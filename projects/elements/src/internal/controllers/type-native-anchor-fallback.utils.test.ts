@@ -1,11 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { ComputePositionReturn } from '@floating-ui/dom';
-import {
-  PopoverConfig,
-  setPopoverStyles,
-  setArrowStyles,
-  computePopoverPosition
-} from './type-native-anchor-fallback.utils.js';
+import type { ComputePositionReturn } from '@floating-ui/dom';
+import type { PopoverConfig } from './type-native-anchor-fallback.utils.js';
+import { setPopoverStyles, setArrowStyles, computePopoverPosition } from './type-native-anchor-fallback.utils.js';
 
 describe('setPopoverStyles', () => {
   it('should use position fixed if popover has anchor attached to body', () => {

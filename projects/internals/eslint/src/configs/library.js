@@ -1,4 +1,3 @@
-import js from '@eslint/js';
 import { config } from '@weiran.zsd/multi-eslint-rule-config'; // https://github.com/eslint/eslint/issues/19013
 
 const source = ['**/src/**/*.ts', '**/src/**/*.js', '**/src/**/*.tsx', '**/src/**/*.d.ts'];
@@ -13,15 +12,8 @@ const tests = [
 const stories = ['**/*.stories.ts'];
 const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**', '**/.wireit/**'];
 
+/** @type {import('eslint').Linter.Config[]} */
 export const libraryConfig = [
-  {
-    files: [...source],
-    ignores: [...ignores],
-    rules: {
-      ...js.configs.recommended.rules,
-      'no-unused-vars': ['error', { varsIgnorePattern: 'Demo|Test|T' }]
-    }
-  },
   {
     files: [...source],
     ignores: [...ignores, ...tests, ...stories],
