@@ -18,7 +18,7 @@ const config = {
   rules: {
     ...tseslint.configs.recommended.rules,
     'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
-    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T' }],
+    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T', argsIgnorePattern: '^_' }],
     '@typescript-eslint/consistent-type-imports': ['error'],
     '@typescript-eslint/no-floating-promises': ['error'],
     '@typescript-eslint/no-explicit-any': ['error']
