@@ -150,3 +150,30 @@ export const Links = {
   </nve-tabs>
   `
 };
+
+export const OverflowTabs = {
+  render: () => html`
+    <nve-tabs behavior-select>
+      <nve-tabs-item selected>Tab 1</nve-tabs-item>
+      <nve-tabs-item>Tab 2</nve-tabs-item>
+      <nve-tabs-item>Tab 3</nve-tabs-item>
+      <nve-tabs-item>Tab 4</nve-tabs-item>
+      <nve-tabs-item>Tab 5</nve-tabs-item>
+      <nve-tabs-item>Tab 6</nve-tabs-item>
+      <nve-tabs-item>Tab 7</nve-tabs-item>
+      <nve-tabs-item>Tab 8</nve-tabs-item>
+      <nve-tabs-item>Tab 9</nve-tabs-item>
+      <nve-tabs-item>Tab 10</nve-tabs-item>
+      <nve-tabs-item>Tab 11</nve-tabs-item>
+      <nve-tabs-item>Tab 12</nve-tabs-item>
+      <nve-tabs-item>Tab 13</nve-tabs-item>
+      <nve-tabs-item>Tab 14</nve-tabs-item>
+      <nve-tabs-item>Tab 15</nve-tabs-item>
+      <nve-tabs-item>Tab 16</nve-tabs-item>
+      <nve-tabs-item>Tab 17</nve-tabs-item>
+      <nve-tabs-item>Tab 18</nve-tabs-item>
+      <nve-tabs-item>Tab 19</nve-tabs-item>
+      <nve-tabs-item>Tab 20</nve-tabs-item>
+    </nve-tabs>
+  `,
+};
