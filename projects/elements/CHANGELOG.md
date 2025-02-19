@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.27.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.26.0...@nvidia-elements/core-v1.27.0) (2025-02-19)
+
+
+### Features
+
+* **elements-react:** chat-message component ([f04bcfe](https://github.com/NVIDIA/elements/commit/f04bcfef57e081ed8b26334add24e17cf752ba33))
+* **elements:** chat message component ([00b08ab](https://github.com/NVIDIA/elements/commit/00b08ab9b943d9c2998d241a7ce214918f8b3846))
+
 ## [@nvidia-elements/core-v1.26.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.25.2...@nvidia-elements/core-v1.26.0) (2025-02-15)
 
 
