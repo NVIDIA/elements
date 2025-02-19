@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: row;
   gap: var(--gap);
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-color: var(--nve-ref-border-color-muted) var(--background, transparent);
+  scrollbar-width: thin;
 }
 
 :host([vertical]) {
@@ -34,4 +38,9 @@
 :host([borderless]) ::slotted(nve-tabs-item) {
   --border-width: 0;
   --border-height: 0;
+}
+
+::slotted(mlv-tabs-item),
+::slotted(nve-tabs-item) {
+  white-space: nowrap;
 }
