@@ -4,9 +4,14 @@
 
 [internal-host] {
   display: flex;
+  overflow: visible;
 }
 
 ::slotted(nve-avatar) {
-  margin: -6px;
+  margin-left: -6px;
   --border: 1px solid var(--nve-sys-contrast-mute-color);
+}
+
+::slotted(:first-child) {
+  margin-left: 0; /* Remove the negative margin for the first slotted nve-avatar */
 }
