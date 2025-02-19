@@ -100,10 +100,12 @@
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@internals/elements-api": "workspace:*",
+    "@nvidia-elements/playwright-screencast": "workspace:*",
     "@sentry/browser": "catalog:",
     "compare-versions": "6.1.1",
     "eslint": "catalog:",
     "markdown-it": "14.1.0",
+    "playwright": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"
   }
