@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.27.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.27.0...@nvidia-elements/core-v1.27.1) (2025-02-20)
+
+
+### Bug Fixes
+
+* **elements:** add responsive overflow to tabs ([2d8488d](https://github.com/NVIDIA/elements/commit/2d8488dc51daab5e1132e589e964447dc5ab22b9))
+
 ## [@nvidia-elements/core-v1.27.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.26.0...@nvidia-elements/core-v1.27.0) (2025-02-19)
 
 
