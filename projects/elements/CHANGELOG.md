@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.27.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.27.1...@nvidia-elements/core-v1.27.2) (2025-02-20)
+
+
+### Bug Fixes
+
+* **elements:** update nve-avatar-group css ([c18a464](https://github.com/NVIDIA/elements/commit/c18a464e705e6f69ea91530bf870caebf6baf119))
+
 ## [@nvidia-elements/core-v1.27.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.27.0...@nvidia-elements/core-v1.27.1) (2025-02-20)
 
 
