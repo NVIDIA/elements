@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.27.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.27.2...@nvidia-elements/core-v1.27.3) (2025-02-20)
+
+
+### Bug Fixes
+
+* **elements:** fix internal textarea font-size inconsistency ([f1b8171](https://github.com/NVIDIA/elements/commit/f1b81714484e3759accc4b239bf1843dcc61b892))
+
 ## [@nvidia-elements/core-v1.27.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.27.1...@nvidia-elements/core-v1.27.2) (2025-02-20)
 
 
