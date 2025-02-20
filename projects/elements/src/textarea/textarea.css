@@ -1,6 +1,6 @@
 :host {
   --padding: var(--nve-ref-size-200);
-  --font-size: var(--nve-ref-font-size-200);
+  --font-size: var(--nve-ref-font-size-100);
   --height: 100px;
   --width: 100%;
   --min-height: 100px;
