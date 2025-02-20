@@ -173,7 +173,7 @@ const BASE_HEAD = renderBaseHead({ title })
             </aside>
 
             <!-- Right Column - Content and Inputs -->
-            <div nve-layout="column gap:lg align:left align:stretch align-items:stretch">
+            <div nve-layout="column gap:lg align:left align:stretch">
               <!-- Title -->
               <div nve-text="semibold display md">
                 <span class="silver-gradient gradient-txt"> Ready to use. </span>
@@ -229,199 +229,208 @@ const BASE_HEAD = renderBaseHead({ title })
           <!--  Section 4 | Metrics Highlights -->
           <section
             class="metrics-highlights"
-            nve-layout="column row@xl align:space-between gap:lg gap@xl:xxxl pad-y:xxxl">
-            <!-- Left Column -->
-            <div nve-layout="column gap:lg align:left align:stretch">
-              <!-- Title -->
-              <div nve-text="semibold display md">
-                <span class="silver-gradient gradient-txt"> Built </span>
-                <span class="lime-cyan-gradient gradient-txt"> exceptionally </span>
-                <br />
-                <span class="silver-gradient gradient-txt"> out of the box. </span>
-              </div>
+            nve-layout="align:stretch"
+            style="position: relative; min-height: 400px;padding-top: 25vh;padding-bottom:  25vh;">
+            <nvd-starry-sky
+              style="position: absolute; top: 0; left: 0; right: 0; height: 100%; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%);"></nvd-starry-sky>
 
-              <!-- Subheading -->
-              <div nve-text="muted md regular">
-                Elements follow WCAG 2.1, are W3C spec-compliant and use the W3C interaction models when available.
-              </div>
+            <div
+              nve-layout="column row@xl align:space-between gap:lg gap@xl:xxxl"
+              style="position: relative; z-index: 2; padding: 20px;">
+              <!-- Left Column -->
 
-              <div nve-layout="column gap:lg">
-                <div class="features-grid-container">
-                  <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
-                    <nve-icon name="keyboard" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">Keyboard navigation</div>
-                  </div>
-                  <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
-                    <nve-icon name="cloud-download" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">Dynamic Imports</div>
-                  </div>
-                  <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
-                    <nve-icon name="flag" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">Internationalization</div>
-                  </div>
-                  <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
-                    <nve-icon name="meter" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">Lighthouse Performance Tested</div>
-                  </div>
-                  <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
-                    <nve-icon name="expand-details" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">Container Queries</div>
-                  </div>
-                  <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
-                    <nve-icon name="pulse" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">Automated Axe Testing</div>
-                  </div>
+              <div nve-layout="column gap:lg align:left align:stretch">
+                <!-- Title -->
+                <div nve-text="semibold display md">
+                  <span class="silver-gradient gradient-txt"> Built </span>
+                  <span class="lime-cyan-gradient gradient-txt"> exceptionally </span>
+                  <br />
+                  <span class="silver-gradient gradient-txt"> out of the box. </span>
                 </div>
 
-                <nve-button container="inline" size="lg"
-                  >Learn more about our Best Practices<nve-icon name="arrow" direction="right"></nve-icon
-                ></nve-button>
+                <!-- Subheading -->
+                <div nve-text="muted md regular">
+                  Elements follow WCAG 2.1, are W3C spec-compliant and use the W3C interaction models when available.
+                </div>
+
+                <div nve-layout="column gap:lg">
+                  <div class="features-grid-container">
+                    <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
+                      <nve-icon name="keyboard" size="lg"></nve-icon>
+                      <div nve-text="label semibold md">Keyboard navigation</div>
+                    </div>
+                    <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
+                      <nve-icon name="cloud-download" size="lg"></nve-icon>
+                      <div nve-text="label semibold md">Dynamic Imports</div>
+                    </div>
+                    <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
+                      <nve-icon name="flag" size="lg"></nve-icon>
+                      <div nve-text="label semibold md">Internationalization</div>
+                    </div>
+                    <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
+                      <nve-icon name="meter" size="lg"></nve-icon>
+                      <div nve-text="label semibold md">Lighthouse Performance Tested</div>
+                    </div>
+                    <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
+                      <nve-icon name="expand-details" size="lg"></nve-icon>
+                      <div nve-text="label semibold md">Container Queries</div>
+                    </div>
+                    <div class="feature-grid-item" nve-layout="row gap:md align:vertical-center">
+                      <nve-icon name="pulse" size="lg"></nve-icon>
+                      <div nve-text="label semibold md">Automated Axe Testing</div>
+                    </div>
+                  </div>
+
+                  <nve-button container="inline" size="lg"
+                    >Learn more about our Best Practices<nve-icon name="arrow" direction="right"></nve-icon
+                  ></nve-button>
+                </div>
               </div>
-            </div>
 
-            <!-- Right Column (Carousel) -->
-            <div class="carousel-container">
-              <div class="carousel-track">
-                <!-- TODO: Implement this with some dynamic code -->
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
+              <!-- Right Column (Carousel) -->
+              <div class="carousel-container">
+                <div class="carousel-track">
+                  <!-- TODO: Implement this with some dynamic code -->
+                  <a
+                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
+                    target="_blank"
+                    class="carousel-link">
+                    <div class="carousel-card">
+                      <div class="big-number">96</div>
+                      <div class="text-container">
+                        <div class="title">Total Components</div>
+                        <div class="label">Browse our component offerings</div>
+                      </div>
+                      <nve-icon-button class="arrow-button" icon-name="arrow-angle" size="sm"></nve-icon-button>
                     </div>
-                    <nve-icon-button class="arrow-button" icon-name="arrow-angle" size="sm"></nve-icon-button>
-                  </div>
-                </a>
+                  </a>
 
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
+                  <a
+                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
+                    target="_blank"
+                    class="carousel-link">
+                    <div class="carousel-card">
+                      <div class="big-number">96</div>
+                      <div class="text-container">
+                        <div class="title">Total Components</div>
+                        <div class="label">Browse our component offerings</div>
+                      </div>
+                      <nve-icon-button
+                        class="arrow-button"
+                        icon-name="arrow-angle"
+                        size="sm"
+                        container="inline"></nve-icon-button>
                     </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
+                  </a>
 
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
+                  <a
+                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
+                    target="_blank"
+                    class="carousel-link">
+                    <div class="carousel-card">
+                      <div class="big-number">96</div>
+                      <div class="text-container">
+                        <div class="title">Total Components</div>
+                        <div class="label">Browse our component offerings</div>
+                      </div>
+                      <nve-icon-button
+                        class="arrow-button"
+                        icon-name="arrow-angle"
+                        size="sm"
+                        container="inline"></nve-icon-button>
                     </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
+                  </a>
 
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
+                  <a
+                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
+                    target="_blank"
+                    class="carousel-link">
+                    <div class="carousel-card">
+                      <div class="big-number">96</div>
+                      <div class="text-container">
+                        <div class="title">Total Components</div>
+                        <div class="label">Browse our component offerings</div>
+                      </div>
+                      <nve-icon-button
+                        class="arrow-button"
+                        icon-name="arrow-angle"
+                        size="sm"
+                        container="inline"></nve-icon-button>
                     </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
+                  </a>
 
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
+                  <a
+                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
+                    target="_blank"
+                    class="carousel-link">
+                    <div class="carousel-card">
+                      <div class="big-number">96</div>
+                      <div class="text-container">
+                        <div class="title">Total Components</div>
+                        <div class="label">Browse our component offerings</div>
+                      </div>
+                      <nve-icon-button
+                        class="arrow-button"
+                        icon-name="arrow-angle"
+                        size="sm"
+                        container="inline"></nve-icon-button>
                     </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
+                  </a>
 
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
+                  <a
+                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
+                    target="_blank"
+                    class="carousel-link">
+                    <div class="carousel-card">
+                      <div class="big-number">96</div>
+                      <div class="text-container">
+                        <div class="title">Total Components</div>
+                        <div class="label">Browse our component offerings</div>
+                      </div>
+                      <nve-icon-button
+                        class="arrow-button"
+                        icon-name="arrow-angle"
+                        size="sm"
+                        container="inline"></nve-icon-button>
                     </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
+                  </a>
 
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
+                  <a
+                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
+                    target="_blank"
+                    class="carousel-link">
+                    <div class="carousel-card">
+                      <div class="big-number">96</div>
+                      <div class="text-container">
+                        <div class="title">Total Components</div>
+                        <div class="label">Browse our component offerings</div>
+                      </div>
+                      <nve-icon-button
+                        class="arrow-button"
+                        icon-name="arrow-angle"
+                        size="sm"
+                        container="inline"></nve-icon-button>
                     </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
+                  </a>
 
-                <a
-                  href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                  target="_blank"
-                  class="carousel-link">
-                  <div class="carousel-card">
-                    <div class="big-number">96</div>
-                    <div class="text-container">
-                      <div class="title">Total Components</div>
-                      <div class="label">Browse our component offerings</div>
+                  <a
+                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
+                    target="_blank"
+                    class="carousel-link">
+                    <div class="carousel-card">
+                      <div class="big-number">96</div>
+                      <div class="text-container">
+                        <div class="title">Total Components</div>
+                        <div class="label">Browse our component offerings</div>
+                      </div>
+                      <nve-icon-button
+                        class="arrow-button"
+                        icon-name="arrow-angle"
+                        size="sm"
+                        container="inline"></nve-icon-button>
                     </div>
-                    <nve-icon-button
-                      class="arrow-button"
-                      icon-name="arrow-angle"
-                      size="sm"
-                      container="inline"></nve-icon-button>
-                  </div>
-                </a>
+                  </a>
+                </div>
               </div>
             </div>
           </section>
@@ -559,111 +568,47 @@ const BASE_HEAD = renderBaseHead({ title })
             </div>
             <!--  Starters  -->
             <div nve-layout="grid gap:md align-items:stretch span-items:12 span-items@md:6 span-items@lg:4">
-              <div
-                class="glassmorphic"
-                nve-layout="column gap:lg align:stretch"
-                style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg'); 
-                  background: linear-gradient(180deg, rgba(240, 116, 144, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);">
-                <div nve-layout="row align:center">
-                  <div class="entity-logo">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
-                      alt="HTML5 Logo" />
-                  </div>
-                  <nve-button class="glass-button" style="margin-left: auto"
-                    >Clone template<nve-icon name="arrow-angle" size="sm"></nve-icon
-                  ></nve-button>
-                </div>
-                <div class="glassmorphic-title">MPA Starter</div>
-              </div>
-              <div
-                class="glassmorphic"
-                nve-layout="column gap:lg align:stretch"
-                style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg'); 
-                background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(221, 0, 49, 0.10) 0%, rgba(221, 0, 49, 0.10) 100%), rgba(255, 255, 255, 0.05);
-        
-        ;">
-                <div nve-layout="row align:center">
-                  <div class="entity-logo">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg"
-                      alt="Angular Logo" />
-                  </div>
-                  <nve-button class="glass-button" style="margin-left: auto"
-                    >Clone template<nve-icon name="arrow-angle" size="sm"></nve-icon
-                  ></nve-button>
-                </div>
-                <div class="glassmorphic-title">Angular</div>
-              </div>
-              <div
-                class="glassmorphic"
-                nve-layout="column gap:lg align:stretch"
-                style="--before-bg: url('https://nextjs.org/static/favicon/favicon-32x32.png'); 
-                            background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05);
-        ">
-                <div nve-layout="row align:center">
-                  <div class="entity-logo">
-                    <img src="https://nextjs.org/static/favicon/favicon-32x32.png" alt="Next.js Logo" />
-                  </div>
-                  <nve-button class="glass-button" style="margin-left: auto"
-                    >Clone template<nve-icon name="arrow-angle" size="sm"></nve-icon
-                  ></nve-button>
-                </div>
-                <div class="glassmorphic-title">Next.js</div>
-              </div>
-              <div
-                class="glassmorphic"
-                nve-layout="column gap:lg align:stretch"
-                style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg'); 
-                background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(97, 218, 251, 0.10) 0%, rgba(97, 218, 251, 0.10) 100%), rgba(255, 255, 255, 0.05);
-        
-        ;">
-                <div nve-layout="row align:center">
-                  <div class="entity-logo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React Logo" />
-                  </div>
-                  <nve-button class="glass-button" style="margin-left: auto"
-                    >Clone template<nve-icon name="arrow-angle" size="sm"></nve-icon
-                  ></nve-button>
-                </div>
-                <div class="glassmorphic-title">React</div>
-              </div>
-              <div
-                class="glassmorphic"
-                nve-layout="column gap:lg align:stretch"
-                style="--before-bg: url('https://www.11ty.dev/img/logo-github.svg'); 
-                  background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05);
-        
-        ">
-                <div nve-layout="row align:center">
-                  <div class="entity-logo">
-                    <img src="https://www.11ty.dev/img/logo-github.svg" alt="Eleventy Logo" />
-                  </div>
-                  <nve-button class="glass-button" style="margin-left: auto"
-                    >Clone template<nve-icon name="arrow-angle" size="sm"></nve-icon
-                  ></nve-button>
-                </div>
-                <div class="glassmorphic-title">Eleventy</div>
-              </div>
-              <div
-                class="glassmorphic"
-                nve-layout="column gap:lg align:stretch span:4"
-                style="--before-bg: url('https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg'); 
-                background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(65, 184, 131, 0.10) 0%, rgba(65, 184, 131, 0.10) 100%), rgba(255, 255, 255, 0.05);
-        
-        ">
-                <div nve-layout="row align:center">
-                  <div class="entity-logo">
-                    <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg"
-                      alt="Vue.js Logo" />
-                  </div>
-                  <nve-button class="glass-button" style="margin-left: auto"
-                    >Clone template<nve-icon name="arrow-angle" size="sm"></nve-icon
-                  ></nve-button>
-                </div>
-                <div class="glassmorphic-title">Vue</div>
-              </div>
+              <nvd-glassmorphic-card
+                logo-src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
+                logo-alt="HTML5 Logo"
+                title="MPA Starter"
+                before-bg="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
+                background="linear-gradient(180deg, rgba(240, 116, 144, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%)"></nvd-glassmorphic-card>
+
+              <nvd-glassmorphic-card
+                logo-src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg"
+                logo-alt="Angular Logo"
+                title="Angular"
+                before-bg="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg"
+                background="linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(221, 0, 49, 0.10) 0%, rgba(221, 0, 49, 0.10) 100%), rgba(255, 255, 255, 0.05)"></nvd-glassmorphic-card>
+
+              <nvd-glassmorphic-card
+                logo-src="https://nextjs.org/static/favicon/favicon-32x32.png"
+                logo-alt="Next.js Logo"
+                title="Next.js"
+                before-bg="https://nextjs.org/static/favicon/favicon-32x32.png"
+                background="linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05)"></nvd-glassmorphic-card>
+
+              <nvd-glassmorphic-card
+                logo-src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+                logo-alt="React Logo"
+                title="React"
+                before-bg="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+                background="linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(97, 218, 251, 0.10) 0%, rgba(97, 218, 251, 0.10) 100%), rgba(255, 255, 255, 0.05)"></nvd-glassmorphic-card>
+
+              <nvd-glassmorphic-card
+                logo-src="https://www.11ty.dev/img/logo-github.svg"
+                logo-alt="Eleventy Logo"
+                title="Eleventy"
+                before-bg="https://www.11ty.dev/img/logo-github.svg"
+                background="linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05)"></nvd-glassmorphic-card>
+
+              <nvd-glassmorphic-card
+                logo-src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg"
+                logo-alt="Vue.js Logo"
+                title="Vue"
+                before-bg="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg"
+                background="linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(65, 184, 131, 0.10) 0%, rgba(65, 184, 131, 0.10) 100%), rgba(255, 255, 255, 0.05)"></nvd-glassmorphic-card>
             </div>
           </section>
 

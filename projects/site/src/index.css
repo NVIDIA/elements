@@ -2,6 +2,12 @@ nve-page {
   --background: var(--nve-sys-layer-shell-background);
 }
 
+nve-page-header {
+  --background: transparent;
+  -webkit-backdrop-filter: blur(0.625rem);
+  backdrop-filter: blur(0.625rem);
+}
+
 #main-slot {
   width: 100%;
 }
@@ -62,6 +68,58 @@ nve-logo {
 }
 
 /* Theme Widget */
+
+/* Stars Background */
+
+.stars-wrapper {
+  position: relative;
+  pointer-events: none;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(#16161d, #1f1f3a, #3b2f4a);
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: twinkle var(--twinkle-duration) ease-in-out infinite;
+
+  &:nth-child(2) {
+    animation-delay: calc(var(--twinkle-duration) * -0.33);
+  }
+  &:nth-child(3) {
+    animation-delay: calc(var(--twinkle-duration) * -0.66);
+  }
+
+  @keyframes twinkle {
+    25% {
+      opacity: 0;
+    }
+  }
+}
+
+.star {
+  fill: white;
+
+  &:nth-child(3n) {
+    opacity: 0.8;
+  }
+  &:nth-child(7n) {
+    opacity: 0.6;
+  }
+  &:nth-child(13n) {
+    opacity: 0.4;
+  }
+  &:nth-child(19n) {
+    opacity: 0.2;
+  }
+}
+
+/* Floating Element Container */
 .floating-element-container {
   position: relative;
   width: 460px;
@@ -72,7 +130,7 @@ nve-logo {
 
 .floating-element {
   position: absolute;
-  animation: float 4s ease-in-out infinite;
+
   pointer-events: auto;
 }
 
@@ -80,7 +138,6 @@ nve-logo {
   top: 0px;
   left: 0px;
   position: absolute;
-  animation-delay: 0s;
 }
 
 /* Group with left: 40px */
@@ -89,21 +146,18 @@ nve-logo {
   left: 40px;
   width: 240px;
   position: absolute;
-  animation-delay: 0.2s;
 }
 
 .floating-element-container nve-button-group {
   top: 488px;
   left: 40px;
   position: absolute;
-  animation-delay: 0.6s;
 }
 
 .floating-element-container .stat {
   top: 400px;
   left: 40px;
   position: absolute;
-  animation-delay: 0.6s;
 }
 
 /* Group with left: 320px */
@@ -111,14 +165,12 @@ nve-logo {
   top: 60px;
   left: 320px;
   position: absolute;
-  animation-delay: 0.3s;
 }
 
 .floating-element-container nve-select {
   top: 140px;
   left: 320px;
   position: absolute;
-  animation-delay: 0.5s;
 }
 
 /* Single element at left: 400px */
@@ -126,7 +178,6 @@ nve-logo {
   top: 76px;
   left: 400px;
   position: absolute;
-  animation-delay: 0.4s;
 }
 
 /* Metrics Highlights */
@@ -137,14 +188,18 @@ nve-logo {
 }
 
 .feature-grid-item {
-  border: 1px solid var(--nve-ref-border-color-muted);
   border-radius: var(--nve-ref-border-radius-lg);
   padding: var(--nve-ref-size-400);
+  border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  background: linear-gradient(113deg, rgba(24, 26, 32, 0.75) 4.87%, #0b0c0f 75.88%);
+  box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.15) inset;
+  backdrop-filter: blur(5px);
 }
 
 .metrics-highlights {
   position: relative;
   overflow: visible;
+  min-height: 400px;
 }
 
 .carousel-container {
@@ -242,84 +297,6 @@ nve-logo {
 }
 
 /* Starters */
-.glassmorphic {
-  height: 180px;
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  position: relative;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  overflow: hidden;
-}
-
-.glassmorphic::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 150px;
-  height: 150px;
-  background: var(--before-bg) center/contain no-repeat;
-  transform: translate(-50%, -50%);
-  filter: blur(7px);
-  opacity: 0.7;
-  z-index: -1;
-}
-
-.html-bg {
-  background: linear-gradient(180deg, rgba(240, 116, 144, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%);
-  --before-bg: url('https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg');
-}
-
-.angular-bg {
-  background: linear-gradient(0deg, rgba(221, 0, 49, 0.1) 0%, rgba(221, 0, 49, 0.1) 100%);
-  --before-bg: url('https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg');
-}
-
-.nextjs-bg {
-  background: linear-gradient(0deg, rgba(31, 31, 31, 0.1) 0%, rgba(31, 31, 31, 0.1) 100%);
-  --before-bg: url('https://nextjs.org/static/favicon/favicon-32x32.png');
-}
-
-.react-bg {
-  background: linear-gradient(0deg, rgba(97, 218, 251, 0.1) 0%, rgba(97, 218, 251, 0.1) 100%);
-  --before-bg: url('https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg');
-}
-
-.eleventy-bg {
-  background: linear-gradient(0deg, rgba(31, 31, 31, 0.1) 0%, rgba(31, 31, 31, 0.1) 100%);
-  --before-bg: url('https://www.11ty.dev/img/logo-github.svg');
-}
-
-.vue-bg {
-  background: linear-gradient(0deg, rgba(65, 184, 131, 0.1) 0%, rgba(65, 184, 131, 0.1) 100%);
-  --before-bg: url('https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg');
-}
-
-.entity-logo {
-  width: 50px;
-  height: 50px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.entity-logo img {
-  width: 36px;
-}
-
-.glassmorphic-title {
-  margin-left: 12px;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  flex-grow: 1;
-}
-
 /* Stay in the Loop */
 .contact-container {
   display: grid;
@@ -331,7 +308,7 @@ nve-logo {
   display: grid;
   grid-template-rows: subgrid;
   grid-row: 1/4;
-  border: 1px solid var(--nve-ref-border-color-muted);
+  border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   border-radius: var(--nve-ref-border-radius-lg);
   background: linear-gradient(113deg, rgba(24, 26, 32, 0.75) 4.87%, #0b0c0f 75.88%);
   box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.15) inset;
@@ -350,15 +327,5 @@ nve-logo {
   }
   100% {
     transform: translateX(calc(-250px * 6)); /* Card width * (number of unique cards) */
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
   }
 }
