@@ -1140,7 +1140,7 @@
       ]
     },
     "lint:eslint": {
-      "command": "eslint -c ./eslint.config.js",
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
       "files": [
         "src/**/*.ts",
         "eslint.config.js",

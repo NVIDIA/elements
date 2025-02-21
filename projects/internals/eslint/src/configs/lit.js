@@ -7,18 +7,23 @@ import wc from 'eslint-plugin-wc';
 import rulesdir from 'eslint-plugin-rulesdir';
 import * as url from 'url';
 
-const source = ['**/src/**/*.ts', '**/src/**/*.tsx', '**/src/**/*.d.ts'];
-const tests = ['**/src/test/*.ts', '**/*.test.ts', '**/*.test.axe.ts', '**/*.test.ssr.ts'];
+const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
+const tests = [
+  'src/test/*.ts',
+  '**/*.test.ts',
+  '**/*.test.visual.ts',
+  '**/*.test.lighthouse.ts',
+  '**/*.test.axe.ts',
+  '**/*.test.ssr.ts'
+];
 const stories = ['**/*.stories.ts'];
-const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**', '**/.wireit/**'];
+const ignores = ['node_modules/', 'coverage/', 'dist/', 'build/', '.visual/', '.lighthouse/', '.wireit/'];
 
 rulesdir.RULES_DIR = resolve(url.fileURLToPath(new URL('.', import.meta.url)), '../plugins');
 
 /** @type {import('eslint').Linter.Config[]} */
 export const litConfig = [
   {
-    // files: [...source],
-    // ignores: [...ignores, ...tests, ...stories],
     files: [...source, ...tests, ...stories],
     ignores,
     plugins: {
