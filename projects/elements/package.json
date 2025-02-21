@@ -966,8 +966,6 @@
         "dist/**",
         "!dist/inter.css",
         "!dist/inter.woff",
-        "!dist/elements.html-data.json",
-        "!dist/elements.css-vars.json",
         "!dist/data.snippets.json"
       ],
       "dependencies": [
