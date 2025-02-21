@@ -1,12 +1,12 @@
 import js from '@eslint/js';
 import globals from 'globals';
 
-const source = ['**/src/**/*.js'];
-const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**', '**/.wireit/**'];
+const source = ['src/**/*.js'];
+const ignores = ['node_modules/', 'coverage/', 'dist/', 'build/', '.visual/', '.lighthouse/', '.wireit/'];
 
 const config = {
   files: [...source],
-  ignores: [...ignores],
+  ignores,
   rules: {
     ...js.configs.recommended.rules,
     'no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T' }]
@@ -15,6 +15,9 @@ const config = {
 
 /** @type {import('eslint').Linter.Config[]} */
 export const browserJavaScriptConfig = [
+  {
+    ignores
+  },
   {
     ...config,
     languageOptions: {
@@ -25,6 +28,9 @@ export const browserJavaScriptConfig = [
 
 /** @type {import('eslint').Linter.Config[]} */
 export const nodeJavaScriptConfig = [
+  {
+    ignores
+  },
   {
     ...config,
     languageOptions: {
