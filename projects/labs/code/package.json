@@ -30,7 +30,11 @@
   "exports": {
     "./package.json": "./package.json",
     "./custom-elements.json": "./dist/custom-elements.json",
+    "./custom-elements-jsx": {
+      "types": "./dist/custom-elements-jsx.d.ts"
+    },
     "./data.html.json": "./dist/data.html.json",
+    "./data.snippets.json": "./dist/data.snippets.json",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
@@ -217,7 +221,8 @@
         "vite.config.ts"
       ],
       "output": [
-        "dist/**"
+        "dist/**",
+        "!dist/data.snippets.json"
       ],
       "dependencies": [
         "build:snippets",
@@ -238,7 +243,7 @@
         "**/*.snippets.html"
       ],
       "output": [
-        "dist/snippets.json"
+        "dist/data.snippets.json"
       ]
     },
     "test": {
