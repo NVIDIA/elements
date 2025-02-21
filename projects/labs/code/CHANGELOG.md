@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.2.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.3...@nvidia-elements/code-v0.2.4) (2025-02-21)
+
+
+### Bug Fixes
+
+* **labs-code:** add missing exports ([d4e0461](https://github.com/NVIDIA/elements/commit/d4e0461602e64a311d4672d5aa1cba88a1dd5b00))
+
 ## [@nvidia-elements/code-v0.2.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.2...@nvidia-elements/code-v0.2.3) (2024-10-14)
 
 
