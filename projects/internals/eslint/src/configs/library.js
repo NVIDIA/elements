@@ -1,8 +1,8 @@
 import { config } from '@weiran.zsd/multi-eslint-rule-config'; // https://github.com/eslint/eslint/issues/19013
 
-const source = ['**/src/**/*.ts', '**/src/**/*.js', '**/src/**/*.tsx', '**/src/**/*.d.ts'];
+const source = ['src/**/*.ts', 'src/**/*.js', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
-  '**/src/test/*.ts',
+  'src/test/*.ts',
   '**/*.test.ts',
   '**/*.test.visual.ts',
   '**/*.test.lighthouse.ts',
@@ -10,7 +10,7 @@ const tests = [
   '**/*.test.ssr.ts'
 ];
 const stories = ['**/*.stories.ts'];
-const ignores = ['**/node_modules/**', '**/dist/**', '**/coverage/**', '**/.lighthouse/**', '**/.wireit/**'];
+const ignores = ['node_modules/', 'coverage/', 'dist/', 'build/', '.visual/', '.lighthouse/', '.wireit/'];
 
 /** @type {import('eslint').Linter.Config[]} */
 export const libraryConfig = [
