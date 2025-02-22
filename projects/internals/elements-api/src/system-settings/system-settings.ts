@@ -30,21 +30,37 @@ export class SystemSettings extends LitElement {
 
   static styles = useStyles([styles]);
 
+  #updatePreferences(event: Event) {
+    const preferences = Object.fromEntries((event.target as unknown as { value: FormData }).value);
+    console.log(preferences);
+    this.#writeGlobals({
+      theme: preferences['color-scheme'] as string,
+      scale: preferences['scale'] === 'default' ? '' : (preferences['scale'] as string),
+      animation: preferences['reduced-motion'] === 'true' ? 'reduced-motion' : ''
+    });
+  }
+
   render() {
     return html`
       <form internal-host>
-        <nve-select style="--background: transparent; --min-width: 170px">
-          <label>Theme</label>
-          <select size="6" @change=${e => this.#writeGlobals({ theme: e.target.value })}>
-            <option ?selected=${this.#globals.theme === 'light'} value="light">Light</option>
-            <option ?selected=${this.#globals.theme === 'dark'} value="dark">Dark</option>
-            <option ?selected=${this.#globals.theme === 'high-contrast'} value="high-contrast">High Contrast</option>
-            <option ?selected=${this.#globals.theme === ''} value="ddb-dark">DDB Dark (experimental)</option>
-            <option ?selected=${this.#globals.theme === 'brand'} value="brand">Brand (experimental)</option>
-            <option ?selected=${this.#globals.theme === 'brand-dark'} value="brand-dark">Brand Dark (experimental)</option>
+        <nve-preferences-input
+          @change=${e => this.#updatePreferences(e)}
+          .value=${{
+            'color-scheme': this.#globals.theme,
+            'reduced-motion': this.#globals.animation === 'reduced-motion',
+            scale: this.#globals.scale === '' ? 'default' : this.#globals.scale
+          }}></nve-preferences-input>
+        <nve-divider></nve-divider>
+        <nve-select container="flat" style="--border-bottom: 0; --min-width: 170px">
+          <label>Experimental Themes</label>
+          <select size="3" .value=${this.#globals.theme} @change=${e => this.#writeGlobals({ theme: e.target.value })}>
+            <option ?selected=${this.#globals.theme === 'ddb-dark'} value="ddb-dark">DDB Dark</option>
+            <option ?selected=${this.#globals.theme === 'brand'} value="brand">Brand</option>
+            <option ?selected=${this.#globals.theme === 'brand-dark'} value="brand-dark">Brand Dark</option>
           </select>
         </nve-select>
-        <nve-select style="--background: transparent; --min-width: 170px">
+        <nve-divider></nve-divider>
+        <nve-select container="flat" style="--border-bottom: 0; --min-width: 170px">
           <label>Data</label>
           <nve-icon-button slot="label" popovertarget="demo-data-tooltip" size="sm" container="flat" icon-name="information-circle-stroke" style="--height: 12px"></nve-icon-button>
           <select size="3" @change=${e => this.#writeGlobals({ dataTheme: e.target.value })}>
@@ -53,7 +69,8 @@ export class SystemSettings extends LitElement {
             <option ?selected=${this.#globals.dataTheme === 'hardware'} value="hardware">Hardware</option>
           </select>
         </nve-select>
-        <nve-select style="--background: transparent; --min-width: 170px">
+        <nve-divider></nve-divider>
+        <nve-select container="flat" style="--border-bottom: 0; --min-width: 170px">
           <label>Font</label>
           <select size="3" @change=${e => this.#writeGlobals({ font: e.target.value })}>
             <option ?selected=${this.#globals.font === ''} value="">Default</option>
@@ -61,16 +78,9 @@ export class SystemSettings extends LitElement {
             <option ?selected=${this.#globals.font === 'nvidia-sans'} value="nvidia-sans">NVIDIA Sans</option>
           </select>
         </nve-select>
+        <nve-divider></nve-divider>
         <nve-switch-group>
-          <label>Options ${this.#globals.scale}</label>
-          <nve-switch>
-            <label>Compact</label>
-            <input type="checkbox" value="compact" .checked=${this.#globals.scale === 'compact'} @change=${e => this.#writeGlobals({ scale: e.target.checked ? 'compact' : '' })} />
-          </nve-switch>
-          <nve-switch>
-            <label>Reduced Motion</label>
-            <input type="checkbox" value="reduced-motion" .checked=${this.#globals.animation === 'reduced-motion'} @change=${e => this.#writeGlobals({ animation: e.target.checked ? 'reduced-motion' : '' })} />
-          </nve-switch>
+          <label>Variants</label>
           <nve-switch>
             <label>Debug</label>
             <input type="checkbox" value="debug" .checked=${this.#globals.debug === 'debug'} @change=${e => this.#writeGlobals({ debug: e.target.checked ? 'debug' : '' })} />
@@ -83,6 +93,7 @@ export class SystemSettings extends LitElement {
 
   #writeGlobals(update: Record<string, string>) {
     const globals = { ...this.#globals, ...update };
+    console.log(globals);
     const themes = [
       globals.theme,
       globals.font,

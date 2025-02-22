@@ -142,7 +142,7 @@ export class PreferencesInput extends LitElement {
     return html`
       <div internal-host>
         <nve-control>
-          <label>${this.i18n.theme}</label>
+          <label>${this.i18n.colorScheme}</label>
           <nve-menu nve-control>
           ${colorSchemes.map(
             value => html`
