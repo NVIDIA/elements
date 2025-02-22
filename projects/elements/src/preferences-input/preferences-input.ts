@@ -10,29 +10,29 @@ import { Divider } from '@nvidia-elements/core/divider';
 import { Menu, MenuItem } from '@nvidia-elements/core/menu';
 import { Switch } from '@nvidia-elements/core/switch';
 
-export type ThemeName = 'auto' | 'light' | 'dark' | 'high-contrast';
-export type ThemeScale = 'default' | 'compact' | 'relaxed';
-export type ThemeVariant = 'reduced-motion';
+export type ColorScheme = 'auto' | 'light' | 'dark' | 'high-contrast';
+export type Scale = 'default' | 'compact' | 'relaxed';
+export type Variant = 'reduced-motion';
 
-const themeNames: ThemeName[] = ['auto', 'light', 'dark', 'high-contrast'];
-const themeScales: ThemeScale[] = ['default', 'compact'];
-const themeIcons = {
+const colorSchemes: ColorScheme[] = ['auto', 'light', 'dark', 'high-contrast'];
+const scales: Scale[] = ['default', 'compact'];
+const colorSchemesIcons = {
   auto: 'computer',
   light: 'sun',
   dark: 'moon',
   'high-contrast': 'circle-half'
-} satisfies Record<ThemeName, IconName>;
+} satisfies Record<ColorScheme, IconName>;
 
-function getActiveThemes(element = globalThis.document.documentElement) {
+function getActivePreferences(element = globalThis.document.documentElement) {
   const computedStyle = getComputedStyle(element);
 
   return {
-    light: computedStyle.getPropertyValue('--nve-config-light') === 'true',
-    dark: computedStyle.getPropertyValue('--nve-config-dark') === 'true',
-    'high-contrast': computedStyle.getPropertyValue('--nve-config-high-contrast') === 'true',
-    compact: computedStyle.getPropertyValue('--nve-config-compact') === 'true',
+    light: computedStyle.getPropertyValue('--nve-config-color-scheme-light') === 'true',
+    dark: computedStyle.getPropertyValue('--nve-config-color-scheme-dark') === 'true',
+    'high-contrast': computedStyle.getPropertyValue('--nve-config-color-scheme-high-contrast') === 'true',
+    compact: computedStyle.getPropertyValue('--nve-config-scale-compact') === 'true',
     'reduced-motion': computedStyle.getPropertyValue('--nve-config-reduced-motion') === 'true'
-  } satisfies Partial<Record<ThemeName | ThemeScale | ThemeVariant, boolean>>;
+  } satisfies Partial<Record<ColorScheme | Scale | Variant, boolean>>;
 }
 
 /**
@@ -49,14 +49,14 @@ function getActiveThemes(element = globalThis.document.documentElement) {
  */
 export class PreferencesInput extends LitElement {
   /**
-   * The name for the theme settings, required to associate it with a form.
+   * The name for the preference settings, required to associate it with a form.
    */
   @property({ type: String }) name: string;
 
   #value = new FormData();
 
   /**
-   * The current theme settings.
+   * The current preferences settings.
    */
   @property({ type: Object })
   get value(): Object {
@@ -122,7 +122,7 @@ export class PreferencesInput extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  @state() private activeThemes: ReturnType<typeof getActiveThemes> = {
+  @state() private activePreferences: ReturnType<typeof getActivePreferences> = {
     light: false,
     dark: false,
     'high-contrast': false,
@@ -132,7 +132,7 @@ export class PreferencesInput extends LitElement {
 
   constructor() {
     super();
-    this.#value.set('theme', 'auto');
+    this.#value.set('color-scheme', 'auto');
     this.#value.set('scale', 'default');
     this.#value.set('reduced-motion', 'false');
     attachInternals(this);
@@ -144,27 +144,27 @@ export class PreferencesInput extends LitElement {
         <nve-control>
           <label>${this.i18n.theme}</label>
           <nve-menu nve-control>
-          ${themeNames.map(
+          ${colorSchemes.map(
             value => html`
             <nve-menu-item
-              .selected=${this.#value.get('theme') === value}
+              .selected=${this.#value.get('color-scheme') === value}
               .value=${value}
-              @click=${() => this.#setTheme(value)}
+              @click=${() => this.#setColorScheme(value)}
             >
-              <nve-icon name=${themeIcons[value]}></nve-icon> ${value}
+              <nve-icon name=${colorSchemesIcons[value]}></nve-icon> ${value}
             </nve-menu-item>
             `
           )}
           </nve-menu>
         </nve-control>
         ${
-          this.activeThemes['compact']
+          this.activePreferences['compact']
             ? html`
         <nve-divider></nve-divider>
         <nve-control>
           <label>${this.i18n.scale}</label>
           <nve-menu nve-control>
-          ${themeScales.map(
+          ${scales.map(
             value => html`
             <nve-menu-item
               .selected=${this.#value.get('scale') === value}
@@ -181,7 +181,7 @@ export class PreferencesInput extends LitElement {
             : ''
         }
         ${
-          this.activeThemes['reduced-motion']
+          this.activePreferences['reduced-motion']
             ? html`
         <nve-divider></nve-divider>
         <nve-switch>
@@ -206,7 +206,7 @@ export class PreferencesInput extends LitElement {
 
   updated(props: PropertyValues<this>) {
     super.updated(props);
-    this.#updateTheme();
+    this.#updatePreferences();
   }
 
   checkValidity() {
@@ -217,15 +217,15 @@ export class PreferencesInput extends LitElement {
     this._internals.reportValidity();
   }
 
-  #updateTheme() {
-    const themes = getActiveThemes();
-    if (JSON.stringify(this.activeThemes) !== JSON.stringify(themes)) {
-      this.activeThemes = themes;
+  #updatePreferences() {
+    const preferences = getActivePreferences();
+    if (JSON.stringify(this.activePreferences) !== JSON.stringify(preferences)) {
+      this.activePreferences = preferences;
     }
   }
 
   #ensureFormValue(value: FormData) {
-    value.set('theme', value.get('theme') ?? 'auto');
+    value.set('color-scheme', value.get('color-scheme') ?? 'auto');
     value.set('scale', value.get('scale') ?? 'default');
     value.set('reduced-motion', value.get('reduced-motion') ?? 'false');
 
@@ -235,19 +235,19 @@ export class PreferencesInput extends LitElement {
   #parseFormValue(value: Object) {
     const parsedValueAsFormData = new FormData();
 
-    parsedValueAsFormData.set('theme', value['theme'] ?? 'auto');
+    parsedValueAsFormData.set('color-scheme', value['color-scheme'] ?? 'auto');
     parsedValueAsFormData.set('scale', value['scale'] ?? 'default');
     parsedValueAsFormData.set('reduced-motion', value['reduced-motion'] ?? 'false');
 
     return parsedValueAsFormData;
   }
 
-  #setTheme(value: ThemeName) {
-    this.#value.set('theme', value);
+  #setColorScheme(value: ColorScheme) {
+    this.#value.set('color-scheme', value);
     this.#update();
   }
 
-  #setScale(value: ThemeScale) {
+  #setScale(value: Scale) {
     this.#value.set('scale', value);
     this.#update();
   }
@@ -267,7 +267,7 @@ export class PreferencesInput extends LitElement {
   #updateFormValue() {
     const formData = new FormData();
 
-    formData.append(`${this.name}-theme`, this.#value.get('theme'));
+    formData.append(`${this.name}-color-scheme`, this.#value.get('color-scheme'));
     formData.append(`${this.name}-scale`, this.#value.get('scale'));
     formData.append(`${this.name}-reduced-motion`, this.#value.get('reduced-motion'));
 
