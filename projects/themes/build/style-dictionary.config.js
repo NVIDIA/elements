@@ -109,7 +109,9 @@ StyleDictionary.registerFormat({
     const selector =
       options.theme !== 'index'
         ? `[nve-theme*='${options.theme}'], [mlv-theme*='${options.theme}']`
-        : `:root, [nve-theme~='light'], [mlv-theme~='light']`;
+        : `:root, [nve-theme~='light'], [mlv-theme~='light']`; // todo
+    const config = dictionary.allTokens.filter(t => t.name.includes('config') && !t.name.includes('experimental'));
+    const configString = `:root{${config.map(t => `--${t.name}: ${t.value}`).join(';\n')}}`;
     const formatted = formattedVariables({ format: 'css', dictionary, outputReferences: options.outputReferences })
       .split('\n')
       .map(line => {
@@ -125,7 +127,7 @@ StyleDictionary.registerFormat({
       })
       .join('\n');
 
-    return `${experimental}\n${options.theme === 'index' ? `${baseReset}\n` : ''}${selector} {\n${formatted}\n}`;
+    return `${experimental}\n${options.theme === 'index' ? `${baseReset}\n` : ''}${configString}${selector} {\n${formatted}\n}`;
   }
 });
 
