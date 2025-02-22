@@ -20,8 +20,8 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(0.41); // total
-    expect(report.payload.css.requests['compact.css'].kb).toBeLessThan(0.41);
+    expect(report.payload.css.kb).toBeLessThan(0.45); // total
+    expect(report.payload.css.requests['compact.css'].kb).toBeLessThan(0.45);
   });
 
   test('dark.css should remain within compressed bundle limits', async () => {
@@ -97,7 +97,7 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(0.81); // total
-    expect(report.payload.css.requests['brand.css'].kb).toBeLessThan(0.81);
+    expect(report.payload.css.kb).toBeLessThan(0.82); // total
+    expect(report.payload.css.requests['brand.css'].kb).toBeLessThan(0.82);
   });
 });

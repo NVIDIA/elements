@@ -1,8 +1,10 @@
 {
   "$schema": "../dist/schema.json",
   "config": {
-    "compact": {
-      "value": "true"
+    "scale": {
+      "compact": {
+        "value": "true"
+      }
     }
   },
   "ref": {
