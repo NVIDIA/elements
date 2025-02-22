@@ -4,6 +4,7 @@ import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/switch/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/preferences-input/define.js';
 
 define(SystemSettings);
 

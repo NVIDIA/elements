@@ -21,7 +21,7 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <form>
-        <nve-preferences-input name="config" .value=${{ colorScheme: 'auto' }}></nve-preferences-input>
+        <nve-preferences-input name="config" .value=${{ 'color-scheme': 'auto' }}></nve-preferences-input>
       </form>
     `);
     element = fixture.querySelector(PreferencesInput.metadata.tag);
