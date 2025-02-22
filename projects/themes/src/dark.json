@@ -1,8 +1,10 @@
 {
   "$schema": "../dist/schema.json",
   "config": {
-    "dark": {
-      "value": "true"
+    "color-scheme": {
+      "dark": {
+        "value": "true"
+      }
     }
   },
   "ref": {
