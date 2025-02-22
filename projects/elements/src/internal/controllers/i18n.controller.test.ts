@@ -63,7 +63,8 @@ describe('i18n.controller', () => {
       of: 'of',
       theme: 'theme',
       scale: 'scale',
-      reducedMotion: 'reduced motion'
+      reducedMotion: 'reduced motion',
+      colorScheme: 'color scheme'
     });
   });
 
@@ -101,7 +102,8 @@ describe('i18n.controller', () => {
       of: 'of',
       theme: 'theme',
       scale: 'scale',
-      reducedMotion: 'reduced motion'
+      reducedMotion: 'reduced motion',
+      colorScheme: 'color scheme'
     });
   });
 });
