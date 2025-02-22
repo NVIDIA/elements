@@ -21,7 +21,7 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <form>
-        <nve-preferences-input name="config" .value=${{ theme: 'auto' }}></nve-preferences-input>
+        <nve-preferences-input name="config" .value=${{ colorScheme: 'auto' }}></nve-preferences-input>
       </form>
     `);
     element = fixture.querySelector(PreferencesInput.metadata.tag);
@@ -66,7 +66,7 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
   it('should set value as object', async () => {
     const form = fixture.querySelector('form');
     expect(Object.fromEntries(new FormData(form))).toEqual({
-      'config-theme': 'auto',
+      'config-color-scheme': 'auto',
       'config-reduced-motion': 'false',
       'config-scale': 'default'
     });
@@ -76,11 +76,11 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
     const form = fixture.querySelector('form');
     const value = new FormData();
 
-    value.set('theme', 'dark');
+    value.set('color-scheme', 'dark');
     element.value = value;
 
     expect(Object.fromEntries(new FormData(form))).toEqual({
-      'config-theme': 'dark',
+      'config-color-scheme': 'dark',
       'config-reduced-motion': 'false',
       'config-scale': 'default'
     });
@@ -91,9 +91,9 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
    */
   it('should emit change event on user input', async () => {
     const styles = mockCSSProperties(`:root {
-      --nve-config-light: true;
-      --nve-config-dark: true;
-      --nve-config-compact: true;
+      --nve-config-color-scheme-light: true;
+      --nve-config-color-scheme-dark: true;
+      --nve-config-scale-compact: true;
       --nve-config-reduced-motion: true;
     }`);
 
@@ -106,7 +106,7 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
     const motionMenu = element.shadowRoot.querySelector<Control>('nve-switch');
 
     expect(Object.fromEntries(new FormData(form))).toEqual({
-      'config-theme': 'auto',
+      'config-color-scheme': 'auto',
       'config-reduced-motion': 'false',
       'config-scale': 'default'
     });
@@ -121,7 +121,7 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
     await changeEvent;
 
     expect(Object.fromEntries(new FormData(form))).toEqual({
-      'config-theme': 'dark',
+      'config-color-scheme': 'dark',
       'config-reduced-motion': 'true',
       'config-scale': 'compact'
     });
@@ -136,9 +136,9 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
    */
   it('should emit input event on user input', async () => {
     const styles = mockCSSProperties(`:root {
-      --nve-config-light: true;
-      --nve-config-dark: true;
-      --nve-config-compact: true;
+      --nve-config-color-scheme-light: true;
+      --nve-config-color-scheme-dark: true;
+      --nve-config-scale-compact: true;
       --nve-config-reduced-motion: true;
     }`);
 
@@ -151,7 +151,7 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
     const motionMenu = element.shadowRoot.querySelector<Control>('nve-switch');
 
     expect(Object.fromEntries(new FormData(form))).toEqual({
-      'config-theme': 'auto',
+      'config-color-scheme': 'auto',
       'config-reduced-motion': 'false',
       'config-scale': 'default'
     });
@@ -166,7 +166,7 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
     await inputEvent;
 
     expect(Object.fromEntries(new FormData(form))).toEqual({
-      'config-theme': 'dark',
+      'config-color-scheme': 'dark',
       'config-reduced-motion': 'true',
       'config-scale': 'compact'
     });
@@ -181,8 +181,8 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
    */
   it('should show color controls when "true"', async () => {
     const styles = mockCSSProperties(`:root {
-      --nve-config-light: true;
-      --nve-config-dark: true;
+      --nve-config-color-scheme-light: true;
+      --nve-config-color-scheme-dark: true;
     }`);
 
     element.requestUpdate();
@@ -196,8 +196,8 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
 
   it('should show color controls when "false"', async () => {
     const styles = mockCSSProperties(`:root {
-      --nve-config-light: false;
-      --nve-config-dark: false;
+      --nve-config-color-scheme-light: false;
+      --nve-config-color-scheme-dark: false;
     }`);
     element.requestUpdate();
     await elementIsStable(element);
@@ -221,7 +221,7 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
    * Test visibility of scale controls
    */
   it('should show scale controls when "true"', async () => {
-    const styles = mockCSSProperties(`:root { --nve-config-compact: true; }`);
+    const styles = mockCSSProperties(`:root { --nve-config-scale-compact: true; }`);
     element.requestUpdate();
     await elementIsStable(element);
 
@@ -231,7 +231,7 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
   });
 
   it('should hide scale controls when "false"', async () => {
-    const styles = mockCSSProperties(`:root { --nve-config-compact: false; }`);
+    const styles = mockCSSProperties(`:root { --nve-config-scale-compact: false; }`);
     element.requestUpdate();
     await elementIsStable(element);
 
