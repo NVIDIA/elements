@@ -14,7 +14,7 @@ export default {
 export const Default = {
   render: () => {
     return html`
-      <nve-preferences-input name="theme" value='{ "theme": "dark", "scale": "compact", "reduced-motion": "true" }'></nve-preferences-input>
+      <nve-preferences-input name="theme" value='{ "color-scheme": "dark", "scale": "compact", "reduced-motion": "true" }'></nve-preferences-input>
     `
   }
 };
@@ -24,7 +24,7 @@ export const Forms = {
     return html`
       <form id="preferences-input-form" nve-layout="row gap:md">
         <div nve-layout="column gap:md">
-          <nve-preferences-input name="theme" value='{ "theme": "light" }'></nve-preferences-input>
+          <nve-preferences-input name="theme" value='{ "color-scheme": "light" }'></nve-preferences-input>
           <nve-button>submit</nve-button>
         </div>
         <pre></pre>
@@ -58,7 +58,7 @@ export const Dropdown = {
         <nve-icon-button slot="suffix" icon-name="gear" size="sm" popovertarget="preferences-input"></nve-icon-button>
       </nve-page-header>
       <nve-dropdown id="preferences-input" position="bottom" alignment="end">
-        <nve-preferences-input name="theme" value='{ "theme": "dark" }'></nve-preferences-input>
+        <nve-preferences-input name="theme" value='{ "color-scheme": "dark" }'></nve-preferences-input>
       </nve-dropdown>
     `
   }
