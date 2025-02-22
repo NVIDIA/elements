@@ -1,5 +1,12 @@
 {
   "$schema": "../dist/schema.json",
+  "config": {
+    "color-scheme": {
+      "light": {
+        "value": "true"
+      }
+    }
+  },
   "ref": {
     "scale": {
       "text": {
