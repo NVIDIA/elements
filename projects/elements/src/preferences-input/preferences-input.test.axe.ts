@@ -15,10 +15,10 @@ describe(PreferencesInput.metadata.tag, () => {
     document.head.appendChild(style);
     style.textContent = `
       :root {
-       --nve-config-light: true;
-       --nve-config-dark: true;
-       --nve-config-high-contrast: true;
-       --nve-config-compact: true;
+       --nve-config-color-scheme-light: true;
+       --nve-config-color-scheme-dark: true;
+       --nve-config-color-scheme-high-contrast: true;
+       --nve-config-scale-compact: true;
        --nve-config-reduced-motion: true;
       }
     `;
