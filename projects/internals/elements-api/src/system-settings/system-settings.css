@@ -1,5 +1,14 @@
 [internal-host] {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--nve-ref-size-400);
+  padding-top: var(--nve-ref-size-400);
+}
+
+nve-preferences-input {
+  width: 100%;
+}
+
+nve-select {
+  --size: initial !important;
 }
