@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.5.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.5.0...@nvidia-elements/themes-v1.5.1) (2025-02-24)
+
+
+### Bug Fixes
+
+* **themes:** config flag scopes ([55f90f7](https://github.com/NVIDIA/elements/commit/55f90f7ecb18a0d1712894dfc1ed996617e065fe))
+
 ## [@nvidia-elements/themes-v1.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.4.0...@nvidia-elements/themes-v1.5.0) (2025-02-05)
 
 
