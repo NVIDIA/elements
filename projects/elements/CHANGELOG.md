@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.27.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.27.3...@nvidia-elements/core-v1.27.4) (2025-02-24)
+
+
+### Bug Fixes
+
+* **elements:** preferences input config name ([f8a141f](https://github.com/NVIDIA/elements/commit/f8a141f44c778950b0b16072e806ff9deb429d11))
+
 ## [@nvidia-elements/core-v1.27.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.27.2...@nvidia-elements/core-v1.27.3) (2025-02-20)
 
 
