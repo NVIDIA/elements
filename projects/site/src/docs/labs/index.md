@@ -1,16 +1,16 @@
-import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import '@nvidia-elements/core/grid/define.js';
+---
+{
+  title: 'Labs',
+  layout: 'docs.11ty.js'
+}
+---
 
-<Meta title="Labs/About" />
+# {{ title }}
 
-<h1 nve-text="display">Labs <nve-icon name="beaker" size="xl"></nve-icon></h1>
+Labs projects are experimental packages we are actively seeking feedback on. They may not be ready for production use and APIs may change frequently.
 
-Labs projects are experimental packages we are actively seeking feedback on. They
-may not be ready for production use and APIs may change frequently.
-
-Once a lab project is considered stable, it will be moved from `@nve-labs` to the
-main `@nve` package scope. Labs projects may be deprecated or removed at any time.
+Once a lab project is considered stable, it will be moved from @nve-labs to the
+main @nve package scope. Labs projects may be deprecated or removed at any time.
 
 <nve-grid>
   <nve-grid-header>

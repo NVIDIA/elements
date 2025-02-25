@@ -4,14 +4,13 @@ const markdown = markdownIt({
   html: true,
   breaks: true,
   linkify: true,
-  // highlight: function (/*str, lang*/) { return ''; }
   highlight: function (str, lang) {
     return /* html */ `<nve-codeblock language="${lang}" style="--padding: var(--nve-ref-space-lg)">${markdown.utils.escapeHtml(str)}</nve-codeblock>`;
   }
 });
 
 const formats = {
-  h1: 'display',
+  h1: 'display emphasis',
   h2: 'heading xl',
   h3: 'heading lg',
   h4: 'heading',
