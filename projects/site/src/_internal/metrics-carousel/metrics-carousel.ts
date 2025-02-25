@@ -21,7 +21,7 @@ export class MetricsCarousel extends LitElement {
     .carousel-card {
       display: grid;
       grid-template-rows: 1fr auto;
-      align-items: start;
+      align-items: center;
       justify-items: center;
       width: 248px;
       height: 300px;
