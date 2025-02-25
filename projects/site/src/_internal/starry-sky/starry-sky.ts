@@ -56,6 +56,7 @@ export class NvdStarrySky extends LitElement {
   firstUpdated() {
     this.createStars();
   }
+
   createStars() {
     const container = this.shadowRoot?.querySelector('.starry-background');
     if (!container) return;
