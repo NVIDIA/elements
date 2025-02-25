@@ -116,7 +116,7 @@ export function render(data) {
             document.querySelector('nve-api-table') ? { textContent: 'API', id: 'element-api'} : null
           ].filter(i => !!i);
 
-          if (headings.length > 2) {
+          if (headings.length > 2 && headings.length < 10) {
             const ul = document.createElement('ul');
             ul.id = 'doc-sidenav';
             ul.setAttribute('nve-text', 'list mkd');
@@ -156,7 +156,7 @@ export function render(data) {
                 ${
                   data.tag
                     ? `
-                  <h1 nve-text="display mkd">${data.title}</h1>
+                  <h1 nve-text="display emphasis mkd">${data.title}</h1>
                   <nve-api-summary tag="${data.tag}"></nve-api-summary>`
                     : ''
                 }
