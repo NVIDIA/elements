@@ -5,13 +5,12 @@ const BASE_HEAD = renderBaseHead({ title })
 ---
 
 <!doctype html>
-<html lang="en" nve-theme="" nve-transition="auto">
+<html lang="en" nve-theme="light" nve-transition="auto">
   <head>
     {{ PROD_REDIRECT }} {{ BASE_HEAD }}
     <link rel="stylesheet" href="./index.css" />
     <script type="module">
       import './index.ts';
-      console.log(2 + 1);
     </script>
   </head>
 
@@ -227,18 +226,13 @@ const BASE_HEAD = renderBaseHead({ title })
           </section>
 
           <!--  Section 4 | Metrics Highlights -->
-          <section
-            class="metrics-highlights"
-            nve-layout="align:stretch"
-            style="position: relative; min-height: 400px;padding-top: 25vh;padding-bottom:  25vh;">
-            <nvd-starry-sky
-              style="position: absolute; top: 0; left: 0; right: 0; height: 100%; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%);"></nvd-starry-sky>
+          <section class="metrics-highlights" nve-layout="align:stretch">
+            <nvd-starry-sky></nvd-starry-sky>
 
             <div
-              nve-layout="column row@xl align:space-between gap:lg gap@xl:xxxl"
-              style="position: relative; z-index: 2; padding: 20px;">
+              nve-layout="grid span-items:12 span-items@xl:6 align:space-between gap:lg gap@xl:xxxl"
+              style="position: relative; z-index: 2;">
               <!-- Left Column -->
-
               <div nve-layout="column gap:lg align:left align:stretch">
                 <!-- Title -->
                 <div nve-text="semibold display md">
@@ -281,157 +275,18 @@ const BASE_HEAD = renderBaseHead({ title })
                     </div>
                   </div>
 
-                  <nve-button container="inline" size="lg"
-                    >Learn more about our Best Practices<nve-icon name="arrow" direction="right"></nve-icon
-                  ></nve-button>
+                  <nve-button container="inline" size="lg">
+                    <a
+                      href="https://NVIDIA.github.io/elements/docs/api-design/getting-started/"
+                      target="_blank">
+                      Learn more about our Best Practices<nve-icon name="arrow" direction="right"></nve-icon>
+                    </a>
+                  </nve-button>
                 </div>
               </div>
 
               <!-- Right Column (Carousel) -->
-              <div class="carousel-container">
-                <div class="carousel-track">
-                  <!-- TODO: Implement this with some dynamic code -->
-                  <a
-                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                    target="_blank"
-                    class="carousel-link">
-                    <div class="carousel-card">
-                      <div class="big-number">96</div>
-                      <div class="text-container">
-                        <div class="title">Total Components</div>
-                        <div class="label">Browse our component offerings</div>
-                      </div>
-                      <nve-icon-button class="arrow-button" icon-name="arrow-angle" size="sm"></nve-icon-button>
-                    </div>
-                  </a>
-
-                  <a
-                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                    target="_blank"
-                    class="carousel-link">
-                    <div class="carousel-card">
-                      <div class="big-number">96</div>
-                      <div class="text-container">
-                        <div class="title">Total Components</div>
-                        <div class="label">Browse our component offerings</div>
-                      </div>
-                      <nve-icon-button
-                        class="arrow-button"
-                        icon-name="arrow-angle"
-                        size="sm"
-                        container="inline"></nve-icon-button>
-                    </div>
-                  </a>
-
-                  <a
-                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                    target="_blank"
-                    class="carousel-link">
-                    <div class="carousel-card">
-                      <div class="big-number">96</div>
-                      <div class="text-container">
-                        <div class="title">Total Components</div>
-                        <div class="label">Browse our component offerings</div>
-                      </div>
-                      <nve-icon-button
-                        class="arrow-button"
-                        icon-name="arrow-angle"
-                        size="sm"
-                        container="inline"></nve-icon-button>
-                    </div>
-                  </a>
-
-                  <a
-                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                    target="_blank"
-                    class="carousel-link">
-                    <div class="carousel-card">
-                      <div class="big-number">96</div>
-                      <div class="text-container">
-                        <div class="title">Total Components</div>
-                        <div class="label">Browse our component offerings</div>
-                      </div>
-                      <nve-icon-button
-                        class="arrow-button"
-                        icon-name="arrow-angle"
-                        size="sm"
-                        container="inline"></nve-icon-button>
-                    </div>
-                  </a>
-
-                  <a
-                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                    target="_blank"
-                    class="carousel-link">
-                    <div class="carousel-card">
-                      <div class="big-number">96</div>
-                      <div class="text-container">
-                        <div class="title">Total Components</div>
-                        <div class="label">Browse our component offerings</div>
-                      </div>
-                      <nve-icon-button
-                        class="arrow-button"
-                        icon-name="arrow-angle"
-                        size="sm"
-                        container="inline"></nve-icon-button>
-                    </div>
-                  </a>
-
-                  <a
-                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                    target="_blank"
-                    class="carousel-link">
-                    <div class="carousel-card">
-                      <div class="big-number">96</div>
-                      <div class="text-container">
-                        <div class="title">Total Components</div>
-                        <div class="label">Browse our component offerings</div>
-                      </div>
-                      <nve-icon-button
-                        class="arrow-button"
-                        icon-name="arrow-angle"
-                        size="sm"
-                        container="inline"></nve-icon-button>
-                    </div>
-                  </a>
-
-                  <a
-                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                    target="_blank"
-                    class="carousel-link">
-                    <div class="carousel-card">
-                      <div class="big-number">96</div>
-                      <div class="text-container">
-                        <div class="title">Total Components</div>
-                        <div class="label">Browse our component offerings</div>
-                      </div>
-                      <nve-icon-button
-                        class="arrow-button"
-                        icon-name="arrow-angle"
-                        size="sm"
-                        container="inline"></nve-icon-button>
-                    </div>
-                  </a>
-
-                  <a
-                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs"
-                    target="_blank"
-                    class="carousel-link">
-                    <div class="carousel-card">
-                      <div class="big-number">96</div>
-                      <div class="text-container">
-                        <div class="title">Total Components</div>
-                        <div class="label">Browse our component offerings</div>
-                      </div>
-                      <nve-icon-button
-                        class="arrow-button"
-                        icon-name="arrow-angle"
-                        size="sm"
-                        container="inline"></nve-icon-button>
-                    </div>
-                  </a>
-                </div>
-              </div>
+              <nvd-metrics-carousel></nvd-metrics-carousel>
             </div>
           </section>
 
@@ -439,7 +294,6 @@ const BASE_HEAD = renderBaseHead({ title })
           <section nve-layout="column align:horizontal-stretch gap:xxxl pad-y:xxl">
             <div nve-layout="column align:space-between row@lg gap:lg gap@xl:xxl">
               <div nve-layout="column gap:lg" class="feature">
-                <!-- Heading -->
                 <div nve-text="semibold display">
                   <span class="coral-yellow-gradient gradient-txt">Skip the hassle</span>
                   <br />
@@ -475,6 +329,19 @@ const BASE_HEAD = renderBaseHead({ title })
                   <div nve-text="muted md regular">
                     Grid, horizontal and vertical based layouts can be achieved with little to no CSS using the
                     nve-layout attribute.
+                  </div>
+                </div>
+              </div>
+
+              <div nve-layout="column gap:lg pad-top:md" class="feature">
+                <nve-logo color="gray-slate">
+                  <nve-icon name="laptop-phone"></nve-icon>
+                </nve-logo>
+
+                <div nve-layout="column gap:sm">
+                  <div nve-text="emphasis heading medium">Responsiveness</div>
+                  <div nve-text="muted md regular">
+                    Optimization for a range of device sizes and screen densities is innate to the design of Elements.
                   </div>
                 </div>
               </div>
@@ -645,7 +512,7 @@ const BASE_HEAD = renderBaseHead({ title })
                       alt="Slack Logo"
                       style="width: 28px" />
                   </div>
-                  <div nve-text="heading medium md emphasis">Gitlab Repo</div>
+                  <div nve-text="heading medium md emphasis">Elements Support</div>
                 </div>
                 <div nve-text="body medium md muted">
                   Join our Slack community to get quick support, share ideas, and see how others solve challenges.
