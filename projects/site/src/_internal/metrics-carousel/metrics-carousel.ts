@@ -37,7 +37,7 @@ export class NvdMetricsCarousel extends LitElement {
 
     .big-number {
       text-align: center;
-      font-size: 96px;
+      font-size: 76px;
       font-weight: var(--nve-ref-font-weight-semibold);
       line-height: 100%;
       letter-spacing: -1.8px;
@@ -63,9 +63,6 @@ export class NvdMetricsCarousel extends LitElement {
 
     .carousel-link {
       text-decoration: none;
-    }
-
-    .carousel-link .carousel-card {
       cursor: pointer;
     }
 
@@ -97,6 +94,16 @@ export class NvdMetricsCarousel extends LitElement {
       text-align: left;
       align-items: left;
     }
+    
+    /* Animations */
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-250px * 6)); /* Card width * (number of unique cards) */
+      }
+    }
   `;
 
   render() {
@@ -113,23 +120,53 @@ export class NvdMetricsCarousel extends LitElement {
     const items = [
       {
         href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
-        title: 'Total Components',
-        label: 'Browse our component offerings'
+        title: 'Parent Elements',
+        label: 'Browse our component offerings',
+        metricCount: 58
+      },
+      {
+        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
+        title: 'Total Web Components',
+        label: 'Browse our component offerings',
+        metricCount: 102
+      },
+      {
+        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
+        title: 'Lighthouse Tests',
+        label: 'Browse our component offerings',
+        metricCount: 73
+      },
+      {
+        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
+        title: 'Unit Tests',
+        label: 'Browse our component offerings',
+        metricCount: 1584
+      },
+      {
+        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
+        title: '% Test Coverage',
+        label: 'Browse our component offerings',
+        metricCount: 99
+      },
+      {
+        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
+        title: 'Instances in MagLev',
+        label: 'Browse our component offerings',
+        metricCount: 1795
       }
-      // Add more items as needed
     ];
 
     return items.map(
       item => html`
       <a href="${item.href}" target="_blank" class="carousel-link">
         <div class="carousel-card">
-          <div class="big-number">
-            <slot name="content"></slot>
-          </div>
+          <div class="big-number">${item.metricCount}</div>
+
           <div class="text-container">
             <div class="title">${item.title}</div>
             <div class="label">${item.label}</div>
           </div>
+
           <nve-icon-button class="arrow-button" icon-name="arrow-angle" size="sm"></nve-icon-button>
         </div>
       </a>
