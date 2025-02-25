@@ -16,13 +16,6 @@ main {
   width: 1280px;
 }
 
-nve-logo {
-  --width: 44px;
-  --height: 44px;
-  --background: linear-gradient(315deg, #121212 0%, var(--sys-interaction-field, #23262f) 100%);
-  --color: white;
-}
-
 .feature {
   max-width: 360px;
 }

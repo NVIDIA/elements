@@ -660,6 +660,9 @@ importers:
       '@nve-internals/eslint':
         specifier: workspace:*
         version: link:../internals/eslint
+      '@nvidia-elements/code':
+        specifier: workspace:*
+        version: link:../labs/code
       '@nvidia-elements/playwright-screencast':
         specifier: workspace:*
         version: link:../labs/playwright-screencast

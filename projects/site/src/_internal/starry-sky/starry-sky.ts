@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 
 @customElement('nvd-starry-sky')
-export class NvdStarrySky extends LitElement {
+export class StarrySky extends LitElement {
   static styles = css`
     :host {
       display: block;
