@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.28.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.27.4...@nvidia-elements/core-v1.28.0) (2025-02-25)
+
+
+### Features
+
+* **elements:** resize-handle ([45493a1](https://github.com/NVIDIA/elements/commit/45493a107adb8ef3d5b68a1dc7fc4762dc56c1b4))
+
 ## [@nvidia-elements/core-v1.27.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.27.3...@nvidia-elements/core-v1.27.4) (2025-02-24)
 
 
