@@ -10,7 +10,7 @@ import '@internals/elements-api/canvas/define.js';
 
 export const H1 = ({ children }) => (
   <Unstyled>
-    <h1 nve-text="display">{children}</h1>
+    <h1 nve-text="display emphasis">{children}</h1>
   </Unstyled>
 )
 

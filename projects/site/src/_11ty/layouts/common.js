@@ -74,11 +74,11 @@ export const renderBaseHead = data => /* html */ `
 
 export const renderDocsNav = data => /* html */ `
 <nve-tree behavior-expand>
-  <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') ? 'expanded' : ''}>
     About
     <nve-tree-node><a href="api/?path=/docs/about-getting-started--docs">Getting Started</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/about-installation--docs">Installation</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/about-changelog--docs">Changelog</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted' : ''}><a href="docs/changelog/">Changelog</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted' : ''}><a href="docs/metrics/">Metrics</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/about-support--docs">Support</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/about-accessibility--docs">Accessibility</a></nve-tree-node>
@@ -240,9 +240,9 @@ export const renderDocsNav = data => /* html */ `
     Testing
     <nve-tree-node><a href="api/?path=/docs/testing-documentation--docs">Getting Started</a></nve-tree-node>
   </nve-tree-node>
-  <nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''}>
     Labs
-    <nve-tree-node><a href="api/?path=/docs/labs-about--docs">About</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}><a href="docs/labs/">About</a></nve-tree-node>
     <nve-tree-node>
       Code
       <nve-tree-node><a href="api/?path=/docs/labs-code-codeblock-documentation--docs">Codeblock</a></nve-tree-node>
