@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 
 @customElement('nvd-metrics-carousel')
-export class NvdMetricsCarousel extends LitElement {
+export class MetricsCarousel extends LitElement {
   static styles = css`
     .carousel-container {
       overflow: hidden;
