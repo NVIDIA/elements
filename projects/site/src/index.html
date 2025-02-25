@@ -32,7 +32,7 @@ const BASE_HEAD = renderBaseHead({ title })
       </nve-page-header>
 
       <div id="main-slot" nve-layout="row align:horizontal-center">
-        <main nve-layout="column align:horizontal-stretch pad:none pad@md:xxxl gap:xxxl">
+        <main nve-layout="column align:horizontal-stretch pad:none pad@xs:xl pad@md:xxxl gap:xxxl">
           <!-- Hero Section | Scroll Driven Animation - TODO: John Y Add Widget -->
 
           <!-- Section 1 | "Work how you want" -->
@@ -347,7 +347,7 @@ const BASE_HEAD = renderBaseHead({ title })
 
             <!-- Video Row -->
             <video loop autoplay muted nve-layout="full">
-              <source src="https://cdn-stage.nvidia.com/assets/elements/browse-pattern.webm" type="video/webm" />
+              <source src="https://cdn-stage.nvidia.com/assets/elements/browse-pattern-snippets-dark.webm" />
               Your browser does not support the video tag or WebM format.
             </video>
           </section>
@@ -405,7 +405,9 @@ const BASE_HEAD = renderBaseHead({ title })
 
             <!-- Video Row -->
             <video loop autoplay muted nve-layout="full">
-              <source src="https://cdn-stage.nvidia.com/assets/elements/browse-pattern.webm" type="video/webm" />
+              <source
+                src="https://cdn-stage.nvidia.com/assets/elements/browse-pattern-snippets-dark.webm"
+                type="video/webm" />
               Your browser does not support the video tag or WebM format.
             </video>
           </section>
@@ -434,46 +436,46 @@ const BASE_HEAD = renderBaseHead({ title })
             <!--  Starters  -->
             <div nve-layout="grid gap:md align-items:stretch span-items:12 span-items@md:6 span-items@lg:4">
               <nvd-glassmorphic-card
-                logo-src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
-                logo-alt="HTML5 Logo"
-                title="MPA Starter"
-                before-bg="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg"
-                background="linear-gradient(180deg, rgba(240, 116, 144, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%)"></nvd-glassmorphic-card>
+                logo-src="https://NVIDIA.github.io/elements/static/images/integrations/vite.svg"
+                logo-alt="Vite Logo"
+                title="MPA & Vite"
+                style="--background: linear-gradient(180deg, rgba(240, 116, 144, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%); --background-logo: url(https://NVIDIA.github.io/elements/static/images/integrations/vite.svg)">
+              </nvd-glassmorphic-card>
 
               <nvd-glassmorphic-card
-                logo-src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg"
+                logo-src="https://NVIDIA.github.io/elements/static/images/integrations/angular.svg"
                 logo-alt="Angular Logo"
                 title="Angular"
-                before-bg="https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg"
-                background="linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(221, 0, 49, 0.10) 0%, rgba(221, 0, 49, 0.10) 100%), rgba(255, 255, 255, 0.05)"></nvd-glassmorphic-card>
+                style="--background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(221, 0, 49, 0.10) 0%, rgba(221, 0, 49, 0.10) 100%), rgba(255, 255, 255, 0.05); --background-logo: url(https://NVIDIA.github.io/elements/static/images/integrations/angular.svg)">
+              </nvd-glassmorphic-card>
 
               <nvd-glassmorphic-card
-                logo-src="https://nextjs.org/static/favicon/favicon-32x32.png"
+                logo-src="	https://NVIDIA.github.io/elements/static/images/integrations/nextjs.svg"
                 logo-alt="Next.js Logo"
                 title="Next.js"
-                before-bg="https://nextjs.org/static/favicon/favicon-32x32.png"
-                background="linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05)"></nvd-glassmorphic-card>
+                style="--background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05); --background-logo: url(	https://NVIDIA.github.io/elements/static/images/integrations/nextjs.svg)">
+              </nvd-glassmorphic-card>
 
               <nvd-glassmorphic-card
-                logo-src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+                logo-src="https://NVIDIA.github.io/elements/static/images/integrations/react.svg"
                 logo-alt="React Logo"
                 title="React"
-                before-bg="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
-                background="linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(97, 218, 251, 0.10) 0%, rgba(97, 218, 251, 0.10) 100%), rgba(255, 255, 255, 0.05)"></nvd-glassmorphic-card>
+                style="--background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(97, 218, 251, 0.10) 0%, rgba(97, 218, 251, 0.10) 100%), rgba(255, 255, 255, 0.05); --background-logo: url(https://NVIDIA.github.io/elements/static/images/integrations/react.svg)">
+              </nvd-glassmorphic-card>
 
               <nvd-glassmorphic-card
-                logo-src="https://www.11ty.dev/img/logo-github.svg"
+                logo-src="https://NVIDIA.github.io/elements/static/images/integrations/eleventy.svg"
                 logo-alt="Eleventy Logo"
                 title="Eleventy"
-                before-bg="https://www.11ty.dev/img/logo-github.svg"
-                background="linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(31, 31, 31, 0.10) 0%, rgba(31, 31, 31, 0.10) 100%), rgba(255, 255, 255, 0.05)"></nvd-glassmorphic-card>
+                style="--background: linear-gradient(180deg, rgba(240, 116, 144, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%); --background-logo: url(https://NVIDIA.github.io/elements/static/images/integrations/eleventy.svg)">
+              </nvd-glassmorphic-card>
 
               <nvd-glassmorphic-card
-                logo-src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg"
+                logo-src="https://NVIDIA.github.io/elements/static/images/integrations/vue.svg"
                 logo-alt="Vue.js Logo"
                 title="Vue"
-                before-bg="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg"
-                background="linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(65, 184, 131, 0.10) 0%, rgba(65, 184, 131, 0.10) 100%), rgba(255, 255, 255, 0.05)"></nvd-glassmorphic-card>
+                style="--background: linear-gradient(180deg, rgba(144, 116, 240, 0.00) 0%, rgba(255, 255, 255, 0.24) 100%), linear-gradient(0deg, rgba(65, 184, 131, 0.10) 0%, rgba(65, 184, 131, 0.10) 100%), rgba(255, 255, 255, 0.05); --background-logo: url(https://NVIDIA.github.io/elements/static/images/integrations/vue.svg)">
+              </nvd-glassmorphic-card>
             </div>
           </section>
 
@@ -490,8 +492,8 @@ const BASE_HEAD = renderBaseHead({ title })
                 <div nve-layout="row gap:md align:vertical-center">
                   <div>
                     <img
-                      src="https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png"
-                      alt="Slack Logo"
+                      src="https://images.ctfassets.net/xz1dnu24egyd/3FbNmZRES38q2Sk2EcoT7a/a290dc207a67cf779fc7c2456b177e9f/press-kit-icon.svg"
+                      alt="GitLab Logo"
                       style="width: 28px" />
                   </div>
                   <div nve-text="heading medium md emphasis">Gitlab Repo</div>
@@ -499,7 +501,11 @@ const BASE_HEAD = renderBaseHead({ title })
                 <div nve-text="body medium md muted">
                   Submit requests through GitLab issues to help shape future improvements.
                 </div>
-                <nve-button container="inline">View <nve-icon name="arrow" direction="right"></nve-icon></nve-button>
+                <nve-button container="inline">
+                  <a href="https://github.com/NVIDIA/elements" target="_blank">
+                    View <nve-icon name="arrow" direction="right"></nve-icon>
+                  </a>
+                </nve-button>
               </div>
 
               <div class="contact">
@@ -510,12 +516,16 @@ const BASE_HEAD = renderBaseHead({ title })
                       alt="Slack Logo"
                       style="width: 28px" />
                   </div>
-                  <div nve-text="heading medium md emphasis">Elements Support</div>
+                  <div nve-text="heading medium md emphasis">Slack Support</div>
                 </div>
                 <div nve-text="body medium md muted">
                   Join our Slack community to get quick support, share ideas, and see how others solve challenges.
                 </div>
-                <nve-button container="inline">View <nve-icon name="arrow" direction="right"></nve-icon></nve-button>
+                <nve-button container="inline">
+                  <a href="http://nv/elements-slack" target="_blank">
+                    View <nve-icon name="arrow" direction="right"></nve-icon>
+                  </a>
+                </nve-button>
               </div>
             </div>
           </section>
