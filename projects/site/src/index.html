@@ -5,13 +5,11 @@ const BASE_HEAD = renderBaseHead({ title })
 ---
 
 <!doctype html>
-<html lang="en" nve-theme="light" nve-transition="auto">
+<html lang="en" nve-theme="auto" nve-transition="auto">
   <head>
     {{ PROD_REDIRECT }} {{ BASE_HEAD }}
     <link rel="stylesheet" href="./index.css" />
-    <script type="module">
-      import './index.ts';
-    </script>
+    <script type="module" src="./index.ts"></script>
   </head>
 
   <body>
@@ -19,20 +17,18 @@ const BASE_HEAD = renderBaseHead({ title })
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm"></nve-logo>
         <a slot="prefix" href=".">Elements</a>
-
-        <nve-button container="flat"><a href="api/?path=/docs/about-installation--docs">Get Started</a></nve-button>
-
-        <nve-button container="flat"
-          ><a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank"
-            >Playground</a
-          ></nve-button
-        >
-
-        <nve-button container="flat"><a href="starters/">Starters</a></nve-button>
-
-        <nve-button container="flat"
-          ><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button
-        >
+        <nve-button container="flat">
+          <a href="api/?path=/docs/about-installation--docs">Get Started</a>
+        </nve-button>
+        <nve-button container="flat">
+          <a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank">Playground</a>
+        </nve-button>
+        <nve-button container="flat">
+          <a href="starters/">Starters</a>
+        </nve-button>
+        <nve-button container="flat">
+          <a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a>
+        </nve-button>
       </nve-page-header>
 
       <div id="main-slot" nve-layout="row align:horizontal-center">
@@ -90,9 +86,11 @@ const BASE_HEAD = renderBaseHead({ title })
                 </div>
               </div>
             </div>
+            <div nve-layout="row align:center gap:xl">
+              <nvd-framework-selector></nvd-framework-selector>
+              <nve-codeblock style="width: 480px; height: 320px;" language="html"> </nve-codeblock>
+            </div>
           </section>
-
-          <!--  Section 2 | Frameworks Widget - TODO: John Y Add Widget -->
 
           <!--  Section 3 | Theme Widget -->
           <section nve-layout="grid span-items:12 span-items@xl:6 pad-y:xxl">
