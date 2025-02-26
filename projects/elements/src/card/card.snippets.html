@@ -27,15 +27,76 @@
       loading="lazy"
       style="width: 100%; height: 100%; object-fit: cover;" />
     <nve-card-content>
-      ${4:
+      ${1:
       <p>•︎•︎•︎ •︎•︎•︎ •︎•︎•︎</p>
       }
     </nve-card-content>
     <nve-card-footer>
       <div nve-layout="grid span-items:6 gap:xs">
-        <nve-button>${5:•︎•︎•︎•︎•︎•︎}</nve-button>
-        <nve-button>${6:•︎•︎•︎•︎•︎•︎}</nve-button>
+        <nve-button>${2:•︎•︎•︎•︎•︎•︎}</nve-button>
+        <nve-button>${3:•︎•︎•︎•︎•︎•︎}</nve-button>
       </div>
     </nve-card-footer>
   </nve-card>
+</template>
+
+<template name="Media Card Grid" prefix="media-card-grid" description="Grid layout with 3 media cards" type="pattern">
+  <section nve-layout="grid span-items:4 gap:md">
+    <nve-card style="height: 100%; width: 100%;">
+      <img
+        src="https://cdn-stage.nvidia.com/assets/elements/test-image-2.webp"
+        alt="example visualization for media card 1"
+        loading="lazy"
+        style="width: 100%; height: 100%; object-fit: cover;" />
+      <nve-card-content>
+        ${1:
+        <p>•︎•︎•︎ •︎•︎•︎ •︎•︎•︎</p>
+        }
+      </nve-card-content>
+      <nve-card-footer>
+        <div nve-layout="grid span-items:6 gap:xs">
+          <nve-button>${2:•︎•︎•︎•︎•︎•︎}</nve-button>
+          <nve-button>${3:•︎•︎•︎•︎•︎•︎}</nve-button>
+        </div>
+      </nve-card-footer>
+    </nve-card>
+
+    <nve-card style="height: 100%; width: 100%;">
+      <img
+        src="https://cdn-stage.nvidia.com/assets/elements/test-image-2.webp"
+        alt="example visualization for media card 2"
+        loading="lazy"
+        style="width: 100%; height: 100%; object-fit: cover;" />
+      <nve-card-content>
+        ${4:
+        <p>•︎•︎•︎ •︎•︎•︎ •︎•︎•︎</p>
+        }
+      </nve-card-content>
+      <nve-card-footer>
+        <div nve-layout="grid span-items:6 gap:xs">
+          <nve-button>${5:•︎•︎•︎•︎•︎•︎}</nve-button>
+          <nve-button>${6:•︎•︎•︎•︎•︎•︎}</nve-button>
+        </div>
+      </nve-card-footer>
+    </nve-card>
+
+    <nve-card style="height: 100%; width: 100%;">
+      <img
+        src="https://cdn-stage.nvidia.com/assets/elements/test-image-2.webp"
+        alt="example visualization for media card 3"
+        loading="lazy"
+        style="width: 100%; height: 100%; object-fit: cover;" />
+      <nve-card-content>
+        ${7:
+        <p>•︎•︎•︎ •︎•︎•︎ •︎•︎•︎</p>
+        }
+      </nve-card-content>
+      <nve-card-footer>
+        <div nve-layout="grid span-items:6 gap:xs">
+          <nve-button>${8:•︎•︎•︎•︎•︎•︎}</nve-button>
+          <nve-button>${9:•︎•︎•︎•︎•︎•︎}</nve-button>
+        </div>
+      </nve-card-footer>
+    </nve-card>
+  </section>
 </template>

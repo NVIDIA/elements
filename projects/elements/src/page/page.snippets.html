@@ -29,11 +29,21 @@
 
 <template
   name="Page Subheader"
-  prefix="page-subheader"
-  description="Basic page subheader using toolbar."
+  prefix="page-subheader-with-icon"
+  description="Basic page subheader using toolbar with icon"
   type="pattern">
   <nve-toolbar slot="subheader">
     <nve-icon-button icon-name="arrow" direction="left" size="sm" aria-label="back"></nve-icon-button>
     <h2 nve-text="heading sm">${1:Subheader}</h2>
+  </nve-toolbar>
+</template>
+
+<template
+  name="Page Subheader"
+  prefix="page-subheader"
+  description="Basic page subheader using toolbar."
+  type="pattern">
+  <nve-toolbar slot="subheader">
+    <h2 nve-text="emphasis heading sm">${1:Subheader}</h2>
   </nve-toolbar>
 </template>
