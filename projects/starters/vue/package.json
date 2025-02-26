@@ -48,6 +48,7 @@
     "vue": "3.4.34"
   },
   "devDependencies": {
+    "@types/node": "catalog:",
     "@vitejs/plugin-vue": "5.2.1",
     "@vue/tsconfig": "0.5.1",
     "typescript": "catalog:",
