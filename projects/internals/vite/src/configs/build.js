@@ -1,9 +1,9 @@
 import fs from 'fs';
 import process from 'process';
 import terser from '@rollup/plugin-terser';
-import { minifyHTML } from '../plugins/minify-html.js';
 import { resolve } from 'path';
 import { globSync } from 'glob';
+import { minifyHTML } from '../plugins/minify-html.js';
 
 import { tsc } from '../plugins/tsc.js';
 import { cem } from '../plugins/cem.js';

@@ -37,7 +37,6 @@
     "@semantic-release/npm": "12.0.0",
     "@semantic-release/release-notes-generator": "13.0.0",
     "@tsconfig/node20": "20.1.4",
-    "@types/node": "22.13.1",
     "@weiran.zsd/multi-eslint-rule-config": "0.0.6",
     "commitlint": "19.5.0",
     "glob": "catalog:",
