@@ -1,6 +1,8 @@
 export { libraryBuildConfig } from './configs/build.js';
+export { libraryNodeBuildConfig } from './configs/build.node.js';
 export { libraryBundleConfig } from './configs/bundle.js';
 export { libraryTestConfig } from './configs/test.js';
+export { libraryNodeTestConfig } from './configs/test.node.js';
 export { libraryAxeTestConfig } from './configs/axe.js';
 export { libraryLitSSRTestConfig } from './configs/ssr.js';
 export { libraryVisualTestConfig } from './configs/visual.js';
