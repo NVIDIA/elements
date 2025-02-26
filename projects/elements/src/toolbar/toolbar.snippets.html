@@ -1,0 +1,40 @@
+<template
+  name="Toolbar with Progressive Filter Chip"
+  prefix="toolbar-with-progressive-filter-chip"
+  description="Toolbar with progressive-filter-chip"
+  type="pattern">
+  <div style="width: 100%;">
+    <nve-toolbar container="flat" style="width: 100%;">
+      <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
+      <nve-progressive-filter-chip closable>
+        <select aria-label="dataset">
+          <option selected>${1:status}</option>
+          <option>${2:workload}</option>
+        </select>
+        <select aria-label="condition">
+          <option selected>${3:filter by}</option>
+          <option>${4:sort by}</option>
+        </select>
+        <select multiple aria-label="filter">
+          <option selected>${5:progress}</option>
+          <option>${6:pending}</option>
+          <option>${7:success}</option>
+          <option>${8:failed}</option>
+        </select>
+      </nve-progressive-filter-chip>
+      <nve-combobox container="flat" style="flex-grow: 1; min-width: 150px;">
+        <input type="search" placeholder="${9:Add Filter}" />
+        <datalist>
+          <option value="${10:Status}"></option>
+          <option value="${11:Priority}"></option>
+          <option value="${12:Date}"></option>
+          <option value="${13:Session}"></option>
+          <option value="${14:Configuration}"></option>
+          <option value="${15:Contains}"></option>
+        </datalist>
+      </nve-combobox>
+      <nve-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
+      <nve-button slot="suffix">${16:Save Filters}</nve-button>
+    </nve-toolbar>
+  </div>
+</template>
