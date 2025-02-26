@@ -33,6 +33,9 @@ catalogs:
     '@sentry/browser':
       specifier: 7.120.3
       version: 7.120.3
+    '@types/node':
+      specifier: 22.13.1
+      version: 22.13.1
     '@vitest/browser':
       specifier: 3.0.0-beta.4
       version: 3.0.0-beta.4
@@ -131,9 +134,6 @@ importers:
       '@tsconfig/node20':
         specifier: 20.1.4
         version: 20.1.4
-      '@types/node':
-        specifier: 22.13.1
-        version: 22.13.1
       '@weiran.zsd/multi-eslint-rule-config':
         specifier: 0.0.6
         version: 0.0.6(eslint@9.20.1(jiti@2.4.2))
@@ -592,6 +592,15 @@ importers:
       '@nve-internals/eslint':
         specifier: workspace:*
         version: link:../../internals/eslint
+      '@nve-internals/vite':
+        specifier: workspace:*
+        version: link:../../internals/vite
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.13.1
+      '@vitest/coverage-istanbul':
+        specifier: 'catalog:'
+        version: 3.0.0-beta.4(vitest@3.0.0-beta.4)
       eslint:
         specifier: 'catalog:'
         version: 9.18.0(jiti@2.4.2)
@@ -604,6 +613,12 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.6.3
+      vite:
+        specifier: 'catalog:'
+        version: 6.0.7(@types/node@22.13.1)(jiti@2.4.2)(less@4.2.0)(sass@1.80.7)(sugarss@4.0.1(postcss@8.5.2))(terser@5.37.0)(yaml@2.7.0)
+      vitest:
+        specifier: 'catalog:'
+        version: 3.0.0-beta.4(@types/node@22.13.1)(@vitest/browser@3.0.0-beta.4)(jiti@2.4.2)(less@4.2.0)(msw@2.7.0(@types/node@22.13.1)(typescript@5.6.3))(sass@1.80.7)(sugarss@4.0.1(postcss@8.5.2))(terser@5.37.0)(yaml@2.7.0)
 
   projects/labs/snippets:
     dependencies:
@@ -1271,6 +1286,9 @@ importers:
         specifier: 3.4.34
         version: 3.4.34(typescript@5.6.3)
     devDependencies:
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.13.1
       '@vitejs/plugin-vue':
         specifier: 5.2.1
         version: 5.2.1(vite@6.0.7(@types/node@22.13.1)(jiti@2.4.2)(less@4.2.0)(sass@1.80.7)(sugarss@4.0.1(postcss@8.5.2))(terser@5.37.0)(yaml@2.7.0))(vue@3.4.34(typescript@5.6.3))
@@ -12575,7 +12593,7 @@ snapshots:
       '@babel/types': 7.26.8
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
-      jsesc: 3.0.2
+      jsesc: 3.1.0
 
   '@babel/helper-annotate-as-pure@7.25.9':
     dependencies:
@@ -14495,7 +14513,7 @@ snapshots:
       proc-log: 5.0.0
       promise-inflight: 1.0.1
       promise-retry: 2.0.1
-      semver: 7.6.3
+      semver: 7.7.1
       which: 5.0.0
     transitivePeerDependencies:
       - bluebird
@@ -14526,7 +14544,7 @@ snapshots:
       hosted-git-info: 8.0.2
       json-parse-even-better-errors: 4.0.0
       proc-log: 5.0.0
-      semver: 7.6.3
+      semver: 7.7.1
       validate-npm-package-license: 3.0.4
     transitivePeerDependencies:
       - bluebird
@@ -17739,7 +17757,7 @@ snapshots:
       postcss-modules-scope: 3.2.1(postcss@8.5.2)
       postcss-modules-values: 4.0.0(postcss@8.5.2)
       postcss-value-parser: 4.2.0
-      semver: 7.6.3
+      semver: 7.7.1
     optionalDependencies:
       webpack: 5.96.1(esbuild@0.24.0)
 
@@ -21149,7 +21167,7 @@ snapshots:
       make-fetch-happen: 14.0.3
       nopt: 8.1.0
       proc-log: 5.0.0
-      semver: 7.6.3
+      semver: 7.7.1
       tar: 7.4.3
       which: 5.0.0
     transitivePeerDependencies:
@@ -21203,7 +21221,7 @@ snapshots:
 
   npm-install-checks@7.1.1:
     dependencies:
-      semver: 7.6.3
+      semver: 7.7.1
 
   npm-normalize-package-bin@3.0.1: {}
 
@@ -21220,7 +21238,7 @@ snapshots:
     dependencies:
       hosted-git-info: 8.0.2
       proc-log: 5.0.0
-      semver: 7.6.3
+      semver: 7.7.1
       validate-npm-package-name: 6.0.0
 
   npm-packlist@9.0.0:
@@ -21232,7 +21250,7 @@ snapshots:
       npm-install-checks: 7.1.1
       npm-normalize-package-bin: 4.0.0
       npm-package-arg: 12.0.0
-      semver: 7.6.3
+      semver: 7.7.1
 
   npm-pick-manifest@8.0.2:
     dependencies:
@@ -21825,7 +21843,7 @@ snapshots:
       cosmiconfig: 9.0.0(typescript@5.6.3)
       jiti: 1.21.7
       postcss: 8.4.49
-      semver: 7.6.3
+      semver: 7.7.1
     optionalDependencies:
       webpack: 5.96.1(esbuild@0.24.0)
     transitivePeerDependencies:
