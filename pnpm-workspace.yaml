@@ -44,6 +44,7 @@ catalog:
   '@lit/react': ^1.0.7
   '@rollup/plugin-terser': 0.4.4
   '@sentry/browser': 7.120.3
+  '@types/node': 22.13.1
   '@types/react': 19.0.7
   '@types/react-dom': 19.0.3
   '@vitest/browser': 3.0.0-beta.4
