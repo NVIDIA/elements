@@ -1,6 +1,9 @@
 nve-page {
   --background: var(--nve-sys-layer-shell-background);
 }
+[nve-theme='light'] nve-page {
+  --background: var(--nve-sys-layer-accent-canvas-background);
+}
 
 nve-page-header {
   --background: transparent;
