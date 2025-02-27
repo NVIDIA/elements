@@ -34,7 +34,23 @@ export const renderBaseHead = data => /* html */ `
   </style>
   <script type="module">
     const SB_GLOBALS = { theme: 'dark', font: '',  scale: '', debug: '', animation: '', sourceType: 'html', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
-    document.documentElement.setAttribute('nve-theme', SB_GLOBALS.theme);
+    const themes = [
+      SB_GLOBALS.theme === 'auto'
+        ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
+          ? 'light'
+          : 'dark'
+        : SB_GLOBALS.theme,
+      SB_GLOBALS.font,
+      SB_GLOBALS.scale,
+      SB_GLOBALS.debug,
+      SB_GLOBALS.animation,
+      SB_GLOBALS.experimental,
+      SB_GLOBALS.systemOptions
+    ]
+      .filter(i => i !== '')
+      .join(' ')
+      .trim();
+    globalThis.document.documentElement.setAttribute('nve-theme', themes);
   </script>
   <script type="module">
     import { BrowserClient, getCurrentScope, defaultStackParser, makeFetchTransport, breadcrumbsIntegration, browserApiErrorsIntegration, dedupeIntegration, functionToStringIntegration, globalHandlersIntegration, httpContextIntegration, browserTracingIntegration } from '@sentry/browser';
