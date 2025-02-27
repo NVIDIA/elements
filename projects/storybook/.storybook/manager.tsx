@@ -28,7 +28,22 @@ function updateTheme(themes) {
 
 const PageHeader = () => {
   const [globals] = useGlobals();
-  const themes = [globals.theme, globals.font, globals.scale, globals.debug, globals.animation, globals.experimental, globals.systemOptions].filter(i => i !== '').join(' ').trim();
+  const themes = [
+    globals.theme === 'auto'
+      ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
+        ? 'light'
+        : 'dark'
+      : globals.theme,
+    globals.font,
+    globals.scale,
+    globals.debug,
+    globals.animation,
+    globals.experimental,
+    globals.systemOptions
+  ]
+    .filter(i => i !== '')
+    .join(' ')
+    .trim();
   updateTheme(themes);
 
   return (
