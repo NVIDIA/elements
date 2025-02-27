@@ -9,9 +9,12 @@ import './_internal/glassmorphic-card/glassmorphic-card.js';
 import './_internal/metrics-carousel/metrics-carousel.js';
 import './_internal/starry-sky/starry-sky.js';
 
-window.customElements.whenDefined('nvd-framework-selector').then(() => {
-  const selector = document.querySelector<FrameworkSelector>('nvd-framework-selector')!;
-  const codeblock = document.querySelector<CodeBlock>('nve-codeblock')!;
+await Promise.all([
+  globalThis.customElements.whenDefined('nvd-framework-selector'),
+  globalThis.customElements.whenDefined('nve-codeblock')
+]).then(() => {
+  const selector = globalThis.document.querySelector<FrameworkSelector>('nvd-framework-selector')!;
+  const codeblock = globalThis.document.querySelector<CodeBlock>('nve-codeblock')!;
   codeblock.code = `<!-- ${selector.value} -->`;
   selector.addEventListener('change', _event => {
     codeblock.code = `<!-- ${selector.value} -->`;
