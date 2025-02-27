@@ -93,9 +93,12 @@ export class SystemSettings extends LitElement {
 
   #writeGlobals(update: Record<string, string>) {
     const globals = { ...this.#globals, ...update };
-    console.log(globals);
     const themes = [
-      globals.theme,
+      globals.theme === 'auto'
+        ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
+          ? 'light'
+          : 'dark'
+        : globals.theme,
       globals.font,
       globals.scale,
       globals.debug,
