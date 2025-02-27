@@ -1,3 +1,6 @@
+/* eslint-env node */
+/* global process */
+
 import { join } from 'node:path';
 
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
