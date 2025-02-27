@@ -32,9 +32,9 @@ function getOptionIndex(value: FrameworkIdentifier): number {
   return OPTION_INDEX_BY_VALUE[value];
 }
 
-function throttle<T extends (...args: any[]) => void>(fn: T, delay: number): T {
+function throttle<T extends (...args: unknown[]) => void>(fn: T, delay: number): T {
   let lastCall = 0;
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: unknown, ...args: Parameters<T>) {
     const now = Date.now();
     if (now - lastCall > delay) {
       lastCall = now;
@@ -159,8 +159,8 @@ export class FrameworkSelector extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
 
-    window.addEventListener('mousemove', this.#onMouseMove);
-    window.addEventListener('keydown', this.#onKeyDown);
+    globalThis.addEventListener('mousemove', this.#onMouseMove);
+    globalThis.addEventListener('keydown', this.#onKeyDown);
     this.addEventListener('wheel', this.#onWheel);
     this.addEventListener('scroll', this.#onScroll);
     this.addEventListener('pointerenter', this.#onPointerEnter);
@@ -174,8 +174,8 @@ export class FrameworkSelector extends LitElement {
   disconnectedCallback(): void {
     super.disconnectedCallback();
 
-    window.removeEventListener('mousemove', this.#onMouseMove);
-    window.removeEventListener('keydown', this.#onKeyDown);
+    globalThis.removeEventListener('mousemove', this.#onMouseMove);
+    globalThis.removeEventListener('keydown', this.#onKeyDown);
     this.removeEventListener('wheel', this.#onWheel);
     this.removeEventListener('scroll', this.#onScroll);
     this.removeEventListener('pointerenter', this.#onPointerEnter);
