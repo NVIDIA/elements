@@ -8,6 +8,7 @@ import type { FrameworkSelector } from './_internal/framework-selector/index.js'
 import './_internal/glassmorphic-card/glassmorphic-card.js';
 import './_internal/metrics-carousel/metrics-carousel.js';
 import './_internal/starry-sky/starry-sky.js';
+import './_internal/theme-gen/theme-gen.js';
 
 await Promise.all([
   globalThis.customElements.whenDefined('nvd-framework-selector'),
