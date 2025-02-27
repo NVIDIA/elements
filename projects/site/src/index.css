@@ -115,67 +115,6 @@ main {
   }
 }
 
-/* Floating Element Container */
-.floating-element-container {
-  position: relative;
-  width: 460px;
-  height: 600px;
-  pointer-events: none;
-  overflow: visible;
-}
-
-.floating-element {
-  position: absolute;
-
-  pointer-events: auto;
-}
-
-.floating-element-container nve-alert-group {
-  top: 0px;
-  left: 0px;
-  position: absolute;
-}
-
-/* Group with left: 40px */
-.floating-element-container nve-card {
-  top: 60px;
-  left: 40px;
-  width: 240px;
-  position: absolute;
-}
-
-.floating-element-container nve-button-group {
-  top: 488px;
-  left: 40px;
-  position: absolute;
-}
-
-.floating-element-container .stat {
-  top: 400px;
-  left: 40px;
-  position: absolute;
-}
-
-/* Group with left: 320px */
-.floating-element-container nve-pulse {
-  top: 60px;
-  left: 320px;
-  position: absolute;
-}
-
-.floating-element-container nve-select {
-  top: 140px;
-  left: 320px;
-  position: absolute;
-}
-
-/* Single element at left: 400px */
-.floating-element-container nve-progress-ring {
-  top: 76px;
-  left: 400px;
-  position: absolute;
-}
-
 /* Metrics Highlights */
 .features-grid-container {
   display: grid;
