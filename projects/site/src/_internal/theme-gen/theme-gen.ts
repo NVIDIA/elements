@@ -44,22 +44,22 @@ export class ThemeGen extends LitElement {
   ];
 
   @state() formValues = {
-    'sys-accent-primary-background': '#63a600',
-    'sys-accent-secondary-background': '#006adc',
-    'ref-scale-border-radius': 1,
-    'ref-scale-border-width': 1,
-    'ref-scale-space': 1,
-    'ref-scale-size': 1,
-    'ref-scale-text': 1
+    'sys-support-accent-color': '#0a71f0',
+    'sys-support-accent-muted-color': '#0f2f57',
+    'ref-scale-border-radius': '1',
+    'ref-scale-border-width': '1',
+    'ref-scale-space': '1',
+    'ref-scale-size': '1',
+    'ref-scale-text': '1'
   };
 
   render() {
     return html`
       <section nve-layout="row column-reverse@xs row@xl pad-y:xxl gap:xxl">
         <!-- Left Column - Example UI -->
-        <aside nve-layout="grid span-items:6 gap:md" nve-theme="root dark">
+        <aside nve-layout="grid span-items:6 gap:md" nve-theme="root">
           <nve-alert-group status="accent" nve-layout="span:12">
-            <nve-alert>Accent</nve-alert>
+            <nve-alert style="--icon-color: var(--nve-sys-support-accent-color)">Accent</nve-alert>
           </nve-alert-group>
 
           <div nve-layout="column gap:lg span:12 span@md:6">
@@ -92,7 +92,7 @@ export class ThemeGen extends LitElement {
 
               <nve-card-footer>
                 <div nve-layout="grid span-items:12 gap:xs">
-                  <nve-button>Add to Dataset</nve-button>
+                  <nve-button pressed>Add to Dataset</nve-button>
                 </div>
               </nve-card-footer>
             </nve-card>
@@ -129,7 +129,15 @@ export class ThemeGen extends LitElement {
             </nve-button-group>
 
             <div nve-layout="row gap:sm align:vertical-center">
+              <nve-progress-ring status="accent" size="xxs"></nve-progress-ring>
+
+              <nve-progress-ring status="accent" size="xs"></nve-progress-ring>
+              
+              <nve-progress-ring status="accent" size="sm"></nve-progress-ring>
+
               <nve-progress-ring status="accent"></nve-progress-ring>
+
+              <nve-progress-ring status="accent" size="lg"></nve-progress-ring>
 
               <nve-pulse size="lg" status="accent"></nve-pulse>
             </div>
@@ -154,37 +162,41 @@ export class ThemeGen extends LitElement {
           <!--  Form -->
           <form @input=${this.#input} nve-layout="column gap:md align:stretch">
             <nve-color layout="horizontal">
-              <label>Accent Color</label>
-              <input type="color" name="sys-accent-secondary-background" .value=${this.formValues['sys-accent-secondary-background']} />
+              <label>System Accent Color</label>
+              <input type="color" name="sys-support-accent-color" .value=${this.formValues['sys-support-accent-color']} />
+            </nve-color>
+
+            <nve-color layout="horizontal">
+              <label>System Accent Muted Color</label>
+              <input type="color" name="sys-support-accent-muted-color" .value=${this.formValues['sys-support-accent-muted-color']} />
             </nve-color>
 
             <nve-range>
               <label>Space Scale</label>
-              <input type="range" name="ref-scale-space" .value=${this.formValues['ref-space-scale']} min="0.5" max="2" step="0.1" />
+              <input type="range" name="ref-scale-space" .value=${this.formValues['ref-scale-space']} min="0.5" max="1.5" step="0.1" />
             </nve-range>
 
             <nve-range>
               <label>Size Scale</label>
-              <input type="range" name="ref-scale-size" .value=${this.formValues['ref-size-scale']} min="0.5" max="1.5" step="0.1" />
+              <input type="range" name="ref-scale-size" .value=${this.formValues['ref-scale-size']} min="0.5" max="1.5" step="0.1" />
             </nve-range>
 
             <nve-range>
               <label>Text Scale</label>
-              <input type="range" name="ref-scale-text" .value=${this.formValues['ref-text-scale']} min="0.5" max="1.5" step="0.1" />
+              <input type="range" name="ref-scale-text" .value=${this.formValues['ref-scale-text']} min="0.5" max="1.5" step="0.1" />
             </nve-range>
 
             <nve-range>
               <label>Border Radius</label>
-              <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-scale-border-radius']} min="0" max="1.5" step="0.1" />
+              <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-scale-border-radius']} min="0" max="2" step="0.1" />
             </nve-range>
 
             <nve-range>
               <label>Border Width</label>
-              <input type="range" name="ref-scale-border-width" .value=${this.formValues['ref-scale-border-width']} min="0.5" max="3" step="0.5" />
+              <input type="range" name="ref-scale-border-width" .value=${this.formValues['ref-scale-border-width']} min="0.5" max="6" step="0.5" />
             </nve-range>
 
             <!-- TODO - DETERMINE IF ROUNDED BUTTONS IS POSSIBLE -->
-             
             <!-- <nve-switch>
               <label>Rounded Buttons</label>
               <input type="checkbox" />
@@ -198,22 +210,50 @@ export class ThemeGen extends LitElement {
   #input() {
     const form = this.shadowRoot?.querySelector('form');
     const values = Object.fromEntries(new FormData(form as any)) as any;
-    this.#setFormValues(values);
+    this.setFormValues(values);
   }
 
-  #setFormValues(formValues) {
+  firstUpdated(props) {
+    super.firstUpdated(props);
+
+    // set all the scale based tokens diectly on aside
+    // this is a workaround due to how css custom properties inherit and resolve to the :root
+    const cssprops = getAllRootCSSCustomProperties();
+    Object.keys(cssprops)
+      .filter(key => cssprops[key].includes('scale'))
+      .map(key => [key, cssprops[key]])
+      .forEach(([key, value]) => {
+        this.shadowRoot?.querySelector('aside')?.style.setProperty(key, value);
+      });
+  }
+
+  setFormValues(formValues) {
     this.formValues = {
       ...formValues,
-      'sys-support-accent-emphasis-color': formValues['sys-accent-secondary-background']
+      'sys-support-accent-emphasis-color': formValues['sys-support-accent-muted-color']
     };
 
-    const asideElement = this.shadowRoot?.querySelector('section');
+    const asideElement = this.shadowRoot?.querySelector('aside');
 
     Object.keys(this.formValues).forEach(prop => {
-      /* TODO - DETERMINE IF WE ARE ABLE TO SET THE PROPERTY ON THE ASIDE ELEMENT */
-
-      // asideElement.style.setProperty(`--nve-${prop}`, this.formValues[prop]);
-      document.documentElement.style.setProperty(`--nve-${prop}`, this.formValues[prop]);
+      asideElement?.style.setProperty(`--nve-${prop}`, this.formValues[prop]);
     });
   }
+}
+
+function getAllRootCSSCustomProperties() {
+  const customProperties = new Map();
+  Array.from(document.styleSheets).forEach(sheet => {
+    Array.from(sheet.cssRules)
+      .filter(rule => rule.constructor.name === 'CSSStyleRule')
+      .forEach((rule: CSSStyleRule) => {
+        Array.from(rule.style)
+          .filter(prop => prop.startsWith('--'))
+          .forEach(propName => {
+            const value = rule.style.getPropertyValue(propName).trim();
+            customProperties.set(propName, value);
+          });
+      });
+  });
+  return Object.fromEntries(customProperties);
 }
