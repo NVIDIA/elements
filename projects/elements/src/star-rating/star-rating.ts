@@ -33,6 +33,7 @@ export class StarRating extends Control {
   @state() private max = 5;
   @state() private value = 0;
   @state() private active = 0;
+  @state() private precision = 0.5;
 
   firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
@@ -62,17 +63,45 @@ export class StarRating extends Control {
     return html`
     <div aria-hidden="true" class="stars" @mouseleave=${() => (this.active = 0)}>
       ${new Array(this.max).fill('').map((_, i) => {
-        const selected = i <= this.value - 1 && this.value > 0;
+        const starValue = i + 1;
+        const currentValue = this.active || this.value;
+        const diff = currentValue - i;
+
+        const iconName = diff >= 1 ? 'star' : diff >= 0.5 ? 'star-half' : 'star-stroke';
+
         return html`
         <nve-icon
-          @click=${() => this.#setValue(i + 1)}
-          @mouseover=${() => (this.active = i + 1)}
-          .name=${(selected && this.active === 0) || i <= this.active - 1 ? 'star' : 'star-stroke'}
+          @click=${() => this.#setValue(this.#getStepValue(i, starValue))}
+          @mousemove=${(e: MouseEvent) => this.#handleMouseMove(e, i, starValue)}
+          name=${iconName}
         ></nve-icon>
       `;
       })}
     </div>
     `;
+  }
+
+  #handleMouseMove(e: MouseEvent, index: number, starValue: number) {
+    const target = e.currentTarget as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    const position = (e.clientX - rect.left) / rect.width;
+
+    this.active = position <= 0.5 ? index + 0.5 : starValue;
+  }
+
+  #getStepValue(index: number, starValue: number) {
+    // If we're hovering (active is set), use that value
+    if (this.active > 0) {
+      return this.active;
+    }
+
+    // If clicking on the current value, toggle it off
+    if (this.value === starValue || this.value === index + 0.5) {
+      return 0;
+    }
+
+    // Otherwise, return the star value
+    return starValue;
   }
 
   #setValue(value: number) {

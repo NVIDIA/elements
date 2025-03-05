@@ -25,6 +25,16 @@ export const Disabled = {
   </nve-star-rating>`
 };
 
+export const HalfStar = {
+  render: () => html`
+  <nve-star-rating>
+    <label>Half-star rating</label>
+    <input id="half-star-input" type="range" max="5" value="3.5" min="0" step="0.5" />
+    <nve-control-message>message</nve-control-message>
+  </nve-star-rating>
+  `
+};
+
 export const Toggle = {
   render: () => html`
   <nve-star-rating>
