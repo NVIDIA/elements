@@ -1,3 +1,15 @@
+## [@nvidia-elements/styles-v1.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.7.1...@nvidia-elements/styles-v1.8.0) (2025-03-05)
+
+
+### Features
+
+* **styles:** add reverse flex direction to responsive util ([1fc3ca6](https://github.com/NVIDIA/elements/commit/1fc3ca6361e4622b0e5ab49e3bcd4ed8f9e536df))
+
+
+### Bug Fixes
+
+* **docs:** fix scoping of theme customizer ([bd009cc](https://github.com/NVIDIA/elements/commit/bd009ccb7a65ce22dddf0b8b7e37fd5e0b9f425b))
+
 ## [@nvidia-elements/styles-v1.7.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.7.0...@nvidia-elements/styles-v1.7.1) (2025-02-15)
 
 
