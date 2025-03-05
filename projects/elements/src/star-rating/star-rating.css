@@ -14,6 +14,15 @@
   --color: var(--nve-ref-color-yellow-amber-900);
 }
 
+[name='star-half'] {
+  --color: var(--nve-ref-color-yellow-amber-900);
+  --stroke-color: var(--nve-ref-border-color-emphasis);
+}
+
+[name='star-stroke'] {
+  --color: var(--nve-ref-border-color-emphasis);
+}
+
 nve-icon {
   --width: var(--star-size);
   --height: var(--star-size);
