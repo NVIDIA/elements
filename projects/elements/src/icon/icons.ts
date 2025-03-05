@@ -247,6 +247,7 @@ export const ICON_IMPORTS = {
   'split-horizontal': iconImport(() => import('./icons/split-horizontal.svg?raw')),
   'split-none': iconImport(() => import('./icons/split-none.svg?raw')),
   'split-vertical': iconImport(() => import('./icons/split-vertical.svg?raw')),
+  'star-half': iconImport(() => import('./icons/star-half.svg?raw')),
   'star-stroke': iconImport(() => import('./icons/star-stroke.svg?raw')),
   'star': iconImport(() => import('./icons/star.svg?raw')),
   'start': iconImport(() => import('./icons/start.svg?raw')),
