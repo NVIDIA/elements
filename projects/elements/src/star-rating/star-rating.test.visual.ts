@@ -39,5 +39,11 @@ function template(theme: '' | 'dark' = '') {
    <label>•︎•︎•︎•︎•︎•︎</label>
    <input type="range" max="1" value="0" min="0" />
  </nve-star-rating>
+
+ <nve-star-rating>
+   <label>•︎•︎•︎•︎•︎•︎</label>
+   <input type="range" max="5" value="2.5" min="0" step="0.5" />
+   <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
+ </nve-star-rating>
  `;
 }
