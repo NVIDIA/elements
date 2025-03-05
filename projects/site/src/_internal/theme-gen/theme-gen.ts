@@ -55,7 +55,7 @@ export class ThemeGen extends LitElement {
 
   render() {
     return html`
-      <section nve-layout="grid span-items:12 span-items@xl:6 pad-y:xxl gap:xxl">
+      <section nve-layout="row column-reverse@xs row@xl pad-y:xxl gap:xxl">
         <!-- Left Column - Example UI -->
         <aside nve-layout="grid span-items:6 gap:md" nve-theme="root dark">
           <nve-alert-group status="accent" nve-layout="span:12">

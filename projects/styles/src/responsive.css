@@ -58,6 +58,16 @@
         flex-direction: column;
         align-items: flex-start;
       }
+
+      &[nve-layout~='row-reverse@$(breakpoint)'] {
+        flex-direction: row-reverse;
+        place-items: flex-start;
+      }
+
+      &[nve-layout~='column-reverse@$(breakpoint)'] {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
     }
   }
 
