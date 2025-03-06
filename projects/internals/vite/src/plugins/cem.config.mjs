@@ -86,6 +86,7 @@ function metadataPlugin() {
             classDeclaration.metadata.entrypoint = classDeclaration.metadata.entrypoint.replace('\\', '');
             classDeclaration.metadata.status = getElementStability(classDeclaration.metadata);
             classDeclaration.metadata.behavior = getBehaviorCategory(classDeclaration);
+            classDeclaration.metadata.aria = getSpecUrl(classDeclaration);
           }
           break;
       }
@@ -137,14 +138,6 @@ function getBehaviorCategory(classDeclaration) {
     return 'button';
   }
 
-  if (
-    classDeclaration.superclass?.name === 'Control' ||
-    classDeclaration.superclass?.name === 'ControlGroup' ||
-    classDeclaration.name.startsWith('Control')
-  ) {
-    return 'form';
-  }
-
   if (JSON.stringify(classDeclaration.members).includes('TypeNativePopoverController')) {
     return 'popover';
   }
@@ -165,7 +158,37 @@ function getBehaviorCategory(classDeclaration) {
     return 'container';
   }
 
+  if (
+    classDeclaration.superclass?.name === 'BaseFormAssociatedElement' ||
+    classDeclaration.superclass?.name === 'Control' ||
+    classDeclaration.superclass?.name === 'ControlGroup' ||
+    classDeclaration.name.startsWith('Control') ||
+    classDeclaration.members?.some(m => m.name === 'formAssociated')
+  ) {
+    return 'form';
+  }
+
   return classDeclaration.metadata.category ?? 'content';
+}
+
+export function getSpecUrl(classDeclaration) {
+  if (classDeclaration.metadata.aria) {
+    return classDeclaration.metadata.aria;
+  }
+
+  if (getBehaviorCategory(classDeclaration) === 'button') {
+    return 'https://www.w3.org/WAI/ARIA/apg/patterns/button/';
+  }
+
+  if (getBehaviorCategory(classDeclaration) === 'form') {
+    return 'https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/attachInternals';
+  }
+
+  if (getBehaviorCategory(classDeclaration) === 'popover') {
+    return 'https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/popover';
+  }
+
+  return '#';
 }
 
 function basePathPlugin() {
