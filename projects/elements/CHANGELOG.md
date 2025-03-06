@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.29.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.28.0...@nvidia-elements/core-v1.29.0) (2025-03-06)
+
+
+### Features
+
+* **elements:** half-star support for nve-star-rating component ([532e3a0](https://github.com/NVIDIA/elements/commit/532e3a0079f3cd7e02f6f014bc14f49f19b4acf4))
+
 ## [@nvidia-elements/core-v1.28.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.27.4...@nvidia-elements/core-v1.28.0) (2025-02-25)
 
 
