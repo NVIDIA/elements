@@ -1,10 +1,10 @@
-import { html, LitElement, nothing } from 'lit';
+import { html, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   attachInternals,
+  BaseFormAssociatedElement,
   formatStandardNumber,
-  I18nController,
   keyNavigationList,
   useStyles
 } from '@nvidia-elements/core/internal';
@@ -26,14 +26,10 @@ import styles from './pagination.css?inline';
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-pagination-documentation--docs
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=3689-87177&t=znx8f5Hs8oD2ySWm-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
+ * @property {Number} value - value the current page number
  */
 @keyNavigationList<Pagination>()
-export class Pagination extends LitElement {
-  /**
-   * The current page number.
-   */
-  @property({ type: Number }) value = 1;
-
+export class Pagination extends BaseFormAssociatedElement<number> {
   /**
    * The number of items per page.
    */
@@ -64,23 +60,9 @@ export class Pagination extends LitElement {
   @property({ type: Boolean }) disabled: boolean;
 
   /**
-   * The name for the pagination, required to associate it with a form.
-   */
-  @property({ type: String }) name: string;
-
-  /**
    * Determines the container styles of component. Flat is used for nesting within other containers. Inline is used to inline within other inline content.
    */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
-
-  #i18nController: I18nController<this> = new I18nController<this>(this);
-
-  /**
-   * Enables internal string values to be updated for internationalization.
-   */
-  @property({ type: Object }) i18n = this.#i18nController.i18n;
-
-  static formAssociated = true;
 
   static styles = useStyles([styles]);
 
@@ -206,12 +188,15 @@ export class Pagination extends LitElement {
     `;
   }
 
+  constructor() {
+    super();
+    this.value = 1;
+  }
+
   async connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'toolbar';
-    this._internals.setFormValue(`${this.value}`);
-
     await this.updateComplete;
     this.#setupLabelWidth();
   }
@@ -242,9 +227,8 @@ export class Pagination extends LitElement {
   #setValue(value: number) {
     if (this.value !== value) {
       this.value = value;
-      this._internals.setFormValue(`${this.value}`);
-      this.dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, data: `${this.value}` }));
-      this.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+      this.dispatchInputEvent();
+      this.dispatchChangeEvent();
     }
 
     if (this.#isLastPage) {

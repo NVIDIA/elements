@@ -31,18 +31,19 @@ export const Forms = {
       </form>
       <script type="module">
         const form = document.querySelector('form');
+        const preferencesInput = document.querySelector('nve-preferences-input');
         const pre = document.querySelector('form pre');
 
         form.addEventListener('change', renderValues);
         form.addEventListener('input', renderValues);
         form.addEventListener('submit', renderValues);
+        pre.innerText = JSON.stringify(preferencesInput.value, null, 2);
 
+        
         function renderValues(e) {
           e.preventDefault();
           console.log(e);
-          pre.innerText = JSON.stringify({
-            ...Object.fromEntries(new FormData(form)), event: e.type
-          }, null, 2);
+          pre.innerText = JSON.stringify(preferencesInput.value, null, 2);
         }
       </script>
     `

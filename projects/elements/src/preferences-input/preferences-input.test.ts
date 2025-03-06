@@ -72,12 +72,9 @@ describe(`${PreferencesInput.metadata.tag}: style check`, () => {
     });
   });
 
-  it('should set value as form data', async () => {
+  it('should set and merge value as form data', async () => {
     const form = fixture.querySelector('form');
-    const value = new FormData();
-
-    value.set('color-scheme', 'dark');
-    element.value = value;
+    element.value = { 'color-scheme': 'dark' };
 
     expect(Object.fromEntries(new FormData(form))).toEqual({
       'config-color-scheme': 'dark',
