@@ -70,6 +70,7 @@ export const litConfig = [
       'lit/prefer-nothing': ['error'],
       'lit/quoted-expressions': ['error'],
       'lit/value-after-constraints': ['error'],
+      'lit/no-complex-attribute-binding': ['off'], // rule is not working when type is being resolved from a generic type parameter
       'lit-a11y/anchor-has-content': 'off', // rule does not check for aria-label
       'lit-a11y/click-events-have-key-events': 'off', // a11y may be handled by @keyNavigationList controller
       'no-unknown-slot': ['off'], // currently not working due to hoisting types

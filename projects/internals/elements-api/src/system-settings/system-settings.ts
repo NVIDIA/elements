@@ -31,12 +31,11 @@ export class SystemSettings extends LitElement {
   static styles = useStyles([styles]);
 
   #updatePreferences(event: Event) {
-    const preferences = Object.fromEntries((event.target as unknown as { value: FormData }).value);
-    console.log(preferences);
+    const preferences = (event.target as unknown as { value: FormData }).value;
     this.#writeGlobals({
       theme: preferences['color-scheme'] as string,
       scale: preferences['scale'] === 'default' ? '' : (preferences['scale'] as string),
-      animation: preferences['reduced-motion'] === 'true' ? 'reduced-motion' : ''
+      animation: preferences['reduced-motion'] ? 'reduced-motion' : ''
     });
   }
 

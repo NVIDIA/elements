@@ -1,8 +1,8 @@
 import type { PropertyValues } from 'lit';
-import { LitElement, html } from 'lit';
-import { attachInternals, I18nController, useStyles } from '@nvidia-elements/core/internal';
-import styles from './preferences-input.css?inline';
+import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { BaseFormAssociatedElement, useStyles } from '@nvidia-elements/core/internal';
+import styles from './preferences-input.css?inline';
 import { state } from 'lit/decorators/state.js';
 import type { IconName } from '@nvidia-elements/core/icon';
 import { Control } from '@nvidia-elements/core/forms';
@@ -35,6 +35,12 @@ function getActivePreferences(element = globalThis.document.documentElement) {
   } satisfies Partial<Record<ColorScheme | Scale | Variant, boolean>>;
 }
 
+export interface PreferencesInputValue {
+  'color-scheme'?: ColorScheme | string;
+  scale?: Scale | string;
+  'reduced-motion'?: boolean;
+}
+
 /**
  * @element nve-preferences-input
  * @description A preferences input is a widget for controlling apperance. Stylesheets register to the preferences input by including a css-property, see Standard for an example.
@@ -47,64 +53,20 @@ function getActivePreferences(element = globalThis.document.documentElement) {
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
  * @stable false
  */
-export class PreferencesInput extends LitElement {
-  /**
-   * The name for the preference settings, required to associate it with a form.
-   */
-  @property({ type: String }) name: string;
+export class PreferencesInput extends BaseFormAssociatedElement<PreferencesInputValue> {
+  static styles = useStyles([styles]);
 
-  #value = new FormData();
+  #value: PreferencesInputValue;
 
-  /**
-   * The current preferences settings.
-   */
   @property({ type: Object })
-  get value(): Object {
+  get value() {
     return this.#value;
   }
-  set value(value: Object) {
-    let previousValue = this.#value;
 
-    if (value instanceof FormData) {
-      this.#value = this.#ensureFormValue(value);
-    } else {
-      this.#value = this.#parseFormValue(value);
-    }
-
-    this.#updateFormValue();
-    this.requestUpdate('value', previousValue);
+  set value(value) {
+    this.#value = { ...this.#value, ...value };
+    this.setFormValue();
   }
-
-  #i18nController: I18nController<this> = new I18nController<this>(this);
-
-  /**
-   * Enables internal string values to be updated for internationalization.
-   */
-  @property({ type: Object }) i18n = this.#i18nController.i18n;
-
-  get form() {
-    return this._internals.form;
-  }
-
-  get type() {
-    return this.localName;
-  }
-
-  get validity() {
-    return this._internals.validity;
-  }
-
-  get validationMessage() {
-    return this._internals.validationMessage;
-  }
-
-  get willValidate() {
-    return this._internals.willValidate;
-  }
-
-  static formAssociated = true;
-
-  static styles = useStyles([styles]);
 
   static readonly metadata = {
     tag: 'nve-preferences-input',
@@ -132,10 +94,11 @@ export class PreferencesInput extends LitElement {
 
   constructor() {
     super();
-    this.#value.set('color-scheme', 'auto');
-    this.#value.set('scale', 'default');
-    this.#value.set('reduced-motion', 'false');
-    attachInternals(this);
+    this.value = {
+      'color-scheme': 'auto',
+      'reduced-motion': false,
+      scale: 'default'
+    };
   }
 
   render() {
@@ -147,7 +110,7 @@ export class PreferencesInput extends LitElement {
           ${colorSchemes.map(
             value => html`
             <nve-menu-item
-              .selected=${this.#value.get('color-scheme') === value}
+              .selected=${this.value['color-scheme'] === value}
               .value=${value}
               @click=${() => this.#setColorScheme(value)}
             >
@@ -167,7 +130,7 @@ export class PreferencesInput extends LitElement {
           ${scales.map(
             value => html`
             <nve-menu-item
-              .selected=${this.#value.get('scale') === value}
+              .selected=${this.value['scale'] === value}
               .value=${value}
               @click=${() => this.#setScale(value)}
             >
@@ -189,7 +152,7 @@ export class PreferencesInput extends LitElement {
           <input
             type="checkbox"
             value="reduced-motion"
-            .checked=${this.#value.get('reduced-motion') === 'true'}
+            .checked=${this.value['reduced-motion']}
             @change=${(e: { target: HTMLInputElement }) => this.#setReducedMotion(e.target.checked)}
           />
         </nve-switch>`
@@ -209,14 +172,6 @@ export class PreferencesInput extends LitElement {
     this.#updatePreferences();
   }
 
-  checkValidity() {
-    this._internals.checkValidity();
-  }
-
-  reportValidity() {
-    this._internals.reportValidity();
-  }
-
   #updatePreferences() {
     const preferences = getActivePreferences();
     if (JSON.stringify(this.activePreferences) !== JSON.stringify(preferences)) {
@@ -224,53 +179,23 @@ export class PreferencesInput extends LitElement {
     }
   }
 
-  #ensureFormValue(value: FormData) {
-    value.set('color-scheme', value.get('color-scheme') ?? 'auto');
-    value.set('scale', value.get('scale') ?? 'default');
-    value.set('reduced-motion', value.get('reduced-motion') ?? 'false');
-
-    return value;
-  }
-
-  #parseFormValue(value: Object) {
-    const parsedValueAsFormData = new FormData();
-
-    parsedValueAsFormData.set('color-scheme', value['color-scheme'] ?? 'auto');
-    parsedValueAsFormData.set('scale', value['scale'] ?? 'default');
-    parsedValueAsFormData.set('reduced-motion', value['reduced-motion'] ?? 'false');
-
-    return parsedValueAsFormData;
-  }
-
   #setColorScheme(value: ColorScheme) {
-    this.#value.set('color-scheme', value);
+    this.value = { ...this.value, 'color-scheme': value };
     this.#update();
   }
 
   #setScale(value: Scale) {
-    this.#value.set('scale', value);
+    this.value = { ...this.value, scale: value };
     this.#update();
   }
 
   #setReducedMotion(value: boolean) {
-    this.#value.set('reduced-motion', String(value));
+    this.value = { ...this.value, 'reduced-motion': value };
     this.#update();
   }
 
   #update() {
-    this.requestUpdate();
-    this.#updateFormValue();
-    this.dispatchEvent(new CustomEvent('change', { bubbles: true }));
-    this.dispatchEvent(new CustomEvent('input', { bubbles: true }));
-  }
-
-  #updateFormValue() {
-    const formData = new FormData();
-
-    formData.append(`${this.name}-color-scheme`, this.#value.get('color-scheme'));
-    formData.append(`${this.name}-scale`, this.#value.get('scale'));
-    formData.append(`${this.name}-reduced-motion`, this.#value.get('reduced-motion'));
-
-    this._internals.setFormValue(formData);
+    this.dispatchInputEvent();
+    this.dispatchChangeEvent();
   }
 }
