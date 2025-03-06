@@ -2,6 +2,14 @@ export function isObject(item) {
   return item && typeof item === 'object' && !Array.isArray(item);
 }
 
+export function isObjectLiteral(item) {
+  if (!item || typeof item !== 'object' || Array.isArray(item)) {
+    return false;
+  }
+  const proto = Object.getPrototypeOf(item);
+  return proto === null || proto === Object.prototype;
+}
+
 export function deepMerge(target, ...sources) {
   if (!sources.length) {
     return target;
