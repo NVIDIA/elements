@@ -60,6 +60,22 @@ export const FlexDirectionResponsive = {
   `
 }
 
+export const FlexDirectionReverse = {
+  render: () => html`
+    <style>
+      nve-logo.reversible {
+        --width: 250px;
+        --height: 250px;
+      }
+    </style>
+
+    <section nve-layout="row column-reverse@sm row@lg gap:xxl">
+      <nve-logo class="reversible" color="green-mint">A</nve-logo>
+      <nve-logo class="reversible" color="green-mint">B</nve-logo>
+    </section>
+  `
+}
+
 export const ResponsiveGrid = {
   render: () => html`
     <section nve-layout="grid gap:md span-items:12 span-items@sm:6 span-items@md:4 span-items@lg:3">
