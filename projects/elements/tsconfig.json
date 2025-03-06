@@ -30,7 +30,9 @@
           "no-unknown-attribute": "off",
           "no-missing-import": "off",
           "no-unknown-property": "off",
-          "no-property-visibility-mismatch": "off"
+          "no-property-visibility-mismatch": "off",
+          "no-complex-attribute-binding": "off",
+          "no-incompatible-type-binding": "off"
         }
       }
     ]
