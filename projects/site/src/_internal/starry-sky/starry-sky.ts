@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit';
+import type { PropertyValues } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 
 @customElement('nvd-starry-sky')
@@ -51,7 +52,9 @@ export class StarrySky extends LitElement {
     }
   `;
 
-  firstUpdated() {
+  firstUpdated(changedProperties: PropertyValues) {
+    super.firstUpdated(changedProperties);
+
     this.createStars();
   }
 

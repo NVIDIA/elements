@@ -17,6 +17,7 @@ const CENTER_INDEX = Math.floor(VISIBLE_CARD_COUNT / 2);
 const CENTER_OFFSET = CENTER_INDEX * CARD_HEIGHT;
 
 const AUTO_SCROLL_INTERVAL = 2000;
+
 const MAX_TILT = 15;
 
 const OPTIONS = frameworkOptions;
@@ -32,7 +33,8 @@ function getOptionIndex(value: FrameworkIdentifier): number {
   return OPTION_INDEX_BY_VALUE[value];
 }
 
-function throttle<T extends (...args: unknown[]) => void>(fn: T, delay: number): T {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function throttle<T extends (...args: any[]) => void>(fn: T, delay: number): T {
   let lastCall = 0;
   return function (this: unknown, ...args: Parameters<T>) {
     const now = Date.now();
@@ -205,6 +207,8 @@ export class FrameworkSelector extends LitElement {
   };
 
   updated(changedProperties: PropertyValues<this>) {
+    super.updated(changedProperties);
+
     if (changedProperties.has('value')) {
       this.#updateScrollPosition(getOptionIndex(this.#value));
       this.#updateCards();
@@ -225,7 +229,7 @@ export class FrameworkSelector extends LitElement {
     const y = ((clientY - top) / height - 0.5) * 2;
 
     const tiltX = Math.max(Math.min(-y * MAX_TILT, MAX_TILT), -MAX_TILT);
-    const tiltY = Math.max(Math.min(x * MAX_TILT, MAX_TILT), -MAX_TILT);
+    const tiltY = Math.max(Math.min(x * MAX_TILT, MAX_TILT), 0);
 
     const gradientAngle = Math.atan2(tiltY, tiltX) * (180 / Math.PI);
     const tiltMagnitude = Math.sqrt(tiltX ** 2 + tiltY ** 2) / MAX_TILT;
