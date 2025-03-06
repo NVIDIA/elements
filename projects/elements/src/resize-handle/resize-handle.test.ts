@@ -167,12 +167,12 @@ describe(ResizeHandle.metadata.tag, () => {
     element.dispatchEvent(new Event('dblclick'));
     await event;
     expect(element.valueAsNumber).toBe(10);
-    expect(element.value).toBe('10');
+    expect(element.value).toBe(10);
 
     const event2 = untilEvent(element, 'input');
     element.dispatchEvent(new Event('dblclick'));
     await event2;
     expect(element.valueAsNumber).toBe(90);
-    expect(element.value).toBe('90');
+    expect(element.value).toBe(90);
   });
 });
