@@ -2,6 +2,7 @@ import { html, css, LitElement, unsafeCSS } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators.js';
 
+/* eslint-disable no-inline-css/no-restricted-imports */
 import layout from '@nvidia-elements/styles/layout.css?inline';
 import typography from '@nvidia-elements/styles/typography.css?inline';
 import responsive from '@nvidia-elements/styles/responsive.css?inline';
@@ -24,7 +25,6 @@ export class GlassmorphicCard extends LitElement {
       gap: var(--nve-ref-size-400);
       position: relative;
       border-radius: var(--nve-ref-border-radius-xl);
-      border: var(--nve-ref-border-width-sm) solid rgba(255, 255, 255, 0.08);
       background: var(--background);
     }
 
@@ -37,8 +37,8 @@ export class GlassmorphicCard extends LitElement {
       height: 150px;
       background: var(--background-logo) center/contain no-repeat;
       transform: translate(-50%, -50%);
-      filter: blur(5px);
-      opacity: 0.75;
+      filter: blur(8px);
+      opacity: 0.2;
     }
 
     .header {
@@ -51,15 +51,19 @@ export class GlassmorphicCard extends LitElement {
       width: 40px;
     }
 
+    h3 {
+      margin: 0;
+    }
+
     nve-button {
       margin-left: auto;
       --background: rgba(255, 255, 255, 0.4);
-      --color: black;
-      --border: var(--nve-ref-border-width-sm) solid rgba(255, 255, 255, 0.15);
+      --border: var(--nve-ref-border-width-sm) solid rgba(255, 255, 255, 0.18);
+      --background: rgba(255, 255, 255, 0.12);
     }
 
     nve-button nve-icon {
-      --color: black;
+      --color: var(--nve-sys-text-emphasis-color);
     }
 
     h3 {
