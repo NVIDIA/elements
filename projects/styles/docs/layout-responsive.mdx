@@ -1,6 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
 import { Canvas } from '@nve-internals/storybook/blocks';
-import { GapResponsive, PadResponsive, HideResponsive, FlexDirectionResponsive, ResponsiveGrid, ResponsiveGridItems } from './layout-responsive.stories';
+import { GapResponsive, PadResponsive, HideResponsive, FlexDirectionResponsive, FlexDirectionReverse, ResponsiveGrid, ResponsiveGridItems } from './layout-responsive.stories';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/icon/define.js';
@@ -136,6 +136,13 @@ The following container query breakpoints are available for swapping flex direct
 - `column@3xl`
 
 <Canvas of={FlexDirectionResponsive} />
+
+In addition to the above, you can also use the following syntax for flipping the flex direction:
+
+- `row-reverse@...`
+- `column-reverse@...`
+
+<Canvas of={FlexDirectionReverse} />
 
 ## Responsive Grid
 
