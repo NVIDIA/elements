@@ -57,7 +57,7 @@ export class ThemeGen extends LitElement {
     return html`
       <section nve-layout="row column-reverse@xs row@xl pad-y:xxl gap:xxl">
         <!-- Left Column - Example UI -->
-        <aside nve-layout="grid span-items:6 gap:md" nve-theme="root">
+        <aside nve-layout="grid span-items:6 gap:xl" nve-theme="root">
           <nve-alert-group status="accent" nve-layout="span:12">
             <nve-alert style="--icon-color: var(--nve-sys-support-accent-color)">Accent</nve-alert>
           </nve-alert-group>
@@ -96,6 +96,37 @@ export class ThemeGen extends LitElement {
                 </div>
               </nve-card-footer>
             </nve-card>
+          </div>
+
+          <div nve-layout="column gap:lg align:center span:12 span@md:6">
+            <nve-select>
+              <label>label</label>
+              <select>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+
+              <!-- <nve-control-message>message</nve-control-message> -->
+            </nve-select>
+            
+            <nve-button-group container="rounded" behavior-select="single">
+              <nve-button pressed>All Time</nve-button>
+              <nve-button>30 Days</nve-button>
+              <nve-button>90 Days</nve-button>
+            </nve-button-group>
+
+            <div nve-layout="row gap:sm pad-left:md align:vertical-center">
+              <nve-progress-ring status="accent" size="xs"></nve-progress-ring>
+              
+              <nve-progress-ring status="accent" size="sm"></nve-progress-ring>
+
+              <nve-progress-ring status="accent"></nve-progress-ring>
+
+              <nve-progress-ring status="accent" size="lg"></nve-progress-ring>
+
+              <nve-pulse size="lg" status="accent"></nve-pulse>
+            </div>
 
             <div class="stat" nve-layout="column gap:xs">
               <div nve-layout="column gap:sm">
@@ -107,39 +138,6 @@ export class ThemeGen extends LitElement {
                 <label nve-text="label medium sm muted">Since last week</label>
                 <nve-badge status="trend-up">+15%</nve-badge>
               </div>
-            </div>
-
-            <nve-select fit-text>
-              <label>label</label>
-              <select>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </select>
-
-              <!-- <nve-control-message>message</nve-control-message> -->
-            </nve-select>
-          </div>
-
-          <div nve-layout="column gap:lg align:center span:12 span@md:6">
-            <nve-button-group container="rounded" behavior-select="single">
-              <nve-button pressed>All Time</nve-button>
-              <nve-button>30 Days</nve-button>
-              <nve-button>90 Days</nve-button>
-            </nve-button-group>
-
-            <div nve-layout="row gap:sm align:vertical-center">
-              <nve-progress-ring status="accent" size="xxs"></nve-progress-ring>
-
-              <nve-progress-ring status="accent" size="xs"></nve-progress-ring>
-              
-              <nve-progress-ring status="accent" size="sm"></nve-progress-ring>
-
-              <nve-progress-ring status="accent"></nve-progress-ring>
-
-              <nve-progress-ring status="accent" size="lg"></nve-progress-ring>
-
-              <nve-pulse size="lg" status="accent"></nve-pulse>
             </div>
           </div>
         </aside>
@@ -160,41 +158,47 @@ export class ThemeGen extends LitElement {
           </div>
 
           <!--  Form -->
-          <form @input=${this.#input} nve-layout="column gap:md align:stretch">
-            <nve-color layout="horizontal">
-              <label>System Accent Color</label>
-              <input type="color" name="sys-support-accent-color" .value=${this.formValues['sys-support-accent-color']} />
-            </nve-color>
+          <form @input=${this.#input} nve-layout="column gap:lg align:stretch">
+            <div nve-layout="row gap:md">
+              <nve-color layout="horizontal">
+                <label>System Accent Color</label>
+                <input type="color" name="sys-support-accent-color" .value=${this.formValues['sys-support-accent-color']} />
+              </nve-color>
 
-            <nve-color layout="horizontal">
-              <label>System Accent Muted Color</label>
-              <input type="color" name="sys-support-accent-muted-color" .value=${this.formValues['sys-support-accent-muted-color']} />
-            </nve-color>
-
-            <nve-range>
-              <label>Space Scale</label>
-              <input type="range" name="ref-scale-space" .value=${this.formValues['ref-scale-space']} min="0.5" max="1.5" step="0.1" />
-            </nve-range>
-
-            <nve-range>
-              <label>Size Scale</label>
-              <input type="range" name="ref-scale-size" .value=${this.formValues['ref-scale-size']} min="0.5" max="1.5" step="0.1" />
-            </nve-range>
+              <nve-color layout="horizontal">
+                <label>System Accent Muted Color</label>
+                <input type="color" name="sys-support-accent-muted-color" .value=${this.formValues['sys-support-accent-muted-color']} />
+              </nve-color>
+            </div>
 
             <nve-range>
               <label>Text Scale</label>
               <input type="range" name="ref-scale-text" .value=${this.formValues['ref-scale-text']} min="0.5" max="1.5" step="0.1" />
             </nve-range>
 
-            <nve-range>
-              <label>Border Radius</label>
-              <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-scale-border-radius']} min="0" max="2" step="0.1" />
-            </nve-range>
+            <div nve-layout="row gap:md">
+              <nve-range>
+                <label>Space Scale</label>
+                <input type="range" name="ref-scale-space" .value=${this.formValues['ref-scale-space']} min="0.5" max="1.5" step="0.1" />
+              </nve-range>
 
-            <nve-range>
-              <label>Border Width</label>
-              <input type="range" name="ref-scale-border-width" .value=${this.formValues['ref-scale-border-width']} min="0.5" max="6" step="0.5" />
-            </nve-range>
+              <nve-range>
+                <label>Size Scale</label>
+                <input type="range" name="ref-scale-size" .value=${this.formValues['ref-scale-size']} min="0.5" max="1.5" step="0.1" />
+              </nve-range>
+            </div>
+
+            <div nve-layout="row gap:md">
+              <nve-range>
+                <label>Border Radius</label>
+                <input type="range" name="ref-scale-border-radius" .value=${this.formValues['ref-scale-border-radius']} min="0" max="2" step="0.1" />
+              </nve-range>
+
+              <nve-range>
+                <label>Border Width</label>
+                <input type="range" name="ref-scale-border-width" .value=${this.formValues['ref-scale-border-width']} min="0.5" max="6" step="0.5" />
+              </nve-range>
+            </div>
 
             <!-- TODO - DETERMINE IF ROUNDED BUTTONS IS POSSIBLE -->
             <!-- <nve-switch>
