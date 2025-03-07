@@ -1,12 +1,21 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement, unsafeCSS } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators.js';
+
+import layout from '@nvidia-elements/styles/layout.css?inline';
+import typography from '@nvidia-elements/styles/typography.css?inline';
+import responsive from '@nvidia-elements/styles/responsive.css?inline';
+
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon/define.js';
 
 @customElement('nvd-glassmorphic-card')
 export class GlassmorphicCard extends LitElement {
-  static styles = css`
+  static styles = [
+    unsafeCSS(layout),
+    unsafeCSS(typography),
+    unsafeCSS(responsive),
+    css`
     :host {
       height: 180px;
       padding: var(--nve-ref-size-600);
@@ -56,7 +65,8 @@ export class GlassmorphicCard extends LitElement {
     h3 {
       font-weight: var(--nve-ref-font-weight-medium);
     }
-  `;
+  `
+  ];
 
   @property({ attribute: 'logo-src' }) logoSrc = '';
 
@@ -67,7 +77,7 @@ export class GlassmorphicCard extends LitElement {
   render() {
     return html`
       <div class="header">
-        <div class="logo">
+        <div class="logo" nve-layout="hide show@xs">
           <img src="${this.logoSrc}" alt="${this.logoAlt}" />
         </div>
 
