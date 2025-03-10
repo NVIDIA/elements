@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.29.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.0...@nvidia-elements/core-v1.29.1) (2025-03-10)
+
+
+### Bug Fixes
+
+* **elements:** update various snippets for browse pattern snippet ([1822497](https://github.com/NVIDIA/elements/commit/1822497c46cc4dc49d4ba4b64d56df7e6b8b0924))
+
 ## [@nvidia-elements/core-v1.29.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.28.0...@nvidia-elements/core-v1.29.0) (2025-03-06)
 
 
