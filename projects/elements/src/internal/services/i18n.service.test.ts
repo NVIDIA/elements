@@ -39,7 +39,12 @@ describe('GlobalStateService', () => {
       scale: 'scale',
       reducedMotion: 'reduced motion',
       colorScheme: 'color scheme',
-      resize: 'resize'
+      resize: 'resize',
+      or: 'or',
+      files: 'files',
+      dragAndDrop: 'drag & drop',
+      browseFiles: 'browse files',
+      maxFileSize: 'max file size'
     });
   });
 
@@ -77,7 +82,12 @@ describe('GlobalStateService', () => {
       scale: 'échelle',
       reducedMotion: 'mouvement réduit',
       colorScheme: 'schéma de couleur',
-      resize: 'redimensionner'
+      resize: 'redimensionner',
+      or: 'or',
+      files: 'files',
+      dragAndDrop: 'drag & drop',
+      browseFiles: 'browse files',
+      maxFileSize: 'max file size'
     });
 
     expect(I18nService.i18n).toStrictEqual({
@@ -111,7 +121,12 @@ describe('GlobalStateService', () => {
       scale: 'échelle',
       reducedMotion: 'mouvement réduit',
       colorScheme: 'schéma de couleur',
-      resize: 'redimensionner'
+      resize: 'redimensionner',
+      or: 'or',
+      files: 'files',
+      dragAndDrop: 'drag & drop',
+      browseFiles: 'browse files',
+      maxFileSize: 'max file size'
     });
 
     I18nService.update(original);
