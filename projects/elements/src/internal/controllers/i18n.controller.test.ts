@@ -65,7 +65,12 @@ describe('i18n.controller', () => {
       scale: 'scale',
       reducedMotion: 'reduced motion',
       colorScheme: 'color scheme',
-      resize: 'resize'
+      resize: 'resize',
+      or: 'or',
+      files: 'files',
+      dragAndDrop: 'drag & drop',
+      browseFiles: 'browse files',
+      maxFileSize: 'max file size'
     });
   });
 
@@ -105,7 +110,12 @@ describe('i18n.controller', () => {
       scale: 'scale',
       reducedMotion: 'reduced motion',
       colorScheme: 'color scheme',
-      resize: 'resize'
+      resize: 'resize',
+      or: 'or',
+      files: 'files',
+      dragAndDrop: 'drag & drop',
+      browseFiles: 'browse files',
+      maxFileSize: 'max file size'
     });
   });
 });
