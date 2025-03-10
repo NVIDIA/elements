@@ -190,6 +190,7 @@ export const parameters = {
           'Dot',
           'Drawer',
           'Dropdown',
+          'Dropzone',
           'File',
           'Icon',
           'Icon Button',
