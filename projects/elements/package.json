@@ -347,6 +347,18 @@
       "types": "./dist/dropdown/define.d.ts",
       "default": "./dist/dropdown/define.js"
     },
+    "./dropzone": {
+      "types": "./dist/dropzone/index.d.ts",
+      "default": "./dist/dropzone/index.js"
+    },
+    "./dropzone/index.js": {
+      "types": "./dist/dropzone/index.d.ts",
+      "default": "./dist/dropzone/index.js"
+    },
+    "./dropzone/define.js": {
+      "types": "./dist/dropzone/define.d.ts",
+      "default": "./dist/dropzone/define.js"
+    },
     "./file": {
       "types": "./dist/file/index.d.ts",
       "default": "./dist/file/index.js"

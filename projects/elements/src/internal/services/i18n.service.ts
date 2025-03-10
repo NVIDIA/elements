@@ -32,6 +32,11 @@ export interface I18nStrings {
   reducedMotion: string;
   colorScheme: string;
   resize: string;
+  or: string;
+  files: string;
+  dragAndDrop: string;
+  browseFiles: string;
+  maxFileSize: string;
 }
 
 const i18nRegistry = {
@@ -65,7 +70,12 @@ const i18nRegistry = {
   scale: 'scale',
   reducedMotion: 'reduced motion',
   colorScheme: 'color scheme',
-  resize: 'resize'
+  resize: 'resize',
+  or: 'or',
+  files: 'files',
+  dragAndDrop: 'drag & drop',
+  browseFiles: 'browse files',
+  maxFileSize: 'max file size'
 };
 
 export class I18nService_ {
