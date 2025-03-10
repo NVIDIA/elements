@@ -1,0 +1,84 @@
+:host {
+  --background: inherit;
+  --min-height: 50px;
+  --border-radius: var(--nve-ref-border-radius-xs);
+  --border-color: var(--nve-ref-border-color);
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nve-ref-space-md);
+}
+
+.container {
+  background: var(--background);
+  border-radius: var(--border-radius);
+  justify-content: center;
+  gap: var(--nve-ref-space-xs);
+  min-height: var(--min-height);
+  padding: var(--nve-ref-space-lg);
+  color: var(--nve-sys-text-color);
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+
+.border {
+  border-radius: var(--border-radius);
+  color: var(--border-color);
+  position: absolute;
+  inset: 0;
+}
+
+.icon {
+  padding: var(--nve-ref-space-xs);
+  border-radius: var(--nve-ref-border-radius-sm);
+  background: var(--nve-sys-layer-canvas-accent-background);
+}
+
+.text-emphasized {
+  color: var(--nve-sys-interaction-emphasis-background);
+}
+
+.text-center {
+  text-align: center;
+  line-height: var(--nve-ref-line-height-relaxed);
+  font-size: var(--nve-ref-font-size-200);
+}
+.text-center::first-letter {
+  text-transform: capitalize;
+}
+
+.text-bold {
+  font-weight: var(--nve-ref-font-weight-semibold);
+}
+
+.text-muted {
+  color: var(--nve-sys-text-muted-color);
+  font-size: var(--nve-ref-font-size-100);
+  font-weight: var(--nve-ref-font-weight-regular);
+}
+
+:host([highlighted]),
+:host(:hover) {
+  --background: color-mix(in oklab, transparent, var(--nve-sys-accent-secondary-background) 20%);
+  --border-color: var(--nve-ref-border-color-emphasis);
+
+  .icon {
+    background: var(--nve-sys-accent-secondary-background);
+    --color: var(--nve-sys-text-white-color);
+  }
+
+  .text-emphasized {
+    color: var(--nve-sys-text-color);
+  }
+}
+
+:host([highlighted]),
+:host(:active) {
+  --background: color-mix(in oklab, transparent, var(--nve-sys-accent-secondary-background) 30%);
+}

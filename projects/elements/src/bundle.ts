@@ -28,6 +28,7 @@ import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/dot/define.js';
 import '@nvidia-elements/core/drawer/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
+import '@nvidia-elements/core/dropzone/define.js';
 import '@nvidia-elements/core/file/define.js';
 import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/grid/define.js';
