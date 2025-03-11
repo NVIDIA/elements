@@ -4,9 +4,13 @@
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
   --border-radius: var(--nve-ref-border-radius-md);
   --icon-size: var(--nve-ref-size-600);
+  --icon-color: var(--color);
   --color: var(--nve-sys-text-color);
-  --icon-color: var(--nve-sys-support-emphasis-color);
-  --background: var(--nve-sys-support-muted-color);
+  --background: color-mix(
+    in oklab,
+    var(--status-color) var(--nve-sys-contrast-mute-ratio),
+    var(--nve-sys-contrast-mute-color)
+  );
   width: 100%;
 }
 
@@ -33,26 +37,6 @@
   height: 100%;
 }
 
-:host([status='accent']) {
-  --background: var(--nve-sys-support-accent-muted-color);
-  --icon-color: var(--nve-sys-support-accent-emphasis-color);
-}
-
-:host([status='success']) {
-  --background: var(--nve-sys-support-success-muted-color);
-  --icon-color: var(--nve-sys-support-success-emphasis-color);
-}
-
-:host([status='warning']) {
-  --background: var(--nve-sys-support-warning-muted-color);
-  --icon-color: var(--nve-sys-support-warning-emphasis-color);
-}
-
-:host([status='danger']) {
-  --background: var(--nve-sys-support-danger-muted-color);
-  --icon-color: var(--nve-sys-support-danger-emphasis-color);
-}
-
 :host([container='full']) {
   --border-radius: 0;
 }
@@ -65,26 +49,26 @@
 
 :host([prominence='emphasis'][status='accent']) {
   --background: var(--nve-sys-support-accent-color);
-  --icon-color: var(--color);
 }
 
 :host([prominence='emphasis'][status='success']) {
   --background: var(--nve-sys-support-success-color);
-  --icon-color: var(--color);
 }
 
 :host([prominence='emphasis'][status='warning']) {
   --background: var(--nve-sys-support-warning-color);
-  --icon-color: var(--color);
   --color: var(--nve-sys-text-black-color);
 }
 
 :host([prominence='emphasis'][status='danger']) {
   --background: var(--nve-sys-support-danger-color);
-  --icon-color: var(--color);
 }
 
 :host([prominence='emphasis']) ::slotted(nve-alert),
 :host([prominence='emphasis']) ::slotted(nve-alert) {
   --font-weight: var(--nve-ref-font-weight-regular);
+}
+
+:host(:not([prominence='emphasis'])) ::slotted(nve-alert) {
+  --icon-color: var(--status-color) !important;
 }
