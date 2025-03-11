@@ -75,13 +75,9 @@ nve-icon[size='sm'] {
   padding: var(--nve-ref-size-50);
 }
 
-nve-icon-button:not([icon-name='cancel']) {
+nve-icon-button {
   --color: var(--icon-color);
   margin-left: auto;
-}
-
-nve-icon-button {
-  --color: var(--_icon-cancel-color);
 }
 
 ::slotted([nve-text]),
@@ -106,4 +102,8 @@ nve-icon-button {
 :host([status='unknown']),
 :host([status='ignored']) {
   --color: var(--status-color);
+}
+
+::slotted([slot='actions']) {
+  --color: var(--status-color) !important;
 }
