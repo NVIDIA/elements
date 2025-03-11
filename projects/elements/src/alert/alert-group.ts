@@ -3,7 +3,7 @@ import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { property } from 'lit/decorators/property.js';
 import type { Container, Prominence, SupportStatus } from '@nvidia-elements/core/internal';
-import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
+import { attachInternals, useStyles, supportStateStyles } from '@nvidia-elements/core/internal';
 import type { Alert } from './alert.js';
 import styles from './alert-group.css?inline';
 
@@ -24,7 +24,7 @@ import styles from './alert-group.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
  */
 export class AlertGroup extends LitElement {
-  static styles = useStyles([styles]);
+  static styles = useStyles([supportStateStyles, styles]);
 
   static readonly metadata = {
     tag: 'nve-alert-group',

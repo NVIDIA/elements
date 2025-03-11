@@ -1,5 +1,5 @@
 :host {
-  --status-color: var(--nve-sys-status-color);
+  --status-color: var(--nve-sys-support-emphasis-color);
 }
 
 :host([status='muted']) {
