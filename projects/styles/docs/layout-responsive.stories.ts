@@ -9,7 +9,7 @@ export default {
 
 export const GapResponsive = {
   render: () => html`
-    <section nve-layout="row align:center gap@sm:xs gap@md:xl gap@lg:xxl gap@xl:xxxl">
+    <section nve-layout="row align:center &sm|gap:xs &md|gap:xl &lg|gap:xxl &xl|gap:xxxl">
       <nve-card></nve-card>
       <nve-card></nve-card>
       <nve-card></nve-card>
@@ -19,7 +19,7 @@ export const GapResponsive = {
 
 export const PadResponsive = {
   render: () => html`
-    <section nve-layout="row pad@sm:xxxs pad@md:md pad@lg:lg pad@xl:xxxl">
+    <section nve-layout="row &sm|pad:xxxs &md|pad:md &lg|pad:lg &xl|pad:xxxl">
       <nve-card nve-layout="full"></nve-card>
     </section>
   `
@@ -28,29 +28,29 @@ export const PadResponsive = {
 export const HideResponsive = {
   render: () => html`
     <section nve-layout="row gap:lg">
-      <nve-logo size="lg" color="green-mint" nve-layout="hide show@xs">1</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &xs|show">1</nve-logo>
 
-      <nve-logo size="lg" color="green-mint" nve-layout="hide show@sm">2</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-layout="hide show@sm">3</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-layout="hide show@sm">4</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &sm|show">2</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &sm|show">3</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &sm|show">4</nve-logo>
 
-      <nve-logo size="lg" color="green-mint" nve-layout="hide show@lg">5</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-layout="hide show@lg">6</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-layout="hide show@lg">7</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &lg|show">5</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &lg|show">6</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &lg|show">7</nve-logo>
 
-      <nve-logo size="lg" color="green-mint" nve-layout="hide show@xl">8</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-layout="hide show@xl">9</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &xl|show">8</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &xl|show">9</nve-logo>
 
-      <nve-logo size="lg" color="green-mint" nve-layout="hide show@2xl">10</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-layout="hide@xs show@2xl">11</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-layout="hide@sm show@2xl">12</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &2xl|show">10</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="&xs|hide &2xl|show">11</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="&sm|hide &2xl|show">12</nve-logo>
     </section>
   `
 }
 
 export const FlexDirectionResponsive = {
   render: () => html`
-    <section nve-layout="column row@md gap:lg">
+    <section nve-layout="column &md|row gap:lg">
       <nve-card></nve-card>
       <nve-card></nve-card>
       <nve-card></nve-card>
@@ -69,7 +69,7 @@ export const FlexDirectionReverse = {
       }
     </style>
 
-    <section nve-layout="row column-reverse@sm row@lg gap:xxl">
+    <section nve-layout="column column-reverse &lg|row gap:xxl">
       <nve-logo class="reversible" color="green-mint">A</nve-logo>
       <nve-logo class="reversible" color="green-mint">B</nve-logo>
     </section>
@@ -78,7 +78,7 @@ export const FlexDirectionReverse = {
 
 export const ResponsiveGrid = {
   render: () => html`
-    <section nve-layout="grid gap:md span-items:12 span-items@sm:6 span-items@md:4 span-items@lg:3">
+    <section nve-layout="grid gap:md span-items:12 &sm|span-items:6 &md|span-items:4 &lg|span-items:3">
       <nve-card></nve-card>
       <nve-card></nve-card>
       <nve-card></nve-card>
@@ -94,10 +94,10 @@ export const ResponsiveGrid = {
 export const ResponsiveGridItems = {
   render: () => html`        
     <section nve-layout="grid gap:md">
-      <nve-card nve-layout="span-items:12 span@sm:4 span@md:6 span@lg:8"></nve-card>
-      <nve-card nve-layout="span-items:12 span@sm:8 span@md:6 span@lg:4"></nve-card>
-      <nve-card nve-layout="span-items:12 span@sm:8 span@md:6 span@lg:4"></nve-card>
-      <nve-card nve-layout="span-items:12 span@sm:4 span@md:6 span@lg:8"></nve-card>
+      <nve-card nve-layout="span-items:12 &sm|span:4 &md|span:6 &lg|span:8"></nve-card>
+      <nve-card nve-layout="span-items:12 &sm|span:8 &md|span:6 &lg|span:4"></nve-card>
+      <nve-card nve-layout="span-items:12 &sm|span:8 &md|span:6 &lg|span:4"></nve-card>
+      <nve-card nve-layout="span-items:12 &sm|span:4 &md|span:6 &lg|span:8"></nve-card>
     </section>
   `
 }
