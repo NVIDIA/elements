@@ -63,7 +63,7 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
     }
 
     if (this.host.type === 'submit') {
-      const e = new SubmitEvent('submit', { cancelable: true });
+      const e = new SubmitEvent('submit', { cancelable: true, bubbles: true, submitter: this.host });
       this.host._internals.form?.dispatchEvent(e);
 
       /* istanbul ignore next -- @preserve */
