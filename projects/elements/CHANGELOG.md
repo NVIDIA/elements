@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.29.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.1...@nvidia-elements/core-v1.29.2) (2025-03-13)
+
+
+### Bug Fixes
+
+* **elements:** base form associated element ([5bc0ca5](https://github.com/NVIDIA/elements/commit/5bc0ca5a92d5cc16072f9d8e0b91e69ad53d7c71))
+
 ## [@nvidia-elements/core-v1.29.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.0...@nvidia-elements/core-v1.29.1) (2025-03-10)
 
 
