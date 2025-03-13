@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.29.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.2...@nvidia-elements/core-v1.29.3) (2025-03-13)
+
+
+### Bug Fixes
+
+* **elements:** submit event defaults ([7b37816](https://github.com/NVIDIA/elements/commit/7b37816b5867035493e3010fab3632138e8a64ce))
+
 ## [@nvidia-elements/core-v1.29.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.1...@nvidia-elements/core-v1.29.2) (2025-03-13)
 
 
