@@ -66,15 +66,6 @@ describe('type-submit.controller', () => {
     expect(submitButtonInForm.type).toBe('submit');
   });
 
-  // https://github.com/capricorn86/happy-dom/issues/527
-  // it('should allow click event to bubble', async () => {
-  //   await elementIsStable(button);
-  //   expect(button.type).toBe(undefined);
-  //   const event = untilEvent(form, 'click');
-  //   emulateClick(button);
-  //   expect((await event).target).toBe(button);
-  // });
-
   it('should trigger click event when using space key', async () => {
     await elementIsStable(button);
     expect(button.type).toBe(undefined);
@@ -104,6 +95,30 @@ describe('type-submit.controller', () => {
     const event = untilEvent(form, 'submit');
     emulateClick(submitButtonInForm);
     expect((await event).type).toBe('submit');
+  });
+
+  it('should trigger submit event with browser default of bubbles: true', async () => {
+    submitButtonInForm.type = 'submit';
+    await elementIsStable(submitButtonInForm);
+    const event = untilEvent(form, 'submit');
+    emulateClick(submitButtonInForm);
+    expect((await event).bubbles).toBe(true);
+  });
+
+  it('should trigger submit event with browser default of cancelable: true', async () => {
+    submitButtonInForm.type = 'submit';
+    await elementIsStable(submitButtonInForm);
+    const event = untilEvent(form, 'submit');
+    emulateClick(submitButtonInForm);
+    expect((await event).cancelable).toBe(true);
+  });
+
+  it('should trigger submit event the event submitter assigned as the host', async () => {
+    submitButtonInForm.type = 'submit';
+    await elementIsStable(submitButtonInForm);
+    const event = untilEvent(form, 'submit');
+    emulateClick(submitButtonInForm);
+    expect(((await event) as SubmitEvent).submitter).toBe(submitButtonInForm);
   });
 
   it('should NOT trigger submit event when host exists within a form element and disabled', async () => {
