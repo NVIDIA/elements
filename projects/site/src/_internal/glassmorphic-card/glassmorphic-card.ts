@@ -77,7 +77,7 @@ export class GlassmorphicCard extends LitElement {
   render() {
     return html`
       <div class="header">
-        <div class="logo" nve-layout="hide show@xs">
+        <div class="logo" nve-layout="hide &xs|show">
           <img src="${this.logoSrc}" alt="${this.logoAlt}" />
         </div>
 
