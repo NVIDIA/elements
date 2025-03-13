@@ -55,14 +55,14 @@ export class ThemeGen extends LitElement {
 
   render() {
     return html`
-      <section nve-layout="row column-reverse@xs row@xl pad-y:xxl gap:xxl">
+      <section nve-layout="column &xs|column-reverse &xl|row pad-y:xxl gap:xxl">
         <!-- Left Column - Example UI -->
         <aside nve-layout="grid span-items:6 gap:xl" nve-theme="root">
           <nve-alert-group status="accent" nve-layout="span:12">
             <nve-alert style="--icon-color: var(--nve-sys-support-accent-color)">Accent</nve-alert>
           </nve-alert-group>
 
-          <div nve-layout="column gap:lg span:12 span@md:6">
+          <div nve-layout="column gap:lg span:12 &md|span:6">
             <nve-card>
               <img
                 src="https://cdn-stage.nvidia.com/assets/elements/test-image-2.webp"
@@ -98,7 +98,7 @@ export class ThemeGen extends LitElement {
             </nve-card>
           </div>
 
-          <div nve-layout="column gap:lg align:center span:12 span@md:6">
+          <div nve-layout="column gap:lg align:center span:12 &md|span:6">
             <nve-select>
               <label>label</label>
               <select>
