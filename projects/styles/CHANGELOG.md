@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.8.0...@nvidia-elements/styles-v1.9.0) (2025-03-13)
+
+
+### Features
+
+* **styles:** rework responsive layout module's api ([93f8670](https://github.com/NVIDIA/elements/commit/93f8670d69488190e0736d87184d752bd63bf87f))
+
 ## [@nvidia-elements/styles-v1.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.7.1...@nvidia-elements/styles-v1.8.0) (2025-03-05)
 
 
