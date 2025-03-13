@@ -144,24 +144,9 @@ nvd-starry-sky {
 
 /* Starters */
 /* Stay in the Loop */
-.contact-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
 .contact {
-  display: grid;
-  grid-template-rows: subgrid;
-  grid-row: 1/4;
   border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   border-radius: var(--nve-ref-border-radius-lg);
   background: linear-gradient(113deg, rgba(24, 26, 32, 0.75) 4.87%, #0b0c0f 75.88%);
   box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.15) inset;
-  backdrop-filter: blur(5px);
-  padding: var(--nve-ref-size-600);
-}
-
-.contact nve-button {
-  max-width: max-content;
 }

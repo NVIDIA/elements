@@ -32,7 +32,7 @@ const BASE_HEAD = renderBaseHead({ title })
       </nve-page-header>
 
       <div id="main-slot" nve-layout="row align:horizontal-center">
-        <main nve-layout="column align:horizontal-stretch pad:none pad@xs:xl pad@md:xxxl gap:xxxl">
+        <main nve-layout="column align:horizontal-stretch pad:none &xs|pad:md &md|pad:xl &md|pad:xxxl gap:xxxl">
           <!-- Hero Section | Scroll Driven Animation - TODO: John Y Add Widget -->
 
           <!-- Section 1 | "Work how you want" -->
@@ -45,7 +45,7 @@ const BASE_HEAD = renderBaseHead({ title })
             </div>
 
             <!-- Features Row-->
-            <div nve-layout="column align:space-between row@lg gap:lg gap@xl:xxxl">
+            <div nve-layout="column align:space-between &lg|row gap:lg &xl|gap:xxxl">
               <div nve-layout="row gap:lg" class="feature">
                 <nve-logo color="gray-slate">
                   <nve-icon name="terminal"></nve-icon>
@@ -86,21 +86,24 @@ const BASE_HEAD = renderBaseHead({ title })
                 </div>
               </div>
             </div>
-            <div nve-layout="row align:center gap:xl">
+
+            <!-- Section 1.5 | "Framework Selector" -->
+            <div nve-layout="column &lg|row align:center gap:xl">
               <nvd-framework-selector></nvd-framework-selector>
+
               <nve-codeblock style="width: 480px; height: 320px;" language="html"> </nve-codeblock>
             </div>
           </section>
 
-          <!--  Section 3 | Theme Widget -->
+          <!--  Section 2 | Theme Widget -->
           <nvd-theme-gen></nvd-theme-gen>
 
-          <!--  Section 4 | Metrics Highlights -->
+          <!--  Section 3 | Metrics Highlights -->
           <section class="metrics-highlights" nve-layout="align:stretch">
             <nvd-starry-sky></nvd-starry-sky>
 
             <div
-              nve-layout="grid span-items:12 span-items@xl:6 align:space-between gap:lg gap@xl:xxxl"
+              nve-layout="grid span-items:12 &xl|span-items:6 align:space-between gap:xxl"
               style="position: relative; z-index: 2;">
               <!-- Left Column -->
               <div nve-layout="column gap:lg align:left align:stretch">
@@ -160,9 +163,9 @@ const BASE_HEAD = renderBaseHead({ title })
             </div>
           </section>
 
-          <!--  Section 5 | "Skip the hassles of CSS" + Layout/Typography Video -->
+          <!--  Section 4 | "Skip the hassles of CSS" + Layout/Typography Video -->
           <section nve-layout="column align:horizontal-stretch gap:xxxl pad-y:xxl">
-            <div nve-layout="column align:space-between row@lg gap:lg gap@xl:xxl">
+            <div nve-layout="column align:space-between &lg|row gap:lg &xl|gap:xxl">
               <div nve-layout="column gap:lg" class="feature">
                 <div nve-text="semibold display">
                   <span class="coral-yellow-gradient gradient-txt">Skip the hassle</span>
@@ -176,7 +179,7 @@ const BASE_HEAD = renderBaseHead({ title })
                 </nve-button>
               </div>
 
-              <div nve-layout="column gap:lg pad-top:md" class="feature">
+              <div nve-layout="row &lg|column gap:lg pad-top:md" class="feature">
                 <nve-logo color="gray-slate">
                   <nve-icon name="typography"></nve-icon>
                 </nve-logo>
@@ -189,7 +192,7 @@ const BASE_HEAD = renderBaseHead({ title })
                 </div>
               </div>
 
-              <div nve-layout="column gap:lg pad-top:md" class="feature">
+              <div nve-layout="row &lg|column gap:lg pad-top:md" class="feature">
                 <nve-logo color="gray-slate">
                   <nve-icon name="outline"></nve-icon>
                 </nve-logo>
@@ -203,7 +206,7 @@ const BASE_HEAD = renderBaseHead({ title })
                 </div>
               </div>
 
-              <div nve-layout="column gap:lg pad-top:md" class="feature">
+              <div nve-layout="row &lg|column gap:lg pad-top:md" class="feature">
                 <nve-logo color="gray-slate">
                   <nve-icon name="laptop-phone"></nve-icon>
                 </nve-logo>
@@ -224,7 +227,7 @@ const BASE_HEAD = renderBaseHead({ title })
             </video>
           </section>
 
-          <!--  Section 6 | "Turn your ideas into reality" + Snippets Video -->
+          <!--  Section 5 | "Turn your ideas into reality" + Snippets Video -->
           <section nve-layout="column align:center gap:xxxl pad-y:xxxl">
             <!-- Heading -->
             <div nve-text="semibold display center">
@@ -234,7 +237,7 @@ const BASE_HEAD = renderBaseHead({ title })
             </div>
 
             <!-- Features Row-->
-            <div nve-layout="column align:space-between row@lg gap:lg gap@xl:xxxl">
+            <div nve-layout="column align:space-between &lg|row gap:lg &xl|gap:xxxl">
               <div nve-layout="row gap:lg" class="feature">
                 <nve-logo color="gray-slate">
                   <nve-icon name="shapes"></nve-icon>
@@ -284,7 +287,7 @@ const BASE_HEAD = renderBaseHead({ title })
             </video>
           </section>
 
-          <!--  Section 7 | "Build together as one team" -->
+          <!--  Section 6 | "Build together as one team" -->
           <section nve-layout="column gap:xl pad-top:xl">
             <!-- Heading -->
             <div nve-text="semibold display">
@@ -301,12 +304,12 @@ const BASE_HEAD = renderBaseHead({ title })
             </div>
 
             <!-- Buttons -->
-            <div nve-layout="column row@sm gap:sm align:stretch">
+            <div nve-layout="column &sm|row gap:sm align:stretch">
               <nve-button size="lg">View our community</nve-button>
               <nve-button interaction="emphasis" size="lg">Start building</nve-button>
             </div>
             <!--  Starters  -->
-            <div nve-layout="grid gap:md align-items:stretch span-items:12 span-items@sm:6 span-items@lg:4">
+            <div nve-layout="grid gap:md align-items:stretch span-items:12 &sm|span-items:6 &lg|span-items:4">
               <nvd-glassmorphic-card
                 logo-src="https://NVIDIA.github.io/elements/static/images/integrations/vite.svg"
                 logo-alt="Vite Logo"
@@ -351,7 +354,7 @@ const BASE_HEAD = renderBaseHead({ title })
             </div>
           </section>
 
-          <!--  Section 8 | "Stay in the loop" -->
+          <!--  Section 7 | "Stay in the loop" -->
           <section nve-layout="column align:center gap:xxxl pad-top:xxxl pad-bottom:xxl">
             <!-- Heading -->
             <div nve-text="semibold emphasis display center">
@@ -359,8 +362,8 @@ const BASE_HEAD = renderBaseHead({ title })
               <span class="amber-orange-gradient gradient-txt">Loop</span>
             </div>
             <!-- Card Row -->
-            <div class="contact-container">
-              <div class="contact">
+            <div nve-layout="grid span-items:12 &md|span-items:6 gap:lg align:space-between align:vertical-stretch">
+              <div class="contact" nve-layout="column gap:lg pad:lg align:space-between">
                 <div nve-layout="row gap:md align:vertical-center">
                   <div>
                     <img
@@ -380,7 +383,7 @@ const BASE_HEAD = renderBaseHead({ title })
                 </nve-button>
               </div>
 
-              <div class="contact">
+              <div class="contact" nve-layout="column gap:lg pad:lg align:space-between">
                 <div nve-layout="row gap:md align:vertical-center">
                   <div>
                     <img
