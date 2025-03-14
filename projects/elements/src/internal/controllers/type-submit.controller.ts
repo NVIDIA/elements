@@ -18,6 +18,7 @@ export type Submit = ReactiveElement &
     disabled: boolean;
     type: 'button' | 'submit' | 'reset';
     readonly: boolean;
+    form?: HTMLFormElement | null;
     _internals: ElementInternals;
   };
 
@@ -62,16 +63,35 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
       return;
     }
 
-    if (this.host.type === 'submit') {
-      const e = new SubmitEvent('submit', { cancelable: true, bubbles: true, submitter: this.host });
-      this.host._internals.form?.dispatchEvent(e);
-
-      /* istanbul ignore next -- @preserve */
-      if (!e.defaultPrevented) {
-        this.host._internals.form?.submit();
-      }
+    if (this.host.type === 'submit' && this.host.form) {
+      this.#requestSubmit();
     } else if (this.host.type === 'reset') {
-      this.host._internals.form?.reset();
+      this.host.form?.reset();
+    }
+  }
+
+  #requestSubmit() {
+    this.#createSubmitter();
+    this.host.form.addEventListener(
+      'submit',
+      () => {
+        setTimeout(() => this.#submitter.remove(), 0);
+      },
+      { once: true }
+    );
+    this.host.form.appendChild(this.#submitter);
+    this.host.form.requestSubmit(this.#submitter);
+  }
+
+  #submitter: HTMLButtonElement;
+  // https://github.com/WICG/webcomponents/issues/814
+  #createSubmitter() {
+    if (!this.#submitter) {
+      this.#submitter = globalThis.document.createElement('button');
+      this.#submitter.type = 'submit';
+      this.#submitter.name = this.host.name ?? '';
+      this.#submitter.value = this.host.value ?? '';
+      this.#submitter.style.display = 'none';
     }
   }
 }
