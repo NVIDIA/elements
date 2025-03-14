@@ -14,6 +14,21 @@ class TypeSubmitControllerTestElement extends LitElement {
   @property({ type: String }) type: 'button' | 'submit' | 'reset';
   @property({ type: Boolean }) readonly: boolean;
 
+  #form: HTMLFormElement;
+
+  @property({ type: Object })
+  get form(): HTMLFormElement | null {
+    return this.#form ? this.#form : this._internals.form;
+  }
+
+  set form(form: string | HTMLFormElement) {
+    if (typeof form === 'string') {
+      this.#form = (this.getRootNode() as Document | ShadowRoot).getElementById(form) as HTMLFormElement;
+    } else {
+      this.#form = form;
+    }
+  }
+
   static formAssociated = true;
 
   _internals: ElementInternals;
@@ -115,10 +130,12 @@ describe('type-submit.controller', () => {
 
   it('should trigger submit event the event submitter assigned as the host', async () => {
     submitButtonInForm.type = 'submit';
+    submitButtonInForm.name = 'test-name';
     await elementIsStable(submitButtonInForm);
     const event = untilEvent(form, 'submit');
     emulateClick(submitButtonInForm);
-    expect(((await event) as SubmitEvent).submitter).toBe(submitButtonInForm);
+    expect((((await event) as SubmitEvent).submitter as HTMLButtonElement).name).toBe('test-name');
+    // expect(event.submitter).toBe(submitButtonInForm); // https://github.com/WICG/webcomponents/issues/814
   });
 
   it('should NOT trigger submit event when host exists within a form element and disabled', async () => {
@@ -208,5 +225,52 @@ describe('type-submit.controller', () => {
     emulateClick(submitButtonInForm);
     await elementIsStable(submitButtonInForm);
     expect(o.f).toHaveBeenCalledTimes(1);
+  });
+
+  it('should use form property if defined', async () => {
+    button.form = form;
+    button.type = 'submit';
+    await elementIsStable(button);
+
+    const o = { f: () => null };
+    vi.spyOn(o, 'f');
+
+    form.addEventListener('submit', o.f);
+    expect(o.f).not.toHaveBeenCalled();
+
+    emulateClick(button);
+    await elementIsStable(button);
+    expect(o.f).toHaveBeenCalledTimes(1);
+  });
+
+  it('should be able to access form property from submit event even if form is not in the same document', async () => {
+    button.form = form;
+    button.type = 'submit';
+    button.name = 'test-name';
+    button.value = 'test-value';
+    await elementIsStable(button);
+    const submit = untilEvent(form, 'submit');
+    emulateClick(button);
+    const event = await submit;
+    expect(event.target).toBe(form);
+  });
+
+  it('should use a dynamic native HTMLButtonElement as the submitter due to https://github.com/WICG/webcomponents/issues/814', async () => {
+    submitButtonInForm.name = 'test-name';
+    submitButtonInForm.value = 'test-value';
+    await elementIsStable(submitButtonInForm);
+    const submit = untilEvent(form, 'submit');
+    emulateClick(submitButtonInForm);
+
+    const submitter = ((await submit) as SubmitEvent).submitter as HTMLButtonElement;
+    expect(submitter.form).toBe(form);
+    expect(submitter.name).toBe('test-name');
+    expect(submitter.type).toBe('submit');
+    expect(submitter.value).toBe('test-value');
+
+    // submitter is a native HTMLButtonElement rather than the host custom element
+    // this is due to https://github.com/WICG/webcomponents/issues/814
+    // expect(submitter).toBe(submitButtonInForm);
+    expect(submitter instanceof HTMLButtonElement).toBe(true);
   });
 });
