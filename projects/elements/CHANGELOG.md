@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.29.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.3...@nvidia-elements/core-v1.29.4) (2025-03-14)
+
+
+### Bug Fixes
+
+* **elements:** alert group background ([96f2948](https://github.com/NVIDIA/elements/commit/96f2948657d215eafc4ba10b750bb229ec572c24)), closes [#107](https://github.com/NVIDIA/elements/issues/107)
+
 ## [@nvidia-elements/core-v1.29.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.2...@nvidia-elements/core-v1.29.3) (2025-03-13)
 
 
