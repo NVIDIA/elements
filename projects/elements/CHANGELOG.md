@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.29.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.4...@nvidia-elements/core-v1.29.5) (2025-03-14)
+
+
+### Bug Fixes
+
+* **elements:** form submitter ([1340c31](https://github.com/NVIDIA/elements/commit/1340c31d96f5f90f122826f397eb1e8f60e62acb))
+
 ## [@nvidia-elements/core-v1.29.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.3...@nvidia-elements/core-v1.29.4) (2025-03-14)
 
 
