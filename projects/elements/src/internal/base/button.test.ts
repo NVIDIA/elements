@@ -265,6 +265,8 @@ describe('base button', () => {
     submitButtonInForm.form = 'other';
     await elementIsStable(submitButtonInForm);
 
+    expect(submitButtonInForm.form).toBe(otherForm);
+
     const f = { f: () => null };
     vi.spyOn(f, 'f');
     form.addEventListener('submit', f.f);
@@ -277,5 +279,29 @@ describe('base button', () => {
 
     expect(f.f).not.toHaveBeenCalled();
     expect(o.f).toHaveBeenCalled();
+  });
+
+  it('should return associated form if in a form element', async () => {
+    await elementIsStable(element);
+    expect(buttonInForm.form).toBe(form);
+    expect(submitButtonInForm.form).toBe(form);
+  });
+
+  it('should be able to access form property from submit event even if form is not in the same document', async () => {
+    element.form = 'main';
+    element.type = 'submit';
+    element.name = 'test-name';
+    element.value = 'test-value';
+    await elementIsStable(element);
+    const submit = untilEvent(form, 'submit');
+    emulateClick(element);
+    const event = await submit;
+    expect(event.target).toBe(form);
+    expect((((await event) as SubmitEvent).submitter as HTMLButtonElement).name).toBe('test-name');
+    expect(event.submitter.form).toBe(form);
+    expect(event.submitter.name).toBe('test-name');
+    expect(event.submitter.type).toBe('submit');
+    expect(event.submitter.value).toBe('test-value');
+    // expect(event.submitter).toBe(button); // https://github.com/WICG/webcomponents/issues/814
   });
 });

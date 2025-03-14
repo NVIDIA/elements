@@ -26,7 +26,7 @@ export function render(data) {
 
 # ${data.title}
 
-<div class="starters-page" nve-layout="grid gap:md span-items:12 span-items@md:6 span-items@lg:4">
+<div class="starters-page" nve-layout="grid gap:md span-items:12 &md|span-items:6 &lg|span-items:4">
   <a href="starters/typescript/">
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
