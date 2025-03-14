@@ -130,16 +130,16 @@ export const NoWrap = {
 export const FormSubmit = {
   render: () => html`
 <form id="test-form">
-  <nve-button id="test-button">submit</nve-button>
+  <nve-button name="test-button" value="test-value">submit</nve-button>
 </form>
 <script>
   const form = document.querySelector('#test-form');
-  const button = document.querySelector('#test-button');
+  const button = document.querySelector('[name="test-button"]');
 
   button.addEventListener('click', e => console.log(e));
   form.addEventListener('submit', e => {
     e.preventDefault();
-    console.log(e);
+    console.log(Object.fromEntries(new FormData(form, e.submitter)));
   });
 </script>
 `
