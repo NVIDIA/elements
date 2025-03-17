@@ -59,7 +59,7 @@ export class ThemeGen extends LitElement {
         <!-- Left Column - Example UI -->
         <aside nve-layout="grid span-items:6 gap:xl" nve-theme="root">
           <nve-alert-group status="accent" nve-layout="span:12">
-            <nve-alert style="--icon-color: var(--nve-sys-support-accent-color)">Accent</nve-alert>
+            <nve-alert>Accent</nve-alert>
           </nve-alert-group>
 
           <div nve-layout="column gap:lg span:12 &md|span:6">
@@ -164,11 +164,6 @@ export class ThemeGen extends LitElement {
                 <label>System Accent Color</label>
                 <input type="color" name="sys-support-accent-color" .value=${this.formValues['sys-support-accent-color']} />
               </nve-color>
-
-              <nve-color layout="horizontal">
-                <label>System Accent Muted Color</label>
-                <input type="color" name="sys-support-accent-muted-color" .value=${this.formValues['sys-support-accent-muted-color']} />
-              </nve-color>
             </div>
 
             <nve-range>
@@ -234,7 +229,7 @@ export class ThemeGen extends LitElement {
   setFormValues(formValues) {
     this.formValues = {
       ...formValues,
-      'sys-support-accent-emphasis-color': formValues['sys-support-accent-muted-color']
+      'sys-support-accent-emphasis-color': formValues['sys-support-accent-color']
     };
 
     const asideElement = this.shadowRoot?.querySelector('aside');
