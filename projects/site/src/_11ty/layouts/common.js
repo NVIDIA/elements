@@ -53,7 +53,7 @@ export const renderBaseHead = data => /* html */ `
       .filter(i => i !== '')
       .join(' ')
       .trim();
-    globalThis.document.documentElement.setAttribute('nve-theme', themes);
+      ${data.disableTheme ? '' : `globalThis.document.documentElement.setAttribute('nve-theme', themes);`}
   </script>
   <script type="module">
     import { BrowserClient, getCurrentScope, defaultStackParser, makeFetchTransport, breadcrumbsIntegration, browserApiErrorsIntegration, dedupeIntegration, functionToStringIntegration, globalHandlersIntegration, httpContextIntegration, browserTracingIntegration } from '@sentry/browser';

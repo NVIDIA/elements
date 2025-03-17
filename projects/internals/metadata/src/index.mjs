@@ -26,7 +26,40 @@ function getManifestDeclarations(customElementsManifest) {
 /** projects/../coverage/unit/coverage-summary.json */
 function getTestCoverage(basePath) {
   const coverageReportPath = new URL(basePath + '/coverage/unit/coverage-summary.json', import.meta.url);
+  const coverageJunitPath = new URL(basePath + '/coverage/unit/junit.xml', import.meta.url);
+  const coverageAxePath = new URL(basePath + '/coverage/axe/junit.xml', import.meta.url);
+  const coverageVisualPath = new URL(basePath + '/coverage/visual/junit.xml', import.meta.url);
+  const coverageSsrPath = new URL(basePath + '/coverage/ssr/junit.xml', import.meta.url);
+  const tests = {
+    coverage: [],
+    coverageTotal: 0,
+    unitTestsTotal: 0,
+    axeTestsTotal: 0,
+    visualTestsTotal: 0,
+    ssrTestsTotal: 0
+  };
+
+  if (existsSync(coverageAxePath)) {
+    const junit = readFileSync(coverageAxePath, 'utf8');
+    const axeTestsTotal = parseInt(junit.match(/<testsuites[^>]*tests="([^"]+)"/)[1]);
+    tests.axeTestsTotal = axeTestsTotal;
+  }
+
+  if (existsSync(coverageVisualPath)) {
+    const junit = readFileSync(coverageVisualPath, 'utf8');
+    const visualTestsTotal = parseInt(junit.match(/<testsuites[^>]*tests="([^"]+)"/)[1]);
+    tests.visualTestsTotal = visualTestsTotal;
+  }
+
+  if (existsSync(coverageSsrPath)) {
+    const junit = readFileSync(coverageSsrPath, 'utf8');
+    const ssrTestsTotal = parseInt(junit.match(/<testsuites[^>]*tests="([^"]+)"/)[1]);
+    tests.ssrTestsTotal = ssrTestsTotal;
+  }
+
   if (existsSync(coverageReportPath)) {
+    const junit = readFileSync(coverageJunitPath, 'utf8');
+    const unitTestsTotal = parseInt(junit.match(/<testsuites[^>]*tests="([^"]+)"/)[1]);
     const coverageJSON = JSON.parse(readFileSync(coverageReportPath));
     const coverage = Object.entries(coverageJSON)
       .map(([file, coverage]) => ({
@@ -41,10 +74,12 @@ function getTestCoverage(basePath) {
       1
     )[0];
 
-    return { coverage, coverageTotal };
-  } else {
-    return null;
+    tests.coverage = coverage;
+    tests.coverageTotal = coverageTotal;
+    tests.unitTestsTotal = unitTestsTotal;
   }
+
+  return tests;
 }
 
 function getPackageFile(basePath) {
