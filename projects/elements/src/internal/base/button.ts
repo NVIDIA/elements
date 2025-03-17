@@ -19,7 +19,7 @@ import { attachInternals } from '../utils/a11y.js';
  */
 @typeButton<BaseButton>()
 @typeAnchor<BaseButton>()
-@typeSubmit<BaseButton>()
+@typeSubmit<BaseButton & { form: HTMLFormElement | null }>() // override to exclude type string from getter, see comment in getter below
 @typeNativePopoverTrigger<BaseButton>()
 @stateActive<BaseButton>()
 @stateCurrent<BaseButton>()
@@ -51,11 +51,13 @@ export class BaseButton extends LitElement {
   #form: HTMLFormElement;
 
   /**
-   * Similar to input form, sets a button to submit a form outside its parent form
+   * Similar to input form, sets a button to submit a form outside its parent form.
+   * Returns a reference to the form element if available.
    * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/form
    */
   @property({ type: Object })
-  get form(): HTMLFormElement | null {
+  get form(): HTMLFormElement | null | string {
+    // string should be removed but without it the type is not derived from the setter correctly
     return this.#form ? this.#form : this._internals.form;
   }
 
