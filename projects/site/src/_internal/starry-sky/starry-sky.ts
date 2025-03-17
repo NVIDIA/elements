@@ -9,9 +9,7 @@ export class StarrySky extends LitElement {
       width: 100vw;
       height: 100%;
       overflow: hidden;
-      position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       z-index: 1;
     }
 
