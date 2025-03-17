@@ -13,6 +13,7 @@ import styles from './button.css?inline';
  * @cssprop --color
  * @cssprop --background
  * @cssprop --padding
+ * @cssprop --border
  * @cssprop --border-radius
  * @cssprop --font-weight
  * @cssprop --font-size
