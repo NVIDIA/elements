@@ -3,6 +3,7 @@
   --background: var(--nve-sys-interaction-background);
   --color: var(--nve-sys-interaction-color);
   --padding: 0 var(--nve-ref-size-300);
+  --border: 0;
   --border-radius: var(--nve-ref-border-radius-full);
   --font-weight: var(--nve-ref-font-weight-semibold);
   --font-size: var(--nve-ref-font-size-100);
@@ -30,6 +31,7 @@
   padding: var(--padding);
   height: var(--height);
   width: 100%;
+  border: var(--border);
   border-radius: var(--border-radius);
   text-decoration: var(--text-decoration);
   text-align: var(--text-align);
