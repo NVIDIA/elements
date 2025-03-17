@@ -139,7 +139,8 @@ main {
 
 nvd-starry-sky {
   position: absolute;
-  margin-left: calc(-50vw + 50%);
+  inset: 0;
+  margin-left: calc(-50vw + 49.5%);
 }
 
 /* Starters */

@@ -1,9 +1,14 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
+import { state } from 'lit/decorators/state.js';
 
 @customElement('nvd-metrics-carousel')
 export class MetricsCarousel extends LitElement {
   static styles = css`
+    :host {
+      font-family: inherit;
+    }
+
     .carousel-container {
       overflow: hidden;
       pointer-events: none;
@@ -12,7 +17,7 @@ export class MetricsCarousel extends LitElement {
     .carousel-track {
       display: flex;
       width: calc(248px * 3); /* Card width * number of duplicates */
-      animation: scroll 20s linear infinite;
+      animation: scroll 90s linear infinite;
       gap: var(--nve-ref-size-400);
       position: relative;
       pointer-events: auto;
@@ -71,17 +76,13 @@ export class MetricsCarousel extends LitElement {
     }
 
     .title {
-      font-family: Inter;
       font-size: var(--nve-ref-font-size-100);
-      font-style: normal;
       color: var(--nve-sys-text-muted-color);
       font-weight: var(--nve-ref-font-weight-semibold);
     }
 
     .label {
-      font-family: Inter;
       font-size: var(--nve-ref-font-size-200);
-      font-style: normal;
       color: var(--nve-sys-text-emphasis-color);
       font-weight: var(--nve-ref-font-weight-semibold);
     }
@@ -101,76 +102,123 @@ export class MetricsCarousel extends LitElement {
         transform: translateX(0);
       }
       100% {
-        transform: translateX(calc(-250px * 6)); /* Card width * (number of unique cards) */
+        transform: translateX(calc(-250px * 30)); /* Card width * (number of unique cards) */
       }
     }
   `;
+
+  @state() metrics: any[] = [];
 
   render() {
     return html`
       <div class="carousel-container">
         <div class="carousel-track">
-          ${this.renderCarouselItems()}
+          ${this.metrics.map(
+            item => html`
+          <a href="${item.href}" target="_blank" class="carousel-link">
+            <div class="carousel-card">
+              <div class="big-number">${item.metricCount}</div>
+              <div class="text-container">
+                <div class="title">${item.title}</div>
+                <div class="label">${item.label}</div>
+              </div>
+              <nve-icon-button class="arrow-button" icon-name="arrow-angle" size="sm"></nve-icon-button>
+            </div>
+          </a>`
+          )}
         </div>
       </div>
     `;
   }
 
-  renderCarouselItems() {
-    const items = [
+  async connectedCallback() {
+    super.connectedCallback();
+    const metrics = await this.#getMetrics();
+    // naively duplicate the metrics to fill the carousel, ideally should rotate through the metrics
+    this.metrics = [...metrics, ...metrics, ...metrics];
+  }
+
+  async #getMetrics() {
+    const { MetadataService } = await import('@nve-internals/elements-api');
+    const metrics = (await MetadataService.getMetadata()) as any;
+    const projects = Object.keys(metrics)
+      .filter(key => key.startsWith('@nve'))
+      .map(key => metrics[key]);
+    const totalElements = projects.reduce((acc, project) => acc + project.elements.length, 0);
+    const totalParentElements = projects.reduce(
+      (acc, project) => acc + [...new Set(project.elements.map((el: any) => el.name.split('-')[1]))].length + 2,
+      0
+    );
+    const elementsTestCoverage = metrics['@nvidia-elements/core'].tests.coverageTotal.branches.pct;
+    const totalLighthouseTests = totalParentElements + projects.length; // one for each element + project bundle
+    const totalUnitTests = projects.reduce((acc, project) => acc + (project.tests?.unitTestsTotal ?? 0), 0);
+    const totalAxeTests = projects.reduce((acc, project) => acc + (project.tests?.axeTestsTotal ?? 0), 0);
+    const totalVisualTests = projects.reduce((acc, project) => acc + (project.tests?.visualTestsTotal ?? 0), 0);
+    const totalSsrTests = projects.reduce((acc, project) => acc + (project.tests?.ssrTestsTotal ?? 0), 0);
+    const totalAutomatedTests =
+      totalUnitTests + totalAxeTests + totalVisualTests + totalSsrTests + totalLighthouseTests;
+
+    return [
       {
-        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
-        title: 'Parent Elements',
+        href: '/elements/docs/metrics/',
+        title: 'Available Components',
         label: 'Browse our component offerings',
-        metricCount: 58
+        metricCount: totalParentElements
       },
       {
-        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
+        href: '/elements/docs/metrics/',
         title: 'Total Web Components',
         label: 'Browse our component offerings',
-        metricCount: 102
+        metricCount: totalElements
       },
       {
-        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
-        title: 'Lighthouse Tests',
-        label: 'Browse our component offerings',
-        metricCount: 73
+        href: '/elements/docs/metrics/testing-and-performance/',
+        title: 'Total Automated Tests',
+        label: 'View automated test results',
+        metricCount: totalAutomatedTests
       },
       {
-        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
+        href: '/elements/docs/metrics/testing-and-performance/',
         title: 'Unit Tests',
-        label: 'Browse our component offerings',
-        metricCount: 1584
+        label: 'View our unit test suite',
+        metricCount: totalUnitTests
       },
       {
-        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
+        href: '/elements/docs/metrics/testing-and-performance/',
         title: '% Test Coverage',
-        label: 'Browse our component offerings',
-        metricCount: 99
+        label: 'View our test coverage',
+        metricCount: `${Math.round(elementsTestCoverage)}%`
       },
       {
-        href: 'https://NVIDIA.github.io/elements/api/?path=/docs/about-metrics--docs',
+        href: '/elements/docs/metrics/testing-and-performance/',
+        title: 'Axe Tests',
+        label: 'View Axe accessibility test results',
+        metricCount: totalAxeTests
+      },
+      {
+        href: '/elements/docs/metrics/testing-and-performance/',
+        title: 'Lighthouse Test Suites',
+        label: 'View Lighthouse test results',
+        metricCount: totalLighthouseTests
+      },
+      {
+        href: '/elements/docs/metrics/testing-and-performance/',
+        title: 'Visual Regression Tests',
+        label: 'View visual test results',
+        metricCount: totalVisualTests
+      },
+      {
+        href: '/elements/docs/metrics/testing-and-performance/',
+        title: 'SSR Tests',
+        label: 'View SSR test results',
+        metricCount: totalSsrTests
+      },
+      {
+        href: '/elements/docs/metrics/elements/',
         title: 'Instances in MagLev',
-        label: 'Browse our component offerings',
+        label: 'View Maglev adoption metrics',
         metricCount: 1795
       }
     ];
-
-    return items.map(
-      item => html`
-      <a href="${item.href}" target="_blank" class="carousel-link">
-        <div class="carousel-card">
-          <div class="big-number">${item.metricCount}</div>
-
-          <div class="text-container">
-            <div class="title">${item.title}</div>
-            <div class="label">${item.label}</div>
-          </div>
-
-          <nve-icon-button class="arrow-button" icon-name="arrow-angle" size="sm"></nve-icon-button>
-        </div>
-      </a>
-    `
-    );
   }
 }
