@@ -1,3 +1,16 @@
+## [@nvidia-elements/core-v1.30.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.5...@nvidia-elements/core-v1.30.0) (2025-03-17)
+
+
+### Features
+
+* **elements:** add --border prop for button ([a733ae3](https://github.com/NVIDIA/elements/commit/a733ae3344023e6779694b32456512263ec4a433))
+
+
+### Bug Fixes
+
+* **elements:** base button setter type ([999cb68](https://github.com/NVIDIA/elements/commit/999cb682e0a26600230e70f1f17c68a2636d6493))
+* **elements:** panel overflow ([cf7bbde](https://github.com/NVIDIA/elements/commit/cf7bbdeefff812ab390fb6128f1a72ea1635aa77))
+
 ## [@nvidia-elements/core-v1.29.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.4...@nvidia-elements/core-v1.29.5) (2025-03-14)
 
 
