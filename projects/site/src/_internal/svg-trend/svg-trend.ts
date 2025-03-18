@@ -10,14 +10,14 @@ export class SvgTrend extends LitElement {
     :host {
       display: flex;
       flex-direction: column;
-      gap: var(--nve-ref-size-200);
+      gap: var(--nve-ref-size-100);
       width: 100%;
     }
 
     .trend-container {
       display: flex;
       flex-direction: column;
-      gap: var(--nve-ref-size-100);
+      gap: var(--nve-ref-size-50);
     }
 
     .trend-header {
@@ -39,7 +39,7 @@ export class SvgTrend extends LitElement {
     }
 
     .trend-value {
-      font-size: var(--nve-ref-font-size-lg);
+      font-size: var(--nve-ref-font-size-md);
       font-weight: var(--nve-ref-font-weight-medium);
       color: var(--nve-sys-text-emphasis-color);
     }
@@ -47,14 +47,14 @@ export class SvgTrend extends LitElement {
     .trend-comparison {
       display: flex;
       align-items: center;
-      gap: var(--nve-ref-size-100);
+      gap: var(--nve-ref-size-50);
       font-size: var(--nve-ref-font-size-sm);
       color: var(--nve-sys-text-muted-color);
     }
 
     .trend-graph {
       width: 100%;
-      height: 40px;
+      height: 30px;
       position: relative;
       overflow: visible;
     }
@@ -65,10 +65,26 @@ export class SvgTrend extends LitElement {
       overflow: visible;
     }
 
+    .baseline-area {
+      fill: var(--nve-sys-text-muted-color);
+      opacity: 0.05;
+    }
+
+    .trend-area {
+      fill: var(--nve-sys-text-emphasis-color);
+      opacity: 0.1;
+    }
+
     .value-separator {
-      margin: 0 var(--nve-ref-size-100);
+      margin: 0 var(--nve-ref-size-50);
       color: var(--nve-sys-text-subtle-color);
     }
+
+      nve-badge {
+    --padding-inline: var(--nve-ref-size-50);
+    --padding-block: var(--nve-ref-size-25);
+    font-size: var(--nve-ref-font-size-xs);
+  }
 
     nve-icon.positive {
       --color: var(--nve-sys-success-color);
@@ -88,6 +104,9 @@ export class SvgTrend extends LitElement {
   @property({ type: String, attribute: 'svg-path' }) svgPath = '';
 
   @property({ type: String, attribute: 'baseline-path' }) baselinePath = '';
+
+  @property({ type: String, attribute: 'baseline-area-path' }) baselineAreaPath = '';
+  @property({ type: String, attribute: 'trend-area-path' }) trendAreaPath = '';
 
   // Calculate comparison value based on current and previous values
   get comparisonValue() {
@@ -139,7 +158,19 @@ export class SvgTrend extends LitElement {
         </div>
         
         <div class="trend-graph">
-          <svg viewBox="0 0 300 40" preserveAspectRatio="none">
+          <svg viewBox="0 0 300 30" preserveAspectRatio="none">
+            <!-- Baseline area fill -->
+            <path 
+              d="${this.baselineAreaPath || (this.baselinePath ? this.baselinePath + ' L300,30 L0,30 Z' : '')}"              
+              class="baseline-area"
+            />
+            
+            <!-- Trend area fill -->
+            <path 
+              d="${this.trendAreaPath || (this.svgPath ? this.svgPath + ' L300,30 L0,30 Z' : '')}"
+              class="trend-area"
+            />
+            
             <!-- Baseline path (dashed line) -->
             <path 
               d="${this.baselinePath}" 
@@ -160,7 +191,7 @@ export class SvgTrend extends LitElement {
             <!-- Vertical marker line -->
             <line 
               x1="150" y1="0" 
-              x2="150" y2="40" 
+              x2="150" y2="30" 
               stroke="var(--nve-sys-error-color)" 
               stroke-width="1"
             />
