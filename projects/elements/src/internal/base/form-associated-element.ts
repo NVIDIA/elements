@@ -51,9 +51,7 @@ export class BaseFormAssociatedElement<T extends FormControlValue> extends LitEl
       this._internals?.setFormValue(formData);
     } else if (Array.isArray(this.value)) {
       const formData = new FormData();
-      this.value.forEach(i => {
-        formData.append(`${this.name}-${i.name}`, i);
-      });
+      this.value.forEach(i => formData.append(`${this.name}`, i));
       this._internals?.setFormValue(formData);
     } else {
       this._internals?.setFormValue(this.value as null | string | File);
