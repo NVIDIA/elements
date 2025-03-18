@@ -294,14 +294,14 @@ describe('base form associated element - multiple files', () => {
   it('should set form data on initialization with flat form data value', async () => {
     expect(element.value[0]).toEqual(new File([''], 'test1.txt', { type: 'text/plain' }));
     expect(element.value[1]).toEqual(new File([''], 'test2.txt', { type: 'text/plain' }));
-    expect((new FormData(form).get('file-input-test1.txt') as File).name).toBe('test1.txt');
-    expect((new FormData(form).get('file-input-test2.txt') as File).name).toBe('test2.txt');
+    expect((new FormData(form).getAll('file-input')[0] as File).name).toBe('test1.txt');
+    expect((new FormData(form).getAll('file-input')[1] as File).name).toBe('test2.txt');
   });
 
   it('should set form data on input', async () => {
     element.value = [new File([''], 'update.txt', { type: 'text/plain' })];
     await elementIsStable(element);
     expect(element.value).toEqual([new File([''], 'update.txt', { type: 'text/plain' })]);
-    expect((new FormData(form).get('file-input-update.txt') as File).name).toBe('update.txt');
+    expect((new FormData(form).get('file-input') as File).name).toBe('update.txt');
   });
 });
