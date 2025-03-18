@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.30.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.30.0...@nvidia-elements/core-v1.30.1) (2025-03-18)
+
+
+### Bug Fixes
+
+* **elements:** base form control file list support ([d9f1158](https://github.com/NVIDIA/elements/commit/d9f1158af2c4fb98b55146875bea3527ef9172f5))
+
 ## [@nvidia-elements/core-v1.30.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.29.5...@nvidia-elements/core-v1.30.0) (2025-03-17)
 
 
