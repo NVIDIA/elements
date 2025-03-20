@@ -1,18 +1,38 @@
 {
-  "name": "@nve-internal/metadata",
+  "name": "@internals/metadata",
   "type": "module",
   "private": true,
+  "version": "0.0.0",
   "scripts": {
+    "dev": "node --experimental-strip-types ./src/metadata.ts",
     "ci": "wireit",
     "ci:all": "wireit",
     "build": "wireit",
+    "build:metadata": "wireit",
     "build:elements": "wireit",
-    "build:lighthouse": "wireit"
+    "build:lighthouse": "wireit",
+    "test": "wireit",
+    "test:watch": "wireit",
+    "test:coverage": "wireit",
+    "lint": "wireit"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
   },
   "wireit": {
     "ci": {
       "dependencies": [
-        "build"
+        "lint",
+        "build",
+        "publint",
+        "test:coverage"
       ]
     },
     "ci:all": {
@@ -22,26 +42,59 @@
         "build:elements"
       ]
     },
-    "build": {
-      "clean": false,
-      "command": "node ./src/index.mjs",
+    "publint": {
+      "dependencies": [
+        "build"
+      ],
+      "command": "publint",
       "files": [
-        "src/index.mjs"
+        "package.json"
+      ],
+      "output": []
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build",
+      "files": [
+        "src/**",
+        "!src/**/*.test.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
       ],
       "output": [
-        "dist/index.json"
+        "dist/**"
+      ],
+      "dependencies": [
+        "../vite:ci",
+        "build:metadata"
+      ]
+    },
+    "build:metadata": {
+      "command": "node --experimental-strip-types ./src/node/metadata.ts",
+      "files": [
+        "./src/node/metadata.ts",
+        "./src/node/metadata.utils.ts"
+      ],
+      "output": [
+        "static/index.json"
       ],
       "dependencies": [
         "../../elements:ci",
         "../../elements-react:ci",
+        "../../styles:ci",
         "../../testing:ci",
-        "../../labs/code:ci"
+        "../../themes:ci",
+        "../../labs/code:ci",
+        "../../labs/behaviors-alpine:ci",
+        "../../labs/playwright-screencast:ci"
       ]
     },
     "build:lighthouse": {
-      "command": "node ./src/lighthouse.mjs",
+      "command": "node --experimental-strip-types ./src/node/lighthouse.ts",
       "files": [
-        "src/lighthouse.mjs"
+        "src/node/lighthouse.ts",
+        "src/node/lighthouse.utils.ts"
       ],
       "output": [
         "static/lighthouse.json"
@@ -51,9 +104,10 @@
       ]
     },
     "build:elements": {
-      "command": "node ./src/elements.mjs",
+      "command": "node --experimental-strip-types ./src/node/elements.ts",
       "files": [
-        "src/elements.mjs"
+        "src/node/elements.ts",
+        "src/node/elements.utils.ts"
       ],
       "output": [
         "static/elements.json"
@@ -61,9 +115,73 @@
       "dependencies": [
         "../../elements:build"
       ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../eslint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix"
+    },
+    "test": {
+      "command": "playwright-lock 'vitest run'",
+      "files": [
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "../vite:ci"
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    },
+    "test:coverage": {
+      "command": "playwright-lock 'vitest run --coverage'",
+      "files": [
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [
+        "coverage/unit/**"
+      ],
+      "dependencies": [
+        "build",
+        "../vite:ci"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
     }
   },
   "dependencies": {
+    "@types/node": "catalog:",
+    "glob": "catalog:",
     "ts-morph": "20.0.0"
+  },
+  "devDependencies": {
+    "@internals/eslint": "workspace:*",
+    "@internals/vite": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
+    "eslint": "catalog:",
+    "publint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
   }
 }
