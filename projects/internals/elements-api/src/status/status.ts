@@ -1,7 +1,7 @@
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { MetadataService } from '../internal/metadata.service.js';
+import { MetadataService } from '@internals/metadata'; // eslint-disable-line
 import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './status.css?inline';
 

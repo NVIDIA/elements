@@ -1,4 +1,5 @@
-import { MetadataService, ESM_ELEMENTS_VERSION } from '@internals/elements-api';
+import { ESM_ELEMENTS_VERSION } from '@internals/elements-api';
+import { MetadataService } from '@internals/metadata';
 
 export const data = {
   title: 'Metrics',

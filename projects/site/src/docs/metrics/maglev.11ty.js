@@ -1,4 +1,5 @@
-import { ESM_ELEMENTS_VERSION, MetadataService } from '@internals/elements-api';
+import { ESM_ELEMENTS_VERSION } from '@internals/elements-api';
+import { MetadataService } from '@internals/metadata';
 import { compareVersions } from 'compare-versions';
 
 export const data = {
