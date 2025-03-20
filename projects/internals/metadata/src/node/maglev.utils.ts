@@ -1,13 +1,19 @@
 import { createRequire } from 'module';
 import { resolve } from 'node:path';
-import { writeFileSync, readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { readdir } from 'node:fs/promises';
+import type { MetadataCustomElementsManifestDeclaration } from '../types.js';
 
 const require = createRequire(import.meta.url);
 
 async function* getFiles(dir) {
-  for (const dirent of await readdir(resolve(dir), { withFileTypes: true })) {
-    const res = resolve(dir, dirent.name);
+  const resolvedDir = resolve(dir);
+  if (!existsSync(resolvedDir)) {
+    return;
+  }
+
+  for (const dirent of await readdir(resolvedDir, { withFileTypes: true })) {
+    const res = resolve(resolvedDir, dirent.name);
     if (dirent.isDirectory() && !dirent.name.includes('node_modules')) {
       yield* getFiles(res);
     } else {
@@ -17,7 +23,7 @@ async function* getFiles(dir) {
 }
 
 async function getPackageFiles(src) {
-  const files = [];
+  const files: string[] = [];
   for await (const file of getFiles(src)) {
     if (file.includes('/package.json')) {
       files.push(file);
@@ -27,7 +33,7 @@ async function getPackageFiles(src) {
 }
 
 async function getSourceFiles(src) {
-  const files = [];
+  const files: string[] = [];
   for await (const file of getFiles(src)) {
     if (
       (file.endsWith('.ts') ||
@@ -48,7 +54,7 @@ async function getSourceFiles(src) {
 
 function getManifest() {
   const elementsSchemaJSON = JSON.parse(
-    readFileSync(new URL('../../../elements/dist/custom-elements.json', import.meta.url))
+    readFileSync(new URL('../../../../elements/dist/custom-elements.json', import.meta.url), 'utf8')
   );
   return Array.from(
     new Set(
@@ -57,7 +63,7 @@ function getManifest() {
         return module.declarations;
       })
     )
-  );
+  ) as MetadataCustomElementsManifestDeclaration[];
 }
 
 function getElementsVersion(data) {
@@ -70,14 +76,24 @@ function getElementsVersion(data) {
   return dependencies || devDependencies || peerDependencies;
 }
 
-async function getProjects() {
+export interface MaglevProject {
+  name: string;
+  path: string;
+  elementsVersion: string;
+  elements: {
+    name: string;
+    instanceTotal: unknown;
+  }[];
+  instanceTotal: number;
+}
+
+export async function getProjects(path = '../../../../elements'): Promise<MaglevProject[]> {
   const elementTags = getManifest().map(d => d.tagName);
-  const path = '../../../../elements';
 
   return Promise.all(
     (await getPackageFiles(path))
       .filter(path => !path.includes('dist') && !path.includes('deprecated'))
-      .reduce((files, path) => {
+      .reduce((files: { name: string; path: string; elements: string[] }[], path) => {
         const data = require(path);
         return getElementsVersion(data) ? [...files, { ...data, path }] : files;
       }, [])
@@ -109,13 +125,8 @@ async function getProjects() {
           path: `src/ui/${project.path.split('/src/ui/')[1]}`,
           elementsVersion: project.elements,
           elements,
-          instanceTotal: elements.reduce((p, e) => e.instanceTotal + p, 0)
+          instanceTotal: elements.reduce((p, e) => (e.instanceTotal as number) + p, 0)
         };
       })
   );
 }
-
-const projects = await getProjects();
-const created = new Date().toISOString();
-
-writeFileSync('./static/elements.json', JSON.stringify({ created, projects }, null, 2));
