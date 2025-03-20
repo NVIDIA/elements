@@ -1,4 +1,4 @@
-import { MetadataService } from '@nve-internals/elements-api';
+import { MetadataService } from '@nve-internals/metadata';
 
 const metrics = await MetadataService.getMetadata();
 

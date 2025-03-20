@@ -1,3 +1,4 @@
+import { MetadataProject } from '@nve-internals/metadata';
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { state } from 'lit/decorators/state.js';
@@ -139,11 +140,12 @@ export class MetricsCarousel extends LitElement {
   }
 
   async #getMetrics() {
-    const { MetadataService } = await import('@nve-internals/elements-api');
-    const metrics = (await MetadataService.getMetadata()) as any;
+    const { MetadataService } = await import('@nve-internals/metadata');
+    const metrics = await MetadataService.getMetadata();
+    const elementsMetrics = await MetadataService.getMaglevMetadata();
     const projects = Object.keys(metrics)
       .filter(key => key.startsWith('@nve'))
-      .map(key => metrics[key]);
+      .map(key => metrics[key as keyof typeof metrics] as MetadataProject);
     const totalElements = projects.reduce((acc, project) => acc + project.elements.length, 0);
     const totalParentElements = projects.reduce(
       (acc, project) => acc + [...new Set(project.elements.map((el: any) => el.name.split('-')[1]))].length + 2,
@@ -217,7 +219,7 @@ export class MetricsCarousel extends LitElement {
         href: '/elements/docs/metrics/elements/',
         title: 'Instances in MagLev',
         label: 'View Maglev adoption metrics',
-        metricCount: 1795
+        metricCount: elementsMetrics.projects.reduce((acc, project) => acc + project.instanceTotal, 0)
       }
     ];
   }

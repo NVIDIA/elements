@@ -30,35 +30,32 @@ export const libraryConfig = [
   {
     files: [...source],
     ignores: ['**/src/**/bundle.ts', ...ignores, ...tests, ...stories],
-    ...config(
-      [
-        {
-          rule: 'no-restricted-imports',
-          ruleConfig: [
-            'error',
-            {
-              patterns: [
-                {
-                  group: [
-                    '@nvidia-elements/core/**/*.css',
-                    '@nvidia-elements/core/**/*.css?inline',
-                    '@nvidia-elements/styles/**/*.css',
-                    '@nvidia-elements/styles/**/*.css?inline'
-                  ],
-                  message:
-                    'Inline CSS utils are not allowed in library APIs to prevent performance issues, use shadow DOM encapsulated CSS instead'
-                },
-                {
-                  group: ['@nve-internals/'],
-                  message: 'Repository internal utilities and libraries cannot be used in published packages.'
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      'no-inline-css'
-    )
+    ...config([
+      {
+        rule: 'no-restricted-imports',
+        ruleConfig: [
+          'error',
+          {
+            patterns: [
+              {
+                group: [
+                  '@nvidia-elements/core/**/*.css',
+                  '@nvidia-elements/core/**/*.css?inline',
+                  '@nvidia-elements/styles/**/*.css',
+                  '@nvidia-elements/styles/**/*.css?inline'
+                ],
+                message:
+                  'Inline CSS utils are not allowed in library APIs to prevent performance issues, use shadow DOM encapsulated CSS instead'
+              },
+              {
+                group: ['@nve-internals/'],
+                message: 'Repository internal utilities and libraries cannot be used in published packages.'
+              }
+            ]
+          }
+        ]
+      }
+    ])
   },
   {
     files: [...source],

@@ -31,7 +31,7 @@ export function render() {
   </div>
 </div>
 <script type="module">
-  import { MetadataService } from '@nve-internals/elements-api';
+  import { MetadataService } from '@nve-internals/metadata';
   const metrics = await MetadataService.getMetadata();
   document.querySelector('pre').textContent = JSON.stringify(metrics, null, 2);
 </script> `;
