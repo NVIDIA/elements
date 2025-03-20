@@ -43,7 +43,8 @@
       "dependencies": [
         "clean",
         "../elements:build",
-        "../internals/elements-api:build"
+        "../internals/elements-api:build",
+        "../internals/metadata:build"
       ],
       "env": {
         "PAGES_BASE_URL": {
@@ -97,6 +98,7 @@
     "@lit-labs/ssr-client": "catalog:",
     "@internals/elements-api": "workspace:*",
     "@internals/eslint": "workspace:*",
+    "@internals/metadata": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/playwright-screencast": "workspace:*",
     "@nvidia-elements/core": "workspace:*",

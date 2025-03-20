@@ -1,4 +1,4 @@
-import { MetadataService } from '@internals/elements-api';
+import { MetadataService } from '@internals/metadata';
 
 const metrics = await MetadataService.getMetadata();
 

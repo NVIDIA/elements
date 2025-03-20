@@ -1,0 +1,298 @@
+export interface MetadataSummary {
+  created: string;
+  types: MetadataTypes;
+  '@nvidia-elements/core': MetadataProject;
+  '@nvidia-elements/core-react': MetadataProject;
+  '@nvidia-elements/testing': MetadataProject;
+  '@nvidia-elements/code': MetadataProject;
+  '@nvidia-elements/behaviors-alpine': MetadataProject;
+}
+
+export interface MetadataTypes {
+  props: { name: string; type: string; description: string }[];
+}
+
+export interface MetadataProject {
+  name: string;
+  version: string;
+  readme: string;
+  changelog: string;
+  tests: MetadataTestReport;
+  elements: MetadataElement[];
+}
+
+export interface MetadataElement {
+  name: string;
+  manifest?: MetadataCustomElementsManifestDeclaration;
+  tests: {
+    unit: {
+      coverageTotal: number;
+    };
+    lighthouse: MetadataLighthouseElementReport;
+    ssr: {
+      baseline: boolean;
+      hydration: boolean;
+    };
+  };
+  stories: MetadataStory[];
+}
+
+export interface MetadataElementSories {
+  element: string;
+  stories: MetadataStory[];
+}
+
+export interface MetadataStory {
+  id: string;
+  file: string;
+  template: string;
+  description?: string;
+}
+
+export interface MetadataPackage {
+  name: string;
+  version: string;
+  description: string;
+  homepage: string;
+  repository: {
+    type: string;
+    url: string;
+  };
+  type: string;
+  files: string[];
+  sideEffects: string[];
+  exports: {
+    default: string;
+    types: string;
+    import: string;
+  };
+  dependencies: {
+    [key: string]: string;
+  };
+  devDependencies: {
+    [key: string]: string;
+  };
+}
+
+export interface MetadataTestCoverage {
+  unitTestsTotal: number;
+  axeTestsTotal: number;
+  visualTestsTotal: number;
+  ssrTestsTotal: number;
+  coverageTotal: number;
+  coverage: {
+    file: string;
+    lines: {
+      pct: number;
+    };
+    functions: {
+      pct: number;
+    };
+    branches: {
+      pct: number;
+    };
+  }[];
+}
+
+export interface MetadataCustomElementsManifest {
+  modules: {
+    kind: string;
+    path: string;
+    declarations: MetadataCustomElementsManifestDeclaration[];
+    exports: {
+      kind: string;
+      name: string;
+      declaration: {
+        name: string;
+        module: string;
+      };
+    }[];
+  }[];
+}
+
+export interface MetadataCustomElementsManifestDeclaration {
+  tagName: string;
+  customElement: boolean;
+  kind: string;
+  path: string;
+  name: string;
+  cssProperties: {
+    name: string;
+    description: string;
+  }[];
+  slots: {
+    name: string;
+    description: string;
+  }[];
+  members: {
+    kind: string;
+    name: string;
+    description: string;
+    attribute: string;
+    default: string;
+    reflects: boolean;
+    type: {
+      text: string;
+    };
+  }[];
+  attributes: {
+    name: string;
+    type: {
+      text: string;
+    };
+    default: string;
+    description: string;
+    fieldName: string;
+  }[];
+  superclass: {
+    name: string;
+    package: string;
+  };
+  metadata: {
+    unitTests: boolean;
+    apiReview: boolean;
+    performance: boolean;
+    stable: boolean;
+    vqa: boolean;
+    responsive: boolean;
+    themes: boolean;
+    aria: string;
+    entrypoint: string;
+    package: boolean;
+    since: string;
+    storybook: string;
+    figma: string;
+    status: string;
+    behavior: string;
+  };
+}
+
+export interface MetadataUnitTestCoverageSummary {
+  file: string;
+  lines: {
+    total: number;
+    covered: number;
+    skipped: number;
+    pct: number;
+  };
+  statements: {
+    total: number;
+    covered: number;
+    skipped: number;
+    pct: number;
+  };
+  branches: {
+    total: number;
+    covered: number;
+    skipped: number;
+    pct: number;
+  };
+  functions: {
+    total: number;
+    covered: number;
+    skipped: number;
+    pct: number;
+  };
+}
+
+export interface MetadataUnitTestCoverageSummaryReport {
+  total: MetadataUnitTestCoverageSummary;
+  [key: string]: MetadataUnitTestCoverageSummary;
+}
+
+export interface MetadataTestReport {
+  coverage: MetadataUnitTestCoverageSummary[];
+  coverageTotal: MetadataUnitTestCoverageSummary;
+  unitTestsTotal: number;
+  axeTestsTotal: number;
+  visualTestsTotal: number;
+  ssrTestsTotal: number;
+}
+
+export interface MetadataLighthouseElementReport {
+  name: string;
+  payload: {
+    javascript: {
+      kb: number;
+      requests: Record<
+        string,
+        {
+          kb: number;
+          name: string;
+        }
+      >;
+    };
+    css: {
+      kb: number;
+      requests: Record<
+        string,
+        {
+          kb: number;
+          name: string;
+        }
+      >;
+    };
+  };
+  scores: {
+    performance: number;
+    accessibility: number;
+    bestPractices: number;
+  };
+}
+
+export interface MetadataLighthouseReport {
+  [key: string]: {
+    [key: string]: MetadataLighthouseElementReport | null;
+  };
+}
+
+export interface MetadataSSRReportJSON {
+  numTotalTestSuites: number;
+  numPassedTestSuites: number;
+  numFailedTestSuites: number;
+  numPendingTestSuites: number;
+  numTotalTests: number;
+  numPassedTests: number;
+  numFailedTests: number;
+  numPendingTests: number;
+  numTodoTests: number;
+  snapshot: {
+    added: number;
+    failure: boolean;
+    filesAdded: number;
+    filesRemoved: number;
+    filesRemovedList: string[];
+    filesUnmatched: number;
+    filesUpdated: number;
+    matched: number;
+    total: number;
+    unchecked: number;
+    uncheckedKeysByFile: string[];
+    unmatched: number;
+    updated: number;
+    didUpdate: boolean;
+  };
+  startTime: number;
+  success: boolean;
+  testResults: {
+    assertionResults: {
+      ancestorTitles: string[];
+      fullName: string;
+      status: 'passed' | 'failed';
+      title: string;
+      duration: number;
+      failureMessages: string[];
+      meta: Record<string, unknown>;
+    }[];
+    startTime: number;
+    endTime: number;
+    status: 'passed' | 'failed';
+    message: string;
+    name: string;
+  }[];
+}
+
+export interface MetadataSSRElementReport {
+  name: string;
+  status: 'passed' | 'failed';
+}

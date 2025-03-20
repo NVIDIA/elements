@@ -3,7 +3,7 @@ export const libraryLighthouseTestConfig = {
   logLevel: 'info',
   test: {
     retry: 1,
-    bail: 2,
+    bail: process.env.CI ? 1 : 0,
     isolate: false,
     fileParallelism: false,
     onConsoleLog(log) {

@@ -2,7 +2,7 @@ import { gzipSync } from 'fflate';
 import format from 'html-format';
 import packageFile from '../../../../elements/package.json' with { type: 'json' };
 import { ESM_ELEMENTS_VERSION } from '../internal/version.js';
-import { MetadataService } from '../internal/metadata.service.js';
+import { MetadataService } from '@internals/metadata'; // eslint-disable-line
 
 const metrics = await MetadataService.getMetadata();
 
