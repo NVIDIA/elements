@@ -1,4 +1,5 @@
-import { ESM_ELEMENTS_VERSION, MetadataService } from '@nve-internals/elements-api';
+import { ESM_ELEMENTS_VERSION } from '@nve-internals/elements-api';
+import { MetadataService } from '@nve-internals/metadata';
 import { compareVersions } from 'compare-versions';
 
 export const data = {

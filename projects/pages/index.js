@@ -8,7 +8,7 @@ if (!existsSync('./dist')) {
 cpSync('./_redirects', './dist/_redirects');
 cpSync('../site/dist/', './dist/', { recursive: true });
 cpSync('../storybook/dist/', './dist/api/', { recursive: true });
-cpSync('../internals/metadata/dist/', './dist/metadata/', { recursive: true });
+cpSync('../internals/metadata/static/index.json', './dist/metadata/index.json');
 
 cpSync('../starters/dist/', './dist/starters/download/', { recursive: true });
 cpSync('../starters/angular/dist/angular-app/browser/', './dist/starters/angular/', { recursive: true });

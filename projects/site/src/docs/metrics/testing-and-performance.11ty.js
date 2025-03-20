@@ -1,4 +1,5 @@
-import { MetadataService, ESM_ELEMENTS_VERSION } from '@nve-internals/elements-api';
+import { ESM_ELEMENTS_VERSION } from '@nve-internals/elements-api';
+import { MetadataService } from '@nve-internals/metadata';
 
 export const data = {
   title: 'Testing & Performance',

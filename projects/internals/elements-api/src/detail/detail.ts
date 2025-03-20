@@ -3,7 +3,7 @@ import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import showdown from 'showdown';
 import { useStyles } from '@nvidia-elements/core/internal';
-import { MetadataService } from '../internal/metadata.service.js';
+import { MetadataService } from '@nve-internals/metadata'; // eslint-disable-line
 import styles from './detail.css?inline';
 
 const showdownOptions = { simplifiedAutoLink: true };

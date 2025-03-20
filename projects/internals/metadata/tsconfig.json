@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "module": "esnext",
+    "target": "es2022",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/",
+    "baseUrl": "./",
+    "rootDir": "./",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": false,
+    "isolatedModules": true,
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@nve-internal/metadata": ["./src/index.js"],
+      "@nve-internal/metadata/*": ["./src/*"],
+      "@nve-internal/metadata/*.js": ["./src/*.js"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}
