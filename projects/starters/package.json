@@ -43,7 +43,12 @@
         "./solidjs:build",
         "./typescript:build",
         "./vue:build"
-      ]
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true
+        }
+      }
     }
   }
 }
