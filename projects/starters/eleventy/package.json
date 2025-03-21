@@ -16,7 +16,8 @@
       ]
     },
     "dev": {
-      "command": "pnpm exec eleventy --watch & vite build --watch & vite preview",
+      "command": "pnpm exec eleventy --serve --port=8082",
+      "service": true,
       "dependencies": [
         "build"
       ],
@@ -28,12 +29,6 @@
       }
     },
     "build": {
-      "dependencies": [
-        "build:11ty",
-        "build:vite"
-      ]
-    },
-    "build:11ty": {
       "command": "pnpm exec eleventy",
       "files": [
         "src",
@@ -54,37 +49,18 @@
         }
       }
     },
-    "build:vite": {
-      "command": "vite build",
+    "preview": {
+      "command": "pnpm run build && vite preview --base=$PAGES_BASE_URL",
+      "service": true,
       "files": [
         "src",
-        "vite.config.ts",
-        "package.json"
-      ],
-      "output": [
-        "dist"
-      ],
-      "dependencies": [
-        "../../elements:build",
-        "build:11ty"
+        "assets",
+        "./eleventy.config.js"
       ],
       "env": {
         "PAGES_BASE_URL": {
           "external": true,
-          "default": "/elements/"
-        }
-      }
-    },
-    "preview": {
-      "command": "vite preview",
-      "service": true,
-      "dependencies": [
-        "build"
-      ],
-      "env": {
-        "PAGES_BASE_URL": {
-          "external": true,
-          "default": "/elements/"
+          "default": "/elements/preview/starters/eleventy/"
         }
       }
     },
@@ -96,8 +72,9 @@
     }
   },
   "devDependencies": {
-    "@11ty/eleventy": "3.0.0",
+    "@11ty/eleventy": "3.0.1-alpha.5",
     "@11ty/eleventy-plugin-syntaxhighlight": "5.0.0",
+    "@11ty/eleventy-plugin-vite": "6.0.0",
     "@lit-labs/eleventy-plugin-lit": "1.0.3",
     "@lit-labs/ssr-client": "catalog:",
     "@nvidia-elements/core": "workspace:*",

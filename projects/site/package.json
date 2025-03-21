@@ -18,7 +18,7 @@
       ]
     },
     "dev": {
-      "command": "eleventy --serve --port=8082",
+      "command": "pnpm exec eleventy --serve --port=8082",
       "service": true,
       "dependencies": [
         "build"
@@ -91,8 +91,8 @@
     "lit": "catalog:"
   },
   "devDependencies": {
-    "@11ty/eleventy": "3.0.1-alpha.4",
-    "@11ty/eleventy-plugin-vite": "6.0.0-alpha.4",
+    "@11ty/eleventy": "3.0.1-alpha.5",
+    "@11ty/eleventy-plugin-vite": "6.0.0",
     "@eslint/js": "catalog:",
     "@lit-labs/eleventy-plugin-lit": "1.0.3",
     "@lit-labs/ssr-client": "catalog:",
