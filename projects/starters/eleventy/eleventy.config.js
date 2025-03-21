@@ -1,27 +1,35 @@
 import { EleventyRenderPlugin } from '@11ty/eleventy';
 import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
+import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import markdownIt from 'markdown-it';
-// import litPlugin from '@lit-labs/eleventy-plugin-lit';
+
+const BASE_URL = `${process.env.PAGES_BASE_URL}starters/eleventy/`;
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
-
-  // eleventyConfig.addPlugin(litPlugin, {
-  //   mode: 'worker',
-  //   componentModules: [
-  //     'node_modules/@nvidia-elements/core/dist/dot/define.js'
-  //   ],
-  // });
-
-  eleventyConfig.addPassthroughCopy('assets');
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
-  // eleventyConfig.addPassthroughCopy('node_modules/@nvidia-elements/themes/dist/');
-  // eleventyConfig.addPassthroughCopy('node_modules/@nvidia-elements/styles/dist/');
-  // eleventyConfig.addPassthroughCopy('node_modules/@nvidia-elements/core/dist/bundles/');
-  // eleventyConfig.addPassthroughCopy('node_modules/@lit-labs/ssr-client/lit-element-hydrate-support.js');
+  eleventyConfig.addPlugin(EleventyPluginVite, {
+    viteOptions: {
+      base: BASE_URL,
+      build: {
+        target: 'esnext'
+      }
+    }
+  });
+
+  eleventyConfig.setServerOptions({
+    onRequest: {
+      '/': () => ({
+        status: 307,
+        headers: {
+          Location: BASE_URL
+        }
+      })
+    }
+  });
 
   const markdown = markdownIt({
     html: true,
@@ -67,11 +75,8 @@ export default function (eleventyConfig) {
   return {
     dir: {
       input: 'src',
-      output: '_site',
-      layouts: '_layouts',
-      inlcudes: '_includes',
-      data: '_data'
+      output: 'dist',
+      layouts: '_layouts'
     }
-    // templateFormats: ['liquid', 'html', 'md', '11ty.js']
   };
 }
