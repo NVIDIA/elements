@@ -196,7 +196,7 @@ export function render(data) {
           <main nve-layout="column align:center">
             <div nve-layout="row align:horizontal-center full" style="gap: 5rem;">
               <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl">
-                ${data.tag ? `<h1 nve-text="display emphasis mkd">${data.title}</h1>${elementSummary(data.tag)}` : ''}
+                ${data.tag ? `<h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>${elementSummary(data.tag)}` : ''}
                 ${data.content}
                 ${data.tag ? `${elementStatus(data.tag)}${elementTable(data.tag)}` : ''}
                 ${data.associatedElements?.length ? data.associatedElements.map(tag => elementTable(tag)).join('') : ''}

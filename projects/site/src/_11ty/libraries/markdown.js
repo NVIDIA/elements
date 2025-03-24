@@ -36,6 +36,11 @@ function renderer(tokens, idx, options, env, slf) {
     tokens[idx].attrSet('nve-layout', 'column gap:xs');
   }
 
+  // add heading to search index metadata
+  if (tokens[idx].type === 'heading_open') {
+    tokens[idx].attrSet('data-pagefind-meta', `${tokens[idx].tag}_${idx}`);
+  }
+
   return slf.renderToken(tokens, idx, options, env, slf);
 }
 
