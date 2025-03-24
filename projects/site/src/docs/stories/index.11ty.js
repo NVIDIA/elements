@@ -44,6 +44,7 @@ export function render(data) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="${BASE_URL}" />
+    <title data-pagefind-meta="title">${data.story.permalink}</title>
     <style>
       @import '@nvidia-elements/themes/fonts/inter.css';
       @import '@nvidia-elements/themes/index.css';
@@ -77,7 +78,7 @@ export function render(data) {
       }
     </script>
   </head>
-  <body nve-layout="column">
+  <body nve-layout="column" data-pagefind-ignore="all">
     <div id="iframe-links" hidden>
       <a href="docs/elements/${data.story.element}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
       <a href="${data.story.playground}" target="_blank" nve-text="link body sm">playground &#8599;</a>

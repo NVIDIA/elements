@@ -2,6 +2,7 @@ import { EleventyRenderPlugin, IdAttributePlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
 import { BASE_URL } from './src/_11ty/layouts/common.js';
+import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { apiShortcode, storyShortcode } from './src/_11ty/shortcodes/index.js';
@@ -52,6 +53,9 @@ export default function (eleventyConfig) {
     }
   });
 
+  eleventyConfig.addPlugin(searchPlugin, {
+    outputPath: './.11ty-vite/public/.pagefind'
+  });
   eleventyConfig.setLibrary('md', markdown);
   eleventyConfig.addAsyncShortcode('story', storyShortcode);
   eleventyConfig.addAsyncShortcode('api', apiShortcode);

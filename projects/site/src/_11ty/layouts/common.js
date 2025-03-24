@@ -13,7 +13,7 @@ export const renderBaseHead = data => /* html */ `
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="${BASE_URL}" />
-  <title>${data.title}</title>
+  <title data-pagefind-meta="title">${data.title}</title>
   <meta name="description" content="Elements - ${data.title}">
   <link rel="icon" href="/favicon.svg"> 
   <style>
@@ -107,7 +107,8 @@ export const renderBaseHead = data => /* html */ `
 `;
 
 export const renderDocsNav = data => /* html */ `
-<nve-tree behavior-expand>
+<nve-docs-search id="docs-search" base-url="${BASE_URL}"></nve-docs-search>
+<nve-tree id="docs-nav" data-pagefind-ignore="all" behavior-expand>
   <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') ? 'expanded' : ''}>
     About
     <nve-tree-node ${data.page.url.includes('/docs/about/getting-started/') ? 'highlighted' : ''}><a href="docs/about/getting-started/">Getting Started</a></nve-tree-node>
@@ -310,6 +311,32 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/api-design/glossary/') ? 'highlighted' : ''}><a href="docs/api-design/glossary/">Glossary</a></nve-tree-node>
   </nve-tree-node>
 </nve-tree>
+${renderSearchScript()}
+`;
+
+export const renderSearchScript = () => /* html */ `
+<script type="module">
+  // pagefind
+  import('${join(globalThis.process.env.ELEVENTY_ROOT, 'src', '_internal', 'search')}/search.js');
+
+  const docsSearch = document.getElementById('docs-search');
+
+  let isSearching = false;
+  docsSearch.addEventListener('search-change', (event) => {
+    isSearching = event.detail.length > 0;
+  });
+  docsSearch.addEventListener('search-reset', (event) => toggleSideNav(true));
+  docsSearch.addEventListener('search-focus', () => toggleSideNav(false));
+  docsSearch.addEventListener('search-blur', () => !isSearching && toggleSideNav(true));
+
+  // toggle side nav
+  const docsNav = document.getElementById('docs-nav');
+  const docsNavDisplay = docsNav.style.display;
+
+  const toggleSideNav = (state) => {
+    docsNav.style.display = state ? docsNavDisplay : 'none';
+  };
+</script>
 `;
 
 export const IS_MR_PREVIEW = process.env.PAGES_BASE_URL?.includes('mr-preview');
