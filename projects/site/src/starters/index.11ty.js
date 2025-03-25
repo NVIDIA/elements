@@ -118,19 +118,6 @@ export function render(data) {
       </div>
     </nve-card>
   </a>
-  <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/remix">
-    <nve-card>
-      <div nve-layout="row gap:sm align:vertical-center">
-        <nve-logo color="gray-denim" size="lg">
-          <img src="/static/images/integrations/remix.svg" width="24px" height="24px" alt="remix logo" />
-        </nve-logo>
-        <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Remix</h2>
-          <p nve-text="body sm muted">Starter leveraging Remix and React 19.</p>
-        </div>
-      </div>
-    </nve-card>
-  </a>
   <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nextjs">
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
