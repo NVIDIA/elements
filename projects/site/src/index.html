@@ -51,7 +51,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
         </section>
 
         <!-- Section 1 -->
-        <section>
+        <section id="works-for-you">
           <div class="content" nve-layout="column gap:xxl align:center">
             <div nve-text="semibold display center">
               <span class="silver-gradient gradient-txt">Work the way</span>
@@ -106,7 +106,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
         </section>
 
         <!-- Section 2 -->
-        <section>
+        <section id="ready-to-use">
           <div class="background" style="background: var(--nve-sys-layer-shell-accent-background)"></div>
           <div class="content trailing" nve-layout="column gap:xxl align:center align:horizontal-stretch">
             <div nve-layout="column gap:lg">
@@ -196,7 +196,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
         </section>
 
         <!--  Section 4 -->
-        <section>
+        <section id="design-directly">
           <div class="content" nve-layout="column align:center align:horizontal-stretch gap:xxl">
             <div nve-layout="column &lg|row gap:lg">
               <div nve-layout="column gap:lg" class="feature">
@@ -262,7 +262,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
         </section>
 
         <!--  Section 5 -->
-        <section>
+        <section id="turn-ideas-into-reality">
           <div class="background" style="background: var(--nve-sys-layer-shell-accent-background)"></div>
           <div class="content" nve-layout="column align:center gap:xxl">
             <div nve-text="semibold display center">
@@ -323,7 +323,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
         </section>
 
         <!--  Section 6 -->
-        <section>
+        <section id="start-building">
           <div class="content" nve-layout="column gap:xxl align:center align:horizontal-stretch">
             <div nve-layout="column gap:lg">
               <div nve-text="semibold display">
@@ -335,8 +335,20 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
                 No need to start from scratch. We've got starter projects—just clone, run, and start building.
               </div>
               <div nve-layout="column &sm|row gap:sm">
-                <nve-button size="lg">View our community</nve-button>
-                <nve-button interaction="emphasis" size="lg">Start building</nve-button>
+                <nve-button size="lg">
+                  <a
+                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-support--docs"
+                    target="_blank"
+                    >View our community</a
+                  >
+                </nve-button>
+                <nve-button interaction="emphasis" size="lg">
+                  <a
+                    href="https://NVIDIA.github.io/elements/api/?path=/docs/about-getting-started--docs"
+                    target="_blank"
+                    >Start building</a
+                  >
+                </nve-button>
               </div>
             </div>
 
