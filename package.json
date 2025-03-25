@@ -71,8 +71,6 @@
         "./projects/starters/mpa:ci",
         "./projects/starters/nextjs:ci",
         "./projects/starters/nextjs-react-18:ci",
-        "./projects/starters/remix:ci",
-        "./projects/starters/remix-react-18:ci",
         "./projects/starters/react:ci",
         "./projects/starters/react-18:ci",
         "./projects/starters/scoped-registry:ci",
@@ -175,9 +173,7 @@
         "!projects/internals/metadata/static/**",
         "!projects/elements-react/src/**/*",
         "!projects/starters/nextjs/next-env.d.ts",
-        "!projects/starters/nextjs-react-18/next-env.d.ts",
-        "!projects/starters/remix/build/**/*",
-        "!projects/starters/remix-react-18/build/**/*"
+        "!projects/starters/nextjs-react-18/next-env.d.ts"
       ],
       "output": []
     },
