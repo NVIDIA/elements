@@ -114,7 +114,6 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node><a href="api/?path=/docs/integrations-nextjs--docs">NextJS</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/integrations-preact--docs">Preact</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/integrations-react--docs">React</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/integrations-remix--docs">Remix</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/integrations-solidjs--docs">SolidJS</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/integrations-typescript--docs">TypeScript</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/integrations-vue--docs">Vue</a></nve-tree-node>

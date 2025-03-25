@@ -46,6 +46,17 @@ declare module 'react/jsx-runtime' {
 }
 ```
 
+### React SSR
+
+An experimental [@lit-labs/ssr-react](https://github.com/lit/lit/tree/main/packages/labs/ssr-react) package exists for rendering elements with SSR.
+
+```javascript
+// app/root.tsx, import before any other elements import statements
+import '@lit-labs/ssr-react/enable-lit-ssr.js';
+
+// the rest of your app
+```
+
 ## React 18
 
 To use Elements in [React v18](https://reactjs.org/) follow the [installation getting started](?path=/docs/about-installation--docs) steps. Once complete
