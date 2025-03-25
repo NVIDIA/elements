@@ -7,8 +7,6 @@ packages:
   - 'projects/starters/mpa'
   - 'projects/starters/nextjs'
   - 'projects/starters/nextjs-react-18'
-  - 'projects/starters/remix'
-  - 'projects/starters/remix-react-18'
   - 'projects/starters/react'
   - 'projects/starters/react-18'
   - 'projects/starters/scoped-registry'
