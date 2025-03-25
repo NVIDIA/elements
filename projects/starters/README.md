@@ -7,7 +7,6 @@ This directory contains a suite of standardized starter apps for kickstarting an
 - `/extensions` - Build setup for highly reusable and resiliant Web Components.
 - `/mpa` - Multi Page App setup for when you just need something simple.
 - `/nextjs` - Experimental NextJS demo.
-- `/remix` - Experimental Remix demo.
 - `/react` - React app built with [Create React App](https://create-react-app.dev/)
 - `/solidjs` - [SolidJS](https://www.solidjs.com/) app built with [Vite](https://vitejs.dev/)
 - `/static` - No tooling bundle and no performance optimizations
