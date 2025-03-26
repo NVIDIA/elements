@@ -7,7 +7,7 @@ export default {
   component: 'nve-file',
 };
 
-export const File = {
+export const Default = {
   render: () => html`
 <nve-file>
   <label>file</label>

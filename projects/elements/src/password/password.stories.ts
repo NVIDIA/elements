@@ -7,7 +7,7 @@ export default {
   component: 'nve-password',
 };
 
-export const Password = {
+export const Default = {
   render: () => html`
 <nve-password>
   <label>label</label>

@@ -7,7 +7,7 @@ export default {
   component: 'nve-switch',
 };
 
-export const Switch = () => {
+export const Default = () => {
   return html`
 <nve-switch>
   <label>label</label>
