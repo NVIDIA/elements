@@ -1,0 +1,4 @@
+nve-dropdown-group > nve-dropdown + nve-dropdown {
+  --nve-sys-layer-popover-offset: calc(var(--nve-ref-size-400) + 2px);
+  margin-top: calc(var(--nve-ref-size-400) * -1);
+}
