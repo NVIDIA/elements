@@ -349,6 +349,18 @@
       "types": "./dist/dropdown/define.d.ts",
       "default": "./dist/dropdown/define.js"
     },
+    "./dropdown-group": {
+      "types": "./dist/dropdown-group/index.d.ts",
+      "default": "./dist/dropdown-group/index.js"
+    },
+    "./dropdown-group/index.js": {
+      "types": "./dist/dropdown-group/index.d.ts",
+      "default": "./dist/dropdown-group/index.js"
+    },
+    "./dropdown-group/define.js": {
+      "types": "./dist/dropdown-group/define.d.ts",
+      "default": "./dist/dropdown-group/define.js"
+    },
     "./dropzone": {
       "types": "./dist/dropzone/index.d.ts",
       "default": "./dist/dropzone/index.js"

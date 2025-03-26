@@ -1,0 +1,64 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { Canvas } from '@internals/storybook/blocks';
+import { Default, WithDisabledItems, WithIcons } from './dropdown-group.stories';
+
+<Meta title="Elements/Dropdown Group/Documentation" />
+
+# Dropdown Group
+
+<nve-api-summary tag="nve-dropdown-group"></nve-api-summary>
+
+## Installation
+
+```typescript
+import '@nvidia-elements/core/dropdown-group/define.js';
+```
+
+```html
+<nve-button popovertarget="menu-1">menu</nve-button>
+<nve-dropdown-group>
+  <nve-dropdown id="menu-1">
+    <nve-menu>
+      <nve-menu-item popovertarget="menu-2">
+        item 1-1 <nve-icon name="caret" direction="right" size="sm" slot="suffix"></nve-icon>
+      </nve-menu-item>
+      <nve-menu-item>item 1-2</nve-menu-item>
+      <nve-menu-item>item 1-3</nve-menu-item>
+    </nve-menu>
+  </nve-dropdown>
+  <nve-dropdown id="menu-2" position="right">
+    <nve-menu>
+      <nve-menu-item>item 2-1</nve-menu-item>
+      <nve-menu-item popovertarget="menu-3">
+        item 2-2 <nve-icon name="caret" direction="right" size="sm" slot="suffix"></nve-icon>
+      </nve-menu-item>
+      <nve-menu-item>item 2-3</nve-menu-item>
+    </nve-menu>
+  </nve-dropdown>
+  <nve-dropdown id="menu-3" position="right">
+    <nve-menu>
+      <nve-menu-item>item 3-1</nve-menu-item>
+      <nve-menu-item>item 3-2</nve-menu-item>
+      <nve-menu-item>item 3-3</nve-menu-item>
+    </nve-menu>
+  </nve-dropdown>
+</nve-dropdown-group>
+```
+
+## Standard
+
+<Canvas of={Default} story={{ inline: false, height: 300 }}  />
+
+## Disabled Menu Items
+
+Disable individual menu items using the `disabled` attribute.
+
+<Canvas of={WithDisabledItems} story={{ inline: false, height: 400 }}  />
+
+## Icons in Menu Items
+
+<Canvas of={WithIcons} story={{ inline: false, height: 400 }}  />
+
+<nve-api-status tag="nve-dropdown-group"></nve-api-status>
+
+<nve-api-table tag="nve-dropdown-group"></nve-api-table>
