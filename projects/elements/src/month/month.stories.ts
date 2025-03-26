@@ -7,7 +7,7 @@ export default {
   component: 'nve-month',
 };
 
-export const Month = {
+export const Default = {
   render: () => html`
 <nve-month>
   <label>label</label>

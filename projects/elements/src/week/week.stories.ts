@@ -7,7 +7,7 @@ export default {
   component: 'nve-week',
 };
 
-export const Week = {
+export const Default = {
   render: () => html`
 <nve-week>
   <label>label</label>
