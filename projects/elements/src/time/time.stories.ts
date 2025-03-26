@@ -7,7 +7,7 @@ export default {
   component: 'nve-time',
 };
 
-export const Time = {
+export const Default = {
   render: () => html`
 <nve-time>
   <label>label</label>

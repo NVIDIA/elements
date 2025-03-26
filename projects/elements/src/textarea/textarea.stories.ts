@@ -7,7 +7,7 @@ export default {
   component: 'nve-textarea',
 };
 
-export const Textarea = {
+export const Default = {
   render: () => html`
 <nve-textarea>
   <label>label</label>

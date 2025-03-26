@@ -1,6 +1,7 @@
 packages:
   - 'projects/starters'
   - 'projects/starters/eleventy'
+  - 'projects/starters/eleventy-ssr'
   - 'projects/starters/angular'
   - 'projects/starters/buildless'
   - 'projects/starters/lit-library'

@@ -10,7 +10,7 @@ export default {
   component: 'nve-select',
 };
 
-export const Select = {
+export const Default = {
   render: () => html`
 <nve-select>
   <label>label</label>
