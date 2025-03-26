@@ -7,7 +7,7 @@ export default {
   component: 'nve-color',
 };
 
-export const Color = {
+export const Default = {
   render: () => html`
 <nve-color>
   <label>label</label>
