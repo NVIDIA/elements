@@ -7,7 +7,7 @@ export default {
   component: 'nve-checkbox',
 };
 
-export const Checkbox = () => {
+export const Default = () => {
   return html`
 <nve-checkbox>
   <label>label</label>

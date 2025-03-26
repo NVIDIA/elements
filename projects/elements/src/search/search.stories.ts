@@ -7,7 +7,7 @@ export default {
   component: 'nve-search',
 };
 
-export const Search = {
+export const Default = {
   render: () => html`
 <nve-search>
   <label>label</label>

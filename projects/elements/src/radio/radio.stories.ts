@@ -7,7 +7,7 @@ export default {
   component: 'nve-radio',
 };
 
-export const Radio = {
+export const Default = {
   render: () => html`
   <nve-radio-group>
     <label>label</label>

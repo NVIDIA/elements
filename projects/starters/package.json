@@ -31,6 +31,7 @@
         "./angular:build",
         "./buildless:build",
         "./eleventy:build",
+        "./eleventy-ssr:build",
         "./lit-library:build",
         "./mpa:build",
         "./nextjs:build",
