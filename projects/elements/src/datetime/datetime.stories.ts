@@ -8,7 +8,7 @@ export default {
   component: 'nve-datetime',
 };
 
-export const Datetime = {
+export const Default = {
   render: () => html`
 <nve-datetime>
   <label>date</label>

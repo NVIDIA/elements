@@ -7,7 +7,7 @@ export default {
   component: 'nve-range',
 };
 
-export const Range = {
+export const Default = {
   render: () => html`
 <nve-range>
   <label>label</label>
