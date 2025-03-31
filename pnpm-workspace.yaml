@@ -34,11 +34,11 @@ packages:
 
 catalog:
   '@custom-elements-manifest/analyzer': 0.10.4
-  '@eslint/js': 9.18.0
+  '@eslint/js': 9.23.0
   '@lit-labs/scoped-registry-mixin': ^1.0.3
-  '@lit-labs/ssr': ^3.3.0
+  '@lit-labs/ssr': ^3.3.1
   '@lit-labs/ssr-client': ^1.1.7
-  '@lit-labs/ssr-react': ^0.3.1
+  '@lit-labs/ssr-react': ^0.3.2
   '@lit-labs/virtualizer': ^2.0.15
   '@lit/react': ^1.0.7
   '@rollup/plugin-terser': 0.4.4
@@ -46,22 +46,22 @@ catalog:
   '@types/node': 22.13.1
   '@types/react': 19.0.7
   '@types/react-dom': 19.0.3
-  '@vitest/browser': 3.0.0-beta.4
-  '@vitest/mocker': 3.0.0-beta.4
-  '@vitest/coverage-istanbul': 3.0.0-beta.4
+  '@vitest/browser': 3.0.9
+  '@vitest/mocker': 3.0.9
+  '@vitest/coverage-istanbul': 3.0.9
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
   cpy-cli: 5.0.0
-  eslint: 9.18.0
+  eslint: 9.23.0
   glob: 11.0.1
   lighthouse: 12.3.0
   lit: ^3.2.1
   lit-html: ^3.2.1
   playwright: 1.49.0
-  publint: 0.3.2
+  publint: 0.3.9
   react: 19.0.0
   react-dom: 19.0.0
   rollup-plugin-minify-html-literals: 1.2.6
-  typescript: 5.6.3
-  vite: 6.0.7
-  vitest: 3.0.0-beta.4
-  vite-plugin-dts: 4.5.0
+  typescript: 5.8.2
+  vite: 6.2.3
+  vitest: 3.0.9
+  vite-plugin-dts: 4.5.3
