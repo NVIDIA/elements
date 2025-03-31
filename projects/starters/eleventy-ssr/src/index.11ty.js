@@ -10,8 +10,9 @@ const stories = metadata['@nvidia-elements/core'].elements
   .map(e => {
     const story = e.stories.find(s => s.id.includes('Default'));
     let template = story?.template.includes('${') ? '' : story?.template;
-    template = template?.replaceAll('<label>', '<label slot="label">');
-    template = template?.replaceAll('<nve-control-message>', '<nve-control-message slot="messages">');
+    template = template
+      ?.replaceAll('<label>', '<label slot="label">')
+      ?.replaceAll('<nve-control-message>', '<nve-control-message slot="messages">');
     return {
       name: e.name,
       entrypoint: e.manifest?.metadata?.entrypoint,
@@ -37,6 +38,7 @@ export function render(data) {
       @import '@nvidia-elements/themes/index.css';
       @import '@nvidia-elements/themes/dark.css';
       @import '@nvidia-elements/styles/layout.css';
+      @import '@nvidia-elements/styles/responsive.css';
       @import '@nvidia-elements/styles/typography.css';
       @import '@nvidia-elements/styles/view-transitions.css';
     </style>
@@ -52,14 +54,14 @@ export function render(data) {
     </script>
   </head>
   <body nve-layout="column gap:lg pad:md">
-    <h1 nve-text="heading xl">${data.title}</h1>
-    <section nve-layout="grid gap:xl span-items:4">
+    <h1 nve-text="heading xl">${data.title}${globalThis.process?.env?.NODE_ENV}</h1>
+    <section nve-layout="grid gap:lg align:vertical-stretch span-items:12 &md|span-items:6 &lg|span-items:4">
       ${stories
         .map(story => {
           return /* html */ `
-        <div nve-layout="column gap:md align:stretch">
+        <div nve-layout="column gap:md align:stretch pad:md" style="border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)">
           <h2 nve-text="heading lg">${story.name}</h2>
-          <div style="max-height: 400px">${story.template}</div>
+          <div style="max-height: 400px; overflow: hidden;">${story.template}</div>
         </div>`;
         })
         .join('\n')}
