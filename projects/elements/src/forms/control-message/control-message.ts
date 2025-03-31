@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
 import styles from './control-message.css?inline';
 
 const statusIcons = {
@@ -44,6 +44,8 @@ export class ControlMessage extends LitElement {
     version: '0.0.0'
   };
 
+  @hostAttr() slot = 'messages';
+
   render() {
     return html`
       <div internal-host>
@@ -51,10 +53,5 @@ export class ControlMessage extends LitElement {
         <slot></slot>
       </div>
     `;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.slot = 'messages';
   }
 }
