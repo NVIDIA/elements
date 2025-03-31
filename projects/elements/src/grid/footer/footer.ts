@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
+import { useStyles, attachInternals, hostAttr } from '@nvidia-elements/core/internal';
 import styles from './footer.css?inline';
 
 /**
@@ -28,6 +28,8 @@ export class GridFooter extends LitElement {
   /** @private */
   _internals: ElementInternals;
 
+  @hostAttr() slot = 'footer';
+
   render() {
     return html`
       <div internal-host role="gridcell">
@@ -38,7 +40,6 @@ export class GridFooter extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.slot = 'footer';
     attachInternals(this);
     this._internals.role = 'row';
   }
