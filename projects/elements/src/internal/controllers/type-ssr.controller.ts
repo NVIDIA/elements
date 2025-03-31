@@ -3,6 +3,7 @@ import type { LegacyDecoratorTarget } from '../types/index.js';
 import { render } from 'lit';
 import { LogService } from '../services/log.service.js';
 import { getSSRMismatchWarning } from '../utils/audit.js';
+import { getEnv } from '../services/global.utils.js';
 
 type UnprotectedLitElement = ReactiveElement & {
   update: () => void;
@@ -32,13 +33,14 @@ export class TypeSSRController<T extends ReactiveElement> implements ReactiveCon
           try {
             updateOriginal.call(host, args);
           } catch (e) {
-            console.log(e);
-            LogService.warn(getSSRMismatchWarning(host.localName));
-            (host.renderRoot as HTMLElement).innerHTML = (host.renderRoot as HTMLElement).innerHTML.split(
-              '<!--lit-part '
-            )[0];
-            render(host.render(), host.renderRoot, host.renderOptions);
-            host.requestUpdate();
+            const renderRoot = host.renderRoot as HTMLElement;
+            renderRoot.innerHTML = renderRoot.innerHTML.split('<!--lit-part ')[0];
+            render(host.render(), renderRoot, host.renderOptions);
+
+            if (getEnv() !== 'production') {
+              LogService.warn(getSSRMismatchWarning(host.localName));
+              console.log(e);
+            }
           }
           return updateOriginal;
         }

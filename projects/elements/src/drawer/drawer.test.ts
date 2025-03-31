@@ -27,13 +27,11 @@ describe(Drawer.metadata.tag, () => {
   });
 
   it('should render close button when closable', async () => {
-    expect(element.shadowRoot.querySelector(IconButton.metadata.tag)).toBe(null);
+    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).hidden).toBe(true);
 
     element.closable = true;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).tagName.toLocaleLowerCase()).toBe(
-      IconButton.metadata.tag
-    );
+    expect(element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).hidden).toBe(false);
   });
 
   it('should use manual behavior when non-modal', async () => {

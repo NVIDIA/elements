@@ -32,6 +32,10 @@ slot[name='nodes'] {
   align-items: start;
 }
 
+slot:not(:has-slotted) {
+  display: none !important;
+}
+
 [part='_node'] {
   display: flex;
   align-items: center;

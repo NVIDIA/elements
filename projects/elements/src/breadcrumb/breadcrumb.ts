@@ -1,7 +1,14 @@
 import { html, LitElement, nothing } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
-import { useStyles, keyNavigationList, attachInternals, generateId, isFocusable } from '@nvidia-elements/core/internal';
+import {
+  useStyles,
+  keyNavigationList,
+  attachInternals,
+  generateId,
+  isFocusable,
+  typeSSR
+} from '@nvidia-elements/core/internal';
 import styles from './breadcrumb.css?inline';
 import { Icon } from '@nvidia-elements/core/icon';
 import type { Button } from '@nvidia-elements/core/button';
@@ -21,6 +28,7 @@ import type { Button } from '@nvidia-elements/core/button';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/navigation_role
  */
+@typeSSR()
 @keyNavigationList<Breadcrumb>()
 export class Breadcrumb extends LitElement {
   get keynavListConfig(): KeynavListConfig {
