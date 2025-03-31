@@ -7,6 +7,7 @@ import {
   popoverStyles,
   TypeNativeAnchorController,
   TypeNativePopoverController,
+  typeSSR,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -16,6 +17,7 @@ import styles from './drawer.css?inline';
  * @element nve-drawer
  * @description Drawer are to display content that is out of context of the rest of the page (notifications, navigations, settings). Alternatively [Panel](./?path=/docs/elements-panel-documentation--docs) is inline as its content is coupled or closely related to the content on the page (details, additional actions/options).
  * @since 0.16.0
+ * @entrypoint \@nvidia-elements/core/drawer
  * @event open - Dispatched when the drawer is opened.
  * @event close - Dispatched when the drawer is closed.
  * @slot default content slot
@@ -32,6 +34,7 @@ import styles from './drawer.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=4152%3A86953&mode=dev
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
+@typeSSR()
 export class Drawer extends LitElement {
   /**
    * Sets the side position of the popover relative to the provided anchor element.
@@ -115,7 +118,7 @@ export class Drawer extends LitElement {
     return html`
     <div internal-host>
       <div class="header">
-        ${this.closable ? html`<nve-icon-button @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close} container="flat"></nve-icon-button>` : ''}
+        <nve-icon-button .hidden=${!this.closable} @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close} container="flat"></nve-icon-button>
         <slot name="header"></slot>
       </div>
       <div class="content">

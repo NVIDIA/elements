@@ -7,6 +7,7 @@ import {
   generateId,
   I18nController,
   TypeClosableController,
+  typeSSR,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { Input } from '@nvidia-elements/core/input';
@@ -28,6 +29,7 @@ import styles from './progressive-filter-chip.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=72%3A5357
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
  */
+@typeSSR()
 export class ProgressiveFilterChip extends LitElement {
   static readonly metadata = {
     tag: 'nve-progressive-filter-chip',
