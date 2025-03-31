@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.31.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.30.1...@nvidia-elements/core-v1.31.0) (2025-03-31)
+
+
+### Features
+
+* **elements:** dropzone ([bd2deeb](https://github.com/NVIDIA/elements/commit/bd2deebcee7b0bebc47a59c909bacc38db97b7e5))
+
 ## [@nvidia-elements/core-v1.30.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.30.0...@nvidia-elements/core-v1.30.1) (2025-03-18)
 
 
