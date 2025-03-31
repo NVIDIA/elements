@@ -1,5 +1,4 @@
-import type { PropertyValues } from 'lit';
-import { html } from 'lit';
+import { html, isServer } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { BaseFormAssociatedElement, useStyles } from '@nvidia-elements/core/internal';
 import styles from './preferences-input.css?inline';
@@ -64,8 +63,11 @@ export class PreferencesInput extends BaseFormAssociatedElement<PreferencesInput
   }
 
   set value(value) {
-    this.#value = { ...this.#value, ...value };
-    this.setFormValue();
+    if (JSON.stringify(this.#value) !== JSON.stringify(value)) {
+      this.#value = { ...this.#value, ...value };
+      this.setFormValue();
+      this.#updatePreferences();
+    }
   }
 
   static readonly metadata = {
@@ -167,15 +169,12 @@ export class PreferencesInput extends BaseFormAssociatedElement<PreferencesInput
     this.setAttribute('nve-control', '');
   }
 
-  updated(props: PropertyValues<this>) {
-    super.updated(props);
-    this.#updatePreferences();
-  }
-
   #updatePreferences() {
-    const preferences = getActivePreferences();
-    if (JSON.stringify(this.activePreferences) !== JSON.stringify(preferences)) {
-      this.activePreferences = preferences;
+    if (!isServer) {
+      const preferences = getActivePreferences();
+      if (JSON.stringify(this.activePreferences) !== JSON.stringify(preferences)) {
+        this.activePreferences = preferences;
+      }
     }
   }
 

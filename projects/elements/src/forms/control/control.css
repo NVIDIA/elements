@@ -103,6 +103,11 @@ slot[name='messages'] {
   display: inline-flex;
 }
 
+[name='messages']:not(:has-slotted),
+[name='label']:not(:has-slotted) {
+  display: none !important;
+}
+
 [internal-host] {
   opacity: var(--opacity);
   display: grid;
@@ -137,4 +142,64 @@ slot[name='messages'] {
 :host([layout='horizontal']) [internal-host],
 :host([layout='horizontal-inline']) [internal-host] {
   grid-template-columns: var(--_label-width) 1fr minmax(0, var(--_label-width));
+}
+
+/** block controls */
+[internal-host] {
+  &:has([name='label']:has-slotted) {
+    grid-template-areas:
+      'label label label'
+      'input input input';
+  }
+
+  &:has([name='messages']:has-slotted) {
+    grid-template-areas:
+      'input input input'
+      'messages messages messages';
+  }
+
+  &:has([name='label']:has-slotted):has([name='messages']:has-slotted) {
+    grid-template-areas:
+      'label label label'
+      'input input input'
+      'messages messages messages';
+  }
+}
+
+:host([layout='horizontal']),
+:host([layout='horizontal-inline']) {
+  [internal-host] {
+    &:has([name='messages']:has-slotted) {
+      grid-template-areas:
+        'label input input'
+        '. messages messages';
+    }
+
+    &:not(:has([name='messages']:has-slotted)) {
+      grid-template-areas: 'label input input';
+    }
+  }
+}
+
+/** inline controls */
+:host([nve-control='inline']) {
+  [internal-host] {
+    grid-template-areas: 'input input input';
+
+    &:has([name='label']:has-slotted) {
+      grid-template-areas: 'input label label';
+    }
+
+    &:has([name='messages']:has-slotted) {
+      grid-template-areas:
+        'input input input'
+        'messages messages messages';
+    }
+
+    &:has([name='label']:has-slotted):has([name='messages']:has-slotted) {
+      grid-template-areas:
+        'input label label'
+        'messages messages messages';
+    }
+  }
 }
