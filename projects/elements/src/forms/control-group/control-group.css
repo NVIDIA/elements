@@ -55,8 +55,21 @@ slot[name='messages'] {
   flex-direction: row;
 }
 
+[name='messages']:not(:has-slotted),
+[name='label']:not(:has-slotted) {
+  display: none !important;
+}
+
+/* fallback for :has-slotted */
 .no-messages {
   & slot[name='messages'] {
+    display: none !important;
+  }
+}
+
+/* fallback for :has-slotted */
+.no-label {
+  & slot[name='label'] {
     display: none !important;
   }
 }
