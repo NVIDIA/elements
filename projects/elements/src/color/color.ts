@@ -36,7 +36,10 @@ export class Color extends Control {
     super.connectedCallback();
     appendRootNodeStyle(this, globalStyles);
     if (this.input.value === '#000000') {
-      this.input.value = getComputedStyle(this).getPropertyValue('--background').trim();
+      const color = getComputedStyle(this).getPropertyValue('--background').trim();
+      if (color.includes('#')) {
+        this.input.value = color;
+      }
     }
   }
 

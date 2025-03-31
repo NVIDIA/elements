@@ -1,6 +1,7 @@
 /**
- * Majority of this CSS will be refactored back into the component shadow root once
- * this draft reaches consensous and lands in browsers https://github.com/w3c/csswg-drafts/issues/6867
+ * Majority of this CSS will be able to be removed once :has-slotted is widely supported
+ * https://developer.mozilla.org/en-US/docs/Web/CSS/:has-slotted
+ * https://chromestatus.com/feature/5134941143433216
  */
 
 [nve-control]:not([nofocus]):has(*:focus-visible)::part(_input) {
@@ -71,12 +72,6 @@
 [nve-control='inline']:has(nve-control-message:not([hidden]))::part(_internal-host) {
   grid-template-areas:
     'input input input'
-    'messages messages messages';
-}
-
-[nve-control='inline']:has(label):has(nve-control-message:not([hidden]))::part(_internal-host) {
-  grid-template-areas:
-    'input label label'
     'messages messages messages';
 }
 
