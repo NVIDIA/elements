@@ -10,7 +10,8 @@ import {
   useStyles,
   attachInternals,
   generateId,
-  isFocusable
+  isFocusable,
+  hostAttr
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
@@ -59,9 +60,10 @@ export class AccordionHeader extends LitElement {
     `;
   }
 
+  @hostAttr() slot = 'header';
+
   connectedCallback() {
     super.connectedCallback(); // Do not override connectedCallback w/out supering
-    this.slot = 'header';
     attachInternals(this);
     this._internals.role = 'heading';
     this._internals.ariaLevel = '2';

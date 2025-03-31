@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
 import styles from './page-panel-header.css?inline';
 
 /**
@@ -23,16 +23,13 @@ export class PagePanelHeader extends LitElement {
     version: '0.0.0'
   };
 
+  @hostAttr() slot = 'header';
+
   render() {
     return html`
       <div internal-host>
         <slot></slot>
       </div>
     `;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.slot = 'header';
   }
 }

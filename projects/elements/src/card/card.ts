@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
 import cardStyleSheet from './card.css?inline';
 import cardHeaderStyleSheet from './card-header.css?inline';
 import cardContentStyleSheet from './card-content.css?inline';
@@ -70,6 +70,8 @@ export class CardHeader extends LitElement {
     version: '0.0.0'
   };
 
+  @hostAttr() slot = 'header';
+
   render() {
     return html`
       <header internal-host>
@@ -82,11 +84,6 @@ export class CardHeader extends LitElement {
         <slot name="header-action"></slot>
       </header>
     `;
-  }
-
-  connectedCallback() {
-    super.connectedCallback(); // Do not override connectedCallback w/out supering
-    this.slot = 'header';
   }
 }
 
@@ -133,16 +130,13 @@ export class CardFooter extends LitElement {
     version: '0.0.0'
   };
 
+  @hostAttr() slot = 'footer';
+
   render() {
     return html`
       <footer internal-host>
         <slot></slot>
       </footer>
     `;
-  }
-
-  connectedCallback() {
-    super.connectedCallback(); // Do not override connectedCallback w/out supering
-    this.slot = 'footer';
   }
 }
