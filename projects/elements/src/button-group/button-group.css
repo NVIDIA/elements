@@ -34,13 +34,6 @@
   --color: color-mix(in oklab, var(--nve-sys-interaction-background) 100%, var(--nve-sys-interaction-color) 50%);
 }
 
-::slotted(mlv-button:hover),
-::slotted(mlv-icon-button:hover),
-::slotted(nve-button:hover),
-::slotted(nve-icon-button:hover) {
-  --color: var(--nve-sys-text-emphasis-color);
-}
-
 :host([container='flat']) {
   --background: transparent;
 }

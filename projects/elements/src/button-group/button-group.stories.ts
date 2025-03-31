@@ -37,6 +37,16 @@ export const MultiSelect = {
   `
 };
 
+export const Disabled = {
+  render: () => html`
+    <nve-button-group container="rounded">
+      <nve-button disabled>button</nve-button>
+      <nve-divider orientation="vertical"></nve-divider>
+      <nve-icon-button icon-name="caret" size="sm" direction="down" disabled></nve-icon-button>
+    </nve-button-group>
+  `
+};
+
 export const Flat = {
   render: () => html`
     <nve-button-group container="flat">
