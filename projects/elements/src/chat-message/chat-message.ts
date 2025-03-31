@@ -10,6 +10,7 @@ import globalStyles from './chat-message.global.css?inline';
  * @element nve-chat-message
  * @description A chat message component displays a text message within a conversation, sent between users or bots
  * @since 1.25.0
+ * @entrypoint \@nvidia-elements/core/chat-message
  * @slot - default slot for content
  * @slot prefix - for avatar/img content
  * @slot suffix - for avatar/img content
@@ -25,7 +26,6 @@ import globalStyles from './chat-message.global.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
  * @stable false
  */
-
 export class ChatMessage extends LitElement {
   static styles = useStyles([styles, colorStateStyles]);
 

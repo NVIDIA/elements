@@ -32,13 +32,12 @@ interface ArgTypes {
 }
 
 export const Default = {
-  render: (args: ArgTypes) =>
-    html`
-<nve-input .layout=${args.layout}>
+  render: html`
+<nve-input>
   <label>label</label>
-  <input type="text" ?disabled=${args.disabled} />
-  <nve-control-message .status=${args.status}>message</nve-control-message>
-</nve-input>`,
+  <input type="text" />
+  <nve-control-message>message</nve-control-message>
+</nve-input>`
 };
 
 export const Input = () => {

@@ -9,6 +9,7 @@ import {
   getDisplayValue,
   getElementUpdate,
   onChildListMutation,
+  typeSSR,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
@@ -42,6 +43,7 @@ import styles from './combobox.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-41&mode=design&t=guIM7VohnWYQUEQv-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
  */
+@typeSSR()
 export class Combobox extends Control implements ContainerElement {
   /** Flat container option is used when embeding component within another containing element */
   @property({ type: String, reflect: true }) container?: 'flat';

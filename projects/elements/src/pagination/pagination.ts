@@ -6,6 +6,7 @@ import {
   BaseFormAssociatedElement,
   formatStandardNumber,
   keyNavigationList,
+  typeSSR,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -28,6 +29,7 @@ import styles from './pagination.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
  * @property {Number} value - value the current page number
  */
+@typeSSR()
 @keyNavigationList<Pagination>()
 export class Pagination extends BaseFormAssociatedElement<number> {
   /**

@@ -9,7 +9,8 @@ import {
   i18n,
   I18nController,
   onChildListMutation,
-  getElementUpdate
+  getElementUpdate,
+  typeSSR
 } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { Icon } from '@nvidia-elements/core/icon';
@@ -34,6 +35,7 @@ import styles from './select.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-24&t=clRGqnKDRGNhR0Yu-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
  */
+@typeSSR()
 @i18n<Select>()
 export class Select extends Control {
   static styles = useStyles([...Control.styles, styles]);

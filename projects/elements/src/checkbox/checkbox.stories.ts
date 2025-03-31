@@ -9,10 +9,20 @@ export default {
 
 export const Default = () => {
   return html`
-<nve-checkbox>
-  <label>label</label>
-  <input type="checkbox" />
-</nve-checkbox>`
+<nve-checkbox-group>
+  <nve-checkbox>
+    <label>checkbox 1</label>
+    <input type="checkbox" checked />
+  </nve-checkbox>
+  <nve-checkbox>
+    <label>checkbox 2</label>
+    <input type="checkbox" />
+  </nve-checkbox>
+  <nve-checkbox>
+    <label>checkbox 3</label>
+    <input type="checkbox" />
+  </nve-checkbox>
+</nve-checkbox-group>`
 };
 
 export const States = () => {
