@@ -98,9 +98,11 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
               </div>
             </div>
 
-            <div nve-layout="column &lg|row align:center gap:xl">
+            <div nve-layout="column &lg|row align:center gap:xl" style="align-items: center">
               <nvd-framework-selector></nvd-framework-selector>
-              <nve-codeblock style="width: 480px; height: 320px;" language="html"> </nve-codeblock>
+              <div class="code-container">
+                <nve-codeblock style="width: 550px; height: 550px;" language="html"></nve-codeblock>
+              </div>
             </div>
           </div>
         </section>
