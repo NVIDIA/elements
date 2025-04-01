@@ -5,7 +5,9 @@ import {
   getIdMatchNotFoundWarning,
   getInvalidParentWarning,
   getInvalidSlotsWarning,
-  getSSRMismatchWarning
+  getInvalidSlottedChildrenWarning,
+  getSSRMismatchWarning,
+  getUseElementWarning
 } from './audit.js';
 
 describe('getExcessiveInstanceLimitWarning', () => {
@@ -52,6 +54,22 @@ describe('getCrossShadowRootAnchorWarning', () => {
   it('should return warning message for cross shadow root anchoring', () => {
     expect(getCrossShadowRootAnchorWarning('nve-tooltip')).toBe(
       '(deprecated) nve-tooltip was provided an anchor outside of its render root. https://NVIDIA.github.io/elements/api/?path=/docs/foundations-popovers-documentation--docs#shadow-root-anchoring'
+    );
+  });
+});
+
+describe('getInvalidSlottedChildrenWarning', () => {
+  it('should return warning message for invalid slotted children', () => {
+    expect(getInvalidSlottedChildrenWarning('test-element', ['test-element-one', 'test-element-two'])).toBe(
+      'Invalid slotted children detected in test-element. Disallowed: test-element-one, test-element-two'
+    );
+  });
+});
+
+describe('getUseElementWarning', () => {
+  it('should return warning message for invalid slotted children', () => {
+    expect(getUseElementWarning('test-element', 'test-element-one', 'test-element-two')).toBe(
+      'Element test-element-one found in test-element, use test-element-two instead.'
     );
   });
 });
