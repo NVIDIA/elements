@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.31.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.0...@nvidia-elements/core-v1.31.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **elements:** button and button group disabled state ([adfafa8](https://github.com/NVIDIA/elements/commit/adfafa8003855c524fdda4b7bdb01958f2323d32))
+
 ## [@nvidia-elements/core-v1.31.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.30.1...@nvidia-elements/core-v1.31.0) (2025-03-31)
 
 
