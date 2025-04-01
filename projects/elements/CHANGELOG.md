@@ -1,3 +1,13 @@
+## [@nvidia-elements/core-v1.31.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.1...@nvidia-elements/core-v1.31.2) (2025-04-01)
+
+
+### Bug Fixes
+
+* **elements:** audit controller prefered element ([42a1b9c](https://github.com/NVIDIA/elements/commit/42a1b9c7275eaf46159b7f26594566a8c981d3cc))
+* **elements:** host slot attribute for ssr ([e45409c](https://github.com/NVIDIA/elements/commit/e45409c3818985e79411c1e50717301ef1f74552))
+* **elements:** ssr controller fallback ([0121307](https://github.com/NVIDIA/elements/commit/012130700be9733a4294f2558a320e8c35080c02))
+* **elements:** ssr form control errors ([6e203fc](https://github.com/NVIDIA/elements/commit/6e203fc3cf5d730e8038aec8fc9387963b6f058e))
+
 ## [@nvidia-elements/core-v1.31.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.0...@nvidia-elements/core-v1.31.1) (2025-04-01)
 
 
