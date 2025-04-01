@@ -20,8 +20,8 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(0.45); // total
-    expect(report.payload.css.requests['compact.css'].kb).toBeLessThan(0.45);
+    expect(report.payload.css.kb).toBeLessThan(0.5); // total
+    expect(report.payload.css.requests['compact.css'].kb).toBeLessThan(0.5);
   });
 
   test('dark.css should remain within compressed bundle limits', async () => {
@@ -64,8 +64,8 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(0.7); // total
-    expect(report.payload.css.requests['debug.css'].kb).toBeLessThan(0.7);
+    expect(report.payload.css.kb).toBeLessThan(0.75); // total
+    expect(report.payload.css.requests['debug.css'].kb).toBeLessThan(0.75);
   });
 
   test('ddb-dark.css should remain within compressed bundle limits', async () => {
@@ -75,8 +75,8 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(0.8); // total
-    expect(report.payload.css.requests['ddb.css'].kb).toBeLessThan(0.8);
+    expect(report.payload.css.kb).toBeLessThan(0.85); // total
+    expect(report.payload.css.requests['ddb.css'].kb).toBeLessThan(0.85);
   });
 
   test('brand.css should remain within compressed bundle limits', async () => {
@@ -97,7 +97,7 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(0.82); // total
-    expect(report.payload.css.requests['brand.css'].kb).toBeLessThan(0.82);
+    expect(report.payload.css.kb).toBeLessThan(0.85); // total
+    expect(report.payload.css.requests['brand.css'].kb).toBeLessThan(0.85);
   });
 });

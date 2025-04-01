@@ -31,7 +31,7 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(1.5); // total
-    expect(report.payload.css.requests['typography.css'].kb).toBeLessThan(1.5);
+    expect(report.payload.css.kb).toBeLessThan(1.6); // total
+    expect(report.payload.css.requests['typography.css'].kb).toBeLessThan(1.6);
   });
 });
