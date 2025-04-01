@@ -1,8 +1,12 @@
 import '@nvidia-elements/code/codeblock/define.js';
+
 import '@nvidia-elements/code/codeblock/languages/html.js';
+import '@nvidia-elements/code/codeblock/languages/typescript.js';
+import '@nvidia-elements/code/codeblock/languages/xml.js';
 import type { CodeBlock } from '@nvidia-elements/code/codeblock/index.js';
 
 import './_internal/framework-selector/index.js';
+import { frameworksById } from './_internal/framework-selector/frameworks.js';
 import type { FrameworkSelector } from './_internal/framework-selector/index.js';
 
 import './_internal/glassmorphic-card/glassmorphic-card.js';
@@ -22,9 +26,27 @@ void Promise.all([
 ]).then(() => {
   const selector = globalThis.document.querySelector<FrameworkSelector>('nvd-framework-selector')!;
   const codeblock = globalThis.document.querySelector<CodeBlock>('nve-codeblock')!;
-  codeblock.code = `<!-- ${selector.value} -->`;
+
+  // workaround for syntax highlighting issue for Lit example
+  const customStyle = document.createElement('style');
+  customStyle.textContent = `
+    .hljs-subst:has(.hljs-variable.language_) {
+      color: var(--nve-text-color) !important;
+    }
+  `;
+  codeblock.shadowRoot?.appendChild(customStyle);
+
+  function updateCodeblock() {
+    const framework = frameworksById.get(selector.value);
+    if (!framework) {
+      throw new Error(`Framework not found: ${selector.value}`);
+    }
+    codeblock.language = framework.example.language;
+    codeblock.code = framework.example.code;
+  }
+  updateCodeblock();
   selector.addEventListener('change', () => {
-    codeblock.code = `<!-- ${selector.value} -->`;
+    updateCodeblock();
   });
 });
 
