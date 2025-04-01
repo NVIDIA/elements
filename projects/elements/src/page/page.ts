@@ -27,7 +27,10 @@ import styles from './page.css?inline';
  * @responsive false
  * @stable false
  */
-@audit({ excessiveInstanceLimit: 0 })
+@audit({
+  excessiveInstanceLimit: 0,
+  alternates: [{ name: 'nve-panel', use: 'nve-page-panel' }]
+})
 export class Page extends LitElement {
   static styles = useStyles([styles]);
 
