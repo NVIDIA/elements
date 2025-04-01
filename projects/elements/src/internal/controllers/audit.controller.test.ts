@@ -5,12 +5,12 @@ import { audit, GlobalStateService } from '@nvidia-elements/core/internal';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
 
 @customElement('audit-test-element')
-@audit({ excessiveInstanceLimit: 1, auditSlots: true })
+@audit({ excessiveInstanceLimit: 1, auditSlots: true, alternates: [{ name: 'p', use: 'span' }] })
 class AuditTestElement extends LitElement {
   static readonly metadata = {
     tag: 'audit-test-element',
     version: '0.0.0',
-    children: ['audit-test-element-slotted']
+    children: ['audit-test-element-slotted', 'p']
   };
 
   render() {
@@ -110,7 +110,35 @@ describe('audit.controller slotted vailidation', () => {
   it('should validate allowed slotted elements', () => {
     expect(GlobalStateService.state.env).toBe('development');
     expect(console.warn).toHaveBeenCalledWith(
-      '@nve: Invalid slotted elements detected in audit-test-element. Allowed: template, audit-test-element-slotted'
+      '@nve: Invalid slotted elements detected in audit-test-element. Allowed: template, audit-test-element-slotted, p'
     );
+  });
+});
+
+describe('audit.controller alternates vailidation', () => {
+  let element: AuditTestElement;
+  let fixture: HTMLElement;
+  let originalWarn = console.warn;
+
+  beforeEach(async () => {
+    console.warn = () => null;
+    vi.spyOn(console, 'warn');
+
+    fixture = await createFixture(html`
+      <audit-test-element>
+        <p></p>
+      </audit-test-element>`);
+    element = fixture.querySelector<AuditTestElement>('audit-test-element');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+    console.warn = originalWarn;
+  });
+
+  it('should validate allowed slotted elements', () => {
+    expect(GlobalStateService.state.env).toBe('development');
+    expect(console.warn).toHaveBeenCalledWith('@nve: Element p found in audit-test-element, use span instead.');
   });
 });

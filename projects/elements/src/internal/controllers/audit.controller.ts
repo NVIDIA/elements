@@ -2,13 +2,19 @@ import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
 import { GlobalStateService } from '../services/global.service.js';
 import { LogService } from '../services/log.service.js';
-import { auditSlots, getInvalidSlotsWarning, getExcessiveInstanceLimitWarning } from '../utils/audit.js';
+import {
+  auditSlots,
+  getInvalidSlotsWarning,
+  getExcessiveInstanceLimitWarning,
+  auditAlternates
+} from '../utils/audit.js';
 
 export const excessiveInstanceLimit = 50;
 
 export interface AuditOptions {
   excessiveInstanceLimit?: number;
   auditSlots?: boolean;
+  alternates?: { name: string; use: string }[];
 }
 
 interface AuditRegistry {
@@ -49,6 +55,7 @@ export class AuditController<T extends Audit> implements ReactiveController {
     if (!this.#production) {
       this.#auditSlots();
       this.#auditExcessiveInstanceLimit();
+      this.#auditAlternates();
     }
   }
 
@@ -92,6 +99,12 @@ export class AuditController<T extends Audit> implements ReactiveController {
       if (invalidElements.length) {
         LogService.warn(getInvalidSlotsWarning(this.host.localName, validElements));
       }
+    }
+  }
+
+  #auditAlternates() {
+    if (this.options.alternates) {
+      auditAlternates(this.host, this.options.alternates).forEach(warning => LogService.warn(warning));
     }
   }
 
