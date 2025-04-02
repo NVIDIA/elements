@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.31.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.2...@nvidia-elements/core-v1.31.3) (2025-04-02)
+
+
+### Bug Fixes
+
+* **elements:** modal pointer events ([3684732](https://github.com/NVIDIA/elements/commit/368473286c153511549ebcf444101c350bf1ea02))
+
 ## [@nvidia-elements/core-v1.31.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.1...@nvidia-elements/core-v1.31.2) (2025-04-01)
 
 
