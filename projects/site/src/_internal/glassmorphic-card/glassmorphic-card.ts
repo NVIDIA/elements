@@ -37,8 +37,8 @@ export class GlassmorphicCard extends LitElement {
       height: 150px;
       background: var(--background-logo) center/contain no-repeat;
       transform: translate(-50%, -50%);
-      filter: blur(8px);
-      opacity: 0.2;
+      filter: blur(4px);
+      opacity: 0.4;
     }
 
     .header {
@@ -59,7 +59,10 @@ export class GlassmorphicCard extends LitElement {
       margin-left: auto;
       --background: rgba(255, 255, 255, 0.4);
       --border: var(--nve-ref-border-width-sm) solid rgba(255, 255, 255, 0.18);
-      --background: rgba(255, 255, 255, 0.12);
+      --background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(8px);
+      border-radius: var(--nve-ref-border-radius-full);
+
     }
 
     nve-button nve-icon {
