@@ -113,7 +113,7 @@ export function getElementUpdate(element: HTMLElement, key: string, callback: (v
   return getAttributeChanges(element, key, val => callback(val));
 }
 
-export function clickOutsideElementBounds(event: PointerEvent, element: HTMLElement) {
+export function clickOutsideElementBounds(event: PointerEvent | MouseEvent, element: HTMLElement) {
   const { left, right, top, bottom } = element.getBoundingClientRect();
   return event.clientX < left || event.clientX > right || event.clientY < top || event.clientY > bottom;
 }
