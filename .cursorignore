@@ -1,0 +1,10 @@
+node_modules
+coverage
+config
+dist
+.husky
+.eslintcache
+.visual
+.lighthouse
+.vscode
+.wireit
