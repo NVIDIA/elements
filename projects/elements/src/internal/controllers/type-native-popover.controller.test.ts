@@ -143,6 +143,7 @@ describe('type-popover.controller', () => {
     expect((await open).target).toBe(element);
     expect(element.matches(':popover-open')).toBe(true);
 
+    element.dispatchEvent(new PointerEvent('pointerdown', { clientX: 0, clientY: 0 }));
     element.dispatchEvent(new PointerEvent('pointerup', { clientX: 0, clientY: 0 }));
     await elementIsStable(element);
     expect(element.matches(':popover-open')).toBe(false);
@@ -158,6 +159,7 @@ describe('type-popover.controller', () => {
     expect((await open).target).toBe(element);
     expect(element.matches(':popover-open')).toBe(true);
 
+    element.dispatchEvent(new PointerEvent('pointerdown', { clientX: 0, clientY: 0 }));
     element.dispatchEvent(new PointerEvent('pointerup', { clientX: 0, clientY: 0 }));
     await elementIsStable(element);
     expect(element.matches(':popover-open')).toBe(true);
@@ -183,6 +185,7 @@ describe('type-popover.controller', () => {
     expect(childPopover.matches(':popover-open')).toBe(true);
 
     // close child popover, parent remains open
+    element.dispatchEvent(new PointerEvent('pointerdown', { clientX: 0, clientY: 0 }));
     element.dispatchEvent(new PointerEvent('pointerup', { clientX: 0, clientY: 0 }));
     await elementIsStable(element);
     expect(element.matches(':popover-open')).toBe(true);
