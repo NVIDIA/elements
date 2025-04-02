@@ -73,10 +73,11 @@ export class MetricsCarousel extends LitElement {
 
       color: var(--nve-sys-text-emphasis-color);
       font-size: var(--nve-ref-font-size-600);
-      background-color: var(--nve-sys-layer-shell-accent-background);
       padding: 68px var(--nve-ref-size-800) var(--nve-ref-size-800) var(--nve-ref-size-800);
       overflow: hidden;
-      border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+      background: rgba(24, 26, 32, 0.6); 
+    backdrop-filter: blur(6px); 
+    box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.1), 0 0 6px rgba(0, 0, 0, 0.5); 
       border-radius: var(--nve-ref-border-radius-lg);
     }
 

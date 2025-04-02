@@ -65,6 +65,11 @@ export class ThemePreview extends LitElement {
           transform-origin: 0 0;
           padding: var(--nve-ref-space-xxl) var(--nve-ref-space-lg);
 
+          .box{
+          --border-radius:var(--nve-ref-border-radius-sm);
+        --box-shadow:none;
+      }
+
           .bento-box-row {
             display: flex;
             flex-direction: row;
@@ -80,13 +85,8 @@ export class ThemePreview extends LitElement {
             display: flex;
             flex-direction: column;
             gap: var(--nve-ref-space-md);
-            align-items: center;
+            align-items:stretch;
           }
-
-          nve-card {
-            width: fit-content;
-          }
-
           nve-button,
           nve-button-group {
             --border-radius: var(--nvd-button-border-radius);
@@ -151,14 +151,14 @@ export class ThemePreview extends LitElement {
         <div class="bento-box-column">
           <div class="bento-box-row">
             <div class="bento-box-column">
-              <nve-card>
+              <nve-card class="box">
                 <nve-card-content nve-layout="column align:center">
                   <nve-switch>
                     <input type="checkbox" checked />
                   </nve-switch>
                 </nve-card-content>
               </nve-card>
-              <nve-card>
+              <nve-card class="box">
                 <nve-card-content nve-layout="column gap:sm">
                   <label nve-text="label medium sm muted">Label</label>
                   <h3 nve-text="heading semibold lg">123,456</h3>
@@ -166,16 +166,18 @@ export class ThemePreview extends LitElement {
               </nve-card>
             </div>
             <div class="bento-box-column">
-              <nve-card>
+              <nve-card class="box">
                 <nve-card-content>
                   <nve-tabs behavior-select>
                     <nve-tabs-item selected>Tab 1</nve-tabs-item>
                     <nve-tabs-item>Tab 2</nve-tabs-item>
                     <nve-tabs-item>Tab 3</nve-tabs-item>
+                    <nve-tabs-item>Tab 4</nve-tabs-item>
+
                   </nve-tabs>
                 </nve-card-content>
               </nve-card>
-              <nve-card>
+              <nve-card class="box">
                 <nve-card-content nve-layout="row align:center">
                   <nve-button-group container="rounded" behavior-select="single">
                     <nve-button pressed>All Time</nve-button>
@@ -186,12 +188,12 @@ export class ThemePreview extends LitElement {
               </nve-card>
             </div>
             <div class="bento-box-column">
-              <nve-card>
+              <nve-card class="box">
                 <nve-card-content nve-layout="column align:center">
                   <nve-progress-ring status="accent" value="40" max="100"></nve-progress-ring>
                 </nve-card-content>
               </nve-card>
-              <nve-card>
+              <nve-card class="box">
                 <nve-card-content nve-layout="column align:center">
                   <nve-progress-bar status="accent" value="40" max="100" style="width: calc(var(--nve-ref-scale-size) * 40px + var(--nve-ref-scale-text) * 40px)"></nve-progress-bar>
                 </nve-card-content>
@@ -232,7 +234,7 @@ export class ThemePreview extends LitElement {
               </nve-card>
             </div>
             <div class="bento-box-column">
-              <nve-card>
+              <nve-card class="box">
                 <nve-card-content>
                   <nve-select>
                     <label>label</label>
@@ -244,7 +246,7 @@ export class ThemePreview extends LitElement {
                   </nve-select>
                 </nve-card-content>
               </nve-card>
-              <nve-card>
+              <nve-card class="box">
                 <nve-card-content>
                   <nve-checkbox-group>
                     <label>Label</label>
@@ -323,7 +325,7 @@ export class ThemePreview extends LitElement {
   #toggleRoundedButtons(value: boolean) {
     this.style.setProperty(
       '--nvd-button-border-radius',
-      value ? 'var(--nve-ref-border-radius-full)' : 'var(--nve-ref-border-radius-none)'
+      value ? 'var(--nve-ref-border-radius-full)' : 'var(--nve-ref-border-radius-sm)'
     );
   }
 }

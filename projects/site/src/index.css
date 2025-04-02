@@ -1,5 +1,8 @@
 :root {
   --content-max-width: 1280px;
+  --gradient-angle: 180deg;
+  --shadow-percentage: 5%;
+  --gallery-item-height: calc(50vw * (9 / 16));
 }
 
 nve-page {
@@ -40,12 +43,16 @@ section {
 @media only screen and (min-width: 960px) {
   section {
     min-height: 90vh;
-
-    &#metrics {
-      min-height: 75vh;
+    &#starter {
+      min-height: 45vh;
+    }
+    &#loop {
+      min-height: 15vh;
     }
 
     > .content {
+      padding-top: 56px;
+
       &.leading {
         grid-area: 1 / 2 / 2 / 3;
 
@@ -69,33 +76,44 @@ section {
 }
 
 .code-container {
-  padding: 8px;
+  padding-left: var(--nve-ref-space-xs);
+  padding-right: var(--nve-ref-space-xs);
   margin: 50px auto;
   backdrop-filter: blur(20px);
   background: color-mix(
     in oklch,
-    var(--nve-sys-layer-canvas-background) 20%,
+    var(--nve-sys-layer-canvas-background) var(--shadow-percentage),
     var(--nve-sys-layer-container-background)
   );
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: var(--nve-ref-border-radius-lg);
 
   nve-codeblock {
     --background: transparent;
+    scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
+    scrollbar-width: thin;
   }
 }
 
 video {
   width: 100%;
-  border: 2px solid var(--nve-ref-border-color-muted);
-  border-image: linear-gradient(to top right, var(--nve-ref-border-color), var(--nve-ref-border-color-emphasis)) 1;
+  border-radius: var(--nve-ref-border-radius-md);
 }
 
+.media-container {
+  position: relative;
+  backdrop-filter: blur(20px);
+  background: rgba(24, 26, 32, 0.11);
+  border-radius: 16px;
+  padding: 8px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 1px 0 rgba(72, 78, 88, 0.2),
+    inset 0 24px 48px 0 rgba(40, 46, 54, 0.02);
+}
 /* Gradients */
 
 .silver-gradient {
-  background: linear-gradient(45deg, rgba(161, 161, 170, 0.6) 0%, #fff 66%);
+  background: linear-gradient(130deg, rgba(161, 161, 170, 0.6) 0%, #fff 66%);
 }
 
 .coral-yellow-gradient {
@@ -131,18 +149,57 @@ video {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+.gradient-line {
+  position: absolute;
+  top: 0%;
+  left: 3rem;
+  right: 3rem;
+  height: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+.radial-gradient-overlay {
+  position: absolute;
+  left: 0;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(35% 96px at 50% 0%, rgba(245, 245, 245, 0.08), transparent);
+}
+
+.gradient-card {
+  background: linear-gradient(
+    var(--gradient-angle),
+    color-mix(in oklch, white 5%, var(--nve-sys-layer-container-background)),
+    color-mix(
+      in oklch,
+      var(--nve-sys-layer-canvas-background) var(--shadow-percentage),
+      var(--nve-sys-layer-container-background)
+    )
+  );
+}
+.gradient-layer {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+}
 
 /* Features */
 
 .feature {
-  max-width: 360px;
+  width: 364px;
+  text-wrap: pretty;
 
   .feature-icon {
     --border-radius: var(--nve-ref-border-radius-lg);
     --background: linear-gradient(
-      45deg,
-      var(--nve-ref-color-gray-slate-100) 0%,
-      var(--nve-ref-color-gray-slate-300) 100%
+      var(--gradient-angle),
+      color-mix(in oklch, white 5%, var(--nve-sys-layer-container-background)),
+      color-mix(
+        in oklch,
+        var(--nve-sys-layer-canvas-background) var(--shadow-percentage),
+        var(--nve-sys-layer-container-background)
+      )
     );
     --width: 48px;
     --height: 48px;
@@ -164,20 +221,196 @@ video {
   gap: var(--nve-ref-size-400);
 
   .feature-grid-item {
-    border-radius: var(--nve-ref-border-radius-lg);
+    border-radius: var(--nve-ref-border-radius-md);
     padding: var(--nve-ref-size-400);
-    border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
-    background: linear-gradient(215deg, rgba(24, 26, 32, 0.75) 4.87%, #0b0c0f 75.88%);
-    box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.15) inset;
-    backdrop-filter: blur(5px);
   }
+}
+
+.grid-box-container {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(35% 350px at 50% 40%, rgba(245, 245, 245, 0.08), transparent);
+}
+
+.grid-box-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 50px 50px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  opacity: 0.6;
 }
 
 /* Contacts */
 
 .contact {
-  border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   border-radius: var(--nve-ref-border-radius-lg);
-  background: linear-gradient(215deg, rgba(24, 26, 32, 0.75) 4.87%, #0b0c0f 75.88%);
-  box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.15) inset;
+}
+
+.hero {
+  height: 100vh;
+}
+/* Gallery Grid */
+.examples {
+  position: relative;
+  overflow: visible;
+  padding-top: var(--nve-ref-size-600);
+  /* Had to modify the height to make the gallery grid fit the screen TODO fix this*/
+  height: calc(2.5 * var(--gallery-item-height));
+}
+
+.title-container {
+  position: relative;
+  width: 100%;
+  z-index: 10;
+  animation: fadeOut 1s both;
+  animation-timeline: view();
+  animation-range: 70% 110%;
+}
+
+.scroll-container {
+  height: calc(3 * var(--gallery-item-height));
+  view-timeline: --gallery_timeline block;
+  width: 100%;
+  position: relative;
+}
+
+.gallery-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: var(--nve-ref-size-200);
+  position: sticky;
+  z-index: 5;
+}
+
+.grid-img {
+  background-size: cover;
+  background-position: top left;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+  aspect-ratio: 16/9;
+} /* Grid positions */
+.pos-1 {
+  grid-area: 1 / 1 / 2 / 2;
+}
+.pos-2 {
+  grid-area: 1 / 2 / 2 / 3; /* Row 1, Column 2 */
+}
+.pos-3 {
+  grid-area: 1 / 3 / 2 / 4; /* Row 1, Column 3 */
+}
+.pos-4 {
+  grid-area: 2 / 1 / 3 / 2; /* Row 2, Column 1 */
+}
+.pos-5 {
+  grid-area: 2 / 2 / 3 / 3; /* Row 2, Column 2 */
+}
+.pos-6 {
+  grid-area: 2 / 3 / 3 / 4; /* Row 2, Column 3 */
+}
+.pos-7 {
+  grid-area: 3 / 1 / 4 / 2; /* Row 3, Column 1 */
+}
+.pos-8 {
+  grid-area: 3 / 2 / 4 / 3; /* Row 3, Column 2 */
+}
+.pos-9 {
+  grid-area: 3 / 3 / 4 / 4; /* Row 3, Column 3 */
+}
+
+/* Scroll-driven animations for images */
+.pos-1 {
+  animation: fadeInUp 1s both;
+  animation-timeline: view(block);
+  animation-range: contain 0% contain 100%;
+}
+.pos-2 {
+  animation: fadeInUp 1s both;
+  animation-timeline: view(block);
+  animation-range: contain 20% contain 100%;
+}
+.pos-3 {
+  animation: fadeInUp 1s both;
+  animation-timeline: view(block);
+  animation-range: contain 40% contain 100%;
+}
+.pos-4 {
+  animation: fadeInUp 1s both;
+  animation-timeline: view(block);
+  animation-range: contain 0% contain 100%;
+}
+.pos-5 {
+  animation: fadeInUp 1s both;
+  animation-timeline: view(block);
+  animation-range: contain 20% contain 100%;
+}
+.pos-6 {
+  animation: fadeInUp 1s both;
+  animation-timeline: view(block);
+  animation-range: contain 40% contain 100%;
+}
+.pos-7 {
+  animation: fadeInUp 1s both;
+  animation-timeline: view(block);
+  animation-range: contain 0% contain 100%;
+}
+.pos-8 {
+  animation: fadeInUp 1s both;
+  animation-timeline: view(block);
+  animation-range: contain 20% contain 100%;
+}
+.pos-9 {
+  animation: fadeInUp 1s both;
+  animation-timeline: view(block);
+  animation-range: contain 40% contain 100%;
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-5vh);
+    pointer-events: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--gallery-item-height) / 2));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Fallback styles for browsers that do not support scroll-driven animations */
+@supports not (animation-timeline: auto) {
+  .title-container {
+    animation: fadeOut 1s both;
+    opacity: 1;
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  .scroll-container {
+    height: auto;
+    width: 100%;
+    position: relative;
+  }
+
+  /* Fallback animations for images */
+  .grid-img {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
 }

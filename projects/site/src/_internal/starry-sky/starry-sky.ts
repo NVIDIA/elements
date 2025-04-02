@@ -23,7 +23,11 @@ export class StarrySky extends LitElement {
       pointer-events: none;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to bottom, #000000, #08080f 50%, #101016 80%, #141419);
+      background: linear-gradient(
+    180deg,
+    color-mix(in oklch, black 40%, var(--nve-sys-layer-container-background)),
+    color-mix(in oklch, black 60%, var(--nve-sys-layer-canvas-background))
+  );
     }
 
     .starry-background::before {
@@ -33,8 +37,11 @@ export class StarrySky extends LitElement {
       left: 50%;
       width: 120vw;
       height: 120vh;
-      background: radial-gradient(circle at top, rgba(50, 50, 60, 0.3), transparent 70%);
-      transform: translateX(-50%);
+ background: radial-gradient(
+    circle at top,
+    color-mix(in oklch, rgba(50, 50, 60, 0.3), var(--nve-sys-layer-container-background) 30%),
+    transparent 70%
+  );      transform: translateX(-50%);
       pointer-events: none;
     }
 
@@ -48,7 +55,7 @@ export class StarrySky extends LitElement {
 
     .star {
       fill: white;
-      opacity: 0;
+      opacity: 50%;
     }
 
     @keyframes flickerAnimation {
