@@ -74,7 +74,7 @@ export class ThemeForm extends LitElement {
           </nve-range>
         </div>
         <nve-switch>
-          <label>Rounded Buttons</label>
+          <label>Fully-Rounded Buttons</label>
           <input type="checkbox" name="rounded-buttons" checked />
         </nve-switch>
       </form>
