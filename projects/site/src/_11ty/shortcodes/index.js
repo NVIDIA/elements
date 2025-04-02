@@ -12,6 +12,6 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
   return /* html */ `
 <nve-api-canvas>
 <nve-button container="flat" slot="suffix"><a href="${createPlaygroundURLFromStorySource(story.template, { id: storyName, globals: {} })}" target="_blank">Playground</a></nve-button>
-<template>${markdown.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>${config.inline ? story.template : `<iframe src="stories/${tag.replace('nve-', '')}/${story.id.toLowerCase()}.html" style="height: ${config.height}; width: 95%; border: none;" />`}
+<template>${markdown.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>${config.inline ? story.template.replaceAll('\n', '') : `<iframe loading="lazy" src="stories/${tag.replace('nve-', '')}/${story.id.toLowerCase()}.html" style="height: ${config.height}; width: 95%; border: none;" />`}
 </nve-api-canvas>`;
 }
