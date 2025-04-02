@@ -18,24 +18,24 @@ import '@nvidia-elements/core/dot/define.js';
 
 ## Standard
 
-{% story 'nve-dot' 'Default' %}
+{% story 'nve-dot', 'Default' %}
 
 ## Status
 
-{% api 'nve-dot' 'property' 'status' %}
+{% api 'nve-dot', 'property' 'status' %}
 
-{% story 'nve-dot' 'Status' %}
+{% story 'nve-dot', 'Status' %}
 
 ## Support
 
-{% story 'nve-dot' 'SupportStatus' %}
+{% story 'nve-dot', 'SupportStatus' %}
 
 ## Number
 
-{% story 'nve-dot' 'Number' %}
+{% story 'nve-dot', 'Number' %}
 
 ## Size
 
-{% api 'nve-dot' 'property' 'size' %}
+{% api 'nve-dot', 'property' 'size' %}
 
-{% story 'nve-dot' 'Size' %}
+{% story 'nve-dot', 'Size' %}
