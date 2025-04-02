@@ -90,9 +90,18 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.host.popover = this.host.popoverType && this.host.popoverType !== 'hint' ? this.host.popoverType : 'auto';
   }
 
+  #pointerdownWithinModal = false;
+
   #setupModalLightDismiss() {
+    this.host.addEventListener('pointerdown', e => {
+      if (this.host.modal && this.host.matches(':popover-open')) {
+        this.#pointerdownWithinModal = clickOutsideElementBounds(e, this.host);
+      }
+    });
+
     this.host.addEventListener('pointerup', e => {
       if (
+        this.#pointerdownWithinModal &&
         this.host.popoverDismissible &&
         this.host.modal &&
         this.host.matches(':popover-open') &&
