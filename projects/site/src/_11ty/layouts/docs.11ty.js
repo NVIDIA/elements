@@ -19,11 +19,14 @@ export function render(data) {
             letter-spacing: 1.76px;
           }
 
+          h2 {
+            border-bottom: 1px solid var(--nve-ref-border-color);
+          }
+
           [nve-text='heading xl mkd'],
           [nve-text='heading lg mkd'] {
             padding-top: var(--nve-ref-space-xl);
-            padding-bottom: 4px;
-            border-bottom: 1px solid var(--nve-ref-border-color);
+            padding-bottom: var(--nve-ref-space-xs);
           }
 
           pre:has(nve-codeblock),
@@ -166,6 +169,11 @@ export function render(data) {
                     ? `
                   <nve-api-status tag="${data.tag}"></nve-api-status>
                   <nve-api-table tag="${data.tag}"></nve-api-table>`
+                    : ''
+                }
+                ${
+                  data.associatedElements?.length
+                    ? data.associatedElements.map(tag => `<nve-api-table tag="${tag}"></nve-api-table>`).join('')
                     : ''
                 }
               </div>
