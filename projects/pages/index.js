@@ -1,4 +1,8 @@
-import { cpSync, existsSync, mkdirSync } from 'fs';
+import { readFile, writeFile, readdir } from 'node:fs/promises';
+import { cpSync, existsSync, mkdirSync } from 'node:fs';
+import { brotliCompress, constants } from 'node:zlib';
+import { join, extname } from 'node:path';
+import { promisify } from 'node:util';
 
 if (!existsSync('./dist')) {
   mkdirSync('./dist/starters', { recursive: true });
@@ -20,3 +24,68 @@ cpSync('../starters/react/dist/', './dist/starters/react/', { recursive: true })
 cpSync('../starters/solidjs/dist/', './dist/starters/solidjs/', { recursive: true });
 cpSync('../starters/typescript/dist/', './dist/starters/typescript/', { recursive: true });
 cpSync('../starters/vue/dist/', './dist/starters/vue/', { recursive: true });
+
+// https://docs.gitlab.com/user/project/pages/introduction/#serving-compressed-assets
+
+const TEXT_EXTENSIONS = ['.html', '.css', '.js', '.json', '.xml', '.txt', '.md', '.svg', '.map', '.woff2'];
+
+function isUTF8Text(buffer) {
+  try {
+    // Try to decode the buffer as UTF-8
+    const text = buffer.toString('utf8');
+    // Check if the text contains any non-printable characters
+    return !/[\x00-\x08\x0B\x0C\x0E-\x1F]/.test(text);
+  } catch {
+    return false;
+  }
+}
+
+let count = 0;
+async function compressFile(filePath) {
+  const ext = extname(filePath);
+  if (TEXT_EXTENSIONS.includes(ext)) {
+    try {
+      const content = await readFile(filePath);
+      const brotliOptions = {
+        params: {
+          [constants.BROTLI_PARAM_QUALITY]: 11,
+          [constants.BROTLI_PARAM_SIZE_HINT]: content.length
+        }
+      };
+
+      if (ext === '.woff2') {
+        brotliOptions.params[constants.BROTLI_PARAM_MODE] = constants.BROTLI_MODE_FONT;
+      } else if (isUTF8Text(content)) {
+        brotliOptions.params[constants.BROTLI_PARAM_MODE] = constants.BROTLI_MODE_TEXT;
+      }
+
+      const brotlied = await promisify(brotliCompress)(content, brotliOptions);
+      await writeFile(`${filePath}.br`, brotlied);
+      count++;
+      process.stdout.write(`Compressed files: ${count}\r`);
+    } catch (error) {
+      console.error(`Error compressing ${filePath}:`, error);
+    }
+  }
+}
+
+async function processDirectory(dir) {
+  try {
+    const entries = await readdir(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        await processDirectory(fullPath);
+      } else {
+        await compressFile(fullPath);
+      }
+    }
+  } catch (error) {
+    console.error(`Error processing directory ${dir}:`, error);
+  }
+}
+
+console.log('Starting compression...');
+processDirectory('./dist')
+  .then(() => console.log(`Compressed files: ${count}\nCompression complete!`))
+  .catch(error => console.error('Compression failed:', error));
