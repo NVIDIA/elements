@@ -35,7 +35,6 @@
         "./lit-library:build",
         "./mpa:build",
         "./nextjs:build",
-        "./nextjs-react-18:build",
         "./react:build",
         "./react-18:build",
         "./scoped-registry:build",
