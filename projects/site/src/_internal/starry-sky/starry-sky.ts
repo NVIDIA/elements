@@ -50,18 +50,20 @@ export class StarrySky extends LitElement {
       fill: white;
       opacity: 0;
     }
+
+    @keyframes flickerAnimation {
+      0%   { opacity:1; }
+      50%  { opacity:0; }
+      100% { opacity:1; }
+    }
   `;
 
   firstUpdated(changedProperties: PropertyValues) {
     super.firstUpdated(changedProperties);
-
-    this.createStars();
+    this.#createStars();
   }
 
-  createStars() {
-    const container = this.shadowRoot?.querySelector('.starry-background');
-    if (!container) return;
-
+  #createStars() {
     for (let s = 0; s < 3; s++) {
       const svg = globalThis.document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 
@@ -75,31 +77,17 @@ export class StarrySky extends LitElement {
         circle.setAttribute('cx', cx);
         circle.setAttribute('cy', cy);
         circle.setAttribute('r', r.toString());
+        circle.style.opacity = `${0.5 + Math.random() * 0.5}`;
+        // only 50% of the stars will twinkle
+        if (Math.round(Math.random())) {
+          circle.style.animation = `flickerAnimation ${1 + Math.random() * 10}s infinite ease-in-out ${Math.random() * 5}s`;
+        }
 
         svg.appendChild(circle);
-        this.animateTwinkle(circle);
       }
 
-      container.appendChild(svg);
+      this.shadowRoot?.querySelector('.starry-background')?.appendChild(svg);
     }
-  }
-
-  animateTwinkle(star: SVGCircleElement) {
-    const twinkle = () => {
-      const duration: number = 1 + Math.random() * 2;
-      const delay: number = Math.random() * 1;
-      const targetOpacity: number = 0.5 + Math.random() * 0.5;
-
-      star.style.transition = `opacity ${duration}s ease-in-out ${delay}s`;
-      star.style.opacity = targetOpacity.toString();
-
-      setTimeout(() => {
-        star.style.opacity = '0';
-        setTimeout(twinkle, duration * 1000);
-      }, duration * 1000);
-    };
-
-    twinkle();
   }
 
   render() {
