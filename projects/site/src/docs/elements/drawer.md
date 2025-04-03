@@ -53,6 +53,6 @@ import '@nvidia-elements/core/drawer/define.js';
 
 ## Position
 
-{% api 'nve-drawer', 'property' 'position' %}
+{% api 'nve-drawer', 'property', 'position' %}
 
 {% story 'nve-drawer', 'Position', '{ "inline": false, "height": "700px" }' %}
