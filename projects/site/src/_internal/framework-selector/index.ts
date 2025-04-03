@@ -184,6 +184,7 @@ export class FrameworkSelector extends LitElement {
     this.removeEventListener('pointerleave', this.#onPointerLeave);
     this.removeEventListener('focus', this.#onFocus);
     this.removeEventListener('blur', this.#onBlur);
+    this.#intersectionObserver.disconnect();
   }
 
   render() {
@@ -205,6 +206,11 @@ export class FrameworkSelector extends LitElement {
       </div>
     </nve-card>`;
   };
+
+  firstUpdated(changedProperties: PropertyValues<this>) {
+    super.firstUpdated(changedProperties);
+    this.#intersectionObserver.observe(this);
+  }
 
   updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
@@ -321,11 +327,26 @@ export class FrameworkSelector extends LitElement {
 
   #autoScrollInterval: ReturnType<typeof setTimeout> | undefined;
 
+  #isVisible = false;
+  #intersectionObserver = new IntersectionObserver(
+    (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        this.#isVisible = entry.isIntersecting;
+      });
+    },
+    {
+      rootMargin: '0px',
+      threshold: 0.75
+    }
+  );
+
   #updateAutoScroll() {
     clearInterval(this.#autoScrollInterval);
     if (!this.#isInteractive) {
       this.#autoScrollInterval = setInterval(() => {
-        this.#scrollBySteps(1);
+        if (this.#isVisible) {
+          this.#scrollBySteps(1);
+        }
       }, AUTO_SCROLL_INTERVAL);
     }
   }
