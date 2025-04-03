@@ -70,7 +70,6 @@
         "./projects/starters/lit-library:ci",
         "./projects/starters/mpa:ci",
         "./projects/starters/nextjs:ci",
-        "./projects/starters/nextjs-react-18:ci",
         "./projects/starters/react:ci",
         "./projects/starters/react-18:ci",
         "./projects/starters/scoped-registry:ci",
@@ -172,8 +171,7 @@
         "!projects/elements/src/icon/{icons,server}.ts",
         "!projects/internals/metadata/static/**",
         "!projects/elements-react/src/**/*",
-        "!projects/starters/nextjs/next-env.d.ts",
-        "!projects/starters/nextjs-react-18/next-env.d.ts"
+        "!projects/starters/nextjs/next-env.d.ts"
       ],
       "output": []
     },
