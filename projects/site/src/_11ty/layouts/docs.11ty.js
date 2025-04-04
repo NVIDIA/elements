@@ -135,6 +135,18 @@ export function render(data) {
             document.querySelector('#doc-content').insertAdjacentElement('afterend', ul);
           }
         </script>
+        <script>
+          const scrollToAnchor = () => {
+            const anchorId = new URL(window.parent.location.href).hash.replace('#', '');
+            
+            document.getElementById(anchorId)?.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          };
+          setTimeout(() => scrollToAnchor(), 500);
+          setTimeout(() => scrollToAnchor(), 1500);
+        </script>
       </head>
       <body nve-text="body trim:none">
         <nve-page>
