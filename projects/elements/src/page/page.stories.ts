@@ -820,7 +820,7 @@ export const PageLayoutCardGrid = {
     <section nve-layout="grid span-items:3 gap:md">
       ${new Array(24).fill('').map(() => html`
       <nve-card style="height: 100%; width: 100%;">
-        <img src="images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+        <img src="static/images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
         <nve-card-content>
           <p>•︎•︎•︎ •︎•︎•︎ •︎•︎•︎</p>
         </nve-card-content>

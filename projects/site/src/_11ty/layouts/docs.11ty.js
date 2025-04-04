@@ -135,7 +135,7 @@ export function render(data) {
             document.querySelector('#doc-content').insertAdjacentElement('afterend', ul);
           }
         </script>
-        <script>
+        <script type="module">
           const scrollToAnchor = () => {
             const anchorId = new URL(window.parent.location.href).hash.replace('#', '');
             
@@ -145,7 +145,6 @@ export function render(data) {
             });
           };
           setTimeout(() => scrollToAnchor(), 500);
-          setTimeout(() => scrollToAnchor(), 1500);
         </script>
       </head>
       <body nve-text="body trim:none">
