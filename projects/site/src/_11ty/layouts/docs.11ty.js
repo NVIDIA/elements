@@ -1,5 +1,5 @@
 import { renderBaseHead, renderDocsNav } from './common.js';
-
+import { renderSvgLogos } from './svg-logos.js';
 /**
  * Provides mirrored layout to mimic existing Storybook docs navigation.
  */
@@ -144,9 +144,11 @@ export function render(data) {
               block: 'start'
             });
           };
-          
+
           setTimeout(() => scrollToAnchor(), 1000);
         </script>
+
+        ${renderSvgLogos()}
       </head>
       <body nve-text="body trim:none">
         <nve-page>
