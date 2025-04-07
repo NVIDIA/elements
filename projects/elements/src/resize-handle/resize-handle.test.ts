@@ -164,15 +164,28 @@ describe(ResizeHandle.metadata.tag, () => {
     await elementIsStable(element);
 
     const event = untilEvent(element, 'input');
-    element.dispatchEvent(new Event('dblclick'));
+    element.dispatchEvent(new Event('dblclick', { bubbles: true }));
     await event;
     expect(element.valueAsNumber).toBe(10);
     expect(element.value).toBe(10);
 
     const event2 = untilEvent(element, 'input');
-    element.dispatchEvent(new Event('dblclick'));
+    element.dispatchEvent(new Event('dblclick', { bubbles: true }));
     await event2;
     expect(element.valueAsNumber).toBe(90);
     expect(element.value).toBe(90);
+  });
+
+  it('should allow prevent default on dblclick and not change value', async () => {
+    expect(element.valueAsNumber).toBe(50);
+
+    element.addEventListener('toggle', e => {
+      e.preventDefault();
+    });
+
+    const event = untilEvent(element, 'toggle');
+    element.dispatchEvent(new Event('dblclick', { bubbles: true, cancelable: true }));
+    expect((await event)?.defaultPrevented).toBe(true);
+    expect(element.valueAsNumber).toBe(50);
   });
 });
