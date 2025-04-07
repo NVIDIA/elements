@@ -3,7 +3,8 @@
   --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
   --color: var(--nve-sys-layer-canvas-color);
   --box-shadow: var(--nve-ref-shadow-300);
-  overflow: hidden;
+  --panel-button-border-radius: 0 var(--nve-ref-border-radius-full) var(--nve-ref-border-radius-full) 0;
+  overflow: visible;
   -webkit-transition: width 240ms ease;
   -webkit-transition: height 240ms ease;
   contain: none;
@@ -25,23 +26,50 @@
   --box-shadow: none;
 }
 
-:host(:not([closable]):not(:state(expanded))) [internal-host] {
-  width: var(--nve-ref-space-xl) !important;
-  height: var(--nve-ref-space-xl) !important;
-  background: none;
-}
-
 :host(:not([closable]):not(:state(expanded))) {
   pointer-events: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+:host(:not([closable]):not(:state(expanded))) [internal-host] {
+  width: 0 !important;
+  height: var(--trigger-size) !important;
+  background: none;
+  overflow: visible;
 }
 
 :host(:not([closable]):not(:state(expanded))) slot {
   display: none;
 }
 
-:host(:not([closable]):not(:state(expanded))) nve-icon-button {
-  position: initial;
+:host(:not([closable]):not(:state(expanded))) .header nve-icon-button {
+  position: absolute;
   pointer-events: auto;
+  margin: 0;
+  width: calc(var(--nve-ref-size-900) / 2);
+  height: var(--nve-ref-size-900);
+  border-radius: var(--panel-button-border-radius);
+  left: 0;
+  top: 0;
+  background: var(--background);
+  box-shadow: var(--box-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:host([side='right']):not([closable]):not(:state(expanded)) {
+  left: auto;
+  right: 0;
+  top: 0;
+  position: absolute;
+}
+
+:host([side='right']):not([closable]):not(:state(expanded)) .header nve-icon-button {
+  left: auto;
+  right: 0;
 }
 
 :host([closable]:not(:state(expanded))) {
@@ -49,6 +77,7 @@
 }
 
 :host([side='right']) {
+  --panel-button-border-radius: var(--nve-ref-border-radius-full) 0 0 var(--nve-ref-border-radius-full);
   float: right;
 }
 
@@ -69,7 +98,7 @@
   flex-grow: 1;
 }
 
-nve-icon-button {
+.header nve-icon-button {
   margin-top: var(--nve-ref-size-100); /* not nve-ref-size-300 */
   margin-right: var(--nve-ref-size-100);
   margin-left: auto;
