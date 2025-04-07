@@ -53,7 +53,7 @@ export function render(data) {
       }
     </style>
   </head>
-  <body>
+  <body nve-layout="row align:center">
     ${data.story.template}
   </body>
 </html>
