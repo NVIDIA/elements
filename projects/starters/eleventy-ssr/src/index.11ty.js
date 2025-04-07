@@ -54,7 +54,7 @@ export function render(data) {
     </script>
   </head>
   <body nve-layout="column gap:lg pad:md">
-    <h1 nve-text="heading xl">${data.title}${globalThis.process?.env?.NODE_ENV}</h1>
+    <h1 nve-text="heading xl">${data.title}${globalThis.process?.env?.NODE_ENV ?? ''}</h1>
     <section nve-layout="grid gap:lg align:vertical-stretch span-items:12 &md|span-items:6 &lg|span-items:4">
       ${stories
         .map(story => {
