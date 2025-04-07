@@ -2,7 +2,7 @@ import markdownIt from 'markdown-it';
 
 const markdown = markdownIt({
   html: true,
-  breaks: true,
+  breaks: false,
   linkify: true,
   highlight: function (str, lang) {
     return /* html */ `<nve-codeblock language="${lang}" style="--padding: var(--nve-ref-space-lg)">${markdown.utils.escapeHtml(str)}</nve-codeblock>`;
@@ -16,15 +16,17 @@ const formats = {
   h4: 'heading',
   h5: 'heading',
   h6: 'heading sm',
-  p: 'body',
-  a: 'link'
+  p: 'body relaxed',
+  a: 'link',
+  code: 'code'
 };
 
 function renderer(tokens, idx, options, env, slf) {
   if (
     tokens[idx].type === 'heading_open' ||
     tokens[idx].type === 'link_open' ||
-    tokens[idx].type === 'paragraph_open'
+    tokens[idx].type === 'paragraph_open' ||
+    tokens[idx].type === 'code_inline'
   ) {
     tokens[idx].attrSet('nve-text', `${formats[tokens[idx].tag]} mkd`);
   }
@@ -41,5 +43,7 @@ markdown.renderer.rules.heading_open = renderer;
 markdown.renderer.rules.link_open = renderer;
 markdown.renderer.rules.paragraph_open = renderer;
 markdown.renderer.rules.bullet_list_open = renderer;
+// markdown.renderer.rules.code_inline = renderer;
+/* TODO: fix code inline renderer */
 
 export default markdown;
