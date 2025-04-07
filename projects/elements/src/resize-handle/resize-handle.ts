@@ -10,8 +10,11 @@ import styles from './resize-handle.css?inline';
  * @description A resize-handle slider is a control that enables users to resize views or panels vertically or horizontally.
  * @since 1.27.0
  * @entrypoint \@nvidia-elements/core/resize-handle
+ * @event toggle - Dispatched when the resize handle is double clicked.
  * @cssprop --background
  * @cssprop --line-width
+ * @cssprop --target-size
+ * @cssprop --cursor
  * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-resize-handle-documentation--docs
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=3975-92825&p=f&t=vwCezJmCbI1X94vQ-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/slider/
@@ -77,7 +80,12 @@ export class ResizeHandle extends BaseFormAssociatedElement<number> {
     this.addEventListener('nve-touch-start', () => this.#touchStart());
     this.addEventListener('nve-touch-end', () => this.#touchEnd());
     this.addEventListener('nve-touch-move', (e: NveTouchEvent) => this.#touchMove(e));
-    this.addEventListener('dblclick', () => this.#toggle());
+    this.addEventListener('dblclick', () => {
+      if (!this.dispatchEvent(new CustomEvent('toggle', { cancelable: true, bubbles: true, composed: true }))) {
+        return;
+      }
+      this.#toggle();
+    });
   }
 
   #toggle() {

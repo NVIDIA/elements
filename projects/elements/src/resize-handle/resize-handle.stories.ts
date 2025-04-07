@@ -82,3 +82,36 @@ export const Form = {
 </script>
 `
 };
+
+export const PreventDefault = {
+  render: () => html`
+<form id="prevent-default-demo" nve-layout="column gap:lg">
+  <section style="display: grid; width: 250px; height: 250px; grid-template-rows: 1fr auto 1fr; border: 1px solid var(--nve-ref-border-color)">
+    <div></div>
+    <nve-resize-handle name="resize" min="20" max="230" value="125" step="20"></nve-resize-handle>
+    <div style="background: hsla(0, 0%, 65%, 0.1)"></div>
+  </section>
+</form>
+<script type="module">
+  const split = document.querySelector('#prevent-default-demo section');
+  const handle = document.querySelector('#prevent-default-demo nve-resize-handle');
+
+  handle.addEventListener('toggle', e => {
+    e.preventDefault();
+    console.log('toggle defaultPrevented:', e.defaultPrevented);
+  });
+
+  handle.addEventListener('input', e => {
+    split.style.gridTemplateRows = '1fr auto ' + e.target.value + 'px';
+  });
+</script>
+`
+};
+
+export const LineWidth = {
+  render: () => html`
+<div style="height: 200px;">
+  <nve-resize-handle orientation="vertical" style="--line-width: 6px"></nve-resize-handle>
+</div>
+`
+};
