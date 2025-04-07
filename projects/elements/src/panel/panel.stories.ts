@@ -59,7 +59,7 @@ export const Default = {
   render: (args: ArgTypes) => html`
     <section nve-layout="row align:space-between pad:sm">
       <div nve-theme="root ${args.theme}">
-        <nve-panel behavior-expand id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} .side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
+        <nve-panel behavior-expand id=${args.showTrigger ? `trigger-closable-${args.closable}` : ''} ?expanded=${args.expanded} ?closable=${args.closable} @close=${() => togglePanel(args.closable)} side=${args.side} style=${'width:' + args.width + 'px; height:' + args.height + 'px'}>
         ${when(
             args.showHeader,
             () => html`
@@ -189,4 +189,14 @@ export const DarkTheme = {
 export const HighContrastTheme = {
   ...Default,
   args: { title: 'High Contrast Theme', side: 'left', expanded: true, showHeader: true, theme: 'high-contrast', width: 280, height: 600 }
+};
+
+export const CollapsedLeftPanel = {
+  ...Default,
+  args: { title: 'Collapsed Left Panel', side: 'left', expanded: false, closable: false, width: 280, height: 550 }
+};
+
+export const CollapsedRightPanel = {
+  ...Default,
+  args: { title: 'Collapsed Right Panel', side: 'right', expanded: false, closable: false, width: 280, height: 550 }
 };

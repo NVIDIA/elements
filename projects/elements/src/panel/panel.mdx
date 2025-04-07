@@ -45,7 +45,11 @@ import '@nvidia-elements/core/panel/define.js';
 
 ## Collapsable Panel with External Trigger
 
-An external trigger can be used to expand/collapse or hide/show a panel. In this example clicking the button toggles the `expanded` attribute on the `panel` between `true` and `false`
+An external trigger can be used to expand/collapse or hide/show a panel. In this example clicking the button toggles the `expanded` attribute on the `panel` between `true` and `false`.
+
+<nve-alert status="warning">
+  Collapsible Panel with External Trigger is for use with a fixed position when collapsed, otherwise the button may have a flat side and not be on the edge of the page.
+</nve-alert>
 
 <Canvas of={PanelWithTrigger} />
 
