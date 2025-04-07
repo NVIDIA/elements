@@ -117,6 +117,9 @@ describe(`${Tree.metadata.tag} slots`, () => {
     node1 = fixture.querySelector('#node-1');
     node2 = fixture.querySelector('#node-2');
     await elementIsStable(element);
+    await elementIsStable(node0);
+    await elementIsStable(node1);
+    await elementIsStable(node2);
   });
 
   afterEach(() => {
