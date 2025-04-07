@@ -11,11 +11,15 @@
   <nve-button>
     <a target="_blank" href="https://NVIDIA.github.io/elements/starters/angular/"><svg width="18" height="18"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#angular-svg"></use></svg> Demo</a>
   </nve-button>
+
   <nve-button>
-    <nve-icon name="download" size="sm"></nve-icon> <a target="_blank" href="https://NVIDIA.github.io/elements/starters/download/angular.zip">Download</a>
+    <nve-icon name="download" size="sm"></nve-icon>
+    <a target="_blank" href="https://NVIDIA.github.io/elements/starters/download/angular.zip">Download</a>
   </nve-button>
+
   <nve-button>
-    <nve-icon name="code"></nve-icon> <a target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/angular">Source</a>
+    <nve-icon name="code"></nve-icon>
+    <a target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/angular">Source</a>
   </nve-button>
 </div>
 
