@@ -37,7 +37,7 @@ import { updateNodeSelection } from './utils.js';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  * @stable false
  */
-@typeSSR()
+@typeSSR({ log: false }) // warning about ssr mismatch disabled as tree node will never be a 1:1 match in ssr due to performance constraints and slot complexity
 @typeAnchor()
 @stateSelected()
 @stateExpanded()
