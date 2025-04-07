@@ -144,7 +144,8 @@ export function render(data) {
               block: 'start'
             });
           };
-          setTimeout(() => scrollToAnchor(), 500);
+          
+          setTimeout(() => scrollToAnchor(), 1000);
         </script>
       </head>
       <body nve-text="body trim:none">
