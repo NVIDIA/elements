@@ -1,10 +1,11 @@
 :host {
   --background: var(--nve-ref-border-color);
   --line-width: var(--nve-ref-border-width-sm);
+  --target-size: var(--nve-ref-border-width-lg);
+  --cursor: row-resize;
   display: block;
-  width: 100%;
   contain: layout;
-  cursor: row-resize;
+  cursor: var(--cursor);
   z-index: 99;
 }
 
@@ -16,21 +17,39 @@
   ::after {
     display: block;
     content: ' ';
-    width: 100%;
-    height: var(--line-width);
     position: absolute;
-    cursor: row-resize;
+    cursor: var(--cursor);
   }
 }
 
 .line {
   height: var(--line-width);
-  transition: background-color 200ms ease-in;
+  transition:
+    background-color var(--nve-ref-animation-duration-200) ease-in,
+    outline-color var(--nve-ref-animation-duration-200) ease-in;
   background: var(--background);
+  outline: 1px solid transparent;
+  width: 100%;
+  height: 100%;
 }
 
 :host([orientation='horizontal']) {
-  height: var(--nve-ref-size-50);
+  height: var(--line-width);
+  width: 100%;
+
+  ::before,
+  ::after {
+    height: var(--target-size);
+    width: 100%;
+  }
+
+  ::before {
+    top: calc(-1 * var(--target-size));
+  }
+
+  ::after {
+    bottom: calc(-1 * var(--target-size));
+  }
 
   input {
     writing-mode: vertical-lr;
@@ -39,30 +58,22 @@
 }
 
 :host([orientation='vertical']) {
+  --cursor: col-resize;
+  width: var(--line-width);
   height: 100%;
-  width: var(--nve-ref-size-50);
-  cursor: col-resize;
 
-  [internal-host] {
-    ::before,
-    ::after {
-      height: 100%;
-      width: calc(2 * var(--line-width));
-      cursor: col-resize;
-    }
-
-    ::before {
-      left: calc(-1 * var(--line-width));
-    }
-
-    ::after {
-      right: calc(-1 * var(--line-width));
-    }
+  ::before,
+  ::after {
+    height: 100%;
+    width: var(--target-size);
   }
 
-  .line {
-    height: 100%;
-    width: var(--line-width);
+  ::before {
+    left: calc(-1 * var(--target-size));
+  }
+
+  ::after {
+    right: calc(-1 * var(--target-size));
   }
 }
 
@@ -75,8 +86,11 @@
 [internal-host]:hover,
 [internal-host]:has(input:focus),
 :host(:state(active)) [internal-host] {
-  --line-width: var(--nve-ref-border-width-md);
   --background: var(--nve-sys-accent-secondary-background);
+
+  .line {
+    outline: 1px solid var(--background);
+  }
 }
 
 input {
@@ -88,14 +102,4 @@ input {
 
 :host(:state(active)) {
   --background: var(--nve-sys-accent-secondary-background);
-
-  [internal-host] {
-    ::before,
-    ::after {
-      height: 100vh;
-      width: 100vw;
-      left: -50vw;
-      top: -50vh;
-    }
-  }
 }
