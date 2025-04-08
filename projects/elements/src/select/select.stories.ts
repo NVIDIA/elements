@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit';
+import { html } from 'lit';
 import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/input/define.js';
@@ -396,20 +396,20 @@ export const ViewportOverflow = {
 };
 
 export const Performance = {
-  render: () => html`<nve-select-performance-demo></nve-select-performance-demo>`
-}
-
-class SelectPerformanceDemo extends LitElement {
-  render() {
-    return html`
-  <nve-select>
+  render: () => html`
+  <nve-select id="performance-select">
     <label>1000 options</label>
-    <select>
-      ${new Array(1000).fill('').map((_, i) => html`<option value=${i}>${i} item</option>`)}
-    </select>
+    <select></select>
   </nve-select>
-    `;
-  }
+  <script type="module">
+    const select = document.querySelector('#performance-select select');
+    const options = new Array(1000).fill('').map((_, i) => {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = i + ' item';
+      return option;
+    });
+    select.append(...options);
+  </script>
+  `
 }
-
-customElements.get('nve-select-performance-demo') || customElements.define('nve-select-performance-demo', SelectPerformanceDemo);
