@@ -105,18 +105,18 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node><a href="api/?path=/docs/about-requests--docs">Requests</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/about-migration--docs">Migration</a></nve-tree-node>
   </nve-tree-node>
-  <nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('/docs/integrations/') ? 'expanded' : ''}>
     Integrations
-    <nve-tree-node><a href="api/?path=/docs/integrations-angular--docs">Angular</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/integrations-buildless--docs">Buildless</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/integrations-extensions--docs">Extensions</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/integrations-lit--docs">Lit</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/integrations-nextjs--docs">NextJS</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/integrations-preact--docs">Preact</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/integrations-react--docs">React</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/integrations-solidjs--docs">SolidJS</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/integrations-typescript--docs">TypeScript</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/integrations-vue--docs">Vue</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted' : ''}><a href="docs/integrations/angular/">Angular</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/buildless/') ? 'highlighted' : ''}><a href="docs/integrations/buildless/">Buildless</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/extensions/') ? 'highlighted' : ''}><a href="docs/integrations/extensions/">Extensions</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/lit/') ? 'highlighted' : ''}><a href="docs/integrations/lit/">Lit</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/nextjs/') ? 'highlighted' : ''}><a href="docs/integrations/nextjs/">NextJS</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/preact/') ? 'highlighted' : ''}><a href="docs/integrations/preact/">Preact</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/react/') ? 'highlighted' : ''}><a href="docs/integrations/react/">React</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/solidjs/') ? 'highlighted' : ''}><a href="docs/integrations/solidjs/">SolidJS</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/typescript/') ? 'highlighted' : ''}><a href="docs/integrations/typescript/">TypeScript</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/vue/') ? 'highlighted' : ''}><a href="docs/integrations/vue/">Vue</a></nve-tree-node>
   </nve-tree-node>
   <nve-tree-node>
     Foundations
