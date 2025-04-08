@@ -1,5 +1,4 @@
-import { LitElement, html } from 'lit';
-import { state } from 'lit/decorators/state.js';
+import { html } from 'lit';
 import '@nvidia-elements/core/accordion/define.js';
 
 export default {
@@ -78,32 +77,28 @@ export const Flat = {
 `
 };
 
-class CustomIconButtonDemo extends LitElement {
-  @state() private expanded = false;
-
-  toggleExpanded() {
-    this.expanded = !this.expanded;
-  }
-
-  render() {
-    return html`
-      <nve-accordion .expanded=${this.expanded}>
-        <nve-icon-button slot="icon-button" icon-name=${this.expanded ? "minus" : "add"} size="sm" container="flat" @click=${this.toggleExpanded}></nve-icon-button>
-
-        <nve-accordion-header @click=${this.toggleExpanded}>
-          <div slot="title">Heading</div>
-        </nve-accordion-header>
-
-        <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
-      </nve-accordion>
-    `;
-  }
-}
-
-customElements.get('custom-icon-button-demo') || customElements.define('custom-icon-button-demo', CustomIconButtonDemo);
-
 export const CustomIconButtonInteractive = {
-  render: () => html`<custom-icon-button-demo></custom-icon-button-demo>`
+  render: () => html`
+<nve-accordion id="custom-icon-button-accordion">
+  <nve-icon-button slot="icon-button" icon-name="add" size="sm" container="flat"></nve-icon-button>
+  <nve-accordion-header>
+    <div slot="title">Heading</div>
+  </nve-accordion-header>
+  <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+</nve-accordion>
+<script type="module">
+  const accordion = document.querySelector('#custom-icon-button-accordion');
+  const accordionHeader = accordion.querySelector('nve-accordion-header');
+  const iconButton = accordion.querySelector('nve-icon-button');
+  accordionHeader.addEventListener('click', () => toggle());
+  iconButton.addEventListener('click', () => toggle());
+
+  function toggle() {
+    accordion.expanded = !accordion.expanded;
+    iconButton.iconName = accordion.expanded ? 'minus' : 'add';
+  }
+</script>
+  `
 };
 
 export const AccordionGroupFull = {
