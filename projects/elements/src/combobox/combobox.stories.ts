@@ -407,23 +407,21 @@ export const Form = () => {
 };
 
 export const Performance = () => {
-  return html`<nve-combobox-performance-demo></nve-combobox-performance-demo>`
+  return html`
+<nve-combobox id="performance-combobox">
+  <input type="search">
+  <datalist></datalist>
+</nve-combobox>
+<script type="module">
+  const datalist = document.querySelector('#performance-combobox datalist');
+  const options = new Array(1000).fill('').map((_, i) => {
+    const option = document.createElement('option');
+    option.value = i + ' item';
+    return option;
+  });
+  datalist.append(...options);
+</script>`
 }
-
-class ComboboxPerformanceDemo extends LitElement {
-  render() {
-    return html`
-  <nve-combobox>
-    <input type="search">
-    <datalist>
-      ${new Array(1000).fill('').map((_, i) => html`<option value="${i} item"></option>`)}
-    </datalist>
-  </nve-combobox>
-    `;
-  }
-}
-
-customElements.get('nve-combobox-performance-demo') || customElements.define('nve-combobox-performance-demo', ComboboxPerformanceDemo);
 
 export const FilterDemo = {
   render: () => html`<nve-combobox-demo></nve-combobox-demo>`
