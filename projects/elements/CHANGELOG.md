@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.31.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.3...@nvidia-elements/core-v1.31.4) (2025-04-08)
+
+
+### Bug Fixes
+
+* **elements:** resize handle ([5603d32](https://github.com/NVIDIA/elements/commit/5603d32411e66c9efd99f7dc9421a361ff8e2c48))
+* **elements:** ssr logging ([0fa752b](https://github.com/NVIDIA/elements/commit/0fa752ba8767deafe0a2c8a5fa0e3728790243a7))
+
 ## [@nvidia-elements/core-v1.31.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.2...@nvidia-elements/core-v1.31.3) (2025-04-02)
 
 
