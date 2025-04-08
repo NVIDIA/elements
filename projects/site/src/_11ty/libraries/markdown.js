@@ -43,7 +43,6 @@ markdown.renderer.rules.heading_open = renderer;
 markdown.renderer.rules.link_open = renderer;
 markdown.renderer.rules.paragraph_open = renderer;
 markdown.renderer.rules.bullet_list_open = renderer;
-// markdown.renderer.rules.code_inline = renderer;
-/* TODO: fix code inline renderer */
+// markdown.renderer.rules.code_inline = renderer; /* TODO: fix code inline renderer */
 
 export default markdown;
