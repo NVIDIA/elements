@@ -29,6 +29,15 @@ export function render(data) {
             padding-bottom: var(--nve-ref-space-xs);
           }
 
+          /* Temporary fix for code_inline tag renderer in paragraphs, applies nve-text="code" styles */
+          p[nve-text] > code {
+            background: var(--nve-sys-interaction-field-background) !important;
+            border-radius: var(--nve-ref-border-radius-xs) !important;
+            display: inline-block !important;
+            font-family: monospace !important;
+            padding: var(--nve-ref-size-50) var(--nve-ref-size-100)
+          }
+
           pre:has(nve-codeblock),
           code:has(nve-codeblock) {
             display: contents;
