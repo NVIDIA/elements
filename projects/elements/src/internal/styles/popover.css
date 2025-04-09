@@ -246,11 +246,6 @@
     inset: 0 0 auto auto;
   }
 
-  /* if not relative to body and not floating-ui fallback */
-  :host(:not(:state(anchor-body)):not([style*='left'][style*='top'])) {
-    inset: unset !important;
-  }
-
   :host([popover]) {
     position-try-fallbacks:
       flip-block,
@@ -273,9 +268,9 @@
 
 :host(:state(anchor-positioning-fallback)) {
   margin: 0;
-  inset: auto;
-  position-area: initial;
-  position-anchor: initial;
+  position-area: unset !important;
+  position-anchor: unset !important;
+  position-try: unset !important;
 }
 
 :host(:state(anchor-positioning-fallback):not([popover])) {

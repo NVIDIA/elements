@@ -32,9 +32,7 @@ export function getHostAnchor(host: HTMLElement & { anchor?: HTMLElement | strin
   const anchor = host.anchor ?? host._activeTrigger;
 
   if (typeof anchor === 'string' && anchor?.length) {
-    const match = getFlatDOMTree(host.parentNode as HTMLElement)
-      .filter(el => el?.id !== '')
-      .find(el => el.id === anchor);
+    const match = getFlatDOMTree(host.parentNode as HTMLElement).find(el => el.id === anchor);
 
     if (!match) {
       LogService.warn(getIdMatchNotFoundWarning(anchor));
