@@ -94,32 +94,34 @@ type TestHost = HTMLElement & { anchor?: HTMLElement | string; _activeTrigger?: 
 
 describe('getHostAnchor', () => {
   let logSpy;
+  let host: TestHost;
+  let anchor: HTMLElement;
+
   beforeEach(() => {
     logSpy = vi.spyOn(LogService, 'warn');
+    host = document.createElement('div') as TestHost;
+    anchor = document.createElement('div');
+    document.body.appendChild(host);
+    document.body.appendChild(anchor);
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
+    host.remove();
+    anchor.remove();
   });
 
   it('returns the anchor element when provided as a DOM element', () => {
-    const host = document.createElement('div') as TestHost;
-    document.body.appendChild(host);
     host.anchor = document.createElement('div');
     expect(getHostAnchor(host)).toBe(host.anchor);
   });
 
-  it('returns the active trigger element when no anchor is provided', () => {
-    const host = document.createElement('div') as TestHost;
-    const trigger = document.createElement('div');
-    document.body.appendChild(trigger);
-    host._activeTrigger = trigger;
+  it('returns the active anchor element when no anchor is provided', () => {
+    host._activeTrigger = anchor;
     expect(getHostAnchor(host)).toBe(host._activeTrigger);
   });
 
   it('returns the body as a fallback when anchor is not an element and id does not match any elements in the DOM tree', () => {
-    const host = document.createElement('div') as TestHost;
-    document.body.appendChild(host);
     host.anchor = 'not-found';
     logSpy.mockClear();
     expect(getHostAnchor(host)).toBe(document.body);
@@ -127,12 +129,25 @@ describe('getHostAnchor', () => {
   });
 
   it('returns the body as a fallback when anchor is not an element and is equal to the body', () => {
-    const host = document.createElement('div') as TestHost;
-    document.body.appendChild(host);
     const anchor = document.createElement('div');
     document.body.appendChild(anchor);
     anchor.id = 'body';
     expect(getHostAnchor(host)).toBe(document.body);
+  });
+
+  it('should not match anchors with same id but different render root', () => {
+    host.anchor = 'test-anchor';
+    anchor.id = 'test-anchor';
+    expect(getHostAnchor(host)).toStrictEqual(anchor);
+
+    const shadowHost = document.createElement('div');
+    shadowHost.attachShadow({ mode: 'open' });
+    shadowHost.shadowRoot.appendChild(anchor);
+
+    logSpy.mockClear();
+    expect(getHostAnchor(host)).toStrictEqual(document.body);
+    expect(logSpy).toHaveBeenCalledWith('Provided id "test-anchor" was not found in DOM');
+    shadowHost.remove();
   });
 });
 

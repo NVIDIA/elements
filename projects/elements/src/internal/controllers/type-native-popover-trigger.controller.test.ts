@@ -84,4 +84,18 @@ describe('type-native-popover-trigger.controller', () => {
     await elementIsStable(element);
     expect(popover.matches(':popover-open')).toBe(true);
   });
+
+  it('should not trigger popover in cross render roots', async () => {
+    const shadowHost = document.createElement('div');
+    shadowHost.attachShadow({ mode: 'open' });
+    shadowHost.shadowRoot.appendChild(popover);
+    document.body.appendChild(shadowHost);
+
+    const event = untilEvent(element, 'click');
+    emulateClick(element);
+    expect(await event).toBeDefined();
+
+    await elementIsStable(element);
+    expect(popover.matches(':popover-open')).toBe(false);
+  });
 });
