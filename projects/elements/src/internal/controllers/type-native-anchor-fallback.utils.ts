@@ -45,7 +45,8 @@ export async function setAnchorPositionFallback(host: HTMLElement, popoverConfig
 }
 
 export function setPopoverStyles(config: PopoverConfig, position: Partial<ComputePositionReturn>) {
-  Object.assign(config.popover.style, { position: config.strategy, left: `${position.x}px`, top: `${position.y}px` });
+  config.popover.style.setProperty('position', config.strategy);
+  config.popover.style.setProperty('inset', `${position.y}px auto auto ${position.x}px`, 'important');
 }
 
 export function setArrowStyles(config: PopoverConfig, position: ComputePositionReturn) {
