@@ -1,7 +1,7 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
 import { clickOutsideElementBounds, generateId, getAttributeListChanges } from '../utils/dom.js';
 import { attachInternals } from '../utils/a11y.js';
-import { focusElement } from '../utils/focus.js';
+import { focusElement, getActiveElement } from '../utils/focus.js';
 import { getHostTrigger, hasOpenPopover } from './type-native-popover.utils.js';
 import type { PopoverType } from '../types/index.js';
 
@@ -169,7 +169,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #_close = () => this.#close();
   #_open = e => this.#open(e);
   #_pointerdown = (e: Event) => (this.host._activeTrigger = e.target as HTMLElement);
-  #_focus = () => (this.host._activeTrigger = globalThis.document.activeElement as HTMLElement);
+  #_focus = () => (this.host._activeTrigger = getActiveElement() as HTMLElement);
 
   #addTriggerInteractions() {
     this.#triggers.forEach(t => t.addEventListener('pointerdown', this.#_pointerdown));
