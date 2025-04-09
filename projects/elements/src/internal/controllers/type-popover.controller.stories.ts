@@ -6,6 +6,7 @@ import { popoverStyles, TypeNativePopoverController, useStyles, TypeNativeAnchor
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/dropdown/define.js';
 
 export default {
   title: 'Internal/Controllers'
@@ -133,3 +134,25 @@ export const TypePopoverControllerAlignmentDemo = {
   <ui-popover popover-type="manual" position="left" alignment="end">left end</ui-popover>
   `
 }
+
+export const AbsolutePositioningFallback = {
+  render: () => html`
+  <div nve-layout="row align-center pad:lg">
+    <nve-dropdown id="dropdown" position-strategy="absolute">dropdown content</nve-dropdown>
+    <nve-icon-button popovertarget="dropdown" icon-name="refresh"></nve-icon-button>
+  </div>
+  `
+}
+
+class MyElement extends LitElement {
+  render() {
+    return html`
+      <div style="width: 250px; height: 100px; resize: both; overflow: scroll; border: 1px solid white;">
+        <nve-dropdown id="my-dropdown">dropdown content</nve-dropdown>
+        <nve-icon-button id="my-dropdown-anchor" popovertarget="my-dropdown" icon-name="refresh"></nve-icon-button>
+      </div>
+    `;
+  }
+}
+
+customElements.get('my-element') || customElements.define('my-element', MyElement);

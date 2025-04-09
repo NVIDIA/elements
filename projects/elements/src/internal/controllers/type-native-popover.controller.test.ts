@@ -32,6 +32,8 @@ class TypeNativePopoverControllerTestElement extends LitElement {
 
   @property({ type: Boolean, reflect: true }) hidden = false;
 
+  _activeTrigger: HTMLElement;
+
   get popoverArrow() {
     return this.shadowRoot.querySelector<HTMLElement>('.arrow');
   }
@@ -591,6 +593,25 @@ describe('type-popover.controller - hint', () => {
 
     await new Promise(r => setTimeout(() => r(null), 10));
     expect(element.matches(':popover-open')).toBe(true);
+  });
+
+  it('should find shadow root active triggers', async () => {
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+    element._activeTrigger = undefined;
+
+    const shadowHost = document.createElement('div');
+    shadowHost.attachShadow({ mode: 'open', delegatesFocus: true });
+    button.remove();
+    shadowHost.shadowRoot.appendChild(button);
+    document.body.appendChild(shadowHost);
+
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    shadowHost.focus();
+    await elementIsStable(element);
+    expect(element._activeTrigger).toBe(button);
   });
 });
 

@@ -52,7 +52,8 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
     const hostAnchor = getHostAnchor(this.host);
     return (
       supportsNativeCSSAnchorPosition() &&
-      (hostAnchor === globalThis.document.body || sameRenderRoot(this.host, hostAnchor))
+      (hostAnchor === globalThis.document.body || sameRenderRoot(this.host, hostAnchor)) &&
+      this.host.getAttribute('position-strategy') !== 'absolute'
     );
   }
 
@@ -88,7 +89,7 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
       this.host.addController(this.typeNativeAnchorFallbackController);
     }
 
-    if (!crossRootWarning) {
+    if (!crossRootWarning && !sameRenderRoot(this.host, getHostAnchor(this.host))) {
       LogService.warn(getCrossShadowRootAnchorWarning(this.host.localName));
       crossRootWarning = true;
     }
