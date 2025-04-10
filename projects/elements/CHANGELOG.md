@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.31.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.4...@nvidia-elements/core-v1.31.5) (2025-04-10)
+
+
+### Bug Fixes
+
+* **elements:** popover anchoring ([eac64c8](https://github.com/NVIDIA/elements/commit/eac64c8301a51aa2ae447b4d4893fa8495da062c))
+
 ## [@nvidia-elements/core-v1.31.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.3...@nvidia-elements/core-v1.31.4) (2025-04-08)
 
 
