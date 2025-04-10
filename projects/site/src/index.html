@@ -44,8 +44,15 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
               faster, together.
             </span>
           </div>
-          <div class="content trailing" nve-layout="column gap:xl align:horizontal-stretch align:vertical-center ">
-            <p nve-text="heading center">Placeholder</p>
+          <div
+            class="content trailing escaping browser"
+            nve-layout="column gap:xl align:horizontal-stretch align:vertical-center "
+            style="padding-left: 0px;height:100vh;">
+            <video autoplay loop muted>
+              <source
+                src="https://cdn-prod.nvidia.com/assets/elements/splash/hero-video-tilted-01.webm"
+                type="video/webm" />
+            </video>
           </div>
         </section>
 
@@ -511,7 +518,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
                 <div nve-layout="row gap:md align:vertical-center">
                   <div>
                     <img
-                      src="https://images.ctfassets.net/xz1dnu24egyd/3FbNmZRES38q2Sk2EcoT7a/a290dc207a67cf779fc7c2456b177e9f/press-kit-icon.svg"
+                      src="https://cdn-prod.nvidia.com/assets/elements/splash/gitlab-icon.svg"
                       alt="GitLab Logo"
                       style="width: 28px" />
                   </div>
@@ -528,7 +535,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
                 <div nve-layout="row gap:md align:vertical-center">
                   <div>
                     <img
-                      src="https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png"
+                      src="https://cdn-prod.nvidia.com/assets/elements/splash/slack-icon.png"
                       alt="Slack Logo"
                       style="width: 28px" />
                   </div>
