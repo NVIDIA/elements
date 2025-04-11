@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.2.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.4...@nvidia-elements/code-v0.2.5) (2025-04-11)
+
+
+### Bug Fixes
+
+* **labs-code:** clone template tag content ([d76119e](https://github.com/NVIDIA/elements/commit/d76119e6a3ba3c5374e099528d854d9e4e9ea982))
+
 ## [@nvidia-elements/code-v0.2.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.3...@nvidia-elements/code-v0.2.4) (2025-02-21)
 
 
