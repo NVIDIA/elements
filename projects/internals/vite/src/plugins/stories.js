@@ -1,3 +1,6 @@
+import { html } from 'lit';
+import { render } from '@lit-labs/ssr';
+import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
 import fs from 'fs';
 import path from 'path';
 import { globSync } from 'glob';
@@ -61,10 +64,15 @@ async function getStoriesFromFile(filePath) {
       ?.getDescendants()[1]
       ?.getText()
       .trim();
-
     template = template?.substring(1, template?.length - 1);
 
     if (template) {
+      try {
+        template = await renderTemplate(template);
+      } catch (e) {
+        // console.log(e);
+      }
+
       if (template.includes('nve-theme')) {
         const lines = template?.split('\n');
         template = lines.splice(1, lines.length - 2).join('\n');
@@ -93,4 +101,11 @@ async function getStoriesFromFile(filePath) {
     path,
     stories: await Promise.all(formattedStories)
   };
+}
+
+async function renderTemplate(template) {
+  const data = eval(`html\`${template}\``); // treat parsed source string as a template literal
+  const result = render(data);
+  const contents = await collectResult(result);
+  return contents.replaceAll(/<!--[^>]*lit[^>]*-->/g, '').replaceAll('=""', '');
 }
