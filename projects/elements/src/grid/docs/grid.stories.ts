@@ -337,7 +337,7 @@ export const ColumnAction = {
   <nve-grid-header>
     ${Array(5).fill('').map((_, i) => html`
       <nve-grid-column>
-        column ${i} <nve-icon-button popovertarget="grid-column-action-dropdown" icon-name="more-actions" slot="actions"></nve-icon-button>
+        column ${i} <nve-icon-button container="flat" popovertarget="grid-column-action-dropdown" icon-name="more-actions" slot="actions"></nve-icon-button>
       </nve-grid-column>`)}
   </nve-grid-header>
   ${Array(10).fill('').map((_, r) => html`
