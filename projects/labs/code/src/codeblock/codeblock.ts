@@ -81,10 +81,17 @@ export class CodeBlock extends LitElement implements ContainerElement {
     const textContent = this.shadowRoot
       ?.querySelector('slot')
       ?.assignedNodes()
-      .reduce((p, n: HTMLElement) => {
-        // if innerHTML its an HTMLElement instance or Template tag
-        // if not then its a TextNode type and should use textContent instead
-        return [...p, n.innerHTML ?? n.textContent];
+      .reduce((p, n: HTMLElement | HTMLTemplateElement | Text) => {
+        let template = '';
+        if (n instanceof HTMLTemplateElement) {
+          template = n.content.textContent;
+        } else if (n instanceof HTMLElement) {
+          template = n.innerHTML;
+        } else {
+          template = n.textContent;
+        }
+
+        return [...p, template];
       }, [])
       .join('');
 
