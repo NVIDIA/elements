@@ -6,6 +6,7 @@ import styles from './footer.css?inline';
  * @element nve-grid-footer
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
+ * @description Grid footer can be used to display contextual information or additonal user actions such as pagination.
  * @slot - default slot for content
  * @cssprop --background
  * @cssprop --color

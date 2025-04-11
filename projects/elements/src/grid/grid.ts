@@ -21,7 +21,7 @@ import globalStyles from './grid.global.css?inline';
 
 /**
  * @element nve-grid
- * @description A grid widget is a container that enables users to navigate the information or interactive elements it contains using directional navigation keys, such as arrow keys, Home, and End. As a generic container widget that offers flexible keyboard navigation, it can serve a wide variety of needs. It can be used for purposes as simple as grouping a collection of checkboxes or navigation links or as complex as creating a full-featured spreadsheet application. - ARIA Authoring Practices Guide
+ * @description A grid is a container enabling users to navigate information or interactive elements it contains using directional navigation keys. As a generic container with flexible keyboard navigation, it can serve a wide variety of needs from a simple use of grouping collections of checkboxes and navigation links to as complex as creating a full-featured spreadsheet. - ARIA Authoring Practices Guide
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for content
