@@ -133,6 +133,7 @@
       "command": "playwright-lock 'vitest run --config=vitest.visual.ts'",
       "clean": false,
       "files": [
+        "dist/**/*.css",
         "src/index.test.visual.ts",
         "src/**/*.test.visual.ts",
         "vitest.visual.html",
@@ -142,7 +143,11 @@
         ".visual/*.png"
       ],
       "dependencies": [
-        "build"
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ]
     }
   }
