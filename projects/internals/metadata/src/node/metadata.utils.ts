@@ -182,7 +182,7 @@ function getElementMetadata(
           lighthouse,
           ssr
         },
-        stories: stories.find(s => s.element === name)?.stories ?? []
+        stories: stories.filter(s => s.element === name).flatMap(s => s.stories) ?? []
       };
 
       return [...elements, metadata];
