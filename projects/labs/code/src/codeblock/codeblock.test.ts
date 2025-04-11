@@ -78,6 +78,16 @@ function getTime(): number {
     expect(element.shadowRoot.querySelector('.hljs-title')).toBeTruthy();
   });
 
+  it('should render HTML source code if slotted HTML content', async () => {
+    element.language = 'typescript';
+    const div = document.createElement('div');
+    div.textContent = 'hello';
+    element.append(div);
+    element.shadowRoot.querySelector('slot').dispatchEvent(new Event('slotchange'));
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('slot').assignedNodes()[0]).toBe(div);
+  });
+
   it('should not render any line numbers by default', async () => {
     await elementIsStable(element);
     expect(element.lineNumbers).toBeFalsy();
