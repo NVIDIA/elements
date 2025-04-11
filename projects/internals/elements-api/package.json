@@ -223,6 +223,8 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
+        "../../elements/dist/**/*.js",
+        "../../labs/code/dist/**/*.js",
         "src/**",
         "!src/**/*.stories.ts",
         "!src/**/*.mdx",
@@ -240,10 +242,16 @@
         "dist/**"
       ],
       "dependencies": [
-        "../../elements:build",
-        "../../labs/code:build",
         "../../internals/vite:ci",
-        "../../internals/metadata:ci"
+        "../../internals/metadata:build",
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/code:build",
+          "cascade": false
+        }
       ]
     },
     "build:watch": {

@@ -475,6 +475,9 @@ importers:
       lighthouse:
         specifier: 'catalog:'
         version: 12.3.0
+      lit:
+        specifier: 'catalog:'
+        version: 3.2.1
       pixelmatch:
         specifier: 6.0.0
         version: 6.0.0
@@ -1248,9 +1251,6 @@ importers:
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../elements
-      '@nvidia-elements/core-react':
-        specifier: workspace:*
-        version: link:../elements-react
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../styles
@@ -7566,7 +7566,7 @@ packages:
     resolution: {integrity: sha512-qI/3lziaPMSKsrwlxH/xMgikhQ0EGOX2ICU73Bi/YHFvz2j/yMCIrw4+puF2IpQ4+upd3EWbvnHM9+PnJn48YA==}
 
   lit@3.2.1:
-    resolution: {integrity: sha512-1BBa1E/z0O9ye5fZprPtdqnc0BFzxIxTTOO/tQFmyC/hj1O3jL4TfmLBw0WEwjAokdLwpclkvGgDJwTIh0/22w==}
+    resolution: {integrity: sha512-1BBa1E/z0O9ye5fZprPtdqnc0BFzxIxTTOO/tQFmyC/hj1O3jL4TfmLBw0WEwjAokdLwpclkvGgDJwTIh0/22w==, tarball: https://registry.npmjs.org
 
   lmdb@3.2.6:
     resolution: {integrity: sha512-SuHqzPl7mYStna8WRotY8XX/EUZBjjv3QyKIByeCLFfC9uXT/OIHByEcA07PzbMfQAM0KYJtLgtpMRlIe5dErQ==, tarball: https://registry.npmjs.org
@@ -10041,6 +10041,9 @@ packages:
 
   third-party-web@0.26.5:
     resolution: {integrity: sha512-tDuKQJUTfjvi9Fcrs1s6YAQAB9mzhTSbBZMfNgtWNmJlHuoFeXO6dzBFdGeCWRvYL50jQGK0jPsBZYxqZQJ2SA==}
+
+  third-party-web@0.26.6:
+    resolution: {integrity: sha512-GsjP92xycMK8qLTcQCacgzvffYzEqe29wyz3zdKVXlfRD5Kz1NatCTOZEeDaSd6uCZXvGd2CNVtQ89RNIhJWvA==, tarball: https://registry.npmjs.org
 
   through2@2.0.5:
     resolution: {integrity: sha512-/mrRod8xqpA+IHSLyGCQ2s8SPHiCDEeQJSep1jqLYeEUClOFG2Qsh+4FU6G9VeqpZnGW/Su8LQGc4YKni5rYSQ==}
@@ -13117,7 +13120,7 @@ snapshots:
 
   '@paulirish/trace_engine@0.0.39':
     dependencies:
-      third-party-web: 0.26.5
+      third-party-web: 0.26.6
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -20727,6 +20730,8 @@ snapshots:
       tslib: 2.8.1
 
   third-party-web@0.26.5: {}
+
+  third-party-web@0.26.6: {}
 
   through2@2.0.5:
     dependencies:

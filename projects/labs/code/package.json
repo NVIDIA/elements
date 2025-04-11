@@ -207,6 +207,7 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
+        "../../elements/dist/**/*.js",
         "src/**",
         "!src/**/*.stories.ts",
         "!src/**/*.mdx",
@@ -226,8 +227,11 @@
       ],
       "dependencies": [
         "build:snippets",
-        "../../elements:build",
-        "../../internals/vite:ci"
+        "../../internals/vite:ci",
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        }
       ]
     },
     "build:watch": {
@@ -249,40 +253,39 @@
     "test": {
       "command": "playwright-lock 'vitest run'",
       "files": [
+        "dist/**/*.js",
         "src/**/*.test.ts",
-        "!src/**/*.test.lighthouse.ts",
-        "!src/**/*.test.visual.ts",
-        "!src/**/*.test.axe.ts",
-        "!src/**/*.test.ssr.ts",
         "tsconfig.json",
-        "vite.config.ts",
         "vitest.config.ts"
       ],
       "output": [],
       "dependencies": [
-        "build",
-        "../../elements:test",
-        "../../testing:ci"
+        "../../testing:ci",
+        "../../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ]
     },
     "test:coverage": {
       "command": "playwright-lock 'vitest run --coverage'",
       "files": [
+        "dist/**/*.js",
         "src/**/*.test.ts",
-        "!src/**/*.test.lighthouse.ts",
-        "!src/**/*.test.visual.ts",
-        "!src/**/*.test.axe.ts",
-        "!src/**/*.test.ssr.ts",
         "tsconfig.json",
-        "vite.config.ts",
         "vitest.config.ts"
       ],
       "output": [
         "coverage/unit/**"
       ],
       "dependencies": [
-        "build",
-        "../../testing:ci"
+        "../../testing:ci",
+        "../../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ]
     },
     "test:watch": {
@@ -311,6 +314,7 @@
     "test:axe": {
       "command": "playwright-lock 'vitest run --config=vitest.axe.ts'",
       "files": [
+        "dist/**/*.js",
         "src/**/*.test.axe.ts",
         "tsconfig.json",
         "vitest.axe.ts"
@@ -319,8 +323,11 @@
         "coverage/axe/**"
       ],
       "dependencies": [
-        "build",
-        "../../internals/vite:ci"
+        "../../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ],
       "env": {
         "NODE_ENV": "production"

@@ -74,20 +74,134 @@
       "command": "node --experimental-strip-types ./src/node/metadata.ts",
       "files": [
         "./src/node/metadata.ts",
-        "./src/node/metadata.utils.ts"
+        "./src/node/metadata.utils.ts",
+        "./static/lighthouse.json",
+        "../../elements/src/internal/types/index.ts",
+        "../../elements/package.json",
+        "../../elements/README.md",
+        "../../elements/CHANGELOG.md",
+        "../../elements/dist/custom-elements.json",
+        "../../elements/dist/**/*.stories.json",
+        "../../elements/coverage/unit/coverage-summary.json",
+        "../../elements/coverage/unit/junit.xml",
+        "../../elements/coverage/axe/junit.xml",
+        "../../elements/coverage/visual/junit.xml",
+        "../../elements/coverage/ssr/junit.xml",
+        "../../elements/coverage/ssr/summary.json",
+        "../../elements-react/package.json",
+        "../../elements-react/README.md",
+        "../../elements-react/CHANGELOG.md",
+        "../../elements-react/dist/custom-elements.json",
+        "../../elements-react/dist/**/*.stories.json",
+        "../../elements-react/coverage/unit/coverage-summary.json",
+        "../../elements-react/coverage/unit/junit.xml",
+        "../../elements-react/coverage/axe/junit.xml",
+        "../../elements-react/coverage/visual/junit.xml",
+        "../../elements-react/coverage/ssr/junit.xml",
+        "../../elements-react/coverage/ssr/summary.json",
+        "../../styles/package.json",
+        "../../styles/README.md",
+        "../../styles/CHANGELOG.md",
+        "../../styles/dist/custom-elements.json",
+        "../../styles/dist/**/*.stories.json",
+        "../../styles/coverage/unit/coverage-summary.json",
+        "../../styles/coverage/unit/junit.xml",
+        "../../styles/coverage/axe/junit.xml",
+        "../../styles/coverage/visual/junit.xml",
+        "../../styles/coverage/ssr/junit.xml",
+        "../../styles/coverage/ssr/summary.json",
+        "../../testing/package.json",
+        "../../testing/README.md",
+        "../../testing/CHANGELOG.md",
+        "../../testing/dist/custom-elements.json",
+        "../../testing/dist/**/*.stories.json",
+        "../../testing/coverage/unit/coverage-summary.json",
+        "../../testing/coverage/unit/junit.xml",
+        "../../testing/coverage/axe/junit.xml",
+        "../../testing/coverage/visual/junit.xml",
+        "../../testing/coverage/ssr/junit.xml",
+        "../../testing/coverage/ssr/summary.json",
+        "../../themes/package.json",
+        "../../themes/README.md",
+        "../../themes/CHANGELOG.md",
+        "../../themes/dist/custom-elements.json",
+        "../../themes/dist/**/*.stories.json",
+        "../../themes/coverage/unit/coverage-summary.json",
+        "../../themes/coverage/unit/junit.xml",
+        "../../themes/coverage/axe/junit.xml",
+        "../../themes/coverage/visual/junit.xml",
+        "../../themes/coverage/ssr/junit.xml",
+        "../../themes/coverage/ssr/summary.json",
+        "../../labs/code/package.json",
+        "../../labs/code/README.md",
+        "../../labs/code/CHANGELOG.md",
+        "../../labs/code/dist/custom-elements.json",
+        "../../labs/code/dist/**/*.stories.json",
+        "../../labs/code/coverage/unit/coverage-summary.json",
+        "../../labs/code/coverage/unit/junit.xml",
+        "../../labs/code/coverage/axe/junit.xml",
+        "../../labs/code/coverage/visual/junit.xml",
+        "../../labs/code/coverage/ssr/junit.xml",
+        "../../labs/code/coverage/ssr/summary.json",
+        "../../labs/behaviors-alpine/package.json",
+        "../../labs/behaviors-alpine/README.md",
+        "../../labs/behaviors-alpine/CHANGELOG.md",
+        "../../labs/behaviors-alpine/dist/custom-elements.json",
+        "../../labs/behaviors-alpine/dist/**/*.stories.json",
+        "../../labs/behaviors-alpine/coverage/unit/coverage-summary.json",
+        "../../labs/behaviors-alpine/coverage/unit/junit.xml",
+        "../../labs/behaviors-alpine/coverage/axe/junit.xml",
+        "../../labs/behaviors-alpine/coverage/visual/junit.xml",
+        "../../labs/behaviors-alpine/coverage/ssr/junit.xml",
+        "../../labs/behaviors-alpine/coverage/ssr/summary.json",
+        "../../labs/playwright-screencast/package.json",
+        "../../labs/playwright-screencast/README.md",
+        "../../labs/playwright-screencast/CHANGELOG.md",
+        "../../labs/playwright-screencast/dist/custom-elements.json",
+        "../../labs/playwright-screencast/dist/**/*.stories.json",
+        "../../labs/playwright-screencast/coverage/unit/coverage-summary.json",
+        "../../labs/playwright-screencast/coverage/unit/junit.xml",
+        "../../labs/playwright-screencast/coverage/axe/junit.xml",
+        "../../labs/playwright-screencast/coverage/visual/junit.xml",
+        "../../labs/playwright-screencast/coverage/ssr/junit.xml",
+        "../../labs/playwright-screencast/coverage/ssr/summary.json"
       ],
       "output": [
         "static/index.json"
       ],
       "dependencies": [
-        "../../elements:ci",
-        "../../elements-react:ci",
-        "../../styles:ci",
-        "../../testing:ci",
-        "../../themes:ci",
-        "../../labs/code:ci",
-        "../../labs/behaviors-alpine:ci",
-        "../../labs/playwright-screencast:ci"
+        {
+          "script": "../../elements:ci",
+          "cascade": false
+        },
+        {
+          "script": "../../elements-react:ci",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:ci",
+          "cascade": false
+        },
+        {
+          "script": "../../testing:ci",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:ci",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/code:ci",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/behaviors-alpine:ci",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/playwright-screencast:ci",
+          "cascade": false
+        }
       ]
     },
     "build:lighthouse": {
@@ -133,15 +247,18 @@
     "test": {
       "command": "playwright-lock 'vitest run'",
       "files": [
+        "dist/**/*.js",
         "src/**/*.test.ts",
         "tsconfig.json",
-        "vite.config.ts",
         "vitest.config.ts"
       ],
       "output": [],
       "dependencies": [
-        "build",
-        "../vite:ci"
+        "../vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ]
     },
     "test:watch": {
@@ -153,15 +270,14 @@
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
-        "vite.config.ts",
         "vitest.config.ts"
       ],
       "output": [
         "coverage/unit/**"
       ],
       "dependencies": [
-        "build",
-        "../vite:ci"
+        "../vite:ci",
+        "build"
       ],
       "env": {
         "NODE_ENV": "production"

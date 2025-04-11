@@ -38,13 +38,15 @@
         "./eleventy.config.js"
       ],
       "output": [
-        "dist/**"
+        "dist/**",
+        ".11ty-vite"
       ],
       "dependencies": [
-        "clean",
         "../elements:build",
-        "../internals/elements-api:build",
-        "../internals/metadata:build"
+        "../styles:build",
+        "../themes:build",
+        "../labs/code:build",
+        "../internals/elements-api:build"
       ],
       "env": {
         "PAGES_BASE_URL": {
@@ -69,7 +71,7 @@
       }
     },
     "clean": {
-      "command": "rm -rf dist",
+      "command": "rm -rf dist && rm -rf .11ty-vite",
       "files": [],
       "output": [],
       "dependencies": []
