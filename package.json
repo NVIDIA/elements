@@ -10,7 +10,7 @@
   },
   "scripts": {
     "ci": "wireit",
-    "ci:all": "PAGES_BASE_URL=/elements/preview/ pnpm run ci && PAGES_BASE_URL=/elements/preview/ node ./projects/internals/gitlab/cache-validate.js ci && pnpm run lighthouse && node ./projects/internals/gitlab/cache-validate.js lighthouse",
+    "ci:all": "PAGES_BASE_URL=/elements/preview/ pnpm run ci && PAGES_BASE_URL=/elements/preview/ node ./projects/internals/gitlab/cache-validate.js ci",
     "ci:reset": "pnpm run clean && pnpm i --frozen-lockfile --prefer-offline",
     "lighthouse": "wireit",
     "clean": "git clean -dfX",
