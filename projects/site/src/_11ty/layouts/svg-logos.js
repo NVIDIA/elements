@@ -1,5 +1,3 @@
-import { join } from 'path';
-
 export const renderSvgLogos = () => {
   return /* html */ `
     <div hidden style="display: none !important">
