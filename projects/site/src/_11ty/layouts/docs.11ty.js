@@ -19,7 +19,7 @@ export function render(data) {
             letter-spacing: 1.76px;
           }
 
-          h2 {
+          h2[nve-text='heading xl mkd'] {
             border-bottom: 1px solid var(--nve-ref-border-color);
           }
 

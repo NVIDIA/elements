@@ -5,7 +5,7 @@ const markdown = markdownIt({
   breaks: false,
   linkify: true,
   highlight: function (str, lang) {
-    return /* html */ `<nve-codeblock language="${lang}" style="--padding: var(--nve-ref-space-lg)">${markdown.utils.escapeHtml(str)}</nve-codeblock>`;
+    return /* html */ `<nve-codeblock language="${lang}" style="--padding: var(--nve-ref-space-lg)"><template>${markdown.utils.escapeHtml(str)}</template></nve-codeblock>`;
   }
 });
 
