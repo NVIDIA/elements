@@ -22,6 +22,7 @@
     "custom-element-vs-code-integration": "1.4.1",
     "glob": "catalog:",
     "lighthouse": "catalog:",
+    "lit": "catalog:",
     "pixelmatch": "6.0.0",
     "pngjs": "7.0.0",
     "rollup": "4.30.1",
