@@ -969,7 +969,6 @@
       "files": [
         "public/**",
         "src/**",
-        "!src/**/*.stories.ts",
         "!src/**/*.mdx",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -1035,21 +1034,20 @@
     "test": {
       "command": "playwright-lock 'vitest run'",
       "files": [
+        "dist/**/*.js",
         "src/**/*.test.ts",
-        "!src/**/*.test.lighthouse.ts",
-        "!src/**/*.test.visual.ts",
-        "!src/**/*.test.axe.ts",
-        "!src/**/*.test.ssr.ts",
-        "!src/**/__screenshots__/**",
         "tsconfig.json",
-        "vite.config.ts",
+        "!src/**/__screenshots__/**",
         "vitest.config.ts"
       ],
       "output": [],
       "dependencies": [
-        "build",
         "../testing:ci",
-        "../internals/vite:ci"
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ],
       "env": {
         "NODE_ENV": "production"
@@ -1058,23 +1056,22 @@
     "test:coverage": {
       "command": "playwright-lock 'vitest run --coverage'",
       "files": [
+        "dist/**/*.js",
         "src/**/*.test.ts",
-        "!src/**/*.test.lighthouse.ts",
-        "!src/**/*.test.visual.ts",
-        "!src/**/*.test.axe.ts",
-        "!src/**/*.test.ssr.ts",
-        "!src/**/__screenshots__/**",
         "tsconfig.json",
-        "vite.config.ts",
+        "!src/**/__screenshots__/**",
         "vitest.config.ts"
       ],
       "output": [
         "coverage/unit/**"
       ],
       "dependencies": [
-        "build",
         "../testing:ci",
-        "../internals/vite:ci"
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ],
       "env": {
         "NODE_ENV": "production"
@@ -1107,6 +1104,7 @@
       "command": "playwright-lock 'vitest run --config=vitest.visual.ts'",
       "clean": false,
       "files": [
+        "dist/**/*.js",
         "src/index.test.visual.ts",
         "src/**/*.test.visual.ts",
         "vitest.visual.html",
@@ -1117,13 +1115,17 @@
         "coverage/visual/**"
       ],
       "dependencies": [
-        "build",
-        "../internals/vite:ci"
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ]
     },
     "test:axe": {
       "command": "playwright-lock 'vitest run --config=vitest.axe.ts'",
       "files": [
+        "dist/**/*.js",
         "src/**/*.test.axe.ts",
         "tsconfig.json",
         "vitest.axe.ts"
@@ -1132,8 +1134,11 @@
         "coverage/axe/**"
       ],
       "dependencies": [
-        "build",
-        "../internals/vite:ci"
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ],
       "env": {
         "NODE_ENV": "production"
@@ -1142,16 +1147,25 @@
     "test:ssr": {
       "command": "playwright-lock 'vitest run --config=vitest.ssr.ts'",
       "files": [
+        "dist/**/*.js",
         "src/**/*.test.ssr.ts",
         "tsconfig.json",
-        "vitest.ssr.ts"
+        "vitest.ssr.ts",
+        "../themes/dist/**/*.css"
       ],
       "output": [
         "coverage/ssr/**"
       ],
       "dependencies": [
-        "build",
-        "../internals/vite:ci"
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        },
+        {
+          "script": "../themes:build",
+          "cascade": false
+        }
       ],
       "env": {
         "NODE_ENV": "production"
