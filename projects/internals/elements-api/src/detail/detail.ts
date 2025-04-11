@@ -11,7 +11,7 @@ const showdownOptions = { simplifiedAutoLink: true };
 export class Detail extends LitElement {
   @property({ type: String }) tag = '';
 
-  @property({ type: String }) type: 'property' | 'event' | 'slot' | 'story';
+  @property({ type: String }) type: 'description' | 'property' | 'event' | 'slot' | 'story';
 
   @property({ type: String }) value: string;
 
@@ -29,6 +29,7 @@ export class Detail extends LitElement {
   render() {
     return this.element
       ? html`
+      ${this.type === 'description' ? html`<div .innerHTML=${this.#markdown.makeHtml(this.element.manifest.description ?? '')}></div>` : nothing}
       ${this.type === 'event' ? html`<div .innerHTML=${this.#markdown.makeHtml(`<code>${this.value}</code>: ` + this.element.manifest.events?.find(m => m.name === this.value)?.description)}></div>` : nothing}
       ${this.type === 'property' ? html`<div .innerHTML=${this.#markdown.makeHtml(this.element.manifest.members?.find(m => m.name === this.value)?.description ?? '')}></div>` : nothing}
       ${this.type === 'slot' ? html`<div .innerHTML=${this.#markdown.makeHtml(this.element.manifest.slots?.find(m => m.name === this.value)?.description ?? '')}></div>` : nothing}
