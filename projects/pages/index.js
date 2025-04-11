@@ -69,23 +69,28 @@ async function compressFile(filePath) {
   }
 }
 
-async function processDirectory(dir) {
-  try {
-    const entries = await readdir(dir, { withFileTypes: true });
-    for (const entry of entries) {
-      const fullPath = join(dir, entry.name);
-      if (entry.isDirectory()) {
-        await processDirectory(fullPath);
-      } else {
-        await compressFile(fullPath);
-      }
+async function getAllFilePaths(dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const paths = [];
+
+  for (const entry of entries) {
+    const fullPath = join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      // Recursively get paths from subdirectories
+      const subPaths = await getAllFilePaths(fullPath);
+      paths.push(...subPaths);
+    } else {
+      paths.push(fullPath);
     }
-  } catch (error) {
-    console.error(`Error processing directory ${dir}:`, error);
   }
+
+  return paths;
 }
 
+const files = await getAllFilePaths('./dist');
+
 console.log('Starting compression...');
-processDirectory('./dist')
+Promise.all(files.map(path => compressFile(path)))
   .then(() => console.log(`Compressed files: ${count}\nCompression complete!`))
   .catch(error => console.error('Compression failed:', error));
