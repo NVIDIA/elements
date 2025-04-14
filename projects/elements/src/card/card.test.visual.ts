@@ -20,18 +20,34 @@ function template(theme: '' | 'dark' = '') {
     import '@nvidia-elements/core/button/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
-  <nve-card style="width:400px; height:200px">
-    <nve-card-header>
-      <div slot="title">•︎•︎•︎</div>
-      <div slot="subtitle">•︎•︎•︎</div>
-      <nve-icon-button slot="header-action" icon-name="more-actions" container="flat"></nve-icon-button>
-    </nve-card-header>
-    <nve-card-content>
-      •︎•︎•︎
-    </nve-card-content>
-    <nve-card-footer>
-      <nve-button style="margin-left: auto">•︎•︎•︎</nve-button>
-    </nve-card-footer>
-  </nve-card>
+  <div nve-layout="column gap:md pad:sm">
+    <nve-card style="width:400px; height:200px">
+      <nve-card-header>
+        <h2 nve-text="heading">•︎•︎•︎•︎•︎•︎</h2>
+        <h3 nve-text="heading xs muted">•︎•︎•︎•︎•︎•︎</h3>
+        <nve-icon-button slot="header-action" icon-name="more-actions" container="flat"></nve-icon-button>
+      </nve-card-header>
+      <nve-card-content>
+        •︎•︎•︎
+      </nve-card-content>
+      <nve-card-footer>
+        <nve-button style="margin-left: auto">•︎•︎•︎</nve-button>
+      </nve-card-footer>
+    </nve-card>
+
+    <nve-card container="flat" style="width:400px; height:200px">
+      <nve-card-header>
+        <h2 nve-text="heading">•︎•︎•︎•︎•︎•︎</h2>
+        <h3 nve-text="heading xs muted">•︎•︎•︎•︎•︎•︎</h3>
+        <nve-icon-button slot="header-action" icon-name="more-actions" container="flat"></nve-icon-button>
+      </nve-card-header>
+      <nve-card-content>
+        •︎•︎•︎
+      </nve-card-content>
+      <nve-card-footer>
+        <nve-button container="flat" style="margin-left: auto">•︎•︎•︎</nve-button>
+      </nve-card-footer>
+    </nve-card>
+  </div>
   `;
 }
