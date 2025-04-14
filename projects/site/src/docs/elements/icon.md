@@ -25,7 +25,12 @@ import '@nvidia-elements/core/icon/define.js';
 
 ## All Icons
 
-{% story 'nve-icon', 'PreviewAllIcons' %}
+<all-icons></all-icons>
+
+## Icon Catalog
+
+<icon-demo></icon-demo>
+<nve-notification-group position="bottom" alignment="end"></nve-notification-group>
 
 ## Status
 
@@ -66,3 +71,6 @@ Icons can be aliased to a different name. This can be useful for context specifi
 Direct SVG paths can be provided for rendering.
 
 {% story 'nve-icon', 'Source' %}
+
+<script type="module" src="/_internal/stories/icon/icon-demo.js"></script>
+<script type="module" src="/_internal/stories/icon/all-icons.js"></script>
