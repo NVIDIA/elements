@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.31.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.5...@nvidia-elements/core-v1.31.6) (2025-04-14)
+
+
+### Bug Fixes
+
+* **elements:** card container layers ([ce9e527](https://github.com/NVIDIA/elements/commit/ce9e5278265412b8afa8a9a47d6a7d8c4741b15d))
+* **styles:** leading trim ([b1c5743](https://github.com/NVIDIA/elements/commit/b1c574300c93f0f904c42d3981b97044477058e1))
+
 ## [@nvidia-elements/core-v1.31.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.4...@nvidia-elements/core-v1.31.5) (2025-04-10)
 
 
