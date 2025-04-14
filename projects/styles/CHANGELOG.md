@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.9.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.9.0...@nvidia-elements/styles-v1.9.1) (2025-04-14)
+
+
+### Bug Fixes
+
+* **styles:** set nve-layout="row" to 100% width ([f4c3ae4](https://github.com/NVIDIA/elements/commit/f4c3ae44369ea6b6a83e87e6141dd5d1b1790370))
+
 ## [@nvidia-elements/styles-v1.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.8.0...@nvidia-elements/styles-v1.9.0) (2025-03-13)
 
 
