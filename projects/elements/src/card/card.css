@@ -33,6 +33,8 @@
 }
 
 :host([container='flat']) {
+  --nve-sys-interaction-background: unset;
+  --nve-sys-interaction-field-background: unset;
   --background: transparent;
   --border-bottom: none;
   --border-radius: 0;
