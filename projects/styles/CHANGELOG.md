@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.9.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.9.1...@nvidia-elements/styles-v1.9.2) (2025-04-14)
+
+
+### Bug Fixes
+
+* **styles:** leading trim ([b1c5743](https://github.com/NVIDIA/elements/commit/b1c574300c93f0f904c42d3981b97044477058e1))
+
 ## [@nvidia-elements/styles-v1.9.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.9.0...@nvidia-elements/styles-v1.9.1) (2025-04-14)
 
 
