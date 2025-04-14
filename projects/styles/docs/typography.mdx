@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import { Canvas } from '@nve-internals/storybook/blocks';
 import '@nvidia-elements/core/button/define.js';
-import { Type, Color, Weights, Transforms, Link, List, OrderedList, UnstyledList, NavList, Headings, Size, LeadingTrim, LineHeightFixed, LineHeightRelative } from './typography.stories';
+import { Type, Color, Weights, Transforms, Link, List, OrderedList, UnstyledList, NavList, Headings, Size, LineHeightFixed, LineHeightRelative } from './typography.stories';
 import { Text } from '../../themes/docs/tokens.stories';
 
 <Meta title="Foundations/Typography/Documentation" />
@@ -92,13 +92,6 @@ Some frameworks and libraries may require additional configuration to use the `n
 ## Size
 
 <Canvas of={Size} />
-
-## Leading Trim
-
-By default all `nve-text` attributes use [leading-trim](https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202) to remove excesss whitespace between lines. This provides a more precise layout.
-Due to the use of `::before` and `::after` to polyfill the `leading-trim` behavior it may be necessary to disable this behavior. This can be done by applying `nve-text="trim:none"`.
-
-<Canvas of={LeadingTrim} />
 
 ## Line height
 
