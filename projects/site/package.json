@@ -8,6 +8,7 @@
     "dev": "wireit",
     "build": "wireit",
     "lint": "wireit",
+    "lint:fix": "wireit",
     "preview": "wireit"
   },
   "wireit": {
@@ -87,6 +88,9 @@
       "dependencies": [
         "../internals/eslint:ci"
       ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix"
     }
   },
   "dependencies": {

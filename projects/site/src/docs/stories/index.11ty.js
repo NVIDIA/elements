@@ -1,7 +1,7 @@
 import { join } from 'node:path';
 import { MetadataService } from '@nve-internals/metadata';
 
-export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
+export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
 const metadata = await MetadataService.getMetadata();
 const stories = metadata['@nvidia-elements/core'].elements.flatMap(element => {

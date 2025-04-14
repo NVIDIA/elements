@@ -9,6 +9,8 @@
     "ci": "wireit"
   },
   "dependencies": {
+    "@html-eslint/eslint-plugin": "0.38.1",
+    "@html-eslint/parser": "0.38.0",
     "@eslint/js": "catalog:",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-lit": "1.15.0",

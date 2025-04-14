@@ -28,7 +28,7 @@ void Promise.all([
   const codeblock = globalThis.document.querySelector<CodeBlock>('nve-codeblock')!;
 
   // workaround for syntax highlighting issue for Lit example
-  const customStyle = document.createElement('style');
+  const customStyle = globalThis.document.createElement('style');
   customStyle.textContent = `
     .hljs-subst:has(.hljs-variable.language_) {
       color: var(--nve-text-color) !important;

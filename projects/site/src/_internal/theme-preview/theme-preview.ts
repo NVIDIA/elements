@@ -2,9 +2,6 @@ import { css, html, LitElement } from 'lit';
 import type { PropertyValues } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
-
-/* eslint-disable no-inline-css/no-restricted-imports */
-
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/button-group/define.js';
@@ -279,9 +276,9 @@ export class ThemePreview extends LitElement {
     super.firstUpdated(changedProperties);
 
     // NOTE: manually applying <style> tags to root DOM
-    const styleEl = document.createElement('style');
+    const styleEl = globalThis.document.createElement('style');
     styleEl.textContent = ThemePreview.styles.map(s => s.cssText).join(' ');
-    document.head.prepend(styleEl);
+    globalThis.document.head.prepend(styleEl);
 
     // NOTE: set clones of all the scale based token properties diectly on nvd-theme-preview
     const cssprops = getAllRootCSSCustomProperties();
