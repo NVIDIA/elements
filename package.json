@@ -179,10 +179,13 @@
       "command": "prettier --config prettier.config.js --write .",
       "dependencies": [
         "./projects/elements:lint:fix",
+        "./projects/internals/elements-api:lint:fix",
+        "./projects/internals/metadata:lint:fix",
         "./projects/labs/behaviors-alpine:lint:fix",
         "./projects/labs/code:lint:fix",
         "./projects/labs/playwright-screencast:lint:fix",
         "./projects/labs/snippets:lint:fix",
+        "./projects/site:lint:fix",
         "./projects/storybook:lint:fix",
         "./projects/testing:lint:fix"
       ]
