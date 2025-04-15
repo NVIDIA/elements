@@ -217,7 +217,7 @@ video {
 /* Features */
 
 .feature {
-  width: 364px;
+  max-width: 364px;
   text-wrap: pretty;
 
   .feature-icon {
