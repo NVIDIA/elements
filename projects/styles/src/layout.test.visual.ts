@@ -17,6 +17,23 @@ describe('column visual', () => {
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
+  test('column nested should match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'column-width',
+      /* html */ `
+      <section style="min-width: 300px; padding: 12px;">
+        <section nve-layout="column">
+          <div></div>
+          <div></div>
+          <div></div>
+        </section>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
   test('column gap should match visual baseline', async () => {
     const report = await visualRunner.render(
       'column-gap',
@@ -196,6 +213,26 @@ describe('column visual', () => {
 
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
+
+  test('columns with nested rows should match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'columns-with-nested-rows',
+      /* html */ `
+      <section nve-layout="column gap:sm" style="width: 300px; padding: 12px;">
+        <section nve-layout="row gap:sm">
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="row gap:sm">
+          <div></div>
+          <div></div>
+        </section>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
 });
 
 describe('row visual', () => {
@@ -355,6 +392,66 @@ describe('row visual', () => {
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
+  test('row nested align:space-around should match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'row-nested-align-space-around',
+      /* html */ `
+      <section nve-layout="row align:space-around" style="min-width: 450px">
+        <section nve-layout="row gap:md">
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="row gap:md">
+          <div></div>
+          <div></div>
+        </section>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('row nested align:space-between should match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'row-nested-align-space-between',
+      /* html */ `
+      <section nve-layout="row align:space-between" style="min-width: 450px">
+        <section nve-layout="row gap:md">
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="row gap:md">
+          <div></div>
+          <div></div>
+        </section>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('row nested align:space-evenly should match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'row-nested-align-space-evenly',
+      /* html */ `
+      <section nve-layout="row align:space-evenly" style="min-width: 450px">
+        <section nve-layout="row gap:md">
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="row gap:md">
+          <div></div>
+          <div></div>
+        </section>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
   test('row align:horizontal-stretch should match visual baseline', async () => {
     const report = await visualRunner.render(
       'row-align-horizontal-stretch',
@@ -408,6 +505,46 @@ describe('row visual', () => {
         <div></div>
         <div></div>
         <div></div>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('rows with nested rows should match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'rows-with-nested-rows',
+      /* html */ `
+      <section nve-layout="row gap:sm" style="width: 300px">
+        <section nve-layout="row gap:sm">
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="row gap:sm">
+          <div></div>
+          <div></div>
+        </section>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('rows with nested columns should match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'rows-with-nested-columns',
+      /* html */ `
+      <section nve-layout="row gap:sm" style="width: 300px">
+        <section nve-layout="column gap:sm">
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="column gap:sm">
+          <div></div>
+          <div></div>
+        </section>
       </section>
     `
     );
