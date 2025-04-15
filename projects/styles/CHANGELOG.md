@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.9.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.9.2...@nvidia-elements/styles-v1.9.3) (2025-04-15)
+
+
+### Bug Fixes
+
+* **styles:** align space options ([6382f8b](https://github.com/NVIDIA/elements/commit/6382f8ba3dee92b9ab2c8c49c1e8a113d68a2841))
+
 ## [@nvidia-elements/styles-v1.9.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.9.1...@nvidia-elements/styles-v1.9.2) (2025-04-14)
 
 
