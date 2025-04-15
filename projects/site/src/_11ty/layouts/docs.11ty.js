@@ -110,6 +110,10 @@ export function render(data) {
               display: block;
             }
           }
+
+          nve-api-summary {
+            min-height: 65px;
+          }
         </style>
         <script type="module">
           const systemOptionsPanel = document.querySelector('#system-options-panel');
