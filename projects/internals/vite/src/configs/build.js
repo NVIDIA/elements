@@ -37,6 +37,7 @@ export const libraryBuildConfig = {
       entry: {
         index: resolve(process.cwd(), './src/index.ts'),
         ...[
+          ...globSync('./src/**/*.stories.ts'),
           ...globSync('./src/**/define.ts'),
           ...globSync('./src/**/server.ts'),
           ...globSync('./src/**/index.ts'),
