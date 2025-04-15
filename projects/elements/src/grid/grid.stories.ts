@@ -1,6 +1,6 @@
 import { LitElement, unsafeCSS, html, nothing } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { getItems, grid } from '../../test/demo.js';
+import { getItems, grid } from '../test/demo.js';
 import layout from '@nvidia-elements/styles/layout.css?inline';
 import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/badge/define.js'
@@ -655,7 +655,7 @@ class InfiniteScrollDemo extends LitElement {
 
   @state() private rows = this.#group(grid(10000).rows, 100);
 
-  @state() private grid = grid(0, 4)
+  @state() private grid: { columns: { id: string; label: string; sort: string }[]; rows: Partial<{ id: string; cells: { id: string; label: string }[] }>[] } = grid(0, 4)
 
   render() {
     return html`
