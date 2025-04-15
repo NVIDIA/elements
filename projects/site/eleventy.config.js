@@ -11,6 +11,7 @@ export default function (eleventyConfig) {
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
+
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
       base: BASE_URL,
