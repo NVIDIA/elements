@@ -47,7 +47,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
           <div
             class="content trailing escaping browser"
             nve-layout="column gap:xl align:horizontal-stretch align:vertical-center "
-            style="padding-left: 0px;height:100vh;">
+            style="padding-left: 0px; height: 100vh;">
             <video autoplay loop muted>
               <source
                 src="https://cdn-prod.nvidia.com/assets/elements/splash/hero-video-tilted-01.webm"
@@ -59,6 +59,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
         <!--  Section : Ideas to Reality -->
         <section>
           <nvd-starry-sky class="background" style="opacity:50%"></nvd-starry-sky>
+
           <div class="content" nve-layout="column align:center gap:xxl">
             <div nve-text="semibold display center">
               <span class="silver-gradient gradient-txt">Turn your ideas</span>
@@ -109,39 +110,15 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
             </div>
             <!-- /* TODO: orange and blue layers should be relative size */ -->
 
-            <div style="position: relative;">
-              <div
-                class="orange-layer"
-                style="  position: absolute;
-              border-radius: 50%;
-              filter: blur(100px);
-              width: 600px;
-              height: 600px;
-              background: linear-gradient(to right, #e3a6ff 20%, #9ecfff 87%);
-              opacity: 0.7;
-              top: 32px;
-              right: -48px;"></div>
-              <div
-                class="orange-layer-2"
-                style=" position: absolute;
-              border-radius: 50%;
-              filter: blur(100px);
-              width: 400px;
-              height: 400px;
-              background: linear-gradient(to top right, #9ecfff 87%, #e3a6ff 20%);
-              opacity: 0.6;
-              top: 24px;
-              right: -24px;
-              filter: blur(80px);
-              animation: float 10s ease-in-out infinite;"></div>
-              <div class="media-container">
-                <video loop autoplay muted>
-                  <source
-                    src="https://cdn-prod.nvidia.com/assets/elements/screencast/browse-pattern-snippets-dark.webm"
-                    type="video/webm" />
-                  Your browser does not support the video tag or WebM format.
-                </video>
-              </div>
+            <div class="media-container">
+              <div class="glint"></div>
+              <div class="glimmer"></div>
+              <video loop autoplay muted>
+                <source
+                  src="https://cdn-prod.nvidia.com/assets/elements/screencast/browse-pattern-snippets-dark.webm"
+                  type="video/webm" />
+                Your browser does not support the video tag or WebM format.
+              </video>
             </div>
           </div>
         </section>
@@ -240,7 +217,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
             <div nve-layout="column &lg|row align:center gap:xl" style="align-items: center">
               <nvd-framework-selector></nvd-framework-selector>
               <div class="code-container">
-                <nve-codeblock style="width: 494px; height: 512px; font-size: 12px;" language="html"></nve-codeblock>
+                <nve-codeblock style="width: 494px; height: 516px; font-size: 12px;" language="html"></nve-codeblock>
               </div>
             </div>
           </div>
@@ -394,38 +371,14 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
                 </div>
               </div>
             </div>
-            <div style="position: relative;">
-              <div
-                class="orange-layer"
-                style="  position: absolute;
-          border-radius: 50%;
-          filter: blur(100px);
-          width: 600px;
-          height: 600px;
-          background: linear-gradient(to right, #ffc46c, #ff9e4a);
-          opacity: 0.7;
-          top: 32px;
-          right: -48px;"></div>
-              <div
-                class=" orange-layer-2"
-                style=" position: absolute;
-          border-radius: 50%;
-          filter: blur(100px);
-          width: 400px;
-          height: 400px;
-          background: linear-gradient(to top right, #ff9e4a, #ffc46c);
-          opacity: 0.6;
-          top: 24px;
-          right: -24px;
-          filter: blur(80px);
-          animation: float 10s ease-in-out infinite;"></div>
-              <div class="media-container">
-                <video loop autoplay muted>
-                  <source
-                    src="https://cdn-prod.nvidia.com/assets/elements/screencast/layout-typography-snippets-dark.webm" />
-                  Your browser does not support the video tag or WebM format.
-                </video>
-              </div>
+            <div class="media-container">
+              <div class="glint orange"></div>
+              <div class="glimmer orange"></div>
+              <video loop autoplay muted>
+                <source
+                  src="https://cdn-prod.nvidia.com/assets/elements/screencast/layout-typography-snippets-dark.webm" />
+                Your browser does not support the video tag or WebM format.
+              </video>
             </div>
           </div>
         </section>
