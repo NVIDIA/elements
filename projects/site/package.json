@@ -19,6 +19,12 @@
       ]
     },
     "dev": {
+      "dependencies": [
+        "build:watch",
+        "../elements:build:watch"
+      ]
+    },
+    "build:watch": {
       "command": "pnpm exec eleventy --serve --port=8082",
       "service": true,
       "dependencies": [
