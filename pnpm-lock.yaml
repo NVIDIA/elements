@@ -22,7 +22,7 @@ catalogs:
       specifier: ^1.1.7
       version: 1.1.7
     '@lit-labs/virtualizer':
-      specifier: ^2.0.15
+      specifier: ^2.1.0
       version: 2.1.0
     '@rollup/plugin-terser':
       specifier: 0.4.4
@@ -3052,7 +3052,7 @@ packages:
     engines: {node: '>=13.9.0'}
 
   '@lit-labs/virtualizer@2.1.0':
-    resolution: {integrity: sha512-I79sNaalK9rD6FWO/AoxBMnA6jjNBrQu7F6lzz8W/GkQLcqveMWK3IrJAilso+XeFFn7BvlxBv6FqZaoMt+Qkg==}
+    resolution: {integrity: sha512-I79sNaalK9rD6FWO/AoxBMnA6jjNBrQu7F6lzz8W/GkQLcqveMWK3IrJAilso+XeFFn7BvlxBv6FqZaoMt+Qkg==, tarball: https://registry.npmjs.org
 
   '@lit/react@1.0.7':
     resolution: {integrity: sha512-cencnwwLXQKiKxjfFzSgZRngcWJzUDZi/04E0fSaF86wZgchMdvTyu+lE36DrUfvuus3bH8+xLPrhM1cTjwpzw==}
