@@ -149,3 +149,83 @@ export const Full = {
     <section nve-layout="row full"></section>
   `
 }
+
+export const Spacing = {
+  render: () => html`
+<style>
+  nve-card {
+    min-width: 60px;
+    min-height: 60px;
+  }
+</style>
+<div nve-layout="column gap:lg align:stretch">
+  <h2>Space Around</h2>
+  <section nve-layout="row gap:md align:space-around">
+    <div nve-layout="row gap:sm">
+      <nve-search>
+        <input placeholder="Search" type="search" />
+      </nve-search>
+    </div>
+    <div nve-layout="row gap:sm">
+      <nve-icon-button icon-name="filter"></nve-icon-button>
+      <nve-icon-button icon-name="sort-descending"></nve-icon-button>
+    </div>
+  </section>
+
+  <h2>Space Between</h2>
+  <section nve-layout="row gap:md align:space-between">
+    <div nve-layout="row gap:sm">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+    </div>
+    <div nve-layout="row gap:sm">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+    </div>
+  </section>
+
+  <h2>Space Between + Full</h2>
+  <section nve-layout="row gap:md align:space-between">
+    <div nve-layout="row full gap:sm">
+      <nve-search>
+        <input placeholder="Search" type="search" />
+      </nve-search>
+    </div>
+    <div nve-layout="row gap:sm">
+      <nve-icon-button icon-name="filter"></nve-icon-button>
+      <nve-icon-button icon-name="sort-descending"></nve-icon-button>
+    </div>
+  </section>
+
+  <h2>Space Evenly</h2>
+  <section nve-layout="row gap:md align:space-evenly">
+    <div nve-layout="row gap:sm">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+    </div>
+    <div nve-layout="row gap:sm">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+    </div>
+  </section>
+
+  <h2>Nested Rows</h2>
+  <section nve-layout="row gap:md">
+    <div nve-layout="row gap:sm">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+    </div>
+    <div nve-layout="row gap:sm">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+    </div>
+  </section>
+
+  <h2>Rows</h2>
+  <section nve-layout="row gap:sm">
+    <nve-card></nve-card>
+    <nve-card></nve-card>
+  </section>
+</div>
+  `
+}
