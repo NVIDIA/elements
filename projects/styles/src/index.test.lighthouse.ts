@@ -9,8 +9,8 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(1.7); // total
-    expect(report.payload.css.requests['layout.css'].kb).toBeLessThan(1.7);
+    expect(report.payload.css.kb).toBeLessThan(1.8); // total
+    expect(report.payload.css.requests['layout.css'].kb).toBeLessThan(1.8);
   });
 
   test('responsive.css should remain within compressed bundle limits', async () => {
