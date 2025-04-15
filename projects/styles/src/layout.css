@@ -17,7 +17,6 @@
     display: flex;
     margin: 0;
     min-height: 0;
-    width: 100%;
   }
 
   &[nve-layout~='full'],
@@ -260,4 +259,9 @@
       @mixin auto-columns;
     }
   }
+}
+
+/* rows fill unless they are nested with child inline rows */
+:not([nve-layout~='row']) > [nve-layout~='row'] {
+  width: 100%;
 }
