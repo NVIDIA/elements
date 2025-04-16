@@ -33,26 +33,25 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
 
       <main>
         <!-- Hero Section -->
-        <section class="hero">
-          <div class="content leading" nve-layout="column gap:xl align:vertical-center">
-            <span nve-text="display xl semibold emphasis">
-              Make it happen,<br />
-              <span>with</span> <span class="lime-green-gradient gradient-txt">elements.</span>
-            </span>
-            <span nve-text="regular heading lg default relaxed">
-              Nvidia Elements is a flexible, framework-agnostic design system and toolkit that empowers teams to build
-              faster, together.
-            </span>
-          </div>
-          <div
-            class="content trailing escaping browser"
-            nve-layout="column gap:xl align:horizontal-stretch align:vertical-center "
-            style="padding-left: 0px; height: 100vh;">
-            <video autoplay loop muted>
-              <source
-                src="https://cdn-prod.nvidia.com/assets/elements/splash/hero-video-tilted-01.webm"
-                type="video/webm" />
-            </video>
+        <section id="hero">
+          <img
+            class="background"
+            src="https://cdn-prod.nvidia.com/assets/elements/hero/nv-wave-01.png"
+            alt="NVIDIA Background" />
+          <div class="content full">
+            <div class="layout">
+              <div id="hero-text" nve-layout="column gap:xl align:vertical-center">
+                <span nve-text="display xl semibold emphasis">
+                  Build faster, together<br />
+                  <span>with</span> <span class="lime-green-gradient gradient-txt">Elements.</span>
+                </span>
+                <span nve-text="regular heading lg default relaxed">
+                  NVIDIA Elements is a flexible, framework-agnostic design system and toolkit that empowers teams to
+                  build exceptional user experiences.
+                </span>
+              </div>
+              <nvd-animated-build></nvd-animated-build>
+            </div>
           </div>
         </section>
 
@@ -110,7 +109,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
             </div>
             <!-- /* TODO: orange and blue layers should be relative size */ -->
 
-            <div class="media-container">
+            <div class="video-container">
               <div class="glint"></div>
               <div class="glimmer"></div>
               <video loop autoplay muted>
@@ -175,7 +174,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
 
             <div nve-layout="column &xl|row align:center gap:xl" style="align-items: center">
               <nvd-framework-selector></nvd-framework-selector>
-              <div class="code-container">
+              <div class="codeblock-container">
                 <nve-codeblock style="width: 494px; height: 516px; font-size: 12px;" language="html"></nve-codeblock>
               </div>
             </div>
@@ -331,7 +330,7 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
                 </div>
               </div>
             </div>
-            <div class="media-container">
+            <div class="video-container">
               <div class="glint orange"></div>
               <div class="glimmer orange"></div>
               <video loop autoplay muted>
