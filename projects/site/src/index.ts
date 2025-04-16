@@ -5,6 +5,8 @@ import '@nvidia-elements/code/codeblock/languages/typescript.js';
 import '@nvidia-elements/code/codeblock/languages/xml.js';
 import type { CodeBlock } from '@nvidia-elements/code/codeblock/index.js';
 
+import './_internal/animated-build/animated-build.js';
+
 import './_internal/framework-selector/index.js';
 import { frameworksById } from './_internal/framework-selector/frameworks.js';
 import type { FrameworkSelector } from './_internal/framework-selector/index.js';
