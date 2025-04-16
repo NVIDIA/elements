@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.31.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.6...@nvidia-elements/core-v1.31.7) (2025-04-16)
+
+
+### Bug Fixes
+
+* **elements:** update nve-panel trigger button style to wrap ([26ccdae](https://github.com/NVIDIA/elements/commit/26ccdaef5be6268e2c2f89ac67e85f559df41099))
+
 ## [@nvidia-elements/core-v1.31.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.5...@nvidia-elements/core-v1.31.6) (2025-04-14)
 
 
