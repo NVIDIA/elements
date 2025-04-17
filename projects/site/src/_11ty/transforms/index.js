@@ -4,6 +4,7 @@ import fs from 'node:fs';
 export async function elementLoaderTransform(content) {
   const ELEMENTS_PACKAGE = JSON.parse(fs.readFileSync('../elements/package.json', 'utf8'));
   const ELEMENTS_API_PACKAGE = JSON.parse(fs.readFileSync('../internals/elements-api/package.json', 'utf8'));
+  const MONACO_PACKAGE = JSON.parse(fs.readFileSync('../monaco/package.json', 'utf8'));
 
   const ELEMENTS_IMPORTS = Array.from(
     new Set(
@@ -27,6 +28,17 @@ export async function elementLoaderTransform(content) {
     .map(tagName => `import '@internals/elements-api/${tagName.replace('nve-api-', '')}/define.js';`)
     .join('\n');
 
+  const MONACO_IMPORTS = Array.from(
+    new Set(
+      Object.keys(MONACO_PACKAGE.exports)
+        .filter(key => key.endsWith('define.js'))
+        .map(key => key.replace('./', 'nve-monaco-').replace('/define.js', ''))
+        .filter(tagName => content?.includes(`<${tagName}`))
+    )
+  )
+    .map(tagName => `import '@nvidia-elements/monaco/${tagName.replace('nve-monaco-', '')}/define.js';`)
+    .join('\n');
+
   const ELEMENTS_CODE_IMPORTS = content.includes('<nve-codeblock')
     ? `
     import '@nvidia-elements/code/codeblock/languages/html.js';
@@ -36,8 +48,10 @@ export async function elementLoaderTransform(content) {
     import '@nvidia-elements/code/codeblock/define.js';`
     : '';
 
+  console.log(MONACO_IMPORTS);
   return content.replace(
     '</head>',
-    `<script type="module">${ELEMENTS_IMPORTS}\n${ELEMENTS_API_IMPORTS}\n${ELEMENTS_CODE_IMPORTS}</script>` + '</head>'
+    `<script type="module">${ELEMENTS_IMPORTS}\n${ELEMENTS_API_IMPORTS}\n${ELEMENTS_CODE_IMPORTS}\n${MONACO_IMPORTS}</script>` +
+      '</head>'
   );
 }

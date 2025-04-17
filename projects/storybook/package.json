@@ -16,6 +16,7 @@
     "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/behaviors-alpine": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@internals/elements-api": "workspace:*",
     "html-format": "1.1.7",
     "lit": "catalog:",
@@ -57,6 +58,7 @@
       "dependencies": [
         "../elements:build",
         "../labs/code:build",
+        "../monaco:build",
         "../styles:build",
         "../themes:build",
         "../starters/lit-library:build",
@@ -81,6 +83,8 @@
         "../elements/src/**/*.stories.ts",
         "../labs/code/docs/**/*.mdx",
         "../labs/code/docs/**/*.stories.ts",
+        "../monaco/docs/**/*.mdx",
+        "../monaco/docs/**/*.stories.ts",
         "../styles/docs/**/*.mdx",
         "../styles/docs/**/*.stories.ts",
         "../testing/docs/**/*.mdx",
@@ -94,6 +98,7 @@
       "dependencies": [
         "../elements:build",
         "../labs/code:build",
+        "../monaco:build",
         "../styles:build",
         "../themes:build",
         "../starters/lit-library:build",
