@@ -63,7 +63,9 @@
         "./projects/labs/code:ci",
         "./projects/labs/playwright-screencast:ci",
         "./projects/labs/snippets:ci",
+        "./projects/monaco:ci",
         "./projects/pages:ci",
+        "./projects/site:ci",
         "./projects/starters:ci",
         "./projects/starters/angular:ci",
         "./projects/starters/buildless:ci",
@@ -90,7 +92,8 @@
         "./projects/styles:test:lighthouse",
         "./projects/themes:test:lighthouse",
         "./projects/elements:test:lighthouse",
-        "./projects/labs/code:test:lighthouse"
+        "./projects/labs/code:test:lighthouse",
+        "./projects/monaco:test:lighthouse"
       ],
       "output": [
         ".metrics/metrics.txt"
@@ -144,6 +147,12 @@
         "release:elements"
       ]
     },
+    "release:monaco": {
+      "command": "cd projects/monaco && HUSKY=0 pnpm exec semantic-release",
+      "dependencies": [
+        "release:themes"
+      ]
+    },
     "release:styles": {
       "command": "cd projects/styles && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
@@ -185,6 +194,7 @@
         "./projects/labs/code:lint:fix",
         "./projects/labs/playwright-screencast:lint:fix",
         "./projects/labs/snippets:lint:fix",
+        "./projects/monaco:lint:fix",
         "./projects/site:lint:fix",
         "./projects/storybook:lint:fix",
         "./projects/testing:lint:fix"

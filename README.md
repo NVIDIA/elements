@@ -128,6 +128,7 @@ git commit -a -m "fix(core): disabled multi-select"
 | `playground`                 | `/projects/playground`        |
 | `testing`                    | `/projects/testing`           |
 | `themes`                     | `/projects/themes`            |
+| `monaco`                     | `/projects/monaco`            |
 | `labs`                       | `/projects/labs`              |
 | `labs-behaviors-alpine`      | `/labs/behaviors-alpine`      |
 | `labs-playwright-screencast` | `/labs/playwright-screencast` |
