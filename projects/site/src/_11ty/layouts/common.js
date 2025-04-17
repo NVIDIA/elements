@@ -283,9 +283,6 @@ export const renderDocsNav = data => /* html */ `
 </nve-tree>
 `;
 
-const IS_MR_PREVIEW = process.env.PAGES_BASE_URL?.includes('mr-preview');
-const IS_DEV_MODE = process.env.ELEVENTY_RUN_MODE === 'serve' || process.env.PAGES_BASE_URL === '/elements/preview/';
-export const PROD_REDIRECT =
-  !IS_MR_PREVIEW && !IS_DEV_MODE
-    ? /* html */ `<meta http-equiv="refresh" content="0; url=/elements/api/" /><style>body { display: none !important; }</style>`
-    : /* html */ `<!-- IS_MR_PREVIEW: ${IS_MR_PREVIEW}, IS_DEV_MODE: ${IS_DEV_MODE} -->`;
+export const IS_MR_PREVIEW = process.env.PAGES_BASE_URL?.includes('mr-preview');
+export const IS_DEV_MODE =
+  process.env.ELEVENTY_RUN_MODE === 'serve' || process.env.PAGES_BASE_URL === '/elements/preview/';
