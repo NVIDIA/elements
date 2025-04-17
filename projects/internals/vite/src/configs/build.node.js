@@ -29,7 +29,8 @@ export const libraryNodeBuildConfig = {
     watch: mode === 'watch' ? {} : undefined,
     outDir: dist(),
     emptyOutDir: false,
-    sourcemap: true,
+    sourcemap: false,
+    minify: false,
     target: 'esnext',
     lib: {
       entry: {
@@ -58,45 +59,4 @@ export const libraryNodeBuildConfig = {
       ]
     }
   }
-
-  // plugins: [initial(), tsc(), cem(), dts(), bundle(), storiesToJSON()],
-  // build: {
-
-  //   lib: {
-  //     entry: {
-  //       index: resolve(process.cwd(), './src/index.ts'),
-  //       ...[
-  //         ...globSync('./src/**/define.ts'),
-  //         ...globSync('./src/**/server.ts'),
-  //         ...globSync('./src/**/index.ts'),
-  //         ...globSync('./src/**/index.tsx')
-  //       ].reduce((p, i) => {
-  //         // all component entrypoints
-  //         return { ...p, [i.replace('src/', '').replace('.tsx', '').replace('.ts', '')]: resolve(process.cwd(), i) };
-  //       }, {})
-  //     }
-  //   },
-  //   rollupOptions: {
-  //     preserveEntrySignatures: 'strict',
-  //     external: [
-  //       ...Object.keys(packageFile.dependencies || {}),
-  //       ...Object.keys(packageFile.peerDependencies || {}),
-  //       ...Object.keys(packageFile.optionalDependencies || {})
-  //     ].map(packageName => new RegExp(`^${packageName}(/.*)?`)),
-  //     output: [
-  //       {
-  //         format: 'esm',
-  //         preserveModules: true,
-  //         assetFileNames: '[name].[ext]',
-  //         entryFileNames: '[name].js'
-  //       }
-  //     ],
-  //     plugins: [
-  //       mode === 'production' ? minifyHTML() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
-  //       mode === 'production'
-  //         ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
-  //         : false // https://github.com/vitejs/vite/issues/8848
-  //     ]
-  //   }
-  // }
 };

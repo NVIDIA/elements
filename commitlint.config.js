@@ -30,7 +30,8 @@ export default {
         'labs-behaviors-alpine',
         'labs-code',
         'labs-playwright-screencast',
-        'labs-snippets'
+        'labs-snippets',
+        'monaco'
       ]
     ]
   }
