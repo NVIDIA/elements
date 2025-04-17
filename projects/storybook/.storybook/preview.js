@@ -246,6 +246,7 @@ export const parameters = {
           'Examples'
         ],
         'Testing',
+        'Monaco Editor',
         'Labs',
         [
           'About',

@@ -15,6 +15,8 @@ export default {
     '../../labs/behaviors-alpine/src/**/*.stories.ts',
     '../../labs/code/src/**/*.mdx',
     '../../labs/code/src/**/*.stories.ts',
+    '../../monaco/src/**/*.mdx',
+    '../../monaco/src/**/*.stories.ts',
     '../../starters/lit-library/src/**/*.stories.ts',
     '../../styles/docs/**/*.mdx',
     '../../styles/docs/**/*.stories.ts',
@@ -52,7 +54,8 @@ export default {
       },
       build: {
         target: 'esnext', // https://github.com/storybookjs/storybook/issues/22223
-        minify: 'esbuild'
+        minify: 'esbuild',
+        assetsInclude: ['node_modules/@nvidia-elements/monaco/dist/*.worker.js']
       },
       optimizeDeps: {
         esbuildOptions: {
@@ -62,12 +65,6 @@ export default {
       resolve: {
         alias: {
           '@storybook/addon-docs': resolve('node_modules/@storybook/addon-docs'),
-          '@nvidia-elements/styles/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/styles/CHANGELOG.md?raw'),
-          '@nvidia-elements/themes/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/themes/CHANGELOG.md?raw'),
-          '@nvidia-elements/testing/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/testing/CHANGELOG.md?raw'),
-          '@nvidia-elements/core/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/core/CHANGELOG.md?raw'),
-          '@nvidia-elements/behaviors-alpine/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/behaviors-alpine/CHANGELOG.md?raw'),
-          '@nvidia-elements/code/CHANGELOG.md?raw': resolve('node_modules/@nvidia-elements/code/CHANGELOG.md?raw'),
           '@internals/storybook/blocks': resolve('.storybook/blocks.jsx')
         }
       }

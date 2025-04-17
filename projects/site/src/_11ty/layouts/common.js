@@ -258,6 +258,10 @@ export const renderDocsNav = data => /* html */ `
     Testing
     <nve-tree-node><a href="api/?path=/docs/testing-documentation--docs">Getting Started</a></nve-tree-node>
   </nve-tree-node>
+  <!-- <nve-tree-node ${data.page.url.includes('/docs/monaco/') ? 'expanded' : ''}>
+    Monaco
+    <nve-tree-node ${data.page.url === '/docs/monaco/editor/' ? 'highlighted' : ''}><a href="docs/monaco/editor/">Editor</a></nve-tree-node>
+  </nve-tree-node> -->
   <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''}>
     Labs
     <nve-tree-node ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}><a href="docs/labs/">About</a></nve-tree-node>
