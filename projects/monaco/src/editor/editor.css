@@ -1,0 +1,24 @@
+:host {
+  --min-height: 300px;
+  all: initial;
+  display: block;
+  visibility: inherit;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  contain: layout; /* https://developer.mozilla.org/en-US/docs/Web/CSS/contain */
+  height: 100%;
+  width: 100%;
+  outline: var(--nve-debug-element-outline, initial);
+  color-scheme: var(--nve-sys-color-scheme);
+  min-height: var(--min-height);
+}
+
+#editor {
+  width: 100%;
+  min-height: var(--min-height);
+}
+
+[internal-host]:has(.monaco-editor) #loading {
+  display: none;
+}

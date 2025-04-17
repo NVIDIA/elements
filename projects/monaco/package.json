@@ -1,0 +1,257 @@
+{
+  "name": "@nvidia-elements/monaco",
+  "version": "0.0.0",
+  "description": "Monaco Editor Web Component",
+  "homepage": "https://NVIDIA.github.io/elements/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git"
+  },
+  "type": "module",
+  "customElements": "custom-elements.json",
+  "contributes": {
+    "html": {
+      "customData": [
+        "./dist/data.html.json"
+      ]
+    }
+  },
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./custom-elements-jsx": {
+      "types": "./dist/custom-elements-jsx.d.ts"
+    },
+    "./data.html.json": "./dist/data.html.json",
+    "./*.stories.json": "./dist/*.stories.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./editor": {
+      "types": "./dist/editor/index.d.ts",
+      "default": "./dist/editor/index.js"
+    },
+    "./editor/index.js": {
+      "types": "./dist/editor/index.d.ts",
+      "default": "./dist/editor/index.js"
+    },
+    "./editor/define.js": {
+      "types": "./dist/editor/define.d.ts",
+      "default": "./dist/editor/define.js"
+    }
+  },
+  "sideEffects": true,
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "build:watch": "wireit",
+    "build:snippets": "wireit",
+    "lint": "wireit",
+    "test": "wireit",
+    "test:axe": "wireit",
+    "test:coverage": "wireit",
+    "test:watch": "wireit",
+    "test:lighthouse": "wireit"
+  },
+  "dependencies": {
+    "lit": "catalog:",
+    "monaco-editor": "0.52.2"
+  },
+  "peerDependencies": {
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
+    "@nvidia-elements/testing": "workspace:*",
+    "@nve-internals/eslint": "workspace:*",
+    "@nve-internals/vite": "workspace:*",
+    "@nvidia-elements/snippets": "workspace:*",
+    "@vitest/browser": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
+    "eslint": "catalog:",
+    "publint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  },
+  "wireit": {
+    "dev": {
+      "command": "vite",
+      "dependencies": [
+        "build:watch",
+        "../storybook:dev"
+      ]
+    },
+    "ci": {
+      "dependencies": [
+        "build",
+        "lint",
+        "publint",
+        "test:axe",
+        "test:coverage"
+      ]
+    },
+    "publint": {
+      "dependencies": [
+        "build"
+      ],
+      "command": "publint",
+      "files": [
+        "package.json"
+      ],
+      "output": []
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build",
+      "files": [
+        "../elements/dist/**/*.js",
+        "../themes/dist/**/*.css",
+        "src/**",
+        "!src/**/*.stories.ts",
+        "!src/**/*.mdx",
+        "!src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/*.test.axe.ts",
+        "!src/**/*.test.ssr.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../themes:build",
+          "cascade": false
+        }
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test": {
+      "command": "playwright-lock 'vitest run'",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "../testing:ci",
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
+    },
+    "test:coverage": {
+      "command": "playwright-lock 'vitest run --coverage'",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "vitest.config.ts"
+      ],
+      "output": [
+        "coverage/unit/**"
+      ],
+      "dependencies": [
+        "../testing:ci",
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    },
+    "test:lighthouse": {
+      "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
+      "files": [
+        "src/index.test.lighthouse.ts",
+        "src/**/*.test.lighthouse.ts",
+        "vitest.lighthouse.html",
+        "vitest.lighthouse.ts"
+      ],
+      "output": [
+        ".lighthouse"
+      ],
+      "dependencies": [
+        "build",
+        "../internals/vite:ci"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:axe": {
+      "command": "playwright-lock 'vitest run --config=vitest.axe.ts'",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.axe.ts",
+        "tsconfig.json",
+        "vitest.axe.ts"
+      ],
+      "output": [
+        "coverage/axe/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/eslint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix"
+    }
+  }
+}

@@ -20,8 +20,7 @@
     },
     "dev": {
       "dependencies": [
-        "build:watch",
-        "../elements:build:watch"
+        "build:watch"
       ]
     },
     "build:watch": {
@@ -53,6 +52,7 @@
         "../styles:build",
         "../themes:build",
         "../labs/code:build",
+        "../monaco:build",
         "../internals/elements-api:build"
       ],
       "env": {
@@ -114,6 +114,7 @@
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/playwright-screencast": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@sentry/browser": "catalog:",
