@@ -11,7 +11,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
   const storyModule = await import(`@nvidia-elements/core/${name}/${name}.stories.json`, { with: { type: 'json' } });
   const story = storyModule.default.stories.find(s => s.id === storyName);
   const reload =
-    process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story
+    process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story // eslint-disable-line no-undef
       ? /* html */ `
   <script type="module">
     import stories from '@nvidia-elements/core/${name}/${name}.stories.json' with { type: 'json' };

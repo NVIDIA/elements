@@ -1,5 +1,5 @@
 ---js
-import { renderBaseHead, PROD_REDIRECT } from './src/_11ty/layouts/common.js';
+import { renderBaseHead, IS_MR_PREVIEW, IS_DEV_MODE } from './src/_11ty/layouts/common.js';
 const title = 'Elements';
 const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
 const permalink = '/landing.html';
@@ -8,7 +8,8 @@ const permalink = '/landing.html';
 <!doctype html>
 <html lang="en" nve-theme="dark" nve-transition="auto">
   <head>
-    {{ PROD_REDIRECT }} {{ BASE_HEAD }}
+    {{ BASE_HEAD }}
+    <!-- IS_MR_PREVIEW: ${IS_MR_PREVIEW}, IS_DEV_MODE: ${IS_DEV_MODE} -->
     <link rel="stylesheet" href="./index.css" />
     <script type="module" src="./index.ts"></script>
   </head>
