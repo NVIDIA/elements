@@ -18,7 +18,7 @@ export const libraryBundleConfig = {
     minify: false, // https://github.com/vitejs/vite/issues/8848
     outDir: 'dist/bundles/',
     emptyOutDir: false,
-    sourcemap: true,
+    sourcemap: false,
     target: 'esnext',
     lib: {
       formats: ['es'],

@@ -59,7 +59,6 @@
     "./custom-elements.json": "./dist/custom-elements.json",
     "./data.html.json": "./dist/data.html.json",
     "./data.snippets.json": "./dist/data.snippets.json",
-    "./*.stories.json": "./dist/*.stories.json",
     "./css/*": "./dist/css/*",
     ".": {
       "types": "./dist/index.d.ts",

@@ -70,5 +70,8 @@ export const libraryBuildConfig = {
           : false // https://github.com/vitejs/vite/issues/8848
       ]
     }
+  },
+  esbuild: {
+    platform: 'neutral' // https://github.com/evanw/esbuild/issues/2649
   }
 };
