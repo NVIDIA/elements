@@ -29,9 +29,9 @@ export const htmlConfig = [
       ...html.configs['flat/recommended'].rules,
       '@html-eslint/require-title': 'off',
       '@html-eslint/no-extra-spacing-text': 'error',
-      '@html-eslint/no-extra-spacing-attrs': 'error',
-      '@html-eslint/require-closing-tags': 'off',
-      '@html-eslint/indent': ['error', 2],
+      '@html-eslint/no-extra-spacing-attrs': 'off', // prettier
+      '@html-eslint/indent': 'off', // prettier
+      '@html-eslint/require-closing-tags': 'off', // prettier
       '@html-eslint/attrs-newline': [
         'error',
         {

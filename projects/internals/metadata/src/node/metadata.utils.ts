@@ -20,7 +20,10 @@ import type {
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
 
-const stories: MetadataElementSories[] = globSync(`${resolve('../../elements')}/dist/**/*.stories.json`)
+const stories: MetadataElementSories[] = [
+  ...globSync(`${resolve('../../elements')}/dist/**/*.stories.json`),
+  ...globSync(`${resolve('../../monaco')}/dist/**/*.stories.json`)
+]
   .map(path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8')))
   .reduce((prev, next) => [...prev, next], []);
 
@@ -235,6 +238,7 @@ export async function getMetadata() {
     '@nvidia-elements/code': await getProjectMetadata('../../../../labs/code'),
     '@nvidia-elements/behaviors-alpine': await getProjectMetadata('../../../../labs/behaviors-alpine'),
     '@nvidia-elements/playwright-screencast': await getProjectMetadata('../../../../labs/playwright-screencast'),
+    '@nvidia-elements/monaco': await getProjectMetadata('../../../../monaco'),
     '@nve-internals/metadata': await getProjectMetadata('../../../../internals/metadata')
   } as MetadataSummary;
 }

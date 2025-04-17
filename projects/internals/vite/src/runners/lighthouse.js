@@ -61,16 +61,21 @@ function round(num) {
 function getPayload(lighthouseRequests) {
   const requests = lighthouseRequests
     .filter(r => r.mimeType === 'text/javascript' || r.mimeType === 'text/css')
-    .map(r => ({
-      kb: round(r.transferSize / 1000),
-      name: r.url
-        .split('/assets/')[1]
-        .replace(/-\w+\.css$/, '.css')
-        .replace(/-\w+\.js$/, '.js')
-    }));
+    .map(r => {
+      return {
+        kb: round(r.transferSize / 1000),
+        mimeType: r.mimeType,
+        name: !r.url.includes('/assets/')
+          ? r.url
+          : r.url
+              .split('/assets/')[1]
+              .replace(/-\w+\.css$/, '.css')
+              .replace(/-\w+\.js$/, '.js')
+      };
+    });
 
-  const js = requests.filter(r => r.name.endsWith('.js'));
-  const css = requests.filter(r => r.name.endsWith('.css'));
+  const js = requests.filter(r => r.mimeType === 'text/javascript');
+  const css = requests.filter(r => r.mimeType === 'text/css');
 
   return {
     javascript: {

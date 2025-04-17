@@ -36,5 +36,10 @@ export default [
     title: '@nvidia-elements/behaviors-alpine',
     permalink: '/labs-behaviors-alpine/',
     changelog: readFileSync('../labs/behaviors-alpine/CHANGELOG.md', 'utf8')
+  },
+  {
+    title: '@nvidia-elements/monaco',
+    permalink: '/monaco/',
+    changelog: readFileSync('../monaco/CHANGELOG.md', 'utf8')
   }
 ];

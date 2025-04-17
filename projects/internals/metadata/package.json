@@ -164,7 +164,18 @@
         "../../labs/playwright-screencast/coverage/axe/junit.xml",
         "../../labs/playwright-screencast/coverage/visual/junit.xml",
         "../../labs/playwright-screencast/coverage/ssr/junit.xml",
-        "../../labs/playwright-screencast/coverage/ssr/summary.json"
+        "../../labs/playwright-screencast/coverage/ssr/summary.json",
+        "../../monaco/package.json",
+        "../../monaco/README.md",
+        "../../monaco/CHANGELOG.md",
+        "../../monaco/dist/custom-elements.json",
+        "../../monaco/dist/**/*.stories.json",
+        "../../monaco/coverage/unit/coverage-summary.json",
+        "../../monaco/coverage/unit/junit.xml",
+        "../../monaco/coverage/axe/junit.xml",
+        "../../monaco/coverage/visual/junit.xml",
+        "../../monaco/coverage/ssr/junit.xml",
+        "../../monaco/coverage/ssr/summary.json"
       ],
       "output": [
         "static/index.json"
@@ -200,6 +211,10 @@
         },
         {
           "script": "../../labs/playwright-screencast:ci",
+          "cascade": false
+        },
+        {
+          "script": "../../monaco:ci",
           "cascade": false
         }
       ]

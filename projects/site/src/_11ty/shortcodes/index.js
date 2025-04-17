@@ -1,3 +1,6 @@
+import { resolve } from 'node:path';
+import { globSync } from 'glob';
+import { readFileSync } from 'node:fs';
 import { createPlaygroundURLFromStorySource } from '@nve-internals/elements-api';
 import markdown from '../libraries/markdown.js';
 
@@ -5,11 +8,16 @@ export async function apiShortcode(tag, type, value) {
   return /* html */ `<nve-api-detail tag="${tag}" type="${type}" value="${value}"></nve-api-detail>`;
 }
 
+const stories = [
+  ...globSync(`${resolve('../elements')}/dist/**/*.stories.json`),
+  ...globSync(`${resolve('../monaco')}/dist/**/*.stories.json`)
+].map(path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8')));
+
 export async function storyShortcode(tag, storyName, userConfig = { inline: true, height: '95%' }) {
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
   const name = tag.replace('nve-', '');
-  const storyModule = await import(`@nvidia-elements/core/${name}/${name}.stories.json`, { with: { type: 'json' } });
-  const story = storyModule.default.stories.find(s => s.id === storyName);
+
+  const story = stories.find(s => s.element === tag)?.stories?.find(s => s.id === storyName);
   const reload =
     process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story // eslint-disable-line no-undef
       ? /* html */ `
