@@ -2,7 +2,7 @@ import { expect, test, describe } from 'vitest';
 import { visualRunner } from '@internals/vite';
 
 describe('menu visual', () => {
-  test('dot should match visual baseline', async () => {
+  test('menu should match visual baseline', async () => {
     const report = await visualRunner.render('menu', template());
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
