@@ -133,6 +133,7 @@ git commit -a -m "fix(core): disabled multi-select"
 | `labs-behaviors-alpine`      | `/labs/behaviors-alpine`      |
 | `labs-playwright-screencast` | `/labs/playwright-screencast` |
 | `labs-code`                  | `/labs/code`                  |
+| `labs-entity`                | `/labs/entity`                |
 
 Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
 

@@ -51,6 +51,11 @@ export class Editor extends LitElement {
     if (!this.#editor) {
       const { monaco, styles } = await loadMonaco();
       this.shadowRoot.adoptedStyleSheets = [styles, ...this.shadowRoot.adoptedStyleSheets];
+
+      monaco.editor.onDidCreateEditor(() => {
+        this.dispatchEvent(new CustomEvent('init', { bubbles: true }));
+      });
+
       this.#editor = monaco.editor.create(this.shadowRoot.querySelector('#editor'), {
         value: this.source,
         language: this.language
