@@ -5,17 +5,14 @@ import { libraryTestConfig } from '@internals/vite';
 export default mergeConfig(libraryTestConfig, {
   test: {
     include: ['./src/**/*.test.ts'],
-    alias: {
-      '@nvidia-elements/monaco': resolve(import.meta.dirname, './src')
-    },
+    alias: { '@nvidia-elements/entity': resolve(import.meta.dirname, './src') },
     coverage: {
       thresholds: {
         lines: 90,
-        branches: 70,
-        functions: 80,
+        branches: 90,
+        functions: 90,
         statements: 90
-      },
-      exclude: ['src/monaco.ts'] // ignoring due to web workers
+      }
     }
   }
 });

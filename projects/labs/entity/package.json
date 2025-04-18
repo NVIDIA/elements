@@ -1,7 +1,7 @@
 {
-  "name": "@nvidia-elements/monaco",
+  "name": "@nvidia-elements/entity",
   "version": "0.0.0",
-  "description": "Monaco Editor Web Component",
+  "description": "Entity Protocol is a library for creating standardized domain specific UI components via form-associated custom elements with built-in validation, form integration, and standardized metadata.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
     "type": "git",
@@ -14,7 +14,13 @@
       "customData": [
         "./dist/data.html.json"
       ]
-    }
+    },
+    "snippets": [
+      {
+        "language": "html",
+        "path": "./dist/data.snippets.json"
+      }
+    ]
   },
   "files": [
     "README.md",
@@ -24,11 +30,6 @@
   "exports": {
     "./package.json": "./package.json",
     "./custom-elements.json": "./dist/custom-elements.json",
-    "./custom-elements-jsx": {
-      "types": "./dist/custom-elements-jsx.d.ts"
-    },
-    "./data.html.json": "./dist/data.html.json",
-    "./*.stories.json": "./dist/*.stories.json",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
@@ -36,21 +37,9 @@
     "./index.js": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./editor": {
-      "types": "./dist/editor/index.d.ts",
-      "default": "./dist/editor/index.js"
-    },
-    "./editor/index.js": {
-      "types": "./dist/editor/index.d.ts",
-      "default": "./dist/editor/index.js"
-    },
-    "./editor/define.js": {
-      "types": "./dist/editor/define.d.ts",
-      "default": "./dist/editor/define.js"
     }
   },
-  "sideEffects": true,
+  "sideEffects": [],
   "scripts": {
     "ci": "wireit",
     "dev": "wireit",
@@ -59,24 +48,17 @@
     "build:snippets": "wireit",
     "lint": "wireit",
     "test": "wireit",
-    "test:axe": "wireit",
     "test:coverage": "wireit",
     "test:watch": "wireit",
     "test:lighthouse": "wireit"
   },
   "dependencies": {
-    "lit": "catalog:",
-    "monaco-editor": "0.52.2"
-  },
-  "peerDependencies": {
-    "@nvidia-elements/core": "workspace:*",
-    "@nvidia-elements/themes": "workspace:*"
+    "lit": "catalog:"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
-    "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
@@ -94,7 +76,7 @@
       "command": "vite",
       "dependencies": [
         "build:watch",
-        "../storybook:dev"
+        "../../storybook:dev"
       ]
     },
     "ci": {
@@ -102,7 +84,6 @@
         "build",
         "lint",
         "publint",
-        "test:axe",
         "test:coverage"
       ]
     },
@@ -117,37 +98,27 @@
       "output": []
     },
     "build": {
-      "command": "playwright-lock 'vite build'",
+      "command": "NODE_ENV=production vite build",
       "files": [
-        "../elements/dist/**/*.js",
-        "../themes/dist/**/*.css",
         "src/**",
         "!src/**/*.stories.ts",
         "!src/**/*.mdx",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
-        "!src/**/*.test.visual.ts",
-        "!src/**/*.test.axe.ts",
         "!src/**/*.test.ssr.ts",
-        "!src/**/__screenshots__/**",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
         "vite.config.ts"
       ],
       "output": [
-        "dist/**"
+        "dist/**",
+        "!dist/data.snippets.json"
       ],
       "dependencies": [
-        "../internals/vite:ci",
-        {
-          "script": "../elements:build",
-          "cascade": false
-        },
-        {
-          "script": "../themes:build",
-          "cascade": false
-        }
+        "build:snippets",
+        "../../elements:build",
+        "../../internals/vite:ci"
       ]
     },
     "build:watch": {
@@ -157,38 +128,48 @@
         "build"
       ]
     },
+    "build:snippets": {
+      "command": "@nve-snippets",
+      "files": [
+        "**/*.snippets.html"
+      ],
+      "output": [
+        "dist/data.snippets.json"
+      ]
+    },
     "test": {
       "command": "playwright-lock 'vitest run'",
       "files": [
-        "dist/**/*.js",
         "src/**/*.test.ts",
-        "!src/**/__screenshots__/**",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
         "tsconfig.json",
+        "vite.config.ts",
         "vitest.config.ts"
       ],
       "output": [],
       "dependencies": [
-        "../testing:ci",
-        "../internals/vite:ci",
-        {
-          "script": "build",
-          "cascade": false
-        }
+        "build",
+        "../../elements:test",
+        "../../testing:ci"
       ]
     },
     "test:coverage": {
       "command": "playwright-lock 'vitest run --coverage'",
       "files": [
         "src/**/*.test.ts",
-        "!src/**/__screenshots__/**",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
         "tsconfig.json",
+        "vite.config.ts",
         "vitest.config.ts"
       ],
-      "output": [],
+      "output": [
+        "coverage/unit/**"
+      ],
       "dependencies": [
-        "../testing:ci",
-        "../internals/vite:ci",
-        "build"
+        "build",
+        "../../testing:ci"
       ]
     },
     "test:watch": {
@@ -208,29 +189,7 @@
       ],
       "dependencies": [
         "build",
-        "../internals/vite:ci"
-      ],
-      "env": {
-        "NODE_ENV": "production"
-      }
-    },
-    "test:axe": {
-      "command": "playwright-lock 'vitest run --config=vitest.axe.ts'",
-      "files": [
-        "dist/**/*.js",
-        "src/**/*.test.axe.ts",
-        "tsconfig.json",
-        "vitest.axe.ts"
-      ],
-      "output": [
-        "coverage/axe/**"
-      ],
-      "dependencies": [
-        "../internals/vite:ci",
-        {
-          "script": "build",
-          "cascade": false
-        }
+        "../../internals/vite:ci"
       ],
       "env": {
         "NODE_ENV": "production"
@@ -240,12 +199,11 @@
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
       "files": [
         "src/**/*.ts",
-        "eslint.config.js",
-        "!src/**/__screenshots__/**"
+        "eslint.config.js"
       ],
       "output": [],
       "dependencies": [
-        "../internals/eslint:ci"
+        "../../internals/eslint:ci"
       ]
     },
     "lint:fix": {
