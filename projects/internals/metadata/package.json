@@ -143,6 +143,17 @@
         "../../labs/code/coverage/visual/junit.xml",
         "../../labs/code/coverage/ssr/junit.xml",
         "../../labs/code/coverage/ssr/summary.json",
+        "../../labs/entity/package.json",
+        "../../labs/entity/README.md",
+        "../../labs/entity/CHANGELOG.md",
+        "../../labs/entity/dist/custom-elements.json",
+        "../../labs/entity/dist/**/*.stories.json",
+        "../../labs/entity/coverage/unit/coverage-summary.json",
+        "../../labs/entity/coverage/unit/junit.xml",
+        "../../labs/entity/coverage/axe/junit.xml",
+        "../../labs/entity/coverage/visual/junit.xml",
+        "../../labs/entity/coverage/ssr/junit.xml",
+        "../../labs/entity/coverage/ssr/summary.json",
         "../../labs/behaviors-alpine/package.json",
         "../../labs/behaviors-alpine/README.md",
         "../../labs/behaviors-alpine/CHANGELOG.md",
@@ -203,6 +214,10 @@
         },
         {
           "script": "../../labs/code:ci",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/entity:ci",
           "cascade": false
         },
         {

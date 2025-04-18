@@ -1,8 +1,5 @@
-import { html, LitElement } from 'lit';
-import { state } from 'lit/decorators/state.js';
-import { define } from '@nvidia-elements/core/internal';
+import { html } from 'lit';
 import '@nvidia-elements/core/json-viewer/define.js';
-
 
 export default {
   title: 'Internal/JSON Viewer/Examples',
@@ -14,32 +11,5 @@ const json = {"tasks": [{ "id": 1, "status": "success", "date": "08/03/2023 14:2
 export const Default = {
   render: () => html`
   <nve-json-viewer expanded>${JSON.stringify(json)}</nve-json-viewer>
-  `
-};
-
-class DyanamicJSONDemo extends LitElement {
-  @state() metrics = {};
-
-  static metadata = {
-    tag: 'dynamic-json-demo',
-    version: 'demo'
-  }
-
-  async connectedCallback() {
-    super.connectedCallback();
-    this.metrics = await import('../../../internals/metadata/static/index.json');
-  }
-
-  render() {
-    return html`<nve-json-viewer .value=${this.metrics}></nve-json-viewer>`
-  }
-}
-
-define(DyanamicJSONDemo)
-
-
-export const Dynamic = {
-  render: () => html`
-  <dynamic-json-demo></dynamic-json-demo>
   `
 };

@@ -32,6 +32,11 @@ export default [
     permalink: '/labs-code/',
     changelog: readFileSync('../labs/code/CHANGELOG.md', 'utf8')
   },
+  // {
+  //   title: '@nvidia-elements/entity',
+  //   permalink: '/labs-entity/',
+  //   changelog: readFileSync('../labs/entity/CHANGELOG.md', 'utf8')
+  // },
   {
     title: '@nvidia-elements/behaviors-alpine',
     permalink: '/labs-behaviors-alpine/',
