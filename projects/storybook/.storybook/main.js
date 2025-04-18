@@ -15,6 +15,7 @@ export default {
     '../../labs/behaviors-alpine/src/**/*.stories.ts',
     '../../labs/code/src/**/*.mdx',
     '../../labs/code/src/**/*.stories.ts',
+    '../../labs/entity/src/**/*.stories.ts',
     '../../monaco/src/**/*.mdx',
     '../../monaco/src/**/*.stories.ts',
     '../../starters/lit-library/src/**/*.stories.ts',
