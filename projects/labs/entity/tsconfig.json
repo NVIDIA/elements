@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "module": "es2022",
+    "target": "es2022",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "typeRoots": ["./node_modules/@types"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/",
+    "baseUrl": "./",
+    "rootDir": "./",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "isolatedModules": true,
+    "paths": {
+      "@nvidia-elements/entity": ["./src/index.js"],
+      "@nvidia-elements/entity/*": ["./src/*"],
+      "@nvidia-elements/entity/*.js": ["./src/*.js"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}
