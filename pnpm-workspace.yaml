@@ -17,6 +17,7 @@ packages:
   - 'projects/site'
   - 'projects/labs/behaviors-alpine'
   - 'projects/labs/code'
+  - 'projects/labs/entity'
   - 'projects/labs/playwright-screencast'
   - 'projects/labs/snippets'
   - 'projects/monaco'
