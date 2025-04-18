@@ -110,10 +110,14 @@ export class AnimatedBuild extends LitElement {
   private resetInterval: number | undefined;
   private resizeObserver?: ResizeObserver;
 
+  #internals = this.attachInternals();
+
   connectedCallback() {
     super.connectedCallback();
     this.setupAnimationReset();
     this.setupResizeObserver();
+    this.#internals.role = 'img';
+    this.#internals.ariaLabel = 'Animation of a web application being built with Elements';
   }
 
   disconnectedCallback() {
@@ -192,7 +196,7 @@ export class AnimatedBuild extends LitElement {
 
   render() {
     return html`
-      <div id="hero-scene-wrapper">
+      <div id="hero-scene-wrapper" inert>
         <div id="hero-scene">
           <div id="page-wrapper" class="layer">
             <nve-page class="layer">
@@ -212,17 +216,17 @@ export class AnimatedBuild extends LitElement {
               <nve-page-panel slot="header" class="layer" style="--delay: 3s">
                 <nve-page-panel-content>
                   <div class="layer" style="--delay: 4s">
-                    <img style="width: 1280px; height: 74px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/header.svg" />
+                    <img style="width: 1280px; height: 74px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/header.svg" alt="example of a header component" />
                   </div>
                 </nve-page-panel-content>
               </nve-page-panel>
 
               <main class="layer" style="--delay: 2s">
-                <img style="width: 913px; height: 300px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/voxels.png" />
+                <img style="width: 913px; height: 300px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/voxels.png" alt="example of a voxel viewer" />
 
                 <nve-card class="layer" style="--delay: 5s">
                   <nve-card-content>
-                    <img style="width: 100px; height: 136px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/car.svg" />
+                    <img style="width: 100px; height: 136px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/car.svg" alt="example of a camera rig" />
                   </nve-card-content>
                 </nve-card>
               </main>
@@ -230,7 +234,7 @@ export class AnimatedBuild extends LitElement {
               <nve-page-panel slot="right-aside" class="layer" style="--delay: 3s">
                 <nve-page-panel-content>
                   <div class="layer" style="--delay: 4s">
-                    <img style="width: 366px; height: 598px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/panel.svg" />
+                    <img style="width: 366px; height: 598px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/panel.svg" alt="example of a panel component" />
                   </div>
                 </nve-page-panel-content>
               </nve-page-panel>
@@ -238,7 +242,7 @@ export class AnimatedBuild extends LitElement {
               <nve-page-panel slot="subfooter" class="layer" style="--delay: 3s">
                 <nve-page-panel-content>
                   <div class="layer" style="--delay: 4s">
-                    <img style="width: 914px; height: 296px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/timeline.svg" />
+                    <img style="width: 914px; height: 296px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/timeline.svg" alt="example of a timeline component" />
                   </div>
                 </nve-page-panel-content>
               </nve-page-panel>

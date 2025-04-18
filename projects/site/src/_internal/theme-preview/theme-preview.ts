@@ -151,7 +151,7 @@ export class ThemePreview extends LitElement {
               <nve-card class="box">
                 <nve-card-content nve-layout="column align:center">
                   <nve-switch>
-                    <input type="checkbox" checked />
+                    <input type="checkbox" checked aria-label="example of a switch component" />
                   </nve-switch>
                 </nve-card-content>
               </nve-card>
