@@ -1,12 +1,10 @@
-import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@internals/storybook/blocks';
-import { Default, Code, Flat, Theme, LineNumbers, Highlight, Overflow } from './codeblock.stories';
-
-<Meta title="Labs/Code/Codeblock/Documentation" />
-
-# Codeblock
-
-<nve-api-summary tag="nve-codeblock"></nve-api-summary>
+---
+{
+  title: 'Codeblock',
+  layout: 'docs.11ty.js',
+  tag: 'nve-codeblock'
+}
+---
 
 ## Installation
 
@@ -36,42 +34,38 @@ function getTime(): number {
 
 ## Default
 
-<Canvas of={Default} />
+{% story 'nve-codeblock', 'Default' %}
 
 ## Code
 
-<nve-api-detail tag="nve-codeblock" type="property" value="code"></nve-api-detail>
+{% api 'nve-codeblock', 'property', 'code' %}
 
-<Canvas of={Code} />
+{% story 'nve-codeblock', 'Code' %}
 
 ## Container
 
-<nve-api-detail tag="nve-codeblock" type="property" value="container"></nve-api-detail>
+{% api 'nve-codeblock', 'property', 'container' %}
 
-<Canvas of={Flat} />
+{% story 'nve-codeblock', 'Flat' %}
 
 ## Theme
 
 A Theme can be set independant of the global theme using the `nve-theme` attribute.
 
-<Canvas of={Theme} />
+{% story 'nve-codeblock', 'Theme' %}
 
 ## Line Numbers
 
-<nve-api-detail tag="nve-codeblock" type="property" value="lineNumbers"></nve-api-detail>
+{% api 'nve-codeblock', 'property', 'lineNumbers' %}
 
-<Canvas of={LineNumbers} />
+{% story 'nve-codeblock', 'LineNumbers' %}
 
 ## Highlight
 
-<nve-api-detail tag="nve-codeblock" type="property" value="highlight"></nve-api-detail>
+{% api 'nve-codeblock', 'property', 'highlight' %}
 
-<Canvas of={Highlight} />
+{% story 'nve-codeblock', 'Highlight' %}
 
 ## Overflow
 
-<Canvas of={Overflow} />
-
-<nve-api-status tag="nve-codeblock"></nve-api-status>
-
-<nve-api-table tag="nve-codeblock"></nve-api-table>
+{% story 'nve-codeblock', 'Overflow' %}
