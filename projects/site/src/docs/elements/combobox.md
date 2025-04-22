@@ -100,6 +100,10 @@ If the multiple tags overflow the parent container a simple text label will be s
 
 {% story 'nve-combobox', 'Reset' %}
 
+## Disabled Options
+
+{% story 'nve-combobox', 'DisabledOptions' %}
+
 ## Select All
 
 {% api 'nve-combobox', 'property', 'selectAll' %}
