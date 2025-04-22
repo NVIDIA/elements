@@ -3,10 +3,9 @@ import '@nvidia-elements/code/codeblock/languages/typescript.js'
 import '@nvidia-elements/code/codeblock/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
-
 export default {
   title: 'Labs/Code/Codeblock/Examples',
-  component: 'codeblock'
+  component: 'nve-codeblock'
 };
 
 export const Default = {
