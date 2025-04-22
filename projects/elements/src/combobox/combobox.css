@@ -99,8 +99,20 @@ nve-menu-item {
   content-visibility: auto;
 }
 
+[internal-host]:has([matches]) nve-menu-item {
+  --color: var(--nve-sys-text-muted-color);
+}
+
 nve-menu-item nve-icon {
   --color: inherit;
+}
+
+input[type='checkbox'] {
+  accent-color: var(--nve-sys-accent-secondary-background);
+}
+
+nve-checkbox:not(:state(disabled)) {
+  --border-color: var(--nve-ref-border-color-emphasis);
 }
 
 nve-menu-item:not(:state(selected)) nve-icon[name='check'] {

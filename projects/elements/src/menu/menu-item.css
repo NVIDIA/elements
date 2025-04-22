@@ -37,6 +37,7 @@
   text-align: left;
 }
 
+:host(:hover),
 :host(:state(selected)) {
   --color: var(--nve-sys-interaction-selected-color);
 }
@@ -48,10 +49,6 @@
 :host(:state(disabled)) {
   --cursor: not-allowed;
   --color: var(--nve-sys-interaction-disabled-color);
-}
-
-:host(:hover) {
-  --color: var(--nve-sys-interaction-selected-color);
 }
 
 :host(:state(current)) {
