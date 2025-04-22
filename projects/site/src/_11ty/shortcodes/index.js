@@ -10,19 +10,27 @@ export async function apiShortcode(tag, type, value) {
 
 const stories = [
   ...globSync(`${resolve('../elements')}/dist/**/*.stories.json`),
-  ...globSync(`${resolve('../monaco')}/dist/**/*.stories.json`)
+  ...globSync(`${resolve('../monaco')}/dist/**/*.stories.json`),
+  ...globSync(`${resolve('../labs/code')}/dist/**/*.stories.json`)
 ].map(path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8')));
 
 export async function storyShortcode(tag, storyName, userConfig = { inline: true, height: '95%' }) {
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
-  const name = tag.replace('nve-', '');
-
   const story = stories.find(s => s.element === tag)?.stories?.find(s => s.id === storyName);
+  let name = tag.replace('nve-', '');
+  let base = '@nvidia-elements/core';
+  if (name === 'monaco-editor') {
+    base = '@nvidia-elements/monaco';
+    name = 'editor';
+  } else if (name === 'codeblock') {
+    base = '@nvidia-elements/code';
+  }
+
   const reload =
     process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story // eslint-disable-line no-undef
       ? /* html */ `
   <script type="module">
-    import stories from '@nvidia-elements/core/${name}/${name}.stories.json' with { type: 'json' };
+    import stories from '${base}/${name}/${name}.stories.json' with { type: 'json' };
     const canvas = document.querySelector('nve-api-canvas#${story.id}');
     const story = stories.stories.find(s => s.id === '${story.id}');
     canvas.innerHTML = story.template ?? '';

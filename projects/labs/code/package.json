@@ -35,6 +35,7 @@
     },
     "./data.html.json": "./dist/data.html.json",
     "./data.snippets.json": "./dist/data.snippets.json",
+    "./*.stories.json": "./dist/*.stories.json",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
