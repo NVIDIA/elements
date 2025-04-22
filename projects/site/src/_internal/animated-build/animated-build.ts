@@ -222,7 +222,7 @@ export class AnimatedBuild extends LitElement {
               </nve-page-panel>
 
               <main class="layer" style="--delay: 2s">
-                <img style="width: 913px; height: 300px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/voxels.png" alt="example of a voxel viewer" />
+                <img style="width: 913px; height: 300px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/voxels-webp.webp" alt="example of a voxel viewer" />
 
                 <nve-card class="layer" style="--delay: 5s">
                   <nve-card-content>
