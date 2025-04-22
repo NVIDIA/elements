@@ -228,6 +228,15 @@ describe(Combobox.metadata.tag, () => {
   it('should provide a prefix-icon slot', async () => {
     expect(element.shadowRoot.querySelector('slot[name="prefix-icon"]')).toBeTruthy();
   });
+
+  it('should filter out menu items when corresponding option is disabled', async () => {
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].disabled).toBe(false);
+    options[0].disabled = true;
+    element.shadowRoot.dispatchEvent(new Event('slotchange'));
+    await elementIsStable(element);
+    expect(items[0].disabled).toBe(true);
+  });
 });
 
 describe(`${Combobox.metadata.tag}: single select`, () => {
@@ -269,6 +278,12 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     expect(options[0].selected).toBe(true);
     expect(select.value).toBe('option 1');
     expect(input.value).toBe('option 1');
+  });
+
+  it('should show a check icon when the option is selected', async () => {
+    expect(options[0].selected).toBe(true);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].querySelector('nve-icon[name="check"]')).toBeTruthy();
   });
 
   it('should reflect each option to a menu item', async () => {
@@ -415,6 +430,62 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
 
   it('should initialize :state(multiple) state', () => {
     expect(element.matches(':state(multiple)')).toBe(true);
+  });
+
+  it('should show a nve-checkbox when the option is selected', async () => {
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+    select.options[2].selected = true;
+    await elementIsStable(element);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].querySelector('nve-checkbox')).toBeTruthy();
+    expect(items[1].querySelector('nve-checkbox')).toBeTruthy();
+    expect(items[2].querySelector('nve-checkbox')).toBeTruthy();
+  });
+
+  it('should show a selected and disabled nve-menu-item and nve-checkbox when the option is selected and disabled', async () => {
+    select.options[0].selected = true;
+    select.options[0].disabled = true;
+    await elementIsStable(element);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].querySelector('nve-checkbox')).toBeTruthy();
+    expect(items[0].selected).toBe(true);
+    expect(items[0].disabled).toBe(true);
+    expect(items[0].querySelector<HTMLInputElement>('input[type=checkbox]').checked).toBe(true);
+    expect(items[0].querySelector<HTMLInputElement>('input[type=checkbox]').disabled).toBe(true);
+  });
+
+  it('should show a selected and disabled nve-menu-item and checkbox when the option is selected and disabled when there are more than 50 options', async () => {
+    Array(51)
+      .fill(0)
+      .forEach((_, i) => {
+        const option = document.createElement('option');
+        option.value = `option ${i + 1}`;
+        select.appendChild(option);
+      });
+    select.options[0].selected = true;
+    select.options[0].disabled = true;
+    await elementIsStable(element);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].querySelector('nve-checkbox')).toBeFalsy();
+    expect(items[0].selected).toBe(true);
+    expect(items[0].disabled).toBe(true);
+    expect(items[0].querySelector<HTMLInputElement>('input[type=checkbox]').checked).toBe(true);
+    expect(items[0].querySelector<HTMLInputElement>('input[type=checkbox]').disabled).toBe(true);
+  });
+
+  it('should show a checkbox when there are more than 50 options', async () => {
+    Array(51)
+      .fill(0)
+      .forEach((_, i) => {
+        const option = document.createElement('option');
+        option.value = `option ${i + 1}`;
+        select.appendChild(option);
+      });
+    await elementIsStable(element);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].querySelector('nve-checkbox')).toBeFalsy();
+    expect(items[0].querySelector('input[type="checkbox"]')).toBeTruthy();
   });
 
   it('should cooresponding menu items and options as selected', async () => {
