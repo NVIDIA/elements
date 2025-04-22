@@ -359,6 +359,24 @@ export const SelectAll = () => {
   `
 };
 
+export const DisabledOptions = () => {
+  return html`
+  <nve-combobox>
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option value="status" disabled></option>
+      <option value="priority" disabled></option>
+      <option value="date" disabled></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+  `
+};
+
 export const Form = () => {
   return html`
 <form nve-layout="column gap:lg align:stretch">
