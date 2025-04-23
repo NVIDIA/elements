@@ -544,6 +544,16 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
     expect(element.matches(':state(multiple-overflow)')).toBe(true);
   });
 
+  it('should not render inline tags when notags is used', async () => {
+    element.notags = true;
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+    select.options[2].selected = true;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
+  });
+
   it('should clear and reset text input and select when reset() is called', async () => {
     const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
     expect(tags().length).toBe(2);
