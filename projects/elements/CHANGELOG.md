@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.31.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.7...@nvidia-elements/core-v1.31.8) (2025-04-23)
+
+
+### Bug Fixes
+
+* **elements:** combobox disabled and checkmarks ([cb231de](https://github.com/NVIDIA/elements/commit/cb231de99c5e6497606e8843cca9c690148c0abf)), closes [#120](https://github.com/NVIDIA/elements/issues/120)
+
 ## [@nvidia-elements/core-v1.31.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.6...@nvidia-elements/core-v1.31.7) (2025-04-16)
 
 
