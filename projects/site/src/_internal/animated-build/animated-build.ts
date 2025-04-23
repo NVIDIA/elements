@@ -200,7 +200,7 @@ export class AnimatedBuild extends LitElement {
         <div id="hero-scene">
           <div id="page-wrapper" class="layer">
             <nve-page class="layer">
-              <nve-page-header slot="header" class="layer" style="--delay: 1s">
+              <nve-page-header slot="header" class="layer" style="--delay: 0.7s">
                 <nve-logo slot="prefix" size="sm"></nve-logo>
                 <h2 slot="prefix">Scenario Management</h2>
                 <nve-button container="flat">Scenario Catalog</nve-button>
@@ -213,35 +213,35 @@ export class AnimatedBuild extends LitElement {
                 <nve-icon-button slot="suffix" interaction="emphasis" size="sm">EL</nve-icon-button>
               </nve-page-header>
 
-              <nve-page-panel slot="header" class="layer" style="--delay: 3s">
+              <nve-page-panel slot="header" class="layer" style="--delay: 2.7s">
                 <nve-page-panel-content>
-                  <div class="layer" style="--delay: 4s">
+                  <div class="layer" style="--delay: 3.5s">
                     <img style="width: 1280px; height: 74px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/header.svg" alt="example of a header component" />
                   </div>
                 </nve-page-panel-content>
               </nve-page-panel>
 
-              <main class="layer" style="--delay: 2s">
+              <main class="layer" style="--delay: 1.7s">
                 <img style="width: 913px; height: 300px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/voxels-webp.webp" alt="example of a voxel viewer" />
 
-                <nve-card class="layer" style="--delay: 5s">
+                <nve-card class="layer" style="--delay: 4s">
                   <nve-card-content>
                     <img style="width: 100px; height: 136px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/car.svg" alt="example of a camera rig" />
                   </nve-card-content>
                 </nve-card>
               </main>
 
-              <nve-page-panel slot="right-aside" class="layer" style="--delay: 3s">
+              <nve-page-panel slot="right-aside" class="layer" style="--delay: 2.7s">
                 <nve-page-panel-content>
-                  <div class="layer" style="--delay: 4s">
+                  <div class="layer" style="--delay: 3.5s">
                     <img style="width: 366px; height: 598px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/panel.svg" alt="example of a panel component" />
                   </div>
                 </nve-page-panel-content>
               </nve-page-panel>
 
-              <nve-page-panel slot="subfooter" class="layer" style="--delay: 3s">
+              <nve-page-panel slot="subfooter" class="layer" style="--delay: 2.7s">
                 <nve-page-panel-content>
-                  <div class="layer" style="--delay: 4s">
+                  <div class="layer" style="--delay: 3.5s">
                     <img style="width: 914px; height: 296px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/timeline.svg" alt="example of a timeline component" />
                   </div>
                 </nve-page-panel-content>
