@@ -1,5 +1,7 @@
 import { join } from 'node:path';
 import { MetadataService } from '@internals/metadata';
+import { createPlaygroundURLFromStorySource } from '@internals/elements-api';
+import { camelToKebab } from '../../_11ty/utils/index.js';
 
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
@@ -12,8 +14,10 @@ const stories = metadata['@nvidia-elements/core'].elements.flatMap(element => {
 
   return stories.map(story => ({
     title: story.id.toLowerCase(),
-    permalink: `${element.name.replace('nve-', '')}/${story.id.toLowerCase()}`,
-    template: story.template
+    permalink: `${element.name.replace('nve-', '')}/${camelToKebab(story.id)}`,
+    template: story.template,
+    element: element.name.replace('nve-', ''),
+    playground: createPlaygroundURLFromStorySource(story.template, { id: story.id, globals: { theme: 'dark' } })
   }));
 });
 
@@ -25,7 +29,7 @@ export const data = {
     alias: 'story'
   },
   stories,
-  permalink: data => `stories/${data.story.permalink}.html`
+  permalink: data => `stories/${data.story.permalink}/index.html`
 };
 
 export function render(data) {
@@ -51,9 +55,24 @@ export function render(data) {
       *:not(:defined) {
         visibility: hidden;
       }
+
+      #iframe-links {
+        position: fixed;
+        inset: 1rem 1rem auto auto;
+        z-index: 1000;
+      }
     </style>
+    <script type="module">
+      if (window.self === window.top) {
+        document.getElementById('iframe-links').hidden = false;
+      }
+    </script>
   </head>
   <body nve-layout="row align:center">
+    <div id="iframe-links" hidden>
+      <a href="docs/elements/${data.story.element}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
+      <a href="${data.story.playground}" target="_blank" nve-text="link body sm">playground &#8599;</a>
+    </div>
     ${data.story.template}
   </body>
 </html>
