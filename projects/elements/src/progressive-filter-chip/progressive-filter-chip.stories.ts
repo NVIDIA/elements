@@ -150,7 +150,7 @@ export const Custom = {
         <nve-icon-button icon-name="map-pin" readonly></nve-icon-button>
         <input value="37.3706254,-121.9671894" disabled />
       </nve-input>
-      <img src="images/test-map-2.webp" width="300px" alt="non-interactive demo map" />
+      <img src="static/images/test-map-2.webp" width="300px" alt="non-interactive demo map" />
     </nve-dropdown>
   `
 }
