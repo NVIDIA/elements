@@ -377,6 +377,45 @@ export const DisabledOptions = () => {
   `
 };
 
+export const NoTags = () => {
+  return html`
+  <form id="notags" nve-layout="column gap:lg align:stretch">
+    <nve-combobox notags>
+      <label>label</label>
+      <input type="search">
+      <select multiple>
+        <option selected value="status"></option>
+        <option selected value="priority"></option>
+        <option value="date"></option>
+        <option value="session"></option>
+        <option value="configuration"></option>
+        <option value="contains"></option>
+      </select>
+    </nve-combobox>
+    <div id="tags" nve-layout="row gap:xs">
+    </div>
+  </form>
+  <script type="module">
+    const form = document.querySelector('#notags');
+    const select = form.querySelector('select');
+    const tags = form.querySelector('#tags');
+    
+    updateTags();
+    select.addEventListener('change', e => updateTags());
+
+    tags.addEventListener('close', e => {
+      Array.from(select.options).find(o => o.value === e.target.value).selected = false;
+      updateTags();
+    });
+
+    function updateTags() {
+      tags.innerHTML = '';
+      Array.from(select.selectedOptions).forEach(o => tags.innerHTML += '<nve-tag closable value="' + o.value + '">' + o.value + '</nve-tag>');
+    }
+  </script>
+  `
+};
+
 export const Form = () => {
   return html`
 <form nve-layout="column gap:lg align:stretch">

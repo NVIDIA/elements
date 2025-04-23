@@ -1,6 +1,6 @@
 import { Meta, Story } from '@storybook/addon-docs';
 import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, MultiSelect, Select, Label, Overflow, Vertical, Horizontal, Flat, Footer, Form, Reset, SelectAll, DisabledOptions } from './combobox.stories';
+import { Default, MultiSelect, Select, Label, Overflow, Vertical, Horizontal, Flat, Footer, Form, Reset, SelectAll, DisabledOptions, NoTags } from './combobox.stories';
 
 <Meta title="Elements/Combobox/Documentation" />
 
@@ -105,6 +105,12 @@ If the multiple tags overflow the parent container a simple text label will be s
 ## Disabled Options
 
 <Canvas of={DisabledOptions} story={{ inline: false, height: 300 }} />
+
+## No Tags
+
+<nve-api-detail tag="nve-combobox" type="property" value="notags"></nve-api-detail>
+
+<Canvas of={NoTags} story={{ inline: false, height: 400 }} />
 
 ## Select All
 
