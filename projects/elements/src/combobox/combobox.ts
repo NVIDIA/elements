@@ -48,6 +48,9 @@ export class Combobox extends Control implements ContainerElement {
   /** Flat container option is used when embeding component within another containing element */
   @property({ type: String, reflect: true }) container?: 'flat';
 
+  /** Disable rendering of inline tags for multiple select */
+  @property({ type: Boolean, reflect: true }) notags?: boolean;
+
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
   static readonly metadata = {
@@ -115,7 +118,7 @@ export class Combobox extends Control implements ContainerElement {
   protected _associateDatalist = false;
 
   protected get prefixContent() {
-    return this.#select?.multiple
+    return this.#select?.multiple && !this.notags
       ? html`
     <div class="tags-label" aria-hidden="true">${this.#select.selectedOptions.length} ${this.i18n.selected}</div>
     <div class="tags">
@@ -357,7 +360,7 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setupOverflowListener() {
-    if (this.#select?.multiple) {
+    if (this.#select?.multiple && !this.notags) {
       this.#updateMultipleOverflow(this.#tags.getBoundingClientRect().width);
       const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0].contentRect.width));
       this.#observers.push(observer);
