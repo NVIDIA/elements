@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.32.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.9...@nvidia-elements/core-v1.32.0) (2025-04-24)
+
+
+### Features
+
+* **elements:** combobox notags ([9a1590d](https://github.com/NVIDIA/elements/commit/9a1590d42ffa210612d693d59f98fd3b858c9445))
+
 ## [@nvidia-elements/core-v1.31.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.8...@nvidia-elements/core-v1.31.9) (2025-04-24)
 
 
