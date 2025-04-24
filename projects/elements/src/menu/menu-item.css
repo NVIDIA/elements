@@ -17,6 +17,7 @@
 }
 
 [internal-host] {
+  --_icon-color: var(--color);
   padding: var(--padding);
   color: var(--color);
   font-size: var(--font-size);
@@ -35,6 +36,11 @@
   white-space: nowrap;
   border: 0;
   text-align: left;
+}
+
+::slotted(nve-icon),
+::slotted(nve-icon) {
+  --color: var(--_icon-color);
 }
 
 :host(:hover),
@@ -116,20 +122,4 @@
 
 ::slotted([slot='suffix']) {
   margin-left: auto;
-}
-::slotted(nve-icon),
-::slotted(nve-icon) {
-  --color: var(--nve-sys-text-muted-color);
-}
-
-:host(:hover) ::slotted(nve-icon),
-:host(:hover) ::slotted(nve-icon) {
-  --color: var(--nve-sys-text-emphasis-color) !important;
-}
-
-:host(:state(current)) ::slotted(nve-icon),
-:host(:state(current)) ::slotted(nve-icon),
-:host(:state(selected)) ::slotted(nve-icon),
-:host(:state(selected)) ::slotted(nve-icon) {
-  --color: var(--nve-sys-interaction-selected-color) !important;
 }
