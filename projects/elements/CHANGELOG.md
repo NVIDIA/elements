@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.31.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.8...@nvidia-elements/core-v1.31.9) (2025-04-24)
+
+
+### Bug Fixes
+
+* **elements:** menu icon state ([3284dfc](https://github.com/NVIDIA/elements/commit/3284dfc9c38e6af96df6a07a52a3cbb152b7979d))
+
 ## [@nvidia-elements/core-v1.31.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.7...@nvidia-elements/core-v1.31.8) (2025-04-23)
 
 
