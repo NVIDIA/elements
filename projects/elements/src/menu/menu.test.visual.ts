@@ -85,5 +85,12 @@ function template(theme: '' | 'dark' = '') {
     <nve-menu-item>•︎•︎•</nve-menu-item>
     <nve-menu-item>•︎•︎•</nve-menu-item>
   </nve-menu>
+
+  <nve-menu>
+    <nve-menu-item><nve-icon name="person"></nve-icon> •︎•︎•</nve-menu-item>
+    <nve-menu-item disabled><nve-icon name="gear"></nve-icon> •︎•︎•</nve-menu-item>
+    <nve-menu-item current="page"><nve-icon name="star"></nve-icon> •︎•︎•</nve-menu-item>
+    <nve-menu-item selected><nve-icon name="logout"></nve-icon> •︎•︎•</nve-menu-item>
+  </nve-menu>
   `;
 }
