@@ -1,0 +1,363 @@
+diff --git a/esm/vs/base/common/async.js b/esm/vs/base/common/async.js
+index 5a5588e64135d87ac643aa75dd339f96ec3613a8..bdfbaf9cd113683af0d3f4f64d636b36a6684778 100644
+--- a/esm/vs/base/common/async.js
++++ b/esm/vs/base/common/async.js
+@@ -216,7 +216,17 @@ export class Delayer {
+     cancel() {
+         this.cancelTimeout();
+         if (this.completionPromise) {
+-            this.doReject?.(new CancellationError());
++            // PATCH: Remove error throwing during cancellation
++            // The Delayer treats cancellation as an error condition that should be thrown,
++            // but this is problematic during editor disposal where cancellation is a normal
++            // part of the lifecycle. This patch changes the behavior to treat cancellation
++            // as a normal state transition rather than an error condition.
++            //
++            // This fixes unhandled rejections that occur when the editor is disposed while
++            // async operations are pending. The issue affects both test and production
++            // environments.
++            // See: https://github.com/microsoft/monaco-editor/issues/4702
++            // this.doReject?.(new CancellationError());
+             this.completionPromise = null;
+         }
+     }
+diff --git a/esm/vs/editor/browser/controller/mouseHandler.js b/esm/vs/editor/browser/controller/mouseHandler.js
+index e787d70d2cea450a323468d1fa3a9cb3367a1221..75c772ded4c4c2eb22a65845ced30f4015c985ee 100644
+--- a/esm/vs/editor/browser/controller/mouseHandler.js
++++ b/esm/vs/editor/browser/controller/mouseHandler.js
+@@ -36,7 +36,10 @@ export class MouseHandler extends ViewEventHandler {
+             // remove this listener
+             if (!this._mouseLeaveMonitor) {
+                 this._mouseLeaveMonitor = dom.addDisposableListener(this.viewHelper.viewDomNode.ownerDocument, 'mousemove', (e) => {
+-                    if (!this.viewHelper.viewDomNode.contains(e.target)) {
++                    // PATCH: Workaround for Monaco's HoverProvider not working inside a ShadowDOM
++                    // See: https://github.com/microsoft/monaco-editor/issues/3241
++                    // See: https://github.com/microsoft/monaco-editor/issues/3409
++                    if (!this.viewHelper.viewDomNode.contains(e.composedPath()[0])) {
+                         // went outside the editor!
+                         this._onMouseLeave(new EditorMouseEvent(e, false, this.viewHelper.viewDomNode));
+                     }
+diff --git a/esm/vs/editor/browser/controller/mouseTarget.js b/esm/vs/editor/browser/controller/mouseTarget.js
+index 31ca82a2b7b141c85a23384ed42c7eaad1f97432..77c6a920d40e05a88749ce0654ef1878acc16fbe 100644
+--- a/esm/vs/editor/browser/controller/mouseTarget.js
++++ b/esm/vs/editor/browser/controller/mouseTarget.js
+@@ -890,8 +890,9 @@ function shadowCaretRangeFromPoint(shadowRoot, x, y) {
+             }
+         }
+         // Creates a range with the text node of the element and set the offset found
+-        range.setStart(el.firstChild, offset);
+-        range.setEnd(el.firstChild, offset);
++        // PATCH: Fix for RTE in shadowCaretRangeFromPoint when selecting lines
++        range.setStart(el.firstChild ?? el, offset);
++        range.setEnd(el.firstChild ?? el, offset);
+     }
+     return range;
+ }
+diff --git a/esm/vs/editor/common/model/textModel.js b/esm/vs/editor/common/model/textModel.js
+index 92bbf91d421a45172ff04c2bac1025e433300b62..6688c3d07a38855df88a5903feafe46315e4e32c 100644
+--- a/esm/vs/editor/common/model/textModel.js
++++ b/esm/vs/editor/common/model/textModel.js
+@@ -170,6 +170,9 @@ let TextModel = class TextModel extends Disposable {
+         this._languageSelectionListener = this._register(new MutableDisposable());
+         this._deltaDecorationCallCnt = 0;
+         this._attachedViews = new AttachedViews();
++        // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++        this._onDidValidateVersion = new Emitter();
++        this.onDidValidateVersion = this._onDidValidateVersion.event;
+         // Generate a new unique model id
+         MODEL_ID++;
+         this.id = '$model' + MODEL_ID;
+@@ -247,6 +250,10 @@ let TextModel = class TextModel extends Disposable {
+         this._buffer = emptyDisposedTextBuffer;
+         this._bufferDisposable = Disposable.None;
+     }
++    // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++    setVersionValidated(versionId) {
++        this._onDidValidateVersion.fire(versionId);
++    }
+     _assertNotDisposed() {
+         if (this._isDisposed) {
+             throw new BugIndicatingError('Model is disposed!');
+diff --git a/esm/vs/editor/editor.api.d.ts b/esm/vs/editor/editor.api.d.ts
+index 6e21bfb0ceac3a097f10ec3a060142b6418782b3..46cdf106735a66abb64baa08a5b5d7beb8d272ae 100644
+--- a/esm/vs/editor/editor.api.d.ts
++++ b/esm/vs/editor/editor.api.d.ts
+@@ -1039,6 +1039,19 @@ export namespace editor {
+      */
+     export function setModelLanguage(model: ITextModel, mimeTypeOrLanguageId: string): void;
+ 
++    // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++    /**
++     * Set a version of the model as validated.
++     */
++    export function setModelVersionValidated(model: ITextModel, versionId: number): void;
++
++    // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++    /**
++     * Emitted when a model version has been validated.
++     * @event
++     */
++    export function onDidValidateModelVersion(model: ITextModel, listener: (versionId: number) => void): IDisposable;
++
+     /**
+      * Set the markers for a model.
+      */
+@@ -1128,6 +1141,12 @@ export namespace editor {
+      */
+     export function defineTheme(themeName: string, themeData: IStandaloneThemeData): void;
+ 
++    // PATCH: Add missing accessor for current theme.
++    /**
++     * Get the current theme.
++     */
++    export function getTheme(): string;
++
+     /**
+      * Switches to a theme.
+      */
+@@ -2372,6 +2391,18 @@ export namespace editor {
+          * Returns if this model is attached to an editor or not.
+          */
+         isAttachedToEditor(): boolean;
++
++        // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++        /**
++         * Set a version of the model as validated.
++         */
++        setVersionValidated(versionId: number): void;
++
++        // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++        /**
++         * Register a listener for model version validation events.
++         */
++        onDidValidateVersion(listener: (versionId: number) => void): IDisposable;
+     }
+ 
+     export enum PositionAffinity {
+diff --git a/esm/vs/editor/standalone/browser/standaloneEditor.js b/esm/vs/editor/standalone/browser/standaloneEditor.js
+index aa33e1d4a4facf5ba98d3730267133f18638463c..751b554032bfa823704fd5e1ca362131f5b9c7bc 100644
+--- a/esm/vs/editor/standalone/browser/standaloneEditor.js
++++ b/esm/vs/editor/standalone/browser/standaloneEditor.js
+@@ -186,6 +186,22 @@ export function setModelLanguage(model, mimeTypeOrLanguageId) {
+     const languageId = languageService.getLanguageIdByMimeType(mimeTypeOrLanguageId) || mimeTypeOrLanguageId || PLAINTEXT_LANGUAGE_ID;
+     model.setLanguage(languageService.createById(languageId));
+ }
++// PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++/**
++ * Set a version of the model as validated.
++ */
++export function setModelVersionValidated(model, versionId) {
++    if (model) {
++        model.setVersionValidated(versionId);
++    }
++}
++/**
++ * Emitted when a model version has been validated.
++ * @event
++ */
++export function onDidValidateModelVersion(model, listener) {
++    return model.onDidValidateModelVersion(listener);
++}
+ /**
+  * Set the markers for a model.
+  */
+@@ -334,6 +350,14 @@ export function defineTheme(themeName, themeData) {
+     const standaloneThemeService = StandaloneServices.get(IStandaloneThemeService);
+     standaloneThemeService.defineTheme(themeName, themeData);
+ }
++// PATCH: Add missing accessor for current theme.
++/**
++ * Get the current theme.
++ */
++export function getTheme() {
++    const standaloneThemeService = StandaloneServices.get(IStandaloneThemeService);
++    return standaloneThemeService.getColorTheme().themeName;
++}
+ /**
+  * Switches to a theme.
+  */
+@@ -416,6 +440,9 @@ export function createMonacoEditorAPI() {
+         addKeybindingRules: addKeybindingRules,
+         createModel: createModel,
+         setModelLanguage: setModelLanguage,
++        // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++        setModelVersionValidated: setModelVersionValidated,
++        onDidValidateModelVersion: onDidValidateModelVersion,
+         setModelMarkers: setModelMarkers,
+         getModelMarkers: getModelMarkers,
+         removeAllMarkers: removeAllMarkers,
+@@ -431,6 +458,8 @@ export function createMonacoEditorAPI() {
+         colorizeModelLine: colorizeModelLine,
+         tokenize: tokenize,
+         defineTheme: defineTheme,
++        // PATCH: Add missing accessor for current theme.
++        getTheme: getTheme,
+         setTheme: setTheme,
+         remeasureFonts: remeasureFonts,
+         registerCommand: registerCommand,
+diff --git a/esm/vs/language/css/css.worker.js b/esm/vs/language/css/css.worker.js
+index 7cf2dea5ffc67aa6982321567ce08c487625aa33..5e16b9841587784ffc3d100eacbe3afffbf6e113 100644
+--- a/esm/vs/language/css/css.worker.js
++++ b/esm/vs/language/css/css.worker.js
+@@ -39937,7 +39937,8 @@ var CSSWorker = class {
+       return [];
+     }
+     const stylesheet = this._languageService.parseStylesheet(document);
+-    const symbols = this._languageService.findDocumentSymbols(document, stylesheet);
++    // PATCH: Ensure the new standard DocumentSymbol data structure is provided from language services
++    const symbols = this._languageService.findDocumentSymbols2(document, stylesheet);
+     return Promise.resolve(symbols);
+   }
+   async doCodeActions(uri, range, context) {
+diff --git a/esm/vs/language/css/cssMode.js b/esm/vs/language/css/cssMode.js
+index 6e7b742f0cd23f7a8c2e9cc0c65dd5c269b33635..74131c8f4001dda7dd4baa69c975c3eb8b1a694e 100644
+--- a/esm/vs/language/css/cssMode.js
++++ b/esm/vs/language/css/cssMode.js
+@@ -1334,8 +1334,11 @@ var DiagnosticsAdapter = class {
+     }).then((diagnostics) => {
+       const markers = diagnostics.map((d) => toDiagnostics(resource, d));
+       let model = monaco_editor_core_exports.editor.getModel(resource);
+-      if (model && model.getLanguageId() === languageId) {
++      // PATCH: Gracefully handle the case where the model was disposed during async validation.
++      if (model && !model.isDisposed() && model.getLanguageId() === languageId) {
+         monaco_editor_core_exports.editor.setModelMarkers(model, languageId, markers);
++        // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++        monaco_editor_core_exports.editor.setModelVersionValidated(model, model.getVersionId());
+       }
+     }).then(void 0, (err) => {
+       console.error(err);
+@@ -1678,26 +1681,11 @@ var DocumentSymbolAdapter = class {
+       if (!items) {
+         return;
+       }
+-      return items.map((item) => {
+-        if (isDocumentSymbol(item)) {
+-          return toDocumentSymbol(item);
+-        }
+-        return {
+-          name: item.name,
+-          detail: "",
+-          containerName: item.containerName,
+-          kind: toSymbolKind(item.kind),
+-          range: toRange(item.location.range),
+-          selectionRange: toRange(item.location.range),
+-          tags: []
+-        };
+-      });
++      // PATCH: Ensure the new standard DocumentSymbol data structure is provided from language services
++      return items.map((item) => toDocumentSymbol(item));
+     });
+   }
+ };
+-function isDocumentSymbol(symbol) {
+-  return "children" in symbol;
+-}
+ function toDocumentSymbol(symbol) {
+   return {
+     name: symbol.name,
+diff --git a/esm/vs/language/html/html.worker.js b/esm/vs/language/html/html.worker.js
+index bb2c0be331b18e5dc668cab88834f5dd1be4597b..c1275b7f8b0079934caac1392701ede13139c735 100644
+--- a/esm/vs/language/html/html.worker.js
++++ b/esm/vs/language/html/html.worker.js
+@@ -16155,7 +16155,8 @@ var HTMLWorker = class {
+       return [];
+     }
+     let htmlDocument = this._languageService.parseHTMLDocument(document);
+-    let symbols = this._languageService.findDocumentSymbols(document, htmlDocument);
++    // PATCH: Ensure the new standard DocumentSymbol data structure is provided from language services
++    let symbols = this._languageService.findDocumentSymbols2(document, htmlDocument);
+     return Promise.resolve(symbols);
+   }
+   async getFoldingRanges(uri, context) {
+diff --git a/esm/vs/language/html/htmlMode.js b/esm/vs/language/html/htmlMode.js
+index 3ad9cb2d83dc5ea1d4a0270412875a82f3da38e1..b0f3be8b1c80391626f014aa0f4d2d885aa5fa24 100644
+--- a/esm/vs/language/html/htmlMode.js
++++ b/esm/vs/language/html/htmlMode.js
+@@ -1678,26 +1678,11 @@ var DocumentSymbolAdapter = class {
+       if (!items) {
+         return;
+       }
+-      return items.map((item) => {
+-        if (isDocumentSymbol(item)) {
+-          return toDocumentSymbol(item);
+-        }
+-        return {
+-          name: item.name,
+-          detail: "",
+-          containerName: item.containerName,
+-          kind: toSymbolKind(item.kind),
+-          range: toRange(item.location.range),
+-          selectionRange: toRange(item.location.range),
+-          tags: []
+-        };
+-      });
++      // PATCH: Ensure the new standard DocumentSymbol data structure is provided from language services
++      return items.map((item) => toDocumentSymbol(item));
+     });
+   }
+ };
+-function isDocumentSymbol(symbol) {
+-  return "children" in symbol;
+-}
+ function toDocumentSymbol(symbol) {
+   return {
+     name: symbol.name,
+diff --git a/esm/vs/language/json/jsonMode.js b/esm/vs/language/json/jsonMode.js
+index 2469e15731504d94f94047a0108b104eb1f8bc40..2b2d727d6d805bae024ac244c1541faf002b461b 100644
+--- a/esm/vs/language/json/jsonMode.js
++++ b/esm/vs/language/json/jsonMode.js
+@@ -1335,8 +1335,11 @@ var DiagnosticsAdapter = class {
+     }).then((diagnostics) => {
+       const markers = diagnostics.map((d) => toDiagnostics(resource, d));
+       let model = monaco_editor_core_exports.editor.getModel(resource);
+-      if (model && model.getLanguageId() === languageId) {
++      // PATCH: Gracefully handle the case where the model was disposed during async validation.
++      if (model && !model.isDisposed() && model.getLanguageId() === languageId) {
+         monaco_editor_core_exports.editor.setModelMarkers(model, languageId, markers);
++        // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++        monaco_editor_core_exports.editor.setModelVersionValidated(model, model.getVersionId());
+       }
+     }).then(void 0, (err) => {
+       console.error(err);
+diff --git a/esm/vs/language/typescript/tsMode.js b/esm/vs/language/typescript/tsMode.js
+index 6e696fc4eb64adb9c5f6986192fd17c566d16db9..5b9c9324fbc782aaf521e5b3485ceb243bf0abcd 100644
+--- a/esm/vs/language/typescript/tsMode.js
++++ b/esm/vs/language/typescript/tsMode.js
+@@ -377,6 +377,7 @@ var DiagnosticsAdapter = class extends Adapter {
+     this._disposables = [];
+   }
+   async _doValidate(model) {
++    const modelVersionId = model.getVersionId();
+     const worker = await this._worker(model.uri);
+     if (model.isDisposed()) {
+       return;
+@@ -406,11 +407,17 @@ var DiagnosticsAdapter = class extends Adapter {
+     if (model.isDisposed()) {
+       return;
+     }
++    // PATCH: Don't apply model markers if the language has changed. (Aligns this behavior with other language services.) 
++    if (model.getLanguageId() !== this._selector) {
++      return;
++    }
+     monaco_editor_core_exports.editor.setModelMarkers(
+       model,
+       this._selector,
+       diagnostics.map((d) => this._convertDiagnostics(model, d))
+     );
++    // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++    monaco_editor_core_exports.editor.setModelVersionValidated(model, modelVersionId);
+   }
+   _convertDiagnostics(model, diag) {
+     const diagStart = diag.start || 0;
+diff --git a/monaco.d.ts b/monaco.d.ts
+index de65a4a52dacfd7f6986fb06198e056ab70ab3ef..d8443e404db7faf640e1dcae6854c0d4a49beb92 100644
+--- a/monaco.d.ts
++++ b/monaco.d.ts
+@@ -2028,6 +2028,7 @@ declare namespace monaco.editor {
+          * @return The text.
+          */
+         getValue(eol?: EndOfLinePreference, preserveBOM?: boolean): string;
++
+         /**
+          * Get the text stored in this model.
+          * @param preserverBOM Preserve a BOM character if it was detected when the model was constructed.

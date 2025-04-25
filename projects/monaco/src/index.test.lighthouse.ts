@@ -6,10 +6,10 @@ describe('lighthouse report', () => {
     const report = await lighthouseRunner.getReport('bundles', /* html */`
       <script type="module">
         import('@nvidia-elements/monaco/editor/define.js');
+        import('@nvidia-elements/monaco/input/define.js');
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(10);
-    expect(report.payload.javascript.requests['define.js'].kb).toBeLessThan(10);
+    expect(report.payload.javascript.kb).toBeLessThan(15);
   });
 });

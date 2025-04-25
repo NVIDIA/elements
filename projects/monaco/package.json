@@ -14,7 +14,13 @@
       "customData": [
         "./dist/data.html.json"
       ]
-    }
+    },
+    "snippets": [
+      {
+        "language": "html",
+        "path": "./dist/data.snippets.json"
+      }
+    ]
   },
   "files": [
     "README.md",
@@ -28,14 +34,22 @@
       "types": "./dist/custom-elements-jsx.d.ts"
     },
     "./data.html.json": "./dist/data.html.json",
+    "./data.snippets.json": "./dist/data.snippets.json",
     "./*.stories.json": "./dist/*.stories.json",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./types": {
+      "types": "./dist/types.d.ts"
+    },
     "./index.js": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./monaco.js": {
+      "types": "./dist/monaco.d.ts",
+      "default": "./dist/monaco.js"
     },
     "./editor": {
       "types": "./dist/editor/index.d.ts",
@@ -48,6 +62,38 @@
     "./editor/define.js": {
       "types": "./dist/editor/define.d.ts",
       "default": "./dist/editor/define.js"
+    },
+    "./input": {
+      "types": "./dist/input/index.d.ts",
+      "default": "./dist/input/index.js"
+    },
+    "./input/index.js": {
+      "types": "./dist/input/index.d.ts",
+      "default": "./dist/input/index.js"
+    },
+    "./input/define.js": {
+      "types": "./dist/input/define.d.ts",
+      "default": "./dist/input/define.js"
+    },
+    "./workers/json.worker.js": {
+      "types": "./dist/workers/json.worker.d.ts",
+      "default": "./dist/workers/json.worker.js"
+    },
+    "./workers/css.worker.js": {
+      "types": "./dist/workers/css.worker.d.ts",
+      "default": "./dist/workers/css.worker.js"
+    },
+    "./workers/html.worker.js": {
+      "types": "./dist/workers/html.worker.d.ts",
+      "default": "./dist/workers/html.worker.js"
+    },
+    "./workers/ts.worker.js": {
+      "types": "./dist/workers/ts.worker.d.ts",
+      "default": "./dist/workers/ts.worker.js"
+    },
+    "./workers/editor.worker.js": {
+      "types": "./dist/workers/editor.worker.d.ts",
+      "default": "./dist/workers/editor.worker.js"
     }
   },
   "sideEffects": true,
@@ -57,6 +103,7 @@
     "build": "wireit",
     "build:watch": "wireit",
     "build:snippets": "wireit",
+    "build:themes": "wireit",
     "lint": "wireit",
     "test": "wireit",
     "test:axe": "wireit",
@@ -81,9 +128,12 @@
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@nvidia-elements/snippets": "workspace:*",
+    "@types/node": "catalog:",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
+    "colorjs.io": "0.5.2",
     "eslint": "catalog:",
+    "postcss": "8.4.31",
     "publint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
@@ -129,15 +179,20 @@
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.ssr.ts",
         "!src/**/__screenshots__/**",
+        "!src/themes/generated/**",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
-        "vite.config.ts"
+        "vite.config.ts",
+        "postcss.config.js"
       ],
       "output": [
-        "dist/**"
+        "dist/**",
+        "!dist/data.snippets.json"
       ],
       "dependencies": [
+        "build:snippets",
+        "build:themes",
         "../internals/vite:ci",
         {
           "script": "../elements:build",
@@ -154,6 +209,31 @@
       "service": true,
       "dependencies": [
         "build"
+      ]
+    },
+    "build:snippets": {
+      "command": "@nve-snippets",
+      "files": [
+        "**/*.snippets.html"
+      ],
+      "output": [
+        "dist/data.snippets.json"
+      ]
+    },
+    "build:themes": {
+      "command": "node --experimental-transform-types ./build/themes.ts",
+      "files": [
+        "../themes/dist/**/*.json",
+        "src/themes/*.json"
+      ],
+      "output": [
+        "src/themes/generated/*.json"
+      ],
+      "dependencies": [
+        {
+          "script": "../themes:build",
+          "cascade": false
+        }
       ]
     },
     "test": {
@@ -240,7 +320,8 @@
       "files": [
         "src/**/*.ts",
         "eslint.config.js",
-        "!src/**/__screenshots__/**"
+        "!src/**/__screenshots__/**",
+        "!src/themes/generated/**"
       ],
       "output": [],
       "dependencies": [
