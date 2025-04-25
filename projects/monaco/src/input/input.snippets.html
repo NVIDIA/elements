@@ -1,0 +1,11 @@
+<template name="Monaco Input" prefix="monaco" description="Basic Monaco Editor input" type="pattern">
+  <nve-monaco-editor language="${1:Language}" value="${2:Value}"></nve-monaco-editor>
+</template>
+
+<template name="Monaco Input Control" prefix="monaco" description="Basic Monaco Editor input control" type="pattern">
+  <nve-control style="width: 100%;">
+    <label>${1:Label}</label>
+    <nve-monaco-input nve-control name="${2:Name}" language="${3:Language}" value="${4:Value}"></nve-monaco-input>
+    <nve-control-message>${5:Message}</nve-control-message>
+  </nve-control>
+</template>
