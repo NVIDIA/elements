@@ -1,10 +1,10 @@
 import { define } from '@nvidia-elements/core/internal';
-import { Editor } from '@nvidia-elements/monaco/editor';
+import { MonacoEditor } from '@nvidia-elements/monaco/editor';
 
-define(Editor);
+define(MonacoEditor);
 
 declare global {
   interface HTMLElementTagNameMap {
-    ['nve-monaco-editor']: Editor;
+    ['nve-monaco-editor']: MonacoEditor;
   }
 }

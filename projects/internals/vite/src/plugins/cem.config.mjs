@@ -311,13 +311,14 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
             // Evaluate types that look like this:
             //   export type Interaction = 'emphasize' | 'destructive';
             //   export type FlatInteraction = 'flat' | `${'flat'}-${interaction}`;
+            //   export type LineNumbersType = 'on' | 'off' | 'relative' | 'interval' | LineNumberFormatter;
             if (node.type.kind === ts.SyntaxKind.UnionType) {
               const typeAlias = node.name.escapedText;
-              const { types } = runtimeEnvironment.typeChecker.getTypeAtLocation(node);
-              if (types?.every(type => type.value !== undefined)) {
-                const stringLiterals = types.map(type => quoteWrap(type.value));
-                stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
-              }
+              const stringLiterals = node.type.types.map(typeNode => {
+                const type = runtimeEnvironment.typeChecker.getTypeAtLocation(typeNode);
+                return type.value !== undefined ? quoteWrap(type.value) : typeNode.getText();
+              });
+              stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
             }
 
             // remove any @deprecated types

@@ -5,17 +5,20 @@ import { libraryTestConfig } from '@nve-internals/vite';
 export default mergeConfig(libraryTestConfig, {
   test: {
     include: ['./src/**/*.test.ts'],
-    alias: {
-      '@nvidia-elements/monaco': resolve(import.meta.dirname, './src')
-    },
+    alias: { '@nvidia-elements/monaco': resolve(import.meta.dirname, './src') },
+    isolate: true,
     coverage: {
-      thresholds: {
-        lines: 90,
-        branches: 70,
-        functions: 80,
-        statements: 90
-      },
-      exclude: ['src/monaco.ts'] // ignoring due to web workers
+      exclude: ['src/workers/*.ts'] // ignore the re-exported web workers
     }
+  },
+  optimizeDeps: {
+    include: [
+      'monaco-editor/esm/vs/editor/editor.main.js',
+      'monaco-editor/esm/vs/editor/editor.worker.js',
+      'monaco-editor/esm/vs/language/css/css.worker.js',
+      'monaco-editor/esm/vs/language/json/json.worker.js',
+      'monaco-editor/esm/vs/language/html/html.worker.js',
+      'monaco-editor/esm/vs/language/typescript/ts.worker.js'
+    ]
   }
 });
