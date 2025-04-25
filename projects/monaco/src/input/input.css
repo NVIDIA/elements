@@ -1,0 +1,100 @@
+:host {
+  --background: var(--nve-sys-interaction-field-background);
+  --border: var(--nve-ref-border-width-md) solid transparent;
+  --border-radius: var(--nve-ref-border-radius-sm);
+  --min-height: 200px;
+  --padding: var(--nve-ref-size-200);
+  all: initial;
+  display: block;
+  position: relative;
+  visibility: inherit;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  height: 100%;
+  width: 100%;
+  outline: var(--nve-debug-element-outline, initial);
+  color-scheme: var(--nve-sys-color-scheme);
+}
+
+:host([disabled]) {
+  nve-monaco-editor {
+    opacity: 0.5;
+    pointer-events: none;
+    user-select: none;
+
+    .cursor {
+      display: none !important;
+    }
+  }
+}
+
+:host(:invalid) {
+  --border: var(--nve-ref-border-width-md) solid var(--nve-sys-support-danger-emphasis-color);
+}
+
+:host(:state(validating-syntax)) {
+  --border: var(--nve-ref-border-width-md) solid transparent;
+}
+
+:host(:not(:state(ready))),
+:host(:state(validating-syntax):not(:focus-within)) {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: var(--nve-ref-border-radius-sm);
+    width: calc(100% - var(--nve-ref-border-radius-sm) * 2);
+    height: var(--nve-ref-border-width-md);
+    background: var(--nve-ref-border-color-emphasis);
+    transform-origin: 0% 0%;
+    animation: validating-animation 2.4s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+}
+
+@keyframes validating-animation {
+  0% {
+    transform: scaleX(0.015);
+    transform-origin: 0% 0%;
+  }
+  25% {
+    transform: scaleX(0.4);
+  }
+  50% {
+    transform: scaleX(0.015);
+    transform-origin: 100% 0%;
+  }
+  50.1% {
+    transform: scaleX(0.015);
+    transform-origin: 100% 0%;
+  }
+  75% {
+    transform: scaleX(0.4);
+  }
+  100% {
+    transform: scaleX(0.015);
+    transform-origin: 0% 0%;
+  }
+}
+
+[internal-host] {
+  background-color: var(--background);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+
+  --_background: var(--background);
+  --_min-height: var(--min-height);
+
+  &:focus-within {
+    outline: Highlight solid 2px !important;
+    outline: 5px auto -webkit-focus-ring-color !important;
+  }
+
+  nve-monaco-editor {
+    width: 100%;
+    height: 100%;
+    --min-height: var(--_min-height);
+    --background: var(--_background);
+  }
+}

@@ -1,4 +1,5 @@
 :host {
+  --background: var(--nve-sys-layer-container-background);
   --min-height: 300px;
   all: initial;
   display: block;
@@ -6,19 +7,31 @@
   box-sizing: border-box;
   font-family: inherit;
   font-size: inherit;
-  contain: layout; /* https://developer.mozilla.org/en-US/docs/Web/CSS/contain */
   height: 100%;
   width: 100%;
   outline: var(--nve-debug-element-outline, initial);
   color-scheme: var(--nve-sys-color-scheme);
+}
+
+[internal-host] {
+  background: var(--background);
+  position: relative;
   min-height: var(--min-height);
+  height: 100%;
+}
+
+#color-scheme-probe {
+  background-color: var(--nve-sys-layer-canvas-background);
+  transition: background-color 50ms ease;
+  width: 0;
+  height: 0;
 }
 
 #editor {
-  width: 100%;
-  min-height: var(--min-height);
-}
+  position: absolute;
+  inset: 0;
 
-[internal-host]:has(.monaco-editor) #loading {
-  display: none;
+  .monaco-editor {
+    outline: none;
+  }
 }

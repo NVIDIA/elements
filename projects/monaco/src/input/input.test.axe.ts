@@ -2,18 +2,18 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { MonacoEditor } from '@nvidia-elements/monaco/editor';
-import '@nvidia-elements/monaco/editor/define.js';
+import { MonacoInput } from '@nvidia-elements/monaco/input';
+import '@nvidia-elements/monaco/input/define.js';
 
-describe(MonacoEditor.metadata.tag, () => {
+describe(MonacoInput.metadata.tag, () => {
   let fixture: HTMLElement;
-  let element: MonacoEditor;
+  let element: MonacoInput;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-monaco-editor></nve-monaco-editor>
+      <nve-monaco-input></nve-monaco-input>
     `);
-    element = fixture.querySelector(MonacoEditor.metadata.tag);
+    element = fixture.querySelector(MonacoInput.metadata.tag);
     await untilEvent(element, 'ready');
     await elementIsStable(element);
   });
@@ -22,8 +22,8 @@ describe(MonacoEditor.metadata.tag, () => {
     removeFixture(fixture);
   });
 
-  it('should pass axe check for status', async () => {
-    const results = await runAxe([MonacoEditor.metadata.tag]);
+  it('should pass axe check', async () => {
+    const results = await runAxe([MonacoInput.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });

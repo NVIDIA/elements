@@ -16,6 +16,8 @@ tsconfig.*.tsbuildinfo
 projects/labs/code/index.html
 projects/elements/src/css/*.css
 projects/elements/src/icon/server.ts
-projects/internals/metadata/static/*.json
 projects/elements-react/src/**/*
+projects/internals/metadata/static/*.json
+projects/monaco/src/themes/generated/*
+projects/**/.screencast/.auth/*
 .vscode/*.json.code-snippets
