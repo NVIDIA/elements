@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/monaco/editor/define.js';
-```
-
-```html
-<nve-monaco-editor></nve-monaco-editor>
-```
+{% install 'nve-monaco-editor' %}
 
 ## Default
 

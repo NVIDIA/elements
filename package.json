@@ -117,6 +117,7 @@
         "release:elements-react",
         "release:labs-behaviors-alpine",
         "release:labs-code",
+        "release:monaco",
         "release:styles"
       ]
     },
@@ -162,6 +163,7 @@
     "release:monaco": {
       "command": "cd projects/monaco && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
+        "release:elements",
         "release:themes"
       ]
     },
@@ -192,6 +194,7 @@
         "!projects/elements/src/icon/{icons,server}.ts",
         "!projects/internals/metadata/static/**",
         "!projects/elements-react/src/**/*",
+        "!projects/monaco/src/themes/generated/**",
         "!projects/starters/nextjs/next-env.d.ts"
       ],
       "output": []
@@ -232,6 +235,9 @@
       "esbuild",
       "sharp",
       "style-dictionary"
-    ]
+    ],
+    "patchedDependencies": {
+      "monaco-editor": "patches/monaco-editor.patch"
+    }
   }
 }
