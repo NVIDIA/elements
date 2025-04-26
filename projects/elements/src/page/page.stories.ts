@@ -207,6 +207,15 @@ export const SlotLeft = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat.
+    </p>
+  </main>
+
   <nve-page-panel slot="left" size="sm">
     <nve-page-panel-content>left</nve-page-panel-content>
   </nve-page-panel>
