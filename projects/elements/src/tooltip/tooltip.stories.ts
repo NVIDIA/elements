@@ -99,9 +99,13 @@ export const OpenDelay = {
 export const DynamicTrigger = {
   render: () => html`
 <nve-tooltip id="dynamic-popover"></nve-tooltip>
-<nve-button popovertarget="dynamic-popover">one</nve-button>
-<nve-button popovertarget="dynamic-popover">two</nve-button>
-<nve-button popovertarget="dynamic-popover">three</nve-button>
+
+<div nve-layout="row gap:sm">
+  <nve-button popovertarget="dynamic-popover">one</nve-button>
+  <nve-button popovertarget="dynamic-popover">two</nve-button>
+  <nve-button popovertarget="dynamic-popover">three</nve-button>
+</div>
+
 <script type="module">
   document.querySelector('#dynamic-popover').addEventListener('open', e => {
     e.target.textContent = 'tooltip ' + e.detail.trigger.textContent;
