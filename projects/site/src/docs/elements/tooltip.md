@@ -76,7 +76,7 @@ useful when displaying tooltips on datagrid items to avoid overwhelming the UX a
 
 A popover will follow its assigned anchor event when the anchor position is dynamically changed.
 
-{% story 'nve-tooltip', 'DynamicAnchorPosition' %}
+<!-- {% story 'nve-tooltip', 'DynamicAnchorPosition' %} -->
 
 ```typescript
 @customElement('dynamic-anchor-position-demo')

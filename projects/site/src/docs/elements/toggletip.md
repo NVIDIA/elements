@@ -22,19 +22,19 @@ import '@nvidia-elements/core/toggletip/define.js';
 
 {% story 'nve-toggletip', 'Default' %}
 
-{% story 'nve-toggletip', 'Visual', '{ "inline": false, "height": "130px" }' %}
+{% story 'nve-toggletip', 'Visual', '{ "inline": false, "height": "250px" }' %}
 
 ## Position
 
 {% api 'nve-toggletip', 'property', 'position' %}
 
-{% story 'nve-toggletip', 'Position', '{ "inline": false, "height": "280px" }' %}
+{% story 'nve-toggletip', 'Position', '{ "inline": false, "height": "250px" }' %}
 
 ## Alignment
 
 {% api 'nve-toggletip', 'property', 'alignment' %}
 
-{% story 'nve-toggletip', 'Alignment', '{ "inline": false, "height": "350px" }' %}
+{% story 'nve-toggletip', 'Alignment', '{ "inline": false, "height": "400px" }' %}
 
 ## Events
 
@@ -42,7 +42,7 @@ import '@nvidia-elements/core/toggletip/define.js';
 
 {% api 'nve-toggletip', 'event', 'close' %}
 
-{% story 'nve-toggletip', 'Events', '{ "inline": false, "height": "280px" }' %}
+{% story 'nve-toggletip', 'Events', '{ "inline": false, "height": "250px" }' %}
 
 ## Content
 

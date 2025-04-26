@@ -26,15 +26,15 @@ import '@nvidia-elements/core/resize-handle/define.js';
 
 ## Split Horizontal
 
-{% story 'nve-resize-handle', 'SplitHorizontal', '{ "inline": false, "height": "300px" }' %}
+{% story 'nve-resize-handle', 'SplitHorizontal', '{ "inline": false, "height": "250px" }' %}
 
 ## Split Vertical
 
-{% story 'nve-resize-handle', 'SplitVertical', '{ "inline": false, "height": "300px" }' %}
+{% story 'nve-resize-handle', 'SplitVertical', '{ "inline": false, "height": "250px" }' %}
 
 ## Form
 
-{% story 'nve-resize-handle', 'Form', '{ "inline": false, "height": "350px" }' %}
+{% story 'nve-resize-handle', 'Form', '{ "inline": false, "height": "300px" }' %}
 
 ## Line Width
 

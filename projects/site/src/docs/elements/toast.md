@@ -57,4 +57,4 @@ import '@nvidia-elements/core/toast/define.js';
 
 {% api 'nve-toast', 'property', 'alignment' %}
 
-{% story 'nve-toast', 'Alignment', '{ "inline": false, "height": "600px" }' %}
+{% story 'nve-toast', 'Alignment', '{ "inline": false, "height": "500px" }' %}

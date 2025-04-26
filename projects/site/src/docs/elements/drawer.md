@@ -33,7 +33,7 @@ import '@nvidia-elements/core/drawer/define.js';
 
 {% story 'nve-drawer', 'Default' %}
 
-{% story 'nve-drawer', 'Visual', '{ "inline": false, "height": "700px" }' %}
+{% story 'nve-drawer', 'Visual', '{ "inline": false, "height": "500px" }' %}
 
 ## Size
 
@@ -41,18 +41,18 @@ import '@nvidia-elements/core/drawer/define.js';
 
 ### Small
 
-{% story 'nve-drawer', 'Small', '{ "inline": false, "height": "700px" }' %}
+{% story 'nve-drawer', 'Small', '{ "inline": false, "height": "500px" }' %}
 
 ### Large
 
-{% story 'nve-drawer', 'Large', '{ "inline": false, "height": "700px" }' %}
+{% story 'nve-drawer', 'Large', '{ "inline": false, "height": "500px" }' %}
 
 ## Scroll
 
-{% story 'nve-drawer', 'Scroll', '{ "inline": false, "height": "700px" }' %}
+{% story 'nve-drawer', 'Scroll', '{ "inline": false, "height": "500px" }' %}
 
 ## Position
 
 {% api 'nve-drawer', 'property', 'position' %}
 
-{% story 'nve-drawer', 'Position', '{ "inline": false, "height": "700px" }' %}
+{% story 'nve-drawer', 'Position', '{ "inline": false, "height": "500px" }' %}

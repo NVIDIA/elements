@@ -68,7 +68,7 @@ If data is dynamically loaded for a node use a `progress-ring` to show loading p
 
 ## Vertical Nav
 
-{% story 'nve-tree', 'VerticalNav', '{ "inline": false, "height": "600px" }' %}
+{% story 'nve-tree', 'VerticalNav', '{ "inline": false, "height": "500px" }' %}
 
 ## Node Content
 
