@@ -58,7 +58,7 @@ export function render(data) {
 
       #iframe-links {
         position: fixed;
-        inset: 1rem 1rem auto auto;
+        inset: auto 1rem 1rem auto;
         z-index: 1000;
       }
     </style>
@@ -68,12 +68,14 @@ export function render(data) {
       }
     </script>
   </head>
-  <body nve-layout="row align:center">
+  <body nve-layout="column">
     <div id="iframe-links" hidden>
       <a href="docs/elements/${data.story.element}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
       <a href="${data.story.playground}" target="_blank" nve-text="link body sm">playground &#8599;</a>
     </div>
-    ${data.story.template}
+    <div nve-layout="row full align:center">
+      ${data.story.template}
+    </div>
   </body>
 </html>
 `,

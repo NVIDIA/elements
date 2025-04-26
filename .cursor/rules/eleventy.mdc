@@ -1,0 +1,82 @@
+---
+description: 
+globs: *.md,*.mdx
+alwaysApply: false
+---
+# 11ty Markdown Conversion Rules
+
+## 1. Frontmatter
+
+- **Always** include frontmatter with the following fields:
+  ```yaml
+  ---
+  {
+    title: 'ComponentName',
+    layout: 'docs.11ty.js',
+    tag: 'nve-component'
+  }
+  ---
+  ```
+- If the original file contains related elements referenced in `<nve-api-table>` tags, add:
+  ```yaml
+  associatedElements: ['nve-related-1', 'nve-related-2']
+  ```
+  - Use single quotes for element names.
+- **Do not** use the old YAML frontmatter format (e.g., `title: Panels`).
+
+## 2. Component Conversion
+
+- Convert Storybook/MDX tags as follows:
+  - `<Canvas of={Story}>` → `{% story 'component', 'Story' %}`
+  - `<nve-api-detail>` → `{% api 'component', 'type', 'value' %}`
+- **Remove** the following sections entirely:
+  - `<nve-api-summary>`
+  - `<nve-api-status>`
+  - `<nve-api-table>`
+- **Preserve** all descriptive text, HTML examples, and section hierarchy.
+- **Remove** the top-level `# h1` header.
+
+## 3. Story Parameters
+
+- When you detect `inline: false` in story parameters:
+  - Use this format:
+    ```liquid
+    {% story 'component', 'Story', '{ "inline": false, "height": "600px" }' %}
+    ```
+    - The entire parameters object must be wrapped in single quotes.
+    - Height values must be quoted and include the `px` unit.
+  - **Do not** use unquoted or unwrapped parameter objects.
+
+## 4. Alerts
+
+- **Do not** convert `<nve-alert>` to shortcodes.
+- **Preserve** the original HTML format:
+  ```html
+  <nve-alert status="warning">
+    Message here
+  </nve-alert>
+  ```
+
+## 5. File Organization
+
+- **Output location:**
+  - Place files in `projects/site/src/docs/`.
+  - If the input file contains `<Meta title="Elements/...">`, place in `projects/site/src/docs/elements/`.
+- **Maintain** installation/code example sections.
+- **Group** related sections (e.g., all layout variations together).
+- **Preserve** ARIA spec links and external references.
+- **End every file with a single trailing newline.**
+
+## 6. Reference Examples
+
+- For a fully converted component doc, see:  
+  `projects/site/src/docs/elements/accordion.md`
+- For a fully converted non-component doc, see:  
+  `projects/site/src/docs/integrations/angular.md`
+
+---
+
+**General Notes:**
+- Be consistent with single vs. double quotes as shown in the examples.
+- Only add `associatedElements` if the original file references related elements in `<nve-api-table>`.
+- Always check for and remove deprecated or unnecessary sections as specified.
