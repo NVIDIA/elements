@@ -53,7 +53,7 @@ import '@nvidia-elements/core/progressive-filter-chip/define.js';
 
 Custom filter chips can be created by using the `slot` attribute. A `nve-button` can be used to trigger custom UI.
 
-{% story 'nve-progressive-filter-chip', 'Custom', '{ "inline": false, "height": "750px" }' %}
+{% story 'nve-progressive-filter-chip', 'Custom', '{ "inline": false, "height": "400px" }' %}
 
 ## Validation
 

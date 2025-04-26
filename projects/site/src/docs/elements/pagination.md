@@ -45,7 +45,7 @@ import '@nvidia-elements/core/pagination/define.js';
 If the upper bound of items is unknown the `last-page` event can be used to determine when
 to load additional data and update the pagination with the latest total of items.
 
-{% story 'nve-pagination', 'DynamicItems', '{ "inline": false, "height": 100 }' %}
+{% story 'nve-pagination', 'DynamicItems' %}
 
 ## Dynamic Step Size
 
@@ -57,7 +57,7 @@ When custom step is provided, the select options dynamically adapt to the step a
 
 Pagination is [form associated component](https://web.dev/more-capable-form-controls/#defining-a-form-associated-custom-element) and can be used within FormData.
 
-{% story 'nve-pagination', 'Forms', '{ "inline": false, "height": 240 }' %}
+{% story 'nve-pagination', 'Forms', '{ "inline": false, "height": 300 }' %}
 
 ## No Provided Items Count
 

@@ -62,7 +62,7 @@ By default Menu will show a blue border on the selected item. You can change the
 
 [ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
 
-{% story 'nve-menu', 'Dropdown', '{ "inline": false, "height": "600px" }' %}
+{% story 'nve-menu', 'Dropdown', '{ "inline": false, "height": "300px" }' %}
 
 ## Vertical Navigation Drawer
 
@@ -83,7 +83,7 @@ Navigation should be relevant and contextual to the page content.
 
 ## Complex
 
-{% story 'nve-menu', 'Complex', '{ "inline": false, "height": "650px" }' %}
+{% story 'nve-menu', 'Complex', '{ "inline": false, "height": "300px" }' %}
 
 ## Links
 

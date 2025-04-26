@@ -33,35 +33,35 @@ import '@nvidia-elements/core/notification/define.js';
 
 {% api 'nve-notification', 'event', 'close' %}
 
-{% story 'nve-notification', 'Events', '{ "inline": false, "height": "400px" }' %}
+{% story 'nve-notification', 'Events', '{ "inline": false, "height": "250px" }' %}
 
 ## Status
 
 {% api 'nve-notification', 'property', 'status' %}
 
-{% story 'nve-notification', 'Status', '{ "inline": false, "height": "650px" }' %}
+{% story 'nve-notification', 'Status', '{ "inline": false, "height": "400px" }' %}
 
 ## Interactive Group
 
-{% story 'nve-notification', 'InteractiveGroup', '{ "inline": false, "height": "600px" }' %}
+{% story 'nve-notification', 'InteractiveGroup', '{ "inline": false, "height": "400px" }' %}
 
 ## Drawer
 
 {% api 'nve-notification', 'property', 'container' %}
 
-{% story 'nve-notification', 'Drawer', '{ "inline": false, "height": "900px" }' %}
+{% story 'nve-notification', 'Drawer', '{ "inline": false, "height": "600px" }' %}
 
 ## Alignment
 
 {% api 'nve-notification-group', 'property', 'alignment' %}
 
-{% story 'nve-notification', 'Alignment', '{ "inline": false, "height": "700px" }' %}
+{% story 'nve-notification', 'Alignment', '{ "inline": false, "height": "600px" }' %}
 
 ## Position
 
 {% api 'nve-notification-group', 'property', 'position' %}
 
-{% story 'nve-notification', 'Position', '{ "inline": false, "height": "700px" }' %}
+{% story 'nve-notification', 'Position', '{ "inline": false, "height": "400px" }' %}
 
 ## Position Group
 
@@ -71,4 +71,4 @@ import '@nvidia-elements/core/notification/define.js';
 
 ## Content Wrap
 
-{% story 'nve-notification', 'ContentWrap', '{ "inline": false, "height": "700px" }' %}
+{% story 'nve-notification', 'ContentWrap', '{ "inline": false, "height": "250px" }' %}
