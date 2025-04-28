@@ -1,66 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@internals/storybook/blocks';
-import { Default, VerticalGroup, VerticalInlineGroup, HorizontalGroup, HorizontalInlineGroup } from './radio.stories';
+import { Redirect } from '@internals/storybook/blocks';
 
 <Meta title="Elements/Radio/Documentation" />
 
-# Radio
-
-<nve-api-summary tag="nve-radio"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/radio/define.js';
-```
-
-```html
-<nve-radio-group>
-  <label>label</label>
-  <nve-radio>
-    <label>radio 1</label>
-    <input type="radio" checked />
-  </nve-radio>
-
-  <nve-radio>
-    <label>radio 2</label>
-    <input type="radio" />
-  </nve-radio>
-
-  <nve-radio>
-    <label>radio 3</label>
-    <input type="radio" />
-  </nve-radio>
-  <nve-control-message>message</nve-control-message>
-</nve-radio-group>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Layout
-
-<nve-api-detail tag="nve-checkbox-group" type="property" value="layout"></nve-api-detail>
-
-### Vertical Group
-
-<Canvas of={VerticalGroup} />
-
-### Vertical Inline Group
-
-<Canvas of={VerticalInlineGroup} />
-
-### Horizontal Group
-
-<Canvas of={HorizontalGroup} />
-
-### Horizontal Inline Group
-
-<Canvas of={HorizontalInlineGroup} />
-
-<nve-api-status tag="nve-radio"></nve-api-status>
-
-<nve-api-table tag="nve-radio"></nve-api-table>
-
-<nve-api-table tag="nve-radio-group"></nve-api-table>
+<Redirect path={'docs/elements/radio/'} />
