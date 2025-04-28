@@ -1,46 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, Datalist, Vertical, Horizontal } from './month.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
-<Meta title="Elements/Month/Documentation"  />
+<Meta title="Elements/Month/Documentation" />
 
-# Month
-
-<nve-api-summary tag="nve-month"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/month/define.js';
-```
-
-```html
-<nve-month>
-  <label>label</label>
-  <input type="month" />
-</nve-month>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Datalist
-
-<Canvas of={Datalist} />
-
-## Layout
-
-<nve-api-detail tag="nve-month" type="property" value="layout"></nve-api-detail>
-
-### Vertical
-
-<Canvas of={Vertical} />
-
-### Horizontal
-
-<Canvas of={Horizontal} />
-
-<nve-api-status tag="nve-month"></nve-api-status>
-
-<nve-api-table tag="nve-month"></nve-api-table>
+<Redirect path={'docs/elements/month/'} />

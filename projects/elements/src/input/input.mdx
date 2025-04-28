@@ -1,62 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Input, Vertical, Horizontal, Rounded, Flat, FitContent, FitText } from './input.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Input/Documentation" />
 
-# Input
-
-<nve-api-summary tag="nve-input"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/input/define.js';
-```
-
-```html
-<nve-input>
-  <label>label</label>
-  <input type="text" />
-</nve-input>
-```
-
-## Standard
-
-<Canvas of={Input} />
-
-## Layout
-
-<nve-api-detail tag="nve-input" type="property" value="layout"></nve-api-detail>
-
-### Vertical
-
-<Canvas of={Vertical} />
-
-### Horizontal
-
-<Canvas of={Horizontal} />
-
-## Rounded
-
-<Canvas of={Rounded} />
-
-## Flat
-
-<Canvas of={Flat} />
-
-## Fit Content
-
-<nve-api-detail tag="nve-input" type="property" value="fitContent"></nve-api-detail>
-
-<Canvas of={FitContent} />
-
-## Fit Text
-
-<nve-api-detail tag="nve-input" type="property" value="fitText"></nve-api-detail>
-
-<Canvas of={FitText} />
-
-<nve-api-status tag="nve-input"></nve-api-status>
-
-<nve-api-table tag="nve-input"></nve-api-table>
+<Redirect path={'docs/elements/input/'} />
