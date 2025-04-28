@@ -189,6 +189,7 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   reset() {
+    this.#dropdown.hidePopover();
     if (this.#select) {
       this.#select.selectedIndex = -1;
     }
