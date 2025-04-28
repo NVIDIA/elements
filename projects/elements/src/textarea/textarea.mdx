@@ -1,46 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, Vertical, Horizontal, ColumnsAndRows } from './textarea.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Textarea/Documentation" />
 
-# Textarea
-
-<nve-api-summary tag="nve-textarea"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/textarea/define.js';
-```
-
-```html
-<nve-textarea>
-  <label>label</label>
-  <textarea></textarea>
-</nve-textarea>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Layout
-
-<nve-api-detail tag="nve-textarea" type="property" value="layout"></nve-api-detail>
-
-### Vertical
-
-<Canvas of={Vertical} />
-
-### Horizontal
-
-<Canvas of={Horizontal} />
-
-### Columns and Rows
-
-<Canvas of={ColumnsAndRows} />
-
-<nve-api-status tag="nve-textarea"></nve-api-status>
-
-<nve-api-table tag="nve-textarea"></nve-api-table>
+<Redirect path={'docs/elements/textarea/'} />

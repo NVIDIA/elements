@@ -1,44 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { InputGroup, FilterGroupRange  } from './input-group.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
-<Meta title="Elements/Input Group/Documentation" />
+<Meta title="Elements/Input/Documentation" />
 
-# Input Group
-
-<nve-api-summary tag="nve-input-group"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/input/define.js';
-```
-
-```html
-<nve-input-group>
-  <label>domain</label>
-  <nve-select style="width: 130px">
-    <select aria-label="protocol">
-      <option>https://</option>
-      <option>http://</option>
-    </select>
-  </nve-select>
-  <nve-input>
-    <input placeholder="example" type="url" aria-label="host" />
-    <nve-button container="flat" readonly="">.com</nve-button>
-  </nve-input>
-  <nve-control-message>host: 123456</nve-control-message>
-</nve-input-group>
-```
-
-## Standard
-
-<Canvas of={InputGroup} />
-
-## Range Group
-
-<Canvas of={FilterGroupRange} />
-
-<nve-api-status tag="nve-input-group"></nve-api-status>
-
-<nve-api-table tag="nve-input-group"></nve-api-table>
+<Redirect path={'docs/elements/input/'} />

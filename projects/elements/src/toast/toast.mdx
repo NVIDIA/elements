@@ -1,66 +1,6 @@
-import { Meta, Story } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, Visual, Status, Actions, Events, Alignment, Position } from './toast.stories';
+import { Meta } from '@storybook/addon-docs';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Toast/Documentation" />
 
-# Toast
-
-<nve-api-summary tag="nve-toast"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/toast/define.js';
-```
-
-```html
-<nve-toast id="toast" close-timeout="1500">hello there</nve-toast>
-<nve-button popovertarget="toast">button</nve-button>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-<Canvas of={Visual} story={{ inline: false, height: 130 }} />
-
-## Status
-
-<nve-api-detail tag="nve-toast" type="property" value="status"></nve-api-detail>
-
-<Canvas of={Status} story={{ inline: false, height: 300 }} />
-
-## Close Timeout
-
-<nve-api-detail tag="nve-toast" type="property" value="closeTimeout"></nve-api-detail>
-
-<Canvas of={Default} story={{ inline: false, height: 200 }} />
-
-## Events
-
-<nve-api-detail tag="nve-toast" type="event" value="open"></nve-api-detail>
-
-<nve-api-detail tag="nve-toast" type="event" value="close"></nve-api-detail>
-
-<Canvas of={Events} story={{ inline: false, height: 200 }} />
-
-## Actions
-
-<Canvas of={Actions} story={{ inline: false, height: 200 }} />
-
-## Position
-
-<nve-api-detail tag="nve-toast" type="property" value="position"></nve-api-detail>
-
-<Canvas of={Position} story={{ inline: false, height: 200 }} />
-
-## Alignment
-
-<nve-api-detail tag="nve-toast" type="property" value="alignment"></nve-api-detail>
-
-<Canvas of={Alignment} story={{ inline: false, height: 600 }} />
-
-<nve-api-status tag="nve-toast"></nve-api-status>
-
-<nve-api-table tag="nve-toast"></nve-api-table>
+<Redirect path={'docs/elements/toast/'} />
