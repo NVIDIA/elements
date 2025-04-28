@@ -284,7 +284,7 @@ export const PopoverOverflow = () => {
 
 export const Reset = () => {
   return html`
-  <nve-combobox style="width: 500px; --scroll-height: 220px">
+  <nve-combobox id="combobox-reset" style="width: 500px; --scroll-height: 220px">
     <label>label</label>
     <input type="search">
     <select multiple>
@@ -295,11 +295,13 @@ export const Reset = () => {
       <option value="configuration"></option>
       <option value="contains"></option>
     </select>
-    <nve-icon-button id="combobox-reset" aria-label="clear selection" icon-name="cancel" container="inline"></nve-icon-button>
+    <nve-icon-button aria-label="clear selection" icon-name="cancel" container="inline"></nve-icon-button>
+    <nve-button slot="footer" aria-label="clear selection" container="flat">reset</nve-button>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
   <script type="module">
-    document.querySelector('#combobox-reset').addEventListener('click', e => e.target.parentElement.reset());
+    document.querySelector('#combobox-reset nve-icon-button').addEventListener('click', e => e.target.parentElement.reset());
+    document.querySelector('#combobox-reset nve-button').addEventListener('click', e => e.target.parentElement.reset());
   </script>
   `
 };
