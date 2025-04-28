@@ -1,47 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, Datalist, Vertical, Horizontal } from './time.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Time/Documentation" />
 
-# Time
-
-<nve-api-summary tag="nve-time"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/time/define.js';
-```
-
-```html
-<nve-time>
-  <label>label</label>
-  <input type="time" min="09:00" max="18:00" value="12:00" />
-  <nve-control-message>message</nve-control-message>
-</nve-time>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Datalist
-
-<Canvas of={Datalist} />
-
-## Layout
-
-<nve-api-detail tag="nve-time" type="property" value="layout"></nve-api-detail>
-
-### Vertical
-
-<Canvas of={Vertical} />
-
-### Horizontal
-
-<Canvas of={Horizontal} />
-
-<nve-api-status tag="nve-time"></nve-api-status>
-
-<nve-api-table tag="nve-time"></nve-api-table>
+<Redirect path={'docs/elements/time/'} />

@@ -1,35 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, Form, Icon } from './dropzone.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Dropzone/Documentation" />
 
-# Dropzone
-
-<nve-api-summary tag="nve-dropzone"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/dropzone/define.js';
-```
-
-```html
-<nve-dropzone></nve-dropzone>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Icon
-
-<Canvas of={Icon} />
-
-## Form
-
-<Canvas of={Form} story={{ inline: false, height: 350 }} />
-
-<nve-api-status tag="nve-resize-handle"></nve-api-status>
-
-<nve-api-table tag="nve-resize-handle"></nve-api-table>
+<Redirect path={'docs/elements/dropzone/'} />

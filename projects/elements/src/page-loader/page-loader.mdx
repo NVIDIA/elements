@@ -1,31 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, Interactive } from './page-loader.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Page Loader/Documentation" />
 
-# Page Loader
-
-<nve-api-summary tag="nve-page-loader"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/page-loader/define.js';
-```
-
-```html
-<nve-page-loader></nve-page-loader>
-```
-
-## Standard
-
-<Canvas of={Default} story={{ inline: false, height: '400px' }} />
-
-## Interactive
-
-<Canvas of={Interactive} story={{ inline: false, height: '400px' }} />
-
-<nve-api-status tag="nve-page-loader"></nve-api-status>
-
-<nve-api-table tag="nve-page-loader"></nve-api-table>
+<Redirect path={'docs/elements/page-loader/'} />

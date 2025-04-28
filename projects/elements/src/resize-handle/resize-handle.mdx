@@ -1,47 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, Vertical, SplitHorizontal, SplitVertical, Form, LineWidth } from './resize-handle.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Resize Handle/Documentation" />
 
-# Resize Handle
-
-<nve-api-summary tag="nve-resize-handle"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/resize-handle/define.js';
-```
-
-```html
-<nve-resize-handle min="0" max="100" value="50" step="10"></nve-resize-handle>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Vertical
-
-<Canvas of={Vertical} />
-
-## Split Horizontal
-
-<Canvas of={SplitHorizontal} story={{ inline: false, height: 300 }} />
-
-## Split Vertical
-
-<Canvas of={SplitVertical} story={{ inline: false, height: 300 }} />
-
-## Form
-
-<Canvas of={Form} story={{ inline: false, height: 350 }} />
-
-## Line Width
-
-<Canvas of={LineWidth} />
-
-<nve-api-status tag="nve-resize-handle"></nve-api-status>
-
-<nve-api-table tag="nve-resize-handle"></nve-api-table>
+<Redirect path={'docs/elements/resize-handle/'} />

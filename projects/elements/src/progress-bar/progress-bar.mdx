@@ -1,65 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, Max, Labeled, Indeterminate, IndeterminateStatusColors, IndeterminateCustomColor } from './progress-bar.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Progress Bar/Documentation" />
 
-# Progress Bar
-
-<nve-api-summary tag="nve-progress-bar"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/progress-bar/define.js';
-```
-
-## Setting the Value
-
-<nve-api-detail tag="nve-progress-bar" type="property" value="value"></nve-api-detail>
-
-```html
-<nve-progress-bar status="accent" value="25"></nve-progress-bar>
-
-<nve-progress-bar status="success" value="50"></nve-progress-bar>
-
-<nve-progress-bar status="warning" value="75"></nve-progress-bar>
-
-<nve-progress-bar status="danger" value="100"></nve-progress-bar>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Max Value
-
-<nve-api-detail tag="nve-progress-bar" type="property" value="max"></nve-api-detail>
-
-<Canvas of={Max} />
-
-## Label Display
-
-Progress bars may have their labels and numerical values displayed above its visual indicator.
-
-<Canvas of={Labeled} />
-
-## Indeterminate Animation (Horizontal Loading Indicator)
-
-Progress bars may will display as an animated loading indicator when no `value` attribute is set.
-
-Leave off the `status` attribute for the `neutral` color.
-
-<Canvas of={Indeterminate} />
-
-Or in combination with `status` colors.
-
-<Canvas of={IndeterminateStatusColors} />
-
-Alternatively, set the `--accent-color` css property for a branded progress bar style.
-
-<Canvas of={IndeterminateCustomColor} />
-
-<nve-api-status tag="nve-progress-bar"></nve-api-status>
-
-<nve-api-table tag="nve-progress-bar"></nve-api-table>
+<Redirect path={'docs/elements/progress-bar/'} />

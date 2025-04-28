@@ -1,45 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Default, Size, Color, SlottedIcons } from './logo.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Logo/Documentation" />
 
-# Logo
-
-<nve-api-summary tag="nve-logo"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/logo/define.js';
-```
-
-```html
-<nve-logo></nve-logo>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Size
-
-<nve-api-detail tag="nve-logo" type="property" value="size"></nve-api-detail>
-
-<Canvas of={Size} />
-
-## Color
-
-<nve-api-detail tag="nve-logo" type="property" value="color"></nve-api-detail>
-
-<Canvas of={Color} />
-
-## Slotted Icon
-
-Slotted icon in logo will inherit logo color and size
-
-<Canvas of={SlottedIcons} />
-
-<nve-api-status tag="nve-logo"></nve-api-status>
-
-<nve-api-table tag="nve-logo"></nve-api-table>
+<Redirect path={'docs/elements/logo/'} />
