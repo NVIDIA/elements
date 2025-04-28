@@ -149,16 +149,34 @@ export function render(data) {
           }
         </script>
         <script type="module">
-          const scrollToAnchor = () => {
-            const anchorId = new URL(window.parent.location.href).hash.replace('#', '');
+        // Auto-scroll to deep-link headers
+          const scrollToHeader = () => {
+            const headerId = new URL(window.parent.location.href).hash.replace('#', '');
             
-            document.getElementById(anchorId)?.scrollIntoView({
+            document.getElementById(headerId)?.scrollIntoView({
               behavior: 'smooth',
               block: 'start'
             });
           };
 
-          setTimeout(() => scrollToAnchor(), 1000);
+          setTimeout(() => scrollToHeader(), 1500);
+        </script>
+
+        <script type="module">
+          // Auto-scroll to highlighted nav item
+          const scrollToNavItem = () => {
+            const navPanel = document.querySelector('nve-page-panel-content');
+            const highlightedNode = navPanel.querySelector('nve-tree-node[highlighted]');
+            
+            if (highlightedNode) {
+              highlightedNode.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+              });
+            }
+          };
+
+          setTimeout(() => scrollToNavItem(), 500);
         </script>
 
         ${renderSvgLogos()}
