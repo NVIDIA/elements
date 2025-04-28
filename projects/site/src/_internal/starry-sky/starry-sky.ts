@@ -65,9 +65,26 @@ export class StarrySky extends LitElement {
     }
   `;
 
+  #intersectionObserver = new IntersectionObserver(
+    (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.#createStars();
+        } else {
+          this.shadowRoot?.querySelector('svg')?.remove();
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
   firstUpdated(changedProperties: PropertyValues) {
     super.firstUpdated(changedProperties);
-    this.#createStars();
+    this.#intersectionObserver.observe(this);
+  }
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.#intersectionObserver.disconnect();
   }
 
   #createStars() {
