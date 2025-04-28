@@ -385,7 +385,13 @@ function publicPropertiesPlugin() {
         for (const declaration of module.declarations) {
           if (declaration.tagName) {
             declaration.members = declaration.members.filter(
-              m => m.kind === 'field' && !m.name.startsWith('_') && !m.readonly && !m.static && m.privacy !== 'private'
+              m =>
+                (m.kind === 'field' || m.kind === 'method') &&
+                !m.name.startsWith('_') &&
+                !m.name.startsWith('#') &&
+                !m.readonly &&
+                !m.static &&
+                m.privacy !== 'private'
             );
           }
         }
