@@ -1,46 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@internals/storybook/blocks';
-import { Default, Datalist, Vertical, Horizontal } from './week.stories';
+import { Redirect } from '@internals/storybook/blocks';
 
 <Meta title="Elements/Week/Documentation" />
 
-# Week
-
-<nve-api-summary tag="nve-week"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/week/define.js';
-```
-
-```html
-<nve-week>
-  <label>label</label>
-  <input type="week" />
-</nve-week>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Datalist
-
-<Canvas of={Datalist} />
-
-## Layout
-
-<nve-api-detail tag="nve-week" type="property" value="layout"></nve-api-detail>
-
-### Vertical
-
-<Canvas of={Vertical} />
-
-### Horizontal
-
-<Canvas of={Horizontal} />
-
-<nve-api-status tag="nve-week"></nve-api-status>
-
-<nve-api-table tag="nve-week"></nve-api-table>
+<Redirect path={'docs/elements/week/'} />

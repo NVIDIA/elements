@@ -1,43 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@internals/storybook/blocks';
-import { Default, Status, Size, Inline } from './pulse.stories';
+import { Redirect } from '@internals/storybook/blocks';
 
 <Meta title="Elements/Pulse/Documentation" />
 
-# Pulse
-
-<nve-api-summary tag="nve-pulse"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/pulse/define.js';
-```
-
-```html
-<nve-pulse></nve-pulse>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Status
-
-<nve-api-detail tag="nve-pulse" type="property" value="status"></nve-api-detail>
-
-<Canvas of={Status} />
-
-## Size
-
-<nve-api-detail tag="nve-pulse" type="property" value="size"></nve-api-detail>
-
-<Canvas of={Size} />
-
-## Inline
-
-<Canvas of={Inline} />
-
-<nve-api-status tag="nve-pulse"></nve-api-status>
-
-<nve-api-table tag="nve-pulse"></nve-api-table>
+<Redirect path={'docs/elements/pulse/'} />
