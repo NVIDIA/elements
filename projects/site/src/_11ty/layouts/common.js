@@ -158,88 +158,89 @@ export const renderDocsNav = data => /* html */ `
   </nve-tree-node>
   <nve-tree-node ${data.page.url.includes('/docs/elements/') ? 'expanded' : ''}>
     Elements
-    <nve-tree-node><a href="api/?path=/docs/elements-accordion-documentation--docs">Accordion</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-alert-documentation--docs">Alert</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-avatar-documentation--docs">Avatar</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-badge-documentation--docs">Badge</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-breadcrumb-documentation--docs">Breadcrumb</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-button-documentation--docs">Button</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-button-group-documentation--docs">Button Group</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-card-documentation--docs">Card</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-checkbox-documentation--docs">Checkbox</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-color-documentation--docs">Color</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-combobox-documentation--docs">Combobox</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-copy-button-documentation--docs">Copy Button</a></nve-tree-node>
-    <nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/accordion/') ? 'highlighted' : ''}><a href="docs/elements/accordion/">Accordion</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/alert/') ? 'highlighted' : ''}><a href="docs/elements/alert/">Alert</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/avatar/') ? 'highlighted' : ''}><a href="docs/elements/avatar/">Avatar</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/badge/') ? 'highlighted' : ''}><a href="docs/elements/badge/">Badge</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/breadcrumb/') ? 'highlighted' : ''}><a href="docs/elements/breadcrumb/">Breadcrumb</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/button/') ? 'highlighted' : ''}><a href="docs/elements/button/">Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/button-group/') ? 'highlighted' : ''}><a href="docs/elements/button-group/">Button Group</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/card/') ? 'highlighted' : ''}><a href="docs/elements/card/">Card</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/checkbox/') ? 'highlighted' : ''}><a href="docs/elements/checkbox/">Checkbox</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/color/') ? 'highlighted' : ''}><a href="docs/elements/color/">Color</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/combobox/') ? 'highlighted' : ''}><a href="docs/elements/combobox/">Combobox</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/copy-button/') ? 'highlighted' : ''}><a href="docs/elements/copy-button/">Copy Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/') ? 'expanded' : ''}>
       Datagrid
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-documentation--docs">Documentation</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-integrations--docs">Integrations</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-column-action--docs">Column Action</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-column-alignment--docs">Column Alignment</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-column-fixed--docs">Column Fixed</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-column-width--docs">Column width</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-container--docs">Container</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-card--docs">Card</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-display-settings--docs">Display Settings</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-footer--docs">Footer</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-multi-select--docs">Multi Select</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-pagination--docs">Pagination</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-panel-detail--docs">Panel Detail</a></nve-tree-node>  
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-panel-grid--docs">Panel Grid</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-performance--docs">Performance</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-placeholder--docs">Placeholder</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-row-action--docs">Row Action</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-row-groups--docs">Row Groups</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-row-sort--docs">Row Sort</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-scroll-height--docs">Scroll Height</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-single-select--docs">Single Select</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/elements-data-grid-stripe--docs">Stripe</a></nve-tree-node>
-    </nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-date-documentation--docs">Date</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-datetime-documentation--docs">Datetime</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-dialog-documentation--docs">Dialog</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-divider-documentation--docs">Divider</a></nve-tree-node>
-    <!-- <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'highlighted' : ''}><a href="docs/elements/dot/">Dot</a></nve-tree-node> -->
-    <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'highlighted' : ''}><a href="api/?path=/docs/elements-dot-documentation--docs">Dot</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-drawer-documentation--docs">Drawer</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-dropdown-documentation--docs">Dropdown</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-file-documentation--docs">File</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-icon-documentation--docs">Icon</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-icon-button-documentation--docs">Icon Button</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-input-documentation--docs">Input</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-input-group-documentation--docs">Input Group</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-logo-documentation--docs">Logo</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-menu-documentation--docs">Menu</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-month-documentation--docs">Month</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-notification-documentation--docs">Notification</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-page-documentation--docs">Page</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-page-header-documentation--docs">Page Header</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-page-loader-documentation--docs">Page Loader</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-pagination-documentation--docs">Pagination</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-panel-documentation--docs">Panel</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-progressive-filter-chip-documentation--docs">Progressive Filter Chip</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-progress-bar-documentation--docs">Progress Bar</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-progress-ring-documentation--docs">Progress Ring</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-password-documentation--docs">Password</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-preferences-input-documentation--docs">Preferences Input</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-pulse-documentation--docs">Pulse</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-radio-documentation--docs">Radio</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-range-documentation--docs">Range</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-search-documentation--docs">Search</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-select-documentation--docs">Select</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-sort-button-documentation--docs">Sort Button</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-switch-documentation--docs">Switch</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-steps-documentation--docs">Steps</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-tabs-documentation--docs">Tabs</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-tag-documentation--docs">Tag</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-textarea-documentation--docs">Textarea</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-time-documentation--docs">Time</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-toast-documentation--docs">Toast</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-toggletip-documentation--docs">Toggletip</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-toolbar-documentation--docs">Toolbar</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-tooltip-documentation--docs">Tooltip</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-tree-documentation--docs">Tree</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/elements-week-documentation--docs">Week</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.endsWith('/docs/elements/data-grid/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/">Documentation</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/integrations/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/integrations/">Integrations</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-action/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/column-action/">Column Action</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-alignment/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/column-alignment/">Column Alignment</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-fixed/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/column-fixed/">Column Fixed</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-width/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/column-width/">Column width</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/container/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/container/">Container</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/card/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/card/">Card</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/display-settings/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/display-settings/">Display Settings</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/footer/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/footer/">Footer</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/multi-select/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/multi-select/">Multi Select</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/pagination/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/pagination/">Pagination</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/panel-detail/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/panel-detail/">Panel Detail</a></nve-tree-node>  
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/panel-grid/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/panel-grid/">Panel Grid</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/performance/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/performance/">Performance</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/placeholder/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/placeholder/">Placeholder</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/row-action/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/row-action/">Row Action</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/row-groups/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/row-groups/">Row Groups</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/row-sort/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/row-sort/">Row Sort</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/scroll-height/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/scroll-height/">Scroll Height</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/single-select/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/single-select/">Single Select</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/stripe/') ? 'highlighted' : ''}><a href="/docs/elements/data-grid/stripe/">Stripe</a></nve-tree-node>
+    </nve-tree-node>  
+    <nve-tree-node ${data.page.url.includes('/docs/elements/date/') ? 'highlighted' : ''}><a href="docs/elements/date/">Date</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/datetime/') ? 'highlighted' : ''}><a href="docs/elements/datetime/">Datetime</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/dialog/') ? 'highlighted' : ''}><a href="docs/elements/dialog/">Dialog</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/divider/') ? 'highlighted' : ''}><a href="docs/elements/divider/">Divider</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/dot/') ? 'highlighted' : ''}><a href="docs/elements/dot/">Dot</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/drawer/') ? 'highlighted' : ''}><a href="docs/elements/drawer/">Drawer</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown/') ? 'highlighted' : ''}><a href="docs/elements/dropdown/">Dropdown</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/file/') ? 'highlighted' : ''}><a href="docs/elements/file/">File</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/icon/') ? 'highlighted' : ''}><a href="docs/elements/icon/">Icon</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/icon-button/') ? 'highlighted' : ''}><a href="docs/elements/icon-button/">Icon Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/input/') ? 'highlighted' : ''}><a href="docs/elements/input/">Input</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/input-group/') ? 'highlighted' : ''}><a href="docs/elements/input-group/">Input Group</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/logo/') ? 'highlighted' : ''}><a href="docs/elements/logo/">Logo</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/menu/') ? 'highlighted' : ''}><a href="docs/elements/menu/">Menu</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/month/') ? 'highlighted' : ''}><a href="docs/elements/month/">Month</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/notification/') ? 'highlighted' : ''}><a href="docs/elements/notification/">Notification</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/page/') ? 'highlighted' : ''}><a href="docs/elements/page/">Page</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/page-header/') ? 'highlighted' : ''}><a href="docs/elements/page-header/">Page Header</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/page-loader/') ? 'highlighted' : ''}><a href="docs/elements/page-loader/">Page Loader</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/pagination/') ? 'highlighted' : ''}><a href="docs/elements/pagination/">Pagination</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/panel/') ? 'highlighted' : ''}><a href="docs/elements/panel/">Panel</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/progressive-filter-chip/') ? 'highlighted' : ''}><a href="docs/elements/progressive-filter-chip/">Progressive Filter Chip</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/progress-bar/') ? 'highlighted' : ''}><a href="docs/elements/progress-bar/">Progress Bar</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/progress-ring/') ? 'highlighted' : ''}><a href="docs/elements/progress-ring/">Progress Ring</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/password/') ? 'highlighted' : ''}><a href="docs/elements/password/">Password</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/preferences-input/') ? 'highlighted' : ''}><a href="docs/elements/preferences-input/">Preferences Input</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/pulse/') ? 'highlighted' : ''}><a href="docs/elements/pulse/">Pulse</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/radio/') ? 'highlighted' : ''}><a href="docs/elements/radio/">Radio</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/range/') ? 'highlighted' : ''}><a href="docs/elements/range/">Range</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/resize-handle/') ? 'highlighted' : ''}><a href="docs/elements/resize-handle/">Resize Handle</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/search/') ? 'highlighted' : ''}><a href="docs/elements/search/">Search</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/select/') ? 'highlighted' : ''}><a href="docs/elements/select/">Select</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/sort-button/') ? 'highlighted' : ''}><a href="docs/elements/sort-button/">Sort Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/star-rating/') ? 'highlighted' : ''}><a href="docs/elements/star-rating/">Star Rating</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/steps/') ? 'highlighted' : ''}><a href="docs/elements/steps/">Steps</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/switch/') ? 'highlighted' : ''}><a href="docs/elements/switch/">Switch</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/tabs/') ? 'highlighted' : ''}><a href="docs/elements/tabs/">Tabs</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/tag/') ? 'highlighted' : ''}><a href="docs/elements/tag/">Tag</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/textarea/') ? 'highlighted' : ''}><a href="docs/elements/textarea/">Textarea</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/time/') ? 'highlighted' : ''}><a href="docs/elements/time/">Time</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/toast/') ? 'highlighted' : ''}><a href="docs/elements/toast/">Toast</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/toggletip/') ? 'highlighted' : ''}><a href="docs/elements/toggletip/">Toggletip</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/toolbar/') ? 'highlighted' : ''}><a href="docs/elements/toolbar/">Toolbar</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/tooltip/') ? 'highlighted' : ''}><a href="docs/elements/tooltip/">Tooltip</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/tree/') ? 'highlighted' : ''}><a href="docs/elements/tree/">Tree</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/week/') ? 'highlighted' : ''}><a href="docs/elements/week/">Week</a></nve-tree-node>
   </nve-tree-node>
   <nve-tree-node>
     Patterns
