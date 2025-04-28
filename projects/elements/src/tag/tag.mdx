@@ -1,63 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@internals/storybook/blocks';
-import { Default, Color, Prominence, Closable, TagGroup, Readonly, OverflowSingle, OverflowMaxWidth } from './tag.stories';
+import { Redirect } from '@internals/storybook/blocks';
 
 <Meta title="Elements/Tag/Documentation" />
 
-# Tag
-
-<nve-api-summary tag="nve-tag"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/tag/define.js';
-```
-
-```html
-<nve-tag></nve-tag>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Color
-
-<nve-api-detail tag="nve-tag" type="property" value="color"></nve-api-detail>
-
-<Canvas of={Color} />
-
-## Emphasis
-
-<nve-api-detail tag="nve-tag" type="property" value="prominence"></nve-api-detail>
-
-<Canvas of={Prominence} />
-
-## Closable
-
-<nve-api-detail tag="nve-tag" type="property" value="closable"></nve-api-detail>
-
-<Canvas of={Closable} />
-
-## Readonly
-
-<nve-api-detail tag="nve-tag" type="property" value="readonly"></nve-api-detail>
-
-<Canvas of={Readonly} />
-
-## Tag Group
-
-<Canvas of={TagGroup} />
-
-## Overflow Single
-
-<Canvas of={OverflowSingle} />
-
-## Overflow Max Width
-
-<Canvas of={OverflowMaxWidth} />
-
-<nve-api-status tag="nve-tag"></nve-api-status>
-
-<nve-api-table tag="nve-tag"></nve-api-table>
+<Redirect path={'docs/elements/tag/'} />

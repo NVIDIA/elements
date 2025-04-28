@@ -1,38 +1,6 @@
-import { Meta, Story } from '@storybook/addon-docs';
-import { Canvas } from '@internals/storybook/blocks';
-import { Default, Vertical, Horizontal } from './file.stories';
+import { Meta } from '@storybook/addon-docs';
+import { Redirect } from '@internals/storybook/blocks';
 
 <Meta title="Elements/File/Documentation" />
 
-# File
-
-<nve-api-summary tag="nve-file"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/file/define.js';
-```
-
-```html
-<nve-file>
-  <label>label</label>
-  <input type="file" />
-</nve-file>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Vertical
-
-<Canvas of={Vertical} />
-
-## Horizontal
-
-<Canvas of={Horizontal} />
-
-<nve-api-status tag="nve-file"></nve-api-status>
-
-<nve-api-table tag="nve-file"></nve-api-table>
+<Redirect path={'docs/elements/file/'} />

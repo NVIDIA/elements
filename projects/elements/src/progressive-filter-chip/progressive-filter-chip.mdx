@@ -1,66 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@internals/storybook/blocks';
-import { Default, TextInput, Multiple, DateRange, Layer, Custom, Validation } from './progressive-filter-chip.stories';
+import { Redirect } from '@internals/storybook/blocks';
 
 <Meta title="Elements/Progressive Filter Chip/Documentation" />
 
-# Progressive Filter Chip
-
-<nve-api-summary tag="nve-progressive-filter-chip"></nve-api-summary>
-
-## Installation
-
-```typescript
-import '@nvidia-elements/core/progressive-filter-chip/define.js';
-```
-
-```html
-<nve-progressive-filter-chip closable>
-  <select aria-label="dataset">
-    <option>workload</option>
-    <option selected>instance</option>
-  </select>
-  <select aria-label="condition">
-    <option>sort by</option>
-    <option selected>filter by</option>
-  </select>
-  <select aria-label="filter">
-    <option>utilization</option>
-    <option selected>status</option>
-  </select>
-</nve-progressive-filter-chip>
-```
-
-## Standard
-
-<Canvas of={Default} />
-
-## Text Input
-
-<Canvas of={TextInput} />
-
-## Multiple
-
-<Canvas of={Multiple} />
-
-## Date Range
-
-<Canvas of={DateRange} />
-
-## Layer
-
-<Canvas of={Layer} />
-
-## Custom
-
-Custom filter chips can be created by using the `slot` attribute. A `nve-button` can be used to trigger custom UI.
-
-<Canvas of={Custom} story={{ inline: false, height: '450px' }} />
-
-## Validation
-
-<Canvas of={Validation} />
-
-<nve-api-status tag="nve-progressive-filter-chip"></nve-api-status>
-
-<nve-api-table tag="nve-progressive-filter-chip"></nve-api-table>
+<Redirect path={'docs/elements/progressive-filter-chip/'} />
