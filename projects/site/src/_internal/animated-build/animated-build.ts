@@ -86,6 +86,7 @@ export class AnimatedBuild extends LitElement {
       animation: build 600ms ease-out forwards;
       animation-delay: var(--delay, 0ms);
       animation-timing-function: cubic-bezier(0.65, -0.2, 0.35, 1.2);
+      will-change: transform, opacity;
     }
 
     @keyframes build {
@@ -222,11 +223,11 @@ export class AnimatedBuild extends LitElement {
               </nve-page-panel>
 
               <main class="layer" style="--delay: 1.7s">
-                <img style="width: 913px; height: 300px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/voxels-webp.webp" alt="example of a voxel viewer" />
+                <img loading="lazy" style="width: 913px; height: 300px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/voxels-avif.avif" alt="example of a voxel viewer"  />
 
                 <nve-card class="layer" style="--delay: 4s">
                   <nve-card-content>
-                    <img style="width: 100px; height: 136px;" src="https://cdn-prod.nvidia.com/assets/elements/hero/car.svg" alt="example of a camera rig" />
+                    <img style="width: 100px; height: 136px;" src="https://cdn-prod.nvidia.com/assets/elements/splash/hero/car-avif.avif" alt="example of a camera rig" />
                   </nve-card-content>
                 </nve-card>
               </main>
