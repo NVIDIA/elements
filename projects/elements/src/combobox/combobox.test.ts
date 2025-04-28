@@ -567,6 +567,19 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
     expect(input.value).toBe('');
   });
 
+  it('should hide dropdown when reset() is called', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(dropdown.matches(':popover-open')).toBe(false);
+
+    input.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown', bubbles: true }));
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+
+    element.reset();
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(false);
+  });
+
   it('should hide tags and display label when a new selection causes a overflow', async () => {
     expect(element.matches(':state(multiple-overflow)')).toBe(false);
     element.style.setProperty('--width', '100px');
