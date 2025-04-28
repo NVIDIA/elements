@@ -81,6 +81,8 @@ section {
   .background {
     width: 100%;
     height: 100%;
+    contain: paint;
+    will-change: transform;
   }
 
   .content {

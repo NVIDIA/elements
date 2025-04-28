@@ -11,6 +11,18 @@ const permalink = '/landing.html';
     {{ BASE_HEAD }}
     <!-- IS_MR_PREVIEW: ${IS_MR_PREVIEW}, IS_DEV_MODE: ${IS_DEV_MODE} -->
     <link rel="stylesheet" href="./index.css" />
+    <!-- eslint-disable @html-eslint/use-baseline -->
+    <link
+      rel="preload"
+      href="https://cdn-prod.nvidia.com/assets/elements/hero/nv-wave-avif.avif"
+      fetchpriority="high"
+      as="image" />
+    <link
+      rel="preload"
+      href="https://cdn-prod.nvidia.com/assets/elements/hero/voxels-avif.avif"
+      fetchpriority="high"
+      as="image" />
+    <!-- eslint-enable @html-eslint/use-baseline -->
     <script type="module" src="./index.ts"></script>
   </head>
 
@@ -39,7 +51,7 @@ const permalink = '/landing.html';
           <img
             aria-hidden="true"
             class="background"
-            src="https://cdn-prod.nvidia.com/assets/elements/hero/nv-wave-webp.webp"
+            src="https://cdn-prod.nvidia.com/assets/elements/hero/nv-wave-avif.avif"
             alt="NVIDIA Background" />
           <div class="content full">
             <div class="layout">
@@ -60,7 +72,7 @@ const permalink = '/landing.html';
 
         <!-- Section : Ideas to Reality -->
         <section>
-          <nvd-starry-sky class="background" style="opacity:50%"></nvd-starry-sky>
+          <nvd-starry-sky class="background" style="opacity:70%"></nvd-starry-sky>
 
           <div class="content" nve-layout="column align:center gap:xxl">
             <div nve-text="semibold display center">
@@ -118,7 +130,9 @@ const permalink = '/landing.html';
               <video loop autoplay muted>
                 <source
                   src="https://cdn-prod.nvidia.com/assets/elements/screencast/browse-pattern-snippets-dark.webm"
-                  type="video/webm" />
+                  type="video/webm"
+                  loading="lazy"
+                  decoding="async" />
                 Your browser does not support the video tag or WebM format.
               </video>
             </div>
@@ -338,6 +352,8 @@ const permalink = '/landing.html';
               <div class="glimmer orange"></div>
               <video loop autoplay muted>
                 <source
+                  loading="lazy"
+                  decoding="async"
                   src="https://cdn-prod.nvidia.com/assets/elements/screencast/layout-typography-snippets-dark.webm" />
                 Your browser does not support the video tag or WebM format.
               </video>
@@ -435,7 +451,7 @@ const permalink = '/landing.html';
                     <img
                       src="https://cdn-prod.nvidia.com/assets/elements/splash/gitlab-icon.svg"
                       alt="GitLab Logo"
-                      style="width: 28px" />
+                      style="width: 28px;height: 26px;" />
                   </div>
                   <div nve-text="heading medium md emphasis">Gitlab Repo</div>
                 </div>
@@ -451,9 +467,9 @@ const permalink = '/landing.html';
                 <div nve-layout="row gap:md align:vertical-center">
                   <div>
                     <img
-                      src="https://cdn-prod.nvidia.com/assets/elements/splash/slack-icon.png"
+                      src="https://cdn-prod.nvidia.com/assets/elements/splash/slack-icon-svg.svg"
                       alt="Slack Logo"
-                      style="width: 28px" />
+                      style="width: 28px;height: 28px;" />
                   </div>
                   <div nve-text="heading medium md emphasis">Slack Support</div>
                 </div>
