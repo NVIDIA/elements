@@ -17,5 +17,4 @@ projects/themes/index.html
 v8-compile-cache-0
 __screenshots__
 vite.*.ts.timestamp*
-.vscode
 .11ty-vite
