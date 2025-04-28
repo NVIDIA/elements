@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.32.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.32.0...@nvidia-elements/core-v1.32.1) (2025-04-28)
+
+
+### Bug Fixes
+
+* **elements:** combobox reset state ([f4e6896](https://github.com/NVIDIA/elements/commit/f4e689627a0f1cbcb748697e57bfd3c1a2441336))
+
 ## [@nvidia-elements/core-v1.32.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.31.9...@nvidia-elements/core-v1.32.0) (2025-04-24)
 
 
