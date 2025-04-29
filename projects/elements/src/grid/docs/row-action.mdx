@@ -1,49 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@internals/storybook/blocks';
-import { RowAction } from '../grid.stories';
+import { Redirect } from '@internals/storybook/blocks';
 
 <Meta title="Elements/Data Grid/Row Action" />
 
-# Data Grid Row Action
-
-<nve-api-summary tag="nve-grid-row"></nve-api-summary>
-
-Row actions enable addtional user actions specific to a given row. Place a `nve-icon-button` at the end
-of the grid row for actions.
-
-```html
-<nve-grid>
-  <nve-grid-header>
-    <nve-grid-column>Column 1</nve-grid-column>
-    <nve-grid-column>Column 2</nve-grid-column>
-    <nve-grid-column>Column 3</nve-grid-column>
-    <nve-grid-column width="max-content" position="fixed" aria-label="additonal actions"></nve-grid-column>
-  </nve-grid-header>
-  ...
-  <nve-grid-row>
-    <nve-grid-cell>Cell 1-1</nve-grid-cell>
-    <nve-grid-cell>Cell 1-2</nve-grid-cell>
-    <nve-grid-cell>Cell 1-3</nve-grid-cell>
-    <nve-grid-cell>
-      <nve-icon-button container="flat" icon-name="additional-actions" aria-label="row 1 actions"></nve-icon-button>
-    </nve-grid-cell>
-  </nve-grid-row>
-  ...
-</nve-grid>
-```
-
-## Action
-
-<Canvas of={RowAction} />
-
-<nve-api-status tag="nve-grid"></nve-api-status>
-
-<nve-api-table tag="nve-grid"></nve-api-table>
-
-<nve-api-table tag="nve-grid-header"></nve-api-table>
-
-<nve-api-table tag="nve-grid-column"></nve-api-table>
-
-<nve-api-table tag="nve-grid-row"></nve-api-table>
-
-<nve-api-table tag="nve-grid-cell"></nve-api-table>
+<Redirect path={'docs/elements/data-grid/row-action/'} />

@@ -1,40 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@internals/storybook/blocks';
-import { DisplaySettings } from '../grid.stories';
+import { Redirect } from '@internals/storybook/blocks';
 
 <Meta title="Elements/Data Grid/Display Settings" />
 
-# Data Grid Display Settings
-
-<nve-api-summary tag="nve-grid-column"></nve-api-summary>
-
-Display settings are placed above the data grid leveraging dropdowns to provide various configuration options.
-Columns can be hidden via the `hidden` attribute or conditionaly rendered in DOM. Display settings can include
-column visibility or advanced filtering options.
-
-```html
-<section nve-layout="row gap:md align:stretch">
-  <nve-panel expanded closable>
-    ...
-  </nve-panel>
-
-  <div nve-layout="column gap:md">
-    <nve-button>display settings</nve-button>
-    <nve-grid>
-      ...
-    </nve-grid>
-  </div>
-</section>
-```
-
-<Canvas of={DisplaySettings} story={{ inline: false, height: '450px' }} />
-
-<nve-api-table tag="nve-grid"></nve-api-table>
-
-<nve-api-table tag="nve-grid-header"></nve-api-table>
-
-<nve-api-table tag="nve-grid-column"></nve-api-table>
-
-<nve-api-table tag="nve-grid-row"></nve-api-table>
-
-<nve-api-table tag="nve-grid-cell"></nve-api-table>
+<Redirect path={'docs/elements/data-grid/display-settings/'} />
