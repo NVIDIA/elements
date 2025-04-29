@@ -1,44 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Placeholder, PlaceholderRetry } from '../grid.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Data Grid/Placeholder" />
 
-# Data Grid Placeholder
-
-<nve-api-summary tag="nve-grid-placeholder"></nve-api-summary>
-
-Placeholder can be used to display a message when data is being loaded for the grid or empty states for datasets.
-
-```html
-<nve-grid style="min-height: 400px">
-  <nve-grid-header>
-    <nve-grid-column></nve-grid-column>
-  </nve-grid-header>
-  <nve-grid-placeholder>
-    <nve-progress-ring status="accent" size="lg"></nve-progress-ring>
-  </nve-grid-placeholder>
-</nve-grid>
-```
-
-## Loading
-
-<Canvas of={Placeholder} />
-
-## Retry
-
-<Canvas of={PlaceholderRetry} />
-
-<nve-api-status tag="nve-grid"></nve-api-status>
-
-<nve-api-table tag="nve-grid-placeholder"></nve-api-table>
-
-<nve-api-table tag="nve-grid"></nve-api-table>
-
-<nve-api-table tag="nve-grid-header"></nve-api-table>
-
-<nve-api-table tag="nve-grid-column"></nve-api-table>
-
-<nve-api-table tag="nve-grid-row"></nve-api-table>
-
-<nve-api-table tag="nve-grid-cell"></nve-api-table>
+<Redirect path={'docs/elements/data-grid/placeholder/'} />

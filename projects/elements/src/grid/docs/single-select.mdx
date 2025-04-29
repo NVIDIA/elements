@@ -1,49 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { SingleSelect } from '../grid.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Data Grid/Single Select" />
 
-# Data Grid Single Select
-
-<nve-api-summary tag="nve-grid-row"></nve-api-summary>
-
-Single selection enables users to use a radio list association to select one item at a time.
-To enable single select, place a `nve-radio` input as the first grid cell of each row. Set the `name`
-attribute on each radio to ensure they associate to the same radio group.
-
-```html
-<nve-grid>
-  <nve-grid-header>
-    <nve-grid-column width="max-content" aria-label="single selection"></nve-grid-column>
-    <nve-grid-column>Column</nve-grid-column>
-    ...
-  </nve-grid-header>
-  <nve-grid-row selected>
-    <nve-grid-cell>
-      <nve-radio>
-        <input type="radio" name="single-select" checked aria-label="select row 1">
-      </nve-radio>
-    </nve-grid-cell>
-    <nve-grid-cell>Cell</nve-grid-cell>
-    ...
-  </nve-grid-row>
-  ...
-</nve-grid>
-```
-
-## Single Select
-
-<Canvas of={SingleSelect} />
-
-<nve-api-status tag="nve-grid"></nve-api-status>
-
-<nve-api-table tag="nve-grid"></nve-api-table>
-
-<nve-api-table tag="nve-grid-header"></nve-api-table>
-
-<nve-api-table tag="nve-grid-column"></nve-api-table>
-
-<nve-api-table tag="nve-grid-row"></nve-api-table>
-
-<nve-api-table tag="nve-grid-cell"></nve-api-table>
+<Redirect path={'docs/elements/data-grid/single-select/'} />

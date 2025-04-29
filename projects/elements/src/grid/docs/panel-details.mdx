@@ -1,50 +1,6 @@
-import { Meta, Story } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { PanelDetail } from '../grid.stories';
+import { Meta } from '@storybook/addon-docs';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
-<Meta title="Elements/Data Grid/Panel Detail" />
+<Meta title="Elements/Data Grid/Panel Details" />
 
-# Data Grid Panel Details
-
-<nve-api-summary tag="nve-grid"></nve-api-summary>
-
-Use a right aligned [panel](./?path=/docs/elements-panel-documentation--docs) when displaying advanced filtering or display settings for the grid.
-Item detail panels should be open using a action button placed at the end of the grid row.
-
-```html
-<section nve-layout="row gap:md align:stretch">
-  <nve-grid>
-    <nve-grid-header>
-      <nve-grid-column>Column 1</nve-grid-column>
-      <nve-grid-column>Column 2</nve-grid-column>
-      <nve-grid-column>Column 3</nve-grid-column>
-      <nve-grid-column width="max-content" aria-label="details"></nve-grid-column>
-    </nve-grid-header>
-
-    <nve-grid-row>
-      <nve-grid-cell>Cell 1-1</nve-grid-cell>
-      <nve-grid-cell>Cell 1-2</nve-grid-cell>
-      <nve-grid-cell>Cell 1-3</nve-grid-cell>
-      <nve-grid-cell>
-        <nve-icon-button container="flat" icon-name="additional-actions" aria-label="view item 1"></nve-icon-button>
-      </nve-grid-cell>
-    </nve-grid-row>
-  </nve-grid>
-
-  <nve-panel expanded closable></nve-panel>
-</section>
-```
-
-<Canvas of={PanelDetail} />
-
-<nve-api-status tag="nve-grid"></nve-api-status>
-
-<nve-api-table tag="nve-grid"></nve-api-table>
-
-<nve-api-table tag="nve-grid-header"></nve-api-table>
-
-<nve-api-table tag="nve-grid-column"></nve-api-table>
-
-<nve-api-table tag="nve-grid-row"></nve-api-table>
-
-<nve-api-table tag="nve-grid-cell"></nve-api-table>
+<Redirect path={'docs/elements/data-grid/panel-details/'} />
