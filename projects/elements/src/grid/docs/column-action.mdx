@@ -1,42 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@internals/storybook/blocks';
-import { ColumnAction } from '../grid.stories';
+import { Redirect } from '@internals/storybook/blocks';
 
 <Meta title="Elements/Data Grid/Column Action" />
 
-# Data Grid Column Action
-
-<nve-api-summary tag="nve-grid-column"></nve-api-summary>
-
-Column actions can be created by using the `nve-icon-button` to trigger dropdowns or panels to reveal additional actions to the user.
-
-```html
-<nve-grid>
-  <nve-grid-header>
-    <nve-grid-column>
-      Column 1 <nve-icon-button slot="actions"></nve-icon-button>
-    </nve-grid-column>
-    <nve-grid-column>Column 2</nve-grid-column>
-    <nve-grid-column>Column 3</nve-grid-column>
-    <nve-grid-column>Column 4</nve-grid-column>
-  </nve-grid-header>
-    <nve-grid-row>
-      ...
-    </nve-grid-row>
-  ...
-</nve-grid>
-```
-
-## Column Action
-
-<Canvas of={ColumnAction} story={{ inline: false, height: 460 }} />
-
-<nve-api-table tag="nve-grid"></nve-api-table>
-
-<nve-api-table tag="nve-grid-header"></nve-api-table>
-
-<nve-api-table tag="nve-grid-column"></nve-api-table>
-
-<nve-api-table tag="nve-grid-row"></nve-api-table>
-
-<nve-api-table tag="nve-grid-cell"></nve-api-table>
+<Redirect path={'docs/elements/data-grid/column-action/'} />
