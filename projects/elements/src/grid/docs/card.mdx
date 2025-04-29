@@ -1,43 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { Card, CardTabs } from '../grid.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Data Grid/Card" />
 
-# Data Grid Card
-
-<nve-api-summary tag="nve-grid"></nve-api-summary>
-
-Grid can be nested in Cards for various UI patterns such as card tab groups. Use the `container="flat"` attribute to
-enable proper styling of the grid when nested within a card.
-
-```html
-<nve-card>
-  <nve-card-header>
-    <div slot="title">Data Grid</div>
-    <div slot="subtitle">Card Example</div>
-    <nve-icon-button slot="header-action" icon-name="filter-stroke"></nve-icon-button>
-  </nve-card-header>
-  <nve-grid container="flat">
-    ...
-  </nve-grid>
-</nve-card>
-```
-
-## Card
-
-<Canvas of={Card} />
-
-## Card Tabs
-
-<Canvas of={CardTabs} />
-
-<nve-api-table tag="nve-grid"></nve-api-table>
-
-<nve-api-table tag="nve-grid-header"></nve-api-table>
-
-<nve-api-table tag="nve-grid-column"></nve-api-table>
-
-<nve-api-table tag="nve-grid-row"></nve-api-table>
-
-<nve-api-table tag="nve-grid-cell"></nve-api-table>
+<Redirect path={'docs/elements/data-grid/card/'} />
