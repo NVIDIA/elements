@@ -22,7 +22,7 @@ import '@nvidia-elements/core/dropdown/define.js';
 
 {% story 'nve-dropdown', 'Default' %}
 
-{% story 'nve-dropdown', 'Visual', '{ "inline": false, "height": "280px" }' %}
+{% story 'nve-dropdown', 'Visual', '{ "inline": false, "height": "230px" }' %}
 
 ## Events
 
@@ -60,4 +60,4 @@ import '@nvidia-elements/core/dropdown/define.js';
 
 ## Checkbox Group Pattern
 
-{% story 'nve-dropdown', 'CheckboxGroup', '{ "inline": false, "height": "350px" }' %}
+{% story 'nve-dropdown', 'CheckboxGroup', '{ "inline": false, "height": "320px" }' %}
