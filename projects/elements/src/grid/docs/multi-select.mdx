@@ -1,61 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { MultiSelect, MultiSelectBulkActions } from '../grid.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Data Grid/Multi Select" />
 
-# Data Grid Multi Select
-
-<nve-api-summary tag="nve-grid-row"></nve-api-summary>
-
-Multi Select rows use a checkbox as the first focusable item within the row. When selected
-set the `selected` attribute/property on the row. This will ensure selected styles as well
-as the proper `ariaSelected` state for accessibility.
-
-```html
-<nve-grid>
-  <nve-grid-header>
-    <nve-grid-column width="max-content">
-      <nve-checkbox>
-        <input type="checkbox" aria-label="select all rows">
-      </nve-checkbox>
-    </nve-grid-column>
-    <nve-grid-column>Column</nve-grid-column>
-  </nve-grid-header>
-  ...
-  <nve-grid-row selected>
-    <nve-grid-cell>
-      <nve-checkbox>
-        <input type="checkbox" checked aria-label="select row 1">
-      </nve-checkbox>
-    </nve-grid-cell>
-    <nve-grid-cell>Cell</nve-grid-cell>
-    ...
-  </nve-grid-row>
-  ...
-</nve-grid>
-```
-
-## Multi Select
-
-<Canvas of={MultiSelect} />
-
-## Multi Select Bulk Actions
-
-When a user has actions that can be applied to multiple items, use the bulk actions component.
-The bulk actions should only be visible when at least one or more rows are selected.
-If the bulk actions are closed then all selected rows should be deselected.
-
-<Canvas of={MultiSelectBulkActions} />
-
-<nve-api-status tag="nve-grid"></nve-api-status>
-
-<nve-api-table tag="nve-grid"></nve-api-table>
-
-<nve-api-table tag="nve-grid-header"></nve-api-table>
-
-<nve-api-table tag="nve-grid-column"></nve-api-table>
-
-<nve-api-table tag="nve-grid-row"></nve-api-table>
-
-<nve-api-table tag="nve-grid-cell"></nve-api-table>
+<Redirect path={'docs/elements/data-grid/multi-select/'} />
