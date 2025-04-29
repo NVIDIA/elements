@@ -1,38 +1,6 @@
 import { Meta } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { PanelGrid } from '../grid.stories';
+import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="Elements/Data Grid/Panel Grid" />
 
-# Panel Grid
-
-<nve-api-summary tag="nve-grid"></nve-api-summary>
-
-Panel Grid can be used to display key value type data sets for details of a given item in a collection.
-
-```html
-<main nve-layout="row gap:sm full">
-  <section nve-layout="column gap:md full align:stretch">
-    page content
-  </section>
-  <nve-panel expanded>
-    <nve-grid container="flat" stripe>
-      ...
-    </nve-grid>
-  </nve-panel>
-</main>
-```
-
-<Canvas of={PanelGrid} />
-
-<nve-api-status tag="nve-grid"></nve-api-status>
-
-<nve-api-table tag="nve-grid"></nve-api-table>
-
-<nve-api-table tag="nve-grid-header"></nve-api-table>
-
-<nve-api-table tag="nve-grid-column"></nve-api-table>
-
-<nve-api-table tag="nve-grid-row"></nve-api-table>
-
-<nve-api-table tag="nve-grid-cell"></nve-api-table>
+<Redirect path={'docs/elements/data-grid/panel-grid/'} />
