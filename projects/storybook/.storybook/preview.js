@@ -170,7 +170,7 @@ export const parameters = {
             'Footer',
             'Multi Select',
             'Pagination',
-            'Panel Details',
+            'Panel Detail',
             'Panel Grid',
             'Performance',
             'Placeholder',
