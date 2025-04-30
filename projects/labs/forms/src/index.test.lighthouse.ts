@@ -2,10 +2,10 @@ import { expect, test, describe } from 'vitest';
 import { lighthouseRunner } from '@internals/vite';
 
 describe('lighthouse report', () => {
-  test('@nvidia-elements/entity-element JS Bundles should remain within compressed bundle limits', async () => {
+  test('@nvidia-elements/forms-element JS Bundles should remain within compressed bundle limits', async () => {
     const report = await lighthouseRunner.getReport('bundles', /* html */`
       <script type="module">
-        import('@nvidia-elements/entity/index.js');
+        import('@nvidia-elements/forms/index.js');
       </script>
     `);
 

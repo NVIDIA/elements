@@ -29,7 +29,7 @@ export default {
         'themes',
         'labs-behaviors-alpine',
         'labs-code',
-        'labs-entity',
+        'labs-forms',
         'labs-playwright-screencast',
         'labs-snippets',
         'monaco'
