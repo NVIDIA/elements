@@ -1,8 +1,11 @@
-import { Meta } from '@storybook/addon-docs';
+---
+{
+  title: 'Accessibility',
+  layout: 'docs.11ty.js'
+}
+---
 
-<Meta title="About/Accessibility" />
-
-# Accessibility
+# {{ title }}
 
 The following document outlines the accessibility standards and guidelines for our system.
 Our goal is to provide an inclusive and accessible user experience for all users.
