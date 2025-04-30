@@ -23,7 +23,7 @@
   </nve-button>
 </div>
 
-To use Elements in [Angular](https://angular.dev/) follow the [installation getting started](/api/?path=/docs/about-installation--docs) steps.
+To use Elements in [Angular](https://angular.dev/) follow the [installation getting started](/docs/about/getting-started/) steps.
 
 Next import the element your Angular component and add `CUSTOM_ELEMENTS_SCHEMA` to the schemas to allow web components to be used within your template.
 

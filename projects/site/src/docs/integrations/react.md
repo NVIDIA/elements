@@ -18,7 +18,7 @@
   </nve-button>
 </div>
 
-To use Elements in [React (v19)](https://preactjs.com/) follow the [installation getting started](./api/?path=/docs/about-installation--docs) steps. Once complete
+To use Elements in [React (v19)](https://preactjs.com/) follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
 elements can be imported and used within React jsx and tsx files.
 
 ```typescript
@@ -65,7 +65,7 @@ import '@lit-labs/ssr-react/enable-lit-ssr.js';
 
 ## React 18
 
-To use Elements in [React v18](https://reactjs.org/) follow the [installation getting started](./api/?path=/docs/about-installation--docs) steps. Once complete
+To use Elements in [React v18](https://reactjs.org/) follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
 elements can be imported and used within React jsx and tsx files via the `@nvidia-elements/core-react` package. This package must be used to enable React 18 compatibility with Custom Elements.
 This package will wrap the custom elements into a React component, mapping the standard events and properties in a way that React can understand.
 
