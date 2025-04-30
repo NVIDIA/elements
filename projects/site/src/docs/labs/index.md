@@ -29,6 +29,16 @@ main @nve package scope. Labs projects may be deprecated or removed at any time.
     <nve-grid-cell>In Development</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/brand" target="_blank"><code nve-text="code">@nvidia-elements/brand</code></a></nve-grid-cell>
+    <nve-grid-cell></nve-grid-cell>
+    <nve-grid-cell>In Development</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/forms" target="_blank"><code nve-text="code">@nvidia-elements/forms</code></a></nve-grid-cell>
+    <nve-grid-cell></nve-grid-cell>
+    <nve-grid-cell>In Development</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/playwright-screencast" target="_blank"><code nve-text="code">@nvidia-elements/playwright-screencast</code></a></nve-grid-cell>
     <nve-grid-cell>A package containing utilities for recording screencasts using Playwright.</nve-grid-cell>
     <nve-grid-cell>In Development</nve-grid-cell>
@@ -38,9 +48,4 @@ main @nve package scope. Labs projects may be deprecated or removed at any time.
     <nve-grid-cell>A CLI tool for generating IntelliSense snippets.</nve-grid-cell>
     <nve-grid-cell>In Development</nve-grid-cell>
   </nve-grid-row>
-  <!-- <nve-grid-row>
-    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/forms" target="_blank"><code nve-text="code">@nvidia-elements/forms</code></a></nve-grid-cell>
-    <nve-grid-cell></nve-grid-cell>
-    <nve-grid-cell>In Development</nve-grid-cell>
-  </nve-grid-row> -->
 </nve-grid>
