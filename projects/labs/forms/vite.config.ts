@@ -5,7 +5,7 @@ import { libraryBuildConfig } from '@nve-internals/vite';
 export default defineConfig(() => {
   const config: UserConfig = {
     resolve: {
-      alias: { '@nvidia-elements/entity': resolve(import.meta.dirname, './src') }
+      alias: { '@nvidia-elements/forms': resolve(import.meta.dirname, './src') }
     }
   };
 
