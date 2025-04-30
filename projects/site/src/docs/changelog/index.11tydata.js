@@ -27,6 +27,11 @@ export default [
     permalink: '/testing/',
     changelog: readFileSync('../testing/CHANGELOG.md', 'utf8')
   },
+  // {
+  //   title: '@nvidia-elements/brand',
+  //   permalink: '/labs-brand/',
+  //   changelog: readFileSync('../labs/brand/CHANGELOG.md', 'utf8')
+  // },
   {
     title: '@nvidia-elements/code',
     permalink: '/labs-code/',
