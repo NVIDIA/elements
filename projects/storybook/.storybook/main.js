@@ -13,6 +13,8 @@ export default {
     '../../elements/src/**/*.stories.ts',
     '../../labs/behaviors-alpine/src/**/*.mdx',
     '../../labs/behaviors-alpine/src/**/*.stories.ts',
+    '../../labs/brand/src/**/*.mdx',
+    '../../labs/brand/src/**/*.stories.ts',
     '../../labs/code/src/**/*.mdx',
     '../../labs/code/src/**/*.stories.ts',
     '../../labs/forms/src/**/*.stories.ts',

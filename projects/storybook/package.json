@@ -15,6 +15,7 @@
     "@nvidia-elements/testing": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/behaviors-alpine": "workspace:*",
+    "@nvidia-elements/brand": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/forms": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",
@@ -59,6 +60,7 @@
       "dependencies": [
         "../elements:build",
         "../labs/code:build",
+        "../labs/brand:build",
         "../labs/forms:build",
         "../monaco:build",
         "../styles:build",

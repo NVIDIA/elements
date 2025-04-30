@@ -132,6 +132,7 @@ git commit -a -m "fix(core): disabled multi-select"
 | `labs`                       | `/projects/labs`              |
 | `labs-behaviors-alpine`      | `/labs/behaviors-alpine`      |
 | `labs-playwright-screencast` | `/labs/playwright-screencast` |
+| `labs-brand`                 | `/labs/brand`                 |
 | `labs-code`                  | `/labs/code`                  |
 | `labs-forms`                 | `/labs/forms`                 |
 
