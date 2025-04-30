@@ -33,9 +33,9 @@ export default [
     changelog: readFileSync('../labs/code/CHANGELOG.md', 'utf8')
   },
   // {
-  //   title: '@nvidia-elements/entity',
-  //   permalink: '/labs-entity/',
-  //   changelog: readFileSync('../labs/entity/CHANGELOG.md', 'utf8')
+  //   title: '@nvidia-elements/forms',
+  //   permalink: '/labs-forms/',
+  //   changelog: readFileSync('../labs/forms/CHANGELOG.md', 'utf8')
   // },
   {
     title: '@nvidia-elements/behaviors-alpine',

@@ -16,7 +16,7 @@
     "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/behaviors-alpine": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
-    "@nvidia-elements/entity": "workspace:*",
+    "@nvidia-elements/forms": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",
     "@internals/elements-api": "workspace:*",
     "html-format": "1.1.7",
@@ -59,7 +59,7 @@
       "dependencies": [
         "../elements:build",
         "../labs/code:build",
-        "../labs/entity:build",
+        "../labs/forms:build",
         "../monaco:build",
         "../styles:build",
         "../themes:build",
