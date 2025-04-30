@@ -23,7 +23,7 @@
   </nve-button>
 </div>
 
-To use Elements in Vue follow the [installation getting started](./api/?path=/docs/about-installation--docs) steps. Once complete
+To use Elements in Vue follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
 elements can be imported and used within Vue SFC files.
 
 ```typescript
