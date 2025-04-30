@@ -61,7 +61,7 @@
         "./projects/elements-react:ci",
         "./projects/labs/behaviors-alpine:ci",
         "./projects/labs/code:ci",
-        "./projects/labs/entity:ci",
+        "./projects/labs/forms:ci",
         "./projects/labs/playwright-screencast:ci",
         "./projects/labs/snippets:ci",
         "./projects/monaco:ci",
@@ -94,7 +94,7 @@
         "./projects/themes:test:lighthouse",
         "./projects/elements:test:lighthouse",
         "./projects/labs/code:test:lighthouse",
-        "./projects/labs/entity:test:lighthouse",
+        "./projects/labs/forms:test:lighthouse",
         "./projects/monaco:test:lighthouse"
       ],
       "output": [
@@ -149,8 +149,8 @@
         "release:elements"
       ]
     },
-    "release:labs-entity": {
-      "command": "cd projects/labs/entity && HUSKY=0 pnpm exec semantic-release"
+    "release:labs-forms": {
+      "command": "cd projects/labs/forms && HUSKY=0 pnpm exec semantic-release"
     },
     "release:monaco": {
       "command": "cd projects/monaco && HUSKY=0 pnpm exec semantic-release",
@@ -197,7 +197,7 @@
         "./projects/internals/metadata:lint:fix",
         "./projects/labs/behaviors-alpine:lint:fix",
         "./projects/labs/code:lint:fix",
-        "./projects/labs/entity:lint:fix",
+        "./projects/labs/forms:lint:fix",
         "./projects/labs/playwright-screencast:lint:fix",
         "./projects/labs/snippets:lint:fix",
         "./projects/monaco:lint:fix",
