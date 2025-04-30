@@ -23,6 +23,7 @@ alwaysApply: false
   ```
   - Use single quotes for element names.
 - **Do not** use the old YAML frontmatter format (e.g., `title: Panels`).
+- If the original frontmatter does not include `tag:`, add `# {{ title }}` line directly below the frontmatter.
 
 ## 2. Component Conversion
 
@@ -73,6 +74,34 @@ alwaysApply: false
   `projects/site/src/docs/elements/accordion.md`
 - For a fully converted non-component doc, see:  
   `projects/site/src/docs/integrations/angular.md`
+
+## 7. Style Attributes and Links
+
+- **Convert React-style** object syntax to standard HTML attribute style:
+```jsx
+// Before (React-style)
+style={{ 'property': 'value' }}
+
+// After (HTML-style)
+style="property: value"
+```
+
+- **Replace complex HTML links** with Markdown links when possible:
+```jsx
+// Before (complex HTML)
+<a nve-text="link" style={{'color': 'var(--color) !important'}} href="/path/to/page">link text</a>
+
+// After (Markdown link)
+[link text](/path/to/page)
+```
+
+- **Use standard CSS variable format** in style attributes:
+```jsx
+// Before
+style={{ '--color': 'var(--nve-variable)' }}
+
+// After
+style="--color: var(--nve-variable)"
 
 ---
 
