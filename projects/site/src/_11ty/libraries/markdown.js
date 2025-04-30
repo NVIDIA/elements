@@ -31,7 +31,7 @@ function renderer(tokens, idx, options, env, slf) {
     tokens[idx].attrSet('nve-text', `${formats[tokens[idx].tag]} mkd`);
   }
 
-  if (tokens[idx].type === 'bullet_list_open') {
+  if (tokens[idx].type === 'bullet_list_open' || tokens[idx].type === 'ordered_list_open') {
     tokens[idx].attrSet('nve-text', 'list mkd');
     tokens[idx].attrSet('nve-layout', 'column gap:xs');
   }
@@ -43,6 +43,7 @@ markdown.renderer.rules.heading_open = renderer;
 markdown.renderer.rules.link_open = renderer;
 markdown.renderer.rules.paragraph_open = renderer;
 markdown.renderer.rules.bullet_list_open = renderer;
+markdown.renderer.rules.ordered_list_open = renderer;
 // markdown.renderer.rules.code_inline = renderer; /* TODO: fix code inline renderer */
 
 export default markdown;
