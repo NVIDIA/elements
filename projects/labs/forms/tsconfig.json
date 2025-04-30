@@ -16,9 +16,9 @@
     "useDefineForClassFields": false,
     "isolatedModules": true,
     "paths": {
-      "@nvidia-elements/entity": ["./src/index.js"],
-      "@nvidia-elements/entity/*": ["./src/*"],
-      "@nvidia-elements/entity/*.js": ["./src/*.js"]
+      "@nvidia-elements/forms": ["./src/index.js"],
+      "@nvidia-elements/forms/*": ["./src/*"],
+      "@nvidia-elements/forms/*.js": ["./src/*.js"]
     }
   },
   "include": ["src/**/*.ts"]

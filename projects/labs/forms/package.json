@@ -1,7 +1,7 @@
 {
-  "name": "@nvidia-elements/entity",
+  "name": "@nvidia-elements/forms",
   "version": "0.0.0",
-  "description": "Entity Protocol is a library for creating standardized domain specific UI components via form-associated custom elements with built-in validation, form integration, and standardized metadata.",
+  "description": "",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
     "type": "git",
