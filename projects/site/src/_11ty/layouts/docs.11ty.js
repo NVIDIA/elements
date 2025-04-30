@@ -28,6 +28,14 @@ export function render(data) {
             padding-top: var(--nve-ref-space-xl);
             padding-bottom: var(--nve-ref-space-xs);
           }
+          
+          [nve-text='link mkd']:visited {
+            color: inherit !important;
+          }
+
+          [nve-text='list mkd'] [nve-text="body relaxed mkd"] {
+            display: inline !important;
+          }
 
           /* Temporary fix for code_inline tag renderer in paragraphs, applies nve-text="code" styles */
           p[nve-text] > code {
@@ -79,6 +87,15 @@ export function render(data) {
             #doc-content {
               max-width: 100%;
             }
+          }
+
+          main:has(#getting-started-img) {
+            background-image: url(static/images/test-image-2.webp) !important;
+            object-fit: fill !important;
+            background-repeat: no-repeat !important;
+            background-position: 0 15vh !important;
+            box-shadow: inset 0 0 0 1000px rgb(11 12 15 / 88%) !important;
+            filter: drop-shadow(0 50px 50px rgb(11 12 15 / 95%));
           }
 
           #doc-sidenav[nve-text='list mkd'] {

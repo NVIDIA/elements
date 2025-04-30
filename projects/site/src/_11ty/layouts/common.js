@@ -94,17 +94,17 @@ export const renderBaseHead = data => /* html */ `
 
 export const renderDocsNav = data => /* html */ `
 <nve-tree behavior-expand>
-  <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') ? 'expanded' : ''}>
     About
-    <nve-tree-node><a href="api/?path=/docs/about-getting-started--docs">Getting Started</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/about-installation--docs">Installation</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/getting-started/') ? 'highlighted' : ''}><a href="docs/about/getting-started/">Getting Started</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/installation/') ? 'highlighted' : ''}><a href="docs/about/installation/">Installation</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted' : ''}><a href="docs/changelog/">Changelog</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted' : ''}><a href="docs/metrics/">Metrics</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/about-support--docs">Support</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/about-accessibility--docs">Accessibility</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/about-contributions--docs">Contributions</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/about-requests--docs">Requests</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/about-migration--docs">Migration</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/support/') ? 'highlighted' : ''}><a href="docs/about/support/">Support</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/accessibility/') ? 'highlighted' : ''}><a href="docs/about/accessibility/">Accessibility</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/contributions/') ? 'highlighted' : ''}><a href="docs/about/contributions/">Contributions</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'highlighted' : ''}><a href="docs/about/requests/">Requests</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted' : ''}><a href="docs/about/migration/">Migration</a></nve-tree-node>
   </nve-tree-node>
   <nve-tree-node ${data.page.url.includes('/docs/integrations/') ? 'expanded' : ''}>
     Integrations
