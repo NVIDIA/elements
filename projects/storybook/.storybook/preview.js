@@ -13,8 +13,8 @@ import reducedMotionTheme from '@nvidia-elements/themes/reduced-motion.css?inlin
 import compactTheme from '@nvidia-elements/themes/compact.css?inline';
 import debugTheme from '@nvidia-elements/themes/debug.css?inline';
 import ddbTheme from '@nvidia-elements/themes/ddb-dark.css?inline';
-import brandTheme from '@nvidia-elements/themes/brand.css?inline';
-import brandDarkTheme from '@nvidia-elements/themes/brand-dark.css?inline';
+import brandTheme from '@nvidia-elements/brand/index.css?inline';
+import brandDarkTheme from '@nvidia-elements/brand/dark.css?inline';
 import fontNvidiaSans from '@nvidia-elements/themes/fonts/nvidia-sans.css?inline';
 import viewTransitionStyles from '@nvidia-elements/styles/view-transitions.css?inline';
 import { H1, H2, H3, H4, P, UL, OL, PRE, CODE } from '@nve-internals/storybook/blocks';
