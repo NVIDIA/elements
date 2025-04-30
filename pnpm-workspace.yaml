@@ -16,6 +16,7 @@ packages:
   - 'projects/starters/vue'
   - 'projects/site'
   - 'projects/labs/behaviors-alpine'
+  - 'projects/labs/brand'
   - 'projects/labs/code'
   - 'projects/labs/forms'
   - 'projects/labs/playwright-screencast'

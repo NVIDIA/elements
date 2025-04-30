@@ -132,6 +132,17 @@
         "../../themes/coverage/visual/junit.xml",
         "../../themes/coverage/ssr/junit.xml",
         "../../themes/coverage/ssr/summary.json",
+        "../../labs/brand/package.json",
+        "../../labs/brand/README.md",
+        "../../labs/brand/CHANGELOG.md",
+        "../../labs/brand/dist/custom-elements.json",
+        "../../labs/brand/dist/**/*.stories.json",
+        "../../labs/brand/coverage/unit/coverage-summary.json",
+        "../../labs/brand/coverage/unit/junit.xml",
+        "../../labs/brand/coverage/axe/junit.xml",
+        "../../labs/brand/coverage/visual/junit.xml",
+        "../../labs/brand/coverage/ssr/junit.xml",
+        "../../labs/brand/coverage/ssr/summary.json",
         "../../labs/code/package.json",
         "../../labs/code/README.md",
         "../../labs/code/CHANGELOG.md",
@@ -210,6 +221,10 @@
         },
         {
           "script": "../../themes:ci",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/brand:ci",
           "cascade": false
         },
         {
