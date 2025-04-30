@@ -23,7 +23,7 @@
   </nve-button>
 </div>
 
-To use Elements in [TypeScript](https://www.typescriptlang.org/) follow the [installation](./api/?path=/docs/about-installation--docs) steps.
+To use Elements in [TypeScript](https://www.typescriptlang.org/) follow the [installation](./docs/about/getting-started/) steps.
 Once complete elements can be imported and used within TS files. The Element class
 definitions can be imported via [type imports](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) to use for static type checking.
 

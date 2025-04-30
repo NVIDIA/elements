@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-To use Elements in Lit follow the [installation](./api/?path=/docs/about-installation--docs) steps. Once complete
+To use Elements in Lit follow the [installation](./docs/about/getting-started/) steps. Once complete
 elements can be imported and used within Lit components.
 
 ```typescript

@@ -16,7 +16,7 @@ function App() {
           Elements
         </a>
         <nve-button container="flat">
-          <a href="../../api/?path=/docs/about-installation--docs">Get Started</a>
+          <a href="../../docs/about/getting-started/">Get Started</a>
         </nve-button>
         <nve-button container="flat">
           <a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">
