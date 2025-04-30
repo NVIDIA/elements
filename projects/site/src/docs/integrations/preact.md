@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-To use Elements in [Preact](https://preactjs.com/) follow the [installation getting started](./api/?path=/docs/about-installation--docs) steps. Once complete
+To use Elements in [Preact](https://preactjs.com/) follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
 elements can be imported and used within Preact jsx and tsx files.
 
 ```typescript
