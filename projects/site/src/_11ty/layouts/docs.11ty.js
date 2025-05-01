@@ -166,7 +166,7 @@ export function render(data) {
           }
         </script>
         <script type="module">
-        // Auto-scroll to deep-link headers
+          // Auto-scroll to deep-link headers
           const scrollToHeader = () => {
             const headerId = new URL(window.parent.location.href).hash.replace('#', '');
             
@@ -177,23 +177,20 @@ export function render(data) {
           };
 
           setTimeout(() => scrollToHeader(), 1500);
-        </script>
 
-        <script type="module">
-          // Auto-scroll to highlighted nav item
-          const scrollToNavItem = () => {
-            const navPanel = document.querySelector('nve-page-panel-content');
-            const highlightedNode = navPanel.querySelector('nve-tree-node[highlighted]');
-            
-            if (highlightedNode) {
-              highlightedNode.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
-              });
-            }
-          };
+          // preserve scroll position between page transitions
+          const content = document.querySelector('#sidenav-panel nve-page-panel-content');
+          window.addEventListener('beforeunload', () => {
+            sessionStorage.setItem('sidenav-scroll-position', content.scrollTop);
+          });
 
-          setTimeout(() => scrollToNavItem(), 500);
+          const savedPosition = sessionStorage.getItem('sidenav-scroll-position');
+          if (savedPosition) {
+            await customElements.whenDefined('nve-page-panel-content');
+            content.scrollTop = parseInt(savedPosition);
+            await content.updateComplete;
+            content.scrollTop = parseInt(savedPosition);
+          }
         </script>
 
         ${renderSvgLogos()}
@@ -209,7 +206,7 @@ export function render(data) {
             <nve-button container="flat"><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button>
             <nve-button slot="suffix" id="system-options-panel-btn" container="flat" id="dropdown-btn">System Themes</nve-button>
           </nve-page-header>
-          <nve-page-panel slot="left">
+          <nve-page-panel slot="left" id="sidenav-panel">
             <nve-page-panel-content>
               ${renderDocsNav(data)}
             </nve-page-panel-content>
