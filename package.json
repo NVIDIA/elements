@@ -203,6 +203,7 @@
         "./projects/elements:lint:fix",
         "./projects/internals/elements-api:lint:fix",
         "./projects/internals/metadata:lint:fix",
+        "./projects/internals/patterns:lint:fix",
         "./projects/labs/behaviors-alpine:lint:fix",
         "./projects/labs/brand:lint:fix",
         "./projects/labs/code:lint:fix",
@@ -211,7 +212,6 @@
         "./projects/labs/snippets:lint:fix",
         "./projects/monaco:lint:fix",
         "./projects/site:lint:fix",
-        "./projects/storybook:lint:fix",
         "./projects/testing:lint:fix"
       ]
     },
