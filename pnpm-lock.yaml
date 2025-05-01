@@ -452,6 +452,43 @@ importers:
         specifier: 'catalog:'
         version: 3.1.1(@types/node@22.13.1)(@vitest/browser@3.1.1)(jiti@2.4.2)(less@4.2.2)(msw@2.7.3(@types/node@22.13.1)(typescript@5.8.2))(sass@1.85.0)(sugarss@4.0.1(postcss@8.5.3))(terser@5.39.0)(yaml@2.7.0)
 
+  projects/internals/patterns:
+    dependencies:
+      lit:
+        specifier: 'catalog:'
+        version: 3.2.1
+    devDependencies:
+      '@eslint/js':
+        specifier: 'catalog:'
+        version: 9.23.0
+      '@internals/eslint':
+        specifier: workspace:*
+        version: link:../eslint
+      '@internals/vite':
+        specifier: workspace:*
+        version: link:../vite
+      '@nvidia-elements/core':
+        specifier: workspace:*
+        version: link:../../elements
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      '@nvidia-elements/themes':
+        specifier: workspace:*
+        version: link:../../themes
+      eslint:
+        specifier: 'catalog:'
+        version: 9.23.0(jiti@2.4.2)
+      publint:
+        specifier: 'catalog:'
+        version: 0.3.9
+      typescript:
+        specifier: 'catalog:'
+        version: 5.8.2
+      vite:
+        specifier: 'catalog:'
+        version: 6.3.2(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(sass@1.85.0)(sugarss@4.0.1(postcss@8.5.3))(terser@5.39.0)(yaml@2.7.0)
+
   projects/internals/vite:
     dependencies:
       '@custom-elements-manifest/analyzer':
@@ -868,6 +905,9 @@ importers:
       '@internals/metadata':
         specifier: workspace:*
         version: link:../internals/metadata
+      '@internals/patterns':
+        specifier: workspace:*
+        version: link:../internals/patterns
       '@nvidia-elements/code':
         specifier: workspace:*
         version: link:../labs/code
@@ -1401,6 +1441,9 @@ importers:
       '@internals/elements-api':
         specifier: workspace:*
         version: link:../internals/elements-api
+      '@internals/patterns':
+        specifier: workspace:*
+        version: link:../internals/patterns
       '@nvidia-elements/behaviors-alpine':
         specifier: workspace:*
         version: link:../labs/behaviors-alpine
@@ -1438,12 +1481,6 @@ importers:
         specifier: 2.1.0
         version: 2.1.0
     devDependencies:
-      '@eslint/js':
-        specifier: 'catalog:'
-        version: 9.23.0
-      '@internals/eslint':
-        specifier: workspace:*
-        version: link:../internals/eslint
       '@storybook/addon-docs':
         specifier: 8.5.0
         version: 8.5.0(@types/react@19.0.7)(storybook@8.5.0(prettier@3.4.2))
@@ -1480,9 +1517,6 @@ importers:
       '@storybook/web-components-vite':
         specifier: 8.5.0
         version: 8.5.0(lit@3.2.1)(storybook@8.5.0(prettier@3.4.2))(vite@6.3.2(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(sass@1.85.0)(sugarss@4.0.1(postcss@8.5.3))(terser@5.39.0)(yaml@2.7.0))
-      eslint:
-        specifier: 'catalog:'
-        version: 9.23.0(jiti@2.4.2)
       react:
         specifier: 19.0.0
         version: 19.0.0
