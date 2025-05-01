@@ -25,6 +25,7 @@
     "./package.json": "./package.json",
     "./CHANGELOG.md": "./CHANGELOG.md",
     "./data.html.json": "./dist/data.html.json",
+    "./*.stories.json": "./dist/*.stories.json",
     "./layout.css": "./dist/layout.css",
     "./responsive.css": "./dist/responsive.css",
     "./typography.css": "./dist/typography.css",

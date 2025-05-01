@@ -18,4 +18,4 @@ import '@nvidia-elements/monaco/editor/define.js';
 
 ## Default
 
-{% story 'nve-monaco-editor', 'Default' %}
+{% story '@nvidia-elements/monaco/editor/editor.stories.json', 'Default' %}

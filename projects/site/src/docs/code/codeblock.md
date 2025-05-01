@@ -34,38 +34,38 @@ function getTime(): number {
 
 ## Default
 
-{% story 'nve-codeblock', 'Default' %}
+{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Default' %}
 
 ## Code
 
 {% api 'nve-codeblock', 'property', 'code' %}
 
-{% story 'nve-codeblock', 'Code' %}
+{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Code' %}
 
 ## Container
 
 {% api 'nve-codeblock', 'property', 'container' %}
 
-{% story 'nve-codeblock', 'Flat' %}
+{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Flat' %}
 
 ## Theme
 
 A Theme can be set independant of the global theme using the `nve-theme` attribute.
 
-{% story 'nve-codeblock', 'Theme' %}
+{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Theme' %}
 
 ## Line Numbers
 
 {% api 'nve-codeblock', 'property', 'lineNumbers' %}
 
-{% story 'nve-codeblock', 'LineNumbers' %}
+{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'LineNumbers' %}
 
 ## Highlight
 
 {% api 'nve-codeblock', 'property', 'highlight' %}
 
-{% story 'nve-codeblock', 'Highlight' %}
+{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Highlight' %}
 
 ## Overflow
 
-{% story 'nve-codeblock', 'Overflow' %}
+{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Overflow' %}

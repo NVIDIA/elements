@@ -25,13 +25,3 @@ Display settings are placed above the data grid leveraging dropdowns to provide 
 ```
 
 {% story 'nve-grid', 'DisplaySettings' %}
-
-<nve-api-table tag="nve-grid"></nve-api-table>
-
-<nve-api-table tag="nve-grid-header"></nve-api-table>
-
-<nve-api-table tag="nve-grid-column"></nve-api-table>
-
-<nve-api-table tag="nve-grid-row"></nve-api-table>
-
-<nve-api-table tag="nve-grid-cell"></nve-api-table>
