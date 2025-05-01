@@ -61,6 +61,11 @@ export function render(data) {
         inset: auto 1rem 1rem auto;
         z-index: 1000;
       }
+      
+      .story-container[data-element="dropdown-group"] {
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+      }
     </style>
     <script type="module">
       if (window.self === window.top) {
@@ -73,7 +78,7 @@ export function render(data) {
       <a href="docs/elements/${data.story.element}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
       <a href="${data.story.playground}" target="_blank" nve-text="link body sm">playground &#8599;</a>
     </div>
-    <div nve-layout="row full align:center">
+    <div class="story-container" nve-layout="row full align:center" data-element="${data.story.element}">
       ${data.story.template}
     </div>
   </body>
