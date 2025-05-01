@@ -3,4 +3,4 @@ import { Redirect } from '@nve-internals/storybook/blocks';
 
 <Meta title="About/Getting Started" />
 
-<Redirect path={'docs/about/getting-started/'} />
+{!document.location.href.includes('localhost') ? <Redirect path={'docs/about/getting-started/'} /> : ''}

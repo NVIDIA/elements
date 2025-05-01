@@ -1,5 +1,7 @@
 import { renderBaseHead, renderDocsNav } from './common.js';
 import { renderSvgLogos } from './svg-logos.js';
+import { elementSummary, elementStatus, elementTable } from '../templates/api.js';
+
 /**
  * Provides mirrored layout to mimic existing Storybook docs navigation.
  */
@@ -127,10 +129,6 @@ export function render(data) {
               display: block;
             }
           }
-
-          nve-api-summary {
-            min-height: 65px;
-          }
         </style>
         <script type="module">
           const systemOptionsPanel = document.querySelector('#system-options-panel');
@@ -144,12 +142,10 @@ export function render(data) {
         </script>
         <script type="module">
           const headings = [
-            ...Array.from(document.querySelectorAll('h2[nve-text*="mkd"], h3[nve-text*="mkd"], h4[nve-text*="mkd"]')),
-            document.querySelector('nve-api-status') ? { textContent: 'Status', id: 'element-status'} : null,
-            document.querySelector('nve-api-table') ? { textContent: 'API', id: 'element-api'} : null
+            ...Array.from(document.querySelectorAll('h2[nve-text*="mkd"], h3[nve-text*="mkd"], h4[nve-text*="mkd"]'))
           ].filter(i => !!i);
 
-          if (headings.length > 2 && headings.length < 10) {
+          if (headings.length > 2 && headings.length < 20) {
             const ul = document.createElement('ul');
             ul.id = 'doc-sidenav';
             ul.setAttribute('nve-text', 'list mkd');
@@ -215,26 +211,10 @@ export function render(data) {
           <main nve-layout="column align:center">
             <div nve-layout="row align:horizontal-center full" style="gap: 5rem;">
               <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl">
-                ${
-                  data.tag
-                    ? `
-                  <h1 nve-text="display emphasis mkd">${data.title}</h1>
-                  <nve-api-summary tag="${data.tag}"></nve-api-summary>`
-                    : ''
-                }
+                ${data.tag ? `<h1 nve-text="display emphasis mkd">${data.title}</h1>${elementSummary(data.tag)}` : ''}
                 ${data.content}
-                ${
-                  data.tag
-                    ? `
-                  <nve-api-status tag="${data.tag}"></nve-api-status>
-                  <nve-api-table tag="${data.tag}"></nve-api-table>`
-                    : ''
-                }
-                ${
-                  data.associatedElements?.length
-                    ? data.associatedElements.map(tag => `<nve-api-table tag="${tag}"></nve-api-table>`).join('')
-                    : ''
-                }
+                ${data.tag ? `${elementStatus(data.tag)}${elementTable(data.tag)}` : ''}
+                ${data.associatedElements?.length ? data.associatedElements.map(tag => elementTable(tag)).join('') : ''}
               </div>
             </div>
           </main>

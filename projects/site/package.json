@@ -53,7 +53,8 @@
         "../themes:build",
         "../labs/code:build",
         "../monaco:build",
-        "../internals/elements-api:build"
+        "../internals/elements-api:build",
+        "../internals/patterns:build"
       ],
       "env": {
         "PAGES_BASE_URL": {
@@ -111,6 +112,7 @@
     "@nve-internals/elements-api": "workspace:*",
     "@nve-internals/eslint": "workspace:*",
     "@nve-internals/metadata": "workspace:*",
+    "@nve-internals/patterns": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/playwright-screencast": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
