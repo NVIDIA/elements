@@ -21,10 +21,6 @@ import { H1, H2, H3, H4, P, UL, OL, PRE, CODE } from '@internals/storybook/block
 import { setSourcePackageScope } from '@internals/elements-api';
 
 import '@nvidia-elements/core/button/define.js';
-import '@internals/elements-api/table/define.js';
-import '@internals/elements-api/detail/define.js';
-import '@internals/elements-api/status/define.js';
-import '@internals/elements-api/summary/define.js';
 
 export const parameters = {
   badges: ['stable'],
@@ -411,9 +407,7 @@ export const decorators = [(story, { globals }) => {
 
   if (docsWrapper && elementMetrics && !document.querySelector(`#${listId}`)) {
     const headings = [
-      ...Array.from(document.querySelectorAll('h1, h2, h3, h4')).filter(h => h.className === 'dynamic-anchor'),
-      document.querySelector('nve-api-status') ? { textContent: 'Status', id: 'element-status'} : null,
-      document.querySelector('nve-api-table[type="all"]') ? { textContent: 'API', id: 'element-api'} : null
+      ...Array.from(document.querySelectorAll('h1, h2, h3, h4')).filter(h => h.className === 'dynamic-anchor')
     ].filter(i => !!i);
   
     if (headings.length > 2) {

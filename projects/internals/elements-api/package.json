@@ -25,66 +25,6 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./badge-axe": {
-      "types": "./dist/badge-axe/index.d.ts",
-      "default": "./dist/badge-axe/index.js"
-    },
-    "./badge-axe/index.js": {
-      "types": "./dist/badge-axe/index.d.ts",
-      "default": "./dist/badge-axe/index.js"
-    },
-    "./badge-axe/define.js": {
-      "types": "./dist/badge-axe/define.d.ts",
-      "default": "./dist/badge-axe/define.js"
-    },
-    "./badge-bundle": {
-      "types": "./dist/badge-bundle/index.d.ts",
-      "default": "./dist/badge-bundle/index.js"
-    },
-    "./badge-bundle/index.js": {
-      "types": "./dist/badge-bundle/index.d.ts",
-      "default": "./dist/badge-bundle/index.js"
-    },
-    "./badge-bundle/define.js": {
-      "types": "./dist/badge-bundle/define.d.ts",
-      "default": "./dist/badge-bundle/define.js"
-    },
-    "./badge-coverage": {
-      "types": "./dist/badge-coverage/index.d.ts",
-      "default": "./dist/badge-coverage/index.js"
-    },
-    "./badge-coverage/index.js": {
-      "types": "./dist/badge-coverage/index.d.ts",
-      "default": "./dist/badge-coverage/index.js"
-    },
-    "./badge-coverage/define.js": {
-      "types": "./dist/badge-coverage/define.d.ts",
-      "default": "./dist/badge-coverage/define.js"
-    },
-    "./badge-lighthouse": {
-      "types": "./dist/badge-lighthouse/index.d.ts",
-      "default": "./dist/badge-lighthouse/index.js"
-    },
-    "./badge-lighthouse/index.js": {
-      "types": "./dist/badge-lighthouse/index.d.ts",
-      "default": "./dist/badge-lighthouse/index.js"
-    },
-    "./badge-lighthouse/define.js": {
-      "types": "./dist/badge-lighthouse/define.d.ts",
-      "default": "./dist/badge-lighthouse/define.js"
-    },
-    "./badge-status": {
-      "types": "./dist/badge-status/index.d.ts",
-      "default": "./dist/badge-status/index.js"
-    },
-    "./badge-status/index.js": {
-      "types": "./dist/badge-status/index.d.ts",
-      "default": "./dist/badge-status/index.js"
-    },
-    "./badge-status/define.js": {
-      "types": "./dist/badge-status/define.d.ts",
-      "default": "./dist/badge-status/define.js"
-    },
     "./canvas": {
       "types": "./dist/canvas/index.d.ts",
       "default": "./dist/canvas/index.js"
@@ -97,42 +37,6 @@
       "types": "./dist/canvas/define.d.ts",
       "default": "./dist/canvas/define.js"
     },
-    "./detail": {
-      "types": "./dist/detail/index.d.ts",
-      "default": "./dist/detail/index.js"
-    },
-    "./detail/index.js": {
-      "types": "./dist/detail/index.d.ts",
-      "default": "./dist/detail/index.js"
-    },
-    "./detail/define.js": {
-      "types": "./dist/detail/define.d.ts",
-      "default": "./dist/detail/define.js"
-    },
-    "./status": {
-      "types": "./dist/status/index.d.ts",
-      "default": "./dist/status/index.js"
-    },
-    "./status/index.js": {
-      "types": "./dist/status/index.d.ts",
-      "default": "./dist/status/index.js"
-    },
-    "./status/define.js": {
-      "types": "./dist/status/define.d.ts",
-      "default": "./dist/status/define.js"
-    },
-    "./summary": {
-      "types": "./dist/summary/index.d.ts",
-      "default": "./dist/summary/index.js"
-    },
-    "./summary/index.js": {
-      "types": "./dist/summary/index.d.ts",
-      "default": "./dist/summary/index.js"
-    },
-    "./summary/define.js": {
-      "types": "./dist/summary/define.d.ts",
-      "default": "./dist/summary/define.js"
-    },
     "./system-settings": {
       "types": "./dist/system-settings/index.d.ts",
       "default": "./dist/system-settings/index.js"
@@ -144,18 +48,6 @@
     "./system-settings/define.js": {
       "types": "./dist/system-settings/define.d.ts",
       "default": "./dist/system-settings/define.js"
-    },
-    "./table": {
-      "types": "./dist/table/index.d.ts",
-      "default": "./dist/table/index.js"
-    },
-    "./table/index.js": {
-      "types": "./dist/table/index.d.ts",
-      "default": "./dist/table/index.js"
-    },
-    "./table/define.js": {
-      "types": "./dist/table/define.d.ts",
-      "default": "./dist/table/define.js"
     }
   },
   "sideEffects": [

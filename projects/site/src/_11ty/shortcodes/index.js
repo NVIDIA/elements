@@ -1,40 +1,59 @@
 import { resolve } from 'node:path';
 import { globSync } from 'glob';
 import { readFileSync } from 'node:fs';
+import markdownIt from 'markdown-it';
 import { createPlaygroundURLFromStorySource } from '@internals/elements-api';
-import markdown from '../libraries/markdown.js';
+import { MetadataService } from '@internals/metadata';
 import { camelToKebab } from '../utils/index.js';
+import markdown from '../libraries/markdown.js';
+
+const md = markdownIt();
+const metadata = await MetadataService.getMetadata();
+const elements = Object.keys(metadata).flatMap(packageName => metadata[packageName].elements ?? []);
 
 export async function apiShortcode(tag, type, value) {
-  return /* html */ `<nve-api-detail tag="${tag}" type="${type}" value="${value}"></nve-api-detail>`;
+  const element = elements.find(d => d.name === tag);
+  return element
+    ? /* html */ `
+  ${type === 'description' ? md.render(element.manifest.description ?? '') : ''}
+  ${type === 'event' ? md.render(`<code>${value}</code>: ` + element.manifest.events?.find(m => m.name === value)?.description) : ''}
+  ${type === 'property' ? md.render(element.manifest.members?.find(m => m.name === value)?.description ?? '') : ''}
+  ${type === 'slot' ? md.render(element.manifest.slots?.find(m => m.name === value)?.description ?? '') : ''}
+  ${type === 'story' ? md.render(element.stories?.find(m => m.id === value)?.description ?? '') : ''}`
+        .trim()
+        .replaceAll('<p>', '<p nve-text="body relaxed mkd">')
+    : '';
 }
-
-const stories = [
-  ...globSync(`${resolve('../elements')}/dist/**/*.stories.json`),
-  ...globSync(`${resolve('../monaco')}/dist/**/*.stories.json`),
-  ...globSync(`${resolve('../labs/code')}/dist/**/*.stories.json`)
-].map(path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8')));
 
 export async function storyShortcode(tag, storyName, userConfig = { inline: true, height: '95%' }) {
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
-  const story = stories.find(s => s.element === tag)?.stories?.find(s => s.id === storyName);
-  let name = tag.replace('nve-', '');
-  let base = '@nvidia-elements/core';
-  if (name === 'monaco-editor') {
-    base = '@nvidia-elements/monaco';
-    name = 'editor';
-  } else if (name === 'codeblock') {
-    base = '@nvidia-elements/code';
+  let story;
+  let path;
+
+  if (tag.includes('.stories.json')) {
+    path = tag;
+    story = (await import(path, { with: { type: 'json' } })).default.stories?.find(s => s.id === storyName);
+  } else {
+    const stories = globSync(`${resolve('../elements')}/dist/**/*.stories.json`).map(path =>
+      JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'))
+    );
+    let name = tag.replace('nve-', '');
+    story = stories.find(s => s.element === tag)?.stories?.find(s => s.id === storyName);
+    path = `@nvidia-elements/core/${name}/${name}.stories.json`;
   }
+
+  const playgroundButton = story
+    ? /* html */ `<nve-button container="flat" slot="suffix"><a href="${createPlaygroundURLFromStorySource(story.template, { id: storyName, globals: {} })}" target="_blank">Playground</a></nve-button>`
+    : '';
 
   const reload =
     process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story // eslint-disable-line no-undef
       ? /* html */ `
   <script type="module">
-    import stories from '${base}/${name}/${name}.stories.json' with { type: 'json' };
+    import stories from '${path}' with { type: 'json' };
     const canvas = document.querySelector('nve-api-canvas#${story.id}');
     const story = stories.stories.find(s => s.id === '${story.id}');
-    canvas.innerHTML = story.template ?? '';
+    canvas.innerHTML = \`${playgroundButton}\` + story.template;
     canvas.source = story.template ?? '';
   </script>`
       : '';
@@ -42,7 +61,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
   return story
     ? /* html */ `
 <nve-api-canvas id="${story.id}">
-<nve-button container="flat" slot="suffix"><a href="${createPlaygroundURLFromStorySource(story.template, { id: storyName, globals: {} })}" target="_blank">Playground</a></nve-button>
+${playgroundButton}
 <template>${markdown.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>${config.inline ? story.template.replace(/\n\n/g, '\n') : `<iframe loading="lazy" src="stories/${tag.replace('nve-', '')}/${camelToKebab(story.id)}/" style="height: ${config.height}; width: 100%; border: none;" />`}
 </nve-api-canvas>${reload}`
     : '';

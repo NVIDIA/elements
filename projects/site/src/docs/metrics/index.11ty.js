@@ -1,5 +1,6 @@
 import { ESM_ELEMENTS_VERSION } from '@internals/elements-api';
 import { MetadataService } from '@internals/metadata';
+import { badgeStatus, badgeCoverage, badgeBundle, badgeLighthouse, badgeAxe } from '../../_11ty/templates/api.js';
 
 export const data = {
   title: 'Metrics',
@@ -66,14 +67,14 @@ export function render() {
       .map(element => {
         return /* html */ `<nve-grid-row>
         <nve-grid-cell><a href=${element.manifest.metadata.storybook.replace('https://NVIDIA.github.io/elements/api/', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
-        <nve-grid-cell><nve-api-badge-status value="${element.manifest.metadata.status}" container="flat"></nve-api-badge-status></nve-grid-cell>
-        <nve-grid-cell><nve-api-badge-coverage value="${element.tests.unit.coverageTotal}" container="flat"></nve-api-badge-coverage></nve-grid-cell>
-        <nve-grid-cell>${element.tests.lighthouse?.payload?.javascript?.kb ? /* html */ `<nve-api-badge-bundle value="${element.tests.lighthouse?.payload?.javascript?.kb?.toFixed(2)}" container="flat"></nve-api-badge-bundle>` : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
-        <nve-grid-cell>${element.tests.lighthouse?.scores?.performance ? /* html */ `<nve-api-badge-lighthouse value='{ "performance": ${element.tests.lighthouse?.scores?.performance} }' container="flat"></nve-api-badge-lighthouse>` : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
-        <nve-grid-cell>${element.tests.lighthouse?.scores?.accessibility ? /* html */ `<nve-api-badge-lighthouse value='{ "performance": ${element.tests.lighthouse?.scores?.accessibility} }' container="flat"></nve-api-badge-lighthouse>` : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
-        <nve-grid-cell>${element.tests.lighthouse?.scores?.bestPractices ? /* html */ `<nve-api-badge-lighthouse value='{ "performance": ${element.tests.lighthouse?.scores?.bestPractices} }' container="flat"></nve-api-badge-lighthouse>` : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+        <nve-grid-cell>${badgeStatus(element.manifest.metadata.status, 'flat')}</nve-grid-cell>
+        <nve-grid-cell>${badgeCoverage(element.tests.unit.coverageTotal, 'flat')}</nve-grid-cell>
+        <nve-grid-cell>${element.tests.lighthouse?.payload?.javascript?.kb ? /* html */ badgeBundle(element.tests.lighthouse?.payload?.javascript?.kb?.toFixed(2), 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+        <nve-grid-cell>${element.tests.lighthouse?.scores?.performance ? /* html */ badgeLighthouse({ performance: element.tests.lighthouse?.scores?.performance }, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+        <nve-grid-cell>${element.tests.lighthouse?.scores?.accessibility ? /* html */ badgeLighthouse({ accessibility: element.tests.lighthouse?.scores?.accessibility }, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+        <nve-grid-cell>${element.tests.lighthouse?.scores?.bestPractices ? /* html */ badgeLighthouse({ bestPractices: element.tests.lighthouse?.scores?.bestPractices }, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
         <nve-grid-cell><nve-badge container="flat" status="${element.tests?.ssr?.baseline ? 'success' : 'warning'}">Static</nve-badge></nve-grid-cell>
-        <nve-grid-cell><nve-api-badge-axe container="flat" value="${element.manifest.metadata.axe ?? ''}"></nve-api-badge-axe></nve-grid-cell>
+        <nve-grid-cell>${badgeAxe(element.manifest.metadata.axe, 'flat')}</nve-grid-cell>
         <nve-grid-cell>${getBehaviorCategoryIcon(element.manifest.metadata.behavior)}&nbsp;&nbsp;<a href=${element.manifest.metadata.aria} nve-text="link no-visit">${element.manifest.metadata.behavior}</a></nve-grid-cell>
         <nve-grid-cell>${element.manifest.metadata.since ?? ''}</nve-grid-cell>
         <nve-grid-cell>${element.manifest.metadata.figma ? /* html */ `<a href=${element.manifest.metadata.figma} nve-text="link no-visit">Figma</a>` : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>

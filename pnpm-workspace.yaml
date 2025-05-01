@@ -32,6 +32,7 @@ packages:
   - 'projects/internals/elements-api'
   - 'projects/internals/eslint'
   - 'projects/internals/metadata'
+  - 'projects/internals/patterns'
   - 'projects/internals/vite'
 
 catalog:
