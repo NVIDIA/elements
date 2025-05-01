@@ -3,6 +3,7 @@ import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import { BASE_URL } from './src/_11ty/layouts/common.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/index.js';
 import { apiShortcode, storyShortcode } from './src/_11ty/shortcodes/index.js';
+import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
 
 export default function (eleventyConfig) {
@@ -35,6 +36,7 @@ export default function (eleventyConfig) {
   eleventyConfig.setLibrary('md', markdown);
   eleventyConfig.addAsyncShortcode('story', storyShortcode);
   eleventyConfig.addAsyncShortcode('api', apiShortcode);
+  eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
 
   return {

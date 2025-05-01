@@ -1,5 +1,6 @@
 import { ESM_ELEMENTS_VERSION } from '@nve-internals/elements-api';
 import { MetadataService } from '@nve-internals/metadata';
+import { badgeCoverage, badgeBundle, badgeLighthouse } from '../../_11ty/templates/api.js';
 
 export const data = {
   title: 'Testing & Performance',
@@ -38,19 +39,19 @@ export function render() {
         <h3 nve-text="body bold">Test Coverage:</h3>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Statements</span>
-          <nve-api-badge-coverage value="${metrics['@nvidia-elements/core'].tests.coverageTotal.statements.pct}" container="flat"></nve-api-badge-coverage>
+          ${badgeCoverage(metrics['@nvidia-elements/core'].tests.coverageTotal.statements.pct, 'flat')}
         </section>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Lines</span>
-          <nve-api-badge-coverage value="${metrics['@nvidia-elements/core'].tests.coverageTotal.lines.pct}" container="flat"></nve-api-badge-coverage>
+          ${badgeCoverage(metrics['@nvidia-elements/core'].tests.coverageTotal.lines.pct, 'flat')}
         </section>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Functions</span>
-          <nve-api-badge-coverage value="${metrics['@nvidia-elements/core'].tests.coverageTotal.functions.pct}" container="flat"></nve-api-badge-coverage>
+          ${badgeCoverage(metrics['@nvidia-elements/core'].tests.coverageTotal.functions.pct, 'flat')}
         </section>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Branches</span>
-          <nve-api-badge-coverage value="${metrics['@nvidia-elements/core'].tests.coverageTotal.branches.pct}" container="flat"></nve-api-badge-coverage>
+          ${badgeCoverage(metrics['@nvidia-elements/core'].tests.coverageTotal.branches.pct, 'flat')}
         </section>
       </div>
       <nve-grid style="--scroll-height: calc(100vh - 330px)">
@@ -65,10 +66,10 @@ export function render() {
           .map(
             cov => /* html */ `<nve-grid-row>
           <nve-grid-cell><p nve-text="body truncate">${cov.file}</p></nve-grid-cell>
-          <nve-grid-cell><nve-api-badge-coverage value="${cov.statements.pct}" container="flat"></nve-api-badge-coverage></nve-grid-cell>
-          <nve-grid-cell><nve-api-badge-coverage value="${cov.lines.pct}" container="flat"></nve-api-badge-coverage></nve-grid-cell>
-          <nve-grid-cell><nve-api-badge-coverage value="${cov.functions.pct}" container="flat"></nve-api-badge-coverage></nve-grid-cell>
-          <nve-grid-cell><nve-api-badge-coverage value="${cov.branches.pct}" container="flat"></nve-api-badge-coverage></nve-grid-cell>
+          <nve-grid-cell>${badgeCoverage(cov.statements.pct, 'flat')}</nve-grid-cell>
+          <nve-grid-cell>${badgeCoverage(cov.lines.pct, 'flat')}</nve-grid-cell>
+          <nve-grid-cell>${badgeCoverage(cov.functions.pct, 'flat')}</nve-grid-cell>
+          <nve-grid-cell>${badgeCoverage(cov.branches.pct, 'flat')}</nve-grid-cell>
         </nve-grid-row>`
           )
           .join('')}
@@ -89,10 +90,10 @@ export function render() {
         .map(
           element => /* html */ `<nve-grid-row>
           <nve-grid-cell>${element.name}</nve-grid-cell>
-          <nve-grid-cell><nve-api-badge-lighthouse value='{ "performance": ${element.tests.lighthouse?.scores?.performance} }' container="flat"></nve-api-badge-lighthouse></nve-grid-cell>
-          <nve-grid-cell><nve-api-badge-lighthouse value='{ "accessibility": ${element.tests.lighthouse?.scores?.accessibility} }' container="flat"></nve-api-badge-lighthouse></nve-grid-cell>
-          <nve-grid-cell><nve-api-badge-lighthouse value='{ "bestPractices": ${element.tests.lighthouse?.scores?.bestPractices} }' container="flat"></nve-api-badge-lighthouse></nve-grid-cell>
-          <nve-grid-cell><nve-api-badge-bundle value="${element.tests.lighthouse?.payload?.javascript?.kb?.toFixed(2)}" container="flat"></nve-api-badge-bundle></nve-grid-cell>
+          <nve-grid-cell>${badgeLighthouse({ performance: element.tests.lighthouse?.scores?.performance }, 'flat')}</nve-grid-cell>
+          <nve-grid-cell>${badgeLighthouse({ accessibility: element.tests.lighthouse?.scores?.accessibility }, 'flat')}</nve-grid-cell>
+          <nve-grid-cell>${badgeLighthouse({ bestPractices: element.tests.lighthouse?.scores?.bestPractices }, 'flat')}</nve-grid-cell>
+          <nve-grid-cell>${badgeBundle(element.tests.lighthouse?.payload?.javascript?.kb?.toFixed(2), 'flat')}</nve-grid-cell>
         </nve-grid-row>`
         )
         .join('')}

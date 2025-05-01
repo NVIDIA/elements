@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "module": "es2022",
+    "target": "es2022",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "typeRoots": ["./node_modules/@types"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/",
+    "baseUrl": "./",
+    "rootDir": "./",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "isolatedModules": true,
+    "paths": {
+      "@nvidia-elements/monaco": ["./src/index.js"],
+      "@nvidia-elements/monaco/*": ["./src/*"],
+      "@nvidia-elements/monaco/*.js": ["./src/*.js"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

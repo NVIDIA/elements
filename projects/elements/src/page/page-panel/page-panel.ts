@@ -105,7 +105,7 @@ export class PagePanel extends LitElement {
     <div internal-host>
       <div part="_header">
         <slot name="header"></slot>
-        ${this.closable || this.expandable ? html`<nve-icon-button @click=${() => this.#typeExpandableController.close()} .iconName=${this.#closableIconName} .direction=${this.#closableIconDirection} .ariaLabel=${this.i18n.close} part="_close-btn" container="inline"></nve-icon-button>` : nothing}
+        ${this.closable || this.expandable ? html`<nve-icon-button @click=${() => this.#typeExpandableController.close()} .iconName=${this.#closableIconName} .direction=${this.#closableIconDirection} aria-label=${this.i18n.close} part="_close-btn" container="inline" role="button"></nve-icon-button>` : nothing}
       </div>
       <div class="content">
         <slot></slot>
