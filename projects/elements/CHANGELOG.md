@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.33.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.32.1...@nvidia-elements/core-v1.33.0) (2025-05-01)
+
+
+### Features
+
+* **elements-react:** dropdown group ([37f272e](https://github.com/NVIDIA/elements/commit/37f272e765259c52695696c13748ec3bf5746ec0))
+* **elements:** dropdown group ([cd6f298](https://github.com/NVIDIA/elements/commit/cd6f2984d318ef4e13708479057380234fd6e05e))
+
 ## [@nvidia-elements/core-v1.32.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.32.0...@nvidia-elements/core-v1.32.1) (2025-04-28)
 
 
