@@ -1,8 +1,7 @@
 ---
 {
   title: 'Layout Horizontal',
-  layout: 'docs.11ty.js',
-  permalink: 'docs/foundations/layout/horizontal/index.html'
+  layout: 'docs.11ty.js'
 }
 ---
 

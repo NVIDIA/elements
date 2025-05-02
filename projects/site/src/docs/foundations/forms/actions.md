@@ -1,12 +1,11 @@
 ---
 {
   title: 'Control Actions',
-  layout: 'docs.11ty.js',
-  permalink: 'docs/foundations/forms/actions/index.html'
+  layout: 'docs.11ty.js'
 }
 ---
 
-# Control Actions
+# {{ title }}
 
 Text type controls support prefix and suffix labeling as well as action buttons.
 

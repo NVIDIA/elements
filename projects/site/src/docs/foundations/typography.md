@@ -1,8 +1,7 @@
 ---
 {
   title: 'Typography',
-  layout: 'docs.11ty.js',
-  permalink: 'docs/foundations/typography/index.html'
+  layout: 'docs.11ty.js'
 }
 ---
 
