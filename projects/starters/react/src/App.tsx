@@ -100,7 +100,7 @@ function App() {
           <span>React</span>
         </nve-breadcrumb>
         <h1 nve-text="heading xl">React</h1>
-        <p nve-text="body">A simple starter using Elements and React.</p>
+        <p nve-text="body">A simple starter using Elements and React (v19).</p>
         <ul nve-text="list" nve-layout="column gap:xs">
           <li>
             <a
