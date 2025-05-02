@@ -113,7 +113,7 @@ export function render(data) {
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">React</h2>
-          <p nve-text="body sm muted">Starter leveraging React and Vite.</p>
+          <p nve-text="body sm muted">Starter leveraging React (v19) and Vite.</p>
         </div>
       </div>
     </nve-card>
@@ -126,7 +126,7 @@ export function render(data) {
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">NextJS</h2>
-          <p nve-text="body sm muted">Starter leveraging NextJS and React 19.</p>
+          <p nve-text="body sm muted">Starter leveraging NextJS (v15) and React (v19).</p>
         </div>
       </div>
     </nve-card>
