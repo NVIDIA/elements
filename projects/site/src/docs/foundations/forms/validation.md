@@ -2,8 +2,7 @@
 {
   title: 'Form Validation',
   layout: 'docs.11ty.js',
-  tag: 'nve-control',
-  permalink: 'docs/foundations/forms/validation/index.html'
+  tag: 'nve-control'
 }
 ---
 

@@ -136,7 +136,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-fonts--docs">Fonts</a></nve-tree-node>
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-custom-themes--docs">Custom</a></nve-tree-node>
     </nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/page-header/') ? 'highlighted' : ''}><a href="docs/foundations/typography">Typography</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/page-header/') ? 'highlighted' : ''}><a href="docs/foundations/typography/">Typography</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/foundations-iconography-documentation--docs">Iconography</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/') ? 'expanded' : ''}>
       Layout
@@ -153,10 +153,10 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/controls/') ? 'highlighted' : ''}><a href="docs/foundations/forms/controls/">Controls</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/actions/') ? 'highlighted' : ''}><a href="docs/foundations/forms/actions/">Actions</a></nve-tree-node>
     </nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/foundations-popovers-documentation--docs">Popovers</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/foundations-i18n-documentation--docs">i18n</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/foundations/popovers/' ? 'highlighted' : ''}><a href="docs/foundations/popovers/">Popovers</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/foundations/i18n/' ? 'highlighted' : ''}><a href="docs/foundations/i18n/">i18n</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/foundations-visualization-documentation--docs">Visualization</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/foundations-view-transitions-documentation--docs">View Transitions</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/foundations/view-transitions/' ? 'highlighted' : ''}><a href="docs/foundations/view-transitions/">View Transitions</a></nve-tree-node>
   </nve-tree-node>
   <nve-tree-node ${data.page.url.includes('/docs/elements/') ? 'expanded' : ''}>
     Elements

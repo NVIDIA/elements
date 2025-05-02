@@ -1,8 +1,7 @@
 ---
 {
   title: 'Layout Responsive',
-  layout: 'docs.11ty.js',
-  permalink: 'docs/foundations/layout/responsive/index.html'
+  layout: 'docs.11ty.js'
 }
 ---
 
