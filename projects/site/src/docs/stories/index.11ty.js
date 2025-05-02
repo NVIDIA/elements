@@ -2,11 +2,15 @@ import { join } from 'node:path';
 import { MetadataService } from '@nve-internals/metadata';
 import { createPlaygroundURLFromStorySource } from '@nve-internals/elements-api';
 import { camelToKebab } from '../../_11ty/utils/index.js';
+import popoverStories from '@nvidia-elements/core/internal/controllers/popover.stories.json' with { type: 'json' };
 
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
 const metadata = await MetadataService.getMetadata();
-const stories = metadata['@nvidia-elements/core'].elements.flatMap(element => {
+const stories = [
+  ...metadata['@nvidia-elements/core'].elements,
+  { ...popoverStories, name: '@nvidia-elements/core/internal/controllers/popover.stories.json' }
+].flatMap(element => {
   const stories = element.stories
     // few stories have invalid html so they are filtered out
     .filter(s => !s.template?.includes('${'))

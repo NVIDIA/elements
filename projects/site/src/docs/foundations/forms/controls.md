@@ -3,7 +3,6 @@
   title: 'Controls',
   layout: 'docs.11ty.js',
   tag: 'nve-control',
-  permalink: 'docs/foundations/forms/controls/index.html',
   associatedElements: ['nve-control-mesage', 'nve-control-group']
 }
 ---

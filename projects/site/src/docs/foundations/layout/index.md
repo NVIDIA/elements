@@ -1,8 +1,7 @@
 ---
 {
   title: 'Layout',
-  layout: 'docs.11ty.js',
-  permalink: 'docs/foundations/layout/index.html'
+  layout: 'docs.11ty.js'
 }
 ---
 

@@ -2,8 +2,7 @@
 {
   title: 'Forms',
   layout: 'docs.11ty.js',
-  tag: 'nve-control',
-  permalink: 'docs/foundations/forms/index.html'
+  tag: 'nve-control'
 }
 ---
 
