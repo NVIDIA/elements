@@ -89,7 +89,7 @@ export class GlassmorphicCard extends LitElement {
         </div>
 
         <nve-button>
-          <a href="https://NVIDIA.github.io/elements/starters/" target="_blank">
+          <a href="/elements/starters/" target="_blank">
             Clone template<nve-icon name="arrow-angle" size="sm"></nve-icon>
           </a>
         </nve-button>

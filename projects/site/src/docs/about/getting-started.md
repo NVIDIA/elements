@@ -49,40 +49,40 @@ import '@nvidia-elements/core/button/define.js';
 
 <section nve-layout="row gap:sm align:center">
   <nve-button>
-    <a href="/docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>
+    <a href="./docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/lit/"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit</a>
+    <a href="./docs/integrations/lit/"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/angular/"><svg width="20" height="20"><use href="#angular-svg"></use></svg> Angular</a>
+    <a href="./docs/integrations/angular/"><svg width="20" height="20"><use href="#angular-svg"></use></svg> Angular</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/vue/"><svg width="20" height="20"><use href="#vue-svg"></use></svg> Vue</a>
+    <a href="./docs/integrations/vue/"><svg width="20" height="20"><use href="#vue-svg"></use></svg> Vue</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/preact/"><svg width="20" height="20"><use href="#preact-svg"></use></svg> Preact</a>
+    <a href="./docs/integrations/preact/"><svg width="20" height="20"><use href="#preact-svg"></use></svg> Preact</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/nextjs/"><svg width="20" height="20"><use href="#nextjs-svg"></use></svg> NextJS</a>
+    <a href="./docs/integrations/nextjs/"><svg width="20" height="20"><use href="#nextjs-svg"></use></svg> NextJS</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/react/"><svg width="20" height="20"><use href="#react-svg"></use></svg> React</a>
+    <a href="./docs/integrations/react/"><svg width="20" height="20"><use href="#react-svg"></use></svg> React</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/solidjs/"><svg width="20" height="20"><use href="#solidjs-svg"></use></svg> SolidJS</a>
+    <a href="./docs/integrations/solidjs/"><svg width="20" height="20"><use href="#solidjs-svg"></use></svg> SolidJS</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/about/installation/"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> JavaScript</a>
+    <a href="./docs/about/installation/"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> JavaScript</a>
   </nve-button>
 </section>
 
 <section nve-layout="row gap:sm align:center">
   <nve-button>
-    <a href="/docs/about/installation/"><nve-icon name="gear"></nve-icon> Installation</a>
+    <a href="./docs/about/installation/"><nve-icon name="gear"></nve-icon> Installation</a>
   </nve-button>
   <nve-button>
-    <a href="https://NVIDIA.github.io/elements/api/" target="_blank"><svg width="18" height="18"><use href="#storybook-svg"></use></svg> API Documentation</a>
+    <a href="./docs/about/getting-started/" target="_blank"><svg width="18" height="18"><use href="#storybook-svg"></use></svg> API Documentation</a>
   </nve-button>
   <nve-button>
     <a href="https://github.com/NVIDIA/elements" target="_blank"><svg width="18" height="18"><use href="#gitlab-svg"></use></svg> Gitlab Repo</a>
