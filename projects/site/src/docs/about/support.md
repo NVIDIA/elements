@@ -32,31 +32,31 @@ Elements [supports a wide variety](https://custom-elements-everywhere.com) of Ja
 
 <section nve-layout="row gap:sm pad-bottom:lg">
   <nve-button>
-    <a href="/docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>
+    <a href="./docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/lit/"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit</a>
+    <a href="./docs/integrations/lit/"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/angular/"><svg width="20" height="20"><use href="#angular-svg"></use></svg> Angular</a>
+    <a href="./docs/integrations/angular/"><svg width="20" height="20"><use href="#angular-svg"></use></svg> Angular</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/vue/"><svg width="20" height="20"><use href="#vue-svg"></use></svg> Vue</a>
+    <a href="./docs/integrations/vue/"><svg width="20" height="20"><use href="#vue-svg"></use></svg> Vue</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/preact/"><svg width="20" height="20"><use href="#preact-svg"></use></svg> Preact</a>
+    <a href="./docs/integrations/preact/"><svg width="20" height="20"><use href="#preact-svg"></use></svg> Preact</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/nextjs/"><svg width="20" height="20"><use href="#nextjs-svg"></use></svg> NextJS</a>
+    <a href="./docs/integrations/nextjs/"><svg width="20" height="20"><use href="#nextjs-svg"></use></svg> NextJS</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/react/"><svg width="20" height="20"><use href="#react-svg"></use></svg> React</a>
+    <a href="./docs/integrations/react/"><svg width="20" height="20"><use href="#react-svg"></use></svg> React</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/integrations/solidjs/"><svg width="20" height="20"><use href="#solidjs-svg"></use></svg> SolidJS</a>
+    <a href="./docs/integrations/solidjs/"><svg width="20" height="20"><use href="#solidjs-svg"></use></svg> SolidJS</a>
   </nve-button>
   <nve-button>
-    <a href="/docs/about/installation/"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> JavaScript</a>
+    <a href="./docs/about/installation/"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> JavaScript</a>
   </nve-button>
 </section>
 
