@@ -1,8 +1,7 @@
 ---
 {
   title: 'Layout Grid',
-  layout: 'docs.11ty.js',
-  permalink: 'docs/foundations/layout/grid/index.html'
+  layout: 'docs.11ty.js'
 }
 ---
 
