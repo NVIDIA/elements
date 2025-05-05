@@ -11,7 +11,7 @@ import styles from './row.css?inline';
  * @slot - default slot for `nve-grid-cell`
  * @cssprop --background
  * @cssprop --border-bottom
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-grid-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/grid/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-33&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  */

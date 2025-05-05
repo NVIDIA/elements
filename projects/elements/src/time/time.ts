@@ -10,7 +10,7 @@ import styles from './time.css?inline';
  * @description A time picker is a control that enables users to choose a time value.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/time
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-time-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/time/
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time
  * @themes false
  */

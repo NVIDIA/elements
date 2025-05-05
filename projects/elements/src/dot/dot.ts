@@ -19,7 +19,7 @@ import styles from './dot.css?inline';
  * @cssprop --height
  * @cssprop --width
  * @cssprop --padding
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-dot-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/dot/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=CAAM7yEBvG18tRRa-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
