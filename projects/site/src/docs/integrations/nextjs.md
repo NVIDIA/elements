@@ -19,7 +19,7 @@
   </nve-button>
 </div>
 
-To use Elements in [NextJS](https://nextjs.org/) follow the [installation](./api/?path=/docs/integrations-react--docs) steps. Once complete
+To use Elements in [NextJS](https://nextjs.org/) follow the [installation](./docs/integrations/react/) steps. Once complete
 elements can be imported and used within React jsx and tsx files. An experimental [@lit-labs/nextjs](https://github.com/lit/lit/tree/main/packages/labs/nextjs) package exists for rendering
 elements with NextJS SSR.
 

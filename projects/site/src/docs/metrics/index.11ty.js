@@ -32,18 +32,14 @@ export function render() {
     <h3 nve-text="body bold">Summary:</h3>
     <section nve-layout="row gap:xs align:center">
       <span nve-text="body sm muted">Total Available Web Components</span>
-      <span nve-text="body sm bold">
-        <nve-badge color="blue-cobalt">
-          ${metrics['@nvidia-elements/core'].elements.length}
-        </nve-badge>
-      </span>
+      <nve-badge color="blue-cobalt">
+        ${metrics['@nvidia-elements/core'].elements.length}
+      </nve-badge>
       -
       <span nve-text="body sm muted">Total Available Parent Elements</span>
-      <span nve-text="body sm bold">
-        <nve-badge color="blue-cobalt">
-          ${[...new Set(metrics['@nvidia-elements/core'].elements.map(el => el.name.split('-')[1]))].length + 2}
-        </nve-badge>
-      </span>
+      <nve-badge color="blue-cobalt">
+        ${[...new Set(metrics['@nvidia-elements/core'].elements.map(el => el.name.split('-')[1]))].length + 2}
+      </nve-badge>
     </section>
   </div>
   <nve-grid style="--scroll-height: calc(100vh - 335px)">
