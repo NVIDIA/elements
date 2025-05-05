@@ -35,6 +35,20 @@ export const renderBaseHead = data => /* html */ `
     nve-page:not(:defined) {
       visibility: visible !important;
     }
+
+    /* hide non-ssr elements until defined */
+    nve-tree:not(:defined),
+    nve-grid:not(:defined),
+    nve-api-canvas:not(:defined) {
+      visibility: hidden !important;
+    }
+
+    /* hide if not defined and view transition is active */
+    [nve-transition='auto']:active-view-transition-type(forwards, backwards) {
+      nve-page:not(:defined) {
+        visibility: hidden !important;
+      }
+    }
   </style>
   <script type="module">
     const SB_GLOBALS = { theme: 'dark', font: '',  scale: '', debug: '', animation: '', sourceType: 'html', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
