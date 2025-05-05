@@ -12,13 +12,26 @@ export function render(data) {
       <head>
         ${renderBaseHead(data)}
         <style>
-          nve-tree > nve-tree-node:not(:has(> a)) {
-            --color: var(--nve-sys-text-muted-color);
-            --font-size: 11px;
-            font-weight: var(--nve-ref-font-weight-regular);
-            margin-bottom: var(--nve-ref-space-sm);
-            text-transform: uppercase;
-            letter-spacing: 1.76px;
+          /* hide non-ssr elements until defined */
+          nve-grid:not(:defined),
+          nve-tree:not(:defined),
+          nve-api-canvas:not(:defined) {
+            visibility: hidden;
+          }
+
+          #sidenav-panel {
+            nve-tree:not(:defined) {
+              visibility: hidden;
+            }
+
+            nve-tree > nve-tree-node:not(:has(> a)) {
+              --color: var(--nve-sys-text-muted-color);
+              --font-size: 11px;
+              font-weight: var(--nve-ref-font-weight-regular);
+              margin-bottom: var(--nve-ref-space-sm);
+              text-transform: uppercase;
+              letter-spacing: 1.76px;
+            }
           }
 
           h2[nve-text='heading xl mkd'] {
@@ -72,7 +85,7 @@ export function render(data) {
             padding-bottom: var(--nve-ref-space-xl);
 
             #doc-content {
-              max-width: 1120px;
+              max-width: 1160px;
               width: 100%;
             }
           }
@@ -91,43 +104,13 @@ export function render(data) {
             }
           }
 
-          main:has(#getting-started-img) {
+          [nve-theme~='dark'] main:has(#getting-started-img) {
             background-image: url(static/images/test-image-2.webp) !important;
             object-fit: fill !important;
             background-repeat: no-repeat !important;
             background-position: 0 15vh !important;
             box-shadow: inset 0 0 0 1000px rgb(11 12 15 / 88%) !important;
             filter: drop-shadow(0 50px 50px rgb(11 12 15 / 95%));
-          }
-
-          #doc-sidenav[nve-text='list mkd'] {
-            padding: 0;
-            height: fit-content;
-            list-style: none !important;
-            margin: 50px 0 0 0 !important;
-            position: sticky !important;
-            display: none;
-            top: 50px;
-            right: 50px;
-
-            a[nve-text='link truncate'] {
-              text-decoration: none !important;
-              color: var(--nve-sys-text-muted-color) !important;
-              text-wrap: nowrap !important;
-              min-width: 150px;
-              max-width: 150px;
-              display: block;
-            }
-
-            li {
-              padding-bottom: 14px;
-            }
-          }
-
-          @media (min-width: 1600px) {
-            #doc-sidenav[nve-text='list mkd'] {
-              display: block;
-            }
           }
         </style>
         <script type="module">
@@ -139,27 +122,6 @@ export function render(data) {
           const handle = document.querySelector('nve-resize-handle[slot="left"]');
           const panel = document.querySelector('nve-page-panel[slot="left"]');
           handle.addEventListener('input', e => panel.style.width = e.target.value + 'px');
-        </script>
-        <script type="module">
-          const headings = [
-            ...Array.from(document.querySelectorAll('h2[nve-text*="mkd"], h3[nve-text*="mkd"], h4[nve-text*="mkd"]'))
-          ].filter(i => !!i);
-
-          if (headings.length > 2 && headings.length < 20) {
-            const ul = document.createElement('ul');
-            ul.id = 'doc-sidenav';
-            ul.setAttribute('nve-text', 'list mkd');
-            for (const heading of headings) {
-              const li = document.createElement('li');
-              const a = document.createElement('a');
-              a.setAttribute('nve-text', 'link truncate');
-              a.href = document.location.pathname + '#' + heading.id;
-              a.textContent = heading.textContent;
-              li.appendChild(a);
-              ul.appendChild(li);
-            }
-            document.querySelector('#doc-content').insertAdjacentElement('afterend', ul);
-          }
         </script>
         <script type="module">
           // Auto-scroll to deep-link headers
@@ -216,6 +178,7 @@ export function render(data) {
                 ${data.tag ? `${elementStatus(data.tag)}${elementTable(data.tag)}` : ''}
                 ${data.associatedElements?.length ? data.associatedElements.map(tag => elementTable(tag)).join('') : ''}
               </div>
+              <!-- ANCHOR-GENERATOR -->
             </div>
           </main>
           <nve-page-panel closable hidden slot="right" size="sm" id="system-options-panel">
