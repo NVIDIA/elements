@@ -20,7 +20,7 @@ import globalStyles from './dropdown-group.global.css?inline';
  * @event close - Dispatched when a dropdown in the group is closed
  * @cssprop --nve-dropdown-group-spacing
  * @cssprop --nve-dropdown-group-transition
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-dropdown-group-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/dropdown-group/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  * @stable false

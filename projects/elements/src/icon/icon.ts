@@ -19,7 +19,7 @@ export type { IconName, IconNames, IconSVG } from './icons.js';
  * @cssprop --color
  * @cssprop --width
  * @cssprop --height
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-icon-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/icon/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
