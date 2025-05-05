@@ -15,7 +15,7 @@ import styles from './dropzone.css?inline';
  * @cssprop --min-height
  * @slot icon - default slot for icon
  * @slot content - default slot for content
- * @storybook  https://NVIDIA.github.io/elements/api/?path=/docs/elements-dropzone-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/dropzone/
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/branch/Y4puI42AmbVoGryu6yJqNl/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=2915-74822&p=f&t=f7SAVbl2KRCFZZul-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  * @stable false

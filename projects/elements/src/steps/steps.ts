@@ -25,7 +25,7 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
  * @cssprop --border-radius
  * @cssprop --color
  * @cssprop --text-transform
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-steps-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/steps/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5348&mode=design&t=WcDb2p9I7zwJ9GhW-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  */
@@ -95,7 +95,7 @@ export class StepsItem extends BaseButton {
  * @entrypoint \@nvidia-elements/core/steps
  * @slot - default slot for steps-item
  * @cssprop --gap
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-steps-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/steps/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5453&mode=design&t=8txdFlcqmipufrZs-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  */

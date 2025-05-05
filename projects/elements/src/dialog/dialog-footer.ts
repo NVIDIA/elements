@@ -7,7 +7,7 @@ import styles from './dialog-footer.css?inline';
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/dialog
  * @slot - default slot for the dialog footer
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-dialog-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/dialog/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-39&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
