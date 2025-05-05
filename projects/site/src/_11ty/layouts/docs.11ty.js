@@ -12,18 +12,7 @@ export function render(data) {
       <head>
         ${renderBaseHead(data)}
         <style>
-          /* hide non-ssr elements until defined */
-          nve-grid:not(:defined),
-          nve-tree:not(:defined),
-          nve-api-canvas:not(:defined) {
-            visibility: hidden;
-          }
-
           #sidenav-panel {
-            nve-tree:not(:defined) {
-              visibility: hidden;
-            }
-
             nve-tree > nve-tree-node:not(:has(> a)) {
               --color: var(--nve-sys-text-muted-color);
               --font-size: 11px;
@@ -111,6 +100,40 @@ export function render(data) {
             background-position: 0 15vh !important;
             box-shadow: inset 0 0 0 1000px rgb(11 12 15 / 88%) !important;
             filter: drop-shadow(0 50px 50px rgb(11 12 15 / 95%));
+          }
+
+          #anchor-generator {
+            padding: 0;
+            height: fit-content;
+            list-style: none !important;
+
+            a {
+              text-decoration: none !important;
+              color: var(--nve-sys-text-muted-color) !important;
+              text-wrap: nowrap !important;
+              min-width: 150px;
+              max-width: 150px;
+              min-height: 14px;
+              display: block;
+            }
+
+            li {
+              padding-bottom: 14px;
+            }
+          }
+
+          #doc-content + #anchor-generator {
+            margin: 50px 0 0 0 !important;
+            position: sticky !important;
+            display: none;
+            top: 50px;
+            right: 50px;
+          }
+
+          @media (min-width: 1600px) {
+            #doc-content + #anchor-generator {
+              display: block;
+            }
           }
         </style>
         <script type="module">
