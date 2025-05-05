@@ -24,7 +24,7 @@ import type { Button } from '@nvidia-elements/core/button';
  * @cssprop --item-active-color
  * @cssprop --item-active-font-weight
  * @slot - default slot for `nve-button` and anchor elements
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-breadcrumb-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/breadcrumb/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/navigation_role
  */

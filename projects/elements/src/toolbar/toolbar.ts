@@ -35,7 +35,7 @@ import styles from './toolbar.css?inline';
  * @cssprop --border-bottom
  * @cssprop --box-shadow
  * @cssprop --width
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-toolbar-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/toolbar/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=208%3A27566&mode=dev
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
  */

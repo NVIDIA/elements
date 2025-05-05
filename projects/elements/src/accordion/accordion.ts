@@ -28,7 +28,7 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
  * @slot title - (deprecated)
  * @slot subtitle - (deprecated)
  * @slot actions - (deprecated)
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
@@ -76,7 +76,7 @@ export class AccordionHeader extends LitElement {
  * @entrypoint \@nvidia-elements/core/accordion
  * @slot - This is a default/unnamed slot for accordion content content
  * @cssprop --padding
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
@@ -109,7 +109,7 @@ export class AccordionContent extends LitElement {
  * @cssprop --color
  * @cssprop --header-padding
  * @cssprop --transition
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
@@ -223,7 +223,7 @@ export class Accordion extends LitElement implements ContainerElement {
  * @element nve-accordion-group
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-accordion-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
