@@ -28,21 +28,17 @@ import '@nvidia-elements/core/input/define.js';
 
 ## Framework Integrations
 
-Each frontend framework typically provides its own guidance and best practices for creating forms. See the links below for specific integration patterns for the following frameworks:
+Each frontend framework typically provides its own guidance and best practices for creating forms.
 
-<section nve-layout="row gap:sm align:center">
+See the links below for specific integration patterns for the following frameworks:
+
+<section nve-layout="row align:left gap:md">
   <nve-button>
-    <a href="./?path=/docs/integrations-angular--docs&anchor=forms">
-      <svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#angular-svg"></use></svg>
-      Angular Integration
-    </a>
+    <a href="./docs/integrations/lit/#forms"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit Integration</a>
   </nve-button>
 
   <nve-button>
-    <a href="./?path=/docs/integrations-lit--docs&anchor=forms">
-      <svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"><use></svg>
-      Lit Integration
-    </a>
+    <a href="./docs/integrations/angular/#forms"><svg width="20" height="20"><use href="#angular-svg"></use></svg> Angular Integration</a>
   </nve-button>
 </section>
 
