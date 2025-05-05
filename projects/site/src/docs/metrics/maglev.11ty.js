@@ -31,7 +31,7 @@ export function render() {
       <h3 nve-text="body bold">Summary:</h3>
       <section nve-layout="row gap:xs align:center">
         <span nve-text="body sm muted">Total Maglev Instances</span>
-        <span nve-text="body sm bold"><nve-badge status="queued">${metricsMaglev.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge></span>
+        <nve-badge status="queued">${metricsMaglev.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge>
       </section>
     </div>
     <nve-tooltip id="instance-total-tooltip" style="--width: 300px">

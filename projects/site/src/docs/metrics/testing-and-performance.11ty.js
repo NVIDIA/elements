@@ -78,7 +78,7 @@ export function render() {
         </nve-grid-footer>
       </nve-grid>
     </section>
-    <nve-grid style="margin-top: 26px; --scroll-height: calc(100vh - 330px)">
+    <nve-grid style="margin-top: 44px; --scroll-height: calc(100vh - 330px)">
       <nve-grid-header>
         <nve-grid-column>Lighthouse Report</nve-grid-column>
         <nve-grid-column>Performance</nve-grid-column>
