@@ -23,7 +23,7 @@ Apply the following attribute to the root HTML element:
 <html nve-transition="auto">
 ```
 
-Use the [nve-page](./?path=/docs/elements-page-documentation--docs) element to enable the transition animations for page content.
+Use the [nve-page](./docs/elements/page/) element to enable the transition animations for page content.
 
 ```javascript
 import '@nvidia-elements/core/page/define.js';

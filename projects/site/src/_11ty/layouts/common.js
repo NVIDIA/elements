@@ -106,6 +106,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'highlighted' : ''}><a href="docs/about/requests/">Requests</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted' : ''}><a href="docs/about/migration/">Migration</a></nve-tree-node>
   </nve-tree-node>
+  
   <nve-tree-node ${data.page.url.includes('/docs/integrations/') ? 'expanded' : ''}>
     Integrations
     <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted' : ''}><a href="docs/integrations/angular/">Angular</a></nve-tree-node>
@@ -119,45 +120,46 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/typescript/') ? 'highlighted' : ''}><a href="docs/integrations/typescript/">TypeScript</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/vue/') ? 'highlighted' : ''}><a href="docs/integrations/vue/">Vue</a></nve-tree-node>
   </nve-tree-node>
+  
   <nve-tree-node ${data.page.url.includes('/docs/foundations/') ? 'expanded' : ''}>
     Foundations
-    <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/') ? 'expanded' : ''}>
-      Themes
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-documentation--docs">Documentation</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-design-tokens--docs">Design Tokens</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-size-space--docs">Size & Space</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-objects--docs">Objects</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/themes/' ? 'highlighted' : ''}>
+      <a href="api/?path=/docs/foundations-themes-documentation--docs">Themes</a>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/tokens/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/themes/tokens/' ? 'highlighted' : ''}>
+        <a href="api/?path=/docs/foundations-themes-design-tokens--docs">Design Tokens</a>
+        <nve-tree-node ><a href="api/?path=/docs/foundations-themes-size-space--docs">Size & Space</a></nve-tree-node>
+        <nve-tree-node><a href="api/?path=/docs/foundations-themes-objects--docs">Objects</a></nve-tree-node>
+        <nve-tree-node><a href="api/?path=/docs/foundations-themes-interactions--docs">Interactions</a></nve-tree-node>
+        <nve-tree-node><a href="api/?path=/docs/foundations-themes-support--docs">Support</a></nve-tree-node>
+        <nve-tree-node><a href="api/?path=/docs/foundations-themes-status--docs">Status</a></nve-tree-node>
+        <nve-tree-node ${data.page.url === '/docs/foundations/themes/color/' ? 'highlighted' : ''}><a href="docs/foundations/themes/color/">Color</a></nve-tree-node>
+        <nve-tree-node><a href="api/?path=/docs/foundations-themes-animation--docs">Animation</a></nve-tree-node>
+        <nve-tree-node><a href="api/?path=/docs/foundations-themes-fonts--docs">Fonts</a></nve-tree-node>
+      </nve-tree-node>
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-layers--docs">Layers</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-interactions--docs">Interactions</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-support--docs">Support</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-status--docs">Status</a></nve-tree-node>
-      <nve-tree-node ${data.page.url === '/docs/foundations/themes/color/' ? 'highlighted' : ''}><a href="docs/foundations/themes/color/">Color</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-animation--docs">Animation</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-fonts--docs">Fonts</a></nve-tree-node>
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-custom-themes--docs">Custom</a></nve-tree-node>
     </nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/page-header/') ? 'highlighted' : ''}><a href="docs/foundations/typography/">Typography</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/foundations-iconography-documentation--docs">Iconography</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/') ? 'expanded' : ''}>
-      Layout
-      <nve-tree-node ${data.page.url === '/docs/foundations/layout/' ? 'highlighted' : ''}><a href="docs/foundations/layout/">Documentation</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/layout/' ? 'highlighted' : ''}>
+      <a href="docs/foundations/layout/">Layout</a>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/horizontal/') ? 'highlighted' : ''}><a href="docs/foundations/layout/horizontal/">Horizontal</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/vertical/') ? 'highlighted' : ''}><a href="docs/foundations/layout/vertical/">Vertical</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/grid/') ? 'highlighted' : ''}><a href="docs/foundations/layout/grid/">Grid</a></nve-tree-node>
       <!-- <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/responsive/') ? 'highlighted' : ''}><a href="docs/foundations/layout/responsive/">Responsive</a></nve-tree-node> -->
     </nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/') ? 'expanded' : ''}>
-      Forms
-      <nve-tree-node ${data.page.url === '/docs/foundations/forms/' ? 'highlighted' : ''}><a href="docs/foundations/forms/">Documentation</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/forms/' ? 'highlighted' : ''}>
+      <a href="docs/foundations/forms/">Forms</a>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/validation/') ? 'highlighted' : ''}><a href="docs/foundations/forms/validation/">Validation</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/controls/') ? 'highlighted' : ''}><a href="docs/foundations/forms/controls/">Controls</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/actions/') ? 'highlighted' : ''}><a href="docs/foundations/forms/actions/">Actions</a></nve-tree-node>
     </nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/typography/') ? 'highlighted' : ''}><a href="docs/foundations/typography/">Typography</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/iconography/') ? 'highlighted' : ''}><a href="docs/foundations/iconography/">Iconography</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/popovers/' ? 'highlighted' : ''}><a href="docs/foundations/popovers/">Popovers</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/i18n/' ? 'highlighted' : ''}><a href="docs/foundations/i18n/">i18n</a></nve-tree-node>
     <nve-tree-node><a href="api/?path=/docs/foundations-visualization-documentation--docs">Visualization</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/view-transitions/' ? 'highlighted' : ''}><a href="docs/foundations/view-transitions/">View Transitions</a></nve-tree-node>
   </nve-tree-node>
+
   <nve-tree-node ${data.page.url.includes('/docs/elements/') ? 'expanded' : ''}>
     Elements
     <nve-tree-node ${data.page.url.includes('/docs/elements/accordion/') ? 'highlighted' : ''}><a href="docs/elements/accordion/">Accordion</a></nve-tree-node>
@@ -172,9 +174,8 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/color/') ? 'highlighted' : ''}><a href="docs/elements/color/">Color</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/combobox/') ? 'highlighted' : ''}><a href="docs/elements/combobox/">Combobox</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/copy-button/') ? 'highlighted' : ''}><a href="docs/elements/copy-button/">Copy Button</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/') ? 'expanded' : ''}>
-      Datagrid
-      <nve-tree-node ${data.page.url.endsWith('/docs/elements/data-grid/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/">Documentation</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/') ? 'expanded' : ''} ${data.page.url.endsWith('/docs/elements/data-grid/') ? 'highlighted' : ''}>
+      <a href="docs/elements/data-grid/">Datagrid</a>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/integrations/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/integrations/">Integrations</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-action/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/column-action/">Column Action</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-alignment/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/column-alignment/">Column Alignment</a></nve-tree-node>
@@ -245,6 +246,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/tree/') ? 'highlighted' : ''}><a href="docs/elements/tree/">Tree</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/week/') ? 'highlighted' : ''}><a href="docs/elements/week/">Week</a></nve-tree-node>
   </nve-tree-node>
+
   <nve-tree-node ${data.page.url.includes('/docs/patterns/') ? 'expanded' : ''}>
     Patterns
     <nve-tree-node ${data.page.url.endsWith('/docs/patterns/') ? 'highlighted' : ''}><a href="docs/patterns/">Documentation</a></nve-tree-node>
@@ -257,23 +259,29 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/patterns/media/') ? 'highlighted' : ''}><a href="docs/patterns/media/">Media</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/onboarding/') ? 'highlighted' : ''}><a href="docs/patterns/onboarding/">Onboarding</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/button-row/') ? 'highlighted' : ''}><a href="docs/patterns/button-row/">Button Row</a></nve-tree-node>
+  </nve-tree-node>
+
   <nve-tree-node ${data.page.url.includes('/docs/testing/') ? 'expanded' : ''}>
     Testing
     <nve-tree-node ${data.page.url === '/docs/testing/' ? 'highlighted' : ''}><a href="docs/testing/">Getting Started</a></nve-tree-node>
   </nve-tree-node>
+
   <!-- <nve-tree-node disabled ${data.page.url.includes('/docs/monaco/') ? 'expanded' : ''}>
     Monaco
     <nve-tree-node ${data.page.url === '/docs/monaco/editor/' ? 'highlighted' : ''}><a href="docs/monaco/editor/">Editor</a></nve-tree-node>
   </nve-tree-node> -->
+
   <nve-tree-node ${data.page.url.includes('/docs/code/') ? 'expanded' : ''}>
     Code
     <nve-tree-node ${data.page.url === '/docs/code/codeblock/' ? 'highlighted' : ''}><a href="docs/code/codeblock/">Codeblock</a></nve-tree-node>
   </nve-tree-node>
+
   <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''}>
     Labs
     <nve-tree-node ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}><a href="docs/labs/">About</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted' : ''}><a href="docs/labs/behaviors-alpine/">Behaviors Alpine</a></nve-tree-node>
   </nve-tree-node>
+
   <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''}>
     API Design
     <nve-tree-node ${data.page.url.includes('/docs/api-design/getting-started/') ? 'highlighted' : ''}><a href="docs/api-design/getting-started/">Getting Started</a></nve-tree-node>

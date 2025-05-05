@@ -3,7 +3,7 @@
   title: 'Controls',
   layout: 'docs.11ty.js',
   tag: 'nve-control',
-  associatedElements: ['nve-control-mesage', 'nve-control-group']
+  associatedElements: ['nve-control-message', 'nve-control-group']
 }
 ---
 

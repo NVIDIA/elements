@@ -163,7 +163,7 @@ export function elementTable(tag, type = 'all') {
 
   return elementManifest
     ? /* html */ `
-    <h2 nve-text="heading xl mkd" id="api">API</h2>
+    <h2 nve-text="heading xl mkd" id="api">API Details: &lt;${tag}&gt; </h2>
     ${type === 'properties' || type === 'all' ? renderProperties() : ''}
     ${type === 'events' || type === 'all' ? renderEvents() : ''}
     ${type === 'slots' || type === 'all' ? renderSlots() : ''}
