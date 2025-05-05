@@ -17,7 +17,7 @@ import globalStyles from './menu.global.css?inline';
  * @cssprop --gap
  * @cssprop --width
  * @cssprop --min-width
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-menu-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/menu/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=DjsMr3p502i01oCU-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */

@@ -10,7 +10,7 @@ import styles from './json-viewer.css?inline';
  * @description The JSON Viewer is a custom element that renders JSON data in a easy to read format. This can be used for prototyping and quickly displaying and debugging data. The JSON View is not a substitute for treeview patterns.
  * @since 0.16.0
  * @slot - default slot for json
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/internal-json-viewer-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/json-viewer/
  * @figma false
  * @stable false
  */

@@ -11,7 +11,7 @@ import styles from './page-loader.css?inline';
  * @entrypoint \@nvidia-elements/core/page-loader
  * @slot - default slot for content
  * @cssprop --gap
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-page-loader-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/page-loader/
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=8866%3A125698&mode=dev
  */
