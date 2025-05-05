@@ -48,10 +48,9 @@ export async function elementLoaderTransform(content) {
     import '@nvidia-elements/code/codeblock/define.js';`
     : '';
 
-  console.log(MONACO_IMPORTS);
   return content.replace(
     '</head>',
-    `<script type="module">${ELEMENTS_IMPORTS}\n${ELEMENTS_API_IMPORTS}\n${ELEMENTS_CODE_IMPORTS}\n${MONACO_IMPORTS}</script>` +
+    `<script type="module">import '@lit-labs/ssr-client/lit-element-hydrate-support.js';\n${ELEMENTS_IMPORTS}\n${ELEMENTS_API_IMPORTS}\n${ELEMENTS_CODE_IMPORTS}\n${MONACO_IMPORTS}</script>` +
       '</head>'
   );
 }

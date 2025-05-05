@@ -1,5 +1,6 @@
-import '@nvidia-elements/code/codeblock/define.js';
+import '@lit-labs/ssr-client/lit-element-hydrate-support.js';
 
+import '@nvidia-elements/code/codeblock/define.js';
 import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/languages/typescript.js';
 import '@nvidia-elements/code/codeblock/languages/xml.js';
@@ -58,4 +59,18 @@ void globalThis.customElements.whenDefined('nvd-theme-form').then(() => {
   form.addEventListener('input', () => {
     preview.settings = form.value;
   });
+});
+
+globalThis.document.querySelectorAll('.content:has(video)').forEach(video => {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const video = entry.target.querySelector('video')!;
+      if (entry.isIntersecting) {
+        void video.play();
+      } else {
+        void video.pause();
+      }
+    });
+  });
+  observer.observe(video);
 });
