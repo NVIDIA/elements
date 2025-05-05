@@ -7,7 +7,7 @@
 ---
 
 The Iconography system is based on exposing an SVG based icon library to a the `icon` element.
-See the searchable [Interactive Icon Catalog](./?path=/docs/foundations-iconography-documentation--docs)
+See the searchable [Interactive Icon Catalog](./docs/foundations/iconography/)
 
 ## Installation
 
@@ -26,11 +26,6 @@ import '@nvidia-elements/core/icon/define.js';
 ## All Icons
 
 <all-icons></all-icons>
-
-## Icon Catalog
-
-<icon-demo></icon-demo>
-<nve-notification-group position="bottom" alignment="end"></nve-notification-group>
 
 ## Status
 
@@ -72,5 +67,4 @@ Direct SVG paths can be provided for rendering.
 
 {% story 'nve-icon', 'Source' %}
 
-<script type="module" src="/_internal/stories/icon/icon-demo.js"></script>
 <script type="module" src="/_internal/stories/icon/all-icons.js"></script>
