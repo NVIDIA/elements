@@ -31,9 +31,10 @@ Once added, properties and events can be used via the standard lit template synt
 
 ## CSS Utilities
 
-Elements provides [layout](/api/?path=/docs/foundations-layout-documentation--docs) and [typography](/api/?path=/docs/foundations-typography-documentation--docs) utilities to make it easy to style your UI.
-These utilities are global CSS attributes that can be applied to any element. To
-use these utilities within a Lit element, you need to import the styles, so they
+Elements provides [layout](./docs/foundations/layout/) and [typography](./docs/foundations/typography/) utilities to make it easy to style your UI.
+
+These utilities are global CSS attributes that can be applied to any element. <br />
+To use these utilities within a Lit element, you need to import the styles, so they
 are available in your elements Shadow DOM.
 
 <nve-alert status="accent">
