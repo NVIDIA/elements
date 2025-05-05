@@ -62,7 +62,7 @@ export function render() {
     ${elements
       .map(element => {
         return /* html */ `<nve-grid-row>
-        <nve-grid-cell><a href=${element.manifest.metadata.storybook.replace('https://NVIDIA.github.io/elements/api/', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
+        <nve-grid-cell><a href=${element.manifest.metadata.storybook.replace('https://NVIDIA.github.io/elements/', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
         <nve-grid-cell>${badgeStatus(element.manifest.metadata.status, 'flat')}</nve-grid-cell>
         <nve-grid-cell>${badgeCoverage(element.tests.unit.coverageTotal, 'flat')}</nve-grid-cell>
         <nve-grid-cell>${element.tests.lighthouse?.payload?.javascript?.kb ? /* html */ badgeBundle(element.tests.lighthouse?.payload?.javascript?.kb?.toFixed(2), 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
