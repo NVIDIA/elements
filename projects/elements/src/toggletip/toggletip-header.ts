@@ -10,7 +10,7 @@ import styles from './toggletip-header.css?inline';
  * @cssprop --border-bottom
  * @cssprop --padding
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=11271-137320&t=nq7LDEegFP41AilB-0
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-toggletip-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/toggletip/
  * @stable false
  */
 export class ToggletipHeader extends LitElement {

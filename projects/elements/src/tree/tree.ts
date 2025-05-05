@@ -20,7 +20,7 @@ import globalStyles from './tree.global.css?inline';
  * @since 1.2.0
  * @entrypoint \@nvidia-elements/core/tree
  * @slot - tree nodes
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-tree-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/tree/
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=30-30&t=TiwKVvP1YHl3NylZ-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  * @stable false

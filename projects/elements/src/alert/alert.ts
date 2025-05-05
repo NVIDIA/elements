@@ -37,7 +37,7 @@ import styles from './alert.css?inline';
  * @cssprop --justify-content
  * @cssprop --align-items
  * @cssprop --min-height
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-alert-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/alert/
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=76-5326&t=CAAM7yEBvG18tRRa-0
  */

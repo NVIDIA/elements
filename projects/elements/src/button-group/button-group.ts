@@ -20,7 +20,7 @@ import styles from './button-group.css?inline';
  * @cssprop --padding
  * @cssprop --width
  * @cssprop --gap
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/elements-button-group-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/elements/button-group/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=4047-92996&mode=design&t=XPYuD3f2yaKCAMl3-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/group_role
  */
