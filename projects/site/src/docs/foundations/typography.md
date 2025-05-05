@@ -30,11 +30,17 @@ npm install @nvidia-elements/themes @nvidia-elements/styles
 
 ## Framework Integrations
 
-Some frameworks and libraries may require additional configuration to use the `nve-text` attribute. See the links below for specific integration patterns for the following frameworks:
+Some frameworks and libraries may require additional configuration to use the `nve-text` attribute.
 
-<div nve-layout="row align:center">
+See the links below for specific integration patterns for the following frameworks:
+
+<div nve-layout="row align:left gap:md">
   <nve-button>
-    <a href="./?path=/docs/integrations-lit--docs&anchor=css-utilities"><svg width="20" height="20"><use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#lit-svg"></use></svg> Lit Integration</a>
+    <a href="./docs/integrations/lit/#css-utilities"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit Integration</a>
+  </nve-button>
+
+  <nve-button>
+    <a href="./docs/integrations/angular/#advanced-import-css-source"><svg width="20" height="20"><use href="#angular-svg"></use></svg> Angular Integration</a>
   </nve-button>
 </div>
 
