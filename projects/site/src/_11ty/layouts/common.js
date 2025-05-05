@@ -32,8 +32,8 @@ export const renderBaseHead = data => /* html */ `
     @import '@nvidia-elements/styles/typography.css';
     @import '@nvidia-elements/styles/view-transitions.css';
 
-    *:not(:defined) {
-      visibility: hidden;
+    nve-page:not(:defined) {
+      visibility: visible !important;
     }
   </style>
   <script type="module">

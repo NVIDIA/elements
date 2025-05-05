@@ -107,7 +107,7 @@
     "@11ty/eleventy": "3.0.1-alpha.5",
     "@11ty/eleventy-plugin-vite": "6.0.0",
     "@eslint/js": "catalog:",
-    "@lit-labs/eleventy-plugin-lit": "1.0.3",
+    "@lit-labs/eleventy-plugin-lit": "1.0.5",
     "@lit-labs/ssr-client": "catalog:",
     "@internals/elements-api": "workspace:*",
     "@internals/eslint": "workspace:*",
