@@ -21,9 +21,9 @@ export function elementSummary(tag) {
       ${badgeAxe(element.manifest.metadata.axe, '')}
     </div>
     <div nve-layout="row gap:xs align:center">
-      <nve-button size="sm" style="margin-left: auto"><nve-icon name="checklist" size="sm"></nve-icon><a href=${element.aria}>API Spec</a></nve-button>
-      ${element.manifest.metadata.figma ? /* html */ `<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href="${element.manifest.metadata.figma}">Figma</a></nve-button>` : ''}
-      <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}">Released ${element.manifest.metadata.since}</a></nve-button>
+      <nve-button size="sm" style="margin-left: auto"><nve-icon name="checklist" size="sm"></nve-icon><a href="${element.manifest.metadata.aria}" target="_blank">ARIA Spec</a></nve-button>
+      ${element.manifest.metadata.figma ? /* html */ `<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href="${element.manifest.metadata.figma}" target="_blank">Figma</a></nve-button>` : ''}
+      <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">Released ${element.manifest.metadata.since}</a></nve-button>
     </div>
   </div>
 </section>`;
