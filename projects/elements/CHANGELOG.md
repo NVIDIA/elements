@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.33.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.33.1...@nvidia-elements/core-v1.33.2) (2025-05-06)
+
+
+### Bug Fixes
+
+* **elements:** remove page header mergin bottom ([bbc9bb9](https://github.com/NVIDIA/elements/commit/bbc9bb9b3ca7af0aef710336ba9b70f88715719b))
+
 ## [@nvidia-elements/core-v1.33.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.33.0...@nvidia-elements/core-v1.33.1) (2025-05-06)
 
 
