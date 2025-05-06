@@ -10,7 +10,8 @@ import {
   appendRootNodeStyle,
   getAttributeListChanges,
   I18nController,
-  hostAttr
+  hostAttr,
+  typeSSR
 } from '@nvidia-elements/core/internal';
 import type { ControlMessage } from '../control-message/control-message.js';
 import {
@@ -41,6 +42,7 @@ import styles from './control.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals
  * @package true
  */
+@typeSSR()
 export class Control extends LitElement {
   /** Set current visaul state for control. This overrides any validation states active. */
   @property({ type: String }) status: 'warning' | 'error' | 'success' | 'disabled';
