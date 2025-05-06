@@ -169,8 +169,7 @@ export class FrameworkSelector extends LitElement {
     this.addEventListener('pointerleave', this.#onPointerLeave);
     this.addEventListener('focus', this.#onFocus);
     this.addEventListener('blur', this.#onBlur);
-
-    this.#updateAutoScroll();
+    this.#intersectionObserver.observe(this);
   }
 
   disconnectedCallback(): void {
@@ -206,11 +205,6 @@ export class FrameworkSelector extends LitElement {
       </div>
     </nve-card>`;
   };
-
-  firstUpdated(changedProperties: PropertyValues<this>) {
-    super.firstUpdated(changedProperties);
-    this.#intersectionObserver.observe(this);
-  }
 
   updated(changedProperties: PropertyValues<this>) {
     super.updated(changedProperties);
@@ -307,22 +301,22 @@ export class FrameworkSelector extends LitElement {
 
   #onPointerEnter = () => {
     this.#hovered = true;
-    this.#updateAutoScroll();
+    this.#enableAutoScroll();
   };
 
   #onPointerLeave = () => {
     this.#hovered = false;
-    this.#updateAutoScroll();
+    this.#enableAutoScroll();
   };
 
   #onFocus = () => {
     this.#focused = true;
-    this.#updateAutoScroll();
+    this.#enableAutoScroll();
   };
 
   #onBlur = () => {
     this.#focused = false;
-    this.#updateAutoScroll();
+    this.#enableAutoScroll();
   };
 
   #autoScrollInterval: ReturnType<typeof setTimeout> | undefined;
@@ -332,6 +326,11 @@ export class FrameworkSelector extends LitElement {
     (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
         this.#isVisible = entry.isIntersecting;
+        if (this.#isVisible) {
+          this.#enableAutoScroll();
+        } else {
+          this.#disableAutoScroll();
+        }
       });
     },
     {
@@ -340,7 +339,7 @@ export class FrameworkSelector extends LitElement {
     }
   );
 
-  #updateAutoScroll() {
+  #enableAutoScroll() {
     clearInterval(this.#autoScrollInterval);
     if (!this.#isInteractive) {
       this.#autoScrollInterval = setInterval(() => {
@@ -349,6 +348,10 @@ export class FrameworkSelector extends LitElement {
         }
       }, AUTO_SCROLL_INTERVAL);
     }
+  }
+
+  #disableAutoScroll() {
+    clearInterval(this.#autoScrollInterval);
   }
 
   #updateCards() {
