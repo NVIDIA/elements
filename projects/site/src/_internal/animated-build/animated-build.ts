@@ -108,37 +108,51 @@ export class AnimatedBuild extends LitElement {
     }
   `;
 
-  private resetInterval: number | undefined;
-  private resizeObserver?: ResizeObserver;
+  #resetInterval: number | undefined;
+  #resizeObserver?: ResizeObserver;
+  #intersectionObserver?: IntersectionObserver;
 
   #internals = this.attachInternals();
 
   connectedCallback() {
     super.connectedCallback();
-    this.setupAnimationReset();
-    this.setupResizeObserver();
     this.#internals.role = 'img';
     this.#internals.ariaLabel = 'Animation of a web application being built with Elements';
+    this.#setupResizeObserver();
+    this.#setupIntersectionObserver();
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    if (this.resetInterval) {
-      globalThis.clearInterval(this.resetInterval);
-    }
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
+    this.#stopAnimationLoop();
+    this.#resizeObserver?.disconnect();
+    this.#intersectionObserver?.disconnect();
   }
 
-  private setupResizeObserver() {
-    this.resizeObserver = new ResizeObserver(() => {
-      this.scaleToFit();
+  #setupResizeObserver() {
+    this.#resizeObserver = new ResizeObserver(() => {
+      this.#scaleToFit();
     });
-    this.resizeObserver.observe(this);
+    this.#resizeObserver.observe(this);
   }
 
-  private scaleToFit() {
+  #setupIntersectionObserver() {
+    this.#intersectionObserver = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.#startAnimationLoop();
+          } else {
+            this.#stopAnimationLoop();
+          }
+        });
+      },
+      { threshold: 0 }
+    );
+    this.#intersectionObserver.observe(this);
+  }
+
+  #scaleToFit() {
     const wrapper = this.shadowRoot?.getElementById('hero-scene-wrapper');
     if (!wrapper) return;
 
@@ -157,7 +171,7 @@ export class AnimatedBuild extends LitElement {
     this.style.height = `${intrinsicHeight * scale}px`;
   }
 
-  private setupAnimationReset() {
+  #startAnimationLoop() {
     // Wait for the component to be rendered
     requestAnimationFrame(() => {
       const wrapper = this.shadowRoot?.getElementById('hero-scene-wrapper');
@@ -180,7 +194,7 @@ export class AnimatedBuild extends LitElement {
       const totalCycleTime = maxDelay + animationDuration + displayTime;
 
       // Set up the reset cycle
-      this.resetInterval = globalThis.setInterval(() => {
+      this.#resetInterval = globalThis.setInterval(() => {
         // Reset all animations
         wrapper.setAttribute('data-reset', 'true');
 
@@ -193,6 +207,12 @@ export class AnimatedBuild extends LitElement {
         }, 50);
       }, totalCycleTime);
     });
+  }
+
+  #stopAnimationLoop() {
+    if (this.#resetInterval) {
+      globalThis.clearInterval(this.#resetInterval);
+    }
   }
 
   render() {
