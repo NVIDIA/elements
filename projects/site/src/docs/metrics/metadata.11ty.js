@@ -15,7 +15,8 @@ export function render() {
     </div>
     <p nve-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
   </div>
-  <div nve-layout="column gap:xs">
+
+  <div nve-layout="column gap:xs align:stretch">
     <nve-tabs style="height: 32px">
       <nve-tabs-item><a href="docs/metrics/">Metrics</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
@@ -23,10 +24,13 @@ export function render() {
       <nve-tabs-item><a href="docs/metrics/elements/">Maglev</a></nve-tabs-item>
       <nve-tabs-item selected><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>
+
     <nve-divider></nve-divider>
-    <div nve-layout="column gap:lg">
+
+    <div nve-layout="column gap:lg align:right">
       <nve-button><a target="_blank" href="https://NVIDIA.github.io/elements/metadata/index.json">download</a></nve-button>
-<pre></pre>
+      
+      <pre style="overflow: scroll;" nve-layout="full"></pre>
     </div>
   </div>
 </div>
