@@ -37,7 +37,6 @@ slot {
 [name='header'] {
   grid-area: header;
   flex-direction: column;
-  margin-bottom: var(--nve-ref-border-width-sm);
 }
 
 [name='subheader'] {
