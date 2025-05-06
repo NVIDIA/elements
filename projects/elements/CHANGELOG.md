@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.33.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.33.0...@nvidia-elements/core-v1.33.1) (2025-05-06)
+
+
+### Bug Fixes
+
+* **elements:** form ssr ([f301361](https://github.com/NVIDIA/elements/commit/f301361f727eedcf75b9d35449e0c29adbf9f06d))
+
 ## [@nvidia-elements/core-v1.33.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.32.1...@nvidia-elements/core-v1.33.0) (2025-05-01)
 
 
