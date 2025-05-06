@@ -58,7 +58,7 @@ export class BaseButton extends LitElement {
   @property({ type: Object })
   get form(): HTMLFormElement | null | string {
     // string should be removed but without it the type is not derived from the setter correctly
-    return this.#form ? this.#form : this._internals.form;
+    return this.#form ? this.#form : this._internals?.form;
   }
 
   set form(form: string | HTMLFormElement) {

@@ -10,4 +10,13 @@ describe(Button.metadata.tag, () => {
     expect(result.includes('shadowroot="open"')).toBe(true);
     expect(result.includes('nve-button')).toBe(true);
   });
+
+  it('should pass ssr check with associated external form', async () => {
+    const result = await ssrRunner.render(html`
+        <form id="test-form"></form>
+        <nve-button form="test-form" type="submit">submit</nve-button>
+    `);
+    expect(result.includes('shadowroot="open"')).toBe(true);
+    expect(result.includes('nve-button')).toBe(true);
+  });
 });
