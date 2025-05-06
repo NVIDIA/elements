@@ -1,5 +1,5 @@
 import type { CSSResult } from 'lit';
-import { hostAttr, typeSSR, useStyles } from '@nvidia-elements/core/internal';
+import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import styles from './radio.css?inline';
 
@@ -15,7 +15,6 @@ import styles from './radio.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-16&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/radio/
  */
-@typeSSR()
 export class Radio extends Control {
   @hostAttr({ attribute: 'nve-control' }) protected nveControl = 'inline';
 
