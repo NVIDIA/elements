@@ -73,7 +73,7 @@ export function render() {
         <nve-grid-cell>${badgeAxe(element.manifest.metadata.axe, 'flat')}</nve-grid-cell>
         <nve-grid-cell>${getBehaviorCategoryIcon(element.manifest.metadata.behavior)}&nbsp;&nbsp;<a href=${element.manifest.metadata.aria} nve-text="link no-visit">${element.manifest.metadata.behavior}</a></nve-grid-cell>
         <nve-grid-cell>${element.manifest.metadata.since ?? ''}</nve-grid-cell>
-        <nve-grid-cell>${element.manifest.metadata.figma ? /* html */ `<a href=${element.manifest.metadata.figma} nve-text="link no-visit">Figma</a>` : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+        <nve-grid-cell>${element.manifest.metadata.figma ? /* html */ `<a href="${element.manifest.metadata.figma}" nve-text="link no-visit">Figma</a>` : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
         <nve-grid-cell><nve-badge status="success" container="flat">light/dark</nve-badge></nve-grid-cell>
         <nve-grid-cell>${element.manifest.metadata.responsive ? /* html */ `<nve-badge status="success" container="flat">layouts</nve-badge>` : /* html */ `<nve-badge status="warning" container="flat">partial</nve-badge>`}</nve-grid-cell>
       </nve-grid-row>`;
