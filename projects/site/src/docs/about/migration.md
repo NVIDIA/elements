@@ -10,18 +10,14 @@
 ## Why nve?
 
 Elements has been gradually transitioning its libraries to use the `@nvidia-elements/*` package
-scope and namespace. This change began earlier this year with Elements, which already
+scope and namespace. This change began in early 2024 with Elements, which already
 employed the `nve` namespace internally. The shift to `@nvidia-elements/*` aims to establish a
 clear ownership boundary and signal of support for our libraries. As we expand into new
-projects through [@nve-labs](/docs/labs/about/documentation/), this
-namespace will continue to signify which projects have the backing of the Elements team.
+projects through [@nve-labs](./docs/labs/), this namespace will continue to signify which
+projects have the backing of the Elements team.
 
-The 1.0 release addresses a long standing issue where peer dependencies are inadvertently overlooked by package managers when the
+The [1.0 release](./docs/changelog/#nve-elements-v1-0-0-2024-07-31) addresses a long standing issue where peer dependencies are inadvertently overlooked by package managers when the
 package itself has a '0.x' version number. [(npm)](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies) [(semver)](https://semver.org/#spec-item-9)
-
-Don't worry about stability - despite this being a breaking change, we're committed
-to ensuring backwards compatibility throughout our 1.0 release cycle, so you can
-still rely on the `mlv-*` namespace in our APIs.
 
 ## Migration Steps (required)
 

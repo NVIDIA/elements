@@ -1,5 +1,5 @@
 function createDocLink(subpath = '') {
-  return `https://NVIDIA.github.io/elements/api/${subpath}`;
+  return `https://NVIDIA.github.io/elements/docs/${subpath}`;
 }
 
 export function auditSlots(
@@ -61,5 +61,5 @@ export function getSSRMismatchWarning(localName: string) {
 }
 
 export function getCrossShadowRootAnchorWarning(localName: string) {
-  return `(deprecated) ${localName} was provided an anchor outside of its render root. ${createDocLink('?path=/docs/foundations-popovers-documentation--docs#shadow-root-anchoring')}`;
+  return `(deprecated) ${localName} was provided an anchor outside of its render root. ${createDocLink('foundations/popovers/#shadow-root-anchoring')}`;
 }
