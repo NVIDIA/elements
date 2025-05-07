@@ -53,7 +53,7 @@ describe('getSSRMismatchWarning', () => {
 describe('getCrossShadowRootAnchorWarning', () => {
   it('should return warning message for cross shadow root anchoring', () => {
     expect(getCrossShadowRootAnchorWarning('nve-tooltip')).toBe(
-      '(deprecated) nve-tooltip was provided an anchor outside of its render root. https://NVIDIA.github.io/elements/api/?path=/docs/foundations-popovers-documentation--docs#shadow-root-anchoring'
+      '(deprecated) nve-tooltip was provided an anchor outside of its render root. https://NVIDIA.github.io/elements/docs/foundations/popovers/#shadow-root-anchoring'
     );
   });
 });

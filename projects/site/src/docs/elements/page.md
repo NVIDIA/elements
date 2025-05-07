@@ -9,7 +9,7 @@
 
 ## Installation
 
-To enable smooth transitions between page view, see our [View Transition API](/docs/foundations/view-transitions/) documentation.
+To enable smooth transitions between page view, see our [View Transition API](./docs/foundations/view-transitions/) documentation.
 
 ```typescript
 import '@nvidia-elements/core/page/define.js';
@@ -36,7 +36,7 @@ import '@nvidia-elements/core/page/define.js';
 
 {% api 'nve-page', 'slot', '' %}
 
-It's recommended to leverage the new [nve-page-header](/docs/elements/page-header/) instead of `nve-app-header` when using the `nve-page` Element.
+It's recommended to leverage the new [nve-page-header](./docs/elements/page-header/) instead of `nve-app-header` when using the `nve-page` Element.
 
 {% story 'nve-page', 'Default', '{ "inline": false, "height": "480px", "padding": 0 }' %}
 
