@@ -140,6 +140,7 @@ export const renderDocsNav = data => /* html */ `
     Foundations
     <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/themes/' ? 'highlighted' : ''}>
       <a href="api/?path=/docs/foundations-themes-documentation--docs">Themes</a>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/tokens/') ? 'highlighted' : ''}><a href="docs/foundations/themes/tokens/">Design Tokens</a></nve-tree-node>
       <nve-tree-node ${data.page.url === '/docs/foundations/themes/size/' ? 'highlighted' : ''}><a href="docs/foundations/themes/size/">Size & Space</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/objects/') ? 'highlighted' : ''}><a href="docs/foundations/themes/objects/">Objects</a></nve-tree-node>
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-interactions--docs">Interactions</a></nve-tree-node>
