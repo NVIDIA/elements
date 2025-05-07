@@ -1,26 +1,32 @@
-import { join } from 'node:path';
-import { MetadataService } from '@nve-internals/metadata';
+import { join, resolve } from 'node:path';
 import { createPlaygroundURLFromStorySource } from '@nve-internals/elements-api';
 import { camelToKebab } from '../../_11ty/utils/index.js';
-import popoverStories from '@nvidia-elements/core/internal/controllers/popover.stories.json' with { type: 'json' };
+import { globSync } from 'glob';
+import { readFileSync } from 'node:fs';
 
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
-const metadata = await MetadataService.getMetadata();
-const stories = [
-  ...metadata['@nvidia-elements/core'].elements,
-  { ...popoverStories, name: '@nvidia-elements/core/internal/controllers/popover.stories.json' }
-].flatMap(element => {
-  const stories = element.stories
+function getStories() {
+  return [
+    ...globSync(resolve('node_modules/@nvidia-elements/core/**/*.stories.json')),
+    ...globSync(resolve('node_modules/@nvidia-elements/code/**/*.stories.json'))
+  ].map(path => ({
+    path: path.replace(resolve('node_modules/'), '').replace('/dist/', '/').replace('/@nve', '@nve'),
+    ...JSON.parse(readFileSync(path, 'utf8'))
+  }));
+}
+
+const stories = getStories().flatMap(storiesFile => {
+  const stories = storiesFile.stories
     // few stories have invalid html so they are filtered out
     .filter(s => !s.template?.includes('${'))
     .filter(s => !s.id.toLowerCase().includes('shadowroot'));
 
   return stories.map(story => ({
     title: story.id.toLowerCase(),
-    permalink: `${element.name.replace('nve-', '')}/${camelToKebab(story.id)}`,
+    permalink: `${storiesFile.path.replace('.stories.json', '-')}${camelToKebab(story.id)}/`,
     template: story.template,
-    element: element.name.replace('nve-', ''),
+    element: storiesFile.element?.replace('nve-', ''),
     playground: createPlaygroundURLFromStorySource(story.template, { id: story.id, globals: { theme: 'dark' } })
   }));
 });
