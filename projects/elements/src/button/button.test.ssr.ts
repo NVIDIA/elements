@@ -15,8 +15,10 @@ describe(Button.metadata.tag, () => {
     const result = await ssrRunner.render(html`
         <form id="test-form"></form>
         <nve-button form="test-form" type="submit">submit</nve-button>
+        <nve-button .form=${'test-form-attr'} type="submit">submit</nve-button>
     `);
     expect(result.includes('shadowroot="open"')).toBe(true);
     expect(result.includes('nve-button')).toBe(true);
+    expect(result.includes('form="test-form-attr"')).toBe(true);
   });
 });
