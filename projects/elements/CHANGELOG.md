@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.33.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.33.2...@nvidia-elements/core-v1.33.3) (2025-05-07)
+
+
+### Bug Fixes
+
+* **elements:** ssr button getter ([3583ae7](https://github.com/NVIDIA/elements/commit/3583ae768cbc7003abca1fea7de4be4f0df7ff2a))
+
 ## [@nvidia-elements/core-v1.33.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.33.1...@nvidia-elements/core-v1.33.2) (2025-05-06)
 
 
