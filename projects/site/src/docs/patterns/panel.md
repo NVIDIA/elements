@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-Examples of the [Panel](/docs/elements/panel/) component with various content
+Examples of the [Panel](./docs/elements/panel/) component with various content
 intended for different use-cases.
 
 ### Key Value
