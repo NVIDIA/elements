@@ -2,11 +2,25 @@ import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './canvas.css?inline';
+import { state } from 'lit/decorators/state.js';
+
+function convertToJsxElement(html: string): string {
+  return html.replace(/<(\/?)([a-z]+(?:-[a-z]+)+)([^>]*)>/g, (match, closingSlash, tagName, attributes) => {
+    const jsxTagName = tagName
+      .split('-')
+      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+      .join('');
+
+    return `<${closingSlash}${jsxTagName}${attributes}>`;
+  });
+}
 
 export class Canvas extends LitElement {
   @property({ type: String }) source: string;
 
-  @property({ type: Boolean }) showSource = false;
+  @state() private showSource = false;
+
+  @state() private sourceType: 'html' | 'react' = 'html';
 
   static metadata = {
     tag: 'nve-api-canvas',
@@ -14,6 +28,11 @@ export class Canvas extends LitElement {
   };
 
   static styles = useStyles([styles]);
+
+  get formattedSource() {
+    const source = (this.source ? this.source : this.innerHTML).trim();
+    return this.sourceType === 'react' ? convertToJsxElement(source) : source;
+  }
 
   render() {
     return html`
@@ -23,17 +42,28 @@ export class Canvas extends LitElement {
           <div class="preview-backdrop"></div>
         </div>
         <div class="code" .hidden=${!this.showSource}>
-          ${this.source ? html`<nve-codeblock language="html" .code=${this.source ? this.source : this.innerHTML}></nve-codeblock>` : nothing}
-          <nve-copy-button container="flat" behavior-copy .value=${this.source?.trim()}></nve-copy-button>
+          ${this.source ? html`<nve-codeblock language="html" .code=${this.formattedSource}></nve-codeblock>` : nothing}
+          <nve-copy-button container="flat" behavior-copy .value=${this.formattedSource}></nve-copy-button>
         </div>
         <div style="width: 100%">
           <nve-toolbar container="flat">
             <nve-button container="flat" @click=${() => (this['showSource'] = !this.showSource)}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
+            <nve-select container="flat" fit-text>
+              <select @change=${e => this.#updateSourceType(e)}>
+                <option value="html">HTML&nbsp;</option>
+                <option value="react">React</option>
+              </select>
+            </nve-select>
             <slot name="suffix"></slot>
           </nve-toolbar>
         </div>
       </div>
     `;
+  }
+
+  #updateSourceType(event: Event) {
+    this.sourceType = (event.target as HTMLSelectElement).value as 'html' | 'react';
+    this.showSource = true;
   }
 
   get #template() {
