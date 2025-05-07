@@ -147,7 +147,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url === '/docs/foundations/themes/status/' ? 'highlighted' : ''}><a href="docs/foundations/themes/status/">Status</a></nve-tree-node>
       <nve-tree-node ${data.page.url === '/docs/foundations/themes/color/' ? 'highlighted' : ''}><a href="docs/foundations/themes/color/">Color</a></nve-tree-node>
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-animation--docs">Animation</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-fonts--docs">Fonts</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/fonts/' ? 'highlighted' : ''}><a href="docs/foundations/themes/fonts/">Fonts</a></nve-tree-node>
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-layers--docs">Layers</a></nve-tree-node>
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-custom-themes--docs">Custom</a></nve-tree-node>
     </nve-tree-node>
