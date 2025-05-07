@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, isServer, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { stateActive } from '../controllers/state-active.controller.js';
 import { stateDisabled } from '../controllers/state-disabled.controller.js';
@@ -48,24 +48,37 @@ export class BaseButton extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) readonly: boolean;
 
-  #form: HTMLFormElement;
+  #form: string | HTMLFormElement = null;
 
   /**
    * Similar to input form, sets a button to submit a form outside its parent form.
    * Returns a reference to the form element if available.
    * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/form
    */
-  @property({ type: Object })
-  get form(): HTMLFormElement | null | string {
-    // string should be removed but without it the type is not derived from the setter correctly
-    return this.#form ? this.#form : this._internals?.form;
+  @property({
+    type: String,
+    attribute: 'form',
+    converter: {
+      fromAttribute: (value: string) => value
+    }
+  })
+  set form(form: string | HTMLFormElement) {
+    this.#form = form;
+    if (typeof form === 'string') {
+      this.setAttribute('form', form);
+    } else {
+      this.removeAttribute('form');
+    }
   }
 
-  set form(form: string | HTMLFormElement) {
-    if (typeof form === 'string') {
-      this.#form = (this.getRootNode() as Document | ShadowRoot).getElementById(form) as HTMLFormElement;
+  get form(): HTMLFormElement | null | string {
+    // string should be removed but without it the type is not derived from the setter correctly
+    if (this.#form && typeof this.#form !== 'string') {
+      return this.#form;
+    } else if (typeof this.#form === 'string' && !isServer) {
+      return (this.getRootNode() as Document | ShadowRoot).getElementById(this.#form) as HTMLFormElement;
     } else {
-      this.#form = form;
+      return this._internals?.form;
     }
   }
 
