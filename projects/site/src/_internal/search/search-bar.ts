@@ -1,4 +1,4 @@
-import { html, LitElement, unsafeCSS } from 'lit';
+import { html, LitElement, css, unsafeCSS } from 'lit';
 import { query } from 'lit/decorators/query.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 
@@ -11,7 +11,14 @@ import '@nvidia-elements/core/search/define.js';
 
 @customElement('nve-docs-search-bar')
 export class DocsSearchBar extends LitElement {
-  static styles = [unsafeCSS(layout), unsafeCSS(typography)];
+  static styles = [
+    unsafeCSS(layout),
+    unsafeCSS(typography),
+    css`
+    nve-search:has(input:placeholder-shown) nve-icon-button {
+      display: none;
+    }`
+  ];
 
   @query('#search-input')
   private searchInput!: HTMLInputElement;
