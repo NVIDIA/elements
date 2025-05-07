@@ -2,6 +2,7 @@
   --padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
   display: block;
   width: 100%;
+  min-height: 120px;
 }
 
 nve-codeblock {
@@ -29,10 +30,19 @@ slot:not([name]) {
 }
 
 slot[name='suffix'] {
-  margin-left: auto;
   display: block;
   gap: 8px;
   display: flex;
+}
+
+nve-select {
+  --font-weight: var(--nve-ref-font-weight-semibold);
+  margin-left: auto;
+  width: 54px;
+}
+
+nve-select::part(caret) {
+  display: none;
 }
 
 .resizer {

@@ -109,34 +109,12 @@ export const PRE = (args) => {
 export const Canvas = ({ of, story }) => {
   const resolvedOf = useOf(of || 'story', ['story', 'meta']);
   const globals = { ...addons.getChannel().data.setGlobals[0].globals, ...window.NVE_SB_GLOBALS };
-  const scope = globals?.scope ?? 'mlv';
   const source = getRenderString(resolvedOf.story.originalStoryFn());
   const playground = createPlaygroundURLFromStorySource(source, { globals, id: resolvedOf.story.id });
-  const [sourceType, setSourceType] = useState(globals?.sourceType ?? '');
-  const [updatedSource, setUpdatedSource] = useState(source, { scope, sourceType });
-  const [updatedShowSource, setUpdatedShowSource] = useState(false);
-  const canvasRef = useRef(null);
-  const htmlBtnRef = useRef(null);
-  const reactBtnRef = useRef(null);
-
-  const updateSource = (sourceType) => {
-    setUpdatedShowSource(true);
-    setSourceType(sourceType);
-    setUpdatedSource(setSourcePackageScope(source, { scope, sourceType }));
-  };
-
-  useEffect(() => {
-    canvasRef.current.source = updatedSource;
-    canvasRef.current.showSource = updatedShowSource;
-    htmlBtnRef.current.selected = sourceType !== 'react';
-    reactBtnRef.current.selected = sourceType === 'react';
-  });
 
   return (
-    <nve-api-canvas ref={canvasRef}>
+    <nve-api-canvas>
       <div style={{ height: story?.height ?? '', width: story?.width, overflow: 'hidden' }}><Story of={of} inline={story?.inline} height={story?.height} /></div>
-      <nve-button ref={htmlBtnRef} container="flat" slot="suffix" onClick={() => updateSource('html')}>HTML</nve-button>
-      <nve-button ref={reactBtnRef} container="flat" slot="suffix" onClick={() => updateSource('react')}>React</nve-button>
       <nve-button container="flat" slot="suffix">
         <a href={playground} target="_blank">Playground</a>
       </nve-button>
