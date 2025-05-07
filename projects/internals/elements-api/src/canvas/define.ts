@@ -2,6 +2,7 @@ import { define } from '@nvidia-elements/core/internal';
 import { Canvas } from './canvas.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/divider/define.js';
+import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/toolbar/define.js';
 import '@nvidia-elements/core/copy-button/define.js';
 import '@nvidia-elements/code/codeblock/languages/css.js';
