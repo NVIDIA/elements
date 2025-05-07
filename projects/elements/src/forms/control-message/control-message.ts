@@ -20,7 +20,7 @@ const statusIcons = {
  * @cssprop --color
  * @cssprop --font-weight
  * @cssprop --font-size
- * @storybook http://localhost:7789/?path=/docs/foundations-forms-validation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/foundations/forms/controls/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals
  * @package true

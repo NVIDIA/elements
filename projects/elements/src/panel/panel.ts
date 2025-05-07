@@ -116,7 +116,7 @@ export class PanelFooter extends LitElement {
 
 /**
  * @element nve-panel
- * @description Panel is inline container for content that is coupled to the content on the page (details, additional actions/options). Alternatively [Drawer](./?path=/docs/elements-drawer-documentation--docs) is out of context of the rest of the page (notifications, navigations, settings).
+ * @description Panel is inline container for content that is coupled to the content on the page (details, additional actions/options). Alternatively [Drawer](./docs/elements/drawer/) is out of context of the rest of the page (notifications, navigations, settings).
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/panel
  * @event open - Dispatched when the panel is opened.
