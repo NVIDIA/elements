@@ -29,17 +29,20 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
   let story;
   let path;
+  let iframePath = '';
 
   if (tag.includes('.stories.json')) {
     path = tag;
     story = (await import(path, { with: { type: 'json' } })).default.stories?.find(s => s.id === storyName);
+    iframePath = `stories/${path.replace('.stories.json', '-')}${camelToKebab(storyName)}/`;
   } else {
     const stories = globSync(`${resolve('../elements')}/dist/**/*.stories.json`).map(path =>
       JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'))
     );
     let name = tag.replace('nve-', '');
-    story = stories.find(s => s.element === tag)?.stories?.find(s => s.id === storyName);
     path = `@nvidia-elements/core/${name}/${name}.stories.json`;
+    story = stories.find(s => s.element === tag)?.stories?.find(s => s.id === storyName);
+    iframePath = `stories/@nvidia-elements/core/${name}/${name}-${camelToKebab(storyName)}/`;
   }
 
   const playgroundButton = story
@@ -62,7 +65,12 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
     ? /* html */ `
 <nve-api-canvas id="${story.id}">
 ${playgroundButton}
-<template>${markdown.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>${config.inline ? story.template.replace(/\n\n/g, '\n') : `<iframe loading="lazy" src="stories/${tag.replace('nve-', '')}/${camelToKebab(story.id)}/" style="height: ${config.height}; width: 100%; border: none;" />`}
+<template>${markdown.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>
+${
+  config.inline
+    ? story.template.replace(/\n\n/g, '\n')
+    : `<iframe loading="lazy" src="${iframePath}" style="height: ${config.height}; width: 100%; border: none;" />`
+}
 </nve-api-canvas>${reload}`
     : '';
 }
