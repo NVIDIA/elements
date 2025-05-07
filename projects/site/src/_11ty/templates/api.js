@@ -12,7 +12,7 @@ export function elementSummary(tag) {
   const element = elements.find(d => d.name === tag);
   return /* html */ `<section nve-layout="column gap:md align:stretch margin-top:md">
   ${element.manifest.description ? md.render(element.manifest.description).replace('<p>', '<p nve-text="heading muted sm">') : ''}
-  <div nve-layout="row gap:xs align:center align:space-between">
+  <div nve-layout="row gap:xs align:center align:space-between align:wrap">
     <div nve-layout="row gap:xs align:center">
       ${badgeStatus(element.manifest.metadata.status, '', ESM_ELEMENTS_VERSION)}
       ${badgeCoverage(element.tests.unit.coverageTotal, '', 'Coverage:&nbsp;')}
