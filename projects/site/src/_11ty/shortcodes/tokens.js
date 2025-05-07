@@ -1,7 +1,16 @@
 import tokens from '@nvidia-elements/themes/index.json' with { type: 'json' };
+
 export async function tokensShortcode(...tokenArgs) {
   const formattedTokens = Object.entries(tokens)
-    .filter(([name]) => tokenArgs.some(token => name.includes(token)))
+    .filter(([name]) =>
+      tokenArgs.some(token => {
+        if (token.startsWith('=')) {
+          const exactToken = token.substring(1);
+          return name.endsWith(exactToken);
+        }
+        return name.includes(token);
+      })
+    )
     .map(([name, value]) => [`--${name}`, `--${value}`]);
   return renderTokenTable(formattedTokens);
 }
