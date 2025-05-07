@@ -70,7 +70,7 @@ export function render(data) {
           }
 
           main {
-            padding: var(--nve-ref-space-xl) var(--nve-ref-space-md);
+            padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
             padding-bottom: var(--nve-ref-space-xl);
 
             #doc-content {
