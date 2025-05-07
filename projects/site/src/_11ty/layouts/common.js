@@ -140,17 +140,14 @@ export const renderDocsNav = data => /* html */ `
     Foundations
     <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/themes/' ? 'highlighted' : ''}>
       <a href="api/?path=/docs/foundations-themes-documentation--docs">Themes</a>
-      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/tokens/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/themes/tokens/' ? 'highlighted' : ''}>
-        <a href="api/?path=/docs/foundations-themes-design-tokens--docs">Design Tokens</a>
-        <nve-tree-node ><a href="api/?path=/docs/foundations-themes-size-space--docs">Size & Space</a></nve-tree-node>
-        <nve-tree-node><a href="api/?path=/docs/foundations-themes-objects--docs">Objects</a></nve-tree-node>
-        <nve-tree-node><a href="api/?path=/docs/foundations-themes-interactions--docs">Interactions</a></nve-tree-node>
-        <nve-tree-node><a href="api/?path=/docs/foundations-themes-support--docs">Support</a></nve-tree-node>
-        <nve-tree-node><a href="api/?path=/docs/foundations-themes-status--docs">Status</a></nve-tree-node>
-        <nve-tree-node ${data.page.url === '/docs/foundations/themes/color/' ? 'highlighted' : ''}><a href="docs/foundations/themes/color/">Color</a></nve-tree-node>
-        <nve-tree-node><a href="api/?path=/docs/foundations-themes-animation--docs">Animation</a></nve-tree-node>
-        <nve-tree-node><a href="api/?path=/docs/foundations-themes-fonts--docs">Fonts</a></nve-tree-node>
-      </nve-tree-node>
+      <nve-tree-node><a href="api/?path=/docs/foundations-themes-size-space--docs">Size & Space</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/objects/') ? 'highlighted' : ''}><a href="docs/foundations/themes/objects/">Objects</a></nve-tree-node>
+      <nve-tree-node><a href="api/?path=/docs/foundations-themes-interactions--docs">Interactions</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/support/' ? 'highlighted' : ''}><a href="docs/foundations/themes/support/">Support</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/status/' ? 'highlighted' : ''}><a href="docs/foundations/themes/status/">Status</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/color/' ? 'highlighted' : ''}><a href="docs/foundations/themes/color/">Color</a></nve-tree-node>
+      <nve-tree-node><a href="api/?path=/docs/foundations-themes-animation--docs">Animation</a></nve-tree-node>
+      <nve-tree-node><a href="api/?path=/docs/foundations-themes-fonts--docs">Fonts</a></nve-tree-node>
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-layers--docs">Layers</a></nve-tree-node>
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-custom-themes--docs">Custom</a></nve-tree-node>
     </nve-tree-node>
