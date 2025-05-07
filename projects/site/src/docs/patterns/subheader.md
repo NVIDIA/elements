@@ -7,11 +7,11 @@
 
 # {{ title }}
 
-Intended for use at the top of pages, but below the [App Header](/docs/elements/page-header-main-page/), the following combinations of components are recommended patterns for composing subheaders.
+Intended for use at the top of pages, but below the App Header, the following combinations of components are recommended patterns for composing subheaders.
 
 ## Main Page Headers
 
-Page headers used for _main content pages_ should use `<nve-card container="flat">` cotaining sections for a `<h1>` page title, and sections for action buttons, breadcrumbs, and optional metadata.
+Page headers used for _main content pages_ should use `<nve-card container="flat">` containing sections for a `<h1>` page title, and sections for action buttons, breadcrumbs, and optional metadata.
 
 ### Standard
 

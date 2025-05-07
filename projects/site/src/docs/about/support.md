@@ -28,7 +28,7 @@ Reach out to our slack support chanel or find additional resources in our Figma 
 
 ## Frameworks
 
-Elements [supports a wide variety](https://custom-elements-everywhere.com) of JavaScript frameworks and libraries as well as vanilla JS. Read more at our [installation](/docs/about/installation/) page.
+Elements [supports a wide variety](https://custom-elements-everywhere.com) of JavaScript frameworks and libraries as well as vanilla JS. Read more at our [installation](./docs/about/installation/) page.
 
 <section nve-layout="row gap:sm pad-bottom:lg">
   <nve-button>
@@ -78,7 +78,7 @@ import '@nvidia-elements/core/polyfills';
 
 ## Versioning
 
-The Elements package follows [semantic versioning](https://semver.org/) and is now in its stable 1.x release cycle. Changes can be found in the [Changelog](/docs/about/changelog/). A debug utility is available
+The Elements package follows [semantic versioning](https://semver.org/) and is now in its stable 1.x release cycle. Changes can be found in the [Changelog](./docs/changelog/). A debug utility is available
 on the global window object to help identify the active versions being used at runtime. This log will list out all the registered elements and active versions.
 
 - API <strong>Breaking</strong> changes are maximum once per <strong>three months</strong>.
