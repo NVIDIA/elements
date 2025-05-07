@@ -190,7 +190,7 @@ export class AnimatedBuild extends LitElement {
 
       // Total cycle time = max delay + animation duration + display time
       const animationDuration = 600; // animation duration
-      const displayTime = 2000; // how long to display before resetting
+      const displayTime = 20000; // how long to display before resetting
       const totalCycleTime = maxDelay + animationDuration + displayTime;
 
       // Set up the reset cycle
