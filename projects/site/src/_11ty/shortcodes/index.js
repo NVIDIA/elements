@@ -47,7 +47,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
     : '';
 
   const reload =
-    process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story // eslint-disable-line no-undef
+    process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story && !tag.includes('.stories.json') // eslint-disable-line no-undef
       ? /* html */ `
   <script type="module">
     import stories from '${path}' with { type: 'json' };
