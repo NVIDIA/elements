@@ -23,7 +23,12 @@ All control elements are responsive and will adjust to one of the set layouts ba
 
 ## Custom Controls
 
-Custom inputs can be used and leverage the same form layouts and validation statuses as the built in controls.
-Place the `nve-control` attribute on the element that is the custom input. [emoji picker source](https://github.com/nolanlawson/emoji-picker-element).
+Custom inputs can be used and leverage the same form layouts and validation statuses as the built in controls. Place the `nve-control` attribute on the element that is the custom input.
 
-{% story '@nvidia-elements/core/forms/control/control.stories.json', 'Custom', '{ "inline": false, "height": "400px" }' %}
+```html
+<nve-control>
+  <label>custom control</label>
+  <my-custom-form-control nve-control></my-custom-form-control>
+  <nve-control-message>message</nve-control-message>
+</nve-control>
+```

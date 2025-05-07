@@ -933,7 +933,6 @@
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "cpy-cli": "catalog:",
-    "emoji-picker-element": "1.22.8",
     "eslint": "catalog:",
     "lit-analyzer": "2.0.3",
     "publint": "catalog:",
