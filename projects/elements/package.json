@@ -945,8 +945,7 @@
   "wireit": {
     "dev": {
       "dependencies": [
-        "build:watch",
-        "../storybook:dev"
+        "build:watch"
       ]
     },
     "ci": {
