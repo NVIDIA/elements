@@ -16,7 +16,7 @@ import styles from './page-header.css?inline';
  * @storybook https://NVIDIA.github.io/elements/docs/elements/page-header/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-35&t=c9DaB6YRpkhGAp49-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav
- * @stable false
+ *
  */
 export class PageHeader extends LitElement {
   static styles = useStyles([styles]);
