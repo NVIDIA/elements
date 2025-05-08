@@ -1,6 +1,4 @@
-import { html, LitElement } from 'lit';
-import { customElement } from 'lit/decorators/custom-element.js';
-import { state } from 'lit/decorators/state.js';
+import { html } from 'lit';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/forms/define.js';
@@ -239,39 +237,6 @@ export const RadioGroup = {
   `
 };
 
-const options = [
-  { id: '1', label: 'completed', message: 'latest completed tasts' },
-  { id: '2', label: 'failing', message: 'latest failing tasks' },
-  { id: '3', label: 'status', message: 'task status priority' }
-];
-
-@customElement('radio-group-interactive-demo')
-class RadioGroupInteractiveDemo extends LitElement {
-  @state() private show = false;
-  @state() private selected = options[0];
-
-  render() {
-    return html`
-<nve-button id="btn" nve-control>${this.selected.label} <nve-icon name="caret" direction="down" size="sm"></nve-icon></nve-button>
-<nve-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
-  <nve-radio-group style="width: 250px">
-    <label>Sort By</label>
-    ${options.map(option => html`
-    <nve-radio @pointerup=${() => this.show = false}>
-      <label>${option.label}</label>
-      <input type="radio" .value=${option.id} ?checked=${option.id === this.selected.id} @input=${() => this.selected = option} />
-      <nve-control-message>${option.message}</nve-control-message>
-    </nve-radio>`)}
-  </nve-radio-group>
-</nve-dropdown>
-    `
-  }
-}
-
-export function RadioGroupInteractive() {
-  return html`<radio-group-interactive-demo></radio-group-interactive-demo>`
-}
-
 export const CheckboxGroup = {
   render: () => html`
 <nve-dropdown anchor="btn">
@@ -293,40 +258,6 @@ export const CheckboxGroup = {
 </nve-dropdown>
 <nve-button id="btn" nve-control>test suites <nve-icon name="caret" direction="down" size="sm"></nve-icon></nve-button>
   `
-};
-
-const checkboxes = [
-  { id: '1', label: 'local', message: 'latest local' },
-  { id: '2', label: 'nightly', message: 'latest nightly builds' },
-  { id: '3', label: 'remote', message: 'pending remote builds' }
-];
-
-@customElement('checkbox-group-interactive-demo')
-class CheckboxGroupInteractiveDemo extends LitElement { /* eslint no-unused-vars: 0 */
-  @state() private show = false;
-  @state() private suites = { '1': true, '2': false, '3': false };
-
-  render() {
-    return html`
-<nve-button id="btn" nve-control>test suites <nve-icon name="caret" direction="down" size="sm"></nve-icon></nve-button>
-<nve-dropdown anchor="btn" trigger="btn" .hidden=${!this.show} @open=${() => this.show = true} @close=${() => this.show = false}>
-  <nve-checkbox-group style="width: 250px">
-    <label>Sort By</label>
-    ${checkboxes.map(checkbox => html`
-    <nve-checkbox>
-      <label>${checkbox.label}</label>
-      <input type="checkbox" .value=${checkbox.id} ?checked=${this.suites[checkbox.id]} @input=${e => this.suites = { ...this.suites, [checkbox.id]: e.target.checked }} />
-      <nve-control-message>${checkbox.message}</nve-control-message>
-    </nve-checkbox>`)}
-  </nve-checkbox-group>
-</nve-dropdown>
-<pre>${checkboxes.map(c => html`${c.label}: ${this.suites[c.id]}\n`)}</pre>
-    `
-  }
-}
-
-export const CheckboxGroupInteractive = {
-  render: () => html`<checkbox-group-interactive-demo></checkbox-group-interactive-demo>`
 };
 
 export const LegacyBehaviorTrigger = {
