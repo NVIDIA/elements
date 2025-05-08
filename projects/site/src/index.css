@@ -76,7 +76,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 48px);
+  min-height: calc(100vh - 40px); /* small buffer for lazy loading of video player */
 
   .background {
     width: 100%;

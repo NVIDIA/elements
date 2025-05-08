@@ -11,10 +11,11 @@ export async function anchorGeneratorTransform(content) {
         return { id, textContent };
       });
 
-    const sidenav = !this.page.url.includes('changelog')
-      ? /* html */ `
+    const sidenav =
+      !this.page.url.includes('changelog') && headings.length > 2
+        ? /* html */ `
     <ul id="anchor-generator" nve-text="list">${headings.map(h => `<li><a href="${this.page.url.replace('/docs', 'docs')}#${h.id}" nve-text="link truncate">${h.textContent}</a></li>`).join('')}</ul>`
-      : '';
+        : '';
 
     return content.replace('<!-- ANCHOR-GENERATOR -->', sidenav);
   }

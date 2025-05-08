@@ -21,7 +21,6 @@ function renderTokenTable(tokens) {
     .tokens-table {
       width: 100%;
       text-align: left;
-      background: var(--nve-sys-layer-canvas-background);
 
       th {
         font-weight: 400;
