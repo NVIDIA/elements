@@ -15,7 +15,7 @@ import styles from './star-rating.css?inline';
  * @storybook https://NVIDIA.github.io/elements/docs/elements/star-rating/
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=10779-25920&p=f&t=jDJwFKeFLq5vTuCH-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
- * @stable false
+ *
  */
 export class StarRating extends Control {
   static styles = useStyles([...Control.styles, styles]);
