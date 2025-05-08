@@ -25,7 +25,7 @@ import styles from './page.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=72-1024&node-type=canvas&t=MpkuCQK1YGf307s2-0
  * @responsive false
- * @stable false
+ *
  */
 @audit({
   excessiveInstanceLimit: 0,

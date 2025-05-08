@@ -33,7 +33,7 @@ import globalStyles from './page-panel.global.css?inline';
  * @storybook https://NVIDIA.github.io/elements/docs/elements/page/
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=30-54&node-type=canvas&t=MpkuCQK1YGf307s2-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/region_role
- * @stable false
+ *
  */
 @auditParent()
 export class PagePanel extends LitElement {
