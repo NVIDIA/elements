@@ -30,6 +30,7 @@
 slot {
   display: flex;
   scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
+  background: var(--background);
   scrollbar-width: thin;
   scroll-behavior: smooth;
 }
