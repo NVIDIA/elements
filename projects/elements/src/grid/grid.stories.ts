@@ -1154,12 +1154,12 @@ export const InvalidDOM = {
   render: () => html`
 <nve-grid>
   <nve-grid-header>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column>`)}
   </nve-grid-header>
   <div>invalid</div>
-  ${getItems().map(row => html`
+  ${Array(10).fill('').map((_, r) => html`
     <nve-grid-row>
-      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}</nve-grid-cell> `)}
+      ${Array(5).fill('').map((_, c) => html`<nve-grid-cell>cell ${r}-${c}</nve-grid-cell>`)}
     </nve-grid-row>
   `)}
   <span>invalid</span>
@@ -1174,12 +1174,12 @@ export const Audit = {
   <div hidden></div>
   <nve-grid-header>
     <div hidden></div>
-    ${Object.entries(getItems()[0]).map(([, column]) => html`<nve-grid-column>${column.label}</nve-grid-column> `)}
+    ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column>`)}
   </nve-grid-header>
-  ${getItems(50).map(row => html`
+  ${Array(10).fill('').map((_, r) => html`
     <nve-grid-row>
       <div hidden></div>
-      ${Object.entries(row).map(([, cell]) => html`<nve-grid-cell>${cell.value}<nve-tooltip hidden>???</nve-tooltip></nve-grid-cell> `)}
+      ${Array(5).fill('').map((_, c) => html`<nve-grid-cell>cell ${r}-${c}</nve-grid-cell>`)}
     </nve-grid-row>
   `)}
 </nve-grid>
