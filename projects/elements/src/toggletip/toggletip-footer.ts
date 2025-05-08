@@ -12,7 +12,7 @@ import styles from './toggletip-footer.css?inline';
  * @cssprop --gap
  * @storybook https://NVIDIA.github.io/elements/docs/elements/toggletip/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0
- * @stable false
+ *
  */
 export class ToggletipFooter extends LitElement {
   static styles = useStyles([styles]);

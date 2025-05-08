@@ -13,6 +13,7 @@ import styles from './json-viewer.css?inline';
  * @storybook https://NVIDIA.github.io/elements/docs/elements/json-viewer/
  * @figma false
  * @stable false
+ * @package false
  */
 export class JSONViewer extends LitElement {
   /** JSON value to be displayed */
