@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.33.3...@nvidia-elements/core-v1.34.0) (2025-05-08)
+
+
+### Features
+
+* **elements:** upgrade component status for elements stable for > 90 days ([9c78894](https://github.com/NVIDIA/elements/commit/9c78894f92969d8088837bad7651e00c3850f241))
+
 ## [@nvidia-elements/core-v1.33.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.33.2...@nvidia-elements/core-v1.33.3) (2025-05-07)
 
 
