@@ -40,7 +40,7 @@ export async function elementLoaderTransform(content) {
     .map(tagName => createImport(`@nvidia-elements/monaco/${tagName.replace('nve-monaco-', '')}/define.js`, LAZY))
     .join('\n');
 
-  const ELEMENTS_CODE_IMPORTS = content.includes('<nve-codeblock')
+  const ELEMENTS_CODE_IMPORTS = content.includes('nve-codeblock')
     ? `
     import '@nvidia-elements/code/codeblock/languages/html.js';
     import '@nvidia-elements/code/codeblock/languages/css.js';
@@ -50,9 +50,11 @@ export async function elementLoaderTransform(content) {
     : '';
 
   return content.replace(
-    '</head>',
-    `<script type="module">import '@lit-labs/ssr-client/lit-element-hydrate-support.js';\n${ELEMENTS_IMPORTS}\n${ELEMENTS_API_IMPORTS}\n${ELEMENTS_CODE_IMPORTS}\n${MONACO_IMPORTS}</script>` +
-      '</head>'
+    '<head>',
+    `<head><script type="module">import '@lit-labs/ssr-client/lit-element-hydrate-support.js';\n${ELEMENTS_IMPORTS}\n${ELEMENTS_CODE_IMPORTS}\n${ELEMENTS_API_IMPORTS}\n${MONACO_IMPORTS}</script>`.replace(
+      /\n/g,
+      ''
+    )
   );
 }
 

@@ -1,11 +1,7 @@
-import { html, LitElement, unsafeCSS } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { customElement } from 'lit/decorators/custom-element.js';
-
-/* eslint-disable no-inline-css/no-restricted-imports */
-import layout from '@nvidia-elements/styles/layout.css?inline';
-import typography from '@nvidia-elements/styles/typography.css?inline';
 
 import './search-bar.js';
 import './search-results.js';
@@ -43,10 +39,8 @@ export type PagefindSearchAnchor = {
   location: number;
 };
 
-@customElement('nve-docs-search')
+@customElement('nvd-search')
 export class DocsSearch extends LitElement {
-  static styles = [unsafeCSS(layout), unsafeCSS(typography)];
-
   @property({ type: String, attribute: 'base-url' })
   baseUrl!: string;
 
@@ -69,7 +63,8 @@ export class DocsSearch extends LitElement {
     this.dispatchEvent(new Event('search-reset', { bubbles: true, composed: true }));
   }
 
-  handleFocus(event: Event) {
+  async handleFocus(event: Event) {
+    void (await this.#loadPagefind());
     event.preventDefault();
 
     this.dispatchEvent(new Event('search-focus', { bubbles: true, composed: true }));
@@ -88,8 +83,9 @@ export class DocsSearch extends LitElement {
     if (this.baseUrl) {
       this.baseUrl = this.baseUrl.replace(/\/$/, '');
     }
+  }
 
-    // load pagefind
+  async #loadPagefind() {
     if (!this.#pagefind) {
       const url = `${this.baseUrl}/.pagefind/pagefind.js`;
       this.#pagefind = await import(/* @vite-ignore */ url);
@@ -98,6 +94,8 @@ export class DocsSearch extends LitElement {
   }
 
   async search(term: string) {
+    void (await this.#loadPagefind());
+
     if (this.#pagefind) {
       this.results = [];
 
@@ -116,12 +114,8 @@ export class DocsSearch extends LitElement {
 
   render() {
     return html`
-    <section nve-layout="column pad-bottom:xs align:stretch">
-      <nve-docs-search-bar @search-bar-change="${this.handleChange}" @search-bar-reset="${this.handleReset}" @search-bar-focus="${this.handleFocus}" @search-bar-blur="${this.handleBlur}"></nve-docs-search-bar>
-    </section>
-    <section id="search-results">
-      <nve-docs-search-results nve-layout="column gap:sm align:stretch" .results="${this.results}" base-url="${this.baseUrl}"></nve-docs-search-results>
-    </section>
+    <nvd-search-bar @search-bar-change="${this.handleChange}" @search-bar-reset="${this.handleReset}" @search-bar-focus="${this.handleFocus}" @search-bar-blur="${this.handleBlur}"></nvd-search-bar>
+    <nvd-search-results .results="${this.results}" base-url="${this.baseUrl}"></nvd-search-results>
   `;
   }
 }

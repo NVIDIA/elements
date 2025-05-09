@@ -6,7 +6,7 @@ const markdown = markdownIt({
   linkify: true,
   highlight: function (str, lang) {
     lang = lang === 'javascript' ? 'typescript' : lang; // alias javascript to typescript
-    return /* html */ `<nve-codeblock language="${lang}" style="--padding: var(--nve-ref-space-lg)"><template>${markdown.utils.escapeHtml(str)}</template></nve-codeblock>`;
+    return /* html */ `<nve-codeblock language="${lang}"><template>${markdown.utils.escapeHtml(str)}</template></nve-codeblock>`;
   }
 });
 
