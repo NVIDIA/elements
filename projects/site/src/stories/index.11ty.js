@@ -1,7 +1,7 @@
 import { join, resolve } from 'node:path';
-import { camelToKebab } from '../../_11ty/utils/index.js';
-import { globSync } from 'glob';
 import { readFileSync } from 'node:fs';
+import { globSync } from 'glob';
+import { camelToKebab } from '../_11ty/utils/index.js';
 
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
