@@ -2,6 +2,7 @@ import fs from 'node:fs';
 
 /** base on element tags found, inline the imports for the elements and elements-api */
 export async function elementLoaderTransform(content) {
+  const LAZY = content.includes('<!-- ELEMENT_LOADER_LAZY -->');
   const ELEMENTS_PACKAGE = JSON.parse(fs.readFileSync('../elements/package.json', 'utf8'));
   const ELEMENTS_API_PACKAGE = JSON.parse(fs.readFileSync('../internals/elements-api/package.json', 'utf8'));
   const MONACO_PACKAGE = JSON.parse(fs.readFileSync('../monaco/package.json', 'utf8'));
@@ -14,7 +15,7 @@ export async function elementLoaderTransform(content) {
         .filter(tagName => content?.includes(`<${tagName}`))
     )
   )
-    .map(tagName => `import '@nvidia-elements/core/${tagName.replace('nve-', '')}/define.js';`)
+    .map(tagName => createImport(`@nvidia-elements/core/${tagName.replace('nve-', '')}/define.js`, LAZY))
     .join('\n');
 
   const ELEMENTS_API_IMPORTS = Array.from(
@@ -25,7 +26,7 @@ export async function elementLoaderTransform(content) {
         .filter(tagName => content?.includes(`<${tagName}`))
     )
   )
-    .map(tagName => `import '@internals/elements-api/${tagName.replace('nve-api-', '')}/define.js';`)
+    .map(tagName => createImport(`@internals/elements-api/${tagName.replace('nve-api-', '')}/define.js`, LAZY))
     .join('\n');
 
   const MONACO_IMPORTS = Array.from(
@@ -36,7 +37,7 @@ export async function elementLoaderTransform(content) {
         .filter(tagName => content?.includes(`<${tagName}`))
     )
   )
-    .map(tagName => `import '@nvidia-elements/monaco/${tagName.replace('nve-monaco-', '')}/define.js';`)
+    .map(tagName => createImport(`@nvidia-elements/monaco/${tagName.replace('nve-monaco-', '')}/define.js`, LAZY))
     .join('\n');
 
   const ELEMENTS_CODE_IMPORTS = content.includes('<nve-codeblock')
@@ -53,4 +54,8 @@ export async function elementLoaderTransform(content) {
     `<script type="module">import '@lit-labs/ssr-client/lit-element-hydrate-support.js';\n${ELEMENTS_IMPORTS}\n${ELEMENTS_API_IMPORTS}\n${ELEMENTS_CODE_IMPORTS}\n${MONACO_IMPORTS}</script>` +
       '</head>'
   );
+}
+
+function createImport(path, lazy = false) {
+  return lazy ? `import('${path}');` : `import '${path}';`;
 }
