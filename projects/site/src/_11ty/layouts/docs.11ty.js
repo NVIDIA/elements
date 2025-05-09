@@ -13,9 +13,11 @@ export function render(data) {
         ${renderBaseHead(data)}
         <style>
           #sidenav-panel {
-            nve-tree > nve-tree-node:not(:has(> a)) {
+            nve-tree > nve-tree-node:not(:has(> a)),
+            nve-tree > nve-tree-node:has(> a) {
               --color: var(--nve-sys-text-muted-color);
               --font-size: 11px;
+              --border-radius: var(--nve-ref-border-radius-xs);
               font-weight: var(--nve-ref-font-weight-regular);
               margin-bottom: var(--nve-ref-space-sm);
               text-transform: uppercase;
