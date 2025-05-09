@@ -1,15 +1,16 @@
----js
-import { renderBaseHead, IS_MR_PREVIEW, IS_DEV_MODE } from './src/_11ty/layouts/common.js';
-const title = 'Elements';
-const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
----
+import { readFileSync } from 'node:fs';
+import { renderBaseHead, IS_MR_PREVIEW, IS_DEV_MODE } from './_11ty/layouts/common.js';
 
+const BASE_HEAD = renderBaseHead({ title: 'Elements', disableTheme: true });
+const styles = readFileSync(new URL('./index.css', import.meta.url), 'utf-8');
+
+export function render() {
+  return /* html */ `
 <!doctype html>
 <html lang="en" nve-theme="dark" nve-transition="auto">
   <head>
-    {{ BASE_HEAD }}
+    ${BASE_HEAD}
     <!-- IS_MR_PREVIEW: ${IS_MR_PREVIEW}, IS_DEV_MODE: ${IS_DEV_MODE} -->
-    <link rel="stylesheet" href="./index.css" />
     <!-- eslint-disable @html-eslint/use-baseline -->
     <link
       rel="preload"
@@ -22,7 +23,10 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
       fetchpriority="high"
       as="image" />
     <!-- eslint-enable @html-eslint/use-baseline -->
-    <script type="module" src="./index.ts"></script>
+    <style>${styles}</style>
+    <script type="module">
+      import './index.ts';
+    </script>
   </head>
 
   <body>
@@ -483,3 +487,5 @@ const BASE_HEAD = renderBaseHead({ title, disableTheme: true });
     </nve-page>
   </body>
 </html>
+  `;
+}
