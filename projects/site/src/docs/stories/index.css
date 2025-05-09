@@ -1,0 +1,20 @@
+@import '@nvidia-elements/themes/fonts/inter.css';
+@import '@nvidia-elements/themes/index.css';
+@import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/themes/high-contrast.css';
+@import '@nvidia-elements/themes/compact.css';
+@import '@nvidia-elements/themes/debug.css';
+@import '@nvidia-elements/styles/layout.css';
+@import '@nvidia-elements/styles/responsive.css';
+@import '@nvidia-elements/styles/typography.css';
+@import '@nvidia-elements/styles/view-transitions.css';
+
+*:not(:defined) {
+  visibility: hidden;
+}
+
+#iframe-links {
+  position: fixed;
+  inset: auto 1rem 1rem auto;
+  z-index: 1000;
+}

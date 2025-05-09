@@ -26,6 +26,10 @@ export default function (eleventyConfig) {
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
+  eleventyConfig.addPassthroughCopy({
+    'src/docs/stories/index.ts': 'stories/index.ts',
+    'src/docs/stories/index.css': 'stories/index.css'
+  });
 
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',

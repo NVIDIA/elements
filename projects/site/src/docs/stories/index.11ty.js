@@ -1,5 +1,4 @@
 import { join, resolve } from 'node:path';
-import { createPlaygroundURLFromStorySource } from '@nve-internals/elements-api';
 import { camelToKebab } from '../../_11ty/utils/index.js';
 import { globSync } from 'glob';
 import { readFileSync } from 'node:fs';
@@ -8,8 +7,8 @@ export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // esl
 
 function getStories() {
   return [
-    ...globSync(resolve('node_modules/@nvidia-elements/core/**/*.stories.json')),
-    ...globSync(resolve('node_modules/@nvidia-elements/code/**/*.stories.json'))
+    ...globSync(resolve('node_modules/@nvidia-elements/**/dist/**/*.stories.json')),
+    ...globSync(resolve('node_modules/@nvidia-elements/**/dist/**/*.stories.json'))
   ].map(path => ({
     path: path.replace(resolve('node_modules/'), '').replace('/dist/', '/').replace('/@nve', '@nve'),
     ...JSON.parse(readFileSync(path, 'utf8'))
@@ -26,8 +25,7 @@ const stories = getStories().flatMap(storiesFile => {
     title: story.id.toLowerCase(),
     permalink: `${storiesFile.path.replace('.stories.json', '-')}${camelToKebab(story.id)}/`,
     template: story.template,
-    element: storiesFile.element?.replace('nve-', ''),
-    playground: createPlaygroundURLFromStorySource(story.template, { id: story.id, globals: { theme: 'dark' } })
+    element: storiesFile.element?.replace('nve-', '')
   }));
 });
 
@@ -50,48 +48,22 @@ export function render(data) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="${BASE_URL}" />
-    <title data-pagefind-meta="title">${data.story.permalink}</title>
+    <title data-pagefind-meta="title">Story - ${data.story.permalink}</title>
     <style>
-      @import '@nvidia-elements/themes/fonts/inter.css';
-      @import '@nvidia-elements/themes/index.css';
-      @import '@nvidia-elements/themes/dark.css';
-      @import '@nvidia-elements/themes/high-contrast.css';
-      @import '@nvidia-elements/themes/compact.css';
-      @import '@nvidia-elements/themes/debug.css';
-      @import '@nvidia-elements/styles/layout.css';
-      @import '@nvidia-elements/styles/responsive.css';
-      @import '@nvidia-elements/styles/typography.css';
-      @import '@nvidia-elements/styles/view-transitions.css';
-
-      *:not(:defined) {
-        visibility: hidden;
-      }
-
-      #iframe-links {
-        position: fixed;
-        inset: auto 1rem 1rem auto;
-        z-index: 1000;
-      }
-      
-      .story-container[data-element="dropdown-group"] {
-        justify-content: flex-start !important;
-        align-items: flex-start !important;
-      }
+      @import '/stories/index.css';
     </style>
-    <script type="module">
-      if (window.self === window.top) {
-        document.getElementById('iframe-links').hidden = false;
-      }
-    </script>
+    <!-- ELEMENT_LOADER_LAZY -->
   </head>
   <body nve-layout="column" data-pagefind-ignore="all">
     <div id="iframe-links" hidden>
       <a href="docs/elements/${data.story.element}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
-      <a href="${data.story.playground}" target="_blank" nve-text="link body sm">playground &#8599;</a>
     </div>
     <div class="story-container" nve-layout="row full align:center" data-element="${data.story.element}">
       ${data.story.template}
     </div>
+    <script type="module">
+      import '/stories/index.ts';
+    </script>
   </body>
 </html>
 `,
