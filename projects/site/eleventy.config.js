@@ -5,6 +5,7 @@ import { BASE_URL } from './src/_11ty/layouts/common.js';
 import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
+import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
 import { apiShortcode, storyShortcode } from './src/_11ty/shortcodes/index.js';
 import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
@@ -26,10 +27,6 @@ export default function (eleventyConfig) {
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
-  eleventyConfig.addPassthroughCopy({
-    'src/docs/stories/index.ts': 'stories/index.ts',
-    'src/docs/stories/index.css': 'stories/index.css'
-  });
 
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',
@@ -66,6 +63,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
   eleventyConfig.addTransform('anchor-generator', anchorGeneratorTransform);
+  eleventyConfig.addTransform('html-minify', htmlMinifyTransform);
   return {
     dir: {
       input: 'src',

@@ -2,7 +2,6 @@
   --padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
   display: block;
   width: 100%;
-  min-height: 120px;
 }
 
 nve-codeblock {
@@ -13,8 +12,9 @@ nve-codeblock {
 
 nve-toolbar {
   --border-radius: 0;
-  --padding: 0 var(--nve-ref-space-xxs);
+  --padding: var(--nve-ref-space-xxs);
   --border-bottom: 0;
+  --min-height: fit-content;
   overflow: hidden;
   border-bottom-right-radius: var(--nve-ref-border-radius-md);
   border-bottom-left-radius: var(--nve-ref-border-radius-md);
@@ -48,6 +48,7 @@ nve-select::part(caret) {
 .resizer {
   display: flex;
   align-items: stretch;
+  min-height: 80px;
 }
 
 .preview-backdrop {
