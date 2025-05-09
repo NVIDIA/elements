@@ -83,7 +83,7 @@ module.exports = {
       '@semantic-release/gitlab',
       {
         successComment:
-          '🎉 This issue has been resolved in version ${nextRelease.version} 🎉\n\n[Changelog](https://NVIDIA.github.io/elements/api/?path=/docs/about-changelog--docs)',
+          '🎉 This issue has been resolved in version ${nextRelease.version} 🎉\n\n[Changelog](https://NVIDIA.github.io/elements/docs/changelog/)',
         assets: [
           {
             label: packageFile.name,

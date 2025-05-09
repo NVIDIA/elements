@@ -2,9 +2,9 @@
 
 ### The Design Language for AI/ML Factories Building at the Speed of Light
 
-- [Documentation](https://NVIDIA.github.io/elements/api/?path=/docs/about-getting-started--docs)
+- [Documentation](https://NVIDIA.github.io/elements/)
 - [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
-- [Changelog](https://NVIDIA.github.io/elements/api/?path=/docs/about-changelog--docs)
+- [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [Gitlab Repo](https://github.com/NVIDIA/elements)
 - [Package Artifactory URM](https://registry.npmjs.org
 - [Package Artifactory Maglev](ui/packages/npm:%2F%2F@nvidia-elements%2Fcore)
@@ -40,12 +40,12 @@ import '@nvidia-elements/core/button/define.js';
 
 ## Framework Integrations
 
-- [Angular](https://NVIDIA.github.io/elements/api/?path=/docs/integrations-angular--docs)
-- [Lit](https://NVIDIA.github.io/elements/api/?path=/docs/integrations-lit--docs)
-- [Preact](https://NVIDIA.github.io/elements/api/?path=/docs/integrations-preact--docs)
-- [React](https://NVIDIA.github.io/elements/api/?path=/docs/integrations-react--docs)
-- [TypeScript](https://NVIDIA.github.io/elements/api/?path=/docs/integrations-typescript--docs)
-- [Vue](https://NVIDIA.github.io/elements/api/?path=/docs/integrations-Vue--docs)
+- [Angular](https://NVIDIA.github.io/elements/docs/integrations/angular/)
+- [Lit](https://NVIDIA.github.io/elements/docs/integrations/lit/)
+- [Preact](https://NVIDIA.github.io/elements/docs/integrations/preact/)
+- [React](https://NVIDIA.github.io/elements/docs/integrations/react/)
+- [TypeScript](https://NVIDIA.github.io/elements/docs/integrations/typescript/)
+- [Vue](https://NVIDIA.github.io/elements/docs/integrations/vue/)
 
 ## Development
 

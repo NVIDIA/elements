@@ -113,7 +113,7 @@ const App: Component = () => {
             <a
               nve-text="link"
               target="_blank"
-              href="https://NVIDIA.github.io/elements/api/?path=/docs/integrations-solidjs--docs">
+              href="https://NVIDIA.github.io/elements/docs/integrations/solidjs/">
               Documentation
             </a>
           </li>
