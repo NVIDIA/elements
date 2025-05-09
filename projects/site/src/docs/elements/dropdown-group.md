@@ -6,15 +6,6 @@
 }
 ---
 
-<style>
-/* Ensure wide containers for stories */
-iframe {
-  min-width: 850px !important;
-  max-width: 100% !important;
-  overflow: visible !important;
-}
-</style>
-
 <nve-alert status="warning">Note: Hover-based interactions are not currently supported due to added complexity and accessibility concerns. Support may be considered in future iterations with improved popover APIs.</nve-alert>
 
 ## Installation
@@ -56,14 +47,14 @@ import '@nvidia-elements/core/dropdown-group/define.js';
 
 ## Standard
 
-{% story 'nve-dropdown-group', 'Default', '{ "inline": false, "height": "300px" }' %}
+{% story 'nve-dropdown-group', 'Default' %}
 
 ## Disabled Menu Items
 
 Disable individual menu items using the `disabled` attribute.
 
-{% story 'nve-dropdown-group', 'WithDisabledItems', '{ "inline": false, "height": "300px" }' %}
+{% story 'nve-dropdown-group', 'WithDisabledItems' %}
 
 ## Icons in Menu Items
 
-{% story 'nve-dropdown-group', 'WithIcons', '{ "inline": false, "height": "300px" }' %}
+{% story 'nve-dropdown-group', 'WithIcons' %}

@@ -9,7 +9,7 @@ export default {
 
 export const Default = {
   render: () => html`
-  <nve-badge>badge</nve-badge>
+  <nve-badge status="success">badge</nve-badge>
   `
 };
 
