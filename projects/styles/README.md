@@ -1,8 +1,8 @@
 # Elements Styles
 
-- [Documentation](https://NVIDIA.github.io/elements/api/?path=/docs/about-getting-started--docs)
+- [Documentation](https://NVIDIA.github.io/elements/)
 - [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
-- [Changelog](https://NVIDIA.github.io/elements/api/?path=/docs/about-changelog--docs)
+- [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [Gitlab Repo](https://github.com/NVIDIA/elements)
 - [Package Artifactory URM](https://registry.npmjs.org
 - [Package Artifactory Maglev](ui/packages/npm:%2F%2F@nvidia-elements%2Fstyles)
