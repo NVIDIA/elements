@@ -31,7 +31,7 @@ const rule = {
           if (noExceptions && props.has(name)) {
             context.report({
               node: node.parent,
-              message: `Public API "${name}" should not be stateful or stateful behavior must be opt-in. https://NVIDIA.github.io/elements/api/?path=/docs/api-design-stateless--docs`
+              message: `Public API "${name}" should not be stateful or stateful behavior must be opt-in. https://NVIDIA.github.io/elements/docs/api-design/stateless/`
             });
           }
         });

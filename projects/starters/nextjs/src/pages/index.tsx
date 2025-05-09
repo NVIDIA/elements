@@ -121,7 +121,7 @@ export default function Home() {
             <a
               nve-text="link"
               target="_blank"
-              href="https://NVIDIA.github.io/elements/api/?path=/docs/integrations-react--docs">
+              href="https://NVIDIA.github.io/elements/docs/integrations/nextjs/">
               Documentation
             </a>
           </li>

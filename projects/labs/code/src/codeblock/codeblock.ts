@@ -23,7 +23,7 @@ hljs.registerLanguage('shell', shell);
  * @cssprop --padding
  * @cssprop --border-radius
  * @cssprop --font-family
- * @storybook https://NVIDIA.github.io/elements/api/?path=/docs/labs-code-codeblock-documentation--docs
+ * @storybook https://NVIDIA.github.io/elements/docs/code/codeblock/
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=12982-3305&t=3Qq325PlfuYlknS6-0
  * @aria https://www.w3.org/WAI/ARIA/apg/practices/structural-roles/
  * @beta

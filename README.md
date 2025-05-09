@@ -12,7 +12,7 @@ The Design Language for AI/ML Factories Building at the Speed of Light
 
 ## Requests and Contributions
 
-- [Contribution Guidelines](https://NVIDIA.github.io/elements/api/?path=/docs/about-contributions--docs)
+- [Contribution Guidelines](https://NVIDIA.github.io/elements/docs/about/contributions/)
 - [Feature request](https://github.com/NVIDIA/elements/-/issues/new?issuable_template=feature)
 - [Bug report](https://github.com/NVIDIA/elements/-/issues/new?issuable_template=default)
 - [Slack Support](https://nvidia.enterprise.slack.com/archives/C03BDL2UCGK)
@@ -181,4 +181,4 @@ When creating a new project, ex: `./projects/labs/code`, make sure to add the pr
 
 ### Release
 
-Once your Merge Request is approved, you can merge it into `main` via the Gitlab UI. This will trigger a [new release](https://github.com/NVIDIA/elements/-/releases) of the package automatically. The version number will be bumped based on the type of commit (see above). The [changelog](https://NVIDIA.github.io/elements/api/?path=/docs/about-changelog--docs) will also be updated with the changes from the commits in the MR.
+Once your Merge Request is approved, you can merge it into `main` via the Gitlab UI. This will trigger a [new release](https://github.com/NVIDIA/elements/-/releases) of the package automatically. The version number will be bumped based on the type of commit (see above). The [changelog](https://NVIDIA.github.io/elements/docs/changelog/) will also be updated with the changes from the commits in the MR.

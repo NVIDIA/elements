@@ -139,7 +139,7 @@ export const renderDocsNav = data => /* html */ `
   <nve-tree-node ${data.page.url.includes('/docs/foundations/') ? 'expanded' : ''}>
     Foundations
     <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/themes/' ? 'highlighted' : ''}>
-      <a href="api/?path=/docs/foundations-themes-documentation--docs">Themes</a>
+      <a href="docs/foundations/themes/">Themes</a>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/tokens/') ? 'highlighted' : ''}><a href="docs/foundations/themes/tokens/">Design Tokens</a></nve-tree-node>
       <nve-tree-node ${data.page.url === '/docs/foundations/themes/size/' ? 'highlighted' : ''}><a href="docs/foundations/themes/size/">Size & Space</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/objects/') ? 'highlighted' : ''}><a href="docs/foundations/themes/objects/">Objects</a></nve-tree-node>
@@ -295,9 +295,8 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted' : ''}><a href="docs/labs/behaviors-alpine/">Behaviors Alpine</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''}>
-    API Design
-    <nve-tree-node ${data.page.url.includes('/docs/api-design/getting-started/') ? 'highlighted' : ''}><a href="docs/api-design/getting-started/">Getting Started</a></nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''} ${data.page.url === '/docs/api-design/' ? 'highlighted' : ''}>
+    <a href="docs/api-design/">API Design</a>
     <nve-tree-node ${data.page.url.includes('/docs/api-design/properties-attributes/') ? 'highlighted' : ''}><a href="docs/api-design/properties-attributes/">Properties & Attributes</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/api-design/slots/') ? 'highlighted' : ''}><a href="docs/api-design/slots/">Slots</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/api-design/registration/') ? 'highlighted' : ''}><a href="docs/api-design/registration/">Registration</a></nve-tree-node>
