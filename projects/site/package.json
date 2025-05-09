@@ -27,7 +27,13 @@
       "command": "pnpm exec eleventy --serve --port=8082",
       "service": true,
       "dependencies": [
-        "build"
+        "../elements:build",
+        "../styles:build",
+        "../themes:build",
+        "../labs/code:build",
+        "../monaco:build",
+        "../internals/elements-api:build",
+        "../internals/patterns:build"
       ],
       "env": {
         "PAGES_BASE_URL": {
@@ -37,7 +43,7 @@
       }
     },
     "build": {
-      "command": "pnpm exec eleventy",
+      "command": "NODE_OPTIONS=--max-old-space-size=8192 pnpm exec eleventy",
       "files": [
         "src",
         "public",

@@ -36,6 +36,7 @@
     "postcss": "8.4.31",
     "publint": "catalog:",
     "style-dictionary": "4.3.0",
+    "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
   },
@@ -71,14 +72,17 @@
       ]
     },
     "build:styledictionary": {
-      "command": "node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js && node ./build/style-dictionary.minify.js && node ./build/fonts.js && node ./build/version.js",
+      "clean": false,
+      "command": "NODE_ENV=production vite build && node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js && node ./build/style-dictionary.minify.js && node ./build/fonts.js && node ./build/version.js",
       "files": [
         "src/**",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
         "build/style-dictionary.config.js",
         "build/style-dictionary.alias.js",
-        "build/style-dictionary.minify.js"
+        "build/style-dictionary.minify.js",
+        "package.json",
+        "vite.config.ts"
       ],
       "output": [
         "dist/",

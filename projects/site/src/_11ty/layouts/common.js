@@ -143,13 +143,13 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/tokens/') ? 'highlighted' : ''}><a href="docs/foundations/themes/tokens/">Design Tokens</a></nve-tree-node>
       <nve-tree-node ${data.page.url === '/docs/foundations/themes/size/' ? 'highlighted' : ''}><a href="docs/foundations/themes/size/">Size & Space</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/objects/') ? 'highlighted' : ''}><a href="docs/foundations/themes/objects/">Objects</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-interactions--docs">Interactions</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/interactions/') ? 'highlighted' : ''}><a href="docs/foundations/themes/interactions/">Interactions</a></nve-tree-node>
       <nve-tree-node ${data.page.url === '/docs/foundations/themes/support/' ? 'highlighted' : ''}><a href="docs/foundations/themes/support/">Support</a></nve-tree-node>
       <nve-tree-node ${data.page.url === '/docs/foundations/themes/status/' ? 'highlighted' : ''}><a href="docs/foundations/themes/status/">Status</a></nve-tree-node>
       <nve-tree-node ${data.page.url === '/docs/foundations/themes/color/' ? 'highlighted' : ''}><a href="docs/foundations/themes/color/">Color</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-animation--docs">Animation</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/foundations/themes/animation/' ? 'highlighted' : ''}><a href="docs/foundations/themes/animation/">Animation</a></nve-tree-node>
       <nve-tree-node ${data.page.url === '/docs/foundations/themes/fonts/' ? 'highlighted' : ''}><a href="docs/foundations/themes/fonts/">Fonts</a></nve-tree-node>
-      <nve-tree-node><a href="api/?path=/docs/foundations-themes-layers--docs">Layers</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/layers/') ? 'highlighted' : ''}><a href="docs/foundations/themes/layers/">Layers</a></nve-tree-node>
       <nve-tree-node><a href="api/?path=/docs/foundations-themes-custom--docs">Custom</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/layout/' ? 'highlighted' : ''}>
