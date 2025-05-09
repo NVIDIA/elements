@@ -1,0 +1,136 @@
+#sidenav-panel {
+  nve-tree > nve-tree-node:not(:has(> a)),
+  nve-tree > nve-tree-node:has(> a) {
+    --color: var(--nve-sys-text-muted-color);
+    --font-size: 11px;
+    --border-radius: var(--nve-ref-border-radius-xs);
+    font-weight: var(--nve-ref-font-weight-regular);
+    margin-bottom: var(--nve-ref-space-sm);
+    text-transform: uppercase;
+    letter-spacing: 1.76px;
+  }
+
+  nvd-search {
+    display: block;
+    min-height: 32px;
+    margin-bottom: var(--nve-ref-space-sm);
+  }
+}
+
+h2[nve-text='heading xl mkd'] {
+  border-bottom: 1px solid var(--nve-ref-border-color);
+}
+
+[nve-text='heading xl mkd'],
+[nve-text='heading lg mkd'] {
+  padding-top: var(--nve-ref-space-xl);
+  padding-bottom: var(--nve-ref-space-xs);
+}
+
+[nve-text='link mkd']:visited {
+  color: inherit !important;
+}
+
+[nve-text='list mkd'] [nve-text='body relaxed mkd'] {
+  display: inline !important;
+}
+
+/* Temporary fix for code_inline tag renderer in paragraphs, applies nve-text="code" styles */
+p[nve-text] > code {
+  background: var(--nve-sys-interaction-field-background) !important;
+  border-radius: var(--nve-ref-border-radius-xs) !important;
+  display: inline-block !important;
+  font-family: monospace !important;
+  padding: var(--nve-ref-size-50) var(--nve-ref-size-100);
+}
+
+pre:has(nve-codeblock),
+code:has(nve-codeblock) {
+  display: contents;
+}
+
+code > nve-codeblock {
+  --padding: var(--nve-ref-space-lg);
+  min-height: 65px;
+  width: 100%;
+}
+
+nve-api-canvas {
+  min-height: 140px;
+}
+
+nve-page-panel[slot='left'] {
+  --background: var(--nve-sys-layer-shell-background);
+  --width: 300px;
+
+  nve-page-panel-content {
+    --padding: var(--nve-ref-size-600) var(--nve-ref-size-400) var(--nve-ref-size-300) var(--nve-ref-size-400);
+  }
+}
+
+main {
+  padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
+  padding-bottom: var(--nve-ref-space-xl);
+
+  #doc-content {
+    max-width: 1160px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1920px) {
+  main {
+    padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl);
+  }
+}
+
+main:has([docs-full-width]) {
+  padding: var(--nve-ref-space-lg) var(--nve-ref-space-md);
+
+  #doc-content {
+    max-width: 100%;
+  }
+}
+
+[nve-theme~='dark'] main:has(#getting-started-img) {
+  background-image: url(static/images/test-image-2.webp) !important;
+  object-fit: fill !important;
+  background-repeat: no-repeat !important;
+  background-position: 0 15vh !important;
+  box-shadow: inset 0 0 0 1000px rgb(11 12 15 / 88%) !important;
+  filter: drop-shadow(0 50px 50px rgb(11 12 15 / 95%));
+}
+
+#anchor-generator {
+  padding: 0;
+  height: fit-content;
+  list-style: none !important;
+
+  a {
+    text-decoration: none !important;
+    color: var(--nve-sys-text-muted-color) !important;
+    text-wrap: nowrap !important;
+    min-width: 150px;
+    max-width: 150px;
+    min-height: 14px;
+    display: block;
+  }
+
+  li {
+    padding-bottom: 14px;
+  }
+}
+
+#doc-content + #anchor-generator {
+  margin: 50px 0 0 0 !important;
+  position: sticky !important;
+  display: none;
+  top: 50px;
+  right: 50px;
+}
+
+@media (min-width: 1600px) {
+  #doc-content + #anchor-generator {
+    display: block;
+  }
+}

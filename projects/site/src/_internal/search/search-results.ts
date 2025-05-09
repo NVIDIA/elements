@@ -18,7 +18,7 @@ export interface SearchResult {
   style: string;
 }
 
-@customElement('nve-docs-search-results')
+@customElement('nvd-search-results')
 export class DocsSearchResults extends LitElement {
   static styles = [unsafeCSS(layout), unsafeCSS(typography)];
 
