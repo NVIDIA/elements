@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.0...@nvidia-elements/core-v1.34.1) (2025-05-09)
+
+
+### Bug Fixes
+
+* **elements:** page background ([8cc43a5](https://github.com/NVIDIA/elements/commit/8cc43a58481f2a869c2133673c14a81b091469f3))
+
 ## [@nvidia-elements/core-v1.34.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.33.3...@nvidia-elements/core-v1.34.0) (2025-05-08)
 
 
