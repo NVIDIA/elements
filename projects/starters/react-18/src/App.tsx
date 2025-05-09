@@ -114,7 +114,7 @@ function App() {
             <a
               nve-text="link"
               target="_blank"
-              href="https://NVIDIA.github.io/elements/api/?path=/docs/integrations-react--docs">
+              href="https://NVIDIA.github.io/elements/docs/integrations/react/">
               Documentation
             </a>
           </li>

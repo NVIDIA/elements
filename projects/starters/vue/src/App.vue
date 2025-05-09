@@ -97,7 +97,7 @@ import '@nvidia-elements/core/logo/define.js';
           <a
             nve-text="link"
             target="_blank"
-            href="https://NVIDIA.github.io/elements/api/?path=/docs/integrations-vue--docs"
+            href="https://NVIDIA.github.io/elements/docs/integrations/vue/"
             >Documentation</a
           >
         </li>

@@ -28,7 +28,7 @@ const rule = {
             if (noExceptions && prop.key.name === 'type' && (propType === 'Array' || propType === 'Object')) {
               context.report({
                 node: node.parent,
-                message: `Public API "${propName}" with type ${propType} must be a primitive type https://NVIDIA.github.io/elements/api/?path=/docs/api-design-properties-attributes--docs`
+                message: `Public API "${propName}" with type ${propType} must be a primitive type https://NVIDIA.github.io/elements/docs/api-design/properties-attributes/`
               });
             }
           });
