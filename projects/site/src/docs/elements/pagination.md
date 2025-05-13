@@ -55,7 +55,7 @@ When custom step is provided, the select options dynamically adapt to the step a
 
 ## Forms
 
-Pagination is [form associated component](https://web.dev/more-capable-form-controls/#defining-a-form-associated-custom-element) and can be used within FormData.
+Pagination is [form associated component](https://web.dev/more-capable-form-controls) and can be used within FormData.
 
 {% story 'nve-pagination', 'Forms', '{ "inline": false, "height": 300 }' %}
 
