@@ -6,8 +6,6 @@
 }
 ---
 
-# Form Validation
-
 The `control` supports various validation statuses such as error and success. These statuses can be toggle by any framework level forms API. However the `control` component does also support the native [HTML Validation API](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation). Defining a Validity State on a `control-message` will allow messages to be
 shown conditionally based on the current input validity state.
 

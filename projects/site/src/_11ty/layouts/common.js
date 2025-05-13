@@ -148,9 +148,9 @@ export const renderDocsNav = data => /* html */ `
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/forms/' ? 'highlighted' : ''}>
       <a href="docs/foundations/forms/">Forms</a>
-      <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/validation/') ? 'highlighted' : ''}><a href="docs/foundations/forms/validation/">Validation</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/controls/') ? 'highlighted' : ''}><a href="docs/foundations/forms/controls/">Controls</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/actions/') ? 'highlighted' : ''}><a href="docs/foundations/forms/actions/">Actions</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/validation/') ? 'highlighted' : ''}><a href="docs/foundations/forms/validation/">Validation</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/typography/') ? 'highlighted' : ''}><a href="docs/foundations/typography/">Typography</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/iconography/') ? 'highlighted' : ''}><a href="docs/foundations/iconography/">Iconography</a></nve-tree-node>
