@@ -156,7 +156,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/foundations/iconography/') ? 'highlighted' : ''}><a href="docs/foundations/iconography/">Iconography</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/popovers/' ? 'highlighted' : ''}><a href="docs/foundations/popovers/">Popovers</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/i18n/' ? 'highlighted' : ''}><a href="docs/foundations/i18n/">i18n</a></nve-tree-node>
-    <nve-tree-node><a href="api/?path=/docs/foundations-visualization-documentation--docs">Visualization</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/foundations/visualization/' ? 'highlighted' : ''}><a href="docs/foundations/visualization/">Visualization</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/view-transitions/' ? 'highlighted' : ''}><a href="docs/foundations/view-transitions/">View Transitions</a></nve-tree-node>
   </nve-tree-node>
 

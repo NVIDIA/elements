@@ -874,6 +874,9 @@ importers:
 
   projects/site:
     dependencies:
+      chart.js:
+        specifier: 4.4.0
+        version: 4.4.0
       lit:
         specifier: 'catalog:'
         version: 3.2.1
