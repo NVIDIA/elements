@@ -1,7 +1,9 @@
 import { join, resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { globSync } from 'glob';
+import { createPlaygroundURLFromStorySource } from '@internals/elements-api';
 import { camelToKebab } from '../_11ty/utils/index.js';
+import { renderGlobalsScript } from '../_11ty/layouts/common.js';
 
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
@@ -53,17 +55,20 @@ export function render(data) {
       @import '/stories/index.css';
     </style>
     <!-- ELEMENT_LOADER_LAZY -->
-  </head>
-  <body nve-layout="column" data-pagefind-ignore="all">
-    <div id="iframe-links" hidden>
-      <a href="docs/elements/${data.story.element}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
-    </div>
-    <div class="story-container" nve-layout="row full align:center" data-element="${data.story.element}">
-      ${data.story.template}
-    </div>
+    ${renderGlobalsScript(data)}
     <script type="module">
       import '/stories/index.ts';
     </script>
+  </head>
+  <body data-pagefind-ignore="all">
+    <div id="iframe-links" nve-layout="row gap:sm align:right" hidden>
+      <a href="stories/" nve-text="link body sm">view all</a>
+      <a href="${createPlaygroundURLFromStorySource(data.story.template, { id: data.story.title, globals: {} })}" target="_blank" nve-text="link body sm">playground &#8599;</a>
+      <a href="docs/elements/${data.story.element}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
+    </div>
+    <div id="story-container" data-element="${data.story.element}">
+      ${data.story.template}
+    </div>
   </body>
 </html>
 `,

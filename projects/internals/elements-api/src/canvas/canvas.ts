@@ -45,17 +45,15 @@ export class Canvas extends LitElement {
           ${this.source ? html`<nve-codeblock language="html" .code=${this.formattedSource}></nve-codeblock>` : nothing}
           <nve-copy-button container="flat" behavior-copy .value=${this.formattedSource}></nve-copy-button>
         </div>
-        <div style="width: 100%">
-          <nve-toolbar container="flat">
-            <nve-button container="flat" @click=${() => (this['showSource'] = !this.showSource)}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
-            <nve-select container="flat" fit-text>
-              <select @change=${e => this.#updateSourceType(e)}>
-                <option value="html">HTML&nbsp;</option>
-                <option value="react">React</option>
-              </select>
-            </nve-select>
-            <slot name="suffix"></slot>
-          </nve-toolbar>
+        <div class="toolbar">
+          <nve-button container="flat" @click=${() => (this['showSource'] = !this.showSource)}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
+          <nve-select container="flat" fit-text>
+            <select @change=${e => this.#updateSourceType(e)} aria-label="source type">
+              <option value="html">HTML&nbsp;</option>
+              <option value="react">React</option>
+            </select>
+          </nve-select>
+          <slot name="suffix"></slot>
         </div>
       </div>
     `;

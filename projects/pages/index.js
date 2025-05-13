@@ -91,6 +91,6 @@ async function getAllFilePaths(dir) {
 const files = await getAllFilePaths('./dist');
 
 console.log('Starting compression...');
-Promise.all(files.map(path => compressFile(path)))
+Promise.all(files.filter(path => !path.includes('api')).map(path => compressFile(path)))
   .then(() => console.log(`Compressed files: ${count}\nCompression complete!`))
   .catch(error => console.error('Compression failed:', error));
