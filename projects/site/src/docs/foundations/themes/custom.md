@@ -1,10 +1,11 @@
-import { Meta, Story } from '@storybook/addon-docs';
-import { Canvas } from '@nve-internals/storybook/blocks';
-import { ThemeGenerator } from './theme.stories';
+---
+{
+  title: 'Custom Themes',
+  layout: 'docs.11ty.js'
+}
+---
 
-<Meta title="Foundations/Themes/Custom" />
-
-# Custom Themes
+# {{ title }}
 
 Custom themes can be created by overriding the global CSS properties.
 
@@ -31,4 +32,6 @@ These flags help the system determine which types of themes are available for th
 
 The demo below demonstrates how only a few tokens adjusted can drastically change the look and feel of the system.
 
-<Canvas of={ThemeGenerator} story={{ inline: false, height: 980 }} />
+<theme-generator-demo></theme-generator-demo>
+
+<script type="module" src="/_internal/stories/theme/theme-generator.js"></script>
