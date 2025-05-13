@@ -21,7 +21,7 @@ export async function elementLoaderTransform(content) {
   const ELEMENTS_API_IMPORTS = Array.from(
     new Set(
       Object.keys(ELEMENTS_API_PACKAGE.exports)
-        .filter(key => key.endsWith('define.js'))
+        .filter(key => key.endsWith('define.js') && !key.includes('system-settings')) // system settings is dynamically loaded
         .map(key => key.replace('./', 'nve-api-').replace('/define.js', ''))
         .filter(tagName => content?.includes(`<${tagName}`))
     )

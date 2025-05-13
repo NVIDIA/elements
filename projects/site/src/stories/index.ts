@@ -1,3 +1,6 @@
 if (globalThis.window.self === globalThis.window.top) {
-  globalThis.document.getElementById('iframe-links').hidden = false;
+  const links = globalThis.document.getElementById('iframe-links');
+  if (links) {
+    links.hidden = false;
+  }
 }
