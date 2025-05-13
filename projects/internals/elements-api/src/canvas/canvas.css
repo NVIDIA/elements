@@ -35,8 +35,9 @@ slot[name='suffix'] {
   display: flex;
 }
 
-nve-select {
+nve-select[container='flat'] {
   --font-weight: var(--nve-ref-font-weight-semibold);
+  --border-bottom: 0;
   margin-left: auto;
   width: 54px;
 }
@@ -65,6 +66,13 @@ nve-select::part(caret) {
 .code {
   position: relative;
   margin-top: 1px;
+}
+
+.toolbar {
+  display: flex;
+  gap: var(--nve-ref-space-xxs);
+  padding: var(--nve-ref-space-xxs);
+  border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
 }
 
 nve-copy-button {

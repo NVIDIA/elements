@@ -1,10 +1,17 @@
-import '/_internal/search/search.js';
+void import('/_internal/search/search.js');
 
 // panel toggles
+let loadedSystemsPanel = false;
 const systemOptionsPanel = globalThis.document.querySelector<HTMLElement>('#system-options-panel')!;
 const systemOptionsPanelBtn = globalThis.document.querySelector<HTMLElement>('#system-options-panel-btn')!;
 systemOptionsPanel.addEventListener('close', () => (systemOptionsPanel.hidden = true));
-systemOptionsPanelBtn.addEventListener('click', () => (systemOptionsPanel.hidden = !systemOptionsPanel.hidden));
+systemOptionsPanelBtn.addEventListener('click', async () => {
+  if (!loadedSystemsPanel) {
+    await import('@internals/elements-api/system-settings/define.js');
+    loadedSystemsPanel = true;
+  }
+  systemOptionsPanel.hidden = !systemOptionsPanel.hidden;
+});
 
 // resize panels
 const handle = globalThis.document.querySelector<HTMLElement>('nve-resize-handle[slot="left"]')!;

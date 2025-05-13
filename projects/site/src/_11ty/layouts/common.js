@@ -12,9 +12,16 @@ export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
 export const renderBaseHead = data => /* html */ `
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="all">
   <base href="${BASE_URL}" />
   <title data-pagefind-meta="title">${data.title}</title>
   <meta name="description" content="Elements - ${data.title}">
+  <meta property="og:title" content="Elements - ${data.title}" >
+  <meta property="og:url" content="${data.page?.url ?? ''}">
+  <meta property="og:description" content="NVIDIA Elements is a flexible, framework-agnostic design system and toolkit that empowers teams to build exceptional user experiences.">
+  <meta property="og:image" content="/favicon.svg">
+  <meta property="og:site_name" content="https://NVIDIA.github.io/elements/">
+  <meta property="og:type" content="website">
   <link rel="icon" href="/favicon.svg"> 
   <style>
     @import '@nvidia-elements/themes/fonts/inter.css';
@@ -50,27 +57,8 @@ export const renderBaseHead = data => /* html */ `
       }
     }
   </style>
-  <script type="module">
-    const SB_GLOBALS = { theme: 'dark', font: '',  scale: '', debug: '', animation: '', sourceType: 'html', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
-    const themes = [
-      SB_GLOBALS.theme === 'auto'
-        ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
-          ? 'light'
-          : 'dark'
-        : SB_GLOBALS.theme,
-      SB_GLOBALS.font,
-      SB_GLOBALS.scale,
-      SB_GLOBALS.debug,
-      SB_GLOBALS.animation,
-      SB_GLOBALS.experimental,
-      SB_GLOBALS.systemOptions
-    ]
-      .filter(i => i !== '')
-      .join(' ')
-      .trim();
-      ${data.disableTheme ? '' : `globalThis.document.documentElement.setAttribute('nve-theme', themes);`}
-  </script>
-  <script type="module">
+  ${renderGlobalsScript(data)}
+  <script type="module" defer>
     import { BrowserClient, getCurrentScope, defaultStackParser, makeFetchTransport, breadcrumbsIntegration, browserApiErrorsIntegration, dedupeIntegration, functionToStringIntegration, globalHandlersIntegration, httpContextIntegration, browserTracingIntegration } from '@sentry/browser';
     const client = new BrowserClient({
       dsn: 'https://aeb149467b30cd6b4e34711e88727b1f@sentry.perflab.nvidia.com/3418',
@@ -95,8 +83,8 @@ export const renderBaseHead = data => /* html */ `
     // setTimeout(() => NOTFOUND(), 2000) // test error
   </script>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-723T2ZTKVT"></script>
-  <script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-723T2ZTKVT" defer></script>
+  <script defer>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
@@ -308,6 +296,31 @@ export const renderDocsNav = data => /* html */ `
   </nve-tree-node>
 </nve-tree>
 `;
+
+export function renderGlobalsScript(data = { disableTheme: false }) {
+  return /* html */ `
+<script type="module">
+  const SB_GLOBALS = { theme: 'dark', font: '',  scale: '', debug: '', animation: '', sourceType: 'html', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
+  const themes = [
+    SB_GLOBALS.theme === 'auto'
+      ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
+        ? 'light'
+        : 'dark'
+      : SB_GLOBALS.theme,
+    SB_GLOBALS.font,
+    SB_GLOBALS.scale,
+    SB_GLOBALS.debug,
+    SB_GLOBALS.animation,
+    SB_GLOBALS.experimental,
+    SB_GLOBALS.systemOptions
+  ]
+    .filter(i => i !== '')
+    .join(' ')
+    .trim();
+    ${data.disableTheme ? '' : `globalThis.document.documentElement.setAttribute('nve-theme', themes);`}
+</script>
+  `;
+}
 
 export const IS_MR_PREVIEW = process.env.PAGES_BASE_URL?.includes('mr-preview');
 export const IS_DEV_MODE =
