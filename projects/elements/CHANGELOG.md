@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.1...@nvidia-elements/core-v1.34.2) (2025-05-13)
+
+
+### Bug Fixes
+
+* **elements:** badge ssr ([f93aec6](https://github.com/NVIDIA/elements/commit/f93aec6b39cf48f6162ed1fde7e837a850f61200))
+
 ## [@nvidia-elements/core-v1.34.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.0...@nvidia-elements/core-v1.34.1) (2025-05-09)
 
 
