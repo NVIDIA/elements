@@ -1,7 +1,8 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Foundations/Layout/Examples'
+  title: 'Foundations/Layout/Examples',
+  element: 'layout'
 };
 
 export const HorizontalAlignLeft = {
