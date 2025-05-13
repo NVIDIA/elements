@@ -207,6 +207,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/drawer/') ? 'highlighted' : ''}><a href="docs/elements/drawer/">Drawer</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown/') ? 'highlighted' : ''}><a href="docs/elements/dropdown/">Dropdown</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown-group/') ? 'highlighted' : ''}><a href="docs/elements/dropdown-group/">Dropdown Group</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/dropzone/') ? 'highlighted' : ''}><a href="docs/elements/dropzone/">Dropzone</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/file/') ? 'highlighted' : ''}><a href="docs/elements/file/">File</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/icon/') ? 'highlighted' : ''}><a href="docs/elements/icon/">Icon</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/icon-button/') ? 'highlighted' : ''}><a href="docs/elements/icon-button/">Icon Button</a></nve-tree-node>
