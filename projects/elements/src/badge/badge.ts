@@ -10,7 +10,8 @@ import {
   supportStateStyles,
   colorStateStyles,
   attachInternals,
-  I18nController
+  I18nController,
+  typeSSR
 } from '@nvidia-elements/core/internal';
 import styles from './badge.css?inline';
 
@@ -34,6 +35,7 @@ import styles from './badge.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=UOtcGeukBSZqsnnO-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
+@typeSSR()
 export class Badge extends LitElement {
   /**
    * Visual treatment to represent a ongoing task, support or trend status. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=48-710&mode=design)
@@ -90,10 +92,9 @@ export class Badge extends LitElement {
     `;
   }
 
-  async connectedCallback() {
+  connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
-    await this.updateComplete;
     this._internals.role = 'status';
   }
 
