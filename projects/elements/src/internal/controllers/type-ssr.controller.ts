@@ -9,6 +9,7 @@ type UnprotectedLitElement = ReactiveElement & {
   update: () => void;
   render: () => TemplateResult;
   renderOptions: RenderOptions;
+  _internals?: ElementInternals;
 };
 
 /**
@@ -16,7 +17,7 @@ type UnprotectedLitElement = ReactiveElement & {
  */
 export function typeSSR<T extends UnprotectedLitElement>(options: { log?: boolean } = { log: true }): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new TypeSSRController(instance, options));
+    target.addInitializer((instance: T & { _internals: ElementInternals }) => new TypeSSRController(instance, options));
 }
 
 export class TypeSSRController<T extends ReactiveElement> implements ReactiveController {
@@ -53,15 +54,20 @@ export class TypeSSRController<T extends ReactiveElement> implements ReactiveCon
     }
   }
 
-  // https://github.com/lit/lit/discussions/4697
-  // https://github.com/w3c/csswg-drafts/issues/6867#issuecomment-1599444407
   #firstUpdate = true;
   hostUpdated() {
+    // https://github.com/lit/lit/discussions/4697
+    // https://github.com/w3c/csswg-drafts/issues/6867#issuecomment-1599444407
     if (this.didSSR && this.#firstUpdate) {
       this.#firstUpdate = false;
       this.host.shadowRoot?.querySelectorAll('slot').forEach(slotElement => {
         slotElement.dispatchEvent(new Event('slotchange', { bubbles: true, composed: false, cancelable: false }));
       });
+
+      // if SSR reflect role attribute to host
+      if (this.host._internals?.role) {
+        this.host.setAttribute('role', this.host._internals.role);
+      }
     }
   }
 }
