@@ -39,7 +39,7 @@ export type Prominence = 'emphasis' | 'muted';
  * Determines the container bounds of the element
  * - `flat` element has white space bounds but reduced visual container
  * - `inline` element container is reduced to fit within inline content such as a block of text
- * - `inset` element container is optimized for embeding or being inset inside another containing element
+ * - `inset` element container is optimized for embedding or being inset inside another containing element
  * - `full` element container is optimized for filling its container bounds
  * - `condensed` element container is optimized for small, summarized or contained spaces
  */
@@ -85,7 +85,7 @@ export type PopoverPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
 /** Determines the overall position of an element relative to its anchor */
 export type Placement = PopoverPosition | `${PopoverSides}-${PopoverAlign}`;
 
-/** Determines the overal control layout relative to the control input and labels */
+/** Determines the overall control layout relative to the control input and labels */
 export type ControlLayout = 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
 
 export interface NveElement {
@@ -101,13 +101,13 @@ export interface NveElement {
   /** Determines if an element is pressed as a stand alone interaction. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed */
   pressed?: boolean;
 
-  /** Deterimines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected */
+  /** Determines if an element is selected and part of a multi choice selection group. https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected */
   selected?: boolean;
 
   /** Sets a interactive element to be in a readonly content state. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly */
   readonly?: boolean;
 
-  /** Defines the value associated with the elmeents's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value */
+  /** Defines the value associated with the element's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value */
   value?: string;
 
   /** The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name */
@@ -175,7 +175,7 @@ export interface NveElement {
    * Determines the container bounds of the element
    * - `flat` element has white space bounds but reduced visual container
    * - `inline` element container is reduced to fit within inline content such as a block of text
-   * - `inset` element container is optimized for embeding or being inset inside another containing element
+   * - `inset` element container is optimized for embedding or being inset inside another containing element
    * - `full` element container is optimized for filling its container bounds
    */
   container?: 'inline' | 'flat' | 'inset' | 'full';

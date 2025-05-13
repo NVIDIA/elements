@@ -22,7 +22,7 @@ import '@nvidia-elements/core/preferences-input/define.js';
 
 ## Forms
 
-Preferences Input is [form associated component](https://web.dev/more-capable-form-controls/#defining-a-form-associated-custom-element) and can be used within FormData.
+Preferences Input is [form associated component](https://web.dev/more-capable-form-controls) and can be used within FormData.
 
 {% story 'nve-preferences-input', 'Forms', '{ "inline": false, "height": "400px" }' %}
 
