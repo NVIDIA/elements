@@ -4,7 +4,8 @@ import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/logo/define.js';
 
 export default {
-  title: 'Internal/Layout/Responsive'
+  title: 'Internal/Layout/Responsive',
+  element: 'responsive'
 };
 
 export const GapResponsive = {

@@ -12,13 +12,13 @@ import markdown from './src/_11ty/libraries/markdown.js';
 import { MetadataService } from '@internals/metadata';
 
 const metadata = await MetadataService.getMetadata();
+
+// Exclude high memory usage components.
+// These components have a high frequency of use and large amount of inlined declarative shadow DOM CSS
+const ssrExcludeEntrypoints = new Set(['@nvidia-elements/core/grid', '@nvidia-elements/core/tree']);
+
 const entrypoints = metadata['@nvidia-elements/core'].elements
-  .filter(
-    e =>
-      e.manifest?.metadata?.entrypoint &&
-      !e.manifest?.metadata?.entrypoint.includes('tree') &&
-      !e.manifest?.metadata?.entrypoint.includes('grid')
-  )
+  .filter(e => e.manifest?.metadata?.entrypoint && !ssrExcludeEntrypoints.has(e.manifest?.metadata?.entrypoint))
   .map(e => `node_modules/${e.manifest.metadata.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`);
 
 export default function (eleventyConfig) {
@@ -38,7 +38,8 @@ export default function (eleventyConfig) {
       base: BASE_URL,
       build: {
         target: 'esnext',
-        sourcemap: false
+        sourcemap: false,
+        modulePreload: false
       }
     }
   });
