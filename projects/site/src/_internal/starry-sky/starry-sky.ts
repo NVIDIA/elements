@@ -71,7 +71,7 @@ export class StarrySky extends LitElement {
         if (entry.isIntersecting) {
           this.#createStars();
         } else {
-          this.shadowRoot?.querySelector('svg')?.remove();
+          this.shadowRoot?.querySelectorAll('svg')?.forEach(svg => svg.remove());
         }
       });
     },

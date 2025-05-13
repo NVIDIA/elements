@@ -18,3 +18,23 @@
   inset: auto 1rem 1rem auto;
   z-index: 1000;
 }
+
+#story-container {
+  display: flex;
+  place-items: center;
+  place-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+body:has(#iframe-links:not([hidden])) #story-container {
+  padding: 24px;
+
+  & > [nve-layout~='row'] {
+    width: fit-content;
+  }
+}
+
+body:has(nve-page) #story-container {
+  display: contents;
+}
