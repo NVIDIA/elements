@@ -8,6 +8,11 @@
     margin-bottom: var(--nve-ref-space-sm);
     text-transform: uppercase;
     letter-spacing: 1.76px;
+    cursor: pointer;
+  }
+
+  nve-tree-node > nve-tree-node {
+    margin-top: var(--nve-ref-space-xxxs);
   }
 
   nvd-search {
