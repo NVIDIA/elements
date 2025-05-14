@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.2...@nvidia-elements/core-v1.34.3) (2025-05-14)
+
+
+### Bug Fixes
+
+* **elements:** notification group popover type ([1338141](https://github.com/NVIDIA/elements/commit/1338141fb255ccf246a2f5da3f42f7d0fe0af462))
+
 ## [@nvidia-elements/core-v1.34.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.1...@nvidia-elements/core-v1.34.2) (2025-05-13)
 
 
