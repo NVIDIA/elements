@@ -170,6 +170,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/button/') ? 'highlighted' : ''}><a href="docs/elements/button/">Button</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/button-group/') ? 'highlighted' : ''}><a href="docs/elements/button-group/">Button Group</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/card/') ? 'highlighted' : ''}><a href="docs/elements/card/">Card</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/chat-message/') ? 'highlighted' : ''}><a href="docs/elements/chat-message/">Chat Message</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/checkbox/') ? 'highlighted' : ''}><a href="docs/elements/checkbox/">Checkbox</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/color/') ? 'highlighted' : ''}><a href="docs/elements/color/">Color</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/combobox/') ? 'highlighted' : ''}><a href="docs/elements/combobox/">Combobox</a></nve-tree-node>
