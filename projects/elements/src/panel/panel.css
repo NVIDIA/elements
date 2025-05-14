@@ -28,7 +28,6 @@
 
 :host(:not([closable]):not(:state(expanded))) {
   pointer-events: none;
-  position: absolute;
   left: 0;
   top: 0;
 }
@@ -64,7 +63,6 @@
   left: auto;
   right: 0;
   top: 0;
-  position: absolute;
 }
 
 :host([side='right']):not([closable]):not(:state(expanded)) .header nve-icon-button {
