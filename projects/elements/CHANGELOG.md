@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.3...@nvidia-elements/core-v1.34.4) (2025-05-14)
+
+
+### Bug Fixes
+
+* **elements:** update nve-panel css ([bec1556](https://github.com/NVIDIA/elements/commit/bec1556dc247e8e115b98e75bbdf9fa4374e6213))
+
 ## [@nvidia-elements/core-v1.34.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.2...@nvidia-elements/core-v1.34.3) (2025-05-14)
 
 
