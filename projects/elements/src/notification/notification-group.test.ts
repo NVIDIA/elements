@@ -25,4 +25,8 @@ describe(NotificationGroup.metadata.tag, () => {
   it('should define element', () => {
     expect(customElements.get(NotificationGroup.metadata.tag)).toBeDefined();
   });
+
+  it('should be a manual popover type, to prevent closure of other type auto popovers', () => {
+    expect(element.popoverType).toBe('manual');
+  });
 });
