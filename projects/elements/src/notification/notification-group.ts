@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import type { PopoverAlign } from '@nvidia-elements/core/internal';
+import type { PopoverAlign, PopoverType } from '@nvidia-elements/core/internal';
 import {
   popoverStyles,
   TypeNativeAnchorController,
@@ -40,6 +40,11 @@ export class NotificationGroup extends LitElement {
   protected typeNativePopoverController = new TypeNativePopoverController<NotificationGroup>(this);
 
   static styles = useStyles([popoverStyles, styles]);
+
+  /** @private */
+  get popoverType(): PopoverType {
+    return 'manual';
+  }
 
   static readonly metadata = {
     tag: 'nve-notification-group',
