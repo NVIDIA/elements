@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import '@nvidia-elements/core/notification/define.js';
+import '@nvidia-elements/core/dialog/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/drawer/define.js';
 
@@ -346,5 +347,38 @@ export const LegacyBehaviorTrigger = {
   <p nve-text="body">some text content in a notification</p>
 </nve-notification>
 <nve-button id="notification-btn">show</nve-button>
+`
+};
+
+
+export const Layers = {
+  render: () => html`
+<nve-button>Notification</nve-button>
+<nve-button popovertarget="dialog">Dialog</nve-button>
+<nve-notification-group position="bottom" alignment="end" id="group"></nve-notification-group>
+<nve-dialog id="dialog" modal closable>
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">Notification</h3>
+  </nve-dialog-header>
+  <p nve-text="body">This should not cause the dialog to close</p>
+</nve-dialog>
+
+<script type="module">
+  const button = document.querySelector('nve-button');
+  button.addEventListener('click', () => {
+    const notification = document.createElement('nve-notification');
+    notification.closable = true;
+    notification.status = ['warning', 'danger', 'success', 'accent', undefined][Math.floor(Math.random() * 5)];
+    notification.innerHTML =
+      '<h3 nve-text="label">' +
+      (notification.status ?? "default") +
+      '</h3><p nve-text="body">some text content in a notification</p>';
+    notification.closeTimeout = 3000 * (document.querySelectorAll('nve-notification').length + 1);
+    notification.addEventListener('close', () => notification.remove(), { once: true });
+    notification.position = 'bottom';
+    notification.alignment = 'end';
+    document.querySelector('nve-notification-group').prepend(notification);
+  });
+</script>
 `
 };
