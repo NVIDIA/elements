@@ -1,6 +1,8 @@
 import { EleventyRenderPlugin, IdAttributePlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
+import markdownItLink from 'markdown-it-link-attributes';
+
 import { BASE_URL } from './src/_11ty/layouts/common.js';
 import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
@@ -27,6 +29,16 @@ export default function (eleventyConfig) {
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
+
+  const markdownItLinkOptions = {
+    matcher(href) {
+      return href.match(/^https?:\/\//);
+    },
+    attrs: {
+      target: '_blank',
+      rel: 'noopener'
+    }
+  };
 
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',
@@ -58,10 +70,14 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(searchPlugin, {
     outputPath: './.11ty-vite/public/.pagefind'
   });
+
   eleventyConfig.setLibrary('md', markdown);
+  eleventyConfig.amendLibrary('md', mdLib => mdLib.use(markdownItLink, markdownItLinkOptions));
+
   eleventyConfig.addAsyncShortcode('story', storyShortcode);
   eleventyConfig.addAsyncShortcode('api', apiShortcode);
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
+
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
   eleventyConfig.addTransform('anchor-generator', anchorGeneratorTransform);
   eleventyConfig.addTransform('html-minify', htmlMinifyTransform);
