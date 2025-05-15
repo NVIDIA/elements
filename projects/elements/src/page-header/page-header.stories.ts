@@ -10,7 +10,7 @@ import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
-  title: 'Elements/Page Header/Examples',
+  title: 'Elements/Page Header',
   component: 'nve-page-header',
 };
 

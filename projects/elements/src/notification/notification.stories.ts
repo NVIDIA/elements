@@ -5,7 +5,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/drawer/define.js';
 
 export default {
-  title: 'Elements/Notification/Examples',
+  title: 'Elements/Notification',
   component: 'nve-notification',
   parameters: {
     layout: 'centered'

@@ -15,7 +15,7 @@ import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/notification/define.js';
 
 export default {
-  title: 'Elements/Icon/Examples',
+  title: 'Elements/Icon',
   component: 'nve-icon'
 };
 

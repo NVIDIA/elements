@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/accordion/define.js';
 
 export default {
-  title: 'Elements/Accordion/Examples',
+  title: 'Elements/Accordion',
   component: 'nve-accordion',
 };
 

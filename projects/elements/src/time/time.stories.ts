@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/time/define.js';
 
 export default {
-  title: 'Elements/Time/Examples',
+  title: 'Elements/Time',
   component: 'nve-time',
 };
 

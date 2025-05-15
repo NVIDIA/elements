@@ -8,26 +8,17 @@ export default {
   ],
   stories: [
     '../src/**/*.mdx',
-    '../src/**/*.stories.ts',
-    '../../elements/src/**/*.mdx',
     '../../elements/src/**/*.stories.ts',
-    '../../labs/behaviors-alpine/src/**/*.mdx',
     '../../labs/behaviors-alpine/src/**/*.stories.ts',
-    '../../labs/brand/src/**/*.mdx',
     '../../labs/brand/src/**/*.stories.ts',
-    '../../labs/code/src/**/*.mdx',
     '../../labs/code/src/**/*.stories.ts',
     '../../labs/forms/src/**/*.stories.ts',
-    '../../monaco/src/**/*.mdx',
     '../../monaco/src/**/*.stories.ts',
     '../../starters/lit-library/src/**/*.stories.ts',
-    '../../styles/docs/**/*.mdx',
-    '../../styles/docs/**/*.stories.ts',
-    '../../testing/docs/**/*.mdx',
-    '../../testing/docs/**/*.stories.ts',
-    '../../themes/docs/**/*.mdx',
-    '../../themes/docs/**/*.stories.ts',
-    '../../internals/elements-api/src/**/*.stories.ts'
+    '../../styles/**/*.stories.ts',
+    '../../themes/**/*.stories.ts',
+    '../../internals/elements-api/src/**/*.stories.ts',
+    '../../internals/patterns/src/**/*.stories.ts'
   ],
   addons: [
     '@storybook/addon-links',
@@ -67,8 +58,7 @@ export default {
       },
       resolve: {
         alias: {
-          '@storybook/addon-docs': resolve('node_modules/@storybook/addon-docs'),
-          '@nve-internals/storybook/blocks': resolve('.storybook/blocks.jsx')
+          '@storybook/addon-docs': resolve('node_modules/@storybook/addon-docs')
         }
       }
     });

@@ -13,7 +13,7 @@ import '@nvidia-elements/core/tooltip/define.js';
 import '@nvidia-elements/core/select/define.js';
 
 export default {
-  title: 'Elements/Dropdown/Examples',
+  title: 'Elements/Dropdown',
   component: 'nve-dropdown',
   parameters: {
     layout: 'centered'

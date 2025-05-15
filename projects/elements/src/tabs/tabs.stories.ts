@@ -5,7 +5,7 @@ import '@nvidia-elements/core/dot/define.js';
 import '@nvidia-elements/core/icon/define.js';
 
 export default {
-  title: 'Elements/Tabs/Examples',
+  title: 'Elements/Tabs',
   component: 'nve-tabs',
 };
 

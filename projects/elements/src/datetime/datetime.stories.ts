@@ -4,7 +4,7 @@ import '@nvidia-elements/core/month/define.js';
 import '@nvidia-elements/core/datetime/define.js';
 
 export default {
-  title: 'Elements/Datetime/Examples',
+  title: 'Elements/Datetime',
   component: 'nve-datetime',
 };
 

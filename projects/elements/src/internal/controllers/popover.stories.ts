@@ -11,7 +11,7 @@ import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/notification/define.js';
 
 export default {
-  title: 'Foundations/Popovers/Examples',
+  title: 'Elements/Popovers',
   parameters: {
     layout: 'centered'
   }

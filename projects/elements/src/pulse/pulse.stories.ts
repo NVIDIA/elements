@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/pulse/define.js';
 
 export default {
-  title: 'Elements/Pulse/Examples',
+  title: 'Elements/Pulse',
   component: 'nve-pulse',
 };
 

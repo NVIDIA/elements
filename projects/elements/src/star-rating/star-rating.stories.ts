@@ -3,7 +3,7 @@ import '@nvidia-elements/core/star-rating/define.js';
 import '@nvidia-elements/core/forms/define.js';
 
 export default {
-  title: 'Elements/Star Rating/Examples',
+  title: 'Elements/Star Rating',
   component: 'nve-star-rating'
 };
 

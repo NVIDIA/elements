@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/textarea/define.js';
 
 export default {
-  title: 'Elements/Textarea/Examples',
+  title: 'Elements/Textarea',
   component: 'nve-textarea',
 };
 

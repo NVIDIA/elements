@@ -5,7 +5,7 @@ import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/select/define.js';
 
 export default {
-  title: 'Elements/Progressive Filter Chip/Examples',
+  title: 'Elements/Progressive Filter Chip',
   component: 'nve-progressive-filter-chip',
 };
 
