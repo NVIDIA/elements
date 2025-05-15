@@ -12,7 +12,7 @@ import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
 
 export default {
-  title: 'Foundations/Themes/Examples'
+  title: 'Themes/Examples'
 };
 
 export const Layers = {

@@ -3,7 +3,7 @@ import '@nvidia-elements/core/chat-message/define.js';
 import '@nvidia-elements/core/avatar/define.js';
 
 export default {
-  title: 'Elements/Chat Message/Examples',
+  title: 'Elements/Chat Message',
   component: 'nve-chat-message',
 };
 

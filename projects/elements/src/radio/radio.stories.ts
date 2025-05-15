@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/radio/define.js';
 
 export default {
-  title: 'Elements/Radio/Examples',
+  title: 'Elements/Radio',
   component: 'nve-radio',
 };
 

@@ -10,7 +10,7 @@ import '@nvidia-elements/core/input/define.js';
 import '@nvidia-elements/core/password/define.js';
 
 export default {
-  title: 'Foundations/Forms/Examples',
+  title: 'Elements/Forms',
 };
 
 export const Validation = () => {

@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/range/define.js';
 
 export default {
-  title: 'Elements/Range/Examples',
+  title: 'Elements/Range',
   component: 'nve-range',
 };
 

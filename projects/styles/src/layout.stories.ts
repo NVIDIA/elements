@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
 export default {
-  title: 'Foundations/Layout/Examples',
+  title: 'Styles/Layout',
   element: 'layout'
 };
 

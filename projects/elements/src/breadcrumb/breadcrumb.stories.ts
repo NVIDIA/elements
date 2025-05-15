@@ -8,7 +8,7 @@ import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/menu/define.js';
 
 export default {
-  title: 'Elements/Breadcrumb/Examples',
+  title: 'Elements/Breadcrumb',
   component: 'nve-breadcrumb',
 };
 

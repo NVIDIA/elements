@@ -9,7 +9,7 @@ import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
 
 export default {
-  title: 'Elements/App Header/Examples',
+  title: 'Elements/App Header',
   component: 'nve-app-header',
 };
 

@@ -3,7 +3,7 @@
   title: 'Accordion',
   layout: 'docs.11ty.js',
   tag: 'nve-accordion',
-  associatedElements: ['nve-accordion-content', 'nve-accordion-group']
+  associatedElements: ['nve-accordion-header', 'nve-accordion-content', 'nve-accordion-group']
 }
 ---
 

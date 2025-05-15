@@ -8,7 +8,7 @@ import '@nvidia-elements/core/week/define.js';
 import '@nvidia-elements/core/time/define.js';
 
 export default {
-  title: 'Elements/Date/Examples',
+  title: 'Elements/Date',
   component: 'nve-date',
 };
 

@@ -8,7 +8,7 @@ import '@nvidia-elements/core/textarea/define.js';
 import '@nvidia-elements/core/checkbox/define.js';
 
 export default {
-  title: 'Foundations/Forms/Examples',
+  title: 'Elements/Forms',
 }
 
 export const Control = () => {

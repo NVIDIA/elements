@@ -3,7 +3,7 @@ import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/alert/define.js';
 
 export default {
-  title: 'Elements/Badge/Examples',
+  title: 'Elements/Badge',
   component: 'nve-badge',
 };
 

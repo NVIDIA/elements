@@ -7,7 +7,7 @@ import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/preferences-input/define.js';
 
 export default {
-  title: 'Elements/Preferences Input/Examples',
+  title: 'Elements/Preferences Input',
   component: 'nve-preferences-input'
 };
 

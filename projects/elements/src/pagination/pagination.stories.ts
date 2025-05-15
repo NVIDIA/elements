@@ -3,7 +3,7 @@ import '@nvidia-elements/core/pagination/define.js';
 import '@nvidia-elements/core/button/define.js';
 
 export default {
-  title: 'Elements/Pagination/Examples',
+  title: 'Elements/Pagination',
   component: 'nve-pagination',
 };
 

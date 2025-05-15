@@ -72,15 +72,15 @@
     }
   },
   "devDependencies": {
-    "@11ty/eleventy": "3.0.1-alpha.5",
-    "@11ty/eleventy-plugin-syntaxhighlight": "5.0.0",
-    "@11ty/eleventy-plugin-vite": "6.0.0",
-    "@lit-labs/eleventy-plugin-lit": "1.0.3",
+    "@11ty/eleventy": "catalog:",
+    "@11ty/eleventy-plugin-syntaxhighlight": "catalog:",
+    "@11ty/eleventy-plugin-vite": "catalog:",
+    "@lit-labs/eleventy-plugin-lit": "catalog:",
     "@lit-labs/ssr-client": "catalog:",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "markdown-it": "14.1.0",
+    "markdown-it": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"
   }

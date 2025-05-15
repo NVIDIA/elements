@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/dot/define.js';
 
 export default {
-  title: 'Elements/Dot/Examples',
+  title: 'Elements/Dot',
   component: 'nve-dot',
 };
 

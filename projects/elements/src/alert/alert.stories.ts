@@ -4,7 +4,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/divider/define.js';
 
 export default {
-  title: 'Elements/Alert/Examples',
+  title: 'Elements/Alert',
   component: 'nve-alert'
 };
 

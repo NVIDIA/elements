@@ -23,7 +23,7 @@ import '@nvidia-elements/core/tabs/define.js';
 import '@nvidia-elements/core/resize-handle/define.js';
 
 export default {
-  title: 'Elements/Page/Examples',
+  title: 'Elements/Page',
   component: 'nve-page',
 };
 

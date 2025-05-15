@@ -6,7 +6,7 @@ import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/menu/define.js';
 
 export default {
-  title: 'Elements/Dropdown Group/Examples',
+  title: 'Elements/Dropdown Group',
   component: 'nve-dropdown-group',
 };
 
