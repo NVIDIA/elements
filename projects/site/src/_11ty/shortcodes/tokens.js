@@ -30,7 +30,7 @@ function renderTokenTable(tokens) {
         padding-bottom: var(--nve-ref-space-xxs);
       }
       
-      td div {
+      td > div {
         background: var(--nve-ref-border-color);
         min-height: var(--nve-ref-size-1000);
         display: flex;
@@ -83,7 +83,17 @@ function renderTokenTable(tokens) {
           ${name.includes('ref-border-width') ? /* html */ `<div style="border: 1px solid var(--nve-ref-border-color); background: transparent; border-width: var(${name})"></div>` : ''}
           ${name.includes('ref-opacity') ? /* html */ `<div style="opacity: var(${name}); background: #000"></div>` : ''}
           ${name.includes('ref-shadow') ? /* html */ `<div style="padding: 12px; background: transparent;"><div style="box-shadow: var(${name}); background: var(--nve-sys-layer-container-background)"></div></div>` : ''}
-          ${name.includes('ref-animation') ? /* html */ `<div style="background: transparent"></div>` : ''}
+          ${
+            name.includes('ref-animation-duration')
+              ? /* html */ `
+            <div style="background: transparent">
+              <div class="animation">
+                <div style="animation-duration: var(${name})"></div>
+              </div>
+            </div>
+          `
+              : ''
+          }
           ${name.includes('sys-status') || name.includes('sys-support') ? /* html */ `<div style="background: var(${name})"></div>` : ''}
           ${name.includes('sys-text') ? /* html */ `<div style="background: var(${name})"></div>` : ''}
           ${name.includes('sys-accent') ? /* html */ `<div style="background: var(${name})"></div>` : ''}
