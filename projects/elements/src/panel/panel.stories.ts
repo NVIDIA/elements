@@ -6,7 +6,7 @@ import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/notification/define.js';
 
 export default {
-  title: 'Elements/Panel/Examples',
+  title: 'Elements/Panel',
   component: 'nve-panel'
 };
 

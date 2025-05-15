@@ -10,7 +10,7 @@ import '@nvidia-elements/core/checkbox/define.js';
 import '@nvidia-elements/core/icon/define.js';
 
 export default {
-  title: 'Elements/Toggletip/Examples',
+  title: 'Elements/Toggletip',
   component: 'nve-toggletip',
   parameters: {
     layout: 'centered'

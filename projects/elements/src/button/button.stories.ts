@@ -4,7 +4,7 @@ import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/search/define.js';
 
 export default {
-  title: 'Elements/Button/Examples',
+  title: 'Elements/Button',
   component: 'nve-button'
 };
 

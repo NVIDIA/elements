@@ -14,7 +14,7 @@ import type { Badge } from '@nvidia-elements/core/badge';
 import type { Tooltip } from '@nvidia-elements/core/tooltip';
 
 export default {
-  title: 'Elements/Tooltip/Examples',
+  title: 'Elements/Tooltip',
   component: 'nve-tooltip',
   parameters: {
     layout: 'centered'

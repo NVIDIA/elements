@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/copy-button/define.js';
 
 export default {
-  title: 'Elements/Copy Button/Examples',
+  title: 'Elements/Copy Button',
   component: 'nve-copy-button',
 };
 

@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/sort-button/define.js';
 
 export default {
-  title: 'Elements/Sort Button/Examples',
+  title: 'Elements/Sort Button',
   component: 'nve-sort-button',
 };
 

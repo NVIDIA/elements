@@ -80,17 +80,11 @@
         "package.json",
         "tsconfig.json",
         "../**/coverage/size/index.html",
-        "../elements/src/**/*.mdx",
         "../elements/src/**/*.stories.ts",
-        "../labs/code/docs/**/*.mdx",
         "../labs/code/docs/**/*.stories.ts",
-        "../monaco/docs/**/*.mdx",
         "../monaco/docs/**/*.stories.ts",
-        "../styles/docs/**/*.mdx",
         "../styles/docs/**/*.stories.ts",
-        "../testing/docs/**/*.mdx",
         "../testing/docs/**/*.stories.ts",
-        "../themes/docs/**/*.mdx",
         "../themes/docs/**/*.stories.ts"
       ],
       "output": [

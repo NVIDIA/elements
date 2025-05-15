@@ -11,7 +11,7 @@ import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
 
 export default {
-  title: 'Elements/Menu/Examples',
+  title: 'Elements/Menu',
   component: 'nve-menu',
 };
 

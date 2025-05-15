@@ -6,7 +6,7 @@ import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/tabs/define.js';
 
 export default {
-  title: 'Elements/Card/Examples',
+  title: 'Elements/Card',
   component: 'nve-card'
 };
 
