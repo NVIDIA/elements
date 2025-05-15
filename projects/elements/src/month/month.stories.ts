@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/month/define.js';
 
 export default {
-  title: 'Elements/Month/Examples',
+  title: 'Elements/Month',
   component: 'nve-month',
 };
 

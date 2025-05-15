@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/password/define.js';
 
 export default {
-  title: 'Elements/Password/Examples',
+  title: 'Elements/Password',
   component: 'nve-password',
 };
 

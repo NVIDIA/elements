@@ -22,7 +22,8 @@ export const renderBaseHead = data => /* html */ `
   <meta property="og:image" content="/favicon.svg">
   <meta property="og:site_name" content="https://NVIDIA.github.io/elements/">
   <meta property="og:type" content="website">
-  <link rel="icon" href="/favicon.svg"> 
+  <link rel="icon" href="/favicon.svg">
+  ${renderGlobalsScript(data)}
   <style>
     @import '@nvidia-elements/themes/fonts/inter.css';
     @import '@nvidia-elements/themes/index.css';
@@ -57,7 +58,6 @@ export const renderBaseHead = data => /* html */ `
       }
     }
   </style>
-  ${renderGlobalsScript(data)}
   <script type="module" defer>
     import { BrowserClient, getCurrentScope, defaultStackParser, makeFetchTransport, breadcrumbsIntegration, browserApiErrorsIntegration, dedupeIntegration, functionToStringIntegration, globalHandlersIntegration, httpContextIntegration, browserTracingIntegration } from '@sentry/browser';
     const client = new BrowserClient({
@@ -300,26 +300,30 @@ export const renderDocsNav = data => /* html */ `
 `;
 
 export function renderGlobalsScript(data = { disableTheme: false }) {
-  return /* html */ `
-<script type="module">
-  const SB_GLOBALS = { theme: 'dark', font: '',  scale: '', debug: '', animation: '', sourceType: 'html', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
-  const themes = [
-    SB_GLOBALS.theme === 'auto'
-      ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
-        ? 'light'
-        : 'dark'
-      : SB_GLOBALS.theme,
-    SB_GLOBALS.font,
-    SB_GLOBALS.scale,
-    SB_GLOBALS.debug,
-    SB_GLOBALS.animation,
-    SB_GLOBALS.experimental,
-    SB_GLOBALS.systemOptions
-  ]
-    .filter(i => i !== '')
-    .join(' ')
-    .trim();
-    ${data.disableTheme ? '' : `globalThis.document.documentElement.setAttribute('nve-theme', themes);`}
+  return data.disableTheme
+    ? ''
+    : /* html */ `
+<script>
+  (() => {
+    const SB_GLOBALS = { theme: 'dark', font: '',  scale: '', debug: '', animation: '', sourceType: 'html', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
+    const themes = [
+      SB_GLOBALS.theme === 'auto'
+        ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
+          ? 'light'
+          : 'dark'
+        : SB_GLOBALS.theme,
+      SB_GLOBALS.font,
+      SB_GLOBALS.scale,
+      SB_GLOBALS.debug,
+      SB_GLOBALS.animation,
+      SB_GLOBALS.experimental,
+      SB_GLOBALS.systemOptions
+    ]
+      .filter(i => i !== '')
+      .join(' ')
+      .trim();
+      globalThis.document.documentElement.setAttribute('nve-theme', themes);
+  })();
 </script>
   `;
 }

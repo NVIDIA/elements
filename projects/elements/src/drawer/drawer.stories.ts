@@ -4,7 +4,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/drawer/define.js';
 
 export default {
-  title: 'Elements/Drawer/Examples',
+  title: 'Elements/Drawer',
   component: 'nve-drawer',
   inline: false
 };

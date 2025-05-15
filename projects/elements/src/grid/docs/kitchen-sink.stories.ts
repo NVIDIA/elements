@@ -23,7 +23,7 @@ import '@nvidia-elements/core/select/define.js';
 import { generateId } from '@nvidia-elements/core/internal';
 
 export default {
-  title: 'Elements/Data Grid/Examples',
+  title: 'Elements/Data Grid',
   component: 'nve-grid',
 };
 

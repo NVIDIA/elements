@@ -26,7 +26,7 @@ import '@nvidia-elements/core/tooltip/define.js';
 import '@lit-labs/virtualizer';
 
 export default {
-  title: 'Elements/Data Grid/Examples',
+  title: 'Elements/Data Grid',
   component: 'nve-grid',
 };
 

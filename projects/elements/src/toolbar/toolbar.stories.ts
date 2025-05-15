@@ -10,7 +10,7 @@ import '@nvidia-elements/core/input/define.js';
 import '@nvidia-elements/core/color/define.js';
 
 export default {
-  title: 'Elements/Toolbar/Examples',
+  title: 'Elements/Toolbar',
   component: 'nve-toolbar',
 };
 

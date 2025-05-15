@@ -1,6 +1,0 @@
-import { Meta } from '@storybook/addon-docs';
-import { Redirect } from '@internals/storybook/blocks';
-
-<Meta title="About/Getting Started" />
-
-{!document.location.href.includes('localhost') ? <Redirect path={'docs/about/getting-started/'} /> : ''}

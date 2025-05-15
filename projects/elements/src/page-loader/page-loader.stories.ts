@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/page-loader/define.js';
 
 export default {
-  title: 'Elements/Page Loader/Examples',
+  title: 'Elements/Page Loader',
   component: 'nve-page-loader',
 };
 

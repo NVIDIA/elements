@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/checkbox/define.js';
 
 export default {
-  title: 'Elements/Checkbox/Examples',
+  title: 'Elements/Checkbox',
   component: 'nve-checkbox',
 };
 

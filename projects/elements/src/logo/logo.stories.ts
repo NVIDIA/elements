@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/logo/define.js';
 
 export default {
-  title: 'Elements/Logo/Examples',
+  title: 'Elements/Logo',
   component: 'nve-logo',
 };
 
