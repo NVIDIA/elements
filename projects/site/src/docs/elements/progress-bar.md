@@ -55,3 +55,9 @@ Or in combination with `status` colors.
 Alternatively, set the `--accent-color` css property for a branded progress bar style.
 
 {% story 'nve-progress-bar', 'IndeterminateCustomColor' %}
+
+## Height Customization
+
+The progress bar's height can be customized using the `--height` CSS custom property. This allows you to create progress bars that match your application's visual hierarchy and emphasis needs. For consistency and theming, we recommend using our design system tokens—but you're free to use any value that suits your layout.
+
+{% story 'nve-progress-bar', 'CustomHeights' %}
