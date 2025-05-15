@@ -68,3 +68,14 @@ export const IndeterminateCustomColor = {
     <nve-progress-bar style="--accent-color: var(--nve-sys-accent-primary-background); --height: var(--nve-ref-size-150); --opacity: 1;"></nve-progress-bar>
   `
 };
+export const CustomHeights = {
+  render: () => html`
+    <div nve-layout="column gap:md full">
+      <nve-progress-bar style="--height: var(--nve-ref-size-100);"></nve-progress-bar>
+
+      <nve-progress-bar style="--height: var(--nve-ref-size-200);"></nve-progress-bar>
+
+      <nve-progress-bar style="--height: var(--nve-ref-size-300);"></nve-progress-bar>
+    </div>
+  `
+};
