@@ -10,7 +10,7 @@
   }
 
   ::view-transition-group(*) {
-    animation-duration: var(--nve-ref-animation-duration-300);
+    animation-duration: var(--nve-ref-animation-duration-400);
   }
 
   [nve-transition='auto']:active-view-transition-type(forwards, backwards) {
