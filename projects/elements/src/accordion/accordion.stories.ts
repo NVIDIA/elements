@@ -1,5 +1,7 @@
 import { html } from 'lit';
 import '@nvidia-elements/core/accordion/define.js';
+import '@nvidia-elements/core/tooltip/define.js';
+import '@nvidia-elements/core/button/define.js';
 
 export default {
   title: 'Elements/Accordion',
@@ -223,6 +225,21 @@ export const WithActions = {
       </nve-accordion-header>
       <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
     </nve-accordion>
+  `
+};
+
+
+export const NestedOpenEvent = {
+  render: () => html`
+    <nve-accordion-group behavior-expand-single>
+      <nve-accordion>
+        <nve-accordion-header>accordion</nve-accordion-header>
+        <nve-accordion-content>
+          <nve-tooltip id="tooltip">tooltip</nve-tooltip>
+          <nve-button popovertarget="tooltip">button</nve-button>
+        </nve-accordion-content>
+      </nve-accordion>
+    </nve-accordion-group>
   `
 };
 
