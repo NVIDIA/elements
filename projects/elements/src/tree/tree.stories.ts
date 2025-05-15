@@ -7,7 +7,7 @@ import '@nvidia-elements/core/radio/define.js';
 import '@nvidia-elements/core/progress-ring/define.js';
 
 export default {
-  title: 'Elements/Tree/Examples',
+  title: 'Elements/Tree',
   component: 'nve-tree',
 };
 
@@ -454,6 +454,14 @@ export const BulkCreation = {
       rootEl.replaceChildren(document.createTextNode('Test'));
     });
   </script>
+  `
+};
+
+export const Audit = {
+  render: () => html`
+    <div>
+      <nve-tree-node>node</nve-tree-node>
+    </div>
   `
 };
 

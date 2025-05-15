@@ -6,7 +6,7 @@ import '@nvidia-elements/core/accordion/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
 
 export default {
-  title: 'Elements/Dialog/Examples',
+  title: 'Elements/Dialog',
   component: 'nve-dialog',
   parameters: {
     layout: 'centered'

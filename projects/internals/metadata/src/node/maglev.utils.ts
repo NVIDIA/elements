@@ -36,11 +36,7 @@ async function getSourceFiles(src) {
   const files: string[] = [];
   for await (const file of getFiles(src)) {
     if (
-      (file.endsWith('.ts') ||
-        file.endsWith('.js') ||
-        file.endsWith('.html') ||
-        file.endsWith('.md') ||
-        file.endsWith('.mdx')) &&
+      (file.endsWith('.ts') || file.endsWith('.js') || file.endsWith('.html') || file.endsWith('.md')) &&
       !file.includes('.wireit') &&
       !file.includes('dist') &&
       !file.includes('node_modules') &&

@@ -6,7 +6,7 @@ import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/logo/define.js';
 
 export default {
-  title: 'Elements/Select/Examples',
+  title: 'Elements/Select',
   component: 'nve-select',
 };
 

@@ -4,7 +4,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/toast/define.js';
 
 export default {
-  title: 'Elements/Toast/Examples',
+  title: 'Elements/Toast',
   component: 'nve-toast',
   parameters: {
     layout: 'centered'

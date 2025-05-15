@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/file/define.js';
 
 export default {
-  title: 'Elements/File/Examples',
+  title: 'Elements/File',
   component: 'nve-file',
 };
 

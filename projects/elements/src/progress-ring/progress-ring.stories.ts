@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/progress-ring/define.js';
 
 export default {
-  title: 'Elements/Progress Ring/Examples',
+  title: 'Elements/Progress Ring',
   component: 'nve-progress-ring',
 };
 

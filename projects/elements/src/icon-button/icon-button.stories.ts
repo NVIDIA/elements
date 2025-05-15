@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
-  title: 'Elements/Icon Button/Examples',
+  title: 'Elements/Icon Button',
   component: 'nve-icon-button'
 };
 

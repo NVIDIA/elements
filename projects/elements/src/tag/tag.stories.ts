@@ -3,7 +3,7 @@ import '@nvidia-elements/core/tag/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
-  title: 'Elements/Tag/Examples',
+  title: 'Elements/Tag',
   component: 'nve-tag',
 };
 

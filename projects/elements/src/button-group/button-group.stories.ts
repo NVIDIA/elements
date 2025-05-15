@@ -3,7 +3,7 @@ import '@nvidia-elements/core/button-group/define.js';
 import '@nvidia-elements/core/divider/define.js';
 
 export default {
-  title: 'Elements/Button Group/Examples',
+  title: 'Elements/Button Group',
   component: 'nve-button-group',
 };
 

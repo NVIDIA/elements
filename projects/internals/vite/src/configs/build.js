@@ -14,7 +14,7 @@ import { storiesToJSON } from '../plugins/stories.js';
 
 const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
-const mode = process.env.NODE_ENV;
+const prod = process.env.NODE_ENV === 'production';
 const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package.json')));
 
 /**
@@ -25,13 +25,12 @@ const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package
 export const libraryBuildConfig = {
   plugins: [initial(), tsc(), cem(), dts(), bundle(), storiesToJSON()],
   build: {
-    cssMinify: 'esbuild',
+    cssMinify: prod ? 'esbuild' : false,
     cssCodeSplit: true,
     minify: false, // https://github.com/vitejs/vite/issues/8848
-    watch: mode === 'watch' ? {} : undefined,
     outDir: dist(),
     emptyOutDir: false,
-    sourcemap: true,
+    sourcemap: prod,
     target: 'esnext',
     lib: {
       entry: {
@@ -64,8 +63,8 @@ export const libraryBuildConfig = {
         }
       ],
       plugins: [
-        mode === 'production' ? minifyHTML() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
-        mode === 'production'
+        prod ? minifyHTML() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
+        prod
           ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
           : false // https://github.com/vitejs/vite/issues/8848
       ]
