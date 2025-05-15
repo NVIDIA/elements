@@ -265,7 +265,7 @@ export class AccordionGroup extends LitElement {
     this._internals.role = 'group';
 
     this.addEventListener('open', e => {
-      if (this.behaviorExpandSingle) {
+      if (this.behaviorExpandSingle && this.accordions.find(accordion => accordion === e.target)) {
         this.accordions.filter(accordion => accordion !== e.target).forEach(accordion => (accordion.expanded = false));
       }
     });
