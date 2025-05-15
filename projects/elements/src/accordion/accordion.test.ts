@@ -132,6 +132,26 @@ describe(Accordion.metadata.tag, () => {
     expect(childElement2.expanded).toBe(true);
   });
 
+  it('should only toggle expanded state if the open event originates from a slotted accordion', async () => {
+    parentElement.behaviorExpandSingle = true;
+    childElement1.expanded = true;
+    await elementIsStable(childElement1);
+    await elementIsStable(childElement2);
+    expect(childElement1.expanded).toBe(true);
+    expect(childElement2.expanded).toBe(false);
+
+    const open = untilEvent(childElement1, 'open');
+    const div = document.createElement('div');
+    childElement1.querySelector('nve-accordion-content')?.appendChild(div);
+    div.dispatchEvent(new CustomEvent('open', { bubbles: true }));
+    expect(await open).toBeDefined();
+
+    await elementIsStable(childElement1);
+    await elementIsStable(childElement2);
+    expect(childElement1.expanded).toBe(true);
+    expect(childElement2.expanded).toBe(false);
+  });
+
   it('should pass container styles set on parent to children', async () => {
     expect(parentElement.container).toBe('full');
     expect(childElement1.container).toBe('full');
