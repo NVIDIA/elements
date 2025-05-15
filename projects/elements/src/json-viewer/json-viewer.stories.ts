@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/json-viewer/define.js';
 
 export default {
-  title: 'Internal/JSON Viewer/Examples',
+  title: 'Internal/JSON Viewer',
   component: 'nve-json-viewer',
 };
 

@@ -3,7 +3,7 @@ import '@nvidia-elements/core/avatar/define.js';
 import '@nvidia-elements/core/icon/define.js';
 
 export default {
-  title: 'Elements/Avatar/Examples',
+  title: 'Elements/Avatar',
   component: 'nve-avatar',
 };
 

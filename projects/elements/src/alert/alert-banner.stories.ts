@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/alert/define.js';
 
 export default {
-  title: 'Deprecated/Alert Banner/Examples',
+  title: 'Deprecated/Alert Banner',
   component: 'nve-alert-banner'
 };
 

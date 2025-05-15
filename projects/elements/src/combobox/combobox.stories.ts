@@ -12,7 +12,7 @@ import '@nvidia-elements/core/input/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
 
 export default {
-  title: 'Elements/Combobox/Examples',
+  title: 'Elements/Combobox',
   component: 'nve-combobox',
 };
 

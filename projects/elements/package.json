@@ -943,11 +943,6 @@
     "vitest": "catalog:"
   },
   "wireit": {
-    "dev": {
-      "dependencies": [
-        "build:watch"
-      ]
-    },
     "ci": {
       "dependencies": [
         "lint",
@@ -969,11 +964,15 @@
       ],
       "output": []
     },
-    "build:watch": {
-      "command": "vite build --watch",
+    "dev": {
+      "command": "NODE_ENV=development vite build --watch",
       "service": true,
       "dependencies": [
-        "build"
+        "build:icons",
+        "build:snippets",
+        "../themes:build",
+        "../styles:build",
+        "../internals/vite:ci"
       ]
     },
     "build": {
@@ -981,7 +980,6 @@
       "files": [
         "public/**",
         "src/**",
-        "!src/**/*.mdx",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",

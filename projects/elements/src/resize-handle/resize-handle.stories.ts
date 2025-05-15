@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/resize-handle/define.js';
 
 export default {
-  title: 'Elements/Resize Handle/Examples',
+  title: 'Elements/Resize Handle',
   component: 'nve-resize-handle',
 };
 

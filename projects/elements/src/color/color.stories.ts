@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/color/define.js';
 
 export default {
-  title: 'Elements/Color/Examples',
+  title: 'Elements/Color',
   component: 'nve-color',
 };
 

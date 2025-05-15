@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/card/define.js';
 
 export default {
-  title: 'Foundations/Typography/Examples',
+  title: 'Styles/Typography',
   element: 'typography'
 };
 

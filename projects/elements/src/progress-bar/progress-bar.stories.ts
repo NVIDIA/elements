@@ -2,7 +2,7 @@ import { html } from 'lit';
 import '@nvidia-elements/core/progress-bar/define.js';
 
 export default {
-  title: 'Elements/Progress Bar/Examples',
+  title: 'Elements/Progress Bar',
   component: 'nve-progress-bar',
 };
 

@@ -4,7 +4,7 @@ import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
-  title: 'Elements/Divider/Examples',
+  title: 'Elements/Divider',
   component: 'nve-divider',
 };
 

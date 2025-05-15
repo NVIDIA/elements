@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/dropzone/define.js';
 
 export default {
-  title: 'Elements/Dropzone/Examples',
+  title: 'Elements/Dropzone',
   component: 'nve-dropzone'
 };
 

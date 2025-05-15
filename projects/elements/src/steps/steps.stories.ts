@@ -5,7 +5,7 @@ import '@nvidia-elements/core/dot/define.js';
 import '@nvidia-elements/core/icon/define.js';
 
 export default {
-  title: 'Elements/Steps/Examples',
+  title: 'Elements/Steps',
   component: 'nve-steps',
 };
 
