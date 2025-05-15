@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/week/define.js';
 
 export default {
-  title: 'Elements/Week/Examples',
+  title: 'Elements/Week',
   component: 'nve-week',
 };
 

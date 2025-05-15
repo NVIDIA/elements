@@ -119,7 +119,6 @@
         "../../labs/code/dist/**/*.js",
         "src/**",
         "!src/**/*.stories.ts",
-        "!src/**/*.mdx",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",

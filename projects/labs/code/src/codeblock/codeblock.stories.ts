@@ -4,7 +4,7 @@ import '@nvidia-elements/code/codeblock/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
-  title: 'Labs/Code/Codeblock/Examples',
+  title: 'Labs/Code/Codeblock',
   component: 'nve-codeblock'
 };
 

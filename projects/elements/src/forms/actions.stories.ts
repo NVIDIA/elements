@@ -5,7 +5,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
-  title: 'Foundations/Forms/Examples',
+  title: 'Elements/Forms',
   component: 'nve-input'
 };
 

@@ -20,7 +20,7 @@ import '@nvidia-elements/core/month/define.js';
 import '@nvidia-elements/core/textarea/define.js';
 
 export default {
-  title: 'Foundations/Forms/Examples'
+  title: 'Elements/Forms'
 }
 
 export const KitchenSink = {

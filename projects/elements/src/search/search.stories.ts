@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/search/define.js';
 
 export default {
-  title: 'Elements/Search/Examples',
+  title: 'Elements/Search',
   component: 'nve-search',
 };
 

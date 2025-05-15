@@ -102,7 +102,6 @@
       "files": [
         "src/**",
         "!src/**/*.stories.ts",
-        "!src/**/*.mdx",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.ssr.ts",

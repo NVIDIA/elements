@@ -3,7 +3,7 @@ import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/switch/define.js';
 
 export default {
-  title: 'Elements/Switch/Examples',
+  title: 'Elements/Switch',
   component: 'nve-switch',
 };
 

@@ -108,7 +108,6 @@
         "src/**",
         "!src/**/*.stories.ts",
         "!src/**/*.test.ts",
-        "!src/**/*.mdx",
         "package.json",
         "tsconfig.lib.json",
         "vite.config.ts"
