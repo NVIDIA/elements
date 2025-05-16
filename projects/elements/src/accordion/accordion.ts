@@ -11,7 +11,8 @@ import {
   attachInternals,
   generateId,
   isFocusable,
-  hostAttr
+  hostAttr,
+  audit
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
@@ -113,13 +114,15 @@ export class AccordionContent extends LitElement {
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
+@audit()
 @stateExpanded<Accordion>()
 export class Accordion extends LitElement implements ContainerElement {
   static styles = useStyles([accordionStyleSheet]);
 
   static readonly metadata = {
     tag: 'nve-accordion',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: [AccordionHeader.metadata.tag, AccordionContent.metadata.tag]
   };
 
   static elementDefinitions = {
@@ -227,6 +230,7 @@ export class Accordion extends LitElement implements ContainerElement {
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
+@audit()
 export class AccordionGroup extends LitElement {
   declare _internals: ElementInternals;
   static styles = useStyles([accordionGroupStyleSheet]);
@@ -246,7 +250,8 @@ export class AccordionGroup extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-accordion-group',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: [Accordion.metadata.tag]
   };
 
   @queryAssignedElements() private accordions!: Accordion[];

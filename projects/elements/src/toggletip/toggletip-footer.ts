@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { audit, useStyles } from '@nvidia-elements/core/internal';
 import styles from './toggletip-footer.css?inline';
 
 /**
@@ -14,12 +14,14 @@ import styles from './toggletip-footer.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0
  *
  */
+@audit()
 export class ToggletipFooter extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
     tag: 'nve-toggletip-footer',
-    version: '0.0.0'
+    version: '0.0.0',
+    parents: ['nve-toggletip']
   };
 
   render() {
