@@ -5,7 +5,14 @@ import { state } from 'lit/decorators/state.js';
 import { when } from 'lit/directives/when.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { KeynavListConfig, SupportStatus, Container } from '@nvidia-elements/core/internal';
-import { BaseButton, stateSelected, useStyles, keyNavigationList, attachInternals } from '@nvidia-elements/core/internal';
+import {
+  BaseButton,
+  stateSelected,
+  useStyles,
+  keyNavigationList,
+  attachInternals,
+  audit
+} from '@nvidia-elements/core/internal';
 import stepsItemStyleSheet from './steps-item.css?inline';
 import stepsStyleSheet from './steps.css?inline';
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -29,6 +36,7 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5348&mode=design&t=WcDb2p9I7zwJ9GhW-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  */
+@audit()
 @stateSelected<StepsItem>()
 export class StepsItem extends BaseButton {
   /**
@@ -55,7 +63,8 @@ export class StepsItem extends BaseButton {
 
   static readonly metadata = {
     tag: 'nve-steps-item',
-    version: '0.0.0'
+    version: '0.0.0',
+    parents: ['nve-steps']
   };
 
   static elementDefinitions = {
@@ -99,6 +108,7 @@ export class StepsItem extends BaseButton {
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=121-5453&mode=design&t=8txdFlcqmipufrZs-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  */
+@audit()
 @keyNavigationList<Steps>()
 export class Steps extends LitElement {
   /**
@@ -120,7 +130,8 @@ export class Steps extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-steps',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: ['nve-steps-item']
   };
 
   /** @private */

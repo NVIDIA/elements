@@ -22,6 +22,7 @@ export class AlertBanner extends AlertGroup {
 
   static readonly metadata = {
     tag: 'nve-alert-banner',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: []
   };
 }

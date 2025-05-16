@@ -2,10 +2,11 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { audit, GlobalStateService } from '@nvidia-elements/core/internal';
-import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { DOCS_LOG_URL } from '../utils/audit-logs.js';
 
 @customElement('audit-test-element')
-@audit({ excessiveInstanceLimit: 1, auditSlots: true, alternates: [{ name: 'p', use: 'span' }] })
+@audit({ excessiveInstanceLimit: 1, alternates: [{ name: 'p', use: 'span' }] })
 class AuditTestElement extends LitElement {
   static readonly metadata = {
     tag: 'audit-test-element',
@@ -16,6 +17,16 @@ class AuditTestElement extends LitElement {
   render() {
     return html`<slot></slot>`;
   }
+}
+
+@audit()
+@customElement('audit-test-parent-element')
+class AuditTestParentElement extends LitElement {
+  static readonly metadata = {
+    tag: 'audit-test-parent-element',
+    version: '0.0.0',
+    parents: ['valid-audit-test-parent-element']
+  };
 }
 
 describe('audit.controller instance tracking', () => {
@@ -72,9 +83,10 @@ describe('audit.controller instance tracking', () => {
     await elementIsStable(elementTwo);
     await elementIsStable(elementThree);
 
+    await untilEvent(document, 'NVE_ELEMENTS_LOG');
     expect(GlobalStateService.state.audit['audit-test-element'].count).toBe(3);
     expect(console.warn).toHaveBeenCalledWith(
-      '@nve: Excessive rendering of 2 audit-test-element were detected in DOM. Recycle/reuse elements when possible to improve application performance.'
+      `@nve: Excessive rendering of 2 audit-test-element were detected in DOM. Recycle/reuse elements when possible to improve application performance. ${DOCS_LOG_URL}#excessive-instance-limit`
     );
 
     vi.clearAllMocks();
@@ -85,7 +97,7 @@ describe('audit.controller instance tracking', () => {
   });
 });
 
-describe('audit.controller slotted vailidation', () => {
+describe('audit.controller slotted validation', () => {
   let element: AuditTestElement;
   let fixture: HTMLElement;
   let originalWarn = console.warn;
@@ -107,15 +119,16 @@ describe('audit.controller slotted vailidation', () => {
     console.warn = originalWarn;
   });
 
-  it('should validate allowed slotted elements', () => {
+  it('should validate allowed slotted elements', async () => {
     expect(GlobalStateService.state.env).toBe('development');
+    await untilEvent(document, 'NVE_ELEMENTS_LOG');
     expect(console.warn).toHaveBeenCalledWith(
-      '@nve: Invalid slotted elements detected in audit-test-element. Allowed: template, audit-test-element-slotted, p'
+      `@nve: Invalid slotted elements detected in audit-test-element. Allowed: template, audit-test-element-slotted, p. ${DOCS_LOG_URL}#invalid-slotted-children`
     );
   });
 });
 
-describe('audit.controller alternates vailidation', () => {
+describe('audit.controller alternates validation', () => {
   let element: AuditTestElement;
   let fixture: HTMLElement;
   let originalWarn = console.warn;
@@ -137,8 +150,44 @@ describe('audit.controller alternates vailidation', () => {
     console.warn = originalWarn;
   });
 
-  it('should validate allowed slotted elements', () => {
+  it('should validate allowed slotted elements', async () => {
     expect(GlobalStateService.state.env).toBe('development');
-    expect(console.warn).toHaveBeenCalledWith('@nve: Element p found in audit-test-element, use span instead.');
+    await untilEvent(document, 'NVE_ELEMENTS_LOG');
+    expect(console.warn).toHaveBeenCalledWith(
+      `@nve: Element p found in audit-test-element, use span instead. ${DOCS_LOG_URL}#use-element`
+    );
+  });
+});
+
+describe('audit.controller parent validation', () => {
+  let element: AuditTestParentElement;
+  let fixture: HTMLElement;
+  let originalWarn = console.warn;
+
+  beforeEach(async () => {
+    globalThis.NVE_ELEMENTS.state.env = 'development';
+    console.warn = () => null;
+    vi.spyOn(console, 'warn');
+
+    fixture = await createFixture(html`
+      <div>
+        <audit-test-parent-element></audit-test-parent-element>
+      </div>`);
+    element = fixture.querySelector<AuditTestParentElement>('audit-test-parent-element');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+    globalThis.NVE_ELEMENTS.state.env = 'development';
+    console.warn = originalWarn;
+  });
+
+  it('should validate allowed slotted elements', async () => {
+    expect(GlobalStateService.state.env).toBe('development');
+    await untilEvent(document, 'NVE_ELEMENTS_LOG');
+    expect(console.warn).toHaveBeenCalledWith(
+      `@nve: Element audit-test-parent-element can only be used as a direct child of valid-audit-test-parent-element. ${DOCS_LOG_URL}#invalid-parent`
+    );
   });
 });

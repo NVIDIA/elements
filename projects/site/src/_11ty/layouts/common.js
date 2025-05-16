@@ -295,6 +295,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/api-design/styles/') ? 'highlighted' : ''}><a href="docs/api-design/styles/">Styles</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/api-design/packaging/') ? 'highlighted' : ''}><a href="docs/api-design/packaging/">Packaging</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/api-design/glossary/') ? 'highlighted' : ''}><a href="docs/api-design/glossary/">Glossary</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/logs/') ? 'highlighted' : ''}><a href="docs/api-design/logs/">Logs</a></nve-tree-node>
   </nve-tree-node>
 </nve-tree>
 `;

@@ -29,3 +29,5 @@ export function shiftLeft(value: string) {
     })
     .join('\n');
 }
+
+export const DOCS_URL = 'https://NVIDIA.github.io/elements/';
