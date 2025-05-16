@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, BaseButton } from '@nvidia-elements/core/internal';
+import { useStyles, BaseButton, audit } from '@nvidia-elements/core/internal';
 import styles from './menu-item.css?inline';
 
 /**
@@ -24,6 +24,7 @@ import styles from './menu-item.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=DjsMr3p502i01oCU-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
+@audit()
 export class MenuItem extends BaseButton {
   static styles = useStyles([styles]);
 
@@ -31,7 +32,8 @@ export class MenuItem extends BaseButton {
 
   static readonly metadata = {
     tag: 'nve-menu-item',
-    version: '0.0.0'
+    version: '0.0.0',
+    parents: ['nve-menu']
   };
 
   static elementDefinitions = {};

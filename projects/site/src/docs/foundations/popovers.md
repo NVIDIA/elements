@@ -97,5 +97,3 @@ Native [CSS Anchor Positioning](https://developer.chrome.com/blog/anchor-positio
 
 Element popover positioning will detect instances of cross Shadow Root anchoring attempts and fallback to a JavaScript based positioning system.
 This will allow the popover to anchor correctly but at the cost of render reliability and performance when compared to native CSS Anchor Positioning.
-
-{% story 'nve-tooltip', 'CrossShadowRootAnchorPosition', '{ "inline": false, "height": "400px" }' %}

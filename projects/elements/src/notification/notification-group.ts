@@ -2,6 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { PopoverAlign, PopoverType } from '@nvidia-elements/core/internal';
 import {
+  audit,
   popoverStyles,
   TypeNativeAnchorController,
   TypeNativePopoverController,
@@ -19,6 +20,7 @@ import styles from './notification-group.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
  */
+@audit()
 export class NotificationGroup extends LitElement {
   /**
    * Sets the anchor element to which the popover is attached.
@@ -48,7 +50,8 @@ export class NotificationGroup extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-notification-group',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: ['nve-notification']
   };
 
   render() {
