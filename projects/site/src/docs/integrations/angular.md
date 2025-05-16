@@ -7,9 +7,11 @@
 
 # {{ title }}
 
+{% svg-logos 'angular' %}
+
 <div nve-layout="row gap:xs">
   <nve-button>
-    <a target="_blank" href="https://NVIDIA.github.io/elements/starters/angular/"><svg width="18" height="18"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#angular-svg"></use></svg> Demo</a>
+    <a target="_blank" href="https://NVIDIA.github.io/elements/starters/angular/"><svg width="18" height="18"><use href="#angular-svg"></use></svg> Demo</a>
   </nve-button>
 
   <nve-button>

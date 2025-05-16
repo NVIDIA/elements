@@ -7,9 +7,11 @@
 
 # {{ title }}
 
+{% svg-logos 'solidjs' %}
+
 <div nve-layout="row gap:xs">
   <nve-button>
-    <a href="https://NVIDIA.github.io/elements/starters/solidjs/" target="_blank"><svg width="18" height="18"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#solidjs-svg"></use></svg> Demo</a>
+    <a href="https://NVIDIA.github.io/elements/starters/solidjs/" target="_blank"><svg width="18" height="18"><use href="#solidjs-svg"></use></svg> Demo</a>
   </nve-button>
 
   <nve-button>

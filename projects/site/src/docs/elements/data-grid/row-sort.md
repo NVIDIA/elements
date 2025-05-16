@@ -35,7 +35,9 @@ Sort can be set via the `sort` property and `sort` event on the `nve-sort-button
 
 {% story 'nve-grid', 'ColumnSortButtonVisibility' %}
 
-## Lit <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lit-svg"></use></svg>
+{% svg-logos 'lit' %}
+
+## Lit <svg width="20" height="20"><use href="#lit-svg"></use></svg>
 
 ```typescript
 class RowSortDemo extends LitElement {

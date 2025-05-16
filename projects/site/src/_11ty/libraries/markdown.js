@@ -1,4 +1,5 @@
 import markdownIt from 'markdown-it';
+import markdownItLink from 'markdown-it-link-attributes';
 
 const markdown = markdownIt({
   html: true,
@@ -51,5 +52,15 @@ markdown.renderer.rules.paragraph_open = renderer;
 markdown.renderer.rules.bullet_list_open = renderer;
 markdown.renderer.rules.ordered_list_open = renderer;
 // markdown.renderer.rules.code_inline = renderer; /* TODO: fix code inline renderer */
+
+markdown.use(markdownItLink, {
+  matcher(href) {
+    return href.match(/^https?:\/\//);
+  },
+  attrs: {
+    target: '_blank',
+    rel: 'noopener'
+  }
+});
 
 export default markdown;
