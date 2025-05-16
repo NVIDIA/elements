@@ -11,6 +11,8 @@
 
 Reach out to our slack support chanel or find additional resources in our Figma libraries.
 
+{% svg-logos %}
+
 <section nve-layout="row gap:sm pad-bottom:lg">
   <nve-button>
     <a href="http://nv/elements-slack" target="_blank"><svg width="18" height="18"><use href="#slack-icon-svg"></use></svg> Slack Support</a>

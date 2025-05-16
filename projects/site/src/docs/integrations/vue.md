@@ -7,9 +7,11 @@
 
 # {{ title }}
 
+{% svg-logos 'vue' %}
+
 <div nve-layout="row gap:xs">
   <nve-button>
-    <a href="https://NVIDIA.github.io/elements/starters/vue/" target="_blank"><svg width="18" height="18"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#vue-svg"></use></svg> Demo</a>
+    <a href="https://NVIDIA.github.io/elements/starters/vue/" target="_blank"><svg width="18" height="18"><use href="#vue-svg"></use></svg> Demo</a>
   </nve-button>
 
   <nve-button>
