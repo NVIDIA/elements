@@ -87,7 +87,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   }
 
   #updatePopoverType() {
-    this.host.popover = this.host.popoverType && this.host.popoverType !== 'hint' ? this.host.popoverType : 'auto';
+    this.host.popover = this.host.popoverType;
   }
 
   #pointerdownWithinModal = false;
