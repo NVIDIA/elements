@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.4...@nvidia-elements/core-v1.34.5) (2025-05-16)
+
+
+### Bug Fixes
+
+* **elements:** accordion expand single ([fb317d9](https://github.com/NVIDIA/elements/commit/fb317d9d59e9cf992e104553638cc597963b5f0b))
+
 ## [@nvidia-elements/core-v1.34.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.3...@nvidia-elements/core-v1.34.4) (2025-05-14)
 
 
