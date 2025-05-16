@@ -5,7 +5,6 @@ import markdownIt from 'markdown-it';
 import { createPlaygroundURLFromStorySource } from '@internals/elements-api';
 import { MetadataService } from '@internals/metadata';
 import { camelToKebab } from '../utils/index.js';
-import markdown from '../libraries/markdown.js';
 
 const md = markdownIt();
 const metadata = await MetadataService.getMetadata();
@@ -65,7 +64,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
     ? /* html */ `
 <nve-api-canvas id="${story.id}">
 ${playgroundButton}
-<template>${markdown.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>
+<template>${md.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>
 ${
   config.inline
     ? story.template.replace(/\n\n/g, '\n')

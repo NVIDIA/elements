@@ -47,6 +47,8 @@ import '@nvidia-elements/core/button/define.js';
 
 <nve-divider></nve-divider>
 
+{% svg-logos %}
+
 <section nve-layout="row gap:sm align:center">
   <nve-button>
     <a href="./docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>

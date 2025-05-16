@@ -54,6 +54,7 @@
         ".11ty-vite"
       ],
       "dependencies": [
+        "clean",
         "../elements:build",
         "../styles:build",
         "../themes:build",
