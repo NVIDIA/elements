@@ -3,8 +3,8 @@ import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { property } from 'lit/decorators/property.js';
 import type { Container, Prominence, SupportStatus } from '@nvidia-elements/core/internal';
-import { attachInternals, useStyles, supportStateStyles } from '@nvidia-elements/core/internal';
-import type { Alert } from './alert.js';
+import { attachInternals, useStyles, supportStateStyles, audit } from '@nvidia-elements/core/internal';
+import { Alert } from './alert.js';
 import styles from './alert-group.css?inline';
 
 /**
@@ -23,12 +23,14 @@ import styles from './alert-group.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2519-54572&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
  */
+@audit()
 export class AlertGroup extends LitElement {
   static styles = useStyles([supportStateStyles, styles]);
 
   static readonly metadata = {
     tag: 'nve-alert-group',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: [Alert.metadata.tag]
   };
 
   /** Defines visual treatment to represent a ongoing task or support status. */

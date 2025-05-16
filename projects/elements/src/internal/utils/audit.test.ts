@@ -1,75 +1,75 @@
-import { describe, expect, it } from 'vitest';
-import {
-  getCrossShadowRootAnchorWarning,
-  getExcessiveInstanceLimitWarning,
-  getIdMatchNotFoundWarning,
-  getInvalidParentWarning,
-  getInvalidSlotsWarning,
-  getInvalidSlottedChildrenWarning,
-  getSSRMismatchWarning,
-  getUseElementWarning
-} from './audit.js';
+import { html, LitElement } from 'lit';
+import { customElement } from 'lit/decorators/custom-element.js';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { auditSlots, auditParentElement, auditAlternates } from './audit.js';
+import { createFixture, removeFixture } from '@nvidia-elements/testing';
 
-describe('getExcessiveInstanceLimitWarning', () => {
-  it('should return warning message for excessive instance limit', () => {
-    expect(getExcessiveInstanceLimitWarning(10, 'test-element')).toBe(
-      'Excessive rendering of 10 test-element were detected in DOM. Recycle/reuse elements when possible to improve application performance.'
-    );
+@customElement('audit-test-element')
+class AuditTestElement extends LitElement {
+  static readonly metadata = {
+    tag: 'audit-test-element',
+    version: '0.0.0',
+    children: ['audit-test-element-slotted', 'p']
+  };
+
+  render() {
+    return html`<slot></slot>`;
+  }
+}
+
+@customElement('audit-test-parent-element')
+class AuditTestParentElement extends LitElement {
+  static readonly metadata = {
+    tag: 'audit-test-parent-element',
+    version: '0.0.0',
+    parents: ['valid-audit-test-parent-element']
+  };
+}
+
+describe('audit', () => {
+  let fixture: HTMLElement;
+  let element: AuditTestElement;
+  let parent: AuditTestParentElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+    <audit-test-parent-element>
+      <audit-test-element><p></p></audit-test-element>
+    </audit-test-parent-element>`);
+    element = fixture.querySelector('audit-test-element') as AuditTestElement;
+    parent = fixture.querySelector('audit-test-parent-element') as AuditTestParentElement;
   });
-});
 
-describe('getInvalidSlotsWarning', () => {
-  it('should return warning message for invalid slotted elements', () => {
-    expect(getInvalidSlotsWarning('test-element', ['test-element-one', 'test-element-two'])).toBe(
-      'Invalid slotted elements detected in test-element. Allowed: test-element-one, test-element-two'
-    );
+  afterEach(() => {
+    removeFixture(fixture);
   });
-});
 
-describe('getInvalidParentWarning', () => {
-  it('should return warning message for invalid parent element', () => {
-    expect(getInvalidParentWarning('test-element', 'test-element-parent')).toBe(
-      'Element test-element can only be used as a direct child of test-element-parent.'
+  it('auditSlots should return invalid elements and valid elements', () => {
+    const [invalidElements, validElements] = auditSlots(
+      element as unknown as HTMLElement & {
+        constructor: { metadata?: { children?: string[]; disallowedChildren?: string[] } };
+      }
     );
+    expect(invalidElements.length).toBe(0);
+    expect(validElements).toEqual(['template', 'audit-test-element-slotted', 'p']);
   });
-});
 
-describe('getIdMatchNotFoundWarning', () => {
-  it('should return warning message for id selectors unmatched in DOM', () => {
-    expect(getIdMatchNotFoundWarning('no-id-found-test-element')).toBe(
-      'Provided id "no-id-found-test-element" was not found in DOM'
+  it('auditParentElement should return parent elements', () => {
+    const [valid, validParents] = auditParentElement(
+      parent as unknown as HTMLElement & { constructor: { metadata?: { parents?: string[] } } }
     );
+    expect(valid).toBe(false);
+    expect(validParents[0]).toBe('valid-audit-test-parent-element');
   });
-});
 
-describe('getSSRMismatchWarning', () => {
-  it('should return warning message for hydration mismatch', () => {
-    expect(getSSRMismatchWarning('nve-tree')).toBe(
-      'nve-tree rendered on the client with mismatched SSR content. https://lit.dev/docs/ssr/overview/'
+  it('auditAlternates should return alternates', () => {
+    const alternates = auditAlternates(
+      element as unknown as HTMLElement & {
+        constructor: { metadata?: { alternates?: { name: string; use: string }[] } };
+      },
+      [{ name: 'p', use: 'span' }]
     );
-  });
-});
-
-describe('getCrossShadowRootAnchorWarning', () => {
-  it('should return warning message for cross shadow root anchoring', () => {
-    expect(getCrossShadowRootAnchorWarning('nve-tooltip')).toBe(
-      '(deprecated) nve-tooltip was provided an anchor outside of its render root. https://NVIDIA.github.io/elements/docs/foundations/popovers/#shadow-root-anchoring'
-    );
-  });
-});
-
-describe('getInvalidSlottedChildrenWarning', () => {
-  it('should return warning message for invalid slotted children', () => {
-    expect(getInvalidSlottedChildrenWarning('test-element', ['test-element-one', 'test-element-two'])).toBe(
-      'Invalid slotted children detected in test-element. Disallowed: test-element-one, test-element-two'
-    );
-  });
-});
-
-describe('getUseElementWarning', () => {
-  it('should return warning message for invalid slotted children', () => {
-    expect(getUseElementWarning('test-element', 'test-element-one', 'test-element-two')).toBe(
-      'Element test-element-one found in test-element, use test-element-two instead.'
-    );
+    expect(alternates[0].found).toBe('p');
+    expect(alternates[0].use).toBe('span');
   });
 });

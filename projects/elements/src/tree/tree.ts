@@ -5,6 +5,7 @@ import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   appendRootNodeStyle,
   attachInternals,
+  audit,
   keyNavigationList,
   onChildListMutation,
   useStyles
@@ -25,6 +26,7 @@ import globalStyles from './tree.global.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  *
  */
+@audit()
 @keyNavigationList<Tree>()
 export class Tree extends LitElement {
   /**
@@ -51,7 +53,8 @@ export class Tree extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-tree',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: ['nve-tree-node']
   };
 
   _internals: ElementInternals;

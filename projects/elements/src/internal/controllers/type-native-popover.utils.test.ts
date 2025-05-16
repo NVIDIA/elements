@@ -1,6 +1,7 @@
 import { beforeEach, afterEach, vi, describe, expect, it } from 'vitest';
 import { associateAnchor, getHostAnchor, getHostTrigger, hasOpenPopover } from './type-native-popover.utils.js';
 import { LogService } from '../services/log.service.js';
+import { DOCS_LOG_URL } from '../utils/audit-logs.js';
 
 describe('associateAnchor', () => {
   it('should create a CSS Anchor Position association between two elements', async () => {
@@ -146,7 +147,9 @@ describe('getHostAnchor', () => {
 
     logSpy.mockClear();
     expect(getHostAnchor(host)).toStrictEqual(document.body);
-    expect(logSpy).toHaveBeenCalledWith('Provided id "test-anchor" was not found in DOM');
+    expect(logSpy).toHaveBeenCalledWith(
+      `Provided id "test-anchor" not found in DOM. ${DOCS_LOG_URL}#id-match-not-found`
+    );
     shadowHost.remove();
   });
 });
