@@ -4,7 +4,7 @@ import type { Size } from '@nvidia-elements/core/internal';
 import {
   appendRootNodeStyle,
   attachInternals,
-  auditParent,
+  audit,
   I18nController,
   TypeExpandableController,
   useStyles
@@ -35,7 +35,7 @@ import globalStyles from './page-panel.global.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/region_role
  *
  */
-@auditParent()
+@audit()
 export class PagePanel extends LitElement {
   /**
    * Sets the maximum size of the panel.
@@ -64,7 +64,7 @@ export class PagePanel extends LitElement {
   static readonly metadata = {
     tag: 'nve-page-panel',
     version: '0.0.0',
-    parent: 'nve-page'
+    parents: ['nve-page']
   };
 
   static elementDefinitions = {

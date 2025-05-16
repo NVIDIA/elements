@@ -16,7 +16,7 @@ import styles from './row.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  */
 @stateSelected()
-@audit({ auditSlots: true })
+@audit()
 export class GridRow extends LitElement {
   /**
    * The `selected` property or attribute can be set to `true` to indicate that the row is in a selected state.

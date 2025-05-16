@@ -1,4 +1,5 @@
 import { GlobalStateService } from '../services/global.service.js';
+import { getDuplicatePackageVersionWarning } from './audit-logs.js';
 import { isFocusable } from './focus.js';
 
 /**
@@ -138,7 +139,7 @@ function defineInternal(element: CustomElementConstructor & { metadata: { versio
     GlobalStateService.state.elementRegistry[tag] !== version &&
     globalThis?.location?.hostname === 'localhost'
   ) {
-    console.warn(`Element ${tag} version ${version} already defined, please check for duplicate package versions.`);
+    console.warn(getDuplicatePackageVersionWarning(tag, version));
   }
 }
 

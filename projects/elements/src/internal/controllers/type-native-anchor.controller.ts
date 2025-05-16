@@ -4,7 +4,7 @@ import { attachInternals } from '../utils/a11y.js';
 import { supportsNativeCSSAnchorPosition } from '../utils/supports.js';
 import { associateAnchor, getHostAnchor } from './type-native-popover.utils.js';
 import { TypeNativeAnchorFallbackController } from './type-native-anchor-fallback.controller.js';
-import { getCrossShadowRootAnchorWarning } from '../utils/audit.js';
+import { getCrossShadowRootAnchorWarning } from '../utils/audit-logs.js';
 import { LogService } from '../services/log.service.js';
 import { sameRenderRoot } from '../utils/dom.js';
 
