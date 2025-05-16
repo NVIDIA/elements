@@ -7,9 +7,11 @@
 
 # {{ title }}
 
+{% svg-logos 'javascript' %}
+
 <div nve-layout="row gap:xs">
   <nve-button>
-    <a href="https://NVIDIA.github.io/elements/starters/buildless/" target="_blank"><svg width="18" height="18"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#javascript-svg"></use></svg> Demo</a>
+    <a href="https://NVIDIA.github.io/elements/starters/buildless/" target="_blank"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> Demo</a>
   </nve-button>
 
   <nve-button>
