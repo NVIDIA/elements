@@ -209,3 +209,21 @@ export const DarkTheme = {
 </div>
   `
 }
+
+export const Audit = {
+  render: () => html`
+  <!-- invalid padding usage -->
+  <nve-card nve-layout="pad:md"></nve-card>
+
+  <!-- invalid parent element -->
+  <nve-card-header>
+    card header
+  </nve-card-header>
+  <nve-card-content>
+    card content
+  </nve-card-content>
+  <nve-card-footer>
+    card footer
+  </nve-card-footer>
+  `
+};

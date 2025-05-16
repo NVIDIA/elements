@@ -3,7 +3,14 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
-import { BaseButton, stateSelected, useStyles, keyNavigationList, attachInternals } from '@nvidia-elements/core/internal';
+import {
+  BaseButton,
+  stateSelected,
+  useStyles,
+  keyNavigationList,
+  attachInternals,
+  audit
+} from '@nvidia-elements/core/internal';
 import tabsItemStyleSheet from './tabs-item.css?inline';
 import tabsStyleSheet from './tabs.css?inline';
 
@@ -30,6 +37,7 @@ import tabsStyleSheet from './tabs.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  * @responsive false
  */
+@audit()
 @stateSelected<TabsItem>()
 export class TabsItem extends BaseButton {
   /**
@@ -41,7 +49,8 @@ export class TabsItem extends BaseButton {
 
   static readonly metadata = {
     tag: 'nve-tabs-item',
-    version: '0.0.0'
+    version: '0.0.0',
+    parents: ['nve-tabs']
   };
 
   render() {
@@ -75,6 +84,7 @@ export class TabsItem extends BaseButton {
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  * @responsive false
  */
+@audit()
 @keyNavigationList<Tabs>()
 export class Tabs extends LitElement {
   /**
@@ -96,7 +106,8 @@ export class Tabs extends LitElement {
 
   static readonly metadata = {
     tag: 'nve-tabs',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: ['nve-tabs-item']
   };
 
   /** @private */

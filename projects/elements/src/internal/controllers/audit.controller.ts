@@ -1,20 +1,19 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
 import { GlobalStateService } from '../services/global.service.js';
-import { LogService } from '../services/log.service.js';
-import {
-  auditSlots,
-  getInvalidSlotsWarning,
-  getExcessiveInstanceLimitWarning,
-  auditAlternates
-} from '../utils/audit.js';
+import { auditSlots, auditAlternates, auditParentElement } from '../utils/audit.js';
 
 export const excessiveInstanceLimit = 50;
 
 export interface AuditOptions {
   excessiveInstanceLimit?: number;
-  auditSlots?: boolean;
   alternates?: { name: string; use: string }[];
+}
+
+export interface AuditMetadata {
+  parents?: string[];
+  children?: string[];
+  disallowedChildren?: string[];
 }
 
 interface AuditRegistry {
@@ -24,7 +23,12 @@ interface AuditRegistry {
   };
 }
 
-export function audit<T extends Audit>(options: AuditOptions): ClassDecorator {
+async function log(message: string) {
+  const { LogService } = await import('../services/log.service.js');
+  LogService.warn(message);
+}
+
+export function audit<T extends Audit>(options: AuditOptions = {}): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
     target.addInitializer((instance: T) => new AuditController(instance, options));
 }
@@ -40,6 +44,10 @@ export class AuditController<T extends Audit> implements ReactiveController {
     return GlobalStateService.state.env === 'production';
   }
 
+  get #hostMetadata() {
+    return (this.host.constructor as unknown as { metadata: AuditMetadata }).metadata;
+  }
+
   constructor(
     private host: T,
     private options: AuditOptions
@@ -53,9 +61,11 @@ export class AuditController<T extends Audit> implements ReactiveController {
   async hostConnected() {
     await this.host.updateComplete;
     if (!this.#production) {
-      this.#auditSlots();
-      this.#auditExcessiveInstanceLimit();
-      this.#auditAlternates();
+      void this.#auditExcessiveInstanceLimit();
+      void this.#auditSlots();
+      void this.#auditAlternates();
+      void this.#auditParentElement();
+      void this.#auditInvalidLayoutUtilities();
     }
   }
 
@@ -69,13 +79,14 @@ export class AuditController<T extends Audit> implements ReactiveController {
     }
   }
 
-  #auditExcessiveInstanceLimit() {
+  async #auditExcessiveInstanceLimit() {
     if (this.options.excessiveInstanceLimit !== undefined) {
       if (
         this.#hostAuditState.count > this.options.excessiveInstanceLimit &&
         !this.#hostAuditState.excessiveInstanceLimitAudited
       ) {
-        LogService.warn(getExcessiveInstanceLimitWarning(this.#hostAuditState.count, this.host.localName));
+        const { getExcessiveInstanceLimitWarning } = await import('../utils/audit-logs.js');
+        void log(getExcessiveInstanceLimitWarning(this.#hostAuditState.count, this.host.localName));
         this.#update({
           [this.host.localName]: { count: this.#hostAuditState.count + 1, excessiveInstanceLimitAudited: true }
         });
@@ -93,22 +104,46 @@ export class AuditController<T extends Audit> implements ReactiveController {
     }
   }
 
-  #auditSlots() {
-    if (this.options.auditSlots) {
+  #update(audit: Partial<AuditRegistry>) {
+    GlobalStateService.dispatch('NVE_ELEMENTS_AUDIT_UPDATE', { audit });
+  }
+
+  async #auditSlots() {
+    if (this.#hostMetadata.children || this.#hostMetadata.disallowedChildren) {
       const [invalidElements, validElements] = auditSlots(this.host);
       if (invalidElements.length) {
-        LogService.warn(getInvalidSlotsWarning(this.host.localName, validElements));
+        const { getInvalidSlottedChildrenWarning } = await import('../utils/audit-logs.js');
+        void log(getInvalidSlottedChildrenWarning(this.host.localName, validElements));
       }
     }
   }
 
-  #auditAlternates() {
+  async #auditAlternates() {
     if (this.options.alternates) {
-      auditAlternates(this.host, this.options.alternates).forEach(warning => LogService.warn(warning));
+      const alternates = auditAlternates(this.host, this.options.alternates);
+      if (alternates.length) {
+        const { getUseElementWarning } = await import('../utils/audit-logs.js');
+        alternates.forEach(warning => {
+          void log(getUseElementWarning(this.host.localName, warning.found, warning.use));
+        });
+      }
     }
   }
 
-  #update(audit: Partial<AuditRegistry>) {
-    GlobalStateService.dispatch('NVE_ELEMENTS_AUDIT_UPDATE', { audit });
+  async #auditParentElement() {
+    if (this.#hostMetadata.parents) {
+      const [valid, validParents] = auditParentElement(this.host);
+      if (!valid) {
+        const { getInvalidParentWarning } = await import('../utils/audit-logs.js');
+        void log(getInvalidParentWarning(this.host.localName, validParents.join(', ')));
+      }
+    }
+  }
+
+  async #auditInvalidLayoutUtilities() {
+    if (this.host.matches('[nve-layout*="pad"]')) {
+      const { getInvalidPaddingLayoutUtilityWarning } = await import('../utils/audit-logs.js');
+      void log(getInvalidPaddingLayoutUtilityWarning(this.host.localName));
+    }
   }
 }

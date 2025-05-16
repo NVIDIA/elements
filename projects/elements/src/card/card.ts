@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
-import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
+import { audit, hostAttr, useStyles } from '@nvidia-elements/core/internal';
 import cardStyleSheet from './card.css?inline';
 import cardHeaderStyleSheet from './card-header.css?inline';
 import cardContentStyleSheet from './card-content.css?inline';
@@ -23,6 +23,7 @@ import cardFooterStyleSheet from './card-footer.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
+@audit()
 export class Card extends LitElement implements ContainerElement {
   /** flat (embed into parent container) or full (full parent container width) */
   @property({ type: String, reflect: true }) container?: 'flat' | 'full';
@@ -62,12 +63,14 @@ export class Card extends LitElement implements ContainerElement {
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
+@audit()
 export class CardHeader extends LitElement {
   static styles = useStyles([cardHeaderStyleSheet]);
 
   static readonly metadata = {
     tag: 'nve-card-header',
-    version: '0.0.0'
+    version: '0.0.0',
+    parents: ['nve-card']
   };
 
   @hostAttr() slot = 'header';
@@ -97,12 +100,14 @@ export class CardHeader extends LitElement {
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
+@audit()
 export class CardContent extends LitElement {
   static styles = useStyles([cardContentStyleSheet]);
 
   static readonly metadata = {
     tag: 'nve-card-content',
-    version: '0.0.0'
+    version: '0.0.0',
+    parents: ['nve-card']
   };
 
   render() {
@@ -122,12 +127,14 @@ export class CardContent extends LitElement {
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
+@audit()
 export class CardFooter extends LitElement {
   static styles = useStyles([cardFooterStyleSheet]);
 
   static readonly metadata = {
     tag: 'nve-card-footer',
-    version: '0.0.0'
+    version: '0.0.0',
+    parents: ['nve-card']
   };
 
   @hostAttr() slot = 'footer';
