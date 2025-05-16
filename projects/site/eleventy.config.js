@@ -1,7 +1,6 @@
 import { EleventyRenderPlugin, IdAttributePlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
-import markdownItLink from 'markdown-it-link-attributes';
 
 import { BASE_URL } from './src/_11ty/layouts/common.js';
 import { searchPlugin } from './src/_11ty/plugins/search.js';
@@ -9,19 +8,51 @@ import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
 import { apiShortcode, storyShortcode } from './src/_11ty/shortcodes/index.js';
+import { svgLogosShortcode } from './src/_11ty/shortcodes/svg-logos.js';
 import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
 import { MetadataService } from '@internals/metadata';
 
 const metadata = await MetadataService.getMetadata();
 
-// Exclude high memory usage components.
-// These components have a high frequency of use and large amount of inlined declarative shadow DOM CSS
-const ssrExcludeEntrypoints = new Set(['@nvidia-elements/core/grid', '@nvidia-elements/core/tree']);
+// Temporary:Exclude certain components that have low performance gains from SSR or high inline
+// This minimizes the memory footprint of Rollup which builds a dependency graph of all pages
+const ssrExcludeEntrypoints = new Set([
+  '@nvidia-elements/core/app-header',
+  '@nvidia-elements/core/avatar',
+  '@nvidia-elements/core/breadcrumb',
+  '@nvidia-elements/core/combobox',
+  '@nvidia-elements/core/copy-button',
+  '@nvidia-elements/core/dialog',
+  '@nvidia-elements/core/dot',
+  '@nvidia-elements/core/drawer',
+  '@nvidia-elements/core/dropdown',
+  '@nvidia-elements/core/dropzone',
+  '@nvidia-elements/core/file',
+  '@nvidia-elements/core/grid',
+  '@nvidia-elements/core/notification',
+  '@nvidia-elements/core/page-loader',
+  '@nvidia-elements/core/pagination',
+  '@nvidia-elements/core/panel',
+  '@nvidia-elements/core/preferences-input',
+  '@nvidia-elements/core/progressive-filter-chip',
+  '@nvidia-elements/core/resize-handle',
+  '@nvidia-elements/core/tag',
+  '@nvidia-elements/core/toast',
+  '@nvidia-elements/core/toggletip',
+  '@nvidia-elements/core/tooltip',
+  '@nvidia-elements/core/tree'
+]);
 
-const entrypoints = metadata['@nvidia-elements/core'].elements
-  .filter(e => e.manifest?.metadata?.entrypoint && !ssrExcludeEntrypoints.has(e.manifest?.metadata?.entrypoint))
-  .map(e => `node_modules/${e.manifest.metadata.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`);
+const entrypoints = [
+  ...new Set(
+    metadata['@nvidia-elements/core'].elements
+      .filter(e => e.manifest?.metadata?.entrypoint && !ssrExcludeEntrypoints.has(e.manifest?.metadata?.entrypoint))
+      .map(
+        e => `node_modules/${e.manifest.metadata.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`
+      )
+  )
+];
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
@@ -29,16 +60,6 @@ export default function (eleventyConfig) {
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
-
-  const markdownItLinkOptions = {
-    matcher(href) {
-      return href.match(/^https?:\/\//);
-    },
-    attrs: {
-      target: '_blank',
-      rel: 'noopener'
-    }
-  };
 
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',
@@ -72,12 +93,11 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.setLibrary('md', markdown);
-  eleventyConfig.amendLibrary('md', mdLib => mdLib.use(markdownItLink, markdownItLinkOptions));
 
   eleventyConfig.addAsyncShortcode('story', storyShortcode);
   eleventyConfig.addAsyncShortcode('api', apiShortcode);
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
-
+  eleventyConfig.addShortcode('svg-logos', svgLogosShortcode);
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
   eleventyConfig.addTransform('anchor-generator', anchorGeneratorTransform);
   eleventyConfig.addTransform('html-minify', htmlMinifyTransform);

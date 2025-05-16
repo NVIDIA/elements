@@ -18,7 +18,9 @@ when the user has scrolled to the end of the current scroll box. When the event 
 
 <!-- todo {% story 'nve-grid', 'PerformanceInfiniteScroll' %} -->
 
-### Lit Example <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lit-svg"></use></svg>
+{% svg-logos 'lit' %}
+
+### Lit Example <svg width="20" height="20"><use href="#lit-svg"></use></svg>
 
 ```typescript
 @customElement('batch-render-demo')
@@ -56,7 +58,7 @@ Virtual Scroll can be acheived using a virtual scroll packge such as [@lit-labs/
 
 <!-- todo {% story 'nve-grid', 'PerformanceVirtualScroll' %} -->
 
-### Lit Example <svg width="20" height="20"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lit-svg"></use></svg>
+### Lit Example <svg width="20" height="20"><use href="#lit-svg"></use></svg>
 
 ```typescript
 @customElement('grid-virtual-scroll-demo')

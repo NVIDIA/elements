@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { renderBaseHead, IS_MR_PREVIEW, IS_DEV_MODE } from './_11ty/layouts/common.js';
+import { svgLogosShortcode } from './_11ty/shortcodes/svg-logos.js';
 
 const BASE_HEAD = renderBaseHead({ title: 'Elements', disableTheme: true });
 const styles = readFileSync(new URL('./index.css', import.meta.url), 'utf-8');
@@ -146,6 +147,7 @@ export function render() {
           </div>
         </section>
 
+        ${svgLogosShortcode()}
         <!-- Section : Work -->
         <section id="works-for-you">
           <div class="radial-gradient-overlay"></div>
