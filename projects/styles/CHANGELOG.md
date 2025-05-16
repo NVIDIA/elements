@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.9.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.9.3...@nvidia-elements/styles-v1.9.4) (2025-05-16)
+
+
+### Bug Fixes
+
+* **styles:** increase the view transition duration by 400ms to smooth out the docs navigation ([571d9aa](https://github.com/NVIDIA/elements/commit/571d9aa4043765e49d2420ab04bda077efaeac8a))
+
 ## [@nvidia-elements/styles-v1.9.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.9.2...@nvidia-elements/styles-v1.9.3) (2025-04-15)
 
 
