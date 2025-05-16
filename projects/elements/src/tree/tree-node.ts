@@ -7,6 +7,7 @@ import {
   TypeExpandableController,
   TypeSelectableController,
   attachInternals,
+  audit,
   getFlattenedFocusableItems,
   hostAttr,
   stateExpanded,
@@ -37,6 +38,7 @@ import { updateNodeSelection } from './utils.js';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  *
  */
+@audit()
 @typeSSR({ log: false }) // warning about ssr mismatch disabled as tree node will never be a 1:1 match in ssr due to performance constraints and slot complexity
 @typeAnchor()
 @stateSelected()
@@ -106,7 +108,8 @@ export class TreeNode extends LitElement {
 
   static metadata = {
     tag: 'nve-tree-node',
-    version: '0.0.0'
+    version: '0.0.0',
+    parents: ['nve-tree', 'nve-tree-node']
   };
 
   static styles = useStyles([styles]);

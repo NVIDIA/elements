@@ -5,7 +5,8 @@ import {
   appendRootNodeStyle,
   getFlattenedFocusableItems,
   isSimpleFocusable,
-  useStyles
+  useStyles,
+  audit
 } from '@nvidia-elements/core/internal';
 import type { Dropdown } from '@nvidia-elements/core/dropdown';
 import globalStyles from './dropdown-group.global.css?inline';
@@ -25,12 +26,14 @@ import globalStyles from './dropdown-group.global.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  * @stable false
  */
+@audit()
 export class DropdownGroup extends LitElement {
   static styles = useStyles([]);
 
   static readonly metadata = {
     tag: 'nve-dropdown-group',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: ['nve-dropdown']
   };
 
   @queryAssignedElements() protected dropdowns!: Dropdown[];

@@ -1,5 +1,5 @@
 import { LogService } from '../services/log.service.js';
-import { getIdMatchNotFoundWarning } from '../utils/audit.js';
+import { getIdMatchNotFoundWarning } from '../utils/audit-logs.js';
 import { generateId, getFlatDOMTree, getFlattenedDOMTree } from '../utils/dom.js';
 
 export interface AnchorStyle extends CSSStyleDeclaration {

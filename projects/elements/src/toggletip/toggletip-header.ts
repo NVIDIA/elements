@@ -1,5 +1,5 @@
 import { html, LitElement } from 'lit';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { audit, useStyles } from '@nvidia-elements/core/internal';
 import styles from './toggletip-header.css?inline';
 
 /**
@@ -13,12 +13,14 @@ import styles from './toggletip-header.css?inline';
  * @storybook https://NVIDIA.github.io/elements/docs/elements/toggletip/
  *
  */
+@audit()
 export class ToggletipHeader extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
     tag: 'nve-toggletip-header',
-    version: '0.0.0'
+    version: '0.0.0',
+    parents: ['nve-toggletip']
   };
 
   render() {

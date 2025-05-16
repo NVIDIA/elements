@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
-import { useStyles, attachInternals, keyNavigationList, appendRootNodeStyle } from '@nvidia-elements/core/internal';
+import { useStyles, attachInternals, keyNavigationList, appendRootNodeStyle, audit } from '@nvidia-elements/core/internal';
 import type { MenuItem } from './menu-item.js';
 import styles from './menu.css?inline';
 import globalStyles from './menu.global.css?inline';
@@ -21,13 +21,15 @@ import globalStyles from './menu.global.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=DjsMr3p502i01oCU-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
+@audit()
 @keyNavigationList<Menu>()
 export class Menu extends LitElement {
   static styles = useStyles([styles]);
 
   static readonly metadata = {
     tag: 'nve-menu',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: ['nve-menu-item']
   };
 
   static elementDefinitions = {};

@@ -2,7 +2,7 @@ import type { ReactiveController, ReactiveElement, RenderOptions, TemplateResult
 import type { LegacyDecoratorTarget } from '../types/index.js';
 import { render } from 'lit';
 import { LogService } from '../services/log.service.js';
-import { getSSRMismatchWarning } from '../utils/audit.js';
+import { getSSRMismatchWarning } from '../utils/audit-logs.js';
 import { getEnv } from '../services/global.utils.js';
 
 type UnprotectedLitElement = ReactiveElement & {
