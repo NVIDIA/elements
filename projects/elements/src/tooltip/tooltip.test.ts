@@ -41,6 +41,14 @@ describe(Tooltip.metadata.tag, () => {
     expect(element.popoverType).toBe('hint');
   });
 
+  it('should open hint popover type should set the popover attribute type to manual to avoid closing other open popover="auto" elements', async () => {
+    await elementIsStable(element);
+
+    // type hint will close other type hint popovers but not auto popovers
+    // browsers that do not support type hint will fall back to manual
+    expect(element.popover).toBe('hint');
+  });
+
   it('should default to positioning on the top of an anchor', async () => {
     await elementIsStable(element);
     expect(element.position).toBe('top');

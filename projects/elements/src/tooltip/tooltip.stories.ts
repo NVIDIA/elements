@@ -10,6 +10,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/badge/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/dialog/define.js';
 import type { Badge } from '@nvidia-elements/core/badge';
 import type { Tooltip } from '@nvidia-elements/core/tooltip';
 
@@ -265,5 +266,18 @@ export const CrossShadowRootAnchorPosition = {
 
 <cross-shadow-root-anchor-position-demo></cross-shadow-root-anchor-position-demo>
 <nve-tooltip id="cross-root-tooltip" hidden behavior-trigger>cross root tooltip</nve-tooltip>
+  `
+};
+
+export const NestedDynamic = {
+  render: () => html`
+<nve-button popovertarget="dialog">open</nve-button>
+<nve-dialog id="dialog" size="lg" modal closable>
+  <nve-button popovertarget="tooltip">button</nve-button>
+  <section>
+    <button popovertarget="tooltip">button</button>
+  </section>
+</nve-dialog>
+<nve-tooltip id="tooltip">test</nve-tooltip>
   `
 };
