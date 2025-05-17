@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.5...@nvidia-elements/core-v1.34.6) (2025-05-17)
+
+
+### Bug Fixes
+
+* **elements:** improve audit log messaging ([c966c1f](https://github.com/NVIDIA/elements/commit/c966c1fb653676838a06c62473f37ec69874ed8e))
+
 ## [@nvidia-elements/core-v1.34.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.4...@nvidia-elements/core-v1.34.5) (2025-05-16)
 
 
