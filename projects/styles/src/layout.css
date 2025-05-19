@@ -261,7 +261,7 @@
   }
 }
 
-/* rows fill unless they are nested with child inline rows */
-:not([nve-layout~='row']) > [nve-layout~='row'] {
+/* rows fill available space unless they are inline nested or an aligned position */
+:not([nve-layout~='row']) > [nve-layout~='row']:not([nve-layout*='align:']) {
   width: 100%;
 }
