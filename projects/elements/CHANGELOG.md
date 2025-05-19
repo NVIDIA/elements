@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.7...@nvidia-elements/core-v1.34.8) (2025-05-19)
+
+
+### Bug Fixes
+
+* **elements:** css anchor position within grid scroll ([43a3c54](https://github.com/NVIDIA/elements/commit/43a3c540dc217db227f5ba32bfb7a6a4fb1248e0)), closes [#126](https://github.com/NVIDIA/elements/issues/126)
+
 ## [@nvidia-elements/core-v1.34.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.6...@nvidia-elements/core-v1.34.7) (2025-05-19)
 
 
