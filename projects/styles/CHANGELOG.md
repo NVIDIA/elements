@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.9.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.9.4...@nvidia-elements/styles-v1.9.5) (2025-05-19)
+
+
+### Bug Fixes
+
+* **styles:** row alignment ([70d5916](https://github.com/NVIDIA/elements/commit/70d591640b9597c3301bc231db28bd7c5973e4d5))
+
 ## [@nvidia-elements/styles-v1.9.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.9.3...@nvidia-elements/styles-v1.9.4) (2025-05-16)
 
 
