@@ -20,7 +20,7 @@
   </nve-button>
 </div>
 
-To use Elements in [React (v19)](https://https://react.dev/) follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
+To use Elements in [React (v19)](https://react.dev/) follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
 elements can be imported and used within React jsx and tsx files.
 
 ```typescript
