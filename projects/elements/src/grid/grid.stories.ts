@@ -597,6 +597,24 @@ export const RowSort = {
   `
 };
 
+export const ContentVisibilityCSSAnchor = {
+  render: () => html`
+  <nve-grid style="height: 200px;">
+    <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
+    <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
+    <nve-grid-row><nve-grid-cell><span id="target">Target 1</span></nve-grid-cell></nve-grid-row>
+    <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
+    <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
+    <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
+    <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
+    <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
+    <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
+    <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
+  </nve-grid>
+  <nve-tooltip anchor="target" position="right">My tooltip</nve-tooltip>
+  `
+};
+
 export function sortStringKeys<T>(list: T[], key: string, sortType: 'none' | 'ascending' | 'descending') {
   if (sortType === 'ascending') {
     return list.sort((a: {}, b: {}) => a[key].localeCompare(b[key]));
