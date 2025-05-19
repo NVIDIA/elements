@@ -551,6 +551,70 @@ describe('row visual', () => {
 
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
+
+  test('rows with alignments should not fill available space respecting the parent width and match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'rows-with-alignment',
+      /* html */ `
+      <section nve-layout="column gap:md pad:sm align:center" style="width: 280px">
+        <section nve-layout="row gap:sm align:left" style="min-width: 200px">
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="row gap:sm align:center" style="min-width: 200px">
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="row gap:sm align:right" style="min-width: 200px">
+          <div></div>
+          <div></div>
+        </section>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('rows with nested aligned rows should match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'nested-rows-with-alignment',
+      /* html */ `
+      <section nve-layout="row gap:md pad:sm align:space-between" style="width: 720px">
+        <section nve-layout="row gap:sm align:left" style="min-width: 180px">
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="row gap:sm align:center" style="min-width: 180px">
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="row gap:sm align:right" style="min-width: 180px">
+          <div></div>
+          <div></div>
+        </section>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('rows should fill available space of the parent width when using "full" and match visual baseline', async () => {
+    const report = await visualRunner.render(
+      'rows-with-full',
+      /* html */ `
+      <section nve-layout="column gap:md pad:sm" style="width: 280px">
+        <section nve-layout="row gap:sm align:center full">
+          <div></div>
+          <div></div>
+        </section>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
 });
 
 describe('grid visual', () => {
