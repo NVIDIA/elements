@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.6...@nvidia-elements/core-v1.34.7) (2025-05-19)
+
+
+### Bug Fixes
+
+* **elements:** tooltip popover type ([d035ec2](https://github.com/NVIDIA/elements/commit/d035ec2dc6eec51630057eb3dc3d3fd8a1fdf186)), closes [#123](https://github.com/NVIDIA/elements/issues/123)
+
 ## [@nvidia-elements/core-v1.34.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.5...@nvidia-elements/core-v1.34.6) (2025-05-17)
 
 
