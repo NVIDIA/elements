@@ -2,6 +2,7 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
 import { Grid } from '@nvidia-elements/core/grid';
+import type { GridRow } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 
 describe(Grid.metadata.tag, () => {
@@ -156,5 +157,45 @@ describe(`${Grid.metadata.tag}: scroll`, () => {
     element.scrollTo({ top: 20 });
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('[part="scrollbox"]').scrollTop).toBe(20);
+  });
+});
+
+describe(`${Grid.metadata.tag}: scroll`, () => {
+  let fixture: HTMLElement;
+  let element: Grid;
+  let row: GridRow;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-grid>
+        <nve-grid-header>
+          <nve-grid-column>column 1</nve-grid-column>
+          <nve-grid-column>column 2</nve-grid-column>
+          <nve-grid-column>column 3</nve-grid-column>
+          <nve-grid-column>column 4</nve-grid-column>
+        </nve-grid-header>
+        <nve-grid-row>
+          <nve-grid-cell>cell 1-1</nve-grid-cell>
+          <nve-grid-cell><span style="anchor-name: target">cell 1-2</span></nve-grid-cell>
+          <nve-grid-cell>cell 1-3</nve-grid-cell>
+          <nve-grid-cell>cell 1-4</nve-grid-cell>
+        </nve-grid-row>
+      </nve-grid>
+    `);
+    element = fixture.querySelector(Grid.metadata.tag);
+    row = element.querySelector('nve-grid-row');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should disable content-visibility for rows if CSS anchor from a nve-popover is detected', async () => {
+    await elementIsStable(element);
+    await elementIsStable(row);
+    await new Promise(resolve => setTimeout(resolve, 0));
+    const styles = globalThis.getComputedStyle(row);
+    expect(styles.contentVisibility).toBe('visible');
   });
 });
