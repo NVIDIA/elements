@@ -218,7 +218,7 @@ export class DocsSearch extends LitElement {
     const style = `--color: var(--nve-ref-color-${isNveTag ? 'blue-cobalt' : 'yellow-amber'}-1000);`;
 
     return {
-      url: result.raw_url || '',
+      url: result.raw_url + (this.searchInput.value ? `?q=${encodeURIComponent(this.searchInput.value)}` : '') || '',
       title: result.meta?.title,
       subtitle: result.raw_url || '',
       icon: icon,
@@ -234,7 +234,11 @@ export class DocsSearch extends LitElement {
         const headingAnchor = heading.replaceAll(' ', '-').toLowerCase();
 
         headings.push({
-          url: result.raw_url + '#' + headingAnchor,
+          url:
+            result.raw_url +
+            (this.searchInput.value ? `?q=${encodeURIComponent(this.searchInput.value)}` : '') +
+            '#' +
+            headingAnchor,
           title: result.meta.title + ' - ' + heading,
           subtitle: result.raw_url + '#' + headingAnchor,
           icon: 'bookmark',
