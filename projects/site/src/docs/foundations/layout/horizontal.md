@@ -6,7 +6,7 @@
 ---
 
 <style>
-  nve-api-canvas {
+  nvd-canvas {
     section[nve-layout~='row'][nve-layout*='align'] {
       min-height: 220px !important;
     }

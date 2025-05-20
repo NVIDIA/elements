@@ -5,7 +5,7 @@ import '@nvidia-elements/core/logo/define.js';
 
 export default {
   title: 'Internal/Layout/Responsive',
-  element: 'responsive'
+  component: 'layout responsive'
 };
 
 export const GapResponsive = {

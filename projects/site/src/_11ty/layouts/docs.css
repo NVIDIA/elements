@@ -60,7 +60,7 @@ code > nve-codeblock {
   width: 100%;
 }
 
-nve-api-canvas {
+nvd-canvas {
   min-height: 140px;
 }
 

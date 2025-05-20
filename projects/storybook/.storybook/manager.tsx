@@ -2,13 +2,9 @@ import React from 'react';
 import { addons, types, useGlobals } from '@storybook/manager-api';
 
 import '@nvidia-elements/core/button/define.js';
-import '@nvidia-elements/core/drawer/define.js';
-import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/icon/define.js';
-import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/page-header/define.js';
 import '@nvidia-elements/core/logo/define.js';
-import '@nve-internals/elements-api/system-settings/define.js';
 
 function updateTheme(themes) {
   const previewIframe = document.querySelector('#storybook-preview-iframe') as any;
@@ -51,13 +47,7 @@ const PageHeader = () => {
         <nve-button container="flat"><a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>
         <nve-button container="flat"><a href="../starters/">Starters</a></nve-button>
         <nve-button container="flat"><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button>
-        <nve-button slot="suffix" popovertarget="system-options-drawer" container="flat" id="dropdown-btn">System Themes</nve-button>
       </nve-page-header>
-      <nve-drawer id="system-options-drawer" position="right" size="sm" closable style={{'--top': '47px', '--box-shadow': '0'}}>
-        <nve-drawer-content style={{'height': 'initial', 'flex': 'initial'}}>
-          <nve-api-system-settings></nve-api-system-settings>
-        </nve-drawer-content>
-      </nve-drawer>
     </> : ''
   );
 }
@@ -72,7 +62,8 @@ addons.register('my-addon', () => {
 
 addons.setConfig({
   navSize: 300,
-  showToolbar: false,
+  showToolbar: true,
+  showAddonsPanel: false,
   enableShortcuts: false,
   sidebar: {
     showRoots: true,
@@ -87,10 +78,8 @@ declare global {
       ['nve-drawer']: any;
       ['nve-drawer-content']: any;
       ['nve-drawer-header']: any;
-      ['nve-icon-button']: any;
       ['nve-logo']: any;
       ['nve-page-header']: any;
-      ['nve-api-system-settings']: any;
     }
   }
 }

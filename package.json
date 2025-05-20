@@ -83,8 +83,7 @@
         "./projects/styles:ci",
         "./projects/testing:ci",
         "./projects/themes:ci",
-        "./projects/internals/metadata:ci",
-        "./projects/internals/elements-api:ci"
+        "./projects/internals/metadata:ci"
       ],
       "files": []
     },
@@ -201,7 +200,6 @@
       "command": "prettier --config prettier.config.js --write .",
       "dependencies": [
         "./projects/elements:lint:fix",
-        "./projects/internals/elements-api:lint:fix",
         "./projects/internals/metadata:lint:fix",
         "./projects/internals/patterns:lint:fix",
         "./projects/labs/behaviors-alpine:lint:fix",

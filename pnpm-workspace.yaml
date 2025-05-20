@@ -29,7 +29,6 @@ packages:
   - 'projects/styles'
   - 'projects/testing'
   - 'projects/themes'
-  - 'projects/internals/elements-api'
   - 'projects/internals/eslint'
   - 'projects/internals/metadata'
   - 'projects/internals/patterns'
