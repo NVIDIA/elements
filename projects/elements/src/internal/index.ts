@@ -17,6 +17,7 @@ export * from './controllers/state-selected.controller.js';
 export * from './controllers/state-pressed.controller.js';
 export * from './controllers/type-anchor.controller.js';
 export * from './controllers/type-closable.controller.js';
+export * from './controllers/type-command.controller.js';
 export * from './controllers/type-expandable.controller.js';
 export * from './controllers/type-selectable.controller.js';
 export * from './controllers/type-button.controller.js';
