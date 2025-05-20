@@ -18,7 +18,6 @@
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/forms": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",
-    "@nve-internals/elements-api": "workspace:*",
     "@nve-internals/patterns": "workspace:*",
     "html-format": "1.1.7",
     "lit": "catalog:",
@@ -62,7 +61,6 @@
         "../styles:build",
         "../themes:build",
         "../starters/lit-library:build",
-        "../internals/elements-api:build",
         "../internals/patterns:build"
       ],
       "env": {
@@ -96,8 +94,7 @@
         "../monaco:build",
         "../styles:build",
         "../themes:build",
-        "../starters/lit-library:build",
-        "../internals/elements-api:build"
+        "../starters/lit-library:build"
       ],
       "env": {
         "PAGES_BASE_URL": {

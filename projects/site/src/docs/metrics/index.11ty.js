@@ -1,6 +1,6 @@
-import { ESM_ELEMENTS_VERSION } from '@nve-internals/elements-api';
 import { MetadataService } from '@nve-internals/metadata';
 import { badgeStatus, badgeCoverage, badgeBundle, badgeLighthouse, badgeAxe } from '../../_11ty/templates/api.js';
+import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
 
 export const data = {
   title: 'Metrics',
