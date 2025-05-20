@@ -50,17 +50,7 @@ const docsNav = globalThis.document.querySelector<HTMLElement>('#docs-nav')!;
 const docsNavDisplay = docsNav.style.display;
 
 let isSearching = false;
-let searchTimeout: number;
-docsSearch.addEventListener('search-change', (event: CustomEvent) => {
-  isSearching = event.detail.length > 0;
-
-  clearTimeout(searchTimeout);
-  searchTimeout = globalThis.setTimeout(() => {
-    if (event.detail.length > 0) {
-      sendEvent('elements-docs-search', { query: event.detail });
-    }
-  }, 1000);
-});
+docsSearch.addEventListener('search-change', (event: CustomEvent) => (isSearching = event.detail.length > 0));
 docsSearch.addEventListener('search-reset', () => ((isSearching = false), toggleSideNav(true)));
 docsSearch.addEventListener('search-focus', () => toggleSideNav(false));
 docsSearch.addEventListener('search-blur', () => !isSearching && toggleSideNav(true));
@@ -68,9 +58,11 @@ docsSearch.addEventListener('search-blur', () => !isSearching && toggleSideNav(t
 const toggleSideNav = (state: boolean) => {
   docsNav.style.display = state ? docsNavDisplay : 'none';
 };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const sendEvent = (eventName: string, params: any) => {
+
+const searchParams = new URLSearchParams(globalThis.location.search);
+const query = searchParams.get('q');
+if (query) {
   if (globalThis.gtag) {
-    globalThis.gtag('event', eventName, params);
+    globalThis.gtag('event', 'elements-docs-search', { query: query });
   }
-};
+}
