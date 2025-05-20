@@ -1,10 +1,9 @@
 import fs from 'node:fs';
 
-/** base on element tags found, inline the imports for the elements and elements-api */
+/** base on element tags found, inline the imports for the elements */
 export async function elementLoaderTransform(content) {
   const LAZY = content.includes('<!-- ELEMENT_LOADER_LAZY -->');
   const ELEMENTS_PACKAGE = JSON.parse(fs.readFileSync('../elements/package.json', 'utf8'));
-  const ELEMENTS_API_PACKAGE = JSON.parse(fs.readFileSync('../internals/elements-api/package.json', 'utf8'));
   const MONACO_PACKAGE = JSON.parse(fs.readFileSync('../monaco/package.json', 'utf8'));
 
   const ELEMENTS_IMPORTS = Array.from(
@@ -16,17 +15,6 @@ export async function elementLoaderTransform(content) {
     )
   )
     .map(tagName => createImport(`@nvidia-elements/core/${tagName.replace('nve-', '')}/define.js`, LAZY))
-    .join('\n');
-
-  const ELEMENTS_API_IMPORTS = Array.from(
-    new Set(
-      Object.keys(ELEMENTS_API_PACKAGE.exports)
-        .filter(key => key.endsWith('define.js') && !key.includes('system-settings')) // system settings is dynamically loaded
-        .map(key => key.replace('./', 'nve-api-').replace('/define.js', ''))
-        .filter(tagName => content?.includes(`<${tagName}`))
-    )
-  )
-    .map(tagName => createImport(`@internals/elements-api/${tagName.replace('nve-api-', '')}/define.js`, LAZY))
     .join('\n');
 
   const MONACO_IMPORTS = Array.from(
@@ -51,7 +39,7 @@ export async function elementLoaderTransform(content) {
 
   return content.replace(
     '<head>',
-    `<head><script type="module">import '@lit-labs/ssr-client/lit-element-hydrate-support.js';\n${ELEMENTS_IMPORTS}\n${ELEMENTS_CODE_IMPORTS}\n${ELEMENTS_API_IMPORTS}\n${MONACO_IMPORTS}</script>`.replace(
+    `<head><script type="module">import '@lit-labs/ssr-client/lit-element-hydrate-support.js';\n${ELEMENTS_IMPORTS}\n${ELEMENTS_CODE_IMPORTS}\n${MONACO_IMPORTS}</script>`.replace(
       /\n/g,
       ''
     )

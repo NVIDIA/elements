@@ -32,7 +32,6 @@
         "../themes:build",
         "../labs/code:build",
         "../monaco:build",
-        "../internals/elements-api:build",
         "../internals/patterns:build"
       ],
       "env": {
@@ -60,7 +59,7 @@
         "../themes:build",
         "../labs/code:build",
         "../monaco:build",
-        "../internals/elements-api:build",
+        "../internals/metadata:build",
         "../internals/patterns:build"
       ],
       "env": {
@@ -117,7 +116,6 @@
     "@eslint/js": "catalog:",
     "@lit-labs/eleventy-plugin-lit": "catalog:",
     "@lit-labs/ssr-client": "catalog:",
-    "@internals/elements-api": "workspace:*",
     "@internals/eslint": "workspace:*",
     "@internals/metadata": "workspace:*",
     "@internals/patterns": "workspace:*",
@@ -129,7 +127,9 @@
     "@nvidia-elements/themes": "workspace:*",
     "@sentry/browser": "catalog:",
     "compare-versions": "6.1.1",
+    "fflate": "0.8.2",
     "eslint": "catalog:",
+    "html-format": "1.1.7",
     "html-minifier": "4.0.0",
     "lightningcss": "1.30.0",
     "markdown-it": "catalog:",

@@ -47,7 +47,7 @@ export const renderBaseHead = data => /* html */ `
     /* hide non-ssr elements until defined */
     nve-tree:not(:defined),
     nve-grid:not(:defined),
-    nve-api-canvas:not(:defined) {
+    nvd-canvas:not(:defined) {
       visibility: hidden !important;
     }
 
@@ -296,6 +296,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/api-design/packaging/') ? 'highlighted' : ''}><a href="docs/api-design/packaging/">Packaging</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/api-design/glossary/') ? 'highlighted' : ''}><a href="docs/api-design/glossary/">Glossary</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/api-design/logs/') ? 'highlighted' : ''}><a href="docs/api-design/logs/">Logs</a></nve-tree-node>
+    <nve-tree-node><a href="stories/">Stories</a></nve-tree-node>
   </nve-tree-node>
 </nve-tree>
 `;

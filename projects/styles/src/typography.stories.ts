@@ -3,7 +3,7 @@ import '@nvidia-elements/core/card/define.js';
 
 export default {
   title: 'Styles/Typography',
-  element: 'typography'
+  component: 'typography'
 };
 
 export const Type = {
