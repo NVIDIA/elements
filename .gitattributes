@@ -1,7 +1,5 @@
 **/.visual/*.png filter=lfs diff=lfs merge=lfs -text
 projects/internals/metadata/static/*.json filter=lfs diff=lfs merge=lfs -text
-projects/storybook/.storybook/assets/**/*.mp4 filter=lfs diff=lfs merge=lfs -text
-projects/storybook/.storybook/assets/**/*.webp filter=lfs diff=lfs merge=lfs -text
 projects/site/public/static/**/*.webp filter=lfs diff=lfs merge=lfs -text
 projects/site/public/static/**/*.jpg filter=lfs diff=lfs merge=lfs -text
 projects/site/public/static/**/*.png filter=lfs diff=lfs merge=lfs -text

@@ -3,217 +3,44 @@
   window.global = window;
 </script>
 <style>
-    html,
-    body,
-    .sbdocs-wrapper {
-      height: 100%;
-      background: var(--nve-sys-layer-canvas-background, #0b0c0f) !important;
-      color: var(--nve-sys-layer-canvas-color) !important;
-    }
+  html,
+  body,
+  .sbdocs-wrapper {
+    height: 100%;
+    background: var(--nve-sys-layer-canvas-background, #0b0c0f) !important;
+    color: var(--nve-sys-layer-canvas-color) !important;
+  }
 
-    :root {
-      --nve-config-color-scheme-light: true;
-      --nve-config-color-scheme-dark: true;
-      --nve-config-color-scheme-high-contrast: true;
-      --nve-config-scale-compact: true;
-      --nve-config-reduced-motion: true;
-    }
+  :root {
+    --nve-config-color-scheme-light: true;
+    --nve-config-color-scheme-dark: true;
+    --nve-config-color-scheme-high-contrast: true;
+    --nve-config-scale-compact: true;
+    --nve-config-reduced-motion: true;
+  }
 
-    html,
-    body,
-    * {
-      font-family: var(--nve-ref-font-family) !important;
-    }
+  html,
+  body,
+  * {
+    font-family: var(--nve-ref-font-family) !important;
+  }
 
-    .prismjs,
-    .prismjs *,
-    code {
-      font-family: monospace !important;
-    }
+  html {
+    scrollbar-color: var(--nve-ref-border-color-muted) var(--nve-sys-layer-canvas-background, transparent);
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+  }
 
-    html {
-      scrollbar-color: var(--nve-ref-border-color-muted) var(--nve-sys-layer-canvas-background, transparent);
-      scrollbar-width: thin;
-      scroll-behavior: smooth;
-    }
+  body,
+  .sbdocs.sbdocs-preview,
+  .sbdocs.sbdocs-wrapper {
+    font-family: var(--nve-ref-font-family) !important;
+    font-weight: var(--nve-ref-font-weight-regular) !important;
+    font-size: var(--nve-ref-font-size-200);
+  }
 
-    body,
-    .sbdocs.sbdocs-preview,
-    .sbdocs.sbdocs-wrapper {
-      font-family: var(--nve-ref-font-family) !important;
-      font-weight: var(--nve-ref-font-weight-regular) !important;
-      font-size: var(--nve-ref-font-size-200);
-    }
-
-    .sb-show-main.sb-main-centered #storybook-root,
-    body:has(nve-page) {
-      padding: 0 !important;
-    }
-
-    .sbdocs-content {
-      display: flex !important;
-      flex-direction: column !important;
-      gap: 24px !important;
-      max-width: 1120px !important;
-    }
-
-    .sbdocs-preview {
-      background: transparent !important;
-      box-shadow: none !important;
-      margin: 0 !important;
-      border: 0 !important;
-      overflow: visible !important;
-
-      & .css-xzp052 {
-        overflow: visible !important;
-        padding: 0 0 32px 0 !important;
-      }
-
-      .css-kdwx3d {
-        overflow: visible !important;
-      }
-
-      & .innerZoomElementWrapper div {
-        border: 0 !important;
-      }
-
-      & .playground-btn {
-        display: block;
-      }
-    }
-
-    figure {
-      margin: 24px 0 0 0 !important;
-    }
-
-    figcaption {
-      font-size: var(--nve-ref-font-size-200) !important;
-      font-weight: var(--nve-ref-font-weight-regular) !important;
-    }
-
-    .css-1kaktxp {
-      box-shadow: none !important;
-      background: transparent !important;
-
-      button {
-        background: var(--nve-sys-interaction-background) !important;
-        color: var(--nve-sys-interaction-color) !important;
-      }
-    }
-
-    .sbdocs {
-      & code {
-        color: var(--nve-sys-layer-overlay-color) !important;
-        background: var(--nve-sys-layer-overlay-background) !important;
-        border: 0 !important;
-      }
-
-      & .sbdocs-a {
-        font-family: var(--nve-ref-font-family) !important;
-        color: var(--nve-sys-text-link-color) !important;
-        text-decoration: underline !important;
-
-        &:hover {
-          color: var(--nve-sys-text-link-hover-color) !important;
-        }
-      }
-
-      &.sbdocs-preview:has([no-story-container]) {
-        margin: 0 !important;
-      }
-
-      &.sbdocs-wrapper:has([no-story-container]) {
-        padding: 0 !important;
-      }
-
-      &.sbdocs-wrapper:has([no-story-container]) .css-q22hxw {
-        max-width: initial !important;
-        overflow-x: hidden !important;
-      }
-    }
-
-    .docs-story .css-1qq744x {
-      padding-inline: 0 !important;
-    }
-
-    .sbdocs.sbdocs-wrapper {
-      padding: var(--nve-ref-space-xl) !important;
-    }
-
-    @media (min-width: 1440px) {
-      .sbdocs.sbdocs-wrapper {
-        padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl) !important;
-        gap: 5rem !important;
-      }
-    }
-
-    /* fix z-layer issue with story blocks */
-    .sbdocs.sbdocs-preview,
-    .docs-story.css-kdwx3d,
-    .css-xzp052 {
-      overflow: visible !important;
-    }
-
-    .sb-unstyled {
-      display: contents;
-    }
-
-    .sb-unstyled > [nve-text='list'] [nve-text='body'] {
-      display: inline !important;
-
-      &::before,
-      &::after {
-        content: initial !important;
-      }
-    }
-
-    [nve-text='list'] li > .sb-unstyled {
-      display: contents;
-    }
-
-    [scale='1'] {
-      transform: none !important;
-      width: 100% !important;
-    }
-
-    [nve-text='list sb'] {
-      padding: 0;
-      height: fit-content;
-      list-style: none !important;
-      margin: 50px 0 0 0 !important;
-      position: sticky !important;
-      display: none;
-      top: 50px;
-
-      li {
-        padding-bottom: 14px;
-      }
-
-      a {
-        text-decoration: none !important;
-        color: var(--nve-sys-text-muted-color) !important;
-        text-wrap: nowrap !important;
-        min-width: 150px;
-        max-width: 150px;
-        display: block;
-
-        &:hover {
-          text-decoration: underline !important;
-        }
-
-        &:visited {
-          color: var(--nve-sys-text-muted-color) !important;
-        }
-      }
-    }
-
-    #root-inner > nve-page {
-      height: 100%;
-    }
-
-    #storybook-root:has(nve-page),
-    #root-inner:has(nve-page),
-    [id*='story--']:has(nve-page) {
-      height: 100%;
-    }
+  .sb-show-main.sb-main-centered #storybook-root,
+  body:has(nve-page) {
+    padding: 0 !important;
+  }
 </style>
