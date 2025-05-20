@@ -1,25 +1,25 @@
 import { gzipSync } from 'fflate';
 import format from 'html-format';
 import packageFile from '../../../../elements/package.json' with { type: 'json' };
-import { ESM_ELEMENTS_VERSION } from '../internal/version.js';
-import { MetadataService } from '@internals/metadata'; // eslint-disable-line
+import { ESM_ELEMENTS_VERSION } from './version.js';
+import { MetadataService } from '@internals/metadata';
 
 const metrics = await MetadataService.getMetadata();
 
-export function createPlaygroundURLFromStorySource(
-  source,
-  context: {
-    id: string;
-    globals: {
-      theme: string;
-      scale: string;
-      debug: string;
-      animation: string;
-      experimental: string;
-      systemOptions: string;
-    };
-  }
-) {
+// SB context
+// {
+//   id: string;
+//   globals: {
+//     theme: string;
+//     scale: string;
+//     debug: string;
+//     animation: string;
+//     experimental: string;
+//     systemOptions: string;
+//   };
+// }
+
+export function createPlaygroundURLFromStorySource(source, context) {
   const formattedSource = format(
     source.replaceAll(' nve-theme="dark"', '').replaceAll(' nve-theme="light"', '').replaceAll(' nve-theme="root"', ''),
     ' '.repeat(2),
@@ -52,36 +52,7 @@ function createDefaultFiles(content, context) {
     .join(' ')
     .trim();
 
-  const mlvTemplate = {
-    'index.html': {
-      content: `<!doctype html>
-<html mlv-theme="${themes}">
-<head>
-  <link rel="stylesheet" href="@elements/elements/dist/index.css" />
-  <link rel="stylesheet" href="@elements/elements/dist/inter.css" />
-  <script type="module" src="./index.js"></script>${context.id.includes('foundations-layout') ? `\n<link rel="stylesheet" href="./index.css">` : ''}
-</head>
-<body mlv-text="body" mlv-layout="${content.split('\n')[0].includes('full') ? '' : 'pad:lg'}">
-
-${content.replaceAll('nve-', 'mlv-')}
-
-</body>
-</html>`
-    },
-    'index.ts': {
-      content: `${getImports(globals.scope)}`
-    },
-    'importmap.json': {
-      content: `{
-  "imports": {
-    "@elements/elements": "${CDN_MODULES_URL}/@elements/elements@0.41.0",
-    "@elements/elements/": "${CDN_MODULES_URL}/@elements/elements@0.41.0/"
-  }
-}`
-    }
-  };
-
-  const nveTemplate = {
+  const template = {
     'index.html': {
       content: `<!doctype html>
 <html nve-theme="${themes}">
@@ -118,7 +89,7 @@ ${content}
     }
   };
 
-  return globals.scope === 'mlv' ? mlvTemplate : nveTemplate;
+  return template;
 }
 
 function getImports(scope) {

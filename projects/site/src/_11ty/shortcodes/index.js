@@ -2,9 +2,9 @@ import { resolve } from 'node:path';
 import { globSync } from 'glob';
 import { readFileSync } from 'node:fs';
 import markdownIt from 'markdown-it';
-import { createPlaygroundURLFromStorySource } from '@internals/elements-api';
 import { MetadataService } from '@internals/metadata';
 import { camelToKebab } from '../utils/index.js';
+import { createPlaygroundURLFromStorySource } from '../utils/playground-url.js';
 
 const md = markdownIt();
 const metadata = await MetadataService.getMetadata();
@@ -53,7 +53,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
       ? /* html */ `
   <script type="module">
     import stories from '${path}' with { type: 'json' };
-    const canvas = document.querySelector('nve-api-canvas#${story.id}');
+    const canvas = document.querySelector('nvd-canvas#${story.id}');
     const story = stories.stories.find(s => s.id === '${story.id}');
     canvas.innerHTML = \`${playgroundButton}\` + story.template;
     canvas.source = story.template ?? '';
@@ -62,7 +62,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
 
   return story
     ? /* html */ `
-<nve-api-canvas id="${story.id}">
+<nvd-canvas id="${story.id}">
 ${playgroundButton}
 <template>${md.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>
 ${
@@ -70,6 +70,6 @@ ${
     ? story.template.replace(/\n\n/g, '\n')
     : `<iframe loading="lazy" src="${iframePath}" style="height: ${config.height}; width: 100%; border: none;" />`
 }
-</nve-api-canvas>${reload}`
+</nvd-canvas>${reload}`
     : '';
 }

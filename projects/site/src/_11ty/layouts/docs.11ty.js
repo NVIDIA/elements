@@ -55,7 +55,7 @@ export function render(data) {
           </main>
           <nve-page-panel closable hidden slot="right" size="sm" id="system-options-panel">
             <nve-page-panel-content>
-              <nve-api-system-settings></nve-api-system-settings>
+              <nvd-system-settings></nvd-system-settings>
             </nve-page-panel-content>
           </nve-page-panel>
         </nve-page>
