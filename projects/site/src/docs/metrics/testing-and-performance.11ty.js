@@ -1,6 +1,6 @@
-import { ESM_ELEMENTS_VERSION } from '@internals/elements-api';
 import { MetadataService } from '@internals/metadata';
 import { badgeCoverage, badgeBundle, badgeLighthouse } from '../../_11ty/templates/api.js';
+import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
 
 export const data = {
   title: 'Testing & Performance',

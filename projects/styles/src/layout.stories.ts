@@ -2,7 +2,7 @@ import { html } from 'lit';
 
 export default {
   title: 'Styles/Layout',
-  element: 'layout'
+  component: 'layout'
 };
 
 export const HorizontalAlignLeft = {

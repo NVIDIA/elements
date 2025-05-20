@@ -1,6 +1,6 @@
 import markdown from 'markdown-it';
 import { MetadataService } from '@internals/metadata';
-import { ESM_ELEMENTS_VERSION } from '@internals/elements-api';
+import { ESM_ELEMENTS_VERSION } from '../utils/version.js';
 
 const PACKAGE_URL = 'https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages';
 

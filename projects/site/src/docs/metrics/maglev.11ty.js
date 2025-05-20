@@ -1,6 +1,6 @@
-import { ESM_ELEMENTS_VERSION } from '@internals/elements-api';
 import { MetadataService } from '@internals/metadata';
 import { compareVersions } from 'compare-versions';
+import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
 
 export const data = {
   title: 'Maglev',

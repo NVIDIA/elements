@@ -1,4 +1,4 @@
-import { ESM_ELEMENTS_VERSION } from '@internals/elements-api';
+import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
 
 export const data = {
   title: 'Bundle Explorer',
