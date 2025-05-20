@@ -10,6 +10,7 @@ import { typeAnchor } from '../controllers/type-anchor.controller.js';
 import { typeSubmit } from '../controllers/type-submit.controller.js';
 import { typeNativePopoverTrigger } from '../controllers/type-native-popover-trigger.controller.js';
 import { stateCurrent } from '../controllers/state-current.controller.js';
+import { typeCommand } from '../controllers/type-command.controller.js';
 import { attachInternals } from '../utils/a11y.js';
 
 /**
@@ -21,6 +22,7 @@ import { attachInternals } from '../utils/a11y.js';
 @typeAnchor<BaseButton>()
 @typeSubmit<BaseButton & { form: HTMLFormElement | null }>() // override to exclude type string from getter, see comment in getter below
 @typeNativePopoverTrigger<BaseButton>()
+@typeCommand<BaseButton>()
 @stateActive<BaseButton>()
 @stateCurrent<BaseButton>()
 @statePressed<BaseButton>()
@@ -118,14 +120,38 @@ export class BaseButton extends LitElement {
    */
   @property({ type: String, reflect: true }) current: 'page' | 'step';
 
+  /**
+   * Establishing a relationship between a popover and its invoker button.
+   * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/popoverTargetElement
+   */
   @property({ type: Object }) popoverTargetElement: HTMLElement; // eslint-disable-line rulesdir/primitive-property
 
+  /**
+   * The id of the element to which the popover is applied.
+   * https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#popovertarget
+   */
   @property({ type: String, attribute: 'popovertarget', reflect: true }) popovertarget: string;
 
+  /**
+   * The popover target action to be applied to the popover target element.
+   * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/popoverTargetAction
+   */
   @property({ type: String, attribute: 'popovertargetaction', reflect: true }) popoverTargetAction:
     | 'show'
     | 'hide'
     | 'toggle';
+
+  /**
+   * The id of the element to which the command is applied.
+   * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
+   */
+  @property({ type: String, attribute: 'commandfor', reflect: true }) commandFor: string;
+
+  /**
+   * The command to be applied to the element.
+   * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
+   */
+  @property({ type: String, attribute: 'command', reflect: true }) command: string;
 
   /**
    * @private

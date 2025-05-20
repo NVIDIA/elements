@@ -9,6 +9,7 @@ import '@nvidia-elements/core/toast/define.js';
 import '@nvidia-elements/core/drawer/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/notification/define.js';
+import '@nvidia-elements/core/toggletip/define.js';
 
 export default {
   title: 'Elements/Popovers',
@@ -139,3 +140,19 @@ export const Closable = {
     </nve-dialog>
   `
 }
+
+/**
+ * @description example of declarative popovers using the Invoker Commands API
+ * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
+ * https://open-ui.org/components/invokers.explainer/#defaults
+ */
+export const InvokerCommand = {
+  render: () => html`
+    <nve-button commandfor="popover" command="toggle-popover">toggle-popover</nve-button>
+    <nve-button commandfor="popover" command="show-popover">show-popover</nve-button>
+    <nve-toggletip id="popover">
+      toggletip
+      <nve-button commandfor="popover" command="hide-popover">hide-popover</nve-button>
+    </nve-toggletip>
+  `
+};
