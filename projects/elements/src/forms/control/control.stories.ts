@@ -9,6 +9,7 @@ import '@nvidia-elements/core/checkbox/define.js';
 
 export default {
   title: 'Elements/Forms',
+  component: 'forms control'
 }
 
 export const Control = () => {

@@ -20,21 +20,28 @@
 }
 
 #story-container {
-  display: flex;
-  place-items: center;
-  place-content: center;
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
+  scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
+  scrollbar-width: thin;
 }
 
 body:has(#iframe-links:not([hidden])) #story-container {
   padding: 24px;
-
-  & > [nve-layout~='row'] {
-    width: fit-content;
-  }
 }
 
 body:has(nve-page) #story-container {
   display: contents;
+}
+
+[data-element^='layout'] {
+  & > [nve-layout] {
+    height: 100%;
+  }
+
+  nve-card {
+    min-width: 60px;
+    min-height: 60px;
+  }
 }

@@ -1,3 +1,4 @@
+import '/_internal/canvas/canvas.js';
 void import('/_internal/search/search.js');
 
 // panel toggles
@@ -7,7 +8,7 @@ const systemOptionsPanelBtn = globalThis.document.querySelector<HTMLElement>('#s
 systemOptionsPanel.addEventListener('close', () => (systemOptionsPanel.hidden = true));
 systemOptionsPanelBtn.addEventListener('click', async () => {
   if (!loadedSystemsPanel) {
-    await import('@nve-internals/elements-api/system-settings/define.js');
+    await import('/_internal/system-settings/system-settings.js');
     loadedSystemsPanel = true;
   }
   systemOptionsPanel.hidden = !systemOptionsPanel.hidden;

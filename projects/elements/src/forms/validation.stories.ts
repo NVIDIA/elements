@@ -11,6 +11,7 @@ import '@nvidia-elements/core/password/define.js';
 
 export default {
   title: 'Elements/Forms',
+  component: 'forms validation'
 };
 
 export const Validation = () => {
