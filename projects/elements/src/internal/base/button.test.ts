@@ -190,12 +190,12 @@ describe('base button', () => {
     vi.spyOn(submitButtonInForm, 'removeEventListener');
     submitButtonInForm.readonly = true;
     await elementIsStable(submitButtonInForm);
-    expect(submitButtonInForm.removeEventListener).toBeCalledTimes(2);
+    expect(submitButtonInForm.removeEventListener).toBeCalledTimes(3); // 2x button controller, 1x command controller
 
     vi.spyOn(submitButtonInForm, 'addEventListener');
     submitButtonInForm.readonly = false;
     await elementIsStable(submitButtonInForm);
-    expect(submitButtonInForm.addEventListener).toBeCalledTimes(2);
+    expect(submitButtonInForm.addEventListener).toBeCalledTimes(3); // 2x button controller, 1x command controller
   });
 
   it('should trigger submit event when host exists within a form element', async () => {
