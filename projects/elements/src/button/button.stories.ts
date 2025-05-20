@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/toggletip/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/search/define.js';
 
@@ -10,6 +11,33 @@ export default {
 
 export const Default = {
   render: () => html`<nve-button>standard</nve-button>`
+};
+
+/**
+ * @description This example demonstrates how to use the `commandfor` and `command` attributes to create a button that can be used to rotate an image.
+ * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
+ * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#creating_custom_commands
+ */
+export const InvokerCommand = {
+  render: () => html`
+    <img id="logo" src="https://NVIDIA.github.io/elements/favicon.svg" alt="logo" style="width: 100px; height: 100px;" />
+    <section>
+      <nve-button commandfor="logo" command="--rotate-left">Rotate left</nve-button>
+      <nve-button commandfor="logo" command="--rotate-right">Rotate right</nve-button>
+      <nve-button commandfor="popover" command="toggle-popover">toggle-popover</nve-button>
+    </section>
+    <nve-toggletip id="popover">popover</nve-toggletip>
+    <script type="module">
+      const logo = document.getElementById('logo');
+      logo.addEventListener('command', (event) => {
+        if (event.command == '--rotate-left') {
+          logo.style.rotate = '-90deg';
+        } else if (event.command == '--rotate-right') {
+          logo.style.rotate = '90deg';
+        }
+      });
+    </script>
+  `
 };
 
 export const ButtonWithIcon = {

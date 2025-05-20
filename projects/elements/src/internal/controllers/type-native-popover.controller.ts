@@ -29,11 +29,16 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   }
 
   get #nativeTriggers(): HTMLElement[] {
-    return Array.from(
-      (this.host.getRootNode() as HTMLElement).querySelectorAll(
-        `[popovertarget="${CSS.escape ? CSS.escape(this.host.id) : this.host.id}"]`
-      )
+    const root = this.host.getRootNode() as HTMLElement;
+    const popoverTargetTriggers = Array.from(
+      root.querySelectorAll(`[popovertarget="${CSS.escape ? CSS.escape(this.host.id) : this.host.id}"]`)
     ) as HTMLElement[];
+
+    const commandForTriggers = Array.from(
+      root.querySelectorAll(`[commandfor="${CSS.escape ? CSS.escape(this.host.id) : this.host.id}"]`)
+    ) as HTMLElement[];
+
+    return [...popoverTargetTriggers, ...commandForTriggers];
   }
 
   constructor(private host: T) {
@@ -76,6 +81,21 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
           detail: { trigger: this.host._activeTrigger }
         })
       );
+    });
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#creating_declarative_popovers
+    this.host.addEventListener('command', (e: Event & { command: string }) => {
+      if (e.command === 'toggle-popover') {
+        this.host.togglePopover();
+      }
+
+      if (e.command === 'hide-popover') {
+        this.host.hidePopover();
+      }
+
+      if (e.command === 'show-popover') {
+        this.host.showPopover();
+      }
     });
   }
 

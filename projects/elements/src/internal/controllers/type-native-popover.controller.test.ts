@@ -661,3 +661,39 @@ describe('type-popover.controller - close timeout', () => {
     expect(element.matches(':popover-open')).toBe(false);
   });
 });
+
+describe('type-popover.controller - invoker command support', () => {
+  let element: TypeNativePopoverControllerTestElement;
+  let button: Button;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-button commandfor="popover" command="toggle-popover">anchor</nve-button>
+      <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    element.popoverType = 'hint';
+    button = fixture.querySelector(Button.metadata.tag);
+    await element.updateComplete;
+    await button.updateComplete;
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should toggle popover when command is triggered', async () => {
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    const event = untilEvent<Event & { source: HTMLElement; command: string }>(element, 'command');
+    await emulateClick(button);
+    const { source, command } = await event;
+    expect(source).toBe(button);
+    expect(command).toBe('toggle-popover');
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+});
