@@ -29,7 +29,7 @@ export const Input = () => {
 
 export const Vertical = () => {
   return html`
-<div nve-layout="column gap:lg">
+<div nve-layout="column gap:lg full">
   <nve-input>
     <label>label</label>
     <input />
@@ -58,7 +58,7 @@ export const Vertical = () => {
 
 export const Horizontal = () => {
   return html`
-<div nve-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg full">
   <nve-input layout="horizontal">
     <label>label</label>
     <input />

@@ -1,31 +1,17 @@
-import fs from 'node:fs';
+import { MetadataService } from '@nve-internals/metadata';
 
-/** base on element tags found, inline the imports for the elements */
+const metadata = await MetadataService.getMetadata();
+
+/** based on element tags found, inline the imports for the elements */
 export async function elementLoaderTransform(content) {
-  const LAZY = content.includes('<!-- ELEMENT_LOADER_LAZY -->');
-  const ELEMENTS_PACKAGE = JSON.parse(fs.readFileSync('../elements/package.json', 'utf8'));
-  const MONACO_PACKAGE = JSON.parse(fs.readFileSync('../monaco/package.json', 'utf8'));
-
-  const ELEMENTS_IMPORTS = Array.from(
-    new Set(
-      Object.keys(ELEMENTS_PACKAGE.exports)
-        .filter(key => key.endsWith('define.js'))
-        .map(key => key.replace('./', 'nve-').replace('/define.js', ''))
-        .filter(tagName => content?.includes(`<${tagName}`))
-    )
-  )
-    .map(tagName => createImport(`@nvidia-elements/core/${tagName.replace('nve-', '')}/define.js`, LAZY))
-    .join('\n');
-
-  const MONACO_IMPORTS = Array.from(
-    new Set(
-      Object.keys(MONACO_PACKAGE.exports)
-        .filter(key => key.endsWith('define.js'))
-        .map(key => key.replace('./', 'nve-monaco-').replace('/define.js', ''))
-        .filter(tagName => content?.includes(`<${tagName}`))
-    )
-  )
-    .map(tagName => createImport(`@nvidia-elements/monaco/${tagName.replace('nve-monaco-', '')}/define.js`, LAZY))
+  const IMPORTS = [...metadata['@nvidia-elements/core'].elements, ...metadata['@nvidia-elements/monaco'].elements]
+    .filter(element => content?.includes(`<${element.name}`))
+    .filter(element => !element.deprecated && element.manifest.metadata.entrypoint)
+    .map(element => {
+      const path = `${element.manifest.metadata.entrypoint}/define.js`;
+      const lazy = content.includes('<!-- ELEMENT_LOADER_LAZY -->');
+      return lazy ? `import('${path}');` : `import '${path}';`;
+    })
     .join('\n');
 
   const ELEMENTS_CODE_IMPORTS = content.includes('nve-codeblock')
@@ -39,13 +25,9 @@ export async function elementLoaderTransform(content) {
 
   return content.replace(
     '<head>',
-    `<head><script type="module">import '@lit-labs/ssr-client/lit-element-hydrate-support.js';\n${ELEMENTS_IMPORTS}\n${ELEMENTS_CODE_IMPORTS}\n${MONACO_IMPORTS}</script>`.replace(
+    `<head><script type="module">import '@lit-labs/ssr-client/lit-element-hydrate-support.js';\n${IMPORTS}\n${ELEMENTS_CODE_IMPORTS}</script>`.replace(
       /\n/g,
       ''
     )
   );
-}
-
-function createImport(path, lazy = false) {
-  return lazy ? `import('${path}');` : `import '${path}';`;
 }

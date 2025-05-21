@@ -18,7 +18,7 @@ export const Default = {
 
 export const Vertical = {
   render: () => html`
-<div nve-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg full">
   <nve-textarea>
     <label>label</label>
     <textarea></textarea>
@@ -47,7 +47,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div nve-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg full">
   <nve-textarea layout="horizontal">
     <label>label</label>
     <textarea></textarea>
