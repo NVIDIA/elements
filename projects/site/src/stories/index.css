@@ -20,6 +20,9 @@
 }
 
 #story-container {
+  display: flex;
+  place-items: center;
+  place-content: center;
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
@@ -38,6 +41,7 @@ body:has(nve-page) #story-container {
 [data-element^='layout'] {
   & > [nve-layout] {
     height: 100%;
+    width: 100%;
   }
 
   nve-card {
