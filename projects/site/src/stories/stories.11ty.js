@@ -20,7 +20,7 @@ export function render() {
   <style>
     @import './stories.css';
   </style>
-  <nve-page-panel slot="left" style="--width: 300px">
+  <nve-page-panel id="stories-sidenav-panel" slot="left" style="--width: 300px">
     <nve-page-panel-content>
       <ul class="stories">
       ${groupedStories

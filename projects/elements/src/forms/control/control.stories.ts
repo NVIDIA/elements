@@ -74,21 +74,22 @@ export const Responsive = () => {
 export const ControlLayout = () => {
   return html`
 <style>
-  div {
+  #control-layout {
     display: flex;
     gap: 48px;
     flex-direction: column;
-  }
+    min-width: 300px;
 
-  nve-control {
-    outline: 1px solid red;
-  }
+    nve-control {
+      outline: 1px solid red;
+    }
 
-  nve-control-group {
-    outline: 1px solid blue;
+    nve-control-group {
+      outline: 1px solid blue;
+    }
   }
 </style>
-<div style="">
+<div id="control-layout">
   <nve-control>
     <label>vertical</label>
     <input />

@@ -45,7 +45,7 @@ export const Step = {
 
 export const Vertical = {
   render: () => html`
-<div nve-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg full">
   <nve-range>
     <label>label</label>
     <input type="range" />
@@ -74,7 +74,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div nve-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg full">
   <nve-range layout="horizontal">
     <label>label</label>
     <input type="range" />
