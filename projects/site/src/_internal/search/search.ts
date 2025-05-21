@@ -218,7 +218,7 @@ export class DocsSearch extends LitElement {
     const style = `--color: var(--nve-ref-color-${isNveTag ? 'blue-cobalt' : 'yellow-amber'}-1000);`;
 
     return {
-      url: result.raw_url + (this.searchInput.value ? `?q=${encodeURIComponent(this.searchInput.value)}` : '') || '',
+      url: result.raw_url + this.#getQueryParam() || '',
       title: result.meta?.title,
       subtitle: result.raw_url || '',
       icon: icon,
@@ -228,25 +228,23 @@ export class DocsSearch extends LitElement {
 
   #getHeadings(result: PagefindSearchFragment): SearchResult[] {
     const headings: SearchResult[] = [];
-    Object.keys(result.meta).forEach(key => {
-      if (key.includes('h2_')) {
-        const heading = result.meta[key];
-        const headingAnchor = heading.replaceAll(' ', '-').toLowerCase();
 
+    for (const anchor of result.anchors) {
+      if (anchor.element === 'h2') {
         headings.push({
-          url:
-            result.raw_url +
-            (this.searchInput.value ? `?q=${encodeURIComponent(this.searchInput.value)}` : '') +
-            '#' +
-            headingAnchor,
-          title: result.meta.title + ' - ' + heading,
-          subtitle: result.raw_url + '#' + headingAnchor,
+          url: result.raw_url + this.#getQueryParam() + '#' + anchor.id,
+          title: result.meta.title + ' - ' + anchor.text,
+          subtitle: result.raw_url + '#' + anchor.id,
           icon: 'bookmark',
           style: '--color: var(--nve-ref-color-teal-seafoam-1000);'
         });
       }
-    });
+    }
 
     return headings;
+  }
+
+  #getQueryParam(): string {
+    return this.searchInput.value ? `?q=${encodeURIComponent(this.searchInput.value)}` : '';
   }
 }
