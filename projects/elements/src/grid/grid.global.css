@@ -79,14 +79,3 @@ nve-grid {
     scrollbar-width: thin;
   }
 }
-
-/* 
-  We leverage content-visibility for rendering performance of data grid rows.
-  This allows the browser to skip render calculations on rows that are not visible.
-  Since the browser skips the render calc this prevents the css anchor from positioning correctly
-  as it does not know the true height of the un-rendered grid rows.
-  https://web.dev/articles/content-visibility
-*/
-nve-grid:has([style*='anchor-name:']) nve-grid-row {
-  content-visibility: visible !important;
-}
