@@ -36,7 +36,7 @@ export const Default = () => {
 
 export const Vertical = () => {
   return html`
-<div nve-layout="column gap:lg">
+<div nve-layout="column gap:lg full">
   <nve-combobox>
     <label>label</label>
     <input type="search" />
@@ -97,7 +97,7 @@ export const Vertical = () => {
 
 export const Horizontal = () => {
   return html`
-<div nve-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg full">
   <nve-combobox layout="horizontal">
     <label>label</label>
     <input type="search" />

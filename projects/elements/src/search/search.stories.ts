@@ -37,7 +37,7 @@ export const Datalist = () => {
 
 export const Vertical = {
   render: () => html`
-<div nve-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg full">
   <nve-search>
     <label>label</label>
     <input type="search" placeholder="search" />
@@ -66,7 +66,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div nve-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg full">
   <nve-search layout="horizontal">
     <label>label</label>
     <input type="search" placeholder="search" />
