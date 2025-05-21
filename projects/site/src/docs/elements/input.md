@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/input/define.js';
-```
-
-```html
-<nve-input>
-  <label>label</label>
-  <input type="text" />
-</nve-input>
-```
+{% install 'nve-input' %}
 
 ## Standard
 

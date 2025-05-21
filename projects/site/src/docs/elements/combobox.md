@@ -8,21 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/combobox/define.js';
-```
-
-```html
-<nve-combobox>
-  <label>combobox</label>
-  <input type="search">
-  <datalist>
-    <option value="option 1"></option>
-    <option value="option 2"></option>
-    <option value="option 3"></option>
-  </datalist>
-</nve-combobox>
-```
+{% install 'nve-combobox' %}
 
 ## Standard
 

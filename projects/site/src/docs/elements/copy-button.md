@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/copy-button/define.js';
-```
-
-```html
-<nve-copy-button value="copy"></nve-copy-button>
-```
+{% install 'nve-copy-button' %}
 
 ## Default
 

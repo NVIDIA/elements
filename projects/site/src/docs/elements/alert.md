@@ -9,13 +9,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/alert/define.js';
-```
-
-```html
-<nve-alert status="success">success message</nve-alert>
-```
+{% install 'nve-alert' %}
 
 ## Standard
 

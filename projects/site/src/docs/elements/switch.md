@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/switch/define.js';
-```
-
-```html
-<nve-switch>
-  <label>label</label>
-  <input type="checkbox" />
-</nve-switch>
-```
+{% install 'nve-switch' %}
 
 ## Standard
 

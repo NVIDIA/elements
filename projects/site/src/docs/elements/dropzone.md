@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/dropzone/define.js';
-```
-
-```html
-<nve-dropzone></nve-dropzone>
-```
+{% install 'nve-dropzone' %}
 
 ## Standard
 

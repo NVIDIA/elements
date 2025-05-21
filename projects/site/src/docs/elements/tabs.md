@@ -7,30 +7,15 @@
 }
 ---
 
-The Tabs component is composed of a `<nve-tabs>` parent element and multiple `<nve-tabs-item>` elements slotted as children.
-The `selected` attribute when applied to an item by the host application will give the selected tab the proper selected styles.
-
-The `disabled` attribute can be applied to an item to get the proper visual cues and prevent interaction.
-All default interaction, hover and active states are handled by the elements.
-
-Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
-concerns are handled out of the box. Try using left/right arrow keys on horizontal tabs or up/down on vertical tabs.
-
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/tabs/define.js';
-```
+{% install 'nve-tabs' %}
 
-```html
-<nve-tabs>
-  <nve-tabs-item selected>Tab 1</nve-tabs-item>
-  <nve-tabs-item>Tab 2</nve-tabs-item>
-  <nve-tabs-item>Tab 3</nve-tabs-item>
-  <nve-tabs-item>Tab 4</nve-tabs-item>
-  <nve-tabs-item disabled>disabled</nve-tabs-item>
-</nve-tabs>
-```
+The Tabs component is composed of a `<nve-tabs>` parent element and multiple `<nve-tabs-item>` elements slotted as children. The `selected` attribute when applied to an item by the host application will give the selected tab the proper selected styles.
+
+The `disabled` attribute can be applied to an item to get the proper visual cues and prevent interaction. All default interaction, hover and active states are handled by the elements.
+
+Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) concerns are handled out of the box. Try using left/right arrow keys on horizontal tabs or up/down on vertical tabs.
 
 ## Standard
 

@@ -8,9 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/progress-bar/define.js';
-```
+{% install 'nve-progress-bar' %}
 
 ## Setting the Value
 

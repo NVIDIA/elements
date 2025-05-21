@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/progress-ring/define.js';
-```
-
-```html
-<nve-progress-ring></nve-progress-ring>
-```
+{% install 'nve-progress-ring' %}
 
 ## Standard
 
