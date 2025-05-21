@@ -37,9 +37,17 @@
 
 {% story 'nve-toggletip', 'Events', '{ "inline": false, "height": "250px" }' %}
 
-## Content
+## Header and Footer
 
 {% story 'nve-toggletip', 'Content', '{ "inline": false, "height": "400px" }' %}
+
+## Header Only
+
+{% story 'nve-toggletip', 'ContentWithHeader', '{ "inline": false, "height": "400px" }' %}
+
+## Footer Only
+
+{% story 'nve-toggletip', 'ContentWithFooter', '{ "inline": false, "height": "400px" }' %}
 
 ## Closable
 
