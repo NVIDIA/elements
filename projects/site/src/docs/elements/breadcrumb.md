@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/breadcrumb/define.js';
-```
-
-```html
-<nve-breadcrumb></nve-breadcrumb>
-```
+{% install 'nve-breadcrumb' %}
 
 ## Standard
 

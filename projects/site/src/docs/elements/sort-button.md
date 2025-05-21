@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/sort-button/define.js';
-```
-
-```html
-<nve-sort-button></nve-sort-button>
-```
+{% install 'nve-sort-button' %}
 
 ## Standard
 

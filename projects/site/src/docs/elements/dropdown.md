@@ -9,14 +9,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/dropdown/define.js';
-```
-
-```html
-<nve-dropdown id="dropdown">dropdown content</nve-tooltip>
-<nve-button popovertarget="dropdown">button</nve-button>
-```
+{% install 'nve-dropdown' %}
 
 ## Standard
 

@@ -9,20 +9,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/dialog/define.js';
-```
-
-```html
-<nve-dialog id="dialog" modal closable>
-  <nve-dialog-header>
-    <h3 nve-text="heading semibold">title</h3>
-  </nve-dialog-header>
-  <p nve-text="body">some text content in a closable dialog</p>
-</nve-dialog>
-
-<nve-button popovertarget="dialog">button</nve-button>
-```
+{% install 'nve-dialog' %}
 
 ## Standard
 

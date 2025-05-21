@@ -9,25 +9,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/drawer/define.js';
-```
-
-```html
-<nve-drawer id="drawer" closable modal>
-  <nve-drawer-header>
-    <h3 nve-text="heading semibold sm">drawer header</h3>
-  </nve-drawer-header>
-  <nve-drawer-content>
-    <p nve-text="body">drawer content</p>
-  </nve-drawer-content>
-  <nve-drawer-footer>
-    <p nve-text="body">drawer footer</p>
-  </nve-drawer-footer>
-</nve-drawer>
-
-<nve-button popovertarget="drawer">button</nve-button>
-```
+{% install 'nve-drawer' %}
 
 ## Standard
 

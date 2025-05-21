@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/checkbox/define.js';
-```
-
-```html
-<nve-checkbox>
-  <label>label</label>
-  <input type="checkbox" />
-</nve-checkbox>
-```
+{% install 'nve-checkbox' %}
 
 ## Standard
 

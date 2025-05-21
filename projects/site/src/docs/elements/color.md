@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/color/define.js';
-```
-
-```html
-<nve-color>
-  <label>label</label>
-  <input type="color" />
-</nve-color>
-```
+{% install 'nve-color' %}
 
 ## Standard
 

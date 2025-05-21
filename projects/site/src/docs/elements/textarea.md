@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/textarea/define.js';
-```
-
-```html
-<nve-textarea>
-  <label>label</label>
-  <textarea></textarea>
-</nve-textarea>
-```
+{% install 'nve-textarea' %}
 
 ## Standard
 

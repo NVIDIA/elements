@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/badge/define.js';
-```
-
-```html
-<nve-badge status="starting"></nve-badge>
-```
+{% install 'nve-badge' %}
 
 ## Standard
 

@@ -10,40 +10,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/dropdown-group/define.js';
-```
-
-```html
-<nve-button popovertarget="menu-1">menu</nve-button>
-<nve-dropdown-group>
-  <nve-dropdown id="menu-1">
-    <nve-menu>
-      <nve-menu-item popovertarget="menu-2">
-        item 1-1 <nve-icon name="caret" direction="right" size="sm" slot="suffix"></nve-icon>
-      </nve-menu-item>
-      <nve-menu-item>item 1-2</nve-menu-item>
-      <nve-menu-item>item 1-3</nve-menu-item>
-    </nve-menu>
-  </nve-dropdown>
-  <nve-dropdown id="menu-2" position="right">
-    <nve-menu>
-      <nve-menu-item>item 2-1</nve-menu-item>
-      <nve-menu-item popovertarget="menu-3">
-        item 2-2 <nve-icon name="caret" direction="right" size="sm" slot="suffix"></nve-icon>
-      </nve-menu-item>
-      <nve-menu-item>item 2-3</nve-menu-item>
-    </nve-menu>
-  </nve-dropdown>
-  <nve-dropdown id="menu-3" position="right">
-    <nve-menu>
-      <nve-menu-item>item 3-1</nve-menu-item>
-      <nve-menu-item>item 3-2</nve-menu-item>
-      <nve-menu-item>item 3-3</nve-menu-item>
-    </nve-menu>
-  </nve-dropdown>
-</nve-dropdown-group>
-```
+{% install 'nve-dropdown-group' %}
 
 ## Standard
 

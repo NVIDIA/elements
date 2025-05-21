@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/search/define.js';
-```
-
-```html
-<nve-search>
-  <label>label</label>
-  <input type="search" />
-</nve-search>
-```
+{% install 'nve-search' %}
 
 ## Standard
 

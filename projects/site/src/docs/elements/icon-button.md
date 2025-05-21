@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/icon-button/define.js';
-```
-
-```html
-<nve-icon-button icon-name="person"></nve-icon-button>
-```
+{% install 'nve-icon-button' %}
 
 ## Standard
 

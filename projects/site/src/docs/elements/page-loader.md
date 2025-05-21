@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/page-loader/define.js';
-```
-
-```html
-<nve-page-loader></nve-page-loader>
-```
+{% install 'nve-page-loader' %}
 
 ## Standard
 

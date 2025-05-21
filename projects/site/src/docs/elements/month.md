@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/month/define.js';
-```
-
-```html
-<nve-month>
-  <label>label</label>
-  <input type="month" />
-</nve-month>
-```
+{% install 'nve-month' %}
 
 ## Standard
 

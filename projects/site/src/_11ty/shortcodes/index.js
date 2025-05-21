@@ -10,6 +10,21 @@ const md = markdownIt();
 const metadata = await MetadataService.getMetadata();
 const elements = Object.keys(metadata).flatMap(packageName => metadata[packageName].elements ?? []);
 
+export async function installShortcode(tag) {
+  const element = elements.find(d => d.name === tag);
+  return element
+    ? /* html */ `
+\`\`\`typescript
+import '${element.manifest.metadata.entrypoint}/define.js';
+\`\`\`
+
+\`\`\`html
+${element.stories.find(s => s.id === 'Default')?.template}
+\`\`\`
+`
+    : '';
+}
+
 export async function apiShortcode(tag, type, value) {
   const element = elements.find(d => d.name === tag);
   return element

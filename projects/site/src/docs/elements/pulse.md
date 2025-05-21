@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/pulse/define.js';
-```
-
-```html
-<nve-pulse></nve-pulse>
-```
+{% install 'nve-pulse' %}
 
 ## Standard
 

@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/preferences-input/define.js';
-```
-
-```html
-<nve-preferences-input name="theme" value="{ 'theme': 'dark' }"></nve-preferences-input>
-```
+{% install 'nve-preferences-input' %}
 
 ## Standard
 

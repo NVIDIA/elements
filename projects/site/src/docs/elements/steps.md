@@ -9,30 +9,15 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/steps/define.js';
-```
-
-```html
-<nve-steps behavior-select>
-  <nve-steps-item status="success">Step 1</nve-steps-item>
-  <nve-steps-item status="danger">Step 2</nve-steps-item>
-  <nve-steps-item selected>Step 3</nve-steps-item>
-  <nve-steps-item status="pending">Step 4</nve-steps-item>
-  <nve-steps-item disabled>Disabled</nve-steps-item>
-</nve-steps>
-```
+{% install 'nve-steps' %}
 
 By showing less information at a time, multi-step workflows allow users to focus better on the content pertinent to each step and decrease the chance of errors.
 
-The Steps component is composed of a `steps` parent element and multiple `steps-item` elements slotted as children.
-The `selected` attribute applied by the host application will give the selected step the proper selected styles.
+The Steps component is composed of a `steps` parent element and multiple `steps-item` elements slotted as children. The `selected` attribute applied by the host application will give the selected step the proper selected styles.
 
-The `disabled` attribute can be applied to an item to get the proper visual cues and prevent interaction.
-All default interaction, hover and active states are handled by the elements.
+The `disabled` attribute can be applied to an item to get the proper visual cues and prevent interaction. All default interaction, hover and active states are handled by the elements.
 
-Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/)
-concerns are handled out of the box. Try using left/right arrow keys on horizontal steps or up/down arrow keys on vertical steps.
+Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) concerns are handled out of the box. Try using left/right arrow keys on horizontal steps or up/down arrow keys on vertical steps.
 
 ## Standard
 

@@ -8,21 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/page-header/define.js';
-```
-
-```html
-<nve-page-header>
-  <nve-logo slot="prefix"></nve-logo>
-  <h2 slot="prefix">Workflows</h2>
-  <nve-button selected><a href="#">Link 1</a></nve-button>
-  <nve-button><a href="#">Link 2</a></nve-button>
-  <nve-icon-button icon-name="chat-bubble" slot="suffix"></nve-icon-button>
-  <nve-icon-button icon-name="switch-apps" slot="suffix"></nve-icon-button>
-  <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
-</nve-page-header>
-```
+{% install 'nve-page-header' %}
 
 ## Standard
 

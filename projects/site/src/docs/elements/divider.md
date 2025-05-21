@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/divider/define.js';
-```
-
-```html
-<nve-divider></nve-divider>
-```
+{% install 'nve-divider' %}
 
 ## Standard
 
