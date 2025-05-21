@@ -18,7 +18,7 @@ export const Default = {
 
 export const Vertical = {
   render: () => html`
-<div nve-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg full">
   <nve-password>
     <label>label</label>
     <input type="password" value="123456" />
@@ -47,7 +47,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div nve-layout="column gap:lg align:stretch">
+<div nve-layout="column gap:lg full">
   <nve-password layout="horizontal">
     <label>label</label>
     <input type="password" value="123456" />
