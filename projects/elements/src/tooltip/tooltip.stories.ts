@@ -144,6 +144,47 @@ export const Wrap = {
   `
 };
 
+export const PositionStrategyAbsolute = {
+  render: () => html`
+<nve-tooltip id="tooltip" position-strategy="absolute">hello there</nve-tooltip>
+<nve-button popovertarget="tooltip">button</nve-button>
+  `
+};
+
+export const ScrollContainer = {
+  render: () => html`
+<style>
+  #scroll-container {
+    display: flex;
+    flex-direction: column;
+    height: 300px;
+    width: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin: 20vh;
+
+    & > button {
+      min-height: 50px;
+      width: 100%;
+    }
+  }
+</style>
+<section id="scroll-container">
+  <button popovertarget="tooltip">1</button>
+  <button popovertarget="tooltip">2</button>
+  <button popovertarget="tooltip">3</button>
+  <button popovertarget="tooltip">4</button>
+  <button popovertarget="tooltip">5</button>
+  <button popovertarget="tooltip">6</button>
+  <button popovertarget="tooltip">7</button>
+  <button popovertarget="tooltip">8</button>
+  <button popovertarget="tooltip">9</button>
+  <button popovertarget="tooltip">10</button>
+</section>
+<nve-tooltip id="tooltip" position="left">hello there</nve-tooltip>
+  `
+};
+
 @customElement('dynamic-anchor-position-demo')
 class DynamicAnchorPositionDemo extends LitElement { /* eslint no-unused-vars: 0 */
   static styles = [css`

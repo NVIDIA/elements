@@ -10,11 +10,16 @@
   width: max-content;
   z-index: 99;
   pointer-events: none;
-  /* for fallback floating ui positioning */
+  opacity: 0;
 }
 
-:host {
+/* ensure popover is not visible until floating-ui has positioned it */
+:host([position-strategy='absolute']:not([style*='inset:'])) {
   opacity: 0;
+}
+
+/* apply transitions during beforetoggle event to prevent flash of unstyled popover on page load */
+:host(:state(transition-start)) {
   transition:
     opacity var(--animation-duration),
     transform var(--animation-duration) allow-discrete,
@@ -40,13 +45,6 @@
 :host(:popover-open),
 :host(:state(no-trigger):not([hidden])) {
   display: block;
-}
-
-@starting-style {
-  :host(:popover-open),
-  :host(:not([popover]):not([hidden])) {
-    opacity: 0;
-  }
 }
 
 :host::backdrop {
@@ -176,7 +174,7 @@
 
   /** top */
   :host([position='top']) {
-    position-area: top;
+    position-area: top center;
     inset: 0 auto auto auto;
   }
 
@@ -200,7 +198,7 @@
 
   /** bottom */
   :host([position='bottom']) {
-    position-area: bottom;
+    position-area: bottom center;
     inset: auto auto 0 auto;
   }
 
@@ -216,7 +214,7 @@
 
   /** left */
   :host([position='left']) {
-    position-area: left;
+    position-area: left center;
     inset: auto auto auto 0;
   }
 
@@ -232,7 +230,7 @@
 
   /** right */
   :host([position='right']) {
-    position-area: right;
+    position-area: right center;
     inset: auto 0 auto auto;
   }
 

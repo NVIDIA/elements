@@ -200,6 +200,15 @@ describe('type-popover.controller', () => {
     expect((await event).target).toBe(element);
     expect(element.inert).toBe(false);
   });
+
+  it('should update :state(transition-start) on beforetoggle for animation', async () => {
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'beforetoggle');
+    element.showPopover();
+    expect((await event).target).toBe(element);
+    expect(element.matches(':state(transition-start)')).toBe(true);
+  });
 });
 
 describe('type-popover.controller - default open', () => {
