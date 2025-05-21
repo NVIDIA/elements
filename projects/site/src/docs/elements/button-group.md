@@ -8,23 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/button-group/define.js';
-```
-
-```html
-<nve-button-group>
-  <nve-icon-button pressed icon-name="split-vertical"></nve-icon-button>
-  <nve-icon-button icon-name="split-horizontal"></nve-icon-button>
-  <nve-icon-button icon-name="split-none"></nve-icon-button>
-</nve-button-group>
-
-<nve-button-group behavior-select="single">
-  <nve-button pressed>10%</nve-button>
-  <nve-button>15%</nve-button>
-  <nve-button>20%</nve-button>
-</nve-button-group>
-```
+{% install 'nve-button-group' %}
 
 ## Standard
 

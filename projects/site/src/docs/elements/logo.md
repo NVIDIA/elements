@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/logo/define.js';
-```
-
-```html
-<nve-logo></nve-logo>
-```
+{% install 'nve-logo' %}
 
 ## Standard
 

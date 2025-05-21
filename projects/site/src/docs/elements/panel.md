@@ -17,17 +17,7 @@ Additionally, `nve-panel` can be have its `side` property set to `left` or `righ
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/panel/define.js';
-```
-
-```html
-<nve-panel>
-  <nve-panel-content>
-    Panel Content
-  </nve-panel-content>
-</nve-panel>
-```
+{% install 'nve-panel' %}
 
 ## Standard
 

@@ -8,14 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/toast/define.js';
-```
-
-```html
-<nve-toast id="toast" close-timeout="1500">hello there</nve-toast>
-<nve-button popovertarget="toast">button</nve-button>
-```
+{% install 'nve-toast' %}
 
 ## Standard
 
