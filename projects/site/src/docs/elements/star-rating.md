@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/star-rating/define.js';
-```
-
-```html
-<nve-star-rating></nve-star-rating>
-```
+{% install 'nve-star-rating' %}
 
 ## Standard
 

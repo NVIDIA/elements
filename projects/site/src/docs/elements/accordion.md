@@ -9,21 +9,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/accordion/define.js';
-```
-
-```html
-<nve-accordion>
-  <nve-accordion-header>
-    <div slot="title">Heading</div>
-  </nve-accordion-header>
-
-  <nve-accordion-content>
-    Content
-  </nve-accordion-content>
-</nve-accordion>
-```
+{% install 'nve-accordion' %}
 
 ## Standard
 

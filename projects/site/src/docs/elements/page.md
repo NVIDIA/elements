@@ -11,24 +11,7 @@
 
 To enable smooth transitions between page view, see our [View Transition API](./docs/foundations/view-transitions/) documentation.
 
-```typescript
-import '@nvidia-elements/core/page/define.js';
-```
-
-```html
-<nve-page>
-  <div slot="header">header</div>
-  <div slot="subheader">subheader</div>
-  <div slot="left-aside">left-aside</div>
-  <div slot="left">left</div>
-  <div>main</div>
-  <div slot="bottom">bottom</div>
-  <div slot="right">right</div>
-  <div slot="right-aside">right-aside</div>
-  <div slot="subfooter">subfooter</div>
-  <div slot="footer">footer</div>
-</nve-page>
-```
+{% install 'nve-page' %}
 
 {% story 'nve-page', 'Content', '{ "height": "480px", "padding": 0 }' %}
 

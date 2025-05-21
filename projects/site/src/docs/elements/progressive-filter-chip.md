@@ -8,26 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/progressive-filter-chip/define.js';
-```
-
-```html
-<nve-progressive-filter-chip closable>
-  <select aria-label="dataset">
-    <option>workload</option>
-    <option selected>instance</option>
-  </select>
-  <select aria-label="condition">
-    <option>sort by</option>
-    <option selected>filter by</option>
-  </select>
-  <select aria-label="filter">
-    <option>utilization</option>
-    <option selected>status</option>
-  </select>
-</nve-progressive-filter-chip>
-```
+{% install 'nve-progressive-filter-chip' %}
 
 ## Standard
 

@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/password/define.js';
-```
-
-```html
-<nve-password>
-  <label>label</label>
-  <input type="password" />
-</nve-password>
-```
+{% install 'nve-password' %}
 
 ## Standard
 

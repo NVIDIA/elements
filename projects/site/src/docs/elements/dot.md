@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/dot/define.js';
-```
-
-```html
-<nve-dot status="starting"></nve-dot>
-```
+{% install 'nve-dot' %}
 
 ## Standard
 

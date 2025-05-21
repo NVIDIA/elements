@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/button/define.js';
-```
-
-```html
-<nve-button>button</nve-button>
-```
+{% install 'nve-button' %}
 
 ## Standard
 

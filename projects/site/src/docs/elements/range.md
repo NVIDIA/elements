@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/range/define.js';
-```
-
-```html
-<nve-range>
-  <label>label</label>
-  <input type="range" />
-</nve-range>
-```
+{% install 'nve-range' %}
 
 ## Standard
 

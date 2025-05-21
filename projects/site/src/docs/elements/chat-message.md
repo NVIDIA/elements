@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/chat-message/define.js';
-```
-
-```html
-<nve-chat-message></nve-chat-message>
-```
+{% install 'nve-chat-message' %}
 
 ## Standard
 

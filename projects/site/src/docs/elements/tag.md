@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/tag/define.js';
-```
-
-```html
-<nve-tag></nve-tag>
-```
+{% install 'nve-tag' %}
 
 ## Standard
 

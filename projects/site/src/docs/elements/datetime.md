@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/datetime/define.js';
-```
-
-```html
-<nve-datetime>
-  <label>label</label>
-  <input type="datetime-local" />
-</nve-datetime>
-```
+{% install 'nve-datetime' %}
 
 ## Standard
 

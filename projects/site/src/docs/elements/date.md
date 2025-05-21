@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/date/define.js';
-```
-
-```html
-<nve-date>
-  <label>label</label>
-  <input type="date" />
-</nve-date>
-```
+{% install 'nve-date' %}
 
 ## Standard
 
