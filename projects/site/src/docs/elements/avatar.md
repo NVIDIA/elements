@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/avatar/define.js';
-```
-
-```html
-<nve-avatar></nve-avatar>
-```
+{% install 'nve-avatar' %}
 
 ## Standard
 

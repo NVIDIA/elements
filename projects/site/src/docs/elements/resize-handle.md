@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/resize-handle/define.js';
-```
-
-```html
-<nve-resize-handle min="0" max="100" value="50" step="10"></nve-resize-handle>
-```
+{% install 'nve-resize-handle' %}
 
 ## Standard
 
