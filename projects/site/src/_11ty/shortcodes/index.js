@@ -30,7 +30,7 @@ export async function apiShortcode(tag, type, value) {
   return element
     ? /* html */ `
   ${type === 'description' ? md.render(element.manifest.description ?? '') : ''}
-  ${type === 'event' ? md.render(`<code>${value}</code>: ` + element.manifest.events?.find(m => m.name === value)?.description) : ''}
+  ${type === 'event' ? md.render(`\`${value}\`: ` + element.manifest.events?.find(m => m.name === value)?.description) : ''}
   ${type === 'property' ? md.render(element.manifest.members?.find(m => m.name === value)?.description ?? '') : ''}
   ${type === 'slot' ? md.render(element.manifest.slots?.find(m => m.name === value)?.description ?? '') : ''}
   ${type === 'story' ? md.render(element.stories?.find(m => m.id === value)?.description ?? '') : ''}`
