@@ -1,3 +1,5 @@
+import type { PagePanelContent } from '@nvidia-elements/core/page';
+
 const iframe = globalThis.document.querySelector('iframe');
 const list = globalThis.document.querySelector('ul.stories');
 
@@ -33,4 +35,19 @@ function setSelected(url: string) {
   if (link) {
     link.setAttribute('selected', '');
   }
+}
+
+// preserve scroll position between page transitions
+
+const content = globalThis.document.querySelector<PagePanelContent>('#stories-sidenav-panel nve-page-panel-content')!;
+globalThis.window.addEventListener('beforeunload', () => {
+  sessionStorage.setItem('sidenav-scroll-position', content.scrollTop.toString());
+});
+
+const savedPosition = sessionStorage.getItem('sidenav-scroll-position');
+if (savedPosition) {
+  await customElements.whenDefined('nve-page-panel-content');
+  content.scrollTop = parseInt(savedPosition);
+  await content.updateComplete;
+  content.scrollTop = parseInt(savedPosition);
 }
