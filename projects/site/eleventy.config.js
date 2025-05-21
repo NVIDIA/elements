@@ -7,7 +7,7 @@ import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
-import { apiShortcode, storyShortcode } from './src/_11ty/shortcodes/index.js';
+import { apiShortcode, storyShortcode, installShortcode } from './src/_11ty/shortcodes/index.js';
 import { svgLogosShortcode } from './src/_11ty/shortcodes/svg-logos.js';
 import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
@@ -97,6 +97,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addAsyncShortcode('story', storyShortcode);
   eleventyConfig.addAsyncShortcode('api', apiShortcode);
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
+  eleventyConfig.addAsyncShortcode('install', installShortcode);
   eleventyConfig.addShortcode('svg-logos', svgLogosShortcode);
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
   eleventyConfig.addTransform('anchor-generator', anchorGeneratorTransform);

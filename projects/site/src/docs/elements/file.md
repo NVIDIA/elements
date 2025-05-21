@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/file/define.js';
-```
-
-```html
-<nve-file>
-  <label>label</label>
-  <input type="file" />
-</nve-file>
-```
+{% install 'nve-file' %}
 
 ## Standard
 

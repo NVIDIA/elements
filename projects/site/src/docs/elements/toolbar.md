@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/toolbar/define.js';
-```
-
-```html
-<nve-toolbar></nve-toolbar>
-```
+{% install 'nve-toolbar' %}
 
 ## Standard
 

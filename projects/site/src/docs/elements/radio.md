@@ -8,30 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/radio/define.js';
-```
-
-```html
-<nve-radio-group>
-  <label>label</label>
-  <nve-radio>
-    <label>radio 1</label>
-    <input type="radio" checked />
-  </nve-radio>
-
-  <nve-radio>
-    <label>radio 2</label>
-    <input type="radio" />
-  </nve-radio>
-
-  <nve-radio>
-    <label>radio 3</label>
-    <input type="radio" />
-  </nve-radio>
-  <nve-control-message>message</nve-control-message>
-</nve-radio-group>
-```
+{% install 'nve-radio' %}
 
 ## Standard
 

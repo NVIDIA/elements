@@ -8,14 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/tooltip/define.js';
-```
-
-```html
-<nve-tooltip id="tooltip">tooltip</nve-tooltip>
-<nve-button popovertarget="tooltip">button</nve-button>
-```
+{% install 'nve-tooltip' %}
 
 ## Standard
 

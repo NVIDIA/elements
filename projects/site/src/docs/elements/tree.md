@@ -9,24 +9,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/tree/define.js';
-```
-
-```html
-<nve-tree>
-  <nve-tree-node expanded>
-    node 1
-    <nve-tree-node>node 1-1</nve-tree-node>
-    <nve-tree-node>node 1-2</nve-tree-node>
-  </nve-tree-node>
-  <nve-tree-node>
-    node 2
-    <nve-tree-node>node 2-1</nve-tree-node>
-    <nve-tree-node>node 2-2</nve-tree-node>
-  </nve-tree-node>
-</nve-tree>
-```
+{% install 'nve-tree' %}
 
 ## Standard
 

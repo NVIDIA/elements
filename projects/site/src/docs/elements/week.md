@@ -8,16 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/week/define.js';
-```
-
-```html
-<nve-week>
-  <label>label</label>
-  <input type="week" />
-</nve-week>
-```
+{% install 'nve-week' %}
 
 ## Standard
 

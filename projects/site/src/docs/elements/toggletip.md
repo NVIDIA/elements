@@ -9,14 +9,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/toggletip/define.js';
-```
-
-```html
-<nve-toggletip anchor="btn">>hello there</nve-toggletip>
-<nve-button id="btn">button</nve-button>
-```
+{% install 'nve-toggletip' %}
 
 ## Standard
 

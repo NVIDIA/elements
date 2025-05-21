@@ -9,17 +9,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/notification/define.js';
-```
-
-```html
-<nve-notification id="notification" position="top" close-timeout="2000">
-  <h3 nve-text="label">Notification</h3>
-  <p nve-text="body">some text content in a notification</p>
-</nve-notification>
-<nve-button popovertarget="notification">button</nve-button>
-```
+{% install 'nve-notification' %}
 
 ## Standard
 

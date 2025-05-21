@@ -6,18 +6,11 @@
 }
 ---
 
-The Iconography system is based on exposing an SVG based icon library to a the `icon` element.
-See the searchable [Interactive Icon Catalog](./docs/foundations/iconography/)
+The Iconography system is based on exposing an SVG based icon library to a the `icon` element. See the searchable [Interactive Icon Catalog](./docs/foundations/iconography/)
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/icon/define.js';
-```
-
-```html
-<nve-icon name="person"></nve-icon>
-```
+{% install 'nve-icon' %}
 
 ## Standard
 

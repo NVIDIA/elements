@@ -9,18 +9,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/menu/define.js';
-```
-
-```html
-<nve-menu>
-  <nve-menu-item>item 1</nve-menu-item>
-  <nve-menu-item selected>item 2</nve-menu-item>
-  <nve-menu-item>item 3</nve-menu-item>
-  <nve-menu-item>item 4</nve-menu-item>
-</nve-menu>
-```
+{% install 'nve-menu' %}
 
 ## Standard
 

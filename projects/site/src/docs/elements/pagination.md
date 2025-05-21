@@ -8,13 +8,7 @@
 
 ## Installation
 
-```typescript
-import '@nvidia-elements/core/pagination/define.js';
-```
-
-```html
-<nve-pagination value="1" items="100" step="20"></nve-pagination>
-```
+{% install 'nve-pagination' %}
 
 ## Standard
 
