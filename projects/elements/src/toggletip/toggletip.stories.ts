@@ -42,6 +42,33 @@ export const Content = {
     <p nve-text="body">Toggletip Footer</p>
   </nve-toggletip-footer>
 </nve-toggletip>
+
+<nve-button id="btn">button</nve-button>
+`
+};
+
+export const ContentWithFooter = {
+  render: () => html`
+<nve-toggletip anchor="btn">
+    <p nve-text="body">some text content in a toggletip</p>
+  <nve-toggletip-footer>
+    <p nve-text="body">Toggletip Footer</p>
+  </nve-toggletip-footer>
+</nve-toggletip>
+
+<nve-button id="btn">button</nve-button>
+`
+};
+
+export const ContentWithHeader = {
+  render: () => html`
+<nve-toggletip anchor="btn">
+  <nve-toggletip-header>
+    <h3 nve-text="heading sm">Toggletip Header</h3>
+  </nve-toggletip-header>
+    <p nve-text="body">some text content in a toggletip</p>
+</nve-toggletip>
+
 <nve-button id="btn">button</nve-button>
 `
 };
