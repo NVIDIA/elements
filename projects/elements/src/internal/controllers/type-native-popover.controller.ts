@@ -51,6 +51,10 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.#setupModalLightDismiss();
     this.host.inert = this.host.matches(':not(:popover-open)') && !!this.#triggers.length;
 
+    this.host.addEventListener('beforetoggle', () => {
+      this.host._internals.states.add('transition-start');
+    });
+
     this.host.addEventListener('toggle', (e: ToggleEvent) => {
       if (this.host.behaviorTrigger) {
         this.host.hidden = e.newState === 'closed';
