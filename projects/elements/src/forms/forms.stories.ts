@@ -248,7 +248,7 @@ export const KitchenSink = {
 
 export const Vertical = () => {
   return html`
-<div nve-layout="column gap:lg">
+<div nve-layout="column gap:lg full">
   <nve-input>
     <label>text label</label>
     <input />
@@ -359,7 +359,7 @@ export const Vertical = () => {
 
 export const VerticalInline = () => {
   return html`
-<div nve-layout="column gap:lg">
+<div nve-layout="column gap:lg full">
   <nve-input layout="vertical-inline">
     <label>text label</label>
     <input />
@@ -470,7 +470,7 @@ export const VerticalInline = () => {
 
 export const Horizontal = () => {
   return html`
-<div nve-layout="column gap:lg">
+<div nve-layout="column gap:lg full">
   <nve-input layout="horizontal">
     <label>text label</label>
     <input />
@@ -581,7 +581,7 @@ export const Horizontal = () => {
 
 export const HorizontalInline = () => {
   return html`
-<div nve-layout="column gap:lg">
+<div nve-layout="column gap:lg full">
   <nve-input layout="horizontal-inline">
     <label>text label</label>
     <input />
@@ -690,10 +690,9 @@ export const HorizontalInline = () => {
   `;
 };
 
-
 export const FitText = {
   render: () => html`
-<section nve-layout="column gap:md">
+<section nve-layout="column gap:md full">
   <nve-date fit-text>
     <label>date</label>
     <input type="date" value="2017-06-01" />

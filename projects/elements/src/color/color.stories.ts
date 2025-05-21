@@ -46,7 +46,7 @@ export const Datalist = {
 
 export const Vertical = {
   render: () => html`
-<div nve-layout="column gap:lg">
+<div nve-layout="column gap:lg full">
   <nve-color>
     <label>label</label>
     <input type="color" />
@@ -75,7 +75,7 @@ export const Vertical = {
 
 export const Horizontal = {
   render: () => html`
-<div nve-layout="column gap:lg">
+<div nve-layout="column gap:lg full">
   <nve-color layout="horizontal">
     <label>label</label>
     <input type="color" />
