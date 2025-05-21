@@ -11,9 +11,11 @@ import {
   popoverStyles,
   TypeNativePopoverController,
   useStyles,
-  TypeNativeAnchorController
+  TypeNativeAnchorController,
+  appendRootNodeStyle
 } from '@nvidia-elements/core/internal';
 import styles from './toggletip.css?inline';
+import globalStyles from './toggletip.global.css?inline';
 
 /**
  * @element nve-toggletip
@@ -110,7 +112,7 @@ export class Toggletip extends LitElement {
     <div internal-host>
       <slot name="header"></slot>
       ${this.closable ? html`<nve-icon-button @click=${this.hidePopover} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
-      <div id="content">
+      <div id="content" part="_content">
         <slot></slot>
       </div>
       <slot name="footer"></slot>
@@ -123,5 +125,6 @@ export class Toggletip extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'toggletip';
+    appendRootNodeStyle(this, globalStyles);
   }
 }
