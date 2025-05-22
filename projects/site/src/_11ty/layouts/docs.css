@@ -64,6 +64,10 @@ nvd-canvas {
   min-height: 140px;
 }
 
+nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
+  --padding: var(--nve-ref-space-xs);
+}
+
 nve-page-panel[slot='left'] {
   --background: var(--nve-sys-layer-shell-background);
   --width: 300px;
