@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.8...@nvidia-elements/core-v1.34.9) (2025-05-22)
+
+
+### Bug Fixes
+
+* **elements:** popover position area ([97cf72d](https://github.com/NVIDIA/elements/commit/97cf72daaa0e529f26f276c304dc8e579d88ac1f))
+
 ## [@nvidia-elements/core-v1.34.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.7...@nvidia-elements/core-v1.34.8) (2025-05-19)
 
 
