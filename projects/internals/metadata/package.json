@@ -332,7 +332,7 @@
   "dependencies": {
     "@types/node": "catalog:",
     "glob": "catalog:",
-    "ts-morph": "20.0.0"
+    "ts-morph": "catalog:"
   },
   "devDependencies": {
     "@nve-internals/eslint": "workspace:*",
