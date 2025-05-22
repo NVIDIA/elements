@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.9...@nvidia-elements/core-v1.34.10) (2025-05-22)
+
+
+### Bug Fixes
+
+* **elements:** use proper padding on nve-toggletip header without footer ([a68a69a](https://github.com/NVIDIA/elements/commit/a68a69aff98b38f0b3f21a6e985994cdd5398743))
+
 ## [@nvidia-elements/core-v1.34.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.8...@nvidia-elements/core-v1.34.9) (2025-05-22)
 
 
