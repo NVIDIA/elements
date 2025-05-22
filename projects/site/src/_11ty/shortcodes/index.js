@@ -77,6 +77,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
 
   return story
     ? /* html */ `
+${story.description ? `<p nve-text="body relaxed">${md.utils.escapeHtml(story.description)}</p>` : ''}
 <nvd-canvas id="${story.id}">
 ${playgroundButton}
 <template>${md.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>

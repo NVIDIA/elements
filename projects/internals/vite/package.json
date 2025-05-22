@@ -29,7 +29,7 @@
     "rollup-plugin-minify-html-literals": "catalog:",
     "rollup-plugin-visualizer": "5.14.0",
     "terser": "5.37.0",
-    "ts-morph": "20.0.0",
+    "ts-morph": "catalog:",
     "vite-plugin-dts": "catalog:",
     "vite-plugin-virtual-html": "1.2.3"
   },
