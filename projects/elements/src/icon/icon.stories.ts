@@ -191,11 +191,13 @@ export const Themes = {
   `
 }
 
-
+/**
+ * @description SVG paths can be registered and made accessible to the `<nve-icon>` element. Icons can be defined via a string or async function returning the resulting string.
+ */
 export const Registration = {
   render: () => html`
-    <nve-icon name=${'inference-ai-posters' as unknown as IconName} style="--width: 75px; --height: 75px;"></nve-icon>
-    <nve-icon name=${'automotive-vehicles-autonomous-car-side' as unknown as IconName} style="--width: 75px; --height: 75px;"></nve-icon>
+    <nve-icon name="inference-ai-posters" style="--width: 75px; --height: 75px;"></nve-icon>
+    <nve-icon name="automotive-vehicles-autonomous-car-side" style="--width: 75px; --height: 75px;"></nve-icon>
 
     <script type="module">
       customElements.get('nve-icon').add({
@@ -210,22 +212,28 @@ export const Registration = {
   `
 }
 
+/**
+ * @description Icons can be aliased to a different name. This can be useful for context specific names or migrations between icon sets.
+ */
 export const Alias = {
   render: () => html`
-    <nve-icon name="chevron"></nve-icon>
-    <nve-icon name=${'chevron-up' as unknown as IconName}></nve-icon>
-
     <script type="module">
+      await customElements.whenDefined('nve-icon');
       customElements.get('nve-icon').alias({
-        'chevron': 'chevron-up'
+        attached: 'paper-clip'
       });
     </script>
+    <nve-icon name="paper-clip"></nve-icon>
+    <nve-icon name="attached"></nve-icon>
   `
 }
 
+/**
+ * @description Direct SVG paths can be provided for rendering.
+ */
 export const Source = {
   render: () => html`
-    <nve-icon name=${'https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg' as unknown as IconName} style="--width: 75px; --height: 75px;"></nve-icon>
+    <nve-icon name="https://brand-assets.cne.ngc.nvidia.com/assets/marketing-icons/1.2.0/automotive-vehicles-autonomous-car-side.svg" style="--width: 75px; --height: 75px;"></nve-icon>
   `
 }
 

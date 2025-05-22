@@ -99,31 +99,21 @@ It's recommended to leverage the new [nve-page-header](./docs/elements/page-head
 
 ## Page Panel Tabs
 
-{% api 'nve-page', 'story', 'PagePanelTabs' %}
-
 {% story 'nve-page', 'PagePanelTabs', '{ "inline": false, "height": "480px", "padding": 0 }' %}
 
 ## Page Panel Headings
-
-{% api 'nve-page', 'story', 'PagePanelHeadings' %}
 
 {% story 'nve-page', 'PagePanelHeadings', '{ "inline": false, "height": "480px", "padding": 0 }' %}
 
 ## Interaction Panel
 
-{% api 'nve-page', 'story', 'InteractionPanel' %}
-
 {% story 'nve-page', 'InteractionPanel', '{ "inline": false, "height": "480px", "padding": 0 }' %}
 
 ## Interaction Panel Navigation
 
-{% api 'nve-page', 'story', 'InteractionPanelNavigation' %}
-
 {% story 'nve-page', 'InteractionPanelNavigation', '{ "inline": false, "height": "480px", "padding": 0 }' %}
 
 ## Interaction Drawer
-
-{% api 'nve-page', 'story', 'InteractionDrawer' %}
 
 {% story 'nve-page', 'InteractionDrawer', '{ "inline": false, "height": "480px", "padding": 0 }' %}
 
@@ -141,12 +131,8 @@ It's recommended to leverage the new [nve-page-header](./docs/elements/page-head
 
 ## Document Scroll
 
-{% api 'nve-page', 'story', 'DocumentScroll' %}
-
 {% story 'nve-page', 'DocumentScroll', '{ "inline": false, "height": "480px", "padding": 0 }' %}
 
 ## Kitchen Sink
-
-{% api 'nve-page', 'story', 'KitchenSink' %}
 
 {% story 'nve-page', 'KitchenSink', '{ "inline": false, "height": "780px", "padding": 0 }' %}
