@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { render } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
-import fs from 'fs';
+import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
 import path from 'path';
 import { Project, SyntaxKind } from 'ts-morph';
 import * as prettier from 'prettier';
@@ -12,15 +12,19 @@ import * as prettier from 'prettier';
 export function storiesToJSON() {
   return {
     name: 'stories',
-    async transform(code, id) {
+    async transform(_code, id) {
       if (!id.endsWith('.stories.ts')) {
         return null;
       }
 
+      // have to read the file from disk instead of `code` from vite due to esbuild stripping out comments
+      // https://github.com/evanw/esbuild/issues/516
+      const source = readFileSync(id, 'utf-8');
+
       try {
         const file = id.split('src/')[1];
         const project = new Project();
-        const tempFile = project.createSourceFile('temp.ts', code);
+        const tempFile = project.createSourceFile('temp.ts', source);
         const storiesVariableStatement = tempFile.getChildrenOfKind(SyntaxKind.VariableStatement);
         const element = tempFile
           .getChildrenOfKind(SyntaxKind.ExportAssignment)[0]
@@ -28,7 +32,8 @@ export function storiesToJSON() {
           .find(el => el.getText() === 'component')
           ?.getNextSiblings()[1]
           ?.getText()
-          ?.replace(/"/g, '');
+          ?.replace(/"/g, '')
+          ?.replace(/'/g, '');
 
         const stories = (
           await Promise.all(
@@ -83,7 +88,7 @@ export function storiesToJSON() {
         const srcPath = path.relative(process.cwd(), id);
         const distPath = path.join(srcPath.replace('.ts', '.json').replace('src', 'dist'));
         createDirectoryIfNotExists(distPath);
-        fs.writeFileSync(distPath, JSON.stringify(json, null, 2));
+        writeFileSync(distPath, JSON.stringify(json, null, 2));
 
         return {
           code: `export default ''`,
@@ -100,8 +105,8 @@ export function storiesToJSON() {
 function createDirectoryIfNotExists(filePath) {
   const directoryPath = path.dirname(filePath);
 
-  if (!fs.existsSync(directoryPath)) {
-    fs.mkdirSync(directoryPath, { recursive: true });
+  if (!existsSync(directoryPath)) {
+    mkdirSync(directoryPath, { recursive: true });
   }
 }
 

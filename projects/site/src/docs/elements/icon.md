@@ -44,19 +44,13 @@ The Iconography system is based on exposing an SVG based icon library to a the `
 
 ## Registration
 
-SVG paths can be registered and made accessible to the `<nve-icon>` element. Icons can be defined via a string or async function returning the resulting string.
-
 {% story 'nve-icon', 'Registration' %}
 
 ## Alias
 
-Icons can be aliased to a different name. This can be useful for context specific names or migrations between icon sets.
-
 {% story 'nve-icon', 'Alias' %}
 
 ## Source
-
-Direct SVG paths can be provided for rendering.
 
 {% story 'nve-icon', 'Source' %}
 
