@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/styles",
-  "version": "1.9.5",
+  "version": "1.10.0",
   "description": "Base global styles for Elements",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
