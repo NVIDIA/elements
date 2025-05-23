@@ -17,37 +17,24 @@ const metadata = await MetadataService.getMetadata();
 
 // Temporary:Exclude certain components that have low performance gains from SSR or high inline
 // This minimizes the memory footprint of Rollup which builds a dependency graph of all pages
-const ssrExcludeEntrypoints = new Set([
-  '@nvidia-elements/core/app-header',
+const ssrEntrypoints = new Set([
+  '@nvidia-elements/core/accordion',
+  '@nvidia-elements/core/alert',
   '@nvidia-elements/core/avatar',
-  '@nvidia-elements/core/breadcrumb',
-  '@nvidia-elements/core/combobox',
-  '@nvidia-elements/core/copy-button',
-  '@nvidia-elements/core/dialog',
-  '@nvidia-elements/core/dot',
-  '@nvidia-elements/core/drawer',
-  '@nvidia-elements/core/dropdown',
-  '@nvidia-elements/core/dropzone',
-  '@nvidia-elements/core/file',
-  '@nvidia-elements/core/grid',
-  '@nvidia-elements/core/notification',
-  '@nvidia-elements/core/page-loader',
-  '@nvidia-elements/core/pagination',
-  '@nvidia-elements/core/panel',
-  '@nvidia-elements/core/preferences-input',
-  '@nvidia-elements/core/progressive-filter-chip',
-  '@nvidia-elements/core/resize-handle',
-  '@nvidia-elements/core/tag',
-  '@nvidia-elements/core/toast',
-  '@nvidia-elements/core/toggletip',
-  '@nvidia-elements/core/tooltip',
-  '@nvidia-elements/core/tree'
+  '@nvidia-elements/core/badge',
+  '@nvidia-elements/core/button',
+  '@nvidia-elements/core/card',
+  '@nvidia-elements/core/icon',
+  '@nvidia-elements/core/icon-button',
+  '@nvidia-elements/core/logo',
+  '@nvidia-elements/core/page',
+  '@nvidia-elements/core/page-header'
 ]);
 
 const entrypoints = [
   ...new Set(
     metadata['@nvidia-elements/core'].elements
-      .filter(e => e.manifest?.metadata?.entrypoint && !ssrExcludeEntrypoints.has(e.manifest?.metadata?.entrypoint))
+      .filter(e => e.manifest?.metadata?.entrypoint && ssrEntrypoints.has(e.manifest?.metadata?.entrypoint))
       .map(
         e => `node_modules/${e.manifest.metadata.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`
       )
