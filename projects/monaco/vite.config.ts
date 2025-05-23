@@ -10,11 +10,11 @@ const prod = process.env.NODE_ENV === 'production';
  * @param ext The extension to use for files without an extension (defaults to '[ext]' for assets)
  * @returns The rewritten path, or undefined if not a Monaco path
  */
-const rewriteMonacoPath = (path: string | undefined, ext: string = '[ext]'): string | undefined => {
+const rewriteMonacoPath = (path: string | undefined, ext?: string): string | undefined => {
   if (!path) return undefined;
   if (path.startsWith('node_modules/monaco-editor/esm/')) {
     const rewrittenPath = path.replace('node_modules/monaco-editor/esm/', 'vendor/monaco-editor/');
-    return path.includes('.') ? rewrittenPath : rewrittenPath + '.' + ext;
+    return ext ? `${rewrittenPath}.${ext}` : rewrittenPath;
   }
   return undefined;
 };
