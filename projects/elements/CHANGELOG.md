@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.34.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.10...@nvidia-elements/core-v1.34.11) (2025-05-23)
+
+
+### Bug Fixes
+
+* **elements:** add missing invoker command support ([4a0f578](https://github.com/NVIDIA/elements/commit/4a0f5785393434855bb435beceaf363f40ea3d0d))
+
 ## [@nvidia-elements/core-v1.34.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.9...@nvidia-elements/core-v1.34.10) (2025-05-22)
 
 
