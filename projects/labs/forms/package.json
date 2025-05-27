@@ -37,6 +37,14 @@
     "./index.js": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./mixin": {
+      "types": "./dist/mixin/index.d.ts",
+      "default": "./dist/mixin/index.js"
+    },
+    "./mixin/index.js": {
+      "types": "./dist/mixin/index.d.ts",
+      "default": "./dist/mixin/index.js"
     }
   },
   "sideEffects": [],
@@ -73,11 +81,8 @@
   },
   "wireit": {
     "dev": {
-      "command": "vite",
-      "dependencies": [
-        "build:watch",
-        "../../storybook:dev"
-      ]
+      "command": "NODE_ENV=development vite build --watch",
+      "service": true
     },
     "ci": {
       "dependencies": [
@@ -88,10 +93,10 @@
       ]
     },
     "publint": {
+      "command": "publint",
       "dependencies": [
         "build"
       ],
-      "command": "publint",
       "files": [
         "package.json"
       ],
@@ -116,7 +121,6 @@
       ],
       "dependencies": [
         "build:snippets",
-        "../../elements:build",
         "../../internals/vite:ci"
       ]
     },

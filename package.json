@@ -120,6 +120,7 @@
         "release:elements-react",
         "release:labs-behaviors-alpine",
         "release:labs-code",
+        "release:labs-forms",
         "release:monaco",
         "release:styles"
       ]
@@ -133,7 +134,8 @@
     "release:elements": {
       "command": "cd projects/elements && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:themes"
+        "release:themes",
+        "release:labs-forms"
       ]
     },
     "release:elements-react": {
