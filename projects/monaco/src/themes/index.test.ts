@@ -1,5 +1,7 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
-import type * as monaco from 'monaco-editor';
+
+import type { monaco } from '../types.js';
+
 import { defineThemes, applyThemeForColorScheme, toggleThemeForColorScheme } from './index.js';
 
 function expectValidHexColor(value: string) {

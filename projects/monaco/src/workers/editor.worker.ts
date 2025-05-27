@@ -1,2 +1,2 @@
-import * as worker from 'monaco-editor/esm/vs/editor/editor.worker.js';
+import * as worker from '../vendor/monaco-editor/editor/editor.worker.js';
 export default worker;
