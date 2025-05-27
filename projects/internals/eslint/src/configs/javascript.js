@@ -2,7 +2,16 @@ import js from '@eslint/js';
 import globals from 'globals';
 
 const source = ['src/**/*.js'];
-const ignores = ['node_modules/', 'coverage/', 'dist/', 'build/', '.visual/', '.lighthouse/', '.wireit/'];
+const ignores = [
+  'node_modules/',
+  'coverage/',
+  'dist/',
+  'build/',
+  'src/vendor/',
+  '.visual/',
+  '.lighthouse/',
+  '.wireit/'
+];
 
 const config = {
   files: [...source],
