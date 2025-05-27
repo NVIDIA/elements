@@ -200,6 +200,8 @@
         "!projects/internals/metadata/static/**",
         "!projects/elements-react/src/**/*",
         "!projects/monaco/src/themes/generated/**",
+        "!projects/**/src/vendor/**/*",
+        "!projects/**/.screencast/.auth/*",
         "!projects/starters/nextjs/next-env.d.ts"
       ],
       "output": []
