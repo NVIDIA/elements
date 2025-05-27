@@ -11,6 +11,7 @@ dist-storybook
 .visual/dist
 *.diff.png
 coverage
+vendor/
 projects/elements/src/icon/icons.ts
 projects/elements/index.html
 projects/monaco/src/themes/generated

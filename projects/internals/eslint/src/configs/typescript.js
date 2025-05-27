@@ -12,7 +12,16 @@ const tests = [
   '**/*.test.ssr.ts'
 ];
 const stories = ['**/*.stories.ts'];
-const ignores = ['node_modules/', 'coverage/', 'dist/', 'build/', '.visual/', '.lighthouse/', '.wireit/'];
+const ignores = [
+  'node_modules/',
+  'coverage/',
+  'dist/',
+  'build/',
+  'src/vendor/',
+  '.visual/',
+  '.lighthouse/',
+  '.wireit/'
+];
 
 /** @type {import('eslint').Linter.Config[]} */
 const config = {
