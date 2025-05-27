@@ -1,7 +1,16 @@
 import { config } from '@weiran.zsd/multi-eslint-rule-config'; // https://github.com/eslint/eslint/issues/19013
 
 const source = ['src/**/*.ts', 'src/**/*.d.ts'];
-const ignores = ['node_modules/', 'coverage/', 'dist/', 'build/', '.visual/', '.lighthouse/', '.wireit/'];
+const ignores = [
+  'node_modules/',
+  'coverage/',
+  'dist/',
+  'build/',
+  'src/vendor/',
+  '.visual/',
+  '.lighthouse/',
+  '.wireit/'
+];
 
 /** @type {import('eslint').Linter.Config[]} */
 export const appConfig = [
