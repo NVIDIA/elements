@@ -1,2 +1,2 @@
-import * as worker from 'monaco-editor/esm/vs/language/json/json.worker.js';
+import * as worker from '../vendor/monaco-editor/language/json/json.worker.js';
 export default worker;

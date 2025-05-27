@@ -34,7 +34,7 @@ let lazyLoadedMonaco: Promise<Monaco> | undefined;
 export async function loadMonaco(): Promise<Monaco> {
   // NOTE: Guards against multiple evaluations of await import() from different import paths. (Encountered in Vitest.)
   lazyLoadedMonaco ??= (async () => {
-    self.MonacoEnvironment ??= createMonacoEnvironment();
+    globalThis.MonacoEnvironment ??= createMonacoEnvironment();
     await injectMonacoGlobalStyles();
     const monaco = (await import('./editor.main.js')) as Monaco;
     await defineThemes(monaco);

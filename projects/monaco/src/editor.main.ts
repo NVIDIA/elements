@@ -1,1 +1,1 @@
-export * from 'monaco-editor/esm/vs/editor/editor.main.js';
+export * from './vendor/monaco-editor/editor/editor.main.js';
