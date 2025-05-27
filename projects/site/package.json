@@ -33,7 +33,9 @@
         "../styles:build",
         "../themes:build",
         "../labs/code:build",
+        "../labs/forms:build",
         "../monaco:build",
+        "../internals/metadata:build",
         "../internals/patterns:build"
       ],
       "env": {
