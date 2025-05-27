@@ -1,4 +1,4 @@
-import type * as monaco from 'monaco-editor';
+import type * as monaco from './vendor/monaco-editor/editor/editor.api';
 
 export type { monaco };
 

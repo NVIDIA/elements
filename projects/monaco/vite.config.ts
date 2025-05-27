@@ -1,43 +1,8 @@
 import { resolve } from 'path';
-import { Plugin, UserConfig, defineConfig, mergeConfig } from 'vite';
+import { UserConfig, defineConfig, mergeConfig } from 'vite';
 import { libraryBuildConfig } from '@nve-internals/vite';
 
 const prod = process.env.NODE_ENV === 'production';
-
-/**
- * Rewrites paths from node_modules/monaco-editor/esm/ to vendor/monaco-editor/
- * @param path The path to rewrite
- * @param ext The extension to use for files without an extension (defaults to '[ext]' for assets)
- * @returns The rewritten path, or undefined if not a Monaco path
- */
-const rewriteMonacoPath = (path: string | undefined, ext?: string): string | undefined => {
-  if (!path) return undefined;
-  if (path.startsWith('node_modules/monaco-editor/esm/')) {
-    const rewrittenPath = path.replace('node_modules/monaco-editor/esm/', 'vendor/monaco-editor/');
-    return ext ? `${rewrittenPath}.${ext}` : rewrittenPath;
-  }
-  return undefined;
-};
-
-// A rollup plugin to rewrite dynamic import(s) in vendored monaco-editor to add a /* vite-ignore */ comment
-// to suppress warnings when workspace: linked into adjacent projects.
-function injectViteIgnore(): Plugin {
-  return {
-    name: 'inject-vite-ignore',
-    renderChunk(code, chunk, _options) {
-      if (
-        chunk.fileName.endsWith('monaco-editor/vs/base/common/worker/simpleWorker.js') ||
-        chunk.fileName.endsWith('monaco-editor/vs/editor/common/services/editorSimpleWorker.js')
-      ) {
-        return {
-          code: code.replace(/import\(`([^`]+)`\)/g, 'import(/* @vite-ignore */`$1`)'),
-          map: null
-        };
-      }
-      return null;
-    }
-  };
-}
 
 export default defineConfig(() => {
   const config: UserConfig = {
@@ -65,32 +30,10 @@ export default defineConfig(() => {
     }
   };
 
-  // Override default externals for monaco-editor to bundle it since we have many patches
   const merged = mergeConfig(libraryBuildConfig, config);
-  merged.build.rollupOptions.external = merged.build.rollupOptions.external.filter(
-    regex => !regex.toString().includes('monaco-editor')
-  );
-  merged.build.rollupOptions.output = [
-    {
-      format: 'esm',
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      assetFileNames: assetInfo => {
-        return rewriteMonacoPath(assetInfo.name) ?? '[name].[ext]';
-      },
-      entryFileNames: chunkInfo => {
-        if (chunkInfo.facadeModuleId?.endsWith('?worker&inline')) {
-          return '[name].js';
-        }
-        return rewriteMonacoPath(chunkInfo.name, 'js') ?? '[name].js';
-      }
-    }
-  ];
   merged.build.rollupOptions.plugins = [
     // Disable terser rollup plugin in favor of esbuild minification to workaround CI OOM issues
-    ...merged.build.rollupOptions.plugins.filter(p => p.name !== 'terser'),
-    // Suppress warnings for internal monaco-editor import()s when workspace: linked into adjacent projects
-    injectViteIgnore()
+    ...merged.build.rollupOptions.plugins.filter(p => p.name !== 'terser')
   ];
 
   return merged;

@@ -75,25 +75,25 @@
       "types": "./dist/input/define.d.ts",
       "default": "./dist/input/define.js"
     },
-    "./workers/json.worker.js": {
-      "types": "./dist/workers/json.worker.d.ts",
-      "default": "./dist/workers/json.worker.js"
-    },
     "./workers/css.worker.js": {
       "types": "./dist/workers/css.worker.d.ts",
       "default": "./dist/workers/css.worker.js"
+    },
+    "./workers/editor.worker.js": {
+      "types": "./dist/workers/editor.worker.d.ts",
+      "default": "./dist/workers/editor.worker.js"
     },
     "./workers/html.worker.js": {
       "types": "./dist/workers/html.worker.d.ts",
       "default": "./dist/workers/html.worker.js"
     },
+    "./workers/json.worker.js": {
+      "types": "./dist/workers/json.worker.d.ts",
+      "default": "./dist/workers/json.worker.js"
+    },
     "./workers/ts.worker.js": {
       "types": "./dist/workers/ts.worker.d.ts",
       "default": "./dist/workers/ts.worker.js"
-    },
-    "./workers/editor.worker.js": {
-      "types": "./dist/workers/editor.worker.d.ts",
-      "default": "./dist/workers/editor.worker.js"
     }
   },
   "sideEffects": true,
@@ -102,6 +102,7 @@
     "dev": "wireit",
     "build": "wireit",
     "build:watch": "wireit",
+    "build:prebundle": "wireit",
     "build:snippets": "wireit",
     "build:themes": "wireit",
     "lint": "wireit",
@@ -112,8 +113,7 @@
     "test:lighthouse": "wireit"
   },
   "dependencies": {
-    "lit": "catalog:",
-    "monaco-editor": "0.52.2"
+    "lit": "catalog:"
   },
   "peerDependencies": {
     "@nvidia-elements/core": "workspace:*",
@@ -121,18 +121,21 @@
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
-    "@nvidia-elements/core": "workspace:*",
-    "@nvidia-elements/styles": "workspace:*",
-    "@nvidia-elements/themes": "workspace:*",
-    "@nvidia-elements/testing": "workspace:*",
     "@nve-internals/eslint": "workspace:*",
     "@nve-internals/vite": "workspace:*",
     "@nvidia-elements/snippets": "workspace:*",
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/testing": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
     "@types/node": "catalog:",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "colorjs.io": "0.5.2",
+    "dts-bundle-generator": "9.5.1",
+    "esbuild": "0.25.5",
     "eslint": "catalog:",
+    "monaco-editor": "0.52.2",
     "postcss": "8.4.31",
     "publint": "catalog:",
     "typescript": "catalog:",
@@ -180,17 +183,18 @@
         "!src/**/*.test.ssr.ts",
         "!src/**/__screenshots__/**",
         "!src/themes/generated/**",
+        "!src/vendor/**",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
-        "vite.config.ts",
-        "postcss.config.js"
+        "vite.config.ts"
       ],
       "output": [
         "dist/**",
         "!dist/data.snippets.json"
       ],
       "dependencies": [
+        "build:prebundle",
         "build:snippets",
         "build:themes",
         "../internals/vite:ci",
@@ -211,6 +215,16 @@
         "build"
       ]
     },
+    "build:prebundle": {
+      "command": "node --experimental-transform-types ./build/prebundle.ts",
+      "files": [
+        "build/prebundle.ts",
+        "build/tsconfig.json"
+      ],
+      "output": [
+        "src/vendor/monaco-editor/**"
+      ]
+    },
     "build:snippets": {
       "command": "@nve-snippets",
       "files": [
@@ -224,6 +238,8 @@
       "command": "node --experimental-transform-types ./build/themes.ts",
       "files": [
         "../themes/dist/**/*.json",
+        "build/themes.ts",
+        "build/tsconfig.json",
         "src/themes/*.json"
       ],
       "output": [
@@ -321,7 +337,8 @@
         "src/**/*.ts",
         "eslint.config.js",
         "!src/**/__screenshots__/**",
-        "!src/themes/generated/**"
+        "!src/themes/generated/**",
+        "!src/vendor/**"
       ],
       "output": [],
       "dependencies": [
