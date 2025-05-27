@@ -11,10 +11,10 @@ describe('Monaco Module', () => {
 
     it('should create a default MonacoEnvironment if not already specified', async () => {
       await loadMonaco();
-      expect(self.MonacoEnvironment).toBeDefined();
-      expect(self.MonacoEnvironment?.getWorker).toBeDefined();
+      expect(globalThis.MonacoEnvironment).toBeDefined();
+      expect(globalThis.MonacoEnvironment?.getWorker).toBeDefined();
 
-      const worker = self.MonacoEnvironment?.getWorker;
+      const worker = globalThis.MonacoEnvironment?.getWorker;
       const jsonWorker = await worker?.('', 'json');
       expect(jsonWorker).toBeDefined();
 
@@ -37,11 +37,11 @@ describe('Monaco Module', () => {
         return defaultEnv.getWorker(_, label);
       }
       const existingEnv = { getWorker };
-      self.MonacoEnvironment = existingEnv;
+      globalThis.MonacoEnvironment = existingEnv;
 
       await loadMonaco();
-      expect(self.MonacoEnvironment).toBe(existingEnv);
-      expect(self.MonacoEnvironment.getWorker).toBe(existingEnv.getWorker);
+      expect(globalThis.MonacoEnvironment).toBe(existingEnv);
+      expect(globalThis.MonacoEnvironment.getWorker).toBe(existingEnv.getWorker);
     });
 
     it('should define and apply the elements monaco theme for the current color scheme', async () => {
