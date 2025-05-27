@@ -23,8 +23,10 @@ export const libraryTestConfig = {
       if (log.includes('scheduled an update')) return false;
       if (log.includes('Lit is in dev mode')) return false;
       if (log.includes('@nve: ')) return false;
+      if (log.startsWith('[Error: Expected error]')) return false;
+      if (log.startsWith('Ignored')) return false;
     },
-    setupFiles: ['@internals/vite/setup/library.js'],
+    setupFiles: ['@internals/vite/setup/library.js'], // todo: this should be project specific
     browser: {
       enabled: true,
       provider: 'playwright',
