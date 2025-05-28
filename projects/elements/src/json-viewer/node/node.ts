@@ -6,7 +6,10 @@ import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Button } from '@nvidia-elements/core/button';
 import styles from './node.css?inline';
 
-/** @private */
+/**
+ * @deprecated
+ * @private
+ */
 export class JSONNode extends LitElement {
   @property({ type: Object }) value: any; // eslint-disable-line
 

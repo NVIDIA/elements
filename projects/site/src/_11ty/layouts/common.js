@@ -107,6 +107,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/about/contributions/') ? 'highlighted' : ''}><a href="docs/about/contributions/">Contributions</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'highlighted' : ''}><a href="docs/about/requests/">Requests</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted' : ''}><a href="docs/about/migration/">Migration</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/deprecations/') ? 'highlighted' : ''}><a href="docs/about/deprecations/">Deprecations</a></nve-tree-node>
   </nve-tree-node>
   
   <nve-tree-node ${data.page.url.includes('/docs/integrations/') ? 'expanded' : ''}>
