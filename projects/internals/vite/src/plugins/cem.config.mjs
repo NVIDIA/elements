@@ -159,7 +159,7 @@ function getBehaviorCategory(classDeclaration) {
   }
 
   if (
-    classDeclaration.superclass?.name === 'BaseFormAssociatedElement' ||
+    classDeclaration.mixins?.find(i => i.name === 'FormControlMixin') ||
     classDeclaration.superclass?.name === 'Control' ||
     classDeclaration.superclass?.name === 'ControlGroup' ||
     classDeclaration.name.startsWith('Control') ||

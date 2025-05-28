@@ -169,11 +169,11 @@ export class LightCard extends FormControlMixin<typeof LitElement, LightCardValu
     <form @input=${this.#updateValue} @change=${this.#updateValue}>
       <nve-icon size="lg" name="lightbulb" style="--color: ${this.value.status === 'on' ? 'var(--nve-ref-color-yellow-nova-900)' : 'initial'}; opacity: ${this.value.status === 'on' ? this.value.dim / 100 + 0.3 : 0.5};"></nve-icon>
       ${
-        this.readonly
+        this.readOnly
           ? nothing
           : html`
-        <input type="checkbox" name="status" .checked=${this.value.status === 'on'} ?disabled=${this.readonly} aria-label="Light Status">
-        <input type="range" name="dim" .valueAsNumber=${this.value.dim} ?disabled=${this.readonly} min=${LightCard.metadata.valueSchema.properties.dim.minimum ?? 0} max=${LightCard.metadata.valueSchema.properties.dim.maximum ?? 100} aria-label="Light Dim">
+        <input type="checkbox" name="status" .checked=${this.value.status === 'on'} ?disabled=${this.readOnly} aria-label="Light Status">
+        <input type="range" name="dim" .valueAsNumber=${this.value.dim} ?disabled=${this.readOnly} min=${LightCard.metadata.valueSchema.properties.dim.minimum ?? 0} max=${LightCard.metadata.valueSchema.properties.dim.maximum ?? 100} aria-label="Light Dim">
       `
       }
     </form>`

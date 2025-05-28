@@ -2,6 +2,7 @@ import { html } from 'lit';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { FormControlMixin } from './index.js';
+import { requiredValidator } from '../validators/index.js';
 
 export class TestElement extends FormControlMixin<typeof HTMLElement, string>(HTMLElement) {
   static readonly metadata = {
@@ -43,11 +44,11 @@ describe('FormControlMixin', () => {
   });
 
   it('should implement readonly', () => {
-    expect(element.readonly).toBe(false);
+    expect(element.readOnly).toBe(false);
     expect(element.hasAttribute('readonly')).toBe(false);
 
-    element.readonly = true;
-    expect(element.readonly).toBe(true);
+    element.readOnly = true;
+    expect(element.readOnly).toBe(true);
     expect(element.hasAttribute('readonly')).toBe(true);
   });
 
@@ -58,6 +59,15 @@ describe('FormControlMixin', () => {
     element.disabled = true;
     expect(element.disabled).toBe(true);
     expect(element.hasAttribute('disabled')).toBe(true);
+  });
+
+  it('should implement required', () => {
+    expect(element.required).toBe(false);
+    expect(element.hasAttribute('required')).toBe(false);
+
+    element.required = true;
+    expect(element.required).toBe(true);
+    expect(element.hasAttribute('required')).toBe(true);
   });
 
   it('should implement name', () => {
@@ -75,6 +85,13 @@ describe('FormControlMixin', () => {
 
     element.noValidate = true;
     expect(element.noValidate).toBe(true);
+  });
+
+  it('should clear validity when noValidate is set', () => {
+    element.noValidate = true;
+    element.checkValidity();
+    expect(element.validity).toBeInstanceOf(ValidityState);
+    expect(element.validity.valid).toBe(true);
   });
 
   it('should implement form', () => {
@@ -188,6 +205,54 @@ describe('FormControlMixin', () => {
     element.value = 'test';
     element.formResetCallback();
     expect(element.value).toBe(undefined);
+  });
+});
+
+export class ValidatorTestElement extends FormControlMixin<typeof HTMLElement, string>(HTMLElement) {
+  static readonly metadata = {
+    version: '0.0.0',
+    tag: 'ui-validator-test-element',
+    validators: [requiredValidator],
+    valueSchema: {
+      type: 'string' as const
+    }
+  };
+
+  requestUpdate() {}
+}
+
+customElements.define('ui-validator-test-element', ValidatorTestElement);
+
+describe('mixin - validators', () => {
+  let fixture: HTMLElement;
+  let element: ValidatorTestElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <form>
+        <ui-validator-test-element required></ui-validator-test-element>
+      </form>
+    `);
+
+    element = fixture.querySelector('ui-validator-test-element');
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should return valid when value is valid', () => {
+    element.value = 'test';
+    expect(element.checkValidity()).toBe(true);
+    expect(element.validity.valid).toBe(true);
+    expect(element.validity.valueMissing).toBe(false);
+  });
+
+  it('should return invalid when value is invalid', () => {
+    element.value = '';
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.valid).toBe(false);
+    expect(element.validity.valueMissing).toBe(true);
   });
 });
 
