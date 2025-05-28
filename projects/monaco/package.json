@@ -113,7 +113,8 @@
     "test:lighthouse": "wireit"
   },
   "dependencies": {
-    "lit": "catalog:"
+    "lit": "catalog:",
+    "@nvidia-elements/forms": "workspace:*"
   },
   "peerDependencies": {
     "@nvidia-elements/core": "workspace:*",
@@ -173,6 +174,7 @@
       "command": "playwright-lock 'vite build'",
       "files": [
         "../elements/dist/**/*.js",
+        "../labs/forms/dist/**/*.js",
         "../themes/dist/**/*.css",
         "src/**",
         "!src/**/*.stories.ts",
@@ -200,6 +202,10 @@
         "../internals/vite:ci",
         {
           "script": "../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../labs/forms:build",
           "cascade": false
         },
         {
