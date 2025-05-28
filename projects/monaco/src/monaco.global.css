@@ -1,3 +1,5 @@
+@import './vendor/monaco-editor/editor.global.css';
+
 @font-face {
   font-family: codicon;
   font-display: block;
