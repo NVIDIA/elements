@@ -30,6 +30,9 @@ h2[nve-text='heading xl mkd'] {
 [nve-text='heading lg mkd'] {
   padding-top: var(--nve-ref-space-xl);
   padding-bottom: var(--nve-ref-space-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--nve-ref-space-sm);
 }
 
 [nve-text='link mkd']:visited {

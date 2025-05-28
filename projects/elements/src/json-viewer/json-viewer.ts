@@ -6,6 +6,7 @@ import { JSONNode } from './node/node.js';
 import styles from './json-viewer.css?inline';
 
 /**
+ * @deprecated
  * @element nve-json-viewer
  * @description The JSON Viewer is a custom element that renders JSON data in a easy to read format. This can be used for prototyping and quickly displaying and debugging data. The JSON View is not a substitute for treeview patterns.
  * @since 0.16.0
