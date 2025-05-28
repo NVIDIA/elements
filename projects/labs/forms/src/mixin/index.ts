@@ -1,6 +1,6 @@
-import type { FormControl, FormControlMetadata, FormControlValue, Validator } from '../internal/types.js';
+import type { FormControl, FormControlMetadata, FormControlValue } from '../internal/types.js';
 import { FormControlError } from '../internal/errors.js';
-import { parseValueSchema, valueSchemaValidator } from '../internal/schema.js';
+import { parseValueSchema } from '../internal/schema.js';
 import { isObjectLiteral } from '../internal/utils.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,29 +20,40 @@ type Constructor = (new (...args: any[]) => HTMLElement & {
  * @event reset - Emitted when the control state was reset to its initial value.
  * @event invalid - Emitted when the control is invalid.
  */
-export function FormControlMixin<TBase extends Constructor, T extends FormControlValue>(Base: TBase) {
-  return class FormControlBase extends Base {
+export function FormControlMixin<TBase extends Constructor, T extends FormControlValue>(SuperClass: TBase) {
+  return class FormControlBase extends SuperClass {
     static formAssociated = true;
 
     static metadata: FormControlMetadata;
 
     /** determine if component is in readonly/non-editable state */
-    get readonly() {
+    get readOnly(): boolean {
       return this.getAttribute('readonly') !== null;
     }
 
-    set readonly(value: boolean) {
-      this.toggleAttribute('readonly', value);
+    set readOnly(value: boolean | unknown) {
+      this.toggleAttribute('readonly', value as boolean);
       this.#requestUpdate();
     }
 
     /** determine if component is in disabled state */
-    get disabled() {
+    get disabled(): boolean {
       return this.getAttribute('disabled') !== null;
     }
 
-    set disabled(value: boolean) {
-      this.toggleAttribute('disabled', value);
+    // unknown is used to force generation of get/set in type defs see https://github.com/microsoft/TypeScript/issues/58790
+    set disabled(value: boolean | unknown) {
+      this.toggleAttribute('disabled', value as boolean);
+      this.#requestUpdate();
+    }
+
+    /** determine if component value is required */
+    get required(): boolean {
+      return this.getAttribute('required') !== null;
+    }
+
+    set required(value: T | unknown) {
+      this.toggleAttribute('required', value as boolean);
       this.#requestUpdate();
     }
 
@@ -56,21 +67,22 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
       this.#requestUpdate();
     }
 
-    /** determine if component is in no validation state */
-    get noValidate() {
+    /** get determine if component is in no validation state */
+    get noValidate(): boolean {
       return this.getAttribute('novalidate') !== null || this.#internals.form?.noValidate === true;
     }
 
-    set noValidate(value: boolean) {
-      this.toggleAttribute('novalidate', value);
+    /** set determine if component is in no validation state */
+    set noValidate(value: boolean | unknown) {
+      this.toggleAttribute('novalidate', value as boolean);
       this.#requestUpdate();
     }
 
     #value: T | undefined;
 
     /** value state of the component */
-    set value(value: T) {
-      this.updateValue(value);
+    set value(value: T | unknown) {
+      this.updateValue(value as T);
       this.#requestUpdate();
     }
 
@@ -142,17 +154,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
     #initialValue: T | undefined;
 
     get #validators() {
-      const validators: Validator[] = [];
-
-      if (this.#metadata.valueSchema.validate !== false) {
-        validators.push(valueSchemaValidator);
-      }
-
-      if (Array.isArray(this.#metadata.validators)) {
-        validators.push(...this.#metadata.validators);
-      }
-
-      return validators;
+      return this.#metadata.validators ?? [];
     }
 
     /** @protected */
@@ -180,7 +182,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
 
     static get observedAttributes() {
       const attrs = super.observedAttributes ?? [];
-      return attrs.concat(['value', 'readonly', 'name', 'novalidate', 'disabled']);
+      return attrs.concat(['value', 'readonly', 'required', 'name', 'novalidate', 'disabled']);
     }
 
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -197,11 +199,15 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
       }
 
       if (name === 'readonly' && newValue !== oldValue) {
-        this.readonly = newValue !== null;
+        this.readOnly = newValue !== null;
       }
 
       if (name === 'disabled' && newValue !== oldValue) {
         this.disabled = newValue !== null;
+      }
+
+      if (name === 'required' && newValue !== oldValue) {
+        this.required = newValue !== null;
       }
 
       if (name === 'name' && newValue !== oldValue) {
@@ -228,17 +234,21 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
 
     /** check validity of the component */
     checkValidity() {
-      for (const validator of this.#validators) {
-        const result = validator(this.value, this as unknown as FormControl);
-        if (!result.validity.valid) {
-          this.#internals.setValidity(
-            result.validity,
-            result.message,
-            (this.shadowRoot?.activeElement as HTMLElement) ?? undefined
-          );
-          break;
-        } else {
-          this.#internals.setValidity({});
+      if (this.noValidate) {
+        this.#internals.setValidity({});
+      } else {
+        for (const validator of this.#validators) {
+          const result = validator(this.value, this as unknown as FormControl);
+          if (!result.validity.valid) {
+            this.#internals.setValidity(
+              result.validity,
+              result.message,
+              (this.shadowRoot?.activeElement as HTMLElement) ?? undefined
+            );
+            break;
+          } else {
+            this.#internals.setValidity({});
+          }
         }
       }
 

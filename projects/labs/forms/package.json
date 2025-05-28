@@ -45,6 +45,14 @@
     "./mixin/index.js": {
       "types": "./dist/mixin/index.d.ts",
       "default": "./dist/mixin/index.js"
+    },
+    "./validators": {
+      "types": "./dist/validators/index.d.ts",
+      "default": "./dist/validators/index.js"
+    },
+    "./validators/index.js": {
+      "types": "./dist/validators/index.d.ts",
+      "default": "./dist/validators/index.js"
     }
   },
   "sideEffects": [],
@@ -65,7 +73,6 @@
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
-    "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@nve-internals/eslint": "workspace:*",

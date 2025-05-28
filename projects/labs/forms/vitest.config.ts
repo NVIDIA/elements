@@ -2,7 +2,7 @@ import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
 import { libraryTestConfig } from '@nve-internals/vite';
 
-export default mergeConfig(libraryTestConfig, {
+const config = mergeConfig(libraryTestConfig, {
   test: {
     include: ['./src/**/*.test.ts'],
     alias: { '@nvidia-elements/forms': resolve(import.meta.dirname, './src') },
@@ -17,3 +17,7 @@ export default mergeConfig(libraryTestConfig, {
     }
   }
 });
+
+config.test.setupFiles = [];
+
+export default config;

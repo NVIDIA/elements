@@ -1,25 +1,5 @@
-import type { FormControl, Schema, ValidatorResult } from './types.js';
+import type { Schema } from './types.js';
 import { FormControlError } from './errors.js';
-
-/**
- * Given a json schema validate the value against the schema
- * JSON Schema follows the OpenAI JSON Schema for structured outputs
- * https://platform.openai.com/docs/guides/structured-outputs
- *
- * - All fields or function parameters must be specified as required
- * - Require additionalProperties: false to be set on all objects
- * - The following types are supported for Structured Outputs:
- *   - String
- *   - Number
- *   - Boolean
- *   - Object
- *   - Array
- *   - Enum
- */
-export function valueSchemaValidator(value: unknown, element: FormControl): ValidatorResult {
-  const metadata = (element as any).constructor.metadata; // eslint-disable-line @typescript-eslint/no-explicit-any
-  return validateSchema(metadata.valueSchema, value);
-}
 
 export function parseValueSchema<T>(formControlName: string, value: string, schema: Schema): T {
   const parsedValue = parseControlValue(value, schema);
@@ -195,8 +175,6 @@ export function validateSchema(schema: Schema, value: unknown): { validity: Part
 export function parseControlValue<T>(value: string, schema: Schema): T | undefined {
   const schemaType = schema.type;
   let parsedValue: unknown;
-
-  console.log('parseControlValue', value, schema);
 
   switch (schemaType) {
     case 'string': {
