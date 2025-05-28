@@ -169,7 +169,8 @@
       "command": "cd projects/monaco && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:elements",
-        "release:themes"
+        "release:themes",
+        "release:labs-forms"
       ]
     },
     "release:styles": {
