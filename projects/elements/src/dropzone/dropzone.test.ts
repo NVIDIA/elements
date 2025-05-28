@@ -168,7 +168,7 @@ describe(Dropzone.metadata.tag, () => {
     const files = formData.getAll('files');
 
     expect(files.length).toBe(1);
-    expect(files[0]).toBe(file);
+    expect(files[0]).toStrictEqual(file);
   });
 
   it('should add highlighted attribute on dragenter', async () => {

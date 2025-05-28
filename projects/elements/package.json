@@ -907,6 +907,7 @@
   },
   "dependencies": {
     "@floating-ui/dom": "1.6.1",
+    "@nvidia-elements/forms": "workspace:*",
     "composed-offset-position": "^0.0.4",
     "lit": "catalog:",
     "lit-html": "catalog:"
@@ -993,7 +994,8 @@
         "tsconfig.lib.json",
         "vite.config.ts",
         "vite.bundle.ts",
-        "custom-elements-manifest.config.mjs"
+        "custom-elements-manifest.config.mjs",
+        "../labs/forms/dist/**/*.js"
       ],
       "output": [
         "dist/**",
@@ -1006,7 +1008,11 @@
         "build:snippets",
         "../themes:build",
         "../styles:build",
-        "../internals/vite:ci"
+        "../internals/vite:ci",
+        {
+          "script": "../labs/forms:build",
+          "cascade": false
+        }
       ]
     },
     "build:icons": {
