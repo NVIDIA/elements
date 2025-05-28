@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.0.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.1...@nvidia-elements/monaco-v1.0.2) (2025-05-28)
+
+
+### Bug Fixes
+
+* **monaco:** prebundle vendored code ([3e57bab](https://github.com/NVIDIA/elements/commit/3e57bab1dfeecde0c3ae41dc3a97435d8a8635cd))
+
 ## [@nvidia-elements/monaco-v1.0.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.0...@nvidia-elements/monaco-v1.0.1) (2025-05-23)
 
 
