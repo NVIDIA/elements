@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.35.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.35.0...@nvidia-elements/core-v1.35.1) (2025-05-28)
+
+
+### Bug Fixes
+
+* **elements:** update to forms mixin ([7c04524](https://github.com/NVIDIA/elements/commit/7c045240f8fb5d0965d7e32ae627d4b2fc392ee8))
+* **labs-forms:** get and set override support ([9937ce6](https://github.com/NVIDIA/elements/commit/9937ce61e565c6d6877569b94dde944cc83c19fb))
+
 ## [@nvidia-elements/core-v1.35.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.34.11...@nvidia-elements/core-v1.35.0) (2025-05-23)
 
 
