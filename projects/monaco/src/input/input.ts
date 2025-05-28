@@ -268,7 +268,7 @@ export class MonacoInput extends FormControlMixin<typeof LitElement, string>(Lit
     this.#editor = undefined;
     this.#model = undefined;
 
-    this._internals?.states.delete('ready');
+    this._internals.states.delete('ready');
   }
 
   render() {
@@ -317,26 +317,32 @@ export class MonacoInput extends FormControlMixin<typeof LitElement, string>(Lit
     const editor = editorEl.editor;
     const model = editor.getModel();
 
-    // Tweak the default options to be more visually consistent with an input field
+    // Tweak the default options to be more visually and behaviorally consistent with an input control
     editor.updateOptions({
-      renderLineHighlight: 'none'
+      renderLineHighlight: 'none',
+      scrollbar: { alwaysConsumeMouseWheel: false }
     });
 
-    // Emulate "input" events
     const didChangeContentListener = model.onDidChangeContent(() => {
       this.#updateValidationState();
+
+      // Emulate "input" events
       super.value = model.getValue();
       if (!this.#isProgrammaticChange) {
         this.dispatchInputEvent();
       }
     });
 
-    // Emulate "change" events
     let lastCommittedVersionId = model.getVersionId();
     const didFocusListener = editor.onDidFocusEditorText(() => {
+      editor.updateOptions({ scrollbar: { alwaysConsumeMouseWheel: true } });
+
       lastCommittedVersionId = model.getVersionId();
     });
     const didBlurListener = editor.onDidBlurEditorText(() => {
+      editor.updateOptions({ scrollbar: { alwaysConsumeMouseWheel: false } });
+
+      // Emulate "change" events
       const currentVersionId = model.getVersionId();
       if (lastCommittedVersionId !== currentVersionId) {
         lastCommittedVersionId = currentVersionId;
@@ -389,7 +395,7 @@ export class MonacoInput extends FormControlMixin<typeof LitElement, string>(Lit
     this.#applyOptions();
     this.#applyValue();
 
-    this._internals?.states.add('ready');
+    this._internals.states.add('ready');
 
     this.dispatchEvent(new Event('ready'));
   }
@@ -437,29 +443,25 @@ export class MonacoInput extends FormControlMixin<typeof LitElement, string>(Lit
   }
 
   #setRequiredValidationError() {
-    this._internals?.setValidity({ valueMissing: true }, 'This field is required');
+    this._internals.setValidity({ valueMissing: true }, 'This field is required');
   }
 
   #setSyntaxValidationPending() {
-    this._internals?.states.add('validating-syntax');
-    this._internals?.setValidity({ customError: true }, 'Validating syntax...');
+    this._internals.states.add('validating-syntax');
+    this._internals.setValidity({ customError: true }, 'Validating syntax...');
   }
 
   #setSyntaxValidationError(errors: string[]) {
-    this._internals?.states.delete('validating-syntax');
-    this._internals?.setValidity({ customError: true }, errors.join('\n'));
+    this._internals.states.delete('validating-syntax');
+    this._internals.setValidity({ customError: true }, errors.join('\n'));
   }
 
   #clearValidation() {
-    this._internals?.states.delete('validating-syntax');
-    this._internals?.setValidity({});
+    this._internals.states.delete('validating-syntax');
+    this._internals.setValidity({});
   }
 
   #updateValidationState() {
-    if (!this._internals) {
-      return;
-    }
-
     if (!this.#shouldValidate()) {
       this.#clearValidation();
       return;
