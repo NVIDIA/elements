@@ -199,6 +199,9 @@ importers:
       '@floating-ui/dom':
         specifier: 1.6.1
         version: 1.6.1
+      '@nvidia-elements/forms':
+        specifier: workspace:*
+        version: link:../labs/forms
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -775,6 +778,9 @@ importers:
 
   projects/monaco:
     dependencies:
+      '@nvidia-elements/forms':
+        specifier: workspace:*
+        version: link:../labs/forms
       lit:
         specifier: 'catalog:'
         version: 3.2.1

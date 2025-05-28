@@ -1,15 +1,13 @@
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { useStyles } from '@nvidia-elements/core/internal';
+import { FormControlMixin } from '@nvidia-elements/forms/mixin';
 
 import type { monaco } from '../types.js';
 
 import styles from './input.css?inline';
 
 import type { MonacoEditor } from '@nvidia-elements/monaco/editor';
-import '@nvidia-elements/monaco/editor/define.js';
-
-import { BaseFormAssociatedElement } from '@nvidia-elements/core/internal';
 
 const SYNTAX_VALIDATABLE_LANGUAGES = ['css', 'json', 'javascript', 'typescript'] as const;
 
@@ -77,10 +75,13 @@ function setJSONSchemaForModel(
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-Nvidia-Elements-Design-Catalog?node-id=12947-3101&p=f&t=PNLgvP1PAy5fn1KW-0
  * @stable false
  */
-export class MonacoInput extends BaseFormAssociatedElement<string> {
+export class MonacoInput extends FormControlMixin<typeof LitElement, string>(LitElement) {
   static readonly metadata = {
     tag: 'nve-monaco-input',
-    version: '0.0.0'
+    version: '0.0.0',
+    valueSchema: {
+      type: 'string' as const
+    }
   };
 
   /**
@@ -99,15 +100,13 @@ export class MonacoInput extends BaseFormAssociatedElement<string> {
   /**
    * Determines whether the input is disabled and cannot be edited.
    */
-  @property({ type: Boolean })
   get disabled(): boolean {
-    return this.#disabled;
+    return super.disabled;
   }
   set disabled(value: boolean) {
-    this.#disabled = value;
+    super.disabled = value;
     this.#applyOptions();
   }
-  #disabled = false;
 
   /**
    * Determines whether code folding is enabled in the editor.
@@ -164,28 +163,24 @@ export class MonacoInput extends BaseFormAssociatedElement<string> {
   /**
    * Determines whether the editor is in read-only mode.
    */
-  @property({ attribute: 'readonly', type: Boolean })
   get readOnly(): boolean {
-    return this.#readOnly;
+    return super.readOnly;
   }
   set readOnly(value: boolean) {
-    this.#readOnly = value;
+    super.readOnly = value;
     this.#applyOptions();
   }
-  #readOnly = false;
 
   /**
    * Determines whether the input is required to have a value.
    */
-  @property({ type: Boolean })
   get required(): boolean {
-    return this.#required;
+    return super.required;
   }
   set required(value: boolean) {
-    this.#required = value;
+    super.required = value;
     this.#updateValidationState();
   }
-  #required = false;
 
   /**
    * JSON schema to use for validation when language is set to 'json'.
@@ -217,7 +212,6 @@ export class MonacoInput extends BaseFormAssociatedElement<string> {
   /**
    * The current value/content of the editor.
    */
-  @property({ type: String })
   override get value(): string {
     return super.value ?? '';
   }
@@ -242,15 +236,13 @@ export class MonacoInput extends BaseFormAssociatedElement<string> {
   /**
    * Determines whether to disable validation of the input.
    */
-  @property({ attribute: 'novalidate', type: Boolean })
   get noValidate(): boolean {
-    return this.#noValidate;
+    return super.noValidate;
   }
   set noValidate(value: boolean) {
-    this.#noValidate = value;
+    super.noValidate = value;
     this.#updateValidationState();
   }
-  #noValidate = false;
 
   #monaco: typeof monaco | undefined;
   #editor: monaco.editor.IStandaloneCodeEditor | undefined;
@@ -307,7 +299,7 @@ export class MonacoInput extends BaseFormAssociatedElement<string> {
       this.#minimap = options.minimap.enabled;
     }
     if ('readOnly' in options) {
-      this.#readOnly = options.readOnly;
+      super.readOnly = options.readOnly;
     }
     if ('tabSize' in options) {
       this.#tabSize = options.tabSize;
@@ -419,7 +411,7 @@ export class MonacoInput extends BaseFormAssociatedElement<string> {
       lineDecorationsWidth: this.#lineNumbers !== 'off' || this.#folding ? 10 : 0,
       lineNumbers: this.#lineNumbers,
       minimap: { ...this.#editor?.getOption(73 /* EditorOption.minimap */), enabled: this.#minimap },
-      readOnly: this.#readOnly || this.disabled,
+      readOnly: this.readOnly || this.disabled,
       tabSize: this.#tabSize,
       wordWrap: this.#wordWrap
     });
@@ -441,7 +433,7 @@ export class MonacoInput extends BaseFormAssociatedElement<string> {
   }
 
   #isRequiredAndEmpty(): boolean {
-    return this.#required && !this.value;
+    return this.required && !this.value;
   }
 
   #setRequiredValidationError() {
