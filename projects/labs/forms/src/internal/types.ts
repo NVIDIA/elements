@@ -4,7 +4,6 @@ interface SchemaBase {
   type: string;
   description?: string;
   format?: string;
-  validate?: boolean;
 }
 
 export interface StringSchema extends SchemaBase {
@@ -63,6 +62,7 @@ interface FormControlInstance extends HTMLElement {
   willValidate: boolean;
   validity: ValidityState;
   validationMessage: string;
+  required?: boolean;
   checkValidity(): boolean;
   reportValidity(): boolean;
 }
