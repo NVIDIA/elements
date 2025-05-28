@@ -1,9 +1,10 @@
-import { html, nothing } from 'lit';
+import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { FormControlMixin } from '@nvidia-elements/forms/mixin';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   attachInternals,
-  BaseFormAssociatedElement,
+  I18nController,
   formatStandardNumber,
   keyNavigationList,
   typeSSR,
@@ -31,7 +32,7 @@ import styles from './pagination.css?inline';
  */
 @typeSSR()
 @keyNavigationList<Pagination>()
-export class Pagination extends BaseFormAssociatedElement<number> {
+export class Pagination extends FormControlMixin<typeof LitElement, number>(LitElement) {
   /**
    * The number of items per page.
    */
@@ -57,20 +58,25 @@ export class Pagination extends BaseFormAssociatedElement<number> {
   @property({ type: Boolean, attribute: 'disable-step' }) disableStep: boolean;
 
   /**
-   * Whether or not the pagination is disabled.
-   */
-  @property({ type: Boolean }) disabled: boolean;
-
-  /**
    * Determines the container styles of component. Flat is used for nesting within other containers. Inline is used to inline within other inline content.
    */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
+
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   static styles = useStyles([styles]);
 
   static readonly metadata = {
     tag: 'nve-pagination',
-    version: '0.0.0'
+    version: '0.0.0',
+    valueSchema: {
+      type: 'number' as const
+    }
   };
 
   static elementDefinitions = {
