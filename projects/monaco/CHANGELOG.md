@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.0.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.2...@nvidia-elements/monaco-v1.0.3) (2025-05-28)
+
+
+### Bug Fixes
+
+* **monaco:** upgrade form control internals ([17c4acf](https://github.com/NVIDIA/elements/commit/17c4acf9f02bced7a1067556efc186e88fc58c49))
+
 ## [@nvidia-elements/monaco-v1.0.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.1...@nvidia-elements/monaco-v1.0.2) (2025-05-28)
 
 
