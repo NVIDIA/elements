@@ -154,15 +154,15 @@ export class QualityControl extends FormControlMixin<typeof LitElement, QualityC
       ? html`
     <form @input=${this.#updateValue} @change=${this.#updateValue}>
       <label>
-        <input type="checkbox" name="good" .checked=${this.value.good} ?disabled=${this.disabled || this.readonly} aria-label="Good">
+        <input type="checkbox" name="good" .checked=${this.value.good} ?disabled=${this.disabled || this.readOnly} aria-label="Good">
         Good
       </label>
       <label>
-        <input type="checkbox" name="fast" .checked=${this.value.fast} ?disabled=${this.disabled || this.readonly} aria-label="Fast">
+        <input type="checkbox" name="fast" .checked=${this.value.fast} ?disabled=${this.disabled || this.readOnly} aria-label="Fast">
         Fast
       </label>
       <label>
-        <input type="checkbox" name="cheap" .checked=${this.value.cheap} ?disabled=${this.disabled || this.readonly} aria-label="Cheap">
+        <input type="checkbox" name="cheap" .checked=${this.value.cheap} ?disabled=${this.disabled || this.readOnly} aria-label="Cheap">
         Cheap
       </label>
     </form>`
