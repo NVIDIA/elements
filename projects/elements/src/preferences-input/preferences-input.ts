@@ -1,13 +1,14 @@
-import { html, isServer } from 'lit';
+import { html, isServer, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { BaseFormAssociatedElement, useStyles } from '@nvidia-elements/core/internal';
-import styles from './preferences-input.css?inline';
+import { I18nController, useStyles } from '@nvidia-elements/core/internal';
 import { state } from 'lit/decorators/state.js';
+import { FormControlMixin } from '@nvidia-elements/forms/mixin';
 import type { IconName } from '@nvidia-elements/core/icon';
 import { Control } from '@nvidia-elements/core/forms';
 import { Divider } from '@nvidia-elements/core/divider';
 import { Menu, MenuItem } from '@nvidia-elements/core/menu';
 import { Switch } from '@nvidia-elements/core/switch';
+import styles from './preferences-input.css?inline';
 
 export type ColorScheme = 'auto' | 'light' | 'dark' | 'high-contrast';
 export type Scale = 'default' | 'compact' | 'relaxed';
@@ -52,27 +53,27 @@ export interface PreferencesInputValue {
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
  *
  */
-export class PreferencesInput extends BaseFormAssociatedElement<PreferencesInputValue> {
+export class PreferencesInput extends FormControlMixin<typeof LitElement, PreferencesInputValue>(LitElement) {
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
+
   static styles = useStyles([styles]);
-
-  #value: PreferencesInputValue;
-
-  @property({ type: Object })
-  get value() {
-    return this.#value;
-  }
-
-  set value(value) {
-    if (JSON.stringify(this.#value) !== JSON.stringify(value)) {
-      this.#value = { ...this.#value, ...value };
-      this.setFormValue();
-      this.#updatePreferences();
-    }
-  }
 
   static readonly metadata = {
     tag: 'nve-preferences-input',
-    version: '0.0.0'
+    version: '0.0.0',
+    valueSchema: {
+      type: 'object' as const,
+      properties: {
+        'color-scheme': { type: 'string' as const },
+        scale: { type: 'string' as const },
+        'reduced-motion': { type: 'boolean' as const }
+      }
+    }
   };
 
   static elementDefinitions = {
@@ -93,15 +94,6 @@ export class PreferencesInput extends BaseFormAssociatedElement<PreferencesInput
     compact: false,
     'reduced-motion': false
   };
-
-  constructor() {
-    super();
-    this.value = {
-      'color-scheme': 'auto',
-      'reduced-motion': false,
-      scale: 'default'
-    };
-  }
 
   render() {
     return html`
@@ -164,9 +156,25 @@ export class PreferencesInput extends BaseFormAssociatedElement<PreferencesInput
     `;
   }
 
+  constructor() {
+    super();
+    this.value = {
+      'color-scheme': 'auto',
+      'reduced-motion': false,
+      scale: 'default'
+    };
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute('nve-control', '');
+    this.#updatePreferences();
+  }
+
+  /** @private */
+  updateValue(value: PreferencesInputValue) {
+    super.updateValue({ ...this.value, ...value });
+    this.#updatePreferences();
   }
 
   #updatePreferences() {
