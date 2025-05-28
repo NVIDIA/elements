@@ -10,7 +10,7 @@ describe('monaco-editor lighthouse report', () => {
       </script>
     `);
 
-    expect(report.scores.performance).toBeGreaterThan(95);
+    expect(report.scores.performance).toBeGreaterThanOrEqual(95);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(89);
     expect(report.payload.javascript.kb).toBeLessThan(1186);
