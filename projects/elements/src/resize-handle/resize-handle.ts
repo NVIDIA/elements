@@ -1,8 +1,9 @@
-import { html, type PropertyValues } from 'lit';
+import { html, LitElement, type PropertyValues } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, typeTouch, BaseFormAssociatedElement } from '@nvidia-elements/core/internal';
-import type { NveTouchEvent } from '@nvidia-elements/core/internal';
+import { FormControlMixin } from '@nvidia-elements/forms/mixin';
+import { useStyles, typeTouch } from '@nvidia-elements/core/internal';
+import { I18nController, type NveTouchEvent } from '@nvidia-elements/core/internal';
 import styles from './resize-handle.css?inline';
 
 /**
@@ -21,7 +22,7 @@ import styles from './resize-handle.css?inline';
  *
  */
 @typeTouch<ResizeHandle>()
-export class ResizeHandle extends BaseFormAssociatedElement<number> {
+export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(LitElement) {
   /**
    * Determines the orientation direction of the resize handle.
    */
@@ -50,8 +51,18 @@ export class ResizeHandle extends BaseFormAssociatedElement<number> {
 
   static readonly metadata = {
     tag: 'nve-resize-handle',
-    version: '0.0.0'
+    version: '0.0.0',
+    valueSchema: {
+      type: 'number' as const
+    }
   };
+
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   #offset = 0;
 

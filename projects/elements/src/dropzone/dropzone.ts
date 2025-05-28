@@ -1,8 +1,9 @@
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 import { property, query } from 'lit/decorators.js';
-import { BaseFormAssociatedElement, formatFileSize, useStyles, removeEmptyTextNode } from '@nvidia-elements/core/internal';
+import { formatFileSize, useStyles, removeEmptyTextNode, I18nController } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './dropzone.css?inline';
+import { FormControlMixin } from '@nvidia-elements/forms/mixin';
 
 /**
  * @element nve-dropzone
@@ -21,12 +22,19 @@ import styles from './dropzone.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  * @stable false
  */
-export class Dropzone extends BaseFormAssociatedElement<File[]> {
+export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitElement) {
   @property()
   accept: string = `image/gif, image/jpeg, image/png, image/svg+xml`;
 
   @property({ attribute: 'max-file-size', type: Number })
   maxFileSize: number = 2 * 1024 ** 2;
+
+  #i18nController: I18nController<this> = new I18nController<this>(this);
+
+  /**
+   * Enables internal string values to be updated for internationalization.
+   */
+  @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   @query('#dropzone-input')
   private fileInput: HTMLInputElement;
@@ -35,7 +43,18 @@ export class Dropzone extends BaseFormAssociatedElement<File[]> {
 
   static readonly metadata = {
     tag: 'nve-dropzone',
-    version: '0.0.0'
+    version: '0.0.0',
+    valueSchema: {
+      type: 'array' as const,
+      items: {
+        type: 'object' as const,
+        properties: {
+          name: { type: 'string' as const },
+          size: { type: 'number' as const },
+          type: { type: 'string' as const }
+        }
+      }
+    }
   };
 
   static elementDefinitions = {
