@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.0.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.3...@nvidia-elements/monaco-v1.0.4) (2025-05-29)
+
+
+### Bug Fixes
+
+* **monaco:** adjust monaco input scroll capture ([4dce858](https://github.com/NVIDIA/elements/commit/4dce8587d60faf85d671363968e0db16455bd95c))
+
 ## [@nvidia-elements/monaco-v1.0.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.2...@nvidia-elements/monaco-v1.0.3) (2025-05-28)
 
 
