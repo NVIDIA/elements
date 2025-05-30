@@ -5,7 +5,7 @@ import { globSync } from 'glob';
 import type {
   MetadataCustomElementsManifest,
   MetadataCustomElementsManifestDeclaration,
-  MetadataElementSories,
+  MetadataElementStories,
   MetadataLighthouseElementReport,
   MetadataLighthouseReport,
   MetadataPackage,
@@ -15,12 +15,14 @@ import type {
   MetadataTestReport,
   MetadataUnitTestCoverageSummary,
   MetadataUnitTestCoverageSummaryReport,
-  MetadataSummary
+  MetadataType,
+  MetadataElement
 } from '../types.js';
+import { elementMetadataToMarkdown, getElementChangelog } from '../utils/index.ts';
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
 
-const stories: MetadataElementSories[] = [
+const stories: MetadataElementStories[] = [
   ...globSync(`${resolve('../../elements')}/dist/**/*.stories.json`),
   ...globSync(`${resolve('../../monaco')}/dist/**/*.stories.json`)
 ]
@@ -32,9 +34,10 @@ function getPackageFile(basePath: string): MetadataPackage {
 }
 
 function getChangelog(basePath: string): string {
-  return existsSync(new URL(basePath + '/CHANGELOG.md', import.meta.url))
+  const changelog = existsSync(new URL(basePath + '/CHANGELOG.md', import.meta.url))
     ? readFileSync(new URL(basePath + '/CHANGELOG.md', import.meta.url), 'utf8')
-    : null;
+    : '';
+  return changelog.includes('@elements') ? changelog.split('@elements')[0] : changelog;
 }
 
 function getReadMe(basePath: string): string {
@@ -144,6 +147,7 @@ function getSSRReport(basePath: string): MetadataSSRElementReport[] {
 
 function getElementMetadata(
   packageName: string,
+  packageChangelog: string,
   customElementsManifest: MetadataCustomElementsManifest,
   testCoverage: MetadataTestReport,
   lighthouseReport: MetadataLighthouseReport,
@@ -154,8 +158,9 @@ function getElementMetadata(
 
   return elementDeclarations
     .map(d => d.tagName)
-    .reduce((elements: MetadataProject[], name) => {
+    .reduce((elements: MetadataElement[], name) => {
       const manifest = elementDeclarations.find(e => e.tagName === name);
+      const markdown = elementMetadataToMarkdown(manifest);
       const lighthouse: MetadataLighthouseElementReport = lighthouseReport[packageName][
         Object.keys(lighthouseReport[packageName]).find(key => name === 'key' || name.startsWith(key)) ?? ''
       ] ?? {
@@ -177,8 +182,12 @@ function getElementMetadata(
         hydration: false
       };
 
-      const metadata = {
+      const changelog = getElementChangelog(name, packageChangelog);
+
+      const metadata: MetadataElement = {
         name,
+        markdown,
+        changelog,
         manifest,
         tests: {
           unit,
@@ -193,7 +202,7 @@ function getElementMetadata(
     .sort((a, b) => (a.name < b.name ? -1 : 1));
 }
 
-function getElementsStandardAPIProperties() {
+function getElementsStandardAPIProperties(): MetadataType[] {
   const project = new Project();
   const file = project.addSourceFileAtPath(BASE_ELEMENT_INTERFACE_PATH);
   const base = file
@@ -203,11 +212,11 @@ function getElementsStandardAPIProperties() {
     name: n.name,
     type: n.type,
     description: n.docs ? (n.docs[0] as OptionalKind<JSDocStructure>)?.description : ''
-  }));
-  return { props: props ?? [] };
+  })) as MetadataType[];
+  return props ?? [];
 }
 
-async function getProjectMetadata(basePath) {
+async function getProjectMetadata(basePath): Promise<MetadataProject> {
   const packageFile = getPackageFile(basePath);
   const changelog = getChangelog(basePath);
   const readme = getReadMe(basePath);
@@ -222,25 +231,36 @@ async function getProjectMetadata(basePath) {
     readme,
     changelog,
     tests,
-    elements: getElementMetadata(packageFile.name, customElementsManifest, tests, lighthouseReport, ssrReport)
+    elements: getElementMetadata(
+      packageFile.name,
+      changelog,
+      customElementsManifest,
+      tests,
+      lighthouseReport,
+      ssrReport
+    )
   };
 }
 
 export async function getMetadata() {
+  const elements = await getProjectMetadata('../../../../elements');
+  elements.types = getElementsStandardAPIProperties();
+
   return {
     created: new Date().toISOString(),
-    types: getElementsStandardAPIProperties(),
-    '@nvidia-elements/core': await getProjectMetadata('../../../../elements'),
-    '@nvidia-elements/core-react': await getProjectMetadata('../../../../elements-react'),
-    '@nvidia-elements/styles': await getProjectMetadata('../../../../styles'),
-    '@nvidia-elements/testing': await getProjectMetadata('../../../../testing'),
-    '@nvidia-elements/themes': await getProjectMetadata('../../../../themes'),
-    '@nvidia-elements/behaviors-alpine': await getProjectMetadata('../../../../labs/behaviors-alpine'),
-    '@nvidia-elements/brand': await getProjectMetadata('../../../../labs/brand'),
-    '@nvidia-elements/code': await getProjectMetadata('../../../../labs/code'),
-    '@nvidia-elements/forms': await getProjectMetadata('../../../../labs/forms'),
-    '@nvidia-elements/playwright-screencast': await getProjectMetadata('../../../../labs/playwright-screencast'),
-    '@nvidia-elements/monaco': await getProjectMetadata('../../../../monaco'),
-    '@internals/metadata': await getProjectMetadata('../../../../internals/metadata')
-  } as MetadataSummary;
+    projects: {
+      '@nvidia-elements/core': elements,
+      '@nvidia-elements/core-react': await getProjectMetadata('../../../../elements-react'),
+      '@nvidia-elements/styles': await getProjectMetadata('../../../../styles'),
+      '@nvidia-elements/testing': await getProjectMetadata('../../../../testing'),
+      '@nvidia-elements/themes': await getProjectMetadata('../../../../themes'),
+      '@nvidia-elements/behaviors-alpine': await getProjectMetadata('../../../../labs/behaviors-alpine'),
+      '@nvidia-elements/brand': await getProjectMetadata('../../../../labs/brand'),
+      '@nvidia-elements/code': await getProjectMetadata('../../../../labs/code'),
+      '@nvidia-elements/forms': await getProjectMetadata('../../../../labs/forms'),
+      '@nvidia-elements/playwright-screencast': await getProjectMetadata('../../../../labs/playwright-screencast'),
+      '@nvidia-elements/monaco': await getProjectMetadata('../../../../monaco'),
+      '@internals/metadata': await getProjectMetadata('../../../../internals/metadata')
+    }
+  };
 }

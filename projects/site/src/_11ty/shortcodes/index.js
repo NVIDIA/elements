@@ -1,14 +1,12 @@
-import { resolve } from 'node:path';
-import { globSync } from 'glob';
-import { readFileSync } from 'node:fs';
+// @ts-check
+
 import markdownIt from 'markdown-it';
-import { MetadataService } from '@internals/metadata';
-import { camelToKebab } from '../utils/index.js';
-import { createPlaygroundURLFromStorySource } from '../utils/playground-url.js';
+import { MetadataService, createPlaygroundURL } from '@internals/metadata';
+import { stories } from '../../../src/stories/utils.js';
 
 const md = markdownIt();
 const metadata = await MetadataService.getMetadata();
-const elements = Object.keys(metadata).flatMap(packageName => metadata[packageName].elements ?? []);
+const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
 
 export async function installShortcode(tag) {
   const element = elements.find(d => d.name === tag);
@@ -42,32 +40,22 @@ export async function apiShortcode(tag, type, value) {
 export async function storyShortcode(tag, storyName, userConfig = { inline: true, height: '95%' }) {
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
   let story;
-  let path;
-  let iframePath = '';
 
   if (tag.includes('.stories.json')) {
-    path = tag;
-    story = (await import(path, { with: { type: 'json' } })).default.stories?.find(s => s.id === storyName);
-    iframePath = `stories/${path.replace('.stories.json', '-')}${camelToKebab(storyName)}/`;
+    story = stories.find(s => s.path.includes(tag) && s.id === storyName);
   } else {
-    const stories = globSync(`${resolve('../elements')}/dist/**/*.stories.json`).map(path =>
-      JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'))
-    );
-    let name = tag.replace('nve-', '');
-    path = `@nvidia-elements/core/${name}/${name}.stories.json`;
-    story = stories.find(s => s.element === tag)?.stories?.find(s => s.id === storyName);
-    iframePath = `stories/@nvidia-elements/core/${name}/${name}-${camelToKebab(storyName)}/`;
+    story = stories.find(s => s.tagName === tag && s.id === storyName);
   }
 
   const playgroundButton = story
-    ? /* html */ `<nve-button container="flat" slot="suffix"><a href="${createPlaygroundURLFromStorySource(story.template, { id: storyName, globals: {} })}" target="_blank">Playground</a></nve-button>`
+    ? /* html */ `<nve-button container="flat" slot="suffix"><a href="${createPlaygroundURL(story.template, { id: `${story.path}_${storyName}`, theme: '' }, metadata)}" target="_blank">Playground</a></nve-button>`
     : '';
 
   const reload =
     process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story && !tag.includes('.stories.json') // eslint-disable-line no-undef
       ? /* html */ `
   <script type="module">
-    import stories from '${path}' with { type: 'json' };
+    import stories from '${story.path}' with { type: 'json' };
     const canvas = document.querySelector('nvd-canvas#${story.id}');
     const story = stories.stories.find(s => s.id === '${story.id}');
     canvas.innerHTML = \`${playgroundButton}\` + story.template;
@@ -84,7 +72,7 @@ ${playgroundButton}
 ${
   config.inline
     ? story.template.replace(/\n\n/g, '\n')
-    : `<iframe loading="lazy" src="${iframePath}" style="height: ${config.height}; width: 100%; border: none;" />`
+    : `<iframe loading="lazy" src="stories/${story?.permalink}index.html" style="height: ${config.height}; width: 100%; border: none;" />`
 }
 </nvd-canvas>${reload}`
     : '';

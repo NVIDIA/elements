@@ -1,9 +1,11 @@
 /* eslint-env node */
 /* global process */
 
-import { createPlaygroundURLFromStorySource } from '../_11ty/utils/playground-url.js';
+import { MetadataService, createPlaygroundURL } from '@internals/metadata';
 import { renderGlobalsScript } from '../_11ty/layouts/common.js';
 import { stories, BASE_URL } from './utils.js';
+
+const metadata = await MetadataService.getMetadata();
 
 export const data = {
   title: 'Stories',
@@ -42,7 +44,7 @@ export function render(data) {
   </head>
   <body data-pagefind-ignore="all">
     <div id="iframe-links" nve-layout="row gap:sm align:right" hidden>
-      <a href="${createPlaygroundURLFromStorySource(data.story.template, { id: data.story.title, globals: {} })}" target="_blank" nve-text="link body sm">playground &#8599;</a>
+      <a href="${createPlaygroundURL(data.story.template, { id: `${data.story.path}_${data.story.title}` }, metadata)}" target="_blank" nve-text="link body sm">playground &#8599;</a>
       <a href="docs/elements/${data.story.element}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
     </div>
     <div id="story-container" data-element="${data.story.element}">

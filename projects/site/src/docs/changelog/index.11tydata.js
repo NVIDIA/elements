@@ -1,55 +1,59 @@
-import { readFileSync } from 'fs';
+// @ts-check
+
+import { MetadataService } from '@internals/metadata';
+
+const metadata = await MetadataService.getMetadata();
 
 // https://www.11ty.dev/docs/data-js/
 export default [
   {
     title: '@nvidia-elements/core',
     permalink: '/',
-    changelog: readFileSync('../elements/CHANGELOG.md', 'utf8')
+    changelog: metadata.projects['@nvidia-elements/core'].changelog
   },
   {
     title: '@nvidia-elements/core-react',
     permalink: '/elements-react/',
-    changelog: readFileSync('../elements-react/CHANGELOG.md', 'utf8')
+    changelog: metadata.projects['@nvidia-elements/core-react'].changelog
   },
   {
     title: '@nvidia-elements/styles',
     permalink: '/styles/',
-    changelog: readFileSync('../styles/CHANGELOG.md', 'utf8')
+    changelog: metadata.projects['@nvidia-elements/styles'].changelog
   },
   {
     title: '@nvidia-elements/themes',
     permalink: '/themes/',
-    changelog: readFileSync('../themes/CHANGELOG.md', 'utf8')
+    changelog: metadata.projects['@nvidia-elements/themes'].changelog
   },
   {
     title: '@nvidia-elements/testing',
     permalink: '/testing/',
-    changelog: readFileSync('../testing/CHANGELOG.md', 'utf8')
+    changelog: metadata.projects['@nvidia-elements/testing'].changelog
   },
   // {
   //   title: '@nvidia-elements/brand',
   //   permalink: '/labs-brand/',
-  //   changelog: readFileSync('../labs/brand/CHANGELOG.md', 'utf8')
+  //   changelog: metadata.projects['@nvidia-elements/brand'].changelog
   // },
   {
     title: '@nvidia-elements/code',
     permalink: '/labs-code/',
-    changelog: readFileSync('../labs/code/CHANGELOG.md', 'utf8')
+    changelog: metadata.projects['@nvidia-elements/code'].changelog
   },
-  // {
-  //   title: '@nvidia-elements/forms',
-  //   permalink: '/labs-forms/',
-  //   changelog: readFileSync('../labs/forms/CHANGELOG.md', 'utf8')
-  // },
+  {
+    title: '@nvidia-elements/forms',
+    permalink: '/labs-forms/',
+    changelog: metadata.projects['@nvidia-elements/forms'].changelog
+  },
   {
     title: '@nvidia-elements/behaviors-alpine',
     permalink: '/labs-behaviors-alpine/',
-    changelog: readFileSync('../labs/behaviors-alpine/CHANGELOG.md', 'utf8')
+    changelog: metadata.projects['@nvidia-elements/behaviors-alpine'].changelog
   },
   {
     title: '@nvidia-elements/monaco',
     permalink: '/monaco/',
-    changelog: readFileSync('../monaco/CHANGELOG.md', 'utf8')
+    changelog: metadata.projects['@nvidia-elements/monaco'].changelog
   }
 ];
