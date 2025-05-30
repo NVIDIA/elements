@@ -302,3 +302,147 @@ export const Multiline = {
     </nve-alert-group>
   `
 }
+
+export const CustomColors = {
+  render: () => html`
+    <div nve-layout="column gap:md">
+      <nve-alert-group color="red-cardinal">
+        <nve-alert>red-cardinal</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="gray-slate">
+        <nve-alert>gray-slate</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="gray-denim">
+        <nve-alert>gray-denim</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="blue-indigo">
+        <nve-alert>blue-indigo</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="blue-cobalt">
+        <nve-alert>blue-cobalt</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="blue-sky">
+        <nve-alert>blue-sky</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="teal-cyan">
+        <nve-alert>teal-cyan</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="green-mint">
+        <nve-alert>green-mint</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="teal-seafoam">
+        <nve-alert>teal-seafoam</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="green-grass">
+        <nve-alert>green-grass</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="yellow-amber">
+        <nve-alert>yellow-amber</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="orange-pumpkin">
+        <nve-alert>orange-pumpkin</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="red-tomato">
+        <nve-alert>red-tomato</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="pink-magenta">
+        <nve-alert>pink-magenta</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="purple-plum">
+        <nve-alert>purple-plum</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="purple-violet">
+        <nve-alert>purple-violet</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="purple-lavender">
+        <nve-alert>purple-lavender</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="pink-rose">
+        <nve-alert>pink-rose</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="green-jade">
+        <nve-alert>green-jade</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="lime-pear">
+        <nve-alert>lime-pear</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="yellow-nova">
+        <nve-alert>yellow-nova</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="brand-green">
+        <nve-alert>brand-green</nve-alert>
+      </nve-alert-group>
+    </div>
+  `
+}
+
+
+export const CustomColorCombinations = {
+  render: () => html`
+    <div nve-layout="column gap:md">
+      <nve-alert-group color="blue-indigo">
+        <nve-alert closable>Custom <code>color</code> will theme the <code>closable</code> icon.</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="teal-seafoam">
+        <nve-alert>
+          Custom <code>color</code> is compatible with <code>actions</code> button.
+          <nve-button slot="actions" container="flat">action</nve-button>
+        </nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="pink-rose" status="accent">
+        <nve-alert>Combining custom <code>color="pink-rose"</code> with <code>status</code> yields the status icon with custom alert color.</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="pink-rose" status="success">
+        <nve-alert>Combining custom <code>color="pink-rose"</code> with <code>status</code> yields the status icon with custom alert color.</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="pink-rose" status="warning">
+        <nve-alert>Combining custom <code>color="pink-rose"</code> with <code>status</code> yields the status icon with custom alert color.</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="pink-rose" status="danger">
+        <nve-alert>Combining custom <code>color="pink-rose"</code> with <code>status</code> yields the status icon with custom alert color.</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="blue-indigo" status="accent" prominence="emphasis">
+        <nve-alert>Combining custom <code>color="blue-indigo"</code> with <code>status</code> and <code>prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="blue-indigo" status="success" prominence="emphasis">
+        <nve-alert>Combining custom <code>color="blue-indigo"</code> with <code>status</code> and <code>prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="blue-indigo" status="warning" prominence="emphasis">
+        <nve-alert>Combining custom <code>color="blue-indigo"</code> with <code>status</code> and <code>prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
+      </nve-alert-group>
+
+      <nve-alert-group color="blue-indigo" status="danger" prominence="emphasis">
+        <nve-alert>Combining custom <code>color="blue-indigo"</code> with <code>status</code> and <code>prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
+      </nve-alert-group>
+    </div>
+  `
+}

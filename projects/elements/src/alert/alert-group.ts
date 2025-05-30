@@ -2,8 +2,8 @@ import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { property } from 'lit/decorators/property.js';
-import type { Container, Prominence, SupportStatus } from '@nvidia-elements/core/internal';
-import { attachInternals, useStyles, supportStateStyles, audit } from '@nvidia-elements/core/internal';
+import type { Color, Container, Prominence, SupportStatus } from '@nvidia-elements/core/internal';
+import { attachInternals, useStyles, supportStateStyles, audit, colorStateStyles } from '@nvidia-elements/core/internal';
 import { Alert } from './alert.js';
 import styles from './alert-group.css?inline';
 
@@ -13,7 +13,6 @@ import styles from './alert-group.css?inline';
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/alert
  * @cssprop --gap
- * @cssprop --color
  * @cssprop --padding
  * @cssprop --font-size
  * @cssprop --background
@@ -25,7 +24,7 @@ import styles from './alert-group.css?inline';
  */
 @audit()
 export class AlertGroup extends LitElement {
-  static styles = useStyles([supportStateStyles, styles]);
+  static styles = useStyles([styles, supportStateStyles, colorStateStyles]);
 
   static readonly metadata = {
     tag: 'nve-alert-group',
@@ -38,6 +37,9 @@ export class AlertGroup extends LitElement {
 
   /** Determines the visual prominence or weight, emphasis is used for banner style alerts */
   @property({ type: String, reflect: true }) prominence?: Extract<Prominence, 'emphasis'>;
+
+  /** Allows for colors not defined by semantic status definitions to be used in non-status instances, such as callouts for tutorials or tips on a documentation site. */
+  @property({ type: String, reflect: true }) color: Color;
 
   /** Determines the container bounds of the element */
   @property({ type: String, reflect: true }) container?: Extract<Container, 'full'>;
