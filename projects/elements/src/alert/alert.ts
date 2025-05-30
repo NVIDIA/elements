@@ -30,7 +30,6 @@ import styles from './alert.css?inline';
  * @slot - Default content placed inside of the alert.
  * @cssprop --gap
  * @cssprop --font-size
- * @cssprop --color
  * @cssprop --icon-color
  * @cssprop --icon-size
  * @cssprop --font-weight
