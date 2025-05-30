@@ -7,6 +7,6 @@
 
 # {{ title }}
 
-Elements primary support customer is Maglev and AV teams. Priority is given to their requests.
+Elements primary support customer is AV and AV Infra teams. Priority is given to their requests.
 
 <img src="static/images/requests.drawio.svg" class="full-width" />

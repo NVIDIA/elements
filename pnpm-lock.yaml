@@ -385,9 +385,15 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 22.13.1
+      fflate:
+        specifier: 0.8.2
+        version: 0.8.2
       glob:
         specifier: 'catalog:'
         version: 11.0.1
+      html-format:
+        specifier: 1.1.7
+        version: 1.1.7
       ts-morph:
         specifier: 'catalog:'
         version: 26.0.0
@@ -918,12 +924,6 @@ importers:
       eslint:
         specifier: 'catalog:'
         version: 9.23.0(jiti@2.4.2)
-      fflate:
-        specifier: 0.8.2
-        version: 0.8.2
-      html-format:
-        specifier: 1.1.7
-        version: 1.1.7
       html-minifier:
         specifier: 4.0.0
         version: 4.0.0
@@ -1475,15 +1475,9 @@ importers:
       '@nvidia-elements/themes':
         specifier: workspace:*
         version: link:../themes
-      html-format:
-        specifier: 1.1.7
-        version: 1.1.7
       lit:
         specifier: 'catalog:'
         version: 3.2.1
-      showdown:
-        specifier: 2.1.0
-        version: 2.1.0
     devDependencies:
       '@storybook/addon-docs':
         specifier: 8.5.0
@@ -6072,10 +6066,6 @@ packages:
     resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==, tarball: https://registry.npmjs.org
     engines: {node: '>= 12'}
 
-  commander@9.5.0:
-    resolution: {integrity: sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==, tarball: https://registry.npmjs.org
-    engines: {node: ^12.20.0 || >=14}
-
   comment-parser@1.2.4:
     resolution: {integrity: sha512-pm0b+qv+CkWNriSTMsfnjChF9kH0kxz55y44Wo5le9qLxMj5xDQAaEd9ZN1ovSuk9CsrncWaFwgpOMg7ClJwkw==, tarball: https://registry.npmjs.org
     engines: {node: '>= 12.0.0'}
@@ -10339,10 +10329,6 @@ packages:
   shell-quote@1.8.2:
     resolution: {integrity: sha512-AzqKpGKjrj7EM6rKVQEPpB288oCfnrEIuyoT9cyF4nmGa7V8Zk6f7RRqYisX8X9m+Q7bd632aZW4ky7EhbQztA==, tarball: https://registry.npmjs.org
     engines: {node: '>= 0.4'}
-
-  showdown@2.1.0:
-    resolution: {integrity: sha512-/6NVYu4U819R2pUIk79n67SYgJHWCce0a5xTP979WbNp0FL9MN1I1QK662IDU1b6JzKTvmhgI7T7JYIxBi3kMQ==, tarball: https://registry.npmjs.org
-    hasBin: true
 
   side-channel-list@1.0.0:
     resolution: {integrity: sha512-FCLHtRD/gnpCiCHEiJLOwdmFP+wzCmDEkc9y7NsYxeF4u7Btsn1ZuwgwJGxImImHicJArLP4R0yX4c2KCrMrTA==, tarball: https://registry.npmjs.org
@@ -16641,8 +16627,6 @@ snapshots:
 
   commander@8.3.0: {}
 
-  commander@9.5.0: {}
-
   comment-parser@1.2.4: {}
 
   commitlint@19.5.0(@types/node@22.13.10)(typescript@5.8.2):
@@ -21419,10 +21403,6 @@ snapshots:
   shebang-regex@3.0.0: {}
 
   shell-quote@1.8.2: {}
-
-  showdown@2.1.0:
-    dependencies:
-      commander: 9.5.0
 
   side-channel-list@1.0.0:
     dependencies:

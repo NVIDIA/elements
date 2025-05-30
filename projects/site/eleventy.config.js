@@ -18,7 +18,6 @@ const metadata = await MetadataService.getMetadata();
 // Temporary:Exclude certain components that have low performance gains from SSR or high inline
 // This minimizes the memory footprint of Rollup which builds a dependency graph of all pages
 const ssrEntrypoints = new Set([
-  '@nvidia-elements/core/accordion',
   '@nvidia-elements/core/alert',
   '@nvidia-elements/core/avatar',
   '@nvidia-elements/core/badge',
@@ -28,12 +27,13 @@ const ssrEntrypoints = new Set([
   '@nvidia-elements/core/icon-button',
   '@nvidia-elements/core/logo',
   '@nvidia-elements/core/page',
-  '@nvidia-elements/core/page-header'
+  '@nvidia-elements/core/page-header',
+  '@nvidia-elements/core/tabs'
 ]);
 
 const entrypoints = [
   ...new Set(
-    metadata['@nvidia-elements/core'].elements
+    metadata.projects['@nvidia-elements/core'].elements
       .filter(e => e.manifest?.metadata?.entrypoint && ssrEntrypoints.has(e.manifest?.metadata?.entrypoint))
       .map(
         e => `node_modules/${e.manifest.metadata.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`

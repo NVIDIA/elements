@@ -1,14 +1,16 @@
+// @ts-check
+
 import markdown from 'markdown-it';
 import { MetadataService } from '@nve-internals/metadata';
 import { ESM_ELEMENTS_VERSION } from '../utils/version.js';
 
-const PACKAGE_URL = 'https://artifactory.build.nvidia.com/ui/packages?name=%40elements%2Felements&type=packages';
+const PACKAGE_URL = 'https://github.com/NVIDIA/elements/-/releases';
 
 const md = markdown();
 const metadata = await MetadataService.getMetadata();
 
 export function elementSummary(tag) {
-  const elements = Object.keys(metadata).flatMap(packageName => metadata[packageName].elements ?? []);
+  const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
   const element = elements.find(d => d.name === tag);
   return /* html */ `<section nve-layout="column gap:md align:stretch margin-top:md">
   ${element.manifest.description ? md.render(element.manifest.description).replace('<p>', '<p nve-text="heading muted sm">') : ''}
@@ -95,9 +97,9 @@ export function badgeLighthouse(value, container = '', content = '') {
 
   let status = 'unknown';
   if (value !== null) {
-    if (average > 95) {
+    if (average && average > 95) {
       status = 'success';
-    } else if (average > 80) {
+    } else if (average && average > 80) {
       status = 'warning';
     } else {
       status = 'danger';
@@ -120,7 +122,7 @@ export function badgeAxe(value, container = '') {
 }
 
 export function elementStatus(tag) {
-  const elements = Object.keys(metadata).flatMap(packageName => metadata[packageName].elements ?? []);
+  const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
   const elementMetadata = elements.find(d => d.name === tag)?.manifest?.metadata;
 
   return /* html */ `
@@ -159,7 +161,7 @@ export function elementStatus(tag) {
 }
 
 export function elementTable(tag, type = 'all') {
-  const elements = Object.keys(metadata).flatMap(packageName => metadata[packageName].elements ?? []);
+  const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
   const elementManifest = elements.find(d => d.name === tag)?.manifest;
 
   return elementManifest
