@@ -5,12 +5,15 @@ export class MetadataService {
 
   static async getMetadata(): Promise<MetadataSummary> {
     if (!MetadataService.#metadata) {
-      MetadataService.#metadata = (await import('../../static/index.json', { with: { type: 'json' } })).default;
+      try {
+        MetadataService.#metadata = (await import('../../static/index.json', { with: { type: 'json' } })).default;
+      } catch {
+        /* istanbul ignore next -- @preserve */
+        MetadataService.#metadata = fetch(
+          'https://NVIDIA.github.io/elements/metadata/index.json'
+        ).then(res => res.json());
+      }
     }
     return MetadataService.#metadata;
-  }
-
-  static async getMaglevMetadata() {
-    return (await import('../../static/elements.json', { with: { type: 'json' } })).default;
   }
 }

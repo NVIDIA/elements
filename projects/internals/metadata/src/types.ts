@@ -1,15 +1,19 @@
 export interface MetadataSummary {
   created: string;
-  types: MetadataTypes;
-  '@nvidia-elements/core': MetadataProject;
-  '@nvidia-elements/core-react': MetadataProject;
-  '@nvidia-elements/testing': MetadataProject;
-  '@nvidia-elements/code': MetadataProject;
-  '@nvidia-elements/behaviors-alpine': MetadataProject;
-}
-
-export interface MetadataTypes {
-  props: { name: string; type: string; description: string }[];
+  projects: {
+    '@nvidia-elements/core': MetadataProject;
+    '@nvidia-elements/core-react': MetadataProject;
+    '@nvidia-elements/styles': MetadataProject;
+    '@nvidia-elements/testing': MetadataProject;
+    '@nvidia-elements/themes': MetadataProject;
+    '@nvidia-elements/behaviors-alpine': MetadataProject;
+    '@nvidia-elements/brand': MetadataProject;
+    '@nvidia-elements/code': MetadataProject;
+    '@nvidia-elements/forms': MetadataProject;
+    '@nvidia-elements/playwright-screencast': MetadataProject;
+    '@nvidia-elements/monaco': MetadataProject;
+    '@nve-internals/metadata': MetadataProject;
+  };
 }
 
 export interface MetadataProject {
@@ -19,11 +23,20 @@ export interface MetadataProject {
   changelog: string;
   tests: MetadataTestReport;
   elements: MetadataElement[];
+  types?: MetadataType[];
+}
+
+export interface MetadataType {
+  name: string;
+  type: string;
+  description: string;
 }
 
 export interface MetadataElement {
   name: string;
+  changelog?: string;
   manifest?: MetadataCustomElementsManifestDeclaration;
+  markdown?: string;
   tests: {
     unit: {
       coverageTotal: number;
@@ -34,10 +47,10 @@ export interface MetadataElement {
       hydration: boolean;
     };
   };
-  stories: MetadataStory[];
+  stories?: MetadataStory[];
 }
 
-export interface MetadataElementSories {
+export interface MetadataElementStories {
   element: string;
   stories: MetadataStory[];
 }
@@ -116,6 +129,8 @@ export interface MetadataCustomElementsManifestDeclaration {
   kind: string;
   path: string;
   name: string;
+  description: string;
+  deprecated: string;
   cssProperties: {
     name: string;
     description: string;
@@ -144,6 +159,10 @@ export interface MetadataCustomElementsManifestDeclaration {
     description: string;
     fieldName: string;
   }[];
+  events: {
+    name: string;
+    description: string;
+  }[];
   superclass: {
     name: string;
     package: string;
@@ -164,6 +183,7 @@ export interface MetadataCustomElementsManifestDeclaration {
     figma: string;
     status: string;
     behavior: string;
+    example: string;
   };
 }
 
