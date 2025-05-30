@@ -12,7 +12,7 @@ export function cem() {
   return {
     name: 'cem',
     apply: 'build',
-    async buildStart() {
+    async buildEnd() {
       if (process.env.VITE_INITIAL_BUILD) {
         const hasConfig = fs.existsSync(resolve('./custom-elements-manifest.config.mjs'));
         const configPath = hasConfig

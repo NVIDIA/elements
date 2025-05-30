@@ -4,11 +4,11 @@ import { MetadataService } from '@internals/metadata';
 
 const metadata = await MetadataService.getMetadata();
 
-const stories = metadata['@nvidia-elements/core'].elements
+const stories = metadata.projects['@nvidia-elements/core'].elements
   .filter(e => !e.name.includes('nve-page-loader') && !e.name.includes('nve-app-header'))
-  .filter(e => e.stories.find(s => s.id.includes('Default')))
+  .filter(e => e.stories?.find(s => s.id.includes('Default')))
   .map(e => {
-    const story = e.stories.find(s => s.id.includes('Default'));
+    const story = e.stories?.find(s => s.id.includes('Default'));
     let template = story?.template.includes('${') ? '' : story?.template;
     template = template
       ?.replaceAll('<label>', '<label slot="label">')
