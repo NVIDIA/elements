@@ -1,3 +1,5 @@
+// @ts-check
+
 import { MetadataService } from '@nve-internals/metadata';
 
 const metrics = await MetadataService.getMetadata();
@@ -22,7 +24,7 @@ Below are the common base properties that define the consistent API definition a
     <nve-grid-column>Description</nve-grid-column>
     <nve-grid-column width="350px">Type</nve-grid-column>
   </nve-grid-header>
-  ${metrics.types.props
+  ${metrics.projects['@nvidia-elements/core'].types
     ?.map(
       prop => /* html */ `
   <nve-grid-row>

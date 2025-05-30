@@ -4,7 +4,7 @@ import litPlugin from '@lit-labs/eleventy-plugin-lit';
 import { MetadataService } from '@nve-internals/metadata';
 
 const metadata = await MetadataService.getMetadata();
-const entrypoints = metadata['@nvidia-elements/core'].elements
+const entrypoints = metadata.projects['@nvidia-elements/core'].elements
   .filter(e => e.manifest?.metadata?.entrypoint)
   .map(e => `node_modules/${e.manifest.metadata.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`);
 

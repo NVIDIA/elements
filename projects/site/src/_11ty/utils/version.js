@@ -1,13 +1,5 @@
-const controller = new AbortController();
-const timeout = setTimeout(() => controller.abort(), 3000);
-const LATEST_URL = 'https://esm.nvidia.com/@nvidia-elements/core@latest/package.json';
+import { MetadataService, getLatestPublishedVersions } from '@nve-internals/metadata';
 
-export const ESM_ELEMENTS_VERSION = await fetch(LATEST_URL, { signal: controller.signal })
-  .then(async response => {
-    clearTimeout(timeout);
-    return (await response.json()).version;
-  })
-  .catch(() => {
-    console.warn('Could not fetch latest version from https://esm.nvidia.com');
-    return '0.0.0';
-  });
+export const ESM_PACKAGE_VERSIONS = await getLatestPublishedVersions(await MetadataService.getMetadata());
+
+export const ESM_ELEMENTS_VERSION = ESM_PACKAGE_VERSIONS['@nvidia-elements/core'];

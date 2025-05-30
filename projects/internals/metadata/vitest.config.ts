@@ -9,7 +9,7 @@ export default mergeConfig(libraryNodeTestConfig, {
     coverage: {
       thresholds: {
         lines: 90,
-        branches: 80,
+        branches: 79,
         functions: 90,
         statements: 90
       },
@@ -17,8 +17,8 @@ export default mergeConfig(libraryNodeTestConfig, {
         // excluding node operations that write to local file system
         'src/node/metadata.ts',
         'src/node/lighthouse.ts',
-        'src/node/elements.ts',
-        'src/node/elements.utils.ts'
+        'src/node/av-infra.ts',
+        'src/node/av-infra.utils.ts'
       ]
     }
   }

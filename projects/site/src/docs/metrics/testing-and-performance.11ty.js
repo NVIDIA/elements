@@ -1,3 +1,5 @@
+// @ts-check
+
 import { MetadataService } from '@nve-internals/metadata';
 import { badgeCoverage, badgeBundle, badgeLighthouse } from '../../_11ty/templates/api.js';
 import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
@@ -28,7 +30,7 @@ export function render() {
       <nve-tabs-item><a href="docs/metrics/">Metrics</a></nve-tabs-item>
       <nve-tabs-item selected><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/elements/">Maglev</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/av-infra/">AV Infra</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>
     <nve-divider></nve-divider>
@@ -39,19 +41,19 @@ export function render() {
         <h3 nve-text="body bold">Test Coverage:</h3>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Statements</span>
-          ${badgeCoverage(metrics['@nvidia-elements/core'].tests.coverageTotal.statements.pct, 'flat')}
+          ${badgeCoverage(metrics.projects['@nvidia-elements/core'].tests.coverageTotal.statements.pct, 'flat')}
         </section>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Lines</span>
-          ${badgeCoverage(metrics['@nvidia-elements/core'].tests.coverageTotal.lines.pct, 'flat')}
+          ${badgeCoverage(metrics.projects['@nvidia-elements/core'].tests.coverageTotal.lines.pct, 'flat')}
         </section>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Functions</span>
-          ${badgeCoverage(metrics['@nvidia-elements/core'].tests.coverageTotal.functions.pct, 'flat')}
+          ${badgeCoverage(metrics.projects['@nvidia-elements/core'].tests.coverageTotal.functions.pct, 'flat')}
         </section>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Branches</span>
-          ${badgeCoverage(metrics['@nvidia-elements/core'].tests.coverageTotal.branches.pct, 'flat')}
+          ${badgeCoverage(metrics.projects['@nvidia-elements/core'].tests.coverageTotal.branches.pct, 'flat')}
         </section>
       </div>
       <nve-grid style="--scroll-height: calc(100vh - 330px)">
@@ -62,7 +64,7 @@ export function render() {
           <nve-grid-column width="180px">Functions</nve-grid-column>
           <nve-grid-column>Branches</nve-grid-column>
         </nve-grid-header>
-        ${metrics['@nvidia-elements/core'].tests.coverage
+        ${metrics.projects['@nvidia-elements/core'].tests.coverage
           .map(
             cov => /* html */ `<nve-grid-row>
           <nve-grid-cell><p nve-text="body truncate">${cov.file}</p></nve-grid-cell>
@@ -86,7 +88,7 @@ export function render() {
         <nve-grid-column>Best Practices</nve-grid-column>
         <nve-grid-column>Bundle Size</nve-grid-column>
       </nve-grid-header>
-      ${metrics['@nvidia-elements/core'].elements
+      ${metrics.projects['@nvidia-elements/core'].elements
         .map(
           element => /* html */ `<nve-grid-row>
           <nve-grid-cell>${element.name}</nve-grid-cell>

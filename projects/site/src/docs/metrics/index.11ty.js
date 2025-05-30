@@ -1,3 +1,5 @@
+// @ts-check
+
 import { MetadataService } from '@nve-internals/metadata';
 import { badgeStatus, badgeCoverage, badgeBundle, badgeLighthouse, badgeAxe } from '../../_11ty/templates/api.js';
 import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
@@ -23,7 +25,7 @@ export function render() {
       <nve-tabs-item selected><a href="docs/metrics/">Metrics</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/elements/">Maglev</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/av-infra/">AV Infra</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>
     <nve-divider></nve-divider>
@@ -33,12 +35,12 @@ export function render() {
     <section nve-layout="row gap:xs align:center">
       <span nve-text="body sm muted">Total Available Web Components</span>
       <nve-badge color="blue-cobalt">
-        ${metrics['@nvidia-elements/core'].elements.length}
+        ${metrics.projects['@nvidia-elements/core'].elements.length}
       </nve-badge>
       -
       <span nve-text="body sm muted">Total Available Parent Elements</span>
       <nve-badge color="blue-cobalt">
-        ${[...new Set(metrics['@nvidia-elements/core'].elements.map(el => el.name.split('-')[1]))].length + 2}
+        ${[...new Set(metrics.projects['@nvidia-elements/core'].elements.map(el => el.name.split('-')[1]))].length + 2}
       </nve-badge>
     </section>
   </div>
@@ -96,7 +98,7 @@ const metrics = await MetadataService.getMetadata();
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
   new Date(metrics.created)
 );
-const elements = metrics['@nvidia-elements/core'].elements;
+const elements = metrics.projects['@nvidia-elements/core'].elements;
 const columns = {
   element: { width: '200px', tooltip: 'Custom Element API' },
   status: { width: '120px', tooltip: 'Element Stability Status' },

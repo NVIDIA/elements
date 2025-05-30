@@ -7,11 +7,4 @@ describe('MetadataService', () => {
     expect(metadata).toBeDefined();
     expect(metadata.created).toBeDefined();
   });
-
-  it('should return the elements metadata', async () => {
-    const elementsMetadata = await MetadataService.getMaglevMetadata();
-    expect(elementsMetadata).toBeDefined();
-    expect(elementsMetadata.created).toBeDefined();
-    expect(elementsMetadata.projects).toBeDefined();
-  });
 });

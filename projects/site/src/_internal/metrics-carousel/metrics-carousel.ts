@@ -171,7 +171,7 @@ export class MetricsCarousel extends LitElement {
   }
 
   async #getMetrics(): Promise<MetricsCarouselItem[]> {
-    const { MetadataService } = await import('@nve-internals/metadata');
+    const { MetadataService, AVInfraService } = await import('@nve-internals/metadata');
     const metrics = await MetadataService.getMetadata();
 
     function isMetadataProject(projectMetrics: unknown): projectMetrics is MetadataProject {
@@ -190,7 +190,7 @@ export class MetricsCarousel extends LitElement {
     let totalAxeTests = 0;
     let totalVisualTests = 0;
     let totalSsrTests = 0;
-    for (const [project, projectMetrics] of Object.entries(metrics)) {
+    for (const [project, projectMetrics] of Object.entries(metrics.projects)) {
       if (!project.startsWith('@nve') || !isMetadataProject(projectMetrics)) {
         continue;
       }
@@ -207,17 +207,17 @@ export class MetricsCarousel extends LitElement {
       }
     }
 
-    const elementsTestCoverage = metrics['@nvidia-elements/core'].tests.coverageTotal.branches.pct;
+    const elementsTestCoverage = metrics.projects['@nvidia-elements/core'].tests.coverageTotal.branches.pct;
 
     const totalLighthouseTests = totalParentElements + totalProjects; // one for each element + project bundle
     const totalAutomatedTests =
       totalUnitTests + totalAxeTests + totalVisualTests + totalSsrTests + totalLighthouseTests;
 
-    const elementsMetrics = await MetadataService.getMaglevMetadata();
+    const avInfraMetrics = await AVInfraService.getMetadata();
 
-    let totalMaglevInstances = 0;
-    for (const project of elementsMetrics.projects) {
-      totalMaglevInstances += project.instanceTotal;
+    let totalAVInfraInstances = 0;
+    for (const project of avInfraMetrics.projects) {
+      totalAVInfraInstances += project.instanceTotal;
     }
 
     return [
@@ -276,10 +276,10 @@ export class MetricsCarousel extends LitElement {
         metricCount: totalSsrTests
       },
       {
-        href: '/elements/docs/metrics/elements/',
-        title: 'Instances in MagLev',
-        label: 'View Maglev adoption metrics',
-        metricCount: totalMaglevInstances
+        href: '/elements/docs/metrics/av-infra/',
+        title: 'Instances in AV Infra',
+        label: 'View AV Infra adoption metrics',
+        metricCount: totalAVInfraInstances
       }
     ];
   }
