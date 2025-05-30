@@ -108,4 +108,35 @@ describe(CopyButton.metadata.tag, () => {
     consoleErrorSpy.mockRestore();
     Object.defineProperty(navigator, 'clipboard', { value: originalClipboard });
   });
+
+  it('should allow event listeners and event bubbling when behavior-copy is active', async () => {
+    const mockClipboard = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
+
+    const buttonClickSpy = vi.fn();
+    element.addEventListener('click', buttonClickSpy);
+
+    const wrapper = document.createElement('div');
+    const parentClickSpy = vi.fn();
+    wrapper.addEventListener('click', parentClickSpy);
+    wrapper.appendChild(element);
+    document.body.appendChild(wrapper);
+
+    await elementIsStable(element);
+
+    element.shadowRoot.querySelector<HTMLElement>('#btn').click();
+    await elementIsStable(element);
+
+    // Verify button's own event listener was called
+    expect(buttonClickSpy).toHaveBeenCalledTimes(1);
+
+    // Verify parent click handler WAS called (events bubble up without stopPropagation)
+    expect(parentClickSpy).toHaveBeenCalledTimes(1);
+
+    // Verify clipboard functionality still works
+    expect(mockClipboard).toHaveBeenCalledWith('hello');
+    expect(mockClipboard).toHaveBeenCalledTimes(1);
+
+    wrapper.remove();
+    mockClipboard.mockRestore();
+  });
 });
