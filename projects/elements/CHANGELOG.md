@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.35.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.35.2...@nvidia-elements/core-v1.35.3) (2025-05-30)
+
+
+### Bug Fixes
+
+* **elements:** update copy-button event propagation ([c05578b](https://github.com/NVIDIA/elements/commit/c05578b22d9844653bcc8651b41ea95ce355c68e))
+
 ## [@nvidia-elements/core-v1.35.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.35.1...@nvidia-elements/core-v1.35.2) (2025-05-29)
 
 
