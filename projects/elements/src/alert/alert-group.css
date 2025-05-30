@@ -6,11 +6,7 @@
   --icon-size: var(--nve-ref-size-600);
   --icon-color: var(--color);
   --color: var(--nve-sys-text-color);
-  --background: color-mix(
-    in oklab,
-    var(--status-color) var(--nve-sys-contrast-mute-ratio),
-    var(--nve-sys-contrast-mute-color)
-  );
+  --background: var(--state-color-background);
   width: 100%;
 }
 
@@ -41,26 +37,26 @@
   --border-radius: 0;
 }
 
-:host([prominence='emphasis']) {
+:host([prominence='emphasis']:not([color])) {
   --background: var(--nve-sys-support-color);
   --color: var(--nve-sys-text-white-color);
   --icon-color: var(--color);
 }
 
-:host([prominence='emphasis'][status='accent']) {
+:host([prominence='emphasis'][status='accent']:not([color])) {
   --background: var(--nve-sys-support-accent-color);
 }
 
-:host([prominence='emphasis'][status='success']) {
+:host([prominence='emphasis'][status='success']:not([color])) {
   --background: var(--nve-sys-support-success-color);
 }
 
-:host([prominence='emphasis'][status='warning']) {
+:host([prominence='emphasis'][status='warning']:not([color])) {
   --background: var(--nve-sys-support-warning-color);
   --color: var(--nve-sys-text-black-color);
 }
 
-:host([prominence='emphasis'][status='danger']) {
+:host([prominence='emphasis'][status='danger']:not([color])) {
   --background: var(--nve-sys-support-danger-color);
 }
 
@@ -71,4 +67,12 @@
 
 :host(:not([prominence='emphasis'])) ::slotted(nve-alert) {
   --icon-color: var(--status-color) !important;
+}
+
+:host([status]) {
+  --state-color-base: var(--status-color);
+}
+
+:host([color]) ::slotted(nve-alert) {
+  --status-color: var(--state-color-base) !important;
 }
