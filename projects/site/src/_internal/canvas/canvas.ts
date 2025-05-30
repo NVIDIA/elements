@@ -49,10 +49,10 @@ export class Canvas extends LitElement {
         </div>
         <div class="code" .hidden=${!this.showSource}>
           ${this.source ? html`<nve-codeblock language="html" .code=${this.formattedSource}></nve-codeblock>` : nothing}
-          <nve-copy-button container="flat" behavior-copy .value=${this.formattedSource}></nve-copy-button>
+          <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.formattedSource}></nve-copy-button>
         </div>
         <div class="toolbar">
-          <nve-button container="flat" @click=${() => (this['showSource'] = !this.showSource)}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
+          <nve-button container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
           <nve-select container="flat" fit-text>
             <select @change=${(e: Event) => this.#updateSourceType(e)} aria-label="source type">
               <option value="html">HTML&nbsp;</option>
@@ -80,6 +80,21 @@ export class Canvas extends LitElement {
   #updateSource() {
     const template = this.#template;
     this.source = template ? unescapeHtml(template.innerHTML) : this.source;
+  }
+
+  #handleSourceClick() {
+    this.showSource = !this.showSource;
+    this.#sendAnalyticsEvent('elements-docs-source-click');
+  }
+
+  #handleCopyClick() {
+    this.#sendAnalyticsEvent('elements-docs-source-copy');
+  }
+
+  #sendAnalyticsEvent(eventName: string) {
+    if (globalThis.gtag) {
+      globalThis.gtag('event', eventName, { tag: this.id });
+    }
   }
 }
 
