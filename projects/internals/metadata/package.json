@@ -9,7 +9,7 @@
     "ci:all": "wireit",
     "build": "wireit",
     "build:metadata": "wireit",
-    "build:elements": "wireit",
+    "build:av-infra": "wireit",
     "build:lighthouse": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
@@ -39,7 +39,7 @@
       "dependencies": [
         "build",
         "build:lighthouse",
-        "build:elements"
+        "build:av-infra"
       ]
     },
     "publint": {
@@ -262,14 +262,14 @@
         "../../../:lighthouse"
       ]
     },
-    "build:elements": {
-      "command": "node --experimental-strip-types ./src/node/elements.ts",
+    "build:av-infra": {
+      "command": "node --experimental-strip-types ./src/node/av-infra.ts",
       "files": [
-        "src/node/elements.ts",
-        "src/node/elements.utils.ts"
+        "src/node/av-infra.ts",
+        "src/node/av-infra.utils.ts"
       ],
       "output": [
-        "static/elements.json"
+        "static/av-infra.json"
       ],
       "dependencies": [
         "../../elements:build"
@@ -331,6 +331,8 @@
   },
   "dependencies": {
     "@types/node": "catalog:",
+    "fflate": "0.8.2",
+    "html-format": "1.1.7",
     "glob": "catalog:",
     "ts-morph": "catalog:"
   },

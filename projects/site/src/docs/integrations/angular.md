@@ -60,8 +60,7 @@ Once added, properties and events can be used via the standard Angular template 
 
 ## Forms
 
-Maglev Elements provides a suite of form components that leverage standard HTML input types. This enables frameworks
-to take advantage of built in framework features like [Angular Reactive Forms](https://angular.io/guide/reactive-forms) for managing form validation and state.
+Elements provides a suite of form components that leverage standard HTML input types. This enables frameworks to take advantage of built in framework features like [Angular Reactive Forms](https://angular.io/guide/reactive-forms) for managing form validation and state.
 
 <nve-alert>To integrate custom form control types into Elements checkout our <a nve-text="link" href="./docs/foundations/forms/controls/#custom-controls" onClick="location.reload()">custom control</a> documentation.</nve-alert>
 

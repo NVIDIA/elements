@@ -23,7 +23,7 @@ const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package
  * @type {import('vite').UserConfig}
  */
 export const libraryBuildConfig = {
-  plugins: [initial(), tsc(), cem(), dts(), bundle(), storiesToJSON()],
+  plugins: [initial(), tsc(), dts(), bundle(), storiesToJSON(), cem()],
   build: {
     cssMinify: prod ? 'esbuild' : false,
     cssCodeSplit: true,
