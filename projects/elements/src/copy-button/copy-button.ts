@@ -68,9 +68,8 @@ export class CopyButton extends Button {
    `;
   }
 
-  #copy(e: Event) {
+  #copy() {
     if (this.behaviorCopy) {
-      e.stopPropagation();
       navigator.clipboard
         .writeText(this.value)
         .then(() => {
