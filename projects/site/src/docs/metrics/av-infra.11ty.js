@@ -1,9 +1,12 @@
-import { MetadataService } from '@internals/metadata';
+import { MetadataService, AVInfraService } from '@internals/metadata';
 import { compareVersions } from 'compare-versions';
 import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
 
+const metrics = await MetadataService.getMetadata();
+const metricsAVInfra = await AVInfraService.getMetadata();
+
 export const data = {
-  title: 'Maglev',
+  title: 'AV Infra',
   layout: 'docs.11ty.js'
 };
 
@@ -23,15 +26,15 @@ export function render() {
       <nve-tabs-item><a href="docs/metrics/">Metrics</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
-      <nve-tabs-item selected><a href="docs/metrics/elements/">Maglev</a></nve-tabs-item>
+      <nve-tabs-item selected><a href="docs/metrics/av-infra/">AV Infra</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>
     <nve-divider></nve-divider>
     <div nve-layout="row gap:md align:vertical-center">
       <h3 nve-text="body bold">Summary:</h3>
       <section nve-layout="row gap:xs align:center">
-        <span nve-text="body sm muted">Total Maglev Instances</span>
-        <nve-badge status="queued">${metricsMaglev.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge>
+        <span nve-text="body sm muted">Total AV Infra Instances</span>
+        <nve-badge status="queued">${metricsAVInfra.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge>
       </section>
     </div>
     <nve-tooltip id="instance-total-tooltip" style="--width: 300px">
@@ -44,7 +47,7 @@ export function render() {
         <nve-grid-column name="Instances" width="300px" popoverTarget="instance-total-tooltip">Instances</nve-grid-column>
         <nve-grid-column name="Source" width="">Source</nve-grid-column>
       </nve-grid-header>
-      ${metricsMaglev.projects
+      ${metricsAVInfra.projects
         .sort((a, b) => compareVersions(a.elementsVersion, b.elementsVersion))
         .reverse()
         .map(
@@ -66,8 +69,6 @@ export function render() {
   );
 }
 
-const metrics = await MetadataService.getMetadata();
-const metricsMaglev = await MetadataService.getMaglevMetadata();
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
   new Date(metrics.created)
 );

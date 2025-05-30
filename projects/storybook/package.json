@@ -19,9 +19,7 @@
     "@nvidia-elements/forms": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",
     "@internals/patterns": "workspace:*",
-    "html-format": "1.1.7",
-    "lit": "catalog:",
-    "showdown": "2.1.0"
+    "lit": "catalog:"
   },
   "devDependencies": {
     "@storybook/core-events": "8.5.0",

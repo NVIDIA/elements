@@ -41,7 +41,8 @@ function metadataPlugin() {
         'description',
         'since',
         'axe',
-        'entrypoint'
+        'entrypoint',
+        'example'
       ];
 
       switch (node.kind) {
@@ -79,6 +80,7 @@ function metadataPlugin() {
               themes: true,
               aria: false,
               entrypoint: '',
+              example: '',
               package: JSON.stringify(pkg.exports).includes(classDeclaration.tagName.split('-')[1]),
               ...classDeclaration.metadata
             };
@@ -87,11 +89,26 @@ function metadataPlugin() {
             classDeclaration.metadata.status = getElementStability(classDeclaration.metadata);
             classDeclaration.metadata.behavior = getBehaviorCategory(classDeclaration);
             classDeclaration.metadata.aria = getSpecUrl(classDeclaration);
+            classDeclaration.metadata.example = getExample(classDeclaration, moduleDoc.path);
           }
           break;
       }
     }
   };
+}
+
+function getExample(classDeclaration, path) {
+  if (classDeclaration.metadata.example?.length) {
+    return classDeclaration.metadata.example;
+  } else {
+    const storyPath = path.replace('src', 'dist').replace('.ts', '.stories.json');
+    if (fs.existsSync(storyPath)) {
+      const storyJSON = JSON.parse(fs.readFileSync(storyPath, 'utf-8'));
+      const example = storyJSON.stories[0]?.template?.trim();
+      return example ? example : '';
+    }
+  }
+  return '';
 }
 
 function getElementStability(metadata) {
@@ -171,7 +188,7 @@ function getBehaviorCategory(classDeclaration) {
   return classDeclaration.metadata.category ?? 'content';
 }
 
-export function getSpecUrl(classDeclaration) {
+function getSpecUrl(classDeclaration) {
   if (classDeclaration.metadata.aria) {
     return classDeclaration.metadata.aria;
   }

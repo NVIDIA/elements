@@ -72,7 +72,7 @@ function getElementsVersion(data) {
   return dependencies || devDependencies || peerDependencies;
 }
 
-export interface MaglevProject {
+export interface AVInfraProject {
   name: string;
   path: string;
   elementsVersion: string;
@@ -83,7 +83,7 @@ export interface MaglevProject {
   instanceTotal: number;
 }
 
-export async function getProjects(path = '../../../../elements'): Promise<MaglevProject[]> {
+export async function getProjects(path = '../../../../elements'): Promise<AVInfraProject[]> {
   const elementTags = getManifest().map(d => d.tagName);
 
   return Promise.all(
