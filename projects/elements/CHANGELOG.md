@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.35.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.35.3...@nvidia-elements/core-v1.35.4) (2025-05-31)
+
+
+### Bug Fixes
+
+* **elements:** nve-progress-bar invisible space rendered on small overrides ([539ca07](https://github.com/NVIDIA/elements/commit/539ca07a72c4f3790af2a32aeccc366eb1f0ee2b))
+
 ## [@nvidia-elements/core-v1.35.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.35.2...@nvidia-elements/core-v1.35.3) (2025-05-30)
 
 
