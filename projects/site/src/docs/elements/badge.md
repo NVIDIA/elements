@@ -20,6 +20,8 @@
 
 {% story 'nve-badge', 'Status' %}
 
+{% story 'nve-badge', 'Support' %}
+
 ## Flat
 
 {% api 'nve-badge', 'property', 'container' %}
