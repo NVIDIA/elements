@@ -27,16 +27,20 @@ export function render() {
 
     <nve-divider></nve-divider>
 
-    <div nve-layout="column gap:lg align:right">
-      <nve-button><a target="_blank" href="https://NVIDIA.github.io/elements/metadata/index.json">download</a></nve-button>
+    <div nve-layout="column gap:xs">
+      <div nve-layout="row gap:xs align:vertical-center full">
+        <nve-alert style="--color: var(--nve-sys-text-muted-color)" status="warning">The schema for this metadata is currently subject to change.</nve-alert>
+        <nve-button style="margin-left: auto;"><a target="_blank" href="https://NVIDIA.github.io/elements/metadata/index.json">Download</a></nve-button>
+      </div>
       
-      <pre style="overflow: scroll;" nve-layout="full"></pre>
+      <nve-monaco-input style="--min-height: calc(100vh - 303px);" folding language="json" readonly minimap></nve-monaco-input>
     </div>
   </div>
 </div>
 <script type="module">
+  import '@nvidia-elements/monaco/input/index.js';
   import { MetadataService } from '@nve-internals/metadata';
   const metrics = await MetadataService.getMetadata();
-  document.querySelector('pre').textContent = JSON.stringify(metrics, null, 2);
+  document.querySelector('nve-monaco-input').value = JSON.stringify(metrics, null, 2);
 </script> `;
 }
