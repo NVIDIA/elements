@@ -85,6 +85,19 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
+  <a href="docs/patterns/responsive/">
+    <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
+          <nve-icon name="resize"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">Responsive</h2>
+          <p nve-text="body sm muted">Adaptive overflow with container queries</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
   <a href="docs/patterns/subheader/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:xs align:vertical-center">
