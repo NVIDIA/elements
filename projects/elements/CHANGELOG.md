@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.36.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.35.4...@nvidia-elements/core-v1.36.0) (2025-06-03)
+
+
+### Features
+
+* **elements:** add color prop support to nve-alert-group ([0d6a1a0](https://github.com/NVIDIA/elements/commit/0d6a1a0bd1b4625f413a4736dcb40c4089869f75))
+
 ## [@nvidia-elements/core-v1.35.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.35.3...@nvidia-elements/core-v1.35.4) (2025-05-31)
 
 
