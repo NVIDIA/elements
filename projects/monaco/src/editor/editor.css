@@ -33,5 +33,15 @@
 
   .monaco-editor {
     outline: none;
+
+    background-color: var(--background, var(--vscode-editor-background));
+
+    .sticky-widget {
+      background-color: var(--background, var(--vscode-editorStickyScroll-background));
+    }
+
+    .minimap {
+      background-color: var(--background, var(--vscode-editor-background));
+    }
   }
 }

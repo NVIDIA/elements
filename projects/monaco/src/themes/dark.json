@@ -16,6 +16,7 @@
     "editorIndentGuide.background": "ref.color.gray-denim.600",
     "editorIndentGuide.activeBackground": "ref.color.gray-denim.800",
     "editorRuler.foreground": "ref.color.gray-denim.800",
+    "editorStickyScroll.shadow": { "token": "ref.color.black", "alpha": 0.5 },
     "editorWidget.background": "ref.color.gray-denim.400",
     "editorWidget.foreground": "ref.color.gray-slate.1100",
     "editorWidget.border": "ref.color.gray-denim.700",
@@ -38,6 +39,7 @@
     "minimap.background": { "token": "ref.color.gray-denim.200", "alpha": 0 },
     "quickInput.background": "ref.color.gray-denim.400",
     "quickInput.foreground": "ref.color.gray-slate.1100",
+    "scrollbar.shadow": { "token": "ref.color.black", "alpha": 0.5 },
     "toolbar.hoverBackground": "ref.color.gray-denim.500"
   },
   "rules": [
