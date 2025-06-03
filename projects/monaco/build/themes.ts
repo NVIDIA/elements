@@ -171,7 +171,7 @@ function buildTheme(filePath: string, tokens: Record<string, unknown>) {
 
 try {
   const lightTheme = buildTheme(path.join(inputPath, 'light.json'), lightTokens);
-  const darkTheme = buildTheme(path.join(inputPath, 'dark.json'), darkTokens);
+  const darkTheme = buildTheme(path.join(inputPath, 'dark.json'), { ...lightTokens, ...darkTokens });
 
   // Ensure output directory exists
   if (!fs.existsSync(outputPath)) {
