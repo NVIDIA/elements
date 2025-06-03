@@ -1,3 +1,17 @@
+diff --git a/dev/vs/editor/editor.main.css b/dev/vs/editor/editor.main.css
+index 890c1be5218ba1e650969aa09bdac07b757ba462..17bedf47fb43f0afe4ccc216fdb1db1cead2ec36 100644
+--- a/dev/vs/editor/editor.main.css
++++ b/dev/vs/editor/editor.main.css
+@@ -5145,7 +5145,8 @@
+ 
+ .monaco-editor .sticky-widget {
+ 	width: 100%;
+-	box-shadow: var(--vscode-editorStickyScroll-shadow) 0 4px 2px -2px;
++	/* PATCH: more consistent size sticky shadow through all of its states */
++	box-shadow: var(--vscode-editorStickyScroll-shadow) 0 6px 6px -6px;
+ 	z-index: 4;
+ 	background-color: var(--vscode-editorStickyScroll-background);
+ 	right: initial !important;
 diff --git a/esm/vs/base/browser/ui/scrollbar/scrollableElement.js b/esm/vs/base/browser/ui/scrollbar/scrollableElement.js
 index 633002e63f2999335d8a800cc57957b179d281a2..85a53ea7848919396c6cb3cc9b5ee997470e3f91 100644
 --- a/esm/vs/base/browser/ui/scrollbar/scrollableElement.js
@@ -106,6 +120,20 @@ index 92bbf91d421a45172ff04c2bac1025e433300b62..6688c3d07a38855df88a5903feafe463
      _assertNotDisposed() {
          if (this._isDisposed) {
              throw new BugIndicatingError('Model is disposed!');
+diff --git a/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css b/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css
+index 276082256f6efda17a33630f2aeb9dd7fa5507ea..282b97d67aa01c509b2a549ca1f8be056bd3c1f2 100644
+--- a/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css
++++ b/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css
+@@ -61,7 +61,8 @@
+ 
+ .monaco-editor .sticky-widget {
+ 	width: 100%;
+-	box-shadow: var(--vscode-editorStickyScroll-shadow) 0 4px 2px -2px;
++	/* PATCH: more consistent size sticky shadow through all of its states */
++	box-shadow: var(--vscode-editorStickyScroll-shadow) 0 6px 6px -6px;
+ 	z-index: 4;
+ 	background-color: var(--vscode-editorStickyScroll-background);
+ 	right: initial !important;
 diff --git a/esm/vs/editor/editor.api.d.ts b/esm/vs/editor/editor.api.d.ts
 index 6e21bfb0ceac3a097f10ec3a060142b6418782b3..85998ee402b7cdfd411b7e6593dfaa1c33583aac 100644
 --- a/esm/vs/editor/editor.api.d.ts
