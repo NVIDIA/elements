@@ -291,13 +291,13 @@ export const Multiline = {
       <nve-alert>
         Session Paused:
         <div slot="content" nve-layout="column gap:sm align:stretch">
-          <p nve-text="body sm">Failed to verify drives. <a href="#" nve-text="link">Check Status</a></p>
-          <nve-divider style="--color: var(--nve-sys-text-muted-color)"></nve-divider>
-          <pre nve-text="code sm" style="background: transparent !important; margin: 0;">
+          <p nve-text="body sm emphasis">Failed to verify drives.</p>
+          <pre nve-text="sm emphasis" style="background: transparent !important; margin: 0;">
 10:06:01 AM [verify] update /virtual:/verify/
 10:06:11 AM [build] update /virtual:/build/
 10:06:22 AM [error] update /virtual:/error/ - failed to connect to remote</pre>
         </div>
+        <nve-button slot="actions" container="flat">Collapse Details</nve-button>
       </nve-alert>
     </nve-alert-group>
   `
