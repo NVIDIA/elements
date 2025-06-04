@@ -5,7 +5,9 @@
   --padding: var(--nve-ref-space-xxs);
   --gap: var(--nve-ref-space-xxxs);
   --width: fit-content;
+  --height: fit-content;
   width: var(--width);
+  height: var(--height);
 }
 
 [internal-host] {

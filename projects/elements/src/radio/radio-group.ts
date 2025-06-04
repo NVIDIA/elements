@@ -19,6 +19,6 @@ export class RadioGroup extends ControlGroup {
   static readonly metadata = {
     tag: 'nve-radio-group',
     version: '0.0.0',
-    children: ['nve-radio']
+    children: ['label', 'nve-control-message', 'nve-radio']
   };
 }
