@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.36.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.36.0...@nvidia-elements/core-v1.36.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* **elements:** change alert text color to emphasis ([5d277fe](https://github.com/NVIDIA/elements/commit/5d277fed1c29e831be90c9e05d26a989315d6047))
+
 ## [@nvidia-elements/core-v1.36.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.35.4...@nvidia-elements/core-v1.36.0) (2025-06-03)
 
 
