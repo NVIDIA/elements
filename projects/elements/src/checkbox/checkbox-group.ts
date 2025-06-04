@@ -19,6 +19,6 @@ export class CheckboxGroup extends ControlGroup {
   static readonly metadata = {
     tag: 'nve-checkbox-group',
     version: '0.0.0',
-    children: ['nve-checkbox']
+    children: ['label', 'nve-control-message', 'nve-checkbox']
   };
 }
