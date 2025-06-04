@@ -1,5 +1,5 @@
 import type { CSSResult } from 'lit';
-import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
+import { audit, hostAttr, useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import styles from './switch.css?inline';
 
@@ -21,6 +21,7 @@ import styles from './switch.css?inline';
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-28&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/switch/
  */
+@audit()
 export class Switch extends Control {
   @hostAttr({ attribute: 'nve-control' }) protected nveControl = 'inline';
 
@@ -28,6 +29,7 @@ export class Switch extends Control {
 
   static readonly metadata = {
     tag: 'nve-switch',
-    version: '0.0.0'
+    version: '0.0.0',
+    children: ['label', 'input', 'nve-control-message']
   };
 }
