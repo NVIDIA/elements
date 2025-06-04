@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.0.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.4...@nvidia-elements/monaco-v1.0.5) (2025-06-04)
+
+
+### Bug Fixes
+
+* **monaco:** sticky scroll colors ([549a78c](https://github.com/NVIDIA/elements/commit/549a78c971b25036069ce6468a78018e54d3695d))
+
 ## [@nvidia-elements/monaco-v1.0.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.3...@nvidia-elements/monaco-v1.0.4) (2025-05-29)
 
 
