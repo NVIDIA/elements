@@ -29,7 +29,7 @@ export class Menu extends LitElement {
   static readonly metadata = {
     tag: 'nve-menu',
     version: '0.0.0',
-    children: ['nve-menu-item']
+    children: ['nve-menu-item', 'nve-divider']
   };
 
   static elementDefinitions = {};
