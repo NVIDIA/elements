@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.10.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.10.0...@nvidia-elements/styles-v1.10.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* **styles:** text-box trim defaults ([61e0e54](https://github.com/NVIDIA/elements/commit/61e0e54d87f6b95bd2d19d23c9a8ce530fe38a5f))
+
 ## [@nvidia-elements/styles-v1.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.9.5...@nvidia-elements/styles-v1.10.0) (2025-05-23)
 
 
