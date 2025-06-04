@@ -22,6 +22,12 @@
   outline: var(--nve-debug-typography-outline, initial);
 }
 
+/* disable trim if on body to prevent descender clipping */
+body[nve-text],
+[nve-text~='trim:none'] {
+  text-box: none !important;
+}
+
 @supports not (text-box: trim-both cap alphabetic) {
   /* https://seek-oss.github.io/capsize/ (firefox) */
   [nve-text] {
@@ -356,6 +362,7 @@
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
+  text-box: none !important;
 }
 
 [nve-text~='nowrap'] {
