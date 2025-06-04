@@ -56,8 +56,8 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
       ? /* html */ `
   <script type="module">
     import stories from '${story.path}' with { type: 'json' };
-    const canvas = document.querySelector('nvd-canvas#${story.id}');
     const story = stories.stories.find(s => s.id === '${story.id}');
+    const canvas = document.getElementById(stories.element + '_' + story.id);
     canvas.innerHTML = \`${playgroundButton}\` + story.template;
     canvas.source = story.template ?? '';
   </script>`
@@ -66,7 +66,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
   return story
     ? /* html */ `
 ${story.description ? `<p nve-text="body relaxed">${md.utils.escapeHtml(story.description)}</p>` : ''}
-<nvd-canvas id="${tag}:${story.id}">
+<nvd-canvas id="${tag}_${story.id}">
 ${playgroundButton}
 <template>${md.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>
 ${
