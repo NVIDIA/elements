@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.36.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.36.1...@nvidia-elements/core-v1.36.2) (2025-06-05)
+
+
+### Bug Fixes
+
+* **elements:** audit warnings and group height ([a50e66a](https://github.com/NVIDIA/elements/commit/a50e66a04d0bab72d89ebd336978ce17a4265896))
+
 ## [@nvidia-elements/core-v1.36.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.36.0...@nvidia-elements/core-v1.36.1) (2025-06-04)
 
 
