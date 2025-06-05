@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.5.1...@nvidia-elements/themes-v1.6.0) (2025-06-05)
+
+
+### Features
+
+* **themes:** add duration token options ([d96108a](https://github.com/NVIDIA/elements/commit/d96108a472d8066db6887858fa244ddca4cf4f3c))
+
 ## [@nvidia-elements/themes-v1.5.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.5.0...@nvidia-elements/themes-v1.5.1) (2025-02-24)
 
 
