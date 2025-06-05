@@ -284,6 +284,8 @@ export const renderDocsNav = data => /* html */ `
     Labs
     <nve-tree-node ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}><a href="docs/labs/">About</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted' : ''}><a href="docs/labs/behaviors-alpine/">Behaviors Alpine</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/labs/brand/' ? 'highlighted' : ''}><a href="docs/labs/brand/">Brand</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted' : ''}><a href="docs/labs/forms/">Forms</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''} ${data.page.url === '/docs/api-design/' ? 'highlighted' : ''}>

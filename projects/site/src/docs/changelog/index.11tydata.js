@@ -27,19 +27,24 @@ export default [
     changelog: metadata.projects['@nvidia-elements/themes'].changelog
   },
   {
+    title: '@nvidia-elements/monaco',
+    permalink: '/monaco/',
+    changelog: metadata.projects['@nvidia-elements/monaco'].changelog
+  },
+  {
     title: '@nvidia-elements/testing',
     permalink: '/testing/',
     changelog: metadata.projects['@nvidia-elements/testing'].changelog
   },
-  // {
-  //   title: '@nvidia-elements/brand',
-  //   permalink: '/labs-brand/',
-  //   changelog: metadata.projects['@nvidia-elements/brand'].changelog
-  // },
   {
     title: '@nvidia-elements/code',
     permalink: '/labs-code/',
     changelog: metadata.projects['@nvidia-elements/code'].changelog
+  },
+  {
+    title: '@nvidia-elements/brand',
+    permalink: '/labs-brand/',
+    changelog: metadata.projects['@nvidia-elements/brand'].changelog
   },
   {
     title: '@nvidia-elements/forms',
@@ -50,10 +55,5 @@ export default [
     title: '@nvidia-elements/behaviors-alpine',
     permalink: '/labs-behaviors-alpine/',
     changelog: metadata.projects['@nvidia-elements/behaviors-alpine'].changelog
-  },
-  {
-    title: '@nvidia-elements/monaco',
-    permalink: '/monaco/',
-    changelog: metadata.projects['@nvidia-elements/monaco'].changelog
   }
 ];

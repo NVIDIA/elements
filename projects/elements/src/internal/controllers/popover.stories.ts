@@ -22,7 +22,7 @@ export const Anchor = {
   render: () => html`
     <nve-tooltip id="popover-1" anchor="btn-2">tooltip 1</nve-tooltip>
     <nve-tooltip id="popover-2" anchor="btn-1">tooltip 2</nve-tooltip>
-    <div nve-layout="row gap:xs">
+    <div nve-layout="row gap:xs align:center">
       <nve-button id="btn-1" popovertarget="popover-1">button 1</nve-button>
       <nve-button id="btn-2" popovertarget="popover-2">button 2</nve-button>
     </div>
@@ -54,6 +54,22 @@ export const Nested = {
   <p nve-text="body">some text content in a notification</p>  
 </nve-notification>
   `
+}
+
+export const ProgrammaticTrigger = {
+  render: () => html`
+<nve-toast hidden close-timeout="3000">hello there</nve-toast>
+<nve-button>open after 2s</nve-button>
+
+<script type="module">
+  const toast = document.querySelector('nve-toast');
+  const button = document.querySelector('nve-button');
+
+  button.addEventListener('click', async () => {
+    await new Promise(r => setTimeout(r, 2000)); // do an async task then open the popover
+    toast.showPopover();
+  });
+</script>`
 }
 
 export const Interactive = {
