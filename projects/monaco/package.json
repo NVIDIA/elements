@@ -110,7 +110,8 @@
     "test:axe": "wireit",
     "test:coverage": "wireit",
     "test:watch": "wireit",
-    "test:lighthouse": "wireit"
+    "test:lighthouse": "wireit",
+    "test:visual": "wireit"
   },
   "dependencies": {
     "lit": "catalog:",
@@ -157,7 +158,8 @@
         "lint",
         "publint",
         "test:axe",
-        "test:coverage"
+        "test:coverage",
+        "test:visual"
       ]
     },
     "publint": {
@@ -336,6 +338,28 @@
       "env": {
         "NODE_ENV": "production"
       }
+    },
+    "test:visual": {
+      "command": "playwright-lock 'vitest run --config=vitest.visual.ts'",
+      "clean": false,
+      "files": [
+        "dist/**/*.js",
+        "src/index.test.visual.ts",
+        "src/**/*.test.visual.ts",
+        "vitest.visual.html",
+        "vitest.visual.ts"
+      ],
+      "output": [
+        ".visual/*.png",
+        "coverage/visual/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
     },
     "lint": {
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
