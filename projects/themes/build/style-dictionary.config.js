@@ -105,7 +105,9 @@ StyleDictionary.registerTransform({
 StyleDictionary.registerFormat({
   name: 'custom/css',
   format: async ({ dictionary, options }) => {
-    const experimental = dictionary.allTokens.find(t => t.name.includes('experimental')) ? '/** @experimental */' : '';
+    const experimental = dictionary.allTokens.find(t => t.name.includes('experimental'))
+      ? '/*!\n * @experimental\n */'
+      : '';
     const selector =
       options.theme !== 'index'
         ? `[nve-theme*='${options.theme}'], [nve-theme*='${options.theme}']`
@@ -127,7 +129,8 @@ StyleDictionary.registerFormat({
       })
       .join('\n');
 
-    return `${experimental}\n${options.theme === 'index' ? `${baseReset}\n` : ''}${configString}${selector} {\n${formatted}\n}`;
+    const deprecated = options.theme.includes('brand') ? '/*!\n * @deprecated - use @nvidia-elements/brand instead\n */' : '';
+    return `${deprecated}\n${experimental}\n${options.theme === 'index' ? `${baseReset}\n` : ''}${configString}${selector} {\n${formatted}\n}`;
   }
 });
 
