@@ -10,6 +10,7 @@ export function render(data) {
 # ${data.title}
 
 Themes are built leveraging CSS Custom Properties. Themes are applied by setting the \`nve-theme\` attribute on the host \`html\` element.
+Themes can be independently loaded as needed to reduce the size of the initial bundle.
 
 \`\`\`css
 @import '@nvidia-elements/themes/fonts/inter.css';
@@ -29,6 +30,9 @@ Themes are built leveraging CSS Custom Properties. Themes are applied by setting
   If your application cannot access root nodes like html or body then apply nve-theme="root" to set the root background colors and fonts.
 </nve-alert>
 
+
+## Autodetect Preferences
+
 Themes can be applied dynamically based on user preferences.
 
 \`\`\`javascript
@@ -47,9 +51,17 @@ Themes can be applied dynamically based on user preferences.
 
 ## Dark
 
+\`\`\`css
+@import '@nvidia-elements/themes/dark.css';
+\`\`\`
+
 ${getThemeDemo('dark')}
 
 ## Light (Default)
+
+\`\`\`css
+@import '@nvidia-elements/themes/index.css';
+\`\`\`
 
 ${getThemeDemo('light')}
 
@@ -57,11 +69,31 @@ ${getThemeDemo('light')}
 
 The \`debug\` theme will highlight elements with a green outline, layouts with a purple outline and typography with a gold outline.
 
+\`\`\`css
+@import '@nvidia-elements/themes/debug.css';
+\`\`\`
+
 ${getThemeDemo('debug')}
 
 ## High Contrast
 
+\`\`\`css
+@import '@nvidia-elements/themes/high-contrast.css';
+\`\`\`
+
 ${getThemeDemo('high-contrast')}
+
+## Brand
+
+The \`brand\` theme is a set of themes that are designed to be used with the \`@nvidia-elements/brand\` package.
+[Learn more](docs/labs/brand/).
+
+\`\`\`css
+@import '@nvidia-elements/brand/index.css';
+@import '@nvidia-elements/brand/dark.css';
+\`\`\`
+
+${getThemeDemo('brand-dark')}
 `,
     'md'
   );
@@ -81,20 +113,6 @@ function getThemeDemo(theme) {
 function getThemeContent() {
   return /* html */ `
     <div style="display: flex; flex-direction: column; gap: 24px; padding: 24px">
-    <div nve-layout="row gap:sm">
-        <nve-icon-button icon-name="person"></nve-icon-button>
-        <nve-icon-button icon-name="person" interaction="emphasis"></nve-icon-button>
-        <nve-icon-button icon-name="person" interaction="destructive"></nve-icon-button>
-        <nve-icon-button icon-name="person" container="flat"></nve-icon-button>
-        <nve-icon-button icon-name="person" disabled></nve-icon-button>
-      </div>
-      <div nve-layout="row gap:sm">
-        <nve-icon name="person"></nve-icon>
-        <nve-icon name="person" status="accent"></nve-icon>
-        <nve-icon name="person" status="success"></nve-icon>
-        <nve-icon name="person" status="warning"></nve-icon>
-        <nve-icon name="person" status="danger"></nve-icon>
-      </div>
       <div nve-layout="row gap:sm">
         <nve-button>default</nve-button>
         <nve-button interaction="emphasis">emphasis</nve-button>
@@ -123,32 +141,6 @@ function getThemeContent() {
         <nve-alert status="warning">warning</nve-alert>
         <nve-alert status="success">success</nve-alert>
         <nve-alert status="danger">danger</nve-alert>
-      </div>
-      <div nve-layout="column gap:md">
-        <nve-alert-group>
-          <nve-alert>default</nve-alert>
-          <nve-alert>default</nve-alert>
-        </nve-alert-group>
-
-        <nve-alert-group status="accent">
-          <nve-alert>accent</nve-alert>
-          <nve-alert>accent</nve-alert>
-        </nve-alert-group>
-
-        <nve-alert-group status="warning">
-          <nve-alert>warning</nve-alert>
-          <nve-alert>warning</nve-alert>
-        </nve-alert-group>
-
-        <nve-alert-group status="success">
-          <nve-alert>success</nve-alert>
-          <nve-alert>success</nve-alert>
-        </nve-alert-group>
-
-        <nve-alert-group status="danger">
-          <nve-alert>danger</nve-alert>
-          <nve-alert>danger</nve-alert>
-        </nve-alert-group>
       </div>
     </div>
     `;

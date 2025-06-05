@@ -15,7 +15,7 @@ import styles from './drawer.css?inline';
 
 /**
  * @element nve-drawer
- * @description Drawer are to display content that is out of context of the rest of the page (notifications, navigations, settings). Alternatively [Panel](./docs/elements/panel/) is inline as its content is coupled or closely related to the content on the page (details, additional actions/options).
+ * @description Drawer are to display content that is out of context of the rest of the page (notifications, navigation, settings). Alternatively [Panel](./docs/elements/panel/) is inline as its content is coupled or closely related to the content on the page (details, additional actions/options). [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/drawer
  * @event open - Dispatched when the drawer is opened.

@@ -21,22 +21,22 @@ main @nve package scope. Labs projects may be deprecated or removed at any time.
   <nve-grid-row>
     <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/code" target="_blank"><code nve-text="code">@nvidia-elements/code</code></a></nve-grid-cell>
     <nve-grid-cell>A package containing UI components for displaying and editing source code.</nve-grid-cell>
-    <nve-grid-cell>In Development</nve-grid-cell>
+    <nve-grid-cell>Available / In Development</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/behaviors-alpine" target="_blank"><code nve-text="code">@nvidia-elements/behaviors-alpine</code></a></nve-grid-cell>
     <nve-grid-cell>A package containing AlpineJS utilities.</nve-grid-cell>
-    <nve-grid-cell>In Development</nve-grid-cell>
+    <nve-grid-cell>Available / In Development</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/brand" target="_blank"><code nve-text="code">@nvidia-elements/brand</code></a></nve-grid-cell>
-    <nve-grid-cell></nve-grid-cell>
-    <nve-grid-cell>In Development</nve-grid-cell>
+    <nve-grid-cell>A custom marketing/brand theme.</nve-grid-cell>
+    <nve-grid-cell>Available / In Development</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/forms" target="_blank"><code nve-text="code">@nvidia-elements/forms</code></a></nve-grid-cell>
-    <nve-grid-cell></nve-grid-cell>
-    <nve-grid-cell>In Development</nve-grid-cell>
+    <nve-grid-cell>Utilities for building custom form control APIs.</nve-grid-cell>
+    <nve-grid-cell>Available / In Development</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/playwright-screencast" target="_blank"><code nve-text="code">@nvidia-elements/playwright-screencast</code></a></nve-grid-cell>

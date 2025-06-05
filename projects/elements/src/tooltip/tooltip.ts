@@ -15,7 +15,7 @@ import styles from './tooltip.css?inline';
 
 /**
  * @element nve-tooltip
- * @description A contextual popup that displays a description for an element. Tooltips are [triggered](https://w3c.github.io/aria/#tooltip) by hovering, focusing, or tapping an element and cannot have interactive elements within them.
+ * @description A contextual popup that displays a plaintext description. Tooltips are [triggered](https://w3c.github.io/aria/#tooltip) by hovering, focusing, or tapping an element and cannot have interactive elements within them. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/tooltip
  * @event open - Dispatched when the tooltip is opened.

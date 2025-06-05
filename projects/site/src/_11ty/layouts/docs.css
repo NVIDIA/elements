@@ -22,6 +22,12 @@
   }
 }
 
+#docs-nav nve-tree-node:not([expanded]) > a {
+  &::after {
+    inset: 0 0 0 -24px !important;
+  }
+}
+
 h2[nve-text='heading xl mkd'] {
   border-bottom: 1px solid var(--nve-ref-border-color);
 }
