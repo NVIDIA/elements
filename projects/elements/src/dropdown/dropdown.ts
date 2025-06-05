@@ -16,7 +16,7 @@ import styles from './dropdown.css?inline';
 
 /**
  * @element nve-dropdown
- * @description Generic dropdown element for rendering a variety of different content within a dropdown container.
+ * @description Generic dropdown element for rendering a variety of different content such as interactive navigation or form controls. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/dropdown
  * @event open - Dispatched when the dropdown is opened.

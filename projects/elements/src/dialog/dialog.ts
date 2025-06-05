@@ -16,7 +16,7 @@ import styles from './dialog.css?inline';
 
 /**
  * @element nve-dialog
- * @description Dialog is a component that appears above main content. A modal dialog is used to display critical information that requires users attention. Use `hidden` to show or hide the dialog.
+ * @description Dialog is a component that appears above main content. A modal dialog is used to display critical information that requires users attention that interrupts user flow. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/dialog
  * @event open - Dispatched when the dialog is opened.

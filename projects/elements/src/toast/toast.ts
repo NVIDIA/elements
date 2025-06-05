@@ -18,7 +18,7 @@ import styles from './toast.css?inline';
 
 /**
  * @element nve-toast
- * @description A contextual popup that displays a status. Toasts are [triggered](https://w3c.github.io/aria/#tooltip) by clicking, focusing, or tapping an element and cannot have interactive elements within them.
+ * @description A contextual popup that displays a status. Toasts are [triggered](https://w3c.github.io/aria/#tooltip) by clicking, focusing, or tapping an element and cannot have interactive elements within them. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/toast
  * @event open - Dispatched when the toast is opened.
