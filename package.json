@@ -119,6 +119,7 @@
         "release:elements",
         "release:elements-react",
         "release:labs-behaviors-alpine",
+        "release:labs-brand",
         "release:labs-code",
         "release:labs-forms",
         "release:monaco",
