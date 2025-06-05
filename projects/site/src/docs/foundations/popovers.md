@@ -7,10 +7,7 @@
 
 # {{ title }}
 
-Elements provides a set of popover type components based on the popover spec and aria guidelines.
-
-- [popover spec](https://open-ui.org/components/popup.research.explainer)
-- [w3c aria patterns](https://www.w3.org/WAI/ARIA/apg/patterns/)
+Elements provides a set of popover type components built on the native browser [Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
 
 ## Available Elements
 
@@ -37,8 +34,6 @@ import '@nvidia-elements/core/notification/define.js';
 
 ## Usage
 
-Element popover types use the browser standard [Popover API](https://developer.chrome.com/blog/introducing-popover-api)
-
 ```html
 <nve-tooltip id="tooltip">hello there</nve-tooltip>
 <nve-button popovertarget="tooltip">button</nve-button>
@@ -51,17 +46,20 @@ Element popover types use the browser standard [Popover API](https://developer.c
 Some popover types such as tooltip have complex interactions such as showing when hovered or focused. To simplify these interactions all popover type elements provide a `open` and `close` event to notify when the popover is attempting to close or open based on a user interaction. You can also listen
 to the native `toggle` or `beforetoggle` popover events.
 
-{% story 'nve-tooltip', 'Events', '{ "inline": false, "height": "400px" }' %}
+- [toggle](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
+- [beforetoggle](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
 
-```html
-<nve-tooltip id="tooltip">hello there</nve-tooltip>
-<nve-button popovertarget="tooltip">button</nve-button>
-<script type="module">
-  const tooltip = document.querySelector('nve-tooltip');
-  tooltip.addEventListener('close', () => console.log('close'));
-  tooltip.addEventListener('open', () => console.log('open'));
-</script>
-```
+{% story 'nve-tooltip', 'Events', '{ "inline": false, "height": "150px" }' %}
+
+## Programmatic Trigger
+
+Popovers can be triggered manually via the native popover APIs.
+
+- [showPopover()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/showPopover)
+- [hidePopover()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/hidePopover)
+- [togglePopover()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/togglePopover)
+
+{% story '@nvidia-elements/core/internal/controllers/popover.stories.json', 'ProgrammaticTrigger', '{ "inline": false, "height": "150px" }' %}
 
 ## Positioning
 

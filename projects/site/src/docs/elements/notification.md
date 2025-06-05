@@ -9,6 +9,8 @@
 
 ## Installation
 
+Learn more about native [Popover APIs](docs/foundations/popovers/).
+
 {% install 'nve-notification' %}
 
 ## Standard
