@@ -19,7 +19,7 @@ import globalStyles from './toggletip.global.css?inline';
 
 /**
  * @element nve-toggletip
- * @description Generic toggletip element for rendering a variety of different content within a toggletip container.
+ * @description Generic toggletip element for rendering a variety of different interactive content. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.38.0
  * @entrypoint \@nvidia-elements/core/toggletip
  * @event open - Dispatched when the toggletip is opened.
