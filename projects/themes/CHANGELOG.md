@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.6.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.6.0...@nvidia-elements/themes-v1.6.1) (2025-06-05)
+
+
+### Bug Fixes
+
+* **themes:** tag comments ([fea79f6](https://github.com/NVIDIA/elements/commit/fea79f678b57bdfeb66cc47da51a5aa9e19d4706))
+
 ## [@nvidia-elements/themes-v1.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.5.1...@nvidia-elements/themes-v1.6.0) (2025-06-05)
 
 
