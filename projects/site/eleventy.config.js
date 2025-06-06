@@ -89,6 +89,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
   eleventyConfig.addTransform('anchor-generator', anchorGeneratorTransform);
   eleventyConfig.addTransform('html-minify', htmlMinifyTransform);
+
+  // Add collection for component docs
+  eleventyConfig.addCollection('componentDocs', function (collection) {
+    return collection.getFilteredByGlob('src/docs/elements/*.md');
+  });
+
   return {
     dir: {
       input: 'src',
