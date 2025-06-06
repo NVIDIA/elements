@@ -27,6 +27,20 @@ function template(theme: '' | 'dark' = '') {
     <nve-steps-item disabled>•︎•︎•︎•︎•︎•︎</nve-steps-item>
   </nve-steps>
 
+  <nve-steps>
+    <nve-steps-item selected status="success">•︎•︎•︎•︎•︎•︎</nve-steps-item>
+    <nve-steps-item selected status="danger">•︎•︎•︎•︎•︎•︎</nve-steps-item>
+    <nve-steps-item selected>•︎•︎•︎•︎•︎•︎</nve-steps-item>
+    <nve-steps-item selected disabled>•︎•︎•︎•︎•︎•︎</nve-steps-item>
+  </nve-steps>
+
+  <nve-steps>
+    <nve-steps-item disabled status="success">•︎•︎•︎•︎•︎•︎</nve-steps-item>
+    <nve-steps-item disabled status="danger">•︎•︎•︎•︎•︎•︎</nve-steps-item>
+    <nve-steps-item disabled>•︎•︎•︎•︎•︎•︎</nve-steps-item>
+    <nve-steps-item disabled>•︎•︎•︎•︎•︎•︎</nve-steps-item>
+  </nve-steps>
+
   <nve-steps container="condensed">
     <nve-steps-item status="success">•︎•︎•︎•︎•︎•︎</nve-steps-item>
     <nve-steps-item status="danger">•︎•︎•︎•︎•︎•︎</nve-steps-item>

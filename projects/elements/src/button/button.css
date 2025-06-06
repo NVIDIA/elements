@@ -93,10 +93,6 @@
   --nve-sys-interaction-state-ratio: 0;
 }
 
-:host([container='flat']:not([interaction]):not([disabled]):not([readonly])) {
-  --nve-sys-interaction-state-ratio-hover: 8%;
-}
-
 :host([size='sm']) {
   --height: var(--nve-ref-size-700);
 }
@@ -180,7 +176,7 @@
 }
 
 :host([container*='flat'][interaction='destructive']) {
-  --color: var(--nve-sys-interaction-destructive-background);
+  --color: color-mix(in oklab, var(--nve-sys-interaction-destructive-background) 100%, currentColor 20%);
 }
 
 :host([container*='inline']) {
@@ -266,7 +262,7 @@
 }
 
 :host([container='inline'][interaction='destructive']) {
-  --color: var(--nve-sys-interaction-destructive-background);
+  --color: color-mix(in oklab, var(--nve-sys-interaction-destructive-background) 100%, currentColor 20%);
 }
 
 :host([container='inline'][interaction='emphasis']) {
