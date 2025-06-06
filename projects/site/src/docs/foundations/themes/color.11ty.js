@@ -42,6 +42,7 @@ Colors should be used via the system tokens (--nve-sys-*) when possible to ensur
   }
 </style>
 <div nve-layout="grid gap:md" class="color-scale full-width">
+${getColorScale('ref-color-neutral')}
 ${getColorScale('ref-color-gray-slate')}
 ${getColorScale('ref-color-gray-denim')}
 ${getColorScale('ref-color-green-grass')}
