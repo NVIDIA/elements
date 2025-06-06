@@ -3,6 +3,7 @@
 import markdownIt from 'markdown-it';
 import { MetadataService, createPlaygroundURL } from '@nve-internals/metadata';
 import { stories } from '../../../src/stories/utils.js';
+import markdown from '../libraries/markdown.js';
 
 const md = markdownIt();
 const metadata = await MetadataService.getMetadata();
@@ -65,7 +66,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
 
   return story
     ? /* html */ `
-${story.description ? `<p nve-text="body relaxed">${md.utils.escapeHtml(story.description)}</p>` : ''}
+${markdown.render(story.description ?? '')}
 <nvd-canvas id="${tag}_${story.id}">
 ${playgroundButton}
 <template>${md.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>
