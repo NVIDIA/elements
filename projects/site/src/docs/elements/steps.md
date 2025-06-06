@@ -25,13 +25,13 @@ Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI
 
 ## Condensed
 
-Steps can be displayed in a condensed view where the text labels are hidden. Set `container="condensed"` on `<nve-steps>`
+{% api 'nve-steps-item', 'property', 'container' %}
 
 {% story 'nve-steps', 'Condensed' %}
 
 ## Vertical Steps
 
-Steps can be used as the foundation for a side menu by enabling vertical mode. Simply set `vertical` on `<nve-steps>`
+{% api 'nve-steps', 'property', 'vertical' %}
 
 {% story 'nve-steps', 'VerticalSteps' %}
 
