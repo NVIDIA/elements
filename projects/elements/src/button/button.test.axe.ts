@@ -26,9 +26,7 @@ describe(Button.metadata.tag, () => {
   });
 
   it('should pass axe check', async () => {
-    const results = await runAxe([Button.metadata.tag], {
-      rules: { 'color-contrast': { enabled: false } } // interaction emphasis fails minimum color-contrast
-    });
+    const results = await runAxe([Button.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });
