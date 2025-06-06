@@ -10,6 +10,7 @@
 }
 
 [internal-host] {
+  --_icon-button-color: var(--color);
   width: var(--width);
   gap: var(--nve-ref-space-xs);
   padding: var(--nve-ref-size-200) var(--nve-ref-size-300) var(--nve-ref-size-200) var(--nve-ref-size-200);
@@ -43,6 +44,7 @@ nve-icon-button#number-icon {
   box-sizing: content-box;
   border: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
   border-radius: 100%;
+  --color: var(--_icon-button-color);
   --height: var(--nve-ref-size-600);
   --width: var(--nve-ref-size-600);
   --background: transparent;
@@ -50,10 +52,7 @@ nve-icon-button#number-icon {
 
 nve-icon-button[interaction='emphasis'] {
   --background: var(--nve-sys-support-success-color);
-}
-
-nve-icon-button[interaction='danger'] {
-  --background-color: var(--nve-sys-support-danger-color);
+  --color: var(--nve-sys-text-white-color);
 }
 
 :host(:state(selected)) {
@@ -68,13 +67,7 @@ nve-icon-button[interaction='danger'] {
 }
 
 :host(:hover:not(:state(disabled), :state(selected))) {
-  --color: var(--nve-sys-text-emphasis-color);
   --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-hover);
-}
-
-:host(:state(selected)) nve-icon-button,
-:host(:hover:not(:state(disabled))) nve-icon-button {
-  --color: var(--nve-sys-text-emphasis-color);
 }
 
 :host([container='condensed']) div {
