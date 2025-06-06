@@ -1396,7 +1396,7 @@
     },
     "interaction": {
       "color": {
-        "value": "{sys.text.color}",
+        "value": "{ref.color.neutral.1200}",
         "type": "color"
       },
       "background": {
@@ -1451,7 +1451,7 @@
       },
       "emphasis": {
         "color": {
-          "value": "{sys.text.white.color}",
+          "value": "{sys.text.black.color}",
           "type": "color"
         },
         "background": {
@@ -1465,7 +1465,7 @@
           "type": "color"
         },
         "background": {
-          "value": "{ref.color.red-cardinal.1000}",
+          "value": "{ref.color.red-cardinal.800}",
           "type": "color"
         }
       },
@@ -1533,18 +1533,6 @@
       },
       "mix": {
         "value": "{ref.color.white}"
-      },
-      "ratio-hover": {
-        "value": "4%"
-      },
-      "ratio-disabled": {
-        "value": "4%"
-      },
-      "ratio-active": {
-        "value": "8%"
-      },
-      "ratio-selected": {
-        "value": "8%"
       }
     },
     "layer": {
