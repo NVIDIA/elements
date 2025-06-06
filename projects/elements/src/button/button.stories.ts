@@ -49,28 +49,34 @@ export const ButtonWithIcon = {
 
 export const Interaction = {
   render: () => html`
-    <nve-button>standard</nve-button>
-    <nve-button interaction="emphasis">emphasis</nve-button>
-    <nve-button interaction="destructive">destructive</nve-button>
-    <nve-button disabled>disabled</nve-button>
+    <div nve-layout="row gap:xs">
+      <nve-button>standard</nve-button>
+      <nve-button interaction="emphasis">emphasis</nve-button>
+      <nve-button interaction="destructive">destructive</nve-button>
+      <nve-button disabled>disabled</nve-button>
+    </div>
   `
 }
 
 export const Flat = {
   render: () => html`
-    <nve-button container="flat">standard</nve-button>
-    <nve-button container="flat" interaction="emphasis">emphasis</nve-button>
-    <nve-button container="flat" interaction="destructive">destructive</nve-button>
-    <nve-button container="flat" disabled>disabled</nve-button>
+    <div nve-layout="row gap:xs">
+      <nve-button container="flat">standard</nve-button>
+      <nve-button container="flat" interaction="emphasis">emphasis</nve-button>
+      <nve-button container="flat" interaction="destructive">destructive</nve-button>
+      <nve-button container="flat" disabled>disabled</nve-button>
+    </div>
   `
 }
 
 export const Inline = {
   render: () => html`
-    <nve-button container="inline">standard</nve-button>
-    <nve-button container="inline" interaction="emphasis">emphasis</nve-button>
-    <nve-button container="inline" interaction="destructive">destructive</nve-button>
-    <nve-button container="inline" disabled>disabled</nve-button>
+    <div nve-layout="row gap:xs">
+      <nve-button container="inline">standard</nve-button>
+      <nve-button container="inline" interaction="emphasis">emphasis</nve-button>
+      <nve-button container="inline" interaction="destructive">destructive</nve-button>
+      <nve-button container="inline" disabled>disabled</nve-button>
+    </div>
   `
 }
 
@@ -86,41 +92,51 @@ export const Deprecated = {
 
 export const Size = {
   render: () => html`
-    <nve-button size="sm">small button</nve-button>
-    <nve-button>standard button</nve-button>
-    <nve-button size="lg">large button</nve-button>
+    <div nve-layout="row gap:xs">
+      <nve-button size="sm">small button</nve-button>
+      <nve-button>standard button</nve-button>
+      <nve-button size="lg">large button</nve-button>
+    </div>
   `
 }
 
 export const Link = {
   render: () => html`
-<nve-button><a href="#">standard</a></nve-button>
-<nve-button interaction="emphasis"><a href="#">emphasis</a></nve-button>
-<nve-button interaction="destructive"><a href="#">destructive</a></nve-button>
-<nve-button disabled><a href="#">disabled</a></nve-button>
+    <div nve-layout="row gap:xs"> 
+      <nve-button><a href="#">standard</a></nve-button>
+      <nve-button interaction="emphasis"><a href="#">emphasis</a></nve-button>
+      <nve-button interaction="destructive"><a href="#">destructive</a></nve-button>
+      <nve-button disabled><a href="#">disabled</a></nve-button>
+    </div>
   `
 }
 
 export const Pressed = {
   render: () => html`
-    <nve-button pressed>pressed</nve-button>
-    <nve-button>unpressed</nve-button>
+    <div nve-layout="row gap:xs">
+      <nve-button pressed>pressed</nve-button>
+      <nve-button>unpressed</nve-button>
+    </div>
   `
 }
 
 export const SelectedFlat = {
   render: () => html`
-    <nve-button selected container="flat">selected</nve-button>
-    <nve-button container="flat">unselected</nve-button>
-    <nve-button container="flat">unselected</nve-button>
+    <div nve-layout="row gap:xs">
+      <nve-button selected container="flat">selected</nve-button>
+      <nve-button container="flat">unselected</nve-button>
+      <nve-button container="flat">unselected</nve-button>
+    </div>
   `
 }
 
 export const LinkFlat = {
   render: () => html`
-<nve-button container="flat"><a href="#">flat</a></nve-button>
-<nve-button container="flat" interaction="emphasis"><a href="#">flat emphasis</a></nve-button>
-<nve-button container="flat" interaction="destructive"><a href="#">flat destructive</a></nve-button>
+    <div nve-layout="row gap:xs">
+      <nve-button container="flat"><a href="#">flat</a></nve-button>
+      <nve-button container="flat" interaction="emphasis"><a href="#">flat emphasis</a></nve-button>
+      <nve-button container="flat" interaction="destructive"><a href="#">flat destructive</a></nve-button>
+    </div>
   `
 }
 
@@ -173,6 +189,9 @@ export const FormSubmit = {
 `
 }
 
+/**
+ * @description Form control option allows a button to be styled like a control field. This is helpful for using button to trigger custom form control components or dropdowns.
+ */
 export const FormControl = {
   render: () => html`
 <div nve-layout="row gap:xs" style="max-width: 400px">
