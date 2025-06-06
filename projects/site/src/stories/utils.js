@@ -38,6 +38,7 @@ export const stories = getStories().flatMap(storiesFile => {
     id: story.id,
     title: camelToKebab(story.id),
     permalink: `${storiesFile.path.replace('.stories.json', '-')}${camelToKebab(story.id)}/`,
+    description: story.description,
     template: story.template,
     tagName: storiesFile.element,
     element: storiesFile.element?.replace('nve-', ''),

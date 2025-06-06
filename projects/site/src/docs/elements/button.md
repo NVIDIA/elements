@@ -77,6 +77,4 @@ If you need to slot an icon in a linked button, put `nve-icon` adjacent to the a
 
 ## Form Control
 
-Form control option allows a button to be styled like a control field. This is helpful for using button to trigger custom form control components or dropdowns.
-
 {% story 'nve-button', 'FormControl' %}
