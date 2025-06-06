@@ -29,8 +29,6 @@
 
 ## Border Background
 
-By default Menu will show a blue border on the selected item. You can change the border color by setting `--border-background` on the `<nve-menu-item>`
-
 {% story 'nve-menu', 'BorderBackground' %}
 
 ## Disabled
@@ -49,20 +47,13 @@ By default Menu will show a blue border on the selected item. You can change the
 
 ## Dropdown
 
-[ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
-
-{% story 'nve-menu', 'Dropdown', '{ "inline": false, "height": "300px" }' %}
+{% story 'nve-menu', 'Dropdown', '{ "inline": false, "height": "380px" }' %}
 
 ## Vertical Navigation Drawer
 
-Navigation drawers overlay the existing page content. Navigation is for out of page context navigation.
-
-{% story 'nve-menu', 'VerticalNavigationDrawer', '{ "inline": false, "height": "300px" }' %}
+{% story 'nve-menu', 'VerticalNavigationDrawer', '{ "inline": false, "height": "380px" }' %}
 
 ## Vertical Navigation Panel
-
-Navigation panels are inline to the page and push the existing page content to the side.
-Navigation should be relevant and contextual to the page content.
 
 {% story 'nve-menu', 'VerticalNavigationPanel' %}
 
@@ -79,8 +70,6 @@ Navigation should be relevant and contextual to the page content.
 {% story 'nve-menu', 'Links' %}
 
 ## Suffix Slot
-
-Menu item features a default slot for content, along with a suffix slot for displaying elements such as keyboard shortcuts at the end of the menu item container.
 
 {% story 'nve-menu', 'Suffix' %}
 
