@@ -23,11 +23,15 @@ export function render(data) {
     padding: 0 !important;
   }
 </style>
+
 <div nve-layout='row gap:sm'>
   <a href='https://github.com/NVIDIA/elements/-/releases'><img src='https://github.com/NVIDIA/elements/-/badges/release.svg?value_width=200' alt='release'></a>
+
   <a href='https://github.com/NVIDIA/elements/-/commits/main'><img src='https://github.com/NVIDIA/elements/badges/main/pipeline.svg' alt='pipeline status'></a>
+  
   <a href='https://github.com/NVIDIA/elements/-/graphs/main/charts'><img src='https://github.com/NVIDIA/elements/badges/main/coverage.svg?min_good=90&amp;key_text=coverage' alt='coverage'></a>
 </div>
+
 <nve-tabs>
   ${data.changelogs
     .map(

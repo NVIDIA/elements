@@ -12,8 +12,10 @@ const metadata = await MetadataService.getMetadata();
 export function elementSummary(tag) {
   const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
   const element = elements.find(d => d.name === tag);
+
   return /* html */ `<section nve-layout="column gap:md align:stretch margin-top:md">
   ${element.manifest.description ? md.render(element.manifest.description).replace('<p>', '<p nve-text="heading muted sm">') : ''}
+
   <div nve-layout="row gap:xs align:center align:space-between align:wrap">
     <div nve-layout="row gap:xs align:center">
       ${badgeStatus(element.manifest.metadata.status, '', ESM_ELEMENTS_VERSION)}
@@ -22,10 +24,14 @@ export function elementSummary(tag) {
       ${badgeLighthouse(element.tests.lighthouse?.scores, '', 'Lighthouse:&nbsp;')}
       ${badgeAxe(element.manifest.metadata.axe, '')}
     </div>
+
     <div nve-layout="row gap:xs align:center">
       ${element.manifest.metadata.behavior === 'form' ? /* html */ `<nve-button size="sm"><nve-icon name="checklist" size="sm"></nve-icon><a href="./docs/foundations/forms/controls/#form-associated-elements" target="_blank">Form Control</a></nve-button>` : ''}
+      
       <nve-button size="sm" style="margin-left: auto"><nve-icon name="group" size="sm"></nve-icon><a href="${element.manifest.metadata.aria}" target="_blank">ARIA Spec</a></nve-button>
+
       ${element.manifest.metadata.figma ? /* html */ `<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href="${element.manifest.metadata.figma}" target="_blank">Figma</a></nve-button>` : ''}
+      
       <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">Released: ${element.manifest.metadata.since}</a></nve-button>
     </div>
   </div>
@@ -127,10 +133,13 @@ export function elementStatus(tag) {
 
   return /* html */ `
   <h2 nve-text="heading xl mkd" id="release-status">Release Status</h2>
+
   <div nve-layout="column gap:md">
     <p nve-text="body">All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
+
     <div nve-layout="column gap:sm">
       <nve-badge status="${elementMetadata.status === 'pre-release' ? 'warning' : 'pending'}">pre-release <nve-icon name="exclamation-triangle"></nve-icon></nve-badge>
+      
       <div nve-layout="column gap:xs">
         <nve-alert status="${elementMetadata.figma ? 'finished' : 'pending'}">Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
         <nve-alert status="${elementMetadata.storybook ? 'finished' : 'pending'}">Storybook Preview</nve-alert>
@@ -138,8 +147,10 @@ export function elementStatus(tag) {
         <nve-alert status="${elementMetadata.themes ? 'finished' : 'pending'}">Fully Themeable</nve-alert>
       </div>
     </div>
+
     <div nve-layout="column gap:sm">
       <nve-badge status="${elementMetadata.status === 'beta' ? 'running' : 'pending'}">beta <nve-icon name="clock"></nve-icon></nve-badge>
+
       <div nve-layout="column gap:xs">
         <nve-alert status="${elementMetadata.unitTests ? 'finished' : 'pending'}">Robust unit test coverages</nve-alert>
         <nve-alert status="${elementMetadata.apiReview ? 'finished' : 'pending'}">Passed <a href="docs/api-design/">API Review</a></nve-alert>
@@ -147,8 +158,10 @@ export function elementStatus(tag) {
         <nve-alert status="${elementMetadata.package ? 'finished' : 'pending'}">Included in <a href="http://nv/elements">library package</a></nve-alert>
       </div>
     </div>
+
     <div nve-layout="column gap:sm">
       <nve-badge status="${elementMetadata.status === 'stable' ? 'finished' : 'pending'}">stable <nve-icon name="checkmark-circle"></nve-icon></nve-badge>
+      
       <div nve-layout="column gap:xs">
         <nve-alert status="${elementMetadata.aria ? 'finished' : 'pending'}">No known outstanding <a href="https://www.w3.org/WAI/ARIA/apg/">AA WCAG issues</a></nve-alert>
         <nve-alert status="${elementMetadata.performance ? 'finished' : 'pending'}">No known outstanding performance issues</nve-alert>
