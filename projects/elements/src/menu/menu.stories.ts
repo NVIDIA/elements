@@ -26,6 +26,9 @@ export const Default = {
   `
 };
 
+/**
+ * @description An example of a dropdown menu. [ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
+ */
 export const Dropdown = {
   render: () => html`
   <nve-button id="dropdown-menu-btn">dropdown</nve-button>
@@ -63,6 +66,9 @@ export const Current = {
   `
 };
 
+/**
+ * @description By default Menu will show a blue border on the selected item. You can change the border color by setting `--border-background` on the `<nve-menu-item>`
+ */
 export const BorderBackground = {
   render: () => html`
   <nve-menu>
@@ -107,6 +113,9 @@ export const Links = {
   `
 };
 
+/**
+ * @description Menu item features a default slot for content, along with a suffix slot for displaying elements such as keyboard shortcuts at the end of the menu item container.
+ */
 export const Suffix = {
   render: () => html`
   <nve-menu>
@@ -154,6 +163,9 @@ export const Complex = {
   `
 };
 
+/**
+ * @description Navigation drawers overlay the existing page content. Navigation is for out of page context navigation.
+ */
 export const VerticalNavigationDrawer = {
   render: () => html`
   <div nve-layout="column align:stretch full">
@@ -180,6 +192,9 @@ export const VerticalNavigationDrawer = {
   `
 };
 
+/**
+ * @description Navigation panels are inline to the page and push the existing page content to the side. Navigation should be relevant and contextual to the page content.
+ */
 export const VerticalNavigationPanel = {
   render: () => html`
   <div nve-layout="row gap:md align:stretch">
