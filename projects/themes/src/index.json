@@ -1865,7 +1865,7 @@
       },
       "emphasis": {
         "color": {
-          "value": "{sys.text.white.color}",
+          "value": "{sys.text.black.color}",
           "type": "color"
         },
         "background": {
@@ -1942,16 +1942,16 @@
         "value": "initial"
       },
       "ratio-hover": {
-        "value": "2%"
+        "value": "4%"
       },
       "ratio-disabled": {
-        "value": "2%"
+        "value": "4%"
       },
       "ratio-active": {
-        "value": "4%"
+        "value": "8%"
       },
       "ratio-selected": {
-        "value": "4%"
+        "value": "8%"
       }
     },
     "layer": {
