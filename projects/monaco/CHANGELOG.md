@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.0.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.5...@nvidia-elements/monaco-v1.0.6) (2025-06-06)
+
+
+### Bug Fixes
+
+* **monaco:** types export fix ([4c59645](https://github.com/NVIDIA/elements/commit/4c596454cf4f6ed936dd7141b07d6d5d0f47d992))
+
 ## [@nvidia-elements/monaco-v1.0.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.4...@nvidia-elements/monaco-v1.0.5) (2025-06-04)
 
 
