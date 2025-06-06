@@ -3,7 +3,7 @@ export async function anchorGeneratorTransform(content) {
   if (content.includes('<!-- ANCHOR-GENERATOR -->')) {
     const headings = content
       .split('\n')
-      .filter(line => line.includes('<h2') && line.includes('mkd') && line.includes('id="'))
+      .filter(line => (line.includes('<h2') || line.includes('<h3')) && line.includes('mkd') && line.includes('id="'))
       .map(line => {
         const idMatch = line.match(/id="([^"]+)"/);
         const id = idMatch ? idMatch[1] : '';

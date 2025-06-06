@@ -4,7 +4,23 @@
 import { join } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { renderBaseHead, renderDocsNav } from './common.js';
-import { elementSummary, elementStatus, elementTable } from '../templates/api.js';
+import { elementSummary, elementStatus } from '../templates/api.js';
+
+const componentDocTabs = [
+  {
+    label: 'Overview',
+    slug: '/'
+  },
+  {
+    label: 'API',
+    slug: '/api/'
+  },
+  {
+    label: 'Examples',
+    slug: '/examples/',
+    hidden: true
+  }
+];
 
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
 
@@ -56,9 +72,26 @@ export function render(data) {
             <div nve-layout="row align:horizontal-center full" style="gap: 5rem;">
               <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl">
                 ${data.tag ? `<h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>${elementSummary(data.tag)}` : ''}
+
+                ${
+                  data.tag
+                    ? `
+                <nve-tabs>
+                  ${componentDocTabs
+                    .filter(tab => !tab.hidden)
+                    .map(
+                      tabItem => `<nve-tabs-item ${`/docs/elements/${data.page.fileSlug}${tabItem.slug}` === data.page.url ? 'selected' : ''}>
+                      <a href='docs/elements/${data.page.fileSlug}${tabItem.slug}'>${tabItem.label}</a>
+                    </nve-tabs-item>`
+                    )
+                    .join('')}
+                </nve-tabs>`
+                    : ''
+                }
+
                 ${data.content}
-                ${data.tag ? `${elementStatus(data.tag)}${elementTable(data.tag)}` : ''}
-                ${data.associatedElements?.length ? data.associatedElements.map(tag => elementTable(tag)).join('') : ''}
+
+                ${data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
               </div>
               
               <!-- ANCHOR-GENERATOR -->
