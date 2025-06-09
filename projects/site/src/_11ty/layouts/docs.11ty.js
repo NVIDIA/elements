@@ -6,6 +6,7 @@ import { readFileSync } from 'node:fs';
 import { renderBaseHead, renderDocsNav } from './common.js';
 import { elementSummary, elementStatus } from '../templates/api.js';
 
+// Define the available tabs for component documentation
 const componentDocTabs = [
   {
     label: 'Overview',
@@ -22,12 +23,18 @@ const componentDocTabs = [
   }
 ];
 
+// Base URL for the documentation site
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
 
+// Load documentation-specific styles
 const styles = readFileSync(new URL('./docs.css', import.meta.url), 'utf-8');
 
 /**
- * Provides mirrored layout to mimic existing Storybook docs navigation.
+ * Main documentation layout template that mimics Storybook docs navigation.
+ * Provides a three-column layout with navigation, content, and anchor links.
+ *
+ * @param {Object} data - The page data object from 11ty
+ * @returns {string} HTML string containing the rendered documentation page
  */
 export function render(data) {
   return /* html */ `
@@ -43,6 +50,7 @@ export function render(data) {
 
       <body nve-text="body trim:none">
         <nve-page>
+          <!-- Main navigation header -->
           <nve-page-header slot="header">
             <nve-logo slot="prefix" size="sm"></nve-logo>
             <a slot="prefix" href=".">Elements</a>
@@ -58,6 +66,7 @@ export function render(data) {
             <nve-button slot="suffix" id="system-options-panel-btn" container="flat" id="dropdown-btn">System Themes</nve-button>
           </nve-page-header>
 
+          <!-- Left sidebar navigation -->
           <nve-page-panel slot="left" id="sidenav-panel">
             <nve-page-panel-content>
               <nvd-search id="docs-search" base-url="${BASE_URL}"></nvd-search>
@@ -66,13 +75,17 @@ export function render(data) {
             </nve-page-panel-content>
           </nve-page-panel>
 
+          <!-- Resizable handle for the left sidebar -->
           <nve-resize-handle slot="left" min="3" max="300" value="300" step="20" orientation="vertical"></nve-resize-handle>
 
+          <!-- Main content area -->
           <main nve-layout="column align:center">
             <div nve-layout="row align:horizontal-center full" style="gap: 5rem;">
               <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl">
+                <!-- Component title and summary if this is a component page -->
                 ${data.tag ? `<h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>${elementSummary(data.tag)}` : ''}
 
+                <!-- Component documentation tabs -->
                 ${
                   data.tag
                     ? `
@@ -89,8 +102,10 @@ export function render(data) {
                     : ''
                 }
 
+                <!-- Page content -->
                 ${data.content}
 
+                <!-- Component status section if this is a component page -->
                 ${data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
               </div>
               
@@ -98,6 +113,7 @@ export function render(data) {
             </div>
           </main>
 
+          <!-- System theme settings panel -->
           <nve-page-panel closable hidden slot="right" size="sm" id="system-options-panel">
             <nve-page-panel-content>
               <nvd-system-settings></nvd-system-settings>
