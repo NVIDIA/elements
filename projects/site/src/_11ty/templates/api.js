@@ -4,11 +4,18 @@ import markdown from 'markdown-it';
 import { MetadataService } from '@nve-internals/metadata';
 import { ESM_ELEMENTS_VERSION } from '../utils/version.js';
 
+// Base URL for package releases
 const PACKAGE_URL = 'https://github.com/NVIDIA/elements/-/releases';
 
+// Initialize markdown parser and metadata service
 const md = markdown();
 const metadata = await MetadataService.getMetadata();
 
+/**
+ * Generates a summary section for a component including description, status badges, and metadata links
+ * @param {string} tag - The component tag name
+ * @returns {string} HTML string containing the component summary
+ */
 export function elementSummary(tag) {
   const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
   const element = elements.find(d => d.name === tag);
@@ -38,6 +45,13 @@ export function elementSummary(tag) {
 </section>`;
 }
 
+/**
+ * Generates a status badge with appropriate color based on component status
+ * @param {string} status - Component status (pre-release, beta, stable)
+ * @param {string} container - Container class for the badge
+ * @param {string} content - Additional content to display
+ * @returns {string} HTML string for the status badge
+ */
 export function badgeStatus(status, container = '', content = '') {
   const statuses = {
     'pre-release': 'warning',
@@ -53,6 +67,13 @@ export function badgeStatus(status, container = '', content = '') {
   `;
 }
 
+/**
+ * Generates a coverage badge with color based on test coverage percentage
+ * @param {number} value - Test coverage percentage
+ * @param {string} container - Container class for the badge
+ * @param {string} content - Additional content to display
+ * @returns {string} HTML string for the coverage badge
+ */
 export function badgeCoverage(value, container = '', content = '') {
   let status = 'unknown';
   let formattedValue = value
@@ -78,6 +99,13 @@ export function badgeCoverage(value, container = '', content = '') {
   `;
 }
 
+/**
+ * Generates a bundle size badge with color based on JavaScript bundle size
+ * @param {number} value - Bundle size in KB
+ * @param {string} container - Container class for the badge
+ * @param {string} content - Additional content to display
+ * @returns {string} HTML string for the bundle size badge
+ */
 export function badgeBundle(value, container = '', content = '') {
   let status = 'unknown';
   if (value !== undefined) {
@@ -95,6 +123,13 @@ export function badgeBundle(value, container = '', content = '') {
   `;
 }
 
+/**
+ * Generates a Lighthouse score badge with color based on average score
+ * @param {Object} value - Lighthouse scores object
+ * @param {string} container - Container class for the badge
+ * @param {string} content - Additional content to display
+ * @returns {string} HTML string for the Lighthouse score badge
+ */
 export function badgeLighthouse(value, container = '', content = '') {
   const values = Object.keys(value ?? {})
     .map(key => (value ?? {})[key])
@@ -119,6 +154,12 @@ export function badgeLighthouse(value, container = '', content = '') {
   `;
 }
 
+/**
+ * Generates an Axe accessibility badge with appropriate status
+ * @param {string|boolean} value - Axe accessibility status
+ * @param {string} container - Container class for the badge
+ * @returns {string} HTML string for the Axe accessibility badge
+ */
 export function badgeAxe(value, container = '') {
   return /* html */ `
   ${value === undefined || value === '' ? /* html */ `<nve-badge container="${container}" status="success" style="--text-transform: none"><a href="https://github.com/dequelabs/axe-core" target="_blank">Axe Core</a></nve-badge>` : ''}
@@ -127,6 +168,11 @@ export function badgeAxe(value, container = '') {
   `;
 }
 
+/**
+ * Generates a detailed status section showing component development progress
+ * @param {string} tag - The component tag name
+ * @returns {string} HTML string containing the component status section
+ */
 export function elementStatus(tag) {
   const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
   const elementMetadata = elements.find(d => d.name === tag)?.manifest?.metadata;
@@ -173,6 +219,12 @@ export function elementStatus(tag) {
   `;
 }
 
+/**
+ * Generates API documentation tables for a component
+ * @param {string} tag - The component tag name
+ * @param {string} type - The type of documentation to generate (all, properties, events, slots, css-properties)
+ * @returns {string} HTML string containing the API documentation tables
+ */
 export function elementTable(tag, type = 'all') {
   const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
   const elementManifest = elements.find(d => d.name === tag)?.manifest;
@@ -187,6 +239,10 @@ export function elementTable(tag, type = 'all') {
   `
     : '';
 
+  /**
+   * Renders the properties table for the component
+   * @returns {string} HTML string for the properties table
+   */
   function renderProperties() {
     return /* html */ `
       <div nve-layout="column gap:md">
@@ -233,6 +289,10 @@ export function elementTable(tag, type = 'all') {
     `;
   }
 
+  /**
+   * Renders the events table for the component
+   * @returns {string} HTML string for the events table
+   */
   function renderEvents() {
     return /* html */ `
     <div nve-layout="column gap:md">
@@ -257,6 +317,10 @@ export function elementTable(tag, type = 'all') {
     `;
   }
 
+  /**
+   * Renders the slots table for the component
+   * @returns {string} HTML string for the slots table
+   */
   function renderSlots() {
     return /* html */ `
     <div nve-layout="column gap:md">
@@ -281,6 +345,10 @@ export function elementTable(tag, type = 'all') {
     `;
   }
 
+  /**
+   * Renders the CSS properties table for the component
+   * @returns {string} HTML string for the CSS properties table
+   */
   function renderCssProperties() {
     return /* html */ `
     <div nve-layout="column gap:md">
