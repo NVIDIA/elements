@@ -15,8 +15,13 @@ import { MetadataService } from '@internals/metadata';
 
 const metadata = await MetadataService.getMetadata();
 
-// Temporary:Exclude certain components that have low performance gains from SSR or high inline
-// This minimizes the memory footprint of Rollup which builds a dependency graph of all pages
+/**
+ * List of components that benefit from Server-Side Rendering (SSR).
+ * These components are selected based on:
+ * - High performance gains from SSR
+ * - Low inline script size
+ * This helps minimize Rollup's memory footprint by limiting the dependency graph.
+ */
 const ssrEntrypoints = new Set([
   '@nvidia-elements/core/alert',
   '@nvidia-elements/core/avatar',
@@ -31,6 +36,10 @@ const ssrEntrypoints = new Set([
   '@nvidia-elements/core/tabs'
 ]);
 
+/**
+ * Generate list of component entrypoints for SSR.
+ * Filters components based on ssrEntrypoints set and maps to their define.js paths.
+ */
 const entrypoints = [
   ...new Set(
     metadata.projects['@nvidia-elements/core'].elements
@@ -41,18 +50,27 @@ const entrypoints = [
   )
 ];
 
+/**
+ * Main 11ty configuration function
+ * Sets up plugins, transforms, collections, and build options
+ */
 export default function (eleventyConfig) {
+  // Add core 11ty plugins
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(IdAttributePlugin, { checkDuplicates: false });
+
+  // Configure front matter parsing and file copying
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
 
+  // Configure Lit SSR plugin for web components
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',
     componentModules: ['node_modules/@nvidia-elements/core/dist/icon/server.js', ...entrypoints]
   });
 
+  // Configure Vite plugin for modern JavaScript bundling
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
       base: BASE_URL,
@@ -64,6 +82,7 @@ export default function (eleventyConfig) {
     }
   });
 
+  // Configure server options for development
   eleventyConfig.setServerOptions({
     onRequest: {
       '/': () => ({
@@ -75,26 +94,43 @@ export default function (eleventyConfig) {
     }
   });
 
+  // Add search plugin for documentation search functionality
   eleventyConfig.addPlugin(searchPlugin, {
     outputPath: './.11ty-vite/public/.pagefind'
   });
 
+  // Set custom markdown library
   eleventyConfig.setLibrary('md', markdown);
 
+  // Register custom shortcodes for documentation
   eleventyConfig.addAsyncShortcode('story', storyShortcode);
   eleventyConfig.addAsyncShortcode('api', apiShortcode);
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
   eleventyConfig.addAsyncShortcode('install', installShortcode);
   eleventyConfig.addShortcode('svg-logos', svgLogosShortcode);
+
+  // Register custom transforms for content processing
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
   eleventyConfig.addTransform('anchor-generator', anchorGeneratorTransform);
   eleventyConfig.addTransform('html-minify', htmlMinifyTransform);
 
-  // Add collection for component docs
+  /**
+   * Collections in 11ty are groups of content that can be filtered, sorted and accessed as a single unit.
+   * They allow us to:
+   *
+   * - Group related content (like component docs) together
+   * - Access the collection data in templates and layouts
+   * - Sort and filter content based on frontmatter or other criteria
+   *
+   * This collection includes all markdown files in src/docs/elements/, making component docs easily accessible throughout the site build process.
+   *
+   * Used by `../src/docs/elements/_tabs/api.11ty.js` to generate the API documentation page for each component.
+   */
   eleventyConfig.addCollection('componentDocs', function (collection) {
     return collection.getFilteredByGlob('src/docs/elements/*.md');
   });
 
+  // Return build configuration
   return {
     dir: {
       input: 'src',
