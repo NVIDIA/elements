@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.37.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.36.3...@nvidia-elements/core-v1.37.0) (2025-06-10)
+
+
+### Features
+
+* **elements:** add pagination suffix-label slot ([0ad10c9](https://github.com/NVIDIA/elements/commit/0ad10c96e64c46a2336eb585aeca33e2a0219250))
+
 ## [@nvidia-elements/core-v1.36.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.36.2...@nvidia-elements/core-v1.36.3) (2025-06-10)
 
 
