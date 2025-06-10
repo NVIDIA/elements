@@ -6,6 +6,7 @@
   --height: var(--nve-ref-size-800);
   --min-width: var(--nve-ref-size-800);
   --font-size: calc(var(--width) / 2.3);
+  --_icon-color: var(--color);
 }
 
 :host([size='sm']) {
@@ -38,5 +39,6 @@
 }
 
 nve-icon {
+  --color: var(--_icon-color);
   pointer-events: none;
 }
