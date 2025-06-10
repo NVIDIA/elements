@@ -15,8 +15,14 @@ export const data = {
     alias: 'component',
     addAllPagesToCollections: true
   },
-  // Generate URLs in the format /docs/elements/{component-name}/api/
-  permalink: data => `/docs/elements/${data.component.fileSlug}/api/`
+  // Generate URLs in the format /docs/elements/{component-name}/api/ or /docs/code/{component-name}/api/ or /docs/monaco/{component-name}/api/
+  permalink: data => {
+    const filePath = data.component.filePathStem;
+    let dir = 'elements';
+    if (filePath.includes('/code/')) dir = 'code';
+    else if (filePath.includes('/monaco/')) dir = 'monaco';
+    return `/docs/${dir}/${data.component.fileSlug}/api/`;
+  }
 };
 
 /**

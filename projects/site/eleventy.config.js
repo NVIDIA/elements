@@ -127,7 +127,7 @@ export default function (eleventyConfig) {
    * Used by `../src/docs/elements/_tabs/api.11ty.js` to generate the API documentation page for each component.
    */
   eleventyConfig.addCollection('componentDocs', function (collection) {
-    return collection.getFilteredByGlob('src/docs/elements/*.md');
+    return collection.getFilteredByGlob(['src/docs/elements/*.md', 'src/docs/code/*.md', 'src/docs/monaco/*.md']);
   });
 
   // Return build configuration
