@@ -4,7 +4,7 @@ import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvid
 import { MonacoInput } from '@nvidia-elements/monaco/input';
 import { MonacoEditor } from '@nvidia-elements/monaco/editor';
 
-import type { monaco } from '../types.js';
+import type * as monaco from '@nvidia-elements/monaco';
 
 import '@nvidia-elements/monaco/input/define.js';
 

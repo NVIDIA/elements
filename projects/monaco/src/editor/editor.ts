@@ -3,10 +3,13 @@ import { property } from 'lit/decorators.js';
 
 import { useStyles } from '@nvidia-elements/core/internal';
 
-import type { monaco, Monaco } from '../types.js';
+import type * as monaco from '@nvidia-elements/monaco';
+import type { Monaco } from '@nvidia-elements/monaco';
+
+import { toggleThemeForColorScheme } from '../themes/index.js';
 
 import { loadEditorStyles, loadMonaco } from '../monaco.js';
-import { toggleThemeForColorScheme } from '../themes/index.js';
+
 import styles from './editor.css?inline';
 
 /**
