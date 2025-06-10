@@ -24,6 +24,7 @@ import styles from './pagination.css?inline';
  * @event first-page emits when the first page is active
  * @event last-page emits when the last page is active
  * @slot - default slot for content
+ * @slot suffix-label - slot for overriding the "n of total" label when total is an approximation
  * @cssprop --background
  * @storybook https://NVIDIA.github.io/elements/docs/elements/pagination/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=3689-87177&t=znx8f5Hs8oD2ySWm-0
@@ -114,7 +115,9 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   }
 
   get #label() {
-    return this.items ? html`<label>${this.i18n.of} ${formatStandardNumber(this.items)}</label>` : nothing;
+    return this.items
+      ? html`<label><slot name="suffix-label">${this.i18n.of} ${formatStandardNumber(this.items)}</slot></label>`
+      : nothing;
   }
 
   get #previousButton() {

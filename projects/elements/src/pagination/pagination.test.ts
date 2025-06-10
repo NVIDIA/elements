@@ -10,18 +10,24 @@ describe(Pagination.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Pagination;
   let element2: Pagination;
+  let element3: Pagination;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
       <form>
         <nve-pagination name="page" id="pagination-1" .value=${1} .step=${10} .items=${100}></nve-pagination>
         <nve-pagination id="pagination-2" .value=${1} .step=${100} .items=${10000} .stepSizes=${[100, 500, 1000]}></nve-pagination>
+        <nve-pagination id="pagination-3" .value=${1} .step=${20} .items=${50000}>
+          <span slot="suffix-label">of 50,000+ results</span>
+        </nve-pagination>
       </form>
     `);
     element = fixture.querySelector('#pagination-1');
     element2 = fixture.querySelector('#pagination-2');
+    element3 = fixture.querySelector('#pagination-3');
     await elementIsStable(element);
     await elementIsStable(element2);
+    await elementIsStable(element3);
   });
 
   afterEach(() => {
@@ -236,5 +242,17 @@ describe(Pagination.metadata.tag, () => {
     expect(select.options[0].value).toBe('100');
     expect(select.options[1].value).toBe('500');
     expect(select.options[2].value).toBe('1000');
+  });
+
+  it('should support custom suffix-label slot content', async () => {
+    const slot = element3.shadowRoot.querySelector('slot[name="suffix-label"]') as HTMLSlotElement;
+    const slottedElements = slot?.assignedElements();
+    const customSpan = element3.querySelector('span[slot="suffix-label"]');
+
+    expect(slottedElements.length).toBeGreaterThan(0);
+    expect(slottedElements).toContain(customSpan);
+
+    // Check that the custom content is correct
+    expect(customSpan?.textContent).toBe('of 50,000+ results');
   });
 });
