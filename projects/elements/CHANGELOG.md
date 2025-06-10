@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.37.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.37.0...@nvidia-elements/core-v1.37.1) (2025-06-10)
+
+
+### Bug Fixes
+
+* **elements:** update nve-copy-button interaction on hover ([c86e378](https://github.com/NVIDIA/elements/commit/c86e378a2dd303816cf9a46d62d9508377b7da37))
+
 ## [@nvidia-elements/core-v1.37.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.36.3...@nvidia-elements/core-v1.37.0) (2025-06-10)
 
 
