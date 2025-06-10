@@ -1,8 +1,9 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import type { monaco } from '../types.js';
+import type * as monaco from '@nvidia-elements/monaco';
 
-import { defineThemes, applyThemeForColorScheme, toggleThemeForColorScheme } from './index.js';
+import { applyThemeForColorScheme, defineThemes, getTheme, toggleThemeForColorScheme } from './index.js';
+import type { ThemeName } from './index.js';
 
 function expectValidHexColor(value: string) {
   expect(value).toMatch(/^#[0-9a-f]{6,8}$/);
@@ -70,6 +71,22 @@ describe('themes', () => {
   afterEach(() => {
     vi.clearAllMocks();
     getComputedStyleSpy.mockRestore();
+  });
+
+  describe('getTheme', () => {
+    it('should return the correct theme', async () => {
+      const darkTheme = await getTheme('elements-dark');
+      expect(darkTheme).toBeDefined();
+      expectValidMonacoTheme(darkTheme, 'vs-dark');
+
+      const lightTheme = await getTheme('elements-light');
+      expect(lightTheme).toBeDefined();
+      expectValidMonacoTheme(lightTheme, 'vs');
+    });
+
+    it('should throw if the theme name is unknown', async () => {
+      await expect(() => getTheme('invalid' as ThemeName)).rejects.toThrow('Unknown theme: invalid');
+    });
   });
 
   describe('defineThemes', () => {
