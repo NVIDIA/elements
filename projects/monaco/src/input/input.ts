@@ -3,7 +3,7 @@ import { property } from 'lit/decorators.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { FormControlMixin } from '@nvidia-elements/forms/mixin';
 
-import type { monaco } from '../types.js';
+import type * as monaco from '@nvidia-elements/monaco';
 
 import styles from './input.css?inline';
 
