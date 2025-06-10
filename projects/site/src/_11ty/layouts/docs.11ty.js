@@ -87,7 +87,10 @@ export function render(data) {
 
                 <!-- Component documentation tabs -->
                 ${
-                  data.tag
+                  data.tag &&
+                  (!data.page.url.includes('/data-grid/') ||
+                    data.page.url.endsWith('/data-grid/') ||
+                    data.page.url.endsWith('/data-grid/api/'))
                     ? `
                 <nve-tabs>
                   ${componentDocTabs
@@ -111,7 +114,7 @@ export function render(data) {
                 ${data.content}
 
                 <!-- Component status section if this is a component page -->
-                ${data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
+                ${data.tag && !data.hideStatus && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
               </div>
               
               <!-- ANCHOR-GENERATOR -->
