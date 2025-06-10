@@ -271,13 +271,13 @@ export const renderDocsNav = data => /* html */ `
 
   <nve-tree-node ${data.page.url.includes('/docs/code/') ? 'expanded' : ''}>
     Code
-    <nve-tree-node ${data.page.url === '/docs/code/codeblock/' ? 'highlighted' : ''}><a href="docs/code/codeblock/">Codeblock</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/code/codeblock/') ? 'highlighted' : ''}><a href="docs/code/codeblock/">Codeblock</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/monaco/') ? 'expanded' : ''}>
     Monaco
-    <nve-tree-node ${data.page.url === '/docs/monaco/input/' ? 'highlighted' : ''}><a href="docs/monaco/input/">Input</a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/monaco/editor/' ? 'highlighted' : ''}><a href="docs/monaco/editor/">Editor</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/monaco/input/') ? 'highlighted' : ''}><a href="docs/monaco/input/">Input</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/monaco/editor/') ? 'highlighted' : ''}><a href="docs/monaco/editor/">Editor</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''}>
