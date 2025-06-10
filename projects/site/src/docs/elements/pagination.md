@@ -47,6 +47,12 @@ When custom step is provided, the select options dynamically adapt to the step a
 
 {% story 'nve-pagination', 'DynamicStepSize' %}
 
+## Suffix Label
+
+Use the `suffix-label` slot to customize the "of total" label when dealing with approximated totals from API responses. This is useful when the API returns a limited count but indicates there are more items available.
+
+{% story 'nve-pagination', 'SuffixLabel' %}
+
 ## Forms
 
 Pagination is [form associated component](https://web.dev/more-capable-form-controls) and can be used within FormData.
