@@ -92,11 +92,16 @@ export function render(data) {
                 <nve-tabs>
                   ${componentDocTabs
                     .filter(tab => !tab.hidden)
-                    .map(
-                      tabItem => `<nve-tabs-item ${`/docs/elements/${data.page.fileSlug}${tabItem.slug}` === data.page.url ? 'selected' : ''}>
-                      <a href='docs/elements/${data.page.fileSlug}${tabItem.slug}'>${tabItem.label}</a>
-                    </nve-tabs-item>`
-                    )
+                    .map(tabItem => {
+                      const filePath = data.page.url;
+                      let dir = 'elements';
+                      if (filePath.includes('/docs/code/')) dir = 'code';
+                      else if (filePath.includes('/docs/monaco/')) dir = 'monaco';
+                      const tabUrl = `/docs/${dir}/${data.page.fileSlug}${tabItem.slug}`;
+                      return `<nve-tabs-item ${tabUrl === data.page.url ? 'selected' : ''}>
+                          <a href="${tabUrl}">${tabItem.label}</a>
+                        </nve-tabs-item>`;
+                    })
                     .join('')}
                 </nve-tabs>`
                     : ''
