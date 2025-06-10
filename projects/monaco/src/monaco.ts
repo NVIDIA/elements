@@ -1,32 +1,17 @@
-import type { Monaco } from './types.js';
+import type { Monaco } from '@nvidia-elements/monaco';
 
-import { applyThemeForColorScheme, defineThemes } from './themes/index.js';
+import { applyThemeForColorScheme, defineThemes } from '@nvidia-elements/monaco/themes';
 
-export function createMonacoEnvironment() {
-  return {
-    async getWorker(_, label: string) {
-      switch (label) {
-        case 'json':
-          return new (await import('./workers/json.worker.js?worker&inline')).default();
-        case 'css':
-          return new (await import('./workers/css.worker.js?worker&inline')).default();
-        case 'html':
-          return new (await import('./workers/html.worker.js?worker&inline')).default();
-        case 'javascript':
-        case 'typescript':
-          return new (await import('./workers/ts.worker.js?worker&inline')).default();
-        default:
-          return new (await import('./workers/editor.worker.js?worker&inline')).default();
-      }
-    }
-  };
-}
+let injectedGlobalStyles: CSSStyleSheet | undefined;
 
-async function injectMonacoGlobalStyles() {
-  const global = await import('./monaco.global.css?inline');
-  const globalStyles = new CSSStyleSheet();
-  globalStyles.replaceSync(global.default);
-  globalThis.document.adoptedStyleSheets = [globalStyles, ...globalThis.document.adoptedStyleSheets];
+export async function injectMonacoGlobalStyles(): Promise<CSSStyleSheet> {
+  if (!injectedGlobalStyles) {
+    const globalCSS = await import('./editor.global.css?inline');
+    injectedGlobalStyles = new CSSStyleSheet();
+    injectedGlobalStyles.replaceSync(globalCSS.default);
+    globalThis.document.adoptedStyleSheets = [injectedGlobalStyles, ...globalThis.document.adoptedStyleSheets];
+  }
+  return injectedGlobalStyles;
 }
 
 let lazyLoadedMonaco: Promise<Monaco> | undefined;
@@ -34,11 +19,12 @@ let lazyLoadedMonaco: Promise<Monaco> | undefined;
 export async function loadMonaco(): Promise<Monaco> {
   // NOTE: Guards against multiple evaluations of await import() from different import paths. (Encountered in Vitest.)
   lazyLoadedMonaco ??= (async () => {
-    globalThis.MonacoEnvironment ??= createMonacoEnvironment();
     await injectMonacoGlobalStyles();
-    const monaco = (await import('./editor.main.js')) as Monaco;
+    const monaco = (await import('@nvidia-elements/monaco')) as Monaco;
+
     await defineThemes(monaco);
-    applyThemeForColorScheme(monaco, self.document.documentElement);
+    applyThemeForColorScheme(monaco, globalThis.document.documentElement);
+
     return monaco;
   })();
   return lazyLoadedMonaco;

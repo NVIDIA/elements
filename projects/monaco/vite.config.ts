@@ -15,10 +15,15 @@ export default defineConfig(() => {
       minify: prod ? 'esbuild' : false,
       lib: {
         entry: {
+          // monaco-editor environment entry point
+          environment: resolve(import.meta.dirname, './src/environment.ts'),
+          // synchronous monaco-editor main entry point
+          index: resolve(import.meta.dirname, './src/index.ts'),
+          // themes entry point
+          themes: resolve(import.meta.dirname, './src/themes/index.ts'),
+          // asynchronous monaco-editor entry point
           monaco: resolve(import.meta.dirname, './src/monaco.ts'),
-          // monaco-editor main entry point
-          'editor.main': resolve(import.meta.dirname, './src/editor.main.ts'),
-          // create worker entry points for optional customization of workers
+          // worker entry points (for optional customization of workers)
           'workers/css.worker': resolve(import.meta.dirname, './src/workers/css.worker.ts'),
           'workers/editor.worker': resolve(import.meta.dirname, './src/workers/editor.worker.ts'),
           'workers/html.worker': resolve(import.meta.dirname, './src/workers/html.worker.ts'),

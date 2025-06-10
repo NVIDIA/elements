@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { loadMonaco, loadEditorStyles, createMonacoEnvironment } from './monaco.js';
+import { injectMonacoGlobalStyles, loadMonaco, loadEditorStyles } from './monaco.js';
+import { createMonacoEnvironment } from './environment.js';
 
 describe('Monaco Module', () => {
   describe('loadMonaco', () => {
@@ -59,6 +60,23 @@ describe('Monaco Module', () => {
       await document.fonts.load('16px codicon');
 
       expect(document.fonts.check('16px codicon')).toBe(true);
+    });
+  });
+
+  describe('injectMonacoGlobalStyles', () => {
+    it('should inject the monaco global styles', async () => {
+      const injectedStyles = await injectMonacoGlobalStyles();
+
+      expect(injectedStyles).toBeDefined();
+      expect(globalThis.document.adoptedStyleSheets.includes(injectedStyles)).toBe(true);
+    });
+
+    it('should not inject the monaco global styles if they have already been injected', async () => {
+      const injectedStyles = await injectMonacoGlobalStyles();
+      const injectedStyles2 = await injectMonacoGlobalStyles();
+
+      expect(injectedStyles2).toBe(injectedStyles);
+      expect(globalThis.document.adoptedStyleSheets.filter(style => style === injectedStyles).length).toBe(1);
     });
   });
 

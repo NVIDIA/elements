@@ -40,9 +40,6 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./types": {
-      "types": "./dist/types.d.ts"
-    },
     "./index.js": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
@@ -63,6 +60,10 @@
       "types": "./dist/editor/define.d.ts",
       "default": "./dist/editor/define.js"
     },
+    "./environment.js": {
+      "types": "./dist/environment.d.ts",
+      "default": "./dist/environment.js"
+    },
     "./input": {
       "types": "./dist/input/index.d.ts",
       "default": "./dist/input/index.js"
@@ -74,6 +75,14 @@
     "./input/define.js": {
       "types": "./dist/input/define.d.ts",
       "default": "./dist/input/define.js"
+    },
+    "./themes": {
+      "types": "./dist/themes/index.d.ts",
+      "default": "./dist/themes/index.js"
+    },
+    "./themes/index.js": {
+      "types": "./dist/themes/index.d.ts",
+      "default": "./dist/themes/index.js"
     },
     "./workers/css.worker.js": {
       "types": "./dist/workers/css.worker.d.ts",
