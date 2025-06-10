@@ -1,4 +1,18 @@
-import type { monaco, Monaco } from '../types.js';
+import type * as monaco from '@nvidia-elements/monaco';
+import type { Monaco } from '@nvidia-elements/monaco';
+
+export type ThemeName = 'elements-dark' | 'elements-light';
+
+export async function getTheme(name: ThemeName): Promise<monaco.editor.IStandaloneThemeData> {
+  switch (name) {
+    case 'elements-dark':
+      return (await import('./generated/dark.json')).default as monaco.editor.IStandaloneThemeData;
+    case 'elements-light':
+      return (await import('./generated/light.json')).default as monaco.editor.IStandaloneThemeData;
+    default:
+      throw new Error(`Unknown theme: ${name}`);
+  }
+}
 
 let definedThemes = false;
 
@@ -7,13 +21,10 @@ export async function defineThemes(monaco: Monaco) {
     return;
   }
 
-  const [darkTheme, lightTheme] = await Promise.all([
-    import('./generated/dark.json'),
-    import('./generated/light.json')
-  ]);
+  const [darkTheme, lightTheme] = await Promise.all([getTheme('elements-dark'), getTheme('elements-light')]);
 
-  monaco.editor.defineTheme('elements-dark', darkTheme.default as monaco.editor.IStandaloneThemeData);
-  monaco.editor.defineTheme('elements-light', lightTheme.default as monaco.editor.IStandaloneThemeData);
+  monaco.editor.defineTheme('elements-dark', darkTheme);
+  monaco.editor.defineTheme('elements-light', lightTheme);
 
   definedThemes = true;
 }

@@ -118,7 +118,7 @@ const types = generateDtsBundle([
   }
 ]);
 
-fs.writeFileSync(path.resolve(outdir, 'editor/editor.api.d.ts'), types.join('\n'));
+fs.writeFileSync(path.resolve(outdir, 'editor/editor.main.d.ts'), types.join('\n'));
 
 // ---
 
