@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.36.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.36.2...@nvidia-elements/core-v1.36.3) (2025-06-10)
+
+
+### Bug Fixes
+
+* **elements:** interaction color contrast ([810fc53](https://github.com/NVIDIA/elements/commit/810fc53de8037f1ac5faa15ab9bfb98c7c7c0002))
+
 ## [@nvidia-elements/core-v1.36.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.36.1...@nvidia-elements/core-v1.36.2) (2025-06-05)
 
 
