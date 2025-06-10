@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.0.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.6...@nvidia-elements/monaco-v1.0.7) (2025-06-10)
+
+
+### Bug Fixes
+
+* **monaco:** added sync aliasable export ([b86bda8](https://github.com/NVIDIA/elements/commit/b86bda883f752d4d3424fe9f85e5c36698d925d7))
+
 ## [@nvidia-elements/monaco-v1.0.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.5...@nvidia-elements/monaco-v1.0.6) (2025-06-06)
 
 
