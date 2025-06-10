@@ -139,3 +139,11 @@ export const DynamicStepSize = {
   <nve-pagination value="1" items="10000" step="100" step-sizes="[100, 500, 1000]"></nve-pagination>
   `
 };
+
+export const SuffixLabel = {
+  render: () => html`
+    <nve-pagination value="1" items="50000" step="100">
+      <span slot="suffix-label">of 50,000+</span>
+    </nve-pagination>
+  `
+};
