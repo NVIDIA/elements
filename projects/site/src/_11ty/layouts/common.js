@@ -176,7 +176,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/color/') ? 'highlighted' : ''}><a href="docs/elements/color/">Color</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/combobox/') ? 'highlighted' : ''}><a href="docs/elements/combobox/">Combobox</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/copy-button/') ? 'highlighted' : ''}><a href="docs/elements/copy-button/">Copy Button</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/') ? 'expanded' : ''} ${data.page.url.endsWith('/docs/elements/data-grid/') ? 'highlighted' : ''}>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/') ? 'expanded' : ''} ${data.page.url.endsWith('/docs/elements/data-grid/') || data.page.url.endsWith('/docs/elements/data-grid/api/') ? 'highlighted' : ''}>
       <a href="docs/elements/data-grid/">Datagrid</a>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/integrations/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/integrations/">Integrations</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/column-action/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/column-action/">Column Action</a></nve-tree-node>

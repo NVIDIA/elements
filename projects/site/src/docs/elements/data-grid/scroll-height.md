@@ -3,7 +3,7 @@
   title: 'Data Grid Scroll Height',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
-  associatedElements: ['nve-grid', 'nve-grid-header', 'nve-grid-column', 'nve-grid-row', 'nve-grid-cell']
+  hideStatus: true
 }
 ---
 
