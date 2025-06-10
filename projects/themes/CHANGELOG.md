@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.6.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.6.1...@nvidia-elements/themes-v1.6.2) (2025-06-10)
+
+
+### Bug Fixes
+
+* **themes:** interaction color contrast ([a7a9ab8](https://github.com/NVIDIA/elements/commit/a7a9ab8c92a76f3ab39e507401f119e151595be5))
+
 ## [@nvidia-elements/themes-v1.6.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.6.0...@nvidia-elements/themes-v1.6.1) (2025-06-05)
 
 
