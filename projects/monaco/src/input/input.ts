@@ -216,8 +216,11 @@ export class MonacoInput extends FormControlMixin<typeof LitElement, string>(Lit
     return super.value ?? '';
   }
   override set value(value: string) {
+    const previous = this.value;
     super.value = value;
-    this.#applyValue();
+    if (value !== previous) {
+      this.#applyValue();
+    }
   }
 
   /**
