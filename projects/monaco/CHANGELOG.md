@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.0.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.7...@nvidia-elements/monaco-v1.0.8) (2025-06-11)
+
+
+### Bug Fixes
+
+* **monaco:** heights and input value binding ([e7b7ecc](https://github.com/NVIDIA/elements/commit/e7b7eccdffa25fea60a4e02f07f1b44c91a1c83c))
+
 ## [@nvidia-elements/monaco-v1.0.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.6...@nvidia-elements/monaco-v1.0.7) (2025-06-10)
 
 
