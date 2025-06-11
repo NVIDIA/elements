@@ -7,7 +7,6 @@
   box-sizing: border-box;
   font-family: inherit;
   font-size: inherit;
-  height: 100%;
   width: 100%;
   outline: var(--nve-debug-element-outline, initial);
   color-scheme: var(--nve-sys-color-scheme);

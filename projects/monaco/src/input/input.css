@@ -11,7 +11,6 @@
   box-sizing: border-box;
   font-family: inherit;
   font-size: inherit;
-  height: 100%;
   width: 100%;
   outline: var(--nve-debug-element-outline, initial);
   color-scheme: var(--nve-sys-color-scheme);
@@ -81,6 +80,7 @@
   background-color: var(--background);
   border: var(--border);
   border-radius: var(--border-radius);
+  height: 100%;
   padding: var(--padding);
 
   --_background: var(--background);
