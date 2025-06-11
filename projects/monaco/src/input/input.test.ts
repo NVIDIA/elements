@@ -73,6 +73,19 @@ describe('nve-monaco-input', () => {
     expect(model.getValue()).toBe(expectedValue);
   });
 
+  it('should not re-apply the value if it is the same to prevent framework binding loops and races', async () => {
+    const expectedValue = 'console.log("Hello, world!");';
+
+    element.value = expectedValue;
+    const expectedVersion = model.getVersionId();
+    element.value = expectedValue;
+
+    await elementIsStable(element);
+    expect(element.value).toBe(expectedValue);
+    expect(model.getValue()).toBe(expectedValue);
+    expect(model.getVersionId()).toBe(expectedVersion);
+  });
+
   it('should gracefully handle connect/disconnect during initialization', async () => {
     const { parentElement } = element;
 
