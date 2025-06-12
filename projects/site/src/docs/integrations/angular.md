@@ -11,7 +11,13 @@
 
 <div nve-layout="row gap:xs">
   <nve-button>
-    <a target="_blank" href="https://NVIDIA.github.io/elements/starters/angular/"><svg width="18" height="18"><use href="#angular-svg"></use></svg> Demo</a>
+    <svg width="18" height="18"><use href="#angular-svg"></use></svg>
+    <a target="_blank" href="{{ playground.angularPlaygroundURL }}">Playground</a>
+  </nve-button>
+
+  <nve-button>
+    <nve-icon name="browser"></nve-icon>
+    <a target="_blank" href="https://NVIDIA.github.io/elements/starters/angular/"> Demo</a>
   </nve-button>
 
   <nve-button>

@@ -18,7 +18,7 @@ import type {
   MetadataType,
   MetadataElement
 } from '../types.js';
-import { elementMetadataToMarkdown, getElementChangelog } from '../utils/index.ts';
+import { elementMetadataToMarkdown, getElementChangelog } from '../utils/utils.ts';
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
 

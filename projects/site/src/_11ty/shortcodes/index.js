@@ -74,7 +74,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
 
   // Generate playground button if story exists
   const playgroundButton = story
-    ? /* html */ `<nve-button container="flat" slot="suffix"><a href="${createPlaygroundURL(story.template, { id: `${story.path}_${storyName}`, theme: '' }, metadata)}" target="_blank">Playground</a></nve-button>`
+    ? /* html */ `<nve-button container="flat" slot="suffix"><a href="${createPlaygroundURL(story.template, metadata, { name: `${story.path}_${storyName}`, theme: '' })}" target="_blank">Playground</a></nve-button>`
     : '';
 
   // Add live reload script in development mode

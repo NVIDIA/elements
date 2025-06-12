@@ -7,6 +7,15 @@
 
 # {{ title }}
 
+{% svg-logos 'lit' %}
+
+<div nve-layout="row gap:xs">
+  <nve-button>
+    <svg width="18" height="18"><use href="#lit-svg"></use></svg>
+    <a target="_blank" href="{{ playground.litPlaygroundURL }}">Playground</a>
+  </nve-button>
+</div>
+
 To use Elements in Lit follow the [installation](./docs/about/getting-started/) steps. Once complete
 elements can be imported and used within Lit components.
 
