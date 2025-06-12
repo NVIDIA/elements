@@ -6,7 +6,9 @@ import {
   createLitFiles,
   createLitPlaygroundURL,
   createReactFiles,
-  createReactPlaygroundURL
+  createReactPlaygroundURL,
+  createPreactPlaygroundURL,
+  createPreactFiles
 } from './playground.js';
 import type { MetadataSummary } from '../types.js';
 
@@ -103,6 +105,57 @@ describe('createReactPlaygroundURL', () => {
     expect(files['index.tsx'].content.includes(`import React from 'react'`)).toBe(true);
     expect(files['global.ts'].content.includes(`declare module 'react' {`)).toBe(true);
     expect(files['importmap.json'].content.includes('"react-dom": "https://https://esm.sh/react-dom@19"')).toBe(true);
+  });
+});
+
+describe('createPreactPlaygroundURL', () => {
+  const metadata = {
+    created: '2021-01-01',
+    projects: {
+      '@nvidia-elements/core': {
+        elements: [
+          {
+            name: 'nve-button',
+            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
+          }
+        ]
+      },
+      '@nvidia-elements/monaco': {
+        elements: [
+          { name: 'nve-monaco', manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco', markdown: ' ### Import ' } } }
+        ]
+      }
+    }
+  } as unknown as MetadataSummary;
+
+  it('should create a Preact playground URL', () => {
+    const url = createPreactPlaygroundURL('nve-button', metadata);
+    expect(url.includes('?version=1&layout=vertical-split&name=preact&file=index.tsx&files=')).toBe(true);
+  });
+
+  it('should create a Preact playground URL with a custom name', () => {
+    const url = createPreactPlaygroundURL('nve-button', metadata, { name: 'nve-button' });
+    expect(url.includes('?version=1&layout=vertical-split&name=preact%20nve-button&file=index.tsx&files=')).toBe(true);
+  });
+
+  it('should create a Preact playground URL with a referer', () => {
+    const url = createPreactPlaygroundURL('nve-button', metadata, {
+      name: 'nve-button',
+      referer: 'https://www.nvidia.com'
+    });
+    expect(
+      url.includes(
+        '?version=1&layout=vertical-split&name=preact%20nve-button&file=index.tsx&ref=https://www.nvidia.com&files='
+      )
+    ).toBe(true);
+  });
+
+  it('should bootstrap Preact files needed for the playground', () => {
+    const files = createPreactFiles('<nve-button></nve-button>', metadata, { name: 'nve-button' });
+    expect(files['index.html'].content.includes('<div id="root"></div>')).toBe(true);
+    expect(files['index.tsx'].content.includes(`import { render } from 'preact'`)).toBe(true);
+    expect(files['global.ts'].content.includes(`namespace preact.JSX`)).toBe(true);
+    expect(files['importmap.json'].content.includes('"preact": "https://https://esm.sh/preact@10"')).toBe(true);
   });
 });
 

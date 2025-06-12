@@ -3,6 +3,7 @@ import {
   createAngularPlaygroundURL,
   createLitPlaygroundURL,
   createPlaygroundURL,
+  createPreactPlaygroundURL,
   createReactPlaygroundURL
 } from '../utils/playground.js';
 import { metadata } from '../utils/metadata.js';
@@ -50,6 +51,20 @@ export class PlaygroundService {
   })
   async getReactPlaygroundURL({ html }: { html: string }) {
     return createReactPlaygroundURL(html, data);
+  }
+
+  @metadata({
+    description: 'Create a Preact based playground url / link from a html string',
+    params: {
+      html: {
+        type: 'string',
+        description:
+          'HTML to be embedded in a Preact playground page. Do not include "<html>", "<body>" and "<nve-page>" tags or custom CSS.'
+      }
+    }
+  })
+  async getPreactPlaygroundURL({ html }: { html: string }) {
+    return createPreactPlaygroundURL(html, data);
   }
 
   @metadata({
