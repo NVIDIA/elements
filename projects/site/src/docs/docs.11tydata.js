@@ -13,12 +13,16 @@ const angularPlaygroundURL = await playgroundService.getAngularPlaygroundURL({
 const litPlaygroundURL = await playgroundService.getLitPlaygroundURL({
   html: '<nve-alert status="success">Elements + Lit</nve-alert>'
 });
+const preactPlaygroundURL = await playgroundService.getPreactPlaygroundURL({
+  html: '<nve-alert status="success">Elements + Preact</nve-alert>'
+});
 
 export default function () {
   return {
     playground: {
       playgroundURL,
       reactPlaygroundURL,
+      preactPlaygroundURL,
       angularPlaygroundURL,
       litPlaygroundURL
     }

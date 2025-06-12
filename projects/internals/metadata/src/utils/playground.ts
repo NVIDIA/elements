@@ -28,6 +28,16 @@ export function createReactPlaygroundURL(source: string, metadata: MetadataSumma
   return createURL(files, { ...options, openFile: 'index.tsx', name: `react ${options.name ?? ''}` });
 }
 
+export function createPreactPlaygroundURL(source: string, metadata: MetadataSummary, options: PlaygroundOptions = {}) {
+  const sanitizedSource = validateTemplate(source, metadata, {
+    allowGlobalElements: false,
+    allowStyleAttribute: false
+  });
+  const formattedSource = formatTemplate(sanitizedSource);
+  const files = serialize(createPreactFiles(formattedSource, metadata, options));
+  return createURL(files, { ...options, openFile: 'index.tsx', name: `preact ${options.name ?? ''}` });
+}
+
 export function createAngularPlaygroundURL(source: string, metadata: MetadataSummary, options: PlaygroundOptions = {}) {
   const sanitizedSource = validateTemplate(source, metadata, { allowGlobalElements: false });
   const formattedSource = formatTemplate(sanitizedSource);
@@ -56,6 +66,15 @@ export function createReactFiles(content, metadata: MetadataSummary, options: Pl
     'index.tsx': { content: createReactIndexTSX(content, metadata) },
     'global.ts': { content: createReactTSXGlobal() },
     'importmap.json': { content: createImportMap('react') }
+  };
+}
+
+export function createPreactFiles(content, metadata: MetadataSummary, options: PlaygroundOptions) {
+  return {
+    'index.html': { content: createIndexHTML(`<div id="root"></div>`, options) },
+    'index.tsx': { content: createPreactIndexTSX(content, metadata) },
+    'global.ts': { content: createPreactTSXGlobal() },
+    'importmap.json': { content: createImportMap('preact') }
   };
 }
 
@@ -107,7 +126,7 @@ function createIndexHTML(content: string, options: PlaygroundOptions) {
 </html>`;
 }
 
-function createImportMap(framework: 'react' | 'angular' | 'lit' | 'vanilla' = 'vanilla') {
+function createImportMap(framework: 'react' | 'preact' | 'angular' | 'lit' | 'vanilla' = 'vanilla') {
   const CDN_MODULES_URL = `https://esm.nvidia.com`;
 
   const importmap = {
@@ -132,6 +151,11 @@ function createImportMap(framework: 'react' | 'angular' | 'lit' | 'vanilla' = 'v
     importmap.imports['react-dom/'] = `${CDN_MODULES_URL}/react-dom@19/`;
     importmap.imports['react'] = `${CDN_MODULES_URL}/react@19`;
     importmap.imports['react/'] = `${CDN_MODULES_URL}/react@19/`;
+  }
+
+  if (framework === 'preact') {
+    importmap.imports['preact'] = `${CDN_MODULES_URL}/preact@10`;
+    importmap.imports['preact/'] = `${CDN_MODULES_URL}/preact@10/`;
   }
 
   if (framework === 'angular') {
@@ -172,6 +196,31 @@ function createReactTSXGlobal() {
 declare module 'react' {
   namespace JSX {
     interface IntrinsicElements extends CustomElements {}
+  }
+}`;
+}
+
+function createPreactIndexTSX(content: string, metadata: MetadataSummary) {
+  return `/** @jsxImportSource preact */
+import { render } from 'preact';
+${getElementImports(content, metadata).join('\n')}
+
+function App() {
+  return (
+    <div>
+      ${content}
+    </div>
+  );
+}
+render(<App />, document.getElementById('root'));`;
+}
+
+function createPreactTSXGlobal() {
+  return `import type { CustomElements } from '@nvidia-elements/core/dist/custom-elements-jsx.d.ts';
+
+declare global {
+  namespace preact.JSX {
+    interface IntrinsicElements extends CustomElements { }
   }
 }`;
 }
