@@ -39,7 +39,8 @@ export function render() {
 </div>
 <script type="module">
   import '@nvidia-elements/monaco/input/index.js';
-  import { MetadataService } from '@internals/metadata';
+  import { MetadataService } from '@internals/metadata/services/metadata.service.js';
+  // todo: this should be computed at build time with 11ty and not at runtime as this is a node library atm
   const metrics = await MetadataService.getMetadata();
   document.querySelector('nve-monaco-input').value = JSON.stringify(metrics, null, 2);
 </script> `;

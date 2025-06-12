@@ -171,7 +171,9 @@ export class MetricsCarousel extends LitElement {
   }
 
   async #getMetrics(): Promise<MetricsCarouselItem[]> {
-    const { MetadataService, AVInfraService } = await import('@internals/metadata');
+    // todo: this should be computed at build time with 11ty and not at runtime as this is a node library atm
+    const { MetadataService } = await import('@internals/metadata/services/metadata.service.js');
+    const { AVInfraService } = await import('@internals/metadata/services/av-infra.service.js');
     const metrics = await MetadataService.getMetadata();
 
     function isMetadataProject(projectMetrics: unknown): projectMetrics is MetadataProject {

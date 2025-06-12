@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "ci": "wireit",
+    "dev": "wireit",
     "start": "wireit",
     "build": "wireit",
     "watch": "ng build --watch --configuration development",

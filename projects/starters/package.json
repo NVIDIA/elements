@@ -6,12 +6,7 @@
     "build": "wireit"
   },
   "dependencies": {
-    "@pnpm/exportable-manifest": "7.0.3",
-    "@pnpm/read-project-manifest": "6.0.6",
-    "@pnpm/workspace.read-manifest": "2.2.0",
-    "@pnpm/catalogs.config": "0.1.0",
-    "archiver": "7.0.1",
-    "glob": "catalog:"
+    "@internals/metadata": "workspace:*"
   },
   "wireit": {
     "ci": {
@@ -28,6 +23,7 @@
         "dist"
       ],
       "dependencies": [
+        "../internals/metadata:build",
         "./angular:build",
         "./buildless:build",
         "./eleventy:build",
