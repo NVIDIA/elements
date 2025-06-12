@@ -88,11 +88,20 @@ export function getCoverageSummaries(metadata: MetadataSummary) {
   }, {});
 }
 
-export function getAvailableElementsAPIs(metadata: MetadataSummary) {
+export function getAvailableElementsAPIs(
+  metadata: MetadataSummary
+): { name: string; description: string; usage?: string }[] {
   return Object.values(metadata.projects)
     .flatMap(i => (i.elements.length ? i.elements : []))
     .filter(e => e.manifest?.deprecated !== 'true' && e.manifest.description)
     .map(e => ({ name: e.name, description: e.manifest.description }));
+}
+
+export function getAvailableElementTags(metadata: MetadataSummary) {
+  return Object.values(metadata.projects)
+    .flatMap(i => (i.elements.length ? i.elements : []))
+    .filter(e => e.manifest?.deprecated !== 'true')
+    .map(e => e.name);
 }
 
 /* istanbul ignore next -- @preserve */
