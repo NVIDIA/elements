@@ -47,6 +47,18 @@ describe('PlaygroundService', () => {
     expect((playgroundService.getReactPlaygroundURL as MetadataMethod<string>).metadata.params.html).toBeDefined();
   });
 
+  it('should provide getPreactPlaygroundURL', async () => {
+    const url = await playgroundService.getPreactPlaygroundURL({ html: '<nve-button></nve-button>' });
+    expect(url.includes('?version=1&layout=vertical-split&name=preact&file=index.tsx&files=')).toBe(true);
+    expect((playgroundService.getPreactPlaygroundURL as MetadataMethod<string>).metadata.name).toBe(
+      'elements_getPreactPlaygroundURL'
+    );
+    expect((playgroundService.getPreactPlaygroundURL as MetadataMethod<string>).metadata.description).toBe(
+      'Create a Preact based playground url / link from a html string'
+    );
+    expect((playgroundService.getPreactPlaygroundURL as MetadataMethod<string>).metadata.params.html).toBeDefined();
+  });
+
   it('should provide getAngularPlaygroundURL', async () => {
     const url = await playgroundService.getAngularPlaygroundURL({ html: '<nve-button></nve-button>' });
     expect(url.includes('?version=1&layout=vertical-split&name=angular&file=index.ts&files=')).toBe(true);
