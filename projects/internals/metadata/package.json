@@ -24,6 +24,14 @@
     "./index.js": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./services/metadata.service.js": {
+      "types": "./dist/services/metadata.service.d.ts",
+      "default": "./dist/src/services/metadata.service.js"
+    },
+    "./services/av-infra.service.js": {
+      "types": "./dist/services/av-infra.service.d.ts",
+      "default": "./dist/src/services/av-infra.service.js"
     }
   },
   "wireit": {
@@ -71,10 +79,10 @@
       ]
     },
     "build:metadata": {
-      "command": "node --experimental-strip-types ./src/node/metadata.ts",
+      "command": "node --experimental-strip-types ./src/tasks/metadata.ts",
       "files": [
-        "./src/node/metadata.ts",
-        "./src/node/metadata.utils.ts",
+        "./src/tasks/metadata.ts",
+        "./src/tasks/metadata.utils.ts",
         "./static/lighthouse.json",
         "../../elements/src/internal/types/index.ts",
         "../../elements/package.json",
@@ -250,10 +258,10 @@
       ]
     },
     "build:lighthouse": {
-      "command": "node --experimental-strip-types ./src/node/lighthouse.ts",
+      "command": "node --experimental-strip-types ./src/tasks/lighthouse.ts",
       "files": [
-        "src/node/lighthouse.ts",
-        "src/node/lighthouse.utils.ts"
+        "src/tasks/lighthouse.ts",
+        "src/tasks/lighthouse.utils.ts"
       ],
       "output": [
         "static/lighthouse.json"
@@ -263,10 +271,10 @@
       ]
     },
     "build:av-infra": {
-      "command": "node --experimental-strip-types ./src/node/av-infra.ts",
+      "command": "node --experimental-strip-types ./src/tasks/metadata.av-infra.ts",
       "files": [
-        "src/node/av-infra.ts",
-        "src/node/av-infra.utils.ts"
+        "src/tasks/metadata.av-infra.ts",
+        "src/tasks/metadata.av-infra.utils.ts"
       ],
       "output": [
         "static/av-infra.json"
@@ -330,11 +338,17 @@
     }
   },
   "dependencies": {
-    "@types/node": "catalog:",
+    "@pnpm/exportable-manifest": "7.0.3",
+    "@pnpm/read-project-manifest": "6.0.6",
+    "@pnpm/workspace.read-manifest": "2.2.0",
+    "@pnpm/catalogs.config": "0.1.0",
+    "archiver": "7.0.1",
     "fflate": "0.8.2",
     "html-format": "1.1.7",
     "glob": "catalog:",
-    "ts-morph": "catalog:"
+    "sanitize-html": "2.17.0",
+    "ts-morph": "catalog:",
+    "unzipper": "0.12.3"
   },
   "devDependencies": {
     "@internals/eslint": "workspace:*",
