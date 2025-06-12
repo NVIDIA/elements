@@ -11,7 +11,11 @@
 
 <div nve-layout="row gap:xs">
   <nve-button>
-    <a href="https://NVIDIA.github.io/elements/starters/typescript/" target="_blank"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> Demo</a>
+    <a href="{{ playground.playgroundURL }}" target="_blank"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> Playground</a>
+  </nve-button>
+
+  <nve-button>
+    <a href="https://NVIDIA.github.io/elements/starters/typescript/" target="_blank"><nve-icon name="browser"></nve-icon> Demo</a>
   </nve-button>
 
   <nve-button>
@@ -26,8 +30,7 @@
 </div>
 
 To use Elements in [TypeScript](https://www.typescriptlang.org/) follow the [installation](./docs/about/getting-started/) steps.
-Once complete elements can be imported and used within TS files. The Element class
-definitions can be imported via [type imports](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) to use for static type checking.
+Once complete elements can be imported and used within TS files. The Element class definitions can be imported via [type imports](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) to use for static type checking.
 
 ```typescript
 import '@nvidia-elements/core/alert/define.js'; // import and register element to DOM
