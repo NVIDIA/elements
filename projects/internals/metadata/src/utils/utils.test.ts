@@ -11,7 +11,7 @@ import {
   getPackageNames,
   searchChangelogs,
   getAvailableElementsAPIs
-} from './index.js';
+} from './utils.js';
 import type { MetadataSummary } from '../types.js';
 
 describe('getElementImports', () => {

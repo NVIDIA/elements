@@ -1,5 +1,5 @@
 import { writeFileSync } from 'node:fs';
-import { getProjects } from './av-infra.utils.ts';
+import { getProjects } from './metadata.av-infra.utils.ts';
 
 const projects = await getProjects();
 const created = new Date().toISOString();

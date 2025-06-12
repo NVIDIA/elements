@@ -15,10 +15,11 @@ export default mergeConfig(libraryNodeTestConfig, {
       },
       exclude: [
         // excluding node operations that write to local file system
-        'src/node/metadata.ts',
-        'src/node/lighthouse.ts',
-        'src/node/av-infra.ts',
-        'src/node/av-infra.utils.ts'
+        'src/tasks/metadata.ts',
+        'src/tasks/lighthouse.ts',
+        'src/tasks/metadata.av-infra.ts',
+        'src/tasks/metadata.av-infra.utils.ts',
+        'src/utils/starters.ts'
       ]
     }
   }

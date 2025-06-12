@@ -11,7 +11,11 @@
 
 <div nve-layout="row gap:xs">
   <nve-button>
-    <a href="https://NVIDIA.github.io/elements/starters/react/" target="_blank"><svg width="18" height="18"><use href="#react-svg"></use></svg> Demo</a>
+    <a href="{{ playground.reactPlaygroundURL }}" target="_blank"><svg width="18" height="18"><use href="#react-svg"></use></svg> Playground</a>
+  </nve-button>
+
+  <nve-button>
+    <a href="https://NVIDIA.github.io/elements/starters/react/" target="_blank"> <nve-icon name="browser"></nve-icon> Demo</a>
   </nve-button>
 
   <nve-button>
