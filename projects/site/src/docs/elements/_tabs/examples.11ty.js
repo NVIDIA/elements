@@ -1,3 +1,11 @@
+import { MetadataService } from '@internals/metadata';
+import markdownIt from 'markdown-it';
+
+// Initialize markdown parser and metadata service
+const md = markdownIt();
+const metadata = await MetadataService.getMetadata();
+const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
+
 /**
  * Configuration object for the examples documentation template.
  * Sets up pagination to generate one page per component for examples.
@@ -36,9 +44,71 @@ export function render(data) {
   data.title = componentData.title;
   data.page.fileSlug = componentData.page.fileSlug;
 
+  const element = elements.find(d => d.name === componentData.tag);
+  const stories = element.stories || [];
+
+  // Create a JSON string of all story templates for JavaScript to cycle through
+  const storyTemplates = stories.map(story => ({
+    id: story.id,
+    template: md.utils.escapeHtml(story.template)
+  }));
+
   return `
     <h2 nve-text="heading xl mkd">${componentData.title} Examples</h2>
 
-    <p nve-text="body trim:none">Todo: Render examples for ${componentData.tag}</p>
+    <!-- Triggers element loader -->
+    <div style="display: none">
+      ${element.stories.find(s => s.id === 'Default')?.template}
+    </div>
+
+    <nve-select>
+      ${
+        stories.length > 1
+          ? `
+      <select id="example-selector">
+        ${stories
+          .map(
+            (story, index) => `
+          <option value="${index}" ${index === 0 ? 'selected' : ''}>${story.id.split(/(?=[A-Z])/).join(' ')}</option>
+        `
+          )
+          .join('')}
+      </select>
+      `
+          : ''
+      }
+    </nve-select>
+  
+    <nvd-canvas-editable id="cycling-example" source="${md.utils.escapeHtml(stories[0]?.template || '')}"></nvd-canvas-editable>
+
+    <script type="module">
+      (function() {
+        const cyclingExample = document.querySelector('#cycling-example');
+        const exampleSelector = document.querySelector('#example-selector');
+        
+        if (cyclingExample && exampleSelector) {
+          const storyTemplates = ${JSON.stringify(storyTemplates)};
+          
+          // Function to unescape HTML entities
+          function unescapeHtml(html) {
+            const textarea = document.createElement('textarea');
+            textarea.innerHTML = html;
+            return textarea.value;
+          }
+          
+          exampleSelector.addEventListener('change', (event) => {
+            const selectedIndex = parseInt(event.target.value);
+            const story = storyTemplates[selectedIndex];
+            if (story) {
+              cyclingExample.setAttribute('source', unescapeHtml(story.template));
+            }
+          });
+        }
+      })();
+    </script>
+
+    <script type="module">
+      import '/_internal/canvas-editable/canvas-editable.js';
+    </script>
   `;
 }
