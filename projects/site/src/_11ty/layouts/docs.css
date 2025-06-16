@@ -45,6 +45,10 @@ nve-tabs + h2[nve-text='heading xl mkd'] {
   padding-top: var(--nve-ref-space-md);
 }
 
+nve-tabs-item {
+  font-size: var(--nve-ref-font-size-200);
+}
+
 [nve-text='link mkd']:visited {
   color: inherit !important;
 }

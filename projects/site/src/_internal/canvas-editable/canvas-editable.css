@@ -1,0 +1,61 @@
+@import '@nvidia-elements/styles/layout.css';
+@import '@nvidia-elements/styles/typography.css';
+
+:host {
+  --padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
+  display: block;
+  width: 100%;
+}
+
+[internal-host] {
+  border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  border-radius: var(--nve-ref-border-radius-md);
+}
+
+.resizer {
+  display: flex;
+  align-items: stretch;
+  min-height: 80px;
+}
+
+.preview {
+  padding: var(--padding);
+  display: block;
+  resize: horizontal;
+  overflow: visible;
+  width: 100%;
+}
+
+.preview-backdrop {
+  background: var(--nve-ref-color-neutral-200);
+  min-height: 100%;
+  flex: 1;
+}
+
+.code {
+  position: relative;
+  margin-top: 1px;
+}
+
+.code nve-monaco-input {
+  height: 320px;
+}
+
+.toolbar {
+  display: flex;
+  gap: var(--nve-ref-space-xxs);
+  padding: var(--nve-ref-space-xxs);
+  border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+}
+
+nve-copy-button {
+  position: absolute;
+  top: 4px;
+  right: 24px;
+}
+
+.error {
+  color: var(--nve-ref-color-error-500);
+  padding: var(--nve-ref-space-md);
+  text-align: center;
+}

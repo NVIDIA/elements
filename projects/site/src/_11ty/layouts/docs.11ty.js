@@ -19,7 +19,7 @@ const componentDocTabs = [
   {
     label: 'Examples',
     slug: '/examples/',
-    hidden: true
+    hidden: false
   }
 ];
 
