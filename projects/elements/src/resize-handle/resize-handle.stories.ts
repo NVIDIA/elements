@@ -38,7 +38,7 @@ export const SplitHorizontal = {
 export const SplitVertical = {
   render: () => html`
 <section id="split-vertical-demo" style="display: grid; width: 250px; height: 250px; grid-template-columns: 1fr auto 1fr; border: 1px solid var(--nve-ref-border-color)">
-  <div style="background: hsla(0, 0%, 65%, 0.1"></div>
+  <div style="background: hsla(0, 0%, 65%, 0.1)"></div>
   <nve-resize-handle orientation="vertical" min="20" max="230" value="125" step="20"></nve-resize-handle>
   <div></div>
 </section>

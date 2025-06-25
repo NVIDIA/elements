@@ -9,44 +9,39 @@ interface PlaygroundOptions {
   name?: string;
   referer?: string;
   openFile?: string;
+  trustedContent?: boolean;
 }
 
 export function createPlaygroundURL(source: string, metadata: MetadataSummary, options: PlaygroundOptions = {}) {
-  const sanitizedSource = validateTemplate(source, metadata, { allowGlobalElements: false });
+  const sanitizedSource = options.trustedContent ? source : validateTemplate(source, metadata);
   const formattedSource = formatTemplate(sanitizedSource);
   const files = serialize(createDefaultFiles(formattedSource, metadata, options));
   return createURL(files, options);
 }
 
 export function createReactPlaygroundURL(source: string, metadata: MetadataSummary, options: PlaygroundOptions = {}) {
-  const sanitizedSource = validateTemplate(source, metadata, {
-    allowGlobalElements: false,
-    allowStyleAttribute: false
-  });
+  const sanitizedSource = options.trustedContent ? source : validateTemplate(source, metadata);
   const formattedSource = formatTemplate(sanitizedSource);
   const files = serialize(createReactFiles(formattedSource, metadata, options));
   return createURL(files, { ...options, openFile: 'index.tsx', name: `react ${options.name ?? ''}` });
 }
 
 export function createPreactPlaygroundURL(source: string, metadata: MetadataSummary, options: PlaygroundOptions = {}) {
-  const sanitizedSource = validateTemplate(source, metadata, {
-    allowGlobalElements: false,
-    allowStyleAttribute: false
-  });
+  const sanitizedSource = options.trustedContent ? source : validateTemplate(source, metadata);
   const formattedSource = formatTemplate(sanitizedSource);
   const files = serialize(createPreactFiles(formattedSource, metadata, options));
   return createURL(files, { ...options, openFile: 'index.tsx', name: `preact ${options.name ?? ''}` });
 }
 
 export function createAngularPlaygroundURL(source: string, metadata: MetadataSummary, options: PlaygroundOptions = {}) {
-  const sanitizedSource = validateTemplate(source, metadata, { allowGlobalElements: false });
+  const sanitizedSource = options.trustedContent ? source : validateTemplate(source, metadata);
   const formattedSource = formatTemplate(sanitizedSource);
   const files = serialize(createAngularFiles(formattedSource, metadata, options));
   return createURL(files, { ...options, openFile: 'index.ts', name: `angular ${options.name ?? ''}` });
 }
 
 export function createLitPlaygroundURL(source: string, metadata: MetadataSummary, options: PlaygroundOptions = {}) {
-  const sanitizedSource = validateTemplate(source, metadata, { allowGlobalElements: false });
+  const sanitizedSource = options.trustedContent ? source : validateTemplate(source, metadata);
   const formattedSource = formatTemplate(sanitizedSource);
   const files = serialize(createLitFiles(formattedSource, metadata, options));
   return createURL(files, { ...options, openFile: 'index.ts', name: `lit ${options.name ?? ''}` });
@@ -121,7 +116,7 @@ function createIndexHTML(content: string, options: PlaygroundOptions) {
     <script type="module" src="./index.js"></script>
   </head>
   <body nve-text="body" nve-layout="${!content.includes('<nve-page') ? 'pad:md' : ''}">
-    ${content.trim()}
+${content.trim()}
   </body>
 </html>`;
 }

@@ -6,12 +6,38 @@ const metadata = {
   projects: {
     '@nvidia-elements/core': {
       elements: [
-        { name: 'nve-button', manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } } },
+        {
+          name: 'nve-button',
+          manifest: {
+            metadata: { entrypoint: '@nvidia-elements/core/button' },
+            attributes: [
+              { name: 'pressed', type: { text: `boolean` } },
+              { name: 'command', type: { text: `string` } },
+              { name: 'commandfor', type: { text: `string` } },
+              { name: 'popovertarget', type: { text: `string` } },
+              { name: 'popovertargetaction', type: { text: `string` } }
+            ]
+          }
+        },
         {
           name: 'nve-badge',
           manifest: {
             metadata: { entrypoint: '@nvidia-elements/core/badge' },
-            attributes: [{ name: 'status', type: { text: 'success|invalid' } }]
+            attributes: [{ name: 'status', type: { text: `'accent' | 'warning' | 'success' | 'danger'` } }]
+          }
+        },
+        {
+          name: 'nve-icon',
+          manifest: {
+            metadata: { entrypoint: '@nvidia-elements/core/icon' },
+            attributes: [{ name: 'name', type: { text: `IconName | default` } }]
+          }
+        },
+        {
+          name: 'nve-grid-column',
+          manifest: {
+            metadata: { entrypoint: '@nvidia-elements/core/grid' },
+            attributes: [{ name: 'width', type: { text: `number` } }]
           }
         },
         { name: 'nve-page', manifest: { metadata: { entrypoint: '@nvidia-elements/core/page' } } }
@@ -23,10 +49,10 @@ const metadata = {
 describe('validateTemplate', () => {
   it('should validate a template', () => {
     const template =
-      '<nve-page><div nve-invalid="test" nve-layout="column gap:md" nve-text="body"><b>test</b><nve-invalid></nve-invalid><nve-badge status="success">test</nve-badge><nve-badge status="invalid">test</nve-badge><nve-badge style="--color: red">test</nve-badge><script>alert("!")</script></div></nve-page>';
+      '<nve-page><div nve-invalid="test" nve-layout="column gap:md" nve-text="body"><b>test</b><nve-invalid></nve-invalid><nve-badge status="success">test</nve-badge><nve-badge>test</nve-badge><nve-badge style="--color: red">test</nve-badge><script>alert("!")</script></div></nve-page>';
     const result = validateTemplate(template, metadata);
     expect(result).toBe(
-      '<nve-page><div nve-layout="column gap:md" nve-text="body"><b>test</b><nve-badge status="success">test</nve-badge><nve-badge status="invalid">test</nve-badge><nve-badge style="--color:red">test</nve-badge></div></nve-page>'
+      '<div nve-layout="column gap:md" nve-text="body"><b>test</b><nve-badge status="success">test</nve-badge><nve-badge>test</nve-badge><nve-badge>test</nve-badge></div>'
     );
   });
 
@@ -72,28 +98,76 @@ describe('validateTemplate', () => {
     expect(result).toBe('<nve-badge status="success">hello there</nve-badge>');
   });
 
+  it('should remove invalid element attribute values', () => {
+    const template = '<nve-badge status="blah">hello there</nve-badge>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe('<nve-badge status>hello there</nve-badge>');
+  });
+
+  it('should allow icon name attribute with arbitrary values', () => {
+    const template = '<nve-icon name="test">hello there</nve-icon>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe('<nve-icon name="test">hello there</nve-icon>');
+  });
+
+  it('should allow number type attribute with arbitrary values', () => {
+    const template = '<nve-grid-column width="100">hello there</nve-grid-column>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe('<nve-grid-column width="100">hello there</nve-grid-column>');
+  });
+
+  it('should allow boolean type attributes', () => {
+    const template = '<nve-button pressed>hello there</nve-button>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe('<nve-button pressed>hello there</nve-button>');
+  });
+
+  it('should allow popover attributes', () => {
+    const template = '<nve-button popovertarget="test">test</nve-button><dialog id="test">test</dialog>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe('<nve-button popovertarget="test">test</nve-button><dialog id="test">test</dialog>');
+  });
+
+  it('should allow command attributes', () => {
+    const template =
+      '<nve-button command="show-dialog" commandfor="test">test</nve-button><dialog id="test">test</dialog>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe(
+      '<nve-button command="show-dialog" commandfor="test">test</nve-button><dialog id="test">test</dialog>'
+    );
+  });
+
+  it('should allow form elements', () => {
+    const template =
+      '<form></form><label for="test">test</label><input id="test" /><select><option value="1">test</option></select>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe(
+      '<form></form><label for="test">test</label><input id="test" /><select><option value="1">test</option></select>'
+    );
+  });
+
+  it('should remove global elements by default', () => {
+    const template = '<nve-page></nve-page>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe('');
+  });
+
   it('should allow global elements', () => {
     const template = '<nve-page></nve-page>';
     const result = validateTemplate(template, metadata, { allowGlobalElements: true });
     expect(result).toBe('<nve-page></nve-page>');
   });
 
-  it('should remove global elements', () => {
-    const template = '<nve-page></nve-page>';
-    const result = validateTemplate(template, metadata, { allowGlobalElements: false });
-    expect(result).toBe('');
+  it('should remove style attributes by default', () => {
+    const template = '<nve-badge style="--color: red">hello there</nve-badge>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe('<nve-badge>hello there</nve-badge>');
   });
 
   it('should allow style attributes', () => {
     const template = '<nve-badge style="--color: red">hello there</nve-badge>';
-    const result = validateTemplate(template, metadata);
+    const result = validateTemplate(template, metadata, { allowStyleAttribute: true });
     expect(result).toBe('<nve-badge style="--color:red">hello there</nve-badge>');
-  });
-
-  it('should remove style attributes', () => {
-    const template = '<nve-badge style="--color: red">hello there</nve-badge>';
-    const result = validateTemplate(template, metadata, { allowStyleAttribute: false });
-    expect(result).toBe('<nve-badge>hello there</nve-badge>');
   });
 
   it('should allow slot attribute on elements', () => {
@@ -118,5 +192,17 @@ describe('validateTemplate', () => {
     const template = '<nve-badge nve-text="body">hello there</nve-badge>';
     const result = validateTemplate(template, metadata);
     expect(result).toBe('<nve-badge>hello there</nve-badge>');
+  });
+
+  it('should not allow script tags by default', () => {
+    const template = '<script type="module">console.log("!")</script>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe('');
+  });
+
+  it('should allow script tags for trusted content', () => {
+    const template = '<script type="module">console.log("!")</script>';
+    const result = validateTemplate(template, metadata, { allowVulnerableTags: true });
+    expect(result).toBe('<script type="module">console.log("!")</script>');
   });
 });
