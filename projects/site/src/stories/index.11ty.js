@@ -45,7 +45,7 @@ export function render(data) {
   </head>
   <body data-pagefind-ignore="all">
     <div id="iframe-links" nve-layout="row gap:sm align:right" hidden>
-      <a href="${createPlaygroundURL(data.story.template, metadata, { name: `${data.story.path}_${data.story.title}`, theme: '' })}" target="_blank" nve-text="link body sm">playground &#8599;</a>
+      <a href="${createPlaygroundURL(data.story.template, metadata, { name: `${data.story.path}_${data.story.title}`, theme: '', trustedContent: true })}" target="_blank" nve-text="link body sm">playground &#8599;</a>
       <a href="docs/elements/${data.story.element}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
     </div>
     <div id="story-container" data-element="${data.story.element}">

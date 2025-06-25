@@ -23,7 +23,7 @@ To manage validation manually use the `novalidate` attribute to disable HTML5 va
     <nve-control-message error="valueMissing">required</nve-control-message>
     <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
   </nve-input>
-<script>
+<script type="module">
   const form = document.querySelector('form');
 
   form.addEventListener('submit', e => {

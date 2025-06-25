@@ -168,7 +168,7 @@ export const ShortcutDropdown = {
   </nve-dropdown>
 
 
-  <script>
+  <script type="module">
     const dropdown = document.querySelector('nve-dropdown');
     dropdown.addEventListener('open', () => dropdown.hidden = false);
     dropdown.addEventListener('close', () => dropdown.hidden = true);

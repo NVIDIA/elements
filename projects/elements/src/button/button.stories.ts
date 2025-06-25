@@ -176,7 +176,7 @@ export const FormSubmit = {
 <form id="test-form">
   <nve-button name="test-button" value="test-value">submit</nve-button>
 </form>
-<script>
+<script type="module">
   const form = document.querySelector('#test-form');
   const button = document.querySelector('[name="test-button"]');
 
