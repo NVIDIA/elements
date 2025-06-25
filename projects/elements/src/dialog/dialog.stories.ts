@@ -158,7 +158,7 @@ export const LegacyTrigger = {
     <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
   </nve-accordion>
 </nve-dialog>
-<script>
+<script type="module">
   const dialog = document.querySelector('nve-dialog');
   dialog.addEventListener('open', e => {
     console.log(e);

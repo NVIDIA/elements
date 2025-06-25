@@ -19,6 +19,7 @@ projects/elements/src/icon/server.ts
 projects/elements-react/src/**/*
 projects/internals/metadata/static/*.json
 projects/monaco/src/themes/generated/*
+projects/starters/angular/.angular/**/*
 projects/**/src/vendor/**/*
 projects/**/.screencast/.auth/*
 .vscode/*.json.code-snippets

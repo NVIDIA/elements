@@ -22,7 +22,7 @@ export class PlaygroundService {
     }
   })
   async getValidatedHTMLTemplate({ html }: { html: string }) {
-    return validateTemplate(html, data, { allowGlobalElements: false });
+    return validateTemplate(html, data);
   }
 
   @metadata({
