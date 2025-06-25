@@ -93,7 +93,7 @@ export const Events = {
   render: () => html`
 <nve-dropdown id="dropdown">dropdown content</nve-dropdown>
 <nve-button popovertarget="dropdown">button</nve-button>
-<script>
+<script type="module">
   const dropdown = document.querySelector('nve-dropdown');
   dropdown.addEventListener('open', () => console.log('open'));
   dropdown.addEventListener('close', () => console.log('close'));
