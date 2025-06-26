@@ -1,5 +1,5 @@
 import '@nvidia-elements/core/polyfills';
-import { themes } from '@storybook/theming';
+import { themes } from 'storybook/theming';
 import fontInter from '@nvidia-elements/themes/fonts/inter.css?inline';
 import theme from '@nvidia-elements/themes/index.css?inline';
 import dark from '@nvidia-elements/themes/dark.css?inline';

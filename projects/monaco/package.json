@@ -157,8 +157,7 @@
     "dev": {
       "command": "vite",
       "dependencies": [
-        "build:watch",
-        "../storybook:dev"
+        "build:watch"
       ]
     },
     "ci": {

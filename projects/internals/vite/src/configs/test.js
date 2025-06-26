@@ -58,6 +58,7 @@ export const libraryTestConfig = {
       },
       include: ['src'],
       exclude: [
+        '**/*.html',
         '**/test/**',
         '**/dist/**',
         '**/build/**',
