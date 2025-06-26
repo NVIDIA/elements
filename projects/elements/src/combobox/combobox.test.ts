@@ -102,6 +102,17 @@ describe(Combobox.metadata.tag, () => {
     expect(items[2].getAttribute('role')).toBe('option');
   });
 
+  it('should only show options that partial match the input value', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    input.value = 'Option 2';
+    input.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+    expect(options[0].hidden).toBe(true);
+    expect(options[1].hidden).toBe(false);
+    expect(options[2].hidden).toBe(true);
+  });
+
   it('should show options on keydown', async () => {
     const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
     expect(dropdown.matches(':popover-open')).toBe(false);
@@ -286,10 +297,24 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     expect(items[0].querySelector('nve-icon[name="check"]')).toBeTruthy();
   });
 
+  it('should show all options initially when input is active', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    input.value = 'option 2';
+    input.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+    expect(options[0].hidden).toBe(false);
+    expect(options[1].hidden).toBe(false);
+    expect(options[2].hidden).toBe(false);
+  });
+
   it('should reflect each option to a menu item', async () => {
     input.value = '';
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(dropdown.matches(':popover-open')).toBe(false);
     emulateClick(input);
     await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items.length).toBe(3);
     expect(items[0].textContent.trim()).toBe(options[0].value);
@@ -396,11 +421,54 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
   });
 });
 
+describe(`${Combobox.metadata.tag}: single select empty default option`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+  let select: HTMLSelectElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select>
+          <option disabled selected></option>
+          <option value="option 1"></option>
+          <option value="option 2"></option>
+          <option value="option 3"></option>
+        </select>
+        <nve-control-message>message</nve-control-message>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    select = fixture.querySelector('select');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should define element', () => {
+    expect(customElements.get(Combobox.metadata.tag)).toBeDefined();
+  });
+
+  it('should not render empty options used for select empty state', async () => {
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items.length).toBe(3);
+    expect(select.value).toBe('');
+    expect(input.value).toBe('');
+  });
+});
+
 describe(`${Combobox.metadata.tag}: multi select`, () => {
   let fixture: HTMLElement;
   let element: Combobox;
   let input: HTMLInputElement;
   let select: HTMLSelectElement;
+  let options: HTMLOptionElement[];
 
   beforeEach(async () => {
     fixture = await createFixture(html`
@@ -418,6 +486,7 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
     element = fixture.querySelector(Combobox.metadata.tag);
     input = fixture.querySelector('input');
     select = fixture.querySelector('select');
+    options = Array.from(fixture.querySelectorAll('option'));
   });
 
   afterEach(() => {
@@ -430,6 +499,17 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
 
   it('should initialize :state(multiple) state', () => {
     expect(element.matches(':state(multiple)')).toBe(true);
+  });
+
+  it('should all options initially when input is active', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    input.value = 'option 2';
+    input.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+    expect(options[0].hidden).toBe(false);
+    expect(options[1].hidden).toBe(false);
+    expect(options[2].hidden).toBe(false);
   });
 
   it('should show a nve-checkbox when the option is selected', async () => {
