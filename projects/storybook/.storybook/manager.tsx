@@ -1,5 +1,5 @@
 import React from 'react';
-import { addons, types, useGlobals } from '@storybook/manager-api';
+import { addons, types, useGlobals } from 'storybook/manager-api';
 
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon/define.js';
