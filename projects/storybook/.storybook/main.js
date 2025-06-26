@@ -4,7 +4,7 @@ const resolve = (rel) => path.resolve(process.cwd(), rel);
 
 export default {
   stories: [
-    '../src/**/*.mdx',
+    '../src/**/*.md',
     '../../elements/src/**/*.stories.ts',
     '../../labs/behaviors-alpine/src/**/*.stories.ts',
     '../../labs/brand/src/**/*.stories.ts',
@@ -12,21 +12,11 @@ export default {
     '../../labs/forms/src/**/*.stories.ts',
     '../../monaco/src/**/*.stories.ts',
     '../../starters/lit-library/src/**/*.stories.ts',
-    '../../styles/**/*.stories.ts',
-    '../../themes/**/*.stories.ts',
+    '../../styles/src/**/*.stories.ts',
+    '../../themes/src/**/*.stories.ts',
     '../../internals/patterns/src/**/*.stories.ts'
   ],
-  addons: [
-    '@storybook/addon-links',
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        'actions': false,
-        'controls': false,
-        'backgrounds': false
-      }
-    }
-  ],
+  addons: ['@storybook/addon-links'],
   framework: {
     name: '@storybook/web-components-vite',
     options: {}
@@ -51,11 +41,6 @@ export default {
         esbuildOptions: {
           target: "esnext",
         },
-      },
-      resolve: {
-        alias: {
-          '@storybook/addon-docs': resolve('node_modules/@storybook/addon-docs')
-        }
       }
     });
   }
