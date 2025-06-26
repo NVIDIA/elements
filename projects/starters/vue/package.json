@@ -45,14 +45,14 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "vue": "3.4.34"
+    "vue": "3.5.17"
   },
   "devDependencies": {
     "@types/node": "catalog:",
-    "@vitejs/plugin-vue": "5.2.1",
-    "@vue/tsconfig": "0.5.1",
+    "@vitejs/plugin-vue": "6.0.0",
+    "@vue/tsconfig": "0.7.0",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vue-tsc": "2.0.29"
+    "vue-tsc": "2.2.10"
   }
 }
