@@ -52,9 +52,9 @@ catalog:
   '@types/node': 22.13.1
   '@types/react': 19.0.7
   '@types/react-dom': 19.0.3
-  '@vitest/browser': 3.1.1
-  '@vitest/mocker': 3.1.1
-  '@vitest/coverage-istanbul': 3.1.1
+  '@vitest/browser': 4.0.0-beta.2
+  '@vitest/mocker': 4.0.0-beta.2
+  '@vitest/coverage-istanbul': 4.0.0-beta.2
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
   cpy-cli: 5.0.0
   eslint: 9.23.0
@@ -71,6 +71,6 @@ catalog:
   rollup-plugin-minify-html-literals: 1.2.6
   ts-morph: 26.0.0
   typescript: 5.8.2
-  vite: 6.3.5
-  vitest: 3.1.1
-  vite-plugin-dts: 4.5.3
+  vite: 7.0.0
+  vitest: 4.0.0-beta.2
+  vite-plugin-dts: 4.5.4
