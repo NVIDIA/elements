@@ -21,10 +21,10 @@ import styles from './combobox.css?inline';
 
 /**
  * @element nve-combobox
- * @description An editable combobox with autocomplete behavior from a given datalist.
+ * @description An editable combobox with autocomplete behavior and selection support.
  * @since 0.17.0
  * @entrypoint \@nvidia-elements/core/combobox
- * @slot - default slot for input
+ * @slot - default slot for an input and a datalist/select element
  * @slot prefix-icon - slot for icon to be placed before the input
  * @slot footer - slot for dropdown footer content
  * @cssprop --scroll-height
@@ -40,14 +40,14 @@ import styles from './combobox.css?inline';
  * @cssprop --width
  * @storybook https://NVIDIA.github.io/elements/docs/elements/combobox/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-41&mode=design&t=guIM7VohnWYQUEQv-0
- * @aria https://www.w3.org/WAI/ARIA/apg/patterns/combobox/
+ * @aria https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/
  */
 export class Combobox extends Control implements ContainerElement {
-  /** Flat container option is used when embeding component within another containing element */
-  @property({ type: String, reflect: true }) container?: 'flat';
+  /** Flat container option is used when embedding component within another containing element */
+  @property({ type: String, reflect: true }) accessor container: 'flat';
 
   /** Disable rendering of inline tags for multiple select */
-  @property({ type: Boolean, reflect: true }) notags?: boolean;
+  @property({ type: Boolean, reflect: true }) accessor notags: boolean;
 
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
@@ -64,7 +64,11 @@ export class Combobox extends Control implements ContainerElement {
     [Tag.metadata.tag]: Tag
   };
 
-  get #datalist() {
+  /**
+   * If a <select> is provided, on focus all options will be shown by default.
+   * If a <datalist> is provided, on focus only options that match the current input value will be shown.
+   */
+  get #datalist(): HTMLSelectElement {
     return this.shadowRoot
       ? ((this.shadowRoot
           .querySelector('slot')
@@ -74,7 +78,7 @@ export class Combobox extends Control implements ContainerElement {
       : null;
   }
 
-  get #select() {
+  get #select(): HTMLSelectElement {
     return this.shadowRoot
       ? ((this.shadowRoot
           .querySelector('slot')
@@ -135,10 +139,11 @@ export class Combobox extends Control implements ContainerElement {
   protected get suffixContent() {
     return !isServer
       ? html`
-    <nve-dropdown .popoverType=${'manual'} .modal=${false} @open=${e => (e.target.hidden = false)} @close=${this.#closeDropdown} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
+    <nve-dropdown .popoverType=${'manual'} .modal=${false} @open=${e => (e.target.hidden = false)} @close=${this.#closeListBox} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
       <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
         ${this.#options
           .filter(o => !o.hidden)
+          .filter(o => !(o.value === '' && o.disabled))
           .map(
             o => html`
           <nve-menu-item .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
@@ -203,25 +208,45 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setupSingleSelect() {
-    if (this.#select && !this.#select.multiple && !this.input.value) {
+    if (this.#select && !this.#select.multiple) {
+      this.#setupInitialValue();
       this.#syncSelectValueStates();
       this.#syncOptionSelectedStates();
-      const selected = this.#options.find(o => o.hasAttribute('selected'));
-      this.input.value = getDisplayValue(selected);
     }
   }
 
   #setupMultipleSelect() {
     if (this.#select?.multiple) {
+      this.#setupInitialValue();
       this.#syncSelectValueStates();
       this.#syncOptionSelectedStates();
       this._internals.states.add('multiple');
     }
   }
 
+  #setupInitialValue() {
+    const selected = Array.from(this.#select.selectedOptions).find((o: HTMLOptionElement) =>
+      o.hasAttribute('selected')
+    );
+    if (selected && !this.#select.multiple) {
+      this.input.value = getDisplayValue(selected);
+    }
+  }
+
+  #updateInputValue() {
+    if (!this.#select.multiple) {
+      this.input.value = getDisplayValue(
+        Array.from(this.#select.selectedOptions).find(o => o.value === this.#select.value)
+      );
+    }
+  }
+
   #syncSelectValueStates() {
     this.#observers.push(
-      getElementUpdate(this.#select, 'value', () => this.requestUpdate()),
+      getElementUpdate(this.#select, 'value', () => {
+        this.#updateInputValue();
+        this.requestUpdate();
+      }),
       onChildListMutation(this.#select, () => this.requestUpdate(), { attributes: true, subtree: true }),
       onChildListMutation(this.#select, () => this.#syncOptionSelectedStates(), { subtree: true })
     );
@@ -251,8 +276,8 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setupMenuItemUpdateEvents() {
-    this.input.addEventListener('input', () => this.#updateMenuItems());
-    this.shadowRoot.addEventListener('slotchange', () => this.#updateMenuItems());
+    this.input.addEventListener('input', () => this.#filterOptions());
+    this.shadowRoot.addEventListener('slotchange', () => this.#filterOptions());
   }
 
   async #setupLightDismiss() {
@@ -287,15 +312,6 @@ export class Combobox extends Control implements ContainerElement {
     });
   }
 
-  #closeDropdown() {
-    this.#dropdown.hidePopover();
-    if (this.#select && !this.#select.multiple && !this.#options.find(o => getDisplayValue(o) === this.input.value)) {
-      this.#options.forEach(o => (o.selected = false));
-      this.#setInputValue('');
-      this.#setSelectValue({ value: '', selected: false });
-    }
-  }
-
   #selectValue(option: { selected?: boolean; label?: string; value?: string }) {
     if (!this.#select?.multiple) {
       this.#setInputValue(getDisplayValue(option));
@@ -317,7 +333,7 @@ export class Combobox extends Control implements ContainerElement {
     }
   }
 
-  #updateMenuItems() {
+  #filterOptions() {
     this.#options.forEach(option => {
       const hasLabel = option.textContent.trim().length;
       if (hasLabel) {
@@ -328,16 +344,36 @@ export class Combobox extends Control implements ContainerElement {
         option.hidden = !matchesValue;
       }
     });
-
     this.requestUpdate();
   }
 
   #openListBox() {
     if (!this.input.disabled && !this.#dropdown.matches(':popover-open')) {
-      this.#updateMenuItems();
+      if (this.#select) {
+        this.#options.forEach(option => (option.hidden = false));
+      } else {
+        this.#filterOptions();
+      }
       this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
       this.#dropdown.showPopover();
       this.#dropdown.tabIndex = -1;
+    }
+  }
+
+  #closeListBox() {
+    this.#dropdown.hidePopover();
+    this.#validateSingleSelectValue();
+  }
+
+  #validateSingleSelectValue() {
+    const invalidInputValue =
+      this.#select &&
+      !this.#select.multiple &&
+      !this.#options.filter(o => !(o.value === '' && o.disabled)).find(o => getDisplayValue(o) === this.input.value);
+    if (invalidInputValue) {
+      this.#options.forEach(o => (o.selected = false));
+      this.#setInputValue('');
+      this.#setSelectValue({ value: '', selected: false });
     }
   }
 

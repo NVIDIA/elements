@@ -173,6 +173,13 @@ export const Flat = () => {
   `
 };
 
+/**
+ * @description Single select is similar to the default datalist behavior. However, by using a single selection select,
+ * the combobox will enforce and only allow values from the select to be used. If a invalid value is entered
+ * that does not match a option in the select, the value will be cleared. On focus all options will be shown by default until the user starts typing.
+ * 
+ * The select should be treated as the "value" of the combobox. The input is solely used to filter down available options for the user.
+ */
 export const Select = () => {
   return html`
 <nve-combobox>
@@ -191,6 +198,14 @@ export const Select = () => {
   `
 };
 
+/**
+ * @description The multiple option behavior preserves the native select value behavior. The `value` on the select
+ * will only reflect the first selected value. To get all selected options check the `selected` property
+ * on each `<option>` element or the select property [selectedOptions](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions).
+ * On focus all options will be shown by default until the user starts typing.
+ * 
+ * The select should be treated as the "value" of the combobox. The input is solely used to filter down available options for the user.
+ */
 export const MultiSelect = () => {
   return html`
   <nve-combobox>
@@ -209,6 +224,36 @@ export const MultiSelect = () => {
   `
 };
 
+/**
+ * @description The default behavior of a native select element is to select the first option if no default `selected` option is provided.
+ * If an empty initial value is desired, provide a empty value option that is disabled and selected.
+ */
+export const EmptyDefault = () => {
+  return html`
+<nve-combobox>
+  <label>label</label>
+  <input type="search">
+  <select>
+    <option disabled selected></option>
+    <option value="status"></option>
+    <option value="priority"></option>
+    <option value="date"></option>
+    <option value="session"></option>
+    <option value="configuration"></option>
+    <option value="contains"></option>
+  </select>
+  <nve-control-message>message</nve-control-message>
+</nve-combobox>
+  `
+};
+
+/**
+ * @description Options by default provide a value for the user input.
+ * An optional label can be provided. If an option label is provided, the label
+ * will be displayed to the user rather than the value. When using labels the
+ * text input value will be the option label rather than the option value.
+ * The select input will continue to use option value.
+ */
 export const Label = () => {
   return html`
   <nve-combobox>
@@ -245,6 +290,9 @@ export const LabelMultiSelect = () => {
   `
 };
 
+/**
+ * @description If the multiple tags overflow the parent container a simple text label will be shown instead.
+ */
 export const Overflow = () => {
   return html`
   <nve-combobox style="width: 250px">
