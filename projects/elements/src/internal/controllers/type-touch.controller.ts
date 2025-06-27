@@ -29,45 +29,49 @@ export function typeTouch<T extends ReactiveElement>(): ClassDecorator {
 export class TypeTouchController<T extends ReactiveElement> implements ReactiveController {
   #startPosition: Point;
   #pointerId: number;
-  #moveFn = this.#move.bind(this);
-  #endFn = this.#end.bind(this);
 
   constructor(private host: T) {
     this.host.addController(this);
   }
 
   hostConnected() {
-    this.host.addEventListener('pointerdown', e => this.#start(e));
+    this.host.addEventListener('pointerdown', this.#start);
   }
 
-  #start(e: PointerEvent) {
+  hostDisconnected() {
+    this.host.removeEventListener('pointerdown', this.#start);
+    globalThis.document.removeEventListener('pointerup', this.#end);
+    globalThis.document.removeEventListener('pointermove', this.#move);
+  }
+
+  #start = (e: PointerEvent) => {
     if (e.composedPath().find(el => el === this.host)) {
       this.#startPosition = { x: e.clientX, y: e.clientY };
       this.#pointerId = e.pointerId;
       this.host.setPointerCapture(this.#pointerId);
-      globalThis.document.addEventListener('pointerup', this.#endFn);
-      globalThis.document.addEventListener('pointermove', this.#moveFn);
+      globalThis.document.addEventListener('pointerup', this.#end);
+      globalThis.document.addEventListener('pointermove', this.#move);
       this.host.dispatchEvent(new NveTouchEvent('nve-touch-start', { ...this.#startPosition, offsetX: 0, offsetY: 0 }));
     }
-  }
+  };
 
-  #move(e: PointerEvent) {
+  #move = (e: PointerEvent) => {
     requestAnimationFrame(() => {
       const point = this.#getCoordinatesFromPointerEvent(e);
       this.host.dispatchEvent(new NveTouchEvent('nve-touch-move', point));
       this.#startPosition = { x: e.clientX, y: e.clientY };
     });
-  }
+  };
 
-  #end(e: PointerEvent) {
+  #end = (e: PointerEvent) => {
     if (this.#startPosition) {
-      globalThis.document.removeEventListener('pointerup', this.#endFn, false);
-      globalThis.document.removeEventListener('pointermove', this.#moveFn, false);
+      globalThis.document.removeEventListener('pointerup', this.#end, false);
+      globalThis.document.removeEventListener('pointermove', this.#move, false);
       this.host.dispatchEvent(new NveTouchEvent('nve-touch-end', this.#getCoordinatesFromPointerEvent(e)));
       this.host.releasePointerCapture(this.#pointerId);
       this.#pointerId = null;
     }
-  }
+  };
 
   #getCoordinatesFromPointerEvent(e: PointerEvent) {
     const value = {
