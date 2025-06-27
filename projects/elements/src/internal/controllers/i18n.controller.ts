@@ -21,7 +21,11 @@ export class I18nController<T extends I18n> implements ReactiveController {
   }
 
   hostConnected() {
-    globalThis.document.addEventListener('NVE_ELEMENTS_I18N_UPDATE', () => this.#update());
+    globalThis.document.addEventListener('NVE_ELEMENTS_I18N_UPDATE', this.#update);
+  }
+
+  hostDisconnected() {
+    globalThis.document.removeEventListener('NVE_ELEMENTS_I18N_UPDATE', this.#update);
   }
 
   hostUpdated() {
@@ -32,7 +36,7 @@ export class I18nController<T extends I18n> implements ReactiveController {
     }
   }
 
-  #update() {
+  #update = () => {
     this.host.i18n = { ...I18nService.i18n, ...this.#overides, __set: true };
-  }
+  };
 }
