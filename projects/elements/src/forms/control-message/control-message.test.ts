@@ -53,6 +53,14 @@ describe(ControlMessage.metadata.tag, () => {
   it('should set the icon name if message has a validation error applied', async () => {
     element.error = 'valueMissing';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('information-circle-stroke');
+    expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('exclamation-circle');
+  });
+
+  it('should set danger color status if message has a validation error applied', async () => {
+    element.error = 'valueMissing';
+    await elementIsStable(element);
+    expect(getComputedStyle(element).getPropertyValue('--color')).toBe(
+      getComputedStyle(globalThis.document.documentElement).getPropertyValue('--nve-sys-support-danger-emphasis-color')
+    );
   });
 });
