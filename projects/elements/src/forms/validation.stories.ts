@@ -90,7 +90,7 @@ export const ValidationSuccessGroup = () => {
     <nve-control-message status="success">username available</nve-control-message>
   </nve-input>
 
-  <nve-password status="error">
+  <nve-password>
     <label>password</label>
     <input type="password" name="password" required minlength="6" autocomplete="off" />
   </nve-password>
