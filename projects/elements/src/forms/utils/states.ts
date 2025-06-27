@@ -32,7 +32,6 @@ export function setupControlValidationStates(control: Control, messages: Control
         control._internals.states.delete('invalid');
         control._internals.states.add('valid');
         control.status = null;
-        showNonValidationMessages(messages);
       }
 
       hideInactiveValidationMessages(control, messages);
@@ -43,7 +42,6 @@ export function setupControlValidationStates(control: Control, messages: Control
       control._internals.states.delete('valid');
       control._internals.states.delete('invalid');
       hideAllValidationMessages(messages);
-      showNonValidationMessages(messages);
     };
 
     control.input.addEventListener('blur', () => {
@@ -57,7 +55,7 @@ export function setupControlValidationStates(control: Control, messages: Control
 
     control.input.addEventListener('invalid', () => {
       if (messages.find(m => m.error)) {
-        hideAllControlMessages(messages);
+        hideAllValidationMessages(messages);
         showActiveValidationMessages(control, messages);
       }
 
@@ -68,18 +66,18 @@ export function setupControlValidationStates(control: Control, messages: Control
 
     control.addEventListener('reset', () => resetValidityState());
     control.input.form?.addEventListener('reset', () => resetValidityState());
-  } else {
-    control.shadowRoot.addEventListener('slotchange', () => {
-      const messages = Array.from(control.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)));
-      if (messages.find(m => m.status === 'error' && !m.hidden)) {
-        control._internals.states.delete('valid');
-        control._internals.states.add('invalid');
-      } else {
-        control._internals.states.delete('invalid');
-        control._internals.states.add('valid');
-      }
-    });
   }
+
+  control.shadowRoot.addEventListener('slotchange', () => {
+    const messages = Array.from(control.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)));
+    control._internals.states.delete('valid');
+    control._internals.states.delete('invalid');
+    if (messages.find(m => !m.hidden && (m.status === 'error' || m.error))) {
+      control._internals.states.add('invalid');
+    } else {
+      control._internals.states.add('valid');
+    }
+  });
 }
 
 /**
@@ -169,6 +167,17 @@ export function setupControlStatusStates(control: Control | ControlGroup, messag
       }
     })
   );
+
+  control.shadowRoot.addEventListener('slotchange', () => {
+    const messages = Array.from(control.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)));
+    const message = messages.find(m => m.status && !m.hidden);
+    control._internals.states.delete('error');
+    control._internals.states.delete('success');
+    if (message) {
+      control._internals.states.add(message.status);
+    }
+  });
+
   return observers;
 }
 
@@ -191,10 +200,6 @@ export function hideAllValidationMessages(messages: ControlMessage[]) {
 
 export function showActiveValidationMessages(control: Control, messages: ControlMessage[]) {
   messages.find(m => control.input.validity[m.error])?.removeAttribute('hidden');
-}
-
-export function hideAllControlMessages(messages: ControlMessage[]) {
-  messages.forEach(m => m.setAttribute('hidden', ''));
 }
 
 export function hideInactiveValidationMessages(control: Control, messages: ControlMessage[]) {

@@ -104,6 +104,61 @@ describe(Control.metadata.tag, () => {
   });
 });
 
+describe(Control.metadata.tag, () => {
+  let fixture: HTMLElement;
+  let element: Control;
+  let input: HTMLInputElement;
+  let message: ControlMessage;
+  let validationMessage: ControlMessage;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-control>
+        <label>label</label>
+        <input type="text" required />
+        <nve-control-message>message</nve-control-message>
+        <nve-control-message error="valueMissing">required</nve-control-message>
+      </nve-control>
+    `);
+    element = fixture.querySelector(Control.metadata.tag);
+    input = fixture.querySelector('input');
+    message = fixture.querySelector(ControlMessage.metadata.tag);
+    validationMessage = fixture.querySelector(`${ControlMessage.metadata.tag}[error="valueMissing"]`);
+    await elementIsStable(element);
+    await elementIsStable(message);
+    await elementIsStable(validationMessage);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should hide non-validation messages if input is invalid', async () => {
+    input.value = '';
+    input.dispatchEvent(new Event('input'));
+    input.dispatchEvent(new Event('blur'));
+    await elementIsStable(element);
+    expect(getComputedStyle(message).display).toBe('none');
+    expect(validationMessage.hidden).toBe(false);
+  });
+
+  it('should show non-validation messages if input is valid', async () => {
+    input.value = '';
+    input.dispatchEvent(new Event('input'));
+    input.dispatchEvent(new Event('blur'));
+    await elementIsStable(element);
+    expect(getComputedStyle(message).display).toBe('none');
+    expect(validationMessage.hidden).toBe(false);
+
+    input.value = 'test';
+    input.dispatchEvent(new Event('input'));
+    input.dispatchEvent(new Event('blur'));
+    await elementIsStable(element);
+    expect(getComputedStyle(message).display).toBe('block');
+    expect(validationMessage.hidden).toBe(true);
+  });
+});
+
 describe(`${Control.metadata.tag}: custom`, () => {
   let fixture: HTMLElement;
   let element: Control;
