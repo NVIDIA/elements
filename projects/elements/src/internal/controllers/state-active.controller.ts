@@ -13,21 +13,33 @@ export function stateActive<T extends Active>(): ClassDecorator {
 type Active = ReactiveElement & { disabled: boolean; _internals?: ElementInternals };
 
 export class StateActiveController<T extends Active> implements ReactiveController {
+  #initialized = false;
   constructor(private host: T) {
     this.host.addController(this);
   }
 
   async hostConnected() {
-    attachInternals(this.host);
-    await this.host.updateComplete;
-    this.host.addEventListener('keypress', (e: KeyboardEvent) => this.#emulateActive(e));
-    this.host.addEventListener('mousedown', (e: PointerEvent) => this.#emulateActive(e));
-    this.host.addEventListener('keyup', () => this.#emulateInactive());
-    this.host.addEventListener('blur', () => this.#emulateInactive());
-    this.host.addEventListener('mouseup', () => this.#emulateInactive());
+    if (!this.#initialized) {
+      attachInternals(this.host);
+      await this.host.updateComplete;
+      this.host.addEventListener('keypress', this.#emulateActive);
+      this.host.addEventListener('mousedown', this.#emulateActive);
+      this.host.addEventListener('keyup', this.#emulateInactive);
+      this.host.addEventListener('blur', this.#emulateInactive);
+      this.host.addEventListener('mouseup', this.#emulateInactive);
+      this.#initialized = true;
+    }
   }
 
-  #emulateActive(e: KeyboardEvent | PointerEvent) {
+  hostDisconnected() {
+    this.host.removeEventListener('keypress', this.#emulateActive);
+    this.host.removeEventListener('mousedown', this.#emulateActive);
+    this.host.removeEventListener('keyup', this.#emulateInactive);
+    this.host.removeEventListener('blur', this.#emulateInactive);
+    this.host.removeEventListener('mouseup', this.#emulateInactive);
+  }
+
+  #emulateActive = (e: KeyboardEvent | PointerEvent) => {
     if (!this.host.disabled && this.#isValidKeyEvent(e)) {
       this.host._internals.states.add('active');
     }
@@ -35,11 +47,11 @@ export class StateActiveController<T extends Active> implements ReactiveControll
     if (e instanceof KeyboardEvent && e.code === 'Space' && e.target === this.host) {
       e.preventDefault(); // prevent space bar scroll with standard button behavior
     }
-  }
+  };
 
-  #emulateInactive() {
+  #emulateInactive = () => {
     this.host._internals.states.delete('active');
-  }
+  };
 
   #isValidKeyEvent(e: KeyboardEvent | PointerEvent) {
     return e instanceof KeyboardEvent ? e.code === 'Space' || e.code === 'Enter' : true;
