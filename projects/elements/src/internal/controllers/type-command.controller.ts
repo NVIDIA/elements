@@ -28,16 +28,19 @@ export class TypeCommandController<T extends Command> implements ReactiveControl
     this.#updateListener();
   }
 
+  hostDisconnected() {
+    this.host.removeEventListener('click', this.#triggerCommand);
+  }
+
   #updateListener() {
     if (!this.host.readonly && !this.host.disabled) {
-      this.host.addEventListener('click', this.#triggerCommandFn);
+      this.host.addEventListener('click', this.#triggerCommand);
     } else {
-      this.host.removeEventListener('click', this.#triggerCommandFn);
+      this.host.removeEventListener('click', this.#triggerCommand);
     }
   }
 
-  #triggerCommandFn = this.#triggerCommand.bind(this);
-  #triggerCommand() {
+  #triggerCommand = () => {
     if (this.host.commandFor && globalThis.CommandEvent) {
       const match = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(el => el.id === this.host.commandFor);
       if (!match) {
@@ -46,5 +49,5 @@ export class TypeCommandController<T extends Command> implements ReactiveControl
         match.dispatchEvent(new globalThis.CommandEvent('command', { command: this.host.command, source: this.host }));
       }
     }
-  }
+  };
 }
