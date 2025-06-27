@@ -20,22 +20,27 @@ export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> 
   }
 
   hostConnected() {
-    this.host.addEventListener('click', () => {
-      const id = this.host.popovertarget?.length ? this.host.popovertarget : this.host.popoverTargetElement?.id;
-
-      if (id && !this.host.disabled) {
-        const popover = getFlattenedDOMTree(this.host.getRootNode()).find(
-          e => e.id === id && sameRenderRoot(this.host, e)
-        );
-
-        if (this.host.popoverTargetAction === 'hide') {
-          popover?.hidePopover();
-        } else if (this.host.popoverTargetAction === 'show') {
-          popover?.showPopover();
-        } else {
-          popover?.togglePopover();
-        }
-      }
-    });
+    this.host.addEventListener('click', this.#click);
   }
+
+  hostDisconnected() {
+    this.host.removeEventListener('click', this.#click);
+  }
+
+  #click = () => {
+    const id = this.host.popovertarget?.length ? this.host.popovertarget : this.host.popoverTargetElement?.id;
+    if (id && !this.host.disabled) {
+      const popover = getFlattenedDOMTree(this.host.getRootNode()).find(
+        e => e.id === id && sameRenderRoot(this.host, e)
+      );
+
+      if (this.host.popoverTargetAction === 'hide') {
+        popover?.hidePopover();
+      } else if (this.host.popoverTargetAction === 'show') {
+        popover?.showPopover();
+      } else {
+        popover?.togglePopover();
+      }
+    }
+  };
 }

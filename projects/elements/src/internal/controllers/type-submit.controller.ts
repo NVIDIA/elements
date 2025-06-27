@@ -33,6 +33,10 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
     this.#setupNativeButtonBehavior();
   }
 
+  hostDisconnected() {
+    this.#removeNativeButtonBehavior();
+  }
+
   #setButtonType() {
     if (!this.host.type && !this.host.hasAttribute('type') && this.host.closest('form')) {
       this.host.type = 'submit';
@@ -40,24 +44,24 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
   }
 
   #setupNativeButtonBehavior() {
+    this.#removeNativeButtonBehavior();
     if (!this.host.readonly && !this.host.disabled) {
-      this.host.addEventListener('click', this.#triggerNativeButtonBehaviorFn);
-      this.host.addEventListener('keyup', this.#emulateKeyBoardEventBehaviorFn);
-    } else {
-      this.host.removeEventListener('click', this.#triggerNativeButtonBehaviorFn);
-      this.host.removeEventListener('keyup', this.#emulateKeyBoardEventBehaviorFn);
+      this.host.addEventListener('click', this.#triggerNativeButtonBehavior);
+      this.host.addEventListener('keyup', this.#emulateKeyBoardEventBehavior);
     }
   }
 
-  #triggerNativeButtonBehaviorFn = this.#triggerNativeButtonBehavior.bind(this);
-  #emulateKeyBoardEventBehaviorFn = this.#emulateKeyBoardEventBehavior.bind(this);
-
-  // when submitting forms with Enter key, default submit button receives click event from the form
-  #emulateKeyBoardEventBehavior(event: KeyboardEvent) {
-    onKeys(['Enter', 'Space'], event, () => this.host.click());
+  #removeNativeButtonBehavior() {
+    this.host.removeEventListener('click', this.#triggerNativeButtonBehavior);
+    this.host.removeEventListener('keyup', this.#emulateKeyBoardEventBehavior);
   }
 
-  #triggerNativeButtonBehavior(event: Event) {
+  // when submitting forms with Enter key, default submit button receives click event from the form
+  #emulateKeyBoardEventBehavior = (event: KeyboardEvent) => {
+    onKeys(['Enter', 'Space'], event, () => this.host.click());
+  };
+
+  #triggerNativeButtonBehavior = (event: Event) => {
     if (this.host.disabled) {
       stopEvent(event);
       return;
@@ -68,7 +72,7 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
     } else if (this.host.type === 'reset') {
       this.host.form?.reset();
     }
-  }
+  };
 
   #requestSubmit() {
     this.#createSubmitter();
