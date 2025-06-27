@@ -29,14 +29,7 @@
       "command": "pnpm exec eleventy --incremental --serve --port=8082",
       "service": true,
       "dependencies": [
-        "../elements:build",
-        "../styles:build",
-        "../themes:build",
-        "../labs/code:build",
-        "../labs/forms:build",
-        "../monaco:build",
-        "../internals/metadata:build",
-        "../internals/patterns:build"
+        "build"
       ],
       "env": {
         "PAGES_BASE_URL": {
@@ -63,6 +56,7 @@
         "../styles:build",
         "../themes:build",
         "../labs/code:build",
+        "../labs/forms:build",
         "../monaco:build",
         "../internals/metadata:build",
         "../internals/patterns:build"
