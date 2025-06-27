@@ -27,6 +27,7 @@ nve-icon {
   --color: var(--nve-sys-support-warning-emphasis-color);
 }
 
-:host([status='error']) {
+:host([status='error']),
+:host([error]) {
   --color: var(--nve-sys-support-danger-emphasis-color);
 }
