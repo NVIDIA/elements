@@ -122,7 +122,7 @@ export class Accordion extends LitElement implements ContainerElement {
   static readonly metadata = {
     tag: 'nve-accordion',
     version: '0.0.0',
-    children: [AccordionHeader.metadata.tag, AccordionContent.metadata.tag]
+    children: [AccordionHeader.metadata.tag, AccordionContent.metadata.tag, IconButton.metadata.tag]
   };
 
   static elementDefinitions = {
