@@ -11,7 +11,6 @@ import {
   showNonValidationMessages,
   hideAllValidationMessages,
   showActiveValidationMessages,
-  hideAllControlMessages,
   hideInactiveValidationMessages
 } from './states.js';
 import '@nvidia-elements/core/forms/define.js';
@@ -52,6 +51,54 @@ describe('updateControlStatusState', () => {
       updateControlStatusState(control, message);
       expect(control.matches(':state(error)')).toBe(false);
       expect(control.matches(':state(success)')).toBe(true);
+    });
+
+    it('should add/remove success states if added or removed', async () => {
+      expect(control.matches(':state(error)')).toBe(false);
+      expect(control.matches(':state(success)')).toBe(false);
+
+      message.status = 'success';
+      updateControlStatusState(control, message);
+      expect(control.matches(':state(error)')).toBe(false);
+      expect(control.matches(':state(success)')).toBe(true);
+
+      message.remove();
+      control.shadowRoot.dispatchEvent(new Event('slotchange'));
+      await elementIsStable(control);
+
+      expect(control.matches(':state(error)')).toBe(false);
+      expect(control.matches(':state(success)')).toBe(false);
+
+      control.appendChild(message);
+      control.shadowRoot.dispatchEvent(new Event('slotchange'));
+      await elementIsStable(control);
+
+      expect(control.matches(':state(error)')).toBe(false);
+      expect(control.matches(':state(success)')).toBe(true);
+    });
+
+    it('should add/remove error states if added or removed', async () => {
+      expect(control.matches(':state(error)')).toBe(false);
+      expect(control.matches(':state(success)')).toBe(false);
+
+      message.status = 'error';
+      updateControlStatusState(control, message);
+      expect(control.matches(':state(error)')).toBe(true);
+      expect(control.matches(':state(success)')).toBe(false);
+
+      message.remove();
+      control.shadowRoot.dispatchEvent(new Event('slotchange'));
+      await elementIsStable(control);
+
+      expect(control.matches(':state(error)')).toBe(false);
+      expect(control.matches(':state(success)')).toBe(false);
+
+      control.appendChild(message);
+      control.shadowRoot.dispatchEvent(new Event('slotchange'));
+      await elementIsStable(control);
+
+      expect(control.matches(':state(error)')).toBe(true);
+      expect(control.matches(':state(success)')).toBe(false);
     });
   });
 });
@@ -111,6 +158,7 @@ describe('setupControlValidationStates', () => {
   let input: HTMLInputElement;
   let control: Control;
   let message: ControlMessage;
+  let validationMessage: ControlMessage;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
@@ -119,6 +167,7 @@ describe('setupControlValidationStates', () => {
           <label>label</label>
           <input type="text" required value="" />
           <nve-control-message>message</nve-control-message>
+          <nve-control-message error="valueMissing">required</nve-control-message>
         </nve-control>
       </form>
     `);
@@ -126,7 +175,7 @@ describe('setupControlValidationStates', () => {
     message = fixture.querySelector(ControlMessage.metadata.tag);
     form = fixture.querySelector('form');
     input = fixture.querySelector('input');
-    setupControlValidationStates(control, [message]);
+    validationMessage = fixture.querySelector(`${ControlMessage.metadata.tag}[error="valueMissing"]`);
     await elementIsStable(control);
   });
 
@@ -141,8 +190,8 @@ describe('setupControlValidationStates', () => {
     expect(control._internals.states.has('invalid')).toBe(true);
     expect(control._internals.states.has('valid')).toBe(false);
     expect(control.status).toBe('error');
-    expect(message.hidden).toBe(false);
-    expect(message.hasAttribute('hidden')).toBe(false);
+    expect(getComputedStyle(message).display).toBe('none');
+    expect(validationMessage.hidden).toBe(false);
 
     control.input.value = 'test';
     control.input.dispatchEvent(new Event('blur'));
@@ -151,6 +200,8 @@ describe('setupControlValidationStates', () => {
     expect(control._internals.states.has('invalid')).toBe(false);
     expect(control._internals.states.has('valid')).toBe(true);
     expect(control.status).toBe(null);
+    expect(getComputedStyle(message).display).toBe('block');
+    expect(validationMessage.hidden).toBe(true);
   });
 
   it('should reset validation state on input', async () => {
@@ -189,6 +240,7 @@ describe('setupControlValidationStates', () => {
     control.input.dispatchEvent(new Event('invalid'));
     await elementIsStable(control);
     expect(message.hidden).toBe(false);
+    expect(validationMessage.hidden).toBe(true);
   });
 });
 
@@ -344,32 +396,6 @@ describe('showActiveValidationMessages', () => {
     expect(messages[1].hidden).toBe(true);
     expect(messages[0].hasAttribute('hidden')).toBe(false);
     expect(messages[1].hasAttribute('hidden')).toBe(true);
-  });
-});
-
-describe('hideAllControlMessages', () => {
-  it('should hide all control messages', async () => {
-    const messages = [
-      document.createElement(ControlMessage.metadata.tag) as ControlMessage,
-      document.createElement(ControlMessage.metadata.tag) as ControlMessage
-    ];
-
-    document.body.append(...messages);
-
-    expect(messages[0].hidden).toBe(false);
-    expect(messages[1].hidden).toBe(false);
-    expect(messages[0].hasAttribute('hidden')).toBe(false);
-    expect(messages[1].hasAttribute('hidden')).toBe(false);
-
-    hideAllControlMessages(messages);
-
-    expect(messages[0].hidden).toBe(true);
-    expect(messages[1].hidden).toBe(true);
-    expect(messages[0].hasAttribute('hidden')).toBe(true);
-    expect(messages[1].hasAttribute('hidden')).toBe(true);
-
-    messages[0].remove();
-    messages[1].remove();
   });
 });
 
