@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.37.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.37.1...@nvidia-elements/core-v1.37.2) (2025-06-28)
+
+
+### Bug Fixes
+
+* **elements:** accordion [secure] positive audit warning ([8c9cd6e](https://github.com/NVIDIA/elements/commit/8c9cd6ea9ef657ddcdc41b63a319f4014713f272))
+
 ## [@nvidia-elements/core-v1.37.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.37.0...@nvidia-elements/core-v1.37.1) (2025-06-10)
 
 
