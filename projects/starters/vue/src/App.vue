@@ -64,9 +64,15 @@ import '@nvidia-elements/core/logo/define.js';
             </a>
           </nve-menu-item>
           <nve-menu-item>
-            <a href="../buildless/">
+            <a href="../importmaps/">
               <img src="/javascript.svg" width="18px" height="18px" alt="javascript logo" />
-              Buildless
+              Import Maps
+            </a>
+          </nve-menu-item>
+          <nve-menu-item>
+            <a href="../bundles/">
+              <img src="/javascript.svg" width="18px" height="18px" alt="javascript logo" />
+              Bundles
             </a>
           </nve-menu-item>
           <nve-menu-item>

@@ -30,10 +30,10 @@ export const libraryBundleConfig = {
     rollupOptions: {
       output: {
         format: 'esm',
-        assetFileNames: `index.${packageFile.version}.[ext]`,
-        entryFileNames: `index.${packageFile.version}.js`,
+        assetFileNames: `index.[ext]`,
+        entryFileNames: `index.js`,
         inlineDynamicImports: false,
-        chunkFileNames: info => `${info.name ? info.name : 'index'}.${packageFile.version}.js`
+        chunkFileNames: info => `${info.name ? info.name : 'index'}.js`
       },
       plugins: [
         minifyHTML(),

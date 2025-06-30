@@ -1,12 +1,11 @@
 import { expect, test, describe } from 'vitest';
 import { lighthouseRunner } from '@internals/vite';
-import packageJson from '../package.json';
 
 describe('lighthouse report', () => {
   test('CSS bundles should remain within compressed bundle limits', async () => {
-    const report = await lighthouseRunner.getReport(`bundles/index.${packageJson.version}.css`, /* html */`
+    const report = await lighthouseRunner.getReport(`bundles/index.css`, /* html */`
       <script type="module">
-        import('@nvidia-elements/core/bundles/index.${packageJson.version}.css');
+        import('@nvidia-elements/core/bundles/index.css');
       </script>
     `);
 
@@ -15,9 +14,9 @@ describe('lighthouse report', () => {
   });
 
   test('JS Bundles should remain within compressed bundle limits', async () => {
-    const report = await lighthouseRunner.getReport(`bundles/index.${packageJson.version}.js`, /* html */`
+    const report = await lighthouseRunner.getReport(`bundles/index.js`, /* html */`
       <script type="module">
-      import '@nvidia-elements/core/bundles/index.${packageJson.version}.js';
+      import '@nvidia-elements/core/bundles/index.js';
       </script>
     `);
 

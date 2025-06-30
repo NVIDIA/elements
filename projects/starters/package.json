@@ -25,7 +25,8 @@
       "dependencies": [
         "../internals/metadata:build",
         "./angular:build",
-        "./buildless:build",
+        "./bundles:build",
+        "./importmaps:build",
         "./eleventy:build",
         "./eleventy-ssr:build",
         "./lit-library:build",
