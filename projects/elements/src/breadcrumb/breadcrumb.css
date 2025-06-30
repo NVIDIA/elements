@@ -34,11 +34,9 @@ li {
   --padding: 0 var(--nve-ref-size-100);
   --height: var(--breadcrumb-height);
   --font-weight: var(--nve-ref-font-weight-medium);
-}
-
-::slotted(nve-button:hover),
-::slotted(nve-button:hover) {
-  --text-decoration: underline;
+  --text-decoration: none !important;
+  --_border-bottom-offset: -0.5;
+  --_border-bottom-width: 85%;
 }
 
 ::slotted(nve-icon-button),

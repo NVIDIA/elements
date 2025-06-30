@@ -3,11 +3,11 @@ nve-tree-node:not(:has(> [slot='content']))::part(_content) {
 }
 
 nve-tree-node:not(:has(> [slot='nodes']))::part(_nodes) {
-  display: none;
+  height: 0;
 }
 
 nve-tree-node:has(> [slot='nodes']):not([expanded])::part(_nodes) {
-  display: none;
+  height: 0;
 }
 
 nve-tree-node > nve-tree-node:state(is-expandable) {
