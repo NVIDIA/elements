@@ -9,6 +9,10 @@
   --_icon-color: var(--color);
 }
 
+[internal-host]::after {
+  display: none !important;
+}
+
 :host([size='sm']) {
   --height: var(--nve-ref-size-700);
   --min-width: var(--nve-ref-size-700);
