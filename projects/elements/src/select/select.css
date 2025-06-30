@@ -50,6 +50,7 @@
   align-self: center;
   pointer-events: none;
   position: absolute;
+  transition: transform var(--nve-ref-animation-duration-200) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 ::slotted(select) {

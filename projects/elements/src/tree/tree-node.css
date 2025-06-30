@@ -77,6 +77,15 @@ slot:not(:has-slotted) {
   position: relative;
   display: block;
   padding-left: var(--nve-ref-size-200);
+  overflow: hidden;
+  transition: height var(--nve-ref-animation-duration-200) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:host([expanded]) [part='_nodes'] {
+  /* fallback for browsers that do not support intrinsic sizing keywords with calc-size() */
+  height: auto;
+  /* https://developer.chrome.com/docs/css-ui/animate-to-height-auto#animate_to_and_from_intrinsic_sizing_keywords_with_calc-size */
+  height: calc-size(max-content, size);
 }
 
 [part='_nodes']::before {
@@ -92,6 +101,10 @@ slot:not(:has-slotted) {
 nve-icon-button {
   --width: var(--nve-ref-size-400);
   outline: 0 !important;
+}
+
+nve-icon[name='caret'] {
+  transition: transform var(--nve-ref-animation-duration-150) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 nve-checkbox {

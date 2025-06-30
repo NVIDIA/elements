@@ -83,6 +83,10 @@ export class Select extends Control {
     return this.shadowRoot.querySelector('.tags');
   }
 
+  get #caret() {
+    return this.shadowRoot.querySelector<Icon>('[name="caret"]');
+  }
+
   get #placeholderOption() {
     return this.#options.find(o => o.selected && o.hidden && o.disabled);
   }
@@ -132,7 +136,19 @@ export class Select extends Control {
     return this.#select?.size === 0
       ? html`
       <nve-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></nve-icon>
-      <nve-dropdown @close=${e => (e.target.hidden = true)} @open=${e => (e.target.hidden = false)} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
+      <nve-dropdown 
+        @close=${(e: { target: Dropdown }) => {
+          e.target.hidden = true;
+          this.#caret.direction = 'down';
+        }} 
+        @open=${(e: { target: Dropdown }) => {
+          e.target.hidden = false;
+          this.#caret.direction = 'up';
+        }}
+        hidden 
+        .anchor=${this.#input as HTMLElement} 
+        .trigger=${this.#input as HTMLElement} 
+        position="bottom">
         ${this.#menu}
       </nve-dropdown>`
       : this.#menu;
