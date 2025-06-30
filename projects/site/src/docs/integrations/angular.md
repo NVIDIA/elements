@@ -117,15 +117,18 @@ export class AppComponent  {
 </nve-alert-group>
 
 Angular 12 is not officially supported due to its older dependencies (ESBuild, Webpack) not supporting browser standard JavaScript (es2020) and CSS features.
-To use elements in Angular 12 when upgrading is not possible, the [static import bundles](https://github.com/NVIDIA/elements/-/tree/main/projects/starters/static?ref_type=heads) can be copied into the Angular CLI assets and referenced.
+To use elements in Angular 12 when upgrading is not possible, the [static import bundles](https://github.com/NVIDIA/elements/-/tree/main/projects/starters/bundles) can be copied into the Angular CLI assets and referenced.
 
 <nve-alert status="warning">Static bundles are strongly discouraged as it will include all component code and not support any performance optimizations
 such as tree-shaking.</nve-alert>
 
 ```json
 "assets": [
-  "@nvidia-elements/core/bundles/elements.0.30.0.bundle.css",
-  "@nvidia-elements/core/bundles/elements.0.30.0.bundle.js"
+  {
+    "glob": "**/*",
+    "input": "@nvidia-elements/core/bundles/",
+    "output": "/assets/elements/"
+  }
 ]
 ```
 
@@ -133,11 +136,11 @@ such as tree-shaking.</nve-alert>
 <!doctype html>
 <html lang="en" nve-theme="dark">
   <head>
-    <link rel="stylesheet" href="assets/elements.0.30.0.bundle.css" />
+    <link rel="stylesheet" href="/assets/elements/index.css" />
   </head>
   <body nve-layout="column gap:md pad:lg">
     <nve-alert>hello there</nve-alert>
-    <script type="module" src="/assets/elements.0.30.0.bundle.js"></script>
+    <script type="module" src="/assets/elements/index.js"></script>
   </body>
 </html>
 ```

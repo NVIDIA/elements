@@ -53,15 +53,15 @@ export function render(data) {
       </div>
     </nve-card>
   </a>
-  <a href="starters/angular/">
+  <a href="starters/bundles/">
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/static/images/integrations/angular.svg" width="36px" height="36px" alt="angular logo" />
+          <img src="/static/images/integrations/javascript.svg" width="36px" height="36px" alt="javascript logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Angular</h2>
-          <p nve-text="body sm muted">Single Page Application Framework.</p>
+          <h2 nve-text="label medium">Bundles</h2>
+          <p nve-text="body sm muted">Starter using static pre built bundles.</p>
         </div>
       </div>
     </nve-card>
@@ -75,6 +75,19 @@ export function render(data) {
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Eleventy</h2>
           <p nve-text="body sm muted">Starter leveraging Eleventy and Vite.</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="starters/angular/">
+    <nve-card>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg">
+          <img src="/static/images/integrations/angular.svg" width="36px" height="36px" alt="angular logo" />
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">Angular</h2>
+          <p nve-text="body sm muted">Single Page Application Framework.</p>
         </div>
       </div>
     </nve-card>
@@ -131,15 +144,15 @@ export function render(data) {
       </div>
     </nve-card>
   </a>
-  <a href="starters/buildless/">
+  <a href="starters/importmaps/">
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
           <img src="/static/images/integrations/javascript.svg" width="36px" height="36px" alt="javascript logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
-          <h2 nve-text="label medium">Buildless</h2>
-          <p nve-text="body sm muted">Starter leveraging standard JavaScript via a CDN.</p>
+          <h2 nve-text="label medium">Import Maps</h2>
+          <p nve-text="body sm muted">Starter leveraging import maps and ESM.sh</p>
         </div>
       </div>
     </nve-card>
