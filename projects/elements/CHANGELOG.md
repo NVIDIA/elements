@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.37.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.37.2...@nvidia-elements/core-v1.37.3) (2025-06-30)
+
+
+### Bug Fixes
+
+* **elements:** control message status ([b488cbe](https://github.com/NVIDIA/elements/commit/b488cbede30857d94bd7ed71ea27850a99d6e194))
+
 ## [@nvidia-elements/core-v1.37.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.37.1...@nvidia-elements/core-v1.37.2) (2025-06-28)
 
 
