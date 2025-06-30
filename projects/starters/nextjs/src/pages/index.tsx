@@ -82,9 +82,15 @@ export default function Home() {
               </a>
             </nve-menu-item>
             <nve-menu-item>
-              <a href="/elements/starters/buildless/">
+              <a href="/elements/starters/importmaps/">
                 <img src="/elements/starters/nextjs/javascript.svg" width="18px" height="18px" alt="javascript logo" />
-                Buildless
+                Import Maps
+              </a>
+            </nve-menu-item>
+            <nve-menu-item>
+              <a href="/elements/starters/bundles/">
+                <img src="/elements/starters/nextjs/javascript.svg" width="18px" height="18px" alt="javascript logo" />
+                Bundles
               </a>
             </nve-menu-item>
             <nve-menu-item>

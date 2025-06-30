@@ -1,4 +1,4 @@
-# Static Bundle
+# Bundles
 
 [Built with Vite](https://vitejs.dev/)
 
@@ -28,12 +28,12 @@ Copy the bundles into your environment:
 <!DOCTYPE html>
 <html lang="en" nve-theme="dark">
   <head>
-    <link rel="stylesheet" href="./elements.[version].bundle.css">
+    <link rel="stylesheet" href="node_modules/@nvidia-elements/core/bundles/index.css">
   </head>
   <body nve-text="body">
     <nve-alert>hello there</nve-alert>
 
-    <script type="module" src="./elements.[version].bundle.js"></script>
+    <script type="module" src="node_modules/@nvidia-elements/core/bundles/index.js"></script>
   </body>
 </html>
 ```
