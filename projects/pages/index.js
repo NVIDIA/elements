@@ -16,7 +16,8 @@ cpSync('../internals/metadata/static/index.json', './dist/metadata/index.json');
 
 cpSync('../starters/dist/', './dist/starters/download/', { recursive: true });
 cpSync('../starters/angular/dist/angular-app/browser/', './dist/starters/angular/', { recursive: true });
-cpSync('../starters/buildless/dist/', './dist/starters/buildless/', { recursive: true });
+cpSync('../starters/bundles/dist/', './dist/starters/bundles/', { recursive: true });
+cpSync('../starters/importmaps/dist/', './dist/starters/importmaps/', { recursive: true });
 cpSync('../starters/eleventy/dist/', './dist/starters/eleventy/', { recursive: true });
 cpSync('../starters/mpa/dist/', './dist/starters/mpa/', { recursive: true });
 cpSync('../starters/nextjs/dist/', './dist/starters/nextjs/', { recursive: true });

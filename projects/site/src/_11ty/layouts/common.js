@@ -110,11 +110,12 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/about/deprecations/') ? 'highlighted' : ''}><a href="docs/about/deprecations/">Deprecations</a></nve-tree-node>
   </nve-tree-node>
   
-  <nve-tree-node ${data.page.url.includes('/docs/integrations/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/integrations/') || data.page.url.includes('/starters/') ? 'expanded' : ''}>
     Integrations
     <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted' : ''}><a href="docs/integrations/angular/">Angular</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/buildless/') ? 'highlighted' : ''}><a href="docs/integrations/buildless/">Buildless</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'highlighted' : ''}><a href="docs/integrations/bundles/">Bundles</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/extensions/') ? 'highlighted' : ''}><a href="docs/integrations/extensions/">Extensions</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/importmaps/') ? 'highlighted' : ''}><a href="docs/integrations/importmaps/">Import Maps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/lit/') ? 'highlighted' : ''}><a href="docs/integrations/lit/">Lit</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/nextjs/') ? 'highlighted' : ''}><a href="docs/integrations/nextjs/">NextJS</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/preact/') ? 'highlighted' : ''}><a href="docs/integrations/preact/">Preact</a></nve-tree-node>

@@ -1,6 +1,6 @@
 ---
 {
-  title: 'Buildless Integration',
+  title: 'Import Maps Integration',
   layout: 'docs.11ty.js'
 }
 ---
@@ -11,22 +11,21 @@
 
 <div nve-layout="row gap:xs">
   <nve-button>
-    <a href="https://NVIDIA.github.io/elements/starters/buildless/" target="_blank"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> Demo</a>
+    <a href="https://NVIDIA.github.io/elements/starters/importmaps/" target="_blank"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> Demo</a>
   </nve-button>
 
   <nve-button>
     <nve-icon name="download" size="sm"></nve-icon>
-    <a href="https://NVIDIA.github.io/elements/starters/download/buildless.zip" target="_blank">Download</a>
+    <a href="https://NVIDIA.github.io/elements/starters/download/importmaps.zip" target="_blank">Download</a>
   </nve-button>
   
   <nve-button>
     <nve-icon name="code"></nve-icon>
-    <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/buildless" target="_blank">Source</a>
+    <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/importmaps" target="_blank">Source</a>
   </nve-button>
 </div>
 
-Using [Import Maps](https://web.dev/import-maps-in-all-modern-browsers/) it is possible to
-use elements without build tooling such as Vite or Rollup for easy in browser **prototyping**.
+Using [Import Maps](https://web.dev/import-maps-in-all-modern-browsers/) it is possible to use elements without build tooling such as Vite or Rollup for easy in browser **prototyping**.
 
 ```html
 <!DOCTYPE html>
@@ -58,9 +57,11 @@ use elements without build tooling such as Vite or Rollup for easy in browser **
 
 Using import maps more complex UI components can be created without build tooling.
 
-<nve-button>
-    <a href="https://elements-stage.nvidia.com/ui/elements-playground/91017958-e474-4f1a-9d9c-107d0ad7db8b" target="_blank">Playground</a>
-</nve-button>
+<div>
+  <nve-button>
+    <a href="https://elements-stage.nvidia.com/ui/elements-playground/59d28a7e-8032-407d-9dd3-53b69725a0f3" target="_blank">Playground</a>
+  </nve-button>
+</div>
 
 ```html
 <!DOCTYPE html>
