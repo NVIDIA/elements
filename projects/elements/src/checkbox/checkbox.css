@@ -9,6 +9,7 @@
   --check-color: transparent;
   display: inline-block;
   contain: layout;
+  will-change: transform, border-color;
 }
 
 ::slotted(input) {
@@ -26,7 +27,21 @@
   position: relative;
 }
 
+@keyframes selectPop {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 [input] slot {
+  align-items: center;
+  position: relative;
   width: var(--width);
   height: var(--height);
   border: var(--border-width) solid var(--border-color);
@@ -34,15 +49,53 @@
   border-radius: var(--border-radius);
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+  transition:
+    transform var(--nve-ref-animation-duration-200) cubic-bezier(0.12, 0.32, 0.54, 2),
+    border-color var(--nve-ref-animation-duration-150) ease;
 }
 
 [input] slot::before {
   content: '';
-  width: calc(var(--width) / 1.5);
-  height: calc(var(--height) / 1.5);
-  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-  margin-left: var(--nve-ref-space-xxxs);
+  width: calc(var(--width) * 0.7);
+  height: calc(var(--width) * 0.7 / 1.369);
+  aspect-ratio: 1.369;
   pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Fallback for browsers that don't support clip-path: shape(). Use polygon-based checkmark as fallback */
+@supports not (clip-path: shape(from 0% 0%, line to 100% 100%)) {
+  [input] slot::before {
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    width: calc(var(--width) * 0.6);
+    height: calc(var(--width) * 0.6);
+    aspect-ratio: 1;
+  }
+}
+
+/* Modern browsers with shape() support */
+@supports (clip-path: shape(from 0% 0%, line to 100% 100%)) {
+  [input] slot::before {
+    clip-path: shape(
+      from 98.17% 2.51%,
+      arc by 0% 12.12% of 8% 8.57% small cw,
+      line by -60.51% 82.87%,
+      arc by -8.85% 0% of 8% 8.57% small cw,
+      line to 1.68% 60.34%,
+      arc by 0.15% -11.91% of 8% 8.58% small cw,
+      arc by 8.7% -0.21% of 8% 8.58% small cw,
+      line to 33.23% 79.32%,
+      line by 56.09% -76.81%,
+      arc by 8.85% 0% of 8% 8.57% small cw,
+      close
+    );
+  }
 }
 
 :host(:state(checked)) {
@@ -53,6 +106,7 @@
 
 :host(:state(checked)) [input] slot {
   border: 0;
+  animation: selectPop var(--nve-ref-animation-duration-200) ease-out;
 }
 
 :host(:state(checked)) [input] slot::before {
@@ -79,12 +133,11 @@
   background: var(--nve-sys-interaction-color);
   content: '';
   display: inline-block;
+  width: calc(var(--width) * 0.5);
   height: var(--border-width);
-  top: 7px;
-  left: 3px;
-  z-index: 99;
-  width: 10px;
-  margin: 0 auto;
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: none;
 }

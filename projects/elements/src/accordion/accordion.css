@@ -71,3 +71,7 @@
 :host(:not([disabled])) #header:hover nve-icon-button {
   --color: var(--nve-sys-text-emphasis-color);
 }
+
+nve-icon-button::part(icon) {
+  transition: transform var(--nve-ref-animation-duration-200) cubic-bezier(0.4, 0, 0.2, 1);
+}
