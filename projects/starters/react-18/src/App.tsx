@@ -75,9 +75,15 @@ function App() {
               </a>
             </NveMenuItem>
             <NveMenuItem>
-              <a href="/elements/starters/buildless/">
+              <a href="/elements/starters/importmaps/">
                 <img src="/elements/starters/react/javascript.svg" width="18px" height="18px" alt="javascript logo" />
-                Buildless
+                Import Maps
+              </a>
+            </NveMenuItem>
+            <NveMenuItem>
+              <a href="/elements/starters/bundles/">
+                <img src="/elements/starters/react/javascript.svg" width="18px" height="18px" alt="javascript logo" />
+                Bundles
               </a>
             </NveMenuItem>
             <NveMenuItem>

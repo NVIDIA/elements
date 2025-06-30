@@ -1,5 +1,5 @@
 {
-  "name": "static-starter",
+  "name": "bundles-starter",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -18,6 +18,11 @@
     "vite": "catalog:"
   },
   "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
     "build": {
       "command": "vite build",
       "files": [

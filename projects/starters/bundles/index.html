@@ -1,13 +1,12 @@
 <!doctype html>
 <html lang="en" nve-theme="dark" nve-transition="auto">
   <head>
-    <title>Elements + Multi Page App</title>
+    <title>Elements + Static Bundles</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A simple starter using Elements in a Multi Page App." />
+    <meta name="description" content="A simple starter using Elements and JS Bundles." />
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
-    <link rel="stylesheet" href="/index.css" />
-    <script type="module" src="/index.ts"></script>
+    <link rel="stylesheet" href="./node_modules/@nvidia-elements/core/dist/bundles/index.css" />
   </head>
   <body>
     <nve-page>
@@ -31,78 +30,73 @@
           <nve-menu>
             <nve-menu-item>
               <a href="../typescript/">
-                <img src="/typescript.svg" width="18px" height="18px" alt="typescript logo" />
+                <img src="assets/typescript.svg" width="18px" height="18px" alt="typescript logo" />
                 TypeScript
               </a>
             </nve-menu-item>
             <nve-menu-item>
               <a href="../eleventy/">
-                <img src="/eleventy.svg" width="18px" height="18px" alt="eleventy logo" />
+                <img src="assets/eleventy.svg" width="18px" height="18px" alt="eleventy logo" />
                 Eleventy
               </a>
             </nve-menu-item>
             <nve-menu-item>
               <a href="../angular/">
-                <img src="/angular.svg" width="18px" height="18px" alt="angular logo" />
+                <img src="assets/angular.svg" width="18px" height="18px" alt="angular logo" />
                 Angular
               </a>
             </nve-menu-item>
             <nve-menu-item>
               <a href="../vue/">
-                <img src="/vue.svg" width="18px" height="18px" alt="vue logo" />
+                <img src="assets/vue.svg" width="18px" height="18px" alt="vue logo" />
                 Vue
               </a>
             </nve-menu-item>
             <nve-menu-item>
               <a href="../react/">
-                <img src="/react.svg" width="18px" height="18px" alt="react logo" />
+                <img src="assets/react.svg" width="18px" height="18px" alt="react logo" />
                 React
               </a>
             </nve-menu-item>
             <nve-menu-item>
               <a href="../solidjs/">
-                <img src="/solidjs.svg" width="18px" height="18px" alt="solidjs logo" />
+                <img src="assets/solidjs.svg" width="18px" height="18px" alt="solidjs logo" />
                 SolidJS
               </a>
             </nve-menu-item>
             <nve-menu-item>
               <a href="../importmaps/">
-                <img src="/javascript.svg" width="18px" height="18px" alt="javascript logo" />
+                <img src="assets/javascript.svg" width="18px" height="18px" alt="javascript logo" />
                 Import Maps
               </a>
             </nve-menu-item>
             <nve-menu-item>
-              <a href="../bundles/">
-                <img src="/javascript.svg" width="18px" height="18px" alt="javascript logo" />
-                Bundles
-              </a>
-            </nve-menu-item>
-            <nve-menu-item current="page">
               <nve-icon name="template"></nve-icon>
               <a href="../mpa/">MPA</a>
+            </nve-menu-item>
+            <nve-menu-item current="page">
+              <a href="../bundles/">
+                <img src="assets/javascript.svg" width="18px" height="18px" alt="javascript logo" />
+                Bundles
+              </a>
             </nve-menu-item>
           </nve-menu>
         </nve-page-panel-content>
       </nve-page-panel>
       <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
         <nve-breadcrumb>
-          <nve-button><a href=".">Elements</a></nve-button>
-          <nve-button><a href="../" target="_self">Starters</a></nve-button>
-          <span>MPA</span>
+          <nve-button><a href="../../../">Elements</a></nve-button>
+          <nve-button><a href="./" target="_self">Starters</a></nve-button>
+          <span>Bundles</span>
         </nve-breadcrumb>
-        <h1 nve-text="heading xl">Multi Page App</h1>
-        <nve-tabs>
-          <nve-tabs-item selected><a href="./">Home</a></nve-tabs-item>
-          <nve-tabs-item><a href="./about/">About</a></nve-tabs-item>
-          <nve-tabs-item><a href="./settings/">Settings</a></nve-tabs-item>
-        </nve-tabs>
-        <p nve-text="body">A simple starter using Elements in a Multi Page App built with Vite.</p>
+        <h1 nve-text="heading xl">Bundles</h1>
+        <p nve-text="body">A simple starter using Elements and static bundles.</p>
         <ul nve-text="list" nve-layout="column gap:xs">
           <li>
             <a
               nve-text="link"
               target="_blank"
-              href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/mpa"
+              href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/bundles"
               >Source</a
             >
           </li>
@@ -110,7 +104,7 @@
             <a
               nve-text="link"
               target="_blank"
-              href="https://NVIDIA.github.io/elements/docs/integrations/typescript/"
+              href="https://NVIDIA.github.io/elements/docs/integrations/bundles/"
               >Documentation</a
             >
           </li>
@@ -119,12 +113,15 @@
               download
               nve-text="link"
               target="_blank"
-              href="https://NVIDIA.github.io/elements/starters/download/mpa.zip"
+              href="https://NVIDIA.github.io/elements/starters/download/bundles.zip"
               >Download</a
             >
           </li>
         </ul>
       </main>
     </nve-page>
+    <script type="module">
+      import './node_modules/@nvidia-elements/core/dist/bundles/index.js';
+    </script>
   </body>
 </html>
