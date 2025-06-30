@@ -108,20 +108,22 @@ describe(TreeNode.metadata.tag, () => {
   });
 
   it('should show node group slot if expanded', async () => {
-    expect(getComputedStyle(nestedNodeElement.shadowRoot.querySelector<HTMLElement>('[part="_nodes"]')).display).toBe(
-      'none'
+    expect(getComputedStyle(nestedNodeElement.shadowRoot.querySelector<HTMLElement>('[part="_nodes"]')).height).toBe(
+      '0px'
     );
 
     nestedNodeElement.expanded = true;
     await elementIsStable(nestedNodeElement);
-    expect(getComputedStyle(nestedNodeElement.shadowRoot.querySelector<HTMLElement>('[part="_nodes"]')).display).toBe(
-      'block'
-    );
+    await new Promise(resolve => setTimeout(resolve, 250));
+    expect(
+      getComputedStyle(nestedNodeElement.shadowRoot.querySelector<HTMLElement>('[part="_nodes"]')).height
+    ).not.toBe('0px');
 
     nestedNodeElement.expanded = false;
     await elementIsStable(nestedNodeElement);
-    expect(getComputedStyle(nestedNodeElement.shadowRoot.querySelector<HTMLElement>('[part="_nodes"]')).display).toBe(
-      'none'
+    await new Promise(resolve => setTimeout(resolve, 250));
+    expect(getComputedStyle(nestedNodeElement.shadowRoot.querySelector<HTMLElement>('[part="_nodes"]')).height).toBe(
+      '0px'
     );
   });
 

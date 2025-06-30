@@ -289,3 +289,45 @@
 :host([interaction*='flat-emphasize']) {
   --color: var(--nve-sys-interaction-emphasis-background);
 }
+
+@keyframes inlineUnderline {
+  from {
+    transform: translateX(-50%) scaleX(0);
+  }
+  to {
+    transform: translateX(-50%) scaleX(1);
+  }
+}
+
+:host([container*='inline']) [internal-host]::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  /* private API for inline underline border-bottom to customize underline downstream */
+  bottom: calc(var(--_border-bottom-offset, -2) * var(--nve-ref-border-width-md));
+  width: var(--_border-bottom-width, 100%);
+  height: var(--nve-ref-border-width-md);
+  background-color: currentColor;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+  will-change: transform;
+  border-radius: var(--nve-ref-border-radius-full);
+}
+
+:host([container*='inline']:hover) [internal-host]::after,
+:host([container*='inline']:focus) [internal-host]::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+:host([container*='inline']:state(disabled)) [internal-host]::after {
+  display: none;
+}
+
+:host([container*='inline']) {
+  --text-decoration: none;
+}
+
+:host([container*='inline']:hover) {
+  --text-decoration: none;
+}
