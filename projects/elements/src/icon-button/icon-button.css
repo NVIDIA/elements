@@ -30,6 +30,9 @@
 [internal-host] {
   font-size: var(--font-size);
 }
+[internal-host]::after {
+  display: none !important;
+}
 
 nve-icon {
   --color: var(--_icon-color);
