@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.37.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.37.3...@nvidia-elements/core-v1.37.4) (2025-06-30)
+
+
+### Bug Fixes
+
+* **elements:** combobox default selection value ([6f56e9f](https://github.com/NVIDIA/elements/commit/6f56e9f6899b927e3321831ec02706f39d208894)), closes [#31](https://github.com/NVIDIA/elements/issues/31)
+
 ## [@nvidia-elements/core-v1.37.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.37.2...@nvidia-elements/core-v1.37.3) (2025-06-30)
 
 
