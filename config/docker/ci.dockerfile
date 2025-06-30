@@ -7,6 +7,7 @@ ENV PLAYWRIGHT_BROWSERS_PATH /var/cache/ms-playwright
 
 COPY package.json pnpm-lock.yaml ./
 
+# install/setup pnpm and playwright
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash && \
   apt-get update && apt-get -y upgrade && \
   # install common dependencies
@@ -23,3 +24,11 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
   # cleanup any files we don't need
   rm -rf package.json pnpm-lock.yaml node_modules /var/cache/pnpm-store && \
   apt-get -y autoremove --purge && apt-get -y clean
+
+# install/setup vault
+RUN curl https://registry.npmjs.org -L -o vault.zip || true \
+  unzip vault.zip -d /root || true \
+  cp /root/vault /usr/local/bin/vault \
+  rm vault.zip || true \
+  vault --version \
+  apt-get update && apt-get install -y jq
