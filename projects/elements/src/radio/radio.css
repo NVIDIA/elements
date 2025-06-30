@@ -8,6 +8,7 @@
   --background: transparent;
   display: inline-block;
   contain: layout;
+  will-change: transform, border-color;
 }
 
 ::slotted(input) {
@@ -26,6 +27,18 @@
   position: relative;
 }
 
+@keyframes radioSelectPop {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 [input] slot {
   width: var(--width);
   height: var(--height);
@@ -35,6 +48,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition:
+    transform var(--nve-ref-animation-duration-200) cubic-bezier(0.12, 0.32, 0.54, 2),
+    border-color var(--nve-ref-animation-duration-150) ease;
+  will-change: transform, border-color;
 }
 
 [input] slot::before {
@@ -42,6 +59,22 @@
   width: calc(var(--width) / 2);
   height: calc(var(--height) / 2);
   border-radius: var(--border-radius);
+  transform: scale(0);
+  opacity: 0;
+  transition:
+    transform var(--nve-ref-animation-duration-250) ease,
+    opacity var(--nve-ref-animation-duration-200) ease,
+    background-color var(--nve-ref-animation-duration-150) ease;
+}
+
+:host(:state(checked)) [input] slot {
+  animation: radioSelectPop var(--nve-ref-animation-duration-200) ease-out;
+}
+
+:host(:state(checked)) [input] slot::before {
+  background: var(--border-color);
+  transform: scale(1);
+  opacity: 1;
 }
 
 :host(:state(checked)) {
