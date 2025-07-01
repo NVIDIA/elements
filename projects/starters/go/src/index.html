@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" nve-theme="dark" nve-transition="auto">
+  <head>
+    <title>Elements + Go</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A simple starter using Elements and TypeScript." />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <link rel="stylesheet" type="text/css" href="/node_modules/@nvidia-elements/core/dist/bundles/index.css" />
+    <script type="module">
+      import '/node_modules/@nvidia-elements/core/dist/bundles/index.js';
+    </script>
+  </head>
+
+  <body nve-text="body">
+    <nve-page>
+      <nve-page-header slot="header">
+        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <a slot="prefix" href="https://NVIDIA.github.io/elements/">Elements</a>
+        <nve-button container="flat"
+          ><a href="https://NVIDIA.github.io/elements/docs/about/getting-started/"
+            >Catalog</a
+          ></nve-button
+        >
+        <nve-button container="flat">
+          <a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a>
+        </nve-button>
+        <nve-button selected container="flat">
+          <a href="https://NVIDIA.github.io/elements/starters/">Starters</a>
+        </nve-button>
+        <nve-button container="flat">
+          <a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a>
+        </nve-button>
+      </nve-page-header>
+      <main nve-layout="column gap:lg pad:lg full">
+        <h1 nve-text="heading">{{.Data.Title}}</h1>
+        <p nve-text="body">{{.Data.Description}}</p>
+        <p nve-text="body sm muted">Last updated: {{.Data.Date}}</p>
+
+        <ul nve-text="list" nve-layout="column gap:xs">
+          <li>
+            <a
+              nve-text="link"
+              target="_blank"
+              href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/go"
+              >Source</a
+            >
+          </li>
+          <li>
+            <a
+              nve-text="link"
+              target="_blank"
+              href="https://NVIDIA.github.io/elements/docs/integrations/go/"
+              >Documentation</a
+            >
+          </li>
+          <li>
+            <a
+              download
+              nve-text="link"
+              target="_blank"
+              href="https://NVIDIA.github.io/elements/starters/download/go.zip"
+              >Download</a
+            >
+          </li>
+        </ul>
+      </main>
+    </nve-page>
+  </body>
+</html>
