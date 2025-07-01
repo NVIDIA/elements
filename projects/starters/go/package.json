@@ -1,0 +1,16 @@
+{
+  "name": "go-starter",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Go starter",
+  "scripts": {
+    "dev": "go run main.go",
+    "build": "go build -o bin main.go",
+    "preview": "go build -o bin main.go && ./bin"
+  },
+  "dependencies": {
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*"
+  }
+}
