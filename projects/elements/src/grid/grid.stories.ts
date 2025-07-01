@@ -124,6 +124,13 @@ export const SingleSelect = {
 
 export const RowAction = {
   render: () => html`
+<nve-dropdown id="row-actions-dropdown" align="end">
+  <nve-menu>
+    <nve-menu-item>action 1</nve-menu-item>
+    <nve-menu-item>action 2</nve-menu-item>
+    <nve-menu-item>action 3</nve-menu-item>
+  </nve-menu>
+</nve-dropdown>
 <nve-grid>
   <nve-grid-header>
     ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column> `)}
@@ -133,7 +140,7 @@ export const RowAction = {
     <nve-grid-row>
       ${Array(5).fill('').map((_, c) => html`<nve-grid-cell>cell ${r}-${c}</nve-grid-cell> `)}
       <nve-grid-cell>
-        <nve-icon-button container="flat" icon-name="more-actions" aria-label="row ${r} actions"></nve-icon-button>
+        <nve-icon-button id="action-${r}" popovertarget="row-actions-dropdown" container="flat" icon-name="more-actions" aria-label="row ${r} actions"></nve-icon-button>
       </nve-grid-cell>
     </nve-grid-row>
   `)}

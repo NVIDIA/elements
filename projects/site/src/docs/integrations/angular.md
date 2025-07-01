@@ -1,39 +1,19 @@
 ---
 {
-  title: 'Angular Integration',
+  title: 'Angular',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-{% svg-logos 'angular' %}
+{% integration 'angular' %}
 
-<div nve-layout="row gap:xs">
-  <nve-button>
-    <svg width="18" height="18"><use href="#angular-svg"></use></svg>
-    <a target="_blank" href="{{ playground.angularPlaygroundURL }}">Playground</a>
-  </nve-button>
+{% installation %}
 
-  <nve-button>
-    <nve-icon name="browser"></nve-icon>
-    <a target="_blank" href="https://NVIDIA.github.io/elements/starters/angular/"> Demo</a>
-  </nve-button>
+## Integration
 
-  <nve-button>
-    <nve-icon name="download" size="sm"></nve-icon>
-    <a target="_blank" href="https://NVIDIA.github.io/elements/starters/download/angular.zip">Download</a>
-  </nve-button>
-
-  <nve-button>
-    <nve-icon name="code"></nve-icon>
-    <a target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/angular">Source</a>
-  </nve-button>
-</div>
-
-To use Elements in [Angular](https://angular.dev/) follow the [installation getting started](./docs/about/getting-started/) steps.
-
-Next import the element your Angular component and add `CUSTOM_ELEMENTS_SCHEMA` to the schemas to allow web components to be used within your template.
+To use Elements in your [Angular](https://angular.dev/) components and add `CUSTOM_ELEMENTS_SCHEMA` to the schemas to allow web components to be used within your template.
 
 ```typescript
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';

@@ -8,6 +8,7 @@ import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
 import { apiShortcode, storyShortcode, installShortcode } from './src/_11ty/shortcodes/index.js';
+import { renderInstallationShortcode, renderIntegrationShortcode } from './src/docs/integrations/shortcodes.js';
 import { svgLogosShortcode } from './src/_11ty/shortcodes/svg-logos.js';
 import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
@@ -95,9 +96,11 @@ export default function (eleventyConfig) {
   });
 
   // Add search plugin for documentation search functionality
-  eleventyConfig.addPlugin(searchPlugin, {
-    outputPath: './.11ty-vite/public/.pagefind'
-  });
+  if (process.env.ELEVENTY_RUN_MODE === 'build') {
+    eleventyConfig.addPlugin(searchPlugin, {
+      outputPath: './.11ty-vite/public/.pagefind'
+    });
+  }
 
   // Set custom markdown library
   eleventyConfig.setLibrary('md', markdown);
@@ -108,11 +111,16 @@ export default function (eleventyConfig) {
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
   eleventyConfig.addAsyncShortcode('install', installShortcode);
   eleventyConfig.addShortcode('svg-logos', svgLogosShortcode);
+  eleventyConfig.addShortcode('installation', renderInstallationShortcode);
+  eleventyConfig.addShortcode('integration', renderIntegrationShortcode);
 
   // Register custom transforms for content processing
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
   eleventyConfig.addTransform('anchor-generator', anchorGeneratorTransform);
-  eleventyConfig.addTransform('html-minify', htmlMinifyTransform);
+
+  if (process.env.ELEVENTY_RUN_MODE === 'build') {
+    eleventyConfig.addTransform('html-minify', htmlMinifyTransform);
+  }
 
   /**
    * Collections in 11ty are groups of content that can be filtered, sorted and accessed as a single unit.
@@ -127,6 +135,7 @@ export default function (eleventyConfig) {
    * Used by `../src/docs/elements/_tabs/api.11ty.js` to generate the API documentation page for each component.
    */
   eleventyConfig.addCollection('componentDocs', function (collection) {
+    // https://github.com/11ty/eleventy/issues/3838 each rebuild of any md file triggers all rebuilds of collection
     return collection.getFilteredByGlob([
       'src/docs/elements/*.md',
       'src/docs/elements/data-grid/index.md',
