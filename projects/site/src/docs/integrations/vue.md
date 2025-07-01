@@ -1,32 +1,19 @@
 ---
 {
-  title: 'Vue Integration',
+  title: 'Vue',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-{% svg-logos 'vue' %}
+{% integration 'vue' %}
 
-<div nve-layout="row gap:xs">
-  <nve-button>
-    <a href="https://NVIDIA.github.io/elements/starters/vue/" target="_blank"><svg width="18" height="18"><use href="#vue-svg"></use></svg> Demo</a>
-  </nve-button>
+{% installation %}
 
-  <nve-button>
-    <nve-icon name="download" size="sm"></nve-icon>
-    <a href="https://NVIDIA.github.io/elements/starters/download/vue.zip" target="_blank">Download</a>
-  </nve-button>
+## Integration
 
-  <nve-button>
-    <nve-icon name="code"></nve-icon>
-    <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/vue" target="_blank">Source</a>
-  </nve-button>
-</div>
-
-To use Elements in Vue follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
-elements can be imported and used within Vue SFC files.
+Once installation is complete Elements can be imported and used within [Vue](https://vuejs.org/) SFC files.
 
 ```typescript
 import '@nvidia-elements/core/alert-group/define.js';

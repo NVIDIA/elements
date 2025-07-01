@@ -1,22 +1,19 @@
 ---
 {
-  title: 'Preact Integration',
+  title: 'Preact',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-{% svg-logos 'preact' %}
+{% integration 'preact' %}
 
-<div nve-layout="row gap:xs">
-  <nve-button>
-    <a href="{{ playground.preactPlaygroundURL }}" target="_blank"><svg width="18" height="18"><use href="#preact-svg"></use></svg> Playground</a>
-  </nve-button>
-</div>
+{% installation %}
 
-To use Elements in [Preact](https://preactjs.com/) follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
-elements can be imported and used within Preact jsx and tsx files.
+## Integration
+
+Once installation is complete elements can be imported and used within [Preact](https://preactjs.com/) jsx and tsx files.
 
 ```typescript
 import '@nvidia-elements/core/alert/define.js';
