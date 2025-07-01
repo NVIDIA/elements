@@ -1,29 +1,15 @@
 ---
 {
-  title: 'Import Maps Integration',
+  title: 'Import Maps',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-{% svg-logos 'javascript' %}
+{% integration 'importmaps' %}
 
-<div nve-layout="row gap:xs">
-  <nve-button>
-    <a href="https://NVIDIA.github.io/elements/starters/importmaps/" target="_blank"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> Demo</a>
-  </nve-button>
-
-  <nve-button>
-    <nve-icon name="download" size="sm"></nve-icon>
-    <a href="https://NVIDIA.github.io/elements/starters/download/importmaps.zip" target="_blank">Download</a>
-  </nve-button>
-  
-  <nve-button>
-    <nve-icon name="code"></nve-icon>
-    <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/importmaps" target="_blank">Source</a>
-  </nve-button>
-</div>
+{% installation %}
 
 Using [Import Maps](https://web.dev/import-maps-in-all-modern-browsers/) it is possible to use elements without build tooling such as Vite or Rollup for easy in browser **prototyping**.
 
