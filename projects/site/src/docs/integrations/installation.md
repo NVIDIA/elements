@@ -7,25 +7,7 @@
 
 # {{ title }}
 
-## NPM/Artifactory
-
-Add the following references to the `.npmrc` file in the root of your project where your `package.json` is located.
-
-```shell
-registry=https://registry.npmjs.org
-```
-
-Login to [Artifactory](https://registry.npmjs.org once logged in run the following:
-
-```shell
-npm login
-```
-
-Install base packages:
-
-```shell
-npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/core
-```
+{% installation %}
 
 ## Usage
 

@@ -1,32 +1,19 @@
 ---
 {
-  title: 'SolidJS Integration',
+  title: 'SolidJS',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-{% svg-logos 'solidjs' %}
+{% integration 'solidjs' %}
 
-<div nve-layout="row gap:xs">
-  <nve-button>
-    <a href="https://NVIDIA.github.io/elements/starters/solidjs/" target="_blank"><svg width="18" height="18"><use href="#solidjs-svg"></use></svg> Demo</a>
-  </nve-button>
+{% installation %}
 
-  <nve-button>
-    <nve-icon name="download" size="sm"></nve-icon>
-    <a href="https://NVIDIA.github.io/elements/starters/download/solidjs.zip" target="_blank">Download</a>
-  </nve-button>
+## Integration
 
-  <nve-button>
-    <nve-icon name="code"></nve-icon>
-    <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/solidjs" target="_blank">Source</a>
-  </nve-button>
-</div>
-
-To use Elements in [SolidJS](https://www.solidjs.com/) follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
-elements can be imported and used within SolidJS jsx and tsx files.
+Once installation is complete Elements can be imported and used within [SolidJS](https://www.solidjs.com/) jsx and tsx files.
 
 ```typescript
 import '@nvidia-elements/core/alert-group/define.js';
