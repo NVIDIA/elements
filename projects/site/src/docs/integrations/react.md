@@ -1,31 +1,19 @@
 ---
 {
-  title: 'React Integration',
+  title: 'React',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-{% svg-logos 'react' %}
+{% integration 'react' %}
 
-<div nve-layout="row gap:xs">
-  <nve-button>
-    <a href="{{ playground.reactPlaygroundURL }}" target="_blank"><svg width="18" height="18"><use href="#react-svg"></use></svg> Playground</a>
-  </nve-button>
+{% installation %}
 
-  <nve-button>
-    <a href="https://NVIDIA.github.io/elements/starters/react/" target="_blank"> <nve-icon name="browser"></nve-icon> Demo</a>
-  </nve-button>
+## Integration
 
-  <nve-button>
-    <nve-icon name="code"></nve-icon>
-    <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/react" target="_blank">Source</a>
-  </nve-button>
-</div>
-
-To use Elements in [React (v19)](https://react.dev/) follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
-elements can be imported and used within React jsx and tsx files.
+Once installation is complete Elements can be imported and used within [React](https://react.dev/) jsx and tsx files.
 
 ```typescript
 import '@nvidia-elements/core/alert/define.js';

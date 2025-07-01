@@ -26,11 +26,11 @@
       ]
     },
     "build:watch": {
-      "command": "pnpm exec eleventy --incremental --serve --port=8082",
-      "service": true,
+      "command": "pnpm exec eleventy --incremental --serve --quiet --port=8082",
       "dependencies": [
         "build"
       ],
+      "service": true,
       "env": {
         "PAGES_BASE_URL": {
           "external": true,

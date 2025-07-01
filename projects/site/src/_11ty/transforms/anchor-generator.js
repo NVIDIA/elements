@@ -22,7 +22,7 @@ export async function anchorGeneratorTransform(content) {
     // Generate the side navigation HTML if there are enough headings
     // Skip for changelog pages and pages with fewer than 3 headings
     const sidenav =
-      !this.page.url.includes('changelog') && headings.length > 2
+      !this.page.url.includes('integrations') && !this.page.url.includes('changelog') && headings.length > 2
         ? /* html */ `
     <ul id="anchor-generator" nve-text="list">${headings.map(h => `<li><a href="${this.page.url.replace('/docs', 'docs')}#${h.id}" nve-text="link truncate" ${h.subHeading ? 'nve-layout="pad-left:md"' : ''}>${h.textContent}</a></li>`).join('')}</ul>`
         : '';

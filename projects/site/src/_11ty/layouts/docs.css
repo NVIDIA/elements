@@ -111,7 +111,7 @@ main:has([docs-full-width]) {
 }
 
 [nve-theme~='dark'] main:has(#getting-started-img) {
-  background-image: url(static/images/test-image-2.webp) !important;
+  background-image: url(/static/images/test-image-2.webp) !important;
   object-fit: fill !important;
   background-repeat: no-repeat !important;
   background-position: 0 15vh !important;
