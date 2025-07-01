@@ -54,6 +54,9 @@ import '@nvidia-elements/core/button/define.js';
     <a href="./docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>
   </nve-button>
   <nve-button>
+    <a href="./docs/integrations/go/"><svg width="18" height="18"><use href="#go-svg"></use></svg> Go</a>
+  </nve-button>
+  <nve-button>
     <a href="./docs/integrations/lit/"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit</a>
   </nve-button>
   <nve-button>
@@ -75,13 +78,13 @@ import '@nvidia-elements/core/button/define.js';
     <a href="./docs/integrations/solidjs/"><svg width="20" height="20"><use href="#solidjs-svg"></use></svg> SolidJS</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/about/installation/"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> JavaScript</a>
+    <a href="./docs/integrations/installation/"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> JavaScript</a>
   </nve-button>
 </section>
 
 <section nve-layout="row gap:sm align:center">
   <nve-button>
-    <a href="./docs/about/installation/"><nve-icon name="gear"></nve-icon> Installation</a>
+    <a href="./docs/integrations/installation/"><nve-icon name="gear"></nve-icon> Installation</a>
   </nve-button>
   <nve-button>
     <a href="./docs/about/getting-started/" target="_blank"><svg width="18" height="18"><use href="#storybook-svg"></use></svg> API Documentation</a>

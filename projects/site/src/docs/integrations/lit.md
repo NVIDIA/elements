@@ -1,23 +1,17 @@
 ---
 {
-  title: 'Lit Integration',
+  title: 'Lit',
   layout: 'docs.11ty.js'
 }
 ---
 
 # {{ title }}
 
-{% svg-logos 'lit' %}
+{% integration 'lit' %}
 
-<div nve-layout="row gap:xs">
-  <nve-button>
-    <svg width="18" height="18"><use href="#lit-svg"></use></svg>
-    <a target="_blank" href="{{ playground.litPlaygroundURL }}">Playground</a>
-  </nve-button>
-</div>
+{% installation %}
 
-To use Elements in Lit follow the [installation](./docs/about/getting-started/) steps. Once complete
-elements can be imported and used within Lit components.
+## Integration
 
 ```typescript
 import '@nvidia-elements/core/alert-group/define.js';
@@ -33,9 +27,9 @@ Once added, properties and events can be used via the standard lit template synt
 ```
 
 ```html
-  <nve-alert-group status="success" ?hidden=${!showAlert}>
-    <nve-alert .closable=${true} @close=${() => showAlert = false}">hello there!</nve-alert>
-  </nve-alert-group>
+<nve-alert-group status="success" ?hidden=${!showAlert}>
+  <nve-alert .closable=${true} @close=${() => showAlert = false}">hello there!</nve-alert>
+</nve-alert-group>
 ```
 
 ## CSS Utilities

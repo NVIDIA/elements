@@ -99,7 +99,6 @@ export const renderDocsNav = data => /* html */ `
   <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') ? 'expanded' : ''}>
     About
     <nve-tree-node ${data.page.url.includes('/docs/about/getting-started/') ? 'highlighted' : ''}><a href="docs/about/getting-started/">Getting Started</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/installation/') ? 'highlighted' : ''}><a href="docs/about/installation/">Installation</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted' : ''}><a href="docs/changelog/">Changelog</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted' : ''}><a href="docs/metrics/">Metrics</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/support/') ? 'highlighted' : ''}><a href="docs/about/support/">Support</a></nve-tree-node>
@@ -112,9 +111,11 @@ export const renderDocsNav = data => /* html */ `
   
   <nve-tree-node ${data.page.url.includes('/docs/integrations/') || data.page.url.includes('/starters/') ? 'expanded' : ''}>
     Integrations
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/installation/') ? 'highlighted' : ''}><a href="docs/integrations/installation/">Installation</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted' : ''}><a href="docs/integrations/angular/">Angular</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'highlighted' : ''}><a href="docs/integrations/bundles/">Bundles</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/extensions/') ? 'highlighted' : ''}><a href="docs/integrations/extensions/">Extensions</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'highlighted' : ''}><a href="docs/integrations/go/">Go</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/importmaps/') ? 'highlighted' : ''}><a href="docs/integrations/importmaps/">Import Maps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/lit/') ? 'highlighted' : ''}><a href="docs/integrations/lit/">Lit</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/nextjs/') ? 'highlighted' : ''}><a href="docs/integrations/nextjs/">NextJS</a></nve-tree-node>

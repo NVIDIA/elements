@@ -7,21 +7,11 @@
 
 # {{ title }}
 
-<div nve-layout="row gap:xs">
-  <nve-button>
-    <nve-icon name="download" size="sm"></nve-icon>
-    <a href="https://NVIDIA.github.io/elements/starters/download/scoped-registry.zip" target="_blank">Download</a>
-  </nve-button>
+{% integration 'extensions' %}
 
-  <nve-button>
-    <nve-icon name="code"></nve-icon>
-    <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/scoped-registry" target="_blank">Source</a>
-  </nve-button>
-</div>
+{% installation %}
 
-To create reusable UI components that build on top of Elements we recommend using [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components).
-This path enables your extensions to work in a large variety of frameworks and environments. We recommend
-reading the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the lit team.
+To create reusable UI components that build on top of Elements we recommend using [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components). This path enables your extensions to work in a large variety of frameworks and environments. We recommend reading the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the lit team.
 The rest of this guide will focus on how to integrate specifically for Element integration and best practices.
 
 ## Scoped Registry
