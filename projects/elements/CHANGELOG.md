@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.38.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.37.4...@nvidia-elements/core-v1.38.0) (2025-07-01)
+
+
+### Features
+
+* **elements:** animation-enhancements ([206108d](https://github.com/NVIDIA/elements/commit/206108ddc8c672230092fd392a7fd6fabf769ad8))
+
 ## [@nvidia-elements/core-v1.37.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.37.3...@nvidia-elements/core-v1.37.4) (2025-06-30)
 
 
