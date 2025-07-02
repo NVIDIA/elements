@@ -61,6 +61,7 @@
         "./projects/elements-react:ci",
         "./projects/labs/behaviors-alpine:ci",
         "./projects/labs/brand:ci",
+        "./projects/labs/cli:ci",
         "./projects/labs/code:ci",
         "./projects/labs/forms:ci",
         "./projects/labs/playwright-screencast:ci",
@@ -158,6 +159,9 @@
         "release:themes"
       ]
     },
+    "release:labs-cli": {
+      "command": "cd projects/labs/cli && HUSKY=0 pnpm exec semantic-release"
+    },
     "release:labs-code": {
       "command": "cd projects/labs/code && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
@@ -217,6 +221,7 @@
         "./projects/internals/patterns:lint:fix",
         "./projects/labs/behaviors-alpine:lint:fix",
         "./projects/labs/brand:lint:fix",
+        "./projects/labs/cli:lint:fix",
         "./projects/labs/code:lint:fix",
         "./projects/labs/forms:lint:fix",
         "./projects/labs/playwright-screencast:lint:fix",
