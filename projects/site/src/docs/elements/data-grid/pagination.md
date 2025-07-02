@@ -8,8 +8,6 @@
 }
 ---
 
-The pagination pattern should be used when working with large data sets that need to be incrementally loaded or filtered for performance or usablity.
-
 ```html
 <nve-grid>
   ...
@@ -19,7 +17,5 @@ The pagination pattern should be used when working with large data sets that nee
   </nve-grid-footer>
 </nve-grid>
 ```
-
-## Pagination
 
 {% story 'nve-grid', 'Pagination' %}

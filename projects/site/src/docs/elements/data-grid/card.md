@@ -7,8 +7,6 @@
 }
 ---
 
-Grid can be nested in Cards for various UI patterns such as card tab groups. Use the `container="flat"` attribute to enable proper styling of the grid when nested within a card.
-
 ```html
 <nve-card>
   <nve-card-header>

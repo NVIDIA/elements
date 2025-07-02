@@ -7,8 +7,6 @@
 }
 ---
 
-Panel Grid can be used to display key value type data sets for details of a given item in a collection.
-
 ```html
 <main nve-layout="row gap:sm full">
   <section nve-layout="column gap:md full align:stretch">
