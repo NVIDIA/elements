@@ -7,8 +7,6 @@
 }
 ---
 
-{% api 'nve-grid-placeholder', 'description' %}
-
 ```html
 <nve-grid style="min-height: 400px">
   <nve-grid-header>
@@ -21,6 +19,8 @@
 ```
 
 ## Loading
+
+{% api 'nve-grid-placeholder', 'description' %}
 
 {% story 'nve-grid', 'Placeholder' %}
 
