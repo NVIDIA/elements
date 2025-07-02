@@ -7,8 +7,6 @@
 }
 ---
 
-{% api 'nve-grid-column', 'property', 'columnAlign' %}
-
 ```html
 <nve-grid>
   <nve-grid-header>
@@ -26,6 +24,8 @@
   ...
 </nve-grid>
 ```
+
+{% api 'nve-grid-column', 'property', 'columnAlign' %}
 
 ## Column Align Center
 

@@ -45,6 +45,11 @@ export const Default = {
   `
 };
 
+/**
+ * @description Multi Select rows use a checkbox as the first focusable item within the row.
+ * When selected set the `selected` attribute/property on the row. This will ensure selected
+ * styles as well as the proper `ariaSelected` state for accessibility.
+ */
 export const MultiSelect = {
   render: () => html`
 <nve-grid>
@@ -70,6 +75,12 @@ export const MultiSelect = {
   `
 };
 
+/**
+ * @description When a user has actions that can be applied to multiple items,
+ * use the bulk actions component. The bulk actions should only be visible when
+ * at least one or more rows are selected. If the bulk actions are closed then
+ * all selected rows should be deselected.
+ */
 export const MultiSelectBulkActions = {
   render: () => html`
 <nve-grid style="--scroll-height: 402px">
@@ -101,6 +112,12 @@ export const MultiSelectBulkActions = {
   `
 };
 
+/**
+ * @description Single selection enables users to use a radio list association
+ * to select one item at a time. To enable single select, place a `nve-radio`
+ * input as the first grid cell of each row. Set the `name` attribute on each
+ * radio to ensure they associate to the same radio group.
+ */
 export const SingleSelect = {
   render: () => html`
 <nve-grid>
@@ -122,6 +139,10 @@ export const SingleSelect = {
   `
 };
 
+/**
+ * @description Row actions enable additional user actions specific to a given row.
+ * Place a `nve-icon-button` at the end of the grid row for actions.
+ */
 export const RowAction = {
   render: () => html`
 <nve-dropdown id="row-actions-dropdown" align="end">
@@ -148,6 +169,9 @@ export const RowAction = {
   `
 };
 
+/**
+ * @description Row groups can be used to organize related rows of a similar subtype.
+ */
 export const RowGroups = {
   render: () => html`
 <nve-grid>
@@ -259,6 +283,11 @@ export const FooterScrollbar = {
   `
 };
 
+/**
+ * @description The pagination pattern should be used when working with large
+ * data sets that need to be incrementally loaded or filtered for performance or
+ * useability.
+ */
 export const Pagination = {
   render: () => html`
 <nve-grid style="--scroll-height: 370px">
@@ -277,6 +306,10 @@ export const Pagination = {
   `
 };
 
+/**
+ * @description A fixed height can be placed on the grid allowing rows to be
+ * scrolled within the bounding box of the grid.
+ */
 export const Scroll = {
   render: () => html`
 <nve-grid style="height: 402px">
@@ -293,6 +326,9 @@ export const Scroll = {
   `
 };
 
+/**
+ * @description Scroll position can be controlled via the `scrollTo` API.
+ */
 export const ScrollPosition = {
   render: () => html`
 <nve-grid id="scroll-position-grid" style="height: 402px">
@@ -318,6 +354,12 @@ export const ScrollPosition = {
   `
 };
 
+/**
+ * @description Using `nve-layout="column"` and `nve-layout="full"` enables the
+ * grid to fill any remaining space of a parent containing element. This is
+ * helpful for preserving the grid height/fill while dynamic content above can
+ * freely change.
+ */
 export const FullHeight = {
   render: () => html`
 <section nve-layout="column gap:lg" style="height: 500px; padding: var(--nve-ref-size-100); border: 1px solid var(--nve-ref-border-color-emphasis); resize: vertical; overflow: hidden;">
@@ -338,6 +380,10 @@ export const FullHeight = {
   `
 };
 
+/**
+ * @description Column actions can be created by using the `nve-icon-button` to
+ * trigger dropdowns or panels to reveal additional actions to the user.
+ */
 export const ColumnAction = {
   render: () => html`
 <nve-grid>
@@ -381,6 +427,11 @@ export const ColumnWidth = {
   `
 };
 
+/**
+ * @description By default columns are evenly divided unless width is explicitly
+ * provided. Content within a cell of a given column will wrap content to fit the
+ * width of the column.
+ */
 export const Content = {
   render: () => html`
 <nve-grid>
@@ -411,6 +462,10 @@ export const ColumnFixed = {
   `
 };
 
+/**
+ * @description Multiple Columns can fixed to any given side, however fixed columns
+ * should not span past the half way point of the grid.
+ */
 export const ColumnMultiFixed = {
   render: () => html`
 <nve-grid style="--scroll-height: 402px; max-width: 800px">
@@ -535,6 +590,12 @@ export const ColumnAlignStart = {
   `
 };
 
+/**
+ * @description Display settings are placed above the data grid leveraging
+ * dropdowns to provide various configuration options. Columns can be hidden via
+ * the `hidden` attribute or conditionally rendered in DOM. Display settings can
+ * include column visibility or advanced filtering options.
+ */
 export const DisplaySettings = {
   render: () => html`
 <div nve-layout="column gap:md full">
@@ -601,6 +662,71 @@ export const RowSort = {
     </nve-grid-row>
   `)}
 </nve-grid>
+  `
+};
+
+/**
+ * @description A grid heatmap pattern can be implemented when combining the [nve-sys-visualization-sequential-diverging-red-green-*](docs/foundations/visualization/#sequential-diverging-red-green) theme tokens.
+ * Heatmap patterns can be useful for visualizing test results, performance metrics or any data that has a fixed range of values.
+ */
+export const HeatmapPattern = {
+  render: () => html`
+<nve-grid container="flat" style="max-width: 1100px">
+  <nve-grid-header>
+    <nve-grid-column width="150px" position="fixed">Test Pipeline</nve-grid-column>
+  </nve-grid-header>
+</nve-grid>
+<script type="module">
+  const testData = Array(15).fill('').map(() => ({
+    id: 'id_' + self.crypto.getRandomValues(new Uint32Array(1))[0].toString(16),
+    tests: Array(5).fill('').map(() => (Math.random() * 100).toFixed(2).padStart(5, '0'))
+  }));
+
+  const grid = document.querySelector('nve-grid');
+  const gridHeader = document.querySelector('nve-grid-header');
+
+  const columns = testData[0].tests.map((_, i) => {
+    const column = document.createElement('nve-grid-column');
+    column.textContent = 'Test Suite ' + (i + 1);
+    return column;
+  });
+
+  const rows = testData.map(pipeline => {
+    const row = document.createElement('nve-grid-row');
+    const pipelineCell = document.createElement('nve-grid-cell');
+    pipelineCell.textContent = pipeline.id;
+
+    const testCells = pipeline.tests.map(test => {
+      const cell = document.createElement('nve-grid-cell');
+      cell.textContent = test + '%';
+      cell.setAttribute('data-value', test);
+      return cell;
+    });
+
+    row.append(pipelineCell, ...testCells);
+    return row;
+  });
+
+  const style = document.createElement('style');
+  style.textContent = \`@scope {
+    [data-value^='0'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-100); }
+    [data-value^='1'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-100); }
+    [data-value^='2'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-200); }
+    [data-value^='3'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-300); }
+    [data-value^='4'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-400); }
+    [data-value^='5'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-500); }
+    [data-value^='6'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-600); }
+    [data-value^='7'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-700); }
+    [data-value^='8'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-800); }
+    [data-value^='9'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-900); }
+    [data-value='100'] { --background: var(--nve-sys-visualization-sequential-diverging-red-green-900); }
+    [data-value] { --color: var(--nve-ref-color-neutral-1200); --border-right: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted) }
+    [data-value^='0'], [data-value^='1'], [data-value^='9'], [data-value~='100'] { --color: var(--nve-ref-color-neutral-100); }
+  }\`;
+
+  gridHeader.append(...columns);
+  grid.append(style, ...rows);
+</script>
   `
 };
 
@@ -812,6 +938,11 @@ export const Stripe = {
   `
 };
 
+/**
+ * @description Grid can be nested in Cards for various UI patterns such as card
+ * tab groups. Use the `container="flat"` attribute to enable proper styling of
+ * the grid when nested within a card.
+ */
 export const Card = {
   render: () => html`
 <nve-card>
@@ -948,6 +1079,11 @@ export const FocusTypes = {
   `
 };
 
+/**
+ * @description Use a right aligned [panel](docs/elements/page/#panels) when
+ * displaying advanced filtering or display settings for the grid. Item detail
+ * panels should be open using a action button placed at the end of the grid row.
+ */
 export const PanelDetail = {
   render: () => html`
 <nve-page id="grid-panel-demo" style="max-height: 500px;">
@@ -1018,6 +1154,10 @@ export const PanelDetail = {
   `
 };
 
+/**
+ * @description Panel Grid can be used to display key value type data sets for
+ * details of a given item in a collection.
+ */
 export const PanelGrid = {
   render() {
     return html`
@@ -1211,6 +1351,12 @@ export const Audit = {
   `
 };
 
+/**
+ * @description Sort can be set via the `sort` property and `sort` event on the
+ * `nve-sort-button`. The grid sort API follows the [ARIA sort spec](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/)
+ * and automatically will set the appropriate accessibility related attributes
+ * to convey the current sorting state.
+ */
 export const ColumnSortButtonVisibility = {
   render: () => html `
 <nve-grid>

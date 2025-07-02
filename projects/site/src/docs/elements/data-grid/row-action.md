@@ -8,8 +8,6 @@
 }
 ---
 
-Row actions enable addtional user actions specific to a given row. Place a `nve-icon-button` at the end of the grid row for actions.
-
 ```html
 <nve-grid>
   <nve-grid-header>
@@ -30,7 +28,5 @@ Row actions enable addtional user actions specific to a given row. Place a `nve-
   ...
 </nve-grid>
 ```
-
-## Action
 
 {% story 'nve-grid', 'RowAction' %}

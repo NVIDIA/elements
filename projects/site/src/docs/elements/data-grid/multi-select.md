@@ -8,8 +8,6 @@
 }
 ---
 
-Multi Select rows use a checkbox as the first focusable item within the row When selected set the `selected` attribute/property on the row. This will ensure selected styles as well as the proper `ariaSelected` state for accessibility.
-
 ```html
 <nve-grid>
   <nve-grid-header>
@@ -39,7 +37,5 @@ Multi Select rows use a checkbox as the first focusable item within the row When
 {% story 'nve-grid', 'MultiSelect' %}
 
 ## Multi Select Bulk Actions
-
-When a user has actions that can be applied to multiple items, use the bulk actions component. The bulk actions should only be visible when at least one or more rows are selected. If the bulk actions are closed then all selected rows should be deselected.
 
 {% story 'nve-grid', 'MultiSelectBulkActions' %}
