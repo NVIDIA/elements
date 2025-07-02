@@ -1,0 +1,144 @@
+{
+  "name": "@nvidia-elements/cli",
+  "version": "0.0.0",
+  "description": "A CLI tool for Elements related utilities",
+  "type": "module",
+  "bin": {
+    "nve": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "wireit",
+    "ci": "wireit",
+    "build": "wireit",
+    "lint": "wireit",
+    "test": "wireit",
+    "test:watch": "wireit",
+    "test:coverage": "wireit",
+    "nve:install": "pnpm link --global",
+    "nve:uninstall": "pnpm uninstall --global @nvidia-elements/cli"
+  },
+  "dependencies": {
+    "yargs": "18.0.0"
+  },
+  "devDependencies": {
+    "@internals/eslint": "workspace:*",
+    "@internals/vite": "workspace:*",
+    "@vitest/coverage-istanbul": "catalog:",
+    "@types/node": "catalog:",
+    "@types/yargs": "17.0.33",
+    "eslint": "catalog:",
+    "publint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "lint",
+        "build",
+        "publint",
+        "test:coverage"
+      ]
+    },
+    "publint": {
+      "dependencies": [
+        "build"
+      ],
+      "command": "publint",
+      "files": [
+        "package.json"
+      ],
+      "output": []
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build",
+      "files": [
+        "src/**",
+        "!src/**/*.test.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../../internals/vite:ci"
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "dev": {
+      "command": "nve --version",
+      "dependencies": [
+        "build"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../internals/eslint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix"
+    },
+    "test": {
+      "command": "vitest run",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../testing:ci",
+        "../../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    },
+    "test:coverage": {
+      "command": "vitest run --coverage",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "vitest.config.ts"
+      ],
+      "output": [
+        "coverage/unit/**"
+      ],
+      "dependencies": [
+        "../../testing:ci",
+        "../../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
