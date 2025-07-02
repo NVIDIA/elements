@@ -7,8 +7,6 @@
 }
 ---
 
-Sort can be set via the `sort` property and `sort` event on the `nve-sort-button`. The grid sort API follows the [ARIA sort spec](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/) and automatically will set the appropriate accessibility related attributes to convey the current sorting state.
-
 ```html
 <nve-grid>
   <nve-grid-header>

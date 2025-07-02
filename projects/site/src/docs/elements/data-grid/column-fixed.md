@@ -8,8 +8,6 @@
 }
 ---
 
-Columns positioned to a fixed location within the grid preventing the column from scrolling when the grid has horizontal scroll. Use the `position="fixed"` attribute to position the column.
-
 ```html
 <nve-grid>
   <nve-grid-header>
@@ -30,11 +28,11 @@ Columns positioned to a fixed location within the grid preventing the column fro
 
 ## Column Fixed
 
+{% api 'nve-grid-column', 'property', 'position' %}
+
 {% story 'nve-grid', 'ColumnFixed' %}
 
 ## Column Multi Fixed
-
-Multiple Columns can fixed to any given side, however fixed columns should not span past the half way point of the grid.
 
 {% story 'nve-grid', 'ColumnMultiFixed' %}
 
