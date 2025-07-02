@@ -18,6 +18,7 @@ packages:
   - 'projects/site'
   - 'projects/labs/behaviors-alpine'
   - 'projects/labs/brand'
+  - 'projects/labs/cli'
   - 'projects/labs/code'
   - 'projects/labs/forms'
   - 'projects/labs/playwright-screencast'
