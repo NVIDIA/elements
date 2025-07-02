@@ -8,8 +8,6 @@
 }
 ---
 
-Single selection enables users to use a radio list association to select one item at a time. To enable single select, place a `nve-radio` input as the first grid cell of each row. Set the `name` attribute on each radio to ensure they associate to the same radio group.
-
 ```html
 <nve-grid>
   <nve-grid-header>
@@ -29,7 +27,5 @@ Single selection enables users to use a radio list association to select one ite
   ...
 </nve-grid>
 ```
-
-## Single Select
 
 {% story 'nve-grid', 'SingleSelect' %}

@@ -7,8 +7,6 @@
 }
 ---
 
-A fixed height can be placed on the grid allowing rows to be scrolled within the bounding box of the grid.
-
 ```html
 <nve-grid style="height: 400px">
   <nve-grid-header>
@@ -27,17 +25,15 @@ A fixed height can be placed on the grid allowing rows to be scrolled within the
 </nve-grid>
 ```
 
+## Scroll Height
+
 {% story 'nve-grid', 'Scroll' %}
 
 ## Full Height
 
-Using `nve-layout="column"` and `nve-layout="full"` enables the grid to fill any remaining space of a parent containing element. This is helpful for preserving the grid height/fill while dynamic content above can freely change.
-
 {% story 'nve-grid', 'FullHeight' %}
 
 ## Scroll Position
-
-Scroll position can be controlled via the `scrollTo` API.
 
 ```javascript
 document.querySelector('nve-grid').scrollTo({ top: 0, left: 0, behavior: 'smooth' });

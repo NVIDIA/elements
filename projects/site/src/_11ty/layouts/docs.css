@@ -41,6 +41,10 @@ h2[nve-text='heading xl mkd'] {
   gap: var(--nve-ref-space-sm);
 }
 
+nve-tabs + h2[nve-text='heading xl mkd'] {
+  padding-top: var(--nve-ref-space-md);
+}
+
 [nve-text='link mkd']:visited {
   color: inherit !important;
 }

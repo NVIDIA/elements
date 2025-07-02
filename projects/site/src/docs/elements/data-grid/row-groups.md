@@ -8,8 +8,6 @@
 }
 ---
 
-Row groups can be used to organize related rows of a similar subtype.
-
 ```html
 <nve-grid>
   <nve-grid-header>
@@ -33,7 +31,5 @@ Row groups can be used to organize related rows of a similar subtype.
   ...
 </nve-grid>
 ```
-
-## Standard
 
 {% story 'nve-grid', 'RowGroups' %}

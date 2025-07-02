@@ -8,8 +8,6 @@
 }
 ---
 
-{% api 'nve-grid', 'property', 'container' %}
-
 ```html
 <nve-grid container="full">
   ...
@@ -17,6 +15,8 @@
 ```
 
 ## Full
+
+{% api 'nve-grid', 'property', 'container' %}
 
 {% story 'nve-grid', 'Full' %}
 

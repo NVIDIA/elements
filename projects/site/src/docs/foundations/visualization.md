@@ -27,7 +27,7 @@ const tokens = getThemeTokens();
 }
 ```
 
-## Example
+## ChartJS
 
 Below is a simple demo of a visualization library (ChartJS) consuming the tokens and rendering the visualization to a HTML canvas.
 
@@ -54,6 +54,10 @@ new Chart(document.querySelector('canvas'), {
   }
 });
 ```
+
+## Heatmap
+
+{% story 'nve-grid', 'HeatmapPattern', '{ "inline": false, "height": "600px" }' %}
 
 ## Categorical
 

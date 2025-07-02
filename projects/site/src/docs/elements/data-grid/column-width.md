@@ -7,8 +7,6 @@
 }
 ---
 
-{% api 'nve-grid-column', 'property', 'width' %}
-
 ```html
 <nve-grid>
   <nve-grid-header>
@@ -29,10 +27,10 @@
 
 ## Column Width
 
+{% api 'nve-grid-column', 'property', 'width' %}
+
 {% story 'nve-grid', 'ColumnWidth' %}
 
 ## Content
-
-By default columns are evenly devided unless width is explicitly provided. Content within a cell of a given column will wrap content to fit the width of the column.
 
 {% story 'nve-grid', 'Content' %}
