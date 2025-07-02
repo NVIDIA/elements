@@ -3,7 +3,7 @@ import path from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
 import terser from '@rollup/plugin-terser';
-import minifyHTML from 'rollup-plugin-minify-html-literals';
+import minifyHTML from 'rollup-plugin-html-literals';
 import dts from 'vite-plugin-dts';
 import { globSync } from 'glob';
 
@@ -66,7 +66,7 @@ export default defineConfig(env => {
           }
         ],
         plugins: [
-          mode === 'production' ? (minifyHTML as any).default() : false, // https://github.com/asyncLiz/rollup-plugin-minify-html-literals/issues/24
+          mode === 'production' ? minifyHTML() : false,
           mode === 'production'
             ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
             : false // https://github.com/vitejs/vite/issues/8848

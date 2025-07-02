@@ -1,11 +1,7 @@
-import fs from 'fs';
-import process from 'process';
 import terser from '@rollup/plugin-terser';
-import { minifyHTML } from '../plugins/minify-html.js';
+import minifyHTML from 'rollup-plugin-html-literals';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
-
-const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package.json')));
 
 /**
  * - https://vitejs.dev/config/

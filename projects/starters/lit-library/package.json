@@ -73,7 +73,7 @@
     "@rollup/plugin-terser": "catalog:",
     "@vitest/browser": "catalog:",
     "glob": "catalog:",
-    "rollup-plugin-minify-html-literals": "catalog:",
+    "rollup-plugin-html-literals": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vite-plugin-dts": "catalog:",

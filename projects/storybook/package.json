@@ -22,13 +22,13 @@
     "lit": "catalog:"
   },
   "devDependencies": {
-    "@storybook/addon-links": "9.0.13",
-    "@storybook/addon-docs": "9.0.13",
-    "@storybook/web-components-vite": "9.0.13",
-    "@storybook/web-components": "9.0.13",
+    "@storybook/addon-links": "9.0.15",
+    "@storybook/addon-docs": "9.0.15",
+    "@storybook/web-components-vite": "9.0.15",
+    "@storybook/web-components": "9.0.15",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "storybook": "9.0.13",
+    "storybook": "9.0.15",
     "typescript": "catalog:",
     "vite": "catalog:"
   },
