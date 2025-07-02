@@ -7,8 +7,6 @@
 }
 ---
 
-{% api 'nve-grid-footer', 'description' %}
-
 ```html
 <nve-grid>
   <nve-grid-header>
@@ -29,6 +27,8 @@
 ```
 
 ## Footer
+
+{% api 'nve-grid-footer', 'description' %}
 
 {% story 'nve-grid', 'Footer' %}
 

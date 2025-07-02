@@ -8,8 +8,6 @@
 }
 ---
 
-Use a right aligned [panel](./?path=/docs/elements-page-documentation--docs) when displaying advanced filtering or display settings for the grid. Item detail panels should be open using a action button placed at the end of the grid row.
-
 ```html
 <nve-page>
   <nve-grid>

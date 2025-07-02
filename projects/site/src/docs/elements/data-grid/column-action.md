@@ -8,8 +8,6 @@
 }
 ---
 
-Column actions can be created by using the `mlv-icon-button` to trigger dropdowns or panels to reveal additional actions to the user.
-
 ```html
 <nve-grid>
   <nve-grid-header>
@@ -26,7 +24,5 @@ Column actions can be created by using the `mlv-icon-button` to trigger dropdown
   ...
 </nve-grid>
 ```
-
-## Column Action
 
 {% story 'nve-grid', 'ColumnAction' %}
