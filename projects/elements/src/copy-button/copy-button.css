@@ -1,4 +1,5 @@
 :host {
+  --nve-sys-interaction-state-base: var(--background);
   --color: var(--nve-sys-text-muted-color);
   --border-radius: var(--nve-ref-border-radius-full);
   --line-height: 0;
@@ -24,22 +25,29 @@
   --padding: 0;
 }
 
+:host([container='flat'][selected]) [interaction-state],
+:host([container='flat']:state(selected)) [interaction-state],
+:host([container='flat'][pressed]) [interaction-state],
+:host([container='flat']:state(pressed)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
+}
+
 :host([container*='flat']) {
-  --color: var(--nve-sys-text-muted-color);
+  --background: transparent;
+  --border-radius: var(--nve-ref-border-radius-xs);
 }
 
-:host([container*='flat']) [interaction-state] {
-  --nve-sys-interaction-state-ratio: 0 !important;
+:host([container*='flat']:state(disabled)) {
+  --color: var(--nve-sys-interaction-disabled-color);
+  --background: transparent;
 }
 
-:host([container*='flat']:state(selected)),
-:host(:not([interaction='emphasis'], [interaction='destructive'], [disabled]):hover) {
-  --color: var(--nve-sys-text-emphasis-color) !important;
+:host([container*='flat']:state(disabled)) [interaction-state] {
+  --nve-sys-interaction-state-ratio: 0;
 }
 
-:host([container*='flat']:state(pressed)) {
-  --color: var(--nve-sys-text-emphasis-color) !important;
-  --background: none !important;
+:host([container*='flat']:state(selected)) {
+  --color: var(--nve-sys-interaction-selected-color);
 }
 
 nve-icon {
