@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "ci": "wireit",
+    "dev": "wireit",
     "build": "wireit",
     "preview": "wireit"
   },
@@ -22,6 +23,10 @@
       "dependencies": [
         "build"
       ]
+    },
+    "dev": {
+      "command": "vite",
+      "service": true
     },
     "build": {
       "command": "vite build",

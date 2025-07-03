@@ -8,6 +8,39 @@ import type { AddressInfo } from 'net';
 
 const viewport = { width: 1728, height: 1117 };
 
+interface LighthouseRequest {
+  mimeType: string;
+  transferSize: number;
+  url: string;
+}
+
+function round(num: number) {
+  return Math.round((num + Number.EPSILON) * 100) / 100;
+}
+
+function getPayload(lighthouseRequests: LighthouseRequest[]) {
+  const requests = lighthouseRequests
+    .filter(r => r.mimeType === 'text/javascript' || r.mimeType === 'text/css')
+    .map(r => {
+      return {
+        kb: round(r.transferSize / 1000),
+        mimeType: r.mimeType,
+        name: !r.url.includes('/assets/')
+          ? r.url
+          : r.url
+              .split('/assets/')[1]
+              .replace(/-\w+\.css$/, '.css')
+              .replace(/-\w+\.js$/, '.js')
+      };
+    });
+
+  // value in kb
+  return {
+    js: requests.filter(r => r.mimeType === 'text/javascript').reduce((p, n) => p + n.kb, 0),
+    css: requests.filter(r => r.mimeType === 'text/css').reduce((p, n) => p + n.kb, 0)
+  };
+}
+
 async function getLighthouseScores(path: string) {
   const customConfig = { ...config };
   customConfig.settings!.screenEmulation!.width = viewport.width;
@@ -17,7 +50,8 @@ async function getLighthouseScores(path: string) {
     performance: (result.lhr.categories.performance.score ?? 0) * 100,
     accessibility: (result.lhr.categories.accessibility.score ?? 0) * 100,
     seo: (result.lhr.categories.seo.score ?? 0) * 100,
-    bestPractices: (result.lhr.categories['best-practices']?.score ?? 0) * 100
+    bestPractices: (result.lhr.categories['best-practices']?.score ?? 0) * 100,
+    payload: getPayload((result.lhr.audits['network-requests'] as unknown as { details: { items: LighthouseRequest[] } }).details.items)
   }
 }
 
@@ -57,6 +91,8 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
+    expect(scores.payload.js).toBeLessThan(400);
+    expect(scores.payload.css).toBe(0); // css should be 0 as we inline all css
   });
 
   test('getting started page', async () => {
@@ -65,6 +101,8 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
+    expect(scores.payload.js).toBeLessThan(170);
+    expect(scores.payload.css).toBe(0);
   });
 
   test('minimal template page', async () => {
@@ -73,14 +111,28 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
+    expect(scores.payload.js).toBeLessThan(135);
+    expect(scores.payload.css).toBe(0);
   });
 
-  test('component docs page', async () => {
+  test('component docs overview page', async () => {
     const scores = await getLighthouseScores(`${base}/elements/docs/elements/badge/`);
     expect(scores.performance).toBeGreaterThanOrEqual(90);
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
+    expect(scores.payload.js).toBeLessThan(200);
+    expect(scores.payload.css).toBe(0);
+  });
+
+  test('component docs API page', async () => {
+    const scores = await getLighthouseScores(`${base}/elements/docs/elements/badge/api/`);
+    expect(scores.performance).toBeGreaterThanOrEqual(90);
+    expect(scores.accessibility).toBeGreaterThanOrEqual(90);
+    expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
+    expect(scores.seo).toBeGreaterThanOrEqual(90);
+    expect(scores.payload.js).toBeLessThan(180);
+    expect(scores.payload.css).toBe(0);
   });
 
   test('static content docs page', async () => {
@@ -89,5 +141,7 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
+    expect(scores.payload.js).toBeLessThan(170);
+    expect(scores.payload.css).toBe(0);
   });
 });

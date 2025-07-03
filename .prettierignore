@@ -23,3 +23,18 @@ projects/starters/angular/.angular/**/*
 projects/**/src/vendor/**/*
 projects/**/.screencast/.auth/*
 .vscode/*.json.code-snippets
+
+# ignore starter templates as they are used for project generation and formatting is picky
+projects/starters/angular/src/app/app.component.html
+projects/starters/bundles/src/index.html
+projects/starters/eleventy/src/_layouts/index.11ty.js
+projects/starters/eleventy/src/index.11ty.js
+projects/starters/go/src/index.html
+projects/starters/importmaps/src/index.html
+projects/starters/mpa/src/**/*.html
+projects/starters/nextjs/src/pages/index.tsx
+projects/starters/react/src/App.tsx
+projects/starters/react-18/src/App.tsx
+projects/starters/solidjs/src/App.tsx
+projects/starters/typescript/src/index.html
+projects/starters/vue/src/App.vue

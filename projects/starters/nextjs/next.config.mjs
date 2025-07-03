@@ -1,4 +1,3 @@
-// https://github.com/lit/lit/pull/4774
 import withLitSSR from '@lit-labs/nextjs';
 
 /** @type {import('next').NextConfig} */

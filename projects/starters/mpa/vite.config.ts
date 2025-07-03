@@ -1,12 +1,10 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import { join } from 'node:path';
 
 export default defineConfig({
   root: './src',
   envDir: '../',
   base: './',
-  publicDir: '../assets',
   build: {
     sourcemap: true,
     outDir: '../dist',

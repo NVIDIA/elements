@@ -1,8 +1,8 @@
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/page-header/define.js';
+import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/button/define.js';
-import '@nvidia-elements/core/breadcrumb/define.js';
 import '@nvidia-elements/core/menu/define.js';
 import '@nvidia-elements/core/logo/define.js';
 
@@ -12,6 +12,4 @@ import '@nvidia-elements/core/logo/define.js';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  expanded = true;
-}
+export class AppComponent {}
