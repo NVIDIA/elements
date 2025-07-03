@@ -17,6 +17,10 @@
         "build"
       ]
     },
+    "dev": {
+      "command": "ng serve",
+      "service": true
+    },
     "start": {
       "command": "ng serve",
       "service": true
