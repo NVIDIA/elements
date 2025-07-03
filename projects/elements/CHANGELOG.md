@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.38.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.38.0...@nvidia-elements/core-v1.38.1) (2025-07-03)
+
+
+### Bug Fixes
+
+* **elements:** update nve-copy-button styling for flat container ([de68801](https://github.com/NVIDIA/elements/commit/de6880142841a7cc536c8accf7021adc598a7eb3))
+
 ## [@nvidia-elements/core-v1.38.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.37.4...@nvidia-elements/core-v1.38.0) (2025-07-01)
 
 
