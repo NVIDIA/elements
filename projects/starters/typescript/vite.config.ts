@@ -5,7 +5,6 @@ export default defineConfig(() => {
     root: './src',
     envDir: '../',
     base: './',
-    publicDir: '../assets',
     build: {
       outDir: '../dist',
       emptyOutDir: true
