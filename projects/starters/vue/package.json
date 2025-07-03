@@ -53,6 +53,6 @@
     "@vue/tsconfig": "0.7.0",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vue-tsc": "2.2.10"
+    "vue-tsc": "3.0.1"
   }
 }

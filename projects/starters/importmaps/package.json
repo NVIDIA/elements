@@ -15,10 +15,9 @@
       ]
     },
     "build": {
-      "command": "mkdir -p dist && cp -a ./assets dist/assets/ && cp -a ./src/index.html dist/",
+      "command": "mkdir -p dist && cp -a ./src/index.html dist/",
       "files": [
-        "src/index.html",
-        "assets/**"
+        "src/index.html"
       ],
       "output": [
         "dist"
