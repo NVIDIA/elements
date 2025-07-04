@@ -2,6 +2,10 @@
   "inherit": false,
   "base": "vs",
   "colors": {
+    "diffEditor.insertedLineBackground": { "token": "ref.color.green-grass.900", "alpha": 0.2 },
+    "diffEditor.insertedTextBackground": { "token": "ref.color.green-grass.900", "alpha": 0.25 },
+    "diffEditor.removedLineBackground": { "token": "ref.color.red-cardinal.900", "alpha": 0.2 },
+    "diffEditor.removedTextBackground": { "token": "ref.color.red-cardinal.900", "alpha": 0.25 },
     "editor.background": { "token": "ref.color.white", "alpha": 0 },
     "editor.findMatchBackground": "ref.color.blue-sky.600",
     "editor.findMatchHighlightBackground": "ref.color.orange-pumpkin.600",
@@ -15,6 +19,7 @@
     "editorHoverWidget.border": "ref.color.gray-slate.700",
     "editorIndentGuide.background": "ref.color.gray-slate.600",
     "editorIndentGuide.activeBackground": "ref.color.gray-slate.800",
+    "editorOverviewRuler.background": { "token": "ref.color.white", "alpha": 0 },
     "editorRuler.foreground": "ref.color.gray-slate.800",
     "editorStickyScroll.shadow": { "token": "ref.color.black", "alpha": 0.5 },
     "editorWidget.background": "ref.color.white",
