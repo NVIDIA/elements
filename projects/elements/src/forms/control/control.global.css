@@ -90,6 +90,7 @@
 }
 
 /* customizations for first-party elements */
-nve-control:has(nve-monaco-input) {
+nve-control:has(nve-monaco-input),
+nve-control:has(nve-monaco-diff-input) {
   contain: none;
 }
