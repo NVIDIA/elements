@@ -117,7 +117,7 @@ catalogs:
 
 patchedDependencies:
   monaco-editor:
-    hash: 014b3d353950093d449ae73219b91640a92e126b77d729b102b1e71fba37d931
+    hash: 8564f3cf407fce37d363bca938e573e478e7790a04f3d3159321819f96977968
     path: patches/monaco-editor.patch
 
 importers:
@@ -908,7 +908,7 @@ importers:
         version: 9.23.0(jiti@2.4.2)
       monaco-editor:
         specifier: 0.52.2
-        version: 0.52.2(patch_hash=014b3d353950093d449ae73219b91640a92e126b77d729b102b1e71fba37d931)
+        version: 0.52.2(patch_hash=8564f3cf407fce37d363bca938e573e478e7790a04f3d3159321819f96977968)
       postcss:
         specifier: 8.4.31
         version: 8.4.31
@@ -4924,20 +4924,11 @@ packages:
   '@vitest/utils@4.0.0-beta.2':
     resolution: {integrity: sha512-SJuRx8e+0TZBnhJGLRemzoVziJkGskgfhZoCiD27tLEoPUvE7kk7ygSQVGIkYBH/A7i/p+psbF1seMfxV2flOA==, tarball: https://registry.npmjs.org
 
-  '@volar/language-core@2.4.12':
-    resolution: {integrity: sha512-RLrFdXEaQBWfSnYGVxvR2WrO6Bub0unkdHYIdC31HzIEqATIuuhRRzYu76iGPZ6OtA4Au1SnW0ZwIqPP217YhA==, tarball: https://registry.npmjs.org
-
   '@volar/language-core@2.4.17':
     resolution: {integrity: sha512-chmRZMbKmcGpKMoO7Reb70uiLrzo0KWC2CkFttKUuKvrE+VYgi+fL9vWMJ07Fv5ulX0V1TAyyacN9q3nc5/ecA==, tarball: https://registry.npmjs.org
 
-  '@volar/source-map@2.4.12':
-    resolution: {integrity: sha512-bUFIKvn2U0AWojOaqf63ER0N/iHIBYZPpNGogfLPQ68F5Eet6FnLlyho7BS0y2HJ1jFhSif7AcuTx1TqsCzRzw==, tarball: https://registry.npmjs.org
-
   '@volar/source-map@2.4.17':
     resolution: {integrity: sha512-QDybtQyO3Ms/NjFqNHTC5tbDN2oK5VH7ZaKrcubtfHBDj63n2pizHC3wlMQ+iT55kQXZUUAbmBX5L1C8CHFeBw==, tarball: https://registry.npmjs.org
-
-  '@volar/typescript@2.4.12':
-    resolution: {integrity: sha512-HJB73OTJDgPc80K30wxi3if4fSsZZAOScbj2fcicMuOPoOkcf9NNAINb33o+DzhBdF9xTKC1gnPmIRDous5S0g==, tarball: https://registry.npmjs.org
 
   '@volar/typescript@2.4.17':
     resolution: {integrity: sha512-3paEFNh4P5DkgNUB2YkTRrfUekN4brAXxd3Ow1syMqdIPtCZHbUy4AW99S5RO/7mzyTWPMdDSo3mqTpB/LPObQ==, tarball: https://registry.npmjs.org
@@ -4945,14 +4936,8 @@ packages:
   '@vscode/web-custom-data@0.4.13':
     resolution: {integrity: sha512-2ZUIRfhofZ/npLlf872EBnPmn27Kt4M2UssmQIfnJvgGgMYZJ5fvtHEDnttBBf2hnVtBgNCqZMVHJA+wsFVqTA==, tarball: https://registry.npmjs.org
 
-  '@vue/compiler-core@3.5.13':
-    resolution: {integrity: sha512-oOdAkwqUfW1WqpwSYJce06wvt6HljgY3fGeM9NcVA1HaYOij3mZG9Rkysn0OHuyUAGMbEbARIpsG+LPVlBJ5/Q==, tarball: https://registry.npmjs.org
-
   '@vue/compiler-core@3.5.17':
     resolution: {integrity: sha512-Xe+AittLbAyV0pabcN7cP7/BenRBNcteM4aSDCtRvGw0d9OL+HG1u/XHLY/kt1q4fyMeZYXyIYrsHuPSiDPosA==, tarball: https://registry.npmjs.org
-
-  '@vue/compiler-dom@3.5.13':
-    resolution: {integrity: sha512-ZOJ46sMOKUjO3e94wPdCzQ6P1Lx/vhp2RSvfaab88Ajexs0AHeV0uasYhi99WPaogmBlRHNRuly8xV75cNTMDA==, tarball: https://registry.npmjs.org
 
   '@vue/compiler-dom@3.5.17':
     resolution: {integrity: sha512-+2UgfLKoaNLhgfhV5Ihnk6wB4ljyW1/7wUIog2puUqajiC29Lp5R/IKDdkebh9jTbTogTbsgB+OY9cEWzG95JQ==, tarball: https://registry.npmjs.org
@@ -5001,9 +4986,6 @@ packages:
 
   '@vue/shared@3.1.5':
     resolution: {integrity: sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==, tarball: https://registry.npmjs.org
-
-  '@vue/shared@3.5.13':
-    resolution: {integrity: sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==, tarball: https://registry.npmjs.org
 
   '@vue/shared@3.5.17':
     resolution: {integrity: sha512-CabR+UN630VnsJO/jHWYBC1YVXyMq94KKp6iF5MQgZJs5I8cmjw6oVMO1oDbtBkENSHSSn/UadWlW/OAgdmKrg==, tarball: https://registry.npmjs.org
@@ -6764,14 +6746,6 @@ packages:
 
   fd-slicer@1.1.0:
     resolution: {integrity: sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==, tarball: https://registry.npmjs.org
-
-  fdir@6.4.4:
-    resolution: {integrity: sha512-1NZP+GK4GfuAv3PqKvxQRDMjdSRZjnkq7KfhlNrCNNlZ0ygQFpebfrnfnq/W7fpUnAv9aGWmY1zKx7FYL3gwhg==, tarball: https://registry.npmjs.org
-    peerDependencies:
-      picomatch: ^3 || ^4
-    peerDependenciesMeta:
-      picomatch:
-        optional: true
 
   fdir@6.4.6:
     resolution: {integrity: sha512-hiFoqpyZcfNm1yc4u8oWCf9A2c4D3QjCrks3zmoVKVxpQRzmPNar1hUJcBG2RQHvEVGDN+Jm81ZheVLAQMK6+w==, tarball: https://registry.npmjs.org
@@ -9512,10 +9486,6 @@ packages:
     resolution: {integrity: sha512-MjOadfU3Ys9KYoX0AdkBlFEF1Vx37uCCeN4ZHnmwm9FfpbsGWMZeBLMmmpY+6Ocqod7mkdZ0DT31OlbsFrLlkA==, tarball: https://registry.npmjs.org
     engines: {node: ^10 || ^12 || >=14}
 
-  postcss@8.5.3:
-    resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==, tarball: https://registry.npmjs.org
-    engines: {node: ^10 || ^12 || >=14}
-
   postcss@8.5.6:
     resolution: {integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg==, tarball: https://registry.npmjs.org
     engines: {node: ^10 || ^12 || >=14}
@@ -10620,10 +10590,6 @@ packages:
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==, tarball: https://registry.npmjs.org
 
-  tinyglobby@0.2.13:
-    resolution: {integrity: sha512-mEwzpUgrLySlveBwEVDMKk5B57bhLPYovRfPAXD5gA/98Opn0rCDj3GtLwFvCvH5RK9uPCExUROW5NjDwvqkxw==, tarball: https://registry.npmjs.org
-    engines: {node: '>=12.0.0'}
-
   tinyglobby@0.2.14:
     resolution: {integrity: sha512-tX5e7OM1HnYr2+a2C/4V0htOcSQcoSTH9KgJnVvNm5zm/cyEWKJ7j7YutsH9CxMdtOkkLFy2AHrMci9IM8IPZQ==, tarball: https://registry.npmjs.org
     engines: {node: '>=12.0.0'}
@@ -11600,7 +11566,7 @@ snapshots:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.1902.5(chokidar@4.0.1)
-      '@angular-devkit/build-webpack': 0.1902.5(chokidar@4.0.1)(webpack-dev-server@5.2.0(webpack@5.98.0))(webpack@5.98.0)
+      '@angular-devkit/build-webpack': 0.1902.5(chokidar@4.0.1)(webpack-dev-server@5.2.0(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1))
       '@angular-devkit/core': 19.2.5(chokidar@4.0.1)
       '@angular/build': 19.2.5(@angular/compiler-cli@19.2.3(@angular/compiler@19.2.3)(typescript@5.8.2))(@angular/compiler@19.2.3)(@types/node@22.13.10)(chokidar@4.0.1)(jiti@2.4.2)(karma@6.4.4)(less@4.2.2)(lightningcss@1.30.0)(postcss@8.5.2)(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0)
       '@angular/compiler-cli': 19.2.3(@angular/compiler@19.2.3)(typescript@5.8.2)
@@ -11614,14 +11580,14 @@ snapshots:
       '@babel/preset-env': 7.26.9(@babel/core@7.26.10)
       '@babel/runtime': 7.26.10
       '@discoveryjs/json-ext': 0.6.3
-      '@ngtools/webpack': 19.2.5(@angular/compiler-cli@19.2.3(@angular/compiler@19.2.3)(typescript@5.8.2))(typescript@5.8.2)(webpack@5.98.0)
+      '@ngtools/webpack': 19.2.5(@angular/compiler-cli@19.2.3(@angular/compiler@19.2.3)(typescript@5.8.2))(typescript@5.8.2)(webpack@5.98.0(esbuild@0.25.1))
       '@vitejs/plugin-basic-ssl': 1.2.0(vite@6.2.3(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.30.0)(sass@1.85.0)(terser@5.39.0)(yaml@2.7.0))
       ansi-colors: 4.1.3
       autoprefixer: 10.4.20(postcss@8.5.2)
-      babel-loader: 9.2.1(@babel/core@7.26.10)(webpack@5.98.0)
+      babel-loader: 9.2.1(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1))
       browserslist: 4.24.4
-      copy-webpack-plugin: 12.0.2(webpack@5.98.0)
-      css-loader: 7.1.2(webpack@5.98.0)
+      copy-webpack-plugin: 12.0.2(webpack@5.98.0(esbuild@0.25.1))
+      css-loader: 7.1.2(webpack@5.98.0(esbuild@0.25.1))
       esbuild-wasm: 0.25.1
       fast-glob: 3.3.3
       http-proxy-middleware: 3.0.3
@@ -11629,22 +11595,22 @@ snapshots:
       jsonc-parser: 3.3.1
       karma-source-map-support: 1.4.0
       less: 4.2.2
-      less-loader: 12.2.0(less@4.2.2)(webpack@5.98.0)
-      license-webpack-plugin: 4.0.2(webpack@5.98.0)
+      less-loader: 12.2.0(less@4.2.2)(webpack@5.98.0(esbuild@0.25.1))
+      license-webpack-plugin: 4.0.2(webpack@5.98.0(esbuild@0.25.1))
       loader-utils: 3.3.1
-      mini-css-extract-plugin: 2.9.2(webpack@5.98.0)
+      mini-css-extract-plugin: 2.9.2(webpack@5.98.0(esbuild@0.25.1))
       open: 10.1.0
       ora: 5.4.1
       picomatch: 4.0.2
       piscina: 4.8.0
       postcss: 8.5.2
-      postcss-loader: 8.1.1(postcss@8.5.2)(typescript@5.8.2)(webpack@5.98.0)
+      postcss-loader: 8.1.1(postcss@8.5.2)(typescript@5.8.2)(webpack@5.98.0(esbuild@0.25.1))
       resolve-url-loader: 5.0.0
       rxjs: 7.8.1
       sass: 1.85.0
-      sass-loader: 16.0.5(sass@1.85.0)(webpack@5.98.0)
+      sass-loader: 16.0.5(sass@1.85.0)(webpack@5.98.0(esbuild@0.25.1))
       semver: 7.7.1
-      source-map-loader: 5.0.0(webpack@5.98.0)
+      source-map-loader: 5.0.0(webpack@5.98.0(esbuild@0.25.1))
       source-map-support: 0.5.21
       terser: 5.39.0
       tree-kill: 1.2.2
@@ -11654,7 +11620,7 @@ snapshots:
       webpack-dev-middleware: 7.4.2(webpack@5.98.0)
       webpack-dev-server: 5.2.0(webpack@5.98.0)
       webpack-merge: 6.0.1
-      webpack-subresource-integrity: 5.1.0(webpack@5.98.0)
+      webpack-subresource-integrity: 5.1.0(webpack@5.98.0(esbuild@0.25.1))
     optionalDependencies:
       esbuild: 0.25.1
       karma: 6.4.4
@@ -11681,7 +11647,7 @@ snapshots:
       - webpack-cli
       - yaml
 
-  '@angular-devkit/build-webpack@0.1902.5(chokidar@4.0.1)(webpack-dev-server@5.2.0(webpack@5.98.0))(webpack@5.98.0)':
+  '@angular-devkit/build-webpack@0.1902.5(chokidar@4.0.1)(webpack-dev-server@5.2.0(webpack@5.98.0))(webpack@5.98.0(esbuild@0.25.1))':
     dependencies:
       '@angular-devkit/architect': 0.1902.5(chokidar@4.0.1)
       rxjs: 7.8.1
@@ -13002,7 +12968,7 @@ snapshots:
   '@eslint/config-array@0.19.2':
     dependencies:
       '@eslint/object-schema': 2.1.6
-      debug: 4.4.0
+      debug: 4.4.1
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -13018,7 +12984,7 @@ snapshots:
   '@eslint/eslintrc@3.3.0':
     dependencies:
       ajv: 6.12.6
-      debug: 4.4.0
+      debug: 4.4.1
       espree: 10.3.0
       globals: 14.0.0
       ignore: 5.3.2
@@ -13669,7 +13635,7 @@ snapshots:
   '@next/swc-win32-x64-msvc@15.3.4':
     optional: true
 
-  '@ngtools/webpack@19.2.5(@angular/compiler-cli@19.2.3(@angular/compiler@19.2.3)(typescript@5.8.2))(typescript@5.8.2)(webpack@5.98.0)':
+  '@ngtools/webpack@19.2.5(@angular/compiler-cli@19.2.3(@angular/compiler@19.2.3)(typescript@5.8.2))(typescript@5.8.2)(webpack@5.98.0(esbuild@0.25.1))':
     dependencies:
       '@angular/compiler-cli': 19.2.3(@angular/compiler@19.2.3)(typescript@5.8.2)
       typescript: 5.8.2
@@ -14006,7 +13972,7 @@ snapshots:
 
   '@puppeteer/browsers@2.10.4':
     dependencies:
-      debug: 4.4.0
+      debug: 4.4.1
       extract-zip: 2.0.1
       progress: 2.0.3
       proxy-agent: 6.5.0
@@ -14721,7 +14687,7 @@ snapshots:
 
   '@testing-library/dom@10.4.0':
     dependencies:
-      '@babel/code-frame': 7.26.2
+      '@babel/code-frame': 7.27.1
       '@babel/runtime': 7.26.10
       '@types/aria-query': 5.0.4
       aria-query: 5.3.0
@@ -15239,23 +15205,11 @@ snapshots:
       loupe: 3.1.4
       tinyrainbow: 2.0.0
 
-  '@volar/language-core@2.4.12':
-    dependencies:
-      '@volar/source-map': 2.4.12
-
   '@volar/language-core@2.4.17':
     dependencies:
       '@volar/source-map': 2.4.17
 
-  '@volar/source-map@2.4.12': {}
-
   '@volar/source-map@2.4.17': {}
-
-  '@volar/typescript@2.4.12':
-    dependencies:
-      '@volar/language-core': 2.4.12
-      path-browserify: 1.0.1
-      vscode-uri: 3.1.0
 
   '@volar/typescript@2.4.17':
     dependencies:
@@ -15265,14 +15219,6 @@ snapshots:
 
   '@vscode/web-custom-data@0.4.13': {}
 
-  '@vue/compiler-core@3.5.13':
-    dependencies:
-      '@babel/parser': 7.26.10
-      '@vue/shared': 3.5.13
-      entities: 4.5.0
-      estree-walker: 2.0.2
-      source-map-js: 1.2.1
-
   '@vue/compiler-core@3.5.17':
     dependencies:
       '@babel/parser': 7.27.7
@@ -15280,11 +15226,6 @@ snapshots:
       entities: 4.5.0
       estree-walker: 2.0.2
       source-map-js: 1.2.1
-
-  '@vue/compiler-dom@3.5.13':
-    dependencies:
-      '@vue/compiler-core': 3.5.13
-      '@vue/shared': 3.5.13
 
   '@vue/compiler-dom@3.5.17':
     dependencies:
@@ -15315,10 +15256,10 @@ snapshots:
 
   '@vue/language-core@2.2.0(typescript@5.8.2)':
     dependencies:
-      '@volar/language-core': 2.4.12
-      '@vue/compiler-dom': 3.5.13
+      '@volar/language-core': 2.4.17
+      '@vue/compiler-dom': 3.5.17
       '@vue/compiler-vue2': 2.7.16
-      '@vue/shared': 3.5.13
+      '@vue/shared': 3.5.17
       alien-signals: 0.4.14
       minimatch: 9.0.5
       muggle-string: 0.4.1
@@ -15366,8 +15307,6 @@ snapshots:
       vue: 3.5.17(typescript@5.8.2)
 
   '@vue/shared@3.1.5': {}
-
-  '@vue/shared@3.5.13': {}
 
   '@vue/shared@3.5.17': {}
 
@@ -15765,7 +15704,7 @@ snapshots:
 
   b4a@1.6.7: {}
 
-  babel-loader@9.2.1(@babel/core@7.26.10)(webpack@5.98.0):
+  babel-loader@9.2.1(@babel/core@7.26.10)(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       '@babel/core': 7.26.10
       find-cache-dir: 4.0.0
@@ -16384,7 +16323,7 @@ snapshots:
     dependencies:
       is-what: 3.14.1
 
-  copy-webpack-plugin@12.0.2(webpack@5.98.0):
+  copy-webpack-plugin@12.0.2(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       fast-glob: 3.3.3
       glob-parent: 6.0.2
@@ -16479,7 +16418,7 @@ snapshots:
     dependencies:
       postcss: 8.4.31
 
-  css-loader@7.1.2(webpack@5.98.0):
+  css-loader@7.1.2(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.6)
       postcss: 8.5.6
@@ -17426,10 +17365,6 @@ snapshots:
   fd-slicer@1.1.0:
     dependencies:
       pend: 1.2.0
-
-  fdir@6.4.4(picomatch@4.0.2):
-    optionalDependencies:
-      picomatch: 4.0.2
 
   fdir@6.4.6(picomatch@4.0.2):
     optionalDependencies:
@@ -18637,7 +18572,7 @@ snapshots:
 
   legacy-javascript@0.0.1: {}
 
-  less-loader@12.2.0(less@4.2.2)(webpack@5.98.0):
+  less-loader@12.2.0(less@4.2.2)(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       less: 4.2.2
     optionalDependencies:
@@ -18664,7 +18599,7 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
-  license-webpack-plugin@4.0.2(webpack@5.98.0):
+  license-webpack-plugin@4.0.2(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       webpack-sources: 3.2.3
     optionalDependencies:
@@ -19130,7 +19065,7 @@ snapshots:
 
   min-indent@1.0.1: {}
 
-  mini-css-extract-plugin@2.9.2(webpack@5.98.0):
+  mini-css-extract-plugin@2.9.2(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       schema-utils: 4.3.0
       tapable: 2.2.1
@@ -19226,7 +19161,7 @@ snapshots:
       pkg-types: 1.3.1
       ufo: 1.5.4
 
-  monaco-editor@0.52.2(patch_hash=014b3d353950093d449ae73219b91640a92e126b77d729b102b1e71fba37d931): {}
+  monaco-editor@0.52.2(patch_hash=8564f3cf407fce37d363bca938e573e478e7790a04f3d3159321819f96977968): {}
 
   moo@0.5.2: {}
 
@@ -20051,7 +19986,7 @@ snapshots:
     optionalDependencies:
       postcss: 8.4.31
 
-  postcss-loader@8.1.1(postcss@8.5.2)(typescript@5.8.2)(webpack@5.98.0):
+  postcss-loader@8.1.1(postcss@8.5.2)(typescript@5.8.2)(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.8.2)
       jiti: 1.21.7
@@ -20236,12 +20171,6 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  postcss@8.5.3:
-    dependencies:
-      nanoid: 3.3.9
-      picocolors: 1.1.1
-      source-map-js: 1.2.1
-
   postcss@8.5.6:
     dependencies:
       nanoid: 3.3.11
@@ -20355,7 +20284,7 @@ snapshots:
     dependencies:
       '@puppeteer/browsers': 2.10.4
       chromium-bidi: 5.1.0(devtools-protocol@0.0.1439962)
-      debug: 4.4.0
+      debug: 4.4.1
       devtools-protocol: 0.0.1439962
       typed-query-selector: 2.12.0
       ws: 8.18.2
@@ -20785,7 +20714,7 @@ snapshots:
       parse-srcset: 1.0.2
       postcss: 8.4.31
 
-  sass-loader@16.0.5(sass@1.85.0)(webpack@5.98.0):
+  sass-loader@16.0.5(sass@1.85.0)(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
@@ -21223,7 +21152,7 @@ snapshots:
 
   source-map-js@1.2.1: {}
 
-  source-map-loader@5.0.0(webpack@5.98.0):
+  source-map-loader@5.0.0(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       iconv-lite: 0.6.3
       source-map-js: 1.2.1
@@ -21624,11 +21553,6 @@ snapshots:
 
   tinyexec@0.3.2: {}
 
-  tinyglobby@0.2.13:
-    dependencies:
-      fdir: 6.4.6(picomatch@4.0.2)
-      picomatch: 4.0.2
-
   tinyglobby@0.2.14:
     dependencies:
       fdir: 6.4.6(picomatch@4.0.2)
@@ -21996,10 +21920,10 @@ snapshots:
     dependencies:
       '@microsoft/api-extractor': 7.52.1(@types/node@22.13.10)
       '@rollup/pluginutils': 5.1.4(rollup@4.30.1)
-      '@volar/typescript': 2.4.12
+      '@volar/typescript': 2.4.17
       '@vue/language-core': 2.2.0(typescript@5.8.2)
       compare-versions: 6.1.1
-      debug: 4.4.0
+      debug: 4.4.1
       kolorist: 1.8.0
       local-pkg: 1.1.1
       magic-string: 0.30.17
@@ -22015,10 +21939,10 @@ snapshots:
     dependencies:
       '@microsoft/api-extractor': 7.52.1(@types/node@22.13.10)
       '@rollup/pluginutils': 5.1.4(rollup@4.40.0)
-      '@volar/typescript': 2.4.12
+      '@volar/typescript': 2.4.17
       '@vue/language-core': 2.2.0(typescript@5.8.2)
       compare-versions: 6.1.1
-      debug: 4.4.0
+      debug: 4.4.1
       kolorist: 1.8.0
       local-pkg: 1.1.1
       magic-string: 0.30.17
@@ -22085,11 +22009,11 @@ snapshots:
   vite@6.3.5(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.30.0)(sass@1.85.0)(terser@5.37.0)(yaml@2.7.0):
     dependencies:
       esbuild: 0.25.5
-      fdir: 6.4.4(picomatch@4.0.2)
+      fdir: 6.4.6(picomatch@4.0.2)
       picomatch: 4.0.2
-      postcss: 8.5.3
+      postcss: 8.5.6
       rollup: 4.40.0
-      tinyglobby: 0.2.13
+      tinyglobby: 0.2.14
     optionalDependencies:
       '@types/node': 22.13.10
       fsevents: 2.3.3
@@ -22410,7 +22334,7 @@ snapshots:
 
   webpack-sources@3.2.3: {}
 
-  webpack-subresource-integrity@5.1.0(webpack@5.98.0):
+  webpack-subresource-integrity@5.1.0(webpack@5.98.0(esbuild@0.25.1)):
     dependencies:
       typed-assert: 1.0.9
       webpack: 5.98.0(esbuild@0.25.1)

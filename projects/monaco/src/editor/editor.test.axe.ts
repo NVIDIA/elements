@@ -14,6 +14,7 @@ describe(MonacoEditor.metadata.tag, () => {
       <nve-monaco-editor></nve-monaco-editor>
     `);
     element = fixture.querySelector(MonacoEditor.metadata.tag);
+
     await untilEvent(element, 'ready');
     await elementIsStable(element);
   });
