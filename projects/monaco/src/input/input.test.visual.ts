@@ -3,7 +3,7 @@ import { visualRunner } from '@internals/vite';
 
 describe('monaco input visual', () => {
   test('input should match visual baseline', async () => {
-    const report = await visualRunner.render('monaco-input', template(), { network: true });
+    const report = await visualRunner.render('monaco-input', template(''), { network: true });
     expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
   });
 
@@ -44,6 +44,10 @@ function template(theme: '' | 'dark' = '') {
 
   <div nve-layout="column gap:md">
     <nve-monaco-input language="json" schema='${jsonSchema}' value='${jsonValue}'></nve-monaco-input>
+
+    <nve-monaco-input language="json" schema='${jsonSchema}' value='${jsonValue}' disabled></nve-monaco-input>
+
+    <nve-monaco-input language="json" schema='${jsonSchema}' value='${jsonValue}' line-numbers="on" folding minimap></nve-monaco-input>
 
     <nve-control style="width: 100%;">
       <label>•︎•︎•︎•︎•︎•︎</label>

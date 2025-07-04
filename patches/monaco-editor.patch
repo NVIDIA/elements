@@ -95,6 +95,113 @@ index 9a326187e9b9d58ba7434bf9efd2be1e860d63f6..bb2d479cc107bfd876782cc5756d33fd
                  vertical: scrollbar.vertical,
                  horizontal: scrollbar.horizontal,
                  verticalScrollbarSize: scrollbar.verticalScrollbarSize,
+diff --git a/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js b/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js
+index 5cf17f8c8565259f89c5bf1aece91c721dd67fd4..662846460ba8890ca49b381d9a10b05dfa711518 100644
+--- a/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js
++++ b/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js
+@@ -53,11 +53,14 @@ let DiffEditorEditors = class DiffEditorEditors extends Disposable {
+                 return true;
+             }
+         }, (reader, changeSummary) => {
++            // PATCH: preserve and propagate originalAriaLabel and modifiedAriaLabel IDiffEditorConstructionOptions
++            const originalAriaLabel = this.original.getOption(4 /* EditorOption.ariaLabel */);
++            const modifiedAriaLabel = this.modified.getOption(4 /* EditorOption.ariaLabel */);
+             /** @description update editor options */
+             _options.editorOptions.read(reader);
+             this._options.renderSideBySide.read(reader);
+-            this.modified.updateOptions(this._adjustOptionsForRightHandSide(reader, changeSummary));
+-            this.original.updateOptions(this._adjustOptionsForLeftHandSide(reader, changeSummary));
++            this.original.updateOptions(this._adjustOptionsForLeftHandSide(reader, { originalAriaLabel, ...changeSummary }));
++            this.modified.updateOptions(this._adjustOptionsForRightHandSide(reader, { modifiedAriaLabel, ...changeSummary }));
+         }));
+     }
+     _createLeftHandSideEditor(options, codeEditorWidgetOptions) {
+@@ -136,7 +139,8 @@ let DiffEditorEditors = class DiffEditorEditors extends Disposable {
+         clonedOptions.scrollbar = { ...(clonedOptions.scrollbar || {}) };
+         clonedOptions.folding = false;
+         clonedOptions.codeLens = this._options.diffCodeLens.get();
+-        clonedOptions.fixedOverflowWidgets = true;
++        // PATCH: respect explicit options, as fixed overflow does not work in a shadow DOM
++        // clonedOptions.fixedOverflowWidgets = true;
+         // Clone minimap options before changing them
+         clonedOptions.minimap = { ...(clonedOptions.minimap || {}) };
+         clonedOptions.minimap.enabled = false;
+diff --git a/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js b/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js
+index 26f3b65fb40c70eb490975c93cf823797b61330b..47f00ca0bbdb87963fe95ed5bda42d7b1bda9735 100644
+--- a/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js
++++ b/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js
+@@ -105,4 +105,10 @@ export class DelegatingEditor extends Disposable {
+     changeDecorations(callback) {
+         return this._targetEditor.changeDecorations(callback);
+     }
++    // PATCH: Fire missing onDidDispose event.
++    // See: https://github.com/microsoft/monaco-editor/issues/4714
++    dispose() {
++        this._onDidDispose.fire();
++        super.dispose();
++    }
+ }
+diff --git a/esm/vs/editor/browser/widget/diffEditor/features/gutterFeature.js b/esm/vs/editor/browser/widget/diffEditor/features/gutterFeature.js
+index 6a65951dce7583b077445d33d7115fd37da6708b..76fb442be1959dcbea370f08c339a2298c0f4d9d 100644
+--- a/esm/vs/editor/browser/widget/diffEditor/features/gutterFeature.js
++++ b/esm/vs/editor/browser/widget/diffEditor/features/gutterFeature.js
+@@ -88,6 +88,10 @@ let DiffEditorGutter = class DiffEditorGutter extends Disposable {
+         this._register(addDisposableListener(this.elements.root, 'click', () => {
+             this._editors.modified.focus();
+         }));
++        // PATCH: fix a bug where the menu is incorrectly parented to the wrong (focused) editor
++        this._register(addDisposableListener(this.elements.root, 'mousedown', () => {
++            this._editors.modified.focus();
++        }, true));
+         this._register(applyStyle(this.elements.root, { display: this._hasActions.map(a => a ? 'block' : 'none') }));
+         derivedDisposable(this, reader => {
+             const showSash = this._showSash.read(reader);
+@@ -186,6 +190,8 @@ let DiffToolBar = class DiffToolBar extends Disposable {
+                     primaryGroup: g => g.startsWith('primary'),
+                 },
+                 overflowBehavior: { maxItems: this._isSmall.read(reader) ? 1 : 3 },
++                // PATCH: fix a bug where menu is incorrectly positioned when editor is within a shadow DOM
++                menuAsChild: true,
+                 hiddenItemStrategy: 0 /* HiddenItemStrategy.Ignore */,
+                 actionRunner: new ActionRunnerWithContext(() => {
+                     const item = this._item.get();
+diff --git a/esm/vs/editor/browser/widget/diffEditor/utils/editorGutter.js b/esm/vs/editor/browser/widget/diffEditor/utils/editorGutter.js
+index bfd5289c9cfe2af54cf8c5a5fbfbf99c9031cc11..a5514101f1e9650bc37a33796f825f4610078773 100644
+--- a/esm/vs/editor/browser/widget/diffEditor/utils/editorGutter.js
++++ b/esm/vs/editor/browser/widget/diffEditor/utils/editorGutter.js
+@@ -78,9 +78,15 @@ export class EditorGutter extends Disposable {
+                         const top = gutterItem.range.startLineNumber <= this._editor.getModel().getLineCount()
+                             ? this._editor.getTopForLineNumber(gutterItem.range.startLineNumber, true) - scrollTop
+                             : this._editor.getBottomForLineNumber(gutterItem.range.startLineNumber - 1, false) - scrollTop;
+-                        const bottom = gutterItem.range.endLineNumberExclusive === 1 ?
+-                            Math.max(top, this._editor.getTopForLineNumber(gutterItem.range.startLineNumber, false) - scrollTop)
+-                            : Math.max(top, this._editor.getBottomForLineNumber(gutterItem.range.endLineNumberExclusive - 1, true) - scrollTop);
++                        // PATCH: Clamp line numbers to avoid Error: Illegal value for lineNumber
++                        // See: https://github.com/microsoft/monaco-editor/issues/4852
++                        // See: https://github.com/microsoft/vscode/issues/248826
++                        const lineCount = this._editor.getModel().getLineCount();
++                        const clampedStartLineNumber = Math.min(lineCount, Math.max(1, gutterItem.range.startLineNumber));
++                        const clampedEndLineNumber = Math.min(lineCount, Math.max(1, gutterItem.range.endLineNumberExclusive - 1));
++                        const bottom = gutterItem.range.endLineNumberExclusive === 1
++                            ? Math.max(top, this._editor.getTopForLineNumber(clampedStartLineNumber, false) - scrollTop)
++                            : Math.max(top, this._editor.getBottomForLineNumber(clampedEndLineNumber, true) - scrollTop);
+                         const height = bottom - top;
+                         view.domNode.style.top = `${top}px`;
+                         view.domNode.style.height = `${height}px`;
+diff --git a/esm/vs/editor/browser/widget/multiDiffEditor/diffEditorItemTemplate.js b/esm/vs/editor/browser/widget/multiDiffEditor/diffEditorItemTemplate.js
+index 48173fa08a38a6675cd70f359ca86c74b6a18268..e913b556d13397eeca8f2b087e4f268dac81be53 100644
+--- a/esm/vs/editor/browser/widget/multiDiffEditor/diffEditorItemTemplate.js
++++ b/esm/vs/editor/browser/widget/multiDiffEditor/diffEditorItemTemplate.js
+@@ -172,7 +172,8 @@ let DiffEditorItemTemplate = class DiffEditorItemTemplate extends Disposable {
+                     useShadows: false,
+                 },
+                 renderOverviewRuler: false,
+-                fixedOverflowWidgets: true,
++                // PATCH: respect explicit options, as fixed overflow does not work in a shadow DOM
++                // fixedOverflowWidgets: true,
+                 overviewRulerBorder: false,
+             };
+         }
 diff --git a/esm/vs/editor/common/model/textModel.js b/esm/vs/editor/common/model/textModel.js
 index 92bbf91d421a45172ff04c2bac1025e433300b62..6688c3d07a38855df88a5903feafe46315e4e32c 100644
 --- a/esm/vs/editor/common/model/textModel.js
@@ -120,6 +227,20 @@ index 92bbf91d421a45172ff04c2bac1025e433300b62..6688c3d07a38855df88a5903feafe463
      _assertNotDisposed() {
          if (this._isDisposed) {
              throw new BugIndicatingError('Model is disposed!');
+diff --git a/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js b/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js
+index be8ff0dd7f4cc05ca1f74b3b561f80d6dd530f33..d2aea97c401230cc3c1390828cc2be86361dbc70 100644
+--- a/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js
++++ b/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js
+@@ -251,7 +251,8 @@ let ReferenceWidget = class ReferenceWidget extends peekView.PeekViewWidget {
+                 alwaysConsumeMouseWheel: true
+             },
+             overviewRulerLanes: 2,
+-            fixedOverflowWidgets: true,
++            // PATCH: fixed overflow does not work in a shadow DOM
++            // fixedOverflowWidgets: true,
+             minimap: {
+                 enabled: false
+             }
 diff --git a/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css b/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css
 index 276082256f6efda17a33630f2aeb9dd7fa5507ea..282b97d67aa01c509b2a549ca1f8be056bd3c1f2 100644
 --- a/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css
@@ -387,6 +508,199 @@ index 2469e15731504d94f94047a0108b104eb1f8bc40..2b2d727d6d805bae024ac244c1541faf
        }
      }).then(void 0, (err) => {
        console.error(err);
+diff --git a/esm/vs/language/typescript/ts.worker.js b/esm/vs/language/typescript/ts.worker.js
+index cd571071d308d9257dba55aeacc974d716d0b68d..76c8d483a0b43306481ee8f481cb1331872ad22d 100644
+--- a/esm/vs/language/typescript/ts.worker.js
++++ b/esm/vs/language/typescript/ts.worker.js
+@@ -242481,6 +242481,13 @@ function fileNameIsLib(resource) {
+   }
+   return false;
+ }
++// PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++function fileNameIsDiff(resource) {
++  if (typeof resource === 'string') {
++    return /^diff:\//.test(resource);
++  }
++  return resource.scheme === 'diff';
++}
+ var TypeScriptWorker = class _TypeScriptWorker {
+   constructor(ctx, createData) {
+     this._extraLibs = /* @__PURE__ */ Object.create(null);
+@@ -242502,7 +242509,8 @@ var TypeScriptWorker = class _TypeScriptWorker {
+   }
+   getScriptFileNames() {
+     const allModels = this._ctx.getMirrorModels().map((model) => model.uri);
+-    const models = allModels.filter((uri) => !fileNameIsLib(uri)).map((uri) => uri.toString());
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    const models = allModels.filter((uri) => !fileNameIsDiff(uri) && !fileNameIsLib(uri)).map((uri) => uri.toString());
+     return models.concat(Object.keys(this._extraLibs));
+   }
+   _getModel(fileName) {
+@@ -242629,35 +242637,39 @@ var TypeScriptWorker = class _TypeScriptWorker {
+     return diagnostics;
+   }
+   async getSyntacticDiagnostics(fileName) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return [];
+     }
+     const diagnostics = this._languageService.getSyntacticDiagnostics(fileName);
+     return _TypeScriptWorker.clearFiles(diagnostics);
+   }
+   async getSemanticDiagnostics(fileName) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return [];
+     }
+     const diagnostics = this._languageService.getSemanticDiagnostics(fileName);
+     return _TypeScriptWorker.clearFiles(diagnostics);
+   }
+   async getSuggestionDiagnostics(fileName) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return [];
+     }
+     const diagnostics = this._languageService.getSuggestionDiagnostics(fileName);
+     return _TypeScriptWorker.clearFiles(diagnostics);
+   }
+   async getCompilerOptionsDiagnostics(fileName) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return [];
+     }
+     const diagnostics = this._languageService.getCompilerOptionsDiagnostics();
+     return _TypeScriptWorker.clearFiles(diagnostics);
+   }
+   async getCompletionsAtPosition(fileName, position) {
+-    if (fileNameIsLib(fileName)) {
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return void 0;
+     }
+     return this._languageService.getCompletionsAtPosition(fileName, position, void 0);
+@@ -242674,61 +242686,71 @@ var TypeScriptWorker = class _TypeScriptWorker {
+     );
+   }
+   async getSignatureHelpItems(fileName, position, options) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return void 0;
+     }
+     return this._languageService.getSignatureHelpItems(fileName, position, options);
+   }
+   async getQuickInfoAtPosition(fileName, position) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return void 0;
+     }
+     return this._languageService.getQuickInfoAtPosition(fileName, position);
+   }
+   async getDocumentHighlights(fileName, position, filesToSearch) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return void 0;
+     }
+     return this._languageService.getDocumentHighlights(fileName, position, filesToSearch);
+   }
+   async getDefinitionAtPosition(fileName, position) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return void 0;
+     }
+     return this._languageService.getDefinitionAtPosition(fileName, position);
+   }
+   async getReferencesAtPosition(fileName, position) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return void 0;
+     }
+     return this._languageService.getReferencesAtPosition(fileName, position);
+   }
+   async getNavigationTree(fileName) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return void 0;
+     }
+     return this._languageService.getNavigationTree(fileName);
+   }
+   async getFormattingEditsForDocument(fileName, options) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return [];
+     }
+     return this._languageService.getFormattingEditsForDocument(fileName, options);
+   }
+   async getFormattingEditsForRange(fileName, start, end, options) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return [];
+     }
+     return this._languageService.getFormattingEditsForRange(fileName, start, end, options);
+   }
+   async getFormattingEditsAfterKeystroke(fileName, postion, ch, options) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return [];
+     }
+     return this._languageService.getFormattingEditsAfterKeystroke(fileName, postion, ch, options);
+   }
+   async findRenameLocations(fileName, position, findInStrings, findInComments, providePrefixAndSuffixTextForRename) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return void 0;
+     }
+     return this._languageService.findRenameLocations(
+@@ -242740,13 +242762,15 @@ var TypeScriptWorker = class _TypeScriptWorker {
+     );
+   }
+   async getRenameInfo(fileName, position, options) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return { canRename: false, localizedErrorMessage: "Cannot rename in lib file" };
+     }
+     return this._languageService.getRenameInfo(fileName, position, options);
+   }
+   async getEmitOutput(fileName, emitOnlyDtsFiles, forceDtsEmit) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return { outputFiles: [], emitSkipped: true };
+     }
+     const emitOutput = this._languageService.getEmitOutput(
+@@ -242758,7 +242782,8 @@ var TypeScriptWorker = class _TypeScriptWorker {
+     return { ...emitOutput, diagnostics };
+   }
+   async getCodeFixesAtPosition(fileName, start, end, errorCodes, formatOptions) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return [];
+     }
+     const preferences = {};
+@@ -242779,7 +242804,8 @@ var TypeScriptWorker = class _TypeScriptWorker {
+     this._extraLibs = extraLibs;
+   }
+   async provideInlayHints(fileName, start, end) {
+-    if (fileNameIsLib(fileName)) {
++    // PATCH: Treat diff:// as isolated originals; excluded from diagnostics (akin to libs)
++    if (fileNameIsDiff(fileName) || fileNameIsLib(fileName)) {
+       return [];
+     }
+     const preferences = this._inlayHintsOptions ?? {};
 diff --git a/esm/vs/language/typescript/tsMode.js b/esm/vs/language/typescript/tsMode.js
 index 6e696fc4eb64adb9c5f6986192fd17c566d16db9..5b9c9324fbc782aaf521e5b3485ceb243bf0abcd 100644
 --- a/esm/vs/language/typescript/tsMode.js
