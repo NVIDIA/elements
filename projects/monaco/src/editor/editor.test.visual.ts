@@ -44,7 +44,7 @@ function template(theme: '' | 'dark' = '') {
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
 
-  <div nve-layout="column gap:md" style="width: 640px; height: 400px;">
+  <div nve-layout="column gap:md align:stretch" style="width: 640px; height: 400px;">
     <nve-monaco-editor></nve-monaco-editor>
   </div>
 

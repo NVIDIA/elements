@@ -2,18 +2,18 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { runAxe } from '@nvidia-elements/testing/axe';
-import { MonacoInput } from '@nvidia-elements/monaco/input';
-import '@nvidia-elements/monaco/input/define.js';
+import { MonacoDiffEditor } from '@nvidia-elements/monaco/diff-editor';
+import '@nvidia-elements/monaco/diff-editor/define.js';
 
-describe(MonacoInput.metadata.tag, () => {
+describe(MonacoDiffEditor.metadata.tag, () => {
   let fixture: HTMLElement;
-  let element: MonacoInput;
+  let element: MonacoDiffEditor;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-monaco-input></nve-monaco-input>
+      <nve-monaco-diff-editor></nve-monaco-diff-editor>
     `);
-    element = fixture.querySelector(MonacoInput.metadata.tag);
+    element = fixture.querySelector(MonacoDiffEditor.metadata.tag);
 
     await untilEvent(element, 'ready');
     await elementIsStable(element);
@@ -23,8 +23,8 @@ describe(MonacoInput.metadata.tag, () => {
     removeFixture(fixture);
   });
 
-  it('should pass axe check', async () => {
-    const results = await runAxe([MonacoInput.metadata.tag]);
+  it('should pass axe check for status', async () => {
+    const results = await runAxe([MonacoDiffEditor.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
 });
