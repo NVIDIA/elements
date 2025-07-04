@@ -1,12 +1,12 @@
 import { expect, test, describe } from 'vitest';
 import { lighthouseRunner } from '@nve-internals/vite';
 
-describe('monaco-input lighthouse report', () => {
-  test('monaco-input should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-monaco-input', /* html */`
-      <nve-monaco-input language="plaintext"></nve-monaco-input>
+describe('monaco-diff-input lighthouse report', () => {
+  test('monaco-diff-input should meet lighthouse benchmarks', async () => {
+    const report = await lighthouseRunner.getReport('nve-monaco-diff-input', /* html */`
+      <nve-monaco-diff-input language="plaintext"></nve-monaco-diff-input>
       <script type="module">
-        import '@nvidia-elements/monaco/input/define.js';
+        import '@nvidia-elements/monaco/diff-input/define.js';
       </script>
     `);
 
@@ -14,7 +14,7 @@ describe('monaco-input lighthouse report', () => {
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(89);
     expect(report.payload.javascript.kb).toBeLessThan(1190);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(13);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14);
     expect(report.payload.javascript.requests['editor.global.css2.js'].kb).toBeLessThan(57);
     expect(report.payload.javascript.requests['editor.main.css2.js'].kb).toBeLessThan(22);
     expect(report.payload.javascript.requests['index2.js'].kb).toBeLessThan(1022);
@@ -23,19 +23,19 @@ describe('monaco-input lighthouse report', () => {
     expect(report.payload.javascript.requests['editor.worker2.js'].kb).toBeLessThan(72);
   });
 
-  test('monaco-input should meet lighthouse benchmarks for CSS', async () => {
-    const report = await lighthouseRunner.getReport('nve-monaco-input_css', /* html */`
-      <nve-monaco-input language="css"></nve-monaco-input>
+  test('monaco-diff-input should meet lighthouse benchmarks for CSS', async () => {
+    const report = await lighthouseRunner.getReport('nve-monaco-diff-input_css', /* html */`
+      <nve-monaco-diff-input language="css"></nve-monaco-diff-input>
       <script type="module">
-        import '@nvidia-elements/monaco/input/define.js';
+        import '@nvidia-elements/monaco/diff-input/define.js';
       </script>
     `);
 
     expect(report.scores.performance).toBeGreaterThanOrEqual(90);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(89);
-    expect(report.payload.javascript.kb).toBeLessThan(1417);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(13);
+    expect(report.payload.javascript.kb).toBeLessThan(1418);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14);
     expect(report.payload.javascript.requests['editor.global.css2.js'].kb).toBeLessThan(57);
     expect(report.payload.javascript.requests['editor.main.css2.js'].kb).toBeLessThan(22);
     expect(report.payload.javascript.requests['index2.js'].kb).toBeLessThan(1022);
@@ -45,19 +45,19 @@ describe('monaco-input lighthouse report', () => {
     expect(report.payload.javascript.requests['editor.worker2.js'].kb).toBeLessThan(72);
   });
 
-  test('monaco-input should meet lighthouse benchmarks for HTML', async () => {
-    const report = await lighthouseRunner.getReport('nve-monaco-input_html', /* html */`
-      <nve-monaco-input language="html"></nve-monaco-input>
+  test('monaco-diff-input should meet lighthouse benchmarks for HTML', async () => {
+    const report = await lighthouseRunner.getReport('nve-monaco-diff-input_html', /* html */`
+      <nve-monaco-diff-input language="html"></nve-monaco-diff-input>
       <script type="module">
-        import '@nvidia-elements/monaco/input/define.js';
+        import '@nvidia-elements/monaco/diff-input/define.js';
       </script>
     `);
 
     expect(report.scores.performance).toBeGreaterThanOrEqual(90);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(89);
-    expect(report.payload.javascript.kb).toBeLessThan(1366);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(13);
+    expect(report.payload.javascript.kb).toBeLessThan(1367);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14);
     expect(report.payload.javascript.requests['editor.global.css2.js'].kb).toBeLessThan(57);
     expect(report.payload.javascript.requests['editor.main.css2.js'].kb).toBeLessThan(22);
     expect(report.payload.javascript.requests['index2.js'].kb).toBeLessThan(1022);
@@ -67,11 +67,11 @@ describe('monaco-input lighthouse report', () => {
     expect(report.payload.javascript.requests['html.worker2.js'].kb).toBeLessThan(178);
   });
 
-  test('monaco-input should meet lighthouse benchmarks for JSON', async () => {
-    const report = await lighthouseRunner.getReport('nve-monaco-input_json', /* html */`
-      <nve-monaco-input language="json"></nve-monaco-input>
+  test('monaco-diff-input should meet lighthouse benchmarks for JSON', async () => {
+    const report = await lighthouseRunner.getReport('nve-monaco-diff-input_json', /* html */`
+      <nve-monaco-diff-input language="json"></nve-monaco-diff-input>
       <script type="module">
-        import '@nvidia-elements/monaco/input/define.js';
+        import '@nvidia-elements/monaco/diff-input/define.js';
       </script>
     `);
 
@@ -79,7 +79,7 @@ describe('monaco-input lighthouse report', () => {
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(89);
     expect(report.payload.javascript.kb).toBeLessThan(1299);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(13);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14);
     expect(report.payload.javascript.requests['editor.global.css2.js'].kb).toBeLessThan(57);
     expect(report.payload.javascript.requests['editor.main.css2.js'].kb).toBeLessThan(22);
     expect(report.payload.javascript.requests['index2.js'].kb).toBeLessThan(1022);
@@ -89,19 +89,19 @@ describe('monaco-input lighthouse report', () => {
     expect(report.payload.javascript.requests['json.worker2.js'].kb).toBeLessThan(110);
   });
 
-  test('monaco-input should meet lighthouse benchmarks for TypeScript', async () => {
-    const report = await lighthouseRunner.getReport('nve-monaco-input_typescript', /* html */`
-      <nve-monaco-input language="typescript"></nve-monaco-input>
+  test('monaco-diff-input should meet lighthouse benchmarks for TypeScript', async () => {
+    const report = await lighthouseRunner.getReport('nve-monaco-diff-input_typescript', /* html */`
+      <nve-monaco-diff-input language="typescript"></nve-monaco-diff-input>
       <script type="module">
-        import '@nvidia-elements/monaco/input/define.js';
+        import '@nvidia-elements/monaco/diff-input/define.js';
       </script>
     `);
 
     expect(report.scores.performance).toBeGreaterThanOrEqual(90);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(89);
-    expect(report.payload.javascript.kb).toBeLessThan(2557);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(13);
+    expect(report.payload.javascript.kb).toBeLessThan(2558);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14);
     expect(report.payload.javascript.requests['editor.global.css2.js'].kb).toBeLessThan(57);
     expect(report.payload.javascript.requests['editor.main.css2.js'].kb).toBeLessThan(22);
     expect(report.payload.javascript.requests['index2.js'].kb).toBeLessThan(1022);

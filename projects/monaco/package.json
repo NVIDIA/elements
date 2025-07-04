@@ -48,6 +48,30 @@
       "types": "./dist/monaco.d.ts",
       "default": "./dist/monaco.js"
     },
+    "./diff-editor": {
+      "types": "./dist/diff-editor/index.d.ts",
+      "default": "./dist/diff-editor/index.js"
+    },
+    "./diff-editor/index.js": {
+      "types": "./dist/diff-editor/index.d.ts",
+      "default": "./dist/diff-editor/index.js"
+    },
+    "./diff-editor/define.js": {
+      "types": "./dist/diff-editor/define.d.ts",
+      "default": "./dist/diff-editor/define.js"
+    },
+    "./diff-input": {
+      "types": "./dist/diff-input/index.d.ts",
+      "default": "./dist/diff-input/index.js"
+    },
+    "./diff-input/index.js": {
+      "types": "./dist/diff-input/index.d.ts",
+      "default": "./dist/diff-input/index.js"
+    },
+    "./diff-input/define.js": {
+      "types": "./dist/diff-input/define.d.ts",
+      "default": "./dist/diff-input/define.js"
+    },
     "./editor": {
       "types": "./dist/editor/index.d.ts",
       "default": "./dist/editor/index.js"
@@ -187,7 +211,6 @@
         "../labs/forms/dist/**/*.js",
         "../themes/dist/**/*.css",
         "src/**",
-        "!src/**/*.stories.ts",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
@@ -235,7 +258,8 @@
       "command": "node --experimental-transform-types ./build/prebundle.ts",
       "files": [
         "build/prebundle.ts",
-        "build/tsconfig.json"
+        "build/tsconfig.json",
+        "../../patches/monaco-editor.patch"
       ],
       "output": [
         "src/vendor/monaco-editor/**"
