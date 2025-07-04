@@ -1,8 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import type { MockInstance } from 'vitest';
 
 import type * as monaco from '@nvidia-elements/monaco';
+import type { Monaco } from '@nvidia-elements/monaco';
 
-import { applyThemeForColorScheme, defineThemes, getTheme, toggleThemeForColorScheme } from './index.js';
+import { applyThemeForColorScheme, defineThemes, getTheme, updateThemeForColorScheme } from './index.js';
 import type { ThemeName } from './index.js';
 
 function expectValidHexColor(value: string) {
@@ -47,9 +49,11 @@ describe('themes', () => {
     setTheme: ReturnType<typeof vi.fn>;
     getTheme: ReturnType<typeof vi.fn>;
   };
-  let monacoMock: typeof monaco;
+  let monacoMock: Monaco;
   let rootEl: HTMLElement;
-  let getComputedStyleSpy: ReturnType<typeof vi.spyOn>;
+
+  const originalGetComputedStyle = globalThis.getComputedStyle;
+  let getComputedStyleSpy: MockInstance<typeof globalThis.getComputedStyle>;
 
   beforeEach(() => {
     editorMock = {
@@ -58,14 +62,15 @@ describe('themes', () => {
       getTheme: vi.fn()
     };
 
+    // NOTE: Incomplete mock, only the editor is needed for the tests
     monacoMock = {
       editor: editorMock
-    } as unknown as typeof monaco;
+    } as unknown as Monaco;
 
     rootEl = document.createElement('div');
-    getComputedStyleSpy = vi
-      .spyOn(globalThis, 'getComputedStyle')
-      .mockReturnValue({ colorScheme: 'dark' } as CSSStyleDeclaration);
+
+    getComputedStyleSpy = vi.spyOn(globalThis, 'getComputedStyle');
+    getComputedStyleSpy.mockImplementation(element => ({ ...originalGetComputedStyle(element), colorScheme: 'dark' }));
   });
 
   afterEach(() => {
@@ -115,14 +120,20 @@ describe('themes', () => {
 
   describe('applyThemeForColorScheme', () => {
     it('should apply dark theme when color scheme is dark', () => {
-      getComputedStyleSpy.mockReturnValue({ colorScheme: 'dark' } as CSSStyleDeclaration);
+      getComputedStyleSpy.mockImplementation(element => ({
+        ...originalGetComputedStyle(element),
+        colorScheme: 'dark'
+      }));
 
       applyThemeForColorScheme(monacoMock, rootEl);
       expect(editorMock.setTheme).toHaveBeenCalledWith('elements-dark');
     });
 
     it('should apply light theme when color scheme is light', () => {
-      getComputedStyleSpy.mockReturnValue({ colorScheme: 'light' } as CSSStyleDeclaration);
+      getComputedStyleSpy.mockImplementation(element => ({
+        ...originalGetComputedStyle(element),
+        colorScheme: 'light'
+      }));
 
       applyThemeForColorScheme(monacoMock, rootEl);
 
@@ -130,30 +141,39 @@ describe('themes', () => {
     });
   });
 
-  describe('toggleThemeForColorScheme', () => {
+  describe('updateThemeForColorScheme', () => {
     it('should toggle theme when current theme is elements-dark', () => {
       editorMock.getTheme.mockReturnValue('elements-dark');
-      getComputedStyleSpy.mockReturnValue({ colorScheme: 'light' } as CSSStyleDeclaration);
+      getComputedStyleSpy.mockImplementation(element => ({
+        ...originalGetComputedStyle(element),
+        colorScheme: 'light'
+      }));
 
-      toggleThemeForColorScheme(monacoMock, rootEl);
+      updateThemeForColorScheme(monacoMock, rootEl);
 
       expect(editorMock.setTheme).toHaveBeenCalledWith('elements-light');
     });
 
     it('should toggle theme when current theme is elements-light', () => {
       editorMock.getTheme.mockReturnValue('elements-light');
-      getComputedStyleSpy.mockReturnValue({ colorScheme: 'dark' } as CSSStyleDeclaration);
+      getComputedStyleSpy.mockImplementation(element => ({
+        ...originalGetComputedStyle(element),
+        colorScheme: 'dark'
+      }));
 
-      toggleThemeForColorScheme(monacoMock, rootEl);
+      updateThemeForColorScheme(monacoMock, rootEl);
 
       expect(editorMock.setTheme).toHaveBeenCalledWith('elements-dark');
     });
 
     it('should not toggle theme when current theme is not elements-dark or elements-light', () => {
       editorMock.getTheme.mockReturnValue('some-other-theme');
-      getComputedStyleSpy.mockReturnValue({ colorScheme: 'dark' } as CSSStyleDeclaration);
+      getComputedStyleSpy.mockImplementation(element => ({
+        ...originalGetComputedStyle(element),
+        colorScheme: 'dark'
+      }));
 
-      toggleThemeForColorScheme(monacoMock, rootEl);
+      updateThemeForColorScheme(monacoMock, rootEl);
 
       expect(editorMock.setTheme).not.toHaveBeenCalled();
     });

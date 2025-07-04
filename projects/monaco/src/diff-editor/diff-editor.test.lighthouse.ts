@@ -1,20 +1,27 @@
 import { expect, test, describe } from 'vitest';
 import { lighthouseRunner } from '@nve-internals/vite';
 
-describe('monaco-editor lighthouse report', () => {
-  test('monaco-editor should meet lighthouse benchmarks', async () => {
-    const report = await lighthouseRunner.getReport('nve-monaco-editor', /* html */`
-      <nve-monaco-editor></nve-monaco-editor>
+describe('monaco-diff-editor lighthouse report', () => {
+  test('monaco-diff-editor should meet lighthouse benchmarks', async () => {
+    const report = await lighthouseRunner.getReport('nve-monaco-diff-editor', /* html */`
+      <nve-monaco-diff-editor></nve-monaco-diff-editor>
       <script type="module">
-        import '@nvidia-elements/monaco/editor/define.js';
-        const diffEditorEl = document.querySelector('nve-monaco-editor');
+        import '@nvidia-elements/monaco/diff-editor/define.js';
+
+        const diffEditorEl = document.querySelector('nve-monaco-diff-editor');
         diffEditorEl.addEventListener('ready', (event) => {
           const { editor, monaco } = event.target;
-          const model = monaco.editor.createModel(
+          const original = monaco.editor.createModel(
             'Hello World!',
-            'plaintext'
+            'plaintext',
+            monaco.Uri.parse('diff:///src/example.txt')
           );
-          editor.setModel(model);
+          const modified = monaco.editor.createModel(
+            'Hello world!',
+            'plaintext',
+            monaco.Uri.parse('file:///src/example.txt')
+          );
+          editor.setModel({ original, modified });
         });
       </script>
     `);
