@@ -1,0 +1,20 @@
+---
+description: Details of how to write automated tests within the monorepo.
+globs: **/*.test.ts,**/*.test.axe.ts,**/*.test.lighthouse.ts,**/*.test.ssr.ts,**/*.test.visual.ts
+alwaysApply: false
+---
+
+# Testing Guidelines
+
+You MUST review @projects/site/src/docs/internal/testing/index.md before making any changes:
+
+## References
+
+- [Testing Guidelines](/projects/site/src/docs/internal/testing/index.md)
+- [Unit Testing](/projects/site/src/docs/internal/testing/unit.md)
+- [Accessibility Testing](/projects/site/src/docs/internal/testing/accessibility.md)
+- [Lighthouse Testing](/projects/site/src/docs/internal/testing/lighthouse.md)
+- [SSR Testing](/projects/site/src/docs/internal/testing/ssr.md)
+- [Visual Testing](/projects/site/src/docs/internal/testing/visual.md)
+- [Testing Package](/projects/testing/README.md)
+- [Vite Internals](/projects/internals/vite/README.md)
