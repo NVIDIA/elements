@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.6.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.6.2...@nvidia-elements/themes-v1.6.3) (2025-07-07)
+
+
+### Bug Fixes
+
+* **themes:** reduced motion ([eb79944](https://github.com/NVIDIA/elements/commit/eb7994455ae7c2c14b76d868294a1c7dd250556c))
+
 ## [@nvidia-elements/themes-v1.6.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.6.1...@nvidia-elements/themes-v1.6.2) (2025-06-10)
 
 
