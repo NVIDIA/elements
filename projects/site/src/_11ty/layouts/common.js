@@ -190,6 +190,7 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/display-settings/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/display-settings/">Display Settings</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/footer/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/footer/">Footer</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/heatmap/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/heatmap/">Heatmap</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/keynav/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/keynav/">Keynav</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/multi-select/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/multi-select/">Multi Select</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/pagination/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/pagination/">Pagination</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/data-grid/panel-detail/') ? 'highlighted' : ''}><a href="docs/elements/data-grid/panel-detail/">Panel Detail</a></nve-tree-node>  
