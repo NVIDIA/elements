@@ -12,9 +12,7 @@ import './_internal/framework-selector/index.js';
 import { frameworksById } from './_internal/framework-selector/frameworks.js';
 import type { FrameworkSelector } from './_internal/framework-selector/index.js';
 
-import './_internal/glassmorphic-card/glassmorphic-card.js';
 import './_internal/metrics-carousel/metrics-carousel.js';
-import './_internal/svg-trend/svg-trend.js';
 import './_internal/starry-sky/starry-sky.js';
 
 import './_internal/theme-form/theme-form.js';
