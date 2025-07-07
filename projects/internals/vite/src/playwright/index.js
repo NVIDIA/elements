@@ -12,7 +12,7 @@ import * as lockFile from 'proper-lockfile';
  * executing at a time see https://github.com/google/wireit/issues/325
  */
 
-const cmd = process.argv[2];
+const cmd = process.argv.slice(2).join(' ');
 const path = resolve(import.meta.dirname, './index.js');
 
 const timerId = setInterval(() => {
