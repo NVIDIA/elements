@@ -394,42 +394,42 @@ export function render() {
 
             <div nve-layout="grid gap:lg align-items:stretch span-items:12 &sm|span-items:6 &lg|span-items:4">
               <nvd-glassmorphic-card
-                logo-src="/static/images/integrations/vite.svg"
+                logo-src="./static/images/integrations/vite.svg"
                 logo-alt="Vite Logo"
                 title="MPA & Vite"
                 style="--background: linear-gradient(135deg, rgba(144, 116, 240, 0.45) 0%, rgba(144, 116, 240, 0.15) 100%); --background-logo: url(/static/images/integrations/vite.svg)">
               </nvd-glassmorphic-card>
 
               <nvd-glassmorphic-card
-                logo-src="/static/images/integrations/angular.svg"
+                logo-src="./static/images/integrations/angular.svg"
                 logo-alt="Angular Logo"
                 title="Angular (v12+)"
                 style="--background: linear-gradient(135deg, rgba(236, 72, 153, 0.45) 0%, rgba(236, 72, 153, 0.15) 100%); --background-logo: url(/static/images/integrations/angular.svg)">
               </nvd-glassmorphic-card>
 
               <nvd-glassmorphic-card
-                logo-src="/static/images/integrations/nextjs.svg"
+                logo-src="./static/images/integrations/nextjs.svg"
                 logo-alt="Next.js Logo"
                 title="Next.js (v15)"
                 style="--background: linear-gradient(135deg, rgba(31, 31, 31, 0.45) 0%, rgba(144, 116, 240, 0.1) 100%); --background-logo: url(/static/images/integrations/nextjs.svg)">
               </nvd-glassmorphic-card>
 
               <nvd-glassmorphic-card
-                logo-src="/static/images/integrations/react.svg"
+                logo-src="./static/images/integrations/react.svg"
                 logo-alt="React Logo"
                 title="React (v18/v19)"
                 style="--background: linear-gradient(135deg, rgba(97, 218, 251, 0.45) 0%, rgba(144, 116, 240, 0.1) 100%); --background-logo: url(/static/images/integrations/react.svg)">
               </nvd-glassmorphic-card>
 
               <nvd-glassmorphic-card
-                logo-src="/static/images/integrations/eleventy.svg"
+                logo-src="./static/images/integrations/eleventy.svg"
                 logo-alt="Eleventy Logo"
                 title="Eleventy"
                 style="--background: linear-gradient(135deg, rgba(125, 145, 190, 0.45) 0%, rgba(125, 145, 190, 0.15) 100%); --background-logo: url(/static/images/integrations/eleventy.svg)">
               </nvd-glassmorphic-card>
 
               <nvd-glassmorphic-card
-                logo-src="/static/images/integrations/vue.svg"
+                logo-src="./static/images/integrations/vue.svg"
                 logo-alt="Vue.js Logo"
                 title="Vue (v3)"
                 style="--background: linear-gradient(135deg, rgba(65, 184, 131, 0.45) 0%, rgba(144, 116, 240, 0.1) 100%); --background-logo: url(https://NVIDIA.github.io/elements/static/images/integrations/vue.svg)">
