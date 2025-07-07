@@ -1019,7 +1019,7 @@
       "command": "node ./build/icons.js",
       "clean": false,
       "files": [
-        "src/icon/**",
+        "src/icon/icons",
         "!src/icon/{icons,server}.ts",
         "!src/**/__screenshots__/**",
         "build/icons.js"

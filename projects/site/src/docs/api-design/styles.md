@@ -16,8 +16,7 @@ The look and feel of the system can be controlled or adjusted via three primary 
 - relative scales
 - responsive elements
 
-**Explicit (consumer dev/designer)**: Low confidence the system can predict precise usage but high confidence by the consumer developer/designer. These cases
-are conext specific. Example, when to use a small button in a toolbar vs a large button for a call to action.
+**Explicit (consumer dev/designer)**: Low confidence the system can predict precise usage but high confidence by the consumer developer/designer. These cases are context specific. Example, when to use a small button in a toolbar vs a large button for a call to action.
 
 - size properties/variants
 - status properties/variants

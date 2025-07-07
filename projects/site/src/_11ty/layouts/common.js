@@ -308,6 +308,16 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/api-design/logs/') ? 'highlighted' : ''}><a href="docs/api-design/logs/">Logs</a></nve-tree-node>
     <nve-tree-node><a href="stories/">Stories</a></nve-tree-node>
   </nve-tree-node>
+
+  <nve-tree-node ${data.page.url.includes('/docs/internal/') ? 'expanded' : ''} ${data.page.url === '/docs/internal/' ? 'highlighted' : ''}>
+    <a href="docs/internal/">Internal</a>
+    <nve-tree-node ${data.page.url === '/docs/internal/testing/' ? 'highlighted' : ''}><a href="docs/internal/testing/">Testing Guidelines</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/testing/unit/') ? 'highlighted' : ''}><a href="docs/internal/testing/unit/">Unit Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/testing/accessibility/') ? 'highlighted' : ''}><a href="docs/internal/testing/accessibility/">Accessibility Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/testing/lighthouse/') ? 'highlighted' : ''}><a href="docs/internal/testing/lighthouse/">Lighthouse Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/testing/ssr/') ? 'highlighted' : ''}><a href="docs/internal/testing/ssr/">SSR Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/testing/visual/') ? 'highlighted' : ''}><a href="docs/internal/testing/visual/">Visual Testing</a></nve-tree-node>
+  </nve-tree-node>
 </nve-tree>
 `;
 
