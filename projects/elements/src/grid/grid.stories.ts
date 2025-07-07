@@ -46,6 +46,109 @@ export const Default = {
 };
 
 /**
+ * @description The datagrid follows the [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/grid/examples/data-grids/#kbd_label) for standardized keyboard navigation.
+ */
+export const Keynav = {
+  render: () => html`
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column width="150px">Key</nve-grid-column>
+    <nve-grid-column>Function</nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <kbd>Right Arrow</kbd>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <ul nve-text="list">
+        <li>Moves focus one cell to the right.</li>
+        <li>If focus is on the right-most cell in the row, focus does not move.</li>
+      </ul>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <kbd>Left Arrow</kbd>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <ul nve-text="list">
+        <li>Moves focus one cell to the left.</li>
+        <li>If focus is on the left-most cell in the row, focus does not move.</li>
+      </ul>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <kbd>Down Arrow</kbd>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <ul nve-text="list">
+        <li>Moves focus one cell down.</li>
+        <li>If focus is on the bottom cell in the column, focus does not move.</li>
+      </ul>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <kbd>Up Arrow</kbd>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <ul nve-text="list">
+        <li>Moves focus one cell Up.</li>
+        <li>If focus is on the top cell in the column, focus does not move.</li>
+      </ul>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <kbd>Page Down</kbd>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <ul nve-text="list">
+        <li>In example 3, moves focus down five rows, scrolling so the bottom row in the currently visible set of rows becomes the first visible row.</li>
+        <li>If focus is in the last row, focus does not move.</li>
+      </ul>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <kbd>Page Up</kbd>
+    </nve-grid-cell>
+    <nve-grid-cell>
+      <ul nve-text="list">
+        <li>In example 3, moves focus up 5 rows, scrolling so the top row in the currently visible set of rows becomes the last visible row.</li>
+        <li>If focus is in the first row of the grid, focus does not move.</li>
+      </ul>
+    </nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <kbd>Home</kbd>
+    </nve-grid-cell>
+    <nve-grid-cell>Moves focus to the first cell in the row that contains focus.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <kbd>End</kbd>
+    </nve-grid-cell>
+    <nve-grid-cell>Moves focus to the last cell in the row that contains focus.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <kbd>Control</kbd> + <kbd>Home</kbd>
+    </nve-grid-cell>
+    <nve-grid-cell>Moves focus to the first cell in the first row.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>
+      <kbd>Control</kbd> + <kbd>End</kbd>
+    </nve-grid-cell>
+    <nve-grid-cell>Moves focus to the last cell in the last row.</nve-grid-cell>
+  </nve-grid-row>
+</nve-grid>`
+};
+
+/**
  * @description Multi Select rows use a checkbox as the first focusable item within the row.
  * When selected set the `selected` attribute/property on the row. This will ensure selected
  * styles as well as the proper `ariaSelected` state for accessibility.
