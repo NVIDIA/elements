@@ -29,7 +29,7 @@ export class Color extends Control {
   };
 
   protected get suffixContent() {
-    return html`<nve-icon-button .ariaLabel=${this.i18n.expand} icon-name="dropper" container="inline" @click=${() => this.#select()}></nve-icon-button>`;
+    return html`<nve-icon-button .role=${'button'} .ariaLabel=${this.i18n.expand} icon-name="dropper" container="inline" @click=${() => this.#select()}></nve-icon-button>`;
   }
 
   connectedCallback() {

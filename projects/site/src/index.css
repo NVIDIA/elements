@@ -350,3 +350,87 @@ video {
 .contact {
   border-radius: var(--nve-ref-border-radius-lg);
 }
+
+.glassmorphic-card {
+  height: 180px;
+  padding: var(--nve-ref-size-600);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nve-ref-size-400);
+  position: relative;
+  border-radius: var(--nve-ref-border-radius-xl);
+  background: var(--background);
+  text-decoration: none;
+  color: var(--nve-sys-layer-canvas-color);
+
+  &:has(img[src*='vite']) {
+    --background-img: url(/static/images/integrations/vite.svg);
+    --background: linear-gradient(135deg, rgba(144, 116, 240, 0.45) 0%, rgba(144, 116, 240, 0.15) 100%);
+  }
+
+  &:has(img[src*='angular']) {
+    --background-img: url(/static/images/integrations/angular.svg);
+    --background: linear-gradient(135deg, rgba(236, 72, 153, 0.45) 0%, rgba(236, 72, 153, 0.15) 100%);
+  }
+
+  &:has(img[src*='nextjs']) {
+    --background-img: url(/static/images/integrations/nextjs.svg);
+    --background: linear-gradient(135deg, rgba(31, 31, 31, 0.45) 0%, rgba(144, 116, 240, 0.1) 100%);
+  }
+
+  &:has(img[src*='react']) {
+    --background-img: url(/static/images/integrations/react.svg);
+    --background: linear-gradient(135deg, rgba(97, 218, 251, 0.45) 0%, rgba(144, 116, 240, 0.1) 100%);
+  }
+
+  &:has(img[src*='eleventy']) {
+    --background-img: url(/static/images/integrations/eleventy.svg);
+    --background: linear-gradient(135deg, rgba(125, 145, 190, 0.45) 0%, rgba(125, 145, 190, 0.15) 100%);
+  }
+
+  &:has(img[src*='vue']) {
+    --background-img: url(/static/images/integrations/vue.svg);
+    --background: linear-gradient(135deg, rgba(65, 184, 131, 0.45) 0%, rgba(144, 116, 240, 0.1) 100%);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    background: var(--background-img) center/contain no-repeat;
+    transform: translate(-50%, -50%);
+    filter: blur(4px);
+    opacity: 0.4;
+  }
+
+  img {
+    background: var(--background-img) center/contain no-repeat;
+    height: 40px;
+    width: 40px;
+  }
+
+  .btn {
+    padding: var(--nve-ref-size-200);
+    border: var(--nve-ref-border-width-sm) solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: var(--nve-ref-border-radius-full);
+    font-size: var(--nve-ref-font-size-100);
+    color: var(--nve-sys-interaction-color);
+    font-weight: var(--nve-ref-font-weight-semibold);
+    backdrop-filter: blur(8px);
+    margin-left: auto;
+    display: flex;
+    gap: var(--nve-ref-size-200);
+
+    nve-icon {
+      --color: inherit;
+    }
+  }
+
+  &:hover .btn {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
