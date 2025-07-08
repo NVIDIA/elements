@@ -146,6 +146,7 @@ export function getElementImports(html: string, metadata: MetadataSummary, lazy 
         `import '@nvidia-elements/code/codeblock/languages/html.js';`,
         `import '@nvidia-elements/code/codeblock/languages/css.js';`,
         `import '@nvidia-elements/code/codeblock/languages/json.js';`,
+        `import '@nvidia-elements/code/codeblock/languages/javascript.js';`,
         `import '@nvidia-elements/code/codeblock/languages/typescript.js';`,
         `import '@nvidia-elements/code/codeblock/define.js';`
       ]
