@@ -7,64 +7,69 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/progressive-filter-chip/define.js';
 import '@nvidia-elements/core/input/define.js';
-import '@nvidia-elements/core/color/define.js';
 
 export default {
   title: 'Elements/Toolbar',
   component: 'nve-toolbar',
 };
 
+/**
+ * @description Basic toolbar with action buttons and a settings icon in the suffix slot.
+ */
 export const Default = {
   render: () => html`
-  <div>
     <nve-toolbar>
       <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
       <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
       <nve-icon-button container="inline" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
-  </div>
   `
 };
 
+/**
+ * @description Toolbar with flat container styling for a more subtle appearance.
+ */
 export const ContainerFlat = {
   render: () => html`
-  <div>
     <nve-toolbar container="flat">
       <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
       <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
       <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
-  </div>
   `
 };
 
+/**
+ * @description Toolbar with inset container styling and constrained width for contained layouts.
+ */
 export const ContainerInset = {
   render: () => html`
-  <div>
-    <nve-toolbar container="inset">
+    <nve-toolbar container="inset" style="--width: 300px">
       <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
       <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
-      <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      <nve-icon-button container="inline" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
-  </div>
   `
 };
 
+/**
+ * @description Toolbar with full container styling that spans the entire width.
+ */
 export const ContainerFull = {
   render: () => html`
-  <div>
     <nve-toolbar container="full">
       <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
       <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
       <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
-  </div>
   `
 };
 
+/**
+ * @description Complex toolbar with grouped controls including select dropdowns, button groups, and dividers for text editing scenarios.
+ */
 export const Groups = {
   render: () => html`
-  <div>
     <nve-toolbar>
       <nve-select fit-text>
         <select aria-label="element type">
@@ -109,13 +114,14 @@ export const Groups = {
 
       <nve-button slot="suffix" container="flat">Save</nve-button>
     </nve-toolbar>
-  </div>
   `
 };
 
+/**
+ * @description Vertical toolbar orientation with button groups and dividers for sidebar layouts.
+ */
 export const Vertical = {
   render: () => html`
-  <div>
     <nve-toolbar orientation="vertical">
       <nve-button-group>
         <nve-icon-button pressed icon-name="bars-3-bottom-left"></nve-icon-button>
@@ -131,13 +137,14 @@ export const Vertical = {
         <nve-icon-button icon-name="strikethrough"></nve-icon-button>
       </nve-button-group>
     </nve-toolbar>
-  </div>
   `
 };
 
+/**
+ * @description Toolbar with filter functionality including progressive filter chips and search combobox for data filtering scenarios.
+ */
 export const Filter = {
   render: () => html`
-  <div>
     <nve-toolbar container="flat">
       <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
       <nve-progressive-filter-chip closable>
@@ -170,13 +177,14 @@ export const Filter = {
       <nve-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
       <nve-button slot="suffix">Save Filters</nve-button>
     </nve-toolbar>
-  </div>
   `
 };
 
+/**
+ * @description Toolbar with multiple filter chips and date inputs demonstrating horizontal scrolling behavior when content overflows.
+ */
 export const Scroll = {
   render: () => html`
-  <div>
     <nve-toolbar container="flat">
       <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
       <nve-progressive-filter-chip closable>
@@ -231,13 +239,14 @@ export const Scroll = {
       <nve-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
       <nve-button slot="suffix">Save Filters</nve-button>
     </nve-toolbar>
-  </div>
   `
 };
 
+/**
+ * @description Toolbar with content wrapping enabled to handle overflow by wrapping items to new lines instead of scrolling.
+ */
 export const Wrap = {
   render: () => html`
-  <div>
     <nve-toolbar container="flat" content="wrap">
       <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
       <nve-progressive-filter-chip closable>
@@ -292,13 +301,15 @@ export const Wrap = {
       <nve-icon-button container="flat" aria-label="clear filters" icon-name="cancel" slot="suffix"></nve-icon-button>
       <nve-button slot="suffix">Save Filters</nve-button>
     </nve-toolbar>
-  </div>
   `
 };
 
+/**
+ * @description Toolbar with status styling showing selection state with accent status and default status variants for bulk actions.
+ */
 export const Status = {
   render: () => html`
-    <div nve-layout="column gap:lg align:stretch">
+    <div nve-layout="column gap:lg align:horizontal-stretch full">
       <nve-toolbar status="accent">
         <nve-icon-button icon-name="cancel" slot="prefix"></nve-icon-button>  
         <p nve-text="body">123 selected</p>
