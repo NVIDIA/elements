@@ -8,6 +8,7 @@
   --border-bottom: 0;
   --box-shadow: var(--nve-ref-shadow-100);
   --width: 100%;
+  width: var(--width);
   contain: initial;
 }
 
@@ -72,6 +73,7 @@
   --padding: var(--nve-ref-size-100) 0;
   --width: var(--nve-ref-size-1000);
   --gap: var(--nve-ref-space-xs);
+  --width: fit-content;
 }
 
 :host([orientation='vertical']) [internal-host],
