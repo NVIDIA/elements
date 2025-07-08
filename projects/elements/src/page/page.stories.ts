@@ -794,9 +794,9 @@ export const KitchenSink = {
   </nve-toolbar>
 
   <nve-toolbar slot="footer">
-    <a href="#" nve-text="link">docmentation</a>
-    <a href="#" nve-text="link">logging</a>
-    <a href="#" nve-text="link">contact</a>
+    <a href="#" nve-text="link sm">docmentation</a>
+    <a href="#" nve-text="link sm">logging</a>
+    <a href="#" nve-text="link sm">contact</a>
   </nve-toolbar>
 </nve-page>
   `
