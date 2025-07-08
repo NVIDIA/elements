@@ -254,9 +254,8 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/week/') ? 'highlighted' : ''}><a href="docs/elements/week/">Week</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/patterns/') ? 'expanded' : ''}>
-    Patterns
-    <nve-tree-node ${data.page.url.endsWith('/docs/patterns/') ? 'highlighted' : ''}><a href="docs/patterns/">Documentation</a></nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('/docs/patterns/') ? 'expanded' : ''} ${data.page.url === '/docs/patterns/' ? 'highlighted' : ''}>
+    <a href="docs/patterns/">Patterns</a>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/browse/') ? 'highlighted' : ''}><a href="docs/patterns/browse/">Browse</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/editor/') ? 'highlighted' : ''}><a href="docs/patterns/editor/">Editor</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/subheader/') ? 'highlighted' : ''}><a href="docs/patterns/subheader/">Subheader</a></nve-tree-node>
@@ -287,8 +286,8 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-editor/') ? 'highlighted' : ''}><a href="docs/monaco/diff-editor/">Diff Editor</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''}>
-    Labs
+  <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}>
+    <a href="docs/labs/">Labs</a>
     <nve-tree-node ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}><a href="docs/labs/">About</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted' : ''}><a href="docs/labs/behaviors-alpine/">Behaviors Alpine</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/brand/' ? 'highlighted' : ''}><a href="docs/labs/brand/">Brand</a></nve-tree-node>
