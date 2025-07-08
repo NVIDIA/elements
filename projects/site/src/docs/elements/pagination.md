@@ -36,29 +36,36 @@
 
 ## Dynamic Items
 
-If the upper bound of items is unknown the `last-page` event can be used to determine when
-to load additional data and update the pagination with the latest total of items.
-
 {% story 'nve-pagination', 'DynamicItems' %}
 
 ## Dynamic Step Size
-
-When custom step is provided, the select options dynamically adapt to the step and is appended to the default option list
 
 {% story 'nve-pagination', 'DynamicStepSize' %}
 
 ## Suffix Label
 
-Use the `suffix-label` slot to customize the "of total" label when dealing with approximated totals from API responses. This is useful when the API returns a limited count but indicates there are more items available.
-
 {% story 'nve-pagination', 'SuffixLabel' %}
 
 ## Forms
-
-Pagination is [form associated component](https://web.dev/more-capable-form-controls) and can be used within FormData.
 
 {% story 'nve-pagination', 'Forms', '{ "inline": false, "height": 300 }' %}
 
 ## No Provided Items Count
 
 {% story 'nve-pagination', 'NoItemsCount', '{ "inline": false, "height": 200 }' %}
+
+## Pattern - Page List
+
+{% story 'nve-pagination', 'PageListPattern' %}
+
+## Pattern - Page List Skip
+
+{% story 'nve-pagination', 'PageListSkipPattern' %}
+
+## Pattern - Vertical
+
+{% story 'nve-pagination', 'VerticalPattern' %}
+
+## Pattern - Custom Select
+
+{% story 'nve-pagination', 'CustomSelectPattern' %}
