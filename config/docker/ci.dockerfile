@@ -32,3 +32,8 @@ RUN curl https://registry.npmjs.org -L -o vault.zip || true \
   rm vault.zip || true \
   vault --version \
   apt-get update && apt-get install -y jq
+
+# install aws cli (default install: /usr/local/aws-cli, and a symbolic link in /usr/local/bin)
+RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip || true \
+  unzip awscliv2.zip || true \
+  sudo ./aws/install
