@@ -9,7 +9,6 @@
   --check-color: transparent;
   display: inline-block;
   contain: layout;
-  will-change: transform, border-color;
 }
 
 ::slotted(input) {
@@ -106,6 +105,9 @@
 
 :host(:state(checked)) [input] slot {
   border: 0;
+}
+
+:host(:state(checked):state(dirty)) [input] slot {
   animation: selectPop var(--nve-ref-animation-duration-200) ease-out;
 }
 
