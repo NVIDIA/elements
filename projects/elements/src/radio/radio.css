@@ -67,7 +67,7 @@
     background-color var(--nve-ref-animation-duration-150) ease;
 }
 
-:host(:state(checked)) [input] slot {
+:host(:state(checked):state(dirty)) [input] slot {
   animation: radioSelectPop var(--nve-ref-animation-duration-200) ease-out;
 }
 

@@ -10,7 +10,6 @@
   --anchor-background: var(--nve-sys-interaction-disabled-color);
   display: inline-block;
   contain: layout;
-  will-change: transform;
 }
 
 ::slotted(input) {
@@ -40,9 +39,7 @@
   display: flex !important;
   padding: 0 var(--nve-ref-size-100);
   align-items: center;
-  transition-duration: 150ms;
-  transition-timing-function: ease;
-  transition-property: background-color;
+  transition: background-color var(--nve-ref-animation-duration-150) ease;
   position: relative;
 }
 
@@ -60,6 +57,7 @@
   content: '';
   transition: transform var(--nve-ref-animation-duration-250) cubic-bezier(0.12, 0.32, 0.54, 2);
   pointer-events: none;
+  will-change: transform;
 }
 
 :host(:state(checked)) {
@@ -68,7 +66,10 @@
 }
 
 :host(:state(checked)) [input] slot::after {
-  transform: translate(calc(var(--width) / 2), 0) scale(1.1);
+  transform: translate(calc(var(--width) / 2), 0);
+}
+
+:host(:state(checked):state(dirty)) [input] slot::after {
   animation: thumbBounce var(--nve-ref-animation-duration-250) cubic-bezier(0.12, 0.32, 0.54, 2);
 }
 
