@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.38.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.38.1...@nvidia-elements/core-v1.38.2) (2025-07-08)
+
+
+### Bug Fixes
+
+* **elements:** default animation behavior ([9c073a9](https://github.com/NVIDIA/elements/commit/9c073a9105b0cce5b0bd69497caef292487d7584))
+
 ## [@nvidia-elements/core-v1.38.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.38.0...@nvidia-elements/core-v1.38.1) (2025-07-03)
 
 
