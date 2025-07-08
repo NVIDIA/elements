@@ -7,6 +7,9 @@ export default {
   component: 'nve-pagination',
 };
 
+/**
+ * @description Basic pagination component with default styling and behavior.
+ */
 export const Default = {
   render: () => html`
   <nve-pagination value="1" items="100" step="10"></nve-pagination>
@@ -17,36 +20,55 @@ export const Default = {
   `
 };
 
+/**
+ * @description Pagination with skip buttons to navigate to first and last pages quickly.
+ */
 export const Skippable = {
   render: () => html`
     <nve-pagination value="1" items="100" step="10" skippable></nve-pagination>
   `
 };
 
+/**
+ * @description Disabled pagination component that prevents user interaction.
+ */
 export const Disabled = {
   render: () => html`
     <nve-pagination disabled value="1" items="100" step="10" skippable></nve-pagination>
   `
 };
 
+/**
+ * @description Pagination with flat container styling for a more minimal appearance.
+ */
 export const Flat = {
   render: () => html`
     <nve-pagination container="flat" value="1" items="100" step="10" skippable></nve-pagination>
   `
 };
 
+/**
+ * @description Inline pagination layout that fits inline with content.
+ */
 export const Inline = {
   render: () => html`
     <nve-pagination container="inline" value="1" items="100" step="10"></nve-pagination>
   `
 };
 
+/**
+ * @description Inline pagination with disabled step selector to prevent page size changes.
+ */
 export const DisableStep = {
   render: () => html`
     <nve-pagination disable-step container="inline" value="1" items="100" step="10"></nve-pagination>
   `
 };
 
+/**
+ * @description Pagination is [form associated component](https://web.dev/more-capable-form-controls)
+ * and can be used within FormData.
+ */
 export const Forms = {
   render: () => html`
     <form id="pagination-form" nve-layout="column gap:md">
@@ -72,6 +94,9 @@ export const Forms = {
   `
 };
 
+/**
+ * @description Pagination without items count display, useful when total count is unknown.
+ */
 export const NoItemsCount = {
   render: () => html`
     <form id="pagination-form" nve-layout="column gap:md">
@@ -91,6 +116,9 @@ export const NoItemsCount = {
   `
 };
 
+/**
+ * @description Pagination component displayed in light theme with disabled state.
+ */
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light pad:md">
@@ -99,6 +127,9 @@ export const LightTheme = {
   `
 }
 
+/**
+ * @description Pagination component displayed in dark theme with disabled state.
+ */
 export const DarkTheme = {
   render: () => html`
 <div nve-theme="root dark pad:md">
@@ -107,12 +138,20 @@ export const DarkTheme = {
   `
 }
 
+/**
+ * @description Pagination handling large datasets with higher step values for efficient navigation.
+ */
 export const LargeValues = {
   render: () => html`
     <nve-pagination container="inline" value="1" items="10000" step="100"></nve-pagination>
   `
 }
 
+/**
+ * @description If the upper bound of items is unknown the `last-page` event can
+ * be used to determine when to load additional data and update the pagination
+ * with the latest total of items.
+ */
 export const DynamicItems = {
   render: () => html`
     <nve-pagination disable-step container="inline" value="1" items="100" step="20"></nve-pagination>
@@ -133,6 +172,10 @@ export const DynamicItems = {
   `
 }
 
+/**
+ * @description When custom step is provided, the select options dynamically
+ * adapt to the step and is appended to the default option list.
+ */
 export const DynamicStepSize = {
   render: () => html`
   <!-- javascript property binding -->
@@ -140,10 +183,83 @@ export const DynamicStepSize = {
   `
 };
 
+/**
+ * @description Use the `suffix-label` slot to customize the "of total" label
+ * when dealing with approximated totals from API responses. This is useful
+ * when the API returns a limited count but indicates there are more items
+ * available.
+ */
 export const SuffixLabel = {
   render: () => html`
     <nve-pagination value="1" items="50000" step="100">
       <span slot="suffix-label">of 50,000+</span>
     </nve-pagination>
+  `
+};
+
+/**
+ * @description Custom pagination pattern using toolbar with numbered page
+ * buttons and navigation arrows. [Figma](https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-Nvidia-Elements-Design-Catalog?node-id=3689-87177&p=f&t=odpJ12NktrAtL2vK-0)
+ */
+export const PageListPattern = {
+  render: () => html`
+    <nve-toolbar container="inset">
+      <nve-button disabled container="flat"><nve-icon name="chevron" direction="left" size="sm"></nve-icon> previous</nve-button>
+      <nve-button container="flat" selected>1</nve-button>
+      <nve-button container="flat">2</nve-button>
+      <nve-button container="flat">3</nve-button>
+      <nve-button container="flat">4</nve-button>
+      <nve-button container="flat">next <nve-icon name="chevron" direction="right" size="sm"></nve-icon></nve-button>
+    </nve-toolbar>
+  `
+};
+
+/**
+ * @description Enhanced pagination pattern with first/last page buttons and numbered page navigation.
+ */
+export const PageListSkipPattern = {
+  render: () => html`
+    <nve-toolbar container="inset">
+      <nve-icon-button container="flat" icon-name="arrow-stop" direction="left" aria-label="first" disabled></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="chevron" direction="left" aria-label="previous"></nve-icon-button>
+      <nve-button container="flat" selected>1</nve-button>
+      <nve-button container="flat">2</nve-button>
+      <nve-button container="flat">3</nve-button>
+      <nve-button container="flat">4</nve-button>
+      <nve-icon-button icon-name="chevron" direction="right" aria-label="next"></nve-icon-button>
+      <nve-icon-button icon-name="arrow-stop" direction="right" aria-label="last"></nve-icon-button>
+    </nve-toolbar>
+  `
+};
+
+/**
+ * @description Vertical pagination pattern with up/down navigation arrows for
+ * compact layouts. [Figma](https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-Nvidia-Elements-Design-Catalog?node-id=14605-25522&p=f&t=odpJ12NktrAtL2vK-0)
+ */
+export const VerticalPattern = {
+  render: () => html`
+    <nve-toolbar container="inset">
+      <label nve-text="body muted sm">1 of 13</label>
+      <nve-icon-button container="flat" size="sm" icon-name="chevron" direction="up" aria-label="previous"></nve-icon-button>
+      <nve-icon-button container="flat" size="sm" icon-name="chevron" direction="down" aria-label="next"></nve-icon-button>
+    </nve-toolbar>
+  `
+};
+
+/**
+ * @description Custom pagination with select dropdown for page size and navigation arrows.
+ */
+export const CustomSelectPattern = {
+  render: () => html`
+    <nve-toolbar container="inset">
+      <nve-select style="--width: 80px">
+        <select>
+          <option value="10">1-10</option>
+        </select>
+      </nve-select>
+      <label nve-text="label muted sm" style="width: 40px">of ~13</label>
+      <nve-icon-button container="flat" icon-name="chevron" direction="left" aria-label="previous" disabled></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="chevron" direction="right" aria-label="next"></nve-icon-button>
+    </nve-toolbar>
   `
 };
