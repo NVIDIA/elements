@@ -10,6 +10,7 @@
   --_icon-color: var(--color);
 }
 
+/* disable pseudo element on base button */
 [internal-host]::after {
   display: none !important;
 }

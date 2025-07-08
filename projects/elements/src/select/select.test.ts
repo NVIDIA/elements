@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, emulateClick } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@nvidia-elements/testing';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Select } from '@nvidia-elements/core/select';
 import { Dropdown } from '@nvidia-elements/core/dropdown';
@@ -113,6 +113,26 @@ describe(Select.metadata.tag, () => {
     dropdown.hidePopover();
     await element.updateComplete;
     expect(dropdown.matches(':popover-open')).toBe(false);
+  });
+
+  it('should rotate caret when dropdown is opened and closed', async () => {
+    const caret = element.shadowRoot.querySelector<Icon>(`${Icon.metadata.tag}[part="caret"]`);
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(dropdown.matches(':popover-open')).toBe(false);
+    expect(caret.direction).toBe('down');
+
+    const open = untilEvent(dropdown, 'open');
+    emulateClick(select);
+    element.requestUpdate();
+    await open;
+    expect(dropdown.matches(':popover-open')).toBe(true);
+    expect(caret.direction).toBe('up');
+
+    const close = untilEvent(dropdown, 'close');
+    dropdown.hidePopover();
+    await close;
+    expect(dropdown.matches(':popover-open')).toBe(false);
+    expect(caret.direction).toBe('down');
   });
 
   it('should use aria-hidden for decorative non-semantic icons', async () => {
