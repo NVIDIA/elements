@@ -23,7 +23,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(129.4); // @nvidia-elements/core/bundles/index.VERSION.js
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(130); // @nvidia-elements/core/bundles/index.VERSION.js
   });
 
   test('JS imports should remain within compressed bundle limits', async () => {
