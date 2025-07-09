@@ -2,7 +2,8 @@
 {
   title: 'Monaco Editor',
   layout: 'docs.11ty.js',
-  tag: 'nve-monaco-editor'
+  tag: 'nve-monaco-editor',
+  hideExamplesTab: true
 }
 ---
 
@@ -21,4 +22,4 @@
 
 ## Default
 
-{% story '@nvidia-elements/monaco/editor/editor.stories.json', 'Default' %}
+{% story '@nvidia-elements/monaco/editor/editor.stories.json', 'Default', '{ "resizable": false }' %}
