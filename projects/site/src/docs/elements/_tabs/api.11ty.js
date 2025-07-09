@@ -38,6 +38,7 @@ export function render(data) {
   data.tag = componentData.tag;
   data.title = componentData.title;
   data.page.fileSlug = componentData.page.fileSlug;
+  data.hideExamplesTab = componentData.hideExamplesTab;
 
   return `
     ${elementTable(componentData.tag)}

@@ -12,6 +12,45 @@
   border-radius: var(--nve-ref-border-radius-md);
 }
 
+[internal-host].horizontal-layout {
+  display: flex;
+  gap: 1px;
+  height: 100%;
+}
+
+[internal-host].horizontal-layout .resizer {
+  width: 50%;
+  min-width: 200px;
+  max-width: 80%;
+  resize: horizontal;
+  overflow: auto;
+  flex: 0 0 auto;
+}
+
+[internal-host].horizontal-layout .preview {
+  resize: none;
+  width: 100%;
+}
+
+[internal-host].horizontal-layout .preview-backdrop {
+  display: none;
+}
+
+[internal-host].horizontal-layout .code {
+  flex: 1;
+  min-width: 0;
+  margin-top: 0;
+  margin-left: 1px;
+}
+
+[internal-host].horizontal-layout .code nve-monaco-input {
+  height: 100%;
+}
+
+[internal-host].horizontal-layout .toolbar {
+  display: none;
+}
+
 .resizer {
   display: flex;
   align-items: stretch;
@@ -22,10 +61,15 @@
   padding: var(--padding);
   display: block;
   resize: horizontal;
-  overflow: visible;
+  overflow: hidden;
   width: 100%;
 }
 
+.preview iframe {
+  width: 100%;
+  min-height: 400px;
+  border: none;
+}
 .preview-backdrop {
   background: var(--nve-ref-color-neutral-200);
   min-height: 100%;
@@ -37,8 +81,16 @@
   margin-top: 1px;
 }
 
-.code nve-monaco-input {
-  height: 320px;
+.code nve-copy-button {
+  position: absolute;
+  bottom: var(--nve-ref-space-xs);
+  right: var(--nve-ref-space-xs);
+}
+
+.code nve-button {
+  position: absolute;
+  bottom: var(--nve-ref-space-xs);
+  right: var(--nve-ref-space-xxl);
 }
 
 .toolbar {
@@ -46,12 +98,6 @@
   gap: var(--nve-ref-space-xxs);
   padding: var(--nve-ref-space-xxs);
   border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
-}
-
-nve-copy-button {
-  position: absolute;
-  top: 4px;
-  right: 24px;
 }
 
 .error {
