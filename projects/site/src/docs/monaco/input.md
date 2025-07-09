@@ -2,7 +2,8 @@
 {
   title: 'Monaco Input',
   layout: 'docs.11ty.js',
-  tag: 'nve-monaco-input'
+  tag: 'nve-monaco-input',
+  hideExamplesTab: true
 }
 ---
 
@@ -12,24 +13,24 @@
 
 ## Default
 
-{% story '@nvidia-elements/monaco/input/input.stories.json', 'Default' %}
+{% story '@nvidia-elements/monaco/input/input.stories.json', 'Default', '{ "resizable": false }' %}
 
 ## Optional Features
 
-{% story '@nvidia-elements/monaco/input/input.stories.json', 'WithOptionalAttributes' %}
+{% story '@nvidia-elements/monaco/input/input.stories.json', 'WithOptionalAttributes', '{ "resizable": false }' %}
 
 ## Read Only
 
-{% story '@nvidia-elements/monaco/input/input.stories.json', 'ReadOnly' %}
+{% story '@nvidia-elements/monaco/input/input.stories.json', 'ReadOnly', '{ "resizable": false }' %}
 
 ## Disabled
 
-{% story '@nvidia-elements/monaco/input/input.stories.json', 'Disabled' %}
+{% story '@nvidia-elements/monaco/input/input.stories.json', 'Disabled', '{ "resizable": false }' %}
 
 ## JSON Schema Validation
 
-{% story '@nvidia-elements/monaco/input/input.stories.json', 'JSONSchemaValidation' %}
+{% story '@nvidia-elements/monaco/input/input.stories.json', 'JSONSchemaValidation', '{ "resizable": false }' %}
 
 ## TypeScript Validation
 
-{% story '@nvidia-elements/monaco/input/input.stories.json', 'TypeScriptValidation' %}
+{% story '@nvidia-elements/monaco/input/input.stories.json', 'TypeScriptValidation', '{ "resizable": false }' %}

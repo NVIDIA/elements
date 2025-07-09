@@ -1,5 +1,6 @@
 :host {
   --padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
+  --overflow: auto;
   display: block;
   width: 100%;
 }
@@ -25,7 +26,7 @@ slot:not([name]) {
   padding: var(--padding);
   display: block;
   resize: horizontal;
-  overflow: visible;
+  overflow: var(--overflow);
   width: 100%;
 }
 
