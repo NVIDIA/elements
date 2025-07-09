@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.38.2...@nvidia-elements/core-v1.39.0) (2025-07-09)
+
+
+### Features
+
+* **elements:** support nve-monaco-diff-input in nve-control ([0ef1d46](https://github.com/NVIDIA/elements/commit/0ef1d46d95b2f983289a481596986e289b69a121))
+
 ## [@nvidia-elements/core-v1.38.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.38.1...@nvidia-elements/core-v1.38.2) (2025-07-08)
 
 
