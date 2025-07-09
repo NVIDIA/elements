@@ -95,6 +95,7 @@ export function render(data) {
                 <nve-tabs>
                   ${componentDocTabs
                     .filter(tab => !tab.hidden)
+                    .filter(tab => !(data.hideExamplesTab && tab.label === 'Examples'))
                     .map(tabItem => {
                       const filePath = data.page.url;
                       let dir = 'elements';
