@@ -61,7 +61,7 @@ export async function apiShortcode(tag, type, value) {
  * @param {Object|string} userConfig - Configuration options for the story display
  * @returns {Promise<string>} HTML string containing the embedded story
  */
-export async function storyShortcode(tag, storyName, userConfig = { inline: true, height: '95%' }) {
+export async function storyShortcode(tag, storyName, userConfig = { inline: true, height: '95%', resizable: true }) {
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
   let story;
 
@@ -93,7 +93,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
   return story
     ? /* html */ `
 ${markdown.render(story.description ?? '')}
-<nvd-canvas id="${tag}_${story.id}">
+<nvd-canvas id="${tag}_${story.id}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
 ${playgroundButton}
 <template>${md.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>
 ${

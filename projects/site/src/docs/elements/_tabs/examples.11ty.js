@@ -53,58 +53,116 @@ export function render(data) {
     template: md.utils.escapeHtml(story.template)
   }));
 
-  return `
-    <h2 nve-text="heading xl mkd">${componentData.title} Examples</h2>
+  return /* html */ `
+    <style>
+      nve-menu {
+        max-height: 500px;
+        overflow: auto;
+        overflow-x: hidden;
+      }
+    </style>
+  
+    <h2 nve-text="heading xl mkd">Example Browser</h2>
 
     <!-- Triggers element loader -->
-    <div style="display: none">
+    <template>
       ${element.stories.find(s => s.id === 'Default')?.template}
-    </div>
+    </template>
 
-    <nve-select>
+    <div nve-layout="row gap:lg align:stretch">
       ${
         stories.length > 1
           ? `
-      <select id="example-selector">
-        ${stories
-          .map(
-            (story, index) => `
-          <option value="${index}" ${index === 0 ? 'selected' : ''}>${story.id.split(/(?=[A-Z])/).join(' ')}</option>
+          <nve-menu id="example-selector">
+            ${stories
+              .map(
+                (story, index) => `
+              <nve-menu-item value="${index}" ${index === 0 ? 'selected' : ''}>${story.id.split(/(?=[A-Z])/).join(' ')}</nve-menu-item>
+            `
+              )
+              .join('')}
+          </nve-menu>
         `
-          )
-          .join('')}
-      </select>
-      `
           : ''
       }
-    </nve-select>
-  
-    <nvd-canvas-editable id="cycling-example" source="${md.utils.escapeHtml(stories[0]?.template || '')}"></nvd-canvas-editable>
+    
+      <nvd-canvas-editable id="cycling-example" source="${md.utils.escapeHtml(stories[0]?.template || '')}"  tag="${componentData.tag}" show-source></nvd-canvas-editable>
+    </div>
+
+    ${stories
+      .map(
+        (story, index) => /* html */ `
+        <div class="story-example">
+          <h3 nve-text="heading lg mkd">${story.id.split(/(?=[A-Z])/).join(' ')}</h3>
+          <nvd-canvas-editable source="${md.utils.escapeHtml(story.template)}" readonly tag="${componentData.tag}">
+            <nve-button container="flat" slot="suffix" value="${index}">Edit</nve-button>
+          </nvd-canvas-editable>
+        </div>
+      `
+      )
+      .join('\n')}
+
+    
 
     <script type="module">
-      (function() {
-        const cyclingExample = document.querySelector('#cycling-example');
-        const exampleSelector = document.querySelector('#example-selector');
+      const cyclingExample = document.querySelector('#cycling-example');
+      const exampleSelector = document.querySelector('#example-selector');
+      
+      if (cyclingExample && exampleSelector) {
+        const storyTemplates = ${JSON.stringify(storyTemplates)};
         
-        if (cyclingExample && exampleSelector) {
-          const storyTemplates = ${JSON.stringify(storyTemplates)};
-          
-          // Function to unescape HTML entities
-          function unescapeHtml(html) {
-            const textarea = document.createElement('textarea');
-            textarea.innerHTML = html;
-            return textarea.value;
-          }
-          
-          exampleSelector.addEventListener('change', (event) => {
-            const selectedIndex = parseInt(event.target.value);
-            const story = storyTemplates[selectedIndex];
-            if (story) {
-              cyclingExample.setAttribute('source', unescapeHtml(story.template));
-            }
-          });
+        // Function to unescape HTML entities
+        function unescapeHtml(html) {
+          const textarea = document.createElement('textarea');
+          textarea.innerHTML = html;
+          return textarea.value;
         }
-      })();
+        
+        exampleSelector.addEventListener('click', (event) => {
+          const selectedIndex = parseInt(event.target.value);
+          const story = storyTemplates[selectedIndex];
+          if (story) {
+            cyclingExample.setAttribute('source', unescapeHtml(story.template));
+            
+            // Clear selection from all menu items
+            const allItems = exampleSelector.querySelectorAll('nve-menu-item');
+            allItems.forEach(item => item.selected = false);
+            
+            // Set selection on the clicked item
+            event.target.selected = true;
+          }
+        });
+      }
+
+      // Add click event listeners to Edit buttons
+      const editButtons = document.querySelectorAll('.story-example nve-button');
+      editButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+          const parentCanvas = event.target.closest('nvd-canvas-editable');
+          const source = parentCanvas.getAttribute('source');
+          
+          if (cyclingExample && source) {
+            cyclingExample.setAttribute('source', source);
+            
+            // Clear selection from all menu items
+            const allItems = exampleSelector.querySelectorAll('nve-menu-item');
+            allItems.forEach(item => item.selected = false);
+
+            // Find the corresponding nve-menu-item in exampleSelector and select it
+            const value = event.target.value;
+            const menuItem = exampleSelector.querySelector('nve-menu-item[value="' + value + '"]');
+            if (menuItem) {
+              menuItem.selected = true;
+            }
+
+            // Scroll to #example-browser
+            var exampleBrowser = document.getElementById('example-browser');
+            if (exampleBrowser && exampleBrowser.scrollIntoView) {
+              exampleBrowser.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
     </script>
 
     <script type="module">
