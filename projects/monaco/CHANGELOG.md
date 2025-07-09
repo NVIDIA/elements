@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.8...@nvidia-elements/monaco-v1.1.0) (2025-07-09)
+
+
+### Features
+
+* **monaco:** add nve-monaco-diff-editor and -input ([d6002a1](https://github.com/NVIDIA/elements/commit/d6002a187a752310cea53118816d8ee87eb81b2b))
+
 ## [@nvidia-elements/monaco-v1.0.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.7...@nvidia-elements/monaco-v1.0.8) (2025-06-11)
 
 
