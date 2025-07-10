@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.1.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.1.0...@nvidia-elements/monaco-v1.1.1) (2025-07-10)
+
+
+### Bug Fixes
+
+* **monaco:** support reduced-motion ([1136e0f](https://github.com/NVIDIA/elements/commit/1136e0fb05c926b7a253f2e159121133f837de23))
+
 ## [@nvidia-elements/monaco-v1.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.0.8...@nvidia-elements/monaco-v1.1.0) (2025-07-09)
 
 
