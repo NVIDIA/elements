@@ -106,7 +106,10 @@ async function copyProject(projectDir) {
     mkdirSync(`dist/${projectDir}`, { recursive: true });
   }
 
-  const files = await glob(`./${projectDir}/**/*.*`, { ignore: ['**/dist/**', '**/node_modules/**', '**/.wireit/**'] });
+  const files = await glob(`./${projectDir}/**/*`, {
+    dot: true,
+    ignore: ['**/dist/**', '**/node_modules/**', '**/.wireit/**']
+  });
   files.forEach(file => cpSync(file, `dist/${projectDir}${file.replace(projectDir, '')}`, { recursive: true }));
 }
 

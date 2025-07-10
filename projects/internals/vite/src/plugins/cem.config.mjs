@@ -240,6 +240,23 @@ function orderPlugin() {
   };
 }
 
+function deprecatedPlugin() {
+  return {
+    name: 'deprecated',
+    packageLinkPhase({ customElementsManifest }) {
+      // remove deprecated slots
+      customElementsManifest.modules
+        .flatMap(module => module.declarations)
+        .forEach(declaration => {
+          if (declaration.slots) {
+            console.log(declaration.slots);
+            declaration.slots = declaration.slots.filter(slot => !slot.description?.includes('deprecated'));
+          }
+        });
+    }
+  };
+}
+
 function jsxTypesPlugin() {
   return customElementJsxPlugin({
     outdir: resolve('dist'),
@@ -461,6 +478,7 @@ export default {
     rewriteExportedStringLiteralTypeAliasesPlugin(),
     publicPropertiesPlugin(),
     superClassMetadataPlugin(),
+    deprecatedPlugin(),
     jsxTypesPlugin()
   ],
   overrideModuleCreation: ({ ts, globs }) => {
