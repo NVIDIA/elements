@@ -5,3 +5,13 @@
   font-display: block;
   src: url(../node_modules/monaco-editor/dev/vs/base/browser/ui/codicons/codicon/codicon.ttf) format('truetype');
 }
+
+[nve-theme*='reduced-motion'] {
+  --vscode-animationDuration-instant: 0;
+  --vscode-animationDuration-short: 0;
+  --vscode-animationDuration-medium: 0;
+  --vscode-animationDuration-long: 0;
+  --vscode-animationDuration-slow: 0;
+  --vscode-animationDuration-ambient: 0;
+  --vscode-animationDuration-cycle: 0;
+}

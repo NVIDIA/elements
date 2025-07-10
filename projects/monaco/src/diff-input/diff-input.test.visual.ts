@@ -4,26 +4,26 @@ import { visualRunner } from '@internals/vite';
 describe('monaco diff input visual', () => {
   test('input should match visual baseline when narrow', async () => {
     const report = await visualRunner.render('monaco-diff-input.narrow', template('', 640, 1252), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(16);
   });
 
   test('input should match visual baseline when wide', async () => {
     const report = await visualRunner.render('monaco-diff-input.wide', template('', 1280, 1252), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(16);
   });
 
   test('input should match visual baseline dark theme when narrow', async () => {
     const report = await visualRunner.render('monaco-diff-input.dark.narrow', template('dark', 640, 1252), {
       network: true
     });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(16);
   });
 
   test('input should match visual baseline dark theme when wide', async () => {
     const report = await visualRunner.render('monaco-diff-input.dark.wide', template('dark', 1280, 1252), {
       network: true
     });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(16);
   });
 });
 
@@ -58,7 +58,7 @@ function template(theme: '' | 'dark' = '', width: number, height: number) {
   <script type="module">
     import '@nvidia-elements/core/forms/define.js';
     import '@nvidia-elements/monaco/diff-input/define.js';
-    document.documentElement.setAttribute('nve-theme', '${theme}');
+    document.documentElement.setAttribute('nve-theme', '${theme} reduced-motion');
   </script>
 
   <div nve-layout="column gap:md" style="width: ${width}px; height: ${height}px;">
