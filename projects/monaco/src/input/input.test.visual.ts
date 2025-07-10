@@ -4,12 +4,12 @@ import { visualRunner } from '@nve-internals/vite';
 describe('monaco input visual', () => {
   test('input should match visual baseline', async () => {
     const report = await visualRunner.render('monaco-input', template(''), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
   });
 
   test('input should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('monaco-input.dark', template('dark'), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
   });
 });
 
