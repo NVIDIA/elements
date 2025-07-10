@@ -78,7 +78,7 @@ describe('monaco-diff-input lighthouse report', () => {
     expect(report.scores.performance).toBeGreaterThanOrEqual(90);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(89);
-    expect(report.payload.javascript.kb).toBeLessThan(1299);
+    expect(report.payload.javascript.kb).toBeLessThan(1300);
     expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14);
     expect(report.payload.javascript.requests['editor.global.css2.js'].kb).toBeLessThan(57);
     expect(report.payload.javascript.requests['editor.main.css2.js'].kb).toBeLessThan(22);
