@@ -12,6 +12,167 @@ index 890c1be5218ba1e650969aa09bdac07b757ba462..17bedf47fb43f0afe4ccc216fdb1db1c
  	z-index: 4;
  	background-color: var(--vscode-editorStickyScroll-background);
  	right: initial !important;
+diff --git a/esm/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css b/esm/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css
+index 9666216f6ae00e73fd6ce82d8039f6d97ab179cb..4db2b1f115ade9456fd2e4771ec44914c68e9944 100644
+--- a/esm/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css
++++ b/esm/vs/base/browser/ui/codicons/codicon/codicon-modifiers.css
+@@ -18,7 +18,7 @@
+ .codicon-gear.codicon-modifier-spin,
+ .codicon-notebook-state-executing.codicon-modifier-spin {
+ 	/* Use steps to throttle FPS to reduce CPU usage */
+-	animation: codicon-spin 1.5s steps(30) infinite;
++	animation: codicon-spin var(--vscode-animationDuration-ambient, 1.25s) steps(30) infinite;
+ }
+ 
+ .codicon-modifier-disabled {
+@@ -28,6 +28,6 @@
+ /* custom speed & easing for loading icon */
+ .codicon-loading,
+ .codicon-tree-item-loading::before {
+-	animation-duration: 1s !important;
++	animation-duration: var(--vscode-animationDuration-ambient, 1.25s) !important;
+ 	animation-timing-function: cubic-bezier(0.53, 0.21, 0.29, 0.67) !important;
+ }
+diff --git a/esm/vs/base/browser/ui/findinput/findInput.css b/esm/vs/base/browser/ui/findinput/findInput.css
+index 3de2fd329aca8658d65e4335f171057dd1cc9736..29a79816c3a302196f5568e3ed6a4d07ee260cb7 100644
+--- a/esm/vs/base/browser/ui/findinput/findInput.css
++++ b/esm/vs/base/browser/ui/findinput/findInput.css
+@@ -31,22 +31,22 @@
+ /* Highlighting */
+ .monaco-findInput.highlight-0 .controls,
+ .hc-light .monaco-findInput.highlight-0 .controls {
+-	animation: monaco-findInput-highlight-0 100ms linear 0s;
++	animation: monaco-findInput-highlight-0 var(--vscode-animationDuration-short, 100ms) linear 0s;
+ }
+ 
+ .monaco-findInput.highlight-1 .controls,
+ .hc-light .monaco-findInput.highlight-1 .controls {
+-	animation: monaco-findInput-highlight-1 100ms linear 0s;
++	animation: monaco-findInput-highlight-1 var(--vscode-animationDuration-short, 100ms) linear 0s;
+ }
+ 
+ .hc-black .monaco-findInput.highlight-0 .controls,
+ .vs-dark  .monaco-findInput.highlight-0 .controls {
+-	animation: monaco-findInput-highlight-dark-0 100ms linear 0s;
++	animation: monaco-findInput-highlight-dark-0 var(--vscode-animationDuration-short, 100ms) linear 0s;
+ }
+ 
+ .hc-black .monaco-findInput.highlight-1 .controls,
+ .vs-dark  .monaco-findInput.highlight-1 .controls {
+-	animation: monaco-findInput-highlight-dark-1 100ms linear 0s;
++	animation: monaco-findInput-highlight-dark-1 var(--vscode-animationDuration-short, 100ms) linear 0s;
+ }
+ 
+ @keyframes monaco-findInput-highlight-0 {
+diff --git a/esm/vs/base/browser/ui/hover/hoverWidget.css b/esm/vs/base/browser/ui/hover/hoverWidget.css
+index d69122654e579098a88016d7c049424a0d2ec8e9..7b8ce50f5d5edd88614a8c028660978e293c7b8a 100644
+--- a/esm/vs/base/browser/ui/hover/hoverWidget.css
++++ b/esm/vs/base/browser/ui/hover/hoverWidget.css
+@@ -10,7 +10,7 @@
+ 	user-select: text;
+ 	-webkit-user-select: text;
+ 	box-sizing: border-box;
+-	animation: fadein 100ms linear;
++	animation: fadein var(--vscode-animationDuration-short, 100ms) linear;
+ 	line-height: 1.5em;
+ 	white-space: var(--vscode-hover-whiteSpace, normal);
+ }
+diff --git a/esm/vs/base/browser/ui/menu/menu.js b/esm/vs/base/browser/ui/menu/menu.js
+index 0a638b92add280f96d4a1cf7fe8c07a64b37d50e..a0b98f6fc73b13d5ff5aeddbce674c54bf5f0a25 100644
+--- a/esm/vs/base/browser/ui/menu/menu.js
++++ b/esm/vs/base/browser/ui/menu/menu.js
+@@ -782,7 +782,7 @@ ${formatRule(Codicon.menuSubmenu)}
+ .monaco-menu .monaco-action-bar .action-item {
+ 	cursor: pointer;
+ 	display: inline-block;
+-	transition: transform 50ms ease;
++	transition: transform var(--vscode-animationDuration-instant, 50ms) ease;
+ 	position: relative;  /* DO NOT REMOVE - this is the key to preventing the ghosting icon bug in Chrome 42 */
+ }
+ 
+@@ -966,7 +966,7 @@ ${formatRule(Codicon.menuSubmenu)}
+ .context-view.monaco-menu-container {
+ 	outline: 0;
+ 	border: none;
+-	animation: fadeIn 0.083s linear;
++	animation: fadeIn 0.var(--vscode-animationDuration-short, 100ms) linear;
+ 	-webkit-app-region: no-drag;
+ }
+ 
+@@ -1056,14 +1056,14 @@ ${formatRule(Codicon.menuSubmenu)}
+ 				/* Background rule added for IE9 - to allow clicks on dom node */
+ 				background:rgba(0,0,0,0);
+ 
+-				transition: opacity 100ms linear;
++				transition: opacity var(--vscode-animationDuration-short, 100ms) linear;
+ 			}
+ 			.monaco-scrollable-element > .invisible {
+ 				opacity: 0;
+ 				pointer-events: none;
+ 			}
+ 			.monaco-scrollable-element > .invisible.fade {
+-				transition: opacity 800ms linear;
++				transition: opacity var(--vscode-animationDuration-slow, 800ms) linear;
+ 			}
+ 
+ 			/* Scrollable Content Inset Shadow */
+diff --git a/esm/vs/base/browser/ui/progressbar/progressbar.css b/esm/vs/base/browser/ui/progressbar/progressbar.css
+index dc23cd255ecfcf1a6243f8b636d52ce83769f212..db44dbdcdef2965ad55608ce9bfdbffb2e79f8f6 100644
+--- a/esm/vs/base/browser/ui/progressbar/progressbar.css
++++ b/esm/vs/base/browser/ui/progressbar/progressbar.css
+@@ -23,7 +23,7 @@
+ 
+ .monaco-progress-container.discrete .progress-bit {
+ 	left: 0;
+-	transition: width 100ms linear;
++	transition: width var(--vscode-animationDuration-short, 100ms) linear;
+ }
+ 
+ .monaco-progress-container.discrete.done .progress-bit {
+@@ -32,7 +32,7 @@
+ 
+ .monaco-progress-container.infinite .progress-bit {
+ 	animation-name: progress;
+-	animation-duration: 4s;
++	animation-duration: var(--vscode-animationDuration-cycle, 4s);
+ 	animation-iteration-count: infinite;
+ 	transform: translate3d(0px, 0px, 0px);
+ 	animation-timing-function: linear;
+diff --git a/esm/vs/base/browser/ui/sash/sash.css b/esm/vs/base/browser/ui/sash/sash.css
+index 42b0f4257877fa7acc3ddc2c9ddef6fd8468542e..ab12da4d6c34cc971038712d0b33496bdb01cb49 100644
+--- a/esm/vs/base/browser/ui/sash/sash.css
++++ b/esm/vs/base/browser/ui/sash/sash.css
+@@ -112,7 +112,7 @@
+ }
+ 
+ .monaco-workbench:not(.reduce-motion) .monaco-sash:before {
+-	transition: background-color 0.1s ease-out;
++	transition: background-color var(--vscode-animationDuration-short, 100ms) ease-out;
+ }
+ 
+ .monaco-sash.hover:before,
+diff --git a/esm/vs/base/browser/ui/scrollbar/media/scrollbars.css b/esm/vs/base/browser/ui/scrollbar/media/scrollbars.css
+index 84c173708948a4dcbf871a5ddc728cbca4cf950f..bbc3a44bf23229e4a84fcb6c23d5360042ab3878 100644
+--- a/esm/vs/base/browser/ui/scrollbar/media/scrollbars.css
++++ b/esm/vs/base/browser/ui/scrollbar/media/scrollbars.css
+@@ -15,7 +15,7 @@
+ 	/* Background rule added for IE9 - to allow clicks on dom node */
+ 	background:rgba(0,0,0,0);
+ 
+-	transition: opacity 100ms linear;
++	transition: opacity var(--vscode-animationDuration-short, 100ms) linear;
+ 	/* In front of peek view */
+ 	z-index: 11;
+ }
+@@ -24,7 +24,7 @@
+ 	pointer-events: none;
+ }
+ .monaco-scrollable-element > .invisible.fade {
+-	transition: opacity 800ms linear;
++	transition: opacity var(--vscode-animationDuration-slow, 800ms) linear;
+ }
+ 
+ /* Scrollable Content Inset Shadow */
 diff --git a/esm/vs/base/browser/ui/scrollbar/scrollableElement.js b/esm/vs/base/browser/ui/scrollbar/scrollableElement.js
 index 633002e63f2999335d8a800cc57957b179d281a2..85a53ea7848919396c6cb3cc9b5ee997470e3f91 100644
 --- a/esm/vs/base/browser/ui/scrollbar/scrollableElement.js
@@ -27,6 +188,48 @@ index 633002e63f2999335d8a800cc57957b179d281a2..85a53ea7848919396c6cb3cc9b5ee997
          if (typeof newOptions.handleMouseWheel !== 'undefined') {
              this._options.handleMouseWheel = newOptions.handleMouseWheel;
              this._setListeningToMouseWheel(this._options.handleMouseWheel);
+diff --git a/esm/vs/base/browser/ui/table/table.css b/esm/vs/base/browser/ui/table/table.css
+index 2266437d7bc966c5f6edaa28db754b8a25ee6b03..3551391581919ad59dc0d332663db555f1a6d70c 100644
+--- a/esm/vs/base/browser/ui/table/table.css
++++ b/esm/vs/base/browser/ui/table/table.css
+@@ -53,5 +53,5 @@
+ 
+ .monaco-workbench:not(.reduce-motion) .monaco-table > .monaco-split-view2,
+ .monaco-workbench:not(.reduce-motion) .monaco-table > .monaco-split-view2 .monaco-sash.vertical::before {
+-	transition: border-color 0.2s ease-out;
++	transition: border-color var(--vscode-animationDuration-medium, 300ms) ease-out;
+ }
+diff --git a/esm/vs/base/browser/ui/tree/media/tree.css b/esm/vs/base/browser/ui/tree/media/tree.css
+index 58099a56c27c04b9b22430b833476735a2988dbe..25c6e8929aa7622992d686879e1cfa7621c54110 100644
+--- a/esm/vs/base/browser/ui/tree/media/tree.css
++++ b/esm/vs/base/browser/ui/tree/media/tree.css
+@@ -33,7 +33,7 @@
+ }
+ 
+ .monaco-workbench:not(.reduce-motion) .monaco-tl-indent > .indent-guide {
+-	transition: border-color 0.1s linear;
++	transition: border-color var(--vscode-animationDuration-short, 100ms) linear;
+ }
+ 
+ .monaco-tl-twistie,
+@@ -68,7 +68,7 @@
+ 
+ .monaco-tl-twistie.codicon-tree-item-loading::before {
+ 	/* Use steps to throttle FPS to reduce CPU usage */
+-	animation: codicon-spin 1.25s steps(30) infinite;
++	animation: codicon-spin var(--vscode-animationDuration-ambient, 1.25s) steps(30) infinite;
+ }
+ 
+ .monaco-tree-type-filter {
+@@ -85,7 +85,7 @@
+ }
+ 
+ .monaco-workbench:not(.reduce-motion) .monaco-tree-type-filter {
+-	transition: top 0.3s;
++	transition: top var(--vscode-animationDuration-medium, 300ms);
+ }
+ 
+ .monaco-tree-type-filter.disabled {
 diff --git a/esm/vs/base/common/async.js b/esm/vs/base/common/async.js
 index 5a5588e64135d87ac643aa75dd339f96ec3613a8..bdfbaf9cd113683af0d3f4f64d636b36a6684778 100644
 --- a/esm/vs/base/common/async.js
@@ -82,6 +285,19 @@ index 31ca82a2b7b141c85a23384ed42c7eaad1f97432..77c6a920d40e05a88749ce0654ef1878
      }
      return range;
  }
+diff --git a/esm/vs/editor/browser/services/hoverService/hover.css b/esm/vs/editor/browser/services/hoverService/hover.css
+index 87ed1d3c84ec42677c1f903284fabb746e834445..a9efed0f94b482a7d9aa1f75ce1b99abb0fb78ae 100644
+--- a/esm/vs/editor/browser/services/hoverService/hover.css
++++ b/esm/vs/editor/browser/services/hoverService/hover.css
+@@ -23,7 +23,7 @@
+ }
+ 
+ .monaco-workbench .workbench-hover:not(.skip-fade-in) {
+-	animation: fadein 100ms linear;
++	animation: fadein var(--vscode-animationDuration-short, 100ms) linear;
+ }
+ 
+ .monaco-workbench .workbench-hover.compact {
 diff --git a/esm/vs/editor/browser/viewParts/editorScrollbar/editorScrollbar.js b/esm/vs/editor/browser/viewParts/editorScrollbar/editorScrollbar.js
 index 9a326187e9b9d58ba7434bf9efd2be1e860d63f6..bb2d479cc107bfd876782cc5756d33fd98486e9c 100644
 --- a/esm/vs/editor/browser/viewParts/editorScrollbar/editorScrollbar.js
@@ -95,6 +311,90 @@ index 9a326187e9b9d58ba7434bf9efd2be1e860d63f6..bb2d479cc107bfd876782cc5756d33fd
                  vertical: scrollbar.vertical,
                  horizontal: scrollbar.horizontal,
                  verticalScrollbarSize: scrollbar.verticalScrollbarSize,
+diff --git a/esm/vs/editor/browser/viewParts/lines/viewLines.css b/esm/vs/editor/browser/viewParts/lines/viewLines.css
+index 899c96b8cfcdbbb7a9b33355346f5537cf500da6..f7475cd48d2dec4ca6f14e1d58facf20fea47a98 100644
+--- a/esm/vs/editor/browser/viewParts/lines/viewLines.css
++++ b/esm/vs/editor/browser/viewParts/lines/viewLines.css
+@@ -7,7 +7,7 @@
+ /*.monaco-editor .view-lines > .view-line {
+ 	background-color: none;
+ 	animation-name: flash-background;
+-	animation-duration: 800ms;
++	animation-duration: var(--vscode-animationDuration-slow, 800ms);
+ }
+ @keyframes flash-background {
+ 	0%   { background-color: lightgreen; }
+diff --git a/esm/vs/editor/browser/viewParts/minimap/minimap.css b/esm/vs/editor/browser/viewParts/minimap/minimap.css
+index d09f089b0810d0831c658837b4eb89bddc172ae0..d28ccb815ec2b627265006ca932585ac1fa460ce 100644
+--- a/esm/vs/editor/browser/viewParts/minimap/minimap.css
++++ b/esm/vs/editor/browser/viewParts/minimap/minimap.css
+@@ -6,7 +6,7 @@
+ /* START cover the case that slider is visible on mouseover */
+ .monaco-editor .minimap.slider-mouseover .minimap-slider {
+ 	opacity: 0;
+-	transition: opacity 100ms linear;
++	transition: opacity var(--vscode-animationDuration-short, 100ms) linear;
+ }
+ .monaco-editor .minimap.slider-mouseover:hover .minimap-slider {
+ 	opacity: 1;
+@@ -45,7 +45,7 @@
+ /* 0.5s fade in/out for the minimap */
+ .minimap.autohide {
+ 	opacity: 0;
+-	transition: opacity 0.5s;
++	transition: opacity var(--vscode-animationDuration-long, 500ms);
+ }
+ .minimap.autohide:hover {
+ 	opacity: 1;
+diff --git a/esm/vs/editor/browser/viewParts/viewCursors/viewCursors.css b/esm/vs/editor/browser/viewParts/viewCursors/viewCursors.css
+index 5549376d99d507c93f0da27de7d852aa85fe4a93..b54a5617183d45d33f62d8fae9b7d957a8d9fa67 100644
+--- a/esm/vs/editor/browser/viewParts/viewCursors/viewCursors.css
++++ b/esm/vs/editor/browser/viewParts/viewCursors/viewCursors.css
+@@ -15,7 +15,7 @@
+ 
+ /* -- smooth-caret-animation -- */
+ .monaco-editor .cursors-layer.cursor-smooth-caret-animation > .cursor {
+-	transition: all 80ms;
++	transition: all var(--vscode-animationDuration-short, 100ms);
+ }
+ 
+ /* -- block-outline-style -- */
+@@ -73,13 +73,13 @@
+ }
+ 
+ .cursor-smooth {
+-	animation: monaco-cursor-smooth 0.5s ease-in-out 0s 20 alternate;
++	animation: monaco-cursor-smooth var(--vscode-animationDuration-long, 500ms) ease-in-out 0s 20 alternate;
+ }
+ 
+ .cursor-phase {
+-	animation: monaco-cursor-phase 0.5s ease-in-out 0s 20 alternate;
++	animation: monaco-cursor-phase var(--vscode-animationDuration-long, 500ms) ease-in-out 0s 20 alternate;
+ }
+ 
+ .cursor-expand > .cursor {
+-	animation: monaco-cursor-expand 0.5s ease-in-out 0s 20 alternate;
++	animation: monaco-cursor-expand var(--vscode-animationDuration-long, 500ms) ease-in-out 0s 20 alternate;
+ }
+diff --git a/esm/vs/editor/browser/widget/codeEditor/editor.css b/esm/vs/editor/browser/widget/codeEditor/editor.css
+index a6d82d5845f0ff89520a23855d6c5a4c888e70c2..f994f58b3a443ba7fb8cfc5a572a17b77e35b5b0 100644
+--- a/esm/vs/editor/browser/widget/codeEditor/editor.css
++++ b/esm/vs/editor/browser/widget/codeEditor/editor.css
+@@ -109,3 +109,14 @@
+ 	text-decoration: line-through;
+ 	text-decoration-color: var(--vscode-editor-foreground, inherit);
+ }
++
++/* PATCH: Add animation duration CSS properties */
++:root {
++	--vscode-animationDuration-instant: 50ms;
++	--vscode-animationDuration-short: 100ms;
++	--vscode-animationDuration-medium: 300ms;
++	--vscode-animationDuration-long: 500ms;
++	--vscode-animationDuration-slow: 800ms;
++	--vscode-animationDuration-ambient: 1.25s;
++	--vscode-animationDuration-cycle: 4s;	
++}
 diff --git a/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js b/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js
 index 5cf17f8c8565259f89c5bf1aece91c721dd67fd4..662846460ba8890ca49b381d9a10b05dfa711518 100644
 --- a/esm/vs/editor/browser/widget/diffEditor/components/diffEditorEditors.js
@@ -126,6 +426,20 @@ index 5cf17f8c8565259f89c5bf1aece91c721dd67fd4..662846460ba8890ca49b381d9a10b05d
          // Clone minimap options before changing them
          clonedOptions.minimap = { ...(clonedOptions.minimap || {}) };
          clonedOptions.minimap.enabled = false;
+diff --git a/esm/vs/editor/browser/widget/diffEditor/components/diffEditorViewZones/inlineDiffDeletedCodeMargin.js b/esm/vs/editor/browser/widget/diffEditor/components/diffEditorViewZones/inlineDiffDeletedCodeMargin.js
+index c2f3b77791796dcacd8c25613479cc804ed5fa27..b47b284d3977d906152a4d15f5b5ef3f18486be4 100644
+--- a/esm/vs/editor/browser/widget/diffEditor/components/diffEditorViewZones/inlineDiffDeletedCodeMargin.js
++++ b/esm/vs/editor/browser/widget/diffEditor/components/diffEditorViewZones/inlineDiffDeletedCodeMargin.js
+@@ -37,7 +37,8 @@ export class InlineDiffDeletedCodeMargin extends Disposable {
+         this._diffActions.className = ThemeIcon.asClassName(Codicon.lightBulb) + ' lightbulb-glyph';
+         this._diffActions.style.position = 'absolute';
+         const lineHeight = this._modifiedEditor.getOption(67 /* EditorOption.lineHeight */);
+-        this._diffActions.style.right = '0px';
++        // PATCH: adjust horizontal position to avoid truncation
++        this._diffActions.style.right = '-2px';
+         this._diffActions.style.visibility = 'hidden';
+         this._diffActions.style.height = `${lineHeight}px`;
+         this._diffActions.style.lineHeight = `${lineHeight}px`;
 diff --git a/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js b/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js
 index 26f3b65fb40c70eb490975c93cf823797b61330b..47f00ca0bbdb87963fe95ed5bda42d7b1bda9735 100644
 --- a/esm/vs/editor/browser/widget/diffEditor/delegatingEditorImpl.js
@@ -165,6 +479,37 @@ index 6a65951dce7583b077445d33d7115fd37da6708b..76fb442be1959dcbea370f08c339a229
                  hiddenItemStrategy: 0 /* HiddenItemStrategy.Ignore */,
                  actionRunner: new ActionRunnerWithContext(() => {
                      const item = this._item.get();
+diff --git a/esm/vs/editor/browser/widget/diffEditor/style.css b/esm/vs/editor/browser/widget/diffEditor/style.css
+index 4489d84be38302782022904728af8b94c89fd10f..82ded1bfbd797a57f96143c30d007186718b552f 100644
+--- a/esm/vs/editor/browser/widget/diffEditor/style.css
++++ b/esm/vs/editor/browser/widget/diffEditor/style.css
+@@ -23,7 +23,7 @@
+ 
+ .monaco-editor .diff-hidden-lines .top,
+ .monaco-editor .diff-hidden-lines .bottom {
+-	transition: background-color 0.1s ease-out;
++	transition: background-color var(--vscode-animationDuration-short, 100ms) ease-out;
+ 	height: 4px;
+ 	background-color: transparent;
+ 	background-clip: padding-box;
+@@ -338,7 +338,7 @@
+ 
+ 	.gutterItem {
+ 		opacity: 0;
+-		transition: opacity 0.7s;
++		transition: opacity var(--vscode-animationDuration-slow, 800ms);
+ 
+ 		&.showAlways {
+ 			opacity: 1;
+@@ -352,7 +352,7 @@
+ 
+ 	&:hover .gutterItem {
+ 		opacity: 1;
+-		transition: opacity 0.1s ease-in-out;
++		transition: opacity var(--vscode-animationDuration-short, 100ms) ease-in-out;
+ 	}
+ 
+ 	.gutterItem {
 diff --git a/esm/vs/editor/browser/widget/diffEditor/utils/editorGutter.js b/esm/vs/editor/browser/widget/diffEditor/utils/editorGutter.js
 index bfd5289c9cfe2af54cf8c5a5fbfbf99c9031cc11..a5514101f1e9650bc37a33796f825f4610078773 100644
 --- a/esm/vs/editor/browser/widget/diffEditor/utils/editorGutter.js
@@ -227,6 +572,43 @@ index 92bbf91d421a45172ff04c2bac1025e433300b62..6688c3d07a38855df88a5903feafe463
      _assertNotDisposed() {
          if (this._isDisposed) {
              throw new BugIndicatingError('Model is disposed!');
+diff --git a/esm/vs/editor/contrib/codelens/browser/codelensWidget.css b/esm/vs/editor/contrib/codelens/browser/codelensWidget.css
+index 14711df31af6653764fe137de3f920f8ab986bcf..e10cbfba02bbe7ec18fce0d7de6a766cd87dc35f 100644
+--- a/esm/vs/editor/contrib/codelens/browser/codelensWidget.css
++++ b/esm/vs/editor/contrib/codelens/browser/codelensWidget.css
+@@ -61,5 +61,5 @@
+ }
+ 
+ .monaco-editor .codelens-decoration.fadein {
+-	animation: fadein 0.1s linear;
++	animation: fadein 0.var(--vscode-animationDuration-short, 100ms) linear;
+ }
+diff --git a/esm/vs/editor/contrib/find/browser/findWidget.css b/esm/vs/editor/contrib/find/browser/findWidget.css
+index 5d3ef3277d7995a2dba29a832d359fa1de69bcdc..ec6c4d658cdda0d89a39b3ef353010b1854f1233 100644
+--- a/esm/vs/editor/contrib/find/browser/findWidget.css
++++ b/esm/vs/editor/contrib/find/browser/findWidget.css
+@@ -10,7 +10,7 @@
+ 	height: 33px;
+ 	overflow: hidden;
+ 	line-height: 19px;
+-	transition: transform 200ms linear;
++	transition: transform var(--vscode-animationDuration-medium, 200ms) linear;
+ 	padding: 0 4px;
+ 	box-sizing: border-box;
+ 	transform: translateY(calc(-100% - 10px)); /* shadow (10px) */
+diff --git a/esm/vs/editor/contrib/folding/browser/folding.css b/esm/vs/editor/contrib/folding/browser/folding.css
+index 5f7ab05db78bb090e41d39f045f57ba7a797fc0d..a28f54c21226153e3ea25b3093e39e4d1913911e 100644
+--- a/esm/vs/editor/contrib/folding/browser/folding.css
++++ b/esm/vs/editor/contrib/folding/browser/folding.css
+@@ -8,7 +8,7 @@
+ .monaco-editor .margin-view-overlays .codicon-folding-collapsed {
+ 	cursor: pointer;
+ 	opacity: 0;
+-	transition: opacity 0.5s;
++	transition: opacity var(--vscode-animationDuration-long, 500ms);
+ 	display: flex;
+ 	align-items: center;
+ 	justify-content: center;
 diff --git a/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js b/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js
 index be8ff0dd7f4cc05ca1f74b3b561f80d6dd530f33..d2aea97c401230cc3c1390828cc2be86361dbc70 100644
 --- a/esm/vs/editor/contrib/gotoSymbol/browser/peek/referencesWidget.js
@@ -241,6 +623,41 @@ index be8ff0dd7f4cc05ca1f74b3b561f80d6dd530f33..d2aea97c401230cc3c1390828cc2be86
              minimap: {
                  enabled: false
              }
+diff --git a/esm/vs/editor/contrib/inlineEdits/browser/inlineEditsWidget.css b/esm/vs/editor/contrib/inlineEdits/browser/inlineEditsWidget.css
+index 68910c883a69f7aaca0bbe2a59317ceeb24f3c50..82944f88213feaf99724a653edaae81ceabbc776 100644
+--- a/esm/vs/editor/contrib/inlineEdits/browser/inlineEditsWidget.css
++++ b/esm/vs/editor/contrib/inlineEdits/browser/inlineEditsWidget.css
+@@ -12,7 +12,7 @@
+ 
+ 	.toolbar, .promptEditor {
+ 		opacity: 0;
+-		transition: opacity 0.2s ease-in-out;
++		transition: opacity var(--vscode-animationDuration-medium, 300ms) ease-in-out;
+ 	}
+ 	&:hover, &.focused {
+ 		.toolbar, .promptEditor {
+diff --git a/esm/vs/editor/contrib/message/browser/messageController.css b/esm/vs/editor/contrib/message/browser/messageController.css
+index 6ea335781ce0df57917f086974bed027421f8411..9532c077395c83bc959d920bee5beea0a04ca635 100644
+--- a/esm/vs/editor/contrib/message/browser/messageController.css
++++ b/esm/vs/editor/contrib/message/browser/messageController.css
+@@ -19,7 +19,7 @@
+ 	to { opacity: 1; }
+ }
+ .monaco-editor .monaco-editor-overlaymessage.fadeIn {
+-	animation: fadeIn 150ms ease-out;
++	animation: fadeIn var(--vscode-animationDuration-medium, 300ms) ease-out;
+ }
+ 
+ @keyframes fadeOut {
+@@ -27,7 +27,7 @@
+ 	to { opacity: 0; }
+ }
+ .monaco-editor .monaco-editor-overlaymessage.fadeOut {
+-	animation: fadeOut 100ms ease-out;
++	animation: fadeOut var(--vscode-animationDuration-short, 100ms) ease-out;
+ }
+ 
+ .monaco-editor .monaco-editor-overlaymessage .message {
 diff --git a/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css b/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css
 index 276082256f6efda17a33630f2aeb9dd7fa5507ea..282b97d67aa01c509b2a549ca1f8be056bd3c1f2 100644
 --- a/esm/vs/editor/contrib/stickyScroll/browser/stickyScroll.css
