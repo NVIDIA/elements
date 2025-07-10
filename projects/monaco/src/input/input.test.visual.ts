@@ -4,12 +4,12 @@ import { visualRunner } from '@nve-internals/vite';
 describe('monaco input visual', () => {
   test('input should match visual baseline', async () => {
     const report = await visualRunner.render('monaco-input', template(''), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
   });
 
   test('input should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('monaco-input.dark', template('dark'), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
   });
 });
 
@@ -39,7 +39,7 @@ function template(theme: '' | 'dark' = '') {
   <script type="module">
     import '@nvidia-elements/core/forms/define.js';
     import '@nvidia-elements/monaco/input/define.js';
-    document.documentElement.setAttribute('nve-theme', '${theme}');
+    document.documentElement.setAttribute('nve-theme', '${theme} reduced-motion');
   </script>
 
   <div nve-layout="column gap:md">
