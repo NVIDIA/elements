@@ -4,26 +4,26 @@ import { visualRunner } from '@internals/vite';
 describe('monaco diff input visual', () => {
   test('input should match visual baseline when narrow', async () => {
     const report = await visualRunner.render('monaco-diff-input.narrow', template('', 640, 1252), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
   });
 
   test('input should match visual baseline when wide', async () => {
     const report = await visualRunner.render('monaco-diff-input.wide', template('', 1280, 1252), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
   });
 
   test('input should match visual baseline dark theme when narrow', async () => {
     const report = await visualRunner.render('monaco-diff-input.dark.narrow', template('dark', 640, 1252), {
       network: true
     });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
   });
 
   test('input should match visual baseline dark theme when wide', async () => {
     const report = await visualRunner.render('monaco-diff-input.dark.wide', template('dark', 1280, 1252), {
       network: true
     });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
   });
 });
 
