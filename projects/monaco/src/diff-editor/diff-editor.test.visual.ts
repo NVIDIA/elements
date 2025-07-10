@@ -8,22 +8,22 @@ const options = {
 describe('monaco diff editor visual', () => {
   test('editor should match visual baseline when narrow', async () => {
     const report = await visualRunner.render('monaco-diff-editor.narrow', template('', 640, 486), options);
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(16);
   });
 
   test('editor should match visual baseline when wide', async () => {
     const report = await visualRunner.render('monaco-diff-editor.wide', template('', 1280, 486), options);
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(16);
   });
 
   test('editor should match visual baseline dark theme when narrow', async () => {
     const report = await visualRunner.render('monaco-diff-editor.dark.narrow', template('dark', 640, 486), options);
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(16);
   });
 
   test('editor should match visual baseline dark theme when wide', async () => {
     const report = await visualRunner.render('monaco-diff-editor.dark.wide', template('dark', 1280, 486), options);
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(16);
   });
 });
 
@@ -79,7 +79,7 @@ function template(theme: '' | 'dark' = '', width: number, height: number) {
   return /* html */ `
   <script type="module">
     import '@nvidia-elements/monaco/diff-editor/define.js';
-    document.documentElement.setAttribute('nve-theme', '${theme}');
+    document.documentElement.setAttribute('nve-theme', '${theme} reduced-motion');
   </script>
 
   <div nve-layout="column gap:md align:stretch" style="width: ${width}px; height: ${height}px;">

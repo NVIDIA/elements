@@ -4,12 +4,12 @@ import { visualRunner } from '@nve-internals/vite';
 describe('monaco editor visual', () => {
   test('editor should match visual baseline', async () => {
     const report = await visualRunner.render('monaco-editor', template(), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
   });
 
   test('editor should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('monaco-editor.dark', template('dark'), { network: true });
-    expect(report.maxDiffPercentage).toBeLessThanOrEqual(20);
+    expect(report.maxDiffPercentage).toBeLessThanOrEqual(5);
   });
 });
 
@@ -41,7 +41,7 @@ function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
     import '@nvidia-elements/monaco/editor/define.js';
-    document.documentElement.setAttribute('nve-theme', '${theme}');
+    document.documentElement.setAttribute('nve-theme', '${theme} reduced-motion');
   </script>
 
   <div nve-layout="column gap:md align:stretch" style="width: 640px; height: 400px;">
