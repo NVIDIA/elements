@@ -25,12 +25,10 @@ export const libraryNodeBuildConfig = {
   },
   plugins: [tsc(), dts()],
   build: {
-    minify: false, // https://github.com/vitejs/vite/issues/8848
     watch: mode === 'watch' ? {} : undefined,
     outDir: dist(),
     emptyOutDir: false,
     sourcemap: false,
-    minify: false,
     target: 'esnext',
     lib: {
       entry: {
