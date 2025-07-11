@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.0...@nvidia-elements/core-v1.39.1) (2025-07-11)
+
+
+### Bug Fixes
+
+* **elements:** toolbar default vertical width ([232f962](https://github.com/NVIDIA/elements/commit/232f962b317a247921638c2181b2a158d9620668))
+
 ## [@nvidia-elements/core-v1.39.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.38.2...@nvidia-elements/core-v1.39.0) (2025-07-09)
 
 
