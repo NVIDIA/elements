@@ -63,7 +63,6 @@ export const libraryTestConfig = {
         '**/dist/**',
         '**/build/**',
         '**/.lighthouse/**',
-        '**/.storybook/**',
         '**/.wireit/**',
         '**/.pnpm/**',
         '**/*.test.ts',
