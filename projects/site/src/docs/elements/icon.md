@@ -50,6 +50,10 @@ The Iconography system is based on exposing an SVG based icon library to a the `
 
 {% story 'nve-icon', 'Alias' %}
 
+## Brand
+
+{% story 'nve-icon', 'Brand' %}
+
 ## Source
 
 {% story 'nve-icon', 'Source' %}

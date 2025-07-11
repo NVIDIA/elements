@@ -49,16 +49,19 @@ import '@nvidia-elements/core/button/define.js';
 
 ## Development
 
-- `ci`: run full build/lint/test as well as demo/storybook apps against final output
+- `ci`: run full build/lint/test
 - `build`: run library build
-- `dev`: run storybook and build in watch mode
+- `dev`: run build in watch mode
 - `test`: run unit tests
 - `test:watch`: run unit tets in watch mode
 
-All component development is currently done within a Storybook build:
+All component development is currently done within the docs site. Run each
+site and elements dev mode in a independent terminal.
 
 ```bash
-pnpm dev
+pnpm dev # /projects/elements
+
+pnpm dev # /projects/site
 ```
 
 <br />
