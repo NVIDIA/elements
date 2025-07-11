@@ -188,7 +188,7 @@ export function elementStatus(tag) {
       
       <div nve-layout="column gap:xs">
         <nve-alert status="${elementMetadata.figma ? 'finished' : 'pending'}">Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
-        <nve-alert status="${elementMetadata.storybook ? 'finished' : 'pending'}">Storybook Preview</nve-alert>
+        <nve-alert status="${elementMetadata.storybook ? 'finished' : 'pending'}">Docs Preview</nve-alert>
         <nve-alert status="${elementMetadata.storybook ? 'finished' : 'pending'}">API Documentation</nve-alert>
         <nve-alert status="${elementMetadata.themes ? 'finished' : 'pending'}">Fully Themeable</nve-alert>
       </div>

@@ -27,7 +27,6 @@ packages:
   - 'projects/pages'
   - 'projects/elements'
   - 'projects/elements-react'
-  - 'projects/storybook'
   - 'projects/styles'
   - 'projects/testing'
   - 'projects/themes'

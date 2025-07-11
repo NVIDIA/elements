@@ -304,10 +304,6 @@ export const DropdownPositionFallback = {
     margin: 0;
     padding: 0 !important;
   }
-
-  #storybook-root {
-    margin: 512px !important;
-  }
 </style>
 
 <nve-dropdown id="dropdown" anchor="btn" position="bottom" alignment="center">

@@ -87,9 +87,6 @@ import '@nvidia-elements/core/button/define.js';
     <a href="./docs/integrations/installation/"><nve-icon name="gear"></nve-icon> Installation</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/about/getting-started/" target="_blank"><svg width="18" height="18"><use href="#storybook-svg"></use></svg> API Documentation</a>
-  </nve-button>
-  <nve-button>
     <a href="https://github.com/NVIDIA/elements" target="_blank"><svg width="18" height="18"><use href="#gitlab-svg"></use></svg> Gitlab Repo</a>
   </nve-button>
   <nve-button>
