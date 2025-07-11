@@ -26,14 +26,17 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
   apt-get -y autoremove --purge && apt-get -y clean
 
 # install/setup vault
-RUN curl https://registry.npmjs.org -L -o vault.zip || true \
-  unzip vault.zip -d /root || true \
-  cp /root/vault /usr/local/bin/vault \
-  rm vault.zip || true \
-  vault --version \
+RUN curl https://registry.npmjs.org -L -o vault.zip && \
+  unzip vault.zip -d /root && \
+  cp /root/vault /usr/local/bin/vault && \
+  rm vault.zip && \
+  vault --version  && \
   apt-get update && apt-get install -y jq
 
-# install aws cli (default install: /usr/local/aws-cli, and a symbolic link in /usr/local/bin)
-RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip || true \
-  unzip awscliv2.zip || true \
-  sudo ./aws/install
+# install aws cli (default install: /usr/local/bin/aws)
+RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip && \
+  unzip awscliv2.zip && \
+  ./aws/install && \
+  rm awscliv2.zip && \
+  rm -rf ./aws && \
+  aws --version
