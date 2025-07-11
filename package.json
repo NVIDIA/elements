@@ -84,7 +84,6 @@
         "./projects/starters/solidjs:ci",
         "./projects/starters/typescript:ci",
         "./projects/starters/vue:ci",
-        "./projects/storybook:ci",
         "./projects/styles:ci",
         "./projects/testing:ci",
         "./projects/themes:ci",

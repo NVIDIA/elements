@@ -1,6 +1,6 @@
 # Metadata
 
-The metadata scripts generate common metadata about projects in the repo. This information is then consumed in a variety of ways such as displaying information in [Storybook](https://NVIDIA.github.io/elements/docs/metrics/) or reporting to [GitLab](https://github.com/NVIDIA/elements/-/graphs/main/charts).
+The metadata scripts generate common metadata about projects in the repo. This information is then consumed in a variety of ways such as displaying information our [documentation](https://NVIDIA.github.io/elements/docs/metrics/) or reporting to [GitLab](https://github.com/NVIDIA/elements/-/graphs/main/charts).
 
 ## Commands
 

@@ -6,7 +6,6 @@
 .DS_store
 node_modules
 dist
-dist-storybook
 .lighthouse
 .visual/dist
 *.diff.png
