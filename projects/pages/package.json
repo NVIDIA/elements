@@ -18,7 +18,6 @@
         "dist"
       ],
       "dependencies": [
-        "../storybook:build",
         "../site:build",
         "../starters:build",
         "../internals/metadata:build"

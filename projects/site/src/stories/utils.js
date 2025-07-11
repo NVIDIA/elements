@@ -6,7 +6,8 @@ import { camelToKebab } from '../_11ty/utils/index.js';
 export function getStories() {
   return [
     ...globSync(resolve('node_modules/@nvidia-elements/**/dist/**/*.stories.json')),
-    ...globSync(resolve('node_modules/@nvidia-elements/**/dist/**/*.stories.json'))
+    ...globSync(resolve('node_modules/@nvidia-elements/**/dist/**/*.stories.json')),
+    ...globSync(resolve('node_modules/@nve-internals/**/dist/**/*.stories.json'))
   ]
     .map(path => ({
       path: path.replace(resolve('node_modules/'), '').replace('/dist/', '/').replace('/@nve', '@nve'),
