@@ -5,7 +5,6 @@ public
 coverage
 .wireit
 .lighthouse
-.storybook
 .next
 *.stories.ts
 *.test.lighthouse.ts

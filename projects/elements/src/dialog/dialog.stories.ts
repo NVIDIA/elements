@@ -270,11 +270,6 @@ export const InertModal = {
     display: block !important;
     padding: 24px;
   }
-
-  #storybook-root {
-    display: block;
-    margin: 0 !important;
-  }
 </style>
 <div>
   <button popovertarget="popover">btn</button>

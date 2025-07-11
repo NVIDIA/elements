@@ -94,17 +94,6 @@ export const TypePopoverControllerDemo = {
 
 export const TypePopoverControllerAlignmentDemo = {
   render: () => html`
-    <style>
-    #storybook-root {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      width: 100%;
-      height: 100vh;
-    }
-  </style>
-
   <nve-card id="card" style="width: 450px; height: 300px;"></nve-card>
   <ui-popover anchor="card" popover-type="manual" position="top" alignment="start">top start</ui-popover>
   <ui-popover anchor="card" popover-type="manual" position="top">top center</ui-popover>

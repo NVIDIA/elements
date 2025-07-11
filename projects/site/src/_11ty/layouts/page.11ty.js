@@ -1,7 +1,7 @@
 import { renderBaseHead } from './common.js';
 
 /**
- * Basic page layout template that aligns with Storybook and Starters page header.
+ * Basic page layout template that aligns with Starters page header.
  * Provides a consistent header with navigation and system theme controls.
  *
  * @param {Object} data - The page data object from 11ty
