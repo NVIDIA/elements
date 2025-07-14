@@ -5,6 +5,11 @@ import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 
+export default {
+  title: 'Elements/InputGroup',
+  component: 'nve-input-group'
+};
+
 export const InputGroup = () => {
   return html`
 <nve-input-group>
