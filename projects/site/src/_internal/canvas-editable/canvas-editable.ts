@@ -94,6 +94,16 @@ export class CanvasEditable extends LitElement {
             <head>
               <link rel="stylesheet" href="https://https://esm.sh/@nvidia-elements/core@latest/dist/bundles/index.css" />
               <script async type="module" src="https://https://esm.sh/@nvidia-elements/core@latest/dist/bundles/index.js"></script>
+
+              <style>
+                body {
+                  display: flex;
+                  place-items: center;
+                  place-content: center;
+                  height: 100vh;
+                  width: 100vw;
+                }
+              </style>
             </head>
             <body>
               ${srcdoc}
@@ -144,12 +154,17 @@ export class CanvasEditable extends LitElement {
   #isPopoverElement(tag: string): boolean {
     const popoverElements = [
       'nve-dialog',
-      'nve-tooltip',
-      'nve-toggletip',
+      'nve-drawer',
       'nve-dropdown',
-      'nve-toast',
+      'nve-input-group',
+      'nve-menu',
       'nve-notification',
-      'nve-drawer'
+      'nve-page',
+      'nve-page-loader',
+      'nve-toast',
+      'nve-toolbar',
+      'nve-toggletip',
+      'nve-tooltip'
     ];
     return popoverElements.includes(tag);
   }
