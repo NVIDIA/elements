@@ -1,3 +1,8 @@
+/* ==========================================================================
+   DOCS LAYOUT STYLES
+   ========================================================================== */
+
+/* Sidenav Panel Styles */
 #sidenav-panel {
   nve-tree > nve-tree-node:not(:has(> a)),
   nve-tree > nve-tree-node:has(> a) {
@@ -22,33 +27,44 @@
   }
 }
 
+/* Navigation Tree Styles */
 #docs-nav nve-tree-node:not([expanded]) > a {
   &::after {
     inset: 0 0 0 -24px !important;
   }
 }
 
-h2[nve-text='heading xl mkd'] {
-  border-bottom: 1px solid var(--nve-ref-border-color);
-}
-
-[nve-text='heading xl mkd'],
-[nve-text='heading lg mkd'] {
-  padding-top: var(--nve-ref-space-xl);
-  padding-bottom: var(--nve-ref-space-xs);
-  display: flex;
-  align-items: center;
-  gap: var(--nve-ref-space-sm);
-}
-
-nve-tabs + h2[nve-text='heading xl mkd'] {
-  padding-top: var(--nve-ref-space-md);
+/* Tab Styles */
+nve-tabs#doc-tabs {
+  padding: var(--nve-ref-space-xl) 0 var(--nve-ref-space-sm);
 }
 
 nve-tabs-item {
   font-size: var(--nve-ref-font-size-200);
 }
 
+/* Heading Styles */
+h2[nve-text='heading xl mkd'] {
+  border-bottom: 1px solid var(--nve-ref-border-color);
+}
+
+h2[nve-text='heading xl mkd']:first-of-type {
+  padding-top: 0;
+}
+
+[nve-text='heading xl mkd'],
+[nve-text='heading lg mkd'] {
+  padding: var(--nve-ref-space-xl) 0 var(--nve-ref-space-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--nve-ref-space-sm);
+}
+
+[nve-text='heading lg mkd'] {
+  padding-top: var(--nve-ref-space-md);
+}
+
+/* Link and List Styles */
 [nve-text='link mkd']:visited {
   color: inherit !important;
 }
@@ -57,6 +73,7 @@ nve-tabs-item {
   display: inline !important;
 }
 
+/* Code Block Styles */
 /* Temporary fix for code_inline tag renderer in paragraphs, applies nve-text="code" styles */
 p[nve-text] > code {
   background: var(--nve-sys-interaction-field-background) !important;
@@ -77,6 +94,7 @@ code > nve-codeblock {
   width: 100%;
 }
 
+/* Canvas Styles */
 nvd-canvas {
   min-height: 140px;
 }
@@ -85,6 +103,7 @@ nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
   --padding: var(--nve-ref-space-xs);
 }
 
+/* Page Panel Styles */
 nve-page-panel[slot='left'] {
   --background: var(--nve-sys-layer-shell-background);
   --width: 300px;
@@ -94,6 +113,7 @@ nve-page-panel[slot='left'] {
   }
 }
 
+/* Main Content Styles */
 main {
   padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
   padding-bottom: var(--nve-ref-space-xl);
@@ -118,6 +138,7 @@ main:has([docs-full-width]) {
   }
 }
 
+/* Dark Theme Background Styles */
 [nve-theme~='dark'] main:has(#getting-started-img) {
   background-image: url(/static/images/test-image-2.webp) !important;
   object-fit: fill !important;
@@ -127,6 +148,7 @@ main:has([docs-full-width]) {
   filter: drop-shadow(0 50px 50px rgb(11 12 15 / 95%));
 }
 
+/* Right Side Anchor Generator Styles */
 #anchor-generator {
   padding: 0;
   height: fit-content;
