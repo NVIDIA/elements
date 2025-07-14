@@ -64,7 +64,7 @@ export function render(data) {
       }
     </style>
   
-    <h2 nve-text="heading xl mkd">Example Browser</h2>
+    <h2 nve-text="heading xl mkd">${componentData.title} Examples</h2>
 
     <!-- Triggers element loader -->
     <template>
@@ -158,7 +158,7 @@ export function render(data) {
             }
 
             // Scroll to #example-browser
-            var exampleBrowser = document.getElementById('example-browser');
+            var exampleBrowser = document.getElementById('${componentData.title.toLowerCase().replace(/\s+/g, '-')}-examples');
             if (exampleBrowser && exampleBrowser.scrollIntoView) {
               exampleBrowser.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
