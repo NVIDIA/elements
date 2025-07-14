@@ -68,7 +68,7 @@ export class CanvasEditable extends LitElement {
               : html`<nve-codeblock language="html" .code=${this.editableSource}></nve-codeblock>`
           }
           <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.editableSource}></nve-copy-button>
-          <nve-button>View in Playground</nve-button>
+          <!-- <nve-button>View in Playground</nve-button> -->
         </div>
         
         <div class="toolbar">
