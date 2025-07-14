@@ -92,7 +92,7 @@ export function render(data) {
                     data.page.url.endsWith('/data-grid/') ||
                     data.page.url.endsWith('/data-grid/api/'))
                     ? `
-                <nve-tabs>
+                <nve-tabs id="doc-tabs">
                   ${componentDocTabs
                     .filter(tab => !tab.hidden)
                     .filter(tab => !(data.hideExamplesTab && tab.label === 'Examples'))
