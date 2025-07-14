@@ -90,7 +90,7 @@ export class CanvasEditable extends LitElement {
         sandbox="allow-scripts allow-modals allow-forms allow-popups allow-same-origin"
         .srcdoc=${`
           <!DOCTYPE html>
-          <html nve-theme="dark" nve-transition="auto">
+          <html nve-theme="${globalThis.document.documentElement.getAttribute('nve-theme')}" nve-transition="auto">
             <head>
               <link rel="stylesheet" href="https://esm.nvidia.com/@nvidia-elements/core@latest/dist/bundles/index.css" />
               <script async type="module" src="https://esm.nvidia.com/@nvidia-elements/core@latest/dist/bundles/index.js"></script>
