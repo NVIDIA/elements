@@ -45,7 +45,9 @@ export function render(data) {
   data.page.fileSlug = componentData.page.fileSlug;
 
   const element = elements.find(d => d.name === componentData.tag);
-  const stories = element.stories || [];
+  const stories =
+    element.stories.filter(s => !s.template?.includes('${')).filter(s => !s.id.toLowerCase().includes('shadowroot')) ||
+    [];
 
   // Create a JSON string of all story templates for JavaScript to cycle through
   const storyTemplates = stories.map(story => ({
