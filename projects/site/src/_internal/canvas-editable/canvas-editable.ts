@@ -45,15 +45,13 @@ export class CanvasEditable extends LitElement {
   }
 
   render() {
-    const isHorizontal = !this.readonly && this.showSource && this.source;
-
     return html`
-      <div internal-host class=${isHorizontal ? 'horizontal-layout' : ''}>
+      <div internal-host class=${!this.readonly ? 'horizontal-layout' : ''}>
         <div class="resizer">
           <div class="preview">
             ${this.readonly && !this.#isPopoverElement(this.tag) ? this.#renderInlinePreview() : this.#renderSandboxedPreview()}
           </div>
-          <div class="preview-backdrop"></div>
+          <div class="preview-backdrop" .hidden=${!this.readonly}></div>
         </div>
 
         <div class="code" .hidden=${!this.showSource || !this.source}>
@@ -71,7 +69,7 @@ export class CanvasEditable extends LitElement {
           <!-- <nve-button>View in Playground</nve-button> -->
         </div>
         
-        <div class="toolbar">
+        <div class="toolbar" .hidden=${!this.readonly}>
           <nve-button container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
           <slot name="suffix"></slot>
         </div>
@@ -84,7 +82,7 @@ export class CanvasEditable extends LitElement {
     // We use a key to force re-render when editableSource changes
     const srcdoc = this.editableSource ?? '';
     // Use a unique key to force iframe reload on source change
-    const key = String(srcdoc.length) + String(srcdoc.hashCode?.() ?? 0) + String(Date.now());
+    const key = String(srcdoc.length) + String(Date.now());
     return html`
       <iframe
         sandbox="allow-scripts allow-modals allow-forms allow-popups allow-same-origin"

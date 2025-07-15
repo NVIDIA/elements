@@ -32,10 +32,6 @@
   width: 100%;
 }
 
-[internal-host].horizontal-layout .preview-backdrop {
-  display: none;
-}
-
 [internal-host].horizontal-layout .code {
   flex: 1;
   min-width: 0;
@@ -45,10 +41,6 @@
 
 [internal-host].horizontal-layout .code nve-monaco-input {
   height: 100%;
-}
-
-[internal-host].horizontal-layout .toolbar {
-  display: none;
 }
 
 .resizer {
@@ -83,13 +75,13 @@
 
 .code nve-copy-button {
   position: absolute;
-  bottom: var(--nve-ref-space-xs);
-  right: var(--nve-ref-space-xs);
+  bottom: var(--nve-ref-space-sm);
+  right: var(--nve-ref-space-sm);
 }
 
 .code nve-button {
   position: absolute;
-  bottom: var(--nve-ref-space-xs);
+  bottom: var(--nve-ref-space-sm);
   right: var(--nve-ref-space-xxl);
 }
 
