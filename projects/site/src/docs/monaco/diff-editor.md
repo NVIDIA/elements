@@ -2,7 +2,8 @@
 {
   title: 'Monaco Diff Editor',
   layout: 'docs.11ty.js',
-  tag: 'nve-monaco-diff-editor'
+  tag: 'nve-monaco-diff-editor',
+  hideExamplesTab: true
 }
 ---
 

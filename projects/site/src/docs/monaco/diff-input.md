@@ -2,7 +2,8 @@
 {
   title: 'Monaco Diff Input',
   layout: 'docs.11ty.js',
-  tag: 'nve-monaco-diff-input'
+  tag: 'nve-monaco-diff-input',
+  hideExamplesTab: true
 }
 ---
 
