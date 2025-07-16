@@ -53,13 +53,13 @@ catalog:
   '@types/node': 22.13.1
   '@types/react': 19.1.8
   '@types/react-dom': 19.1.6
-  '@vitest/browser': 4.0.0-beta.2
-  '@vitest/mocker': 4.0.0-beta.2
-  '@vitest/coverage-istanbul': 4.0.0-beta.2
+  '@vitest/browser': 4.0.0-beta.3
+  '@vitest/mocker': 4.0.0-beta.3
+  '@vitest/coverage-istanbul': 4.0.0-beta.3
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
   cpy-cli: 5.0.0
   eslint: 9.23.0
-  glob: 11.0.1
+  glob: 11.0.3
   markdown-it: 14.1.0
   markdown-it-link-attributes: 4.0.1
   lighthouse: 12.6.0
@@ -72,6 +72,6 @@ catalog:
   rollup-plugin-html-literals: 2.0.0
   ts-morph: 26.0.0
   typescript: 5.8.2
-  vite: 7.0.0
-  vitest: 4.0.0-beta.2
+  vite: 7.0.4
+  vitest: 4.0.0-beta.3
   vite-plugin-dts: 4.5.4

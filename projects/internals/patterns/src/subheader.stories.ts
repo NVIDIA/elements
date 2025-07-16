@@ -9,8 +9,7 @@ import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/tabs/define.js';
 
 export default {
-  title: 'Patterns/Examples',
-  component: 'patterns'
+  title: 'Patterns/Examples'
 };
 
 /* Main Page Headers */
