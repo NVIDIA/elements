@@ -419,15 +419,16 @@ function publicPropertiesPlugin() {
       for (const module of customElementsManifest.modules) {
         for (const declaration of module.declarations) {
           if (declaration.tagName) {
-            declaration.members = declaration.members.filter(
-              m =>
-                (m.kind === 'field' || m.kind === 'method') &&
-                !m.name.startsWith('_') &&
-                !m.name.startsWith('#') &&
-                !m.readonly &&
-                !m.static &&
-                m.privacy !== 'private'
-            );
+            declaration.members =
+              declaration.members?.filter(
+                m =>
+                  (m.kind === 'field' || m.kind === 'method') &&
+                  !m.name.startsWith('_') &&
+                  !m.name.startsWith('#') &&
+                  !m.readonly &&
+                  !m.static &&
+                  m.privacy !== 'private'
+              ) ?? [];
           }
         }
       }

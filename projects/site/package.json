@@ -6,6 +6,7 @@
   "scripts": {
     "ci": "wireit",
     "dev": "wireit",
+    "dev:fast": "wireit",
     "build": "wireit",
     "lint": "wireit",
     "lint:fix": "wireit",
@@ -21,15 +22,20 @@
       ]
     },
     "dev": {
-      "dependencies": [
-        "build:watch"
-      ]
-    },
-    "build:watch": {
       "command": "pnpm exec eleventy --incremental --serve --quiet --port=8082",
+      "service": true,
       "dependencies": [
         "build"
       ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
+    },
+    "dev:fast": {
+      "command": "pnpm exec eleventy --serve --quiet --port=8082",
       "service": true,
       "env": {
         "PAGES_BASE_URL": {
