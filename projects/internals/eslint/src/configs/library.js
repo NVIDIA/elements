@@ -18,7 +18,8 @@ const ignores = [
   'src/vendor/',
   '.visual/',
   '.lighthouse/',
-  '.wireit/'
+  '.wireit/',
+  '.11ty-vite/'
 ];
 
 /** @type {import('eslint').Linter.Config[]} */

@@ -10,6 +10,7 @@ import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Patterns/Responsive',
+  component: 'nve-internal-patterns'
 };
 
 export const ResponsiveTabs = {

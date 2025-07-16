@@ -29,7 +29,7 @@ export function cem() {
             cssFileName: null,
             referencesTemplate: (_name, tag) => {
               const declaration = manifest.modules.flatMap(module => module.declarations).find(d => d.tagName === tag);
-              const references = Object.keys(declaration.metadata)
+              const references = Object.keys(declaration.metadata ?? {})
                 .map(name => ({ name, url: declaration.metadata[name] }))
                 .filter(ref => ref.url?.includes && ref.url.includes('http'));
               return references;
