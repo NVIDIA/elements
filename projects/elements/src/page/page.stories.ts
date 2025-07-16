@@ -27,6 +27,9 @@ export default {
   component: 'nve-page',
 };
 
+/**
+ * @description Demonstrates all slot areas and debug backgrounds for nve-page.
+ */
 export const Content = {
   render: () => html`
 <style>
@@ -79,6 +82,9 @@ export const Content = {
   `
 };
 
+/**
+ * @description Basic nve-page layout with a header and main content.
+ */
 export const Default = {
   render: () => html`
 <nve-page>
@@ -98,6 +104,9 @@ export const Default = {
   `
 };
 
+/**
+ * @description Shows a warning banner in the header slot above the page header.
+ */
 export const SlotBanner = {
   render: () => html`
 <nve-page>
@@ -122,6 +131,9 @@ export const SlotBanner = {
   `
 };
 
+/**
+ * @description Demonstrates the subheader slot with a toolbar below the header.
+ */
 export const SlotSubheader = {
   render: () => html`
 <nve-page>
@@ -146,6 +158,9 @@ export const SlotSubheader = {
   `
 };
 
+/**
+ * @description Shows a large subheader using nve-page-panel in the subheader slot.
+ */
 export const SlotSubheaderLarge = {
   render: () => html`
 <nve-page>
@@ -196,6 +211,9 @@ export const SlotSubheaderLarge = {
   `
 };
 
+/**
+ * @description Demonstrates the left slot with a page panel for side navigation or content.
+ */
 export const SlotLeft = {
   render: () => html`
 <nve-page>
@@ -223,6 +241,9 @@ export const SlotLeft = {
   `
 };
 
+/**
+ * @description Demonstrates the right slot with a page panel for side content.
+ */
 export const SlotRight = {
   render: () => html`
 <nve-page>
@@ -246,6 +267,9 @@ export const SlotRight = {
   `
 };
 
+/**
+ * @description Shows the bottom slot with a page panel for footer or additional content.
+ */
 export const SlotBottom = {
   render: () => html`
 <nve-page>
@@ -269,6 +293,9 @@ export const SlotBottom = {
   `
 };
 
+/**
+ * @description Demonstrates the left-aside slot with a vertical toolbar for navigation.
+ */
 export const SlotLeftAside = {
   render: () => html`
 <nve-page>
@@ -296,6 +323,9 @@ export const SlotLeftAside = {
   `
 };
 
+/**
+ * @description Demonstrates the right-aside slot with a vertical toolbar for actions or navigation.
+ */
 export const SlotRightAside = {
   render: () => html`
 <nve-page>
@@ -323,6 +353,9 @@ export const SlotRightAside = {
   `
 };
 
+/**
+ * @description Shows the subfooter slot with a toolbar for status or metadata.
+ */
 export const SlotSubfooter = {
   render: () => html`
 <nve-page>
@@ -355,6 +388,9 @@ export const SlotSubfooter = {
   `
 };
 
+/**
+ * @description Demonstrates the footer slot with a toolbar for links or actions.
+ */
 export const SlotFooter = {
   render: () => html`
 <nve-page>
@@ -388,6 +424,9 @@ export const SlotFooter = {
   `
 };
 
+/**
+ * @description Shows expandable page panels in left, right, and bottom slots.
+ */
 export const PagePanelExpandable = {
   render: () => html`
 <nve-page>
@@ -419,6 +458,9 @@ export const PagePanelExpandable = {
   `
 };
 
+/**
+ * @description Shows closable page panels in left, right, and bottom slots.
+ */
 export const PagePanelClosable = {
   render: () => html`
 <nve-page>
@@ -450,6 +492,9 @@ export const PagePanelClosable = {
   `
 };
 
+/**
+ * @description Demonstrates tabs in a page panel header for contextual navigation.
+ */
 export const PagePanelTabs = {
   render: () => html`
 <nve-page>
@@ -477,6 +522,9 @@ export const PagePanelTabs = {
   `
 };
 
+/**
+ * @description Shows headings in a page panel header for context.
+ */
 export const PagePanelHeadings = {
   render: () => html`
 <nve-page>
@@ -802,8 +850,9 @@ export const KitchenSink = {
   `
 };
 
-// patterns
-
+/**
+ * @description Demonstrates a card grid layout pattern inside nve-page.
+ */
 export const PageLayoutCardGrid = {
   render: () => html`
 <nve-page>
@@ -847,6 +896,9 @@ export const PageLayoutCardGrid = {
   `
 };
 
+/**
+ * @description Demonstrates a video player layout with controls and panels.
+ */
 export const PageLayoutVideo = {
   render: () => html`
 <nve-page style="--padding: 0">
@@ -925,6 +977,9 @@ export const PageLayoutVideo = {
   `
 };
 
+/**
+ * @description Shows a multi-video grid layout with synchronized controls.
+ */
 export const PageLayoutMultiVideo = {
   render: () => html`
 <style>
@@ -1149,6 +1204,9 @@ export const PageLayoutMultiVideo = {
   `
 };
 
+/**
+ * @description Demonstrates an editor layout with outline, main, and console panels.
+ */
 export const PageLayoutEditor = {
   render: () => html`
 <nve-page>
@@ -1214,6 +1272,9 @@ export const PageLayoutEditor = {
   `
 };
 
+/**
+ * @description Shows a stepper pattern layout for multi-step processes.
+ */
 export const PageLayoutSteps = {
   render: () => html`
 <nve-page>
@@ -1255,6 +1316,9 @@ export const PageLayoutSteps = {
   `
 };
 
+/**
+ * @description Demonstrates resizing a left page panel using a resize handle.
+ */
 export const Resize = {
   render: () => html`
 <nve-page>
@@ -1280,6 +1344,9 @@ export const Resize = {
   `
 };
 
+/**
+ * @description Demonstrates resizing multiple panels (left, right, bottom) with handles.
+ */
 export const ResizeMulti = {
   render: () => html`
 <nve-page>
@@ -1323,6 +1390,9 @@ export const ResizeMulti = {
   `
 };
 
+/**
+ * @description Shows snapping a right panel to min or max width using double-click on the handle.
+ */
 export const ResizeSnap = {
   render: () => html`
 <nve-page style="--padding: var(--nve-ref-space-lg)">

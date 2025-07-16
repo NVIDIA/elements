@@ -11,7 +11,7 @@ import '@nvidia-elements/core/tabs/define.js';
 
 export default {
   title: 'Patterns/Examples',
-  component: 'patterns'
+  component: 'nve-internal-patterns'
 };
 
 export const ButtonRowFilledIcon = {
@@ -143,35 +143,24 @@ export const ShortcutFlat = {
 
 export const ShortcutDropdown = {
   render: () => html`
-  <nve-button id="code-menu">dropdown</nve-button>
-
-  <nve-dropdown anchor="code-menu" trigger="code-menu" hidden>
+  <nve-button popover="code-menu">dropdown</nve-button>
+  <nve-dropdown id="code-menu" hidden>
     <nve-menu>
       <nve-menu-item>
         <nve-icon name="edit"></nve-icon> Edit
       </nve-menu-item>
-
       <nve-menu-item>
         <div nve-layout="row align:space-between full">
           <span nve-layout="row gap:sm align:vertical-center">
             <nve-icon name="copy"></nve-icon> Copy
           </span>
-
           <kbd nve-text="code">CMD + C</kbd>
         </div>
       </nve-menu-item>
-
       <nve-menu-item>
         <nve-icon name="delete"></nve-icon> Delete
       </nve-menu-item>
     </nve-menu>
   </nve-dropdown>
-
-
-  <script type="module">
-    const dropdown = document.querySelector('nve-dropdown');
-    dropdown.addEventListener('open', () => dropdown.hidden = false);
-    dropdown.addEventListener('close', () => dropdown.hidden = true);
-  </script>
   `
-  };
+};

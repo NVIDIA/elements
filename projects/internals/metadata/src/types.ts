@@ -13,6 +13,7 @@ export interface MetadataSummary {
     '@nvidia-elements/playwright-screencast': MetadataProject;
     '@nvidia-elements/monaco': MetadataProject;
     '@internals/metadata': MetadataProject;
+    '@internals/patterns': MetadataProject;
   };
 }
 

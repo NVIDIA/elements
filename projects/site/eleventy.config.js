@@ -78,7 +78,13 @@ export default function (eleventyConfig) {
       build: {
         target: 'esnext',
         sourcemap: false,
-        modulePreload: false
+        modulePreload: false,
+        watch:
+          process.env.ELEVENTY_RUN_MODE !== 'build'
+            ? {
+                buildDelay: 100
+              }
+            : undefined
       }
     }
   });

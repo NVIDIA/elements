@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import * as lockFile from 'proper-lockfile';
 
 /**
- * creates a lockfile to force parrallel playright runners to execute one at a time, example:
+ * creates a lockfile to force parallel playright runners to execute one at a time, example:
  *
  * "test": "playwright-lock 'vite run'"
  *
@@ -18,7 +18,7 @@ const path = resolve(import.meta.dirname, './index.js');
 const timerId = setInterval(() => {
   lockFile
     .lock(path, {
-      stale: 30000
+      stale: 60000
     })
     .then(async release => {
       clearInterval(timerId);
