@@ -10,6 +10,7 @@ const ignores = [
   '.visual/',
   '.lighthouse/',
   '.wireit/',
+  '.11ty-vite/',
   'src/**/*.snippets.html'
 ];
 

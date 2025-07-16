@@ -10,7 +10,9 @@ const ignores = [
   'src/vendor/',
   '.visual/',
   '.lighthouse/',
-  '.wireit/'
+  '.wireit/',
+  '.11ty-vite/',
+  '.11ty-vite/'
 ];
 
 const config = {
