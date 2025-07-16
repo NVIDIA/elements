@@ -11,8 +11,7 @@ import '@nvidia-elements/core/tabs/define.js';
 import '@nvidia-elements/core/tag/define.js';
 
 export default {
-  title: 'Patterns/Examples',
-  component: 'patterns'
+  title: 'Patterns/Examples'
 };
 
 export const PanelKeyValue = {
@@ -85,19 +84,6 @@ export const PanelAccordion = {
         <nve-search rounded>
           <input type="search" aria-label="search" placeholder="Search for xyz" />
         </nve-search>
-
-        <!-- <nve-divider></nve-divider>
-
-        <div>
-          <nve-tabs behavior-select>
-            <nve-tabs-item selected>Tab 1</nve-tabs-item>
-            <nve-tabs-item>Tab 2</nve-tabs-item>
-            <nve-tabs-item>Tab 3</nve-tabs-item>
-            <nve-tabs-item>Tab 4</nve-tabs-item>
-          </nve-tabs>
-
-          <nve-divider></nve-divider>
-        </div> -->
 
         <nve-accordion-group container="inset" behavior-expand>
           <nve-accordion>
@@ -231,7 +217,7 @@ export const PanelNotificationStack = {
 
       <nve-panel-footer>
         <div nve-layout="grid gap:sm span-items:6">
-          <nve-button interaction="ghost-destructive" >Clear All</nve-button>
+          <nve-button interaction="flat-destructive" >Clear All</nve-button>
           <nve-button>Mark All as Read</nve-button>
         </div>
       </nve-panel-footer>

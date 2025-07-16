@@ -205,7 +205,10 @@
         "../../monaco/coverage/axe/junit.xml",
         "../../monaco/coverage/visual/junit.xml",
         "../../monaco/coverage/ssr/junit.xml",
-        "../../monaco/coverage/ssr/summary.json"
+        "../../monaco/coverage/ssr/summary.json",
+        "../../patterns/package.json",
+        "../../patterns/dist/custom-elements.json",
+        "../../patterns/dist/**/*.stories.json"
       ],
       "output": [
         "static/index.json"
@@ -253,6 +256,10 @@
         },
         {
           "script": "../../monaco:ci",
+          "cascade": false
+        },
+        {
+          "script": "../patterns:ci",
           "cascade": false
         }
       ]
