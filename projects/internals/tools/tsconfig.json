@@ -15,7 +15,12 @@
     "allowSyntheticDefaultImports": true,
     "useDefineForClassFields": false,
     "isolatedModules": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "paths": {
+      "@internals/tools": ["./src/index.js"],
+      "@internals/tools/*": ["./src/*"],
+      "@internals/tools/*.js": ["./src/*.js"]
+    }
   },
   "include": ["src/**/*.ts"]
 }

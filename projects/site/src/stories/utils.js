@@ -14,7 +14,7 @@ export function getStories() {
       ...JSON.parse(readFileSync(path, 'utf8'))
     }))
     .map(storiesFile => {
-      const stories = storiesFile.stories
+      const stories = storiesFile.items
         // few stories have invalid html so they are filtered out
         .filter(s => !s.template?.includes('${'))
         .filter(s => !s.id.toLowerCase().includes('shadowroot'));

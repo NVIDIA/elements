@@ -25,7 +25,7 @@ import '${element.manifest.metadata.entrypoint}/define.js';
 \`\`\`
 
 \`\`\`html
-${element.stories.find(s => s.id === 'Default')?.template}
+${element.stories.items.find(s => s.id === 'Default')?.template}
 \`\`\`
 `
     : '';
@@ -47,7 +47,7 @@ export async function apiShortcode(tag, type, value) {
   ${type === 'event' ? md.render(`\`${value}\`: ` + element.manifest.events?.find(m => m.name === value)?.description) : ''}
   ${type === 'property' ? md.render(element.manifest.members?.find(m => m.name === value)?.description ?? '') : ''}
   ${type === 'slot' ? md.render(element.manifest.slots?.find(m => m.name === value)?.description ?? '') : ''}
-  ${type === 'story' ? md.render(element.stories?.find(m => m.id === value)?.description ?? '') : ''}`
+  ${type === 'story' ? md.render(element.stories?.items?.find(m => m.id === value)?.description ?? '') : ''}`
         .trim()
         .replaceAll('<p>', '<p nve-text="body relaxed mkd">')
     : '';
@@ -66,6 +66,11 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
   const story = tag.includes('.stories.json')
     ? stories.find(s => s.path.includes(tag) && s.id === storyName)
     : stories.find(s => s.tagName === tag && s.id === storyName);
+
+  if (!story) {
+    console.error('Story not found: ', tag, storyName);
+    return '';
+  }
 
   const playgroundButton = story
     ? `<nve-button container="flat" slot="suffix"><a href="${createPlaygroundURL(story.template, metadata, { name: `${story.path}_${storyName}`, theme: '', trustedContent: true })}" target="_blank">Playground</a></nve-button>`
@@ -96,7 +101,7 @@ function reloadScript(story, content) {
   return /* html */ `
 <script type="module">
   import stories from '${story.path}' with { type: 'json' };
-  const story = stories.stories.find(s => s.id === '${story.id}');
+  const story = stories.items.find(s => s.id === '${story.id}');
   const canvas = document.getElementById(stories.element + '_' + story.id);
   const template = '${content}' + story.template.replace(/import\\s+(?:(?:\\{[^}]*\\}|\\w+)\\s+from\\s+)?['"][^'"]*['"];?/g, '');
   canvas.innerHTML = template;

@@ -46,8 +46,9 @@ export function render(data) {
 
   const element = elements.find(d => d.name === componentData.tag);
   const stories =
-    element.stories.filter(s => !s.template?.includes('${')).filter(s => !s.id.toLowerCase().includes('shadowroot')) ||
-    [];
+    element.stories.items
+      .filter(s => !s.template?.includes('${'))
+      .filter(s => !s.id.toLowerCase().includes('shadowroot')) || [];
 
   // Create a JSON string of all story templates for JavaScript to cycle through
   const storyTemplates = stories.map(story => ({
@@ -68,7 +69,7 @@ export function render(data) {
 
     <!-- Triggers element loader -->
     <template>
-      ${element.stories.find(s => s.id === 'Default')?.template}
+      ${element.stories.items.find(s => s.id === 'Default')?.template}
     </template>
 
     <div nve-layout="row gap:lg align:stretch">
