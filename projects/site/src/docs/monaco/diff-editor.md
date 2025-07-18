@@ -22,4 +22,4 @@
 
 ## Default
 
-{% story '@nvidia-elements/monaco/diff-editor/diff-editor.stories.json', 'Default' %}
+{% story '@nvidia-elements/monaco/diff-editor/diff-editor.stories.json', 'Default', '{ "resizable": false, "inline": true }' %}
