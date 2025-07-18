@@ -958,6 +958,7 @@ export const Performance = {
     <p nve-text="body muted">1000 rows, 4000 cells</p>
   </section>
   <script type="module">
+    import '@nvidia-elements/core/grid/define.js';
     const section = document.getElementById('grid-performance-demo');
     const button = section.querySelector('nve-button');
 
