@@ -22,4 +22,4 @@
 
 ## Default
 
-{% story '@nvidia-elements/monaco/editor/editor.stories.json', 'Default', '{ "resizable": false }' %}
+{% story '@nvidia-elements/monaco/editor/editor.stories.json', 'Default', '{ "resizable": false, "inline": true }' %}
