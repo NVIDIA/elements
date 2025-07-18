@@ -139,10 +139,10 @@ describe('validateTemplate', () => {
 
   it('should allow form elements', () => {
     const template =
-      '<form></form><label for="test">test</label><input id="test" /><select><option value="1">test</option></select>';
+      '<form><label for="test">test</label><input id="test" /><select><option value="1">test</option></select></form>';
     const result = validateTemplate(template, metadata);
     expect(result).toBe(
-      '<form></form><label for="test">test</label><input id="test" /><select><option value="1">test</option></select>'
+      '<form><label for="test">test</label><input id="test" /><select><option value="1">test</option></select></form>'
     );
   });
 

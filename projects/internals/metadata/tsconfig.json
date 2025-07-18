@@ -15,12 +15,7 @@
     "allowSyntheticDefaultImports": true,
     "useDefineForClassFields": false,
     "isolatedModules": true,
-    "allowImportingTsExtensions": true,
-    "paths": {
-      "@nve-internal/metadata": ["./src/index.js"],
-      "@nve-internal/metadata/*": ["./src/*"],
-      "@nve-internal/metadata/*.js": ["./src/*.js"]
-    }
+    "allowImportingTsExtensions": true
   },
   "include": ["src/**/*.ts"]
 }

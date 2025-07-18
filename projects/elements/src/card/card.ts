@@ -53,9 +53,9 @@ export class Card extends LitElement implements ContainerElement {
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
  * @slot - default slot
- * @slot title - Title Text
- * @slot subtitle - Subtitle Text
- * @slot header-action - Header Action Button
+ * @slot title - (deprecated) Title Text
+ * @slot subtitle - (deprecated) Subtitle Text
+ * @slot header-action - (deprecated) Header Action Button
  * @cssprop --padding
  * @cssprop --border-bottom
  * @cssprop --line-height
