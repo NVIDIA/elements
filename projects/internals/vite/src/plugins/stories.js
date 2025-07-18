@@ -9,7 +9,7 @@ import * as prettier from 'prettier';
 /**
  * Outputs *.stories.ts files to *.stories.json metadata format
  */
-export function storiesToJSON() {
+export function storiesToJSON(packageFile) {
   return {
     name: 'stories',
     async transform(_code, id) {
@@ -22,7 +22,8 @@ export function storiesToJSON() {
       const source = readFileSync(id, 'utf-8');
 
       try {
-        const file = id.split('src/')[1];
+        const file = id.split('src/')[1]?.replace('.ts', '.json');
+        const entrypoint = `${packageFile.name}/${file}`;
         const project = new Project();
         const tempFile = project.createSourceFile('temp.ts', source);
         const storiesVariableStatement = tempFile.getChildrenOfKind(SyntaxKind.VariableStatement);
@@ -35,7 +36,7 @@ export function storiesToJSON() {
           ?.replace(/"/g, '')
           ?.replace(/'/g, '');
 
-        const stories = (
+        const items = (
           await Promise.all(
             storiesVariableStatement.map(async story => {
               const id = story.getDescendantsOfKind(SyntaxKind.VariableDeclaration)[0].getName();
@@ -44,7 +45,8 @@ export function storiesToJSON() {
                   .getDescendantsOfKind(SyntaxKind.TaggedTemplateExpression)[0]
                   ?.getDescendants()[1]
                   ?.getText()
-                  .trim() ?? '';
+                  ?.replace(/\n\n/g, '\n')
+                  ?.trim() ?? '';
 
               if (template) {
                 template = template.substring(1, template.length - 1);
@@ -63,15 +65,15 @@ export function storiesToJSON() {
                 } catch {}
               }
 
-              const description = story
-                .getJsDocs()
-                .flatMap(doc => doc.getTags())
-                .filter(tag => tag.getTagName() === 'description')
-                .map(tag => tag.getCommentText())[0];
+              const description =
+                story
+                  .getJsDocs()
+                  .flatMap(doc => doc.getTags())
+                  .filter(tag => tag.getTagName() === 'description')
+                  .map(tag => tag.getCommentText())[0] ?? '';
 
               return {
                 id,
-                file,
                 template,
                 description
               };
@@ -81,7 +83,8 @@ export function storiesToJSON() {
 
         const json = {
           element,
-          stories
+          entrypoint,
+          items
         };
 
         // Calculate the output path relative to dist
