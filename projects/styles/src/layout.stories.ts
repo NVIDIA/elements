@@ -421,6 +421,14 @@ export const PadTop = {
   `
 }
 
+export const PadLeft = {
+  render: () => html`
+    <section nve-layout="row gap:sm align:stretch pad-left:xxl">
+      ${new Array(3).fill(html`<nve-card></nve-card>`)}
+    </section>
+  `
+}
+
 export const PadRight = {
   render: () => html`
     <section nve-layout="row gap:sm align:stretch pad-right:xxl">

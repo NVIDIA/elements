@@ -9,7 +9,7 @@
 
 ## Card Grid
 
-{% story '@nve-internals/patterns/browse.stories.json', 'PageLayoutCardGrid', '{ "inline": false, "height": "640px" }' %}
+{% story '@nvidia-elements/core/page/page.stories.json', 'PageLayoutCardGrid', '{ "inline": false, "height": "640px" }' %}
 
 ## Content Row
 

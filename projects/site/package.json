@@ -65,7 +65,8 @@
         "../labs/forms:build",
         "../monaco:build",
         "../internals/metadata:build",
-        "../internals/patterns:build"
+        "../internals/patterns:build",
+        "../internals/tools:build"
       ],
       "env": {
         "PAGES_BASE_URL": {
@@ -139,6 +140,7 @@
     "@lit-labs/ssr-client": "catalog:",
     "@nve-internals/eslint": "workspace:*",
     "@nve-internals/metadata": "workspace:*",
+    "@nve-internals/tools": "workspace:*",
     "@nve-internals/patterns": "workspace:*",
     "@nve-internals/vite": "workspace:*",
     "@nvidia-elements/code": "workspace:*",

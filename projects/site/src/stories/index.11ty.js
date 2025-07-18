@@ -39,7 +39,7 @@ export function render(data) {
     <script type="module">
       import stories from '${data.story.path}' with { type: 'json' };
       const container = document.querySelector('#story-container');
-      const story = stories.stories.find(s => s.id === '${data.story.id}');
+      const story = stories.items.find(s => s.id === '${data.story.id}');
       ${process.env.ELEVENTY_RUN_MODE === 'serve' ? 'container.innerHTML = story.template;' : ''}
     </script>
   </head>
