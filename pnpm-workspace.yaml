@@ -34,6 +34,7 @@ packages:
   - 'projects/internals/metadata'
   - 'projects/internals/patterns'
   - 'projects/internals/vite'
+  - 'projects/internals/tools'
 
 catalog:
   '@11ty/eleventy': 3.1.2

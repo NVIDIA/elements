@@ -306,11 +306,11 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/api-design/packaging/') ? 'highlighted' : ''}><a href="docs/api-design/packaging/">Packaging</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/api-design/glossary/') ? 'highlighted' : ''}><a href="docs/api-design/glossary/">Glossary</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/api-design/logs/') ? 'highlighted' : ''}><a href="docs/api-design/logs/">Logs</a></nve-tree-node>
-    <nve-tree-node><a href="stories/">Stories</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/internal/') ? 'expanded' : ''} ${data.page.url === '/docs/internal/' ? 'highlighted' : ''}>
     <a href="docs/internal/">Internal</a>
+    <nve-tree-node><a href="stories/">Stories</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/internal/testing/' ? 'highlighted' : ''}><a href="docs/internal/testing/">Testing Guidelines</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/testing/unit/') ? 'highlighted' : ''}><a href="docs/internal/testing/unit/">Unit Testing</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/testing/accessibility/') ? 'highlighted' : ''}><a href="docs/internal/testing/accessibility/">Accessibility Testing</a></nve-tree-node>

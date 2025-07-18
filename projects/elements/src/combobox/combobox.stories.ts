@@ -449,15 +449,12 @@ export const NoTags = () => {
     const form = document.querySelector('#notags');
     const select = form.querySelector('select');
     const tags = form.querySelector('#tags');
-    
     updateTags();
     select.addEventListener('change', e => updateTags());
-
     tags.addEventListener('close', e => {
       Array.from(select.options).find(o => o.value === e.target.value).selected = false;
       updateTags();
     });
-
     function updateTags() {
       tags.innerHTML = '';
       Array.from(select.selectedOptions).forEach(o => tags.innerHTML += '<nve-tag closable value="' + o.value + '">' + o.value + '</nve-tag>');
