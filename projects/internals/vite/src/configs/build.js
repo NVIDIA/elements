@@ -15,7 +15,8 @@ import { storiesToJSON } from '../plugins/stories.js';
 const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
 const prod = process.env.NODE_ENV === 'production';
-const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package.json')));
+const packageFilePath = fs.readFileSync(resolve(process.cwd(), './package.json'));
+const packageFile = JSON.parse(packageFilePath);
 
 /**
  * - https://vitejs.dev/config/
@@ -23,7 +24,7 @@ const packageFile = JSON.parse(fs.readFileSync(resolve(process.cwd(), './package
  * @type {import('vite').UserConfig}
  */
 export const libraryBuildConfig = {
-  plugins: [initial(), tsc(), dts(), bundle(), storiesToJSON(), cem()],
+  plugins: [initial(), tsc(), dts(), bundle(), storiesToJSON(packageFile), cem()],
   build: {
     cssMinify: prod ? 'esbuild' : false,
     cssCodeSplit: true,

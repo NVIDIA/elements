@@ -77,7 +77,7 @@ Vertical is the default label layout for all elements.
 
 {% api 'nve-control', 'property' 'fitText' %}
 
-{% story '@nvidia-elements/core/forms/control/control.stories.json', 'FitText' %}
+{% story '@nvidia-elements/core/forms/forms.stories.json', 'FitText' %}
 
 ## Kitchen Sink
 

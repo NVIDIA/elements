@@ -5,7 +5,6 @@ import { globSync } from 'glob';
 import type {
   MetadataCustomElementsManifest,
   MetadataCustomElementsManifestDeclaration,
-  MetadataElementStories,
   MetadataLighthouseElementReport,
   MetadataLighthouseReport,
   MetadataPackage,
@@ -22,10 +21,8 @@ import { elementMetadataToMarkdown, getElementChangelog } from '../utils/utils.t
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
 
-const stories: MetadataElementStories[] = [
-  ...globSync(`${resolve('../../elements')}/dist/**/*.stories.json`),
-  ...globSync(`${resolve('../../monaco')}/dist/**/*.stories.json`)
-]
+const stories = [...new Set(globSync(resolve('../../**/dist/**/*.stories.json')))]
+  .filter(path => !path.includes('node_modules'))
   .map(path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8')))
   .reduce((prev, next) => [...prev, next], []);
 
@@ -160,14 +157,18 @@ function getElementMetadata(
     .map(d => d.tagName)
     .reduce((elements: MetadataElement[], name) => {
       const manifest = elementDeclarations.find(e => e.tagName === name);
-      const markdown = elementMetadataToMarkdown(manifest);
-      const lighthouse: MetadataLighthouseElementReport = lighthouseReport[packageName][
-        Object.keys(lighthouseReport[packageName]).find(key => name === 'key' || name.startsWith(key)) ?? ''
-      ] ?? {
-        name,
-        payload: { javascript: { kb: 0, requests: {} }, css: { kb: 0, requests: {} } },
-        scores: { accessibility: 0, bestPractices: 0, performance: 0 }
-      };
+      const markdown = manifest.metadata ? elementMetadataToMarkdown(manifest) : '';
+      const lighthouseKey = lighthouseReport[packageName]
+        ? (Object.keys(lighthouseReport[packageName]).find(key => name === 'key' || name.startsWith(key)) ?? '')
+        : '';
+      const lighthousePackageReport = lighthouseReport[packageName];
+      const lighthouse: MetadataLighthouseElementReport = lighthousePackageReport
+        ? lighthousePackageReport[lighthouseKey]
+        : {
+            name,
+            payload: { javascript: { kb: 0, requests: {} }, css: { kb: 0, requests: {} } },
+            scores: { accessibility: 0, bestPractices: 0, performance: 0 }
+          };
       const cov = coverage.find(c => c.file.replace('.ts', '.js') === manifest?.path.replace('/src/', ''));
       const unit = {
         coverageTotal: cov ? (cov.statements.pct + cov.functions.pct + cov.branches.pct + cov.lines.pct) / 4 : 0
@@ -194,7 +195,7 @@ function getElementMetadata(
           lighthouse,
           ssr
         },
-        stories: stories.filter(s => s.element === name).flatMap(s => s.stories) ?? []
+        stories: stories.find(s => s.element === name && manifest.deprecated !== 'true')
       };
 
       return [...elements, metadata];
@@ -260,7 +261,8 @@ export async function getMetadata() {
       '@nvidia-elements/forms': await getProjectMetadata('../../../../labs/forms'),
       '@nvidia-elements/playwright-screencast': await getProjectMetadata('../../../../labs/playwright-screencast'),
       '@nvidia-elements/monaco': await getProjectMetadata('../../../../monaco'),
-      '@nve-internals/metadata': await getProjectMetadata('../../../../internals/metadata')
+      '@nve-internals/metadata': await getProjectMetadata('../../../../internals/metadata'),
+      '@nve-internals/patterns': await getProjectMetadata('../../../../internals/patterns')
     }
   };
 }

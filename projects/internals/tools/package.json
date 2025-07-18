@@ -1,0 +1,142 @@
+{
+  "name": "@nve-internals/tools",
+  "type": "module",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "ci": "wireit",
+    "build": "wireit",
+    "test": "wireit",
+    "test:watch": "wireit",
+    "test:coverage": "wireit",
+    "lint": "wireit"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "lint",
+        "build",
+        "publint",
+        "test:coverage"
+      ]
+    },
+    "publint": {
+      "dependencies": [
+        "build"
+      ],
+      "command": "publint",
+      "files": [
+        "package.json"
+      ],
+      "output": []
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build",
+      "files": [
+        "src/**",
+        "!src/**/*.test.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../vite:ci",
+        "../metadata:build"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../eslint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix"
+    },
+    "test": {
+      "command": "playwright-lock 'vitest run'",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "../vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    },
+    "test:coverage": {
+      "command": "playwright-lock 'vitest run --coverage'",
+      "files": [
+        "src/**/*.test.ts",
+        "tsconfig.json",
+        "vitest.config.ts"
+      ],
+      "output": [
+        "coverage/unit/**"
+      ],
+      "dependencies": [
+        "../vite:ci",
+        "build"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  },
+  "dependencies": {
+    "@pnpm/exportable-manifest": "7.0.3",
+    "@pnpm/read-project-manifest": "6.0.6",
+    "@pnpm/workspace.read-manifest": "2.2.0",
+    "@pnpm/catalogs.config": "0.1.0",
+    "adm-zip": "0.5.16",
+    "archiver": "7.0.1",
+    "fflate": "0.8.2",
+    "html-format": "1.1.7",
+    "glob": "catalog:",
+    "open": "10.1.2",
+    "sanitize-html": "2.17.0",
+    "ts-morph": "catalog:",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@nve-internals/eslint": "workspace:*",
+    "@nve-internals/vite": "workspace:*",
+    "@nve-internals/metadata": "workspace:*",
+    "@types/node": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
+    "eslint": "catalog:",
+    "publint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

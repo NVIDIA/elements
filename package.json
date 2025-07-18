@@ -87,7 +87,8 @@
         "./projects/styles:ci",
         "./projects/testing:ci",
         "./projects/themes:ci",
-        "./projects/internals/metadata:ci"
+        "./projects/internals/metadata:ci",
+        "./projects/internals/tools:ci"
       ],
       "files": []
     },
@@ -218,6 +219,7 @@
         "./projects/elements:lint:fix",
         "./projects/internals/metadata:lint:fix",
         "./projects/internals/patterns:lint:fix",
+        "./projects/internals/tools:lint:fix",
         "./projects/labs/behaviors-alpine:lint:fix",
         "./projects/labs/brand:lint:fix",
         "./projects/labs/cli:lint:fix",
