@@ -108,7 +108,3 @@ Use different attributes with `nve-text` like `loose`, `relaxed`, `moderate`, `s
 Use different attributes with `nve-text` like `line-height-3` and `line-height-4` to give an element a fixed line-height, irrespective of the current font-size. These are useful when you need very precise control over an element’s final size.
 
 {% story '@nvidia-elements/styles/typography.stories.json', 'LineHeightFixed' %}
-
-<!-- TODO ## Tokens
-
-{% story '@nvidia-elements/styles/typography.stories.json', 'Text' %} -->
