@@ -63,44 +63,48 @@ export async function apiShortcode(tag, type, value) {
  */
 export async function storyShortcode(tag, storyName, userConfig = { inline: true, height: '95%', resizable: true }) {
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
-  let story;
+  const story = tag.includes('.stories.json')
+    ? stories.find(s => s.path.includes(tag) && s.id === storyName)
+    : stories.find(s => s.tagName === tag && s.id === storyName);
 
-  // Find the story either by path or by tag name
-  if (tag.includes('.stories.json')) {
-    story = stories.find(s => s.path.includes(tag) && s.id === storyName);
-  } else {
-    story = stories.find(s => s.tagName === tag && s.id === storyName);
-  }
-
-  // Generate playground button if story exists
   const playgroundButton = story
-    ? /* html */ `<nve-button container="flat" slot="suffix"><a href="${createPlaygroundURL(story.template, metadata, { name: `${story.path}_${storyName}`, theme: '', trustedContent: true })}" target="_blank">Playground</a></nve-button>`
+    ? `<nve-button container="flat" slot="suffix"><a href="${createPlaygroundURL(story.template, metadata, { name: `${story.path}_${storyName}`, theme: '', trustedContent: true })}" target="_blank">Playground</a></nve-button>`
     : '';
 
-  // Add live reload script in development mode
+  const templateContent = config.inline
+    ? story.template.replace(/\n\n/g, '\n')
+    : `<iframe loading="lazy" src="stories/${story?.permalink}index.html" style="height: ${config.height}; width: 100%; border: none;" />`;
+
   const reload =
-    process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story && !tag.includes('.stories.json') // eslint-disable-line no-undef
-      ? /* html */ `
-  <script type="module">
-    import stories from '${story.path}' with { type: 'json' };
-    const story = stories.stories.find(s => s.id === '${story.id}');
-    const canvas = document.getElementById(stories.element + '_' + story.id);
-    canvas.innerHTML = \`${playgroundButton}\` + story.template;
-    canvas.source = story.template ?? '';
-  </script>`
+    // eslint-disable-next-line no-undef
+    process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story && !tag.includes('.stories.json')
+      ? reloadScript(story, playgroundButton)
       : '';
 
   return story
     ? /* html */ `
 ${markdown.render(story.description ?? '')}
 <nvd-canvas id="${tag}_${story.id}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
-${playgroundButton}
-<template>${md.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>
-${
-  config.inline
-    ? story.template.replace(/\n\n/g, '\n')
-    : `<iframe loading="lazy" src="stories/${story?.permalink}index.html" style="height: ${config.height}; width: 100%; border: none;" />`
-}
+  <template>${md.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>
+  ${playgroundButton}
+  ${templateContent}
 </nvd-canvas>${reload}`
     : '';
+}
+
+function reloadScript(story, content) {
+  return /* html */ `
+<script type="module">
+  import stories from '${story.path}' with { type: 'json' };
+  const story = stories.stories.find(s => s.id === '${story.id}');
+  const canvas = document.getElementById(stories.element + '_' + story.id);
+  const template = '${content}' + story.template.replace(/import\\s+(?:(?:\\{[^}]*\\}|\\w+)\\s+from\\s+)?['"][^'"]*['"];?/g, '');
+  canvas.innerHTML = template;
+  Array.from(canvas.querySelectorAll('script')).forEach(prev => {
+    const next = document.createElement('script');
+    Array.from(prev.attributes).forEach(attr => next.setAttribute(attr.name, attr.value));
+    next.appendChild(document.createTextNode(prev.innerHTML));
+    prev.parentNode.replaceChild(next, prev);
+  });
+</script>`;
 }
