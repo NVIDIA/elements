@@ -49,7 +49,7 @@ export function render(data) {
       </head>
 
       <body nve-text="body trim:none">
-        <nve-page>
+        <nve-page style="anchor-name: --page-anchor;">
           <!-- Main navigation header -->
           <nve-page-header slot="header">
             <nve-logo slot="prefix" size="sm"></nve-logo>
@@ -80,8 +80,8 @@ export function render(data) {
 
           <!-- Main content area -->
           <main nve-layout="column align:center">
-            <div nve-layout="row align:horizontal-center full" style="gap: 5rem;">
-              <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl">
+            <div nve-layout="row align:horizontal-center full">
+              <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
                 <!-- Component title and summary if this is a component page -->
                 ${data.tag ? `<h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>${elementSummary(data.tag)}` : ''}
 
