@@ -119,7 +119,7 @@ main {
   padding-bottom: var(--nve-ref-space-xl);
 
   #doc-content {
-    max-width: 1160px;
+    max-width: 1260px;
     width: 100%;
   }
 }
@@ -178,6 +178,10 @@ main:has([docs-full-width]) {
 }
 
 @media (min-width: 1750px) {
+  #doc-content {
+    margin-right: 200px;
+  }
+
   #doc-content + #anchor-generator {
     display: block;
   }
