@@ -150,8 +150,6 @@ main:has([docs-full-width]) {
 
 /* Right Side Anchor Generator Styles */
 #anchor-generator {
-  padding: 0;
-  height: fit-content;
   list-style: none !important;
 
   a {
@@ -159,7 +157,7 @@ main:has([docs-full-width]) {
     color: var(--nve-sys-text-muted-color) !important;
     text-wrap: nowrap !important;
     min-width: 150px;
-    max-width: 150px;
+    max-width: 220px;
     min-height: 14px;
     display: block;
   }
@@ -170,14 +168,16 @@ main:has([docs-full-width]) {
 }
 
 #doc-content + #anchor-generator {
-  margin: 50px 0 0 0 !important;
-  position: sticky !important;
+  position: fixed;
+  top: calc(anchor(--page-anchor top) + 125px);
+  left: calc(anchor(--doc-content-anchor right) + 50px);
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  z-index: 10;
   display: none;
-  top: 50px;
-  right: 50px;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1750px) {
   #doc-content + #anchor-generator {
     display: block;
   }
