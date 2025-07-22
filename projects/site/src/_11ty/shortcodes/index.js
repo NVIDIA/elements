@@ -1,14 +1,12 @@
 // @ts-check
 
 import markdownIt from 'markdown-it';
-import { MetadataService, createPlaygroundURL } from '@internals/metadata';
-import { stories } from '../../../src/stories/utils.js';
+import { PlaygroundService } from '@internals/tools/playground';
+import { siteData } from '../../index.11tydata.js';
 import markdown from '../libraries/markdown.js';
 
-// Initialize markdown parser and metadata service
 const md = markdownIt();
-const metadata = await MetadataService.getMetadata();
-const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
+const { stories, elements } = siteData;
 
 /**
  * Shortcode for generating installation instructions for a component
@@ -25,7 +23,7 @@ import '${element.manifest.metadata.entrypoint}/define.js';
 \`\`\`
 
 \`\`\`html
-${element.stories.items.find(s => s.id === 'Default')?.template}
+${stories.find(s => s.id === 'Default' && s.element === tag)?.template}
 \`\`\`
 `
     : '';
@@ -64,20 +62,24 @@ export async function apiShortcode(tag, type, value) {
 export async function storyShortcode(tag, storyName, userConfig = { inline: true, height: '95%', resizable: true }) {
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
   const story = tag.includes('.stories.json')
-    ? stories.find(s => s.path.includes(tag) && s.id === storyName)
-    : stories.find(s => s.tagName === tag && s.id === storyName);
+    ? stories.find(s => s.entrypoint.includes(tag) && s.id === storyName)
+    : stories.find(s => s.element === tag && s.id === storyName);
 
   if (!story) {
     console.error('Story not found: ', tag, storyName);
     return '';
   }
 
+  const playgroundURL = await PlaygroundService.create({
+    html: story?.template ?? '',
+    name: `${story.entrypoint}_${storyName}`
+  });
   const playgroundButton = story
-    ? `<nve-button container="flat" slot="suffix"><a href="${createPlaygroundURL(story.template, metadata, { name: `${story.path}_${storyName}`, theme: '', trustedContent: true })}" target="_blank">Playground</a></nve-button>`
+    ? `<nve-button container="flat" slot="suffix"><a href="${playgroundURL}" target="_blank">Playground</a></nve-button>`
     : '';
 
   const templateContent = config.inline
-    ? story.template.replace(/\n\n/g, '\n')
+    ? story?.template?.replace(/\n\n/g, '\n')
     : `<iframe loading="lazy" src="stories/${story?.permalink}index.html" style="height: ${config.height}; width: 100%; border: none;" />`;
 
   const reload =
@@ -90,7 +92,7 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
     ? /* html */ `
 ${markdown.render(story.description ?? '')}
 <nvd-canvas id="${tag}_${story.id}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
-  <template>${md.utils.escapeHtml(story.template.replace(/\n\n/g, '\n'))}</template>
+  <template>${md.utils.escapeHtml(story?.template?.replace(/\n\n/g, '\n') ?? '')}</template>
   ${playgroundButton}
   ${templateContent}
 </nvd-canvas>${reload}`
@@ -100,7 +102,7 @@ ${markdown.render(story.description ?? '')}
 function reloadScript(story, content) {
   return /* html */ `
 <script type="module">
-  import stories from '${story.path}' with { type: 'json' };
+  import stories from '${story.entrypoint}' with { type: 'json' };
   const story = stories.items.find(s => s.id === '${story.id}');
   const canvas = document.getElementById(stories.element + '_' + story.id);
   const template = '${content}' + story.template.replace(/import\\s+(?:(?:\\{[^}]*\\}|\\w+)\\s+from\\s+)?['"][^'"]*['"];?/g, '');

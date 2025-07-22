@@ -35,7 +35,8 @@
       "dependencies": [
         "clean",
         "../../elements:build",
-        "../../internals/metadata:build"
+        "../../internals/metadata:build",
+        "../../internals/tools:build"
       ]
     },
     "preview": {
@@ -66,6 +67,7 @@
     "@lit-labs/eleventy-plugin-lit": "catalog:",
     "@lit-labs/ssr-client": "catalog:",
     "@nvidia-elements/core": "workspace:*",
+    "@internals/tools": "workspace:*",
     "@internals/metadata": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",

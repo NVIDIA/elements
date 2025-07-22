@@ -144,6 +144,7 @@
     "@internals/patterns": "workspace:*",
     "@internals/vite": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
+    "@nvidia-elements/forms": "workspace:*",
     "@nvidia-elements/playwright-screencast": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",

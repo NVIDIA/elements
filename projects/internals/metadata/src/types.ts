@@ -48,17 +48,14 @@ export interface MetadataElement {
       hydration: boolean;
     };
   };
-  stories?: MetadataStories;
 }
 
-export interface MetadataStories {
+export interface MetadataStory {
+  id: string;
+  description: string;
+  template: string;
   element: string;
   entrypoint: string;
-  items: {
-    id: string;
-    template: string;
-    description: string;
-  }[];
 }
 
 export interface MetadataPackage {
