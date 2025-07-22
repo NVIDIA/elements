@@ -13,9 +13,11 @@
 
 ## Standard
 
-Combining `card-header`, `card-content` & `card-footer` will yield a fully styled card. Note how `card-content` will vertically stretch to fill the card size and the footer will align to the bottom of the card.
-
 {% story 'nve-card', 'Default' %}
+
+## Card Actions
+
+{% story 'nve-card', 'CardActions' %}
 
 ## Media Card
 
@@ -23,22 +25,16 @@ Combining `card-header`, `card-content` & `card-footer` will yield a fully style
 
 ## Card with Header Tabs
 
-{% story 'nve-card', 'Tabs' %}
+{% story 'nve-card', 'CardWithTabs' %}
 
 ## Card Description List
 
-{% story 'nve-card', 'DescriptionList' %}
+{% story 'nve-card', 'CardDescriptionList' %}
 
-## Multiple Content Containers and Full-bleed Divider
+## Card with Divider
 
-{% story 'nve-card', 'CardWithMultipleContentsAndDivider' %}
+{% story 'nve-card', 'CardWithDivider' %}
 
-## Content Layout
+## Container Full
 
-Layout system is supported when `nve-layout` attribute is used on the `card-content` element:
-
-{% story 'nve-card', 'CardWithContentLayout' %}
-
-## Container Fill
-
-{% story 'nve-card', 'ContainerFill' %}
+{% story 'nve-card', 'ContainerFull' %}

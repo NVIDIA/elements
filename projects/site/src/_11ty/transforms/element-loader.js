@@ -1,4 +1,5 @@
-import { MetadataService, getElementImports } from '@internals/metadata';
+import { MetadataService } from '@internals/metadata';
+import { getElementImports } from '@internals/tools';
 
 const metadata = await MetadataService.getMetadata();
 

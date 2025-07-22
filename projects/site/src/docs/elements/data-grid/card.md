@@ -10,9 +10,10 @@
 ```html
 <nve-card>
   <nve-card-header>
-    <div slot="title">Data Grid</div>
-    <div slot="subtitle">Card Example</div>
-    <nve-icon-button slot="header-action" icon-name="filter-stroke"></nve-icon-button>
+    <div nve-layout="column gap:xs">
+      <h2 nve-text="heading sm bold">Header</h2>
+      <h3 nve-text="body sm muted">Sub Header</h3>
+    </div>
   </nve-card-header>
   <nve-grid container="flat">
     ...
