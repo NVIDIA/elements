@@ -16,9 +16,53 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./index.js": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./api": {
+      "types": "./dist/api/index.d.ts",
+      "default": "./dist/api/index.js"
+    },
+    "./api/index.js": {
+      "types": "./dist/api/index.d.ts",
+      "default": "./dist/api/index.js"
+    },
+    "./example": {
+      "types": "./dist/example/index.d.ts",
+      "default": "./dist/example/index.js"
+    },
+    "./example/index.js": {
+      "types": "./dist/example/index.d.ts",
+      "default": "./dist/example/index.js"
+    },
+    "./health": {
+      "types": "./dist/health/index.d.ts",
+      "default": "./dist/health/index.js"
+    },
+    "./health/index.js": {
+      "types": "./dist/health/index.d.ts",
+      "default": "./dist/health/index.js"
+    },
+    "./playground": {
+      "types": "./dist/playground/index.d.ts",
+      "default": "./dist/playground/index.js"
+    },
+    "./playground/index.js": {
+      "types": "./dist/playground/index.d.ts",
+      "default": "./dist/playground/index.js"
+    },
+    "./starter": {
+      "types": "./dist/starter/index.d.ts",
+      "default": "./dist/starter/index.js"
+    },
+    "./starter/index.js": {
+      "types": "./dist/starter/index.d.ts",
+      "default": "./dist/starter/index.js"
     }
   },
   "wireit": {

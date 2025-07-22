@@ -8,6 +8,7 @@ import type { Button } from '@nvidia-elements/core/button';
 import styles from './app-header.css?inline';
 
 /**
+ * @deprecated use `nve-page-header` instead
  * @element nve-app-header
  * @description An element that appears across the top of all pages containing the application name and primary navigation.
  * @since 0.11.0

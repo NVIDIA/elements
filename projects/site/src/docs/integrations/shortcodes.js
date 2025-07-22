@@ -1,5 +1,5 @@
 import { svgLogosShortcode } from '../../_11ty/shortcodes/svg-logos.js';
-import docsData from '../docs.11tydata.js';
+import { siteData } from '../../index.11tydata.js';
 
 export function renderInstallationShortcode() {
   return /* html */ `
@@ -27,7 +27,7 @@ npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/cor
 }
 
 export function renderIntegrationShortcode(integration) {
-  const integrationData = docsData().integrations[integration] ?? {};
+  const integrationData = siteData.integrations[integration] ?? {};
 
   return integrationData.logo
     ? /* html */ `

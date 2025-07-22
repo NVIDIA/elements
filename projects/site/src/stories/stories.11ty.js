@@ -1,5 +1,6 @@
-import { stories } from './utils.js';
+import { siteData } from '../index.11tydata.js';
 
+const stories = siteData.stories;
 const groupedStories = Object.entries(
   stories.reduce((acc, story) => {
     acc[story.element] = acc[story.element] || [];

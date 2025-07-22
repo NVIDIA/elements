@@ -7,4 +7,10 @@ describe('MetadataService', () => {
     expect(metadata).toBeDefined();
     expect(metadata.created).toBeDefined();
   });
+
+  it('should return the stories json', async () => {
+    const stories = await MetadataService.getStories();
+    expect(stories).toBeDefined();
+    expect(stories.length).toBeGreaterThan(0);
+  });
 });

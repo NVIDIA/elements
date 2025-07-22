@@ -1,16 +1,17 @@
-export * from './services/playground.service.js';
-export * from './services/starter.service.js';
-export * from './services/example.service.js';
-export * from './services/api.service.js';
-export * from './services/health.service.js';
-export * from './services/index.js';
-export { type ToolOutput, type ToolMethod } from './utils/tools.js';
-
-// temporary exports
-export { getElementImports } from './utils/utils.js';
-export { getLatestPublishedVersions } from './utils/api.js';
-export { archiveStarter } from './utils/starters.js';
-export { createPlaygroundURL } from './utils/playground.js';
-export { loadTools, jsonSchemaToZodMCP } from './utils/tools.js';
+import { StarterService } from './starter/service.js';
+import { PlaygroundService } from './playground/service.js';
+import { ExampleService } from './example/service.js';
+import { ApiService } from './api/service.js';
+import { HealthService } from './health/service.js';
+import { loadTools } from './internal/tools.js';
 
 export const VERSION = '0.0.0';
+
+export { type ToolOutput, type ToolMethod, jsonSchemaToZodMCP } from './internal/tools.js';
+
+export const tools = [ApiService, PlaygroundService, StarterService, ExampleService, HealthService].flatMap(service =>
+  loadTools(service)
+);
+
+// temporary exports
+export { getElementImports } from './internal/utils.js';

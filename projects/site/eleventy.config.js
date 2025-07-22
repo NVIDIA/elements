@@ -76,6 +76,9 @@ export default function (eleventyConfig) {
     viteOptions: {
       base: BASE_URL,
       build: {
+        rollupOptions: {
+          external: ['open'] // todo: remove when tools have conditional exports
+        },
         target: 'esnext',
         sourcemap: false,
         modulePreload: false,

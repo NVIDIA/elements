@@ -16,39 +16,27 @@
 
 ## Status
 
-{% api 'nve-badge', 'property', 'status' %}
-
 {% story 'nve-badge', 'Status' %}
 
 {% story 'nve-badge', 'Support' %}
 
 ## Flat
 
-{% api 'nve-badge', 'property', 'container' %}
-
 {% story 'nve-badge', 'StatusFlat' %}
 
 ## Icon
-
-When the text content is not slotted, the badge will display an icon.
 
 {% story 'nve-badge', 'StatusIcon' %}
 
 ## Color
 
-{% api 'nve-badge', 'property', 'color' %}
-
 {% story 'nve-badge', 'Color' %}
 
 ### Flat
 
-{% api 'nve-badge', 'property', 'container' %}
-
 {% story 'nve-badge', 'Flat' %}
 
 ### Emphasis
-
-{% api 'nve-badge', 'property', 'prominence' %}
 
 {% story 'nve-badge', 'Prominence' %}
 
