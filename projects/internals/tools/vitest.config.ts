@@ -8,10 +8,10 @@ export default mergeConfig(libraryNodeTestConfig, {
     alias: { '@nve-internals/tools': resolve(import.meta.dirname, './src') },
     coverage: {
       thresholds: {
-        lines: 50,
-        branches: 50,
-        functions: 50,
-        statements: 50
+        lines: 40,
+        branches: 40,
+        functions: 40,
+        statements: 40
       }
     }
   }

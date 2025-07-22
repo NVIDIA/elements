@@ -1,15 +1,16 @@
 // @ts-check
 
 import markdown from 'markdown-it';
-import { MetadataService } from '@nve-internals/metadata';
 import { ESM_ELEMENTS_VERSION } from '../utils/version.js';
+import { siteData } from '../../index.11tydata.js';
+
+const { elements } = siteData;
 
 // Base URL for package releases
 const PACKAGE_URL = 'https://github.com/NVIDIA/elements/-/releases';
 
 // Initialize markdown parser and metadata service
 const md = markdown();
-const metadata = await MetadataService.getMetadata();
 
 /**
  * Generates a summary section for a component including description, status badges, and metadata links
@@ -17,7 +18,6 @@ const metadata = await MetadataService.getMetadata();
  * @returns {string} HTML string containing the component summary
  */
 export function elementSummary(tag) {
-  const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
   const element = elements.find(d => d.name === tag);
 
   return /* html */ `<section nve-layout="column gap:md align:stretch margin-top:md">
@@ -174,7 +174,6 @@ export function badgeAxe(value, container = '') {
  * @returns {string} HTML string containing the component status section
  */
 export function elementStatus(tag) {
-  const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
   const elementMetadata = elements.find(d => d.name === tag)?.manifest?.metadata;
 
   return /* html */ `
@@ -226,7 +225,6 @@ export function elementStatus(tag) {
  * @returns {string} HTML string containing the API documentation tables
  */
 export function elementTable(tag, type = 'all') {
-  const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
   const elementManifest = elements.find(d => d.name === tag)?.manifest;
 
   return elementManifest

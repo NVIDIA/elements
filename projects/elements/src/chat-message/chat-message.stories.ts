@@ -7,12 +7,18 @@ export default {
   component: 'nve-chat-message',
 };
 
+/**
+ * @description Basic chat message with default styling and behavior. Use this for simple text-based chat interactions.
+ */
 export const Default = {
   render: () => html`
   <nve-chat-message>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   </nve-chat-message>`};
 
+/**
+ * @description Demonstrates different arrow positions for chat messages. Useful for creating chat bubbles that point to specific elements or users.
+ */
 export const ArrowPosition = {
   render: () => html`
   <section nve-layout="column gap:lg">
@@ -24,6 +30,9 @@ export const ArrowPosition = {
   </section>
 `};
 
+/**
+ * @description Flat container style with avatar integration. Perfect for modern chat interfaces where messages have a cleaner, flatter appearance.
+ */
 export const Flat = {
   render: () => html`
   <section nve-layout="column gap:lg full">
@@ -39,6 +48,9 @@ export const Flat = {
 </section>
 `};
 
+/**
+ * @description Chat conversation with prefix and suffix avatars. Ideal for multi-user chat applications where you need to distinguish between different participants.
+ */
 export const PrefixSuffix = {
   render: () => html`
   <section nve-layout="column gap:lg full" style="max-width: 600px">
@@ -60,6 +72,9 @@ export const PrefixSuffix = {
     </section>
 `};
 
+/**
+ * @description Chat messages with code blocks for technical discussions. Perfect for developer chat interfaces or documentation systems.
+ */
 export const Codeblock = {
   render: () => html`
   <section nve-layout="column gap:lg full">
@@ -78,6 +93,9 @@ export const Codeblock = {
   `
 }
 
+/**
+ * @description Custom top offset positioning for precise arrow placement. Useful when you need fine-tuned control over the chat bubble positioning.
+ */
 export const TopOffset = {
   render: () => html`
   <nve-chat-message arrow-position="top-start" style="--top-offset: var(--nve-ref-space-sm)">
@@ -87,6 +105,9 @@ export const TopOffset = {
   `
 }
 
+/**
+ * @description All available color variants for chat messages. Use these to create themed chat interfaces or to differentiate message types and priorities.
+ */
 export const Color = {
     render: () => html `
     <section nve-layout="column gap:md">

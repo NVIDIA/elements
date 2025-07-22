@@ -26,7 +26,6 @@
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
-    "build:watch": "wireit",
     "build:icons": "wireit",
     "build:snippets": "wireit",
     "build:snippets:watch": "wireit",

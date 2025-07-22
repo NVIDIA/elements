@@ -249,7 +249,6 @@ function deprecatedPlugin() {
         .flatMap(module => module.declarations)
         .forEach(declaration => {
           if (declaration.slots) {
-            console.log(declaration.slots);
             declaration.slots = declaration.slots.filter(slot => !slot.description?.includes('deprecated'));
           }
         });

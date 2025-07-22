@@ -7,12 +7,18 @@ export default {
   component: 'nve-badge',
 };
 
+/**
+ * @description Basic badge component with default styling. Use for simple non-interactive labels or status indicators.
+ */
 export const Default = {
   render: () => html`
   <nve-badge>badge</nve-badge>
   `
 };
 
+/**
+ * @description Badges with predefined status colors for different states. Ideal for showing job status, task progress, or system states.
+ */
 export const Status = {
   render: () => html`
 <div nve-layout="row gap:xs align:wrap">
@@ -31,6 +37,9 @@ export const Status = {
   `
 }
 
+/**
+ * @description Flat container badges with status colors for a more subtle appearance. Perfect for dense layouts or when you want less visual weight.
+ */
 export const StatusFlat = {
   render: () => html`
 <div nve-layout="row gap:md align:wrap">
@@ -49,6 +58,9 @@ export const StatusFlat = {
   `
 }
 
+/**
+ * @description Status badges with icons only, using aria-label for accessibility. Useful for compact status indicators in toolbars or data tables.
+ */
 export const StatusIcon = {
   render: () => html`
 <div nve-layout="row gap:md align:wrap">
@@ -67,6 +79,9 @@ export const StatusIcon = {
   `
 }
 
+/**
+ * @description Support status badges for general feedback states. Use for success, warning, error, or informational messages.
+ */
 export const Support = {
   render: () => html`
 <div nve-layout="row gap:md">
@@ -78,6 +93,9 @@ export const Support = {
   `
 }
 
+/**
+ * @description Status badges in light theme for better visibility on light backgrounds. Use when your application primarily uses light mode.
+ */
 export const StatusLightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="row gap:md pad:md align:wrap">
@@ -96,6 +114,9 @@ export const StatusLightTheme = {
   `
 }
 
+/**
+ * @description Status badges in dark theme for better visibility on dark backgrounds. Use when your application primarily uses dark mode.
+ */
 export const StatusDarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="row gap:md pad:md align:wrap">
@@ -114,16 +135,22 @@ export const StatusDarkTheme = {
   `
 }
 
+/**
+ * @description Trend badges for displaying data changes and metrics. Perfect for dashboards, analytics, or financial data showing positive, negative, or neutral trends.
+ */
 export const Trend = {
   render: () => html`
 <div nve-layout="row gap:md">
-  <nve-badge status="trend-neutral">+15%</nve-badge>
-  <nve-badge status="trend-up">+15%</nve-badge>
-  <nve-badge status="trend-down">-15%</nve-badge>
+  <nve-badge>0%</nve-badge>
+  <nve-badge status="success">+15%</nve-badge>
+  <nve-badge status="danger">-15%</nve-badge>
 </div>
   `
 }
 
+/**
+ * @description Badges with color variants for categorization and theming. Use for organizing content by color-coded categories.
+ */
 export const Color = {
   render: () => html`
 <div nve-layout="row gap:sm align:wrap">
@@ -153,6 +180,9 @@ export const Color = {
   `
 };
 
+/**
+ * @description High emphasis badges with custom colors for important or highlighted content. Use for critical information, featured items, or primary actions.
+ */
 export const Prominence = {
   render: () => html`
 <div nve-layout="row gap:sm align:wrap">
@@ -182,6 +212,9 @@ export const Prominence = {
   `
 };
 
+/**
+ * @description Flat container badges with custom colors for a minimal, borderless appearance. Ideal for subtle categorization or when you want to reduce visual noise.
+ */
 export const Flat = {
   render: () => html`
 <div nve-layout="row gap:sm align:wrap">
@@ -211,6 +244,9 @@ export const Flat = {
   `
 };
 
+/**
+ * @description Badge with constrained width to demonstrate text overflow behavior. Use when you need to control badge width in constrained layouts or responsive designs.
+ */
 export const Overflow = {
   render: () => html`
   <nve-badge status="pending" style="--width: 150px">some really long content</nve-badge>
