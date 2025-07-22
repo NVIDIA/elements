@@ -394,39 +394,12 @@ importers:
 
   projects/internals/metadata:
     dependencies:
-      '@pnpm/catalogs.config':
-        specifier: 0.1.0
-        version: 0.1.0
-      '@pnpm/exportable-manifest':
-        specifier: 7.0.3
-        version: 7.0.3
-      '@pnpm/read-project-manifest':
-        specifier: 6.0.6
-        version: 6.0.6
-      '@pnpm/workspace.read-manifest':
-        specifier: 2.2.0
-        version: 2.2.0
-      archiver:
-        specifier: 7.0.1
-        version: 7.0.1
-      fflate:
-        specifier: 0.8.2
-        version: 0.8.2
       glob:
         specifier: 'catalog:'
         version: 11.0.3
-      html-format:
-        specifier: 1.1.7
-        version: 1.1.7
-      sanitize-html:
-        specifier: 2.17.0
-        version: 2.17.0
       ts-morph:
         specifier: 'catalog:'
         version: 26.0.0
-      unzipper:
-        specifier: 0.12.3
-        version: 0.12.3
     devDependencies:
       '@nve-internals/eslint':
         specifier: workspace:*
@@ -1046,6 +1019,9 @@ importers:
       '@nvidia-elements/code':
         specifier: workspace:*
         version: link:../labs/code
+      '@nvidia-elements/forms':
+        specifier: workspace:*
+        version: link:../labs/forms
       '@nvidia-elements/playwright-screencast':
         specifier: workspace:*
         version: link:../labs/playwright-screencast
@@ -1103,9 +1079,9 @@ importers:
 
   projects/starters:
     dependencies:
-      '@nve-internals/metadata':
+      '@nve-internals/tools':
         specifier: workspace:*
-        version: link:../internals/metadata
+        version: link:../internals/tools
 
   projects/starters/angular:
     dependencies:
@@ -1249,6 +1225,9 @@ importers:
       '@nve-internals/metadata':
         specifier: workspace:*
         version: link:../../internals/metadata
+      '@nve-internals/tools':
+        specifier: workspace:*
+        version: link:../../internals/tools
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../../elements
@@ -4664,9 +4643,6 @@ packages:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==, tarball: https://registry.npmjs.org
     engines: {node: '>=8'}
 
-  bluebird@3.7.2:
-    resolution: {integrity: sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg==, tarball: https://registry.npmjs.org
-
   body-parser@1.20.3:
     resolution: {integrity: sha512-7rAxByjUMqQ3/bHJy7D6OGXvx/MMc4IqBn/X0fcM1QUcAItpZrBEYhWGem+tzXH90c+G01ypMcYJBO9Y30203g==, tarball: https://registry.npmjs.org
     engines: {node: '>= 0.8', npm: 1.2.8000 || >= 1.4.16}
@@ -7619,9 +7595,6 @@ packages:
     engines: {node: ^18.17.0 || >=20.5.0}
     hasBin: true
 
-  node-int64@0.4.0:
-    resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==, tarball: https://registry.npmjs.org
-
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==, tarball: https://registry.npmjs.org
 
@@ -9656,9 +9629,6 @@ packages:
   unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==, tarball: https://registry.npmjs.org
     engines: {node: '>= 0.8'}
-
-  unzipper@0.12.3:
-    resolution: {integrity: sha512-PZ8hTS+AqcGxsaQntl3IRBw65QrBI6lxzqDEL7IAo/XCEqRTKGfOX56Vea5TH9SZczRVxuzk1re04z/YjuYCJA==, tarball: https://registry.npmjs.org
 
   update-browserslist-db@1.1.3:
     resolution: {integrity: sha512-UxhIZQ+QInVdunkDAaiazvvT/+fXL5Osr0JZlJulepYu6Jd7qJtDZjlur0emRlT71EN3ScPoE7gvsuIKKNavKw==, tarball: https://registry.npmjs.org
@@ -13607,8 +13577,6 @@ snapshots:
 
   binary-extensions@2.3.0: {}
 
-  bluebird@3.7.2: {}
-
   body-parser@1.20.3:
     dependencies:
       bytes: 3.1.2
@@ -16940,8 +16908,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  node-int64@0.4.0: {}
-
   node-releases@2.0.19: {}
 
   node-retrieve-globals@6.0.1:
@@ -19161,14 +19127,6 @@ snapshots:
   universalify@2.0.1: {}
 
   unpipe@1.0.0: {}
-
-  unzipper@0.12.3:
-    dependencies:
-      bluebird: 3.7.2
-      duplexer2: 0.1.4
-      fs-extra: 11.3.0
-      graceful-fs: 4.2.11
-      node-int64: 0.4.0
 
   update-browserslist-db@1.1.3(browserslist@4.24.4):
     dependencies:

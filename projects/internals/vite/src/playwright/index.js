@@ -3,7 +3,7 @@ import { resolve } from 'path';
 import * as lockFile from 'proper-lockfile';
 
 /**
- * creates a lockfile to force parallel playright runners to execute one at a time, example:
+ * creates a lockfile to force parallel playwright runners to execute one at a time, example:
  *
  * "test": "playwright-lock 'vite run'"
  *
