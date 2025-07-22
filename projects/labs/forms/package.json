@@ -30,6 +30,7 @@
   "exports": {
     "./package.json": "./package.json",
     "./custom-elements.json": "./dist/custom-elements.json",
+    "./*.stories.json": "./dist/*.stories.json",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"

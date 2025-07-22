@@ -1,4 +1,5 @@
-import { MetadataService, getElementImports } from '@nve-internals/metadata';
+import { MetadataService } from '@nve-internals/metadata';
+import { getElementImports } from '@nve-internals/tools';
 
 const metadata = await MetadataService.getMetadata();
 

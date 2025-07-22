@@ -1,7 +1,6 @@
 import { resolve } from 'node:path';
 import { readFileSync, existsSync } from 'node:fs';
 import { type InterfaceDeclaration, type JSDocStructure, type OptionalKind, Project, SyntaxKind } from 'ts-morph';
-import { globSync } from 'glob';
 import type {
   MetadataCustomElementsManifest,
   MetadataCustomElementsManifestDeclaration,
@@ -20,11 +19,6 @@ import type {
 import { elementMetadataToMarkdown, getElementChangelog } from '../utils/utils.ts';
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
-
-const stories = [...new Set(globSync(resolve('../../**/dist/**/*.stories.json')))]
-  .filter(path => !path.includes('node_modules'))
-  .map(path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8')))
-  .reduce((prev, next) => [...prev, next], []);
 
 function getPackageFile(basePath: string): MetadataPackage {
   return JSON.parse(readFileSync(new URL(basePath + '/package.json', import.meta.url), 'utf8'));
@@ -194,8 +188,7 @@ function getElementMetadata(
           unit,
           lighthouse,
           ssr
-        },
-        stories: stories.find(s => s.element === name && manifest.deprecated !== 'true')
+        }
       };
 
       return [...elements, metadata];
