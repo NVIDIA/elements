@@ -1,10 +1,12 @@
-import { MetadataService } from '@internals/metadata';
+// @ts-check
+
 import markdownIt from 'markdown-it';
+import { siteData } from '../../../index.11tydata.js';
+
+const { stories } = siteData;
 
 // Initialize markdown parser and metadata service
 const md = markdownIt();
-const metadata = await MetadataService.getMetadata();
-const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
 
 /**
  * Configuration object for the examples documentation template.
@@ -44,17 +46,13 @@ export function render(data) {
   data.title = componentData.title;
   data.page.fileSlug = componentData.page.fileSlug;
 
-  const element = elements.find(d => d.name === componentData.tag);
-  const stories =
-    element.stories.items
-      .filter(s => !s.template?.includes('${'))
-      .filter(s => !s.id.toLowerCase().includes('shadowroot')) || [];
-
   // Create a JSON string of all story templates for JavaScript to cycle through
-  const storyTemplates = stories.map(story => ({
-    id: story.id,
-    template: md.utils.escapeHtml(story.template)
-  }));
+  const storyTemplates = stories
+    .filter(story => story.element === componentData.tag)
+    .map(story => ({
+      ...story,
+      template: md.utils.escapeHtml(story.template)
+    }));
 
   return /* html */ `
     <style>
@@ -69,15 +67,15 @@ export function render(data) {
 
     <!-- Triggers element loader -->
     <template>
-      ${element.stories.items.find(s => s.id === 'Default')?.template}
+      ${storyTemplates.find(s => s.id === 'Default')?.template}
     </template>
 
     <div nve-layout="row gap:lg align:stretch">
       ${
-        stories.length > 1
+        storyTemplates.length > 1
           ? `
           <nve-menu id="example-selector">
-            ${stories
+            ${storyTemplates
               .map(
                 (story, index) => `
               <nve-menu-item value="${index}" ${index === 0 ? 'selected' : ''}>${story.id.split(/(?=[A-Z])/).join(' ')}</nve-menu-item>
@@ -89,15 +87,15 @@ export function render(data) {
           : ''
       }
     
-      <nvd-canvas-editable id="cycling-example" source="${md.utils.escapeHtml(stories[0]?.template || '')}"  tag="${componentData.tag}" show-source></nvd-canvas-editable>
+      <nvd-canvas-editable id="cycling-example" source="${storyTemplates[0]?.template || ''}"  tag="${componentData.tag}" show-source></nvd-canvas-editable>
     </div>
 
-    ${stories
+    ${storyTemplates
       .map(
         (story, index) => /* html */ `
         <div class="story-example">
           <h3 nve-text="heading lg mkd">${story.id.split(/(?=[A-Z])/).join(' ')}</h3>
-          <nvd-canvas-editable source="${md.utils.escapeHtml(story.template)}" readonly tag="${componentData.tag}">
+          <nvd-canvas-editable source="${story.template}" readonly tag="${componentData.tag}">
             <nve-button container="flat" slot="suffix" value="${index}">Edit</nve-button>
           </nvd-canvas-editable>
         </div>

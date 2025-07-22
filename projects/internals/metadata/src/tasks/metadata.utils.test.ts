@@ -82,11 +82,4 @@ describe('Metadata', () => {
     expect(metadata.projects['@nvidia-elements/core'].tests.coverage[0].functions).toBeDefined();
     expect(metadata.projects['@nvidia-elements/core'].tests.coverage[0].functions.pct).toBeDefined();
   });
-
-  it('should return project element stories', async () => {
-    expect(metadata.projects['@nvidia-elements/core'].elements[0].stories).toBeDefined();
-    expect(metadata.projects['@nvidia-elements/core'].elements[0].stories.items.length).toBeGreaterThan(0);
-    expect(metadata.projects['@nvidia-elements/core'].elements[0].stories.items[0].id).toBeDefined();
-    expect(metadata.projects['@nvidia-elements/core'].elements[0].stories.items[0].template).toBeDefined();
-  });
 });

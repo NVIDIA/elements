@@ -75,7 +75,8 @@
       ],
       "dependencies": [
         "../vite:ci",
-        "build:metadata"
+        "build:metadata",
+        "build:stories"
       ]
     },
     "build:metadata": {
@@ -89,7 +90,6 @@
         "../../elements/README.md",
         "../../elements/CHANGELOG.md",
         "../../elements/dist/custom-elements.json",
-        "../../elements/dist/**/*.stories.json",
         "../../elements/coverage/unit/coverage-summary.json",
         "../../elements/coverage/unit/junit.xml",
         "../../elements/coverage/axe/junit.xml",
@@ -100,7 +100,6 @@
         "../../elements-react/README.md",
         "../../elements-react/CHANGELOG.md",
         "../../elements-react/dist/custom-elements.json",
-        "../../elements-react/dist/**/*.stories.json",
         "../../elements-react/coverage/unit/coverage-summary.json",
         "../../elements-react/coverage/unit/junit.xml",
         "../../elements-react/coverage/axe/junit.xml",
@@ -111,7 +110,6 @@
         "../../styles/README.md",
         "../../styles/CHANGELOG.md",
         "../../styles/dist/custom-elements.json",
-        "../../styles/dist/**/*.stories.json",
         "../../styles/coverage/unit/coverage-summary.json",
         "../../styles/coverage/unit/junit.xml",
         "../../styles/coverage/axe/junit.xml",
@@ -122,7 +120,6 @@
         "../../testing/README.md",
         "../../testing/CHANGELOG.md",
         "../../testing/dist/custom-elements.json",
-        "../../testing/dist/**/*.stories.json",
         "../../testing/coverage/unit/coverage-summary.json",
         "../../testing/coverage/unit/junit.xml",
         "../../testing/coverage/axe/junit.xml",
@@ -133,7 +130,6 @@
         "../../themes/README.md",
         "../../themes/CHANGELOG.md",
         "../../themes/dist/custom-elements.json",
-        "../../themes/dist/**/*.stories.json",
         "../../themes/coverage/unit/coverage-summary.json",
         "../../themes/coverage/unit/junit.xml",
         "../../themes/coverage/axe/junit.xml",
@@ -144,7 +140,6 @@
         "../../labs/brand/README.md",
         "../../labs/brand/CHANGELOG.md",
         "../../labs/brand/dist/custom-elements.json",
-        "../../labs/brand/dist/**/*.stories.json",
         "../../labs/brand/coverage/unit/coverage-summary.json",
         "../../labs/brand/coverage/unit/junit.xml",
         "../../labs/brand/coverage/axe/junit.xml",
@@ -155,7 +150,6 @@
         "../../labs/code/README.md",
         "../../labs/code/CHANGELOG.md",
         "../../labs/code/dist/custom-elements.json",
-        "../../labs/code/dist/**/*.stories.json",
         "../../labs/code/coverage/unit/coverage-summary.json",
         "../../labs/code/coverage/unit/junit.xml",
         "../../labs/code/coverage/axe/junit.xml",
@@ -166,7 +160,6 @@
         "../../labs/forms/README.md",
         "../../labs/forms/CHANGELOG.md",
         "../../labs/forms/dist/custom-elements.json",
-        "../../labs/forms/dist/**/*.stories.json",
         "../../labs/forms/coverage/unit/coverage-summary.json",
         "../../labs/forms/coverage/unit/junit.xml",
         "../../labs/forms/coverage/axe/junit.xml",
@@ -177,7 +170,6 @@
         "../../labs/behaviors-alpine/README.md",
         "../../labs/behaviors-alpine/CHANGELOG.md",
         "../../labs/behaviors-alpine/dist/custom-elements.json",
-        "../../labs/behaviors-alpine/dist/**/*.stories.json",
         "../../labs/behaviors-alpine/coverage/unit/coverage-summary.json",
         "../../labs/behaviors-alpine/coverage/unit/junit.xml",
         "../../labs/behaviors-alpine/coverage/axe/junit.xml",
@@ -188,7 +180,6 @@
         "../../labs/playwright-screencast/README.md",
         "../../labs/playwright-screencast/CHANGELOG.md",
         "../../labs/playwright-screencast/dist/custom-elements.json",
-        "../../labs/playwright-screencast/dist/**/*.stories.json",
         "../../labs/playwright-screencast/coverage/unit/coverage-summary.json",
         "../../labs/playwright-screencast/coverage/unit/junit.xml",
         "../../labs/playwright-screencast/coverage/axe/junit.xml",
@@ -199,7 +190,6 @@
         "../../monaco/README.md",
         "../../monaco/CHANGELOG.md",
         "../../monaco/dist/custom-elements.json",
-        "../../monaco/dist/**/*.stories.json",
         "../../monaco/coverage/unit/coverage-summary.json",
         "../../monaco/coverage/unit/junit.xml",
         "../../monaco/coverage/axe/junit.xml",
@@ -207,8 +197,7 @@
         "../../monaco/coverage/ssr/junit.xml",
         "../../monaco/coverage/ssr/summary.json",
         "../../patterns/package.json",
-        "../../patterns/dist/custom-elements.json",
-        "../../patterns/dist/**/*.stories.json"
+        "../../patterns/dist/custom-elements.json"
       ],
       "output": [
         "static/index.json"
@@ -247,6 +236,10 @@
           "cascade": false
         },
         {
+          "script": "../../monaco:ci",
+          "cascade": false
+        },
+        {
           "script": "../../labs/behaviors-alpine:ci",
           "cascade": false
         },
@@ -255,11 +248,79 @@
           "cascade": false
         },
         {
-          "script": "../../monaco:ci",
+          "script": "../patterns:ci",
+          "cascade": false
+        }
+      ]
+    },
+    "build:stories": {
+      "command": "node --experimental-strip-types ./src/tasks/stories.ts",
+      "files": [
+        "./src/tasks/stories.ts",
+        "./src/tasks/stories.utils.ts",
+        "../../elements/dist/**/*.stories.json",
+        "../../elements-react/dist/**/*.stories.json",
+        "../../styles/dist/**/*.stories.json",
+        "../../testing/dist/**/*.stories.json",
+        "../../themes/dist/**/*.stories.json",
+        "../../labs/brand/dist/**/*.stories.json",
+        "../../labs/code/dist/**/*.stories.json",
+        "../../labs/forms/dist/**/*.stories.json",
+        "../../labs/behaviors-alpine/dist/**/*.stories.json",
+        "../../labs/playwright-screencast/dist/**/*.stories.json",
+        "../../monaco/dist/**/*.stories.json",
+        "../../patterns/dist/**/*.stories.json"
+      ],
+      "output": [
+        "static/stories.json"
+      ],
+      "dependencies": [
+        {
+          "script": "../../elements:build",
           "cascade": false
         },
         {
-          "script": "../patterns:ci",
+          "script": "../../elements-react:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../testing:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/brand:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/code:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/forms:build",
+          "cascade": false
+        },
+        {
+          "script": "../../monaco:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/behaviors-alpine:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/playwright-screencast:build",
+          "cascade": false
+        },
+        {
+          "script": "../patterns:build",
           "cascade": false
         }
       ]
@@ -345,17 +406,8 @@
     }
   },
   "dependencies": {
-    "@pnpm/exportable-manifest": "7.0.3",
-    "@pnpm/read-project-manifest": "6.0.6",
-    "@pnpm/workspace.read-manifest": "2.2.0",
-    "@pnpm/catalogs.config": "0.1.0",
-    "archiver": "7.0.1",
-    "fflate": "0.8.2",
-    "html-format": "1.1.7",
     "glob": "catalog:",
-    "sanitize-html": "2.17.0",
-    "ts-morph": "catalog:",
-    "unzipper": "0.12.3"
+    "ts-morph": "catalog:"
   },
   "devDependencies": {
     "@internals/eslint": "workspace:*",
