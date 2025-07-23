@@ -1,6 +1,6 @@
 ---
 {
-  title: 'Layout Grid',
+  title: 'Grid Layout',
   layout: 'docs.11ty.js'
 }
 ---
