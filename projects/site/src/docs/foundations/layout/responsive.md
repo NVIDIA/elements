@@ -1,7 +1,8 @@
 ---
 {
-  title: 'Layout Responsive',
-  layout: 'docs.11ty.js'
+  title: 'Responsive Layout',
+  layout: 'docs.11ty.js',
+  permalink: 'docs/internal/layout-responsive/index.html',
 }
 ---
 
@@ -17,13 +18,13 @@
 
 # {{title}}
 
-You may be able to achieve fluid page layouts by simply leveraging the abstracted `flexbox` and `grid` APIs. You will notice that pages built with Elements `nve-layout` attributes will result in pages that grow and shrink with respect to browser viewport width.
+Fluid page layouts are achieved through the abstracted CSS flexbox and grid APIs, allowing pages built with Elements `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
 
-However, we introduced an additional responsive layout module to our system that leverages [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) for even more adaptive responsive design, based on the width of container elements rather than just browser width.
+By optionally importing the responsive layout module, this system is extended using [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) for adaptive responsive design based on the container element's width rather than just the browser width.
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about container queries in this Google <a href="https://web.dev/articles/new-responsive#using_container_queries_today" target="_blank" nve-text="link">web.dev</a> video and article.</nve-alert>
 
-This addition to the layout API gives you the ability to apply conditional layout styling based on the width of the parent element containing an element with `nve-layout` attributes. Currently it supports `gap`, `padding`, `row vs column`, `reversing` flex direction, varying `grid` structure and `hiding / showing` content across the following pixel width breakpoints.
+The responsive layout API applies conditional styling based on parent element width. Supported features include `gap`, `padding`, `row vs column`, `reversing` flex direction, varying `grid` structure and `hiding / showing` content across defined pixel width breakpoints.
 
 The following set of container `breakpoint-values` are defined as:
 
@@ -32,12 +33,12 @@ The following set of container `breakpoint-values` are defined as:
 - `md = 480px`
 - `lg = 640px`
 - `xl = 800px`
-- `2xl = 960px`
-- `3xl = 1200px`
+- `xxl = 960px`
+- `xxxl = 1200px`
 
-The ampersand based `&breakpoint-size|...` API is introduced, where the breakpoint size is added before the layout modifier.
+The ampersand-based `&breakpoint-size|...` API adds the breakpoint size before the layout modifier.
 
-For example, you can add conditional based gap sizing using `nve-layout="row &sm|gap:xxxs &md|gap:md &lg|gap:xxxl"`. The size value after the `:` is one of the nine size values for the [spacing](./?path=/docs/foundations-layout-documentation--docs&anchor=layout-gap-spacing)/[padding](./?path=/docs/foundations-layout-documentation--docs&anchor=layout-padding) system.
+Conditional gap sizing example: `nve-layout="row &sm|gap:xxxs &md|gap:md &lg|gap:xxxl"`. The size value after the `:` corresponds to one of the nine [spacing](docs/foundations/layout/#layout-gap-spacing)/[padding](docs/foundations/layout/#layout-padding) system values.
 
 ```html
 <div>
@@ -57,31 +58,31 @@ For example, you can add conditional based gap sizing using `nve-layout="row &sm
 
 ## Responsive Gap Sizing
 
-The following container query breakpoints are available for gap, replace `...` with one of the 9 gap [spacing](./?path=/docs/foundations-layout-documentation--docs&anchor=layout-gap-spacing) values:
+The following container query breakpoints are available for gap, replace `...` with one of the 9 gap [spacing](docs/foundations/layout/#layout-gap-spacing) values:
 
 - `&xs|gap:...`
 - `&sm|gap:...`
 - `&md|gap:...`
 - `&lg|gap:...`
 - `&xl|gap:...`
-- `&2xl|gap:...`
-- `&3xl|gap:...`
+- `&xxl|gap:...`
+- `&xxxl|gap:...`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'GapResponsive' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'GapResponsive', '{ "inline": false, "resizable": true, "height": "400px" }' %}
 
 ## Responsive Padding
 
-The following container query breakpoints are available for padding, replace `...` with one of the 9 padding [padding](./?path=/docs/foundations-layout-documentation--docs&anchor=layout-padding) values:
+The following container query breakpoints are available for padding, replace `...` with one of the 9 padding [padding](docs/foundations/layout/#layout-padding) values:
 
 - `&xs|pad:...`
 - `&sm|pad:...`
 - `&md|pad:...`
 - `&lg|pad:...`
 - `&xl|pad:...`
-- `&2xl|pad:...`
-- `&3xl|pad:...`
+- `&xxl|pad:...`
+- `&xxxl|pad:...`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'PadResponsive' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'PadResponsive', '{ "inline": false, "resizable": true, "height": "400px" }' %}
 
 ## Hiding Elements Based on Container Size
 
@@ -93,25 +94,25 @@ The following container query breakpoints are available for hiding:
 - `&md|hide`
 - `&lg|hide`
 - `&xl|hide`
-- `&2xl|hide`
-- `&3xl|hide`
+- `&xxl|hide`
+- `&xxxl|hide`
 
-You can subsequently reverse the hiding of elements with the `show@` attribute.
+Element hiding can be reversed using the `show` attribute:
 
 - `&xs|show`
 - `&sm|show`
 - `&md|show`
 - `&lg|show`
 - `&xl|show`
-- `&2xl|show`
-- `&3xl|show`
+- `&xxl|show`
+- `&xxxl|show`
 
-**Note that this responsive layout system is _minimum width based_ and takes an "upward" mobile-first approach.
-You will likely need to combine `&hide|` and `&show|` to hide elements at smaller container sizes.**
+**Note: This responsive layout system is _minimum width based_ using a mobile-first approach.
+Combine `&hide|` and `&show|` attributes to hide elements at smaller container sizes.**
 
 The `&show|...` attribute will reverse setting of `display: none` back to `display: initial`.
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'HideResponsive' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'HideResponsive', '{ "inline": false, "resizable": true, "height": "400px" }' %}
 
 ## Breakpoints for Switching Flexbox Layout Direction
 
@@ -124,31 +125,31 @@ The following container query breakpoints are available for swapping flex direct
 - `&md|row`
 - `&lg|row`
 - `&xl|row`
-- `&2xl|row`
-- `&3xl|row`
+- `&xxl|row`
+- `&xxxl|row`
 
-### Vertically:
+### Vertically
 
 - `&xs|column`
 - `&sm|column`
 - `&md|column`
 - `&lg|column`
 - `&xl|column`
-- `&2xl|column`
-- `&3xl|column`
+- `&xxl|column`
+- `&xxxl|column`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionResponsive' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionResponsive', '{ "inline": false, "resizable": true, "height": "400px" }' %}
 
 In addition to the above, you can also use the following syntax for flipping the flex direction:
 
 - `&...|row-reverse`
 - `&...|column-reverse`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionReverse' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionReverse', '{ "inline": false, "resizable": true, "height": "400px" }' %}
 
 ## Responsive Grid
 
-Lastly, you can use the following syntax with `nve-layout=grid...` to vary grid structure based on container size.
+Grid structure can be varied based on container size using the following syntax with `nve-layout=grid...`:
 
 ```html
 <section nve-layout="grid gap:md span-items:12 &sm|span-items:6 &md|span-items:4 &lg|span-items:3">
@@ -176,8 +177,8 @@ Or:
 
 ### Responsive Grid Parent
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveGrid' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveGrid', '{ "inline": false, "resizable": true, "height": "400px" }' %}
 
 ### Responsive Grid Items
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveGridItems' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveGridItems', '{ "inline": false, "resizable": true, "height": "400px" }' %}
