@@ -20,7 +20,7 @@ export const GapResponsive = {
 
 export const PadResponsive = {
   render: () => html`
-    <section nve-layout="row &sm|pad:xxxs &md|pad:md &lg|pad:lg &xl|pad:xxxl">
+    <section nve-layout="row &sm|pad:xs &md|pad:lg &xl|pad:xxxl">
       <nve-card nve-layout="full"></nve-card>
     </section>
   `
@@ -42,9 +42,9 @@ export const HideResponsive = {
       <nve-logo size="lg" color="green-mint" nve-layout="hide &xl|show">8</nve-logo>
       <nve-logo size="lg" color="green-mint" nve-layout="hide &xl|show">9</nve-logo>
 
-      <nve-logo size="lg" color="green-mint" nve-layout="hide &2xl|show">10</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-layout="&xs|hide &2xl|show">11</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-layout="&sm|hide &2xl|show">12</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="hide &xxl|show">10</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="&xs|hide &xxl|show">11</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-layout="&sm|hide &xxl|show">12</nve-logo>
     </section>
   `
 }
