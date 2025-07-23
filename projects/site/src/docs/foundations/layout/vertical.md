@@ -1,6 +1,6 @@
 ---
 {
-  title: 'Layout Vertical',
+  title: 'Vertical Layout',
   layout: 'docs.11ty.js'
 }
 ---
