@@ -147,7 +147,6 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/horizontal/') ? 'highlighted' : ''}><a href="docs/foundations/layout/horizontal/">Horizontal</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/vertical/') ? 'highlighted' : ''}><a href="docs/foundations/layout/vertical/">Vertical</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/grid/') ? 'highlighted' : ''}><a href="docs/foundations/layout/grid/">Grid</a></nve-tree-node>
-      <!-- <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/responsive/') ? 'highlighted' : ''}><a href="docs/foundations/layout/responsive/">Responsive</a></nve-tree-node> -->
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/forms/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/forms/' ? 'highlighted' : ''}>
       <a href="docs/foundations/forms/">Forms</a>
@@ -317,6 +316,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/internal/testing/lighthouse/') ? 'highlighted' : ''}><a href="docs/internal/testing/lighthouse/">Lighthouse Testing</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/testing/ssr/') ? 'highlighted' : ''}><a href="docs/internal/testing/ssr/">SSR Testing</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/testing/visual/') ? 'highlighted' : ''}><a href="docs/internal/testing/visual/">Visual Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/layout-responsive/') ? 'highlighted' : ''}><a href="docs/internal/layout-responsive/">Responsive Layout</a></nve-tree-node>
   </nve-tree-node>
 </nve-tree>
 `;

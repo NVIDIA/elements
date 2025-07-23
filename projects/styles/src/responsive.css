@@ -19,23 +19,23 @@
   }
 
   /* Responsive (Container Query Based) Layout & Padding */
-  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, 2xl, 3xl),
+  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, xxl, xxxl),
     (160px, 320px, 480px, 640px, 800px, 960px, 1200px) {
-    @each $spacing-size in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+    @each $space-token in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
       @container (width >= $(breakpoint-value)) {
-        &[nve-layout~='&$(breakpoint)|gap:$(spacing-size)'] {
-          gap: var(--nve-ref-space-$(spacing-size));
+        &[nve-layout~='&$(breakpoint)|gap:$(space-token)'] {
+          gap: var(--nve-ref-space-$(space-token));
         }
 
-        &[nve-layout~='&$(breakpoint)|pad:$(spacing-size)'] {
-          padding: var(--nve-ref-space-$(spacing-size));
+        &[nve-layout~='&$(breakpoint)|pad:$(space-token)'] {
+          padding: var(--nve-ref-space-$(space-token));
         }
       }
     }
   }
 
   /* Responsive (Container Query Based) Hiding & Showing of Elements */
-  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, 2xl, 3xl),
+  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, xxl, xxxl),
     (160px, 320px, 480px, 640px, 800px, 960px, 1200px) {
     @container (width >= $(breakpoint-value)) {
       &[nve-layout~='&$(breakpoint)|hide'] {
@@ -49,7 +49,7 @@
   }
 
   /* Responsive (Container Query Based) Row vs Column */
-  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, 2xl, 3xl),
+  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, xxl, xxxl),
     (160px, 320px, 480px, 640px, 800px, 960px, 1200px) {
     @container (width >= $(breakpoint-value)) {
       &[nve-layout~='&$(breakpoint)|row'] {
@@ -76,7 +76,7 @@
 
   /* Responsive Grid Breakpoints */
   &[nve-layout~='grid'] {
-    @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, 2xl, 3xl),
+    @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, xxl, xxxl),
       (160px, 320px, 480px, 640px, 800px, 960px, 1200px) {
       @each $num in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
         @container (width >= $(breakpoint-value)) {
