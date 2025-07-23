@@ -1,9 +1,9 @@
-import { html } from 'lit';
+import { html, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { state } from 'lit/decorators/state.js';
 import { useStyles, I18nController } from '@nvidia-elements/core/internal';
 import { Button } from '@nvidia-elements/core/button';
 import { Icon } from '@nvidia-elements/core/icon';
-import { state } from 'lit/decorators/state.js';
 import styles from './copy-button.css?inline';
 
 /**
@@ -55,7 +55,7 @@ export class CopyButton extends Button {
 
   render() {
     return html`
-     <div id="btn" internal-host interaction-state focus-within @click=${this.#copy}>
+     <div id="btn" internal-host interaction-state focus-within>
         <slot></slot>
         ${
           this.copied
@@ -63,9 +63,16 @@ export class CopyButton extends Button {
             : html`<slot name="icon"><nve-icon name="copy" .size=${this.size} aria-hidden="true"></nve-icon></slot>`
         }
      </div>
-     <nve-toast .hidden=${!this.showToast} @close=${this.#close} status="success" anchor="btn" trigger="btn" position="top" close-timeout="1500">${this.i18n.copied}</nve-toast>
-     <nve-tooltip .hidden=${!this.showTooltip || this.showToast} @open=${() => (this.showTooltip = true)} @close=${() => (this.showTooltip = false)} anchor="btn" trigger="btn">${this.ariaLabel ?? this.i18n.copy}</nve-tooltip>
+     ${this.showToast ? html`<nve-toast @close=${this.#close} status="success" anchor="btn" trigger="btn" position="top" close-timeout="1500">${this.i18n.copied}</nve-toast>` : nothing}
+     ${this.showTooltip && !this.showToast ? html`<nve-tooltip anchor="btn" trigger="btn">${this.ariaLabel ?? this.i18n.copy}</nve-tooltip>` : nothing}
    `;
+  }
+
+  constructor() {
+    super();
+    this.addEventListener('click', this.#copy);
+    this.addEventListener('mouseenter', this.#openTooltip);
+    this.addEventListener('mouseleave', this.#closeTooltip);
   }
 
   #copy() {
@@ -86,6 +93,14 @@ export class CopyButton extends Button {
   #close() {
     this.showToast = false;
     this.copied = false;
+    this.showTooltip = false;
+  }
+
+  #openTooltip() {
+    this.showTooltip = true;
+  }
+
+  #closeTooltip() {
     this.showTooltip = false;
   }
 }
