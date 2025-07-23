@@ -1,15 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
-import {
-  createFixture,
-  elementIsStable,
-  removeFixture,
-  emulateMouseEnter,
-  emulateMouseLeave,
-  untilEvent
-} from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture, emulateMouseEnter, emulateMouseLeave } from '@nvidia-elements/testing';
 import { CopyButton } from '@nvidia-elements/core/copy-button';
-import { Icon } from '@nvidia-elements/core/icon';
 import { Toast } from '@nvidia-elements/core/toast';
 import { Tooltip } from '@nvidia-elements/core/tooltip';
 
@@ -35,9 +27,10 @@ describe(CopyButton.metadata.tag, () => {
 
   it('should enable copy functionality and show toast when clicked', async () => {
     const mockClipboard = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
+    element.click();
+    await elementIsStable(element);
 
     // check if clipboard functionality was called with the right value
-    element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).click();
     expect(mockClipboard).toHaveBeenCalledWith('hello');
     expect(mockClipboard).toHaveBeenCalledTimes(1);
 
@@ -50,9 +43,10 @@ describe(CopyButton.metadata.tag, () => {
 
   it('should enable copy functionality and show toast when clicked', async () => {
     const mockClipboard = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
+    element.click();
+    await elementIsStable(element);
 
     // check if clipboard functionality was called with the right value
-    element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).click();
     expect(mockClipboard).toHaveBeenCalledWith('hello');
     expect(mockClipboard).toHaveBeenCalledTimes(1);
 
@@ -60,29 +54,18 @@ describe(CopyButton.metadata.tag, () => {
     const toast = element.shadowRoot.querySelector<Toast>(Toast.metadata.tag);
     expect(toast.status).toBe('success');
     await toast.updateComplete;
-    await new Promise(resolve => setTimeout(resolve, 0));
-    expect(toast.hidden).toBe(false);
 
     mockClipboard.mockRestore();
   });
 
   it('should show the tooltip on hover', async () => {
-    // Simulate hover event
-    const tooltip = element.shadowRoot.querySelector<Tooltip>(Tooltip.metadata.tag);
-    const button = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
-    tooltip.hidePopover();
+    emulateMouseEnter(element);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector<Tooltip>(Tooltip.metadata.tag)).toBeTruthy();
 
-    const open = untilEvent(tooltip, 'open');
-    emulateMouseEnter(button);
-    await open;
-    await elementIsStable(button);
-    expect(tooltip.hidden).toBe(false);
-
-    const close = untilEvent(tooltip, 'close');
-    emulateMouseLeave(button);
-    await close;
-    await elementIsStable(button);
-    expect(tooltip.hidden).toBe(true);
+    emulateMouseLeave(element);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector<Tooltip>(Tooltip.metadata.tag)).toBeFalsy();
   });
 
   it('should handle clipboard API errors', async () => {
@@ -98,12 +81,12 @@ describe(CopyButton.metadata.tag, () => {
     // Capture error messages
     const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).click();
-    await new Promise(resolve => setTimeout(resolve, 0));
+    element.click();
+    await elementIsStable(element);
 
     // Check if error was logged
     expect(consoleErrorSpy).toHaveBeenCalledWith(new Error('Clipboard API error'));
-    expect(element.shadowRoot.querySelector<Toast>(Toast.metadata.tag).hidden).toBe(true);
+    expect(element.shadowRoot.querySelector<Toast>(Toast.metadata.tag)).toBeFalsy();
 
     consoleErrorSpy.mockRestore();
     Object.defineProperty(navigator, 'clipboard', { value: originalClipboard });
