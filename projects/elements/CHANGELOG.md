@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.1...@nvidia-elements/core-v1.39.2) (2025-07-23)
+
+
+### Bug Fixes
+
+* **elements:** copy-button performance ([06f7124](https://github.com/NVIDIA/elements/commit/06f7124c5c0e5951296cc7222b32e2a5f564b112))
+
 ## [@nvidia-elements/core-v1.39.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.0...@nvidia-elements/core-v1.39.1) (2025-07-11)
 
 
