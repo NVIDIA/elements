@@ -7,6 +7,8 @@
 
 <style>
   nvd-canvas {
+    --padding: none;
+    
     section[nve-layout~='row'][nve-layout*='align'] {
       min-height: 220px !important;
     }
