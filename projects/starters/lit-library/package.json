@@ -94,15 +94,6 @@
     },
     "build": {
       "command": "NODE_ENV=production tsc -p tsconfig.lib.json && vite build",
-      "dependencies": [
-        {
-          "script": "../../elements:build",
-          "cascade": false
-        }
-      ],
-      "output": [
-        "dist/**"
-      ],
       "files": [
         "../../elements/dist/**/*.js",
         "src/**",
@@ -111,6 +102,15 @@
         "package.json",
         "tsconfig.lib.json",
         "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        }
       ]
     },
     "build:watch": {

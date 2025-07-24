@@ -1158,12 +1158,6 @@ importers:
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../../elements
-      '@nvidia-elements/styles':
-        specifier: workspace:*
-        version: link:../../styles
-      '@nvidia-elements/themes':
-        specifier: workspace:*
-        version: link:../../themes
     devDependencies:
       typescript:
         specifier: 'catalog:'
@@ -1173,6 +1167,16 @@ importers:
         version: 7.0.4(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.30.0)(sass@1.89.2)(terser@5.39.0)(yaml@2.7.0)
 
   projects/starters/eleventy:
+    dependencies:
+      '@nvidia-elements/core':
+        specifier: workspace:*
+        version: link:../../elements
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      '@nvidia-elements/themes':
+        specifier: workspace:*
+        version: link:../../themes
     devDependencies:
       '@11ty/eleventy':
         specifier: 'catalog:'
@@ -1189,15 +1193,6 @@ importers:
       '@lit-labs/ssr-client':
         specifier: 'catalog:'
         version: 1.1.7
-      '@nvidia-elements/core':
-        specifier: workspace:*
-        version: link:../../elements
-      '@nvidia-elements/styles':
-        specifier: workspace:*
-        version: link:../../styles
-      '@nvidia-elements/themes':
-        specifier: workspace:*
-        version: link:../../themes
       markdown-it:
         specifier: 'catalog:'
         version: 14.1.0
@@ -1209,6 +1204,16 @@ importers:
         version: 7.0.4(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.30.0)(sass@1.89.2)(terser@5.39.0)(yaml@2.7.0)
 
   projects/starters/eleventy-ssr:
+    dependencies:
+      '@nvidia-elements/core':
+        specifier: workspace:*
+        version: link:../../elements
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      '@nvidia-elements/themes':
+        specifier: workspace:*
+        version: link:../../themes
     devDependencies:
       '@11ty/eleventy':
         specifier: 'catalog:'
@@ -1228,15 +1233,6 @@ importers:
       '@nve-internals/tools':
         specifier: workspace:*
         version: link:../../internals/tools
-      '@nvidia-elements/core':
-        specifier: workspace:*
-        version: link:../../elements
-      '@nvidia-elements/styles':
-        specifier: workspace:*
-        version: link:../../styles
-      '@nvidia-elements/themes':
-        specifier: workspace:*
-        version: link:../../themes
       typescript:
         specifier: 'catalog:'
         version: 5.8.2

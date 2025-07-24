@@ -10,9 +10,7 @@
     "preview": "wireit"
   },
   "dependencies": {
-    "@nvidia-elements/core": "workspace:*",
-    "@nvidia-elements/styles": "workspace:*",
-    "@nvidia-elements/themes": "workspace:*"
+    "@nvidia-elements/core": "workspace:*"
   },
   "devDependencies": {
     "typescript": "catalog:",
@@ -31,6 +29,8 @@
     "build": {
       "command": "vite build",
       "files": [
+        "../../elements/dist/bundles/index.js",
+        "../../elements/dist/bundles/index.css",
         "index.html",
         "vite.config.ts",
         "package.json"
@@ -39,7 +39,10 @@
         "dist"
       ],
       "dependencies": [
-        "../../elements:build"
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        }
       ]
     },
     "preview": {

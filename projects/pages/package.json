@@ -10,6 +10,9 @@
     "ci": {
       "command": "node ./index.js",
       "files": [
+        "../site/dist/**",
+        "../starters/dist/**",
+        "../internals/metadata/static/**",
         "index.js",
         "_redirects",
         "robots.txt"
@@ -18,24 +21,41 @@
         "dist"
       ],
       "dependencies": [
-        "../site:build",
-        "../starters:build",
-        "../internals/metadata:build"
+        {
+          "script": "../site:build",
+          "cascade": false
+        },
+        {
+          "script": "../starters:build",
+          "cascade": false
+        },
+        {
+          "script": "../internals/metadata:build",
+          "cascade": false
+        }
       ],
       "env": {
         "PAGES_BASE_URL": {
           "external": true,
           "default": "/elements/preview/"
+        },
+        "LOCAL_PREVIEW": {
+          "external": true,
+          "default": "false"
         }
       }
     },
     "preview": {
-      "command": "pnpm run ci && vite preview --base=$PAGES_BASE_URL",
+      "command": "LOCAL_PREVIEW=true pnpm run ci && vite preview --base=$PAGES_BASE_URL",
       "service": true,
       "env": {
         "PAGES_BASE_URL": {
           "external": true,
           "default": "/elements/preview/"
+        },
+        "LOCAL_PREVIEW": {
+          "external": true,
+          "default": "true"
         }
       }
     }
