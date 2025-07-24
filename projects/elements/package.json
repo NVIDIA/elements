@@ -978,6 +978,10 @@
     "build": {
       "command": "NODE_ENV=production ELEMENTS_BUILD=true vite build",
       "files": [
+        "../styles/dist/**/*.css",
+        "../themes/dist/**/*.css",
+        "../labs/forms/dist/**/*.js",
+        "!../labs/forms/dist/**/*.stories.js",
         "public/**",
         "src/**",
         "!src/**/*.test.ts",
@@ -993,8 +997,7 @@
         "tsconfig.lib.json",
         "vite.config.ts",
         "vite.bundle.ts",
-        "custom-elements-manifest.config.mjs",
-        "../labs/forms/dist/**/*.js"
+        "custom-elements-manifest.config.mjs"
       ],
       "output": [
         "dist/**",
@@ -1005,9 +1008,15 @@
       "dependencies": [
         "build:icons",
         "build:snippets",
-        "../themes:build",
-        "../styles:build",
         "../internals/vite:ci",
+        {
+          "script": "../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../themes:build",
+          "cascade": false
+        },
         {
           "script": "../labs/forms:build",
           "cascade": false

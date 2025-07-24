@@ -55,18 +55,32 @@
     },
     "build": {
       "command": "next build",
-      "dependencies": [
-        "../../elements:build"
+      "files": [
+        "../../elements/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
+        "src/**",
+        "package.json",
+        "next.config.mjs",
+        "tsconfig.json"
       ],
       "output": [
         ".next/**",
         "dist/**"
       ],
-      "files": [
-        "src/**",
-        "package.json",
-        "next.config.mjs",
-        "tsconfig.json"
+      "dependencies": [
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
       ]
     }
   }

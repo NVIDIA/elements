@@ -208,6 +208,7 @@
       "command": "NODE_ENV=production vite build",
       "files": [
         "../../elements/dist/**/*.js",
+        "!../../elements/dist/**/*.stories.js",
         "src/**",
         "!src/**/*.stories.ts",
         "!src/**/*.test.ts",
@@ -225,8 +226,8 @@
         "!dist/data.snippets.json"
       ],
       "dependencies": [
-        "build:snippets",
         "../../internals/vite:ci",
+        "build:snippets",
         {
           "script": "../../elements:build",
           "cascade": false

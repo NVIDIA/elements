@@ -19,13 +19,13 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% story 'nve-dropdown', 'Visual', '{ "inline": false, "height": "230px" }' %}
 
-## Events
+## Layout
 
-{% api 'nve-dropdown', 'event' 'open' %}
+{% story 'nve-dropdown', 'DropdownLayout', '{ "inline": false, "height": "450px" }' %}
 
-{% api 'nve-dropdown', 'event' 'close' %}
+## Dropdown Menu
 
-{% story 'nve-dropdown', 'Events', '{ "inline": false, "height": "280px" }' %}
+{% story 'nve-dropdown', 'DropdownMenu', '{ "inline": false, "height": "450px" }' %}
 
 ## Closable
 
@@ -33,9 +33,13 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% story 'nve-dropdown', 'Closable', '{ "inline": false, "height": "280px" }' %}
 
-## Content
+## Events
 
-{% story 'nve-dropdown', 'Content', '{ "inline": false, "height": "450px" }' %}
+{% api 'nve-dropdown', 'event' 'open' %}
+
+{% api 'nve-dropdown', 'event' 'close' %}
+
+{% story 'nve-dropdown', 'Events', '{ "inline": false, "height": "280px" }' %}
 
 ## Position
 
@@ -56,3 +60,7 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 ## Checkbox Group Pattern
 
 {% story 'nve-dropdown', 'CheckboxGroup', '{ "inline": false, "height": "320px" }' %}
+
+## Multiple Triggers
+
+{% story 'nve-dropdown', 'MultipleTriggers', '{ "inline": false, "height": "320px" }' %}

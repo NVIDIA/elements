@@ -17,27 +17,88 @@
     "build": {
       "command": "node ./index.js",
       "files": [
+        "../internals/tools/dist/**/starter/**",
+        "../internals/tools/dist/starter/**/*.js",
+        "./angular/dist/**/*.js",
+        "./bundles/dist/**/*.js",
+        "./importmaps/dist/**/*.js",
+        "./eleventy/dist/**/*.js",
+        "./eleventy-ssr/dist/**/*.js",
+        "./lit-library/dist/**/*.js",
+        "./mpa/dist/**/*.js",
+        "./nextjs/dist/**/*.js",
+        "./react/dist/**/*.js",
+        "./react-18/dist/**/*.js",
+        "./scoped-registry/dist/**/*.js",
+        "./solidjs/dist/**/*.js",
+        "./typescript/dist/**/*.js",
+        "./vue/dist/**/*.js",
         "./index.js"
       ],
       "output": [
         "dist"
       ],
       "dependencies": [
-        "../internals/tools:build",
-        "./angular:build",
-        "./bundles:build",
-        "./importmaps:build",
-        "./eleventy:build",
-        "./eleventy-ssr:build",
-        "./lit-library:build",
-        "./mpa:build",
-        "./nextjs:build",
-        "./react:build",
-        "./react-18:build",
-        "./scoped-registry:build",
-        "./solidjs:build",
-        "./typescript:build",
-        "./vue:build"
+        {
+          "script": "../internals/tools:build",
+          "cascade": false
+        },
+        {
+          "script": "./angular:build",
+          "cascade": false
+        },
+        {
+          "script": "./bundles:build",
+          "cascade": false
+        },
+        {
+          "script": "./importmaps:build",
+          "cascade": false
+        },
+        {
+          "script": "./eleventy:build",
+          "cascade": false
+        },
+        {
+          "script": "./eleventy-ssr:build",
+          "cascade": false
+        },
+        {
+          "script": "./lit-library:build",
+          "cascade": false
+        },
+        {
+          "script": "./mpa:build",
+          "cascade": false
+        },
+        {
+          "script": "./nextjs:build",
+          "cascade": false
+        },
+        {
+          "script": "./react:build",
+          "cascade": false
+        },
+        {
+          "script": "./react-18:build",
+          "cascade": false
+        },
+        {
+          "script": "./scoped-registry:build",
+          "cascade": false
+        },
+        {
+          "script": "./solidjs:build",
+          "cascade": false
+        },
+        {
+          "script": "./typescript:build",
+          "cascade": false
+        },
+        {
+          "script": "./vue:build",
+          "cascade": false
+        }
       ],
       "env": {
         "PAGES_BASE_URL": {
