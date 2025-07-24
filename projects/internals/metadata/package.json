@@ -366,7 +366,7 @@
       "command": "eslint -c ./eslint.config.js --fix"
     },
     "test": {
-      "command": "playwright-lock 'vitest run'",
+      "command": "vitest run",
       "files": [
         "dist/**/*.js",
         "src/**/*.test.ts",
@@ -387,7 +387,7 @@
       "service": true
     },
     "test:coverage": {
-      "command": "playwright-lock 'vitest run --coverage'",
+      "command": "vitest run --coverage",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
