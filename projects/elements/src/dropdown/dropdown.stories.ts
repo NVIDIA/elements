@@ -2,24 +2,21 @@ import { html } from 'lit';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/forms/define.js';
-import '@nvidia-elements/core/search/define.js';
-import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/radio/define.js';
 import '@nvidia-elements/core/checkbox/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/menu/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
-import '@nvidia-elements/core/select/define.js';
 
 export default {
   title: 'Elements/Dropdown',
-  component: 'nve-dropdown',
-  parameters: {
-    layout: 'centered'
-  }
+  component: 'nve-dropdown'
 };
 
+/**
+ * @description Basic dropdown implementation using popovertarget attribute to connect trigger and dropdown. Useful for simple dropdown menus.
+ */
 export const Default = {
   render: () => html`
 <nve-dropdown id="dropdown">dropdown content</nve-dropdown>
@@ -27,60 +24,27 @@ export const Default = {
   `
 };
 
-export const NestedMenus = {
+/**
+ * @description An example of a dropdown menu. Useful for navigation menus, context menus, settings and user actions.
+ */
+export const DropdownMenu = {
   render: () => html`
-<style>
-  nve-dropdown + nve-dropdown {
-    --nve-sys-layer-popover-offset: 14px;
-  }
-</style>
-
-<nve-button popovertarget="menu-1">menu</nve-button>
-
-<!-- experimental demo, not stable! -->
-<section id="dropdown-group">
-  <nve-dropdown popover-type="manual" id="menu-1">
+  <nve-button popovertarget="dropdown-menu">dropdown</nve-button>
+  <nve-dropdown id="dropdown-menu">
     <nve-menu>
-      <nve-menu-item popovertarget="menu-2">item 1-1 <nve-icon name="caret" direction="right" size="sm" slot="suffix"></nve-icon></nve-menu-item>
-      <nve-menu-item>item 1-2</nve-menu-item>
-      <nve-menu-item>item 1-3</nve-menu-item>
+      <nve-menu-item><nve-icon name="person"></nve-icon> profile</nve-menu-item>
+      <nve-menu-item><nve-icon name="gear"></nve-icon> settings</nve-menu-item>
+      <nve-menu-item><nve-icon name="star"></nve-icon> favorites</nve-menu-item>
+      <nve-divider></nve-divider>
+      <nve-menu-item><nve-icon name="logout"></nve-icon> logout</nve-menu-item>
     </nve-menu>
   </nve-dropdown>
-
-  <nve-dropdown popover-type="manual" id="menu-2" position="right" alignment="start">
-    <nve-menu>
-      <nve-menu-item>item 2-1</nve-menu-item>
-      <nve-menu-item popovertarget="menu-3">item 2-2 <nve-icon name="caret" direction="right" size="sm" slot="suffix"></nve-icon></nve-menu-item>
-      <nve-menu-item>item 2-3</nve-menu-item>
-    </nve-menu>
-  </nve-dropdown>
-
-  <nve-dropdown popover-type="manual" id="menu-3" position="right" alignment="start">
-    <nve-menu>
-      <nve-menu-item>item 3-1</nve-menu-item>
-      <nve-menu-item>item 3-2</nve-menu-item>
-      <nve-menu-item>item 3-3</nve-menu-item>
-    </nve-menu>
-  </nve-dropdown>
-</section>
-
-<script type="module">
-  const group = document.querySelector('#dropdown-group');
-
-  globalThis.document.addEventListener('pointerup', (e) => {
-    if (Array.from(group.querySelectorAll('nve-dropdown')).every(dropdown => clickOutsideElementBounds(e, dropdown))) {
-      group.querySelectorAll('nve-dropdown').forEach(d => d.hidePopover());
-    }
-  });
-
-  function clickOutsideElementBounds(event, element) {
-    const { left, right, top, bottom } = element.getBoundingClientRect();
-    return event.clientX < left || event.clientX > right || event.clientY < top || event.clientY > bottom;
-  }
-</script>
   `
 };
 
+/**
+ * @description Dropdown using anchor attribute to reference trigger element by ID. Alternative approach for connecting dropdowns to their triggers.
+ */
 export const Visual = {
   render: () => html`
 <nve-dropdown anchor="btn">dropdown content</nve-dropdown>
@@ -88,6 +52,9 @@ export const Visual = {
   `
 };
 
+/**
+ * @description Demonstrates event handling for dropdown open and close events. Useful for adding custom behavior when dropdown state changes.
+ */
 export const Events = {
   inline: false,
   render: () => html`
@@ -101,6 +68,9 @@ export const Events = {
   `
 };
 
+/**
+ * @description Dropdown with closable attribute that allows users to dismiss the dropdown by clicking close button.
+ */
 export const Closable = {
   render: () => html`
 <nve-dropdown anchor="btn" closable>
@@ -111,7 +81,10 @@ export const Closable = {
   `
 };
 
-export const Content = {
+/**
+ * @description Dropdown with structured content using header and footer sections. Perfect for complex dropdown content that needs clear visual hierarchy.
+ */
+export const DropdownLayout = {
   render: () => html`
 <nve-dropdown anchor="btn">
   <nve-dropdown-header>
@@ -126,22 +99,13 @@ export const Content = {
   `
 };
 
-export const DynamicTrigger = {
+export const MultipleTriggers = {
   render: () => html`
-<div id="dynamic-trigger-demo" nve-layout="row align:center" style="height: 250px">
-  <nve-dropdown behavior-trigger hidden>hello there</nve-dropdown>
-  <nve-button>button</nve-button>
-  <nve-button>button</nve-button>
-  <nve-button>button</nve-button>
-  <script type="module">
-    const dropdown = document.querySelector('#dynamic-trigger-demo nve-dropdown');
-    document.querySelector('#dynamic-trigger-demo').addEventListener('mousedown', e => {
-      if (e.target.tagName === 'NVE-BUTTON') {
-        dropdown.anchor = e.target;
-        dropdown.trigger = e.target;
-      }
-    });
-  </script>
+<div nve-layout="row gap:sm align:center">
+  <nve-button popovertarget="dropdown">button</nve-button>
+  <nve-button popovertarget="dropdown">button</nve-button>
+  <nve-button popovertarget="dropdown">button</nve-button>
+  <nve-dropdown id="dropdown">hello there</nve-dropdown>
 </div>
   `
 };
@@ -192,25 +156,9 @@ export const Alignment = {
   `
 };
 
-export const NestedDropdownShadowRoots = {
-  render: () => html`
-<nve-button popovertarget="dropdown">open</nve-button>
-<nve-dropdown id="dropdown">
-  <nve-select style="--width: 300px">
-    <label>label</label>
-    <select multiple>
-      <option value="1">Option 1</option>
-      <option value="2" selected>Option 2</option>
-      <option value="3" selected>Option 3</option>
-      <option value="4">Option 4</option>
-      <option value="5">Option 5</option>
-    </select>
-    <nve-control-message>message</nve-control-message>
-  </nve-select>
-</nve-dropdown>
-  `
-};
-
+/**
+ * @description Dropdown containing a radio group for single-selection options. Perfect for sort controls, filter selections, or preference settings.
+ */
 export const RadioGroup = {
   render: () => html`
 <nve-dropdown anchor="btn">
@@ -237,6 +185,9 @@ export const RadioGroup = {
   `
 };
 
+/**
+ * @description Dropdown containing a checkbox group for multi-selection options. Ideal for filter controls, feature toggles, or bulk action selections.
+ */
 export const CheckboxGroup = {
   render: () => html`
 <nve-dropdown anchor="btn">
@@ -272,27 +223,13 @@ export const LegacyBehaviorTrigger = {
 
 export const DropdownHint = {
   render: () => html`
-<nve-dropdown id="dropdown" closable>
+<nve-dropdown id="dropdown">
   dropdown content
-  <button>btn</button>
 </nve-dropdown>
 
 <nve-tooltip id="tooltip" hidden behavior-trigger trigger="btn">dropdown content</nve-tooltip>
 
 <nve-icon-button id="btn" popovertarget="dropdown" icon-name="gear" aria-label="settings"></nve-icon-button>
-  `
-};
-
-export const DropdownHintTriggers = {
-  render: () => html`
-<nve-tooltip id="tooltip" hidden behavior-trigger trigger="btn">dropdown content</nve-tooltip>
-
-<nve-dropdown id="dropdown" hidden behavior-trigger trigger="btn" closable>
-  dropdown content
-  <button>btn</button>
-</nve-dropdown>
-
-<nve-icon-button id="btn" icon-name="gear" aria-label="settings"></nve-icon-button>
   `
 };
 

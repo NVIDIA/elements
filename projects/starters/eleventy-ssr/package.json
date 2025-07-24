@@ -9,6 +9,21 @@
     "build": "wireit",
     "preview": "wireit"
   },
+  "dependencies": {
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "catalog:",
+    "@11ty/eleventy-plugin-vite": "catalog:",
+    "@lit-labs/eleventy-plugin-lit": "catalog:",
+    "@lit-labs/ssr-client": "catalog:",
+    "@internals/tools": "workspace:*",
+    "@internals/metadata": "workspace:*",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
   "wireit": {
     "ci": {
       "dependencies": [
@@ -25,6 +40,11 @@
     "build": {
       "command": "pnpm exec eleventy",
       "files": [
+        "../../internals/metadata/dist/**/*.js",
+        "../../internals/tools/dist/**/*.js",
+        "../../elements/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
         "src",
         "assets",
         "./eleventy.config.js"
@@ -34,9 +54,26 @@
       ],
       "dependencies": [
         "clean",
-        "../../elements:build",
-        "../../internals/metadata:build",
-        "../../internals/tools:build"
+        {
+          "script": "../../internals/metadata:build",
+          "cascade": false
+        },
+        {
+          "script": "../../internals/tools:build",
+          "cascade": false
+        },
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
       ]
     },
     "preview": {
@@ -60,18 +97,5 @@
       "output": [],
       "dependencies": []
     }
-  },
-  "devDependencies": {
-    "@11ty/eleventy": "catalog:",
-    "@11ty/eleventy-plugin-vite": "catalog:",
-    "@lit-labs/eleventy-plugin-lit": "catalog:",
-    "@lit-labs/ssr-client": "catalog:",
-    "@nvidia-elements/core": "workspace:*",
-    "@internals/tools": "workspace:*",
-    "@internals/metadata": "workspace:*",
-    "@nvidia-elements/styles": "workspace:*",
-    "@nvidia-elements/themes": "workspace:*",
-    "typescript": "catalog:",
-    "vite": "catalog:"
   }
 }

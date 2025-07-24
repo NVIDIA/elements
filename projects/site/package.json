@@ -47,6 +47,24 @@
     "build": {
       "command": "pnpm exec eleventy",
       "files": [
+        "../elements/dist/**/*.js",
+        "../elements/dist/**/*.stories.json",
+        "../styles/dist/**/*.css",
+        "../styles/dist/**/*.stories.json",
+        "../themes/dist/**/*.css",
+        "../themes/dist/**/*.stories.json",
+        "../themes/dist/**/*.json",
+        "../labs/code/dist/**/*.js",
+        "../labs/code/dist/**/*.stories.json",
+        "../labs/forms/dist/**/*.js",
+        "../labs/forms/dist/**/*.stories.json",
+        "../monaco/dist/**/*.js",
+        "../monaco/dist/**/*.stories.json",
+        "../internals/metadata/static/**",
+        "../internals/patterns/dist/**/*.js",
+        "../internals/patterns/dist/**/*.stories.json",
+        "../internals/tools/dist/**/*.js",
+        "../internals/tools/dist/**/*.stories.json",
         "src",
         "!src/**/*.test.lighthouse.ts",
         "public",
@@ -58,15 +76,38 @@
       ],
       "dependencies": [
         "clean",
-        "../elements:build",
-        "../styles:build",
-        "../themes:build",
-        "../labs/code:build",
-        "../labs/forms:build",
-        "../monaco:build",
-        "../internals/metadata:build",
-        "../internals/patterns:build",
-        "../internals/tools:build"
+        {
+          "script": "../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../themes:build",
+          "cascade": false
+        },
+        {
+          "script": "../labs/code:build",
+          "cascade": false
+        },
+        {
+          "script": "../monaco:build",
+          "cascade": false
+        },
+        {
+          "script": "../internals/metadata:build",
+          "cascade": false
+        },
+        {
+          "script": "../internals/patterns:build",
+          "cascade": false
+        },
+        {
+          "script": "../internals/tools:build",
+          "cascade": false
+        }
       ],
       "env": {
         "PAGES_BASE_URL": {

@@ -35,15 +35,29 @@
     },
     "build": {
       "command": "vite build",
-      "dependencies": [
-        "../../elements:build"
+      "files": [
+        "../../elements/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
+        "src/**",
+        "package.json"
       ],
       "output": [
         ".next/**"
       ],
-      "files": [
-        "src/**",
-        "package.json"
+      "dependencies": [
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
       ]
     },
     "preview": {

@@ -1,24 +1,31 @@
 // @ts-check
 
+import { ExampleService } from '@internals/tools/example';
 import { MetadataService } from '@internals/metadata';
 
 const metadata = await MetadataService.getMetadata();
+const elements = metadata.projects['@nvidia-elements/core'].elements;
 
-const stories = metadata.projects['@nvidia-elements/core'].elements
-  .filter(e => !e.name.includes('nve-page-loader') && !e.name.includes('nve-app-header'))
-  .filter(e => e.stories?.items?.find(s => s.id.includes('Default')))
-  .map(e => {
-    const story = e.stories?.items?.find(s => s.id.includes('Default'));
-    let template = story?.template.includes('${') ? '' : story?.template;
-    template = template
-      ?.replaceAll('<label>', '<label slot="label">')
-      ?.replaceAll('<nve-control-message>', '<nve-control-message slot="messages">');
-    return {
-      name: e.name,
-      entrypoint: e.manifest?.metadata?.entrypoint,
-      template
-    };
-  });
+const stories = (await ExampleService.getAll())
+  .filter(
+    story =>
+      story.id.includes('Default') &&
+      !story.element.includes('nve-page-loader') &&
+      !story.element.includes('nve-app-header')
+  )
+  .map(story => {
+    const element = elements.find(e => e.name === story.element && !e.manifest?.deprecated);
+    return element
+      ? {
+          name: story.element,
+          entrypoint: element?.manifest?.metadata?.entrypoint,
+          template: story.template
+            .replaceAll('<label>', '<label slot="label">')
+            .replaceAll('<nve-control-message>', '<nve-control-message slot="messages">')
+        }
+      : null;
+  })
+  .filter(story => story !== null);
 
 export const data = {
   title: 'Eleventy + Elements + Lit SSR'
