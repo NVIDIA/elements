@@ -52,11 +52,11 @@ export const HideResponsive = {
 export const FlexDirectionResponsive = {
   render: () => html`
     <section nve-layout="column &md|row gap:lg">
-      <nve-card></nve-card>
-      <nve-card></nve-card>
-      <nve-card></nve-card>
-      <nve-card></nve-card>
-      <nve-card></nve-card>
+      <nve-logo size="lg" color="green-mint">1</nve-logo>
+      <nve-logo size="lg" color="green-mint">2</nve-logo>
+      <nve-logo size="lg" color="green-mint">3</nve-logo>
+      <nve-logo size="lg" color="green-mint">4</nve-logo>
+      <nve-logo size="lg" color="green-mint">5</nve-logo>
     </section>
   `
 }
@@ -64,15 +64,15 @@ export const FlexDirectionResponsive = {
 export const FlexDirectionReverse = {
   render: () => html`
     <style>
-      nve-logo.reversible {
-        --width: 250px;
-        --height: 250px;
+      nve-logo.large {
+        --width: 200px;
+        --height: 200px;
       }
     </style>
 
-    <section nve-layout="column column-reverse &lg|row gap:xxl">
-      <nve-logo class="reversible" color="green-mint">A</nve-logo>
-      <nve-logo class="reversible" color="green-mint">B</nve-logo>
+    <section nve-layout="column column-reverse &lg|row gap:lg">
+      <nve-logo class="large" color="green-mint">A</nve-logo>
+      <nve-logo class="large" color="green-mint">B</nve-logo>
     </section>
   `
 }
