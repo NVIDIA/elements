@@ -10,6 +10,7 @@ import '@nvidia-elements/core/copy-button/define.js';
 import '@nvidia-elements/monaco/input/define.js';
 import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/define.js';
+import { PlaygroundService } from '@nve-internals/tools/playground';
 
 import styles from './canvas-editable.css?inline';
 
@@ -66,7 +67,7 @@ export class CanvasEditable extends LitElement {
               : html`<nve-codeblock language="html" .code=${this.editableSource}></nve-codeblock>`
           }
           <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.editableSource}></nve-copy-button>
-          <!-- <nve-button>View in Playground</nve-button> -->
+          <nve-button @click=${this.#handlePlaygroundClick}>View in Playground</nve-button>
         </div>
         
         <div class="toolbar" .hidden=${!this.readonly}>
@@ -141,6 +142,14 @@ export class CanvasEditable extends LitElement {
   #handleChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.editableSource = input.value;
+  }
+
+  async #handlePlaygroundClick() {
+    const playgroundUrl = await PlaygroundService.create({ html: this.editableSource });
+
+    globalThis.open(playgroundUrl, '_blank');
+
+    this.#sendAnalyticsEvent('elements-docs-source-playground');
   }
 
   #sendAnalyticsEvent(eventName: string) {
