@@ -92,19 +92,33 @@
     },
     "build": {
       "command": "tsc && vite build --config=vite.config.ts",
-      "dependencies": [
-        "../../elements:build",
-        "../../testing:ci"
-      ],
-      "output": [
-        "dist/**"
-      ],
       "files": [
+        "../../elements/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
         "src/**",
         "!src/**/*.stories.ts",
         "package.json",
         "tsconfig.json",
         "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../../testing:ci",
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
       ]
     },
     "build:watch": {

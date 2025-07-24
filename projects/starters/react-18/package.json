@@ -49,15 +49,34 @@
     },
     "build": {
       "command": "vite build",
-      "dependencies": [
-        "../../elements-react:build"
-      ],
-      "output": [
-        ".next/**"
-      ],
       "files": [
+        "../../elements/dist/**/*.js",
+        "../../elements-react/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
         "src/**",
         "package.json"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        {
+          "script": "../../elements-react:build",
+          "cascade": false
+        },
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
       ]
     },
     "preview": {
