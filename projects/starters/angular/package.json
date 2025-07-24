@@ -28,6 +28,9 @@
     "build": {
       "command": "ng build --base-href ${PAGES_BASE_URL}starters/angular/",
       "files": [
+        "../../elements/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
         "src/**",
         "angular.json",
         "tsconfig.json",
@@ -38,7 +41,18 @@
         "dist/**"
       ],
       "dependencies": [
-        "../../elements:build"
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
       ],
       "env": {
         "PAGES_BASE_URL": {

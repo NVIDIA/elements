@@ -54,6 +54,7 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
+        "../../internals/tools/dist/**/*.js",
         "src/**",
         "!src/**/*.test.ts",
         "package.json",
@@ -65,7 +66,11 @@
         "dist/**"
       ],
       "dependencies": [
-        "../../internals/vite:ci"
+        "../../internals/vite:ci",
+        {
+          "script": "../../internals/tools:build",
+          "cascade": false
+        }
       ]
     },
     "build:watch": {

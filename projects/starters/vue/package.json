@@ -8,39 +8,6 @@
     "dev": "wireit",
     "preview": "wireit"
   },
-  "wireit": {
-    "ci": {
-      "dependencies": [
-        "build"
-      ]
-    },
-    "dev": {
-      "command": "vite",
-      "service": true
-    },
-    "build": {
-      "command": "vue-tsc --build --force && vite build",
-      "files": [
-        "src/**",
-        "public/**",
-        "vite.config.ts",
-        "teconfig.json"
-      ],
-      "output": [
-        "./dist/**"
-      ],
-      "dependencies": [
-        "../../elements:build"
-      ]
-    },
-    "preview": {
-      "command": "vite preview",
-      "service": true,
-      "dependencies": [
-        "build"
-      ]
-    }
-  },
   "dependencies": {
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
@@ -54,5 +21,52 @@
     "typescript": "catalog:",
     "vite": "catalog:",
     "vue-tsc": "3.0.1"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "dev": {
+      "command": "vite",
+      "service": true
+    },
+    "build": {
+      "command": "vue-tsc --build --force && vite build",
+      "files": [
+        "../../elements/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
+        "src/**",
+        "public/**",
+        "vite.config.ts",
+        "tsconfig.json"
+      ],
+      "output": [
+        "./dist/**"
+      ],
+      "dependencies": [
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
+      ]
+    },
+    "preview": {
+      "command": "vite preview",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    }
   }
 }
