@@ -6,13 +6,22 @@
 ---
 
 <style>
-  nve-card {
-    min-height: 60px !important;
-    min-width: 60px !important;
+  nvd-canvas {
+    --padding: none;
+
+    section {
+      min-height: 220px !important;
+    }
+
+    nve-card {
+      --background: var(--nve-sys-layer-overlay-background);
+      min-height: 60px;
+      min-width: 60px;
+    }
   }
 </style>
 
-# Layout
+# {{title}}
 
 Grid, horizontal and vertical based layouts can be achieved with _little to no CSS_ using the `nve-layout` attribute. Layouts support `column`, `row` and `grid` based layouts as well as `align` and `gap` adjustments.
 
@@ -58,10 +67,6 @@ The following "t-shirt" spacing values are available:
 - `gap:xxl`
 - `gap:xxxl`
 
-### No Gap
-
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapNone' %}
-
 ### Gap xxxs
 
 {% story '@nvidia-elements/styles/layout.stories.json', 'GapXxxs' %}
@@ -97,6 +102,10 @@ The following "t-shirt" spacing values are available:
 ### Gap xxxl
 
 {% story '@nvidia-elements/styles/layout.stories.json', 'GapXxxl' %}
+
+### No Gap
+
+{% story '@nvidia-elements/styles/layout.stories.json', 'GapNone' %}
 
 ## Layout Padding
 
@@ -161,10 +170,6 @@ Or alternatively use the short hand to just pad the x and y axes.
 
 {% story '@nvidia-elements/styles/layout.stories.json', 'PadY' %}
 
-### No Padding
-
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadNone' %}
-
 ### Padding xxxs
 
 {% story '@nvidia-elements/styles/layout.stories.json', 'PadXxxs' %}
@@ -200,6 +205,10 @@ Or alternatively use the short hand to just pad the x and y axes.
 ### Padding xxxl
 
 {% story '@nvidia-elements/styles/layout.stories.json', 'PadXxxl' %}
+
+### No Padding
+
+{% story '@nvidia-elements/styles/layout.stories.json', 'PadNone' %}
 
 ## Full width/height on container
 
