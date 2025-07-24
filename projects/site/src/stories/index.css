@@ -38,14 +38,15 @@ body:has(nve-page) #story-container {
   display: contents;
 }
 
-[data-element^='layout'] {
+[data-element^='layout responsive'] {
   & > [nve-layout] {
     height: 100%;
     width: 100%;
   }
 
   nve-card {
-    min-width: 60px;
-    min-height: 60px;
+    min-width: 120px;
+    min-height: 120px;
+    --background: oklab(0.3344 -0.0439437 0.00222608);
   }
 }
