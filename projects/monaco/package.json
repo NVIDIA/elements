@@ -207,8 +207,11 @@
     "build": {
       "command": "playwright-lock 'vite build'",
       "files": [
-        "../elements/dist/**/*.js",
+        "../elements/dist/internal/utils/dom.js",
+        "../elements/dist/internal/styles/**",
+        "!../elements/dist/**/*.stories.js",
         "../labs/forms/dist/**/*.js",
+        "!../labs/forms/dist/**/*.stories.js",
         "../themes/dist/**/*.css",
         "src/**",
         "!src/**/*.test.ts",
@@ -296,6 +299,7 @@
       "command": "playwright-lock 'vitest run'",
       "files": [
         "dist/**/*.js",
+        "!dist/**/*.stories.js",
         "src/**/*.test.ts",
         "!src/**/__screenshots__/**",
         "tsconfig.json",
@@ -314,6 +318,8 @@
     "test:coverage": {
       "command": "playwright-lock 'vitest run --coverage'",
       "files": [
+        "dist/**/*.js",
+        "!dist/**/*.stories.js",
         "src/**/*.test.ts",
         "!src/**/__screenshots__/**",
         "tsconfig.json",
@@ -323,7 +329,10 @@
       "dependencies": [
         "../testing:ci",
         "../internals/vite:ci",
-        "build"
+        {
+          "script": "build",
+          "cascade": false
+        }
       ]
     },
     "test:watch": {
@@ -333,6 +342,8 @@
     "test:lighthouse": {
       "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
       "files": [
+        "dist/**/*.js",
+        "!dist/**/*.stories.js",
         "src/index.test.lighthouse.ts",
         "src/**/*.test.lighthouse.ts",
         "vitest.lighthouse.html",
@@ -342,8 +353,11 @@
         ".lighthouse"
       ],
       "dependencies": [
-        "build",
-        "../internals/vite:ci"
+        "../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ],
       "env": {
         "NODE_ENV": "production"
@@ -353,6 +367,7 @@
       "command": "playwright-lock 'vitest run --config=vitest.axe.ts'",
       "files": [
         "dist/**/*.js",
+        "!dist/**/*.stories.js",
         "src/**/*.test.axe.ts",
         "tsconfig.json",
         "vitest.axe.ts"
@@ -376,6 +391,7 @@
       "clean": false,
       "files": [
         "dist/**/*.js",
+        "!dist/**/*.stories.js",
         "src/index.test.visual.ts",
         "src/**/*.test.visual.ts",
         "vitest.visual.html",

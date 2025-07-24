@@ -89,9 +89,13 @@ async function getAllFilePaths(dir) {
   return paths;
 }
 
-const files = await getAllFilePaths('./dist');
+if (process.env.CI === 'true' || process.env.LOCAL_PREVIEW === 'true') {
+  console.log('Starting compression...');
+  const files = await getAllFilePaths('./dist');
 
-console.log('Starting compression...');
-Promise.all(files.map(path => compressFile(path)))
-  .then(() => console.log(`Compressed files: ${count}\nCompression complete!`))
-  .catch(error => console.error('Compression failed:', error));
+  Promise.all(files.map(path => compressFile(path)))
+    .then(() => console.log(`Compressed files: ${count}\nCompression complete!`))
+    .catch(error => console.error('Compression failed:', error));
+} else {
+  console.log('Local build, skipping deployment compression');
+}
