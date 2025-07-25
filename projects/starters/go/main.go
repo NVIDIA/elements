@@ -19,16 +19,12 @@ type PageData struct {
 }
 
 func main() {
-	// serve the elements js/css bundles from the node_modules directory
-	fs := http.FileServer(http.Dir("node_modules/@nve"))
-	http.Handle("/node_modules/@nvidia-elements/", http.StripPrefix("/node_modules/@nvidia-elements/", fs))
-
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		renderPage(w, Page[PageData]{
 			Template: "src/index.html",
 			Data: PageData{
-				Title:       "Hello from Elements + Go!",
-				Description: "This is a simple example of using Elements + Go to create a web page.",
+				Title:       "Go",
+				Description: "A simple starter using Elements and Go.",
 				Date:        time.Now().Format("02-01-2006 15:04:05"),
 			},
 		})
