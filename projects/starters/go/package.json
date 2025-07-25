@@ -8,11 +8,6 @@
     "build": "go build -o bin main.go",
     "preview": "go build -o bin main.go && ./bin"
   },
-  "dependencies": {
-    "@nvidia-elements/core": "workspace:*",
-    "@nvidia-elements/styles": "workspace:*",
-    "@nvidia-elements/themes": "workspace:*"
-  },
   "wireit": {
     "ci": {
       "dependencies": [
