@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="A simple starter using Elements and TypeScript." />
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="/node_modules/@nvidia-elements/core/dist/bundles/index.css" />
+    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/core/dist/bundles/index.css" /> <!-- will be replaced by CDN when available-->
     <script type="module">
-      import '/node_modules/@nvidia-elements/core/dist/bundles/index.js';
+      import 'https://https://esm.sh/@nvidia-elements/core/dist/bundles/index.js'; // will be replaced by CDN when available
     </script>
   </head>
   <body nve-text="body">
@@ -42,9 +42,10 @@
       <main nve-layout="column gap:lg pad:lg">
         <div nve-layout="row gap:sm align:vertical-center">
           <img src="https://NVIDIA.github.io/elements/static/images/integrations/go.svg" width="36px" height="36px" alt="go logo">
-          <h1 nve-text="heading xl">Go</h1>
+          <h1 nve-text="heading xl">{{.Data.Title}}</h1>
         </div>
-        <p nve-text="body">A simple starter using Elements and Go.</p>
+        <p nve-text="body">{{.Data.Description}}</p>
+        <p nve-text="body sm muted">Last updated: {{.Data.Date}}</p>
         <div nve-layout="row gap:xs">
           <a nve-text="body sm" target="_blank" href="https://NVIDIA.github.io/elements/docs/integrations/go/">Documentation</a>
           <a nve-text="body sm" target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/go">Source</a>
