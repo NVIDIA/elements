@@ -38,7 +38,7 @@ body:has(nve-page) #story-container {
   display: contents;
 }
 
-[data-element^='layout responsive'] {
+[data-element*='Responsive'] {
   & > [nve-layout] {
     height: 100%;
     width: 100%;
@@ -48,5 +48,11 @@ body:has(nve-page) #story-container {
     min-width: 120px;
     min-height: 120px;
     --background: oklab(0.3344 -0.0439437 0.00222608);
+  }
+
+  &[data-element*='Viewport'] {
+    nve-card {
+      --background: oklab(0.2868 -0.0197945 -0.0574875);
+    }
   }
 }

@@ -1,8 +1,8 @@
 ---
 {
-  title: 'Responsive Layout',
+  title: 'Responsive Layout - Container',
   layout: 'docs.11ty.js',
-  permalink: 'docs/internal/layout-responsive/index.html',
+  permalink: 'docs/internal/layout/responsive/container/index.html',
 }
 ---
 
@@ -14,7 +14,7 @@ Fluid page layouts are achieved through the [abstracted CSS flexbox and grid API
 
 By optionally importing the responsive layout module, this system is extended using [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) for adaptive responsive design based on the container element's width rather than just the browser width.
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about container queries in this Google <a href="https://web.dev/articles/new-responsive#using_container_queries_today" target="_blank" nve-text="link">web.dev</a> video and article.</nve-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about container queries in this Google <a href="https://web.dev/articles/new-responsive#responsive_to_the_container" target="_blank" nve-text="link">web.dev</a> video and article.</nve-alert>
 
 The responsive layout API applies conditional styling based on parent element width. Supported features include `gap`, `padding`, `row vs column`, `reversing` flex direction, varying `grid` structure and `hiding / showing` content across defined pixel width breakpoints.
 

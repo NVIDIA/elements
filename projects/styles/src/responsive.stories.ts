@@ -102,3 +102,98 @@ export const ResponsiveGridItems = {
     </section>
   `
 }
+
+// Responsive Layout - Viewport (@media query based)
+export const ViewportGapResponsive = {
+  render: () => html`
+    <section nve-layout="row align:center @sm|gap:xs @md|gap:xl @lg|gap:xxl @xl|gap:xxxl">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+    </section>
+  `
+}
+
+export const ViewportPadResponsive = {
+  render: () => html`
+    <section nve-layout="row @sm|pad:xs @md|pad:lg @xl|pad:xxxl">
+      <nve-card nve-layout="full"></nve-card>
+    </section>
+  `
+}
+
+export const ViewportHideResponsive = {
+  render: () => html`
+    <section nve-layout="row gap:lg">
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="hide @sm|show">1</nve-logo>
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="hide @sm|show">2</nve-logo>
+
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="hide @md|show">3</nve-logo>
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="hide @md|show">4</nve-logo>
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="hide @md|show">5</nve-logo>
+
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="hide @lg|show">6</nve-logo>
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="hide @lg|show">7</nve-logo>
+
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="hide @xl|show">8</nve-logo>
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="hide @xl|show">9</nve-logo>
+
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="hide @xxl|show">10</nve-logo>
+      <nve-logo size="lg" color="blue-cobalt" nve-layout="@sm|hide @xxl|show">11</nve-logo>
+    </section>
+  `
+}
+
+export const ViewportFlexDirectionResponsive = {
+  render: () => html`
+    <section nve-layout="column @md|row gap:lg">
+      <nve-logo size="lg" color="blue-cobalt">1</nve-logo>
+      <nve-logo size="lg" color="blue-cobalt">2</nve-logo>
+      <nve-logo size="lg" color="blue-cobalt">3</nve-logo>
+      <nve-logo size="lg" color="blue-cobalt">4</nve-logo>
+      <nve-logo size="lg" color="blue-cobalt">5</nve-logo>
+    </section>
+  `
+}
+
+export const ViewportFlexDirectionReverse = {
+  render: () => html`
+    <style>
+      nve-logo.large {
+        --width: 200px;
+        --height: 200px;
+      }
+    </style>
+
+    <section nve-layout="column column-reverse @lg|row gap:lg">
+      <nve-logo class="large" color="blue-cobalt">A</nve-logo>
+      <nve-logo class="large" color="blue-cobalt">B</nve-logo>
+    </section>
+  `
+}
+
+export const ViewportResponsiveGrid = {
+  render: () => html`
+    <section nve-layout="grid gap:md span-items:12 @sm|span-items:6 @md|span-items:4 @lg|span-items:3">
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+      <nve-card></nve-card>
+    </section>
+  `
+}
+
+export const ViewportResponsiveGridItems = {
+  render: () => html`        
+    <section nve-layout="grid gap:md">
+      <nve-card nve-layout="span-items:12 @sm|span:4 @md|span:6 @lg|span:8"></nve-card>
+      <nve-card nve-layout="span-items:12 @sm|span:8 @md|span:6 @lg|span:4"></nve-card>
+      <nve-card nve-layout="span-items:12 @sm|span:8 @md|span:6 @lg|span:4"></nve-card>
+      <nve-card nve-layout="span-items:12 @sm|span:4 @md|span:6 @lg|span:8"></nve-card>
+    </section>
+  `
+}
