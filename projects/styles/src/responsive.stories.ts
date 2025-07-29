@@ -2,6 +2,7 @@
 import { html } from 'lit';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/logo/define.js';
+import '@nvidia-elements/core/page/define.js';
 
 export default {
   title: 'Internal/Layout/Responsive',
@@ -195,5 +196,75 @@ export const ViewportResponsiveGridItems = {
       <nve-card nve-layout="span-items:12 @sm|span:8 @md|span:6 @lg|span:4"></nve-card>
       <nve-card nve-layout="span-items:12 @sm|span:4 @md|span:6 @lg|span:8"></nve-card>
     </section>
+  `
+}
+
+export const ResponsiveCombined = {
+  render: () => html`        
+    <nve-page>
+      <main nve-layout="column gap:lg pad:xs @lg|pad:xxl">
+        <section nve-layout="grid gap:md span-items:12 @sm|span-items:6 @lg|span-items:4">
+          <nve-card>
+            <nve-card-header>
+              <h3 nve-text="heading lg">Responsive Card Example</h3>
+            </nve-card-header>
+            <nve-card-content>
+              <nve-logo size="lg" nve-layout="hide &sm|show"></nve-logo>
+              <p>This card demonstrates combining container and viewport queries.</p>
+            </nve-card-content>
+          </nve-card>
+
+          <nve-card>
+            <nve-card-header>
+              <h3 nve-text="heading lg">Responsive Card Example</h3>
+            </nve-card-header>
+            <nve-card-content>
+              <nve-logo size="lg" nve-layout="hide &sm|show"></nve-logo>
+              <p>This card demonstrates combining container and viewport queries.</p>
+            </nve-card-content>
+          </nve-card>
+
+          <nve-card>
+            <nve-card-header>
+              <h3 nve-text="heading lg">Responsive Card Example</h3>
+            </nve-card-header>
+            <nve-card-content>
+              <nve-logo size="lg" nve-layout="hide &sm|show"></nve-logo>
+              <p>This card demonstrates combining container and viewport queries.</p>
+            </nve-card-content>
+          </nve-card>
+
+          <nve-card>
+            <nve-card-header>
+              <h3 nve-text="heading lg">Responsive Card Example</h3>
+            </nve-card-header>
+            <nve-card-content>
+              <nve-logo size="lg" nve-layout="hide &sm|show"></nve-logo>
+              <p>This card demonstrates combining container and viewport queries.</p>
+            </nve-card-content>
+          </nve-card>
+
+          <nve-card>
+            <nve-card-header>
+              <h3 nve-text="heading lg">Responsive Card Example</h3>
+            </nve-card-header>
+            <nve-card-content>
+              <nve-logo size="lg" nve-layout="hide &sm|show"></nve-logo>
+              <p>This card demonstrates combining container and viewport queries.</p>
+            </nve-card-content>
+          </nve-card>
+          
+          <nve-card>
+            <nve-card-header>
+              <h3 nve-text="heading lg">Responsive Card Example</h3>
+            </nve-card-header>
+            <nve-card-content>
+              <nve-logo size="lg" nve-layout="hide &sm|show"></nve-logo>
+              <p>This card demonstrates combining container and viewport queries.</p>
+            </nve-card-content>
+          </nve-card>
+        </section>
+      </main>
+    </nve-page>
   `
 }
