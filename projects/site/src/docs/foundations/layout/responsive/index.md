@@ -8,11 +8,13 @@
 
 # {{title}}
 
-<nve-alert status="danger">This responsive layout module is marked _**Pre-Release**_ and is not yet ready for consumer adoption, its API is subject to breaking changes.</nve-alert>
+<nve-alert status="danger">Responsive layout modules are marked _**Pre-Release**_ and are not yet ready for consumer adoption - API is subject to breaking changes.</nve-alert>
 
 Fluid page layouts are achieved through the [abstracted CSS flexbox and grid APIs](docs/foundations/layout/), allowing pages built with Elements `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
 
 The layout system can be extended with responsive capabilities using two different approaches: **Container Queries** and **Viewport Queries**. Both systems allow you to create adaptive layouts that respond to different screen sizes, but they work in fundamentally different ways.
+
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about container queries in this <a href="https://web.dev/articles/new-responsive" target="_blank" nve-text="link">Google web.dev article</a> and media queries in <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media" target="_blank" nve-text="link">MDN documentation</a>.</nve-alert>
 
 ## Container Queries (`&` prefix)
 
@@ -33,6 +35,7 @@ Container queries respond to the **width of the parent container**, making them 
 - **Component-aware**: Elements respond to their actual available space
 - **Reusable**: Same component works in different contexts (sidebar, main content, etc.)
 - **Future-proof**: Modern CSS approach for intrinsic web design
+- **Broad support**: Works in all modern browsers as of summer 2025
 - **Flexible**: More granular breakpoints (xs: 160px to xxxl: 1200px)
 
 **Cons:**
@@ -90,6 +93,8 @@ Viewport queries respond to the **browser window width**, providing traditional 
 
 You can use both systems together for maximum flexibility:
 
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about combining container and media queries in this Google <a href="https://web.dev/articles/new-responsive#mixing_container_queries_with_media_queries" target="_blank" nve-text="link">web.dev</a> video and article.</nve-alert>
+
 ```html
 <!-- Viewport-based overall layout, container-based component layout -->
 <nve-page>
@@ -132,5 +137,3 @@ Both responsive layout systems support conditional styling across defined pixel 
 - **Direction reversal**: `row-reverse` and `column-reverse` options
 - **Grid structure**: Varying grid column spans and layouts
 - **Visibility control**: Hide and show elements based on breakpoints
-
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about container queries in this <a href="https://web.dev/articles/new-responsive" target="_blank" nve-text="link">Google web.dev article</a> and media queries in <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media" target="_blank" nve-text="link">MDN documentation</a>.</nve-alert>

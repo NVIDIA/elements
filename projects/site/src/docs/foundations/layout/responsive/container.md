@@ -10,9 +10,7 @@
 
 <nve-alert status="danger">This responsive layout module is marked _**Pre-Release**_ and is not yet ready for consumer adoption, its API is subject to breaking changes.</nve-alert>
 
-Fluid page layouts are achieved through the [abstracted CSS flexbox and grid APIs](docs/foundations/layout/), allowing pages built with Elements `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
-
-By optionally importing the responsive layout module, this system is extended using [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) for adaptive responsive design based on the container element's width rather than just the browser width.
+By optionally importing the responsive container layout module, the `nve-layout` system is extended using [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) for adaptive responsive design based on the container element's width rather than just the browser width.
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about container queries in this Google <a href="https://web.dev/articles/new-responsive#responsive_to_the_container" target="_blank" nve-text="link">web.dev</a> video and article.</nve-alert>
 
@@ -130,14 +128,16 @@ The following container query breakpoints are available for swapping flex direct
 - `&xxl|column`
 - `&xxxl|column`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionResponsive', '{ "inline": false, "resizable": true, "height": "360px" }' %}
+
+### Reverse Direction
 
 In addition to the above, you can also use the following syntax for flipping the flex direction:
 
 - `&...|row-reverse`
 - `&...|column-reverse`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionReverse', '{ "inline": false, "resizable": true, "height": "420px" }' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionReverse', '{ "inline": false, "resizable": true, "height": "425px" }' %}
 
 ## Responsive Grid
 
