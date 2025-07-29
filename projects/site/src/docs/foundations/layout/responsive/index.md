@@ -92,15 +92,35 @@ You can use both systems together for maximum flexibility:
 
 ```html
 <!-- Viewport-based overall layout, container-based component layout -->
-<main nve-layout="column @lg|row gap:lg">
-  <aside nve-layout="&md|column gap:sm">
-    <!-- Sidebar content adapts to sidebar width -->
-  </aside>
-  <section nve-layout="&lg|row gap:md">
-    <!-- Main content adapts to main area width -->
-  </section>
-</main>
+<nve-page>
+  <main nve-layout="column gap:lg pad:xs @lg|pad:xxl">
+    <section nve-layout="grid gap:md span-items:12 @sm|span-items:6 @lg|span-items:4">
+      <nve-card>
+        <nve-card-header>
+          <h3 nve-text="heading lg">Responsive Card Example</h3>
+        </nve-card-header>
+        <nve-card-content>
+          <nve-logo size="lg" nve-layout="hide &sm|show"></nve-logo>
+          <p>This card demonstrates combining container and viewport queries.</p>
+        </nve-card-content>
+      </nve-card>
+
+      <nve-card>
+        <nve-card-header>
+          <h3 nve-text="heading lg">Responsive Card Example</h3>
+        </nve-card-header>
+        <nve-card-content>
+          <nve-logo size="lg" nve-layout="hide &sm|show"></nve-logo>
+          <p>This card demonstrates combining container and viewport queries.</p>
+        </nve-card-content>
+      </nve-card>
+
+      <!-- Repeats... -->
+  </main>
+</nve-page>
 ```
+
+{% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveCombined', '{ "inline": false, "resizable": true, "height": "650px" }' %}
 
 ## Supported Features
 
