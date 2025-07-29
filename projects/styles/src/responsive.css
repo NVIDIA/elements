@@ -3,6 +3,11 @@
   container-type: inline-size;
 }
 
+/* This is to ensure the nve-layout element fills the parent container's width */
+[nve-layout*='&'] {
+  width: 100%;
+}
+
 [nve-layout] {
   &[nve-layout~='hide'] {
     display: none;
