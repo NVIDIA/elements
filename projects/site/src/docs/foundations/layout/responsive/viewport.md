@@ -10,9 +10,7 @@
 
 <nve-alert status="danger">This responsive layout module is marked _**Pre-Release**_ and is not yet ready for consumer adoption, its API is subject to breaking changes.</nve-alert>
 
-Fluid page layouts are achieved through the [abstracted CSS flexbox and grid APIs](docs/foundations/layout/), allowing pages built with Elements `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
-
-By optionally importing the responsive layout module, this system is extended using [CSS Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@media) for adaptive responsive design based on the browser viewport width rather than the container element's width.
+By optionally importing the responsive viewport layout module, the `nve-layout` this system is extended using [CSS Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@media) for adaptive responsive design based on the browser viewport width rather than the container element's width.
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about media queries in this Mozilla <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media" target="_blank" nve-text="link">MDN</a> documentation.</nve-alert>
 
@@ -41,7 +39,7 @@ Conditional gap sizing example: `nve-layout="row @sm|gap:xxxs @md|gap:md @lg|gap
 ```
 
 <nve-alert status="accent">
-  Note that viewport-based responsive layout responds to the browser window size, not the container size. Use [Container Queries](docs/foundations/layout/responsive/container/) if you need container-aware responsive behavior.
+  Note that viewport-based responsive layout responds to the browser window size, not the container size. Use <a href="docs/internal/layout/responsive/container/" nve-text="link">Container Queries</a> if you need container-aware responsive behavior.
 </nve-alert>
 
 ## Responsive Gap Sizing
@@ -114,14 +112,16 @@ The following media query breakpoints are available for swapping flex direction:
 - `@xl|column`
 - `@xxl|column`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportFlexDirectionResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportFlexDirectionResponsive', '{ "inline": false, "resizable": true, "height": "360px" }' %}
+
+### Reverse Direction
 
 In addition to the above, you can also use the following syntax for flipping the flex direction:
 
 - `@...|row-reverse`
 - `@...|column-reverse`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportFlexDirectionReverse', '{ "inline": false, "resizable": true, "height": "420px" }' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportFlexDirectionReverse', '{ "inline": false, "resizable": true, "height": "425px" }' %}
 
 ## Responsive Grid
 
