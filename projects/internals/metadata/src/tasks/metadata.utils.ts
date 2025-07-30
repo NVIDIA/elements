@@ -252,6 +252,7 @@ export async function getMetadata() {
       '@nvidia-elements/brand': await getProjectMetadata('../../../../labs/brand'),
       '@nvidia-elements/code': await getProjectMetadata('../../../../labs/code'),
       '@nvidia-elements/forms': await getProjectMetadata('../../../../labs/forms'),
+      '@nvidia-elements/markdown': await getProjectMetadata('../../../../labs/markdown'),
       '@nvidia-elements/playwright-screencast': await getProjectMetadata('../../../../labs/playwright-screencast'),
       '@nvidia-elements/monaco': await getProjectMetadata('../../../../monaco'),
       '@nve-internals/metadata': await getProjectMetadata('../../../../internals/metadata'),

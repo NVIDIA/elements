@@ -1,0 +1,225 @@
+{
+  "name": "@nvidia-elements/markdown",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "https://NVIDIA.github.io/elements/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git"
+  },
+  "type": "module",
+  "customElements": "custom-elements.json",
+  "contributes": {
+    "html": {
+      "customData": [
+        "./dist/data.html.json"
+      ]
+    },
+    "snippets": [
+      {
+        "language": "html",
+        "path": "./dist/data.snippets.json"
+      }
+    ]
+  },
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./*.stories.json": "./dist/*.stories.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./styles/index.css": "./dist/styles/index.css",
+    "./markdown": {
+      "types": "./dist/markdown/index.d.ts",
+      "default": "./dist/markdown/index.js"
+    },
+    "./markdown/index.js": {
+      "types": "./dist/markdown/index.d.ts",
+      "default": "./dist/markdown/index.js"
+    },
+    "./markdown/define.js": {
+      "types": "./dist/markdown/define.d.ts",
+      "default": "./dist/markdown/define.js"
+    }
+  },
+  "sideEffects": [
+    "./**/define.js"
+  ],
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "build:watch": "wireit",
+    "build:snippets": "wireit",
+    "lint": "wireit",
+    "test": "wireit",
+    "test:coverage": "wireit",
+    "test:watch": "wireit",
+    "test:lighthouse": "wireit"
+  },
+  "dependencies": {
+    "lit": "catalog:",
+    "@nvidia-elements/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/testing": "workspace:*",
+    "@nve-internals/eslint": "workspace:*",
+    "@nve-internals/vite": "workspace:*",
+    "@nvidia-elements/snippets": "workspace:*",
+    "@vitest/browser": "catalog:",
+    "@vitest/coverage-istanbul": "catalog:",
+    "eslint": "catalog:",
+    "publint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  },
+  "wireit": {
+    "dev": {
+      "command": "NODE_ENV=development vite build --watch",
+      "service": true
+    },
+    "ci": {
+      "dependencies": [
+        "build",
+        "lint",
+        "publint",
+        "test:coverage"
+      ]
+    },
+    "publint": {
+      "command": "publint",
+      "dependencies": [
+        "build"
+      ],
+      "files": [
+        "package.json"
+      ],
+      "output": []
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build",
+      "files": [
+        "src/**",
+        "!src/**/*.stories.ts",
+        "!src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**",
+        "!dist/data.snippets.json"
+      ],
+      "dependencies": [
+        "build:snippets",
+        "../../elements:build",
+        "../../internals/vite:ci"
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build:snippets": {
+      "command": "@nve-snippets",
+      "files": [
+        "**/*.snippets.html"
+      ],
+      "output": [
+        "dist/data.snippets.json"
+      ]
+    },
+    "test": {
+      "command": "playwright-lock 'vitest run'",
+      "files": [
+        "src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
+        "tsconfig.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "../../elements:test",
+        "../../testing:ci"
+      ]
+    },
+    "test:coverage": {
+      "command": "playwright-lock 'vitest run --coverage'",
+      "files": [
+        "src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
+        "tsconfig.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [
+        "coverage/unit/**"
+      ],
+      "dependencies": [
+        "build",
+        "../../testing:ci"
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    },
+    "test:lighthouse": {
+      "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
+      "files": [
+        "src/index.test.lighthouse.ts",
+        "src/**/*.test.lighthouse.ts",
+        "vitest.lighthouse.html",
+        "vitest.lighthouse.ts"
+      ],
+      "output": [
+        ".lighthouse"
+      ],
+      "dependencies": [
+        "build",
+        "../../internals/vite:ci"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../internals/eslint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix"
+    }
+  }
+}

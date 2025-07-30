@@ -52,6 +52,11 @@ export default [
     changelog: metadata.projects['@nvidia-elements/forms'].changelog
   },
   {
+    title: '@nvidia-elements/markdown',
+    permalink: '/labs-markdown/',
+    changelog: metadata.projects['@nvidia-elements/markdown'].changelog
+  },
+  {
     title: '@nvidia-elements/behaviors-alpine',
     permalink: '/labs-behaviors-alpine/',
     changelog: metadata.projects['@nvidia-elements/behaviors-alpine'].changelog

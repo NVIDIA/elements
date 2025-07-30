@@ -39,6 +39,11 @@ main @nve package scope. Labs projects may be deprecated or removed at any time.
     <nve-grid-cell>Available / In Development</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/markdown" target="_blank"><code nve-text="code">@nvidia-elements/markdown</code></a></nve-grid-cell>
+    <nve-grid-cell>Utilities for rendering Markdown.</nve-grid-cell>
+    <nve-grid-cell>In Development</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/playwright-screencast" target="_blank"><code nve-text="code">@nvidia-elements/playwright-screencast</code></a></nve-grid-cell>
     <nve-grid-cell>A package containing utilities for recording screencasts using Playwright.</nve-grid-cell>
     <nve-grid-cell>In Development</nve-grid-cell>
