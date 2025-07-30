@@ -60,6 +60,7 @@ describe('getPackageNames', () => {
       '@nvidia-elements/core': {},
       '@nvidia-elements/monaco': {},
       '@nvidia-elements/code': {},
+      '@nvidia-elements/markdown': {},
       '@internals/metadata': {}
     }
   } as unknown as MetadataSummary;
@@ -69,6 +70,7 @@ describe('getPackageNames', () => {
       '@nvidia-elements/core',
       '@nvidia-elements/monaco',
       '@nvidia-elements/code',
+      '@nvidia-elements/markdown',
       '@internals/metadata'
     ]);
   });
@@ -79,7 +81,8 @@ describe('searchPackageNames', () => {
     projects: {
       '@nvidia-elements/core': {},
       '@nvidia-elements/monaco': {},
-      '@nvidia-elements/code': {}
+      '@nvidia-elements/code': {},
+      '@nvidia-elements/markdown': {}
     }
   } as unknown as MetadataSummary;
 
@@ -90,6 +93,7 @@ describe('searchPackageNames', () => {
     expect(searchPackageNames('@nvidia-elements/core', metadata)).toEqual(['@nvidia-elements/core']);
     expect(searchPackageNames('@nvidia-elements/monaco', metadata)).toEqual(['@nvidia-elements/monaco']);
     expect(searchPackageNames('@nvidia-elements/code', metadata)).toEqual(['@nvidia-elements/code']);
+    expect(searchPackageNames('@nvidia-elements/markdown', metadata)).toEqual(['@nvidia-elements/markdown']);
     expect(searchPackageNames('elements monaco code', metadata)).toEqual([
       '@nvidia-elements/core',
       '@nvidia-elements/monaco',
@@ -130,6 +134,16 @@ describe('getCoverageSummaries', () => {
             functions: { pct: 100 }
           }
         }
+      },
+      '@nvidia-elements/markdown': {
+        tests: {
+          coverageTotal: {
+            branches: { pct: 100 },
+            lines: { pct: 100 },
+            statements: { pct: 100 },
+            functions: { pct: 100 }
+          }
+        }
       }
     }
   } as unknown as MetadataSummary;
@@ -138,7 +152,8 @@ describe('getCoverageSummaries', () => {
     expect(getCoverageSummaries(metadata)).toEqual({
       '@nvidia-elements/core': { branches: 100, lines: 100, statements: 100, functions: 100, total: 100 },
       '@nvidia-elements/monaco': { branches: 100, lines: 100, statements: 100, functions: 100, total: 100 },
-      '@nvidia-elements/code': { branches: 100, lines: 100, statements: 100, functions: 100, total: 100 }
+      '@nvidia-elements/code': { branches: 100, lines: 100, statements: 100, functions: 100, total: 100 },
+      '@nvidia-elements/markdown': { branches: 100, lines: 100, statements: 100, functions: 100, total: 100 }
     });
   });
 });
