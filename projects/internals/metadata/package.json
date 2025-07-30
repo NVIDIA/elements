@@ -176,6 +176,16 @@
         "../../labs/behaviors-alpine/coverage/visual/junit.xml",
         "../../labs/behaviors-alpine/coverage/ssr/junit.xml",
         "../../labs/behaviors-alpine/coverage/ssr/summary.json",
+        "../../labs/markdown/package.json",
+        "../../labs/markdown/README.md",
+        "../../labs/markdown/CHANGELOG.md",
+        "../../labs/markdown/dist/custom-elements.json",
+        "../../labs/markdown/coverage/unit/coverage-summary.json",
+        "../../labs/markdown/coverage/unit/junit.xml",
+        "../../labs/markdown/coverage/axe/junit.xml",
+        "../../labs/markdown/coverage/visual/junit.xml",
+        "../../labs/markdown/coverage/ssr/junit.xml",
+        "../../labs/markdown/coverage/ssr/summary.json",
         "../../labs/playwright-screencast/package.json",
         "../../labs/playwright-screencast/README.md",
         "../../labs/playwright-screencast/CHANGELOG.md",
@@ -236,6 +246,10 @@
           "cascade": false
         },
         {
+          "script": "../../labs/markdown:ci",
+          "cascade": false
+        },
+        {
           "script": "../../monaco:ci",
           "cascade": false
         },
@@ -266,6 +280,7 @@
         "../../labs/brand/dist/**/*.stories.json",
         "../../labs/code/dist/**/*.stories.json",
         "../../labs/forms/dist/**/*.stories.json",
+        "../../labs/markdown/dist/**/*.stories.json",
         "../../labs/behaviors-alpine/dist/**/*.stories.json",
         "../../labs/playwright-screencast/dist/**/*.stories.json",
         "../../monaco/dist/**/*.stories.json",

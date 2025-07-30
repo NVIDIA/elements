@@ -10,6 +10,7 @@ export interface MetadataSummary {
     '@nvidia-elements/brand': MetadataProject;
     '@nvidia-elements/code': MetadataProject;
     '@nvidia-elements/forms': MetadataProject;
+    '@nvidia-elements/markdown': MetadataProject;
     '@nvidia-elements/playwright-screencast': MetadataProject;
     '@nvidia-elements/monaco': MetadataProject;
     '@internals/metadata': MetadataProject;
