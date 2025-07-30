@@ -15,6 +15,7 @@ export interface LighthouseScores {
   '@nvidia-elements/brand': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/code': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/forms': { [key: string]: LighthouseElementReport };
+  '@nvidia-elements/markdown': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/behaviors-alpine': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/monaco': { [key: string]: LighthouseElementReport };
 }
@@ -60,6 +61,7 @@ export async function generateLighthouseReport(): Promise<LighthouseScores> {
     '@nvidia-elements/behaviors-alpine': await loadLighthouseReport('../../../../labs/behaviors-alpine'),
     '@nvidia-elements/brand': await loadLighthouseReport('../../../../labs/brand'),
     '@nvidia-elements/forms': await loadLighthouseReport('../../../../labs/forms'),
+    '@nvidia-elements/markdown': await loadLighthouseReport('../../../../labs/markdown'),
     '@nvidia-elements/monaco': await loadLighthouseReport('../../../../monaco')
   };
 }
