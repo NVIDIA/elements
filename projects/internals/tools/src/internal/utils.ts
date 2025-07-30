@@ -52,7 +52,16 @@ export function getAvailableElementTags(metadata: MetadataSummary) {
 }
 
 export function getElementImports(html: string, metadata: MetadataSummary, lazy = false) {
-  const IMPORTS = [...metadata.projects['@nvidia-elements/core'].elements, ...metadata.projects['@nvidia-elements/monaco'].elements]
+  if (!metadata.projects['@nvidia-elements/code']?.elements) {
+    console.log(metadata.projects);
+  }
+
+  const IMPORTS = [
+    ...(metadata.projects['@nvidia-elements/core']?.elements ?? []),
+    ...(metadata.projects['@nvidia-elements/monaco']?.elements ?? []),
+    ...(metadata.projects['@nvidia-elements/code']?.elements ?? []),
+    ...(metadata.projects['@nvidia-elements/markdown']?.elements ?? [])
+  ]
     .filter(element => html?.includes(`<${element.name}`))
     .filter(element => element.manifest?.deprecated !== 'true' && element.manifest?.metadata.entrypoint)
     .map(element => {

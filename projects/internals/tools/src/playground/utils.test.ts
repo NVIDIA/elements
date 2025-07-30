@@ -24,6 +24,22 @@ describe('createPlaygroundURL', () => {
         elements: [
           { name: 'nve-monaco', manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco', markdown: ' ### Import ' } } }
         ]
+      },
+      '@nvidia-elements/code': {
+        elements: [
+          {
+            name: 'nve-code',
+            manifest: { metadata: { entrypoint: '@nvidia-elements/code/codeblock', markdown: ' ### Import ' } }
+          }
+        ]
+      },
+      '@nvidia-elements/markdown': {
+        elements: [
+          {
+            name: 'nve-markdown',
+            manifest: { metadata: { entrypoint: '@nvidia-elements/markdown/markdown', markdown: ' ### Import ' } }
+          }
+        ]
       }
     }
   } as unknown as MetadataSummary;

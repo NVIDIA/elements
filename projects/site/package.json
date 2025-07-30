@@ -58,6 +58,8 @@
         "../labs/code/dist/**/*.stories.json",
         "../labs/forms/dist/**/*.js",
         "../labs/forms/dist/**/*.stories.json",
+        "../labs/markdown/dist/**/*.js",
+        "../labs/markdown/dist/**/*.stories.json",
         "../monaco/dist/**/*.js",
         "../monaco/dist/**/*.stories.json",
         "../internals/metadata/static/**",
@@ -90,6 +92,14 @@
         },
         {
           "script": "../labs/code:build",
+          "cascade": false
+        },
+        {
+          "script": "../labs/forms:build",
+          "cascade": false
+        },
+        {
+          "script": "../labs/markdown:build",
           "cascade": false
         },
         {
@@ -186,6 +196,7 @@
     "@nve-internals/vite": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/forms": "workspace:*",
+    "@nvidia-elements/markdown": "workspace:*",
     "@nvidia-elements/playwright-screencast": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",
