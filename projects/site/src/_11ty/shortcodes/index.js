@@ -59,7 +59,11 @@ export async function apiShortcode(tag, type, value) {
  * @param {Object|string} userConfig - Configuration options for the story display
  * @returns {Promise<string>} HTML string containing the embedded story
  */
-export async function storyShortcode(tag, storyName, userConfig = { inline: true, height: '95%', resizable: true }) {
+export async function storyShortcode(
+  tag,
+  storyName,
+  userConfig = { inline: true, height: '95%', resizable: true, editable: false }
+) {
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
   const story = tag.includes('.stories.json')
     ? stories.find(s => s.entrypoint.includes(tag) && s.id === storyName)
@@ -89,7 +93,16 @@ export async function storyShortcode(tag, storyName, userConfig = { inline: true
       : '';
 
   return story
-    ? /* html */ `
+    ? config.editable
+      ? /* html */ `
+<nvd-canvas-editable 
+  id="${tag}_${story.id}"
+  style="--height: ${config.height}"
+  source="${md.utils.escapeHtml(story?.template?.replace(/\n\n/g, '\n') ?? '')}"
+  tag="${story.element || tag}">
+  ${playgroundButton}
+</nvd-canvas-editable>`
+      : /* html */ `
 ${markdown.render(story.description ?? '')}
 <nvd-canvas id="${tag}_${story.id}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
   <template>${md.utils.escapeHtml(story?.template?.replace(/\n\n/g, '\n') ?? '')}</template>

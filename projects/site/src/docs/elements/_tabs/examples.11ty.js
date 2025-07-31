@@ -66,9 +66,9 @@ export function render(data) {
     <h2 nve-text="heading xl mkd">${componentData.title} Examples</h2>
 
     <!-- Triggers element loader -->
-    <template>
-      ${storyTemplates.find(s => s.id === 'Default')?.template}
-    </template>
+     <template>
+      ${stories.filter(story => story.element === componentData.tag).find(s => s.id === 'Default')?.template}
+     </template>
 
     <div nve-layout="row gap:lg align:stretch">
       ${
@@ -87,7 +87,7 @@ export function render(data) {
           : ''
       }
     
-      <nvd-canvas-editable id="cycling-example" source="${storyTemplates[0]?.template || ''}"  tag="${componentData.tag}" show-source></nvd-canvas-editable>
+      <nvd-canvas-editable id="cycling-example" source="${storyTemplates[0]?.template || ''}"  tag="${componentData.tag}" horizontal-layout></nvd-canvas-editable>
     </div>
 
     ${storyTemplates
@@ -95,7 +95,7 @@ export function render(data) {
         (story, index) => /* html */ `
         <div class="story-example">
           <h3 nve-text="heading lg mkd">${story.id.split(/(?=[A-Z])/).join(' ')}</h3>
-          <nvd-canvas-editable source="${story.template}" readonly tag="${componentData.tag}">
+          <nvd-canvas-editable source="${story.template}" tag="${componentData.tag}" readonly>
             <nve-button container="flat" slot="suffix" value="${index}">Edit</nve-button>
           </nvd-canvas-editable>
         </div>
