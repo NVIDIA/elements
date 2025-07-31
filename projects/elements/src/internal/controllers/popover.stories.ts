@@ -172,3 +172,41 @@ export const InvokerCommand = {
     </nve-toggletip>
   `
 };
+
+/**
+ * @description Custom events like many standard DOM events bubble. When listening
+ * to larger DOM trees, check which element dispatched the source event.
+ */
+export const EventBubbling = {
+  render: () => html`
+    <div style="width: 100vw; height: 100vh;">
+      <p id="event-example">event:</p>
+      <nve-button popovertarget="event-example-dialog">open</nve-button>
+
+      <nve-dialog id="event-example-dialog" closable modal (close)="close($event)" (open)="open($event)">
+        <nve-dialog-header>Header</nve-dialog-header>
+        <div>
+          <nve-button popovertarget="event-example-dropdown">show dropdown</nve-button>
+        </div>
+        <nve-dropdown id="event-example-dropdown">
+          dropdown content
+        </nve-dropdown>
+      </nve-dialog>
+    </div>
+
+    <script type="module">
+      const dialog = document.querySelector('#event-example-dialog');
+      const eventLabel = document.querySelector('#event-example');
+
+      // Custom events like many standard DOM events bubble. By listening to
+      // larger DOM trees check which element dispatched the source event
+      dialog.addEventListener('open', e => {
+        eventLabel.innerText = 'open: ' + e.target.localName;
+      });
+
+      dialog.addEventListener('close', e => {
+        eventLabel.innerText = 'close: ' + e.target.localName;
+      });
+    </script>
+  `
+}
