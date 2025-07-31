@@ -12,6 +12,7 @@ import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/define.js';
 import { PlaygroundService } from '@internals/tools/playground';
 
+import responsiveStyles from '@nvidia-elements/styles/responsive.css?raw'; // temporary workaround as latest version of responsive.css is not published yet
 import styles from './canvas-editable.css?inline';
 
 declare global {
@@ -21,10 +22,11 @@ declare global {
 @customElement('nvd-canvas-editable')
 export class CanvasEditable extends LitElement {
   @property({ type: String }) source: string = '';
-  @property({ type: Boolean, attribute: 'show-source' }) private showSource = false;
   @property({ type: Boolean }) readonly: boolean = false;
+  @property({ type: Boolean, attribute: 'horizontal-layout' }) horizontalLayout: boolean = false;
   @property({ type: String }) tag: string = '';
 
+  @state() private showSource = false;
   @state() private editableSource: string = '';
 
   static metadata = {
@@ -47,15 +49,15 @@ export class CanvasEditable extends LitElement {
 
   render() {
     return html`
-      <div internal-host class=${!this.readonly ? 'horizontal-layout' : ''}>
+      <div internal-host class=${this.horizontalLayout ? 'horizontal-layout' : ''}>
         <div class="resizer">
           <div class="preview">
             ${this.readonly && !this.#isPopoverElement(this.tag) ? this.#renderInlinePreview() : this.#renderSandboxedPreview()}
           </div>
-          <div class="preview-backdrop" .hidden=${!this.readonly}></div>
+          <div class="preview-backdrop" .hidden=${this.horizontalLayout}></div>
         </div>
 
-        <div class="code" .hidden=${!this.showSource || !this.source}>
+        <div class="code" .hidden=${!this.horizontalLayout && !this.showSource}>
           ${
             !this.readonly
               ? html`<nve-monaco-input 
@@ -70,7 +72,7 @@ export class CanvasEditable extends LitElement {
           <nve-button @click=${this.#handlePlaygroundClick}>View in Playground</nve-button>
         </div>
         
-        <div class="toolbar" .hidden=${!this.readonly}>
+        <div class="toolbar" .hidden=${this.horizontalLayout}>
           <nve-button container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
           <slot name="suffix"></slot>
         </div>
@@ -92,17 +94,10 @@ export class CanvasEditable extends LitElement {
           <html nve-theme="${globalThis.document.documentElement.getAttribute('nve-theme')}" nve-transition="auto">
             <head>
               <link rel="stylesheet" href="https://https://esm.sh/@nvidia-elements/core@latest/dist/bundles/index.css" />
-              <script async type="module" src="https://https://esm.sh/@nvidia-elements/core@latest/dist/bundles/index.js"></script>
-
               <style>
-                body {
-                  display: flex;
-                  place-items: center;
-                  place-content: center;
-                  height: 100vh;
-                  width: 100vw;
-                }
+                ${responsiveStyles}
               </style>
+              <script async type="module" src="https://https://esm.sh/@nvidia-elements/core@latest/dist/bundles/index.js"></script>
             </head>
             <body>
               ${srcdoc}
