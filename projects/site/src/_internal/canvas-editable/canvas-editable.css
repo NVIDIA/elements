@@ -3,6 +3,7 @@
 
 :host {
   --padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
+  --height: 400px;
   display: block;
   width: 100%;
 }
@@ -59,7 +60,7 @@
 
 .preview iframe {
   width: 100%;
-  min-height: 400px;
+  min-height: var(--height);
   border: none;
 }
 .preview-backdrop {
