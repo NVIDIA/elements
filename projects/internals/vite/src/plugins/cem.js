@@ -23,12 +23,42 @@ export function cem() {
         const hasComponents = manifest.modules.flatMap(module => module.declarations).find(d => d.tagName);
 
         if (hasComponents) {
-          generateVsCodeCustomElementData(manifest, {
+          // deep clone
+          const vsCodeManifest = structuredClone(manifest);
+          vsCodeManifest.modules.forEach(module => {
+            module.declarations
+              .filter(declaration => declaration.tagName)
+              .forEach(declaration => {
+                declaration.attributes = [
+                  ...(declaration.attributes ?? []),
+                  {
+                    name: 'nve-layout',
+                    deprecated: true,
+                    description: '⚠️ nve-layout not supported on custom element tags',
+                    type: {
+                      text: 'disallowed'
+                    }
+                  },
+                  {
+                    name: 'nve-text',
+                    deprecated: true,
+                    description: '⚠️ nve-text not supported on custom element tags',
+                    type: {
+                      text: 'disallowed'
+                    }
+                  }
+                ];
+              });
+          });
+
+          generateVsCodeCustomElementData(vsCodeManifest, {
             outdir: resolve('./dist'),
             htmlFileName: 'data.html.json',
             cssFileName: null,
             referencesTemplate: (_name, tag) => {
-              const declaration = manifest.modules.flatMap(module => module.declarations).find(d => d.tagName === tag);
+              const declaration = vsCodeManifest.modules
+                .flatMap(module => module.declarations)
+                .find(d => d.tagName === tag);
               const references = Object.keys(declaration.metadata ?? {})
                 .map(name => ({ name, url: declaration.metadata[name] }))
                 .filter(ref => ref.url?.includes && ref.url.includes('http'));

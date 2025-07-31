@@ -36,8 +36,17 @@ async function generateGlobalAttributes(files, attributes) {
   );
   const globalAttributes = [];
   for (const [attribute, values] of Object.entries(utilityAttributes)) {
+    let description = '';
+
+    if (attribute === 'nve-layout') {
+      description = 'Layout utility for native HTML elements';
+    } else if (attribute === 'nve-text') {
+      description = 'Typography style utility for native HTML elements';
+    }
+
     globalAttributes.push({
       name: attribute,
+      description,
       values: values.map(value => ({
         name: value
       }))
