@@ -89,6 +89,10 @@ while subsequent presses have no effect. This behavior is for accessibility, pre
 
 {% story '@nvidia-elements/core/internal/controllers/popover.stories.json', 'Nested', '{ "inline": false, "height": "400px" }' %}
 
+## Event Bubbling
+
+{% story '@nvidia-elements/core/internal/controllers/popover.stories.json', 'EventBubbling', '{ "inline": false, "height": "400px" }' %}
+
 ## Shadow Root Anchoring
 
 Native [CSS Anchor Positioning](https://developer.chrome.com/blog/anchor-positioning-api) allows two elements to be tethered together via a unique identifier. This is commonly used for popover-like elements. However CSS Anchor Positioning is limited to only positioning two elements in the same render root. Examples of rendering accross render roots include in different Shadow Dom Roots or popover top layer instances. This behavior/compatibility issue is being tracked https://github.com/w3c/csswg-drafts/issues/9408.
