@@ -24,7 +24,6 @@
     opacity var(--animation-duration),
     transform var(--animation-duration) allow-discrete,
     translate var(--animation-duration) allow-discrete,
-    overlay var(--animation-duration) allow-discrete,
     display var(--animation-duration) allow-discrete;
 }
 
