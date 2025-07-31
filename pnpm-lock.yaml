@@ -560,8 +560,8 @@ importers:
         specifier: 1.5.4
         version: 1.5.4(prettier@3.4.2)
       custom-element-vs-code-integration:
-        specifier: 1.4.1
-        version: 1.4.1(prettier@3.4.2)
+        specifier: 1.5.0
+        version: 1.5.0(prettier@3.4.2)
       glob:
         specifier: 'catalog:'
         version: 11.0.3
@@ -5215,8 +5215,8 @@ packages:
   custom-element-jsx-integration@1.5.4:
     resolution: {integrity: sha512-Qre9talR1Of6J7UhcreL9TPvBrXjrhb52sdqIHmx09WNQkRuv28I6gIQWeb4Uuj137BOJBAcv5gBjPJsBeuEOg==, tarball: https://registry.npmjs.org
 
-  custom-element-vs-code-integration@1.4.1:
-    resolution: {integrity: sha512-aOQpNayEzXHUg7JRo/eIS8aCMiOPLuMwhANj4iFdAz3NnHy5Y0Us7uS/qSeJhYbl+5NddygQvp3is8L0ggxMbQ==, tarball: https://registry.npmjs.org
+  custom-element-vs-code-integration@1.5.0:
+    resolution: {integrity: sha512-dMKlHq7qz1HbNZUXqw/4fVTh8FBLYX/dIQRt9M0M3KX+Z4iXKUzXxCBdNIdLjE18kMiOCZuRLDZly5mBznoCYw==, tarball: https://registry.npmjs.org
 
   custom-elements-manifest@1.0.0:
     resolution: {integrity: sha512-j59k0ExGCKA8T6Mzaq+7axc+KVHwpEphEERU7VZ99260npu/p/9kd+Db+I3cGKxHkM5y6q5gnlXn00mzRQkX2A==, tarball: https://registry.npmjs.org
@@ -14239,7 +14239,7 @@ snapshots:
     transitivePeerDependencies:
       - prettier
 
-  custom-element-vs-code-integration@1.4.1(prettier@3.4.2):
+  custom-element-vs-code-integration@1.5.0(prettier@3.4.2):
     dependencies:
       '@prettier/sync': 0.5.2(prettier@3.4.2)
     transitivePeerDependencies:
