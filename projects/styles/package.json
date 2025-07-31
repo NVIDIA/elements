@@ -95,7 +95,8 @@
         "!src/**/*.test.visual.ts",
         "package.json",
         "vite.config.ts",
-        "postcss.config.cjs"
+        "postcss.config.cjs",
+        "build/metadata.js"
       ],
       "output": [
         "dist/**"
