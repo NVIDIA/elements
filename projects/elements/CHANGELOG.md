@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.2...@nvidia-elements/core-v1.39.3) (2025-07-31)
+
+
+### Bug Fixes
+
+* **elements:** popover animation overlay ([8660dd1](https://github.com/NVIDIA/elements/commit/8660dd15219095b547b4652dbc67c7582b280d3b))
+
 ## [@nvidia-elements/core-v1.39.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.1...@nvidia-elements/core-v1.39.2) (2025-07-23)
 
 
