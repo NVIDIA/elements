@@ -125,7 +125,7 @@ You can use both systems together for maximum flexibility:
 </nve-page>
 ```
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveCombined', '{ "inline": false, "resizable": true, "height": "650px" }' %}
+{% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveCombined', '{ "editable": true, "height": "650px" }' %}
 
 ## Supported Features
 

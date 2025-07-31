@@ -1,4 +1,6 @@
 import '/_internal/canvas/canvas.js';
+import '/_internal/canvas-editable/canvas-editable.js';
+
 void import('/_internal/search/search.js');
 
 // panel toggles
