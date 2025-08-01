@@ -30,11 +30,10 @@ The following set of container `breakpoint-values` are defined as:
 - `lg = 640px`
 - `xl = 800px`
 - `xxl = 960px`
-- `xxxl = 1200px`
 
 The ampersand-based `&breakpoint-size|...` API adds the breakpoint size before the layout modifier.
 
-Conditional gap sizing example: `nve-layout="row &sm|gap:xxxs &md|gap:md &lg|gap:xxxl"`. The size value after the `:` corresponds to one of the nine [spacing](docs/foundations/layout/#layout-gap-spacing)/[padding](docs/foundations/layout/#layout-padding) system values.
+Conditional gap sizing example: `nve-layout="row &sm|gap:xxxs &md|gap:md &lg|gap:xxl"`. The size value after the `:` corresponds to one of the nine [spacing](docs/foundations/layout/#layout-gap-spacing)/[padding](docs/foundations/layout/#layout-padding) system values.
 
 ```html
 <div>
@@ -62,7 +61,6 @@ The following container query breakpoints are available for gap, replace `...` w
 - `&lg|gap:...`
 - `&xl|gap:...`
 - `&xxl|gap:...`
-- `&xxxl|gap:...`
 
 {% story '@nvidia-elements/styles/responsive.stories.json', 'GapResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
@@ -76,7 +74,6 @@ The following container query breakpoints are available for padding, replace `..
 - `&lg|pad:...`
 - `&xl|pad:...`
 - `&xxl|pad:...`
-- `&xxxl|pad:...`
 
 {% story '@nvidia-elements/styles/responsive.stories.json', 'PadResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
@@ -91,7 +88,6 @@ The following container query breakpoints are available for hiding:
 - `&lg|hide`
 - `&xl|hide`
 - `&xxl|hide`
-- `&xxxl|hide`
 
 Element hiding can be reversed using the `show` attribute:
 
@@ -101,7 +97,6 @@ Element hiding can be reversed using the `show` attribute:
 - `&lg|show`
 - `&xl|show`
 - `&xxl|show`
-- `&xxxl|show`
 
 **Note: This responsive layout system is _minimum width based_ using a mobile-first approach.
 Combine `hide` and `&show|` attributes to have elements hidden by default and display at larger container sizes.**
@@ -122,7 +117,6 @@ The following container query breakpoints are available for swapping flex direct
 - `&lg|row`
 - `&xl|row`
 - `&xxl|row`
-- `&xxxl|row`
 
 ### Vertically
 
@@ -132,7 +126,6 @@ The following container query breakpoints are available for swapping flex direct
 - `&lg|column`
 - `&xl|column`
 - `&xxl|column`
-- `&xxxl|column`
 
 {% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionResponsive', '{ "inline": false, "resizable": true, "height": "360px" }' %}
 
