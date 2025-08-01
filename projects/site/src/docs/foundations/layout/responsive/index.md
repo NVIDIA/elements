@@ -69,9 +69,9 @@ Viewport queries respond to the **browser window width**, providing traditional 
 
 - `sm = 576px`
 - `md = 768px`
-- `lg = 992px`
-- `xl = 1200px`
-- `xxl = 1400px`
+- `lg = 1024px`
+- `xl = 1280px`
+- `xxl = 1440px`
 
 ```html
 <!-- Responds to the browser viewport width -->
@@ -92,7 +92,7 @@ Viewport queries respond to the **browser window width**, providing traditional 
 
 - **Less flexible**: Elements can't adapt to their actual container size
 - **Context-blind**: Same breakpoint triggers regardless of element placement
-- **Fewer breakpoints**: Standard breakpoints (sm: 576px to xxl: 1400px)
+- **Fewer breakpoints**: Standard breakpoints (sm: 576px to xxl: 1440px)
 
 [Learn more about Viewport Query based system →](docs/internal/layout/responsive/viewport/)
 
