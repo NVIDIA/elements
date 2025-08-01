@@ -12,7 +12,7 @@ import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/define.js';
 import { PlaygroundService } from '@internals/tools/playground';
 
-import responsiveStyles from '@nvidia-elements/styles/responsive.css?raw'; // temporary workaround as latest version of responsive.css is not published yet
+import responsiveStyles from '@nvidia-elements/styles/responsive.css?inline'; // temporary workaround as latest version of responsive.css is not published yet
 import styles from './canvas-editable.css?inline';
 
 declare global {
