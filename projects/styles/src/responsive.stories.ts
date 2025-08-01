@@ -117,7 +117,7 @@ export const ViewportGapResponsive = {
 
 export const ViewportPadResponsive = {
   render: () => html`
-    <section nve-layout="row @sm|pad:xs @md|pad:lg @lg|pad:xxl">
+    <section nve-layout="row @sm|pad:xs @md|pad:lg @lg|pad:lg @xl|pad:xxxl">
       <nve-card nve-layout="full"></nve-card>
     </section>
   `

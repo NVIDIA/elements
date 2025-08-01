@@ -94,7 +94,7 @@
 /* Responsive Layout - Viewport (@media query based) */
 [nve-layout] {
   /* Responsive (Media Query Based) Layout & Padding */
-  @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 992px, 1200px, 1400px) {
+  @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
     @each $space-token in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
       @media (min-width: $(breakpoint-value)) {
         &[nve-layout~='@$(breakpoint)|gap:$(space-token)'] {
@@ -109,7 +109,7 @@
   }
 
   /* Responsive (Media Query Based) Hiding & Showing of Elements */
-  @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 992px, 1200px, 1400px) {
+  @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
     @media (min-width: $(breakpoint-value)) {
       &[nve-layout~='@$(breakpoint)|hide'] {
         display: none;
@@ -122,7 +122,7 @@
   }
 
   /* Responsive (Media Query Based) Row vs Column */
-  @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 992px, 1200px, 1400px) {
+  @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
     @media (min-width: $(breakpoint-value)) {
       &[nve-layout~='@$(breakpoint)|row'] {
         flex-direction: row;
@@ -148,7 +148,7 @@
 
   /* Responsive Grid Breakpoints (Media Query Based) */
   &[nve-layout~='grid'] {
-    @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 992px, 1200px, 1400px) {
+    @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
       @each $num in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
         @media (min-width: $(breakpoint-value)) {
           & > [nve-layout~='@$(breakpoint)|span:$(num)'],
