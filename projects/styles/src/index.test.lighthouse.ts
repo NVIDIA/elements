@@ -20,8 +20,8 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(2.9); // total
-    expect(report.payload.css.requests['responsive.css'].kb).toBeLessThan(2.9);
+    expect(report.payload.css.kb).toBeLessThan(2.7); // total
+    expect(report.payload.css.requests['responsive.css'].kb).toBeLessThan(2.7);
   });
 
   test('typography.css should remain within compressed bundle limits', async () => {
