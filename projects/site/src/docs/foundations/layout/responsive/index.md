@@ -8,7 +8,13 @@
 
 # {{title}}
 
-<nve-alert status="danger">Responsive layout modules are marked _**Pre-Release**_ and are not yet ready for consumer adoption - API is subject to breaking changes.</nve-alert>
+<nve-alert-group status="warning">
+  <nve-alert style="--align-items: start">
+    <div nve-text="relaxed">
+      Responsive layout modules are marked _**Pre-Release**_ and are not yet ready for consumer adoption - API is subject to breaking changes.
+    </div>
+  </nve-alert>
+</nve-alert-group>
 
 Fluid page layouts are achieved through the [abstracted CSS flexbox and grid APIs](docs/foundations/layout/), allowing pages built with Elements `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
 
