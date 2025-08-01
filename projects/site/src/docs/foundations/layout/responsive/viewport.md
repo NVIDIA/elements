@@ -11,7 +11,7 @@
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      This responsive layout module is marked _**Pre-Release**_ and is not yet ready for consumer adoption, its API is subject to breaking changes.
+      This responsive layout module is marked <em>Pre-Release</em> and is not yet ready for consumer adoption, its API is subject to breaking changes.
     </div>
   </nve-alert>
 </nve-alert-group>
