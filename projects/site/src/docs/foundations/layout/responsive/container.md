@@ -8,7 +8,13 @@
 
 # {{title}}
 
-<nve-alert status="danger">This responsive layout module is marked _**Pre-Release**_ and is not yet ready for consumer adoption, its API is subject to breaking changes.</nve-alert>
+<nve-alert-group status="warning">
+  <nve-alert style="--align-items: start">
+    <div nve-text="relaxed">
+      This responsive layout module is marked _**Pre-Release**_ and is not yet ready for consumer adoption, its API is subject to breaking changes.
+    </div>
+  </nve-alert>
+</nve-alert-group>
 
 By optionally importing the responsive container layout module, the `nve-layout` system is extended using [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) for adaptive responsive design based on the container element's width rather than just the browser width.
 
