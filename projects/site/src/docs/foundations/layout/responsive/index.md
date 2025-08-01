@@ -11,7 +11,7 @@
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Responsive layout modules are marked _**Pre-Release**_ and are not yet ready for consumer adoption - API is subject to breaking changes.
+      Responsive layout modules are marked <em>Pre-Release</em> and are not yet ready for consumer adoption - API is subject to breaking changes.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -143,3 +143,7 @@ Both responsive layout systems support conditional styling across defined pixel 
 - **Direction reversal**: `row-reverse` and `column-reverse` options
 - **Grid structure**: Varying grid column spans and layouts
 - **Visibility control**: Hide and show elements based on breakpoints
+
+<script type="module">
+  import '/_internal/canvas-editable/canvas-editable.js';
+</script>
