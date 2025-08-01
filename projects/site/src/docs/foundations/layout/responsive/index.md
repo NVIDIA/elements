@@ -26,6 +26,15 @@ The layout system can be extended with responsive capabilities using two differe
 
 Container queries respond to the **width of the parent container**, making them ideal for component-based responsive design. This approach allows components to adapt regardless of where they're placed on the page.
 
+**Breakpoints:**
+
+- `xs = 160px`
+- `sm = 320px`
+- `md = 480px`
+- `lg = 640px`
+- `xl = 800px`
+- `xxl = 960px`
+
 ```html
 <!-- Responds to the container's width, not the browser width -->
 <div>
@@ -42,7 +51,7 @@ Container queries respond to the **width of the parent container**, making them 
 - **Reusable**: Same component works in different contexts (sidebar, main content, etc.)
 - **Future-proof**: Modern CSS approach for intrinsic web design
 - **Broad support**: Works in all modern browsers as of summer 2025
-- **Flexible**: More granular breakpoints (xs: 160px to xxxl: 1200px)
+- **Flexible**: More granular breakpoints (xs: 160px to xxl: 960px)
 
 **Cons:**
 
@@ -55,6 +64,14 @@ Container queries respond to the **width of the parent container**, making them 
 ## Viewport Queries (`@` prefix)
 
 Viewport queries respond to the **browser window width**, providing traditional responsive design behavior that most developers are familiar with.
+
+**Breakpoints:**
+
+- `sm = 576px`
+- `md = 768px`
+- `lg = 992px`
+- `xl = 1200px`
+- `xxl = 1400px`
 
 ```html
 <!-- Responds to the browser viewport width -->
