@@ -2,7 +2,7 @@
 {
   title: 'Responsive Layout',
   layout: 'docs.11ty.js',
-  permalink: 'docs/internal/layout/responsive/index.html',
+  permalink: 'docs/internal/layout/responsive/index.html'
 }
 ---
 

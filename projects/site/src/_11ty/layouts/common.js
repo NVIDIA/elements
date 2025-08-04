@@ -325,8 +325,9 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/') ? 'expanded' : ''} ${data.page.url === '/docs/internal/layout/responsive/' ? 'highlighted' : ''}>
       <a href="docs/internal/layout/responsive/">Responsive Layout</a>
 
-      <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/viewport/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/viewport/">Viewport</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/container') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/container/">Container</a></nve-tree-node>
+        <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/viewport/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/viewport/">Viewport</a></nve-tree-node>
+        <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/container/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/container/">Container</a></nve-tree-node>
+        <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/patterns/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/patterns/">Patterns</a></nve-tree-node>
     </nve-tree-node>
   </nve-tree-node>
 </nve-tree>
