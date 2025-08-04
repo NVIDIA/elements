@@ -2,7 +2,7 @@
 {
   title: 'Responsive Layout - Viewport',
   layout: 'docs.11ty.js',
-  permalink: 'docs/internal/layout/responsive/viewport/index.html',
+  permalink: 'docs/internal/layout/responsive/viewport/index.html'
 }
 ---
 
