@@ -24,7 +24,7 @@ export async function anchorGeneratorTransform(content) {
     const sidenav =
       !this.page.url.includes('integrations') && !this.page.url.includes('changelog') && headings.length > 2
         ? /* html */ `
-    <ul id="anchor-generator" nve-text="list">${headings
+    <ul id="anchor-generator" nve-text="list nav">${headings
       .map(
         h =>
           `<li>
