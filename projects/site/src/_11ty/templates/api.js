@@ -13,6 +13,18 @@ const PACKAGE_URL = 'https://github.com/NVIDIA/elements/-/releases';
 const md = markdown();
 
 /**
+ * Renders a component description with appropriate styling
+ * @param {string} tag - The component tag name
+ * @returns {string} HTML string containing the rendered description
+ */
+export function elementDescription(tag) {
+  const element = elements.find(d => d.name === tag);
+  return element?.manifest?.description
+    ? md.render(element.manifest.description).replace('<p>', '<p nve-text="heading muted sm">')
+    : '';
+}
+
+/**
  * Generates a summary section for a component including description, status badges, and metadata links
  * @param {string} tag - The component tag name
  * @returns {string} HTML string containing the component summary
@@ -21,7 +33,6 @@ export function elementSummary(tag) {
   const element = elements.find(d => d.name === tag);
 
   return /* html */ `<section nve-layout="column gap:md align:stretch margin-top:md">
-  ${element.manifest.description ? md.render(element.manifest.description).replace('<p>', '<p nve-text="heading muted sm">') : ''}
 
   <div nve-layout="row gap:xs align:center align:space-between align:wrap">
     <div nve-layout="row gap:xs align:center">

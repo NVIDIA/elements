@@ -4,7 +4,7 @@
 import { join } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { renderBaseHead, renderDocsNav } from './common.js';
-import { elementSummary, elementStatus } from '../templates/api.js';
+import { elementSummary, elementStatus, elementDescription } from '../templates/api.js';
 
 // Define the available tabs for component documentation
 const componentDocTabs = [
@@ -108,6 +108,16 @@ export function render(data) {
                     })
                     .join('')}
                 </nve-tabs>`
+                    : ''
+                }
+
+                <!-- Component description -->
+                ${
+                  data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples'))
+                    ? `
+                <h2 nve-text="heading xl mkd">Overview</h2>
+                  ${elementDescription(data.tag)}
+                `
                     : ''
                 }
 
