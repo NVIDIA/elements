@@ -26,6 +26,7 @@ slot:not([name]) {
   padding: var(--padding);
   display: block;
   resize: horizontal;
+  min-width: 120px;
   overflow: var(--overflow);
   width: 100%;
 }
