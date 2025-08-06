@@ -37,10 +37,10 @@
 /* Tab Styles */
 nve-tabs#doc-tabs {
   padding: var(--nve-ref-space-sm) 0;
-}
 
-nve-tabs-item {
-  --font-size: var(--nve-ref-font-size-300);
+  nve-tabs-item {
+    --font-size: var(--nve-ref-font-size-300);
+  }
 }
 
 /* Heading Styles */
