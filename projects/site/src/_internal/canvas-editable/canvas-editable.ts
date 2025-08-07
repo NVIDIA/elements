@@ -13,7 +13,9 @@ import '@nvidia-elements/code/codeblock/define.js';
 import { PlaygroundService } from '@internals/tools/playground';
 
 // eslint-disable-next-line no-inline-css/no-restricted-imports
-import responsiveStyles from '@nvidia-elements/styles/responsive.css?inline'; // temporary workaround as latest version of responsive.css is not published yet
+import layoutLabsViewportStyles from '@nvidia-elements/styles/layout-labs-viewport.css?inline'; // temporary workaround as latest version is not published yet
+// eslint-disable-next-line no-inline-css/no-restricted-imports
+import layoutLabsContainerStyles from '@nvidia-elements/styles/layout-labs-container.css?inline'; // temporary workaround as latest version is not published yet
 import styles from './canvas-editable.css?inline';
 
 declare global {
@@ -96,7 +98,8 @@ export class CanvasEditable extends LitElement {
             <head>
               <link rel="stylesheet" href="https://esm.nvidia.com/@nvidia-elements/core@latest/dist/bundles/index.css" />
               <style>
-                ${responsiveStyles}
+                ${layoutLabsViewportStyles}
+                ${layoutLabsContainerStyles}
               </style>
               <script async type="module" src="https://esm.nvidia.com/@nvidia-elements/core@latest/dist/bundles/index.js"></script>
             </head>
