@@ -13,15 +13,30 @@ describe('lighthouse report', () => {
     expect(report.payload.css.requests['layout.css'].kb).toBeLessThan(1.8);
   });
 
-  test('responsive.css should remain within compressed bundle limits', async () => {
-    const report = await lighthouseRunner.getReport('responsive.css', /* html */`
+  test('layout-labs-container.css should remain within compressed bundle limits', async () => {
+    const report = await lighthouseRunner.getReport('layout-labs-container.css', /* html */`
       <script type="module">
-        import('@nvidia-elements/styles/responsive.css');
+        import('@nvidia-elements/styles/layout-labs-container.css');
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(2.75); // total
-    expect(report.payload.css.requests['responsive.css'].kb).toBeLessThan(2.75);
+    expect(report.payload.css.kb).toBeLessThan(1.9); // total
+    // Use the first CSS request key since it might have a version in the filename
+    const cssRequestKey = Object.keys(report.payload.css.requests)[0];
+    expect(report.payload.css.requests[cssRequestKey].kb).toBeLessThan(1.9);
+  });
+
+  test('layout-labs-viewport.css should remain within compressed bundle limits', async () => {
+    const report = await lighthouseRunner.getReport('layout-labs-viewport.css', /* html */`
+      <script type="module">
+        import('@nvidia-elements/styles/layout-labs-viewport.css');
+      </script>
+    `);
+
+    expect(report.payload.css.kb).toBeLessThan(1.7); // total
+    // Use the first CSS request key since it might have a version in the filename
+    const cssRequestKey = Object.keys(report.payload.css.requests)[0];
+    expect(report.payload.css.requests[cssRequestKey].kb).toBeLessThan(1.7);
   });
 
   test('typography.css should remain within compressed bundle limits', async () => {
