@@ -36,7 +36,8 @@ export const renderBaseHead = data => /* html */ `
     @import '@nvidia-elements/themes/brand-dark.css';
     @import '@nvidia-elements/themes/reduced-motion.css';
     @import '@nvidia-elements/styles/layout.css';
-    @import '@nvidia-elements/styles/responsive.css';
+    @import '@nvidia-elements/styles/layout-labs-viewport.css';
+    @import '@nvidia-elements/styles/layout-labs-container.css';
     @import '@nvidia-elements/styles/typography.css';
     @import '@nvidia-elements/styles/view-transitions.css';
 
@@ -323,7 +324,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/internal/testing/visual/') ? 'highlighted' : ''}><a href="docs/internal/testing/visual/">Visual Testing</a></nve-tree-node>
 
     <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/') ? 'expanded' : ''} ${data.page.url === '/docs/internal/layout/responsive/' ? 'highlighted' : ''}>
-      <a href="docs/internal/layout/responsive/">Responsive Layout</a>
+      <a href="docs/internal/layout/responsive/">Responsive Layout Labs</a>
 
         <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/viewport/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/viewport/">Viewport</a></nve-tree-node>
         <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/container/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/container/">Container</a></nve-tree-node>
