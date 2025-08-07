@@ -4,8 +4,6 @@ import { property } from 'lit/decorators/property.js';
 
 /* eslint-disable no-inline-css/no-restricted-imports */
 import layout from '@nvidia-elements/styles/layout.css?inline';
-import typography from '@nvidia-elements/styles/typography.css?inline';
-import responsive from '@nvidia-elements/styles/responsive.css?inline';
 
 import '@nvidia-elements/core/input/define.js';
 import '@nvidia-elements/core/color/define.js';
@@ -16,7 +14,7 @@ import type { ThemePreviewSettings } from '../theme-preview/theme-preview.js';
 
 @customElement('nvd-theme-form')
 export class ThemeForm extends LitElement {
-  static styles = [unsafeCSS(layout), unsafeCSS(typography), unsafeCSS(responsive)];
+  static styles = [unsafeCSS(layout)];
 
   @property({ type: Object })
   value: ThemePreviewSettings = {
