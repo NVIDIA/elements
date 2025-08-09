@@ -30,10 +30,10 @@ export const ResponsiveTabs = {
         <nve-tabs-item selected>Tab 1</nve-tabs-item>
         <nve-tabs-item>Tab 2</nve-tabs-item>
         <nve-tabs-item>Tab 3</nve-tabs-item>
-        <nve-tabs-item nve-layout="hide &sm|show">Tab 4</nve-tabs-item>
-        <nve-tabs-item nve-layout="hide &sm|show">Tab 5</nve-tabs-item>
-        <nve-tabs-item nve-layout="hide &sm|show">Tab 6</nve-tabs-item>
-        <nve-tabs-item popovertarget="more-tabs" nve-layout="&sm|hide">
+        <nve-tabs-item nve-display="hide &sm|show">Tab 4</nve-tabs-item>
+        <nve-tabs-item nve-display="hide &sm|show">Tab 5</nve-tabs-item>
+        <nve-tabs-item nve-display="hide &sm|show">Tab 6</nve-tabs-item>
+        <nve-tabs-item popovertarget="more-tabs" nve-display="&sm|hide">
           <nve-icon name="more-actions"></nve-icon>
         </nve-tabs-item>
       </nve-tabs>
@@ -73,17 +73,17 @@ export const ResponsiveToolbar = {
           <nve-icon name="filter"></nve-icon> Filter
         </nve-button>
 
-        <nve-button container="flat" slot="suffix" nve-layout="hide &md|show">
+        <nve-button container="flat" slot="suffix" nve-display="hide &md|show">
           <nve-icon name="sort-ascending"></nve-icon> Sort
         </nve-button>
 
-        <nve-button container="flat" slot="suffix" nve-layout="hide &md|show">
+        <nve-button container="flat" slot="suffix" nve-display="hide &md|show">
           <nve-icon name="download"></nve-icon> Export
         </nve-button>
 
-        <nve-icon-button container="flat" slot="suffix" icon-name="gear" aria-label="Settings" nve-layout="hide &md|show"></nve-icon-button>
+        <nve-icon-button container="flat" slot="suffix" icon-name="gear" aria-label="Settings" nve-display="hide &md|show"></nve-icon-button>
 
-        <nve-icon-button container="flat" slot="suffix" icon-name="more-actions" aria-label="More actions" popovertarget="toolbar-more-actions" nve-layout="&md|hide"></nve-icon-button>
+        <nve-icon-button container="flat" slot="suffix" icon-name="more-actions" aria-label="More actions" popovertarget="toolbar-more-actions" nve-display="&md|hide"></nve-icon-button>
       </nve-toolbar>
 
       <nve-dropdown id="toolbar-more-actions">
@@ -133,11 +133,11 @@ export const ResponsiveNavigation = {
           icon-name="bars-3" 
           aria-label="Menu" 
           popovertarget="mobile-menu"
-          nve-layout="@lg|hide"
+          nve-display="@lg|hide"
         ></nve-icon-button>
       </div>
 
-      <nav nve-layout="hide @lg|show">
+      <nav nve-display="hide @lg|show">
         <nve-tabs>
           <nve-tabs-item selected>Dashboard</nve-tabs-item>
           <nve-tabs-item>Products</nve-tabs-item>

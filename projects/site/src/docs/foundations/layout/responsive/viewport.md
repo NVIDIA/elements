@@ -8,7 +8,7 @@
 
 # {{title}}
 
-<nve-alert-group status="warning">
+<nve-alert-group status="warning" prominence="emphasis">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
       This responsive layout module is marked <em>Pre-Release</em> and is not yet ready for consumer adoption, its API is subject to breaking changes.
@@ -18,9 +18,13 @@
 
 By optionally importing the responsive viewport layout module, the `nve-layout` this system is extended using [CSS Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@media) for adaptive responsive design based on the browser viewport width rather than the container element's width.
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about media queries in this Mozilla <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media" target="_blank" nve-text="link">MDN</a> documentation.</nve-alert>
+<nve-alert-group>
+  <nve-alert>
+    <nve-icon slot="icon">🎓</nve-icon> Learn more about media queries in this Mozilla <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media" target="_blank" nve-text="link">MDN</a> documentation.
+  </nve-alert>
+</nve-alert-group>
 
-The responsive layout API applies conditional styling based on browser viewport width. Supported features include `gap`, `padding`, `row vs column`, `reversing` flex direction, varying `grid` structure and `hiding / showing` content across defined pixel width breakpoints.
+The responsive layout API applies conditional styling based on browser viewport width. Supported features include `gap`, `padding`, `row vs column`, `reversing` flex direction, and varying `grid` structure across defined pixel width breakpoints.
 
 The following set of viewport `breakpoint-values` are defined as:
 
@@ -40,13 +44,15 @@ Conditional gap sizing example: `nve-layout="row @sm|gap:xxxs @md|gap:md @lg|gap
   <nve-card></nve-card>
   <nve-card></nve-card>
   <nve-card></nve-card>
-  <nve-card nve-layout="@sm|hide"></nve-card>
+  <nve-card nve-display="@sm|hide"></nve-card>
 </section>
 ```
 
-<nve-alert status="accent">
-  Note that viewport-based responsive layout responds to the browser window size, not the container size. Use <a href="docs/internal/layout/responsive/container/" nve-text="link">Container Queries</a> if you need container-aware responsive behavior.
-</nve-alert>
+<nve-alert-group status="accent">
+  <nve-alert>
+    Note that viewport-based responsive layout responds to the browser window size, not the container size. Use <a href="docs/internal/layout/responsive/container/" nve-text="link">Container Queries</a> if you need container-aware responsive behavior.
+  </nve-alert>
+</nve-alert-group>
 
 ## Responsive Gap Sizing
 
@@ -71,32 +77,6 @@ The following media query breakpoints are available for padding, replace `...` w
 - `@xxl|pad:...`
 
 {% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportPadResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
-
-## Hiding Elements Based on Viewport Size
-
-The following media query breakpoints are available for hiding:
-
-- `hide`
-- `@sm|hide`
-- `@md|hide`
-- `@lg|hide`
-- `@xl|hide`
-- `@xxl|hide`
-
-Element hiding can be reversed using the `show` attribute:
-
-- `@sm|show`
-- `@md|show`
-- `@lg|show`
-- `@xl|show`
-- `@xxl|show`
-
-**Note: This responsive layout system is _minimum width based_ using a mobile-first approach.
-Combine `hide` and `@show|` attributes to have elements hidden by default and display at larger viewport sizes.**
-
-The `@show|...` attribute will reverse setting of `display: none` back to `display: initial`.
-
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportHideResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
 ## Breakpoints for Switching Flexbox Layout Direction
 
@@ -164,3 +144,63 @@ Or:
 ### Responsive Grid Items
 
 {% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportResponsiveGridItems', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+
+## Hiding Elements Based on Viewport Size
+
+Since hiding elements only affects the display of the element itself and not the layout of its children, we use the `nve-display` attribute for responsive visibility control.
+
+<nve-alert-group status="accent">
+  <nve-alert style="--align-items: start">
+    <div nve-text="relaxed">
+      <strong>Important:</strong> Element visibility (hiding/showing) uses the separate <code>nve-display</code> attribute rather than <code>nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how children are arranged. For example, <code>nve-display="hide @md|show"</code> hides an element until the viewport is at least 768px wide.
+    </div>
+  </nve-alert>
+</nve-alert-group>
+
+The following media query breakpoints are available for hiding:
+
+- `hide`
+- `@sm|hide`
+- `@md|hide`
+- `@lg|hide`
+- `@xl|hide`
+- `@xxl|hide`
+
+Element hiding can be reversed using the `show` attribute:
+
+- `@sm|show`
+- `@md|show`
+- `@lg|show`
+- `@xl|show`
+- `@xxl|show`
+
+<nve-alert-group>
+  <nve-alert style="--align-items: start">
+    <div nve-text="relaxed">
+      <strong>Note:</strong> This responsive layout system is <em>minimum width based</em> using a mobile-first approach.
+      Combine <code>hide</code> and <code>@show|</code> attributes to have elements hidden by default and display at larger viewport sizes.
+    </div>
+  </nve-alert>
+</nve-alert-group>
+
+The `@show|...` attribute will reverse setting of `display: none` back to `display: initial`.
+
+{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportHideResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+
+## Summary
+
+The viewport query responsive system allows elements to adapt based on the browser window width using the `@` prefix. Remember:
+
+- **Layout properties** (`gap`, `padding`, `row/column`, `grid`) use `nve-layout`
+- **Visibility control** (`hide`/`show`) uses `nve-display`
+- Viewport queries respond to the entire browser window
+- Breakpoints range from `sm` (576px) to `xxl` (1440px)
+
+Example combining both:
+
+```html
+<section nve-layout="row @md|gap:lg">
+  <div>Always visible</div>
+  <div nve-display="hide @md|show">Visible when viewport ≥ 768px</div>
+</section>
+```
