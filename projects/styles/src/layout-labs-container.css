@@ -3,11 +3,17 @@
   container-type: inline-size;
 }
 
-[nve-layout] {
-  &[nve-layout~='hide'] {
-    display: none;
-  }
+/* Also apply container type for elements using nve-display with container queries */
+*:has(> [nve-display*='&']) {
+  container-type: inline-size;
+}
 
+/* This is to ensure the nve-layout element fills the parent container's width */
+[nve-layout*='&'] {
+  width: 100%;
+}
+
+[nve-layout] {
   &[nve-layout~='row-reverse'] {
     flex-direction: row-reverse;
     place-items: flex-start;
@@ -29,19 +35,6 @@
         &[nve-layout~='&$(breakpoint)|pad:$(space-token)'] {
           padding: var(--nve-ref-space-$(space-token));
         }
-      }
-    }
-  }
-
-  /* Responsive (Container Query Based) Hiding & Showing of Elements */
-  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, xxl), (160px, 320px, 480px, 640px, 800px, 960px) {
-    @container (width >= $(breakpoint-value)) {
-      &[nve-layout~='&$(breakpoint)|hide'] {
-        display: none;
-      }
-
-      &[nve-layout~='&$(breakpoint)|show'] {
-        display: initial !important;
       }
     }
   }
@@ -81,6 +74,25 @@
             grid-column: span $(num) / span $(num);
           }
         }
+      }
+    }
+  }
+}
+
+/* Container Query Based Hiding & Showing using nve-display attribute */
+[nve-display] {
+  &[nve-display~='hide'] {
+    display: none;
+  }
+
+  @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, xxl), (160px, 320px, 480px, 640px, 800px, 960px) {
+    @container (width >= $(breakpoint-value)) {
+      &[nve-display~='&$(breakpoint)|hide'] {
+        display: none;
+      }
+
+      &[nve-display~='&$(breakpoint)|show'] {
+        display: initial !important;
       }
     }
   }
