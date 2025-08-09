@@ -8,7 +8,7 @@
 
 # {{title}}
 
-<nve-alert-group status="warning">
+<nve-alert-group status="warning" prominence="emphasis">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
       This responsive layout module is marked <em>Pre-Release</em> and is not yet ready for consumer adoption, its API is subject to breaking changes.
@@ -18,9 +18,13 @@
 
 By optionally importing the responsive container layout module, the `nve-layout` system is extended using [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) for adaptive responsive design based on the container element's width rather than just the browser width.
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn more about container queries in this Google <a href="https://web.dev/articles/new-responsive#responsive_to_the_container" target="_blank" nve-text="link">web.dev</a> video and article.</nve-alert>
+<nve-alert-group>
+  <nve-alert>
+    <nve-icon slot="icon">🎓</nve-icon> Learn more about container queries in this Google <a href="https://web.dev/articles/new-responsive#responsive_to_the_container" target="_blank" nve-text="link">web.dev</a> video and article.
+  </nve-alert>
+</nve-alert-group>
 
-The responsive layout API applies conditional styling based on parent element width. Supported features include `gap`, `padding`, `row vs column`, `reversing` flex direction, varying `grid` structure and `hiding / showing` content across defined pixel width breakpoints.
+The responsive layout API applies conditional styling based on parent element width. Supported features include `gap`, `padding`, `row vs column`, `reversing` flex direction, and varying `grid` structure across defined pixel width breakpoints.
 
 The following set of container `breakpoint-values` are defined as:
 
@@ -36,20 +40,24 @@ The ampersand-based `&breakpoint-size|...` API adds the breakpoint size before t
 Conditional gap sizing example: `nve-layout="row &sm|gap:xxxs &md|gap:md &lg|gap:xxl"`. The size value after the `:` corresponds to one of the nine [spacing](docs/foundations/layout/#layout-gap-spacing)/[padding](docs/foundations/layout/#layout-padding) system values.
 
 ```html
-<div>
+<div> <!-- This parent div element is the containing element - its width will be queried -->
   <section nve-layout="row &sm|gap:xxs &md|gap:md &lg|gap:xl &xl|gap:xxxl">
     <nve-card></nve-card>
     <nve-card></nve-card>
     <nve-card></nve-card>
     <nve-card></nve-card>
-    <nve-card nve-layout="&sm|hide"></nve-card>
+    <nve-card nve-display="&sm|hide"></nve-card>
   </section>
 </div>
 ```
 
-<nve-alert status="accent">
-  Note the inclusion of an extra `div` element wrapping the `nve-layout` element to ensure the parent element that receives the container query not the page.
- </nve-alert>
+<nve-alert-group status="accent">
+  <nve-alert style="--align-items: start">
+    <div nve-text="relaxed">
+      <strong>Important:</strong> The extra <code>div</code> wrapper explicitly defines the container element for queries. This design keeps the utility minimal — elements with <code>&</code> syntax automatically use their parent as the container without requiring manual container specification.
+    </div>
+  </nve-alert>
+</nve-alert-group>
 
 ## Responsive Gap Sizing
 
@@ -76,34 +84,6 @@ The following container query breakpoints are available for padding, replace `..
 - `&xxl|pad:...`
 
 {% story '@nvidia-elements/styles/responsive.stories.json', 'PadResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
-
-## Hiding Elements Based on Container Size
-
-The following container query breakpoints are available for hiding:
-
-- `hide`
-- `&xs|hide`
-- `&sm|hide`
-- `&md|hide`
-- `&lg|hide`
-- `&xl|hide`
-- `&xxl|hide`
-
-Element hiding can be reversed using the `show` attribute:
-
-- `&xs|show`
-- `&sm|show`
-- `&md|show`
-- `&lg|show`
-- `&xl|show`
-- `&xxl|show`
-
-**Note: This responsive layout system is _minimum width based_ using a mobile-first approach.
-Combine `hide` and `&show|` attributes to have elements hidden by default and display at larger container sizes.**
-
-The `&show|...` attribute will reverse setting of `display: none` back to `display: initial`.
-
-{% story '@nvidia-elements/styles/responsive.stories.json', 'HideResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
 ## Breakpoints for Switching Flexbox Layout Direction
 
@@ -173,3 +153,67 @@ Or:
 ### Responsive Grid Items
 
 {% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveGridItems', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+
+## Hiding Elements Based on Container Size
+
+Since hiding elements only affects the display of the element itself and not the layout of its children, we use the `nve-display` attribute for responsive visibility control.
+
+<nve-alert-group status="accent">
+  <nve-alert style="--align-items: start">
+    <div nve-text="relaxed">
+      <strong>Important:</strong> Element visibility (hiding/showing) uses the separate <code>nve-display</code> attribute rather than <code>nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how children are arranged. For example, <code>nve-display="hide &sm|show"</code> hides an element until its container is at least 320px wide.
+    </div>
+  </nve-alert>
+</nve-alert-group>
+
+The following container query breakpoints are available for hiding:
+
+- `hide`
+- `&xs|hide`
+- `&sm|hide`
+- `&md|hide`
+- `&lg|hide`
+- `&xl|hide`
+- `&xxl|hide`
+
+Element hiding can be reversed using the `show` attribute:
+
+- `&xs|show`
+- `&sm|show`
+- `&md|show`
+- `&lg|show`
+- `&xl|show`
+- `&xxl|show`
+
+<nve-alert-group>
+  <nve-alert style="--align-items: start">
+    <div nve-text="relaxed">
+      <strong>Note:</strong> This responsive layout system is <em>minimum width based</em> using a mobile-first approach.
+      Combine <code>hide</code> and <code>&show|</code> attributes to have elements hidden by default and display at larger container sizes.
+    </div>
+  </nve-alert>
+</nve-alert-group>
+
+The `&show|...` attribute will reverse setting of `display: none` back to `display: initial`.
+
+{% story '@nvidia-elements/styles/responsive.stories.json', 'HideResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+
+## Summary
+
+The container query responsive system allows elements to adapt based on their container's width using the `&` prefix. Remember:
+
+- **Layout properties** (`gap`, `padding`, `row/column`, `grid`) use `nve-layout`
+- **Visibility control** (`hide`/`show`) uses `nve-display`
+- Container queries **use the parent element** to establish the container context
+- Breakpoints range from `xs` (160px) to `xxl` (960px)
+
+Example combining both:
+
+```html
+<div>
+  <section nve-layout="row &md|gap:lg">
+    <div>Always visible</div>
+    <div nve-display="hide &sm|show">Visible when container ≥ 320px</div>
+  </section>
+</div>
+```
