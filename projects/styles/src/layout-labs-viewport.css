@@ -15,19 +15,6 @@
     }
   }
 
-  /* Responsive (Media Query Based) Hiding & Showing of Elements */
-  @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
-    @media (min-width: $(breakpoint-value)) {
-      &[nve-layout~='@$(breakpoint)|hide'] {
-        display: none;
-      }
-
-      &[nve-layout~='@$(breakpoint)|show'] {
-        display: initial !important;
-      }
-    }
-  }
-
   /* Responsive (Media Query Based) Row vs Column */
   @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
     @media (min-width: $(breakpoint-value)) {
@@ -63,6 +50,25 @@
             grid-column: span $(num) / span $(num);
           }
         }
+      }
+    }
+  }
+}
+
+/* Media Query Based Hiding & Showing using nve-display attribute */
+[nve-display] {
+  &[nve-display~='hide'] {
+    display: none;
+  }
+
+  @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
+    @media (min-width: $(breakpoint-value)) {
+      &[nve-display~='@$(breakpoint)|hide'] {
+        display: none;
+      }
+
+      &[nve-display~='@$(breakpoint)|show'] {
+        display: initial !important;
       }
     }
   }
