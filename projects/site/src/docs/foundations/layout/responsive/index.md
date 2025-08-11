@@ -8,7 +8,7 @@
 
 # {{title}}
 
-<nve-alert-group status="warning" prominence="emphasis">
+<nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
       Responsive layout modules are marked <em>Pre-Release</em> and are not yet ready for consumer adoption - API is subject to breaking changes.
