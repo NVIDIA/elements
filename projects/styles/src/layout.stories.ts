@@ -617,7 +617,7 @@ export const GridVariableSpans = {
 export const Full = {
   render: () => html`
     <section nve-layout="full">
-      <nve-card nve-layout="grow"></nve-card>
+      <nve-card nve-layout="full"></nve-card>
     </section>
   `
 }
