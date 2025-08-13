@@ -52,5 +52,9 @@ function template(theme: '' | 'dark' = '') {
     <nve-button selected container="flat">•︎•︎•︎•︎•︎•︎</nve-button>
     <nve-button container="flat">•︎•︎•︎•︎•︎•︎</nve-button>
   </div>
+  <div nve-layout="row gap:xs pad:md" style="background: var(--background); --background: var(--nve-sys-layer-shell-background)">
+    <nve-button selected container="flat">•︎•︎•︎•︎•︎•︎</nve-button>
+    <nve-button container="flat">•︎•︎•︎•︎•︎•︎</nve-button>
+  </div>
   `;
 }
