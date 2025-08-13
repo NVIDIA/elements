@@ -171,6 +171,13 @@
   );
 }
 
+@container style(--nve-sys-color-scheme: dark) {
+  :host([container*='flat']) {
+    --nve-sys-interaction-state-ratio-selected: 16% !important;
+    --nve-sys-interaction-state-ratio-hover: 12% !important;
+  }
+}
+
 :host([container*='flat'][interaction='emphasis']) {
   --color: var(--nve-sys-interaction-emphasis-background);
 }
