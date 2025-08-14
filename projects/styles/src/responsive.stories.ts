@@ -96,10 +96,10 @@ export const ResponsiveGrid = {
 export const ResponsiveGridItems = {
   render: () => html`        
     <section nve-layout="grid gap:md">
-      <nve-card nve-layout="span-items:12 &sm|span:4 &md|span:6 &lg|span:8"></nve-card>
-      <nve-card nve-layout="span-items:12 &sm|span:8 &md|span:6 &lg|span:4"></nve-card>
-      <nve-card nve-layout="span-items:12 &sm|span:8 &md|span:6 &lg|span:4"></nve-card>
-      <nve-card nve-layout="span-items:12 &sm|span:4 &md|span:6 &lg|span:8"></nve-card>
+      <span nve-layout="&sm|span:4 &md|span:6 &lg|span:8"><nve-card></nve-card></span>
+      <span nve-layout="&sm|span:8 &md|span:6 &lg|span:4"><nve-card></nve-card></span>
+      <span nve-layout="&sm|span:8 &md|span:6 &lg|span:4"><nve-card></nve-card></span>
+      <span nve-layout="&sm|span:4 &md|span:6 &lg|span:8"><nve-card></nve-card></span>
     </section>
   `
 }
@@ -191,10 +191,10 @@ export const ViewportResponsiveGrid = {
 export const ViewportResponsiveGridItems = {
   render: () => html`        
     <section nve-layout="grid gap:md">
-      <nve-card nve-layout="span-items:12 @sm|span:4 @md|span:6 @lg|span:8"></nve-card>
-      <nve-card nve-layout="span-items:12 @sm|span:8 @md|span:6 @lg|span:4"></nve-card>
-      <nve-card nve-layout="span-items:12 @sm|span:8 @md|span:6 @lg|span:4"></nve-card>
-      <nve-card nve-layout="span-items:12 @sm|span:4 @md|span:6 @lg|span:8"></nve-card>
+      <span nve-layout="@sm|span:4 @md|span:6 @lg|span:8"><nve-card></nve-card></span>
+      <span nve-layout="@sm|span:8 @md|span:6 @lg|span:4"><nve-card></nve-card></span>
+      <span nve-layout="@sm|span:8 @md|span:6 @lg|span:4"><nve-card></nve-card></span>
+      <span nve-layout="@sm|span:4 @md|span:6 @lg|span:8"><nve-card></nve-card></span>
     </section>
   `
 }
