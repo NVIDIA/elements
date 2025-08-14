@@ -5,8 +5,8 @@
 @import '@nvidia-elements/themes/compact.css';
 @import '@nvidia-elements/themes/debug.css';
 @import '@nvidia-elements/styles/layout.css';
-@import '@nvidia-elements/styles/layout-labs-viewport.css';
-@import '@nvidia-elements/styles/layout-labs-container.css';
+@import '@nvidia-elements/styles/labs/layout-viewport.css';
+@import '@nvidia-elements/styles/labs/layout-container.css';
 @import '@nvidia-elements/styles/typography.css';
 @import '@nvidia-elements/styles/view-transitions.css';
 
@@ -53,7 +53,7 @@ body:has(nve-page) #story-container {
 
   &[data-element*='Viewport'] {
     nve-card {
-      --background: oklab(0.2868 -0.0197945 -0.0574875);
+      --background: oklab(0.2776 0.0214875 -0.0624042);
     }
   }
 }
