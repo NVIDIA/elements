@@ -91,7 +91,7 @@
 
 .toolbar {
   display: flex;
-  gap: var(--nve-ref-space-xxs);
+  justify-content: space-between;
   padding: var(--nve-ref-space-xxs);
   border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
 }
