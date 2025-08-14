@@ -576,40 +576,40 @@ export const GridAlignFullStretch = {
 export const GridVariableSpans = {
   render: () => html`
     <section nve-layout="grid gap:md">
-      ${new Array(12).fill(html`<nve-card></nve-card>`)}
+      ${new Array(12).fill(html`<span><nve-card></nve-card></span>`)}
 
-      <nve-card nve-layout="span:2"></nve-card>
-      <nve-card nve-layout="span:2"></nve-card>
-      <nve-card nve-layout="span:2"></nve-card>
-      <nve-card nve-layout="span:2"></nve-card>
-      <nve-card nve-layout="span:2"></nve-card>
-      <nve-card nve-layout="span:2"></nve-card>
+      <span nve-layout="span:2"><nve-card></nve-card></span>
+      <span nve-layout="span:2"><nve-card></nve-card></span>
+      <span nve-layout="span:2"><nve-card></nve-card></span>
+      <span nve-layout="span:2"><nve-card></nve-card></span>
+      <span nve-layout="span:2"><nve-card></nve-card></span>
+      <span nve-layout="span:2"><nve-card></nve-card></span>
 
-      <nve-card nve-layout="span:3"></nve-card>
-      <nve-card nve-layout="span:3"></nve-card>
-      <nve-card nve-layout="span:3"></nve-card>
-      <nve-card nve-layout="span:3"></nve-card>
+      <span nve-layout="span:3"><nve-card></nve-card></span>
+      <span nve-layout="span:3"><nve-card></nve-card></span>
+      <span nve-layout="span:3"><nve-card></nve-card></span>
+      <span nve-layout="span:3"><nve-card></nve-card></span>
 
-      <nve-card nve-layout="span:4"></nve-card>
-      <nve-card nve-layout="span:4"></nve-card>
-      <nve-card nve-layout="span:4"></nve-card>
+      <span nve-layout="span:4"><nve-card></nve-card></span>
+      <span nve-layout="span:4"><nve-card></nve-card></span>
+      <span nve-layout="span:4"><nve-card></nve-card></span>
 
-      <nve-card nve-layout="span:5"></nve-card>
-      <nve-card nve-layout="span:5"></nve-card>
-      <nve-card nve-layout="span:2"></nve-card>
+      <span nve-layout="span:5"><nve-card></nve-card></span>
+      <span nve-layout="span:5"><nve-card></nve-card></span>
+      <span nve-layout="span:2"><nve-card></nve-card></span>
 
-      <nve-card nve-layout="span:6"></nve-card>
-      <nve-card nve-layout="span:6"></nve-card>
+      <span nve-layout="span:6"><nve-card></nve-card></span>
+      <span nve-layout="span:6"><nve-card></nve-card></span>
 
-      <nve-card nve-layout="span:7"></nve-card>
-      <nve-card nve-layout="span:3"></nve-card>
-      <nve-card nve-layout="span:2"></nve-card>
+      <span nve-layout="span:7"><nve-card></nve-card></span>
+      <span nve-layout="span:3"><nve-card></nve-card></span>
+      <span nve-layout="span:2"><nve-card></nve-card></span>
 
-      <nve-card nve-layout="span:8"></nve-card>
-      <nve-card nve-layout="span:4"></nve-card>
+      <span nve-layout="span:8"><nve-card></nve-card></span>
+      <span nve-layout="span:4"><nve-card></nve-card></span>
 
-      <nve-card nve-layout="span:9"></nve-card>
-      <nve-card nve-layout="span:3"></nve-card>
+      <span nve-layout="span:9"><nve-card></nve-card></span>
+      <span nve-layout="span:3"><nve-card></nve-card></span>
     </section>
   `
 }
