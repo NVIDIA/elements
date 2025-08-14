@@ -53,11 +53,22 @@ export function createPlaygroundURL(source: string, metadata: MetadataSummary, o
 }
 
 export function createDefaultFiles(content, metadata: MetadataSummary, options: PlaygroundOptions) {
-  return {
+  const files: Record<string, { content: string }> = {
     'index.html': { content: createIndexHTML(content, options) },
     'index.ts': { content: `${getElementImports(content, metadata).join('\n')}` },
     'importmap.json': { content: createImportMap() }
   };
+
+  // Add styles CSS file if this is from layout or responsive stories
+  if (options.name?.includes('@nvidia-elements/styles/layout.stories.json')) {
+    files['styles.css'] = { content: createLayoutStyles() };
+  } else if (options.name?.includes('@nvidia-elements/styles/responsive.stories.json')) {
+    files['styles.css'] = { content: createResponsiveStyles() };
+  } else if (options.name?.includes('@nvidia-elements/styles/responsive-patterns.stories.json')) {
+    files['styles.css'] = { content: '' };
+  }
+
+  return files;
 }
 
 export function createReactFiles(content, metadata: MetadataSummary, options: PlaygroundOptions) {
@@ -99,6 +110,43 @@ function createURL(files: string, options: PlaygroundOptions) {
   return `https://elements-stage.nvidia.com/ui/elements-playground/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim().replaceAll(' ', '%20')}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`;
 }
 
+function createLayoutStyles() {
+  return `/* Layout example styles */
+section[nve-layout~='row'][nve-layout*='align'] {
+  min-height: 220px !important;
+}
+
+section[nve-layout~='column'][nve-layout*='align'] {
+  min-height: 320px !important;
+}
+
+section[nve-layout~='grid'][nve-layout*='align'] {
+  min-height: 220px !important;
+}
+
+nve-card {
+  --background: var(--nve-sys-layer-overlay-background);
+  min-height: 60px;
+  min-width: 60px;
+}
+`;
+}
+
+function createResponsiveStyles() {
+  return `/* Responsive example styles */
+nve-card {
+  min-width: 120px;
+  min-height: 120px;
+  --background: oklab(0.2776 0.0214875 -0.0624042);
+}
+
+nve-logo.large {
+  --width: 200px;
+  --height: 200px;
+}
+`;
+}
+
 function serialize(data, compress = true) {
   const encoded = new TextEncoder().encode(JSON.stringify(data));
   const array = compress ? gzipSync(encoded) : encoded;
@@ -107,6 +155,20 @@ function serialize(data, compress = true) {
 }
 
 function createIndexHTML(content: string, options: PlaygroundOptions) {
+  // Check if this is from the layout or responsive stories file
+  const isLayoutStory = options.name?.includes('@nvidia-elements/styles/layout.stories.json');
+  const isResponsiveStory = options.name?.includes('@nvidia-elements/styles/responsive.stories.json');
+  const isResponsivePatternsStory = options.name?.includes('@nvidia-elements/styles/responsive-patterns.stories.json');
+
+  // Add link to styles CSS if needed
+  const layoutExamplesStyles =
+    isLayoutStory || isResponsiveStory || isResponsivePatternsStory
+      ? `
+    <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/labs/layout-viewport.css" />
+    <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/labs/layout-container.css" />
+    <link rel="stylesheet" type="text/css" href="./styles.css" />`
+      : '';
+
   return `<!doctype html>
 <html nve-theme="${options.theme ?? ''}">
   <head>
@@ -118,6 +180,7 @@ function createIndexHTML(content: string, options: PlaygroundOptions) {
     <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/compact.css" />
     <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/typography.css" />
     <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/layout.css" />
+    ${layoutExamplesStyles}
     <script type="module" src="./index.js"></script>
   </head>
   <body nve-text="body" nve-layout="${!content.includes('<nve-page') ? 'pad:md' : ''}">
