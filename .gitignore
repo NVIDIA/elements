@@ -19,3 +19,4 @@ v8-compile-cache-0
 __screenshots__
 vite.*.ts.timestamp*
 .11ty-vite
+.gitlab/scripts/
