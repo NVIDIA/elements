@@ -26,8 +26,11 @@
 Vertical layouts provide top-to-bottom content flow that aligns with reading patterns. The Elements vertical layout system uses CSS Flexbox to create stackable layouts that adapt to content and container constraints.
 
 <nve-alert-group>
-  <nve-alert>
-    <nve-icon slot="icon">🎓</nve-icon> Learn flexbox concepts with the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox" target="_blank" nve-text="link">MDN Flexbox guide</a> and practice with this visual <a href="https://flexboxfroggy.com/" target="_blank" nve-text="link">Flexbox Froggy</a> game.
+  <nve-alert style="--align-items: start">
+    <nve-icon slot="icon" name="academic-cap"></nve-icon>
+    <div nve-text="relaxed">
+      Learn flexbox concepts with the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox" target="_blank" nve-text="link">MDN Flexbox guide</a> and practice with this visual <a href="https://flexboxfroggy.com/" target="_blank" nve-text="link">Flexbox Froggy</a> game.
+    </div>
   </nve-alert>
 </nve-alert-group>
 
@@ -114,6 +117,7 @@ Vertical layouts support alignment along both axes:
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
+    <nve-icon slot="icon" name="academic-cap"></nve-icon>
     <div nve-text="relaxed">
       <strong>Alignment mental model:</strong> In vertical layouts, the main axis runs top-to-bottom and the cross axis runs left-to-right. This reversal from horizontal layouts is key to understanding alignment behavior.
     </div>

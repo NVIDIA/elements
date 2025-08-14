@@ -26,8 +26,11 @@
 The Elements layout system provides a declarative approach to creating layouts using CSS flexbox and grid. This system enables complex, adaptive layouts with minimal markup and custom CSS.
 
 <nve-alert-group>
-  <nve-alert>
-    <nve-icon slot="icon">🎓</nve-icon> Learn more about CSS layout fundamentals in the <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout" target="_blank" nve-text="link">MDN CSS Layout guide</a> and <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" nve-text="link">CSS-Tricks Flexbox guide</a>.
+  <nve-alert style="--align-items: start">
+    <nve-icon slot="icon" name="academic-cap"></nve-icon>
+    <div nve-text="relaxed">
+      Learn more about CSS layout fundamentals in the <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout" target="_blank" nve-text="link">MDN CSS Layout guide</a> and <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" nve-text="link">CSS-Tricks Flexbox guide</a>.
+    </div>
   </nve-alert>
 </nve-alert-group>
 
@@ -45,8 +48,10 @@ npm install @nvidia-elements/styles @nvidia-elements/themes
 ```
 
 <nve-alert-group status="accent">
-  <nve-alert>
-    <nve-icon slot="icon">💡</nve-icon> The base layout system provides static layouts. For responsive behavior, additional modules will be made available for container and viewport breakpoint-based responsive design.
+  <nve-alert style="--align-items: start">
+    <div nve-text="relaxed">
+      The base layout system provides static layouts. For responsive behavior, additional modules will be made available for container and viewport breakpoint-based responsive design.
+    </div>
   </nve-alert>
 </nve-alert-group>
 
@@ -88,7 +93,7 @@ Each layout mode supports spacing, alignment, and responsive behavior through a 
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      <strong>Important:</strong> Elements components are built using Web Components with Shadow DOM encapsulation. Many components manage their own internal layout, for example: <code>nve-card</code> components have built-in layout for <code>nve-card-header</code>, <code>nve-card-content</code>, and <code>nve-card-footer</code>. Applying <code>nve-layout</code> directly to these components may not work as expected due to Shadow DOM boundaries. 
+      Elements components are built using Web Components with Shadow DOM encapsulation. Many components manage their own internal layout, for example: <code>nve-card</code> components have built-in layout for <code>nve-card-header</code>, <code>nve-card-content</code>, and <code>nve-card-footer</code>. Applying <code>nve-layout</code> directly to these components may not work as expected due to Shadow DOM boundaries.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -289,8 +294,9 @@ Or alternatively use the short hand to just pad the x and y axes.
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
+    <nve-icon slot="icon" name="academic-cap"></nve-icon>
     <div nve-text="relaxed">
-      <strong>Tip:</strong> Gap affects space <em>between</em> child elements, while padding affects space <em>inside</em> the container. Use gap for consistent spacing between items and padding for breathing room around content.
+      Gap affects space <em>between</em> child elements, while padding affects space <em>inside</em> the container. Use gap for consistent spacing between items and padding for breathing room around content.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -358,10 +364,10 @@ Layout attributes can be composed to create sophisticated designs:
 5. **Combine thoughtfully**: Layer layout attributes to achieve complex designs
 6. **Test responsively**: Ensure layouts work across all device sizes
 
-<nve-alert-group status="warning">
+<nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      <strong>Performance Note:</strong> While the layout system is highly optimized, avoid deeply nested layouts when simpler structures suffice. Modern browsers handle flexbox and grid efficiently, but excessive nesting can impact performance on lower-end devices.
+      While the layout system is highly optimized, avoid deeply nested layouts when simpler structures suffice. Modern browsers handle flexbox and grid efficiently, but excessive nesting can impact performance on lower-end devices.
     </div>
   </nve-alert>
 </nve-alert-group>
