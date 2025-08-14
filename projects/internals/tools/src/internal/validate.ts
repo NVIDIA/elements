@@ -39,7 +39,7 @@ const standardElements = [
 ];
 
 const formElements = ['label', 'form', 'optgroup', 'fieldset', 'input', 'textarea', 'button', 'select', 'option'];
-const standardAttrs = ['nve-text', 'nve-layout', 'nve-control', 'slot', 'id', 'name', 'style'];
+const standardAttrs = ['nve-text', 'nve-layout', `nve-display`, 'nve-control', 'slot', 'id', 'name', 'style'];
 const formAttrs = [
   'aria-label',
   'aria-labelledby',
@@ -122,7 +122,15 @@ export function validateTemplate(
           }
         }) ?? [];
 
-      acc[element.name] = [...(acc[element.name] ?? []), ...formAttrs, ...customAttrs, 'slot', 'id', 'name'];
+      acc[element.name] = [
+        ...(acc[element.name] ?? []),
+        ...formAttrs,
+        ...customAttrs,
+        'slot',
+        'id',
+        'name',
+        'nve-display'
+      ];
       return acc;
     }, {});
 
