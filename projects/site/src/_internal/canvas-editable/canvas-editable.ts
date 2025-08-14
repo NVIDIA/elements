@@ -80,12 +80,17 @@ export class CanvasEditable extends LitElement {
               : html`<nve-codeblock language="html" .code=${this.editableSource}></nve-codeblock>`
           }
           <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.editableSource}></nve-copy-button>
-          <nve-button @click=${this.#handlePlaygroundClick}>View in Playground</nve-button>
+          <nve-button .hidden=${!this.horizontalLayout} @click=${this.#handlePlaygroundClick}>Open in Playground</nve-button>
         </div>
         
         <div class="toolbar" .hidden=${this.horizontalLayout}>
           <nve-button container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
-          <slot name="suffix"></slot>
+
+          <div>
+            <slot name="suffix"></slot>
+
+            <nve-button container="flat" .hidden=${this.horizontalLayout} @click=${this.#handlePlaygroundClick}>Open in Playground</nve-button>
+          </div>
         </div>
       </div>
     `;
