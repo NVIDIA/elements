@@ -259,12 +259,13 @@ export function elementTable(tag, type = 'all') {
         <!-- roles are temporary workaround due to lighthouse audits not understanding element internals role -->
         <nve-grid role="grid" style="min-height: 100px">
           <nve-grid-header role="row">
-            <nve-grid-column role="columnheader" width="120px">Property</nve-grid-column>
+            <nve-grid-column role="columnheader" width="180px">Property</nve-grid-column>
             <nve-grid-column role="columnheader" width="180px">Attribute</nve-grid-column>
             <nve-grid-column role="columnheader">Description</nve-grid-column>
             <nve-grid-column role="columnheader">Type</nve-grid-column>
           </nve-grid-header>
           ${elementManifest.attributes
+            ?.filter(attr => !attr.deprecated)
             ?.map(
               attr => /* html */ `
           <nve-grid-row role="row">
