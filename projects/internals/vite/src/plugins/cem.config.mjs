@@ -91,6 +91,29 @@ function metadataPlugin() {
             classDeclaration.metadata.aria = getSpecUrl(classDeclaration);
             classDeclaration.metadata.example = getExample(classDeclaration, moduleDoc.path);
           }
+
+          if (classDeclaration.tagName) {
+            const disallowed = [
+              {
+                name: 'nve-layout',
+                deprecated: true,
+                description: 'not supported on custom element tags',
+                type: { text: "'disallowed'" }
+              },
+              {
+                name: 'nve-text',
+                deprecated: true,
+                description: 'not supported on custom element tags',
+                type: { text: "'disallowed'" }
+              }
+            ];
+
+            classDeclaration.attributes = [...(classDeclaration.attributes ?? []), ...disallowed];
+            classDeclaration.members = [
+              ...(classDeclaration.members ?? []),
+              ...disallowed.map(i => ({ ...i, attribute: i.name, kind: 'field' }))
+            ];
+          }
           break;
       }
     }
