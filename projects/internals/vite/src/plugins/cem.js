@@ -29,25 +29,7 @@ export function cem() {
             module.declarations
               .filter(declaration => declaration.tagName)
               .forEach(declaration => {
-                declaration.attributes = [
-                  ...(declaration.attributes ?? []),
-                  {
-                    name: 'nve-layout',
-                    deprecated: true,
-                    description: '⚠️ nve-layout not supported on custom element tags',
-                    type: {
-                      text: 'disallowed'
-                    }
-                  },
-                  {
-                    name: 'nve-text',
-                    deprecated: true,
-                    description: '⚠️ nve-text not supported on custom element tags',
-                    type: {
-                      text: 'disallowed'
-                    }
-                  }
-                ];
+                declaration.attributes = (declaration.attributes ?? []).filter(attr => !attr.deprecated);
               });
           });
 
