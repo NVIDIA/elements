@@ -26,8 +26,11 @@
 CSS Grid provides two-dimensional control over both rows and columns. The Elements grid system implements CSS Grid through the `nve-layout` API to simplify complex layout creation.
 
 <nve-alert-group>
-  <nve-alert>
-    <nve-icon slot="icon">🎓</nve-icon> Learn more about CSS Grid in the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout" target="_blank" nve-text="link">MDN Grid Layout guide</a>, this comprehensive <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank" nve-text="link">CSS-Tricks Grid guide</a>, and practice with the interactive <a href="https://cssgridgarden.com/" target="_blank" nve-text="link">CSS Grid Garden</a> game.
+  <nve-alert style="--align-items: start">
+    <nve-icon slot="icon" name="academic-cap"></nve-icon>
+    <div nve-text="relaxed">
+      Learn more about CSS Grid in the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout" target="_blank" nve-text="link">MDN Grid Layout guide</a>, this comprehensive <a href="https://css-tricks.com/snippets/css/complete-guide-grid/" target="_blank" nve-text="link">CSS-Tricks Grid guide</a>, and practice with the interactive <a href="https://cssgridgarden.com/" target="_blank" nve-text="link">CSS Grid Garden</a> game.
+    </div>
   </nve-alert>
 </nve-alert-group>
 
@@ -108,8 +111,9 @@ Similar to flexbox layouts, grid supports comprehensive alignment options that c
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
+    <nve-icon slot="icon" name="academic-cap"></nve-icon>
     <div nve-text="relaxed">
-      <strong>Alignment tip:</strong> Grid alignment works on the entire grid container. For individual item alignment, consider wrapping items in flexbox containers or using CSS custom properties for fine-tuned control. See the <a href="#child-controlled-spans-vs-parent-controlled-spans">child-controlled spans section</a> for more granular layout control options.
+       Grid alignment works on the entire grid container. For individual item alignment, consider wrapping items in flexbox containers or using CSS custom properties for fine-tuned control. See the <a href="#child-controlled-spans-vs-parent-controlled-spans">child-controlled spans section</a> for more granular layout control options.
     </div>
   </nve-alert>
 </nve-alert-group>
