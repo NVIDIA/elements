@@ -27,8 +27,8 @@
     "./data.html.json": "./dist/data.html.json",
     "./*.stories.json": "./dist/*.stories.json",
     "./layout.css": "./dist/layout.css",
-    "./layout-labs-viewport.css": "./dist/layout-labs-viewport.css",
-    "./layout-labs-container.css": "./dist/layout-labs-container.css",
+    "./labs/layout-viewport.css": "./dist/labs/layout-viewport.css",
+    "./labs/layout-container.css": "./dist/labs/layout-container.css",
     "./typography.css": "./dist/typography.css",
     "./view-transitions.css": "./dist/view-transitions.css",
     ".": {
