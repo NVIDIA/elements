@@ -19,8 +19,11 @@
 By optionally importing the responsive viewport layout module, the `nve-layout` this system is extended using [CSS Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@media) for adaptive responsive design based on the browser viewport width rather than the container element's width.
 
 <nve-alert-group>
-  <nve-alert>
-    <nve-icon slot="icon">🎓</nve-icon> Learn more about media queries in this Mozilla <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media" target="_blank" nve-text="link">MDN</a> documentation.
+  <nve-alert style="--align-items: start">
+    <nve-icon slot="icon" name="academic-cap"></nve-icon>
+    <div nve-text="relaxed">
+      Learn more about media queries in this Mozilla <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media" target="_blank" nve-text="link">MDN</a> documentation.
+    </div>
   </nve-alert>
 </nve-alert-group>
 
@@ -49,8 +52,10 @@ Conditional gap sizing example: `nve-layout="row @sm|gap:xxxs @md|gap:md @lg|gap
 ```
 
 <nve-alert-group status="accent">
-  <nve-alert>
-    Note that viewport-based responsive layout responds to the browser window size, not the container size. Use <a href="docs/internal/layout/responsive/container/" nve-text="link">Container Queries</a> if you need container-aware responsive behavior.
+  <nve-alert style="--align-items: start">
+    <div nve-text="relaxed">
+      Viewport-based responsive layout responds to the browser window size, not the container size. Use <a href="docs/internal/layout/responsive/container/" nve-text="link">Container Queries</a> if you need container-aware responsive behavior.
+    </div>
   </nve-alert>
 </nve-alert-group>
 
@@ -115,14 +120,14 @@ Grid structure can be varied based on viewport size using the following syntax w
 
 ```html
 <section nve-layout="grid gap:md span-items:12 @sm|span-items:6 @md|span-items:4 @lg|span-items:3">
-  <nve-logo size="lg" color="blue-cobalt">1</nve-logo>
-  <nve-logo size="lg" color="blue-cobalt">2</nve-logo>
-  <nve-logo size="lg" color="blue-cobalt">3</nve-logo>
-  <nve-logo size="lg" color="blue-cobalt">4</nve-logo>
-  <nve-logo size="lg" color="blue-cobalt">5</nve-logo>
-  <nve-logo size="lg" color="blue-cobalt">6</nve-logo>
-  <nve-logo size="lg" color="blue-cobalt">7</nve-logo>
-  <nve-logo size="lg" color="blue-cobalt">8</nve-logo>
+  <nve-logo size="lg" color="purple-plum">1</nve-logo>
+  <nve-logo size="lg" color="purple-plum">2</nve-logo>
+  <nve-logo size="lg" color="purple-plum">3</nve-logo>
+  <nve-logo size="lg" color="purple-plum">4</nve-logo>
+  <nve-logo size="lg" color="purple-plum">5</nve-logo>
+  <nve-logo size="lg" color="purple-plum">6</nve-logo>
+  <nve-logo size="lg" color="purple-plum">7</nve-logo>
+  <nve-logo size="lg" color="purple-plum">8</nve-logo>
 </section>
 ```
 
@@ -149,41 +154,22 @@ Or:
 
 Since hiding elements only affects the display of the element itself and not the layout of its children, we use the `nve-display` attribute for responsive visibility control.
 
-<nve-alert-group status="accent">
+<nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      <strong>Important:</strong> Element visibility (hiding/showing) uses the separate <code>nve-display</code> attribute rather than <code>nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how children are arranged. For example, <code>nve-display="hide @md|show"</code> hides an element until the viewport is at least 768px wide.
+      Element visibility (hiding) uses the separate <code>nve-display</code> attribute rather than <code>nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how children are arranged.
     </div>
   </nve-alert>
 </nve-alert-group>
 
 The following media query breakpoints are available for hiding:
 
-- `hide`
-- `@sm|hide`
-- `@md|hide`
-- `@lg|hide`
-- `@xl|hide`
-- `@xxl|hide`
-
-Element hiding can be reversed using the `show` attribute:
-
-- `@sm|show`
-- `@md|show`
-- `@lg|show`
-- `@xl|show`
-- `@xxl|show`
-
-<nve-alert-group>
-  <nve-alert style="--align-items: start">
-    <div nve-text="relaxed">
-      <strong>Note:</strong> This responsive layout system is <em>minimum width based</em> using a mobile-first approach.
-      Combine <code>hide</code> and <code>@show|</code> attributes to have elements hidden by default and display at larger viewport sizes.
-    </div>
-  </nve-alert>
-</nve-alert-group>
-
-The `@show|...` attribute will reverse setting of `display: none` back to `display: initial`.
+- `nve-display="hide"`
+- `nve-display="@sm|hide"`
+- `nve-display="@md|hide"`
+- `nve-display="@lg|hide"`
+- `nve-display="@xl|hide"`
+- `nve-display="@xxl|hide"`
 
 {% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportHideResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
@@ -201,6 +187,6 @@ Example combining both:
 ```html
 <section nve-layout="row @md|gap:lg">
   <div>Always visible</div>
-  <div nve-display="hide @md|show">Visible when viewport ≥ 768px</div>
+  <div nve-display="@md|hide">Hidden when viewport ≥ 768px</div>
 </section>
 ```

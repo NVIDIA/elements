@@ -26,8 +26,11 @@
 Horizontal layouts support common UI patterns like navigation bars and button groups. The Elements horizontal layout system uses CSS Flexbox to create one-dimensional layouts that adapt to content and container constraints.
 
 <nve-alert-group>
-  <nve-alert>
-    <nve-icon slot="icon">🎓</nve-icon> Deep dive into flexbox with the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox" target="_blank" nve-text="link">MDN Flexbox guide</a> and this visual <a href="https://flexboxfroggy.com/" target="_blank" nve-text="link">Flexbox Froggy</a> game.
+  <nve-alert style="--align-items: start">
+    <nve-icon slot="icon" name="academic-cap"></nve-icon>
+    <div nve-text="relaxed">
+      Deep dive into flexbox with the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox" target="_blank" nve-text="link">MDN Flexbox guide</a> and this visual <a href="https://flexboxfroggy.com/" target="_blank" nve-text="link">Flexbox Froggy</a> game.
+    </div>
   </nve-alert>
 </nve-alert-group>
 
