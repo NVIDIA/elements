@@ -79,7 +79,7 @@ export async function storyShortcode(
     name: `${story.entrypoint}_${storyName}`
   });
   const playgroundButton = story
-    ? `<nve-button container="flat" slot="suffix"><a href="${playgroundURL}" target="_blank">Playground</a></nve-button>`
+    ? `<nve-button container="flat" slot="suffix"><a href="${playgroundURL}" target="_blank">Open in Playground</a></nve-button>`
     : '';
 
   const templateContent = config.inline
@@ -100,7 +100,6 @@ export async function storyShortcode(
   style="--height: ${config.height}"
   source="${md.utils.escapeHtml(story?.template?.replace(/\n\n/g, '\n') ?? '')}"
   tag="${story.element || tag}">
-  ${playgroundButton}
 </nvd-canvas-editable>`
       : /* html */ `
 ${markdown.render(story.description ?? '')}
