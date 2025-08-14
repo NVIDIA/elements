@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.3...@nvidia-elements/core-v1.39.4) (2025-08-14)
+
+
+### Bug Fixes
+
+* **elements:** flat button contrast ([011cb4b](https://github.com/NVIDIA/elements/commit/011cb4baf2cbaa0e0914fa96672d846db7363ac5))
+
 ## [@nvidia-elements/core-v1.39.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.2...@nvidia-elements/core-v1.39.3) (2025-07-31)
 
 
