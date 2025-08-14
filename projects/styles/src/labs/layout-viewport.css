@@ -1,0 +1,75 @@
+/* Responsive Layout - Viewport (@media query based) */
+@layer nve-layout, nve-viewport, nve-container;
+
+@layer nve-viewport {
+  [nve-layout] {
+    /* Responsive (Media Query Based) Layout & Padding */
+    @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
+      @each $space-token in xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl {
+        @media (min-width: $(breakpoint-value)) {
+          &[nve-layout~='@$(breakpoint)|gap:$(space-token)'] {
+            gap: var(--nve-ref-space-$(space-token));
+          }
+
+          &[nve-layout~='@$(breakpoint)|pad:$(space-token)'] {
+            padding: var(--nve-ref-space-$(space-token));
+          }
+        }
+      }
+    }
+
+    /* Responsive (Media Query Based) Row vs Column */
+    @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
+      @media (min-width: $(breakpoint-value)) {
+        &[nve-layout~='@$(breakpoint)|row'] {
+          flex-direction: row;
+          place-items: flex-start;
+        }
+
+        &[nve-layout~='@$(breakpoint)|column'] {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        &[nve-layout~='@$(breakpoint)|row-reverse'] {
+          flex-direction: row-reverse;
+          justify-content: flex-end;
+        }
+
+        &[nve-layout~='@$(breakpoint)|column-reverse'] {
+          flex-direction: column-reverse;
+          align-items: flex-start;
+        }
+      }
+    }
+
+    /* Responsive Grid Breakpoints (Media Query Based) */
+    &[nve-layout~='grid'] {
+      @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
+        @each $num in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
+          @media (min-width: $(breakpoint-value)) {
+            & > [nve-layout~='@$(breakpoint)|span:$(num)'],
+            &[nve-layout~='@$(breakpoint)|span-items:$(num)'] > * {
+              grid-column: span $(num) / span $(num);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /* Media Query Based Hiding using nve-display attribute */
+  [nve-display] {
+    &[nve-display~='hide'] {
+      display: none;
+    }
+
+    @each $breakpoint, $breakpoint-value in (sm, md, lg, xl, xxl), (576px, 768px, 1024px, 1280px, 1440px) {
+      @media (max-width: $(breakpoint-value)) {
+        &[nve-display~='@$(breakpoint)|hide'] {
+          display: none;
+        }
+      }
+    }
+  }
+}

@@ -13,8 +13,8 @@ export default defineConfig(() => {
           index: resolve(import.meta.dirname, './src/index.ts'),
           'typography.css': resolve(import.meta.dirname, './src/typography.css'),
           'layout.css': resolve(import.meta.dirname, './src/layout.css'),
-          'layout-labs-viewport.css': resolve(import.meta.dirname, './src/layout-labs-viewport.css'),
-          'layout-labs-container.css': resolve(import.meta.dirname, './src/layout-labs-container.css'),
+          'labs/layout-viewport.css': resolve(import.meta.dirname, './src/labs/layout-viewport.css'),
+          'labs/layout-container.css': resolve(import.meta.dirname, './src/labs/layout-container.css'),
           'view-transitions.css': resolve(import.meta.dirname, './src/view-transitions.css')
         }
       }
