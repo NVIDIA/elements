@@ -13,9 +13,17 @@ import '@nvidia-elements/code/codeblock/define.js';
 import { PlaygroundService } from '@nve-internals/tools/playground';
 
 // eslint-disable-next-line no-inline-css/no-restricted-imports
-import layoutLabsViewportStyles from '@nvidia-elements/styles/layout-labs-viewport.css?inline'; // temporary workaround as latest version is not published yet
+import themeStyles from '@nvidia-elements/themes/index.css?inline'; // temporary workaround as latest version is not published yet
 // eslint-disable-next-line no-inline-css/no-restricted-imports
-import layoutLabsContainerStyles from '@nvidia-elements/styles/layout-labs-container.css?inline'; // temporary workaround as latest version is not published yet
+import darkThemeStyles from '@nvidia-elements/themes/dark.css?inline'; // temporary workaround as latest version is not published yet
+// eslint-disable-next-line no-inline-css/no-restricted-imports
+import typographyStyles from '@nvidia-elements/styles/typography.css?inline'; // temporary workaround as latest version is not published yet
+// eslint-disable-next-line no-inline-css/no-restricted-imports
+import layoutStyles from '@nvidia-elements/styles/layout.css?inline'; // temporary workaround as latest version is not published yet
+// eslint-disable-next-line no-inline-css/no-restricted-imports
+import layoutLabsViewportStyles from '@nvidia-elements/styles/labs/layout-viewport.css?inline'; // temporary workaround as latest version is not published yet
+// eslint-disable-next-line no-inline-css/no-restricted-imports
+import layoutLabsContainerStyles from '@nvidia-elements/styles/labs/layout-container.css?inline'; // temporary workaround as latest version is not published yet
 import styles from './canvas-editable.css?inline';
 
 declare global {
@@ -96,11 +104,15 @@ export class CanvasEditable extends LitElement {
           <!DOCTYPE html>
           <html nve-theme="${globalThis.document.documentElement.getAttribute('nve-theme')}" nve-transition="auto">
             <head>
-              <link rel="stylesheet" href="https://esm.nvidia.com/@nvidia-elements/core@latest/dist/bundles/index.css" />
               <style>
+                ${themeStyles}
+                ${darkThemeStyles}
+                ${typographyStyles}
+                ${layoutStyles}
                 ${layoutLabsViewportStyles}
                 ${layoutLabsContainerStyles}
               </style>
+
               <script async type="module" src="https://esm.nvidia.com/@nvidia-elements/core@latest/dist/bundles/index.js"></script>
             </head>
             <body>

@@ -30,29 +30,29 @@ export const PadResponsive = {
 export const HideResponsive = {
   render: () => html`
     <section nve-layout="row gap:lg">
-      <nve-logo size="lg" color="green-mint" nve-display="hide &xs|show">1</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&xs|hide">1</nve-logo>
 
-      <nve-logo size="lg" color="green-mint" nve-display="hide &sm|show">2</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-display="hide &sm|show">3</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-display="hide &sm|show">4</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&sm|hide">2</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&sm|hide">3</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&sm|hide">4</nve-logo>
 
-      <nve-logo size="lg" color="green-mint" nve-display="hide &lg|show">5</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-display="hide &lg|show">6</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-display="hide &lg|show">7</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&lg|hide">5</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&lg|hide">6</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&lg|hide">7</nve-logo>
 
-      <nve-logo size="lg" color="green-mint" nve-display="hide &xl|show">8</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-display="hide &xl|show">9</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&xl|hide">8</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&xl|hide">9</nve-logo>
 
-      <nve-logo size="lg" color="green-mint" nve-display="hide &xxl|show">10</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-display="&xs|hide &xxl|show">11</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-display="&sm|hide &xxl|show">12</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&xxl|hide">10</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&xs|hide">11</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&sm|hide">12</nve-logo>
     </section>
   `
 }
 
 export const FlexDirectionResponsive = {
   render: () => html`
-    <section nve-layout="column &md|row gap:sm &md|gap:xxl">
+    <section nve-layout="column gap:sm &md|row &md|gap:xxl">
       <nve-logo size="lg" color="green-mint">1</nve-logo>
       <nve-logo size="lg" color="green-mint">2</nve-logo>
       <nve-logo size="lg" color="green-mint">3</nve-logo>
@@ -71,7 +71,7 @@ export const FlexDirectionReverse = {
       }
     </style>
 
-    <section nve-layout="column column-reverse &lg|row gap:lg">
+    <section nve-layout="column gap:lg &lg|row-reverse">
       <nve-logo class="large" color="green-mint">A</nve-logo>
       <nve-logo class="large" color="green-mint">B</nve-logo>
     </section>
@@ -126,33 +126,33 @@ export const ViewportPadResponsive = {
 export const ViewportHideResponsive = {
   render: () => html`
     <section nve-layout="row gap:lg">
-      <nve-logo size="lg" color="blue-cobalt">1</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt">2</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt">3</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt">4</nve-logo>
+      <nve-logo size="lg" color="purple-violet">1</nve-logo>
+      <nve-logo size="lg" color="purple-violet">2</nve-logo>
+      <nve-logo size="lg" color="purple-violet">3</nve-logo>
+      <nve-logo size="lg" color="purple-violet">4</nve-logo>
 
-      <nve-logo size="lg" color="blue-cobalt" nve-display="hide @sm|show">5</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt" nve-display="hide @sm|show">6</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt" nve-display="hide @sm|show">7</nve-logo>
+      <nve-logo size="lg" color="purple-violet" nve-display="@sm|hide">5</nve-logo>
+      <nve-logo size="lg" color="purple-violet" nve-display="@sm|hide">6</nve-logo>
+      <nve-logo size="lg" color="purple-violet" nve-display="@sm|hide">7</nve-logo>
 
-      <nve-logo size="lg" color="blue-cobalt" nve-display="hide @md|show">8</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt" nve-display="hide @md|show">9</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt" nve-display="hide @md|show">10</nve-logo>
+      <nve-logo size="lg" color="purple-violet" nve-display="@md|hide">8</nve-logo>
+      <nve-logo size="lg" color="purple-violet" nve-display="@md|hide">9</nve-logo>
+      <nve-logo size="lg" color="purple-violet" nve-display="@md|hide">10</nve-logo>
 
-      <nve-logo size="lg" color="blue-cobalt" nve-display="hide @lg|show">11</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt" nve-display="hide @lg|show">12</nve-logo>
+      <nve-logo size="lg" color="purple-violet" nve-display="@lg|hide">11</nve-logo>
+      <nve-logo size="lg" color="purple-violet" nve-display="@lg|hide">12</nve-logo>
     </section>
   `
 }
 
 export const ViewportFlexDirectionResponsive = {
   render: () => html`
-    <section nve-layout="column @sm|row gap:sm @sm|gap:xxl">
-      <nve-logo size="lg" color="blue-cobalt">1</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt">2</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt">3</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt">4</nve-logo>
-      <nve-logo size="lg" color="blue-cobalt">5</nve-logo>
+    <section nve-layout="column gap:sm @sm|row @sm|gap:xxl">
+      <nve-logo size="lg" color="purple-violet">1</nve-logo>
+      <nve-logo size="lg" color="purple-violet">2</nve-logo>
+      <nve-logo size="lg" color="purple-violet">3</nve-logo>
+      <nve-logo size="lg" color="purple-violet">4</nve-logo>
+      <nve-logo size="lg" color="purple-violet">5</nve-logo>
     </section>
   `
 }
@@ -166,9 +166,9 @@ export const ViewportFlexDirectionReverse = {
       }
     </style>
 
-    <section nve-layout="column column-reverse @sm|row gap:lg">
-      <nve-logo class="large" color="blue-cobalt">A</nve-logo>
-      <nve-logo class="large" color="blue-cobalt">B</nve-logo>
+    <section nve-layout="column gap:lg @sm|row-reverse">
+      <nve-logo class="large" color="purple-violet">A</nve-logo>
+      <nve-logo class="large" color="purple-violet">B</nve-logo>
     </section>
   `
 }
@@ -209,7 +209,7 @@ export const ResponsiveCombined = {
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="hide &sm|show"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
               <p>This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
@@ -219,7 +219,7 @@ export const ResponsiveCombined = {
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="hide &sm|show"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
               <p>This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
@@ -229,37 +229,37 @@ export const ResponsiveCombined = {
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="hide &sm|show"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
               <p>This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
 
-          <nve-card nve-display="hide @sm|show">
+          <nve-card nve-display="@sm|hide">
             <nve-card-header>
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="hide &sm|show"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
               <p>This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
 
-          <nve-card nve-display="hide @sm|show">
+          <nve-card nve-display="@sm|hide">
             <nve-card-header>
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="hide &sm|show"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
               <p>This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
           
-          <nve-card nve-display="hide @sm|show">
+          <nve-card nve-display="@sm|hide">
             <nve-card-header>
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="hide &sm|show"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
               <p>This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>

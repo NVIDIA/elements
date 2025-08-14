@@ -45,8 +45,8 @@ export function render(data) {
       @import '@nvidia-elements/themes/index.css';
       @import '@nvidia-elements/themes/dark.css';
       @import '@nvidia-elements/styles/layout.css';
-      @import '@nvidia-elements/styles/layout-labs-viewport.css';
-      @import '@nvidia-elements/styles/layout-labs-container.css';
+      @import '@nvidia-elements/styles/labs/layout-viewport.css';
+      @import '@nvidia-elements/styles/labs/layout-container.css';
       @import '@nvidia-elements/styles/typography.css';
       @import '@nvidia-elements/styles/view-transitions.css';
     </style>
