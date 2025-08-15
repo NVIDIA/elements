@@ -1,3 +1,12 @@
+## [@nvidia-elements/styles-v1.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.10.1...@nvidia-elements/styles-v1.11.0) (2025-08-15)
+
+
+### Features
+
+* **styles:** publish preview of responsive css under layout-labs scope ([430f7f9](https://github.com/NVIDIA/elements/commit/430f7f9daf05214841e7957b611322546f2dec2d))
+* **styles:** publish responsive under styles/labs/ sub-directory ([04d3da6](https://github.com/NVIDIA/elements/commit/04d3da675187973d98e383eb8b3b58901d7e5ea9))
+* **styles:** scope hide/show api to new nve-display attr ([f3463e7](https://github.com/NVIDIA/elements/commit/f3463e7da3ae2074b4bdf1a1aed11b9b9c5c6271))
+
 ## [@nvidia-elements/styles-v1.10.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.10.0...@nvidia-elements/styles-v1.10.1) (2025-06-04)
 
 
