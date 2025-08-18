@@ -33,7 +33,7 @@ export const ResponsiveTabs = {
         <nve-tabs-item nve-display="&sm|hide">Tab 4</nve-tabs-item>
         <nve-tabs-item nve-display="&sm|hide">Tab 5</nve-tabs-item>
         <nve-tabs-item nve-display="&sm|hide">Tab 6</nve-tabs-item>
-        <nve-tabs-item popovertarget="more-tabs" nve-display="&sm|hide">
+        <nve-tabs-item popovertarget="more-tabs" nve-display="&sm|show">
           <nve-icon name="more-actions"></nve-icon>
         </nve-tabs-item>
       </nve-tabs>
@@ -83,7 +83,7 @@ export const ResponsiveToolbar = {
 
         <nve-icon-button container="flat" slot="suffix" icon-name="gear" aria-label="Settings" nve-display="&md|hide"></nve-icon-button>
 
-        <nve-icon-button container="flat" slot="suffix" icon-name="more-actions" aria-label="More actions" popovertarget="toolbar-more-actions" nve-display="&md|hide"></nve-icon-button>
+        <nve-icon-button container="flat" slot="suffix" icon-name="more-actions" aria-label="More actions" popovertarget="toolbar-more-actions" nve-display="&md|show"></nve-icon-button>
       </nve-toolbar>
 
       <nve-dropdown id="toolbar-more-actions">
