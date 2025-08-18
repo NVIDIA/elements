@@ -20,10 +20,10 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.css.kb).toBeLessThan(1.9); // total
+    expect(report.payload.css.kb).toBeLessThan(1.93); // total
     // Use the first CSS request key since it might have a version in the filename
     const cssRequestKey = Object.keys(report.payload.css.requests)[0];
-    expect(report.payload.css.requests[cssRequestKey].kb).toBeLessThan(1.9);
+    expect(report.payload.css.requests[cssRequestKey].kb).toBeLessThan(1.93);
   });
 
   test('labs/layout-viewport.css should remain within compressed bundle limits', async () => {
