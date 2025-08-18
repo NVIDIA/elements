@@ -162,7 +162,7 @@ Since hiding elements only affects the display of the element itself and not the
   </nve-alert>
 </nve-alert-group>
 
-The following media query breakpoints are available for hiding:
+The following attributes are available for _hiding_ elements at specific viewport breakpoints and below:
 
 - `nve-display="hide"`
 - `nve-display="@sm|hide"`
@@ -170,6 +170,15 @@ The following media query breakpoints are available for hiding:
 - `nve-display="@lg|hide"`
 - `nve-display="@xl|hide"`
 - `nve-display="@xxl|hide"`
+
+You may want to now `show` elements at smaller viewport widths.
+The following attributes are available for _showing_ elements at specific viewport breakpoints and below:
+
+- `nve-display="@sm|show"`
+- `nve-display="@md|show"`
+- `nve-display="@lg|show"`
+- `nve-display="@xl|show"`
+- `nve-display="@xxl|show"`
 
 {% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportHideResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 

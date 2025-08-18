@@ -85,5 +85,13 @@
         }
       }
     }
+
+    @each $breakpoint, $breakpoint-value in (xs, sm, md, lg, xl, xxl), (160px, 320px, 480px, 640px, 800px, 960px) {
+      @container (width >= $(breakpoint-value)) {
+        &[nve-display~='&$(breakpoint)|show'] {
+          display: none;
+        }
+      }
+    }
   }
 }

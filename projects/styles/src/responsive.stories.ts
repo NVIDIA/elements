@@ -44,8 +44,10 @@ export const HideResponsive = {
       <nve-logo size="lg" color="green-mint" nve-display="&xl|hide">9</nve-logo>
 
       <nve-logo size="lg" color="green-mint" nve-display="&xxl|hide">10</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-display="&xs|hide">11</nve-logo>
-      <nve-logo size="lg" color="green-mint" nve-display="&sm|hide">12</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&xxl|hide">11</nve-logo>
+      <nve-logo size="lg" color="green-mint" nve-display="&xxl|hide">12</nve-logo>
+
+      <nve-logo size="lg" color="green-mint" nve-display="&sm|show">13</nve-logo>
     </section>
   `
 }
@@ -141,6 +143,8 @@ export const ViewportHideResponsive = {
 
       <nve-logo size="lg" color="purple-violet" nve-display="@lg|hide">11</nve-logo>
       <nve-logo size="lg" color="purple-violet" nve-display="@lg|hide">12</nve-logo>
+
+      <nve-logo size="lg" color="purple-violet" nve-display="@sm|show">13</nve-logo>
     </section>
   `
 }
