@@ -25,7 +25,7 @@ The layout system can be extended with responsive capabilities using two differe
 The responsive system uses two distinct attributes:
 
 - **`nve-layout`**: Controls layout properties that affect how children are arranged (gap, padding, flex direction, grid structure)
-- **`nve-display`**: Controls visibility of individual elements (hide)
+- **`nve-display`**: Controls visibility of individual elements (hide/show)
 
 This separation exists because hiding an element only affects its own display, not the layout of its children. By using `nve-display` for visibility control, we maintain a clear distinction between layout utilities that affect child arrangement and display utilities that affect element visibility.
 
@@ -186,7 +186,7 @@ Both responsive layout systems support conditional styling across defined pixel 
 - **Flex direction**: Switch between `row` and `column` layouts
 - **Direction reversal**: `row-reverse` and `column-reverse` options
 - **Grid structure**: Varying grid column spans and layouts
-- **Visibility control**: Hide elements based on breakpoints
+- **Visibility control**: Hide/show elements based on breakpoints
 
 ### Important Note on Visibility Control
 
@@ -194,10 +194,12 @@ Hiding and showing elements uses the `nve-display` attribute instead of `nve-lay
 
 ```html
 <!-- Container queries -->
-<nve-badge nve-display="&md|hide">Hidden when container is ≥ 480px wide</nve-badge>
+<nve-badge nve-display="&md|hide">Hidden when container is <= 480px wide</nve-badge>
+<nve-badge nve-display="&md|show">Shown when container is <= 480px wide</nve-badge>
 
 <!-- Viewport queries -->
-<nve-badge nve-display="@lg|hide">Hidden when viewport is ≥ 1024px wide</nve-badge>
+<nve-badge nve-display="@lg|hide">Hidden when viewport is <= 1024px wide</nve-badge>
+<nve-badge nve-display="@lg|show">Shown when viewport is <= 1024px wide</nve-badge>
 ```
 
 <script type="module">
