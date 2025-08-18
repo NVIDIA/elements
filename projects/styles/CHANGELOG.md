@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.12.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.11.0...@nvidia-elements/styles-v1.12.0) (2025-08-18)
+
+
+### Features
+
+* **styles:** add show api to back nve-display ([39eb147](https://github.com/NVIDIA/elements/commit/39eb147165463dc920aca1c058771fec505509bf))
+
 ## [@nvidia-elements/styles-v1.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.10.1...@nvidia-elements/styles-v1.11.0) (2025-08-15)
 
 
