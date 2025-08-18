@@ -70,6 +70,12 @@
           display: none;
         }
       }
+
+      @media (min-width: $(breakpoint-value)) {
+        &[nve-display~='@$(breakpoint)|show'] {
+          display: none;
+        }
+      }
     }
   }
 }
