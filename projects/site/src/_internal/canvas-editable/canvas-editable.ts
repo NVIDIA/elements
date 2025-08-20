@@ -4,9 +4,11 @@ import { customElement } from 'lit/decorators/custom-element.js';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { state } from 'lit/decorators/state.js';
 import '@nvidia-elements/core/icon/define.js';
+import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/copy-button/define.js';
+import '@nvidia-elements/core/resize-handle/define.js';
 import '@nvidia-elements/monaco/input/define.js';
 import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/define.js';
@@ -39,6 +41,12 @@ export class CanvasEditable extends LitElement {
 
   @state() private showSource = false;
   @state() private editableSource: string = '';
+  @state() private previewWidth: number = 500;
+
+  protected firstUpdated() {
+    // Set previewWidth after determining if the layout is horizontal or not
+    this.previewWidth = this.horizontalLayout ? 500 : 1260;
+  }
 
   static metadata = {
     tag: 'nvd-canvas-editable',
@@ -62,11 +70,38 @@ export class CanvasEditable extends LitElement {
     return html`
       <div internal-host class=${this.horizontalLayout ? 'horizontal-layout' : ''}>
         <div class="resizer">
-          <div class="preview">
-            ${this.readonly && !this.#isPopoverElement(this.tag) ? this.#renderInlinePreview() : this.#renderSandboxedPreview()}
+          <div class="preview-wrapper" style=${!this.horizontalLayout ? `width: ${this.previewWidth}px` : ''}>
+            <div class="preview" style=${this.horizontalLayout ? `width: ${this.previewWidth}px` : ''}>
+              ${this.readonly && !this.#isPopoverElement(this.tag) ? this.#renderInlinePreview() : this.#renderSandboxedPreview()}
+            </div>
+            ${
+              !this.horizontalLayout
+                ? html`<nve-resize-handle 
+              class="preview-resize-handle" 
+              orientation="vertical" 
+              min="300" 
+              max="1260" 
+              value="${this.previewWidth}" 
+              step="1"
+              @input=${this.#handleResize}></nve-resize-handle>`
+                : ''
+            }
           </div>
           <div class="preview-backdrop" .hidden=${this.horizontalLayout}></div>
         </div>
+
+        ${
+          this.horizontalLayout
+            ? html`<nve-resize-handle 
+          class="horizontal-resize-handle"
+          orientation="vertical" 
+          min="150" 
+          max="800" 
+          value="${this.previewWidth}" 
+          step="1"
+          @input=${this.#handleResize}></nve-resize-handle>`
+            : ''
+        }
 
         <div class="code" .hidden=${!this.horizontalLayout && !this.showSource}>
           ${
@@ -158,6 +193,11 @@ export class CanvasEditable extends LitElement {
   #handleChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.editableSource = input.value;
+  }
+
+  #handleResize(event: Event) {
+    const handle = event.target as HTMLInputElement;
+    this.previewWidth = Number(handle.value);
   }
 
   async #handlePlaygroundClick() {
