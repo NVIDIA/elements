@@ -6,9 +6,9 @@ alwaysApply: false
 
 # Accessibility Tests (`.test.axe.ts`)
 
-You MUST review @projects/site/src/docs/internal/testing/accessibility.md before making any changes:
+You MUST review @projects/site/src/docs/internal/guidelines/testing-accessibility.md before making any changes:
 
 ## References
 
 - [Accessibility Test Example](/projects/elements/src/badge/badge.test.axe.ts)
-- [Documentation](/projects/site/src/docs/internal/testing/accessibility.md)
+- [Documentation](/projects/site/src/docs/internal/guidelines/testing-accessibility.md)
