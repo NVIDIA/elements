@@ -316,19 +316,23 @@ export const renderDocsNav = data => /* html */ `
   <nve-tree-node ${data.page.url.includes('/docs/internal/') ? 'expanded' : ''} ${data.page.url === '/docs/internal/' ? 'highlighted' : ''}>
     <a href="docs/internal/">Internal</a>
     <nve-tree-node><a href="stories/">Stories</a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/internal/testing/' ? 'highlighted' : ''}><a href="docs/internal/testing/">Testing Guidelines</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/internal/testing/unit/') ? 'highlighted' : ''}><a href="docs/internal/testing/unit/">Unit Testing</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/internal/testing/accessibility/') ? 'highlighted' : ''}><a href="docs/internal/testing/accessibility/">Accessibility Testing</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/internal/testing/lighthouse/') ? 'highlighted' : ''}><a href="docs/internal/testing/lighthouse/">Lighthouse Testing</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/internal/testing/ssr/') ? 'highlighted' : ''}><a href="docs/internal/testing/ssr/">SSR Testing</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/internal/testing/visual/') ? 'highlighted' : ''}><a href="docs/internal/testing/visual/">Visual Testing</a></nve-tree-node>
+
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines') ? 'expanded' : ''} ${data.page.url === '/docs/internal/guidelines/' ? 'highlighted' : ''}>
+      Guidelines
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/typescript/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/typescript/">TypeScript</a></nve-tree-node>
+      <nve-tree-node ${data.page.url === '/docs/internal/guidelines/testing/' ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing/">Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-unit/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing-unit/">Unit Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-accessibility/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing-accessibility/">Accessibility Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-lighthouse/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing-lighthouse/">Lighthouse Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-ssr/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing-ssr/">SSR Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-visual/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing-visual/">Visual Testing</a></nve-tree-node>
+    </nve-tree-node>
 
     <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/') ? 'expanded' : ''} ${data.page.url === '/docs/internal/layout/responsive/' ? 'highlighted' : ''}>
       <a href="docs/internal/layout/responsive/">Responsive Layout Labs</a>
-
-        <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/viewport/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/viewport/">Viewport</a></nve-tree-node>
-        <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/container/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/container/">Container</a></nve-tree-node>
-        <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/patterns/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/patterns/">Patterns</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/viewport/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/viewport/">Viewport</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/container/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/container/">Container</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/patterns/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/patterns/">Patterns</a></nve-tree-node>
     </nve-tree-node>
   </nve-tree-node>
 </nve-tree>

@@ -1,0 +1,13 @@
+---
+description: Details of best practices and conventions for TypeScript.
+globs: **/*.ts
+alwaysApply: false
+---
+
+# TypeScript
+
+You MUST review @projects/site/src/docs/internal/typescript.md before making any changes:
+
+## References
+
+- [Documentation](/projects/site/src/docs/internal/guidelines/typescript.md)
