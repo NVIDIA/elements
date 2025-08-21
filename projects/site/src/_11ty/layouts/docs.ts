@@ -22,12 +22,17 @@ handle.addEventListener('input', e => (panel.style.width = (e.target as HTMLInpu
 
 // auto-scroll to deep-link headers
 setTimeout(() => {
+  const url = new URL(globalThis.window.parent.location.href);
+  const isExamplesRoute = url.pathname.includes('/examples');
+  const isEditMode = url.searchParams.get('edit') === 'true' || url.searchParams.get('edit') === '1';
+  if (isExamplesRoute && isEditMode) return;
+
   const headerId = new URL(globalThis.window.parent.location.href).hash.replace('#', '');
   globalThis.document.getElementById(headerId)?.scrollIntoView({
     behavior: 'smooth',
     block: 'start'
   });
-}, 1500);
+}, 500);
 
 // preserve scroll position between page transitions
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
