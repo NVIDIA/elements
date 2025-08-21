@@ -6,15 +6,15 @@ alwaysApply: false
 
 # Testing Guidelines
 
-You MUST review @projects/site/src/docs/internal/testing/index.md before making any changes:
+You MUST review @projects/site/src/docs/internal/guidelines/testing.md before making any changes:
 
 ## References
 
-- [Testing Guidelines](/projects/site/src/docs/internal/testing/index.md)
-- [Unit Testing](/projects/site/src/docs/internal/testing/unit.md)
-- [Accessibility Testing](/projects/site/src/docs/internal/testing/accessibility.md)
-- [Lighthouse Testing](/projects/site/src/docs/internal/testing/lighthouse.md)
-- [SSR Testing](/projects/site/src/docs/internal/testing/ssr.md)
-- [Visual Testing](/projects/site/src/docs/internal/testing/visual.md)
+- [Testing Guidelines](/projects/site/src/docs/internal/guidelines/testing.md)
+- [Unit Testing](/projects/site/src/docs/internal/guidelines/testing-unit.md)
+- [Accessibility Testing](/projects/site/src/docs/internal/guidelines/testing-accessibility.md)
+- [Lighthouse Testing](/projects/site/src/docs/internal/guidelines/testing-lighthouse.md)
+- [SSR Testing](/projects/site/src/docs/internal/guidelines/testing-ssr.md)
+- [Visual Testing](/projects/site/src/docs/internal/guidelines/testing-visual.md)
 - [Testing Package](/projects/testing/README.md)
 - [Vite Internals](/projects/internals/vite/README.md)

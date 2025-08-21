@@ -6,9 +6,9 @@ alwaysApply: false
 
 # Unit Tests (`.test.ts`)
 
-You MUST review @projects/site/src/docs/internal/testing/unit.md before making any changes:
+You MUST review @projects/site/src/docs/internal/guidelines/testing-unit.md before making any changes:
 
 ## References
 
 - [Unit Test Example](/projects/elements/src/badge/badge.test.ts)
-- [Documentation](/projects/site/src/docs/internal/testing/unit.md)
+- [Documentation](/projects/site/src/docs/internal/guidelines/testing-unit.md)
