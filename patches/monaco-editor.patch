@@ -270,10 +270,42 @@ index e787d70d2cea450a323468d1fa3a9cb3367a1221..75c772ded4c4c2eb22a65845ced30f40
                          this._onMouseLeave(new EditorMouseEvent(e, false, this.viewHelper.viewDomNode));
                      }
 diff --git a/esm/vs/editor/browser/controller/mouseTarget.js b/esm/vs/editor/browser/controller/mouseTarget.js
-index 31ca82a2b7b141c85a23384ed42c7eaad1f97432..77c6a920d40e05a88749ce0654ef1878acc16fbe 100644
+index 31ca82a2b7b141c85a23384ed42c7eaad1f97432..f6c237aab6f8f0242b8efd3b00508b41b5740ae9 100644
 --- a/esm/vs/editor/browser/controller/mouseTarget.js
 +++ b/esm/vs/editor/browser/controller/mouseTarget.js
-@@ -890,8 +890,9 @@ function shadowCaretRangeFromPoint(shadowRoot, x, y) {
+@@ -839,16 +839,28 @@ export class MouseTargetFactory {
+         return result;
+     }
+ }
++// PATCH: Fixes for caret range calculation w/folding indicator, a trailing span.inline-folded with no .text
++function isInlineFolded(el) {
++    return el && el.nodeType === el.ELEMENT_NODE && el.classList.contains('inline-folded');
++}
+ function shadowCaretRangeFromPoint(shadowRoot, x, y) {
+     const range = document.createRange();
+     // Get the element under the point
+     let el = shadowRoot.elementFromPoint(x, y);
+-    if (el !== null) {
++    // PATCH: Fixes for caret range calculation w/folding indicator, a trailing span.inline-folded with no .text
++    if (isInlineFolded(el)) {
++        el = el.parentNode;
++    }
++    // PATCH: Fix RTE for selection range
++    // See: https://github.com/microsoft/monaco-editor/issues/4548
++    // See: https://github.com/microsoft/vscode/pull/215780
++    if (el?.hasChildNodes()) {
+         // Get the last child of the element until its firstChild is a text node
+         // This assumes that the pointer is on the right of the line, out of the tokens
+         // and that we want to get the offset of the last token of the line
+-        while (el && el.firstChild && el.firstChild.nodeType !== el.firstChild.TEXT_NODE && el.lastChild && el.lastChild.firstChild) {
+-            el = el.lastChild;
++        // PATCH: Fixes for caret range calculation w/folding indicator, a trailing span.inline-folded with no .text
++        while (el && el.firstChild && el.firstChild.nodeType !== el.firstChild.TEXT_NODE && el.lastChild && (el.lastChild.firstChild || isInlineFolded(el.lastChild))) {
++            el = isInlineFolded(el.lastChild) ? el.lastChild.previousSibling : el.lastChild;
+         }
+         // Grab its rect
+         const rect = el.getBoundingClientRect();
+@@ -890,8 +902,9 @@ function shadowCaretRangeFromPoint(shadowRoot, x, y) {
              }
          }
          // Creates a range with the text node of the element and set the offset found

@@ -1,0 +1,43 @@
+:host {
+  position: relative;
+}
+
+:host(:not(:state(ready))),
+:host(:state(validating):not(:focus-within)) {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: var(--nve-ref-border-radius-sm);
+    width: calc(100% - var(--nve-ref-border-radius-sm) * 2);
+    height: var(--nve-ref-border-width-md);
+    background: var(--nve-ref-border-color-emphasis);
+    transform-origin: 0% 0%;
+    animation: loading-animation 2.4s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+}
+
+@keyframes loading-animation {
+  0% {
+    transform: scaleX(0.015);
+    transform-origin: 0% 0%;
+  }
+  25% {
+    transform: scaleX(0.4);
+  }
+  50% {
+    transform: scaleX(0.015);
+    transform-origin: 100% 0%;
+  }
+  50.1% {
+    transform: scaleX(0.015);
+    transform-origin: 100% 0%;
+  }
+  75% {
+    transform: scaleX(0.4);
+  }
+  100% {
+    transform: scaleX(0.015);
+    transform-origin: 0% 0%;
+  }
+}

@@ -100,6 +100,18 @@
       "types": "./dist/input/define.d.ts",
       "default": "./dist/input/define.js"
     },
+    "./problems": {
+      "types": "./dist/problems/index.d.ts",
+      "default": "./dist/problems/index.js"
+    },
+    "./problems/index.js": {
+      "types": "./dist/problems/index.d.ts",
+      "default": "./dist/problems/index.js"
+    },
+    "./problems/define.js": {
+      "types": "./dist/problems/define.d.ts",
+      "default": "./dist/problems/define.js"
+    },
     "./themes": {
       "types": "./dist/themes/index.d.ts",
       "default": "./dist/themes/index.js"
