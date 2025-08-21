@@ -13,6 +13,7 @@ import type { MonacoEditor } from '@nvidia-elements/monaco/editor';
 import type { BaseMonacoEditor } from './editor.js';
 
 import styles from './input.css?inline';
+import loadingStyles from './loading.css?inline';
 
 export type SuggestedLanguages =
   | 'css'
@@ -77,7 +78,7 @@ export abstract class BaseMonacoInput<
   T extends BaseMonacoEditor<TEditor>,
   TEditor extends monaco.editor.IEditor
 > extends FormControlMixin<typeof LitElement, string>(LitElement) {
-  static styles = useStyles([styles]);
+  static styles = useStyles([styles, loadingStyles]);
 
   #monaco: Monaco | undefined;
   #editor: monaco.editor.IStandaloneCodeEditor | undefined;
@@ -358,17 +359,17 @@ export abstract class BaseMonacoInput<
   }
 
   #setSyntaxValidationPending() {
-    this._internals.states.add('validating-syntax');
+    this._internals.states.add('validating');
     this._internals.setValidity({ customError: true }, 'Validating syntax...');
   }
 
   #setSyntaxValidationError(errors: string[]) {
-    this._internals.states.delete('validating-syntax');
+    this._internals.states.delete('validating');
     this._internals.setValidity({ customError: true }, errors.join('\n'));
   }
 
   #clearValidation() {
-    this._internals.states.delete('validating-syntax');
+    this._internals.states.delete('validating');
     this._internals.setValidity({});
   }
 

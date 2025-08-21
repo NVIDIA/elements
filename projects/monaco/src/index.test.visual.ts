@@ -4,6 +4,7 @@ import { template as inputTemplate } from './input/input.test.visual.js';
 import { template as editorTemplate } from './editor/editor.test.visual.js';
 import { template as diffEditorTemplate } from './diff-editor/diff-editor.test.visual.js';
 import { template as diffInputTemplate } from './diff-input/diff-input.test.visual.js';
+import { template as problemsTemplate } from './problems/problems.test.visual.js';
 
 describe('monaco input visual', () => {
   test('input should match visual baseline', async () => {
@@ -25,6 +26,7 @@ function template(theme: '' | 'dark' = '') {
     import '@nvidia-elements/monaco/editor/define.js';
     import '@nvidia-elements/monaco/diff-editor/define.js';
     import '@nvidia-elements/monaco/diff-input/define.js';
+    import '@nvidia-elements/monaco/problems/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme} reduced-motion');
   </script>
   <div nve-layout="column gap:lg align:stretch">
@@ -32,5 +34,6 @@ function template(theme: '' | 'dark' = '') {
     ${editorTemplate()}
     ${diffEditorTemplate()}
     ${diffInputTemplate()}
+    ${problemsTemplate()}
   </div>`;
 }
