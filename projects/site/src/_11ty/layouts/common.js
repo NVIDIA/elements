@@ -284,6 +284,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-input/') ? 'highlighted' : ''}><a href="docs/monaco/diff-input/">Diff Input</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/monaco/editor/') ? 'highlighted' : ''}><a href="docs/monaco/editor/">Editor</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/monaco/diff-editor/') ? 'highlighted' : ''}><a href="docs/monaco/diff-editor/">Diff Editor</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/monaco/problems/') ? 'highlighted' : ''}><a href="docs/monaco/problems/">Problems</a></nve-tree-node>
   </nve-tree-node>
 
   <!-- <nve-tree-node ${data.page.url.includes('/docs/markdown/') ? 'expanded' : ''}>
