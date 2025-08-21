@@ -1,0 +1,43 @@
+:host {
+  --background: var(--nve-sys-layer-container-background);
+  --min-height: 200px;
+  --selected-line-background: var(--nve-ref-color-neutral-800);
+  --selected-line-border: none;
+  all: initial;
+  display: block;
+  visibility: inherit;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  outline: var(--nve-debug-element-outline, initial);
+  color-scheme: var(--nve-sys-color-scheme);
+}
+
+:host(:focus-within) {
+  --selected-line-background: var(--nve-sys-accent-secondary-background);
+  --selected-line-border: 1px solid var(--nve-sys-accent-secondary-background);
+}
+
+[internal-host] {
+  background: var(--background);
+  position: relative;
+  min-height: var(--min-height);
+  height: 100%;
+}
+
+slot[name='empty'] {
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+
+.empty-message {
+  color: var(--nve-sys-text-muted-color);
+  font-size: var(--nve-ref-font-size-200);
+  margin: 0;
+  padding: var(--nve-ref-size-200);
+  text-box: trim-both cap alphabetic;
+  text-box-trim: trim-both;
+  text-box-edge: cap alphabetic;
+}
