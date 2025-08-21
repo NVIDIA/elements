@@ -1,0 +1,82 @@
+.monaco-editor {
+  .cursor {
+    display: none !important;
+  }
+  .inline-folded {
+    display: none !important;
+  }
+  .view-overlays {
+    --vscode-editor-foldBackground: transparent;
+  }
+  .view-lines {
+    cursor: pointer !important;
+  }
+}
+
+.problems-decoration {
+  &.problems-line-hovered {
+    background-color: color-mix(
+      in oklab,
+      var(--nve-ref-color-neutral-400) 100%,
+      var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio-hover)
+    );
+  }
+
+  &.problems-line-selected {
+    background-color: color-mix(in oklch, var(--selected-line-background), transparent 80%);
+    border: var(--selected-line-border);
+  }
+
+  &.problem-quote {
+    display: none;
+  }
+
+  &.problem-file {
+    padding-left: 6px;
+  }
+
+  &.problem-path {
+    color: var(--nve-ref-color-gray-denim-1100);
+    font-size: 0.9em;
+  }
+
+  &.problem-count {
+    background-color: var(--nve-ref-color-gray-denim-800);
+    padding: 1.2px 6px;
+    border-radius: 11px;
+    font-family: var(--nve-ref-font-family);
+    font-size: 11px;
+    font-weight: var(--nve-ref-font-weight-semibold);
+  }
+
+  &.codicon {
+    font-size: inherit;
+
+    &.codicon-hint {
+      color: var(--nve-ref-color-gray-denim-1000);
+    }
+    &.codicon-info {
+      color: var(--nve-ref-color-gray-denim-1000);
+    }
+    &.codicon-warning {
+      color: var(--nve-ref-color-yellow-nova-800);
+    }
+    &.codicon-error {
+      color: var(--nve-ref-color-red-cardinal-800);
+    }
+
+    &::before {
+      zoom: 1.2;
+      vertical-align: middle;
+    }
+  }
+
+  &.severity-label {
+    display: none;
+  }
+
+  &.problem-code,
+  &.problem-position {
+    color: var(--nve-ref-color-gray-denim-1000);
+  }
+}
