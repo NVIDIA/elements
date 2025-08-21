@@ -51,7 +51,11 @@ export function render(data) {
     .filter(story => story.element === componentData.tag)
     .map(story => ({
       ...story,
-      template: md.utils.escapeHtml(story.template)
+      template: md.utils.escapeHtml(story.template),
+      slug: story.id
+        .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+        .replace(/\s+/g, '-')
+        .toLowerCase()
     }));
 
   return /* html */ `
@@ -94,7 +98,7 @@ export function render(data) {
       .map(
         (story, index) => /* html */ `
         <div class="story-example">
-          <h3 nve-text="heading lg mkd">${story.id.split(/(?=[A-Z])/).join(' ')}</h3>
+          <h3 nve-text="heading lg mkd" id="${story.slug}">${story.id.split(/(?=[A-Z])/).join(' ')}</h3>
           <nvd-canvas-editable source="${story.template}" tag="${componentData.tag}" readonly>
             <nve-button container="flat" slot="suffix" value="${index}">Edit</nve-button>
           </nvd-canvas-editable>
@@ -108,53 +112,73 @@ export function render(data) {
     <script type="module">
       const cyclingExample = document.querySelector('#cycling-example');
       const exampleSelector = document.querySelector('#example-selector');
+      const storyTemplates = ${JSON.stringify(storyTemplates)};
       
-      if (cyclingExample && exampleSelector) {
-        const storyTemplates = ${JSON.stringify(storyTemplates)};
-        
-        // Function to unescape HTML entities
-        function unescapeHtml(html) {
-          const textarea = document.createElement('textarea');
-          textarea.innerHTML = html;
-          return textarea.value;
+      // Utility: unescape HTML entities
+      function unescapeHtml(html) {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = html;
+        return textarea.value;
+      }
+      
+      // Utility: update URL to reflect edit mode and selected story
+      function updateUrlForEdit(slug) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('edit', 'true');
+        if (slug) url.hash = '#' + slug;
+        window.history.replaceState({}, '', url.toString());
+      }
+      
+      // Utility: select a menu item by index (if menu is present)
+      function selectMenuIndex(index) {
+        if (!exampleSelector) return;
+        const allItems = exampleSelector.querySelectorAll('nve-menu-item');
+        allItems.forEach(item => item.selected = false);
+        const menuItem = exampleSelector.querySelector('nve-menu-item[value="' + index + '"]');
+        if (menuItem) menuItem.selected = true;
+      }
+      
+      // Utility: load a story into the top editor by index
+      function setEditorIndex(index, persistUrl = false) {
+        if (!cyclingExample) return;
+        const story = storyTemplates[index];
+        if (!story) return;
+        cyclingExample.setAttribute('source', unescapeHtml(story.template));
+        if (persistUrl) updateUrlForEdit(story.slug);
+      }
+      
+      if (cyclingExample) {
+        // If edit mode is enabled via URL param, load the hash example into the top editor
+        const params = new URLSearchParams(window.location.search);
+        const isEditMode = params.get('edit') === 'true' || params.get('edit') === '1';
+        const initialHash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
+        if (isEditMode && initialHash) {
+          const index = storyTemplates.findIndex(s => s.slug === initialHash);
+          if (index >= 0) {
+            setEditorIndex(index, false);
+            selectMenuIndex(index);
+          }
         }
         
-        exampleSelector.addEventListener('click', (event) => {
-          const selectedIndex = parseInt(event.target.value);
-          const story = storyTemplates[selectedIndex];
-          if (story) {
-            cyclingExample.setAttribute('source', unescapeHtml(story.template));
-            
-            // Clear selection from all menu items
-            const allItems = exampleSelector.querySelectorAll('nve-menu-item');
-            allItems.forEach(item => item.selected = false);
-            
-            // Set selection on the clicked item
-            event.target.selected = true;
-          }
-        });
+        if (exampleSelector) {
+          exampleSelector.addEventListener('click', (event) => {
+            const selectedIndex = parseInt(event.target.value);
+            if (Number.isFinite(selectedIndex)) {
+              setEditorIndex(selectedIndex, true);
+              selectMenuIndex(selectedIndex);
+            }
+          });
+        }
       }
 
       // Add click event listeners to Edit buttons
       const editButtons = document.querySelectorAll('.story-example nve-button');
       editButtons.forEach(button => {
         button.addEventListener('click', (event) => {
-          const parentCanvas = event.target.closest('nvd-canvas-editable');
-          const source = parentCanvas.getAttribute('source');
-          
-          if (cyclingExample && source) {
-            cyclingExample.setAttribute('source', source);
-            
-            // Clear selection from all menu items
-            const allItems = exampleSelector.querySelectorAll('nve-menu-item');
-            allItems.forEach(item => item.selected = false);
-
-            // Find the corresponding nve-menu-item in exampleSelector and select it
-            const value = event.target.value;
-            const menuItem = exampleSelector.querySelector('nve-menu-item[value="' + value + '"]');
-            if (menuItem) {
-              menuItem.selected = true;
-            }
+          const value = parseInt(event.target.value);
+          if (Number.isFinite(value)) {
+            setEditorIndex(value, true);
+            selectMenuIndex(value);
 
             // Scroll to #example-browser
             var exampleBrowser = document.getElementById('${componentData.title.toLowerCase().replace(/\s+/g, '-')}-examples');
