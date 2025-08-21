@@ -6,9 +6,9 @@ alwaysApply: false
 
 # Lighthouse Performance Tests (`.test.lighthouse.ts`)
 
-You MUST review @projects/site/src/docs/internal/testing/lighthouse.md before making any changes:
+You MUST review @projects/site/src/docs/internal/guidelines/testing-lighthouse.md before making any changes:
 
 ## References
 
 - [Lighthouse Test Example](/projects/elements/src/badge/badge.test.lighthouse.ts)
-- [Documentation](/projects/site/src/docs/internal/testing/lighthouse.md)
+- [Documentation](/projects/site/src/docs/internal/guidelines/testing-lighthouse.md)

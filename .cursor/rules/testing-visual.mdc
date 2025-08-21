@@ -6,9 +6,9 @@ alwaysApply: false
 
 # Visual Regression Tests (`.test.visual.ts`)
 
-You MUST review @projects/site/src/docs/internal/testing/visual.md before making any changes:
+You MUST review @projects/site/src/docs/internal/guidelines/testing-visual.md before making any changes:
 
 ## References
 
 - [SSR Test Example](/projects/elements/src/badge/badge.test.visual.ts)
-- [Documentation](/projects/site/src/docs/internal/testing/visual.md)
+- [Documentation](/projects/site/src/docs/internal/guidelines/testing-visual.md)
