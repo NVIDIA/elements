@@ -5,7 +5,10 @@ import {
   createAngularFiles,
   createLitFiles,
   createReactFiles,
-  createPreactFiles
+  createPreactFiles,
+  createDefaultFiles,
+  formatTemplate,
+  playgroundTypes
 } from './utils.js';
 
 describe('createPlaygroundURL', () => {
@@ -278,5 +281,323 @@ describe('createLitPlaygroundURL', () => {
     expect(files['index.html'].content.includes('<app-root></app-root>')).toBe(true);
     expect(files['index.ts'].content.includes(`import { LitElement, html } from 'lit'`)).toBe(true);
     expect(files['importmap.json'].content.includes('"lit": "https://https://esm.sh/lit@latest"')).toBe(true);
+  });
+});
+
+describe('createDefaultFiles', () => {
+  const metadata = {
+    created: '2021-01-01',
+    projects: {
+      '@nvidia-elements/core': {
+        elements: [
+          {
+            name: 'nve-button',
+            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
+          }
+        ]
+      }
+    }
+  } as unknown as MetadataSummary;
+
+  it('should create default files with basic structure', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {});
+    expect(files['index.html']).toBeDefined();
+    expect(files['index.ts']).toBeDefined();
+    expect(files['importmap.json']).toBeDefined();
+    expect(files['styles.css']).toBeUndefined();
+  });
+
+  it('should add layout styles CSS when name includes layout stories', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+      name: '@nvidia-elements/styles/layout.stories.json'
+    });
+    expect(files['styles.css']).toBeDefined();
+    expect(files['styles.css'].content).toContain('Layout example styles');
+    expect(files['styles.css'].content).toContain('min-height: 220px');
+  });
+
+  it('should add responsive styles CSS when name includes responsive stories', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+      name: '@nvidia-elements/styles/responsive.stories.json'
+    });
+    expect(files['styles.css']).toBeDefined();
+    expect(files['styles.css'].content).toContain('Responsive example styles');
+    expect(files['styles.css'].content).toContain('min-width: 120px');
+  });
+
+  it('should add empty styles CSS when name includes responsive-patterns stories', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+      name: '@nvidia-elements/styles/responsive-patterns.stories.json'
+    });
+    expect(files['styles.css']).toBeDefined();
+    expect(files['styles.css'].content).toBe('');
+  });
+});
+
+describe('formatTemplate', () => {
+  it('should remove nve-theme attributes from source', () => {
+    const source = '<div nve-theme="dark">Content</div>';
+    const result = formatTemplate(source);
+    expect(result).not.toContain('nve-theme="dark"');
+    expect(result).toContain('Content');
+  });
+
+  it('should remove multiple nve-theme attributes', () => {
+    const source = '<div nve-theme="light" nve-theme="dark">Content</div>';
+    const result = formatTemplate(source);
+    expect(result).not.toContain('nve-theme="light"');
+    expect(result).not.toContain('nve-theme="dark"');
+  });
+
+  it('should remove nve-theme="root" attribute', () => {
+    const source = '<div nve-theme="root">Content</div>';
+    const result = formatTemplate(source);
+    expect(result).not.toContain('nve-theme="root"');
+  });
+
+  it('should preserve other attributes and content', () => {
+    const source = '<div class="test" nve-theme="dark" id="main">Content</div>';
+    const result = formatTemplate(source);
+    expect(result).toContain('class="test"');
+    expect(result).toContain('id="main"');
+    expect(result).toContain('Content');
+    expect(result).not.toContain('nve-theme="dark"');
+  });
+});
+
+describe('playgroundTypes', () => {
+  it('should contain all expected playground types', () => {
+    expect(playgroundTypes).toEqual(['default', 'react', 'preact', 'angular', 'lit']);
+  });
+
+  it('should have correct type definition', () => {
+    const validTypes = ['default', 'react', 'preact', 'angular', 'lit'];
+    validTypes.forEach(type => {
+      expect(playgroundTypes).toContain(type);
+    });
+  });
+});
+
+describe('createPlaygroundURL with additional options', () => {
+  const metadata = {
+    created: '2021-01-01',
+    projects: {
+      '@nvidia-elements/core': {
+        elements: [
+          {
+            name: 'nve-button',
+            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
+          }
+        ]
+      }
+    }
+  } as unknown as MetadataSummary;
+
+  it('should handle trustedContent option', () => {
+    const result = createPlaygroundURL('nve-button', metadata, { trustedContent: true });
+    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+  });
+
+  it('should handle custom openFile option for default type', () => {
+    const result = createPlaygroundURL('nve-button', metadata, { openFile: 'custom.html' });
+    expect(result.includes('&file=custom.html&')).toBe(true);
+  });
+
+  it('should handle custom openFile option for React type', () => {
+    const result = createPlaygroundURL('nve-button', metadata, {
+      type: 'react',
+      openFile: 'custom.tsx'
+    });
+    // React type overrides openFile to 'index.tsx', so we test that behavior
+    expect(result.includes('&file=index.tsx&')).toBe(true);
+  });
+
+  it('should handle empty name option', () => {
+    const result = createPlaygroundURL('nve-button', metadata, { name: '' });
+    expect(result.includes('&name=&')).toBe(false); // Should not add name parameter for empty string
+  });
+
+  it('should handle whitespace in name option', () => {
+    const result = createPlaygroundURL('nve-button', metadata, { name: '  test name  ' });
+    expect(result.includes('&name=test%20name&')).toBe(true);
+  });
+
+  it('should handle special characters in name option', () => {
+    const result = createPlaygroundURL('nve-button', metadata, { name: 'test@name#123' });
+    expect(result.includes('&name=test@name#123&')).toBe(true);
+  });
+});
+
+describe('createIndexHTML behavior', () => {
+  const metadata = {
+    created: '2021-01-01',
+    projects: {
+      '@nvidia-elements/core': {
+        elements: [
+          {
+            name: 'nve-button',
+            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
+          }
+        ]
+      }
+    }
+  } as unknown as MetadataSummary;
+
+  it('should include layout styles when name contains layout stories', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+      name: '@nvidia-elements/styles/layout.stories.json'
+    });
+    const htmlContent = files['index.html'].content;
+    expect(htmlContent).toContain('@nvidia-elements/styles/dist/labs/layout-viewport.css');
+    expect(htmlContent).toContain('@nvidia-elements/styles/dist/labs/layout-container.css');
+    expect(htmlContent).toContain('./styles.css');
+  });
+
+  it('should include layout styles when name contains responsive stories', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+      name: '@nvidia-elements/styles/responsive.stories.json'
+    });
+    const htmlContent = files['index.html'].content;
+    expect(htmlContent).toContain('@nvidia-elements/styles/dist/labs/layout-viewport.css');
+    expect(htmlContent).toContain('@nvidia-elements/styles/dist/labs/layout-container.css');
+    expect(htmlContent).toContain('./styles.css');
+  });
+
+  it('should include layout styles when name contains responsive-patterns stories', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+      name: '@nvidia-elements/styles/responsive-patterns.stories.json'
+    });
+    const htmlContent = files['index.html'].content;
+    expect(htmlContent).toContain('@nvidia-elements/styles/dist/labs/layout-viewport.css');
+    expect(htmlContent).toContain('@nvidia-elements/styles/dist/labs/layout-container.css');
+    expect(htmlContent).toContain('./styles.css');
+  });
+
+  it('should not include layout styles when name does not contain stories patterns', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+      name: 'regular-name'
+    });
+    const htmlContent = files['index.html'].content;
+    expect(htmlContent).not.toContain('@nvidia-elements/styles/dist/labs/layout-viewport.css');
+    expect(htmlContent).not.toContain('@nvidia-elements/styles/dist/labs/layout-container.css');
+    expect(htmlContent).not.toContain('./styles.css');
+  });
+
+  it('should set nve-layout="pad:md" when content does not contain nve-page', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {});
+    const htmlContent = files['index.html'].content;
+    expect(htmlContent).toContain('nve-layout="pad:md"');
+  });
+
+  it('should not set nve-layout="pad:md" when content contains nve-page', () => {
+    const files = createDefaultFiles('<nve-page></nve-page>', metadata, {});
+    const htmlContent = files['index.html'].content;
+    expect(htmlContent).not.toContain('nve-layout="pad:md"');
+  });
+});
+
+describe('createImportMap with different frameworks', () => {
+  const metadata = {
+    created: '2021-01-01',
+    projects: {
+      '@nvidia-elements/core': {
+        elements: [
+          {
+            name: 'nve-button',
+            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
+          }
+        ]
+      }
+    }
+  } as unknown as MetadataSummary;
+
+  it('should include React dependencies for React framework', () => {
+    const files = createReactFiles('<nve-button></nve-button>', metadata, {});
+    const importmap = JSON.parse(files['importmap.json'].content);
+    expect(importmap.imports['react']).toBe('https://https://esm.sh/react@19');
+    expect(importmap.imports['react-dom']).toBe('https://https://esm.sh/react-dom@19');
+  });
+
+  it('should include Preact dependencies for Preact framework', () => {
+    const files = createPreactFiles('<nve-button></nve-button>', metadata, {});
+    const importmap = JSON.parse(files['importmap.json'].content);
+    expect(importmap.imports['preact']).toBe('https://https://esm.sh/preact@10');
+  });
+
+  it('should include Angular dependencies for Angular framework', () => {
+    const files = createAngularFiles('<nve-button></nve-button>', metadata, {});
+    const importmap = JSON.parse(files['importmap.json'].content);
+    expect(importmap.imports['@angular/core']).toBe('https://https://esm.sh/@angular/core@20.0.0');
+    expect(importmap.imports['zone.js']).toBe('https://https://esm.sh/zone.js');
+  });
+
+  it('should include Lit dependencies for Lit framework', () => {
+    const files = createLitFiles('<nve-button></nve-button>', metadata, {});
+    const importmap = JSON.parse(files['importmap.json'].content);
+    expect(importmap.imports['lit']).toBe('https://https://esm.sh/lit@latest');
+  });
+
+  it('should include all NVE packages for all frameworks', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {});
+    const importmap = JSON.parse(files['importmap.json'].content);
+    expect(importmap.imports['@nvidia-elements/core']).toBe('https://https://esm.sh/@nvidia-elements/core@latest');
+    expect(importmap.imports['@nvidia-elements/styles']).toBe('https://https://esm.sh/@nvidia-elements/styles@latest');
+    expect(importmap.imports['@nvidia-elements/themes']).toBe('https://https://esm.sh/@nvidia-elements/themes@latest');
+    expect(importmap.imports['@nvidia-elements/monaco']).toBe('https://https://esm.sh/@nvidia-elements/monaco@latest');
+    expect(importmap.imports['@nvidia-elements/code']).toBe('https://https://esm.sh/@nvidia-elements/code@latest');
+    expect(importmap.imports['@nvidia-elements/forms']).toBe('https://https://esm.sh/@nvidia-elements/forms@latest');
+  });
+});
+
+describe('serialize function behavior', () => {
+  it('should compress and encode data by default', () => {
+    // The serialize function is called internally, so we test its effect
+    const result = createPlaygroundURL(
+      '<nve-button></nve-button>',
+      {
+        created: '2021-01-01',
+        projects: {}
+      } as unknown as MetadataSummary,
+      {}
+    );
+
+    // Should contain encoded files data
+    expect(result).toContain('&files=');
+    expect(result.length).toBeGreaterThan(100); // Should be reasonably long due to compression
+  });
+});
+
+describe('Edge cases and error handling', () => {
+  const metadata = {
+    created: '2021-01-01',
+    projects: {}
+  } as unknown as MetadataSummary;
+
+  it('should handle empty content string', () => {
+    const result = createPlaygroundURL('', metadata);
+    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+  });
+
+  it('should handle content with only whitespace', () => {
+    const result = createPlaygroundURL('   ', metadata);
+    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+  });
+
+  it('should handle undefined options', () => {
+    const result = createPlaygroundURL('<nve-button></nve-button>', metadata);
+    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+  });
+
+  it('should handle options with empty string values', () => {
+    const result = createPlaygroundURL('<nve-button></nve-button>', metadata, {
+      name: '',
+      theme: '',
+      referer: ''
+    });
+    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+    // Empty strings should not add parameters
+    expect(result.includes('&name=&')).toBe(false);
+    expect(result.includes('&theme=&')).toBe(false);
+    expect(result.includes('&ref=&')).toBe(false);
   });
 });

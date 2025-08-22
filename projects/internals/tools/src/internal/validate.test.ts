@@ -51,7 +51,7 @@ describe('validateTemplate', () => {
       '<div nve-invalid="test" nve-layout="column gap:md" nve-text="body"><b>test</b><nve-invalid></nve-invalid><nve-badge status="success">test</nve-badge><nve-badge>test</nve-badge><nve-badge style="--color: red">test</nve-badge><script>alert("!")</script></div>';
     const result = validateTemplate(template, metadata);
     expect(result).toBe(
-      '<div nve-layout="column gap:md" nve-text="body"><b>test</b><nve-badge status="success">test</nve-badge><nve-badge>test</nve-badge><nve-badge>test</nve-badge><script>alert("!")</script></div>'
+      '<div nve-layout="column gap:md" nve-text="body"><b>test</b><nve-badge status="success">test</nve-badge><nve-badge>test</nve-badge><nve-badge style="--color:red">test</nve-badge><script>alert("!")</script></div>'
     );
   });
 
@@ -153,7 +153,7 @@ describe('validateTemplate', () => {
 
   it('should not allow global elements', () => {
     const template = '<body></body>';
-    expect(() => validateTemplate(template, metadata)).toThrowError('Do not include `html`, `body` tags or custom CSS');
+    expect(validateTemplate(template, metadata)).toBe('');
   });
 
   it('should allow global elements', () => {
@@ -162,16 +162,34 @@ describe('validateTemplate', () => {
     expect(result).toBe('<body></body>');
   });
 
-  it('should remove style attributes by default', () => {
+  it('should remove style attributes', () => {
     const template = '<nve-badge style="--color: red">hello there</nve-badge>';
-    const result = validateTemplate(template, metadata);
+    const result = validateTemplate(template, metadata, { allowStyles: false });
     expect(result).toBe('<nve-badge>hello there</nve-badge>');
   });
 
-  it('should allow style attributes', () => {
+  it('should allow style attributes by default', () => {
     const template = '<nve-badge style="--color: red">hello there</nve-badge>';
-    const result = validateTemplate(template, metadata, { allowStyleAttribute: true });
+    const result = validateTemplate(template, metadata, { allowStyles: true });
     expect(result).toBe('<nve-badge style="--color:red">hello there</nve-badge>');
+  });
+
+  it('should allow style tags by default', () => {
+    const template = '<style>nve-badge { --color: red; }</style><nve-badge>hello there</nve-badge>';
+    const result = validateTemplate(template, metadata, { allowStyles: true });
+    expect(result).toBe('<style>nve-badge { --color: red; }</style><nve-badge>hello there</nve-badge>');
+  });
+
+  it('should remove style tags', () => {
+    const template = '<style>nve-badge { --color: red; }</style><nve-badge>hello there</nve-badge>';
+    const result = validateTemplate(template, metadata, { allowStyles: false });
+    expect(result).toBe('<nve-badge>hello there</nve-badge>');
+  });
+
+  it('should remove body style selectors to preserve default nve-theme styles', () => {
+    const template = `<style>body { color: red; } p { color: blue; }</style>`;
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe('<style> p { color: blue; }</style>');
   });
 
   it('should allow slot attribute on elements', () => {
@@ -208,5 +226,11 @@ describe('validateTemplate', () => {
     const template = '<script type="module">console.log("!")</script>';
     const result = validateTemplate(template, metadata, { allowVulnerableTags: true });
     expect(result).toBe('<script type="module">console.log("!")</script>');
+  });
+
+  it('should allow hidden attribute on custom elements', () => {
+    const template = '<nve-badge hidden>hello there</nve-badge>';
+    const result = validateTemplate(template, metadata);
+    expect(result).toBe('<nve-badge hidden>hello there</nve-badge>');
   });
 });

@@ -1,28 +1,60 @@
-import { data } from '../internal/data.js';
+import type { MetadataCustomElementsManifestDeclaration } from '@internals/metadata';
+import { MetadataService } from '@internals/metadata';
 import {
+  type ElementVersions,
+  type PartialAPIResult,
   getLatestPublishedVersions,
-  getAvailableElementsAPIs,
-  searchElementsAPIsJSON,
-  getElementAPIsMarkdown,
-  searchChangelogs,
-  searchChangelogsMarkdown,
-  type ElementVersions
+  getAvailableAPIs,
+  searchAPIs
 } from './utils.js';
 import { service, tool } from '../internal/tools.js';
-
-const packageNames = Object.keys(data.projects).filter(p => data.projects[p].changelog);
 
 @service()
 export class ApiService {
   @tool({
-    description: 'Get list of all available APIs and components.'
+    description: 'Get list of all available APIs and components.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        format: {
+          type: 'string',
+          description: 'Format of the output contents. `markdown` | `json`',
+          enum: ['markdown', 'json'],
+          default: 'markdown'
+        }
+      },
+      required: ['format'],
+      additionalProperties: false
+    },
+    outputSchema: {
+      oneOf: [
+        { type: 'string' },
+        {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              name: { type: 'string' },
+              description: { type: 'string' },
+              behavior: { type: 'string' }
+            },
+            additionalProperties: false,
+            required: ['name', 'description', 'behavior']
+          }
+        }
+      ],
+      additionalProperties: false
+    }
   })
-  static async available(): Promise<{ name: string; description: string; usage?: string }[]> {
-    return getAvailableElementsAPIs(data);
+  static async list(
+    { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
+  ): Promise<PartialAPIResult[] | string> {
+    const metadata = await MetadataService.getMetadata();
+    return getAvailableAPIs(format, metadata);
   }
 
   @tool({
-    description: 'Get API information for specific APIs and components',
+    description: 'Get API information for specific APIs and components.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -37,42 +69,37 @@ export class ApiService {
           default: 'markdown'
         }
       },
-      required: ['query']
+      required: ['query'],
+      additionalProperties: false
+    },
+    outputSchema: {
+      oneOf: [{ type: 'string' }, { type: 'array' }],
+      additionalProperties: false
     }
   })
-  static async search({ query, format }: { query: string; format: 'markdown' | 'json' }) {
-    return format === 'markdown' ? getElementAPIsMarkdown(query, data) : searchElementsAPIsJSON(query, data);
+  static async search({
+    query,
+    format
+  }: {
+    query: string;
+    format: 'markdown' | 'json';
+  }): Promise<MetadataCustomElementsManifestDeclaration[] | string> {
+    const metadata = await MetadataService.getMetadata();
+    return searchAPIs(query, format, metadata);
   }
 
   @tool({
-    description: 'Get the changelog details for the @nve packages',
-    inputSchema: {
+    description: 'Get latest versions of elements/@nve packages.',
+    outputSchema: {
       type: 'object',
-      properties: {
-        name: {
-          type: 'string',
-          description: `Available packages: ${packageNames.map(p => `\`${p}\``).join(' | ')}`,
-          enum: packageNames
-        },
-        format: {
-          type: 'string',
-          description: 'Format of the output. `markdown` | `json`',
-          enum: ['markdown', 'json'],
-          default: 'markdown'
-        }
+      patternProperties: {
+        '^.*$': { type: 'string' }
       },
-      required: ['name']
+      additionalProperties: false
     }
   })
-  static async changelog({ name, format }: { name: string; format: 'markdown' | 'json' }): Promise<string> {
-    const changelogs = await searchChangelogs(name, data);
-    return format === 'markdown'
-      ? searchChangelogsMarkdown(name, data).split('\n').slice(0, 512).join('\n')
-      : JSON.stringify(changelogs, null, 2);
-  }
-
-  @tool({ description: 'Get the latest published versions of elements / @nve packages' })
   static async version(): Promise<ElementVersions> {
-    return await getLatestPublishedVersions(data);
+    const metadata = await MetadataService.getMetadata();
+    return await getLatestPublishedVersions(metadata);
   }
 }

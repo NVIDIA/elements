@@ -1,12 +1,12 @@
 // @ts-check
 
-import { ExampleService } from '@internals/tools/example';
+import { ExamplesService } from '@internals/tools/examples';
 import { MetadataService } from '@internals/metadata';
 
 const metadata = await MetadataService.getMetadata();
 const elements = metadata.projects['@nvidia-elements/core'].elements;
 
-const stories = (await ExampleService.getAll())
+const stories = (await ExamplesService.getAll())
   .filter(
     story =>
       story.id.includes('Default') &&

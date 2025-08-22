@@ -8,10 +8,10 @@ export default mergeConfig(libraryNodeTestConfig, {
     alias: { '@internals/tools': resolve(import.meta.dirname, './src') },
     coverage: {
       thresholds: {
-        lines: 40,
-        branches: 40,
-        functions: 40,
-        statements: 40
+        lines: 90,
+        branches: 90,
+        functions: 90,
+        statements: 90
       }
     }
   }

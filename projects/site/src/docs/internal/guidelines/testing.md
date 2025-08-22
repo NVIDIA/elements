@@ -9,6 +9,30 @@
 
 The Elements library uses a comprehensive testing strategy with multiple test types to ensure quality, accessibility, and performance. All tests follow consistent patterns and use shared utilities from `@nvidia-elements/testing` and `@internals/vite`.
 
+## Running Tests
+
+Test scripts should be run in the root directory of the project where the `package.json` is located.
+
+```shell
+# Unit tests
+pnpm run test
+
+# Single test suite
+pnpm run test -- src/badge/badge.test.ts
+
+# Accessibility tests
+pnpm run test:axe
+
+# Performance tests
+pnpm run test:lighthouse
+
+# Visual regression tests
+pnpm run test:visual
+
+# SSR tests
+pnpm run test:ssr
+```
+
 ## Test Types
 
 ### Unit Tests (`.test.ts`)
@@ -49,24 +73,3 @@ Core testing utilities for DOM manipulation and element stability:
 - `elementIsStable`: Waits for Lit element to be stable
 - `emulateClick`: Triggers native click events
 - `untilEvent`: Creates promise for event results
-
-## Running Tests
-
-Test scripts should be run in the root directory of the project where the `package.json` is located.
-
-```shell
-# Unit tests
-pnpm run test
-
-# Accessibility tests
-pnpm run test:axe
-
-# Performance tests
-pnpm run test:lighthouse
-
-# Visual regression tests
-pnpm run test:visual
-
-# SSR tests
-pnpm run test:ssr
-```
