@@ -72,3 +72,40 @@ if (query) {
     globalThis.gtag('event', 'elements-docs-search', { query: query });
   }
 }
+
+// Add clickable anchor links to headings
+function addHeadingAnchors() {
+  // Find all h2 and h3 elements with mkd class
+  const headings = globalThis.document.querySelectorAll('h2[nve-text*="mkd"], h3[nve-text*="mkd"]');
+
+  headings.forEach(heading => {
+    // Skip if anchor already exists
+    if (heading.querySelector('.heading-anchor')) return;
+
+    // Get or generate ID
+    let id = heading.id;
+
+    // Create anchor element
+    const anchor = globalThis.document.createElement('a');
+    anchor.className = 'heading-anchor';
+    anchor.href = `${globalThis.window.parent.location.pathname}#${id}`;
+    anchor.setAttribute('aria-label', 'Copy link to this section');
+    anchor.innerHTML = '<nve-icon-button container="inline" icon-name="link"></nve-icon-button>';
+
+    // Add click handler
+    anchor.addEventListener('click', _e => {
+      // Copy to clipboard
+      if (globalThis.navigator.clipboard) {
+        void globalThis.navigator.clipboard.writeText(
+          `${globalThis.window.location.origin}${globalThis.window.location.pathname}#${id}`
+        );
+      }
+    });
+
+    // Insert anchor as first child of heading
+    heading.insertBefore(anchor, heading.firstChild);
+  });
+}
+
+// Run on initial load
+addHeadingAnchors();
