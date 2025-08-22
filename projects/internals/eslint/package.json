@@ -9,16 +9,15 @@
     "ci": "wireit"
   },
   "dependencies": {
-    "@html-eslint/eslint-plugin": "0.38.1",
-    "@html-eslint/parser": "0.38.0",
+    "@html-eslint/eslint-plugin": "0.45.0",
+    "@html-eslint/parser": "0.45.0",
     "@eslint/js": "catalog:",
-    "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-lit": "1.15.0",
-    "eslint-plugin-lit-a11y": "4.1.4",
-    "eslint-plugin-rulesdir": "0.2.2",
-    "eslint-plugin-wc": "2.2.0",
-    "globals": "15.14.0",
-    "typescript-eslint": "8.28.0"
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-lit": "2.1.1",
+    "eslint-plugin-lit-a11y": "5.1.1",
+    "eslint-plugin-wc": "3.0.1",
+    "globals": "16.3.0",
+    "typescript-eslint": "8.40.0"
   },
   "peerDependencies": {
     "eslint": ">= 9"

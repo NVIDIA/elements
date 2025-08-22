@@ -2,7 +2,7 @@ const props = new Map();
 const mutations = new Map();
 
 /** https://github.com/stencil-community/stencil-eslint/blob/main/src/rules/strict-mutable.ts */
-const rule = {
+export default {
   meta: {
     docs: {
       description: 'Prevent stateful mutations on public API properties',
@@ -41,5 +41,3 @@ const rule = {
     };
   }
 };
-
-module.exports = rule;
