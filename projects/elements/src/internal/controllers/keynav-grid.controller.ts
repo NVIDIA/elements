@@ -1,12 +1,15 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
 import { onChildListMutation, throttle } from '../utils/events.js';
+import { GlobalStateService } from '../services/global.service.js';
+import { LogService } from '../services/log.service.js';
 import {
   validKeyNavigationCode,
   isContextMenuClick,
   getFlattenedDOMTree,
   getFlattenedFocusableItems,
-  KeynavCode
+  KeynavCode,
+  isValidDOMGrid
 } from '../utils/dom.js';
 import {
   focusElement,
@@ -93,16 +96,22 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
   }
 
   #keynavCell(e: KeyboardEvent) {
+    const rows = Array.from(this.#hostRows);
+    const cells = Array.from(this.#hostCells);
+
+    if (GlobalStateService.state.env !== 'production' && isValidDOMGrid(rows)) {
+      LogService.warn('Invalid grid structure, all rows must have the same number of cells');
+      return;
+    }
+
     if (validKeyNavigationCode(e) && isSimpleFocusable(getActiveElement() as Element)) {
-      const { x, y } = getNextKeyGridItem(this.#hostCells, this.#hostRows, {
+      const { x, y } = getNextKeyGridItem(cells, rows, {
         code: e.code,
         ctrlKey: e.ctrlKey,
         dir: this.host.dir
       });
 
-      const nextCell = Array.from(getFlattenedDOMTree(this.#hostRows[y])).filter(
-        c => !!this.#hostCells.find(i => i === c)
-      )[x];
+      const nextCell = Array.from(getFlattenedDOMTree(rows[y])).filter(c => !!cells.find(i => i === c))[x];
       this.#setActiveCell(e, nextCell);
       e.preventDefault();
     }
