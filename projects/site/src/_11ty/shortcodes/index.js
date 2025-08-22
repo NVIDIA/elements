@@ -64,6 +64,7 @@ export async function storyShortcode(
   storyName,
   userConfig = { inline: true, height: '95%', resizable: true, editable: false }
 ) {
+  const element = elements.find(d => d.name === tag);
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
   const story = tag.includes('.stories.json')
     ? stories.find(s => s.entrypoint.includes(tag) && s.id === storyName)
@@ -86,7 +87,7 @@ export async function storyShortcode(
     ? `<nve-button container="flat" slot="suffix"><a href="./docs/elements/${tag.replace(/^nve-/, '')}/examples/?edit=true&example=${story.id
         .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
         .replace(/\s+/g, '-')
-        .toLowerCase()}">Edit</a></nve-button>`
+        .toLowerCase()}">Edit Example</a></nve-button>`
     : '';
 
   const templateContent = config.inline
@@ -95,8 +96,8 @@ export async function storyShortcode(
 
   const reload =
     // eslint-disable-next-line no-undef
-    process.env.ELEVENTY_RUN_MODE === 'watch' && config.inline && story && !tag.includes('.stories.json')
-      ? reloadScript(story, playgroundButton)
+    process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story && !tag.includes('.stories.json')
+      ? reloadScript(story, element ? editButton + playgroundButton : playgroundButton)
       : '';
 
   return story
@@ -112,8 +113,7 @@ export async function storyShortcode(
 ${markdown.render(story.description ?? '')}
 <nvd-canvas id="${tag}_${story.id}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
   <template>${md.utils.escapeHtml(story?.template?.replace(/\n\n/g, '\n') ?? '')}</template>
-  ${editButton}
-  ${playgroundButton}
+  ${element ? editButton + playgroundButton : playgroundButton}
   ${templateContent}
 </nvd-canvas>${reload}`
     : '';
