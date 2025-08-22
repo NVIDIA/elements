@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { keyNavigationGrid } from '@nvidia-elements/core/internal';
 import { createFixture, removeFixture, elementIsStable, emulateClick } from '@nvidia-elements/testing';
 
@@ -47,6 +47,70 @@ class GridKeyNavigationControllerTestElement extends LitElement {
           <div>15 <input /></div>
           <div><button>16</button></div>
           <div><button>17-1</button><button>17-2</button></div>
+        </div>
+      </section>
+    `;
+  }
+}
+
+@keyNavigationGrid<GridKeyNavigationControllerWithColumnsTestElement>()
+@customElement('grid-key-navigation-controller-with-columns-test-element')
+class GridKeyNavigationControllerWithColumnsTestElement extends LitElement {
+  get keynavGridConfig() {
+    return {
+      grid: this.shadowRoot.querySelector<HTMLElement>('section'),
+      columnRow: this.shadowRoot.querySelector<HTMLElement>('section > div:first-child'),
+      columns: this.shadowRoot.querySelectorAll<HTMLElement>('section > div:first-child > *'),
+      rows: this.shadowRoot.querySelectorAll<HTMLElement>('section > div:not(:first-child)'),
+      cells: this.shadowRoot.querySelectorAll<HTMLElement>('section > div:not(:first-child) > *')
+    };
+  }
+
+  render() {
+    return html`
+      <section>
+        <div>
+          <span>Header 1</span>
+          <span>Header 2</span>
+          <span>Header 3</span>
+        </div>
+        <div>
+          <button>0</button>
+          <button>1</button>
+          <button>2</button>
+        </div>
+        <div>
+          <button>3</button>
+          <button>4</button>
+          <button>5</button>
+        </div>
+      </section>
+    `;
+  }
+}
+
+@keyNavigationGrid<GridKeyNavigationControllerInvalidGridTestElement>()
+@customElement('grid-key-navigation-controller-invalid-grid-test-element')
+class GridKeyNavigationControllerInvalidGridTestElement extends LitElement {
+  get keynavGridConfig() {
+    return {
+      grid: this.shadowRoot.querySelector<HTMLElement>('section'),
+      rows: this.shadowRoot.querySelectorAll<HTMLElement>('section > div'),
+      cells: this.shadowRoot.querySelectorAll<HTMLElement>('section > div > *')
+    };
+  }
+
+  render() {
+    return html`
+      <section>
+        <div>
+          <button>0</button>
+          <button>1</button>
+        </div>
+        <div>
+          <button>2</button>
+          <button>3</button>
+          <button>4</button>
         </div>
       </section>
     `;
@@ -355,5 +419,200 @@ describe('grid-key-navigation.controller', () => {
     emulateClick(button);
     await elementIsStable(element);
     expect(button.matches(':focus')).toBe(true);
+  });
+
+  it('should ignore context menu clicks', async () => {
+    await elementIsStable(element);
+    const initialActiveCell = element.keynavGridConfig.cells[0];
+    expect(initialActiveCell.tabIndex).toBe(0);
+
+    // Simulate right-click (context menu)
+    element.keynavGridConfig.cells[2].dispatchEvent(new MouseEvent('mouseup', { bubbles: true, buttons: 2 }));
+    await elementIsStable(element);
+
+    // Should not change active cell
+    expect(initialActiveCell.tabIndex).toBe(0);
+    expect(element.keynavGridConfig.cells[2].tabIndex).toBe(-1);
+  });
+
+  it('should dispatch custom event on cell activation', async () => {
+    await elementIsStable(element);
+    let eventReceived = false;
+    let eventDetail: { code: string | null; shiftKey: boolean; activeItem: HTMLElement } | null = null;
+
+    const eventHandler = (e: CustomEvent) => {
+      eventReceived = true;
+      eventDetail = e.detail;
+    };
+
+    element.keynavGridConfig.cells[2].addEventListener('nve-key-change', eventHandler);
+    element.keynavGridConfig.cells[2].dispatchEvent(new MouseEvent('mouseup', { bubbles: true, buttons: 1 }));
+    await elementIsStable(element);
+
+    expect(eventReceived).toBe(true);
+    expect(eventDetail).toBeDefined();
+    expect(eventDetail.code).toBeNull(); // Mouse events have null code
+    expect(eventDetail.activeItem).toBe(element.keynavGridConfig.cells[2]);
+    element.keynavGridConfig.cells[2].removeEventListener('nve-key-change', eventHandler);
+  });
+
+  it('should include null code for mouse events in custom event detail', async () => {
+    await elementIsStable(element);
+    let eventReceived = false;
+    let eventDetail: { code: string | null; shiftKey: boolean; activeItem: HTMLElement } | null = null;
+
+    // Listen for the custom event on the cell that will be activated
+    const eventHandler = (e: CustomEvent) => {
+      eventReceived = true;
+      eventDetail = e.detail;
+    };
+    element.keynavGridConfig.cells[2].addEventListener('nve-key-change', eventHandler);
+
+    element.keynavGridConfig.cells[2].dispatchEvent(new MouseEvent('mouseup', { bubbles: true, buttons: 1 }));
+    await elementIsStable(element);
+
+    expect(eventReceived).toBe(true);
+    expect(eventDetail).toBeDefined();
+    expect(eventDetail.code).toBeNull();
+    expect(eventDetail.shiftKey).toBe(false);
+    element.keynavGridConfig.cells[2].removeEventListener('nve-key-change', eventHandler);
+  });
+
+  it('should handle edge case navigation at grid boundaries', async () => {
+    await elementIsStable(element);
+
+    // Try to navigate beyond left boundary
+    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowLeft' }));
+    await elementIsStable(element);
+    expect(element.keynavGridConfig.cells[0].tabIndex).toBe(0); // Should stay at boundary
+
+    // Try to navigate beyond top boundary
+    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowUp' }));
+    await elementIsStable(element);
+    expect(element.keynavGridConfig.cells[0].tabIndex).toBe(0); // Should stay at boundary
+
+    // Navigate to bottom-right corner
+    element.keynavGridConfig.grid.dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'End', ctrlKey: true, metaKey: true })
+    );
+    await elementIsStable(element);
+    expect(element.keynavGridConfig.cells[17].tabIndex).toBe(0);
+
+    // Try to navigate beyond right boundary
+    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight' }));
+    await elementIsStable(element);
+    expect(element.keynavGridConfig.cells[17].tabIndex).toBe(0); // Should stay at boundary
+
+    // Try to navigate beyond bottom boundary
+    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowDown' }));
+    await elementIsStable(element);
+    expect(element.keynavGridConfig.cells[17].tabIndex).toBe(0); // Should stay at boundary
+  });
+
+  it('should handle PageUp/PageDown with exact multiples', async () => {
+    await elementIsStable(element);
+    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'PageDown' }));
+    await elementIsStable(element);
+    expect(element.keynavGridConfig.cells[12].tabIndex).toBe(0); // 4 rows * 3 columns = index 12
+
+    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'PageUp' }));
+    await elementIsStable(element);
+    expect(element.keynavGridConfig.cells[0].tabIndex).toBe(0);
+  });
+});
+
+describe('grid-key-navigation.controller with columns', () => {
+  let element: GridKeyNavigationControllerWithColumnsTestElement;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(
+      html`<grid-key-navigation-controller-with-columns-test-element></grid-key-navigation-controller-with-columns-test-element>`
+    );
+    element = fixture.querySelector<GridKeyNavigationControllerWithColumnsTestElement>(
+      'grid-key-navigation-controller-with-columns-test-element'
+    );
+    element.keynavGridConfig.cells[0].focus();
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should include column row in navigation', async () => {
+    await elementIsStable(element);
+    expect(element.keynavGridConfig.columnRow).toBeDefined();
+    expect(element.keynavGridConfig.columns).toBeDefined();
+    expect(element.keynavGridConfig.columns.length).toBe(3);
+    expect(element.keynavGridConfig.rows.length).toBe(2); // Excluding column row
+  });
+
+  it('should navigate through columns when column row is present', async () => {
+    await elementIsStable(element);
+    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowUp' }));
+    await elementIsStable(element);
+
+    const columnHeaders = Array.from(element.keynavGridConfig.columns);
+    expect(columnHeaders[0].tabIndex).toBe(0);
+  });
+});
+
+describe('grid-key-navigation.controller invalid grid', () => {
+  let element: GridKeyNavigationControllerInvalidGridTestElement;
+  let fixture: HTMLElement;
+  let warnSpy: ReturnType<typeof vi.fn>;
+
+  beforeEach(async () => {
+    warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    fixture = await createFixture(
+      html`<grid-key-navigation-controller-invalid-grid-test-element></grid-key-navigation-controller-invalid-grid-test-element>`
+    );
+    element = fixture.querySelector<GridKeyNavigationControllerInvalidGridTestElement>(
+      'grid-key-navigation-controller-invalid-grid-test-element'
+    );
+    element.keynavGridConfig.cells[0].focus();
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+    warnSpy.mockRestore();
+  });
+
+  it('should warn and not navigate when grid structure is invalid', async () => {
+    await elementIsStable(element);
+
+    // Try to navigate - should not work due to invalid structure
+    element.keynavGridConfig.grid.dispatchEvent(new KeyboardEvent('keydown', { code: 'ArrowRight' }));
+    await elementIsStable(element);
+
+    // Should still be on first cell
+    expect(element.keynavGridConfig.cells[0].tabIndex).toBe(0);
+    expect(element.keynavGridConfig.cells[1].tabIndex).toBe(-1);
+  });
+});
+
+describe('grid-key-navigation.controller lifecycle', () => {
+  let element: GridKeyNavigationControllerTestElement;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(
+      html`<grid-key-navigation-controller-test-element></grid-key-navigation-controller-test-element>`
+    );
+    element = fixture.querySelector<GridKeyNavigationControllerTestElement>(
+      'grid-key-navigation-controller-test-element'
+    );
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should clean up observers on disconnect', async () => {
+    expect(element.keynavGridConfig.cells[0].tabIndex).toBe(0);
+    element.remove();
+    await elementIsStable(element);
+    expect(() => element.keynavGridConfig).not.toThrow();
   });
 });
