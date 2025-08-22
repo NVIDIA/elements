@@ -76,7 +76,7 @@ export async function storyShortcode(
   }
 
   const playgroundURL = await PlaygroundService.create({
-    html: story?.template ?? '',
+    template: story?.template ?? '',
     name: `${story.entrypoint}_${storyName}`
   });
   const playgroundButton = story

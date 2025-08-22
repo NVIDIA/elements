@@ -38,7 +38,7 @@ import styles from './badge.css?inline';
 @typeSSR()
 export class Badge extends LitElement {
   /**
-   * Visual treatment to represent a ongoing task, support or trend status. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=48-710&mode=design)
+   * Visual treatment to represent a ongoing task, support status. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=48-710&mode=design)
    */
   @property({ type: String, reflect: true }) status: TaskStatus | SupportStatus | TrendStatus;
 
