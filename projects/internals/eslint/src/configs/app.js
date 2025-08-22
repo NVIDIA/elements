@@ -44,7 +44,9 @@ export const appConfig = [
                     '@nvidia-elements/core/**/*.css',
                     '@nvidia-elements/core/**/*.css?inline',
                     '@nvidia-elements/styles/**/*.css',
-                    '@nvidia-elements/styles/**/*.css?inline'
+                    '@nvidia-elements/styles/**/*.css?inline',
+                    '@nvidia-elements/themes/**/*.css',
+                    '@nvidia-elements/themes/**/*.css?inline'
                   ],
                   message:
                     'Inline CSS utils are not allowed to prevent performance issues, use shadow DOM encapsulated CSS instead'

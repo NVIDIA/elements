@@ -21,7 +21,7 @@ function template(theme: '' | 'dark' = '') {
   </script>
 
   <div nve-layout="row gap:xs">
-    <nve-copy-button value='hello'></nve-copy-button>
+    <nve-copy-button value="hello"></nve-copy-button>
   </div>
 
   <div nve-layout="row gap:sm">

@@ -243,11 +243,11 @@ export const DropdownPositionFallback = {
   }
 </style>
 
-<nve-dropdown id="dropdown" anchor="btn" position="bottom" alignment="center">
+<nve-dropdown anchor="btn" position="bottom" alignment="center">
   dropdown content
 </nve-dropdown>
 
-<nve-dropdown id="dropdown" anchor="btn" position="right" alignment="center">
+<nve-dropdown anchor="btn" position="right" alignment="center">
   dropdown content
 </nve-dropdown>
 
