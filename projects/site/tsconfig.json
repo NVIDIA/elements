@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "esnext",
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
-    "module": "ESNext",
-    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "esnext",
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
     "moduleResolution": "bundler",
     "strict": true,
     "baseUrl": "./",

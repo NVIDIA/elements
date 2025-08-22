@@ -95,9 +95,9 @@ ${
 | ---- | ----- | ----------- |
 ${manifest.attributes
   .map(i => {
-    const type = i.type?.text ? i.type.text.replace(/\|/g, '\\|').split('\n').join('') : '';
+    const type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
     const description = i.description?.replace(/\|/g, '\\|')?.split('\n')?.join('');
-    return `| ${i.name} | \`${type}\` | ${description} |`;
+    return `| ${i.name} | ${type} | ${description} |`;
   })
   .join('\n')}`
     : 'No Attributes available.'
@@ -111,9 +111,9 @@ ${
 | ---- | ----- | ----------- |
 ${manifest.members
   .map(i => {
-    const type = i.type?.text ? i.type.text.replace(/\|/g, '\\|').split('\n').join('') : '';
+    const type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
     const description = i.description ? i.description.replace(/\|/g, '\\|').split('\n').join('') : '';
-    return `| ${i.name} | \`${type}\` | ${description ?? ''} |`;
+    return `| ${i.name} | ${type} | ${description} |`;
   })
   .join('\n')}`
     : 'No Properties available.'

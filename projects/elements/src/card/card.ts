@@ -25,7 +25,7 @@ import cardFooterStyleSheet from './card-footer.css?inline';
  */
 @audit()
 export class Card extends LitElement implements ContainerElement {
-  /** flat (embed into parent container) or full (full parent container width) */
+  /** flat (embed into parent container) or full (width of viewport) */
   @property({ type: String, reflect: true }) container?: 'flat' | 'full';
 
   static styles = useStyles([cardStyleSheet]);

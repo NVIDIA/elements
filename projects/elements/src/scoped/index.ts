@@ -17,22 +17,3 @@ export function scope(
     );
   } as typeof element;
 }
-
-/**
- * @deprecated
- * Utility for registering Elements with a scope suffix when Custom Element Scoped Registries are not available
- */
-export function defineScopedElement(
-  suffix: string,
-  Element: LitElementConstructor & { metadata: { tag: string } },
-  Mixin = ScopedRegistryHost
-) {
-  const { tag } = Element.metadata;
-  /* istanbul ignore next -- @preserve */
-  const tagName = `${tag}${suffix ? `-${suffix}` : ''}`;
-
-  /* istanbul ignore next -- @preserve */
-  if (!customElements.get(tagName)) {
-    customElements.define(tagName, scope(Element, Mixin));
-  }
-}
