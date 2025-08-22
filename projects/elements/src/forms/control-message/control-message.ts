@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
+import { type ValidityStateError } from '../utils/types.js';
 import styles from './control-message.css?inline';
 
 const statusIcons = {
@@ -35,7 +36,7 @@ export class ControlMessage extends LitElement {
    * Validation error code for current form control
    * https://developer.mozilla.org/en-US/docs/Web/API/ValidityState
    */
-  @property({ type: String, reflect: true }) error: keyof ValidityState = null;
+  @property({ type: String, reflect: true }) error: ValidityStateError = null;
 
   static styles = useStyles([styles]);
 

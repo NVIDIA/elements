@@ -107,7 +107,9 @@ export function createLitFiles(content, metadata: MetadataSummary, options: Play
 
 function createURL(files: string, options: PlaygroundOptions) {
   const defaultOptions = { openFile: 'index.html', ...options };
-  return `https://elements-stage.nvidia.com/ui/elements-playground/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim().replaceAll(' ', '%20')}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`;
+  return encodeURI(
+    `https://elements-stage.nvidia.com/ui/elements-playground/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim()}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`
+  );
 }
 
 function createLayoutStyles() {

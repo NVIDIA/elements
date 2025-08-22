@@ -18,9 +18,20 @@
     "nve:uninstall": "pnpm uninstall --global @nvidia-elements/cli"
   },
   "dependencies": {
-    "yargs": "18.0.0"
+    "@inquirer/prompts": "7.8.4",
+    "@modelcontextprotocol/sdk": "1.17.4",
+    "adm-zip": "0.5.16",
+    "archiver": "7.0.1",
+    "glob": "catalog:",
+    "marked": "16.2.0",
+    "marked-terminal": "7.3.0",
+    "ora": "8.2.0",
+    "yargs": "18.0.0",
+    "open": "10.2.0",
+    "zod": "3.25.76"
   },
   "devDependencies": {
+    "@nve-internals/tools": "workspace:*",
     "@nve-internals/eslint": "workspace:*",
     "@nve-internals/vite": "workspace:*",
     "@vitest/coverage-istanbul": "catalog:",

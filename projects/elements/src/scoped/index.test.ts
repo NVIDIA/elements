@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { defineScopedElement, scope } from '@nvidia-elements/core/scoped';
+import { scope } from '@nvidia-elements/core/scoped';
 import { define } from '@nvidia-elements/core/internal';
 
 export class TestTwoElement extends LitElement {
@@ -24,7 +24,6 @@ export class TestElement extends LitElement {
 
 scope(TestTwoElement);
 define(TestTwoElement);
-defineScopedElement('scoped', TestElement);
 
 describe('scoped element', () => {
   let fixture: HTMLElement;
@@ -42,10 +41,6 @@ describe('scoped element', () => {
 
   it('should define element', () => {
     expect(customElements.get('test-element')).toBeDefined();
-  });
-
-  it('should define scoped alias element', () => {
-    expect(customElements.get('test-element-scoped')).toBeDefined();
   });
 
   it('should have static defined dependencies', () => {

@@ -6,9 +6,9 @@ interface AllowedAttributes {
   [key: string]: ({ name: string; values: string[] } | string)[];
 }
 
-const globalElements = ['html', 'body', 'head'];
+const globalElements = ['html', 'body', 'head', 'meta', 'title', 'doctype'];
 
-const standardElements = [
+const nativeElements = [
   'div',
   'section',
   'article',
@@ -34,13 +34,88 @@ const standardElements = [
   'audio',
   'iframe',
   'canvas',
-  'svg',
   'dialog'
 ];
 
+const svgElements = [
+  'svg',
+  'path',
+  'g',
+  'defs',
+  'linearGradient',
+  'stop',
+  'circle',
+  'text',
+  'line',
+  'ellipse',
+  'rect',
+  'polygon',
+  'polyline',
+  'pattern'
+];
+const svgAttrs = [
+  'id',
+  'class',
+  'width',
+  'height',
+  'dominant-baseline',
+  'rx',
+  'ry',
+  'style',
+  'cx',
+  'cy',
+  'r',
+  'fill',
+  'd',
+  'opacity',
+  'x',
+  'y',
+  'x1',
+  'y1',
+  'x2',
+  'y2',
+  'stroke',
+  'stroke-width',
+  'transform',
+  'viewBox',
+  'preserveAspectRatio',
+  'stroke-dashoffset',
+  'stroke-dasharray',
+  'text-anchor',
+  'font-size',
+  'font-weight',
+  'patternUnits',
+  'points'
+];
 const formElements = ['label', 'form', 'optgroup', 'fieldset', 'input', 'textarea', 'button', 'select', 'option'];
-const standardAttrs = ['nve-text', 'nve-layout', `nve-display`, 'nve-control', 'slot', 'id', 'name', 'style'];
+const nativeElementAttrs = [
+  'nve-text',
+  'nve-layout',
+  `nve-display`,
+  'nve-control',
+  'slot',
+  'id',
+  'name',
+  'class',
+  'hidden',
+  'href',
+  'data-*'
+];
 const formAttrs = [
+  'nve-control',
+  'minlength',
+  'maxlength',
+  'min',
+  'max',
+  'step',
+  'multiple',
+  'size',
+  'rows',
+  'cols',
+  'wrap',
+  'spellcheck',
+  'readonly',
+  'autocomplete',
   'aria-label',
   'aria-labelledby',
   'aria-describedby',
@@ -48,51 +123,41 @@ const formAttrs = [
   'aria-disabled',
   'aria-expanded',
   'aria-controls',
-  'nve-control',
   'slot',
   'name',
   'required',
   'pattern',
   'placeholder',
-  'type',
   'value',
   'disabled',
   'type',
   'checked',
   'id',
-  'for'
+  'for',
+  'hidden',
+  'data-*'
 ];
 
 export function validateTemplate(
   source: string,
   metadata: MetadataSummary,
-  config: { allowStyleAttribute?: boolean; allowGlobalElements?: boolean; allowVulnerableTags?: boolean } = {}
+  config: { allowStyles?: boolean; allowGlobalElements?: boolean; allowVulnerableTags?: boolean } = {}
 ): string {
-  const defaultConfig = { allowStyleAttribute: false, allowGlobalElements: false, allowVulnerableTags: true };
+  const defaultConfig = { allowStyles: true, allowGlobalElements: false, allowVulnerableTags: true };
   const mergedConfig = { ...defaultConfig, ...config };
 
-  if (!mergedConfig.allowGlobalElements) {
-    if (source.includes('<html') || source.includes('<body') || source.includes('<head')) {
-      throw new Error('Do not include `html`, `body` tags or custom CSS.');
-    }
-  }
-
   const allowedTags = [
-    ...globalElements,
-    ...standardElements,
+    ...nativeElements,
+    ...svgElements,
     ...formElements,
     ...sanitizeHtml.defaults.allowedTags,
     ...getAvailableElementTags(metadata),
-    ...(mergedConfig.allowVulnerableTags ? ['script'] : [])
-  ].filter(tag => {
-    if (!mergedConfig.allowGlobalElements) {
-      return tag !== 'body' && tag !== 'html' && tag !== 'head';
-    } else {
-      return true;
-    }
-  });
+    ...(mergedConfig.allowVulnerableTags ? ['script'] : []),
+    ...(mergedConfig.allowStyles ? ['style'] : []),
+    ...(mergedConfig.allowGlobalElements ? globalElements : [])
+  ];
 
-  const elementsAllowedAttributes: AllowedAttributes = Object.values(metadata.projects)
+  const customElementsAllowedAttributes: AllowedAttributes = Object.values(metadata.projects)
     .filter(project => project.elements)
     .flatMap(project => project.elements)
     .reduce((acc, element) => {
@@ -122,45 +187,66 @@ export function validateTemplate(
           }
         }) ?? [];
 
-      acc[element.name] = [
-        ...(acc[element.name] ?? []),
-        ...formAttrs,
-        ...customAttrs,
-        'slot',
-        'id',
-        'name',
-        'nve-display'
-      ];
+      acc[element.name] = [...(acc[element.name] ?? []), ...formAttrs, ...customAttrs];
       return acc;
     }, {});
+
+  const allowedSvgAttributes: AllowedAttributes = svgElements.reduce((acc, element) => {
+    acc[element] = svgAttrs;
+    return acc;
+  }, {});
 
   const allowedAttributes: AllowedAttributes = {
     ...sanitizeHtml.defaults.allowedAttributes,
     script: mergedConfig.allowVulnerableTags ? ['type'] : [],
     html: ['nve-theme'],
     body: ['nve-text', 'nve-layout', 'nve-theme'],
-    ...elementsAllowedAttributes,
+    ...customElementsAllowedAttributes,
+    ...allowedSvgAttributes,
     ...formElements.reduce((acc, element) => {
-      acc[element] = formAttrs;
+      acc[element] = [...nativeElementAttrs, ...formAttrs];
       return acc;
     }, {}),
-    ...standardElements.reduce((acc, element) => {
-      acc[element] = [...(acc[element] ?? []), ...standardAttrs];
+    ...nativeElements.reduce((acc, element) => {
+      acc[element] = [...(acc[element] ?? []), ...nativeElementAttrs];
       return acc;
     }, {}),
-    '*': mergedConfig.allowStyleAttribute ? ['style'] : []
+    '*': [
+      'slot',
+      'id',
+      'name',
+      'class',
+      'hidden',
+      'href',
+      'data-*',
+      'nve-display',
+      ...(mergedConfig.allowStyles ? ['style'] : [])
+    ]
   };
 
-  const nonBooleanAttributes = Object.values(allowedAttributes)
+  const customElementsNonBooleanAttributes = Object.values(allowedAttributes)
     .filter(i => typeof i !== 'string')
     .flatMap(i => (Array.isArray(i?.values) ? i.values : []));
+
+  const nonBooleanAttributes = sanitizeHtml.defaults.nonBooleanAttributes.filter(attr => attr !== 'hidden');
+
+  source = removeBodyStyleSelectors(source);
 
   const result = sanitizeHtml(source, {
     allowedTags,
     allowedAttributes,
-    allowVulnerableTags: mergedConfig.allowVulnerableTags,
-    nonBooleanAttributes: [...sanitizeHtml.defaults.nonBooleanAttributes, ...nonBooleanAttributes]
+    allowVulnerableTags: mergedConfig.allowVulnerableTags || mergedConfig.allowStyles, // allows script and style tags
+    nonBooleanAttributes: [...nonBooleanAttributes, ...customElementsNonBooleanAttributes],
+    parser: {
+      lowerCaseTags: false,
+      lowerCaseAttributeNames: false
+    }
   });
 
   return result;
+}
+
+function removeBodyStyleSelectors(styles: string) {
+  // Simple regex to remove basic body selectors: body, body.class, body#id, body[attr], etc. followed by CSS rule block
+  return styles.replace(/body[^\s{]*\s*\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/gi, '');
 }

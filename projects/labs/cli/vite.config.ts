@@ -1,3 +1,4 @@
+import { resolve } from 'node:path';
 import { defineConfig, mergeConfig } from 'vite';
 import { libraryNodeBuildConfig } from '@nve-internals/vite';
 import { builtinModules } from 'node:module';
@@ -14,5 +15,9 @@ export default defineConfig(() => {
     }
   }
 
-  return mergeConfig(libConfig, {});
+  return mergeConfig(libConfig, {
+    build: {
+      ssr: true // trick vite to build with node deps
+    }
+  });
 });

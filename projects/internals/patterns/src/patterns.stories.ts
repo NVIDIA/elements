@@ -86,55 +86,20 @@ export const ButtonRowFilledTextWithIcon = {
   `
 };
 
-export const Trend = {
-  render: () => html`
-  <div nve-layout="column gap:sm">
-    <label nve-text="label medium sm muted">Label</label>
-    <div nve-layout="row gap:sm align:vertical-center">
-      <h3 nve-text="heading semibold lg">198,298</h3>
-      <nve-badge status="trend-up">+15%</nve-badge>
-    </div>
-    <label nve-text="label medium sm muted">Since last week</label>
-  </div>
-  `
-};
-
-export const TrendTopBadge = {
-  render: () => html`
-  <div nve-layout="column gap:xs">
-    <div nve-layout="row gap:sm align:vertical-center">
-      <label nve-text="label medium sm muted">Since last week</label>
-      <nve-badge status="trend-up">+15%</nve-badge>
-    </div>
-    <div nve-layout="column gap:sm">
-      <h3 nve-text="heading semibold lg">198,298</h3>
-      <label nve-text="label medium sm muted">Label</label>
-    </div>
-  </div>
-  `
-};
-
-export const TrendBottomBadge = {
-  render: () => html`
-  <div nve-layout="column gap:xs">
-    <div nve-layout="column gap:sm">
-      <label nve-text="label medium sm muted">Label</label>
-      <h3 nve-text="heading semibold lg">198,298</h3>
-    </div>
-    <div nve-layout="row gap:sm align:vertical-center">
-      <label nve-text="label medium sm muted">Since last week</label>
-      <nve-badge status="trend-up">+15%</nve-badge>
-    </div>
-  </div>
-  `
-};
-
+/**
+ * @description Keyboard shortcut content example.
+ * @tags pattern
+ */
 export const ShortcutFilled = {
   render: () => html`
     <kbd nve-text="code">CMD + C</kbd>
   `
 };
 
+/**
+ * @description Keyboard shortcut content example for inline text content.
+ * @tags pattern
+ */
 export const ShortcutFlat = {
   render: () => html`
     <kbd nve-text="code flat">CMD + C</kbd>

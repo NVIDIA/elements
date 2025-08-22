@@ -12,7 +12,7 @@ if (!existsSync('./dist')) {
 cpSync('./_redirects', './dist/_redirects');
 cpSync('../site/dist/', './dist/', { recursive: true });
 cpSync('../internals/metadata/static/index.json', './dist/metadata/index.json');
-cpSync('../internals/metadata/static/stories.json', './dist/metadata/stories.json');
+cpSync('../internals/metadata/static/examples.json', './dist/metadata/examples.json');
 
 cpSync('../starters/dist/', './dist/starters/download/', { recursive: true });
 cpSync('../starters/angular/dist/angular-starter/browser/', './dist/starters/angular/', { recursive: true });
