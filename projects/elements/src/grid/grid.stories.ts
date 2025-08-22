@@ -458,10 +458,9 @@ export const ScrollPosition = {
 };
 
 /**
- * @description Using `nve-layout="column"` and `nve-layout="full"` enables the
- * grid to fill any remaining space of a parent containing element. This is
- * helpful for preserving the grid height/fill while dynamic content above can
- * freely change.
+ * @description Using `nve-layout="column"` the grid to fill any remaining space
+ * of a parent containing element. This is helpful for preserving the grid
+ * height/fill while dynamic content above can freely change.
  */
 export const FullHeight = {
   render: () => html`
@@ -469,7 +468,7 @@ export const FullHeight = {
   <nve-search>
     <input type="search" aria-label="search" placeholder="search" />
   </nve-search>
-  <nve-grid nve-layout="full">
+  <nve-grid style="height: 100%; min-height: 0;">
     <nve-grid-header>
       ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column> `)}
     </nve-grid-header>
@@ -729,7 +728,7 @@ export const DisplaySettings = {
     <p nve-text="body muted">1,145 results found</p>
     <nve-button popovertarget="column-settings-dropdown">Display Settings</nve-button>
   </div>
-  <nve-grid nve-layout="full">
+  <nve-grid>
     <nve-grid-header>
       ${Array(4).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column> `)}
     </nve-grid-header>

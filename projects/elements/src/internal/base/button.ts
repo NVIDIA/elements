@@ -45,7 +45,7 @@ export class BaseButton extends LitElement {
   @property({ type: Boolean, reflect: true }) expanded: boolean;
 
   /**
-   * Similar to input readonly, sets a button sematically as visual treatment only
+   * Similar to input readonly, sets a button semantically as visual treatment only
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly
    */
   @property({ type: Boolean, reflect: true }) readonly: boolean;
@@ -124,7 +124,7 @@ export class BaseButton extends LitElement {
    * Establishing a relationship between a popover and its invoker button.
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/popoverTargetElement
    */
-  @property({ type: Object }) popoverTargetElement: HTMLElement; // eslint-disable-line rulesdir/primitive-property
+  @property({ type: Object }) popoverTargetElement: HTMLElement; // eslint-disable-line local/primitive-property
 
   /**
    * The id of the element to which the popover is applied.

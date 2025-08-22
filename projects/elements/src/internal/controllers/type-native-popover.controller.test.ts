@@ -32,6 +32,8 @@ class TypeNativePopoverControllerTestElement extends LitElement {
 
   @property({ type: Boolean, reflect: true }) hidden = false;
 
+  @property({ type: Object }) popoverTargetElement: HTMLElement;
+
   _activeTrigger: HTMLElement;
 
   get popoverArrow() {

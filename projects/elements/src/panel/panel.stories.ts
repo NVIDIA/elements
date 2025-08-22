@@ -5,6 +5,8 @@ import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/notification/define.js';
 
+/* eslint-disable @html-eslint/no-restricted-attrs */
+
 export default {
   title: 'Elements/Panel',
   component: 'nve-panel'
@@ -383,3 +385,5 @@ export const PanelWithFooter = {
     </section>
   `
 };
+
+/* eslint-enable @html-eslint/no-restricted-attrs */
