@@ -1,11 +1,13 @@
-import { resolve } from 'path';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import lit from 'eslint-plugin-lit';
 import litA11y from 'eslint-plugin-lit-a11y';
 import wc from 'eslint-plugin-wc';
-import rulesdir from 'eslint-plugin-rulesdir';
-import * as url from 'url';
+import eslintHTML from '@html-eslint/eslint-plugin';
+import reservedPropertyNames from '../local/reserved-property-names.js';
+import primitiveProperty from '../local/primitive-property.js';
+import reservedEventNames from '../local/reserved-event-names.js';
+import statelessProperty from '../local/stateless-property.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -28,18 +30,24 @@ const ignores = [
   '.wireit/'
 ];
 
-rulesdir.RULES_DIR = resolve(url.fileURLToPath(new URL('.', import.meta.url)), '../plugins');
-
 /** @type {import('eslint').Linter.Config[]} */
 export const litConfig = [
   {
     files: [...source, ...tests, ...stories],
     ignores,
     plugins: {
-      rulesdir: rulesdir,
       wc: wc,
       'lit-a11y': litA11y,
-      lit
+      lit,
+      '@html-eslint': eslintHTML,
+      local: {
+        rules: {
+          'reserved-property-names': reservedPropertyNames,
+          'primitive-property': primitiveProperty,
+          'reserved-event-names': reservedEventNames,
+          'stateless-property': statelessProperty
+        }
+      }
     },
     languageOptions: {
       parser: tseslint.parser,
@@ -53,7 +61,6 @@ export const litConfig = [
       }
     },
     rules: {
-      ...litA11y.configs.recommended.rules,
       ...litA11y.configs.recommended.rules,
       'wc/no-constructor-attributes': ['error'],
       'wc/no-invalid-element-name': ['error'],
@@ -80,19 +87,40 @@ export const litConfig = [
       'lit/quoted-expressions': ['error'],
       'lit/value-after-constraints': ['error'],
       'lit/no-complex-attribute-binding': ['off'], // rule is not working when type is being resolved from a generic type parameter
-      'lit-a11y/anchor-has-content': 'off', // rule does not check for aria-label
-      'lit-a11y/click-events-have-key-events': 'off', // a11y may be handled by @keyNavigationList controller
-      'no-unknown-slot': ['off'], // currently not working due to hoisting types
-      'rulesdir/reserved-property-names': ['error'],
-      'rulesdir/reserved-event-names': ['error'],
-      'rulesdir/stateless-property': ['error']
+      'lit-a11y/anchor-has-content': ['off'], // rule does not check for aria-label
+      'lit-a11y/click-events-have-key-events': ['off'], // a11y may be handled by @keyNavigationList controller
+      ...eslintHTML.configs.recommended.rules,
+      '@html-eslint/no-extra-spacing-text': ['off'], // todo: run lint:fix
+      '@html-eslint/indent': ['off', 2], // todo: run lint:fix
+      '@html-eslint/use-baseline': ['off'], // disabled we use chrome specific APIs with fallbacks
+      '@html-eslint/attrs-newline': ['off'], // disabled interferes with example templates
+      '@html-eslint/element-newline': ['off'], // disabled interferes with example templates
+      '@html-eslint/require-closing-tags': ['off'], // disabled interferes with example templates
+      '@html-eslint/no-extra-spacing-attrs': ['off'], // disabled interferes with example templates
+      '@html-eslint/no-restricted-attrs': [
+        'error',
+        {
+          tagPatterns: ['.*-.*'],
+          attrPatterns: ['nve-layout'],
+          message: 'Use of nve-layout is not allowed on custom HTML element tags.'
+        },
+        {
+          tagPatterns: ['.*-.*'],
+          attrPatterns: ['nve-text'],
+          message: 'Use of nve-text is not allowed on custom HTML element tags.'
+        }
+      ]
     }
   },
+  // library implementation files
   {
     files: [...source],
     ignores: [...ignores, ...tests, ...stories],
     rules: {
-      'rulesdir/primitive-property': ['error']
+      'local/reserved-property-names': ['error'],
+      'local/primitive-property': ['error'],
+      'local/reserved-event-names': ['error'],
+      'local/stateless-property': ['error']
     }
   }
 ];

@@ -12,7 +12,7 @@ describe(CopyButton.metadata.tag, () => {
   let element: CopyButton;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<nve-copy-button value='hello' behavior-copy></nve-copy-button>`);
+    fixture = await createFixture(html`<nve-copy-button value="hello" behavior-copy></nve-copy-button>`);
     element = fixture.querySelector(CopyButton.metadata.tag);
     await elementIsStable(element);
   });

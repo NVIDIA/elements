@@ -10,7 +10,7 @@ describe('panel lighthouse report', () => {
           <div slot="subtitle"></div>
         </nve-panel-header>
 
-        <nve-panel-content nve-layout="column gap:md">
+        <nve-panel-content>
           <p nve-text="body">content</p>
         </nve-panel-content>
       </nve-panel>

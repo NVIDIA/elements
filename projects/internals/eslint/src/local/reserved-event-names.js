@@ -1,11 +1,12 @@
 /**
- * Prevent property overrides that conflicts with a key in the HTMLElement prototype
- * Credit to https://github.com/ionic-team/stencil-eslint/blob/main/src/rules/reserved-member-names.ts
+ * Prevent event overrides that conflicts with a existing event on the HTMLElement base type
+ * Credit to https://github.com/ionic-team/stencil-eslint/blob/main/src/rules/reserved-event-names.ts
  */
-const rule = {
+export default {
   meta: {
     docs: {
-      description: 'Prevent property overrides that conflicts with a key in the HTMLElement prototype',
+      description:
+        'This rule catches event overrides that conflicts with a existing event on the HTMLElement base type',
       category: 'Possible Errors'
     },
     schema: [],
@@ -16,12 +17,12 @@ const rule = {
       Decorator: node => {
         const decoratorName = node.expression.callee.name;
 
-        if (decoratorName === 'property' || decoratorName === 'state' || decoratorName === 'event') {
+        if (decoratorName === 'event') {
           const propName = node.parent.key.name;
-          if (isReservedProperty(propName)) {
+          if (isReservedEvent(propName)) {
             context.report({
               node: node.parent.key,
-              message: `"@${decoratorName} ${propName}" conflicts with a key in the HTMLElement prototype. Please choose a different name.`
+              message: `"@${decoratorName} ${propName}" conflicts with a event in the HTMLElement base type. Please choose a different name.`
             });
           }
         }
@@ -30,70 +31,21 @@ const rule = {
   }
 };
 
-const ARIA_KEYS = [
-  'ActiveDescendant',
-  'Atomic',
-  'AutoComplete',
-  'Busy',
-  'Checked',
-  'ColCount',
-  'ColIndex',
-  'ColSpan',
-  'Controls',
-  'Current',
-  'DescribedBy',
-  'Details',
-  'Disabled',
-  'ErrorMessage',
-  'Expanded',
-  'FlowTo',
-  'HasPopup',
-  'Hidden',
-  'Invalid',
-  'KeyShortcuts',
-  'Label',
-  'LabelledBy',
-  'Level',
-  'Live',
-  'Modal',
-  'MultiLine',
-  'MultiSelectable',
-  'Orientation',
-  'Owns',
-  'Placeholder',
-  'PosInSet',
-  'Pressed',
-  'ReadOnly',
-  'Relevant',
-  'Required',
-  'RoleDescription',
-  'RowCount',
-  'RowIndex',
-  'RowSpan',
-  'Selected',
-  'SetSize',
-  'Sort',
-  'ValueMax',
-  'ValueMin',
-  'ValueNow',
-  'ValueText'
-].map(name => `aria${name}`);
-
-const HTML_ELEMENT_KEYS = [
+const HTML_EVENTS = [
   'title',
   'lang',
   'translate',
   'dir',
-  'dataset',
-  // 'hidden', disabled for lit animation trigger, should enable in future
+  // 'dataset',
+  // 'hidden',
   'tabIndex',
   'accessKey',
   'draggable',
-  'spellcheck',
-  'autocapitalize',
+  // 'spellcheck',
+  // 'autocapitalize',
   'contentEditable',
   'isContentEditable',
-  'inputMode',
+  // 'inputMode',
   'offsetParent',
   'offsetTop',
   'offsetLeft',
@@ -327,13 +279,11 @@ const NODE_KEYS = [
 
 const JSX_KEYS = ['ref', 'key'];
 
-const reservedPublicProperties = new Set(
-  [...ARIA_KEYS, ...HTML_ELEMENT_KEYS, ...ELEMENT_KEYS, ...NODE_KEYS, ...JSX_KEYS].map(p => p.toLowerCase())
+const reservedPublicEvents = new Set(
+  [...HTML_EVENTS, ...ELEMENT_KEYS, ...NODE_KEYS, ...JSX_KEYS].map(p => p.toLowerCase())
 );
 
-function isReservedProperty(memberName) {
+function isReservedEvent(memberName) {
   memberName = memberName.toLowerCase();
-  return reservedPublicProperties.has(memberName);
+  return reservedPublicEvents.has(memberName);
 }
-
-module.exports = rule;
