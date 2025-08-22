@@ -38,10 +38,10 @@ export function storiesToJSON(packageFile) {
 
         const items = (
           await Promise.all(
-            storiesVariableStatement.map(async story => {
-              const id = story.getDescendantsOfKind(SyntaxKind.VariableDeclaration)[0].getName();
+            storiesVariableStatement.map(async example => {
+              const id = example.getDescendantsOfKind(SyntaxKind.VariableDeclaration)[0].getName();
               let template =
-                story
+                example
                   .getDescendantsOfKind(SyntaxKind.TaggedTemplateExpression)[0]
                   ?.getDescendants()[1]
                   ?.getText()
@@ -53,7 +53,7 @@ export function storiesToJSON(packageFile) {
                 try {
                   template = await renderTemplate(template);
                 } catch (e) {
-                  console.warn(`Element ${element} story ${id} is not stateless.`);
+                  console.warn(`Element ${element} example "${id}" is not stateless.`);
                 }
 
                 try {
@@ -66,16 +66,44 @@ export function storiesToJSON(packageFile) {
               }
 
               const description =
-                story
+                example
                   .getJsDocs()
                   .flatMap(doc => doc.getTags())
                   .filter(tag => tag.getTagName() === 'description')
                   .map(tag => tag.getCommentText())[0] ?? '';
 
+              const deprecated = (
+                example
+                  .getJsDocs()
+                  .flatMap(doc => doc.getTags())
+                  .filter(tag => tag.getTagName() === 'deprecated')
+                  .map(tag => tag.getCommentText())[0] ?? ''
+              ).length
+                ? true
+                : undefined;
+
+              const tags =
+                example
+                  .getJsDocs()
+                  .flatMap(doc => doc.getTags())
+                  .filter(tag => tag.getTagName() === 'tags')
+                  .flatMap(tag =>
+                    tag
+                      .getCommentText()
+                      .split(' ')
+                      .map(t => t.trim())
+                  )
+                  .filter(tag => tag.length > 0) ?? [];
+
+              validateDescriptionContext(id, description);
+              validateTagsContext(id, tags);
+
               return {
                 id,
                 template,
-                description
+                description,
+                deprecated,
+                tags
               };
             })
           )
@@ -98,7 +126,7 @@ export function storiesToJSON(packageFile) {
           map: null
         };
       } catch (error) {
-        console.error(`Error processing story file ${id}:`, error);
+        console.error(`Error processing example file ${id}:`, error);
         return null;
       }
     }
@@ -118,4 +146,29 @@ async function renderTemplate(template) {
   const result = render(data);
   const contents = await collectResult(result);
   return contents.replaceAll(/<!--[^>]*lit[^>]*-->/g, '').replaceAll('=""', '');
+}
+
+/**
+ * Descriptions context must be concise to be compatible with externalized tools such as CLIs and MCPs.
+ */
+function validateDescriptionContext(id, description) {
+  const contextMaxLength = 400;
+  const plainTextDescription = description
+    .replaceAll(/https?:\/\/[^\s<>"{}|\\^`\[\]]+/gi, '')
+    .replaceAll(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+  if (plainTextDescription.length > contextMaxLength) {
+    console.error(
+      `Description context for "${id}" is too long. (${plainTextDescription.length}/${contextMaxLength} characters)`
+    );
+    process.exit(1);
+  }
+}
+
+function validateTagsContext(id, tags) {
+  const allowedTags = ['pattern', 'anti-pattern'];
+  const invalidTags = tags.filter(tag => !allowedTags.includes(tag));
+  if (invalidTags.length > 0) {
+    console.error(`Invalid tags for "${id}": ${invalidTags.join(', ')}`);
+    process.exit(1);
+  }
 }

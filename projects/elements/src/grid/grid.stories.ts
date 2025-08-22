@@ -179,10 +179,8 @@ export const MultiSelect = {
 };
 
 /**
- * @description When a user has actions that can be applied to multiple items,
- * use the bulk actions component. The bulk actions should only be visible when
- * at least one or more rows are selected. If the bulk actions are closed then
- * all selected rows should be deselected.
+ * @description Use bulk actions for operations on multiple items. Display only
+ * when rows are selected. Closing bulk actions deselects all selected rows.
  */
 export const MultiSelectBulkActions = {
   render: () => html`
@@ -216,10 +214,11 @@ export const MultiSelectBulkActions = {
 };
 
 /**
- * @description Single selection enables users to use a radio list association
- * to select one item at a time. To enable single select, place a `nve-radio`
- * input as the first grid cell of each row. Set the `name` attribute on each
- * radio to ensure they associate to the same radio group.
+ * @description A single select datagrid allows users to choose exactly one row
+ * from a data table by providing radio buttons in the first column, ensuring
+ * only one item can be selected at a time. To enable single select, place `nve-radio`
+ * input as the first grid cell of each row. Set `name` attribute on each radio
+ * to ensure to associate the same radio group.
  */
 export const SingleSelect = {
   render: () => html`
@@ -693,10 +692,8 @@ export const ColumnAlignStart = {
 };
 
 /**
- * @description Display settings are placed above the data grid leveraging
- * dropdowns to provide various configuration options. Columns can be hidden via
- * the `hidden` attribute or conditionally rendered in DOM. Display settings can
- * include column visibility or advanced filtering options.
+ * @description Users can customize their data view through a dropdown menu above the grid, 
+ * allowing them to show/hide columns and restore default settings for a personalized experience.
  */
 export const DisplaySettings = {
   render: () => html`
@@ -1338,6 +1335,10 @@ export const InvalidDOM = {
 };
 
 
+/**
+ * @description Examples of invalid grid usage patterns for testing and documentation purposes, showing what not to do when implementing grids.
+ * @tags anti-pattern
+ */
 export const Audit = {
   render: () => html`
 <nve-grid style="height: 450px">
@@ -1357,10 +1358,9 @@ export const Audit = {
 };
 
 /**
- * @description Sort can be set via the `sort` property and `sort` event on the
- * `nve-sort-button`. The grid sort API follows the [ARIA sort spec](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/)
- * and automatically will set the appropriate accessibility related attributes
- * to convey the current sorting state.
+ * @description Grid row sort can be implemented via the `nve-sort-button`.
+ * The grid follows the [ARIA sort spec](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/)
+ * and automatically sets the appropriate accessibility related attributes to convey the current sorting state.
  */
 export const ColumnSortButtonVisibility = {
   render: () => html `

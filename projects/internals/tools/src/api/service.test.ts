@@ -1,40 +1,51 @@
 import { describe, expect, it } from 'vitest';
-import type { ToolMethod } from '../tools/utils.js';
+import type { ToolMethod } from '../internal/tools.js';
 import { ApiService } from './service.js';
 
 describe('ApiService', () => {
-  it('should provide available tool', async () => {
-    const result = await ApiService.available();
+  it('should provide list tool', async () => {
+    const result = await ApiService.list();
     expect(result).toBeDefined();
-    expect((ApiService.available as ToolMethod<unknown>).metadata.name).toBe('available');
-    expect((ApiService.available as ToolMethod<unknown>).metadata.command).toBe('available');
-    expect((ApiService.available as ToolMethod<unknown>).metadata.description).toBe(
+    expect(result).toContain('## nve-button');
+    expect((ApiService.list as ToolMethod<unknown>).metadata.name).toBe('list');
+    expect((ApiService.list as ToolMethod<unknown>).metadata.command).toBe('list');
+    expect((ApiService.list as ToolMethod<unknown>).metadata.description).toBe(
+      'Get list of all available APIs and components.'
+    );
+  });
+
+  it('should provide list tool with JSON format', async () => {
+    const result = await ApiService.list({ format: 'json' });
+    expect(result).toBeDefined();
+    expect((ApiService.list as ToolMethod<unknown>).metadata.name).toBe('list');
+    expect((ApiService.list as ToolMethod<unknown>).metadata.command).toBe('list');
+    expect((ApiService.list as ToolMethod<unknown>).metadata.description).toBe(
       'Get list of all available APIs and components.'
     );
   });
 
   it('should provide search tool', async () => {
     const result = await ApiService.search({ query: 'button', format: 'markdown' });
-    expect(result).toBeDefined();
+    expect((result as string).includes('## nve-button')).toBe(true);
     expect((ApiService.search as ToolMethod<unknown>).metadata.name).toBe('search');
     expect((ApiService.search as ToolMethod<unknown>).metadata.command).toBe('search');
     expect((ApiService.search as ToolMethod<unknown>).metadata.description).toBe(
-      'Get API information for specific APIs and components'
+      'Get API information for specific APIs and components.'
     );
     expect((ApiService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.query).toBeDefined();
     expect((ApiService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.format).toBeDefined();
   });
 
-  it('should provide changelog tool', async () => {
-    const result = await ApiService.changelog({ name: 'button', format: 'markdown' });
-    expect(result).toBeDefined();
-    expect((ApiService.changelog as ToolMethod<unknown>).metadata.name).toBe('changelog');
-    expect((ApiService.changelog as ToolMethod<unknown>).metadata.command).toBe('changelog');
-    expect((ApiService.changelog as ToolMethod<unknown>).metadata.description).toBe(
-      'Get the changelog details for the @nve packages'
+  it('should provide search tool with JSON format', async () => {
+    const result = await ApiService.search({ query: 'button', format: 'json' });
+    expect((result as { tagName: string }[])[0].tagName).toBe('nve-button');
+    expect((ApiService.search as ToolMethod<unknown>).metadata.name).toBe('search');
+    expect((ApiService.search as ToolMethod<unknown>).metadata.command).toBe('search');
+    expect((ApiService.search as ToolMethod<unknown>).metadata.description).toBe(
+      'Get API information for specific APIs and components.'
     );
-    expect((ApiService.changelog as ToolMethod<unknown>).metadata.inputSchema?.properties?.name).toBeDefined();
-    expect((ApiService.changelog as ToolMethod<unknown>).metadata.inputSchema?.properties?.format).toBeDefined();
+    expect((ApiService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.query).toBeDefined();
+    expect((ApiService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.format).toBeDefined();
   });
 
   it('should provide version tool', async () => {
@@ -43,7 +54,7 @@ describe('ApiService', () => {
     expect((ApiService.version as ToolMethod<unknown>).metadata.name).toBe('version');
     expect((ApiService.version as ToolMethod<unknown>).metadata.command).toBe('version');
     expect((ApiService.version as ToolMethod<unknown>).metadata.description).toBe(
-      'Get the latest published versions of elements / @nve packages'
+      'Get latest versions of elements/@nve packages.'
     );
   });
 });

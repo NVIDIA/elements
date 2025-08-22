@@ -174,11 +174,9 @@ export const Flat = () => {
 };
 
 /**
- * @description Single select is similar to the default datalist behavior. However, by using a single selection select,
- * the combobox will enforce and only allow values from the select to be used. If a invalid value is entered
- * that does not match a option in the select, the value will be cleared. On focus all options will be shown by default until the user starts typing.
- * 
- * The select should be treated as the "value" of the combobox. The input is solely used to filter down available options for the user.
+ * @description Single select allows users only to select from a predefined list
+ * of options. Invalid input is automatically cleared. All options are visible
+ * on focus until typing begins for filtering.
  */
 export const Select = () => {
   return html`
@@ -199,12 +197,12 @@ export const Select = () => {
 };
 
 /**
- * @description The multiple option behavior preserves the native select value behavior. The `value` on the select
- * will only reflect the first selected value. To get all selected options check the `selected` property
- * on each `<option>` element or the select property [selectedOptions](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions).
- * On focus all options will be shown by default until the user starts typing.
- * 
- * The select should be treated as the "value" of the combobox. The input is solely used to filter down available options for the user.
+ * @description Multi select allows users to select multiple options from a
+ * predefined list. The select `value` will only reflect the first selected value.
+ * To get all selected options check the `selected` property on each `<option>`
+ * or the select property [selectedOptions](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions).
+ * On focus all options will show until the user starts typing. Select is the
+ * selection value of the combobox. The input is the filter value.
  */
 export const MultiSelect = () => {
   return html`

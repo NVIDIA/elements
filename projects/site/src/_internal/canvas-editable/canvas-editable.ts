@@ -201,7 +201,7 @@ export class CanvasEditable extends LitElement {
   }
 
   async #handlePlaygroundClick() {
-    const playgroundUrl = await PlaygroundService.create({ html: this.editableSource });
+    const playgroundUrl = await PlaygroundService.create({ template: this.editableSource });
 
     globalThis.open(playgroundUrl, '_blank');
 

@@ -3,7 +3,7 @@
 import { join } from 'node:path';
 import { MetadataService } from '@nve-internals/metadata';
 import { PlaygroundService } from '@nve-internals/tools/playground';
-import { ExampleService } from '@nve-internals/tools/example';
+import { ExamplesService } from '@nve-internals/tools/examples';
 import { camelToKebab } from './_11ty/utils/index.js';
 
 const metadata = await MetadataService.getMetadata();
@@ -12,7 +12,7 @@ const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-dis
 
 const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
 
-const stories = (await ExampleService.getAll())
+const stories = (await ExamplesService.getAll())
   .filter(s => !s.template?.includes('${'))
   .map(story => ({
     id: story.id,
@@ -23,7 +23,7 @@ const stories = (await ExampleService.getAll())
     entrypoint: story.entrypoint,
     title: camelToKebab(story.id),
     elementName: story.element?.replace('nve-', ''),
-    permalink: `${story.entrypoint.replace('.stories.json', '-')}${camelToKebab(story.id)}/`
+    permalink: `${story.entrypoint?.replace('.stories.json', '-')}${camelToKebab(story.id)}/`
   }));
 
 const integrations = {
@@ -34,7 +34,7 @@ const integrations = {
     starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/angular',
     documentation: 'https://angular.dev',
     playgroundURL: await PlaygroundService.create({
-      html: '<nve-alert status="success">Elements + Angular</nve-alert>',
+      template: '<nve-alert status="success">Elements + Angular</nve-alert>',
       type: 'angular'
     })
   },
@@ -77,7 +77,7 @@ const integrations = {
     starterSource: null,
     documentation: 'https://lit.dev',
     playgroundURL: await PlaygroundService.create({
-      html: '<nve-alert status="success">Elements + Lit</nve-alert>',
+      template: '<nve-alert status="success">Elements + Lit</nve-alert>',
       type: 'lit'
     })
   },
@@ -96,7 +96,7 @@ const integrations = {
     starterSource: null,
     documentation: 'https://preactjs.com',
     playgroundURL: await PlaygroundService.create({
-      html: '<nve-alert status="success">Elements + Preact</nve-alert>',
+      template: '<nve-alert status="success">Elements + Preact</nve-alert>',
       type: 'preact'
     })
   },
@@ -107,7 +107,7 @@ const integrations = {
     starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/react',
     documentation: 'https://react.dev',
     playgroundURL: await PlaygroundService.create({
-      html: '<nve-alert status="success">Elements + React</nve-alert>',
+      template: '<nve-alert status="success">Elements + React</nve-alert>',
       type: 'react'
     })
   },
@@ -126,7 +126,7 @@ const integrations = {
     starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/typescript',
     documentation: 'https://www.typescriptlang.org',
     playgroundURL: await PlaygroundService.create({
-      html: '<nve-alert status="success">Elements</nve-alert>'
+      template: '<nve-alert status="success">Elements</nve-alert>'
     })
   },
   vue: {

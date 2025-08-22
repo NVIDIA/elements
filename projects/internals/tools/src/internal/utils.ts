@@ -1,5 +1,13 @@
 import type { MetadataSummary } from '@nve-internals/metadata';
-// import { getPublishedPackageNames } from '../api/utils.js';
+
+export type ELEMENTS_ENV = 'mcp' | 'cli' | 'browser' | 'docs';
+
+export const ELEMENTS_ENV_ICON = {
+  mcp: '🤖',
+  cli: '💻',
+  browser: '🌐',
+  docs: '📖'
+} as const;
 
 export function fuzzyMatch(search: string, candidates: string[]) {
   const words = search
@@ -52,10 +60,6 @@ export function getAvailableElementTags(metadata: MetadataSummary) {
 }
 
 export function getElementImports(html: string, metadata: MetadataSummary, lazy = false) {
-  if (!metadata.projects['@nvidia-elements/code']?.elements) {
-    console.log(metadata.projects);
-  }
-
   const IMPORTS = [
     ...(metadata.projects['@nvidia-elements/core']?.elements ?? []),
     ...(metadata.projects['@nvidia-elements/monaco']?.elements ?? []),

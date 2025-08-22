@@ -24,8 +24,9 @@ export interface MetadataProject {
   readme: string;
   changelog: string;
   tests: MetadataTestReport;
-  elements: MetadataElement[];
   types?: MetadataType[];
+  elements: MetadataElement[];
+  tokens?: MetadataToken[];
 }
 
 export interface MetadataType {
@@ -51,12 +52,20 @@ export interface MetadataElement {
   };
 }
 
-export interface MetadataStory {
-  id: string;
+export interface MetadataToken {
+  name: string;
+  value: string;
   description: string;
+}
+
+export interface MetadataExample {
+  id: string;
   template: string;
-  element: string;
-  entrypoint: string;
+  description: string;
+  tags: string[];
+  deprecated?: boolean;
+  entrypoint?: string;
+  element?: string;
 }
 
 export interface MetadataPackage {

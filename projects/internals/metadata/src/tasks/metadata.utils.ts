@@ -14,7 +14,8 @@ import type {
   MetadataUnitTestCoverageSummary,
   MetadataUnitTestCoverageSummaryReport,
   MetadataType,
-  MetadataElement
+  MetadataElement,
+  MetadataToken
 } from '../types.js';
 import { elementMetadataToMarkdown, getElementChangelog } from '../utils/utils.ts';
 
@@ -218,6 +219,30 @@ async function getProjectMetadata(basePath): Promise<MetadataProject> {
   const tests = getTestCoverage(basePath);
   const ssrReport = getSSRReport(basePath);
   const lighthouseReport = getLighthouseReport();
+  let tokens: MetadataToken[] = [];
+
+  if (packageFile.name === '@nvidia-elements/themes') {
+    const tokensJSON: { [key: string]: string } = JSON.parse(
+      readFileSync(new URL(basePath + '/dist/index.json', import.meta.url), 'utf8')
+    );
+
+    tokens = Object.entries(tokensJSON).map(([key, v]) => {
+      let value = v;
+      if (value.includes('ref-scale')) {
+        value = value.split(' * ')[1].replace(')', '').trim();
+      }
+
+      if (value.includes('nve')) {
+        value = `var(--nve-${value})`;
+      }
+
+      return {
+        name: `--${key}`,
+        value,
+        description: ''
+      };
+    });
+  }
 
   return {
     name: packageFile.name,
@@ -225,6 +250,7 @@ async function getProjectMetadata(basePath): Promise<MetadataProject> {
     readme,
     changelog,
     tests,
+    tokens,
     elements: getElementMetadata(
       packageFile.name,
       changelog,

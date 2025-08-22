@@ -7,14 +7,10 @@
 
 # {{ title }}
 
-## Standard
+## Trend
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'Trend' %}
+{% story '@nve-internals/patterns/trend.stories.json', 'Trend' %}
 
-## Top Badge
+## Trend Data
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'TrendTopBadge' %}
-
-## Bottom Badge
-
-{% story '@nve-internals/patterns/patterns.stories.json', 'TrendBottomBadge' %}
+{% story '@nve-internals/patterns/trend.stories.json', 'TrendData' %}

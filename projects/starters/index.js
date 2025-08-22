@@ -1,5 +1,5 @@
 import { readdirSync } from 'fs';
-import { archiveStarter } from '@nve-internals/tools/starter';
+import { archiveStarter } from '@nve-internals/tools/project';
 import { cwd } from 'process';
 
 /**
