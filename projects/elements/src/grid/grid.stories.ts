@@ -1329,7 +1329,7 @@ export const InvalidDOM = {
   <div>invalid</div>
   ${Array(10).fill('').map((_, r) => html`
     <nve-grid-row>
-      ${Array(5).fill('').map((_, c) => html`<nve-grid-cell>cell ${r}-${c}</nve-grid-cell>`)}
+      ${Array(r === 9 ? 4 : 5).fill('').map((_, c) => html`<nve-grid-cell>cell ${r}-${c}</nve-grid-cell>`)}
     </nve-grid-row>
   `)}
   <span>invalid</span>
