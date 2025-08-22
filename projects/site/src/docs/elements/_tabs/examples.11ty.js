@@ -100,7 +100,7 @@ export function render(data) {
         <div class="story-example">
           <h3 nve-text="heading lg mkd" id="${story.slug}">${story.id.split(/(?=[A-Z])/).join(' ')}</h3>
           <nvd-canvas-editable source="${story.template}" tag="${componentData.tag}" readonly>
-            <nve-button container="flat" slot="suffix" value="${index}">Edit</nve-button>
+            <nve-button container="flat" slot="suffix" value="${index}">Edit Example</nve-button>
           </nvd-canvas-editable>
         </div>
       `
@@ -131,7 +131,7 @@ export function render(data) {
         } else {
           url.searchParams.delete('example');
         }
-        
+
         // Remove any existing hash
         url.hash = '';
         window.history.replaceState({}, '', url.toString());
