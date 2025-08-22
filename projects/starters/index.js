@@ -1,5 +1,5 @@
 import { readdirSync } from 'fs';
-import { archiveStarter } from '@internals/tools/starter';
+import { archiveStarter } from '@internals/tools/project';
 import { cwd } from 'process';
 
 /**

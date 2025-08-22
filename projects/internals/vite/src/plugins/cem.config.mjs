@@ -377,11 +377,89 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
               stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
             }
 
+            // Evaluate types that look like this:
+            // const ICON_IMPORTS = { 'user': 'svg...', 'bell': 'svg...' };
+            // export type IconName = keyof typeof ICON_IMPORTS;
+            // checking for IconName to optimize performance
+            if (node.name.escapedText === 'IconName' && node.type.kind === ts.SyntaxKind.TypeOperator) {
+              const typeAlias = node.name.escapedText;
+              const typeOperator = node.type;
+
+              // Check if it's a keyof typeof expression
+              if (
+                typeOperator.operator === ts.SyntaxKind.KeyOfKeyword &&
+                typeOperator.type.kind === ts.SyntaxKind.TypeQuery
+              ) {
+                const typeQuery = typeOperator.type;
+                const exprName = typeQuery.exprName.escapedText;
+
+                // Find the const declaration for this object
+                const sourceFile = node.getSourceFile();
+                let constDeclaration = null;
+
+                // Walk through the AST to find the const declaration
+                function findConstDeclaration(node) {
+                  if (node.kind === ts.SyntaxKind.VariableStatement) {
+                    const declList = node.declarationList;
+                    if (declList && declList.declarations) {
+                      const found = declList.declarations.find(
+                        decl =>
+                          decl.name.escapedText === exprName &&
+                          decl.initializer?.kind === ts.SyntaxKind.ObjectLiteralExpression
+                      );
+                      if (found) {
+                        return node;
+                      }
+                    }
+                  }
+
+                  // Recursively search child nodes
+                  ts.forEachChild(node, child => {
+                    if (!constDeclaration) {
+                      const result = findConstDeclaration(child);
+                      if (result) {
+                        constDeclaration = result;
+                      }
+                    }
+                  });
+
+                  return constDeclaration;
+                }
+
+                findConstDeclaration(sourceFile);
+
+                if (constDeclaration) {
+                  const declList = constDeclaration.declarationList;
+                  const objectDecl = declList.declarations.find(decl => decl.name.escapedText === exprName);
+
+                  if (objectDecl?.initializer?.kind === ts.SyntaxKind.ObjectLiteralExpression) {
+                    const objectLiteral = objectDecl.initializer;
+                    const stringLiterals = objectLiteral.properties
+                      .filter(prop => prop.kind === ts.SyntaxKind.PropertyAssignment)
+                      .map(prop => {
+                        if (prop.name.kind === ts.SyntaxKind.StringLiteral) {
+                          return quoteWrap(prop.name.text);
+                        } else if (prop.name.kind === ts.SyntaxKind.Identifier) {
+                          return quoteWrap(prop.name.escapedText);
+                        }
+                        return null;
+                      })
+                      .filter(Boolean);
+
+                    if (stringLiterals.length > 0) {
+                      stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
+                    }
+                  }
+                }
+              }
+            }
+
             // remove any @deprecated types
             if (
               (node.type.kind === ts.SyntaxKind.LiteralType &&
                 node.type.literal.kind === ts.SyntaxKind.StringLiteral) ||
-              node.type.kind === ts.SyntaxKind.UnionType
+              node.type.kind === ts.SyntaxKind.UnionType ||
+              node.type.kind === ts.SyntaxKind.TypeOperator
             ) {
               const deprecated = node.jsDoc
                 ?.flatMap(doc => doc.tags?.find(tag => tag.tagName.escapedText === 'deprecated'))

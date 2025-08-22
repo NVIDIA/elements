@@ -1,8 +1,8 @@
 {
   "name": "@internals/tools",
+  "version": "0.0.0",
   "type": "module",
   "private": true,
-  "version": "0.0.0",
   "scripts": {
     "ci": "wireit",
     "build": "wireit",
@@ -32,21 +32,13 @@
       "types": "./dist/api/index.d.ts",
       "default": "./dist/api/index.js"
     },
-    "./example": {
-      "types": "./dist/example/index.d.ts",
-      "default": "./dist/example/index.js"
+    "./examples": {
+      "types": "./dist/examples/index.d.ts",
+      "default": "./dist/examples/index.js"
     },
-    "./example/index.js": {
-      "types": "./dist/example/index.d.ts",
-      "default": "./dist/example/index.js"
-    },
-    "./health": {
-      "types": "./dist/health/index.d.ts",
-      "default": "./dist/health/index.js"
-    },
-    "./health/index.js": {
-      "types": "./dist/health/index.d.ts",
-      "default": "./dist/health/index.js"
+    "./examples/index.js": {
+      "types": "./dist/examples/index.d.ts",
+      "default": "./dist/examples/index.js"
     },
     "./playground": {
       "types": "./dist/playground/index.d.ts",
@@ -56,13 +48,13 @@
       "types": "./dist/playground/index.d.ts",
       "default": "./dist/playground/index.js"
     },
-    "./starter": {
-      "types": "./dist/starter/index.d.ts",
-      "default": "./dist/starter/index.js"
+    "./project": {
+      "types": "./dist/project/index.d.ts",
+      "default": "./dist/project/index.js"
     },
-    "./starter/index.js": {
-      "types": "./dist/starter/index.d.ts",
-      "default": "./dist/starter/index.js"
+    "./project/index.js": {
+      "types": "./dist/project/index.d.ts",
+      "default": "./dist/project/index.js"
     }
   },
   "wireit": {
@@ -87,6 +79,8 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
+        "../metadata/static/index.json",
+        "../metadata/static/examples.json",
         "src/**",
         "!src/**/*.test.ts",
         "package.json",
@@ -99,7 +93,10 @@
       ],
       "dependencies": [
         "../vite:ci",
-        "../metadata:build"
+        {
+          "script": "../metadata:build",
+          "cascade": false
+        }
       ]
     },
     "lint": {
@@ -138,7 +135,7 @@
       "service": true
     },
     "test:coverage": {
-      "command": "vitest run",
+      "command": "vitest run --coverage",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
@@ -167,6 +164,7 @@
     "html-format": "1.1.7",
     "glob": "catalog:",
     "open": "10.1.2",
+    "publint": "catalog:",
     "sanitize-html": "2.17.0",
     "ts-morph": "catalog:",
     "zod": "3.25.76"

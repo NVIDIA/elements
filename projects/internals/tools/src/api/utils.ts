@@ -1,30 +1,41 @@
-import type { MetadataSummary } from '@internals/metadata';
+import type { MetadataCustomElementsManifestDeclaration, MetadataSummary } from '@internals/metadata';
 import { fuzzyMatch } from '../internal/utils.js';
 
-export function getAvailableElementsAPIs(
+export interface PartialAPIResult {
+  name: string;
+  description: string;
+  behavior: string;
+}
+
+export function getAvailableAPIs(format: 'markdown' | 'json', metadata: MetadataSummary): PartialAPIResult[] | string {
+  const result = Object.values(metadata.projects)
+    .flatMap(i => (i.elements.length ? i.elements : []))
+    .filter(e => !e.manifest?.deprecated && e.manifest.description)
+    .map(e => ({ name: e.name, description: e.manifest.description, behavior: e.manifest.metadata?.behavior ?? '' }));
+
+  if (format === 'markdown') {
+    return result
+      .map(e => {
+        const behavior = e.behavior ? ` (${e.behavior})` : '';
+        return `## ${e.name}${behavior}\n\n${e.description}`;
+      })
+      .join('\n\n---\n\n');
+  } else if (format === 'json') {
+    return result;
+  }
+}
+
+export function searchAPIs(
+  query: string,
+  format: 'markdown' | 'json',
   metadata: MetadataSummary
-): { name: string; description: string; usage?: string }[] {
-  return Object.values(metadata.projects)
-    .flatMap(i => (i.elements.length ? i.elements : []))
-    .filter(e => e.manifest?.deprecated !== 'true' && e.manifest.description)
-    .map(e => ({ name: e.name, description: e.manifest.description }));
-}
-
-export function searchElementsAPIs(query: string, metadata: MetadataSummary) {
+): MetadataCustomElementsManifestDeclaration[] | string {
   const matches = new Set(searchTagNames(query, metadata));
-  return Object.values(metadata.projects)
+  const result = Object.values(metadata.projects)
     .flatMap(i => (i.elements.length ? i.elements : []))
-    .filter(e => matches.has(e.name));
-}
-
-export function searchElementsAPIsJSON(query: string, metadata: MetadataSummary) {
-  return searchElementsAPIs(query, metadata).map(e => ({ tagName: e.name, ...e.manifest }));
-}
-
-export function getElementAPIsMarkdown(query: string, metadata: MetadataSummary) {
-  return searchElementsAPIs(query, metadata)
-    .map(e => e.markdown)
-    .join('\n---\n');
+    .filter(e => !e.manifest.deprecated && (matches.has(e.name) || matches.has(e.manifest.tagName)));
+  const markdown = result.map(e => e.markdown).join('\n---\n');
+  return format === 'markdown' ? markdown : result.map(e => e.manifest);
 }
 
 export function searchTagNames(query: string, metadata: MetadataSummary): string[] {
@@ -49,13 +60,6 @@ export function searchChangelogs(query: string, metadata: MetadataSummary) {
   return Object.fromEntries(
     Object.entries(changelogs).filter(([key]) => (matches.length ? matches.includes(key) : true))
   ) as Record<string, string>;
-}
-
-export function searchChangelogsMarkdown(query: string, metadata: MetadataSummary) {
-  const changelogs = searchChangelogs(query, metadata);
-  return Object.entries(changelogs)
-    .map(([key, value]) => `\n# ${key}\n\n${value}`)
-    .join('\n\n---\n\n');
 }
 
 export interface ElementVersions {
@@ -90,7 +94,7 @@ export async function getLatestPublishedVersions(metadata: MetadataSummary): Pro
             })
             .catch(() => {
               console.warn('Could not fetch latest version from https://https://esm.sh');
-              return '0.0.0';
+              return {};
             });
         })
     );

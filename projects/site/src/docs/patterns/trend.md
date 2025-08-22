@@ -7,14 +7,10 @@
 
 # {{ title }}
 
-## Standard
+## Trend
 
-{% story '@internals/patterns/patterns.stories.json', 'Trend' %}
+{% story '@internals/patterns/trend.stories.json', 'Trend' %}
 
-## Top Badge
+## Trend Data
 
-{% story '@internals/patterns/patterns.stories.json', 'TrendTopBadge' %}
-
-## Bottom Badge
-
-{% story '@internals/patterns/patterns.stories.json', 'TrendBottomBadge' %}
+{% story '@internals/patterns/trend.stories.json', 'TrendData' %}
