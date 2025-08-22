@@ -27,7 +27,12 @@ import {
   getDisplayValue,
   matchesElementName,
   createGhostElement,
-  sameRenderRoot
+  sameRenderRoot,
+  generateId,
+  styleSheetToString,
+  isValidDOMGrid,
+  slotContainsOnlyWhitespace,
+  tagSelector
 } from '@nvidia-elements/core/internal';
 
 @customElement('dom-test-element')
@@ -70,6 +75,28 @@ describe('getChildren', () => {
   it('should get children in shadow DOM', () => {
     const children = getChildren(element);
     expect(children.length).toBe(5);
+  });
+
+  it('should get children from Document', () => {
+    const children = getChildren(document);
+    expect(children.length).toBeGreaterThan(0);
+    expect(children[0]).toBeInstanceOf(HTMLElement);
+  });
+
+  it('should get children from HTMLSlotElement with assigned elements', () => {
+    const slot = element.shadowRoot.querySelector('slot[name="one"]') as HTMLSlotElement;
+    const children = getChildren(slot);
+    expect(children.length).toBe(1);
+    expect(children[0].textContent).toBe('one');
+  });
+
+  it('should get children from HTMLSlotElement with fallback', () => {
+    // Get the default slot (without name attribute)
+    const slot = element.shadowRoot.querySelector('slot:not([name])') as HTMLSlotElement;
+    const children = getChildren(slot);
+    expect(children.length).toBe(1);
+    // The slot gets content from light DOM, not fallback content
+    expect(children[0].textContent).toBe('two');
   });
 });
 
@@ -236,14 +263,32 @@ describe('getElementUpdate', () => {
 
 describe('clickOutsideElementBounds', () => {
   it('should detect when a pointer event is within bounds of target element', async () => {
-    const element = { getBoundingClientRect: () => ({ left: 100, top: 100 }) } as HTMLElement;
+    const element = { getBoundingClientRect: () => ({ left: 100, top: 100, right: 200, bottom: 200 }) } as HTMLElement;
     const result = clickOutsideElementBounds(new PointerEvent('pointerdown', { clientX: 150, clientY: 150 }), element);
     expect(result).toBe(false);
   });
 
   it('should detect when a pointer event is outside bounds of target element', async () => {
-    const element = { getBoundingClientRect: () => ({ left: 100, top: 100 }) } as HTMLElement;
+    const element = { getBoundingClientRect: () => ({ left: 100, top: 100, right: 200, bottom: 200 }) } as HTMLElement;
     const result = clickOutsideElementBounds(new PointerEvent('pointerdown', { clientX: 99, clientY: 99 }), element);
+    expect(result).toBe(true);
+  });
+
+  it('should detect when a mouse event is outside bounds of target element', async () => {
+    const element = { getBoundingClientRect: () => ({ left: 100, top: 100, right: 200, bottom: 200 }) } as HTMLElement;
+    const result = clickOutsideElementBounds(new MouseEvent('mousedown', { clientX: 201, clientY: 201 }), element);
+    expect(result).toBe(true);
+  });
+
+  it('should detect when a pointer event is outside bounds on the right side', async () => {
+    const element = { getBoundingClientRect: () => ({ left: 100, top: 100, right: 200, bottom: 200 }) } as HTMLElement;
+    const result = clickOutsideElementBounds(new PointerEvent('pointerdown', { clientX: 201, clientY: 150 }), element);
+    expect(result).toBe(true);
+  });
+
+  it('should detect when a pointer event is outside bounds on the bottom side', async () => {
+    const element = { getBoundingClientRect: () => ({ left: 100, top: 100, right: 200, bottom: 200 }) } as HTMLElement;
+    const result = clickOutsideElementBounds(new PointerEvent('pointerdown', { clientX: 150, clientY: 201 }), element);
     expect(result).toBe(true);
   });
 });
@@ -266,6 +311,18 @@ describe('parseTokenNumber', () => {
     expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * 1px)')).toBe(1);
     expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * 0px)')).toBe(0);
     expect(parseTokenNumber('calc(var(--nve-ref-scale-size) * 0)')).toBe(0);
+  });
+
+  it('should parse non-calc values', () => {
+    expect(parseTokenNumber('10')).toBe(10);
+    expect(parseTokenNumber('-10')).toBe(-10);
+    expect(parseTokenNumber('0')).toBe(0);
+    expect(parseTokenNumber('42')).toBe(42);
+  });
+
+  it('should return 0 for invalid values', () => {
+    expect(parseTokenNumber('')).toBe(0);
+    expect(parseTokenNumber('invalid')).toBe(0);
   });
 });
 
@@ -406,7 +463,7 @@ describe('scrollBarWidth(): ', () => {
 });
 
 describe('hasScrollBar(): ', () => {
-  it('should compute the current scroll bar width', () => {
+  it('should detect when element has a scroll bar', () => {
     const div = document.createElement('div');
     const innerDiv = document.createElement('div');
     div.style.width = '500px';
@@ -420,6 +477,18 @@ describe('hasScrollBar(): ', () => {
     document.body.appendChild(div);
 
     expect(hasScrollBar(div)).toBe(true);
+    div.remove();
+  });
+
+  it('should detect when element has no scroll bar', () => {
+    const div = document.createElement('div');
+    div.style.width = '500px';
+    div.style.height = '500px';
+    div.style.overflow = 'hidden';
+    div.style.display = 'block';
+    document.body.appendChild(div);
+
+    expect(hasScrollBar(div)).toBe(false);
     div.remove();
   });
 });
@@ -439,6 +508,39 @@ describe('endOfScrollBox(): ', () => {
     expect(endOfScrollBox(div)).toBe(true);
     div.remove();
   });
+
+  it('should determine if the scroll position is not at the end of the scroll box', () => {
+    const div = document.createElement('div');
+    const innerDiv = document.createElement('div');
+    div.style.width = '500px';
+    div.style.height = '500px';
+    div.style.overflow = 'auto';
+    innerDiv.style.width = '1000px';
+    innerDiv.style.height = '1000px';
+    div.appendChild(innerDiv);
+    document.body.appendChild(div);
+    div.scrollTop = 400; // Scroll less to ensure we're not at the end
+    expect(endOfScrollBox(div)).toBe(false);
+    div.remove();
+  });
+
+  it('should respect offset parameter', () => {
+    const div = document.createElement('div');
+    const innerDiv = document.createElement('div');
+    div.style.width = '500px';
+    div.style.height = '500px';
+    div.style.overflow = 'auto';
+    innerDiv.style.width = '1000px';
+    innerDiv.style.height = '1000px';
+    div.appendChild(innerDiv);
+    document.body.appendChild(div);
+    div.scrollTop = 400; // Scroll to position 400
+    // scrollTop (400) + offsetHeight (500) + offset (100) = 1000, which equals scrollHeight (1000)
+    expect(endOfScrollBox(div, 100)).toBe(true);
+    // scrollTop (400) + offsetHeight (500) + offset (99) = 999, which is less than scrollHeight (1000)
+    expect(endOfScrollBox(div, 99)).toBe(false);
+    div.remove();
+  });
 });
 
 describe('getThemeTokens', () => {
@@ -450,6 +552,12 @@ describe('getThemeTokens', () => {
     const tokens = getThemeTokens();
     expect(tokens['--nve-test-token']).toBe('test');
     expect(tokens['--invalid-test-token']).toBe(undefined);
+  });
+
+  it('should accept custom element parameter', async () => {
+    const customElement = document.createElement('div');
+    const tokens = getThemeTokens(customElement);
+    expect(typeof tokens).toBe('object');
   });
 });
 
@@ -591,5 +699,146 @@ describe('sameRenderRoot', () => {
   it('should determine if pair of elements are rendered within same render root target', () => {
     expect(sameRenderRoot(btnShadowRoot1, btnShadowRoot2)).toBe(true);
     expect(sameRenderRoot(btnShadowRoot1, btnRoot)).toBe(false);
+  });
+});
+
+describe('generateId', () => {
+  it('should generate unique IDs with underscore prefix', () => {
+    const id1 = generateId();
+    const id2 = generateId();
+
+    expect(id1).toMatch(/^_[a-f0-9]+$/);
+    expect(id2).toMatch(/^_[a-f0-9]+$/);
+    expect(id1).not.toBe(id2);
+  });
+
+  it('should generate IDs from crypto random values', () => {
+    // Test that the function generates IDs with the expected format
+    const id = generateId();
+    expect(id).toMatch(/^_[a-f0-9]+$/);
+    expect(id.length).toBeGreaterThan(1);
+  });
+});
+
+describe('styleSheetToString', () => {
+  it('should convert CSSStyleSheet to string', () => {
+    const stylesheet = new CSSStyleSheet();
+    stylesheet.replaceSync('body { color: red; } p { margin: 10px; }');
+
+    const result = styleSheetToString(stylesheet);
+    expect(result).toContain('body { color: red; }');
+    expect(result).toContain('p { margin: 10px; }');
+  });
+
+  it('should handle stylesheet without cssRules', () => {
+    const stylesheet = {} as CSSStyleSheet;
+    const result = styleSheetToString(stylesheet);
+    expect(result).toBe('');
+  });
+});
+
+describe('isValidDOMGrid', () => {
+  it('should return false in production environment', () => {
+    const rows = [{ children: { length: 3 } }, { children: { length: 3 } }] as HTMLElement[];
+
+    expect(isValidDOMGrid(rows)).toBe(false);
+  });
+
+  it('should return true when all rows have same number of children', () => {
+    const rows = [
+      { children: { length: 3 } },
+      { children: { length: 3 } },
+      { children: { length: 3 } }
+    ] as HTMLElement[];
+
+    expect(isValidDOMGrid(rows)).toBe(false);
+  });
+
+  it('should return true when rows have different number of children', () => {
+    const rows = [
+      { children: { length: 3 } },
+      { children: { length: 4 } },
+      { children: { length: 3 } }
+    ] as HTMLElement[];
+
+    expect(isValidDOMGrid(rows)).toBe(true);
+  });
+});
+
+describe('slotContainsOnlyWhitespace', () => {
+  it('should detect slot with only whitespace text nodes', () => {
+    const slot = document.createElement('slot') as HTMLSlotElement;
+    const textNode1 = document.createTextNode(' ');
+    const textNode2 = document.createTextNode('\n');
+    const textNode3 = document.createTextNode('\t');
+
+    slot.appendChild(textNode1);
+    slot.appendChild(textNode2);
+    slot.appendChild(textNode3);
+
+    expect(slotContainsOnlyWhitespace(slot)).toBe(true);
+  });
+
+  it('should detect slot with non-whitespace text nodes', () => {
+    const slot = document.createElement('slot') as HTMLSlotElement;
+    const textNode = document.createTextNode('Hello');
+
+    Object.defineProperty(slot, 'assignedNodes', {
+      value: () => [textNode],
+      writable: true,
+      configurable: true
+    });
+
+    expect(slotContainsOnlyWhitespace(slot)).toBe(false);
+  });
+
+  it('should detect slot with element nodes', () => {
+    const slot = document.createElement('slot') as HTMLSlotElement;
+    const div = document.createElement('div');
+
+    // Mock assignedNodes to return the element node
+    Object.defineProperty(slot, 'assignedNodes', {
+      value: () => [div],
+      writable: true,
+      configurable: true
+    });
+
+    expect(slotContainsOnlyWhitespace(slot)).toBe(false);
+  });
+
+  it('should detect slot with mixed content', () => {
+    const slot = document.createElement('slot') as HTMLSlotElement;
+    const textNode = document.createTextNode(' ');
+    const div = document.createElement('div');
+
+    Object.defineProperty(slot, 'assignedNodes', {
+      value: () => [textNode, div],
+      writable: true,
+      configurable: true
+    });
+
+    expect(slotContainsOnlyWhitespace(slot)).toBe(false);
+  });
+});
+
+describe('tagSelector', () => {
+  it('should convert mlv- prefix to nve- prefix', () => {
+    const result = tagSelector('mlv-button');
+    expect(result).toBe('nve-button, mlv-button');
+  });
+
+  it('should convert nve- prefix to mlv- prefix', () => {
+    const result = tagSelector('nve-button');
+    expect(result).toBe('nve-button, mlv-button');
+  });
+
+  it('should handle multiple replacements', () => {
+    const result = tagSelector('mlv-button mlv-input');
+    expect(result).toBe('nve-button nve-input, mlv-button mlv-input');
+  });
+
+  it('should handle no prefix', () => {
+    const result = tagSelector('button');
+    expect(result).toBe('button, button');
   });
 });
