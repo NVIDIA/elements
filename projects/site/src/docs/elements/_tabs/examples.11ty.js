@@ -125,13 +125,22 @@ export function render(data) {
       function updateUrlForEdit(slug) {
         const url = new URL(window.location.href);
         url.searchParams.set('edit', 'true');
-        if (slug) url.hash = '#' + slug;
+
+        if (slug) {
+          url.searchParams.set('example', slug);
+        } else {
+          url.searchParams.delete('example');
+        }
+        
+        // Remove any existing hash
+        url.hash = '';
         window.history.replaceState({}, '', url.toString());
       }
       
       // Utility: select a menu item by index (if menu is present)
       function selectMenuIndex(index) {
         if (!exampleSelector) return;
+
         const allItems = exampleSelector.querySelectorAll('nve-menu-item');
         allItems.forEach(item => item.selected = false);
         const menuItem = exampleSelector.querySelector('nve-menu-item[value="' + index + '"]');
@@ -141,6 +150,7 @@ export function render(data) {
       // Utility: load a story into the top editor by index
       function setEditorIndex(index, persistUrl = false) {
         if (!cyclingExample) return;
+
         const story = storyTemplates[index];
         if (!story) return;
         cyclingExample.setAttribute('source', unescapeHtml(story.template));
@@ -148,15 +158,17 @@ export function render(data) {
       }
       
       if (cyclingExample) {
-        // If edit mode is enabled via URL param, load the hash example into the top editor
+        // If edit mode is enabled via URL param, load the example from URL param into the top editor
         const params = new URLSearchParams(window.location.search);
         const isEditMode = params.get('edit') === 'true' || params.get('edit') === '1';
-        const initialHash = decodeURIComponent(window.location.hash || '').replace(/^#/, '');
-        if (isEditMode && initialHash) {
-          const index = storyTemplates.findIndex(s => s.slug === initialHash);
+        const exampleId = params.get('example');
+
+        if (isEditMode && exampleId) {
+          const index = storyTemplates.findIndex(s => s.slug === exampleId);
           if (index >= 0) {
             setEditorIndex(index, false);
             selectMenuIndex(index);
+            cyclingExample.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         }
         
@@ -179,12 +191,7 @@ export function render(data) {
           if (Number.isFinite(value)) {
             setEditorIndex(value, true);
             selectMenuIndex(value);
-
-            // Scroll to #example-browser
-            var exampleBrowser = document.getElementById('${componentData.title.toLowerCase().replace(/\s+/g, '-')}-examples');
-            if (exampleBrowser && exampleBrowser.scrollIntoView) {
-              exampleBrowser.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            cyclingExample.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         });
       });

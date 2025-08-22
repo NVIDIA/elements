@@ -82,13 +82,20 @@ export async function storyShortcode(
     ? `<nve-button container="flat" slot="suffix"><a href="${playgroundURL}" target="_blank">Open in Playground</a></nve-button>`
     : '';
 
+  const editButton = story
+    ? `<nve-button container="flat" slot="suffix"><a href="./docs/elements/${tag.replace(/^nve-/, '')}/examples/?edit=true&example=${story.id
+        .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+        .replace(/\s+/g, '-')
+        .toLowerCase()}">Edit</a></nve-button>`
+    : '';
+
   const templateContent = config.inline
     ? story?.template?.replace(/\n\n/g, '\n')
     : `<iframe loading="lazy" src="stories/${story?.permalink}index.html" style="height: ${config.height}; width: 100%; border: none;" />`;
 
   const reload =
     // eslint-disable-next-line no-undef
-    process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story && !tag.includes('.stories.json')
+    process.env.ELEVENTY_RUN_MODE === 'watch' && config.inline && story && !tag.includes('.stories.json')
       ? reloadScript(story, playgroundButton)
       : '';
 
@@ -105,6 +112,7 @@ export async function storyShortcode(
 ${markdown.render(story.description ?? '')}
 <nvd-canvas id="${tag}_${story.id}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
   <template>${md.utils.escapeHtml(story?.template?.replace(/\n\n/g, '\n') ?? '')}</template>
+  ${editButton}
   ${playgroundButton}
   ${templateContent}
 </nvd-canvas>${reload}`
