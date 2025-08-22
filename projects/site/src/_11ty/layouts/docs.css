@@ -106,7 +106,7 @@ nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
 /* Page Panel Styles */
 nve-page-panel[slot='left'] {
   --background: var(--nve-sys-layer-shell-background);
-  --width: 300px;
+  --width: 250px;
 
   nve-page-panel-content {
     --padding: var(--nve-ref-size-600) var(--nve-ref-size-400) var(--nve-ref-size-300) var(--nve-ref-size-400);
@@ -124,9 +124,19 @@ main {
   }
 }
 
+@media (min-width: 1440px) {
+  main #doc-content {
+    max-width: 960px;
+  }
+}
+
 @media (min-width: 1920px) {
   main {
     padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl);
+  }
+
+  main #doc-content {
+    max-width: 1260px;
   }
 }
 
@@ -168,14 +178,14 @@ main:has([docs-full-width]) {
 #doc-content + #anchor-generator {
   position: fixed;
   top: calc(anchor(--page-anchor top) + 125px);
-  left: calc(anchor(--doc-content-anchor right) + 50px);
+  left: calc(anchor(--doc-content-anchor right) + 40px);
   max-height: calc(100vh - 200px);
   overflow-y: auto;
   z-index: 10;
   display: none;
 }
 
-@media (min-width: 1750px) {
+@media (min-width: 1440px) {
   #doc-content {
     margin-right: 200px;
   }
