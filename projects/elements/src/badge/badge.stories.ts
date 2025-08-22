@@ -142,8 +142,8 @@ export const Trend = {
   render: () => html`
 <div nve-layout="row gap:md">
   <nve-badge>0%</nve-badge>
-  <nve-badge status="success">+15%</nve-badge>
-  <nve-badge status="danger">-15%</nve-badge>
+  <nve-badge status="success"><nve-icon name="trend-down"></nve-icon> -15%</nve-badge>
+  <nve-badge status="danger"><nve-icon name="trend-up"></nve-icon> +15%</nve-badge>
 </div>
   `
 }

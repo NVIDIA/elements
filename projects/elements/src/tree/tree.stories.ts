@@ -457,6 +457,10 @@ export const BulkCreation = {
   `
 };
 
+/**
+ * @description Examples of invalid tree usage patterns for testing and documentation purposes, showing what not to do when implementing trees.
+ * @tags anti-pattern
+ */
 export const Audit = {
   render: () => html`
     <div>

@@ -70,14 +70,6 @@
       "default": "./dist/index.js"
     },
     "./index.css": "./dist/index.css",
-    "./test": {
-      "types": "./dist/test/index.d.ts",
-      "default": "./dist/test/index.js"
-    },
-    "./test/index.js": {
-      "types": "./dist/test/index.d.ts",
-      "default": "./dist/test/index.js"
-    },
     "./polyfills": {
       "types": "./dist/polyfills/index.d.ts",
       "default": "./dist/polyfills/index.js"

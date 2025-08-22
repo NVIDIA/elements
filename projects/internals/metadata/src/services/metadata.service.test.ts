@@ -8,9 +8,9 @@ describe('MetadataService', () => {
     expect(metadata.created).toBeDefined();
   });
 
-  it('should return the stories json', async () => {
-    const stories = await MetadataService.getStories();
-    expect(stories).toBeDefined();
-    expect(stories.length).toBeGreaterThan(0);
+  it('should return the examples json', async () => {
+    const examples = await MetadataService.getExamples();
+    expect(examples).toBeDefined();
+    expect(examples.length).toBeGreaterThan(0);
   });
 });
