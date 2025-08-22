@@ -48,6 +48,31 @@ h2[nve-text='heading xl mkd'] {
   border-bottom: 1px solid var(--nve-ref-border-color);
 }
 
+/* Heading Anchor Links */
+.heading-anchor {
+  position: absolute;
+  left: calc(-1 * var(--nve-ref-space-xl));
+  text-decoration: none;
+  font-size: 0.65em;
+  cursor: none;
+}
+
+.heading-anchor > nve-icon-button {
+  opacity: 0;
+  transition: opacity 0.15s 0.3s; /* add slight delay to the initial fade in */
+}
+
+h2[nve-text*='mkd']:hover .heading-anchor > nve-icon-button,
+h3[nve-text*='mkd']:hover .heading-anchor > nve-icon-button {
+  opacity: 1;
+}
+
+/* Make headings position relative to contain the absolute anchor */
+h2[nve-text*='mkd'],
+h3[nve-text*='mkd'] {
+  position: relative;
+}
+
 h2[nve-text='heading xl mkd']:first-of-type {
   padding-top: 0;
 }
