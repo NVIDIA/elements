@@ -1,6 +1,6 @@
 const properties = new Map();
 
-const rule = {
+export default {
   meta: {
     docs: {
       description: 'Prevent complex types used on public API properties',
@@ -38,5 +38,3 @@ const rule = {
     };
   }
 };
-
-module.exports = rule;
