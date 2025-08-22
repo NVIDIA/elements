@@ -39,6 +39,19 @@ export const htmlConfig = [
           closeStyle: 'sameline',
           ifAttrsMoreThan: 5
         }
+      ],
+      '@html-eslint/no-restricted-attrs': [
+        'error',
+        {
+          tagPatterns: ['.*-.*'],
+          attrPatterns: ['nve-layout'],
+          message: 'Use of nve-layout is not allowed on custom HTML element tags.'
+        },
+        {
+          tagPatterns: ['.*-.*'],
+          attrPatterns: ['nve-text'],
+          message: 'Use of nve-text is not allowed on custom HTML element tags.'
+        }
       ]
     }
   }
