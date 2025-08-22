@@ -184,6 +184,10 @@ export enum KeynavCode {
   ArrowRight = 'ArrowRight'
 }
 
+export function isValidDOMGrid(rows: HTMLElement[]) {
+  return rows.some(row => row.children.length !== rows[0].children.length);
+}
+
 export function removeEmptyTextNode(node: Node) {
   if ((node as Text)?.wholeText?.trim() === '') {
     (node as Text).remove();
