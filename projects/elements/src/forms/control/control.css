@@ -37,7 +37,7 @@
 :host(:state(disabled)) ::slotted(nve-control-message:not([status])) {
   --cursor: not-allowed;
   --color: var(--nve-sys-text-muted-color);
-  --opacity: 0.5;
+  --opacity: 0.9;
 }
 
 :host(:state(invalid)) ::slotted(nve-control-message:not([error]):not([status])) {

@@ -26,7 +26,6 @@ slot {
 
 slot[name='nodes'] {
   padding-left: var(--nve-ref-size-500);
-  gap: var(--nve-ref-space-xxxs);
   display: flex;
   flex-direction: column;
   align-items: start;
