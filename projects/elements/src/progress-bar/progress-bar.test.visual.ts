@@ -29,24 +29,6 @@ function template(theme: '' | 'dark' = '') {
   <nve-progress-bar status="warning" value="75"></nve-progress-bar>
 
   <nve-progress-bar status="danger" value="100"></nve-progress-bar>
-  `;
-}
-function template(theme: '' | 'dark' = '') {
-  return /* html */ `
-  <script type="module">
-    import '@nvidia-elements/core/progress-bar/define.js';
-    document.documentElement.setAttribute('nve-theme', '${theme}');
-  </script>
-
-  <nve-progress-bar value="0"></nve-progress-bar>
-
-  <nve-progress-bar status="accent" value="25"></nve-progress-bar>
-
-  <nve-progress-bar status="success" value="50"></nve-progress-bar>
-
-  <nve-progress-bar status="warning" value="75"></nve-progress-bar>
-
-  <nve-progress-bar status="danger" value="100"></nve-progress-bar>
 
   <nve-progress-bar style="--height: 6px"></nve-progress-bar>
   `;
