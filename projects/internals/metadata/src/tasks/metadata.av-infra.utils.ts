@@ -84,8 +84,9 @@ export interface AVInfraProject {
 }
 
 export async function getProjects(path = '../../../../elements'): Promise<AVInfraProject[]> {
-  const elementTags = getManifest().map(d => d.tagName);
-
+  const elementTags = getManifest()
+    .map(d => d.tagName)
+    .filter(tag => !!tag);
   return Promise.all(
     (await getPackageFiles(path))
       .filter(path => !path.includes('dist') && !path.includes('deprecated'))
