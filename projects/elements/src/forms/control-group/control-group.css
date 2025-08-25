@@ -21,7 +21,7 @@
 
 :host(:state(disabled)) {
   --color: var(--nve-sys-text-muted-color);
-  --opacity: 0.5;
+  --opacity: 0.9;
 }
 
 :host([layout*='horizontal-inline']) ::slotted([nve-control]),
