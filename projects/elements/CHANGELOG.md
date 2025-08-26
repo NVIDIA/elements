@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.4...@nvidia-elements/core-v1.39.5) (2025-08-26)
+
+
+### Bug Fixes
+
+* **elements:** audit logging ([2993c69](https://github.com/NVIDIA/elements/commit/2993c690ad774f43fb2f46b8e04ce278c9594a55))
+
 ## [@nvidia-elements/core-v1.39.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.3...@nvidia-elements/core-v1.39.4) (2025-08-14)
 
 
