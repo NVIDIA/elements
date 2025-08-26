@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.5...@nvidia-elements/core-v1.39.6) (2025-08-26)
+
+
+### Bug Fixes
+
+* **elements:** form control disable state ([c714349](https://github.com/NVIDIA/elements/commit/c7143490d94174195f92f1d6a2e9af6d02a4ccd2))
+
 ## [@nvidia-elements/core-v1.39.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.4...@nvidia-elements/core-v1.39.5) (2025-08-26)
 
 
