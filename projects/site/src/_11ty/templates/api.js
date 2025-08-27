@@ -35,7 +35,7 @@ export function elementSummary(tag) {
   return /* html */ `<section nve-layout="column gap:md align:stretch margin-top:md">
 
   <div nve-layout="row gap:xs align:center align:space-between align:wrap">
-    <div nve-layout="row gap:xs align:center">
+    <div nve-layout="row gap:xxs align:center">
       ${badgeStatus(element.manifest.metadata.status, '', ESM_ELEMENTS_VERSION)}
       ${badgeCoverage(element.tests.unit.coverageTotal, '', 'Coverage:&nbsp;')}
       ${badgeBundle(element.tests.lighthouse?.payload?.javascript?.kb?.toFixed(2), '', 'Bundle:&nbsp;')}
@@ -43,14 +43,14 @@ export function elementSummary(tag) {
       ${badgeAxe(element.manifest.metadata.axe, '')}
     </div>
 
-    <div nve-layout="row gap:xs align:center">
+    <div nve-layout="row gap:xxs align:center">
       ${element.manifest.metadata.behavior === 'form' ? /* html */ `<nve-button size="sm"><nve-icon name="checklist" size="sm"></nve-icon><a href="./docs/foundations/forms/controls/#form-associated-elements" target="_blank">Form Control</a></nve-button>` : ''}
-      
-      <nve-button size="sm" style="margin-left: auto"><nve-icon name="group" size="sm"></nve-icon><a href="${element.manifest.metadata.aria}" target="_blank">ARIA Spec</a></nve-button>
+
+      <nve-button size="sm" style="margin-left: auto"><nve-icon name="code" size="sm"></nve-icon><a href="${element.manifest.metadata.aria}" target="_blank">Spec</a></nve-button>
 
       ${element.manifest.metadata.figma ? /* html */ `<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href="${element.manifest.metadata.figma}" target="_blank">Figma</a></nve-button>` : ''}
-      
-      <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">Released: ${element.manifest.metadata.since}</a></nve-button>
+
+      <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">${element.manifest.metadata.since}</a></nve-button>
     </div>
   </div>
 </section>`;
@@ -73,7 +73,7 @@ export function badgeStatus(status, container = '', content = '') {
 
   return /* html */ `
   <nve-badge container="${container}" status="${statuses[status]}">
-    ${status ? status : 'unknown'}: &nbsp;${content}
+    <a href="docs/changelog/">${status ? status : 'unknown'}: &nbsp;${content}</a>
   </nve-badge>
   `;
 }
@@ -106,7 +106,9 @@ export function badgeCoverage(value, container = '', content = '') {
   }
 
   return /* html */ `
-  <nve-badge container="${container}" status="${status}">${content}${formattedValue}</nve-badge>
+    <nve-badge container="${container}" status="${status}">
+      <a href="docs/metrics/">${content}${formattedValue}</a>
+    </nve-badge>
   `;
 }
 
@@ -130,7 +132,9 @@ export function badgeBundle(value, container = '', content = '') {
   }
 
   return /* html */ `
-<nve-badge container="${container}" status="${status}">${content}${value}${value ? 'kb' : ''}</nve-badge>
+    <nve-badge container="${container}" status="${status}">
+      <a href="docs/metrics/">${content}${value}${value ? 'kb' : ''}</a>
+    </nve-badge>
   `;
 }
 
@@ -159,7 +163,7 @@ export function badgeLighthouse(value, container = '', content = '') {
   }
 
   return /* html */ `
-  <nve-badge status="${status}" container="${container}" style="--text-transform: none">
+  <nve-badge status="${status}" container="${container}">
     <a href="https://developer.chrome.com/docs/lighthouse/overview/" target="_blank">${content}${average}</a>
   </nve-badge>
   `;
@@ -173,9 +177,9 @@ export function badgeLighthouse(value, container = '', content = '') {
  */
 export function badgeAxe(value, container = '') {
   return /* html */ `
-  ${value === undefined || value === '' ? /* html */ `<nve-badge container="${container}" status="success" style="--text-transform: none"><a href="https://github.com/dequelabs/axe-core" target="_blank">Axe Core</a></nve-badge>` : ''}
+  ${value === undefined || value === '' ? /* html */ `<nve-badge container="${container}" status="success"><a href="https://github.com/dequelabs/axe-core" target="_blank">Axe Core</a></nve-badge>` : ''}
   ${value === false ? /* html */ `<nve-badge container="${container}" status="pending">Pending</nve-badge>` : ''}
-  ${value ? /* html */ `<nve-badge container="${container}" status="warning" style="--text-transform: none"><a href="https://dequeuniversity.com/rules/axe/4.8/${value}?application=axeAPI" target="_blank">${value}</a></nve-badge>` : ''}
+  ${value ? /* html */ `<nve-badge container="${container}" status="warning"><a href="https://dequeuniversity.com/rules/axe/4.8/${value}?application=axeAPI" target="_blank">${value}</a></nve-badge>` : ''}
   `;
 }
 
