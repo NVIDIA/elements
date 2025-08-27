@@ -1,3 +1,4 @@
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { expect, test, describe, beforeAll, afterAll, beforeEach, afterEach } from 'vitest';
 import lighthouse, { type RunnerResult } from 'lighthouse';
 import config from 'lighthouse/core/config/desktop-config.js';
@@ -7,6 +8,7 @@ import { chromium } from 'playwright';
 import type { AddressInfo } from 'net';
 
 const viewport = { width: 1728, height: 1117 };
+const WRITE_REPORT = false; // set to true to write the last run test report to the .lighthouse directory
 
 interface LighthouseRequest {
   mimeType: string;
@@ -45,7 +47,13 @@ async function getLighthouseScores(path: string) {
   const customConfig = { ...config };
   customConfig.settings!.screenEmulation!.width = viewport.width;
   customConfig.settings!.screenEmulation!.height = viewport.height;
-  const result = await lighthouse(path, { logLevel: 'error', port: 9222 }, customConfig) as RunnerResult;
+  const result = await lighthouse(path, { output: ['json', 'html'], logLevel: 'error', port: 9222 }, customConfig) as RunnerResult;
+
+  if (WRITE_REPORT && !existsSync(`.lighthouse`)) {
+    mkdirSync(`.lighthouse`);
+    writeFileSync(`.lighthouse/report.html`, result.report[1]);
+  }
+
   return {
     performance: (result.lhr.categories.performance.score ?? 0) * 100,
     accessibility: (result.lhr.categories.accessibility.score ?? 0) * 100,
