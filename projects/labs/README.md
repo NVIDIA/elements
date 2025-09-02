@@ -9,7 +9,7 @@ Indicators of Labs project maturation:
 - Has documentation or code documentation.
 - Has lighthouse.
 - Has visual regression.
-- Has accessiblity.
+- Has accessibility.
 - Has Snippets.
 - Has high test coverage.
-- Has been used in a project and recieved feedback.
+- Has been used in a project and received feedback.
