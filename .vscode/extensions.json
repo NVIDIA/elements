@@ -4,6 +4,8 @@
 
   // List of extensions which should be recommended for users of this workspace.
   "recommendations": [
+    "google.wireit",
+    "dbaeumer.vscode-eslint",
     "runem.lit-plugin",
     "sissel.shopify-liquid",
     "unifiedjs.vscode-mdx",
