@@ -4,19 +4,19 @@ import { getExampleStoriesMarkdown, searchExampleStories } from './utils.js';
 
 @service()
 export class ExampleService {
-  private static _examples: MetadataStory[] = [];
+  static #examples: MetadataStory[] = [];
 
   @tool({
     description: 'Get list of available examples.'
   })
   static async available(): Promise<MetadataStory[]> {
-    if (ExampleService._examples.length === 0) {
-      ExampleService._examples = (await MetadataService.getStories())?.map(s => {
+    if (ExampleService.#examples.length === 0) {
+      ExampleService.#examples = (await MetadataService.getStories())?.map(s => {
         s.template = 'get full template via example_search';
         return s;
       });
     }
-    return ExampleService._examples;
+    return ExampleService.#examples;
   }
 
   @tool({

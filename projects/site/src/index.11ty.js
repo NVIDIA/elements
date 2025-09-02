@@ -29,7 +29,6 @@ export function render() {
       import './index.ts';
     </script>
   </head>
-
   <body>
     <nve-page>
       <nve-page-header slot="header">
@@ -52,6 +51,7 @@ export function render() {
       <main>
         <!-- Hero Section -->
         <section id="hero">
+          <!-- eslint-disable @html-eslint/require-img-alt -->
           <img
             class="background"
             src="https://cdn-prod.nvidia.com/assets/elements/hero/nv-wave-avif.avif"

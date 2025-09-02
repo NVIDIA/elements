@@ -38,7 +38,16 @@ const config = {
     '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T', argsIgnorePattern: '^_' }],
     '@typescript-eslint/consistent-type-imports': ['error'],
     '@typescript-eslint/no-floating-promises': ['error'],
-    '@typescript-eslint/no-explicit-any': ['error']
+    '@typescript-eslint/no-explicit-any': ['error'],
+    '@typescript-eslint/explicit-member-accessibility': ['error', { accessibility: 'no-public' }],
+    'no-restricted-syntax': [
+      'error',
+      {
+        selector:
+          ':matches(PropertyDefinition, MethodDefinition)[accessibility="private"]:not(:has(Decorator)):not([kind="constructor"])',
+        message: 'Use #private instead'
+      }
+    ]
   }
 };
 
