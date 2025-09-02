@@ -21,6 +21,7 @@ export const data = {
     let dir = 'elements';
     if (filePath.includes('/code/')) dir = 'code';
     else if (filePath.includes('/monaco/')) dir = 'monaco';
+    else if (filePath.includes('/markdown/')) dir = 'labs';
     return `/docs/${dir}/${data.component.fileSlug}/api/`;
   }
 };
