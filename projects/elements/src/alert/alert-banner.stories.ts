@@ -1,6 +1,8 @@
 import { html } from 'lit';
 import '@nvidia-elements/core/alert/define.js';
 
+/* eslint-disable elements/deprecated-tags */
+
 export default {
   title: 'Deprecated/Alert Banner',
   component: 'nve-alert-banner'

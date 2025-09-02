@@ -1,7 +1,7 @@
-import html from '@html-eslint/eslint-plugin';
+import eslintHTML from '@html-eslint/eslint-plugin';
 import htmlParser from '@html-eslint/parser';
 
-const source = ['src/**/*.html'];
+const source = ['src/**/*.html', 'src/**/*.11ty.js'];
 const ignores = [
   'node_modules/',
   'coverage/',
@@ -17,7 +17,6 @@ const ignores = [
 /** @type {import('eslint').Linter.Config[]} */
 export const htmlConfig = [
   {
-    ...html.configs['flat/recommended'],
     languageOptions: {
       parser: htmlParser,
       parserOptions: {
@@ -26,10 +25,15 @@ export const htmlConfig = [
     },
     files: [...source],
     ignores,
+    plugins: {
+      '@html-eslint': eslintHTML
+    },
     rules: {
-      ...html.configs['flat/recommended'].rules,
+      ...eslintHTML.configs.recommended.rules,
+      '@html-eslint/require-doctype': 'off', // not accurate for templates
       '@html-eslint/require-title': 'off',
       '@html-eslint/no-extra-spacing-text': 'error',
+      '@html-eslint/quotes': 'off', // prettier
       '@html-eslint/no-extra-spacing-attrs': 'off', // prettier
       '@html-eslint/indent': 'off', // prettier
       '@html-eslint/require-closing-tags': 'off', // prettier
@@ -37,20 +41,7 @@ export const htmlConfig = [
         'error',
         {
           closeStyle: 'sameline',
-          ifAttrsMoreThan: 5
-        }
-      ],
-      '@html-eslint/no-restricted-attrs': [
-        'error',
-        {
-          tagPatterns: ['.*-.*'],
-          attrPatterns: ['nve-layout'],
-          message: 'Use of nve-layout is not allowed on custom HTML element tags.'
-        },
-        {
-          tagPatterns: ['.*-.*'],
-          attrPatterns: ['nve-text'],
-          message: 'Use of nve-text is not allowed on custom HTML element tags.'
+          ifAttrsMoreThan: 10
         }
       ]
     }

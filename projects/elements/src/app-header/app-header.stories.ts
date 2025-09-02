@@ -13,6 +13,8 @@ export default {
   component: 'nve-app-header',
 };
 
+/* eslint-disable elements/deprecated-tags */
+
 export const Default = {
   render: () => {
     return html`
