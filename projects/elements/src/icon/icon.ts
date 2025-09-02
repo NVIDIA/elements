@@ -55,14 +55,17 @@ export class Icon extends LitElement {
 
   static _icons: { [key: string]: IconSVG } = ICON_IMPORTS;
 
+  // eslint-disable-next-line no-restricted-syntax
   private static get _iconsRegistry() {
     return this.registeredIcon?._icons ?? Icon._icons;
   }
 
+  // eslint-disable-next-line no-restricted-syntax
   private static set _iconsRegistry(icons: { [key: string]: IconSVG }) {
     this.registeredIcon._icons = { ...Icon._iconsRegistry, ...icons };
   }
 
+  // eslint-disable-next-line no-restricted-syntax
   private static get registeredIcon() {
     return customElements.get(Icon.metadata.tag) as typeof Icon;
   }

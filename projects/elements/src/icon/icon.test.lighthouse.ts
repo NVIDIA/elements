@@ -4,7 +4,7 @@ import { lighthouseRunner } from '@internals/vite';
 describe('icon lighthouse report', () => {
   test('icon should meet lighthouse benchmarks', async () => {
     const report = await lighthouseRunner.getReport('nve-icon', /* html */`
-      <nve-icon name="user"></nve-icon>
+      <nve-icon name="person"></nve-icon>
       <script type="module">
         import '@nvidia-elements/core/icon/define.js';
       </script>

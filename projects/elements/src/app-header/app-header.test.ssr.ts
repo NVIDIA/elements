@@ -4,6 +4,8 @@ import { ssrRunner } from '@internals/vite';
 import { AppHeader } from '@nvidia-elements/core/app-header';
 import '@nvidia-elements/core/app-header/define.js';
 
+/* eslint-disable elements/deprecated-tags */
+
 describe(AppHeader.metadata.tag, () => {
   it('should pass baseline ssr check', async () => {
     const result = await ssrRunner.render(html`

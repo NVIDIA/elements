@@ -1,6 +1,8 @@
 import { expect, test, describe } from 'vitest';
 import { visualRunner } from '@internals/vite';
 
+/* eslint-disable elements/deprecated-tags */
+
 describe('app-header visual', () => {
   test('app-header should match visual baseline', async () => {
     const report = await visualRunner.render('app-header', template());
