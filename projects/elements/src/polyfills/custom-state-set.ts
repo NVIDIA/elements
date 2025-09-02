@@ -9,8 +9,8 @@ const SUPPORTS_CUSTOM_STATES = CSS.supports('selector(:state(test))');
 
 class CustomStateSetPolyfill extends Set {
   // not using native private fields due to terser bug
-  private _stateSet: CustomStateSet;
-  private _element: HTMLElement;
+  private _stateSet: CustomStateSet; // eslint-disable-line no-restricted-syntax
+  private _element: HTMLElement; // eslint-disable-line no-restricted-syntax
 
   constructor(stateSet: CustomStateSet, element: HTMLElement) {
     super();

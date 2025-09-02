@@ -39,44 +39,46 @@ export class IconDemo extends LitElement {
     </style>
 
     <nve-card>
-      <nve-card-content nve-layout="column gap:lg">
-        <form @submit=${e => e.preventDefault()} @input=${this.#input} nve-layout="row gap:md align:vertical-center full">
-          <nve-search style="width: 350px">
-            <input type="search" @input=${e => (this.iconSearchKey = e.target.value)} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
-          </nve-search>
-          <nve-select style="--width: 90px; --text-transform: none">
-            <select aria-label="size" .value=${this.values.size} name="size">
-              <option value="xs">xs</option>
-              <option value="sm">sm</option>
-              <option value="">md</option>
-              <option value="lg">lg</option>
-              <option value="xl">xl</option>
-            </select>
-          </nve-select>
-          <nve-select style="--width: 90px; --text-transform: none">
-            <select aria-label="direction" .value=${this.values.direction} name="direction">
-              <option value="">up</option>
-              <option value="down">down</option>
-              <option value="left">left</option>
-              <option value="right">right</option>
-            </select>
-          </nve-select>
-          <nve-checkbox style="min-width: 200px">
-            <label>bounding box</label>
-            <input type="checkbox" .checked=${this.values.outline} name="outline" />
-          </nve-checkbox>
-        </form>          
+      <nve-card-content>
+        <div nve-layout="column gap:lg">
+          <form @submit=${e => e.preventDefault()} @input=${this.#input} nve-layout="row gap:md align:vertical-center full">
+            <nve-search style="width: 350px">
+              <input type="search" @input=${e => (this.iconSearchKey = e.target.value)} aria-label="Search the Icon Catalog" placeholder="Search the Icon Catalog" />
+            </nve-search>
+            <nve-select style="--width: 90px; --text-transform: none">
+              <select aria-label="size" .value=${this.values.size} name="size">
+                <option value="xs">xs</option>
+                <option value="sm">sm</option>
+                <option value="">md</option>
+                <option value="lg">lg</option>
+                <option value="xl">xl</option>
+              </select>
+            </nve-select>
+            <nve-select style="--width: 90px; --text-transform: none">
+              <select aria-label="direction" .value=${this.values.direction} name="direction">
+                <option value="">up</option>
+                <option value="down">down</option>
+                <option value="left">left</option>
+                <option value="right">right</option>
+              </select>
+            </nve-select>
+            <nve-checkbox style="min-width: 200px">
+              <label>bounding box</label>
+              <input type="checkbox" .checked=${this.values.outline} name="outline" />
+            </nve-checkbox>
+          </form>          
 
-        <div nve-layout="grid gap:md span-items:2">
-          ${ICON_NAMES.filter(iconName => iconName.includes(this.iconSearchKey)).map(
-            iconName => html`
-            <nve-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." container="flat">
-              <div nve-layout="column align:center gap:md">
-                <nve-icon ?outline=${this.values.outline} .size=${this.values.size as IconSize} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></nve-icon>
-                <h3 nve-text="label sm light muted">${iconName}</h3>
-              </div>
-            </nve-button>`
-          )}
+          <div nve-layout="grid gap:md span-items:2">
+            ${ICON_NAMES.filter(iconName => iconName.includes(this.iconSearchKey)).map(
+              iconName => html`
+              <nve-button @click=${() => this.#copyIcon(iconName)} title="Copy '${iconName}' to clipboard." container="flat">
+                <div nve-layout="column align:center gap:md">
+                  <nve-icon ?outline=${this.values.outline} .size=${this.values.size as IconSize} .name=${iconName as IconName} .direction=${this.#getRotation(iconName, this.values.direction)}></nve-icon>
+                  <h3 nve-text="label sm light muted">${iconName}</h3>
+                </div>
+              </nve-button>`
+            )}
+          </div>
         </div>
       </nve-card-content>
     </nve-card>

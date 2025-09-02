@@ -14,6 +14,8 @@ export default {
   title: 'Patterns/Examples'
 };
 
+/* eslint-disable @html-eslint/no-restricted-attrs */
+
 export const PanelKeyValue = {
   render: () => html`
     <nve-panel behavior-expand expanded style="width:280px; height:550px">

@@ -1,6 +1,8 @@
 import { expect, test, describe } from 'vitest';
 import { lighthouseRunner } from '@nve-internals/vite';
 
+/* eslint-disable elements/deprecated-tags */
+
 describe('app-header lighthouse report', () => {
   test('app-header should meet lighthouse benchmarks', async () => {
     const report = await lighthouseRunner.getReport('nve-app-header', /* html */`
