@@ -63,7 +63,7 @@ export function render(data) {
 
             <nve-button container="flat"><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button>
 
-            <nve-button slot="suffix" id="system-options-panel-btn" container="flat" id="dropdown-btn">System Themes</nve-button>
+            <nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>
           </nve-page-header>
 
           <!-- Left sidebar navigation -->

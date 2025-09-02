@@ -142,6 +142,8 @@ export class ThemePreview extends LitElement {
     this.#resizeObserver?.unobserve(this);
   }
 
+  // todo:
+  /* eslint-disable @html-eslint/no-restricted-attrs */
   render() {
     return html`
       <div class="scalable-content" nve-theme="root">

@@ -24,20 +24,20 @@ export function render(data) {
   }
 </style>
 
-<div nve-layout='row gap:sm'>
-  <a href='https://github.com/NVIDIA/elements/-/releases'><img src='https://github.com/NVIDIA/elements/-/badges/release.svg?value_width=200' alt='release'></a>
-
-  <a href='https://github.com/NVIDIA/elements/-/commits/main'><img src='https://github.com/NVIDIA/elements/badges/main/pipeline.svg' alt='pipeline status'></a>
-  
-  <a href='https://github.com/NVIDIA/elements/-/graphs/main/charts'><img src='https://github.com/NVIDIA/elements/badges/main/coverage.svg?min_good=90&amp;key_text=coverage' alt='coverage'></a>
+<div nve-layout="row gap:sm">
+  <a href="https://github.com/NVIDIA/elements/-/releases"><img src="https://github.com/NVIDIA/elements/-/badges/release.svg?value_width=200" alt="release"></a>
+  <a href="https://github.com/NVIDIA/elements/-/commits/main"><img src="https://github.com/NVIDIA/elements/badges/main/pipeline.svg" alt="pipeline status"></a>
+  <a href="https://github.com/NVIDIA/elements/-/graphs/main/charts"><img src="https://github.com/NVIDIA/elements/badges/main/coverage.svg?min_good=90&amp;key_text=coverage" alt="coverage"></a>
 </div>
 
 <nve-tabs>
   ${data.changelogs
     .map(
-      changelog => `<nve-tabs-item ${changelog.permalink === data.changelog.permalink ? 'selected' : ''}>
-    <a href='docs/changelog${changelog.permalink}'>${changelog.title}</a>
-  </nve-tabs-item>`
+      changelog => /* html */ `
+      <nve-tabs-item ${changelog.permalink === data.changelog.permalink ? 'selected' : ''}>
+        <a href="docs/changelog${changelog.permalink}">${changelog.title}</a>
+      </nve-tabs-item>
+      `
     )
     .join('')}
 </nve-tabs>

@@ -22,6 +22,7 @@ export const data = {
 export function render(data) {
   return this.renderTemplate(
     /* html */ `
+<!DOCTYPE HTML>
 <html lang="en" nve-theme="dark">
   <head>
     <meta charset="UTF-8">
