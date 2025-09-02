@@ -101,6 +101,7 @@ export function render(data) {
                       let dir = 'elements';
                       if (filePath.includes('/docs/code/')) dir = 'code';
                       else if (filePath.includes('/docs/monaco/')) dir = 'monaco';
+                      else if (filePath.includes('/docs/labs/markdown/')) dir = 'labs';
                       const tabUrl = `docs/${dir}/${data.page.fileSlug}${tabItem.slug}`;
                       return `<nve-tabs-item ${`/${tabUrl}` === data.page.url ? 'selected' : ''}>
                           <a href="${tabUrl}">${tabItem.label}</a>
