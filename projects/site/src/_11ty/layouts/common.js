@@ -285,7 +285,7 @@ export const renderDocsNav = data => /* html */ `
 
   <!-- <nve-tree-node ${data.page.url.includes('/docs/markdown/') ? 'expanded' : ''}>
     Markdown
-    <nve-tree-node ${data.page.url.includes('/docs/markdown/') ? 'highlighted' : ''}><a href="docs/markdown/">Markdown</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/markdown/markdown/') ? 'highlighted' : ''}><a href="docs/markdown/markdown/">Markdown</a></nve-tree-node>
   </nve-tree-node> -->
 
   <nve-tree-node ${data.page.url.includes('cli') || data.page.url.includes('mcp') || data.page.url.includes('lint') || data.page.url.includes('testing') ? 'expanded' : ''}>
@@ -302,6 +302,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted' : ''}><a href="docs/labs/behaviors-alpine/">Behaviors Alpine</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/brand/' ? 'highlighted' : ''}><a href="docs/labs/brand/">Brand</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted' : ''}><a href="docs/labs/forms/">Forms</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/labs/markdown/' ? 'highlighted' : ''}><a href="docs/labs/markdown/">Markdown</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''} ${data.page.url === '/docs/api-design/' ? 'highlighted' : ''}>
