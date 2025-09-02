@@ -1,3 +1,407 @@
 :host {
   display: block;
+  height: 100%;
+  overflow-y: auto;
+  font-family: var(--nve-ref-font-family);
+  font-weight: var(--nve-ref-font-weight-regular);
+  color: var(--nve-sys-text-color);
+  line-height: var(--nve-ref-font-line-height-relaxed);
+  --padding: var(--nve-ref-space-lg);
+}
+
+/* Container div for rendered content */
+div[internal-host] {
+  padding: var(--padding);
+}
+
+/* Remove bottom margin from last elements to prevent extra spacing */
+p:last-child,
+ul:last-child,
+ol:last-child,
+pre:last-child,
+blockquote:last-child,
+table:last-child,
+img:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   HEADINGS
+   ========================================================================== */
+
+/* Base heading styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: var(--nve-ref-font-weight-medium);
+  line-height: var(--nve-ref-font-line-height-tight);
+  color: var(--nve-sys-text-color);
+}
+
+/* Display/emphasis heading (h1) */
+h1 {
+  font-size: var(--nve-ref-font-size-1000);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--nve-ref-space-lg);
+}
+
+/* Extra large heading (h2) */
+h2 {
+  font-size: var(--nve-ref-font-size-600);
+  padding: var(--nve-ref-space-xl) 0 var(--nve-ref-space-xs);
+  border-bottom: 1px solid var(--nve-ref-border-color);
+  margin-bottom: var(--nve-ref-space-md);
+}
+
+h2:first-child {
+  padding-top: 0;
+}
+
+/* Large heading (h3) */
+h3 {
+  font-size: var(--nve-ref-font-size-500);
+  padding-top: var(--nve-ref-space-md);
+  margin-bottom: var(--nve-ref-space-sm);
+}
+
+/* Regular heading (h4, h5) */
+h4,
+h5 {
+  font-size: var(--nve-ref-font-size-400);
+  margin-bottom: var(--nve-ref-space-sm);
+}
+
+/* Small heading (h6) */
+h6 {
+  font-size: var(--nve-ref-font-size-300);
+  margin-bottom: var(--nve-ref-space-xs);
+}
+
+/* ==========================================================================
+   PARAGRAPHS AND TEXT
+   ========================================================================== */
+
+p {
+  margin: 0 0 var(--nve-ref-space-md);
+  font-size: var(--nve-ref-font-size-200);
+  line-height: var(--nve-ref-font-line-height-relaxed);
+  font-weight: var(--nve-ref-font-weight-regular);
+}
+
+/* ==========================================================================
+   LISTS
+   ========================================================================== */
+
+ul,
+ol {
+  margin: 0 0 var(--nve-ref-space-md);
+  padding-left: var(--nve-ref-space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--nve-ref-space-xs);
+}
+
+li {
+  line-height: var(--nve-ref-font-line-height-relaxed);
+}
+
+/* Nested lists */
+li > ul,
+li > ol {
+  margin-top: var(--nve-ref-space-xs);
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   LINKS
+   ========================================================================== */
+
+a {
+  color: var(--nve-sys-text-link-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--nve-sys-text-link-hover-color);
+}
+
+a:visited {
+  color: var(--nve-sys-text-link-visited-color);
+}
+
+/* External links */
+a[target='_blank']::after {
+  content: ' ↗';
+  font-size: 0.75em;
+  vertical-align: super;
+}
+
+/* ==========================================================================
+   CODE AND PREFORMATTED TEXT
+   ========================================================================== */
+
+/* Inline code */
+code {
+  background: var(--nve-sys-interaction-field-background);
+  border-radius: var(--nve-ref-border-radius-xs);
+  display: inline-block;
+  font-family: monospace;
+  font-size: 0.875em;
+  padding: var(--nve-ref-size-50) var(--nve-ref-size-100);
+  color: var(--nve-sys-text-color);
+}
+
+/* Code blocks */
+pre {
+  margin: 0 0 var(--nve-ref-space-md);
+  border-radius: var(--nve-ref-border-radius-md);
+  overflow-x: auto;
+}
+
+pre code {
+  display: block;
+  background: var(--nve-sys-layer-container-background);
+  border: 1px solid var(--nve-ref-border-color);
+  border-radius: var(--nve-ref-border-radius-md);
+  padding: var(--nve-ref-space-lg);
+  font-size: var(--nve-ref-font-size-100);
+  line-height: var(--nve-ref-font-line-height-relaxed);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* ==========================================================================
+   BLOCKQUOTES
+   ========================================================================== */
+
+blockquote {
+  margin: 0 0 var(--nve-ref-space-md);
+  padding: var(--nve-ref-space-sm) var(--nve-ref-space-lg);
+  border-left: 4px solid var(--nve-ref-border-color);
+  background: var(--nve-sys-layer-container-background);
+  font-style: italic;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   HORIZONTAL RULES
+   ========================================================================== */
+
+hr {
+  border: none;
+  border-top: 1px solid var(--nve-ref-border-color);
+  margin: var(--nve-ref-space-xl) 0;
+}
+
+/* ==========================================================================
+   TABLES
+   ========================================================================== */
+
+table {
+  width: 100%;
+  margin: 0 0 var(--nve-ref-space-md);
+  border-collapse: collapse;
+  font-size: var(--nve-ref-font-size-100);
+}
+
+th,
+td {
+  padding: var(--nve-ref-space-sm) var(--nve-ref-space-md);
+  text-align: left;
+  border: 1px solid var(--nve-ref-border-color);
+}
+
+th {
+  background: var(--nve-sys-layer-container-background);
+  font-weight: var(--nve-ref-font-weight-semibold);
+}
+
+/* Zebra striping */
+tbody tr:nth-child(even) {
+  background: var(--nve-sys-layer-shell-background);
+}
+
+/* ==========================================================================
+   IMAGES
+   ========================================================================== */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 0 var(--nve-ref-space-md);
+  border-radius: var(--nve-ref-border-radius-md);
+}
+
+/* ==========================================================================
+   EMPHASIS AND STRONG
+   ========================================================================== */
+
+em {
+  font-style: italic;
+}
+
+strong {
+  font-weight: var(--nve-ref-font-weight-semibold);
+}
+
+/* ==========================================================================
+   DEFINITION LISTS
+   ========================================================================== */
+
+dl {
+  margin: 0 0 var(--nve-ref-space-md);
+}
+
+dt {
+  font-weight: var(--nve-ref-font-weight-semibold);
+  margin-bottom: var(--nve-ref-space-xs);
+}
+
+dd {
+  margin-left: var(--nve-ref-space-lg);
+  margin-bottom: var(--nve-ref-space-sm);
+}
+
+/* ==========================================================================
+   DETAILS/SUMMARY (Collapsible sections)
+   ========================================================================== */
+
+details {
+  margin: 0 0 var(--nve-ref-space-md);
+  padding: var(--nve-ref-space-sm);
+  border: 1px solid var(--nve-ref-border-color);
+  border-radius: var(--nve-ref-border-radius-md);
+  background: var(--nve-sys-layer-container-background);
+}
+
+summary {
+  cursor: pointer;
+  font-weight: var(--nve-ref-font-weight-semibold);
+  padding: var(--nve-ref-space-xs);
+  margin: calc(-1 * var(--nve-ref-space-sm));
+  margin-bottom: var(--nve-ref-space-sm);
+}
+
+summary:hover {
+  background: var(--nve-sys-interaction-hover-background);
+}
+
+details[open] summary {
+  border-bottom: 1px solid var(--nve-ref-border-color);
+  margin-bottom: var(--nve-ref-space-sm);
+  padding-bottom: var(--nve-ref-space-sm);
+}
+
+/* ==========================================================================
+   ADDITIONAL ELEMENTS
+   ========================================================================== */
+
+/* Keyboard input */
+kbd {
+  background: var(--nve-sys-layer-container-background);
+  border: 1px solid var(--nve-ref-border-color);
+  border-radius: var(--nve-ref-border-radius-xs);
+  display: inline-block;
+  font-family: monospace;
+  font-size: 0.875em;
+  padding: 2px 6px;
+  white-space: nowrap;
+}
+
+/* Marked/highlighted text */
+mark {
+  background: var(--nve-sys-interaction-field-background);
+  color: var(--nve-sys-text-color);
+  padding: 2px 4px;
+  border-radius: var(--nve-ref-border-radius-xs);
+}
+
+/* Abbreviations */
+abbr[title] {
+  text-decoration: underline dotted;
+  cursor: help;
+}
+
+/* Sample output */
+samp {
+  font-family: monospace;
+  font-size: 0.875em;
+  background: var(--nve-sys-layer-shell-background);
+  padding: 2px 4px;
+  border-radius: var(--nve-ref-border-radius-xs);
+}
+
+/* Variables */
+var {
+  font-family: monospace;
+  font-style: italic;
+  font-size: 0.875em;
+}
+
+/* Subscript and Superscript */
+sub,
+sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Deleted and Inserted text */
+del {
+  text-decoration: line-through;
+  color: var(--nve-sys-text-muted-color);
+}
+
+ins {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-decoration-color: var(--nve-sys-support-success-emphasis-color);
+}
+
+/* Small text */
+small {
+  font-size: var(--nve-ref-font-size-100);
+}
+
+/* Figure and caption */
+figure {
+  margin: 0 0 var(--nve-ref-space-lg);
+  text-align: center;
+}
+
+figcaption {
+  font-size: var(--nve-ref-font-size-200);
+  color: var(--nve-sys-text-muted-color);
+  margin-top: var(--nve-ref-space-sm);
+  font-style: italic;
+}
+
+/* Address */
+address {
+  font-style: normal;
+  margin: 0 0 var(--nve-ref-space-md);
+}
+
+/* Cite */
+cite {
+  font-style: italic;
 }

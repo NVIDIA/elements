@@ -130,6 +130,7 @@
         "release:labs-cli",
         "release:labs-forms",
         "release:labs-lint",
+        "release:labs-markdown",
         "release:monaco",
         "release:styles"
       ]
@@ -184,7 +185,10 @@
       ]
     },
     "release:labs-markdown": {
-      "command": "cd projects/labs/markdown && HUSKY=0 pnpm exec semantic-release"
+      "command": "cd projects/labs/markdown && HUSKY=0 pnpm exec semantic-release",
+      "dependencies": [
+        "release:elements"
+      ]
     },
     "release:monaco": {
       "command": "cd projects/monaco && HUSKY=0 pnpm exec semantic-release",

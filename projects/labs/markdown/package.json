@@ -70,6 +70,7 @@
   },
   "dependencies": {
     "lit": "catalog:",
+    "markdown-it": "catalog:",
     "@nvidia-elements/core": "workspace:*"
   },
   "devDependencies": {
