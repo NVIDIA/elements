@@ -96,20 +96,7 @@ export const litConfig = [
       '@html-eslint/attrs-newline': ['off'], // disabled interferes with example templates
       '@html-eslint/element-newline': ['off'], // disabled interferes with example templates
       '@html-eslint/require-closing-tags': ['off'], // disabled interferes with example templates
-      '@html-eslint/no-extra-spacing-attrs': ['off'], // disabled interferes with example templates
-      '@html-eslint/no-restricted-attrs': [
-        'error',
-        {
-          tagPatterns: ['.*-.*'],
-          attrPatterns: ['nve-layout'],
-          message: 'Use of nve-layout is not allowed on custom HTML element tags.'
-        },
-        {
-          tagPatterns: ['.*-.*'],
-          attrPatterns: ['nve-text'],
-          message: 'Use of nve-text is not allowed on custom HTML element tags.'
-        }
-      ]
+      '@html-eslint/no-extra-spacing-attrs': ['off'] // disabled interferes with example templates
     }
   },
   // library implementation files

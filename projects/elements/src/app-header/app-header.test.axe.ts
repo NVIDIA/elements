@@ -8,6 +8,8 @@ import '@nvidia-elements/core/logo/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
+/* eslint-disable elements/deprecated-tags */
+
 describe(AppHeader.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: AppHeader;

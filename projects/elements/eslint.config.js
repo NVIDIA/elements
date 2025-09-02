@@ -3,8 +3,16 @@ import {
   browserTypescriptConfig,
   libraryConfig,
   litConfig,
-  htmlConfig
+  htmlConfig,
+  elementsConfig
 } from '@nve-internals/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [...browserJavaScriptConfig, ...browserTypescriptConfig, ...libraryConfig, ...litConfig, ...htmlConfig];
+export default [
+  ...browserJavaScriptConfig,
+  ...browserTypescriptConfig,
+  ...libraryConfig,
+  ...litConfig,
+  ...htmlConfig,
+  ...elementsConfig
+];

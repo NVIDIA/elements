@@ -24,6 +24,7 @@ let crossRootWarning = false;
  * https://developer.chrome.com/blog/anchor-positioning-api
  */
 export class TypeNativeAnchorController<T extends NativeAnchor> implements ReactiveController {
+  // eslint-disable-next-line no-restricted-syntax
   private typeNativeAnchorFallbackController: TypeNativeAnchorFallbackController<T>;
 
   constructor(private host: T) {
