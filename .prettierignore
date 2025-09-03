@@ -9,6 +9,7 @@ coverage
 *.stories.ts
 *.test.lighthouse.ts
 CHANGELOG.md
+README.md
 pnpm-lock.yaml
 vite.*.ts.timestamp*
 tsconfig.*.tsbuildinfo
