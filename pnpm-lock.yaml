@@ -711,8 +711,8 @@ importers:
         specifier: 7.8.4
         version: 7.8.4(@types/node@22.13.1)
       '@modelcontextprotocol/sdk':
-        specifier: 1.17.4
-        version: 1.17.4
+        specifier: 1.17.5
+        version: 1.17.5
       adm-zip:
         specifier: 0.5.16
         version: 0.5.16
@@ -723,11 +723,11 @@ importers:
         specifier: 'catalog:'
         version: 11.0.3
       marked:
-        specifier: 16.2.0
-        version: 16.2.0
+        specifier: 16.2.1
+        version: 16.2.1
       marked-terminal:
         specifier: 7.3.0
-        version: 7.3.0(marked@16.2.0)
+        version: 7.3.0(marked@16.2.1)
       open:
         specifier: 10.2.0
         version: 10.2.0
@@ -2999,8 +2999,8 @@ packages:
     resolution: {integrity: sha512-bGwA78F/U5G2jrnsdRkPY3IwIwZeWUEfb5o764b79lb0rJmMT76TLwKhdNZOWakOQtedYefwIR4emisEMvInKA==, tarball: https://registry.npmjs.org
     engines: {node: '>=18'}
 
-  '@modelcontextprotocol/sdk@1.17.4':
-    resolution: {integrity: sha512-zq24hfuAmmlNZvik0FLI58uE5sriN0WWsQzIlYnzSuKDAHFqJtBFrl/LfB1NLgJT5Y7dEBzaX4yAKqOPrcetaw==, tarball: https://registry.npmjs.org
+  '@modelcontextprotocol/sdk@1.17.5':
+    resolution: {integrity: sha512-QakrKIGniGuRVfWBdMsDea/dx1PNE739QJ7gCM41s9q+qaCYTHCdsIBXQVVXry3mfWAiaM9kT22Hyz53Uw8mfg==, tarball: https://registry.npmjs.org
     engines: {node: '>=18'}
 
   '@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.3':
@@ -7546,8 +7546,8 @@ packages:
     peerDependencies:
       marked: '>=1 <16'
 
-  marked@16.2.0:
-    resolution: {integrity: sha512-LbbTuye+0dWRz2TS9KJ7wsnD4KAtpj0MVkWc90XvBa6AslXsT0hTBVH5k32pcSyHH1fst9XEFJunXHktVy0zlg==, tarball: https://registry.npmjs.org
+  marked@16.2.1:
+    resolution: {integrity: sha512-r3UrXED9lMlHF97jJByry90cwrZBBvZmjG1L68oYfuPMW+uDTnuMbyJDymCWwbTE+f+3LhpNDKfpR3a3saFyjA==, tarball: https://registry.npmjs.org
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -11998,7 +11998,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@modelcontextprotocol/sdk@1.17.4':
+  '@modelcontextprotocol/sdk@1.17.5':
     dependencies:
       ajv: 6.12.6
       content-type: 1.0.5
@@ -17208,18 +17208,18 @@ snapshots:
       node-emoji: 2.2.0
       supports-hyperlinks: 3.2.0
 
-  marked-terminal@7.3.0(marked@16.2.0):
+  marked-terminal@7.3.0(marked@16.2.1):
     dependencies:
       ansi-escapes: 7.0.0
       ansi-regex: 6.1.0
       chalk: 5.4.1
       cli-highlight: 2.1.11
       cli-table3: 0.6.5
-      marked: 16.2.0
+      marked: 16.2.1
       node-emoji: 2.2.0
       supports-hyperlinks: 3.2.0
 
-  marked@16.2.0: {}
+  marked@16.2.1: {}
 
   marked@9.1.6: {}
 
