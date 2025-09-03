@@ -4,26 +4,34 @@
   "description": "A CLI tool for Elements related utilities",
   "type": "module",
   "bin": {
-    "nve": "./dist/index.js"
+    "nve": "./dist/index.js",
+    "nve-mcp": "./dist/mcp/index.js"
   },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "package.json",
+    "dist/**/*"
+  ],
   "scripts": {
     "dev": "wireit",
+    "dev:mcp": "pnpm dlx @modelcontextprotocol/inspector nve-mcp",
     "ci": "wireit",
     "build": "wireit",
     "lint": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
     "test:coverage": "wireit",
-    "nve:install": "pnpm link --global",
+    "nve:install": "test -n \"$CI\" || pnpm link --global",
     "nve:uninstall": "pnpm uninstall --global @nvidia-elements/cli"
   },
   "dependencies": {
     "@inquirer/prompts": "7.8.4",
-    "@modelcontextprotocol/sdk": "1.17.4",
+    "@modelcontextprotocol/sdk": "1.17.5",
     "adm-zip": "0.5.16",
     "archiver": "7.0.1",
     "glob": "catalog:",
-    "marked": "16.2.0",
+    "marked": "16.2.1",
     "marked-terminal": "7.3.0",
     "ora": "8.2.0",
     "yargs": "18.0.0",
@@ -63,7 +71,7 @@
       "output": []
     },
     "build": {
-      "command": "NODE_ENV=production vite build",
+      "command": "NODE_ENV=production vite build && pnpm run nve:install",
       "files": [
         "../../internals/tools/dist/**/*.js",
         "src/**",

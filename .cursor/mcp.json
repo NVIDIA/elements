@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "elements": {
+      "command": "nve-mcp",
+      "description": "Elements API and Custom Element Schema"
+    }
+  }
+}
