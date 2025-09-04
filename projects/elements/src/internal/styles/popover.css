@@ -11,6 +11,7 @@
   z-index: 99;
   pointer-events: none;
   opacity: 0;
+  inset: revert;
 }
 
 /* ensure popover is not visible until floating-ui has positioned it */
@@ -174,17 +175,14 @@
   /** top */
   :host([position='top']) {
     position-area: top center;
-    inset: 0 auto auto auto;
   }
 
   :host([position='top'][alignment='start']) {
     position-area: top left;
-    inset: 0 auto auto 0;
   }
 
   :host([position='top'][alignment='end']) {
     position-area: top right;
-    inset: 0 0 auto auto;
   }
 
   :host([position='top'][alignment='start']) {
@@ -198,49 +196,40 @@
   /** bottom */
   :host([position='bottom']) {
     position-area: bottom center;
-    inset: auto auto 0 auto;
   }
 
   :host([position='bottom'][alignment='start']) {
     position-area: bottom span-right;
-    inset: auto auto 0 0;
   }
 
   :host([position='bottom'][alignment='end']) {
     position-area: bottom span-left;
-    inset: auto 0 0 auto;
   }
 
   /** left */
   :host([position='left']) {
     position-area: left center;
-    inset: auto auto auto 0;
   }
 
   :host([position='left'][alignment='end']) {
     position-area: left span-top;
-    inset: auto auto 0 0;
   }
 
   :host([position='left'][alignment='start']) {
     position-area: left span-bottom;
-    inset: 0 auto auto 0;
   }
 
   /** right */
   :host([position='right']) {
     position-area: right center;
-    inset: auto 0 auto auto;
   }
 
   :host([position='right'][alignment='end']) {
     position-area: right span-top;
-    inset: auto 0 0 auto;
   }
 
   :host([position='right'][alignment='start']) {
     position-area: right span-bottom;
-    inset: 0 0 auto auto;
   }
 
   :host([popover]) {

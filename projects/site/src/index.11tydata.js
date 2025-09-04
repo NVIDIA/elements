@@ -13,7 +13,7 @@ const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-dis
 const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
 
 const stories = (await ExampleService.getAll())
-  .filter(s => !s.template?.includes('${') && !s.id.toLowerCase().includes('shadowroot'))
+  .filter(s => !s.template?.includes('${'))
   .map(story => ({
     id: story.id,
     story: story.element,
