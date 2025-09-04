@@ -101,3 +101,19 @@ nve-icon-button {
 :host([position='top']) [internal-host] {
   height: min-content;
 }
+
+:host([position='left']) {
+  inset: auto auto auto 0;
+}
+
+:host([position='right']) {
+  inset: auto 0 auto auto;
+}
+
+:host([position='top']) {
+  inset: 0 auto auto auto;
+}
+
+:host([position='bottom']) {
+  inset: auto auto 0 auto;
+}
