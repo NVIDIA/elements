@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.6...@nvidia-elements/core-v1.39.7) (2025-09-05)
+
+
+### Bug Fixes
+
+* **elements:** popover anchor position styles ([d4962cf](https://github.com/NVIDIA/elements/commit/d4962cf6d2c26e169b0b50e8b831939faffabaa6))
+
 ## [@nvidia-elements/core-v1.39.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.5...@nvidia-elements/core-v1.39.6) (2025-08-26)
 
 
