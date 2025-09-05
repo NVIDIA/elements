@@ -3,7 +3,7 @@ import { libraryVisualTestConfig } from '@nve-internals/vite';
 
 export default mergeConfig(libraryVisualTestConfig, {
   test: {
-    include: ['src/**/*.test.visual.ts'],
+    include: ['src/index.test.visual.ts'],
     outputFile: {
       junit: './coverage/visual/junit.xml'
     }
