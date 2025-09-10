@@ -119,6 +119,14 @@ const integrations = {
     documentation: 'https://www.solidjs.com',
     playgroundURL: null
   },
+  svelte: {
+    logo: 'svelte',
+    starterDemo: 'https://NVIDIA.github.io/elements/starters/svelte/',
+    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/svelte.zip',
+    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/svelte',
+    documentation: 'https://svelte.dev',
+    playgroundURL: null
+  },
   typescript: {
     logo: 'typescript',
     starterDemo: 'https://NVIDIA.github.io/elements/starters/typescript/',

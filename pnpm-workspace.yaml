@@ -13,6 +13,7 @@ packages:
   - 'projects/starters/react-18'
   - 'projects/starters/scoped-registry'
   - 'projects/starters/solidjs'
+  - 'projects/starters/svelte'
   - 'projects/starters/typescript'
   - 'projects/starters/vue'
   - 'projects/site'
