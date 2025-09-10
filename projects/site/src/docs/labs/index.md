@@ -44,6 +44,11 @@ main @nve package scope. Labs projects may be deprecated or removed at any time.
     <nve-grid-cell>Available / In Development</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/lint" target="_blank"><code nve-text="code">@nvidia-elements/lint</code></a></nve-grid-cell>
+    <nve-grid-cell>Utility library for Elements specific lint rules.</nve-grid-cell>
+    <nve-grid-cell>In Development</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/markdown" target="_blank"><code nve-text="code">@nvidia-elements/markdown</code></a></nve-grid-cell>
     <nve-grid-cell>Utilities for rendering Markdown.</nve-grid-cell>
     <nve-grid-cell>In Development</nve-grid-cell>
