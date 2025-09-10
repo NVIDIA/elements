@@ -291,6 +291,11 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/markdown/') ? 'highlighted' : ''}><a href="docs/markdown/">Markdown</a></nve-tree-node>
   </nve-tree-node> -->
 
+  <!-- <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'expanded' : ''}>
+    <a href="docs/cli/">CLI</a>
+    <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'highlighted' : ''}><a href="docs/cli/">Getting Started</a></nve-tree-node>
+  </nve-tree-node> -->
+
   <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}>
     <a href="docs/labs/">Labs</a>
     <nve-tree-node ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}><a href="docs/labs/">About</a></nve-tree-node>
@@ -315,7 +320,7 @@ export const renderDocsNav = data => /* html */ `
 
   <nve-tree-node ${data.page.url.includes('/docs/internal/') ? 'expanded' : ''} ${data.page.url === '/docs/internal/' ? 'highlighted' : ''}>
     <a href="docs/internal/">Internal</a>
-    <nve-tree-node><a href="stories/">Stories</a></nve-tree-node>
+    <nve-tree-node><a href="stories/">Examples</a></nve-tree-node>
 
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines') ? 'expanded' : ''} ${data.page.url === '/docs/internal/guidelines/' ? 'highlighted' : ''}>
       Guidelines
