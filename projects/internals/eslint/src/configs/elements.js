@@ -1,7 +1,10 @@
 import eslintHTML from '@html-eslint/eslint-plugin';
+import eslintCSS from '@eslint/css';
 import deprecatedTags from '../local/deprecated-tags.js';
+import cssProperty from '../local/css-property.js';
 
 const source = ['src/**/*.html', 'src/**/*.11ty.js', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
+const cssSource = ['src/**/*.css'];
 const ignores = [
   'node_modules/',
   'coverage/',
@@ -65,6 +68,25 @@ export const elementsConfig = [
           message: 'Icon name {{attrValuePatterns}} is deprecated.'
         }
       ]
+    }
+  },
+  {
+    files: [...cssSource],
+    ignores,
+    plugins: {
+      '@eslint/css': eslintCSS,
+      elements: {
+        rules: {
+          'no-invalid-css-variable': cssProperty
+        }
+      }
+    },
+    language: '@eslint/css/css',
+    languageOptions: {
+      tolerant: true
+    },
+    rules: {
+      'elements/no-invalid-css-variable': ['error']
     }
   }
 ];
