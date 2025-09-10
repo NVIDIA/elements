@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* istanbul ignore file -- @preserve */
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { tools, prompts, jsonSchemaToZod } from '@nve-internals/tools';
