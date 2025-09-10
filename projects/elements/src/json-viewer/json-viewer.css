@@ -18,7 +18,7 @@ nve-json-node {
 }
 
 nve-json-node:first-of-type {
-  margin-top: var(--nve-ref-size-400) !important;
+  margin-top: var(--nve-ref-space-md) !important;
 }
 
 .array::before,

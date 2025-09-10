@@ -27,8 +27,8 @@
 }
 
 :host(:not([closable]):not(:state(expanded))) [internal-host] {
-  width: var(--nve-ref-space-xl) !important;
-  height: var(--nve-ref-space-xl) !important;
+  width: var(--nve-ref-size-800) !important;
+  height: var(--nve-ref-size-800) !important;
   background: none;
 }
 
@@ -79,8 +79,8 @@
 }
 
 nve-icon-button {
-  margin-top: var(--nve-ref-size-100); /* not nve-ref-size-300 */
-  margin-right: var(--nve-ref-size-100);
+  margin-top: var(--nve-ref-space-xxs);
+  margin-right: var(--nve-ref-space-xxs);
   margin-left: auto;
   z-index: 99;
 }

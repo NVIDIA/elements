@@ -7,7 +7,7 @@
 [internal-host] {
   color: var(--color);
   display: flex;
-  gap: var(--nve-ref-size-300);
+  gap: var(--nve-ref-space-sm);
   flex-direction: column;
 }
 

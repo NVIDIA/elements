@@ -37,7 +37,7 @@ nve-button {
 
 pre {
   padding: var(--nve-ref-size-200);
-  margin: 0 0 0 var(--nve-ref-size-100);
+  margin: 0 0 0 var(--nve-ref-space-xxs);
   width: fit-content;
 }
 

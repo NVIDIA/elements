@@ -39,7 +39,8 @@
 }
 
 :host([modal])::backdrop {
-  background: rgba(0, 0, 0, 0.5);
+  /* --nve-sys-layer-backdrop-background (not available on top layer) */
+  background: hsla(0, 0%, 0%, 0.5); /* eslint-disable-line elements/no-invalid-css-variable */
 }
 
 .header {
