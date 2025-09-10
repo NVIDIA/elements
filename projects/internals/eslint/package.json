@@ -11,7 +11,9 @@
   "dependencies": {
     "@html-eslint/eslint-plugin": "0.45.0",
     "@html-eslint/parser": "0.45.0",
+    "@eslint/css": "0.11.0",
     "@eslint/js": "catalog:",
+    "@nvidia-elements/themes": "workspace:*",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-lit": "2.1.1",
     "eslint-plugin-lit-a11y": "5.1.1",
@@ -26,6 +28,9 @@
     "ci": {
       "files": [
         "src"
+      ],
+      "dependencies": [
+        "../../themes:build"
       ]
     }
   }
