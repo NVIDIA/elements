@@ -182,9 +182,9 @@ pre {
 
 .hljs-linenumber {
   color: var(--nve-ref-color-gray-slate-1100);
-  margin-right: 24px;
+  margin-right: var(--nve-ref-space-lg);
   display: inline-block;
-  width: 24px;
+  width: var(--nve-ref-size-600);
   text-align: right;
   user-select: none;
 }
@@ -197,7 +197,7 @@ pre {
 
   &::after {
     background-color: color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 80%);
-    box-shadow: inset 2px 0 0 color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 20%);
+    box-shadow: inset 2px 0 0 color-mix(in oklch, var(--nve-ref-color-yellow-amber-900), transparent 20%); /* eslint-disable-line elements/no-invalid-css-variable */
     position: absolute;
     inset: 0 calc(var(--padding) * -1);
     display: block;
