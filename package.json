@@ -64,6 +64,7 @@
         "./projects/labs/cli:ci",
         "./projects/labs/code:ci",
         "./projects/labs/forms:ci",
+        "./projects/labs/lint:ci",
         "./projects/labs/markdown:ci",
         "./projects/labs/playwright-screencast:ci",
         "./projects/labs/snippets:ci",
@@ -173,6 +174,9 @@
     "release:labs-forms": {
       "command": "cd projects/labs/forms && HUSKY=0 pnpm exec semantic-release"
     },
+    "release:labs-lint": {
+      "command": "cd projects/labs/lint && HUSKY=0 pnpm exec semantic-release"
+    },
     "release:labs-markdown": {
       "command": "cd projects/labs/markdown && HUSKY=0 pnpm exec semantic-release"
     },
@@ -230,6 +234,7 @@
         "./projects/labs/cli:lint:fix",
         "./projects/labs/code:lint:fix",
         "./projects/labs/forms:lint:fix",
+        "./projects/labs/lint:lint:fix",
         "./projects/labs/markdown:lint:fix",
         "./projects/labs/playwright-screencast:lint:fix",
         "./projects/labs/snippets:lint:fix",
