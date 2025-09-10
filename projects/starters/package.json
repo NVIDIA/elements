@@ -31,6 +31,7 @@
         "./react-18/dist/**/*.js",
         "./scoped-registry/dist/**/*.js",
         "./solidjs/dist/**/*.js",
+        "./svelte/dist/**/*.js",
         "./typescript/dist/**/*.js",
         "./vue/dist/**/*.js",
         "./index.js"
@@ -89,6 +90,10 @@
         },
         {
           "script": "./solidjs:build",
+          "cascade": false
+        },
+        {
+          "script": "./svelte:build",
           "cascade": false
         },
         {
