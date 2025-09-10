@@ -44,7 +44,7 @@ slot:not(:has-slotted) {
 .node-title {
   border-radius: var(--border-radius);
   border-left: var(--nve-ref-border-width-md) solid transparent;
-  margin-left: var(--nve-ref-size-50);
+  margin-left: var(--nve-ref-space-xxxs);
   padding: var(--nve-ref-size-200) var(--nve-ref-size-100);
   min-height: var(--min-height);
   width: 100%;
@@ -107,8 +107,8 @@ nve-icon[name='caret'] {
 }
 
 nve-checkbox {
-  margin-left: var(--nve-ref-size-100);
-  margin-top: var(--nve-ref-size-200);
+  margin-left: var(--nve-ref-space-xxs);
+  margin-top: var(--nve-ref-space-xs);
   align-self: start;
 }
 
