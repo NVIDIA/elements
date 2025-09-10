@@ -43,9 +43,9 @@
   &.problem-count {
     background-color: var(--nve-ref-color-gray-denim-800);
     padding: 1.2px 6px;
-    border-radius: 11px;
+    border-radius: var(--nve-ref-border-radius-md);
     font-family: var(--nve-ref-font-family);
-    font-size: 11px;
+    font-size: var(--nve-ref-font-size-100);
     font-weight: var(--nve-ref-font-weight-semibold);
   }
 
