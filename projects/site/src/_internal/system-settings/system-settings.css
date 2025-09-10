@@ -1,7 +1,7 @@
 [internal-host] {
   display: flex;
   flex-direction: column;
-  gap: var(--nve-ref-size-400);
+  gap: var(--nve-ref-space-md);
   padding-top: var(--nve-ref-size-400);
 }
 
