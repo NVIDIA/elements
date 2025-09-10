@@ -46,7 +46,7 @@ slot[name='messages'] {
   grid-area: input;
   display: flex;
   flex-direction: column;
-  gap: var(--nve-ref-size-300) var(--nve-ref-size-400);
+  gap: var(--nve-ref-space-sm) var(--nve-ref-space-md);
   width: fit-content;
   flex-wrap: wrap;
 }

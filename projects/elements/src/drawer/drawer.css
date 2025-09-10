@@ -67,7 +67,8 @@
 }
 
 :host([modal])::backdrop {
-  background: hsla(0, 0%, 0%, 0.07); /* --nve-sys-layer-backdrop-background (not available on top layer */
+  /* --nve-sys-layer-backdrop-background (not available on top layer) */
+  background: hsla(0, 0%, 0%, 0.07); /* eslint-disable-line elements/no-invalid-css-variable */
 }
 
 .header {
