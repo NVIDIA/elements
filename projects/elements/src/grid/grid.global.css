@@ -64,7 +64,7 @@ nve-grid-column > nve-sort-button + nve-icon-button {
 
 mlv-grid-cell:focus-within > a,
 nve-grid-cell:focus-within > a {
-  box-shadow: 0 0 0 2px Highlight; /* programatic focus does not trigger standard outline style */
+  box-shadow: 0 0 0 2px Highlight; /* programmatic focus does not trigger standard outline style */
 }
 
 mlv-grid,

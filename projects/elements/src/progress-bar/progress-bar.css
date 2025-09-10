@@ -77,7 +77,7 @@ progress.indeterminate {
 }
 
 progress[value].indeterminate::-webkit-progress-value {
-  border-radius: 0;
+  border-radius: var(--nve-ref-border-radius-none);
   background-color: transparent !important;
 }
 
