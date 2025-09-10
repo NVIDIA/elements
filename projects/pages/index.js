@@ -23,6 +23,7 @@ cpSync('../starters/mpa/dist/', './dist/starters/mpa/', { recursive: true });
 cpSync('../starters/nextjs/dist/', './dist/starters/nextjs/', { recursive: true });
 cpSync('../starters/react/dist/', './dist/starters/react/', { recursive: true });
 cpSync('../starters/solidjs/dist/', './dist/starters/solidjs/', { recursive: true });
+cpSync('../starters/svelte/dist/', './dist/starters/svelte/', { recursive: true });
 cpSync('../starters/typescript/dist/', './dist/starters/typescript/', { recursive: true });
 cpSync('../starters/vue/dist/', './dist/starters/vue/', { recursive: true });
 

@@ -18,6 +18,7 @@ export type Starter =
   | 'lit'
   | 'preact'
   | 'solidjs'
+  | 'svelte'
   | 'vue'
   | 'nextjs'
   | 'typescript'
@@ -57,6 +58,10 @@ export const startersData = {
   },
   solidjs: {
     zip: 'https://NVIDIA.github.io/elements/starters/download/solidjs.zip',
+    cli: true
+  },
+  svelte: {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/svelte.zip',
     cli: true
   },
   importmaps: {

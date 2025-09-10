@@ -123,6 +123,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/preact/') ? 'highlighted' : ''}><a href="docs/integrations/preact/">Preact</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/react/') ? 'highlighted' : ''}><a href="docs/integrations/react/">React</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/solidjs/') ? 'highlighted' : ''}><a href="docs/integrations/solidjs/">SolidJS</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/svelte/') ? 'highlighted' : ''}><a href="docs/integrations/svelte/">Svelte</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/typescript/') ? 'highlighted' : ''}><a href="docs/integrations/typescript/">TypeScript</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/vue/') ? 'highlighted' : ''}><a href="docs/integrations/vue/">Vue</a></nve-tree-node>
   </nve-tree-node>

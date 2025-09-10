@@ -78,6 +78,9 @@ import '@nvidia-elements/core/button/define.js';
     <a href="./docs/integrations/solidjs/"><svg width="20" height="20"><use href="#solidjs-svg"></use></svg> SolidJS</a>
   </nve-button>
   <nve-button>
+    <a href="./docs/integrations/svelte/"><svg width="20" height="20"><use href="#svelte-svg"></use></svg> Svelte</a>
+  </nve-button>
+  <nve-button>
     <a href="./docs/integrations/installation/"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> JavaScript</a>
   </nve-button>
 </section>

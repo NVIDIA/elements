@@ -118,6 +118,19 @@ export function render(data) {
       </div>
     </nve-card>
   </a>
+  <a href="starters/svelte/">
+    <nve-card>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg">
+          <img src="/static/images/integrations/svelte.svg" width="36px" height="36px" alt="svelte logo" />
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">Svelte</h2>
+          <p nve-text="body sm muted">Starter leveraging Svelte and Vite.</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
   <a href="starters/react/">
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
