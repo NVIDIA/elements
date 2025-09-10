@@ -512,6 +512,20 @@ describe('row visual', () => {
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
+  test.skip('row should allow break words when wrapping long text using min-height', async () => {
+    const report = await visualRunner.render(
+      'row-align-wrap-with-overflow-wrap',
+      /* html */ `
+      <section nve-layout="row align:wrap gap:lg" style="width: 150px;">
+        <!-- https://defensivecss.dev/tip/flexbox-min-content-size/ -->
+        <p style="margin: 0; overflow-wrap: break-word; min-width: 0;">•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎•︎</p>
+      </section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
   test('rows with nested rows should match visual baseline', async () => {
     const report = await visualRunner.render(
       'rows-with-nested-rows',
