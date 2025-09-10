@@ -132,7 +132,7 @@
 }
 
 :host(:state(indeterminate)) [input] slot::after {
-  background: var(--nve-sys-interaction-color);
+  background: var(--nve-sys-interaction-color); /* eslint-disable-line elements/no-invalid-css-variable */
   content: '';
   display: inline-block;
   width: calc(var(--width) * 0.5);
