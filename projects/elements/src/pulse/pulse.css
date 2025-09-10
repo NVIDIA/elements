@@ -94,11 +94,11 @@ svg {
   }
 
   50% {
-    opacity: 0.1;
+    opacity: var(--nve-ref-opacity-150);
   }
 
   70% {
-    opacity: 0.09;
+    opacity: var(--nve-ref-opacity-900);
   }
 
   100% {

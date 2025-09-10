@@ -9,7 +9,7 @@
 }
 
 :host([container='flat']) [internal-host] {
-  gap: var(--nve-ref-size-50);
+  gap: var(--nve-ref-space-xxxs);
 }
 
 :host([container='inset']) [internal-host] {

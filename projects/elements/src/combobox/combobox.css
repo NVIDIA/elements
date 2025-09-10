@@ -30,7 +30,7 @@
 .tags {
   width: fit-content;
   display: flex;
-  gap: var(--nve-ref-size-100);
+  gap: var(--nve-ref-space-xxs);
   align-items: center;
 }
 

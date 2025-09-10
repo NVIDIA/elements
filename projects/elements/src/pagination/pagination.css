@@ -13,7 +13,7 @@
 label {
   color: var(--nve-sys-text-muted-color);
   font-size: var(--nve-ref-font-size-100);
-  margin-inline: var(--nve-ref-size-100);
+  margin-inline: var(--nve-ref-space-xxs);
   white-space: nowrap;
 }
 
@@ -55,12 +55,12 @@ label {
 }
 
 nve-input {
-  margin-inline-end: var(--nve-ref-size-200);
+  margin-inline-end: var(--nve-ref-space-xs);
   --width: fit-content;
 }
 
 nve-select {
-  margin-inline-end: var(--nve-ref-size-200);
+  margin-inline-end: var(--nve-ref-space-xs);
   --width: fit-content;
 }
 

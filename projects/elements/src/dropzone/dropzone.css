@@ -41,7 +41,7 @@
 }
 
 .text-emphasized {
-  color: var(--nve-sys-interaction-emphasis-background);
+  color: var(--nve-sys-text-emphasis-color);
 }
 
 .text-center {
