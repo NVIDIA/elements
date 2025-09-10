@@ -358,6 +358,9 @@ importers:
 
   projects/internals/eslint:
     dependencies:
+      '@eslint/css':
+        specifier: 0.11.0
+        version: 0.11.0
       '@eslint/js':
         specifier: 'catalog:'
         version: 9.33.0
@@ -367,6 +370,9 @@ importers:
       '@html-eslint/parser':
         specifier: 0.45.0
         version: 0.45.0
+      '@nvidia-elements/themes':
+        specifier: workspace:*
+        version: link:../../themes
       eslint:
         specifier: '>= 9'
         version: 9.22.0(jiti@2.4.2)
@@ -2418,6 +2424,14 @@ packages:
 
   '@eslint/core@0.15.2':
     resolution: {integrity: sha512-78Md3/Rrxh83gCxoUc0EiciuOHsIITzLy53m3d9UyiW8y9Dj2D29FeETqyKA+BRK76tnTp6RXWb3pCay8Oyomg==, tarball: https://registry.npmjs.org
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/css-tree@3.6.5':
+    resolution: {integrity: sha512-bJgnXu0D0K1BbfPfHTmCaJe2ucBOjeg/tG37H2CSqYCw51VMmBtPfWrH8LKPLAVCOp0h94e1n8PfR3v9iRbtyA==, tarball: https://registry.npmjs.org
+    engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0}
+
+  '@eslint/css@0.11.0':
+    resolution: {integrity: sha512-QQEw1zoOnF6E7+i9cyWpsXdOyy2ebH9hR9O2q+Vvl5mmBwBGBa33BkhKlWHqZiG9ib0AKlw0hGgnxOH0r12l9g==, tarball: https://registry.npmjs.org
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/eslintrc@3.3.0':
@@ -7673,6 +7687,9 @@ packages:
   mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==, tarball: https://registry.npmjs.org
 
+  mdn-data@2.23.0:
+    resolution: {integrity: sha512-786vq1+4079JSeu2XdcDjrhi/Ry7BWtjDl9WtGPWLiIHb2T66GvIVflZTBoSNZ5JqTtJGYEVMuFA/lbQlMOyDQ==, tarball: https://registry.npmjs.org
+
   mdurl@2.0.0:
     resolution: {integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==, tarball: https://registry.npmjs.org
 
@@ -11430,6 +11447,17 @@ snapshots:
   '@eslint/core@0.15.2':
     dependencies:
       '@types/json-schema': 7.0.15
+
+  '@eslint/css-tree@3.6.5':
+    dependencies:
+      mdn-data: 2.23.0
+      source-map-js: 1.2.1
+
+  '@eslint/css@0.11.0':
+    dependencies:
+      '@eslint/core': 0.15.2
+      '@eslint/css-tree': 3.6.5
+      '@eslint/plugin-kit': 0.3.5
 
   '@eslint/eslintrc@3.3.0':
     dependencies:
@@ -17354,6 +17382,8 @@ snapshots:
   mdn-data@2.0.28: {}
 
   mdn-data@2.0.30: {}
+
+  mdn-data@2.23.0: {}
 
   mdurl@2.0.0: {}
 
