@@ -19,7 +19,7 @@
 :host([disabled]) {
   nve-monaco-diff-editor,
   nve-monaco-editor {
-    opacity: 0.5;
+    opacity: var(--nve-ref-opacity-500);
     pointer-events: none;
     user-select: none;
   }
