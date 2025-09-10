@@ -30,6 +30,7 @@ function App() {
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/mpa/">MPA</a></NveMenuItem>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/react/">React</a></NveMenuItem>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/solidjs/">SolidJS</a></NveMenuItem>
+            <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/svelte/">Svelte</a></NveMenuItem>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/typescript/">TypeScript</a></NveMenuItem>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/vue/">Vue</a></NveMenuItem>
             <NveDivider></NveDivider>

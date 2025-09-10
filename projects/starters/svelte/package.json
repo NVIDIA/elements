@@ -1,0 +1,72 @@
+{
+  "name": "svelte",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wireit",
+    "build": "wireit",
+    "preview": "wireit",
+    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
+  },
+  "dependencies": {
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "6.2.0",
+    "@tsconfig/svelte": "5.0.5",
+    "svelte": "5.38.8",
+    "svelte-check": "4.3.1",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "dev": {
+      "command": "vite",
+      "dependencies": [
+        "../../elements:build"
+      ]
+    },
+    "build": {
+      "command": "vite build",
+      "files": [
+        "../../elements/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
+        "src/**",
+        "package.json"
+      ],
+      "output": [
+        ".next/**"
+      ],
+      "dependencies": [
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
+      ]
+    },
+    "preview": {
+      "command": "vite preview",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    }
+  }
+}

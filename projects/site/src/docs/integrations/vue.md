@@ -16,7 +16,7 @@
 Once installation is complete Elements can be imported and used within [Vue](https://vuejs.org/) SFC files.
 
 ```typescript
-import '@nvidia-elements/core/alert-group/define.js';
+import '@nvidia-elements/core/alert/define.js';
 ```
 
 Once added, properties and events can be used via the standard Vue template syntax.

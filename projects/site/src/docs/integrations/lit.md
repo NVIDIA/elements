@@ -14,7 +14,7 @@
 ## Integration
 
 ```typescript
-import '@nvidia-elements/core/alert-group/define.js';
+import '@nvidia-elements/core/alert/define.js';
 ```
 
 Once added, properties and events can be used via the standard lit template syntax.
