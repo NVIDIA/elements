@@ -8,7 +8,7 @@
 nve-codeblock {
   --padding: var(--nve-ref-space-lg);
   --border-radius: 0;
-  font-size: 14px;
+  font-size: var(--nve-ref-font-size-200);
 }
 
 nve-toolbar {
@@ -33,7 +33,7 @@ slot:not([name]) {
 
 slot[name='suffix'] {
   display: block;
-  gap: 8px;
+  gap: var(--nve-ref-space-xs);
   display: flex;
 }
 
