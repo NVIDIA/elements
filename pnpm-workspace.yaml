@@ -21,6 +21,7 @@ packages:
   - 'projects/labs/cli'
   - 'projects/labs/code'
   - 'projects/labs/forms'
+  - 'projects/labs/lint'
   - 'projects/labs/markdown'
   - 'projects/labs/playwright-screencast'
   - 'projects/labs/snippets'

@@ -1,0 +1,159 @@
+{
+  "name": "@nvidia-elements/lint",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "https://NVIDIA.github.io/elements/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git"
+  },
+  "type": "module",
+  "files": [
+    "README.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./eslint/index.js": {
+      "types": "./dist/eslint/index.d.ts",
+      "default": "./dist/eslint/index.js"
+    }
+  },
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit",
+    "build:watch": "wireit",
+    "lint": "wireit",
+    "test": "wireit",
+    "test:coverage": "wireit",
+    "test:watch": "wireit"
+  },
+  "peerDependencies": {},
+  "dependencies": {},
+  "devDependencies": {
+    "@nve-internals/eslint": "workspace:*",
+    "@nve-internals/vite": "workspace:*",
+    "@vitest/coverage-istanbul": "catalog:",
+    "eslint": "catalog:",
+    "publint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  },
+  "wireit": {
+    "dev": {
+      "command": "NODE_ENV=development vite build --watch",
+      "service": true
+    },
+    "ci": {
+      "dependencies": [
+        "build",
+        "lint",
+        "publint",
+        "test:coverage"
+      ]
+    },
+    "publint": {
+      "command": "publint",
+      "dependencies": [
+        "build"
+      ],
+      "files": [
+        "package.json"
+      ],
+      "output": []
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build",
+      "files": [
+        "src/**",
+        "!src/**/*.stories.ts",
+        "!src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**",
+        "!dist/data.snippets.json"
+      ],
+      "dependencies": [
+        "../../elements:build",
+        "../../internals/vite:ci"
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "test": {
+      "command": "playwright-lock 'vitest run'",
+      "files": [
+        "src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
+        "tsconfig.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "build",
+        "../../elements:test",
+        "../../testing:ci"
+      ]
+    },
+    "test:coverage": {
+      "command": "playwright-lock 'vitest run --coverage'",
+      "files": [
+        "src/**/*.test.ts",
+        "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.ssr.ts",
+        "tsconfig.json",
+        "vite.config.ts",
+        "vitest.config.ts"
+      ],
+      "output": [
+        "coverage/unit/**"
+      ],
+      "dependencies": [
+        "build",
+        "../../testing:ci"
+      ]
+    },
+    "test:watch": {
+      "command": "vitest --watch",
+      "service": true
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../internals/eslint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix"
+    }
+  }
+}
