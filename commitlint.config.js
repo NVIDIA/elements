@@ -32,6 +32,7 @@ export default {
         'labs-cli',
         'labs-code',
         'labs-forms',
+        'labs-lint',
         'labs-markdown',
         'labs-playwright-screencast',
         'labs-snippets',
