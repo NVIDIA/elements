@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.1.1...@nvidia-elements/monaco-v1.2.0) (2025-09-11)
+
+
+### Features
+
+* **monaco:** add nve-monaco-problems ([1d9846c](https://github.com/NVIDIA/elements/commit/1d9846c0f9eb754c0b48830e11b270fb98edf21d))
+
 ## [@nvidia-elements/monaco-v1.1.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.1.0...@nvidia-elements/monaco-v1.1.1) (2025-07-10)
 
 
