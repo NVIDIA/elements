@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.12.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.0...@nvidia-elements/styles-v1.12.1) (2025-09-11)
+
+
+### Bug Fixes
+
+* **styles:** prevent flex item height collapse ([18d4026](https://github.com/NVIDIA/elements/commit/18d4026f9ad20fb9849a1767659582b77990d936))
+
 ## [@nvidia-elements/styles-v1.12.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.11.0...@nvidia-elements/styles-v1.12.0) (2025-08-18)
 
 
