@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/monaco",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Monaco Editor Web Component",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
