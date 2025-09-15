@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.7...@nvidia-elements/core-v1.39.8) (2025-09-15)
+
+
+### Bug Fixes
+
+* **elements:** css token corrections ([68a0e34](https://github.com/NVIDIA/elements/commit/68a0e34314c89c21fc92f389dbf12cfb6200a913))
+
 ## [@nvidia-elements/core-v1.39.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.6...@nvidia-elements/core-v1.39.7) (2025-09-05)
 
 
