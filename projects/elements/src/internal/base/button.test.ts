@@ -305,3 +305,22 @@ describe('base button', () => {
     // expect(event.submitter).toBe(button); // https://github.com/WICG/webcomponents/issues/814
   });
 });
+
+describe('dynamic form reference', () => {
+  it('should gracefully fall back to null if created and referencing a form not yet created', async () => {
+    const button = document.createElement('base-button-test-element') as BaseButtonTestElement;
+    button.setAttribute('form', 'test-form');
+    expect(button.form).toBe(null);
+
+    const form = document.createElement('form');
+    form.id = 'test-form';
+    document.body.appendChild(form);
+    expect(button.form).toBe(null); // form is not available until form and button are attached to the DOM
+
+    document.body.appendChild(button);
+    expect(button.form).toBe(form); // form is now available after button and form are attached to the DOM
+
+    document.body.removeChild(form);
+    document.body.removeChild(button);
+  });
+});

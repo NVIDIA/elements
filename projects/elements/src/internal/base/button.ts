@@ -78,7 +78,8 @@ export class BaseButton extends LitElement {
     if (this.#form && typeof this.#form !== 'string') {
       return this.#form;
     } else if (typeof this.#form === 'string' && !isServer) {
-      return (this.getRootNode() as Document | ShadowRoot).getElementById(this.#form) as HTMLFormElement;
+      const rootNode = this.getRootNode() as Document | ShadowRoot;
+      return rootNode.getElementById ? (rootNode.getElementById(this.#form) as HTMLFormElement) : null;
     } else {
       return this._internals?.form;
     }
