@@ -13,7 +13,7 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
   # install common dependencies
   apt-get install -y git-lfs yq && \
   # https://github.com/nodejs/corepack/issues/612
-  npm install -g corepack@0.32.0 && \
+  npm install -g corepack@0.34.0 && \
   # install pnpm from our package.json `packageManager` definition
   corepack enable && \
   corepack prepare --activate && \
