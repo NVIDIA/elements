@@ -439,7 +439,7 @@ export function render() {
               Stay in the
               <span class="amber-orange-gradient gradient-txt">Loop.</span>
             </div>
-            <div nve-layout="column &md|row gap:lg">
+            <div nve-layout="column &md|row gap:lg align:stretch">
               <div class="contact gradient-card" nve-layout="column gap:lg pad:lg align:space-between">
                 <div nve-layout="row gap:md align:vertical-center">
                   <div>
