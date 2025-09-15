@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.2.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.0...@nvidia-elements/monaco-v1.2.1) (2025-09-15)
+
+
+### Bug Fixes
+
+* **monaco:** css token corrections ([cae2ba7](https://github.com/NVIDIA/elements/commit/cae2ba7e632eda9c8debf6f0f8f369b60c13c893))
+
 ## [@nvidia-elements/monaco-v1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.1.1...@nvidia-elements/monaco-v1.2.0) (2025-09-11)
 
 
