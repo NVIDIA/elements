@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.2.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.5...@nvidia-elements/code-v0.2.6) (2025-09-15)
+
+
+### Bug Fixes
+
+* **labs-code:** eslint css ([db0deca](https://github.com/NVIDIA/elements/commit/db0decaf76e26195cc2b87ec1d554bbba8b3a9aa))
+
 ## [@nvidia-elements/code-v0.2.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.4...@nvidia-elements/code-v0.2.5) (2025-04-11)
 
 
