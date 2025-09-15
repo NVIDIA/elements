@@ -138,23 +138,7 @@ main {
   padding-bottom: var(--nve-ref-space-xl);
 
   #doc-content {
-    max-width: 1260px;
     width: 100%;
-  }
-}
-
-@media (min-width: 1440px) {
-  main #doc-content {
-    max-width: 960px;
-  }
-}
-
-@media (min-width: 1920px) {
-  main {
-    padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl);
-  }
-
-  main #doc-content {
     max-width: 1260px;
   }
 }
@@ -178,13 +162,19 @@ main:has([docs-full-width]) {
 }
 
 /* Right Side Anchor Generator Styles */
-#anchor-generator {
+main #doc-content + #anchor-generator {
   list-style: none !important;
+  position: fixed;
+  top: calc(anchor(--page-anchor top) + 125px);
+  left: calc(anchor(--doc-content-anchor right) + 40px);
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  display: none;
+  width: 260px;
 
   a {
     text-wrap: nowrap !important;
     min-width: 150px;
-    max-width: 220px;
     min-height: 14px;
     display: block;
   }
@@ -194,22 +184,58 @@ main:has([docs-full-width]) {
   }
 }
 
-#doc-content + #anchor-generator {
-  position: fixed;
-  top: calc(anchor(--page-anchor top) + 125px);
-  left: calc(anchor(--doc-content-anchor right) + 40px);
-  max-height: calc(100vh - 200px);
-  overflow-y: auto;
-  z-index: 10;
-  display: none;
-}
-
+/* Adjusts layout and anchor generator display for large screens (min-width: 1440px and 1700px), 
+depending on the presence and visibility of the anchor generator and system options panel. */
 @media (min-width: 1440px) {
   main:has(#anchor-generator) #doc-content {
-    margin-right: 200px;
+    max-width: 900px;
   }
 
-  #doc-content + #anchor-generator {
+  main:has(#anchor-generator):has(+ #system-options-panel[hidden]) #doc-content {
+    margin-right: 240px;
+  }
+
+  main:has(+ #system-options-panel[hidden]) #doc-content + #anchor-generator {
     display: block;
+  }
+
+  main #doc-content + #anchor-generator {
+    width: 240px;
+  }
+}
+
+@media (min-width: 1500px) {
+  main:has(#anchor-generator) #doc-content {
+    max-width: 1000px;
+  }
+}
+
+@media (min-width: 1700px) {
+  main {
+    padding: calc(var(--nve-ref-space-xl) * 2) var(--nve-ref-space-xl);
+  }
+
+  /* When system options panel is hidden, use full width with margin for anchor generator */
+  main:has(#anchor-generator):has(+ #system-options-panel[hidden]) #doc-content {
+    max-width: 1260px;
+    margin-right: 300px;
+  }
+
+  /* When system options panel is visible, scale down content to make room */
+  main:has(#anchor-generator):has(+ #system-options-panel:not([hidden])) #doc-content {
+    max-width: 960px;
+    margin-right: 300px;
+  }
+
+  main #doc-content + #anchor-generator {
+    display: block;
+    width: 260px;
+  }
+}
+
+@media (min-width: 2000px) {
+  /* When system options panel is hidden, use full width with margin for anchor generator */
+  main #doc-content {
+    max-width: 1260px !important;
   }
 }
