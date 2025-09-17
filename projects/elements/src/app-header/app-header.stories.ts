@@ -13,7 +13,7 @@ export default {
   component: 'nve-app-header',
 };
 
-/* eslint-disable elements/deprecated-tags */
+/* eslint-disable @nvidia-elements/lint/no-deprecated-tags */
 
 export const Default = {
   render: () => {

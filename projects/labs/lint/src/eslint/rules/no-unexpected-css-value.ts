@@ -2,8 +2,11 @@ import theme from '@nvidia-elements/themes/index.json' with { type: 'json' };
 
 const spaceTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-space'))
-  .map(([key, value]) => [key, parseInt(value.replace('nve-ref-scale-space * ', '').replace('px', ''))])
-  .map(([id, value]) => ({
+  .map(([key, value]: [string, string]) => [
+    key,
+    parseInt(value.replace('nve-ref-scale-space * ', '').replace('px', ''))
+  ])
+  .map(([id, value]: [string, number]) => ({
     id,
     value,
     name: `var(--${id})`
@@ -14,8 +17,11 @@ const minSpaceToken = spaceTokens.sort((a, b) => a.value - b.value)[0]; // 1
 
 const sizeTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-size'))
-  .map(([key, value]) => [key, parseInt(value.replace('nve-ref-scale-size * ', '').replace('px', ''))])
-  .map(([id, value]) => ({
+  .map(([key, value]: [string, string]) => [
+    key,
+    parseInt(value.replace('nve-ref-scale-size * ', '').replace('px', ''))
+  ])
+  .map(([id, value]: [string, number]) => ({
     id,
     value,
     name: `var(--${id})`
@@ -26,7 +32,7 @@ const minSizeToken = sizeTokens.sort((a, b) => a.value - b.value)[0]; // 1
 
 const fontSizeTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-font-size'))
-  .map(([id, value]) => ({
+  .map(([id, value]: [string, string]) => ({
     id,
     value: parseInt(value.replace('nve-ref-scale-text * ', '').replace('px', '')),
     name: `var(--${id})`
@@ -37,15 +43,15 @@ const minFontSizeToken = fontSizeTokens.sort((a, b) => a.value - b.value)[1]; //
 
 const fontWeightTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-font-weight'))
-  .map(([id, value]) => ({
+  .map(([id, value]: [string, string]) => ({
     id,
     value,
     name: `var(--${id})`
   }));
 
 const borderRadiusTokens = Object.entries(theme)
-  .filter(([key, value]) => key.includes('nve-ref-border-radius') && !value.includes('999'))
-  .map(([id, value]) => ({
+  .filter(([key, value]: [string, string]) => key.includes('nve-ref-border-radius') && !value.includes('999'))
+  .map(([id, value]: [string, string]) => ({
     id,
     value: parseInt(value.replace('nve-ref-scale-border-radius * ', '').replace('px', '')),
     name: `var(--${id})`
@@ -56,8 +62,11 @@ const minBorderRadiusToken = borderRadiusTokens.sort((a, b) => a.value - b.value
 
 const borderWidthTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-border-width'))
-  .map(([key, value]) => [key, parseInt(value.replace('nve-ref-scale-border-width * ', '').replace('px', ''))])
-  .map(([id, value]) => ({
+  .map(([key, value]: [string, string]) => [
+    key,
+    parseInt(value.replace('nve-ref-scale-border-width * ', '').replace('px', ''))
+  ])
+  .map(([id, value]: [string, number]) => ({
     id,
     value,
     name: `var(--${id})`
@@ -66,21 +75,20 @@ const borderWidthTokens = Object.entries(theme)
 const maxBorderWidthToken = borderWidthTokens.sort((a, b) => b.value - a.value)[0]; // 4
 const minBorderWidthToken = borderWidthTokens.sort((a, b) => a.value - b.value)[0]; // 1
 
-export default {
+const rule = {
   meta: {
-    type: 'problem',
+    type: 'problem' as const,
     docs: {
-      description: 'Do not allow use of invalid CSS theme variables.',
+      description: 'Do not allow use of invalid CSS values.',
       category: 'Best Practice',
       recommended: true,
       url: ''
     },
-    fixable: 'code',
+    fixable: 'code' as const,
     schema: [],
     messages: {
       ['unexpected-css-value']:
-        'Unexpected use of {{value}}{{unit}} value for CSS {{property}}. Use {{alternate}} option instead.',
-      ['unexpected-css-var']: 'Unexpected use of {{value}} for CSS {{property}}. Use {{alternate}} option instead.'
+        'Unexpected use of {{value}}{{unit}} value for CSS {{property}}. Use {{alternate}} option instead.'
     }
   },
   create(context) {
@@ -211,8 +219,8 @@ export default {
               messageId: 'unexpected-css-value',
               node,
               data: {
-                value: child.value,
-                unit: child.unit,
+                value: child.value ?? '',
+                unit: child.unit ?? '',
                 property: node.property,
                 alternate: 'var(--nve-ref-opacity-*)'
               }
@@ -303,95 +311,10 @@ export default {
               messageId: 'unexpected-css-value',
               node,
               data: {
-                unit: child.type === 'Hash' ? 'hex' : child.name,
+                value: child.type === 'Hash' ? `#${child.value}` : child.name,
+                unit: child.type === 'Hash' ? '' : child.name,
                 property: node.property,
                 alternate: `var(--nve-*-${node.property})`
-              }
-            });
-          }
-        }
-
-        // unexpected-css-var size
-        if (node.property.includes('margin') || node.property.includes('gap')) {
-          const child = node.value.children
-            ?.filter(child => child.name === 'var')
-            ?.flatMap(child => child.children)
-            ?.find(child => child.name.match(/^--nve-ref-size-/));
-
-          if (child) {
-            const sizeToken = sizeTokens.find(token => token.name.includes(child.name));
-            const alternate = spaceTokens.find(spaceToken => spaceToken.value === sizeToken.value)?.name;
-            context.report({
-              messageId: 'unexpected-css-var',
-              node,
-              data: {
-                value: child.name,
-                property: node.property,
-                alternate: alternate ?? 'var(--nve-ref-space-*)'
-              },
-              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
-            });
-          }
-        }
-
-        // unexpected-css-var space
-        if (node.property === 'width' || node.property === 'height') {
-          const child = node.value.children
-            ?.filter(child => child.name === 'var')
-            ?.flatMap(child => child.children)
-            ?.find(child => child.name?.match(/^--nve-ref-space-/));
-
-          if (child) {
-            const spaceToken = spaceTokens.find(token => token.name.includes(child.name));
-            const alternate = sizeTokens.find(sizeToken => sizeToken.value === spaceToken.value)?.name;
-            context.report({
-              messageId: 'unexpected-css-var',
-              node,
-              data: {
-                value: child.name,
-                property: node.property,
-                alternate: alternate ?? 'var(--nve-ref-size-*)'
-              },
-              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
-            });
-          }
-        }
-
-        // unexpected-css-var color
-        if (node.property === 'background') {
-          const value = node.value.children
-            ?.filter(child => child.name === 'var')
-            ?.flatMap(child => child.children)
-            ?.find(child => child.name?.match(/^--nve-.*-color$/))?.name;
-
-          if (value) {
-            context.report({
-              messageId: 'unexpected-css-var',
-              node,
-              data: {
-                value,
-                property: node.property,
-                alternate: 'var(--nve-*-background)'
-              }
-            });
-          }
-        }
-
-        // unexpected-css-var background
-        if (node.property === 'color') {
-          const value = node.value.children
-            ?.filter(child => child.name === 'var')
-            ?.flatMap(child => child.children)
-            ?.find(child => child.name.match(/^--nve-.*-background$/))?.name;
-
-          if (value) {
-            context.report({
-              messageId: 'unexpected-css-var',
-              node,
-              data: {
-                value,
-                property: node.property,
-                alternate: 'var(--nve-*-color)'
               }
             });
           }
@@ -399,4 +322,6 @@ export default {
       }
     };
   }
-};
+} as const;
+
+export default rule;

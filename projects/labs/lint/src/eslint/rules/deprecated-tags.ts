@@ -1,24 +1,22 @@
+// import type { JSRuleDefinition } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 
 const DEPRECATED_TAGS = new Set(['nve-app-header', 'nve-alert-banner', 'nve-json-view']);
 
-export default {
+const rule = {
   meta: {
-    type: 'code',
+    type: 'problem' as const,
     docs: {
       description: 'Disallow use of deprecated elements in HTML.',
       category: 'Best Practice',
       recommended: true,
       url: ''
     },
-
-    fixable: null,
     schema: [],
     messages: {
       ['unexpected']: 'Unexpected use of deprecated tag <{{tag}}>'
     }
   },
-
   create(context) {
     return createVisitors(context, {
       Tag(node) {
@@ -34,4 +32,6 @@ export default {
       }
     });
   }
-};
+} as const;
+
+export default rule;
