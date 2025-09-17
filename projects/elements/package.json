@@ -915,10 +915,11 @@
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
-    "@nvidia-elements/styles": "workspace:^",
     "@lit-labs/virtualizer": "catalog:",
+    "@nvidia-elements/styles": "workspace:^",
     "@nve-internals/eslint": "workspace:*",
     "@nve-internals/vite": "workspace:*",
+    "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/snippets": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@typescript/lib-dom": "npm:@types/web@0.0.169",
@@ -1203,7 +1204,8 @@
       ],
       "output": [],
       "dependencies": [
-        "../internals/eslint:ci"
+        "../internals/eslint:ci",
+        "../labs/lint:build"
       ]
     },
     "lint:fix": {

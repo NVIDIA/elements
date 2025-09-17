@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "skipLibCheck": true,
-    "module": "es2022",
+    "module": "esnext",
     "target": "es2022",
     "lib": ["es2022"],
     "typeRoots": ["./node_modules/@types"],
