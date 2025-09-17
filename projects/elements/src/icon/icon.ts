@@ -106,7 +106,7 @@ export class Icon extends LitElement {
       globalThis.customElements.whenDefined(Icon.metadata.tag).then(() => {
         Object.keys(aliases).forEach(alias => {
           Icon._iconsRegistry[alias] = Icon._iconsRegistry[aliases[alias]];
-          globalThis.document.dispatchEvent(new CustomEvent(`${Icon.metadata.tag}-${alias}`));
+          globalThis?.document?.dispatchEvent(new CustomEvent(`${Icon.metadata.tag}-${alias}`));
         });
       });
     }
