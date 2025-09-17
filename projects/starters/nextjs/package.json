@@ -12,13 +12,13 @@
     "lint": "wireit"
   },
   "dependencies": {
-    "@lit-labs/nextjs": "0.2.3",
+    "@lit-labs/nextjs": "0.2.4",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "next": "15.3.4"
+    "next": "15.5.3"
   },
   "devDependencies": {
     "typescript": "catalog:",

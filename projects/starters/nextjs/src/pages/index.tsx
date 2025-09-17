@@ -1,5 +1,6 @@
 import React from 'react';
 import '@nvidia-elements/core/icon/server.js';
+import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/page-header/define.js';
 import '@nvidia-elements/core/divider/define.js';
