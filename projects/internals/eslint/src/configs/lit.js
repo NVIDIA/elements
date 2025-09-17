@@ -3,7 +3,7 @@ import tseslint from 'typescript-eslint';
 import lit from 'eslint-plugin-lit';
 import litA11y from 'eslint-plugin-lit-a11y';
 import wc from 'eslint-plugin-wc';
-import eslintHTML from '@html-eslint/eslint-plugin';
+import html from '@html-eslint/eslint-plugin';
 import reservedPropertyNames from '../local/reserved-property-names.js';
 import primitiveProperty from '../local/primitive-property.js';
 import reservedEventNames from '../local/reserved-event-names.js';
@@ -39,7 +39,7 @@ export const litConfig = [
       wc: wc,
       'lit-a11y': litA11y,
       lit,
-      '@html-eslint': eslintHTML,
+      html,
       local: {
         rules: {
           'reserved-property-names': reservedPropertyNames,
@@ -89,14 +89,14 @@ export const litConfig = [
       'lit/no-complex-attribute-binding': ['off'], // rule is not working when type is being resolved from a generic type parameter
       'lit-a11y/anchor-has-content': ['off'], // rule does not check for aria-label
       'lit-a11y/click-events-have-key-events': ['off'], // a11y may be handled by @keyNavigationList controller
-      ...eslintHTML.configs.recommended.rules,
-      '@html-eslint/no-extra-spacing-text': ['off'], // todo: run lint:fix
-      '@html-eslint/indent': ['off', 2], // todo: run lint:fix
-      '@html-eslint/use-baseline': ['off'], // disabled we use chrome specific APIs with fallbacks
-      '@html-eslint/attrs-newline': ['off'], // disabled interferes with example templates
-      '@html-eslint/element-newline': ['off'], // disabled interferes with example templates
-      '@html-eslint/require-closing-tags': ['off'], // disabled interferes with example templates
-      '@html-eslint/no-extra-spacing-attrs': ['off'] // disabled interferes with example templates
+      ...html.configs.recommended.rules,
+      'html/no-extra-spacing-text': ['off'], // todo: run lint:fix
+      'html/indent': ['off', 2], // todo: run lint:fix
+      'html/use-baseline': ['off'], // disabled we use chrome specific APIs with fallbacks
+      'html/attrs-newline': ['off'], // disabled interferes with example templates
+      'html/element-newline': ['off'], // disabled interferes with example templates
+      'html/require-closing-tags': ['off'], // disabled interferes with example templates
+      'html/no-extra-spacing-attrs': ['off'] // disabled interferes with example templates
     }
   },
   // library implementation files

@@ -1,7 +1,7 @@
 import { expect, test, describe } from 'vitest';
 import { lighthouseRunner } from '@internals/vite';
 
-/* eslint-disable elements/deprecated-tags */
+/* eslint-disable @nvidia-elements/lint/no-deprecated-tags */
 
 describe('app-header lighthouse report', () => {
   test('app-header should meet lighthouse benchmarks', async () => {

@@ -18,5 +18,5 @@
 
 :host::backdrop {
   /* not available on top layer */
-  background: hsla(0, 0%, 0%, 0.5); /* eslint-disable-line elements/no-invalid-css-variable */
+  background: hsla(0, 0%, 0%, 0.5); /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
 }

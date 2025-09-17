@@ -78,6 +78,7 @@
     "@nvidia-elements/testing": "workspace:*",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
+    "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/snippets": "workspace:*",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
@@ -215,7 +216,8 @@
       ],
       "output": [],
       "dependencies": [
-        "../../internals/eslint:ci"
+        "../../internals/eslint:ci",
+        "../lint:build"
       ]
     },
     "lint:fix": {

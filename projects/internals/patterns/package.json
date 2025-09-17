@@ -60,6 +60,7 @@
     "@nvidia-elements/themes": "workspace:*",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
+    "@nvidia-elements/lint": "workspace:*",
     "eslint": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",
@@ -131,7 +132,8 @@
       ],
       "output": [],
       "dependencies": [
-        "../eslint:ci"
+        "../eslint:ci",
+        "../../labs/lint:build"
       ]
     },
     "lint:fix": {

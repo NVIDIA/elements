@@ -1,7 +1,13 @@
-import eslintHTML from '@html-eslint/eslint-plugin';
+import html from '@html-eslint/eslint-plugin';
 import htmlParser from '@html-eslint/parser';
 
-const source = ['src/**/*.html', 'src/**/*.11ty.js'];
+const source = [
+  'src/**/*.html',
+  'src/**/*.11ty.js',
+  'src/**/*.examples.ts',
+  'src/**/*.stories.ts',
+  'src/**/*.stories.tsx'
+];
 const ignores = [
   'node_modules/',
   'coverage/',
@@ -26,18 +32,19 @@ export const htmlConfig = [
     files: [...source],
     ignores,
     plugins: {
-      '@html-eslint': eslintHTML
+      html
     },
     rules: {
-      ...eslintHTML.configs.recommended.rules,
-      '@html-eslint/require-doctype': 'off', // not accurate for templates
-      '@html-eslint/require-title': 'off',
-      '@html-eslint/no-extra-spacing-text': 'error',
-      '@html-eslint/quotes': 'off', // prettier
-      '@html-eslint/no-extra-spacing-attrs': 'off', // prettier
-      '@html-eslint/indent': 'off', // prettier
-      '@html-eslint/require-closing-tags': 'off', // prettier
-      '@html-eslint/attrs-newline': [
+      ...html.configs.recommended.rules,
+      'html/require-doctype': 'off', // not accurate for templates
+      'html/require-title': 'off',
+      'html/no-extra-spacing-text': 'error',
+      'html/quotes': 'off', // prettier
+      'html/no-extra-spacing-attrs': 'off', // prettier
+      'html/indent': 'off', // prettier
+      'html/require-closing-tags': 'off', // prettier
+      'html/element-newline': 'off', // prettier
+      'html/attrs-newline': [
         'error',
         {
           closeStyle: 'sameline',
