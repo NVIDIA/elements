@@ -296,6 +296,10 @@ export const renderDocsNav = data => /* html */ `
   <!-- <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'expanded' : ''}>
     <a href="docs/cli/">CLI</a>
     <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'highlighted' : ''}><a href="docs/cli/">Getting Started</a></nve-tree-node>
+  </nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'expanded' : ''}>
+    <a href="docs/mcp/">MCP</a>
+    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'highlighted' : ''}><a href="docs/mcp/">Getting Started</a></nve-tree-node>
   </nve-tree-node> -->
 
   <!-- <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'expanded' : ''}>

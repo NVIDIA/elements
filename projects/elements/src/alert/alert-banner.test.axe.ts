@@ -5,7 +5,7 @@ import { runAxe } from '@nvidia-elements/testing/axe';
 import { AlertBanner } from '@nvidia-elements/core/alert';
 import '@nvidia-elements/core/alert/define.js';
 
-/* eslint-disable elements/deprecated-tags */
+/* eslint-disable @nvidia-elements/lint/no-deprecated-tags */
 
 describe(AlertBanner.metadata.tag, () => {
   let fixture: HTMLElement;

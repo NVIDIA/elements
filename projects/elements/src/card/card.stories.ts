@@ -227,7 +227,7 @@ export const DarkTheme = {
  * @description Examples of invalid card usage patterns for testing and documentation purposes, showing what not to do when implementing cards.
  */
 export const Audit = {
-  /* eslint-disable @html-eslint/no-restricted-attrs */
+  /* eslint-disable @nvidia-elements/lint/no-restricted-attrs */
   render: () => html`
   <!-- invalid padding usage -->
   <nve-card nve-layout="pad:md"></nve-card>
