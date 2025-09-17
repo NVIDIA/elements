@@ -5,8 +5,8 @@ import Color from 'colorjs.io';
 
 // Tokens
 
-import lightTokens from '@nvidia-elements/themes/index.json' assert { type: 'json' };
-import darkTokens from '@nvidia-elements/themes/dark.json' assert { type: 'json' };
+import lightTokens from '@nvidia-elements/themes/index.json' with { type: 'json' };
+import darkTokens from '@nvidia-elements/themes/dark.json' with { type: 'json' };
 
 // Paths
 

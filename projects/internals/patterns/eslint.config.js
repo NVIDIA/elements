@@ -1,18 +1,11 @@
-import {
-  browserJavaScriptConfig,
-  browserTypescriptConfig,
-  libraryConfig,
-  litConfig,
-  elementsConfig
-} from '@nve-internals/eslint';
-
-litConfig[0].rules['@html-eslint/no-restricted-attrs'] = ['off']; // todo: enable
+import { elementsRecommended } from '@nvidia-elements/lint/eslint';
+import { browserJavaScriptConfig, browserTypescriptConfig, libraryConfig, litConfig } from '@nve-internals/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
+  ...elementsRecommended,
   ...browserJavaScriptConfig,
   ...browserTypescriptConfig,
   ...libraryConfig,
-  ...litConfig,
-  ...elementsConfig
+  ...litConfig
 ];

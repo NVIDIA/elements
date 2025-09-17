@@ -156,7 +156,8 @@
       ],
       "output": [],
       "dependencies": [
-        "../internals/eslint:ci"
+        "../internals/eslint:ci",
+        "../labs/lint:build"
       ]
     },
     "lint:fix": {
@@ -196,6 +197,7 @@
     "@nve-internals/vite": "workspace:*",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/forms": "workspace:*",
+    "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/markdown": "workspace:*",
     "@nvidia-elements/playwright-screencast": "workspace:*",
     "@nvidia-elements/core": "workspace:*",

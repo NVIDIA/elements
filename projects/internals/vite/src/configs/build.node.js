@@ -52,7 +52,8 @@ export const libraryNodeBuildConfig = {
           format: 'esm',
           preserveModules: true,
           assetFileNames: '[name].[ext]',
-          entryFileNames: '[name].js'
+          entryFileNames: '[name].js',
+          importAttributesKey: 'with'
         }
       ]
     }

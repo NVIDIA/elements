@@ -12,7 +12,7 @@ export function render() {
   <head>
     ${BASE_HEAD}
     <!-- IS_MR_PREVIEW: ${IS_MR_PREVIEW}, IS_DEV_MODE: ${IS_DEV_MODE} -->
-    <!-- eslint-disable @html-eslint/use-baseline -->
+    <!-- eslint-disable html/use-baseline -->
     <link
       rel="preload"
       href="https://cdn-prod.nvidia.com/assets/elements/hero/nv-wave-avif.avif"
@@ -23,7 +23,7 @@ export function render() {
       href="https://cdn-prod.nvidia.com/assets/elements/hero/voxels-avif.avif"
       fetchpriority="high"
       as="image" />
-    <!-- eslint-enable @html-eslint/use-baseline -->
+    <!-- eslint-enable html/use-baseline -->
     <style>${styles}</style>
     <script type="module">
       import './index.ts';
@@ -51,7 +51,7 @@ export function render() {
       <main>
         <!-- Hero Section -->
         <section id="hero">
-          <!-- eslint-disable @html-eslint/require-img-alt -->
+          <!-- eslint-disable html/require-img-alt -->
           <img
             class="background"
             src="https://cdn-prod.nvidia.com/assets/elements/hero/nv-wave-avif.avif"

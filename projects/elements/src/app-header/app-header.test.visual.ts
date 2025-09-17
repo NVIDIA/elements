@@ -1,7 +1,7 @@
 import { expect, test, describe } from 'vitest';
 import { visualRunner } from '@nve-internals/vite';
 
-/* eslint-disable elements/deprecated-tags */
+/* eslint-disable @nvidia-elements/lint/no-deprecated-tags */
 
 describe('app-header visual', () => {
   test('app-header should match visual baseline', async () => {

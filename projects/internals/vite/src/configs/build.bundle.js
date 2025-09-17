@@ -29,7 +29,8 @@ export const libraryBundleConfig = {
         assetFileNames: `index.[ext]`,
         entryFileNames: `index.js`,
         inlineDynamicImports: false,
-        chunkFileNames: info => `${info.name ? info.name : 'index'}.js`
+        chunkFileNames: info => `${info.name ? info.name : 'index'}.js`,
+        importAttributesKey: 'with'
       },
       plugins: [
         minifyHTML(),
