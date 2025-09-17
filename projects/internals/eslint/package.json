@@ -9,9 +9,9 @@
     "ci": "wireit"
   },
   "dependencies": {
-    "@html-eslint/eslint-plugin": "0.45.0",
-    "@html-eslint/parser": "0.45.0",
-    "@eslint/css": "0.11.0",
+    "@html-eslint/eslint-plugin": "catalog:",
+    "@html-eslint/parser": "catalog:",
+    "@eslint/css": "catalog:",
     "@eslint/js": "catalog:",
     "@nvidia-elements/themes": "workspace:*",
     "eslint-plugin-import": "2.32.0",
@@ -19,7 +19,7 @@
     "eslint-plugin-lit-a11y": "5.1.1",
     "eslint-plugin-wc": "3.0.1",
     "globals": "16.3.0",
-    "typescript-eslint": "8.40.0"
+    "typescript-eslint": "catalog:"
   },
   "peerDependencies": {
     "eslint": ">= 9"

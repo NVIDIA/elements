@@ -14,7 +14,7 @@ export default {
   title: 'Patterns/Examples'
 };
 
-/* eslint-disable @html-eslint/no-restricted-attrs */
+/* eslint-disable @nvidia-elements/lint/no-restricted-attrs */
 
 export const PanelKeyValue = {
   render: () => html`

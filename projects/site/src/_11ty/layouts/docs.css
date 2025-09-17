@@ -178,7 +178,7 @@ main:has([docs-full-width]) {
   object-fit: fill !important;
   background-repeat: no-repeat !important;
   background-position: 0 15vh !important;
-  box-shadow: inset 0 0 0 1000px rgb(11 12 15 / 88%) !important; /* eslint-disable-line elements/no-invalid-css-variable */
+  box-shadow: inset 0 0 0 1000px rgb(11 12 15 / 88%) !important; /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
   filter: drop-shadow(0 50px 50px rgb(11 12 15 / 95%));
 }
 

@@ -143,7 +143,7 @@ export class ThemePreview extends LitElement {
   }
 
   // todo:
-  /* eslint-disable @html-eslint/no-restricted-attrs */
+  /* eslint-disable @nvidia-elements/lint/no-restricted-attrs */
   render() {
     return html`
       <div class="scalable-content" nve-theme="root">

@@ -5,7 +5,7 @@ import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/notification/define.js';
 
-/* eslint-disable @html-eslint/no-restricted-attrs */
+/* eslint-disable @nvidia-elements/lint/no-restricted-attrs */
 
 export default {
   title: 'Elements/Panel',
@@ -386,4 +386,4 @@ export const PanelWithFooter = {
   `
 };
 
-/* eslint-enable @html-eslint/no-restricted-attrs */
+/* eslint-enable @nvidia-elements/lint/no-restricted-attrs */
