@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.8...@nvidia-elements/core-v1.39.9) (2025-09-17)
+
+
+### Bug Fixes
+
+* **elements:** dynamic form references for nve-button ([6413166](https://github.com/NVIDIA/elements/commit/64131661367c85150a42e2c2d0c35c17c7d68fae))
+
 ## [@nvidia-elements/core-v1.39.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.7...@nvidia-elements/core-v1.39.8) (2025-09-15)
 
 
