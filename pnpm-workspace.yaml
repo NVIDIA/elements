@@ -49,17 +49,17 @@ catalog:
   '@html-eslint/eslint-plugin': 0.46.2
   '@html-eslint/parser': 0.46.2
   '@lit-labs/eleventy-plugin-lit': 1.0.5
-  '@lit-labs/scoped-registry-mixin': ^1.0.3
+  '@lit-labs/scoped-registry-mixin': ^1.0.4
   '@lit-labs/ssr': ^3.3.1
   '@lit-labs/ssr-client': ^1.1.7
-  '@lit-labs/ssr-react': ^0.3.2
-  '@lit-labs/virtualizer': ^2.1.0
-  '@lit/react': ^1.0.7
+  '@lit-labs/ssr-react': ^0.3.3
+  '@lit-labs/virtualizer': ^2.1.1
+  '@lit/react': ^1.0.8
   '@rollup/plugin-terser': 0.4.4
   '@sentry/browser': 7.120.3
   '@types/node': 22.13.1
-  '@types/react': 19.1.8
-  '@types/react-dom': 19.1.6
+  '@types/react': 19.1.13
+  '@types/react-dom': 19.1.9
   '@vitest/browser': 4.0.0-beta.3
   '@vitest/mocker': 4.0.0-beta.3
   '@vitest/coverage-istanbul': 4.0.0-beta.3
@@ -70,12 +70,12 @@ catalog:
   markdown-it: 14.1.0
   markdown-it-link-attributes: 4.0.1
   lighthouse: 12.6.0
-  lit: ^3.2.1
-  lit-html: ^3.2.1
+  lit: ^3.3.1
+  lit-html: ^3.3.1
   playwright: 1.55.0
   publint: 0.3.9
-  react: 19.1.0
-  react-dom: 19.1.0
+  react: 19.1.1
+  react-dom: 19.1.1
   rollup-plugin-html-literals: 2.0.0
   ts-morph: 26.0.0
   typescript-eslint: 8.44.0
