@@ -11,7 +11,8 @@ import '@nvidia-elements/core/tabs/define.js';
 import '@nvidia-elements/core/tag/define.js';
 
 export default {
-  title: 'Patterns/Examples'
+  title: 'Patterns/Examples',
+  component: 'nve-internal-patterns'
 };
 
 /* eslint-disable @nvidia-elements/lint/no-restricted-attrs */

@@ -1,7 +1,7 @@
 import type { PagePanelContent } from '@nvidia-elements/core/page';
 
 const iframe = globalThis.document.querySelector('iframe');
-const list = globalThis.document.querySelector('ul.stories');
+const list = globalThis.document.querySelector('ul.examples');
 
 list?.addEventListener('click', e => {
   e.preventDefault();
@@ -10,23 +10,23 @@ list?.addEventListener('click', e => {
   if (link && iframe) {
     iframe.src = link.href;
 
-    // set the story href as a query param on the parent page
+    // set the example href as a query param on the parent page
     const url = new URL(globalThis.window.location.href);
-    const story = link.href.split('/stories/')[1];
-    url.searchParams.set('story', story);
+    const example = link.href.split('/examples/')[1];
+    url.searchParams.set('example', example);
     globalThis.window.history.replaceState({}, '', url.toString());
-    setSelected(story);
+    setSelected(example);
   }
 });
 
-// on page load, check for a query param and load the story
+// on page load, check for a query param and load the example
 globalThis.window.addEventListener('load', () => {
   const url = new URL(globalThis.window.location.href);
-  const story = url.searchParams.get('story')!;
-  if (story && iframe) {
-    iframe.src = `stories/${story}`;
+  const example = url.searchParams.get('example')!;
+  if (example && iframe) {
+    iframe.src = `examples/${example}`;
   }
-  setSelected(story);
+  setSelected(example);
 });
 
 function setSelected(url: string) {
@@ -39,9 +39,11 @@ function setSelected(url: string) {
 
 // preserve scroll position between page transitions
 
-const content = globalThis.document.querySelector<PagePanelContent>('#stories-sidenav-panel nve-page-panel-content')!;
+const content = globalThis.document.querySelector<PagePanelContent>('#examples-sidenav-panel nve-page-panel-content')!;
 globalThis.window.addEventListener('beforeunload', () => {
-  sessionStorage.setItem('sidenav-scroll-position', content.scrollTop.toString());
+  if (content.scrollTop !== 0) {
+    sessionStorage.setItem('sidenav-scroll-position', content.scrollTop.toString());
+  }
 });
 
 const savedPosition = sessionStorage.getItem('sidenav-scroll-position');
