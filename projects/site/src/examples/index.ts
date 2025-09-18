@@ -1,15 +1,15 @@
-let isStoryViewer = false;
+let isExampleViewer = false;
 let isIframe = false;
 let editor = false;
 
 try {
   isIframe = globalThis.window.self !== globalThis.window.top;
-  isStoryViewer = !!globalThis.window.top?.location?.href?.includes('/stories/');
+  isExampleViewer = !!globalThis.window.top?.location?.href?.includes('/example/');
 } catch {
   editor = true;
 }
 
-if ((isStoryViewer && isIframe) || editor) {
+if ((isExampleViewer && isIframe) || editor) {
   const links = globalThis.document.getElementById('iframe-links')!;
   if (links) {
     links.hidden = false;

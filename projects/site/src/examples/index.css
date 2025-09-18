@@ -20,7 +20,7 @@
   z-index: 1000;
 }
 
-#story-container {
+#example-container {
   display: flex;
   place-items: center;
   place-content: center;
@@ -31,11 +31,11 @@
   scrollbar-width: thin;
 }
 
-body:has(#iframe-links:not([hidden])) #story-container {
+body:has(#iframe-links:not([hidden])) #example-container {
   padding: 24px;
 }
 
-body:has(nve-page) #story-container {
+body:has(nve-page) #example-container {
   display: contents;
 }
 

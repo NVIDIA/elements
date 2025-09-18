@@ -85,7 +85,7 @@ export default function (eleventyConfig) {
         watch:
           process.env.ELEVENTY_RUN_MODE !== 'build'
             ? {
-                buildDelay: 100
+                buildDelay: 300
               }
             : undefined
       }

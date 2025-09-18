@@ -12,7 +12,8 @@ import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
 
 export default {
-  title: 'Themes/Examples'
+  title: 'Themes/Examples',
+  component: 'nve-internal-patterns'
 };
 
 export const Layers = {

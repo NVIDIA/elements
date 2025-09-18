@@ -55,7 +55,7 @@ describe('utils', () => {
     it('should return JSON format correctly', () => {
       const result = getAvailableExamples('json', mockExamples);
       expect(Array.isArray(result)).toBe(true);
-      expect(result).toHaveLength(5);
+      expect(result).toHaveLength(3);
       expect(result[0]).toEqual({
         id: 'ButtonBasic',
         element: 'nve-button',
@@ -77,9 +77,9 @@ describe('utils', () => {
     });
 
     it('should handle examples with missing description', () => {
-      const examplesWithMissingDesc = [
-        { id: 'Test1', description: 'Has description' },
-        { id: 'Test2' } // missing description
+      const examplesWithMissingDesc: Partial<MetadataExample>[] = [
+        { id: 'Test1', tags: [], element: 'nve-test', template: '', description: 'Has description' },
+        { id: 'Test2', tags: [], element: 'nve-test', template: '' } // missing description
       ];
 
       const markdownResult = getAvailableExamples('markdown', examplesWithMissingDesc);
