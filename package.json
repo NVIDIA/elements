@@ -127,6 +127,7 @@
         "release:labs-brand",
         "release:labs-code",
         "release:labs-forms",
+        "release:labs-lint",
         "release:monaco",
         "release:styles"
       ]
@@ -175,7 +176,10 @@
       "command": "cd projects/labs/forms && HUSKY=0 pnpm exec semantic-release"
     },
     "release:labs-lint": {
-      "command": "cd projects/labs/lint && HUSKY=0 pnpm exec semantic-release"
+      "command": "cd projects/labs/lint && HUSKY=0 pnpm exec semantic-release",
+      "dependencies": [
+        "release:themes"
+      ]
     },
     "release:labs-markdown": {
       "command": "cd projects/labs/markdown && HUSKY=0 pnpm exec semantic-release"
