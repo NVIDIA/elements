@@ -117,7 +117,11 @@
       ]
     },
     "lint:fix": {
-      "command": "eslint -c ./eslint.config.js --fix"
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../../internals/eslint:ci",
+        "../../labs/lint:build"
+      ]
     },
     "test": {
       "command": "vitest run",
