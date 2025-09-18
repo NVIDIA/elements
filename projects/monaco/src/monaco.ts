@@ -25,14 +25,6 @@ export async function loadMonaco(): Promise<Monaco> {
     await defineThemes(monaco);
     applyThemeForColorScheme(monaco, globalThis.document.documentElement);
 
-    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-      module: monaco.languages.typescript.ModuleKind.ESNext,
-      target: monaco.languages.typescript.ScriptTarget.ESNext,
-      isolatedModules: true,
-      allowNonTsExtensions: true,
-      moduleDetection: 3 /* monaco.languages.typescript.ModuleDetectionKind.Force */
-    });
-
     return monaco;
   })();
   return lazyLoadedMonaco;
