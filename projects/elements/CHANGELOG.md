@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.9...@nvidia-elements/core-v1.39.10) (2025-09-18)
+
+
+### Bug Fixes
+
+* **elements:** graceful fallback for icon alias in ssr context ([b3ebb38](https://github.com/NVIDIA/elements/commit/b3ebb38b9c48a2648340b406e0a7ff213dd0c609))
+
 ## [@nvidia-elements/core-v1.39.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.8...@nvidia-elements/core-v1.39.9) (2025-09-17)
 
 
