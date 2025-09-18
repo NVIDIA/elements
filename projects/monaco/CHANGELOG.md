@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.2.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.1...@nvidia-elements/monaco-v1.2.2) (2025-09-18)
+
+
+### Bug Fixes
+
+* **monaco:** typescript default options without side effects ([9de664f](https://github.com/NVIDIA/elements/commit/9de664f3e86c028df6a9b907b741dde1b3718392))
+
 ## [@nvidia-elements/monaco-v1.2.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.0...@nvidia-elements/monaco-v1.2.1) (2025-09-15)
 
 
