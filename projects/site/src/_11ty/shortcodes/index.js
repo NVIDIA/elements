@@ -7,6 +7,7 @@ import markdown from '../libraries/markdown.js';
 
 const md = markdownIt();
 const { stories, elements } = siteData;
+const examples = stories;
 
 /**
  * Shortcode for generating installation instructions for a component
@@ -23,7 +24,7 @@ import '${element.manifest.metadata.entrypoint}/define.js';
 \`\`\`
 
 \`\`\`html
-${stories.find(s => s.id === 'Default' && s.element === tag)?.template}
+${examples.find(s => s.id === 'Default' && s.element === tag)?.template}
 \`\`\`
 `
     : '';
@@ -52,86 +53,80 @@ export async function apiShortcode(tag, type, value) {
 }
 
 /**
- * Shortcode for embedding component stories/examples
+ * Shortcode for embedding component examples
  * Supports both inline and iframe rendering modes
- * @param {string} tag - The component tag name or story path
- * @param {string} storyName - The name of the story to display
- * @param {Object|string} userConfig - Configuration options for the story display
- * @returns {Promise<string>} HTML string containing the embedded story
+ * @param {string} ref - The component tag name or example path
+ * @param {string} exampleName - The name of the example to display
+ * @param {Object|string} userConfig - Configuration options for the example display
+ * @returns {Promise<string>} HTML string containing the embedded example
  */
 export async function storyShortcode(
-  tag,
-  storyName,
+  ref,
+  exampleName,
   userConfig = { inline: true, height: '95%', resizable: true, editable: false }
 ) {
-  const element = elements.find(d => d.name === tag);
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
-  const story = tag.includes('.stories.json')
-    ? stories.find(s => s.entrypoint.includes(tag) && s.id === storyName)
-    : stories.find(s => s.element === tag && s.id === storyName);
+  const example = ref.includes('.stories.json')
+    ? examples.find(s => s.entrypoint?.includes(ref) && s.id === exampleName)
+    : examples.find(s => s.element === ref && s.id === exampleName);
 
-  if (!story) {
-    console.error('Story not found: ', tag, storyName);
+  if (!example) {
+    console.error('Story not found: ', ref, exampleName);
     return '';
   }
 
+  const canvasId = `${ref.replaceAll('/', '-').replaceAll('.', '-').replaceAll('@', '')}_${example.id}`;
+
   const playgroundURL = await PlaygroundService.create({
-    template: story?.template ?? '',
-    name: `${story.entrypoint}_${storyName}`
+    template: example?.template ?? '',
+    name: `${example.entrypoint}_${exampleName}`
   });
-  const playgroundButton = story
+
+  const playgroundButton = example
     ? `<nve-button container="flat" slot="suffix"><a href="${playgroundURL}" target="_blank">Open in Playground</a></nve-button>`
     : '';
 
-  const editButton = story
-    ? `<nve-button container="flat" slot="suffix"><a href="./docs/elements/${tag.replace(/^nve-/, '')}/examples/?edit=true&example=${story.id
+  const editButton = example
+    ? `<nve-button container="flat" slot="suffix"><a href="./docs/elements/${ref.replace(/^nve-/, '')}/examples/?edit=true&example=${example.id
         .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
         .replace(/\s+/g, '-')
         .toLowerCase()}">Edit Example</a></nve-button>`
     : '';
 
-  const templateContent = config.inline
-    ? story?.template?.replace(/\n\n/g, '\n')
-    : `<iframe loading="lazy" src="stories/${story?.permalink}index.html" style="height: ${config.height}; width: 100%; border: none;" />`;
+  const template = config.inline
+    ? /* html */ `<div id="${canvasId}_content">${example?.template?.replace(/\n\n/g, '\n')}</div>`
+    : `<iframe loading="lazy" src="examples/${example?.permalink}index.html" style="height: ${config.height}; width: 100%; border: none;" />`;
+
+  const source = md.utils?.escapeHtml(example?.template?.replace(/\n\n/g, '\n') ?? '');
 
   const reload =
-    // eslint-disable-next-line no-undef
-    process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && story && !tag.includes('.stories.json')
-      ? reloadScript(story, element ? editButton + playgroundButton : playgroundButton)
+    globalThis.process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && example && !ref.includes('.stories.json')
+      ? reloadScript(example, canvasId)
       : '';
 
-  return story
+  return example
     ? config.editable
       ? /* html */ `
 <nvd-canvas-editable 
-  id="${tag}_${story.id}"
+  id="${canvasId}"
   style="--height: ${config.height}"
-  source="${md.utils.escapeHtml(story?.template?.replace(/\n\n/g, '\n') ?? '')}"
-  tag="${story.element || tag}">
+  source="${source}"
+  tag="${example.element || ref}">
 </nvd-canvas-editable>`
       : /* html */ `
-${markdown.render(story.description ?? '')}
-<nvd-canvas id="${tag}_${story.id}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
-  <template>${md.utils.escapeHtml(story?.template?.replace(/\n\n/g, '\n') ?? '')}</template>
-  ${element ? editButton + playgroundButton : playgroundButton}
-  ${templateContent}
-</nvd-canvas>${reload}`
+${markdown.render(example.description ?? '')}
+<nvd-canvas id="${canvasId}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
+  <template>${source}</template>${template}${editButton}${playgroundButton}
+</nvd-canvas>${reload}`.trim()
     : '';
 }
 
-function reloadScript(story, content) {
+function reloadScript(example, canvasId) {
   return /* html */ `
 <script type="module">
-  import stories from '${story.entrypoint}' with { type: 'json' };
-  const story = stories.items.find(s => s.id === '${story.id}');
-  const canvas = document.getElementById(stories.element + '_' + story.id);
-  const template = '${content}' + story.template.replace(/import\\s+(?:(?:\\{[^}]*\\}|\\w+)\\s+from\\s+)?['"][^'"]*['"];?/g, '');
-  canvas.innerHTML = template;
-  Array.from(canvas.querySelectorAll('script')).forEach(prev => {
-    const next = document.createElement('script');
-    Array.from(prev.attributes).forEach(attr => next.setAttribute(attr.name, attr.value));
-    next.appendChild(document.createTextNode(prev.innerHTML));
-    prev.parentNode.replaceChild(next, prev);
-  });
+  import examples from '${example.entrypoint}' with { type: 'json' };
+  const rawTemplate = examples?.items?.find(s => s.id === '${example.id}')?.template ?? '';
+  const template = rawTemplate.replace(/import\\s+(?:(?:\\{[^}]*\\}|\\w+)\\s+from\\s+)?['"][^'"]*['"];?/g, '');
+  document.querySelector('#${canvasId}_content:not(:has(iframe))').innerHTML = template;
 </script>`;
 }

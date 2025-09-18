@@ -1,7 +1,9 @@
 import { type MetadataExample } from '@internals/metadata';
 
 export function getAvailableExamples(format: 'markdown' | 'json', examples: Partial<MetadataExample>[]) {
-  const result = examples.map(s => ({ id: s.id, description: s.description, element: s.element ?? '' }));
+  const result = examples
+    .filter(e => !e.deprecated && !e.tags.includes('anti-pattern') && !e.element?.includes('internal'))
+    .map(s => ({ id: s.id, description: s.description, element: s.element ?? '' }));
   return format === 'markdown' ? result.map(e => renderExampleHeaderMarkdown(e)).join('\n\n---\n\n') : result;
 }
 
@@ -24,7 +26,7 @@ export async function filterExamples(query: string, examples: MetadataExample[])
 
   // Assign a relevancy score based on matches in description, element, and id for each word
   const scored = examples
-    .filter(e => !e.deprecated && !e.tags.includes('anti-pattern'))
+    .filter(e => !e.deprecated && !e.tags.includes('anti-pattern') && !e.element?.includes('internal'))
     .map(example => {
       let score = 0;
       for (const word of q.split(/\s+/).filter(Boolean)) {

@@ -2,7 +2,7 @@ import { html } from 'lit';
 
 export default {
   title: 'Patterns/Trend',
-  component: 'nve-internal-patterns'
+  component: 'nve-patterns'
 };
 
 /**
