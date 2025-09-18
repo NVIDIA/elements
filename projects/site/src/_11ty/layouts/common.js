@@ -331,7 +331,7 @@ export const renderDocsNav = data => /* html */ `
 
   <nve-tree-node ${data.page.url.includes('/docs/internal/') ? 'expanded' : ''} ${data.page.url === '/docs/internal/' ? 'highlighted' : ''}>
     <a href="docs/internal/">Internal</a>
-    <nve-tree-node><a href="stories/">Examples</a></nve-tree-node>
+    <nve-tree-node><a href="examples/">Examples</a></nve-tree-node>
 
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines') ? 'expanded' : ''} ${data.page.url === '/docs/internal/guidelines/' ? 'highlighted' : ''}>
       Guidelines
