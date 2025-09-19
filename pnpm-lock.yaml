@@ -761,6 +761,9 @@ importers:
       ora:
         specifier: 8.2.0
         version: 8.2.0
+      publint:
+        specifier: 'catalog:'
+        version: 0.3.9
       yargs:
         specifier: 18.0.0
         version: 18.0.0
@@ -789,9 +792,6 @@ importers:
       eslint:
         specifier: 'catalog:'
         version: 9.35.0(jiti@2.4.2)
-      publint:
-        specifier: 'catalog:'
-        version: 0.3.9
       typescript:
         specifier: 'catalog:'
         version: 5.8.2
