@@ -126,6 +126,7 @@
         "release:labs-behaviors-alpine",
         "release:labs-brand",
         "release:labs-code",
+        "release:labs-cli",
         "release:labs-forms",
         "release:labs-lint",
         "release:monaco",
