@@ -34,6 +34,7 @@
     "marked": "16.2.1",
     "marked-terminal": "7.3.0",
     "ora": "8.2.0",
+    "publint": "catalog:",
     "yargs": "18.0.0",
     "open": "10.2.0",
     "zod": "3.25.76"
@@ -46,7 +47,6 @@
     "@types/node": "catalog:",
     "@types/yargs": "17.0.33",
     "eslint": "catalog:",
-    "publint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
