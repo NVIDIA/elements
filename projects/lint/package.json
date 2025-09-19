@@ -114,8 +114,6 @@
       "command": "vitest run",
       "files": [
         "src/**/*.test.ts",
-        "!src/**/*.test.lighthouse.ts",
-        "!src/**/*.test.ssr.ts",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
@@ -130,8 +128,6 @@
       "command": "vitest run --coverage",
       "files": [
         "src/**/*.test.ts",
-        "!src/**/*.test.lighthouse.ts",
-        "!src/**/*.test.ssr.ts",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
