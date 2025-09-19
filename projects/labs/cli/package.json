@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A CLI tool for Elements related utilities",
   "type": "module",
   "bin": {
