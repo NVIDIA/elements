@@ -7,7 +7,9 @@
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
-    "preview": "wireit"
+    "preview": "wireit",
+    "lint": "wireit",
+    "lint:fix": "wireit"
   },
   "dependencies": {
     "@nvidia-elements/core": "workspace:*",
@@ -17,9 +19,11 @@
     "react-dom": "catalog:"
   },
   "devDependencies": {
+    "@nvidia-elements/lint": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "4.6.0",
+    "eslint": "catalog:",
     "vite": "catalog:"
   },
   "browserslist": {
@@ -37,7 +41,8 @@
   "wireit": {
     "ci": {
       "dependencies": [
-        "build"
+        "build",
+        "lint"
       ]
     },
     "dev": {
@@ -78,6 +83,23 @@
       "service": true,
       "dependencies": [
         "build"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../labs/lint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../../labs/lint:ci"
       ]
     }
   }

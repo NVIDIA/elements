@@ -1295,9 +1295,15 @@ importers:
       '@angular/compiler-cli':
         specifier: 20.1.0
         version: 20.1.0(@angular/compiler@20.1.0)(typescript@5.8.2)
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../../labs/lint
       '@types/jasmine':
         specifier: 5.1.0
         version: 5.1.0
+      eslint:
+        specifier: 'catalog:'
+        version: 9.35.0(jiti@2.4.2)
       jasmine-core:
         specifier: 5.8.0
         version: 5.8.0
@@ -1360,6 +1366,12 @@ importers:
       '@lit-labs/ssr-client':
         specifier: 'catalog:'
         version: 1.1.7
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../../labs/lint
+      eslint:
+        specifier: 'catalog:'
+        version: 9.35.0(jiti@2.4.2)
       markdown-it:
         specifier: 'catalog:'
         version: 14.1.0
@@ -1424,6 +1436,9 @@ importers:
       '@nve-internals/vite':
         specifier: workspace:*
         version: link:../../internals/vite
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../../labs/lint
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../../elements
@@ -1442,6 +1457,9 @@ importers:
       '@vitest/browser':
         specifier: 'catalog:'
         version: 4.0.0-beta.3(msw@2.7.3(@types/node@22.13.10)(typescript@5.8.2))(playwright@1.55.0)(vite@7.0.4(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.30.0)(sass@1.89.2)(terser@5.39.0)(yaml@2.7.0))(vitest@4.0.0-beta.3)
+      eslint:
+        specifier: 'catalog:'
+        version: 9.35.0(jiti@2.4.2)
       glob:
         specifier: 'catalog:'
         version: 11.0.3
@@ -1473,6 +1491,12 @@ importers:
         specifier: workspace:*
         version: link:../../themes
     devDependencies:
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../../labs/lint
+      eslint:
+        specifier: 'catalog:'
+        version: 9.35.0(jiti@2.4.2)
       typescript:
         specifier: 'catalog:'
         version: 5.8.2
@@ -1504,12 +1528,18 @@ importers:
         specifier: 'catalog:'
         version: 19.1.1(react@19.1.1)
     devDependencies:
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../../labs/lint
       '@types/react':
         specifier: 'catalog:'
         version: 19.1.13
       '@types/react-dom':
         specifier: 'catalog:'
         version: 19.1.9(@types/react@19.1.13)
+      eslint:
+        specifier: 'catalog:'
+        version: 9.35.0(jiti@2.4.2)
       typescript:
         specifier: 'catalog:'
         version: 5.8.2
@@ -1535,6 +1565,9 @@ importers:
         specifier: 'catalog:'
         version: 19.1.1(react@19.1.1)
     devDependencies:
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../../labs/lint
       '@types/react':
         specifier: 'catalog:'
         version: 19.1.13
@@ -1544,6 +1577,9 @@ importers:
       '@vitejs/plugin-react':
         specifier: 4.6.0
         version: 4.6.0(vite@7.0.4(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.30.0)(sass@1.89.2)(terser@5.39.0)(yaml@2.7.0))
+      eslint:
+        specifier: 'catalog:'
+        version: 9.35.0(jiti@2.4.2)
       vite:
         specifier: 'catalog:'
         version: 7.0.4(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.30.0)(sass@1.89.2)(terser@5.39.0)(yaml@2.7.0)
@@ -1643,6 +1679,12 @@ importers:
         specifier: 1.9.3
         version: 1.9.3
     devDependencies:
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../../labs/lint
+      eslint:
+        specifier: 'catalog:'
+        version: 9.35.0(jiti@2.4.2)
       solid-devtools:
         specifier: 0.34.3
         version: 0.34.3(solid-js@1.9.3)(vite@7.0.4(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.30.0)(sass@1.89.2)(terser@5.39.0)(yaml@2.7.0))
@@ -1668,12 +1710,18 @@ importers:
         specifier: workspace:*
         version: link:../../themes
     devDependencies:
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../../labs/lint
       '@sveltejs/vite-plugin-svelte':
         specifier: 6.2.0
         version: 6.2.0(svelte@5.38.8)(vite@7.0.4(@types/node@22.13.10)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.30.0)(sass@1.89.2)(terser@5.39.0)(yaml@2.7.0))
       '@tsconfig/svelte':
         specifier: 5.0.5
         version: 5.0.5
+      eslint:
+        specifier: 'catalog:'
+        version: 9.35.0(jiti@2.4.2)
       svelte:
         specifier: 5.38.8
         version: 5.38.8
@@ -1699,6 +1747,12 @@ importers:
         specifier: workspace:*
         version: link:../../themes
     devDependencies:
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../../labs/lint
+      eslint:
+        specifier: 'catalog:'
+        version: 9.35.0(jiti@2.4.2)
       typescript:
         specifier: 'catalog:'
         version: 5.8.2
@@ -1721,6 +1775,9 @@ importers:
         specifier: 3.5.17
         version: 3.5.17(typescript@5.8.2)
     devDependencies:
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../../labs/lint
       '@types/node':
         specifier: 'catalog:'
         version: 22.13.1
@@ -1730,6 +1787,9 @@ importers:
       '@vue/tsconfig':
         specifier: 0.7.0
         version: 0.7.0(typescript@5.8.2)(vue@3.5.17(typescript@5.8.2))
+      eslint:
+        specifier: 'catalog:'
+        version: 9.35.0(jiti@2.4.2)
       typescript:
         specifier: 'catalog:'
         version: 5.8.2
@@ -6138,16 +6198,6 @@ packages:
 
   eslint@9.22.0:
     resolution: {integrity: sha512-9V/QURhsRN40xuHXWjV64yvrzMjcz7ZyNoF2jJFmy9j/SLk0u1OLSZgXi28MrXjymnjEGSR80WCdab3RGMDveQ==, tarball: https://registry.npmjs.org
-    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-    hasBin: true
-    peerDependencies:
-      jiti: '*'
-    peerDependenciesMeta:
-      jiti:
-        optional: true
-
-  eslint@9.33.0:
-    resolution: {integrity: sha512-TS9bTNIryDzStCpJN93aC5VRSW3uTx9sClUn4B87pwiCaJh220otoI0X8mJKr+VcPtniMdN8GKjlwgWGUv5ZKA==, tarball: https://registry.npmjs.org
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
     peerDependencies:
@@ -11495,11 +11545,6 @@ snapshots:
       eslint: 9.22.0(jiti@2.4.2)
       eslint-visitor-keys: 3.4.3
 
-  '@eslint-community/eslint-utils@4.7.0(eslint@9.33.0(jiti@2.4.2))':
-    dependencies:
-      eslint: 9.33.0(jiti@2.4.2)
-      eslint-visitor-keys: 3.4.3
-
   '@eslint-community/eslint-utils@4.9.0(eslint@9.35.0(jiti@2.4.2))':
     dependencies:
       eslint: 9.35.0(jiti@2.4.2)
@@ -11685,7 +11730,7 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.8
       es-html-parser: 0.3.0
-      eslint: 9.33.0(jiti@2.4.2)
+      eslint: 9.35.0(jiti@2.4.2)
     transitivePeerDependencies:
       - jiti
       - supports-color
@@ -15696,48 +15741,6 @@ snapshots:
       eslint-scope: 8.3.0
       eslint-visitor-keys: 4.2.0
       espree: 10.3.0
-      esquery: 1.6.0
-      esutils: 2.0.3
-      fast-deep-equal: 3.1.3
-      file-entry-cache: 8.0.0
-      find-up: 5.0.0
-      glob-parent: 6.0.2
-      ignore: 5.3.2
-      imurmurhash: 0.1.4
-      is-glob: 4.0.3
-      json-stable-stringify-without-jsonify: 1.0.1
-      lodash.merge: 4.6.2
-      minimatch: 3.1.2
-      natural-compare: 1.4.0
-      optionator: 0.9.4
-    optionalDependencies:
-      jiti: 2.4.2
-    transitivePeerDependencies:
-      - supports-color
-
-  eslint@9.33.0(jiti@2.4.2):
-    dependencies:
-      '@eslint-community/eslint-utils': 4.7.0(eslint@9.33.0(jiti@2.4.2))
-      '@eslint-community/regexpp': 4.12.1
-      '@eslint/config-array': 0.21.0
-      '@eslint/config-helpers': 0.3.1
-      '@eslint/core': 0.15.2
-      '@eslint/eslintrc': 3.3.1
-      '@eslint/js': 9.33.0
-      '@eslint/plugin-kit': 0.3.5
-      '@humanfs/node': 0.16.6
-      '@humanwhocodes/module-importer': 1.0.1
-      '@humanwhocodes/retry': 0.4.2
-      '@types/estree': 1.0.8
-      '@types/json-schema': 7.0.15
-      ajv: 6.12.6
-      chalk: 4.1.2
-      cross-spawn: 7.0.6
-      debug: 4.4.1
-      escape-string-regexp: 4.0.0
-      eslint-scope: 8.4.0
-      eslint-visitor-keys: 4.2.1
-      espree: 10.4.0
       esquery: 1.6.0
       esutils: 2.0.3
       fast-deep-equal: 3.1.3
