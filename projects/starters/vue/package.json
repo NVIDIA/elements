@@ -6,7 +6,9 @@
   "scripts": {
     "ci": "wireit",
     "dev": "wireit",
-    "preview": "wireit"
+    "preview": "wireit",
+    "lint": "wireit",
+    "lint:fix": "wireit"
   },
   "dependencies": {
     "@nvidia-elements/core": "workspace:*",
@@ -15,9 +17,11 @@
     "vue": "3.5.17"
   },
   "devDependencies": {
+    "@nvidia-elements/lint": "workspace:*",
     "@types/node": "catalog:",
     "@vitejs/plugin-vue": "6.0.0",
     "@vue/tsconfig": "0.7.0",
+    "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vue-tsc": "3.0.1"
@@ -25,7 +29,8 @@
   "wireit": {
     "ci": {
       "dependencies": [
-        "build"
+        "build",
+        "lint"
       ]
     },
     "dev": {
@@ -66,6 +71,23 @@
       "service": true,
       "dependencies": [
         "build"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../labs/lint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../../labs/lint:ci"
       ]
     }
   }

@@ -8,13 +8,16 @@
     "dev": "wireit",
     "start": "wireit",
     "build": "wireit",
+    "lint": "wireit",
+    "lint:fix": "wireit",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "wireit": {
     "ci": {
       "dependencies": [
-        "build"
+        "build",
+        "lint"
       ]
     },
     "dev": {
@@ -60,6 +63,23 @@
           "default": "/elements/"
         }
       }
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../labs/lint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../../labs/lint:ci"
+      ]
     }
   },
   "dependencies": {
@@ -79,7 +99,9 @@
     "@angular/build": "20.1.0",
     "@angular/cli": "20.1.0",
     "@angular/compiler-cli": "20.1.0",
+    "@nvidia-elements/lint": "workspace:*",
     "@types/jasmine": "5.1.0",
+    "eslint": "catalog:",
     "jasmine-core": "5.8.0",
     "karma": "6.4.0",
     "karma-chrome-launcher": "3.2.0",
