@@ -14,46 +14,64 @@ import { isCommandAvailable, getNPMClient } from '../internal/node.js';
 
 export type Starter =
   | 'angular'
-  | 'react'
-  | 'lit'
-  | 'preact'
-  | 'solidjs'
-  | 'svelte'
-  | 'vue'
-  | 'nextjs'
-  | 'typescript'
+  | 'bundles'
+  | 'eleventy'
+  | 'extensions'
   | 'go'
   | 'importmaps'
-  | 'bundles'
-  | 'extensions';
+  | 'lit-library'
+  | 'lit'
+  | 'nextjs'
+  | 'preact'
+  | 'react'
+  | 'solidjs'
+  | 'svelte'
+  | 'typescript'
+  | 'vue';
 
 export const startersData = {
-  typescript: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/typescript.zip',
+  angular: {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/angular.zip',
     cli: true
+  },
+  bundles: {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/bundles.zip',
+    cli: false
   },
   eleventy: {
     zip: 'https://NVIDIA.github.io/elements/starters/download/eleventy.zip',
     cli: true
   },
+  extensions: {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/scoped-registry.zip',
+    cli: false
+  },
   go: {
     zip: 'https://NVIDIA.github.io/elements/starters/download/go.zip',
     cli: true
   },
-  angular: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/angular.zip',
-    cli: true
+  importmaps: {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/importmaps.zip',
+    cli: false
   },
-  react: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/react.zip',
-    cli: true
+  'lit-library': {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/lit-library.zip',
+    cli: false
   },
-  vue: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/vue.zip',
-    cli: true
+  lit: {
+    zip: null,
+    cli: false
   },
   nextjs: {
     zip: 'https://NVIDIA.github.io/elements/starters/download/nextjs.zip',
+    cli: true
+  },
+  preact: {
+    zip: null,
+    cli: false
+  },
+  react: {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/react.zip',
     cli: true
   },
   solidjs: {
@@ -64,31 +82,20 @@ export const startersData = {
     zip: 'https://NVIDIA.github.io/elements/starters/download/svelte.zip',
     cli: true
   },
-  importmaps: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/importmaps.zip',
-    cli: false
+  typescript: {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/typescript.zip',
+    cli: true
   },
-  lit: {
-    zip: null,
-    cli: false
-  },
-  preact: {
-    zip: null,
-    cli: false
-  },
-  bundles: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/bundles.zip',
-    cli: false
-  },
-  extensions: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/scoped-registry.zip',
-    cli: false
+  vue: {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/vue.zip',
+    cli: true
   }
 };
 
 /* istanbul ignore next -- @preserve */
 export async function archiveStarter(projectDir, outDir) {
   await copyProject(projectDir);
+  await createCursorConfig(projectDir);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
   await writeFile(
     `${`${outDir}/${projectDir}`}/.npmrc`,
@@ -122,6 +129,28 @@ async function copyProject(projectDir) {
     ignore: ['**/dist/**', '**/node_modules/**', '**/.wireit/**']
   });
   files.forEach(file => cpSync(file, `dist/${projectDir}${file.replace(projectDir, '')}`, { recursive: true }));
+}
+
+/* istanbul ignore next -- @preserve */
+async function createCursorConfig(projectDir) {
+  const cursorConfig = {
+    mcpServers: {
+      elements: {
+        command: 'npx', // npx allows the package to run on latest without requiring a global installation by user
+        description: 'Elements API and Custom Element Schema',
+        args: ['-y', '--package=@nvidia-elements/cli@latest', 'nve-mcp'],
+        env: {
+          npm_config_registry: 'https://registry.npmjs.org'
+        }
+      }
+    }
+  };
+
+  const dist = `dist/${projectDir}/.cursor`;
+  if (!existsSync(dist)) {
+    mkdirSync(dist, { recursive: true });
+  }
+  await writeFile(`${dist}/mcp.json`, JSON.stringify(cursorConfig, undefined, 2));
 }
 
 /* istanbul ignore next -- @preserve */

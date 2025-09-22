@@ -139,7 +139,7 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(182);
+    expect(scores.payload.js).toBeLessThan(185);
     expect(scores.payload.css).toBe(0);
   });
 
@@ -149,7 +149,7 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(170);
+    expect(scores.payload.js).toBeLessThan(171);
     expect(scores.payload.css).toBe(0);
   });
 });

@@ -7,6 +7,8 @@
     "dev": "wireit",
     "build": "wireit",
     "preview": "wireit",
+    "lint": "wireit",
+    "lint:fix": "wireit",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
   },
   "dependencies": {
@@ -15,8 +17,10 @@
     "@nvidia-elements/themes": "workspace:*"
   },
   "devDependencies": {
+    "@nvidia-elements/lint": "workspace:*",
     "@sveltejs/vite-plugin-svelte": "6.2.0",
     "@tsconfig/svelte": "5.0.5",
+    "eslint": "catalog:",
     "svelte": "5.38.8",
     "svelte-check": "4.3.1",
     "typescript": "catalog:",
@@ -25,7 +29,8 @@
   "wireit": {
     "ci": {
       "dependencies": [
-        "build"
+        "build",
+        "lint"
       ]
     },
     "dev": {
@@ -66,6 +71,23 @@
       "service": true,
       "dependencies": [
         "build"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../labs/lint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../../labs/lint:ci"
       ]
     }
   }
