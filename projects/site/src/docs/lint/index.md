@@ -6,19 +6,21 @@
 }
 ---
 
+<nve-alert-group status="warning">
+  <nve-alert>
+    <nve-icon name="beaker" slot="icon" style="--color:inherit"></nve-icon> Labs projects are experimental packages available for early feedback.
+  </nve-alert>
+</nve-alert-group>
+
 # Elements Lint
 
-## Getting Started
+The `@nvidia-elements/lint` package is a utility library that provides Elements-specific lint rules to enforce best practices and prevent common errors when using Elements.
+
+{% install-artifactory %}
 
 ```shell
-# local .npmrc file
-registry=https://registry.npmjs.org
-
-# https://registry.npmjs.org
-pnpm login
-
 # install
-pnpm install @nvidia-elements/lint
+npm install @nvidia-elements/lint --save-dev
 ```
 
 ## ESLint
@@ -52,7 +54,26 @@ export default [
 eslint -c ./eslint.config.js --color
 ```
 
-### Rules
+## Severity
+
+Rules can individually be adjusted for lint severity. By default rules are set to `error`.
+
+```javascript
+import { elementsHtmlConfig, elementsCssConfig } from '@nvidia-elements/lint/eslint';
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  elementsHtmlConfig,
+  {
+    ...elementsCssConfig,
+    rules: {
+      '@nvidia-elements/lint/no-unexpected-css-value': 'warn'
+    }
+  }
+];
+```
+
+## Rules
 
 <nve-grid>
   <nve-grid-header>

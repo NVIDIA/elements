@@ -1,7 +1,7 @@
 {
   "name": "@nvidia-elements/themes",
   "version": "1.6.3",
-  "description": "Elements themes and tokens",
+  "description": "Themes for the Elements design system, providing comprehensive color palettes, typography, and spacing.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
     "type": "git",

@@ -269,11 +269,6 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/patterns/responsive/') ? 'highlighted' : ''}><a href="docs/patterns/responsive/">Responsive</a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/testing/') ? 'expanded' : ''}>
-    Testing
-    <nve-tree-node ${data.page.url === '/docs/testing/' ? 'highlighted' : ''}><a href="docs/testing/">Getting Started</a></nve-tree-node>
-  </nve-tree-node>
-
   <nve-tree-node ${data.page.url.includes('/docs/code/') ? 'expanded' : ''}>
     Code
     <nve-tree-node ${data.page.url.includes('/docs/code/codeblock/') ? 'highlighted' : ''}><a href="docs/code/codeblock/">Codeblock</a></nve-tree-node>
@@ -293,19 +288,13 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/markdown/') ? 'highlighted' : ''}><a href="docs/markdown/">Markdown</a></nve-tree-node>
   </nve-tree-node> -->
 
-  <!-- <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'expanded' : ''}>
-    <a href="docs/cli/">CLI</a>
-    <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'highlighted' : ''}><a href="docs/cli/">Getting Started</a></nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('cli') || data.page.url.includes('mcp') || data.page.url.includes('lint') || data.page.url.includes('testing') ? 'expanded' : ''}>
+    Tools
+    <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'highlighted' : ''}><a href="docs/cli/" nve-layout="row align:vertical-center gap:xs">CLI <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'highlighted' : ''}><a href="docs/mcp/" nve-layout="row align:vertical-center gap:xs">MCP <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'highlighted' : ''}><a href="docs/lint/" nve-layout="row align:vertical-center gap:xs">Lint <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/testing/' ? 'highlighted' : ''}><a href="docs/testing/">Testing</a></nve-tree-node>
   </nve-tree-node>
-  <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'expanded' : ''}>
-    <a href="docs/mcp/">MCP</a>
-    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'highlighted' : ''}><a href="docs/mcp/">Getting Started</a></nve-tree-node>
-  </nve-tree-node> -->
-
-  <!-- <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'expanded' : ''}>
-    <a href="docs/lint/">Lint</a>
-    <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'highlighted' : ''}><a href="docs/lint/">Getting Started</a></nve-tree-node>
-  </nve-tree-node> -->
 
   <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}>
     <a href="docs/labs/">Labs</a>

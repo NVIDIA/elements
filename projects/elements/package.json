@@ -1,7 +1,7 @@
 {
   "name": "@nvidia-elements/core",
   "version": "1.39.10",
-  "description": "The Design Language for AI/ML Factories Building at the Speed of Light",
+  "description": "The Design Language for AI/ML Factories Building at the Speed of Light. Provides a set of accessible and themeable UI elements.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
     "type": "git",

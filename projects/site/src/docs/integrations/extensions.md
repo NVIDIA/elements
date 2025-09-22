@@ -11,6 +11,8 @@
 
 {% installation %}
 
+## Integration
+
 To create reusable UI components that build on top of Elements we recommend using [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components). This path enables your extensions to work in a large variety of frameworks and environments. We recommend reading the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the lit team.
 The rest of this guide will focus on how to integrate specifically for Element integration and best practices.
 

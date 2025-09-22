@@ -1,7 +1,7 @@
 {
   "name": "@nvidia-elements/cli",
   "version": "0.1.1",
-  "description": "A CLI tool for Elements related utilities",
+  "description": "Command-line interface for Elements development and tooling, providing interactive prompts, project scaffolding, and integration with AI assistants via Model Context Protocol.",
   "type": "module",
   "bin": {
     "nve": "./dist/index.js",
