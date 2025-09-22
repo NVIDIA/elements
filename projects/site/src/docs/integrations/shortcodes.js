@@ -1,28 +1,34 @@
 import { svgLogosShortcode } from '../../_11ty/shortcodes/svg-logos.js';
 import { siteData } from '../../index.11tydata.js';
 
-export function renderInstallationShortcode() {
+export function renderInstallArtifactoryShortcode() {
   return /* html */ `
+## Install
 
-## NPM/Artifactory
+If not yet done, install [NodeJS](https://nodejs.org/en/download/). NodeJS is a JavaScript runtime that has a large ecosystem of tooling and packages for Web Development. Once installed the Node Package Manager (NPM) will be available for use.
 
 <nve-alert status="warning">AVInfra monorepo users skip .npmrc setup/login and use pnpm to install base packages.</nve-alert>
 
-Create/add the following references to a \`.npmrc\` file in the root of your project where your \`package.json\` is located.
-
 \`\`\`shell
-registry=https://registry.npmjs.org
-\`\`\`
+# setup artifactory registry
+npm config set registry https://registry.npmjs.org
 
-Login to [Artifactory](https://registry.npmjs.org once logged in run the following:
-
-\`\`\`shell
-# login to artifactory
+# https://registry.npmjs.org
 npm login
-
-# install base packages
-npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/core
 \`\`\`
+`;
+}
+
+export function renderInstallShortcode() {
+  return /* html */ `
+${renderInstallArtifactoryShortcode()}
+
+Once the registry is setup and authenticated, install the core dependencies:
+
+\`\`\`shell
+# install core dependencies
+npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/core
+\`\`\`  
 `;
 }
 

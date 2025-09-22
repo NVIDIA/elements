@@ -8,7 +8,11 @@ import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
 import { apiShortcode, storyShortcode, installShortcode } from './src/_11ty/shortcodes/index.js';
-import { renderInstallationShortcode, renderIntegrationShortcode } from './src/docs/integrations/shortcodes.js';
+import {
+  renderInstallShortcode,
+  renderInstallArtifactoryShortcode,
+  renderIntegrationShortcode
+} from './src/docs/integrations/shortcodes.js';
 import { svgLogosShortcode } from './src/_11ty/shortcodes/svg-logos.js';
 import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
@@ -120,7 +124,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
   eleventyConfig.addAsyncShortcode('install', installShortcode);
   eleventyConfig.addShortcode('svg-logos', svgLogosShortcode);
-  eleventyConfig.addShortcode('installation', renderInstallationShortcode);
+  eleventyConfig.addShortcode('installation', renderInstallShortcode);
+  eleventyConfig.addShortcode('install-artifactory', renderInstallArtifactoryShortcode);
   eleventyConfig.addShortcode('integration', renderIntegrationShortcode);
 
   // Register custom transforms for content processing
