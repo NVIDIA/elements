@@ -2,11 +2,18 @@
 
 ## Installation
 
-```shell
-pnpm install -g @nvidia-elements/cli
-```
+To use the Elements CLI you must have [NodeJS](https://nodejs.org/) installed.
 
 ```shell
+# setup artifactory registry
+npm config set registry https://registry.npmjs.org
+
+# https://registry.npmjs.org
+npm login
+
+# install package
+npm install -g @nvidia-elements/cli
+
 nve
 ```
 
