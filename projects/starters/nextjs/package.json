@@ -21,9 +21,11 @@
     "next": "15.5.3"
   },
   "devDependencies": {
-    "typescript": "catalog:",
+    "@nvidia-elements/lint": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
     "vite": "catalog:"
   },
   "wireit": {
@@ -35,11 +37,9 @@
     },
     "ci": {
       "dependencies": [
-        "build"
+        "build",
+        "lint"
       ]
-    },
-    "lint": {
-      "command": "next lint"
     },
     "start": {
       "command": "next start",
@@ -81,6 +81,23 @@
           "script": "../../themes:build",
           "cascade": false
         }
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../labs/lint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../../labs/lint:ci"
       ]
     }
   }
