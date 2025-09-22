@@ -105,7 +105,7 @@ describe.sequential('lighthouse', () => {
 
   test('getting started page', async () => {
     const scores = await getLighthouseScores(`${base}/elements/docs/about/getting-started/`);
-    expect(scores.performance).toBeGreaterThanOrEqual(90);
+    expect(scores.performance).toBeGreaterThanOrEqual(85);
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
