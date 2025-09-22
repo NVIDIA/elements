@@ -15,27 +15,23 @@ export default {
  
 export const Default = {
   render: () => html`
-    <div nve-layout="row align:center">
-      <nve-breadcrumb>
-        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-        <nve-button><a href="#" target="_self">Item 3</a></nve-button>
-        <span>You Are Here</span>
-      </nve-breadcrumb>
-    </div>
+    <nve-breadcrumb>
+      <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+      <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+      <nve-button><a href="#" target="_self">Item 3</a></nve-button>
+      <span>You Are Here</span>
+    </nve-breadcrumb>
   `
 };
 
 export const WithIconButton = {
   render: () => html`
-    <div nve-layout="row align:center">
-      <nve-breadcrumb>
-        <nve-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></nve-icon-button>
-        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-        <span>You Are Here</span>
-      </nve-breadcrumb>
-    </div>
+    <nve-breadcrumb>
+      <nve-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></nve-icon-button>
+      <nve-button><a href="#" target="_self">Item 1</a></nve-button>
+      <nve-button><a href="#" target="_self">Item 2</a></nve-button>
+      <span>You Are Here</span>
+    </nve-breadcrumb>
   `
 };
 
