@@ -18,9 +18,6 @@
 
 {% story 'nve-breadcrumb', 'WithIconButton' %}
 
-<!-- TODO: Add menu story (direct web component) -->
-
 ## Menu
 
-<breadcrumb-menu-demo></breadcrumb-menu-demo>
 {% story 'nve-breadcrumb', 'WithMenu' %}
