@@ -21,6 +21,7 @@ export interface MetadataSummary {
 export interface MetadataProject {
   name: string;
   version: string;
+  description: string;
   readme: string;
   changelog: string;
   tests: MetadataTestReport;

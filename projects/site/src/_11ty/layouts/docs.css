@@ -72,13 +72,13 @@ h3[nve-text*='mkd'] {
   position: relative;
 }
 
-h2[nve-text='heading xl mkd']:first-of-type {
+nve-tabs + h2[nve-text='heading xl mkd']:first-of-type {
   padding-top: 0;
 }
 
 [nve-text='heading xl mkd'],
 [nve-text='heading lg mkd'] {
-  padding: var(--nve-ref-space-xl) 0 var(--nve-ref-space-xs);
+  padding-top: var(--nve-ref-space-xl);
   display: flex;
   align-items: center;
   gap: var(--nve-ref-space-sm);

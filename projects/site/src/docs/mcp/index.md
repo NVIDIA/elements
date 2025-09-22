@@ -6,38 +6,77 @@
 }
 ---
 
+<nve-alert-group status="warning">
+  <nve-alert>
+    <nve-icon name="beaker" slot="icon" style="--color:inherit"></nve-icon> Labs projects are experimental packages available for early feedback.
+  </nve-alert>
+</nve-alert-group>
+
 # Elements MCP
 
-## Installation
+{% install-artifactory %}
 
-```shell
-# local .npmrc file
-registry=https://registry.npmjs.org
+## Cursor
 
-# https://registry.npmjs.org
-pnpm login
+Install to Cursor or copy the MCP configuration below.
 
-# install
-pnpm install @nvidia-elements/cli
-```
-
-### Cursor
+<div>
+  <nve-button>
+    <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=elements&config=eyJkZXNjcmlwdGlvbiI6IkVsZW1lbnRzIEFQSSBhbmQgQ3VzdG9tIEVsZW1lbnQgU2NoZW1hIiwiZW52Ijp7Im5wbV9jb25maWdfcmVnaXN0cnkiOiJodHRwczovL3VybS5udmlkaWEuY29tL2FydGlmYWN0b3J5L2FwaS9ucG0vc3ctbmdjLXVuaWZpZWQtbnBtLXByb3h5LyJ9LCJjb21tYW5kIjoibnB4IC15IC0tcGFja2FnZT1AbnZlLWxhYnMvY2xpQGxhdGVzdCBudmUtbWNwIn0%3D">Add to Cursor with NPM</a>
+  </nve-button>
+</div>
 
 ```json
+// .cursor/mcp.json
+{
+  "mcpServers": {
+    "elements": {
+      "command": "npx",
+      "description": "Elements API and Custom Element Schema",
+      "args": ["-y", "--package=@nvidia-elements/cli@latest", "nve-mcp"],
+      "env": {
+        "npm_config_registry": "https://registry.npmjs.org"
+      }
+    }
+  }
+}
+```
+
+<div>
+  <nve-button>
+    <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=elements&config=eyJkZXNjcmlwdGlvbiI6IkVsZW1lbnRzIEFQSSBhbmQgQ3VzdG9tIEVsZW1lbnQgU2NoZW1hIiwiZW52Ijp7Im5wbV9jb25maWdfcmVnaXN0cnkiOiJodHRwczovL3VybS5udmlkaWEuY29tL2FydGlmYWN0b3J5L2FwaS9ucG0vc3ctbmdjLXVuaWZpZWQtbnBtLXByb3h5LyJ9LCJjb21tYW5kIjoicG5wbSAtLXBhY2thZ2U9QG52ZS1sYWJzL2NsaUBsYXRlc3QgZGx4IG52ZS1tY3AifQ%3D%3D">Add to Cursor with PNPM</a>
+  </nve-button>
+</div>
+
+```json
+// .cursor/mcp.json
 {
   "mcpServers": {
     "elements": {
       "command": "pnpm",
       "description": "Elements API and Custom Element Schema",
-      "args": [
-        "--registry=https://registry.npmjs.org",
-        "dlx",
-        "nve-mcp"
-      ]
+      "args": ["--package=@nvidia-elements/cli@latest", "dlx", "nve-mcp"],
+      "env": {
+        "npm_config_registry": "https://registry.npmjs.org"
+      }
     }
   }
 }
 ```
+
+<script type="module">
+  const tabs = document.querySelector('#cursor-install-tabs');
+  const tabPanels = {
+    npm: document.querySelector('#cursor-npm-install'),
+    pnpm: document.querySelector('#cursor-pnpm-install')
+  };
+
+  tabs.addEventListener('click', e => {
+    tabPanels.npm.hidden = true;
+    tabPanels.pnpm.hidden = true;
+    tabPanels[e.target.value].hidden = false;
+  });
+</script>
 
 ## Usage
 

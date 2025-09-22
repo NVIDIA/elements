@@ -1,18 +1,18 @@
 # @nvidia-elements/lint
 
-Utility library for Elements specific lint rules.
+The `@nvidia-elements/lint` package is a utility library that provides Elements-specific lint rules to enforce best practices and prevent common errors when using Elements.
 
 ## Getting Started
 
 ```shell
-# local .npmrc file
-registry=https://registry.npmjs.org
+# setup artifactory registry
+npm config set registry https://registry.npmjs.org
 
 # https://registry.npmjs.org
-pnpm login
+npm login
 
-# install
-pnpm install @nvidia-elements/lint
+# install package
+npm install @nvidia-elements/cli
 ```
 
 ## ESLint
@@ -44,6 +44,25 @@ export default [
 
 ```shell
 eslint -c ./eslint.config.js --color
+```
+
+## Severity
+
+Rules can individually be adjusted for lint severity. By default rules are set to `error`.
+
+```javascript
+import { elementsHtmlConfig, elementsCssConfig } from '@nvidia-elements/lint/eslint';
+
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+  elementsHtmlConfig,
+  {
+    ...elementsCssConfig,
+    rules: {
+      '@nvidia-elements/lint/no-unexpected-css-value': 'warn'
+    }
+  }
+];
 ```
 
 ### Rules

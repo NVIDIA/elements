@@ -247,6 +247,7 @@ async function getProjectMetadata(basePath): Promise<MetadataProject> {
   return {
     name: packageFile.name,
     version: packageFile.version,
+    description: packageFile.description,
     readme,
     changelog,
     tests,
