@@ -1,5 +1,5 @@
 :host {
-  --background: var(--nve-sys-support-color);
+  --background: var(--nve-ref-border-color);
   --color: var(--nve-sys-interaction-field-color);
   --border-radius: var(--nve-ref-border-radius-sm);
   --gap: calc(var(--nve-ref-space-xxxs) / 2);
