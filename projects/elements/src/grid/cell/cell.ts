@@ -13,6 +13,7 @@ import styles from './cell.css?inline';
  * @cssprop --min-height
  * @cssprop --min-width
  * @cssprop --font-weight
+ * @cssprop --font-size
  * @cssprop --height
  * @cssprop --border-left
  * @cssprop --border-right
