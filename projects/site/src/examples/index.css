@@ -4,6 +4,8 @@
 @import '@nvidia-elements/themes/high-contrast.css';
 @import '@nvidia-elements/themes/compact.css';
 @import '@nvidia-elements/themes/debug.css';
+@import '@nvidia-elements/brand/index.css';
+@import '@nvidia-elements/brand/dark.css';
 @import '@nvidia-elements/styles/layout.css';
 @import '@nvidia-elements/styles/labs/layout-viewport.css';
 @import '@nvidia-elements/styles/labs/layout-container.css';

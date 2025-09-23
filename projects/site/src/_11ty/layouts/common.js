@@ -32,8 +32,8 @@ export const renderBaseHead = data => /* html */ `
     @import '@nvidia-elements/themes/compact.css';
     @import '@nvidia-elements/themes/debug.css';
     @import '@nvidia-elements/themes/ddb-dark.css';
-    @import '@nvidia-elements/themes/brand.css';
-    @import '@nvidia-elements/themes/brand-dark.css';
+    @import '@nvidia-elements/brand/index.css';
+    @import '@nvidia-elements/brand/dark.css';
     @import '@nvidia-elements/themes/reduced-motion.css';
     @import '@nvidia-elements/styles/layout.css';
     @import '@nvidia-elements/styles/labs/layout-viewport.css';
