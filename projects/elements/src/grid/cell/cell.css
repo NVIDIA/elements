@@ -4,6 +4,7 @@
   --min-height: var(--row-height);
   --min-width: var(--nve-ref-size-1000);
   --font-weight: var(--nve-ref-font-weight-medium);
+  --font-size: var(--nve-ref-font-size-100);
   --height: 100%;
   --border-left: 0;
   --border-right: 0;

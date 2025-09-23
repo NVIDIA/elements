@@ -63,7 +63,6 @@ export class ProgressRing extends LitElement {
             stroke-dasharray=${(this.value / this.max) * 44 + 'px' + ' ' + '44px'}>
           </circle>
         </svg>
-
         <slot name="status-icon">
           ${this.status !== 'accent' ? html`<nve-icon .name=${statusIcons[this.status]} .status=${this.status as SupportStatus} aria-hidden="true"></nve-icon>` : ''}
         </slot>
