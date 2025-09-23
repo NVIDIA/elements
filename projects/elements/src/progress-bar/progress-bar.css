@@ -8,7 +8,7 @@
 }
 
 :host([status='accent']) {
-  --accent-color: var(--nve-sys-support-accent-color);
+  --accent-color: var(--nve-sys-accent-secondary-background);
 }
 
 :host([status='success']) {

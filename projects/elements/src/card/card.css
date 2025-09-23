@@ -6,10 +6,12 @@
   --border-radius: var(--nve-ref-border-radius-lg);
   --box-shadow: var(--nve-ref-shadow-100);
   --border-bottom: none;
+  --border: 0;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   border-bottom: var(--border-bottom);
   background: var(--background);
+  border: var(--border);
   color: var(--color);
   display: flex;
   flex-direction: column;
