@@ -1,6 +1,6 @@
 :host {
   --background-color: var(--nve-sys-interaction-field-background-100);
-  --ring-color: var(--nve-sys-support-accent-color);
+  --ring-color: var(--nve-sys-accent-secondary-background);
   --ring-background-opacity: 1;
   --ring-width: 2px;
   --width: var(--nve-ref-size-800);
@@ -81,6 +81,10 @@ circle.ring {
 :host([status='warning']) {
   --ring-color: var(--nve-sys-support-warning-emphasis-color);
   --background-color: var(--nve-sys-support-warning-muted-color);
+
+  [zeroValue] svg[role='presentation'] {
+    display: none;
+  }
 }
 
 :host([status='danger']) {
