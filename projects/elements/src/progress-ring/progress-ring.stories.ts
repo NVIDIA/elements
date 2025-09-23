@@ -8,7 +8,7 @@ export default {
 
 export const Default = {
   render: () => html`
-    <div nve-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm">
       <nve-progress-ring status="accent"></nve-progress-ring>
   
       <nve-progress-ring status="accent" value="66"></nve-progress-ring>
@@ -17,7 +17,7 @@ export const Default = {
 
 export const Values = {
   render: () => html`
-    <div nve-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm">
       <nve-progress-ring status="accent"></nve-progress-ring>
 
       <nve-progress-ring status="accent" value="0"></nve-progress-ring>
@@ -32,7 +32,7 @@ export const Values = {
 
 export const Max = {
   render: () => html`
-    <div nve-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm">
       <nve-progress-ring status="accent" max="20" value="5"></nve-progress-ring>
 
       <nve-progress-ring status="accent" max="20" value="10"></nve-progress-ring>
@@ -43,7 +43,7 @@ export const Max = {
     
 export const Status = {
   render: () => html`
-    <div nve-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm">
       <nve-progress-ring status="warning" value="75"></nve-progress-ring>
 
       <nve-progress-ring status="danger" value="75"></nve-progress-ring>
@@ -56,7 +56,7 @@ export const Status = {
     
 export const ZeroValueStatus = {
   render: () => html`
-    <div nve-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm">
       <nve-progress-ring status="success" value="0"></nve-progress-ring>
 
       <nve-progress-ring status="warning" value="0"></nve-progress-ring>
@@ -67,7 +67,7 @@ export const ZeroValueStatus = {
     
 export const WithText = {
   render: () => html`
-    <div nve-layout="column gap:sm pad:md" nve-text="medium">
+    <div nve-layout="column gap:sm" nve-text="medium">
       <div nve-layout="row gap:xs align:center">
         <nve-progress-ring size="xs" status="success" value="0"></nve-progress-ring>
         Loading Successful
@@ -92,7 +92,7 @@ export const WithText = {
     
 export const SlottedIcon = {
   render: () => html`
-    <div nve-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm">
       <nve-progress-ring status="accent">
         <nve-icon name="pause" status="accent" slot="status-icon"></nve-icon>
       </nve-progress-ring>
@@ -121,7 +121,7 @@ export const Sizing = {
     
 export const WithButton = {
   render: () => html`
-    <div nve-layout="row gap:sm pad:md">
+    <div nve-layout="row gap:sm">
       <nve-button>
         <nve-progress-ring status="neutral" size="xxs"></nve-progress-ring>
         Button
