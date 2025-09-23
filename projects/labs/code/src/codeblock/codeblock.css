@@ -1,4 +1,9 @@
 :host {
+  --background: var(--nve-sys-layer-container-background);
+  --font-family: var(--nve-ref-font-family-roboto-mono);
+  --padding: var(--nve-ref-space-sm);
+  --border-radius: var(--nve-ref-border-radius-md);
+  --border: 0;
   all: initial;
   display: block;
   visibility: inherit;
@@ -9,23 +14,16 @@
   pointer-events: inherit;
   outline: var(--nve-debug-element-outline, initial);
   color-scheme: var(--nve-sys-color-scheme);
-}
-
-:host {
-  --background: var(--nve-sys-layer-container-background);
-  --font-family: var(--nve-ref-font-family-roboto-mono);
-  --padding: var(--nve-ref-space-sm);
-  --border-radius: var(--nve-ref-border-radius-md);
-  display: block;
   overflow: hidden;
 }
 
 [internal-host] {
-  position: relative;
-  overflow: auto;
   background: var(--background);
   border-radius: var(--border-radius);
   font-family: var(--font-family);
+  border: var(--border);
+  position: relative;
+  overflow: auto;
   height: 100%;
 }
 
