@@ -1189,6 +1189,9 @@ importers:
       '@nve-internals/vite':
         specifier: workspace:*
         version: link:../internals/vite
+      '@nvidia-elements/brand':
+        specifier: workspace:*
+        version: link:../labs/brand
       '@nvidia-elements/code':
         specifier: workspace:*
         version: link:../labs/code
