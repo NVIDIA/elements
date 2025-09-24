@@ -1,14 +1,10 @@
-import theme from '@nvidia-elements/themes/index.json' with { type: 'json' };
+import { theme } from '@nvidia-elements/themes';
 
 const spaceTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-space'))
-  .map(([key, value]: [string, string]) => [
-    key,
-    parseInt(value.replace('nve-ref-scale-space * ', '').replace('px', ''))
-  ])
-  .map(([id, value]: [string, number]) => ({
+  .map(([id, value]: [string, string]) => ({
     id,
-    value,
+    value: parseInt(value.replace('calc(var(--nve-ref-scale-space) * ', '').replace(')', '').replace('px', '')),
     name: `var(--${id})`
   }));
 
@@ -17,13 +13,9 @@ const minSpaceToken = spaceTokens.sort((a, b) => a.value - b.value)[0]; // 1
 
 const sizeTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-size'))
-  .map(([key, value]: [string, string]) => [
-    key,
-    parseInt(value.replace('nve-ref-scale-size * ', '').replace('px', ''))
-  ])
-  .map(([id, value]: [string, number]) => ({
+  .map(([id, value]: [string, string]) => ({
     id,
-    value,
+    value: parseInt(value.replace('calc(var(--nve-ref-scale-size) * ', '').replace(')', '').replace('px', '')),
     name: `var(--${id})`
   }));
 
@@ -34,7 +26,7 @@ const fontSizeTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-font-size'))
   .map(([id, value]: [string, string]) => ({
     id,
-    value: parseInt(value.replace('nve-ref-scale-text * ', '').replace('px', '')),
+    value: parseInt(value.replace('calc(var(--nve-ref-scale-text) * ', '').replace(')', '').replace('px', '')),
     name: `var(--${id})`
   }));
 
@@ -53,7 +45,7 @@ const borderRadiusTokens = Object.entries(theme)
   .filter(([key, value]: [string, string]) => key.includes('nve-ref-border-radius') && !value.includes('999'))
   .map(([id, value]: [string, string]) => ({
     id,
-    value: parseInt(value.replace('nve-ref-scale-border-radius * ', '').replace('px', '')),
+    value: parseInt(value.replace('calc(var(--nve-ref-scale-border-radius) * ', '').replace(')', '').replace('px', '')),
     name: `var(--${id})`
   }));
 
@@ -64,7 +56,7 @@ const borderWidthTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-border-width'))
   .map(([key, value]: [string, string]) => [
     key,
-    parseInt(value.replace('nve-ref-scale-border-width * ', '').replace('px', ''))
+    parseInt(value.replace('calc(var(--nve-ref-scale-border-width) * ', '').replace(')', '').replace('px', ''))
   ])
   .map(([id, value]: [string, number]) => ({
     id,
@@ -82,7 +74,7 @@ const rule = {
       description: 'Do not allow use of invalid CSS values.',
       category: 'Best Practice',
       recommended: true,
-      url: ''
+      url: 'https://NVIDIA.github.io/elements/docs/lint/'
     },
     fixable: 'code' as const,
     schema: [],
