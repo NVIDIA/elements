@@ -112,4 +112,10 @@ export default [
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-library-dependencies</code></nve-grid-cell>
+    <nve-grid-cell>Disallow incorrect dependency usage of @nve packages in consuming libraries.</nve-grid-cell>
+    <nve-grid-cell>JSON</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
 </nve-grid>

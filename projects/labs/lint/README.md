@@ -74,3 +74,4 @@ export default [
 | `@nvidia-elements/lint/no-deprecated-tags` | Do not allow use of deprecated elements/tags | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attrs` | Do not allow invalid use of nve-* attributes | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attr-values` | Do not allow invalid nve-* attribute values | HTML | `error` |
+| `@nvidia-elements/lint/no-unexpected-library-dependencies` | Disallow incorrect dependency usage of @nve packages in consuming libraries. | JSON | `error` |
