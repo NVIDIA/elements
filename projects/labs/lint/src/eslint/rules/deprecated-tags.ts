@@ -10,7 +10,7 @@ const rule = {
       description: 'Disallow use of deprecated elements in HTML.',
       category: 'Best Practice',
       recommended: true,
-      url: ''
+      url: 'https://NVIDIA.github.io/elements/docs/lint/'
     },
     schema: [],
     messages: {
