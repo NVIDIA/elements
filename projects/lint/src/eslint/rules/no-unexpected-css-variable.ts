@@ -12,9 +12,6 @@ const spaceTokens = Object.entries(theme)
     name: `var(--${id})`
   }));
 
-const maxSpaceToken = spaceTokens.sort((a, b) => b.value - a.value)[0]; // 64
-const minSpaceToken = spaceTokens.sort((a, b) => a.value - b.value)[0]; // 1
-
 const sizeTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-size'))
   .map(([key, value]: [string, string]) => [
@@ -27,54 +24,6 @@ const sizeTokens = Object.entries(theme)
     name: `var(--${id})`
   }));
 
-const maxSizeToken = sizeTokens.sort((a, b) => b.value - a.value)[0]; // 40
-const minSizeToken = sizeTokens.sort((a, b) => a.value - b.value)[0]; // 1
-
-const fontSizeTokens = Object.entries(theme)
-  .filter(([key]) => key.includes('nve-ref-font-size'))
-  .map(([id, value]: [string, string]) => ({
-    id,
-    value: parseInt(value.replace('nve-ref-scale-text * ', '').replace('px', '')),
-    name: `var(--${id})`
-  }));
-
-const maxFontSizeToken = fontSizeTokens.sort((a, b) => b.value - a.value)[0]; // 50
-const minFontSizeToken = fontSizeTokens.sort((a, b) => a.value - b.value)[1]; // 12
-
-const fontWeightTokens = Object.entries(theme)
-  .filter(([key]) => key.includes('nve-ref-font-weight'))
-  .map(([id, value]: [string, string]) => ({
-    id,
-    value,
-    name: `var(--${id})`
-  }));
-
-const borderRadiusTokens = Object.entries(theme)
-  .filter(([key, value]: [string, string]) => key.includes('nve-ref-border-radius') && !value.includes('999'))
-  .map(([id, value]: [string, string]) => ({
-    id,
-    value: parseInt(value.replace('nve-ref-scale-border-radius * ', '').replace('px', '')),
-    name: `var(--${id})`
-  }));
-
-const maxBorderRadiusToken = borderRadiusTokens.sort((a, b) => b.value - a.value)[0]; // 48
-const minBorderRadiusToken = borderRadiusTokens.sort((a, b) => a.value - b.value)[0]; // 0
-
-const borderWidthTokens = Object.entries(theme)
-  .filter(([key]) => key.includes('nve-ref-border-width'))
-  .map(([key, value]: [string, string]) => [
-    key,
-    parseInt(value.replace('nve-ref-scale-border-width * ', '').replace('px', ''))
-  ])
-  .map(([id, value]: [string, number]) => ({
-    id,
-    value,
-    name: `var(--${id})`
-  }));
-
-const maxBorderWidthToken = borderWidthTokens.sort((a, b) => b.value - a.value)[0]; // 4
-const minBorderWidthToken = borderWidthTokens.sort((a, b) => a.value - b.value)[0]; // 1
-
 export default {
   meta: {
     type: 'problem' as const,
@@ -82,7 +31,7 @@ export default {
       description: 'Do not allow use of invalid CSS theme variables.',
       category: 'Best Practice',
       recommended: true,
-      url: ''
+      url: 'https://NVIDIA.github.io/elements/docs/lint/'
     },
     fixable: 'code' as const,
     schema: [],
