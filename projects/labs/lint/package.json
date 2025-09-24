@@ -47,7 +47,9 @@
     "@html-eslint/parser": "catalog:",
     "@eslint/css": "catalog:",
     "@eslint/js": "catalog:",
-    "@nvidia-elements/themes": "workspace:*"
+    "@eslint/json": "catalog:",
+    "@nvidia-elements/themes": "workspace:*",
+    "typescript-eslint": "catalog:"
   },
   "peerDependencies": {
     "eslint": ">= 9"
@@ -55,6 +57,7 @@
   "devDependencies": {
     "@nve-internals/eslint": "workspace:*",
     "@nve-internals/vite": "workspace:*",
+    "@types/node": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "eslint": "catalog:",
     "publint": "catalog:",
