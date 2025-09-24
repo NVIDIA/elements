@@ -151,6 +151,32 @@ StyleDictionary.registerFormat({
   }
 });
 
+StyleDictionary.registerFormat({
+  name: 'custom/javascript',
+  transformGroup: 'web',
+  format: ({ dictionary }) => {
+    const content = formattedVariables({ format: 'javascript', dictionary, outputReferences: true })
+      .replaceAll(';', '')
+      .split('\n')
+      .map(i => {
+        const kebabToCamel = i => i.replace(/-([a-z,0-9])/g, (_, letter) => letter.toUpperCase());
+        let [key, value] = i.split(' = ');
+        // const formattedValue = value.includes('calc') ? value.replace('calc(', '').replace(')', '') : value;
+
+        if (value.includes(' * ')) {
+          const [nveRef, base] = value.split(' * ');
+          value = `calc(var(--${nveRef}) * ${base})`;
+        } else if (value.startsWith('nve-')) {
+          value = `var(--${value})`;
+        }
+
+        return `  '${key}': "${value}"`;
+      })
+      .join(',\n');
+    return `export const VERSION = '0.0.0';\nexport const theme = {\n${content}\n}`;
+  }
+});
+
 async function buildTokens() {
   const themes = globSync(`${sourcePath}*.json`).filter(path => !path.includes('index'));
 
@@ -159,7 +185,8 @@ async function buildTokens() {
     platforms: {
       css: cssOutput(`${buildPath}index.css`),
       json: jsonOutput(`${buildPath}index.json`),
-      schema: schemaOutput(`${buildPath}schema.json`)
+      schema: schemaOutput(`${buildPath}schema.json`),
+      javascript: javascriptOutput(`${buildPath}index.js`)
     }
   });
   await sd.hasInitialized;
@@ -174,7 +201,8 @@ async function buildTokens() {
         source: [`${sourcePath}${theme}.json`],
         platforms: {
           css: cssOutput(`${buildPath}${theme}.css`),
-          json: jsonOutput(`${buildPath}${theme}.json`)
+          json: jsonOutput(`${buildPath}${theme}.json`),
+          javascript: javascriptOutput(`${buildPath}${theme}.js`)
         }
       });
       await sdTheme.hasInitialized;
@@ -212,6 +240,26 @@ function jsonOutput(destination) {
     files: [
       {
         format: 'custom/json',
+        destination,
+        filter: theme !== 'index' ? token => getTheme(token.filePath) !== 'index' : null
+      }
+    ],
+    options: {
+      outputReferences: true,
+      theme
+    }
+  };
+}
+
+function javascriptOutput(destination) {
+  const theme = getTheme(destination);
+  return {
+    prefix: 'nve',
+    transformGroup: 'web',
+    transforms: ['attribute/cti', 'name/kebab', 'size/px', 'color/css', 'custom/validate'],
+    files: [
+      {
+        format: 'custom/javascript',
         destination,
         filter: theme !== 'index' ? token => getTheme(token.filePath) !== 'index' : null
       }
