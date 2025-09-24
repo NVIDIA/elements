@@ -183,12 +183,30 @@ describe('problems-format', () => {
 
       // prettier-ignore
       expect(result.text).toBe(`\
-"file%20with%20spaces.ts" "/test/path/file%20with%20spaces.ts" 1
+"file with spaces.ts" "/test/path/file with spaces.ts" 1
 	error "Test error message" "test-source" [Ln 1, Col 1]
 "file-with-dashes.ts" "/test/path/file-with-dashes.ts" 1
 	error "Test error message" "test-source" [Ln 1, Col 1]
 "file_with_underscores.ts" "/test/path/file_with_underscores.ts" 1
 	error "Test error message" "test-source" [Ln 1, Col 1]`
+      );
+    });
+
+    it('should escape quotes in file paths and problem messages and sources', () => {
+      const problems = [
+        createMockProblem({
+          resource: 'file:///test/path with "quotes"/file with "quotes".ts',
+          message: 'message with "quotes" inside',
+          source: 'source with "quotes"'
+        })
+      ];
+
+      const result = toProblemsFormat(problems);
+
+      // prettier-ignore
+      expect(result.text).toBe(`\
+"file with \\"quotes\\".ts" "/test/path with \\"quotes\\"/file with \\"quotes\\".ts" 1
+	error "message with \\"quotes\\" inside" "source with \\"quotes\\"" [Ln 1, Col 1]`
       );
     });
 
@@ -269,7 +287,7 @@ describe('problems-format', () => {
       expect(createDecorationsCollectionSpy).toHaveBeenCalledTimes(3);
     });
 
-    it('should decorate lines with model', () => {
+    it('should decorate model lines', () => {
       model.setValue(`\
 "file.ts" "/test/path/file.ts" 1
 	error "Test error message" "test-source" [Ln 1, Col 1]`);
