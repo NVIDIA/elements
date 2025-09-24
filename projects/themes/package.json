@@ -43,6 +43,14 @@
   "exports": {
     "./package.json": "./package.json",
     "./CHANGELOG.md": "./CHANGELOG.md",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
     "./data.css-vars.json": "./dist/data.css-vars.json",
     "./fonts/*": "./dist/fonts/*",
     "./*": "./dist/*"
@@ -73,7 +81,7 @@
     },
     "build:styledictionary": {
       "clean": false,
-      "command": "NODE_ENV=production vite build && node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js && node ./build/style-dictionary.minify.js && node ./build/fonts.js && node ./build/version.js",
+      "command": "NODE_ENV=production vite build && node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js && node ./build/style-dictionary.minify.js && node ./build/fonts.js",
       "files": [
         "src/**",
         "!src/**/*.test.lighthouse.ts",
