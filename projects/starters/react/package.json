@@ -93,13 +93,13 @@
       ],
       "output": [],
       "dependencies": [
-        "../../labs/lint:ci"
+        "../../labs/lint:build"
       ]
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
-        "../../labs/lint:ci"
+        "../../labs/lint:build"
       ]
     }
   }
