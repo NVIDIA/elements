@@ -26,7 +26,9 @@ describe('noUnexpectedCssVariable', () => {
     expect(noUnexpectedCssVariable.meta.docs.description).toBe('Do not allow use of invalid CSS theme variables.');
     expect(noUnexpectedCssVariable.meta.docs.category).toBe('Best Practice');
     expect(noUnexpectedCssVariable.meta.docs.recommended).toBe(true);
-    expect(noUnexpectedCssVariable.meta.docs.url).toBe('');
+    expect(noUnexpectedCssVariable.meta.docs.url).toBe(
+      'https://NVIDIA.github.io/elements/docs/lint/'
+    );
     expect(noUnexpectedCssVariable.meta.schema).toBeDefined();
     expect(noUnexpectedCssVariable.meta.messages).toBeDefined();
   });
