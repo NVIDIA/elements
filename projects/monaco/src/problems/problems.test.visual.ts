@@ -14,13 +14,27 @@ const problems = JSON.stringify([
   },
   {
     resource: 'file:///src/components/Button.ts',
-    message: "Type 'string' is not assignable to type 'number'.",
+    message: "Type '\"success\"' is not assignable to type 'number'.",
     severity: ProblemSeverity.Error,
     startLineNumber: 14,
     startColumn: 8,
     endLineNumber: 14,
     endColumn: 24,
     source: 'ts(2322)',
+    owner: 'typescript'
+  },
+  {
+    resource: 'file:///src/components/Button.ts',
+    message: `Unable to resolve signature of class decorator when called as an expression.
+  Argument of type 'typeof Button' is not assignable to parameter of type 'CustomElementClass'.
+    Types of property 'prototype' are incompatible.
+      Type 'Button' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, dir, and 294 more.`,
+    severity: ProblemSeverity.Error,
+    startLineNumber: 8,
+    startColumn: 2,
+    endLineNumber: 8,
+    endColumn: 30,
+    source: 'ts(1238)',
     owner: 'typescript'
   },
   {
@@ -47,14 +61,14 @@ const problems = JSON.stringify([
   }
 ]);
 
-function escapeSingleQuotes(value: string): string {
-  return value.replaceAll("'", '&#39;');
+function escapeQuotes(value: string): string {
+  return value.replaceAll("'", '&apos;').replaceAll('"', '&quot;');
 }
 
 export function template() {
   return /* html */ `
   <div nve-layout="column gap:md" style="width: 640px;">
-    <nve-monaco-problems problems='${escapeSingleQuotes(problems)}'></nve-monaco-problems>
+    <nve-monaco-problems problems='${escapeQuotes(problems)}'></nve-monaco-problems>
     <nve-monaco-problems></nve-monaco-problems>
     <nve-monaco-problems>
       <div slot="empty" nve-layout="column align:center full">

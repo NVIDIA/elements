@@ -88,14 +88,16 @@ function escapeQuotes(text: string): string {
 
 const FILE_LINE_PATTERN = /^(")((?:[^"\\]|\\.)*)(") (")((?:[^"\\]|\\.)*)(") (\d+)$/d;
 
+const ESCAPED_QUOTE_PATTERN = /\\"/dg;
+
 function basename(path: string): string {
   return path.split('/').filter(Boolean).pop();
 }
 
 function toFileLine(uri: string, problems: Problem[]): string {
-  const url = new URL(uri);
-  const file = escapeQuotes(basename(url.pathname));
-  const path = escapeQuotes(url.pathname);
+  const pathname = decodeURIComponent(new URL(uri).pathname);
+  const file = escapeQuotes(basename(pathname));
+  const path = escapeQuotes(pathname);
 
   return `"${file}" "${path}" ${problems.length}`;
 }
@@ -122,7 +124,7 @@ const MARKER_LINE_PATTERN =
 
 function toProblemLine(problem: Problem): string {
   const severity = toSeverityLabel(problem.severity);
-  const message = escapeQuotes(problem.message);
+  const message = escapeQuotes(problem.message).split('\n')[0];
   const source = escapeQuotes(problem.source ?? '');
 
   return `\t${severity} "${message}" "${source}" [Ln ${problem.startLineNumber}, Col ${problem.startColumn}]`;
@@ -149,6 +151,18 @@ function toProblemLineDecorations(
   return decorations;
 }
 
+function toEscapedQuotesDecorations(
+  monaco: Monaco,
+  lineNumber: number,
+  indices: RegExpIndicesArray
+): monaco.editor.IModelDeltaDecoration[] {
+  const decorations: monaco.editor.IModelDeltaDecoration[] = [];
+  for (const index of indices) {
+    decorations.push(toRangeDecoration(monaco, lineNumber, index, 'problem-escaped-quote'));
+  }
+  return decorations;
+}
+
 function isMatchWithIndices(
   results: RegExpExecArray | null
 ): results is RegExpExecArray & { indices: RegExpIndicesArray } {
@@ -163,7 +177,7 @@ function toLineDecorations(monaco: Monaco, model: monaco.editor.ITextModel): mon
   const decorations: monaco.editor.IModelDeltaDecoration[] = [];
   for (let lineNumber = 1; lineNumber <= lineCount; lineNumber++) {
     const line = model.getLineContent(lineNumber);
-    let matches: RegExpExecArray | null;
+    let matches: RegExpExecArray | RegExpStringIterator<RegExpExecArray> | null;
     switch (true) {
       case isMatchWithIndices((matches = FILE_LINE_PATTERN.exec(line))): {
         const { indices } = matches;
@@ -177,6 +191,10 @@ function toLineDecorations(monaco: Monaco, model: monaco.editor.ITextModel): mon
       }
       default:
         throw new Error(`Invalid input: "${line}"`);
+    }
+    for (const match of line.matchAll(ESCAPED_QUOTE_PATTERN)) {
+      const { indices } = match;
+      decorations.push(...toEscapedQuotesDecorations(monaco, lineNumber, indices));
     }
   }
   return decorations;
