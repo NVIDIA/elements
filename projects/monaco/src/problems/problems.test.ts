@@ -71,55 +71,52 @@ function getEditorLineElement(editor: monaco.editor.IStandaloneCodeEditor, line:
   return editor.getDomNode().querySelector<HTMLElement>(`.view-line:nth-child(${line})`);
 }
 
-function getCenterCoordinates(element: HTMLElement): {
-  clientX: number;
-  clientY: number;
-  offsetX: number;
-  offsetY: number;
-} {
+type EmulatedMouseOffsetOptions = { offsetX?: number; offsetY?: number };
+type EmulatedMouseEventOptions = { detail?: number; button?: number } & EmulatedMouseOffsetOptions;
+
+function getElementCoordinates(element: HTMLElement, options: EmulatedMouseOffsetOptions = {}) {
   const rect = element.getBoundingClientRect();
-  const clientX = rect.left + rect.width / 2;
-  const clientY = rect.top + rect.height / 2;
-  const offsetX = clientX - rect.left;
-  const offsetY = clientY - rect.top;
+  const { offsetX = rect.width / 2, offsetY = rect.height / 2 } = options;
+  const clientX = rect.left + offsetX;
+  const clientY = rect.top + offsetY;
   return { clientX, clientY, offsetX, offsetY };
 }
 
-function emulateMouseDown(element: HTMLElement, options: { detail?: number; button?: number } = {}) {
-  const coordinates = getCenterCoordinates(element);
+function emulateMouseDown(element: HTMLElement, options: EmulatedMouseEventOptions = {}) {
+  const coordinates = getElementCoordinates(element, options);
   element.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, ...coordinates, ...options }));
 }
 
-function emulateMouseUp(element: HTMLElement, options: { detail?: number; button?: number } = {}) {
-  const coordinates = getCenterCoordinates(element);
+function emulateMouseUp(element: HTMLElement, options: EmulatedMouseEventOptions = {}) {
+  const coordinates = getElementCoordinates(element, options);
   element.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, ...coordinates, ...options }));
 }
 
-function emulateClick(element: HTMLElement, options: { detail?: number; button?: number } = {}) {
-  const coordinates = getCenterCoordinates(element);
+function emulateClick(element: HTMLElement, options: EmulatedMouseEventOptions = {}) {
+  const coordinates = getElementCoordinates(element, options);
 
-  element.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, ...coordinates, ...options }));
-  element.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, ...coordinates, ...options }));
-  element.dispatchEvent(new MouseEvent('click', { bubbles: true, ...coordinates, ...options }));
+  element.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, ...options, ...coordinates }));
+  element.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, ...options, ...coordinates }));
+  element.dispatchEvent(new MouseEvent('click', { bubbles: true, ...options, ...coordinates }));
 }
 
 function emulateLineClick(
   editor: monaco.editor.IStandaloneCodeEditor,
   line: number,
-  options: { detail?: number; button?: number } = {}
+  options: EmulatedMouseEventOptions = {}
 ) {
   const element = getEditorLineElement(editor, line);
   emulateClick(element, options);
 }
 
-function emulateMouseMove(element: HTMLElement) {
-  const coordinates = getCenterCoordinates(element);
-  element.dispatchEvent(new MouseEvent('mousemove', { bubbles: true, ...coordinates }));
+function emulateMouseMove(element: HTMLElement, options: EmulatedMouseOffsetOptions = {}) {
+  const coordinates = getElementCoordinates(element, options);
+  element.dispatchEvent(new MouseEvent('mousemove', { bubbles: true, ...options, ...coordinates }));
 }
 
-function emulateMouseLeave(element: HTMLElement) {
-  const coordinates = getCenterCoordinates(element);
-  element.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true, ...coordinates }));
+function emulateMouseLeave(element: HTMLElement, options: EmulatedMouseOffsetOptions = {}) {
+  const coordinates = getElementCoordinates(element);
+  element.dispatchEvent(new MouseEvent('mouseleave', { bubbles: true, ...options, ...coordinates }));
 }
 
 // test fixtures
@@ -138,13 +135,27 @@ const problems: Problem[] = [
   },
   {
     resource: 'file:///src/components/Button.ts',
-    message: "Type 'string' is not assignable to type 'number'.",
+    message: `Type '"success"' is not assignable to type 'number'.`,
     severity: ProblemSeverity.Error,
-    startLineNumber: 14,
+    startLineNumber: 22,
     startColumn: 8,
-    endLineNumber: 14,
+    endLineNumber: 22,
     endColumn: 24,
     source: 'ts(2322)',
+    owner: 'typescript'
+  },
+  {
+    resource: 'file:///src/components/Button.ts',
+    message: `Unable to resolve signature of class decorator when called as an expression.
+  Argument of type 'typeof Button' is not assignable to parameter of type 'CustomElementClass'.
+    Types of property 'prototype' are incompatible.
+      Type 'Button' is missing the following properties from type 'HTMLElement': accessKey, accessKeyLabel, autocapitalize, dir, and 294 more.`,
+    severity: ProblemSeverity.Error,
+    startLineNumber: 8,
+    startColumn: 2,
+    endLineNumber: 8,
+    endColumn: 30,
+    source: 'ts(1238)',
     owner: 'typescript'
   },
   {
@@ -172,8 +183,9 @@ const problems: Problem[] = [
 ];
 
 const problemsText = `\
-"Button.ts" "/src/components/Button.ts" 2
-	error "Type 'string' is not assignable to type 'number'." "ts(2322)" [Ln 14, Col 8]
+"Button.ts" "/src/components/Button.ts" 3
+	error "Unable to resolve signature of class decorator when called as an expression." "ts(1238)" [Ln 8, Col 2]
+	error "Type '\\"success\\"' is not assignable to type 'number'." "ts(2322)" [Ln 22, Col 8]
 	warning "'index' is declared but its value is never read." "ts(6133)" [Ln 16, Col 5]
 "formatDate.ts" "/src/utils/formatDate.ts" 1
 	hint "Convert 'var' to 'let' or 'const'." "eslint" [Ln 57, Col 1]
@@ -182,12 +194,13 @@ const problemsText = `\
 
 const expectedRows = [
   { type: 'file' },
+  { type: 'problem', problem: problems[2] },
   { type: 'problem', problem: problems[1] },
   { type: 'problem', problem: problems[0] },
   { type: 'file' },
-  { type: 'problem', problem: problems[3] },
+  { type: 'problem', problem: problems[4] },
   { type: 'file' },
-  { type: 'problem', problem: problems[2] }
+  { type: 'problem', problem: problems[3] }
 ];
 
 // tests
@@ -319,7 +332,7 @@ describe('nve-monaco-problems', () => {
       await expect(eventAfter(element, 'problem-context-menu', () => emulateShiftF10Key(editor))).resolves.toHaveProperty('detail', { problem });
     }
 
-    await expectFileRowActionEvents(2);
+    await expectFileRowActionEvents(3);
 
     await expect(eventAfter(element, 'problem-selected', () => emulateArrowDownKey(editor))).resolves.toStrictEqual(
       expect.objectContaining({ detail: { problem: expectedRows[1].problem } })
@@ -331,32 +344,42 @@ describe('nve-monaco-problems', () => {
     );
     await expectProblemRowActionEvents(expectedRows[2].problem);
 
+    await expect(eventAfter(element, 'problem-selected', () => emulateArrowDownKey(editor))).resolves.toStrictEqual(
+      expect.objectContaining({ detail: { problem: expectedRows[3].problem } })
+    );
+    await expectProblemRowActionEvents(expectedRows[3].problem);
+
     emulateArrowDownKey(editor);
     await expectFileRowActionEvents(1);
 
     await expect(eventAfter(element, 'problem-selected', () => emulateArrowDownKey(editor))).resolves.toStrictEqual(
-      expect.objectContaining({ detail: { problem: expectedRows[4].problem } })
+      expect.objectContaining({ detail: { problem: expectedRows[5].problem } })
     );
-    await expectProblemRowActionEvents(expectedRows[4].problem);
+    await expectProblemRowActionEvents(expectedRows[5].problem);
 
     emulateArrowDownKey(editor);
     await expectFileRowActionEvents(1);
 
     await expect(eventAfter(element, 'problem-selected', () => emulateArrowDownKey(editor))).resolves.toStrictEqual(
-      expect.objectContaining({ detail: { problem: expectedRows[6].problem } })
+      expect.objectContaining({ detail: { problem: expectedRows[7].problem } })
     );
-    await expectProblemRowActionEvents(expectedRows[6].problem);
+    await expectProblemRowActionEvents(expectedRows[7].problem);
 
     emulateArrowUpKey(editor);
     await expectFileRowActionEvents(1);
 
     await expect(eventAfter(element, 'problem-selected', () => emulateArrowUpKey(editor))).resolves.toStrictEqual(
-      expect.objectContaining({ detail: { problem: expectedRows[4].problem } })
+      expect.objectContaining({ detail: { problem: expectedRows[5].problem } })
     );
-    await expectProblemRowActionEvents(expectedRows[4].problem);
+    await expectProblemRowActionEvents(expectedRows[5].problem);
 
     emulateArrowUpKey(editor);
     await expectFileRowActionEvents(1);
+
+    await expect(eventAfter(element, 'problem-selected', () => emulateArrowUpKey(editor))).resolves.toStrictEqual(
+      expect.objectContaining({ detail: { problem: expectedRows[3].problem } })
+    );
+    await expectProblemRowActionEvents(expectedRows[3].problem);
 
     await expect(eventAfter(element, 'problem-selected', () => emulateArrowUpKey(editor))).resolves.toStrictEqual(
       expect.objectContaining({ detail: { problem: expectedRows[2].problem } })
@@ -369,7 +392,7 @@ describe('nve-monaco-problems', () => {
     await expectProblemRowActionEvents(expectedRows[1].problem);
 
     emulateArrowUpKey(editor);
-    await expectFileRowActionEvents(2);
+    await expectFileRowActionEvents(3);
   });
 
   it('should gracefully ignore smart select expand and retain existing selection', async () => {
@@ -413,31 +436,33 @@ describe('nve-monaco-problems', () => {
       return editorEl.shadowRoot.querySelectorAll<HTMLElement>('.view-overlays .problems-line-hovered');
     }
 
-    emulateMouseMove(getEditorLineElement(editor, 1));
+    const mouseOptions = { offsetX: 8 };
+
+    emulateMouseMove(getEditorLineElement(editor, 1), mouseOptions);
     await expect.poll(() => getHoveredLineElement(1)).not.toBeNull();
     expect(getHoveredLineElements().length).toBe(1);
-    emulateMouseLeave(getEditorLineElement(editor, 1));
+    emulateMouseLeave(getEditorLineElement(editor, 1), mouseOptions);
     await expect.poll(() => getHoveredLineElements().length).toBe(0);
 
-    emulateMouseMove(getEditorLineElement(editor, 2));
+    emulateMouseMove(getEditorLineElement(editor, 2), mouseOptions);
     await expect.poll(() => getHoveredLineElement(2)).not.toBeNull();
     expect(getHoveredLineElements().length).toBe(1);
-    emulateMouseLeave(getEditorLineElement(editor, 2));
+    emulateMouseLeave(getEditorLineElement(editor, 2), mouseOptions);
     await expect.poll(() => getHoveredLineElements().length).toBe(0);
 
-    emulateMouseMove(getEditorLineElement(editor, 3));
+    emulateMouseMove(getEditorLineElement(editor, 3), mouseOptions);
     await expect.poll(() => getHoveredLineElement(3)).not.toBeNull();
     expect(getHoveredLineElements().length).toBe(1);
-    emulateMouseLeave(getEditorLineElement(editor, 3));
+    emulateMouseLeave(getEditorLineElement(editor, 3), mouseOptions);
     await expect.poll(() => getHoveredLineElements().length).toBe(0);
 
-    emulateMouseMove(getEditorLineElement(editor, 4));
+    emulateMouseMove(getEditorLineElement(editor, 4), mouseOptions);
     await expect.poll(() => getHoveredLineElement(4)).not.toBeNull();
     expect(getHoveredLineElements().length).toBe(1);
-    emulateMouseLeave(getEditorLineElement(editor, 4));
+    emulateMouseLeave(getEditorLineElement(editor, 4), mouseOptions);
     await expect.poll(() => getHoveredLineElements().length).toBe(0);
 
-    emulateMouseMove(editorEl.shadowRoot.querySelector<HTMLElement>('.view-lines'));
+    emulateMouseMove(editorEl.shadowRoot.querySelector<HTMLElement>('.view-lines'), mouseOptions);
     await expect.poll(() => getHoveredLineElements().length).toBe(0);
   });
 
@@ -447,31 +472,34 @@ describe('nve-monaco-problems', () => {
     expect(model.getLineCount()).toBe(expectedRows.length);
     await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
 
+    const mouseOptions = { offsetX: 8 };
+
     // prettier-ignore
     async function expectFileRowActionEvents(line: number, childLineCount: number) {
       dispatchEventSpy.mockClear();
 
-      emulateLineClick(editor, line);
+      emulateLineClick(editor, line, mouseOptions);
       await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length - childLineCount);
 
-      emulateLineClick(editor, line);
+      emulateLineClick(editor, line, mouseOptions);
       await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
     }
 
     // prettier-ignore
     async function expectProblemRowActionEvents(line: number, problem: Problem) {
-      await expect(eventAfter(element, 'problem-selected', () => emulateLineClick(editor, line))).resolves.toHaveProperty('detail', { problem });
-      await expect(eventAfter(element, 'problem-activated', () => emulateLineClick(editor, line, { detail: 2 }))).resolves.toHaveProperty('detail', { problem });
-      await expect(eventAfter(element, 'problem-context-menu', () => emulateLineClick(editor, line, { button: 2 }))).resolves.toHaveProperty('detail', { problem });
+      await expect(eventAfter(element, 'problem-selected', () => emulateLineClick(editor, line, mouseOptions))).resolves.toHaveProperty('detail', { problem });
+      await expect(eventAfter(element, 'problem-activated', () => emulateLineClick(editor, line, { detail: 2, ...mouseOptions }))).resolves.toHaveProperty('detail', { problem });     
+      await expect(eventAfter(element, 'problem-context-menu', () => emulateLineClick(editor, line, { button: 2, ...mouseOptions }))).resolves.toHaveProperty('detail', { problem });
     }
 
-    await expectFileRowActionEvents(1, 2);
-    await expectProblemRowActionEvents(2, problems[1]);
-    await expectProblemRowActionEvents(3, problems[0]);
-    await expectFileRowActionEvents(4, 1);
-    await expectProblemRowActionEvents(5, problems[3]);
-    await expectFileRowActionEvents(6, 1);
-    await expectProblemRowActionEvents(7, problems[2]);
+    await expectFileRowActionEvents(1, 3);
+    await expectProblemRowActionEvents(2, expectedRows[1].problem);
+    await expectProblemRowActionEvents(3, expectedRows[2].problem);
+    await expectProblemRowActionEvents(4, expectedRows[3].problem);
+    await expectFileRowActionEvents(5, 1);
+    await expectProblemRowActionEvents(6, expectedRows[5].problem);
+    await expectFileRowActionEvents(7, 1);
+    await expectProblemRowActionEvents(8, expectedRows[7].problem);
   });
 
   it('should not interfere with the built-in folding behavior', async () => {
