@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.6...@nvidia-elements/code-v0.3.0) (2025-09-25)
+
+
+### Features
+
+* **labs-code:** border css prop ([2629a7b](https://github.com/NVIDIA/elements/commit/2629a7bfd8e21abb38b7c86c395ffd0f8cf8225c))
+
 ## [@nvidia-elements/code-v0.2.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.5...@nvidia-elements/code-v0.2.6) (2025-09-15)
 
 
