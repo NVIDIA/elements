@@ -3,7 +3,7 @@ import { type MetadataExample } from '@nve-internals/metadata';
 export function getAvailableExamples(format: 'markdown' | 'json', examples: Partial<MetadataExample>[]) {
   const result = examples
     .filter(e => !e.deprecated && !e.tags.includes('anti-pattern') && !e.element?.includes('internal'))
-    .map(s => ({ id: s.id, description: s.description, element: s.element ?? '' }));
+    .map(s => ({ id: s.id, summary: s.summary, element: s.element ?? '' }));
   return format === 'markdown' ? result.map(e => renderExampleHeaderMarkdown(e)).join('\n\n---\n\n') : result;
 }
 
@@ -32,7 +32,8 @@ export async function filterExamples(query: string, examples: MetadataExample[])
       for (const word of q.split(/\s+/).filter(Boolean)) {
         if (example.id.toLowerCase() === word.toLowerCase()) score += 5;
         if (example.element?.toLowerCase().includes(word)) score += 4;
-        if (example.description.toLowerCase().includes(word)) score += 3;
+        if (example.summary.toLowerCase().includes(word)) score += 3;
+        if (example.description.toLowerCase().includes(word)) score += 2;
         if (
           example.id.toLowerCase().includes(word) ||
           example.id
@@ -67,8 +68,9 @@ export function renderExampleMarkdown(example: Partial<MetadataExample>) {
 }
 
 export function renderExampleHeaderMarkdown(example: Partial<MetadataExample>) {
-  const description = example.description ? `${wrapText(example.description)}\n\n` : '';
-  return `## ${example.id}${example.element ? ' - ' : ''}${example.element ?? ''}\n\n${description}`;
+  const content = example.summary ? example.summary : example.description;
+  const formattedContent = content ? `${wrapText(content)}\n\n` : '';
+  return `## ${example.id}${example.element ? ' - ' : ''}${example.element ?? ''}\n\n${formattedContent}`;
 }
 
 export function wrapText(text = '', width = 80) {

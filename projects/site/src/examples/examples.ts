@@ -1,3 +1,4 @@
+import './examples.css';
 import type { PagePanelContent } from '@nvidia-elements/core/page';
 
 const iframe = globalThis.document.querySelector('iframe');
