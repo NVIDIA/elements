@@ -4,8 +4,8 @@ import { lighthouseRunner } from '@nve-internals/vite';
 describe('toggletip lighthouse report', () => {
   test('toggletip should meet lighthouse benchmarks', async () => {
     const report = await lighthouseRunner.getReport('nve-toggletip', /* html */`
-      <button id="btn">button</button>
-      <nve-toggletip trigger="btn" anchor="btn" closable>hello</nve-toggletip>
+      <button popovertarget="toggletip">button</button>
+      <nve-toggletip id="toggletip">hello</nve-toggletip>
       <script type="module">
         import '@nvidia-elements/core/toggletip/define.js';
       </script>

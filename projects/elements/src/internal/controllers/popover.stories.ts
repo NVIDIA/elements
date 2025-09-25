@@ -110,6 +110,8 @@ export const Interactive = {
   `
 }
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
+
 export const LegacyInteractive = {
   render: () => html`
     <div nve-layout="row align:center gap:xl" style="height: 300px">
