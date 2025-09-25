@@ -27,12 +27,10 @@ export class ExamplesService {
             properties: {
               id: { type: 'string' },
               summary: { type: 'string' },
-              template: { type: 'string' },
-              element: { type: 'string' },
-              entrypoint: { type: 'string' }
+              element: { type: 'string' }
             },
             additionalProperties: false,
-            required: ['id', 'summary', 'template', 'element', 'entrypoint']
+            required: ['id', 'summary', 'element']
           }
         }
       ],
@@ -62,7 +60,26 @@ export class ExamplesService {
       required: ['query']
     },
     outputSchema: {
-      oneOf: [{ type: 'string' }, { type: 'array' }],
+      oneOf: [
+        { type: 'string' },
+        {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'string' },
+              summary: { type: 'string' },
+              description: { type: 'string' },
+              template: { type: 'string' },
+              entrypoint: { type: 'string' },
+              element: { type: 'string' },
+              tags: { type: 'array', items: { type: 'string' } }
+            },
+            additionalProperties: false,
+            required: ['id', 'summary', 'element']
+          }
+        }
+      ],
       additionalProperties: false
     }
   })

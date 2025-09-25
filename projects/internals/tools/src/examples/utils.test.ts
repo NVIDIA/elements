@@ -287,7 +287,7 @@ describe('utils', () => {
       };
 
       const result = renderExampleMarkdown(example);
-      expect(result).toBe('## TestExample\n\n');
+      expect(result).toBe('## TestExample');
     });
   });
 
