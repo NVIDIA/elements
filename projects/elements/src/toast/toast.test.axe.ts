@@ -11,8 +11,8 @@ describe(Toast.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <button id="btn">button</button>
-      <nve-toast trigger="btn" anchor="btn">toast</nve-toast>
+      <button popovertarget="toast">button</button>
+      <nve-toast id="toast">toast</nve-toast>
     `);
     element = fixture.querySelector(Toast.metadata.tag);
     await elementIsStable(element);
