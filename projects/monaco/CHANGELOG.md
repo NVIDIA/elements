@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.2.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.2...@nvidia-elements/monaco-v1.2.3) (2025-09-25)
+
+
+### Bug Fixes
+
+* **monaco:** escaped quote and newlines rendering in problems ([6f90d48](https://github.com/NVIDIA/elements/commit/6f90d48300037bfd584ba8ef900af0fcc0bce300))
+
 ## [@nvidia-elements/monaco-v1.2.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.1...@nvidia-elements/monaco-v1.2.2) (2025-09-18)
 
 
