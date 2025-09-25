@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.6.3...@nvidia-elements/themes-v1.7.0) (2025-09-25)
+
+
+### Features
+
+* **themes:** add js base output file ([d3ea29e](https://github.com/NVIDIA/elements/commit/d3ea29e6d0eb874f94ae0839119acbafaa2fb74b))
+
 ## [@nvidia-elements/themes-v1.6.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.6.2...@nvidia-elements/themes-v1.6.3) (2025-07-07)
 
 
