@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.12](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.11...@nvidia-elements/core-v1.39.12) (2025-09-25)
+
+
+### Bug Fixes
+
+* **elements:** invalid css variable references ([ac468df](https://github.com/NVIDIA/elements/commit/ac468dfb48551b3d41f01293fecd2ca61a9eb926))
+
 ## [@nvidia-elements/core-v1.39.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.10...@nvidia-elements/core-v1.39.11) (2025-09-25)
 
 
