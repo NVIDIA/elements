@@ -84,19 +84,49 @@ export default [
   </nve-grid-header>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-css-variable</code></nve-grid-cell>
-    <nve-grid-cell>Do not allow use of invalid CSS theme variables</nve-grid-cell>
+    <nve-grid-cell>Disallow use of invalid CSS theme variables</nve-grid-cell>
     <nve-grid-cell>CSS</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-css-value</code></nve-grid-cell>
-    <nve-grid-cell>Do not allow use of invalid CSS value</nve-grid-cell>
+    <nve-grid-cell>Disallow use of invalid CSS value</nve-grid-cell>
     <nve-grid-cell>CSS</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unknown-css-variable</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of unknown --nve-* CSS theme variables</nve-grid-cell>
+    <nve-grid-cell>CSS</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-css-variable</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated --mlv-* CSS theme variables.</nve-grid-cell>
+    <nve-grid-cell>CSS</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-attributes</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated attributes in HTML.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-icon-names</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated icon names.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-popover-attributes</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated popover attributes.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-tags</code></nve-grid-cell>
-    <nve-grid-cell>Do not allow use of deprecated elements/tags</nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated elements/tags</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
@@ -107,14 +137,8 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-restricted-attr-values</code></nve-grid-cell>
-    <nve-grid-cell>Do not allow invalid nve-* attribute values</nve-grid-cell>
-    <nve-grid-cell>HTML</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-library-dependencies</code></nve-grid-cell>
-    <nve-grid-cell>Disallow incorrect dependency usage of @nve packages in consuming libraries.</nve-grid-cell>
+    <nve-grid-cell>Disallow incorrect dependency usage of @nve packages in consuming libraries</nve-grid-cell>
     <nve-grid-cell>JSON</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>

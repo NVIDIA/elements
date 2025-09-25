@@ -1,10 +1,10 @@
-import theme from '@nvidia-elements/themes/index.json' with { type: 'json' };
+import { theme } from '@nvidia-elements/themes';
 
 const spaceTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-space'))
   .map(([key, value]: [string, string]) => [
     key,
-    parseInt(value.replace('nve-ref-scale-space * ', '').replace('px', ''))
+    parseInt(value.replace('calc(var(--nve-ref-scale-space) * ', '').replace(')', '').replace('px', ''))
   ])
   .map(([id, value]: [string, number]) => ({
     id,
@@ -16,7 +16,7 @@ const sizeTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-size'))
   .map(([key, value]: [string, string]) => [
     key,
-    parseInt(value.replace('nve-ref-scale-size * ', '').replace('px', ''))
+    parseInt(value.replace('calc(var(--nve-ref-scale-size) * ', '').replace(')', '').replace('px', ''))
   ])
   .map(([id, value]: [string, number]) => ({
     id,
@@ -24,11 +24,11 @@ const sizeTokens = Object.entries(theme)
     name: `var(--${id})`
   }));
 
-export default {
+const rule = {
   meta: {
     type: 'problem' as const,
     docs: {
-      description: 'Do not allow use of invalid CSS theme variables.',
+      description: 'Disallow use of invalid CSS theme variables.',
       category: 'Best Practice',
       recommended: true,
       url: 'https://NVIDIA.github.io/elements/docs/lint/'
@@ -130,4 +130,6 @@ export default {
       }
     };
   }
-};
+} as const;
+
+export default rule;
