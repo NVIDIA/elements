@@ -142,6 +142,8 @@ export const Position = {
   `
 };
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
+
 export const LegacyTrigger = {
   inline: false,
   render: () => html`

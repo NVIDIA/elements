@@ -557,6 +557,8 @@ const schema = {
 class ComboboxDemo extends LitElement {  
   @state() private value = [{ name: '', value: '' }];
 
+  // todo
+  /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
   render() {
     return html`
       <nve-button id="filter-btn" ?pressed=${!!this.value.filter(v => v.name.length).length}><nve-icon name="filter"></nve-icon> </nve-icon>filters</nve-button>

@@ -85,7 +85,7 @@
 }
 
 .error {
-  color: var(--nve-ref-color-error-500);
+  color: var(--nve-sys-support-danger-color);
   padding: var(--nve-ref-space-md);
   text-align: center;
 }
