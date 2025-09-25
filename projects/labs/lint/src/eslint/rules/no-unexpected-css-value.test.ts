@@ -23,7 +23,7 @@ describe('noUnexpectedCssValue', () => {
     expect(noUnexpectedCssValue.meta).toBeDefined();
     expect(noUnexpectedCssValue.meta.type).toBe('problem');
     expect(noUnexpectedCssValue.meta.docs).toBeDefined();
-    expect(noUnexpectedCssValue.meta.docs.description).toBe('Do not allow use of invalid CSS values.');
+    expect(noUnexpectedCssValue.meta.docs.description).toBe('Disallow use of invalid CSS values.');
     expect(noUnexpectedCssValue.meta.docs.category).toBe('Best Practice');
     expect(noUnexpectedCssValue.meta.docs.recommended).toBe(true);
     expect(noUnexpectedCssValue.meta.docs.url).toBe(

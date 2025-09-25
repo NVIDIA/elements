@@ -1,7 +1,10 @@
 import type { Linter } from 'eslint';
 import html from '@html-eslint/eslint-plugin';
 import htmlParser from '@html-eslint/parser';
-import deprecatedTags from '../rules/deprecated-tags.js';
+import noDeprecatedTags from '../rules/no-deprecated-tags.js';
+import noDeprecatedAttributes from '../rules/no-deprecated-attributes.js';
+import noDeprecatedIconNames from '../rules/no-deprecated-icon-names.js';
+import noDeprecatedPopoverAttributes from '../rules/no-deprecated-popover-attributes.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
 
@@ -30,13 +33,18 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint': {
       rules: {
         'no-restricted-attrs': html.rules['no-restricted-attrs'],
-        'no-restricted-attr-values': html.rules['no-restricted-attr-values'],
-        'no-deprecated-tags': deprecatedTags
+        'no-deprecated-tags': noDeprecatedTags,
+        'no-deprecated-attributes': noDeprecatedAttributes,
+        'no-deprecated-icon-names': noDeprecatedIconNames,
+        'no-deprecated-popover-attributes': noDeprecatedPopoverAttributes
       }
     }
   },
   rules: {
     '@nvidia-elements/lint/no-deprecated-tags': ['error'],
+    '@nvidia-elements/lint/no-deprecated-attributes': ['error'],
+    '@nvidia-elements/lint/no-deprecated-icon-names': ['error'],
+    '@nvidia-elements/lint/no-deprecated-popover-attributes': ['error'],
     '@nvidia-elements/lint/no-restricted-attrs': [
       'error',
       {
@@ -65,13 +73,5 @@ export const elementsHtmlConfig: Linter.Config = {
         message: 'Use of nve-theme is not allowed, use nve-theme instead.'
       }
     ]
-    // '@nvidia-elements/lint/no-restricted-attr-values': [
-    //   'off', // disabled, need to add custom rule matcher to prevent false positives on non icon elements
-    //   {
-    //     attrPatterns: ['name'],
-    //     attrValuePatterns: [].map(i => `^${i}$`),
-    //     message: 'Icon name {{attrValuePatterns}} is deprecated.'
-    //   }
-    // ]
   }
 };
