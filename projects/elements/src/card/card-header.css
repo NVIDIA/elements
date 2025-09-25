@@ -32,7 +32,7 @@
 ::slotted([slot='subtitle']) {
   margin: 0;
   font-size: var(--nve-ref-font-size-100);
-  font-weight: var(--nve-ref-font-weight-normal);
+  font-weight: var(--nve-ref-font-weight-regular);
 }
 
 ::slotted(nve-tabs),

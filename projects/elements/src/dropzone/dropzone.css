@@ -46,7 +46,7 @@
 
 .text-center {
   text-align: center;
-  line-height: var(--nve-ref-line-height-relaxed);
+  line-height: var(--nve-ref-font-line-height-relaxed);
   font-size: var(--nve-ref-font-size-200);
 }
 .text-center::first-letter {
