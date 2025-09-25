@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.1.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.0.1...@nvidia-elements/lint-v0.1.0) (2025-09-25)
+
+
+### Features
+
+* **labs-lint:** no-unexpected-library-dependencies ([6f1b0cf](https://github.com/NVIDIA/elements/commit/6f1b0cf3352fda816385dae01b4825617dc2f94e))
+
 ## [@nvidia-elements/lint-v0.0.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.0.0...@nvidia-elements/lint-v0.0.1) (2025-09-19)
 
 
