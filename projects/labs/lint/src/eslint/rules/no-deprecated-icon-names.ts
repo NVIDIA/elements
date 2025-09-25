@@ -1,0 +1,79 @@
+import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
+import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+
+const DEPRECATED_ICONS = {
+  'chevron-right': 'chevron',
+  'chevron-down': 'chevron',
+  'chevron-left': 'chevron',
+  'additional-actions': 'more-actions',
+  analytics: 'pie-chart',
+  annotation: 'transparent-box',
+  'app-switcher': 'switch-apps',
+  assist: 'chat-bubble',
+  checkmark: 'check',
+  date: 'calendar',
+  docs: 'book',
+  'expand-full-screen': 'maximize',
+  'expand-panel': 'arrow-stop',
+  'collapse-panel': 'arrow-stop',
+  failed: 'x-circle',
+  'favorite-filled': 'star',
+  'favorite-outline': 'star-stroke',
+  information: 'information-circle-stroke',
+  maintenance: 'wrench',
+  'navigate-to': 'arrow',
+  'open-external-link': 'arrow-angle',
+  location: 'map-pin',
+  'pinned-1': 'pin',
+  project: 'folder',
+  settings: 'gear',
+  user: 'person',
+  'video-pause': 'pause',
+  'video-play': 'play',
+  'video-stop': 'stop',
+  visible: 'eye',
+  warning: 'exclamation-triangle'
+};
+
+const rule = {
+  meta: {
+    type: 'problem' as const,
+    docs: {
+      description: 'Disallow use of deprecated icon names.',
+      category: 'Best Practice',
+      recommended: true,
+      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+    },
+    schema: [],
+    messages: {
+      ['unexpected-deprecated-icon-attribute']:
+        'Unexpected use of deprecated icon name of {{deprecated}}. Use {{alternative}} instead.'
+    }
+  },
+  create(context) {
+    return createVisitors(context, {
+      Tag(node) {
+        if (node.name === 'nve-icon') {
+          const attr = findAttr(node, 'name');
+          if (attr) {
+            const deprecated = ((attr.value && attr.value.value) || '').toLowerCase();
+            const alternative = DEPRECATED_ICONS[deprecated];
+
+            if (alternative) {
+              context.report({
+                node,
+                data: {
+                  alternative,
+                  deprecated
+                },
+                messageId: 'unexpected-deprecated-icon-attribute'
+              });
+            }
+          }
+        }
+      }
+    });
+  }
+} as const;
+
+export default rule;

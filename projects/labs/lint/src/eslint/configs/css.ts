@@ -2,6 +2,8 @@ import type { Linter } from 'eslint';
 import css from '@eslint/css';
 import noUnexpectedCssVariable from '../rules/no-unexpected-css-variable.js';
 import noUnexpectedCssValue from '../rules/no-unexpected-css-value.js';
+import noUnknownCssVariable from '../rules/no-unknown-css-variable.js';
+import noDeprecatedCssVariable from '../rules/no-deprecated-css-variable.js';
 
 const source = ['src/**/*.css'];
 const ignores = [
@@ -28,12 +30,16 @@ export const elementsCssConfig: Linter.Config = {
     '@nvidia-elements/lint': {
       rules: {
         'no-unexpected-css-variable': noUnexpectedCssVariable,
-        'no-unexpected-css-value': noUnexpectedCssValue
+        'no-unexpected-css-value': noUnexpectedCssValue,
+        'no-unknown-css-variable': noUnknownCssVariable,
+        'no-deprecated-css-variable': noDeprecatedCssVariable
       }
     }
   },
   rules: {
     '@nvidia-elements/lint/no-unexpected-css-variable': ['error'],
-    '@nvidia-elements/lint/no-unexpected-css-value': ['error']
+    '@nvidia-elements/lint/no-unexpected-css-value': ['error'],
+    '@nvidia-elements/lint/no-unknown-css-variable': ['error'],
+    '@nvidia-elements/lint/no-deprecated-css-variable': ['error']
   }
 };
