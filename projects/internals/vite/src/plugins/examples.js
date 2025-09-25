@@ -7,13 +7,13 @@ import { Project, SyntaxKind } from 'ts-morph';
 import * as prettier from 'prettier';
 
 /**
- * Outputs *.stories.ts files to *.stories.json metadata format
+ * Outputs *.examples.ts and *.examples.ts files to *.examples.json and *.examples.json metadata format
  */
-export function storiesToJSON(packageFile) {
+export function examplesToJSON(packageFile) {
   return {
-    name: 'stories',
+    name: 'examples',
     async transform(_code, id) {
-      if (!id.endsWith('.stories.ts')) {
+      if (!id.endsWith('.stories.ts') && !id.endsWith('.examples.ts')) {
         return null;
       }
 
@@ -26,7 +26,7 @@ export function storiesToJSON(packageFile) {
         const entrypoint = `${packageFile.name}/${file}`;
         const project = new Project();
         const tempFile = project.createSourceFile('temp.ts', source);
-        const storiesVariableStatement = tempFile.getChildrenOfKind(SyntaxKind.VariableStatement);
+        const examplesVariableStatement = tempFile.getChildrenOfKind(SyntaxKind.VariableStatement);
         const element = tempFile
           .getChildrenOfKind(SyntaxKind.ExportAssignment)[0]
           .getDescendantsOfKind(SyntaxKind.Identifier)
@@ -38,32 +38,41 @@ export function storiesToJSON(packageFile) {
 
         const items = (
           await Promise.all(
-            storiesVariableStatement.map(async example => {
+            examplesVariableStatement.map(async example => {
               const id = example.getDescendantsOfKind(SyntaxKind.VariableDeclaration)[0].getName();
               let template =
                 example
                   .getDescendantsOfKind(SyntaxKind.TaggedTemplateExpression)[0]
                   ?.getDescendants()[1]
                   ?.getText()
-                  ?.replace(/\n\n/g, '\n')
                   ?.trim() ?? '';
 
               if (template) {
                 template = template.substring(1, template.length - 1);
+
                 try {
                   template = await renderTemplate(template);
                 } catch (e) {
                   console.warn(`Element ${element} example "${id}" is not stateless.`);
                 }
 
-                try {
-                  template = await prettier.format(template, {
-                    parser: 'html',
-                    singleAttributePerLine: false,
-                    printWidth: 120
-                  });
-                } catch {}
+                if (!template.includes('<template>')) {
+                  try {
+                    template = await prettier.format(template.replace(/\n\n/g, '\n'), {
+                      parser: 'html',
+                      singleAttributePerLine: false,
+                      printWidth: 120
+                    });
+                  } catch {}
+                }
               }
+
+              const summary =
+                example
+                  .getJsDocs()
+                  .flatMap(doc => doc.getTags())
+                  .filter(tag => tag.getTagName() === 'summary')
+                  .map(tag => tag.getCommentText())[0] ?? '';
 
               const description =
                 example
@@ -95,12 +104,13 @@ export function storiesToJSON(packageFile) {
                   )
                   .filter(tag => tag.length > 0) ?? [];
 
-              validateDescriptionContext(id, description);
+              validateSummaryContext(id, summary);
               validateTagsContext(id, tags);
 
               return {
                 id,
                 template,
+                summary,
                 description,
                 deprecated,
                 tags
@@ -149,16 +159,16 @@ async function renderTemplate(template) {
 }
 
 /**
- * Descriptions context must be concise to be compatible with externalized tools such as CLIs and MCPs.
+ * Summary context must be concise to be compatible with externalized tools such as CLIs and MCPs.
  */
-function validateDescriptionContext(id, description) {
+function validateSummaryContext(id, summary) {
   const contextMaxLength = 400;
-  const plainTextDescription = description
+  const plainTextSummary = summary
     .replaceAll(/https?:\/\/[^\s<>"{}|\\^`\[\]]+/gi, '')
     .replaceAll(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-  if (plainTextDescription.length > contextMaxLength) {
+  if (plainTextSummary.length > contextMaxLength) {
     console.error(
-      `Description context for "${id}" is too long. (${plainTextDescription.length}/${contextMaxLength} characters)`
+      `Description context for "${id}" is too long. (${plainTextSummary.length}/${contextMaxLength} characters)`
     );
     process.exit(1);
   }

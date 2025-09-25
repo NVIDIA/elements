@@ -18,9 +18,6 @@ export const data = {
 export function render() {
   return this.renderTemplate(
     /* html */ `
-  <style>
-    @import './examples.css';
-  </style>
   <nve-page-panel id="examples-sidenav-panel" slot="left" style="--width: 300px">
     <nve-page-panel-content>
       <ul class="examples">
