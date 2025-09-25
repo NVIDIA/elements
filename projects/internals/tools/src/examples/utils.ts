@@ -3,7 +3,7 @@ import { type MetadataExample } from '@nve-internals/metadata';
 export function getAvailableExamples(format: 'markdown' | 'json', examples: Partial<MetadataExample>[]) {
   const result = examples
     .filter(e => !e.deprecated && !e.tags.includes('anti-pattern') && !e.element?.includes('internal'))
-    .map(s => ({ id: s.id, summary: s.summary, element: s.element ?? '' }));
+    .map(s => ({ id: s.id, summary: s.summary ? s.summary : s.description, element: s.element ?? '' }));
   return format === 'markdown' ? result.map(e => renderExampleHeaderMarkdown(e)).join('\n\n---\n\n') : result;
 }
 
@@ -64,13 +64,13 @@ export async function filterExamples(query: string, examples: MetadataExample[])
 }
 
 export function renderExampleMarkdown(example: Partial<MetadataExample>) {
-  return `${renderExampleHeaderMarkdown(example)}${example.template ? `\`\`\`html\n${example.template}\n\`\`\`` : ''}`;
+  return `${renderExampleHeaderMarkdown(example)}${example.template ? `\n\n` : ''}${example.template ? `\`\`\`html\n${example.template}\n\`\`\`` : ''}`;
 }
 
 export function renderExampleHeaderMarkdown(example: Partial<MetadataExample>) {
   const content = example.summary ? example.summary : example.description;
-  const formattedContent = content ? `${wrapText(content)}\n\n` : '';
-  return `## ${example.id}${example.element ? ' - ' : ''}${example.element ?? ''}\n\n${formattedContent}`;
+  const formattedContent = content ? `${wrapText(content)}` : '';
+  return `## ${example.id}${example.element ? ' - ' : ''}${example.element ?? ''}${formattedContent ? '\n\n' : ''}${formattedContent}`;
 }
 
 export function wrapText(text = '', width = 80) {
