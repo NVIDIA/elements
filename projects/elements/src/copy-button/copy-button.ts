@@ -53,6 +53,8 @@ export class CopyButton extends Button {
     [Icon.metadata.tag]: Icon
   };
 
+  // todo
+  /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
   render() {
     return html`
      <div id="btn" internal-host interaction-state focus-within>
