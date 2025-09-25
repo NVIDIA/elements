@@ -17,6 +17,7 @@ const stories = (await ExamplesService.getAll())
   .map(story => ({
     id: story.id,
     story: story.element,
+    summary: story.summary,
     description: story.description,
     template: story.template,
     element: story.element,

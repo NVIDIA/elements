@@ -66,12 +66,13 @@ export async function storyShortcode(
   userConfig = { inline: true, height: '95%', resizable: true, editable: false }
 ) {
   const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
-  const example = ref.includes('.stories.json')
-    ? examples.find(s => s.entrypoint?.includes(ref) && s.id === exampleName)
-    : examples.find(s => s.element === ref && s.id === exampleName);
+  const example =
+    ref.includes('.stories.json') || ref.includes('.examples.json')
+      ? examples.find(s => s.entrypoint?.includes(ref) && s.id === exampleName)
+      : examples.find(s => s.element === ref && s.id === exampleName);
 
   if (!example) {
-    console.error('Story not found: ', ref, exampleName);
+    console.error('Example not found: ', ref, exampleName);
     return '';
   }
 
@@ -93,11 +94,14 @@ export async function storyShortcode(
         .toLowerCase()}">Edit Example</a></nve-button>`
     : '';
 
-  const template = config.inline
-    ? /* html */ `<div id="${canvasId}_content">${example?.template?.replace(/\n\n/g, '\n')}</div>`
-    : `<iframe loading="lazy" src="examples/${example?.permalink}index.html" style="height: ${config.height}; width: 100%; border: none;" />`;
+  // replace all double newlines with single newlines in script tags only
+  // https://github.com/markdown-it/markdown-it/issues/1056
+  // https://spec.commonmark.org/0.31.2/#html-blocks
+  const templateContent = example?.template.replace(/\n\n/g, '\n');
 
-  const source = md.utils?.escapeHtml(example?.template?.replace(/\n\n/g, '\n') ?? '');
+  const template = config.inline
+    ? /* html */ `<div id="${canvasId}_content">${templateContent}</div>`
+    : `<iframe loading="lazy" src="examples/${example?.permalink}index.html" style="height: ${config.height}; width: 100%; border: none;" />`;
 
   const reload =
     globalThis.process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && example && !ref.includes('.stories.json')
@@ -106,17 +110,16 @@ export async function storyShortcode(
 
   return example
     ? config.editable
-      ? /* html */ `
-<nvd-canvas-editable 
+      ? /* html */ `<nvd-canvas-editable 
   id="${canvasId}"
   style="--height: ${config.height}"
-  source="${source}"
+  source="${md.utils?.escapeHtml(templateContent)}"
   tag="${example.element || ref}">
 </nvd-canvas-editable>`
       : /* html */ `
-${markdown.render(example.description ?? '')}
+${markdown.render(example.description ? example.description : (example.summary ?? ''))}
 <nvd-canvas id="${canvasId}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
-  <template>${source}</template>${template}${editButton}${playgroundButton}
+  <template>${templateContent}</template>${template}${editButton}${playgroundButton}
 </nvd-canvas>${reload}`.trim()
     : '';
 }

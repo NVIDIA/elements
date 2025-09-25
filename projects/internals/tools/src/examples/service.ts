@@ -26,13 +26,13 @@ export class ExamplesService {
             type: 'object',
             properties: {
               id: { type: 'string' },
-              description: { type: 'string' },
+              summary: { type: 'string' },
               template: { type: 'string' },
               element: { type: 'string' },
               entrypoint: { type: 'string' }
             },
             additionalProperties: false,
-            required: ['id', 'description', 'template', 'element', 'entrypoint']
+            required: ['id', 'summary', 'template', 'element', 'entrypoint']
           }
         }
       ],
@@ -41,7 +41,7 @@ export class ExamplesService {
   })
   static async list(
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
-  ): Promise<{ id: string; description: string }[] | string> {
+  ): Promise<{ id: string; summary: string }[] | string> {
     const examples = await MetadataService.getExamples();
     return getAvailableExamples(format, examples);
   }
