@@ -68,16 +68,16 @@ ${getColorScale('ref-color-brand-green')}
 ${getColorScale('ref-color-alpha-black')}
 ${getColorScale('ref-color-alpha-white')}
 </div>
-<nve-toast id="color-scale-toast" trigger="color-scale" close-timeout="1500" position="left" hidden>copied!</nve-toast>
+<nve-toast id="color-scale-toast" close-timeout="1500" position="left" hidden>copied!</nve-toast>
 <script type="module">
   const toast = document.querySelector('#color-scale-toast');
   const scale = document.querySelector('.color-scale');
-  toast.addEventListener('close', () => toast.hidden = true);
+  toast.addEventListener('close', () => toast.hidePopover());
   scale.addEventListener('click', e => {
     if (e.target.tagName === 'BUTTON') {
       navigator.clipboard.writeText(e.target.value);
       toast.anchor = e.target.id;
-      toast.hidden = false;
+      toast.showPopover();
     }
   });
 </script>

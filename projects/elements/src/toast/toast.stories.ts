@@ -95,6 +95,8 @@ export const Alignment = {
   `
 };
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
+
 export const LegacyBehaviorTrigger = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 90vh">

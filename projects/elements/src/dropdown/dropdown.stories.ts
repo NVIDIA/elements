@@ -211,6 +211,8 @@ export const CheckboxGroup = {
   `
 };
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
+
 export const LegacyBehaviorTrigger = {
   inline: false,
   render: () => html`
