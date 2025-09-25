@@ -7,7 +7,9 @@ import z, { type ZodObject } from 'zod';
 
 process.env.ELEMENTS_ENV = 'mcp';
 
-const server = new McpServer({ name: 'nve-mcp', version: '0.0.0' });
+export const VERSION = '0.0.0';
+
+const server = new McpServer({ name: 'nve-mcp', version: VERSION });
 
 tools.forEach(tool => {
   const { description, title, toolName } = tool.metadata;
