@@ -4,7 +4,8 @@ import { lighthouseRunner } from '@internals/vite';
 describe('notification lighthouse report', () => {
   test('notification should meet lighthouse benchmarks', async () => {
     const report = await lighthouseRunner.getReport('nve-notification', /* html */`
-      <nve-notification>hello</nve-notification>
+      <nve-notification id="notification">hello</nve-notification>
+      <button popovertarget="notification">button</button>
       <script type="module">
         import '@nvidia-elements/core/notification/define.js';
       </script>

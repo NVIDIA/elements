@@ -340,6 +340,8 @@ export const ShadowRoot = {
   `
 };
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
+
 export const LegacyBehaviorTrigger = {
   render: () => html`
 <nve-notification trigger="notification-btn" behavior-trigger hidden closable position="bottom" close-timeout="2000">
@@ -349,7 +351,6 @@ export const LegacyBehaviorTrigger = {
 <nve-button id="notification-btn">show</nve-button>
 `
 };
-
 
 export const Layers = {
   render: () => html`

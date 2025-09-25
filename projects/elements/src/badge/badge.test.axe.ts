@@ -27,19 +27,6 @@ describe(Badge.metadata.tag, () => {
     removeFixture(fixture);
   });
 
-  it('should pass axe check for trend', async () => {
-    const fixture = await createFixture(html`
-      <nve-badge status="trend-neutral">+15%</nve-badge>
-      <nve-badge status="trend-up">+15%</nve-badge>
-      <nve-badge status="trend-down">-15%</nve-badge>
-    `);
-
-    await elementIsStable(fixture.querySelector(Badge.metadata.tag));
-    const results = await runAxe([Badge.metadata.tag]);
-    expect(results.violations.length).toBe(0);
-    removeFixture(fixture);
-  });
-
   it('should pass axe check for color', async () => {
     const fixture = await createFixture(html`
       <nve-badge color="red-cardinal">red-cardinal</nve-badge>

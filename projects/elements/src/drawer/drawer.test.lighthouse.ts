@@ -4,7 +4,8 @@ import { lighthouseRunner } from '@internals/vite';
 describe('drawer lighthouse report', () => {
   test('drawer should meet lighthouse benchmarks', async () => {
     const report = await lighthouseRunner.getReport('nve-drawer', /* html */`
-      <nve-drawer closable position="left">hello</nve-drawer>
+      <nve-drawer id="drawer" closable position="left">hello</nve-drawer>
+      <button popovertarget="drawer">button</button>
       <script type="module">
         import '@nvidia-elements/core/drawer/define.js';
         document.querySelector('nve-drawer').showPopover();

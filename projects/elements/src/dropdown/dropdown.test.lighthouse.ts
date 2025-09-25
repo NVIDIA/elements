@@ -4,8 +4,8 @@ import { lighthouseRunner } from '@internals/vite';
 describe('dropdown lighthouse report', () => {
   test('dropdown should meet lighthouse benchmarks', async () => {
     const report = await lighthouseRunner.getReport('nve-dropdown', /* html */`
-      <button id="btn">button</button>
-      <nve-dropdown trigger="btn" anchor="btn" closable>hello</nve-dropdown>
+      <button popovertarget="dropdown">button</button>
+      <nve-dropdown id="dropdown">hello</nve-dropdown>
       <script type="module">
         import '@nvidia-elements/core/dropdown/define.js';
       </script>
