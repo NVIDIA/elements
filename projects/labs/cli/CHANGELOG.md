@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.1.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.1...@nvidia-elements/cli-v0.1.2) (2025-09-25)
+
+
+### Bug Fixes
+
+* **labs-cli:** examples schema ([70d590f](https://github.com/NVIDIA/elements/commit/70d590ff915a41f1b6f55360f56b71fe24894f5f))
+
 ## [@nvidia-elements/cli-v0.1.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.0...@nvidia-elements/cli-v0.1.1) (2025-09-19)
 
 
