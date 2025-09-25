@@ -38,9 +38,7 @@ yargsInstance.command(
 tools.forEach(tool => {
   const { inputSchema, description } = tool.metadata;
   const { properties, required } = inputSchema ?? {};
-
   const requiredArgs = Object.keys(properties ?? {}).filter(key => required?.includes(key));
-
   const optionalArgs = Object.keys(properties ?? {}).filter(
     key => !required?.includes(key) || properties?.[key].default
   );

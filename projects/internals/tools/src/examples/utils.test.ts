@@ -7,21 +7,24 @@ describe('utils', () => {
     {
       id: 'ButtonBasic',
       template: '<nve-button>Click me</nve-button>',
-      description: 'Basic button example',
+      summary: 'Basic button example',
+      description: '',
       tags: ['button', 'basic'],
       element: 'nve-button'
     },
     {
       id: 'ButtonWithIcon',
       template: '<nve-button><nve-icon name="star"></nve-icon>Star</nve-button>',
-      description: 'Button with icon example',
+      summary: 'Button with icon example',
+      description: '',
       tags: ['button', 'icon'],
       element: 'nve-button'
     },
     {
       id: 'DeprecatedExample',
       template: '<nve-old-component>Old</nve-old-component>',
-      description: 'This is deprecated',
+      summary: 'This is deprecated',
+      description: '',
       tags: ['deprecated'],
       element: 'nve-old-component',
       deprecated: true
@@ -29,14 +32,16 @@ describe('utils', () => {
     {
       id: 'AntiPatternExample',
       template: '<div style="color: red;">Bad practice</div>',
-      description: 'This is an anti-pattern',
+      summary: 'This is an anti-pattern',
+      description: '',
       tags: ['anti-pattern'],
       element: 'div'
     },
     {
       id: 'CardComponent',
       template: '<nve-card>Content</nve-card>',
-      description: 'Card component example',
+      summary: 'Card component example',
+      description: '',
       tags: ['card'],
       element: 'nve-card'
     }
@@ -59,12 +64,12 @@ describe('utils', () => {
       expect(result[0]).toEqual({
         id: 'ButtonBasic',
         element: 'nve-button',
-        description: 'Basic button example'
+        summary: 'Basic button example'
       });
       expect(result[1]).toEqual({
         id: 'ButtonWithIcon',
         element: 'nve-button',
-        description: 'Button with icon example'
+        summary: 'Button with icon example'
       });
     });
 
@@ -76,10 +81,10 @@ describe('utils', () => {
       expect(jsonResult).toEqual([]);
     });
 
-    it('should handle examples with missing description', () => {
+    it('should handle examples with missing summary', () => {
       const examplesWithMissingDesc: Partial<MetadataExample>[] = [
-        { id: 'Test1', tags: [], element: 'nve-test', template: '', description: 'Has description' },
-        { id: 'Test2', tags: [], element: 'nve-test', template: '' } // missing description
+        { id: 'Test1', tags: [], element: 'nve-test', template: '', summary: 'Has summary' },
+        { id: 'Test2', tags: [], element: 'nve-test', template: '' } // missing summary
       ];
 
       const markdownResult = getAvailableExamples('markdown', examplesWithMissingDesc);
@@ -88,10 +93,10 @@ describe('utils', () => {
 
       const jsonResult = getAvailableExamples('json', examplesWithMissingDesc) as Array<{
         id: string;
-        description?: string;
+        summary?: string;
       }>;
-      expect(jsonResult[0].description).toBe('Has description');
-      expect(jsonResult[1].description).toBeUndefined();
+      expect(jsonResult[0].summary).toBe('Has summary');
+      expect(jsonResult[1].summary).toBeUndefined();
     });
   });
 
@@ -166,7 +171,8 @@ describe('utils', () => {
       const manyExamples = Array.from({ length: 10 }, (_, i) => ({
         id: `Test${i}`,
         template: `<div>Test ${i}</div>`,
-        description: `This is test ${i}`,
+        summary: `This is test ${i}`,
+        description: '',
         tags: ['test'],
         element: 'div'
       }));
@@ -175,19 +181,21 @@ describe('utils', () => {
       expect(result).toHaveLength(5);
     });
 
-    it('should sort by score then description length', async () => {
+    it('should sort by score then summary length', async () => {
       const examples = [
         {
           id: 'ShortDesc',
           template: '<div>Short</div>',
-          description: 'Short',
+          summary: 'Short',
+          description: '',
           tags: ['test'],
           element: 'div'
         },
         {
           id: 'LongDescription',
           template: '<div>Long</div>',
-          description: 'This is a very long description that should come after the short one when scores are equal',
+          summary: 'This is a very long summary that should come after the short one when scores are equal',
+          description: '',
           tags: ['test'],
           element: 'div'
         }
