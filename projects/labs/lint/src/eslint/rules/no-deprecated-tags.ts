@@ -14,7 +14,7 @@ const rule = {
     },
     schema: [],
     messages: {
-      ['unexpected']: 'Unexpected use of deprecated tag <{{tag}}>'
+      ['unexpected-deprecated-tag']: 'Unexpected use of deprecated tag <{{tag}}>'
     }
   },
   create(context) {
@@ -26,7 +26,7 @@ const rule = {
             data: {
               tag: node.name
             },
-            messageId: 'unexpected'
+            messageId: 'unexpected-deprecated-tag'
           });
         }
       }
