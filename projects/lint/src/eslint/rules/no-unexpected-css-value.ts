@@ -71,7 +71,7 @@ const rule = {
   meta: {
     type: 'problem' as const,
     docs: {
-      description: 'Do not allow use of invalid CSS values.',
+      description: 'Disallow use of invalid CSS values.',
       category: 'Best Practice',
       recommended: true,
       url: 'https://NVIDIA.github.io/elements/docs/lint/'

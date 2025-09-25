@@ -69,9 +69,13 @@ export default [
 
 | Rule | Description | Language | Severity |
 | ---- | ----------- | -------- | -------- |
-| `@nvidia-elements/lint/no-unexpected-css-variable` | Do not allow use of invalid CSS theme variables | CSS | `error` |
-| `@nvidia-elements/lint/no-unexpected-css-value` | Do not allow use of invalid CSS value | CSS | `error` |
-| `@nvidia-elements/lint/no-deprecated-tags` | Do not allow use of deprecated elements/tags | HTML | `error` |
+| `@nvidia-elements/lint/no-unexpected-css-variable` | Disallow use of invalid CSS theme variables | CSS | `error` |
+| `@nvidia-elements/lint/no-unexpected-css-value` | Disallow use of invalid CSS value | CSS | `error` |
+| `@nvidia-elements/lint/no-unknown-css-variable` | Disallow use of unknown --nve-* CSS theme variables. | CSS | `error` |
+| `@nvidia-elements/lint/no-deprecated-css-variable` | Disallow use of deprecated --nve-* CSS theme variables. | CSS | `error` |
+| `@nvidia-elements/lint/no-deprecated-attributes` | Disallow use of deprecated attributes in HTML | HTML | `error` |
+| `@nvidia-elements/lint/no-deprecated-icon-names` | Disallow use of deprecated icon names | HTML | `error` |
+| `@nvidia-elements/lint/no-deprecated-popover-attributes` | Disallow use of deprecated popover attributes | HTML | `error` |
+| `@nvidia-elements/lint/no-deprecated-tags` | Disallow use of deprecated elements/tags | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attrs` | Do not allow invalid use of nve-* attributes | HTML | `error` |
-| `@nvidia-elements/lint/no-restricted-attr-values` | Do not allow invalid nve-* attribute values | HTML | `error` |
-| `@nvidia-elements/lint/no-unexpected-library-dependencies` | Disallow incorrect dependency usage of @nve packages in consuming libraries. | JSON | `error` |
+| `@nvidia-elements/lint/no-unexpected-library-dependencies` | Disallow incorrect dependency usage of @nve packages in consuming libraries | JSON | `error` |
