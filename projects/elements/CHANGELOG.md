@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.10...@nvidia-elements/core-v1.39.11) (2025-09-25)
+
+
+### Bug Fixes
+
+* **elements:** css prop apis ([328a700](https://github.com/NVIDIA/elements/commit/328a70025ebbb6cdcca910e68fc981ad1920e1e2)), closes [#139](https://github.com/NVIDIA/elements/issues/139)
+
 ## [@nvidia-elements/core-v1.39.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.9...@nvidia-elements/core-v1.39.10) (2025-09-18)
 
 
