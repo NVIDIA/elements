@@ -62,6 +62,7 @@ export interface MetadataToken {
 export interface MetadataExample {
   id: string;
   template: string;
+  summary: string;
   description: string;
   tags: string[];
   deprecated?: boolean;
