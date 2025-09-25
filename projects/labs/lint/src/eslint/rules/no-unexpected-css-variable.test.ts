@@ -23,7 +23,7 @@ describe('noUnexpectedCssVariable', () => {
     expect(noUnexpectedCssVariable.meta).toBeDefined();
     expect(noUnexpectedCssVariable.meta.type).toBe('problem');
     expect(noUnexpectedCssVariable.meta.docs).toBeDefined();
-    expect(noUnexpectedCssVariable.meta.docs.description).toBe('Do not allow use of invalid CSS theme variables.');
+    expect(noUnexpectedCssVariable.meta.docs.description).toBe('Disallow use of invalid CSS theme variables.');
     expect(noUnexpectedCssVariable.meta.docs.category).toBe('Best Practice');
     expect(noUnexpectedCssVariable.meta.docs.recommended).toBe(true);
     expect(noUnexpectedCssVariable.meta.docs.url).toBe(
@@ -39,8 +39,8 @@ describe('noUnexpectedCssVariable', () => {
       noUnexpectedCssVariable as unknown as JSRuleDefinition,
       {
         valid: [
-          ':root { margin: var(--nve-ref-space-100); }', // valid token assignment
-          ':root { gap: var(--nve-ref-space-100); }', // valid token assignment
+          ':root { margin: var(--nve-ref-space-md); }', // valid token assignment
+          ':root { gap: var(--nve-ref-space-md); }', // valid token assignment
           ':root { margin: 1000px; }', // ignore out of bounds of space scale
           ':root { color: blue; }' // ignore irrelevant properties
         ],
