@@ -10,7 +10,7 @@ import { cem } from '../plugins/cem.js';
 import { dts } from '../plugins/dts.js';
 import { bundle } from '../plugins/bundle.js';
 import { initial } from '../plugins/initial.js';
-import { storiesToJSON } from '../plugins/stories.js';
+import { examplesToJSON } from '../plugins/examples.js';
 
 const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
@@ -24,7 +24,7 @@ const packageFile = JSON.parse(packageFilePath);
  * @type {import('vite').UserConfig}
  */
 export const libraryBuildConfig = {
-  plugins: [initial(), tsc(), dts(), bundle(), storiesToJSON(packageFile), cem()],
+  plugins: [initial(), tsc(), dts(), bundle(), examplesToJSON(packageFile), cem()],
   build: {
     cssMinify: prod ? 'esbuild' : false,
     cssCodeSplit: true,
@@ -38,6 +38,7 @@ export const libraryBuildConfig = {
         index: resolve(process.cwd(), './src/index.ts'),
         ...[
           ...globSync('./src/**/*.stories.ts'),
+          ...globSync('./src/**/*.examples.ts'),
           ...globSync('./src/**/define.ts'),
           ...globSync('./src/**/server.ts'),
           ...globSync('./src/**/index.ts'),

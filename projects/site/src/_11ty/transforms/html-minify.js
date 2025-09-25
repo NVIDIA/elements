@@ -5,7 +5,13 @@ import htmlMinify from 'html-minifier';
 import { transform } from 'lightningcss';
 
 export async function htmlMinifyTransform(content) {
-  return process.env.ELEVENTY_RUN_MODE !== 'watch' ? minifyStyleTags(minifyHTML(content)) : content;
+  let result = '';
+  try {
+    result = process.env.ELEVENTY_RUN_MODE !== 'watch' ? minifyStyleTags(minifyHTML(content)) : content;
+  } catch (_) {
+    result = content;
+  }
+  return result;
 }
 
 function minifyStyleTags(html) {
@@ -28,8 +34,12 @@ function minifyHTML(html) {
   const templateContents = [];
   let counter = 0;
 
+  const scriptSpacing = html.replace(/<script type="module">([\s\S]*?)<\/script>/g, (match, p1) => {
+    return `<script type="module">${p1.replace(/\n\n/g, '\n')}</script>`;
+  });
+
   // Replace template contents with markers
-  const htmlWithMarkers = html.replace(/<template>([\s\S]*?)<\/template>/g, (match, content) => {
+  const htmlWithMarkers = scriptSpacing.replace(/<template>([\s\S]*?)<\/template>/g, (match, content) => {
     const marker = `__TEMPLATE_${counter}__`;
     templateContents[counter] = content;
     counter++;
