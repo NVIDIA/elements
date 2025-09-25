@@ -143,9 +143,9 @@ export const Custom = {
           <option>excludes</option>
         </select>
       </nve-select>
-      <nve-button style="width: 190px" id="map-btn">37.3706254,-121.9671894</nve-button>
+      <nve-button style="width: 190px" popovertarget="map-dropdown">37.3706254,-121.9671894</nve-button>
     </nve-progressive-filter-chip>
-    <nve-dropdown anchor="map-btn" trigger="map-btn">
+    <nve-dropdown id="map-dropdown">
       <nve-input>
         <nve-icon-button icon-name="map-pin" readonly></nve-icon-button>
         <input value="37.3706254,-121.9671894" disabled />

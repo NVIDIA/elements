@@ -4,7 +4,8 @@ import { lighthouseRunner } from '@nve-internals/vite';
 describe('dialog lighthouse report', () => {
   test('dialog should meet lighthouse benchmarks', async () => {
     const report = await lighthouseRunner.getReport('nve-dialog', /* html */`
-      <nve-dialog closable modal>
+      <button popovertarget="dialog">button</button>
+      <nve-dialog id="dialog" closable modal>
         <nve-dialog-header>
           <h3>header</h3>
         </nve-dialog-header>

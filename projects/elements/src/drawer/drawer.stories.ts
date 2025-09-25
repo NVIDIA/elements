@@ -354,6 +354,8 @@ export const LegacyInline = {
   `
 };
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
+
 export const LegacyBehaviorTrigger = {
   render: () => html`
 <nve-button id="drawer-btn">open</nve-button>

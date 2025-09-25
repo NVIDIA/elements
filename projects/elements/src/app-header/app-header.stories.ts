@@ -81,8 +81,8 @@ export const Dropdown = {
   <nve-icon-button icon-name="chat-bubble" slot="nav-actions"></nve-icon-button>
   <nve-icon-button icon-name="search" slot="nav-actions"></nve-icon-button>
   <nve-icon-button icon-name="switch-apps" slot="nav-actions"></nve-icon-button>
-  <nve-icon-button id="dropdown-btn-1" interaction="emphasis" slot="nav-actions">EL</nve-icon-button>
-  <nve-dropdown anchor="dropdown-btn-1" trigger="dropdown-btn-1" hidden behavior-trigger>
+  <nve-icon-button popovertarget="dropdown-1" interaction="emphasis" slot="nav-actions">EL</nve-icon-button>
+  <nve-dropdown id="dropdown-1">
     <nve-menu>
       <nve-menu-item><nve-icon name="person"></nve-icon> Menu Item</nve-menu-item>
       <nve-menu-item><nve-icon name="gear"></nve-icon> Menu Item</nve-menu-item>

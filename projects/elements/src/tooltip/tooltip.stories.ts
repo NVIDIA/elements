@@ -227,6 +227,8 @@ export const DynamicAnchorPosition = {
   `
 };
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
+
 export const LegacyDynamicTrigger = {
   render: () => html`
 <div id="dynamic-trigger-demo" nve-layout="row align:center" style="height: 250px">
