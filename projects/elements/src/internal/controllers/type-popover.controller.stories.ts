@@ -75,6 +75,9 @@ class PopoverDemo extends LitElement {
 }
 customElements.get('ui-popover') || customElements.define('ui-popover', PopoverDemo);
 
+/**
+ * @tags test-case
+ */
 export const TypePopoverControllerDemo = {
   render: () => html`
     <style>
@@ -92,6 +95,9 @@ export const TypePopoverControllerDemo = {
   `
 };
 
+/**
+ * @tags test-case
+ */
 export const TypePopoverControllerAlignmentDemo = {
   render: () => html`
   <nve-card id="card" style="width: 450px; height: 300px;"></nve-card>
@@ -124,6 +130,9 @@ export const TypePopoverControllerAlignmentDemo = {
   `
 }
 
+/**
+ * @tags test-case
+ */
 export const AbsolutePositioningFallback = {
   render: () => html`
   <div nve-layout="row align-center pad:lg">

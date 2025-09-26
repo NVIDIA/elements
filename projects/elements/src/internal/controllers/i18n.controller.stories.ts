@@ -64,6 +64,9 @@ class I18nDemo extends LitElement {
 }
 customElements.get('i18n-demo') || customElements.define('i18n-demo', I18nDemo);
 
+/**
+ * @tags test-case
+ */
 export const I18nControllerDemo = {
   render: () => html`<i18n-demo></i18n-demo>`
 }

@@ -14,6 +14,9 @@ export default {
   component: 'nve-page-header',
 };
 
+/**
+ * @summary Basic page header with logo, navigation links, and user actions demonstrating standard layout structure.
+ */
 export const Default = {
   render: () => {
     return html`
@@ -32,7 +35,7 @@ export const Default = {
 };
 
 /**
- * @description Use dropdowns and menus to allow progressive disclosure of additional navigation or global user actions.
+ * @summary Use dropdowns and menus to allow progressive disclosure of additional navigation or global user actions.
  */
 export const DropdownMenu = {
   render: () => {
@@ -58,7 +61,7 @@ export const DropdownMenu = {
 };
 
 /**
- * @description Use a Icon Button to represent collapsible top level navigation, optimal for mobile or constrained viewport sizes.
+ * @summary Use a Icon Button to represent collapsible top level navigation, optimal for mobile or constrained viewport sizes.
  */
 export const MenuButton = {
   render: () => {
@@ -79,7 +82,7 @@ export const MenuButton = {
 };
 
 /**
- * @description Use the Logo element when representing an application that is part of a suite of applicaitons in a given problem domain.
+ * @summary Use the Logo element when representing an application that is part of a suite of applications in a given problem domain.
  */
 export const AppLogo = {
   render: () => html`
@@ -96,6 +99,9 @@ export const AppLogo = {
   `
 };
 
+/**
+ * @summary Page header with primary navigation positioned after the logo and branding area.
+ */
 export const PrefixNavigation = {
   render: () => {
     return html`
@@ -113,6 +119,9 @@ export const PrefixNavigation = {
   }
 };
 
+/**
+ * @summary Page header with navigation centered in the available space for balanced visual hierarchy.
+ */
 export const CenterNavigation = {
   render: () => {
     return html`
@@ -132,6 +141,9 @@ export const CenterNavigation = {
   }
 };
 
+/**
+ * @summary Page header with all navigation positioned at the end for right-aligned layout patterns.
+ */
 export const SuffixNavigation = {
   render: () => {
     return html`
@@ -149,6 +161,9 @@ export const SuffixNavigation = {
   }
 };
 
+/**
+ * @summary Page header with integrated search functionality for content discovery within the application.
+ */
 export const Search = {
   render: () => {
     return html`
@@ -166,6 +181,9 @@ export const Search = {
   }
 };
 
+/**
+ * @summary Page header displaying user information and avatar for personalized application experiences.
+ */
 export const UserDetail = {
   render: () => {
     return html`
