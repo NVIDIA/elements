@@ -87,7 +87,7 @@ export const ButtonRowFilledTextWithIcon = {
 };
 
 /**
- * @description Keyboard shortcut content example.
+ * @summary Keyboard shortcut content example.
  * @tags pattern
  */
 export const ShortcutFilled = {
@@ -97,7 +97,7 @@ export const ShortcutFilled = {
 };
 
 /**
- * @description Keyboard shortcut content example for inline text content.
+ * @summary Keyboard shortcut content example for inline text content.
  * @tags pattern
  */
 export const ShortcutFlat = {

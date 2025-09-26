@@ -11,6 +11,9 @@ export default {
   component: 'nve-tree',
 };
 
+/**
+ * @summary Basic tree component with expandable nodes, providing hierarchical data display and navigation for structured content organization.
+ */
 export const Default = {
   render: () => html`
     <nve-tree behavior-expand>
@@ -46,6 +49,9 @@ export const Default = {
   `
 };
 
+/**
+ * @summary Tree with border styling for enhanced visual separation and container definition, improving content structure perception.
+ */
 export const Border = {
   render: () => html`
     <nve-tree behavior-expand border>
@@ -81,6 +87,9 @@ export const Border = {
   `
 };
 
+/**
+ * @summary Single-selection tree for choosing one item from hierarchical options, enabling focused navigation and content selection.
+ */
 export const Selectable = {
   render: () => html`
     <nve-tree selectable="single" behavior-expand behavior-select border>
@@ -116,6 +125,9 @@ export const Selectable = {
   `
 };
 
+/**
+ * @summary Multi-selection tree for choosing multiple items from hierarchical options, enabling bulk operations and comprehensive content management.
+ */
 export const SelectableMultiple = {
   render: () => html`
     <nve-tree selectable="multi" behavior-expand behavior-select border>
@@ -151,6 +163,9 @@ export const SelectableMultiple = {
   `
 };
 
+/**
+ * @summary Tree with highlighted nodes for emphasizing specific items, providing visual focus and search result indication in hierarchical data.
+ */
 export const Highlight = {
   render: () => html`
     <nve-tree behavior-expand border>
@@ -186,6 +201,9 @@ export const Highlight = {
   `
 };
 
+/**
+ * @summary Tree with navigation links for hierarchical menu systems, enabling structured site navigation and content discovery.
+ */
 export const Links = {
   render: () => html`
     <nve-tree behavior-expand>
@@ -213,6 +231,9 @@ export const Links = {
   `
 };
 
+/**
+ * @summary Tree with loading states for asynchronous data, demonstrating progress indicators and dynamic content loading in hierarchical structures.
+ */
 export const Async = {
   render: () => html`
     <nve-tree border>
@@ -250,6 +271,9 @@ export const Async = {
   `
 };
 
+/**
+ * @summary Tree with rich node content including forms, controls, and interactive elements, enabling complex data management within hierarchical structures.
+ */
 export const NodeContent = {
   render: () => html`
     <nve-tree selectable="multi" border behavior-expand behavior-select>
@@ -331,10 +355,17 @@ export const NodeContent = {
   `
 };
 
+/**
+ * @summary Dynamic tree with programmatic node creation and management, demonstrating scalable hierarchical data handling for large datasets.
+ * @tags test-case
+ */
 export const DynamicTree = {
   render: () => html`<test-dynamic-tree></test-dynamic-tree>`
 };
 
+/**
+ * @summary Tree integrated in vertical navigation drawer, providing structured sidebar navigation for application layouts and content organization.
+ */
 export const VerticalNav = {
   render: () => html`
   <nve-drawer inline size="sm" position="left">
@@ -369,6 +400,10 @@ export const VerticalNav = {
   `
 };
 
+/**
+ * @summary Tree with scrollable container for handling deep hierarchies and large datasets, ensuring optimal space utilization and navigation.
+ * @tags test-case
+ */
 export const Overflow = {
   render: () => html`
     <div style="width: 300px; height: 500px; overflow: auto; outline: 1px solid #ccc; padding: 12px">
@@ -430,6 +465,10 @@ export const Overflow = {
   `
 };
 
+/**
+ * @summary Tree with bulk node creation for performance testing, demonstrating efficient handling of large numbers of nodes and dynamic expansion.
+ * @tags test-case performance
+ */
 export const BulkCreation = {
   render: () => html`
     <nve-tree>
@@ -458,7 +497,7 @@ export const BulkCreation = {
 };
 
 /**
- * @description Examples of invalid tree usage patterns for testing and documentation purposes, showing what not to do when implementing trees.
+ * @summary Examples of invalid tree usage patterns for testing and documentation purposes, showing what not to do when implementing trees.
  * @tags anti-pattern
  */
 export const Audit = {

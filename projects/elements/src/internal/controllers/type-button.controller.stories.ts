@@ -11,7 +11,8 @@ export default {
 /**
  * Example of custom element button using the base button and controllers.
  * When a custom element extends the base button it will inherit all the
- * nessesary button behaviors and states.
+ * necessary button behaviors and states.
+ * @tags test-case
  */
 export const TypeButtonDemo = () => {
   class UIButton extends BaseButton {

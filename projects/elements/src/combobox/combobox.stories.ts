@@ -16,6 +16,9 @@ export default {
   component: 'nve-combobox',
 };
 
+/**
+ * @summary Basic combobox with search input and datalist options for filtering and selection.
+ */
 export const Default = () => {
   return html`
   <nve-combobox>
@@ -34,6 +37,9 @@ export const Default = () => {
   `
 };
 
+/**
+ * @summary Vertical layout showing different combobox states (normal, disabled, success, error) stacked for comparison.
+ */
 export const Vertical = () => {
   return html`
 <div nve-layout="column gap:lg full">
@@ -95,6 +101,9 @@ export const Vertical = () => {
 </div>`
 };
 
+/**
+ * @summary Horizontal layout showing different combobox states (normal, disabled, success, error) for inline form layouts.
+ */
 export const Horizontal = () => {
   return html`
 <div nve-layout="column gap:lg full">
@@ -156,6 +165,9 @@ export const Horizontal = () => {
 </div>`
 };
 
+/**
+ * @summary Flat container style with prefix icon for compact inline filtering interfaces.
+ */
 export const Flat = () => {
   return html`
   <nve-combobox container="flat">
@@ -174,7 +186,7 @@ export const Flat = () => {
 };
 
 /**
- * @description Single select allows users only to select from a predefined list
+ * @summary Single select allows users only to select from a predefined list
  * of options. Invalid input is automatically cleared. All options are visible
  * on focus until typing begins for filtering.
  */
@@ -197,7 +209,7 @@ export const Select = () => {
 };
 
 /**
- * @description Multi select allows users to select multiple options from a
+ * @summary Multi select allows users to select multiple options from a
  * predefined list. The select `value` will only reflect the first selected value.
  * To get all selected options check the `selected` property on each `<option>`
  * or the select property [selectedOptions](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions).
@@ -223,7 +235,7 @@ export const MultiSelect = () => {
 };
 
 /**
- * @description The default behavior of a native select element is to select the first option if no default `selected` option is provided.
+ * @summary The default behavior of a native select element is to select the first option if no default `selected` option is provided.
  * If an empty initial value is desired, provide a empty value option that is disabled and selected.
  */
 export const EmptyDefault = () => {
@@ -246,7 +258,7 @@ export const EmptyDefault = () => {
 };
 
 /**
- * @description Options by default provide a value for the user input.
+ * @summary Options by default provide a value for the user input.
  * An optional label can be provided. If an option label is provided, the label
  * will be displayed to the user rather than the value. When using labels the
  * text input value will be the option label rather than the option value.
@@ -270,6 +282,9 @@ export const Label = () => {
   `
 };
 
+/**
+ * @summary Multi-select with labeled options where display text differs from option values.
+ */
 export const LabelMultiSelect = () => {
   return html`
   <nve-combobox>
@@ -289,7 +304,7 @@ export const LabelMultiSelect = () => {
 };
 
 /**
- * @description If the multiple tags overflow the parent container a simple text label will be shown instead.
+ * @summary If the multiple tags overflow the parent container a simple text label will be shown instead.
  */
 export const Overflow = () => {
   return html`
@@ -309,6 +324,10 @@ export const Overflow = () => {
   `
 };
 
+/**
+ * @summary Demonstrates how long option text is handled in constrained width containers.
+ * @tags test-case
+ */
 export const PopoverOverflow = () => {
   return html`
   <nve-combobox style="width: 100px">
@@ -328,6 +347,9 @@ export const PopoverOverflow = () => {
   `
 };
 
+/**
+ * @summary Multi-select with reset functionality via icon button and footer button to clear all selections.
+ */
 export const Reset = () => {
   return html`
   <nve-combobox id="combobox-reset" style="width: 500px; --scroll-height: 220px">
@@ -352,6 +374,9 @@ export const Reset = () => {
   `
 };
 
+/**
+ * @summary Multi-select with footer action button for additional operations on selected items.
+ */
 export const Footer = () => {
   return html`
   <nve-combobox style="width: 500px; --scroll-height: 200px">
@@ -374,6 +399,9 @@ export const Footer = () => {
   `
 };
 
+/**
+ * @summary Multi-select with bulk selection controls (Select All/Deselect All) in footer for efficient mass operations.
+ */
 export const SelectAll = () => {
   return html`
   <nve-combobox id="combobox-select-all" style="width: 500px; --scroll-height: 200px">
@@ -407,6 +435,9 @@ export const SelectAll = () => {
   `
 };
 
+/**
+ * @summary Multi-select with disabled options to show unavailable choices while maintaining visual context.
+ */
 export const DisabledOptions = () => {
   return html`
   <nve-combobox>
@@ -425,6 +456,9 @@ export const DisabledOptions = () => {
   `
 };
 
+/**
+ * @summary Multi-select without built-in tags, using external tag management for custom selection display.
+ */
 export const NoTags = () => {
   return html`
   <form id="notags" nve-layout="column gap:lg align:stretch">
@@ -461,6 +495,9 @@ export const NoTags = () => {
   `
 };
 
+/**
+ * @summary Complete form integration showing combobox with form submission, reset, and programmatic value setting.
+ */
 export const Form = () => {
   return html`
 <form nve-layout="column gap:lg align:stretch">
@@ -508,6 +545,10 @@ export const Form = () => {
   `
 };
 
+/**
+ * @summary Performance test with 1000 options to demonstrate filtering efficiency with large datasets.
+ * @tags test-case performance
+ */
 export const Performance = () => {
   return html`
 <nve-combobox id="performance-combobox">
@@ -525,6 +566,10 @@ export const Performance = () => {
 </script>`
 }
 
+/**
+ * @summary Interactive demo showing progressive filter chips with dynamic combobox creation for complex filtering interfaces.
+ * @tags test-case
+ */
 export const FilterDemo = {
   render: () => html`<nve-combobox-demo></nve-combobox-demo>`
 }
