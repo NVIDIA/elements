@@ -10,7 +10,7 @@ export class MetadataService {
         MetadataService.#metadata = (await import('../../static/index.json', { with: { type: 'json' } })).default;
       } catch {
         /* istanbul ignore next -- @preserve */
-        MetadataService.#metadata = fetch(
+        MetadataService.#metadata = await fetch(
           'https://NVIDIA.github.io/elements/metadata/index.json'
         ).then(res => res.json());
       }
@@ -24,7 +24,7 @@ export class MetadataService {
         MetadataService.#examples = (await import('../../static/examples.json', { with: { type: 'json' } })).default;
       } catch {
         /* istanbul ignore next -- @preserve */
-        MetadataService.#examples = fetch(
+        MetadataService.#examples = await fetch(
           'https://NVIDIA.github.io/elements/metadata/examples.json'
         ).then(res => res.json());
       }
