@@ -24,6 +24,9 @@ export default {
   component: 'forms'
 }
 
+/**
+ * @summary Comprehensive showcase of all form controls in a grid layout, demonstrating various input types, states, and advanced patterns for complete form design reference.
+ */
 export const KitchenSink = {
   render: () => html`
 <div style="display: grid; gap: 36px 48px; grid-template-columns: 1fr 1fr; max-width: 1400px;">
@@ -246,6 +249,9 @@ export const KitchenSink = {
   `
 }
 
+/**
+ * @summary Traditional vertical form layout with labels above inputs, providing clear visual hierarchy and optimal readability for complex forms.
+ */
 export const Vertical = () => {
   return html`
 <div nve-layout="column gap:lg full">
@@ -357,6 +363,9 @@ export const Vertical = () => {
   `;
 };
 
+/**
+ * @summary Compact vertical layout with inline labels and controls, maximizing space efficiency while maintaining form clarity and accessibility.
+ */
 export const VerticalInline = () => {
   return html`
 <div nve-layout="column gap:lg full">
@@ -468,6 +477,9 @@ export const VerticalInline = () => {
   `;
 };
 
+/**
+ * @summary Horizontal form layout with labels beside inputs, creating efficient use of horizontal space and familiar desktop form patterns.
+ */
 export const Horizontal = () => {
   return html`
 <div nve-layout="column gap:lg full">
@@ -579,6 +591,9 @@ export const Horizontal = () => {
   `;
 };
 
+/**
+ * @summary Space-efficient horizontal layout with inline labels, ideal for dense forms where vertical space is limited and quick scanning is important.
+ */
 export const HorizontalInline = () => {
   return html`
 <div nve-layout="column gap:lg full">
@@ -690,6 +705,9 @@ export const HorizontalInline = () => {
   `;
 };
 
+/**
+ * @summary Demonstrates form controls that automatically adjust their width to fit content, optimizing space usage for dynamic or variable-length inputs.
+ */
 export const FitText = {
   render: () => html`
 <section nve-layout="column gap:md full">

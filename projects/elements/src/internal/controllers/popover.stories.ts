@@ -18,6 +18,10 @@ export default {
   }
 }
 
+/**
+ * @summary Demonstrates anchor-based positioning where popovers are anchored to specific elements rather than their triggers.
+ * @tags test-case
+ */
 export const Anchor = {
   render: () => html`
     <nve-tooltip id="popover-1" anchor="btn-2">tooltip 1</nve-tooltip>
@@ -29,6 +33,10 @@ export const Anchor = {
   `
 }
 
+/**
+ * @summary Shows nested popovers within dialogs and notifications, demonstrating proper layering and z-index management.
+ * @tags test-case
+ */
 export const Nested = {
   render: () => html`
 <style>
@@ -56,6 +64,10 @@ export const Nested = {
   `
 }
 
+/**
+ * @summary Demonstrates programmatic popover control with async operations before showing the popover.
+ * @tags test-case
+ */
 export const ProgrammaticTrigger = {
   render: () => html`
 <nve-toast hidden close-timeout="3000">hello there</nve-toast>
@@ -72,6 +84,9 @@ export const ProgrammaticTrigger = {
 </script>`
 }
 
+/**
+ * @summary Interactive showcase of all popover types (tooltip, toast, drawer, dropdown, dialog, notification) using modern popovertarget API.
+ */
 export const Interactive = {
   render: () => html`
     <div nve-layout="row align:center gap:xl" style="height: 300px">
@@ -112,6 +127,11 @@ export const Interactive = {
 
 /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
 
+/**
+ * @deprecated
+ * @summary Legacy implementation showing all popover types using the older trigger/behavior-trigger API for backward compatibility.
+ * @tags test-case
+ */
 export const LegacyInteractive = {
   render: () => html`
     <div nve-layout="row align:center gap:xl" style="height: 300px">
@@ -150,6 +170,10 @@ export const LegacyInteractive = {
   `
 }
 
+/**
+ * @summary Simple modal dialog demonstrating keyboard accessibility with escape key to close functionality.
+ * @tags test-case
+ */
 export const Closable = {
   render: () => html`
     <nve-button popovertarget="popover">open dialog</nve-button>
@@ -160,7 +184,7 @@ export const Closable = {
 }
 
 /**
- * @description example of declarative popovers using the Invoker Commands API
+ * @summary example of declarative popovers using the Invoker Commands API
  * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
  * https://open-ui.org/components/invokers.explainer/#defaults
  */
@@ -176,7 +200,7 @@ export const InvokerCommand = {
 };
 
 /**
- * @description Custom events like many standard DOM events bubble. When listening
+ * @summary Custom events like many standard DOM events bubble. When listening
  * to larger DOM trees, check which element dispatched the source event.
  */
 export const EventBubbling = {

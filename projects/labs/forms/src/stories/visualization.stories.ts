@@ -9,6 +9,9 @@ export default {
   title: 'Labs/Forms/Examples'
 };
 
+/**
+ * @tags test-case
+ */
 export const Visualization = {
   render: () => html`
 <section nve-layout="row gap:lg pad:lg align:center">

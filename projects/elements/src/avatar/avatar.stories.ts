@@ -7,11 +7,17 @@ export default {
   component: 'nve-avatar',
 };
 
+/**
+ * @summary Basic avatar component with text initials, providing a simple way to represent users when profile images are unavailable.
+ */
 export const Default = {
   render: () => html`
     <nve-avatar>AV</nve-avatar>
 `};
 
+/**
+ * @summary Avatar with profile image, offering personalized user representation and visual identity in interfaces.
+ */
 export const Image = {
   render: () => html`
     <nve-avatar>
@@ -19,6 +25,9 @@ export const Image = {
     </nve-avatar>
 `};
 
+/**
+ * @summary Avatar with icons for representing system users, bots, or special account types with clear visual indicators.
+ */
 export const Icon = {
   render: () => html`
     <div nve-layout="row gap:sm align:wrap">
@@ -31,6 +40,9 @@ export const Icon = {
     </div>
 `};
 
+/**
+ * @summary Different avatar sizes to accommodate various layout contexts, from compact lists to prominent user profiles.
+ */
 export const Size = {
   render: () => html`
     <div nve-layout="row gap:sm align:wrap">
@@ -40,6 +52,9 @@ export const Size = {
     </div>
 `};
 
+/**
+ * @summary Avatar group component for displaying multiple users with overflow indicator, ideal for team displays and collaboration interfaces.
+ */
 export const AvatarGroup = {
   render: () => html`
     <nve-avatar-group>
@@ -50,6 +65,9 @@ export const AvatarGroup = {
     </nve-avatar-group>
 `};
 
+/**
+ * @summary Comprehensive color palette for avatar backgrounds, enabling visual distinction and brand consistency across user representations.
+ */
 export const Color = {
   render: () => html`
   <div nve-layout="row gap:sm align:wrap">
