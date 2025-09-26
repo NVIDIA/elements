@@ -8,9 +8,13 @@ import '@nvidia-elements/core/grid/define.js';
 import './csv.stories.js';
 
 export default {
-  title: 'Labs/Forms/Examples'
+  title: 'Labs/Forms/Examples',
+  component: ['forms']
 };
 
+/**
+ * @tags test-case
+ */
 export const CSV = {
   render: () => html`
     <style>

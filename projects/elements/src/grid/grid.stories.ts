@@ -30,6 +30,9 @@ export default {
   component: 'nve-grid',
 };
 
+/**
+ * @summary Basic data grid component with header and rows, demonstrating the basic structure and layout of a grid.
+ */
 export const Default = {
   render: () => html`
 <nve-grid>
@@ -46,7 +49,7 @@ export const Default = {
 };
 
 /**
- * @description The datagrid follows the [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/grid/examples/data-grids/#kbd_label) for standardized keyboard navigation.
+ * @summary The datagrid follows the [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/grid/examples/data-grids/#kbd_label) for standardized keyboard navigation.
  */
 export const Keynav = {
   render: () => html`
@@ -149,7 +152,7 @@ export const Keynav = {
 };
 
 /**
- * @description Multi Select rows use a checkbox as the first focusable item within the row.
+ * @summary Multi Select rows use a checkbox as the first focusable item within the row.
  * When selected set the `selected` attribute/property on the row. This will ensure selected
  * styles as well as the proper `ariaSelected` state for accessibility.
  */
@@ -179,7 +182,7 @@ export const MultiSelect = {
 };
 
 /**
- * @description Use bulk actions for operations on multiple items. Display only
+ * @summary Use bulk actions for operations on multiple items. Display only
  * when rows are selected. Closing bulk actions deselects all selected rows.
  */
 export const MultiSelectBulkActions = {
@@ -214,7 +217,7 @@ export const MultiSelectBulkActions = {
 };
 
 /**
- * @description A single select datagrid allows users to choose exactly one row
+ * @summary A single select datagrid allows users to choose exactly one row
  * from a data table by providing radio buttons in the first column, ensuring
  * only one item can be selected at a time. To enable single select, place `nve-radio`
  * input as the first grid cell of each row. Set `name` attribute on each radio
@@ -242,7 +245,7 @@ export const SingleSelect = {
 };
 
 /**
- * @description Row actions enable additional user actions specific to a given row.
+ * @summary Row actions enable additional user actions specific to a given row.
  * Place a `nve-icon-button` at the end of the grid row for actions.
  */
 export const RowAction = {
@@ -272,7 +275,7 @@ export const RowAction = {
 };
 
 /**
- * @description Row groups can be used to organize related rows of a similar subtype.
+ * @summary Row groups can be used to organize related rows of a similar subtype.
  */
 export const RowGroups = {
   render: () => html`
@@ -349,6 +352,9 @@ export const RowGroups = {
 `
 };
 
+/**
+ * @summary The footer can be used to display contextual information or additional user actions such as pagination.
+ */
 export const Footer = {
 render: () => html`
 <nve-grid>
@@ -367,6 +373,10 @@ render: () => html`
   `
 };
 
+/**
+ * @summary The footer can be used to display contextual information or additional user actions such as pagination.
+ * @tags test-case
+ */
 export const FooterScrollbar = {
   render: () => html`
 <nve-grid style="--scroll-height: 402px">
@@ -386,7 +396,7 @@ export const FooterScrollbar = {
 };
 
 /**
- * @description The pagination pattern should be used when working with large
+ * @summary The pagination pattern should be used when working with large
  * data sets that need to be incrementally loaded or filtered for performance or
  * useability.
  */
@@ -409,7 +419,7 @@ export const Pagination = {
 };
 
 /**
- * @description A fixed height can be placed on the grid allowing rows to be
+ * @summary A fixed height can be placed on the grid allowing rows to be
  * scrolled within the bounding box of the grid.
  */
 export const Scroll = {
@@ -429,7 +439,7 @@ export const Scroll = {
 };
 
 /**
- * @description Scroll position can be controlled via the `scrollTo` API.
+ * @summary Scroll position can be controlled via the `scrollTo` API.
  */
 export const ScrollPosition = {
   render: () => html`
@@ -457,7 +467,7 @@ export const ScrollPosition = {
 };
 
 /**
- * @description Using `nve-layout="column"` the grid to fill any remaining space
+ * @summary Using `nve-layout="column"` the grid to fill any remaining space
  * of a parent containing element. This is helpful for preserving the grid
  * height/fill while dynamic content above can freely change.
  */
@@ -482,7 +492,7 @@ export const FullHeight = {
 };
 
 /**
- * @description Column actions can be created by using the `nve-icon-button` to
+ * @summary Column actions can be created by using the `nve-icon-button` to
  * trigger dropdowns or panels to reveal additional actions to the user.
  */
 export const ColumnAction = {
@@ -512,6 +522,9 @@ export const ColumnAction = {
   `
 };
 
+/**
+ * @summary Column width control for responsive grid layouts, enabling flexible content sizing and optimal space utilization across different screen sizes.
+ */
 export const ColumnWidth = {
   render: () => html`
 <nve-grid style="--scroll-height: 402px">
@@ -529,9 +542,7 @@ export const ColumnWidth = {
 };
 
 /**
- * @description By default columns are evenly divided unless width is explicitly
- * provided. Content within a cell of a given column will wrap content to fit the
- * width of the column.
+ * @summary Basic grid content display with evenly distributed columns, demonstrating standard data presentation and cell content wrapping behavior.
  */
 export const Content = {
   render: () => html`
@@ -548,6 +559,10 @@ export const Content = {
   `
 };
 
+/**
+ * @summary Columns can be fixed to any given side, however fixed columns should
+ * not span past the half way point of the grid.
+ */
 export const ColumnFixed = {
   render: () => html`
 <nve-grid style="--scroll-height: 402px; max-width: 800px">
@@ -564,7 +579,7 @@ export const ColumnFixed = {
 };
 
 /**
- * @description Multiple Columns can fixed to any given side, however fixed columns
+ * @summary Multiple Columns can fixed to any given side, however fixed columns
  * should not span past the half way point of the grid.
  */
 export const ColumnMultiFixed = {
@@ -582,6 +597,10 @@ export const ColumnMultiFixed = {
   `
 };
 
+/**
+ * @summary Multiple columns can be stacked and fixed to any given side, however
+ * fixed columns should not span past the half way point of the grid.
+ */
 export const ColumnStackFixed = {
   render: () => html`
 <nve-grid style="--scroll-height: 402px; max-width: 800px">
@@ -604,6 +623,9 @@ export const ColumnStackFixed = {
   `
 };
 
+/**
+ * @summary Dynamic column management with programmatic addition and positioning, demonstrating flexible grid configuration for evolving data requirements.
+ */
 export const ColumnDynamicFixed = {
   render: () => html`
 <nve-grid id="column-dynamic-fixed-grid" style="--scroll-height: 402px;">
@@ -646,6 +668,9 @@ export const ColumnDynamicFixed = {
   `
 };
 
+/**
+ * @summary Center-aligned column content for improved visual balance and data presentation, enhancing readability for numeric and centered data types.
+ */
 export const ColumnAlignCenter = {
   render: () => html`
 <nve-grid>
@@ -661,6 +686,9 @@ export const ColumnAlignCenter = {
   `
 };
 
+/**
+ * @summary Right-aligned column content for numeric data and values, providing consistent visual alignment and improved data scanning for financial or metric displays.
+ */
 export const ColumnAlignEnd = {
   render: () => html`
 <nve-grid>
@@ -676,6 +704,9 @@ export const ColumnAlignEnd = {
   `
 };
 
+/**
+ * @summary Left-aligned column content for text data and labels, providing consistent visual alignment and improved readability for textual information.
+ */
 export const ColumnAlignStart = {
   render: () => html`
 <nve-grid>
@@ -692,7 +723,7 @@ export const ColumnAlignStart = {
 };
 
 /**
- * @description Users can customize their data view through a dropdown menu above the grid, 
+ * @summary Users can customize their data view through a dropdown menu above the grid, 
  * allowing them to show/hide columns and restore default settings for a personalized experience.
  */
 export const DisplaySettings = {
@@ -739,6 +770,9 @@ export const DisplaySettings = {
   `
 };
 
+/**
+ * @summary Basic row sorting functionality with sort buttons, enabling users to organize data by different criteria for improved data analysis and navigation.
+ */
 export const RowSort = {
   render: () => html`
 <nve-grid>
@@ -765,7 +799,7 @@ export const RowSort = {
 };
 
 /**
- * @description A grid heatmap pattern can be implemented when combining the [nve-sys-visualization-sequential-diverging-red-green-*](docs/foundations/visualization/#sequential-diverging-red-green) theme tokens.
+ * @summary A grid heatmap pattern can be implemented when combining the [nve-sys-visualization-sequential-diverging-red-green-*](docs/foundations/visualization/#sequential-diverging-red-green) theme tokens.
  * Heatmap patterns can be useful for visualizing test results, performance metrics or any data that has a fixed range of values.
  */
 export const HeatmapPattern = {
@@ -829,6 +863,9 @@ export const HeatmapPattern = {
   `
 };
 
+/**
+ * @summary CSS anchor positioning for tooltips within grid cells, demonstrating proper tooltip placement and content visibility in constrained grid environments.
+ */
 export const ContentVisibilityCSSAnchor = {
   render: () => html`
   <nve-grid style="height: 200px;">
@@ -896,6 +933,10 @@ class RowSortDemo extends LitElement {
 
 customElements.get('row-sort-demo') || customElements.define('row-sort-demo', RowSortDemo);
 
+/**
+ * @summary Row sort can be used to sort the rows of the grid.
+ * @tags test-case
+ */
 export const RowSortInteractive = {
   render: () => html`<row-sort-demo></row-sort-demo>`
 };
@@ -943,10 +984,18 @@ class InfiniteScrollDemo extends LitElement {
 
 customElements.get('infinite-scroll-demo') || customElements.define('infinite-scroll-demo', InfiniteScrollDemo);
 
+/**
+ * @summary Infinite scroll can be used to load data as the user scrolls down the grid.
+ * @tags test-case performance
+ */
 export const PerformanceInfiniteScroll = {
   render: () => html`<infinite-scroll-demo></infinite-scroll-demo>`
 };
 
+/**
+ * @summary Performance can be used to test the performance of the grid.
+ * @tags test-case performance
+ */
 export const Performance = {
   render: () => html`
   <section id="grid-performance-demo" nve-layout="column gap:md full" style="height: 500px;">
@@ -1019,10 +1068,17 @@ class GridVirtualScrollDemo extends LitElement {
 
 customElements.get('grid-virtual-scroll-demo') || customElements.define('grid-virtual-scroll-demo', GridVirtualScrollDemo);
 
+/**
+ * @summary Performance virtual scroll can be used to test the performance of the grid.
+ * @tags test-case performance
+ */
 export const PerformanceVirtualScroll = {
   render: () => html`<grid-virtual-scroll-demo></grid-virtual-scroll-demo>`
 };
 
+/**
+ * @summary Striped row styling for improved visual separation and data scanning, enhancing readability in large datasets with alternating row backgrounds.
+ */
 export const Stripe = {
   render: () => html`
 <nve-grid stripe>
@@ -1039,7 +1095,7 @@ export const Stripe = {
 };
 
 /**
- * @description Grid can be nested in Cards for various UI patterns such as card
+ * @summary Grid can be nested in Cards for various UI patterns such as card
  * tab groups. Use the `container="flat"` attribute to enable proper styling of
  * the grid when nested within a card.
  */
@@ -1065,6 +1121,9 @@ export const Card = {
   `
 };
 
+/**
+ * @summary Grid integrated with tabs for organized data presentation, enabling multiple data views within a single interface for comprehensive information display.
+ */
 export const CardTabs = {
   render: () => html`
 <nve-card>
@@ -1090,6 +1149,9 @@ export const CardTabs = {
   `
 };
 
+/**
+ * @summary Loading placeholder state for grid content, providing visual feedback during data fetching and improving perceived performance for users.
+ */
 export const Placeholder = {
   render: () => html`
 <nve-grid style="min-height: 400px">
@@ -1103,6 +1165,9 @@ export const Placeholder = {
   `
 };
 
+/**
+ * @summary Error state placeholder with retry functionality, providing user-friendly error handling and recovery options when data loading fails.
+ */
 export const PlaceholderRetry = {
   render: () => html`
 <nve-grid style="min-height: 400px">
@@ -1121,6 +1186,9 @@ export const PlaceholderRetry = {
   `
 };
 
+/**
+ * @summary Full-width grid container for maximum space utilization, providing edge-to-edge data display for comprehensive information presentation.
+ */
 export const Full = {
   render: () => html`
 <nve-grid container="full" style="--scroll-height: 402px">
@@ -1136,6 +1204,9 @@ export const Full = {
   `
 };
 
+/**
+ * @summary Flat container styling for minimal visual weight, providing subtle grid presentation that integrates seamlessly with surrounding content.
+ */
 export const Flat = {
   render: () => html`
 <nve-grid container="flat" style="--scroll-height: 402px">
@@ -1151,6 +1222,10 @@ export const Flat = {
   `
 };
 
+/**
+ * @summary Different focusable element types within grid cells, demonstrating keyboard navigation and accessibility support for various interactive content.
+ * @tags test-case
+ */
 export const FocusTypes = {
   render: () => html`
 <nve-grid>
@@ -1180,7 +1255,7 @@ export const FocusTypes = {
 };
 
 /**
- * @description Use a right aligned [panel](docs/elements/page/#panels) when
+ * @summary Use a right aligned [panel](docs/elements/page/#panels) when
  * displaying advanced filtering or display settings for the grid. Item detail
  * panels should be open using a action button placed at the end of the grid row.
  */
@@ -1255,7 +1330,7 @@ export const PanelDetail = {
 };
 
 /**
- * @description Panel Grid can be used to display key value type data sets for
+ * @summary Panel Grid can be used to display key value type data sets for
  * details of a given item in a collection.
  */
 export const PanelGrid = {
@@ -1317,6 +1392,10 @@ export const PanelGrid = {
   }
 }
 
+/**
+ * @summary Examples of invalid grid usage patterns for testing and documentation purposes, showing what not to do when implementing grids.
+ * @tags anti-pattern
+ */
 export const InvalidDOM = {
   render: () => html`
 <nve-grid>
@@ -1336,7 +1415,7 @@ export const InvalidDOM = {
 
 
 /**
- * @description Examples of invalid grid usage patterns for testing and documentation purposes, showing what not to do when implementing grids.
+ * @summary Examples of invalid grid usage patterns for testing and documentation purposes, showing what not to do when implementing grids.
  * @tags anti-pattern
  */
 export const Audit = {
@@ -1358,7 +1437,7 @@ export const Audit = {
 };
 
 /**
- * @description Grid row sort can be implemented via the `nve-sort-button`.
+ * @summary Grid row sort can be implemented via the `nve-sort-button`.
  * The grid follows the [ARIA sort spec](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/)
  * and automatically sets the appropriate accessibility related attributes to convey the current sorting state.
  */

@@ -8,6 +8,9 @@ export default {
   component: 'nve-alert-banner'
 };
 
+/**
+ * @deprecated
+ */
 export const Default = {
   render: () =>
     html`
@@ -19,6 +22,9 @@ export const Default = {
     `
 };
 
+/**
+ * @deprecated
+ */
 export const Status = {
   render: () => html`
 <div nve-layout="column gap:md">
@@ -55,6 +61,9 @@ export const Status = {
   `
 }
 
+/**
+ * @deprecated
+ */
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="column gap:md pad:md">
@@ -91,6 +100,9 @@ export const LightTheme = {
   `
 }
 
+/**
+ * @deprecated
+ */
 export const DarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="column gap:md pad:md">

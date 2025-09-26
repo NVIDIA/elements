@@ -25,6 +25,9 @@ class TypeTouchControllerDemoElement extends LitElement {
 
 customElements.get('type-touch-controller-demo-element') || customElements.define('type-touch-controller-demo-element', TypeTouchControllerDemoElement);
 
+/**
+ * @tags test-case
+ */
 export const TypeTouchControllerDemo = {
   render: () => html`
   <type-touch-controller-demo-element></type-touch-controller-demo-element>
