@@ -81,13 +81,10 @@ export function examplesToJSON(packageFile) {
                   .filter(tag => tag.getTagName() === 'description')
                   .map(tag => tag.getCommentText())[0] ?? '';
 
-              const deprecated = (
-                example
-                  .getJsDocs()
-                  .flatMap(doc => doc.getTags())
-                  .filter(tag => tag.getTagName() === 'deprecated')
-                  .map(tag => tag.getCommentText())[0] ?? ''
-              ).length
+              const deprecated = example
+                .getJsDocs()
+                .flatMap(doc => doc.getTags())
+                .find(tag => tag.getTagName() === 'deprecated')
                 ? true
                 : undefined;
 
@@ -104,6 +101,7 @@ export function examplesToJSON(packageFile) {
                   )
                   .filter(tag => tag.length > 0) ?? [];
 
+              validateDescriptionContext(id, summary, description);
               validateSummaryContext(id, summary);
               validateTagsContext(id, tags);
 
@@ -168,14 +166,22 @@ function validateSummaryContext(id, summary) {
     .replaceAll(/\[([^\]]+)\]\([^)]+\)/g, '$1');
   if (plainTextSummary.length > contextMaxLength) {
     console.error(
-      `Description context for "${id}" is too long. (${plainTextSummary.length}/${contextMaxLength} characters)`
+      `Description context for example "${id}" is too long. (${plainTextSummary.length}/${contextMaxLength} characters)`
     );
     process.exit(1);
   }
 }
 
+function validateDescriptionContext(id, summary, description) {
+  if (description?.length > summary?.length) {
+    console.log(summary, description);
+    console.error(`A summary for example "${id}" must be provided before providing a description.`);
+    process.exit(1);
+  }
+}
+
 function validateTagsContext(id, tags) {
-  const allowedTags = ['pattern', 'anti-pattern'];
+  const allowedTags = ['performance', 'pattern', 'anti-pattern', 'test-case'];
   const invalidTags = tags.filter(tag => !allowedTags.includes(tag));
   if (invalidTags.length > 0) {
     console.error(`Invalid tags for "${id}": ${invalidTags.join(', ')}`);

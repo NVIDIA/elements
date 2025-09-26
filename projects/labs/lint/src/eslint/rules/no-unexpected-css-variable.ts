@@ -113,7 +113,7 @@ const rule = {
           const child = node.value.children
             ?.filter(child => child.name === 'var')
             ?.flatMap(child => child.children)
-            ?.find(child => child.name.match(/^--nve-.*-background$/));
+            ?.find(child => child?.name?.match(/^--nve-.*-background$/));
 
           if (child) {
             context.report({
