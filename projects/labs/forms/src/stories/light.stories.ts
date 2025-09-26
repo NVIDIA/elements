@@ -6,6 +6,9 @@ export default {
   title: 'Labs/Forms/Examples'
 };
 
+/**
+ * @tags test-case
+ */
 export const Light = {
   render: () => html`
 <form nve-layout="column gap:lg pad:lg">
@@ -32,6 +35,9 @@ export const Light = {
 `
 };
 
+/**
+ * @tags test-case
+ */
 export const Events = {
   render: () => html`
 <form id="novalidate-form" nve-layout="column gap:lg pad:lg">

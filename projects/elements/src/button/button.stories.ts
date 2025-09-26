@@ -9,12 +9,15 @@ export default {
   component: 'nve-button'
 };
 
+/**
+ * @summary Basic button component demonstrating standard appearance and behavior for primary user actions.
+ */
 export const Default = {
   render: () => html`<nve-button>standard</nve-button>`
 };
 
 /**
- * @description This example demonstrates how to use the `commandfor` and `command` attributes to create a button that can be used to rotate an image.
+ * @summary This example demonstrates how to use the `commandfor` and `command` attributes to create a button that can be used to rotate an image.
  * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
  * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#creating_custom_commands
  */
@@ -40,6 +43,9 @@ export const InvokerCommand = {
   `
 };
 
+/**
+ * @summary Demonstrates button with icons positioned before or after text to enhance visual clarity and user understanding.
+ */
 export const ButtonWithIcon = {
   render: () => html`
     <nve-button><nve-icon name="person"></nve-icon> button</nve-button>
@@ -47,6 +53,9 @@ export const ButtonWithIcon = {
   `
 };
 
+/**
+ * @summary Shows different interaction states to communicate button hierarchy, importance, and availability to users.
+ */
 export const Interaction = {
   render: () => html`
     <div nve-layout="row gap:xs">
@@ -58,6 +67,9 @@ export const Interaction = {
   `
 }
 
+/**
+ * @summary Flat button style for secondary actions with minimal visual weight, maintaining clear interaction states.
+ */
 export const Flat = {
   render: () => html`
     <div nve-layout="row gap:xs">
@@ -69,6 +81,9 @@ export const Flat = {
   `
 }
 
+/**
+ * @summary Inline button style for text-like actions that blend with content while maintaining button functionality.
+ */
 export const Inline = {
   render: () => html`
     <div nve-layout="row gap:xs">
@@ -80,6 +95,9 @@ export const Inline = {
   `
 }
 
+/**
+ * @summary Demonstrates different button sizes to accommodate various layout densities and touch target requirements.
+ */
 export const Size = {
   render: () => html`
     <div nve-layout="row gap:xs">
@@ -90,6 +108,9 @@ export const Size = {
   `
 }
 
+/**
+ * @summary Button styling applied to links for consistent visual treatment while maintaining semantic navigation behavior.
+ */
 export const Link = {
   render: () => html`
     <div nve-layout="row gap:xs"> 
@@ -101,6 +122,9 @@ export const Link = {
   `
 }
 
+/**
+ * @summary Shows pressed state for toggle buttons to indicate active/selected state and provide clear visual feedback.
+ */
 export const Pressed = {
   render: () => html`
     <div nve-layout="row gap:xs">
@@ -110,6 +134,9 @@ export const Pressed = {
   `
 }
 
+/**
+ * @summary Flat button selection state for choice groups where one option is active, providing clear selection feedback.
+ */
 export const SelectedFlat = {
   render: () => html`
     <div nve-layout="row gap:xs">
@@ -120,6 +147,9 @@ export const SelectedFlat = {
   `
 }
 
+/**
+ * @summary Flat button styling for navigation links, providing subtle visual treatment for secondary navigation actions.
+ */
 export const LinkFlat = {
   render: () => html`
     <div nve-layout="row gap:xs">
@@ -130,6 +160,10 @@ export const LinkFlat = {
   `
 }
 
+/**
+ * @summary Light theme appearance showing how buttons adapt to bright backgrounds while maintaining accessibility and contrast.
+ * @tags test-case
+ */
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="row gap:sm pad:md">
@@ -141,6 +175,10 @@ export const LightTheme = {
   `
 }
 
+/**
+ * @summary Dark theme appearance demonstrating button visibility and interaction states in low-light environments.
+ * @tags test-case
+ */
 export const DarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="row gap:sm pad:md">
@@ -152,6 +190,10 @@ export const DarkTheme = {
   `
 }
 
+/**
+ * @summary Demonstrates text wrapping behavior in constrained widths, showing how content adapts to available space.
+ * @tags test-case
+ */
 export const NoWrap = {
   render: () => html`
     <nve-button style="--width: 100px">item item item</nve-button>
@@ -161,6 +203,9 @@ export const NoWrap = {
   `
 }
 
+/**
+ * @summary Form submission button demonstrating proper form integration and data handling for user input processing.
+ */
 export const FormSubmit = {
   render: () => html`
 <form id="test-form">
@@ -180,7 +225,7 @@ export const FormSubmit = {
 }
 
 /**
- * @description Form control option allows a button to be styled like a control field. This is helpful for using button to trigger custom form control components or dropdowns.
+ * @summary Form control option allows a button to be styled like a control field. This is helpful for using button to trigger custom form control components or dropdowns.
  */
 export const FormControl = {
   render: () => html`
@@ -193,6 +238,10 @@ export const FormControl = {
   `
 }
 
+/**
+ * @summary Button integrated with popover API to trigger contextual overlays, providing additional information or controls.
+ * @tags test-case
+ */
 export const Popover = {
   render: () => html`
   <div popover id="popover-example">popover</div>
@@ -200,6 +249,10 @@ export const Popover = {
   `
 }
 
+/**
+ * @summary Custom styling example showing how to override button appearance for brand-specific designs while maintaining functionality.
+ * @tags test-case
+ */
 export const BackgroundOverride = {
   render: () => html`
     <style>

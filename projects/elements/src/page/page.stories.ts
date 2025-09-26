@@ -28,7 +28,8 @@ export default {
 };
 
 /**
- * @description Demonstrates all slot areas and debug backgrounds for nve-page.
+ * @summary Demonstrates all slot areas and debug backgrounds for nve-page.
+ * @tags test-case
  */
 export const Content = {
   render: () => html`
@@ -83,7 +84,7 @@ export const Content = {
 };
 
 /**
- * @description Basic nve-page layout with a header and main content.
+ * @summary Basic nve-page layout with a header and main content.
  */
 export const Default = {
   render: () => html`
@@ -105,7 +106,7 @@ export const Default = {
 };
 
 /**
- * @description Shows a warning banner in the header slot above the page header.
+ * @summary Shows a warning banner in the header slot above the page header.
  */
 export const SlotBanner = {
   render: () => html`
@@ -132,7 +133,7 @@ export const SlotBanner = {
 };
 
 /**
- * @description Demonstrates the subheader slot with a toolbar below the header.
+ * @summary Demonstrates the subheader slot with a toolbar below the header.
  */
 export const SlotSubheader = {
   render: () => html`
@@ -159,7 +160,7 @@ export const SlotSubheader = {
 };
 
 /**
- * @description Shows a large subheader using nve-page-panel in the subheader slot.
+ * @summary Shows a large subheader using nve-page-panel in the subheader slot.
  */
 export const SlotSubheaderLarge = {
   render: () => html`
@@ -212,7 +213,7 @@ export const SlotSubheaderLarge = {
 };
 
 /**
- * @description Demonstrates the left slot with a page panel for side navigation or content.
+ * @summary Demonstrates the left slot with a page panel for side navigation or content.
  */
 export const SlotLeft = {
   render: () => html`
@@ -242,7 +243,7 @@ export const SlotLeft = {
 };
 
 /**
- * @description Demonstrates the right slot with a page panel for side content.
+ * @summary Demonstrates the right slot with a page panel for side content.
  */
 export const SlotRight = {
   render: () => html`
@@ -268,7 +269,7 @@ export const SlotRight = {
 };
 
 /**
- * @description Shows the bottom slot with a page panel for footer or additional content.
+ * @summary Shows the bottom slot with a page panel for footer or additional content.
  */
 export const SlotBottom = {
   render: () => html`
@@ -294,7 +295,7 @@ export const SlotBottom = {
 };
 
 /**
- * @description Demonstrates the left-aside slot with a vertical toolbar for navigation.
+ * @summary Demonstrates the left-aside slot with a vertical toolbar for navigation.
  */
 export const SlotLeftAside = {
   render: () => html`
@@ -324,7 +325,7 @@ export const SlotLeftAside = {
 };
 
 /**
- * @description Demonstrates the right-aside slot with a vertical toolbar for actions or navigation.
+ * @summary Demonstrates the right-aside slot with a vertical toolbar for actions or navigation.
  */
 export const SlotRightAside = {
   render: () => html`
@@ -354,7 +355,7 @@ export const SlotRightAside = {
 };
 
 /**
- * @description Shows the subfooter slot with a toolbar for status or metadata.
+ * @summary Shows the subfooter slot with a toolbar for status or metadata.
  */
 export const SlotSubfooter = {
   render: () => html`
@@ -389,7 +390,7 @@ export const SlotSubfooter = {
 };
 
 /**
- * @description Demonstrates the footer slot with a toolbar for links or actions.
+ * @summary Demonstrates the footer slot with a toolbar for links or actions.
  */
 export const SlotFooter = {
   render: () => html`
@@ -425,7 +426,7 @@ export const SlotFooter = {
 };
 
 /**
- * @description Shows expandable page panels in left, right, and bottom slots.
+ * @summary Shows expandable page panels in left, right, and bottom slots.
  */
 export const PagePanelExpandable = {
   render: () => html`
@@ -459,7 +460,7 @@ export const PagePanelExpandable = {
 };
 
 /**
- * @description Shows closable page panels in left, right, and bottom slots.
+ * @summary Shows closable page panels in left, right, and bottom slots.
  */
 export const PagePanelClosable = {
   render: () => html`
@@ -493,7 +494,7 @@ export const PagePanelClosable = {
 };
 
 /**
- * @description Demonstrates tabs in a page panel header for contextual navigation.
+ * @summary Demonstrates tabs in a page panel header for contextual navigation.
  */
 export const PagePanelTabs = {
   render: () => html`
@@ -523,7 +524,7 @@ export const PagePanelTabs = {
 };
 
 /**
- * @description Shows headings in a page panel header for context.
+ * @summary Shows headings in a page panel header for context.
  */
 export const PagePanelHeadings = {
   render: () => html`
@@ -551,7 +552,7 @@ export const PagePanelHeadings = {
 };
 
 /**
- * @description Use document scroll for static content sites that do not require a fixed navigation.
+ * @summary Use document scroll for static content sites that do not require a fixed navigation.
  */
 export const DocumentScroll = {
   render: () => html`
@@ -579,7 +580,7 @@ export const DocumentScroll = {
 };
 
 /**
- * @description Use Page Panel to create navigation that is within the context of the current view.
+ * @summary Use Page Panel to create navigation that is within the context of the current view.
  */
 export const InteractionPanel = {
   render: () => html`
@@ -618,7 +619,7 @@ export const InteractionPanel = {
 };
 
 /**
- * @description Use Page Panel with Toolbar to create complex navigation groups that are within the context of the current view.
+ * @summary Use Page Panel with Toolbar to create complex navigation groups that are within the context of the current view.
  */
 export const InteractionPanelNavigation = {
   render: () => html`
@@ -688,7 +689,7 @@ export const InteractionPanelNavigation = {
 };
 
 /**
- * @description Use Drawer to create navigation that is outside the context of the current view.
+ * @summary Use Drawer to create navigation that is outside the context of the current view.
  */
 export const InteractionDrawer = {
   render: () => html`
@@ -723,7 +724,8 @@ export const InteractionDrawer = {
 };
 
 /**
- * @description Example demo demonstrating a stress test of all available slot layouts.
+ * @summary Example demo demonstrating a stress test of all available slot layouts.
+ * @tags test-case
  */
 export const KitchenSink = {
   render: () => html`
@@ -851,7 +853,8 @@ export const KitchenSink = {
 };
 
 /**
- * @description Demonstrates a card grid layout pattern inside nve-page.
+ * @summary Demonstrates a card grid layout pattern inside nve-page.
+ * @tags pattern
  */
 export const PageLayoutCardGrid = {
   render: () => html`
@@ -897,7 +900,8 @@ export const PageLayoutCardGrid = {
 };
 
 /**
- * @description Demonstrates a video player layout with controls and panels.
+ * @summary Demonstrates a video player layout with controls and panels.
+ * @tags pattern
  */
 export const PageLayoutVideo = {
   render: () => html`
@@ -978,7 +982,8 @@ export const PageLayoutVideo = {
 };
 
 /**
- * @description Shows a multi-video grid layout with synchronized controls.
+ * @summary Shows a multi-video grid layout with synchronized controls.
+ * @tags pattern
  */
 export const PageLayoutMultiVideo = {
   render: () => html`
@@ -1205,7 +1210,8 @@ export const PageLayoutMultiVideo = {
 };
 
 /**
- * @description Demonstrates an editor layout with outline, main, and console panels.
+ * @summary Demonstrates an editor layout with outline, main, and console panels.
+ * @tags pattern
  */
 export const PageLayoutEditor = {
   render: () => html`
@@ -1273,7 +1279,8 @@ export const PageLayoutEditor = {
 };
 
 /**
- * @description Shows a stepper pattern layout for multi-step processes.
+ * @summary Shows a stepper pattern layout for multi-step processes.
+ * @tags pattern
  */
 export const PageLayoutSteps = {
   render: () => html`
@@ -1317,7 +1324,7 @@ export const PageLayoutSteps = {
 };
 
 /**
- * @description Demonstrates resizing a left page panel using a resize handle.
+ * @summary Demonstrates resizing a left page panel using a resize handle.
  */
 export const Resize = {
   render: () => html`
@@ -1345,7 +1352,7 @@ export const Resize = {
 };
 
 /**
- * @description Demonstrates resizing multiple panels (left, right, bottom) with handles.
+ * @summary Demonstrates resizing multiple panels (left, right, bottom) with handles.
  */
 export const ResizeMulti = {
   render: () => html`
@@ -1391,7 +1398,7 @@ export const ResizeMulti = {
 };
 
 /**
- * @description Shows snapping a right panel to min or max width using double-click on the handle.
+ * @summary Shows snapping a right panel to min or max width using double-click on the handle.
  */
 export const ResizeSnap = {
   render: () => html`

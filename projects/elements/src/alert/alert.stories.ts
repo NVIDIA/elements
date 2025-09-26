@@ -8,10 +8,16 @@ export default {
   component: 'nve-alert'
 };
 
+/**
+ * @summary Basic alert component for displaying informational messages to users
+ */
 export const Default = {
   render: () => html`<nve-alert>alert message</nve-alert>`
 };
 
+/**
+ * @summary Demonstrates different alert status variants (accent, warning, success, danger) for contextual messaging
+ */
 export const Status = {
   render: () => html`
 <div nve-layout="column gap:md">
@@ -24,30 +30,9 @@ export const Status = {
   `
 }
 
-export const StatusLightTheme = {
-  render: () => html`
-<div nve-theme="root light" nve-layout="column gap:md pad:md">
-  <nve-alert>Standard</nve-alert>
-  <nve-alert status="accent">Accent</nve-alert>
-  <nve-alert status="warning">Warning</nve-alert>
-  <nve-alert status="success">Success</nve-alert>
-  <nve-alert status="danger">Danger</nve-alert>
-</div>
-  `
-}
-
-export const StatusDarkTheme = {
-  render: () => html`
-<div nve-theme="root dark" nve-layout="column gap:md pad:md">
-  <nve-alert>Standard</nve-alert>
-  <nve-alert status="accent">Accent</nve-alert>
-  <nve-alert status="warning">Warning</nve-alert>
-  <nve-alert status="success">Success</nve-alert>
-  <nve-alert status="danger">Danger</nve-alert>
-</div>
-  `
-}
-
+/**
+ * @summary Demonstrates task-specific status variants for workflow and process state communication
+ */
 export const TaskStatus = {
   render: () => html`
 <div nve-layout="column gap:md">
@@ -66,40 +51,9 @@ export const TaskStatus = {
   `
 }
 
-export const TaskStatusLightTheme = {
-  render: () => html`
-<div nve-theme="root light" nve-layout="column gap:md pad:md">
-  <nve-alert status="scheduled">Scheduled</nve-alert>
-  <nve-alert status="queued">Queued</nve-alert>
-  <nve-alert status="pending">Pending</nve-alert>
-  <nve-alert status="starting">Starting</nve-alert>
-  <nve-alert status="running">Running</nve-alert>
-  <nve-alert status="restarting">Restarting</nve-alert>
-  <nve-alert status="stopping">Stopping</nve-alert>
-  <nve-alert status="finished">Fnished</nve-alert>
-  <nve-alert status="failed">Failed</nve-alert>
-  <nve-alert status="unknown">Unknown</nve-alert>
-</div>
-  `
-}
-
-export const TaskStatusDarkTheme = {
-  render: () => html`
-<div nve-theme="root dark" nve-layout="column gap:md pad:md">
-  <nve-alert status="scheduled">Scheduled</nve-alert>
-  <nve-alert status="queued">Queued</nve-alert>
-  <nve-alert status="pending">Pending</nve-alert>
-  <nve-alert status="starting">Starting</nve-alert>
-  <nve-alert status="running">Running</nve-alert>
-  <nve-alert status="restarting">Restarting</nve-alert>
-  <nve-alert status="stopping">Stopping</nve-alert>
-  <nve-alert status="finished">Finished</nve-alert>
-  <nve-alert status="failed">Failed</nve-alert>
-  <nve-alert status="unknown">Unknown</nve-alert>
-</div>
-  `
-}
-
+/**
+ * @summary Demonstrates alert grouping for organizing related messages together
+ */
 export const AlertGroupDefault = {
   render: () => html`
   <nve-alert-group>
@@ -108,6 +62,9 @@ export const AlertGroupDefault = {
   `
 };
 
+/**
+ * @summary Shows alert groups with different status variants for contextual message grouping
+ */
 export const AlertGroupStatus = {
   render: () => html`
   <div nve-layout="column gap:md">
@@ -139,6 +96,9 @@ export const AlertGroupStatus = {
   `
 }
 
+/**
+ * @summary Demonstrates closable alerts within groups for dismissible notification patterns
+ */
 export const Closable = {
   render: () => html`
     <div nve-layout="column gap:md">
@@ -170,6 +130,9 @@ export const Closable = {
   `
 }
 
+/**
+ * @summary Shows alerts with action buttons for interactive notification patterns
+ */
 export const Actions = {
   render: () => html`
   <div nve-layout="column gap:md">
@@ -202,6 +165,9 @@ export const Actions = {
   `
 }
 
+/**
+ * @summary Demonstrates high-prominence alerts for banner-style notifications with emphasis styling
+ */
 export const Prominence = {
   render: () => html`
     <div nve-layout="column gap:md">
@@ -228,63 +194,9 @@ export const Prominence = {
   `
 }
 
-export const Themes = {
-  render: () => html`
-    <div nve-theme="root light" nve-layout="column gap:md pad:md">
-      <nve-alert-group>
-        <nve-alert>Standard</nve-alert>
-        <nve-alert>Standard</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="accent">
-        <nve-alert>Accent</nve-alert>
-        <nve-alert>Accent</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="warning">
-        <nve-alert>Warning</nve-alert>
-        <nve-alert>Warning</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="success">
-        <nve-alert>Success</nve-alert>
-        <nve-alert>Success</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="danger">
-        <nve-alert>Danger</nve-alert>
-        <nve-alert>Danger</nve-alert>
-      </nve-alert-group>
-    </div>
-    <div nve-theme="root dark" nve-layout="column gap:md pad:md">
-      <nve-alert-group>
-        <nve-alert>default</nve-alert>
-        <nve-alert>default</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="accent">
-        <nve-alert>Accent</nve-alert>
-        <nve-alert>Accent</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="warning">
-        <nve-alert>Warning</nve-alert>
-        <nve-alert>Warning</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="success">
-        <nve-alert>Success</nve-alert>
-        <nve-alert>Success</nve-alert>
-      </nve-alert-group>
-
-      <nve-alert-group status="danger">
-        <nve-alert>Danger</nve-alert>
-        <nve-alert>Danger</nve-alert>
-      </nve-alert-group>
-    </div>
-  `
-}
-
+/**
+ * @summary Demonstrates complex alert content with structured layouts and detailed information display
+ */
 export const Multiline = {
   render: () => html`
     <nve-alert-group status="danger">
@@ -303,6 +215,10 @@ export const Multiline = {
   `
 }
 
+/**
+ * @summary Shows custom color variants for brand-specific alert styling and visual differentiation
+ * @tags test-case
+ */
 export const CustomColors = {
   render: () => html`
     <div nve-layout="column gap:md">
@@ -398,6 +314,10 @@ export const CustomColors = {
 }
 
 
+/**
+ * @summary Demonstrates combining custom colors with status and prominence for advanced alert customization
+ * @tags test-case
+ */
 export const CustomColorCombinations = {
   render: () => html`
     <div nve-layout="column gap:md">
