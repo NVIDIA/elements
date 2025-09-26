@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 /* istanbul ignore file -- @preserve */
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
