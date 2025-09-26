@@ -15,6 +15,9 @@ export default {
   component: 'nve-menu',
 };
 
+/**
+ * @summary Basic menu with simple text items demonstrating the default menu structure and styling.
+ */
 export const Default = {
   render: () => html`
   <nve-menu>
@@ -27,7 +30,7 @@ export const Default = {
 };
 
 /**
- * @description An example of a dropdown menu. [ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
+ * @summary An example of a dropdown menu. [ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
  */
 export const Dropdown = {
   render: () => html`
@@ -44,6 +47,9 @@ export const Dropdown = {
   `
 };
 
+/**
+ * @summary Menu with a selected item showing the visual state for user-selected options.
+ */
 export const Selected = {
   render: () => html`
   <nve-menu>
@@ -55,6 +61,9 @@ export const Selected = {
   `
 };
 
+/**
+ * @summary Menu with a current page item showing the visual state for the active/current page in navigation.
+ */
 export const Current = {
   render: () => html`
   <nve-menu>
@@ -67,7 +76,7 @@ export const Current = {
 };
 
 /**
- * @description By default Menu will show a blue border on the selected item. You can change the border color by setting `--border-background` on the `<nve-menu-item>`
+ * @summary By default Menu will show a blue border on the selected item. You can change the border color by setting `--border-background` on the `<nve-menu-item>`
  */
 export const BorderBackground = {
   render: () => html`
@@ -80,6 +89,9 @@ export const BorderBackground = {
   `
 };
 
+/**
+ * @summary Menu with disabled items showing unavailable options while maintaining visual context.
+ */
 export const Disabled = {
   render: () => html`
   <nve-menu>
@@ -91,6 +103,9 @@ export const Disabled = {
   `
 };
 
+/**
+ * @summary Menu items with icons demonstrating how to add visual context and improve usability.
+ */
 export const Icons = {
   render: () => html`
   <nve-menu>
@@ -102,6 +117,9 @@ export const Icons = {
   `
 };
 
+/**
+ * @summary Menu items with links demonstrating navigation functionality within menu structures.
+ */
 export const Links = {
   render: () => html`
   <nve-menu>
@@ -114,7 +132,7 @@ export const Links = {
 };
 
 /**
- * @description Menu item features a default slot for content, along with a suffix slot for displaying elements such as keyboard shortcuts at the end of the menu item container.
+ * @summary Menu item features a default slot for content, along with a suffix slot for displaying elements such as keyboard shortcuts at the end of the menu item container.
  */
 export const Suffix = {
   render: () => html`
@@ -124,6 +142,10 @@ export const Suffix = {
   `
 };
 
+/**
+ * @summary Menu with constrained height showing scrollable behavior when content exceeds container limits.
+ * @tags test-case
+ */
 export const Scroll = {
   render: () => html`
   <nve-menu style="--max-height: 150px">
@@ -137,6 +159,9 @@ export const Scroll = {
   `
 };
 
+/**
+ * @summary Complex dropdown menu with search functionality and branded logos for application selection interfaces.
+ */
 export const Complex = {
   render: () => html`
   <nve-button id="dropdown-menu-btn">dropdown</nve-button>
@@ -164,7 +189,8 @@ export const Complex = {
 };
 
 /**
- * @description Navigation drawers overlay the existing page content. Navigation is for out of page context navigation.
+ * @summary Navigation drawers overlay the existing page content. Navigation is for out of page context navigation.
+ * @tags pattern
  */
 export const VerticalNavigationDrawer = {
   render: () => html`
@@ -193,7 +219,8 @@ export const VerticalNavigationDrawer = {
 };
 
 /**
- * @description Navigation panels are inline to the page and push the existing page content to the side. Navigation should be relevant and contextual to the page content.
+ * @summary Navigation panels are inline to the page and push the existing page content to the side. Navigation should be relevant and contextual to the page content.
+ * @tags pattern
  */
 export const VerticalNavigationPanel = {
   render: () => html`
@@ -223,6 +250,10 @@ export const VerticalNavigationPanel = {
   `
 };
 
+/**
+ * @summary Menu item with tooltip integration showing how to provide additional context and warnings.
+ * @tags pattern
+ */
 export const MenuItemTooltip = {
   render: () => html`
   <nve-menu>
@@ -237,17 +268,18 @@ export const MenuItemTooltip = {
   `
 }
 
+/**
+ * @summary Menu items with danger status styling for destructive actions like delete or logout operations.
+ */
 export const DangerStatus = {
   render: () => html`
-  <div nve-layout="pad:lg">
-    <nve-menu>
-      <nve-menu-item status="danger">default</nve-menu-item>
-      <nve-menu-item status="danger" disabled>disabled</nve-menu-item>
-      <nve-menu-item status="danger" selected>selected</nve-menu-item>
-      <nve-menu-item status="danger" current="page">current</nve-menu-item>
-      <nve-menu-item status="danger"><nve-icon name="gear"></nve-icon> icon left</nve-menu-item>
-      <nve-menu-item status="danger">icon right <nve-icon id="warning-icon" size="md" name="exclamation-triangle" style="margin-left: auto"></nve-icon></nve-menu-item>
-    </nve-menu>
-  </div>
+  <nve-menu>
+    <nve-menu-item status="danger">default</nve-menu-item>
+    <nve-menu-item status="danger" disabled>disabled</nve-menu-item>
+    <nve-menu-item status="danger" selected>selected</nve-menu-item>
+    <nve-menu-item status="danger" current="page">current</nve-menu-item>
+    <nve-menu-item status="danger"><nve-icon name="gear"></nve-icon> icon left</nve-menu-item>
+    <nve-menu-item status="danger">icon right <nve-icon id="warning-icon" size="md" name="exclamation-triangle" style="margin-left: auto"></nve-icon></nve-menu-item>
+  </nve-menu>
   `
 }

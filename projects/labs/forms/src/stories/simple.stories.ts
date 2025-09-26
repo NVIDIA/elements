@@ -5,6 +5,9 @@ export default {
   title: 'Labs/Forms/Examples'
 };
 
+/**
+ * @tags test-case
+ */
 export const Simple = {
   render: () => html`
 <form nve-layout="column gap:lg pad:lg">
@@ -31,6 +34,9 @@ export const Simple = {
 `
 };
 
+/**
+ * @tags test-case
+ */
 export const SimpleEvents = {
   render: () => html`
 <form id="simple-events-form" nve-layout="column gap:lg pad:lg">

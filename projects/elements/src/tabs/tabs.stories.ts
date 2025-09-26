@@ -9,6 +9,9 @@ export default {
   component: 'nve-tabs',
 };
 
+/**
+ * @summary Basic tabs component for organizing content into selectable sections with disabled state support.
+ */
 export const Default = {
   render: () => html`
   <nve-tabs behavior-select>
@@ -21,34 +24,9 @@ export const Default = {
   `
 };
 
-export const LightTheme = {
-  render: () => html`
-  <div nve-theme="root light" nve-layout="row gap:sm pad:md">
-    <nve-tabs behavior-select>
-      <nve-tabs-item selected>Tab 1</nve-tabs-item>
-      <nve-tabs-item>Tab 2</nve-tabs-item>
-      <nve-tabs-item>Tab 3</nve-tabs-item>
-      <nve-tabs-item disabled>Disabled</nve-tabs-item>
-      <nve-tabs-item>Tab 5</nve-tabs-item>
-    </nve-tabs>
-  </div>
-  `
-};
-
-export const DarkTheme = {
-  render: () => html`
-  <div nve-theme="root dark" nve-layout="row gap:sm pad:md">
-    <nve-tabs behavior-select>
-      <nve-tabs-item selected> Tab 1</nve-tabs-item>
-      <nve-tabs-item>Tab 2</nve-tabs-item>
-      <nve-tabs-item>Tab 3</nve-tabs-item>
-      <nve-tabs-item disabled>Disabled</nve-tabs-item>
-      <nve-tabs-item>Tab 5</nve-tabs-item>
-    </nve-tabs>
-  </div>
-  `
-};
-
+/**
+ * @summary Borderless tabs variant for minimal visual styling without border emphasis.
+ */
 export const BorderlessTabs = {
   render: () => html`
   <nve-tabs borderless behavior-select>
@@ -61,6 +39,9 @@ export const BorderlessTabs = {
   `
 };
 
+/**
+ * @summary Tabs with custom border background styling for brand-specific visual customization.
+ */
 export const BorderBackground = {
   render: () => html`
   <nve-tabs>
@@ -77,6 +58,9 @@ export const BorderBackground = {
   `
 };
 
+/**
+ * @summary Tabs with notification dots for indicating unread content or alerts within tab sections.
+ */
 export const TabsWithDots = {
   render: () => html`
   <nve-tabs behavior-select>
@@ -92,6 +76,9 @@ export const TabsWithDots = {
   `
 };
 
+/**
+ * @summary Vertical tabs layout for sidebar navigation and vertical content organization patterns.
+ */
 export const VerticalTabs = {
   render: () => html`
   <nve-tabs vertical behavior-select style="width: 250px">
@@ -104,6 +91,9 @@ export const VerticalTabs = {
   `
 };
 
+/**
+ * @summary Borderless vertical tabs with icons for enhanced visual navigation and minimal styling.
+ */
 export const BorderlessVerticalTabs = {
   render: () => html`
   <nve-tabs vertical borderless behavior-select style="width: 250px">
@@ -123,6 +113,9 @@ export const BorderlessVerticalTabs = {
   `
 };
 
+/**
+ * @summary Stateless tabs for external state management without built-in selection behavior.
+ */
 export const StatelessTabs = {
   render: () => html`
   <nve-tabs>
@@ -135,6 +128,9 @@ export const StatelessTabs = {
   `
 };
 
+/**
+ * @summary Tabs with link navigation for routing-based tab switching and page navigation.
+ */
 export const Links = {
   render: () => html`
   <nve-tabs>
@@ -151,6 +147,9 @@ export const Links = {
   `
 };
 
+/**
+ * @summary Tabs with overflow handling for managing large numbers of tabs with scrolling behavior.
+ */
 export const OverflowTabs = {
   render: () => html`
     <nve-tabs behavior-select>

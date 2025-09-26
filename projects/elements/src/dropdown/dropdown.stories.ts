@@ -15,7 +15,7 @@ export default {
 };
 
 /**
- * @description Basic dropdown implementation using popovertarget attribute to connect trigger and dropdown. Useful for simple dropdown menus.
+ * @summary Basic dropdown implementation using popovertarget attribute to connect trigger and dropdown. Useful for simple dropdown menus.
  */
 export const Default = {
   render: () => html`
@@ -25,7 +25,7 @@ export const Default = {
 };
 
 /**
- * @description An example of a dropdown menu. Useful for navigation menus, context menus, settings and user actions.
+ * @summary An example of a dropdown menu. Useful for navigation menus, context menus, settings and user actions.
  */
 export const DropdownMenu = {
   render: () => html`
@@ -43,7 +43,7 @@ export const DropdownMenu = {
 };
 
 /**
- * @description Dropdown using anchor attribute to reference trigger element by ID. Alternative approach for connecting dropdowns to their triggers.
+ * @summary Dropdown using anchor attribute to reference trigger element by ID. Alternative approach for connecting dropdowns to their triggers.
  */
 export const Visual = {
   render: () => html`
@@ -53,7 +53,7 @@ export const Visual = {
 };
 
 /**
- * @description Demonstrates event handling for dropdown open and close events. Useful for adding custom behavior when dropdown state changes.
+ * @summary Demonstrates event handling for dropdown open and close events. Useful for adding custom behavior when dropdown state changes.
  */
 export const Events = {
   inline: false,
@@ -69,7 +69,7 @@ export const Events = {
 };
 
 /**
- * @description Dropdown with closable attribute that allows users to dismiss the dropdown by clicking close button.
+ * @summary Dropdown with closable attribute that allows users to dismiss the dropdown by clicking close button.
  */
 export const Closable = {
   render: () => html`
@@ -82,7 +82,7 @@ export const Closable = {
 };
 
 /**
- * @description Dropdown with structured content using header and footer sections. Perfect for complex dropdown content that needs clear visual hierarchy.
+ * @summary Dropdown with structured content using header and footer sections. Perfect for complex dropdown content that needs clear visual hierarchy.
  */
 export const DropdownLayout = {
   render: () => html`
@@ -99,6 +99,10 @@ export const DropdownLayout = {
   `
 };
 
+/**
+ * @summary Dropdown with multiple triggers, demonstrating how to use the popovertarget attribute to connect multiple triggers to the same dropdown.
+ * @tags test-case
+ */
 export const MultipleTriggers = {
   render: () => html`
 <div nve-layout="row gap:sm align:center">
@@ -110,6 +114,10 @@ export const MultipleTriggers = {
   `
 };
 
+/**
+ * @summary Dropdown position, demonstrating how to use the position attribute to position the dropdown when the trigger is not visible.
+ * @tags test-case
+ */
 export const Position = {
   render: () => html`
 <nve-dropdown anchor="card" position="top" alignment="center">
@@ -132,6 +140,10 @@ export const Position = {
   `
 };
 
+/**
+ * @summary Dropdown alignment, demonstrating how to use the alignment attribute to position the dropdown when the trigger is not visible.
+ * @tags test-case
+ */
 export const Alignment = {
   render: () => html`
 <div nve-theme nve-layout="row align:center">
@@ -157,7 +169,7 @@ export const Alignment = {
 };
 
 /**
- * @description Dropdown containing a radio group for single-selection options. Perfect for sort controls, filter selections, or preference settings.
+ * @summary Dropdown containing a radio group for single-selection options. Perfect for sort controls, filter selections, or preference settings.
  */
 export const RadioGroup = {
   render: () => html`
@@ -186,7 +198,7 @@ export const RadioGroup = {
 };
 
 /**
- * @description Dropdown containing a checkbox group for multi-selection options. Ideal for filter controls, feature toggles, or bulk action selections.
+ * @summary Dropdown containing a checkbox group for multi-selection options. Ideal for filter controls, feature toggles, or bulk action selections.
  */
 export const CheckboxGroup = {
   render: () => html`
@@ -213,6 +225,10 @@ export const CheckboxGroup = {
 
 /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
 
+/**
+ * @summary Legacy behavior trigger for dropdown, demonstrating how to use the behavior-trigger attribute to open the dropdown when the button is clicked.
+ * @tags test-case
+ */
 export const LegacyBehaviorTrigger = {
   inline: false,
   render: () => html`
@@ -223,6 +239,11 @@ export const LegacyBehaviorTrigger = {
   `
 };
 
+/**
+ * @deprecated
+ * @summary Dropdown hint, demonstrating how to use the tooltip element to display a hint when the dropdown is opened.
+ * @tags test-case
+ */
 export const DropdownHint = {
   render: () => html`
 <nve-dropdown id="dropdown">
@@ -235,6 +256,10 @@ export const DropdownHint = {
   `
 };
 
+/**
+ * @summary Dropdown position fallback, demonstrating how to use the position and alignment attributes to position the dropdown when the trigger is not visible.
+ * @tags test-case
+ */
 export const DropdownPositionFallback = {
   render: () => html`
 <style>

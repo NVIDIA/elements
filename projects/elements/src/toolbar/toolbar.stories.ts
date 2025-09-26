@@ -14,7 +14,7 @@ export default {
 };
 
 /**
- * @description Basic toolbar with action buttons and a settings icon in the suffix slot.
+ * @summary Basic toolbar with action buttons and a settings icon in the suffix slot.
  */
 export const Default = {
   render: () => html`
@@ -27,7 +27,7 @@ export const Default = {
 };
 
 /**
- * @description Toolbar with flat container styling for a more subtle appearance.
+ * @summary Toolbar with flat container styling for a more subtle appearance.
  */
 export const ContainerFlat = {
   render: () => html`
@@ -40,7 +40,7 @@ export const ContainerFlat = {
 };
 
 /**
- * @description Toolbar with inset container styling and constrained width for contained layouts.
+ * @summary Toolbar with inset container styling and constrained width for contained layouts.
  */
 export const ContainerInset = {
   render: () => html`
@@ -53,7 +53,7 @@ export const ContainerInset = {
 };
 
 /**
- * @description Toolbar with full container styling that spans the entire width.
+ * @summary Toolbar with full container styling that spans the entire width.
  */
 export const ContainerFull = {
   render: () => html`
@@ -66,7 +66,7 @@ export const ContainerFull = {
 };
 
 /**
- * @description Complex toolbar with grouped controls including select dropdowns, button groups, and dividers for text editing scenarios.
+ * @summary Complex toolbar with grouped controls including select dropdowns, button groups, and dividers for text editing scenarios.
  */
 export const Groups = {
   render: () => html`
@@ -118,7 +118,7 @@ export const Groups = {
 };
 
 /**
- * @description Vertical toolbar orientation with button groups and dividers for sidebar layouts.
+ * @summary Vertical toolbar orientation with button groups and dividers for sidebar layouts.
  */
 export const Vertical = {
   render: () => html`
@@ -141,7 +141,7 @@ export const Vertical = {
 };
 
 /**
- * @description Toolbar with filter functionality including progressive filter chips and search combobox for data filtering scenarios.
+ * @summary Toolbar with filter functionality including progressive filter chips and search combobox for data filtering scenarios.
  */
 export const Filter = {
   render: () => html`
@@ -181,7 +181,7 @@ export const Filter = {
 };
 
 /**
- * @description Toolbar with multiple filter chips and date inputs demonstrating horizontal scrolling behavior when content overflows.
+ * @summary Toolbar with multiple filter chips and date inputs demonstrating horizontal scrolling behavior when content overflows.
  */
 export const Scroll = {
   render: () => html`
@@ -243,7 +243,7 @@ export const Scroll = {
 };
 
 /**
- * @description Toolbar with content wrapping enabled to handle overflow by wrapping items to new lines instead of scrolling.
+ * @summary Toolbar with content wrapping enabled to handle overflow by wrapping items to new lines instead of scrolling.
  */
 export const Wrap = {
   render: () => html`
@@ -305,7 +305,7 @@ export const Wrap = {
 };
 
 /**
- * @description Toolbar with status styling showing selection state with accent status and default status variants for bulk actions.
+ * @summary Toolbar with status styling showing selection state with accent status and default status variants for bulk actions.
  */
 export const Status = {
   render: () => html`

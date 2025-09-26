@@ -8,6 +8,9 @@ export default {
   component: 'nve-accordion',
 };
 
+/**
+ * @summary Basic accordion component for collapsible content sections with expand/collapse functionality
+ */
 export const Default = {
   render: () => html`
     <nve-accordion behavior-expand>
@@ -19,6 +22,9 @@ export const Default = {
   `
 };
 
+/**
+ * @summary Accordion with additional header content for richer information display in collapsed state
+ */
 export const Full = {
   render: () => html`
     <nve-accordion behavior-expand>
@@ -31,6 +37,9 @@ export const Full = {
   `
 };
 
+/**
+ * @summary Accordion with custom CSS transitions for smooth expand/collapse animations
+ */
 export const Animated = {
   render: () => html`
     <nve-accordion behavior-expand style="--transition: height 0.3s ease-in-out">
@@ -43,6 +52,9 @@ export const Animated = {
   `
 };
 
+/**
+ * @summary Disabled accordion state for read-only content display without interaction
+ */
 export const Disabled = {
   render: () => html`
     <nve-accordion behavior-expand disabled>
@@ -55,6 +67,9 @@ export const Disabled = {
   `
 };
 
+/**
+ * @summary Accordion with inset container styling for embedded content sections
+ */
 export const Inset = {
   render: () => html`
     <nve-accordion behavior-expand container="inset">
@@ -67,6 +82,9 @@ export const Inset = {
 `
 };
 
+/**
+ * @summary Accordion with flat container styling for minimal visual appearance
+ */
 export const Flat = {
   render: () => html`
     <nve-accordion behavior-expand container="flat">
@@ -79,6 +97,9 @@ export const Flat = {
 `
 };
 
+/**
+ * @summary Accordion with custom interactive icon button for enhanced user control and visual feedback
+ */
 export const CustomIconButtonInteractive = {
   render: () => html`
 <nve-accordion id="custom-icon-button-accordion">
@@ -103,6 +124,9 @@ export const CustomIconButtonInteractive = {
   `
 };
 
+/**
+ * @summary Accordion group allowing multiple sections to be expanded simultaneously
+ */
 export const AccordionGroupFull = {
   render: () => html`
     <nve-accordion-group behavior-expand>
@@ -130,6 +154,9 @@ export const AccordionGroupFull = {
   `
 };
 
+/**
+ * @summary Accordion group with inset styling for embedded multi-section content organization
+ */
 export const AccordionGroupInset = {
   render: () => html`
     <nve-accordion-group container="inset" behavior-expand>
@@ -157,6 +184,9 @@ export const AccordionGroupInset = {
   `
 };
 
+/**
+ * @summary Accordion group with flat styling for minimal multi-section content display
+ */
 export const AccordionGroupFlat = {
   render: () => html`
     <nve-accordion-group container="flat" behavior-expand>
@@ -184,6 +214,9 @@ export const AccordionGroupFlat = {
   `
 };
 
+/**
+ * @summary Accordion group with single-expand behavior for mutually exclusive content sections
+ */
 export const AccordionGroupExpandSingle = {
   render: () => html`
     <nve-accordion-group behavior-expand-single>
@@ -214,6 +247,9 @@ export const AccordionGroupExpandSingle = {
   `
 };
 
+/**
+ * @summary Accordion with action buttons in header for interactive content management
+ */
 export const WithActions = {
   render: () => html`
     <nve-accordion behavior-expand>
@@ -229,6 +265,10 @@ export const WithActions = {
 };
 
 
+/**
+ * @summary Demonstrates accordion content with nested interactive elements like tooltips and popovers
+ * @tags test-case
+ */
 export const NestedOpenEvent = {
   render: () => html`
     <nve-accordion-group behavior-expand-single>
@@ -243,6 +283,9 @@ export const NestedOpenEvent = {
   `
 };
 
+/**
+ * @summary Demonstrates deprecated slot patterns for backward compatibility reference
+ */
 export const DeprecatedSlots = {
   render: () => html`
     <nve-accordion behavior-expand>
