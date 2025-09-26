@@ -59,12 +59,14 @@ export interface MetadataToken {
   description: string;
 }
 
+export type MetadataExampleTag = 'performance' | 'pattern' | 'anti-pattern' | 'test-case';
+
 export interface MetadataExample {
   id: string;
   template: string;
   summary: string;
   description: string;
-  tags: string[];
+  tags: MetadataExampleTag[];
   deprecated?: boolean;
   entrypoint?: string;
   element?: string;

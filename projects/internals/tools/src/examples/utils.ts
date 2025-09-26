@@ -1,8 +1,19 @@
 import { type MetadataExample } from '@nve-internals/metadata';
 
+export function isValidExample(example: MetadataExample) {
+  return (
+    !example.deprecated &&
+    !example.id.toLowerCase().includes('theme') &&
+    !example.tags.includes('anti-pattern') &&
+    !example.tags.includes('performance') &&
+    !example.tags.includes('test-case') &&
+    !example.element?.includes('internal')
+  );
+}
+
 export function getAvailableExamples(format: 'markdown' | 'json', examples: Partial<MetadataExample>[]) {
   const result = examples
-    .filter(e => !e.deprecated && !e.tags.includes('anti-pattern') && !e.element?.includes('internal'))
+    .filter(isValidExample)
     .map(s => ({ id: s.id, summary: s.summary ? s.summary : s.description, element: s.element ?? '' }));
   return format === 'markdown' ? result.map(e => renderExampleHeaderMarkdown(e)).join('\n\n---\n\n') : result;
 }
@@ -25,28 +36,26 @@ export async function filterExamples(query: string, examples: MetadataExample[])
     .replaceAll('patterns', '');
 
   // Assign a relevancy score based on matches in description, element, and id for each word
-  const scored = examples
-    .filter(e => !e.deprecated && !e.tags.includes('anti-pattern') && !e.element?.includes('internal'))
-    .map(example => {
-      let score = 0;
-      for (const word of q.split(/\s+/).filter(Boolean)) {
-        if (example.id.toLowerCase() === word.toLowerCase()) score += 5;
-        if (example.element?.toLowerCase().includes(word)) score += 4;
-        if (example.summary.toLowerCase().includes(word)) score += 3;
-        if (example.description.toLowerCase().includes(word)) score += 2;
-        if (
-          example.id.toLowerCase().includes(word) ||
-          example.id
-            .split(/(?=[A-Z])/)
-            .join(' ')
-            .toLowerCase()
-            .includes(word)
-        )
-          score += 2;
-        if (example.template.toLowerCase().includes(word)) score += 1;
-      }
-      return { ...example, _score: score };
-    });
+  const scored = examples.filter(isValidExample).map(example => {
+    let score = 0;
+    for (const word of q.split(/\s+/).filter(Boolean)) {
+      if (example.id.toLowerCase() === word.toLowerCase()) score += 5;
+      if (example.element?.toLowerCase().includes(word)) score += 4;
+      if (example.summary.toLowerCase().includes(word)) score += 3;
+      if (example.description.toLowerCase().includes(word)) score += 2;
+      if (
+        example.id.toLowerCase().includes(word) ||
+        example.id
+          .split(/(?=[A-Z])/)
+          .join(' ')
+          .toLowerCase()
+          .includes(word)
+      )
+        score += 2;
+      if (example.template.toLowerCase().includes(word)) score += 1;
+    }
+    return { ...example, _score: score };
+  });
 
   // Filter out stories with no match
   const filtered = scored.filter(story => story._score > 0);
@@ -70,7 +79,7 @@ export function renderExampleMarkdown(example: Partial<MetadataExample>) {
 export function renderExampleHeaderMarkdown(example: Partial<MetadataExample>) {
   const content = example.summary ? example.summary : example.description;
   const formattedContent = content ? `${wrapText(content)}` : '';
-  return `## ${example.id}${example.element ? ' - ' : ''}${example.element ?? ''}${formattedContent ? '\n\n' : ''}${formattedContent}`;
+  return `## ${example.id}${example.element ? ` (${example.element}) ` : ''}${formattedContent ? '\n\n' : ''}${formattedContent}`;
 }
 
 export function wrapText(text = '', width = 80) {

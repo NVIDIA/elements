@@ -237,7 +237,7 @@ describe('utils', () => {
       };
 
       const result = renderExampleMarkdown(example);
-      expect(result).toContain('## TestExample - nve-test');
+      expect(result).toContain('## TestExample (nve-test)');
       expect(result).toContain('This is a test description');
       expect(result).toContain('```html');
       expect(result).toContain('<nve-test>Content</nve-test>');
@@ -263,7 +263,7 @@ describe('utils', () => {
       };
 
       const result = renderExampleMarkdown(example);
-      expect(result).toContain('## TestExample - nve-test');
+      expect(result).toContain('## TestExample (nve-test)');
       expect(result).not.toContain('This is a test description');
       expect(result).toContain('```html');
     });
@@ -276,7 +276,7 @@ describe('utils', () => {
       };
 
       const result = renderExampleMarkdown(example);
-      expect(result).toContain('## TestExample - nve-test');
+      expect(result).toContain('## TestExample (nve-test)');
       expect(result).toContain('This is a test description');
       expect(result).not.toContain('```html');
     });
