@@ -6,7 +6,7 @@ export default {
 };
 
 /**
- * @description Trend badges for displaying data changes and metrics. Perfect
+ * @summary Trend badges for displaying data changes and metrics. Perfect
  * for dashboards, analytics, or financial data showing positive, negative,
  * or neutral trends.
  *
@@ -23,7 +23,7 @@ export const Trend = {
 }
 
 /**
- * @description Displays a metric with a trend indicator. Ideal for dashboards
+ * @summary Displays a metric with a trend indicator. Ideal for dashboards
  * and analytics where users need to quickly assess changes and understand the
  * magnitude of change at at a glance.
  * 

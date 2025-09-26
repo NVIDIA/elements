@@ -13,18 +13,24 @@ export default {
   }
 };
 
+/**
+ * @summary Basic modal dialog with header and content, providing a standard overlay for user interactions and information display.
+ */
 export const Default = {
   render: () => html`
+<nve-button popovertarget="dialog">button</nve-button>
 <nve-dialog id="dialog" modal closable>
   <nve-dialog-header>
     <h3 nve-text="heading semibold">title</h3>
   </nve-dialog-header>
   <p nve-text="body">some text content in a closable dialog</p>
 </nve-dialog>
-<nve-button popovertarget="dialog">button</nve-button>
 `
 };
 
+/**
+ * @summary Visual dialog example with header, content, and footer, demonstrating complete dialog structure for comprehensive user interfaces.
+ */
 export const Visual = {
   render: () => html`
 <nve-dialog closable>
@@ -39,6 +45,9 @@ export const Visual = {
 `
 };
 
+/**
+ * @summary Dialog with action buttons in footer, enabling user decisions and providing clear interaction paths for dialog completion.
+ */
 export const Content = {
   inline: false,
   render: () => html`
@@ -55,6 +64,9 @@ export const Content = {
   `
 };
 
+/**
+ * @summary Small dialog size for compact interactions and brief information display, optimizing space usage for simple user tasks.
+ */
 export const Small = {
   render: () => html`
 <nve-dialog size="sm" closable>
@@ -64,6 +76,9 @@ export const Small = {
   `
 };
 
+/**
+ * @summary Medium dialog size for balanced content presentation, providing optimal space for standard user interactions and information display.
+ */
 export const Medium = {
   render: () => html`
 <nve-dialog size="md" closable>
@@ -73,6 +88,9 @@ export const Medium = {
   `
 };
 
+/**
+ * @summary Large dialog size for comprehensive content display, accommodating complex forms, detailed information, and extensive user interactions.
+ */
 export const Large = {
   render: () => html`
 <nve-dialog size="lg" closable>
@@ -82,6 +100,10 @@ export const Large = {
   `
 };
 
+/**
+ * @summary Dialog with text wrapping behavior, demonstrating how content adapts to dialog constraints and maintains readability in limited space.
+ * @tags test-case
+ */
 export const TextWrap = {
   render: () => html`
 <nve-dialog  closable>
@@ -96,6 +118,9 @@ export const TextWrap = {
   `
 };
 
+/**
+ * @summary Non-closable dialog requiring explicit user action, ensuring critical interactions are completed and preventing accidental dismissal.
+ */
 export const NonClosable = {
   render: () => html`
 <nve-button popovertarget="dialog">open</nve-button>
@@ -109,6 +134,9 @@ export const NonClosable = {
   `
 };
 
+/**
+ * @summary Dialog positioning options for flexible placement, enabling contextual positioning based on user interface requirements and screen space.
+ */
 export const Alignment = {
   inline: false,
   render: () => html`
@@ -133,6 +161,10 @@ export const Alignment = {
   `
 };
 
+/**
+ * @summary Specific dialog positioning example, demonstrating how to place dialogs in optimal locations for user interaction and visual hierarchy.
+ * @tags test-case
+ */
 export const Position = {
   render: () => html`
 <nve-dialog size="sm" position="bottom" alignment="end" closable>
@@ -144,6 +176,11 @@ export const Position = {
 
 /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
 
+/**
+ * @deprecated
+ * @summary Legacy trigger mechanism for dialog opening, demonstrating backward compatibility and alternative interaction patterns for dialog activation.
+ * @tags test-case
+ */
 export const LegacyTrigger = {
   inline: false,
   render: () => html`
@@ -175,6 +212,11 @@ export const LegacyTrigger = {
   `
 };
 
+/**
+ * @deprecated
+ * @summary Legacy behavior trigger for dialog management, showing traditional dialog control patterns and event handling for dialog lifecycle.
+ * @tags test-case
+ */
 export const LegacyBehaviorTrigger = {
   inline: false,
   render: () => html`
@@ -194,6 +236,10 @@ export const LegacyBehaviorTrigger = {
   `
 };
 
+/**
+ * @summary Dialog functionality within shadow DOM, demonstrating proper dialog behavior in encapsulated component environments and custom elements.
+ * @tags test-case
+ */
 export const ShadowRoot = {
   render: () => html`
 <dialog-test-shadow-root></dialog-test-shadow-root>
@@ -231,6 +277,9 @@ export const ShadowRoot = {
   `
 };
 
+/**
+ * @summary Dialog with scrollable content area, handling overflow content gracefully while maintaining dialog structure and user interaction patterns.
+ */
 export const ScrollContent = {
   render: () => html`
 <nve-dialog id="dialog" modal closable style="height: 400px">
@@ -249,22 +298,10 @@ export const ScrollContent = {
 `
 };
 
-export const TallContent = {
-  render: () => html`
-<nve-dialog id="dialog" modal closable>
-  <nve-dialog-header>
-    <h3 nve-text="heading semibold">title</h3>
-  </nve-dialog-header>
-  <p nve-text="body" style="height: 400px">
-    some overflow content
-  </p>
-  <nve-dialog-footer>
-    <nve-button id="cancel-btn">cancel</nve-button>
-  </nve-dialog-footer>
-</nve-dialog>
-`
-};
-
+/**
+ * @summary Modal dialog with inert behavior, demonstrating proper focus management and accessibility compliance for modal overlays and user interaction.
+ * @tags test-case
+ */
 export const InertModal = {
   render: () => html`
 <style>

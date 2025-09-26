@@ -10,7 +10,7 @@ export default {
 };
 
 /**
- * @description Demonstrates the standard usage for copying text to clipboard.
+ * @summary Demonstrates the standard usage for copying text to clipboard.
  */
 export const Default = {
   render: () => html`
@@ -19,7 +19,7 @@ export const Default = {
 }
 
 /**
- * @description Copy button in disabled state. Useful for showing when copying is not available or when the user doesn't have permission to copy.
+ * @summary Copy button in disabled state. Useful for showing when copying is not available or when the user doesn't have permission to copy.
  */
 export const Disabled = {
   render: () => html`
@@ -28,7 +28,7 @@ export const Disabled = {
 }
 
 /**
- * @description Copy buttons with flat container styling, showing both enabled and disabled states. Ideal for inline usage where minimal visual impact is desired.
+ * @summary Copy buttons with flat container styling, showing both enabled and disabled states. Ideal for inline usage where minimal visual impact is desired.
  */
 export const Flat = {
   render: () => html`
@@ -38,7 +38,7 @@ export const Flat = {
 }
 
 /**
- * @description Copy button with behavior-copy attribute that automatically handles the copy functionality. Simplifies implementation by providing built-in copy behavior.
+ * @summary Copy button with behavior-copy attribute that automatically handles the copy functionality. Simplifies implementation by providing built-in copy behavior.
  */
 export const BehaviorCopy = {
   render: () => html`
@@ -47,7 +47,7 @@ export const BehaviorCopy = {
 }
 
 /**
- * @description Copy buttons in different sizes (small, default, large). Useful for adapting to different UI contexts and design requirements.
+ * @summary Copy buttons in different sizes (small, default, large). Useful for adapting to different UI contexts and design requirements.
  */
 export const Size = {
   render: () => html`
@@ -58,7 +58,7 @@ export const Size = {
 }
 
 /**
- * @description Copy button integrated with text content, showing how to copy truncated values like commit hashes. Perfect for code snippets, IDs, or other long text that needs to be copied while displaying a shortened version.
+ * @summary Copy button integrated with text content, showing how to copy truncated values like commit hashes. Perfect for code snippets, IDs, or other long text that needs to be copied while displaying a shortened version.
  */
 export const Hint = {
   render: () => html`
@@ -70,7 +70,7 @@ export const Hint = {
 }
 
 /**
- * @description Copy button with custom icon in the icon slot. Demonstrates how to customize the button appearance while maintaining copy functionality. Useful for context-specific icons like git branches, URLs, or other specialized content.
+ * @summary Copy button with custom icon in the icon slot. Demonstrates how to customize the button appearance while maintaining copy functionality. Useful for context-specific icons like git branches, URLs, or other specialized content.
  */
 export const Icon = {
   render: () => html`
@@ -81,7 +81,8 @@ export const Icon = {
 }
 
 /**
- * @description Advanced pattern/example demonstrating how to handle long-running copy to clipboard operations.
+ * @summary Advanced pattern/example demonstrating how to handle long-running copy to clipboard operations.
+ * @tags test-case
  */
 export const AsyncCopy = {
   render: () => html`

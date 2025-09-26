@@ -8,7 +8,7 @@ export default {
 };
 
 /**
- * @description Basic chat message with default styling and behavior. Use this for simple text-based chat interactions.
+ * @summary Basic chat message with default styling and behavior. Use this for simple text-based chat interactions.
  */
 export const Default = {
   render: () => html`
@@ -17,7 +17,7 @@ export const Default = {
   </nve-chat-message>`};
 
 /**
- * @description Demonstrates different arrow positions for chat messages. Useful for creating chat bubbles that point to specific elements or users.
+ * @summary Demonstrates different arrow positions for chat messages. Useful for creating chat bubbles that point to specific elements or users.
  */
 export const ArrowPosition = {
   render: () => html`
@@ -31,7 +31,7 @@ export const ArrowPosition = {
 `};
 
 /**
- * @description Flat container style with avatar integration. Perfect for modern chat interfaces where messages have a cleaner, flatter appearance.
+ * @summary Flat container style with avatar integration. Perfect for modern chat interfaces where messages have a cleaner, flatter appearance.
  */
 export const Flat = {
   render: () => html`
@@ -49,7 +49,7 @@ export const Flat = {
 `};
 
 /**
- * @description Chat conversation with prefix and suffix avatars. Ideal for multi-user chat applications where you need to distinguish between different participants.
+ * @summary Chat conversation with prefix and suffix avatars. Ideal for multi-user chat applications where you need to distinguish between different participants.
  */
 export const PrefixSuffix = {
   render: () => html`
@@ -73,7 +73,7 @@ export const PrefixSuffix = {
 `};
 
 /**
- * @description Chat messages with code blocks for technical discussions. Perfect for developer chat interfaces or documentation systems.
+ * @summary Chat messages with code blocks for technical discussions. Perfect for developer chat interfaces or documentation systems.
  */
 export const Codeblock = {
   render: () => html`
@@ -94,7 +94,7 @@ export const Codeblock = {
 }
 
 /**
- * @description Custom top offset positioning for precise arrow placement. Useful when you need fine-tuned control over the chat bubble positioning.
+ * @summary Custom top offset positioning for precise arrow placement. Useful when you need fine-tuned control over the chat bubble positioning.
  */
 export const TopOffset = {
   render: () => html`
@@ -106,7 +106,7 @@ export const TopOffset = {
 }
 
 /**
- * @description All available color variants for chat messages. Use these to create themed chat interfaces or to differentiate message types and priorities.
+ * @summary All available color variants for chat messages. Use these to create themed chat interfaces or to differentiate message types and priorities.
  */
 export const Color = {
     render: () => html `

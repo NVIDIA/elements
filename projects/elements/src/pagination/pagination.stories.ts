@@ -8,7 +8,7 @@ export default {
 };
 
 /**
- * @description Basic pagination component with default styling and behavior.
+ * @summary Basic pagination component with default styling and behavior.
  */
 export const Default = {
   render: () => html`
@@ -21,7 +21,7 @@ export const Default = {
 };
 
 /**
- * @description Pagination with skip buttons to navigate to first and last pages quickly.
+ * @summary Pagination with skip buttons to navigate to first and last pages quickly.
  */
 export const Skippable = {
   render: () => html`
@@ -30,7 +30,7 @@ export const Skippable = {
 };
 
 /**
- * @description Disabled pagination component that prevents user interaction.
+ * @summary Disabled pagination component that prevents user interaction.
  */
 export const Disabled = {
   render: () => html`
@@ -39,7 +39,7 @@ export const Disabled = {
 };
 
 /**
- * @description Pagination with flat container styling for a more minimal appearance.
+ * @summary Pagination with flat container styling for a more minimal appearance.
  */
 export const Flat = {
   render: () => html`
@@ -48,7 +48,7 @@ export const Flat = {
 };
 
 /**
- * @description Inline pagination layout that fits inline with content.
+ * @summary Inline pagination layout that fits inline with content.
  */
 export const Inline = {
   render: () => html`
@@ -57,7 +57,7 @@ export const Inline = {
 };
 
 /**
- * @description Inline pagination with disabled step selector to prevent page size changes.
+ * @summary Inline pagination with disabled step selector to prevent page size changes.
  */
 export const DisableStep = {
   render: () => html`
@@ -66,7 +66,7 @@ export const DisableStep = {
 };
 
 /**
- * @description Pagination is [form associated component](https://web.dev/more-capable-form-controls)
+ * @summary Pagination is [form associated component](https://web.dev/more-capable-form-controls)
  * and can be used within FormData.
  */
 export const Forms = {
@@ -95,7 +95,7 @@ export const Forms = {
 };
 
 /**
- * @description Pagination without items count display, useful when total count is unknown.
+ * @summary Pagination without items count display, useful when total count is unknown.
  */
 export const NoItemsCount = {
   render: () => html`
@@ -117,29 +117,7 @@ export const NoItemsCount = {
 };
 
 /**
- * @description Pagination component displayed in light theme with disabled state.
- */
-export const LightTheme = {
-  render: () => html`
-<div nve-theme="root light pad:md">
-  <nve-pagination disabled value="1" items="100" step="10" skippable></nve-pagination>
-</div>
-  `
-}
-
-/**
- * @description Pagination component displayed in dark theme with disabled state.
- */
-export const DarkTheme = {
-  render: () => html`
-<div nve-theme="root dark pad:md">
-  <nve-pagination disabled value="1" items="100" step="10" skippable></nve-pagination>
-</div>
-  `
-}
-
-/**
- * @description Pagination handling large datasets with higher step values for efficient navigation.
+ * @summary Pagination handling large datasets with higher step values for efficient navigation.
  */
 export const LargeValues = {
   render: () => html`
@@ -148,9 +126,10 @@ export const LargeValues = {
 }
 
 /**
- * @description If the upper bound of items is unknown the `last-page` event can
+ * @summary If the upper bound of items is unknown the `last-page` event can
  * be used to determine when to load additional data and update the pagination
  * with the latest total of items.
+ * @tags test-case
  */
 export const DynamicItems = {
   render: () => html`
@@ -173,7 +152,7 @@ export const DynamicItems = {
 }
 
 /**
- * @description When custom step is provided, the select options dynamically
+ * @summary When custom step is provided, the select options dynamically
  * adapt to the step and is appended to the default option list.
  */
 export const DynamicStepSize = {
@@ -184,10 +163,11 @@ export const DynamicStepSize = {
 };
 
 /**
- * @description Use the `suffix-label` slot to customize the "of total" label
+ * @summary Use the `suffix-label` slot to customize the "of total" label
  * when dealing with approximated totals from API responses. This is useful
  * when the API returns a limited count but indicates there are more items
  * available.
+ * @tags test-case
  */
 export const SuffixLabel = {
   render: () => html`
@@ -198,8 +178,7 @@ export const SuffixLabel = {
 };
 
 /**
- * @description Custom pagination pattern using toolbar with numbered page
- * buttons and navigation arrows. [Figma](https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-Nvidia-Elements-Design-Catalog?node-id=3689-87177&p=f&t=odpJ12NktrAtL2vK-0)
+ * @summary Custom pagination pattern using toolbar with numbered page buttons and navigation arrows.
  */
 export const PageListPattern = {
   render: () => html`
@@ -215,7 +194,7 @@ export const PageListPattern = {
 };
 
 /**
- * @description Enhanced pagination pattern with first/last page buttons and numbered page navigation.
+ * @summary Enhanced pagination pattern with first/last page buttons and numbered page navigation.
  */
 export const PageListSkipPattern = {
   render: () => html`
@@ -233,8 +212,7 @@ export const PageListSkipPattern = {
 };
 
 /**
- * @description Vertical pagination pattern with up/down navigation arrows for
- * compact layouts. [Figma](https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-Nvidia-Elements-Design-Catalog?node-id=14605-25522&p=f&t=odpJ12NktrAtL2vK-0)
+ * @summary Vertical pagination pattern with up/down navigation arrows for compact layouts.
  */
 export const VerticalPattern = {
   render: () => html`
@@ -247,7 +225,7 @@ export const VerticalPattern = {
 };
 
 /**
- * @description Custom pagination with select dropdown for page size and navigation arrows.
+ * @summary Custom pagination with select dropdown for page size and navigation arrows.
  */
 export const CustomSelectPattern = {
   render: () => html`

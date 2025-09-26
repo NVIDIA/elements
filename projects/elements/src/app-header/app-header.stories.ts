@@ -15,6 +15,9 @@ export default {
 
 /* eslint-disable @nvidia-elements/lint/no-deprecated-tags */
 
+/**
+ * @deprecated
+ */
 export const Default = {
   render: () => {
     return html`
@@ -31,6 +34,9 @@ export const Default = {
   }
 };
 
+/**
+ * @deprecated
+ */
 export const AppBadge = {
   render: () => html`
 <nve-app-header>
@@ -46,6 +52,9 @@ export const AppBadge = {
   `
 };
 
+/**
+ * @deprecated
+ */
 export const NavItems = {
   render: () => html`
 <nve-app-header>
@@ -58,6 +67,9 @@ export const NavItems = {
   `
 };
 
+/**
+ * @deprecated
+ */
 export const NavActions = {
   render: () => html`
 <nve-app-header>
@@ -71,6 +83,9 @@ export const NavActions = {
   `
 };
 
+/**
+ * @deprecated
+ */
 export const Dropdown = {
   render: () => {
     return html`

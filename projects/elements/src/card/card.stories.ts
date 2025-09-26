@@ -12,7 +12,7 @@ export default {
 };
 
 /**
- * @description Basic card component with header, content, and footer sections. Use this as a starting point for simple content containers.
+ * @summary Basic card component with header, content, and footer sections. Use this as a starting point for simple content containers.
  */
 export const Default = {
   render: () => html`
@@ -31,7 +31,7 @@ export const Default = {
 };
 
 /**
- * @description Card with action buttons in the footer, demonstrating how to create interactive cards with primary and secondary actions.
+ * @summary Card with action buttons in the footer, demonstrating how to create interactive cards with primary and secondary actions.
  */
 export const CardActions = {
   render: () => html`
@@ -56,7 +56,7 @@ export const CardActions = {
 }
 
 /**
- * @description Cards with media content (images) displayed in a grid layout, ideal for photo galleries, product catalogs, or visual content showcases.
+ * @summary Cards with media content (images) displayed in a grid layout, ideal for photo galleries, product catalogs, or visual content showcases.
  */
 export const MediaCard = {
   render: () => html`
@@ -78,7 +78,7 @@ export const MediaCard = {
 }
 
 /**
- * @description Card with a divider separating different content sections, useful for organizing related but distinct information within a single card.
+ * @summary Card with a divider separating different content sections, useful for organizing related but distinct information within a single card.
  */
 export const CardWithDivider = {
   render: () => html`
@@ -98,7 +98,7 @@ export const CardWithDivider = {
 }
 
 /**
- * @description Card containing a description list layout, perfect for displaying key-value pairs, definitions, or structured data in a readable format.
+ * @summary Card containing a description list layout, perfect for displaying key-value pairs, definitions, or structured data in a readable format.
  */
 export const CardDescriptionList = {
   render: () => html`
@@ -123,7 +123,7 @@ export const CardDescriptionList = {
 }
 
 /**
- * @description Card with integrated tabs in the header, demonstrating how to create multi-panel content within a single card interface.
+ * @summary Card with integrated tabs in the header, demonstrating how to create multi-panel content within a single card interface.
  */
 export const CardWithTabs = {
   render: () => html`
@@ -144,7 +144,7 @@ export const CardWithTabs = {
 }
 
 /**
- * @description Card with full container styling that extends to the edges, suitable for full-width layouts or when you want the card to blend with its container.
+ * @summary Card with full container styling that extends to the edges, suitable for full-width layouts or when you want the card to blend with its container.
  */
 export const ContainerFull = {
   render: () => html`
@@ -157,7 +157,7 @@ export const ContainerFull = {
 }
 
 /**
- * @description Card with flat container styling that removes the default card elevation, ideal for subtle content containers or when you want a more minimal appearance.
+ * @summary Card with flat container styling that removes the default card elevation, ideal for subtle content containers or when you want a more minimal appearance.
  */
 export const ContainerFlat = {
   render: () => html`
@@ -170,61 +170,8 @@ export const ContainerFlat = {
 }
 
 /**
- * @description Card displayed in light theme, showing how the component appears with light color scheme and demonstrating proper contrast and readability.
- */
-export const LightTheme = {
-  render: () => html`
-<div nve-theme="root light" nve-layout="pad:md align:center">
-  <nve-card style="width: 400px; height: 300px;">
-    <nve-card-header>
-      <div nve-layout="column gap:xs">
-        <h2 nve-text="heading sm bold">Heading</h2>
-        <h3 nve-text="body sm muted">Sub Heading</h3>
-      </div>
-    </nve-card-header>
-    <nve-card-content>
-      <p nve-text="body">card content</p>
-    </nve-card-content>
-    <nve-card-footer>
-      <div nve-layout="grid span-items:6 gap:xs">
-        <nve-button>cancel</nve-button>  
-        <nve-button>action</nve-button>
-      </div>
-    </nve-card-footer>
-  </nve-card>
-</div>
-  `
-}
-
-/**
- * @description Card displayed in dark theme, showing how the component appears with dark color scheme and demonstrating proper contrast and readability in low-light environments.
- */
-export const DarkTheme = {
-  render: () => html`
-<div nve-theme="root dark" nve-layout="pad:md align:center">
-  <nve-card style="width: 400px; height: 300px;">
-    <nve-card-header>
-      <div nve-layout="column gap:xs">
-        <h2 nve-text="heading sm bold">Heading</h2>
-        <h3 nve-text="body sm muted">Sub Heading</h3>
-      </div>
-    </nve-card-header>
-    <nve-card-content>
-      <p nve-text="body">card content</p>
-    </nve-card-content>
-    <nve-card-footer>
-      <div nve-layout="grid span-items:6 gap:xs">
-        <nve-button>Cancel</nve-button>  
-        <nve-button>Action</nve-button>
-      </div>
-    </nve-card-footer>
-  </nve-card>
-</div>
-  `
-}
-
-/**
- * @description Examples of invalid card usage patterns for testing and documentation purposes, showing what not to do when implementing cards.
+ * @summary Examples of invalid card usage patterns for testing and documentation purposes, showing what not to do when implementing cards.
+ * @tags test-case
  */
 export const Audit = {
   /* eslint-disable @nvidia-elements/lint/no-restricted-attrs */
