@@ -14,10 +14,6 @@ export function getInvalidParentWarning(localName: string, allowedParent: string
   return `Element ${localName} can only be used as a direct child of ${allowedParent}. ${DOCS_LOG_URL}#invalid-parent`;
 }
 
-export function getUseElementWarning(localName: string, found: string, use: string) {
-  return `Element ${found} found in ${localName}${use ? `, use ${use} instead` : ''}. ${DOCS_LOG_URL}#use-element`;
-}
-
 export function getIdMatchNotFoundWarning(id: string) {
   return `Provided id "${id}" not found in DOM. ${DOCS_LOG_URL}#id-match-not-found`;
 }
@@ -28,10 +24,6 @@ export function getSSRMismatchWarning(localName: string) {
 
 export function getCrossShadowRootAnchorWarning(localName: string) {
   return `(deprecated) ${localName} provided an anchor outside of its render root. ${DOCS_LOG_URL}#cross-shadow-root-anchor`;
-}
-
-export function getInvalidPaddingLayoutUtilityWarning(localName: string) {
-  return `Invalid layout padding utility usage on ${localName}. Use CSS custom property API "--padding". ${DOCS_LOG_URL}#invalid-padding-layout-utility`;
 }
 
 export function getDuplicatePackageVersionWarning(localName: string, version: string) {

@@ -88,10 +88,6 @@ To resolve this warning:
 - Check the component's documentation for allowed slotted elements
 - Ensure only supported elements are placed in slots
 
-## Use Element
-
-This warning indicates that there may be a more appropriate element or non-deprecated element to use. This may include elements that have better semantic meaning and UX. Example slotting an anchor or button rather than a div or span element.
-
 ## ID Match Not Found
 
 This warning appears when a component tries to reference an element by ID that doesn't exist in the DOM. Example a popover with a button trigger.
@@ -133,14 +129,3 @@ To resolve this warning:
 - Ensure consistent rendering between server and client
 - Check for conditional rendering that might differ between environments
 - Verify that all required data is available during server-side rendering
-
-## Invalid Padding Layout Utility
-
-This warning appears when a component is using an invalid padding layout utility. Most custom elements have internalized styles via the Shadow DOM. This ensures they remain stable and predictable in applications as well as compatible with theming. Certain utility styles (such as padding) placed on the host Element can cause unexpected layout behavior of the element.
-
-Layout styles and utilities should be focused on the layout and placement of elements on the page rather than modifying the internal styles of the element.
-
-To resolve this warning:
-
-- Use the CSS custom property `--padding` instead of layout utilities for element customizations
-- Separate layout styles from component customization styles for more predictable layouts and theming
