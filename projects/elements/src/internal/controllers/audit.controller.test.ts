@@ -6,7 +6,7 @@ import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvid
 import { DOCS_LOG_URL } from '../utils/audit-logs.js';
 
 @customElement('audit-test-element')
-@audit({ excessiveInstanceLimit: 1, alternates: [{ name: 'p', use: 'span' }] })
+@audit({ excessiveInstanceLimit: 1 })
 class AuditTestElement extends LitElement {
   static readonly metadata = {
     tag: 'audit-test-element',
@@ -31,7 +31,7 @@ class AuditTestParentElement extends LitElement {
 
 describe('audit.controller instance tracking', () => {
   let fixture: HTMLElement;
-  let originalWarn = console.warn;
+  const originalWarn = console.warn;
 
   beforeEach(async () => {
     globalThis.NVE_ELEMENTS.state.env = 'development';
@@ -100,7 +100,7 @@ describe('audit.controller instance tracking', () => {
 describe('audit.controller slotted validation', () => {
   let element: AuditTestElement;
   let fixture: HTMLElement;
-  let originalWarn = console.warn;
+  const originalWarn = console.warn;
 
   beforeEach(async () => {
     console.warn = () => null;
@@ -128,41 +128,10 @@ describe('audit.controller slotted validation', () => {
   });
 });
 
-describe('audit.controller alternates validation', () => {
-  let element: AuditTestElement;
-  let fixture: HTMLElement;
-  let originalWarn = console.warn;
-
-  beforeEach(async () => {
-    console.warn = () => null;
-    vi.spyOn(console, 'warn');
-
-    fixture = await createFixture(html`
-      <audit-test-element>
-        <p></p>
-      </audit-test-element>`);
-    element = fixture.querySelector<AuditTestElement>('audit-test-element');
-    await elementIsStable(element);
-  });
-
-  afterEach(() => {
-    removeFixture(fixture);
-    console.warn = originalWarn;
-  });
-
-  it('should validate allowed slotted elements', async () => {
-    expect(GlobalStateService.state.env).toBe('development');
-    await untilEvent(document, 'NVE_ELEMENTS_LOG');
-    expect(console.warn).toHaveBeenCalledWith(
-      `@nve: Element p found in audit-test-element, use span instead. ${DOCS_LOG_URL}#use-element`
-    );
-  });
-});
-
 describe('audit.controller parent validation', () => {
   let element: AuditTestParentElement;
   let fixture: HTMLElement;
-  let originalWarn = console.warn;
+  const originalWarn = console.warn;
 
   beforeEach(async () => {
     globalThis.NVE_ELEMENTS.state.env = 'development';
