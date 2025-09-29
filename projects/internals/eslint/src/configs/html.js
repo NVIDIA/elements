@@ -8,11 +8,13 @@ const source = [
   'src/**/*.stories.ts',
   'src/**/*.stories.tsx'
 ];
+
 const ignores = [
   'node_modules/',
   'coverage/',
   'dist/',
   'build/',
+  'src/vendor/',
   '.visual/',
   '.lighthouse/',
   '.wireit/',
@@ -22,6 +24,9 @@ const ignores = [
 
 /** @type {import('eslint').Linter.Config[]} */
 export const htmlConfig = [
+  {
+    ignores // https://github.com/eslint/eslint/discussions/18304
+  },
   {
     languageOptions: {
       parser: htmlParser,
@@ -44,6 +49,7 @@ export const htmlConfig = [
       'html/indent': 'off', // prettier
       'html/require-closing-tags': 'off', // prettier
       'html/element-newline': 'off', // prettier
+      'html/use-baseline': 'off', // disabled we use chrome specific APIs with fallbacks
       'html/attrs-newline': [
         'error',
         {
