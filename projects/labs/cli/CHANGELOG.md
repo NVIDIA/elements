@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.1.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.2...@nvidia-elements/cli-v0.1.3) (2025-09-29)
+
+
+### Bug Fixes
+
+* **labs-cli:** filter invalid results ([fbc4995](https://github.com/NVIDIA/elements/commit/fbc4995148ada14df5ee815d69456f9df16f7964))
+
 ## [@nvidia-elements/cli-v0.1.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.1...@nvidia-elements/cli-v0.1.2) (2025-09-25)
 
 
