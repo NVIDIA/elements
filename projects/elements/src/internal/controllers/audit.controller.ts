@@ -1,7 +1,7 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
 import { GlobalStateService } from '../services/global.service.js';
-import { auditSlots, auditAlternates, auditParentElement } from '../utils/audit.js';
+import { auditSlots, auditParentElement } from '../utils/audit.js';
 
 export const excessiveInstanceLimit = 50;
 
@@ -63,9 +63,7 @@ export class AuditController<T extends Audit> implements ReactiveController {
     if (!this.#production) {
       void this.#auditExcessiveInstanceLimit();
       void this.#auditSlots();
-      void this.#auditAlternates();
       void this.#auditParentElement();
-      void this.#auditInvalidLayoutUtilities();
     }
   }
 
@@ -118,18 +116,6 @@ export class AuditController<T extends Audit> implements ReactiveController {
     }
   }
 
-  async #auditAlternates() {
-    if (this.options.alternates) {
-      const alternates = auditAlternates(this.host, this.options.alternates);
-      if (alternates.length) {
-        const { getUseElementWarning } = await import('../utils/audit-logs.js');
-        alternates.forEach(warning => {
-          void log(getUseElementWarning(this.host.localName, warning.found, warning.use));
-        });
-      }
-    }
-  }
-
   async #auditParentElement() {
     if (this.#hostMetadata.parents) {
       const [valid, validParents] = auditParentElement(this.host);
@@ -137,13 +123,6 @@ export class AuditController<T extends Audit> implements ReactiveController {
         const { getInvalidParentWarning } = await import('../utils/audit-logs.js');
         void log(getInvalidParentWarning(this.host.localName, validParents.join(', ')));
       }
-    }
-  }
-
-  async #auditInvalidLayoutUtilities() {
-    if (this.host.matches('[nve-layout*="pad"]')) {
-      const { getInvalidPaddingLayoutUtilityWarning } = await import('../utils/audit-logs.js');
-      void log(getInvalidPaddingLayoutUtilityWarning(this.host.localName));
     }
   }
 }

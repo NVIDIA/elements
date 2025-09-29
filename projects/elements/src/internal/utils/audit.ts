@@ -16,16 +16,3 @@ export function auditParentElement(
     ? [!!validParentTags.find(p => host.parentElement?.localName === p), validParentTags]
     : [true, []];
 }
-
-export function auditAlternates(host: HTMLElement, alternates?: { name: string; use: string }[]) {
-  return alternates
-    .map(alternate => {
-      const found = host.querySelector(alternate.name);
-      if (found) {
-        return { found: found.localName, use: alternate.use };
-      } else {
-        return null;
-      }
-    })
-    .filter(i => i !== null);
-}
