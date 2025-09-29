@@ -15,6 +15,7 @@
     "@eslint/js": "catalog:",
     "@nvidia-elements/themes": "workspace:*",
     "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-jsdoc": "60.5.0",
     "eslint-plugin-lit": "2.1.1",
     "eslint-plugin-lit-a11y": "5.1.1",
     "eslint-plugin-wc": "3.0.1",

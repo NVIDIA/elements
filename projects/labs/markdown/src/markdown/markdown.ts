@@ -36,9 +36,7 @@ const CONFIG = {
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/markdown/markdown
  * @slot - The slot can contain a template element with markdown content
- * @property source - Markdown content to render (can be set programmatically)
  * @alpha
- *
  */
 export class Markdown extends LitElement {
   static styles = useStyles([styles]);
@@ -119,17 +117,6 @@ export class Markdown extends LitElement {
 
     const content = templateElement.innerHTML.trim();
 
-    // console.log(content, 'UPDATE');
-
-    // Process template content: replace <br> with newlines, then remove leading indentation
-    // const markdown = content
-    //   .replace(/<br\s*\/?>/gi, '\n') // Replace <br> tags with newlines
-    //   .split('\n') // Split into lines
-    //   .map(line => line.replace(/^ {4}/, '')) // Remove exactly 4 leading spaces from each line
-    //   .join('\n'); // Join back together
-
-    // console.log(markdown);
-
     void this.#parseMarkdown(content)
       .then(html => {
         this.renderedHtml = html;
@@ -149,8 +136,6 @@ export class Markdown extends LitElement {
    */
   async #parseMarkdown(markdown: string): Promise<string> {
     if (!markdown) return '';
-
-    // console.log(markdown);
 
     // Lazy-load markdown-it constructor only when needed
     if (!this.#MarkdownItConstructor) {

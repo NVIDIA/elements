@@ -17,7 +17,7 @@ import '@nvidia-elements/code/codeblock/define.js';
 describe('nve-codeblock', () => {
   let fixture: HTMLElement;
   let element: CodeBlock;
-  let typescript = `
+  const typescript = `
 /**
  * Function to get current time.
  * @return {number} time in milis
@@ -25,7 +25,7 @@ describe('nve-codeblock', () => {
 function getTime(): number {
   return new Date().getTime();
 }`;
-  let slot = `<nve-icon-button slot="actions" container="flat" icon-name="copy"></nve-icon-button>`;
+  const slot = `<nve-icon-button slot="actions" container="flat" icon-name="copy"></nve-icon-button>`;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
