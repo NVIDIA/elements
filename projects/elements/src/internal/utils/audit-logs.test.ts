@@ -6,8 +6,7 @@ import {
   getIdMatchNotFoundWarning,
   getInvalidParentWarning,
   getInvalidSlottedChildrenWarning,
-  getSSRMismatchWarning,
-  getUseElementWarning
+  getSSRMismatchWarning
 } from './audit-logs.js';
 
 describe('getExcessiveInstanceLimitWarning', () => {
@@ -54,14 +53,6 @@ describe('getCrossShadowRootAnchorWarning', () => {
   it('should return warning message for cross shadow root anchoring', () => {
     expect(getCrossShadowRootAnchorWarning('nve-tooltip')).toBe(
       `(deprecated) nve-tooltip provided an anchor outside of its render root. ${DOCS_LOG_URL}#cross-shadow-root-anchor`
-    );
-  });
-});
-
-describe('getUseElementWarning', () => {
-  it('should return warning message for invalid slotted children', () => {
-    expect(getUseElementWarning('test-element', 'test-element-one', 'test-element-two')).toBe(
-      `Element test-element-one found in test-element, use test-element-two instead. ${DOCS_LOG_URL}#use-element`
     );
   });
 });

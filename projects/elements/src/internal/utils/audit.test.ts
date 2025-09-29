@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { auditSlots, auditParentElement, auditAlternates } from './audit.js';
+import { auditSlots, auditParentElement } from './audit.js';
 import { createFixture, removeFixture } from '@nvidia-elements/testing';
 
 @customElement('audit-test-element')
@@ -60,16 +60,5 @@ describe('audit', () => {
     );
     expect(valid).toBe(false);
     expect(validParents[0]).toBe('valid-audit-test-parent-element');
-  });
-
-  it('auditAlternates should return alternates', () => {
-    const alternates = auditAlternates(
-      element as unknown as HTMLElement & {
-        constructor: { metadata?: { alternates?: { name: string; use: string }[] } };
-      },
-      [{ name: 'p', use: 'span' }]
-    );
-    expect(alternates[0].found).toBe('p');
-    expect(alternates[0].use).toBe('span');
   });
 });
