@@ -1,13 +1,8 @@
 import { elementsRecommended } from '@nvidia-elements/lint/eslint';
-import { browserJavaScriptConfig, browserTypescriptConfig, appConfig, htmlConfig } from '@internals/eslint';
+import { browserTypescriptConfig, appConfig, htmlConfig } from '@internals/eslint';
 
-htmlConfig[0].rules['html/element-newline'] = 'off'; // todo
+htmlConfig[1].rules['html/element-newline'] = 'off'; // todo
+htmlConfig[1].rules['html/require-img-alt'] = 'off'; // disabled due to not following role presentation
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [
-  ...elementsRecommended,
-  ...htmlConfig,
-  ...browserJavaScriptConfig,
-  ...browserTypescriptConfig,
-  ...appConfig
-];
+export default [...elementsRecommended, ...htmlConfig, ...browserTypescriptConfig, ...appConfig];

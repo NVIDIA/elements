@@ -14,6 +14,9 @@ import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Select } from '@nvidia-elements/core/select';
 import styles from './pagination.css?inline';
 
+/* eslint-disable jsdoc/no-types */
+// explicit jsdoc annotation due to inheritance context lost with CEM generator
+
 /**
  * @element nve-pagination
  * @description Pagination is a control that enables users to navigate through pages of content.
@@ -29,7 +32,7 @@ import styles from './pagination.css?inline';
  * @storybook https://NVIDIA.github.io/elements/docs/elements/pagination/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=3689-87177&t=znx8f5Hs8oD2ySWm-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
- * @property {Number} value - value the current page number
+ * @property {number} value - value the current page number
  */
 @typeSSR()
 @keyNavigationList<Pagination>()

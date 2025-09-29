@@ -121,16 +121,16 @@ describe('getFlatDOMTree', () => {
     expect(children.length > 0).toBe(true);
   });
 
-  // it('gets all children in light and shadow DOM a flattened DOM tree', () => {
-  //   const children = getFlatDOMTree(fixture);
-  //   expect(children[0].tagName.toLowerCase()).toBe('test-element');
-  //   expect(children[1].textContent).toBe('one');
-  //   expect(children[2].textContent).toBe('slot one');
-  //   expect(children[3].textContent).toBe('two');
-  //   expect(children[4].textContent).toBe('three');
-  //   expect(children[5].textContent).toBe('four');
-  //   expect(children[6].textContent).toBe('four');
-  // });
+  it('gets all children in light and shadow DOM a flattened DOM tree', () => {
+    const children = getFlatDOMTree(fixture);
+    expect(children[0].tagName.toLowerCase()).toBe('dom-test-element');
+    expect(children[1].textContent).toBe('one');
+    expect(children[2].textContent).toBe('slot one');
+    expect(children[3].textContent).toBe('two');
+    expect(children[4].textContent).toBe('three');
+    expect(children[5].textContent).toBe('four');
+    expect(children[6].textContent).toBe('four');
+  });
 });
 
 describe('getAttributeChanges', () => {
@@ -216,11 +216,6 @@ describe('appendRootNodeStyle', () => {
     expect(customElements.get('test-one')).toBeDefined();
     expect(customElements.get('test-two')).toBeDefined();
   });
-
-  // it('should append stylesheet to document if element is in root light dom', async () => {
-  //   const cssRules = Array.from((document as any).adoptedStyleSheets[0].cssRules) as any;
-  //   expect(cssRules[0].selectorText).toBe('test-one');
-  // });
 
   it('should append stylesheet to shadow root if element is rendered in a shadow root', async () => {
     await elementIsStable(testTwo);

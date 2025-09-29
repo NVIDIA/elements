@@ -16,8 +16,11 @@ const ignores = [
 /** @type {import('eslint').Linter.Config[]} */
 export const appConfig = [
   {
+    ignores // https://github.com/eslint/eslint/discussions/18304
+  },
+  {
     files: [...source],
-    ignores: [...ignores],
+    ignores,
     rules: {
       'no-implicit-globals': ['error'],
       'no-restricted-globals': [
@@ -30,7 +33,7 @@ export const appConfig = [
   },
   {
     files: [...source],
-    ignores: [...ignores],
+    ignores,
     ...config(
       [
         {
