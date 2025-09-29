@@ -1,4 +1,3 @@
-// import type { JSRuleDefinition } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 
 const DEPRECATED_TAGS = new Set(['nve-app-header', 'nve-alert-banner', 'nve-json-view']);

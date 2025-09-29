@@ -1,4 +1,3 @@
-import { resolve } from 'node:path';
 import { defineConfig, mergeConfig } from 'vite';
 import { libraryNodeBuildConfig } from '@nve-internals/vite';
 import { builtinModules } from 'node:module';

@@ -11,7 +11,6 @@ const ignores = [
   '.visual/',
   '.lighthouse/',
   '.wireit/',
-  '.11ty-vite/',
   '.11ty-vite/'
 ];
 
@@ -27,7 +26,7 @@ const config = {
 /** @type {import('eslint').Linter.Config[]} */
 export const browserJavaScriptConfig = [
   {
-    ignores
+    ignores // https://github.com/eslint/eslint/discussions/18304
   },
   {
     ...config,
@@ -40,7 +39,7 @@ export const browserJavaScriptConfig = [
 /** @type {import('eslint').Linter.Config[]} */
 export const nodeJavaScriptConfig = [
   {
-    ignores
+    ignores // https://github.com/eslint/eslint/discussions/18304
   },
   {
     ...config,

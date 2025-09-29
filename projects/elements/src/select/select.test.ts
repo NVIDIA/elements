@@ -389,10 +389,10 @@ describe(Select.metadata.tag, () => {
     element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[0].click();
     element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[2].click();
 
-    // await elementIsStable(element);
-    // await new Promise(r => requestAnimationFrame(r));
-    // await new Promise(resolve => setTimeout(resolve, 0));
-    // expect(element.matches(':state(multiple-overflow)')).toBe(true);
+    await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(element.matches(':state(multiple-overflow)')).toBe(true);
   });
 
   it('should set host :state(size) state when multiple is used', async () => {
