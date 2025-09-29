@@ -11,6 +11,7 @@ const ignores = [
   'coverage/',
   'dist/',
   'build/',
+  'src/vendor/',
   '.visual/',
   '.lighthouse/',
   '.wireit/',

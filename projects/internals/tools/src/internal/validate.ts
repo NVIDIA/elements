@@ -173,7 +173,7 @@ export function validateTemplate(
             return attribute.name;
           } else {
             // allow enumerated values for other attributes
-            let values =
+            const values =
               attribute.type?.text
                 ?.replaceAll(`'`, '')
                 ?.replaceAll(`"`, '')

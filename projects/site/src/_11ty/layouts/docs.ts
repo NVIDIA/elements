@@ -83,7 +83,7 @@ function addHeadingAnchors() {
     if (heading.querySelector('.heading-anchor')) return;
 
     // Get or generate ID
-    let id = heading.id;
+    const id = heading.id;
 
     // Create anchor element
     const anchor = globalThis.document.createElement('a');

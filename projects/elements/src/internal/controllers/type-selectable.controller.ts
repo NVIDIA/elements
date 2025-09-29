@@ -11,8 +11,8 @@ export type TypeSelectable = ReactiveElement & {
 /**
  * Controller for enabling selectable behavior for elements.
  * @event select - Dispatched when the selectable element is selected.
- * @prop selected
- * @prop behaviorSelect?
+ * @property selected - selected state
+ * @property behaviorSelect? - determines if stateful auto behavior should be enabled
  */
 export class TypeSelectableController<T extends TypeSelectable> implements ReactiveController {
   constructor(private host: T) {

@@ -64,7 +64,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
   /**
    * Adds styling to show the line numbers of the codeblock.
    */
-  @property({ attribute: 'line-numbers', type: Boolean }) lineNumbers?: Boolean;
+  @property({ attribute: 'line-numbers', type: Boolean }) lineNumbers?: boolean;
 
   /**
    * Adds styling to highlight the provided code lines.
@@ -156,7 +156,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
   #getLinesToHighlight() {
     const range = [];
     const lines = this.highlight.split(',');
-    for (let l in lines) {
+    for (const l in lines) {
       const [startStr, endStr] = lines[l].split('-');
       const start = parseInt(startStr);
       let end = parseInt(endStr);
