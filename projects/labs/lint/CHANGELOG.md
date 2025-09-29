@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.2.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.2.0...@nvidia-elements/lint-v0.2.1) (2025-09-29)
+
+
+### Bug Fixes
+
+* **labs-cli:** filter invalid results ([fbc4995](https://github.com/NVIDIA/elements/commit/fbc4995148ada14df5ee815d69456f9df16f7964))
+
 ## [@nvidia-elements/lint-v0.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.1.0...@nvidia-elements/lint-v0.2.0) (2025-09-25)
 
 
