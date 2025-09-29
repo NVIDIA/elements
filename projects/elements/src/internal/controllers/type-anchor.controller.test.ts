@@ -68,33 +68,6 @@ describe('type-anchor.controller', () => {
     expect(element.style.cursor).toBe('');
     expect(element.matches(':state(anchor)')).toBe(true);
   });
-
-  // it('should allow element to be wrapped in anchor', () => {
-  //   let clicks = 0;
-  //   anchorTwo.addEventListener('click', () => clicks++);
-
-  //   emulateClick(anchorTwo);
-  //   expect(clicks).toBe(1);
-
-  //   expect(elementTwo.readonly).toBe(true);
-  //   expect(anchorTwo.style.textDecoration).toBe('none');
-  //   expect(elementTwo.style.cursor).toBe('pointer');
-  //   expect(element.matches(':state(anchor)')).toBe(true);
-  // });
-
-  // it('should allow for element to pick up anchors that have been slotted in the shadow DOM', () => {
-  //   const slotWrappedElement = slotTest?.shadowRoot.querySelector<TypeAnchorTestElement>('type-anchor-test-element');
-
-  //   let clicks = 0;
-  //   slottedAnchor.addEventListener('click', () => clicks++);
-
-  //   emulateClick(slottedAnchor);
-  //   expect(clicks).toBe(1);
-
-  //   expect(slotWrappedElement.readonly).toBe(true);
-  //   expect(slottedAnchor.style.textDecoration).toBe('');
-  //   expect(slotWrappedElement.style.cursor).toBe('');
-  // });
 });
 
 describe('type-anchor.controller wrapped element', () => {

@@ -25,6 +25,9 @@ const ignores = [
 /** @type {import('eslint').Linter.Config[]} */
 export const libraryConfig = [
   {
+    ignores // https://github.com/eslint/eslint/discussions/18304
+  },
+  {
     files: [...source],
     ignores: [...ignores, ...tests, ...stories],
     rules: {

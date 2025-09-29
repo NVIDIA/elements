@@ -1,5 +1,6 @@
 
 // This is an auto-generated file. DO NOT EDIT
+// eslint-disable
 // 
 // We could use a top level await in icon.js like the following
 // const { ICON_IMPORTS } = await (isServer ? import('./icons.server.js') : import('./icons.js'));

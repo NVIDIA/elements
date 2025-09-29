@@ -1,6 +1,8 @@
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
+import jsdoc from 'eslint-plugin-jsdoc';
+import deadCode from '../local/dead-code.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -30,7 +32,13 @@ const config = {
   ignores,
   plugins: {
     '@typescript-eslint': tseslint.plugin,
-    import: importPlugin
+    import: importPlugin,
+    jsdoc,
+    'local-typescript': {
+      rules: {
+        'no-dead-code': deadCode
+      }
+    }
   },
   rules: {
     ...tseslint.configs.recommended.rules,
@@ -47,12 +55,42 @@ const config = {
           ':matches(PropertyDefinition, MethodDefinition)[accessibility="private"]:not(:has(Decorator)):not([kind="constructor"])',
         message: 'Use #private instead'
       }
-    ]
+    ],
+    // prevent usage of overlapping/conflicting type annotations between jsdoc and TypeScript metadata
+    'jsdoc/no-types': ['error'],
+    'jsdoc/valid-types': ['error'],
+    'jsdoc/check-tag-names': ['error'],
+    'local-typescript/no-dead-code': ['error']
+  },
+  settings: {
+    jsdoc: {
+      structuredTags: {
+        internal: { name: true },
+        element: { name: true },
+        slot: { name: true },
+        cssprop: { name: true },
+        entrypoint: { name: true },
+        tags: { name: true },
+        aria: { name: true },
+        internal: { name: true },
+        experimental: { name: true },
+        alpha: { name: true },
+        beta: { name: true },
+        stable: { name: true },
+        themes: { name: true },
+        responsive: { name: true },
+        storybook: { name: true },
+        figma: { name: true }
+      }
+    }
   }
 };
 
 /** @type {import('eslint').Linter.Config[]} */
 export const browserTypescriptConfig = [
+  {
+    ignores // https://github.com/eslint/eslint/discussions/18304
+  },
   {
     ...config,
     languageOptions: {
@@ -71,6 +109,9 @@ export const browserTypescriptConfig = [
 
 /** @type {import('eslint').Linter.Config[]} */
 export const nodeTypescriptConfig = [
+  {
+    ignores // https://github.com/eslint/eslint/discussions/18304
+  },
   {
     ...config,
     languageOptions: {
