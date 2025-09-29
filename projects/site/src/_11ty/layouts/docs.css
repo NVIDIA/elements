@@ -44,14 +44,14 @@ nve-tabs#doc-tabs {
 }
 
 /* Heading Styles */
-h2[nve-text='heading xl mkd'] {
+h2[nve-text*='mkd'] {
   border-bottom: 1px solid var(--nve-ref-border-color);
 }
 
 /* Heading Anchor Links */
 .heading-anchor {
   position: absolute;
-  left: calc(-1 * var(--nve-ref-space-xl));
+  left: calc(-1 * var(--nve-ref-space-lg));
   text-decoration: none;
   cursor: none;
 }
@@ -66,25 +66,20 @@ h3[nve-text*='mkd']:hover .heading-anchor > nve-icon-button {
   opacity: 1;
 }
 
-/* Make headings position relative to contain the absolute anchor */
-h2[nve-text*='mkd'],
-h3[nve-text*='mkd'] {
-  position: relative;
-}
-
-nve-tabs + h2[nve-text='heading xl mkd']:first-of-type {
+h2[nve-text*='mkd']:first-of-type {
   padding-top: 0;
 }
 
-[nve-text='heading xl mkd'],
-[nve-text='heading lg mkd'] {
+h2[nve-text*='mkd'],
+h3[nve-text*='mkd'] {
+  position: relative;
   padding-top: var(--nve-ref-space-xl);
   display: flex;
   align-items: center;
   gap: var(--nve-ref-space-sm);
 }
 
-[nve-text='heading lg mkd'] {
+h3[nve-text*='mkd'] {
   padding-top: var(--nve-ref-space-md);
 }
 
