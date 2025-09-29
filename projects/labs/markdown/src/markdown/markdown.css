@@ -39,7 +39,7 @@ h6 {
   margin: 0;
   font-weight: var(--nve-ref-font-weight-medium);
   line-height: var(--nve-ref-font-line-height-tight);
-  color: var(--nve-sys-text-color);
+  color: var(--nve-sys-text-emphasis-color);
 }
 
 /* Display/emphasis heading (h1) */
