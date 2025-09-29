@@ -68,7 +68,7 @@ export function render(data) {
       }
     </style>
   
-    <h2 nve-text="heading xl mkd">${componentData.title} Examples</h2>
+    <h2 nve-text="heading xl emphasis mkd">${componentData.title} Examples</h2>
 
     <!-- Triggers element loader -->
      <template>
@@ -98,8 +98,8 @@ export function render(data) {
     ${storyTemplates
       .map(
         (story, index) => /* html */ `
-        <div class="story-example">
-          <h3 nve-text="heading lg mkd" id="${story.slug}">${story.id.split(/(?=[A-Z])/).join(' ')}</h3>
+        <div class="story-example" nve-layout="column gap:sm">
+          <h3 nve-text="heading lg emphasis mkd" id="${story.slug}">${story.id.split(/(?=[A-Z])/).join(' ')}</h3>
           <nvd-canvas-editable source="${story.template}" tag="${componentData.tag}" readonly>
             <nve-button container="flat" slot="suffix" value="${index}">Edit Example</nve-button>
           </nvd-canvas-editable>

@@ -192,7 +192,7 @@ export function elementStatus(tag) {
   const elementMetadata = elements.find(d => d.name === tag)?.manifest?.metadata;
 
   return /* html */ `
-  <h2 nve-text="heading xl mkd" id="release-status">Release Status</h2>
+  <h2 nve-text="heading xl emphasis mkd" id="release-status">Release Status</h2>
 
   <div nve-layout="column gap:md">
     <p nve-text="body">All elements and features go through 3 phases of stability, pre-release, beta and stable.</p>
@@ -244,7 +244,7 @@ export function elementTable(tag, type = 'all') {
 
   return elementManifest
     ? /* html */ `
-    <h2 nve-text="heading xl mkd" id="${tag}"><code>&lt;${tag}&gt;</code></h2>
+    <h2 nve-text="heading xl emphasis mkd" id="${tag}"><code>&lt;${tag}&gt;</code></h2>
     ${type === 'properties' || type === 'all' ? renderProperties() : ''}
     ${type === 'events' || type === 'all' ? renderEvents() : ''}
     ${type === 'slots' || type === 'all' ? renderSlots() : ''}
