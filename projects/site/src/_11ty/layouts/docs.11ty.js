@@ -116,7 +116,7 @@ export function render(data) {
                 ${
                   data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples'))
                     ? `
-                <h2 nve-text="heading xl mkd">Overview</h2>
+                <h2 nve-text="heading xl emphasis mkd">Overview</h2>
                   ${elementDescription(data.tag)}
                 `
                     : ''
