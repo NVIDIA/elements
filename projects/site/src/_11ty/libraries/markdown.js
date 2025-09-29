@@ -13,8 +13,8 @@ const markdown = markdownIt({
 
 const formats = {
   h1: 'display emphasis',
-  h2: 'heading xl',
-  h3: 'heading lg',
+  h2: 'heading xl emphasis',
+  h3: 'heading lg emphasis',
   h4: 'heading',
   h5: 'heading',
   h6: 'heading sm',
