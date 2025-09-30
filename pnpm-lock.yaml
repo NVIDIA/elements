@@ -963,6 +963,10 @@ importers:
       vitest:
         specifier: 'catalog:'
         version: 4.0.0-beta.3(@types/debug@4.1.12)(@types/node@22.13.1)(@vitest/browser@4.0.0-beta.3)(jiti@2.4.2)(less@4.2.2)(lightningcss@1.30.0)(msw@2.7.3(@types/node@22.13.1)(typescript@5.8.2))(sass@1.89.2)(terser@5.39.0)(yaml@2.7.0)
+    optionalDependencies:
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../../styles
 
   projects/labs/markdown:
     dependencies:

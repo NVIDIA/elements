@@ -54,6 +54,9 @@
   "peerDependencies": {
     "eslint": ">= 9"
   },
+  "optionalDependencies": {
+    "@nvidia-elements/styles": "workspace:*"
+  },
   "devDependencies": {
     "@nve-internals/eslint": "workspace:*",
     "@nve-internals/vite": "workspace:*",
@@ -103,6 +106,7 @@
       ],
       "dependencies": [
         "../../themes:build",
+        "../../styles:build",
         "../../internals/vite:ci"
       ]
     },
@@ -155,7 +159,8 @@
       ],
       "output": [],
       "dependencies": [
-        "../../internals/eslint:ci"
+        "../../internals/eslint:ci",
+        "../../styles:build"
       ]
     },
     "lint:fix": {
