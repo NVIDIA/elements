@@ -60,7 +60,7 @@ export function render() {
                   Build faster, together<br />
                   <span>with</span> <span class="lime-green-gradient gradient-txt">Elements.</span>
                 </span>
-                <span nve-text="regular heading lg default relaxed">
+                <span nve-text="regular heading lg relaxed">
                   NVIDIA Elements is a flexible, framework-agnostic design system and toolkit that empowers teams to
                   build exceptional user experiences.
                 </span>
@@ -93,7 +93,7 @@ export function render() {
 
                 <div class="feature-text horizontal" nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Buildless Prototyping</div>
-                  <div nve-text="muted md regular relaxed">
+                  <div nve-text="muted regular relaxed">
                     No complicated setup. Just start building and iterating. No handoff, no translation.
                   </div>
                 </div>
@@ -106,7 +106,7 @@ export function render() {
 
                 <div class="feature-text horizontal" nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Snippet Templates</div>
-                  <div nve-text="muted md regular relaxed">
+                  <div nve-text="muted regular relaxed">
                     Autocomplete common UX patterns without worrying about breaking changes.
                   </div>
                 </div>
@@ -119,7 +119,7 @@ export function render() {
 
                 <div class="feature-text horizontal" nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Infinite Remixes</div>
-                  <div nve-text="muted md regular relaxed">
+                  <div nve-text="muted regular relaxed">
                     Experiment, pivot, and explore—Elements makes iteration low-cost and easy.
                   </div>
                 </div>
@@ -162,7 +162,7 @@ export function render() {
                 </nve-logo>
                 <div class="feature-text horizontal" nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Any Framework or Language</div>
-                  <div nve-text="muted md regular relaxed">
+                  <div nve-text="muted regular relaxed">
                     Learn once, use anywhere. Build mastery that transfers across tools.
                   </div>
                 </div>
@@ -174,7 +174,7 @@ export function render() {
                 </nve-logo>
                 <div class="feature-text horizontal" nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Flexible by Nature</div>
-                  <div nve-text="muted md regular relaxed">
+                  <div nve-text="muted regular relaxed">
                     Stateless and adaptable to integrate into your existing apps seamlessly.
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export function render() {
                 </nve-logo>
                 <div class="feature-text horizontal" nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Future Proof</div>
-                  <div nve-text="muted md regular relaxed">
+                  <div nve-text="muted regular relaxed">
                     Built on web standards, ensuring long term stability without framework churn.
                   </div>
                 </div>
@@ -207,40 +207,40 @@ export function render() {
           <div class="background grid-box-bg"></div>
           <div class="content leading" nve-layout="column align:center">
             <div nve-layout="column gap:lg">
-              <div nve-text="semibold display md">
+              <div nve-text="semibold display">
                 <span class="silver-gradient gradient-txt">Built to be</span>
                 <span class="lime-cyan-gradient gradient-txt">exceptional</span>
                 <br />
                 <span class="silver-gradient gradient-txt">right out of the box.</span>
               </div>
-              <div nve-text="muted md regular relaxed">
+              <div nve-text="muted regular relaxed">
                 Elements is accessible, standards-compliant, and optimized for performance from day one.
               </div>
               <div nve-layout="column gap:lg">
                 <div class="feature-grid">
                   <div class="feature-grid-item gradient-card" nve-layout="row gap:md align:vertical-center">
                     <nve-icon name="expand-details" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">WCAG 2.1</div>
+                    <div nve-text="label semibold">WCAG 2.1</div>
                   </div>
                   <div class="feature-grid-item gradient-card" nve-layout="row gap:md align:vertical-center">
                     <nve-icon name="expand-details" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">WAI-ARIA 1.3</div>
+                    <div nve-text="label semibold">WAI-ARIA 1.3</div>
                   </div>
                   <div class="feature-grid-item gradient-card" nve-layout="row gap:md align:vertical-center">
                     <nve-icon name="keyboard" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">Keyboard navigation</div>
+                    <div nve-text="label semibold">Keyboard navigation</div>
                   </div>
                   <div class="feature-grid-item gradient-card" nve-layout="row gap:md align:vertical-center">
                     <nve-icon name="flag" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">Internationalization</div>
+                    <div nve-text="label semibold">Internationalization</div>
                   </div>
                   <div class="feature-grid-item gradient-card" nve-layout="row gap:md align:vertical-center">
                     <nve-icon name="meter" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">Lighthouse Tested</div>
+                    <div nve-text="label semibold">Lighthouse Tested</div>
                   </div>
                   <div class="feature-grid-item gradient-card" nve-layout="row gap:md align:vertical-center">
                     <nve-icon name="pulse" size="lg"></nve-icon>
-                    <div nve-text="label semibold md">Axe Accessibility Tested</div>
+                    <div nve-text="label semibold">Axe Accessibility Tested</div>
                   </div>
                 </div>
 
@@ -263,13 +263,13 @@ export function render() {
           <div class="background" style="background: var(--nve-sys-layer-shell-accent-background)"></div>
           <div class="content trailing" nve-layout="column gap:xxl align:center align:horizontal-stretch">
             <div nve-layout="column gap:lg">
-              <div nve-text="semibold display md">
+              <div nve-text="semibold display">
                 <span class="silver-gradient gradient-txt">Ready to use.</span>
                 <br />
                 <span class="silver-gradient gradient-txt">Easy to</span>
                 <span class="blue-purple-gradient gradient-txt">customize.</span>
               </div>
-              <div nve-text="muted md regular relaxed">
+              <div nve-text="muted regular relaxed">
                 Whether you're helping build self driving cars, an AI supercomputer or the next generation gaming
                 platform, our design tokens and customization lets you create the best experience for your users.
               </div>
@@ -302,7 +302,7 @@ export function render() {
                   <span class="silver-gradient gradient-txt">in markup.</span>
                 </div>
 
-                <div nve-text="muted md regular relaxed">
+                <div nve-text="muted regular relaxed">
                   Our attribute system makes it easier to compose your design right in HTML—so you can build faster and
                   more efficiently.
                 </div>
@@ -321,7 +321,7 @@ export function render() {
                 </nve-logo>
                 <div class="feature-text vertical" nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Typography</div>
-                  <div nve-text="muted md regular relaxed">
+                  <div nve-text="muted regular relaxed">
                     Apply consistent typographic styles with simple nve-text attributes
                   </div>
                 </div>
@@ -333,7 +333,7 @@ export function render() {
                 </nve-logo>
                 <div class="feature-text vertical" nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Layout</div>
-                  <div nve-text="muted md regular relaxed">
+                  <div nve-text="muted regular relaxed">
                     Achieve grid, horizontal, and vertical layouts with simple nve-layout attributes
                   </div>
                 </div>
@@ -345,7 +345,7 @@ export function render() {
                 </nve-logo>
                 <div class="feature-text vertical" nve-layout="column gap:sm">
                   <div nve-text="emphasis heading medium">Responsiveness</div>
-                  <div nve-text="muted md regular relaxed">
+                  <div nve-text="muted regular relaxed">
                     Designed for a range of devices and screen densities without extra work
                   </div>
                 </div>
@@ -374,7 +374,7 @@ export function render() {
                 <br />
                 <span class="lime-green-gradient gradient-txt">in minutes.</span>
               </div>
-              <div nve-text="muted md regular">
+              <div nve-text="muted regular">
                 No need to start from scratch. We've got starter projects—just clone, run, and start building.
               </div>
               <div nve-layout="column &sm|row gap:sm">
@@ -387,45 +387,45 @@ export function render() {
               </div>
             </div>
 
-            <div nve-layout="grid gap:lg align-items:stretch span-items:12 &sm|span-items:6 &lg|span-items:4">
+            <div nve-layout="grid gap:lg span-items:12 &sm|span-items:6 &lg|span-items:4">
               <a href="starters/" target="_blank" class="glassmorphic-card">
                 <div nve-layout="row gap:xs align:vertical-center">
-                  <img src="./static/images/integrations/vite.svg" loading="lazy" role="presentation" nve-layout="hide &xs|show" />
+                  <img src="./static/images/integrations/vite.svg" loading="lazy" role="presentation" nve-display="hide &xs|show" />
                   <div class="btn">Clone Template <nve-icon name="arrow-angle" size="sm"></nve-icon></div>
                 </div>
                 <h3 nve-text="heading medium lg">MPA &amp; Vite</h3>
               </a>
               <a href="starters/" target="_blank" class="glassmorphic-card">
                 <div nve-layout="row gap:xs align:vertical-center">
-                  <img src="./static/images/integrations/angular.svg" loading="lazy" role="presentation" nve-layout="hide &xs|show" />
+                  <img src="./static/images/integrations/angular.svg" loading="lazy" role="presentation" nve-display="hide &xs|show" />
                   <div class="btn">Clone Template <nve-icon name="arrow-angle" size="sm"></nve-icon></div>
                 </div>
                 <h3 nve-text="heading medium lg">Angular (v12+)</h3>
               </a>
               <a href="starters/" target="_blank" class="glassmorphic-card">
                 <div nve-layout="row gap:xs align:vertical-center">
-                  <img src="./static/images/integrations/nextjs.svg" loading="lazy" role="presentation" nve-layout="hide &xs|show" />
+                  <img src="./static/images/integrations/nextjs.svg" loading="lazy" role="presentation" nve-display="hide &xs|show" />
                   <div class="btn">Clone Template <nve-icon name="arrow-angle" size="sm"></nve-icon></div>
                 </div>
                 <h3 nve-text="heading medium lg">NextJS (v15)</h3>
               </a>
               <a href="starters/" target="_blank" class="glassmorphic-card">
                 <div nve-layout="row gap:xs align:vertical-center">
-                  <img src="./static/images/integrations/react.svg" loading="lazy" role="presentation" nve-layout="hide &xs|show" />
+                  <img src="./static/images/integrations/react.svg" loading="lazy" role="presentation" nve-display="hide &xs|show" />
                   <div class="btn">Clone Template <nve-icon name="arrow-angle" size="sm"></nve-icon></div>
                 </div>
                 <h3 nve-text="heading medium lg">React (v18/v19)</h3>
               </a>
               <a href="starters/" target="_blank" class="glassmorphic-card">
                 <div nve-layout="row gap:xs align:vertical-center">
-                  <img src="./static/images/integrations/eleventy.svg" loading="lazy" role="presentation" nve-layout="hide &xs|show" />
+                  <img src="./static/images/integrations/eleventy.svg" loading="lazy" role="presentation" nve-display="hide &xs|show" />
                   <div class="btn">Clone Template <nve-icon name="arrow-angle" size="sm"></nve-icon></div>
                 </div>
                 <h3 nve-text="heading medium lg">Eleventy</h3>
               </a>
               <a href="starters/" target="_blank" class="glassmorphic-card">
                 <div nve-layout="row gap:xs align:vertical-center">
-                  <img src="./static/images/integrations/vue.svg" loading="lazy" role="presentation" nve-layout="hide &xs|show" />
+                  <img src="./static/images/integrations/vue.svg" loading="lazy" role="presentation" nve-display="hide &xs|show" />
                   <div class="btn">Clone Template <nve-icon name="arrow-angle" size="sm"></nve-icon></div>
                 </div>
                 <h3 nve-text="heading medium lg">Vue (v3)</h3>
@@ -450,9 +450,9 @@ export function render() {
                       alt="GitLab Logo"
                       style="width: 28px;height: 26px;" />
                   </div>
-                  <div nve-text="heading medium md emphasis">Gitlab Repo</div>
+                  <div nve-text="heading medium emphasis">Gitlab Repo</div>
                 </div>
-                <div nve-text="body medium md muted">Explore the code. Submit issues. Help shape what's next.</div>
+                <div nve-text="body medium muted">Explore the code. Submit issues. Help shape what's next.</div>
                 <nve-button container="inline">
                   <a href="https://github.com/NVIDIA/elements" target="_blank">
                     View
@@ -468,9 +468,9 @@ export function render() {
                       alt="Slack Logo"
                       style="width: 28px;height: 28px;" />
                   </div>
-                  <div nve-text="heading medium md emphasis">Slack Support</div>
+                  <div nve-text="heading medium emphasis">Slack Support</div>
                 </div>
-                <div nve-text="body medium md muted">Join the conversation. Get help, share ideas, and connect.</div>
+                <div nve-text="body medium muted">Join the conversation. Get help, share ideas, and connect.</div>
                 <nve-button container="inline">
                   <a href="http://nv/elements-slack" target="_blank">
                     View
