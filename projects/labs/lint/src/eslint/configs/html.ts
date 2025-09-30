@@ -5,6 +5,7 @@ import noDeprecatedTags from '../rules/no-deprecated-tags.js';
 import noDeprecatedAttributes from '../rules/no-deprecated-attributes.js';
 import noDeprecatedIconNames from '../rules/no-deprecated-icon-names.js';
 import noDeprecatedPopoverAttributes from '../rules/no-deprecated-popover-attributes.js';
+import noUnexpectedGlobalAttributeValue from '../rules/no-unexpected-global-attribute-value.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
 
@@ -37,7 +38,8 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-deprecated-tags': noDeprecatedTags,
         'no-deprecated-attributes': noDeprecatedAttributes,
         'no-deprecated-icon-names': noDeprecatedIconNames,
-        'no-deprecated-popover-attributes': noDeprecatedPopoverAttributes
+        'no-deprecated-popover-attributes': noDeprecatedPopoverAttributes,
+        'no-unexpected-global-attribute-value': noUnexpectedGlobalAttributeValue
       }
     }
   },
@@ -46,6 +48,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-deprecated-attributes': ['error'],
     '@nvidia-elements/lint/no-deprecated-icon-names': ['error'],
     '@nvidia-elements/lint/no-deprecated-popover-attributes': ['error'],
+    '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error'],
     '@nvidia-elements/lint/no-restricted-attrs': [
       'error',
       {
