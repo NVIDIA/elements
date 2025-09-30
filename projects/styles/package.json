@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/styles",
-  "version": "1.12.1",
+  "version": "1.12.2",
   "description": "Core CSS foundation for the Elements design system, providing layout utilities, typography styles, and view transitions.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
