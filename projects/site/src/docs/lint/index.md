@@ -77,8 +77,8 @@ export default [
 
 <nve-grid>
   <nve-grid-header>
-    <nve-grid-column>Rule</nve-grid-column>
-    <nve-grid-column>Description</nve-grid-column>
+    <nve-grid-column width="400px">Rule</nve-grid-column>
+    <nve-grid-column width="350px">Description</nve-grid-column>
     <nve-grid-column>Language</nve-grid-column>
     <nve-grid-column>Severity</nve-grid-column>
   </nve-grid-header>
@@ -119,6 +119,12 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-packages</code></nve-grid-cell>
+    <nve-grid-cell>Disallow usage of deprecated packages.</nve-grid-cell>
+    <nve-grid-cell>JSON</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-popover-attributes</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of deprecated popover attributes.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
@@ -127,6 +133,12 @@ export default [
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-tags</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of deprecated elements/tags</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-global-attribute-value</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of invalid attribute values in HTML</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
