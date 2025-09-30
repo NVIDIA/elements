@@ -135,7 +135,7 @@ export const TypePopoverControllerAlignmentDemo = {
  */
 export const AbsolutePositioningFallback = {
   render: () => html`
-  <div nve-layout="row align-center pad:lg">
+  <div nve-layout="row align:center pad:lg">
     <nve-dropdown id="dropdown" position-strategy="absolute">dropdown content</nve-dropdown>
     <nve-icon-button popovertarget="dropdown" icon-name="refresh"></nve-icon-button>
   </div>
