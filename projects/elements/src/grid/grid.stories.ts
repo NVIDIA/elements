@@ -208,7 +208,7 @@ export const MultiSelectBulkActions = {
   `)}
   <nve-toolbar status="accent" slot="footer">
     <nve-icon-button container="flat" icon-name="cancel" slot="prefix"></nve-icon-button>
-    <p nve-text="boxy">1 selected</p>
+    <p nve-text="body">1 selected</p>
     <nve-button container="flat" interaction="destructive" slot="suffix">delete</nve-button>
     <nve-icon-button container="flat" icon-name="more-actions" slot="suffix"></nve-icon-button>
   </nve-toolbar>
