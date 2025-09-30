@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.12.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.1...@nvidia-elements/styles-v1.12.2) (2025-09-30)
+
+
+### Bug Fixes
+
+* **styles:** add missing html metadata ([fba41f1](https://github.com/NVIDIA/elements/commit/fba41f135bd7ba0fb68e9885219201fd8c46ee32))
+
 ## [@nvidia-elements/styles-v1.12.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.0...@nvidia-elements/styles-v1.12.1) (2025-09-11)
 
 
