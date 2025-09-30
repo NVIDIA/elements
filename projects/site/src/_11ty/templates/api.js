@@ -32,7 +32,7 @@ export function elementDescription(tag) {
 export function elementSummary(tag) {
   const element = elements.find(d => d.name === tag);
 
-  return /* html */ `<section nve-layout="column gap:md align:stretch margin-top:md">
+  return /* html */ `<section nve-layout="column gap:md align:stretch">
 
   <div nve-layout="row gap:xs align:center align:space-between align:wrap">
     <div nve-layout="row gap:xxs align:center">
