@@ -867,7 +867,7 @@ export const PageLayoutCardGrid = {
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <main nve-layout="column gap:lg pad:lg align:stretch-horizontal">
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <nve-search container="flat">
       <input type="search" aria-label="search drives" />
     </nve-search>

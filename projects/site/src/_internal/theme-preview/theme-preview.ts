@@ -213,8 +213,8 @@ export class ThemePreview extends LitElement {
                   loading="lazy"
                   style="width: calc(var(--nve-ref-scale-size) * 160px + var(--nve-ref-scale-text) * 160px); object-fit: cover; aspect-ratio: 16 / 9;" />
 
-                <nve-card-content nve-layout="column gap:sm align:stretch align-items:stretch">
-                  <div nve-text="label semibold md emphasis">Label</div>
+                <nve-card-content nve-layout="column gap:sm align:stretch">
+                  <div nve-text="label semibold emphasis">Label</div>
                     <div nve-layout="row align:space-between">
                     <div nve-text="label medium muted sm">Created</div>
                     <div nve-text="label medium emphasis sm">03/14/2025</div>
