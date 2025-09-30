@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.13](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.12...@nvidia-elements/core-v1.39.13) (2025-09-30)
+
+
+### Bug Fixes
+
+* **elements:** remove runtime audit check ([3a8c742](https://github.com/NVIDIA/elements/commit/3a8c74206ed4d612939c39669ba3c30ce78e2b2d))
+
 ## [@nvidia-elements/core-v1.39.12](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.11...@nvidia-elements/core-v1.39.12) (2025-09-25)
 
 
