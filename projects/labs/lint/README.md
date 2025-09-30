@@ -77,5 +77,7 @@ export default [
 | `@nvidia-elements/lint/no-deprecated-icon-names` | Disallow use of deprecated icon names | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-popover-attributes` | Disallow use of deprecated popover attributes | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-tags` | Disallow use of deprecated elements/tags | HTML | `error` |
+| `@nvidia-elements/lint/no-unexpected-global-attribute-value` | Disallow use of invalid attribute values in HTML | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attrs` | Do not allow invalid use of nve-* attributes | HTML | `error` |
 | `@nvidia-elements/lint/no-unexpected-library-dependencies` | Disallow incorrect dependency usage of @nve packages in consuming libraries | JSON | `error` |
+| `@nvidia-elements/lint/no-deprecated-packages` | Disallow usage of deprecated packages. | JSON | `error` |
