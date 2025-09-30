@@ -96,6 +96,7 @@ export const startersData = {
 export async function archiveStarter(projectDir, outDir) {
   await copyProject(projectDir);
   await createCursorConfig(projectDir);
+  await createVSCodeConfig(projectDir);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
   await writeFile(
     `${`${outDir}/${projectDir}`}/.npmrc`,
@@ -151,6 +152,25 @@ async function createCursorConfig(projectDir) {
     mkdirSync(dist, { recursive: true });
   }
   await writeFile(`${dist}/mcp.json`, JSON.stringify(cursorConfig, undefined, 2));
+}
+
+/* istanbul ignore next -- @preserve */
+async function createVSCodeConfig(projectDir) {
+  const vscodeConfig = {
+    'html.customData': [
+      './node_modules/@nvidia-elements/styles/dist/data.html.json',
+      './node_modules/@nvidia-elements/core/dist/data.html.json',
+      './node_modules/@nvidia-elements/monaco/dist/data.html.json',
+      './node_modules/@nvidia-elements/code/dist/data.html.json',
+      './node_modules/@nvidia-elements/markdown/dist/data.html.json'
+    ]
+  };
+
+  const dist = `dist/${projectDir}/.vscode`;
+  if (!existsSync(dist)) {
+    mkdirSync(dist, { recursive: true });
+  }
+  await writeFile(`${dist}/settings.json`, JSON.stringify(vscodeConfig, undefined, 2));
 }
 
 /* istanbul ignore next -- @preserve */

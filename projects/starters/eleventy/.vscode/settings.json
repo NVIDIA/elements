@@ -1,8 +1,0 @@
-{
-  "html.customData": [
-    "./node_modules/@nvidia-elements/core/dist/data.html.json",
-    "./node_modules/@nvidia-elements/monaco/dist/data.html.json",
-    "./node_modules/@nvidia-elements/code/dist/data.html.json",
-    "./node_modules/@nvidia-elements/styles/dist/data.html.json"
-  ]
-}
