@@ -6,8 +6,13 @@ import postcssrc from 'postcss-load-config';
 const resolve = rel => path.join(process.cwd(), rel);
 
 await generateGlobalAttributes(
-  [resolve('./src/layout.css'), resolve('./src/typography.css')],
-  ['nve-layout', 'nve-text']
+  [
+    resolve('./src/layout.css'),
+    resolve('./src/typography.css'),
+    resolve('./src/labs/layout-container.css'),
+    resolve('./src/labs/layout-viewport.css')
+  ],
+  ['nve-layout', 'nve-text', 'nve-display']
 );
 
 async function generateGlobalAttributes(files, attributes) {
@@ -42,6 +47,8 @@ async function generateGlobalAttributes(files, attributes) {
       description = 'Layout utility for native HTML elements';
     } else if (attribute === 'nve-text') {
       description = 'Typography style utility for native HTML elements';
+    } else if (attribute === 'nve-display') {
+      description = 'Display utility for native HTML elements';
     }
 
     globalAttributes.push({
