@@ -65,12 +65,7 @@ function getPayload(lighthouseRequests) {
       return {
         kb: round(r.transferSize / 1000),
         mimeType: r.mimeType,
-        name: !r.url.includes('/assets/')
-          ? r.url
-          : r.url
-              .split('/assets/')[1]
-              .replace(/-\w+\.css$/, '.css')
-              .replace(/-\w+\.js$/, '.js')
+        name: !r.url.includes('/assets/') ? r.url : r.url.split('/assets/')[1]
       };
     });
 
