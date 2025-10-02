@@ -54,8 +54,8 @@
   contain: layout;
   overflow: auto;
   position: relative;
-  scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
-  scrollbar-width: thin;
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
 }
 
 :host([container*='full']) {
