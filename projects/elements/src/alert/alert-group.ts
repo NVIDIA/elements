@@ -16,6 +16,7 @@ import styles from './alert-group.css?inline';
  * @cssprop --padding
  * @cssprop --font-size
  * @cssprop --background
+ * @cssprop --border
  * @cssprop --border-radius
  * @slot - default slot for nve-alert
  * @storybook https://NVIDIA.github.io/elements/docs/elements/alert-group/
