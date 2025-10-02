@@ -28,18 +28,20 @@ export const renderBaseHead = data => /* html */ `
     @import '@nvidia-elements/themes/fonts/inter.css';
     @import '@nvidia-elements/themes/index.css';
     @import '@nvidia-elements/themes/dark.css';
+    @import '@nvidia-elements/styles/view-transitions.css';
+    @import '@nvidia-elements/styles/typography.css';
+    @import '@nvidia-elements/styles/layout.css';
+    @import '@nvidia-elements/styles/labs/layout-viewport.css';
+    @import '@nvidia-elements/styles/labs/layout-container.css';
+
+    @import '@nvidia-elements/themes/reduced-motion.css';
     @import '@nvidia-elements/themes/high-contrast.css';
     @import '@nvidia-elements/themes/compact.css';
     @import '@nvidia-elements/themes/debug.css';
     @import '@nvidia-elements/themes/ddb-dark.css';
+    @import '@nvidia-elements/themes/fonts/nvidia-sans.css';
     @import '@nvidia-elements/brand/index.css';
     @import '@nvidia-elements/brand/dark.css';
-    @import '@nvidia-elements/themes/reduced-motion.css';
-    @import '@nvidia-elements/styles/layout.css';
-    @import '@nvidia-elements/styles/labs/layout-viewport.css';
-    @import '@nvidia-elements/styles/labs/layout-container.css';
-    @import '@nvidia-elements/styles/typography.css';
-    @import '@nvidia-elements/styles/view-transitions.css';
 
     nve-page:not(:defined) {
       visibility: visible !important;
