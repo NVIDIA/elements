@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.7.0...@nvidia-elements/themes-v1.8.0) (2025-10-02)
+
+
+### Features
+
+* **themes:** add scrollbar tokens ([cae3ee1](https://github.com/NVIDIA/elements/commit/cae3ee198673ba40fe616811b34cf1b5f394cdb2))
+
 ## [@nvidia-elements/themes-v1.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.6.3...@nvidia-elements/themes-v1.7.0) (2025-09-25)
 
 
