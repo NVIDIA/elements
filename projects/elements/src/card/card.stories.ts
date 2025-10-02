@@ -174,7 +174,7 @@ export const ContainerFlat = {
  * @tags test-case
  */
 export const Audit = {
-  /* eslint-disable @nvidia-elements/lint/no-restricted-attrs */
+  /* eslint-disable @nvidia-elements/lint/no-restricted-attributes */
   render: () => html`
   <!-- invalid padding usage -->
   <nve-card nve-layout="pad:md"></nve-card>

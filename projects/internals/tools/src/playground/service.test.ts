@@ -4,18 +4,27 @@ import { PlaygroundService } from './service.js';
 
 describe('PlaygroundService', () => {
   it('should provide validate', async () => {
+    const env = process.env.ELEMENTS_ENV;
+    process.env.ELEMENTS_ENV = 'mcp';
     const result = await PlaygroundService.validate({
-      template: '<div nve-invalid="test"><nve-button>hello there</nve-button>'
+      template: '<nve-button nve-layout="column">hello there</nve-button>'
     });
-    expect(result).toBe('<div><nve-button>hello there</nve-button></div>');
+    expect(Array.isArray(result)).toBe(true);
+    expect(result.length).toBe(1);
+    expect(result[0].message).toBe('Unexpected use of restricted attribute nve-layout on custom HTML element.');
+    expect(result[0].line).toBe(1);
+    expect(result[0].column).toBe(1);
+    expect(result[0].endLine).toBe(1);
+    expect(result[0].endColumn).toBe(57);
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.name).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.command).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.description).toBe(
-      'Get validated HTML string for an example template/playground.'
+      'Returns a list of potential errors in a playground template.'
     );
     expect(
       (PlaygroundService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.template
     ).toBeDefined();
+    process.env.ELEMENTS_ENV = env;
   });
 
   it('should provide create', async () => {
@@ -33,7 +42,7 @@ describe('PlaygroundService', () => {
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.name).toBe('create');
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.command).toBe('create');
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.description).toBe(
-      'Creates a playground url/link generated from a html template string.'
+      'Creates a playground url/link generated from a html template string. Returns URL only if template passes validation, otherwise returns errors to correct.'
     );
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.inputSchema?.properties?.template).toBeDefined();
   });
