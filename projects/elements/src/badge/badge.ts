@@ -28,6 +28,7 @@ import styles from './badge.css?inline';
  * @cssprop --font-size
  * @cssprop --status-color
  * @cssprop --padding
+ * @cssprop --border
  * @cssprop --border-radius
  * @cssprop --font-weight
  * @cssprop --text-transform
