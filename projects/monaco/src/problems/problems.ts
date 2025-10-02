@@ -40,6 +40,13 @@ const EDITOR_OPTIONS: monaco.editor.IEditorOptions & monaco.editor.IGlobalEditor
  * @description A Monaco Editor based tree view for presenting problems (i.e. diagnostics markers).
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/monaco/problems
+ * @cssprop --background
+ * @cssprop --min-height
+ * @event canceled - Dispatched when editor initialization is canceled.
+ * @event ready - Dispatched when the editor is initialized and ready.
+ * @event problem-selected - Dispatched when a problem is selected.
+ * @event problem-activated - Dispatched when a problem is activated.
+ * @event problem-context-menu - Dispatched when a problem's context menu is requested.
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea
  * @storybook https://NVIDIA.github.io/elements/docs/labs/monaco/problems/
  * @stable false
@@ -122,11 +129,11 @@ export class MonacoProblems extends LitElement {
     this.#applyProblems();
 
     this._internals.states.add('ready');
-    this.dispatchEvent(new CustomEvent('ready'));
+    this.dispatchEvent(new CustomEvent('ready', { bubbles: true }));
   };
 
   #editorCanceled = (_event: Event) => {
-    this.dispatchEvent(new Event('canceled'));
+    this.dispatchEvent(new CustomEvent('canceled', { bubbles: true }));
   };
 
   #setupEditor(editor: monaco.editor.IStandaloneCodeEditor) {
@@ -161,15 +168,15 @@ export class MonacoProblems extends LitElement {
   }
 
   #selectProblem(problem: Problem) {
-    this.dispatchEvent(new CustomEvent('problem-selected', { detail: { problem } }));
+    this.dispatchEvent(new CustomEvent('problem-selected', { bubbles: true, detail: { problem } }));
   }
 
   #activateProblem(problem: Problem) {
-    this.dispatchEvent(new CustomEvent('problem-activated', { detail: { problem } }));
+    this.dispatchEvent(new CustomEvent('problem-activated', { bubbles: true, detail: { problem } }));
   }
 
   #toggleContextMenu(problem: Problem) {
-    this.dispatchEvent(new CustomEvent('problem-context-menu', { detail: { problem } }));
+    this.dispatchEvent(new CustomEvent('problem-context-menu', { bubbles: true, detail: { problem } }));
   }
 
   #isEmptyModel() {
