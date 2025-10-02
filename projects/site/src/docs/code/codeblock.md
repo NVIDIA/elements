@@ -51,7 +51,7 @@ function getTime(): number {
 
 ## Theme
 
-A Theme can be set independant of the global theme using the `nve-theme` attribute.
+A Theme can be set independent of the global theme using the `nve-theme` attribute.
 
 {% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Theme' %}
 
@@ -70,3 +70,7 @@ A Theme can be set independant of the global theme using the `nve-theme` attribu
 ## Overflow
 
 {% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Overflow' %}
+
+## Line Wrap
+
+{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'LineWrap' %}
