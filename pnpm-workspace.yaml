@@ -44,11 +44,11 @@ catalog:
   '@11ty/eleventy-plugin-syntaxhighlight': 5.0.1
   '@11ty/eleventy-plugin-vite': 7.0.0
   '@custom-elements-manifest/analyzer': 0.10.4
-  '@eslint/css': 0.11.0
-  '@eslint/js': 9.33.0
+  '@eslint/css': 0.11.1
+  '@eslint/js': 9.36.0
   '@eslint/json': 0.13.2
-  '@html-eslint/eslint-plugin': 0.46.2
-  '@html-eslint/parser': 0.46.2
+  '@html-eslint/eslint-plugin': 0.47.0
+  '@html-eslint/parser': 0.47.0
   '@lit-labs/eleventy-plugin-lit': 1.0.5
   '@lit-labs/scoped-registry-mixin': ^1.0.4
   '@lit-labs/ssr': ^3.3.1
@@ -66,7 +66,7 @@ catalog:
   '@vitest/coverage-istanbul': 4.0.0-beta.3
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
   cpy-cli: 5.0.0
-  eslint: 9.35.0
+  eslint: 9.36.0
   glob: 11.0.3
   markdown-it: 14.1.0
   markdown-it-link-attributes: 4.0.1
