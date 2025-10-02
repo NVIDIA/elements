@@ -159,7 +159,8 @@
     "lit": "catalog:"
   },
   "peerDependencies": {
-    "@nvidia-elements/core": "workspace:^"
+    "@nvidia-elements/core": "workspace:^",
+    "@nvidia-elements/themes": "workspace:^"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
