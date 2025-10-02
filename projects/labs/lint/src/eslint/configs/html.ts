@@ -1,11 +1,13 @@
 import type { Linter } from 'eslint';
-import html from '@html-eslint/eslint-plugin';
 import htmlParser from '@html-eslint/parser';
 import noDeprecatedTags from '../rules/no-deprecated-tags.js';
 import noDeprecatedAttributes from '../rules/no-deprecated-attributes.js';
 import noDeprecatedIconNames from '../rules/no-deprecated-icon-names.js';
 import noDeprecatedPopoverAttributes from '../rules/no-deprecated-popover-attributes.js';
 import noUnexpectedGlobalAttributeValue from '../rules/no-unexpected-global-attribute-value.js';
+import noUnexpectedStyleCustomization from '../rules/no-unexpected-style-customization.js';
+import noDeprecatedGlobalAttributes from '../rules/no-deprecated-global-attributes.js';
+import noRestrictedAttributes from '../rules/no-restricted-attributes.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
 
@@ -34,48 +36,25 @@ export const elementsHtmlConfig: Linter.Config = {
   plugins: {
     '@nvidia-elements/lint': {
       rules: {
-        'no-restricted-attrs': html.rules['no-restricted-attrs'],
         'no-deprecated-tags': noDeprecatedTags,
         'no-deprecated-attributes': noDeprecatedAttributes,
         'no-deprecated-icon-names': noDeprecatedIconNames,
         'no-deprecated-popover-attributes': noDeprecatedPopoverAttributes,
-        'no-unexpected-global-attribute-value': noUnexpectedGlobalAttributeValue
+        'no-deprecated-global-attributes': noDeprecatedGlobalAttributes,
+        'no-unexpected-global-attribute-value': noUnexpectedGlobalAttributeValue,
+        'no-unexpected-style-customization': noUnexpectedStyleCustomization,
+        'no-restricted-attributes': noRestrictedAttributes
       }
     }
   },
   rules: {
+    '@nvidia-elements/lint/no-unexpected-style-customization': ['off'],
     '@nvidia-elements/lint/no-deprecated-tags': ['error'],
     '@nvidia-elements/lint/no-deprecated-attributes': ['error'],
     '@nvidia-elements/lint/no-deprecated-icon-names': ['error'],
     '@nvidia-elements/lint/no-deprecated-popover-attributes': ['error'],
+    '@nvidia-elements/lint/no-deprecated-global-attributes': ['error'],
     '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error'],
-    '@nvidia-elements/lint/no-restricted-attrs': [
-      'error',
-      {
-        tagPatterns: ['.*-.*'],
-        attrPatterns: ['nve-layout'],
-        message: 'Use of nve-layout is not allowed on custom HTML element tags.'
-      },
-      {
-        tagPatterns: ['.*-.*'],
-        attrPatterns: ['nve-text'],
-        message: 'Use of nve-text is not allowed on custom HTML element tags.'
-      },
-      {
-        tagPatterns: ['.*-.*'],
-        attrPatterns: ['mlv-text'],
-        message: 'Use of mlv-text is not allowed, use nve-text instead.'
-      },
-      {
-        tagPatterns: ['.*-.*'],
-        attrPatterns: ['mlv-layout'],
-        message: 'Use of mlv-layout is not allowed, use nve-layout instead.'
-      },
-      {
-        tagPatterns: ['.*-.*'],
-        attrPatterns: ['mlv-theme'],
-        message: 'Use of mlv-theme is not allowed, use nve-theme instead.'
-      }
-    ]
+    '@nvidia-elements/lint/no-restricted-attributes': ['error']
   }
 };
