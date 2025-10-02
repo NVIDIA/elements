@@ -23,6 +23,7 @@ import styles from './tag.css?inline';
  * @cssprop --gap
  * @cssprop --font-size
  * @cssprop --padding
+ * @cssprop --border
  * @cssprop --border-radius
  * @cssprop --font-weight
  * @cssprop --max-width
