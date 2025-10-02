@@ -1,6 +1,7 @@
 :host {
   --cursor: pointer;
   --border-radius: var(--nve-ref-border-radius-xxl);
+  --border: 0;
   --background: var(--nve-sys-interaction-field-background);
   --width: var(--nve-ref-size-1000);
   --height: var(--nve-ref-size-500);
@@ -32,6 +33,7 @@
 [input] slot {
   cursor: var(--cursor);
   border-radius: var(--border-radius);
+  border: var(--border);
   background: var(--background);
   height: var(--height);
   width: var(--width);

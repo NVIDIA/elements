@@ -35,6 +35,8 @@ import styles from './control.css?inline';
  * @cssprop --color
  * @cssprop --label-color
  * @cssprop --label-width
+ * @cssprop --label-font-weight
+ * @cssprop --label-font-size
  * @cssprop --control-width
  * @cssprop --control-height
  * @storybook https://NVIDIA.github.io/elements/docs/elements/forms/

@@ -10,6 +10,7 @@ import styles from './switch.css?inline';
  * @entrypoint \@nvidia-elements/core/switch
  * @cssprop --cursor
  * @cssprop --border-radius
+ * @cssprop --border
  * @cssprop --background
  * @cssprop --width
  * @cssprop --height
