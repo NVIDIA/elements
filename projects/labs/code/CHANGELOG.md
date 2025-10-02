@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.3.0...@nvidia-elements/code-v0.4.0) (2025-10-02)
+
+
+### Features
+
+* **labs-code:** white-space css prop support ([69d09b7](https://github.com/NVIDIA/elements/commit/69d09b7dbc4d4a2124106240ffbd6e373d35953c))
+
 ## [@nvidia-elements/code-v0.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.2.6...@nvidia-elements/code-v0.3.0) (2025-09-25)
 
 
