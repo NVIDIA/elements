@@ -2,6 +2,7 @@
   --gap: var(--nve-ref-space-xs);
   --font-size: var(--nve-ref-font-size-200);
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
+  --border: 0;
   --border-radius: var(--nve-ref-border-radius-md);
   --icon-size: var(--nve-ref-size-600);
   --icon-color: var(--color);
@@ -16,6 +17,7 @@
   gap: var(--gap);
   color: var(--color);
   padding: var(--padding);
+  border: var(--border);
   border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;
