@@ -3,6 +3,8 @@
   --opacity: 1;
   --label-color: var(--nve-sys-interaction-field-color);
   --label-text-transform: capitalize;
+  --label-font-weight: var(--nve-ref-font-weight-medium);
+  --label-font-size: var(--nve-ref-font-size-100);
   --_label-width: var(--label-width, 180px);
 }
 
@@ -12,8 +14,8 @@
 }
 
 ::slotted(label) {
-  font-weight: var(--nve-ref-font-weight-medium) !important;
-  font-size: var(--nve-ref-font-size-100) !important;
+  font-weight: var(--label-font-weight) !important;
+  font-size: var(--label-font-size) !important;
   color: var(--label-color) !important;
   cursor: var(--cursor) !important;
   text-transform: var(--label-text-transform) !important;
