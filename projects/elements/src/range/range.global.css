@@ -1,10 +1,11 @@
 mlv-range input[type='range']::-webkit-slider-thumb,
 nve-range input[type='range']::-webkit-slider-thumb {
-  width: var(--nve-ref-size-400);
-  height: var(--nve-ref-size-400);
-  background: var(--background);
+  width: var(--thumb-width);
+  height: var(--thumb-height);
+  background: var(--thumb-background);
   border-radius: 50%;
-  margin-top: calc((var(--track-height) - var(--nve-ref-size-400)) / 2);
+  box-shadow: var(--thumb-border);
+  margin-top: calc((var(--track-height) - var(--thumb-height)) / 2);
   appearance: var(--_appearance);
 }
 
