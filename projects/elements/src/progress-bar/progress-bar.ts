@@ -12,6 +12,7 @@ import styles from './progress-bar.css?inline';
  * @entrypoint \@nvidia-elements/core/progress-bar
  * @cssprop --height
  * @cssprop --opacity
+ * @cssprop --background-color
  * @cssprop --accent-color
  * @storybook https://NVIDIA.github.io/elements/docs/elements/progress-bar/
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role

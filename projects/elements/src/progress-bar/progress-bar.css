@@ -5,6 +5,7 @@
   --height: var(--nve-ref-size-200);
   --opacity: 1;
   --accent-color: var(--nve-sys-interaction-color);
+  --background-color: var(--nve-sys-interaction-field-background);
 }
 
 :host([status='accent']) {
@@ -27,7 +28,7 @@ progress {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: var(--nve-sys-interaction-field-background);
+  background-color: var(--background-color);
   border-radius: var(--nve-ref-border-radius-full);
   height: var(--height);
   opacity: var(--opacity);
