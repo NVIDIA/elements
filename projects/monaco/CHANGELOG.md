@@ -1,3 +1,11 @@
+## [@nvidia-elements/monaco-v1.2.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.3...@nvidia-elements/monaco-v1.2.4) (2025-10-02)
+
+
+### Bug Fixes
+
+* **monaco:** events and metadata ([c9a7995](https://github.com/NVIDIA/elements/commit/c9a7995fa3deaab48916a66c2373ccb252ab3f50))
+* **monaco:** problems css sizing ([97978e4](https://github.com/NVIDIA/elements/commit/97978e413d96d419c416d168862801aa6fbfe8c3))
+
 ## [@nvidia-elements/monaco-v1.2.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.2...@nvidia-elements/monaco-v1.2.3) (2025-09-25)
 
 
