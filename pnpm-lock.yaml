@@ -810,6 +810,9 @@ importers:
 
   projects/labs/code:
     dependencies:
+      '@nvidia-elements/themes':
+        specifier: workspace:^
+        version: link:../../themes
       highlight.js:
         specifier: 11.10.0
         version: 11.10.0
@@ -971,8 +974,11 @@ importers:
   projects/labs/markdown:
     dependencies:
       '@nvidia-elements/core':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../elements
+      '@nvidia-elements/themes':
+        specifier: workspace:^
+        version: link:../../themes
       lit:
         specifier: 'catalog:'
         version: 3.3.1

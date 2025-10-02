@@ -195,9 +195,7 @@ export function render() {
 
             <div nve-layout="column &xl|row align:center gap:xl" style="align-items: center">
               <nvd-framework-selector></nvd-framework-selector>
-              <div class="codeblock-container">
-                <nve-codeblock style="width: 494px; height: 516px; font-size: 12px;" language="html"></nve-codeblock>
-              </div>
+              <nve-codeblock style="width: 494px; height: 516px; font-size: 12px;" language="html"></nve-codeblock>
             </div>
           </div>
         </section>
