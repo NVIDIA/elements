@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+process.env.ELEMENTS_ENV = 'cli';
 
 /* istanbul ignore file -- @preserve */
 import yargs from 'yargs';
@@ -7,8 +8,6 @@ import { tools, type Schema } from '@internals/tools';
 import { banner, colors, getArgValue, renderResult, runAsyncTool } from './utils.js';
 
 export const VERSION = '0.0.0';
-
-process.env.ELEMENTS_ENV = 'cli';
 
 process.on('SIGINT', () => process.exit(0));
 
@@ -67,7 +66,7 @@ tools.forEach(tool => {
     async args => {
       const { result, status, message } = await runAsyncTool(args, tool);
 
-      if (status === 'success') {
+      if (status === 'complete') {
         await renderResult(result);
         process.exit(0);
       } else {
