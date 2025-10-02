@@ -170,7 +170,7 @@ describe.each<EditorTestConfig>([
     document.addEventListener('change', changeSpy);
 
     const editorDiv = element.shadowRoot.querySelector('#editor');
-    editorDiv.dispatchEvent(new Event('input', { bubbles: true }));
+    editorDiv.dispatchEvent(new InputEvent('input', { bubbles: true }));
     editorDiv.dispatchEvent(new Event('change', { bubbles: true }));
 
     expect(inputSpy).not.toHaveBeenCalled();
@@ -196,7 +196,7 @@ describe.each<EditorTestConfig>([
     mockUpdateThemeForColorScheme.mockClear();
 
     const probe = element.shadowRoot.querySelector('#color-scheme-probe');
-    probe.dispatchEvent(new Event('transitionrun', { bubbles: true }));
+    probe.dispatchEvent(new TransitionEvent('transitionrun'));
 
     expect(mockUpdateThemeForColorScheme).toHaveBeenCalledWith(element.monaco, element);
   });
@@ -205,7 +205,7 @@ describe.each<EditorTestConfig>([
     beforeReady: async ({}, use) => {
       await use(() => {
         const probe = element.shadowRoot.querySelector('#color-scheme-probe');
-        probe.dispatchEvent(new Event('transitionrun', { bubbles: true }));
+        probe.dispatchEvent(new TransitionEvent('transitionrun'));
 
         expect(mockUpdateThemeForColorScheme).not.toHaveBeenCalled();
       });

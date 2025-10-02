@@ -462,7 +462,7 @@ export abstract class BaseMonacoInput<
         this.#clearValidation();
       }
 
-      this.dispatchEvent(new Event('syntax-validation-changed'));
+      this.dispatchEvent(new CustomEvent('syntax-validation-changed', { bubbles: true }));
     });
 
     // Update the dispose listener to include the new listener
@@ -486,11 +486,13 @@ export abstract class BaseMonacoInput<
 
     this._internals.states.add('ready');
 
-    this.dispatchEvent(new Event('ready'));
+    this.dispatchEvent(new CustomEvent('ready', { bubbles: true }));
   };
 
-  #editorCanceled = (_event: Event) => {
-    this.dispatchEvent(new Event('canceled'));
+  #editorCanceled = (event: Event) => {
+    event.stopPropagation();
+
+    this.dispatchEvent(new CustomEvent('canceled', { bubbles: true }));
   };
 
   protected abstract get _editor(): T;
