@@ -136,26 +136,6 @@ section {
   }
 }
 
-/* Code Block Container */
-
-.codeblock-container {
-  padding-left: var(--nve-ref-space-xs);
-  padding-right: var(--nve-ref-space-xs);
-  backdrop-filter: blur(20px);
-  background: color-mix(
-    in oklch,
-    var(--nve-sys-layer-canvas-background) var(--shadow-percentage),
-    var(--nve-sys-layer-container-background)
-  );
-  border-radius: var(--nve-ref-border-radius-lg);
-
-  nve-codeblock {
-    --background: transparent;
-    scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
-    scrollbar-width: thin;
-  }
-}
-
 /* Videos */
 
 .video-container {
