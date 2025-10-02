@@ -2395,6 +2395,24 @@
           }
         }
       }
+    },
+    "scrollbar": {
+      "thumb": {
+        "color": {
+          "value": "{ref.border.color.muted}",
+          "type": "color"
+        }
+      },
+      "track": {
+        "color": {
+          "value": "{ref.color.alpha.black.200}",
+          "type": "color"
+        }
+      },
+      "width": {
+        "value": "thin",
+        "type": "borderWidth"
+      }
     }
   }
 }
