@@ -100,3 +100,21 @@ export const Horizontal = {
   </nve-range>
 </div>`
 };
+
+/**
+ * @summary Range component can have its visual styles overwritten to accomplish custom themes.
+ * @tags test-case
+ */
+export const CustomStyles = {
+  render: () => html`
+<nve-range style="
+--background: #76b900;
+--track-height: 4px;
+--track-border-radius: 16px;
+--thumb-background: black;
+--thumb-border: inset 0 0 0 2px white;
+--thumb-width: 14px;
+--thumb-height: 14px;">
+  <input type="range" />
+</nve-range>`
+};
