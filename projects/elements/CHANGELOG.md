@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.40.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.14...@nvidia-elements/core-v1.40.0) (2025-10-02)
+
+
+### Features
+
+* **elements:** border css prop for alert-group, badge and tag ([55cd1c8](https://github.com/NVIDIA/elements/commit/55cd1c84dd180b11057804555fa730ab764cd167))
+
 ## [@nvidia-elements/core-v1.39.14](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.13...@nvidia-elements/core-v1.39.14) (2025-10-02)
 
 
