@@ -30,6 +30,7 @@ export const libraryNodeBuildConfig = {
     emptyOutDir: false,
     sourcemap: false,
     target: 'esnext',
+    formats: ['es'],
     lib: {
       entry: {
         index: resolve(process.cwd(), './src/index.ts'),
