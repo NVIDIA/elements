@@ -119,7 +119,7 @@ export async function storyShortcode(
       : /* html */ `
 ${markdown.render(example.description ? example.description : (example.summary ?? ''))}
 <nvd-canvas id="${canvasId}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
-  <template>${templateContent}</template>${template}${editButton}${playgroundButton}
+  <template>${md.utils?.escapeHtml(templateContent)}</template>${template}${editButton}${playgroundButton}
 </nvd-canvas>${reload}`.trim()
     : '';
 }
