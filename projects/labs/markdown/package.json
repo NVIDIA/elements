@@ -70,8 +70,11 @@
   },
   "dependencies": {
     "lit": "catalog:",
-    "markdown-it": "catalog:",
-    "@nvidia-elements/core": "workspace:*"
+    "markdown-it": "catalog:"
+  },
+  "peerDependencies": {
+    "@nvidia-elements/core": "workspace:^",
+    "@nvidia-elements/themes": "workspace:^"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
