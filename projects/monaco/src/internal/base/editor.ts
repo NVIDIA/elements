@@ -92,7 +92,7 @@ export abstract class BaseMonacoEditor<T extends monaco.editor.IEditor> extends 
     const monaco = await loadMonaco();
 
     if (!this.isConnected) {
-      this.dispatchEvent(new Event('canceled'));
+      this.dispatchEvent(new CustomEvent('canceled', { bubbles: true }));
       return;
     }
 
@@ -103,7 +103,7 @@ export abstract class BaseMonacoEditor<T extends monaco.editor.IEditor> extends 
 
     this.#updateThemeForColorScheme();
 
-    this.dispatchEvent(new Event('ready'));
+    this.dispatchEvent(new CustomEvent('ready', { bubbles: true }));
   }
 
   #updateThemeForColorScheme = () => {
