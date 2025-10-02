@@ -14,10 +14,11 @@ export interface Schema {
   type?: 'string' | 'number' | 'boolean' | 'object' | 'array';
   description?: string;
   default?: string | number | boolean | object;
-  defaultTemplate?: string;
-  defaultTemplatePostfix?: string;
+  defaultTemplate?: string; // non-standard schema property for default template
   enum?: string[];
   enumNames?: string[];
+  minItems?: number;
+  maxItems?: number;
   oneOf?: Schema[];
   properties?: {
     [key: string]: Schema;
@@ -42,7 +43,7 @@ export type ToolMethod<T> = {
 };
 
 export interface ToolOutput<T = unknown> {
-  status: 'success' | 'error';
+  status: 'complete' | 'error';
   message?: string;
   result: T;
 }
@@ -112,7 +113,7 @@ export function loadTools(obj: any): ManagedToolMethod<unknown>[] {
       methods.add(name);
       obj[toolName] = async function (...args: unknown[]) {
         try {
-          return { status: 'success', message: '', result: await obj[name](...args) };
+          return { status: 'complete', message: '', result: await obj[name](...args) };
         } catch (e) {
           return { status: 'error', message: e.message, result: '' };
         }
@@ -129,8 +130,28 @@ export function jsonSchemaToZod(schema: Schema) {
     return z.any();
   }
 
+  const requiredFields = schema?.required || [];
+
   const propertiesSchema = schema?.properties
-    ? Object.fromEntries(Object.entries(schema.properties).map(([pattern, value]) => [pattern, jsonSchemaToZod(value)]))
+    ? Object.fromEntries(
+        Object.entries(schema.properties).map(([propertyName, propertySchema]) => {
+          let zodSchema = jsonSchemaToZod(propertySchema);
+
+          if (!requiredFields.includes(propertyName)) {
+            zodSchema = zodSchema.optional();
+          }
+
+          if (propertySchema.default !== undefined) {
+            zodSchema = zodSchema.default(propertySchema.default);
+          }
+
+          if (propertySchema.defaultTemplate !== undefined) {
+            zodSchema = zodSchema.default(propertySchema.defaultTemplate);
+          }
+
+          return [propertyName, zodSchema];
+        })
+      )
     : {};
 
   const patternPropertiesSchema = schema?.patternProperties
@@ -158,7 +179,17 @@ export function jsonSchemaToZod(schema: Schema) {
   }
 
   if (schema.type === 'array') {
-    return z.array(jsonSchemaToZod(schema.items)).describe(schema.description);
+    let arraySchema = z.array(jsonSchemaToZod(schema.items));
+
+    if (typeof schema.minItems === 'number' && schema.minItems > 0) {
+      arraySchema = arraySchema.min(schema.minItems);
+    }
+
+    if (typeof schema.maxItems === 'number' && schema.maxItems >= 0) {
+      arraySchema = arraySchema.max(schema.maxItems);
+    }
+
+    return arraySchema.describe(schema.description);
   }
 
   if (schema.oneOf && Array.isArray(schema.oneOf)) {

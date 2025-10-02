@@ -15,7 +15,7 @@ export default {
   component: 'nve-internal-patterns'
 };
 
-/* eslint-disable @nvidia-elements/lint/no-restricted-attrs */
+/* eslint-disable @nvidia-elements/lint/no-restricted-attributes */
 
 export const PanelKeyValue = {
   render: () => html`
