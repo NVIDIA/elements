@@ -5,6 +5,7 @@
   --border-width: var(--nve-ref-border-width-md);
   --border-radius: var(--nve-ref-border-radius-full);
   --border-color: var(--nve-ref-border-color);
+  --radio-color: var(--border-color);
   --background: transparent;
   display: inline-block;
   contain: layout;
@@ -72,7 +73,7 @@
 }
 
 :host(:state(checked)) [input] slot::before {
-  background: var(--border-color);
+  background: var(--radio-color);
   transform: scale(1);
   opacity: 1;
 }
@@ -80,10 +81,6 @@
 :host(:state(checked)) {
   --nve-sys-interaction-state-lightness: 0%;
   --border-color: var(--accent-color);
-}
-
-:host(:state(checked)) [input] slot::before {
-  background: var(--border-color);
 }
 
 :host(:state(disabled)) {
