@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.39.14](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.13...@nvidia-elements/core-v1.39.14) (2025-10-02)
+
+
+### Bug Fixes
+
+* **elements:** scroll styles ([cceca64](https://github.com/NVIDIA/elements/commit/cceca643fb890dc99f255fc70696ac211520d126))
+
 ## [@nvidia-elements/core-v1.39.13](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.12...@nvidia-elements/core-v1.39.13) (2025-09-30)
 
 
