@@ -5,6 +5,10 @@
   --track-width: 50%;
   --track-height: var(--nve-ref-size-150);
   --track-border-radius: var(--nve-ref-border-radius-md);
+  --thumb-width: var(--nve-ref-size-400);
+  --thumb-height: var(--nve-ref-size-400);
+  --thumb-background: var(--background);
+  --thumb-border: inset 0 0 0 2px transparent;
   width: 100%;
   contain: layout;
 }
@@ -28,7 +32,7 @@
 [input]::after {
   content: '';
   display: block;
-  width: var(--track-width);
+  width: calc(var(--track-width) - var(--thumb-width) / 2 + 0.5px);
   height: var(--track-height);
   background: var(--background);
   border-top-left-radius: var(--track-border-radius);
