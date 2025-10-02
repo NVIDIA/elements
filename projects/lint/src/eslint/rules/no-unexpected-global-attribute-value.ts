@@ -26,17 +26,20 @@ try {
 const EXCEPTIONS = ['debug', 'mkd', 'md']; // internal scopes
 
 const VALID_NVE_TEXT_VALUES = new Set([
-  ...htmlData.globalAttributes.find(attribute => attribute.name === 'nve-text').values.map(value => value.name),
+  ...(htmlData.globalAttributes.find(attribute => attribute.name === 'nve-text')?.values?.map(value => value.name) ??
+    []),
   ...EXCEPTIONS
 ]);
 
 const VALID_NVE_LAYOUT_VALUES = new Set([
-  ...htmlData.globalAttributes.find(attribute => attribute.name === 'nve-layout').values.map(value => value.name),
+  ...(htmlData.globalAttributes.find(attribute => attribute.name === 'nve-layout')?.values?.map(value => value.name) ??
+    []),
   ...EXCEPTIONS
 ]);
 
 const VALID_NVE_DISPLAY_VALUES = new Set([
-  ...htmlData.globalAttributes.find(attribute => attribute.name === 'nve-display').values.map(value => value.name),
+  ...(htmlData.globalAttributes.find(attribute => attribute.name === 'nve-display')?.values?.map(value => value.name) ??
+    []),
   ...EXCEPTIONS
 ]);
 
@@ -62,7 +65,8 @@ const rule = {
         const textAttr = findAttr(node, 'nve-text');
 
         if (textAttr) {
-          const value = textAttr.value.value.split(' ').find(value => !VALID_NVE_TEXT_VALUES.has(value));
+          const values = textAttr.value?.value?.split(' ') ?? [];
+          const value = values.find(value => !VALID_NVE_TEXT_VALUES.has(value));
           const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
           if (value && !isValueBinding) {
             context.report({
@@ -78,7 +82,8 @@ const rule = {
 
         const layoutAttr = findAttr(node, 'nve-layout');
         if (layoutAttr) {
-          const value = layoutAttr.value.value.split(' ').find(value => !VALID_NVE_LAYOUT_VALUES.has(value));
+          const values = layoutAttr.value?.value?.split(' ') ?? [];
+          const value = values.find(value => !VALID_NVE_LAYOUT_VALUES.has(value));
           const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
           if (value && !isValueBinding) {
             context.report({
@@ -94,7 +99,8 @@ const rule = {
 
         const displayAttr = findAttr(node, 'nve-display');
         if (displayAttr) {
-          const value = displayAttr.value.value.split(' ').find(value => !VALID_NVE_DISPLAY_VALUES.has(value));
+          const values = displayAttr.value?.value?.split(' ') ?? [];
+          const value = values.find(value => !VALID_NVE_DISPLAY_VALUES.has(value));
           const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
           if (value && !isValueBinding) {
             context.report({
