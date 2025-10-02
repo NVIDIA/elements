@@ -3,6 +3,7 @@
   --font-family: var(--nve-ref-font-family-roboto-mono);
   --padding: var(--nve-ref-space-sm);
   --border-radius: var(--nve-ref-border-radius-md);
+  --white-space: initial;
   --border: 0;
   all: initial;
   display: block;
@@ -18,6 +19,8 @@
 }
 
 [internal-host] {
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
   background: var(--background);
   border-radius: var(--border-radius);
   font-family: var(--font-family);
@@ -32,6 +35,10 @@ pre {
   margin: 0;
   min-height: fit-content;
   min-width: fit-content;
+}
+
+code {
+  white-space: var(--white-space);
 }
 
 [name='actions'] {
