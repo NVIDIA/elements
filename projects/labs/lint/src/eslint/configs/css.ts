@@ -1,5 +1,5 @@
 import type { Linter } from 'eslint';
-import css from '@eslint/css';
+import { CSSLanguage } from '@eslint/css';
 import noUnexpectedCssVariable from '../rules/no-unexpected-css-variable.js';
 import noUnexpectedCssValue from '../rules/no-unexpected-css-value.js';
 import noUnknownCssVariable from '../rules/no-unknown-css-variable.js';
@@ -27,7 +27,11 @@ export const elementsCssConfig: Linter.Config = {
     tolerant: true
   },
   plugins: {
-    css,
+    css: {
+      languages: {
+        css: new CSSLanguage()
+      }
+    },
     '@nvidia-elements/lint': {
       rules: {
         'no-unexpected-css-variable': noUnexpectedCssVariable,
