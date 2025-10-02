@@ -1,3 +1,10 @@
+## [@nvidia-elements/markdown-v0.1.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/markdown-v0.1.1...@nvidia-elements/markdown-v0.1.2) (2025-10-02)
+
+
+### Bug Fixes
+
+* **labs-markdown:** overflow scroll style ([76d9151](https://github.com/NVIDIA/elements/commit/76d91512f00a28264babec8244b7791ce9ec81d1))
+
 ## [@nvidia-elements/markdown-v0.1.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/markdown-v0.1.0...@nvidia-elements/markdown-v0.1.1) (2025-09-30)
 
 
