@@ -196,7 +196,7 @@ describe('utils', () => {
       const schema = {
         type: 'string',
         defaultTemplate: 'default content',
-        defaultTemplatePostfix: '.md'
+        filename: '.md'
       };
 
       const result = await getArgValue('testArg', schema);
@@ -226,8 +226,8 @@ describe('utils', () => {
       it('should call editor with correct parameters', async () => {
         vi.mocked(editor).mockResolvedValue('edited content');
         const result = await getEditor('testValue', {
-          defaultTemplate: 'default content',
-          defaultTemplatePostfix: '.js'
+          filename: '.js',
+          defaultTemplate: 'default content'
         });
 
         expect(result).toBe('edited content');
@@ -245,7 +245,7 @@ describe('utils', () => {
         expect(result).toBe('content');
         expect(editor).toHaveBeenCalledWith({
           message: 'Enter testValue.',
-          postfix: undefined,
+          postfix: '.html',
           default: undefined
         });
       });

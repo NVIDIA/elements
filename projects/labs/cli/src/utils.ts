@@ -68,10 +68,10 @@ export async function getArgValue(argName: string, propertySchema): Promise<stri
   }
 }
 
-export function getEditor(value: string, prop: { defaultTemplate?: string; defaultTemplatePostfix?: string }) {
+export function getEditor(value: string, prop: { defaultTemplate?: string; filename?: string }) {
   return editor({
     message: `Enter ${value}.`,
-    postfix: prop.defaultTemplatePostfix,
+    postfix: prop.filename ?? '.html',
     default: prop.defaultTemplate
   });
 }
