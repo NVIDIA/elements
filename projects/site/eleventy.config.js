@@ -81,7 +81,7 @@ export default function (eleventyConfig) {
       base: BASE_URL,
       build: {
         rollupOptions: {
-          external: ['open'] // todo: remove when tools have conditional exports
+          external: ['open', '@nvidia-elements/lint', '@nvidia-elements/lint/eslint/internals'] // todo: remove when tools have conditional exports
         },
         target: 'esnext',
         sourcemap: false,
