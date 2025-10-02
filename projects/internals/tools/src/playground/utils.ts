@@ -180,6 +180,7 @@ function createIndexHTML(content: string, options: PlaygroundOptions) {
     <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/high-contrast.css" />
     <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/reduced-motion.css" />
     <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/compact.css" />
+    <link rel="stylesheet" type="text/css" href="@nvidia-elements/themes/dist/debug.css" />
     <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/typography.css" />
     <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/layout.css" />
     ${layoutExamplesStyles}

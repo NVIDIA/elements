@@ -1,7 +1,7 @@
 import { MetadataService } from '@internals/metadata';
+import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
 import { createPlaygroundURL, type PlaygroundType, playgroundTypes } from './utils.js';
-import { service, tool } from '../internal/tools.js';
-import { validateTemplate } from '../internal/validate.js';
+import { type Schema, service, tool } from '../internal/tools.js';
 import { ELEMENTS_ENV_ICON } from '../internal/utils.js';
 
 export interface PlaygroundOptions {
@@ -11,40 +11,72 @@ export interface PlaygroundOptions {
   start?: boolean;
 }
 
+const eslintSchema: Schema = {
+  type: 'object',
+  properties: {
+    id: { type: 'string' },
+    severity: { type: 'string' },
+    message: { type: 'string' },
+    line: { type: 'number' },
+    column: { type: 'number' },
+    endLine: { type: 'number' },
+    endColumn: { type: 'number' },
+    fix: { type: 'object' },
+    suggestions: { type: 'array' }
+  },
+  required: ['id', 'severity', 'message', 'line', 'column', 'endLine', 'endColumn'],
+  additionalProperties: false
+};
+
+const defaultTemplate =
+  '<nve-page>\n  <nve-page-header slot="header">\n    <nve-logo slot="prefix" size="sm"></nve-logo>\n    <h2 slot="prefix">NVIDIA</h2>\n  </nve-page-header>\n  <main nve-layout="column gap:lg pad:lg">\n    <!-- template content here -->\n  </main>\n</nve-page>';
+
 @service()
 export class PlaygroundService {
   @tool({
-    description: 'Get validated HTML string for an example template/playground.',
+    description: 'Returns a list of potential errors in a playground template.',
     inputSchema: {
       type: 'object',
       properties: {
         template: {
           type: 'string',
-          description: 'HTML template/snippet to be validated and formatted.'
+          description: 'HTML template/snippet to be validated.'
         }
       },
       required: ['template']
     },
     outputSchema: {
-      type: 'string',
-      description: 'Validated HTML string.'
+      oneOf: [
+        { type: 'array', maxItems: 0 },
+        {
+          type: 'array',
+          items: eslintSchema,
+          description: 'ESLint warning and error messages.',
+          additionalProperties: false
+        }
+      ]
     }
   })
-  static async validate({ template }: { template: string }): Promise<string> {
-    const metadata = await MetadataService.getMetadata();
-    return validateTemplate(template, metadata, { allowGlobalElements: false });
+  static async validate({ template }: { template: string }): Promise<TemplateLintMessage[]> {
+    if (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli') {
+      const { lintPlaygroundTemplate } = await import('@nvidia-elements/lint/eslint/internals');
+      return await lintPlaygroundTemplate(template);
+    } else {
+      return [];
+    }
   }
 
   @tool({
-    description: 'Creates a playground url/link generated from a html template string.',
+    description:
+      'Creates a playground url/link generated from a html template string. Returns URL only if template passes validation, otherwise returns errors to correct.',
     inputSchema: {
       type: 'object',
       properties: {
         template: {
           type: 'string',
-          description: 'HTML template/snippet. Do NOT include `html`, `body` tags.',
-          defaultTemplate: `<nve-page>\n  <nve-page-header slot="header">\n    <nve-logo slot="prefix" size="sm"></nve-logo>\n    <h2 slot="prefix">NVIDIA</h2>\n  </nve-page-header>\n  <main nve-layout="column gap:lg pad:lg">\n    <!-- template content here -->\n  </main>\n</nve-page>`,
-          defaultTemplatePostfix: '.html'
+          description:
+            'HTML template/snippet. Do NOT include `html`, `body` tags. Must use valid NVE Elements components and pass validation to receive a playground URL.',
+          defaultTemplate
         },
         type: {
           type: 'string',
@@ -65,15 +97,23 @@ export class PlaygroundService {
         },
         start: {
           type: 'boolean',
-          description: 'Open the playground url in browser after creation.',
+          description:
+            'Open the playground url in browser after creation. Note: URL is returned regardless of this setting when template is valid.',
           default: false
         }
       },
       required: ['template']
     },
     outputSchema: {
-      type: 'string',
-      description: 'Returns a playground url/link generated from a html string.'
+      oneOf: [
+        { type: 'string', description: 'Returns a playground URL when template is valid.' },
+        {
+          type: 'array',
+          items: eslintSchema,
+          description: 'Template errors requiring correction.',
+          additionalProperties: false
+        }
+      ]
     }
   })
   static async create({
@@ -82,13 +122,22 @@ export class PlaygroundService {
     type,
     start,
     author
-  }: PlaygroundOptions & { author?: string }): Promise<string> {
+  }: PlaygroundOptions & { author?: string }): Promise<string | TemplateLintMessage[]> {
+    if (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli') {
+      const { lintPlaygroundTemplate } = await import('@nvidia-elements/lint/eslint/internals');
+      const lintResult = await lintPlaygroundTemplate(template);
+
+      if (lintResult.length > 0) {
+        return lintResult;
+      }
+    }
+
     const metadata = await MetadataService.getMetadata();
     const environment = ELEMENTS_ENV_ICON[process.env.ELEMENTS_ENV];
     const formattedName = `${name}${author ? ` - (${author})` : ''}${environment ? ` ${environment}` : ''}`;
     const result = createPlaygroundURL(template, metadata, { name: formattedName, type });
 
-    if (start && !globalThis.document) {
+    if (process.env.ELEMENTS_ENV === 'mcp' || (process.env.ELEMENTS_ENV === 'cli' && start)) {
       const openBrowser = await import('open');
       void openBrowser.default(result);
     }

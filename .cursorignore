@@ -2,6 +2,7 @@ node_modules
 coverage
 config
 dist
+patches
 .husky
 .eslintcache
 .visual
