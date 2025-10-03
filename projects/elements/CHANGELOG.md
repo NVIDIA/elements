@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.41.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.41.0...@nvidia-elements/core-v1.41.1) (2025-10-03)
+
+
+### Bug Fixes
+
+* **elements:** control borders ([ed56490](https://github.com/NVIDIA/elements/commit/ed56490f7e78882cc045974d6885b96ffdd153b0)), closes [#149](https://github.com/NVIDIA/elements/issues/149) [#148](https://github.com/NVIDIA/elements/issues/148)
+
 ## [@nvidia-elements/core-v1.41.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.40.0...@nvidia-elements/core-v1.41.0) (2025-10-03)
 
 
