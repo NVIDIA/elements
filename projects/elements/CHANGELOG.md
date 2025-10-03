@@ -1,3 +1,16 @@
+## [@nvidia-elements/core-v1.41.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.40.0...@nvidia-elements/core-v1.41.0) (2025-10-03)
+
+
+### Features
+
+* **elements:** nve-progress-bar expose track background-color via --background-color ([0fd9b49](https://github.com/NVIDIA/elements/commit/0fd9b4955f225337745927487c6d69b8c750fb74))
+* **elements:** nve-range expose css props; add brand example ([3e6b95d](https://github.com/NVIDIA/elements/commit/3e6b95d62f6bdb3ad4b80811b5c125a50e2d2127))
+
+
+### Bug Fixes
+
+* **elements:** nve-progress-bar expose track via --background css prop ([3b72f47](https://github.com/NVIDIA/elements/commit/3b72f47b327078fed150d42b112682eb81748229))
+
 ## [@nvidia-elements/core-v1.40.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.39.14...@nvidia-elements/core-v1.40.0) (2025-10-02)
 
 
