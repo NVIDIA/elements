@@ -1,4 +1,5 @@
 import type { MetadataSummary } from '@nve-internals/metadata';
+import { fuzzyMatch } from './search.js';
 
 export type ELEMENTS_ENV = 'mcp' | 'cli' | 'browser' | 'docs';
 
@@ -8,25 +9,6 @@ export const ELEMENTS_ENV_ICON = {
   browser: '🌐',
   docs: '📖'
 } as const;
-
-export function fuzzyMatch(search: string, candidates: string[]) {
-  const words = search
-    .toLowerCase()
-    .split(/[^a-z0-9\-]+/)
-    .filter(w => w.length > 2);
-
-  return candidates.filter(candidate => {
-    const candidateParts = new Set(
-      candidate
-        .toLowerCase()
-        .split(/[\/-]/)
-        .filter(i => i !== 'nve')
-    );
-    return words.some(word => {
-      return word.split(/[\/-]/).some(item => candidateParts.has(item));
-    });
-  });
-}
 
 export function searchPackageNames(query: string, metadata: MetadataSummary): string[] {
   return fuzzyMatch(query, getPackageNames(metadata));
