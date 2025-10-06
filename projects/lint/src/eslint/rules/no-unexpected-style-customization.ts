@@ -1,6 +1,23 @@
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 
+const svgElements = [
+  'svg',
+  'path',
+  'g',
+  'defs',
+  'linearGradient',
+  'stop',
+  'circle',
+  'text',
+  'line',
+  'ellipse',
+  'rect',
+  'polygon',
+  'polyline',
+  'pattern'
+];
+
 const rule = {
   meta: {
     type: 'problem' as const,
@@ -27,7 +44,9 @@ const rule = {
       },
       Tag(node) {
         const match = findAttr(node, 'style');
-        if (match) {
+
+        // only allow style attribute on svg elements
+        if (match && !svgElements.includes(node.name)) {
           context.report({
             node,
             messageId: 'unexpected-style-attribute-customization'
