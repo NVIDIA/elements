@@ -1,4 +1,4 @@
-import type { MetadataCustomElementsManifestDeclaration } from '@internals/metadata';
+import type { MetadataAttribute, MetadataCustomElementsManifestDeclaration } from '@internals/metadata';
 import { MetadataService } from '@internals/metadata';
 import {
   type ElementVersions,
@@ -30,16 +30,34 @@ export class ApiService {
       oneOf: [
         { type: 'string' },
         {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              name: { type: 'string' },
-              description: { type: 'string' },
-              behavior: { type: 'string' }
+          type: 'object',
+          properties: {
+            elements: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  name: { type: 'string' },
+                  description: { type: 'string' },
+                  behavior: { type: 'string' }
+                },
+                additionalProperties: false,
+                required: ['name', 'description', 'behavior']
+              }
             },
-            additionalProperties: false,
-            required: ['name', 'description', 'behavior']
+            attributes: {
+              type: 'array',
+              items: {
+                type: 'object',
+                properties: {
+                  name: { type: 'string' },
+                  description: { type: 'string' },
+                  behavior: { type: 'string' }
+                },
+                additionalProperties: false,
+                required: ['name', 'description', 'behavior']
+              }
+            }
           }
         }
       ],
@@ -48,7 +66,7 @@ export class ApiService {
   })
   static async list(
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
-  ): Promise<PartialAPIResult[] | string> {
+  ): Promise<{ elements: PartialAPIResult[]; attributes: PartialAPIResult[] } | string> {
     const metadata = await MetadataService.getMetadata();
     return getAvailableAPIs(format, metadata);
   }
@@ -73,7 +91,10 @@ export class ApiService {
       additionalProperties: false
     },
     outputSchema: {
-      oneOf: [{ type: 'string' }, { type: 'array' }],
+      oneOf: [
+        { type: 'string' },
+        { type: 'object', properties: { elements: { type: 'array' }, attributes: { type: 'array' } } }
+      ],
       additionalProperties: false
     }
   })
@@ -83,7 +104,7 @@ export class ApiService {
   }: {
     query: string;
     format: 'markdown' | 'json';
-  }): Promise<MetadataCustomElementsManifestDeclaration[] | string> {
+  }): Promise<{ elements: MetadataCustomElementsManifestDeclaration[]; attributes: MetadataAttribute[] } | string> {
     const metadata = await MetadataService.getMetadata();
     return searchAPIs(query, format, metadata);
   }

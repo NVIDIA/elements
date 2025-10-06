@@ -3,10 +3,14 @@ import '@nvidia-elements/core/card/define.js';
 
 export default {
   title: 'Styles/Typography',
-  component: 'typography'
+  component: 'nve-text'
 };
 
-export const Type = {
+/**
+ * @summary Demonstrates the foundational text types available in the design system for establishing visual hierarchy.
+ * @tags priority
+ */
+export const Default = {
   render: () => html`
 <div nve-layout="column gap:lg">
   <p nve-text="display">display</p>
@@ -17,6 +21,10 @@ export const Type = {
   `
 }
 
+/**
+ * @summary Shows how text types can be applied to semantic HTML heading elements for accessible content structure.
+ * @tags priority
+ */
 export const Headings = {
   render: () => html`
 <div nve-layout="column gap:lg">
@@ -28,6 +36,9 @@ export const Headings = {
   `
 }
 
+/**
+ * @summary Displays the complete range of size modifiers for each text type, enabling precise typographic scale and size control.
+ */
 export const Size = {
   render: () => html`
 <div nve-layout="column gap:lg">
@@ -52,6 +63,10 @@ export const Size = {
   `
 }
 
+/**
+ * @summary Illustrates color variations for text to convey importance levels and ensure proper contrast in light and dark themes.
+ * @tags test-case
+ */
 export const Color = {
   render: () => html`
 <div nve-layout="column gap:lg">
@@ -68,6 +83,9 @@ export const Color = {
   `
 }
 
+/**
+ * @summary Demonstrates available font weight options for creating visual emphasis and hierarchy within text content.
+ */
 export const Weights = {
   render: () => html`
 <div nve-layout="column gap:lg">
@@ -80,6 +98,9 @@ export const Weights = {
   `
 }
 
+/**
+ * @summary Demonstrates the default styled unordered list with consistent spacing and bullet markers.
+ */
 export const List = {
   render: () => html`
 <ul nve-text="list">
@@ -90,6 +111,9 @@ export const List = {
   `
 }
 
+/**
+ * @summary Shows the styled ordered list format with sequential numbering for step-by-step or prioritized content.
+ */
 export const OrderedList = {
   render: () => html`
 <ol nve-text="list">
@@ -100,6 +124,10 @@ export const OrderedList = {
   `
 }
 
+/**
+ * @summary Displays a list without bullets or default styling, useful for custom layouts or semantic markup without visual indicators.
+ * @tags test-case
+ */
 export const UnstyledList = {
   render: () => html`
 <ul nve-text="list unstyled">
@@ -109,6 +137,10 @@ export const UnstyledList = {
 </ul>
   `
 }
+/**
+ * @summary Presents a navigation-optimized list with nested structure, ideal for sidebars and table of contents.
+ * @tags test-case
+ */
 export const NavList = {
   render: () => html`
 <ul nve-text="list nav">
@@ -149,6 +181,10 @@ export const NavList = {
   `
 }
 
+/**
+ * @summary Demonstrates link styles including states, emphasis levels, and sizes for clear interactive affordances.
+ * @tags test-case
+ */
 export const Link = {
   render: () => html`
 <div nve-layout="column gap:lg">
@@ -173,6 +209,9 @@ export const Link = {
   `
 }
 
+/**
+ * @summary Shows text transformation utilities for case changes and truncation to handle overflow gracefully.
+ */
 export const Transforms = {
   render: () => html`
 <div nve-layout="column gap:lg">
@@ -184,6 +223,10 @@ export const Transforms = {
   `
 }
 
+/**
+ * @summary Illustrates relative line height options that scale with font size, optimizing readability for different text densities.
+ * @tags test-case
+ */
 export const LineHeightRelative = {
   render: () => html`
 <div nve-layout="column">
@@ -195,6 +238,10 @@ export const LineHeightRelative = {
   `
 }
 
+/**
+ * @summary Displays fixed line height values for precise vertical rhythm control independent of font size changes.
+ * @tags test-case
+ */
 export const LineHeightFixed = {
   render: () => html`
 <div nve-layout="column">

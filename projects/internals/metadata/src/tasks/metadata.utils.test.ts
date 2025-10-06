@@ -1,11 +1,11 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import { getMetadata } from './metadata.utils.js';
 import type { MetadataSummary } from '../types.js';
 
 describe('Metadata', () => {
   let metadata: MetadataSummary;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     metadata = await getMetadata();
   });
 
