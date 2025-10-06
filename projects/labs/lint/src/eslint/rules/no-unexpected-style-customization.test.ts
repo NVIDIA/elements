@@ -63,4 +63,20 @@ describe('noUnexpectedStyleCustomization', () => {
       ]
     });
   });
+
+  it('should allow style attributes on svg elements', () => {
+    tester.run('should allow style attributes on svg elements', rule, {
+      valid: [
+        '<svg style="color: red;"></svg>',
+        `<svg>
+          <g>
+            <line x1="80" y1="50" x2="80" y2="450" stroke="#ccc" stroke-width="2"></line>
+            <text x="70" y="55" text-anchor="end" style="fill: blue;font-size:12px">100%</text>
+          </g>
+        </svg>
+        `
+      ],
+      invalid: []
+    });
+  });
 });

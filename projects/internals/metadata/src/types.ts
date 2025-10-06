@@ -27,6 +27,7 @@ export interface MetadataProject {
   tests: MetadataTestReport;
   types?: MetadataType[];
   elements: MetadataElement[];
+  attributes: MetadataAttribute[];
   tokens?: MetadataToken[];
 }
 
@@ -53,13 +54,23 @@ export interface MetadataElement {
   };
 }
 
+export interface MetadataAttribute {
+  name: string;
+  description: string;
+  example: string;
+  markdown: string;
+  values: {
+    name: string;
+  }[];
+}
+
 export interface MetadataToken {
   name: string;
   value: string;
   description: string;
 }
 
-export type MetadataExampleTag = 'performance' | 'pattern' | 'anti-pattern' | 'test-case';
+export type MetadataExampleTag = 'priority' | 'performance' | 'pattern' | 'anti-pattern' | 'test-case';
 
 export interface MetadataExample {
   id: string;

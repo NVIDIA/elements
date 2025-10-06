@@ -1,4 +1,5 @@
 import { type MetadataExample } from '@nve-internals/metadata';
+import { fuzzyMatch, removeNoiseWords } from '../internal/search.js';
 
 export function isValidExample(example: MetadataExample) {
   return (
@@ -7,7 +8,8 @@ export function isValidExample(example: MetadataExample) {
     !example.tags.includes('anti-pattern') &&
     !example.tags.includes('performance') &&
     !example.tags.includes('test-case') &&
-    !example.element?.includes('internal')
+    !example.element?.includes('internal') &&
+    !example.element?.includes('responsive')
   );
 }
 
@@ -24,25 +26,20 @@ export async function searchExamples(query: string, format: 'markdown' | 'json',
 }
 
 export async function filterExamples(query: string, examples: MetadataExample[]) {
-  // remove noise words
-  const q = query
-    .trim()
-    .toLowerCase()
-    .replaceAll('example', '')
-    .replaceAll('examples', '')
-    .replaceAll('story', '')
-    .replaceAll('stories', '')
-    .replaceAll('pattern', '')
-    .replaceAll('patterns', '');
+  const q = removeNoiseWords(query);
 
   // Assign a relevancy score based on matches in description, element, and id for each word
   const scored = examples.filter(isValidExample).map(example => {
     let score = 0;
+
+    if (example.id === 'Default') score += 1;
+
     for (const word of q.split(/\s+/).filter(Boolean)) {
+      if (example.tags.includes('priority') && word === example.element) score += 6;
       if (example.id.toLowerCase() === word.toLowerCase()) score += 5;
-      if (example.element?.toLowerCase().includes(word)) score += 4;
-      if (example.summary.toLowerCase().includes(word)) score += 3;
-      if (example.description.toLowerCase().includes(word)) score += 2;
+      if (fuzzyMatch(word, [example.element]).length > 0) score += 4;
+      if (fuzzyMatch(word, [example.summary]).length > 0) score += 3;
+      if (fuzzyMatch(word, [example.description]).length > 0) score += 2;
       if (
         example.id.toLowerCase().includes(word) ||
         example.id
@@ -57,23 +54,21 @@ export async function filterExamples(query: string, examples: MetadataExample[])
     return { ...example, _score: score };
   });
 
-  // Filter out stories with no match
-  const filtered = scored.filter(story => story._score > 0);
-
-  // Sort by score descending, then by description length ascending (as a tiebreaker)
-  filtered.sort((a, b) => {
-    if (b._score !== a._score) return b._score - a._score;
-    return a.description.length - b.description.length;
-  });
-
-  // Remove the _score property before returning
-  const result = filtered.slice(0, 5).map(({ _score, ...rest }) => rest);
+  const result = scored
+    .filter(story => story._score > 0) // Filter out stories with no match
+    .sort((a, b) => {
+      // Sort by score descending, then by description length ascending (as a tiebreaker)
+      if (b._score !== a._score) return b._score - a._score;
+      return a.description.length - b.description.length;
+    })
+    .slice(0, 5) // return top 5
+    .map(({ _score, ...rest }) => rest); // Remove the _score property before returning
 
   return result;
 }
 
 export function renderExampleMarkdown(example: Partial<MetadataExample>) {
-  return `${renderExampleHeaderMarkdown(example)}${example.template ? `\n\n` : ''}${example.template ? `\`\`\`html\n${example.template}\n\`\`\`` : ''}`;
+  return `${renderExampleHeaderMarkdown(example)}${example.template ? `\n\n` : ''}${example.template ? `\`\`\`html\n${example.template.trim()}\n\`\`\`` : ''}`;
 }
 
 export function renderExampleHeaderMarkdown(example: Partial<MetadataExample>) {
