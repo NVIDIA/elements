@@ -1,4 +1,4 @@
-import type { MetadataCustomElementsManifestDeclaration } from '../types.js';
+import type { MetadataAttribute, MetadataCustomElementsManifestDeclaration } from '../types.js';
 
 export function getElementChangelog(name: string, changelog: string) {
   const changelogJSON = changelogMarkdownToJSON(changelog);
@@ -144,4 +144,24 @@ ${manifest.cssProperties.map(i => `| ${i.name} | ${i.description ?? ''} |`).join
     : 'No CSS Properties available.'
 }`.trim();
   }
+}
+
+export function attributeMetadataToMarkdown(attribute: MetadataAttribute) {
+  return `
+## ${attribute.name}
+
+${attribute.description}
+
+### Example
+
+${attribute.example ? `\`\`\`html\n${attribute.example.trim()}\n\`\`\`` : 'No example available.'}
+
+### Values
+
+| Attribute | Values |
+| --------- | ------ |
+| \`${attribute.name}\` | ${attribute.values
+    .filter(v => !v.name.includes('|') && !v.name.includes('@') && !v.name.includes('&'))
+    .map(value => '`' + value.name + '`')
+    .join(', ')} |`.trim();
 }

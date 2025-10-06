@@ -181,7 +181,7 @@ function validateDescriptionContext(id, summary, description) {
 }
 
 function validateTagsContext(id, tags) {
-  const allowedTags = ['performance', 'pattern', 'anti-pattern', 'test-case'];
+  const allowedTags = ['priority', 'performance', 'pattern', 'anti-pattern', 'test-case'];
   const invalidTags = tags.filter(tag => !allowedTags.includes(tag));
   if (invalidTags.length > 0) {
     console.error(`Invalid tags for "${id}": ${invalidTags.join(', ')}`);
