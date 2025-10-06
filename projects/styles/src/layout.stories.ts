@@ -2,8 +2,57 @@ import { html } from 'lit';
 
 export default {
   title: 'Styles/Layout',
-  component: 'layout'
+  component: 'nve-layout'
 };
+
+/**
+ * @summary Demonstrates the foundational layout types available via the nve-layout attribute.
+ * @tags priority
+ */
+export const Default = {
+  render: () => html`
+    <section nve-layout="row gap:sm">
+      <div></div>
+      <div></div>
+      <div></div>
+    </section>
+
+    <section nve-layout="column gap:sm">
+      <div></div>
+      <div></div>
+      <div></div>
+    </section>
+
+    <section nve-layout="grid gap:sm span-items:6">
+      <div>columns 1-6</div>
+      <div>columns 7-12</div>
+    </section>
+  `
+}
+
+/**
+ * @summary Demonstrates the gap spacing available via the nve-layout attribute.
+ * @tags priority
+ */
+export const LayoutGap = {
+  render: () => html`
+    <section nve-layout="column gap:xs">
+      ${new Array(2).fill(html`<div></div>\n`)}
+    </section>
+    <section nve-layout="column gap:sm">
+      ${new Array(2).fill(html`<div></div>\n`)}
+    </section>
+    <section nve-layout="column gap:md">
+      ${new Array(2).fill(html`<div></div>\n`)}
+    </section>
+    <section nve-layout="column gap:lg">
+      ${new Array(2).fill(html`<div></div>\n`)}
+    </section>
+    <section nve-layout="column gap:xl">
+      ${new Array(2).fill(html`<div></div>\n`)}
+    </section>
+  `
+}
 
 export const HorizontalAlignLeft = {
   render: () => html`

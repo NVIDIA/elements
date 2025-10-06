@@ -9,7 +9,7 @@ describe('utils', () => {
       template: '<nve-button>Click me</nve-button>',
       summary: 'Basic button example',
       description: '',
-      tags: ['button', 'basic'],
+      tags: [],
       element: 'nve-button'
     },
     {
@@ -17,7 +17,7 @@ describe('utils', () => {
       template: '<nve-button><nve-icon name="star"></nve-icon>Star</nve-button>',
       summary: 'Button with icon example',
       description: '',
-      tags: ['button', 'icon'],
+      tags: [],
       element: 'nve-button'
     },
     {
@@ -25,7 +25,7 @@ describe('utils', () => {
       template: '<nve-old-component>Old</nve-old-component>',
       summary: 'This is deprecated',
       description: '',
-      tags: ['deprecated'],
+      tags: [],
       element: 'nve-old-component',
       deprecated: true
     },
@@ -42,7 +42,7 @@ describe('utils', () => {
       template: '<nve-card>Content</nve-card>',
       summary: 'Card component example',
       description: '',
-      tags: ['card'],
+      tags: [],
       element: 'nve-card'
     }
   ];
@@ -173,7 +173,7 @@ describe('utils', () => {
         template: `<div>Test ${i}</div>`,
         summary: `This is test ${i}`,
         description: '',
-        tags: ['test'],
+        tags: [],
         element: 'div'
       }));
 
@@ -188,7 +188,7 @@ describe('utils', () => {
           template: '<div>Short</div>',
           summary: 'Short',
           description: '',
-          tags: ['test'],
+          tags: [],
           element: 'div'
         },
         {
@@ -196,7 +196,7 @@ describe('utils', () => {
           template: '<div>Long</div>',
           summary: 'This is a very long summary that should come after the short one when scores are equal',
           description: '',
-          tags: ['test'],
+          tags: [],
           element: 'div'
         }
       ];
