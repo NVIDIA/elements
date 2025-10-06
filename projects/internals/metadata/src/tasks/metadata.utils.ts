@@ -15,9 +15,10 @@ import type {
   MetadataUnitTestCoverageSummaryReport,
   MetadataType,
   MetadataElement,
-  MetadataToken
+  MetadataToken,
+  MetadataAttribute
 } from '../types.js';
-import { elementMetadataToMarkdown, getElementChangelog } from '../utils/utils.ts';
+import { attributeMetadataToMarkdown, elementMetadataToMarkdown, getElementChangelog } from '../utils/utils.ts';
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
 
@@ -121,6 +122,19 @@ function getCustomElementsManifest(basePath: string): MetadataCustomElementsMani
     : null;
 }
 
+function getGlobalAttributes(basePath: string): MetadataAttribute[] {
+  const htmlDataPath = new URL(basePath + '/dist/data.html.json', import.meta.url);
+  const globalAttributes: MetadataAttribute[] = existsSync(htmlDataPath)
+    ? (JSON.parse(readFileSync(new URL(htmlDataPath, import.meta.url), 'utf8'))?.globalAttributes ?? [])
+    : [];
+
+  globalAttributes.forEach(attribute => {
+    attribute.markdown = attributeMetadataToMarkdown(attribute);
+  });
+
+  return globalAttributes;
+}
+
 function getLighthouseReport(): MetadataLighthouseReport {
   return JSON.parse(readFileSync(new URL('../../static/lighthouse.json', import.meta.url), 'utf8'));
 }
@@ -216,6 +230,7 @@ async function getProjectMetadata(basePath): Promise<MetadataProject> {
   const changelog = getChangelog(basePath);
   const readme = getReadMe(basePath);
   const customElementsManifest = getCustomElementsManifest(basePath);
+  const attributes = getGlobalAttributes(basePath);
   const tests = getTestCoverage(basePath);
   const ssrReport = getSSRReport(basePath);
   const lighthouseReport = getLighthouseReport();
@@ -252,6 +267,7 @@ async function getProjectMetadata(basePath): Promise<MetadataProject> {
     changelog,
     tests,
     tokens,
+    attributes,
     elements: getElementMetadata(
       packageFile.name,
       changelog,

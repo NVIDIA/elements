@@ -1,5 +1,5 @@
 import type { MetadataSummary } from '@nve-internals/metadata';
-import { fuzzyMatch } from '../internal/utils.js';
+import { fuzzyMatch } from '../internal/search.js';
 
 export function getChangelogs(metadata: MetadataSummary): { [key: string]: string } {
   return Object.keys(metadata.projects)

@@ -2,11 +2,10 @@ import { describe, expect, it } from 'vitest';
 import type { MetadataSummary } from '@nve-internals/metadata';
 import {
   getAvailableAPIs,
-  getChangelogs,
   getPublishedPackageNames,
-  searchChangelogs,
   searchTagNames,
-  searchAPIs
+  searchAPIs,
+  type PartialAPIResult
 } from './utils.js';
 
 describe('getPublishedPackageNames', () => {
@@ -28,7 +27,8 @@ describe('searchTagNames', () => {
   const metadata = {
     projects: {
       '@nvidia-elements/core': {
-        elements: [{ name: 'nve-button' }, { name: 'nve-badge' }, { name: 'nve-grid' }, { name: 'nve-grid-cell' }]
+        elements: [{ name: 'nve-button' }, { name: 'nve-badge' }, { name: 'nve-grid' }, { name: 'nve-grid-cell' }],
+        attributes: []
       }
     }
   } as unknown as MetadataSummary;
@@ -44,46 +44,32 @@ describe('searchTagNames', () => {
   });
 });
 
-describe('getChangelogs', () => {
+describe('searchTagNames - overlapping words', () => {
   const metadata = {
     projects: {
-      '@nvidia-elements/core': { changelog: '1.0.0' },
-      '@nvidia-elements/monaco': { changelog: '1.0.0' },
-      '@nvidia-elements/code': { changelog: '1.0.0' }
+      '@nvidia-elements/core': {
+        elements: [
+          { name: 'nve-card' },
+          { name: 'nve-card-header' },
+          { name: 'nve-card-content' },
+          { name: 'nve-card-footer' },
+          { name: 'nve-accordion' },
+          { name: 'nve-accordion-group' },
+          { name: 'nve-accordion-header' },
+          { name: 'nve-accordion-content' }
+        ],
+        attributes: []
+      }
     }
   } as unknown as MetadataSummary;
 
-  it('should get changelogs', async () => {
-    expect(getChangelogs(metadata)).toEqual({
-      '@nvidia-elements/core': '1.0.0',
-      '@nvidia-elements/monaco': '1.0.0',
-      '@nvidia-elements/code': '1.0.0'
-    });
-  });
-});
-
-describe('searchChangelogs', () => {
-  const metadata = {
-    projects: {
-      '@nvidia-elements/core': { changelog: '1.0.0' },
-      '@nvidia-elements/monaco': { changelog: '1.0.0' },
-      '@nvidia-elements/code': { changelog: '1.0.0' }
-    }
-  } as unknown as MetadataSummary;
-
-  it('should search changelogs', () => {
-    expect(searchChangelogs('monaco', metadata)).toEqual({ '@nvidia-elements/monaco': '1.0.0' });
-    expect(searchChangelogs('elements', metadata)).toEqual({ '@nvidia-elements/core': '1.0.0' });
-    expect(searchChangelogs('code', metadata)).toEqual({ '@nvidia-elements/code': '1.0.0' });
-    expect(searchChangelogs('elements monaco', metadata)).toEqual({
-      '@nvidia-elements/core': '1.0.0',
-      '@nvidia-elements/monaco': '1.0.0'
-    });
-    expect(searchChangelogs('no-match', metadata)).toEqual({
-      '@nvidia-elements/core': '1.0.0',
-      '@nvidia-elements/monaco': '1.0.0',
-      '@nvidia-elements/code': '1.0.0'
-    });
+  it('should search tag names with overlapping words', () => {
+    expect(searchTagNames('nve-card how to use card component with header and content', metadata)).toEqual([
+      'nve-card',
+      'nve-card-header',
+      'nve-card-content',
+      'nve-card-footer'
+    ]);
   });
 });
 
@@ -102,9 +88,9 @@ describe('getAvailableAPIs', () => {
   } as unknown as MetadataSummary;
 
   it('should return list of available elements APIs in JSON', () => {
-    const apis = getAvailableAPIs('json', metadata);
-    expect(apis.length).toEqual(2);
-    expect(apis).toEqual([
+    const apis = getAvailableAPIs('json', metadata) as { elements: PartialAPIResult[]; attributes: PartialAPIResult[] };
+    expect(apis.elements.length).toEqual(2);
+    expect(apis.elements).toEqual([
       { name: 'nve-button', behavior: 'button', description: 'button description' },
       { name: 'nve-badge', behavior: '', description: 'badge description' }
     ]);
@@ -138,9 +124,10 @@ describe('searchElementsAPIs', () => {
   } as unknown as MetadataSummary;
 
   it('should search elements APIs in JSON', () => {
-    expect(searchAPIs('button', 'json', metadata)).toEqual([
-      { tagName: 'nve-button', description: 'button description', deprecated: false }
-    ]);
+    expect(searchAPIs('button', 'json', metadata)).toEqual({
+      elements: [{ tagName: 'nve-button', description: 'button description', deprecated: false }],
+      attributes: []
+    });
   });
 
   it('should search elements APIs in markdown', () => {
@@ -149,13 +136,14 @@ describe('searchElementsAPIs', () => {
   });
 
   it('should search by tag name', () => {
-    expect(searchAPIs('nve-badge', 'json', metadata)).toEqual([
-      { tagName: 'nve-badge', description: 'badge description', deprecated: false }
-    ]);
+    expect(searchAPIs('nve-badge', 'json', metadata)).toEqual({
+      elements: [{ tagName: 'nve-badge', description: 'badge description', deprecated: false }],
+      attributes: []
+    });
   });
 
   it('should return empty array for no matches in JSON', () => {
-    expect(searchAPIs('no-match', 'json', metadata)).toEqual([]);
+    expect(searchAPIs('no-match', 'json', metadata)).toEqual({ elements: [], attributes: [] });
   });
 
   it('should return empty string for no matches in markdown', () => {
@@ -182,25 +170,25 @@ describe('searchElementsAPIs', () => {
       }
     } as unknown as MetadataSummary;
 
-    expect(searchAPIs('deprecated', 'json', metadataWithDeprecated)).toEqual([]);
+    expect(searchAPIs('deprecated', 'json', metadataWithDeprecated)).toEqual({ elements: [], attributes: [] });
   });
 });
 
 describe('Edge cases', () => {
   it('should handle empty metadata for getAvailableAPIs', () => {
     const emptyMetadata = { projects: {} } as unknown as MetadataSummary;
-    expect(getAvailableAPIs('json', emptyMetadata)).toEqual([]);
+    expect(getAvailableAPIs('json', emptyMetadata)).toEqual({ elements: [], attributes: [] });
     expect(getAvailableAPIs('markdown', emptyMetadata)).toBe('');
   });
 
   it('should handle projects with no elements for getAvailableAPIs', () => {
     const metadataNoElements = {
       projects: {
-        '@nvidia-elements/core': { elements: [] }
+        '@nvidia-elements/core': { elements: [], attributes: [] }
       }
     } as unknown as MetadataSummary;
 
-    expect(getAvailableAPIs('json', metadataNoElements)).toEqual([]);
+    expect(getAvailableAPIs('json', metadataNoElements)).toEqual({ elements: [], attributes: [] });
     expect(getAvailableAPIs('markdown', metadataNoElements)).toBe('');
   });
 
@@ -212,21 +200,11 @@ describe('Edge cases', () => {
   it('should handle projects with no elements for searchTagNames', () => {
     const metadataNoElements = {
       projects: {
-        '@nvidia-elements/core': { elements: [] }
+        '@nvidia-elements/core': { elements: [], attributes: [] }
       }
     } as unknown as MetadataSummary;
 
     expect(searchTagNames('query', metadataNoElements)).toEqual([]);
-  });
-
-  it('should handle empty metadata for getChangelogs', () => {
-    const emptyMetadata = { projects: {} } as unknown as MetadataSummary;
-    expect(getChangelogs(emptyMetadata)).toEqual({});
-  });
-
-  it('should handle empty metadata for searchChangelogs', () => {
-    const emptyMetadata = { projects: {} } as unknown as MetadataSummary;
-    expect(searchChangelogs('query', emptyMetadata)).toEqual({});
   });
 
   it('should handle empty metadata for getPublishedPackageNames', () => {

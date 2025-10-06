@@ -1,5 +1,10 @@
-import type { MetadataCustomElementsManifestDeclaration, MetadataSummary } from '@nve-internals/metadata';
-import { fuzzyMatch } from '../internal/utils.js';
+import type {
+  MetadataAttribute,
+  MetadataCustomElementsManifestDeclaration,
+  MetadataSummary
+} from '@nve-internals/metadata';
+import { fuzzyMatch } from '../internal/search.js';
+import { removeNoiseWords } from '../internal/search.js';
 
 export interface PartialAPIResult {
   name: string;
@@ -7,21 +12,29 @@ export interface PartialAPIResult {
   behavior: string;
 }
 
-export function getAvailableAPIs(format: 'markdown' | 'json', metadata: MetadataSummary): PartialAPIResult[] | string {
-  const result = Object.values(metadata.projects)
+export function getAvailableAPIs(
+  format: 'markdown' | 'json',
+  metadata: MetadataSummary
+): { elements: PartialAPIResult[]; attributes: PartialAPIResult[] } | string {
+  const elementsResult = Object.values(metadata.projects)
     .flatMap(i => (i.elements.length ? i.elements : []))
     .filter(e => !e.manifest?.deprecated && e.manifest.description)
     .map(e => ({ name: e.name, description: e.manifest.description, behavior: e.manifest.metadata?.behavior ?? '' }));
+  const elementsMarkdown = elementsResult.map(e => {
+    const behavior = e.behavior ? ` (${e.behavior})` : '';
+    return `## ${e.name}${behavior}\n\n${e.description}`;
+  });
+
+  const attributesResult = Object.values(metadata.projects)
+    .flatMap(i => (i.attributes?.length ? i.attributes : []))
+    .filter(a => a.description)
+    .map(a => ({ name: a.name, description: a.description, behavior: 'attribute' }));
+  const attributesMarkdown = attributesResult.map(a => `## ${a.name} (${a.behavior})\n\n${a.description}`);
 
   if (format === 'markdown') {
-    return result
-      .map(e => {
-        const behavior = e.behavior ? ` (${e.behavior})` : '';
-        return `## ${e.name}${behavior}\n\n${e.description}`;
-      })
-      .join('\n\n---\n\n');
+    return [...elementsMarkdown, ...attributesMarkdown].join('\n\n---\n\n');
   } else if (format === 'json') {
-    return result;
+    return { elements: elementsResult, attributes: attributesResult };
   }
 }
 
@@ -29,37 +42,94 @@ export function searchAPIs(
   query: string,
   format: 'markdown' | 'json',
   metadata: MetadataSummary
-): MetadataCustomElementsManifestDeclaration[] | string {
-  const matches = new Set(searchTagNames(query, metadata));
-  const result = Object.values(metadata.projects)
+): { elements: MetadataCustomElementsManifestDeclaration[]; attributes: MetadataAttribute[] } | string {
+  const q = removeNoiseWords(query.trim().toLowerCase());
+
+  const elementMatches = new Set(searchTagNames(q, metadata));
+  const elements = Object.values(metadata.projects)
     .flatMap(i => (i.elements.length ? i.elements : []))
-    .filter(e => !e.manifest.deprecated && (matches.has(e.name) || matches.has(e.manifest.tagName)));
-  const markdown = result.map(e => e.markdown).join('\n---\n');
-  return format === 'markdown' ? markdown : result.map(e => e.manifest);
+    .filter(e => !e.manifest.deprecated && (elementMatches.has(e.name) || elementMatches.has(e.manifest.tagName)));
+
+  const attributeMatches = new Set(searchAttributes(q, metadata));
+  const attributes = Object.values(metadata.projects)
+    .flatMap(i => (i.attributes?.length ? i.attributes : []))
+    .filter(a => attributeMatches.has(a.name));
+
+  const markdown = [...elements, ...attributes].map(e => e.markdown).join('\n---\n');
+  return format === 'markdown' ? markdown : { elements: elements.map(e => e.manifest), attributes };
 }
 
 export function searchTagNames(query: string, metadata: MetadataSummary): string[] {
-  const elements = Object.values(metadata.projects)
-    .filter(i => i.elements)
-    .flatMap(i => i.elements);
+  const elements = Object.values(metadata.projects).flatMap(i => (i.elements?.length ? i.elements : []));
+
+  const elementNames = elements.map(e => e.name);
+
+  // First, check if any element names are explicitly mentioned in the query
+  const queryLower = query.toLowerCase();
+  const explicitMatches = elementNames.filter(name => queryLower.includes(name));
+
+  // If we have explicit matches, use those; otherwise use fuzzy matching
+  const matches = explicitMatches.length > 0 ? explicitMatches : fuzzyMatch(query, elementNames);
+
+  if (matches.length === 0) {
+    return [];
+  }
+
+  // Group matches by their base component (e.g., nve-card, nve-accordion)
+  const families = new Map<string, Set<string>>();
+
+  for (const match of matches) {
+    // Find the base component name (the part before the first child indicator)
+    // For nve-card-header, the base is nve-card
+    // For nve-card, the base is nve-card
+    let base = match;
+    const parts = match.split('-');
+
+    // Try to find if this is a child element by checking if a parent exists
+    for (let i = parts.length - 1; i >= 2; i--) {
+      const potentialParent = parts.slice(0, i).join('-');
+      if (elementNames.includes(potentialParent)) {
+        base = potentialParent;
+        break;
+      }
+    }
+
+    if (!families.has(base)) {
+      families.set(base, new Set());
+    }
+
+    // Add the base and all its children
+    families.get(base)!.add(base);
+    for (const elementName of elementNames) {
+      if (elementName.startsWith(base + '-')) {
+        families.get(base)!.add(elementName);
+      }
+    }
+  }
+
+  // Flatten the families into a result array, maintaining original order from metadata
+  const result: string[] = [];
+  const seen = new Set<string>();
+
+  for (const family of families.values()) {
+    // Maintain the original order from elementNames instead of sorting
+    for (const elementName of elementNames) {
+      if (family.has(elementName) && !seen.has(elementName)) {
+        result.push(elementName);
+        seen.add(elementName);
+      }
+    }
+  }
+
+  return result;
+}
+
+export function searchAttributes(query: string, metadata: MetadataSummary): string[] {
+  const attributes = Object.values(metadata.projects).flatMap(i => (i.attributes?.length ? i.attributes : []));
   return fuzzyMatch(
     query,
-    elements.map(e => e.name)
+    attributes.map(a => a.name)
   );
-}
-
-export function getChangelogs(metadata: MetadataSummary) {
-  return Object.keys(metadata.projects).reduce((results, project) => {
-    return { ...results, [project]: metadata.projects[project].changelog };
-  }, {});
-}
-
-export function searchChangelogs(query: string, metadata: MetadataSummary) {
-  const changelogs = getChangelogs(metadata);
-  const matches = fuzzyMatch(query, Object.keys(changelogs));
-  return Object.fromEntries(
-    Object.entries(changelogs).filter(([key]) => (matches.length ? matches.includes(key) : true))
-  ) as Record<string, string>;
 }
 
 export interface ElementVersions {
@@ -71,7 +141,10 @@ export interface ElementVersions {
   '@nvidia-elements/behaviors-alpine': string;
   '@nvidia-elements/brand': string;
   '@nvidia-elements/code': string;
+  '@nvidia-elements/cli': string;
+  '@nvidia-elements/lint': string;
   '@nvidia-elements/forms': string;
+  '@nvidia-elements/markdown': string;
   '@nvidia-elements/monaco': string;
 }
 
