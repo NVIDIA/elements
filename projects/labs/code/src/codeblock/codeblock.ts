@@ -45,6 +45,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
    * Programming language to be used to process the codeblock.
    */
   @property({ type: String }) language:
+    | 'bash'
     | 'css'
     | 'go'
     | 'html'
@@ -53,6 +54,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
     | 'markdown'
     | 'python'
     | 'shell'
+    | 'toml'
     | 'typescript'
     | 'xml'
     | 'yaml' = 'shell';
