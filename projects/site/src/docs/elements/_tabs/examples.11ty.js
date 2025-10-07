@@ -49,7 +49,7 @@ export function render(data) {
 
   // Create a JSON string of all story templates for JavaScript to cycle through
   const storyTemplates = stories
-    .filter(story => story.element === componentData.tag)
+    .filter(story => story.element === componentData.tag && !story.tags.includes('test-case') && !story.deprecated)
     .map(story => ({
       ...story,
       template: md.utils.escapeHtml(story.template),

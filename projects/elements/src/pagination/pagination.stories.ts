@@ -67,7 +67,6 @@ export const DisableStep = {
 
 /**
  * @summary Pagination is [form associated component](https://web.dev/more-capable-form-controls)
- * and can be used within FormData.
  */
 export const Forms = {
   render: () => html`

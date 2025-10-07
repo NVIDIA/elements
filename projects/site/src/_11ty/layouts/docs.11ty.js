@@ -88,6 +88,7 @@ export function render(data) {
                 <!-- Component documentation tabs -->
                 ${
                   data.tag &&
+                  !data.page.url.includes('/elements/forms/') &&
                   (!data.page.url.includes('/data-grid/') ||
                     data.page.url.endsWith('/data-grid/') ||
                     data.page.url.endsWith('/data-grid/api/'))

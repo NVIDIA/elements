@@ -14,17 +14,19 @@ const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.
 
 const stories = (await ExamplesService.getAll())
   .filter(s => !s.template?.includes('${'))
-  .map(story => ({
-    id: story.id,
-    story: story.element,
-    summary: story.summary,
-    description: story.description,
-    template: story.template,
-    element: story.element,
-    entrypoint: story.entrypoint,
-    title: camelToKebab(story.id),
-    elementName: story.element?.replace('nve-', ''),
-    permalink: `${story.entrypoint?.replace('.stories.json', '-')}${camelToKebab(story.id)}/`
+  .map(example => ({
+    id: example.id,
+    story: example.element,
+    summary: example.summary,
+    description: example.description,
+    tags: example.tags,
+    deprecated: example.deprecated,
+    template: example.template,
+    element: example.element,
+    entrypoint: example.entrypoint,
+    title: camelToKebab(example.id),
+    elementName: example.element?.replace('nve-', ''),
+    permalink: `${example.entrypoint?.replace('.stories.json', '-')}${camelToKebab(example.id)}/`
   }));
 
 const integrations = {
