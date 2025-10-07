@@ -735,3 +735,161 @@ export const FitText = {
 </section>
 `
 };
+
+/**
+ * @summary Demonstrates hiding of status icon of the control message to be used in form controls.
+ * @tags test-case
+ */
+export const HiddenControlMessageIcon = {
+  render: () => html`
+<style>
+  .hidden-icon::part(icon) {
+    display: none;
+  }
+</style>
+<nve-switch-group style="width: 200px">
+  <nve-switch>
+    <label>default</label>
+    <input type="checkbox" />
+    <nve-control-message class="hidden-icon">hidden icon control message</nve-control-message>
+  </nve-switch>
+  <nve-switch>
+    <label>success</label>
+    <input type="checkbox" />
+    <nve-control-message class="hidden-icon" status="success">hidden icon control message</nve-control-message>
+  </nve-switch>
+  <nve-switch>
+    <label>error</label>
+    <input type="checkbox" />
+    <nve-control-message class="hidden-icon" status="error">hidden icon control message</nve-control-message>
+  </nve-switch>
+  <nve-switch>
+    <label>warning</label>
+    <input type="checkbox" />
+    <nve-control-message class="hidden-icon" status="warning">hidden icon control message</nve-control-message>
+  </nve-switch>
+</nve-switch-group>
+`
+}
+
+/**
+ * @summary Use the prominence muted state to lower visual weight of controls in forms.
+ */
+export const ProminenceMuted = {
+  render: () => html`
+<div nve-layout="row gap:lg">
+  <div nve-layout="column gap:lg pad:lg">
+    <nve-radio-group prominence="muted">
+      <label>label</label>
+      <nve-radio>
+        <label>radio 1</label>
+        <input type="radio" checked />
+      </nve-radio>
+      <nve-radio>
+        <label>radio 2</label>
+        <input type="radio" />
+      </nve-radio>
+      <nve-radio>
+        <label>radio 3</label>
+        <input type="radio" />
+      </nve-radio>
+    </nve-radio-group>
+
+    <nve-checkbox-group prominence="muted">
+      <label>label</label>
+      <nve-checkbox>
+        <label>checkbox 1</label>
+        <input type="checkbox" checked />
+      </nve-checkbox>
+      <nve-checkbox>
+        <label>checkbox 2</label>
+        <input type="checkbox" />
+      </nve-checkbox>
+      <nve-checkbox>
+        <label>checkbox 3</label>
+        <input type="checkbox" />
+      </nve-checkbox>
+    </nve-checkbox-group>
+
+    <nve-switch-group prominence="muted">
+      <label>label</label>
+      <nve-switch>
+        <label>switch 1</label>
+        <input type="checkbox" checked />
+      </nve-switch>
+      <nve-switch>
+        <label>switch 2</label>
+        <input type="checkbox" />
+      </nve-switch>
+      <nve-switch>
+        <label>switch 3</label>
+        <input type="checkbox" />
+      </nve-switch>
+    </nve-switch-group>
+
+    <nve-range prominence="muted">
+      <label>label</label>
+      <input type="range" />
+    </nve-range>
+  </div>
+  <nve-card>
+    <nve-card-content>
+      <div nve-layout="column gap:lg pad:lg">
+        <nve-radio-group prominence="muted">
+          <label>label</label>
+          <nve-radio>
+            <label>radio 1</label>
+            <input type="radio" checked />
+          </nve-radio>
+          <nve-radio>
+            <label>radio 2</label>
+            <input type="radio" />
+          </nve-radio>
+          <nve-radio>
+            <label>radio 3</label>
+            <input type="radio" />
+          </nve-radio>
+        </nve-radio-group>
+
+        <nve-checkbox-group prominence="muted">
+          <label>label</label>
+          <nve-checkbox>
+            <label>checkbox 1</label>
+            <input type="checkbox" checked />
+          </nve-checkbox>
+          <nve-checkbox>
+            <label>checkbox 2</label>
+            <input type="checkbox" />
+          </nve-checkbox>
+          <nve-checkbox>
+            <label>checkbox 3</label>
+            <input type="checkbox" />
+          </nve-checkbox>
+        </nve-checkbox-group>
+
+        <nve-switch-group prominence="muted">
+          <label>label</label>
+          <nve-switch>
+            <label>switch 1</label>
+            <input type="checkbox" checked />
+          </nve-switch>
+          <nve-switch>
+            <label>switch 2</label>
+            <input type="checkbox" />
+          </nve-switch>
+          <nve-switch>
+            <label>switch 3</label>
+            <input type="checkbox" />
+          </nve-switch>
+        </nve-switch-group>
+
+        <nve-range prominence="muted">
+        <label>label</label>
+          <input type="range" />
+        </nve-range>
+      </div>
+    </nve-card-content>
+  </nve-card>
+</div>
+`
+}

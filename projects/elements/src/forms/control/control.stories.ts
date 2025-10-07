@@ -9,9 +9,12 @@ import '@nvidia-elements/core/checkbox/define.js';
 
 export default {
   title: 'Elements/Forms',
-  component: 'forms control'
+  component: 'nve-control'
 }
 
+/**
+ * @tags test-case
+ */
 export const Control = () => {
   return html`
 <nve-control>
@@ -21,6 +24,9 @@ export const Control = () => {
 </nve-control>`;
 };
 
+/**
+ * @tags test-case
+ */
 export const Responsive = () => {
   return html`
   <div nve-layout="column gap:lg" style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal; max-width: 600px;">
@@ -71,6 +77,9 @@ export const Responsive = () => {
   `;
 };
 
+/**
+ * @tags test-case
+ */
 export const ControlLayout = () => {
   return html`
 <style>
@@ -254,6 +263,9 @@ export const ControlLayout = () => {
 </div>`;
 };
 
+/**
+ * @tags test-case
+ */
 export const ControlValidation = () => {
   return html`
 <nve-control>
@@ -264,6 +276,9 @@ export const ControlValidation = () => {
 </nve-control>`;
 }
 
+/**
+ * @tags test-case
+ */
 export const NoLabelControl = () => {
   return html`
 <nve-control>
@@ -271,7 +286,10 @@ export const NoLabelControl = () => {
 </nve-control>`;
 }
 
-export const inlineControl = () => {
+/**
+ * @tags test-case
+ */
+export const InlineControl = () => {
   return html`
 <nve-control>
   <label>enable logging</label>
@@ -279,7 +297,10 @@ export const inlineControl = () => {
 </nve-control>`;
 }
 
-export const controlGroup = () => {
+/**
+ * @tags test-case
+ */
+export const ControlGroup = () => {
   return html`
 <nve-control-group>
   <label>environment</label>
@@ -319,6 +340,9 @@ export const controlGroup = () => {
 `;
 }
 
+/**
+ * @tags test-case
+ */
 export const DateControl = () => {
   return html`
 <nve-control>
@@ -328,6 +352,9 @@ export const DateControl = () => {
 </nve-control>`;
 };
 
+/**
+ * @tags test-case
+ */
 export const TextareaControl = () => {
   return html`
 <nve-control>
@@ -337,6 +364,9 @@ export const TextareaControl = () => {
 </nve-control>`;
 }
 
+/**
+ * @tags test-case
+ */
 export const Datalist = () => {
   return html`
 <nve-control>
@@ -350,35 +380,34 @@ export const Datalist = () => {
 </nve-control>`;
 };
 
+/**
+ * @tags test-case
+ */
 export const Status = () => {
   return html`
-<nve-control>
-  <label>label</label>
-  <input />
-  <nve-control-message>message</nve-control-message>
-</nve-control>
+<div nve-layout="column gap:md">
+  <nve-control>
+    <label>label</label>
+    <input />
+    <nve-control-message>message</nve-control-message>
+  </nve-control>
 
-<br />
+  <nve-control>
+    <label>disabled</label>
+    <input disabled />
+    <nve-control-message>message</nve-control-message>
+  </nve-control>
 
-<nve-control>
-  <label>disabled</label>
-  <input disabled />
-  <nve-control-message>message</nve-control-message>
-</nve-control>
+  <nve-control>
+    <label>success</label>
+    <input />
+    <nve-control-message status="success">message</nve-control-message>
+  </nve-control>
 
-<br />
-
-<nve-control>
-  <label>success</label>
-  <input />
-  <nve-control-message status="success">message</nve-control-message>
-</nve-control>
-
-<br />
-
-<nve-control>
-  <label>error</label>
-  <input />
-  <nve-control-message status="error">message</nve-control-message>
-</nve-control>`;
+  <nve-control>
+    <label>error</label>
+    <input />
+    <nve-control-message status="error">message</nve-control-message>
+  </nve-control>
+</div>`;
 };

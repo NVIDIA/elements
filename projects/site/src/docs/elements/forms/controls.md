@@ -23,6 +23,10 @@ The element breakpoints are based on the available space to the element rather t
 
 {% story '@nvidia-elements/core/forms/control/control.stories.json', 'Responsive' %}
 
+## Prominence Muted
+
+{% story '@nvidia-elements/core/forms/forms.stories.json', 'ProminenceMuted' %}
+
 ## Custom Controls
 
 Custom inputs can be used and leverage the same form layouts and validation statuses as the built in controls.
