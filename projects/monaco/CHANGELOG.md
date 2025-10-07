@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.2.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.4...@nvidia-elements/monaco-v1.2.5) (2025-10-07)
+
+
+### Bug Fixes
+
+* **monaco:** avoid unnecessary problems re-rendering ([1c28ed8](https://github.com/NVIDIA/elements/commit/1c28ed865d03b73428449c5d845bbd1cd3ac4e08))
+
 ## [@nvidia-elements/monaco-v1.2.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.3...@nvidia-elements/monaco-v1.2.4) (2025-10-02)
 
 
