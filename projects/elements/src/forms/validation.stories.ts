@@ -11,11 +11,15 @@ import '@nvidia-elements/core/password/define.js';
 
 export default {
   title: 'Elements/Forms',
-  component: 'forms validation'
+  component: 'forms'
 };
 
-export const Validation = () => {
-  return html`
+/**
+ * @summary Real-time validation with contextual error messages and disabled submit until form is valid.
+ */
+export const Validation = {
+  render() {
+    return html`
 <form id="validation" nve-layout="column gap:md" style="max-width: 350px;">
   <nve-input>
     <label>email</label>
@@ -53,11 +57,15 @@ export const Validation = () => {
     form.querySelector('nve-button').disabled = form.matches(':invalid');
   });
 </script>
-`;
+    `
+  }
 }
 
-export const ValidationErrorGroup = () => {
-  return html`
+/**
+ * @summary Grouped error display showing all validation issues together after submission attempt.
+ */
+export const ValidationErrorGroup = {
+  render: () => html`
 <form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
   <nve-input status="error">
     <label>email</label>
@@ -78,11 +86,15 @@ export const ValidationErrorGroup = () => {
     <nve-alert>password required</nve-alert>
   </nve-alert-group>
 </form>
-`;
+  `
 }
 
-export const ValidationSuccessGroup = () => {
-  return html`
+/**
+ * @summary Success feedback with positive confirmation messages for valid input and successful form submission.
+ */
+export const ValidationSuccessGroup = {
+  render: () => {
+    return html`
 <form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
   <nve-input>
     <label>username</label>
@@ -101,11 +113,16 @@ export const ValidationSuccessGroup = () => {
     <nve-alert closable>account created</nve-alert>
   </nve-alert-group>
 </form>
-`;
+`
+  }
 }
 
-export const ValidationReset = () => {
-  return html`
+/**
+ * @summary Form reset functionality allowing users to clear individual fields or reset the entire form.
+ */
+export const ValidationReset = {
+  render: () => {
+    return html`
 <form nve-layout="column gap:md" style="max-width: 350px;">
   <nve-input>
     <label>email</label>
@@ -133,7 +150,8 @@ export const ValidationReset = () => {
   resetForm.addEventListener('click', e => form.reset());
   form.addEventListener('reset', e => console.log(e));
 </script>
-`;
+`
+  }
 }
 
 
@@ -188,6 +206,10 @@ export class AppLogin extends LitElement {
   }
 }
 
+/**
+ * @summary Forms can be used with LitElement
+ * @tags test-case
+ */
 export const LitForms = {
   render: () => html`<app-login></app-login>`
 }

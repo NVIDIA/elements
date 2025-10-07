@@ -6,9 +6,9 @@ import '@nvidia-elements/core/menu/define.js';
 import '@nvidia-elements/core/logo/define.js';
 import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/drawer/define.js';
-import '@nvidia-elements/core/panel/define.js';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/tooltip/define.js';
+import '@nvidia-elements/core/page/define.js';
 
 export default {
   title: 'Elements/Menu',
@@ -194,9 +194,18 @@ export const Complex = {
  */
 export const VerticalNavigationDrawer = {
   render: () => html`
-  <div nve-layout="column align:stretch full">
-    <nve-drawer position="right" size="sm" modal closable>
-      <nve-drawer-header>Applications</nve-drawer-header>
+  <nve-page>
+    <nve-page-header>
+      <nve-logo slot="prefix" size="sm"></nve-logo>
+      <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
+    </nve-page-header>
+    <main nve-layout="column gap:md pad:md">
+      <nve-button popovertarget="menu-drawer">toggle drawer</nve-button>
+    </main>
+    <nve-drawer position="right" size="sm" modal closable id="menu-drawer">
+      <nve-drawer-header>
+      <h3 nve-text="heading">Drawer</h3>
+      </nve-drawer-header>
       <nve-drawer-content>
         <nve-menu>
           <nve-menu-item>item 1</nve-menu-item>
@@ -206,15 +215,7 @@ export const VerticalNavigationDrawer = {
         </nve-menu>
       </nve-drawer-content>
     </nve-drawer>
-    <nve-card style="height: 400px">
-      <nve-card-header>
-        <div slot="title">Header</div>
-      </nve-card-header>
-      <nve-card-content>
-        <p nve-text="body">Content</p>
-      </nve-card-content>
-    </nve-card>
-  </div>
+  </nve-page>
   `
 };
 
@@ -224,29 +225,28 @@ export const VerticalNavigationDrawer = {
  */
 export const VerticalNavigationPanel = {
   render: () => html`
-  <div nve-layout="row gap:md align:stretch">
-    <nve-card>
-      <nve-card-header>
-        <div slot="title">Header</div>
-      </nve-card-header>
-      <nve-card-content>
-        <p nve-text="body">Content</p>
-      </nve-card-content>
-    </nve-card>
-    <nve-panel side="right" expanded closable style="max-width:280px; height:500px">
-      <nve-panel-header>
-        <h3 slot="title">Applications</h3>
-      </nve-panel-header>
-      <nve-panel-content>
-        <nve-menu>
-          <nve-menu-item>item 1</nve-menu-item>
-          <nve-menu-item current="page">item 2</nve-menu-item>
-          <nve-menu-item>item 3</nve-menu-item>
-          <nve-menu-item>item 4</nve-menu-item>
-        </nve-menu>
-      </nve-panel-content>
-    </nve-panel>
-  </div>
+<nve-page>
+  <nve-page-header>
+    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
+  </nve-page-header>
+  <nve-page-panel slot="left" expanded style="max-width:280px">
+    <nve-page-panel-header>
+      <h3 nve-text="heading">Drawer</h3>
+    </nve-page-panel-header>
+    <nve-page-panel-content>
+      <nve-menu>
+        <nve-menu-item>item 1</nve-menu-item>
+        <nve-menu-item current="page">item 2</nve-menu-item>
+        <nve-menu-item>item 3</nve-menu-item>
+        <nve-menu-item>item 4</nve-menu-item>
+      </nve-menu>
+    </nve-page-panel-content>
+  </nve-page-panel>
+  <main nve-layout="column gap:md pad:md">
+    <p nve-text="body">Content</p>
+  </main>
+</nve-page>
   `
 };
 
