@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.1.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.3...@nvidia-elements/cli-v0.1.4) (2025-10-07)
+
+
+### Bug Fixes
+
+* **labs-cli:** update status completion message ([b6e1f08](https://github.com/NVIDIA/elements/commit/b6e1f08fc38904b60b5469b2316d9d94d37fda53))
+
 ## [@nvidia-elements/cli-v0.1.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.2...@nvidia-elements/cli-v0.1.3) (2025-09-29)
 
 
