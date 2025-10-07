@@ -37,6 +37,9 @@ export class ControlGroup extends LitElement {
     | 'horizontal'
     | 'horizontal-inline';
 
+  /** Set the visual prominence of the control group */
+  @property({ type: String, reflect: true }) prominence: 'muted';
+
   get label() {
     return this.querySelector?.<HTMLLabelElement>('label');
   }
