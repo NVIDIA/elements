@@ -488,6 +488,12 @@ describe('problems-format', () => {
       ]);
     });
 
+    it('should not decorate or throw if provided an empty string', () => {
+      model.setValue('');
+      expect(lineDecorationsCollectionSetSpy).not.toHaveBeenCalled();
+      expect(() => decorator.decorateLines(model)).not.toThrow();
+    });
+
     it('should throw if provided an invalid file line', () => {
       // prettier-ignore
       model.setValue(`\
