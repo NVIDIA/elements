@@ -67,6 +67,9 @@ export class Control extends LitElement {
   /** Enables internal string values to be updated for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
+  /** Set the visual prominence of the control */
+  @property({ type: String, reflect: true }) prominence: 'muted';
+
   get #label() {
     return this.shadowRoot
       ?.querySelector<HTMLSlotElement>('slot[name="label"]')

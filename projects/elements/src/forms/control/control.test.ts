@@ -102,6 +102,13 @@ describe(Control.metadata.tag, () => {
   it('should not apply custom control style state if slotted input is a native input type', () => {
     expect(getComputedStyle(element).getPropertyValue('--control-type')).toBe('');
   });
+
+  it('should reflect prominence attribute', async () => {
+    expect(element.getAttribute('prominence')).toBe(null);
+    element.prominence = 'muted';
+    await elementIsStable(element);
+    expect(element.getAttribute('prominence')).toBe('muted');
+  });
 });
 
 describe(Control.metadata.tag, () => {
