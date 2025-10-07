@@ -45,11 +45,6 @@
   position: relative;
 }
 
-:host(:state(disabled):state(checked)) [input] slot {
-  --anchor-background: var(--nve-sys-interaction-disabled-background);
-  --background: var(--nve-sys-interaction-disabled-color);
-}
-
 [input] slot::after {
   border-radius: var(--anchor-border-radius);
   background: var(--anchor-background);

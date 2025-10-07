@@ -38,8 +38,10 @@
 :host(:state(disabled)) ::slotted(nve-control-message:not([status])),
 :host(:state(disabled)) ::slotted(nve-control-message:not([status])) {
   --cursor: not-allowed;
-  --color: var(--nve-sys-text-muted-color);
-  --opacity: 0.9;
+}
+
+:host(:state(disabled)) {
+  --opacity: var(--nve-ref-opacity-500);
 }
 
 :host(:state(invalid)) ::slotted(nve-control-message:not([error]):not([status])) {
@@ -77,10 +79,11 @@
 
 [input] {
   cursor: var(--cursor);
+  min-height: var(--control-height);
+  opacity: var(--opacity);
   grid-area: input;
   display: flex;
   line-height: 1;
-  min-height: var(--control-height);
 }
 
 :host([nve-control='inline']) {
@@ -115,7 +118,6 @@ slot[name='messages'] {
 }
 
 [internal-host] {
-  opacity: var(--opacity);
   display: grid;
   width: 100%;
   gap: var(--nve-ref-space-xs);

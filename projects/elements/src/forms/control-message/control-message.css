@@ -31,3 +31,7 @@ nve-icon {
 :host([error]) {
   --color: var(--nve-sys-support-danger-emphasis-color);
 }
+
+:host([status='muted']) {
+  --color: var(--nve-sys-text-muted-color);
+}

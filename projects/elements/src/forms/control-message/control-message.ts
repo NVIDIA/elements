@@ -50,7 +50,7 @@ export class ControlMessage extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <nve-icon name=${this.error ? statusIcons.error : statusIcons[this.status]}></nve-icon>
+        <slot name="icon" part="icon"><nve-icon name=${this.error ? statusIcons.error : statusIcons[this.status]}></nve-icon></slot>
         <slot></slot>
       </div>
     `;
