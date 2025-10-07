@@ -72,11 +72,11 @@ export const Copy = {
  */
 export const Code = {
   render: () => html`
-<nve-codeblock language="typescript"></nve-codeblock>
+<nve-codeblock language="typescript" id="code-property"></nve-codeblock>
 <script type="module">
   import '@nvidia-elements/code/codeblock/define.js';
   import '@nvidia-elements/code/codeblock/languages/typescript.js';
-  const codeblock = document.querySelector('nve-codeblock');
+  const codeblock = document.querySelector('nve-codeblock#code-property');
   codeblock.code = 'console.log("hello, world!")';
 </script>
 `
