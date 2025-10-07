@@ -34,10 +34,3 @@ nve-file > input::file-selector-button:active {
   --color: var(--nve-sys-interaction-active-color);
   --background: var(--nve-sys-interaction-background);
 }
-
-/* mlv-file > input::file-selector-button:disabled,
-nve-file > input::file-selector-button:disabled {
-  --color: var(--nve-sys-interaction-disabled-color);
-  --background: var(--nve-sys-interaction-disabled-background);
-  --cursor: not-allowed;
-} */

@@ -115,14 +115,6 @@
   background: var(--check-color);
 }
 
-:host(:state(disabled)) {
-  --background: var(--nve-sys-interaction-disabled-background);
-}
-
-:host(:state(checked):state(disabled)) {
-  --background: var(--nve-sys-interaction-disabled-color);
-}
-
 :host(:state(indeterminate)) {
   --background: var(--border-color);
 }

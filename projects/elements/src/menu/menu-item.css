@@ -11,6 +11,7 @@
   --line-height: 0;
   --cursor: pointer;
   --text-transform: capitalize;
+  --opacity: 1;
   contain: layout;
   content-visibility: auto;
   contain-intrinsic-size: auto var(--min-height, initial);
@@ -30,6 +31,7 @@
   cursor: var(--cursor);
   text-transform: var(--text-transform);
   outline-offset: calc(-1 * var(--nve-ref-size-50));
+  opacity: var(--opacity);
   position: relative;
   display: flex;
   align-items: center;
@@ -53,8 +55,8 @@
 }
 
 :host(:state(disabled)) {
+  --opacity: var(--nve-ref-opacity-500);
   --cursor: not-allowed;
-  --color: var(--nve-sys-interaction-disabled-color);
 }
 
 :host(:state(current)) {
