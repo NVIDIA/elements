@@ -218,7 +218,7 @@
       "output": []
     },
     "build": {
-      "command": "playwright-lock 'vite build'",
+      "command": "NODE_ENV=production vite build",
       "files": [
         "../elements/dist/internal/utils/dom.js",
         "../elements/dist/internal/styles/**",
