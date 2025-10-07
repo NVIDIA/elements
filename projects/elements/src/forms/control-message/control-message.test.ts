@@ -63,4 +63,15 @@ describe(ControlMessage.metadata.tag, () => {
       getComputedStyle(globalThis.document.documentElement).getPropertyValue('--nve-sys-support-danger-emphasis-color')
     );
   });
+
+  it('should support a slot for the icon', async () => {
+    const icon = document.createElement(Icon.metadata.tag) as Icon;
+    icon.name = 'information-circle-stroke';
+    icon.slot = 'icon';
+    element.appendChild(icon);
+    await elementIsStable(element);
+    expect(
+      (element.shadowRoot.querySelector('slot[name="icon"]') as HTMLSlotElement).assignedNodes()[0]
+    ).toBeInstanceOf(Icon);
+  });
 });
