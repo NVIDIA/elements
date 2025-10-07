@@ -44,7 +44,7 @@ export function elementSummary(tag) {
     </div>
 
     <div nve-layout="row gap:xxs align:center">
-      ${element.manifest.metadata.behavior === 'form' ? /* html */ `<nve-button size="sm"><nve-icon name="checklist" size="sm"></nve-icon><a href="./docs/foundations/forms/controls/#form-associated-elements" target="_blank">Form Control</a></nve-button>` : ''}
+      ${element.manifest.metadata.behavior === 'form' ? /* html */ `<nve-button size="sm"><nve-icon name="checklist" size="sm"></nve-icon><a href="./docs/elements/forms/controls/#form-associated-elements" target="_blank">Form Control</a></nve-button>` : ''}
 
       <nve-button size="sm" style="margin-left: auto"><nve-icon name="code" size="sm"></nve-icon><a href="${element.manifest.metadata.aria}" target="_blank">Spec</a></nve-button>
 
