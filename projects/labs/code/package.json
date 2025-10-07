@@ -56,6 +56,14 @@
       "types": "./dist/codeblock/define.d.ts",
       "default": "./dist/codeblock/define.js"
     },
+    "./codeblock/languages/bash": {
+      "types": "./dist/codeblock/languages/bash.d.ts",
+      "default": "./dist/codeblock/languages/bash.js"
+    },
+    "./codeblock/languages/bash.js": {
+      "types": "./dist/codeblock/languages/bash.d.ts",
+      "default": "./dist/codeblock/languages/bash.js"
+    },
     "./codeblock/languages/css": {
       "types": "./dist/codeblock/languages/css.d.ts",
       "default": "./dist/codeblock/languages/css.js"
@@ -119,6 +127,14 @@
     "./codeblock/languages/typescript.js": {
       "types": "./dist/codeblock/languages/typescript.d.ts",
       "default": "./dist/codeblock/languages/typescript.js"
+    },
+    "./codeblock/languages/toml": {
+      "types": "./dist/codeblock/languages/toml.d.ts",
+      "default": "./dist/codeblock/languages/toml.js"
+    },
+    "./codeblock/languages/toml.js": {
+      "types": "./dist/codeblock/languages/toml.d.ts",
+      "default": "./dist/codeblock/languages/toml.js"
     },
     "./codeblock/languages/xml": {
       "types": "./dist/codeblock/languages/xml.d.ts",
