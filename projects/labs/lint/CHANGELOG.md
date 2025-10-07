@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.3.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.3.0...@nvidia-elements/lint-v0.3.1) (2025-10-07)
+
+
+### Bug Fixes
+
+* **labs-lint:** eslint unexpected global attribute exception ([48b969a](https://github.com/NVIDIA/elements/commit/48b969ad872afa125477212aaadeec6c19a1efb2))
+
 ## [@nvidia-elements/lint-v0.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.2.1...@nvidia-elements/lint-v0.3.0) (2025-09-30)
 
 
