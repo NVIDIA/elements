@@ -98,7 +98,7 @@ Each layout mode supports spacing, alignment, and responsive behavior through a 
   </nve-alert>
 </nve-alert-group>
 
-The `nve-layout` attribute is designed to be applied to **native HTML elements** rather than Elements components. Use semantic HTML elements like `<section>`, `<main>`, `<nav>`, `<aside>`, or generic containers like `<div>` as your layout containers. Similarly, [form components have built-in layout capabilities](/elements/docs/foundations/forms/#form-layouts).
+The `nve-layout` attribute is designed to be applied to **native HTML elements** rather than Elements components. Use semantic HTML elements like `<section>`, `<main>`, `<nav>`, `<aside>`, or generic containers like `<div>` as your layout containers. Similarly, [form components have built-in layout capabilities](/elements/docs/elements/forms/#form-layouts).
 
 For more details, see our documentation on the [internal-host pattern](/elements/docs/api-design/styles/#internal-host) and [slots](/elements/docs/api-design/slots/) which is used in the development of our library, as well as [MDN docs](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) on the Shadow DOM.
 

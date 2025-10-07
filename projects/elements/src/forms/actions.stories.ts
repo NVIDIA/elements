@@ -9,8 +9,12 @@ export default {
   component: 'nve-input'
 };
 
-export const Actions = () => {
-  return html`
+/**
+ * @summary Input with action buttons for search and clear, providing quick access to common operations.
+ */
+export const Actions = {
+  render: () => {
+    return html`
 <nve-input>
   <label>label</label>
   <nve-icon-button icon-name="search" container="flat" readonly></nve-icon-button>
@@ -18,20 +22,30 @@ export const Actions = () => {
   <nve-icon-button icon-name="cancel" container="flat" aria-label="clear"></nve-icon-button>
   <nve-control-message>message</nve-control-message>
 </nve-input>`
-};
+  }
+}
 
-export const LabelAction = () => {
-  return html`
+/**
+ * @summary Label with an information button to provide contextual help or additional details about the field.
+ */
+export const LabelAction = {
+  render: () => {
+    return html`
 <nve-input>
   <label>label</label>
   <nve-icon-button icon-name="information-circle-stroke" container="flat" aria-label="more details" slot="label"></nve-icon-button>
   <input type="text" />
   <nve-control-message>message</nve-control-message>
 </nve-input>`
-};
+  }
+}
 
-export const PrefixSuffix = () => {
-  return html`
+/**
+ * @summary Input with prefix and suffix buttons to show fixed text elements like URL protocols and domains.
+ */
+export const PrefixSuffix = {
+  render: () => {
+    return html`
 <nve-input>
   <label>label</label>
   <nve-button container="flat" readonly>https://</nve-button>
@@ -39,4 +53,5 @@ export const PrefixSuffix = () => {
   <nve-button container="flat" readonly>.com</nve-button>
   <nve-control-message>message</nve-control-message>
 </nve-input>`
+  }
 }
