@@ -213,6 +213,7 @@ describe('nve-monaco-problems', () => {
   let editor: monaco.editor.IStandaloneCodeEditor;
   let model: monaco.editor.ITextModel;
 
+  let setModelValueSpy: Mock<(value: string) => void>;
   let dispatchEventSpy: Mock<(event: Event) => void>;
 
   beforeEach(async () => {
@@ -228,10 +229,12 @@ describe('nve-monaco-problems', () => {
     editor = editorEl.editor!;
     model = editor.getModel();
 
+    setModelValueSpy = vi.spyOn(model, 'setValue');
     dispatchEventSpy = vi.spyOn(element, 'dispatchEvent');
   });
 
   afterEach(() => {
+    setModelValueSpy.mockRestore();
     dispatchEventSpy.mockRestore();
 
     removeFixture(fixture);
@@ -303,6 +306,20 @@ describe('nve-monaco-problems', () => {
     await elementIsStable(element);
 
     expect(editorEl.shadowRoot.adoptedStyleSheets.length).toBe(initialStyleSheets);
+  });
+
+  it('should not update the editor if the problems are unchanged', async () => {
+    element.problems = problems;
+    await elementIsStable(element);
+    expect(setModelValueSpy).toHaveBeenCalledWith(problemsText);
+
+    setModelValueSpy.mockClear();
+
+    element.problems = [...problems];
+    expect(setModelValueSpy).not.toHaveBeenCalled();
+
+    element.requestUpdate();
+    expect(setModelValueSpy).not.toHaveBeenCalled();
   });
 
   it('should navigate via arrow keys and dispatch relevant events for each row', async () => {
