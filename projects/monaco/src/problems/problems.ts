@@ -1,4 +1,5 @@
 import { html, LitElement } from 'lit';
+import type { PropertyValues } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
@@ -9,6 +10,7 @@ import type { MonacoEditor } from '@nvidia-elements/monaco/editor';
 
 import { EditorDecorator, toProblemsFormat } from '../internal/formats/problems-format.js';
 import type { Problem } from '../internal/types/index.js';
+import { equalsProblems } from '../internal/utils/problem-utils.js';
 
 import styles from './problems.css?inline';
 import loadingStyles from '../internal/base/loading.css?inline';
@@ -34,6 +36,10 @@ const EDITOR_OPTIONS: monaco.editor.IEditorOptions & monaco.editor.IGlobalEditor
   showFoldingControls: 'always',
   tabSize: 2
 };
+
+function hasProblemsChanged(value: Problem[], oldValue: Problem[] | undefined) {
+  return !equalsProblems(value, oldValue ?? []);
+}
 
 /**
  * @element nve-monaco-problems
@@ -62,13 +68,12 @@ export class MonacoProblems extends LitElement {
     version: '0.0.0'
   };
 
-  @property({ type: Array })
+  @property({ type: Array, hasChanged: hasProblemsChanged })
   get problems(): Problem[] {
     return this.#problems;
   }
   set problems(value: Problem[]) {
     this.#problems = value;
-    this.#applyProblems();
   }
   #problems: Problem[] = [];
 
@@ -96,6 +101,12 @@ export class MonacoProblems extends LitElement {
         </slot>
       </div>
     `;
+  }
+
+  updated(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has('problems')) {
+      this.#applyProblems();
+    }
   }
 
   #injectStyles = async (editorEl: MonacoEditor) => {
@@ -126,7 +137,7 @@ export class MonacoProblems extends LitElement {
 
     this.#setupEditor(this.#editor);
 
-    this.#applyProblems();
+    this.requestUpdate('problems');
 
     this._internals.states.add('ready');
     this.dispatchEvent(new CustomEvent('ready', { bubbles: true }));
