@@ -62,8 +62,7 @@ svg {
 }
 .c1,
 .c2,
-.c3,
-.c4 {
+.c3 {
   opacity: 0;
   animation: pulse 2s ease-out infinite;
   animation-duration: var(--animation-duration);
@@ -82,11 +81,6 @@ svg {
   animation-delay: 1.5s;
 }
 
-.c4 {
-  transform: scale(0.5);
-  animation-delay: 2s;
-}
-
 @keyframes pulse {
   0% {
     transform: scale(0.5);
@@ -98,7 +92,7 @@ svg {
   }
 
   70% {
-    opacity: var(--nve-ref-opacity-900);
+    opacity: calc(var(--nve-ref-opacity-150) * 0.9);
   }
 
   100% {
