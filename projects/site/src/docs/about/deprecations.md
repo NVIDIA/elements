@@ -242,12 +242,12 @@ With the deprecation of directional icons the icon button now requires a explici
 
 ## Testing <nve-badge status="warning">1.0 deprecation</nve-badge>
 
-The exported test utilities from `@nvidia-elements/core/test` are now supported in a dedicated testing package `@nvidia-elements/testing`.
+The exported test utilities from `@elements/elements/test` are now supported in a dedicated testing package `@nvidia-elements/testing`.
 
 <nve-alert status="danger">Before:</nve-alert>
 
 ```typescript
-import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@nvidia-elements/core/test';
+import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@elements/elements/test';
 ```
 
 <nve-alert status="success">After:</nve-alert>

@@ -79,7 +79,6 @@
 }
 
 :host(:state(checked)) {
-  --nve-sys-interaction-state-lightness: 0%;
   --border-color: var(--accent-color);
 }
 

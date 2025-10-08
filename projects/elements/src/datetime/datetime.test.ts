@@ -13,7 +13,7 @@ describe(Datetime.metadata.tag, () => {
     fixture = await createFixture(html`
       <nve-datetime>
         <label>label</label>
-        <input type="datetime" />
+        <input type="datetime-local" />
       </nve-datetime>
     `);
     element = fixture.querySelector(Datetime.metadata.tag);

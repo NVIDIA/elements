@@ -25,7 +25,6 @@ function template(theme: '' | 'dark' = '') {
       <nve-card-header>
         <h2 nve-text="heading">•︎•︎•︎•︎•︎•︎</h2>
         <h3 nve-text="heading xs muted">•︎•︎•︎•︎•︎•︎</h3>
-        <nve-icon-button slot="header-action" icon-name="more-actions" container="flat"></nve-icon-button>
       </nve-card-header>
       <nve-card-content>
         •︎•︎•︎
@@ -39,7 +38,6 @@ function template(theme: '' | 'dark' = '') {
       <nve-card-header>
         <h2 nve-text="heading">•︎•︎•︎•︎•︎•︎</h2>
         <h3 nve-text="heading xs muted">•︎•︎•︎•︎•︎•︎</h3>
-        <nve-icon-button slot="header-action" icon-name="more-actions" container="flat"></nve-icon-button>
       </nve-card-header>
       <nve-card-content>
         •︎•︎•︎
