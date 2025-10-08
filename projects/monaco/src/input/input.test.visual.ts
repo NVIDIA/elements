@@ -19,6 +19,10 @@ const jsonSchema = `{
   "required": ["name", "version"]
 }`;
 
+export function readyCheck(evaluate: (fn: () => boolean) => Promise<boolean>) {
+  return evaluate(() => document.querySelectorAll('nve-monaco-input:state(ready)').length === 5);
+}
+
 export function template() {
   return /* html */ `
   <div nve-layout="column gap:md">
