@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.2.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.5...@nvidia-elements/monaco-v1.2.6) (2025-10-08)
+
+
+### Bug Fixes
+
+* **monaco:** fix flakey visual test, consistent ready state ([8a291e0](https://github.com/NVIDIA/elements/commit/8a291e0a76fe0e8d62f4fd04a274470fd4f8cd9e))
+
 ## [@nvidia-elements/monaco-v1.2.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.4...@nvidia-elements/monaco-v1.2.5) (2025-10-07)
 
 
