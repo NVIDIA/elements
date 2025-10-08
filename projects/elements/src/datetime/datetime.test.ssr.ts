@@ -9,7 +9,7 @@ describe(Datetime.metadata.tag, () => {
     const result = await ssrRunner.render(html`
       <nve-datetime>
         <label>label</label>
-        <input type="datetime" />
+        <input type="datetime-local" />
       </nve-datetime>  
     `);
     expect(result.includes('shadowroot="open"')).toBe(true);

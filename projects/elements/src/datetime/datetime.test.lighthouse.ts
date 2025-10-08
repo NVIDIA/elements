@@ -6,7 +6,7 @@ describe('datetime lighthouse report', () => {
     const report = await lighthouseRunner.getReport('nve-datetime', /* html */`
       <nve-datetime>
         <label>label</label>
-        <input type="datetime" />
+        <input type="datetime-local" />
       </nve-datetime>
       <script type="module">
         import '@nvidia-elements/core/datetime/define.js';

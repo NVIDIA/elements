@@ -8,11 +8,7 @@ describe(Card.metadata.tag, () => {
   it('should pass baseline ssr check', async () => {
     const result = await ssrRunner.render(html`
       <nve-card>
-        <nve-card-header>
-          <h2 slot="title">title</h2>
-          <h3 slot="subtitle">subtitle</h3>
-          <button slot="header-action">header action</button>
-        </nve-card-header>
+        <nve-card-header>heading</nve-card-header>
         <nve-card-content>content</nve-card-content>
         <nve-card-footer>footer</nve-card-footer>
       </nve-card>

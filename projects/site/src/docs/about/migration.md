@@ -34,7 +34,11 @@ pnpm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/co
 @import '@elements/elements/index.css';
 
 /* after */
-@import '@nvidia-elements/core/index.css';
+@import '@nvidia-elements/themes/fonts/inter.css';
+@import '@nvidia-elements/themes/index.css';
+@import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/styles/typography.css';
+@import '@nvidia-elements/styles/layout.css';
 ```
 
 ```typescript
