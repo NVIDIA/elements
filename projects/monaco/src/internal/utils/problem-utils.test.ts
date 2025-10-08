@@ -4,39 +4,41 @@ import type { Problem } from '../types/index.js';
 import { equalsProblem, equalsProblems } from './problem-utils.js';
 
 const problem1: Problem = {
+  owner: 'typescript',
   resource: 'file:///src/components/Button.ts',
-  message: "'index' is declared but its value is never read.",
   severity: ProblemSeverity.Warning,
+  message: "'index' is declared but its value is never read.",
+  source: 'ts',
+  code: '6133',
   startLineNumber: 16,
   startColumn: 5,
   endLineNumber: 16,
-  endColumn: 10,
-  source: 'ts(6133)',
-  owner: 'typescript'
+  endColumn: 10
 };
 
 const problem2: Problem = {
+  owner: 'typescript',
   resource: 'file:///src/components/Button.ts',
-  message: `Type '"success"' is not assignable to type 'number'.`,
   severity: ProblemSeverity.Error,
+  message: `Type '"success"' is not assignable to type 'number'.`,
+  source: 'ts',
+  code: '2322',
   startLineNumber: 22,
   startColumn: 8,
   endLineNumber: 22,
-  endColumn: 24,
-  source: 'ts(2322)',
-  owner: 'typescript'
+  endColumn: 24
 };
 
 const problem3: Problem = {
+  owner: 'css',
   resource: 'file:///src/utils/styles.css',
-  message: "Unknown property 'colr'. Did you mean 'color'?",
   severity: ProblemSeverity.Info,
+  message: "Unknown property 'colr'. Did you mean 'color'?",
+  source: 'css',
   startLineNumber: 40,
   startColumn: 2,
   endLineNumber: 40,
-  endColumn: 6,
-  source: 'css',
-  owner: 'css'
+  endColumn: 6
 };
 
 describe('equalsProblem', () => {
@@ -53,7 +55,8 @@ describe('equalsProblem', () => {
     ['resource', { resource: 'file:///src/utils/helper.ts' }],
     ['severity', { severity: ProblemSeverity.Error }],
     ['message', { message: 'Different error message' }],
-    ['source', { source: 'ts(2322)' }],
+    ['source', { source: 'eslint' }],
+    ['code', { code: 'no-var' }],
     ['startLineNumber', { startLineNumber: 20 }],
     ['startColumn', { startColumn: 8 }],
     ['endLineNumber', { endLineNumber: 17 }],
@@ -67,18 +70,24 @@ describe('equalsProblem', () => {
 
   it('should handle problems without source property', () => {
     const problemWithoutSource: Problem = {
-      resource: 'file:///src/test.ts',
-      message: 'Some error',
-      severity: ProblemSeverity.Error,
-      startLineNumber: 1,
-      startColumn: 1,
-      endLineNumber: 1,
-      endColumn: 5,
-      owner: 'custom'
+      ...problem1,
+      source: undefined
     };
 
+    expect(equalsProblem(problemWithoutSource, problem1)).toBe(false);
     const sameProblem: Problem = { ...problemWithoutSource };
     expect(equalsProblem(problemWithoutSource, sameProblem)).toBe(true);
+  });
+
+  it('should handle problems without code property', () => {
+    const problemWithoutCode: Problem = {
+      ...problem1,
+      code: undefined
+    };
+
+    expect(equalsProblem(problemWithoutCode, problem1)).toBe(false);
+    const sameProblem: Problem = { ...problemWithoutCode };
+    expect(equalsProblem(problemWithoutCode, sameProblem)).toBe(true);
   });
 });
 

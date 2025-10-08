@@ -130,7 +130,8 @@ const problems: Problem[] = [
     startColumn: 5,
     endLineNumber: 16,
     endColumn: 10,
-    source: 'ts(6133)',
+    source: 'ts',
+    code: '6133',
     owner: 'typescript'
   },
   {
@@ -141,7 +142,8 @@ const problems: Problem[] = [
     startColumn: 8,
     endLineNumber: 22,
     endColumn: 24,
-    source: 'ts(2322)',
+    source: 'ts',
+    code: '2322',
     owner: 'typescript'
   },
   {
@@ -178,19 +180,23 @@ const problems: Problem[] = [
     endLineNumber: 57,
     endColumn: 4,
     source: 'eslint',
+    code: {
+      value: 'no-var',
+      target: 'https://eslint.org/docs/rules/no-var'
+    },
     owner: 'eslint'
   }
 ];
 
 const problemsText = `\
-"Button.ts" "/src/components/Button.ts" 3
-	error "Unable to resolve signature of class decorator when called as an expression." "ts(1238)" [Ln 8, Col 2]
-	error "Type '\\"success\\"' is not assignable to type 'number'." "ts(2322)" [Ln 22, Col 8]
-	warning "'index' is declared but its value is never read." "ts(6133)" [Ln 16, Col 5]
-"formatDate.ts" "/src/utils/formatDate.ts" 1
-	hint "Convert 'var' to 'let' or 'const'." "eslint" [Ln 57, Col 1]
-"styles.css" "/src/utils/styles.css" 1
-	info "Unknown property 'colr'. Did you mean 'color'?" "css" [Ln 40, Col 2]`;
+Button.ts /src/components/Button.ts 3
+  error Unable to resolve signature of class decorator when called as an expression. ts(1238) [Ln 8, Col 2]
+  error Type '"success"' is not assignable to type 'number'. ts(2322) [Ln 22, Col 8]
+  warning 'index' is declared but its value is never read. ts(6133) [Ln 16, Col 5]
+formatDate.ts /src/utils/formatDate.ts 1
+  hint Convert 'var' to 'let' or 'const'. eslint(no-var) [Ln 57, Col 1]
+styles.css /src/utils/styles.css 1
+  info Unknown property 'colr'. Did you mean 'color'? css [Ln 40, Col 2]`;
 
 const expectedRows = [
   { type: 'file' },
