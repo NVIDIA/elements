@@ -191,9 +191,8 @@ export const LegacyTrigger = {
 
   <nve-accordion behavior-expand>
     <nve-accordion-header>
-      <div slot="title">Heading</div>
+      <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
     </nve-accordion-header>
-
     <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
   </nve-accordion>
 </nve-dialog>
@@ -227,9 +226,8 @@ export const LegacyBehaviorTrigger = {
 
   <nve-accordion behavior-expand>
     <nve-accordion-header>
-      <div slot="title">Heading</div>
+      <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
     </nve-accordion-header>
-
     <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
   </nve-accordion>
 </nve-dialog>

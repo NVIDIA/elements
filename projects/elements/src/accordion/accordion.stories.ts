@@ -105,7 +105,7 @@ export const CustomIconButtonInteractive = {
 <nve-accordion id="custom-icon-button-accordion">
   <nve-icon-button slot="icon-button" icon-name="add" size="sm" container="flat"></nve-icon-button>
   <nve-accordion-header>
-    <div slot="title">Heading</div>
+    <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
   </nve-accordion-header>
   <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
 </nve-accordion>
@@ -284,9 +284,11 @@ export const NestedOpenEvent = {
 };
 
 /**
- * @summary Demonstrates deprecated slot patterns for backward compatibility reference
- */
+ * @summary Demonstrates deprecated slot patterns for backward compatibility reference.
+ * @tags test-case
+*/
 export const DeprecatedSlots = {
+  /* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
   render: () => html`
     <nve-accordion behavior-expand>
       <nve-accordion-header>
