@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.43.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.43.0...@nvidia-elements/core-v1.43.1) (2025-10-08)
+
+
+### Bug Fixes
+
+* **elements:** nve-pulse opacity effect is visually broken ([169c1b5](https://github.com/NVIDIA/elements/commit/169c1b584ce939a5f7cabbdd804759a83113ca15))
+
 ## [@nvidia-elements/core-v1.43.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.42.0...@nvidia-elements/core-v1.43.0) (2025-10-08)
 
 
