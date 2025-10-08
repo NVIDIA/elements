@@ -45,6 +45,10 @@ export class VisualRunner {
       await this.#runner.page.waitForLoadState('networkidle');
     }
 
+    if (options.waitFor) {
+      await options.waitFor(this.#runner.page.waitForFunction.bind(this.#runner.page));
+    }
+
     const baselinePath = `./.${RUNNER_ID}/${name}.png`;
 
     if (fs.existsSync(baselinePath)) {
