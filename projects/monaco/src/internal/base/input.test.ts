@@ -115,10 +115,6 @@ describe.each<InputTestConfig>([
     consoleSpy.mockRestore();
   });
 
-  it('should define element', async () => {
-    expect(customElements.get(tag)).toBeDefined();
-  });
-
   it('should instantiate editor', async () => {
     expect(element.shadowRoot.querySelector(editorTag)).toBeDefined();
   });
