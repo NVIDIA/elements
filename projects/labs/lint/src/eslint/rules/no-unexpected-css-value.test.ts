@@ -215,12 +215,35 @@ describe('noUnexpectedCssValue', () => {
           ':root { color: blue; }' // ignore irrelevant properties
         ],
         invalid: [
+          // unknown value assignment
           {
-            code: ':root { font-weight: bold; }',
+            code: ':root { font-weight: 950; }',
             errors: [
               {
                 messageId: 'unexpected-css-value',
-                data: { value: 'bold', unit: '', property: 'font-weight', alternate: 'var(--nve-ref-font-weight-*)' }
+                data: { value: '950', unit: '', property: 'font-weight', alternate: 'var(--nve-ref-font-weight-*)' }
+              }
+            ]
+          },
+          // known value assignment
+          {
+            code: ':root { font-weight: bold; }',
+            output: ':root { font-weight: var(--nve-ref-font-weight-bold); }',
+            errors: [
+              {
+                messageId: 'unexpected-css-value',
+                data: { value: 'bold', unit: '', property: 'font-weight', alternate: 'var(--nve-ref-font-weight-bold)' }
+              }
+            ]
+          },
+          // known value assignment
+          {
+            code: ':root { font-weight: 200; }',
+            output: ':root { font-weight: var(--nve-ref-font-weight-light); }',
+            errors: [
+              {
+                messageId: 'unexpected-css-value',
+                data: { value: '200', unit: '', property: 'font-weight', alternate: 'var(--nve-ref-font-weight-light)' }
               }
             ]
           }
@@ -240,12 +263,29 @@ describe('noUnexpectedCssValue', () => {
         ],
         invalid: [
           {
-            code: ':root { line-height: 12px; }',
+            code: ':root { line-height: 16px; }',
+            output: ':root { line-height: var(--nve-ref-font-line-height-400); }',
             errors: [
+              // known value assignment
               {
                 messageId: 'unexpected-css-value',
                 data: {
-                  value: '12',
+                  value: '16',
+                  unit: 'px',
+                  property: 'line-height',
+                  alternate: 'var(--nve-ref-font-line-height-400)'
+                }
+              }
+            ]
+          },
+          {
+            code: ':root { line-height: 10px; }',
+            errors: [
+              // unknown value assignment
+              {
+                messageId: 'unexpected-css-value',
+                data: {
+                  value: '10',
                   unit: 'px',
                   property: 'line-height',
                   alternate: 'var(--nve-ref-font-line-height-*)'
@@ -268,12 +308,24 @@ describe('noUnexpectedCssValue', () => {
           ':root { color: blue; }' // ignore irrelevant properties
         ],
         invalid: [
+          // known value assignment
           {
             code: ':root { opacity: 0.5; }',
+            output: ':root { opacity: var(--nve-ref-opacity-500); }',
             errors: [
               {
                 messageId: 'unexpected-css-value',
-                data: { value: '0.5', unit: '', property: 'opacity', alternate: 'var(--nve-ref-opacity-*)' }
+                data: { value: '0.5', unit: '', property: 'opacity', alternate: 'var(--nve-ref-opacity-500)' }
+              }
+            ]
+          },
+          // unknown value assignment
+          {
+            code: ':root { opacity: 0.55; }',
+            errors: [
+              {
+                messageId: 'unexpected-css-value',
+                data: { value: '0.55', unit: '', property: 'opacity', alternate: 'var(--nve-ref-opacity-*)' }
               }
             ]
           }

@@ -49,28 +49,41 @@ describe('noDeprecatedGlobalAttributes', () => {
       invalid: [
         {
           code: '<html mlv-theme="light"></html>',
+          output: '<html nve-theme="light"></html>',
           errors: [
             {
               messageId: 'unexpected-deprecated-global-attribute',
-              data: { attribute: 'mlv-theme', alternative: 'nve-theme', output: '<html nve-theme="light"></html>' }
+              data: { attribute: 'mlv-theme', alternative: 'nve-theme' }
             }
           ]
         },
         {
           code: '<div mlv-layout="row"></div>',
+          output: '<div nve-layout="row"></div>',
           errors: [
             {
               messageId: 'unexpected-deprecated-global-attribute',
-              data: { attribute: 'mlv-layout', alternative: 'nve-layout', output: '<div nve-layout="row"></div>' }
+              data: { attribute: 'mlv-layout', alternative: 'nve-layout' }
             }
           ]
         },
         {
           code: '<p mlv-text="body"></p>',
+          output: '<p nve-text="body"></p>',
           errors: [
             {
               messageId: 'unexpected-deprecated-global-attribute',
-              data: { attribute: 'mlv-text', alternative: 'nve-text', output: '<p nve-text="body"></p>' }
+              data: { attribute: 'mlv-text', alternative: 'nve-text' }
+            }
+          ]
+        },
+        {
+          code: '<p mlv-text></p>',
+          output: '<p nve-text></p>',
+          errors: [
+            {
+              messageId: 'unexpected-deprecated-global-attribute',
+              data: { attribute: 'mlv-text', alternative: 'nve-text' }
             }
           ]
         }

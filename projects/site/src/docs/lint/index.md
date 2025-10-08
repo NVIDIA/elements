@@ -113,6 +113,12 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-css-imports</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated CSS import paths.</nve-grid-cell>
+    <nve-grid-cell>CSS</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-global-attributes</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of deprecated global utility attributes in HTML.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
@@ -137,8 +143,20 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-slots</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated slot APIs.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-tags</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of deprecated elements/tags</nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated elements/tags.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-slotted-elements</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of missing slotted elements.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
@@ -158,6 +176,12 @@ export default [
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-library-dependencies</code></nve-grid-cell>
     <nve-grid-cell>Disallow incorrect dependency usage of @nve packages in consuming libraries</nve-grid-cell>
     <nve-grid-cell>JSON</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-style-customization</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of style customization in Elements playground template.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
 </nve-grid>

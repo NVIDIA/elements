@@ -1,7 +1,7 @@
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 
-const RESTRICTED_ATTRIBUTES = ['nve-text', 'nve-layout'];
+const RESTRICTED_ATTRIBUTES = ['nve-text', 'nve-layout', 'mlv-text', 'mlv-layout'];
 
 const rule = {
   meta: {

@@ -74,12 +74,16 @@ export default [
 | `@nvidia-elements/lint/no-unknown-css-variable` | Disallow use of unknown --nve-* CSS theme variables. | CSS | `error` |
 | `@nvidia-elements/lint/no-deprecated-css-variable` | Disallow use of deprecated --mlv-* CSS theme variables. | CSS | `error` |
 | `@nvidia-elements/lint/no-deprecated-attributes` | Disallow use of deprecated attributes in HTML | HTML | `error` |
+| `@nvidia-elements/lint/no-deprecated-css-imports` | Disallow use of deprecated CSS import paths. | CSS | `error` |
 | `@nvidia-elements/lint/no-deprecated-global-attributes` | Disallow use of deprecated global utility attributes in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-icon-names` | Disallow use of deprecated icon names | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-popover-attributes` | Disallow use of deprecated popover attributes | HTML | `error` |
+| `@nvidia-elements/lint/no-deprecated-slots` | Disallow use of deprecated slot APIs. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-tags` | Disallow use of deprecated elements/tags | HTML | `error` |
+| `@nvidia-elements/lint/no-missing-slotted-elements` | Disallow use of missing slotted elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attributes` | Disallow use of utility attributes on custom HTML element tags. | HTML | `error` |
 | `@nvidia-elements/lint/no-unexpected-global-attribute-value` | Disallow use of invalid attribute values in HTML | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attributes` | Do not allow invalid use of nve-* attributes | HTML | `error` |
 | `@nvidia-elements/lint/no-unexpected-library-dependencies` | Disallow incorrect dependency usage of @nve packages in consuming libraries | JSON | `error` |
 | `@nvidia-elements/lint/no-deprecated-packages` | Disallow usage of deprecated packages. | JSON | `error` |
+| `@nvidia-elements/lint/no-unexpected-style-customization` | Disallow use of style customization in Elements playground template. | HTML | `off` |

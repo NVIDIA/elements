@@ -63,9 +63,10 @@ const rule = {
     return createVisitors(context, {
       Tag(node) {
         const textAttr = findAttr(node, 'nve-text');
-
-        if (textAttr) {
-          const values = textAttr.value?.value?.split(' ') ?? [];
+        const legacyTextAttr = findAttr(node, 'mlv-text');
+        const matchTextAttr = textAttr ?? legacyTextAttr;
+        if (matchTextAttr) {
+          const values = matchTextAttr.value?.value?.split(' ') ?? [];
           const value = values.find(value => !VALID_NVE_TEXT_VALUES.has(value));
           const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
           if (value && !isValueBinding) {
@@ -81,15 +82,18 @@ const rule = {
         }
 
         const layoutAttr = findAttr(node, 'nve-layout');
-        if (layoutAttr) {
-          const values = layoutAttr.value?.value?.split(' ') ?? [];
+        const legacyLayoutAttr = findAttr(node, 'mlv-layout');
+        const matchLayoutAttr = layoutAttr ?? legacyLayoutAttr;
+        if (matchLayoutAttr) {
+          const attribute = layoutAttr ? 'nve-layout' : 'mlv-layout';
+          const values = matchLayoutAttr.value?.value?.split(' ') ?? [];
           const value = values.find(value => !VALID_NVE_LAYOUT_VALUES.has(value));
           const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
           if (value && !isValueBinding) {
             context.report({
               node,
               data: {
-                attribute: 'nve-layout',
+                attribute,
                 value
               },
               messageId: 'unexpected-attribute-value'

@@ -33,9 +33,15 @@ const rule = {
                 alternative: attribute.replace('mlv-', 'nve-')
               },
               fix: fixer => {
+                const newAttributeName = attribute.replace('mlv-', 'nve-');
+
+                if (!attr.value) {
+                  return fixer.replaceText(attr, newAttributeName);
+                }
+
                 return fixer.replaceText(
                   attr,
-                  `${attr.key.value}=${attr.startWrapper.value}${attr.value.value}${attr.endWrapper.value}`
+                  `${newAttributeName}=${attr.startWrapper.value}${attr.value.value}${attr.endWrapper.value}`
                 );
               }
             });
