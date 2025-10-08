@@ -32,14 +32,12 @@ export async function filterExamples(query: string, examples: MetadataExample[])
   const scored = examples.filter(isValidExample).map(example => {
     let score = 0;
 
-    if (example.id === 'Default') score += 1;
-
     for (const word of q.split(/\s+/).filter(Boolean)) {
-      if (example.tags.includes('priority') && word === example.element) score += 6;
-      if (example.id.toLowerCase() === word.toLowerCase()) score += 5;
-      if (fuzzyMatch(word, [example.element]).length > 0) score += 4;
-      if (fuzzyMatch(word, [example.summary]).length > 0) score += 3;
-      if (fuzzyMatch(word, [example.description]).length > 0) score += 2;
+      if (example.tags.includes('priority') && word === example.element) score += 5;
+      if (fuzzyMatch(word, [example.element]).length > 0) score += 5;
+      if (fuzzyMatch(word, [example.summary]).length > 0) score += 4;
+      if (fuzzyMatch(word, [example.description]).length > 0) score += 3;
+      if (example.id.toLowerCase() === word.toLowerCase()) score += 2;
       if (
         example.id.toLowerCase().includes(word) ||
         example.id
@@ -48,8 +46,8 @@ export async function filterExamples(query: string, examples: MetadataExample[])
           .toLowerCase()
           .includes(word)
       )
-        score += 2;
-      if (example.template.toLowerCase().includes(word)) score += 1;
+        score += 1;
+      if (example.template.toLowerCase().includes(word) && score === 0) score += 1;
     }
     return { ...example, _score: score };
   });
