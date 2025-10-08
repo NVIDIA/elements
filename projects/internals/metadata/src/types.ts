@@ -161,6 +161,7 @@ export interface MetadataCustomElementsManifestDeclaration {
     description: string;
   }[];
   members: {
+    deprecated: boolean;
     kind: string;
     name: string;
     description: string;
@@ -173,6 +174,7 @@ export interface MetadataCustomElementsManifestDeclaration {
   }[];
   attributes: {
     name: string;
+    deprecated: boolean;
     type: {
       text: string;
     };
