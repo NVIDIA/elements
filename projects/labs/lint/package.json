@@ -56,8 +56,7 @@
     "@eslint/css": "catalog:",
     "@eslint/js": "catalog:",
     "@eslint/json": "catalog:",
-    "@nvidia-elements/themes": "workspace:*",
-    "typescript-eslint": "catalog:"
+    "@nvidia-elements/themes": "workspace:*"
   },
   "peerDependencies": {
     "eslint": ">= 9"
