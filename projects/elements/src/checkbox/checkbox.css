@@ -98,7 +98,6 @@
 }
 
 :host(:state(checked)) {
-  --nve-sys-interaction-state-lightness: 0%;
   --background: var(--accent-color);
   --check-color: var(--nve-sys-text-white-color);
 }

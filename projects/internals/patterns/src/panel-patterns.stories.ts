@@ -91,7 +91,7 @@ export const PanelAccordion = {
         <nve-accordion-group container="inset" behavior-expand>
           <nve-accordion>
             <nve-accordion-header>
-              <div slot="title">Heading 1</div>
+              <h2 nve-text="heading xs medium" slot="prefix">Heading 1</h2>
             </nve-accordion-header>
             <nve-accordion-content>
               Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
@@ -100,7 +100,7 @@ export const PanelAccordion = {
 
           <nve-accordion>
             <nve-accordion-header>
-              <div slot="title">Heading 2</div>
+              <h2 nve-text="heading xs medium" slot="prefix">Heading 2</h2>
             </nve-accordion-header>
             <nve-accordion-content>
               Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
@@ -109,7 +109,7 @@ export const PanelAccordion = {
 
           <nve-accordion>
             <nve-accordion-header>
-              <div slot="title">Heading 3</div>
+              <h2 nve-text="heading xs medium" slot="prefix">Heading 3</h2>
             </nve-accordion-header>
             <nve-accordion-content>
               Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.

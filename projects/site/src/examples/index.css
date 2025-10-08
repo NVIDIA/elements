@@ -22,15 +22,14 @@
   z-index: 1000;
 }
 
+/* this is a non flex container as flexbox influences the default sizing/behavior of components */
 #example-container {
-  display: flex;
-  place-items: center;
-  place-content: center;
-  width: 100vw;
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
+  padding: var(--nve-ref-space-lg);
+  min-width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
-  scrollbar-color: var(--nve-ref-border-color-muted) var(--background);
-  scrollbar-width: thin;
 }
 
 body:has(#iframe-links:not([hidden])) #example-container {
