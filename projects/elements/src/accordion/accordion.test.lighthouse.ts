@@ -6,10 +6,10 @@ describe('accordion lighthouse report', () => {
     const report = await lighthouseRunner.getReport('nve-accordion', /* html */`
       <nve-accordion>
         <nve-accordion-header>
-          <div slot="title">Heading</div>
+          <h2 slot="prefix">heading</h2>
         </nve-accordion-header>
         <nve-accordion-content>
-          Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+          <p>content</p>
         </nve-accordion-content>
       </nve-accordion>
       <script type="module">

@@ -16,12 +16,13 @@ describe(AccordionGroup.metadata.tag, () => {
         <nve-accordion-header>header</nve-accordion-header>
         <nve-accordion-content>content</nve-accordion-content>
       </nve-accordion>
-      <nve-accordion behavior-expand>
+      <nve-accordion>
         <nve-accordion-header>
-          <div slot="title">title</div>
-          <div slot="subtitle">subtitle</div>
+          <h2 slot="prefix">heading</h2>
         </nve-accordion-header>
-        <nve-accordion-content>content</nve-accordion-content>
+        <nve-accordion-content>
+          <p>content</p>
+        </nve-accordion-content>
       </nve-accordion>
     </nve-accordion-group>
     `);
