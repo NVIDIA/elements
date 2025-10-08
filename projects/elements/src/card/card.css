@@ -17,6 +17,7 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: start;
+  overflow: hidden;
   contain: none;
 }
 
@@ -40,4 +41,13 @@
   --border-bottom: none;
   --border-radius: 0;
   --box-shadow: none;
+}
+
+slot:not([name]) {
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
 }
