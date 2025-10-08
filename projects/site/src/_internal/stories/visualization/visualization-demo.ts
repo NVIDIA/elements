@@ -181,8 +181,8 @@ export class VisualizationDemo extends LitElement {
     return html`
       <nve-card>
         <nve-card-header>
-          <h2 slot="title">Design Tokens + HTML Canvas</h2>
-          <h3 slot="subtitle" nve-text="body sm muted">Demo of ChartJS consuming design tokens</h3>
+          <h2 nve-text="heading sm medium">Design Tokens + HTML Canvas</h2>
+          <h3 nve-text="body sm muted">Demo of ChartJS consuming design tokens</h3>
         </nve-card-header>
         <nve-card-content>
           <div nve-layout="column gap:md align:stretch">

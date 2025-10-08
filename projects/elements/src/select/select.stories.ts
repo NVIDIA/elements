@@ -10,6 +10,9 @@ export default {
   component: 'nve-select',
 };
 
+/**
+ * @summary Basic select component with label, options, and message.
+ */
 export const Default = {
   render: () => html`
 <nve-select>
@@ -23,6 +26,10 @@ export const Default = {
 </nve-select>`
 };
 
+/**
+ * @summary Rich option rendering with custom slots containing logos and descriptions for each option.
+ * @tags test-case
+ */
 export const CustomOptionRender = {
   render: () => html`
 <nve-select>
@@ -64,6 +71,9 @@ export const CustomOptionRender = {
   `
 }
 
+/**
+ * @summary Select with a prefix button to provide additional context or categorization.
+ */
 export const Prefix = {
   render: () => html`
   <nve-select>
@@ -77,6 +87,9 @@ export const Prefix = {
   `
 };
 
+/**
+ * @summary Flat container style for single and multiple select, providing a minimal visual treatment.
+ */
 export const Flat = {
   render: () => html`
 <div nve-layout="column gap:xl align:stretch">
@@ -102,6 +115,9 @@ export const Flat = {
 </div>`
 };
 
+/**
+ * @summary Vertical layout showcasing various states: default, disabled, success, and error.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -147,6 +163,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Horizontal layout showcasing various states: default, disabled, success, and error.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -192,6 +211,9 @@ export const Horizontal = {
 </div>`
 };
 
+/**
+ * @summary Multiple selection mode allowing users to select several options simultaneously.
+ */
 export const Multiple = {
   render: () => html`
 <nve-select>
@@ -207,6 +229,9 @@ export const Multiple = {
 </nve-select>`
 };
 
+/**
+ * @summary Multiple selection in disabled state, showing read-only selected options.
+ */
 export const MultipleDisabled = {
   render: () => html`
 <nve-select>
@@ -222,6 +247,9 @@ export const MultipleDisabled = {
 </nve-select>`
 };
 
+/**
+ * @summary Multiple selection with constrained width to demonstrate overflow handling of selected options.
+ */
 export const MultipleOverflow = {
   render: () => html`
 <nve-select style="--width: 250px">
@@ -237,6 +265,9 @@ export const MultipleOverflow = {
 </nve-select>`
 };
 
+/**
+ * @summary Size attribute controls the number of visible options without scrolling.
+ */
 export const Size = {
   render: () => html`
 <div nve-layout="column gap:xl">
@@ -266,6 +297,10 @@ export const Size = {
 </div>`
 };
 
+/**
+ * @summary Custom scroll height for dropdown with many options to control vertical space usage.
+ * @tags test-case
+ */
 export const Height = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -296,6 +331,9 @@ export const Height = {
 </div>`
 };
 
+/**
+ * @summary Select width dynamically adjusts to fit the currently selected option text.
+ */
 export const FitText = {
   render: () => html`
 <nve-select fit-text>
@@ -309,6 +347,9 @@ export const FitText = {
 </nve-select>`
 };
 
+/**
+ * @summary Select width adjusts to fit the longest option in both vertical and horizontal layouts.
+ */
 export const FitContent = {
   render: () => html`
 <div nve-layout="column gap:lg">
@@ -334,6 +375,9 @@ export const FitContent = {
 </div>`
 };
 
+/**
+ * @summary Placeholder text prompts users to make a selection when no option is chosen.
+ */
 export const Placeholder = {
   render: () => html`
 <nve-select>
@@ -348,6 +392,9 @@ export const Placeholder = {
 </nve-select>`
 };
 
+/**
+ * @summary Placeholder text in multiple selection mode guides users before any selections are made.
+ */
 export const PlaceholderMultiple = {
   render: () => html`
 <nve-select>
@@ -362,6 +409,9 @@ export const PlaceholderMultiple = {
 </nve-select>`
 };
 
+/**
+ * @summary Individual options can be disabled to prevent selection while remaining visible.
+ */
 export const Disabled = {
   render: () => html`
 <nve-select>
@@ -375,6 +425,10 @@ export const Disabled = {
 </nve-select>`
 };
 
+/**
+ * @summary Viewport overflow test for select element
+ * @tags test-case
+ */
 export const ViewportOverflow = {
   render: () => html`
 <nve-select layout="horizontal-inline" style="margin: 30vh 0 0 60vw; max-width: 500px">
@@ -395,6 +449,10 @@ export const ViewportOverflow = {
 </nve-select>`
 };
 
+/**
+ * @summary Performance test for select element with 1000 options
+ * @tags test-case performance
+ */
 export const Performance = {
   render: () => html`
   <nve-select id="performance-select">
