@@ -1,3 +1,15 @@
+## [@nvidia-elements/code-v0.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.4.0...@nvidia-elements/code-v0.5.0) (2025-10-08)
+
+
+### Features
+
+* **labs-code:** add bash and toml to supported languages ([d4228e8](https://github.com/NVIDIA/elements/commit/d4228e8595afa9929012c8fb26f9b4d16303bb1d))
+
+
+### Bug Fixes
+
+* **labs-code:** fix install steps on docs ([1dfd195](https://github.com/NVIDIA/elements/commit/1dfd195067ffadacee11517eef62e5936e687f41))
+
 ## [@nvidia-elements/code-v0.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.3.0...@nvidia-elements/code-v0.4.0) (2025-10-02)
 
 
