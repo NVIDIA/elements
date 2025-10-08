@@ -65,6 +65,10 @@ function escapeQuotes(value: string): string {
   return value.replaceAll("'", '&apos;').replaceAll('"', '&quot;');
 }
 
+export function readyCheck(evaluate: (fn: () => boolean) => Promise<boolean>) {
+  return evaluate(() => document.querySelectorAll('nve-monaco-problems:state(ready)').length === 3);
+}
+
 export function template() {
   return /* html */ `
   <div nve-layout="column gap:md" style="width: 640px;">

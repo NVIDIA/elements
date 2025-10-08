@@ -2,7 +2,7 @@ import { LitElement } from 'lit';
 import type { TemplateResult } from 'lit';
 import { property } from 'lit/decorators.js';
 
-import { useStyles } from '@nvidia-elements/core/internal';
+import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
 
 import type * as monaco from '@nvidia-elements/monaco';
 import type { Monaco } from '@nvidia-elements/monaco';
@@ -20,6 +20,9 @@ import styles from './editor.css?inline';
  * @event ready - Dispatched when the editor is initialized and ready.
  */
 export abstract class BaseMonacoEditor<T extends monaco.editor.IEditor> extends LitElement {
+  /** @private */
+  declare _internals: ElementInternals;
+
   static styles = useStyles([styles]);
 
   /**
@@ -54,6 +57,7 @@ export abstract class BaseMonacoEditor<T extends monaco.editor.IEditor> extends 
 
   async connectedCallback() {
     super.connectedCallback();
+    attachInternals(this);
 
     await this.updateComplete;
 
@@ -103,6 +107,7 @@ export abstract class BaseMonacoEditor<T extends monaco.editor.IEditor> extends 
 
     this.#updateThemeForColorScheme();
 
+    this._internals.states.add('ready');
     this.dispatchEvent(new CustomEvent('ready', { bubbles: true }));
   }
 
