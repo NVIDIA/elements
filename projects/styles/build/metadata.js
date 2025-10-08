@@ -23,18 +23,15 @@ const layoutExample = `
 </section>`;
 
 const typographyExample = `
-<div nve-layout="column gap:lg">
-  <p nve-text="display">display</p>
-  <p nve-text="heading">heading</p>
-  <p nve-text="body">body</p>
-  <p nve-text="label">label</p>
-</div>
-<div nve-layout="column gap:lg">
-  <h1 nve-text="display">display</h1>
-  <h2 nve-text="heading">heading</h2>
-  <h3 nve-text="body">body</h3>
-  <h4 nve-text="label">label</h4>
-</div>`;
+<h1 nve-text="display">display</h1>
+<h2 nve-text="heading">heading</h2>
+<p nve-text="body">body</p>
+<p nve-text="label">label</p>
+
+<h2 nve-text="heading sm">heading small</h2>
+<h2 nve-text="heading lg">heading large</h2>
+<p nve-text="body sm">small</p>
+<p nve-text="body lg">large</p>`;
 
 await generateGlobalAttributes(
   [
