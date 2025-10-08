@@ -8,7 +8,11 @@ import type * as monaco from '@nvidia-elements/monaco';
 import type { Monaco } from '@nvidia-elements/monaco';
 import type { MonacoEditor } from '@nvidia-elements/monaco/editor';
 
-import { EditorDecorator, toProblemsFormat } from '../internal/formats/problems-format.js';
+import {
+  toHoveredLineDecorations,
+  toProblemsFormat,
+  toSelectedLineDecorations
+} from '../internal/formats/problems-format.js';
 import type { Problem } from '../internal/types/index.js';
 import { equalsProblems } from '../internal/utils/problem-utils.js';
 
@@ -82,7 +86,10 @@ export class MonacoProblems extends LitElement {
   #monaco?: Monaco;
   #editor?: monaco.editor.IStandaloneCodeEditor;
   #model?: monaco.editor.ITextModel;
-  #decorator?: EditorDecorator;
+
+  #lineDecorations: monaco.editor.IEditorDecorationsCollection;
+  #selectedLineDecorations: monaco.editor.IEditorDecorationsCollection;
+  #hoveredLineDecorations: monaco.editor.IEditorDecorationsCollection;
 
   #selectedLineNumber: number | undefined = undefined;
   #downLineNumber: number | undefined = undefined;
@@ -130,7 +137,10 @@ export class MonacoProblems extends LitElement {
     this.#monaco = monaco;
     this.#editor = editor;
     this.#model = editor.getModel();
-    this.#decorator = new EditorDecorator(this.#monaco, this.#editor);
+
+    this.#lineDecorations = editor.createDecorationsCollection([]);
+    this.#selectedLineDecorations = editor.createDecorationsCollection([]);
+    this.#hoveredLineDecorations = editor.createDecorationsCollection([]);
 
     this.#selectedLineNumber = undefined;
     this.#downLineNumber = undefined;
@@ -173,8 +183,9 @@ export class MonacoProblems extends LitElement {
   #getProblemByLine?: (lineNumber: number) => Problem | undefined;
 
   #applyProblems() {
-    const { text, getProblemByLine } = toProblemsFormat(this.problems);
+    const { text, decorations, getProblemByLine } = toProblemsFormat(this.#monaco, this.problems);
     this.#model?.setValue(text);
+    this.#lineDecorations?.set(decorations);
     this.#getProblemByLine = getProblemByLine;
   }
 
@@ -203,12 +214,11 @@ export class MonacoProblems extends LitElement {
     const range = new this.#monaco.Range(this.#selectedLineNumber, 1, this.#selectedLineNumber, 1);
     this.#editor.setPosition(range.getStartPosition());
     this.#editor.setSelection(range);
-    this.#decorator.decorateSelectedLine(this.#selectedLineNumber);
+    this.#selectedLineDecorations.set(toSelectedLineDecorations(this.#monaco, this.#selectedLineNumber));
   }
 
   #onDidChangeModelContent = () => {
     this.#selectedLineNumber = undefined;
-    this.#decorator.decorateLines(this.#model);
   };
 
   #onDidChangeCursorSelection = (e: monaco.editor.ICursorSelectionChangedEvent) => {
@@ -218,7 +228,7 @@ export class MonacoProblems extends LitElement {
         this.#selectedLineNumber = selection.startLineNumber;
       }
     }
-    this.#decorator.decorateSelectedLine(this.#selectedLineNumber);
+    this.#selectedLineDecorations.set(toSelectedLineDecorations(this.#monaco, this.#selectedLineNumber));
   };
 
   #onDidKeyUp = (e: monaco.IKeyboardEvent) => {
@@ -308,10 +318,10 @@ export class MonacoProblems extends LitElement {
     const { element, position } = e.target;
     const lineNumber =
       !this.#isEmptyModel() && !element.classList.contains('view-lines') ? position?.lineNumber : undefined;
-    this.#decorator.decorateHoveredLine(lineNumber);
+    this.#hoveredLineDecorations.set(toHoveredLineDecorations(this.#monaco, lineNumber));
   };
 
   #onDidMouseLeave = () => {
-    this.#decorator.decorateHoveredLine(undefined);
+    this.#hoveredLineDecorations.set(toHoveredLineDecorations(this.#monaco, undefined));
   };
 }

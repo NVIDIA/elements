@@ -26,7 +26,8 @@ export const Default = {
       startColumn: 8,
       endLineNumber: 14,
       endColumn: 24,
-      source: 'ts(2322)',
+      source: 'ts',
+      code: '2322',
       owner: 'typescript',
     },
     {
@@ -37,7 +38,8 @@ export const Default = {
       startColumn: 5,
       endLineNumber: 16,
       endColumn: 10,
-      source: 'ts(6133)',
+      source: 'ts',
+      code: '6133',
       owner: 'typescript',
     },
     {
@@ -60,6 +62,10 @@ export const Default = {
       endLineNumber: 57,
       endColumn: 4,
       source: 'eslint',
+      code: {
+        value: 'no-var',
+        target: 'https://eslint.org/docs/rules/no-var'
+      },
       owner: 'eslint',
     },
   ];
