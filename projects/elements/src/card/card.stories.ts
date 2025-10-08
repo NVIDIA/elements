@@ -18,7 +18,7 @@ export const Default = {
   render: () => html`
   <nve-card>
     <nve-card-header>
-      <h2 nve-text="heading sm medium">Heading</h2> 
+      <h2 nve-text="heading sm medium">Heading</h2>
     </nve-card-header>
     <nve-card-content>
       <p nve-text="body" style="min-height: 64px">card content</p>
@@ -62,13 +62,13 @@ export const MediaCard = {
   render: () => html`
   <div nve-layout="grid gap:md span-items:6 align:stretch" style="max-width: 900px">
     <nve-card style="height: 100%; width: 100%;">
-      <img src="static/images/test-image-3.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+      <img src="static/images/test-image-3.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; object-fit: cover;" />
       <nve-card-content>
         <p nve-text="body" style="min-height: 24px">card content</p>
       </nve-card-content>
     </nve-card>
     <nve-card style="height: 100%; width: 100%;">
-      <img src="static/images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
+      <img src="static/images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; object-fit: cover;" />
       <nve-card-content>
         <p nve-text="body" style="min-height: 24px">card content</p>
       </nve-card-content>
@@ -191,4 +191,24 @@ export const Audit = {
   </nve-card-footer>
   `
   /* eslint-enable */
+};
+
+/**
+ * @summary Card with overflow content, demonstrating how the card content can scroll when the content exceeds the height of the card.
+ */
+export const OverflowContent = {
+  render: () => html`
+  <nve-card style="height: 250px; width: 400px;">
+    <nve-card-header>
+      <h2 nve-text="heading sm medium">Heading</h2>
+    </nve-card-header>
+    <nve-card-content>
+      <p nve-text="body" style="margin-bottom: 300px">card content</p>
+      <p nve-text="body">card content</p>
+    </nve-card-content>
+    <nve-card-footer>
+      <p nve-text="body">card footer</p>
+    </nve-card-footer>
+  </nve-card>
+  `
 };
