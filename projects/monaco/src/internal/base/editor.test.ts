@@ -147,6 +147,10 @@ describe.each<EditorTestConfig>([
     expect(element.editor).toBeDefined();
   });
 
+  it('should have a custom css state when ready', async () => {
+    expect(element.matches(':state(ready)')).toBe(true);
+  });
+
   it('should gracefully handle connect/disconnect during initialization', async () => {
     const { parentElement } = element;
 
