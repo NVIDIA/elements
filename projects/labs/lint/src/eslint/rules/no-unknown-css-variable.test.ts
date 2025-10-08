@@ -63,6 +63,15 @@ describe('noUnknownCssVariable', () => {
               data: { value: '--nve-sys-accent-primary-background-color' }
             }
           ]
+        },
+        {
+          code: ':root { --nve-invalid-token: red; }',
+          errors: [
+            {
+              messageId: 'unknown-css-var',
+              data: { value: '--nve-invalid-token' }
+            }
+          ]
         }
       ]
     });
