@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.1.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.4...@nvidia-elements/cli-v0.1.5) (2025-10-08)
+
+
+### Bug Fixes
+
+* **labs-cli:** improved search metadata ([3c7f753](https://github.com/NVIDIA/elements/commit/3c7f753b9bca1f3df710672556ce53a6a6f724bc))
+
 ## [@nvidia-elements/cli-v0.1.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.3...@nvidia-elements/cli-v0.1.4) (2025-10-07)
 
 
