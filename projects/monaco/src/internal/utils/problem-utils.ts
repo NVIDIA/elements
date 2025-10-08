@@ -7,6 +7,7 @@ export function equalsProblem(a: Problem, b: Problem): boolean {
     a.severity === b.severity &&
     a.message === b.message &&
     a.source === b.source &&
+    a.code === b.code &&
     a.startLineNumber === b.startLineNumber &&
     a.startColumn === b.startColumn &&
     a.endLineNumber === b.endLineNumber &&
