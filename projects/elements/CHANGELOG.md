@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.42.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.41.1...@nvidia-elements/core-v1.42.0) (2025-10-08)
+
+
+### Features
+
+* **elements:** form control css ([1301503](https://github.com/NVIDIA/elements/commit/1301503100f6f212b6952a745f08ae28642d09a8)), closes [#119](https://github.com/NVIDIA/elements/issues/119) [#131](https://github.com/NVIDIA/elements/issues/131) [#142](https://github.com/NVIDIA/elements/issues/142)
+
 ## [@nvidia-elements/core-v1.41.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.41.0...@nvidia-elements/core-v1.41.1) (2025-10-03)
 
 
