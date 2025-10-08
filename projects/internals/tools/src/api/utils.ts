@@ -55,7 +55,7 @@ export function searchAPIs(
     .flatMap(i => (i.attributes?.length ? i.attributes : []))
     .filter(a => attributeMatches.has(a.name));
 
-  const markdown = [...elements, ...attributes].map(e => e.markdown).join('\n---\n');
+  const markdown = [...elements, ...attributes].map(e => e.markdown).join('\n\n---\n\n');
   return format === 'markdown' ? markdown : { elements: elements.map(e => e.manifest), attributes };
 }
 

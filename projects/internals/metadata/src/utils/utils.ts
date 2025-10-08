@@ -63,10 +63,12 @@ export function changelogMarkdownToJSON(changelog: string) {
 
 export function elementMetadataToMarkdown(manifest: MetadataCustomElementsManifestDeclaration) {
   if (manifest.tagName) {
+    const slots = manifest.slots?.filter(i => !i.description?.includes('deprecated')) ?? [];
+    const attributes = manifest.attributes?.filter(i => !i.deprecated) ?? [];
+    const members = manifest.members?.filter(i => !i.deprecated) ?? [];
     return `
 ## ${manifest.tagName}
-${manifest.description ? `\n${manifest.description}` : ''}
-
+${manifest.description ? `\n${manifest.description}\n` : ''}
 ### Example
 
 ${manifest.metadata.example ? `\`\`\`html\n${manifest.metadata.example}\n\`\`\`` : 'No example available.'}
@@ -79,44 +81,44 @@ import '${manifest.metadata.entrypoint}/define.js';
 
 ### Slots
 ${
-  manifest.slots
+  slots.length
     ? `
 | name | description |
 | ---- | ----------- |
-${manifest.slots.map(i => `| ${i.name} | ${i.description} |`).join('\n')}`
+${slots.map(i => `| ${i.name} | ${i.description} |`).join('\n')}`
     : 'No slots available.'
 }
 
 ### Attributes
 ${
-  manifest.attributes?.length
+  attributes.length
     ? `
 | name | value | description |
 | ---- | ----- | ----------- |
-${manifest.attributes
+${attributes
   .map(i => {
     const type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
     const description = i.description?.replace(/\|/g, '\\|')?.split('\n')?.join('');
     return `| ${i.name} | ${type} | ${description} |`;
   })
   .join('\n')}`
-    : 'No Attributes available.'
+    : '\nNo Attributes available.'
 }
 
 ### Properties
 ${
-  manifest.attributes?.length
+  members.length
     ? `
 | name | value | description |
 | ---- | ----- | ----------- |
-${manifest.members
+${members
   .map(i => {
     const type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
     const description = i.description ? i.description.replace(/\|/g, '\\|').split('\n').join('') : '';
     return `| ${i.name} | ${type} | ${description} |`;
   })
   .join('\n')}`
-    : 'No Properties available.'
+    : '\nNo Properties available.'
 }
 
 ### Events
@@ -131,7 +133,7 @@ ${manifest.events
     return `| ${i.name} | ${description ?? ''} |`;
   })
   .join('\n')}`
-    : 'No Custom Events available.'
+    : '\nNo Custom Events available.'
 }
 
 ### CSS Properties
@@ -141,7 +143,7 @@ ${
 | name | description |
 | ---- | ----------- |
 ${manifest.cssProperties.map(i => `| ${i.name} | ${i.description ?? ''} |`).join('\n')}`
-    : 'No CSS Properties available.'
+    : '\nNo CSS Properties available.'
 }`.trim();
   }
 }
