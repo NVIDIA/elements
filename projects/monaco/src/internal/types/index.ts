@@ -22,6 +22,7 @@ export interface Problem {
   severity: ProblemSeverityValue;
   message: string;
   source?: string;
+  code?: string | { value: string; target: string | { toString(): string } };
   startLineNumber: number;
   startColumn: number;
   endLineNumber: number;
