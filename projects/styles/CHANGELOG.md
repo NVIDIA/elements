@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.12.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.2...@nvidia-elements/styles-v1.12.3) (2025-10-08)
+
+
+### Bug Fixes
+
+* **labs-cli:** improved search metadata ([3c7f753](https://github.com/NVIDIA/elements/commit/3c7f753b9bca1f3df710672556ce53a6a6f724bc))
+
 ## [@nvidia-elements/styles-v1.12.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.1...@nvidia-elements/styles-v1.12.2) (2025-09-30)
 
 
