@@ -1151,7 +1151,7 @@ index cd571071d308d9257dba55aeacc974d716d0b68d..76c8d483a0b43306481ee8f481cb1331
      }
      const preferences = this._inlayHintsOptions ?? {};
 diff --git a/esm/vs/language/typescript/tsMode.js b/esm/vs/language/typescript/tsMode.js
-index 6e696fc4eb64adb9c5f6986192fd17c566d16db9..5b9c9324fbc782aaf521e5b3485ceb243bf0abcd 100644
+index 6e696fc4eb64adb9c5f6986192fd17c566d16db9..762b7455378a5687b0061039e65482160c796c35 100644
 --- a/esm/vs/language/typescript/tsMode.js
 +++ b/esm/vs/language/typescript/tsMode.js
 @@ -377,6 +377,7 @@ var DiagnosticsAdapter = class extends Adapter {
@@ -1180,6 +1180,15 @@ index 6e696fc4eb64adb9c5f6986192fd17c566d16db9..5b9c9324fbc782aaf521e5b3485ceb24
    }
    _convertDiagnostics(model, diag) {
      const diagStart = diag.start || 0;
+@@ -433,6 +440,8 @@ var DiagnosticsAdapter = class extends Adapter {
+       endLineNumber,
+       endColumn,
+       message: flattenDiagnosticMessageText(diag.messageText, "\n"),
++      // PATCH: Add missing source property to TypeScript diagnostics to match those in VS Code derived IDEs.
++      source: 'ts',
+       code: diag.code.toString(),
+       tags,
+       relatedInformation: this._convertRelatedInformation(model, diag.relatedInformation)
 diff --git a/monaco.d.ts b/monaco.d.ts
 index de65a4a52dacfd7f6986fb06198e056ab70ab3ef..d8443e404db7faf640e1dcae6854c0d4a49beb92 100644
 --- a/monaco.d.ts

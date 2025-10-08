@@ -3,10 +3,8 @@ import type * as monaco from '@nvidia-elements/monaco';
 
 import type { Problem } from '../types/index.js';
 
-type RegExpIndices = [number, number];
-
-function toRange(monaco: Monaco, lineNumber: number, [startIndex, endIndex]: RegExpIndices): monaco.Range {
-  return new monaco.Range(lineNumber, startIndex + 1, lineNumber, endIndex + 1);
+function toRange(monaco: Monaco, lineNumber: number, startColumn: number, endColumn: number): monaco.Range {
+  return new monaco.Range(lineNumber, startColumn, lineNumber, endColumn);
 }
 
 function toLineDecoration(monaco: Monaco, lineNumber: number, className: string): monaco.editor.IModelDeltaDecoration {
@@ -22,11 +20,12 @@ function toLineDecoration(monaco: Monaco, lineNumber: number, className: string)
 function toRangeDecoration(
   monaco: Monaco,
   lineNumber: number,
-  indices: RegExpIndices,
+  startColumn: number,
+  endColumn: number,
   className: string
 ): monaco.editor.IModelDeltaDecoration {
   return {
-    range: toRange(monaco, lineNumber, indices),
+    range: toRange(monaco, lineNumber, startColumn, endColumn),
     options: {
       inlineClassName: `problems-decoration ${className}`
     }
@@ -69,12 +68,13 @@ export function toSeverityIcon(severityLabel: SeverityLabel): string {
 function toIconDecoration(
   monaco: Monaco,
   lineNumber: number,
-  indices: RegExpIndices,
+  startColumn: number,
+  endColumn: number,
   className: string,
   severityLabel: SeverityLabel
 ): monaco.editor.IModelDeltaDecoration {
   return {
-    range: toRange(monaco, lineNumber, indices),
+    range: toRange(monaco, lineNumber, startColumn, endColumn),
     options: {
       beforeContentClassName: `problems-decoration codicon ${toSeverityIcon(severityLabel)}`,
       inlineClassName: `problems-decoration ${className}`
@@ -82,125 +82,105 @@ function toIconDecoration(
   };
 }
 
-function escapeQuotes(text: string): string {
-  return text.replace(/"/g, '\\"');
+interface DecoratedLine {
+  text: string;
+  decorations: monaco.editor.IModelDeltaDecoration[];
 }
-
-const FILE_LINE_PATTERN = /^(")((?:[^"\\]|\\.)*)(") (")((?:[^"\\]|\\.)*)(") (\d+)$/d;
-
-const ESCAPED_QUOTE_PATTERN = /\\"/dg;
 
 function basename(path: string): string {
   return path.split('/').filter(Boolean).pop();
 }
 
-function toFileLine(uri: string, problems: Problem[]): string {
+function toFileLine(monaco: Monaco, lineNumber: number, uri: string, problems: Problem[]): DecoratedLine {
   const pathname = decodeURIComponent(new URL(uri).pathname);
-  const file = escapeQuotes(basename(pathname));
-  const path = escapeQuotes(pathname);
+  const file = basename(pathname);
+  const path = pathname;
+  const count = String(problems.length);
 
-  return `"${file}" "${path}" ${problems.length}`;
-}
-
-function toFileLineDecorations(
-  monaco: Monaco,
-  lineNumber: number,
-  indices: RegExpIndicesArray
-): monaco.editor.IModelDeltaDecoration[] {
   const decorations: monaco.editor.IModelDeltaDecoration[] = [];
   decorations.push(toLineDecoration(monaco, lineNumber, 'problems-line'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[1], 'problem-quote'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[2], 'problem-file'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[3], 'problem-quote'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[4], 'problem-quote'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[5], 'problem-path'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[6], 'problem-quote'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[7], 'problem-count'));
-  return decorations;
+
+  let text = '';
+
+  // file
+  const fileStart = text.length + 1;
+  text += file;
+  decorations.push(toRangeDecoration(monaco, lineNumber, fileStart, text.length + 1, 'problem-file'));
+
+  // separator
+  text += ' ';
+
+  // path
+  const pathStart = text.length + 1;
+  text += path;
+  decorations.push(toRangeDecoration(monaco, lineNumber, pathStart, text.length + 1, 'problem-path'));
+
+  // separator
+  text += ' ';
+
+  // count
+  const countStart = text.length + 1;
+  text += count;
+  decorations.push(toRangeDecoration(monaco, lineNumber, countStart, text.length + 1, 'problem-count'));
+
+  return { text, decorations };
 }
 
-const MARKER_LINE_PATTERN =
-  /^\t(hint|info|warning|error) (")((?:[^"\\]|\\.)*)(") (")((?:[^"\\]|\\.)*)(") (\[Ln \d+, Col \d+\])$/d;
-
-function toProblemLine(problem: Problem): string {
+function toProblemLine(monaco: Monaco, lineNumber: number, problem: Problem): DecoratedLine {
   const severity = toSeverityLabel(problem.severity);
-  const message = escapeQuotes(problem.message).split('\n')[0];
-  const source = escapeQuotes(problem.source ?? '');
+  const message = problem.message.split('\n')[0];
+  const source = problem.source ?? '';
+  const code = (typeof problem.code === 'object' ? problem.code?.value : problem.code) ?? '';
+  const position = `[Ln ${problem.startLineNumber}, Col ${problem.startColumn}]`;
 
-  return `\t${severity} "${message}" "${source}" [Ln ${problem.startLineNumber}, Col ${problem.startColumn}]`;
-}
-
-function toProblemLineDecorations(
-  monaco: Monaco,
-  lineNumber: number,
-  indices: RegExpIndicesArray,
-  line: string
-): monaco.editor.IModelDeltaDecoration[] {
   const decorations: monaco.editor.IModelDeltaDecoration[] = [];
   decorations.push(toLineDecoration(monaco, lineNumber, 'problems-line'));
+
+  let text = '';
+
+  // indent
+  text += '  ';
+
+  // severity
+  const severityStart = text.length + 1;
+  text += severity;
   decorations.push(
-    toIconDecoration(monaco, lineNumber, indices[1], 'severity-label', line.substring(...indices[1]) as SeverityLabel)
+    toIconDecoration(monaco, lineNumber, severityStart, text.length + 1, 'severity-label', severity as SeverityLabel)
   );
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[2], 'problem-quote'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[3], 'problem-message'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[4], 'problem-quote'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[5], 'problem-quote'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[6], 'problem-code'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[7], 'problem-quote'));
-  decorations.push(toRangeDecoration(monaco, lineNumber, indices[8], 'problem-position'));
-  return decorations;
-}
 
-function toEscapedQuotesDecorations(
-  monaco: Monaco,
-  lineNumber: number,
-  indices: RegExpIndicesArray
-): monaco.editor.IModelDeltaDecoration[] {
-  const decorations: monaco.editor.IModelDeltaDecoration[] = [];
-  for (const index of indices) {
-    decorations.push(toRangeDecoration(monaco, lineNumber, index, 'problem-escaped-quote'));
-  }
-  return decorations;
-}
+  // separator
+  text += ' ';
 
-function isMatchWithIndices(
-  results: RegExpExecArray | null
-): results is RegExpExecArray & { indices: RegExpIndicesArray } {
-  return results !== null && results.indices !== undefined;
-}
+  // message
+  const messageStart = text.length + 1;
+  text += message;
+  decorations.push(toRangeDecoration(monaco, lineNumber, messageStart, text.length + 1, 'problem-message'));
 
-function toLineDecorations(monaco: Monaco, model: monaco.editor.ITextModel): monaco.editor.IModelDeltaDecoration[] {
-  const lineCount = model.getLineCount();
-  if (lineCount === 1 && model.getLineLength(1) === 0) {
-    return [];
-  }
-  const decorations: monaco.editor.IModelDeltaDecoration[] = [];
-  for (let lineNumber = 1; lineNumber <= lineCount; lineNumber++) {
-    const line = model.getLineContent(lineNumber);
-    let matches: RegExpExecArray | RegExpStringIterator<RegExpExecArray> | null;
-    switch (true) {
-      case isMatchWithIndices((matches = FILE_LINE_PATTERN.exec(line))): {
-        const { indices } = matches;
-        decorations.push(...toFileLineDecorations(monaco, lineNumber, indices));
-        break;
-      }
-      case isMatchWithIndices((matches = MARKER_LINE_PATTERN.exec(line))): {
-        const { indices } = matches;
-        decorations.push(...toProblemLineDecorations(monaco, lineNumber, indices, line));
-        break;
-      }
-      default:
-        throw new Error(`Invalid input: "${line}"`);
+  // separator
+  text += ' ';
+
+  // source + code
+  if (source.length > 0 || code.length > 0) {
+    const sourceStart = text.length + 1;
+    text += source;
+    if (code.length > 0) {
+      text += `(${code})`;
     }
-    for (const match of line.matchAll(ESCAPED_QUOTE_PATTERN)) {
-      const { indices } = match;
-      decorations.push(...toEscapedQuotesDecorations(monaco, lineNumber, indices));
-    }
+    decorations.push(toRangeDecoration(monaco, lineNumber, sourceStart, text.length + 1, 'problem-source-code'));
+
+    // separator
+    text += ' ';
   }
-  return decorations;
+
+  // position
+  const positionStart = text.length + 1;
+  text += position;
+  decorations.push(toRangeDecoration(monaco, lineNumber, positionStart, text.length + 1, 'problem-position'));
+
+  return { text, decorations };
 }
 
-function toSelectedLineDecorations(
+export function toSelectedLineDecorations(
   monaco: Monaco,
   lineNumber: number | undefined
 ): monaco.editor.IModelDeltaDecoration[] {
@@ -211,7 +191,7 @@ function toSelectedLineDecorations(
   return decorations;
 }
 
-function toHoveredLineDecorations(
+export function toHoveredLineDecorations(
   monaco: Monaco,
   lineNumber: number | undefined
 ): monaco.editor.IModelDeltaDecoration[] {
@@ -237,52 +217,39 @@ function compareProblems(a: Problem, b: Problem): number {
 
 export interface ProblemsFormat {
   text: string;
+  decorations: monaco.editor.IModelDeltaDecoration[];
   getProblemByLine: (lineNumber: number) => Problem | undefined;
 }
 
-export function toProblemsFormat(problems: Problem[]): ProblemsFormat {
+export function toProblemsFormat(monaco: Monaco, problems: Problem[]): ProblemsFormat {
   const problemsByFile = groupProblemsByFile(problems);
 
   const lines: string[] = [];
+  const decorations: monaco.editor.IModelDeltaDecoration[] = [];
   const problemsByLine: Map<number, Problem> = new Map();
 
+  let lineNumber = 0;
   const sortedUris = Array.from(problemsByFile.keys()).sort();
   for (const uri of sortedUris) {
     const sortedProblems = problemsByFile.get(uri)!.sort(compareProblems);
-    lines.push(toFileLine(uri, sortedProblems));
+
+    lineNumber++;
+    const fileLine = toFileLine(monaco, lineNumber, uri, sortedProblems);
+    lines.push(fileLine.text);
+    decorations.push(...fileLine.decorations);
+
     for (const problem of sortedProblems) {
-      lines.push(toProblemLine(problem));
-      problemsByLine.set(lines.length, problem);
+      lineNumber++;
+      const problemLine = toProblemLine(monaco, lineNumber, problem);
+      lines.push(problemLine.text);
+      decorations.push(...problemLine.decorations);
+      problemsByLine.set(lineNumber, problem);
     }
   }
 
-  return { text: lines.join('\n'), getProblemByLine: lineNumber => problemsByLine.get(lineNumber) };
-}
-
-export class EditorDecorator {
-  #monaco: Monaco;
-
-  #lineDecorations: monaco.editor.IEditorDecorationsCollection;
-  #selectedLineDecorations: monaco.editor.IEditorDecorationsCollection;
-  #hoveredLineDecorations: monaco.editor.IEditorDecorationsCollection;
-
-  constructor(monaco: Monaco, editor: monaco.editor.IStandaloneCodeEditor) {
-    this.#monaco = monaco;
-
-    this.#lineDecorations = editor.createDecorationsCollection([]);
-    this.#selectedLineDecorations = editor.createDecorationsCollection([]);
-    this.#hoveredLineDecorations = editor.createDecorationsCollection([]);
-  }
-
-  decorateLines(model: monaco.editor.ITextModel) {
-    this.#lineDecorations.set(toLineDecorations(this.#monaco, model));
-  }
-
-  decorateSelectedLine(lineNumber: number | undefined) {
-    this.#selectedLineDecorations.set(toSelectedLineDecorations(this.#monaco, lineNumber));
-  }
-
-  decorateHoveredLine(lineNumber: number | undefined) {
-    this.#hoveredLineDecorations.set(toHoveredLineDecorations(this.#monaco, lineNumber));
-  }
+  return {
+    text: lines.join('\n'),
+    decorations,
+    getProblemByLine: lineNumber => problemsByLine.get(lineNumber)
+  };
 }

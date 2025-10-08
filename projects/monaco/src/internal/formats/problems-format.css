@@ -27,16 +27,6 @@
     border: var(--selected-line-border);
   }
 
-  &.problem-quote {
-    display: none;
-  }
-
-  &.problem-escaped-quote {
-    display: inline-block;
-    text-indent: -1ch;
-    clip-path: inset(0 0 0 0);
-  }
-
   &.problem-file {
     padding-left: 6px;
   }
@@ -81,7 +71,7 @@
     display: none;
   }
 
-  &.problem-code,
+  &.problem-source-code,
   &.problem-position {
     color: var(--nve-ref-color-gray-denim-1000);
   }
