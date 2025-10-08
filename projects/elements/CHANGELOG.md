@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.43.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.42.0...@nvidia-elements/core-v1.43.0) (2025-10-08)
+
+
+### Features
+
+* **elements:** add overflow card content example ([9fdf1f6](https://github.com/NVIDIA/elements/commit/9fdf1f68761a1cfe6bfe13d0ddc826ef589e9d3c))
+
 ## [@nvidia-elements/core-v1.42.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.41.1...@nvidia-elements/core-v1.42.0) (2025-10-08)
 
 
