@@ -16,9 +16,7 @@ describe(Card.metadata.tag, () => {
     fixture = await createFixture(html`
       <nve-card>
         <nve-card-header>
-          <h2 slot="title">title</h2>
-          <h3 slot="subtitle">subtitle</h3>
-          <button slot="header-action">header action</button>
+          <h2>header</h2>
         </nve-card-header>
         <nve-card-content>
           <p>content</p>

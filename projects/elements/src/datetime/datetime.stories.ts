@@ -20,7 +20,7 @@ export const Default = {
 
 export const Datalist = {
   render: () => html`
-<nve-month>
+<nve-datetime>
   <label>label</label>
   <input type="datetime-local" />
   <nve-control-message>message</nve-control-message>
@@ -29,7 +29,7 @@ export const Datalist = {
     <option value="2018-06-12T19:30"></option>
     <option value="2018-06-14T00:00"></option>
   </datalist>
-</nve-month>
+</nve-datetime>
   `
 }
 

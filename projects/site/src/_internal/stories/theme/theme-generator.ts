@@ -117,7 +117,7 @@ export class ThemeGeneratorDemo extends LitElement {
         <main nve-layout="column gap:lg pad:lg full align:horizontal-stretch">
           <nve-card>
             <nve-card-header>
-              <div slot="title">Title</div>
+              <h2 nve-text="heading sm medium">Title</h2>
             </nve-card-header>
             <nve-card-content>
               <div nve-layout="column gap:lg">

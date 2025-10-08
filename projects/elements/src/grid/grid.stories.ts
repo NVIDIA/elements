@@ -1105,7 +1105,6 @@ export const Card = {
   <nve-card-header>
     <h2 nve-text="heading sm bold">Data Grid</h2>
     <h3 nve-text="body muted">Card Example</h3>
-    <nve-icon-button slot="header-action" icon-name="more-actions"></nve-icon-button>
   </nve-card-header>
   <nve-grid container="flat" style="--scroll-height: 325px">
     <nve-grid-header>

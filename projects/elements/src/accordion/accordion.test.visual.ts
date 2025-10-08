@@ -13,6 +13,8 @@ describe('accordion visual', () => {
   });
 });
 
+/* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
+
 function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
@@ -77,8 +79,8 @@ function template(theme: '' | 'dark' = '') {
     <nve-accordion-header>
       <div slot="title">•︎•︎•︎</div>
       <div slot="subtitle">•︎•︎•︎</div>
-      <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
-      <nve-icon-button container="flat" icon-name="delete" size="sm" slot="actions"></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="add" size="sm" slot="suffix"></nve-icon-button>
+      <nve-icon-button container="flat" icon-name="delete" size="sm" slot="suffix"></nve-icon-button>
     </nve-accordion-header>
     <nve-accordion-content>•︎•︎•︎</nve-accordion-content>
   </nve-accordion>

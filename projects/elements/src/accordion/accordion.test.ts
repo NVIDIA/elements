@@ -190,6 +190,7 @@ describe(`${Accordion.metadata.tag} - Actions`, () => {
   let fixture: HTMLElement;
   let element: Accordion;
 
+  /* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
   beforeEach(async () => {
     fixture = await createFixture(html`
     <nve-accordion-group>
@@ -226,7 +227,7 @@ describe(`${Accordion.metadata.tag} - inline interactive`, () => {
       <nve-accordion behavior-expand>
         <nve-accordion-header>
           <span>heading</span> <button>button</button> 
-          <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
+          <nve-icon-button container="flat" icon-name="add" size="sm" slot="suffix"></nve-icon-button>
         </nve-accordion-header>
         <nve-accordion-content>content</nve-accordion-content>
       </nve-accordion>
