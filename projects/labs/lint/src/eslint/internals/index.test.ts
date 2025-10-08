@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { lintPlaygroundTemplate, type TemplateLintMessage } from './index.js';
+import { lintPlaygroundTemplate } from './index.js';
 
 describe('lintPlaygroundTemplate', () => {
   it('should return empty array for valid HTML code', async () => {

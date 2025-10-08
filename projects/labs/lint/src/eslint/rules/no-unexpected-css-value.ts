@@ -33,13 +33,34 @@ const fontSizeTokens = Object.entries(theme)
 const maxFontSizeToken = fontSizeTokens.sort((a, b) => b.value - a.value)[0]; // 50
 const minFontSizeToken = fontSizeTokens.sort((a, b) => a.value - b.value)[1]; // 12
 
-const fontWeightTokens = Object.entries(theme)
-  .filter(([key]) => key.includes('nve-ref-font-weight'))
-  .map(([id, value]: [string, string]) => ({
-    id,
-    value,
-    name: `var(--${id})`
-  }));
+const fontWeightTokens = [
+  ...Object.entries(theme)
+    .filter(([key]) => key.includes('nve-ref-font-weight'))
+    .map(([id, value]: [string, string]) => ({
+      value,
+      name: `var(--${id})`
+    })),
+  {
+    value: '100',
+    name: 'var(--nve-ref-font-weight-light)'
+  },
+  {
+    value: '300',
+    name: 'var(--nve-ref-font-weight-light)'
+  },
+  {
+    value: '900',
+    name: 'var(--nve-ref-font-weight-extra-bold)'
+  },
+  {
+    value: 'normal',
+    name: 'var(--nve-ref-font-weight-regular)'
+  },
+  {
+    value: 'bold',
+    name: 'var(--nve-ref-font-weight-bold)'
+  }
+];
 
 const borderRadiusTokens = Object.entries(theme)
   .filter(([key, value]: [string, string]) => key.includes('nve-ref-border-radius') && !value.includes('999'))
@@ -66,6 +87,23 @@ const borderWidthTokens = Object.entries(theme)
 
 const maxBorderWidthToken = borderWidthTokens.sort((a, b) => b.value - a.value)[0]; // 4
 const minBorderWidthToken = borderWidthTokens.sort((a, b) => a.value - b.value)[0]; // 1
+
+const lineHeightTokens = Object.entries(theme)
+  .filter(([key]) => key.includes('nve-ref-font-line-height'))
+  .map(([id, value]: [string, string]) => ({
+    value: parseInt(value.replace('calc(var(--nve-ref-scale-line-height) * ', '').replace(')', '').replace('px', '')),
+    name: `var(--${id})`
+  }));
+
+const maxLineHeightToken = lineHeightTokens.sort((a, b) => b.value - a.value)[0];
+const minLineHeightToken = lineHeightTokens.sort((a, b) => a.value - b.value)[0];
+
+const opacityTokens = Object.entries(theme)
+  .filter(([key]) => key.includes('nve-ref-opacity'))
+  .map(([id, value]: [string, string]) => ({
+    value,
+    name: `var(--${id})`
+  }));
 
 const rule = {
   meta: {
@@ -167,7 +205,9 @@ const rule = {
         if (node.property === 'font-weight') {
           const child = node.value.children?.find(child => child.name !== 'var');
           if (child) {
-            const alternate = fontWeightTokens.find(token => token.value === child.value)?.name;
+            const alternate = fontWeightTokens.find(
+              token => token.value === child.value || token.value === child.name
+            )?.name;
             context.report({
               messageId: 'unexpected-css-value',
               node,
@@ -184,9 +224,16 @@ const rule = {
 
         // unexpected-css-value line-height
         if (node.property === 'line-height') {
-          const child = node.value.children?.find(child => child.type === 'Dimension' && child.unit === 'px');
+          const child = node.value.children?.find(child => {
+            const value = parseInt(child.value);
+            const isDimension = child.type === 'Dimension';
+            const isPixelUnit = child.unit === 'px';
+            const isWithinLineHeightTokenRange = value <= maxLineHeightToken.value && value >= minLineHeightToken.value;
+            return isDimension && isPixelUnit && isWithinLineHeightTokenRange;
+          });
 
           if (child) {
+            const alternate = lineHeightTokens.find(token => token.value === parseInt(child.value))?.name;
             context.report({
               messageId: 'unexpected-css-value',
               node,
@@ -194,8 +241,9 @@ const rule = {
                 value: child.value,
                 unit: child.unit,
                 property: node.property,
-                alternate: 'var(--nve-ref-font-line-height-*)'
-              }
+                alternate: alternate ?? 'var(--nve-ref-font-line-height-*)'
+              },
+              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
             });
           }
         }
@@ -207,6 +255,7 @@ const rule = {
           );
 
           if (child) {
+            const alternate = opacityTokens.find(token => token.value === child.value)?.name;
             context.report({
               messageId: 'unexpected-css-value',
               node,
@@ -214,8 +263,9 @@ const rule = {
                 value: child.value ?? '',
                 unit: child.unit ?? '',
                 property: node.property,
-                alternate: 'var(--nve-ref-opacity-*)'
-              }
+                alternate: alternate ?? 'var(--nve-ref-opacity-*)'
+              },
+              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
             });
           }
         }
