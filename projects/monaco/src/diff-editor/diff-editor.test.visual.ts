@@ -46,6 +46,10 @@ const service = new PackageService();
 console.log(service.findByName('@nvidia-elements/monaco'));
 `;
 
+export function readyCheck(evaluate: (fn: () => boolean) => Promise<boolean>) {
+  return evaluate(() => document.querySelectorAll('nve-monaco-diff-editor:state(ready)').length === 2);
+}
+
 export function template() {
   return /* html */ `
   <div nve-layout="column gap:md align:stretch" style="width: 640px; height: 486px;">
@@ -59,16 +63,16 @@ export function template() {
     const diffEditorNarrow = document.querySelector('nve-monaco-diff-editor#diff-editor-narrow');
     diffEditorNarrow.addEventListener('ready', (event) => {
       const { editor, monaco } = event.target;
-      const original = monaco.editor.createModel(\`${originalValue}\`, 'typescript', monaco.Uri.parse('diff:///src/example.ts'));
-      const modified = monaco.editor.createModel(\`${modifiedValue}\`, 'typescript', monaco.Uri.parse('file:///src/example.ts'));
+      const original = monaco.editor.createModel(\`${originalValue}\`, 'typescript', monaco.Uri.parse('diff:///src/example-narrow.ts'));
+      const modified = monaco.editor.createModel(\`${modifiedValue}\`, 'typescript', monaco.Uri.parse('file:///src/example-narrow.ts'));
       editor.setModel({ original, modified });
     });
 
     const diffEditorWide = document.querySelector('nve-monaco-diff-editor#diff-editor-wide');
     diffEditorWide.addEventListener('ready', (event) => {
       const { editor, monaco } = event.target;
-      const original = monaco.editor.createModel(\`${originalValue}\`, 'typescript', monaco.Uri.parse('diff:///src/example.ts'));
-      const modified = monaco.editor.createModel(\`${modifiedValue}\`, 'typescript', monaco.Uri.parse('file:///src/example.ts'));
+      const original = monaco.editor.createModel(\`${originalValue}\`, 'typescript', monaco.Uri.parse('diff:///src/example-wide.ts'));
+      const modified = monaco.editor.createModel(\`${modifiedValue}\`, 'typescript', monaco.Uri.parse('file:///src/example-wide.ts'));
       editor.setModel({ original, modified });
     });
   </script>
