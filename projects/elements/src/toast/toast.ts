@@ -98,7 +98,7 @@ export class Toast extends LitElement {
 
   /**
    * visual treatment to represent a ongoing task or support status
-   * @deprecated Use 'prominence="muted"' instead of status="muted"
+   * deprecated Use 'prominence="muted"' instead of status="muted"
    */
   @property({ type: String, reflect: true }) status: SupportStatus | 'muted';
 
