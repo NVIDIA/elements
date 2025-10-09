@@ -26,14 +26,20 @@
 #example-container {
   scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
   scrollbar-width: var(--nve-sys-scrollbar-width);
-  padding: var(--nve-ref-space-lg);
   min-width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
+/* center content when popovers are present to prevent iframe clipping */
+#example-container:has([nve-popover]) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 body:has(#iframe-links:not([hidden])) #example-container {
-  padding: 24px;
+  padding: var(--nve-ref-space-lg);
 }
 
 body:has(nve-page) #example-container {
