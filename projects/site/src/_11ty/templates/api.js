@@ -249,6 +249,7 @@ export function elementTable(tag, type = 'all') {
     ${type === 'events' || type === 'all' ? renderEvents() : ''}
     ${type === 'slots' || type === 'all' ? renderSlots() : ''}
     ${type === 'css-properties' || type === 'all' ? renderCssProperties() : ''}
+    ${type === 'css-parts' || type === 'all' ? renderCssParts() : ''}
   `
     : '';
 
@@ -388,6 +389,34 @@ export function elementTable(tag, type = 'all') {
           )
           .join('')}
         ${!elementManifest.cssProperties?.length ? /* html */ `<nve-grid-placeholder role="row"><h4 nve-text="body">no css properties</h4></nve-grid-placeholder>` : ''}
+      </nve-grid>
+    </div>
+    `;
+  }
+
+  /**
+   * Renders the CSS parts table for the component
+   * @returns {string} HTML string for the CSS parts table
+   */
+  function renderCssParts() {
+    return /* html */ `
+    <div nve-layout="column gap:md">
+      ${type === 'all' ? /* html */ `<h3 nve-text="heading lg mkd">CSS Parts</h3>` : ''}
+      <nve-grid role="grid" style="min-height: 100px">
+        <nve-grid-header role="row">
+          <nve-grid-column role="columnheader">Part</nve-grid-column>
+          <nve-grid-column role="columnheader">Description</nve-grid-column>
+        </nve-grid-header>
+        ${elementManifest.cssParts
+          ?.map(
+            part => /* html */ `
+        <nve-grid-row role="row">
+          <nve-grid-cell role="cell">${part.name}</nve-grid-cell>
+          <nve-grid-cell role="cell">${md.render(part.description ?? '')}</nve-grid-cell>
+        </nve-grid-row>`
+          )
+          .join('')}
+        ${!elementManifest.cssParts?.length ? /* html */ `<nve-grid-placeholder role="row"><h4 nve-text="body">no css parts</h4></nve-grid-placeholder>` : ''}
       </nve-grid>
     </div>
     `;
