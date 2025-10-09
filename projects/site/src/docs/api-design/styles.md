@@ -322,9 +322,9 @@ CSS Parts enable elements to expose DOM elements to consumers that typically wou
 </style>
 ```
 
-<nve-alert status="warning">Warning: avoid using: CSS Parts can drastically increase the API surface area of a element and can cause significant costs when updating visual changes in future versions.</nve-alert>
+<nve-alert status="warning">Warning: Avoid using CSS Parts as they can drastically increase the API surface area of a element and can cause significant costs when updating visual changes in future versions.</nve-alert>
 
-CSS Parts give full control to the application developer however, this comes with a significant tradeoff. As more internal elements are exposed they become part of the public API of the element.Over time increases the difficulty of maintaining the API and making visual changes of the element without causing unexpected visual breaking changes to the consumer.
+CSS Parts give full control to the application developer however, this comes with a significant tradeoff. As more internal elements are exposed they become part of the public API of the element. Over time increases the difficulty of maintaining the API and making visual changes of the element without causing unexpected visual breaking changes to the consumer.
 
 Elements that are part of the library's public API can more safely be exposed as it has its own well defined and versioned API.
 
