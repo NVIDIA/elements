@@ -151,6 +151,7 @@ export class CanvasEditable extends LitElement {
                 ${layoutStyles}
                 ${layoutLabsViewportStyles}
                 ${layoutLabsContainerStyles}
+                body:has([nve-popover]) { display: flex; align-items: center; justify-content: center; height: 100vh; width: 100vw; }
               </style>
 
               <script async type="module" src="https://https://esm.sh/@nvidia-elements/core@latest/dist/bundles/index.js"></script>
