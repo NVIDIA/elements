@@ -4,7 +4,7 @@ let editor = false;
 
 try {
   isIframe = globalThis.window.self !== globalThis.window.top;
-  isExampleViewer = !!globalThis.window.top?.location?.href?.includes('/example/');
+  isExampleViewer = !!globalThis.window.top?.location?.href?.includes('/examples/');
 } catch {
   editor = true;
 }

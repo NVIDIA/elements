@@ -19,7 +19,7 @@ export const data = {
   permalink: data => `examples/${data.example.permalink}/index.html`
 };
 
-export function render(data) {
+export async function render(data) {
   return this.renderTemplate(
     /* html */ `
 <!DOCTYPE HTML>
@@ -46,7 +46,7 @@ export function render(data) {
   </head>
   <body data-pagefind-ignore="all">
     <div id="iframe-links" nve-layout="row gap:sm align:right" hidden>
-      <a href="${PlaygroundService.create({ template: data.example.template, name: `${data.example.entrypoint}_${data.example.title}` })}" target="_blank" nve-text="link body sm">playground &#8599;</a>
+      <a href="${await PlaygroundService.create({ template: data.example.template, name: `${data.example.entrypoint}_${data.example.title}` })}" target="_blank" nve-text="link body sm">playground &#8599;</a>
       <a href="docs/elements/${data.example.elementName}/" target="_blank" nve-text="link body sm">documentation &#8599;</a>
     </div>
     <div id="example-container" data-element="${data.example.id}">
