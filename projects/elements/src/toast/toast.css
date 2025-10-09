@@ -4,8 +4,10 @@
   --nve-sys-layer-popover-offset: var(--nve-ref-space-md);
   --nve-sys-interaction-color: var(--color);
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-400);
+  --justify-content: initial;
   --background: var(--nve-sys-layer-popover-background);
   --border-radius: var(--nve-ref-border-radius-md);
+  --border: none;
   --color: var(--nve-sys-layer-popover-color);
   --font-size: var(--nve-ref-font-size-200);
   --font-weight: var(--nve-ref-font-weight-medium);
@@ -22,10 +24,11 @@
   color: var(--color);
   padding: var(--padding);
   border-radius: var(--border-radius);
+  border: var(--border);
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: var(--justify-content);
 }
 
 [internal-host]:has(nve-icon-button) {

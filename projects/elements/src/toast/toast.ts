@@ -26,12 +26,16 @@ import styles from './toast.css?inline';
  * @slot default content slot
  * @slot prefix - custom status icon slot
  * @cssprop --padding
+ * @cssprop --justify-content
  * @cssprop --background
  * @cssprop --border-radius
+ * @cssprop --border
  * @cssprop --color
  * @cssprop --font-size
+ * @cssprop --font-weight
  * @cssprop --box-shadow
  * @cssprop --gap
+ * @csspart prefix-icon - The prefix icon slot
  * @storybook https://NVIDIA.github.io/elements/docs/elements/toast/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=596-34431&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
@@ -112,7 +116,7 @@ export class Toast extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot name="prefix">${this.status !== 'muted' ? html`<nve-icon .name=${statusIcons[this.status] as IconName} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information}></nve-icon>` : nothing}</slot>
+        <slot name="prefix">${this.status !== 'muted' ? html`<nve-icon part="prefix-icon" .name=${statusIcons[this.status] as IconName} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information}></nve-icon>` : nothing}</slot>
         ${this.closable ? html`<nve-icon-button @click=${this.hidePopover} icon-name="cancel" container="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : nothing}
         <slot></slot>
       </div>
