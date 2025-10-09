@@ -36,6 +36,10 @@ export const Status = {
   `
 };
 
+export const Prominence = {
+  render: () => html`<nve-toast position="top" prominence="muted">muted</nve-toast>`
+};
+
 export const Actions = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 200px">

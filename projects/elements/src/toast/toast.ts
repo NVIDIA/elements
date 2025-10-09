@@ -77,6 +77,11 @@ export class Toast extends LitElement {
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
 
   /**
+   * Sets the visual prominence of the toast.
+   */
+  @property({ type: String, reflect: true }) prominence: 'muted';
+
+  /**
    * Determines if popover visibility behavior should be automatically controlled by the trigger.
    */
   @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
@@ -93,6 +98,7 @@ export class Toast extends LitElement {
 
   /**
    * visual treatment to represent a ongoing task or support status
+   * @deprecated Use 'prominence="muted"' instead of status="muted"
    */
   @property({ type: String, reflect: true }) status: SupportStatus | 'muted';
 
