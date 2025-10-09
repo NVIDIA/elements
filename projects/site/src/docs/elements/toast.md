@@ -24,6 +24,12 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% story 'nve-toast', 'Status', '{ "inline": false, "height": "300px" }' %}
 
+## Prominence
+
+{% api 'nve-toast', 'property', 'prominence' %}
+
+{% story 'nve-toast', 'Prominence', '{ "inline": false, "height": "130px" }' %}
+
 ## Close Timeout
 
 {% api 'nve-toast', 'property', 'closeTimeout' %}
