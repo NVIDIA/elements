@@ -101,7 +101,7 @@ export const DynamicTrigger = {
   render: () => html`
 <nve-tooltip id="dynamic-popover"></nve-tooltip>
 
-<div nve-layout="row gap:sm">
+<div nve-layout="row gap:sm align:center">
   <nve-button popovertarget="dynamic-popover">one</nve-button>
   <nve-button popovertarget="dynamic-popover">two</nve-button>
   <nve-button popovertarget="dynamic-popover">three</nve-button>
