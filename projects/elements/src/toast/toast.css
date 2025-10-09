@@ -54,6 +54,11 @@
   --color: var(--nve-sys-text-white-color);
 }
 
+:host([prominence='muted']:not([status])) {
+  --background: var(--nve-sys-support-muted-color);
+  --color: var(--nve-sys-layer-popover-background);
+}
+
 nve-icon {
   --color: inherit;
 }
