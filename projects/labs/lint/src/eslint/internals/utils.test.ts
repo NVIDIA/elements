@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { hasTemplateSyntax, parseSelector, hasMatchingChild, type HtmlNode } from './utils.js';
+import { hasTemplateSyntax, parseSelector, hasMatchingChild, type HtmlNode, isNVElement } from './utils.js';
 
 describe('hasTemplateSyntax', () => {
   it('should return false for node with no children', () => {
@@ -386,5 +386,12 @@ describe('hasMatchingChild', () => {
     };
 
     expect(hasMatchingChild(node, 'input')).toBe(true);
+  });
+});
+
+describe('isNVElement', () => {
+  it('should determine if a tag is an NVElement', () => {
+    expect(isNVElement('div')).toEqual(false);
+    expect(isNVElement('nve-button')).toEqual(true);
   });
 });

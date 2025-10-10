@@ -102,3 +102,7 @@ export function hasMatchingChild(node: HtmlNode, selector: string): boolean {
 
   return false;
 }
+
+export function isNVElement(tagName: string): boolean {
+  return tagName?.startsWith('nve-');
+}

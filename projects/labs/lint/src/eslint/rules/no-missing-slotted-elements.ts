@@ -64,28 +64,27 @@ const rule = {
       recommended: true,
       url: 'https://NVIDIA.github.io/elements/docs/lint/'
     },
-    schema: [],
+    schema: [{ type: 'object' }],
     messages: {
-      ['unexpected-missing-slotted-element']: 'Unexpected use of missing slotted element {{element}}'
+      ['unexpected-missing-slotted-element']: 'Unexpected use of missing slotted element <{{element}}>'
     }
   },
   create(context) {
     return createVisitors(context, {
       Tag(node) {
+        const options = context.options[0] ?? {};
         const tagName = node.name.toLowerCase();
-        const requirements = REQUIRED_SLOTTED_ELEMENTS[tagName];
 
-        if (!requirements) {
+        const additionalRequirements = options[tagName]?.required ?? [];
+        const required = [...(REQUIRED_SLOTTED_ELEMENTS[tagName]?.required ?? []), ...additionalRequirements];
+
+        if (!required.length) {
           return;
         }
 
-        // Skip validation if the element contains templating syntax
-        // that might dynamically add the required elements at runtime
         if (hasTemplateSyntax(node)) {
           return;
         }
-
-        const { required } = requirements;
 
         // Check each required element
         for (const requiredSelector of required) {

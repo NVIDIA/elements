@@ -93,11 +93,23 @@ describe('lintPlaygroundTemplate', () => {
   it('should handle multiple violations in single code block', async () => {
     const codeWithMultipleViolations = `
       <nve-button nve-layout="pad:md">Button 1</nve-button>
-      <nve-card nve-text="body">Card content</nve-card>
+      <nve-button nve-text="body">Card content</nve-button>
     `;
     const result = await lintPlaygroundTemplate(codeWithMultipleViolations);
 
     expect(result.length).toBeGreaterThan(1);
     expect(result.every(msg => msg.id === 'no-restricted-attributes')).toBe(true);
+  });
+
+  it('should handle suggestions', async () => {
+    const codeWithSuggestion = '<nve-button mlv-layout="pad:md">Button</nve-button>';
+    const result = await lintPlaygroundTemplate(codeWithSuggestion);
+    expect(result.length).toBeGreaterThan(0);
+
+    // Find the message from the no-deprecated-global-attributes rule
+    const messageWithSuggestion = result.find(msg => msg.id === 'unexpected-deprecated-global-attribute');
+    expect(messageWithSuggestion).toBeDefined();
+    expect(messageWithSuggestion.suggestions).toBeDefined();
+    expect(messageWithSuggestion.suggestions.length).toBeGreaterThan(0);
   });
 });

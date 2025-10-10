@@ -7,6 +7,7 @@ const rule = {
   meta: {
     type: 'problem' as const,
     fixable: 'code' as const,
+    hasSuggestions: true,
     docs: {
       description: 'Disallow use of deprecated global utility attributes in HTML.',
       category: 'Best Practice',
@@ -16,7 +17,8 @@ const rule = {
     schema: [],
     messages: {
       ['unexpected-deprecated-global-attribute']:
-        'Unexpected use of deprecated global attribute {{attribute}}. Use {{alternative}} instead.'
+        'Unexpected use of deprecated global attribute {{attribute}}. Use {{alternative}} instead.',
+      ['suggest-replace-deprecated-attribute']: 'Replace {{attribute}} with {{alternative}}'
     }
   },
   create(context) {
@@ -25,16 +27,35 @@ const rule = {
         DEPRECATED_GLOBAL_ATTRIBUTES.forEach(attribute => {
           const attr = findAttr(node, attribute);
           if (attr) {
+            const newAttributeName = attribute.replace('mlv-', 'nve-');
+
             context.report({
               messageId: 'unexpected-deprecated-global-attribute',
-              node,
+              node: attr,
               data: {
                 attribute,
-                alternative: attribute.replace('mlv-', 'nve-')
+                alternative: newAttributeName
               },
-              fix: fixer => {
-                const newAttributeName = attribute.replace('mlv-', 'nve-');
+              suggest: [
+                {
+                  messageId: 'suggest-replace-deprecated-attribute',
+                  data: {
+                    attribute,
+                    alternative: newAttributeName
+                  },
+                  fix: fixer => {
+                    if (!attr.value) {
+                      return fixer.replaceText(attr, newAttributeName);
+                    }
 
+                    return fixer.replaceText(
+                      attr,
+                      `${newAttributeName}=${attr.startWrapper.value}${attr.value.value}${attr.endWrapper.value}`
+                    );
+                  }
+                }
+              ],
+              fix: fixer => {
                 if (!attr.value) {
                   return fixer.replaceText(attr, newAttributeName);
                 }
