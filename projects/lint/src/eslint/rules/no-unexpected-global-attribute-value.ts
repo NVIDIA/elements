@@ -1,102 +1,98 @@
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
-
-interface HtmlData {
-  globalAttributes: {
-    name: string;
-    values: {
-      name: string;
-    }[];
-  }[];
-  version: number;
-  $schema: string;
-}
-
-let htmlData = {
-  globalAttributes: []
-};
-
-// try to get html schema from locally installed styles package, fallback to bundled version
-try {
-  htmlData = await import('@nvidia-elements/styles/data.html.json');
-} catch {
-  htmlData = (await import('../../../../../styles/dist/data.html.json?inline')) as unknown as HtmlData;
-}
-
-const EXCEPTIONS = ['debug', 'mkd', 'md']; // internal scopes
-
-const VALID_NVE_TEXT_VALUES = new Set([
-  ...(htmlData.globalAttributes.find(attribute => attribute.name === 'nve-text')?.values?.map(value => value.name) ??
-    []),
-  ...EXCEPTIONS
-]);
-
-const VALID_NVE_LAYOUT_VALUES = new Set([
-  ...(htmlData.globalAttributes.find(attribute => attribute.name === 'nve-layout')?.values?.map(value => value.name) ??
-    []),
-  ...EXCEPTIONS
-]);
-
-const VALID_NVE_DISPLAY_VALUES = new Set([
-  ...(htmlData.globalAttributes.find(attribute => attribute.name === 'nve-display')?.values?.map(value => value.name) ??
-    []),
-  ...EXCEPTIONS
-]);
-
-const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
+import {
+  VALID_NVE_DISPLAY_VALUES,
+  VALUE_BINDINGS,
+  recommendedNveTextValue,
+  recommendedNveLayoutValue
+} from '../internals/attributes.js';
 
 const rule = {
   meta: {
     type: 'problem' as const,
+    hasSuggestions: true,
     docs: {
       description: 'Disallow use of invalid attribute values in HTML.',
       category: 'Best Practice',
       recommended: true,
       url: 'https://NVIDIA.github.io/elements/docs/lint/'
     },
-    schema: [],
+    schema: [{ type: 'object' }],
     messages: {
-      ['unexpected-attribute-value']: 'Unexpected value "{{value}}" in "{{attribute}}" attribute'
+      ['unexpected-attribute-value']: 'Unexpected value "{{value}}" in "{{attribute}}" attribute',
+      ['unexpected-attribute-value-alternative']:
+        'Unexpected value "{{value}}" in "{{attribute}}" attribute. Use "{{alternative}}" instead.',
+      ['suggest-replace-attribute-value']: 'Replace "{{value}}" with "{{alternative}}"'
     }
   },
   create(context) {
     return createVisitors(context, {
       Tag(node) {
         const textAttr = findAttr(node, 'nve-text');
-        const legacyTextAttr = findAttr(node, 'nve-text');
-        const matchTextAttr = textAttr ?? legacyTextAttr;
-        if (matchTextAttr) {
-          const values = matchTextAttr.value?.value?.split(' ') ?? [];
-          const value = values.find(value => !VALID_NVE_TEXT_VALUES.has(value));
-          const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
-          if (value && !isValueBinding) {
+        if (textAttr) {
+          const value = textAttr.value?.value ?? '';
+          const alternative = recommendedNveTextValue(value);
+          if (alternative !== value) {
             context.report({
-              node,
+              node: textAttr,
               data: {
                 attribute: 'nve-text',
-                value
+                value,
+                alternative
               },
-              messageId: 'unexpected-attribute-value'
+              messageId: alternative ? 'unexpected-attribute-value-alternative' : 'unexpected-attribute-value',
+              suggest: alternative
+                ? [
+                    {
+                      messageId: 'suggest-replace-attribute-value',
+                      data: {
+                        value,
+                        alternative
+                      },
+                      fix: fixer => {
+                        return fixer.replaceText(
+                          textAttr,
+                          `nve-text=${textAttr.startWrapper.value}${alternative}${textAttr.endWrapper.value}`
+                        );
+                      }
+                    }
+                  ]
+                : []
             });
           }
         }
 
         const layoutAttr = findAttr(node, 'nve-layout');
-        const legacyLayoutAttr = findAttr(node, 'nve-layout');
-        const matchLayoutAttr = layoutAttr ?? legacyLayoutAttr;
-        if (matchLayoutAttr) {
-          const attribute = layoutAttr ? 'nve-layout' : 'nve-layout';
-          const values = matchLayoutAttr.value?.value?.split(' ') ?? [];
-          const value = values.find(value => !VALID_NVE_LAYOUT_VALUES.has(value));
-          const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
-          if (value && !isValueBinding) {
+        if (layoutAttr) {
+          const value = layoutAttr.value?.value ?? '';
+          const invalidSymbols = context.options[0]?.['nve-layout'] ?? [];
+          const alternative = recommendedNveLayoutValue(value, invalidSymbols);
+          if (alternative !== value) {
             context.report({
-              node,
+              node: layoutAttr,
               data: {
-                attribute,
-                value
+                attribute: 'nve-layout',
+                value,
+                alternative
               },
-              messageId: 'unexpected-attribute-value'
+              messageId: alternative ? 'unexpected-attribute-value-alternative' : 'unexpected-attribute-value',
+              suggest: alternative
+                ? [
+                    {
+                      messageId: 'suggest-replace-attribute-value',
+                      data: {
+                        value,
+                        alternative
+                      },
+                      fix: fixer => {
+                        return fixer.replaceText(
+                          layoutAttr,
+                          `nve-layout=${layoutAttr.startWrapper.value}${alternative}${layoutAttr.endWrapper.value}`
+                        );
+                      }
+                    }
+                  ]
+                : []
             });
           }
         }

@@ -34,7 +34,7 @@ const rule = {
               const attr = findAttr(node, attribute);
               if (attr) {
                 context.report({
-                  node,
+                  node: attr,
                   data: {
                     attribute
                   },
