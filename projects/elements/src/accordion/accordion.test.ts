@@ -191,6 +191,7 @@ describe(`${Accordion.metadata.tag} - Actions`, () => {
   let element: Accordion;
 
   /* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
+  /* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value */
   beforeEach(async () => {
     fixture = await createFixture(html`
     <nve-accordion-group>

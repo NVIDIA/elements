@@ -81,6 +81,7 @@
       "files": [
         "../metadata/static/index.json",
         "../metadata/static/examples.json",
+        "../../labs/lint/dist/**",
         "src/**",
         "!src/**/*.test.ts",
         "package.json",
@@ -95,6 +96,10 @@
         "../vite:ci",
         {
           "script": "../metadata:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/lint:build",
           "cascade": false
         }
       ]

@@ -103,6 +103,9 @@ const playgroundCreateContext = `
 
 Best practices and guidelines for creating an Elements Playground.
 
+- Use \`api_list\` and  to lookup available APIs before using \`api_search\`.
+- Use \`examples_list\` to lookup available examples before using \`examples_search\`.
+
 ### Tools to use
 - \`api_list\`: lookup available APIs before implementation
 - \`api_search\`: understand components and their API details before using them
