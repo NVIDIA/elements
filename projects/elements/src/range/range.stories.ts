@@ -7,6 +7,9 @@ export default {
   component: 'nve-range',
 };
 
+/**
+ * @summary Basic range component for numeric value selection, providing a simple slider interface for adjusting values within a defined range.
+ */
 export const Default = {
   render: () => html`
 <nve-range>
@@ -16,6 +19,9 @@ export const Default = {
 </nve-range>`
 };
 
+/**
+ * @summary Range with datalist for visual tick marks and labeled values, enabling users to see available options and precisely select predetermined values.
+ */
 export const Datalist = {
   render: () => html`
 <nve-range>
@@ -33,16 +39,47 @@ export const Datalist = {
   `
 }
 
+/**
+ * @summary Range with combined step increments and datalist labels, ensuring precise value selection with clear visual indicators at each valid step position.
+ */
+export const DatalistWithSteps = {
+  render: () => html`
+<nve-range>
+<label>label</label>
+  <input type="range" min="0" max="100" step="10" />
+  <datalist>
+    <option value="0">0</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+    <option value="40">40</option>
+    <option value="50">50</option>
+    <option value="60">60</option>
+    <option value="70">70</option>
+    <option value="80">80</option>
+    <option value="90">90</option>
+    <option value="100">100</option>
+  </datalist>
+</nve-range>
+  `
+}
+
+/**
+ * @summary Range with defined step increments for discrete value selection, constraining the slider to specific intervals for controlled input precision.
+ */
 export const Step = {
   render: () => html`
 <nve-range>
   <label>label</label>
-  <input type="range" min="25" max="75" step="5" />
+  <input type="range" min="0" max="100" step="20" />
   <nve-control-message>message</nve-control-message>
 </nve-range>
   `
 }
 
+/**
+ * @summary Vertical layout configuration for stacked form arrangements, displaying label, slider, and message in a column format with support for various states including disabled, success, and error feedback.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg full">
@@ -72,6 +109,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Horizontal layout configuration for inline form arrangements, positioning label and slider side-by-side for compact displays with support for various states including disabled, success, and error feedback.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg full">
