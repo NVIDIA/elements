@@ -17,7 +17,6 @@ nve-range input[type='range']::-webkit-slider-runnable-track {
   align-self: center;
 }
 
-mlv-range:has(datalist),
-nve-range:has(datalist) {
-  --_appearance: auto !important;
+nve-range:has(datalist) input[type='range']::-webkit-slider-container {
+  min-block-size: auto;
 }
