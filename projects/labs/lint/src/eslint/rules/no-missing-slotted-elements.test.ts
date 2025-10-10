@@ -33,7 +33,7 @@ describe('noMissingSlottedElements', () => {
     expect(noMissingSlottedElements.meta.schema).toBeDefined();
     expect(noMissingSlottedElements.meta.messages).toBeDefined();
     expect(noMissingSlottedElements.meta.messages['unexpected-missing-slotted-element']).toBe(
-      'Unexpected use of missing slotted element {{element}}'
+      'Unexpected use of missing slotted element <{{element}}>'
     );
   });
 
@@ -82,6 +82,19 @@ describe('noMissingSlottedElements', () => {
         {
           code: `<nve-range></nve-range>`,
           errors: [{ messageId: 'unexpected-missing-slotted-element', data: { element: 'input[type="range"]' } }]
+        }
+      ]
+    });
+  });
+
+  it('should report custom required elements', () => {
+    tester.run('unexpected use of missing slotted elements', rule, {
+      valid: [],
+      invalid: [
+        {
+          options: [{ 'nve-card': { required: ['nve-card-content'] } }],
+          code: `<nve-card></nve-card>`,
+          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { element: 'nve-card-content' } }]
         }
       ]
     });

@@ -28,7 +28,7 @@ const rule = {
         if (deprecatedName) {
           context.report({
             messageId: 'deprecated-css-var',
-            node,
+            node: child,
             data: {
               value: child.name,
               alternative: child.name.replace('--nve-', '--nve-')

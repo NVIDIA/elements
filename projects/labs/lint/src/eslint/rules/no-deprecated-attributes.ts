@@ -18,7 +18,7 @@ const rule = {
     },
     schema: [],
     messages: {
-      ['unexpected-deprecated-attribute']: 'Unexpected use of deprecated attribute {{attribute}}'
+      ['unexpected-deprecated-attribute']: 'Unexpected use of deprecated value "{{value}}" in attribute "{{attribute}}"'
     }
   },
   create(context) {
@@ -28,11 +28,13 @@ const rule = {
         if (deprecatedAttributes) {
           Object.entries(deprecatedAttributes).forEach(([attribute, values]) => {
             const attr = findAttr(node, attribute);
-            if (attr && values.includes(attr.value.value)) {
+            const value = attr?.value?.value;
+            if (attr && values.includes(value)) {
               context.report({
-                node,
+                node: attr,
                 data: {
-                  attribute
+                  attribute,
+                  value
                 },
                 messageId: 'unexpected-deprecated-attribute'
               });
