@@ -25,7 +25,7 @@ const rule = {
           if (node.name.includes('-') && attr) {
             context.report({
               messageId: 'no-restricted-attributes',
-              node,
+              node: attr,
               data: {
                 attribute
               }
