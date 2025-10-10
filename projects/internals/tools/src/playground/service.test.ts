@@ -13,9 +13,9 @@ describe('PlaygroundService', () => {
     expect(result.length).toBe(1);
     expect(result[0].message).toBe('Unexpected use of restricted attribute nve-layout on custom HTML element.');
     expect(result[0].line).toBe(1);
-    expect(result[0].column).toBe(1);
+    expect(result[0].column).toBe(13);
     expect(result[0].endLine).toBe(1);
-    expect(result[0].endColumn).toBe(57);
+    expect(result[0].endColumn).toBe(32);
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.name).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.command).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.description).toBe(

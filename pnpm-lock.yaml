@@ -938,13 +938,16 @@ importers:
       '@html-eslint/parser':
         specifier: 'catalog:'
         version: 0.47.0(jiti@2.6.1)
-      '@nvidia-elements/themes':
+      '@nvidia-elements/styles':
         specifier: workspace:*
-        version: link:../../themes
+        version: link:../../styles
     devDependencies:
       '@nve-internals/eslint':
         specifier: workspace:*
         version: link:../../internals/eslint
+      '@nve-internals/metadata':
+        specifier: workspace:*
+        version: link:../../internals/metadata
       '@nve-internals/vite':
         specifier: workspace:*
         version: link:../../internals/vite
@@ -969,10 +972,6 @@ importers:
       vitest:
         specifier: 'catalog:'
         version: 4.0.0-beta.3(@types/node@22.13.1)(@vitest/browser@4.0.0-beta.3)(jiti@2.6.1)(lightningcss@1.30.0)(sass@1.89.2)(terser@5.37.0)(yaml@2.8.1)
-    optionalDependencies:
-      '@nvidia-elements/styles':
-        specifier: workspace:*
-        version: link:../../styles
 
   projects/labs/markdown:
     dependencies:
