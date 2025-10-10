@@ -18,6 +18,10 @@
 
 {% story 'nve-range', 'Datalist' %}
 
+## Datalist With Steps
+
+{% story 'nve-range', 'DatalistWithSteps' %}
+
 ## Step
 
 {% story 'nve-range', 'Step' %}
