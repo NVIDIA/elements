@@ -55,16 +55,14 @@
     "@html-eslint/parser": "catalog:",
     "@eslint/css": "catalog:",
     "@eslint/js": "catalog:",
-    "@eslint/json": "catalog:",
-    "@nvidia-elements/themes": "workspace:*"
+    "@eslint/json": "catalog:"
   },
   "peerDependencies": {
+    "@nvidia-elements/styles": "workspace:*",
     "eslint": ">= 9"
   },
-  "optionalDependencies": {
-    "@nvidia-elements/styles": "workspace:*"
-  },
   "devDependencies": {
+    "@nve-internals/metadata": "workspace:*",
     "@nve-internals/eslint": "workspace:*",
     "@nve-internals/vite": "workspace:*",
     "@types/node": "catalog:",
@@ -112,8 +110,7 @@
         "dist/**"
       ],
       "dependencies": [
-        "../../themes:build",
-        "../../styles:build",
+        "../../internals/metadata:build",
         "../../internals/vite:ci"
       ]
     },

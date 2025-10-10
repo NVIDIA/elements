@@ -10,6 +10,7 @@ import noDeprecatedGlobalAttributes from '../rules/no-deprecated-global-attribut
 import noRestrictedAttributes from '../rules/no-restricted-attributes.js';
 import noDeprecatedSlots from '../rules/no-deprecated-slots.js';
 import noMissingSlottedElements from '../rules/no-missing-slotted-elements.js';
+import noUnexpectedSlotValue from '../rules/no-unexpected-slot-value.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
 
@@ -43,11 +44,12 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-deprecated-icon-names': noDeprecatedIconNames,
         'no-deprecated-popover-attributes': noDeprecatedPopoverAttributes,
         'no-deprecated-global-attributes': noDeprecatedGlobalAttributes,
+        'no-deprecated-slots': noDeprecatedSlots,
+        'no-missing-slotted-elements': noMissingSlottedElements,
+        'no-restricted-attributes': noRestrictedAttributes,
         'no-unexpected-global-attribute-value': noUnexpectedGlobalAttributeValue,
         'no-unexpected-style-customization': noUnexpectedStyleCustomization,
-        'no-restricted-attributes': noRestrictedAttributes,
-        'no-deprecated-slots': noDeprecatedSlots,
-        'no-missing-slotted-elements': noMissingSlottedElements
+        'no-unexpected-slot-value': noUnexpectedSlotValue
       }
     }
   },
@@ -58,9 +60,10 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-deprecated-icon-names': ['error'],
     '@nvidia-elements/lint/no-deprecated-popover-attributes': ['error'],
     '@nvidia-elements/lint/no-deprecated-global-attributes': ['error'],
-    '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error'],
-    '@nvidia-elements/lint/no-restricted-attributes': ['error'],
     '@nvidia-elements/lint/no-deprecated-slots': ['error'],
-    '@nvidia-elements/lint/no-missing-slotted-elements': ['error']
+    '@nvidia-elements/lint/no-missing-slotted-elements': ['error'],
+    '@nvidia-elements/lint/no-restricted-attributes': ['error'],
+    '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error'],
+    '@nvidia-elements/lint/no-unexpected-slot-value': ['error']
   }
 };
