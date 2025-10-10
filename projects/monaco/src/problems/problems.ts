@@ -57,6 +57,7 @@ function hasProblemsChanged(value: Problem[], oldValue: Problem[] | undefined) {
  * @event problem-selected - Dispatched when a problem is selected.
  * @event problem-activated - Dispatched when a problem is activated.
  * @event problem-context-menu - Dispatched when a problem's context menu is requested.
+ * @slot empty - Slot for displaying empty state messages.
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea
  * @storybook https://NVIDIA.github.io/elements/docs/labs/monaco/problems/
  * @stable false

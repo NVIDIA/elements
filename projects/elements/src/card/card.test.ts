@@ -13,6 +13,7 @@ describe(Card.metadata.tag, () => {
   let cardFooter: CardFooter;
 
   /* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
+  /* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value */
   beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-card>

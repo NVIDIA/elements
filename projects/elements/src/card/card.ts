@@ -12,9 +12,7 @@ import cardFooterStyleSheet from './card-footer.css?inline';
  * @description A container for content representing a single entity.
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
- * @slot - use `<nve-card-content>` for card content
- * @slot header - use `<nve-card-header>` for card header
- * @slot footer - use `<nve-card-footer>` for card footer
+ * @slot - use `<nve-card-header>`,`<nve-card-content>`,`<nve-card-footer>` for card content layout
  * @cssprop --background
  * @cssprop --color
  * @cssprop --border-radius

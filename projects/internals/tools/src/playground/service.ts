@@ -22,7 +22,23 @@ const eslintSchema: Schema = {
     endLine: { type: 'number' },
     endColumn: { type: 'number' },
     fix: { type: 'object' },
-    suggestions: { type: 'array' }
+    suggestions: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          desc: { type: 'string' },
+          fix: {
+            type: 'object',
+            properties: {
+              range: { type: 'array', items: { type: 'number' } },
+              text: { type: 'string' }
+            }
+          },
+          messageId: { type: 'string' }
+        }
+      }
+    }
   },
   required: ['id', 'severity', 'message', 'line', 'column', 'endLine', 'endColumn'],
   additionalProperties: false
@@ -137,7 +153,7 @@ export class PlaygroundService {
     const formattedName = `${name}${author ? ` - (${author})` : ''}${environment ? ` ${environment}` : ''}`;
     const result = createPlaygroundURL(template, metadata, { name: formattedName, type });
 
-    if (process.env.ELEMENTS_ENV === 'mcp' || (process.env.ELEMENTS_ENV === 'cli' && start)) {
+    if (!process.env.CI && (process.env.ELEMENTS_ENV === 'mcp' || (process.env.ELEMENTS_ENV === 'cli' && start))) {
       const openBrowser = await import('open');
       void openBrowser.default(result);
     }

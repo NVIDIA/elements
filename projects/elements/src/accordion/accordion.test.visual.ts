@@ -14,6 +14,7 @@ describe('accordion visual', () => {
 });
 
 /* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
+/* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value */
 
 function template(theme: '' | 'dark' = '') {
   return /* html */ `

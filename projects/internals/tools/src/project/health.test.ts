@@ -1,8 +1,11 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi, beforeEach } from 'vitest';
+import type { MetadataSummary } from '@internals/metadata';
+import type { Result } from 'publint';
 import {
   checkDependencies,
   checkPeerDependencies,
   checkSemanticDependencies,
+  getHealthReport,
   getVersionHealth,
   getVersionNum,
   getVersionStatus
@@ -13,6 +16,23 @@ import type { PackageData } from '../internal/types.js';
 // Mock the publint module
 vi.mock('publint', () => ({
   publint: vi.fn()
+}));
+
+// Mock the internal node module
+vi.mock('../internal/node.js', () => ({
+  getPackageJson: vi.fn()
+}));
+
+// Mock the metadata service
+vi.mock('@internals/metadata', () => ({
+  MetadataService: {
+    getMetadata: vi.fn()
+  }
+}));
+
+// Mock the API utils
+vi.mock('../api/utils.js', () => ({
+  getLatestPublishedVersions: vi.fn()
 }));
 
 describe('getVersionNum', () => {
@@ -569,6 +589,255 @@ describe('checkSemanticDependencies', () => {
     expect(checkSemanticDependencies(packageJson)).toEqual({
       message: '@nve packages contain caret (^) prefix',
       status: 'success'
+    });
+  });
+});
+
+describe('getHealthReport', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should return health report for application type with only dependencies check', async () => {
+    const { getPackageJson } = await import('../internal/node.js');
+    const { MetadataService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+
+    vi.mocked(MetadataService.getMetadata).mockResolvedValue({} as MetadataSummary);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '1.0.0' } as ElementVersions);
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: { '@nvidia-elements/core': '^1.0.0' },
+      devDependencies: {},
+      peerDependencies: {}
+    });
+
+    const result = await getHealthReport('/test/path', 'application');
+    expect(result).toHaveProperty('dependencies');
+    expect(result).not.toHaveProperty('peerDependencies');
+    expect(result).not.toHaveProperty('semanticDependencies');
+    expect(result.dependencies).toHaveProperty('versions');
+    expect(result.dependencies).toHaveProperty('status');
+    expect(result.dependencies).toHaveProperty('message');
+  });
+
+  it('should return health report for library type with all checks', async () => {
+    const { getPackageJson } = await import('../internal/node.js');
+    const { MetadataService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { publint } = await import('publint');
+
+    vi.mocked(MetadataService.getMetadata).mockResolvedValue({} as MetadataSummary);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '1.0.0' } as ElementVersions);
+    vi.mocked(publint).mockResolvedValue({ messages: [] } as Result);
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: {},
+      devDependencies: {},
+      peerDependencies: { '@nvidia-elements/core': '^1.0.0' }
+    });
+
+    const result = await getHealthReport('/test/path', 'library');
+    expect(result).toHaveProperty('dependencies');
+    expect(result).toHaveProperty('peerDependencies');
+    expect(result).toHaveProperty('semanticDependencies');
+    expect(result.peerDependencies).toHaveProperty('status');
+    expect(result.peerDependencies).toHaveProperty('message');
+    expect(result.semanticDependencies).toHaveProperty('status');
+    expect(result.semanticDependencies).toHaveProperty('message');
+  });
+
+  it('should include publint checks for library type', async () => {
+    const { getPackageJson } = await import('../internal/node.js');
+    const { MetadataService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { publint } = await import('publint');
+
+    vi.mocked(MetadataService.getMetadata).mockResolvedValue({} as MetadataSummary);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '1.0.0' } as ElementVersions);
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: {},
+      devDependencies: {},
+      peerDependencies: { '@nvidia-elements/core': '^1.0.0' }
+    });
+    vi.mocked(publint).mockResolvedValue({
+      messages: [
+        {
+          code: 'FILE_DOES_NOT_EXIST',
+          type: 'error',
+          path: ['dist/index.js'],
+          args: {}
+        }
+      ],
+      pkg: {} as PackageData
+    } as Result);
+
+    const result = await getHealthReport('/test/path', 'library');
+
+    expect(result).toHaveProperty('library file does not exist');
+    expect(result['library file does not exist']).toEqual({
+      message: 'https://publint.dev/rules#FILE_DOES_NOT_EXIST',
+      status: 'danger'
+    });
+  });
+
+  it('should show libraryPublint success when no publint issues are found', async () => {
+    const { getPackageJson } = await import('../internal/node.js');
+    const { MetadataService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { publint } = await import('publint');
+
+    vi.mocked(MetadataService.getMetadata).mockResolvedValue({} as MetadataSummary);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '1.0.0' } as ElementVersions);
+    vi.mocked(publint).mockResolvedValue({ messages: [] } as Result);
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: {},
+      devDependencies: {},
+      peerDependencies: { '@nvidia-elements/core': '^1.0.0' }
+    });
+
+    const result = await getHealthReport('/test/path', 'library');
+    expect(result).toHaveProperty('libraryPublint');
+    expect(result.libraryPublint).toEqual({
+      message: 'passed checks',
+      status: 'success'
+    });
+  });
+
+  it('should handle multiple publint warnings and errors', async () => {
+    const { getPackageJson } = await import('../internal/node.js');
+    const { MetadataService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { publint } = await import('publint');
+
+    vi.mocked(MetadataService.getMetadata).mockResolvedValue({} as MetadataSummary);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '1.0.0' } as ElementVersions);
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: {},
+      devDependencies: {},
+      peerDependencies: { '@nvidia-elements/core': '^1.0.0' }
+    });
+
+    vi.mocked(publint).mockResolvedValue({
+      messages: [
+        {
+          code: 'FILE_DOES_NOT_EXIST',
+          type: 'error',
+          path: ['dist/index.js'],
+          args: {}
+        },
+        {
+          code: 'FILE_INVALID_FORMAT',
+          type: 'warning',
+          path: ['package.json'],
+          args: {}
+        },
+        {
+          code: 'FILE_INVALID_FORMAT',
+          type: 'suggestion',
+          path: ['dist/types.d.ts'],
+          args: {}
+        }
+      ]
+    } as Result);
+
+    const result = await getHealthReport('/test/path', 'library');
+
+    expect(result['library file does not exist']).toEqual({
+      message: 'https://publint.dev/rules#FILE_DOES_NOT_EXIST',
+      status: 'danger'
+    });
+    expect(result['library file invalid format']).toEqual({
+      message: 'https://publint.dev/rules#FILE_INVALID_FORMAT',
+      status: 'warning'
+    });
+  });
+
+  it('should handle library with peer dependency issues', async () => {
+    const { getPackageJson } = await import('../internal/node.js');
+    const { MetadataService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { publint } = await import('publint');
+
+    vi.mocked(MetadataService.getMetadata).mockResolvedValue({} as MetadataSummary);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '1.0.0' } as ElementVersions);
+    vi.mocked(publint).mockResolvedValue({ messages: [] } as Result);
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: { '@nvidia-elements/core': '^1.0.0' }, // Should be in peerDependencies
+      devDependencies: {},
+      peerDependencies: {}
+    });
+
+    const result = await getHealthReport('/test/path', 'library');
+    expect(result.peerDependencies).toEqual({
+      message: '@nve packages must be listed as peer dependencies',
+      status: 'danger'
+    });
+  });
+
+  it('should handle library with semantic dependency issues', async () => {
+    const { getPackageJson } = await import('../internal/node.js');
+    const { MetadataService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { publint } = await import('publint');
+
+    vi.mocked(MetadataService.getMetadata).mockResolvedValue({} as MetadataSummary);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '1.0.0' } as ElementVersions);
+    vi.mocked(publint).mockResolvedValue({ messages: [] } as Result);
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: {},
+      devDependencies: {},
+      peerDependencies: { '@nvidia-elements/core': '1.0.0' } // Missing caret
+    });
+
+    const result = await getHealthReport('/test/path', 'library');
+    expect(result.semanticDependencies).toEqual({
+      message: '@nve packages must contain caret (^) prefix',
+      status: 'danger'
+    });
+  });
+
+  it('should handle outdated dependencies in application type', async () => {
+    const { getPackageJson } = await import('../internal/node.js');
+    const { MetadataService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+
+    vi.mocked(MetadataService.getMetadata).mockResolvedValue({} as MetadataSummary);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '2.0.0' } as ElementVersions);
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: { '@nvidia-elements/core': '^1.0.0' },
+      devDependencies: {},
+      peerDependencies: {}
+    });
+
+    const result = await getHealthReport('/test/path', 'application');
+    expect(result.dependencies.status).toBe('warning');
+    expect(result.dependencies.message).toBe('@nve packages are out of date');
+    const dependenciesResult = result.dependencies as {
+      versions: Record<string, { status: string }>;
+      status: string;
+      message: string;
+    };
+    expect(dependenciesResult.versions['@nvidia-elements/core'].status).toBe('danger');
+  });
+
+  it('should pass publint with correct pack option for library type', async () => {
+    const { getPackageJson } = await import('../internal/node.js');
+    const { MetadataService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { publint } = await import('publint');
+
+    vi.mocked(MetadataService.getMetadata).mockResolvedValue({} as MetadataSummary);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '1.0.0' } as ElementVersions);
+    vi.mocked(publint).mockResolvedValue({ messages: [] } as Result);
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: {},
+      devDependencies: {},
+      peerDependencies: { '@nvidia-elements/core': '^1.0.0' }
+    });
+
+    await getHealthReport('/test/path', 'library');
+    expect(publint).toHaveBeenCalledWith({
+      pkgDir: '/test/path',
+      pack: 'pnpm'
     });
   });
 });
