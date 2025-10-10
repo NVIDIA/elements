@@ -85,7 +85,7 @@ export function render() {
               <span class="silver-gradient gradient-txt">at the speed of light.</span>
             </div>
 
-            <div nve-layout="column &lg|row  gap:lg">
+            <div nve-layout="column &lg|row gap:lg">
               <div nve-layout="row gap:lg" class="feature">
                 <nve-logo class="feature-icon" color="gray-slate">
                   <nve-icon name="shapes"></nve-icon>
