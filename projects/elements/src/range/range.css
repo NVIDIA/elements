@@ -2,21 +2,29 @@
   --background: var(--accent-color);
   --control-height: var(--nve-ref-size-800);
   --cursor: pointer;
-  --track-width: 50%;
+  --track-width: 0.5;
   --track-height: var(--nve-ref-size-150);
   --track-border-radius: var(--nve-ref-border-radius-md);
   --thumb-width: var(--nve-ref-size-400);
   --thumb-height: var(--nve-ref-size-400);
-  --thumb-background: var(--background);
-  --thumb-border: inset 0 0 0 2px transparent;
+  --thumb-background: var(--nve-sys-text-muted-color);
+  --thumb-border: inset 0 0 0 2px var(--nve-sys-layer-canvas-background);
   width: 100%;
   contain: layout;
+}
+
+:host(:state(disabled)) {
+  --background: var(--nve-sys-interaction-disabled-background);
+}
+
+:host(:not(:state(disabled)):hover) [input] {
+  filter: brightness(0.9);
 }
 
 ::slotted(input) {
   /* https://web.dev/accent-color/#guaranteeing-contrast */
   accent-color: var(--accent-color) !important;
-  height: var(--track-height) !important;
+  height: calc(var(--track-height) * 3) !important;
   cursor: var(--cursor) !important;
   margin: 0 !important;
   width: var(--control-width) !important;
@@ -29,10 +37,10 @@
   position: relative;
 }
 
-[input]::after {
+[input]::before {
   content: '';
   display: block;
-  width: calc(var(--track-width) - var(--thumb-width) / 2 + 0.5px);
+  width: calc(var(--track-width) * 100% - var(--track-width) * var(--thumb-width));
   height: var(--track-height);
   background: var(--background);
   border-top-left-radius: var(--track-border-radius);
@@ -44,10 +52,36 @@
   left: 0;
 }
 
-:host(:state(disabled)) {
-  --background: var(--nve-sys-interaction-disabled-background);
+[input]:has(.datalist-labels) {
+  flex-direction: column;
 }
 
-:host(:not(:state(disabled)):hover) [input] {
-  filter: brightness(0.9);
+[input]:has(.datalist-labels)::before {
+  margin-top: var(--track-height);
+}
+
+.datalist-labels {
+  display: flex;
+  cursor: auto;
+  position: relative;
+  min-height: calc(var(--nve-ref-size-150) + var(--nve-ref-space-md) + 1em);
+}
+
+.datalist-tick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--nve-ref-space-xxs);
+  transform: translateX(-50%);
+  font-size: var(--nve-ref-font-size-100);
+  color: var(--nve-sys-text-muted-color);
+  position: absolute;
+}
+
+.datalist-tick::before {
+  content: '';
+  width: var(--nve-ref-size-100);
+  height: var(--nve-ref-size-150);
+  border-radius: var(--nve-ref-border-radius-md);
+  background: var(--nve-sys-interaction-background);
 }
