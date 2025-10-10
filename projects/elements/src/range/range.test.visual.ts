@@ -49,5 +49,30 @@ function template(theme: '' | 'dark' = '') {
     <input type="range" />
     <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
   </nve-range>
+
+  <nve-range>
+    <label>•︎•︎•︎•︎•︎•︎</label>
+    <input type="range" min="0" max="100" value="50" list="datalist-1" />
+    <datalist id="datalist-1">
+      <option value="0">0</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="75">75</option>
+      <option value="100">100</option>
+    </datalist>
+  </nve-range>
+
+  <nve-range>
+    <label>•︎•︎•︎•︎•︎•︎</label>
+    <input type="range" min="0" max="100" value="50" list="datalist-2" />
+    <datalist id="datalist-2">
+      <option value="0">0</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="75">75</option>
+      <option value="100">100</option>
+    </datalist>
+    <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
+  </nve-range>
   `;
 }

@@ -29,13 +29,13 @@ describe(Range.metadata.tag, () => {
 
   it('should set the custom track width', async () => {
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--track-width')).toBe('50%');
+    expect(element.style.getPropertyValue('--track-width')).toBe('0.5');
   });
 
   it('should update the custom track width', async () => {
     element.querySelector('input').value = '99';
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--track-width')).toBe('99%');
+    expect(element.style.getPropertyValue('--track-width')).toBe('0.99');
   });
 
   it('should update the custom track width with custom min/max', async () => {
@@ -43,14 +43,14 @@ describe(Range.metadata.tag, () => {
     element.input.max = '80';
     element.querySelector('input').value = '66';
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--track-width')).toBe('76%');
+    expect(element.style.getPropertyValue('--track-width')).toBe('0.76');
   });
 
   it('should update the custom track width when input changes', async () => {
     element.querySelector('input').value = '50';
     await elementIsStable(element);
     element.querySelector('input').dispatchEvent(new Event('input'));
-    expect(element.style.getPropertyValue('--track-width')).toBe('50%');
+    expect(element.style.getPropertyValue('--track-width')).toBe('0.5');
   });
 
   it('should update support decimals', async () => {
@@ -58,6 +58,29 @@ describe(Range.metadata.tag, () => {
     element.input.max = '0.9';
     element.querySelector('input').value = '0.7';
     await elementIsStable(element);
-    expect(element.style.getPropertyValue('--track-width')).toBe('74%');
+    expect(element.style.getPropertyValue('--track-width')).toBe('0.74');
+  });
+
+  it('should properly render datalist ticks', async () => {
+    // Create a new fixture with datalist
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <nve-range>
+        <label>label</label>
+        <input type="range" value="50" />
+        <datalist>
+          <option value="0">0</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </datalist>
+      </nve-range>
+    `);
+    element = fixture.querySelector(Range.metadata.tag);
+    await elementIsStable(element);
+
+    const ticks = element.shadowRoot.querySelectorAll('.datalist-tick');
+    expect(ticks.length).toBe(3);
+    expect(ticks[1].textContent).toBe('50');
+    expect(ticks[1].style.left).toBe('50%');
   });
 });
