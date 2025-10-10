@@ -289,6 +289,7 @@ export const NestedOpenEvent = {
 */
 export const DeprecatedSlots = {
   /* eslint-disable @nvidia-elements/lint/no-deprecated-slots */
+  /* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value */
   render: () => html`
     <nve-accordion behavior-expand>
       <nve-accordion-header>

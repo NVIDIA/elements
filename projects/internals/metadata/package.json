@@ -214,55 +214,91 @@
       ],
       "dependencies": [
         {
-          "script": "../../elements:ci",
+          "script": "../../elements:build",
           "cascade": false
         },
         {
-          "script": "../../elements-react:ci",
+          "script": "../../elements:test",
           "cascade": false
         },
         {
-          "script": "../../styles:ci",
+          "script": "../../elements-react:build",
           "cascade": false
         },
         {
-          "script": "../../testing:ci",
+          "script": "../../elements-react:test",
           "cascade": false
         },
         {
-          "script": "../../themes:ci",
+          "script": "../../styles:build",
           "cascade": false
         },
         {
-          "script": "../../labs/brand:ci",
+          "script": "../../testing:build",
           "cascade": false
         },
         {
-          "script": "../../labs/code:ci",
+          "script": "../../themes:build",
           "cascade": false
         },
         {
-          "script": "../../labs/forms:ci",
+          "script": "../../labs/brand:build",
           "cascade": false
         },
         {
-          "script": "../../labs/markdown:ci",
+          "script": "../../labs/brand:test",
           "cascade": false
         },
         {
-          "script": "../../monaco:ci",
+          "script": "../../labs/code:build",
           "cascade": false
         },
         {
-          "script": "../../labs/behaviors-alpine:ci",
+          "script": "../../labs/code:test",
           "cascade": false
         },
         {
-          "script": "../../labs/playwright-screencast:ci",
+          "script": "../../labs/forms:build",
           "cascade": false
         },
         {
-          "script": "../patterns:ci",
+          "script": "../../labs/forms:test",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/markdown:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/markdown:test",
+          "cascade": false
+        },
+        {
+          "script": "../../monaco:build",
+          "cascade": false
+        },
+        {
+          "script": "../../monaco:test",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/behaviors-alpine:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/behaviors-alpine:test",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/playwright-screencast:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/playwright-screencast:test",
+          "cascade": false
+        },
+        {
+          "script": "../patterns:build",
           "cascade": false
         }
       ]

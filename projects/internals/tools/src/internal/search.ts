@@ -12,6 +12,8 @@ export function removeNoiseWords(str: string) {
     'component',
     'components',
     'available',
+    'display',
+    'displays',
     'for',
     'how',
     'and',
