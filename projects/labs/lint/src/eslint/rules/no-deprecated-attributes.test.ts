@@ -33,7 +33,7 @@ describe('noDeprecatedAttributes', () => {
     expect(noDeprecatedAttributes.meta.schema).toBeDefined();
     expect(noDeprecatedAttributes.meta.messages).toBeDefined();
     expect(noDeprecatedAttributes.meta.messages['unexpected-deprecated-attribute']).toBe(
-      'Unexpected use of deprecated attribute {{attribute}}'
+      'Unexpected use of deprecated value "{{value}}" in attribute "{{attribute}}"'
     );
   });
 
@@ -54,15 +54,17 @@ describe('noDeprecatedAttributes', () => {
       invalid: [
         {
           code: '<nve-badge status="trend-up"></nve-badge>  ',
-          errors: [{ messageId: 'unexpected-deprecated-attribute', data: { attribute: 'status' } }]
+          errors: [{ messageId: 'unexpected-deprecated-attribute', data: { attribute: 'status', value: 'trend-up' } }]
         },
         {
           code: '<nve-badge status="trend-down"></nve-badge>',
-          errors: [{ messageId: 'unexpected-deprecated-attribute', data: { attribute: 'status' } }]
+          errors: [{ messageId: 'unexpected-deprecated-attribute', data: { attribute: 'status', value: 'trend-down' } }]
         },
         {
           code: '<nve-badge status="trend-neutral"></nve-badge>',
-          errors: [{ messageId: 'unexpected-deprecated-attribute', data: { attribute: 'status' } }]
+          errors: [
+            { messageId: 'unexpected-deprecated-attribute', data: { attribute: 'status', value: 'trend-neutral' } }
+          ]
         }
       ]
     });

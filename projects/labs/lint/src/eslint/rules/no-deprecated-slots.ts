@@ -21,7 +21,7 @@ const rule = {
     },
     schema: [],
     messages: {
-      ['unexpected-deprecated-slots']: 'Unexpected use of deprecated slot {{slot}}'
+      ['unexpected-deprecated-slots']: 'Unexpected use of deprecated slot "{{slot}}"'
     }
   },
   create(context) {
@@ -34,7 +34,7 @@ const rule = {
               const slotAttr = findAttr(child, 'slot');
               if (slotAttr && deprecatedSlotConfig.slots.includes(slotAttr.value.value)) {
                 context.report({
-                  node: child,
+                  node: slotAttr,
                   data: {
                     slot: slotAttr.value.value
                   },
