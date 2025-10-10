@@ -31,7 +31,7 @@ describe('noDeprecatedAttributes', () => {
     expect(noDeprecatedSlots.meta.schema).toBeDefined();
     expect(noDeprecatedSlots.meta.messages).toBeDefined();
     expect(noDeprecatedSlots.meta.messages['unexpected-deprecated-slots']).toBe(
-      'Unexpected use of deprecated slot {{slot}}'
+      'Unexpected use of deprecated slot "{{slot}}"'
     );
   });
 

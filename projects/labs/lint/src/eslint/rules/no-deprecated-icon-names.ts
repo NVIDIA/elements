@@ -61,7 +61,7 @@ const rule = {
 
             if (alternative) {
               context.report({
-                node,
+                node: attr,
                 data: {
                   alternative,
                   deprecated
