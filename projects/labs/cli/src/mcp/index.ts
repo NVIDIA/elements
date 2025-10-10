@@ -15,11 +15,16 @@ tools.forEach(tool => {
   const { description, title, toolName } = tool.metadata;
   const inputSchema = (jsonSchemaToZod(tool.metadata.inputSchema) as ZodObject<{}>).shape;
   const resultSchema = tool.metadata.outputSchema ? jsonSchemaToZod(tool.metadata.outputSchema) : z.any();
-  const outputSchema = { status: z.enum(['complete', 'error']), message: z.string().optional(), result: resultSchema };
+  const outputSchema = {
+    status: z.enum(['complete', 'error']).optional(),
+    message: z.string().optional(),
+    result: resultSchema
+  };
   const config = { title, inputSchema, outputSchema, description: `Elements: ${description}` };
   server.registerTool(toolName, config, async params => {
-    const structuredContent = (await tool(params)) as unknown as { [x: string]: unknown };
-    return { structuredContent, content: [{ type: 'text', text: JSON.stringify(structuredContent, null, 2) }] };
+    const toolResult = (await tool(params)) as unknown as { [x: string]: unknown };
+    const structuredContent = toolResult.status !== 'error' ? { result: toolResult.result } : toolResult;
+    return { structuredContent, content: [{ type: 'text', text: JSON.stringify(structuredContent) }] };
   });
 });
 
