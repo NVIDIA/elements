@@ -64,6 +64,7 @@
     "build:snippets": "wireit",
     "lint": "wireit",
     "test": "wireit",
+    "test:axe": "wireit",
     "test:coverage": "wireit",
     "test:watch": "wireit",
     "test:lighthouse": "wireit"
@@ -102,6 +103,7 @@
         "build",
         "lint",
         "publint",
+        "test:axe",
         "test:coverage"
       ]
     },
@@ -207,6 +209,28 @@
       "dependencies": [
         "build",
         "../../internals/vite:ci"
+      ],
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "test:axe": {
+      "command": "playwright-lock 'vitest run --config=vitest.axe.ts'",
+      "files": [
+        "dist/**/*.js",
+        "src/**/*.test.axe.ts",
+        "tsconfig.json",
+        "vitest.axe.ts"
+      ],
+      "output": [
+        "coverage/axe/**"
+      ],
+      "dependencies": [
+        "../../internals/vite:ci",
+        {
+          "script": "build",
+          "cascade": false
+        }
       ],
       "env": {
         "NODE_ENV": "production"
