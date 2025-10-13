@@ -48,7 +48,7 @@ See the links below for specific integration patterns for the following framewor
 
 ## Types
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'Type' %}
+{% story '@nvidia-elements/styles/typography.stories.json', 'Default' %}
 
 ## Colors
 

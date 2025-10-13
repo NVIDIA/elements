@@ -53,10 +53,10 @@ function getManifestDeclarations(
 /** projects/../coverage/unit/coverage-summary.json */
 function getTestCoverage(basePath): MetadataTestReport {
   const coverageReportPath = new URL(basePath + '/coverage/unit/coverage-summary.json', import.meta.url);
-  const coverageJunitPath = new URL(basePath + '/coverage/unit/junit.xml', import.meta.url);
-  const coverageAxePath = new URL(basePath + '/coverage/axe/junit.xml', import.meta.url);
-  const coverageVisualPath = new URL(basePath + '/coverage/visual/junit.xml', import.meta.url);
-  const coverageSsrPath = new URL(basePath + '/coverage/ssr/junit.xml', import.meta.url);
+  const coveragePath = new URL(basePath + '/coverage/unit/summary.json', import.meta.url);
+  const coverageAxePath = new URL(basePath + '/coverage/axe/summary.json', import.meta.url);
+  const coverageVisualPath = new URL(basePath + '/coverage/visual/summary.json', import.meta.url);
+  const coverageSsrPath = new URL(basePath + '/coverage/ssr/summary.json', import.meta.url);
   const tests: MetadataTestReport = {
     coverage: [],
     coverageTotal: {
@@ -73,26 +73,19 @@ function getTestCoverage(basePath): MetadataTestReport {
   };
 
   if (existsSync(coverageAxePath)) {
-    const junit = readFileSync(coverageAxePath, 'utf8');
-    const axeTestsTotal = parseInt(junit.match(/<testsuites[^>]*tests="([^"]+)"/)?.[1] ?? '0');
-    tests.axeTestsTotal = axeTestsTotal;
+    tests.axeTestsTotal = JSON.parse(readFileSync(coverageAxePath, 'utf8'))?.numTotalTests;
   }
 
   if (existsSync(coverageVisualPath)) {
-    const junit = readFileSync(coverageVisualPath, 'utf8');
-    const visualTestsTotal = parseInt(junit.match(/<testsuites[^>]*tests="([^"]+)"/)?.[1] ?? '0');
-    tests.visualTestsTotal = visualTestsTotal;
+    tests.visualTestsTotal = JSON.parse(readFileSync(coverageVisualPath, 'utf8'))?.numTotalTests;
   }
 
   if (existsSync(coverageSsrPath)) {
-    const junit = readFileSync(coverageSsrPath, 'utf8');
-    const ssrTestsTotal = parseInt(junit.match(/<testsuites[^>]*tests="([^"]+)"/)?.[1] ?? '0');
-    tests.ssrTestsTotal = ssrTestsTotal;
+    tests.ssrTestsTotal = JSON.parse(readFileSync(coverageSsrPath, 'utf8'))?.numTotalTests;
   }
 
-  if (existsSync(coverageReportPath)) {
-    const junit = readFileSync(coverageJunitPath, 'utf8');
-    const unitTestsTotal = parseInt(junit.match(/<testsuites[^>]*tests="([^"]+)"/)?.[1] ?? '0');
+  if (existsSync(coverageReportPath) && existsSync(coveragePath)) {
+    const unitTestsTotal = JSON.parse(readFileSync(coveragePath, 'utf8'))?.numTotalTests;
     const coverageJSON: MetadataUnitTestCoverageSummaryReport = JSON.parse(readFileSync(coverageReportPath, 'utf8'));
     const coverage = Object.entries(coverageJSON)
       .map(([file, coverage]: [string, Omit<MetadataUnitTestCoverageSummary, 'file'>]) => ({

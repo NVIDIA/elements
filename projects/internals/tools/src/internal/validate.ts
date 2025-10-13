@@ -246,7 +246,18 @@ export function validateTemplate(
   return result;
 }
 
-function removeBodyStyleSelectors(styles: string) {
-  // Simple regex to remove basic body selectors: body, body.class, body#id, body[attr], etc. followed by CSS rule block
-  return styles.replace(/body[^\s{]*\s*\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/gi, '');
+function removeBodyStyleSelectors(html: string) {
+  // Process <style> tags: remove body selectors from their contents
+  html = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (match, attributes, content) => {
+    const cleanedContent = content.replace(/body[^\s{]*\s*\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/gi, '');
+    return `<style${attributes}>${cleanedContent}</style>`;
+  });
+
+  // Process style="" attributes: remove body selectors from their values
+  html = html.replace(/style=["']([^"']*)["']/gi, (match, content) => {
+    const cleanedContent = content.replace(/body[^\s{]*\s*\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/gi, '');
+    return `style="${cleanedContent}"`;
+  });
+
+  return html;
 }
