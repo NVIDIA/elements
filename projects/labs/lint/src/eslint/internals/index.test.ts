@@ -93,7 +93,7 @@ describe('lintPlaygroundTemplate', () => {
   it('should handle multiple violations in single code block', async () => {
     const codeWithMultipleViolations = `
       <nve-button nve-layout="pad:md">Button 1</nve-button>
-      <nve-button nve-text="body">Card content</nve-button>
+      <nve-button nve-text="body">Button 2</nve-button>
     `;
     const result = await lintPlaygroundTemplate(codeWithMultipleViolations);
 
@@ -106,7 +106,6 @@ describe('lintPlaygroundTemplate', () => {
     const result = await lintPlaygroundTemplate(codeWithSuggestion);
     expect(result.length).toBeGreaterThan(0);
 
-    // Find the message from the no-deprecated-global-attributes rule
     const messageWithSuggestion = result.find(msg => msg.id === 'unexpected-deprecated-global-attribute');
     expect(messageWithSuggestion).toBeDefined();
     expect(messageWithSuggestion.suggestions).toBeDefined();

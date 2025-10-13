@@ -15,9 +15,10 @@ export const libraryTestConfig = {
         external: ['**/node_modules/**']
       }
     },
-    reporters: ['default', 'junit'],
+    reporters: ['default', 'junit', 'json'],
     outputFile: {
-      junit: './coverage/unit/junit.xml'
+      junit: './coverage/unit/junit.xml',
+      json: './coverage/unit/summary.json'
     },
     onConsoleLog(log) {
       if (log.includes('scheduled an update')) return false;
