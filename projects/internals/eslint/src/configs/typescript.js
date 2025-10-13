@@ -60,7 +60,7 @@ const config = {
     'jsdoc/no-types': ['error'],
     'jsdoc/valid-types': ['error'],
     'jsdoc/check-tag-names': ['error'],
-    'local-typescript/no-dead-code': ['error']
+    'local-typescript/no-dead-code': ['warn'] // todo, this should be migrated to the internal playground template config
   },
   settings: {
     jsdoc: {

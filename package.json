@@ -217,6 +217,7 @@
         "!**/vite.*.ts.timestamp*",
         "!**/_site/**",
         "!**/dist/**",
+        "!**/.eslintcache/**",
         "!**/.wireit/**",
         "!**/.next/**",
         "!**/__screenshots__/**",
