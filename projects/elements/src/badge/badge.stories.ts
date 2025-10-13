@@ -95,6 +95,7 @@ export const Support = {
 
 /**
  * @summary Status badges in light theme for better visibility on light backgrounds. Use when your application primarily uses light mode.
+ * @tags test-case
  */
 export const StatusLightTheme = {
   render: () => html`
@@ -116,6 +117,7 @@ export const StatusLightTheme = {
 
 /**
  * @summary Status badges in dark theme for better visibility on dark backgrounds. Use when your application primarily uses dark mode.
+ * @tags test-case
  */
 export const StatusDarkTheme = {
   render: () => html`

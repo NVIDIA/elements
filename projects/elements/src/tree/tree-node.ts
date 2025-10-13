@@ -28,7 +28,7 @@ import { updateNodeSelection } from './utils.js';
  * @entrypoint \@nvidia-elements/core/tree
  * @event open - Dispatched when the node is opened.
  * @event close - Dispatched when the node is closed.
- * @slot - Use default slot for basic text content or nested tree nodes.
+ * @slot - Use default slot for basic text content or nested <nve-tree-node> elements.
  * @slot content - Use for extended long form content containing interactive elements or form inputs.
  * @cssprop --color
  * @cssprop --border-radius

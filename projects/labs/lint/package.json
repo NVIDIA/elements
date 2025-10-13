@@ -104,14 +104,18 @@
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
-        "vite.config.ts"
+        "vite.config.ts",
+        "../metadata/static/index.json"
       ],
       "output": [
         "dist/**"
       ],
       "dependencies": [
-        "../../internals/metadata:build",
-        "../../internals/vite:ci"
+        "../../internals/vite:ci",
+        {
+          "script": "../../internals/metadata:build",
+          "cascade": false
+        }
       ]
     },
     "build:watch": {
