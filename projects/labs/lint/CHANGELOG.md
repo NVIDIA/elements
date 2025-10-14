@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.4.0...@nvidia-elements/lint-v0.5.0) (2025-10-14)
+
+
+### Features
+
+* **labs-lint:** new rules ([72e6882](https://github.com/NVIDIA/elements/commit/72e6882b807d5a251c80277f7a9ff7234e1ca9e2))
+
 ## [@nvidia-elements/lint-v0.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.3.1...@nvidia-elements/lint-v0.4.0) (2025-10-08)
 
 
