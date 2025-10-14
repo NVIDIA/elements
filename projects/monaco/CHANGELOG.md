@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.2.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.6...@nvidia-elements/monaco-v1.2.7) (2025-10-14)
+
+
+### Bug Fixes
+
+* **monaco:** improved problems performance ([603890a](https://github.com/NVIDIA/elements/commit/603890adec263788d1e75452f53817e384c20854))
+
 ## [@nvidia-elements/monaco-v1.2.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.5...@nvidia-elements/monaco-v1.2.6) (2025-10-08)
 
 
