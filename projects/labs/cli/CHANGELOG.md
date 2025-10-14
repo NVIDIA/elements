@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.1.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.5...@nvidia-elements/cli-v0.1.6) (2025-10-14)
+
+
+### Bug Fixes
+
+* **labs-cli:** improve tool call response status ([58c9879](https://github.com/NVIDIA/elements/commit/58c9879c6633666b10ad8428ce5d96b514819ce1))
+
 ## [@nvidia-elements/cli-v0.1.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.4...@nvidia-elements/cli-v0.1.5) (2025-10-08)
 
 
