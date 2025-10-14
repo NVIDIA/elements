@@ -1,3 +1,12 @@
+## [@nvidia-elements/core-v1.44.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.43.1...@nvidia-elements/core-v1.44.0) (2025-10-14)
+
+
+### Features
+
+* **docs:** add css-parts table to api tab ([7145bc7](https://github.com/NVIDIA/elements/commit/7145bc78d97071c3c8a34308a4abf021bd58247d))
+* **elements:** add prominence / muted to nve-toast ([1acd738](https://github.com/NVIDIA/elements/commit/1acd7386dee19c12402c83d12af1fd6853cbd3bc))
+* **elements:** enable deeper theme customization on nve-toast ([17eadd8](https://github.com/NVIDIA/elements/commit/17eadd828f1dbc69769e884b3fd88f1c0ab38907))
+
 ## [@nvidia-elements/core-v1.43.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.43.0...@nvidia-elements/core-v1.43.1) (2025-10-08)
 
 
