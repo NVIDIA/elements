@@ -9,8 +9,10 @@ import {
   useStyles,
   keyNavigationList,
   attachInternals,
-  audit
+  audit,
+  appendRootNodeStyle
 } from '@nvidia-elements/core/internal';
+import globalStyles from './tabs.global.css?inline';
 import tabsItemStyleSheet from './tabs-item.css?inline';
 import tabsStyleSheet from './tabs.css?inline';
 
@@ -79,6 +81,9 @@ export class TabsItem extends BaseButton {
  * @entrypoint \@nvidia-elements/core/tabs
  * @slot - default slot for tab-item
  * @cssprop --gap
+ * @cssprop --indicator-background
+ * @cssprop --indicator-border-radius
+ * @cssprop --indicator-height
  * @storybook https://NVIDIA.github.io/elements/docs/elements/tabs/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-55&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
@@ -142,6 +147,7 @@ export class Tabs extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    appendRootNodeStyle(this, globalStyles);
     attachInternals(this);
     this._internals.role = 'tablist';
     this.addEventListener('click', (e: CustomEvent) => this.#selectTab(e.target));

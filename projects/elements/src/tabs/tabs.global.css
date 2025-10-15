@@ -1,0 +1,49 @@
+mlv-tabs,
+nve-tabs {
+  --indicator-background: var(--nve-sys-accent-secondary-background);
+  --indicator-height: var(--nve-ref-border-width-xl);
+  --indicator-border-radius: var(--nve-ref-border-radius-sm);
+
+  &::after {
+    background: var(--indicator-background);
+    height: var(--indicator-height);
+    border-radius: var(--indicator-border-radius);
+    position: fixed;
+    display: block;
+    content: '';
+    width: anchor-size(width);
+    transition: left var(--nve-ref-animation-duration-150) var(--nve-ref-animation-easing-100);
+    position-anchor: --selected;
+    top: calc(anchor(bottom) - var(--indicator-height));
+    left: anchor(left);
+    z-index: -1;
+  }
+
+  &[borderless]::after {
+    display: none !important;
+  }
+}
+
+mlv-tabs[vertical],
+nve-tabs[vertical] {
+  &::after {
+    width: var(--indicator-height);
+    height: anchor-size(height);
+    transition: top var(--nve-ref-animation-duration-150) var(--nve-ref-animation-easing-100);
+    top: anchor(top);
+  }
+}
+
+mlv-tabs-item,
+nve-tabs-item {
+  &[selected] {
+    anchor-name: --selected;
+  }
+
+  /* if the item does not have custom styles disable the item specific indicator */
+  @container style(--border-background: var(--indicator-background)) {
+    &::after {
+      visibility: hidden !important;
+    }
+  }
+}
