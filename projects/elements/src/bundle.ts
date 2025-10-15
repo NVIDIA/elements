@@ -55,6 +55,7 @@ import '@nvidia-elements/core/range/define.js';
 import '@nvidia-elements/core/resize-handle/define.js';
 import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/skeleton/define.js';
 import '@nvidia-elements/core/sort-button/define.js';
 import '@nvidia-elements/core/star-rating/define.js';
 import '@nvidia-elements/core/steps/define.js';
