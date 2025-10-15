@@ -60,11 +60,6 @@ nve-icon {
 }
 
 /* deprecated */
-:host(:not([interaction='emphasis'], [interaction='destructive'], [disabled]):hover) {
-  --color: var(--nve-sys-text-emphasis-color) !important;
-}
-
-/* deprecated */
 :host([interaction*='flat']:state(pressed)) {
   --color: var(--nve-sys-text-emphasis-color) !important;
   --background: none !important;
