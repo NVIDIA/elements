@@ -27,9 +27,9 @@ By default Tabs will show a blue border on the selected item. You can disable th
 
 {% story 'nve-tabs', 'BorderlessTabs' %}
 
-## Border Background
+## Border Styles
 
-By default Tabs will show a blue border on the selected item. You can change the border color by setting `--border-background` on the `<nve-tabs-item>`
+You can change the border styles by overriding `--indicator-background` and `--indicator-border-radius` on `<nve-tabs>`
 
 {% story 'nve-tabs', 'BorderBackground' %}
 
