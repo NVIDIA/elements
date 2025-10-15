@@ -44,8 +44,8 @@ export const BorderlessTabs = {
  */
 export const BorderBackground = {
   render: () => html`
-  <nve-tabs>
-    <nve-tabs-item selected style="--border-background: var(--nve-ref-color-brand-green-900);">
+  <nve-tabs behavior-select style="--indicator-background: var(--nve-ref-color-brand-green-900); --indicator-border-radius: none;">
+    <nve-tabs-item selected>
       Tab 1
     </nve-tabs-item>
     <nve-tabs-item>
@@ -135,13 +135,13 @@ export const Links = {
   render: () => html`
   <nve-tabs>
     <nve-tabs-item selected>
-      <a href="#">Tab 1</a>
+      <a href="./docs/elements/tabs/#links">Tab 1</a>
     </nve-tabs-item>
     <nve-tabs-item>
-      <a href="#">Tab 2</a>
+      <a href="./docs/elements/tabs/#links">Tab 2</a>
     </nve-tabs-item>
     <nve-tabs-item>
-      <a href="#">Tab 3</a>
+      <a href="/docs/elements/tabs/#links">Tab 3</a>
     </nve-tabs-item>
   </nve-tabs>
   `
