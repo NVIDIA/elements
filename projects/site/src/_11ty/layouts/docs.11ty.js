@@ -42,8 +42,9 @@ export function render(data) {
     <html lang="en" nve-theme="dark" nve-transition="auto">
       <head>
         ${renderBaseHead(data)}
-        <style>${styles}</style>
+        <style>${process.env.ELEVENTY_RUN_MODE === 'build' ? styles : ''}</style>
         <script type="module">
+          ${process.env.ELEVENTY_RUN_MODE !== 'build' ? `import '/_11ty/layouts/docs.css';` : ''}
           import '/_11ty/layouts/docs.ts';
         </script>
       </head>
@@ -79,59 +80,57 @@ export function render(data) {
           <nve-resize-handle slot="left" min="3" max="300" value="300" step="20" orientation="vertical"></nve-resize-handle>
 
           <!-- Main content area -->
-          <main nve-layout="column align:center">
-            <div nve-layout="row align:horizontal-center full">
-              <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
-                <!-- Component title and summary if this is a component page -->
-                ${data.tag ? `<h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>${elementSummary(data.tag)}` : ''}
+          <main>
+            <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
+              <!-- Component title and summary if this is a component page -->
+              ${data.tag ? `<h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>${elementSummary(data.tag)}` : ''}
 
-                <!-- Component documentation tabs -->
-                ${
-                  data.tag &&
-                  !data.page.url.includes('/elements/forms/') &&
-                  (!data.page.url.includes('/data-grid/') ||
-                    data.page.url.endsWith('/data-grid/') ||
-                    data.page.url.endsWith('/data-grid/api/'))
-                    ? `
-                <nve-tabs id="doc-tabs">
-                  ${componentDocTabs
-                    .filter(tab => !tab.hidden)
-                    .filter(tab => !(data.hideExamplesTab && tab.label === 'Examples'))
-                    .map(tabItem => {
-                      const filePath = data.page.url;
-                      let dir = 'elements';
-                      if (filePath.includes('/docs/code/')) dir = 'code';
-                      else if (filePath.includes('/docs/monaco/')) dir = 'monaco';
-                      else if (filePath.includes('/docs/labs/markdown/')) dir = 'labs';
-                      const tabUrl = `docs/${dir}/${data.page.fileSlug}${tabItem.slug}`;
-                      return `<nve-tabs-item ${`/${tabUrl}` === data.page.url ? 'selected' : ''}>
-                          <a href="${tabUrl}">${tabItem.label}</a>
-                        </nve-tabs-item>`;
-                    })
-                    .join('')}
-                </nve-tabs>`
-                    : ''
-                }
+              <!-- Component documentation tabs -->
+              ${
+                data.tag &&
+                !data.page.url.includes('/elements/forms/') &&
+                (!data.page.url.includes('/data-grid/') ||
+                  data.page.url.endsWith('/data-grid/') ||
+                  data.page.url.endsWith('/data-grid/api/'))
+                  ? `
+              <nve-tabs id="doc-tabs">
+                ${componentDocTabs
+                  .filter(tab => !tab.hidden)
+                  .filter(tab => !(data.hideExamplesTab && tab.label === 'Examples'))
+                  .map(tabItem => {
+                    const filePath = data.page.url;
+                    let dir = 'elements';
+                    if (filePath.includes('/docs/code/')) dir = 'code';
+                    else if (filePath.includes('/docs/monaco/')) dir = 'monaco';
+                    else if (filePath.includes('/docs/labs/markdown/')) dir = 'labs';
+                    const tabUrl = `docs/${dir}/${data.page.fileSlug}${tabItem.slug}`;
+                    return `<nve-tabs-item ${`/${tabUrl}` === data.page.url ? 'selected' : ''}>
+                        <a href="${tabUrl}">${tabItem.label}</a>
+                      </nve-tabs-item>`;
+                  })
+                  .join('')}
+              </nve-tabs>`
+                  : ''
+              }
 
-                <!-- Component description -->
-                ${
-                  data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples'))
-                    ? `
-                <h2 nve-text="heading xl emphasis mkd">Overview</h2>
-                  ${elementDescription(data.tag)}
-                `
-                    : ''
-                }
+              <!-- Component description -->
+              ${
+                data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples'))
+                  ? `
+              <h2 nve-text="heading xl emphasis mkd">Overview</h2>
+                ${elementDescription(data.tag)}
+              `
+                  : ''
+              }
 
-                <!-- Page content -->
-                ${data.content}
+              <!-- Page content -->
+              ${data.content}
 
-                <!-- Component status section if this is a component page -->
-                ${data.tag && !data.hideStatus && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
-              </div>
-              
-              <!-- ANCHOR-GENERATOR -->
+              <!-- Component status section if this is a component page -->
+              ${data.tag && !data.hideStatus && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
             </div>
+            
+            <!-- ANCHOR-GENERATOR -->
           </main>
 
           <!-- System theme settings panel -->
