@@ -241,6 +241,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/resize-handle/') ? 'highlighted' : ''}><a href="docs/elements/resize-handle/">Resize Handle</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/search/') ? 'highlighted' : ''}><a href="docs/elements/search/">Search</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/select/') ? 'highlighted' : ''}><a href="docs/elements/select/">Select</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/skeleton/') ? 'highlighted' : ''}><a href="docs/elements/skeleton/">Skeleton</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/sort-button/') ? 'highlighted' : ''}><a href="docs/elements/sort-button/">Sort Button</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/star-rating/') ? 'highlighted' : ''}><a href="docs/elements/star-rating/">Star Rating</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/steps/') ? 'highlighted' : ''}><a href="docs/elements/steps/">Steps</a></nve-tree-node>
