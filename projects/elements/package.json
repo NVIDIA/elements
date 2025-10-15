@@ -688,6 +688,18 @@
       "types": "./dist/select/define.d.ts",
       "default": "./dist/select/define.js"
     },
+    "./skeleton": {
+      "types": "./dist/skeleton/index.d.ts",
+      "default": "./dist/skeleton/index.js"
+    },
+    "./skeleton/index.js": {
+      "types": "./dist/skeleton/index.d.ts",
+      "default": "./dist/skeleton/index.js"
+    },
+    "./skeleton/define.js": {
+      "types": "./dist/skeleton/define.d.ts",
+      "default": "./dist/skeleton/define.js"
+    },
     "./sort-button": {
       "types": "./dist/sort-button/index.d.ts",
       "default": "./dist/sort-button/index.js"
