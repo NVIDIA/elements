@@ -1,8 +1,8 @@
 :host {
+  --border-background: var(--indicator-background);
+  --border-height: var(--indicator-height);
   --border-width: 100%;
-  --border-height: var(--nve-ref-border-width-xl);
   --border-top: auto;
-  --border-background: var(--nve-sys-accent-secondary-background);
   --width: 100%;
   --font-size: var(--nve-ref-font-size-100);
   --font-weight: var(--nve-ref-font-weight-medium);
@@ -46,6 +46,7 @@
   --font-weight: var(--nve-ref-font-weight-semibold);
 }
 
+/* @deprecated use the --indicator-background variable instead */
 :host(:state(selected))::after {
   width: var(--border-width);
   height: var(--border-height);
