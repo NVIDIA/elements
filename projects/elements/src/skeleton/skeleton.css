@@ -1,6 +1,6 @@
 :host {
   --background: var(--nve-sys-layer-container-background);
-  --min-height: 16px;
+  --min-height: var(--nve-ref-size-400);
   --border-radius: var(--nve-ref-border-radius-xs);
   display: block;
   width: 100%;
@@ -25,7 +25,7 @@
 }
 
 :host([effect='shimmer']) [internal-host] {
-  animation: shimmer 3s;
+  animation: shimmer calc(var(--nve-ref-animation-duration-400) * 4);
   animation-iteration-count: infinite;
   background: linear-gradient(
     to right,
@@ -46,7 +46,8 @@
 }
 
 :host([effect='pulse']) [internal-host] {
-  animation: 2s ease-in-out 0.5s infinite normal none running pulse;
+  animation: calc(var(--nve-ref-animation-duration-400) * 2) ease-in-out var(--nve-ref-animation-duration-300) infinite
+    normal none running pulse;
 }
 
 @keyframes pulse {
@@ -63,15 +64,18 @@
   }
 }
 
-/* if no slotted content is provided display only the content */
+/* if slotted content is provided hide the skeleton */
 :host(:state(slotted)) {
   display: contents;
+}
 
-  .animate {
-    display: none;
-  }
+:host(:state(slotted)) [internal-host] {
+  display: contents;
+  background: none;
+  min-height: 0;
+  animation: none;
+}
 
-  [internal-host] {
-    display: contents;
-  }
+:host(:state(slotted)) .animate {
+  display: none;
 }

@@ -6,6 +6,5 @@ define(Skeleton);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-skeleton': Skeleton;
-    'nve-skeleton': Skeleton;
   }
 }
