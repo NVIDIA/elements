@@ -82,22 +82,30 @@ function getElementCoordinates(element: HTMLElement, options: EmulatedMouseOffse
   return { clientX, clientY, offsetX, offsetY };
 }
 
+const defaultOptions = { bubbles: true, cancelable: true };
+
 function emulateMouseDown(element: HTMLElement, options: EmulatedMouseEventOptions = {}) {
   const coordinates = getElementCoordinates(element, options);
-  element.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, ...coordinates, ...options }));
+
+  element.dispatchEvent(new MouseEvent('mousedown', { ...defaultOptions, ...coordinates, ...options }));
 }
 
 function emulateMouseUp(element: HTMLElement, options: EmulatedMouseEventOptions = {}) {
   const coordinates = getElementCoordinates(element, options);
-  element.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, ...coordinates, ...options }));
+  element.dispatchEvent(new MouseEvent('mouseup', { ...defaultOptions, ...coordinates, ...options }));
 }
 
 function emulateClick(element: HTMLElement, options: EmulatedMouseEventOptions = {}) {
   const coordinates = getElementCoordinates(element, options);
 
-  element.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, ...options, ...coordinates }));
-  element.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, ...options, ...coordinates }));
-  element.dispatchEvent(new MouseEvent('click', { bubbles: true, ...options, ...coordinates }));
+  if (options.button === 2) {
+    if (element.dispatchEvent(new PointerEvent('contextmenu', { ...defaultOptions, ...options, ...coordinates }))) {
+      return;
+    }
+  }
+  element.dispatchEvent(new MouseEvent('mousedown', { ...defaultOptions, ...options, ...coordinates }));
+  element.dispatchEvent(new MouseEvent('mouseup', { ...defaultOptions, ...options, ...coordinates }));
+  element.dispatchEvent(new MouseEvent('click', { ...defaultOptions, ...options, ...coordinates }));
 }
 
 function emulateLineClick(
