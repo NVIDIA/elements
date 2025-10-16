@@ -46,13 +46,14 @@ export const Shape = {
 }
 
 /**
- * @summary Slotted content that is displayed in the skeleton.
+ * @summary Slotting content will hide the skeleton.
  */
 export const Slotted = {
   render: () => html`
   <div nve-layout="column gap:xs align:stretch">
-   <nve-skeleton></nve-skeleton>
-    <nve-skeleton effect="shimmer">slotted content, no content in skeleton above</nve-skeleton>
+    <nve-skeleton></nve-skeleton>
+    <nve-skeleton effect="shimmer">slotting content will hide the skeleton</nve-skeleton>
+    <nve-skeleton effect="shimmer">  </nve-skeleton>
   </div>
   `
 }
