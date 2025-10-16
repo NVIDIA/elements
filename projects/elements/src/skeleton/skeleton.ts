@@ -1,4 +1,4 @@
-import { html, LitElement } from 'lit';
+import { html, LitElement, type PropertyValues } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
 import styles from './skeleton.css?inline';
@@ -12,7 +12,6 @@ import styles from './skeleton.css?inline';
  * @cssprop --border-radius
  * @cssprop --min-height
  * @storybook https://NVIDIA.github.io/elements/docs/elements/skeleton/
- * @figma
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-live
  */
 export class Skeleton extends LitElement {
@@ -29,6 +28,9 @@ export class Skeleton extends LitElement {
   /** The shape of the skeleton */
   @property({ type: String, reflect: true }) shape: 'round' | 'pill';
 
+  /** Whether the skeleton is hidden */
+  @property({ type: Boolean, reflect: true }) hidden = false;
+
   /** @private */
   declare _internals: ElementInternals;
 
@@ -44,6 +46,12 @@ export class Skeleton extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
+    this._internals.ariaBusy = 'true';
+  }
+
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    this._internals.ariaBusy = `${!this.hidden}`;
   }
 
   #slotchange(event: Event) {
