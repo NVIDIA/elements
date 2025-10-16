@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.44.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.44.0...@nvidia-elements/core-v1.44.1) (2025-10-16)
+
+
+### Bug Fixes
+
+* **elements:** apply --color token on nve-icon-button hover / active states ([b7a1003](https://github.com/NVIDIA/elements/commit/b7a100386c39c56bb628db6a46d502b4eeca50c8))
+
 ## [@nvidia-elements/core-v1.44.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.43.1...@nvidia-elements/core-v1.44.0) (2025-10-14)
 
 
