@@ -43,6 +43,7 @@
   "exports": {
     "./package.json": "./package.json",
     "./CHANGELOG.md": "./CHANGELOG.md",
+    "./*.stories.json": "./dist/*.stories.json",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
@@ -132,7 +133,7 @@
       }
     },
     "test:visual": {
-      "command": "playwright-lock 'vitest run --config=vitest.visual.ts'",
+      "command": "vitest run --config=vitest.visual.ts",
       "clean": false,
       "files": [
         "dist/**/*.css",

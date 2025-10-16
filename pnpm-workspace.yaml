@@ -1,43 +1,43 @@
 packages:
-  - 'projects/starters'
-  - 'projects/starters/angular'
-  - 'projects/starters/bundles'
-  - 'projects/starters/eleventy'
-  - 'projects/starters/eleventy-ssr'
-  - 'projects/starters/go'
-  - 'projects/starters/importmaps'
-  - 'projects/starters/lit-library'
-  - 'projects/starters/mpa'
-  - 'projects/starters/nextjs'
-  - 'projects/starters/react'
-  - 'projects/starters/react-18'
-  - 'projects/starters/scoped-registry'
-  - 'projects/starters/solidjs'
-  - 'projects/starters/svelte'
-  - 'projects/starters/typescript'
-  - 'projects/starters/vue'
-  - 'projects/site'
-  - 'projects/labs/behaviors-alpine'
-  - 'projects/labs/brand'
-  - 'projects/labs/cli'
-  - 'projects/labs/code'
-  - 'projects/labs/forms'
-  - 'projects/labs/lint'
-  - 'projects/labs/markdown'
-  - 'projects/labs/playwright-screencast'
-  - 'projects/labs/snippets'
-  - 'projects/monaco'
-  - 'projects/pages'
-  - 'projects/elements'
-  - 'projects/elements-react'
-  - 'projects/styles'
-  - 'projects/testing'
-  - 'projects/themes'
-  - 'projects/internals/eslint'
-  - 'projects/internals/metadata'
-  - 'projects/internals/patterns'
-  - 'projects/internals/vite'
-  - 'projects/internals/tools'
+  - projects/starters
+  - projects/starters/angular
+  - projects/starters/bundles
+  - projects/starters/eleventy
+  - projects/starters/eleventy-ssr
+  - projects/starters/go
+  - projects/starters/importmaps
+  - projects/starters/lit-library
+  - projects/starters/mpa
+  - projects/starters/nextjs
+  - projects/starters/react
+  - projects/starters/react-18
+  - projects/starters/scoped-registry
+  - projects/starters/solidjs
+  - projects/starters/svelte
+  - projects/starters/typescript
+  - projects/starters/vue
+  - projects/site
+  - projects/labs/behaviors-alpine
+  - projects/labs/brand
+  - projects/labs/cli
+  - projects/labs/code
+  - projects/labs/forms
+  - projects/labs/lint
+  - projects/labs/markdown
+  - projects/labs/playwright-screencast
+  - projects/labs/snippets
+  - projects/monaco
+  - projects/pages
+  - projects/elements
+  - projects/elements-react
+  - projects/styles
+  - projects/testing
+  - projects/themes
+  - projects/internals/eslint
+  - projects/internals/metadata
+  - projects/internals/patterns
+  - projects/internals/vite
+  - projects/internals/tools
 
 catalog:
   '@11ty/eleventy': 3.1.2
@@ -61,26 +61,28 @@ catalog:
   '@types/node': 22.13.1
   '@types/react': 19.1.13
   '@types/react-dom': 19.1.9
-  '@vitest/browser': 4.0.0-beta.3
-  '@vitest/mocker': 4.0.0-beta.3
-  '@vitest/coverage-istanbul': 4.0.0-beta.3
+  '@vitest/browser': 4.0.0-beta.18
+  '@vitest/browser-playwright': 4.0.0-beta.18
+  '@vitest/coverage-istanbul': 4.0.0-beta.18
+  '@vitest/mocker': 4.0.0-beta.18
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
+  axe-core: 4.11.0
   cpy-cli: 5.0.0
   eslint: 9.36.0
   glob: 11.0.3
-  markdown-it: 14.1.0
-  markdown-it-link-attributes: 4.0.1
   lighthouse: 12.6.0
   lit: ^3.3.1
   lit-html: ^3.3.1
+  markdown-it: 14.1.0
+  markdown-it-link-attributes: 4.0.1
   playwright: 1.55.0
   publint: 0.3.9
   react: 19.1.1
   react-dom: 19.1.1
   rollup-plugin-html-literals: 2.0.0
   ts-morph: 26.0.0
-  typescript-eslint: 8.44.0
   typescript: 5.8.2
-  vite: 7.0.4
-  vitest: 4.0.0-beta.3
+  typescript-eslint: 8.44.0
+  vite: 7.1.10
   vite-plugin-dts: 4.5.4
+  vitest: 4.0.0-beta.18

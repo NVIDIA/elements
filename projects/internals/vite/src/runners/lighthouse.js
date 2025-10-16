@@ -20,7 +20,10 @@ const LIGHTHOUSE_CONFIG = {
 };
 
 export class LighthouseRunner {
-  #runner = new VitePlaywrightRunner({ runnerID: RUNNER_ID });
+  #runner = new VitePlaywrightRunner({
+    runnerID: RUNNER_ID,
+    chromiumArgs: ['--headless', '--remote-debugging-port=9222']
+  });
 
   async open() {
     await this.#runner.open();

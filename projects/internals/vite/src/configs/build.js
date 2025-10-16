@@ -26,6 +26,7 @@ const packageFile = JSON.parse(packageFilePath);
 export const libraryBuildConfig = {
   plugins: [initial(), tsc(), dts(), bundle(), examplesToJSON(packageFile), cem()],
   build: {
+    reportCompressedSize: false,
     cssMinify: prod ? 'esbuild' : false,
     cssCodeSplit: true,
     minify: false, // https://github.com/vitejs/vite/issues/8848

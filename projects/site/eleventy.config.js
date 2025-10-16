@@ -89,10 +89,21 @@ export default function (eleventyConfig) {
         watch:
           process.env.ELEVENTY_RUN_MODE !== 'build'
             ? {
-                buildDelay: 300
+                buildDelay: 1000
               }
             : undefined
-      }
+      },
+      plugins: [
+        {
+          name: 'remove-sourcemaps',
+          transform(code) {
+            return {
+              code,
+              map: { mappings: '' }
+            };
+          }
+        }
+      ]
     }
   });
 

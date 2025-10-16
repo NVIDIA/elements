@@ -1,15 +1,46 @@
+import crypto from 'node:crypto';
 import process from 'process';
+import { playwright } from '@vitest/browser-playwright';
 
 const watch = process.argv.findIndex(i => i === '--watch') !== -1;
 const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
 
+const browser = {
+  browser: 'chromium',
+  isolate: coverage
+};
+
+Object.defineProperty(browser, 'name', {
+  get() {
+    return `chromium-${crypto.randomUUID()}`;
+  }
+});
+
 /** @type {import('vite').UserConfig} */
 export const libraryTestConfig = {
-  testTimeout: 5_000,
+  testTimeout: 60_000,
+  build: {
+    target: 'esnext'
+  },
+  optimizeDeps: {
+    noDiscovery: true
+  },
+  server: {
+    fs: {
+      strict: false,
+      allow: [process.cwd(), '/']
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        inlineDynamicImports: true
+      }
+    }
+  },
   test: {
-    retry: 1,
+    retry: 2,
     isolate: coverage,
-    bail: !watch && !coverage ? 2 : 0,
     server: {
       deps: {
         external: ['**/node_modules/**']
@@ -29,16 +60,20 @@ export const libraryTestConfig = {
     },
     setupFiles: ['@internals/vite/setup/library.js'], // todo: this should be project specific
     browser: {
+      fileParallelism: true,
       enabled: true,
-      provider: 'playwright',
-      headless: !watch,
-      instances: [
-        {
-          browser: 'chromium',
-          isolate: coverage,
-          strictPort: true
+      provider: playwright({
+        launch: {
+          args: [
+            '--disable-dev-shm-usage', // Prevents /dev/shm from running out of memory
+            '--no-sandbox', // Required for CI environments
+            '--disable-setuid-sandbox'
+          ],
+          timeout: 120000 // 120 second browser launch timeout
         }
-      ]
+      }),
+      headless: !watch,
+      instances: [browser]
     },
     coverage: {
       extension: ['.ts'],

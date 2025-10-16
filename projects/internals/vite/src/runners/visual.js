@@ -6,7 +6,6 @@ import { VitePlaywrightRunner, buildPage } from './playwright.js';
 const RUNNER_ID = 'visual';
 const CHROMIUM_ARGS = [
   '--headless',
-  '--remote-debugging-port=9222',
   '--font-render-hinting=none',
   '--disable-skia-runtime-opts',
   '--disable-font-subpixel-positioning',
