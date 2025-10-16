@@ -20,12 +20,6 @@ function template(theme: '' | 'dark' = '') {
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
 
-  <style>
-    nve-skeleton {
-      --animation-duration: 0s;
-    }
-  </style>
-
   <div nve-layout="column gap:md">
     <div nve-layout="column gap:xs align:stretch">
       <h3>Default</h3>
