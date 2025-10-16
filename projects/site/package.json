@@ -25,7 +25,7 @@
       "command": "pnpm exec eleventy --incremental --serve --quiet --port=8082",
       "service": true,
       "dependencies": [
-        "build"
+        "build:dependencies"
       ],
       "env": {
         "PAGES_BASE_URL": {
@@ -46,6 +46,28 @@
     },
     "build": {
       "command": "pnpm exec eleventy",
+      "files": [
+        "src",
+        "!src/**/*.test.lighthouse.ts",
+        "public",
+        "./eleventy.config.js"
+      ],
+      "dependencies": [
+        "build:dependencies"
+      ],
+      "output": [
+        "dist/**",
+        ".11ty-vite"
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
+      }
+    },
+    "build:dependencies": {
+      "command": "echo 'building dependencies...'",
       "files": [
         "../elements/dist/**/*.js",
         "../elements/dist/**/*.stories.json",
@@ -68,15 +90,7 @@
         "../internals/patterns/dist/**/*.js",
         "../internals/patterns/dist/**/*.stories.json",
         "../internals/tools/dist/**/*.js",
-        "../internals/tools/dist/**/*.stories.json",
-        "src",
-        "!src/**/*.test.lighthouse.ts",
-        "public",
-        "./eleventy.config.js"
-      ],
-      "output": [
-        "dist/**",
-        ".11ty-vite"
+        "../internals/tools/dist/**/*.stories.json"
       ],
       "dependencies": [
         "clean",
@@ -125,12 +139,7 @@
           "cascade": false
         }
       ],
-      "env": {
-        "PAGES_BASE_URL": {
-          "external": true,
-          "default": "/elements/"
-        }
-      }
+      "output": []
     },
     "preview": {
       "command": "pnpm run build && vite preview --base=$PAGES_BASE_URL",

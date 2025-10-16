@@ -179,6 +179,7 @@
     "@types/node": "catalog:",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
+    "axe-core": "catalog:",
     "colorjs.io": "0.5.2",
     "dts-bundle-generator": "9.5.1",
     "esbuild": "0.25.5",
@@ -288,6 +289,9 @@
       ],
       "output": [
         "dist/data.snippets.json"
+      ],
+      "dependencies": [
+        "../labs/snippets:build"
       ]
     },
     "build:themes": {
@@ -309,7 +313,7 @@
       ]
     },
     "test": {
-      "command": "playwright-lock 'vitest run'",
+      "command": "vitest run",
       "files": [
         "dist/**/*.js",
         "!dist/**/*.stories.js",
@@ -320,7 +324,7 @@
       ],
       "output": [],
       "dependencies": [
-        "../testing:ci",
+        "../testing:build",
         "../internals/vite:ci",
         {
           "script": "build",
@@ -329,7 +333,7 @@
       ]
     },
     "test:coverage": {
-      "command": "playwright-lock 'vitest run --coverage'",
+      "command": "vitest run --coverage",
       "files": [
         "dist/**/*.js",
         "!dist/**/*.stories.js",
@@ -340,7 +344,7 @@
       ],
       "output": [],
       "dependencies": [
-        "../testing:ci",
+        "../testing:build",
         "../internals/vite:ci",
         {
           "script": "build",
@@ -377,7 +381,7 @@
       }
     },
     "test:axe": {
-      "command": "playwright-lock 'vitest run --config=vitest.axe.ts'",
+      "command": "vitest run --config=vitest.axe.ts",
       "files": [
         "dist/**/*.js",
         "!dist/**/*.stories.js",
@@ -389,6 +393,7 @@
         "coverage/axe/**"
       ],
       "dependencies": [
+        "../testing:build",
         "../internals/vite:ci",
         {
           "script": "build",
@@ -400,7 +405,7 @@
       }
     },
     "test:visual": {
-      "command": "playwright-lock 'vitest run --config=vitest.visual.ts'",
+      "command": "vitest run --config=vitest.visual.ts",
       "clean": false,
       "files": [
         "dist/**/*.js",

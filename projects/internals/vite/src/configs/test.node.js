@@ -6,6 +6,12 @@ const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
 /** @type {import('vite').UserConfig} */
 export const libraryNodeTestConfig = {
   testTimeout: 5_000,
+  server: {
+    fs: {
+      strict: false,
+      allow: [process.cwd(), '/']
+    }
+  },
   test: {
     retry: 1,
     isolate: coverage,

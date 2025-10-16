@@ -1,5 +1,5 @@
 import { mergeConfig } from 'vitest/config';
-import { libraryNodeTestConfig } from '@nve-internals/vite';
+import { libraryNodeTestConfig } from '@nve-internals/vite/configs/test.node.js';
 
 export default mergeConfig(libraryNodeTestConfig, {
   test: {
