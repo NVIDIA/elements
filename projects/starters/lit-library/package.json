@@ -75,6 +75,7 @@
     "@nvidia-elements/lint": "workspace:*",
     "@rollup/plugin-terser": "catalog:",
     "@vitest/browser": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
     "eslint": "catalog:",
     "glob": "catalog:",
     "rollup-plugin-html-literals": "catalog:",
@@ -126,7 +127,7 @@
       ]
     },
     "test": {
-      "command": "playwright-lock 'vitest run'",
+      "command": "vitest run",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
@@ -136,7 +137,7 @@
       "output": [],
       "dependencies": [
         "build",
-        "../../testing:ci"
+        "../../testing:build"
       ]
     },
     "test:watch": {

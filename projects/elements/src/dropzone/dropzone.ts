@@ -1,5 +1,6 @@
 import { html, LitElement } from 'lit';
-import { property, query } from 'lit/decorators.js';
+import { property } from 'lit/decorators/property.js';
+import { query } from 'lit/decorators/query.js';
 import { formatFileSize, useStyles, removeEmptyTextNode, I18nController } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './dropzone.css?inline';

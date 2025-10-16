@@ -24,6 +24,5 @@ describe(Dropzone.metadata.tag, () => {
   it('should pass axe check', async () => {
     const results = await runAxe([Dropzone.metadata.tag]);
     expect(results.violations.length).toBe(0);
-    expect(true).toBe(true);
   });
 });

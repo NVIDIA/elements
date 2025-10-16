@@ -179,10 +179,6 @@
           "cascade": false
         },
         {
-          "script": "../../elements:test:axe",
-          "cascade": false
-        },
-        {
           "script": "../../elements:test:ssr",
           "cascade": false
         },
@@ -239,10 +235,6 @@
           "cascade": false
         },
         {
-          "script": "../../labs/code:test:axe",
-          "cascade": false
-        },
-        {
           "script": "../../labs/forms:build",
           "cascade": false
         },
@@ -256,10 +248,6 @@
         },
         {
           "script": "../../labs/markdown:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/markdown:test:axe",
           "cascade": false
         },
         {
@@ -414,6 +402,7 @@
       "command": "vitest run",
       "files": [
         "dist/**/*.js",
+        "static/**/*.json",
         "src/**/*.test.ts",
         "tsconfig.json",
         "vitest.config.ts"
@@ -421,10 +410,7 @@
       "output": [],
       "dependencies": [
         "../vite:ci",
-        {
-          "script": "build",
-          "cascade": false
-        }
+        "build"
       ]
     },
     "test:watch": {
@@ -434,6 +420,8 @@
     "test:coverage": {
       "command": "vitest run --coverage",
       "files": [
+        "dist/**/*.js",
+        "static/**/*.json",
         "src/**/*.test.ts",
         "tsconfig.json",
         "vitest.config.ts"

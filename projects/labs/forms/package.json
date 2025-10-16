@@ -82,6 +82,7 @@
     "@nvidia-elements/snippets": "workspace:*",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
+    "axe-core": "catalog:",
     "eslint": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",
@@ -118,7 +119,9 @@
         "!src/**/*.stories.ts",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
+        "!src/**/*.test.axe.ts",
         "!src/**/*.test.ssr.ts",
+        "!src/**/__screenshots__/**",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -147,41 +150,49 @@
       ],
       "output": [
         "dist/data.snippets.json"
+      ],
+      "dependencies": [
+        "../snippets:build"
       ]
     },
     "test": {
-      "command": "playwright-lock 'vitest run'",
+      "command": "vitest run",
       "files": [
-        "src/**/*.test.ts",
+        "src/**",
+        "!src/**/*.test.axe.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.ssr.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/__screenshots__/**",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
       ],
       "output": [],
       "dependencies": [
-        "build",
-        "../../elements:test",
-        "../../testing:ci"
+        "../../testing:build",
+        "../../internals/vite:ci",
+        "../../elements:build"
       ]
     },
     "test:coverage": {
-      "command": "playwright-lock 'vitest run --coverage'",
+      "command": "vitest run --coverage",
       "files": [
-        "src/**/*.test.ts",
+        "src/**",
+        "!src/**/*.test.axe.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.ssr.ts",
+        "!src/**/*.test.visual.ts",
+        "!src/**/__screenshots__/**",
         "tsconfig.json",
         "vite.config.ts",
         "vitest.config.ts"
       ],
-      "output": [
-        "coverage/unit/**"
-      ],
+      "output": [],
       "dependencies": [
-        "build",
-        "../../testing:ci"
+        "../../testing:build",
+        "../../internals/vite:ci",
+        "../../elements:build"
       ]
     },
     "test:watch": {

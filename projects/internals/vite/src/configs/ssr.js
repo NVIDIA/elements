@@ -1,5 +1,13 @@
+import process from 'process';
+
 /** @type {import('vite').UserConfig} */
 export const libraryLitSSRTestConfig = {
+  server: {
+    fs: {
+      strict: false,
+      allow: [process.cwd(), '/']
+    }
+  },
   test: {
     retry: 1,
     bail: 2,

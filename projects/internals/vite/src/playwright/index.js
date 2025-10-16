@@ -1,4 +1,5 @@
 import { exec } from 'node:child_process';
+import { existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'path';
 import * as lockFile from 'proper-lockfile';
 
@@ -12,12 +13,18 @@ import * as lockFile from 'proper-lockfile';
  * executing at a time see https://github.com/google/wireit/issues/325
  */
 
-const cmd = process.argv.slice(2).join(' ');
-const path = resolve(import.meta.dirname, './index.js');
+const cmd = process.argv[2];
+const lockName = process.argv[3]?.length > 0 ? process.argv[3] : 'playwright';
+const lockPath = resolve(import.meta.dirname, `locks/${lockName}`);
+
+if (!existsSync(lockPath)) {
+  mkdirSync(resolve(import.meta.dirname, 'locks'), { recursive: true });
+  writeFileSync(lockPath, '');
+}
 
 const timerId = setInterval(() => {
   lockFile
-    .lock(path, {
+    .lock(lockPath, {
       stale: 120000
     })
     .then(async release => {
