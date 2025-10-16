@@ -1,3 +1,5 @@
+import process from 'process';
+
 /** @type {import('vite').UserConfig} */
 export const libraryLighthouseTestConfig = {
   logLevel: 'info',

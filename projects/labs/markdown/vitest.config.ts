@@ -1,11 +1,14 @@
 import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryTestConfig } from '@nve-internals/vite';
+import { libraryTestConfig } from '@nve-internals/vite/configs/test.js';
 
 const config = mergeConfig(libraryTestConfig, {
+  root: import.meta.dirname,
+  resolve: {
+    alias: { '@nvidia-elements/markdown': resolve(import.meta.dirname, './src') }
+  },
   test: {
     include: ['./src/**/*.test.ts'],
-    alias: { '@nvidia-elements/markdown': resolve(import.meta.dirname, './src') },
     setupFiles: [],
     coverage: {
       thresholds: {

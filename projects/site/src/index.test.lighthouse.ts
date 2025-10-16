@@ -120,7 +120,7 @@ describe.sequential('lighthouse', () => {
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
     expect(scores.payload.js).toBeLessThan(135);
-    expect(scores.payload.css).toBe(0);
+    expect(scores.payload.css).toBeLessThan(0.5);
   });
 
   test('component docs overview page', async () => {

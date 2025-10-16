@@ -234,6 +234,9 @@
       "output": []
     },
     "format:fix": {
+      "command": "prettier --config prettier.config.js --write ."
+    },
+    "lint:fix": {
       "command": "prettier --config prettier.config.js --write .",
       "dependencies": [
         "./projects/elements:lint:fix",

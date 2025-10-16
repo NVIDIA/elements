@@ -136,7 +136,7 @@
       "output": [],
       "dependencies": [
         "build",
-        "../../testing:ci"
+        "../../testing:build"
       ]
     },
     "test:coverage": {
@@ -152,7 +152,7 @@
       ],
       "dependencies": [
         "build",
-        "../../testing:ci"
+        "../../testing:build"
       ]
     },
     "test:watch": {
