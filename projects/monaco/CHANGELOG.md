@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.2.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.7...@nvidia-elements/monaco-v1.2.8) (2025-10-16)
+
+
+### Bug Fixes
+
+* **monaco:** fixed init + teardown and contextmenu handling ([66a65fd](https://github.com/NVIDIA/elements/commit/66a65fd36b39fff4d596fbd5f9b995148f654329))
+
 ## [@nvidia-elements/monaco-v1.2.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.6...@nvidia-elements/monaco-v1.2.7) (2025-10-14)
 
 
