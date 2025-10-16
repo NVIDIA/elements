@@ -161,13 +161,16 @@ export class MonacoProblems extends LitElement {
   #setupEditor(editor: monaco.editor.IStandaloneCodeEditor) {
     editor.updateOptions(EDITOR_OPTIONS);
 
+    const editorEl = editor.getDomNode();
+    editorEl.addEventListener('contextmenu', this.#onContextMenu);
+
     const onDidChangeModelContentListener = editor.onDidChangeModelContent(this.#onDidChangeModelContent);
     const onDidChangeCursorSelectionListener = editor.onDidChangeCursorSelection(this.#onDidChangeCursorSelection);
-    const onEditorKeyUpListener = editor.onKeyUp(this.#onDidKeyUp);
-    const onMouseUpListener = editor.onMouseUp(this.#onDidMouseUp);
-    const onMouseDownListener = editor.onMouseDown(this.#onDidMouseDown);
-    const onMouseMoveListener = editor.onMouseMove(this.#onDidMouseMove);
-    const onMouseLeaveListener = editor.onMouseLeave(this.#onDidMouseLeave);
+    const onEditorKeyUpListener = editor.onKeyUp(this.#onKeyUp);
+    const onMouseUpListener = editor.onMouseUp(this.#onMouseUp);
+    const onMouseDownListener = editor.onMouseDown(this.#onMouseDown);
+    const onMouseMoveListener = editor.onMouseMove(this.#onMouseMove);
+    const onMouseLeaveListener = editor.onMouseLeave(this.#onMouseLeave);
 
     const didDisposeListener = editor.onDidDispose(() => {
       didDisposeListener.dispose();
@@ -178,12 +181,30 @@ export class MonacoProblems extends LitElement {
       onMouseUpListener.dispose();
       onMouseMoveListener.dispose();
       onMouseLeaveListener.dispose();
+
+      editorEl.removeEventListener('contextmenu', this.#onContextMenu);
+
+      this.#monaco = undefined;
+      this.#editor = undefined;
+      this.#model = undefined;
+
+      this.#lineDecorations = undefined;
+      this.#selectedLineDecorations = undefined;
+      this.#hoveredLineDecorations = undefined;
+
+      this.#selectedLineNumber = undefined;
+      this.#downLineNumber = undefined;
+
+      this.#getProblemByLine = undefined;
     });
   }
 
   #getProblemByLine?: (lineNumber: number) => Problem | undefined;
 
   #applyProblems() {
+    if (!this.#monaco) {
+      return;
+    }
     const { text, decorations, getProblemByLine } = toProblemsFormat(this.#monaco, this.problems);
     this.#model?.setValue(text);
     this.#lineDecorations?.set(decorations);
@@ -218,6 +239,11 @@ export class MonacoProblems extends LitElement {
     this.#selectedLineDecorations.set(toSelectedLineDecorations(this.#monaco, this.#selectedLineNumber));
   }
 
+  #onContextMenu = (e: PointerEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   #onDidChangeModelContent = () => {
     this.#selectedLineNumber = undefined;
   };
@@ -232,7 +258,7 @@ export class MonacoProblems extends LitElement {
     this.#selectedLineDecorations.set(toSelectedLineDecorations(this.#monaco, this.#selectedLineNumber));
   };
 
-  #onDidKeyUp = (e: monaco.IKeyboardEvent) => {
+  #onKeyUp = (e: monaco.IKeyboardEvent) => {
     if (this.#isEmptyModel()) {
       return;
     }
@@ -265,7 +291,7 @@ export class MonacoProblems extends LitElement {
     }
   };
 
-  #onDidMouseDown = (e: monaco.editor.IEditorMouseEvent) => {
+  #onMouseDown = (e: monaco.editor.IEditorMouseEvent) => {
     if (this.#isEmptyModel()) {
       return;
     }
@@ -277,7 +303,7 @@ export class MonacoProblems extends LitElement {
     }
   };
 
-  #onDidMouseUp = (e: monaco.editor.IEditorMouseEvent) => {
+  #onMouseUp = (e: monaco.editor.IEditorMouseEvent) => {
     if (this.#isEmptyModel()) {
       return;
     }
@@ -315,14 +341,14 @@ export class MonacoProblems extends LitElement {
     }
   };
 
-  #onDidMouseMove = (e: monaco.editor.IEditorMouseEvent) => {
+  #onMouseMove = (e: monaco.editor.IEditorMouseEvent) => {
     const { element, position } = e.target;
     const lineNumber =
       !this.#isEmptyModel() && !element.classList.contains('view-lines') ? position?.lineNumber : undefined;
     this.#hoveredLineDecorations.set(toHoveredLineDecorations(this.#monaco, lineNumber));
   };
 
-  #onDidMouseLeave = () => {
+  #onMouseLeave = () => {
     this.#hoveredLineDecorations.set(toHoveredLineDecorations(this.#monaco, undefined));
   };
 }
