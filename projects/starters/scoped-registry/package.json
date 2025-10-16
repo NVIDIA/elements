@@ -71,6 +71,7 @@
     "@internals/vite": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
     "@vitest/browser": "catalog:",
+    "@vitest/browser-playwright": "catalog:",
     "glob": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
@@ -106,7 +107,7 @@
         "dist/**"
       ],
       "dependencies": [
-        "../../testing:ci",
+        "../../testing:build",
         {
           "script": "../../elements:build",
           "cascade": false
@@ -129,7 +130,7 @@
       ]
     },
     "test": {
-      "command": "playwright-lock 'vitest run'",
+      "command": "vitest run",
       "files": [
         "src/**/*.test.ts",
         "tsconfig.json",
@@ -139,7 +140,7 @@
       "output": [],
       "dependencies": [
         "build",
-        "../../testing:ci"
+        "../../testing:build"
       ]
     },
     "test:watch": {

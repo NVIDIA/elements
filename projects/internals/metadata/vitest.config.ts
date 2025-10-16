@@ -1,11 +1,14 @@
 import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryNodeTestConfig } from '@internals/vite';
+import { libraryNodeTestConfig } from '@internals/vite/configs/test.node.js';
 
 export default mergeConfig(libraryNodeTestConfig, {
+  root: import.meta.dirname,
+  resolve: {
+    alias: { '@internals/metadata': resolve(import.meta.dirname, './src') }
+  },
   test: {
     include: ['./src/**/*.test.ts'],
-    alias: { '@internals/metadata': resolve(import.meta.dirname, './src') },
     coverage: {
       thresholds: {
         lines: 90,

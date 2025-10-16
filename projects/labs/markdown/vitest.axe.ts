@@ -1,7 +1,12 @@
+import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryAxeTestConfig } from '@internals/vite';
+import { libraryAxeTestConfig } from '@internals/vite/configs/axe.js';
 
 export default mergeConfig(libraryAxeTestConfig, {
+  root: import.meta.dirname,
+  resolve: {
+    alias: { '@nvidia-elements/markdown': resolve(import.meta.dirname, './src') }
+  },
   test: {
     include: ['./src/**/*.test.axe.ts'],
     outputFile: {

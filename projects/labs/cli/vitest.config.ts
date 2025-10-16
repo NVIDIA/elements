@@ -1,11 +1,14 @@
 import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryNodeTestConfig } from '@internals/vite';
+import { libraryNodeTestConfig } from '@internals/vite/configs/test.node.js';
 
 export default mergeConfig(libraryNodeTestConfig, {
+  root: import.meta.dirname,
+  resolve: {
+    alias: { '@nvidia-elements/cli': resolve(import.meta.dirname, './src') }
+  },
   test: {
     include: ['./src/**/*.test.ts'],
-    alias: { '@nvidia-elements/cli': resolve(import.meta.dirname, './src') },
     coverage: {
       thresholds: {
         lines: 90,

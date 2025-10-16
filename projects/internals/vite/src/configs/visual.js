@@ -1,9 +1,16 @@
+import process from 'process';
+
 /** @type {import('vite').UserConfig} */
 export const libraryVisualTestConfig = {
   logLevel: 'info',
+  server: {
+    fs: {
+      strict: false,
+      allow: [process.cwd(), '/']
+    }
+  },
   test: {
-    retry: 1,
-    bail: 2,
+    retry: 2,
     isolate: false,
     fileParallelism: false,
     reporters: ['default', 'junit', 'json'],

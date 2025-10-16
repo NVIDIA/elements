@@ -1,12 +1,17 @@
 import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryTestConfig } from '@internals/vite';
+import { libraryTestConfig } from '@internals/vite/configs/test.js';
 
 export default mergeConfig(libraryTestConfig, {
+  root: import.meta.dirname,
+  resolve: {
+    alias: { '@nvidia-elements/monaco': resolve(import.meta.dirname, './src') }
+  },
   test: {
     include: ['./src/**/*.test.ts'],
-    alias: { '@nvidia-elements/monaco': resolve(import.meta.dirname, './src') },
     isolate: true,
+    maxConcurrency: 1,
+    fileParallelism: false,
     coverage: {
       thresholds: {
         lines: 100,

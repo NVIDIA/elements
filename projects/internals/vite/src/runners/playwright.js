@@ -35,7 +35,7 @@ export class VitePlaywrightRunner {
 
   constructor(config = {}) {
     this.#runnerID = config.runnerID ?? 'playwright';
-    this.#chromiumArgs = config.chromiumArgs ?? ['--headless', '--remote-debugging-port=9222'];
+    this.#chromiumArgs = config.chromiumArgs ?? ['--headless'];
   }
 
   async open() {
@@ -48,8 +48,14 @@ export class VitePlaywrightRunner {
         fs.mkdirSync(this.#dist);
       }
 
-      this.#browser = await chromium.launch({ args: this.#chromiumArgs });
+      console.log('playwright-runner: launching browser');
+      this.#browser = await chromium.launch({ args: this.#chromiumArgs }).catch(error => {
+        console.error('playwright-runner: error launching browser', error);
+        throw error;
+      });
+      console.log('playwright-runner: creating context');
       this.#page = await (await this.#browser.newContext({ viewport: { width: 1180, height: 820 } })).newPage();
+      console.log('playwright-runner: creating server');
       this.#server = await preview({ root: this.#root, preview: { port: this.port, open: false } });
       console.log(`Server running at port ${this.port}`);
     }
