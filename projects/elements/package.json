@@ -925,6 +925,7 @@
     "@typescript/lib-dom": "npm:@types/web@0.0.169",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
+    "axe-core": "catalog:",
     "cpy-cli": "catalog:",
     "eslint": "catalog:",
     "lit-analyzer": "2.0.3",
@@ -1039,17 +1040,17 @@
         "dist/data.snippets.json"
       ],
       "dependencies": [
-        "../labs/snippets:ci"
+        "../labs/snippets:build"
       ]
     },
     "build:snippets:watch": {
       "command": "@nve-snippets --watch",
       "dependencies": [
-        "../labs/snippets:ci"
+        "../labs/snippets:build"
       ]
     },
     "test": {
-      "command": "playwright-lock 'vitest run'",
+      "command": "vitest run",
       "files": [
         "dist/**/*.js",
         "src/**/*.test.ts",
@@ -1059,7 +1060,7 @@
       ],
       "output": [],
       "dependencies": [
-        "../testing:ci",
+        "../testing:build",
         "../internals/vite:ci",
         {
           "script": "build",
@@ -1071,7 +1072,7 @@
       }
     },
     "test:coverage": {
-      "command": "playwright-lock 'vitest run --coverage'",
+      "command": "vitest run --coverage",
       "files": [
         "dist/**/*.js",
         "src/**/*.test.ts",
@@ -1083,7 +1084,7 @@
         "coverage/unit/**"
       ],
       "dependencies": [
-        "../testing:ci",
+        "../testing:build",
         "../internals/vite:ci",
         {
           "script": "build",
@@ -1118,7 +1119,7 @@
       }
     },
     "test:visual": {
-      "command": "playwright-lock 'vitest run --config=vitest.visual.ts'",
+      "command": "vitest run --config=vitest.visual.ts",
       "clean": false,
       "files": [
         "dist/**/*.js",
@@ -1140,7 +1141,7 @@
       ]
     },
     "test:axe": {
-      "command": "playwright-lock 'vitest run --config=vitest.axe.ts'",
+      "command": "vitest run --config=vitest.axe.ts",
       "files": [
         "dist/**/*.js",
         "src/**/*.test.axe.ts",
@@ -1151,6 +1152,7 @@
         "coverage/axe/**"
       ],
       "dependencies": [
+        "../testing:build",
         "../internals/vite:ci",
         {
           "script": "build",
@@ -1162,7 +1164,7 @@
       }
     },
     "test:ssr": {
-      "command": "playwright-lock 'vitest run --config=vitest.ssr.ts'",
+      "command": "vitest run --config=vitest.ssr.ts",
       "files": [
         "dist/**/*.js",
         "src/**/*.test.ssr.ts",

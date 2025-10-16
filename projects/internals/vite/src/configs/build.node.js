@@ -25,6 +25,7 @@ export const libraryNodeBuildConfig = {
   },
   plugins: [tsc(), dts()],
   build: {
+    reportCompressedSize: false,
     watch: mode === 'watch' ? {} : undefined,
     outDir: dist(),
     emptyOutDir: false,

@@ -10,6 +10,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
  */
 export const libraryBundleConfig = {
   build: {
+    reportCompressedSize: false,
     cssMinify: 'esbuild',
     minify: false, // https://github.com/vitejs/vite/issues/8848
     outDir: 'dist/bundles/',
