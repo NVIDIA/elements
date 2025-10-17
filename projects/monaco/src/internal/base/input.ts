@@ -407,6 +407,7 @@ export abstract class BaseMonacoInput<
     // Tweak the default options to be more visually and behaviorally consistent with an input control
     editor.updateOptions({
       renderLineHighlight: 'none',
+      scrollBeyondLastLine: false,
       scrollbar: { alwaysConsumeMouseWheel: false }
     });
 
