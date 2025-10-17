@@ -37,6 +37,7 @@ const EDITOR_OPTIONS: monaco.editor.IEditorOptions & monaco.editor.IGlobalEditor
   renderLineHighlight: 'none',
   renderWhitespace: 'none',
   selectionHighlight: false,
+  scrollBeyondLastLine: false,
   showFoldingControls: 'always',
   tabSize: 2
 };
