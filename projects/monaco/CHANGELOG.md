@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.2.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.8...@nvidia-elements/monaco-v1.2.9) (2025-10-20)
+
+
+### Bug Fixes
+
+* **monaco:** disable scroll beyond last line for inputs and problems ([643024b](https://github.com/NVIDIA/elements/commit/643024b8dfe0a4a2836c0ef27f83a08592fb417e))
+
 ## [@nvidia-elements/monaco-v1.2.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.7...@nvidia-elements/monaco-v1.2.8) (2025-10-16)
 
 
