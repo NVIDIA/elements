@@ -147,6 +147,10 @@
   --color: var(--nve-sys-text-white-color);
 }
 
+:host(:hover:not([interaction]):not([disabled]):not([readonly])) {
+  --color: var(--nve-sys-interaction-hover-color) !important;
+}
+
 :host([container='flat'][selected]) [interaction-state],
 :host([container='flat']:state(selected)) [interaction-state],
 :host([container='flat'][pressed]) [interaction-state],
