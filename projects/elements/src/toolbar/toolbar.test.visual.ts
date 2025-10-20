@@ -22,24 +22,28 @@ function template(theme: '' | 'dark' = '') {
     import '@nvidia-elements/core/button-group/define.js';
     import '@nvidia-elements/core/icon-button/define.js';
     import '@nvidia-elements/core/select/define.js';
+    import '@nvidia-elements/core/switch/define.js';
+    import '@nvidia-elements/core/checkbox/define.js';
+    import '@nvidia-elements/core/input/define.js';
+    import '@nvidia-elements/core/copy-button/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
 
   <nve-toolbar>
-    <nve-button container="inline"><nve-icon name="add"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
-    <nve-button container="inline"><nve-icon name="delete"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
-    <nve-icon-button container="inline" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+    <nve-button><nve-icon name="add"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
+    <nve-button><nve-icon name="delete"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
+    <nve-icon-button icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
   </nve-toolbar>
 
   <nve-toolbar container="flat">
-    <nve-button container="inline"><nve-icon name="add"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
-    <nve-button container="inline"><nve-icon name="delete"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
+    <nve-button><nve-icon name="add"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
+    <nve-button><nve-icon name="delete"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
     <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
   </nve-toolbar>
 
   <nve-toolbar container="inset">
-    <nve-button container="inline"><nve-icon name="add"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
-    <nve-button container="inline"><nve-icon name="delete"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
+    <nve-button><nve-icon name="add"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
+    <nve-button><nve-icon name="delete"></nve-icon> •︎•︎•︎•︎•︎•︎</nve-button>
     <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
   </nve-toolbar>
 
@@ -105,10 +109,26 @@ function template(theme: '' | 'dark' = '') {
   </nve-toolbar>
 
   <nve-toolbar status="accent">
-      <nve-icon-button icon-name="cancel" slot="prefix"></nve-icon-button>  
-      <p nve-text="body">•︎•︎•︎•︎•︎•︎</p>
-      <nve-button slot="suffix">•︎•︎•︎•︎•︎•︎</nve-button>
-      <nve-icon-button icon-name="more-actions" slot="suffix"></nve-icon-button>
-    </nve-toolbar>
+    <nve-icon-button icon-name="cancel" slot="prefix"></nve-icon-button>  
+    <p nve-text="body">•︎•︎•︎•︎•︎•︎</p>
+    <nve-button slot="suffix">•︎•︎•︎•︎•︎•︎</nve-button>
+    <nve-icon-button icon-name="more-actions" slot="suffix"></nve-icon-button>
+  </nve-toolbar>
+
+  <nve-toolbar>
+    <nve-button><nve-icon name="copy"></nve-icon> •︎•︎•︎•︎</nve-button>
+    <nve-button><nve-icon name="copy"></nve-icon></nve-button>
+    <nve-icon-button icon-name="copy"></nve-icon-button>
+    <nve-copy-button></nve-copy-button>
+    <nve-switch prominence="muted">
+      <input type="checkbox" checked />
+    </nve-switch>
+    <nve-checkbox prominence="muted">
+      <input type="checkbox" checked />
+    </nve-checkbox>
+    <nve-input>
+      <input />
+    </nve-input>
+  </nve-toolbar>
   `;
 }
