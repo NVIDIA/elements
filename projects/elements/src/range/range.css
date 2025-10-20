@@ -17,8 +17,16 @@
   --background: var(--nve-sys-interaction-disabled-background);
 }
 
+:host([prominence='muted']) {
+  --filter: grayscale(90%);
+}
+
 :host(:not(:state(disabled)):hover) [input] {
-  filter: brightness(0.9);
+  --filter: brightness(1.1);
+}
+
+:host([prominence='muted']:not(:state(disabled)):hover) [input] {
+  --filter: grayscale(90%) brightness(1.1);
 }
 
 ::slotted(input) {
@@ -37,6 +45,7 @@
 
 [input] {
   position: relative;
+  filter: none;
 }
 
 [input]::before {
@@ -46,6 +55,7 @@
   height: var(--track-height);
   background: var(--nve-sys-interaction-background);
   border-radius: var(--track-border-radius);
+  filter: var(--filter);
   position: absolute;
   pointer-events: none;
   align-self: center;
@@ -61,6 +71,7 @@
   background: var(--background);
   border-top-left-radius: var(--track-border-radius);
   border-bottom-left-radius: var(--track-border-radius);
+  filter: var(--filter);
   position: absolute;
   pointer-events: none;
   align-self: center;
