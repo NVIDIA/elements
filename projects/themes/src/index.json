@@ -1749,7 +1749,7 @@
       },
       "link": {
         "color": {
-          "value": "{ref.color.gray-denim.1200}",
+          "value": "{ref.color.neutral.1200}",
           "type": "color"
         },
         "hover": {
@@ -1936,7 +1936,7 @@
         "type": "color"
       },
       "mix": {
-        "value": "{ref.color.black}"
+        "value": "{ref.color.neutral.1200}"
       },
       "ratio": {
         "value": "initial"
@@ -2057,7 +2057,7 @@
     "status": {
       "@": {
         "color": {
-          "value": "{ref.color.gray-denim.900}",
+          "value": "{ref.color.neutral.1000}",
           "type": "color"
         }
       },
@@ -2123,7 +2123,7 @@
       },
       "ignored": {
         "color": {
-          "value": "{ref.color.gray-denim.1100}",
+          "value": "{ref.color.neutral.1100}",
           "type": "color"
         }
       }
