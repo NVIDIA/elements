@@ -11,6 +11,7 @@
   --_label-width: var(--label-width, 180px);
   --nve-sys-interaction-state-base: var(--background);
   --opacity: 1;
+  --filter: none;
   contain: content;
 }
 
@@ -81,6 +82,7 @@
   cursor: var(--cursor);
   min-height: var(--control-height);
   opacity: var(--opacity);
+  filter: var(--filter);
   grid-area: input;
   display: flex;
   line-height: 1;

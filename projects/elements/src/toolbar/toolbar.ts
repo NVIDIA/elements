@@ -11,11 +11,6 @@ import {
   applySlotContentStates,
   hasHorizontalScrollBar
 } from '@nvidia-elements/core/internal';
-import type { IconButton } from '@nvidia-elements/core/icon-button';
-import type { ButtonGroup } from '@nvidia-elements/core/button-group';
-import type { Divider } from '@nvidia-elements/core/divider';
-import type { Button } from '@nvidia-elements/core/button';
-import type { Control } from '@nvidia-elements/core/forms';
 import styles from './toolbar.css?inline';
 
 /**
@@ -143,31 +138,23 @@ export class Toolbar extends LitElement implements ContainerElement {
   }
 
   #updateContainers() {
-    if (this.container !== 'flat' && this.container !== 'inset') {
-      const groups = this.#slottedElements.filter(e =>
-        e.matches('nve-button-group, mlv-button-group')
-      ) as ButtonGroup[];
-      groups.forEach(group => (group.container = 'flat'));
-
-      const controls = this.#slottedElements.filter(e => e.matches('[nve-control], [mlv-control]')) as (Control & {
-        container: string;
-      })[];
-      controls.forEach(control => (control.container = 'flat'));
-
-      (this.#slottedElements.filter(e => e.matches('nve-button, mlv-button')) as Button[]).forEach(
-        button => (button.container = 'inline')
-      );
-      (this.#slottedElements.filter(e => e.matches('nve-icon-button, mlv-icon-button')) as IconButton[]).forEach(
-        button => (button.container = 'flat')
-      );
-    }
+    const slottedElements = this.#slottedElements as (HTMLElement & { container: string })[];
+    slottedElements
+      .filter(e =>
+        e.matches(
+          'nve-button-group, nve-input, nve-search, nve-combobox, nve-button, nve-select, nve-icon-button, nve-copy-button'
+        )
+      )
+      .forEach(e => (e.container = 'flat'));
   }
 
   #updateOrientation() {
-    const dividers = this.#slottedElements.filter(e => e.matches('nve-divider, mlv-divider')) as Divider[];
-    dividers.forEach(divider => (divider.orientation = this.orientation === 'horizontal' ? 'vertical' : 'horizontal'));
-
-    const groups = this.#slottedElements.filter(e => e.matches('nve-button-group, mlv-button-group')) as ButtonGroup[];
-    groups.forEach(group => (group.orientation = this.orientation));
+    const slottedElements = this.#slottedElements as (HTMLElement & { orientation: string })[];
+    slottedElements
+      .filter(e => e.matches('nve-divider, mlv-divider'))
+      .forEach(divider => (divider.orientation = this.orientation === 'horizontal' ? 'vertical' : 'horizontal'));
+    slottedElements
+      .filter(e => e.matches('nve-button-group, mlv-button-group'))
+      .forEach(group => (group.orientation = this.orientation));
   }
 }
