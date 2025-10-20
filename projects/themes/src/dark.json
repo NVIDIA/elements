@@ -11,15 +11,15 @@
     "border": {
       "color": {
         "@": {
-          "value": "{ref.color.gray-slate.600}",
+          "value": "{ref.color.neutral.600}",
           "type": "color"
         },
         "emphasis": {
-          "value": "{ref.color.gray-slate.800}",
+          "value": "{ref.color.neutral.800}",
           "type": "color"
         },
         "muted": {
-          "value": "{ref.color.gray-slate.500}",
+          "value": "{ref.color.neutral.500}",
           "type": "color"
         },
         "inverse": {
@@ -1169,15 +1169,15 @@
           "type": "color"
         },
         "1000": {
-          "value": "oklch(56.8% 0.046 270)",
+          "value": "oklch(70% 0.02 270)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(68.3% 0.035 273.9)",
+          "value": "oklch(85% 0.02 270)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(94.3% 0.006 264.5)",
+          "value": "oklch(95% 0.015 270)",
           "type": "color"
         }
       },
@@ -1324,30 +1324,30 @@
     },
     "text": {
       "color": {
-        "value": "{ref.color.gray-slate.1100}",
+        "value": "{ref.color.neutral.1100}",
         "type": "color"
       },
       "muted": {
         "color": {
-          "value": "{ref.color.gray-slate.1000}",
+          "value": "{ref.color.neutral.1000}",
           "type": "color"
         }
       },
       "emphasis": {
         "color": {
-          "value": "{ref.color.gray-slate.1200}",
+          "value": "{ref.color.neutral.1200}",
           "type": "color"
         }
       },
       "placeholder": {
         "color": {
-          "value": "{ref.color.gray-slate.900}",
+          "value": "{ref.color.neutral.900}",
           "type": "color"
         }
       },
       "link": {
         "color": {
-          "value": "{ref.color.gray-denim.1200}",
+          "value": "{ref.color.neutral.1200}",
           "type": "color"
         }
       }
@@ -1532,7 +1532,7 @@
         "type": "color"
       },
       "mix": {
-        "value": "{ref.color.white}"
+        "value": "{ref.color.neutral.1200}"
       }
     },
     "layer": {
@@ -1644,7 +1644,7 @@
       },
       "pending": {
         "color": {
-          "value": "{ref.color.gray-slate.1100}",
+          "value": "{ref.color.neutral.1100}",
           "type": "color"
         }
       },
@@ -1828,7 +1828,7 @@
           "type": "color"
         },
         "slate": {
-          "value": "{ref.color.gray-slate.1000}",
+          "value": "{ref.color.neutral.1000}",
           "type": "color"
         }
       },
