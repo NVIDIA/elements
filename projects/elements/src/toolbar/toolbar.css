@@ -1,10 +1,12 @@
 :host {
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-200);
   --background: var(--nve-sys-layer-container-background);
   --color: var(--nve-sys-layer-canvas-color);
   --padding: 0 var(--nve-ref-size-300);
   --min-height: var(--nve-ref-size-1000);
   --border-radius: var(--nve-ref-border-radius-sm);
-  --gap: var(--nve-ref-space-sm);
+  --gap: var(--nve-ref-space-xs);
   --border-bottom: 0;
   --box-shadow: var(--nve-ref-shadow-100);
   --width: 100%;
@@ -14,6 +16,8 @@
 
 :host([container='flat']),
 :host([container='inset']) {
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-100);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-100);
   --background: transparent;
   --padding: var(--nve-ref-size-100);
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
@@ -119,6 +123,10 @@
 ::slotted(nve-select),
 ::slotted(nve-select) {
   --border-bottom: 0;
+}
+
+::slotted(nve-button) {
+  --color: var(--nve-sys-text-muted-color);
 }
 
 slot:not([name]) {

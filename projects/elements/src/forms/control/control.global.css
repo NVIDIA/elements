@@ -95,7 +95,7 @@ nve-control:has(nve-monaco-diff-input) {
   contain: none;
 }
 
-[prominence='muted'] > [nve-control]::part(_input),
-[prominence='muted'][nve-control]::part(_input) {
-  filter: grayscale(85%) !important;
+[prominence='muted'] > [nve-control]:state(checked),
+[prominence='muted'][nve-control]:state(checked) {
+  --filter: grayscale(90%);
 }

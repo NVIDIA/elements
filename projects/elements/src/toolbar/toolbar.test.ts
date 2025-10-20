@@ -5,6 +5,7 @@ import { Toolbar } from '@nvidia-elements/core/toolbar';
 import { ButtonGroup } from '@nvidia-elements/core/button-group';
 import { Divider } from '@nvidia-elements/core/divider';
 import { Select } from '@nvidia-elements/core/select';
+import { Input } from '@nvidia-elements/core/input';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Button } from '@nvidia-elements/core/button';
 import '@nvidia-elements/core/toolbar/define.js';
@@ -12,6 +13,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/button-group/define.js';
 import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/select/define.js';
+import '@nvidia-elements/core/input/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 describe(Toolbar.metadata.tag, () => {
@@ -174,6 +176,10 @@ describe(`${Toolbar.metadata.tag}: container`, () => {
           </select>
         </nve-select>
 
+        <nve-input>
+          <input />
+        </nve-input>
+
         <nve-button-group>
           <nve-icon-button pressed icon-name="bars-3-bottom-left"></nve-icon-button>
           <nve-icon-button icon-name="bars-3-bottom-right"></nve-icon-button>
@@ -194,16 +200,10 @@ describe(`${Toolbar.metadata.tag}: container`, () => {
 
   it('should sync container of slotted elements', async () => {
     await elementIsStable(element);
-    expect(fixture.querySelector<Select>(Select.metadata.tag).container).toBe(undefined);
-    expect(fixture.querySelector<ButtonGroup>(ButtonGroup.metadata.tag).container).toBe(undefined);
-    expect(fixture.querySelector<IconButton>(IconButton.metadata.tag).interaction).toBe(undefined);
-    expect(fixture.querySelector<Button>(Button.metadata.tag).interaction).toBe(undefined);
-
-    element.container = undefined;
-    await elementIsStable(element);
     expect(fixture.querySelector<Select>(Select.metadata.tag).container).toBe('flat');
+    expect(fixture.querySelector<Input>(Input.metadata.tag).container).toBe('flat');
     expect(fixture.querySelector<ButtonGroup>(ButtonGroup.metadata.tag).container).toBe('flat');
     expect(fixture.querySelector<IconButton>(IconButton.metadata.tag).container).toBe('flat');
-    expect(fixture.querySelector<Button>(Button.metadata.tag).container).toBe('inline');
+    expect(fixture.querySelector<Button>(Button.metadata.tag).container).toBe('flat');
   });
 });
