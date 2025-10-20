@@ -19,9 +19,9 @@ export default {
 export const Default = {
   render: () => html`
     <nve-toolbar>
-      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
-      <nve-icon-button container="inline" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      <nve-button><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   `
 };
@@ -32,8 +32,8 @@ export const Default = {
 export const ContainerFlat = {
   render: () => html`
     <nve-toolbar container="flat">
-      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-button><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button><nve-icon name="delete"></nve-icon> delete</nve-button>
       <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   `
@@ -45,9 +45,9 @@ export const ContainerFlat = {
 export const ContainerInset = {
   render: () => html`
     <nve-toolbar container="inset" style="--width: 300px">
-      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
-      <nve-icon-button container="inline" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
+      <nve-button><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-icon-button icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   `
 };
@@ -58,8 +58,8 @@ export const ContainerInset = {
 export const ContainerFull = {
   render: () => html`
     <nve-toolbar container="full">
-      <nve-button container="inline"><nve-icon name="add"></nve-icon> create</nve-button>
-      <nve-button container="inline"><nve-icon name="delete"></nve-icon> delete</nve-button>
+      <nve-button><nve-icon name="add"></nve-icon> create</nve-button>
+      <nve-button><nve-icon name="delete"></nve-icon> delete</nve-button>
       <nve-icon-button container="flat" icon-name="gear" slot="suffix" aria-label="settings"></nve-icon-button>
     </nve-toolbar>
   `
@@ -326,3 +326,62 @@ export const Status = {
     </div>
   `
 }
+
+
+/**
+ * @summary Example of toolbar containers and their different appearances with varying prominence levels.
+ * @tags test-case
+ */
+export const Container = {
+  render: () => html`
+    <div nve-layout="column gap:lg">
+      <nve-toolbar>
+        <nve-button><nve-icon name="copy"></nve-icon> copy</nve-button>
+        <nve-button><nve-icon name="copy"></nve-icon></nve-button>
+        <nve-icon-button icon-name="copy"></nve-icon-button>
+        <nve-copy-button></nve-copy-button>
+        <nve-switch prominence="muted">
+          <input type="checkbox" checked />
+        </nve-switch>
+        <nve-checkbox prominence="muted">
+          <input type="checkbox" checked />
+        </nve-checkbox>
+        <nve-input>
+          <input />
+        </nve-input>
+      </nve-toolbar>
+
+      <nve-toolbar container="flat">
+        <nve-button><nve-icon name="copy"></nve-icon> copy</nve-button>
+        <nve-button><nve-icon name="copy"></nve-icon></nve-button>
+        <nve-icon-button icon-name="copy"></nve-icon-button>
+        <nve-copy-button></nve-copy-button>
+        <nve-switch prominence="muted">
+          <input type="checkbox" checked />
+        </nve-switch>
+        <nve-checkbox prominence="muted">
+          <input type="checkbox" checked />
+        </nve-checkbox>
+        <nve-input>
+          <input />
+        </nve-input>
+      </nve-toolbar>
+
+      <nve-toolbar container="inset">
+        <nve-button><nve-icon name="copy"></nve-icon> copy</nve-button>
+        <nve-button><nve-icon name="copy"></nve-icon></nve-button>
+        <nve-icon-button icon-name="copy"></nve-icon-button>
+        <nve-copy-button></nve-copy-button>
+        <nve-switch prominence="muted">
+          <input type="checkbox" checked />
+        </nve-switch>
+        <nve-checkbox prominence="muted">
+          <input type="checkbox" checked />
+        </nve-checkbox>
+        <nve-input>
+          <input />
+        </nve-input>
+      </nve-toolbar>
+    </div>
+  `
+};
