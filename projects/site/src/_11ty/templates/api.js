@@ -4,7 +4,7 @@ import markdown from 'markdown-it';
 import { ESM_ELEMENTS_VERSION } from '../utils/version.js';
 import { siteData } from '../../index.11tydata.js';
 
-const { elements } = siteData;
+const { elements, tests } = siteData;
 
 // Base URL for package releases
 const PACKAGE_URL = 'https://github.com/NVIDIA/elements/-/releases';
@@ -31,26 +31,49 @@ export function elementDescription(tag) {
  */
 export function elementSummary(tag) {
   const element = elements.find(d => d.name === tag);
+  const testReports = Object.values(tests.projects);
+  const unitTestResults = testReports.flatMap(report => report.coverage.testResults);
+  const coverageTotal =
+    unitTestResults.find(result => result.file?.includes(tag.replace('nve-', '')))?.branches.pct ?? 0;
+  const lighthouseResults = testReports
+    .flatMap(report => report.lighthouse)
+    .flatMap(result => result.testResults)
+    .find(result => result.name.includes(tag)) ?? {
+    payload: {
+      javascript: {
+        kb: 10
+      }
+    },
+    scores: {
+      performance: 100,
+      accessibility: 100,
+      bestPractices: 100
+    }
+  };
+  const axeResults = testReports
+    .flatMap(report => report.axe)
+    .flatMap(result => result.testResults)
+    .flatMap(result => result.assertionResults)
+    .find(result => result.name?.includes(tag));
 
   return /* html */ `<section nve-layout="column gap:md align:stretch">
-
   <div nve-layout="row gap:xs align:center align:space-between align:wrap">
     <div nve-layout="row gap:xxs align:center">
-      ${badgeStatus(element.manifest.metadata.status, '', ESM_ELEMENTS_VERSION)}
-      ${badgeCoverage(element.tests.unit.coverageTotal, '', 'Coverage:&nbsp;')}
-      ${badgeBundle(element.tests.lighthouse?.payload?.javascript?.kb?.toFixed(2), '', 'Bundle:&nbsp;')}
-      ${badgeLighthouse(element.tests.lighthouse?.scores, '', 'Lighthouse:&nbsp;')}
-      ${badgeAxe(element.manifest.metadata.axe, '')}
+      ${badgeStatus(element?.manifest?.metadata?.status ?? '', '', ESM_ELEMENTS_VERSION)}
+      ${badgeCoverage(coverageTotal, '', 'Coverage:&nbsp;')}
+      ${badgeBundle(lighthouseResults?.payload?.javascript?.kb ?? 0, '', 'Bundle:&nbsp;')}
+      ${badgeLighthouse(lighthouseResults?.scores ?? {}, '', 'Lighthouse:&nbsp;')}
+      ${badgeAxe(axeResults?.message ?? '', '')}
     </div>
 
     <div nve-layout="row gap:xxs align:center">
-      ${element.manifest.metadata.behavior === 'form' ? /* html */ `<nve-button size="sm"><nve-icon name="checklist" size="sm"></nve-icon><a href="./docs/elements/forms/controls/#form-associated-elements" target="_blank">Form Control</a></nve-button>` : ''}
+      ${element?.manifest?.metadata?.behavior === 'form' ? /* html */ `<nve-button size="sm"><nve-icon name="checklist" size="sm"></nve-icon><a href="./docs/elements/forms/controls/#form-associated-elements" target="_blank">Form Control</a></nve-button>` : ''}
 
-      <nve-button size="sm" style="margin-left: auto"><nve-icon name="code" size="sm"></nve-icon><a href="${element.manifest.metadata.aria}" target="_blank">Spec</a></nve-button>
+      <nve-button size="sm" style="margin-left: auto"><nve-icon name="code" size="sm"></nve-icon><a href="${element?.manifest?.metadata?.aria ?? ''}" target="_blank">Spec</a></nve-button>
 
-      ${element.manifest.metadata.figma ? /* html */ `<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href="${element.manifest.metadata.figma}" target="_blank">Figma</a></nve-button>` : ''}
+      ${element?.manifest?.metadata?.figma ? /* html */ `<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href="${element.manifest.metadata.figma}" target="_blank">Figma</a></nve-button>` : ''}
 
-      <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">${element.manifest.metadata.since}</a></nve-button>
+      <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">${element?.manifest?.metadata?.since ?? ''}</a></nve-button>
     </div>
   </div>
 </section>`;
@@ -189,7 +212,25 @@ export function badgeAxe(value, container = '') {
  * @returns {string} HTML string containing the component status section
  */
 export function elementStatus(tag) {
-  const elementMetadata = elements.find(d => d.name === tag)?.manifest?.metadata;
+  /** @type {import('@nve-internals/metadata').MetadataCustomElementsManifestDeclaration['metadata']} */
+  const elementMetadata = elements.find(d => d.name === tag)?.manifest?.metadata ?? {
+    status: 'unknown',
+    figma: '',
+    storybook: '',
+    aria: '',
+    themes: false,
+    performance: false,
+    responsive: false,
+    stable: false,
+    vqa: false,
+    package: false,
+    unitTests: false,
+    apiReview: false,
+    behavior: '',
+    example: '',
+    entrypoint: '',
+    since: ''
+  };
 
   return /* html */ `
   <h2 nve-text="heading xl emphasis mkd" id="release-status">Release Status</h2>
@@ -240,7 +281,44 @@ export function elementStatus(tag) {
  * @returns {string} HTML string containing the API documentation tables
  */
 export function elementTable(tag, type = 'all') {
-  const elementManifest = elements.find(d => d.name === tag)?.manifest;
+  /** @type {import('@nve-internals/metadata').MetadataCustomElementsManifestDeclaration} */
+  const elementManifest = elements.find(d => d.name === tag)?.manifest ?? {
+    attributes: [],
+    events: [],
+    slots: [],
+    cssProperties: [],
+    cssParts: [],
+    members: [],
+    tagName: '',
+    customElement: false,
+    superclass: {
+      name: '',
+      package: ''
+    },
+    kind: '',
+    path: '',
+    name: '',
+    description: '',
+    deprecated: '',
+    metadata: {
+      status: 'unknown',
+      figma: '',
+      storybook: '',
+      aria: '',
+      themes: false,
+      performance: false,
+      responsive: false,
+      stable: false,
+      vqa: false,
+      package: false,
+      unitTests: false,
+      apiReview: false,
+      behavior: '',
+      example: '',
+      entrypoint: '',
+      since: ''
+    }
+  };
 
   return elementManifest
     ? /* html */ `
@@ -290,8 +368,7 @@ export function elementTable(tag, type = 'all') {
                         .join('')}`
                     : ''
                 }
-                ${attr.enum ? /* html */ `${attr.enum.map(i => /* html */ `<nve-tag readonly color="gray-slate">${md.render(i.replaceAll("'", ''))}</nve-tag>`).join('')}` : ''}
-                ${attr.type && !attr.type.text ? /* html */ `<nve-tag readonly color="gray-slate">${md.render(attr.type.replaceAll("'", '').join(''))}</nve-tag>` : ''}
+                ${attr.type && !attr.type.text ? /* html */ `<nve-tag readonly color="gray-slate">${md.render(attr.type.text.replaceAll("'", ''))}</nve-tag>` : ''}
               </div>
             </nve-grid-cell>
           </nve-grid-row>

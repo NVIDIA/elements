@@ -57,7 +57,7 @@ export class VitePlaywrightRunner {
       this.#page = await (await this.#browser.newContext({ viewport: { width: 1180, height: 820 } })).newPage();
       console.log('playwright-runner: creating server');
       this.#server = await preview({ root: this.#root, preview: { port: this.port, open: false } });
-      console.log(`Server running at port ${this.port}`);
+      console.log(`playwright-runner: server running at port ${this.port}`);
     }
   }
 
