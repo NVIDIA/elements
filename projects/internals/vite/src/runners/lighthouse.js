@@ -34,7 +34,9 @@ export class LighthouseRunner {
   }
 
   async getReport(name, content) {
+    console.log('building lighthouse test page...');
     await buildPage(name, RUNNER_ID, t => t.replace('</body>', `${content}</body>`));
+    console.log('running lighthouse test...');
     const runnerResult = await lighthouse(
       `http://localhost:${this.#runner.port}/${name}/index.html`,
       LIGHTHOUSE_FLAGS,
@@ -42,9 +44,14 @@ export class LighthouseRunner {
     );
     fs.writeFileSync(`.${RUNNER_ID}/dist/${name}/report.html`, runnerResult.report[1]);
 
+    const networkRequests = runnerResult.lhr.audits['network-requests']?.details?.items;
+    if (!networkRequests) {
+      throw new Error(`Lighthouse network requests not found ${JSON.stringify(runnerResult, null, 2)}`);
+    }
+
     const report = {
       name,
-      payload: getPayload(runnerResult.lhr.audits['network-requests'].details.items),
+      payload: getPayload(networkRequests),
       scores: {
         performance: runnerResult.lhr.categories.performance.score * 100,
         accessibility: runnerResult.lhr.categories.accessibility.score * 100,
@@ -52,6 +59,7 @@ export class LighthouseRunner {
       }
     };
 
+    console.log('writing lighthouse test report...');
     fs.writeFileSync(`.${RUNNER_ID}/dist/${name}/report.json`, JSON.stringify(report, null, 2));
     return report;
   }
