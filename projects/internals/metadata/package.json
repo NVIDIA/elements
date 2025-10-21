@@ -8,6 +8,7 @@
     "ci": "wireit",
     "ci:all": "wireit",
     "build": "wireit",
+    "build:tests": "wireit",
     "build:metadata": "wireit",
     "build:av-infra": "wireit",
     "build:lighthouse": "wireit",
@@ -28,6 +29,10 @@
     "./services/metadata.service.js": {
       "types": "./dist/services/metadata.service.d.ts",
       "default": "./dist/src/services/metadata.service.js"
+    },
+    "./services/tests.service.js": {
+      "types": "./dist/services/tests.service.d.ts",
+      "default": "./dist/src/services/tests.service.js"
     },
     "./services/av-infra.service.js": {
       "types": "./dist/services/av-infra.service.d.ts",
@@ -76,7 +81,8 @@
       "dependencies": [
         "../vite:ci",
         "build:metadata",
-        "build:examples"
+        "build:examples",
+        "build:tests"
       ]
     },
     "build:metadata": {
@@ -84,27 +90,19 @@
       "files": [
         "./src/tasks/metadata.ts",
         "./src/tasks/metadata.utils.ts",
-        "./static/lighthouse.json",
         "../../elements/src/internal/types/index.ts",
         "../../elements/package.json",
         "../../elements/README.md",
         "../../elements/CHANGELOG.md",
         "../../elements/dist/custom-elements.json",
-        "../../elements/coverage/unit/coverage-summary.json",
-        "../../elements/coverage/unit/summary.json",
-        "../../elements/coverage/visual/summary.json",
-        "../../elements/coverage/ssr/summary.json",
         "../../elements-react/package.json",
         "../../elements-react/README.md",
         "../../elements-react/CHANGELOG.md",
         "../../elements-react/dist/custom-elements.json",
-        "../../elements-react/coverage/unit/coverage-summary.json",
-        "../../elements-react/coverage/unit/summary.json",
         "../../styles/package.json",
         "../../styles/README.md",
         "../../styles/CHANGELOG.md",
         "../../styles/dist/custom-elements.json",
-        "../../styles/coverage/visual/summary.json",
         "../../testing/package.json",
         "../../testing/README.md",
         "../../testing/CHANGELOG.md",
@@ -113,56 +111,34 @@
         "../../themes/README.md",
         "../../themes/CHANGELOG.md",
         "../../themes/dist/custom-elements.json",
-        "../../themes/coverage/visual/summary.json",
         "../../labs/brand/package.json",
         "../../labs/brand/README.md",
         "../../labs/brand/CHANGELOG.md",
         "../../labs/brand/dist/custom-elements.json",
-        "../../labs/brand/coverage/unit/coverage-summary.json",
-        "../../labs/brand/coverage/unit/summary.json",
-        "../../labs/brand/coverage/visual/summary.json",
         "../../labs/code/package.json",
         "../../labs/code/README.md",
         "../../labs/code/CHANGELOG.md",
         "../../labs/code/dist/custom-elements.json",
-        "../../labs/code/coverage/unit/coverage-summary.json",
-        "../../labs/code/coverage/unit/summary.json",
-        "../../labs/code/coverage/visual/summary.json",
-        "../../labs/code/coverage/ssr/summary.json",
         "../../labs/forms/package.json",
         "../../labs/forms/README.md",
         "../../labs/forms/CHANGELOG.md",
         "../../labs/forms/dist/custom-elements.json",
-        "../../labs/forms/coverage/unit/coverage-summary.json",
-        "../../labs/forms/coverage/unit/summary.json",
         "../../labs/behaviors-alpine/package.json",
         "../../labs/behaviors-alpine/README.md",
         "../../labs/behaviors-alpine/CHANGELOG.md",
         "../../labs/behaviors-alpine/dist/custom-elements.json",
-        "../../labs/behaviors-alpine/coverage/unit/coverage-summary.json",
-        "../../labs/behaviors-alpine/coverage/unit/summary.json",
         "../../labs/markdown/package.json",
         "../../labs/markdown/README.md",
         "../../labs/markdown/CHANGELOG.md",
         "../../labs/markdown/dist/custom-elements.json",
-        "../../labs/markdown/coverage/unit/coverage-summary.json",
-        "../../labs/markdown/coverage/unit/summary.json",
-        "../../labs/markdown/coverage/visual/summary.json",
-        "../../labs/markdown/coverage/ssr/summary.json",
         "../../labs/playwright-screencast/package.json",
         "../../labs/playwright-screencast/README.md",
         "../../labs/playwright-screencast/CHANGELOG.md",
         "../../labs/playwright-screencast/dist/custom-elements.json",
-        "../../labs/playwright-screencast/coverage/unit/coverage-summary.json",
-        "../../labs/playwright-screencast/coverage/unit/summary.json",
         "../../monaco/package.json",
         "../../monaco/README.md",
         "../../monaco/CHANGELOG.md",
         "../../monaco/dist/custom-elements.json",
-        "../../monaco/coverage/unit/coverage-summary.json",
-        "../../monaco/coverage/unit/summary.json",
-        "../../monaco/coverage/visual/summary.json",
-        "../../monaco/coverage/ssr/summary.json",
         "../../patterns/package.json",
         "../../patterns/dist/custom-elements.json"
       ],
@@ -174,6 +150,96 @@
           "script": "../../elements:build",
           "cascade": false
         },
+        {
+          "script": "../../elements-react:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../testing:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/brand:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/code:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/forms:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/markdown:build",
+          "cascade": false
+        },
+        {
+          "script": "../../monaco:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/behaviors-alpine:build",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/playwright-screencast:build",
+          "cascade": false
+        },
+        {
+          "script": "../patterns:build",
+          "cascade": false
+        }
+      ]
+    },
+    "build:tests": {
+      "command": "node --experimental-strip-types ./src/tasks/tests.ts",
+      "files": [
+        "./src/tasks/tests.ts",
+        "./src/tasks/tests.utils.ts",
+        "./static/lighthouse.json",
+        "../../elements/coverage/unit/coverage-summary.json",
+        "../../elements/coverage/unit/summary.json",
+        "../../elements/coverage/visual/summary.json",
+        "../../elements/coverage/ssr/summary.json",
+        "../../elements-react/coverage/unit/coverage-summary.json",
+        "../../elements-react/coverage/unit/summary.json",
+        "../../styles/coverage/visual/summary.json",
+        "../../themes/coverage/visual/summary.json",
+        "../../labs/brand/coverage/unit/coverage-summary.json",
+        "../../labs/brand/coverage/unit/summary.json",
+        "../../labs/brand/coverage/visual/summary.json",
+        "../../labs/code/coverage/unit/coverage-summary.json",
+        "../../labs/code/coverage/unit/summary.json",
+        "../../labs/code/coverage/visual/summary.json",
+        "../../labs/code/coverage/ssr/summary.json",
+        "../../labs/forms/coverage/unit/coverage-summary.json",
+        "../../labs/forms/coverage/unit/summary.json",
+        "../../labs/behaviors-alpine/coverage/unit/coverage-summary.json",
+        "../../labs/behaviors-alpine/coverage/unit/summary.json",
+        "../../labs/markdown/coverage/unit/coverage-summary.json",
+        "../../labs/markdown/coverage/unit/summary.json",
+        "../../labs/markdown/coverage/visual/summary.json",
+        "../../labs/markdown/coverage/ssr/summary.json",
+        "../../labs/playwright-screencast/coverage/unit/coverage-summary.json",
+        "../../labs/playwright-screencast/coverage/unit/summary.json",
+        "../../monaco/coverage/unit/coverage-summary.json",
+        "../../monaco/coverage/unit/summary.json",
+        "../../monaco/coverage/visual/summary.json",
+        "../../monaco/coverage/ssr/summary.json"
+      ],
+      "output": [
+        "static/tests.json"
+      ],
+      "dependencies": [
         {
           "script": "../../elements:test:coverage",
           "cascade": false
@@ -187,15 +253,7 @@
           "cascade": false
         },
         {
-          "script": "../../elements-react:build",
-          "cascade": false
-        },
-        {
           "script": "../../elements-react:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../../styles:build",
           "cascade": false
         },
         {
@@ -203,19 +261,7 @@
           "cascade": false
         },
         {
-          "script": "../../testing:build",
-          "cascade": false
-        },
-        {
-          "script": "../../themes:build",
-          "cascade": false
-        },
-        {
           "script": "../../themes:test:visual",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/brand:build",
           "cascade": false
         },
         {
@@ -227,15 +273,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/code:build",
-          "cascade": false
-        },
-        {
           "script": "../../labs/code:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/forms:build",
           "cascade": false
         },
         {
@@ -243,15 +281,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/markdown:build",
-          "cascade": false
-        },
-        {
           "script": "../../labs/markdown:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../../monaco:build",
           "cascade": false
         },
         {
@@ -259,23 +289,11 @@
           "cascade": false
         },
         {
-          "script": "../../labs/behaviors-alpine:build",
-          "cascade": false
-        },
-        {
           "script": "../../labs/behaviors-alpine:test:coverage",
           "cascade": false
         },
         {
-          "script": "../../labs/playwright-screencast:build",
-          "cascade": false
-        },
-        {
           "script": "../../labs/playwright-screencast:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../patterns:build",
           "cascade": false
         }
       ]

@@ -4,8 +4,6 @@ import { state } from 'lit/decorators/state.js';
 import { map } from 'lit/directives/map.js';
 import { range } from 'lit/directives/range.js';
 
-import type { MetadataProject } from '@internals/metadata';
-
 // repeat the carousel items to create the illusion of infinite scrolling
 const REPETITIONS = 2;
 
@@ -174,44 +172,26 @@ export class MetricsCarousel extends LitElement {
     // todo: this should be computed at build time with 11ty and not at runtime as this is a node library atm
     const { MetadataService } = await import('@internals/metadata/services/metadata.service.js');
     const { AVInfraService } = await import('@internals/metadata/services/av-infra.service.js');
+    const { TestsService } = await import('@internals/metadata/services/tests.service.js');
     const metrics = await MetadataService.getMetadata();
-
-    function isMetadataProject(projectMetrics: unknown): projectMetrics is MetadataProject {
-      return (
-        typeof projectMetrics === 'object' &&
-        projectMetrics !== null &&
-        'elements' in projectMetrics &&
-        'tests' in projectMetrics
-      );
-    }
-
-    let totalProjects = 0;
-    let totalElements = 0;
-    let totalParentElements = 0;
-    let totalUnitTests = 0;
-    let totalAxeTests = 0;
-    let totalVisualTests = 0;
-    let totalSsrTests = 0;
-    for (const [project, projectMetrics] of Object.entries(metrics.projects)) {
-      if (!project.startsWith('@nve') || !isMetadataProject(projectMetrics)) {
-        continue;
-      }
-      totalProjects++;
-      if ('elements' in projectMetrics) {
-        totalElements += projectMetrics.elements.length;
-        totalParentElements += [...new Set(projectMetrics.elements.map(el => el.name.split('-')[1]))].length + 2;
-      }
-      if ('tests' in projectMetrics) {
-        totalUnitTests += projectMetrics.tests.unitTestsTotal;
-        totalAxeTests += projectMetrics.tests.axeTestsTotal;
-        totalVisualTests += projectMetrics.tests.visualTestsTotal;
-        totalSsrTests += projectMetrics.tests.ssrTestsTotal;
-      }
-    }
-
-    const elementsTestCoverage = metrics.projects['@nvidia-elements/core'].tests.coverageTotal.branches.pct;
-
-    const totalLighthouseTests = totalParentElements + totalProjects; // one for each element + project bundle
+    const tests = await TestsService.getTests();
+    const totalElements = Object.values(metrics.projects).flatMap(project => project.elements).length;
+    const elementsTestCoverage = tests.projects['@nvidia-elements/core'].coverage.total.branches.pct;
+    const totalUnitTests = Object.values(tests.projects)
+      .flatMap(report => report.unit.numTotalTests ?? 0)
+      .reduce((acc, curr) => acc + curr, 0);
+    const totalAxeTests = Object.values(tests.projects)
+      .flatMap(report => report.axe)
+      .flatMap(result => result.testResults).length;
+    const totalVisualTests = Object.values(tests.projects)
+      .flatMap(report => report.visual)
+      .flatMap(result => result.testResults).length;
+    const totalSsrTests = Object.values(tests.projects)
+      .flatMap(report => report.ssr)
+      .flatMap(result => result.testResults).length;
+    const totalLighthouseTests = Object.values(tests.projects).flatMap(report =>
+      Object.values(report.lighthouse.testResults)
+    ).length;
     const totalAutomatedTests =
       totalUnitTests + totalAxeTests + totalVisualTests + totalSsrTests + totalLighthouseTests;
 
@@ -227,7 +207,7 @@ export class MetricsCarousel extends LitElement {
         href: '/elements/docs/metrics/',
         title: 'Available Components',
         label: 'Browse our component offerings',
-        metricCount: totalParentElements
+        metricCount: totalElements
       },
       {
         href: '/elements/docs/metrics/',
