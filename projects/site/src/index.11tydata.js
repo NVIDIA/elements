@@ -3,14 +3,20 @@
 import { join } from 'node:path';
 import { MetadataService } from '@nve-internals/metadata';
 import { PlaygroundService } from '@nve-internals/tools/playground';
+import { TestsService } from '@nve-internals/metadata';
 import { ExamplesService } from '@nve-internals/tools/examples';
 import { camelToKebab } from './_11ty/utils/index.js';
 
+/** @type {import('@nve-internals/metadata').MetadataSummary} */
 const metadata = await MetadataService.getMetadata();
 
 const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
+/** @type {import('@nve-internals/metadata').MetadataElement[]} */
 const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
+
+/** @type {import('@nve-internals/metadata').ProjectTestSummary} */
+const tests = await TestsService.getTests();
 
 const stories = (await ExamplesService.getAll())
   .filter(s => !s.template?.includes('${'))
@@ -155,7 +161,8 @@ export const siteData = {
   elements,
   stories,
   metadata,
-  integrations
+  integrations,
+  tests
 };
 
 export default function siteDataFn() {

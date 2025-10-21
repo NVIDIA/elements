@@ -1,13 +1,36 @@
 // @ts-check
 
-import { MetadataService } from '@nve-internals/metadata';
 import { badgeStatus, badgeCoverage, badgeBundle, badgeLighthouse, badgeAxe } from '../../_11ty/templates/api.js';
 import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
+import { siteData } from '../../index.11tydata.js';
+
+const { metadata, tests } = siteData;
+
+/** @type {import('@nve-internals/metadata').MetadataSummary} */
+const metrics = metadata;
 
 export const data = {
   title: 'Metrics',
   layout: 'docs.11ty.js'
 };
+
+const lighthouseResults = Object.values(tests.projects).flatMap(project => project.lighthouse.testResults);
+const ssrResults = Object.values(tests.projects)
+  .flatMap(project => project.ssr.testResults)
+  .flatMap(results => results.assertionResults);
+const axeResults = Object.values(tests.projects)
+  .flatMap(project => project.axe.testResults)
+  .flatMap(results => results.assertionResults);
+const coverageResults = Object.values(tests.projects)
+  .flatMap(project => project.coverage.testResults)
+  .flatMap(results => results);
+const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
+  new Date(metrics.created)
+);
+const elements = Object.values(metrics.projects)
+  .flatMap(project => project.elements ?? [])
+  .filter(element => !element.name.includes('internal') && !element.name.includes('json-viewer'))
+  .sort((a, b) => a.name.localeCompare(b.name));
 
 export function render() {
   return this.renderTemplate(
@@ -35,12 +58,12 @@ export function render() {
     <section nve-layout="row gap:xs align:center">
       <span nve-text="body sm muted">Total Available Web Components</span>
       <nve-badge color="blue-cobalt">
-        ${metrics.projects['@nvidia-elements/core'].elements.length}
+        ${elements.length}
       </nve-badge>
       -
       <span nve-text="body sm muted">Total Available Parent Elements</span>
       <nve-badge color="blue-cobalt">
-        ${[...new Set(metrics.projects['@nvidia-elements/core'].elements.map(el => el.name.split('-')[1]))].length + 2}
+        ${[...new Set(elements.map(el => el.name.split('-')[1]))].length + 2}
       </nve-badge>
     </section>
   </div>
@@ -63,21 +86,34 @@ export function render() {
     </nve-grid-header>
     ${elements
       .map(element => {
+        const lighthouse = lighthouseResults.find(
+          report => report.name === element.name || report.name.includes(element.name.split('-')[1])
+        );
+        const ssr = ssrResults.find(
+          result => result.fullName === element.name || result.fullName.includes(element.name.split('-')[1])
+        );
+        const axe = axeResults.find(
+          result => result.fullName === element.name || result.fullName.includes(element.name.split('-')[1])
+        );
+        const coverageTotal =
+          coverageResults.find(
+            result => result.file === element.name || result.file?.includes(element.name.split('-')[1])
+          )?.branches.pct ?? 0;
         return /* html */ `<nve-grid-row>
-        <nve-grid-cell><a href=${element.manifest.metadata.storybook.replace('https://NVIDIA.github.io/elements/', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
-        <nve-grid-cell>${badgeStatus(element.manifest.metadata.status, 'flat')}</nve-grid-cell>
-        <nve-grid-cell>${badgeCoverage(element.tests.unit.coverageTotal, 'flat')}</nve-grid-cell>
-        <nve-grid-cell>${element.tests.lighthouse?.payload?.javascript?.kb ? /* html */ badgeBundle(element.tests.lighthouse?.payload?.javascript?.kb?.toFixed(2), 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
-        <nve-grid-cell>${element.tests.lighthouse?.scores?.performance ? /* html */ badgeLighthouse({ performance: element.tests.lighthouse?.scores?.performance }, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
-        <nve-grid-cell>${element.tests.lighthouse?.scores?.accessibility ? /* html */ badgeLighthouse({ accessibility: element.tests.lighthouse?.scores?.accessibility }, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
-        <nve-grid-cell>${element.tests.lighthouse?.scores?.bestPractices ? /* html */ badgeLighthouse({ bestPractices: element.tests.lighthouse?.scores?.bestPractices }, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
-        <nve-grid-cell><nve-badge container="flat" status="${element.tests?.ssr?.baseline ? 'success' : 'warning'}">Static</nve-badge></nve-grid-cell>
-        <nve-grid-cell>${badgeAxe(element.manifest.metadata.axe, 'flat')}</nve-grid-cell>
-        <nve-grid-cell>${getBehaviorCategoryIcon(element.manifest.metadata.behavior)}&nbsp;&nbsp;<a href=${element.manifest.metadata.aria} nve-text="link no-visit">${element.manifest.metadata.behavior}</a></nve-grid-cell>
-        <nve-grid-cell>${element.manifest.metadata.since ?? ''}</nve-grid-cell>
-        <nve-grid-cell>${element.manifest.metadata.figma ? /* html */ `<a href="${element.manifest.metadata.figma}" nve-text="link no-visit">Figma</a>` : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+        <nve-grid-cell><a href=${element.manifest?.metadata?.storybook?.replace('https://NVIDIA.github.io/elements/', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
+        <nve-grid-cell>${badgeStatus(element?.manifest?.metadata?.status ?? '', 'flat', ESM_ELEMENTS_VERSION)}</nve-grid-cell>
+        <nve-grid-cell>${badgeCoverage(coverageTotal, 'flat')}</nve-grid-cell>
+        <nve-grid-cell>${lighthouse?.payload?.javascript?.kb ? /* html */ badgeBundle(lighthouse?.payload?.javascript?.kb, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+        <nve-grid-cell>${lighthouse?.scores?.performance ? /* html */ badgeLighthouse({ performance: lighthouse?.scores?.performance }, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+        <nve-grid-cell>${lighthouse?.scores?.accessibility ? /* html */ badgeLighthouse({ accessibility: lighthouse?.scores?.accessibility }, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+        <nve-grid-cell>${lighthouse?.scores?.bestPractices ? /* html */ badgeLighthouse({ bestPractices: lighthouse?.scores?.bestPractices }, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
+        <nve-grid-cell><nve-badge container="flat" status="${ssr?.status === 'passed' ? 'success' : 'warning'}">${ssr?.status ?? 'unknown'}</nve-badge></nve-grid-cell>
+        <nve-grid-cell>${badgeAxe(axe?.failureMessages[0] ?? '', 'flat')}</nve-grid-cell>
+        <nve-grid-cell>${getBehaviorCategoryIcon(element.manifest?.metadata?.behavior ?? 'unknown')}&nbsp;&nbsp;<a href=${element.manifest?.metadata?.aria ?? ''} nve-text="link no-visit">${element.manifest?.metadata?.behavior ?? 'unknown'}</a></nve-grid-cell>
+        <nve-grid-cell>${element.manifest?.metadata?.since ?? ''}</nve-grid-cell>
+        <nve-grid-cell>${element.manifest?.metadata?.figma ? /* html */ `<a href="${element.manifest.metadata.figma}" nve-text="link no-visit">Figma</a>` : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
         <nve-grid-cell><nve-badge status="success" container="flat">light/dark</nve-badge></nve-grid-cell>
-        <nve-grid-cell>${element.manifest.metadata.responsive ? /* html */ `<nve-badge status="success" container="flat">layouts</nve-badge>` : /* html */ `<nve-badge status="warning" container="flat">partial</nve-badge>`}</nve-grid-cell>
+        <nve-grid-cell>${element.manifest?.metadata?.responsive ? /* html */ `<nve-badge status="success" container="flat">layouts</nve-badge>` : /* html */ `<nve-badge status="warning" container="flat">partial</nve-badge>`}</nve-grid-cell>
       </nve-grid-row>`;
       })
       .join('')}
@@ -94,14 +130,9 @@ export function render() {
   );
 }
 
-const metrics = await MetadataService.getMetadata();
-const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
-  new Date(metrics.created)
-);
-const elements = metrics.projects['@nvidia-elements/core'].elements;
 const columns = {
   element: { width: '200px', tooltip: 'Custom Element API' },
-  status: { width: '120px', tooltip: 'Element Stability Status' },
+  status: { width: '130px', tooltip: 'Element Stability Status' },
   coverage: { width: '130px', tooltip: 'Unit Test Coverage' },
   bundle: { width: '130px', tooltip: 'Standalone total JavaScript bundle size in kb' },
   performance: { width: '130px', tooltip: 'Chrome Lighthouse Performance Score' },

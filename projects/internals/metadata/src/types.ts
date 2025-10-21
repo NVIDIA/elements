@@ -24,7 +24,6 @@ export interface MetadataProject {
   description: string;
   readme: string;
   changelog: string;
-  tests: MetadataTestReport;
   types?: MetadataType[];
   elements: MetadataElement[];
   attributes: MetadataAttribute[];
@@ -42,16 +41,6 @@ export interface MetadataElement {
   changelog?: string;
   manifest?: MetadataCustomElementsManifestDeclaration;
   markdown?: string;
-  tests: {
-    unit: {
-      coverageTotal: number;
-    };
-    lighthouse: MetadataLighthouseElementReport;
-    ssr: {
-      baseline: boolean;
-      hydration: boolean;
-    };
-  };
 }
 
 export interface MetadataAttribute {
@@ -108,26 +97,6 @@ export interface MetadataPackage {
   };
 }
 
-export interface MetadataTestCoverage {
-  unitTestsTotal: number;
-  axeTestsTotal: number;
-  visualTestsTotal: number;
-  ssrTestsTotal: number;
-  coverageTotal: number;
-  coverage: {
-    file: string;
-    lines: {
-      pct: number;
-    };
-    functions: {
-      pct: number;
-    };
-    branches: {
-      pct: number;
-    };
-  }[];
-}
-
 export interface MetadataCustomElementsManifest {
   modules: {
     kind: string;
@@ -152,6 +121,10 @@ export interface MetadataCustomElementsManifestDeclaration {
   name: string;
   description: string;
   deprecated: string;
+  cssParts: {
+    name: string;
+    description: string;
+  }[];
   cssProperties: {
     name: string;
     description: string;
@@ -209,9 +182,41 @@ export interface MetadataCustomElementsManifestDeclaration {
     example: string;
   };
 }
+export interface TestSummary {
+  numTotalTestSuites: number;
+  numPassedTestSuites: number;
+  numFailedTestSuites: number;
+  numPendingTestSuites: number;
+  numTotalTests: number;
+  numPassedTests: number;
+  numFailedTests: number;
+  numPendingTests: number;
+  numTodoTests: number;
+  startTime: number;
+  success: boolean;
+  coverageMap?: {};
+  testResults: {
+    assertionResults: {
+      ancestorTitles: string[];
+      fullName: string;
+      status: 'passed' | 'failed';
+      title: string;
+      duration: number;
+      failureMessages: string[];
+      startTime: number;
+      endTime: number;
+      message: string;
+      name: string;
+    }[];
+  }[];
+}
 
-export interface MetadataUnitTestCoverageSummary {
-  file: string;
+export interface CoverageSummary {
+  total: CoverageResult;
+  testResults: ({ file: string } & CoverageResult)[];
+}
+
+export interface CoverageResult {
   lines: {
     total: number;
     covered: number;
@@ -238,104 +243,49 @@ export interface MetadataUnitTestCoverageSummary {
   };
 }
 
-export interface MetadataUnitTestCoverageSummaryReport {
-  total: MetadataUnitTestCoverageSummary;
-  [key: string]: MetadataUnitTestCoverageSummary;
-}
-
-export interface MetadataTestReport {
-  coverage: MetadataUnitTestCoverageSummary[];
-  coverageTotal: MetadataUnitTestCoverageSummary;
-  unitTestsTotal: number;
-  axeTestsTotal: number;
-  visualTestsTotal: number;
-  ssrTestsTotal: number;
-}
-
-export interface MetadataLighthouseElementReport {
-  name: string;
-  payload: {
-    javascript: {
-      kb: number;
-      requests: Record<
-        string,
-        {
-          kb: number;
-          name: string;
-        }
-      >;
-    };
-    css: {
-      kb: number;
-      requests: Record<
-        string,
-        {
-          kb: number;
-          name: string;
-        }
-      >;
-    };
-  };
-  scores: {
-    performance: number;
-    accessibility: number;
-    bestPractices: number;
-  };
-}
-
-export interface MetadataLighthouseReport {
-  [key: string]: {
-    [key: string]: MetadataLighthouseElementReport | null;
-  };
-}
-
-export interface MetadataSSRReportJSON {
-  numTotalTestSuites: number;
-  numPassedTestSuites: number;
-  numFailedTestSuites: number;
-  numPendingTestSuites: number;
-  numTotalTests: number;
-  numPassedTests: number;
-  numFailedTests: number;
-  numPendingTests: number;
-  numTodoTests: number;
-  snapshot: {
-    added: number;
-    failure: boolean;
-    filesAdded: number;
-    filesRemoved: number;
-    filesRemovedList: string[];
-    filesUnmatched: number;
-    filesUpdated: number;
-    matched: number;
-    total: number;
-    unchecked: number;
-    uncheckedKeysByFile: string[];
-    unmatched: number;
-    updated: number;
-    didUpdate: boolean;
-  };
-  startTime: number;
-  success: boolean;
+export interface LighthouseSummary {
   testResults: {
-    assertionResults: {
-      ancestorTitles: string[];
-      fullName: string;
-      status: 'passed' | 'failed';
-      title: string;
-      duration: number;
-      failureMessages: string[];
-      meta: Record<string, unknown>;
-    }[];
-    startTime: number;
-    endTime: number;
-    status: 'passed' | 'failed';
-    message: string;
     name: string;
+    payload: {
+      javascript: {
+        kb: number;
+        requests: Record<
+          string,
+          {
+            kb: number;
+            name: string;
+          }
+        >;
+      };
+      css: {
+        kb: number;
+        requests: Record<
+          string,
+          {
+            kb: number;
+            name: string;
+          }
+        >;
+      };
+    };
+    scores: {
+      performance: number;
+      accessibility: number;
+      bestPractices: number;
+    };
   }[];
 }
 
-export interface MetadataSSRElementReport {
-  name: string;
-  status: 'passed' | 'failed';
+export interface ProjectTestReport {
+  coverage: CoverageSummary;
+  unit: TestSummary;
+  axe: TestSummary;
+  visual: TestSummary;
+  ssr: TestSummary;
+  lighthouse: LighthouseSummary;
+}
+
+export interface ProjectTestSummary {
+  created: string;
+  projects: Record<string, ProjectTestReport>;
 }

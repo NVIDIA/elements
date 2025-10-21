@@ -1,6 +1,6 @@
 // @ts-check
 
-import { MetadataService } from '@nve-internals/metadata';
+import { MetadataService, TestsService } from '@nve-internals/metadata';
 import { badgeCoverage, badgeBundle, badgeLighthouse } from '../../_11ty/templates/api.js';
 import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
 
@@ -10,6 +10,10 @@ export const data = {
 };
 
 const metrics = await MetadataService.getMetadata();
+
+/** @type {import('@nve-internals/metadata').ProjectTestSummary} */
+const tests = await TestsService.getTests();
+
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
   new Date(metrics.created)
 );
@@ -41,19 +45,19 @@ export function render() {
         <h3 nve-text="body bold">Test Coverage:</h3>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Statements</span>
-          ${badgeCoverage(metrics.projects['@nvidia-elements/core'].tests.coverageTotal.statements.pct, 'flat')}
+          ${badgeCoverage(tests.projects['@nvidia-elements/core'].coverage.total.statements.pct, 'flat')}
         </section>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Lines</span>
-          ${badgeCoverage(metrics.projects['@nvidia-elements/core'].tests.coverageTotal.lines.pct, 'flat')}
+          ${badgeCoverage(tests.projects['@nvidia-elements/core'].coverage.total.lines.pct, 'flat')}
         </section>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Functions</span>
-          ${badgeCoverage(metrics.projects['@nvidia-elements/core'].tests.coverageTotal.functions.pct, 'flat')}
+          ${badgeCoverage(tests.projects['@nvidia-elements/core'].coverage.total.functions.pct, 'flat')}
         </section>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Branches</span>
-          ${badgeCoverage(metrics.projects['@nvidia-elements/core'].tests.coverageTotal.branches.pct, 'flat')}
+          ${badgeCoverage(tests.projects['@nvidia-elements/core'].coverage.total.branches.pct, 'flat')}
         </section>
       </div>
       <nve-grid style="--scroll-height: calc(100vh - 330px)">
@@ -64,7 +68,8 @@ export function render() {
           <nve-grid-column width="180px">Functions</nve-grid-column>
           <nve-grid-column>Branches</nve-grid-column>
         </nve-grid-header>
-        ${metrics.projects['@nvidia-elements/core'].tests.coverage
+        ${Object.values(tests.projects)
+          .flatMap(project => project.coverage.testResults)
           .map(
             cov => /* html */ `<nve-grid-row>
           <nve-grid-cell><p nve-text="body truncate">${cov.file}</p></nve-grid-cell>
@@ -88,14 +93,15 @@ export function render() {
         <nve-grid-column>Best Practices</nve-grid-column>
         <nve-grid-column>Bundle Size</nve-grid-column>
       </nve-grid-header>
-      ${metrics.projects['@nvidia-elements/core'].elements
+      ${Object.values(tests.projects)
+        .flatMap(project => project.lighthouse.testResults)
         .map(
-          element => /* html */ `<nve-grid-row>
-          <nve-grid-cell>${element.name}</nve-grid-cell>
-          <nve-grid-cell>${badgeLighthouse({ performance: element.tests.lighthouse?.scores?.performance }, 'flat')}</nve-grid-cell>
-          <nve-grid-cell>${badgeLighthouse({ accessibility: element.tests.lighthouse?.scores?.accessibility }, 'flat')}</nve-grid-cell>
-          <nve-grid-cell>${badgeLighthouse({ bestPractices: element.tests.lighthouse?.scores?.bestPractices }, 'flat')}</nve-grid-cell>
-          <nve-grid-cell>${badgeBundle(element.tests.lighthouse?.payload?.javascript?.kb?.toFixed(2), 'flat')}</nve-grid-cell>
+          report => /* html */ `<nve-grid-row>
+          <nve-grid-cell>${report.name}</nve-grid-cell>
+          <nve-grid-cell>${badgeLighthouse({ performance: report?.scores.performance }, 'flat')}</nve-grid-cell>
+          <nve-grid-cell>${badgeLighthouse({ accessibility: report.scores.accessibility }, 'flat')}</nve-grid-cell>
+          <nve-grid-cell>${badgeLighthouse({ bestPractices: report.scores.bestPractices }, 'flat')}</nve-grid-cell>
+          <nve-grid-cell>${badgeBundle(report?.payload.javascript.kb ?? 0, 'flat')}</nve-grid-cell>
         </nve-grid-row>`
         )
         .join('')}
