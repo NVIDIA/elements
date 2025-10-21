@@ -25,7 +25,7 @@ if (!existsSync(lockPath)) {
 const timerId = setInterval(() => {
   lockFile
     .lock(lockPath, {
-      stale: 120000
+      stale: 300000 // 5 minutes
     })
     .then(async release => {
       clearInterval(timerId);
@@ -34,7 +34,6 @@ const timerId = setInterval(() => {
           console.log(stdout);
 
           if (error) {
-            console.log(1);
             console.error(error);
             process.exit(1);
           }
