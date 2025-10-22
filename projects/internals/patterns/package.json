@@ -8,7 +8,7 @@
     "url": "git+https://github.com/NVIDIA/elements.git"
   },
   "type": "module",
-  "customElements": "custom-elements.json",
+  "customElements": "dist/custom-elements.json",
   "contributes": {
     "html": {
       "customData": [

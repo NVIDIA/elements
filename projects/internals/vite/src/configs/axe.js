@@ -47,7 +47,8 @@ export const libraryAxeTestConfig = {
   plugins: [axePlugin()],
   test: {
     retry: 2,
-    maxConcurrency: 4, // Limit concurrent tests to avoid browser overload
+    maxWorkers: process.env.CI ? 4 : undefined,
+    maxConcurrency: process.env.CI ? 4 : undefined, // Limit concurrent tests to avoid browser overload
     server: {
       deps: {
         external: ['**/node_modules/**']

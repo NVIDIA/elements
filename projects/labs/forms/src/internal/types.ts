@@ -68,8 +68,8 @@ interface FormControlInstance extends HTMLElement {
 }
 
 /**
- * @event InputEvent<'input'>
- * @event Event<'change'>
+ * @event input - Fired when the input value changes
+ * @event change - Fired when the value is committed
  */
 export interface FormControl {
   new (...args: any[]): FormControlInstance; // eslint-disable-line @typescript-eslint/no-explicit-any

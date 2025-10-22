@@ -8,7 +8,7 @@
     "url": "git+https://github.com/NVIDIA/elements.git"
   },
   "type": "module",
-  "customElements": "custom-elements.json",
+  "customElements": "dist/custom-elements.json",
   "contributes": {
     "html": {
       "customData": [
@@ -185,7 +185,7 @@
     "esbuild": "0.25.5",
     "eslint": "catalog:",
     "monaco-editor": "0.52.2",
-    "postcss": "8.4.31",
+    "postcss": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
