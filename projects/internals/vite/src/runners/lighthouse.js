@@ -1,9 +1,11 @@
 import lighthouse from 'lighthouse';
 import fs from 'fs';
+import { resolve } from 'path';
 import { VitePlaywrightRunner, buildPage } from './playwright.js';
 
+const output = process.env.CI ? ['json'] : ['json', 'html'];
 const RUNNER_ID = 'lighthouse';
-const LIGHTHOUSE_FLAGS = { logLevel: 'error', output: ['json', 'html'] };
+const LIGHTHOUSE_FLAGS = { logLevel: 'error', output };
 const LIGHTHOUSE_CONFIG = {
   // https://github.com/GoogleChrome/lighthouse/blob/main/core/config/default-config.js
   extends: 'lighthouse:default',
@@ -34,15 +36,14 @@ export class LighthouseRunner {
   }
 
   async getReport(name, content) {
-    console.log('building lighthouse test page...');
+    console.log('lighthouse-runner: building test page...');
     await buildPage(name, RUNNER_ID, t => t.replace('</body>', `${content}</body>`));
-    console.log('running lighthouse test...');
+    console.log('lighthouse-runner: running tests...');
     const runnerResult = await lighthouse(
       `http://localhost:${this.#runner.port}/${name}/index.html`,
       LIGHTHOUSE_FLAGS,
       LIGHTHOUSE_CONFIG
     );
-    fs.writeFileSync(`.${RUNNER_ID}/dist/${name}/report.html`, runnerResult.report[1]);
 
     const networkRequests = runnerResult.lhr.audits['network-requests']?.details?.items;
     if (!networkRequests) {
@@ -59,8 +60,15 @@ export class LighthouseRunner {
       }
     };
 
-    console.log('writing lighthouse test report...');
-    fs.writeFileSync(`.${RUNNER_ID}/dist/${name}/report.json`, JSON.stringify(report, null, 2));
+    const dist = resolve(`.${RUNNER_ID}/dist/${name}/`);
+
+    if (!process.env.CI) {
+      fs.writeFileSync(`${dist}/report.html`, runnerResult.report[1]);
+    }
+
+    console.log('lighthouse-runner: writing test report...');
+    fs.writeFileSync(`${dist}/report.json`, JSON.stringify(report, null, 2));
+    console.log(`lighthouse-runner: test report written to ${dist}/report.json`);
     return report;
   }
 }

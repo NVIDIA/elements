@@ -11,11 +11,16 @@ process.env.NODE_ENV = 'production';
 
 /** Creates a Vite preview server and Playwright/Chromium instance for test runner environments. */
 export class VitePlaywrightRunner {
+  /** @type {import('playwright').Page} */
   #page;
+  /** @type {import('vite').PreviewServer} */
   #server;
+  /** @type {import('playwright').Browser} */
   #browser;
-  #runnerID;
+  /** @type {import('playwright').LaunchOptions} */
   #chromiumArgs;
+  /** @type {string} */
+  #runnerID;
 
   get page() {
     return this.#page;
@@ -55,6 +60,7 @@ export class VitePlaywrightRunner {
       });
       console.log('playwright-runner: creating context');
       this.#page = await (await this.#browser.newContext({ viewport: { width: 1180, height: 820 } })).newPage();
+      this.#page.on('crash', data => console.error('playwright-runner: browser crashed', data));
       console.log('playwright-runner: creating server');
       this.#server = await preview({ root: this.#root, preview: { port: this.port, open: false } });
       console.log(`playwright-runner: server running at port ${this.port}`);
@@ -68,8 +74,9 @@ export class VitePlaywrightRunner {
     }, {});
 
     fs.writeFileSync(`${this.#dist}/report.json`, JSON.stringify(report, null, 2));
-    this.#server.close();
+    await this.#page.close();
     await this.#browser.close();
+    await this.#server.close();
   }
 }
 
