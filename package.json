@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "description": "",
-  "packageManager": "pnpm@10.16.1",
+  "packageManager": "pnpm@10.19.0",
   "engines": {
-    "node": "22.13.1"
+    "node": "24.10.0"
   },
   "scripts": {
     "ci": "wireit",
@@ -36,7 +36,6 @@
     "@semantic-release/gitlab": "13.2.1",
     "@semantic-release/npm": "12.0.0",
     "@semantic-release/release-notes-generator": "13.0.0",
-    "@tsconfig/node20": "20.1.4",
     "@weiran.zsd/multi-eslint-rule-config": "0.0.6",
     "commitlint": "19.5.0",
     "glob": "catalog:",
@@ -48,7 +47,7 @@
     "semantic-release": "22.0.12",
     "semantic-release-monorepo": "8.0.2",
     "semantic-release-replace-plugin": "1.2.7",
-    "wireit": "0.14.11"
+    "wireit": "0.14.12"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
@@ -262,24 +261,6 @@
     },
     "prepare": {
       "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs)"
-    }
-  },
-  "pnpm": {
-    "minimumReleaseAge": 1440,
-    "ignoredBuiltDependencies": [
-      "@parcel/watcher",
-      "lmdb",
-      "msgpackr-extract",
-      "msw"
-    ],
-    "onlyBuiltDependencies": [
-      "@bundled-es-modules/glob",
-      "esbuild",
-      "sharp",
-      "style-dictionary"
-    ],
-    "patchedDependencies": {
-      "monaco-editor": "patches/monaco-editor.patch"
     }
   }
 }

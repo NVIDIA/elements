@@ -162,7 +162,7 @@ Create a base template for lighthouse to run tests in `vitest.lighthouse.html`
       @import '@nvidia-elements/styles/typography.css';
     </style>
   </head>
-  <body nve-layout="column gap:lg pad:md">
+  <body role="main" nve-layout="column gap:lg pad:md">
     <p nve-text="body">Lighthouse Test</p>
   </body>
 </html>

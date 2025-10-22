@@ -7,6 +7,7 @@ export const libraryLighthouseTestConfig = {
     retry: 1,
     bail: process.env.CI ? 1 : 0,
     isolate: false,
+    maxWorkers: 1,
     fileParallelism: false,
     onConsoleLog(log) {
       if (log.includes('plugin vite-plugin-virtual-html')) {

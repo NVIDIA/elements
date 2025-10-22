@@ -153,7 +153,7 @@ describe(`${Grid.metadata.tag}: scroll`, () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('[part="scrollbox"]').scrollTop).toBe(0);
 
-    element.scrollTo({ top: 20 });
+    await element.scrollTo({ top: 20 });
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('[part="scrollbox"]').scrollTop).toBe(20);
   });
