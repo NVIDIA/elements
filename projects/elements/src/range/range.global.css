@@ -11,7 +11,7 @@ nve-range input[type='range']::-webkit-slider-thumb {
 
 nve-range input[type='range']::-webkit-slider-runnable-track,
 nve-range input[type='range']::-webkit-slider-runnable-track {
-  background: var(--nve-sys-interaction-background);
+  background: transparent;
   height: var(--track-height);
   border-radius: var(--nve-ref-border-radius-lg);
   align-self: center;
