@@ -3,6 +3,7 @@
   "version": "1.12.3",
   "description": "Core CSS foundation for the Elements design system, providing layout utilities, typography styles, and view transitions.",
   "homepage": "https://NVIDIA.github.io/elements/",
+  "customElements": "dist/custom-elements.json",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NVIDIA/elements.git"
@@ -56,10 +57,10 @@
     "@internals/vite": "workspace:*",
     "@vitest/browser": "catalog:",
     "lit": "catalog:",
-    "postcss": "8.4.31",
+    "postcss": "catalog:",
     "postcss-each": "1.1.0",
-    "postcss-load-config": "4.0.1",
-    "postcss-mixins": "9.0.4",
+    "postcss-load-config": "6.0.1",
+    "postcss-mixins": "12.1.2",
     "publint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",

@@ -13,6 +13,8 @@ export const libraryVisualTestConfig = {
     retry: 2,
     isolate: false,
     fileParallelism: false,
+    maxWorkers: process.env.CI ? 4 : undefined,
+    maxConcurrency: process.env.CI ? 4 : undefined,
     reporters: ['default', 'junit', 'json'],
     setupFiles: ['@internals/vite/setup/visual.js'],
     outputFile: {

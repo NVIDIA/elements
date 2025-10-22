@@ -40,6 +40,8 @@ export const libraryTestConfig = {
   },
   test: {
     retry: 2,
+    maxWorkers: process.env.CI ? 4 : undefined,
+    maxConcurrency: process.env.CI ? 4 : undefined, // Limit concurrent tests to avoid browser overload
     isolate: coverage,
     server: {
       deps: {

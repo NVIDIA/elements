@@ -41,11 +41,11 @@ packages:
 
 catalog:
   '@11ty/eleventy': 3.1.2
-  '@11ty/eleventy-plugin-syntaxhighlight': 5.0.1
+  '@11ty/eleventy-plugin-syntaxhighlight': 5.0.2
   '@11ty/eleventy-plugin-vite': 7.0.0
-  '@custom-elements-manifest/analyzer': 0.10.4
-  '@eslint/css': 0.11.1
-  '@eslint/js': 9.36.0
+  '@custom-elements-manifest/analyzer': 0.10.10
+  '@eslint/css': 0.13.0
+  '@eslint/js': 9.38.0
   '@eslint/json': 0.13.2
   '@html-eslint/eslint-plugin': 0.47.0
   '@html-eslint/parser': 0.47.0
@@ -58,31 +58,52 @@ catalog:
   '@lit/react': ^1.0.8
   '@rollup/plugin-terser': 0.4.4
   '@sentry/browser': 7.120.3
-  '@types/node': 22.13.1
-  '@types/react': 19.1.13
-  '@types/react-dom': 19.1.9
-  '@vitest/browser': 4.0.0-beta.18
-  '@vitest/browser-playwright': 4.0.0-beta.18
-  '@vitest/coverage-istanbul': 4.0.0-beta.18
-  '@vitest/mocker': 4.0.0-beta.18
+  '@types/node': 24.9.1
+  '@types/react': 19.2.2
+  '@types/react-dom': 19.2.2
+  '@vitest/browser': 4.0.0-beta.19
+  '@vitest/browser-playwright': 4.0.0-beta.19
+  '@vitest/coverage-istanbul': 4.0.0-beta.19
+  '@vitest/mocker': 4.0.0-beta.19
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
   axe-core: 4.11.0
-  cpy-cli: 5.0.0
-  eslint: 9.36.0
+  eslint: 9.38.0
   glob: 11.0.3
-  lighthouse: 12.6.0
+  lighthouse: 13.0.0
   lit: ^3.3.1
   lit-html: ^3.3.1
   markdown-it: 14.1.0
   markdown-it-link-attributes: 4.0.1
-  playwright: 1.55.0
-  publint: 0.3.9
-  react: 19.1.1
-  react-dom: 19.1.1
-  rollup-plugin-html-literals: 2.0.0
+  playwright: 1.56.1
+  postcss: 8.5.6
+  publint: 0.3.15
+  react: 19.2.0
+  react-dom: 19.2.0
+  rollup-plugin-html-literals: 2.0.1
   ts-morph: 26.0.0
   typescript: 5.8.2
-  typescript-eslint: 8.44.0
+  typescript-eslint: 8.46.2
   vite: 7.1.10
   vite-plugin-dts: 4.5.4
-  vitest: 4.0.0-beta.18
+  vitest: 4.0.0-beta.19
+
+minimumReleaseAge: 1140
+
+onlyBuiltDependencies:
+  - '@bundled-es-modules/glob'
+  - '@parcel/watcher'
+  - esbuild
+  - lmdb
+  - msgpackr-extract
+  - rs-module-lexer
+  - sharp
+  - style-dictionary
+
+packageManagerStrictVersion: true
+
+patchedDependencies:
+  monaco-editor: patches/monaco-editor.patch
+
+useNodeVersion: 24.10.0
+
+verifyDepsBeforeRun: install

@@ -3,6 +3,7 @@
   "version": "1.8.0",
   "description": "Themes for the Elements design system, providing comprehensive color palettes, typography, and spacing.",
   "homepage": "https://NVIDIA.github.io/elements/",
+  "customElements": "dist/custom-elements.json",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NVIDIA/elements.git"
@@ -29,11 +30,10 @@
   ],
   "devDependencies": {
     "@internals/vite": "workspace:*",
-    "chart.js": "4.4.0",
-    "cssnano": "6.0.1",
+    "cssnano": "7.1.1",
     "glob": "catalog:",
     "lit": "catalog:",
-    "postcss": "8.4.31",
+    "postcss": "catalog:",
     "publint": "catalog:",
     "style-dictionary": "4.3.0",
     "typescript": "catalog:",
