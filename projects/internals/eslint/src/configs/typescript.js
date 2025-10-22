@@ -67,6 +67,7 @@ const config = {
       structuredTags: {
         internal: { name: true },
         element: { name: true },
+        event: { name: 'text' },
         slot: { name: true },
         cssprop: { name: true },
         csspart: { name: true },
