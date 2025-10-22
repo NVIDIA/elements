@@ -8,7 +8,7 @@
   --thumb-width: var(--nve-ref-size-400);
   --thumb-height: var(--nve-ref-size-400);
   --thumb-background: var(--nve-sys-text-muted-color);
-  --thumb-border: inset 0 0 0 2px var(--nve-sys-layer-canvas-background);
+  --thumb-border: 0 0 0 2px var(--nve-sys-layer-canvas-background);
   width: 100%;
   contain: layout;
 }
@@ -31,6 +31,8 @@
   background: transparent;
   align-self: center;
   appearance: var(--_appearance);
+  position: relative;
+  z-index: 2;
 }
 
 [input] {
@@ -40,7 +42,21 @@
 [input]::before {
   content: '';
   display: block;
-  width: calc(var(--track-width) * 100% - var(--track-width) * var(--thumb-width));
+  width: 100%;
+  height: var(--track-height);
+  background: var(--nve-sys-interaction-background);
+  border-radius: var(--track-border-radius);
+  position: absolute;
+  pointer-events: none;
+  align-self: center;
+  z-index: 0;
+  left: 0;
+}
+
+[input]::after {
+  content: '';
+  display: block;
+  width: calc(var(--track-width) * 100% - var(--track-width) * var(--thumb-width) / 2);
   height: var(--track-height);
   background: var(--background);
   border-top-left-radius: var(--track-border-radius);
@@ -48,7 +64,7 @@
   position: absolute;
   pointer-events: none;
   align-self: center;
-  z-index: 999;
+  z-index: 1;
   left: 0;
 }
 
@@ -57,6 +73,10 @@
 }
 
 [input]:has(.datalist-labels)::before {
+  margin-top: var(--track-height);
+}
+
+[input]:has(.datalist-labels)::after {
   margin-top: var(--track-height);
 }
 
