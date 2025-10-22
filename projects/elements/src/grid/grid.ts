@@ -106,11 +106,9 @@ export class Grid extends LitElement implements ContainerElement {
     appendRootNodeStyle(this, globalStyles);
   }
 
-  /* eslint no-dupe-class-members: 0 */
-  /* eslint no-unused-vars: 0 */
-  scrollTo(x: number, y: number): void;
-  scrollTo(options?: ScrollToOptions): void;
-  scrollTo(...args): void {
-    this.shadowRoot.querySelector('[part="scrollbox"]').scrollTo(...args);
+  scrollTo(options?: ScrollToOptions): Promise<void>;
+  scrollTo(x: number, y: number): Promise<void>;
+  async scrollTo(...args: [options?: ScrollToOptions] | [x: number, y: number]): Promise<void> {
+    await this.shadowRoot.querySelector('[part="scrollbox"]')?.scrollTo(...(args as [ScrollToOptions]));
   }
 }
