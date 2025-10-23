@@ -6,12 +6,18 @@ export default {
   component: 'nve-icon-button'
 };
 
+/**
+ * @summary Basic icon button for compact actions and toolbar controls with minimal visual footprint.
+ */
 export const Default = {
   render: () => html`
     <nve-icon-button icon-name="menu"></nve-icon-button>
   `
 };
 
+/**
+ * @summary Icon buttons with different interaction styles including default, emphasis, destructive, and disabled states.
+ */
 export const Interactions = {
   render: () => html`
     <nve-icon-button icon-name="menu"></nve-icon-button>
@@ -21,6 +27,9 @@ export const Interactions = {
   `
 }
 
+/**
+ * @summary Icon buttons in different sizes (small, medium, large) for varying contexts and visual hierarchy.
+ */
 export const Size = {
   render: () => html`
     <nve-icon-button size="sm" icon-name="menu"></nve-icon-button>
@@ -29,6 +38,9 @@ export const Size = {
   `
 }
 
+/**
+ * @summary Flat container icon buttons with interaction styles for minimal visual weight in dense toolbars.
+ */
 export const FlatInteractions = {
   render: () => html`
     <nve-icon-button container="flat" icon-name="menu"></nve-icon-button>
@@ -38,6 +50,9 @@ export const FlatInteractions = {
   `
 }
 
+/**
+ * @summary Icon buttons with pressed state for toggle functionality like filters or visibility controls.
+ */
 export const Pressed = {
   render: () => html`
     <nve-icon-button pressed icon-name="filter-stroke"></nve-icon-button>
@@ -45,6 +60,9 @@ export const Pressed = {
   `
 }
 
+/**
+ * @summary Flat icon buttons with pressed state for low-emphasis toggles and compact toggle controls.
+ */
 export const PressedFlat = {
   render: () => html`
     <nve-icon-button pressed container="flat" icon-name="eye-hidden" aria-label="show"></nve-icon-button>
@@ -52,6 +70,9 @@ export const PressedFlat = {
   `
 }
 
+/**
+ * @summary Inline icon buttons with pressed state for minimal toggle controls within text or content flows.
+ */
 export const PressedInline = {
   render: () => html`
     <nve-icon-button pressed container="inline" icon-name="eye-hidden" aria-label="show"></nve-icon-button>
@@ -59,6 +80,9 @@ export const PressedInline = {
   `
 }
 
+/**
+ * @summary Icon buttons with selected state for mutually exclusive options like view modes or layout choices.
+ */
 export const Selected = {
   render: () => html`
   <nve-icon-button selected icon-name="split-vertical" aria-label="split vertical"></nve-icon-button>
@@ -67,6 +91,9 @@ export const Selected = {
   `
 }
 
+/**
+ * @summary Flat icon buttons with selected state for low-emphasis mode selection in compact toolbars.
+ */
 export const SelectedFlat = {
   render: () => html`
     <nve-icon-button selected container="flat" icon-name="split-vertical" aria-label="split vertical"></nve-icon-button>
@@ -75,6 +102,9 @@ export const SelectedFlat = {
   `
 }
 
+/**
+ * @summary Inline icon buttons with selected state for minimal mode selection within content flows.
+ */
 export const SelectedInline = {
   render: () => html`
     <nve-icon-button selected container="inline" icon-name="split-vertical" aria-label="split vertical"></nve-icon-button>
@@ -83,6 +113,9 @@ export const SelectedInline = {
   `
 }
 
+/**
+ * @summary Icon buttons with custom content like text initials, emojis, or symbols for personalized actions.
+ */
 export const CustomIcon = {
   render: () => html`
     <nve-icon-button interaction="emphasis">ML</nve-icon-button>
@@ -93,6 +126,9 @@ export const CustomIcon = {
   `
 }
 
+/**
+ * @summary Proper implementation of icon buttons with links, showing correct and incorrect anchor placement patterns.
+ */
 export const Link = {
   render: () => html`
     <!-- do -->
@@ -107,6 +143,10 @@ export const Link = {
   `
 }
 
+/**
+ * @summary Icon buttons styled for light and dark themes with all interaction states for theme consistency.
+ * @tags test-case
+ */
 export const Themes = {
   render: () => html`
     <div nve-theme="root light">

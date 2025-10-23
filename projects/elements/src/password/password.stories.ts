@@ -7,6 +7,9 @@ export default {
   component: 'nve-password',
 };
 
+/**
+ * @summary Basic password input with toggle visibility for secure credential entry and authentication forms.
+ */
 export const Default = {
   render: () => html`
 <nve-password>
@@ -16,6 +19,9 @@ export const Default = {
 </nve-password>`
 };
 
+/**
+ * @summary Password inputs with vertical layout demonstrating validation states including disabled, success, and error.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg full">
@@ -45,6 +51,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Password inputs with horizontal layout showing validation states for inline forms and compact layouts.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg full">

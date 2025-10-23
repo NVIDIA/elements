@@ -7,6 +7,9 @@ export default {
   component: 'nve-radio',
 };
 
+/**
+ * @summary Basic radio button group for mutually exclusive single-choice selection from multiple options.
+ */
 export const Default = {
   render: () => html`
   <nve-radio-group>
@@ -30,6 +33,9 @@ export const Default = {
   `
 }
 
+/**
+ * @summary Radio groups with vertical layout demonstrating validation states including disabled, success, and error.
+ */
 export const VerticalGroup = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -112,6 +118,9 @@ export const VerticalGroup = {
 `
 };
 
+/**
+ * @summary Radio groups with vertical inline layout for compact vertical stacking with inline label positioning.
+ */
 export const VerticalInlineGroup = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -194,6 +203,9 @@ export const VerticalInlineGroup = {
 `
 };
 
+/**
+ * @summary Radio groups with horizontal layout for options arranged in a row, ideal for limited choices.
+ */
 export const HorizontalGroup = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -276,6 +288,9 @@ export const HorizontalGroup = {
 `
 };
 
+/**
+ * @summary Radio groups with horizontal inline layout for space-efficient horizontal arrangement with inline labels.
+ */
 export const HorizontalInlineGroup = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
