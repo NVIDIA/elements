@@ -8,6 +8,9 @@ export default {
   component: 'nve-datetime',
 };
 
+/**
+ * @summary Basic datetime picker input with label and message for selecting both date and time values.
+ */
 export const Default = {
   render: () => html`
 <nve-datetime>
@@ -18,6 +21,9 @@ export const Default = {
 `
 };
 
+/**
+ * @summary Datetime picker with datalist providing suggested datetime options for quick selection from predefined values.
+ */
 export const Datalist = {
   render: () => html`
 <nve-datetime>
@@ -33,6 +39,9 @@ export const Datalist = {
   `
 }
 
+/**
+ * @summary Datetime pickers with vertical layout demonstrating validation states including disabled, success, and error.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -62,6 +71,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Datetime pickers with horizontal layout showing validation states for inline forms and compact layouts.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">

@@ -8,24 +8,36 @@ export default {
   component: 'nve-divider',
 };
 
+/**
+ * @summary Basic horizontal divider for separating content sections with a subtle line.
+ */
 export const Default = {
   render: () => html`
     <nve-divider></nve-divider>
   `
 };
 
+/**
+ * @summary Divider with emphasis color styling for stronger visual separation between content sections.
+ */
 export const Emphasis = {
   render: () => html`
     <nve-divider style="--color: var(--nve-ref-border-color-emphasis)"></nve-divider>
   `
 };
 
+/**
+ * @summary Divider with muted color styling for subtle, low-contrast separation in dense layouts.
+ */
 export const Muted = {
   render: () => html`
     <nve-divider style="--color: var(--nve-ref-border-color-muted)"></nve-divider>
   `
 };
 
+/**
+ * @summary Vertical divider for separating horizontally arranged elements like toolbar buttons or inline actions.
+ */
 export const Vertical = {
   render: () => html`
     <div nve-layout="row gap:sm align:vertical-center" style="height: 50px">
@@ -36,24 +48,11 @@ export const Vertical = {
   `
 };
 
+/**
+ * @summary Divider with custom rounded styling, thicker border, and accent color for decorative separation.
+ */
 export const Rounded = {
   render: () => html`
     <nve-divider style="--size: var(--nve-ref-border-width-xl); --border-radius: var(--nve-ref-border-radius-xs); --color: var(--nve-sys-accent-secondary-background);"></nve-divider>
   `
 };
-
-export const LightTheme = {
-  render: () => html`
-    <nve-card nve-theme="light">
-      <nve-divider></nve-divider>
-    </nve-card>
-  `
-}
-
-export const DarkTheme = {
-  render: () => html`
-    <nve-card nve-theme="dark">
-      <nve-divider></nve-divider>
-    </nve-card>
-  `
-}
