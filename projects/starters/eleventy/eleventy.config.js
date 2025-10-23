@@ -15,7 +15,9 @@ export default function (eleventyConfig) {
     viteOptions: {
       base: BASE_URL,
       build: {
-        target: 'esnext'
+        target: 'esnext',
+        sourcemap: false,
+        reportCompressedSize: false
       }
     }
   });
