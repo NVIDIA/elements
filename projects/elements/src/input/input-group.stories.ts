@@ -10,6 +10,9 @@ export default {
   component: 'nve-input-group'
 };
 
+/**
+ * @summary Input group combining select, input, and button for composite controls like domain URL entry.
+ */
 export const InputGroup = () => {
   return html`
 <nve-input-group>
@@ -29,6 +32,9 @@ export const InputGroup = () => {
 `
 };
 
+/**
+ * @summary Input group with date range filters combining select and date inputs for filtering data by time periods.
+ */
 export const FilterGroupRange = {
   render: () => html`
 <div nve-layout="row align:vertical-center">

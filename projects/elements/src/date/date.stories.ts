@@ -12,6 +12,9 @@ export default {
   component: 'nve-date',
 };
 
+/**
+ * @summary Basic date picker input with label and message for selecting calendar dates.
+ */
 export const Default = {
   render: () => html`
 <nve-date>
@@ -22,6 +25,9 @@ export const Default = {
 `
 };
 
+/**
+ * @summary Date picker with datalist providing suggested date options for quick selection from predefined dates.
+ */
 export const Datalist = {
   render: () => html`
 <nve-date>
@@ -37,6 +43,9 @@ export const Datalist = {
   `
 }
 
+/**
+ * @summary Date pickers with vertical layout demonstrating validation states including disabled, success, and error.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -66,6 +75,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Date pickers with horizontal layout showing validation states for inline forms and compact layouts.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -95,6 +107,9 @@ export const Horizontal = {
 </div>`
 };
 
+/**
+ * @summary Date range input with start and end date pickers for selecting time periods and date intervals.
+ */
 export const Range = {
   render: () => html`
 <nve-input-group>
@@ -110,6 +125,9 @@ export const Range = {
 `
 };
 
+/**
+ * @summary Collection of temporal input types including date, datetime, month, week, time, and date range pickers.
+ */
 export const Types = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -157,6 +175,9 @@ export const Types = {
 `
 }
 
+/**
+ * @summary Date picker with fit-text styling that adjusts width to match the selected date value for compact displays.
+ */
 export const FitText = {
   render: () => html`
 <nve-date fit-text>

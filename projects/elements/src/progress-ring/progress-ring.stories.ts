@@ -6,6 +6,9 @@ export default {
   component: 'nve-progress-ring',
 };
 
+/**
+ * @summary Circular progress indicators showing indeterminate loading state and determinate completion progress.
+ */
 export const Default = {
   render: () => html`
     <div nve-layout="row gap:sm">
@@ -15,6 +18,9 @@ export const Default = {
     </div>
 `};
 
+/**
+ * @summary Progress rings displaying various completion percentages from indeterminate to 0%, 33%, 66%, and 100%.
+ */
 export const Values = {
   render: () => html`
     <div nve-layout="row gap:sm">
@@ -30,6 +36,9 @@ export const Values = {
     </div>
 `};
 
+/**
+ * @summary Progress rings with custom maximum values demonstrating proportional progress within a defined scale.
+ */
 export const Max = {
   render: () => html`
     <div nve-layout="row gap:sm">
@@ -41,6 +50,9 @@ export const Max = {
     </div>
 `};
     
+/**
+ * @summary Progress rings with warning and danger status colors for indicating critical or cautionary states.
+ */
 export const Status = {
   render: () => html`
     <div nve-layout="row gap:sm">
@@ -54,6 +66,9 @@ export const Status = {
     </div>
 `};
     
+/**
+ * @summary Progress rings at zero completion showing success, warning, and danger states for status indication.
+ */
 export const ZeroValueStatus = {
   render: () => html`
     <div nve-layout="row gap:sm">
@@ -65,6 +80,9 @@ export const ZeroValueStatus = {
     </div>
 `};
     
+/**
+ * @summary Progress rings paired with descriptive text labels for communicating loading states and outcomes.
+ */
 export const WithText = {
   render: () => html`
     <div nve-layout="column gap:sm" nve-text="medium">
@@ -90,6 +108,9 @@ export const WithText = {
     </div>
 `};
     
+/**
+ * @summary Progress ring with custom status icon slotted in the center for enhanced visual communication.
+ */
 export const SlottedIcon = {
   render: () => html`
     <div nve-layout="row gap:sm">
@@ -99,6 +120,9 @@ export const SlottedIcon = {
     </div>
 `};
     
+/**
+ * @summary Progress rings in multiple sizes from extra-extra-small to extra-large for different UI contexts.
+ */
 export const Sizing = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
@@ -119,6 +143,9 @@ export const Sizing = {
     </div>
 `};
     
+/**
+ * @summary Progress rings integrated within buttons to show loading states during actions and operations.
+ */
 export const WithButton = {
   render: () => html`
     <div nve-layout="row gap:sm">
