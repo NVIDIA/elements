@@ -171,7 +171,7 @@ export class MetricsCarousel extends LitElement {
   async #getMetrics(): Promise<MetricsCarouselItem[]> {
     // todo: this should be computed at build time with 11ty and not at runtime as this is a node library atm
     const { MetadataService } = await import('@internals/metadata/services/metadata.service.js');
-    const { AVInfraService } = await import('@internals/metadata/services/av-infra.service.js');
+    const { UsageService } = await import('@internals/metadata/services/usage.service.js');
     const { TestsService } = await import('@internals/metadata/services/tests.service.js');
     const metrics = await MetadataService.getMetadata();
     const tests = await TestsService.getTests();
@@ -195,11 +195,11 @@ export class MetricsCarousel extends LitElement {
     const totalAutomatedTests =
       totalUnitTests + totalAxeTests + totalVisualTests + totalSsrTests + totalLighthouseTests;
 
-    const avInfraMetrics = await AVInfraService.getMetadata();
+    const usageMetrics = await UsageService.getMetadata();
 
-    let totalAVInfraInstances = 0;
-    for (const project of avInfraMetrics.projects) {
-      totalAVInfraInstances += project.instanceTotal;
+    let totalUsageMetrics = 0;
+    for (const project of usageMetrics.projects) {
+      totalUsageMetrics += project.elementReferenceTotal;
     }
 
     return [
@@ -258,10 +258,10 @@ export class MetricsCarousel extends LitElement {
         metricCount: totalSsrTests
       },
       {
-        href: '/elements/docs/metrics/av-infra/',
-        title: 'Instances in AV Infra',
-        label: 'View AV Infra adoption metrics',
-        metricCount: totalAVInfraInstances
+        href: '/elements/docs/metrics/usage-metrics/',
+        title: 'Instances Used Today',
+        label: 'View adoption metrics',
+        metricCount: totalUsageMetrics
       }
     ];
   }
