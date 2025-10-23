@@ -12,7 +12,9 @@ export default {
   component: 'nve-breadcrumb',
 };
 
- 
+/**
+ * @summary Basic breadcrumb navigation showing page hierarchy with linked items and current location indicator.
+ */
 export const Default = {
   render: () => html`
     <nve-breadcrumb>
@@ -24,6 +26,9 @@ export const Default = {
   `
 };
 
+/**
+ * @summary Breadcrumb with home icon button for quick navigation to the root page, offering a compact starting point.
+ */
 export const WithIconButton = {
   render: () => html`
     <nve-breadcrumb>
@@ -35,6 +40,9 @@ export const WithIconButton = {
   `
 };
 
+/**
+ * @summary Breadcrumb with overflow menu for collapsed navigation levels, ideal for deep hierarchies in limited space.
+ */
 export const WithMenu = {
   render: () => html`
 <nve-breadcrumb>
@@ -52,30 +60,3 @@ export const WithMenu = {
 </nve-dropdown>
   `
 };
-
-export const LightTheme = {
-  render: () => html`
-    <div nve-theme="root light" nve-layout="pad:lg">
-      <nve-breadcrumb>
-        <nve-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></nve-icon-button>
-        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-        <span>You Are Here</span>
-      </nve-breadcrumb>
-    </div>
-  `
-}
-
-export const DarkTheme = {
-  render: () => html`
-    <div nve-theme="root dark" nve-layout="pad:lg">
-      <nve-breadcrumb>
-        <nve-icon-button icon-name="home" size="sm"><a href="#" target="_self" aria-label="link to first page"></a></nve-icon-button>
-        <nve-button><a href="#" target="_self">Item 1</a></nve-button>
-        <nve-button><a href="#" target="_self">Item 2</a></nve-button>
-        <span>You Are Here</span>
-      </nve-breadcrumb>
-    </div>
-  `
-}
- 

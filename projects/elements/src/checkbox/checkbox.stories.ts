@@ -7,6 +7,9 @@ export default {
   component: 'nve-checkbox',
 };
 
+/**
+ * @summary Basic checkbox component with label for binary selection and form input.
+ */
 export const Default = () => {
   return html`
 <nve-checkbox>
@@ -15,6 +18,9 @@ export const Default = () => {
 </nve-checkbox>`
 };
 
+/**
+ * @summary Checkbox states including default, disabled, success, and error with control messages for validation feedback.
+ */
 export const States = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
@@ -44,6 +50,9 @@ export const States = () => {
 </div>`
 };
 
+/**
+ * @summary Checkbox group with vertical layout for related options stacked in a column with validation states.
+ */
 export const VerticalGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
@@ -126,6 +135,9 @@ export const VerticalGroup = () => {
 `
 };
 
+/**
+ * @summary Checkbox group with vertical inline layout for compact vertical stacking with inline label positioning.
+ */
 export const VerticalInlineGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
@@ -208,6 +220,9 @@ export const VerticalInlineGroup = () => {
 `
 };
 
+/**
+ * @summary Checkbox group with horizontal layout for related options arranged in a row, ideal for limited choices.
+ */
 export const HorizontalGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
@@ -290,6 +305,9 @@ export const HorizontalGroup = () => {
 `
 };
 
+/**
+ * @summary Checkbox group with horizontal inline layout for space-efficient horizontal arrangement with inline labels.
+ */
 export const HorizontalInlineGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
@@ -372,7 +390,9 @@ export const HorizontalInlineGroup = () => {
 `
 };
 
-
+/**
+ * @summary Checkbox with indeterminate state for representing partial selection or mixed values in hierarchical lists.
+ */
 export const Indeterminate = () => {
   return html`
 <nve-checkbox>

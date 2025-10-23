@@ -6,6 +6,9 @@ export default {
   component: 'nve-progress-bar',
 };
 
+/**
+ * @summary Progress bars with different status colors showing completion levels from 0% to 100% for task tracking.
+ */
 export const Default = {
   render: () => html`
     <div nve-layout="column gap:md pad:lg full">
@@ -22,6 +25,9 @@ export const Default = {
   `
 };
 
+/**
+ * @summary Progress bars with custom max values for representing non-percentage based progress like file counts or steps.
+ */
 export const Max = {
   render: () => html`
     <div nve-layout="column gap:md pad:lg full">
@@ -32,6 +38,9 @@ export const Max = {
   `
 };
 
+/**
+ * @summary Progress bar with descriptive label and percentage display for clear communication of upload or task status.
+ */
 export const Labeled = {
   render: () => html`
     <div nve-layout="column gap:xxxs pad:lg align:horizontal-stretch grow">
@@ -45,12 +54,18 @@ export const Labeled = {
   `
 };
 
+/**
+ * @summary Indeterminate progress bar for showing activity when completion time is unknown, like loading or processing.
+ */
 export const Indeterminate = {
   render: () => html`
     <nve-progress-bar></nve-progress-bar>
   `
 };
 
+/**
+ * @summary Indeterminate progress bars with status color variants for contextual loading states and severity levels.
+ */
 export const IndeterminateStatusColors = {
   render: () => html`
     <div nve-layout="column gap:md full">
@@ -63,11 +78,20 @@ export const IndeterminateStatusColors = {
   `
 };
 
+/**
+ * @summary Indeterminate progress bar with custom color, height, and opacity for brand-specific styling and visual emphasis.
+ * @tags test-case
+ */
 export const IndeterminateCustomColor = {
   render: () => html`
     <nve-progress-bar style="--accent-color: var(--nve-sys-accent-primary-background); --height: var(--nve-ref-size-150); --opacity: 1;"></nve-progress-bar>
   `
 };
+
+/**
+ * @summary Progress bars with custom heights for different visual prominence levels and layout requirements.
+ * @tags test-case
+ */
 export const CustomHeights = {
   render: () => html`
     <div nve-layout="column gap:md full">
