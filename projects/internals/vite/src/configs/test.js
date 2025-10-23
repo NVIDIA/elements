@@ -40,8 +40,8 @@ export const libraryTestConfig = {
   },
   test: {
     retry: 2,
-    maxWorkers: process.env.CI ? 4 : undefined,
-    maxConcurrency: process.env.CI ? 4 : undefined, // Limit concurrent tests to avoid browser overload
+    // maxWorkers: process.env.CI ? 4 : undefined,
+    // maxConcurrency: process.env.CI ? 4 : undefined, // Limit concurrent tests to avoid browser overload
     isolate: coverage,
     server: {
       deps: {
@@ -67,9 +67,10 @@ export const libraryTestConfig = {
       provider: playwright({
         launch: {
           args: [
-            '--disable-dev-shm-usage', // Prevents /dev/shm from running out of memory
-            '--no-sandbox', // Required for CI environments
-            '--disable-setuid-sandbox'
+            '--disable-dev-shm-usage',
+            '--disable-setuid-sandbox',
+            '--disable-software-rasterizer',
+            '--no-sandbox'
           ],
           timeout: 120000 // 120 second browser launch timeout
         }
