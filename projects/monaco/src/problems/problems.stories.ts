@@ -67,7 +67,7 @@ export const Default = {
         target: 'https://eslint.org/docs/rules/no-var'
       },
       owner: 'eslint',
-    },
+    }
   ];
   problemsEl.addEventListener('problem-selected', e => {
     console.log('problem-selected', e.detail.problem);
