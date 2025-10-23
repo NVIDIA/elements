@@ -22,7 +22,8 @@ export default mergeConfig(libraryNodeTestConfig, {
         'src/tasks/lighthouse.ts',
         'src/tasks/metadata.av-infra.ts',
         'src/tasks/metadata.av-infra.utils.ts',
-        'src/tasks/tests.ts'
+        'src/tasks/tests.ts',
+        'src/tasks/usage.utils.ts'
       ]
     }
   }

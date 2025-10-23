@@ -34,9 +34,9 @@
       "types": "./dist/services/tests.service.d.ts",
       "default": "./dist/src/services/tests.service.js"
     },
-    "./services/av-infra.service.js": {
-      "types": "./dist/services/av-infra.service.d.ts",
-      "default": "./dist/src/services/av-infra.service.js"
+    "./services/usage.service.js": {
+      "types": "./dist/services/usage.service.d.ts",
+      "default": "./dist/src/services/usage.service.js"
     }
   },
   "wireit": {
@@ -395,7 +395,8 @@
         "static/av-infra.json"
       ],
       "dependencies": [
-        "../../elements:build"
+        "../../elements:build",
+        "build:metadata"
       ]
     },
     "lint": {

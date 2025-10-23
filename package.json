@@ -90,6 +90,7 @@
         "./projects/testing:ci",
         "./projects/themes:ci",
         "./projects/internals/metadata:ci",
+        "./projects/internals/patterns:ci",
         "./projects/internals/tools:ci"
       ],
       "files": []
