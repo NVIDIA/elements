@@ -22,7 +22,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
       build: {
-        target: 'esnext'
+        target: 'esnext',
+        sourcemap: false,
+        reportCompressedSize: false
       }
     }
   });
