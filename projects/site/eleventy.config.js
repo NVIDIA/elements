@@ -86,6 +86,7 @@ export default function (eleventyConfig) {
         target: 'esnext',
         sourcemap: false,
         modulePreload: false,
+        reportCompressedSize: false,
         watch:
           process.env.ELEVENTY_RUN_MODE !== 'build'
             ? {
