@@ -7,6 +7,9 @@ export default {
   component: 'nve-week',
 };
 
+/**
+ * @summary Basic week picker input for selecting specific weeks in a year for scheduling and planning.
+ */
 export const Default = {
   render: () => html`
 <nve-week>
@@ -17,6 +20,9 @@ export const Default = {
 `
 };
 
+/**
+ * @summary Week picker with datalist providing suggested week options for quick selection from predefined weeks.
+ */
 export const Datalist = {
   render: () => html`
 <nve-week>
@@ -32,6 +38,9 @@ export const Datalist = {
   `
 }
 
+/**
+ * @summary Week pickers with vertical layout demonstrating validation states including disabled, success, and error.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg full">
@@ -61,6 +70,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Week pickers with horizontal layout showing validation states for inline forms and compact layouts.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg full">

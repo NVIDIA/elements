@@ -7,6 +7,9 @@ export default {
   component: 'nve-textarea',
 };
 
+/**
+ * @summary Basic multi-line text input for longer content entry like comments, descriptions, or messages.
+ */
 export const Default = {
   render: () => html`
 <nve-textarea>
@@ -16,6 +19,9 @@ export const Default = {
 </nve-textarea>`
 };
 
+/**
+ * @summary Textareas with vertical layout demonstrating validation states including disabled, success, and error.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg full">
@@ -45,6 +51,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Textareas with horizontal layout showing validation states for inline forms and compact layouts.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg full">
@@ -74,6 +83,9 @@ export const Horizontal = {
 </div>`
 };
 
+/**
+ * @summary Textarea with built-in HTML validation showing required field error messages for form validation.
+ */
 export const ControlValidation = () => {
   return html`
 <nve-textarea>
@@ -84,6 +96,9 @@ export const ControlValidation = () => {
 </nve-textarea>`;
 }
 
+/**
+ * @summary Textarea with custom columns and rows attributes for controlling initial size and dimensions.
+ */
 export const ColumnsAndRows = () => {
   return html`
 <nve-textarea>

@@ -7,6 +7,9 @@ export default {
   component: 'nve-color',
 };
 
+/**
+ * @summary Basic color picker input with label and message for selecting hex color values.
+ */
 export const Default = {
   render: () => html`
 <nve-color>
@@ -17,6 +20,9 @@ export const Default = {
 `
 };
 
+/**
+ * @summary Color picker with datalist providing predefined color swatches for quick selection from a color palette.
+ */
 export const Datalist = {
   render: () => html`
 <nve-color>
@@ -44,6 +50,9 @@ export const Datalist = {
   `
 }
 
+/**
+ * @summary Color pickers with vertical layout demonstrating validation states including disabled, success, and error.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg full">
@@ -73,6 +82,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Color pickers with horizontal layout showing validation states for inline forms and compact layouts.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg full">
