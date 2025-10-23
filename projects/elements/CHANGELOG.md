@@ -1,3 +1,15 @@
+## [@nvidia-elements/core-v1.45.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.44.1...@nvidia-elements/core-v1.45.0) (2025-10-23)
+
+
+### Features
+
+* **elements:** update nve-range styling; custom datalist tick rendering ([e8e7e84](https://github.com/NVIDIA/elements/commit/e8e7e845d15ace3bee57d769c25193f69c54c8fa))
+
+
+### Bug Fixes
+
+* **elements:** fix z-indexing on nve-range styling ([7c2e097](https://github.com/NVIDIA/elements/commit/7c2e0973ea6e6b8b61f0b1c1fed8030c61bb5699))
+
 ## [@nvidia-elements/core-v1.44.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.44.0...@nvidia-elements/core-v1.44.1) (2025-10-16)
 
 
