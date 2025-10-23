@@ -7,6 +7,9 @@ export default {
   component: 'nve-button-group',
 };
 
+/**
+ * @summary Basic button group for organizing related actions into a unified control with connected visual appearance.
+ */
 export const Default = {
   render: () => html`
     <nve-button-group>
@@ -17,6 +20,9 @@ export const Default = {
   `
 };
 
+/**
+ * @summary Button group with single selection behavior for mutually exclusive options like view modes or formatting.
+ */
 export const SingleSelect = {
   render: () => html`
   <nve-button-group behavior-select="single">
@@ -27,6 +33,9 @@ export const SingleSelect = {
   `
 };
 
+/**
+ * @summary Button group with multi-selection behavior for toggling multiple options simultaneously like text formatting.
+ */
 export const MultiSelect = {
   render: () => html`
     <nve-button-group behavior-select="multi">
@@ -37,6 +46,9 @@ export const MultiSelect = {
   `
 };
 
+/**
+ * @summary Button group in disabled state for indicating unavailable actions or read-only contexts.
+ */
 export const Disabled = {
   render: () => html`
     <nve-button-group container="rounded">
@@ -47,6 +59,9 @@ export const Disabled = {
   `
 };
 
+/**
+ * @summary Button group with flat container styling for minimal visual appearance and reduced emphasis.
+ */
 export const Flat = {
   render: () => html`
     <nve-button-group container="flat">
@@ -57,6 +72,9 @@ export const Flat = {
   `
 };
 
+/**
+ * @summary Button group for clustering related action buttons with cohesive visual treatment.
+ */
 export const Action = {
   render: () => html`
     <nve-button-group>
@@ -67,6 +85,9 @@ export const Action = {
   `
 };
 
+/**
+ * @summary Split button groups with different interaction styles for primary actions with dropdown alternatives.
+ */
 export const ActionSplit = {
   render: () => html`
     <div nve-layout="row gap:sm">
@@ -91,6 +112,9 @@ export const ActionSplit = {
   `
 };
 
+/**
+ * @summary Split button groups with rounded container styling for softer visual appearance and modern aesthetics.
+ */
 export const ActionSplitRounded = {
   render: () => html`
     <div nve-layout="row gap:sm">
@@ -115,6 +139,9 @@ export const ActionSplitRounded = {
   `
 };
 
+/**
+ * @summary Rounded button group with single selection for segmented controls and filter options with pill-style buttons.
+ */
 export const Rounded = {
   render: () => html`
     <nve-button-group container="rounded" behavior-select="single">
@@ -125,6 +152,9 @@ export const Rounded = {
   `
 };
 
+/**
+ * @summary Rounded button group with icon buttons for compact view switchers and mode toggles.
+ */
 export const RoundedIcon = {
   render: () => html`
     <nve-button-group container="rounded" behavior-select="single">
@@ -134,6 +164,9 @@ export const RoundedIcon = {
   `
 };
 
+/**
+ * @summary Button group with vertical orientation for sidebars, toolbars, or vertical navigation contexts.
+ */
 export const OrientationVertical = {
   render: () => html`
     <nve-button-group orientation="vertical">

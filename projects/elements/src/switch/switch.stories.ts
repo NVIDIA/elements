@@ -7,6 +7,9 @@ export default {
   component: 'nve-switch',
 };
 
+/**
+ * @summary Basic toggle switch for binary on/off controls and feature activation.
+ */
 export const Default = () => {
   return html`
 <nve-switch>
@@ -15,6 +18,9 @@ export const Default = () => {
 </nve-switch>`
 };
 
+/**
+ * @summary Toggle switches with different states including default, disabled, success, and error with control messages.
+ */
 export const States = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
@@ -44,6 +50,9 @@ export const States = () => {
 </div>`
 };
 
+/**
+ * @summary Switch groups with vertical layout for multiple related toggles stacked in a column with validation states.
+ */
 export const VerticalGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
@@ -126,6 +135,9 @@ export const VerticalGroup = () => {
 `
 };
 
+/**
+ * @summary Switch groups with vertical inline layout for compact vertical stacking with inline label positioning.
+ */
 export const VerticalInlineGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
@@ -208,6 +220,9 @@ export const VerticalInlineGroup = () => {
 `
 };
 
+/**
+ * @summary Switch groups with horizontal layout for multiple toggles arranged in a row, ideal for limited options.
+ */
 export const HorizontalGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">
@@ -290,6 +305,9 @@ export const HorizontalGroup = () => {
 `
 };
 
+/**
+ * @summary Switch groups with horizontal inline layout for space-efficient horizontal arrangement with inline labels.
+ */
 export const HorizontalInlineGroup = () => {
   return html`
 <div nve-layout="column gap:lg align:stretch">

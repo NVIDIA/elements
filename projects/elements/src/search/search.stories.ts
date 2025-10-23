@@ -7,6 +7,9 @@ export default {
   component: 'nve-search',
 };
 
+/**
+ * @summary Basic search input with label and message for query entry and filtering data.
+ */
 export const Default = {
   render: () => html`
 <nve-search>
@@ -16,6 +19,9 @@ export const Default = {
 </nve-search>`
 };
 
+/**
+ * @summary Rounded search input without visible label for compact inline placement in headers or toolbars.
+ */
 export const Inline = {
   render: () => html`
 <nve-search rounded>
@@ -23,6 +29,9 @@ export const Inline = {
 </nve-search>`
 };
 
+/**
+ * @summary Search input with datalist providing autocomplete suggestions for quick query selection from recent searches.
+ */
 export const Datalist = () => {
   return html`
 <nve-search rounded>
@@ -35,6 +44,9 @@ export const Datalist = () => {
 </nve-search>`;
 };
 
+/**
+ * @summary Search inputs with vertical layout demonstrating validation states including disabled, success, and error.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg full">
@@ -64,6 +76,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Search inputs with horizontal layout showing validation states for inline forms and compact layouts.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg full">
