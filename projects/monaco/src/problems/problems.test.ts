@@ -7,7 +7,7 @@ import type * as monaco from '@nvidia-elements/monaco';
 import { MonacoEditor } from '@nvidia-elements/monaco/editor';
 
 import { MonacoProblems, ProblemSeverity } from '@nvidia-elements/monaco/problems';
-import type { Problem } from '@nvidia-elements/monaco/problems';
+import type { Problem, ProblemCode } from '@nvidia-elements/monaco/problems';
 
 import '@nvidia-elements/monaco/problems/define.js';
 
@@ -71,6 +71,10 @@ function getEditorLineElement(editor: monaco.editor.IStandaloneCodeEditor, line:
   return editor.getDomNode().querySelector<HTMLElement>(`.view-line:nth-child(${line})`);
 }
 
+function getEditorSelector(editor: monaco.editor.IStandaloneCodeEditor, selector: string): HTMLElement {
+  return editor.getDomNode().querySelector<HTMLElement>(selector);
+}
+
 type EmulatedMouseOffsetOptions = { offsetX?: number; offsetY?: number };
 type EmulatedMouseEventOptions = { detail?: number; button?: number } & EmulatedMouseOffsetOptions;
 
@@ -80,6 +84,15 @@ function getElementCoordinates(element: HTMLElement, options: EmulatedMouseOffse
   const clientX = rect.left + offsetX;
   const clientY = rect.top + offsetY;
   return { clientX, clientY, offsetX, offsetY };
+}
+
+function getOffsetRelativeTo(element: HTMLElement, relativeToElement: HTMLElement) {
+  const elementRect = element.getBoundingClientRect();
+  const relativeToElementRect = relativeToElement.getBoundingClientRect();
+  return {
+    offsetX: Math.ceil(elementRect.x - relativeToElementRect.x),
+    offsetY: Math.ceil(elementRect.y - relativeToElementRect.y)
+  };
 }
 
 const defaultOptions = { bubbles: true, cancelable: true };
@@ -194,7 +207,7 @@ const problems: Problem[] = [
     },
     owner: 'eslint'
   }
-];
+] as const;
 
 const problemsText = `\
 Button.ts /src/components/Button.ts 3
@@ -215,7 +228,11 @@ const expectedRows = [
   { type: 'problem', problem: problems[4] },
   { type: 'file' },
   { type: 'problem', problem: problems[3] }
-];
+] as const;
+
+async function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 // tests
 
@@ -227,6 +244,7 @@ describe('nve-monaco-problems', () => {
   let editor: monaco.editor.IStandaloneCodeEditor;
   let model: monaco.editor.ITextModel;
 
+  let openSpy: Mock<(url: string, target: string) => void>;
   let setModelValueSpy: Mock<(value: string) => void>;
   let dispatchEventSpy: Mock<(event: Event) => void>;
 
@@ -243,11 +261,13 @@ describe('nve-monaco-problems', () => {
     editor = editorEl.editor!;
     model = editor.getModel();
 
+    openSpy = vi.spyOn(globalThis, 'open');
     setModelValueSpy = vi.spyOn(model, 'setValue');
     dispatchEventSpy = vi.spyOn(element, 'dispatchEvent');
   });
 
   afterEach(() => {
+    openSpy.mockRestore();
     setModelValueSpy.mockRestore();
     dispatchEventSpy.mockRestore();
 
@@ -536,7 +556,7 @@ describe('nve-monaco-problems', () => {
   it('should not interfere with the built-in folding behavior', async () => {
     element.problems = problems;
     await elementIsStable(element);
-
+    expect(model.getLineCount()).toBe(expectedRows.length);
     await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
 
     const firstLineOverlay = `.margin-view-overlays div:first-child`;
@@ -588,5 +608,110 @@ describe('nve-monaco-problems', () => {
     expect(() => emulateMouseMove(getEditorLineElement(editor, 1))).not.toThrow();
     expect(() => emulateMouseLeave(getEditorLineElement(editor, 1))).not.toThrow();
     expect(dispatchEventSpy).not.toHaveBeenCalled();
+  });
+
+  it('should show tooltips for multi-line problem messages', async () => {
+    element.problems = problems;
+    await elementIsStable(element);
+    expect(model.getLineCount()).toBe(expectedRows.length);
+    await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
+
+    const lineEl = getEditorLineElement(editor, 2);
+    expect(() => emulateMouseMove(lineEl)).not.toThrow();
+
+    await expect.poll(() => getEditorSelector(editor, '.hover-row .rendered-markdown')).not.toBeNull();
+    const hoverRowEl = getEditorSelector(editor, '.hover-row .rendered-markdown');
+    expect(hoverRowEl.textContent).toBe(problems[2].message.split('\n').join(''));
+
+    expect(() => emulateClick(lineEl, getOffsetRelativeTo(hoverRowEl, lineEl))).not.toThrow();
+    expect(() => emulateMouseLeave(lineEl)).not.toThrow();
+  });
+
+  it('should not show tooltips for files', async () => {
+    element.problems = problems;
+    await elementIsStable(element);
+    expect(model.getLineCount()).toBe(expectedRows.length);
+    await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
+
+    const lineEl = getEditorLineElement(editor, 1);
+    const spanEl = lineEl.querySelector<HTMLElement>('.view-line span');
+
+    expect(() => emulateMouseMove(lineEl, getOffsetRelativeTo(spanEl, lineEl))).not.toThrow();
+    await delay(400);
+    await expect(getEditorSelector(editor, '.hover-row')).toBeNull();
+  });
+
+  it('should not show tooltips for single-line problem messages', async () => {
+    element.problems = problems;
+    await elementIsStable(element);
+    expect(model.getLineCount()).toBe(expectedRows.length);
+    await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
+
+    const lineEl = getEditorLineElement(editor, 3);
+    const spanEl = lineEl.querySelector<HTMLElement>('.view-line span');
+
+    expect(() => emulateMouseMove(lineEl, getOffsetRelativeTo(spanEl, lineEl))).not.toThrow();
+    await delay(400);
+    await expect(getEditorSelector(editor, '.hover-row')).toBeNull();
+  });
+
+  it('should not show tooltips in unrelated monaco editors (given hover providers are global)', async () => {
+    element.problems = problems;
+    await elementIsStable(element);
+    expect(model.getLineCount()).toBe(expectedRows.length);
+    await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
+
+    // create an unrelated editor and ensure the hover provider early-exits when the model doesn't match
+    const container = document.createElement('div');
+    container.style.height = '300px';
+    fixture.appendChild(container);
+    const { monaco } = editorEl;
+    const unrelatedEditor = monaco.editor.create(container, {
+      value: 'Hello world!',
+      language: 'plaintext'
+    });
+    await expect.poll(() => unrelatedEditor.getDomNode().querySelectorAll('.view-line').length).toBe(1);
+
+    const lineEl = getEditorLineElement(unrelatedEditor, 1);
+    const spanEl = lineEl.querySelector<HTMLElement>('.view-line span');
+
+    expect(() => emulateMouseMove(lineEl, getOffsetRelativeTo(spanEl, lineEl))).not.toThrow();
+    await delay(400);
+    await expect(getEditorSelector(unrelatedEditor, '.hover-row')).toBeNull();
+  });
+
+  it('should show tooltips for hovered problem code links', async () => {
+    element.problems = problems;
+    await elementIsStable(element);
+    expect(model.getLineCount()).toBe(expectedRows.length);
+    await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
+    await expect.poll(() => getEditorSelector(editor, '.problem-source-target')).not.toBeNull();
+
+    const targetEl = getEditorSelector(editor, '.problem-source-target');
+    const lineEl = targetEl.closest<HTMLElement>('.view-line');
+
+    expect(() => emulateMouseMove(lineEl, getOffsetRelativeTo(targetEl, lineEl))).not.toThrow();
+    await expect.poll(() => getEditorSelector(editor, '.hover-row .rendered-markdown')).not.toBeNull();
+    expect(getEditorSelector(editor, '.hover-row .rendered-markdown').textContent).toBe(
+      (problems[4].code as ProblemCode).target
+    );
+    expect(() => emulateMouseLeave(getEditorLineElement(editor, 6))).not.toThrow();
+  });
+
+  it('should open the problem code link in a new tab', async () => {
+    element.problems = problems;
+    await elementIsStable(element);
+    expect(model.getLineCount()).toBe(expectedRows.length);
+    await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
+    await expect.poll(() => getEditorSelector(editor, '.problem-source-target')).not.toBeNull();
+
+    openSpy.mockImplementation(() => {});
+
+    const targetEl = getEditorSelector(editor, '.problem-source-target');
+    const lineEl = targetEl.closest<HTMLElement>('.view-line');
+
+    expect(() => emulateClick(lineEl, getOffsetRelativeTo(targetEl, lineEl))).not.toThrow();
+    expect(openSpy).toHaveBeenCalledTimes(1);
+    expect(openSpy).toHaveBeenCalledWith('https://eslint.org/docs/rules/no-var', '_blank');
   });
 });
