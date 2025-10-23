@@ -75,4 +75,13 @@
   &.problem-position {
     color: var(--nve-ref-color-gray-denim-1000);
   }
+
+  &.problem-source-target {
+    color: var(--nve-sys-text-link-emphasis-color);
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--nve-sys-text-link-hover-color);
+    }
+  }
 }

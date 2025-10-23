@@ -14,6 +14,14 @@ export const ProblemSeverity = {
 export type ProblemSeverityValue = (typeof ProblemSeverity)[keyof typeof ProblemSeverity];
 
 /**
+ * Problem code with target URI to associated documentation.
+ */
+export interface ProblemCode {
+  value: string;
+  target: string | { toString(): string };
+}
+
+/**
  * A JSON-serializable interface for describing problems, compatible with Monaco's IMarker interface.
  */
 export interface Problem {
@@ -22,7 +30,7 @@ export interface Problem {
   severity: ProblemSeverityValue;
   message: string;
   source?: string;
-  code?: string | { value: string; target: string | { toString(): string } };
+  code?: string | ProblemCode;
   startLineNumber: number;
   startColumn: number;
   endLineNumber: number;

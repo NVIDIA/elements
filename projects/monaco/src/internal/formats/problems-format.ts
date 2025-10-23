@@ -131,6 +131,7 @@ function toProblemLine(monaco: Monaco, lineNumber: number, problem: Problem): De
   const message = problem.message.split('\n')[0];
   const source = problem.source ?? '';
   const code = (typeof problem.code === 'object' ? problem.code?.value : problem.code) ?? '';
+  const target = typeof problem.code === 'object' ? problem.code?.target : undefined;
   const position = `[Ln ${problem.startLineNumber}, Col ${problem.startColumn}]`;
 
   const decorations: monaco.editor.IModelDeltaDecoration[] = [];
@@ -164,7 +165,13 @@ function toProblemLine(monaco: Monaco, lineNumber: number, problem: Problem): De
     const sourceStart = text.length + 1;
     text += source;
     if (code.length > 0) {
+      const codeStart = text.length + 1;
       text += `(${code})`;
+      if (target) {
+        decorations.push(
+          toRangeDecoration(monaco, lineNumber, codeStart + 1, codeStart + code.length + 1, 'problem-source-target')
+        );
+      }
     }
     decorations.push(toRangeDecoration(monaco, lineNumber, sourceStart, text.length + 1, 'problem-source-code'));
 

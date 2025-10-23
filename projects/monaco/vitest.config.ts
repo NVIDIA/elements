@@ -12,6 +12,12 @@ export default mergeConfig(libraryTestConfig, {
     isolate: true,
     maxConcurrency: 1,
     fileParallelism: false,
+    browser: {
+      viewport: {
+        width: 1280,
+        height: 720
+      }
+    },
     coverage: {
       thresholds: {
         lines: 100,
