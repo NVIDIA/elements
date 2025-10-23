@@ -13,7 +13,7 @@ import {
   toProblemsFormat,
   toSelectedLineDecorations
 } from '../internal/formats/problems-format.js';
-import type { Problem } from '../internal/types/index.js';
+import type { Problem, ProblemCode } from '../internal/types/index.js';
 import { equalsProblems } from '../internal/utils/problem-utils.js';
 
 import styles from './problems.css?inline';
@@ -173,6 +173,10 @@ export class MonacoProblems extends LitElement {
     const onMouseMoveListener = editor.onMouseMove(this.#onMouseMove);
     const onMouseLeaveListener = editor.onMouseLeave(this.#onMouseLeave);
 
+    const hoverProvider = this.#monaco.languages.registerHoverProvider('*', {
+      provideHover: this.#provideHover
+    });
+
     const didDisposeListener = editor.onDidDispose(() => {
       didDisposeListener.dispose();
       onDidChangeModelContentListener.dispose();
@@ -182,6 +186,8 @@ export class MonacoProblems extends LitElement {
       onMouseUpListener.dispose();
       onMouseMoveListener.dispose();
       onMouseLeaveListener.dispose();
+
+      hoverProvider.dispose();
 
       editorEl.removeEventListener('contextmenu', this.#onContextMenu);
 
@@ -211,6 +217,41 @@ export class MonacoProblems extends LitElement {
     this.#lineDecorations?.set(decorations);
     this.#getProblemByLine = getProblemByLine;
   }
+
+  #isProblemCodeDecoration(position: monaco.Position): boolean {
+    const { lineNumber, column } = position;
+    const decorations = this.#editor.getDecorationsInRange(
+      new this.#monaco.Range(lineNumber, column, lineNumber, column)
+    );
+    return decorations.some(decoration => decoration.options.inlineClassName?.includes('problem-source-target'));
+  }
+
+  #provideHover = (
+    model: monaco.editor.ITextModel,
+    position: monaco.Position
+  ): monaco.languages.ProviderResult<monaco.languages.Hover> => {
+    if (model !== this.#model) {
+      return;
+    }
+    const { lineNumber } = position;
+    const problem = this.#getProblemByLine(lineNumber);
+    if (!problem) {
+      return;
+    }
+    const range = new this.#monaco.Range(lineNumber, 1, lineNumber, 1);
+
+    // code with target
+    if (this.#isProblemCodeDecoration(position)) {
+      return { contents: [{ value: (problem.code as ProblemCode).target.toString(), isTrusted: false }], range };
+    }
+
+    // multi-line message
+    if (problem.message.includes('\n')) {
+      return { contents: [{ value: '```\n' + problem.message + '\n```', isTrusted: false }], range };
+    }
+
+    return undefined;
+  };
 
   #selectProblem(problem: Problem) {
     this.dispatchEvent(new CustomEvent('problem-selected', { bubbles: true, detail: { problem } }));
@@ -310,10 +351,10 @@ export class MonacoProblems extends LitElement {
     }
 
     const { detail: clickCount, leftButton, rightButton } = e.event;
-    const { element } = e.target;
-    const lineNumber = e.target.position?.lineNumber;
+    const { element, position } = e.target;
+    const lineNumber = position?.lineNumber;
 
-    if (this.#downLineNumber !== lineNumber) {
+    if (this.#downLineNumber !== lineNumber || lineNumber === undefined) {
       return;
     }
 
@@ -322,6 +363,10 @@ export class MonacoProblems extends LitElement {
     const problem = this.#getProblemByLine(lineNumber);
     if (problem) {
       if (leftButton) {
+        if (this.#isProblemCodeDecoration(position)) {
+          globalThis.open((problem.code as ProblemCode).target.toString(), '_blank');
+          return;
+        }
         if (clickCount === 1) {
           this.#selectProblem(problem);
         }

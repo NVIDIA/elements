@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import * as monaco from '@nvidia-elements/monaco';
 
+import { ProblemSeverity } from '../types/index.js';
 import type { Problem } from '../types/index.js';
 
 import {
@@ -16,7 +17,7 @@ import type { SeverityLabel } from './problems-format.js';
 const createMockProblem = (overrides: Partial<Problem> = {}): Problem => ({
   owner: 'test-owner',
   resource: 'file:///test/path/file.ts',
-  severity: 8, // Error
+  severity: ProblemSeverity.Error,
   message: 'Test error message',
   source: 'test',
   code: '1234',
@@ -95,10 +96,10 @@ file2.ts /test/path/file2.ts 1
 
     it('should sort problems by severity, line number, and column', () => {
       const problems = [
-        createMockProblem({ severity: 2, startLineNumber: 10, startColumn: 5 }), // Info
-        createMockProblem({ severity: 8, startLineNumber: 1, startColumn: 1 }), // Error
-        createMockProblem({ severity: 4, startLineNumber: 5, startColumn: 3 }), // Warning
-        createMockProblem({ severity: 8, startLineNumber: 1, startColumn: 2 }) // Error, same line, different column
+        createMockProblem({ severity: ProblemSeverity.Info, startLineNumber: 10, startColumn: 5 }),
+        createMockProblem({ severity: ProblemSeverity.Error, startLineNumber: 1, startColumn: 1 }),
+        createMockProblem({ severity: ProblemSeverity.Warning, startLineNumber: 5, startColumn: 3 }),
+        createMockProblem({ severity: ProblemSeverity.Error, startLineNumber: 1, startColumn: 2 }) // same line, different column
       ];
 
       const result = toProblemsFormat(monaco, problems);
@@ -137,10 +138,10 @@ zeta.ts /test/path/zeta.ts 1
 
     it('should handle problems with different severity levels', () => {
       const problems = [
-        createMockProblem({ severity: 1, message: 'Hint message' }), // Hint
-        createMockProblem({ severity: 2, message: 'Info message' }), // Info
-        createMockProblem({ severity: 4, message: 'Warning message' }), // Warning
-        createMockProblem({ severity: 8, message: 'Error message' }) // Error
+        createMockProblem({ severity: ProblemSeverity.Hint, message: 'Hint message' }),
+        createMockProblem({ severity: ProblemSeverity.Info, message: 'Info message' }),
+        createMockProblem({ severity: ProblemSeverity.Warning, message: 'Warning message' }),
+        createMockProblem({ severity: ProblemSeverity.Error, message: 'Error message' })
       ];
 
       const result = toProblemsFormat(monaco, problems);
@@ -164,7 +165,7 @@ file.ts /test/path/file.ts 4
 file.ts /test/path/file.ts 1
   error Test error message test(1234) [Ln 1, Col 1]`
               );
-      expect(result.decorations.length).toEqual(9);
+      expect(result.decorations.length).toEqual(10);
     });
 
     it('should handle problems without source', () => {
@@ -221,34 +222,49 @@ file_with_underscores.ts /test/path/file_with_underscores.ts 1
       const problems = [
         createMockProblem({
           resource: 'file:///test/path/file1.ts',
-          severity: 1,
+          severity: ProblemSeverity.Hint,
           message: 'Hint message',
           startLineNumber: 10,
           startColumn: 5
         }),
         createMockProblem({
           resource: 'file:///test/path/file2.ts',
-          severity: 2,
+          severity: ProblemSeverity.Info,
           message: 'Info message',
           startLineNumber: 1,
           startColumn: 1
         }),
         createMockProblem({
           resource: 'file:///test/path/file1.ts',
-          severity: 4,
+          severity: ProblemSeverity.Warning,
           message: 'Warning message',
           startLineNumber: 5,
           startColumn: 3
+        }),
+        createMockProblem({
+          resource: 'file:///test/path/file1.ts',
+          severity: ProblemSeverity.Error,
+          message: 'Error message',
+          startLineNumber: 7,
+          startColumn: 6,
+          source: 'test',
+          code: {
+            value: '1234',
+            target: 'https://test/docs/latest/rules/1234'
+          }
         })
       ];
       const result = toProblemsFormat(monaco, problems);
+
       // prettier-ignore
       expect(result.text).toEqual(`\
-file1.ts /test/path/file1.ts 2
+file1.ts /test/path/file1.ts 3
+  error Error message test(1234) [Ln 7, Col 6]
   warning Warning message test(1234) [Ln 5, Col 3]
   hint Hint message test(1234) [Ln 10, Col 5]
 file2.ts /test/path/file2.ts 1
   info Info message test(1234) [Ln 1, Col 1]`);
+
       expect(result.decorations).toEqual([
         {
           range: expect.objectContaining({
@@ -269,7 +285,9 @@ file2.ts /test/path/file2.ts 1
             endLineNumber: 1,
             endColumn: 9
           }),
-          options: { inlineClassName: 'problems-decoration problem-file' }
+          options: {
+            inlineClassName: 'problems-decoration problem-file'
+          }
         },
         {
           range: expect.objectContaining({
@@ -278,7 +296,9 @@ file2.ts /test/path/file2.ts 1
             endLineNumber: 1,
             endColumn: 29
           }),
-          options: { inlineClassName: 'problems-decoration problem-path' }
+          options: {
+            inlineClassName: 'problems-decoration problem-path'
+          }
         },
         {
           range: expect.objectContaining({
@@ -287,7 +307,9 @@ file2.ts /test/path/file2.ts 1
             endLineNumber: 1,
             endColumn: 31
           }),
-          options: { inlineClassName: 'problems-decoration problem-count' }
+          options: {
+            inlineClassName: 'problems-decoration problem-count'
+          }
         },
         {
           range: expect.objectContaining({
@@ -306,6 +328,74 @@ file2.ts /test/path/file2.ts 1
             startLineNumber: 2,
             startColumn: 3,
             endLineNumber: 2,
+            endColumn: 8
+          }),
+          options: {
+            beforeContentClassName: 'problems-decoration codicon codicon-error',
+            inlineClassName: 'problems-decoration severity-label'
+          }
+        },
+        {
+          range: expect.objectContaining({
+            startLineNumber: 2,
+            startColumn: 9,
+            endLineNumber: 2,
+            endColumn: 22
+          }),
+          options: {
+            inlineClassName: 'problems-decoration problem-message'
+          }
+        },
+        {
+          range: expect.objectContaining({
+            startLineNumber: 2,
+            startColumn: 28,
+            endLineNumber: 2,
+            endColumn: 32
+          }),
+          options: {
+            inlineClassName: 'problems-decoration problem-source-target'
+          }
+        },
+        {
+          range: expect.objectContaining({
+            startLineNumber: 2,
+            startColumn: 23,
+            endLineNumber: 2,
+            endColumn: 33
+          }),
+          options: {
+            inlineClassName: 'problems-decoration problem-source-code'
+          }
+        },
+        {
+          range: expect.objectContaining({
+            startLineNumber: 2,
+            startColumn: 34,
+            endLineNumber: 2,
+            endColumn: 47
+          }),
+          options: {
+            inlineClassName: 'problems-decoration problem-position'
+          }
+        },
+        {
+          range: expect.objectContaining({
+            startLineNumber: 3,
+            startColumn: 1,
+            endLineNumber: 3,
+            endColumn: 1
+          }),
+          options: {
+            isWholeLine: true,
+            className: 'problems-decoration problems-line'
+          }
+        },
+        {
+          range: expect.objectContaining({
+            startLineNumber: 3,
+            startColumn: 3,
+            endLineNumber: 3,
             endColumn: 10
           }),
           options: {
@@ -315,36 +405,42 @@ file2.ts /test/path/file2.ts 1
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 2,
+            startLineNumber: 3,
             startColumn: 11,
-            endLineNumber: 2,
+            endLineNumber: 3,
             endColumn: 26
           }),
-          options: { inlineClassName: 'problems-decoration problem-message' }
+          options: {
+            inlineClassName: 'problems-decoration problem-message'
+          }
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 2,
+            startLineNumber: 3,
             startColumn: 27,
-            endLineNumber: 2,
+            endLineNumber: 3,
             endColumn: 37
           }),
-          options: { inlineClassName: 'problems-decoration problem-source-code' }
+          options: {
+            inlineClassName: 'problems-decoration problem-source-code'
+          }
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 2,
+            startLineNumber: 3,
             startColumn: 38,
-            endLineNumber: 2,
+            endLineNumber: 3,
             endColumn: 51
           }),
-          options: { inlineClassName: 'problems-decoration problem-position' }
+          options: {
+            inlineClassName: 'problems-decoration problem-position'
+          }
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 3,
+            startLineNumber: 4,
             startColumn: 1,
-            endLineNumber: 3,
+            endLineNumber: 4,
             endColumn: 1
           }),
           options: {
@@ -354,9 +450,9 @@ file2.ts /test/path/file2.ts 1
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 3,
+            startLineNumber: 4,
             startColumn: 3,
-            endLineNumber: 3,
+            endLineNumber: 4,
             endColumn: 7
           }),
           options: {
@@ -366,36 +462,42 @@ file2.ts /test/path/file2.ts 1
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 3,
+            startLineNumber: 4,
             startColumn: 8,
-            endLineNumber: 3,
+            endLineNumber: 4,
             endColumn: 20
           }),
-          options: { inlineClassName: 'problems-decoration problem-message' }
+          options: {
+            inlineClassName: 'problems-decoration problem-message'
+          }
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 3,
+            startLineNumber: 4,
             startColumn: 21,
-            endLineNumber: 3,
+            endLineNumber: 4,
             endColumn: 31
           }),
-          options: { inlineClassName: 'problems-decoration problem-source-code' }
+          options: {
+            inlineClassName: 'problems-decoration problem-source-code'
+          }
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 3,
+            startLineNumber: 4,
             startColumn: 32,
-            endLineNumber: 3,
+            endLineNumber: 4,
             endColumn: 46
           }),
-          options: { inlineClassName: 'problems-decoration problem-position' }
+          options: {
+            inlineClassName: 'problems-decoration problem-position'
+          }
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 4,
+            startLineNumber: 5,
             startColumn: 1,
-            endLineNumber: 4,
+            endLineNumber: 5,
             endColumn: 1
           }),
           options: {
@@ -405,36 +507,42 @@ file2.ts /test/path/file2.ts 1
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 4,
+            startLineNumber: 5,
             startColumn: 1,
-            endLineNumber: 4,
+            endLineNumber: 5,
             endColumn: 9
           }),
-          options: { inlineClassName: 'problems-decoration problem-file' }
-        },
-        {
-          range: expect.objectContaining({
-            startLineNumber: 4,
-            startColumn: 10,
-            endLineNumber: 4,
-            endColumn: 29
-          }),
-          options: { inlineClassName: 'problems-decoration problem-path' }
-        },
-        {
-          range: expect.objectContaining({
-            startLineNumber: 4,
-            startColumn: 30,
-            endLineNumber: 4,
-            endColumn: 31
-          }),
-          options: { inlineClassName: 'problems-decoration problem-count' }
+          options: {
+            inlineClassName: 'problems-decoration problem-file'
+          }
         },
         {
           range: expect.objectContaining({
             startLineNumber: 5,
-            startColumn: 1,
+            startColumn: 10,
             endLineNumber: 5,
+            endColumn: 29
+          }),
+          options: {
+            inlineClassName: 'problems-decoration problem-path'
+          }
+        },
+        {
+          range: expect.objectContaining({
+            startLineNumber: 5,
+            startColumn: 30,
+            endLineNumber: 5,
+            endColumn: 31
+          }),
+          options: {
+            inlineClassName: 'problems-decoration problem-count'
+          }
+        },
+        {
+          range: expect.objectContaining({
+            startLineNumber: 6,
+            startColumn: 1,
+            endLineNumber: 6,
             endColumn: 1
           }),
           options: {
@@ -444,9 +552,9 @@ file2.ts /test/path/file2.ts 1
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 5,
+            startLineNumber: 6,
             startColumn: 3,
-            endLineNumber: 5,
+            endLineNumber: 6,
             endColumn: 7
           }),
           options: {
@@ -456,30 +564,36 @@ file2.ts /test/path/file2.ts 1
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 5,
+            startLineNumber: 6,
             startColumn: 8,
-            endLineNumber: 5,
+            endLineNumber: 6,
             endColumn: 20
           }),
-          options: { inlineClassName: 'problems-decoration problem-message' }
+          options: {
+            inlineClassName: 'problems-decoration problem-message'
+          }
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 5,
+            startLineNumber: 6,
             startColumn: 21,
-            endLineNumber: 5,
+            endLineNumber: 6,
             endColumn: 31
           }),
-          options: { inlineClassName: 'problems-decoration problem-source-code' }
+          options: {
+            inlineClassName: 'problems-decoration problem-source-code'
+          }
         },
         {
           range: expect.objectContaining({
-            startLineNumber: 5,
+            startLineNumber: 6,
             startColumn: 32,
-            endLineNumber: 5,
+            endLineNumber: 6,
             endColumn: 45
           }),
-          options: { inlineClassName: 'problems-decoration problem-position' }
+          options: {
+            inlineClassName: 'problems-decoration problem-position'
+          }
         }
       ]);
     });
@@ -488,21 +602,21 @@ file2.ts /test/path/file2.ts 1
       const problems = [
         createMockProblem({
           resource: 'file:///test/path/file1.ts',
-          severity: 1,
+          severity: ProblemSeverity.Hint,
           message: 'Hint message',
           startLineNumber: 10,
           startColumn: 5
         }),
         createMockProblem({
           resource: 'file:///test/path/file2.ts',
-          severity: 2,
+          severity: ProblemSeverity.Info,
           message: 'Info message',
           startLineNumber: 1,
           startColumn: 1
         }),
         createMockProblem({
           resource: 'file:///test/path/file1.ts',
-          severity: 4,
+          severity: ProblemSeverity.Warning,
           message: 'Warning message',
           startLineNumber: 5,
           startColumn: 3
