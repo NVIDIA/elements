@@ -1,12 +1,12 @@
-import { MetadataService, AVInfraService } from '@internals/metadata';
+import { MetadataService, UsageService } from '@internals/metadata';
 import { compareVersions } from 'compare-versions';
 import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
 
 const metrics = await MetadataService.getMetadata();
-const metricsAVInfra = await AVInfraService.getMetadata();
+const metricsUsage = await UsageService.getMetadata();
 
 export const data = {
-  title: 'AV Infra',
+  title: 'Usage Metrics',
   layout: 'docs.11ty.js'
 };
 
@@ -26,35 +26,50 @@ export function render() {
       <nve-tabs-item><a href="docs/metrics/">Metrics</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
-      <nve-tabs-item selected><a href="docs/metrics/av-infra/">AV Infra</a></nve-tabs-item>
+      <nve-tabs-item selected><a href="docs/metrics/usage-metrics/">Usage Metrics</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>
     <nve-divider></nve-divider>
     <div nve-layout="row gap:md align:vertical-center">
       <h3 nve-text="body bold">Summary:</h3>
       <section nve-layout="row gap:xs align:center">
-        <span nve-text="body sm muted">Total AV Infra Instances</span>
-        <nve-badge status="queued">${metricsAVInfra.projects.reduce((p, n) => n.instanceTotal + p, 0)}</nve-badge>
+        <span nve-text="body sm muted">Total Projects</span>
+        <nve-badge status="queued">${metricsUsage.projects.length}</nve-badge>
+      </section>
+      <section nve-layout="row gap:xs align:center">
+        <span nve-text="body sm muted">Total Element Template References</span>
+        <nve-badge status="accent">${metricsUsage.projects.reduce((p, n) => n.elementReferenceTotal + p, 0)}</nve-badge>
+      </section>
+      <section nve-layout="row gap:xs align:center">
+        <span nve-text="body sm muted">Total Import Source References</span>
+        <nve-badge status="accent">${metricsUsage.projects.reduce((p, n) => n.importReferenceTotal + p, 0)}</nve-badge>
       </section>
     </div>
-    <nve-tooltip id="instance-total-tooltip" style="--width: 300px">
-      Number of instances of elements directly in MagLev source. Note this does not account for runtime instances created from reusable abstractions.
-    </nve-tooltip>
     <nve-grid style="--scroll-height: calc(100vh - 330px)">
       <nve-grid-header>
         <nve-grid-column name="Project" width="300px">Project</nve-grid-column>
-        <nve-grid-column name="Version" width="300px">Version</nve-grid-column>
-        <nve-grid-column name="Instances" width="300px" popoverTarget="instance-total-tooltip">Instances</nve-grid-column>
+        <nve-grid-column name="Version" width="150px">Version</nve-grid-column>
+        <nve-grid-column name="Repo" width="150px">Repo</nve-grid-column>
+        <nve-grid-column name="Element References" width="180px">Element References</nve-grid-column>
+        <nve-grid-column name="Import References" width="180px">Import References</nve-grid-column>
         <nve-grid-column name="Source" width="">Source</nve-grid-column>
       </nve-grid-header>
-      ${metricsAVInfra.projects
-        .sort((a, b) => compareVersions(a.elementsVersion, b.elementsVersion))
+      ${metricsUsage.projects
+        .sort((a, b) => {
+          if (a.elementsVersion.includes('.') && b.elementsVersion.includes('.')) {
+            return compareVersions(a.elementsVersion, b.elementsVersion);
+          }
+          return -1;
+        })
+        .sort((a, b) => (a.url?.includes('git-av.nvidia.com') ? 1 : -1))
         .reverse()
         .map(
           project => /* html */ `<nve-grid-row>
-        <nve-grid-cell>${project.name ?? 'unknown'}</nve-grid-cell>
+        <nve-grid-cell><a href="${project.url}" target="_blank">${project.name ?? 'unknown'}</a></nve-grid-cell>
         <nve-grid-cell>${getVersionBadge(project.elementsVersion)}</nve-grid-cell>
-        <nve-grid-cell>${project.instanceTotal}</nve-grid-cell>
+        <nve-grid-cell>${project.url.includes('git-av.nvidia.com') ? 'AV Infra' : 'Gitlab'}</nve-grid-cell>
+        <nve-grid-cell>${project.elementReferenceTotal !== 0 ? project.elementReferenceTotal : 'unknown'}</nve-grid-cell>
+        <nve-grid-cell>${project.importReferenceTotal !== 0 ? project.importReferenceTotal : 'unknown'}</nve-grid-cell>
         <nve-grid-cell><code nve-text="code">${project.path}</code></nve-grid-cell>
       </nve-grid-row>`
         )
@@ -82,6 +97,10 @@ function getVersionBadge(value) {
   const projectMinorVersion = parseFloat(`${value.split('.')[1]}`);
 
   let status = 'success';
+
+  if (value === 'catalog:' || value === 'latest') {
+    status = 'queued';
+  }
 
   if (getVersionNum(value) < 1.0) {
     status = 'warning';
