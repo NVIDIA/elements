@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.45.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.45.0...@nvidia-elements/core-v1.45.1) (2025-10-24)
+
+
+### Bug Fixes
+
+* **elements:** form controls muted prominence ([384b525](https://github.com/NVIDIA/elements/commit/384b5258b2a30663b9db4d6a6d1619b42ae16b15)), closes [#161](https://github.com/NVIDIA/elements/issues/161) [#159](https://github.com/NVIDIA/elements/issues/159)
+
 ## [@nvidia-elements/core-v1.45.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.44.1...@nvidia-elements/core-v1.45.0) (2025-10-23)
 
 
