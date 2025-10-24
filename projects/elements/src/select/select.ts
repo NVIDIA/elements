@@ -30,6 +30,7 @@ import styles from './select.css?inline';
  * @cssprop --border-radius
  * @cssprop --border
  * @cssprop --scroll-height
+ * @csspart tag
  * @storybook https://NVIDIA.github.io/elements/docs/elements/select/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-24&t=clRGqnKDRGNhR0Yu-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
@@ -110,7 +111,7 @@ export class Select extends Control {
         .filter(o => o.selected && o !== this.#placeholderOption)
         .map(
           o => html`
-      <nve-tag readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o, false)}>${o.textContent}</nve-tag>`
+      <nve-tag part="tag" readonly color="gray-slate" closable .value=${o.value} @click=${() => this.#selectValue(o, false)}>${o.textContent}</nve-tag>`
         )}
     </div>`
       : nothing;
