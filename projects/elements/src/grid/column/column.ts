@@ -1,13 +1,7 @@
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import {
-  useStyles,
-  attachInternals,
-  appendRootNodeStyle,
-  getAttributeChanges,
-  tagSelector
-} from '@nvidia-elements/core/internal';
+import { useStyles, attachInternals, appendRootNodeStyle, tagSelector } from '@nvidia-elements/core/internal';
 import type { Grid } from '@nvidia-elements/core/grid';
 import styles from './column.css?inline';
 
@@ -51,6 +45,11 @@ export class GridColumn extends LitElement {
    */
   @property({ type: String, reflect: true, attribute: 'column-align' }) columnAlign: 'start' | 'center' | 'end';
 
+  /**
+   * @private
+   */
+  @property({ type: String, reflect: true, attribute: 'aria-colindex' }) ariaColIndex: string; // eslint-disable-line local/reserved-property-names
+
   static styles = useStyles([styles]);
 
   static readonly metadata = {
@@ -65,8 +64,6 @@ export class GridColumn extends LitElement {
     return this.parentElement.parentElement as Grid;
   }
 
-  #observers: (MutationObserver | ResizeObserver)[] = [];
-
   render() {
     return html`
       <div internal-host focusable="active">
@@ -80,12 +77,6 @@ export class GridColumn extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'columnheader';
-    this.#observers.push(
-      getAttributeChanges(this, 'aria-colindex', () => {
-        this.#computeColumnPositions();
-        this.#computeColumnAlignment();
-      })
-    );
     this.addEventListener('sort', (e: CustomEvent) => (this.ariaSort = e.detail.next));
   }
 
@@ -98,6 +89,11 @@ export class GridColumn extends LitElement {
 
     if (props.get('position') !== this.position) {
       this.#computeColumnPositions();
+    }
+
+    if (props.get('ariaColIndex') !== this.ariaColIndex) {
+      this.#computeColumnPositions();
+      this.#computeColumnAlignment();
     }
 
     if (props.get('width') !== this.width) {

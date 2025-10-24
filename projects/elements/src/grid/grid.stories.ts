@@ -645,22 +645,20 @@ export const ColumnDynamicFixed = {
   const grid = document.querySelector('#column-dynamic-fixed-grid');
   const button = grid.querySelector('nve-button');
   button.addEventListener('click', () => {
-    const columns = grid.querySelectorAll('nve-grid-column');
-    columns.filter((_ , i) => i !== 0).forEach(column => {
-      column.position = '';
-    });
+    const columns = Array.from(grid.querySelectorAll('nve-grid-column'));
+    columns.filter((_ , i) => i !== 0).forEach(column => column.position = null);
 
     // add new column
     const newColumn = document.createElement('nve-grid-column');
     newColumn.position = 'fixed';
     newColumn.width = '200px';
-    newColumn.textContent = 'column ' + columns.length + 1;
+    newColumn.textContent = 'column ' + columns.length;
     grid.querySelector('nve-grid-header').appendChild(newColumn);
 
     // add new cell to each row to the end
     grid.querySelectorAll('nve-grid-row').forEach((row, i) => {
       const cell = document.createElement('nve-grid-cell');
-      cell.textContent = 'cell ' + i + '-' + columns.length + 1;
+      cell.textContent = 'cell ' + i + '-' + columns.length;
       row.appendChild(cell);
     });
   });

@@ -157,4 +157,44 @@ describe(GridColumn.metadata.tag, () => {
     expect(sheets[sheets.length - 1].cssRules[0]).toBe(undefined);
     expect(sheets[sheets.length - 1].cssRules[1]).toBe(undefined);
   });
+
+  it('should reflect ariaColIndex property to attribute', async () => {
+    columns[0].ariaColIndex = '5';
+    await elementIsStable(columns[0]);
+    expect(columns[0].getAttribute('aria-colindex')).toBe('5');
+  });
+
+  it('should update column positions when ariaColIndex changes', async () => {
+    columns[0].position = 'fixed';
+    await elementIsStable(columns[0]);
+    await elementIsStable(grid);
+    let sheets = (grid.getRootNode() as Document).adoptedStyleSheets;
+
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('nth-child(1)')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('position: sticky')).toBe(true);
+
+    columns[0].ariaColIndex = '3';
+    await elementIsStable(columns[0]);
+    await elementIsStable(grid);
+    sheets = (grid.getRootNode() as Document).adoptedStyleSheets;
+
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('nth-child(3)')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('position: sticky')).toBe(true);
+  });
+
+  it('should update column alignment when ariaColIndex changes', async () => {
+    columns[0].columnAlign = 'center';
+    await elementIsStable(columns[0]);
+    let sheets = (grid.getRootNode() as Document).adoptedStyleSheets;
+
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('nth-child(1)')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('--justify-content: center')).toBe(true);
+
+    columns[0].ariaColIndex = '2';
+    await elementIsStable(columns[0]);
+    sheets = (grid.getRootNode() as Document).adoptedStyleSheets;
+
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('nth-child(2)')).toBe(true);
+    expect(sheets[sheets.length - 1].cssRules[0].cssText.includes('--justify-content: center')).toBe(true);
+  });
 });
