@@ -9,6 +9,7 @@
     "ci:all": "wireit",
     "build": "wireit",
     "build:tests": "wireit",
+    "build:examples": "wireit",
     "build:metadata": "wireit",
     "build:av-infra": "wireit",
     "build:lighthouse": "wireit",
