@@ -1,7 +1,8 @@
 :host {
   --cursor: pointer;
   --border-radius: var(--nve-ref-border-radius-xxl);
-  --border: 0;
+  --border-width: var(--nve-ref-border-width-sm);
+  --border: var(--border-width) solid transparent;
   --background: var(--nve-sys-interaction-field-background);
   --width: var(--nve-ref-size-1000);
   --height: var(--nve-ref-size-500);
@@ -63,7 +64,7 @@
 }
 
 :host(:state(checked)) [input] slot::after {
-  transform: translate(calc(var(--width) / 2), 0);
+  transform: translate(calc(calc(var(--width) / 2) - var(--border-width)), 0);
 }
 
 :host(:state(checked):state(dirty)) [input] slot::after {
