@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.45.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.45.1...@nvidia-elements/core-v1.45.2) (2025-10-24)
+
+
+### Bug Fixes
+
+* **elements:** datagrid fixed col resize ([c209acb](https://github.com/NVIDIA/elements/commit/c209acbe698c460fad59e8c769a4db785e52f82b)), closes [#166](https://github.com/NVIDIA/elements/issues/166)
+
 ## [@nvidia-elements/core-v1.45.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.45.0...@nvidia-elements/core-v1.45.1) (2025-10-24)
 
 
