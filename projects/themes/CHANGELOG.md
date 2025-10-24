@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.8.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.8.0...@nvidia-elements/themes-v1.8.1) (2025-10-24)
+
+
+### Bug Fixes
+
+* **themes:** missing neutral mapping ([991cfb5](https://github.com/NVIDIA/elements/commit/991cfb5722fe169dab1f1bb7928700a840b10b57))
+
 ## [@nvidia-elements/themes-v1.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.7.0...@nvidia-elements/themes-v1.8.0) (2025-10-02)
 
 
