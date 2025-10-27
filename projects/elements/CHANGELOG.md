@@ -1,3 +1,12 @@
+## [@nvidia-elements/core-v1.46.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.45.2...@nvidia-elements/core-v1.46.0) (2025-10-27)
+
+
+### Features
+
+* **elements:** css part for popover arrows ([ccecf9b](https://github.com/NVIDIA/elements/commit/ccecf9b27cdc28638187c8c5022bf7b06e65111e)), closes [#163](https://github.com/NVIDIA/elements/issues/163) [#162](https://github.com/NVIDIA/elements/issues/162)
+* **elements:** enable --border css property for switch ([c28e4a7](https://github.com/NVIDIA/elements/commit/c28e4a7944b1eb6fcc952afbbb1a60c72a3773b9))
+* **elements:** enable css part for select tag ([fbbcfb2](https://github.com/NVIDIA/elements/commit/fbbcfb2dbf67bc6be155ab0e87543dce1677602b))
+
 ## [@nvidia-elements/core-v1.45.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.45.1...@nvidia-elements/core-v1.45.2) (2025-10-24)
 
 
