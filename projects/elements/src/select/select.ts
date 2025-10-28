@@ -27,9 +27,18 @@ import styles from './select.css?inline';
  * @cssprop --font-size
  * @cssprop --height
  * @cssprop --background
+ * @cssprop --color
  * @cssprop --border-radius
  * @cssprop --border
+ * @cssprop --border-bottom
+ * @cssprop --cursor
+ * @cssprop --font-weight
+ * @cssprop --text-align
  * @cssprop --scroll-height
+ * @cssprop --width
+ * @cssprop --control-width
+ * @cssprop --max-width
+ * @cssprop --min-width
  * @csspart tag
  * @storybook https://NVIDIA.github.io/elements/docs/elements/select/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-24&t=clRGqnKDRGNhR0Yu-0
