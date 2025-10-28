@@ -228,13 +228,13 @@ export class Combobox extends Control implements ContainerElement {
     const selected = Array.from(this.#select.selectedOptions).find((o: HTMLOptionElement) =>
       o.hasAttribute('selected')
     );
-    if (selected && !this.#select.multiple) {
+    if (selected && !this.#select.multiple && !this.input.defaultValue) {
       this.input.value = getDisplayValue(selected);
     }
   }
 
   #updateInputValue() {
-    if (!this.#select.multiple) {
+    if (!this.#select.multiple && !this.input.defaultValue) {
       this.input.value = getDisplayValue(
         Array.from(this.#select.selectedOptions).find(o => o.value === this.#select.value)
       );
