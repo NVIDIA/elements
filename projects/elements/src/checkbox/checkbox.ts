@@ -8,9 +8,13 @@ import styles from './checkbox.css?inline';
  * @description A checkbox is a control that enables users to choose between two distinct mutually exclusive options (checked or unchecked, on or off) through a single click or tap.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/checkbox
+ * @cssprop --cursor
  * @cssprop --width
  * @cssprop --height
- * @cssprop --cursor
+ * @cssprop --border-width
+ * @cssprop --border-radius
+ * @cssprop --border-color
+ * @cssprop --background
  * @cssprop --check-color
  * @storybook https://NVIDIA.github.io/elements/docs/elements/checkbox/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-15&t=CAAM7yEBvG18tRRa-0

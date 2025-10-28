@@ -24,13 +24,14 @@ import styles from './notification.css?inline';
  * @event close - Dispatched when the notification is closed.
  * @slot default content slot
  * @cssprop --border-radius
- * @cssprop --status-color
  * @cssprop --background
  * @cssprop --color
  * @cssprop --padding
  * @cssprop --box-shadow
  * @cssprop --min-width
  * @cssprop --width
+ * @cssprop --max-width
+ * @cssprop --border
  * @storybook https://NVIDIA.github.io/elements/docs/elements/notification/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/

@@ -12,6 +12,13 @@ import styles from './search.css?inline';
  * @description A search is a control that enables users to enter text to search.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/search
+ * @cssprop --padding
+ * @cssprop --font-size
+ * @cssprop --height
+ * @cssprop --background
+ * @cssprop --border-radius
+ * @cssprop --border
+ * @cssprop --cursor
  * @storybook https://NVIDIA.github.io/elements/docs/elements/search/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-22&t=clRGqnKDRGNhR0Yu-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/search
