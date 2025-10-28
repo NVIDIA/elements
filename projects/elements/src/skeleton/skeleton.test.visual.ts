@@ -22,34 +22,29 @@ function template(theme: '' | 'dark' = '') {
 
   <div nve-layout="column gap:md">
     <div nve-layout="column gap:xs align:stretch">
-      <h3>Default</h3>
       <nve-skeleton></nve-skeleton>
       <nve-skeleton style="width: 90%"></nve-skeleton>
       <nve-skeleton style="width: 80%"></nve-skeleton>
     </div>
 
     <div nve-layout="column gap:xs align:stretch">
-      <h3>Effects</h3>
       <nve-skeleton></nve-skeleton>
       <nve-skeleton effect="pulse"></nve-skeleton>
       <nve-skeleton effect="shimmer"></nve-skeleton>
     </div>
 
     <div nve-layout="column gap:xs align:stretch">
-      <h3>Shapes</h3>
       <nve-skeleton></nve-skeleton>
       <nve-skeleton shape="pill"></nve-skeleton>
       <nve-skeleton shape="round" style="width: 40px; height: 40px;"></nve-skeleton>
     </div>
 
     <div nve-layout="column gap:xs align:stretch">
-      <h3>Slotted Content</h3>
       <nve-skeleton></nve-skeleton>
-      <nve-skeleton effect="shimmer">Slotted content visible</nve-skeleton>
+      <nve-skeleton effect="shimmer">•︎•︎•︎•︎•︎•︎</nve-skeleton>
     </div>
 
     <div nve-layout="column gap:xs align:stretch">
-      <h3>Combined Variants</h3>
       <nve-skeleton effect="shimmer" shape="pill"></nve-skeleton>
       <nve-skeleton effect="pulse" shape="pill"></nve-skeleton>
       <nve-skeleton effect="shimmer" shape="round" style="width: 60px; height: 60px;"></nve-skeleton>
