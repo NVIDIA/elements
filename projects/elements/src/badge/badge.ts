@@ -24,14 +24,17 @@ import styles from './badge.css?inline';
  * @slot prefix-icon - slot for prefix icon
  * @slot suffix-icon - slot for suffix icon
  * @cssprop --background
+ * @cssprop --color
  * @cssprop --gap
  * @cssprop --font-size
- * @cssprop --status-color
+ * @cssprop --icon-color
  * @cssprop --padding
  * @cssprop --border
  * @cssprop --border-radius
  * @cssprop --font-weight
  * @cssprop --text-transform
+ * @cssprop --width
+ * @cssprop --height
  * @storybook https://NVIDIA.github.io/elements/docs/elements/badge/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=UOtcGeukBSZqsnnO-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img

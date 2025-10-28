@@ -24,6 +24,8 @@ import styles from './progressive-filter-chip.css?inline';
  * @entrypoint \@nvidia-elements/core/progressive-filter-chip
  * @slot - default slot for content
  * @event close - Dispatched when the filter chip is closed.
+ * @cssprop --gap
+ * @cssprop --border-radius
  * @cssprop --background
  * @storybook https://NVIDIA.github.io/elements/docs/elements/progressive-filter-chip/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=72%3A5357

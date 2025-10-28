@@ -28,6 +28,8 @@ import styles from './tooltip.css?inline';
  * @cssprop --box-shadow
  * @cssprop --font-size
  * @cssprop --arrow-transform
+ * @cssprop --width
+ * @cssprop --height
  * @csspart arrow
  * @storybook https://NVIDIA.github.io/elements/docs/elements/tooltip/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-29&t=clRGqnKDRGNhR0Yu-0

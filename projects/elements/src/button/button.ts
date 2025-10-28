@@ -10,19 +10,22 @@ import styles from './button.css?inline';
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/button
  * @slot - slot for button text content or icon, icon placement determined by whether `icon` is inserted before or after text content.
- * @cssprop --color
  * @cssprop --background
+ * @cssprop --color
  * @cssprop --padding
  * @cssprop --border
  * @cssprop --border-radius
  * @cssprop --font-weight
  * @cssprop --font-size
  * @cssprop --text-decoration
+ * @cssprop --text-align
  * @cssprop --cursor
  * @cssprop --gap
  * @cssprop --height
  * @cssprop --text-transform
  * @cssprop --line-height
+ * @cssprop --width
+ * @cssprop --min-width
  * @storybook https://NVIDIA.github.io/elements/docs/elements/button/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-6&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/

@@ -1,10 +1,14 @@
 :host {
   --gap: var(--nve-ref-space-xxs);
-  --breadcrumb-height: var(--nve-ref-size-500);
-  --item-text-size: var(--nve-ref-font-size-50);
-  --item-color: var(--nve-sys-text-muted-color);
-  --item-active-color: var(--nve-sys-text-emphasis-color);
-  --item-active-font-weight: var(--nve-ref-font-weight-semibold);
+  --height: var(--nve-ref-size-500);
+  --font-size: var(--nve-ref-font-size-50);
+  --color: var(--nve-sys-text-muted-color);
+}
+
+[internal-host] {
+  --_font-size: var(--item-text-size, var(--font-size));
+  --_color: var(--item-color, var(--color));
+  --_height: var(--breadcrumb-height, var(--height));
 }
 
 ol,
@@ -23,16 +27,16 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: var(--breadcrumb-height);
+  height: var(--_height);
 }
 
 ::slotted(nve-button),
 ::slotted(nve-button) {
   --border-radius: calc(var(--nve-ref-border-radius-xs) / 2);
-  --font-size: var(--item-text-size);
-  --color: var(--item-color);
+  --font-size: var(--_font-size);
+  --color: var(--_color);
   --padding: 0 var(--nve-ref-size-100);
-  --height: var(--breadcrumb-height);
+  --height: var(--_height);
   --font-weight: var(--nve-ref-font-weight-medium);
   --text-decoration: none !important;
   --_border-bottom-offset: -0.5;
@@ -44,29 +48,29 @@ li {
   --border-radius: calc(var(--nve-ref-border-radius-xs) / 2);
   --icon-width: var(--nve-ref-size-300);
   --icon-height: var(--nve-ref-size-300);
-  --height: var(--breadcrumb-height);
-  --width: var(--breadcrumb-height);
-  --font-size: var(--item-text-size);
-  --color: var(--item-color);
+  --height: var(--_height);
+  --width: var(--_height);
+  --font-size: var(--_font-size);
+  --color: var(--_color);
 }
 
 nve-icon[separator] {
   --height: var(--nve-ref-size-200);
   --width: var(--nve-ref-size-200);
-  --color: var(--item-color);
+  --color: var(--_color);
 }
 
 ::slotted(span) {
-  font-size: var(--item-text-size);
-  color: var(--item-color);
+  font-size: var(--_font-size);
+  color: var(--_color);
   display: block;
 }
 
 ::slotted(*:last-child) {
-  color: var(--item-active-color);
-  font-weight: var(--item-active-font-weight);
-  --font-weight: var(--item-active-font-weight);
-  --color: var(--item-active-color);
+  color: var(--item-active-color, var(--nve-sys-text-emphasis-color));
+  font-weight: var(--item-active-font-weight, var(--nve-ref-font-weight-semibold));
+  --font-weight: var(--item-active-font-weight, var(--nve-ref-font-weight-semibold));
+  --color: var(--item-active-color, var(--nve-sys-text-emphasis-color));
 }
 
 [hidden-slot] {
