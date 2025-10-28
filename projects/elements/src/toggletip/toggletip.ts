@@ -32,6 +32,9 @@ import globalStyles from './toggletip.global.css?inline';
  * @cssprop --color
  * @cssprop --padding
  * @cssprop --box-shadow
+ * @cssprop --width
+ * @cssprop --min-width
+ * @cssprop --gap
  * @storybook https://NVIDIA.github.io/elements/docs/elements/toggletip/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
