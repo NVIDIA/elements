@@ -26,7 +26,7 @@ describe('lighthouse report', () => {
   });
 
   test('dark.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['dark.css'].kb).toBeLessThan(5);
+    expect(report.payload.css.requests['dark.css'].kb).toBeLessThan(4.5);
   });
 
   test('high-contrast.css should remain within compressed bundle limits', async () => {
