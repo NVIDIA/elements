@@ -300,6 +300,78 @@ function jsxTypesPlugin() {
   });
 }
 
+function cssPropsPlugin() {
+  const standardCSSProps = new Set([
+    'color',
+    'background',
+    'padding',
+    'border',
+    'border-bottom',
+    'border-color',
+    'border-radius',
+    'border-top',
+    'border-left',
+    'border-right',
+    'border-width',
+    'font-family',
+    'font-size',
+    'font-weight',
+    'line-height',
+    'overflow',
+    'justify-content',
+    'align-items',
+    'transition',
+    'white-space',
+    'animation-duration',
+    'cursor',
+    'gap',
+    'text-wrap',
+    'text-align',
+    'text-transform',
+    'line-height',
+    'text-decoration',
+    'width',
+    'height',
+    'min-width',
+    'max-width',
+    'min-height',
+    'max-height',
+    'accent-color',
+    'animation-duration',
+    'box-shadow',
+    'opacity',
+    'top',
+    'bottom',
+    'left',
+    'right'
+  ]);
+
+  return {
+    name: 'cssprops',
+    packageLinkPhase({ customElementsManifest }) {
+      customElementsManifest.modules
+        ?.flatMap(module => module.declarations)
+        ?.flatMap(declaration => declaration.cssProperties ?? [])
+        ?.forEach(cssProperty => {
+          cssProperty.description = cssProperty.description ?? '';
+          const name = cssProperty.name
+            .replace('--label-', '')
+            .replace('--control-', '')
+            .replace('--icon-', '')
+            .replace('--track-', '')
+            .replace('--thumb-', '')
+            .replace('--anchor-', '')
+            .replace('--arrow-', '')
+            .replace('--', '');
+          if (standardCSSProps.has(name)) {
+            cssProperty.description =
+              `${cssProperty.description} [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/${name})`.trim();
+          }
+        });
+    }
+  };
+}
+
 function rewriteExportedStringLiteralTypeAliasesPlugin() {
   // Leverage the TypeScript compiler to evaluate exported string literal (union) types to their compiled type values.
   // Note: https://ts-ast-viewer.com/ is helpful for understanding the TypeScript AST and type checker return values.
@@ -580,7 +652,8 @@ export default {
     publicPropertiesPlugin(),
     superClassMetadataPlugin(),
     deprecatedPlugin(),
-    jsxTypesPlugin()
+    jsxTypesPlugin(),
+    cssPropsPlugin()
   ],
   overrideModuleCreation: ({ ts, globs }) => {
     const configFile = ts.findConfigFile(process.cwd(), ts.sys.fileExists, resolve('tsconfig.json'));
