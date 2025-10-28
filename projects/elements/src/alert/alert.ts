@@ -30,12 +30,14 @@ import styles from './alert.css?inline';
  * @slot - Default content placed inside of the alert.
  * @cssprop --gap
  * @cssprop --font-size
+ * @cssprop --color
  * @cssprop --icon-color
  * @cssprop --icon-size
  * @cssprop --font-weight
  * @cssprop --justify-content
  * @cssprop --align-items
  * @cssprop --min-height
+ * @cssprop --text-transform
  * @storybook https://NVIDIA.github.io/elements/docs/elements/alert/
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=76-5326&t=CAAM7yEBvG18tRRa-0

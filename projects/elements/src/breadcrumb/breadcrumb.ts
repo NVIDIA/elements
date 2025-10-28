@@ -18,11 +18,15 @@ import type { Button } from '@nvidia-elements/core/button';
  * @description Breadcrumb is a component that can help users establish their location while navigating a website with complex URLs and navigation paths.
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/breadcrumb
- * @cssprop --breadcrumb-height
- * @cssprop --item-text-size
- * @cssprop --item-color
- * @cssprop --item-active-color
- * @cssprop --item-active-font-weight
+ * @cssprop --gap
+ * @cssprop --height
+ * @cssprop --font-size
+ * @cssprop --color
+ * @cssprop --breadcrumb-height - deprecated
+ * @cssprop --item-text-size - deprecated
+ * @cssprop --item-color - deprecated
+ * @cssprop --item-active-color - deprecated
+ * @cssprop --item-active-font-weight - deprecated
  * @slot - default slot for `nve-button` and anchor elements
  * @storybook https://NVIDIA.github.io/elements/docs/elements/breadcrumb/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=173%3A29384&t=iXgqa5cQO84PPz1R-1

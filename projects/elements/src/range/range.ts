@@ -9,13 +9,16 @@ import { html, nothing, isServer } from 'lit';
  * @description A range slider is a control that enables users to choose a value from a continuous range of values.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/range
+ * @cssprop --background
+ * @cssprop --control-height
+ * @cssprop --cursor
+ * @cssprop --track-width
  * @cssprop --track-height
  * @cssprop --track-border-radius
- * @cssprop --thumb-height
  * @cssprop --thumb-width
+ * @cssprop --thumb-height
  * @cssprop --thumb-background
  * @cssprop --thumb-border
- * @cssprop --background
  * @storybook https://NVIDIA.github.io/elements/docs/elements/range/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-25&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/slider/

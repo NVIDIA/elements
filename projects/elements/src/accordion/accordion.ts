@@ -29,6 +29,7 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
  * @slot title - (deprecated)
  * @slot subtitle - (deprecated)
  * @slot actions - (deprecated)
+ * @cssprop --cursor
  * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
@@ -106,9 +107,10 @@ export class AccordionContent extends LitElement {
  * @slot header - header element (Use `accordion-header` or custom content)
  * @slot content - content element (Use `accordion-content` or custom content)
  * @cssprop --background
- * @cssprop --border-radius
  * @cssprop --color
+ * @cssprop --border-radius
  * @cssprop --header-padding
+ * @cssprop --cursor
  * @cssprop --transition
  * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
@@ -226,6 +228,7 @@ export class Accordion extends LitElement implements ContainerElement {
  * @element nve-accordion-group
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
+ * @cssprop --padding
  * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
