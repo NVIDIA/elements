@@ -10,6 +10,19 @@ import styles from './date.css?inline';
  * @description A date picker is a control that enables users to choose a date value.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/date
+ * @cssprop --padding
+ * @cssprop --font-size
+ * @cssprop --height
+ * @cssprop --background
+ * @cssprop --color
+ * @cssprop --border-radius
+ * @cssprop --border
+ * @cssprop --border-bottom
+ * @cssprop --cursor
+ * @cssprop --font-weight
+ * @cssprop --width
+ * @cssprop --max-width
+ * @cssprop --min-width
  * @storybook https://NVIDIA.github.io/elements/docs/elements/date/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-38&t=CAAM7yEBvG18tRRa-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
