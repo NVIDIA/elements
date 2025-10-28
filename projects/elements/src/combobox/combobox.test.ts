@@ -291,6 +291,29 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     expect(input.value).toBe('option 1');
   });
 
+  it('should not overwrite input value if already set when initializing with selected option', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" value="default value" />
+        <select>
+          <option selected value="option 1"></option>
+          <option value="option 2"></option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    select = fixture.querySelector('select');
+    options = Array.from(fixture.querySelectorAll('option'));
+    await elementIsStable(element);
+
+    expect(options[0].selected).toBe(true);
+    expect(select.value).toBe('option 1');
+    expect(input.value).toBe('default value');
+  });
+
   it('should show a check icon when the option is selected', async () => {
     expect(options[0].selected).toBe(true);
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
