@@ -2141,7 +2141,7 @@
       },
       "emphasis": {
         "color": {
-          "value": "{ref.color.neutral.1100}",
+          "value": "{ref.color.neutral.1000}",
           "type": "color"
         }
       },
