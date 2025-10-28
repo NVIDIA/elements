@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.47.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.46.0...@nvidia-elements/core-v1.47.0) (2025-10-28)
+
+
+### Features
+
+* **elements-react:** add skeleton element ([1f9c5a9](https://github.com/NVIDIA/elements/commit/1f9c5a9a806b10a96c55fd812b48ab09ca30927e))
+* **elements:** add skeleton element ([016694f](https://github.com/NVIDIA/elements/commit/016694fab23ff17763f80094d8634012b8ed168f))
+
 ## [@nvidia-elements/core-v1.46.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.45.2...@nvidia-elements/core-v1.46.0) (2025-10-27)
 
 
