@@ -9,6 +9,16 @@ import globalStyles from './file.global.css?inline';
  * @description A file picker is a control that enables users to choose a file value.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/file
+ * @cssprop --background
+ * @cssprop --padding
+ * @cssprop --border-radius
+ * @cssprop --border
+ * @cssprop --font-weight
+ * @cssprop --font-size
+ * @cssprop --text-decoration
+ * @cssprop --cursor
+ * @cssprop --gap
+ * @cssprop --height
  * @storybook https://NVIDIA.github.io/elements/docs/elements/file/
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  */

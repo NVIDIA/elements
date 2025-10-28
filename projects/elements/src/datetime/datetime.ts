@@ -10,6 +10,19 @@ import styles from './datetime.css?inline';
  * @description A datetime picker is a control that enables users to choose a datetime value.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/datetime
+ * @cssprop --padding
+ * @cssprop --font-size
+ * @cssprop --height
+ * @cssprop --background
+ * @cssprop --color
+ * @cssprop --border-radius
+ * @cssprop --border
+ * @cssprop --border-bottom
+ * @cssprop --cursor
+ * @cssprop --font-weight
+ * @cssprop --width
+ * @cssprop --max-width
+ * @cssprop --min-width
  * @storybook https://NVIDIA.github.io/elements/docs/elements/datetime/
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
  * @themes false
