@@ -456,11 +456,7 @@ export function elementTable(tag, type = 'all') {
         <nve-grid-row role="row">
           <nve-grid-cell role="cell">${prop.name}</nve-grid-cell>
           <nve-grid-cell role="cell">
-            ${
-              !prop.name.includes('icon')
-                ? /* html */ `<a href=${`https://developer.mozilla.org/en-US/docs/Web/CSS/${prop.name.replace('--', '')}`} target="_blank" rel="none">MDN Documentation</a>`
-                : ''
-            }
+            ${md.render(prop.description ?? '')}
           </nve-grid-cell>
         </nve-grid-row>`
           )
