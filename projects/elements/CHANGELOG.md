@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.48.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.0...@nvidia-elements/core-v1.48.1) (2025-10-29)
+
+
+### Bug Fixes
+
+* **elements:** add missing cssprop api docs ([288f813](https://github.com/NVIDIA/elements/commit/288f813bdb76d7c8fa104209a97e7808da74db21))
+
 ## [@nvidia-elements/core-v1.48.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.47.1...@nvidia-elements/core-v1.48.0) (2025-10-29)
 
 
