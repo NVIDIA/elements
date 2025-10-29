@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.48.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.47.1...@nvidia-elements/core-v1.48.0) (2025-10-29)
+
+
+### Features
+
+* **elements:** add animation to nve-tabs active/selected indicator border ([9e19f14](https://github.com/NVIDIA/elements/commit/9e19f14b142c0871c59b63676653b8b65154e69f))
+
 ## [@nvidia-elements/core-v1.47.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.47.0...@nvidia-elements/core-v1.47.1) (2025-10-29)
 
 
