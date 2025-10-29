@@ -1,9 +1,8 @@
 // @ts-check
 
 import { join } from 'node:path';
-import { MetadataService } from '@nve-internals/metadata';
+import { MetadataService, TestsService, WireitService } from '@nve-internals/metadata';
 import { PlaygroundService } from '@nve-internals/tools/playground';
-import { TestsService } from '@nve-internals/metadata';
 import { ExamplesService } from '@nve-internals/tools/examples';
 import { camelToKebab } from './_11ty/utils/index.js';
 
@@ -17,6 +16,9 @@ const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.
 
 /** @type {import('@nve-internals/metadata').ProjectTestSummary} */
 const tests = await TestsService.getTests();
+
+/** @type {import('@nve-internals/metadata').ProjectTestSummary} */
+const wireit = await WireitService.getGraph();
 
 const stories = (await ExamplesService.getAll())
   .filter(s => !s.template?.includes('${'))
@@ -162,7 +164,8 @@ export const siteData = {
   stories,
   metadata,
   integrations,
-  tests
+  tests,
+  wireit
 };
 
 export default function siteDataFn() {
