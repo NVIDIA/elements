@@ -11,7 +11,7 @@
     "build:tests": "wireit",
     "build:examples": "wireit",
     "build:metadata": "wireit",
-    "build:av-infra": "wireit",
+    "build:usage": "wireit",
     "build:lighthouse": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
@@ -47,13 +47,6 @@
         "build",
         "publint",
         "test:coverage"
-      ]
-    },
-    "ci:all": {
-      "dependencies": [
-        "build",
-        "build:lighthouse",
-        "build:av-infra"
       ]
     },
     "publint": {
@@ -386,14 +379,14 @@
         "../../../:lighthouse"
       ]
     },
-    "build:av-infra": {
-      "command": "node --experimental-strip-types ./src/tasks/metadata.av-infra.ts",
+    "build:usage": {
+      "command": "node --experimental-strip-types ./src/tasks/usage.ts",
       "files": [
-        "src/tasks/metadata.av-infra.ts",
-        "src/tasks/metadata.av-infra.utils.ts"
+        "src/tasks/usage.ts",
+        "src/tasks/usage.utils.ts"
       ],
       "output": [
-        "static/av-infra.json"
+        "static/usage.json"
       ],
       "dependencies": [
         "../../elements:build",
