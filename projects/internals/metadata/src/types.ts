@@ -182,6 +182,7 @@ export interface MetadataCustomElementsManifestDeclaration {
     example: string;
   };
 }
+
 export interface TestSummary {
   numTotalTestSuites: number;
   numPassedTestSuites: number;
@@ -288,4 +289,24 @@ export interface ProjectTestReport {
 export interface ProjectTestSummary {
   created: string;
   projects: Record<string, ProjectTestReport>;
+}
+
+export interface WireitGraphNode {
+  id: string;
+  label: string;
+  packageName: string;
+  scriptName: string;
+  dependents: number;
+  dependencies: number;
+  category: string;
+}
+
+export interface WireitGraphLink {
+  source: string;
+  target: string;
+}
+
+export interface WireitGraph {
+  nodes: WireitGraphNode[];
+  links: WireitGraphLink[];
 }

@@ -201,7 +201,8 @@
   },
   "dependencies": {
     "chart.js": "4.5.1",
-    "lit": "catalog:"
+    "lit": "catalog:",
+    "3d-force-graph": "1.79.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "catalog:",
