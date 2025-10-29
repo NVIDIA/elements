@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.47.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.47.0...@nvidia-elements/core-v1.47.1) (2025-10-29)
+
+
+### Bug Fixes
+
+* **elements:** preserve initial default value ([37a5e59](https://github.com/NVIDIA/elements/commit/37a5e59d4925167fb766e11c9525756cadb94477))
+
 ## [@nvidia-elements/core-v1.47.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.46.0...@nvidia-elements/core-v1.47.0) (2025-10-28)
 
 
