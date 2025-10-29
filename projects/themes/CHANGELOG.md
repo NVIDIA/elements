@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.8.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.8.1...@nvidia-elements/themes-v1.8.2) (2025-10-29)
+
+
+### Bug Fixes
+
+* **themes:** optimize dark theme ([b4e2ad5](https://github.com/NVIDIA/elements/commit/b4e2ad57be8075b2b69555f6000ed899396c9832))
+
 ## [@nvidia-elements/themes-v1.8.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.8.0...@nvidia-elements/themes-v1.8.1) (2025-10-24)
 
 
