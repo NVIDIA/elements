@@ -13,6 +13,7 @@
     "build:metadata": "wireit",
     "build:usage": "wireit",
     "build:lighthouse": "wireit",
+    "build:wireit": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
     "test:coverage": "wireit",
@@ -76,7 +77,8 @@
         "../vite:ci",
         "build:metadata",
         "build:examples",
-        "build:tests"
+        "build:tests",
+        "build:wireit"
       ]
     },
     "build:metadata": {
@@ -392,6 +394,17 @@
         "../../elements:build",
         "build:metadata"
       ]
+    },
+    "build:wireit": {
+      "command": "node --experimental-strip-types ./src/tasks/wireit.ts",
+      "files": [
+        "src/tasks/wireit.ts",
+        "src/tasks/wireit.utils.ts"
+      ],
+      "output": [
+        "static/wireit.json"
+      ],
+      "dependencies": []
     },
     "lint": {
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
