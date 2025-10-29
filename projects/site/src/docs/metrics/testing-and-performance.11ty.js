@@ -33,16 +33,17 @@ export function render() {
     <nve-tabs style="height: 32px">
       <nve-tabs-item><a href="docs/metrics/">Metrics</a></nve-tabs-item>
       <nve-tabs-item selected><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/usage-metrics/">Usage Metrics</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/wireit/">Wireit Explorer</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>
     <nve-divider></nve-divider>
   </div>
-  <div nve-layout="grid gap:md span-items:6">
+  <div nve-layout="column gap:md">
     <section nve-layout="column gap:md">
       <div nve-layout="row gap:md align:vertical-center">
-        <h3 nve-text="body bold">Test Coverage:</h3>
+        <h3 nve-text="body bold">Coverage:</h3>
         <section nve-layout="row gap:xs align:center">
           <span nve-text="body sm muted">Statements</span>
           ${badgeCoverage(tests.projects['@nvidia-elements/core'].coverage.total.statements.pct, 'flat')}
@@ -60,6 +61,8 @@ export function render() {
           ${badgeCoverage(tests.projects['@nvidia-elements/core'].coverage.total.branches.pct, 'flat')}
         </section>
       </div>
+    </section>
+    <section nve-layout="grid gap:md span-items:6">
       <nve-grid style="--scroll-height: calc(100vh - 330px)">
         <nve-grid-header>
           <nve-grid-column width="350px">File</nve-grid-column>
@@ -84,35 +87,35 @@ export function render() {
           <p nve-text="body muted sm">Report Created on ${reportDate}</p>
         </nve-grid-footer>
       </nve-grid>
+      <nve-grid style="--scroll-height: calc(100vh - 330px)">
+        <nve-grid-header>
+          <nve-grid-column>Lighthouse Report</nve-grid-column>
+          <nve-grid-column>Performance</nve-grid-column>
+          <nve-grid-column>Accessibility</nve-grid-column>
+          <nve-grid-column>Best Practices</nve-grid-column>
+          <nve-grid-column>Bundle Size</nve-grid-column>
+        </nve-grid-header>
+        ${Object.values(tests.projects)
+          .flatMap(project => project.lighthouse.testResults)
+          .map(
+            report => /* html */ `<nve-grid-row>
+            <nve-grid-cell>${report.name}</nve-grid-cell>
+            <nve-grid-cell>${badgeLighthouse({ performance: report?.scores.performance }, 'flat')}</nve-grid-cell>
+            <nve-grid-cell>${badgeLighthouse({ accessibility: report.scores.accessibility }, 'flat')}</nve-grid-cell>
+            <nve-grid-cell>${badgeLighthouse({ bestPractices: report.scores.bestPractices }, 'flat')}</nve-grid-cell>
+            <nve-grid-cell>${badgeBundle(report?.payload.javascript.kb ?? 0, 'flat')}</nve-grid-cell>
+          </nve-grid-row>`
+          )
+          .join('')}
+        <nve-grid-footer>
+          <p nve-text="body muted sm">Report Created on ${reportDate}</p>
+          <a nve-text="link" href="https://developer.chrome.com/docs/lighthouse/overview/" style="margin-left: auto">Lighthouse</a>
+        </nve-grid-footer>
+      </nve-grid>
     </section>
-    <nve-grid style="margin-top: 44px; --scroll-height: calc(100vh - 330px)">
-      <nve-grid-header>
-        <nve-grid-column>Lighthouse Report</nve-grid-column>
-        <nve-grid-column>Performance</nve-grid-column>
-        <nve-grid-column>Accessibility</nve-grid-column>
-        <nve-grid-column>Best Practices</nve-grid-column>
-        <nve-grid-column>Bundle Size</nve-grid-column>
-      </nve-grid-header>
-      ${Object.values(tests.projects)
-        .flatMap(project => project.lighthouse.testResults)
-        .map(
-          report => /* html */ `<nve-grid-row>
-          <nve-grid-cell>${report.name}</nve-grid-cell>
-          <nve-grid-cell>${badgeLighthouse({ performance: report?.scores.performance }, 'flat')}</nve-grid-cell>
-          <nve-grid-cell>${badgeLighthouse({ accessibility: report.scores.accessibility }, 'flat')}</nve-grid-cell>
-          <nve-grid-cell>${badgeLighthouse({ bestPractices: report.scores.bestPractices }, 'flat')}</nve-grid-cell>
-          <nve-grid-cell>${badgeBundle(report?.payload.javascript.kb ?? 0, 'flat')}</nve-grid-cell>
-        </nve-grid-row>`
-        )
-        .join('')}
-      <nve-grid-footer>
-        <p nve-text="body muted sm">Report Created on ${reportDate}</p>
-        <a nve-text="link" href="https://developer.chrome.com/docs/lighthouse/overview/" style="margin-left: auto">Lighthouse</a>
-      </nve-grid-footer>
-    </nve-grid>
   </div>
 </div>
   `,
-    'md'
+    'html'
   );
 }

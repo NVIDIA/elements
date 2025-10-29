@@ -23,7 +23,8 @@ export default mergeConfig(libraryNodeTestConfig, {
         'src/tasks/metadata.av-infra.ts',
         'src/tasks/metadata.av-infra.utils.ts',
         'src/tasks/tests.ts',
-        'src/tasks/usage.utils.ts'
+        'src/tasks/usage.utils.ts',
+        'src/tasks/wireit.ts'
       ]
     }
   }
