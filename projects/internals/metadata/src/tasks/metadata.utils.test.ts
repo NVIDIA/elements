@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { getMetadata } from './metadata.utils.js';
-import type { MetadataSummary } from '../types.js';
+import type { MetadataSummary } from '../utils/reports.js';
 
 describe('Metadata', () => {
   let metadata: MetadataSummary;
