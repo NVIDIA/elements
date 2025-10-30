@@ -1,4 +1,4 @@
-import { MetadataService, type MetadataExample } from '@nve-internals/metadata';
+import { MetadataService, type Example } from '@nve-internals/metadata';
 import { service, tool } from '../internal/tools.js';
 import { getAvailableExamples, searchExamples } from './utils.js';
 
@@ -89,12 +89,12 @@ export class ExamplesService {
   }: {
     query: string;
     format?: 'markdown' | 'json';
-  }): Promise<MetadataExample[] | string> {
+  }): Promise<Example[] | string> {
     const examples = await MetadataService.getExamples();
     return searchExamples(query, format, examples);
   }
 
-  static async getAll(): Promise<MetadataExample[]> {
+  static async getAll(): Promise<Example[]> {
     return MetadataService.getExamples();
   }
 }
