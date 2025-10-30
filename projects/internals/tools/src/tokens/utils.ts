@@ -1,7 +1,7 @@
-import type { MetadataSummary, MetadataToken } from '@nve-internals/metadata';
+import type { MetadataSummary, Token } from '@nve-internals/metadata';
 
 export function getSemanticTokens(format: 'markdown' | 'json', metadata: MetadataSummary) {
-  const tokens: MetadataToken[] = metadata.projects['@nvidia-elements/themes'].tokens
+  const tokens: Token[] = metadata.projects['@nvidia-elements/themes'].tokens
     .filter(
       token =>
         !token.name.includes('nve-config-') &&

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { MetadataSummary } from '../types.js';
+import type { MetadataSummary } from '../utils/reports.js';
 import { elementMetadataToMarkdown } from './utils.js';
 
 describe('elementMetadataToMarkdown', () => {

@@ -11,7 +11,7 @@ export const data = {
 
 const metrics = await MetadataService.getMetadata();
 
-/** @type {import('@nve-internals/metadata').ProjectTestSummary} */
+/** @type {import('@nve-internals/metadata').ProjectsTestSummary} */
 const tests = await TestsService.getTests();
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
@@ -33,8 +33,9 @@ export function render() {
     <nve-tabs style="height: 32px">
       <nve-tabs-item><a href="docs/metrics/">Metrics</a></nve-tabs-item>
       <nve-tabs-item selected><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/usage-metrics/">Usage Metrics</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/usage-metrics/">Usage Metrics</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/usage-insights/">Usage Insights</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/wireit/">Wireit Explorer</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>

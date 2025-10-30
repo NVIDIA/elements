@@ -1,4 +1,4 @@
-import type { MetadataAttribute, MetadataCustomElementsManifestDeclaration } from '../types.js';
+import type { Attribute, Element } from '../types.js';
 
 export function getElementChangelog(name: string, changelog: string) {
   const changelogJSON = changelogMarkdownToJSON(changelog);
@@ -61,7 +61,7 @@ export function changelogMarkdownToJSON(changelog: string) {
     });
 }
 
-export function elementMetadataToMarkdown(manifest: MetadataCustomElementsManifestDeclaration) {
+export function elementMetadataToMarkdown(manifest: Element) {
   if (manifest.tagName) {
     const slots = manifest.slots?.filter(i => !i.description?.includes('deprecated')) ?? [];
     const attributes = manifest.attributes?.filter(i => !i.deprecated) ?? [];
@@ -148,7 +148,7 @@ ${manifest.cssProperties.map(i => `| ${i.name} | ${i.description ?? ''} |`).join
   }
 }
 
-export function attributeMetadataToMarkdown(attribute: MetadataAttribute) {
+export function attributeMetadataToMarkdown(attribute: Attribute) {
   return `
 ## ${attribute.name}
 

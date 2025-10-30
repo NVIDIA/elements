@@ -1,8 +1,4 @@
-import type {
-  MetadataAttribute,
-  MetadataCustomElementsManifestDeclaration,
-  MetadataSummary
-} from '@nve-internals/metadata';
+import type { Element, Attribute, MetadataSummary } from '@nve-internals/metadata';
 import { fuzzyMatch } from '../internal/search.js';
 import { removeNoiseWords } from '../internal/search.js';
 
@@ -42,7 +38,7 @@ export function searchAPIs(
   query: string,
   format: 'markdown' | 'json',
   metadata: MetadataSummary
-): { elements: MetadataCustomElementsManifestDeclaration[]; attributes: MetadataAttribute[] } | string {
+): { elements: Element[]; attributes: Attribute[] } | string {
   const q = removeNoiseWords(query.trim().toLowerCase());
 
   const elementMatches = new Set(searchTagNames(q, metadata));
