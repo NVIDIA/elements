@@ -1,4 +1,4 @@
-import type { MetadataAttribute, MetadataCustomElementsManifestDeclaration } from '@internals/metadata';
+import type { Attribute, Element } from '@internals/metadata';
 import { MetadataService } from '@internals/metadata';
 import {
   type ElementVersions,
@@ -104,7 +104,7 @@ export class ApiService {
   }: {
     query: string;
     format: 'markdown' | 'json';
-  }): Promise<{ elements: MetadataCustomElementsManifestDeclaration[]; attributes: MetadataAttribute[] } | string> {
+  }): Promise<{ elements: Element[]; attributes: Attribute[] } | string> {
     const metadata = await MetadataService.getMetadata();
     return searchAPIs(query, format, metadata);
   }

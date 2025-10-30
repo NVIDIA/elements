@@ -2,20 +2,20 @@ import { resolve } from 'node:path';
 import { readFileSync, existsSync } from 'node:fs';
 import { type InterfaceDeclaration, type JSDocStructure, type OptionalKind, Project, SyntaxKind } from 'ts-morph';
 import type {
-  MetadataCustomElementsManifest,
-  MetadataCustomElementsManifestDeclaration,
-  MetadataPackage,
-  MetadataProject,
-  MetadataType,
-  MetadataElement,
-  MetadataToken,
-  MetadataAttribute
+  CustomElementsManifest,
+  Element,
+  Package,
+  Project as MetadataProject,
+  ProjectTypes,
+  ProjectElement,
+  Token,
+  Attribute
 } from '../types.js';
 import { attributeMetadataToMarkdown, elementMetadataToMarkdown, getElementChangelog } from '../utils/utils.ts';
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
 
-function getPackageFile(basePath: string): MetadataPackage {
+function getPackageFile(basePath: string): Package {
   return JSON.parse(readFileSync(new URL(basePath + '/package.json', import.meta.url), 'utf8'));
 }
 
@@ -30,9 +30,7 @@ function getReadMe(basePath: string): string {
   return readFileSync(new URL(basePath + '/README.md', import.meta.url), 'utf8');
 }
 
-function getManifestDeclarations(
-  customElementsManifest: MetadataCustomElementsManifest
-): MetadataCustomElementsManifestDeclaration[] {
+function getManifestDeclarations(customElementsManifest: CustomElementsManifest): Element[] {
   return Array.from(
     new Set(
       customElementsManifest.modules.flatMap(module => {
@@ -43,16 +41,16 @@ function getManifestDeclarations(
   ).filter(d => d.tagName);
 }
 
-function getCustomElementsManifest(basePath: string): MetadataCustomElementsManifest {
+function getCustomElementsManifest(basePath: string): CustomElementsManifest {
   const customElementsManifestPath = new URL(basePath + '/dist/custom-elements.json', import.meta.url);
   return existsSync(customElementsManifestPath)
     ? JSON.parse(readFileSync(new URL(customElementsManifestPath, import.meta.url), 'utf8'))
     : null;
 }
 
-function getGlobalAttributes(basePath: string): MetadataAttribute[] {
+function getGlobalAttributes(basePath: string): Attribute[] {
   const htmlDataPath = new URL(basePath + '/dist/data.html.json', import.meta.url);
-  const globalAttributes: MetadataAttribute[] = existsSync(htmlDataPath)
+  const globalAttributes: Attribute[] = existsSync(htmlDataPath)
     ? (JSON.parse(readFileSync(new URL(htmlDataPath, import.meta.url), 'utf8'))?.globalAttributes ?? [])
     : [];
 
@@ -63,16 +61,16 @@ function getGlobalAttributes(basePath: string): MetadataAttribute[] {
   return globalAttributes;
 }
 
-function getElementMetadata(packageChangelog: string, customElementsManifest: MetadataCustomElementsManifest) {
+function getElementMetadata(packageChangelog: string, customElementsManifest: CustomElementsManifest) {
   const elementDeclarations = customElementsManifest ? getManifestDeclarations(customElementsManifest) : [];
 
   return elementDeclarations
     .map(d => d.tagName)
-    .reduce((elements: MetadataElement[], name) => {
+    .reduce((elements: ProjectElement[], name) => {
       const manifest = elementDeclarations.find(e => e.tagName === name);
       const markdown = manifest.metadata ? elementMetadataToMarkdown(manifest) : '';
       const changelog = getElementChangelog(name, packageChangelog);
-      const metadata: MetadataElement = {
+      const metadata: ProjectElement = {
         name,
         markdown,
         changelog,
@@ -84,7 +82,7 @@ function getElementMetadata(packageChangelog: string, customElementsManifest: Me
     .sort((a, b) => (a.name < b.name ? -1 : 1));
 }
 
-function getElementsStandardAPIProperties(): MetadataType[] {
+function getElementsStandardAPIProperties(): ProjectTypes[] {
   const project = new Project();
   const file = project.addSourceFileAtPath(BASE_ELEMENT_INTERFACE_PATH);
   const base = file
@@ -94,7 +92,7 @@ function getElementsStandardAPIProperties(): MetadataType[] {
     name: n.name,
     type: n.type,
     description: n.docs ? (n.docs[0] as OptionalKind<JSDocStructure>)?.description : ''
-  })) as MetadataType[];
+  })) as ProjectTypes[];
   return props ?? [];
 }
 
@@ -104,7 +102,7 @@ async function getProjectMetadata(basePath): Promise<MetadataProject> {
   const readme = getReadMe(basePath);
   const customElementsManifest = getCustomElementsManifest(basePath);
   const attributes = getGlobalAttributes(basePath);
-  let tokens: MetadataToken[] = [];
+  let tokens: Token[] = [];
 
   if (packageFile.name === '@nvidia-elements/themes') {
     const tokensJSON: { [key: string]: string } = JSON.parse(

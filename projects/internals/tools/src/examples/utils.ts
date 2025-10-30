@@ -1,7 +1,7 @@
-import { type MetadataExample } from '@internals/metadata';
+import { type Example } from '@internals/metadata';
 import { fuzzyMatch, removeNoiseWords } from '../internal/search.js';
 
-export function isValidExample(example: MetadataExample) {
+export function isValidExample(example: Example) {
   return (
     !example.deprecated &&
     !example.id.toLowerCase().includes('theme') &&
@@ -13,19 +13,19 @@ export function isValidExample(example: MetadataExample) {
   );
 }
 
-export function getAvailableExamples(format: 'markdown' | 'json', examples: Partial<MetadataExample>[]) {
+export function getAvailableExamples(format: 'markdown' | 'json', examples: Partial<Example>[]) {
   const result = examples
     .filter(isValidExample)
     .map(s => ({ id: s.id, summary: s.summary ? s.summary : s.description, element: s.element ?? '' }));
   return format === 'markdown' ? result.map(e => renderExampleHeaderMarkdown(e)).join('\n\n---\n\n') : result;
 }
 
-export async function searchExamples(query: string, format: 'markdown' | 'json', examples: MetadataExample[]) {
+export async function searchExamples(query: string, format: 'markdown' | 'json', examples: Example[]) {
   const result = await filterExamples(query, examples);
   return format === 'markdown' ? result.map(e => renderExampleMarkdown(e)).join('\n\n---\n\n') : result;
 }
 
-export async function filterExamples(query: string, examples: MetadataExample[]) {
+export async function filterExamples(query: string, examples: Example[]) {
   const q = removeNoiseWords(query);
 
   // Assign a relevancy score based on matches in description, element, and id for each word
@@ -65,11 +65,11 @@ export async function filterExamples(query: string, examples: MetadataExample[])
   return result;
 }
 
-export function renderExampleMarkdown(example: Partial<MetadataExample>) {
+export function renderExampleMarkdown(example: Partial<Example>) {
   return `${renderExampleHeaderMarkdown(example)}${example.template ? `\n\n` : ''}${example.template ? `\`\`\`html\n${example.template.trim()}\n\`\`\`` : ''}`;
 }
 
-export function renderExampleHeaderMarkdown(example: Partial<MetadataExample>) {
+export function renderExampleHeaderMarkdown(example: Partial<Example>) {
   const content = example.summary ? example.summary : example.description;
   const formattedContent = content ? `${wrapText(content)}` : '';
   return `## ${example.id}${example.element ? ` (${example.element}) ` : ''}${formattedContent ? '\n\n' : ''}${formattedContent}`;
