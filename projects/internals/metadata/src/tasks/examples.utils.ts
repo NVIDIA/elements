@@ -1,8 +1,8 @@
 import { globSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { MetadataExample } from '../types.js';
+import type { Example } from '../types.js';
 
-export function getExamples(): MetadataExample[] {
+export function getExamples(): Example[] {
   return [
     ...globSync(resolve('../../../projects/**/dist/**/*.stories.json')),
     ...globSync(resolve('../../../projects/**/dist/**/*.examples.json'))
