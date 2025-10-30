@@ -1,9 +1,9 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { generateTestSummary } from './tests.utils.js';
-import type { ProjectTestSummary } from '../types.js';
+import type { TestSummary } from '../types.js';
 
 describe('TestsUtils', () => {
-  let tests: ProjectTestSummary;
+  let tests: TestSummary;
 
   beforeAll(async () => {
     tests = await generateTestSummary();

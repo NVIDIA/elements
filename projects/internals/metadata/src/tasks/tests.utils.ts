@@ -1,8 +1,9 @@
-import type { ProjectTestReport, CoverageResult, ProjectTestSummary } from '../types.js';
 import { existsSync } from 'node:fs';
 import { readFileSync } from 'node:fs';
+import type { ProjectTestSummary, CoverageResult } from '../types.js';
+import type { ProjectsTestSummary } from '../utils/reports.js';
 
-export async function generateTestSummary(): Promise<ProjectTestSummary> {
+export async function generateTestSummary(): Promise<ProjectsTestSummary> {
   return {
     created: new Date().toISOString(),
     projects: {
@@ -32,14 +33,14 @@ export async function generateTestSummary(): Promise<ProjectTestSummary> {
   };
 }
 
-async function getTestReport(name: string, basePath: string): Promise<ProjectTestReport> {
+async function getTestReport(name: string, basePath: string): Promise<ProjectTestSummary> {
   const coveragePath = new URL(basePath + '/coverage/unit/coverage-summary.json', import.meta.url);
   const unitPath = new URL(basePath + '/coverage/unit/summary.json', import.meta.url);
   const axePath = new URL(basePath + '/coverage/axe/summary.json', import.meta.url);
   const visualPath = new URL(basePath + '/coverage/visual/summary.json', import.meta.url);
   const ssrPath = new URL(basePath + '/coverage/ssr/summary.json', import.meta.url);
   const lighthousePath = new URL('../../static/lighthouse.json', import.meta.url);
-  const report: ProjectTestReport = {
+  const report: ProjectTestSummary = {
     coverage: {
       total: {
         lines: { total: 0, covered: 0, skipped: 0, pct: 0 },

@@ -1,49 +1,42 @@
-export interface MetadataSummary {
-  created: string;
-  projects: {
-    '@nvidia-elements/core': MetadataProject;
-    '@nvidia-elements/core-react': MetadataProject;
-    '@nvidia-elements/styles': MetadataProject;
-    '@nvidia-elements/testing': MetadataProject;
-    '@nvidia-elements/themes': MetadataProject;
-    '@nvidia-elements/behaviors-alpine': MetadataProject;
-    '@nvidia-elements/brand': MetadataProject;
-    '@nvidia-elements/code': MetadataProject;
-    '@nvidia-elements/forms': MetadataProject;
-    '@nvidia-elements/markdown': MetadataProject;
-    '@nvidia-elements/playwright-screencast': MetadataProject;
-    '@nvidia-elements/monaco': MetadataProject;
-    '@internals/metadata': MetadataProject;
-    '@internals/patterns': MetadataProject;
-  };
-}
-
-export interface MetadataProject {
+/**
+ * @summary A project is a collection of metadata about a published package/project.
+ */
+export interface Project {
   name: string;
   version: string;
   description: string;
   readme: string;
   changelog: string;
-  types?: MetadataType[];
-  elements: MetadataElement[];
-  attributes: MetadataAttribute[];
-  tokens?: MetadataToken[];
+  types?: ProjectTypes[];
+  elements: ProjectElement[];
+  attributes: Attribute[];
+  tokens?: Token[];
 }
 
-export interface MetadataType {
+/**
+ * @summary A projects exported interface/types.
+ */
+export interface ProjectTypes {
   name: string;
   type: string;
   description: string;
 }
 
-export interface MetadataElement {
+/**
+ * @summary A project element is a collection of metadata about a custom element in a project.
+ */
+export interface ProjectElement {
   name: string;
   changelog?: string;
-  manifest?: MetadataCustomElementsManifestDeclaration;
+  manifest?: Element;
   markdown?: string;
 }
 
-export interface MetadataAttribute {
+/**
+ * @summary Elements in HTML have attributes; these are additional values that configure the elements or adjust their behavior in various ways to meet the criteria the users want.
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes
+ */
+export interface Attribute {
   name: string;
   description: string;
   example: string;
@@ -53,26 +46,40 @@ export interface MetadataAttribute {
   }[];
 }
 
-export interface MetadataToken {
+/**
+ * @summary A token is a named value that can be used in a CSS theme.
+ * @see https://www.designtokens.org/
+ */
+export interface Token {
   name: string;
   value: string;
   description: string;
 }
 
-export type MetadataExampleTag = 'priority' | 'performance' | 'pattern' | 'anti-pattern' | 'test-case';
+/**
+ * @summary Category that describes the example. Used for filtering and sorting as well as MCP search capabilities.
+ */
+export type ExampleTag = 'priority' | 'performance' | 'pattern' | 'anti-pattern' | 'test-case';
 
-export interface MetadataExample {
+/**
+ * @summary An example is a template that can be used to demonstrate an API, specific use case, or pattern.
+ */
+export interface Example {
   id: string;
   template: string;
   summary: string;
   description: string;
-  tags: MetadataExampleTag[];
+  tags: ExampleTag[];
   deprecated?: boolean;
   entrypoint?: string;
   element?: string;
 }
 
-export interface MetadataPackage {
+/**
+ * @summary A node/npm package.json file contains metadata about a package.
+ * @see https://docs.npmjs.com/cli/v11/configuring-npm/package-json
+ */
+export interface Package {
   name: string;
   version: string;
   description: string;
@@ -97,11 +104,15 @@ export interface MetadataPackage {
   };
 }
 
-export interface MetadataCustomElementsManifest {
+/**
+ * @summary A Custom Elements Manifest is a JSON file that describes the custom elements in a project. (custom-elements.json)
+ * @see https://github.com/webcomponents/custom-elements-manifest
+ */
+export interface CustomElementsManifest {
   modules: {
     kind: string;
     path: string;
-    declarations: MetadataCustomElementsManifestDeclaration[];
+    declarations: Element[];
     exports: {
       kind: string;
       name: string;
@@ -113,7 +124,11 @@ export interface MetadataCustomElementsManifest {
   }[];
 }
 
-export interface MetadataCustomElementsManifestDeclaration {
+/**
+ * @summary A Custom Elements Manifest declaration is a description of a custom element.
+ * @see https://github.com/webcomponents/custom-elements-manifest
+ */
+export interface Element {
   tagName: string;
   customElement: boolean;
   kind: string;
@@ -177,12 +192,46 @@ export interface MetadataCustomElementsManifestDeclaration {
     since: string;
     storybook: string;
     figma: string;
-    status: string;
-    behavior: string;
+    status: ElementStatus;
+    behavior: ElementBehavior;
     example: string;
   };
 }
 
+/**
+ * @summary Category that describes the stability of the element based on development progress.
+ */
+export type ElementStatus = 'unknown' | 'pre-release' | 'beta' | 'stable';
+
+/**
+ * @summary The behavior of an element is a category that describes how the element is used in the UI based on Web API specifications.
+ */
+export type ElementBehavior =
+  | 'button'
+  | 'popover'
+  | 'feedback'
+  | 'navigation'
+  | 'list'
+  | 'container'
+  | 'form'
+  | 'content';
+
+/**
+ * @summary Test summary of all test results for a project.
+ */
+export interface ProjectTestSummary {
+  coverage: CoverageSummary;
+  unit: TestSummary;
+  axe: TestSummary;
+  visual: TestSummary;
+  ssr: TestSummary;
+  lighthouse: LighthouseSummary;
+}
+
+/**
+ * @summary A test summary is a summary of the test results for a test suite/type in a project.
+ * @see https://vitest.dev/guide/coverage.html
+ */
 export interface TestSummary {
   numTotalTestSuites: number;
   numPassedTestSuites: number;
@@ -212,11 +261,19 @@ export interface TestSummary {
   }[];
 }
 
+/**
+ * @summary A coverage summary is a summary of the coverage results for a project.
+ * @see https://vitest.dev/guide/coverage.html
+ */
 export interface CoverageSummary {
   total: CoverageResult;
   testResults: ({ file: string } & CoverageResult)[];
 }
 
+/**
+ * @summary A coverage result is a result of the coverage test for a file in a project.
+ * @see https://vitest.dev/guide/coverage.html#custom-coverage-reporter
+ */
 export interface CoverageResult {
   lines: {
     total: number;
@@ -244,6 +301,10 @@ export interface CoverageResult {
   };
 }
 
+/**
+ * @summary A lighthouse summary is a summary of the lighthouse test results for a project.
+ * @see https://github.com/GoogleChrome/lighthouse
+ */
 export interface LighthouseSummary {
   testResults: {
     name: string;
@@ -277,18 +338,71 @@ export interface LighthouseSummary {
   }[];
 }
 
-export interface ProjectTestReport {
-  coverage: CoverageSummary;
-  unit: TestSummary;
-  axe: TestSummary;
-  visual: TestSummary;
-  ssr: TestSummary;
-  lighthouse: LighthouseSummary;
+/**
+ * @summary VSCode snippets are templates that make it easier to enter repeating code patterns, such as loops or conditional-statements. (data.snippets.json)
+ * @see https://code.visualstudio.com/docs/editing/userdefinedsnippets
+ */
+export interface VSCodeSnippet {
+  name: string;
+  srcFile: string;
+  prefix: string[];
+  type: string;
+  description: string;
+  body: string;
 }
 
-export interface ProjectTestSummary {
-  created: string;
-  projects: Record<string, ProjectTestReport>;
+/**
+ * @summary VS Code HTML custom data is a format for loading custom data in VS Code's HTML support. (data.html.json)
+ * @see https://github.com/microsoft/vscode-custom-data
+ */
+export interface VSCodeHTMLCustomDataFormat {
+  version: 1.1;
+  tags?: {
+    name: string;
+    description?:
+      | string
+      | {
+          name: string;
+          url: string;
+        };
+    attributes?: {
+      name: string;
+      description?:
+        | string
+        | {
+            name: string;
+            url: string;
+          };
+      valueSet?: string;
+      values?: {
+        name: string;
+        description?:
+          | string
+          | {
+              name: string;
+              url: string;
+            };
+        references?: {
+          kind: 'plaintext' | 'markdown';
+          value: string;
+        }[];
+      }[];
+      references?: {
+        kind: 'plaintext' | 'markdown';
+        value: string;
+      }[];
+    }[];
+    references?: {
+      kind: 'plaintext' | 'markdown';
+      value: string;
+    }[];
+    browsers?: string[];
+    baseline?: {
+      status?: 'high' | 'low' | 'false';
+      baseline_low_date?: string;
+      baseline_high_date?: string;
+    };
+  }[];
 }
 
 export interface WireitGraphNode {
