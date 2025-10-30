@@ -1,4 +1,5 @@
-import type { MetadataSummary, MetadataExample } from '../types.js';
+import type { MetadataSummary } from '../utils/reports.js';
+import type { Example } from '../types.js';
 
 export class MetadataService {
   static #metadata = null;
@@ -18,7 +19,7 @@ export class MetadataService {
     return MetadataService.#metadata;
   }
 
-  static async getExamples(): Promise<MetadataExample[]> {
+  static async getExamples(): Promise<Example[]> {
     if (!MetadataService.#examples) {
       try {
         MetadataService.#examples = (await import('../../static/examples.json', { with: { type: 'json' } })).default;
