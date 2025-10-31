@@ -125,7 +125,6 @@
     "test": {
       "command": "vitest run",
       "files": [
-        "dist/**/*.js",
         "src/**/*.test.ts",
         "tsconfig.json",
         "vitest.config.ts"
@@ -133,10 +132,7 @@
       "output": [],
       "dependencies": [
         "../vite:ci",
-        {
-          "script": "build",
-          "cascade": false
-        }
+        "build"
       ]
     },
     "test:watch": {

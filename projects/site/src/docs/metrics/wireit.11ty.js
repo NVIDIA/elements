@@ -1,11 +1,13 @@
-import { siteData } from '../../index.11tydata.js';
+// @ts-check
 
-const { wireit } = siteData;
+import { siteData } from '../../index.11tydata.js';
 
 export const data = {
   title: 'Wireit Explorer',
   layout: 'docs.11ty.js'
 };
+
+const { wireit } = siteData;
 
 export function render() {
   return this.renderTemplate(
@@ -45,7 +47,7 @@ export function render() {
   }
 </style>
 <div nve-layout="column gap:md align:horizontal-stretch" docs-full-width>
-  <div nve-layout="column gap:md pad-bottom:lg">
+  <div nve-layout="column gap:md pad-bottom:sm">
     <div nve-layout="row gap:md align:vertical-center">
       <h1 nve-text="heading lg">Wireit Explorer</h1>
     </div>
@@ -53,12 +55,12 @@ export function render() {
   </div>
   <div nve-layout="column gap:xs">
     <nve-tabs style="height: 32px">
-      <nve-tabs-item><a href="docs/metrics/">Metrics</a></nve-tabs-item>
+      <nve-tabs-item selected><a href="docs/metrics/">Metrics</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/api-status/">API Status</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/usage-metrics/">Usage Metrics</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/usage-insights/">Usage Insights</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/usage-metrics/">Usage &amp; Adoption</a></nve-tabs-item>
       <nve-tabs-item selected><a href="docs/metrics/wireit/">Wireit Explorer</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>
     <nve-divider></nve-divider>

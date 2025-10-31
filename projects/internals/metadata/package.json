@@ -6,14 +6,15 @@
   "scripts": {
     "dev": "node --experimental-strip-types ./src/metadata.ts",
     "ci": "wireit",
-    "ci:all": "wireit",
     "build": "wireit",
-    "build:tests": "wireit",
-    "build:examples": "wireit",
-    "build:metadata": "wireit",
-    "build:usage": "wireit",
-    "build:lighthouse": "wireit",
-    "build:wireit": "wireit",
+    "generate:tests": "wireit",
+    "generate:examples": "wireit",
+    "generate:metadata": "wireit",
+    "generate:usage": "wireit",
+    "generate:lighthouse": "wireit",
+    "generate:wireit": "wireit",
+    "generate:downloads": "wireit",
+    "generate:releases": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
     "test:coverage": "wireit",
@@ -75,13 +76,13 @@
       ],
       "dependencies": [
         "../vite:ci",
-        "build:metadata",
-        "build:examples",
-        "build:tests",
-        "build:wireit"
+        "generate:metadata",
+        "generate:examples",
+        "generate:tests",
+        "generate:wireit"
       ]
     },
-    "build:metadata": {
+    "generate:metadata": {
       "command": "node --experimental-strip-types ./src/tasks/metadata.ts",
       "files": [
         "./src/tasks/metadata.ts",
@@ -196,7 +197,7 @@
         }
       ]
     },
-    "build:tests": {
+    "generate:tests": {
       "command": "node --experimental-strip-types ./src/tasks/tests.ts",
       "files": [
         "./src/tasks/tests.ts",
@@ -294,8 +295,9 @@
         }
       ]
     },
-    "build:examples": {
+    "generate:examples": {
       "command": "node --experimental-strip-types ./src/tasks/examples.ts",
+      "clean": false,
       "files": [
         "./src/tasks/examples.ts",
         "./src/tasks/examples.utils.ts",
@@ -368,8 +370,9 @@
         }
       ]
     },
-    "build:lighthouse": {
+    "generate:lighthouse": {
       "command": "node --experimental-strip-types ./src/tasks/lighthouse.ts",
+      "clean": false,
       "files": [
         "src/tasks/lighthouse.ts",
         "src/tasks/lighthouse.utils.ts"
@@ -381,8 +384,9 @@
         "../../../:lighthouse"
       ]
     },
-    "build:usage": {
+    "generate:usage": {
       "command": "node --experimental-strip-types ./src/tasks/usage.ts",
+      "clean": false,
       "files": [
         "src/tasks/usage.ts",
         "src/tasks/usage.utils.ts"
@@ -391,18 +395,42 @@
         "static/usage.json"
       ],
       "dependencies": [
-        "../../elements:build",
-        "build:metadata"
+        "generate:metadata"
       ]
     },
-    "build:wireit": {
+    "generate:wireit": {
       "command": "node --experimental-strip-types ./src/tasks/wireit.ts",
+      "clean": false,
       "files": [
         "src/tasks/wireit.ts",
         "src/tasks/wireit.utils.ts"
       ],
       "output": [
         "static/wireit.json"
+      ],
+      "dependencies": []
+    },
+    "generate:downloads": {
+      "command": "node --experimental-strip-types ./src/tasks/downloads.ts",
+      "clean": false,
+      "files": [
+        "src/tasks/downloads.ts",
+        "src/tasks/downloads.utils.ts"
+      ],
+      "output": [
+        "static/downloads.json"
+      ],
+      "dependencies": []
+    },
+    "generate:releases": {
+      "command": "node --experimental-strip-types ./src/tasks/releases.ts",
+      "clean": false,
+      "files": [
+        "src/tasks/releases.ts",
+        "src/tasks/releases.utils.ts"
+      ],
+      "output": [
+        "static/releases.json"
       ],
       "dependencies": []
     },
