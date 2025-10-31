@@ -424,3 +424,74 @@ export interface WireitGraph {
   nodes: WireitGraphNode[];
   links: WireitGraphLink[];
 }
+
+export interface ArtifactoryInstance {
+  instance: string;
+  downloads: number;
+  lastDownloaded?: string;
+}
+
+export interface VersionDownload {
+  version: string;
+  totalDownloads: number;
+  instances: ArtifactoryInstance[];
+}
+
+export interface PackageDownload {
+  package: string;
+  totalDownloads: number;
+  instances: {
+    name: string;
+    totalDownloads: number;
+  }[];
+  versions: VersionDownload[];
+}
+
+export interface ProjectUsage {
+  name: string;
+  path: string;
+  url: string;
+  elementsVersion: string;
+  projectDependencies: {
+    angular?: boolean;
+    react?: boolean;
+    vue?: boolean;
+    nextjs?: boolean;
+    svelte?: boolean;
+    solid?: boolean;
+    preact?: boolean;
+    alpinejs?: boolean;
+    hybrids?: boolean;
+    htmx?: boolean;
+    lit?: boolean;
+    typescript?: boolean;
+  };
+  elements: {
+    name: string;
+    total: number;
+  }[];
+  imports: {
+    name: string;
+    total: number;
+  }[];
+  styles: {
+    name: string;
+    total: number;
+  }[];
+  attributes: {
+    name: string;
+    total: number;
+  }[];
+  elementReferenceTotal: number;
+  attributeReferenceTotal: number;
+  importReferenceTotal: number;
+  styleReferenceTotal: number;
+  referenceTotal: number;
+}
+
+export interface Release {
+  name: string;
+  version: string;
+  date: string;
+  type: 'fix' | 'feat' | 'breaking' | 'chore';
+}
