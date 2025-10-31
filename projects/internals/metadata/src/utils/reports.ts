@@ -1,4 +1,4 @@
-import type { Project, ProjectTestSummary } from '../types.js';
+import type { PackageDownload, Project, ProjectTestSummary, Release } from '../types.js';
 
 /**
  * @summary A summary of the metadata for all Elements projects.
@@ -26,4 +26,15 @@ export interface MetadataSummary {
 export interface ProjectsTestSummary {
   created: string;
   projects: Record<string, ProjectTestSummary>;
+}
+
+export interface ReleasesSummary {
+  created: string;
+  releases: Release[];
+}
+
+export interface DownloadsReport {
+  created: string;
+  packages: PackageDownload[];
+  totalDownloads: number;
 }
