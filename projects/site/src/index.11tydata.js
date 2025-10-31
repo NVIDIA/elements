@@ -11,10 +11,10 @@ const metadata = await MetadataService.getMetadata();
 
 const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
-/** @type {import('@nve-internals/metadata').MetadataElement[]} */
+/** @type {import('@nve-internals/metadata').Element[]} */
 const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
 
-/** @type {import('@nve-internals/metadata').ProjectTestSummary} */
+/** @type {import('@nve-internals/metadata').ProjectsTestSummary} */
 const tests = await TestsService.getTests();
 
 /** @type {import('@nve-internals/metadata').ProjectTestSummary} */
