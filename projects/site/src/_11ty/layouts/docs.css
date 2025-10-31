@@ -124,7 +124,6 @@ nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
 
 /* Page Panel Styles */
 nve-page-panel[slot='left'] {
-  --background: var(--nve-sys-layer-shell-background);
   --width: 250px;
 
   nve-page-panel-content {
