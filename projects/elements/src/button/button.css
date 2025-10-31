@@ -148,7 +148,7 @@
 }
 
 :host(:hover:not([interaction]):not([disabled]):not([readonly])) {
-  --color: var(--nve-sys-interaction-hover-color) !important;
+  --color: var(--nve-sys-interaction-hover-color);
 }
 
 :host([container='flat'][selected]) [interaction-state],
