@@ -17,13 +17,20 @@ export default mergeConfig(libraryNodeTestConfig, {
         statements: 90
       },
       exclude: [
-        // excluding node operations that write to local file system
+        // excluding node operations that read/write to local file system
+        'src/services/tests.service.ts',
         'src/tasks/metadata.ts',
+        'src/tasks/metadata.utils.ts',
         'src/tasks/lighthouse.ts',
         'src/tasks/metadata.av-infra.ts',
         'src/tasks/metadata.av-infra.utils.ts',
+        'src/tasks/downloads.ts',
         'src/tasks/tests.ts',
+        'src/tasks/usage.ts',
         'src/tasks/usage.utils.ts',
+        'src/tasks/releases.ts',
+        'src/tasks/examples.ts',
+        'src/tasks/examples.utils.ts',
         'src/tasks/wireit.ts'
       ]
     }

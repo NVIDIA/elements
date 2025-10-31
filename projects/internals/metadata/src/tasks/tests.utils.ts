@@ -28,7 +28,8 @@ export async function generateTestSummary(): Promise<ProjectsTestSummary> {
       ),
       '@nvidia-elements/monaco': await getTestReport('@nvidia-elements/monaco', '../../../../monaco'),
       '@internals/metadata': await getTestReport('@internals/metadata', '../../../../internals/metadata'),
-      '@internals/patterns': await getTestReport('@internals/patterns', '../../../../internals/patterns')
+      '@internals/patterns': await getTestReport('@internals/patterns', '../../../../internals/patterns'),
+      '@internals/tools': await getTestReport('@internals/tools', '../../../../internals/tools')
     }
   };
 }

@@ -2,7 +2,6 @@
 
 import { MetadataService, TestsService } from '@internals/metadata';
 import { badgeCoverage, badgeBundle, badgeLighthouse } from '../../_11ty/templates/api.js';
-import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
 
 export const data = {
   title: 'Testing & Performance',
@@ -22,21 +21,18 @@ export function render() {
   return this.renderTemplate(
     /* html */ `
 <div nve-layout="column gap:md align:stretch" docs-full-width>
-  <div nve-layout="column gap:md pad-bottom:lg">
-    <div nve-layout="row gap:md align:vertical-center">
-      <h1 nve-text="heading lg">Elements</h1>
-      <nve-badge status="success">version ${ESM_ELEMENTS_VERSION}</nve-badge>
-    </div>
-    <p nve-text="body muted">Below are metrics measuring various aspects of the Elements system including usage, test coverage and API stability.</p>
+  <div nve-layout="column gap:md pad-bottom:sm">
+    <h1 nve-text="heading lg">Elements</h1>
+    <p nve-text="body muted">Report of the testing and performance metrics for the Elements components and APIs.</p>
   </div>
   <div nve-layout="column gap:xs">
     <nve-tabs style="height: 32px">
-      <nve-tabs-item><a href="docs/metrics/">Metrics</a></nve-tabs-item>
+    <nve-tabs-item selected><a href="docs/metrics/">Metrics</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/api-status/">API Status</a></nve-tabs-item>
       <nve-tabs-item selected><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/usage-metrics/">Usage Metrics</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/usage-insights/">Usage Insights</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/usage-metrics/">Usage &amp; Adoption</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/wireit/">Wireit Explorer</a></nve-tabs-item>
+      <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>
     <nve-divider></nve-divider>
@@ -64,7 +60,7 @@ export function render() {
       </div>
     </section>
     <section nve-layout="grid gap:md span-items:6">
-      <nve-grid style="--scroll-height: calc(100vh - 330px)">
+      <nve-grid style="--scroll-height: calc(100vh - 310px)">
         <nve-grid-header>
           <nve-grid-column width="350px">File</nve-grid-column>
           <nve-grid-column width="180px">Statements</nve-grid-column>
@@ -88,7 +84,7 @@ export function render() {
           <p nve-text="body muted sm">Report Created on ${reportDate}</p>
         </nve-grid-footer>
       </nve-grid>
-      <nve-grid style="--scroll-height: calc(100vh - 330px)">
+      <nve-grid style="--scroll-height: calc(100vh - 310px)">
         <nve-grid-header>
           <nve-grid-column>Lighthouse Report</nve-grid-column>
           <nve-grid-column>Performance</nve-grid-column>
