@@ -8,26 +8,38 @@
 
 # {{title}}
 
+Fluid page layouts can be achieved through the [abstracted CSS flexbox and grid APIs](docs/foundations/layout/), allowing pages built with `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
+
+However, the layout system can be extended with true responsive capabilities using two different approaches: **Container Queries** and **Viewport Queries**.
+
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Responsive layout modules are marked <em>Pre-Release</em> and are not yet ready for consumer adoption - API is subject to breaking changes.
+      Responsive layout modules are marked <em>Alpha</em> - its API may see changes.
     </div>
   </nve-alert>
 </nve-alert-group>
 
-Fluid page layouts are achieved through the [abstracted CSS flexbox and grid APIs](docs/foundations/layout/), allowing pages built with Elements `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
+## Installation
 
-The layout system can be extended with responsive capabilities using two different approaches: **Container Queries** and **Viewport Queries**. Both systems allow you to create adaptive layouts that respond to different screen sizes, but they work in fundamentally different ways.
+The responsive layout modules layer on-top of the core Elements styles package:
 
-### Layout vs Display Attributes
+```shell
+npm install @nvidia-elements/styles @nvidia-elements/themes
+```
 
-The responsive system uses two distinct attributes:
+```css
+/* Import the main layout CSS into your project */
+@import '@nvidia-elements/styles/dist/layout.css';
 
-- **`nve-layout`**: Controls layout properties that affect how children are arranged (gap, padding, flex direction, grid structure)
-- **`nve-display`**: Controls visibility of individual elements (hide/show)
+/* And include the responsive layout modules */
+@import '@nvidia-elements/styles/dist/labs/layout-container.css';
+@import '@nvidia-elements/styles/dist/labs/layout-viewport.css';
+```
 
-This separation exists because hiding an element only affects its own display, not the layout of its children. By using `nve-display` for visibility control, we maintain a clear distinction between layout utilities that affect child arrangement and display utilities that affect element visibility.
+## Container Queries (`&` prefix)
+
+Container queries respond to the **width of the parent container**, making them ideal for component-based responsive design. This approach allows components to adapt regardless of where they're placed on the page.
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
@@ -37,10 +49,6 @@ This separation exists because hiding an element only affects its own display, n
     </div>
   </nve-alert>
 </nve-alert-group>
-
-## Container Queries (`&` prefix)
-
-Container queries respond to the **width of the parent container**, making them ideal for component-based responsive design. This approach allows components to adapt regardless of where they're placed on the page.
 
 **Breakpoints:**
 
@@ -132,7 +140,7 @@ Example: `<nve-button nve-display="&sm|hide">` - Button hides when its container
 
 Example: `<nav nve-display="@lg|hide">` - Navigation hides on large screens
 
-## Combining Both Systems
+### Combining Both Systems
 
 You can use both systems together for maximum flexibility:
 
@@ -205,3 +213,12 @@ Hiding and showing elements uses the `nve-display` attribute instead of `nve-lay
 <script type="module">
   import '/_internal/canvas-editable/canvas-editable.js';
 </script>
+
+## Layout vs Display Attributes
+
+The responsive system uses two distinct attributes:
+
+- **`nve-layout`**: Controls layout properties that affect how children are arranged (gap, padding, flex direction, grid structure)
+- **`nve-display`**: Controls visibility of individual elements (hide/show)
+
+This separation exists because hiding an element only affects its own display, not the layout of its children. By using `nve-display` for visibility control, we maintain a clear distinction between layout utilities that affect child arrangement and display utilities that affect element visibility.
