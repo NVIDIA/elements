@@ -14,6 +14,10 @@
 
 {% story 'nve-switch', 'Default' %}
 
+## Size
+
+{% story 'nve-switch', 'Size' %}
+
 ## Layout
 
 {% api 'nve-switch-group', 'property', 'layout' %}
