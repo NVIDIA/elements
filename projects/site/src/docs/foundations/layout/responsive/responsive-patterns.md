@@ -2,9 +2,15 @@
 {
   title: 'Responsive Patterns',
   layout: 'docs.11ty.js',
-  permalink: 'docs/internal/layout/responsive/patterns/index.html'
+  permalink: 'docs/labs/layout/responsive/patterns/index.html'
 }
 ---
+
+<nve-alert-group status="warning">
+  <nve-alert>
+    <nve-icon name="beaker" slot="icon" style="--color:inherit"></nve-icon> Labs projects are experimental packages available for early feedback.
+  </nve-alert>
+</nve-alert-group>
 
 # {{ title }}
 

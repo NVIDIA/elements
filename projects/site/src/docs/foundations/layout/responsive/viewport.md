@@ -2,19 +2,17 @@
 {
   title: 'Responsive Layout - Viewport',
   layout: 'docs.11ty.js',
-  permalink: 'docs/internal/layout/responsive/viewport/index.html'
+  permalink: 'docs/labs/layout/responsive/viewport/index.html'
 }
 ---
 
-# {{title}}
-
 <nve-alert-group status="warning">
-  <nve-alert style="--align-items: start">
-    <div nve-text="relaxed">
-      This responsive layout module is marked <em>Pre-Release</em> and is not yet ready for consumer adoption, its API is subject to breaking changes.
-    </div>
+  <nve-alert>
+    <nve-icon name="beaker" slot="icon" style="--color:inherit"></nve-icon> Labs projects are experimental packages available for early feedback.
   </nve-alert>
 </nve-alert-group>
+
+# {{title}}
 
 By optionally importing the responsive viewport layout module, the `nve-layout` this system is extended using [CSS Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@media) for adaptive responsive design based on the browser viewport width rather than the container element's width.
 
@@ -54,7 +52,7 @@ Conditional gap sizing example: `nve-layout="row @sm|gap:xxxs @md|gap:md @lg|gap
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Viewport-based responsive layout responds to the browser window size, not the container size. Use <a href="docs/internal/layout/responsive/container/" nve-text="link">Container Queries</a> if you need container-aware responsive behavior.
+      Viewport-based responsive layout responds to the browser window size, not the container size. Use <a href="docs/labs/layout/responsive/container/" nve-text="link">Container Queries</a> if you need container-aware responsive behavior.
     </div>
   </nve-alert>
 </nve-alert-group>
