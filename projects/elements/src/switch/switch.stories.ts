@@ -18,6 +18,22 @@ export const Default = () => {
 </nve-switch>`
 };
 
+
+/**
+ * @summary Size variants of toggle switches can be achieved with custom CSS properties.
+ */
+export const Size = () => {
+  return html`
+<nve-switch style="
+      --width: var(--nve-ref-size-800);
+      --height: var(--nve-ref-size-400);
+      --anchor-width: calc(var(--nve-ref-size-200) + var(--nve-ref-size-50));
+      --anchor-height: calc(var(--nve-ref-size-200) + var(--nve-ref-size-50));">
+  <label>label</label>
+  <input type="checkbox" />
+</nve-switch>`
+};
+
 /**
  * @summary Toggle switches with different states including default, disabled, success, and error with control messages.
  */
