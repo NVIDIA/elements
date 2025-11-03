@@ -87,12 +87,13 @@ export async function storyShortcode(
     ? `<nve-button container="flat" slot="suffix"><a href="${playgroundURL}" target="_blank">Open in Playground</a></nve-button>`
     : '';
 
-  const editButton = example
-    ? `<nve-button container="flat" slot="suffix"><a href="./docs/elements/${ref.replace(/^nve-/, '')}/examples/?edit=true&example=${example.id
-        .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-        .replace(/\s+/g, '-')
-        .toLowerCase()}">Edit Example</a></nve-button>`
-    : '';
+  const editButton =
+    example && ref.startsWith('nve-')
+      ? `<nve-button container="flat" slot="suffix"><a href="./docs/elements/${ref.replace(/^nve-/, '')}/examples/?edit=true&example=${example.id
+          .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+          .replace(/\s+/g, '-')
+          .toLowerCase()}">Edit Example</a></nve-button>`
+      : '';
 
   // replace all double newlines with single newlines in script tags only
   // https://github.com/markdown-it/markdown-it/issues/1056
