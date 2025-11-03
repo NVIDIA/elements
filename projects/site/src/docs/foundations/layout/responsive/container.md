@@ -2,19 +2,17 @@
 {
   title: 'Responsive Layout - Container',
   layout: 'docs.11ty.js',
-  permalink: 'docs/internal/layout/responsive/container/index.html'
+  permalink: 'docs/labs/layout/responsive/container/index.html'
 }
 ---
 
-# {{title}}
-
 <nve-alert-group status="warning">
-  <nve-alert style="--align-items: start">
-    <div nve-text="relaxed">
-      This responsive layout module is marked <em>Pre-Release</em> and is not yet ready for consumer adoption, its API is subject to breaking changes.
-    </div>
+  <nve-alert>
+    <nve-icon name="beaker" slot="icon" style="--color:inherit"></nve-icon> Labs projects are experimental packages available for early feedback.
   </nve-alert>
 </nve-alert-group>
+
+# {{title}}
 
 By optionally importing the responsive container layout module, the `nve-layout` system is extended using [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) for adaptive responsive design based on the container element's width rather than just the browser width.
 

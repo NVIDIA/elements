@@ -2,23 +2,21 @@
 {
   title: 'Responsive Layout',
   layout: 'docs.11ty.js',
-  permalink: 'docs/internal/layout/responsive/index.html'
+  permalink: 'docs/labs/layout/responsive/index.html'
 }
 ---
+
+<nve-alert-group status="warning">
+  <nve-alert>
+    <nve-icon name="beaker" slot="icon" style="--color:inherit"></nve-icon> Labs projects are experimental packages available for early feedback.
+  </nve-alert>
+</nve-alert-group>
 
 # {{title}}
 
 Fluid page layouts can be achieved through the [abstracted CSS flexbox and grid APIs](docs/foundations/layout/), allowing pages built with `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
 
 However, the layout system can be extended with true responsive capabilities using two different approaches: **Container Queries** and **Viewport Queries**.
-
-<nve-alert-group status="warning">
-  <nve-alert style="--align-items: start">
-    <div nve-text="relaxed">
-      Responsive layout modules are marked <em>Alpha</em> - its API may see changes.
-    </div>
-  </nve-alert>
-</nve-alert-group>
 
 ## Installation
 
@@ -83,7 +81,7 @@ Container queries respond to the **width of the parent container**, making them 
 - **Newer technology**: Limited support in older browsers
 - **Learning curve**: Different mental model than traditional responsive design
 
-[Learn more about the Container Query based system →](docs/internal/layout/responsive/container/)
+[Learn more about the Container Query based system →](docs/labs/layout/responsive/container/)
 
 ## Viewport Queries (`@` prefix)
 
@@ -118,7 +116,7 @@ Viewport queries respond to the **browser window width**, providing traditional 
 - **Context-blind**: Same breakpoint triggers regardless of element placement
 - **Fewer breakpoints**: Standard breakpoints (sm: 576px to xxl: 1440px)
 
-[Learn more about Viewport Query based system →](docs/internal/layout/responsive/viewport/)
+[Learn more about Viewport Query based system →](docs/labs/layout/responsive/viewport/)
 
 ## When to Use Which System
 
