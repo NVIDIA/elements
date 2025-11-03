@@ -40,6 +40,10 @@
 
 {% story 'nve-badge', 'Prominence' %}
 
+## Trend
+
+{% story 'nve-badge', 'Trend' %}
+
 ## Overflow
 
 {% story 'nve-badge', 'Overflow' %}
