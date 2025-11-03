@@ -301,11 +301,16 @@ export const renderDocsNav = data => /* html */ `
 
   <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}>
     <a href="docs/labs/">Labs</a>
-    <nve-tree-node ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}><a href="docs/labs/">About</a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted' : ''}><a href="docs/labs/behaviors-alpine/">Behaviors Alpine</a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/brand/' ? 'highlighted' : ''}><a href="docs/labs/brand/">Brand</a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted' : ''}><a href="docs/labs/forms/">Forms</a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/markdown/' ? 'highlighted' : ''}><a href="docs/labs/markdown/">Markdown</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/layout/responsive/' ? 'highlighted' : ''}>
+      <a href="docs/labs/layout/responsive/" nve-layout="row align:vertical-center gap:xs">Responsive Layout <nve-icon name="beaker" size="sm"></nve-icon></a>
+      <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/viewport/') ? 'highlighted' : ''}><a href="docs/labs/layout/responsive/viewport/">Viewport</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/container/') ? 'highlighted' : ''}><a href="docs/labs/layout/responsive/container/">Container</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/patterns/') ? 'highlighted' : ''}><a href="docs/labs/layout/responsive/patterns/">Patterns</a></nve-tree-node>
+    </nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/labs/markdown/' ? 'highlighted' : ''}><a href="docs/labs/markdown/" nve-layout="row align:vertical-center gap:xs">Markdown <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/labs/brand/' ? 'highlighted' : ''}><a href="docs/labs/brand/" nve-layout="row align:vertical-center gap:xs">Brand <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted' : ''}><a href="docs/labs/behaviors-alpine/" nve-layout="row align:vertical-center gap:xs">Behaviors Alpine <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted' : ''}><a href="docs/labs/forms/" nve-layout="row align:vertical-center gap:xs">Forms <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''} ${data.page.url === '/docs/api-design/' ? 'highlighted' : ''}>
@@ -335,13 +340,6 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-lighthouse/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing-lighthouse/">Lighthouse Testing</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-ssr/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing-ssr/">SSR Testing</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-visual/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing-visual/">Visual Testing</a></nve-tree-node>
-    </nve-tree-node>
-
-    <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/') ? 'expanded' : ''} ${data.page.url === '/docs/internal/layout/responsive/' ? 'highlighted' : ''}>
-      <a href="docs/internal/layout/responsive/">Responsive Layout Labs</a>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/viewport/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/viewport/">Viewport</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/container/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/container/">Container</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/layout/responsive/patterns/') ? 'highlighted' : ''}><a href="docs/internal/layout/responsive/patterns/">Patterns</a></nve-tree-node>
     </nve-tree-node>
   </nve-tree-node>
 </nve-tree>
