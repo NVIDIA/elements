@@ -11,15 +11,7 @@
 
 Elements should default to using composition when possible. This approach is to maximize flexibility, compatibility and API simplicity. API inheritance is when an API unknowingly or over time inherits or re-implements another element's API on its own to expose additional access to its otherwise internal implementation details. Example, using a button and icon element we can start to see some of these tradeoffs.
 
-<nve-alert status="danger">Don't:</nve-alert>
-
-```html
-<nve-button icon="info">
-  button
-</nve-button>
-```
-
-<nve-alert status="success">Do:</nve-alert>
+{% dodont %}
 
 ```html
 <nve-button>
@@ -27,11 +19,25 @@ Elements should default to using composition when possible. This approach is to 
 </nve-button>
 ```
 
+```html
+<nve-button icon="info">
+  button
+</nve-button>
+```
+
+{% enddodont %}
+
 It may be tempting to encapsulate other elements and expose their APIs to the host element. This can make the API seem more terse and less code to write. For example, if a button has an icon we may want to provide an icon `name` API to set the button icon. However this quickly can run into API conflicts. First we conflict with the native button API which has an existing name attribute so the icon must be exposed via `icon`.
 
 Going further we run into layout conflicts. If the icon needs to change position we must provide a secondary “escape hatch” API to change this behavior.
 
-<nve-alert status="danger">Don't:</nve-alert>
+{% dodont %}
+
+```html
+<nve-button>
+  <nve-icon name="info"></nve-icon> button
+</nve-button>
+```
 
 ```html
 <nve-button iconplacement="leading" icon="info">
@@ -39,13 +45,7 @@ Going further we run into layout conflicts. If the icon needs to change position
 </nve-button>
 ```
 
-<nve-alert status="success">Do:</nve-alert>
-
-```html
-<nve-button>
-  <nve-icon name="info"></nve-icon> button
-</nve-button>
-```
+{% enddodont %}
 
 While this works it's introducing “escape hatch” APIs that the button now must support for the use of the icon. These situations can also complicate internationalization use cases where reading order and elements are reversed for right-to-left languages.
 
@@ -85,7 +85,24 @@ Slots can provide default content if no content is provided. Here we set an inte
 
 When building composition based APIs the semantics of the HTML should be pushed up into the light DOM or the control of the consumer. In this example the h1 heading is embedded into the card element. This creates an incorrect DOM structure as only one given h1 can exist within the page. This also applies as the page structure should work down from h1-h6.
 
-<nve-alert status="danger">Don't:</nve-alert>
+{% dodont %}
+
+```html
+<!-- nve-card template -->
+<div>
+  <slot name="header"></slot>
+  <div>
+  	<slot></slot>
+  </div>
+  <slot name="footer"></slot>
+</div>
+
+<!-- consumer API -->
+<nve-card status="warning">
+  <h2 slot="header">Card Header</h2>
+  <p>card content</p>
+</nve-card>
+```
 
 ```html
 <!-- nve-card template -->
@@ -104,24 +121,7 @@ When building composition based APIs the semantics of the HTML should be pushed 
 </nve-card>
 ```
 
-<nve-alert status="success">Do:</nve-alert>
-
-```html
-<!-- nve-card template -->
-<div>
-  <slot name="header"></slot>
-  <div>
-  	<slot></slot>
-  </div>
-  <slot name="footer"></slot>
-</div>
-
-<!-- consumer API -->
-<nve-card status="warning">
-  <h2 slot="header">Card Header</h2>
-  <p>card content</p>
-</nve-card>
-```
+{% enddodont %}
 
 While composition based APIs may be more verbose at times, they lower the overall API surface area to learn in the system and help ensure there is a singular way to use the element. Once a consumer learns an element API, that API usage remains predictable and reliable throughout the system.
 

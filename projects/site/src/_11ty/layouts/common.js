@@ -333,6 +333,8 @@ export const renderDocsNav = data => /* html */ `
 
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines') ? 'expanded' : ''} ${data.page.url === '/docs/internal/guidelines/' ? 'highlighted' : ''}>
       Guidelines
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/documentation/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/documentation/">Documentation</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/examples/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/examples/">Examples</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/typescript/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/typescript/">TypeScript</a></nve-tree-node>
       <nve-tree-node ${data.page.url === '/docs/internal/guidelines/testing/' ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing/">Testing</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-unit/') ? 'highlighted' : ''}><a href="docs/internal/guidelines/testing-unit/">Unit Testing</a></nve-tree-node>
@@ -371,6 +373,20 @@ export function renderGlobalsScript(data = { disableTheme: false }) {
       globalThis.document.documentElement.setAttribute('nve-theme', themes);
   })();
 </script>
+  `;
+}
+
+export function renderBasePageHeader(data) {
+  return /* html */ `
+<nve-page-header slot="header">
+  <nve-logo slot="prefix" size="sm"></nve-logo>
+  <a slot="prefix" href=".">Elements</a>
+  <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''}><a href="docs/about/getting-started/">Catalog</a></nve-button>
+  <nve-button container="flat"><a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>
+  <nve-button container="flat" ${data.page.url.includes('starters') ? 'selected' : ''}><a href="starters/">Starters</a></nve-button>
+  <nve-button container="flat"><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button>
+  ${data.page.url !== '/' ? /* html */ `<nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>` : ''}
+</nve-page-header>
   `;
 }
 

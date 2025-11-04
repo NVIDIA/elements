@@ -36,6 +36,4 @@
 
 ## Avatar Group
 
-An avatar group displays a collection of user avatars in a compact and organized layout, showcasing multiple participants or contributors in a space-efficient way.
-
 {% story 'nve-avatar', 'AvatarGroup' %}
