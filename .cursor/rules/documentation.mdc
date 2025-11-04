@@ -1,0 +1,10 @@
+---
+description: Details of how to write documentation files.
+globs: **/*.md
+alwaysApply: false
+---
+
+# Documentation (`*.md`)
+
+- You MUST review @projects/site/src/docs/internal/guidelines/documentation.md before making any changes
+- You MUST review @projects/site/src/docs/internal/guidelines/examples.md before making any changes

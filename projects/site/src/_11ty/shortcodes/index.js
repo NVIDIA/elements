@@ -46,7 +46,7 @@ export async function apiShortcode(tag, type, value) {
   ${type === 'event' ? md.render(`\`${value}\`: ` + element.manifest.events?.find(m => m.name === value)?.description) : ''}
   ${type === 'property' ? md.render(element.manifest.members?.find(m => m.name === value)?.description ?? '') : ''}
   ${type === 'slot' ? md.render(element.manifest.slots?.find(m => m.name === value)?.description ?? '') : ''}
-  ${type === 'story' ? md.render(element.stories?.items?.find(m => m.id === value)?.description ?? '') : ''}`
+  ${type === 'story' || type === 'example' ? md.render(element.stories?.items?.find(m => m.id === value)?.description ?? '') : ''}`
         .trim()
         .replaceAll('<p>', '<p nve-text="body relaxed mkd">')
     : '';
@@ -60,7 +60,7 @@ export async function apiShortcode(tag, type, value) {
  * @param {Object|string} userConfig - Configuration options for the example display
  * @returns {Promise<string>} HTML string containing the embedded example
  */
-export async function storyShortcode(
+export async function exampleShortcode(
   ref,
   exampleName,
   userConfig = { inline: true, height: '95%', resizable: true, editable: false }
@@ -118,10 +118,12 @@ export async function storyShortcode(
   tag="${example.element || ref}">
 </nvd-canvas-editable>`
       : /* html */ `
+<div nve-layout="column gap:sm">
 ${markdown.render(example.description ? example.description : (example.summary ?? ''))}
 <nvd-canvas id="${canvasId}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
   <template>${md.utils?.escapeHtml(templateContent)}</template>${template}${editButton}${playgroundButton}
-</nvd-canvas>${reload}`.trim()
+</nvd-canvas>${reload}
+</div>`.trim()
     : '';
 }
 
@@ -133,4 +135,28 @@ function reloadScript(example, canvasId) {
   const template = rawTemplate.replace(/import\\s+(?:(?:\\{[^}]*\\}|\\w+)\\s+from\\s+)?['"][^'"]*['"];?/g, '');
   document.querySelector('#${canvasId}_content:not(:has(iframe))').innerHTML = template;
 </script>`;
+}
+
+export async function doDontShortcode(content) {
+  return /* html */ `
+<div nve-layout="column gap:sm">
+  <style scoped>
+    .content > div, {
+      justify-content: space-between;
+      height: 100%;
+    }
+    .content > pre {
+      width: 100%;
+      display: block;
+      margin: 0;
+    }
+  </style>
+  <div nve-layout="grid gap:sm span-items:6">
+    <nve-badge status="success">Do</nve-badge>
+    <nve-badge status="danger">Don't</nve-badge>
+  </div>
+  <div class="content" nve-layout="grid gap:sm span-items:6">
+    ${content}
+  </div>
+</div>`;
 }

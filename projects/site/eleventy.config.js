@@ -7,7 +7,7 @@ import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
-import { apiShortcode, storyShortcode, installShortcode } from './src/_11ty/shortcodes/index.js';
+import { apiShortcode, exampleShortcode, installShortcode, doDontShortcode } from './src/_11ty/shortcodes/index.js';
 import {
   renderInstallShortcode,
   renderInstallArtifactoryShortcode,
@@ -131,7 +131,8 @@ export default function (eleventyConfig) {
   eleventyConfig.setLibrary('md', markdown);
 
   // Register custom shortcodes for documentation
-  eleventyConfig.addAsyncShortcode('story', storyShortcode);
+  eleventyConfig.addAsyncShortcode('example', exampleShortcode);
+  eleventyConfig.addAsyncShortcode('story', exampleShortcode); // deprecated
   eleventyConfig.addAsyncShortcode('api', apiShortcode);
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
   eleventyConfig.addAsyncShortcode('install', installShortcode);
@@ -139,6 +140,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode('installation', renderInstallShortcode);
   eleventyConfig.addShortcode('install-artifactory', renderInstallArtifactoryShortcode);
   eleventyConfig.addShortcode('integration', renderIntegrationShortcode);
+  eleventyConfig.addPairedShortcode('dodont', doDontShortcode);
 
   // Register custom transforms for content processing
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
