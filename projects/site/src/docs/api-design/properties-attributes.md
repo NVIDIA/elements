@@ -37,13 +37,11 @@ Properties (`@property`) in lit enables the property to be set on the element vi
 
 Properties/Attributes should avoid enabling “impossible states”. Impossible states are caused by conflicting APIs on a single element.
 
-<nve-alert status="success">Do:</nve-alert>
+{% dodont %}
 
 ```html
 <nve-alert status="success">hello there</nve-alert>
 ```
-
-<nve-alert status="danger">Don't:</nve-alert>
 
 ```html
 <nve-alert info>hello there</nve-alert>
@@ -54,6 +52,8 @@ Properties/Attributes should avoid enabling “impossible states”. Impossible 
 <!-- alert cannot be in a success and error state -->
 <nve-alert success danger>hello there</nve-alert>
 ```
+
+{% enddodont %}
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn:&nbsp;<a href="https://kentcdodds.com/blog/make-impossible-states-impossible" nve-text="link">Make impossible states impossible</a></nve-alert>
 
