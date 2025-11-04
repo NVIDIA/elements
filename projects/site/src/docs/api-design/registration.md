@@ -18,17 +18,17 @@ Custom Element tags are globally registered to the browser so elements must be s
 
 Tag names should avoid using verbs or actions within the name. Verbs or actions should be described by the properties and events of the element. Exmaples:
 
-<nve-alert status="success">Do:</nve-alert>
+{% dodont %}
 
 ```html
 <nve-select></nve-select>
 ```
 
-<nve-alert status="danger">Don't:</nve-alert>
-
 ```html
 <nve-selection></nve-selection>
 ```
+
+{% enddodont %}
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: Elements should follow common and established names for existing UI patterns. See &nbsp;<a href="https://open-ui.org" nve-text="link">openui.org</a>&nbsp; for more details on upcoming specs.</nve-alert>
 

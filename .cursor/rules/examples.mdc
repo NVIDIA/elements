@@ -1,0 +1,9 @@
+---
+description: Details of how to write example template files.
+globs: **/*.examples.ts
+alwaysApply: false
+---
+
+# Documentation (`*.examples.ts`)
+
+- You MUST review @projects/site/src/docs/internal/guidelines/examples.md before making any changes
