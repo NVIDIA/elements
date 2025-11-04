@@ -1434,6 +1434,49 @@ export const Audit = {
 };
 
 /**
+ * @summary Do not set the column count to a value that does not match the number of cells in the row.
+ * @tags anti-pattern
+ */
+export const InvalidColumnCount = {
+  render: () => html`
+<nve-grid>
+  <div hidden></div>
+  <nve-grid-header>
+    <div hidden></div>
+    ${Array(4).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column>`)}
+  </nve-grid-header>
+  ${Array(4).fill('').map((_, r) => html`
+    <div>
+      <nve-grid-row>
+      ${Array(3).fill('').map((_, c) => html`<nve-grid-cell>cell ${r}-${c}</nve-grid-cell>`)}
+    </nve-grid-row>
+    </div>
+  `)}
+</nve-grid>
+  `
+};
+
+/**
+ * @summary Ensure column count matches the number of cells in the row to preserve keyboard navigation.
+ * @tags test-case
+ */
+export const ValidColumnCount = {
+  render: () => html`
+<nve-grid>
+  <div hidden></div>
+  <nve-grid-header>
+    ${Array(4).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column>`)}
+  </nve-grid-header>
+  ${Array(4).fill('').map((_, r) => html`
+    <nve-grid-row>
+      ${Array(4).fill('').map((_, c) => html`<nve-grid-cell>cell ${r}-${c}</nve-grid-cell>`)}
+    </nve-grid-row>
+  `)}
+</nve-grid>
+  `
+};
+
+/**
  * @summary Grid row sort can be implemented via the `nve-sort-button`.
  * The grid follows the [ARIA sort spec](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/)
  * and automatically sets the appropriate accessibility related attributes to convey the current sorting state.

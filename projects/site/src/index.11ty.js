@@ -1,11 +1,11 @@
 import { readFileSync } from 'node:fs';
-import { renderBaseHead, IS_MR_PREVIEW, IS_DEV_MODE } from './_11ty/layouts/common.js';
+import { renderBaseHead, renderBasePageHeader, IS_MR_PREVIEW, IS_DEV_MODE } from './_11ty/layouts/common.js';
 import { svgLogosShortcode } from './_11ty/shortcodes/svg-logos.js';
 
 const BASE_HEAD = renderBaseHead({ title: 'Elements', disableTheme: true });
 const styles = readFileSync(new URL('./index.css', import.meta.url), 'utf-8');
 
-export function render() {
+export function render(data) {
   return /* html */ `
 <!doctype html>
 <html lang="en" nve-theme="dark" nve-transition="auto">
@@ -29,25 +29,8 @@ export function render() {
   </head>
   <body>
     <nve-page>
-      <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
-        <a slot="prefix" href=".">Elements</a>
-        <nve-button container="flat">
-          <a href="docs/about/getting-started/">Catalog</a>
-        </nve-button>
-        <nve-button container="flat">
-          <a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank">Playground</a>
-        </nve-button>
-        <nve-button container="flat">
-          <a href="starters/" target="_blank">Starters</a>
-        </nve-button>
-        <nve-button container="flat">
-          <a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a>
-        </nve-button>
-      </nve-page-header>
-
+      ${renderBasePageHeader(data)}
       <main>
-        <!-- Hero Section -->
         <section id="hero">
           <img
             class="background"

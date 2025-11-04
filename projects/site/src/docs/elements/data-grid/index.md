@@ -32,3 +32,10 @@ import '@nvidia-elements/core/grid/define.js';
 ```
 
 {% story 'nve-grid', 'Default' %}
+
+## Column Count
+
+{% dodont %}
+{% example '@nvidia-elements/core/grid/grid.stories.json', 'ValidColumnCount' %}
+{% example '@nvidia-elements/core/grid/grid.stories.json', 'InvalidColumnCount' %}
+{% enddodont %}

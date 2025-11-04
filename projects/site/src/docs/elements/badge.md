@@ -12,38 +12,38 @@
 
 ## Standard
 
-{% story 'nve-badge', 'Default' %}
+{% example '@nvidia-elements/core/badge/badge.stories.json', 'Default' %}
 
 ## Status
 
-{% story 'nve-badge', 'Status' %}
+{% example 'nve-badge', 'Status' %}
 
-{% story 'nve-badge', 'Support' %}
+{% example 'nve-badge', 'Support' %}
 
 ## Flat
 
-{% story 'nve-badge', 'StatusFlat' %}
+{% example 'nve-badge', 'StatusFlat' %}
 
 ## Icon
 
-{% story 'nve-badge', 'StatusIcon' %}
+{% example 'nve-badge', 'StatusIcon' %}
 
 ## Color
 
-{% story 'nve-badge', 'Color' %}
+{% example 'nve-badge', 'Color' %}
 
 ### Flat
 
-{% story 'nve-badge', 'Flat' %}
+{% example 'nve-badge', 'Flat' %}
 
 ### Emphasis
 
-{% story 'nve-badge', 'Prominence' %}
+{% example 'nve-badge', 'Prominence' %}
 
 ## Trend
 
-{% story 'nve-badge', 'Trend' %}
+{% example 'nve-badge', 'Trend' %}
 
 ## Overflow
 
-{% story 'nve-badge', 'Overflow' %}
+{% example 'nve-badge', 'Overflow' %}

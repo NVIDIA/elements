@@ -3,7 +3,7 @@
 
 import { join } from 'node:path';
 import { readFileSync } from 'node:fs';
-import { renderBaseHead, renderDocsNav } from './common.js';
+import { renderBaseHead, renderDocsNav, renderBasePageHeader } from './common.js';
 import { elementSummary, elementStatus, elementDescription } from '../templates/api.js';
 
 // Define the available tabs for component documentation
@@ -51,27 +51,12 @@ export function render(data) {
 
       <body nve-text="body trim:none">
         <nve-page style="anchor-name: --page-anchor;">
-          <!-- Main navigation header -->
-          <nve-page-header slot="header">
-            <nve-logo slot="prefix" size="sm"></nve-logo>
-            <a slot="prefix" href=".">Elements</a>
-
-            <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''}><a href="docs/about/getting-started/">Catalog</a></nve-button>
-
-            <nve-button container="flat"><a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>
-
-            <nve-button container="flat" ${data.page.url.includes('starters') ? 'selected' : ''}><a href="starters/">Starters</a></nve-button>
-
-            <nve-button container="flat"><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button>
-
-            <nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>
-          </nve-page-header>
+          ${renderBasePageHeader(data)}
 
           <!-- Left sidebar navigation -->
           <nve-page-panel slot="left" id="sidenav-panel">
             <nve-page-panel-content>
               <nvd-search id="docs-search" base-url="${BASE_URL}"></nvd-search>
-
               ${renderDocsNav(data)}
             </nve-page-panel-content>
           </nve-page-panel>
@@ -133,7 +118,6 @@ export function render(data) {
             <!-- ANCHOR-GENERATOR -->
           </main>
 
-          <!-- System theme settings panel -->
           <nve-page-panel closable hidden slot="right" size="sm" id="system-options-panel">
             <nve-page-panel-content>
               <nvd-system-settings></nvd-system-settings>

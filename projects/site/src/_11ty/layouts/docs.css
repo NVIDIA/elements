@@ -1,8 +1,3 @@
-/* ==========================================================================
-   DOCS LAYOUT STYLES
-   ========================================================================== */
-
-/* Sidenav Panel Styles */
 #sidenav-panel {
   nve-tree > nve-tree-node:not(:has(> a)),
   nve-tree > nve-tree-node:has(> a) {
@@ -115,7 +110,7 @@ code > nve-codeblock {
 
 /* Canvas Styles */
 nvd-canvas {
-  min-height: 140px;
+  min-height: 120px;
 }
 
 nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
@@ -212,5 +207,24 @@ depending on the presence and visibility of the anchor generator and system opti
 @media (min-width: 1440px) and (max-width: 1920px) {
   main:has(#anchor-generator) {
     align-items: start;
+  }
+}
+
+#doc-content table {
+  width: 100%;
+  margin: 0 0 var(--nve-ref-space-md);
+  border-collapse: collapse;
+  font-size: var(--nve-ref-font-size-100);
+
+  th {
+    text-align: start;
+    font-weight: var(--nve-ref-font-weight-semibold);
+    padding: var(--nve-ref-size-300) 0;
+  }
+
+  td {
+    text-align: start;
+    border-top: 1px solid var(--nve-ref-border-color);
+    padding: var(--nve-ref-size-300) 0;
   }
 }
