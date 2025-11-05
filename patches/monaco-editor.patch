@@ -1189,6 +1189,20 @@ index 6e696fc4eb64adb9c5f6986192fd17c566d16db9..762b7455378a5687b0061039e6548216
        code: diag.code.toString(),
        tags,
        relatedInformation: this._convertRelatedInformation(model, diag.relatedInformation)
+diff --git a/esm/vs/platform/actionWidget/browser/actionList.js b/esm/vs/platform/actionWidget/browser/actionList.js
+index d7de1f2bf6413aa2092b5e41b973e0380fc11b63..d178d77a443def44119ac7356f67383387c58f5c 100644
+--- a/esm/vs/platform/actionWidget/browser/actionList.js
++++ b/esm/vs/platform/actionWidget/browser/actionList.js
+@@ -184,7 +184,8 @@ let ActionList = class ActionList extends Disposable {
+         else {
+             // For finding width dynamically (not using resize observer)
+             const itemWidths = this._allMenuItems.map((_, index) => {
+-                const element = this.domNode.ownerDocument.getElementById(this._list.getElementID(index));
++                // PATCH: support lookup / measurement when hosted in a shadow DOM
++                const element = this.domNode.getRootNode().querySelector(`#${this._list.getElementID(index)}`);
+                 if (element) {
+                     element.style.width = 'auto';
+                     const width = element.getBoundingClientRect().width;
 diff --git a/monaco.d.ts b/monaco.d.ts
 index de65a4a52dacfd7f6986fb06198e056ab70ab3ef..d8443e404db7faf640e1dcae6854c0d4a49beb92 100644
 --- a/monaco.d.ts
