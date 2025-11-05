@@ -107,6 +107,7 @@ export const List = {
   <li>list item 1</li>
   <li>list item 2</li>
   <li>list item 3</li>
+  <li>Long line of text.. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.</li>
 </ul>
   `
 }
@@ -144,36 +145,36 @@ export const UnstyledList = {
 export const NavList = {
   render: () => html`
 <ul nve-text="list nav">
-  <li>
-    <a nve-text="link" aria-current="page">Quick Start</a>
+  <li><a nve-text="link" href="#navigation-list">Welcome</a></li>
 
+  <li><a nve-text="link" href="#navigation-list" aria-current="page">Installation</a></li>
+  <li>
     <ul>
       <li><a nve-text="link" href="#navigation-list">Installing Dependencies</a></li>
       <li><a nve-text="link" href="#navigation-list">Configure Library</a></li>
     </ul>
   </li>
-  <li>
-    <a nve-text="link" href="#navigation-list">Basic Usage</a>
 
+  <li><a nve-text="link" href="#navigation-list">Basic Usage</a></li>
+  <li>
     <ul>
       <li><a nve-text="link" href="#navigation-list">Architecture</a></li>
       <li><a nve-text="link" href="#navigation-list">Reference</a></li>
       <li><a nve-text="link" href="#navigation-list">API</a></li>
     </ul>
   </li>
-  <li>
-    External Links
 
+  <li>External Links</li>
+  <li>
     <ul>
       <li><a nve-text="link" href="#navigation-list">Join the Community</a></li>
 
+      <li>Submit an Issue</li>
       <li>
-        Submit an Issue
-
         <ul>
           <li><a nve-text="link" href="#navigation-list">Feature</a></li>
           <li><a nve-text="link" href="#navigation-list">Fix</a></li>
-      </ul>
+        </ul>
       </li>
     </ul>
   </li>
