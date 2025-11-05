@@ -21,6 +21,7 @@ export const Default = () => {
 
 /**
  * @summary Size variants of toggle switches can be achieved with custom CSS properties.
+ * @tags test-case
  */
 export const Size = () => {
   return html`
