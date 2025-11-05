@@ -190,10 +190,6 @@ nve-page-panel[slot='left'] {
     min-height: 14px;
     display: block;
   }
-
-  li {
-    padding-bottom: 14px;
-  }
 }
 
 /* Adjusts layout and anchor generator display for large screens (min-width: 1440px and 1700px), 
