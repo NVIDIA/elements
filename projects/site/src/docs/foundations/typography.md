@@ -86,7 +86,16 @@ See the links below for specific integration patterns for the following framewor
 <!-- Navigation List -->
 <ul nve-text="list nav">
   ...
-  <li></li>
+  <li>
+    <a nve-text="link" href="#" aria-current="page">Top Level Link</a>
+  </li>
+
+  <li>
+    <ul>
+      <li><a nve-text="link" href="#">2nd Level Link</a></li>
+      <li><a nve-text="link" href="#">2nd Level Link</a></li>
+    </ul>
+  </li>
   ...
 </ul>
 ```
