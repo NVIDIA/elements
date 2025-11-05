@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.48.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.1...@nvidia-elements/core-v1.48.2) (2025-11-05)
+
+
+### Bug Fixes
+
+* **elements:** allow hover --color overrides on button and icon-button ([11bcb1e](https://github.com/NVIDIA/elements/commit/11bcb1e0d03606e9697337a0596b29c3bca675c4))
+
 ## [@nvidia-elements/core-v1.48.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.0...@nvidia-elements/core-v1.48.1) (2025-10-29)
 
 
