@@ -138,7 +138,7 @@ catalogs:
 
 patchedDependencies:
   monaco-editor:
-    hash: a390af32e1ac2f60c678deb13e42087191e6fdb344a20256a4dfbad5d7ee3f0d
+    hash: 73102acb7ecd2a107d3f5ef1e9fffcd4f7a18ee834eedad991a738cbe8e50221
     path: patches/monaco-editor.patch
 
 importers:
@@ -1163,7 +1163,7 @@ importers:
         version: 9.38.0(jiti@2.6.1)
       monaco-editor:
         specifier: 0.52.2
-        version: 0.52.2(patch_hash=a390af32e1ac2f60c678deb13e42087191e6fdb344a20256a4dfbad5d7ee3f0d)
+        version: 0.52.2(patch_hash=73102acb7ecd2a107d3f5ef1e9fffcd4f7a18ee834eedad991a738cbe8e50221)
       postcss:
         specifier: 'catalog:'
         version: 8.5.6
@@ -17697,7 +17697,7 @@ snapshots:
 
   module-details-from-path@1.0.4: {}
 
-  monaco-editor@0.52.2(patch_hash=a390af32e1ac2f60c678deb13e42087191e6fdb344a20256a4dfbad5d7ee3f0d): {}
+  monaco-editor@0.52.2(patch_hash=73102acb7ecd2a107d3f5ef1e9fffcd4f7a18ee834eedad991a738cbe8e50221): {}
 
   moo@0.5.2: {}
 
