@@ -167,7 +167,10 @@
       ]
     },
     "release:labs-cli": {
-      "command": "cd projects/labs/cli && HUSKY=0 pnpm exec semantic-release"
+      "command": "cd projects/labs/cli && HUSKY=0 pnpm exec semantic-release",
+      "dependencies": [
+        "release:labs-lint"
+      ]
     },
     "release:labs-code": {
       "command": "cd projects/labs/code && HUSKY=0 pnpm exec semantic-release",
