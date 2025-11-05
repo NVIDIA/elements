@@ -753,8 +753,8 @@ importers:
         specifier: 7.8.6
         version: 7.8.6(@types/node@24.9.1)
       '@modelcontextprotocol/sdk':
-        specifier: 1.19.1
-        version: 1.19.1
+        specifier: 1.21.0
+        version: 1.21.0
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint
@@ -768,11 +768,11 @@ importers:
         specifier: 'catalog:'
         version: 11.0.3
       marked:
-        specifier: 16.4.0
-        version: 16.4.0
+        specifier: 16.4.1
+        version: 16.4.1
       marked-terminal:
         specifier: 7.3.0
-        version: 7.3.0(marked@16.4.0)
+        version: 7.3.0(marked@16.4.1)
       open:
         specifier: 10.2.0
         version: 10.2.0
@@ -802,8 +802,8 @@ importers:
         specifier: 'catalog:'
         version: 24.9.1
       '@types/yargs':
-        specifier: 17.0.33
-        version: 17.0.33
+        specifier: 17.0.34
+        version: 17.0.34
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
         version: 4.0.5(vitest@4.0.5)
@@ -3140,9 +3140,14 @@ packages:
     resolution: {integrity: sha512-bGwA78F/U5G2jrnsdRkPY3IwIwZeWUEfb5o764b79lb0rJmMT76TLwKhdNZOWakOQtedYefwIR4emisEMvInKA==, tarball: https://registry.npmjs.org
     engines: {node: '>=18'}
 
-  '@modelcontextprotocol/sdk@1.19.1':
-    resolution: {integrity: sha512-3Y2h3MZKjec1eAqSTBclATlX+AbC6n1LgfVzRMJLt3v6w0RCYgwLrjbxPDbhsYHt6Wdqc/aCceNJYgj448ELQQ==, tarball: https://registry.npmjs.org
+  '@modelcontextprotocol/sdk@1.21.0':
+    resolution: {integrity: sha512-YFBsXJMFCyI1zP98u7gezMFKX4lgu/XpoZJk7ufI6UlFKXLj2hAMUuRlQX/nrmIPOmhRrG6tw2OQ2ZA/ZlXYpQ==, tarball: https://registry.npmjs.org
     engines: {node: '>=18'}
+    peerDependencies:
+      '@cfworker/json-schema': ^4.1.1
+    peerDependenciesMeta:
+      '@cfworker/json-schema':
+        optional: true
 
   '@msgpackr-extract/msgpackr-extract-darwin-arm64@3.0.3':
     resolution: {integrity: sha512-QZHtlVgbAdy2zAqNA9Gu1UpIuI8Xvsd1v8ic6B2pZmeFnFcMWiPLfWXh7TVw4eGEZ/C9TH281KwhVoeQUKbyjw==, tarball: https://registry.npmjs.org
@@ -4673,8 +4678,8 @@ packages:
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==, tarball: https://registry.npmjs.org
 
-  '@types/yargs@17.0.33':
-    resolution: {integrity: sha512-WpxBCKWPLr4xSsHgz511rFJAM+wS28w2zEO1QDNY5zM/S8ok70NNfztH0xwhqKyaK0OHCbN98LDAZuy1ctxDkA==, tarball: https://registry.npmjs.org
+  '@types/yargs@17.0.34':
+    resolution: {integrity: sha512-KExbHVa92aJpw9WDQvzBaGVE2/Pz+pLZQloT2hjL8IqsZnV62rlPOYvNnLmf/L2dyllfVUOVBj64M0z/46eR2A==, tarball: https://registry.npmjs.org
 
   '@types/yauzl@2.10.3':
     resolution: {integrity: sha512-oJoftv0LSuaDZE3Le4DbKX+KS9G36NzOeSap90UIK0yMA/NhKJhqlSGtNDORNRaIbQfzjXDrQa0ytJ6mNRGz/Q==, tarball: https://registry.npmjs.org
@@ -7935,8 +7940,8 @@ packages:
     peerDependencies:
       marked: '>=1 <16'
 
-  marked@16.4.0:
-    resolution: {integrity: sha512-CTPAcRBq57cn3R8n3hwc2REddc28hjR7RzDXQ+lXLmMJYqn20BaI2cGw6QjgZGIgVfp2Wdfw4aMzgNteQ6qJgQ==, tarball: https://registry.npmjs.org
+  marked@16.4.1:
+    resolution: {integrity: sha512-ntROs7RaN3EvWfy3EZi14H4YxmT6A5YvywfhO+0pm+cH/dnSQRmdAmoFIc3B9aiwTehyk7pESH4ofyBY+V5hZg==, tarball: https://registry.npmjs.org
     engines: {node: '>= 20'}
     hasBin: true
 
@@ -12214,9 +12219,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@modelcontextprotocol/sdk@1.19.1':
+  '@modelcontextprotocol/sdk@1.21.0':
     dependencies:
-      ajv: 6.12.6
+      ajv: 8.17.1
+      ajv-formats: 3.0.1(ajv@8.17.1)
       content-type: 1.0.5
       cors: 2.8.5
       cross-spawn: 7.0.6
@@ -13808,7 +13814,7 @@ snapshots:
 
   '@types/yargs-parser@21.0.3': {}
 
-  '@types/yargs@17.0.33':
+  '@types/yargs@17.0.34':
     dependencies:
       '@types/yargs-parser': 21.0.3
 
@@ -17522,18 +17528,18 @@ snapshots:
       node-emoji: 2.2.0
       supports-hyperlinks: 3.2.0
 
-  marked-terminal@7.3.0(marked@16.4.0):
+  marked-terminal@7.3.0(marked@16.4.1):
     dependencies:
       ansi-escapes: 7.1.1
       ansi-regex: 6.2.2
       chalk: 5.6.2
       cli-highlight: 2.1.11
       cli-table3: 0.6.5
-      marked: 16.4.0
+      marked: 16.4.1
       node-emoji: 2.2.0
       supports-hyperlinks: 3.2.0
 
-  marked@16.4.0: {}
+  marked@16.4.1: {}
 
   marked@9.1.6: {}
 
