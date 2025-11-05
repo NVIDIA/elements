@@ -124,8 +124,11 @@ const rule = {
   create(context) {
     return {
       Declaration(node) {
+        const property = node.property;
+        const propertyName = property.replace('--', '');
+
         // unexpected-css-value space
-        if (node.property.includes('margin') || node.property.includes('gap')) {
+        if (propertyName.includes('margin') || propertyName.includes('gap')) {
           const child = node.value.children?.find(child => {
             const value = parseInt(child.value);
             const isDimension = child.type === 'Dimension';
@@ -142,16 +145,16 @@ const rule = {
               data: {
                 value: child.value,
                 unit: child.unit,
-                property: node.property,
+                property: property,
                 alternate: alternate ?? 'var(--nve-ref-space-*)'
               },
-              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
+              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
             });
           }
         }
 
         // unexpected-css-value size
-        if (node.property === 'width' || node.property === 'height') {
+        if (propertyName === 'width' || propertyName === 'height') {
           const child = node.value.children?.find(child => {
             const value = parseInt(child.value);
             const isDimension = child.type === 'Dimension';
@@ -168,16 +171,16 @@ const rule = {
               data: {
                 value: child.value,
                 unit: child.unit,
-                property: node.property,
+                property: property,
                 alternate: alternate ?? 'var(--nve-ref-size-*)'
               },
-              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
+              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
             });
           }
         }
 
         // unexpected-css-value font-size
-        if (node.property === 'font-size') {
+        if (propertyName === 'font-size') {
           const child = node.value.children?.find(child => {
             const value = parseInt(child.value);
             const isDimension = child.type === 'Dimension';
@@ -193,16 +196,16 @@ const rule = {
               data: {
                 value: child.value,
                 unit: child.unit,
-                property: node.property,
+                property: property,
                 alternate: alternate ?? 'var(--nve-ref-font-size-*)'
               },
-              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
+              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
             });
           }
         }
 
         // unexpected-css-value font-weight
-        if (node.property === 'font-weight') {
+        if (propertyName === 'font-weight') {
           const child = node.value.children?.find(child => child.name !== 'var');
           if (child) {
             const alternate = fontWeightTokens.find(
@@ -214,16 +217,16 @@ const rule = {
               data: {
                 value: child.value ?? '',
                 unit: child.name ?? '',
-                property: node.property,
+                property: property,
                 alternate: alternate ?? 'var(--nve-ref-font-weight-*)'
               },
-              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
+              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
             });
           }
         }
 
         // unexpected-css-value line-height
-        if (node.property === 'line-height') {
+        if (propertyName === 'line-height') {
           const child = node.value.children?.find(child => {
             const value = parseInt(child.value);
             const isDimension = child.type === 'Dimension';
@@ -240,16 +243,16 @@ const rule = {
               data: {
                 value: child.value,
                 unit: child.unit,
-                property: node.property,
+                property: property,
                 alternate: alternate ?? 'var(--nve-ref-font-line-height-*)'
               },
-              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
+              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
             });
           }
         }
 
         // unexpected-css-value opacity
-        if (node.property === 'opacity') {
+        if (propertyName === 'opacity') {
           const child = node.value.children?.find(
             child => child.type === 'Number' && child.value !== '0' && child.value !== '1'
           );
@@ -262,16 +265,19 @@ const rule = {
               data: {
                 value: child.value ?? '',
                 unit: child.unit ?? '',
-                property: node.property,
+                property: property,
                 alternate: alternate ?? 'var(--nve-ref-opacity-*)'
               },
-              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
+              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
             });
           }
         }
 
         // unexpected-css-value border-radius
-        if (node.property === 'border-radius') {
+        if (propertyName === 'border-radius') {
+          let value = '';
+          let unit = '';
+
           const child = node.value.children?.find(child => {
             const value = parseInt(child.value);
             const isDimension = child.type === 'Dimension' && child.unit === 'px';
@@ -282,23 +288,35 @@ const rule = {
           });
 
           if (child) {
-            const alternate = borderRadiusTokens.find(token => token.value === parseInt(child.value))?.name;
+            value = child.value;
+            unit = child.unit;
+          }
+
+          if (node.property.startsWith('--')) {
+            const rawValue = node.value.value.trim();
+            if (rawValue.includes('px')) {
+              value = rawValue;
+            }
+          }
+
+          if (value) {
+            const alternate = borderRadiusTokens.find(token => token.value === parseInt(value))?.name;
             context.report({
               messageId: 'unexpected-css-value',
               node,
               data: {
-                value: child.value,
-                unit: child.unit ?? '',
-                property: node.property,
+                value,
+                unit,
+                property: property,
                 alternate: alternate ?? 'var(--nve-ref-border-radius-*)'
               },
-              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
+              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
             });
           }
         }
 
         // unexpected-css-value border-width
-        if (node.property === 'border-width') {
+        if (propertyName === 'border-width') {
           const child = node.value.children?.find(child => {
             const value = parseInt(child.value);
             const isDimension = child.type === 'Dimension';
@@ -316,16 +334,16 @@ const rule = {
               data: {
                 value: child.value,
                 unit: child.unit,
-                property: node.property,
+                property: property,
                 alternate: alternate ?? 'var(--nve-ref-border-width-*)'
               },
-              fix: alternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
+              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
             });
           }
         }
 
         // unexpected-css-value box-shadow
-        if (node.property === 'box-shadow') {
+        if (propertyName === 'box-shadow') {
           const child = node.value.children?.find(child => child.type === 'Dimension');
 
           if (child && !JSON.stringify(node.value).includes('Highlight')) {
@@ -335,7 +353,7 @@ const rule = {
               data: {
                 value: child.value,
                 unit: child.unit,
-                property: node.property,
+                property: property,
                 alternate: 'var(--nve-ref-shadow-*)'
               }
             });
@@ -343,20 +361,36 @@ const rule = {
         }
 
         // unexpected-css-value color
-        if (node.property === 'color' || node.property === 'background') {
+        if (propertyName === 'color' || propertyName === 'background') {
+          let value = '';
+          let unit = '';
+
           const child = node.value.children?.find(
             child => child.type === 'Hash' || child.name?.includes('hsl') || child.name?.includes('rgb')
           );
 
           if (child) {
+            value = child.type === 'Hash' ? `#${child.value.trim()}` : child.name.trim();
+            unit = child.type === 'Hash' ? '' : child.name.trim();
+          }
+
+          if (node.property.startsWith('--')) {
+            const rawValue = node.value.value.trim();
+            if (rawValue.includes('#') || rawValue.includes('hsl') || rawValue.includes('rgb')) {
+              value = rawValue;
+              unit = '';
+            }
+          }
+
+          if (value) {
             context.report({
               messageId: 'unexpected-css-value',
               node,
               data: {
-                value: child.type === 'Hash' ? `#${child.value}` : child.name,
-                unit: child.type === 'Hash' ? '' : child.name,
+                value,
+                unit,
                 property: node.property,
-                alternate: `var(--nve-*-${node.property})`
+                alternate: `var(--nve-*-${propertyName})`
               }
             });
           }
