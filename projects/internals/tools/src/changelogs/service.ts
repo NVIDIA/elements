@@ -65,7 +65,19 @@ export class ChangelogsService {
       },
       required: ['name']
     },
-    outputSchema: { type: 'string' }
+    outputSchema: {
+      oneOf: [
+        { type: 'string' },
+        {
+          type: 'object',
+          patternProperties: {
+            '^.*$': { type: 'string' }
+          },
+          additionalProperties: false
+        }
+      ],
+      additionalProperties: false
+    }
   })
   static async search({
     name,
