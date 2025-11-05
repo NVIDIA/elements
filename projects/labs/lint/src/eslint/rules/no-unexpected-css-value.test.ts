@@ -382,6 +382,33 @@ describe('noUnexpectedCssValue', () => {
     );
   });
 
+  it('should report unexpected use of CSS value - border-radius custom properties', () => {
+    tester.run(
+      'should report unexpected use of CSS value - border-radius custom properties',
+      noUnexpectedCssValue as unknown as JSRuleDefinition,
+      {
+        valid: [':host { --border-radius: var(----nve-ref-border-radius-sm); }'],
+        invalid: [
+          {
+            code: ':host { --border-radius: 4px; }',
+            output: ':host { --border-radius: var(--nve-ref-border-radius-xs); }',
+            errors: [
+              {
+                messageId: 'unexpected-css-value',
+                data: {
+                  value: '4px',
+                  unit: '',
+                  property: '--border-radius',
+                  alternate: 'var(--nve-ref-border-radius-xs)'
+                }
+              }
+            ]
+          }
+        ]
+      }
+    );
+  });
+
   it('should report unexpected use of CSS value - border-width', () => {
     tester.run(
       'should report unexpected use of CSS value - border-width',
@@ -452,6 +479,30 @@ describe('noUnexpectedCssValue', () => {
               {
                 messageId: 'unexpected-css-value',
                 data: { value: '#000', unit: '', property: 'color', alternate: 'var(--nve-*-color)' }
+              }
+            ]
+          }
+        ]
+      }
+    );
+  });
+
+  it('should report unexpected use of CSS value - custom properties', () => {
+    tester.run(
+      'should report unexpected use of CSS value - custom properties',
+      noUnexpectedCssValue as unknown as JSRuleDefinition,
+      {
+        valid: [
+          ':host { --color: var(--nve-sys-support-success-color); }', // valid token assignment
+          ':host { --background: var(--nve-sys-accent-primary-background); }' // valid token assignment
+        ],
+        invalid: [
+          {
+            code: ':host { --color: #000; }',
+            errors: [
+              {
+                messageId: 'unexpected-css-value',
+                data: { value: '#000', unit: '', property: '--color', alternate: 'var(--nve-*-color)' }
               }
             ]
           }

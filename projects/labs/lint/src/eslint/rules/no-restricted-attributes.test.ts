@@ -58,4 +58,15 @@ describe('noRestrictedAttributes', () => {
       ]
     });
   });
+
+  it('should allow external box-model attribute layout values', () => {
+    tester.run('should allow external box-model attribute layout values', rule, {
+      valid: [
+        '<nve-button nve-layout="span:6"></nve-button>',
+        '<nve-card nve-layout="full"></nve-card>',
+        '<nve-card nve-layout="full span:6"></nve-card>'
+      ],
+      invalid: []
+    });
+  });
 });
