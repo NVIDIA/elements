@@ -3,6 +3,14 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 
 const RESTRICTED_ATTRIBUTES = ['nve-text', 'nve-layout', 'nve-text', 'nve-layout'];
 
+// External box-model attribute values that are allowed on custom elements
+function isExternalBoxModelValue(value: string) {
+  return value
+    .trim()
+    .split(' ')
+    .every(part => part.startsWith('span:') || part === 'full');
+}
+
 const rule = {
   meta: {
     type: 'problem' as const,
@@ -23,6 +31,13 @@ const rule = {
         RESTRICTED_ATTRIBUTES.forEach(attribute => {
           const attr = findAttr(node, attribute);
           if (node.name.includes('-') && attr) {
+            // Allow external box-model values for layout attributes
+            if (attribute === 'nve-layout' && attr.value?.value) {
+              if (isExternalBoxModelValue(attr.value.value)) {
+                return;
+              }
+            }
+
             context.report({
               messageId: 'no-restricted-attributes',
               node: attr,
