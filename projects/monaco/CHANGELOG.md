@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.3.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.3.0...@nvidia-elements/monaco-v1.3.1) (2025-11-06)
+
+
+### Bug Fixes
+
+* **monaco:** trigger release after patch ([1f1fb86](https://github.com/NVIDIA/elements/commit/1f1fb8642a7582a00b1f97db490b78b5ee8f17ad))
+
 ## [@nvidia-elements/monaco-v1.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.2.9...@nvidia-elements/monaco-v1.3.0) (2025-10-23)
 
 
