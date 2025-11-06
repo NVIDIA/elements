@@ -40,7 +40,26 @@ export class VitePlaywrightRunner {
 
   constructor(config = {}) {
     this.#runnerID = config.runnerID ?? 'playwright';
-    this.#chromiumArgs = config.chromiumArgs ?? ['--headless'];
+    this.#chromiumArgs = config.chromiumArgs ?? [
+      '--headless',
+      '--disable-dev-shm-usage',
+      '--disable-setuid-sandbox',
+      '--disable-software-rasterizer',
+      '--no-sandbox',
+      '--disable-gpu',
+      '--disable-extensions',
+      '--disable-background-networking',
+      '--disable-default-apps',
+      '--disable-sync',
+      '--disable-translate',
+      '--metrics-recording-only',
+      '--mute-audio',
+      '--no-first-run',
+      '--safebrowsing-disable-auto-update',
+      '--disable-features=TranslateUI',
+      '--disable-features=BlinkGenPropertyTrees',
+      '--disable-ipc-flooding-protection'
+    ];
   }
 
   async open() {
