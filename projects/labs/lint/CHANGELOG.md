@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.5.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.5.0...@nvidia-elements/lint-v0.5.1) (2025-11-06)
+
+
+### Bug Fixes
+
+* **labs-lint:** improve css property detection ([ac02c5c](https://github.com/NVIDIA/elements/commit/ac02c5c96b426483ac5f9aa08bce13f397addf36))
+
 ## [@nvidia-elements/lint-v0.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.4.0...@nvidia-elements/lint-v0.5.0) (2025-10-14)
 
 
