@@ -22,6 +22,7 @@ export const libraryVisualTestConfig = {
       junit: './coverage/visual/junit.xml'
     },
     testTimeout: 60000,
+    hookTimeout: 30000,
     server: {
       deps: {
         external: ['**/node_modules/**']
