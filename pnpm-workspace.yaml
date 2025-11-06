@@ -61,15 +61,15 @@ catalog:
   '@types/node': 24.9.1
   '@types/react': 19.2.2
   '@types/react-dom': 19.2.2
-  '@vitest/browser': 4.0.5
-  '@vitest/browser-playwright': 4.0.5
-  '@vitest/coverage-istanbul': 4.0.5
-  '@vitest/mocker': 4.0.5
+  '@vitest/browser': 4.0.7
+  '@vitest/browser-playwright': 4.0.7
+  '@vitest/coverage-istanbul': 4.0.7
+  '@vitest/mocker': 4.0.7
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
   axe-core: 4.11.0
   eslint: 9.38.0
   glob: 11.0.3
-  lighthouse: 13.0.0
+  lighthouse: 13.0.1
   lit: ^3.3.1
   lit-html: ^3.3.1
   markdown-it: 14.1.0
@@ -83,9 +83,9 @@ catalog:
   ts-morph: 26.0.0
   typescript: 5.8.2
   typescript-eslint: 8.46.2
-  vite: 7.1.12
+  vite: 7.2.1
   vite-plugin-dts: 4.5.4
-  vitest: 4.0.5
+  vitest: 4.0.7
 
 minimumReleaseAge: 1140
 

@@ -40,9 +40,11 @@ export const libraryTestConfig = {
   },
   test: {
     retry: 2,
-    // maxWorkers: process.env.CI ? 4 : undefined,
-    // maxConcurrency: process.env.CI ? 4 : undefined, // Limit concurrent tests to avoid browser overload
+    maxWorkers: process.env.CI ? 1 : undefined,
+    maxConcurrency: process.env.CI ? 1 : undefined, // Limit concurrent tests to avoid browser overload
     isolate: coverage,
+    testTimeout: 60000,
+    hookTimeout: 30000,
     server: {
       deps: {
         external: ['**/node_modules/**']
@@ -62,7 +64,7 @@ export const libraryTestConfig = {
     },
     setupFiles: ['@nve-internals/vite/setup/library.js'], // todo: this should be project specific
     browser: {
-      fileParallelism: true,
+      fileParallelism: !process.env.CI, // Disable file parallelism in CI to reduce browser instances
       enabled: true,
       provider: playwright({
         launch: {
@@ -70,7 +72,20 @@ export const libraryTestConfig = {
             '--disable-dev-shm-usage',
             '--disable-setuid-sandbox',
             '--disable-software-rasterizer',
-            '--no-sandbox'
+            '--no-sandbox',
+            '--disable-gpu',
+            '--disable-extensions',
+            '--disable-background-networking',
+            '--disable-default-apps',
+            '--disable-sync',
+            '--disable-translate',
+            '--metrics-recording-only',
+            '--mute-audio',
+            '--no-first-run',
+            '--safebrowsing-disable-auto-update',
+            '--disable-features=TranslateUI',
+            '--disable-features=BlinkGenPropertyTrees',
+            '--disable-ipc-flooding-protection'
           ],
           timeout: 120000 // 120 second browser launch timeout
         }
