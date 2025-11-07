@@ -3,6 +3,56 @@ import { readFileSync } from 'node:fs';
 import type { ProjectTestSummary, CoverageResult } from '../types.js';
 import type { ProjectsTestSummary } from '../utils/reports.js';
 
+export function normalizePath(path: string): string {
+  const projectsIndex = path.indexOf('/projects');
+  if (projectsIndex !== -1) {
+    return path.substring(projectsIndex);
+  }
+  return path;
+}
+
+export function normalizeTestResults<T extends Record<string, unknown>>(testResults: T[]): T[] {
+  return testResults.map(result => {
+    const normalized = { ...result };
+
+    if ('name' in result && typeof result.name === 'string') {
+      (normalized as Record<string, unknown>).name = normalizePath(result.name);
+    }
+
+    if ('assertionResults' in result && Array.isArray(result.assertionResults)) {
+      (normalized as Record<string, unknown>).assertionResults = result.assertionResults.map(assertion => {
+        const normalizedAssertion = { ...assertion } as Record<string, string[] | Record<string, string> | undefined>;
+
+        normalizedAssertion.failureMessages = ((normalizedAssertion.failureMessages as string[] | undefined) ?? []).map(
+          (message: string) => {
+            return message.includes('@fs') ? '' : normalizePath(message);
+          }
+        );
+        if (
+          typeof assertion === 'object' &&
+          assertion !== null &&
+          'meta' in assertion &&
+          typeof assertion.meta === 'object' &&
+          assertion.meta !== null
+        ) {
+          const meta = assertion.meta as Record<string, string>;
+          const normalizedMeta = { ...meta };
+
+          if ('failScreenshotPath' in meta && typeof meta.failScreenshotPath === 'string') {
+            normalizedMeta.failScreenshotPath = normalizePath(meta.failScreenshotPath);
+          }
+
+          normalizedAssertion.meta = normalizedMeta as Record<string, string>;
+        }
+
+        return normalizedAssertion;
+      });
+    }
+
+    return normalized;
+  });
+}
+
 export async function generateTestSummary(): Promise<ProjectsTestSummary> {
   return {
     created: new Date().toISOString(),
@@ -113,18 +163,30 @@ async function getTestReport(name: string, basePath: string): Promise<ProjectTes
   if (existsSync(unitPath)) {
     report.unit = JSON.parse(readFileSync(unitPath, 'utf8'));
     report.unit.coverageMap = undefined;
+    if (report.unit.testResults) {
+      report.unit.testResults = normalizeTestResults(report.unit.testResults);
+    }
   }
 
   if (existsSync(axePath)) {
     report.axe = JSON.parse(readFileSync(axePath, 'utf8'));
+    if (report.axe.testResults) {
+      report.axe.testResults = normalizeTestResults(report.axe.testResults);
+    }
   }
 
   if (existsSync(visualPath)) {
     report.visual = JSON.parse(readFileSync(visualPath, 'utf8'));
+    if (report.visual.testResults) {
+      report.visual.testResults = normalizeTestResults(report.visual.testResults);
+    }
   }
 
   if (existsSync(ssrPath)) {
     report.ssr = JSON.parse(readFileSync(ssrPath, 'utf8'));
+    if (report.ssr.testResults) {
+      report.ssr.testResults = normalizeTestResults(report.ssr.testResults);
+    }
   }
 
   if (existsSync(lighthousePath)) {

@@ -78,7 +78,6 @@
         "../vite:ci",
         "generate:metadata",
         "generate:examples",
-        "generate:tests",
         "generate:wireit"
       ]
     },
@@ -203,6 +202,8 @@
         "./src/tasks/tests.ts",
         "./src/tasks/tests.utils.ts",
         "./static/lighthouse.json",
+        "./coverage/unit/coverage-summary.json",
+        "./coverage/unit/summary.json",
         "../../elements/coverage/unit/coverage-summary.json",
         "../../elements/coverage/unit/summary.json",
         "../../elements/coverage/visual/summary.json",
@@ -214,6 +215,10 @@
         "../../labs/brand/coverage/unit/coverage-summary.json",
         "../../labs/brand/coverage/unit/summary.json",
         "../../labs/brand/coverage/visual/summary.json",
+        "../../labs/cli/coverage/unit/coverage-summary.json",
+        "../../labs/cli/coverage/unit/summary.json",
+        "../../labs/lint/coverage/unit/coverage-summary.json",
+        "../../labs/lint/coverage/unit/summary.json",
         "../../labs/code/coverage/unit/coverage-summary.json",
         "../../labs/code/coverage/unit/summary.json",
         "../../labs/code/coverage/visual/summary.json",
@@ -231,12 +236,18 @@
         "../../monaco/coverage/unit/coverage-summary.json",
         "../../monaco/coverage/unit/summary.json",
         "../../monaco/coverage/visual/summary.json",
-        "../../monaco/coverage/ssr/summary.json"
+        "../../monaco/coverage/ssr/summary.json",
+        "../tools/coverage/unit/coverage-summary.json",
+        "../tools/coverage/unit/summary.json"
       ],
       "output": [
         "static/tests.json"
       ],
       "dependencies": [
+        {
+          "script": "test:coverage",
+          "cascade": false
+        },
         {
           "script": "../../elements:test:coverage",
           "cascade": false
@@ -291,6 +302,18 @@
         },
         {
           "script": "../../labs/playwright-screencast:test:coverage",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/cli:test:coverage",
+          "cascade": false
+        },
+        {
+          "script": "../../labs/lint:test:coverage",
+          "cascade": false
+        },
+        {
+          "script": "../tools:test:coverage",
           "cascade": false
         }
       ]
