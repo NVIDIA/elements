@@ -116,6 +116,7 @@
       "command": "NODE_ENV=production vite build",
       "files": [
         "src/**",
+        "!src/**/*.examples.ts",
         "!src/**/*.stories.ts",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",

@@ -25,7 +25,7 @@ Support colors are used in combination of text or iconography to convey status o
 
 ## Badge Support
 
-{% story '@nvidia-elements/core/badge/badge.stories.json', 'Support' %}
+{% story '@nvidia-elements/core/badge/badge.examples.json', 'Support' %}
 
 ## Alert Support
 
