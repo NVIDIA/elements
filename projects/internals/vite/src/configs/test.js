@@ -128,6 +128,7 @@ export const libraryTestConfig = {
         '**/*.test.ssr.ts',
         '**/*.test.lighthouse.ts',
         '**/*.test.visual.ts',
+        '**/*.examples.ts',
         '**/*.stories.ts',
         'vite.*.ts',
         'vitest.*.ts'
