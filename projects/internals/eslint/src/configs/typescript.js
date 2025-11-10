@@ -13,7 +13,7 @@ const tests = [
   '**/*.test.axe.ts',
   '**/*.test.ssr.ts'
 ];
-const stories = ['**/*.stories.ts'];
+const examples = ['**/*.examples.ts', '**/*.stories.ts'];
 const ignores = [
   'node_modules/',
   'coverage/',
@@ -28,7 +28,7 @@ const ignores = [
 
 /** @type {import('eslint').Linter.Config[]} */
 const config = {
-  files: [...source, ...tests, ...stories],
+  files: [...source, ...tests, ...examples],
   ignores,
   plugins: {
     '@typescript-eslint': tseslint.plugin,
