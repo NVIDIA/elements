@@ -15,7 +15,7 @@ Status colors are used in combination of text or iconography to convey status of
 
 ## Badge Status
 
-{% story '@nvidia-elements/core/badge/badge.stories.json', 'Status' %}
+{% story '@nvidia-elements/core/badge/badge.examples.json', 'Status' %}
 
 ## Status Tokens
 

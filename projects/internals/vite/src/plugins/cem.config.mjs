@@ -635,6 +635,7 @@ export default {
   globs: [resolve('./src')],
   exclude: [
     resolve('src/**/*.css'),
+    resolve('src/**/*.examples.ts'),
     resolve('src/**/*.stories.ts'),
     resolve('src/**/*.test.ts'),
     resolve('src/**/*.test.axe.ts'),
