@@ -18,7 +18,7 @@ const tests = [
   '**/*.test.axe.ts',
   '**/*.test.ssr.ts'
 ];
-const stories = ['**/*.stories.ts'];
+const examples = ['**/*.stories.ts'];
 const ignores = [
   'node_modules/',
   'coverage/',
@@ -36,7 +36,7 @@ export const litConfig = [
     ignores // https://github.com/eslint/eslint/discussions/18304
   },
   {
-    files: [...source, ...tests, ...stories],
+    files: [...source, ...tests, ...examples],
     ignores,
     plugins: {
       wc: wc,
@@ -105,7 +105,7 @@ export const litConfig = [
   // library implementation files
   {
     files: [...source],
-    ignores: [...ignores, ...tests, ...stories],
+    ignores: [...ignores, ...tests, ...examples],
     rules: {
       'local/reserved-property-names': ['error'],
       'local/primitive-property': ['error'],
