@@ -31,7 +31,7 @@ Renders an example template and its corresponding metadata.
 
 ```html
 {% raw %}
-{% example '@nvidia-elements/core/badge/badge.stories.json', 'Default' %}
+{% example '@nvidia-elements/core/badge/badge.examples.json', 'Default' %}
 {% endraw %}
 ```
 
@@ -52,8 +52,9 @@ Renders the description metadata of a given API.
 
 | Parameters | Description             | Type                                             |
 | ---------- | ----------------------- | ------------------------------------------------ |
-| Name       | Tag name of element API | `string`                                         |
+| Tag Name   | Tag name of element API | `string`                                         |
 | API        | API metadata to render  | `description` \| `event` \| `property` \| `slot` |
+| Identifier | Public API name         |
 
 ## Do/Don't Shortcode
 
