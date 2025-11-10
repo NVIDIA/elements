@@ -9,7 +9,7 @@ const tests = [
   '**/*.test.axe.ts',
   '**/*.test.ssr.ts'
 ];
-const stories = ['**/*.stories.ts'];
+const examples = ['**/*.examples.ts', '**/*.stories.ts'];
 const ignores = [
   'node_modules/',
   'coverage/',
@@ -29,7 +29,7 @@ export const libraryConfig = [
   },
   {
     files: [...source],
-    ignores: [...ignores, ...tests, ...stories],
+    ignores: [...ignores, ...tests, ...examples],
     rules: {
       'no-implicit-globals': ['error'],
       'no-restricted-globals': [
@@ -42,7 +42,7 @@ export const libraryConfig = [
   },
   {
     files: [...source],
-    ignores: ['**/src/**/bundle.ts', ...ignores, ...tests, ...stories],
+    ignores: ['**/src/**/bundle.ts', ...ignores, ...tests, ...examples],
     ...config([
       {
         rule: 'no-restricted-imports',
@@ -81,7 +81,7 @@ export const libraryConfig = [
       '**/src/**/define.d.ts',
       '**/src/**/bundle.ts',
       ...tests,
-      ...stories,
+      ...examples,
       ...ignores
     ],
     ...config(

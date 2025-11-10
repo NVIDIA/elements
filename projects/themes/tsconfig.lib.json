@@ -10,6 +10,7 @@
     "**/*.test.ssr.ts",
     "**/*.test.lighthouse.ts",
     "**/*.test.visual.ts",
+    "**/*.examples.ts",
     "**/*.stories.ts"
   ]
 }

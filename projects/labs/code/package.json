@@ -229,6 +229,7 @@
         "../../elements/dist/**/*.js",
         "!../../elements/dist/**/*.stories.js",
         "src/**",
+        "!src/**/*.examples.ts",
         "!src/**/*.stories.ts",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
