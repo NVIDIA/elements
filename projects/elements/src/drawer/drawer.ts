@@ -18,6 +18,8 @@ import styles from './drawer.css?inline';
  * @description Drawer are to display content that is out of context of the rest of the page (notifications, navigation, settings). Alternatively [Panel](./docs/elements/panel/) is inline as its content is coupled or closely related to the content on the page (details, additional actions/options). [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/drawer
+ * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
  * @event open - Dispatched when the drawer is opened.
  * @event close - Dispatched when the drawer is closed.
  * @slot default content slot
