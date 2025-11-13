@@ -17,38 +17,16 @@ const examples = stories;
  */
 export async function installShortcode(tag) {
   const element = elements.find(d => d.name === tag);
-  return element
+  return element?.manifest?.metadata?.entrypoint
     ? /* html */ `
 \`\`\`typescript
-import '${element.manifest.metadata.entrypoint}/define.js';
+import '${element?.manifest?.metadata?.entrypoint}/define.js';
 \`\`\`
 
 \`\`\`html
 ${examples.find(s => s.id === 'Default' && s.element === tag)?.template}
 \`\`\`
 `
-    : '';
-}
-
-/**
- * Shortcode for generating API documentation sections
- * Supports different types of documentation: description, event, property, slot, story
- * @param {string} tag - The component tag name
- * @param {string} type - The type of documentation to generate
- * @param {string} value - The specific value to document (e.g., event name, property name)
- * @returns {Promise<string>} HTML string containing the API documentation section
- */
-export async function apiShortcode(tag, type, value) {
-  const element = elements.find(d => d.name === tag);
-  return element
-    ? /* html */ `
-  ${type === 'description' ? md.render(element.manifest.description ?? '') : ''}
-  ${type === 'event' ? md.render(`\`${value}\`: ` + element.manifest.events?.find(m => m.name === value)?.description) : ''}
-  ${type === 'property' ? md.render(element.manifest.members?.find(m => m.name === value)?.description ?? '') : ''}
-  ${type === 'slot' ? md.render(element.manifest.slots?.find(m => m.name === value)?.description ?? '') : ''}
-  ${type === 'story' || type === 'example' ? md.render(element.stories?.items?.find(m => m.id === value)?.description ?? '') : ''}`
-        .trim()
-        .replaceAll('<p>', '<p nve-text="body relaxed mkd">')
     : '';
 }
 
@@ -63,9 +41,13 @@ export async function apiShortcode(tag, type, value) {
 export async function exampleShortcode(
   ref,
   exampleName,
-  userConfig = { inline: true, height: '95%', resizable: true, editable: false }
+  userConfig = { inline: true, height: '95%', resizable: true, summary: true }
 ) {
-  const config = typeof userConfig === 'string' ? JSON.parse(userConfig) : userConfig;
+  const defaultConfig = { inline: true, height: '95%', resizable: true, summary: true };
+  const config =
+    typeof userConfig === 'string'
+      ? { ...defaultConfig, ...JSON.parse(userConfig) }
+      : { ...defaultConfig, ...userConfig };
   const example =
     ref.includes('.stories.json') || ref.includes('.examples.json')
       ? examples.find(s => s.entrypoint?.includes(ref) && s.id === exampleName)
@@ -109,17 +91,11 @@ export async function exampleShortcode(
       ? reloadScript(example, canvasId)
       : '';
 
+  // static canvas is used to ensure what is rendered is local sourced and not from the remote esm.sh
   return example
-    ? config.editable
-      ? /* html */ `<nvd-canvas-editable 
-  id="${canvasId}"
-  style="--height: ${config.height}"
-  source="${md.utils?.escapeHtml(templateContent)}"
-  tag="${example.element || ref}">
-</nvd-canvas-editable>`
-      : /* html */ `
-<div nve-layout="column gap:sm">
-${markdown.render(example.description ? example.description : (example.summary ?? ''))}
+    ? /* html */ `
+<div class="example-shortcode" nve-layout="column gap:sm">
+${config.summary ? markdown.render(example.summary ? example.summary : (example.summary ?? '')).replace('nve-text', 'class="example-shortcode-summary" nve-text') : ''}
 <nvd-canvas id="${canvasId}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
   <template>${md.utils?.escapeHtml(templateContent)}</template>${template}${editButton}${playgroundButton}
 </nvd-canvas>${reload}
@@ -158,5 +134,12 @@ export async function doDontShortcode(content) {
   <div class="content" nve-layout="grid gap:sm span-items:6">
     ${content}
   </div>
+</div>`;
+}
+
+export async function splitShortcode(content) {
+  return /* html */ `
+<div class="split-shortcode" nve-layout="grid gap:lg span-items:12 &xl|span-items:6">
+  ${content}
 </div>`;
 }
