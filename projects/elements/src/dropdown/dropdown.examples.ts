@@ -62,6 +62,8 @@ export const Events = {
 <nve-button popovertarget="dropdown">button</nve-button>
 <script type="module">
   const dropdown = document.querySelector('nve-dropdown');
+  dropdown.addEventListener('beforetoggle', () => console.log('beforetoggle'));
+  dropdown.addEventListener('toggle', () => console.log('toggle'));
   dropdown.addEventListener('open', () => console.log('open'));
   dropdown.addEventListener('close', () => console.log('close'));
 </script>

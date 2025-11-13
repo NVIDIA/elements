@@ -17,6 +17,9 @@ export default {
   }
 };
 
+/**
+ * @summary Basic toggletip requiring click to open and close. Unlike tooltips that appear on hover, use toggletips for interactive content, additional details, or when users need time to read or interact with the popover content.
+ */
 export const Default = {
   render: () => html`
 <nve-toggletip id="toggletip">hello there</nve-toggletip>
@@ -24,6 +27,9 @@ export const Default = {
 `
 };
 
+/**
+ * @summary Visual example using anchor attribute for explicit trigger-target relationship. Demonstrates standard toggletip structure for consistent implementation across your application.
+ */
 export const Visual = {
   render: () => html`
 <nve-toggletip anchor="toggletip-btn">hello there</nve-toggletip>
@@ -31,6 +37,9 @@ export const Visual = {
 `
 };
 
+/**
+ * @summary Toggletip with complete structure including header, content, and footer sections. Perfect for rich interactive content like quick forms, action menus, or detailed explanations that benefit from organized layout.
+ */
 export const Content = {
   render: () => html`
 <nve-toggletip anchor="btn">
@@ -47,6 +56,9 @@ export const Content = {
 `
 };
 
+/**
+ * @summary Toggletip with footer for action buttons or supplementary links. Use when toggletip content needs follow-up actions, navigation, or additional context links without requiring a header section.
+ */
 export const ContentWithFooter = {
   render: () => html`
 <nve-toggletip anchor="btn">
@@ -60,6 +72,9 @@ export const ContentWithFooter = {
 `
 };
 
+/**
+ * @summary Toggletip with header for titled content sections. Use when toggletip information benefits from a clear title or heading to establish context, improving content scannability and understanding.
+ */
 export const ContentWithHeader = {
   render: () => html`
 <nve-toggletip anchor="btn">
@@ -73,18 +88,26 @@ export const ContentWithHeader = {
 `
 };
 
+/**
+ * @summary Demonstrates event handling for toggletip events. Useful for adding custom behavior when toggletip state changes.
+ */
 export const Events = {
   render: () => html`
 <nve-toggletip id="toggletip">hello there</nve-toggletip>
 <nve-button popovertarget="toggletip">button</nve-button>
 <script type="module">
   const toggletip = document.querySelector('nve-toggletip');
+  toggletip.addEventListener('beforetoggle', () => console.log('beforetoggle'));
+  toggletip.addEventListener('toggle', () => console.log('toggle'));
   toggletip.addEventListener('close', () => console.log('close'));
   toggletip.addEventListener('open', () => console.log('open'));
 </script>
   `
 };
 
+/**
+ * @summary Closable toggletip with explicit close button for user control. Use when content is complex enough that users may want to dismiss it independently of clicking outside, providing clear exit paths for longer-form content.
+ */
 export const Closable = {
   render: () => html`
 <nve-toggletip anchor="btn" closable>
@@ -96,6 +119,9 @@ export const Closable = {
   `
 };
 
+/**
+ * @summary Toggletip with alert header for error states or critical messaging. Perfect for displaying error details with recovery actions, combining status communication with actionable next steps in a compact format.
+ */
 export const AlertGroup = {
   inline: false,
   render: () => html`
@@ -114,6 +140,9 @@ export const AlertGroup = {
   `
 };
 
+/**
+ * @summary Toggletip positioning options relative to trigger element. Choose position based on available screen space and content type, ensuring toggletips remain visible and don't extend beyond viewport boundaries.
+ */
 export const Position = {
   render: () => html`
 <nve-toggletip anchor="btn" position="top">top</nve-toggletip>
@@ -124,6 +153,9 @@ export const Position = {
   `
 };
 
+/**
+ * @summary Precise toggletip alignment combined with positioning for optimal placement control. Use alignment to fine-tune toggletip placement relative to trigger edges, improving visual flow and reducing content overlap in dense layouts.
+ */
 export const Alignment = {
   render: () => html`
 <nve-toggletip anchor="card" position="top" alignment="start">top start</nve-toggletip>
@@ -146,6 +178,10 @@ export const Alignment = {
   `
 };
 
+/**
+ * @summary Legacy behavior-trigger pattern for automatic toggletip lifecycle management. Deprecated approach with manual trigger attributes, prefer modern popovertarget API for simpler and more maintainable toggletip implementation.
+ * @tags test-case
+ */
 export const LegacyBehaviorTrigger = {
   render: () => html`
 <nve-toggletip behavior-trigger anchor="action-btn" trigger="action-btn" hidden>hello there</nve-toggletip>

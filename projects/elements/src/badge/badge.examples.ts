@@ -183,7 +183,7 @@ export const Color = {
 };
 
 /**
- * @summary High emphasis badges with custom colors for important or highlighted content. Use for critical information, featured items, or primary actions.
+ * @summary High emphasis badges with custom colors for important or highlighted content. Use for highlighting critical information.
  */
 export const Prominence = {
   render: () => html`
