@@ -14,48 +14,46 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 ## Standard
 
-{% story 'nve-toast', 'Default' %}
+{% example '@nvidia-elements/core/toast/toast.examples.json' 'Default' %}
 
-{% story 'nve-toast', 'Visual', '{ "inline": false, "height": "130px" }' %}
+{% example '@nvidia-elements/core/toast/toast.examples.json' 'Visual' '{ "inline": false, "height": "130px" }' %}
 
 ## Status
 
 {% api 'nve-toast', 'property', 'status' %}
 
-{% story 'nve-toast', 'Status', '{ "inline": false, "height": "300px" }' %}
+{% example '@nvidia-elements/core/toast/toast.examples.json' 'Status' '{ "inline": false, "height": "300px" }' %}
 
 ## Prominence
 
 {% api 'nve-toast', 'property', 'prominence' %}
 
-{% story 'nve-toast', 'Prominence', '{ "inline": false, "height": "130px" }' %}
+{% example '@nvidia-elements/core/toast/toast.examples.json' 'Prominence' '{ "inline": false, "height": "130px" }' %}
 
 ## Close Timeout
 
 {% api 'nve-toast', 'property', 'closeTimeout' %}
 
-{% story 'nve-toast', 'Default', '{ "inline": false, "height": "200px" }' %}
+{% example '@nvidia-elements/core/toast/toast.examples.json' 'Default' '{ "inline": false, "height": "200px" }' %}
 
 ## Events
 
-{% api 'nve-toast', 'event', 'open' %}
+{% api 'nve-toast', 'event' %}
 
-{% api 'nve-toast', 'event', 'close' %}
-
-{% story 'nve-toast', 'Events', '{ "inline": false, "height": "200px" }' %}
+{% example '@nvidia-elements/core/toast/toast.examples.json' 'Events' '{ "inline": false, "height": "200px" }' %}
 
 ## Actions
 
-{% story 'nve-toast', 'Actions', '{ "inline": false, "height": "200px" }' %}
+{% example '@nvidia-elements/core/toast/toast.examples.json' 'Actions' '{ "inline": false, "height": "200px" }' %}
 
 ## Position
 
 {% api 'nve-toast', 'property', 'position' %}
 
-{% story 'nve-toast', 'Position', '{ "inline": false, "height": "200px" }' %}
+{% example '@nvidia-elements/core/toast/toast.examples.json' 'Position' '{ "inline": false, "height": "200px" }' %}
 
 ## Alignment
 
 {% api 'nve-toast', 'property', 'alignment' %}
 
-{% story 'nve-toast', 'Alignment', '{ "inline": false, "height": "500px" }' %}
+{% example '@nvidia-elements/core/toast/toast.examples.json' 'Alignment' '{ "inline": false, "height": "500px" }' %}

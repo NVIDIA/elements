@@ -107,10 +107,10 @@ export interface NveElement {
   /** Sets a interactive element to be in a readonly content state. https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly */
   readonly?: boolean;
 
-  /** Defines the value associated with the element's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value */
+  /** Defines the value associated with the element's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value) */
   value?: string;
 
-  /** The name of the element, submitted as a pair with the element value as part of the form data. https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name */
+  /** The name of the element, submitted as a pair with the element value as part of the form data. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name) */
   name?: string;
 
   /** Determines if the element can be closed by the user. */

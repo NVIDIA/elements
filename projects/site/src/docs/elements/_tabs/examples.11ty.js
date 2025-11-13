@@ -2,10 +2,11 @@
 
 import markdownIt from 'markdown-it';
 import { siteData } from '../../../index.11tydata.js';
-import { exampleShortcode } from '../../../_11ty/shortcodes/index.js';
+import { exampleShortcode, exampleTagsShortcode } from '../../../_11ty/shortcodes/example.js';
 import { apiShortcode } from '../../../_11ty/shortcodes/api.js';
 
 const { stories, elements } = siteData;
+const examples = stories;
 
 // Initialize markdown parser and metadata service
 const md = markdownIt();
@@ -59,59 +60,70 @@ export async function render(data) {
   data.title = componentData.title;
   data.page.fileSlug = componentData.page.fileSlug;
 
-  const storyTemplates = stories
-    .filter(story => story.element === componentData.tag && !story.tags.includes('test-case') && !story.deprecated)
-    .map(story => ({
-      ...story,
-      template: md.utils.escapeHtml(story.template),
-      slug: story.id
+  const exampleTemplates = examples
+    .filter(example => example.element === componentData.tag)
+    .map(example => ({
+      ...example,
+      template: md.utils.escapeHtml(example.template),
+      slug: example.id
         .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
         .replace(/\s+/g, '-')
         .toLowerCase()
     }));
 
   return /* html */ `
-    <style>
-      nve-menu {
+    <style scoped>
+      .canvas-editable-container {
+        min-height: 470px;
+      }
+
+      .example-selector {
         max-height: 500px;
         overflow: auto;
         overflow-x: hidden;
       }
-    </style>
-  
-    <h2 nve-text="heading xl emphasis mkd">${componentData.title} Examples</h2>
 
-    <div nve-layout="row gap:lg align:stretch">
+      .story-example {
+        padding-top: var(--nve-ref-space-lg);
+
+        h3 {
+          padding: 0;
+        }
+      }
+    </style>
+    <h2 nve-text="heading xl emphasis mkd">${componentData.title} Examples</h2>
+    <div class="canvas-editable-container" nve-layout="row gap:lg align:stretch">
       ${
-        storyTemplates.length > 1
-          ? `
-          <nve-menu id="example-selector">
-            ${storyTemplates
-              .map(
-                (story, index) => `
-              <nve-menu-item value="${index}" ${index === 0 ? 'selected' : ''}>${story.id.split(/(?=[A-Z])/).join(' ')}</nve-menu-item>
-            `
-              )
-              .join('')}
-          </nve-menu>
-        `
+        exampleTemplates.length > 1
+          ? /* html */ `
+        <nve-menu class="example-selector">
+          ${exampleTemplates
+            .map(
+              (example, index) => /* html */ `
+            <nve-menu-item value="${index}" ${index === 0 ? 'selected' : ''}>${example.id.split(/(?=[A-Z])/).join(' ')}</nve-menu-item>
+          `
+            )
+            .join('')}
+        </nve-menu>`
           : ''
       }
-    
-      <nvd-canvas-editable id="cycling-example" source="${storyTemplates[0]?.template || ''}"  tag="${componentData.tag}" horizontal-layout></nvd-canvas-editable>
+      <nvd-canvas-editable id="cycling-example" source="${exampleTemplates[0]?.template || ''}"  tag="${componentData.tag}" horizontal-layout></nvd-canvas-editable>
     </div>
 
     ${(
       await Promise.all(
-        storyTemplates.map(async story => {
-          const member = element?.manifest?.members?.find(m => m.name.toLowerCase() === story.id.toLowerCase());
+        exampleTemplates.map(async example => {
+          const member = element?.manifest?.members?.find(m => m.name.toLowerCase() === example.id.toLowerCase());
           return /* html */ `
         <div class="story-example" nve-layout="column gap:sm">
-          <h3 nve-text="heading lg emphasis mkd" id="${story.slug}">${story.id.split(/(?=[A-Z])/).join(' ')}</h3>
-          ${story.id === 'Default' ? await apiShortcode(componentData.tag, 'description') : ''}
-          ${story.id !== 'Default' && member ? await apiShortcode(componentData.tag, 'property', member.name) : ''}
-          ${story.id.startsWith('Event') ? await apiShortcode(componentData.tag, 'event') : ''}
-          ${story.entrypoint ? await exampleShortcode(story.entrypoint, story.id, { inline: !isPopover, height: isPopover ? '400px' : undefined }) : ''}
+          <div nve-layout="row gap:sm align:wrap align:space-between full">
+            <h3 nve-text="heading lg emphasis mkd" id="${example.slug}">${example.id.split(/(?=[A-Z])/).join(' ')}</h3>
+            ${await exampleTagsShortcode(example.entrypoint, example.id)}
+          </div>
+          ${example.id === 'Default' ? await apiShortcode(componentData.tag, 'description') : ''}
+          ${example.id !== 'Default' && member ? await apiShortcode(componentData.tag, 'property', member.name) : ''}
+          ${example.id.startsWith('Event') ? await apiShortcode(componentData.tag, 'event') : ''}
+          ${example.entrypoint ? await exampleShortcode(example.entrypoint, example.id, { inline: !isPopover, height: isPopover ? '400px' : undefined }) : ''}
         </div>
       `;
         })
@@ -121,7 +133,7 @@ export async function render(data) {
     <script type="module">
       const cyclingExample = document.querySelector('#cycling-example');
       const exampleSelector = document.querySelector('#example-selector');
-      const storyTemplates = ${JSON.stringify(storyTemplates)};
+      const storyTemplates = ${JSON.stringify(exampleTemplates)};
       
       // Utility: unescape HTML entities
       function unescapeHtml(html) {
@@ -207,7 +219,7 @@ export async function render(data) {
     </script>
 
     <script type="module">
-      import '/_internal/canvas-editable/canvas-editable.js';
+      import('/_internal/canvas-editable/canvas-editable.js');
     </script>
   `;
 }

@@ -14,64 +14,59 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 ## Standard
 
-{% story 'nve-tooltip', 'Default' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Default' %}
 
-{% story 'nve-tooltip', 'Visual', '{ "inline": false, "height": "130px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Visual' '{ "inline": false, "height": "130px" }' %}
 
 ## Position
 
 {% api 'nve-tooltip', 'property', 'position' %}
 
-{% story 'nve-tooltip', 'Position', '{ "inline": false, "height": "280px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Position' '{ "inline": false, "height": "280px" }' %}
 
 ## Alignment
 
 {% api 'nve-tooltip', 'property', 'alignment' %}
 
-{% story 'nve-tooltip', 'Alignment', '{ "inline": false, "height": "350px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Alignment' '{ "inline": false, "height": "350px" }' %}
 
 ## Events
 
-{% api 'nve-tooltip', 'event', 'open' %}
+{% api 'nve-tooltip', 'event' %}
 
-{% api 'nve-tooltip', 'event', 'close' %}
-
-{% story 'nve-tooltip', 'Events', '{ "inline": false, "height": "280px" }' %}
-
-## Dynamic Trigger
-
-A popover can be recycled for multiple triggers.
-
-{% story 'nve-tooltip', 'DynamicTrigger', '{ "inline": false, "height": "300px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Events' '{ "inline": false, "height": "280px" }' %}
 
 ## Open Delay
 
-Optionally, add a delay to tooltip opening, with `open-delay` attribute (set in milliseconds) -
-useful when displaying tooltips on datagrid items to avoid overwhelming the UX as the user hovers over rows.
+{% api 'nve-tooltip', 'property' 'openDelay' %}
 
-{% story 'nve-tooltip', 'OpenDelay', '{ "inline": false, "height": "300px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'OpenDelay' '{ "inline": false, "height": "300px" }' %}
+
+## Dynamic Trigger
+
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'DynamicTrigger' '{ "inline": false, "height": "300px" }' %}
 
 ## Wrap
 
-{% story 'nve-tooltip', 'Wrap', '{ "inline": false, "height": "280px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Wrap' '{ "inline": false, "height": "280px" }' %}
 
 ## Content
 
-{% story 'nve-tooltip', 'Content', '{ "inline": false, "height": "280px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Content' '{ "inline": false, "height": "280px" }' %}
 
 ## Status
 
-{% story 'nve-tooltip', 'Status', '{ "inline": false, "height": "300px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Status' '{ "inline": false, "height": "300px" }' %}
 
 ## Hint
 
-{% story 'nve-tooltip', 'Hint', '{ "inline": false, "height": "200px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Hint' '{ "inline": false, "height": "200px" }' %}
 
 ## Dynamic Anchor Position
 
 A popover will follow its assigned anchor event when the anchor position is dynamically changed.
 
-<!-- {% story 'nve-tooltip', 'DynamicAnchorPosition' %} -->
+<!-- {% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'DynamicAnchorPosition' %} -->
 
 ```typescript
 @customElement('dynamic-anchor-position-demo')

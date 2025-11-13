@@ -62,8 +62,6 @@
 
 ## Form
 
-{% api 'nve-combobox', 'property', 'name' %}
-
 {% story 'nve-combobox', 'Form' %}
 
 ## Reset

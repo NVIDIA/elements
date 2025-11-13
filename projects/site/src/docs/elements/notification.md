@@ -15,52 +15,44 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 ## Standard
 
-{% story 'nve-notification', 'Default', '{ "height": "300px" }' %}
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'Default' '{ "height": "300px" }' %}
 
-{% story 'nve-notification', 'Visual', '{ "inline": false, "height": "250px" }' %}
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'Visual' '{ "inline": false, "height": "250px" }' %}
 
 ## Events
 
-{% api 'nve-notification', 'event', 'open' %}
+{% api 'nve-notification', 'event' %}
 
-{% api 'nve-notification', 'event', 'close' %}
-
-{% story 'nve-notification', 'Events', '{ "inline": false, "height": "250px" }' %}
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'Events' '{ "inline": false, "height": "250px" }' %}
 
 ## Status
 
 {% api 'nve-notification', 'property', 'status' %}
 
-{% story 'nve-notification', 'Status', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'Status' '{ "inline": false, "height": "440px" }' %}
 
 ## Interactive Group
 
-{% story 'nve-notification', 'InteractiveGroup', '{ "inline": false, "height": "400px" }' %}
-
-## Drawer
-
-{% api 'nve-notification', 'property', 'container' %}
-
-{% story 'nve-notification', 'Drawer', '{ "inline": false, "height": "600px" }' %}
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'InteractiveGroup' '{ "inline": false, "height": "400px" }' %}
 
 ## Alignment
 
 {% api 'nve-notification-group', 'property', 'alignment' %}
 
-{% story 'nve-notification', 'Alignment', '{ "inline": false, "height": "600px" }' %}
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'Alignment' '{ "inline": false, "height": "600px" }' %}
 
 ## Position
 
 {% api 'nve-notification-group', 'property', 'position' %}
 
-{% story 'nve-notification', 'Position', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'Position' '{ "inline": false, "height": "400px" }' %}
 
 ## Position Group
 
 {% api 'nve-notification-group', 'property', 'position' %}
 
-{% story 'nve-notification', 'PositionGroup', '{ "inline": false, "height": "700px" }' %}
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'PositionGroup' '{ "inline": false, "height": "700px" }' %}
 
 ## Content Wrap
 
-{% story 'nve-notification', 'ContentWrap', '{ "inline": false, "height": "250px" }' %}
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'ContentWrap' '{ "inline": false, "height": "250px" }' %}

@@ -7,3 +7,8 @@ alwaysApply: false
 # Documentation (`*.examples.ts`)
 
 - You MUST review @projects/site/src/docs/internal/guidelines/examples.md before making any changes
+
+## References
+
+- [Examples Guidelines](/projects/site/src/docs/internal/guidelines/examples.md)
+- [Documentation Guidelines](/projects/site/src/docs/internal/guidelines/documentation.md)
