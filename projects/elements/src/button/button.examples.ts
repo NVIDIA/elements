@@ -17,9 +17,87 @@ export const Default = {
 };
 
 /**
+ * @summary Shows different interaction states to communicate button hierarchy, importance, and availability to users.
+ */
+export const Interaction = {
+  render: () => html`
+    <div nve-layout="row gap:xs">
+      <nve-button>standard</nve-button>
+      <nve-button interaction="emphasis">emphasis</nve-button>
+      <nve-button interaction="destructive">destructive</nve-button>
+    </div>
+  `
+}
+
+/**
+ * @summary Demonstrates different container styles for buttons to accommodate various visual weight and context.
+ */
+export const Container = {
+  render: () => html`
+    <div nve-layout="row gap:xs align:vertical-center">
+      <nve-button container="inline">inline</nve-button>
+      <nve-button container="flat">flat</nve-button>
+      <nve-button>default</nve-button>
+    </div>
+  `
+}
+
+/**
+ * @summary Demonstrates different button sizes to accommodate various layout densities and touch target requirements.
+ */
+export const Size = {
+  render: () => html`
+    <div nve-layout="row gap:xs">
+      <nve-button size="sm">small button</nve-button>
+      <nve-button>standard button</nve-button>
+      <nve-button size="lg">large button</nve-button>
+    </div>
+  `
+}
+
+/**
+ * @summary Shows pressed state for toggle buttons to indicate active/selected state and provide clear visual feedback.
+ */
+export const Pressed = {
+  render: () => html`
+    <div nve-layout="row gap:xs align:vertical-center">
+      <nve-button pressed container="inline">pressed inline</nve-button>
+      <nve-button pressed container="flat">pressed flat</nve-button>
+      <nve-button pressed>pressed</nve-button>
+    </div>
+  `
+}
+
+/**
+ * @summary Demonstrates different button selection states to accommodate various visual weight and context.
+ */
+export const Selected = {
+  render: () => html`
+    <div nve-layout="row gap:xs align:vertical-center">
+      <nve-button selected container="inline">selected inline</nve-button>
+      <nve-button selected container="flat">selected flat</nve-button>
+      <nve-button selected>selected</nve-button>
+    </div>
+  `
+}
+
+/**
+ * @summary Demonstrates different button disabled states to accommodate various visual weight and context.
+ */
+export const Disabled = {
+  render: () => html`
+    <div nve-layout="row gap:xs align:vertical-center">
+      <nve-button disabled container="inline">disabled inline</nve-button>
+      <nve-button disabled container="flat">disabled flat</nve-button>
+      <nve-button disabled>disabled</nve-button>
+    </div>
+  `
+}
+
+/**
  * @summary This example demonstrates how to use the `commandfor` and `command` attributes to create a button that can be used to rotate an image.
- * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
- * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#creating_custom_commands
+ * [MDN Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API)
+ * [MDN Invoker Commands API - Creating Custom Commands](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#creating_custom_commands)
  */
 export const InvokerCommand = {
   render: () => html`
@@ -54,20 +132,6 @@ export const ButtonWithIcon = {
 };
 
 /**
- * @summary Shows different interaction states to communicate button hierarchy, importance, and availability to users.
- */
-export const Interaction = {
-  render: () => html`
-    <div nve-layout="row gap:xs">
-      <nve-button>standard</nve-button>
-      <nve-button interaction="emphasis">emphasis</nve-button>
-      <nve-button interaction="destructive">destructive</nve-button>
-      <nve-button disabled>disabled</nve-button>
-    </div>
-  `
-}
-
-/**
  * @summary Flat button style for secondary actions with minimal visual weight, maintaining clear interaction states.
  */
 export const Flat = {
@@ -96,19 +160,6 @@ export const Inline = {
 }
 
 /**
- * @summary Demonstrates different button sizes to accommodate various layout densities and touch target requirements.
- */
-export const Size = {
-  render: () => html`
-    <div nve-layout="row gap:xs">
-      <nve-button size="sm">small button</nve-button>
-      <nve-button>standard button</nve-button>
-      <nve-button size="lg">large button</nve-button>
-    </div>
-  `
-}
-
-/**
  * @summary Button styling applied to links for consistent visual treatment while maintaining semantic navigation behavior.
  */
 export const Link = {
@@ -123,25 +174,12 @@ export const Link = {
 }
 
 /**
- * @summary Shows pressed state for toggle buttons to indicate active/selected state and provide clear visual feedback.
- */
-export const Pressed = {
-  render: () => html`
-    <div nve-layout="row gap:xs">
-      <nve-button pressed>pressed</nve-button>
-      <nve-button>unpressed</nve-button>
-    </div>
-  `
-}
-
-/**
  * @summary Flat button selection state for choice groups where one option is active, providing clear selection feedback.
  */
 export const SelectedFlat = {
   render: () => html`
     <div nve-layout="row gap:xs">
       <nve-button selected container="flat">selected</nve-button>
-      <nve-button container="flat">unselected</nve-button>
       <nve-button container="flat">unselected</nve-button>
     </div>
   `
@@ -157,36 +195,6 @@ export const LinkFlat = {
       <nve-button container="flat" interaction="emphasis"><a href="#">flat emphasis</a></nve-button>
       <nve-button container="flat" interaction="destructive"><a href="#">flat destructive</a></nve-button>
     </div>
-  `
-}
-
-/**
- * @summary Light theme appearance showing how buttons adapt to bright backgrounds while maintaining accessibility and contrast.
- * @tags test-case
- */
-export const LightTheme = {
-  render: () => html`
-<div nve-theme="root light" nve-layout="row gap:sm pad:md">
-  <nve-button>standard</nve-button>
-  <nve-button interaction="emphasis">emphasis</nve-button>
-  <nve-button interaction="destructive">destructive</nve-button>
-  <nve-button disabled>disabled</nve-button>
-</div>
-  `
-}
-
-/**
- * @summary Dark theme appearance demonstrating button visibility and interaction states in low-light environments.
- * @tags test-case
- */
-export const DarkTheme = {
-  render: () => html`
-<div nve-theme="root dark" nve-layout="row gap:sm pad:md">
-  <nve-button>standard</nve-button>
-  <nve-button interaction="emphasis">emphasis</nve-button>
-  <nve-button interaction="destructive">destructive</nve-button>
-  <nve-button disabled>disabled</nve-button>
-</div>
   `
 }
 
@@ -270,3 +278,22 @@ export const BackgroundOverride = {
     <nve-button>Create Account</nve-button>
   `
 };
+
+/**
+ * @summary To make a button a link, slot the anchor tag into the button.
+ */
+export const ValidLinkButton = {
+  render: () => html`
+    <nve-button><a href="#">default</a></nve-button>
+  `
+}
+
+/**
+ * @summary Do not wrap buttons in anchor tags.
+ * @tags anti-pattern
+ */
+export const InvalidLinkButton = {
+  render: () => html`
+    <a href="#"><nve-button>default</nve-button></a>
+  `
+}

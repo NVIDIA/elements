@@ -173,7 +173,7 @@ function validateSummaryContext(id, summary) {
 }
 
 function validateDescriptionContext(id, summary, description) {
-  if (description?.length > summary?.length) {
+  if (description?.length && !summary?.trim()) {
     console.log(summary, description);
     console.error(`A summary for example "${id}" must be provided before providing a description.`);
     process.exit(1);

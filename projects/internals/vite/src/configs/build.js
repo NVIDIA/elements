@@ -11,7 +11,7 @@ import { dts } from '../plugins/dts.js';
 import { bundle } from '../plugins/bundle.js';
 import { initial } from '../plugins/initial.js';
 import { examplesToJSON } from '../plugins/examples.js';
-import { diskCache } from '../plugins/disk-cache.js';
+import { writeIfChanged } from '../plugins/write-if-changed.js';
 
 const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
@@ -68,7 +68,7 @@ export const libraryBuildConfig = {
         }
       ],
       plugins: [
-        prod ? false : diskCache(),
+        prod ? false : writeIfChanged(),
         prod ? minifyHTML() : false,
         prod
           ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })

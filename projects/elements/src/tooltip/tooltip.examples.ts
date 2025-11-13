@@ -22,6 +22,9 @@ export default {
   }
 };
 
+/**
+ * @summary Basic tooltip triggered by popovertarget attribute. Use for providing brief, contextual information on hover or focus without cluttering the interface.
+ */
 export const Default = {
   render: () => html`
 <nve-tooltip id="tooltip">hello there</nve-tooltip>
@@ -29,6 +32,9 @@ export const Default = {
   `
 };
 
+/**
+ * @summary Tooltip using anchor attribute to reference the trigger element. Use when you need to explicitly connect tooltips to their triggers by ID for better control over relationships.
+ */
 export const Visual = {
   render: () => html`
 <nve-tooltip anchor="btn">hello there</nve-tooltip>
@@ -36,6 +42,9 @@ export const Visual = {
   `
 };
 
+/**
+ * @summary Tooltip positioning options for optimal placement relative to trigger elements. Use different positions based on available screen space and content layout to ensure tooltips remain visible and don't obscure important content.
+ */
 export const Position = {
   render: () => html`
 <nve-tooltip anchor="btn" position="top">top</nve-tooltip>
@@ -46,6 +55,9 @@ export const Position = {
   `
 };
 
+/**
+ * @summary Fine-grained tooltip alignment combined with positioning for precise placement control. Use to align tooltips to specific edges of trigger elements, improving visual hierarchy and reducing overlap with other UI elements.
+ */
 export const Alignment = {
   render: () => html`
 <nve-tooltip anchor="card" position="top" alignment="start">top start</nve-tooltip>
@@ -68,18 +80,26 @@ export const Alignment = {
   `
 };
 
+/**
+ * @summary Demonstrates event handling for tooltip events. Useful for adding custom behavior when tooltip state changes.
+ */
 export const Events = {
   render: () => html`
 <nve-tooltip id="tooltip">hello there</nve-tooltip>
 <nve-button popovertarget="tooltip">button</nve-button>
 <script type="module">
   const tooltip = document.querySelector('nve-tooltip');
+  tooltip.addEventListener('beforetoggle', () => console.log('beforetoggle'));
+  tooltip.addEventListener('toggle', () => console.log('toggle'));
   tooltip.addEventListener('close', () => console.log('close'));
   tooltip.addEventListener('open', () => console.log('open'));
 </script>
   `
 };
 
+/**
+ * @summary Tooltip with structured content including title and body text. Use for tooltips that need hierarchical information, but keep content brief to maintain tooltip's lightweight nature.
+ */
 export const Content = {
   render: () => html`
 <nve-tooltip anchor="btn" position="bottom">
@@ -90,6 +110,9 @@ export const Content = {
   `
 };
 
+/**
+ * @summary Tooltip with delayed appearance to reduce visual noise during quick mouse movements. Use open-delay for better user experience when tooltips are dense, preventing tooltips from flashing during cursor transitions.
+ */
 export const OpenDelay = {
   render: () => html`
 <nve-tooltip id="delay-tooltip" open-delay="500">delayed tooltip</nve-tooltip>
@@ -97,6 +120,9 @@ export const OpenDelay = {
   `
 };
 
+/**
+ * @summary Single tooltip shared across multiple triggers with dynamic content updates. Use to reduce DOM nodes and improve performance when many similar elements need contextual help, updating tooltip content based on which trigger activated it.
+ */
 export const DynamicTrigger = {
   render: () => html`
 <nve-tooltip id="dynamic-popover"></nve-tooltip>
@@ -115,6 +141,9 @@ export const DynamicTrigger = {
   `
 };
 
+/**
+ * @summary Tooltip as a hint icon pattern for providing contextual help next to labels or headings. Perfect for explaining features or terminology without cluttering the main interface, allowing users to discover information on demand.
+ */
 export const Hint = {
   render: () => html`
 <div nve-layout="row gap:xs align:vertical-center">
@@ -125,6 +154,9 @@ export const Hint = {
   `
 };
 
+/**
+ * @summary Tooltip with muted status variant for subtle, low-emphasis contextual information. Use muted tooltips when the information is supplementary and shouldn't draw attention away from primary content.
+ */
 export const Status = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 250px">
@@ -135,6 +167,9 @@ export const Status = {
   `
 };
 
+/**
+ * @summary Tooltip with constrained width for controlled text wrapping. Use when tooltip content is longer than a single line, but prefer keeping tooltips brief for better scannability and user experience.
+ */
 export const Wrap = {
   render: () => html`
 <nve-tooltip anchor="btn" style="--width: 200px">
@@ -144,6 +179,10 @@ export const Wrap = {
   `
 };
 
+/**
+ * @summary Tooltip with absolute positioning strategy for precise placement in complex layouts. Use when default fixed positioning causes issues with scrolling containers or nested positioning contexts.
+ * @tags test-case
+ */
 export const PositionStrategyAbsolute = {
   render: () => html`
 <nve-tooltip id="tooltip" position-strategy="absolute">hello there</nve-tooltip>
@@ -151,6 +190,10 @@ export const PositionStrategyAbsolute = {
   `
 };
 
+/**
+ * @summary Tooltip behavior within scrollable containers demonstrating automatic repositioning. Tooltips maintain visibility and proper positioning even when anchor elements scroll, ensuring consistent user experience in scrollable interfaces.
+ * @tags test-case
+ */
 export const ScrollContainer = {
   render: () => html`
 <style>
@@ -221,6 +264,10 @@ class DynamicAnchorPositionDemo extends LitElement { /* eslint no-unused-vars: 0
   }
 }
 
+/**
+ * @summary Tooltip that follows a dynamically positioned anchor element. Demonstrates real-time tooltip repositioning as the anchor moves, useful for cursor-following tooltips or drag-and-drop interfaces.
+ * @tags test-case
+ */
 export const DynamicAnchorPosition = {
   render: () => html`
 <dynamic-anchor-position-demo></dynamic-anchor-position-demo>
@@ -229,6 +276,10 @@ export const DynamicAnchorPosition = {
 
 /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
 
+/**
+ * @summary Legacy pattern for dynamic tooltip triggers using behavior-trigger attribute. Demonstrates programmatic anchor and trigger reassignment for backward compatibility with older implementations.
+ * @tags test-case
+ */
 export const LegacyDynamicTrigger = {
   render: () => html`
 <div id="dynamic-trigger-demo" nve-layout="row align:center" style="height: 250px">
@@ -251,6 +302,10 @@ export const LegacyDynamicTrigger = {
   `
 };
 
+/**
+ * @summary Legacy trigger pattern with manual event handling and hidden attribute management. Shows older implementation approach for backward compatibility, prefer using popovertarget for new implementations.
+ * @tags test-case
+ */
 export const LegacyTrigger = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 250px">
@@ -265,6 +320,10 @@ export const LegacyTrigger = {
   `
 };
 
+/**
+ * @summary Legacy behavior-trigger pattern for automatic tooltip lifecycle management. Deprecated approach that auto-manages visibility, prefer modern popovertarget API for new implementations.
+ * @tags test-case
+ */
 export const LegacyBehaviorTrigger = {
   render: () => html`
 <nve-tooltip behavior-trigger anchor="action-btn" trigger="action-btn" hidden>hello there</nve-tooltip>
@@ -272,6 +331,10 @@ export const LegacyBehaviorTrigger = {
   `
 };
 
+/**
+ * @summary Legacy implementation combining behavior-trigger with open-delay for multiple tooltips. Demonstrates older pattern for delayed tooltip appearance, prefer modern popovertarget with open-delay attribute.
+ * @tags test-case
+ */
 export const LegacyOpenDelay = {
   render: () => html`
 <nve-tooltip behavior-trigger anchor="delay-tooltip-1" trigger="delay-tooltip-1" open-delay="500" hidden>delayed tooltip</nve-tooltip>
@@ -302,6 +365,10 @@ class CrossShadowRootAnchorPositionDemo extends LitElement {
   }
 }
 
+/**
+ * @summary Tooltip anchored to elements across shadow DOM boundaries. Demonstrates tooltip positioning when anchor elements exist in different DOM scopes, essential for web component architectures.
+ * @tags test-case
+ */
 export const CrossShadowRootAnchorPosition = {
   render: () => html`
 <nve-button popovertarget="root-tooltip">document root anchor</nve-button>
@@ -312,6 +379,10 @@ export const CrossShadowRootAnchorPosition = {
   `
 };
 
+/**
+ * @summary Tooltip functionality within modal dialogs with multiple triggers. Ensures tooltips work correctly in layered UI contexts, maintaining proper z-index stacking and interaction behavior within modal overlays.
+ * @tags test-case
+ */
 export const NestedDynamic = {
   render: () => html`
 <nve-button popovertarget="dialog">open</nve-button>

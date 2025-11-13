@@ -15,48 +15,46 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 ## Standard
 
-{% story 'nve-toggletip', 'Default' %}
+{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'Default' %}
 
-{% story 'nve-toggletip', 'Visual', '{ "inline": false, "height": "250px" }' %}
+{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'Visual' '{ "inline": false, "height": "250px" }' %}
 
 ## Position
 
 {% api 'nve-toggletip', 'property', 'position' %}
 
-{% story 'nve-toggletip', 'Position', '{ "inline": false, "height": "250px" }' %}
+{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'Position' '{ "inline": false, "height": "250px" }' %}
 
 ## Alignment
 
 {% api 'nve-toggletip', 'property', 'alignment' %}
 
-{% story 'nve-toggletip', 'Alignment', '{ "inline": false, "height": "400px" }' %}
-
-## Events
-
-{% api 'nve-toggletip', 'event', 'open' %}
-
-{% api 'nve-toggletip', 'event', 'close' %}
-
-{% story 'nve-toggletip', 'Events', '{ "inline": false, "height": "250px" }' %}
-
-## Header and Footer
-
-{% story 'nve-toggletip', 'Content', '{ "inline": false, "height": "400px" }' %}
-
-## Header Only
-
-{% story 'nve-toggletip', 'ContentWithHeader', '{ "inline": false, "height": "400px" }' %}
-
-## Footer Only
-
-{% story 'nve-toggletip', 'ContentWithFooter', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'Alignment' '{ "inline": false, "height": "400px" }' %}
 
 ## Closable
 
 {% api 'nve-toggletip', 'property', 'closable' %}
 
-{% story 'nve-toggletip', 'Closable', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'Closable' '{ "inline": false, "height": "400px" }' %}
+
+## Events
+
+{% api 'nve-toggletip', 'event' %}
+
+{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'Events' '{ "inline": false, "height": "250px" }' %}
+
+## Header and Footer
+
+{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'Content' '{ "inline": false, "height": "400px" }' %}
+
+## Header Only
+
+{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'ContentWithHeader' '{ "inline": false, "height": "400px" }' %}
+
+## Footer Only
+
+{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'ContentWithFooter' '{ "inline": false, "height": "400px" }' %}
 
 ## Alert Group
 
-{% story 'nve-toggletip', 'AlertGroup', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'AlertGroup' '{ "inline": false, "height": "400px" }' %}

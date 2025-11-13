@@ -14,7 +14,7 @@ export default {
 };
 
 /**
- * @summary Basic modal dialog with header and content, providing a standard overlay for user interactions and information display.
+ * @summary Basic modal dialog for focused user interactions. Use dialogs for confirmations, simple forms, or important information that requires user attention before continuing, creating a modal overlay that blocks interaction with the underlying page until dismissed.
  */
 export const Default = {
   render: () => html`
@@ -29,7 +29,30 @@ export const Default = {
 };
 
 /**
- * @summary Visual dialog example with header, content, and footer, demonstrating complete dialog structure for comprehensive user interfaces.
+ * @summary Dialog with event listeners for state change tracking. Use dialog events (beforetoggle, toggle, open, close) to trigger side effects like loading data on open, cleaning up resources on close, or preventing closure based on validation state.
+ */
+export const Events = {
+  inline: false,
+  render: () => html`
+<nve-dialog id="dialog" modal closable>
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">title</h3>
+  </nve-dialog-header>
+  <p nve-text="body">some text content in a closable dialog</p>
+</nve-dialog>
+<nve-button popovertarget="dialog">button</nve-button>
+<script type="module">
+  const dialog = document.querySelector('nve-dialog');
+  dialog.addEventListener('beforetoggle', () => console.log('beforetoggle'));
+  dialog.addEventListener('toggle', () => console.log('toggle'));
+  dialog.addEventListener('open', () => console.log('open'));
+  dialog.addEventListener('close', () => console.log('close'));
+</script>
+  `
+};
+
+/**
+ * @summary Dialog with header, content, and footer structure for complete user interactions. Use the footer for action buttons, organizing the dialog into clear sections that guide users through the information hierarchy and toward decision-making.
  */
 export const Visual = {
   render: () => html`
@@ -46,7 +69,7 @@ export const Visual = {
 };
 
 /**
- * @summary Dialog with action buttons in footer, enabling user decisions and providing clear interaction paths for dialog completion.
+ * @summary Dialog with primary and secondary actions in footer. Use cancel + emphasized action pattern for confirmations or decisions where you need to present a choice, with emphasis on the primary action guiding users toward the preferred or expected path.
  */
 export const Content = {
   inline: false,
@@ -65,7 +88,7 @@ export const Content = {
 };
 
 /**
- * @summary Small dialog size for compact interactions and brief information display, optimizing space usage for simple user tasks.
+ * @summary Small dialog size for brief confirmations or single-field inputs. Use size="sm" for simple yes/no confirmations, quick edits, or minimal interactions that don't require significant screen space, keeping the interface uncluttered.
  */
 export const Small = {
   render: () => html`
@@ -77,7 +100,7 @@ export const Small = {
 };
 
 /**
- * @summary Medium dialog size for balanced content presentation, providing optimal space for standard user interactions and information display.
+ * @summary Medium dialog size (default) for standard forms and content. Use size="md" for typical dialogs containing short forms (3-5 fields), moderate content, or standard user interactions that need balanced space without overwhelming the interface.
  */
 export const Medium = {
   render: () => html`
@@ -89,7 +112,7 @@ export const Medium = {
 };
 
 /**
- * @summary Large dialog size for comprehensive content display, accommodating complex forms, detailed information, and extensive user interactions.
+ * @summary Large dialog size for complex forms or extensive content. Use size="lg" for multi-section forms, detailed settings panels, or content-rich interactions where users need more space to work comfortably, but consider using a drawer for very large content areas.
  */
 export const Large = {
   render: () => html`
@@ -119,7 +142,7 @@ export const TextWrap = {
 };
 
 /**
- * @summary Non-closable dialog requiring explicit user action, ensuring critical interactions are completed and preventing accidental dismissal.
+ * @summary Non-closable dialog requiring explicit action through buttons. Use non-closable dialogs sparingly for critical decisions (like irreversible deletions) or required acknowledgments where you must ensure users make a conscious choice rather than accidentally dismissing the dialog.
  */
 export const NonClosable = {
   render: () => html`
@@ -135,7 +158,7 @@ export const NonClosable = {
 };
 
 /**
- * @summary Dialog positioning options for flexible placement, enabling contextual positioning based on user interface requirements and screen space.
+ * @summary Dialog positioning and alignment options for contextual placement. While center positioning is standard, use edge positioning (top/bottom/left/right) for contextually relevant dialogs that relate to specific interface regions or when working with limited vertical space.
  */
 export const Alignment = {
   inline: false,
@@ -276,7 +299,7 @@ export const ShadowRoot = {
 };
 
 /**
- * @summary Dialog with scrollable content area, handling overflow content gracefully while maintaining dialog structure and user interaction patterns.
+ * @summary Dialog with scrollable content while keeping header and footer fixed. Use scrollable content areas for dialogs with variable or lengthy content (like terms of service or detailed descriptions) while keeping action buttons always visible, ensuring users can complete the task without scrolling to find buttons.
  */
 export const ScrollContent = {
   render: () => html`
