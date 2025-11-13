@@ -22,6 +22,8 @@ import globalStyles from './toggletip.global.css?inline';
  * @description Generic toggletip element for rendering a variety of different interactive content. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.38.0
  * @entrypoint \@nvidia-elements/core/toggletip
+ * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
  * @event open - Dispatched when the toggletip is opened.
  * @event close - Dispatched when the toggletip is closed.
  * @slot - default slot for toggletip content

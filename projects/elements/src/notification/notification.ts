@@ -20,6 +20,8 @@ import styles from './notification.css?inline';
  * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/notification
+ * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
  * @event open - Dispatched when the notification is opened.
  * @event close - Dispatched when the notification is closed.
  * @slot default content slot
