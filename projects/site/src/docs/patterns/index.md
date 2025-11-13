@@ -89,7 +89,7 @@ Patterns are an essential component of creating a cohesive and consistent user e
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
-          <nve-icon name="resize"></nve-icon>
+          <nve-icon name="transparent-box"></nve-icon>
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Responsive</h2>

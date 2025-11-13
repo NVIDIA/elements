@@ -9,6 +9,9 @@ export default {
   inline: false
 };
 
+/**
+ * @summary Basic modal drawer with header, content, and footer sections. Use for displaying detailed information, forms, or settings that need more space than a dialog, typically sliding in from the side of the screen.
+ */
 export const Default = {
   render: () => html`
 <nve-drawer id="drawer" closable modal>
@@ -26,6 +29,9 @@ export const Default = {
   `,
 };
 
+/**
+ * @summary Visual example of drawer structure with all available sections. Demonstrates the complete drawer layout pattern with header, scrollable content, and footer for consistent drawer implementations.
+ */
 export const Visual = {
   render: () => html`
 <nve-drawer closable>
@@ -42,6 +48,9 @@ export const Visual = {
   `,
 };
 
+/**
+ * @summary Drawer with scrollable content demonstrating overflow behavior. Use when drawer content exceeds viewport height, ensuring header and footer remain fixed while content scrolls independently.
+ */
 export const Scroll = {
   render: () => html`
 <nve-drawer closable>
@@ -58,6 +67,9 @@ export const Scroll = {
   `,
 };
 
+/**
+ * @summary Demonstrates event handling for drawer events. Useful for adding custom behavior when drawer state changes.
+ */
 export const Events = {
   render: () => html`
 <nve-drawer id="drawer" closable modal position="right">
@@ -67,19 +79,21 @@ export const Events = {
   <nve-drawer-content>
     <p nve-text="body">drawer content</p>
   </nve-drawer-content>
-  <nve-drawer-footer>
-    <p nve-text="body">drawer footer</p>
-  </nve-drawer-footer>
 </nve-drawer>
 <nve-button popovertarget="drawer">open</nve-button>
 <script type="module">
   const drawer = document.querySelector('nve-drawer');
+  drawer.addEventListener('beforetoggle', () => console.log('beforetoggle'));
+  drawer.addEventListener('toggle', () => console.log('toggle'));
   drawer.addEventListener('open', () => console.log('open'));
   drawer.addEventListener('close', () => console.log('close'));
 </script>
   `
 };
 
+/**
+ * @summary Small drawer size for compact side panels and quick actions. Ideal for navigation menus, filters, or supplementary information that shouldn't dominate the screen.
+ */
 export const Small = {
   render: () => html`
 <nve-drawer size="sm" closable>
@@ -96,6 +110,9 @@ export const Small = {
   `
 };
 
+/**
+ * @summary Large drawer size for comprehensive content like detailed forms or settings panels. Use when users need significant screen space for complex tasks without leaving the current page context.
+ */
 export const Large = {
   render: () => html`
 <nve-drawer size="lg" closable>
@@ -112,6 +129,9 @@ export const Large = {
   `
 };
 
+/**
+ * @summary Non-closable drawer requiring explicit user action to close. Use for critical workflows or multi-step processes where users must complete or explicitly cancel actions, preventing accidental dismissal.
+ */
 export const NonClosable = {
   render: () => html`
 <nve-button id="open-btn">open</nve-button>
@@ -136,6 +156,9 @@ export const NonClosable = {
   `
 };
 
+/**
+ * @summary Drawer positioning from all four screen edges. Use position based on content type and user workflow: right for details/settings, left for navigation, top/bottom for notifications or quick actions that span the width.
+ */
 export const Position = {
   inline: false,
   render: () => html`
@@ -196,6 +219,10 @@ export const Position = {
   `
 };
 
+/**
+ * @summary Legacy drawer positioning with manual visibility management. Demonstrates older pattern with programmatic position control and event handling for backward compatibility.
+ * @tags test-case
+ */
 export const LegacyPosition = {
   inline: false,
   render: () => html`
@@ -267,6 +294,9 @@ export const LegacyPosition = {
 };
 
 
+/**
+ * @summary Inline drawer constrained within a parent container rather than full viewport. Perfect for detail panels within cards or sections, maintaining context without overlaying the entire application.
+ */
 export const Inline = {
   render: () => html`
 <div nve-layout="row align:horizontal-stretch">
@@ -294,6 +324,9 @@ export const Inline = {
   `
 };
 
+/**
+ * @summary Inline drawer in persistent open state for always-visible side panels. Use for navigation, filters, or contextual information that should remain accessible while users interact with main content.
+ */
 export const InlineVisible = {
   render: () => html`
 <div nve-layout="row align:horizontal-stretch">
@@ -321,6 +354,10 @@ export const InlineVisible = {
   `
 };
 
+/**
+ * @summary Legacy inline drawer pattern with manual visibility control. Shows older implementation for inline drawer management, prefer modern popovertarget API for new implementations.
+ * @tags test-case
+ */
 export const LegacyInline = {
   render: () => html`
 <div nve-layout="row align:stretch">
@@ -356,6 +393,10 @@ export const LegacyInline = {
 
 /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
 
+/**
+ * @summary Legacy behavior-trigger pattern for automatic drawer lifecycle management. Deprecated approach that auto-manages visibility and state, prefer modern popovertarget API for new implementations.
+ * @tags test-case
+ */
 export const LegacyBehaviorTrigger = {
   render: () => html`
 <nve-button id="drawer-btn">open</nve-button>

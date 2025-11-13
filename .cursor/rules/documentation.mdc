@@ -8,3 +8,8 @@ alwaysApply: false
 
 - You MUST review @projects/site/src/docs/internal/guidelines/documentation.md before making any changes
 - You MUST review @projects/site/src/docs/internal/guidelines/examples.md before making any changes
+
+## References
+
+- [Documentation Guidelines](/projects/site/src/docs/internal/guidelines/documentation.md)
+- [Examples Guidelines](/projects/site/src/docs/internal/guidelines/examples.md)

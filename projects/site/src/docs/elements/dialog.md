@@ -15,34 +15,40 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 ## Standard
 
-{% story 'nve-dialog', 'Default' %}
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'Default' %}
 
-{% story 'nve-dialog', 'Visual', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'Visual' '{ "inline": false, "height": "400px" }' %}
+
+## Events
+
+{% api 'nve-dialog', 'event' %}
+
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'Events' '{ "inline": false, "height": "400px" }' %}
 
 ## Content
 
-{% story 'nve-dialog', 'Content', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'Content' '{ "inline": false, "height": "400px" }' %}
 
 ## Small
 
-{% story 'nve-dialog', 'Small', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'Small' '{ "inline": false, "height": "400px" }' %}
 
 ## Medium
 
-{% story 'nve-dialog', 'Medium', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'Medium' '{ "inline": false, "height": "400px" }' %}
 
 ## Large
 
-{% story 'nve-dialog', 'Large', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'Large' '{ "inline": false, "height": "400px" }' %}
 
 ## Text Wrap
 
-{% story 'nve-dialog', 'TextWrap', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'TextWrap' '{ "inline": false, "height": "400px" }' %}
 
 ## Position
 
-{% story 'nve-dialog', 'Position', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'Position' '{ "inline": false, "height": "400px" }' %}
 
 ## Scroll Content
 
-{% story 'nve-dialog', 'ScrollContent', '{ "inline": false, "height": "650px" }' %}
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'ScrollContent' '{ "inline": false, "height": "650px" }' %}

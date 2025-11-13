@@ -20,21 +20,21 @@ const tests = await TestsService.getTests();
 /** @type {import('@internals/metadata').ProjectTestSummary} */
 const wireit = await WireitService.getGraph();
 
-const stories = (await ExamplesService.getAll())
+const examples = (await ExamplesService.getAll())
   .filter(s => !s.template?.includes('${'))
   .map(example => ({
     id: example.id,
     story: example.element,
     summary: example.summary,
     description: example.description,
-    tags: example.tags,
+    tags: example.tags.filter(tag => tag !== 'priority'),
     deprecated: example.deprecated,
     template: example.template,
     element: example.element,
     entrypoint: example.entrypoint,
     title: camelToKebab(example.id),
     elementName: example.element?.replace('nve-', ''),
-    permalink: `${example.entrypoint?.replace('.stories.json', '-')}${camelToKebab(example.id)}/`
+    permalink: `${example.entrypoint?.replace('.stories.json', '-').replace('.examples.json', '-')}${camelToKebab(example.id)}/`
   }));
 
 const integrations = {
@@ -161,7 +161,8 @@ const integrations = {
 export const siteData = {
   BASE_URL,
   elements,
-  stories,
+  examples,
+  stories: examples, // deprecated
   metadata,
   integrations,
   tests,
