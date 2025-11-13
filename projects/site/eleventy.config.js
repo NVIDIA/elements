@@ -7,7 +7,8 @@ import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
-import { apiShortcode, exampleShortcode, installShortcode, doDontShortcode } from './src/_11ty/shortcodes/index.js';
+import { exampleShortcode, installShortcode, doDontShortcode, splitShortcode } from './src/_11ty/shortcodes/index.js';
+import { apiShortcode } from './src/_11ty/shortcodes/api.js';
 import {
   renderInstallShortcode,
   renderInstallArtifactoryShortcode,
@@ -141,6 +142,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode('install-artifactory', renderInstallArtifactoryShortcode);
   eleventyConfig.addShortcode('integration', renderIntegrationShortcode);
   eleventyConfig.addPairedShortcode('dodont', doDontShortcode);
+  eleventyConfig.addPairedShortcode('split', splitShortcode);
 
   // Register custom transforms for content processing
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);
@@ -173,7 +175,22 @@ export default function (eleventyConfig) {
     ]);
   });
 
-  // Return build configuration
+  // prevent rebuild of api and examples collections on each run
+  if (process.env.ELEVENTY_RUN_MODE === 'serve') {
+    const collectionCache = new Set();
+    eleventyConfig.addPreprocessor('api-collection', '11ty.js', data => {
+      if (collectionCache.has(data.page.filePathStem)) {
+        return false; // skip collection file if already written
+      }
+
+      if (data.page.filePathStem.includes('_tabs/api') || data.page.filePathStem.includes('_tabs/examples')) {
+        collectionCache.add(data.page.filePathStem); // add file to cache to skip it on next run
+      }
+
+      return undefined; // continue with the build
+    });
+  }
+
   return {
     dir: {
       input: 'src',

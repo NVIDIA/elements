@@ -18,6 +18,7 @@ export class SystemSettings extends LitElement {
       scale: '',
       debug: '',
       animation: '',
+      layer: '',
       sourceType: 'html',
       ...JSON.parse(localStorage.getItem('elements-sb-globals') ?? '{}')
     };
@@ -63,12 +64,11 @@ export class SystemSettings extends LitElement {
         </nve-select>
         <nve-divider></nve-divider>
         <nve-select container="flat" style="--border-bottom: 0; --min-width: 170px">
-          <label>Data</label>
-          <nve-icon-button slot="label" popovertarget="demo-data-tooltip" size="sm" container="flat" icon-name="information-circle-stroke" style="--height: 12px"></nve-icon-button>
-          <select size="3" @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ dataTheme: e.target.value })}>
-            <option ?selected=${this.#globals.dataTheme === 'models'} value="models">AI/ML</option>
-            <option ?selected=${this.#globals.dataTheme === ''} value="">Infra</option>
-            <option ?selected=${this.#globals.dataTheme === 'hardware'} value="hardware">Hardware</option>
+          <label>Layer Background</label>
+          <nve-icon-button slot="label" popovertarget="demo-layer-tooltip" size="sm" container="flat" icon-name="information-circle-stroke" style="--height: 12px"></nve-icon-button>
+          <select size="3" @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ layer: e.target.value })}>
+            <option ?selected=${this.#globals.layer === ''} value="">Canvas</option>
+            <option ?selected=${this.#globals.layer === 'container'} value="container">Container</option>
           </select>
         </nve-select>
         <nve-divider></nve-divider>
@@ -89,7 +89,7 @@ export class SystemSettings extends LitElement {
           </nve-switch>
         </nve-switch-group>
       </form>
-      <nve-tooltip id="demo-data-tooltip">Demo data to be displayed in examples (see datagrid)</nve-tooltip>
+      <nve-tooltip id="demo-layer-tooltip" position="left">The background layer color for examples and how they are displayed in the browser.</nve-tooltip>
     `;
   }
 
@@ -115,8 +115,10 @@ export class SystemSettings extends LitElement {
 
     this.#globals = globals;
     globalThis.document.documentElement.setAttribute('nve-theme', themes);
+    globalThis.document.documentElement.setAttribute('nve-layer', globals.layer);
     globalThis.document.querySelectorAll('iframe').forEach(iframe => {
       iframe.contentWindow?.document.documentElement.setAttribute('nve-theme', themes);
+      iframe.contentWindow?.document.documentElement.setAttribute('nve-layer', globals.layer);
     });
   }
 }

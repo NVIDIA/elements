@@ -1,8 +1,13 @@
 :host {
+  --canvas-background: inherit;
   --padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
   --overflow: auto;
   display: block;
   width: 100%;
+}
+
+[internal-host] {
+  overflow: hidden;
 }
 
 nve-codeblock {
@@ -23,6 +28,7 @@ nve-toolbar {
 }
 
 slot:not([name]) {
+  background: var(--canvas-background);
   padding: var(--padding);
   display: block;
   resize: horizontal;
@@ -55,7 +61,7 @@ nve-select::part(caret) {
 }
 
 .preview-backdrop {
-  background: var(--nve-ref-color-neutral-200);
+  background: var(--nve-ref-color-alpha-black-400);
   min-height: 100%;
   flex: 1;
 }

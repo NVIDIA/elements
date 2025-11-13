@@ -1,21 +1,19 @@
-// Import the elementTable function that generates API documentation tables
-import { elementTable } from '../../../_11ty/templates/api.js';
+import { renderAPITable } from '../../../_11ty/shortcodes/api.js';
+import { siteData } from '../../../index.11tydata.js';
+
+const { elements } = siteData;
 
 /**
  * Configuration object for the API documentation template.
  * Sets up pagination to generate one page per component.
  */
 export const data = {
-  // Use the main docs layout template
   layout: 'docs.11ty.js',
-  // Configure pagination to process each component document
   pagination: {
     data: 'collections.componentDocs',
     size: 1,
-    alias: 'component',
-    addAllPagesToCollections: true
+    alias: 'component'
   },
-  // Generate URLs in the format /docs/elements/{component-name}/api/ or /docs/code/{component-name}/api/ or /docs/monaco/{component-name}/api/
   permalink: data => {
     const filePath = data.component.filePathStem;
     let dir = 'elements';
@@ -34,16 +32,44 @@ export const data = {
  * @returns {string} HTML string containing the API documentation
  */
 export function render(data) {
-  // Extract component metadata from the frontmatter
   const componentData = data.component.data;
   data.tag = componentData.tag;
   data.title = componentData.title;
   data.page.fileSlug = componentData.page.fileSlug;
   data.hideExamplesTab = componentData.hideExamplesTab;
 
+  const element = elements.find(d => d.name === componentData.tag);
   return `
-    ${elementTable(componentData.tag)}
-
-    ${componentData.associatedElements?.length ? componentData.associatedElements.map(tag => elementTable(tag)).join('') : ''}
+  ${renderAllAPIs(element)}
+  ${componentData.associatedElements?.length ? componentData.associatedElements.map(tag => renderAllAPIs(elements.find(d => d.name === tag))).join('') : ''}
   `;
+}
+
+function renderAllAPIs(element) {
+  return `
+<h2 nve-text="heading xl mkd">${element.name}</h2>
+<div nve-layout="column gap:md">
+  <h3 nve-text="heading lg mkd">Properties</h3>
+  ${renderAPITable(element, 'property', { container: '' })}
+</div>
+
+<div nve-layout="column gap:md">
+  <h3 nve-text="heading lg mkd">Events</h3>
+  ${renderAPITable(element, 'event', { container: '' })}
+</div>
+
+<div nve-layout="column gap:md">
+  <h3 nve-text="heading lg mkd">Slots</h3>
+  ${renderAPITable(element, 'slot', { container: '' })}
+</div>
+
+<div nve-layout="column gap:md">
+  <h3 nve-text="heading lg mkd">CSS Properties</h3>
+  ${renderAPITable(element, 'css-property', { container: '' })}
+</div>
+
+<div nve-layout="column gap:md">
+  <h3 nve-text="heading lg mkd">CSS Parts</h3>
+  ${renderAPITable(element, 'css-part', { container: '' })}
+</div>`;
 }
