@@ -19,6 +19,8 @@ import styles from './dialog.css?inline';
  * @description Dialog is a component that appears above main content. A modal dialog is used to display critical information that requires users attention that interrupts user flow. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/dialog
+ * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
  * @event open - Dispatched when the dialog is opened.
  * @event close - Dispatched when the dialog is closed.
  * @slot default content slot
@@ -31,6 +33,7 @@ import styles from './dialog.css?inline';
  * @cssprop --gap
  * @cssprop --max-width
  * @cssprop --min-height
+ * @csspart close-button - The inner template reference for the close button of the dialog.
  * @storybook https://NVIDIA.github.io/elements/docs/elements/dialog/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-39&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
@@ -121,7 +124,7 @@ export class Dialog extends LitElement {
     return html`
     <div internal-host>
       <div class="header">
-        ${this.closable ? html`<nve-icon-button size="sm" @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button part="close-button" size="sm" @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
         <slot name="header"></slot>
       </div>
       <div class="content">
