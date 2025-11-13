@@ -11,7 +11,7 @@ const metadata = await MetadataService.getMetadata();
 
 const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
-/** @type {import('@internals/metadata').Element[]} */
+/** @type {import('@internals/metadata').ProjectElement[]} */
 const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
 
 /** @type {import('@internals/metadata').ProjectsTestSummary} */

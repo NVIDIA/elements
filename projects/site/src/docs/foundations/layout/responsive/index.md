@@ -181,8 +181,6 @@ You can use both systems together for maximum flexibility:
 </nve-page>
 ```
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveCombined', '{ "editable": true, "height": "650px" }' %}
-
 ## Supported Features
 
 Both responsive layout systems support conditional styling across defined pixel width breakpoints. Available features include:

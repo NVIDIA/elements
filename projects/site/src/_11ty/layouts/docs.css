@@ -97,9 +97,15 @@ p[nve-text] > code {
   padding: var(--nve-ref-size-50) var(--nve-ref-size-100);
 }
 
-pre:has(nve-codeblock),
 code:has(nve-codeblock) {
   display: contents;
+}
+
+pre {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 code > nve-codeblock {
@@ -115,6 +121,12 @@ nvd-canvas {
 
 nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
   --padding: var(--nve-ref-space-xs);
+}
+
+[nve-layer='container'] nvd-canvas {
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-200);
+  --canvas-background: var(--nve-sys-layer-container-background);
 }
 
 /* Page Panel Styles */
@@ -212,19 +224,42 @@ depending on the presence and visibility of the anchor generator and system opti
 
 #doc-content table {
   width: 100%;
-  margin: 0 0 var(--nve-ref-space-md);
+  margin: 0;
   border-collapse: collapse;
   font-size: var(--nve-ref-font-size-100);
 
   th {
     text-align: start;
     font-weight: var(--nve-ref-font-weight-semibold);
-    padding: var(--nve-ref-size-300) 0;
+    padding: var(--nve-ref-size-300) var(--nve-ref-size-200);
+    text-wrap: nowrap;
   }
 
   td {
     text-align: start;
     border-top: 1px solid var(--nve-ref-border-color);
-    padding: var(--nve-ref-size-300) 0;
+    padding: var(--nve-ref-size-300) var(--nve-ref-size-200);
   }
+}
+
+hr {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--nve-ref-border-color);
+}
+
+.api-shortcode,
+.example-shortcode {
+  width: 100%;
+}
+
+.api-value-table nve-grid {
+  max-height: 225px;
+  height: 100%;
+}
+
+.api-shortcode + .example-shortcode .example-shortcode-summary,
+.story-example:has(.api-description) .example-shortcode-summary,
+.split-shortcode:has(.example-shortcode + .api-shortcode) .example-shortcode-summary {
+  display: none;
 }
