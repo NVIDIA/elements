@@ -11,6 +11,9 @@ export default {
   }
 };
 
+/**
+ * @summary Basic toast with auto-dismiss for brief, non-critical feedback messages. Use toasts for lightweight confirmations like "Saved", "Copied", or "Action complete" that inform users without requiring interaction or disrupting workflow.
+ */
 export const Default = {
   render: () => html`
 <nve-toast id="toast" close-timeout="1500">hello there</nve-toast>
@@ -18,6 +21,9 @@ export const Default = {
 `
 };
 
+/**
+ * @summary Visual example of toast structure with anchor positioning. Demonstrates standard toast appearance and placement for consistent implementation patterns across your application.
+ */
 export const Visual = {
   render: () => html`
 <nve-toast anchor="btn">hello there</nve-toast>
@@ -25,6 +31,9 @@ export const Visual = {
 `
 };
 
+/**
+ * @summary Toast status variants for different feedback types. Use success for confirmations, warning for cautions, and danger for error notifications, helping users quickly identify message importance through color and iconography.
+ */
 export const Status = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 200px">
@@ -36,10 +45,16 @@ export const Status = {
   `
 };
 
+/**
+ * @summary Muted toast variant for subtle, low-priority feedback. Use muted prominence when the message is informative but shouldn't draw significant attention, maintaining user focus on primary tasks.
+ */
 export const Prominence = {
   render: () => html`<nve-toast position="top" prominence="muted">muted</nve-toast>`
 };
 
+/**
+ * @summary Toast with inline action buttons for quick follow-up actions. Use sparingly for important actions like "Undo" or "View", but prefer simple toasts without actions for most feedback to maintain lightweight nature.
+ */
 export const Actions = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 200px">
@@ -59,18 +74,26 @@ export const Actions = {
   `
 };
 
+/**
+ * @summary Demonstrates event handling for toast events. Useful for adding custom behavior when toast state changes.
+ */
 export const Events = {
   render: () => html`
 <nve-toast id="toast">hello there</nve-toast>
 <nve-button popovertarget="toast">button</nve-button>
 <script type="module">
   const toast = document.querySelector('nve-toast');
+  toast.addEventListener('beforetoggle', () => console.log('beforetoggle'));
+  toast.addEventListener('toggle', () => console.log('toggle'));
   toast.addEventListener('close', () => console.log('close'));
   toast.addEventListener('open', () => console.log('open'));
 </script>
   `
 };
 
+/**
+ * @summary Toast positioning options relative to screen edges or anchor elements. Position toasts in consistent locations where they won't obscure important content, typically bottom-center or top-right for global feedback.
+ */
 export const Position = {
   render: () => html`
 <nve-toast anchor="btn" position="top">top</nve-toast>
@@ -81,6 +104,9 @@ export const Position = {
   `
 };
 
+/**
+ * @summary Fine-grained toast alignment for precise placement control. Use alignment to position toasts relative to anchor edges, useful for contextual feedback that should appear near specific UI elements.
+ */
 export const Alignment = {
   render: () => html`
 <nve-card id="card" style="width: 450px; height: 300px;"></nve-card>
@@ -101,6 +127,10 @@ export const Alignment = {
 
 /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
 
+/**
+ * @summary Legacy behavior-trigger pattern for automatic toast lifecycle management. Deprecated approach with manual trigger attributes, prefer modern popovertarget API for simpler toast implementation and better maintainability.
+ * @tags test-case
+ */
 export const LegacyBehaviorTrigger = {
   render: () => html`
 <div nve-layout="row align:center" style="height: 90vh">
@@ -110,6 +140,10 @@ export const LegacyBehaviorTrigger = {
 `
 };
 
+/**
+ * @summary Toast functionality within shadow DOM for web component architectures. Demonstrates proper toast positioning and behavior in encapsulated component environments, essential for component library implementations.
+ * @tags test-case
+ */
 export const ShadowRoot = {
   render: () => html`
 <toast-test-shadow-root></toast-test-shadow-root>

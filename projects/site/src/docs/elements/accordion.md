@@ -13,56 +13,32 @@
 
 ## Standard
 
-{% story 'nve-accordion', 'Default' %}
+{% example '@nvidia-elements/core/accordion/accordion.examples.json' 'Default' %}
 
 ## Container
 
 {% api 'nve-accordion', 'property' 'container' %}
+{% example '@nvidia-elements/core/accordion/accordion.examples.json' 'Container' %}
 
-{% story 'nve-accordion', 'Full' %}
+## Disabled
 
-### Inset
+{% api 'nve-accordion', 'property' 'disabled' %}
+{% example '@nvidia-elements/core/accordion/accordion.examples.json' 'Disabled' %}
 
-{% story 'nve-accordion', 'AccordionGroupInset' %}
+## Behavior Expand Single
 
-### Full
-
-{% story 'nve-accordion', 'AccordionGroupExpandSingle' %}
-
-### Flat
-
-{% story 'nve-accordion', 'AccordionGroupFlat' %}
-
-## Container Single
-
-{% api 'nve-accordion', 'property' 'container' %}
-
-### Full
-
-{% story 'nve-accordion', 'Full' %}
-
-### Inset
-
-{% story 'nve-accordion', 'Inset' %}
-
-### Flat
-
-{% story 'nve-accordion', 'Flat' %}
+{% example '@nvidia-elements/core/accordion/accordion.examples.json' 'BehaviorExpandSingle' %}
 
 ### Animated
 
-{% story 'nve-accordion', 'Animated' %}
+{% example '@nvidia-elements/core/accordion/accordion.examples.json' 'Animated' %}
 
 ## Icon Button
 
 {% api 'nve-accordion', 'slot' 'icon-button' %}
 
-{% story 'nve-accordion', 'CustomIconButtonInteractive' %}
+{% example '@nvidia-elements/core/accordion/accordion.examples.json' 'CustomIconButtonInteractive' %}
 
 ## Actions
 
-{% story 'nve-accordion', 'WithActions' %}
-
-## Disabled
-
-{% story 'nve-accordion', 'Disabled' %}
+{% example '@nvidia-elements/core/accordion/accordion.examples.json' 'WithActions' %}

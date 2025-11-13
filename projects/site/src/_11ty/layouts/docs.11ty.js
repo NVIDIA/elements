@@ -60,17 +60,11 @@ export function render(data) {
               ${renderDocsNav(data)}
             </nve-page-panel-content>
           </nve-page-panel>
-
-          <!-- Resizable handle for the left sidebar -->
           <nve-resize-handle slot="left" min="3" max="300" value="300" step="20" orientation="vertical"></nve-resize-handle>
 
-          <!-- Main content area -->
-          <main>
+          <main id="docs-main">
             <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
-              <!-- Component title and summary if this is a component page -->
               ${data.tag ? `<h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>${elementSummary(data.tag)}` : ''}
-
-              <!-- Component documentation tabs -->
               ${
                 data.tag &&
                 !data.page.url.includes('/elements/forms/') &&

@@ -8,9 +8,13 @@
 }
 ---
 
+## Approach
+
 The grid leverages several approaches to maximize render performance including [CSS Contain](https://developer.mozilla.org/en-US/docs/Web/CSS/contain) and [Element Internal States](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states) Performance is tied to the type of elements rendered within the grid its self. Average performance of 1000 rows and 4000 cells is around 250-300ms in a typical application. Additional elements within cells will add the the overall render time. Use pagination or batch rendering to improve overall initial render performance.
 
-{% story 'nve-grid', 'Performance' %}
+## Best Practices
+
+{% story 'nve-grid' 'Performance' '{ "inline": false, "height": "520px" }' %}
 
 ## Infinite Scroll
 

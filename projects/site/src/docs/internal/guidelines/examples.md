@@ -7,11 +7,11 @@
 
 # {{ title }}
 
-This document provides guidance on creating well-written example templates for the Elements design system.
+This document provides guidance on creating well-written example templates for the Elements design system. (`*.examples.ts`)
 
 ## Core Principles
 
-### 1. Always Use `@summary` JSDoc Comments
+### Always Use `@summary` JSDoc Comments
 
 Every example **must** include a `@summary` JSDoc comment that explains:
 
@@ -30,29 +30,25 @@ export const Default = {
 };
 ```
 
-### 2. Stateless Examples by Default
+<nve-alert status="warning">Summaries are limited to a maximum of 400 characters. This restriction is necessary to ensure the documentation is portable across all platforms including docs, CLI and MCPs.</nve-alert>
+
+### Stateless Examples by Default
 
 Examples should be stateless when possible, focusing on demonstrating the component's capabilities rather than complex interactions:
 
 ```typescript
-// ✅ Good: Stateless example
 export const Status = {
   render: () => html`
-    <div nve-layout="row gap:xs align:wrap">
+    <div nve-layout="row gap:xs">
       <nve-badge status="scheduled">scheduled</nve-badge>
       <nve-badge status="queued">queued</nve-badge>
       <nve-badge status="pending">pending</nve-badge>
     </div>
   `
 };
-
-// ❌ Avoid: Complex state management unless demonstrating specific patterns
-export const ComplexState = {
-  render: () => html`<!-- Complex state logic here -->`
-};
 ```
 
-### 3. Use Plain HTML/CSS/JS
+### Use Plain HTML/CSS/JS
 
 Examples should use standard web technologies without unnecessary abstractions:
 
@@ -102,8 +98,8 @@ export const ExampleName = {
 
 ```typescript
 /**
- * @summary [Status badges with predefined colors for different states.
- * Ideal for showing job status, task progress, or system states.]
+ * @summary Status badges with predefined colors for different states.
+ * Ideal for showing job status, task progress, or system states.
  */
 export const Status = {
   render: () => html`
@@ -203,15 +199,15 @@ export const ComplexPattern = {
 
 ## Anti-Patterns to Avoid
 
-### ❌ Poor Descriptions
+### Avoid Poor Descriptions or Unclear Use Cases
+
+Descriptions should provide UX intent. Do not describe what can be inferred already by the source code.
 
 ```typescript
 /**
  * @summary Default badge example.
  */
-```
 
-```typescript
 /**
  * @summary Badge examples with status colors.
  */
@@ -219,20 +215,12 @@ export const ComplexPattern = {
 
 ### Avoid Overly Complex State
 
+Avoid complex/stateful examples. Use cases vary widely across frameworks/tools so simple stateless examples are necessary to support all of our users.
+
 ```typescript
-// Avoid complex state management unless demonstrating specific patterns
 export const OverlyComplex = {
   render: () => html`<!-- Complex state logic that obscures the example -->`
 };
-```
-
-### Avoid Unclear Use Cases
-
-```typescript
-/**
- * @summary Different badge styles
- */
-// Should explain when to use each style
 ```
 
 ## Best Practices Summary

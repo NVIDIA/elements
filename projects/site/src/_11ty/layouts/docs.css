@@ -139,7 +139,7 @@ nve-page-panel[slot='left'] {
 }
 
 /* Main Content Styles */
-main {
+#docs-main {
   padding: var(--nve-ref-space-xl);
   display: flex;
   flex-direction: column;
@@ -151,7 +151,7 @@ main {
   }
 }
 
-main:has([docs-full-width]) {
+#docs-main:has([docs-full-width]) {
   padding: var(--nve-ref-space-lg) var(--nve-ref-space-md);
 
   #doc-content {
@@ -169,7 +169,7 @@ main:has([docs-full-width]) {
   filter: drop-shadow(0 50px 50px rgb(11 12 15 / 95%));
 }
 
-main:has(#anchor-generator) {
+#docs-main:has(#anchor-generator) {
   --anchor-generator-width: 260px;
 }
 
@@ -203,7 +203,7 @@ depending on the presence and visibility of the anchor generator and system opti
     display: block;
   }
 
-  main:has(#anchor-generator) {
+  #docs-main:has(#anchor-generator) {
     #doc-content {
       width: calc(100% - var(--anchor-generator-width));
     }
@@ -211,13 +211,13 @@ depending on the presence and visibility of the anchor generator and system opti
 }
 
 @media (min-width: 1700px) {
-  main {
+  #docs-main {
     padding: calc(var(--nve-ref-space-xl) * 2);
   }
 }
 
 @media (min-width: 1440px) and (max-width: 1920px) {
-  main:has(#anchor-generator) {
+  #docs-main:has(#anchor-generator) {
     align-items: start;
   }
 }

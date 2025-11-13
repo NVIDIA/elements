@@ -7,7 +7,8 @@ import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
-import { exampleShortcode, installShortcode, doDontShortcode, splitShortcode } from './src/_11ty/shortcodes/index.js';
+import { installShortcode, doDontShortcode, splitShortcode } from './src/_11ty/shortcodes/index.js';
+import { exampleShortcode, exampleTagsShortcode } from './src/_11ty/shortcodes/example.js';
 import { apiShortcode } from './src/_11ty/shortcodes/api.js';
 import {
   renderInstallShortcode,
@@ -134,6 +135,7 @@ export default function (eleventyConfig) {
   // Register custom shortcodes for documentation
   eleventyConfig.addAsyncShortcode('example', exampleShortcode);
   eleventyConfig.addAsyncShortcode('story', exampleShortcode); // deprecated
+  eleventyConfig.addAsyncShortcode('example-tags', exampleTagsShortcode);
   eleventyConfig.addAsyncShortcode('api', apiShortcode);
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
   eleventyConfig.addAsyncShortcode('install', installShortcode);

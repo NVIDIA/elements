@@ -5,6 +5,17 @@
 }
 ---
 
+<style>
+  .shortcode-demo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--nve-ref-space-sm);
+    padding: var(--nve-ref-space-sm);
+    outline: var(--nve-ref-border-width-md) dashed var(--nve-ref-border-color-muted);
+  }
+</style>
+
 # {{ title }}
 
 API Guidelines for the [Eleventy](https://www.11ty.dev/) based documentation site for Elements. [Eleventy Shortcodes](https://www.11ty.dev/docs/shortcodes/) provide a way to create reusable templates in markdown content.
@@ -15,9 +26,9 @@ API Guidelines for the [Eleventy](https://www.11ty.dev/) based documentation sit
 
 Renders the install entrypoint of a given element API.
 
-| Parameters | Description             | Type     |
-| ---------- | ----------------------- | -------- |
-| Name       | Tag name of element API | `string` |
+| Parameter | Description             | Type     |
+| --------- | ----------------------- | -------- |
+| Name      | Tag name of element API | `string` |
 
 ```html
 {% raw %}
@@ -25,49 +36,65 @@ Renders the install entrypoint of a given element API.
 {% endraw %}
 ```
 
+<div class="shortcode-demo">
+{% install 'nve-badge' %}
+</div>
+
 ## Example Shortcode
 
 Renders an example template and its corresponding metadata.
 
-| Parameters | Description                                            | Type     |
-| ---------- | ------------------------------------------------------ | -------- |
-| Path       | Fully qualified path to the examples file              | `string` |
-| Name       | Case sensitive name of the example to render from file | `string` |
-| Options    | JSON options '{ "inline": false, "height": "350px" }'  |
+| Parameter | Description                                               | Type     |
+| --------- | --------------------------------------------------------- | -------- |
+| Path      | Fully qualified path to the examples file                 | `string` |
+| Name      | Case sensitive name of the example to render from file    | `string` |
+| Options   | Optional settings '{ "inline": false "height": "350px" }' | `object` |
 
 ```html
 {% raw %}
-{% example '@nvidia-elements/core/badge/badge.examples.json', 'Default' %}
+{% example '@nvidia-elements/core/badge/badge.examples.json' 'Default' %}
 {% endraw %}
 ```
 
-## Do/Don't Shortcode
+<div class="shortcode-demo">
+{% example '@nvidia-elements/core/badge/badge.examples.json' 'Default' %}
+</div>
 
-Renders the "Do/Don't" shortcode layout for guidance on potential anti-patterns.
+## Example Tags Shortcode
 
-| Parameters | Description                     | Type     |
-| ---------- | ------------------------------- | -------- |
-| Slot       | Slot for two example shortcodes | `string` |
+Render the metadata tags of a given Example template.
+
+| Parameter | Description                                            | Type     |
+| --------- | ------------------------------------------------------ | -------- |
+| Path      | Fully qualified path to the examples file              | `string` |
+| Name      | Case sensitive name of the example to render from file | `string` |
+
+<div nve-layout="grid gap:md span-items:6">
 
 ```html
 {% raw %}
-{% dodont %}
-{% example '@nvidia-elements/core/grid/grid.stories.json', 'ValidColumnCount' %}
-{% example '@nvidia-elements/core/grid/grid.stories.json', 'InvalidColumnCount' %}
-{% enddodont %}
+{% example-tags '@nvidia-elements/core/grid/grid.stories.json' 'PerformanceVirtualScroll' %}
 {% endraw %}
 ```
+
+<div class="shortcode-demo">
+{% example-tags '@nvidia-elements/core/grid/grid.stories.json' 'PerformanceVirtualScroll' %}
+</div>
+
+</div>
 
 ## API Shortcode
 
 Renders the description metadata of a given API. The identifier of the referenced API is optional. If no identifier is provided then all API references of provided type are displayed.
 
-| Parameters | Description              | Type                                                                             |
+| Parameter  | Description              | Type                                                                             |
 | ---------- | ------------------------ | -------------------------------------------------------------------------------- |
 | Tag Name   | Tag name of element API  | `string`                                                                         |
 | API        | API metadata to render   | `description` \| `event` \| `property` \| `slot` \| `css-property` \| `css-part` |
 | Identifier | Optional public API name | `string`                                                                         |
 
+### API Description
+
 <div nve-layout="grid gap:md span-items:6">
 
 ```html
@@ -76,11 +103,13 @@ Renders the description metadata of a given API. The identifier of the reference
 {% endraw %}
 ```
 
+<div class="shortcode-demo">
 {% api 'nve-button' 'description' %}
+</div>
 
 </div>
 
----
+### API Event
 
 <div nve-layout="grid gap:md span-items:6">
 
@@ -90,11 +119,13 @@ Renders the description metadata of a given API. The identifier of the reference
 {% endraw %}
 ```
 
+<div class="shortcode-demo">
 {% api 'nve-alert' 'event' 'close' %}
+</div>
 
 </div>
 
----
+### API Slot
 
 <div nve-layout="grid gap:md span-items:6">
 
@@ -104,11 +135,13 @@ Renders the description metadata of a given API. The identifier of the reference
 {% endraw %}
 ```
 
+<div class="shortcode-demo">
 {% api 'nve-page' 'slot' 'header' %}
+</div>
 
 </div>
 
----
+### API CSS Part
 
 <div nve-layout="grid gap:md span-items:6">
 
@@ -118,11 +151,13 @@ Renders the description metadata of a given API. The identifier of the reference
 {% endraw %}
 ```
 
+<div class="shortcode-demo">
 {% api 'nve-dialog' 'css-part' 'close-button' %}
+</div>
 
 </div>
 
----
+### API CSS Property
 
 <div nve-layout="grid gap:md span-items:6">
 
@@ -132,11 +167,13 @@ Renders the description metadata of a given API. The identifier of the reference
 {% endraw %}
 ```
 
+<div class="shortcode-demo">
 {% api 'nve-button' 'css-property' '--background' %}
+</div>
 
 </div>
 
----
+### API Property / Attribute
 
 <div nve-layout="grid gap:md span-items:6">
 
@@ -146,11 +183,13 @@ Renders the description metadata of a given API. The identifier of the reference
 {% endraw %}
 ```
 
+<div class="shortcode-demo">
 {% api 'nve-button' 'property' 'interaction' %}
+</div>
 
 </div>
 
----
+### API Type
 
 If no identifier is provided then all API references of provided type are displayed.
 
@@ -162,15 +201,40 @@ If no identifier is provided then all API references of provided type are displa
 {% endraw %}
 ```
 
+<div class="shortcode-demo">
 {% api 'nve-avatar' 'property' %}
+</div>
 
 </div>
 
-## Layout Examples
+## Do/Don't Shortcode
+
+Renders the "Do/Don't" shortcode layout for guidance on potential anti-patterns.
+
+| Parameter | Description                     | Type     |
+| --------- | ------------------------------- | -------- |
+| Slot      | Slot for two example shortcodes | `string` |
 
 ```html
 {% raw %}
-## Interaction
+{% dodont %}
+{% example '@nvidia-elements/core/grid/grid.stories.json' 'ValidColumnCount' %}
+{% example '@nvidia-elements/core/grid/grid.stories.json' 'InvalidColumnCount' %}
+{% enddodont %}
+{% endraw %}
+```
+
+<div class="shortcode-demo">
+{% dodont %}
+{% example '@nvidia-elements/core/grid/grid.stories.json' 'ValidColumnCount' %}
+{% example '@nvidia-elements/core/grid/grid.stories.json' 'InvalidColumnCount' %}
+{% enddodont %}
+</div>
+
+## Split Layout Shortcode
+
+```html
+{% raw %}
 {% split %}
 {% example '@nvidia-elements/core/button/button.examples.json' 'Interaction' %}
 {% api 'nve-button' 'property' 'interaction' %}
@@ -178,9 +242,9 @@ If no identifier is provided then all API references of provided type are displa
 {% endraw %}
 ```
 
-### Interaction
-
+<div class="shortcode-demo">
 {% split %}
 {% example '@nvidia-elements/core/button/button.examples.json' 'Interaction' %}
 {% api 'nve-button' 'property' 'interaction' %}
 {% endsplit %}
+</div>
