@@ -35,7 +35,7 @@
       }
     },
     "dev:fast": {
-      "command": "pnpm exec eleventy --serve --quiet --port=8082",
+      "command": "pnpm exec eleventy --incremental --serve --quiet --port=8082",
       "service": true,
       "env": {
         "PAGES_BASE_URL": {
