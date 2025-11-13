@@ -145,7 +145,7 @@ export class Accordion extends LitElement implements ContainerElement {
   /**
    * Determines the container styles of component. Flat is used for nesting accordions within other containers. Inset can be used for more complex accordions where content is distinctly separated.
    */
-  @property({ type: String, reflect: true }) container?: Extract<Container, 'flat' | 'full' | 'inset'> = 'full';
+  @property({ type: String, reflect: true }) container?: Extract<Container, 'flat' | 'inset'>;
 
   /**
    * Determines whether the accordion is expanded, displaying its contents, or not.
@@ -249,7 +249,7 @@ export class AccordionGroup extends LitElement {
   @property({ type: Boolean, attribute: 'behavior-expand-single' }) behaviorExpandSingle = false;
 
   /** flat (Borderless, container-less accordions), full (default), or inset (Rounded corner, contained accordion) */
-  @property({ type: String, reflect: true }) container?: Extract<Container, 'flat' | 'full' | 'inset'> = 'full';
+  @property({ type: String, reflect: true }) container?: Extract<Container, 'flat' | 'inset'>;
 
   static readonly metadata = {
     tag: 'nve-accordion-group',
