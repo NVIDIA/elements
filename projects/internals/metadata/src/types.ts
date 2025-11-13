@@ -43,6 +43,7 @@ export interface Attribute {
   markdown: string;
   values: {
     name: string;
+    description?: string;
   }[];
 }
 
@@ -158,6 +159,12 @@ export interface Element {
     reflects: boolean;
     type: {
       text: string;
+      description?: string;
+      descriptionText?: string;
+      values?: {
+        name: string;
+        description?: string;
+      }[];
     };
   }[];
   attributes: {
@@ -165,6 +172,11 @@ export interface Element {
     deprecated: boolean;
     type: {
       text: string;
+      description?: string;
+      values?: {
+        name: string;
+        description?: string;
+      }[];
     };
     default: string;
     description: string;
