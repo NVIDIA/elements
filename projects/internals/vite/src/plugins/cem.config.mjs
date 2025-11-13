@@ -380,6 +380,46 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
   }
 
   const stringLiteralsByTypeAlias = new Map();
+  const valueDescriptionsByTypeAlias = new Map();
+
+  /**
+   * Parse JSDoc comment to extract value descriptions.
+   * Expected format: - `value` Description text or - `value` - Description text
+   * Also supports numeric values: - `3000` Description text
+   * Example:
+   *   - `emphasis` Indicates the interaction is intended to be used for emphasis
+   *   - `emphasis` - Indicates the interaction is intended to be used for emphasis
+   *   - `destructive` Indicates the interaction is intended to be used for destructive actions
+   *   - `3000` Brief success or confirmation messages
+   */
+  function parseValueDescriptions(jsDocComment) {
+    if (!jsDocComment) return {};
+
+    const descriptions = {};
+    // Match patterns like: - `value` Description text or - `value` - Description text
+    // Also matches numeric values with or without backticks: - `3000` or - 3000
+    const valueDescPattern = /^\s*-\s*[`']?([^`'\s]+)[`']?\s*-?\s*(.+)$/gm;
+    let match;
+
+    while ((match = valueDescPattern.exec(jsDocComment)) !== null) {
+      const [, valueName, description] = match;
+      // Only capture if there's a meaningful description (not just a dash or empty)
+      if (description && description.trim() !== '-') {
+        descriptions[valueName] = description.trim();
+      }
+    }
+
+    return descriptions;
+  }
+
+  /**
+   * Extract JSDoc comment text from a node
+   */
+  function getJsDocText(node) {
+    if (!node.jsDoc || node.jsDoc.length === 0) return '';
+
+    return node.jsDoc.map(doc => doc.comment || '').join('\n');
+  }
 
   function rewriteTypesText(entry) {
     const text = entry.type?.text;
@@ -419,6 +459,147 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
       .join(' | ');
   }
 
+  /**
+   * Remove value descriptions from a description string
+   * Removes lines like: - `value` Description text or - `value` - Description text
+   */
+  function removeValueDescriptionsFromText(description) {
+    if (!description) {
+      return description;
+    }
+
+    // Remove lines that match the value description pattern (with or without dash after value)
+    const valueDescPattern = /^\s*-\s*[`']([^`']+)[`']\s*-?\s*.+$/gm;
+    let cleaned = description.replace(valueDescPattern, '');
+
+    // Clean up extra newlines and whitespace
+    cleaned = cleaned
+      .split('\n')
+      .filter(line => line.trim()) // Remove empty lines
+      .join('\n')
+      .trim();
+
+    return cleaned;
+  }
+
+  /**
+   * Add value descriptions to a member or attribute entry
+   */
+  function addValueDescriptions(entry) {
+    if (!entry.type?.text) {
+      return;
+    }
+
+    const types = entry.type.text.split('|').map(t => t.trim().replace(/^['"]|['"]$/g, ''));
+    let hasAnyDescriptions = false;
+
+    // Check if this is a string literal union (contains quoted strings)
+    const isStringLiteralUnion = /['"]/.test(entry.type.text);
+
+    // Initialize values array if it doesn't exist
+    if (!entry.type.values) {
+      entry.type.values = [];
+    }
+
+    // Special handling for boolean types - extract true/false descriptions from the entry's own description
+    if (entry.type.text === 'boolean' && entry.description) {
+      const booleanDescriptions = parseValueDescriptions(entry.description);
+      if (Object.keys(booleanDescriptions).length > 0) {
+        hasAnyDescriptions = true;
+      }
+      ['true', 'false'].forEach(value => {
+        entry.type.values.push({
+          value: value,
+          description: booleanDescriptions[value] || ''
+        });
+      });
+    } else if (entry.type.text === 'number' && entry.description) {
+      // Special handling for number types - extract numeric value descriptions from the entry's own description
+      const numericDescriptions = parseValueDescriptions(entry.description);
+
+      // Filter to only numeric values
+      const numericValues = Object.entries(numericDescriptions)
+        .filter(([key]) => /^-?\d+(\.\d+)?$/.test(key))
+        .sort(([a], [b]) => parseFloat(a) - parseFloat(b)); // Sort numerically
+
+      if (numericValues.length > 0) {
+        hasAnyDescriptions = true;
+      }
+
+      // Add generic "number" value first
+      entry.type.values.push({
+        value: 'number',
+        description: ''
+      });
+
+      // Add specific numeric values with descriptions
+      numericValues.forEach(([value, description]) => {
+        entry.type.values.push({
+          value: parseFloat(value),
+          description: description
+        });
+      });
+    } else if (isStringLiteralUnion) {
+      // Check all type aliases to handle unions of multiple types (e.g., TaskStatus | SupportStatus)
+      for (const [typeAlias, valueDescriptions] of valueDescriptionsByTypeAlias.entries()) {
+        // Check if the type text contains values from this type alias
+        const typeAliasValues = stringLiteralsByTypeAlias.get(typeAlias) || [];
+        const hasMatchingValues = typeAliasValues.some(literal => entry.type.text.includes(literal));
+
+        if (hasMatchingValues && Object.keys(valueDescriptions).length > 0) {
+          hasAnyDescriptions = true;
+
+          // Add descriptions for values that match this type alias
+          types
+            .filter(type => !type.includes('undefined') && type !== 'default' && type !== '')
+            .forEach(type => {
+              const cleanType = type.replace(/^['"]|['"]$/g, '');
+
+              // Only add if we have a description for this value and it's not already in the array
+              if (valueDescriptions[cleanType] && !entry.type.values.some(v => v.value === cleanType)) {
+                entry.type.values.push({
+                  value: cleanType,
+                  description: valueDescriptions[cleanType]
+                });
+              }
+            });
+        }
+      }
+
+      // Add all remaining values (with or without descriptions)
+      types
+        .filter(type => !type.includes('undefined') && type !== 'default' && type !== '')
+        .forEach(type => {
+          const cleanType = type.replace(/^['"]|['"]$/g, '');
+          if (!entry.type.values.some(v => v.value === cleanType)) {
+            entry.type.values.push({
+              value: cleanType,
+              description: ''
+            });
+          }
+        });
+    } else {
+      // For all other types (string, number, HTMLElement, etc.), add a single value
+      types
+        .filter(type => type !== '' && type !== 'undefined')
+        .forEach(type => {
+          entry.type.values.push({
+            value: type,
+            description: ''
+          });
+        });
+    }
+
+    // Only modify description if we found actual descriptions
+    if (hasAnyDescriptions && entry.description) {
+      entry.descriptionText = removeValueDescriptionsFromText(entry.description);
+      const itemsWithDescriptions = entry.type.values.filter(v => v.description);
+      if (itemsWithDescriptions.length > 0) {
+        entry.description = `${entry.descriptionText}\n${itemsWithDescriptions.map(v => `- \`${v.name}\` ${v.description}`).join('\n')}`;
+      }
+    }
+  }
+
   return {
     name: 'rewrite-exported-string-literal-type-aliases',
     analyzePhase({ ts, node }) {
@@ -447,6 +628,15 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
                 return type.value !== undefined ? quoteWrap(type.value) : typeNode.getText();
               });
               stringLiteralsByTypeAlias.set(typeAlias, stringLiterals);
+
+              // Extract value descriptions from JSDoc comments
+              const jsDocText = getJsDocText(node);
+              if (jsDocText) {
+                const valueDescriptions = parseValueDescriptions(jsDocText);
+                if (Object.keys(valueDescriptions).length > 0) {
+                  valueDescriptionsByTypeAlias.set(typeAlias, valueDescriptions);
+                }
+              }
             }
 
             // Evaluate types that look like this:
@@ -559,17 +749,20 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
           switch (declaration.kind) {
             case 'class':
               for (const member of declaration.members ?? []) {
+                if (baseInterface[member.name] && baseInterface[member.name].docs.length) {
+                  member.description = baseInterface[member.name].docs[0]?.description;
+                }
                 rewriteTypesText(member);
-              }
-              for (const attribute of declaration.attributes ?? []) {
-                rewriteTypesText(attribute);
+                addValueDescriptions(member);
               }
 
-              declaration.attributes?.forEach(attr => {
-                if (baseInterface[attr.name] && baseInterface[attr.name].docs.length) {
-                  attr.description = baseInterface[attr.name].docs[0]?.description;
+              for (const attribute of declaration.attributes ?? []) {
+                if (baseInterface[attribute.name] && baseInterface[attribute.name].docs.length) {
+                  attribute.description = baseInterface[attribute.name].docs[0]?.description;
                 }
-              });
+                rewriteTypesText(attribute);
+                addValueDescriptions(attribute);
+              }
               break;
             case 'function':
               for (const parameter of declaration.parameters ?? []) {
