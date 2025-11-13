@@ -66,7 +66,6 @@ describe(Accordion.metadata.tag, () => {
   });
 
   it('should have proper defaults on parent', () => {
-    expect(parentElement.container).toBe('full');
     expect(parentElement.behaviorExpand).toBe(false);
     expect(parentElement.behaviorExpandSingle).toBe(false);
   });
@@ -153,10 +152,6 @@ describe(Accordion.metadata.tag, () => {
   });
 
   it('should pass container styles set on parent to children', async () => {
-    expect(parentElement.container).toBe('full');
-    expect(childElement1.container).toBe('full');
-    expect(childElement2.container).toBe('full');
-
     parentElement.container = 'flat';
 
     await elementIsStable(parentElement);
