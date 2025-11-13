@@ -15,9 +15,15 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 ## Standard
 
-{% story 'nve-drawer', 'Default' %}
+{% example '@nvidia-elements/core/drawer/drawer.examples.json' 'Default' %}
 
-{% story 'nve-drawer', 'Visual', '{ "inline": false, "height": "500px" }' %}
+{% example '@nvidia-elements/core/drawer/drawer.examples.json' 'Visual' '{ "inline": false, "height": "500px" }' %}
+
+## Events
+
+{% api 'nve-drawer', 'event' %}
+
+{% example '@nvidia-elements/core/drawer/drawer.examples.json' 'Events' '{ "inline": false, "height": "400px" }' %}
 
 ## Size
 
@@ -25,18 +31,18 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 ### Small
 
-{% story 'nve-drawer', 'Small', '{ "inline": false, "height": "500px" }' %}
+{% example '@nvidia-elements/core/drawer/drawer.examples.json' 'Small' '{ "inline": false, "height": "500px" }' %}
 
 ### Large
 
-{% story 'nve-drawer', 'Large', '{ "inline": false, "height": "500px" }' %}
+{% example '@nvidia-elements/core/drawer/drawer.examples.json' 'Large' '{ "inline": false, "height": "500px" }' %}
 
 ## Scroll
 
-{% story 'nve-drawer', 'Scroll', '{ "inline": false, "height": "500px" }' %}
+{% example '@nvidia-elements/core/drawer/drawer.examples.json' 'Scroll' '{ "inline": false, "height": "500px" }' %}
 
 ## Position
 
 {% api 'nve-drawer', 'property', 'position' %}
 
-{% story 'nve-drawer', 'Position', '{ "inline": false, "height": "500px" }' %}
+{% example '@nvidia-elements/core/drawer/drawer.examples.json' 'Position' '{ "inline": false, "height": "500px" }' %}

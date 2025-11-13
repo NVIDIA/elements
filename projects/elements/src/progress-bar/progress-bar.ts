@@ -33,7 +33,7 @@ export class ProgressBar extends LitElement {
   @property({ type: Number }) max? = 100;
 
   /** Defines visual treatment to represent a ongoing task or support status. */
-  @property({ type: String, reflect: true }) status: SupportStatus | 'neutral' = 'neutral';
+  @property({ type: String, reflect: true }) status: SupportStatus;
 
   render() {
     const classes = {

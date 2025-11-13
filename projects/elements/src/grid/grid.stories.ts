@@ -31,7 +31,7 @@ export default {
 };
 
 /**
- * @summary Basic data grid component with header and rows, demonstrating the basic structure and layout of a grid.
+ * @summary Basic data grid for tabular data display with columns and rows. Use grids for presenting structured datasets where users need to scan, compare, and analyze information across multiple columns, such as dashboards, reports, or data management interfaces.
  */
 export const Default = {
   render: () => html`
@@ -152,9 +152,7 @@ export const Keynav = {
 };
 
 /**
- * @summary Multi Select rows use a checkbox as the first focusable item within the row.
- * When selected set the `selected` attribute/property on the row. This will ensure selected
- * styles as well as the proper `ariaSelected` state for accessibility.
+ * @summary Multi-select rows with checkboxes for bulk operations. Use multi-select when users need to perform actions on multiple items simultaneously (like delete, export, or bulk edit), placing checkboxes as the first column and setting the selected attribute for proper accessibility.
  */
 export const MultiSelect = {
   render: () => html`
@@ -275,7 +273,7 @@ export const RowAction = {
 };
 
 /**
- * @summary Row groups can be used to organize related rows of a similar subtype.
+ * @summary Expandable row groups for hierarchical data organization. Use row groups when items have parent-child relationships or nested details (like sessions with uploads, orders with line items), allowing users to progressively disclose details and maintain compact views of large hierarchies.
  */
 export const RowGroups = {
   render: () => html`
@@ -419,8 +417,7 @@ export const Pagination = {
 };
 
 /**
- * @summary A fixed height can be placed on the grid allowing rows to be
- * scrolled within the bounding box of the grid.
+ * @summary Fixed-height scrollable grid with persistent header and footer. Use scrollable grids when displaying large datasets where users need to maintain context of column headers and footer controls (like pagination) while scrolling through many rows, improving navigation without losing orientation.
  */
 export const Scroll = {
   render: () => html`
@@ -769,7 +766,7 @@ export const DisplaySettings = {
 };
 
 /**
- * @summary Basic row sorting functionality with sort buttons, enabling users to organize data by different criteria for improved data analysis and navigation.
+ * @summary Sortable columns with visual indicators for data organization. Use sort buttons on columns where sorting is meaningful (dates, numbers, names) to help users find patterns, identify outliers, or locate specific data points, supporting three states: none, ascending, and descending.
  */
 export const RowSort = {
   render: () => html`
@@ -799,10 +796,11 @@ export const RowSort = {
 /**
  * @summary A grid heatmap pattern can be implemented when combining the [nve-sys-visualization-sequential-diverging-red-green-*](docs/foundations/visualization/#sequential-diverging-red-green) theme tokens.
  * Heatmap patterns can be useful for visualizing test results, performance metrics or any data that has a fixed range of values.
+ * @tags pattern
  */
 export const HeatmapPattern = {
   render: () => html`
-<nve-grid container="flat" style="max-width: 1100px">
+<nve-grid id="heatmap-pattern-grid" container="flat" style="max-width: 1100px">
   <nve-grid-header>
     <nve-grid-column width="150px" position="fixed">Test Pipeline</nve-grid-column>
   </nve-grid-header>
@@ -813,8 +811,8 @@ export const HeatmapPattern = {
     tests: Array(5).fill('').map(() => (Math.random() * 100).toFixed(2).padStart(5, '0'))
   }));
 
-  const grid = document.querySelector('nve-grid');
-  const gridHeader = document.querySelector('nve-grid-header');
+  const grid = document.querySelector('nve-grid#heatmap-pattern-grid');
+  const gridHeader = grid.querySelector('nve-grid-header');
 
   const columns = testData[0].tests.map((_, i) => {
     const column = document.createElement('nve-grid-column');
@@ -991,8 +989,13 @@ export const PerformanceInfiniteScroll = {
 };
 
 /**
- * @summary Performance can be used to test the performance of the grid.
- * @tags test-case performance
+ * @summary Datagrid performance is heavily dependent on the content within the grid as well as the host environment.
+ * @tags performance
+ * @description When rendering large datasets, it is important to use the appropriate techniques to maintain good performance.
+ * - Use pagination or lazy loading to reduce initial render time
+ * - Use virtual scroll or batch rendering to improve render performance
+ * - Use fixed width columns to improve render performance and reduce layout shift
+ * - Avoid duplication of elements within cells, example reuse a single tooltip for all cells vs creating a new tooltip for each cell
  */
 export const Performance = {
   render: () => html`
@@ -1017,6 +1020,7 @@ export const Performance = {
         const header = document.createElement('nve-grid-header');
         const columns = new Array(4).fill('').map((_, i) => {
           const column = document.createElement('nve-grid-column');
+          column.setAttribute('width', '25%');
           column.textContent = 'Column ' + i;
           return column;
         });
@@ -1075,7 +1079,7 @@ export const PerformanceVirtualScroll = {
 };
 
 /**
- * @summary Striped row styling for improved visual separation and data scanning, enhancing readability in large datasets with alternating row backgrounds.
+ * @summary Alternating row background colors for improved scanability. Use striped rows in dense grids or when users frequently scan horizontally across many columns, as the alternating backgrounds help maintain visual alignment and reduce reading errors in wide tables.
  */
 export const Stripe = {
   render: () => html`
@@ -1147,7 +1151,7 @@ export const CardTabs = {
 };
 
 /**
- * @summary Loading placeholder state for grid content, providing visual feedback during data fetching and improving perceived performance for users.
+ * @summary Loading placeholder state with progress indicator. Use grid placeholders during initial data fetching or while loading large datasets, providing visual feedback that content is coming and preventing layout shift when rows populate, improving perceived performance.
  */
 export const Placeholder = {
   render: () => html`
@@ -1163,7 +1167,7 @@ export const Placeholder = {
 };
 
 /**
- * @summary Error state placeholder with retry functionality, providing user-friendly error handling and recovery options when data loading fails.
+ * @summary Error or empty state placeholder with actionable recovery options. Use empty state placeholders when no data is available (due to errors, empty results, or failed filters) with clear messaging and actions like retry or filter adjustment, helping users understand why data is missing and how to resolve it.
  */
 export const PlaceholderRetry = {
   render: () => html`

@@ -16,25 +16,17 @@
 
 ## App Logo
 
-{% api 'nve-page-header', 'story', 'AppLogo' %}
-
 {% story 'nve-page-header', 'AppLogo' %}
 
 ## Menu Button
-
-{% api 'nve-page-header', 'story', 'MenuButton' %}
 
 {% story 'nve-page-header', 'MenuButton' %}
 
 ## Dropdown Menu
 
-{% api 'nve-page-header', 'story', 'DropdownMenu' %}
-
 {% story 'nve-page-header', 'DropdownMenu' %}
 
 ## Search
-
-{% api 'nve-page-header', 'story', 'Search' %}
 
 {% story 'nve-page-header', 'Search' %}
 

@@ -10,23 +10,15 @@
 
 {% install 'nve-progress-bar' %}
 
-## Setting the Value
-
-{% api 'nve-progress-bar', 'property', 'value' %}
-
-```html
-<nve-progress-bar status="accent" value="25"></nve-progress-bar>
-
-<nve-progress-bar status="success" value="50"></nve-progress-bar>
-
-<nve-progress-bar status="warning" value="75"></nve-progress-bar>
-
-<nve-progress-bar status="danger" value="100"></nve-progress-bar>
-```
-
 ## Standard
 
 {% story 'nve-progress-bar', 'Default' %}
+
+## Status
+
+{% api 'nve-progress-bar', 'property', 'status' %}
+
+{% story 'nve-progress-bar', 'Status' %}
 
 ## Max Value
 
@@ -36,28 +28,16 @@
 
 ## Label Display
 
-Progress bars may have their labels and numerical values displayed above its visual indicator.
-
 {% story 'nve-progress-bar', 'Labeled' %}
 
-## Indeterminate Animation (Horizontal Loading Indicator)
-
-Progress bars may will display as an animated loading indicator when no `value` attribute is set.
-
-Leave off the `status` attribute for the `neutral` color.
+## Indeterminate Animation
 
 {% story 'nve-progress-bar', 'Indeterminate' %}
 
-Or in combination with `status` colors.
-
 {% story 'nve-progress-bar', 'IndeterminateStatusColors' %}
-
-Alternatively, set the `--accent-color` css property for a branded progress bar style.
 
 {% story 'nve-progress-bar', 'IndeterminateCustomColor' %}
 
 ## Height Customization
-
-The progress bar's height can be customized using the `--height` CSS custom property. This allows you to create progress bars that match your application's visual hierarchy and emphasis needs. For consistency and theming, we recommend using our design system tokens—but you're free to use any value that suits your layout.
 
 {% story 'nve-progress-bar', 'CustomHeights' %}

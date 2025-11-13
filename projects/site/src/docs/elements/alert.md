@@ -13,54 +13,60 @@
 
 ## Standard
 
-{% story 'nve-alert', 'Default' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'Default' %}
+
+## Support Status
+
+{% api 'nve-alert-group', 'property', 'status' %}
+
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'SupportStatus' %}
 
 ## Status
 
 {% api 'nve-alert', 'property', 'status' %}
 
-{% story 'nve-alert', 'Status' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'Status' %}
 
 ## Alert Group
 
-An alert group is an element that displays a group of related and important messages in a way that attracts the user's attention without interrupting the user's task.
-
-{% story 'nve-alert', 'AlertGroupDefault' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'AlertGroupDefault' %}
 
 ## Alert Group Status
 
 {% api 'nve-alert-group', 'property', 'status' %}
 
-{% story 'nve-alert', 'AlertGroupStatus' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'AlertGroupStatus' %}
 
 ## Closable
 
 {% api 'nve-alert', 'property', 'closable' %}
 
-{% story 'nve-alert', 'Closable' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'Closable' %}
 
 ## Actions
 
 {% api 'nve-alert', 'slot', 'actions' %}
 
-{% story 'nve-alert', 'Actions' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'Actions' %}
 
 ## Prominence
 
 {% api 'nve-alert-group', 'property', 'prominence' %}
 
-{% story 'nve-alert', 'Prominence' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'Prominence' %}
 
-## Multiline
+## Content
 
-{% api 'nve-alert', 'property', 'multiline' %}
+{% api 'nve-alert', 'slot', 'content' %}
 
-{% story 'nve-alert', 'Multiline' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'Content' %}
 
-## Custom Colors
+## Color
 
 {% api 'nve-alert-group', 'property', 'color' %}
 
-{% story 'nve-alert', 'CustomColors' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'Color' %}
 
-{% story 'nve-alert', 'CustomColorCombinations' %}
+## Custom Colors
+
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'CustomColorCombinations' %}

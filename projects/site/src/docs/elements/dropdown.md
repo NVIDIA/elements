@@ -15,52 +15,50 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 ## Standard
 
-{% story 'nve-dropdown', 'Default' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'Default' %}
 
-{% story 'nve-dropdown', 'Visual', '{ "inline": false, "height": "230px" }' %}
-
-## Layout
-
-{% story 'nve-dropdown', 'DropdownLayout', '{ "inline": false, "height": "450px" }' %}
-
-## Dropdown Menu
-
-{% story 'nve-dropdown', 'DropdownMenu', '{ "inline": false, "height": "450px" }' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'Visual' '{ "inline": false, "height": "230px" }' %}
 
 ## Closable
 
 {% api 'nve-dropdown', 'property' 'closable' %}
 
-{% story 'nve-dropdown', 'Closable', '{ "inline": false, "height": "280px" }' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'Closable' '{ "inline": false, "height": "280px" }' %}
 
 ## Events
 
-{% api 'nve-dropdown', 'event' 'open' %}
+{% api 'nve-dropdown', 'event' %}
 
-{% api 'nve-dropdown', 'event' 'close' %}
-
-{% story 'nve-dropdown', 'Events', '{ "inline": false, "height": "280px" }' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'Events' '{ "inline": false, "height": "280px" }' %}
 
 ## Position
 
 {% api 'nve-dropdown', 'property' 'position' %}
 
-{% story 'nve-dropdown', 'Position', '{ "inline": false, "height": "600px" }' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'Position' '{ "inline": false, "height": "600px" }' %}
 
 ## Alignment
 
 {% api 'nve-dropdown', 'property' 'alignment' %}
 
-{% story 'nve-dropdown', 'Alignment', '{ "inline": false, "height": "600px" }' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'Alignment' '{ "inline": false, "height": "600px" }' %}
+
+## Layout
+
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'DropdownLayout' '{ "inline": false, "height": "450px" }' %}
+
+## Dropdown Menu
+
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'DropdownMenu' '{ "inline": false, "height": "450px" }' %}
 
 ## Radio Group Pattern
 
-{% story 'nve-dropdown', 'RadioGroup', '{ "inline": false, "height": "450px" }' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'RadioGroup' '{ "inline": false, "height": "450px" }' %}
 
 ## Checkbox Group Pattern
 
-{% story 'nve-dropdown', 'CheckboxGroup', '{ "inline": false, "height": "320px" }' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'CheckboxGroup' '{ "inline": false, "height": "320px" }' %}
 
 ## Multiple Triggers
 
-{% story 'nve-dropdown', 'MultipleTriggers', '{ "inline": false, "height": "320px" }' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'MultipleTriggers' '{ "inline": false, "height": "320px" }' %}
