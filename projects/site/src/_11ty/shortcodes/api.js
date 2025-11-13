@@ -1,10 +1,9 @@
 // @ts-check
 
-import markdownIt from 'markdown-it';
+import markdown from '../libraries/markdown.js';
 import { siteData } from '../../index.11tydata.js';
 
 const { elements } = siteData;
-const md = markdownIt();
 
 const typeAliasMap = {
   description: 'description',
@@ -20,7 +19,7 @@ export async function apiShortcode(tag, type, value = null) {
 
   if (element?.manifest) {
     if (type === 'description') {
-      return md
+      return markdown
         .render(element.manifest.description ?? '')
         .trim()
         .replaceAll('<p>', '<p class="api-description" nve-text="body relaxed mkd">');
@@ -43,7 +42,7 @@ export function renderAPIValueTable(apiValue) {
     ${
       values.length
         ? /* html */ `
-    ${md
+    ${markdown
       .render(apiValue.descriptionText ?? apiValue.description ?? '')
       .trim()
       .replaceAll('<p>', '<p nve-text="body relaxed">')}
@@ -62,7 +61,7 @@ export function renderAPIValueTable(apiValue) {
         )
         .join('')}
     </nve-grid>`
-        : md
+        : markdown
             .render(apiValue.description ?? '')
             .trim()
             .replaceAll('nve-text', 'class="api-value-table-description" nve-text')
@@ -86,7 +85,7 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
         .map(i => {
           const rawDescription = i.descriptionText ?? i.description;
           const description = rawDescription
-            ? md
+            ? markdown
                 .render(rawDescription)
                 .trim()
                 .replaceAll('<p', '<p nve-text="body relaxed sm"')

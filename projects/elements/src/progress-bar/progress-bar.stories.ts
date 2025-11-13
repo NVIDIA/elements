@@ -7,19 +7,25 @@ export default {
 };
 
 /**
- * @summary Progress bars with different status colors showing completion levels from 0% to 100% for task tracking.
+ * @summary Standard progress bar for representing completion levels from 0% to 100% for task tracking.
  */
 export const Default = {
   render: () => html`
+    <nve-progress-bar value="50"></nve-progress-bar>
+  `
+};
+
+/**
+ * @summary Progress bars with different status colors showing completion levels from 0% to 100% for task tracking.
+ */
+export const Status = {
+  render: () => html`
     <div nve-layout="column gap:md pad:lg full">
       <nve-progress-bar value="0"></nve-progress-bar>
-
+      <nve-progress-bar value="10"></nve-progress-bar>
       <nve-progress-bar status="accent" value="25"></nve-progress-bar>
-
       <nve-progress-bar status="success" value="50"></nve-progress-bar>
-
       <nve-progress-bar status="warning" value="75"></nve-progress-bar>
-
       <nve-progress-bar status="danger" value="100"></nve-progress-bar>
     </div>
   `
@@ -40,6 +46,7 @@ export const Max = {
 
 /**
  * @summary Progress bar with descriptive label and percentage display for clear communication of upload or task status.
+ * @tags pattern
  */
 export const Labeled = {
   render: () => html`
@@ -64,7 +71,7 @@ export const Indeterminate = {
 };
 
 /**
- * @summary Indeterminate progress bars with status color variants for contextual loading states and severity levels.
+ * @summary Progress bars may will display as an animated loading indicator when no `value` attribute is set.
  */
 export const IndeterminateStatusColors = {
   render: () => html`
@@ -91,6 +98,7 @@ export const IndeterminateCustomColor = {
 /**
  * @summary Progress bars with custom heights for different visual prominence levels and layout requirements.
  * @tags test-case
+ * @description The progress bar's height can be customized using the `--height` CSS custom property. This allows you to create progress bars that match your application's visual hierarchy and emphasis needs. For consistency and theming, we recommend using our design system tokens—but you're free to use any value that suits your layout.
  */
 export const CustomHeights = {
   render: () => html`

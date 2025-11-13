@@ -29,23 +29,23 @@ Support colors are used in combination of text or iconography to convey status o
 
 ## Alert Support
 
-{% story '@nvidia-elements/core/alert/alert.stories.json', 'Status' %}
+{% story '@nvidia-elements/core/alert/alert.examples.json', 'SupportStatus' %}
 
 ## Alert Group
 
-{% story '@nvidia-elements/core/alert/alert.stories.json', 'AlertGroupStatus' %}
+{% story '@nvidia-elements/core/alert/alert.examples.json', 'AlertGroupStatus' %}
 
 ## Alert Group Banner
 
-{% story '@nvidia-elements/core/alert/alert.stories.json', 'Prominence' %}
+{% story '@nvidia-elements/core/alert/alert.examples.json', 'Prominence' %}
 
 ## Notification Snackbar
 
-{% story '@nvidia-elements/core/notification/notification.stories.json', 'Status', '{ "inline": false, "height": "640px" }' %}
+{% story '@nvidia-elements/core/notification/notification.examples.json', 'Status', '{ "inline": false, "height": "640px" }' %}
 
 ## Toasts
 
-{% story '@nvidia-elements/core/toast/toast.stories.json', 'Status', '{ "inline": false, "height": "600px" }'  %}
+{% story '@nvidia-elements/core/toast/toast.examples.json', 'Status', '{ "inline": false, "height": "600px" }'  %}
 
 ## Support Tokens
 

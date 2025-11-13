@@ -6,10 +6,6 @@
   width: 100%;
 }
 
-[internal-host] {
-  overflow: hidden;
-}
-
 nve-codeblock {
   --padding: var(--nve-ref-space-lg);
   --border-radius: 0;

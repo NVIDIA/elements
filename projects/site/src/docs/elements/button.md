@@ -12,69 +12,49 @@
 
 ## Standard
 
-{% story 'nve-button', 'Default' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Default' %}
 
 ## Interaction
 
-{% api 'nve-button', 'property', 'interaction' %}
+{% api 'nve-button' 'property' 'interaction' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Interaction' %}
 
-### Standard
+## Container
 
-{% story 'nve-button', 'Interaction' %}
-
-### Flat
-
-{% api 'nve-button', 'property', 'container' %}
-
-{% story 'nve-button', 'Flat' %}
-
-### Inline
-
-{% api 'nve-button', 'property', 'container' %}
-
-{% story 'nve-button', 'Inline' %}
-
-## Pressed
-
-{% api 'nve-button', 'property', 'pressed' %}
-
-{% story 'nve-button', 'Pressed' %}
-
-## Selected
-
-{% api 'nve-button', 'property', 'selected' %}
-
-{% story 'nve-button', 'SelectedFlat' %}
+{% api 'nve-button' 'property' 'container' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Container' %}
 
 ## Size
 
-{% api 'nve-button', 'property', 'size' %}
+{% api 'nve-button' 'property' 'size' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Size' %}
 
-{% story 'nve-button', 'Size' %}
+## Pressed
+
+{% api 'nve-button' 'property' 'pressed' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Pressed' %}
+
+## Selected
+
+{% api 'nve-button' 'property' 'selected' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Selected' %}
+
+## Disabled
+
+{% api 'nve-button' 'property' 'disabled' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Disabled' %}
 
 ## Linked Buttons
 
-Anchors can wrap button instances, however its recommended to slot the anchor into the button.
-
-```html
-<nve-button><a href="#">default</a></nve-button> <!-- do -->
-<a href="#"><nve-button>default</nve-button></a> <!-- don't -->
-```
-
-If you need to slot an icon in a linked button, put `nve-icon` adjacent to the anchor tag.
-
-```html
-<nve-button><a href="#">default</a> <nve-icon name="reset"></nve-icon></nve-button> <!-- do -->
-```
-
-{% story 'nve-button', 'Link' %}
-
-{% story 'nve-button', 'LinkFlat' %}
+{% dodont %}
+{% example '@nvidia-elements/core/button/button.examples.json', 'ValidLinkButton' %}
+{% example '@nvidia-elements/core/button/button.examples.json', 'InvalidLinkButton' %}
+{% enddodont %}
 
 ## With Icon
 
-{% story 'nve-button', 'ButtonWithIcon' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'ButtonWithIcon' %}
 
 ## Form Control
 
-{% story 'nve-button', 'FormControl' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'FormControl' %}

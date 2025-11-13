@@ -9,16 +9,16 @@ export default {
 };
 
 /**
- * @summary Basic alert component for displaying informational messages to users
+ * @summary Basic alert for inline informational messages. Use alerts for persistent feedback that doesn't auto-dismiss, ideal for system status updates, or contextual information that users may need to reference while completing tasks.
  */
 export const Default = {
   render: () => html`<nve-alert>alert message</nve-alert>`
 };
 
 /**
- * @summary Demonstrates different alert status variants (accent, warning, success, danger) for contextual messaging
+ * @summary Alert status variants for semantic messaging. Use accent for informational updates, warning for cautionary messages requiring attention, success for confirmations, and danger for errors or critical issues that may block user progress.
  */
-export const Status = {
+export const SupportStatus = {
   render: () => html`
 <div nve-layout="column gap:md">
   <nve-alert>Standard</nve-alert>
@@ -31,11 +31,17 @@ export const Status = {
 }
 
 /**
- * @summary Demonstrates task-specific status variants for workflow and process state communication
+ * @summary Extended status variants for workflow and process state communication. Use these specialized states (scheduled, queued, running, failed, etc.) in dashboards, build pipelines, or task management interfaces where users need detailed visibility into process lifecycle stages.
  */
-export const TaskStatus = {
+export const Status = {
   render: () => html`
 <div nve-layout="column gap:md">
+  <nve-alert>Standard</nve-alert>
+  <nve-alert status="accent">Accent</nve-alert>
+  <nve-alert status="warning">Warning</nve-alert>
+  <nve-alert status="success">Success</nve-alert>
+  <nve-alert status="danger">Danger</nve-alert>
+
   <nve-alert status="scheduled">Scheduled</nve-alert>
   <nve-alert status="queued">Queued</nve-alert>
   <nve-alert status="finished">Finished</nve-alert>
@@ -52,7 +58,7 @@ export const TaskStatus = {
 }
 
 /**
- * @summary Demonstrates alert grouping for organizing related messages together
+ * @summary Alert group for visually organizing related messages with shared styling. Use alert groups to present multiple related messages as a cohesive unit, improving scannability and visual hierarchy.
  */
 export const AlertGroupDefault = {
   render: () => html`
@@ -63,7 +69,7 @@ export const AlertGroupDefault = {
 };
 
 /**
- * @summary Shows alert groups with different status variants for contextual message grouping
+ * @summary Alert groups with inherited status styling for all children. Applying status at the group level ensures visual consistency across related messages, perfect for form validation where multiple fields share the same error context.
  */
 export const AlertGroupStatus = {
   render: () => html`
@@ -97,7 +103,7 @@ export const AlertGroupStatus = {
 }
 
 /**
- * @summary Demonstrates closable alerts within groups for dismissible notification patterns
+ * @summary Closable alerts that users can dismiss. Use closable alerts for messages that become irrelevant after reading (like onboarding tips, one-time announcements, or acknowledged warnings), but avoid for critical errors that need to remain visible until resolved.
  */
 export const Closable = {
   render: () => html`
@@ -131,7 +137,7 @@ export const Closable = {
 }
 
 /**
- * @summary Shows alerts with action buttons for interactive notification patterns
+ * @summary Alerts with action buttons for immediate user response. Include actions when the alert requires user decision-making (like "Retry", "View Details", or "Undo"), making the next step clear and reducing friction in error recovery or task completion flows.
  */
 export const Actions = {
   render: () => html`
@@ -166,7 +172,7 @@ export const Actions = {
 }
 
 /**
- * @summary Demonstrates high-prominence alerts for banner-style notifications with emphasis styling
+ * @summary High-prominence alerts with emphasis styling for full-width banners. Use prominence="emphasis" for system-wide announcements like maintenance windows, feature launches, or critical security updates that need maximum visibility and impact across the entire interface.
  */
 export const Prominence = {
   render: () => html`
@@ -195,9 +201,9 @@ export const Prominence = {
 }
 
 /**
- * @summary Demonstrates complex alert content with structured layouts and detailed information display
+ * @summary Alert with complex structured content including expandable details. Use the content slot for rich information like stack traces, validation summaries, or detailed error logs where users need both the high-level message and access to technical details for debugging or reporting.
  */
-export const Multiline = {
+export const Content = {
   render: () => html`
     <nve-alert-group status="danger">
       <nve-alert>
@@ -216,10 +222,10 @@ export const Multiline = {
 }
 
 /**
- * @summary Shows custom color variants for brand-specific alert styling and visual differentiation
+ * @summary Custom color variants for brand-specific styling or additional visual differentiation beyond standard status colors. Use custom colors when standard semantic colors don't match your use case, such as category labels, team assignments, or brand-specific messaging.
  * @tags test-case
  */
-export const CustomColors = {
+export const Color = {
   render: () => html`
     <div nve-layout="column gap:md">
       <nve-alert-group color="red-cardinal">
@@ -313,9 +319,8 @@ export const CustomColors = {
   `
 }
 
-
 /**
- * @summary Demonstrates combining custom colors with status and prominence for advanced alert customization
+ * @summary Combining custom colors with status icons and prominence for advanced theming. Demonstrates how custom colors interact with status icons and emphasis styling, useful for maintaining brand consistency while preserving semantic meaning through status indicators.
  * @tags test-case
  */
 export const CustomColorCombinations = {
