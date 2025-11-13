@@ -2,8 +2,10 @@
 
 import markdownIt from 'markdown-it';
 import { siteData } from '../../../index.11tydata.js';
+import { exampleShortcode } from '../../../_11ty/shortcodes/index.js';
+import { apiShortcode } from '../../../_11ty/shortcodes/api.js';
 
-const { stories } = siteData;
+const { stories, elements } = siteData;
 
 // Initialize markdown parser and metadata service
 const md = markdownIt();
@@ -38,16 +40,25 @@ export const data = {
  * Currently a placeholder that will be expanded to show component examples.
  *
  * @param {Object} data - The page data object from 11ty
- * @returns {string} HTML string containing the examples documentation
+ * @returns {Promise<string>} HTML string containing the examples documentation
  */
-export function render(data) {
-  // Extract component metadata from the frontmatter
+export async function render(data) {
   const componentData = data.component.data;
+  const element = elements.find(e => e.name === componentData.tag);
+  const isPopover = [
+    'popover',
+    'dialog',
+    'drawer',
+    'dropdown',
+    'notification',
+    'toast',
+    'toggletip',
+    'tooltip'
+  ].includes(componentData.tag.replace('nve-', ''));
   data.tag = componentData.tag;
   data.title = componentData.title;
   data.page.fileSlug = componentData.page.fileSlug;
 
-  // Create a JSON string of all story templates for JavaScript to cycle through
   const storyTemplates = stories
     .filter(story => story.element === componentData.tag && !story.tags.includes('test-case') && !story.deprecated)
     .map(story => ({
@@ -70,11 +81,6 @@ export function render(data) {
   
     <h2 nve-text="heading xl emphasis mkd">${componentData.title} Examples</h2>
 
-    <!-- Triggers element loader -->
-     <template>
-      ${stories.filter(story => story.element === componentData.tag).find(s => s.id === 'Default')?.template}
-     </template>
-
     <div nve-layout="row gap:lg align:stretch">
       ${
         storyTemplates.length > 1
@@ -95,20 +101,22 @@ export function render(data) {
       <nvd-canvas-editable id="cycling-example" source="${storyTemplates[0]?.template || ''}"  tag="${componentData.tag}" horizontal-layout></nvd-canvas-editable>
     </div>
 
-    ${storyTemplates
-      .map(
-        (story, index) => /* html */ `
+    ${(
+      await Promise.all(
+        storyTemplates.map(async story => {
+          const member = element?.manifest?.members?.find(m => m.name.toLowerCase() === story.id.toLowerCase());
+          return /* html */ `
         <div class="story-example" nve-layout="column gap:sm">
           <h3 nve-text="heading lg emphasis mkd" id="${story.slug}">${story.id.split(/(?=[A-Z])/).join(' ')}</h3>
-          <nvd-canvas-editable source="${story.template}" tag="${componentData.tag}" readonly>
-            <nve-button container="flat" slot="suffix" value="${index}">Edit Example</nve-button>
-          </nvd-canvas-editable>
+          ${story.id === 'Default' ? await apiShortcode(componentData.tag, 'description') : ''}
+          ${story.id !== 'Default' && member ? await apiShortcode(componentData.tag, 'property', member.name) : ''}
+          ${story.id.startsWith('Event') ? await apiShortcode(componentData.tag, 'event') : ''}
+          ${story.entrypoint ? await exampleShortcode(story.entrypoint, story.id, { inline: !isPopover, height: isPopover ? '400px' : undefined }) : ''}
         </div>
-      `
+      `;
+        })
       )
-      .join('\n')}
-
-    
+    ).join('\n')}
 
     <script type="module">
       const cyclingExample = document.querySelector('#cycling-example');
