@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.48.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.2...@nvidia-elements/core-v1.48.3) (2025-11-15)
+
+
+### Bug Fixes
+
+* **elements:** missing type definitions ([2a42c0e](https://github.com/NVIDIA/elements/commit/2a42c0ef7a5cdfaeb139ebb24d59b0d5a34ef78f))
+
 ## [@nvidia-elements/core-v1.48.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.1...@nvidia-elements/core-v1.48.2) (2025-11-05)
 
 
