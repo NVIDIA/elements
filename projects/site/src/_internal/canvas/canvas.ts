@@ -24,6 +24,10 @@ function convertToJsxElement(html: string): string {
 export class Canvas extends LitElement {
   @property({ type: String }) source: string = '';
 
+  @property({ type: String, reflect: true }) align?: 'center';
+
+  @property({ type: String, reflect: true }) layer?: 'container' | 'canvas' | 'highlight';
+
   @state() private showSource = false;
 
   @state() private sourceType: 'html' | 'react' = 'html';
@@ -52,7 +56,7 @@ export class Canvas extends LitElement {
           <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.formattedSource}></nve-copy-button>
         </div>
         <div class="toolbar">
-          <nve-button container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
+          <nve-button class="source-button" container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
           <nve-select container="flat" fit-text>
             <select @change=${(e: Event) => this.#updateSourceType(e)} aria-label="source type">
               <option value="html">HTML&nbsp;</option>

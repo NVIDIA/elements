@@ -18,10 +18,17 @@ const examples = stories;
 export async function exampleShortcode(
   ref,
   exampleName,
-  userConfig = { inline: true, height: '95%', resizable: true, summary: true }
+  userConfig = { inline: true, height: '95%', resizable: true, summary: true, align: 'start', layer: 'canvas' }
 ) {
   const example = findExample(ref, exampleName);
-  const defaultConfig = { inline: true, height: '95%', resizable: true, summary: true };
+  const defaultConfig = {
+    inline: true,
+    height: '95%',
+    resizable: true,
+    summary: true,
+    align: 'start',
+    layer: 'canvas'
+  };
   const config =
     typeof userConfig === 'string'
       ? { ...defaultConfig, ...JSON.parse(userConfig) }
@@ -53,7 +60,7 @@ export async function exampleShortcode(
 
   const template = config.inline
     ? /* html */ `<div id="${canvasId}_content">${templateContent}</div>`
-    : `<iframe loading="lazy" src="examples/${example?.permalink}index.html" style="height: ${config.height}; width: 100%; border: none;" />`;
+    : `<iframe loading="lazy" src="examples/${example?.permalink}index.html" style="height: 100%; width: 100%; border: none;" />`;
 
   const reload =
     globalThis.process.env.ELEVENTY_RUN_MODE === 'serve' && config.inline && example && !ref.includes('.stories.json')
@@ -69,8 +76,8 @@ export async function exampleShortcode(
   return example
     ? /* html */ `
 <div class="example-shortcode" nve-layout="column gap:sm">
-${summary}
-<nvd-canvas id="${canvasId}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}">
+${config.summary ? summary : ''}
+<nvd-canvas id="${canvasId}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}; --height: ${config.height};" align="${config.align}" layer="${config.layer}">
   <template>${md.utils?.escapeHtml(templateContent)}</template>${template}${editButton}${playgroundButton}
 </nvd-canvas>${reload}
 </div>`.trim()
