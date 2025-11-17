@@ -14,12 +14,3 @@
 nve-menu {
   --width: 100%;
 }
-
-/* ensure menu inherits the background to match nve-select and input control backgrounds */
-nve-control {
-  --background: var(--nve-sys-interaction-field-background);
-
-  &::part(_internal-host) {
-    --nve-sys-interaction-state-base: unset;
-  }
-}

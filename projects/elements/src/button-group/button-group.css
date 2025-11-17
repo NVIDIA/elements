@@ -1,5 +1,5 @@
 :host {
-  --nve-sys-interaction-state-base: var(--background);
+  --nve-sys-interaction-state-base: var(--background, var(--nve-sys-layer-canvas-background));
   --background: var(--nve-sys-interaction-background);
   --border-radius: var(--nve-ref-border-radius-sm);
   --padding: var(--nve-ref-space-xxs);

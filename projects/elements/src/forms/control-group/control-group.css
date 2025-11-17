@@ -21,16 +21,11 @@
   text-transform: var(--label-text-transform) !important;
 }
 
-/* :host(:state(disabled)) {
-  --color: var(--nve-sys-text-muted-color);
-  --opacity: 0.9;
-} */
-
 :host([layout*='horizontal-inline']) ::slotted([nve-control]),
 :host([layout*='vertical-inline']) ::slotted([nve-control]),
 :host([layout*='horizontal-inline']) ::slotted([nve-control]),
 :host([layout*='vertical-inline']) ::slotted([nve-control]) {
-  --control-height: var(--nve-ref-size-800);
+  --control-height: var(--nve-sys-interaction-field-height);
 }
 
 slot[name='label'] {

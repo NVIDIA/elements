@@ -2,7 +2,7 @@
   --background: var(--state-color-background);
   --color: var(--state-color);
   --state-color-base: var(--nve-ref-color-blue-cobalt-1100);
-  --nve-sys-interaction-state-base: var(--background);
+  --nve-sys-interaction-state-base: var(--background, var(--nve-sys-layer-canvas-background));
   --gap: var(--nve-ref-space-xs);
   --font-size: var(--nve-ref-font-size-100);
   --padding: 0 var(--nve-ref-size-200);

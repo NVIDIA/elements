@@ -198,6 +198,7 @@ slot[name*='option-'] {
 }
 
 :host([container='flat']) {
+  --background: unset;
   --border-radius: 0;
   --box-shadow: none;
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
