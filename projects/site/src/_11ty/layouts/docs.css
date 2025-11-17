@@ -125,8 +125,8 @@ nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
 
 [nve-layer='container'] nvd-canvas {
   --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
-  --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-200);
-  --canvas-background: var(--nve-sys-layer-container-background);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-field-background-200);
+  --background: var(--nve-sys-layer-container-background);
 }
 
 /* Page Panel Styles */
