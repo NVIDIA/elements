@@ -276,6 +276,7 @@ export const ButtonInteractions = {
 <style>
   button {
     background: color-mix(in oklab, var(--nve-sys-interaction-state-base) 100%, var(--nve-sys-interaction-state-mix) var(--nve-sys-interaction-state-ratio, 0%));
+    color: var(--nve-sys-interaction-color);
     border: 0;
     padding: 12px;
     cursor: pointer;
