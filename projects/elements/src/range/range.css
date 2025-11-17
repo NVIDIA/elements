@@ -1,6 +1,6 @@
 :host {
   --background: var(--accent-color);
-  --control-height: var(--nve-ref-size-800);
+  --control-height: var(--nve-sys-interaction-field-height);
   --cursor: pointer;
   --track-width: 0.5;
   --track-height: var(--nve-ref-size-150);
