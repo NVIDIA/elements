@@ -19,6 +19,7 @@
   "scripts": {
     "ci": "wireit",
     "build": "wireit",
+    "dev": "wireit",
     "test:lighthouse": "wireit",
     "test:visual": "wireit"
   },
@@ -62,6 +63,13 @@
         "build",
         "publint",
         "test:visual"
+      ]
+    },
+    "dev": {
+      "command": "NODE_ENV=development vite build --watch",
+      "service": true,
+      "dependencies": [
+        "build"
       ]
     },
     "publint": {

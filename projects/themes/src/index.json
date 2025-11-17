@@ -1861,6 +1861,10 @@
         "background-300": {
           "value": "{sys.interaction.background-300}",
           "type": "color"
+        },
+        "height": {
+          "value": "{ref.size.800}",
+          "type": "sizing"
         }
       },
       "emphasis": {
