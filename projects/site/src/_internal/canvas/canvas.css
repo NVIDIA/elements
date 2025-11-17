@@ -1,9 +1,28 @@
 :host {
-  --canvas-background: inherit;
+  --background: inherit;
   --padding: var(--nve-ref-space-xl) var(--nve-ref-space-lg);
   --overflow: auto;
+  --height: 100%;
   display: block;
   width: 100%;
+}
+
+::slotted([id*='_content']) {
+  display: contents;
+}
+
+:host([layer='highlight']),
+:host([layer='container']) {
+  --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
+  --nve-sys-interaction-field-background: var(--nve-sys-interaction-field-background-200);
+  --background: var(--nve-sys-layer-container-background);
+}
+
+:host([layer='highlight']) {
+  slot:not([name]) {
+    /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-value */
+    background: linear-gradient(to right, #4e54c8, #8f94fb) !important;
+  }
 }
 
 nve-codeblock {
@@ -24,13 +43,22 @@ nve-toolbar {
 }
 
 slot:not([name]) {
-  background: var(--canvas-background);
+  border-top-left-radius: var(--nve-ref-border-radius-md);
+  border-top-right-radius: var(--nve-ref-border-radius-md);
+  background: var(--background);
   padding: var(--padding);
+  overflow: var(--overflow);
+  height: var(--height);
   display: block;
   resize: horizontal;
   min-width: 120px;
-  overflow: var(--overflow);
   width: 100%;
+}
+
+:host([align='center']) slot:not([name]) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 slot[name='suffix'] {
@@ -42,7 +70,6 @@ slot[name='suffix'] {
 nve-select[container='flat'] {
   --font-weight: var(--nve-ref-font-weight-semibold);
   --border-bottom: 0;
-  margin-left: auto;
   width: 54px;
 }
 
@@ -79,8 +106,18 @@ nve-select::part(caret) {
   border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
 }
 
+.source-button {
+  margin-right: auto;
+}
+
 nve-copy-button {
   position: absolute;
   top: 4px;
   right: 4px;
+}
+
+[internal-host]:has(.code[hidden]) {
+  nve-select {
+    display: none;
+  }
 }
