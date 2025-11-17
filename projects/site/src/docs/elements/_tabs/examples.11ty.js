@@ -96,7 +96,7 @@ export async function render(data) {
       ${
         exampleTemplates.length > 1
           ? /* html */ `
-        <nve-menu class="example-selector">
+        <nve-menu id="example-selector" class="example-selector">
           ${exampleTemplates
             .map(
               (example, index) => /* html */ `

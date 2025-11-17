@@ -11,7 +11,7 @@
     flex-direction: column;
     width: 100%;
     gap: var(--nve-ref-space-sm);
-    padding: var(--nve-ref-space-sm);
+    padding: var(--nve-ref-space-md);
     outline: var(--nve-ref-border-width-md) dashed var(--nve-ref-border-color-muted);
   }
 </style>
@@ -44,20 +44,42 @@ Renders the install entrypoint of a given element API.
 
 Renders an example template and its corresponding metadata.
 
-| Parameter | Description                                               | Type     |
-| --------- | --------------------------------------------------------- | -------- |
-| Path      | Fully qualified path to the examples file                 | `string` |
-| Name      | Case sensitive name of the example to render from file    | `string` |
-| Options   | Optional settings '{ "inline": false "height": "350px" }' | `object` |
+| Parameter | Description                                            | Type                                                                               |
+| --------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| Path      | Fully qualified path to the examples file              | `string`                                                                           |
+| Name      | Case sensitive name of the example to render from file | `string`                                                                           |
+| Options   | Optional settings                                      | `{ "height": "150px", "align": "center", "summary": false, "layer": "highlight" }` |
+
+### Example Default
+
+<div nve-layout="grid gap:md span-items:6">
 
 ```html
 {% raw %}
-{% example '@nvidia-elements/core/badge/badge.examples.json' 'Default' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Default' %}
 {% endraw %}
 ```
 
 <div class="shortcode-demo">
-{% example '@nvidia-elements/core/badge/badge.examples.json' 'Default' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Default' %}
+</div>
+
+</div>
+
+### Example Options
+
+<div nve-layout="grid gap:md span-items:6">
+
+```html
+{% raw %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Default' '{ "height": "150px", "align": "center", "summary": false, "layer": "highlight" }' %}
+{% endraw %}
+```
+
+<div class="shortcode-demo">
+{% example '@nvidia-elements/core/button/button.examples.json' 'Default' '{ "height": "150px", "align": "center", "summary": false, "layer": "highlight" }' %}
+</div>
+
 </div>
 
 ## Example Tags Shortcode
@@ -218,16 +240,16 @@ Renders the "Do/Don't" shortcode layout for guidance on potential anti-patterns.
 ```html
 {% raw %}
 {% dodont %}
-{% example '@nvidia-elements/core/grid/grid.stories.json' 'ValidColumnCount' %}
-{% example '@nvidia-elements/core/grid/grid.stories.json' 'InvalidColumnCount' %}
+{% example '@nvidia-elements/core/grid/grid.stories.json' 'ValidColumnCount' '{ "summary": false }' %}
+{% example '@nvidia-elements/core/grid/grid.stories.json' 'InvalidColumnCount' '{ "summary": false }' %}
 {% enddodont %}
 {% endraw %}
 ```
 
 <div class="shortcode-demo">
 {% dodont %}
-{% example '@nvidia-elements/core/grid/grid.stories.json' 'ValidColumnCount' %}
-{% example '@nvidia-elements/core/grid/grid.stories.json' 'InvalidColumnCount' %}
+{% example '@nvidia-elements/core/grid/grid.stories.json' 'ValidColumnCount' '{ "summary": false }' %}
+{% example '@nvidia-elements/core/grid/grid.stories.json' 'InvalidColumnCount' '{ "summary": false }' %}
 {% enddodont %}
 </div>
 
