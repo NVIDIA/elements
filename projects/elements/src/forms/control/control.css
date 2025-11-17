@@ -7,12 +7,16 @@
   --label-font-weight: var(--nve-ref-font-weight-medium);
   --label-font-size: var(--nve-ref-font-size-100);
   --control-width: 100%;
-  --control-height: auto;
+  --control-height: var(--nve-sys-interaction-field-height);
   --_label-width: var(--label-width, 180px);
-  --nve-sys-interaction-state-base: var(--background);
+  --nve-sys-interaction-state-base: var(--background, var(--nve-sys-layer-canvas-background));
   --opacity: 1;
   --filter: none;
   contain: content;
+}
+
+:host([nve-control='inline']) {
+  --control-height: auto;
 }
 
 ::slotted(*) {
