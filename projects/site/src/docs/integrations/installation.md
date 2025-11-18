@@ -49,3 +49,7 @@ import '@nvidia-elements/core/dot/define.js';
 <!-- use component in HTML template -->
 <nve-button>hello there</nve-button>
 ```
+
+## Artifactory Usage Guidelines
+
+{% artifactory-usage %}{% endartifactory-usage %}

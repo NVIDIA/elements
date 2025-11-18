@@ -1,0 +1,10 @@
+{{- $level := .Level -}}
+{{- $text := .Text -}}
+{{- $format := "" -}}
+{{- if eq $level 1 -}}{{ $format = "heading xl" }}{{- end -}}
+{{- if eq $level 2 -}}{{ $format = "heading lg" }}{{- end -}}
+{{- if eq $level 3 -}}{{ $format = "heading md" }}{{- end -}}
+{{- if eq $level 4 -}}{{ $format = "heading sm" }}{{- end -}}
+{{- if or (eq $level 5) (eq $level 6) -}}{{ $format = "heading" }}{{- end -}}
+<h{{ $level }} nve-text="{{ $format }}" id="{{ .Anchor | safeURL }}">{{ $text | safeHTML }}</h{{ $level }}>
+

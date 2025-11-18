@@ -2,8 +2,7 @@
 
 import { siteData } from '../../index.11tydata.js';
 
-const { stories, elements } = siteData;
-const examples = stories;
+const { examples, elements } = siteData;
 
 /**
  * Shortcode for generating installation instructions for a component

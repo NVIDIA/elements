@@ -1,0 +1,76 @@
+{
+  "name": "hugo-starter",
+  "version": "0.0.0",
+  "description": "Hugo + Elements Starter",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "ci": "wireit",
+    "dev": "wireit",
+    "build": "wireit"
+  },
+  "dependencies": {
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
+    "@nvidia-elements/code": "workspace:*"
+  },
+  "devDependencies": {
+    "hugo-bin": "0.149.2"
+  },
+  "hugo-bin": {
+    "version": "0.152.2"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build"
+      ]
+    },
+    "build": {
+      "command": "hugo --baseURL \"${PAGES_BASE_URL:-/}\"",
+      "files": [
+        "../../elements/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
+        "../../labs/code/dist/**/*.js",
+        "archetypes/**",
+        "content/**",
+        "layouts/**",
+        "static/**",
+        "hugo.toml"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        {
+          "script": "../../labs/code:build",
+          "cascade": false
+        },
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        }
+      ],
+      "env": {
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/"
+        }
+      }
+    },
+    "dev": {
+      "command": "hugo server",
+      "service": true
+    }
+  }
+}

@@ -1,6 +1,12 @@
 import { siteData } from '../index.11tydata.js';
 
-const examples = siteData.stories;
+export const data = {
+  title: 'Examples',
+  layout: 'page.11ty.js',
+  permalink: '/examples/index.html'
+};
+
+const { examples } = siteData;
 const groupedStories = Object.entries(
   examples.reduce((acc, example) => {
     acc[example.element] = acc[example.element] || [];
@@ -8,12 +14,6 @@ const groupedStories = Object.entries(
     return acc;
   }, {})
 ).map(([element, examples]) => ({ element, examples }));
-
-export const data = {
-  title: 'Examples',
-  layout: 'page.11ty.js',
-  permalink: '/examples/index.html'
-};
 
 export function render() {
   return this.renderTemplate(
