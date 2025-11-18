@@ -170,6 +170,32 @@ export function render(data) {
       </div>
     </nve-card>
   </a>
+  <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/go">
+    <nve-card>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg">
+          <img src="/static/images/integrations/go.svg" width="28px" height="28px" alt="go logo" />
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">Go</h2>
+          <p nve-text="body sm muted">Starter leveraging Go.</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/hugo">
+    <nve-card>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg">
+          <img src="/static/images/integrations/hugo.svg" width="28px" height="28px" alt="hugo logo" />
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">Hugo</h2>
+          <p nve-text="body sm muted">Starter leveraging Hugo.</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
 </div>`,
     'md'
   );

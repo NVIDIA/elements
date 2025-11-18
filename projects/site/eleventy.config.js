@@ -15,6 +15,7 @@ import {
   renderInstallArtifactoryShortcode,
   renderIntegrationShortcode
 } from './src/docs/integrations/shortcodes.js';
+import { renderArtifactoryUsageShortcode } from './src/_11ty/shortcodes/artifactory-usage.js';
 import { svgLogosShortcode } from './src/_11ty/shortcodes/svg-logos.js';
 import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
@@ -145,6 +146,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode('integration', renderIntegrationShortcode);
   eleventyConfig.addPairedShortcode('dodont', doDontShortcode);
   eleventyConfig.addPairedShortcode('split', splitShortcode);
+  eleventyConfig.addPairedShortcode('artifactory-usage', renderArtifactoryUsageShortcode);
 
   // Register custom transforms for content processing
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);

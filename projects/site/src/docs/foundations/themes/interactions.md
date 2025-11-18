@@ -30,7 +30,7 @@ Demos will be replaced with custom elements over time.
 
 The `--nve-sys-interaction-state-ratio-*` provides a step ratio value for each interaction state. This combined with the CSS [color-mix](https://developer.chrome.com/blog/css-color-mix/) property allows colors to be dynamically computed from the base color.
 
-{% story '@nvidia-elements/themes/theme.stories.json', 'ButtonInteractions' %}
+{% example '@nvidia-elements/themes/index.examples.json' 'ButtonInteractions' %}
 
 ```css
 button {
@@ -56,7 +56,7 @@ button[selected] {
 
 ## Interactions
 
-{% story '@nvidia-elements/themes/theme.stories.json', 'Interactions' %}
+{% example '@nvidia-elements/themes/index.examples.json' 'Interactions' %}
 
 ## Tokens
 
