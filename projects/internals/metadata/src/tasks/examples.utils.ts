@@ -6,12 +6,14 @@ export function getExamples(): Example[] {
   return [
     ...globSync(resolve('../../../projects/**/dist/**/*.stories.json')),
     ...globSync(resolve('../../../projects/**/dist/**/*.examples.json'))
-  ].flatMap(path => {
-    const examples = JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
-    return examples.items.map(s => ({
-      ...s,
-      element: examples.element ?? '',
-      entrypoint: examples.entrypoint ?? ''
-    }));
-  });
+  ]
+    .filter(path => !path.includes('node_modules'))
+    .flatMap(path => {
+      const examples = JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
+      return examples.items.map(s => ({
+        ...s,
+        element: examples.element ?? '',
+        entrypoint: examples.entrypoint ?? ''
+      }));
+    });
 }

@@ -6,7 +6,7 @@ import { PlaygroundService } from '@nve-internals/tools/playground';
 import { renderGlobalsScript } from '../_11ty/layouts/common.js';
 import { siteData } from '../index.11tydata.js';
 
-const { BASE_URL, stories } = siteData;
+const { BASE_URL, examples } = siteData;
 
 export const data = {
   title: 'Examples',
@@ -15,8 +15,8 @@ export const data = {
     size: 1,
     alias: 'example'
   },
-  examples: stories,
-  permalink: data => `examples/${data.example.permalink}/index.html`
+  examples,
+  permalink: data => `examples/${data.example.permalink}`
 };
 
 export async function render(data) {

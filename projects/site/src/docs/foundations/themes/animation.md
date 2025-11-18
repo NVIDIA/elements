@@ -13,4 +13,4 @@ Animation tokens provide basic timings for animations and hook into theme suppor
 
 ## Reduced Motion
 
-{% story '@nvidia-elements/themes/theme.stories.json', 'ReducedMotion' %}
+{% example '@nvidia-elements/themes/index.examples.json' 'ReducedMotion' %}
