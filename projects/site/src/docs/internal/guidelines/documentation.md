@@ -229,6 +229,22 @@ If no identifier is provided then all API references of provided type are displa
 
 </div>
 
+## Design Token Shortcode
+
+Renders a given subset of matching design tokens.
+
+| Parameter | Description              | Type     |
+| --------- | ------------------------ | -------- |
+| Name      | Tag name of token subset | `string` |
+
+```html
+{% raw %}
+{% tokens 'ref-border-color' %}
+{% endraw %}
+```
+
+{% tokens 'ref-border-color' %}
+
 ## Do/Don't Shortcode
 
 Renders the "Do/Don't" shortcode layout for guidance on potential anti-patterns.

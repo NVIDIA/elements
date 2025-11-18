@@ -1,0 +1,10 @@
+<div nve-layout="row gap:sm align:vertical-center">
+  <img src="./hugo.svg" width="36px" height="36px" alt="hugo logo">
+  <h1 nve-text="heading xl">Hugo</h1>
+</div>
+<nve-tabs>
+  <nve-tabs-item{{ if .IsHome }} selected{{ end }}><a href="./">Home</a></nve-tabs-item>
+  <nve-tabs-item{{ if strings.HasSuffix .RelPermalink "/about/" }} selected{{ end }}><a href="./about/">About</a></nve-tabs-item>
+  <nve-tabs-item{{ if strings.HasSuffix .RelPermalink "/settings/" }} selected{{ end }}><a href="./settings/">Settings</a></nve-tabs-item>
+</nve-tabs>
+{{ .Content }}

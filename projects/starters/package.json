@@ -65,6 +65,10 @@
           "cascade": false
         },
         {
+          "script": "./hugo:build",
+          "cascade": false
+        },
+        {
           "script": "./lit-library:build",
           "cascade": false
         },

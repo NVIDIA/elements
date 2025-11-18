@@ -26,6 +26,7 @@ function App() {
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/angular/">Angular</a></NveMenuItem>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/bundles/">Bundles</a></NveMenuItem>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/eleventy/">Eleventy</a></NveMenuItem>
+            <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/hugo/">Hugo</a></NveMenuItem>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/importmaps/">Import Maps</a></NveMenuItem>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/mpa/">MPA</a></NveMenuItem>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/starters/react/">React</a></NveMenuItem>

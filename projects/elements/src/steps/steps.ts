@@ -4,7 +4,7 @@ import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { when } from 'lit/directives/when.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
-import type { KeynavListConfig, SupportStatus, Container } from '@nvidia-elements/core/internal';
+import type { KeynavListConfig, Container } from '@nvidia-elements/core/internal';
 import {
   BaseButton,
   stateSelected,
@@ -47,9 +47,7 @@ export class StepsItem extends BaseButton {
   /**
    * There are four visual treatments that represent the `status` of varius tasks. When `status` is set to `warning`, `success` or `danger`, appropriate icons are embedded.
    */
-  @property({ type: String, reflect: true }) status?:
-    | Extract<SupportStatus, 'accent' | 'danger' | 'success'>
-    | 'pending';
+  @property({ type: String, reflect: true }) status?: 'accent' | 'danger' | 'success' | 'pending';
 
   /**
    * Determines whether or not the steps should display in condensed format with no text labels.
