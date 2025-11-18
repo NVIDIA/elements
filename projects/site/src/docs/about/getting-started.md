@@ -57,6 +57,9 @@ import '@nvidia-elements/core/button/define.js';
     <a href="./docs/integrations/go/"><svg width="18" height="18"><use href="#go-svg"></use></svg> Go</a>
   </nve-button>
   <nve-button>
+    <a href="./docs/integrations/hugo/"><svg width="18" height="18"><use href="#hugo-svg"></use></svg> Hugo</a>
+  </nve-button>
+  <nve-button>
     <a href="./docs/integrations/lit/"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit</a>
   </nve-button>
   <nve-button>

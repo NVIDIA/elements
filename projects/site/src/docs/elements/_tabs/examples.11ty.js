@@ -5,8 +5,7 @@ import { siteData } from '../../../index.11tydata.js';
 import { exampleShortcode, exampleTagsShortcode } from '../../../_11ty/shortcodes/example.js';
 import { apiShortcode } from '../../../_11ty/shortcodes/api.js';
 
-const { stories, elements } = siteData;
-const examples = stories;
+const { examples, elements } = siteData;
 
 // Initialize markdown parser and metadata service
 const md = markdownIt();

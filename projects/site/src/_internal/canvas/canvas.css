@@ -20,7 +20,6 @@
 
 :host([layer='highlight']) {
   slot:not([name]) {
-    /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-value */
     background: linear-gradient(to right, #4e54c8, #8f94fb) !important;
   }
 }

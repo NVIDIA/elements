@@ -37,3 +37,5 @@ Using the single bundle approach can make simple HTML prototypes easy but preven
   </body>
 </html>
 ```
+
+{% artifactory-usage %}{% endartifactory-usage %}

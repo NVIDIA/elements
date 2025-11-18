@@ -73,6 +73,14 @@ const integrations = {
     documentation: 'https://go.dev',
     playgroundURL: null
   },
+  hugo: {
+    logo: 'hugo',
+    starterDemo: 'https://NVIDIA.github.io/elements/starters/hugo/',
+    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/hugo.zip',
+    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/hugo',
+    documentation: 'https://gohugo.io',
+    playgroundURL: null
+  },
   importmaps: {
     logo: 'javascript',
     starterDemo: 'https://NVIDIA.github.io/elements/starters/importmaps/',

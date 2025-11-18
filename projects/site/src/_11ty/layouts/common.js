@@ -119,6 +119,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'highlighted' : ''}><a href="docs/integrations/bundles/">Bundles</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/extensions/') ? 'highlighted' : ''}><a href="docs/integrations/extensions/">Extensions</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'highlighted' : ''}><a href="docs/integrations/go/">Go</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/hugo/') ? 'highlighted' : ''}><a href="docs/integrations/hugo/">Hugo</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/importmaps/') ? 'highlighted' : ''}><a href="docs/integrations/importmaps/">Import Maps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/lit/') ? 'highlighted' : ''}><a href="docs/integrations/lit/">Lit</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/nextjs/') ? 'highlighted' : ''}><a href="docs/integrations/nextjs/">NextJS</a></nve-tree-node>

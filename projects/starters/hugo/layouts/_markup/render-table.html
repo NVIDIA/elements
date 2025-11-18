@@ -1,0 +1,15 @@
+<nve-grid container="flat">
+  {{- range .THead }}
+  <nve-grid-header>
+    {{- range . }}
+    <nve-grid-column> {{- .Text | safeHTML -}} </nve-grid-column>
+    {{- end }}
+  </nve-grid-header>
+  {{- end }} {{- range .TBody }}
+  <nve-grid-row>
+    {{- range . }}
+    <nve-grid-cell> {{- .Text | safeHTML -}} </nve-grid-cell>
+    {{- end }}
+  </nve-grid-row>
+  {{- end }}
+</nve-grid>

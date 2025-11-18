@@ -21,6 +21,7 @@ projects/elements-react/src/**/*
 projects/internals/metadata/static/*.json
 projects/monaco/src/themes/generated/*
 projects/starters/angular/.angular/**/*
+projects/starters/hugo/**/*
 projects/**/src/vendor/**/*
 projects/**/.screencast/.auth/*
 .vscode/*.json.code-snippets

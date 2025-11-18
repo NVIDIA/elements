@@ -1,0 +1,22 @@
+nve-page:not(:defined) {
+  visibility: hidden;
+}
+
+nve-codeblock {
+  width: 100%;
+}
+
+main {
+  max-width: 1200px;
+
+  p,
+  ol,
+  ul {
+    font-size: var(--nve-ref-font-size-200);
+    font-weight: var(--nve-ref-font-weight-regular);
+    color: var(--nve-sys-text-color);
+    font-family: var(--nve-ref-font-family);
+    text-box: trim-both cap alphabetic;
+    margin: 0;
+  }
+}
