@@ -1,0 +1,40 @@
+baseURL = '/'
+languageCode = 'en-us'
+title = 'Hugo + Elements Starter'
+publishDir = 'dist'
+
+# Disable taxonomies for this simple starter
+disableKinds = ['taxonomy', 'term']
+
+# Allow raw HTML in markdown content
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# Ignore node_modules from being watched (prevents server hanging)
+ignoreFiles = ['^node_modules/']
+
+# Mount Elements packages for CSS imports
+[module]
+  [[module.mounts]]
+    source = 'static'
+    target = 'static'
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+  [[module.mounts]]
+    source = 'layouts'
+    target = 'layouts'
+  [[module.mounts]]
+    source = 'node_modules/@nvidia-elements/core/dist'
+    target = 'static/node_modules/@nvidia-elements/core/dist'
+  [[module.mounts]]
+    source = 'node_modules/@nvidia-elements/themes/dist'
+    target = 'static/node_modules/@nvidia-elements/themes/dist'
+  [[module.mounts]]
+    source = 'node_modules/@nvidia-elements/styles/dist'
+    target = 'static/node_modules/@nvidia-elements/styles/dist'
+  [[module.mounts]]
+    source = 'node_modules/@nvidia-elements/code/dist'
+    target = 'static/node_modules/@nvidia-elements/code/dist'

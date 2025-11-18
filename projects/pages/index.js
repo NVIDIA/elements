@@ -26,6 +26,7 @@ cpSync('../starters/solidjs/dist/', './dist/starters/solidjs/', { recursive: tru
 cpSync('../starters/svelte/dist/', './dist/starters/svelte/', { recursive: true });
 cpSync('../starters/typescript/dist/', './dist/starters/typescript/', { recursive: true });
 cpSync('../starters/vue/dist/', './dist/starters/vue/', { recursive: true });
+cpSync('../starters/hugo/dist/', './dist/starters/hugo/', { recursive: true });
 
 // https://docs.gitlab.com/user/project/pages/introduction/#serving-compressed-assets
 

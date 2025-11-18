@@ -5,6 +5,7 @@ packages:
   - projects/starters/eleventy
   - projects/starters/eleventy-ssr
   - projects/starters/go
+  - projects/starters/hugo
   - projects/starters/importmaps
   - projects/starters/lit-library
   - projects/starters/mpa
@@ -93,6 +94,7 @@ onlyBuiltDependencies:
   - '@bundled-es-modules/glob'
   - '@parcel/watcher'
   - esbuild
+  - hugo-bin
   - lmdb
   - msgpackr-extract
   - rs-module-lexer

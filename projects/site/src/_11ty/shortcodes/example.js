@@ -4,8 +4,7 @@ import markdown from '../libraries/markdown.js';
 import { siteData } from '../../index.11tydata.js';
 
 const md = markdownIt();
-const { stories } = siteData;
-const examples = stories;
+const { examples } = siteData;
 
 /**
  * Shortcode for embedding component examples

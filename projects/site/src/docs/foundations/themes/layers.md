@@ -16,9 +16,9 @@ The layers in order of stacking are the following:
 - `overlay` - modals, drawers, dropdowns (menus, filters, combobox)
 - `popover` - tooltips, toasts, notifications
 
-{% story '@nvidia-elements/themes/theme.stories.json', 'Objects' %}
+{% example '@nvidia-elements/themes/index.examples.json' 'Objects' %}
 
-{% story '@nvidia-elements/themes/theme.stories.json', 'Layers', '{ "inline": false, "height": "650px" }' %}
+{% example '@nvidia-elements/themes/index.examples.json' 'Layers' '{ "inline": false, "height": "650px" }' %}
 
 ## Layer Tokens
 
