@@ -1,4 +1,4 @@
-nve-alert:has([slot='content'])::part(content),
-nve-alert:has([slot='content'])::part(content) {
+nve-alert:has([slot='content'])::part(_content),
+nve-alert:has([slot='content'])::part(_content) {
   display: block;
 }

@@ -124,7 +124,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   }
 
   get #previousButton() {
-    return html`<nve-icon-button
+    return html`<nve-icon-button part="icon-button previous-icon-button"
       @click=${() => this.#setValue(this.value - 1)}
       .disabled=${this.disabled || this.#currentPage <= this.step}
       .ariaLabel=${this.i18n.previous}
@@ -135,7 +135,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   }
 
   get #nextButton() {
-    return html`<nve-icon-button
+    return html`<nve-icon-button part="icon-button next-icon-button"
       @click=${() => this.#setValue(this.value + 1)}
       .disabled=${this.disabled || this.#currentPage >= this.items}
       .ariaLabel=${this.i18n.next}
@@ -146,7 +146,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   }
 
   get #startButton() {
-    return html`<nve-icon-button
+    return html`<nve-icon-button part="icon-button start-icon-button"
       @click=${() => this.#setValue(1)}
       .disabled=${this.disabled || this.#currentPage <= this.step}
       .ariaLabel=${this.i18n.start}
@@ -157,7 +157,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   }
 
   get #endButton() {
-    return html`<nve-icon-button
+    return html`<nve-icon-button part="icon-button end-icon-button"
       @click=${() => this.#setValue(this.items / this.step)}
       .disabled=${this.disabled || (this.value - 1) * this.step + this.step >= this.items}
       .ariaLabel=${this.i18n.end}
@@ -173,7 +173,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
     return this.disableStep
       ? html`<label>${this.#selectLabel}&nbsp;</label>`
       : html`
-          <nve-select .container=${this.container}>
+          <nve-select part="select" .container=${this.container}>
             <select
               .ariaLabel=${this.i18n.currentPage}
               @change=${e => this.#setStep(parseInt(e.target.value, 10))}
