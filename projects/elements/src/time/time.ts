@@ -34,6 +34,6 @@ export class Time extends Control {
   };
 
   protected get suffixContent() {
-    return html`<nve-icon-button .ariaLabel=${this.i18n.expand} icon-name="clock" container="inline" @click=${this.showPicker}></nve-icon-button>`;
+    return html`<nve-icon-button part="icon-button" .ariaLabel=${this.i18n.expand} icon-name="clock" container="inline" @click=${this.showPicker}></nve-icon-button>`;
   }
 }

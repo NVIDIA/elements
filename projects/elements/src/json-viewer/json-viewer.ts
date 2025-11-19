@@ -52,7 +52,7 @@ export class JSONViewer extends LitElement {
         .filter(v => v[1] !== null)
         .map(
           ([prop, value]) =>
-            html`<nve-json-node .expanded=${this.expanded} .expandedAll=${this.expanded} .prop=${prop} .value=${value}></nve-json-node>`
+            html`<nve-json-node part="json-node" .expanded=${this.expanded} .expandedAll=${this.expanded} .prop=${prop} .value=${value}></nve-json-node>`
         )}
     </div>
     `;

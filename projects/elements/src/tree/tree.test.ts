@@ -206,7 +206,7 @@ describe(`${Tree.metadata.tag} - collapsed nodes`, () => {
     `);
     element = fixture.querySelector(Tree.metadata.tag);
     nodes = Array.from(fixture.querySelectorAll(TreeNode.metadata.tag)).map(node =>
-      node.shadowRoot.querySelector('[part="node-header"]')
+      node.shadowRoot.querySelector('[part="_node-header"]')
     );
     await elementIsStable(element);
   });

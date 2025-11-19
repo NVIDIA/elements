@@ -128,14 +128,14 @@ export class Select extends Control {
 
   get #menu() {
     return html`
-    <nve-menu role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
+    <nve-menu part="menu" role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
       ${this.#options
         .filter(o => o !== this.#placeholderOption)
         .map(
           (o, i) => html`
-      <nve-menu-item role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} ?disabled=${o.disabled} ?hidden=${!!o.hidden} aria-selected=${o.selected}>
+      <nve-menu-item part="menu-item" role="option" @click=${() => this.#selectValue(o, !o.selected)} ?selected=${o.selected} ?disabled=${o.disabled} ?hidden=${!!o.hidden} aria-selected=${o.selected}>
         <slot name="option-${i + 1}">
-          <nve-icon name="check" size="sm" aria-hidden="true"></nve-icon> ${o.innerText}
+          <nve-icon part="icon" name="check" size="sm" aria-hidden="true"></nve-icon> ${o.innerText}
         </slot>
       </nve-menu-item>`
         )}
@@ -146,7 +146,7 @@ export class Select extends Control {
     return this.#select?.size === 0
       ? html`
       <nve-icon name="caret" part="caret" direction="down" size="sm" aria-hidden="true"></nve-icon>
-      <nve-dropdown @close=${this.#closeDropdown} @open=${this.#openDropdown} hidden  .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement}  position="bottom">
+      <nve-dropdown part="dropdown" @close=${this.#closeDropdown} @open=${this.#openDropdown} hidden  .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement}  position="bottom">
         ${this.#menu}
       </nve-dropdown>`
       : this.#menu;
