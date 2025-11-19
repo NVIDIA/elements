@@ -324,3 +324,19 @@ export function sameRenderRoot(element1: HTMLElement, element2: HTMLElement) {
   const sameDocumentRoot = root1 === globalThis.document && root2 === globalThis.document;
   return sameShadowRoot || sameDocumentRoot;
 }
+
+export function getAnchorNames(element: HTMLElement) {
+  return element.style.anchorName
+    .split(',')
+    .map(name => name.trim())
+    .filter(name => name !== 'none' && name !== '');
+}
+
+export function removeAnchorName(element: HTMLElement, name: string) {
+  const anchorNames = getAnchorNames(element);
+  element.style.anchorName = anchorNames.filter(i => i !== name).join(',');
+}
+
+export function appendAnchorName(element: HTMLElement, name: string) {
+  element.style.anchorName = Array.from(new Set([...getAnchorNames(element), name])).join(',');
+}

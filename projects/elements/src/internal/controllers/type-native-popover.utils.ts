@@ -1,19 +1,15 @@
 import { LogService } from '../services/log.service.js';
 import { getIdMatchNotFoundWarning } from '../utils/audit-logs.js';
-import { generateId, getFlatDOMTree, getFlattenedDOMTree } from '../utils/dom.js';
-
-export interface AnchorStyle extends CSSStyleDeclaration {
-  anchorName: string;
-  positionAnchor: string;
-}
+import { generateId, getFlatDOMTree, getFlattenedDOMTree, getAnchorNames, appendAnchorName } from '../utils/dom.js';
 
 export function associateAnchor(host: HTMLElement, anchor: HTMLElement) {
-  if (!(anchor.style as AnchorStyle).anchorName) {
-    const id = anchor.id && !anchor.id.includes(':') ? anchor.id : generateId();
-    (anchor.style as AnchorStyle).anchorName = `--${id}`;
+  const anchorNames = getAnchorNames(anchor);
+  let anchorId = anchorNames.find(name => name.startsWith('--_'));
+  if (!anchorId) {
+    anchorId = `--${anchor.id && !anchor.id.includes(':') ? `_${anchor.id}` : generateId()}`;
+    appendAnchorName(anchor, anchorId);
   }
-
-  (host.style as AnchorStyle).positionAnchor = (anchor.style as AnchorStyle).anchorName;
+  host.style.positionAnchor = anchorId;
 }
 
 export function getHostTrigger(element: HTMLElement, trigger: HTMLElement | string) {
