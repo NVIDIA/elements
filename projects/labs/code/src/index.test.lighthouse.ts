@@ -36,4 +36,17 @@ describe('lighthouse report', () => {
     expect(report.payload.javascript.requests['xml.js'].kb).toBeLessThan(0.5);
     expect(report.payload.javascript.requests['yaml.js'].kb).toBeLessThan(1.5);
   });
+
+  test('JS Bundles should remain within compressed bundle limits', async () => {
+    const report = await lighthouseRunner.getReport(`bundles/index.js`, /* html */`
+      <script type="module">
+      import '@nvidia-elements/code/bundles/index.js';
+      </script>
+    `);
+
+    expect(report.scores.performance).toBe(100);
+    expect(report.scores.accessibility).toBe(100);
+    expect(report.scores.bestPractices).toBe(100);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(30);
+  });
 });
