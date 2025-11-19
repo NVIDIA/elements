@@ -5,6 +5,7 @@ import { formatFileSize, useStyles, removeEmptyTextNode, I18nController } from '
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './dropzone.css?inline';
 import { FormControlMixin } from '@nvidia-elements/forms/mixin';
+import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './dropzone.util';
 
 /**
  * @element nve-dropzone
@@ -45,6 +46,7 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
   static readonly metadata = {
     tag: 'nve-dropzone',
     version: '0.0.0',
+    validators: [fileTypeValidator, fileSizeValidator],
     valueSchema: {
       type: 'array' as const,
       items: {
@@ -77,6 +79,7 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
 
   connectedCallback(): void {
     super.connectedCallback();
+    this.setAttribute('nve-control', '');
     globalThis.document.addEventListener('dragover', this.#preventDefaults);
     globalThis.document.addEventListener('drop', this.#preventDefaults);
   }
@@ -129,45 +132,12 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
   }
 
   #addFiles(files: File[]) {
-    let acceptableFiles = this.#filterFileTypes(files);
-    acceptableFiles = this.#filterFileSize(acceptableFiles);
-    this.value = [...this.value, ...acceptableFiles];
+    this.value = [...this.value, ...files];
     this.dispatchChangeEvent();
   }
 
-  #filterFileTypes(files: File[]) {
-    const acceptedTypes = this.#getFileTypeSpecifiers(this.accept);
-    return files.filter(file => {
-      return acceptedTypes.some(acceptedType => {
-        if (file.type.includes(acceptedType)) {
-          return file;
-        }
-      });
-    });
-  }
-
-  #getFileTypeSpecifiers(acceptTypes) {
-    const types = acceptTypes.split(',').map(value => {
-      value = value.trim();
-      if (value.startsWith('.')) {
-        value = value.slice(1);
-      }
-      if (value.endsWith('/*')) {
-        value = value.split('/')[0];
-      }
-      if (value.includes('/')) {
-        value = value.split('/')[1];
-      }
-      if (value.includes('+')) {
-        value = value.split('+')[0];
-      }
-      return value;
-    });
-    return types;
-  }
-
   #formatFileTypeSpecifiers(acceptTypes: string) {
-    const types = this.#getFileTypeSpecifiers(acceptTypes);
+    const types = getFileTypeSpecifiers(acceptTypes);
 
     if (types.length === 1) {
       return types[0].toUpperCase();
@@ -175,10 +145,6 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
 
     const lastType = types.pop();
     return `${types.join(', ').toUpperCase()} or ${lastType.toUpperCase()}`;
-  }
-
-  #filterFileSize(files: File[]) {
-    return files.filter(file => file.size <= this.maxFileSize);
   }
 
   #toggleHighlighted(highlighted: boolean) {
