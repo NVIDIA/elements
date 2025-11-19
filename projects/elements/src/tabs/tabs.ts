@@ -10,7 +10,9 @@ import {
   keyNavigationList,
   attachInternals,
   audit,
-  appendRootNodeStyle
+  appendRootNodeStyle,
+  appendAnchorName,
+  removeAnchorName
 } from '@nvidia-elements/core/internal';
 import globalStyles from './tabs.global.css?inline';
 import tabsItemStyleSheet from './tabs-item.css?inline';
@@ -71,6 +73,16 @@ export class TabsItem extends BaseButton {
   connectedCallback() {
     super.connectedCallback();
     this._internals.role = 'tab';
+  }
+
+  updated(props: PropertyValues<this>) {
+    if (props.has('selected')) {
+      if (this.selected) {
+        appendAnchorName(this, '--selected');
+      } else {
+        removeAnchorName(this, '--selected');
+      }
+    }
   }
 }
 
