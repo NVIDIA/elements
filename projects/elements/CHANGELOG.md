@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.48.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.3...@nvidia-elements/core-v1.48.4) (2025-11-19)
+
+
+### Bug Fixes
+
+* **elements:** css anchor positioning collisions ([d6a0370](https://github.com/NVIDIA/elements/commit/d6a03708c5a76edb0b65018ce95238631ae31a89))
+
 ## [@nvidia-elements/core-v1.48.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.2...@nvidia-elements/core-v1.48.3) (2025-11-15)
 
 
