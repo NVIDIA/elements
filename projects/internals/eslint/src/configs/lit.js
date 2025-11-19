@@ -8,6 +8,8 @@ import reservedPropertyNames from '../local/reserved-property-names.js';
 import primitiveProperty from '../local/primitive-property.js';
 import reservedEventNames from '../local/reserved-event-names.js';
 import statelessProperty from '../local/stateless-property.js';
+import requiredCssParts from '../local/required-css-parts.js';
+import noInvalidCssParts from '../local/no-invalid-css-parts.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -18,7 +20,7 @@ const tests = [
   '**/*.test.axe.ts',
   '**/*.test.ssr.ts'
 ];
-const examples = ['**/*.stories.ts'];
+const examples = ['**/*.stories.ts', '**/*.examples.ts'];
 const ignores = [
   'node_modules/',
   'coverage/',
@@ -48,7 +50,9 @@ export const litConfig = [
           'reserved-property-names': reservedPropertyNames,
           'primitive-property': primitiveProperty,
           'reserved-event-names': reservedEventNames,
-          'stateless-property': statelessProperty
+          'stateless-property': statelessProperty,
+          'required-css-parts': requiredCssParts,
+          'no-invalid-css-parts': noInvalidCssParts
         }
       }
     },
@@ -110,7 +114,9 @@ export const litConfig = [
       'local/reserved-property-names': ['error'],
       'local/primitive-property': ['error'],
       'local/reserved-event-names': ['error'],
-      'local/stateless-property': ['error']
+      'local/stateless-property': ['error'],
+      'local/required-css-parts': ['error'],
+      'local/no-invalid-css-parts': ['error']
     }
   }
 ];
