@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.8.2...@nvidia-elements/themes-v1.9.0) (2025-11-19)
+
+
+### Features
+
+* **themes:** field height support ([2944be6](https://github.com/NVIDIA/elements/commit/2944be664b8d1fa47d14cd5eb74a35ff52cee82b))
+
 ## [@nvidia-elements/themes-v1.8.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.8.1...@nvidia-elements/themes-v1.8.2) (2025-10-29)
 
 
