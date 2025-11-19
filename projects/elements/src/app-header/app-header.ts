@@ -50,7 +50,7 @@ export class AppHeader extends LitElement {
     return html`
       <div internal-host>
         <div app-branding>
-          <slot @slotchange=${this.#sizeLogo}><nve-logo size="sm" aria-label="NVIDIA"></nve-logo></slot>
+          <slot @slotchange=${this.#sizeLogo}><nve-logo part="logo" size="sm" aria-label="NVIDIA"></nve-logo></slot>
           <slot name="title">
             <h2>NVIDIA</h2>
           </slot>

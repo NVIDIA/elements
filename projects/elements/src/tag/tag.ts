@@ -66,7 +66,7 @@ export class Tag extends BaseButton {
     return html`
       <div internal-host interaction-state focus-within>
         <slot></slot>
-        ${this.closable ? html`<nve-icon @click=${() => this.#typeClosableController.close()} container="flat" name="cancel" size="sm" role="img" aria-label=${ifDefined(this.i18n.close)}></nve-icon>` : ''}
+        ${this.closable ? html`<nve-icon part="icon" @click=${() => this.#typeClosableController.close()} container="flat" name="cancel" size="sm" role="img" aria-label=${ifDefined(this.i18n.close)}></nve-icon>` : ''}
       </div>
     `;
   }

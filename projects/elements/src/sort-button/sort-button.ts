@@ -51,7 +51,7 @@ export class SortButton extends BaseButton {
   render() {
     return html`
       <div internal-host focus-within>
-        <nve-icon .name=${this.sort === 'descending' ? 'sort-descending' : 'sort-ascending'} aria-hidden="true"></nve-icon>
+        <nve-icon part="icon" .name=${this.sort === 'descending' ? 'sort-descending' : 'sort-ascending'} aria-hidden="true"></nve-icon>
       </div>
     `;
   }

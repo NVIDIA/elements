@@ -43,7 +43,7 @@ export class MenuItem extends BaseButton {
 
   render() {
     return html`
-      <div internal-host interaction-state focus-within part="internal">
+      <div internal-host interaction-state focus-within part="_internal">
         <slot></slot>
         <slot name="suffix"></slot>
       </div>

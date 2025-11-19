@@ -66,7 +66,7 @@ export class Breadcrumb extends LitElement {
         (el, idx) => html`
         <li>
           <slot name=${el.slot} @slotchange=${this.#removeItem}></slot>
-          ${idx < this.breadcrumbItems.length - 1 ? html`<nve-icon separator aria-hidden="true" name="chevron" direction="right" size="sm"></nve-icon>` : nothing}
+          ${idx < this.breadcrumbItems.length - 1 ? html`<nve-icon part="icon" separator aria-hidden="true" name="chevron" direction="right" size="sm"></nve-icon>` : nothing}
         </li>
       `
       )}

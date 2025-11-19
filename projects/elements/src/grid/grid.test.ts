@@ -151,10 +151,10 @@ describe(`${Grid.metadata.tag}: scroll`, () => {
 
   it('should allow scroll position to be set', async () => {
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('[part="scrollbox"]').scrollTop).toBe(0);
+    expect(element.shadowRoot.querySelector('[part="_scrollbox"]').scrollTop).toBe(0);
 
     await element.scrollTo({ top: 20 });
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('[part="scrollbox"]').scrollTop).toBe(20);
+    expect(element.shadowRoot.querySelector('[part="_scrollbox"]').scrollTop).toBe(20);
   });
 });
