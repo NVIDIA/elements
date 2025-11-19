@@ -8,13 +8,9 @@ describe('associateAnchor', () => {
     const element = document.createElement('div');
     const anchor = document.createElement('div');
     associateAnchor(element, anchor);
-    expect((anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName.startsWith('--')).toBe(true);
-    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor.startsWith('--')).toBe(
-      true
-    );
-    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe(
-      (anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName
-    );
+    expect(anchor.style.anchorName.startsWith('--')).toBe(true);
+    expect(element.style.positionAnchor.startsWith('--')).toBe(true);
+    expect(element.style.positionAnchor).toBe(anchor.style.anchorName);
   });
 
   it('should not recreate new anchor name if one already provided', async () => {
@@ -22,22 +18,22 @@ describe('associateAnchor', () => {
     const anchor = document.createElement('div');
     associateAnchor(element, anchor);
 
-    const originalAnchorName = (anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName;
-    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe(originalAnchorName);
+    const originalAnchorName = anchor.style.anchorName;
+    expect(element.style.positionAnchor).toBe(originalAnchorName);
 
     associateAnchor(element, anchor);
-    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe(originalAnchorName);
+    expect(element.style.positionAnchor).toBe(originalAnchorName);
   });
 
   it('should create a CSS Anchor Position association between two elements with the default id if provided', async () => {
     const element = document.createElement('div');
     const anchor = document.createElement('div');
-    element.id = 'test';
-    anchor.id = 'test';
+    element.id = 'test-element';
+    anchor.id = 'test-anchor';
     associateAnchor(element, anchor);
     expect(anchor.id.startsWith('_')).toBe(false);
-    expect((anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName).toBe('--test');
-    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe('--test');
+    expect(anchor.style.anchorName).toBe('--_test-anchor');
+    expect(element.style.positionAnchor).toBe('--_test-anchor');
   });
 
   // https://github.com/facebook/react/issues/26839#issuecomment-2277253506
@@ -46,21 +42,91 @@ describe('associateAnchor', () => {
     const anchor = document.createElement('div');
     anchor.id = ':test';
     associateAnchor(element, anchor);
-    expect((anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName.includes('test')).toBe(false);
-    expect((anchor.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor.includes('test')).toBe(
-      false
-    );
-    expect((anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName.startsWith('--')).toBe(true);
-    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor.startsWith('--')).toBe(
-      true
-    );
-    expect((element.style as CSSStyleDeclaration & { positionAnchor: string }).positionAnchor).toBe(
-      (anchor.style as CSSStyleDeclaration & { anchorName: string }).anchorName
-    );
+    expect(anchor.style.anchorName.includes('test')).toBe(false);
+    expect(anchor.style.positionAnchor.includes('test')).toBe(false);
+    expect(anchor.style.anchorName.startsWith('--')).toBe(true);
+    expect(element.style.positionAnchor.startsWith('--')).toBe(true);
+    expect(element.style.positionAnchor).toBe(anchor.style.anchorName);
+  });
+
+  it('should not create new anchor name if anchor already has a --_ prefixed name', async () => {
+    const element = document.createElement('div');
+    const anchor = document.createElement('div');
+    anchor.style.anchorName = '--_existing-anchor';
+    document.body.appendChild(anchor);
+
+    associateAnchor(element, anchor);
+
+    expect(anchor.style.anchorName).toBe('--_existing-anchor');
+    expect(element.style.positionAnchor).toBe('--_existing-anchor');
+
+    anchor.remove();
+  });
+
+  it('should append new anchor name when anchor has other names but none with --_ prefix', async () => {
+    const element = document.createElement('div');
+    const anchor = document.createElement('div');
+    anchor.id = 'test-anchor';
+    anchor.style.anchorName = '--other-anchor';
+    document.body.appendChild(anchor);
+
+    associateAnchor(element, anchor);
+
+    const anchorNames = anchor.style.anchorName;
+    expect(anchorNames).toContain('--other-anchor');
+    expect(anchorNames).toContain('--_test-anchor');
+    expect(element.style.positionAnchor).toBe('--_test-anchor');
+
+    anchor.remove();
+  });
+
+  it('should append anchor name to existing multiple anchor names', async () => {
+    const element = document.createElement('div');
+    const anchor = document.createElement('div');
+    anchor.id = 'new-anchor';
+    anchor.style.anchorName = '--anchor-1, --anchor-2';
+    document.body.appendChild(anchor);
+
+    associateAnchor(element, anchor);
+
+    const anchorNames = anchor.style.anchorName;
+    expect(anchorNames).toContain('--anchor-1');
+    expect(anchorNames).toContain('--anchor-2');
+    expect(anchorNames).toContain('--_new-anchor');
+    expect(element.style.positionAnchor).toBe('--_new-anchor');
+
+    anchor.remove();
+  });
+
+  it('should not modify anchor when it has --_ prefixed name among multiple names', async () => {
+    const element = document.createElement('div');
+    const anchor = document.createElement('div');
+    anchor.style.anchorName = '--anchor-1, --_my-anchor, --anchor-2';
+    document.body.appendChild(anchor);
+
+    const originalAnchorNames = anchor.style.anchorName;
+
+    associateAnchor(element, anchor);
+
+    expect(anchor.style.anchorName).toBe(originalAnchorNames);
+    expect(element.style.positionAnchor).toBe('--_my-anchor');
+
+    anchor.remove();
+  });
+
+  it('should use element id with --_ prefix when creating anchor name', async () => {
+    const element = document.createElement('div');
+    const anchor = document.createElement('div');
+    anchor.id = 'my-specific-anchor';
+
+    associateAnchor(element, anchor);
+
+    expect(anchor.style.anchorName).toBe('--_my-specific-anchor');
+    expect(element.style.positionAnchor).toBe('--_my-specific-anchor');
   });
 });
 
-describe('getHostTrgger', () => {
+describe('getHostTrigger', () => {
   it('should return the trigger param if already a DOM node reference', async () => {
     const element = document.createElement('div');
     const trigger = document.createElement('div');
