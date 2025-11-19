@@ -73,7 +73,7 @@ nve-select[container='flat'] {
   width: 54px;
 }
 
-nve-select::part(caret) {
+nve-select::part(_caret) {
   display: none;
 }
 

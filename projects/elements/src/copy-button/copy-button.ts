@@ -61,12 +61,12 @@ export class CopyButton extends Button {
         <slot></slot>
         ${
           this.copied
-            ? html`<nve-icon name="check" status="success" .size=${this.size} aria-hidden="true"></nve-icon>`
-            : html`<slot name="icon"><nve-icon name="copy" .size=${this.size} aria-hidden="true"></nve-icon></slot>`
+            ? html`<nve-icon part="icon" name="check" status="success" .size=${this.size} aria-hidden="true"></nve-icon>`
+            : html`<slot name="icon"><nve-icon part="icon" name="copy" .size=${this.size} aria-hidden="true"></nve-icon></slot>`
         }
      </div>
-     ${this.showToast ? html`<nve-toast @close=${this.#close} status="success" anchor="btn" trigger="btn" position="top" close-timeout="1500">${this.i18n.copied}</nve-toast>` : nothing}
-     ${this.showTooltip && !this.showToast ? html`<nve-tooltip anchor="btn" trigger="btn">${this.ariaLabel ?? this.i18n.copy}</nve-tooltip>` : nothing}
+     ${this.showToast ? html`<nve-toast part="toast" @close=${this.#close} status="success" anchor="btn" trigger="btn" position="top" close-timeout="1500">${this.i18n.copied}</nve-toast>` : nothing}
+     ${this.showTooltip && !this.showToast ? html`<nve-tooltip part="tooltip" anchor="btn" trigger="btn">${this.ariaLabel ?? this.i18n.copy}</nve-tooltip>` : nothing}
    `;
   }
 

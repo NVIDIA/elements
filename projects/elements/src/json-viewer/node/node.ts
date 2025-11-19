@@ -44,16 +44,16 @@ export class JSONNode extends LitElement {
 
   get #expandButton() {
     return this.prop
-      ? html`<nve-button @click=${() => (this.expanded = !this.expanded)} container="flat">${this.prop}: </nve-button>`
-      : html`<nve-icon-button @click=${() => (this.expanded = !this.expanded)} .direction=${this.expanded ? 'down' : 'right'} container="flat" size="sm" icon-name="caret"></nve-icon-button>`;
+      ? html`<nve-button part="button" @click=${() => (this.expanded = !this.expanded)} container="flat">${this.prop}: </nve-button>`
+      : html`<nve-icon-button part="icon-button" @click=${() => (this.expanded = !this.expanded)} .direction=${this.expanded ? 'down' : 'right'} container="flat" size="sm" icon-name="caret"></nve-icon-button>`;
   }
 
   get #arrayNode() {
-    return html`${this.value.filter(i => i !== null).map(value => html`<nve-json-node .value=${value} .expandedAll=${this.expandedAll}></nve-json-node>`)}`;
+    return html`${this.value.filter(i => i !== null).map(value => html`<nve-json-node part="json-node" .value=${value} .expandedAll=${this.expandedAll}></nve-json-node>`)}`;
   }
 
   get #objectNode() {
-    return html`${Object.entries(this.value).map(([k, v]) => html`<nve-json-node .prop=${k} .value=${v} .expandedAll=${this.expandedAll}></nve-json-node>`)}`;
+    return html`${Object.entries(this.value).map(([k, v]) => html`<nve-json-node part="json-node" .prop=${k} .value=${v} .expandedAll=${this.expandedAll}></nve-json-node>`)}`;
   }
 
   get #value() {

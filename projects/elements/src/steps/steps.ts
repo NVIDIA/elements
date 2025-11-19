@@ -76,10 +76,10 @@ export class StepsItem extends BaseButton {
     return html`
       <div internal-host focus-within>  
         <slot name="status-icon">
-          ${this.status === undefined ? html`<nve-icon-button readonly id="number-icon" .disabled=${this.disabled}>${this.index}</nve-icon-button>` : ''}
-          ${this.status === 'success' ? html`<nve-icon-button readonly size="sm" interaction="emphasis" icon-name="check"></nve-icon-button>` : ''}
-          ${this.status === 'danger' ? html`<nve-icon-button readonly size="sm" interaction="destructive" icon-name="exclamation-circle"></nve-icon-button>` : ''}
-          ${this.status === 'pending' ? html`<nve-progress-ring status="accent" size="sm"></nve-progress-ring>` : ''}
+          ${this.status === undefined ? html`<nve-icon-button part="icon-button" readonly id="number-icon" .disabled=${this.disabled}>${this.index}</nve-icon-button>` : ''}
+          ${this.status === 'success' ? html`<nve-icon-button part="icon-button" readonly size="sm" interaction="emphasis" icon-name="check"></nve-icon-button>` : ''}
+          ${this.status === 'danger' ? html`<nve-icon-button part="icon-button" readonly size="sm" interaction="destructive" icon-name="exclamation-circle"></nve-icon-button>` : ''}
+          ${this.status === 'pending' ? html`<nve-progress-ring part="progress-ring" status="accent" size="sm"></nve-progress-ring>` : ''}
         </slot>
         ${when(this.container !== 'condensed', () => html`<slot></slot>`)}
       </div>
