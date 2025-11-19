@@ -2,6 +2,7 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { TabsItem, Tabs } from '@nvidia-elements/core/tabs';
+import { getAnchorNames } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/tabs/define.js';
 
 describe(Tabs.metadata.tag, () => {
@@ -91,5 +92,87 @@ describe(Tabs.metadata.tag, () => {
 
     expect(parentElement.vertical).toBe(true);
     expect(parentElement.keynavListConfig.layout).toBe('vertical');
+  });
+
+  it('should add --selected anchor name when tab item is selected', async () => {
+    document.body.appendChild(childElement);
+    expect(childElement.selected).toBe(false);
+
+    const initialAnchorNames = getAnchorNames(childElement);
+    expect(initialAnchorNames).not.toContain('--selected');
+
+    childElement.selected = true;
+    await elementIsStable(childElement);
+
+    const anchorNames = getAnchorNames(childElement);
+    expect(anchorNames).toContain('--selected');
+
+    childElement.remove();
+  });
+
+  it('should remove --selected anchor name when tab item is deselected', async () => {
+    document.body.appendChild(childElement);
+    childElement.selected = true;
+    await elementIsStable(childElement);
+
+    let anchorNames = getAnchorNames(childElement);
+    expect(anchorNames).toContain('--selected');
+
+    childElement.selected = false;
+    await elementIsStable(childElement);
+
+    anchorNames = getAnchorNames(childElement);
+    expect(anchorNames).not.toContain('--selected');
+
+    childElement.remove();
+  });
+
+  it('should toggle --selected anchor name when selected property changes multiple times', async () => {
+    document.body.appendChild(childElement);
+    expect(childElement.selected).toBe(false);
+
+    childElement.selected = true;
+    await elementIsStable(childElement);
+    expect(getAnchorNames(childElement)).toContain('--selected');
+
+    childElement.selected = false;
+    await elementIsStable(childElement);
+    expect(getAnchorNames(childElement)).not.toContain('--selected');
+
+    childElement.selected = true;
+    await elementIsStable(childElement);
+    expect(getAnchorNames(childElement)).toContain('--selected');
+
+    childElement.remove();
+  });
+
+  it('should preserve other anchor names when adding --selected', async () => {
+    document.body.appendChild(childElement);
+    childElement.style.anchorName = '--my-custom-anchor';
+
+    childElement.selected = true;
+    await elementIsStable(childElement);
+
+    const anchorNames = getAnchorNames(childElement);
+    expect(anchorNames).toContain('--selected');
+    expect(anchorNames).toContain('--my-custom-anchor');
+
+    childElement.remove();
+  });
+
+  it('should preserve other anchor names when removing --selected', async () => {
+    document.body.appendChild(childElement);
+    childElement.style.anchorName = '--my-custom-anchor, --selected';
+    childElement.selected = true;
+    await elementIsStable(childElement);
+
+    childElement.selected = false;
+    await elementIsStable(childElement);
+
+    const anchorNames = getAnchorNames(childElement);
+    expect(anchorNames).not.toContain('--selected');
+    expect(anchorNames).toContain('--my-custom-anchor');
+
+    childElement.remove();
   });
 });

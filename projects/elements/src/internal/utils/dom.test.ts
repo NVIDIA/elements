@@ -32,7 +32,10 @@ import {
   styleSheetToString,
   isValidDOMGrid,
   slotContainsOnlyWhitespace,
-  tagSelector
+  tagSelector,
+  getAnchorNames,
+  removeAnchorName,
+  appendAnchorName
 } from '@nvidia-elements/core/internal';
 
 @customElement('dom-test-element')
@@ -835,5 +838,135 @@ describe('tagSelector', () => {
   it('should handle no prefix', () => {
     const result = tagSelector('button');
     expect(result).toBe('button, button');
+  });
+});
+
+describe('getAnchorNames', () => {
+  it('should return array of anchor names from element', () => {
+    const element = document.createElement('div');
+    element.style.anchorName = '--anchor-1, --anchor-2, --anchor-3';
+    document.body.appendChild(element);
+
+    const names = getAnchorNames(element);
+    expect(names).toEqual(['--anchor-1', '--anchor-2', '--anchor-3']);
+    element.remove();
+  });
+
+  it('should return single anchor name', () => {
+    const element = document.createElement('div');
+    element.style.anchorName = '--my-anchor';
+    document.body.appendChild(element);
+
+    const names = getAnchorNames(element);
+    expect(names).toEqual(['--my-anchor']);
+    element.remove();
+  });
+
+  it('should return empty array when no anchor names are set', () => {
+    const element = document.createElement('div');
+    document.body.appendChild(element);
+
+    const names = getAnchorNames(element);
+    expect(names).toEqual([]);
+    element.remove();
+  });
+
+  it('should filter out "none" value', () => {
+    const element = document.createElement('div');
+    element.style.anchorName = 'none'; // 'none' is returned by getComputedStyle for empty anchor name
+    document.body.appendChild(element);
+
+    const names = getAnchorNames(element);
+    expect(names).toEqual([]);
+    element.remove();
+  });
+
+  it('should trim whitespace from anchor names', () => {
+    const element = document.createElement('div');
+    element.style.anchorName = '  --anchor-1  ,  --anchor-2  ';
+    document.body.appendChild(element);
+
+    const names = getAnchorNames(element);
+    expect(names).toEqual(['--anchor-1', '--anchor-2']);
+    element.remove();
+  });
+});
+
+describe('removeAnchorName', () => {
+  it('should remove specific anchor name from list', () => {
+    const element = document.createElement('div');
+    element.style.anchorName = '--anchor-1, --anchor-2, --anchor-3';
+    document.body.appendChild(element);
+
+    removeAnchorName(element, '--anchor-2');
+    const names = getAnchorNames(element);
+    expect(names).toEqual(['--anchor-1', '--anchor-3']);
+    element.remove();
+  });
+
+  it('should handle removing non-existent anchor name', () => {
+    const element = document.createElement('div');
+    element.style.anchorName = '--anchor-1, --anchor-2';
+    document.body.appendChild(element);
+
+    removeAnchorName(element, '--anchor-3');
+    const names = getAnchorNames(element);
+    expect(names).toEqual(['--anchor-1', '--anchor-2']);
+    element.remove();
+  });
+
+  it('should handle removing the only anchor name', () => {
+    const element = document.createElement('div');
+    element.style.anchorName = '--my-anchor';
+    document.body.appendChild(element);
+
+    removeAnchorName(element, '--my-anchor');
+    expect(element.style.anchorName).toBe('');
+    element.remove();
+  });
+
+  it('should leave other anchor names intact', () => {
+    const element = document.createElement('div');
+    element.style.anchorName = '--keep-1, --remove, --keep-2';
+    document.body.appendChild(element);
+
+    removeAnchorName(element, '--remove');
+    const names = getAnchorNames(element);
+    expect(names).toEqual(['--keep-1', '--keep-2']);
+    element.remove();
+  });
+});
+
+describe('appendAnchorName', () => {
+  it('should append new anchor name to existing list', () => {
+    const element = document.createElement('div');
+    element.style.anchorName = '--anchor-1, --anchor-2';
+    document.body.appendChild(element);
+
+    appendAnchorName(element, '--anchor-3');
+    const names = getAnchorNames(element);
+    expect(names).toEqual(['--anchor-1', '--anchor-2', '--anchor-3']);
+    element.remove();
+  });
+
+  it('should not duplicate existing anchor names', () => {
+    const element = document.createElement('div');
+    element.style.anchorName = '--anchor-1, --anchor-2';
+    document.body.appendChild(element);
+
+    appendAnchorName(element, '--anchor-2');
+    const names = getAnchorNames(element);
+    expect(names).toEqual(['--anchor-1', '--anchor-2']);
+    element.remove();
+  });
+
+  it('should handle appending to empty anchor name list', () => {
+    const element = document.createElement('div');
+    document.body.appendChild(element);
+
+    appendAnchorName(element, '--my-anchor');
+    const names = getAnchorNames(element);
+    expect(names).toEqual(['--my-anchor']);
+    element.remove();
   });
 });
