@@ -34,6 +34,6 @@ export class Week extends Control {
   };
 
   protected get suffixContent() {
-    return html`<nve-icon-button .ariaLabel=${this.i18n.expand} icon-name="calendar" container="inline" @click=${this.showPicker}></nve-icon-button>`;
+    return html`<nve-icon-button exportparts="icon:icon-button-icon" part="icon-button" .ariaLabel=${this.i18n.expand} icon-name="calendar" container="inline" @click=${this.showPicker}></nve-icon-button>`;
   }
 }

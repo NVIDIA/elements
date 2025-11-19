@@ -38,6 +38,7 @@ export class MonacoInput extends BaseMonacoInput<MonacoEditor, monaco.editor.ISt
     return this.shadowRoot?.querySelector<MonacoEditor>(MonacoEditor.metadata.tag)?.editor;
   }
 
+  /* eslint-disable local/required-css-parts */
   render() {
     return html`
       <div internal-host>
