@@ -155,6 +155,7 @@ export class MonacoDiffInput extends BaseMonacoInput<MonacoDiffEditor, monaco.ed
     this.#diffModel = undefined;
   }
 
+  /* eslint-disable local/required-css-parts */
   render() {
     return html`
       <div internal-host>

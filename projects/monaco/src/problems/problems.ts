@@ -101,6 +101,7 @@ export class MonacoProblems extends LitElement {
     attachInternals(this);
   }
 
+  /* eslint-disable local/required-css-parts */
   render() {
     return html`
       <div internal-host>

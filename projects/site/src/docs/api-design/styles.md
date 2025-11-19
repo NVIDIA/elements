@@ -306,7 +306,7 @@ support when the reading order is reversed by the user preferences in the browse
 <nve-badge><nve-icon slot="icon">🎓</nve-icon> Learn: &nbsp;<a href="https://web.dev/logical-property-shorthands/">CSS Logical Properties</a></nve-badge>
 <nve-badge><nve-icon slot="icon">🎓</nve-icon> Case Study: &nbsp;<a href="https://storybook.core.clarity.design/?path=/docs/stories-forms--internationalization">Example of inverted form controls </a></nve-badge>
 
-## Parts
+## CSS Parts
 
 CSS Parts enable elements to expose DOM elements to consumers that typically would be encapsulated in the Shadow DOM.
 
@@ -322,25 +322,88 @@ CSS Parts enable elements to expose DOM elements to consumers that typically wou
 </style>
 ```
 
-<nve-badge status="warning">Warning: Avoid using CSS Parts as they can drastically increase the API surface area of a element and can cause significant costs when updating visual changes in future versions.</nve-badge>
+<nve-alert status="warning">Warning: Avoid using CSS Parts as they can drastically increase the API surface area of a element and can cause significant costs when updating visual changes in future versions.</nve-alert>
 
 CSS Parts give full control to the application developer however, this comes with a significant tradeoff. As more internal elements are exposed they become part of the public API of the element. Over time increases the difficulty of maintaining the API and making visual changes of the element without causing unexpected visual breaking changes to the consumer.
 
-Elements that are part of the library's public API can more safely be exposed as it has its own well defined and versioned API.
+Elements that are part of the library's public API can more safely be exposed as it has its own well defined and versioned API. This enables safely giving more control to the application developer while preventing the element API surface from growing.
 
 ```html
 <!-- nve-dialog internal template -->
-<nve-icon-button part="close-icon"></nve-icon-button>
+<nve-icon-button part="icon-button"></nve-icon-button>
 
 <!-- consumer css -->
 <style>
-  nve-dialog::part(close-icon) {
+  nve-dialog::part(icon-button) {
     --color: purple;
   }
 </style>
 ```
 
-This enables safely giving more control to the application developer while preventing the element API surface from growing.
+### Part Name Conventions
+
+When naming a part use the name of the custom element without the `nve-` prefix for API consistency. If a component has multiple internal part references of the same type use both the generalize element name as well as a semantic name. This allows generalized selectors for theming as well as precise selections when needed.
+
+```html
+<nve-icon-button part="icon-button previous-icon-button"></nve-icon-button>
+<nve-icon-button part="icon-button next-icon-button"></nve-icon-button>
+```
+
+```css
+nve-pagination::part(icon-button) {
+  --color: red;
+}
+
+nve-pagination::part(previous-icon-button) {
+  --color: blue;
+}
+
+nve-pagination::part(next-icon-button) {
+  --color: green;
+}
+```
+
+### Export Parts
+
+<nve-alert status="warning">Due to higher maintenance complexity, this API should be used per-case basis.</nve-alert>
+
+If an element exposes a nve-_ element which is also a `nve-_` element, then a [exportparts attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/exportparts) can be applied to expose deeply nested CSS parts.
+
+Example use case, the `nve-week` component uses a `nve-icon-button` internally. This can be accessed via a CSS part.
+
+```css
+<style>
+  nve-week::part(icon-button) {
+    --background: red;
+  }
+</style>
+<nve-week>
+  <label>label</label>
+  <input type="week" />
+</nve-week>
+```
+
+However, the `nve-icon-button` internal to `nve-week` has its own internal `nve-icon` which is exposed as a part. To access this as a consumer we must explicitly add a `exportparts` to the `nve-icon-button` and expose its inner `nve-icon` to the public API surface of `nve-week.
+
+```css
+<style>
+  /* nve-week > nve-icon-button */
+  nve-week::part(icon-button) {
+    --background: red;
+  }
+
+  /* nve-week > nve-icon-button > nve-icon */
+  nve-week::part(icon-button-icon) {
+    --color: blue;
+  }
+</style>
+<nve-week>
+  <label>label</label>
+  <input type="week" />
+</nve-week>
+```
+
+{% example '@nvidia-elements/core/week/week.stories.json' 'ExportParts' %}
 
 ## Responsive
 
