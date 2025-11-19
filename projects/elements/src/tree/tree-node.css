@@ -53,7 +53,7 @@ slot:not(:has-slotted) {
   justify-content: center;
 }
 
-[part='node-header'] {
+[part='_node-header'] {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -61,7 +61,7 @@ slot:not(:has-slotted) {
   min-width: fit-content;
 }
 
-:host(:focus-visible) [part='node-header'],
+:host(:focus-visible) [part='_node-header'],
 ::slotted(a:focus-visible)::after {
   outline: Highlight solid 2px !important;
   outline: 5px auto -webkit-focus-ring-color !important;

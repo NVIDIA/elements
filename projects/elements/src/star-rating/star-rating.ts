@@ -70,7 +70,7 @@ export class StarRating extends Control {
         const iconName = diff >= 1 ? 'star' : diff >= 0.5 ? 'star-half' : 'star-stroke';
 
         return html`
-        <nve-icon
+        <nve-icon part="icon"
           @click=${() => this.#setValue(this.#getStepValue(i, starValue))}
           @mousemove=${(e: MouseEvent) => this.#handleMouseMove(e, i, starValue)}
           name=${iconName}

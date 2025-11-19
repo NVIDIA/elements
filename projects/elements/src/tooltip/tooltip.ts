@@ -95,6 +95,7 @@ export class Tooltip extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
+  /* eslint-disable local/no-invalid-css-parts */
   render() {
     return html`
     <div internal-host>

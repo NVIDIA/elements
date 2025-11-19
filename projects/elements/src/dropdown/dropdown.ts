@@ -117,7 +117,7 @@ export class Dropdown extends LitElement {
     return html`
     <div internal-host>
       <slot name="header"></slot>
-      ${this.closable ? html`<nve-icon-button @click=${this.hidePopover} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
+      ${this.closable ? html`<nve-icon-button part="icon-button" @click=${this.hidePopover} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
       <slot></slot>
       <slot name="footer"></slot>
       ${this.arrow ? html`<div class="arrow"></div>` : ''}
