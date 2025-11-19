@@ -42,7 +42,7 @@ export class PageLoader extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <nve-progress-ring status="accent" size="xl"></nve-progress-ring>
+        <nve-progress-ring part="progress-ring" status="accent" size="xl"></nve-progress-ring>
         <slot></slot>
       </div>
     `;

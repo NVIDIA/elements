@@ -90,7 +90,7 @@ export class Grid extends LitElement implements ContainerElement {
   render() {
     return html`
       <div internal-host>
-        <div part="scrollbox">
+        <div part="_scrollbox">
           <slot></slot>
         </div>
         <slot name="footer"></slot>
@@ -109,6 +109,6 @@ export class Grid extends LitElement implements ContainerElement {
   scrollTo(options?: ScrollToOptions): Promise<void>;
   scrollTo(x: number, y: number): Promise<void>;
   async scrollTo(...args: [options?: ScrollToOptions] | [x: number, y: number]): Promise<void> {
-    await this.shadowRoot.querySelector('[part="scrollbox"]')?.scrollTo(...(args as [ScrollToOptions]));
+    await this.shadowRoot.querySelector('[part="_scrollbox"]')?.scrollTo(...(args as [ScrollToOptions]));
   }
 }

@@ -188,7 +188,7 @@ export class Accordion extends LitElement implements ContainerElement {
           <slot name="header"></slot>
 
           <slot name="icon-button">
-            <nve-icon-button
+            <nve-icon-button part="icon-button"
               id="internal-trigger"
               container="inline"
               icon-name="caret"

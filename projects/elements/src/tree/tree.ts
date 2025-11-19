@@ -67,7 +67,7 @@ export class Tree extends LitElement {
   /** @private */
   get keynavListConfig(): KeynavListConfig {
     return {
-      items: this.openNodes.map(node => node.shadowRoot.querySelector('[part="node-header"]')),
+      items: this.openNodes.map(node => node.shadowRoot.querySelector('[part="_node-header"]')),
       layout: 'vertical'
     };
   }

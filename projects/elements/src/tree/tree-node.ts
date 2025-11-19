@@ -125,20 +125,20 @@ export class TreeNode extends LitElement {
           ${
             this.#isExpandable
               ? html`
-            <nve-icon-button @pointerup=${this.#toggleExpand} role="presentation" tabindex="-1" size="sm" container="inline" nofocus>
-              <nve-icon name="caret" direction=${this.expanded ? 'down' : 'right'} size="sm"></nve-icon>
+            <nve-icon-button part="icon-button" @pointerup=${this.#toggleExpand} role="presentation" tabindex="-1" size="sm" container="inline" nofocus>
+              <nve-icon part="icon" name="caret" direction=${this.expanded ? 'down' : 'right'} size="sm"></nve-icon>
             </nve-icon-button>`
               : nothing
           }
           ${
             this.selectable === 'multi'
               ? html`
-            <nve-checkbox nofocus>
+            <nve-checkbox part="checkbox" nofocus>
               <input type="checkbox" @change=${this.#toggleMultiSelection} .checked=${this.selected} .indeterminate=${this.indeterminate} .ariaLabel=${this.i18n.expand} tabindex="-1" />
             </nve-checkbox>`
               : nothing
           }
-          <div tabindex="0" part="node-header">
+          <div tabindex="0" part="_node-header">
             <slot tabindex="0" class="node-title" @click=${this.#nodeHeaderClick}></slot>
             <slot name="content" part="_content"></slot>
           </div>
