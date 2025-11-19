@@ -44,6 +44,9 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./bundles/*": {
+      "default": "./dist/bundles/*"
+    },
     "./codeblock": {
       "types": "./dist/codeblock/index.d.ts",
       "default": "./dist/codeblock/index.js"
@@ -155,6 +158,7 @@
   },
   "sideEffects": [
     "./**/define.js",
+    "./dist/bundles/*.js",
     "./dist/codeblock/languages/*.js"
   ],
   "scripts": {
@@ -240,7 +244,8 @@
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
-        "vite.config.ts"
+        "vite.config.ts",
+        "vite.bundle.ts"
       ],
       "output": [
         "dist/**",
