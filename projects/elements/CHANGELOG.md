@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.48.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.4...@nvidia-elements/core-v1.48.5) (2025-11-19)
+
+
+### Bug Fixes
+
+* **elements:** update control height and control contrast corrections ([3efd941](https://github.com/NVIDIA/elements/commit/3efd9410150a88962167bd6777ac8b8a006f07bd))
+
 ## [@nvidia-elements/core-v1.48.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.3...@nvidia-elements/core-v1.48.4) (2025-11-19)
 
 
