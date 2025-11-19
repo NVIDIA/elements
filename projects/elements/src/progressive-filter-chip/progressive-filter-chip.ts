@@ -65,11 +65,11 @@ export class ProgressiveFilterChip extends LitElement {
   #getControlTemplate(el: Element) {
     const slot = html`<slot name=${el.slot} @slotchange=${this.#removeItem}></slot>`;
     if (el.tagName === 'SELECT') {
-      return html`<nve-select multiple-overflow ?fit-text=${!(el as HTMLSelectElement).multiple}>${slot}</nve-select>`;
+      return html`<nve-select part="select" multiple-overflow ?fit-text=${!(el as HTMLSelectElement).multiple}>${slot}</nve-select>`;
     } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'date') {
-      return html`<nve-date>${slot}</nve-date>`;
+      return html`<nve-date part="date">${slot}</nve-date>`;
     } else if (el.tagName === 'INPUT') {
-      return html`<nve-input>${slot}</nve-input>`;
+      return html`<nve-input part="input">${slot}</nve-input>`;
     } else {
       return slot;
     }
@@ -79,7 +79,7 @@ export class ProgressiveFilterChip extends LitElement {
     return html`
     <div internal-host>
       ${this.inputs.map(el => this.#getControlTemplate(el))}
-      ${this.closable ? html`<nve-icon-button @click=${() => this.#typeClosableController.close()} .ariaLabel=${this.i18n.close} icon-name="cancel"></nve-icon-button>` : nothing}
+      ${this.closable ? html`<nve-icon-button part="icon-button" @click=${() => this.#typeClosableController.close()} .ariaLabel=${this.i18n.close} icon-name="cancel"></nve-icon-button>` : nothing}
     </div>
     <slot hidden-slot @slotchange=${this.#createItems}></slot>
     `;

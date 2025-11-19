@@ -1,5 +1,5 @@
-nve-input-group[type='filter'] > nve-select::part(caret),
-nve-input-group[type='filter'] > nve-select::part(caret) {
+nve-input-group[type='filter'] > nve-select::part(_caret),
+nve-input-group[type='filter'] > nve-select::part(_caret) {
   display: none !important;
 }
 
