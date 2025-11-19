@@ -25,25 +25,35 @@ export const Form = {
   render: () => html`
 <form id="form-demo" nve-layout="column gap:lg">
   <section>
-    <nve-dropzone name="files"></nve-dropzone>
+    <nve-control>
+      <nve-dropzone name="files" accept="image/gif, image/jpeg, image/png" max-file-size="1048576"></nve-dropzone>
+      <nve-control-message error="typeMismatch">incorrect file type - only images allowed</nve-control-message>
+      <nve-control-message error="rangeOverflow">file too big - maximum 1.00 MB allowed</nve-control-message>
+    </nve-control>
   </section>
-  <nve-button>submit</nve-button>
+  <nve-button type="submit">submit</nve-button>
 </form>
 <script type="module">
   const form = document.querySelector('#form-demo');
   const dropzone = document.querySelector('#form-demo nve-dropzone');
 
+  dropzone.addEventListener('change', e => {
+    console.log('change', e.target.value);
+    const files = e.target.value;
+    console.log('Validity:', e.target.validity);
+    console.log('Validation Message:', e.target.validationMessage);
+  });
+
   form.addEventListener('submit', e => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const files = formData.getAll('files');
 
-    console.log('Selected files:', files);
-  });
-
-  dropzone.addEventListener('change', e => {
-    console.log('change', e.target.value);
+    if (form.checkValidity()) {
+      console.log('Form submitted successfully!');
+    } else {
+      console.log('Form validation failed');
+    }
   });
 </script>
 `

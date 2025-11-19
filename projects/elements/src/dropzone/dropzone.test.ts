@@ -61,7 +61,7 @@ describe(Dropzone.metadata.tag, () => {
     expect(element.maxFileSize).to.equal(2 * 1024 ** 4);
   });
 
-  it('should filter files by type', async () => {
+  it('should accept all files without filtering by type', async () => {
     const validFile = new File(['content'], 'test.png', { type: 'image/png' });
     const invalidFile = new File(['content'], 'test.txt', { type: 'text/plain' });
 
@@ -79,11 +79,12 @@ describe(Dropzone.metadata.tag, () => {
     input.dispatchEvent(dropEvent);
     await changePromise;
 
-    expect(element.value.length).toBe(1);
+    expect(element.value.length).toBe(2);
     expect(element.value[0].name).toBe('test.png');
+    expect(element.value[1].name).toBe('test.txt');
   });
 
-  it('should filter files by size', async () => {
+  it('should accept all files without filtering by size', async () => {
     const smallFile = new File(['small'], 'small.png', { type: 'image/png' });
     const largeFile = new File(['x'.repeat(200)], 'large.png', { type: 'image/png' });
 
@@ -103,11 +104,12 @@ describe(Dropzone.metadata.tag, () => {
     input.dispatchEvent(dropEvent);
     await changePromise;
 
-    expect(element.value.length).toBe(1);
+    expect(element.value.length).toBe(2);
     expect(element.value[0].name).toBe('small.png');
+    expect(element.value[1].name).toBe('large.png');
   });
 
-  it('should filter files with custom accept type', async () => {
+  it('should accumulate files when dropped multiple times', async () => {
     const smallFile = new File(['small'], 'small.png', { type: 'image/png' });
 
     const dataTransfer = new DataTransfer();
@@ -121,7 +123,7 @@ describe(Dropzone.metadata.tag, () => {
 
     element.accept = '.png';
 
-    const changePromise = untilEvent(element, 'change');
+    let changePromise = untilEvent(element, 'change');
     input.dispatchEvent(dropEvent);
     await changePromise;
 
@@ -130,6 +132,7 @@ describe(Dropzone.metadata.tag, () => {
 
     element.accept = 'image/*';
 
+    changePromise = untilEvent(element, 'change');
     input.dispatchEvent(dropEvent);
     await changePromise;
 
