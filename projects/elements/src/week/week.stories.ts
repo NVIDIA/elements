@@ -101,3 +101,26 @@ export const Horizontal = {
   </nve-week>
 </div>`
 };
+
+/**
+ * @summary Example showing advanced theme usage of [CSS export parts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Parts_and_Slots/Using_CSS_parts) to access nested shadow root elements.
+ * @tags test-case
+ */
+export const ExportParts = {
+  render: () => html`
+<style>
+  nve-week::part(icon-button) {
+    --background: red;
+  }
+
+  nve-week::part(icon-button-icon) {
+    --color: blue;
+  }
+</style>
+<nve-week>
+  <label>label</label>
+  <input type="week" />
+  <nve-control-message>message</nve-control-message>
+</nve-week>
+`
+};
