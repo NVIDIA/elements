@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.12.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.3...@nvidia-elements/styles-v1.12.4) (2025-11-19)
+
+
+### Bug Fixes
+
+* **styles:** reconcile nav-list styles shown on docs with what we have in typography util ([5ec0d91](https://github.com/NVIDIA/elements/commit/5ec0d91b66f2423f0fb2cf8b295cb47653ca537d))
+
 ## [@nvidia-elements/styles-v1.12.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.2...@nvidia-elements/styles-v1.12.3) (2025-10-08)
 
 
