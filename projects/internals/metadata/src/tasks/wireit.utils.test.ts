@@ -5,7 +5,12 @@ import type { WireitGraph } from '../types.js';
 describe('generateGraphData', () => {
   let result: WireitGraph;
   beforeAll(() => {
-    result = generateGraphData();
+    try {
+      result = generateGraphData();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   });
 
   it('should return an object with nodes and links arrays', () => {

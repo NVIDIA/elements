@@ -176,3 +176,20 @@ export const OverflowTabs = {
     </nve-tabs>
   `,
 };
+
+/**
+ * @summary Example test case demonstrating how the tabs selection state and a popover can be used together without any CSS Anchor Positioning collisions.
+ * @tags test-case
+ */
+export const WithTooltips = {
+  render: () => html`
+  <nve-tooltip id="tab1">Tooltip for tab 1</nve-tooltip>
+  <nve-tooltip id="tab2">Tooltip for tab 2</nve-tooltip>
+  <nve-tooltip id="tab3">Tooltip for tab 3</nve-tooltip>
+  <nve-tabs behavior-select>
+    <nve-tabs-item selected popovertarget="tab1">Tab 1</nve-tabs-item>
+    <nve-tabs-item popovertarget="tab2">Tab 2</nve-tabs-item>
+    <nve-tabs-item id="tab-item-3" popovertarget="tab3">Tab 3</nve-tabs-item>
+  </nve-tabs>
+  `
+};
