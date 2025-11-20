@@ -6,7 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="A simple starter using Elements and JS Bundles." />
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
-    <style>@import '@nvidia-elements/core/bundles/index.css';</style>
+    <style>
+      @import './node_modules/@nvidia-elements/themes/dist/fonts/inter.css';
+      @import './node_modules/@nvidia-elements/themes/dist/index.css';
+      @import './node_modules/@nvidia-elements/themes/dist/dark.css';
+      @import './node_modules/@nvidia-elements/styles/dist/typography.css';
+      @import './node_modules/@nvidia-elements/styles/dist/layout.css';
+      @import './node_modules/@nvidia-elements/styles/dist/view-transitions.css';
+    </style>
   </head>
   <body>
     <nve-page>
@@ -33,7 +40,7 @@
             <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/typescript/">TypeScript</a></nve-menu-item>
             <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/vue/">Vue</a></nve-menu-item>
             <nve-divider></nve-divider>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/docs/integrations/hugo/" target="_blank">Hugo</a></nve-menu-item>
+            <nve-menu-item><a href="https://NVIDIA.github.io/elements/docs/integrations/go/" target="_blank">Go</a></nve-menu-item>
             <nve-menu-item><a href="https://NVIDIA.github.io/elements/docs/integrations/nextjs/" target="_blank">NextJS</a></nve-menu-item>
           </nve-menu>
         </nve-page-panel-content>
@@ -52,7 +59,7 @@
       </main>
     </nve-page>
     <script type="module">
-      import '@nvidia-elements/core/bundles/index.js';
+      import './node_modules/@nvidia-elements/core/dist/bundles/index.js';
     </script>
   </body>
 </html>
