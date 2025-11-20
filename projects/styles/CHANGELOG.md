@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.12.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.4...@nvidia-elements/styles-v1.12.5) (2025-11-20)
+
+
+### Bug Fixes
+
+* **styles:** bring back left padding on nve-text list ([a2d6b65](https://github.com/NVIDIA/elements/commit/a2d6b655c351e2694c1c4b44227609b203c3bb3c))
+
 ## [@nvidia-elements/styles-v1.12.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.3...@nvidia-elements/styles-v1.12.4) (2025-11-19)
 
 
