@@ -144,9 +144,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode('installation', renderInstallShortcode);
   eleventyConfig.addShortcode('install-artifactory', renderInstallArtifactoryShortcode);
   eleventyConfig.addShortcode('integration', renderIntegrationShortcode);
+  eleventyConfig.addShortcode('artifactory-usage', renderArtifactoryUsageShortcode);
   eleventyConfig.addPairedShortcode('dodont', doDontShortcode);
   eleventyConfig.addPairedShortcode('split', splitShortcode);
-  eleventyConfig.addPairedShortcode('artifactory-usage', renderArtifactoryUsageShortcode);
 
   // Register custom transforms for content processing
   eleventyConfig.addTransform('element-loader', elementLoaderTransform);

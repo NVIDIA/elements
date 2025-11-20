@@ -24,4 +24,4 @@ However, if you would like to integrate advanced tooling such as TypeScript, tre
 
 ## Artifactory Usage Guidelines
 
-{% artifactory-usage %}{% endartifactory-usage %}
+{% artifactory-usage %}
