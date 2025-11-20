@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.48.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.5...@nvidia-elements/core-v1.48.6) (2025-11-20)
+
+
+### Bug Fixes
+
+* **elements:** css parts ([e401586](https://github.com/NVIDIA/elements/commit/e401586b5bdcd97a976c4993ccbe1da62513f7ab))
+
 ## [@nvidia-elements/core-v1.48.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.4...@nvidia-elements/core-v1.48.5) (2025-11-19)
 
 
