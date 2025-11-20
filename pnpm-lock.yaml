@@ -1385,6 +1385,12 @@ importers:
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../../elements
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      '@nvidia-elements/themes':
+        specifier: workspace:*
+        version: link:../../themes
     devDependencies:
       typescript:
         specifier: 'catalog:'

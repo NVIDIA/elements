@@ -25,17 +25,31 @@ This approach should only be used if the application development environment doe
 Using the single bundle approach can make simple HTML prototypes easy but prevent performance optimizations such as tree shaking. Lack of these optimizations means your users will incur a performance penalty loading all components regardless if they are used in the UI.
 
 ```html
-<!DOCTYPE html>
-<html lang="en" nve-theme="dark">
+<!doctype html>
+<html lang="en" nve-theme="dark" nve-transition="auto">
   <head>
-    <link rel="stylesheet" href="node_modules/@nvidia-elements/core/bundles/index.css">
+    <title>Elements + Static Bundles</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      @import './node_modules/@nvidia-elements/themes/dist/fonts/inter.css';
+      @import './node_modules/@nvidia-elements/themes/dist/index.css';
+      @import './node_modules/@nvidia-elements/themes/dist/dark.css';
+      @import './node_modules/@nvidia-elements/styles/dist/typography.css';
+      @import './node_modules/@nvidia-elements/styles/dist/layout.css';
+      @import './node_modules/@nvidia-elements/styles/dist/view-transitions.css';
+    </style>
   </head>
   <body nve-text="body">
     <nve-alert>hello there</nve-alert>
 
-    <script type="module" src="node_modules/@nvidia-elements/core/bundles/index.js"></script>
+    <script type="module">
+      import './node_modules/@nvidia-elements/core/dist/bundles/index.js';
+    </script>
   </body>
 </html>
 ```
 
-{% artifactory-usage %}{% endartifactory-usage %}
+## Artifactory Usage Guidelines
+
+{% artifactory-usage %}

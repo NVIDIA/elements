@@ -95,4 +95,4 @@ Using import maps more complex UI components can be created without build toolin
 
 ## Artifactory Usage Guidelines
 
-{% artifactory-usage %}{% endartifactory-usage %}
+{% artifactory-usage %}
