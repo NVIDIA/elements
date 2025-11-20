@@ -52,4 +52,4 @@ import '@nvidia-elements/core/dot/define.js';
 
 ## Artifactory Usage Guidelines
 
-{% artifactory-usage %}{% endartifactory-usage %}
+{% artifactory-usage %}
