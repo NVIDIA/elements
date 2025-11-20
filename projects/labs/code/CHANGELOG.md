@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.5.0...@nvidia-elements/code-v0.6.0) (2025-11-20)
+
+
+### Features
+
+* **labs-code:** add bundle support ([db83ac5](https://github.com/NVIDIA/elements/commit/db83ac5c4057bf586f84419a98b945b0109fccc6))
+
 ## [@nvidia-elements/code-v0.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.4.0...@nvidia-elements/code-v0.5.0) (2025-10-08)
 
 
