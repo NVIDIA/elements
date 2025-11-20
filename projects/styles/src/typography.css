@@ -144,9 +144,8 @@ body[nve-text],
 
 [nve-text~='list'] {
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0 0 0 var(--nve-ref-size-400) !important;
   list-style-position: outside !important;
-  padding-left: var(--nve-ref-size-400);
 
   li {
     margin: 0 !important;
