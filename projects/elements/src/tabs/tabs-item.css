@@ -4,6 +4,7 @@
   --border-width: 100%;
   --border-top: auto;
   --width: 100%;
+  --padding: 0 var(--nve-ref-size-200);
   --font-size: var(--nve-ref-font-size-100);
   --font-weight: var(--nve-ref-font-weight-medium);
   --border-radius: var(--nve-ref-border-radius-sm);
@@ -17,7 +18,7 @@
 [internal-host] {
   width: var(--width);
   gap: var(--nve-ref-space-xs);
-  padding: 0 var(--nve-ref-size-200);
+  padding: var(--padding);
   height: var(--height);
   color: var(--color);
   font-weight: var(--font-weight);
