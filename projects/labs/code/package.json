@@ -176,7 +176,8 @@
   },
   "dependencies": {
     "highlight.js": "11.10.0",
-    "lit": "catalog:"
+    "lit": "catalog:",
+    "lit-html": "catalog:"
   },
   "peerDependencies": {
     "@nvidia-elements/core": "workspace:^",
