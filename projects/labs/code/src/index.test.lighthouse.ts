@@ -50,3 +50,15 @@ describe('lighthouse report', () => {
     expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(30);
   });
 });
+
+describe('lighthouse report', () => {
+  test('@nvidia-elements/code JS Bundles should remain within compressed bundle limits', async () => {
+    const report = await lighthouseRunner.getReport('bundles', /* html */`
+      <script type="module">
+      import('@nvidia-elements/code/bundles/index.js');
+      </script>
+    `);
+
+    expect(report.payload.javascript.kb).toBeLessThan(30.5);
+  });
+});
