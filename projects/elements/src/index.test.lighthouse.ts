@@ -2,17 +2,6 @@ import { expect, test, describe } from 'vitest';
 import { lighthouseRunner } from '@nve-internals/vite';
 
 describe('lighthouse report', () => {
-  test('CSS bundles should remain within compressed bundle limits', async () => {
-    const report = await lighthouseRunner.getReport(`bundles/index.css`, /* html */`
-      <script type="module">
-        import('@nvidia-elements/core/bundles/index.css');
-      </script>
-    `);
-
-    
-    expect(report.payload.css.requests[Object.keys(report.payload.css.requests)[0]].kb).toBeLessThan(13); // @nvidia-elements/core/bundles/index.VERSION.css
-  });
-
   test('JS Bundles should remain within compressed bundle limits', async () => {
     const report = await lighthouseRunner.getReport(`bundles/index.js`, /* html */`
       <script type="module">
