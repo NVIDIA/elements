@@ -32,6 +32,7 @@
     "./labs/layout-container.css": "./dist/labs/layout-container.css",
     "./typography.css": "./dist/typography.css",
     "./view-transitions.css": "./dist/view-transitions.css",
+    "./bundles/*": "./dist/bundles/*",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
