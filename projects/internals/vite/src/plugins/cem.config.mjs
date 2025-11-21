@@ -455,7 +455,7 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
 
     entry.type.text = entry.type.text
       .split(' | ')
-      .map(value => (value === 'undefined' || value === '' ? 'default' : value))
+      .map(value => (value === 'undefined' || value === '' ? '"default"' : value))
       .join(' | ');
   }
 
