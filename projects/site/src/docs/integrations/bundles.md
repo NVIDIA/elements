@@ -32,20 +32,16 @@ Using the single bundle approach can make simple HTML prototypes easy but preven
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
+      @import './node_modules/@nvidia-elements/styles/dist/bundles/index.css';
+      @import './node_modules/@nvidia-elements/themes/dist/bundles/index.css';
       @import './node_modules/@nvidia-elements/themes/dist/fonts/inter.css';
-      @import './node_modules/@nvidia-elements/themes/dist/index.css';
-      @import './node_modules/@nvidia-elements/themes/dist/dark.css';
-      @import './node_modules/@nvidia-elements/styles/dist/typography.css';
-      @import './node_modules/@nvidia-elements/styles/dist/layout.css';
-      @import './node_modules/@nvidia-elements/styles/dist/view-transitions.css';
     </style>
-  </head>
-  <body nve-text="body">
-    <nve-alert>hello there</nve-alert>
-
     <script type="module">
       import './node_modules/@nvidia-elements/core/dist/bundles/index.js';
     </script>
+  </head>
+  <body nve-text="body">
+    <nve-alert>hello there</nve-alert>
   </body>
 </html>
 ```
