@@ -2,6 +2,7 @@ import terser from '@rollup/plugin-terser';
 import minifyHTML from 'rollup-plugin-html-literals';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { dtsBundle } from '../plugins/dts.bundle.js';
 
 /**
  * - https://vitejs.dev/config/
@@ -34,6 +35,7 @@ export const libraryBundleConfig = {
         importAttributesKey: 'with'
       },
       plugins: [
+        dtsBundle(),
         minifyHTML(),
         terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } }),
         visualizer({
