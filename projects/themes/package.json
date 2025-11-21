@@ -55,6 +55,7 @@
     },
     "./data.css-vars.json": "./dist/data.css-vars.json",
     "./fonts/*": "./dist/fonts/*",
+    "./bundles/*": "./dist/bundles/*",
     "./*": "./dist/*"
   },
   "wireit": {

@@ -41,3 +41,18 @@ describe('lighthouse report', () => {
     expect(report.payload.css.requests['debug.css'].kb).toBeLessThan(0.75);
   });
 });
+
+describe('lighthouse report', () => {
+  let report: { payload: { css: { kb: number, requests: { [key: string]: { kb: number } } } } };
+  beforeAll(async () => {
+    report = await lighthouseRunner.getReport('index.css', /* html */`
+      <script type="module">
+        import('@nvidia-elements/themes/bundles/index.css');
+      </script>
+    `);
+  });
+
+  test('bundles/index.css should remain within compressed bundle limits', async () => {
+    expect(report.payload.css.requests['index.css'].kb).toBeLessThan(9.8);
+  });
+});
