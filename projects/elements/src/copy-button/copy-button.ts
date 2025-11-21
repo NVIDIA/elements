@@ -66,7 +66,7 @@ export class CopyButton extends Button {
         }
      </div>
      ${this.showToast ? html`<nve-toast part="toast" @close=${this.#close} status="success" anchor="btn" trigger="btn" position="top" close-timeout="1500">${this.i18n.copied}</nve-toast>` : nothing}
-     ${this.showTooltip && !this.showToast ? html`<nve-tooltip part="tooltip" anchor="btn" trigger="btn">${this.ariaLabel ?? this.i18n.copy}</nve-tooltip>` : nothing}
+     ${this.showTooltip && !this.showToast ? html`<nve-tooltip part="tooltip" exportparts="arrow:tooltip-arrow" anchor="btn" trigger="btn">${this.ariaLabel ?? this.i18n.copy}</nve-tooltip>` : nothing}
    `;
   }
 

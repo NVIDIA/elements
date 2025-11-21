@@ -103,3 +103,22 @@ export const AsyncCopy = {
     </script>
   `
 }
+
+/**
+ * @summary Demonstrates override of popover position in a copy button.
+ * @tags test-case
+ */
+export const TooltipPositionOverride = {
+  render: () => html`
+    <style>
+      nve-copy-button.override-position-example {
+        &::part(tooltip-arrow) {
+          position-area: right center;
+          translate: -50% 0%;
+          transform: translate(-2px, 0) rotate(45deg);
+        }
+      }
+    </style>
+    <nve-copy-button class="override-position-example" value="hello" aria-label="copy value" behavior-copy style="position: absolute; top: 12px; right: 12px;"></nve-copy-button>
+  `
+}
