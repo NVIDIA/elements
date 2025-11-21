@@ -11,6 +11,7 @@ export default defineConfig(() => {
       lib: {
         entry: {
           index: resolve(import.meta.dirname, './src/index.ts'),
+          'bundles/index.css': resolve(import.meta.dirname, './src/bundles/index.css'),
           'typography.css': resolve(import.meta.dirname, './src/typography.css'),
           'layout.css': resolve(import.meta.dirname, './src/layout.css'),
           'labs/layout-viewport.css': resolve(import.meta.dirname, './src/labs/layout-viewport.css'),
