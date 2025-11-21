@@ -232,15 +232,20 @@
     position-area: right span-bottom;
   }
 
-  :host([popover]) {
-    position-try-fallbacks:
-      flip-block,
-      flip-inline,
-      flip-block flip-inline;
-    position-try:
-      flip-block,
-      flip-inline,
-      flip-block flip-inline;
+  :host([position='top']) {
+    position-try-fallbacks: top, bottom, left, right;
+  }
+
+  :host([position='bottom']) {
+    position-try-fallbacks: bottom, top, left, right;
+  }
+
+  :host([position='left']) {
+    position-try-fallbacks: left, right, top, bottom;
+  }
+
+  :host([position='right']) {
+    position-try-fallbacks: right, left, top, bottom;
   }
 }
 
