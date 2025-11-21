@@ -12,32 +12,32 @@
 
 ## Default
 
-{% story 'nve-copy-button', 'Default' %}
+{% example '@nvidia-elements/core/copy-button/copy-button.examples.json' 'Default' %}
 
 ## Flat
 
-{% story 'nve-copy-button', 'Flat' %}
+{% example '@nvidia-elements/core/copy-button/copy-button.examples.json' 'Flat' %}
 
 ## Behavior Copy
 
-{% story 'nve-copy-button', 'BehaviorCopy' %}
+{% example '@nvidia-elements/core/copy-button/copy-button.examples.json' 'BehaviorCopy' %}
 
 ## Hint
 
-{% story 'nve-copy-button', 'Hint' %}
+{% example '@nvidia-elements/core/copy-button/copy-button.examples.json' 'Hint' %}
 
 ## Icon
 
-{% story 'nve-copy-button', 'Icon' %}
+{% example '@nvidia-elements/core/copy-button/copy-button.examples.json' 'Icon' %}
 
 ## Async Copy
 
-{% story 'nve-copy-button', 'AsyncCopy' %}
+{% example '@nvidia-elements/core/copy-button/copy-button.examples.json' 'AsyncCopy' %}
 
 ## Disabled
 
-{% story 'nve-copy-button', 'Disabled' %}
+{% example '@nvidia-elements/core/copy-button/copy-button.examples.json' 'Disabled' %}
 
 ## Size
 
-{% story 'nve-copy-button', 'Size' %}
+{% example '@nvidia-elements/core/copy-button/copy-button.examples.json' 'Size' %}
