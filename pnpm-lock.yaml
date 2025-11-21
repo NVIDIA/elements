@@ -598,6 +598,9 @@ importers:
       custom-element-vs-code-integration:
         specifier: 1.5.0
         version: 1.5.0(prettier@3.4.2)
+      dts-bundle-generator:
+        specifier: 9.5.1
+        version: 9.5.1
       glob:
         specifier: 'catalog:'
         version: 11.0.3
@@ -829,6 +832,9 @@ importers:
         specifier: 11.10.0
         version: 11.10.0
       lit:
+        specifier: 'catalog:'
+        version: 3.3.1
+      lit-html:
         specifier: 'catalog:'
         version: 3.3.1
     devDependencies:
