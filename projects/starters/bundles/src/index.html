@@ -7,15 +7,15 @@
     <meta name="description" content="A simple starter using Elements and JS Bundles." />
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
     <style>
+      @import './node_modules/@nvidia-elements/styles/dist/bundles/index.css';
+      @import './node_modules/@nvidia-elements/themes/dist/bundles/index.css';
       @import './node_modules/@nvidia-elements/themes/dist/fonts/inter.css';
-      @import './node_modules/@nvidia-elements/themes/dist/index.css';
-      @import './node_modules/@nvidia-elements/themes/dist/dark.css';
-      @import './node_modules/@nvidia-elements/styles/dist/typography.css';
-      @import './node_modules/@nvidia-elements/styles/dist/layout.css';
-      @import './node_modules/@nvidia-elements/styles/dist/view-transitions.css';
     </style>
+    <script type="module">
+      import './node_modules/@nvidia-elements/core/dist/bundles/index.js';
+    </script>
   </head>
-  <body>
+  <body nve-text="body">
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm"></nve-logo>
@@ -58,8 +58,5 @@
         </div>
       </main>
     </nve-page>
-    <script type="module">
-      import './node_modules/@nvidia-elements/core/dist/bundles/index.js';
-    </script>
   </body>
 </html>
