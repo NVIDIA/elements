@@ -5,7 +5,7 @@
   --height: var(--nve-ref-size-200);
   --opacity: 1;
   --accent-color: var(--nve-sys-interaction-color);
-  --background: var(--nve-sys-interaction-field-background);
+  --background: var(--nve-sys-interaction-background);
 }
 
 :host([status='accent']) {
