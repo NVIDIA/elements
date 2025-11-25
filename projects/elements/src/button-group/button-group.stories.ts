@@ -13,7 +13,7 @@ export default {
 export const Default = {
   render: () => html`
     <nve-button-group>
-      <nve-icon-button icon-name="copy"></nve-icon-button>
+      <nve-icon-button selected icon-name="copy"></nve-icon-button>
       <nve-icon-button icon-name="add-comment"></nve-icon-button>
       <nve-icon-button icon-name="download"></nve-icon-button>
     </nve-button-group>
