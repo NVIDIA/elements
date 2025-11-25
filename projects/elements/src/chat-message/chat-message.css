@@ -1,5 +1,5 @@
 :host {
-  --background: var(--nve-sys-interaction-background);
+  --background: var(--nve-sys-layer-container-background);
   --color: var(--nve-sys-text-color);
   --padding: var(--nve-ref-size-300);
   --gap: var(--nve-ref-space-xs);
