@@ -1,5 +1,5 @@
 :host {
-  --background-color: var(--nve-sys-interaction-field-background-100);
+  --background-color: var(--nve-sys-interaction-background);
   --ring-color: var(--nve-sys-accent-secondary-background);
   --ring-background-opacity: 1;
   --ring-width: 2px;

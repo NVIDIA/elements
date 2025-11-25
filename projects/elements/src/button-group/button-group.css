@@ -25,8 +25,12 @@
 ::slotted(mlv-icon-button),
 ::slotted(nve-button),
 ::slotted(nve-icon-button) {
-  --height: var(--nve-ref-size-700);
+  --height: var(--nve-sys-interaction-field-height);
   --border-radius: var(--nve-ref-border-radius-sm);
+}
+
+::slotted(nve-icon-button) {
+  --width: var(--nve-sys-interaction-field-height);
 }
 
 ::slotted(mlv-divider),
