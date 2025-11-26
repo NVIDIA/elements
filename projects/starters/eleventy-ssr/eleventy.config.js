@@ -1,11 +1,16 @@
 import { EleventyRenderPlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
-import { MetadataService } from '@nve-internals/metadata';
+import { ApiService } from '@nve-internals/metadata';
 
-const metadata = await MetadataService.getMetadata();
-const entrypoints = metadata.projects['@nvidia-elements/core'].elements
-  .filter(e => e.manifest?.metadata?.entrypoint)
+const apis = await ApiService.getData();
+const entrypoints = apis.data.elements
+  .filter(
+    e =>
+      e.manifest?.metadata?.entrypoint &&
+      e.manifest.metadata.entrypoint.includes('@nvidia-elements/core') &&
+      e.manifest?.deprecated !== 'true'
+  )
   .map(e => `node_modules/${e.manifest.metadata.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`);
 
 export default function (eleventyConfig) {

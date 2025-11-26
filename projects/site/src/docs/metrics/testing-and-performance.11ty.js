@@ -1,6 +1,6 @@
 // @ts-check
 
-import { MetadataService, TestsService } from '@nve-internals/metadata';
+import { TestsService } from '@nve-internals/metadata';
 import { badgeCoverage, badgeBundle, badgeLighthouse } from '../../_11ty/templates/api.js';
 
 export const data = {
@@ -8,13 +8,11 @@ export const data = {
   layout: 'docs.11ty.js'
 };
 
-const metrics = await MetadataService.getMetadata();
-
 /** @type {import('@nve-internals/metadata').ProjectsTestSummary} */
-const tests = await TestsService.getTests();
+const tests = await TestsService.getData();
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
-  new Date(metrics.created)
+  new Date(tests.created)
 );
 
 export function render() {
@@ -22,7 +20,7 @@ export function render() {
     /* html */ `
 <div nve-layout="column gap:md align:stretch" docs-full-width>
   <div nve-layout="column gap:md pad-bottom:sm">
-    <h1 nve-text="heading lg">Elements</h1>
+    <h1 nve-text="heading lg">Testing & Performance</h1>
     <p nve-text="body muted">Report of the testing and performance metrics for the Elements components and APIs.</p>
   </div>
   <div nve-layout="column gap:xs">

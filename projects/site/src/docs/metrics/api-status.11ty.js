@@ -4,10 +4,7 @@ import { badgeStatus, badgeCoverage, badgeBundle, badgeLighthouse, badgeAxe } fr
 import { ESM_ELEMENTS_VERSION } from '../../_11ty/utils/version.js';
 import { siteData } from '../../index.11tydata.js';
 
-const { metadata, tests } = siteData;
-
-/** @type {import('@nve-internals/metadata').MetadataSummary} */
-const metrics = metadata;
+const { tests } = siteData;
 
 export const data = {
   title: 'API Status',
@@ -25,10 +22,9 @@ const coverageResults = Object.values(tests.projects)
   .flatMap(project => project.coverage.testResults)
   .flatMap(results => results);
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
-  new Date(metrics.created)
+  new Date(tests.created)
 );
-const elements = Object.values(metrics.projects)
-  .flatMap(project => project.elements ?? [])
+const elements = siteData.elements
   .filter(element => !element.name.includes('internal') && !element.name.includes('json-viewer'))
   .sort((a, b) => a.name.localeCompare(b.name));
 
@@ -37,7 +33,7 @@ export function render() {
     /* html */ `
 <div nve-layout="column gap:md align:stretch" docs-full-width>
   <div nve-layout="column gap:md pad-bottom:sm">
-    <h1 nve-text="heading lg">Elements</h1>
+    <h1 nve-text="heading lg">API Status</h1>
     <p nve-text="body muted">Metrics measuring various aspects of the Elements components and APIs including, test coverage, performance, accessibility, and API stability.</p>
   </div>
   <div nve-layout="column gap:xs">
