@@ -1,10 +1,11 @@
 ---
 {
   title: 'Forms',
-  layout: 'docs.11ty.js',
-  tag: 'nve-control'
+  layout: 'docs.11ty.js'
 }
 ---
+
+# {{ title }}
 
 The form control elements leverage the native browser inputs as its public API.
 This approach allows any framework or library to use the form elements and keeps
