@@ -39,7 +39,7 @@ export function examplesToJSON(packageFile) {
         const items = (
           await Promise.all(
             examplesVariableStatement.map(async example => {
-              const id = example.getDescendantsOfKind(SyntaxKind.VariableDeclaration)[0].getName();
+              const name = example.getDescendantsOfKind(SyntaxKind.VariableDeclaration)[0].getName();
               let template =
                 example
                   .getDescendantsOfKind(SyntaxKind.TaggedTemplateExpression)[0]
@@ -53,7 +53,7 @@ export function examplesToJSON(packageFile) {
                 try {
                   template = await renderTemplate(template);
                 } catch (e) {
-                  console.warn(`Element ${element} example "${id}" is not stateless.`);
+                  console.warn(`Element ${element} example "${name}" is not stateless.`);
                 }
 
                 if (!template.includes('<template>')) {
@@ -101,12 +101,15 @@ export function examplesToJSON(packageFile) {
                   )
                   .filter(tag => tag.length > 0) ?? [];
 
-              validateDescriptionContext(id, summary, description);
-              validateSummaryContext(id, summary);
-              validateTagsContext(id, tags);
+              validateDescriptionContext(name, summary, description);
+              validateSummaryContext(name, summary);
+              validateTagsContext(name, tags);
+
+              const id = generateExampleId(entrypoint, name);
 
               return {
                 id,
+                name,
                 template,
                 summary,
                 description,
@@ -141,6 +144,15 @@ export function examplesToJSON(packageFile) {
   };
 }
 
+function generateExampleId(entrypoint, name) {
+  const exampleName = name.replace(/([A-Z])/g, '-$1').slice(1);
+  const idParts = entrypoint.split('/');
+  const fileName = idParts[idParts.length - 1].replace('.stories.json', '').replace('.examples.json', '');
+  const formattedFileName = idParts[idParts.length - 2] === fileName ? '' : `-${fileName}`;
+  const entrypointName = idParts.slice(1, idParts.length - 1).join('-');
+  return `${entrypointName}${formattedFileName}_${exampleName}`.toLowerCase();
+}
+
 function createDirectoryIfNotExists(filePath) {
   const directoryPath = path.dirname(filePath);
 
@@ -159,32 +171,32 @@ async function renderTemplate(template) {
 /**
  * Summary context must be concise to be compatible with externalized tools such as CLIs and MCPs.
  */
-function validateSummaryContext(id, summary) {
+function validateSummaryContext(name, summary) {
   const contextMaxLength = 400;
   const plainTextSummary = summary
     .replaceAll(/https?:\/\/[^\s<>"{}|\\^`\[\]]+/gi, '')
     .replaceAll(/\[([^\]]+)\]\([^)]+\)/g, '$1');
   if (plainTextSummary.length > contextMaxLength) {
     console.error(
-      `Description context for example "${id}" is too long. (${plainTextSummary.length}/${contextMaxLength} characters)`
+      `Description context for example "${name}" is too long. (${plainTextSummary.length}/${contextMaxLength} characters)`
     );
     process.exit(1);
   }
 }
 
-function validateDescriptionContext(id, summary, description) {
+function validateDescriptionContext(name, summary, description) {
   if (description?.length && !summary?.trim()) {
     console.log(summary, description);
-    console.error(`A summary for example "${id}" must be provided before providing a description.`);
+    console.error(`A summary for example "${name}" must be provided before providing a description.`);
     process.exit(1);
   }
 }
 
-function validateTagsContext(id, tags) {
+function validateTagsContext(name, tags) {
   const allowedTags = ['priority', 'performance', 'pattern', 'anti-pattern', 'test-case'];
   const invalidTags = tags.filter(tag => !allowedTags.includes(tag));
   if (invalidTags.length > 0) {
-    console.error(`Invalid tags for "${id}": ${invalidTags.join(', ')}`);
+    console.error(`Invalid tags for "${name}": ${invalidTags.join(', ')}`);
     process.exit(1);
   }
 }
