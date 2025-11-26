@@ -1,12 +1,10 @@
-import type { Attribute, Element } from '@internals/metadata';
-import { MetadataService } from '@internals/metadata';
 import {
-  type ElementVersions,
-  type PartialAPIResult,
-  getLatestPublishedVersions,
-  getAvailableAPIs,
-  searchAPIs
-} from './utils.js';
+  ProjectsService,
+  ApiService as MetadataApiService,
+  type Attribute,
+  type Element
+} from '@internals/metadata';
+import { type ElementVersions, type PartialAPIResult, getLatestPublishedVersions, getAvailableAPIs } from './utils.js';
 import { service, tool } from '../internal/tools.js';
 
 @service()
@@ -67,8 +65,8 @@ export class ApiService {
   static async list(
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ elements: PartialAPIResult[]; attributes: PartialAPIResult[] } | string> {
-    const metadata = await MetadataService.getMetadata();
-    return getAvailableAPIs(format, metadata);
+    const apis = await MetadataApiService.getData();
+    return getAvailableAPIs(format, apis);
   }
 
   @tool({
@@ -91,10 +89,7 @@ export class ApiService {
       additionalProperties: false
     },
     outputSchema: {
-      oneOf: [
-        { type: 'string' },
-        { type: 'object', properties: { elements: { type: 'array' }, attributes: { type: 'array' } } }
-      ],
+      oneOf: [{ type: 'string' }, { type: 'array' }],
       additionalProperties: false
     }
   })
@@ -104,9 +99,9 @@ export class ApiService {
   }: {
     query: string;
     format: 'markdown' | 'json';
-  }): Promise<{ elements: Element[]; attributes: Attribute[] } | string> {
-    const metadata = await MetadataService.getMetadata();
-    return searchAPIs(query, format, metadata);
+  }): Promise<(Element | Attribute)[] | string> {
+    const results = (await MetadataApiService.search(query)).slice(0, 5);
+    return format === 'markdown' ? results.map(r => r.markdown).join('\n\n---\n\n') : results;
   }
 
   @tool({
@@ -120,7 +115,7 @@ export class ApiService {
     }
   })
   static async version(): Promise<ElementVersions> {
-    const metadata = await MetadataService.getMetadata();
-    return await getLatestPublishedVersions(metadata);
+    const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
+    return await getLatestPublishedVersions(projects);
   }
 }

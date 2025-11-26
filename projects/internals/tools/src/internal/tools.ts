@@ -154,7 +154,7 @@ export function jsonSchemaToZod(schema: Schema) {
       )
     : {};
 
-  const patternPropertiesSchema = schema?.patternProperties
+  const patternPropertiesSchema: Record<string, z.ZodTypeAny> = schema?.patternProperties
     ? Object.fromEntries(
         Object.entries(schema.patternProperties).map(([pattern, value]) => [pattern, jsonSchemaToZod(value)])
       )
