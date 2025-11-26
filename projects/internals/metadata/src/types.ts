@@ -7,10 +7,6 @@ export interface Project {
   description: string;
   readme: string;
   changelog: string;
-  types?: ProjectTypes[];
-  elements: ProjectElement[];
-  attributes: Attribute[];
-  tokens?: Token[];
 }
 
 /**
@@ -25,11 +21,13 @@ export interface ProjectTypes {
 /**
  * @summary A project element is a collection of metadata about a custom element in a project.
  */
-export interface ProjectElement {
+export interface Element {
   name: string;
   changelog?: string;
-  manifest?: Element;
+  manifest?: CustomElementManifest;
   markdown?: string;
+  package?: string;
+  version?: string;
 }
 
 /**
@@ -67,6 +65,7 @@ export type ExampleTag = 'priority' | 'performance' | 'pattern' | 'anti-pattern'
  */
 export interface Example {
   id: string;
+  name: string;
   template: string;
   summary: string;
   description: string;
@@ -113,7 +112,7 @@ export interface CustomElementsManifest {
   modules: {
     kind: string;
     path: string;
-    declarations: Element[];
+    declarations: CustomElementManifest[];
     exports: {
       kind: string;
       name: string;
@@ -129,7 +128,7 @@ export interface CustomElementsManifest {
  * @summary A Custom Elements Manifest declaration is a description of a custom element.
  * @see https://github.com/webcomponents/custom-elements-manifest
  */
-export interface Element {
+export interface CustomElementManifest {
   tagName: string;
   customElement: boolean;
   kind: string;

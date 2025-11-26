@@ -1,4 +1,4 @@
-import type { Attribute, Element } from '../types.js';
+import type { Attribute, CustomElementManifest } from '../types.js';
 
 export function getElementChangelog(name: string, changelog: string) {
   const changelogJSON = changelogMarkdownToJSON(changelog);
@@ -61,10 +61,9 @@ export function changelogMarkdownToJSON(changelog: string) {
     });
 }
 
-export function elementMetadataToMarkdown(manifest: Element) {
+export function elementMetadataToMarkdown(manifest: CustomElementManifest) {
   if (manifest.tagName) {
     const slots = manifest.slots?.filter(i => !i.description?.includes('deprecated')) ?? [];
-    const attributes = manifest.attributes?.filter(i => !i.deprecated) ?? [];
     const members = manifest.members?.filter(i => !i.deprecated) ?? [];
     return `
 ## ${manifest.tagName}
@@ -83,39 +82,23 @@ import '${manifest.metadata.entrypoint}/define.js';
 ${
   slots.length
     ? `
-| name | description |
-| ---- | ----------- |
-${slots.map(i => `| ${i.name} | ${i.description} |`).join('\n')}`
+| name | value | description |
+| ---- | ----- | ----------- |
+${slots.map(i => `| ${i.name} | \`string\` | ${i.description?.replace(/\|/g, '\\|') ?? ''} |`).join('\n')}`
     : 'No slots available.'
 }
 
-### Attributes
-${
-  attributes.length
-    ? `
-| name | value | description |
-| ---- | ----- | ----------- |
-${attributes
-  .map(i => {
-    const type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
-    const description = i.description?.replace(/\|/g, '\\|')?.split('\n')?.join('');
-    return `| ${i.name} | ${type} | ${description} |`;
-  })
-  .join('\n')}`
-    : '\nNo Attributes available.'
-}
-
-### Properties
+### Properties / Attributes
 ${
   members.length
     ? `
-| name | value | description |
-| ---- | ----- | ----------- |
+| property (attribute) | value | description |
+| -------------------- | ----- | ----------- |
 ${members
   .map(i => {
     const type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
-    const description = i.description ? i.description.replace(/\|/g, '\\|').split('\n').join('') : '';
-    return `| ${i.name} | ${type} | ${description} |`;
+    const description = i.description?.replace(/\|/g, '\\|')?.split('\n')?.join(' ') ?? '';
+    return `| ${i.name}${i.attribute && i.attribute !== i.name ? ` (${i.attribute})` : ''} | ${type} | ${description} |`;
   })
   .join('\n')}`
     : '\nNo Properties available.'
@@ -125,12 +108,12 @@ ${members
 ${
   manifest.events?.length
     ? `
-| name | description |
-| ---- | ----------- |
+| name | value | description |
+| ---- | ----- | ----------- |
 ${manifest.events
   .map(i => {
-    const description = i.description ? i.description.replace(/\|/g, '\\|').split('\n').join('') : '';
-    return `| ${i.name} | ${description ?? ''} |`;
+    const description = i.description?.replace(/\|/g, '\\|')?.split('\n')?.join(' ') ?? '';
+    return `| ${i.name} | \`CustomEvent\` | ${description} |`;
   })
   .join('\n')}`
     : '\nNo Custom Events available.'
@@ -140,9 +123,9 @@ ${manifest.events
 ${
   manifest.cssProperties?.length
     ? `
-| name | description |
-| ---- | ----------- |
-${manifest.cssProperties.map(i => `| ${i.name} | ${i.description ?? ''} |`).join('\n')}`
+| name | value | description |
+| ---- | ----- | ----------- |
+${manifest.cssProperties.map(i => `| ${i.name} | \`string\` | ${i.description?.replace(/\|/g, '\\|') ?? ''} |`).join('\n')}`
     : '\nNo CSS Properties available.'
 }`.trim();
   }
@@ -160,9 +143,9 @@ ${attribute.example ? `\`\`\`html\n${attribute.example.trim()}\n\`\`\`` : 'No ex
 
 ### Values
 
-| Attribute | Values |
-| --------- | ------ |
-| \`${attribute.name}\` | ${attribute.values
+| name | type | value  |
+| ---- | ---- | ------ |
+| \`${attribute.name}\` | \`string\` |${attribute.values
     .filter(v => !v.name.includes('|') && !v.name.includes('@') && !v.name.includes('&'))
     .map(value => '`' + value.name + '`')
     .join(', ')} |`.trim();
