@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@nvidia-elements/lint": "workspace:*",
-    "@inquirer/prompts": "7.8.6",
-    "@modelcontextprotocol/sdk": "1.21.0",
+    "@inquirer/prompts": "8.0.1",
+    "@modelcontextprotocol/sdk": "1.23.0",
     "adm-zip": "0.5.16",
     "archiver": "7.0.1",
     "glob": "catalog:",
@@ -37,7 +37,7 @@
     "ora": "9.0.0",
     "publint": "catalog:",
     "yargs": "18.0.0",
-    "open": "10.2.0",
+    "open": "11.0.0",
     "zod": "3.25.76"
   },
   "devDependencies": {
