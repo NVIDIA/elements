@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.6.0...@nvidia-elements/code-v0.7.0) (2025-11-26)
+
+
+### Features
+
+* **labs-code:** type bundle support ([78a92e4](https://github.com/NVIDIA/elements/commit/78a92e49e089862f3e7fd8443d63efa5852c5bfe))
+
 ## [@nvidia-elements/code-v0.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.5.0...@nvidia-elements/code-v0.6.0) (2025-11-20)
 
 
