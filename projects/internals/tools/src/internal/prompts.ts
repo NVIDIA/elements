@@ -10,7 +10,7 @@ const authoringContext = `
 - Verify that each Elements API usage is correct by checking the API documentation via the \`api_search\` tool
 
 ### API Gotchas
-- Do not use \`nve-grid\` for general layout
+- Use \`nve-grid\` for tabular data, lists, and keyboard-navigable collections. Do NOT use it for page layout, use \`nve-page\` and \`nve-layout\` instead.
 - Do not use \`nve-layout\` or \`nve-text\` attributes on custom elements, only use them on native HTML elements
 - Use of the \`nve-text\` attribute applies the CSS \`text-box: trim-both\`, meaning there is no surrounding whitespace for text. Layouts likely need to use \`nve-layout="gap:*"\` to add whitespace between text elements
 - When using \`nve-layout="grid"\`, the \`nve-layout="span-items:*"\` represents number of columns to span out of 12. Example: "span-items:6" will span 6 out of 12 columns or 50% of the grid row.
@@ -158,7 +158,7 @@ export interface Prompt {
   argsSchema?: Schema;
   handler: (args: Record<string, unknown>) => {
     messages: {
-      role: 'user' | 'assistant' | 'system';
+      role: 'user' | 'assistant';
       content: {
         type: 'text';
         text: string;

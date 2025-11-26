@@ -1,4 +1,4 @@
-import { MetadataService, type Example } from '@nve-internals/metadata';
+import { ExamplesService as ExamplesServiceMetadata, type Example } from '@nve-internals/metadata';
 import { service, tool } from '../internal/tools.js';
 import { getAvailableExamples, searchExamples } from './utils.js';
 
@@ -26,11 +26,12 @@ export class ExamplesService {
             type: 'object',
             properties: {
               id: { type: 'string' },
+              name: { type: 'string' },
               summary: { type: 'string' },
               element: { type: 'string' }
             },
             additionalProperties: false,
-            required: ['id', 'summary', 'element']
+            required: ['id', 'name', 'summary', 'element']
           }
         }
       ],
@@ -40,7 +41,7 @@ export class ExamplesService {
   static async list(
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ id: string; summary: string }[] | string> {
-    const examples = await MetadataService.getExamples();
+    const examples = await ExamplesServiceMetadata.getData();
     return getAvailableExamples(format, examples);
   }
 
@@ -68,6 +69,7 @@ export class ExamplesService {
             type: 'object',
             properties: {
               id: { type: 'string' },
+              name: { type: 'string' },
               summary: { type: 'string' },
               description: { type: 'string' },
               template: { type: 'string' },
@@ -76,7 +78,7 @@ export class ExamplesService {
               tags: { type: 'array', items: { type: 'string' } }
             },
             additionalProperties: false,
-            required: ['id', 'summary', 'element']
+            required: ['id', 'name', 'summary', 'element']
           }
         }
       ],
@@ -90,11 +92,10 @@ export class ExamplesService {
     query: string;
     format?: 'markdown' | 'json';
   }): Promise<Example[] | string> {
-    const examples = await MetadataService.getExamples();
-    return searchExamples(query, format, examples);
+    return await searchExamples(query, format);
   }
 
   static async getAll(): Promise<Example[]> {
-    return MetadataService.getExamples();
+    return ExamplesServiceMetadata.getData();
   }
 }
