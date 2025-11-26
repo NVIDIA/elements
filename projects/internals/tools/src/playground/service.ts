@@ -1,4 +1,4 @@
-import { MetadataService } from '@nve-internals/metadata';
+import { ApiService } from '@nve-internals/metadata';
 import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
 import { createPlaygroundURL, type PlaygroundType, playgroundTypes } from './utils.js';
 import { type Schema, service, tool } from '../internal/tools.js';
@@ -148,10 +148,10 @@ export class PlaygroundService {
       }
     }
 
-    const metadata = await MetadataService.getMetadata();
+    const apis = await ApiService.getData();
     const environment = ELEMENTS_ENV_ICON[process.env.ELEMENTS_ENV];
     const formattedName = `${name}${author ? ` - (${author})` : ''}${environment ? ` ${environment}` : ''}`;
-    const result = createPlaygroundURL(template, metadata, { name: formattedName, type });
+    const result = createPlaygroundURL(template, apis.data.elements, { name: formattedName, type });
 
     if (!process.env.CI && (process.env.ELEMENTS_ENV === 'mcp' || (process.env.ELEMENTS_ENV === 'cli' && start))) {
       const openBrowser = await import('open');

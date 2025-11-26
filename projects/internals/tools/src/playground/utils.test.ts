@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { MetadataSummary } from '@nve-internals/metadata';
+import type { ProjectElement } from '@nve-internals/metadata';
 import {
   createPlaygroundURL,
   createAngularFiles,
@@ -12,58 +12,46 @@ import {
 } from './utils.js';
 
 describe('createPlaygroundURL', () => {
-  const metadata = {
-    created: '2021-01-01',
-    projects: {
-      '@nvidia-elements/core': {
-        elements: [
-          {
-            name: 'nve-button',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
-          }
-        ]
-      },
-      '@nvidia-elements/monaco': {
-        elements: [
-          { name: 'nve-monaco', manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco', markdown: ' ### Import ' } } }
-        ]
-      },
-      '@nvidia-elements/code': {
-        elements: [
-          {
-            name: 'nve-code',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/code/codeblock', markdown: ' ### Import ' } }
-          }
-        ]
-      },
-      '@nvidia-elements/markdown': {
-        elements: [
-          {
-            name: 'nve-markdown',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/markdown/markdown', markdown: ' ### Import ' } }
-          }
-        ]
-      }
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
+    },
+    {
+      name: 'nve-monaco',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco' } }
+    },
+    {
+      name: 'nve-code',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/code/codeblock' } }
+    },
+    {
+      name: 'nve-markdown',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/markdown/markdown' } }
     }
-  } as unknown as MetadataSummary;
+  ] as ProjectElement[];
 
   it('should create a playground URL', () => {
-    const result = createPlaygroundURL('nve-button', metadata);
+    const result = createPlaygroundURL('nve-button', elements);
     expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
   });
 
   it('should create a playground URL with a custom name', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { name: 'nve-button' });
+    const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button' });
     expect(result.includes('?version=1&layout=vertical-split&name=nve-button&file=index.html&files=')).toBe(true);
   });
 
   it('should create a playground URL with a theme', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { theme: 'light' });
+    const result = createPlaygroundURL('nve-button', elements, { theme: 'light' });
     expect(result.includes('?version=1&layout=vertical-split&theme=light&file=index.html&files=')).toBe(true);
   });
 
   it('should create a playground URL with a referer', () => {
-    const result = createPlaygroundURL('nve-button', metadata, {
+    const result = createPlaygroundURL('nve-button', elements, {
       referer: 'https://www.nvidia.com'
     });
     expect(result.includes('?version=1&layout=vertical-split&file=index.html&ref=https://www.nvidia.com&files=')).toBe(
@@ -73,39 +61,33 @@ describe('createPlaygroundURL', () => {
 });
 
 describe('createReactPlaygroundURL', () => {
-  const metadata = {
-    created: '2021-01-01',
-    projects: {
-      '@nvidia-elements/core': {
-        elements: [
-          {
-            name: 'nve-button',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
-          }
-        ]
-      },
-      '@nvidia-elements/monaco': {
-        elements: [
-          { name: 'nve-monaco', manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco', markdown: ' ### Import ' } } }
-        ]
-      }
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
+    },
+    {
+      name: 'nve-monaco',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco' } }
     }
-  } as unknown as MetadataSummary;
+  ] as ProjectElement[];
 
   it('should create a React playground URL', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { type: 'react' });
+    const result = createPlaygroundURL('nve-button', elements, { type: 'react' });
     expect(result.includes('?version=1&layout=vertical-split&name=react&file=index.tsx&files=')).toBe(true);
   });
 
   it('should create a React playground URL with a custom name', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { name: 'nve-button', type: 'react' });
+    const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button', type: 'react' });
     expect(result.includes('?version=1&layout=vertical-split&name=react%20nve-button&file=index.tsx&files=')).toBe(
       true
     );
   });
 
   it('should create a React playground URL with a referer', () => {
-    const result = createPlaygroundURL('nve-button', metadata, {
+    const result = createPlaygroundURL('nve-button', elements, {
       type: 'react',
       name: 'nve-button',
       referer: 'https://www.nvidia.com'
@@ -118,7 +100,7 @@ describe('createReactPlaygroundURL', () => {
   });
 
   it('should bootstrap React files needed for the playground', () => {
-    const files = createReactFiles('<nve-button></nve-button>', metadata, { name: 'nve-button', theme: 'light' });
+    const files = createReactFiles('<nve-button></nve-button>', elements, { name: 'nve-button', theme: 'light' });
     expect(files['index.html'].content.includes('<div id="root"></div>')).toBe(true);
     expect(files['index.tsx'].content.includes(`import React from 'react'`)).toBe(true);
     expect(files['global.ts'].content.includes(`declare module 'react' {`)).toBe(true);
@@ -127,39 +109,33 @@ describe('createReactPlaygroundURL', () => {
 });
 
 describe('createPreactPlaygroundURL', () => {
-  const metadata = {
-    created: '2021-01-01',
-    projects: {
-      '@nvidia-elements/core': {
-        elements: [
-          {
-            name: 'nve-button',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
-          }
-        ]
-      },
-      '@nvidia-elements/monaco': {
-        elements: [
-          { name: 'nve-monaco', manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco', markdown: ' ### Import ' } } }
-        ]
-      }
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
+    },
+    {
+      name: 'nve-monaco',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco' } }
     }
-  } as unknown as MetadataSummary;
+  ] as ProjectElement[];
 
   it('should create a Preact playground URL', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { type: 'preact' });
+    const result = createPlaygroundURL('nve-button', elements, { type: 'preact' });
     expect(result.includes('?version=1&layout=vertical-split&name=preact&file=index.tsx&files=')).toBe(true);
   });
 
   it('should create a Preact playground URL with a custom name', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { name: 'nve-button', type: 'preact' });
+    const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button', type: 'preact' });
     expect(result.includes('?version=1&layout=vertical-split&name=preact%20nve-button&file=index.tsx&files=')).toBe(
       true
     );
   });
 
   it('should create a Preact playground URL with a referer', () => {
-    const result = createPlaygroundURL('nve-button', metadata, {
+    const result = createPlaygroundURL('nve-button', elements, {
       name: 'nve-button',
       type: 'preact',
       referer: 'https://www.nvidia.com'
@@ -172,7 +148,7 @@ describe('createPreactPlaygroundURL', () => {
   });
 
   it('should bootstrap Preact files needed for the playground', () => {
-    const files = createPreactFiles('<nve-button></nve-button>', metadata, { name: 'nve-button' });
+    const files = createPreactFiles('<nve-button></nve-button>', elements, { name: 'nve-button' });
     expect(files['index.html'].content.includes('<div id="root"></div>')).toBe(true);
     expect(files['index.tsx'].content.includes(`import { render } from 'preact'`)).toBe(true);
     expect(files['global.ts'].content.includes(`namespace preact.JSX`)).toBe(true);
@@ -181,39 +157,33 @@ describe('createPreactPlaygroundURL', () => {
 });
 
 describe('createAngularPlaygroundURL', () => {
-  const metadata = {
-    created: '2021-01-01',
-    projects: {
-      '@nvidia-elements/core': {
-        elements: [
-          {
-            name: 'nve-button',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
-          }
-        ]
-      },
-      '@nvidia-elements/monaco': {
-        elements: [
-          { name: 'nve-monaco', manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco', markdown: ' ### Import ' } } }
-        ]
-      }
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
+    },
+    {
+      name: 'nve-monaco',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco' } }
     }
-  } as unknown as MetadataSummary;
+  ] as ProjectElement[];
 
   it('should create a Angular playground URL', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { type: 'angular' });
+    const result = createPlaygroundURL('nve-button', elements, { type: 'angular' });
     expect(result.includes('?version=1&layout=vertical-split&name=angular&file=index.ts&files=')).toBe(true);
   });
 
   it('should create a Angular playground URL with a custom name', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { name: 'nve-button', type: 'angular' });
+    const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button', type: 'angular' });
     expect(result.includes('?version=1&layout=vertical-split&name=angular%20nve-button&file=index.ts&files=')).toBe(
       true
     );
   });
 
   it('should create a Angular playground URL with a referer', () => {
-    const result = createPlaygroundURL('nve-button', metadata, {
+    const result = createPlaygroundURL('nve-button', elements, {
       name: 'nve-button',
       type: 'angular',
       referer: 'https://www.nvidia.com'
@@ -226,7 +196,7 @@ describe('createAngularPlaygroundURL', () => {
   });
 
   it('should bootstrap createAngularPlaygroundURL files needed for the playground', () => {
-    const files = createAngularFiles('<nve-button></nve-button>', metadata, { name: 'nve-button', theme: 'light' });
+    const files = createAngularFiles('<nve-button></nve-button>', elements, { name: 'nve-button', theme: 'light' });
     expect(files['index.html'].content.includes('<app-root></app-root>')).toBe(true);
     expect(files['index.ts'].content.includes(`import 'zone.js'`)).toBe(true);
     expect(files['importmap.json'].content.includes('"@angular/core": "https://esm.nvidia.com/@angular/core@')).toBe(true);
@@ -234,37 +204,31 @@ describe('createAngularPlaygroundURL', () => {
 });
 
 describe('createLitPlaygroundURL', () => {
-  const metadata = {
-    created: '2021-01-01',
-    projects: {
-      '@nvidia-elements/core': {
-        elements: [
-          {
-            name: 'nve-button',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
-          }
-        ]
-      },
-      '@nvidia-elements/monaco': {
-        elements: [
-          { name: 'nve-monaco', manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco', markdown: ' ### Import ' } } }
-        ]
-      }
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
+    },
+    {
+      name: 'nve-monaco',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco' } }
     }
-  } as unknown as MetadataSummary;
+  ] as ProjectElement[];
 
   it('should create a Lit playground URL', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { type: 'lit' });
+    const result = createPlaygroundURL('nve-button', elements, { type: 'lit' });
     expect(result.includes('?version=1&layout=vertical-split&name=lit&file=index.ts&files=')).toBe(true);
   });
 
   it('should create a Lit playground URL with a custom name', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { name: 'nve-button', type: 'lit' });
+    const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button', type: 'lit' });
     expect(result.includes('?version=1&layout=vertical-split&name=lit%20nve-button&file=index.ts&files=')).toBe(true);
   });
 
   it('should create a Lit playground URL with a referer', () => {
-    const result = createPlaygroundURL('nve-button', metadata, {
+    const result = createPlaygroundURL('nve-button', elements, {
       name: 'nve-button',
       type: 'lit',
       referer: 'https://www.nvidia.com'
@@ -277,7 +241,7 @@ describe('createLitPlaygroundURL', () => {
   });
 
   it('should bootstrap createLitPlaygroundURL files needed for the playground', () => {
-    const files = createLitFiles('<nve-button></nve-button>', metadata, { name: 'nve-button', theme: 'light' });
+    const files = createLitFiles('<nve-button></nve-button>', elements, { name: 'nve-button', theme: 'light' });
     expect(files['index.html'].content.includes('<app-root></app-root>')).toBe(true);
     expect(files['index.ts'].content.includes(`import { LitElement, html } from 'lit'`)).toBe(true);
     expect(files['importmap.json'].content.includes('"lit": "https://esm.nvidia.com/lit@latest"')).toBe(true);
@@ -285,22 +249,16 @@ describe('createLitPlaygroundURL', () => {
 });
 
 describe('createDefaultFiles', () => {
-  const metadata = {
-    created: '2021-01-01',
-    projects: {
-      '@nvidia-elements/core': {
-        elements: [
-          {
-            name: 'nve-button',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
-          }
-        ]
-      }
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
     }
-  } as unknown as MetadataSummary;
+  ] as ProjectElement[];
 
   it('should create default files with basic structure', () => {
-    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {});
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {});
     expect(files['index.html']).toBeDefined();
     expect(files['index.ts']).toBeDefined();
     expect(files['importmap.json']).toBeDefined();
@@ -308,7 +266,7 @@ describe('createDefaultFiles', () => {
   });
 
   it('should add layout styles CSS when name includes layout stories', () => {
-    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {
       name: '@nvidia-elements/styles/layout.stories.json'
     });
     expect(files['styles.css']).toBeDefined();
@@ -317,7 +275,7 @@ describe('createDefaultFiles', () => {
   });
 
   it('should add responsive styles CSS when name includes responsive stories', () => {
-    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {
       name: '@nvidia-elements/styles/responsive.stories.json'
     });
     expect(files['styles.css']).toBeDefined();
@@ -326,7 +284,7 @@ describe('createDefaultFiles', () => {
   });
 
   it('should add empty styles CSS when name includes responsive-patterns stories', () => {
-    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {
       name: '@nvidia-elements/styles/responsive-patterns.stories.json'
     });
     expect(files['styles.css']).toBeDefined();
@@ -379,32 +337,26 @@ describe('playgroundTypes', () => {
 });
 
 describe('createPlaygroundURL with additional options', () => {
-  const metadata = {
-    created: '2021-01-01',
-    projects: {
-      '@nvidia-elements/core': {
-        elements: [
-          {
-            name: 'nve-button',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
-          }
-        ]
-      }
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
     }
-  } as unknown as MetadataSummary;
+  ] as ProjectElement[];
 
   it('should handle trustedContent option', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { trustedContent: true });
+    const result = createPlaygroundURL('nve-button', elements, { trustedContent: true });
     expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
   });
 
   it('should handle custom openFile option for default type', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { openFile: 'custom.html' });
+    const result = createPlaygroundURL('nve-button', elements, { openFile: 'custom.html' });
     expect(result.includes('&file=custom.html&')).toBe(true);
   });
 
   it('should handle custom openFile option for React type', () => {
-    const result = createPlaygroundURL('nve-button', metadata, {
+    const result = createPlaygroundURL('nve-button', elements, {
       type: 'react',
       openFile: 'custom.tsx'
     });
@@ -413,38 +365,32 @@ describe('createPlaygroundURL with additional options', () => {
   });
 
   it('should handle empty name option', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { name: '' });
+    const result = createPlaygroundURL('nve-button', elements, { name: '' });
     expect(result.includes('&name=&')).toBe(false); // Should not add name parameter for empty string
   });
 
   it('should handle whitespace in name option', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { name: '  test name  ' });
+    const result = createPlaygroundURL('nve-button', elements, { name: '  test name  ' });
     expect(result.includes('&name=test%20name&')).toBe(true);
   });
 
   it('should handle special characters in name option', () => {
-    const result = createPlaygroundURL('nve-button', metadata, { name: 'test@name#123' });
+    const result = createPlaygroundURL('nve-button', elements, { name: 'test@name#123' });
     expect(result.includes('&name=test@name#123&')).toBe(true);
   });
 });
 
 describe('createIndexHTML behavior', () => {
-  const metadata = {
-    created: '2021-01-01',
-    projects: {
-      '@nvidia-elements/core': {
-        elements: [
-          {
-            name: 'nve-button',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
-          }
-        ]
-      }
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
     }
-  } as unknown as MetadataSummary;
+  ] as ProjectElement[];
 
   it('should include layout styles when name contains layout stories', () => {
-    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {
       name: '@nvidia-elements/styles/layout.stories.json'
     });
     const htmlContent = files['index.html'].content;
@@ -454,7 +400,7 @@ describe('createIndexHTML behavior', () => {
   });
 
   it('should include layout styles when name contains responsive stories', () => {
-    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {
       name: '@nvidia-elements/styles/responsive.stories.json'
     });
     const htmlContent = files['index.html'].content;
@@ -464,7 +410,7 @@ describe('createIndexHTML behavior', () => {
   });
 
   it('should include layout styles when name contains responsive-patterns stories', () => {
-    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {
       name: '@nvidia-elements/styles/responsive-patterns.stories.json'
     });
     const htmlContent = files['index.html'].content;
@@ -474,7 +420,7 @@ describe('createIndexHTML behavior', () => {
   });
 
   it('should not include layout styles when name does not contain stories patterns', () => {
-    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {
       name: 'regular-name'
     });
     const htmlContent = files['index.html'].content;
@@ -484,61 +430,55 @@ describe('createIndexHTML behavior', () => {
   });
 
   it('should set nve-layout="pad:md" when content does not contain nve-page', () => {
-    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {});
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {});
     const htmlContent = files['index.html'].content;
     expect(htmlContent).toContain('nve-layout="pad:md"');
   });
 
   it('should not set nve-layout="pad:md" when content contains nve-page', () => {
-    const files = createDefaultFiles('<nve-page></nve-page>', metadata, {});
+    const files = createDefaultFiles('<nve-page></nve-page>', elements, {});
     const htmlContent = files['index.html'].content;
     expect(htmlContent).not.toContain('nve-layout="pad:md"');
   });
 });
 
 describe('createImportMap with different frameworks', () => {
-  const metadata = {
-    created: '2021-01-01',
-    projects: {
-      '@nvidia-elements/core': {
-        elements: [
-          {
-            name: 'nve-button',
-            manifest: { metadata: { entrypoint: '@nvidia-elements/core/button', markdown: ' ### Import ' } }
-          }
-        ]
-      }
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
     }
-  } as unknown as MetadataSummary;
+  ] as ProjectElement[];
 
   it('should include React dependencies for React framework', () => {
-    const files = createReactFiles('<nve-button></nve-button>', metadata, {});
+    const files = createReactFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
     expect(importmap.imports['react']).toBe('https://esm.nvidia.com/react@19');
     expect(importmap.imports['react-dom']).toBe('https://esm.nvidia.com/react-dom@19');
   });
 
   it('should include Preact dependencies for Preact framework', () => {
-    const files = createPreactFiles('<nve-button></nve-button>', metadata, {});
+    const files = createPreactFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
     expect(importmap.imports['preact']).toBe('https://esm.nvidia.com/preact@10');
   });
 
   it('should include Angular dependencies for Angular framework', () => {
-    const files = createAngularFiles('<nve-button></nve-button>', metadata, {});
+    const files = createAngularFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
     expect(importmap.imports['@angular/core']).toBe('https://esm.nvidia.com/@angular/core@20.0.0');
     expect(importmap.imports['zone.js']).toBe('https://esm.nvidia.com/zone.js');
   });
 
   it('should include Lit dependencies for Lit framework', () => {
-    const files = createLitFiles('<nve-button></nve-button>', metadata, {});
+    const files = createLitFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
     expect(importmap.imports['lit']).toBe('https://esm.nvidia.com/lit@latest');
   });
 
   it('should include all NVE packages for all frameworks', () => {
-    const files = createDefaultFiles('<nve-button></nve-button>', metadata, {});
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
     expect(importmap.imports['@nvidia-elements/core']).toBe('https://esm.nvidia.com/@nvidia-elements/core@latest');
     expect(importmap.imports['@nvidia-elements/styles']).toBe('https://esm.nvidia.com/@nvidia-elements/styles@latest');
@@ -552,14 +492,7 @@ describe('createImportMap with different frameworks', () => {
 describe('serialize function behavior', () => {
   it('should compress and encode data by default', () => {
     // The serialize function is called internally, so we test its effect
-    const result = createPlaygroundURL(
-      '<nve-button></nve-button>',
-      {
-        created: '2021-01-01',
-        projects: {}
-      } as unknown as MetadataSummary,
-      {}
-    );
+    const result = createPlaygroundURL('<nve-button></nve-button>', [], {});
 
     // Should contain encoded files data
     expect(result).toContain('&files=');
@@ -568,28 +501,25 @@ describe('serialize function behavior', () => {
 });
 
 describe('Edge cases and error handling', () => {
-  const metadata = {
-    created: '2021-01-01',
-    projects: {}
-  } as unknown as MetadataSummary;
+  const elements: ProjectElement[] = [];
 
   it('should handle empty content string', () => {
-    const result = createPlaygroundURL('', metadata);
+    const result = createPlaygroundURL('', elements);
     expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
   });
 
   it('should handle content with only whitespace', () => {
-    const result = createPlaygroundURL('   ', metadata);
+    const result = createPlaygroundURL('   ', elements);
     expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
   });
 
   it('should handle undefined options', () => {
-    const result = createPlaygroundURL('<nve-button></nve-button>', metadata);
+    const result = createPlaygroundURL('<nve-button></nve-button>', elements);
     expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
   });
 
   it('should handle options with empty string values', () => {
-    const result = createPlaygroundURL('<nve-button></nve-button>', metadata, {
+    const result = createPlaygroundURL('<nve-button></nve-button>', elements, {
       name: '',
       theme: '',
       referer: ''

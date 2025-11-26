@@ -1,4 +1,4 @@
-import type { MetadataSummary } from '@nve-internals/metadata';
+import type { Element } from '@nve-internals/metadata';
 import sanitizeHtml from 'sanitize-html';
 import { getAvailableElementTags } from './utils.js';
 
@@ -140,7 +140,7 @@ const formAttrs = [
 
 export function validateTemplate(
   source: string,
-  metadata: MetadataSummary,
+  elements: Element[],
   config: { allowStyles?: boolean; allowGlobalElements?: boolean; allowVulnerableTags?: boolean } = {}
 ): string {
   const defaultConfig = { allowStyles: true, allowGlobalElements: false, allowVulnerableTags: true };
@@ -151,45 +151,42 @@ export function validateTemplate(
     ...svgElements,
     ...formElements,
     ...sanitizeHtml.defaults.allowedTags,
-    ...getAvailableElementTags(metadata),
+    ...getAvailableElementTags(elements),
     ...(mergedConfig.allowVulnerableTags ? ['script'] : []),
     ...(mergedConfig.allowStyles ? ['style'] : []),
     ...(mergedConfig.allowGlobalElements ? globalElements : [])
   ];
 
-  const customElementsAllowedAttributes: AllowedAttributes = Object.values(metadata.projects)
-    .filter(project => project.elements)
-    .flatMap(project => project.elements)
-    .reduce((acc, element) => {
-      const customAttrs =
-        element.manifest.attributes?.map(attribute => {
-          // allow arbitrary values for boolean,string, number, and icon name attributes
-          if (
-            attribute.type?.text === 'boolean' ||
-            attribute.type?.text === 'string' ||
-            attribute.type?.text === 'number' ||
-            attribute.type?.text.includes('IconName')
-          ) {
-            return attribute.name;
-          } else {
-            // allow enumerated values for other attributes
-            const values =
-              attribute.type?.text
-                ?.replaceAll(`'`, '')
-                ?.replaceAll(`"`, '')
-                ?.split('|')
-                ?.map(i => i.trim()) ?? [];
+  const customElementsAllowedAttributes: AllowedAttributes = elements.reduce((acc, element) => {
+    const customAttrs =
+      element.manifest.attributes?.map(attribute => {
+        // allow arbitrary values for boolean,string, number, and icon name attributes
+        if (
+          attribute.type?.text === 'boolean' ||
+          attribute.type?.text === 'string' ||
+          attribute.type?.text === 'number' ||
+          attribute.type?.text.includes('IconName')
+        ) {
+          return attribute.name;
+        } else {
+          // allow enumerated values for other attributes
+          const values =
+            attribute.type?.text
+              ?.replaceAll(`'`, '')
+              ?.replaceAll(`"`, '')
+              ?.split('|')
+              ?.map(i => i.trim()) ?? [];
 
-            return {
-              name: attribute.name,
-              values
-            };
-          }
-        }) ?? [];
+          return {
+            name: attribute.name,
+            values
+          };
+        }
+      }) ?? [];
 
-      acc[element.name] = [...(acc[element.name] ?? []), ...formAttrs, ...customAttrs];
-      return acc;
-    }, {});
+    acc[element.name] = [...(acc[element.name] ?? []), ...formAttrs, ...customAttrs];
+    return acc;
+  }, {});
 
   const allowedSvgAttributes: AllowedAttributes = svgElements.reduce((acc, element) => {
     acc[element] = svgAttrs;

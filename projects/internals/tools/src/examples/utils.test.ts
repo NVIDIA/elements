@@ -1,11 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import type { MetadataExample } from '@nve-internals/metadata';
-import { getAvailableExamples, searchExamples, filterExamples, renderExampleMarkdown, wrapText } from './utils.js';
+import type { Example } from '@nve-internals/metadata';
+import { getAvailableExamples, searchExamples, renderExampleMarkdown, wrapText } from './utils.js';
 
 describe('utils', () => {
-  const mockExamples: MetadataExample[] = [
+  const mockExamples: Example[] = [
     {
-      id: 'ButtonBasic',
+      id: 'project-example_button-basic',
+      name: 'ButtonBasic',
       template: '<nve-button>Click me</nve-button>',
       summary: 'Basic button example',
       description: '',
@@ -13,7 +14,8 @@ describe('utils', () => {
       element: 'nve-button'
     },
     {
-      id: 'ButtonWithIcon',
+      id: 'project-example_button-with-icon',
+      name: 'ButtonWithIcon',
       template: '<nve-button><nve-icon name="star"></nve-icon>Star</nve-button>',
       summary: 'Button with icon example',
       description: '',
@@ -21,7 +23,8 @@ describe('utils', () => {
       element: 'nve-button'
     },
     {
-      id: 'DeprecatedExample',
+      id: 'project-example_deprecated-example',
+      name: 'DeprecatedExample',
       template: '<nve-old-component>Old</nve-old-component>',
       summary: 'This is deprecated',
       description: '',
@@ -30,7 +33,8 @@ describe('utils', () => {
       deprecated: true
     },
     {
-      id: 'AntiPatternExample',
+      id: 'project-example_anti-pattern-example',
+      name: 'AntiPatternExample',
       template: '<div style="color: red;">Bad practice</div>',
       summary: 'This is an anti-pattern',
       description: '',
@@ -38,7 +42,8 @@ describe('utils', () => {
       element: 'div'
     },
     {
-      id: 'CardComponent',
+      id: 'project-example_card-component',
+      name: 'CardComponent',
       template: '<nve-card>Content</nve-card>',
       summary: 'Card component example',
       description: '',
@@ -50,8 +55,8 @@ describe('utils', () => {
   describe('getAvailableExamples', () => {
     it('should return markdown format correctly', () => {
       const result = getAvailableExamples('markdown', mockExamples);
-      expect(result).toContain('## ButtonBasic');
-      expect(result).toContain('## ButtonWithIcon');
+      expect(result).toContain('## Button Basic (project-example_button-basic)');
+      expect(result).toContain('## Button With Icon (project-example_button-with-icon)');
       expect(result).toContain('Basic button example');
       expect(result).toContain('Button with icon example');
       expect(result).toContain('---');
@@ -62,12 +67,14 @@ describe('utils', () => {
       expect(Array.isArray(result)).toBe(true);
       expect(result).toHaveLength(3);
       expect(result[0]).toEqual({
-        id: 'ButtonBasic',
+        id: 'project-example_button-basic',
+        name: 'ButtonBasic',
         element: 'nve-button',
         summary: 'Basic button example'
       });
       expect(result[1]).toEqual({
-        id: 'ButtonWithIcon',
+        id: 'project-example_button-with-icon',
+        name: 'ButtonWithIcon',
         element: 'nve-button',
         summary: 'Button with icon example'
       });
@@ -82,9 +89,9 @@ describe('utils', () => {
     });
 
     it('should handle examples with missing summary', () => {
-      const examplesWithMissingDesc: Partial<MetadataExample>[] = [
-        { id: 'Test1', tags: [], element: 'nve-test', template: '', summary: 'Has summary' },
-        { id: 'Test2', tags: [], element: 'nve-test', template: '' } // missing summary
+      const examplesWithMissingDesc: Partial<Example>[] = [
+        { id: '', name: 'Test1', tags: [], element: 'nve-test', template: '', summary: 'Has summary' },
+        { id: '', name: 'Test2', tags: [], element: 'nve-test', template: '' } // missing summary
       ];
 
       const markdownResult = getAvailableExamples('markdown', examplesWithMissingDesc);
@@ -93,6 +100,7 @@ describe('utils', () => {
 
       const jsonResult = getAvailableExamples('json', examplesWithMissingDesc) as Array<{
         id: string;
+        name: string;
         summary?: string;
       }>;
       expect(jsonResult[0].summary).toBe('Has summary');
@@ -102,142 +110,42 @@ describe('utils', () => {
 
   describe('searchExamples', () => {
     it('should search and return markdown format', async () => {
-      const result = await searchExamples('button', 'markdown', mockExamples);
-      expect(result).toContain('## ButtonBasic');
-      expect(result).toContain('## ButtonWithIcon');
-      expect(result).toContain('Basic button example');
-      expect(result).toContain('Button with icon example');
+      const result = await searchExamples('button', 'markdown');
+      expect(typeof result).toBe('string');
+      expect(result).toContain('button');
     });
 
     it('should search and return JSON format', async () => {
-      const result = await searchExamples('button', 'json', mockExamples);
+      const result = await searchExamples('button', 'json');
       expect(Array.isArray(result)).toBe(true);
-      expect(result).toHaveLength(2);
-      const jsonResult = result as MetadataExample[];
-      expect(jsonResult[0].id).toBe('ButtonBasic');
-      expect(jsonResult[1].id).toBe('ButtonWithIcon');
+      expect(result.length).toBeGreaterThan(0);
+      expect(result.length).toBeLessThanOrEqual(5);
     });
 
     it('should handle empty query', async () => {
-      const result = await searchExamples('', 'json', mockExamples);
+      const result = await searchExamples('', 'json');
       expect(Array.isArray(result)).toBe(true);
       expect(result).toHaveLength(0);
     });
 
     it('should handle query with only noise words', async () => {
-      const result = await searchExamples('example examples story stories pattern patterns', 'json', mockExamples);
+      const result = await searchExamples('example examples story stories pattern patterns', 'json');
       expect(Array.isArray(result)).toBe(true);
-      // The query contains only noise words, but the function might still find matches
-      // in the mock data due to partial matches in other fields
-      expect(Array.isArray(result)).toBe(true);
-    });
-  });
-
-  describe('filterExamples', () => {
-    it('should filter out deprecated examples', async () => {
-      const result = await filterExamples('button', mockExamples);
-      const hasDeprecated = result.some(e => e.id === 'DeprecatedExample');
-      expect(hasDeprecated).toBe(false);
-    });
-
-    it('should filter out anti-pattern examples', async () => {
-      const result = await filterExamples('component', mockExamples);
-      const hasAntiPattern = result.some(e => e.id === 'AntiPatternExample');
-      expect(hasAntiPattern).toBe(false);
-    });
-
-    it('should score exact ID matches highest', async () => {
-      const result = await filterExamples('ButtonBasic', mockExamples);
-      expect(result[0].id).toBe('ButtonBasic');
-    });
-
-    it('should score element matches high', async () => {
-      const result = await filterExamples('nve-button', mockExamples);
-      expect(result[0].id).toBe('ButtonBasic');
-      expect(result[1].id).toBe('ButtonWithIcon');
-    });
-
-    it('should score description matches', async () => {
-      const result = await filterExamples('icon', mockExamples);
-      expect(result[0].id).toBe('ButtonWithIcon');
-    });
-
-    it('should handle camelCase ID splitting', async () => {
-      const result = await filterExamples('basic', mockExamples);
-      expect(result.some(e => e.id === 'ButtonBasic')).toBe(true);
-    });
-
-    it('should limit results to 5', async () => {
-      const manyExamples = Array.from({ length: 10 }, (_, i) => ({
-        id: `Test${i}`,
-        template: `<div>Test ${i}</div>`,
-        summary: `This is test ${i}`,
-        description: '',
-        tags: [],
-        element: 'div'
-      }));
-
-      const result = await filterExamples('test', manyExamples);
-      expect(result).toHaveLength(5);
-    });
-
-    it('should sort by score then summary length', async () => {
-      const examples = [
-        {
-          id: 'ShortDesc',
-          template: '<div>Short</div>',
-          summary: 'Short',
-          description: '',
-          tags: [],
-          element: 'div'
-        },
-        {
-          id: 'LongDescription',
-          template: '<div>Long</div>',
-          summary: 'This is a very long summary that should come after the short one when scores are equal',
-          description: '',
-          tags: [],
-          element: 'div'
-        }
-      ];
-
-      const result = await filterExamples('div', examples);
-      expect(result).toHaveLength(2);
-      expect(result[0].id).toBe('ShortDesc');
-      expect(result[1].id).toBe('LongDescription');
-    });
-
-    it('should handle case insensitive search', async () => {
-      const result = await filterExamples('BUTTON', mockExamples);
-      expect(result).toHaveLength(2);
-      expect(result[0].id).toBe('ButtonBasic');
-      expect(result[1].id).toBe('ButtonWithIcon');
-    });
-
-    it('should handle multiple word queries', async () => {
-      const result = await filterExamples('button icon', mockExamples);
-      expect(result.some(e => e.id === 'ButtonWithIcon')).toBe(true);
-    });
-
-    it('should remove noise words from query', async () => {
-      const result = await filterExamples('button example story pattern', mockExamples);
-      expect(result).toHaveLength(2);
-      expect(result[0].id).toBe('ButtonBasic');
-      expect(result[1].id).toBe('ButtonWithIcon');
     });
   });
 
   describe('renderExampleMarkdown', () => {
     it('should render complete example correctly', () => {
       const example = {
-        id: 'TestExample',
+        id: 'project-example_test-example',
+        name: 'TestExample',
         description: 'This is a test description',
         element: 'nve-test',
         template: '<nve-test>Content</nve-test>'
       };
 
       const result = renderExampleMarkdown(example);
-      expect(result).toContain('## TestExample (nve-test)');
+      expect(result).toContain('## Test Example (project-example_test-example)');
       expect(result).toContain('This is a test description');
       expect(result).toContain('```html');
       expect(result).toContain('<nve-test>Content</nve-test>');
@@ -245,49 +153,53 @@ describe('utils', () => {
 
     it('should handle example without element', () => {
       const example = {
-        id: 'TestExample',
+        id: 'project-example_test-example',
+        name: 'TestExample',
         description: 'This is a test description',
         template: '<div>Content</div>'
       };
 
       const result = renderExampleMarkdown(example);
-      expect(result).toContain('## TestExample');
+      expect(result).toContain('## Test Example (project-example_test-example)');
       expect(result).not.toContain(' - ');
     });
 
     it('should handle example without description', () => {
       const example = {
-        id: 'TestExample',
+        id: 'project-example_test-example',
+        name: 'TestExample',
         element: 'nve-test',
         template: '<nve-test>Content</nve-test>'
       };
 
       const result = renderExampleMarkdown(example);
-      expect(result).toContain('## TestExample (nve-test)');
+      expect(result).toContain('## Test Example (project-example_test-example)');
       expect(result).not.toContain('This is a test description');
       expect(result).toContain('```html');
     });
 
     it('should handle example without template', () => {
       const example = {
-        id: 'TestExample',
+        id: 'project-example_test-example',
+        name: 'TestExample',
         description: 'This is a test description',
         element: 'nve-test'
       };
 
       const result = renderExampleMarkdown(example);
-      expect(result).toContain('## TestExample (nve-test)');
+      expect(result).toContain('## Test Example (project-example_test-example)');
       expect(result).toContain('This is a test description');
       expect(result).not.toContain('```html');
     });
 
-    it('should handle example with only ID', () => {
+    it('should handle example with only name', () => {
       const example = {
-        id: 'TestExample'
+        id: 'project-example_test-example',
+        name: 'TestExample'
       };
 
       const result = renderExampleMarkdown(example);
-      expect(result).toBe('## TestExample');
+      expect(result).toBe('## Test Example (project-example_test-example)');
     });
   });
 
