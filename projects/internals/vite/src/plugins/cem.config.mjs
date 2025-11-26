@@ -124,7 +124,15 @@ function getExample(classDeclaration, path) {
   if (classDeclaration.metadata.example?.length) {
     return classDeclaration.metadata.example;
   } else {
+    const examplePath = path.replace('src', 'dist').replace('.ts', '.examples.json');
     const storyPath = path.replace('src', 'dist').replace('.ts', '.stories.json');
+
+    if (fs.existsSync(examplePath)) {
+      const exampleJSON = JSON.parse(fs.readFileSync(examplePath, 'utf-8'));
+      const example = exampleJSON.items[0]?.template?.trim();
+      return example ? example : '';
+    }
+
     if (fs.existsSync(storyPath)) {
       const storyJSON = JSON.parse(fs.readFileSync(storyPath, 'utf-8'));
       const example = storyJSON.items[0]?.template?.trim();
@@ -595,7 +603,7 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
       entry.descriptionText = removeValueDescriptionsFromText(entry.description);
       const itemsWithDescriptions = entry.type.values.filter(v => v.description);
       if (itemsWithDescriptions.length > 0) {
-        entry.description = `${entry.descriptionText}\n${itemsWithDescriptions.map(v => `- \`${v.name}\` ${v.description}`).join('\n')}`;
+        entry.description = `${entry.descriptionText}\n${itemsWithDescriptions.map(v => `- \`${v.value}\` ${v.description}`).join('\n\n')}`;
       }
     }
   }
