@@ -8,7 +8,7 @@ writeFileSync(
   JSON.stringify(
     {
       created: new Date().toISOString(),
-      releases
+      data: releases
     },
     null,
     2
