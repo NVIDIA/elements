@@ -22,8 +22,7 @@ tools.forEach(tool => {
   };
   const config = { title, inputSchema, outputSchema, description: `Elements: ${description}` };
   server.registerTool(toolName, config, async params => {
-    const toolResult = (await tool(params)) as unknown as { [x: string]: unknown };
-    const structuredContent = toolResult.status !== 'error' ? { result: toolResult.result } : toolResult;
+    const structuredContent = (await tool(params)) as unknown as { [x: string]: unknown };
     return { structuredContent, content: [{ type: 'text', text: JSON.stringify(structuredContent) }] };
   });
 });
@@ -31,9 +30,7 @@ tools.forEach(tool => {
 prompts.forEach(prompt => {
   const argsSchema = jsonSchemaToZod(prompt.argsSchema).shape;
   const config = { title: prompt.title, description: prompt.description, argsSchema };
-  server.registerPrompt(prompt.name, config, async params => {
-    return prompt.handler(params) as unknown as { [x: string]: unknown };
-  });
+  server.registerPrompt(prompt.name, config, async params => prompt.handler(params));
 });
 
 try {

@@ -170,7 +170,22 @@ export async function renderResult(result: unknown) {
   } else if (typeof result === 'string' && result.trim().startsWith('http') && !result.includes('\n')) {
     console.log(colors.complete(result.match(/.{1,80}/g).join('\n')));
   } else if (typeof result === 'string') {
-    marked.use(markedTerminal());
+    const colWidth = Math.floor(process.stdout.columns / 4);
+    const nameWidth = Math.max(24, colWidth);
+    const valueWidth = Math.max(24, colWidth);
+    const descriptionWidth = process.stdout.columns - nameWidth - valueWidth - 4;
+    marked.use(
+      markedTerminal({
+        reflowText: true,
+        tableOptions: {
+          wordWrap: true,
+          colWidths: [nameWidth, valueWidth, descriptionWidth],
+          style: {
+            head: ['bold']
+          }
+        }
+      })
+    );
     console.log(await marked.parse(result));
   } else {
     console.log(result);
