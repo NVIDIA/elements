@@ -1,6 +1,6 @@
 import { gzipSync } from 'fflate';
 import format from 'html-format';
-import type { MetadataSummary } from '@internals/metadata';
+import type { Element } from '@internals/metadata';
 import { getElementImports } from '../internal/utils.js';
 import { validateTemplate } from '../internal/validate.js';
 
@@ -16,46 +16,46 @@ interface PlaygroundOptions {
 export const playgroundTypes = ['default', 'react', 'preact', 'angular', 'lit'] as const;
 export type PlaygroundType = (typeof playgroundTypes)[number];
 
-export function createPlaygroundURL(source: string, metadata: MetadataSummary, options: PlaygroundOptions = {}) {
-  const result = options.trustedContent ? source : validateTemplate(source, metadata);
+export function createPlaygroundURL(source: string, elements: Element[], options: PlaygroundOptions = {}) {
+  const result = options.trustedContent ? source : validateTemplate(source, elements);
   const formattedSource = formatTemplate(result);
   let url = '';
 
   if (options.type === 'react') {
-    url = createURL(serialize(createReactFiles(formattedSource, metadata, options)), {
+    url = createURL(serialize(createReactFiles(formattedSource, elements, options)), {
       ...options,
       openFile: 'index.tsx',
       name: `react ${options.name ?? ''}`
     });
   } else if (options.type === 'preact') {
-    url = createURL(serialize(createPreactFiles(formattedSource, metadata, options)), {
+    url = createURL(serialize(createPreactFiles(formattedSource, elements, options)), {
       ...options,
       openFile: 'index.tsx',
       name: `preact ${options.name ?? ''}`
     });
   } else if (options.type === 'angular') {
-    url = createURL(serialize(createAngularFiles(formattedSource, metadata, options)), {
+    url = createURL(serialize(createAngularFiles(formattedSource, elements, options)), {
       ...options,
       openFile: 'index.ts',
       name: `angular ${options.name ?? ''}`
     });
   } else if (options.type === 'lit') {
-    url = createURL(serialize(createLitFiles(formattedSource, metadata, options)), {
+    url = createURL(serialize(createLitFiles(formattedSource, elements, options)), {
       ...options,
       openFile: 'index.ts',
       name: `lit ${options.name ?? ''}`
     });
   } else {
-    url = createURL(serialize(createDefaultFiles(formattedSource, metadata, options)), options);
+    url = createURL(serialize(createDefaultFiles(formattedSource, elements, options)), options);
   }
 
   return url;
 }
 
-export function createDefaultFiles(content, metadata: MetadataSummary, options: PlaygroundOptions) {
+export function createDefaultFiles(content, elements: Element[], options: PlaygroundOptions) {
   const files: Record<string, { content: string }> = {
     'index.html': { content: createIndexHTML(content, options) },
-    'index.ts': { content: `${getElementImports(content, metadata).join('\n')}` },
+    'index.ts': { content: `${getElementImports(content, elements).join('\n')}` },
     'importmap.json': { content: createImportMap() }
   };
 
@@ -71,36 +71,36 @@ export function createDefaultFiles(content, metadata: MetadataSummary, options: 
   return files;
 }
 
-export function createReactFiles(content, metadata: MetadataSummary, options: PlaygroundOptions) {
+export function createReactFiles(content, elements: Element[], options: PlaygroundOptions) {
   return {
     'index.html': { content: createIndexHTML(`<div id="root"></div>`, options) },
-    'index.tsx': { content: createReactIndexTSX(content, metadata) },
+    'index.tsx': { content: createReactIndexTSX(content, elements) },
     'global.ts': { content: createReactTSXGlobal() },
     'importmap.json': { content: createImportMap('react') }
   };
 }
 
-export function createPreactFiles(content, metadata: MetadataSummary, options: PlaygroundOptions) {
+export function createPreactFiles(content, elements: Element[], options: PlaygroundOptions) {
   return {
     'index.html': { content: createIndexHTML(`<div id="root"></div>`, options) },
-    'index.tsx': { content: createPreactIndexTSX(content, metadata) },
+    'index.tsx': { content: createPreactIndexTSX(content, elements) },
     'global.ts': { content: createPreactTSXGlobal() },
     'importmap.json': { content: createImportMap('preact') }
   };
 }
 
-export function createAngularFiles(content, metadata: MetadataSummary, options: PlaygroundOptions) {
+export function createAngularFiles(content, elements: Element[], options: PlaygroundOptions) {
   return {
     'index.html': { content: createIndexHTML(`<app-root></app-root>`, options) },
-    'index.ts': { content: createAngularIndexTS(content, metadata) },
+    'index.ts': { content: createAngularIndexTS(content, elements) },
     'importmap.json': { content: createImportMap('angular') }
   };
 }
 
-export function createLitFiles(content, metadata: MetadataSummary, options: PlaygroundOptions) {
+export function createLitFiles(content, elements: Element[], options: PlaygroundOptions) {
   return {
     'index.html': { content: createIndexHTML(`<app-root></app-root>`, options) },
-    'index.ts': { content: createLitIndexTS(content, metadata) },
+    'index.ts': { content: createLitIndexTS(content, elements) },
     'importmap.json': { content: createImportMap('lit') }
   };
 }
@@ -239,10 +239,10 @@ function createImportMap(framework: 'react' | 'preact' | 'angular' | 'lit' | 'va
   return JSON.stringify(importmap, null, 2);
 }
 
-function createReactIndexTSX(content: string, metadata: MetadataSummary) {
+function createReactIndexTSX(content: string, elements: Element[]) {
   return `import React from 'react';
 import { createRoot } from 'react-dom/client';
-${getElementImports(content, metadata).join('\n')}
+${getElementImports(content, elements).join('\n')}
 
 function App() {
   return (
@@ -266,10 +266,10 @@ declare module 'react' {
 }`;
 }
 
-function createPreactIndexTSX(content: string, metadata: MetadataSummary) {
+function createPreactIndexTSX(content: string, elements: Element[]) {
   return `/** @jsxImportSource preact */
 import { render } from 'preact';
-${getElementImports(content, metadata).join('\n')}
+${getElementImports(content, elements).join('\n')}
 
 function App() {
   return (
@@ -291,12 +291,12 @@ declare global {
 }`;
 }
 
-function createAngularIndexTS(content: string, metadata: MetadataSummary) {
+function createAngularIndexTS(content: string, elements: Element[]) {
   return `import 'zone.js';
 import '@angular/compiler';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-${getElementImports(content, metadata).join('\n')}
+${getElementImports(content, elements).join('\n')}
 
 @Component({
   selector: 'app-root',
@@ -320,10 +320,10 @@ bootstrapApplication(App);
 `;
 }
 
-function createLitIndexTS(content: string, metadata: MetadataSummary) {
+function createLitIndexTS(content: string, elements: Element[]) {
   return `import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
-${getElementImports(content, metadata).join('\n')}
+${getElementImports(content, elements).join('\n')}
 
 @customElement('app-root')
 export class App extends LitElement {

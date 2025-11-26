@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
+import type { Attribute, Element } from '@internals/metadata';
 import type { ToolMethod } from '../internal/tools.js';
 import { ApiService } from './service.js';
-import type { MetadataAttribute, MetadataCustomElementsManifestDeclaration } from '@internals/metadata';
 
 describe('ApiService', () => {
   it('should provide list tool', async () => {
@@ -38,11 +38,9 @@ describe('ApiService', () => {
   });
 
   it('should provide search tool with JSON format', async () => {
-    const result = (await ApiService.search({ query: 'button', format: 'json' })) as {
-      elements: MetadataCustomElementsManifestDeclaration[];
-      attributes: MetadataAttribute[];
-    };
-    expect(result.elements[0].tagName).toBe('nve-button');
+    const result = (await ApiService.search({ query: 'button', format: 'json' })) as (Element | Attribute)[];
+    expect(Array.isArray(result)).toBe(true);
+    expect(result.length).toBeGreaterThan(0);
     expect((ApiService.search as ToolMethod<unknown>).metadata.name).toBe('search');
     expect((ApiService.search as ToolMethod<unknown>).metadata.command).toBe('search');
     expect((ApiService.search as ToolMethod<unknown>).metadata.description).toBe(

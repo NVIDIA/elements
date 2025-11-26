@@ -55,6 +55,22 @@
     "./project/index.js": {
       "types": "./dist/project/index.d.ts",
       "default": "./dist/project/index.js"
+    },
+    "./changelogs": {
+      "types": "./dist/changelogs/index.d.ts",
+      "default": "./dist/changelogs/index.js"
+    },
+    "./changelogs/index.js": {
+      "types": "./dist/changelogs/index.d.ts",
+      "default": "./dist/changelogs/index.js"
+    },
+    "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
+      "default": "./dist/tokens/index.js"
+    },
+    "./tokens/index.js": {
+      "types": "./dist/tokens/index.d.ts",
+      "default": "./dist/tokens/index.js"
     }
   },
   "wireit": {
@@ -79,7 +95,8 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
-        "../metadata/static/index.json",
+        "../metadata/static/api.json",
+        "../metadata/static/projects.json",
         "../metadata/static/examples.json",
         "../../labs/lint/dist/**",
         "src/**",
@@ -169,11 +186,12 @@
     "fflate": "0.8.2",
     "html-format": "1.1.7",
     "glob": "catalog:",
-    "open": "10.1.2",
+    "minisearch": "7.2.0",
+    "open": "11.0.0",
     "publint": "catalog:",
     "sanitize-html": "2.17.0",
     "ts-morph": "catalog:",
-    "zod": "3.25.76"
+    "zod": "catalog:"
   },
   "devDependencies": {
     "@internals/eslint": "workspace:*",
