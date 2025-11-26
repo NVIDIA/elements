@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.13.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.5...@nvidia-elements/styles-v1.13.0) (2025-11-26)
+
+
+### Features
+
+* **styles:** bundle support ([0fcb3ea](https://github.com/NVIDIA/elements/commit/0fcb3ea37c31f21f3388ecda9797ab52551ff32f))
+
 ## [@nvidia-elements/styles-v1.12.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.4...@nvidia-elements/styles-v1.12.5) (2025-11-20)
 
 
