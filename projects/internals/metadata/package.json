@@ -7,14 +7,15 @@
     "dev": "node --experimental-strip-types ./src/metadata.ts",
     "ci": "wireit",
     "build": "wireit",
+    "generate:api": "wireit",
     "generate:tests": "wireit",
     "generate:examples": "wireit",
-    "generate:metadata": "wireit",
     "generate:usage": "wireit",
     "generate:lighthouse": "wireit",
     "generate:wireit": "wireit",
     "generate:downloads": "wireit",
     "generate:releases": "wireit",
+    "generate:projects": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
     "test:coverage": "wireit",
@@ -29,9 +30,13 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./services/metadata.service.js": {
-      "types": "./dist/services/metadata.service.d.ts",
-      "default": "./dist/src/services/metadata.service.js"
+    "./services/api.service.js": {
+      "types": "./dist/services/api.service.d.ts",
+      "default": "./dist/src/services/api.service.js"
+    },
+    "./services/projects.service.js": {
+      "types": "./dist/services/projects.service.d.ts",
+      "default": "./dist/src/services/projects.service.js"
     },
     "./services/tests.service.js": {
       "types": "./dist/services/tests.service.d.ts",
@@ -66,6 +71,12 @@
       "files": [
         "src/**",
         "!src/**/*.test.ts",
+        "static/downloads.json",
+        "static/lighthouse.json",
+        "static/releases.json",
+        "static/tests.json",
+        "static/usage.av-infra.json",
+        "static/usage.gitlab.json",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -76,70 +87,50 @@
       ],
       "dependencies": [
         "../vite:ci",
-        "generate:metadata",
+        "generate:api",
         "generate:examples",
+        "generate:projects",
         "generate:wireit"
       ]
     },
-    "generate:metadata": {
-      "command": "node --experimental-strip-types ./src/tasks/metadata.ts",
+    "generate:api": {
+      "command": "node --experimental-strip-types ./src/tasks/api.ts",
       "files": [
-        "./src/tasks/metadata.ts",
-        "./src/tasks/metadata.utils.ts",
+        "./src/tasks/api.ts",
+        "./src/tasks/api.utils.ts",
+        "./src/utils/utils.ts",
         "../../elements/src/internal/types/index.ts",
         "../../elements/package.json",
-        "../../elements/README.md",
-        "../../elements/CHANGELOG.md",
         "../../elements/dist/custom-elements.json",
         "../../elements-react/package.json",
-        "../../elements-react/README.md",
-        "../../elements-react/CHANGELOG.md",
         "../../elements-react/dist/custom-elements.json",
         "../../styles/package.json",
-        "../../styles/README.md",
-        "../../styles/CHANGELOG.md",
         "../../styles/dist/custom-elements.json",
         "../../testing/package.json",
-        "../../testing/README.md",
-        "../../testing/CHANGELOG.md",
         "../../testing/dist/custom-elements.json",
         "../../themes/package.json",
-        "../../themes/README.md",
-        "../../themes/CHANGELOG.md",
         "../../themes/dist/custom-elements.json",
         "../../labs/brand/package.json",
-        "../../labs/brand/README.md",
-        "../../labs/brand/CHANGELOG.md",
         "../../labs/brand/dist/custom-elements.json",
         "../../labs/code/package.json",
-        "../../labs/code/README.md",
-        "../../labs/code/CHANGELOG.md",
         "../../labs/code/dist/custom-elements.json",
         "../../labs/forms/package.json",
-        "../../labs/forms/README.md",
-        "../../labs/forms/CHANGELOG.md",
         "../../labs/forms/dist/custom-elements.json",
         "../../labs/behaviors-alpine/package.json",
-        "../../labs/behaviors-alpine/README.md",
-        "../../labs/behaviors-alpine/CHANGELOG.md",
         "../../labs/behaviors-alpine/dist/custom-elements.json",
         "../../labs/markdown/package.json",
-        "../../labs/markdown/README.md",
-        "../../labs/markdown/CHANGELOG.md",
         "../../labs/markdown/dist/custom-elements.json",
         "../../labs/playwright-screencast/package.json",
         "../../labs/playwright-screencast/README.md",
         "../../labs/playwright-screencast/CHANGELOG.md",
         "../../labs/playwright-screencast/dist/custom-elements.json",
         "../../monaco/package.json",
-        "../../monaco/README.md",
-        "../../monaco/CHANGELOG.md",
         "../../monaco/dist/custom-elements.json",
         "../../patterns/package.json",
         "../../patterns/dist/custom-elements.json"
       ],
       "output": [
-        "static/index.json"
+        "static/api.json"
       ],
       "dependencies": [
         {
@@ -181,19 +172,56 @@
         {
           "script": "../../monaco:build",
           "cascade": false
-        },
-        {
-          "script": "../../labs/behaviors-alpine:build",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/playwright-screencast:build",
-          "cascade": false
-        },
-        {
-          "script": "../patterns:build",
-          "cascade": false
         }
+      ]
+    },
+    "generate:projects": {
+      "command": "node --experimental-strip-types ./src/tasks/projects.ts",
+      "files": [
+        "./src/tasks/projects.ts",
+        "./src/tasks/projects.utils.ts",
+        "../../elements/package.json",
+        "../../elements/README.md",
+        "../../elements/CHANGELOG.md",
+        "../../elements-react/package.json",
+        "../../elements-react/README.md",
+        "../../elements-react/CHANGELOG.md",
+        "../../styles/package.json",
+        "../../styles/README.md",
+        "../../styles/CHANGELOG.md",
+        "../../testing/package.json",
+        "../../testing/README.md",
+        "../../testing/CHANGELOG.md",
+        "../../themes/package.json",
+        "../../themes/README.md",
+        "../../themes/CHANGELOG.md",
+        "../../labs/brand/package.json",
+        "../../labs/brand/README.md",
+        "../../labs/brand/CHANGELOG.md",
+        "../../labs/code/package.json",
+        "../../labs/code/README.md",
+        "../../labs/code/CHANGELOG.md",
+        "../../labs/forms/package.json",
+        "../../labs/forms/README.md",
+        "../../labs/forms/CHANGELOG.md",
+        "../../labs/behaviors-alpine/package.json",
+        "../../labs/behaviors-alpine/README.md",
+        "../../labs/behaviors-alpine/CHANGELOG.md",
+        "../../labs/markdown/package.json",
+        "../../labs/markdown/README.md",
+        "../../labs/markdown/CHANGELOG.md",
+        "../../labs/playwright-screencast/package.json",
+        "../../labs/playwright-screencast/README.md",
+        "../../labs/playwright-screencast/CHANGELOG.md",
+        "../../monaco/package.json",
+        "../../monaco/README.md",
+        "../../monaco/CHANGELOG.md",
+        "../../patterns/package.json",
+        "../../patterns/README.md",
+        "../../patterns/CHANGELOG.md"
+      ],
+      "output": [
+        "static/projects.json"
       ]
     },
     "generate:tests": {
@@ -418,7 +446,8 @@
         "static/usage.json"
       ],
       "dependencies": [
-        "generate:metadata"
+        "generate:api",
+        "generate:projects"
       ]
     },
     "generate:wireit": {
@@ -516,8 +545,7 @@
     }
   },
   "dependencies": {
-    "glob": "catalog:",
-    "ts-morph": "catalog:"
+    "minisearch": "7.2.0"
   },
   "devDependencies": {
     "@internals/eslint": "workspace:*",
@@ -525,7 +553,9 @@
     "@types/node": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "eslint": "catalog:",
+    "glob": "catalog:",
     "publint": "catalog:",
+    "ts-morph": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
