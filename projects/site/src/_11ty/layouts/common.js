@@ -212,11 +212,11 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropdown-group/') ? 'highlighted' : ''}><a href="docs/elements/dropdown-group/">Dropdown Group</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropzone/') ? 'highlighted' : ''}><a href="docs/elements/dropzone/">Dropzone</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/file/') ? 'highlighted' : ''}><a href="docs/elements/file/">File</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/elements/forms/') ? 'expanded' : ''} ${data.page.url === '/docs/elements/forms/' ? 'highlighted' : ''}>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/forms/') || data.page.url.includes('/docs/elements/control/') ? 'expanded' : ''} ${data.page.url === '/docs/elements/forms/' ? 'highlighted' : ''}>
       <a href="docs/elements/forms/">Forms</a>
       <nve-tree-node ${data.page.url.includes('/docs/elements/forms/validation/') ? 'highlighted' : ''}><a href="docs/elements/forms/validation/">Validation</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/elements/forms/controls/') ? 'highlighted' : ''}><a href="docs/elements/forms/controls/">Controls</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/elements/forms/actions/') ? 'highlighted' : ''}><a href="docs/elements/forms/actions/">Actions</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/elements/control/') ? 'highlighted' : ''}><a href="docs/elements/control/">Control</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/icon/') ? 'highlighted' : ''}><a href="docs/elements/icon/">Icon</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/icon-button/') ? 'highlighted' : ''}><a href="docs/elements/icon-button/">Icon Button</a></nve-tree-node>

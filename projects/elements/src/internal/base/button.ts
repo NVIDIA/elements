@@ -137,10 +137,8 @@ export class BaseButton extends LitElement {
    * The popover target action to be applied to the popover target element.
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/popoverTargetAction
    */
-  @property({ type: String, attribute: 'popovertargetaction', reflect: true }) popoverTargetAction:
-    | 'show'
-    | 'hide'
-    | 'toggle';
+  @property({ type: String, attribute: 'popovertargetaction', reflect: true })
+  popoverTargetAction: 'show' | 'hide' | 'toggle';
 
   /**
    * The id of the element to which the command is applied.

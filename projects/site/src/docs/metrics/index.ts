@@ -3,19 +3,19 @@ import { Chart } from 'chart.js/auto';
 import { getThemeTokens } from '@nvidia-elements/core';
 import {
   UsageService,
-  DownloadService,
-  MetadataService,
+  DownloadsService,
   ReleasesService,
   TestsService,
-  type ProjectUsage
+  type ProjectUsage,
+  ApiService
 } from '@nve-internals/metadata';
 
 const tokens = getThemeTokens();
-const usageMetrics = await UsageService.getMetadata();
-const downloadMetrics = await DownloadService.getDownloads();
-const metadataMetrics = await MetadataService.getMetadata();
-const releaseMetrics = await ReleasesService.getReleases();
-const testMetrics = await TestsService.getTests();
+const usageMetrics = await UsageService.getData();
+const downloadMetrics = await DownloadsService.getData();
+const releaseMetrics = await ReleasesService.getData();
+const apiMetrics = await ApiService.getData();
+const testMetrics = await TestsService.getData();
 const projectElementReferences = usageMetrics.projects.reduce(
   (p, n) => ({ ...p, [n.name]: n.elements }),
   {} as Record<string, { name: string; total: unknown }[]>
@@ -164,10 +164,10 @@ const elementReferenceTotal = usageMetrics.projects.reduce((p, n) => p + n.eleme
 const attributeReferenceTotal = usageMetrics.projects.reduce((p, n) => p + n.attributeReferenceTotal, 0);
 const importReferenceTotal = usageMetrics.projects.reduce((p, n) => p + n.importReferenceTotal, 0);
 const styleReferenceTotal = usageMetrics.projects.reduce((p, n) => p + n.styleReferenceTotal, 0);
-
-const componentReleases = Object.values(metadataMetrics.projects)
-  .flatMap(n => n.elements)
-  .reduce((p, n) => ({ ...p, [n.name]: n.manifest?.metadata?.since ?? '' }), {} as Record<string, string>);
+const componentReleases = apiMetrics.data.elements.reduce(
+  (p, n) => ({ ...p, [n.name]: n.manifest?.metadata?.since ?? '' }),
+  {} as Record<string, string>
+);
 
 const componentsByVersion = Object.entries(componentReleases)
   .filter(([_, version]) => version && version !== '') // Exclude empty versions
@@ -195,7 +195,7 @@ const versionMilestones = sortedReleaseVersions.map((version, idx) => ({
   cumulativeTotal: sortedReleaseVersions.slice(0, idx + 1).reduce((sum, v) => sum + componentsByVersion[v].length, 0)
 }));
 
-const sortedReleases = [...releaseMetrics.releases].reverse();
+const sortedReleases = [...releaseMetrics.data].reverse();
 
 const releasesByMonth = sortedReleases.reduce(
   (acc, release) => {

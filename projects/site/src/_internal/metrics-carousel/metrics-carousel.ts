@@ -170,12 +170,12 @@ export class MetricsCarousel extends LitElement {
 
   async #getMetrics(): Promise<MetricsCarouselItem[]> {
     // todo: this should be computed at build time with 11ty and not at runtime as this is a node library atm
-    const { MetadataService } = await import('@nve-internals/metadata/services/metadata.service.js');
     const { UsageService } = await import('@nve-internals/metadata/services/usage.service.js');
     const { TestsService } = await import('@nve-internals/metadata/services/tests.service.js');
-    const metrics = await MetadataService.getMetadata();
-    const tests = await TestsService.getTests();
-    const totalElements = Object.values(metrics.projects).flatMap(project => project.elements).length;
+    const { ApiService } = await import('@nve-internals/metadata/services/api.service.js');
+    const tests = await TestsService.getData();
+    const elements = await ApiService.getData();
+    const totalElements = elements.data.elements.length;
     const elementsTestCoverage = tests.projects['@nvidia-elements/core'].coverage.total.branches.pct;
     const totalUnitTests = Object.values(tests.projects)
       .flatMap(report => report.unit.numTotalTests ?? 0)
@@ -195,7 +195,7 @@ export class MetricsCarousel extends LitElement {
     const totalAutomatedTests =
       totalUnitTests + totalAxeTests + totalVisualTests + totalSsrTests + totalLighthouseTests;
 
-    const usageMetrics = await UsageService.getMetadata();
+    const usageMetrics = await UsageService.getData();
 
     let totalUsageMetrics = 0;
     for (const project of usageMetrics.projects) {

@@ -1,17 +1,17 @@
 // @ts-check
 
 import { ExamplesService } from '@nve-internals/tools/examples';
-import { MetadataService } from '@nve-internals/metadata';
+import { ApiService } from '@nve-internals/metadata';
 
-const metadata = await MetadataService.getMetadata();
-const elements = metadata.projects['@nvidia-elements/core'].elements;
-
+const elements = (await ApiService.getData()).data.elements;
 const stories = (await ExamplesService.getAll())
   .filter(
     story =>
-      story.id.includes('Default') &&
-      !story.element.includes('nve-page-loader') &&
-      !story.element.includes('nve-app-header')
+      story.name.includes('Default') &&
+      !story.element?.includes('nve-page-loader') &&
+      !story.element?.includes('nve-app-header') &&
+      !story.element?.includes('monaco') &&
+      !story.element?.includes('markdown')
   )
   .map(story => {
     const element = elements.find(e => e.name === story.element && !e.manifest?.deprecated);

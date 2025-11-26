@@ -1,24 +1,24 @@
 // @ts-check
 
-import { MetadataService, UsageService, DownloadService, ReleasesService, TestsService } from '@nve-internals/metadata';
+import { UsageService, DownloadsService, ReleasesService, TestsService, ApiService } from '@nve-internals/metadata';
 
 export const data = {
   title: 'Metrics',
   layout: 'docs.11ty.js'
 };
 
-const metadataMetrics = await MetadataService.getMetadata();
-const releases = await ReleasesService.getReleases();
-const testMetrics = await TestsService.getTests();
-const downloads = await DownloadService.getDownloads();
-const usageMetrics = await UsageService.getMetadata();
+const releases = await ReleasesService.getData();
+const testMetrics = await TestsService.getData();
+const downloads = await DownloadsService.getData();
+const usageMetrics = await UsageService.getData();
+const apiMetrics = await ApiService.getData();
 
 const usageMetricsReportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
   new Date(usageMetrics.created)
 );
 
 const referenceTotal = usageMetrics.projects.reduce((p, n) => p + n.referenceTotal, 0);
-const elementTotal = Object.values(metadataMetrics.projects).flatMap(project => project.elements).length;
+const elementTotal = apiMetrics.data.elements.length;
 
 const totalTests = Object.values(testMetrics.projects).reduce(
   (p, n) =>
@@ -115,7 +115,7 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium">${releases.releases.length.toLocaleString()} Total Cumulative Releases</h3>
+          <h3 nve-text="heading sm medium">${releases.data.length.toLocaleString()} Total Cumulative Releases</h3>
           <p nve-text="body muted sm">Total automated releases across all packages</p>
         </nve-card-header>
         <nve-card-content>
