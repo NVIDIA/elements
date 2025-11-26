@@ -28,7 +28,7 @@ export function render() {
         <li>
           <h2 nve-text="heading emphasis">${example.element}</h2>
           <ul nve-text="list nav">
-            ${example.examples.map(example => `<li><a nve-text="body sm" href="examples/${example.permalink}">${example.title}</a></li>`).join('')}
+            ${example.examples.map(example => `<li><a nve-text="body sm" href="examples/${example.permalink}">${example.name}</a></li>`).join('')}
           </ul>
         </li>`
         )

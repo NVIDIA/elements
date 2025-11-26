@@ -1,7 +1,7 @@
 {
   "name": "@nvidia-elements/markdown",
   "version": "0.1.2",
-  "description": "",
+  "description": "A suite of markdown components and utilities.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
     "type": "git",

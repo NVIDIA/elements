@@ -12,7 +12,7 @@ export function render() {
     <div nve-layout="row gap:md align:vertical-center">
       <h1 nve-text="heading lg">Metadata Source</h1>
     </div>
-    <p nve-text="body muted">Below is the raw metadata for the Elements system including, components, APIs, and usage metrics.</p>
+    <p nve-text="body muted">Below is the raw API metadata for the Elements system.</p>
   </div>
 
   <div nve-layout="column gap:xs align:stretch">
@@ -40,9 +40,8 @@ export function render() {
 </div>
 <script type="module">
   import '@nvidia-elements/monaco/input/index.js';
-  import { MetadataService } from '@internals/metadata/services/metadata.service.js';
-  // todo: this should be computed at build time with 11ty and not at runtime as this is a node library atm
-  const metrics = await MetadataService.getMetadata();
+  import { ApiService } from '@internals/metadata/services/api.service.js';
+  const metrics = await ApiService.getData();
   document.querySelector('nve-monaco-input').value = JSON.stringify(metrics, null, 2);
 </script> `;
 }

@@ -1,24 +1,23 @@
 // @ts-check
 
 import { join } from 'node:path';
-import { MetadataService, TestsService, WireitService } from '@internals/metadata';
+import { ApiService, TestsService, WireitService } from '@internals/metadata';
 import { PlaygroundService } from '@internals/tools/playground';
 import { ExamplesService } from '@internals/tools/examples';
 import { camelToKebab } from './_11ty/utils/index.js';
 
-/** @type {import('@internals/metadata').MetadataSummary} */
-const metadata = await MetadataService.getMetadata();
-
 const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
+const apiMetrics = await ApiService.getData();
+
 /** @type {import('@internals/metadata').ProjectElement[]} */
-const elements = Object.keys(metadata.projects).flatMap(packageName => metadata.projects[packageName].elements ?? []);
+const elements = apiMetrics.data.elements;
 
 /** @type {import('@internals/metadata').ProjectsTestSummary} */
-const tests = await TestsService.getTests();
+const tests = await TestsService.getData();
 
 /** @type {import('@internals/metadata').ProjectTestSummary} */
-const wireit = await WireitService.getGraph();
+const wireit = await WireitService.getData();
 
 const examples = (await ExamplesService.getAll())
   .filter(s => !s.template?.includes('${'))
@@ -32,7 +31,7 @@ const examples = (await ExamplesService.getAll())
     template: example.template,
     element: example.element,
     entrypoint: example.entrypoint,
-    title: camelToKebab(example.id),
+    name: example.name,
     elementName: example.element?.replace('nve-', ''),
     permalink: `${example.entrypoint?.replace('.stories.json', '-').replace('.examples.json', '-')}${camelToKebab(example.id)}/`
   }));
@@ -171,7 +170,6 @@ export const siteData = {
   elements,
   examples,
   stories: examples, // deprecated
-  metadata,
   integrations,
   tests,
   wireit
