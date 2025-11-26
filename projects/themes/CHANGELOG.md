@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.9.0...@nvidia-elements/themes-v1.10.0) (2025-11-26)
+
+
+### Features
+
+* **themes:** bundle support ([f7abca4](https://github.com/NVIDIA/elements/commit/f7abca4876063d032d7752069e4655a3a348d432))
+
 ## [@nvidia-elements/themes-v1.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.8.2...@nvidia-elements/themes-v1.9.0) (2025-11-19)
 
 
