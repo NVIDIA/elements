@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.49.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.6...@nvidia-elements/core-v1.49.0) (2025-11-26)
+
+
+### Features
+
+* **elements:** type bundle support ([a461b48](https://github.com/NVIDIA/elements/commit/a461b483fbcd857c0ffa760bd5437cac1b4b6382))
+
 ## [@nvidia-elements/core-v1.48.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.5...@nvidia-elements/core-v1.48.6) (2025-11-20)
 
 
