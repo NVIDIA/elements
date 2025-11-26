@@ -1,4 +1,4 @@
-import { MetadataService } from '@internals/metadata';
+import { ApiService } from '@internals/metadata';
 import { service, tool } from '../internal/tools.js';
 import { getSemanticTokens } from './utils.js';
 
@@ -41,7 +41,7 @@ export class TokensService {
   static async list(
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ name: string; description: string }[] | string> {
-    const metadata = await MetadataService.getMetadata();
-    return getSemanticTokens(format, metadata);
+    const apis = await ApiService.getData();
+    return getSemanticTokens(format, apis.data.tokens);
   }
 }
