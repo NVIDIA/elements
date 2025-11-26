@@ -3,6 +3,6 @@ import { TestsService } from './tests.service.js';
 
 describe('TestsService', () => {
   it('should be defined', () => {
-    expect(TestsService.getTests).toBeDefined();
+    expect(TestsService.getData).toBeDefined();
   });
 });

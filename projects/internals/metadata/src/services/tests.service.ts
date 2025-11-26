@@ -3,7 +3,7 @@ import type { ProjectsTestSummary } from '../utils/reports.js';
 export class TestsService {
   static #tests = null;
 
-  static async getTests(): Promise<ProjectsTestSummary> {
+  static async getData(): Promise<ProjectsTestSummary> {
     if (!TestsService.#tests) {
       try {
         TestsService.#tests = (await import('../../static/tests.json', { with: { type: 'json' } })).default;

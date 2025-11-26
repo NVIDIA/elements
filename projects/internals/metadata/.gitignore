@@ -1,4 +1,5 @@
-static/index.json
+static/api.json
+static/projects.json
 static/examples.json
 static/stories.json
 static/wireit.json
