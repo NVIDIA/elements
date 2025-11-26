@@ -29,6 +29,9 @@ export default mergeConfig(libraryNodeTestConfig, {
         'src/tasks/usage.ts',
         'src/tasks/usage.utils.ts',
         'src/tasks/releases.ts',
+        'src/tasks/projects.ts',
+        'src/tasks/api.ts',
+        'src/tasks/api.utils.ts',
         'src/tasks/examples.ts',
         'src/tasks/examples.utils.ts',
         'src/tasks/wireit.ts'

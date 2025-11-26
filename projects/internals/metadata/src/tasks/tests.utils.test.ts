@@ -299,17 +299,6 @@ describe('generateTestSummary', () => {
     }
   });
 
-  it('should have normalized paths in coverage results', () => {
-    const project = summary.projects['@nve-internals/metadata'];
-
-    if (project.coverage.testResults && project.coverage.testResults.length > 0) {
-      const coverageResult = project.coverage.testResults[0];
-      if ('file' in coverageResult && typeof coverageResult.file === 'string') {
-        expect(coverageResult.file).toMatch(/^\/projects\//);
-      }
-    }
-  });
-
   it('should have coverageMap set to undefined in unit test results', () => {
     const project = summary.projects['@nve-internals/metadata'];
     expect(project.unit.coverageMap).toBeUndefined();

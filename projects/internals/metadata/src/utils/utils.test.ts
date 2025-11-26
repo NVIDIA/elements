@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { MetadataSummary } from '../utils/reports.js';
-import type { Attribute } from '../types.js';
+import type { Attribute, CustomElementManifest } from '../types.js';
 import {
   attributeMetadataToMarkdown,
   changelogMarkdownToJSON,
@@ -9,46 +8,31 @@ import {
 } from './utils.js';
 
 describe('elementMetadataToMarkdown', () => {
-  const metadata = {
-    projects: {
-      '@nvidia-elements/core': {
-        elements: [
-          {
-            name: 'nve-button',
-            manifest: {
-              tagName: 'nve-button',
-              description: 'button description',
-              slots: [{ name: 'slot', description: 'slot description' }],
-              attributes: [
-                { name: 'attribute', description: 'attribute description', type: { text: 'attribute type' } }
-              ],
-              members: [{ name: 'member', description: 'member description', type: { text: 'member type' } }],
-              cssProperties: [
-                { name: 'cssProperty', description: 'cssProperty description', type: { text: 'cssProperty type' } }
-              ],
-              events: [{ name: 'event', description: 'event description' }],
-              metadata: {
-                entrypoint: '@nvidia-elements/core/button',
-                example: '<nve-button>Hello</nve-button>'
-              }
-            }
-          },
-          {
-            name: 'nve-badge',
-            manifest: {
-              tagName: 'nve-badge',
-              metadata: {
-                entrypoint: '@nvidia-elements/core/badge'
-              }
-            }
-          }
-        ]
-      }
+  const buttonManifest = {
+    tagName: 'nve-button',
+    description: 'button description',
+    slots: [{ name: 'slot', description: 'slot description' }],
+    attributes: [{ name: 'attribute', description: 'attribute description', type: { text: 'attribute type' } }],
+    members: [{ name: 'member', description: 'member description', type: { text: 'member type' } }],
+    cssProperties: [
+      { name: 'cssProperty', description: 'cssProperty description', type: { text: 'cssProperty type' } }
+    ],
+    events: [{ name: 'event', description: 'event description' }],
+    metadata: {
+      entrypoint: '@nvidia-elements/core/button',
+      example: '<nve-button>Hello</nve-button>'
     }
-  } as unknown as MetadataSummary;
+  } as unknown as CustomElementManifest;
+
+  const badgeManifest = {
+    tagName: 'nve-badge',
+    metadata: {
+      entrypoint: '@nvidia-elements/core/badge'
+    }
+  } as unknown as CustomElementManifest;
 
   it('should create CEM markdown', () => {
-    const markdown = elementMetadataToMarkdown(metadata.projects['@nvidia-elements/core'].elements[0].manifest);
+    const markdown = elementMetadataToMarkdown(buttonManifest);
     expect(markdown.includes('## nve-button')).toBe(true);
     expect(markdown.includes('button description')).toBe(true);
     expect(markdown.includes('### Example')).toBe(true);
@@ -56,28 +40,24 @@ describe('elementMetadataToMarkdown', () => {
     expect(markdown.includes('### Import')).toBe(true);
     expect(markdown.includes('@nvidia-elements/core/button')).toBe(true);
     expect(markdown.includes('### Slots')).toBe(true);
-    expect(markdown.includes('| slot | slot description |')).toBe(true);
-    expect(markdown.includes('### Attributes')).toBe(true);
-    expect(markdown.includes('| attribute | `attribute type` | attribute description |')).toBe(true);
-    expect(markdown.includes('### Properties')).toBe(true);
+    expect(markdown.includes('| slot | `string` | slot description |')).toBe(true);
+    expect(markdown.includes('### Properties / Attributes')).toBe(true);
     expect(markdown.includes('| member | `member type` | member description |')).toBe(true);
     expect(markdown.includes('### Events')).toBe(true);
-    expect(markdown.includes('| event | event description |')).toBe(true);
+    expect(markdown.includes('| event | `CustomEvent` | event description |')).toBe(true);
     expect(markdown.includes('### CSS Properties')).toBe(true);
-    expect(markdown.includes('| cssProperty | cssProperty description |')).toBe(true);
+    expect(markdown.includes('| cssProperty | `string` | cssProperty description |')).toBe(true);
   });
 
   it('should create CEM markdown with placeholders', () => {
-    const markdown = elementMetadataToMarkdown(metadata.projects['@nvidia-elements/core'].elements[1].manifest);
+    const markdown = elementMetadataToMarkdown(badgeManifest);
     expect(markdown.includes('## nve-badge')).toBe(true);
     expect(markdown.includes('No example available.')).toBe(true);
     expect(markdown.includes('### Import')).toBe(true);
     expect(markdown.includes('@nvidia-elements/core/badge')).toBe(true);
     expect(markdown.includes('### Slots')).toBe(true);
     expect(markdown.includes('No slots available.')).toBe(true);
-    expect(markdown.includes('### Attributes')).toBe(true);
-    expect(markdown.includes('No Attributes available.')).toBe(true);
-    expect(markdown.includes('### Properties')).toBe(true);
+    expect(markdown.includes('### Properties / Attributes')).toBe(true);
     expect(markdown.includes('No Properties available.')).toBe(true);
     expect(markdown.includes('### Events')).toBe(true);
     expect(markdown.includes('No Custom Events available.')).toBe(true);
@@ -392,8 +372,8 @@ describe('attributeMetadataToMarkdown', () => {
     expect(markdown.includes('### Example')).toBe(true);
     expect(markdown.includes('<nve-button theme="primary">Click me</nve-button>')).toBe(true);
     expect(markdown.includes('### Values')).toBe(true);
-    expect(markdown.includes('| Attribute | Values |')).toBe(true);
-    expect(markdown.includes('| `theme` | `primary`, `secondary`, `danger` |')).toBe(true);
+    expect(markdown.includes('| name | type | value  |')).toBe(true);
+    expect(markdown.includes('| `theme` | `string` |`primary`, `secondary`, `danger` |')).toBe(true);
   });
 
   it('should show placeholder when example is missing', () => {
@@ -412,7 +392,7 @@ describe('attributeMetadataToMarkdown', () => {
     expect(markdown.includes('### Example')).toBe(true);
     expect(markdown.includes('No example available.')).toBe(true);
     expect(markdown.includes('### Values')).toBe(true);
-    expect(markdown.includes('| `size` | `small`, `medium`, `large` |')).toBe(true);
+    expect(markdown.includes('| `size` | `string` |`small`, `medium`, `large` |')).toBe(true);
   });
 
   it('should filter out values containing pipe character', () => {
@@ -431,7 +411,7 @@ describe('attributeMetadataToMarkdown', () => {
 
     const markdown = attributeMetadataToMarkdown(attribute);
 
-    expect(markdown.includes('| `variant` | `info`, `warning`, `success` |')).toBe(true);
+    expect(markdown.includes('| `variant` | `string` |`info`, `warning`, `success` |')).toBe(true);
     expect(markdown.includes('error|danger')).toBe(false);
   });
 
@@ -451,7 +431,7 @@ describe('attributeMetadataToMarkdown', () => {
 
     const markdown = attributeMetadataToMarkdown(attribute);
 
-    expect(markdown.includes('| `status` | `active`, `inactive` |')).toBe(true);
+    expect(markdown.includes('| `status` | `string` |`active`, `inactive` |')).toBe(true);
     expect(markdown.includes('@deprecated')).toBe(false);
     expect(markdown.includes('user@email')).toBe(false);
   });
@@ -472,7 +452,7 @@ describe('attributeMetadataToMarkdown', () => {
 
     const markdown = attributeMetadataToMarkdown(attribute);
 
-    expect(markdown.includes('| `align` | `left`, `center`, `right` |')).toBe(true);
+    expect(markdown.includes('| `align` | `string` |`left`, `center`, `right` |')).toBe(true);
     expect(markdown.includes('left&right')).toBe(false);
   });
 
@@ -489,7 +469,7 @@ describe('attributeMetadataToMarkdown', () => {
 
     expect(markdown.includes('## custom')).toBe(true);
     expect(markdown.includes('Custom attribute')).toBe(true);
-    expect(markdown.includes('| `custom` |  |')).toBe(true);
+    expect(markdown.includes('| `custom` | `string` | |')).toBe(true);
   });
 
   it('should handle attribute with all values filtered out', () => {
@@ -505,7 +485,7 @@ describe('attributeMetadataToMarkdown', () => {
 
     expect(markdown.includes('## special')).toBe(true);
     expect(markdown.includes('Special attribute')).toBe(true);
-    expect(markdown.includes('| `special` |  |')).toBe(true);
+    expect(markdown.includes('| `special` | `string` | |')).toBe(true);
   });
 
   it('should trim example content', () => {
@@ -534,7 +514,7 @@ describe('attributeMetadataToMarkdown', () => {
     const markdown = attributeMetadataToMarkdown(attribute);
 
     expect(markdown.includes('## data-test-id')).toBe(true);
-    expect(markdown.includes('| `data-test-id` | `test`, `example` |')).toBe(true);
+    expect(markdown.includes('| `data-test-id` | `string` |`test`, `example` |')).toBe(true);
   });
 
   it('should handle single value', () => {
@@ -548,7 +528,7 @@ describe('attributeMetadataToMarkdown', () => {
 
     const markdown = attributeMetadataToMarkdown(attribute);
 
-    expect(markdown.includes('| `disabled` | `true` |')).toBe(true);
+    expect(markdown.includes('| `disabled` | `string` |`true` |')).toBe(true);
   });
 });
 
