@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.49.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.49.0...@nvidia-elements/core-v1.49.1) (2025-11-26)
+
+
+### Bug Fixes
+
+* **elements:** base component theme ([58141e5](https://github.com/NVIDIA/elements/commit/58141e551adbd5ffdd7fb8cfa4a4049ef711dbe4))
+
 ## [@nvidia-elements/core-v1.49.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.48.6...@nvidia-elements/core-v1.49.0) (2025-11-26)
 
 
