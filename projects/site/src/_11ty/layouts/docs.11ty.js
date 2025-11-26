@@ -67,10 +67,10 @@ export function render(data) {
               ${data.tag ? `<h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>${elementSummary(data.tag)}` : ''}
               ${
                 data.tag &&
-                !data.page.url.includes('/elements/forms/') &&
                 (!data.page.url.includes('/data-grid/') ||
                   data.page.url.endsWith('/data-grid/') ||
-                  data.page.url.endsWith('/data-grid/api/'))
+                  data.page.url.endsWith('/data-grid/api/') ||
+                  data.page.url.endsWith('/data-grid/examples/'))
                   ? `
               <nve-tabs id="doc-tabs">
                 ${componentDocTabs

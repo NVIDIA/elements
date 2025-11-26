@@ -1,3 +1,5 @@
+// @ts-check
+
 import { EleventyRenderPlugin, IdAttributePlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
@@ -19,9 +21,9 @@ import { renderArtifactoryUsageShortcode } from './src/_11ty/shortcodes/artifact
 import { svgLogosShortcode } from './src/_11ty/shortcodes/svg-logos.js';
 import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
-import { MetadataService } from '@internals/metadata';
+import { ApiService } from '@internals/metadata';
 
-const metadata = await MetadataService.getMetadata();
+const apis = await ApiService.getData();
 
 /**
  * List of components that benefit from Server-Side Rendering (SSR).
@@ -50,10 +52,16 @@ const ssrEntrypoints = new Set([
  */
 const entrypoints = [
   ...new Set(
-    metadata.projects['@nvidia-elements/core'].elements
-      .filter(e => e.manifest?.metadata?.entrypoint && ssrEntrypoints.has(e.manifest?.metadata?.entrypoint))
+    apis.data.elements
+      .filter(
+        e =>
+          e.manifest?.metadata?.entrypoint &&
+          e.manifest.metadata.entrypoint.includes('@nvidia-elements/core') &&
+          e.manifest?.deprecated !== 'true' &&
+          ssrEntrypoints.has(e.manifest?.metadata?.entrypoint)
+      )
       .map(
-        e => `node_modules/${e.manifest.metadata.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`
+        e => `node_modules/${e.manifest?.metadata?.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`
       )
   )
 ];

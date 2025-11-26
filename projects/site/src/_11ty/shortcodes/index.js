@@ -19,7 +19,7 @@ import '${element?.manifest?.metadata?.entrypoint}/define.js';
 \`\`\`
 
 \`\`\`html
-${examples.find(s => s.id === 'Default' && s.element === tag)?.template}
+${examples.find(s => s.name === 'Default' && s.element === tag)?.template}
 \`\`\`
 `
     : '';
