@@ -12,9 +12,20 @@ export const Default = {
 <nve-dropzone name="files" style="--min-height: 200px;"></nve-dropzone>`
 };
 
-
 export const Icon = {
   render: () => html`
+<style>
+  nve-dropzone nve-icon {
+    --color: red;
+    background: var(--nve-sys-layer-canvas-accent-background);
+  }
+
+  nve-dropzone[highlighted] nve-icon,
+  nve-dropzone:hover nve-icon {
+    --color: var(--nve-sys-text-white-color);
+    background: var(--nve-sys-accent-primary-background);
+  }
+</style>
 <nve-dropzone name="files">
   <nve-icon slot="icon" name="document"></nve-icon>
 </nve-dropzone>
@@ -27,8 +38,8 @@ export const Form = {
   <section>
     <nve-control>
       <nve-dropzone name="files" accept="image/gif, image/jpeg, image/png" max-file-size="1048576"></nve-dropzone>
-      <nve-control-message error="typeMismatch">incorrect file type - only images allowed</nve-control-message>
-      <nve-control-message error="rangeOverflow">file too big - maximum 1.00 MB allowed</nve-control-message>
+      <nve-control-message error="typeMismatch">Unsupported file type — this upload only accepts images</nve-control-message>
+      <nve-control-message error="rangeOverflow">File too big - maximum 1.00 MB allowed</nve-control-message>
     </nve-control>
   </section>
   <nve-button type="submit">submit</nve-button>
