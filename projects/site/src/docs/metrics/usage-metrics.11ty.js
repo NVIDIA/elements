@@ -1,6 +1,6 @@
 // @ts-check
 
-import { MetadataService, UsageService } from '@nve-internals/metadata';
+import { UsageService } from '@nve-internals/metadata';
 import { compareVersions } from 'compare-versions';
 
 export const data = {
@@ -8,8 +8,7 @@ export const data = {
   layout: 'docs.11ty.js'
 };
 
-const metrics = await MetadataService.getMetadata();
-const metricsUsage = await UsageService.getMetadata();
+const metricsUsage = await UsageService.getData();
 const elementReferenceTotal = metricsUsage.projects.reduce((p, n) => p + n.elementReferenceTotal, 0);
 const attributeReferenceTotal = metricsUsage.projects.reduce((p, n) => p + n.attributeReferenceTotal, 0);
 const importReferenceTotal = metricsUsage.projects.reduce((p, n) => p + n.importReferenceTotal, 0);
@@ -68,7 +67,7 @@ export function render() {
         .map(project => {
           const { elementReferenceTotal, importReferenceTotal, styleReferenceTotal } = computeReferences(project);
           return /* html */ `<nve-grid-row>
-          <nve-grid-cell><a href="${project.url}" target="_blank">${project.name ?? 'unknown'}</a></nve-grid-cell>
+          <nve-grid-cell><a nve-text="link" href="${project.url}" target="_blank">${project.name ?? 'unknown'}</a></nve-grid-cell>
           <nve-grid-cell>${project.url.includes('git-av.nvidia.com') ? 'AV Infra' : 'Gitlab'}</nve-grid-cell>
           <nve-grid-cell><code nve-text="code">${project.path}</code></nve-grid-cell>
           <nve-grid-cell>${getVersionBadge(project.elementsVersion)}</nve-grid-cell>
@@ -136,7 +135,7 @@ function computeReferences(project) {
 }
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
-  new Date(metrics.created)
+  new Date(metricsUsage.created)
 );
 
 function getVersionNum(value) {
