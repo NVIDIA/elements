@@ -1,7 +1,7 @@
-import type { MetadataSummary, Token } from '@nve-internals/metadata';
+import type { Token } from '@nve-internals/metadata';
 
-export function getSemanticTokens(format: 'markdown' | 'json', metadata: MetadataSummary) {
-  const tokens: Token[] = metadata.projects['@nvidia-elements/themes'].tokens
+export function getSemanticTokens(format: 'markdown' | 'json', tokens: Token[]) {
+  const filteredTokens: Token[] = tokens
     .filter(
       token =>
         !token.name.includes('nve-config-') &&
@@ -23,8 +23,8 @@ export function getSemanticTokens(format: 'markdown' | 'json', metadata: Metadat
     return `## CSS Variables\n\nAvailable semantic design tokens for theming.
 | name     | value |
 | -------- | ----- |
-${tokens.map(token => `| ${token.name} | ${token.value} |`).join('\n')}`;
+${filteredTokens.map(token => `| ${token.name} | ${token.value} |`).join('\n')}`;
   } else if (format === 'json') {
-    return tokens;
+    return filteredTokens;
   }
 }

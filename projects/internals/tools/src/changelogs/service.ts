@@ -1,10 +1,11 @@
-import { getChangelogs, searchChangelogs } from './utils.js';
+import { ProjectsService } from '@nve-internals/metadata';
+import { fuzzyMatch } from '../internal/search.js';
 import { service, tool } from '../internal/tools.js';
-import { MetadataService } from '@nve-internals/metadata';
 
-const metadata = await MetadataService.getMetadata();
-const packageNames = Object.keys(metadata.projects).filter(p => metadata.projects[p].changelog);
 const MAX_LINE_COUNT = 1024;
+const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
+const packageNames = projects.map(p => p.name);
+const changelogs = projects.reduce((acc, p) => ({ ...acc, [p.name]: p.changelog }), {});
 
 @service()
 export class ChangelogsService {
@@ -38,8 +39,7 @@ export class ChangelogsService {
   static async list(
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ [key: string]: string } | string> {
-    const changelogs = getChangelogs(metadata);
-    const maxLength = MAX_LINE_COUNT / Object.keys(changelogs).length;
+    const maxLength = MAX_LINE_COUNT / Object.keys(projects).length;
     const markdown = Object.entries(changelogs)
       .map(([key, value]: [string, string]) => `# ${key}\n\n${value.split('\n').slice(0, maxLength).join('\n')}`)
       .join('\n\n---\n\n');
@@ -86,8 +86,13 @@ export class ChangelogsService {
     name: string;
     format?: 'markdown' | 'json';
   }): Promise<{ [key: string]: string } | string> {
-    const changelog = await searchChangelogs(name, metadata);
+    const changelog = await searchChangelogs(name, changelogs);
     const markdown = changelog.split('\n').slice(0, MAX_LINE_COUNT).join('\n');
     return format && format !== 'markdown' ? { [name]: changelog } : markdown;
   }
+}
+
+export function searchChangelogs(query: string, changelogs: { [key: string]: string }) {
+  const matches = fuzzyMatch(query, Object.keys(changelogs));
+  return changelogs[matches[0]];
 }

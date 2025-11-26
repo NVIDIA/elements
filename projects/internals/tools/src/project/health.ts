@@ -1,13 +1,13 @@
 import { publint as publintFn } from 'publint';
-import { MetadataService } from '@nve-internals/metadata';
+import { ProjectsService } from '@nve-internals/metadata';
 import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.js';
 import type { ReportCheck, Report, PackageData } from '../internal/types.js';
 import { getPackageJson } from '../internal/node.js';
 
 export async function getHealthReport(cwd: string, type: 'application' | 'library') {
   const packageJson = getPackageJson(cwd);
-  const metadata = await MetadataService.getMetadata();
-  const currentVersions = await getLatestPublishedVersions(metadata);
+  const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
+  const currentVersions = await getLatestPublishedVersions(projects);
 
   let report: Report = {
     dependencies: await checkDependencies(packageJson, currentVersions)
