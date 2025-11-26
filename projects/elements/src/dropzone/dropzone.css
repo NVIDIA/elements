@@ -40,6 +40,12 @@
   background: var(--nve-sys-layer-canvas-accent-background);
 }
 
+slot[name='icon']::slotted(*) {
+  padding: var(--nve-ref-space-xs);
+  border-radius: var(--nve-ref-border-radius-sm);
+  background: var(--nve-sys-layer-canvas-accent-background);
+}
+
 .text-emphasized {
   color: var(--nve-sys-text-emphasis-color);
 }
@@ -69,6 +75,11 @@
   --border-color: var(--nve-ref-border-color-emphasis);
 
   .icon {
+    background: var(--nve-sys-accent-secondary-background);
+    --color: var(--nve-sys-text-white-color);
+  }
+
+  slot[name='icon']::slotted(*) {
     background: var(--nve-sys-accent-secondary-background);
     --color: var(--nve-sys-text-white-color);
   }
