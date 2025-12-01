@@ -8,8 +8,13 @@ describe('GlobalStateService', () => {
     window.NVE_ELEMENTS.state.elementRegistry = {};
   });
 
-  it('should provide an intial state object', () => {
+  it('should provide an initial state object', () => {
     expect(GlobalStateService.state.versions[0]).toBe('0.0.0');
+  });
+
+  it('should provide host details', () => {
+    expect(GlobalStateService.state.moduleHost).toBeDefined();
+    expect(GlobalStateService.state.pageHost).toBeDefined();
   });
 
   it('should merge state updates', async () => {
