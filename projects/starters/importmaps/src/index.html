@@ -1,77 +1,35 @@
-<!doctype html>
-<html lang="en" nve-theme="dark" nve-transition="auto">
+<!DOCTYPE html>
+<html lang="en" nve-theme="dark">
   <head>
-    <title>Elements + Import Maps</title>
-    <meta charset="UTF-8" />
+    <title>Import Map Starter + @nvidia-elements/core</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A simple starter using Elements and TypeScript." />
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/themes@latest/dist/fonts/inter.css" />
-    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/themes@latest/dist/index.css" />
-    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/themes@latest/dist/dark.css" />
-    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/styles@latest/dist/typography.css" />
-    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/styles@latest/dist/layout.css" />
-    <link rel="stylesheet" type="text/css" href="https://https://esm.sh/@nvidia-elements/styles@latest/dist/view-transitions.css" />
     <script type="importmap">
       {
         "imports": {
-          "@nvidia-elements/core": "https://https://esm.sh/@nvidia-elements/core@latest",
-          "@nvidia-elements/core/": "https://https://esm.sh/@nvidia-elements/core@latest/"
+          "lit": "/node_modules/lit/index.js",
+          "lit/": "/node_modules/lit/",
+          "lit-html": "/node_modules/lit-html/lit-html.js",
+          "lit-html/": "/node_modules/lit-html/",
+          "lit-element/lit-element.js": "/node_modules/lit-element/lit-element.js",
+          "lit-element/": "/node_modules/lit-element/",
+          "@lit/reactive-element": "/node_modules/@lit/reactive-element/reactive-element.js",
+          "@lit/reactive-element/": "/node_modules/@lit/reactive-element/",
+          "@nvidia-elements/core": "/node_modules/@nvidia-elements/core/dist/index.js",
+          "@nvidia-elements/core/": "/node_modules/@nvidia-elements/core/dist/"
         }
       }
     </script>
+    <link rel="stylesheet" type="text/css" href="node_modules/@nvidia-elements/themes/dist/fonts/inter.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/@nvidia-elements/themes/dist/index.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/@nvidia-elements/themes/dist/dark.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/@nvidia-elements/styles/dist/typography.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/@nvidia-elements/styles/dist/layout.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/@nvidia-elements/styles/dist/view-transitions.css" />
     <script type="module">
-      import '@nvidia-elements/core/page/define.js';
-      import '@nvidia-elements/core/page-header/define.js';
-      import '@nvidia-elements/core/button/define.js';
-      import '@nvidia-elements/core/breadcrumb/define.js';
-      import '@nvidia-elements/core/drawer/define.js';
-      import '@nvidia-elements/core/menu/define.js';
-      import '@nvidia-elements/core/logo/define.js';
+      import '@nvidia-elements/core/alert/define.js';
     </script>
   </head>
-  <body>
-    <nve-page>
-      <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
-        <a slot="prefix" href="https://NVIDIA.github.io/elements/">Elements</a>
-        <nve-button container="flat"><a href="https://NVIDIA.github.io/elements/docs/integrations/angular/" target="_blank">Catalog</a></nve-button>
-        <nve-button container="flat"><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button>
-        <nve-button container="flat"><a href="https://NVIDIA.github.io/elements/starters/">Starters</a></nve-button>
-        <nve-button container="flat"><a href="https://github.com/NVIDIA/elements/" target="_blank">Gitlab</a></nve-button>
-      </nve-page-header>
-      <nve-page-panel slot="left" size="sm">
-        <nve-page-panel-content>
-          <nve-menu>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/angular/">Angular</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/bundles/">Bundles</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/eleventy/">Eleventy</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/hugo/">Hugo</a></nve-menu-item>
-            <nve-menu-item current="page"><a href="https://NVIDIA.github.io/elements/starters/importmaps/">Import Maps</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/mpa/">MPA</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/react/">React</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/solidjs/">SolidJS</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/svelte/">Svelte</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/typescript/">TypeScript</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/vue/">Vue</a></nve-menu-item>
-            <nve-divider></nve-divider>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/docs/integrations/go/" target="_blank">Go</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/docs/integrations/nextjs/" target="_blank">NextJS</a></nve-menu-item>
-          </nve-menu>
-        </nve-page-panel-content>
-      </nve-page-panel>
-      <main nve-layout="column gap:lg pad:lg">
-        <div nve-layout="row gap:sm align:vertical-center">
-          <img src="https://NVIDIA.github.io/elements/static/images/integrations/javascript.svg" width="36px" height="36px" alt="javascript logo">
-          <h1 nve-text="heading xl">Import Maps</h1>
-        </div>
-        <p nve-text="body">A simple starter using Elements and Import Maps.</p>
-        <div nve-layout="row gap:xs">
-          <a nve-text="body sm" target="_blank" href="https://NVIDIA.github.io/elements/docs/integrations/importmaps/">Documentation</a>
-          <a nve-text="body sm" target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/importmaps">Source</a>
-          <a nve-text="body sm" download href="https://NVIDIA.github.io/elements/starters/download/importmaps.zip">Download</a>
-        </div>
-      </main>
-    </nve-page>
+  <body nve-text="body" nve-layout="column gap:md pad:lg">
+    <nve-alert status="success">hello world</nve-alert>
   </body>
 </html>
