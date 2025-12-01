@@ -401,6 +401,8 @@ declare global {
   var NVE_ELEMENTS: {
     state: {
       env: 'watch' | 'production' | 'development';
+      pageHost: string;
+      moduleHost: string;
       versions: string[];
       elementRegistry: Readonly<{ [key: string]: string }>;
       i18nRegistry: Readonly<{ [key: string]: string }>;

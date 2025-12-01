@@ -48,6 +48,9 @@ catalogs:
     '@lit-labs/virtualizer':
       specifier: ^2.1.1
       version: 2.1.1
+    '@lit/reactive-element':
+      specifier: ^2.1.1
+      version: 2.1.1
     '@rollup/plugin-terser':
       specifier: 0.4.4
       version: 0.4.4
@@ -90,6 +93,9 @@ catalogs:
     lit:
       specifier: ^3.3.1
       version: 3.3.1
+    lit-element:
+      specifier: ^4.2.1
+      version: 4.2.1
     lit-html:
       specifier: ^3.3.1
       version: 3.3.1
@@ -1516,6 +1522,28 @@ importers:
         version: 0.149.2
 
   projects/starters/importmaps:
+    dependencies:
+      '@lit/reactive-element':
+        specifier: 'catalog:'
+        version: 2.1.1
+      '@nvidia-elements/core':
+        specifier: workspace:*
+        version: link:../../elements
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../../styles
+      '@nvidia-elements/themes':
+        specifier: workspace:*
+        version: link:../../themes
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.1
+      lit-element:
+        specifier: 'catalog:'
+        version: 4.2.1
+      lit-html:
+        specifier: 'catalog:'
+        version: 3.3.1
     devDependencies:
       http-server:
         specifier: 14.1.1
