@@ -9,5 +9,5 @@
 @import '@nvidia-elements/styles/layout.css';
 @import '@nvidia-elements/styles/typography.css';
 @import '@nvidia-elements/themes/elements.css';
-@import './css/module.layout.css';
-@import './css/module.typography.css';
+@import './module.layout.css';
+@import './module.typography.css';
