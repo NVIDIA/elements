@@ -13,7 +13,7 @@ export default defineConfig(() => {
           'polyfills/custom-state-set': resolve(import.meta.dirname, './src/polyfills/custom-state-set.ts'), // optional polyfills for non-chromium envs
           'css/module.typography.css': resolve(import.meta.dirname, './src/css/module.typography.css'), // @deprecated
           'css/module.layout.css': resolve(import.meta.dirname, './src/css/module.layout.css'), // @deprecated
-          'index.css': resolve(import.meta.dirname, './src/index.css') // global styles including all above style modules
+          'index.css': resolve(import.meta.dirname, './src/css/index.css') // global styles including all above style modules
         }
       }
     }

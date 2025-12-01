@@ -9,3 +9,18 @@ export function getEnv(): 'development' | 'production' {
     return 'production';
   }
 }
+
+export function getHostDetails(): { moduleHost: string; pageHost: string } {
+  const pageHost = globalThis.location?.hostname;
+  const moduleHost = new URL(import.meta.url).hostname;
+  const isEsmHosted = moduleHost.startsWith('esm.');
+
+  if (isEsmHosted && pageHost !== 'localhost' && !pageHost.includes('playground')) {
+    console.warn('@nve: Using esm.sh is not supported for production use.');
+  }
+
+  return {
+    pageHost,
+    moduleHost
+  };
+}
