@@ -983,6 +983,7 @@
     },
     "build": {
       "command": "NODE_ENV=production ELEMENTS_BUILD=true vite build",
+      "clean": "if-file-deleted",
       "files": [
         "../styles/dist/**/*.css",
         "../themes/dist/**/*.css",

@@ -1,5 +1,5 @@
 import { deepMerge } from '../utils/objects.js';
-import { getEnv } from './global.utils.js';
+import { getEnv, getHostDetails } from './global.utils.js';
 
 export class GlobalState {
   constructor() {
@@ -12,6 +12,7 @@ export class GlobalState {
         ),
       state: {
         env: getEnv(),
+        ...getHostDetails(),
         versions: [],
         elementRegistry: {},
         i18nRegistry: {},
@@ -21,7 +22,6 @@ export class GlobalState {
 
     /** @deprecated MLV_ELEMENTS */
     globalThis.MLV_ELEMENTS = globalThis.NVE_ELEMENTS;
-
     globalThis.NVE_ELEMENTS.state.versions = Array.from(new Set([...globalThis.NVE_ELEMENTS.state.versions, '0.0.0']));
   }
 
