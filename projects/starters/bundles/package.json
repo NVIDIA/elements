@@ -35,9 +35,9 @@
       "command": "vite build",
       "files": [
         "../../elements/dist/bundles/index.js",
-        "../../elements/dist/bundles/index.css",
-        "../../themes/dist",
-        "../../styles/dist",
+        "../../themes/dist/bundles/index.css",
+        "../../themes/dist/fonts/inter.css",
+        "../../styles/dist/bundles/index.css",
         "index.html",
         "vite.config.ts",
         "package.json"
