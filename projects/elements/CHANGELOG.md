@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.49.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.49.1...@nvidia-elements/core-v1.49.2) (2025-12-01)
+
+
+### Bug Fixes
+
+* **elements:** add validators to dropzone ([bf88f86](https://github.com/NVIDIA/elements/commit/bf88f866177396f4fd89a8d821d7941bb5fbee70))
+
 ## [@nvidia-elements/core-v1.49.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.49.0...@nvidia-elements/core-v1.49.1) (2025-11-26)
 
 
