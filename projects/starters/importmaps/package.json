@@ -15,12 +15,30 @@
       ]
     },
     "build": {
-      "command": "mkdir -p dist && cp -a ./src/index.html dist/",
+      "command": "node build.js",
       "files": [
-        "src/index.html"
+        "../../elements/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
+        "src/index.html",
+        "build.js"
       ],
       "output": [
         "dist"
+      ],
+      "dependencies": [
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        }
       ]
     },
     "dev": {
@@ -35,7 +53,15 @@
       ]
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
+    "@lit/reactive-element": "catalog:",
+    "lit": "catalog:",
+    "lit-html": "catalog:",
+    "lit-element": "catalog:"
+  },
   "devDependencies": {
     "http-server": "14.1.1"
   }
