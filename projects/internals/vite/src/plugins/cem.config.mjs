@@ -98,13 +98,29 @@ function metadataPlugin() {
                 name: 'nve-layout',
                 deprecated: true,
                 description: 'not supported on custom element tags',
-                type: { text: "'disallowed'" }
+                type: {
+                  text: 'string',
+                  values: [
+                    {
+                      value: 'string',
+                      description: ''
+                    }
+                  ]
+                }
               },
               {
                 name: 'nve-text',
                 deprecated: true,
                 description: 'not supported on custom element tags',
-                type: { text: "'disallowed'" }
+                type: {
+                  text: 'string',
+                  values: [
+                    {
+                      value: 'string',
+                      description: ''
+                    }
+                  ]
+                }
               }
             ];
 
