@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.5.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.5.1...@nvidia-elements/lint-v0.5.2) (2025-12-02)
+
+
+### Bug Fixes
+
+* **labs-lint:** update internals to use api metadata service ([2c7bdb3](https://github.com/NVIDIA/elements/commit/2c7bdb3b2f9c4c5e4abb711dc05828164a9d6216))
+
 ## [@nvidia-elements/lint-v0.5.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.5.0...@nvidia-elements/lint-v0.5.1) (2025-11-06)
 
 
