@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.1.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.7...@nvidia-elements/cli-v0.1.8) (2025-12-02)
+
+
+### Bug Fixes
+
+* **labs-cli:** improve markdown output format for tables ([9d0d842](https://github.com/NVIDIA/elements/commit/9d0d8423eaea9061f89854f0e54475052f1c6bd8))
+
 ## [@nvidia-elements/cli-v0.1.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.6...@nvidia-elements/cli-v0.1.7) (2025-11-06)
 
 
