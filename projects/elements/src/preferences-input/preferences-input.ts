@@ -49,6 +49,13 @@ export interface PreferencesInputValue {
  * @event input emits when the value has changed
  * @event change emits when the value has changed
  * @cssprop --color
+ * @csspart control - The control wrapper elements that contain the labels and menus
+ * @csspart menu - The menu elements that display color scheme and scale options
+ * @csspart menu-item - The individual menu item elements for each selectable option
+ * @csspart icon - The icon element displayed next to color scheme options
+ * @csspart divider - The divider elements that separate preference sections
+ * @csspart switch - The switch element for the reduced motion toggle
+ *
  * @storybook https://NVIDIA.github.io/elements/docs/elements/preferences-input/
  * @figma TODO::https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=3689-87177&t=znx8f5Hs8oD2ySWm-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
