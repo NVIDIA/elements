@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.49.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.49.3...@nvidia-elements/core-v1.49.4) (2025-12-03)
+
+
+### Bug Fixes
+
+* **elements:** legacy bundle path ([2f5cbeb](https://github.com/NVIDIA/elements/commit/2f5cbeb53ed66be3bdb6b39426caaac987d64258))
+
 ## [@nvidia-elements/core-v1.49.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.49.2...@nvidia-elements/core-v1.49.3) (2025-12-03)
 
 
