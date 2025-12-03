@@ -6,6 +6,8 @@ import { Button } from '@nvidia-elements/core/button';
 import { JSONNode } from './node.js';
 import '@nvidia-elements/core/json-viewer/define.js';
 
+/* eslint-disable @nvidia-elements/lint/no-unknown-tags */
+
 describe(JSONNode.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: JSONNode;

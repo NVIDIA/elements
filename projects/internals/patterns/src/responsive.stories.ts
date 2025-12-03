@@ -103,10 +103,10 @@ export const ResponsiveToolbar = {
           <nve-icon name="filter"></nve-icon> Filter
         </nve-button>
         <nve-button container="flat" slot="suffix">
-          <nve-icon name="sort"></nve-icon> Sort
+          <nve-icon name="sort-ascending"></nve-icon> Sort
         </nve-button>
         <nve-button container="flat" slot="suffix">
-          <nve-icon name="export"></nve-icon> Export
+          <nve-icon name="download"></nve-icon> Export
         </nve-button>
         <nve-icon-button container="flat" slot="suffix" icon-name="gear" aria-label="Settings"></nve-icon-button>
         <nve-icon-button container="flat" slot="suffix" icon-name="more-actions" aria-label="More actions" popovertarget="toolbar-more-actions"></nve-icon-button>
@@ -115,7 +115,7 @@ export const ResponsiveToolbar = {
       <nve-dropdown id="toolbar-more-actions">
         <nve-menu>
           <nve-menu-item>
-            <nve-icon name="export"></nve-icon> Export
+            <nve-icon name="download"></nve-icon> Export
           </nve-menu-item>
           <nve-menu-item>
             <nve-icon name="gear"></nve-icon> Settings
