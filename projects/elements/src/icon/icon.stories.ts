@@ -14,6 +14,8 @@ export default {
   component: 'nve-icon'
 };
 
+/* eslint-disable @nvidia-elements/lint/no-unexpected-attribute-value */
+
 /**
  * @summary Basic icon component demonstrating standard appearance and usage for visual communication and interface navigation.
  */

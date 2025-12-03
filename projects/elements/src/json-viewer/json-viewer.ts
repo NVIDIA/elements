@@ -5,6 +5,8 @@ import { useStyles } from '@nvidia-elements/core/internal';
 import { JSONNode } from './node/node.js';
 import styles from './json-viewer.css?inline';
 
+/* eslint-disable @nvidia-elements/lint/no-unknown-tags */
+
 /**
  * @deprecated use `nve-monaco-input` instead
  * @element nve-json-viewer
