@@ -173,7 +173,7 @@ export interface CustomElementManifest {
       text: string;
       description?: string;
       values?: {
-        name: string;
+        value: string;
         description?: string;
       }[];
     };
