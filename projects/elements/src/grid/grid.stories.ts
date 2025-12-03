@@ -745,7 +745,7 @@ export const DisplaySettings = {
       </nve-checkbox>
     </nve-checkbox-group>
     <nve-divider></nve-divider>
-    <nve-button popovertarget="column-settings-dropdown" popovertargetaction="hide" interaction="flat-destructive" style="--height: initial">restore settings</nve-button>
+    <nve-button popovertarget="column-settings-dropdown" popovertargetaction="hide" interaction="destructive" container="flat" style="--height: initial">restore settings</nve-button>
   </nve-dropdown>
   <div nve-layout="row gap:sm align:vertical-center">
     <p nve-text="body muted">1,145 results found</p>

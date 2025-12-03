@@ -571,7 +571,7 @@ export const Performance = () => {
  * @tags test-case
  */
 export const FilterDemo = {
-  render: () => html`<nve-combobox-demo></nve-combobox-demo>`
+  render: () => html`<combobox-demo></combobox-demo>`
 }
 
 const schema = {
@@ -608,14 +608,14 @@ class ComboboxDemo extends LitElement {
     return html`
       <nve-button id="filter-btn" ?pressed=${!!this.value.filter(v => v.name.length).length}><nve-icon name="filter"></nve-icon> </nve-icon>filters</nve-button>
       <nve-dropdown id="one" hidden trigger="filter-btn" anchor="filter-btn" @open=${e => e.target.hidden = false} @close=${e => e.target.hidden = true} style="--min-width: 400px; --min-height: 500px;">
-        <nve-progressive-filter-demo @change=${e => this.value = e.detail} .value=${this.value} .schema=${schema}></nve-progressive-filter-demo>
+        <progressive-filter-demo @change=${e => this.value = e.detail} .value=${this.value} .schema=${schema}></progressive-filter-demo>
       </nve-dropdown>
       <pre style="margin-top: 300px">${JSON.stringify(this.value.filter(v => v.name.length), null, 2)}</pre>
     `;
   }
 }
 
-customElements.get('nve-combobox-demo') || customElements.define('nve-combobox-demo', ComboboxDemo);
+customElements.get('combobox-demo') || customElements.define('combobox-demo', ComboboxDemo);
 
 class ProgressiveFilterDemo extends LitElement {
   static styles = [unsafeCSS(`
@@ -685,4 +685,4 @@ class ProgressiveFilterDemo extends LitElement {
   }
 }
 
-customElements.get('nve-progressive-filter-demo') || customElements.define('nve-progressive-filter-demo', ProgressiveFilterDemo);
+customElements.get('progressive-filter-demo') || customElements.define('progressive-filter-demo', ProgressiveFilterDemo);
