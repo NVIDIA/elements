@@ -16,6 +16,7 @@ export default {
 };
 
 /* eslint-disable @nvidia-elements/lint/no-restricted-attributes */
+/* eslint-disable @nvidia-elements/lint/no-unexpected-attribute-value */
 
 export const PanelKeyValue = {
   render: () => html`
@@ -220,7 +221,7 @@ export const PanelNotificationStack = {
 
       <nve-panel-footer>
         <div nve-layout="grid gap:sm span-items:6">
-          <nve-button interaction="flat-destructive" >Clear All</nve-button>
+          <nve-button interaction="destructive" container="flat">Clear All</nve-button>
           <nve-button>Mark All as Read</nve-button>
         </div>
       </nve-panel-footer>
