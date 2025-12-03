@@ -11,6 +11,8 @@ import noRestrictedAttributes from '../rules/no-restricted-attributes.js';
 import noDeprecatedSlots from '../rules/no-deprecated-slots.js';
 import noMissingSlottedElements from '../rules/no-missing-slotted-elements.js';
 import noUnexpectedSlotValue from '../rules/no-unexpected-slot-value.js';
+import noUnknownTags from '../rules/no-unknown-tags.js';
+import noUnexpectedAttributeValue from '../rules/no-unexpected-attribute-value.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
 
@@ -49,7 +51,9 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-restricted-attributes': noRestrictedAttributes,
         'no-unexpected-global-attribute-value': noUnexpectedGlobalAttributeValue,
         'no-unexpected-style-customization': noUnexpectedStyleCustomization,
-        'no-unexpected-slot-value': noUnexpectedSlotValue
+        'no-unexpected-slot-value': noUnexpectedSlotValue,
+        'no-unknown-tags': noUnknownTags,
+        'no-unexpected-attribute-value': noUnexpectedAttributeValue
       }
     }
   },
@@ -64,6 +68,8 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-missing-slotted-elements': ['error'],
     '@nvidia-elements/lint/no-restricted-attributes': ['error'],
     '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error'],
-    '@nvidia-elements/lint/no-unexpected-slot-value': ['error']
+    '@nvidia-elements/lint/no-unexpected-slot-value': ['error'],
+    '@nvidia-elements/lint/no-unknown-tags': ['error'],
+    '@nvidia-elements/lint/no-unexpected-attribute-value': ['error']
   }
 };
