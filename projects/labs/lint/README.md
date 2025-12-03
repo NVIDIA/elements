@@ -88,3 +88,5 @@ export default [
 | `@nvidia-elements/lint/no-deprecated-packages` | Disallow usage of deprecated packages. | JSON | `error` |
 | `@nvidia-elements/lint/no-unexpected-slot-value` | Disallow use of invalid slot values in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-unexpected-style-customization` | Disallow use of style customization in Elements playground template. | HTML | `off` |
+| `@nvidia-elements/lint/no-unknown-tags` | Disallow use of unknown nve-* tags. | HTML | `error` |
+| `@nvidia-elements/lint/no-unexpected-attribute-value` | Disallow use of invalid attribute values for nve-* elements. | HTML | `error` |
