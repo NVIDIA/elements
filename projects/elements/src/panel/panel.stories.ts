@@ -6,6 +6,7 @@ import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/notification/define.js';
 
 /* eslint-disable @nvidia-elements/lint/no-restricted-attributes */
+/* eslint-disable @nvidia-elements/lint/no-unexpected-attribute-value */
 
 export default {
   title: 'Elements/Panel',

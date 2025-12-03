@@ -87,22 +87,20 @@ export function render() {
   <nve-dialog-header>
     <h3 nve-text="heading">Additional Information</h3>
   </nve-dialog-header>
-  <nve-dialog-content>
-    <dl nve-layout="grid gap:lg">
-      <dt nve-layout="span:4" nve-text="body muted medium">Element Reference</dt>
-      <dd nve-layout="span:8" nve-text="body">A reference to an Elements component API in a template/html format file. (html, js, ts, tsx)</dd>
-      <dt nve-layout="span:4" nve-text="body muted medium">Attribute Reference</dt>
-      <dd nve-layout="span:8" nve-text="body">A reference to an Elements utility attribute API in a template/html format file. (html, js, ts, tsx)</dd>
-      <dt nve-layout="span:4" nve-text="body muted medium">Import Reference</dt>
-      <dd nve-layout="span:8" nve-text="body">A reference a Elements library module import. (js, ts, css)</dd>
-      <dt nve-layout="span:4" nve-text="body muted medium">Style Reference</dt>
-      <dd nve-layout="span:8" nve-text="body">A reference to a CSS theme variable. (--nve-)</dd>
-      <dt nve-layout="span:4" nve-text="body muted medium"><code>unknown</code></dt>
-      <dd nve-layout="span:8" nve-text="body">The project has not been reported yet or a reference could not be determined yet.</dd>
-      <dt nve-layout="span:4" nve-text="body muted medium">(<code>-</code>)</dt>
-      <dd nve-layout="span:8" nve-text="body">The project references are already accounted for in a parent directory project.</dd>
-    </dl>
-  </nve-dialog-content>
+  <dl nve-layout="grid gap:lg">
+    <dt nve-layout="span:4" nve-text="body muted medium">Element Reference</dt>
+    <dd nve-layout="span:8" nve-text="body">A reference to an Elements component API in a template/html format file. (html, js, ts, tsx)</dd>
+    <dt nve-layout="span:4" nve-text="body muted medium">Attribute Reference</dt>
+    <dd nve-layout="span:8" nve-text="body">A reference to an Elements utility attribute API in a template/html format file. (html, js, ts, tsx)</dd>
+    <dt nve-layout="span:4" nve-text="body muted medium">Import Reference</dt>
+    <dd nve-layout="span:8" nve-text="body">A reference a Elements library module import. (js, ts, css)</dd>
+    <dt nve-layout="span:4" nve-text="body muted medium">Style Reference</dt>
+    <dd nve-layout="span:8" nve-text="body">A reference to a CSS theme variable. (--nve-)</dd>
+    <dt nve-layout="span:4" nve-text="body muted medium"><code>unknown</code></dt>
+    <dd nve-layout="span:8" nve-text="body">The project has not been reported yet or a reference could not be determined yet.</dd>
+    <dt nve-layout="span:4" nve-text="body muted medium">(<code>-</code>)</dt>
+    <dd nve-layout="span:8" nve-text="body">The project references are already accounted for in a parent directory project.</dd>
+  </dl>
 </nve-dialog>`,
     'html'
   );

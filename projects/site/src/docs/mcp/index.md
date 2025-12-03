@@ -22,7 +22,7 @@ Install to Cursor or copy the MCP configuration below.
 
 <div>
   <nve-button>
-    <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=elements&config=eyJkZXNjcmlwdGlvbiI6IkVsZW1lbnRzIEFQSSBhbmQgQ3VzdG9tIEVsZW1lbnQgU2NoZW1hIiwiZW52Ijp7Im5wbV9jb25maWdfcmVnaXN0cnkiOiJodHRwczovL3VybS5udmlkaWEuY29tL2FydGlmYWN0b3J5L2FwaS9ucG0vc3ctbmdjLXVuaWZpZWQtbnBtLXByb3h5LyJ9LCJjb21tYW5kIjoibnB4IC15IC0tcGFja2FnZT1AbnZlLWxhYnMvY2xpQGxhdGVzdCBudmUtbWNwIn0%3D">Add to Cursor with NPM</a>
+    <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=elements&config=eyJkZXNjcmlwdGlvbiI6IkVsZW1lbnRzIEFQSSBhbmQgQ3VzdG9tIEVsZW1lbnQgU2NoZW1hIiwiZW52Ijp7Im5wbV9jb25maWdfcmVnaXN0cnkiOiJodHRwczovL3VybS5udmlkaWEuY29tL2FydGlmYWN0b3J5L2FwaS9ucG0vc3ctbmdjLXVuaWZpZWQtbnBtLXByb3h5LyJ9LCJjb21tYW5kIjoibnBtIGV4ZWMgLS1wYWNrYWdlPUBudmUtbGFicy9jbGlAbGF0ZXN0IC15IC0tcHJlZmVyLW9ubGluZSAtLSBudmUtbWNwIn0%3D">Add to Cursor with NPM</a>
   </nve-button>
 </div>
 
@@ -31,9 +31,8 @@ Install to Cursor or copy the MCP configuration below.
 {
   "mcpServers": {
     "elements": {
-      "command": "npx",
       "description": "Elements API and Custom Element Schema",
-      "args": ["-y", "--package=@nvidia-elements/cli@latest", "nve-mcp"],
+      "command": "npm exec --package=@nvidia-elements/cli@latest -y --prefer-online -- nve-mcp",
       "env": {
         "npm_config_registry": "https://registry.npmjs.org"
       }
@@ -53,9 +52,8 @@ Install to Cursor or copy the MCP configuration below.
 {
   "mcpServers": {
     "elements": {
-      "command": "pnpm",
       "description": "Elements API and Custom Element Schema",
-      "args": ["--package=@nvidia-elements/cli@latest", "dlx", "nve-mcp"],
+      "command": "pnpm --package=@nvidia-elements/cli@latest dlx nve-mcp",
       "env": {
         "npm_config_registry": "https://registry.npmjs.org"
       }
