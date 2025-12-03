@@ -6,6 +6,8 @@ import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Button } from '@nvidia-elements/core/button';
 import styles from './node.css?inline';
 
+/* eslint-disable @nvidia-elements/lint/no-unknown-tags */
+
 /**
  * @deprecated
  * @private
