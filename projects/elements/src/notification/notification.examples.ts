@@ -306,7 +306,7 @@ export const Drawer = {
   </nve-notification>
   <nve-drawer-footer>
     <div nve-layout="grid gap:sm span-items:6">
-      <nve-button interaction="flat-destructive">Clear All</nve-button>
+      <nve-button interaction="destructive" container="flat">Clear All</nve-button>
       <nve-button>Mark All as Read</nve-button>
     </div>
   </nve-drawer-footer>
