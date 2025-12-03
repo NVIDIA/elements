@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-This document provides guidance on creating well-written example templates for the Elements design system. (`*.examples.ts`)
+Examples are stateless HTML templates demonstrating UI patterns for the Elements design system, portable across docs, CLI, and MCPs. This document provides guidance on creating well-written example templates for the Elements design system. (`*.examples.ts`).
 
 ## Core Principles
 
@@ -136,7 +136,7 @@ export const InteractiveExample = {
 
 ```typescript
 /**
- * @summary [Comprehensive description of the pattern,
+ * @summary [Summary of the pattern,
  * including accessibility considerations and use cases]
  */
 export const ComplexPattern = {
@@ -159,23 +159,23 @@ export const ComplexPattern = {
 };
 ```
 
-## Description Writing Guidelines
+## Summary Writing Guidelines
 
-### Good Descriptions
+### Good Summaries
 
 - **Specific and actionable**: "Use for simple non-interactive labels or status indicators"
 - **Context-aware**: "Ideal for showing job status, task progress, or system states"
 - **UX-focused**: "Perfect for dense layouts or when you want less visual weight"
 - **Accessibility-conscious**: "using aria-label for accessibility"
 
-### Description Structure
+### Summary Structure
 
 1. **Opening**: What the example demonstrates
 2. **Context**: When/why to use this pattern
 3. **Benefits**: How it improves UX or solves problems
 4. **Technical notes**: Any important implementation details
 
-### Examples of Well-Written Descriptions
+### Examples of Well-Written Summaries
 
 ```typescript
 /**
@@ -199,9 +199,9 @@ export const ComplexPattern = {
 
 ## Anti-Patterns to Avoid
 
-### Avoid Poor Descriptions or Unclear Use Cases
+### Avoid Poor Summaries or Unclear Use Cases
 
-Descriptions should provide UX intent. Do not describe what can be inferred already by the source code.
+Summaries should provide UX intent. Do not describe what can be inferred already by the source code.
 
 ```typescript
 /**
@@ -228,7 +228,7 @@ export const OverlyComplex = {
 1. **Always include `@summary`** - Every example needs clear documentation
 2. **Keep examples stateless** - Focus on component capabilities, not complex interactions
 3. **Use plain HTML/CSS/JS** - Avoid unnecessary abstractions
-4. **Write descriptive descriptions** - Explain what, why, when, and how
+4. **Write descriptive summaries** - Explain what, why, when, and how
 5. **Include accessibility notes** - Use ARIA attributes when appropriate
 6. **Provide context** - Explain the UX benefits and use cases
 7. **Keep examples focused** - One clear concept per example
