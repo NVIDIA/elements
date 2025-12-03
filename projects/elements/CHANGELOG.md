@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.49.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.49.2...@nvidia-elements/core-v1.49.3) (2025-12-03)
+
+
+### Bug Fixes
+
+* **elements:** improved popover fallback positioning ([a9cdc70](https://github.com/NVIDIA/elements/commit/a9cdc703616fe98f7b2b1fdf741118846c6f28d6))
+
 ## [@nvidia-elements/core-v1.49.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.49.1...@nvidia-elements/core-v1.49.2) (2025-12-01)
 
 
