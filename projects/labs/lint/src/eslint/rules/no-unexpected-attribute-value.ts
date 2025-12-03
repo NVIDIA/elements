@@ -1,0 +1,85 @@
+import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
+import { getElementAttribute, getRecommendedValue } from '../internals/element-attributes.js';
+import { isNVElement } from '../internals/utils.js';
+
+const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
+
+const rule = {
+  meta: {
+    type: 'problem' as const,
+    hasSuggestions: true,
+    docs: {
+      description: 'Disallow use of invalid attribute values for nve-* elements.',
+      category: 'Best Practice',
+      recommended: true,
+      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+    },
+    schema: [],
+    messages: {
+      ['no-unexpected-attribute-value']: 'Unexpected value "{{value}}" for attribute "{{attribute}}" on <{{tagName}}>',
+      ['unexpected-attribute-value-alternative']:
+        'Unexpected value "{{value}}" for attribute "{{attribute}}" on <{{tagName}}>. Did you mean "{{alternative}}"?',
+      ['suggest-replace-attribute-value']: 'Replace "{{value}}" with "{{alternative}}"'
+    }
+  },
+  create(context) {
+    return createVisitors(context, {
+      Tag(node) {
+        const tagName = node.name;
+
+        if (!isNVElement(tagName)) {
+          return;
+        }
+
+        (node.attributes ?? [])
+          .filter(
+            attr =>
+              attr.type === 'Attribute' &&
+              attr.key?.value &&
+              !VALUE_BINDINGS.some(binding => attr.value?.value?.includes(binding))
+          )
+          .forEach(attr => {
+            const attributeName = attr.key.value;
+            const value = attr.value?.value ?? '';
+            const attrInfo = getElementAttribute(tagName, attributeName);
+
+            if (attrInfo?.isEnum && !attrInfo.deprecated && !attrInfo.values.includes(value)) {
+              const validValues = attrInfo.values;
+              const alternative = getRecommendedValue(value, validValues);
+              const suggest = alternative
+                ? [
+                    {
+                      messageId: 'suggest-replace-attribute-value',
+                      data: {
+                        value,
+                        alternative
+                      },
+                      fix: fixer => {
+                        return fixer.replaceText(
+                          attr,
+                          `${attributeName}=${attr.startWrapper?.value ?? '"'}${alternative}${attr.endWrapper?.value ?? '"'}`
+                        );
+                      }
+                    }
+                  ]
+                : [];
+
+              context.report({
+                node: attr,
+                data: {
+                  tagName,
+                  attribute: attributeName,
+                  value,
+                  alternative
+                },
+                messageId: alternative ? 'unexpected-attribute-value-alternative' : 'no-unexpected-attribute-value',
+                suggest
+              });
+            }
+          });
+      }
+    });
+  }
+} as const;
+
+export default rule;
