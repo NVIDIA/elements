@@ -861,10 +861,14 @@ export const HeatmapPattern = {
 
 /**
  * @summary CSS anchor positioning for tooltips within grid cells, demonstrating proper tooltip placement and content visibility in constrained grid environments.
+ * @tags test-case
  */
 export const ContentVisibilityCSSAnchor = {
   render: () => html`
   <nve-grid style="height: 200px;">
+    <nve-grid-header>
+      <nve-grid-column>Empty</nve-grid-column>
+    </nve-grid-header>
     <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
     <nve-grid-row><nve-grid-cell>Empty</nve-grid-cell></nve-grid-row>
     <nve-grid-row><nve-grid-cell><span id="target">Target 1</span></nve-grid-cell></nve-grid-row>

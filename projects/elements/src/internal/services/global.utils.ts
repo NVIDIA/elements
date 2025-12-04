@@ -15,7 +15,7 @@ export function getHostDetails(): { moduleHost: string; pageHost: string } {
   const moduleHost = new URL(import.meta.url).hostname;
   const isEsmHosted = moduleHost.startsWith('esm.');
 
-  if (isEsmHosted && pageHost !== 'localhost' && !pageHost.includes('playground')) {
+  if (isEsmHosted && pageHost !== 'localhost' && pageHost !== 'esm.nvidia.com') {
     console.warn('@nve: Using esm.sh is not supported for production use.');
   }
 
