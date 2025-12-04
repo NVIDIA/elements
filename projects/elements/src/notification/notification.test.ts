@@ -121,6 +121,11 @@ describe(Notification.metadata.tag, () => {
     element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
   });
+
+  it('should provide a icon slot', async () => {
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('slot[name="icon"]')).toBeDefined();
+  });
 });
 
 describe(`${Notification.metadata.tag} - inline`, () => {
