@@ -11,12 +11,12 @@ Use `nve-text="code"` on a `<kbd>` element for displaying keyboard shourtcut cod
 
 ## Standard Styling
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'ShortcutFilled' %}
+{% example '@nve-internals/patterns/patterns.examples.json', 'ShortcutFilled' %}
 
 ## Flat Styling
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'ShortcutFlat' %}
+{% example '@nve-internals/patterns/patterns.examples.json', 'ShortcutFlat' %}
 
 ## Keyboard Shortcut in Dropdown
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'ShortcutDropdown' %}
+{% example '@nve-internals/patterns/patterns.examples.json', 'ShortcutDropdown' %}

@@ -132,63 +132,63 @@ Vertical layouts support alignment along both axes:
 
 ### Align Top
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignTop' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignTop' %}
 
 ### Align Vertical Center
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignVerticalCenter' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignVerticalCenter' %}
 
 ### Align Bottom
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignBottom' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignBottom' %}
 
 ### Align Horizontal Center
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignHorizontalCenter' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignHorizontalCenter' %}
 
 ### Align Center
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignCenter' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignCenter' %}
 
 ### Align Center and Bottom
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignCenterAndBottom' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignCenterAndBottom' %}
 
 ### Align Top and Right
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignTopAndRight' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignTopAndRight' %}
 
 ### Align Center and Right
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignCenterAndRight' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignCenterAndRight' %}
 
 ### Align Bottom and Right
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignBottomAndRight' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignBottomAndRight' %}
 
 ### Align Space Around
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignSpaceAround' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignSpaceAround' %}
 
 ### Align Space Between
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignSpaceBetween' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignSpaceBetween' %}
 
 ### Align Space Evenly
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignSpaceEvenly' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignSpaceEvenly' %}
 
 ### Align Stretch Horizontal
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignStretchHorizontal' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignStretchHorizontal' %}
 
 ### Align Stretch Vertical
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignStretchVertical' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignStretchVertical' %}
 
 ### Align Full Stretch
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'VerticalAlignFullStretch' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'VerticalAlignFullStretch' %}
 
 ## Flex Behavior in Vertical Layouts
 
