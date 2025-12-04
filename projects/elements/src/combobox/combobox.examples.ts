@@ -305,6 +305,7 @@ export const LabelMultiSelect = () => {
 
 /**
  * @summary If the multiple tags overflow the parent container a simple text label will be shown instead.
+ * @tags test-case
  */
 export const Overflow = () => {
   return html`

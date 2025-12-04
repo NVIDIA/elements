@@ -136,6 +136,10 @@ export class Combobox extends Control implements ContainerElement {
     return this.#options.length > 50;
   }
 
+  get #isPristine() {
+    return !this._internals.states.has('dirty');
+  }
+
   protected get suffixContent() {
     return !isServer
       ? html`
@@ -148,7 +152,7 @@ export class Combobox extends Control implements ContainerElement {
             o => html`
           <nve-menu-item part="menu-item" .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
             ${this.#getOptionCheckbox(o)}
-            ${this.#largeOptionsList ? getDisplayValue(o) : html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>`}
+            ${this.#largeOptionsList || this.#isPristine ? getDisplayValue(o) : html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>`}
           </nve-menu-item>`
           )}
         ${this.#options.filter(o => !o.disabled && !o.hidden).length === 0 ? html`<nve-menu-item part="menu-item" .value=${''} disabled>${this.i18n.noResults}</nve-menu-item>` : nothing}

@@ -994,3 +994,804 @@ describe(`${Combobox.metadata.tag}: option labels for single select`, () => {
     expect(items.length).toBe(1);
   });
 });
+
+describe(`${Combobox.metadata.tag}: character matching`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should not apply matches attribute when combobox is pristine', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+          <option value="Option 2"></option>
+          <option value="Option 3"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const matchesSpans = items[0].querySelectorAll('span[matches]');
+    expect(matchesSpans.length).toBe(0);
+  });
+
+  it('should apply matches attribute when combobox is dirty (user has typed)', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+          <option value="Option 2"></option>
+          <option value="Option 3"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    input.value = 'Opt';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const matchesSpans = items[0].querySelectorAll('span[matches]');
+    expect(matchesSpans.length).toBe(3);
+  });
+
+  it('should not apply matches attribute when options list is large (>50 options)', async () => {
+    const optionsHtml = Array(51)
+      .fill(0)
+      .map((_, i) => `<option value="Option ${i + 1}"></option>`)
+      .join('');
+
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          ${document.createRange().createContextualFragment(optionsHtml)}
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    input.value = 'Opt';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const matchesSpans = items[0].querySelectorAll('span[matches]');
+    expect(matchesSpans.length).toBe(0);
+  });
+
+  it('should apply matches attribute when options list is not large (<=50 options) and combobox is dirty', async () => {
+    const optionsHtml = Array(50)
+      .fill(0)
+      .map((_, i) => `<option value="Option ${i + 1}"></option>`)
+      .join('');
+
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          ${document.createRange().createContextualFragment(optionsHtml)}
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    input.value = 'Opt';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const matchesSpans = items[0].querySelectorAll('span[matches]');
+    expect(matchesSpans.length).toBe(3);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: container property`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should have undefined container by default', async () => {
+    expect(element.container).toBe(undefined);
+    expect(element.hasAttribute('container')).toBe(false);
+  });
+
+  it('should reflect container attribute when set via attribute', async () => {
+    element.setAttribute('container', 'flat');
+    await elementIsStable(element);
+
+    expect(element.container).toBe('flat');
+    expect(element.getAttribute('container')).toBe('flat');
+  });
+
+  it('should update container property and reflect to attribute', async () => {
+    element.container = 'flat';
+    await elementIsStable(element);
+
+    expect(element.container).toBe('flat');
+    expect(element.getAttribute('container')).toBe('flat');
+  });
+});
+
+describe(`${Combobox.metadata.tag}: notags property reflection`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="1">Option 1</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should have notags as false by default', async () => {
+    expect(element.notags).toBeFalsy();
+    expect(element.hasAttribute('notags')).toBe(false);
+  });
+
+  it('should reflect notags attribute when set via attribute', async () => {
+    element.setAttribute('notags', '');
+    await elementIsStable(element);
+
+    expect(element.notags).toBe(true);
+    expect(element.hasAttribute('notags')).toBe(true);
+  });
+
+  it('should reflect notags attribute when set via property', async () => {
+    element.notags = true;
+    await elementIsStable(element);
+
+    expect(element.notags).toBe(true);
+    expect(element.hasAttribute('notags')).toBe(true);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: disabled input`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" disabled />
+        <datalist>
+          <option value="Option 1"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should not open dropdown when input is disabled', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(dropdown.matches(':popover-open')).toBe(false);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+  });
+
+  it('should not open dropdown on pointerdown when input is disabled', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+
+    input.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    await elementIsStable(element);
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: ARIA attributes`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+  let select: HTMLSelectElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select>
+          <option selected value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    select = fixture.querySelector('select');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should set aria-selected to true on selected menu items', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].getAttribute('aria-selected')).toBe('true');
+    expect(items[1].getAttribute('aria-selected')).toBe('false');
+  });
+
+  it('should set aria-label on menu items', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].getAttribute('aria-label')).toBe('Option 1');
+    expect(items[1].getAttribute('aria-label')).toBe('Option 2');
+  });
+
+  it('should set aria-label on menu from i18n', async () => {
+    const menu = element.shadowRoot.querySelector<Menu>(Menu.metadata.tag);
+    expect(menu.getAttribute('aria-label')).toBe(element.i18n.select);
+  });
+
+  it('should update aria-selected when selection changes', async () => {
+    select.multiple = true;
+    select.options[0].selected = false;
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].getAttribute('aria-selected')).toBe('false');
+
+    emulateClick(items[0]);
+    await elementIsStable(element);
+
+    expect(items[0].getAttribute('aria-selected')).toBe('true');
+  });
+});
+
+describe(`${Combobox.metadata.tag}: dropdown state`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should have dropdown hidden initially', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(dropdown.hidden).toBe(true);
+  });
+
+  it('should set dropdown hidden to false on open event', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+
+    const open = untilEvent(dropdown, 'open');
+    emulateClick(input);
+    await open;
+
+    expect(dropdown.hidden).toBe(false);
+  });
+
+  it('should set dropdown tabIndex to -1 when opened', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+
+    const open = untilEvent(dropdown, 'open');
+    emulateClick(input);
+    await open;
+    await elementIsStable(element);
+
+    expect(dropdown.tabIndex).toBe(-1);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: event dispatching`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should dispatch input event on select when option is selected', async () => {
+    const select = fixture.querySelector('select');
+    const inputEvent = untilEvent(select, 'input');
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    emulateClick(items[0]);
+    await inputEvent;
+
+    expect(select.value).toBe('1');
+  });
+
+  it('should dispatch change event on select when option is selected', async () => {
+    const select = fixture.querySelector('select');
+    const changeEvent = untilEvent(select, 'change');
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    emulateClick(items[0]);
+    await changeEvent;
+
+    expect(select.value).toBe('1');
+  });
+
+  it('should dispatch input event on text input when option is clicked', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const inputEvent = untilEvent(input, 'input');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    emulateClick(items[0]);
+    await inputEvent;
+
+    expect(input.value).toBe('Option 1');
+  });
+
+  it('should dispatch change event on text input when option is clicked', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const changeEvent = untilEvent(input, 'change');
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    emulateClick(items[0]);
+    await changeEvent;
+
+    expect(input.value).toBe('Option 1');
+  });
+});
+
+describe(`${Combobox.metadata.tag}: multi select without pre-selected options`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+  let select: HTMLSelectElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    select = fixture.querySelector('select');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should render no tags when no options are pre-selected', async () => {
+    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
+    expect(select.selectedOptions.length).toBe(0);
+  });
+
+  it('should add tag when option is selected from empty state', async () => {
+    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    emulateClick(items[0]);
+    await elementIsStable(element);
+
+    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(1);
+    expect(select.selectedOptions.length).toBe(1);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: tags display value`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let select: HTMLSelectElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option selected value="val1">Label One</option>
+          <option value="val2">Label Two</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    select = fixture.querySelector('select');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should display option label in tag when label is provided', async () => {
+    const tags = element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag);
+    expect(tags.length).toBe(1);
+    expect(tags[0].textContent.trim()).toBe('Label One');
+  });
+
+  it('should display option value in tag when no label is provided', async () => {
+    select.options[0].textContent = '';
+    select.options[0].value = 'value-only';
+    await elementIsStable(element);
+
+    const tags = element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag);
+    expect(tags.length).toBe(1);
+    expect(tags[0].textContent.trim()).toBe('value-only');
+  });
+
+  it('should set tag value attribute to option value', async () => {
+    const tags = element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag);
+    expect(tags[0].value).toBe('val1');
+  });
+});
+
+describe(`${Combobox.metadata.tag}: all options disabled or hidden`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+          <option value="Option 2"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should show no results message when all options are disabled', async () => {
+    const options = fixture.querySelectorAll<HTMLOptionElement>('option');
+    options.forEach(o => (o.disabled = true));
+    element.shadowRoot.dispatchEvent(new Event('slotchange'));
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const noResultsItem = Array.from(items).find(item => item.textContent.trim() === element.i18n.noResults);
+    expect(noResultsItem).toBeTruthy();
+  });
+
+  it('should show no results when all options are hidden via filtering', async () => {
+    input.value = 'xyz no match';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items.length).toBe(1);
+    expect(items[0].textContent.trim()).toBe(element.i18n.noResults);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: keyboard navigation`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should not open dropdown on Tab keydown', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(dropdown.matches(':popover-open')).toBe(false);
+
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }));
+    await elementIsStable(element);
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+  });
+
+  it('should not open dropdown on Escape keydown', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(dropdown.matches(':popover-open')).toBe(false);
+
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Escape' }));
+    await elementIsStable(element);
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+  });
+
+  it('should not autocomplete on Tab when input is empty', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+
+    element.dispatchEvent(new KeyboardEvent('keydown'));
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+
+    input.value = '';
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }));
+    await elementIsStable(element);
+
+    expect(input.value).toBe('');
+  });
+});
+
+describe(`${Combobox.metadata.tag}: single select icon`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select>
+          <option selected value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should show check icon only for selected option in single select', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].querySelector('nve-icon[name="check"]')).toBeTruthy();
+    expect(items[1].querySelector('nve-icon[name="check"]')).toBeFalsy();
+    expect(items[2].querySelector('nve-icon[name="check"]')).toBeFalsy();
+  });
+
+  it('should update check icon when selection changes', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    let items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].querySelector('nve-icon[name="check"]')).toBeTruthy();
+    expect(items[1].querySelector('nve-icon[name="check"]')).toBeFalsy();
+
+    emulateClick(items[1]);
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].querySelector('nve-icon[name="check"]')).toBeFalsy();
+    expect(items[1].querySelector('nve-icon[name="check"]')).toBeTruthy();
+  });
+});
+
+describe(`${Combobox.metadata.tag}: datalist vs select behavior`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Apple"></option>
+          <option value="Banana"></option>
+          <option value="Cherry"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should filter options on focus when using datalist', async () => {
+    input.value = 'Ban';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    input.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    await elementIsStable(element);
+
+    const options = fixture.querySelectorAll<HTMLOptionElement>('option');
+    expect(options[0].hidden).toBe(true);
+    expect(options[1].hidden).toBe(false);
+    expect(options[2].hidden).toBe(true);
+  });
+
+  it('should not render check icon or checkbox for datalist options', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].querySelector('nve-icon')).toBeFalsy();
+    expect(items[0].querySelector('nve-checkbox')).toBeFalsy();
+    expect(items[0].querySelector('input[type="checkbox"]')).toBeFalsy();
+  });
+});
+
+describe(`${Combobox.metadata.tag}: select shows all options on focus`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select>
+          <option value="Apple"></option>
+          <option value="Banana"></option>
+          <option value="Cherry"></option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should show all options on focus when using select', async () => {
+    input.value = 'Ban';
+    input.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    await elementIsStable(element);
+
+    const options = fixture.querySelectorAll<HTMLOptionElement>('option');
+    expect(options[0].hidden).toBe(false);
+    expect(options[1].hidden).toBe(false);
+    expect(options[2].hidden).toBe(false);
+  });
+});
