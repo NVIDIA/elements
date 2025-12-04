@@ -35,7 +35,7 @@
     },
     "./data.html.json": "./dist/data.html.json",
     "./data.snippets.json": "./dist/data.snippets.json",
-    "./*.stories.json": "./dist/*.stories.json",
+    "./*.examples.json": "./dist/*.examples.json",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
@@ -233,9 +233,8 @@
       "files": [
         "../../elements/dist/**/*.js",
         "!../../elements/dist/**/*.stories.js",
+        "!../../elements/dist/**/*.examples.js",
         "src/**",
-        "!src/**/*.examples.ts",
-        "!src/**/*.stories.ts",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",

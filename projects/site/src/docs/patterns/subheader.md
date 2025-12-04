@@ -15,27 +15,27 @@ Page headers used for _main content pages_ should use `<nve-card container="flat
 
 ### Standard
 
-{% story '@internals/patterns/subheader.stories.json', 'StandardHeaderMainPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'StandardHeaderMainPage' %}
 
 ### Stacked Metadata
 
-{% story '@internals/patterns/subheader.stories.json', 'StackedMetadataHeaderMainPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'StackedMetadataHeaderMainPage' %}
 
 ### Inline Metadata
 
-{% story '@internals/patterns/subheader.stories.json', 'InlineMetadataHeaderMainPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'InlineMetadataHeaderMainPage' %}
 
 ### Tabs
 
-{% story '@internals/patterns/subheader.stories.json', 'TabsHeaderMainPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'TabsHeaderMainPage' %}
 
 ### Kitchen Sink, Stacked
 
-{% story '@internals/patterns/subheader.stories.json', 'StackedKitchenSinkHeaderMainPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'StackedKitchenSinkHeaderMainPage' %}
 
 ### Kitchen Sink, Inline
 
-{% story '@internals/patterns/subheader.stories.json', 'InlineKitchenSinkHeaderMainPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'InlineKitchenSinkHeaderMainPage' %}
 
 ## Detail Page Headers
 
@@ -43,36 +43,36 @@ _Detail pages_ are one level deeper in the navigation and should use `<nve-card 
 
 ### Standard
 
-{% story '@internals/patterns/subheader.stories.json', 'StandardHeaderDetailPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'StandardHeaderDetailPage' %}
 
 ### Stacked Metadata
 
-{% story '@internals/patterns/subheader.stories.json', 'StackedMetadataHeaderDetailPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'StackedMetadataHeaderDetailPage' %}
 
 ### Inline Metadata
 
-{% story '@internals/patterns/subheader.stories.json', 'InlineMetadataHeaderDetailPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'InlineMetadataHeaderDetailPage' %}
 
 ### Tabs
 
-{% story '@internals/patterns/subheader.stories.json', 'TabsHeaderDetailPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'TabsHeaderDetailPage' %}
 
 ### Kitchen Sink, Stacked
 
-{% story '@internals/patterns/subheader.stories.json', 'StackedKitchenSinkHeaderDetailPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'StackedKitchenSinkHeaderDetailPage' %}
 
 ### Kitchen Sink, Inline
 
-{% story '@internals/patterns/subheader.stories.json', 'InlineKitchenSinkHeaderDetailPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'InlineKitchenSinkHeaderDetailPage' %}
 
 ## Viewer Page Headers
 
 ### Standard
 
-{% story '@internals/patterns/subheader.stories.json', 'StandardHeaderViewerPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'StandardHeaderViewerPage' %}
 
 ## Toolbar Page Headers
 
 ### Standard
 
-{% story '@internals/patterns/subheader.stories.json', 'StandardHeaderToolbarPage' %}
+{% example '@internals/patterns/subheader.examples.json', 'StandardHeaderToolbarPage' %}

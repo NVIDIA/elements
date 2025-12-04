@@ -60,11 +60,11 @@ export function createDefaultFiles(content, elements: Element[], options: Playgr
   };
 
   // Add styles CSS file if this is from layout or responsive stories
-  if (options.name?.includes('@nvidia-elements/styles/layout.stories.json')) {
+  if (options.name?.includes('@nvidia-elements/styles/layout.examples.json')) {
     files['styles.css'] = { content: createLayoutStyles() };
-  } else if (options.name?.includes('@nvidia-elements/styles/responsive.stories.json')) {
+  } else if (options.name?.includes('@nvidia-elements/styles/responsive.examples.json')) {
     files['styles.css'] = { content: createResponsiveStyles() };
-  } else if (options.name?.includes('@nvidia-elements/styles/responsive-patterns.stories.json')) {
+  } else if (options.name?.includes('@nvidia-elements/styles/responsive-patterns.examples.json')) {
     files['styles.css'] = { content: '' };
   }
 
@@ -158,9 +158,9 @@ function serialize(data, compress = true) {
 
 function createIndexHTML(content: string, options: PlaygroundOptions) {
   // Check if this is from the layout or responsive stories file
-  const isLayoutStory = options.name?.includes('@nvidia-elements/styles/layout.stories.json');
-  const isResponsiveStory = options.name?.includes('@nvidia-elements/styles/responsive.stories.json');
-  const isResponsivePatternsStory = options.name?.includes('@nvidia-elements/styles/responsive-patterns.stories.json');
+  const isLayoutStory = options.name?.includes('@nvidia-elements/styles/layout.examples.json');
+  const isResponsiveStory = options.name?.includes('@nvidia-elements/styles/responsive.examples.json');
+  const isResponsivePatternsStory = options.name?.includes('@nvidia-elements/styles/responsive-patterns.examples.json');
 
   // Add link to styles CSS if needed
   const layoutExamplesStyles =

@@ -16,8 +16,8 @@
 
 ## Responsive Tabs
 
-{% story '@nvidia-elements/styles/responsive-patterns.stories.json', 'ResponsiveTabs', '{ "inline": true, "resizable": false, "height": "240px" }' %}
+{% example '@nvidia-elements/styles/responsive-patterns.examples.json', 'ResponsiveTabs', '{ "inline": true, "resizable": false, "height": "240px" }' %}
 
 ## Responsive Toolbar
 
-{% story '@nvidia-elements/styles/responsive-patterns.stories.json', 'ResponsiveToolbar', '{ "inline": true, "resizable": false, "height": "240px" }' %}
+{% example '@nvidia-elements/styles/responsive-patterns.examples.json', 'ResponsiveToolbar', '{ "inline": true, "resizable": false, "height": "240px" }' %}
