@@ -9,8 +9,8 @@
 
 ## Responsive Tabs
 
-{% story '@internals/patterns/responsive.stories.json', 'ResponsiveTabs' %}
+{% example '@internals/patterns/responsive.examples.json', 'ResponsiveTabs' %}
 
 ## Responsive Toolbar
 
-{% story '@internals/patterns/responsive.stories.json', 'ResponsiveToolbar' %}
+{% example '@internals/patterns/responsive.examples.json', 'ResponsiveToolbar' %}

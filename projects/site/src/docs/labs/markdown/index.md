@@ -17,27 +17,27 @@ The `nve-markdown` component renders markdown content with Elements styling. It 
 
 ### Markdown from Source Property
 
-{% story '@nvidia-elements/markdown/markdown/markdown.stories.json', 'MarkdownFromSource' %}
+{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'MarkdownFromSource' %}
 
 ### Markdown from Template
 
-{% story '@nvidia-elements/markdown/markdown/markdown.stories.json', 'MarkdownFromTemplate' %}
+{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'MarkdownFromTemplate' %}
 
 ## Advanced Examples
 
 ### Combined Markdown and HTML
 
-{% story '@nvidia-elements/markdown/markdown/markdown.stories.json', 'CombinedFromTemplate' %}
+{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'CombinedFromTemplate' %}
 
 ## Interactive Examples
 
 ### Dynamic Content Updates
 
-{% story '@nvidia-elements/markdown/markdown/markdown.stories.json', 'DynamicSource' %}
+{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'DynamicSource' %}
 
 ### Streaming Content
 
-{% story '@nvidia-elements/markdown/markdown/markdown.stories.json', 'JavaScriptDriven' %}
+{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'JavaScriptDriven' %}
 
 ## Features
 

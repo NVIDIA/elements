@@ -35,7 +35,7 @@
     },
     "./data.html.json": "./dist/data.html.json",
     "./data.snippets.json": "./dist/data.snippets.json",
-    "./*.stories.json": "./dist/*.stories.json",
+    "./*.examples.json": "./dist/*.examples.json",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
@@ -224,8 +224,9 @@
         "../elements/dist/internal/utils/dom.js",
         "../elements/dist/internal/styles/**",
         "!../elements/dist/**/*.stories.js",
+        "!../elements/dist/**/*.examples.js",
         "../labs/forms/dist/**/*.js",
-        "!../labs/forms/dist/**/*.stories.js",
+        "!../labs/forms/dist/**/*.examples.js",
         "../themes/dist/**/*.css",
         "src/**",
         "!src/**/*.test.ts",

@@ -13,12 +13,12 @@
 
 ## Default
 
-{% story '@nvidia-elements/monaco/problems/problems.stories.json', 'Default', '{ "resizable": false, "inline": true }' %}
+{% example '@nvidia-elements/monaco/problems/problems.examples.json', 'Default', '{ "resizable": false, "inline": true }' %}
 
 ## Empty
 
-{% story '@nvidia-elements/monaco/problems/problems.stories.json', 'Empty', '{ "resizable": false, "inline": true }' %}
+{% example '@nvidia-elements/monaco/problems/problems.examples.json', 'Empty', '{ "resizable": false, "inline": true }' %}
 
 ## Custom Empty Slot
 
-{% story '@nvidia-elements/monaco/problems/problems.stories.json', 'CustomEmptySlot', '{ "resizable": false, "inline": true }' %}
+{% example '@nvidia-elements/monaco/problems/problems.examples.json', 'CustomEmptySlot', '{ "resizable": false, "inline": true }' %}

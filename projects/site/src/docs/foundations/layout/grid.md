@@ -122,11 +122,11 @@ Similar to flexbox layouts, grid supports comprehensive alignment options that c
 
 ### Span Items 2
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridSpan2' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridSpan2' %}
 
 ### Span Items 6
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridSpan6' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridSpan6' %}
 
 ## Child-controlled Spans vs Parent-controlled Spans
 
@@ -195,55 +195,55 @@ You can mix both approaches for maximum flexibility. Items with explicit `span` 
 
 ### Child-controlled Spans Example
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridVariableSpans' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridVariableSpans' %}
 
 ### Align Top
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignTop' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignTop' %}
 
 ### Align Vertical Center
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignVerticalCenter' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignVerticalCenter' %}
 
 ### Align Bottom
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignBottom' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignBottom' %}
 
 ### Align Horizontal Center
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignHorizontalCenter' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignHorizontalCenter' %}
 
 ### Align Center
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignCenter' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignCenter' %}
 
 ### Align Center and Bottom
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignCenterAndBottom' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignCenterAndBottom' %}
 
 ### Align Top and Right
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignTopAndRight' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignTopAndRight' %}
 
 ### Align Center and Right
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignCenterAndRight' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignCenterAndRight' %}
 
 ### Align Bottom and Right
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignBottomAndRight' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignBottomAndRight' %}
 
 ### Align Horizontal Stretch
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignHorizontalStretch' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignHorizontalStretch' %}
 
 ### Align Vertical Stretch
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignVerticalStretch' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignVerticalStretch' %}
 
 ### Align Full Stretch
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GridAlignFullStretch' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GridAlignFullStretch' %}
 
 ## Common Grid Patterns
 

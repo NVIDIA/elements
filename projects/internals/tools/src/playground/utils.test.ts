@@ -267,7 +267,7 @@ describe('createDefaultFiles', () => {
 
   it('should add layout styles CSS when name includes layout stories', () => {
     const files = createDefaultFiles('<nve-button></nve-button>', elements, {
-      name: '@nvidia-elements/styles/layout.stories.json'
+      name: '@nvidia-elements/styles/layout.examples.json'
     });
     expect(files['styles.css']).toBeDefined();
     expect(files['styles.css'].content).toContain('Layout example styles');
@@ -276,7 +276,7 @@ describe('createDefaultFiles', () => {
 
   it('should add responsive styles CSS when name includes responsive stories', () => {
     const files = createDefaultFiles('<nve-button></nve-button>', elements, {
-      name: '@nvidia-elements/styles/responsive.stories.json'
+      name: '@nvidia-elements/styles/responsive.examples.json'
     });
     expect(files['styles.css']).toBeDefined();
     expect(files['styles.css'].content).toContain('Responsive example styles');
@@ -285,7 +285,7 @@ describe('createDefaultFiles', () => {
 
   it('should add empty styles CSS when name includes responsive-patterns stories', () => {
     const files = createDefaultFiles('<nve-button></nve-button>', elements, {
-      name: '@nvidia-elements/styles/responsive-patterns.stories.json'
+      name: '@nvidia-elements/styles/responsive-patterns.examples.json'
     });
     expect(files['styles.css']).toBeDefined();
     expect(files['styles.css'].content).toBe('');
@@ -391,7 +391,7 @@ describe('createIndexHTML behavior', () => {
 
   it('should include layout styles when name contains layout stories', () => {
     const files = createDefaultFiles('<nve-button></nve-button>', elements, {
-      name: '@nvidia-elements/styles/layout.stories.json'
+      name: '@nvidia-elements/styles/layout.examples.json'
     });
     const htmlContent = files['index.html'].content;
     expect(htmlContent).toContain('@nvidia-elements/styles/dist/labs/layout-viewport.css');
@@ -401,7 +401,7 @@ describe('createIndexHTML behavior', () => {
 
   it('should include layout styles when name contains responsive stories', () => {
     const files = createDefaultFiles('<nve-button></nve-button>', elements, {
-      name: '@nvidia-elements/styles/responsive.stories.json'
+      name: '@nvidia-elements/styles/responsive.examples.json'
     });
     const htmlContent = files['index.html'].content;
     expect(htmlContent).toContain('@nvidia-elements/styles/dist/labs/layout-viewport.css');
@@ -411,7 +411,7 @@ describe('createIndexHTML behavior', () => {
 
   it('should include layout styles when name contains responsive-patterns stories', () => {
     const files = createDefaultFiles('<nve-button></nve-button>', elements, {
-      name: '@nvidia-elements/styles/responsive-patterns.stories.json'
+      name: '@nvidia-elements/styles/responsive-patterns.examples.json'
     });
     const htmlContent = files['index.html'].content;
     expect(htmlContent).toContain('@nvidia-elements/styles/dist/labs/layout-viewport.css');

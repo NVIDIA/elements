@@ -44,7 +44,7 @@
   "exports": {
     "./package.json": "./package.json",
     "./CHANGELOG.md": "./CHANGELOG.md",
-    "./*.stories.json": "./dist/*.stories.json",
+    "./*.examples.json": "./dist/*.examples.json",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
