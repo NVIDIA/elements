@@ -70,7 +70,10 @@ export function renderAPIValueTable(apiValue) {
 }
 
 export function renderAPITable(element, type, options = { container: 'flat' }) {
-  const items = element.manifest[typeAliasMap[type]]?.filter(i => !i.deprecated) ?? [];
+  const items =
+    element.manifest[typeAliasMap[type]]
+      ?.filter(i => !i.name?.startsWith?.('nve-') && i.privacy !== 'private' && i.privacy !== 'protected')
+      ?.sort(i => (i.deprecated ? 1 : -1)) ?? [];
   const noItems = items.length === 0;
   return /* html */ `
   <div class="api-table" nve-layout="column gap:sm full">
@@ -83,18 +86,20 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
       </nve-grid-header>
       ${items
         .map(i => {
-          const rawDescription = i.descriptionText ?? i.description;
+          const rawDescription = i.deprecated ?? i.descriptionText ?? i.description;
           const description = rawDescription
             ? markdown
                 .render(rawDescription)
                 .trim()
-                .replaceAll('<p', '<p nve-text="body relaxed sm"')
+                .replaceAll('<p', `<p nve-text="body relaxed sm${i.deprecated ? ' muted' : ''}"`)
                 .replaceAll('<code', '<code nve-text="code nowrap"')
             : '';
           return /* html */ `<nve-grid-row>
         <nve-grid-cell><span nve-text="code nowrap">${i.name === '' ? 'default' : i.name}</span></nve-grid-cell>
         ${type === 'property' ? /* html */ `<nve-grid-cell><span nve-text="code nowrap">${i.attribute ?? 'none'}</span></nve-grid-cell>` : ''}
-        <nve-grid-cell>${description}</nve-grid-cell>
+        <nve-grid-cell>
+          <div nve-layout="column gap:xs">${i.deprecated ? '<nve-badge status="warning" container="flat">deprecated</nve-badge>' : ''}${description}</div>
+        </nve-grid-cell>
         ${
           type === 'property'
             ? /* html */ `<nve-grid-cell>
