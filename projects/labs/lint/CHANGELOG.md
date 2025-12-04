@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.5.2...@nvidia-elements/lint-v0.6.0) (2025-12-04)
+
+
+### Features
+
+* **labs-lint:** invalid element and attribute value rules ([4f032a7](https://github.com/NVIDIA/elements/commit/4f032a7e83c162cc1aa424a365e16136935b5009))
+
 ## [@nvidia-elements/lint-v0.5.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.5.1...@nvidia-elements/lint-v0.5.2) (2025-12-02)
 
 
