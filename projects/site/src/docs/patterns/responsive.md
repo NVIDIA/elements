@@ -9,8 +9,8 @@
 
 ## Responsive Tabs
 
-{% story '@nve-internals/patterns/responsive.stories.json', 'ResponsiveTabs' %}
+{% example '@nve-internals/patterns/responsive.examples.json', 'ResponsiveTabs' %}
 
 ## Responsive Toolbar
 
-{% story '@nve-internals/patterns/responsive.stories.json', 'ResponsiveToolbar' %}
+{% example '@nve-internals/patterns/responsive.examples.json', 'ResponsiveToolbar' %}
