@@ -57,6 +57,7 @@ export class Dropdown extends LitElement {
   @property({ type: String }) anchor: string | HTMLElement;
 
   /**
+   * @deprecated Use the popover API instead.
    * The trigger defines what element triggers an `open` interaction event.
    * A trigger can accept a idref string within the same render root or a HTMLElement DOM reference.
    */
@@ -74,6 +75,7 @@ export class Dropdown extends LitElement {
   @property({ type: String, reflect: true }) alignment: PopoverAlign = 'start';
 
   /**
+   * @deprecated Use the popover API instead.
    * Determines if popover visibility behavior should be automatically controlled by the trigger.
    */
   @property({ type: Boolean, reflect: true, attribute: 'behavior-trigger' }) behaviorTrigger: boolean;
