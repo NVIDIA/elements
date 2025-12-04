@@ -47,11 +47,15 @@ slot:not([name]) {
   background: var(--background);
   padding: var(--padding);
   overflow: var(--overflow);
-  height: var(--height);
+  min-height: var(--height);
   display: block;
   resize: horizontal;
   min-width: 120px;
   width: 100%;
+}
+
+::slotted(iframe) {
+  height: var(--height) !important;
 }
 
 :host([align='center']) slot:not([name]) {
