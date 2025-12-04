@@ -25,6 +25,7 @@ import styles from './notification.css?inline';
  * @event open - Dispatched when the notification is opened.
  * @event close - Dispatched when the notification is closed.
  * @slot default content slot
+ * @slot icon - content slot for the status icon
  * @cssprop --border-radius
  * @cssprop --background
  * @cssprop --color
@@ -34,6 +35,8 @@ import styles from './notification.css?inline';
  * @cssprop --width
  * @cssprop --max-width
  * @cssprop --border
+ * @cssprop --gap
+ * @cssprop --status-color
  * @storybook https://NVIDIA.github.io/elements/docs/elements/notification/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=2876-64384&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
@@ -119,7 +122,7 @@ export class Notification extends LitElement {
 
   get #popoverContent() {
     return html`
-    <nve-icon .name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information} part="status-icon"></nve-icon>
+    <slot name="icon"><nve-icon .name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information} part="status-icon"></nve-icon></slot>
     ${this.closable ? html`<nve-icon-button part="icon-button" @click=${this.hidePopover} icon-name="cancel" size="sm" container="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
     <slot></slot>`;
   }
