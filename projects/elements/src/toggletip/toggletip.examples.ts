@@ -125,7 +125,7 @@ export const Closable = {
 export const AlertGroup = {
   inline: false,
   render: () => html`
-<nve-toggletip anchor="btn" behavior-trigger trigger="btn">
+<nve-toggletip id="toggletip-alert-group">
   <nve-toggletip-header>
     <nve-alert-group status="danger" container="full" prominence="emphasis">
       <nve-alert>Workflow Failed</nve-alert>
@@ -136,7 +136,7 @@ export const AlertGroup = {
     <nve-button style="width: 100%">Retry Workflow</nve-button>  
   </nve-toggletip-footer>
 </nve-toggletip>
-<nve-button id="btn">button</nve-button>
+<nve-button popovertarget="toggletip-alert-group">button</nve-button>
   `
 };
 
