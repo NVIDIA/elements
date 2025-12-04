@@ -9,8 +9,8 @@
 
 ## Trend
 
-{% story '@internals/patterns/trend.stories.json', 'Trend' %}
+{% example '@internals/patterns/trend.examples.json', 'Trend' %}
 
 ## Trend Data
 
-{% story '@internals/patterns/trend.stories.json', 'TrendData' %}
+{% example '@internals/patterns/trend.examples.json', 'TrendData' %}

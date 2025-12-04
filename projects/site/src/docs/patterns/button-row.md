@@ -9,24 +9,24 @@
 
 ## Filled Icon
 
-{% story '@internals/patterns/patterns.stories.json', 'ButtonRowFilledIcon' %}
+{% example '@internals/patterns/patterns.examples.json', 'ButtonRowFilledIcon' %}
 
 ## Flat Icon
 
-{% story '@internals/patterns/patterns.stories.json', 'ButtonRowFlatIcon' %}
+{% example '@internals/patterns/patterns.examples.json', 'ButtonRowFlatIcon' %}
 
 ## Small Flat Icon
 
-{% story '@internals/patterns/patterns.stories.json', 'ButtonRowSmallFlatIcon' %}
+{% example '@internals/patterns/patterns.examples.json', 'ButtonRowSmallFlatIcon' %}
 
 ## Flat Text
 
-{% story '@internals/patterns/patterns.stories.json', 'ButtonRowFlatText' %}
+{% example '@internals/patterns/patterns.examples.json', 'ButtonRowFlatText' %}
 
 ## Flat Text with Icon
 
-{% story '@internals/patterns/patterns.stories.json', 'ButtonRowFlatTextWithIcon' %}
+{% example '@internals/patterns/patterns.examples.json', 'ButtonRowFlatTextWithIcon' %}
 
 ## Filled Text with Icon
 
-{% story '@internals/patterns/patterns.stories.json', 'ButtonRowFilledTextWithIcon' %}
+{% example '@internals/patterns/patterns.examples.json', 'ButtonRowFilledTextWithIcon' %}

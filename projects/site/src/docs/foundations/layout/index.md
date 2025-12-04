@@ -159,43 +159,43 @@ Control the space between elements using t-shirt sizing values that maintain vis
 
 ### Gap xxxs
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapXxxs' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GapXxxs' %}
 
 ### Gap xxs
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapXxs' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GapXxs' %}
 
 ### Gap xs
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapXs' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GapXs' %}
 
 ### Gap sm
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapSm' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GapSm' %}
 
 ### Gap md
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapMd' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GapMd' %}
 
 ### Gap lg
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapLg' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GapLg' %}
 
 ### Gap xl
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapXl' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GapXl' %}
 
 ### Gap xxl
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapXxl' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GapXxl' %}
 
 ### Gap xxxl
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapXxxl' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GapXxxl' %}
 
 ### No Gap
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'GapNone' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'GapNone' %}
 
 ## Padding
 
@@ -230,67 +230,67 @@ Or alternatively use the short hand to just pad the x and y axes.
 
 ### Padding Top
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadTop' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadTop' %}
 
 ### Padding Left
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadLeft' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadLeft' %}
 
 ### Padding Right
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadRight' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadRight' %}
 
 ### Padding Bottom
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadBottom' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadBottom' %}
 
 ### Padding X
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadX' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadX' %}
 
 ### Padding Y
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadY' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadY' %}
 
 ### Padding xxxs
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadXxxs' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadXxxs' %}
 
 ### Padding xxs
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadXxs' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadXxs' %}
 
 ### Padding xs
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadXs' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadXs' %}
 
 ### Padding sm
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadSm' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadSm' %}
 
 ### Padding md
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadMd' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadMd' %}
 
 ### Padding lg
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadLg' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadLg' %}
 
 ### Padding xl
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadXl' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadXl' %}
 
 ### Padding xxl
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadXxl' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadXxl' %}
 
 ### Padding xxxl
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadXxxl' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadXxxl' %}
 
 ### No Padding
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'PadNone' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'PadNone' %}
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
@@ -309,7 +309,7 @@ For convenience a `full` option can be set to give the container 100% width & he
 <section nve-layout="full">
 ```
 
-{% story '@nvidia-elements/styles/layout.stories.json', 'Full' %}
+{% example '@nvidia-elements/styles/layout.examples.json', 'Full' %}
 
 ## Layout Composition
 

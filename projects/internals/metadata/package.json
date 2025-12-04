@@ -353,19 +353,16 @@
         "./src/tasks/examples.ts",
         "./src/tasks/examples.utils.ts",
         "./src/utils/utils.ts",
+        "../../elements/dist/**/*.examples.json",
         "../../elements/dist/**/*.stories.json",
-        "../../elements-react/dist/**/*.stories.json",
-        "../../styles/dist/**/*.stories.json",
-        "../../testing/dist/**/*.stories.json",
-        "../../themes/dist/**/*.stories.json",
-        "../../labs/brand/dist/**/*.stories.json",
-        "../../labs/code/dist/**/*.stories.json",
-        "../../labs/forms/dist/**/*.stories.json",
-        "../../labs/markdown/dist/**/*.stories.json",
-        "../../labs/behaviors-alpine/dist/**/*.stories.json",
-        "../../labs/playwright-screencast/dist/**/*.stories.json",
-        "../../monaco/dist/**/*.stories.json",
-        "../../patterns/dist/**/*.stories.json"
+        "../../styles/dist/**/*.examples.json",
+        "../../themes/dist/**/*.examples.json",
+        "../../labs/brand/dist/**/*.examples.json",
+        "../../labs/code/dist/**/*.examples.json",
+        "../../labs/forms/dist/**/*.examples.json",
+        "../../labs/markdown/dist/**/*.examples.json",
+        "../../monaco/dist/**/*.examples.json",
+        "../../patterns/dist/**/*.examples.json"
       ],
       "output": [
         "static/examples.json"

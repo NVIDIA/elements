@@ -67,7 +67,7 @@ The following media query breakpoints are available for gap, replace `...` with 
 - `@xl|gap:...`
 - `@xxl|gap:...`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportGapResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'ViewportGapResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
 ## Responsive Padding
 
@@ -79,7 +79,7 @@ The following media query breakpoints are available for padding, replace `...` w
 - `@xl|pad:...`
 - `@xxl|pad:...`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportPadResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'ViewportPadResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
 ## Breakpoints for Switching Flexbox Layout Direction
 
@@ -101,7 +101,7 @@ The following media query breakpoints are available for swapping flex direction:
 - `@xl|column`
 - `@xxl|column`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportFlexDirectionResponsive', '{ "inline": false, "resizable": true, "height": "360px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'ViewportFlexDirectionResponsive', '{ "inline": false, "resizable": true, "height": "360px" }' %}
 
 ### Reverse Direction
 
@@ -110,7 +110,7 @@ In addition to the above, you can also use the following syntax for flipping the
 - `@...|row-reverse`
 - `@...|column-reverse`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportFlexDirectionReverse', '{ "inline": false, "resizable": true, "height": "425px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'ViewportFlexDirectionReverse', '{ "inline": false, "resizable": true, "height": "425px" }' %}
 
 ## Responsive Grid
 
@@ -142,11 +142,11 @@ Or:
 
 ### Responsive Grid Parent
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportResponsiveGrid', '{ "inline": false, "resizable": true, "height": "420px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'ViewportResponsiveGrid', '{ "inline": false, "resizable": true, "height": "420px" }' %}
 
 ### Responsive Grid Items
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportResponsiveGridItems', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'ViewportResponsiveGridItems', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
 ## Hiding Elements Based on Viewport Size
 
@@ -178,7 +178,7 @@ The following attributes are available for _showing_ elements at specific viewpo
 - `nve-display="@xl|show"`
 - `nve-display="@xxl|show"`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ViewportHideResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'ViewportHideResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
 ## Summary
 
