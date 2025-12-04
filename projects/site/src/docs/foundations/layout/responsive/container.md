@@ -71,7 +71,7 @@ The following container query breakpoints are available for gap, replace `...` w
 - `&xl|gap:...`
 - `&xxl|gap:...`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'GapResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'GapResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
 ## Responsive Padding
 
@@ -84,7 +84,7 @@ The following container query breakpoints are available for padding, replace `..
 - `&xl|pad:...`
 - `&xxl|pad:...`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'PadResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'PadResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
 ## Breakpoints for Switching Flexbox Layout Direction
 
@@ -108,7 +108,7 @@ The following container query breakpoints are available for swapping flex direct
 - `&xl|column`
 - `&xxl|column`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionResponsive', '{ "inline": false, "resizable": true, "height": "360px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'FlexDirectionResponsive', '{ "inline": false, "resizable": true, "height": "360px" }' %}
 
 ### Reverse Direction
 
@@ -117,7 +117,7 @@ In addition to the above, you can also use the following syntax for flipping the
 - `&...|row-reverse`
 - `&...|column-reverse`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'FlexDirectionReverse', '{ "inline": false, "resizable": true, "height": "425px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'FlexDirectionReverse', '{ "inline": false, "resizable": true, "height": "425px" }' %}
 
 ## Responsive Grid
 
@@ -149,11 +149,11 @@ Or:
 
 ### Responsive Grid Parent
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveGrid', '{ "inline": false, "resizable": true, "height": "420px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'ResponsiveGrid', '{ "inline": false, "resizable": true, "height": "420px" }' %}
 
 ### Responsive Grid Items
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'ResponsiveGridItems', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'ResponsiveGridItems', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
 ## Hiding Elements Based on Container Size
 
@@ -187,7 +187,7 @@ The following attributes are available for _showing_ elements at specific contai
 - `nve-display="&xl|show"`
 - `nve-display="&xxl|show"`
 
-{% story '@nvidia-elements/styles/responsive.stories.json', 'HideResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
+{% example '@nvidia-elements/styles/responsive.examples.json', 'HideResponsive', '{ "inline": false, "resizable": true, "height": "260px" }' %}
 
 ## Summary
 

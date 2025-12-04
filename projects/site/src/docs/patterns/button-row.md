@@ -9,24 +9,24 @@
 
 ## Filled Icon
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'ButtonRowFilledIcon' %}
+{% example '@nve-internals/patterns/patterns.examples.json', 'ButtonRowFilledIcon' %}
 
 ## Flat Icon
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'ButtonRowFlatIcon' %}
+{% example '@nve-internals/patterns/patterns.examples.json', 'ButtonRowFlatIcon' %}
 
 ## Small Flat Icon
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'ButtonRowSmallFlatIcon' %}
+{% example '@nve-internals/patterns/patterns.examples.json', 'ButtonRowSmallFlatIcon' %}
 
 ## Flat Text
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'ButtonRowFlatText' %}
+{% example '@nve-internals/patterns/patterns.examples.json', 'ButtonRowFlatText' %}
 
 ## Flat Text with Icon
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'ButtonRowFlatTextWithIcon' %}
+{% example '@nve-internals/patterns/patterns.examples.json', 'ButtonRowFlatTextWithIcon' %}
 
 ## Filled Text with Icon
 
-{% story '@nve-internals/patterns/patterns.stories.json', 'ButtonRowFilledTextWithIcon' %}
+{% example '@nve-internals/patterns/patterns.examples.json', 'ButtonRowFilledTextWithIcon' %}

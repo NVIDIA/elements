@@ -40,42 +40,42 @@ function getTime(): number {
 
 ## Default
 
-{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Default' %}
+{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Default' %}
 
 ## Code
 
 {% api 'nve-codeblock', 'property', 'code' %}
 
-{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Code' %}
+{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Code' %}
 
 ## Container
 
 {% api 'nve-codeblock', 'property', 'container' %}
 
-{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Flat' %}
+{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Flat' %}
 
 ## Theme
 
 A Theme can be set independent of the global theme using the `nve-theme` attribute.
 
-{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Theme' %}
+{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Theme' %}
 
 ## Line Numbers
 
 {% api 'nve-codeblock', 'property', 'lineNumbers' %}
 
-{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'LineNumbers' %}
+{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'LineNumbers' %}
 
 ## Highlight
 
 {% api 'nve-codeblock', 'property', 'highlight' %}
 
-{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Highlight' %}
+{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Highlight' %}
 
 ## Overflow
 
-{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'Overflow' %}
+{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Overflow' %}
 
 ## Line Wrap
 
-{% story '@nvidia-elements/code/codeblock/codeblock.stories.json', 'LineWrap' %}
+{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'LineWrap' %}

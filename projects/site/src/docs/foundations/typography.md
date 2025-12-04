@@ -48,39 +48,39 @@ See the links below for specific integration patterns for the following framewor
 
 ## Types
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'Default' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'Default' %}
 
 ## Colors
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'Color' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'Color' %}
 
 ## Weights
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'Weights' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'Weights' %}
 
 ## Transforms
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'Transforms' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'Transforms' %}
 
 ## Link
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'Link' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'Link' %}
 
 ## List
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'List' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'List' %}
 
 ## Ordered List
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'OrderedList' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'OrderedList' %}
 
 ## Unstyled List
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'UnstyledList' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'UnstyledList' %}
 
 ## Navigation List
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'NavList' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'NavList' %}
 
 ```html
 <!-- Navigation List -->
@@ -102,18 +102,18 @@ See the links below for specific integration patterns for the following framewor
 
 ## Headings
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'Headings' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'Headings' %}
 
 ## Size
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'Size' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'Size' %}
 
 ## Line height
 
 Use different attributes with `nve-text` like `loose`, `relaxed`, `moderate`, `snug`, and `tight` to give an element a relative line-height based on its current font-size.
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'LineHeightRelative' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'LineHeightRelative' %}
 
 Use different attributes with `nve-text` like `line-height-3` and `line-height-4` to give an element a fixed line-height, irrespective of the current font-size. These are useful when you need very precise control over an element’s final size.
 
-{% story '@nvidia-elements/styles/typography.stories.json', 'LineHeightFixed' %}
+{% example '@nvidia-elements/styles/typography.examples.json' 'LineHeightFixed' %}
