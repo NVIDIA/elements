@@ -12,27 +12,27 @@
 
 ## Standard
 
-{% story 'nve-combobox', 'Default' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Default' %}
 
 ## Single Select
 
-{% story 'nve-combobox', 'Select' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Select' %}
 
 ## Multi Select
 
-{% story 'nve-combobox', 'MultiSelect' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'MultiSelect' %}
 
 ## Empty Default
 
-{% story 'nve-combobox', 'EmptyDefault' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'EmptyDefault' %}
 
 ## Option Label
 
-{% story 'nve-combobox', 'Label' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Label' %}
 
 ## Overflow
 
-{% story 'nve-combobox', 'Overflow' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Overflow' %}
 
 ## Layout
 
@@ -40,11 +40,11 @@
 
 ### Vertical
 
-{% story 'nve-combobox', 'Vertical' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-combobox', 'Horizontal' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Horizontal' %}
 
 ## Container
 
@@ -52,36 +52,36 @@
 
 ### Flat
 
-{% story 'nve-combobox', 'Flat' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Flat' %}
 
 ## Footer
 
 {% api 'nve-combobox', 'slot', 'footer' %}
 
-{% story 'nve-combobox', 'Footer' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Footer' %}
 
 ## Form
 
-{% story 'nve-combobox', 'Form' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Form' %}
 
 ## Reset
 
 {% api 'nve-combobox', 'property', 'reset' %}
 
-{% story 'nve-combobox', 'Reset' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Reset' %}
 
 ## Disabled Options
 
-{% story 'nve-combobox', 'DisabledOptions' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'DisabledOptions' %}
 
 ## No Tags
 
 {% api 'nve-combobox', 'property', 'notags' %}
 
-{% story 'nve-combobox', 'NoTags' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'NoTags' %}
 
 ## Select All
 
 {% api 'nve-combobox', 'property', 'selectAll' %}
 
-{% story 'nve-combobox', 'SelectAll' %}
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'SelectAll' %}
