@@ -1,6 +1,6 @@
 ---
 {
-  title: 'Notification Snackbar',
+  title: 'Notification',
   layout: 'docs.11ty.js',
   tag: 'nve-notification',
   associatedElements: ['nve-notification-group']
@@ -31,6 +31,10 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% example '@nvidia-elements/core/notification/notification.examples.json' 'Status' '{ "inline": false, "height": "440px" }' %}
 
+## Actions
+
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'Actions' '{ "inline": false, "height": "250px" }' %}
+
 ## Interactive Group
 
 {% example '@nvidia-elements/core/notification/notification.examples.json' 'InteractiveGroup' '{ "inline": false, "height": "400px" }' %}
@@ -56,3 +60,7 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 ## Content Wrap
 
 {% example '@nvidia-elements/core/notification/notification.examples.json' 'ContentWrap' '{ "inline": false, "height": "250px" }' %}
+
+## Custom Status
+
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'CustomStatus' '{ "inline": false, "height": "250px" }' %}
