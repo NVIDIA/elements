@@ -11,12 +11,16 @@
     padding: 0;
   }
 
-  li {
+  h2 {
+    margin-bottom: var(--nve-ref-space-sm) !important;
+  }
+
+  ul[nve-text~='nav'] li {
     display: flex;
     flex-direction: column;
     gap: var(--nve-ref-space-md);
-    padding: 0;
-    margin: 0;
+    padding: 0 !important;
+    margin: 0 !important;
   }
 
   & > li {
