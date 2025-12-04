@@ -26,6 +26,39 @@ export const Default = {
 };
 
 /**
+ * @summary Notification with actions for immediate user response. Use notifications with actions when the notification requires user decision-making (like "Retry", "View Details", or "Undo"), making the next step clear and reducing friction in error recovery or task completion flows.
+ */
+export const Actions = {
+  render: () => html`
+<nve-notification position="center">
+  <h3 nve-text="label">Notification</h3>
+  <p nve-text="body">some text content in a notification</p>
+  <div nve-layout="row gap:sm align:right">
+    <nve-button container="inline">Dismiss</nve-button>
+    <nve-button container="inline">Accept</nve-button>
+  </div>
+</nve-notification>
+`
+};
+
+/**
+ * @summary Custom status color for notification. Use custom status color and icon slot to convey a different meaning than the default status color. Use sparingly as it can add unnecessary cognitive load to the user.
+ * @tags test-case
+ */
+export const CustomStatus = {
+  render: () => html`
+<nve-notification style="--status-color: var(--nve-ref-color-purple-plum-800)" position="center">
+  <h3 nve-text="label">Notification</h3>
+  <p nve-text="body">some text content in a notification</p>
+  <nve-icon slot="icon" name="sparkles" aria-label="Info"></nve-icon>
+  <div nve-layout="row align:right">
+    <nve-button container="inline">Action</nve-button>
+  </div>
+</nve-notification>
+`
+};
+
+/**
  * @summary Visual example of notification structure with centered positioning. Demonstrates the standard notification layout with title and body content for consistent implementation patterns.
  */
 export const Visual = {
