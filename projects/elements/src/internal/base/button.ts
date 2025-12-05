@@ -144,7 +144,7 @@ export class BaseButton extends LitElement {
    * The id of the element to which the command is applied.
    * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
    */
-  @property({ type: String, attribute: 'commandfor', reflect: true }) commandFor: string;
+  @property({ type: String, attribute: 'commandfor', reflect: true }) commandForElement: string;
 
   /**
    * The command to be applied to the element.

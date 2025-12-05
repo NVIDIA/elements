@@ -8,7 +8,7 @@ import { TypeCommandController } from '@nvidia-elements/core/internal';
 @customElement('type-command-controller-test-element')
 class TypeCommandControllerTestElement extends LitElement {
   @property({ type: String }) command: string;
-  @property({ type: String, attribute: 'commandfor' }) commandFor: string;
+  @property({ type: String, attribute: 'commandfor' }) commandForElement: string;
   @property({ type: Boolean }) readonly: boolean;
   @property({ type: Boolean }) disabled: boolean;
   #typeCommandController = new TypeCommandController(this);
