@@ -31,7 +31,7 @@ export type SuggestedLanguages =
 
 const SYNTAX_VALIDATABLE_LANGUAGES: SuggestedLanguages[] = ['css', 'json', 'javascript', 'typescript'];
 
-export type JSONSchema = monaco.languages.json.JSONSchema;
+export type JSONSchema = monaco.json.JSONSchema;
 
 // Derived from: monaco.editor.LineNumbersType
 export type LineNumberFormatter = (lineNumber: number) => string;
@@ -45,13 +45,13 @@ function isSyntaxValidationAvailable(language: string): boolean {
 }
 
 function setJSONSchemaForModel(monaco: Monaco, model: monaco.editor.ITextModel, schema: JSONSchema | undefined) {
-  const options = monaco.languages.json.jsonDefaults.diagnosticsOptions;
+  const options = monaco.json.jsonDefaults.diagnosticsOptions;
   const uri = model.uri.toString();
 
   const otherSchemas = options.schemas.filter(({ fileMatch }) => fileMatch.length === 1 && fileMatch[0] !== uri);
   const schemasForThisModel = schema ? [{ uri, fileMatch: [uri], schema }] : [];
 
-  monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+  monaco.json.jsonDefaults.setDiagnosticsOptions({
     ...options,
     validate: true,
     schemaValidation: 'error',
@@ -300,7 +300,7 @@ export abstract class BaseMonacoInput<
       folding: this.folding,
       insertSpaces: this.insertSpaces,
       lineNumbers: this.lineNumbers,
-      minimap: { ...this.#editor?.getOption(73 /* EditorOption.minimap */), enabled: this.minimap },
+      minimap: { ...this.#editor?.getOption(81 /* EditorOption.minimap */), enabled: this.minimap },
       readOnly: this.readOnly || this.disabled,
       tabSize: this.tabSize,
       wordWrap: this.wordWrap

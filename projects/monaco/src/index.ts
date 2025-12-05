@@ -9,12 +9,15 @@ import { createMonacoEnvironment } from './environment.js';
 globalThis.MonacoEnvironment ??= createMonacoEnvironment();
 
 // Pre-configured TypeScript compiler options with modern defaults suitable for in-browser validation
-monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-  module: monaco.languages.typescript.ModuleKind.ESNext,
-  target: monaco.languages.typescript.ScriptTarget.ESNext,
+monaco.typescript.typescriptDefaults.setCompilerOptions({
+  module: monaco.typescript.ModuleKind.ESNext,
+  target: monaco.typescript.ScriptTarget.ESNext,
   isolatedModules: true,
   allowNonTsExtensions: true,
-  moduleDetection: 3 /* monaco.languages.typescript.ModuleDetectionKind.Force */
+  // https://www.typescriptlang.org/tsconfig/#moduleDetection
+  // NOTE: This enum is not exported by monaco-editor, so we use the corresponding number directly.
+  // https://github.com/microsoft/monaco-editor/blob/main/src/language/typescript/lib/typescriptServices.d.ts
+  moduleDetection: 3 /* monaco.typescript.ModuleDetectionKind.Force */
 });
 
 export * from './vendor/monaco-editor/editor/editor.main.js';
