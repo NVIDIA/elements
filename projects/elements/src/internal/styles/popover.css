@@ -76,67 +76,67 @@
 
   .arrow {
     position-area: bottom;
-    translate: 0% -50%;
+    translate: 0% 50%;
   }
 
   :host([position='top']) .arrow {
     position-area: bottom;
-    translate: 0% -50%;
+    translate: 0% 50%;
   }
 
   :host([position='top'][alignment='end']) .arrow {
     position-area: bottom right;
-    translate: -150% -50%;
+    translate: -50% 50%;
   }
 
   :host([position='top'][alignment='start']) .arrow {
     position-area: bottom left;
-    translate: 150% -50%;
+    translate: 50% 50%;
   }
 
   :host([position='bottom']) .arrow {
     position-area: top;
-    translate: 0% 50%;
+    translate: 0% -50%;
   }
 
   :host([position='bottom'][alignment='end']) .arrow {
     position-area: top right;
-    translate: -150% 50%;
+    translate: -50% -50%;
   }
 
   :host([position='bottom'][alignment='start']) .arrow {
     position-area: top left;
-    translate: 150% 50%;
+    translate: 50% -50%;
   }
 
   :host([position='left']) .arrow {
     position-area: right;
-    translate: -50% 0%;
+    translate: 50% 0%;
   }
 
   :host([position='left'][alignment='end']) .arrow {
     position-area: bottom right;
-    translate: -50% -150%;
+    translate: 50% -50%;
   }
 
   :host([position='left'][alignment='start']) .arrow {
     position-area: top right;
-    translate: -50% 150%;
+    translate: 50% 50%;
   }
 
   :host([position='right']) .arrow {
     position-area: left;
-    translate: 50% 0%;
+    translate: -50% 0%;
   }
 
   :host([position='right'][alignment='end']) .arrow {
     position-area: bottom left;
-    translate: 50% -150%;
+    translate: -50% -50%;
   }
 
   :host([position='right'][alignment='start']) .arrow {
     position-area: top left;
-    translate: 50% 150%;
+    translate: -50% 50%;
   }
 
   /** positioning */
@@ -246,6 +246,68 @@
 
   :host([position='right']) {
     position-try-fallbacks: right, left, top, bottom;
+  }
+}
+
+/*
+ * Remove the following @supports block after Chrome 145 is stable.
+ * This is to compensate for a change in Chrome 144 for how anchor positioning with transforms works.
+ * https://developer.chrome.com/blog/chrome-144-beta#css_anchor_positioning_with_transforms
+ * https://x.com/una/status/1995538970223018004
+ * 
+ * The (not selector(::search-text)) selector is used to target Chrome 143 and below.
+ */
+@supports (not selector(::search-text)) and (position-area: bottom) {
+  .arrow {
+    translate: 0% -50%;
+  }
+
+  :host([position='top']) .arrow {
+    translate: 0% -50%;
+  }
+
+  :host([position='top'][alignment='end']) .arrow {
+    translate: -150% -50%;
+  }
+
+  :host([position='top'][alignment='start']) .arrow {
+    translate: 150% -50%;
+  }
+
+  :host([position='bottom']) .arrow {
+    translate: 0% 50%;
+  }
+
+  :host([position='bottom'][alignment='end']) .arrow {
+    translate: -150% 50%;
+  }
+
+  :host([position='bottom'][alignment='start']) .arrow {
+    translate: 150% 50%;
+  }
+
+  :host([position='left']) .arrow {
+    translate: -50% 0%;
+  }
+
+  :host([position='left'][alignment='end']) .arrow {
+    translate: -50% -150%;
+  }
+
+  :host([position='left'][alignment='start']) .arrow {
+    translate: -50% 150%;
+  }
+
+  :host([position='right']) .arrow {
+    translate: 50% 0%;
+  }
+
+  :host([position='right'][alignment='end']) .arrow {
+    translate: 50% -150%;
+  }
+
+  :host([position='right'][alignment='start']) .arrow {
+    translate: 50% 150%;
   }
 }
 
