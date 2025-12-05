@@ -40,7 +40,7 @@ export class CopyButton extends Button {
   /**
    * Defines the value to be copied to user clipboard. Use `aria-label` to set the tooltip hint.
    */
-  @property({ type: String, reflect: true }) value: string;
+  @property({ type: String }) value: string;
 
   static styles = useStyles([...Button.styles, styles]);
 
