@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.6.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.6.0...@nvidia-elements/lint-v0.6.1) (2025-12-05)
+
+
+### Bug Fixes
+
+* **labs-lint:** correct peer dependency ([15f47db](https://github.com/NVIDIA/elements/commit/15f47db8708e3bd6450f9cf41665e88ea0bea0b0))
+
 ## [@nvidia-elements/lint-v0.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.5.2...@nvidia-elements/lint-v0.6.0) (2025-12-04)
 
 
