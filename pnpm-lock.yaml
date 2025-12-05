@@ -239,7 +239,7 @@ importers:
         specifier: 1.6.1
         version: 1.6.1
       '@nvidia-elements/forms':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../labs/forms
       '@nvidia-elements/themes':
         specifier: workspace:^
@@ -508,7 +508,7 @@ importers:
   projects/internals/tools:
     dependencies:
       '@nvidia-elements/lint':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../labs/lint
       '@pnpm/catalogs.config':
         specifier: 0.1.0
@@ -774,7 +774,7 @@ importers:
         specifier: 1.23.0
         version: 1.23.0(zod@4.1.13)
       '@nvidia-elements/lint':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../lint
       adm-zip:
         specifier: 0.5.16
@@ -972,7 +972,7 @@ importers:
         specifier: 'catalog:'
         version: 0.47.0(jiti@2.6.1)
       '@nvidia-elements/styles':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../../styles
     devDependencies:
       '@nve-internals/eslint':
@@ -1125,7 +1125,7 @@ importers:
   projects/monaco:
     dependencies:
       '@nvidia-elements/forms':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../labs/forms
       lit:
         specifier: 'catalog:'
