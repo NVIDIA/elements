@@ -91,6 +91,8 @@ catalog:
   vitest: 4.0.7
   zod: 4.1.13
 
+ignorePatchFailures: false
+
 minimumReleaseAge: 1140
 
 onlyBuiltDependencies:
