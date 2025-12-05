@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.50.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.50.0...@nvidia-elements/core-v1.50.1) (2025-12-05)
+
+
+### Bug Fixes
+
+* **elements:** correct peer dependency ([a28a242](https://github.com/NVIDIA/elements/commit/a28a24247203e066d45aa9f7a6ebb3e9ccaee319))
+
 ## [@nvidia-elements/core-v1.50.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.49.4...@nvidia-elements/core-v1.50.0) (2025-12-05)
 
 
