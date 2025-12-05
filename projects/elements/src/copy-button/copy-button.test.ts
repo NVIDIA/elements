@@ -25,6 +25,13 @@ describe(CopyButton.metadata.tag, () => {
     expect(customElements.get(CopyButton.metadata.tag)).toBeDefined();
   });
 
+  it('should not reflect value property', () => {
+    element.removeAttribute('value');
+    element.value = 'noreflect';
+    expect(element.getAttribute('value')).toBeNull();
+    expect(element.value).toBe('noreflect');
+  });
+
   it('should enable copy functionality and show toast when clicked', async () => {
     const mockClipboard = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
     element.click();
