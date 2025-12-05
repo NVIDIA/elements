@@ -263,6 +263,7 @@ export const renderDocsNav = data => /* html */ `
     <a href="docs/patterns/">Patterns</a>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/browse/') ? 'highlighted' : ''}><a href="docs/patterns/browse/">Browse</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/editor/') ? 'highlighted' : ''}><a href="docs/patterns/editor/">Editor</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/heatmap/') ? 'highlighted' : ''}><a href="docs/patterns/heatmap/">Heatmap</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/subheader/') ? 'highlighted' : ''}><a href="docs/patterns/subheader/">Subheader</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/panel/') ? 'highlighted' : ''}><a href="docs/patterns/panel/">Panel</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/trend/') ? 'highlighted' : ''}><a href="docs/patterns/trend/">Trend</a></nve-tree-node>
