@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.1.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.8...@nvidia-elements/cli-v0.1.9) (2025-12-05)
+
+
+### Bug Fixes
+
+* **labs-cli:** correct peer dependency ([d5d0700](https://github.com/NVIDIA/elements/commit/d5d07000ccc13c3ff30c46e9eae3b819c7523a02))
+
 ## [@nvidia-elements/cli-v0.1.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.7...@nvidia-elements/cli-v0.1.8) (2025-12-02)
 
 
