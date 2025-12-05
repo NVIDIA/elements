@@ -180,6 +180,28 @@ export const Wrap = {
 };
 
 /**
+ * @summary demonstrates tooltip anchoring to a dynamically created anchor element.
+ * @tags test-case
+ */
+export const AsyncTrigger = {
+  render: () => html`
+<div id="async-trigger-demo">
+  <nve-tooltip id="tooltip">hello there</nve-tooltip>
+  <template><nve-button popovertarget="tooltip">button</nve-button></template>
+</div>
+<script type="module">
+  import '@nvidia-elements/core/button/define.js';
+  import '@nvidia-elements/core/tooltip/define.js';
+  const template = document.querySelector('#async-trigger-demo template');
+  const instance = template.content.cloneNode(true);
+  setTimeout(() => {
+    document.querySelector('#async-trigger-demo').appendChild(instance);
+  }, 1000);
+</script>
+  `
+};
+
+/**
  * @summary Tooltip with absolute positioning strategy for precise placement in complex layouts. Use when default fixed positioning causes issues with scrolling containers or nested positioning contexts.
  * @tags test-case
  */
