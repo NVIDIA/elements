@@ -7,6 +7,9 @@ import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/copy-button/define.js';
+import '@nvidia-elements/code/codeblock/define.js';
+import '@nvidia-elements/code/codeblock/languages/html.js';
+import '@nvidia-elements/code/codeblock/languages/typescript.js';
 import styles from './canvas.css?inline';
 
 function convertToJsxElement(html: string): string {
