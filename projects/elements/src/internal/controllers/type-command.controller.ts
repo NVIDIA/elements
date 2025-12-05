@@ -13,7 +13,7 @@ export function typeCommand<T extends Command>(): ClassDecorator {
 export type Command = ReactiveElement &
   HTMLElement & {
     command: string;
-    commandFor: string;
+    commandForElement: string;
     readonly: boolean;
     disabled: boolean;
   };
@@ -41,10 +41,12 @@ export class TypeCommandController<T extends Command> implements ReactiveControl
   }
 
   #triggerCommand = () => {
-    if (this.host.commandFor && globalThis.CommandEvent) {
-      const match = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(el => el.id === this.host.commandFor);
+    if (this.host.commandForElement && globalThis.CommandEvent) {
+      const match = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(
+        el => el.id === this.host.commandForElement
+      );
       if (!match) {
-        console.warn('commandFor', this.host.commandFor, 'not found');
+        console.warn('commandForElement', this.host.commandForElement, 'not found');
       } else {
         match.dispatchEvent(new globalThis.CommandEvent('command', { command: this.host.command, source: this.host }));
       }
