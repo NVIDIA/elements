@@ -176,7 +176,7 @@
     }
   },
   "dependencies": {
-    "@nvidia-elements/lint": "workspace:*",
+    "@nvidia-elements/lint": "workspace:^",
     "@pnpm/exportable-manifest": "7.0.3",
     "@pnpm/read-project-manifest": "6.0.6",
     "@pnpm/workspace.read-manifest": "2.2.0",
