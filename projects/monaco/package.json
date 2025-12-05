@@ -160,11 +160,11 @@
   },
   "dependencies": {
     "lit": "catalog:",
-    "@nvidia-elements/forms": "workspace:*"
+    "@nvidia-elements/forms": "workspace:^"
   },
   "peerDependencies": {
-    "@nvidia-elements/core": "workspace:*",
-    "@nvidia-elements/themes": "workspace:*"
+    "@nvidia-elements/core": "workspace:^",
+    "@nvidia-elements/themes": "workspace:^"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
