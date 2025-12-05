@@ -159,8 +159,8 @@
     "test:visual": "wireit"
   },
   "dependencies": {
-    "lit": "catalog:",
-    "@nvidia-elements/forms": "workspace:^"
+    "@nvidia-elements/forms": "workspace:^",
+    "lit": "catalog:"
   },
   "peerDependencies": {
     "@nvidia-elements/core": "workspace:^",
@@ -184,7 +184,7 @@
     "dts-bundle-generator": "9.5.1",
     "esbuild": "0.25.5",
     "eslint": "catalog:",
-    "monaco-editor": "0.52.2",
+    "monaco-editor": "0.55.1",
     "postcss": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",

@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
+import type { Mock } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { MonacoInput } from '@nvidia-elements/monaco/input';
 import { MonacoDiffInput } from '@nvidia-elements/monaco/diff-input';
@@ -52,7 +53,9 @@ type InputTestConfig = {
   setup: (element: MonacoInput | MonacoDiffInput) => {
     monaco: Monaco;
     model: monaco.editor.ITextModel;
-    updateEditorOptionsSpy: ReturnType<typeof vi.spyOn>;
+    updateEditorOptionsSpy: Mock<
+      (newOptions: monaco.editor.IEditorOptions & monaco.editor.IGlobalEditorOptions) => void
+    >;
   };
 };
 
@@ -92,8 +95,13 @@ describe.each<InputTestConfig>([
   let element: MonacoInput | MonacoDiffInput;
   let monaco: Monaco;
   let model: monaco.editor.ITextModel;
-  let updateEditorOptionsSpy: ReturnType<typeof vi.spyOn>;
-  let consoleSpy: ReturnType<typeof vi.spyOn>;
+  let updateEditorOptionsSpy: Mock<
+    (newOptions: monaco.editor.IEditorOptions & monaco.editor.IGlobalEditorOptions) => void
+  >;
+  let consoleSpy: Mock<{
+    (...data: unknown[]): void;
+    (message?: unknown, ...optionalParams: unknown[]): void;
+  }>;
 
   beforeEach(async () => {
     fixture = await createFixture(template());
@@ -678,7 +686,7 @@ describe.each<InputTestConfig>([
   });
 
   describe('async validation behavior', () => {
-    let validationSpy: ReturnType<typeof vi.fn>;
+    let validationSpy: Mock<EventListener>;
 
     beforeEach(async () => {
       element.language = 'typescript';
