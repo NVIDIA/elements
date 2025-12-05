@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
+import type { Mock } from 'vitest';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
 import { MonacoDiffInput } from '@nvidia-elements/monaco/diff-input';
 import { MonacoDiffEditor } from '@nvidia-elements/monaco/diff-editor';
@@ -17,9 +18,14 @@ describe('nve-monaco-diff-input', () => {
   let originalEditor: monaco.editor.IStandaloneCodeEditor;
   let originalModel: monaco.editor.ITextModel;
 
-  let updateOptionsSpy: ReturnType<typeof vi.spyOn>;
-  let updateOriginalEditorOptionsSpy: ReturnType<typeof vi.spyOn>;
-  let consoleSpy: ReturnType<typeof vi.spyOn>;
+  let updateOptionsSpy: Mock<(newOptions: monaco.editor.IDiffEditorOptions) => void>;
+  let updateOriginalEditorOptionsSpy: Mock<
+    (newOptions: monaco.editor.IEditorOptions & monaco.editor.IGlobalEditorOptions) => void
+  >;
+  let consoleSpy: Mock<{
+    (...data: unknown[]): void;
+    (message?: unknown, ...optionalParams: unknown[]): void;
+  }>;
 
   beforeEach(async () => {
     fixture = await createFixture(html`

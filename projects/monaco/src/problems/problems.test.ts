@@ -244,9 +244,9 @@ describe('nve-monaco-problems', () => {
   let editor: monaco.editor.IStandaloneCodeEditor;
   let model: monaco.editor.ITextModel;
 
-  let openSpy: Mock<(url: string, target: string) => void>;
+  let openSpy: Mock<(url: string, target: string) => Window>;
   let setModelValueSpy: Mock<(value: string) => void>;
-  let dispatchEventSpy: Mock<(event: Event) => void>;
+  let dispatchEventSpy: Mock<(event: Event) => boolean>;
 
   beforeEach(async () => {
     fixture = await createFixture(html`
@@ -705,7 +705,7 @@ describe('nve-monaco-problems', () => {
     await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
     await expect.poll(() => getEditorSelector(editor, '.problem-source-target')).not.toBeNull();
 
-    openSpy.mockImplementation(() => {});
+    openSpy.mockImplementation(() => window);
 
     const targetEl = getEditorSelector(editor, '.problem-source-target');
     const lineEl = targetEl.closest<HTMLElement>('.view-line');

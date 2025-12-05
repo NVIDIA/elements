@@ -59,20 +59,26 @@ const postcssPlugin: Plugin = {
 
 // ---
 
-// Add /* @vite-ignore */ to dynamic import()s within vendored monaco-editor code
-const viteIgnorePlugin: Plugin = {
-  name: 'vite-ignore-import',
+const workerUrlRewritePlugin: Plugin = {
+  name: 'worker-url-rewrite',
   setup(build) {
-    build.onLoad({ filter: /\.js$/ }, async ({ path }) => {
-      if (
-        path.endsWith('monaco-editor/esm/vs/base/common/worker/simpleWorker.js') ||
-        path.endsWith('monaco-editor/esm/vs/editor/common/services/editorSimpleWorker.js')
-      ) {
-        const code = await fs.promises.readFile(path, 'utf8');
-        return {
-          contents: code.replace(/import\(`(\$\{[^`]+\})`\)/g, 'import(/* @vite-ignore */`$1`)'),
-          loader: 'js'
-        };
+    const languages = ['css', 'html', 'json', 'typescript'];
+
+    build.onLoad({ filter: /workerManager\.js$/ }, async ({ path }) => {
+      const normalizedPath = path.replace(/\\/g, '/');
+
+      for (const language of languages) {
+        if (normalizedPath.endsWith(`monaco-editor/esm/vs/language/${language}/workerManager.js`)) {
+          const workerFile = language === 'typescript' ? 'ts.worker.js' : `${language}.worker.js`;
+          let code = await fs.promises.readFile(path, 'utf8');
+          return {
+            contents: code.replace(
+              new RegExp(`new Worker\\(new URL\\(['"\`]${workerFile}['"\`],\\s*import\\.meta\\.url\\)`, 'g'),
+              `new Worker(/* @vite-ignore */new URL(/* @vite-ignore */'${`../../../workers/${workerFile}`}', import.meta.url)`
+            ),
+            loader: 'js'
+          };
+        }
       }
       return;
     });
@@ -91,7 +97,7 @@ await build({
     'monaco-editor/esm/vs/language/json/json.worker.js',
     'monaco-editor/esm/vs/language/typescript/ts.worker.js'
   ],
-  plugins: [viteIgnorePlugin, postcssPlugin],
+  plugins: [workerUrlRewritePlugin, postcssPlugin],
   outdir,
   format: 'esm',
   target: 'es2020',
@@ -118,7 +124,12 @@ const types = generateDtsBundle([
   }
 ]);
 
-fs.writeFileSync(path.resolve(outdir, 'editor/editor.main.d.ts'), types.join('\n'));
+fs.writeFileSync(path.resolve(outdir, 'editor/editor.api.d.ts'), types.join('\n'));
+
+fs.copyFileSync(
+  path.resolve(node_modules_dir, 'monaco-editor/esm/vs/editor/editor.main.d.ts'),
+  path.resolve(outdir, 'editor/editor.main.d.ts')
+);
 
 // ---
 
