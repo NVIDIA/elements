@@ -147,7 +147,7 @@ catalogs:
 
 patchedDependencies:
   monaco-editor:
-    hash: 73102acb7ecd2a107d3f5ef1e9fffcd4f7a18ee834eedad991a738cbe8e50221
+    hash: 7add229bfcc4afb225997f02f707b1ebbb8e18242054fa0eac66fb74f423e4b4
     path: patches/monaco-editor.patch
 
 importers:
@@ -1183,8 +1183,8 @@ importers:
         specifier: 'catalog:'
         version: 9.38.0(jiti@2.6.1)
       monaco-editor:
-        specifier: 0.52.2
-        version: 0.52.2(patch_hash=73102acb7ecd2a107d3f5ef1e9fffcd4f7a18ee834eedad991a738cbe8e50221)
+        specifier: 0.55.1
+        version: 0.55.1(patch_hash=7add229bfcc4afb225997f02f707b1ebbb8e18242054fa0eac66fb74f423e4b4)
       postcss:
         specifier: 'catalog:'
         version: 8.5.6
@@ -6473,6 +6473,9 @@ packages:
     resolution: {integrity: sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w==, tarball: https://registry.npmjs.org
     engines: {node: '>= 4'}
 
+  dompurify@3.2.7:
+    resolution: {integrity: sha512-WhL/YuveyGXJaerVlMYGWhvQswa7myDG17P7Vu65EWC05o8vfeNbvNf4d/BOvH99+ZW+LlQsc1GDKMa1vNK6dw==, tarball: https://registry.npmjs.org
+
   domutils@2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==, tarball: https://registry.npmjs.org
 
@@ -8361,6 +8364,11 @@ packages:
     peerDependencies:
       marked: '>=1 <16'
 
+  marked@14.0.0:
+    resolution: {integrity: sha512-uIj4+faQ+MgHgwUW1l2PsPglZLOLOT1uErt06dAPtx2kjteLAkbsd/0FiYg/MGS+i7ZKLb7w2WClxHkzOOuryQ==, tarball: https://registry.npmjs.org
+    engines: {node: '>= 18'}
+    hasBin: true
+
   marked@16.4.1:
     resolution: {integrity: sha512-ntROs7RaN3EvWfy3EZi14H4YxmT6A5YvywfhO+0pm+cH/dnSQRmdAmoFIc3B9aiwTehyk7pESH4ofyBY+V5hZg==, tarball: https://registry.npmjs.org
     engines: {node: '>= 20'}
@@ -8567,8 +8575,8 @@ packages:
   module-details-from-path@1.0.4:
     resolution: {integrity: sha512-EGWKgxALGMgzvxYF1UyGTy0HXX/2vHLkw6+NvDKW2jypWbHpjQuj4UMcqQWXHERJhVGKikolT06G3bcKe4fi7w==, tarball: https://registry.npmjs.org
 
-  monaco-editor@0.52.2:
-    resolution: {integrity: sha512-GEQWEZmfkOGLdd3XK8ryrfWz3AIP8YymVXiPHEdewrUq7mh0qrKrfHLNCXcbB6sTnMLnOZ3ztSiKcciFUkIJwQ==, tarball: https://registry.npmjs.org
+  monaco-editor@0.55.1:
+    resolution: {integrity: sha512-jz4x+TJNFHwHtwuV9vA9rMujcZRb0CEilTEwG2rRSpe/A7Jdkuj8xPKttCgOh+v/lkHy7HsZ64oj+q3xoAFl9A==, tarball: https://registry.npmjs.org
 
   moo@0.5.2:
     resolution: {integrity: sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q==, tarball: https://registry.npmjs.org
@@ -16236,6 +16244,10 @@ snapshots:
     dependencies:
       domelementtype: 2.3.0
 
+  dompurify@3.2.7:
+    optionalDependencies:
+      '@types/trusted-types': 2.0.7
+
   domutils@2.8.0:
     dependencies:
       dom-serializer: 1.4.1
@@ -18453,6 +18465,8 @@ snapshots:
       node-emoji: 2.2.0
       supports-hyperlinks: 3.2.0
 
+  marked@14.0.0: {}
+
   marked@16.4.1: {}
 
   marked@9.1.6: {}
@@ -18621,7 +18635,10 @@ snapshots:
 
   module-details-from-path@1.0.4: {}
 
-  monaco-editor@0.52.2(patch_hash=73102acb7ecd2a107d3f5ef1e9fffcd4f7a18ee834eedad991a738cbe8e50221): {}
+  monaco-editor@0.55.1(patch_hash=7add229bfcc4afb225997f02f707b1ebbb8e18242054fa0eac66fb74f423e4b4):
+    dependencies:
+      dompurify: 3.2.7
+      marked: 14.0.0
 
   moo@0.5.2: {}
 

@@ -96,7 +96,7 @@ describe('nve-monaco-diff-editor', () => {
 
     const { original, modified } = editor.getModel();
 
-    const worker = await monaco.languages.typescript.getTypeScriptWorker();
+    const worker = await monaco.typescript.getTypeScriptWorker();
     const workerInstance = await worker(original.uri, modified.uri);
 
     const diagnostics = await workerInstance.getSemanticDiagnostics(modified.uri.toString());
