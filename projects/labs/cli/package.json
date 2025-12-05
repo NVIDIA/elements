@@ -26,7 +26,7 @@
     "nve:uninstall": "pnpm uninstall --global @nvidia-elements/cli"
   },
   "dependencies": {
-    "@nvidia-elements/lint": "workspace:*",
+    "@nvidia-elements/lint": "workspace:^",
     "@inquirer/prompts": "8.0.1",
     "@modelcontextprotocol/sdk": "1.23.0",
     "adm-zip": "0.5.16",
