@@ -1,3 +1,15 @@
+## [@nvidia-elements/core-v1.50.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.49.4...@nvidia-elements/core-v1.50.0) (2025-12-05)
+
+
+### Features
+
+* **elements:** notification add icon slot support ([862bf86](https://github.com/NVIDIA/elements/commit/862bf86a83747ebf1c665cf2e27439abeb611f01)), closes [#188](https://github.com/NVIDIA/elements/issues/188)
+
+
+### Bug Fixes
+
+* **elements:** combobox match filter style ([e878347](https://github.com/NVIDIA/elements/commit/e878347bc3a3b755b3cfb2d79e480a2d7dae2fe4))
+
 ## [@nvidia-elements/core-v1.49.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.49.3...@nvidia-elements/core-v1.49.4) (2025-12-03)
 
 
