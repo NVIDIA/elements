@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.3.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.3.1...@nvidia-elements/monaco-v1.3.2) (2025-12-05)
+
+
+### Bug Fixes
+
+* **monaco:** correct peer dependency ([bfe4277](https://github.com/NVIDIA/elements/commit/bfe4277cf4ff7af65c1b54c4be3e326233ec27ea))
+
 ## [@nvidia-elements/monaco-v1.3.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.3.0...@nvidia-elements/monaco-v1.3.1) (2025-11-06)
 
 
