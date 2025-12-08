@@ -1,3 +1,12 @@
+## [@nvidia-elements/core-v1.50.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.50.1...@nvidia-elements/core-v1.50.2) (2025-12-08)
+
+
+### Bug Fixes
+
+* **elements:** commandfor api name convention ([9b0d25b](https://github.com/NVIDIA/elements/commit/9b0d25b1688a466ea69460dcffea3871b7694824))
+* **elements:** copy button reflection ([47a4709](https://github.com/NVIDIA/elements/commit/47a4709b5ddc38eae644c3aa0a42b0dc6be55094))
+* **elements:** popover anchor arrow position ([af7dfcf](https://github.com/NVIDIA/elements/commit/af7dfcf9aa2e2b2f6a3ff7bdca24539384d1e90d))
+
 ## [@nvidia-elements/core-v1.50.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.50.0...@nvidia-elements/core-v1.50.1) (2025-12-05)
 
 
