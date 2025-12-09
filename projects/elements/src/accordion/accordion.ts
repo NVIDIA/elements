@@ -229,6 +229,7 @@ export class Accordion extends LitElement implements ContainerElement {
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
  * @cssprop --padding
+ * @slot - This is a default slot for accordions within the group
  * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
  * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/

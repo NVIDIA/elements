@@ -105,6 +105,39 @@ Render the metadata tags of a given Example template.
 
 </div>
 
+## Example Group Shortcode
+
+The `example-group` shortcode visualizes multiple related examples in a single layout. Each example summary/description will be rendered alongside its example.
+
+| Parameter    | Description                                                     | Type     |
+| ------------ | --------------------------------------------------------------- | -------- |
+| Paths        | Fully qualified paths to the examples file and its example name | `string` |
+| Content Slot | Additional context about related examples in example group      | `string` |
+
+```html
+{% raw %}
+### Single or Group
+
+{% example-group '@nvidia-elements/core/accordion/accordion.examples.json:Single' '@nvidia-elements/core/accordion/accordion.examples.json:Multiple' %}
+
+Accordions may be leveraged alone or in conjunction with others to create various progressive disclosure patterns.
+
+{% endexample-group %}
+{% endraw %}
+```
+
+<div class="shortcode-demo">
+
+### Single or Group
+
+{% example-group '@nvidia-elements/core/accordion/accordion.examples.json:Single' '@nvidia-elements/core/accordion/accordion.examples.json:Multiple' %}
+
+Accordions may be leveraged alone or in conjunction with others to create various progressive disclosure patterns.
+
+{% endexample-group %}
+
+</div>
+
 ## API Shortcode
 
 Renders the description metadata of a given API. The identifier of the referenced API is optional. If no identifier is provided then all API references of provided type are displayed.
@@ -211,6 +244,22 @@ Renders the description metadata of a given API. The identifier of the reference
 
 </div>
 
+### API Value
+
+<div nve-layout="grid gap:md span-items:6">
+
+```html
+{% raw %}
+{% api 'nve-button' 'property' 'interaction' 'destructive' %}
+{% endraw %}
+```
+
+<div class="shortcode-demo">
+{% api 'nve-button' 'property' 'interaction' 'destructive' %}
+</div>
+
+</div>
+
 ### API Type
 
 If no identifier is provided then all API references of provided type are displayed.
@@ -274,6 +323,22 @@ Renders the "Do/Don't" shortcode layout for guidance on potential anti-patterns.
 ```html
 {% raw %}
 {% split %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Pressed' %}
+{% api 'nve-button' 'property' 'pressed' %}
+{% endsplit %}
+{% endraw %}
+```
+
+<div class="shortcode-demo">
+{% split %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'Pressed' %}
+{% api 'nve-button' 'property' 'pressed' %}
+{% endsplit %}
+</div>
+
+```html
+{% raw %}
+{% split %}
 {% example '@nvidia-elements/core/button/button.examples.json' 'Interaction' %}
 {% api 'nve-button' 'property' 'interaction' %}
 {% endsplit %}
@@ -286,3 +351,60 @@ Renders the "Do/Don't" shortcode layout for guidance on potential anti-patterns.
 {% api 'nve-button' 'property' 'interaction' %}
 {% endsplit %}
 </div>
+
+## Grouping Disjointed APIs
+
+When comparing disjointed or non-enum based properties use the api value shortcode to explicitly render the api description for the given value.
+
+```html
+{% raw %}
+### States
+{% split %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'GroupStates' %}
+
+| State    | Usage                                               |
+| -------- | --------------------------------------------------- |
+| selected | {% api 'nve-button' 'property' 'selected' 'true' %} |
+| pressed  | {% api 'nve-button' 'property' 'pressed' 'true' %}  |
+| disabled | {% api 'nve-button' 'property' 'disabled' 'true' %} |
+{% endsplit %}
+{% endraw %}
+```
+
+<div class="shortcode-demo">
+
+### States
+
+{% split %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'GroupStates' %}
+
+| State    | Usage                                               |
+| -------- | --------------------------------------------------- |
+| selected | {% api 'nve-button' 'property' 'selected' 'true' %} |
+| pressed  | {% api 'nve-button' 'property' 'pressed' 'true' %}  |
+| disabled | {% api 'nve-button' 'property' 'disabled' 'true' %} |
+
+{% endsplit %}
+
+</div>
+
+<!-- this is internally undocumented for now -->
+<!--
+## Example Doc Shortcode
+
+The `example-doc` shortcode is similar to the `example` shortcode but will automatically render the best match documentation available for a given example. The shortcode will attempt automatically match/prioritize the most detailed content available first such as the component API, component description and example summary. This is an **opinionated** API due to the automatic selection of best choice example content. Compose other shortcodes for more fine-grained control of content.
+
+| Parameter | Description                                            | Type     |
+| --------- | ------------------------------------------------------ | -------- |
+| Path      | Fully qualified path to the examples file              | `string` |
+| Name      | Case sensitive name of the example to render from file | `string` |
+
+```html
+{% raw %}
+{% example-doc '@nvidia-elements/core/dot/dot.examples.json' 'Size' %}
+{% endraw %}
+```
+
+<div class="shortcode-demo">
+{% example-doc '@nvidia-elements/core/dot/dot.examples.json' 'Size' %}
+</div> -->

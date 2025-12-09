@@ -11,6 +11,8 @@ import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generato
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
 import { installShortcode, doDontShortcode, splitShortcode } from './src/_11ty/shortcodes/index.js';
 import { exampleShortcode, exampleTagsShortcode } from './src/_11ty/shortcodes/example.js';
+import { exampleDocShortcode } from './src/_11ty/shortcodes/example-doc.js';
+import { exampleGroupShortcode } from './src/_11ty/shortcodes/example-group.js';
 import { apiShortcode } from './src/_11ty/shortcodes/api.js';
 import {
   renderInstallShortcode,
@@ -143,6 +145,8 @@ export default function (eleventyConfig) {
 
   // Register custom shortcodes for documentation
   eleventyConfig.addAsyncShortcode('example', exampleShortcode);
+  eleventyConfig.addAsyncShortcode('example-doc', exampleDocShortcode);
+  eleventyConfig.addPairedShortcode('example-group', exampleGroupShortcode);
   eleventyConfig.addAsyncShortcode('story', exampleShortcode); // deprecated
   eleventyConfig.addAsyncShortcode('example-tags', exampleTagsShortcode);
   eleventyConfig.addAsyncShortcode('api', apiShortcode);
@@ -187,7 +191,7 @@ export default function (eleventyConfig) {
     ]);
   });
 
-  // prevent rebuild of api and examples collections on each run
+  // prevent rebuild of api, examples tabs, and example pages on each run
   if (process.env.ELEVENTY_RUN_MODE === 'serve') {
     const collectionCache = new Set();
     eleventyConfig.addPreprocessor('api-collection', '11ty.js', data => {
@@ -195,7 +199,11 @@ export default function (eleventyConfig) {
         return false; // skip collection file if already written
       }
 
-      if (data.page.filePathStem.includes('_tabs/api') || data.page.filePathStem.includes('_tabs/examples')) {
+      if (
+        data.page.filePathStem.includes('_tabs/api') ||
+        data.page.filePathStem.includes('_tabs/examples') ||
+        data.page.filePathStem.startsWith('/examples/')
+      ) {
         collectionCache.add(data.page.filePathStem); // add file to cache to skip it on next run
       }
 

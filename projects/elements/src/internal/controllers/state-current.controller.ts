@@ -11,7 +11,7 @@ export function stateCurrent<T extends Current>(): ClassDecorator {
     target.addInitializer((instance: T) => new StateCurrentController(instance));
 }
 
-export type Current = ReactiveElement & { current: 'page' | 'step'; readonly?: boolean; _internals?: ElementInternals };
+type Current = ReactiveElement & { current: 'page' | 'step'; readonly?: boolean; _internals?: ElementInternals };
 
 export class StateCurrentController<T extends Current> implements ReactiveController {
   constructor(private host: T) {
