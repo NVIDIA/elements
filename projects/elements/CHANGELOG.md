@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.51.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.50.2...@nvidia-elements/core-v1.51.0) (2025-12-09)
+
+
+### Features
+
+* **elements:** add dropzone icon props ([39c9389](https://github.com/NVIDIA/elements/commit/39c93891f73dfdd5d87fcb6517535822c0888bca))
+
 ## [@nvidia-elements/core-v1.50.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.50.1...@nvidia-elements/core-v1.50.2) (2025-12-08)
 
 
