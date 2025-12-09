@@ -56,27 +56,52 @@ export function elementSummary(tag) {
     .flatMap(result => result.assertionResults)
     .find(result => result.name?.includes(tag));
 
-  return /* html */ `<section nve-layout="column gap:md align:stretch">
-  <div nve-layout="row gap:xs align:center align:space-between align:wrap">
-    <div nve-layout="row gap:xxs align:center">
-      ${badgeStatus(element?.manifest?.metadata?.status ?? '', '', ESM_ELEMENTS_VERSION)}
-      ${badgeCoverage(coverageTotal, '', 'Coverage:&nbsp;')}
-      ${badgeBundle(lighthouseResults?.payload?.javascript?.kb ?? 0, '', 'Bundle:&nbsp;')}
-      ${badgeLighthouse(lighthouseResults?.scores ?? {}, '', 'Lighthouse:&nbsp;')}
-      ${badgeAxe(axeResults?.message ?? '', '')}
-    </div>
+  return /* html */ `
+  <section nve-layout="column gap:md align:stretch">
+    <div nve-layout="row gap:xs align:center align:space-between align:wrap">
+      <div nve-layout="row gap:xxs align:center">
+        ${badgeStatus(element?.manifest?.metadata?.status ?? '', '', ESM_ELEMENTS_VERSION)}
+        ${badgeCoverage(coverageTotal, '', 'Coverage:&nbsp;')}
+        ${badgeBundle(lighthouseResults?.payload?.javascript?.kb ?? 0, '', 'Bundle:&nbsp;')}
+        ${badgeLighthouse(lighthouseResults?.scores ?? {}, '', 'Lighthouse:&nbsp;')}
+        ${badgeAxe(axeResults?.message ?? '', '')}
 
-    <div nve-layout="row gap:xxs align:center">
-      ${element?.manifest?.metadata?.behavior === 'form' ? /* html */ `<nve-button size="sm"><nve-icon name="checklist" size="sm"></nve-icon><a href="./docs/elements/forms/controls/#form-associated-elements" target="_blank">Form Control</a></nve-button>` : ''}
+        <nve-badge size="sm" status="success"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">${element?.manifest?.metadata?.since ?? ''}</a></nve-badge>
+      </div>
+  </section>`;
+}
 
-      <nve-button size="sm" style="margin-left: auto"><nve-icon name="code" size="sm"></nve-icon><a href="${element?.manifest?.metadata?.aria ?? ''}" target="_blank">Spec</a></nve-button>
+/**
+/**
+ * Generates the component support buttons section for a given custom element tag.
+ * @param {string} tag - The component tag name
+ * @returns {string} HTML string containing the component support buttons
+ */
+export function elementSupportButtons(tag) {
+  const element = elements.find(d => d.name === tag);
 
-      ${element?.manifest?.metadata?.figma ? /* html */ `<nve-button size="sm"><nve-icon name="shapes" size="sm"></nve-icon><a href="${element.manifest.metadata.figma}" target="_blank">Figma</a></nve-button>` : ''}
+  return /* html */ `
+  <section nve-layout="row align:center gap:md">
+      <nve-button size="sm">
+        <nve-icon name="hand" size="sm"></nve-icon>
+        <a href="http://nv/elements-slack" target="_blank">Support Request</a>
+      </nve-button>
 
-      <nve-button size="sm"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">${element?.manifest?.metadata?.since ?? ''}</a></nve-button>
-    </div>
-  </div>
-</section>`;
+      <nve-button size="sm">
+        <nve-icon name="edit" size="sm"></nve-icon>
+        <a href="https://github.com/NVIDIA/elements/-/issues/new?issuable_template=chore&issue[title]=chore(docs): update ${tag} component documentation" target="_blank">Request Doc Edit</a>
+      </nve-button>
+
+      <nve-button size="sm">
+        <nve-icon name="person-2" size="sm"></nve-icon>
+        <a href="${element?.manifest?.metadata?.aria ?? ''}" target="_blank">ARIA Pattern</a>
+      </nve-button>
+
+      <nve-button size="sm">
+        <nve-icon name="shapes" size="sm"></nve-icon>
+        <a href="${element?.manifest?.metadata?.figma ?? ''}" target="_blank">Figma</a>
+      </nve-button>
+  </section>`;
 }
 
 /**
