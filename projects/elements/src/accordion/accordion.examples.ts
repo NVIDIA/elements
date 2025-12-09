@@ -18,7 +18,7 @@ export const Default = {
     <nve-accordion-header>
       <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
     </nve-accordion-header>
-    <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
   </nve-accordion>
 </nve-accordion-group>
   `
@@ -34,7 +34,7 @@ export const Disabled = {
     <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
     <p nve-text="body">some additional content</p>
   </nve-accordion-header>
-  <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+  <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
 </nve-accordion>
   `
 };
@@ -51,13 +51,13 @@ export const Container = {
       <nve-accordion-header>
         <h2 nve-text="heading xs medium" slot="prefix">Heading 1</h2>
       </nve-accordion-header>
-      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
     </nve-accordion>
     <nve-accordion>
       <nve-accordion-header>
         <h2 nve-text="heading xs medium" slot="prefix">Heading 2</h2>
       </nve-accordion-header>
-      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
     </nve-accordion>
   </nve-accordion-group>
   <nve-accordion-group container="inset" behavior-expand>
@@ -65,13 +65,13 @@ export const Container = {
       <nve-accordion-header>
         <h2 nve-text="heading xs medium" slot="prefix">Heading 1</h2>
       </nve-accordion-header>
-      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
     </nve-accordion>
     <nve-accordion>
       <nve-accordion-header>
         <h2 nve-text="heading xs medium" slot="prefix">Heading 2</h2>
       </nve-accordion-header>
-      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
     </nve-accordion>
   </nve-accordion-group>
   <nve-accordion-group container="flat" behavior-expand>
@@ -79,13 +79,13 @@ export const Container = {
       <nve-accordion-header>
         <h2 nve-text="heading xs medium" slot="prefix">Heading 1</h2>
       </nve-accordion-header>
-      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
     </nve-accordion>
     <nve-accordion>
       <nve-accordion-header>
         <h2 nve-text="heading xs medium" slot="prefix">Heading 2</h2>
       </nve-accordion-header>
-      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
     </nve-accordion>
   </nve-accordion-group>
 </div>
@@ -103,7 +103,7 @@ export const Animated = {
         <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
         <p nve-text="body">some additional content</p>
       </nve-accordion-header>
-      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
     </nve-accordion>
   `
 };
@@ -118,13 +118,13 @@ export const BehaviorExpandSingle = {
     <nve-accordion-header>
       <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
     </nve-accordion-header>
-    <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
   </nve-accordion>
   <nve-accordion>
     <nve-accordion-header>
       <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
     </nve-accordion-header>
-    <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
   </nve-accordion>
 </nve-accordion-group>
   `
@@ -141,7 +141,7 @@ export const CustomIconButtonInteractive = {
   <nve-accordion-header>
     <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
   </nve-accordion-header>
-  <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+  <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
 </nve-accordion>
 <script type="module">
   const accordion = document.querySelector('#custom-icon-button-accordion');
@@ -170,7 +170,7 @@ export const WithActions = {
         <nve-icon-button container="flat" icon-name="add" size="sm" slot="suffix"></nve-icon-button>
         <nve-icon-button container="flat" icon-name="delete" size="sm" slot="suffix"></nve-icon-button>
       </nve-accordion-header>
-      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
     </nve-accordion>
   `
 };
@@ -208,7 +208,47 @@ export const DeprecatedSlots = {
         <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
         <nve-icon-button container="flat" icon-name="delete" size="sm" slot="actions"></nve-icon-button>
       </nve-accordion-header>
-      <nve-accordion-content> Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. </nve-accordion-content>
+      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
     </nve-accordion>
+  `
+};
+
+/**
+ * @summary Basic accordion component for collapsible content sections with expand/collapse functionality.
+ * @tags test-case
+ */
+export const Single = {
+  render: () => html`
+<nve-accordion-group behavior-expand>
+  <nve-accordion>
+    <nve-accordion-header>
+      <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
+    </nve-accordion-header>
+    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+  </nve-accordion>
+</nve-accordion-group>
+  `
+};
+
+/**
+ * @summary Brings together multiple accordion components for embedded multi-section content organization.
+ * @tags test-case
+ */
+export const Multiple = {
+  render: () => html`
+<nve-accordion-group behavior-expand>
+  <nve-accordion>
+    <nve-accordion-header>
+      <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
+    </nve-accordion-header>
+    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+  </nve-accordion>
+  <nve-accordion>
+    <nve-accordion-header>
+      <h2 nve-text="heading xs medium" slot="prefix">Heading 2</h2>
+    </nve-accordion-header>
+    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+  </nve-accordion>
+</nve-accordion-group>
   `
 };
