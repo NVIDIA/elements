@@ -4,6 +4,7 @@ import markdownIt from 'markdown-it';
 import { siteData } from '../../../index.11tydata.js';
 import { exampleShortcode, exampleTagsShortcode } from '../../../_11ty/shortcodes/example.js';
 import { apiShortcode } from '../../../_11ty/shortcodes/api.js';
+import { exampleDocShortcode } from '../../../_11ty/shortcodes/example-doc.js';
 
 const { examples, elements } = siteData;
 
@@ -82,9 +83,9 @@ export async function render(data) {
     </style>
     <h2 nve-text="heading xl emphasis mkd">${componentData.title} Examples</h2>
     <div class="canvas-editable-container" nve-layout="row gap:lg align:stretch">
-      ${
-        exampleTemplates.length > 1
-          ? /* html */ `
+    ${
+      exampleTemplates.length > 1
+        ? /* html */ `
         <nve-menu id="example-selector" class="example-selector">
           ${exampleTemplates
             .map(
@@ -93,30 +94,18 @@ export async function render(data) {
             )
             .join('')}
         </nve-menu>`
-          : ''
-      }
+        : ''
+    }
       <nvd-canvas-editable id="cycling-example" tag="${componentData.tag}" horizontal-layout></nvd-canvas-editable>
     </div>
 
+    <div nve-layout="column gap:lg">
     ${(
       await Promise.all(
-        exampleTemplates.map(async example => {
-          const member = element?.manifest?.members?.find(m => m.name.toLowerCase() === example.name.toLowerCase());
-          return /* html */ `
-        <div class="story-example" nve-layout="column gap:sm">
-          <div nve-layout="row gap:sm align:wrap align:space-between full">
-            <h3 nve-text="heading lg emphasis mkd" id="${example.id}">${example.name.split(/(?=[A-Z])/).join(' ')}</h3>
-            ${await exampleTagsShortcode(example.entrypoint, example.name)}
-          </div>
-          ${example.name === 'Default' ? await apiShortcode(componentData.tag, 'description') : ''}
-          ${example.name !== 'Default' && member ? await apiShortcode(componentData.tag, 'property', member.name) : ''}
-          ${example.name.startsWith('Event') ? await apiShortcode(componentData.tag, 'event') : ''}
-          ${example.entrypoint ? await exampleShortcode(example.entrypoint, example.name, { inline: !isPopover, height: isPopover ? '400px' : undefined }) : ''}
-        </div>
-      `;
-        })
+        exampleTemplates.map(async example => await exampleDocShortcode(example.entrypoint, example.name))
       )
     ).join('\n')}
+    </div>
 
     <script type="module">
       const params = new URLSearchParams(window.location.search);

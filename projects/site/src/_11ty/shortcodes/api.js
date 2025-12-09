@@ -14,7 +14,7 @@ const typeAliasMap = {
   'css-part': 'cssParts'
 };
 
-export async function apiShortcode(tag, type, value = null) {
+export async function apiShortcode(tag, type, name = null, value = null) {
   const element = elements.find(d => d.name === tag);
 
   if (element?.manifest) {
@@ -25,17 +25,26 @@ export async function apiShortcode(tag, type, value = null) {
         .replaceAll('<p>', '<p class="api-description" nve-text="body relaxed mkd">');
     }
 
-    let apiItem = element.manifest[typeAliasMap[type]]?.find(m => m.name === value);
+    const apiItem = element.manifest[typeAliasMap[type]]?.find(m => m.name === name);
+    const shouldRenderAPINameTable = apiItem && name !== null && value === null;
+    const shouldRenderAPIValueDescription = apiItem && name !== null && value !== null;
 
     return /* html */ `<div class="api-shortcode" nve-layout="column gap:sm">
-    ${apiItem && value !== null ? renderAPIValueTable(apiItem) : renderAPITable(element, type)}
-</div>`.replaceAll('\n', '');
+      ${shouldRenderAPINameTable ? renderAPINameTable(apiItem) : ''}
+      ${shouldRenderAPIValueDescription ? renderAPIValueDescription(apiItem, value) : ''}
+      ${!shouldRenderAPINameTable && !shouldRenderAPIValueDescription ? renderAPITable(element, type) : ''}
+    </div>`.replaceAll('\n', '');
   }
 
   return '';
 }
 
-export function renderAPIValueTable(apiValue) {
+function renderAPIValueDescription(apiItem, value) {
+  const valueItem = apiItem.type?.values?.find(v => v.value === value);
+  return /* html */ `${valueItem?.description ?? ''}`;
+}
+
+export function renderAPINameTable(apiValue) {
   const values = apiValue.type?.values ?? [];
   return /* html */ `
   <div class="api-value-table" nve-layout="column gap:sm full">
@@ -79,8 +88,8 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
   <div class="api-table" nve-layout="column gap:sm full">
     <nve-grid container="${options.container}" style="min-height: 100px">
       <nve-grid-header>
-        <nve-grid-column>${type.charAt(0).toUpperCase() + type.slice(1)}</nve-grid-column>
-        ${type === 'property' ? '<nve-grid-column>Attribute</nve-grid-column>' : ''}
+        <nve-grid-column width="200px">${type.charAt(0).toUpperCase() + type.slice(1)}</nve-grid-column>
+        ${type === 'property' ? '<nve-grid-column width="200px">Attribute</nve-grid-column>' : ''}
         <nve-grid-column>Description</nve-grid-column>
         ${type === 'property' ? '<nve-grid-column>Values</nve-grid-column>' : ''}
       </nve-grid-header>
@@ -103,7 +112,14 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
         ${
           type === 'property'
             ? /* html */ `<nve-grid-cell>
-          <div nve-layout="row gap:xxs align:wrap">${(i.type?.values ?? []).map(v => /* html */ `<span nve-text="code nowrap">${v.value}</span>`).join('')}</div>
+          <div nve-layout="${i.type?.values?.some(v => v.description) ? 'column gap:xs' : 'row gap:xxs align:wrap'}">
+          ${(i.type?.values ?? [])
+            .map(
+              v =>
+                /* html */ `<div><span nve-text="code nowrap">${v.value}</span> ${v.description ? v.description : ''}</div>`
+            )
+            .join('')}
+          </div>
         </nve-grid-cell>`
             : ''
         }
