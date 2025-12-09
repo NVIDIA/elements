@@ -7,11 +7,80 @@
 
 # {{ title }}
 
-Examples are stateless HTML templates demonstrating UI patterns for the Elements design system, portable across docs, CLI, and MCPs. This document provides guidance on creating well-written example templates for the Elements design system. (`*.examples.ts`).
+Examples are stateless HTML templates demonstrating UI patterns for the Elements design system. Well defined examples are critical for providing a portable documentation format for the CLI, MCP and documentation site. This document provides guidance on creating well-written example templates. (`*.examples.ts`).
 
 ## Core Principles
 
-### Always Use `@summary` JSDoc Comments
+### Example Title
+
+The example title name should be no more than three words. This name is the name that is referenced in the function as well as rendered in various API/Documentation endpoints.
+
+#### Naming Format
+
+- **Use PascalCase** for all example names (e.g., `Default`, `StatusFlat`, `FormSubmit`)
+- Names should describe **what** the example shows, not **how** it works, how should be explained in the summary.
+
+#### Single-Word Names
+
+Use single words for basic API features and properties:
+
+| Pattern             | Examples                                           |
+| ------------------- | -------------------------------------------------- |
+| Default/basic usage | `Default`                                          |
+| API properties      | `Status`, `Size`, `Color`, `Position`, `Alignment` |
+| Container variants  | `Flat`, `Inline`                                   |
+| States              | `Pressed`, `Selected`, `Disabled`                  |
+| Slots/content       | `Content`, `Actions`                               |
+| Features            | `Closable`, `Events`, `Overflow`                   |
+
+#### Compound Names (2-3 words)
+
+Use compound PascalCase for combinations or specific features and patterns:
+
+| Pattern            | Examples                                       |
+| ------------------ | ---------------------------------------------- |
+| Property + variant | `StatusFlat`, `StatusIcon`, `SelectedFlat`     |
+| Feature + modifier | `OpenDelay`, `DynamicTrigger`, `ScrollContent` |
+| Concept + variant  | `GroupStatus`, `FormSubmit`, `FormControl`     |
+| Layout variants    | `VerticalTabs`, `BorderlessTabs`               |
+
+#### Special Prefixes
+
+| Prefix    | Usage                                            | Examples                                 |
+| --------- | ------------------------------------------------ | ---------------------------------------- |
+| `Legacy`  | Deprecated patterns                              | `LegacyTrigger`, `LegacyBehaviorTrigger` |
+| `Invalid` | Anti-patterns                                    | `InvalidLinkButton`                      |
+| `Valid`   | Correct patterns (when contrasting with invalid) | `ValidLinkButton`                        |
+
+#### What to Avoid
+
+- ❌ **Component names in titles**: Use `Status` not `BadgeStatus`
+- ❌ **Implementation details**: Use `ScrollContent` not `OverflowAutoScrollContent`
+- ❌ **Vague names**: Use `DynamicTrigger` not `Example1`
+- ❌ **Overly long names**: Keep to 3 words maximum
+
+#### Examples
+
+```typescript
+// ✅ Good: Clear, semantic names
+export const Default = { /* ... */ };
+export const Status = { /* ... */ };
+export const StatusFlat = { /* ... */ };
+export const FormSubmit = { /* ... */ };
+
+// ❌ Bad: Component name in title
+export const BadgeDefault = { /* ... */ };
+export const BadgeStatus = { /* ... */ };
+
+// ❌ Bad: Too verbose or unclear
+export const Example1 = { /* ... */ };
+export const TestCase = { /* ... */ };
+export const DefaultBadgeWithStatusColors = { /* ... */ };
+```
+
+When examples are built for API consumption they will automatically have additional metadata attached to them such as the associated element/component they reference and a UUID to ensure each example has a unique identifier across all projects.
+
+### Use `@summary` JSDoc Comments
 
 Every example **must** include a `@summary` JSDoc comment that explains:
 
@@ -238,11 +307,9 @@ export const OverlyComplex = {
 
 Before submitting an example, ensure:
 
+- [ ] Example title is provided
 - [ ] `@summary` JSDoc comment is present and comprehensive
 - [ ] Description explains the UX intent and use cases
 - [ ] Example is stateless (unless demonstrating specific state patterns)
 - [ ] Uses plain HTML/CSS/JS without unnecessary abstractions
 - [ ] Includes accessibility considerations when relevant
-- [ ] Example name clearly indicates its purpose
-- [ ] Code is clean and readable
-- [ ] Follows established patterns from existing examples

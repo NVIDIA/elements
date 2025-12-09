@@ -11,11 +11,11 @@ Status colors are used in combination of text or iconography to convey status of
 
 ## Dot Status
 
-{% story '@nvidia-elements/core/dot/dot.stories.json', 'Status' %}
+{% example '@nvidia-elements/core/dot/dot.examples.json' 'Status' %}
 
 ## Badge Status
 
-{% story '@nvidia-elements/core/badge/badge.examples.json', 'Status' %}
+{% example '@nvidia-elements/core/badge/badge.examples.json' 'Status' %}
 
 ## Status Tokens
 
