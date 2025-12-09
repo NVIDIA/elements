@@ -9,7 +9,7 @@ import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './d
 
 /**
  * @element nve-dropzone
- * @description A dropzone form control that enables users to drag anddrop files onto it.
+ * @description A dropzone form control that enables users to drag and drop files onto it.
  * @since 1.29.0
  * @entrypoint \@nvidia-elements/core/dropzone
  * @event change emits when the value has changed (files located in event.target)
