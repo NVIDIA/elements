@@ -4,7 +4,7 @@
 import { join } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { renderBaseHead, renderDocsNav, renderBasePageHeader } from './common.js';
-import { elementSummary, elementStatus, elementDescription } from '../templates/api.js';
+import { elementSummary, elementStatus, elementDescription, elementSupportButtons } from '../templates/api.js';
 
 // Define the available tabs for component documentation
 const componentDocTabs = [
@@ -64,7 +64,18 @@ export function render(data) {
 
           <main id="docs-main">
             <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
-              ${data.tag ? `<h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>${elementSummary(data.tag)}` : ''}
+              ${
+                data.tag
+                  ? `
+                <div nve-layout="column gap:md align:left">
+                  <h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>
+                  
+                  ${elementSummary(data.tag)}
+                </div>
+              `
+                  : ''
+              }
+
               ${
                 data.tag &&
                 (!data.page.url.includes('/data-grid/') ||
@@ -96,11 +107,12 @@ export function render(data) {
               ${
                 data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples'))
                   ? `
-              <h2 nve-text="heading xl emphasis mkd">Overview</h2>
                 ${elementDescription(data.tag)}
               `
                   : ''
               }
+
+              ${data.tag ? `${elementSupportButtons(data.tag)}` : ''}
 
               <!-- Page content -->
               ${data.content}
