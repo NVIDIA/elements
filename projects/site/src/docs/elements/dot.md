@@ -12,24 +12,24 @@
 
 ## Standard
 
-{% story 'nve-dot', 'Default' %}
+{% example '@nvidia-elements/core/dot/dot.examples.json' 'Default' %}
 
 ## Status
 
 {% api 'nve-dot', 'property' 'status' %}
 
-{% story 'nve-dot', 'Status' %}
+{% example '@nvidia-elements/core/dot/dot.examples.json' 'Status' %}
 
 ## Support
 
-{% story 'nve-dot', 'SupportStatus' %}
+{% example '@nvidia-elements/core/dot/dot.examples.json' 'SupportStatus' %}
 
 ## Number
 
-{% story 'nve-dot', 'Number' %}
+{% example '@nvidia-elements/core/dot/dot.examples.json' 'Number' %}
 
 ## Size
 
 {% api 'nve-dot', 'property' 'size' %}
 
-{% story 'nve-dot', 'Size' %}
+{% example '@nvidia-elements/core/dot/dot.examples.json' 'Size' %}

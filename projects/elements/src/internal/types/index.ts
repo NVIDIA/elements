@@ -138,6 +138,12 @@ export type Placement = PopoverPosition | `${PopoverSides}-${PopoverAlign}`;
  */
 export type ControlLayout = 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
 
+/** Indicates the element that represents the user's current location or position within a set. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)
+ * - `page` - Marks the current page within a set of navigation links.
+ * - `step` - Marks the current step within a multi-step process or workflow.
+ */
+export type Current = 'page' | 'step';
+
 export interface NveElement {
   /**
    * This Boolean attribute prevents the user from interacting with the element: it cannot be pressed or focused. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled)

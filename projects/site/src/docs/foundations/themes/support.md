@@ -17,35 +17,35 @@ Support colors are used in combination of text or iconography to convey status o
 
 ## Icon Support
 
-{% story '@nvidia-elements/core/icon/icon.stories.json', 'Statuses' %}
+{% example '@nvidia-elements/core/icon/icon.stories.json' 'Statuses' %}
 
 ## Dot Support
 
-{% story '@nvidia-elements/core/dot/dot.stories.json', 'SupportStatus' %}
+{% example '@nvidia-elements/core/dot/dot.examples.json' 'SupportStatus' %}
 
 ## Badge Support
 
-{% story '@nvidia-elements/core/badge/badge.examples.json', 'Support' %}
+{% example '@nvidia-elements/core/badge/badge.examples.json' 'Support' %}
 
 ## Alert Support
 
-{% story '@nvidia-elements/core/alert/alert.examples.json', 'SupportStatus' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'SupportStatus' %}
 
 ## Alert Group
 
-{% story '@nvidia-elements/core/alert/alert.examples.json', 'AlertGroupStatus' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'AlertGroupStatus' %}
 
 ## Alert Group Banner
 
-{% story '@nvidia-elements/core/alert/alert.examples.json', 'Prominence' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'Prominence' %}
 
 ## Notification Snackbar
 
-{% story '@nvidia-elements/core/notification/notification.examples.json', 'Status', '{ "inline": false, "height": "640px" }' %}
+{% example '@nvidia-elements/core/notification/notification.examples.json' 'Status' '{ "inline": false, "height": "640px" }' %}
 
 ## Toasts
 
-{% story '@nvidia-elements/core/toast/toast.examples.json', 'Status', '{ "inline": false, "height": "600px" }'  %}
+{% example '@nvidia-elements/core/toast/toast.examples.json' 'Status' '{ "inline": false, "height": "600px" }'  %}
 
 ## Support Tokens
 
