@@ -1,6 +1,7 @@
 // @ts-check
 
 import markdown from 'markdown-it';
+import markdownItLink from 'markdown-it-link-attributes';
 import { ESM_ELEMENTS_VERSION } from '../utils/version.js';
 import { siteData } from '../../index.11tydata.js';
 
@@ -11,6 +12,27 @@ const PACKAGE_URL = 'https://github.com/NVIDIA/elements/-/releases';
 
 // Initialize markdown parser and metadata service
 const md = markdown();
+
+// Open MDN links in new tab
+md.use(markdownItLink, {
+  matcher(href) {
+    return href.match(/^https?:\/\//);
+  },
+  attrs: {
+    target: '_blank',
+    rel: 'noopener'
+  }
+});
+
+// Always add nve-text="link" to all links
+md.use(markdownItLink, {
+  matcher() {
+    return true;
+  },
+  attrs: {
+    'nve-text': 'link'
+  }
+});
 
 /**
  * Renders a component description with appropriate styling
@@ -57,17 +79,14 @@ export function elementSummary(tag) {
     .find(result => result.name?.includes(tag));
 
   return /* html */ `
-  <section nve-layout="column gap:md align:stretch">
-    <div nve-layout="row gap:xs align:center align:space-between align:wrap">
-      <div nve-layout="row gap:xxs align:center">
-        ${badgeStatus(element?.manifest?.metadata?.status ?? '', '', ESM_ELEMENTS_VERSION)}
-        ${badgeCoverage(coverageTotal, '', 'Coverage:&nbsp;')}
-        ${badgeBundle(lighthouseResults?.payload?.javascript?.kb ?? 0, '', 'Bundle:&nbsp;')}
-        ${badgeLighthouse(lighthouseResults?.scores ?? {}, '', 'Lighthouse:&nbsp;')}
-        ${badgeAxe(axeResults?.message ?? '', '')}
+  <section nve-layout="row gap:xxs align:right">
+    ${badgeStatus(element?.manifest?.metadata?.status ?? '', '', ESM_ELEMENTS_VERSION)}
+    ${badgeCoverage(coverageTotal, '', 'Coverage:&nbsp;')}
+    ${badgeBundle(lighthouseResults?.payload?.javascript?.kb ?? 0, '', 'Bundle:&nbsp;')}
+    ${badgeLighthouse(lighthouseResults?.scores ?? {}, '', 'Lighthouse:&nbsp;')}
+    ${badgeAxe(axeResults?.message ?? '', '')}
 
-        <nve-badge size="sm" status="success"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">${element?.manifest?.metadata?.since ?? ''}</a></nve-badge>
-      </div>
+    <nve-badge size="sm" status="success"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">${element?.manifest?.metadata?.since ?? ''}</a></nve-badge>
   </section>`;
 }
 
@@ -82,25 +101,25 @@ export function elementSupportButtons(tag) {
 
   return /* html */ `
   <section nve-layout="row align:center gap:md">
-      <nve-button size="sm">
-        <nve-icon name="hand" size="sm"></nve-icon>
-        <a href="http://nv/elements-slack" target="_blank">Support Request</a>
-      </nve-button>
+    <nve-button size="sm">
+      <nve-icon name="hand" size="sm"></nve-icon>
+      <a href="http://nv/elements-slack" target="_blank">Support Request</a>
+    </nve-button>
 
-      <nve-button size="sm">
-        <nve-icon name="edit" size="sm"></nve-icon>
-        <a href="https://github.com/NVIDIA/elements/-/issues/new?issuable_template=chore&issue[title]=chore(docs): update ${tag} component documentation" target="_blank">Request Doc Edit</a>
-      </nve-button>
+    <nve-button size="sm">
+      <nve-icon name="edit" size="sm"></nve-icon>
+      <a href="https://github.com/NVIDIA/elements/-/issues/new?issuable_template=chore&issue[title]=chore(docs): update ${tag} component documentation" target="_blank">Request Doc Edit</a>
+    </nve-button>
 
-      <nve-button size="sm">
-        <nve-icon name="person-2" size="sm"></nve-icon>
-        <a href="${element?.manifest?.metadata?.aria ?? ''}" target="_blank">ARIA Pattern</a>
-      </nve-button>
+    <nve-button size="sm">
+      <nve-icon name="person-2" size="sm"></nve-icon>
+      <a href="${element?.manifest?.metadata?.aria ?? ''}" target="_blank">ARIA Pattern</a>
+    </nve-button>
 
-      <nve-button size="sm">
-        <nve-icon name="shapes" size="sm"></nve-icon>
-        <a href="${element?.manifest?.metadata?.figma ?? ''}" target="_blank">Figma</a>
-      </nve-button>
+    <nve-button size="sm">
+      <nve-icon name="shapes" size="sm"></nve-icon>
+      <a href="${element?.manifest?.metadata?.figma ?? ''}" target="_blank">Figma</a>
+    </nve-button>
   </section>`;
 }
 
