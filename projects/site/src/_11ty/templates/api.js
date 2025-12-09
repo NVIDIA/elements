@@ -91,7 +91,6 @@ export function elementSummary(tag) {
 }
 
 /**
-/**
  * Generates the component support buttons section for a given custom element tag.
  * @param {string} tag - The component tag name
  * @returns {string} HTML string containing the component support buttons
@@ -100,26 +99,62 @@ export function elementSupportButtons(tag) {
   const element = elements.find(d => d.name === tag);
 
   return /* html */ `
-  <section nve-layout="row align:center gap:md">
-    <nve-button size="sm">
-      <nve-icon name="hand" size="sm"></nve-icon>
-      <a href="http://nv/elements-slack" target="_blank">Support Request</a>
-    </nve-button>
+  <section nve-layout="grid span-items:12 &md|span-items:6 &lg|span-items:3 gap:md">
+    <a href="http://nv/elements-slack" target="_blank" class="support-button-link">
+      <nve-card>
+        <div nve-layout="row align:vertical-center">
+          <span class="support-button-icon" nve-layout="row align:center">
+            <nve-icon name="hand" size="lg"></nve-icon>
+          </span>
 
-    <nve-button size="sm">
-      <nve-icon name="edit" size="sm"></nve-icon>
-      <a href="https://github.com/NVIDIA/elements/-/issues/new?issuable_template=chore&issue[title]=chore(docs): update ${tag} component documentation" target="_blank">Request Doc Edit</a>
-    </nve-button>
+          <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
+            Support Request
+          </span>
+        </div>
+      </nve-card>
+    </a>
 
-    <nve-button size="sm">
-      <nve-icon name="person-2" size="sm"></nve-icon>
-      <a href="${element?.manifest?.metadata?.aria ?? ''}" target="_blank">ARIA Pattern</a>
-    </nve-button>
+    <a href="https://github.com/NVIDIA/elements/-/issues/new?issuable_template=chore&issue[title]=chore(docs): update ${tag} component documentation" target="_blank" class="support-button-link">
+      <nve-card>
+        <div nve-layout="row align:vertical-center">
+          <span class="support-button-icon" nve-layout="row align:center">
+            <nve-icon name="edit" size="lg"></nve-icon>
+          </span>
 
-    <nve-button size="sm">
-      <nve-icon name="shapes" size="sm"></nve-icon>
-      <a href="${element?.manifest?.metadata?.figma ?? ''}" target="_blank">Figma</a>
-    </nve-button>
+          <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
+            Request Doc Edit
+          </span>
+        </div>
+      </nve-card>
+    </a>
+
+    <a href="${element?.manifest?.metadata?.aria ?? ''}" target="_blank" class="support-button-link">
+      <nve-card>
+        <div nve-layout="row align:vertical-center">
+          <span class="support-button-icon" nve-layout="row align:center">
+            <nve-icon name="person-2" size="lg"></nve-icon>
+          </span>
+
+          <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
+            ARIA Pattern
+          </span>
+        </div>
+      </nve-card>
+    </a>
+
+    <a href="${element?.manifest?.metadata?.figma ?? ''}" target="_blank" class="support-button-link">
+      <nve-card>
+        <div nve-layout="row align:vertical-center">
+          <span class="support-button-icon" nve-layout="row align:center">
+            <nve-icon name="shapes" size="lg"></nve-icon>
+          </span>
+
+          <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
+            Figma
+          </span>
+        </div>
+      </nve-card>
+    </a>
   </section>`;
 }
 

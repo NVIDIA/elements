@@ -29,6 +29,29 @@
   }
 }
 
+/* Support Button Styles */
+.support-button-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.support-button-link nve-card {
+  --border-radius: var(--nve-ref-border-radius-md);
+  cursor: pointer;
+}
+
+.support-button-link .support-button-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--nve-sys-layer-container-accent-background);
+  cursor: pointer;
+}
+
+.support-button-link nve-icon,
+.support-button-link span[nve-text] {
+  cursor: pointer;
+}
+
 /* Tab Styles */
 nve-tabs#doc-tabs {
   padding: var(--nve-ref-space-sm) 0;
