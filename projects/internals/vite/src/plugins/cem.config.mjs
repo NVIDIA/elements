@@ -396,6 +396,9 @@ function cssPropsPlugin() {
   };
 }
 
+/**
+ * rewrites exported string literal type aliases to their compiled type values and adds value descriptions to the entries.
+ */
 function rewriteExportedStringLiteralTypeAliasesPlugin() {
   // Leverage the TypeScript compiler to evaluate exported string literal (union) types to their compiled type values.
   // Note: https://ts-ast-viewer.com/ is helpful for understanding the TypeScript AST and type checker return values.
@@ -584,6 +587,25 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
                 entry.type.values.push({
                   value: cleanType,
                   description: valueDescriptions[cleanType]
+                });
+              }
+            });
+        }
+      }
+
+      // For inline string literal unions (not from type aliases), parse descriptions from the entry's own description
+      if (entry.description) {
+        const inlineDescriptions = parseValueDescriptions(entry.description);
+        if (Object.keys(inlineDescriptions).length > 0) {
+          hasAnyDescriptions = true;
+          types
+            .filter(type => !type.includes('undefined') && type !== 'default' && type !== '')
+            .forEach(type => {
+              const cleanType = type.replace(/^['"]|['"]$/g, '');
+              if (inlineDescriptions[cleanType] && !entry.type.values.some(v => v.value === cleanType)) {
+                entry.type.values.push({
+                  value: cleanType,
+                  description: inlineDescriptions[cleanType]
                 });
               }
             });

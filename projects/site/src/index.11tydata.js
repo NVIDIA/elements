@@ -10,7 +10,7 @@ const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-dis
 
 const apiMetrics = await ApiService.getData();
 
-/** @type {import('@internals/metadata').ProjectElement[]} */
+/** @type {import('@internals/metadata').Element[]} */
 const elements = apiMetrics.data.elements;
 
 /** @type {import('@internals/metadata').ProjectsTestSummary} */

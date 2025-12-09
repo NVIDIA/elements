@@ -17,6 +17,21 @@ export const Default = {
 };
 
 /**
+ * @summary Demonstrates the various interaction states of the button.
+ * @tags test-case
+ */
+export const GroupStates = {
+  render: () => html`
+    <div nve-layout="row gap:xs">
+      <nve-button>standard</nve-button>
+      <nve-button selected>selected</nve-button>
+      <nve-button pressed>pressed</nve-button>
+      <nve-button disabled>disabled</nve-button>
+    </div>
+  `
+}
+
+/**
  * @summary Shows different interaction states to communicate button hierarchy, importance, and availability to users.
  */
 export const Interaction = {

@@ -139,6 +139,7 @@ export const StatusDarkTheme = {
 
 /**
  * @summary Trend badges for displaying data changes and metrics. Perfect for dashboards, analytics, or financial data showing positive, negative, or neutral trends.
+ * @tags pattern
  */
 export const Trend = {
   render: () => html`
