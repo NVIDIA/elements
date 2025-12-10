@@ -13,9 +13,7 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% install 'nve-dialog' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'Default' %}
+## Visual
 
 {% example '@nvidia-elements/core/dialog/dialog.examples.json' 'Visual' '{ "inline": false, "height": "400px" }' %}
 

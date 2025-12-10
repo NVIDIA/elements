@@ -10,10 +10,6 @@
 
 {% install 'nve-range' %}
 
-## Standard
-
-{% story 'nve-range', 'Default' %}
-
 ## Datalist
 
 {% story 'nve-range', 'Datalist' %}

@@ -10,10 +10,6 @@
 
 {% install 'nve-resize-handle' %}
 
-## Standard
-
-{% story 'nve-resize-handle', 'Default' %}
-
 ## Vertical
 
 {% story 'nve-resize-handle', 'Vertical' %}

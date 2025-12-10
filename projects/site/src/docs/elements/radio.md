@@ -10,10 +10,6 @@
 
 {% install 'nve-radio' %}
 
-## Standard
-
-{% story 'nve-radio', 'Default' %}
-
 ## Layout
 
 {% api 'nve-checkbox-group', 'property', 'layout' %}

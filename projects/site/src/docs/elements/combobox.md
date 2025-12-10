@@ -10,10 +10,6 @@
 
 {% install 'nve-combobox' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Default' %}
-
 ## Single Select
 
 {% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Select' %}

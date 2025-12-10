@@ -12,10 +12,6 @@
 
 {% install 'nve-dropdown-group' %}
 
-## Standard
-
-{% story 'nve-dropdown-group', 'Default' %}
-
 ## Disabled Menu Items
 
 Disable individual menu items using the `disabled` attribute.

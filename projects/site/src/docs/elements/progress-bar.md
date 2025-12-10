@@ -10,10 +10,6 @@
 
 {% install 'nve-progress-bar' %}
 
-## Standard
-
-{% story 'nve-progress-bar', 'Default' %}
-
 ## Status
 
 {% api 'nve-progress-bar', 'property', 'status' %}

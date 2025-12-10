@@ -11,10 +11,6 @@
 
 {% install 'nve-tree' %}
 
-## Standard
-
-{% story 'nve-tree', 'Default' %}
-
 ## Border
 
 {% api 'nve-tree', 'property', 'border' %}
