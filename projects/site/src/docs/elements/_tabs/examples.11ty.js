@@ -81,7 +81,6 @@ export async function render(data) {
         }
       }
     </style>
-    <h2 nve-text="heading xl emphasis mkd">${componentData.title} Examples</h2>
     <div class="canvas-editable-container" nve-layout="row gap:lg align:stretch">
     ${
       exampleTemplates.length > 1
