@@ -95,12 +95,12 @@ Render the metadata tags of a given Example template.
 
 ```html
 {% raw %}
-{% example-tags '@nvidia-elements/core/grid/grid.stories.json' 'PerformanceVirtualScroll' %}
+{% example-tags '@nvidia-elements/core/grid/grid.examples.json' 'PerformanceVirtualScroll' %}
 {% endraw %}
 ```
 
 <div class="shortcode-demo">
-{% example-tags '@nvidia-elements/core/grid/grid.stories.json' 'PerformanceVirtualScroll' %}
+{% example-tags '@nvidia-elements/core/grid/grid.examples.json' 'PerformanceVirtualScroll' %}
 </div>
 
 </div>
@@ -305,16 +305,16 @@ Renders the "Do/Don't" shortcode layout for guidance on potential anti-patterns.
 ```html
 {% raw %}
 {% dodont %}
-{% example '@nvidia-elements/core/grid/grid.stories.json' 'ValidColumnCount' '{ "summary": false }' %}
-{% example '@nvidia-elements/core/grid/grid.stories.json' 'InvalidColumnCount' '{ "summary": false }' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ValidColumnCount' '{ "summary": false }' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'InvalidColumnCount' '{ "summary": false }' %}
 {% enddodont %}
 {% endraw %}
 ```
 
 <div class="shortcode-demo">
 {% dodont %}
-{% example '@nvidia-elements/core/grid/grid.stories.json' 'ValidColumnCount' '{ "summary": false }' %}
-{% example '@nvidia-elements/core/grid/grid.stories.json' 'InvalidColumnCount' '{ "summary": false }' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ValidColumnCount' '{ "summary": false }' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'InvalidColumnCount' '{ "summary": false }' %}
 {% enddodont %}
 </div>
 

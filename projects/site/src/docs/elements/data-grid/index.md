@@ -34,6 +34,6 @@ import '@nvidia-elements/core/grid/define.js';
 ## Column Count
 
 {% dodont %}
-{% example '@nvidia-elements/core/grid/grid.stories.json', 'ValidColumnCount' %}
-{% example '@nvidia-elements/core/grid/grid.stories.json', 'InvalidColumnCount' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json', 'ValidColumnCount' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json', 'InvalidColumnCount' %}
 {% enddodont %}

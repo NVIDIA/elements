@@ -9,4 +9,4 @@
 
 ## Steps Onboarding
 
-{% story 'nve-page', 'PageLayoutSteps', '{ "inline": false, "height": "640px" }' %}
+{% example '@nvidia-elements/core/page/page.examples.json' 'PageLayoutSteps' '{ "inline": false, "height": "640px" }' %}

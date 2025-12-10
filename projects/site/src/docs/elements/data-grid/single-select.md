@@ -28,4 +28,4 @@
 </nve-grid>
 ```
 
-{% story 'nve-grid', 'SingleSelect' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'SingleSelect' %}

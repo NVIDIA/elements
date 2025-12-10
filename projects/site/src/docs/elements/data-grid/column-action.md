@@ -25,4 +25,4 @@
 </nve-grid>
 ```
 
-{% story 'nve-grid', 'ColumnAction' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnAction' %}

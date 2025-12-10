@@ -7,4 +7,4 @@
 }
 ---
 
-{% story 'nve-grid', 'Keynav' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'Keynav' %}
