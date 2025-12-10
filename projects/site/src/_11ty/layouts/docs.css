@@ -55,6 +55,7 @@
 /* Tab Styles */
 nve-tabs#doc-tabs {
   padding: var(--nve-ref-space-sm) 0;
+  border-bottom: 1px solid var(--nve-ref-border-color);
 
   nve-tabs-item {
     --font-size: var(--nve-ref-font-size-300);
@@ -85,7 +86,7 @@ h3[nve-text*='mkd']:hover .heading-anchor > nve-icon-button {
 }
 
 h2[nve-text*='mkd']:first-of-type {
-  padding-top: 0;
+  padding-top: var(--nve-ref-space-xxl);
 }
 
 h2[nve-text*='mkd'],
