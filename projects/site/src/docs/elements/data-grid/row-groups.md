@@ -32,4 +32,4 @@
 </nve-grid>
 ```
 
-{% story 'nve-grid', 'RowGroups' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'RowGroups' %}

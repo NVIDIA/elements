@@ -9,8 +9,8 @@
 
 ## Single Video Layout
 
-{% story 'nve-page', 'PageLayoutVideo', '{ "inline": false, "height": "640px" }' %}
+{% example '@nvidia-elements/core/page/page.examples.json' 'PageLayoutVideo' '{ "inline": false, "height": "640px" }' %}
 
 ## Multi Video Layout
 
-{% story 'nve-page', 'PageLayoutMultiVideo', '{ "inline": false, "height": "720px" }' %}
+{% example '@nvidia-elements/core/page/page.examples.json' 'PageLayoutMultiVideo' '{ "inline": false, "height": "720px" }' %}

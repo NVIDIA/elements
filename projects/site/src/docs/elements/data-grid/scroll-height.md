@@ -27,11 +27,11 @@
 
 ## Scroll Height
 
-{% story 'nve-grid', 'Scroll' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'Scroll' %}
 
 ## Full Height
 
-{% story 'nve-grid', 'FullHeight' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'FullHeight' %}
 
 ## Scroll Position
 
@@ -39,4 +39,4 @@
 document.querySelector('nve-grid').scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 ```
 
-{% story 'nve-grid', 'ScrollPosition' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ScrollPosition' %}

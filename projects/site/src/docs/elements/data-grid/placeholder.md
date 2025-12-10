@@ -22,8 +22,8 @@
 
 {% api 'nve-grid-placeholder', 'description' %}
 
-{% story 'nve-grid', 'Placeholder' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'Placeholder' %}
 
 ## Retry
 
-{% story 'nve-grid', 'PlaceholderRetry' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'PlaceholderRetry' %}

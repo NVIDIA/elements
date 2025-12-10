@@ -20,7 +20,7 @@ The grid leverages several approaches to maximize render performance including [
 
 Batch rendering allows rows to dynamically be added for improved performance. The grid will dispatch a `scrollboxend` event when the user has scrolled to the end of the current scroll box. When the event occurs additional rows can be appended.
 
-<!-- todo {% story 'nve-grid', 'PerformanceInfiniteScroll' %} -->
+<!-- todo {% example '@nvidia-elements/core/grid/grid.examples.json' 'PerformanceInfiniteScroll' %} -->
 
 {% svg-logos 'lit' %}
 
@@ -59,7 +59,7 @@ Virtual Scroll can be achieved using a virtual scroll package such as [@lit-labs
   Warning: Using advanced features may be unavailable such as keyboard navigation shortcuts. Be aware of <a nve-text="link" href="https://adrianroselli.com/2014/05/so-you-think-you-built-good-infinite.html">accessibility risks</a>.
 </nve-alert>
 
-<!-- todo {% story 'nve-grid', 'PerformanceVirtualScroll' %} -->
+<!-- todo {% example '@nvidia-elements/core/grid/grid.examples.json' 'PerformanceVirtualScroll' %} -->
 
 ### Lit Example <svg width="20" height="20"><use href="#lit-svg"></use></svg>
 
