@@ -10,10 +10,6 @@
 
 {% install 'nve-month' %}
 
-## Standard
-
-{% story 'nve-month', 'Default' %}
-
 ## Datalist
 
 {% story 'nve-month', 'Datalist' %}

@@ -10,10 +10,6 @@
 
 {% install 'nve-icon-button' %}
 
-## Standard
-
-{% story 'nve-icon-button', 'Default' %}
-
 ## Interactions
 
 {% story 'nve-icon-button', 'Interactions' %}

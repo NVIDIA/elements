@@ -29,10 +29,6 @@ import '@nvidia-elements/core/input/define.js';
 </nve-input-group>
 ```
 
-## Standard
-
-{% story 'nve-input-group', 'InputGroup' %}
-
 ## Range Group
 
 {% story 'nve-input-group', 'FilterGroupRange' %}

@@ -10,10 +10,6 @@
 
 {% install 'nve-dropzone' %}
 
-## Standard
-
-{% story 'nve-dropzone', 'Default' %}
-
 ## Icon
 
 {% story 'nve-dropzone', 'Icon' %}

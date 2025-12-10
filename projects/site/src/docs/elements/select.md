@@ -10,10 +10,6 @@
 
 {% install 'nve-select' %}
 
-## Standard
-
-{% story 'nve-select', 'Default' %}
-
 ## Multiple
 
 The multiple option behavior preserves the native select value behavior. The `value` on the select
