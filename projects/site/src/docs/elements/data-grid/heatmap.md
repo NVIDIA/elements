@@ -7,4 +7,4 @@
 }
 ---
 
-{% story 'nve-grid', 'HeatmapPattern', '{ "inline": false, "height": "600px" }' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'HeatmapPattern', '{ "inline": false, "height": "600px" }' %}
