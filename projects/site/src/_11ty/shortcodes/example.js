@@ -20,6 +20,12 @@ export async function exampleShortcode(
   userConfig = { inline: true, height: '95%', resizable: true, summary: true, align: 'start', layer: 'canvas' }
 ) {
   const example = findExample(ref, exampleName);
+
+  // Return early if no example is found
+  if (!example) {
+    return '';
+  }
+
   const defaultConfig = {
     inline: true,
     height: '95%',
