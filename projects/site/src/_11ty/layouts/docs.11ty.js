@@ -110,7 +110,14 @@ export async function render(data) {
                   ? `
                 ${elementDescription(data.tag)}
 
-                ${await exampleShortcode(data.tag, 'Default', { summary: false })}
+                ${
+                  !(data.page.url.includes('/data-grid/') && !data.page.url.endsWith('/data-grid/'))
+                    ? await exampleShortcode(data.tag, 'Default', {
+                        summary: false,
+                        inline: data.tag !== 'nve-page-loader'
+                      })
+                    : ''
+                }
 
                 ${elementSupportButtons(data.tag)}
               `
