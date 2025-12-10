@@ -104,7 +104,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <nve-icon name="hand" size="lg" status="accent"></nve-icon>
+            <img src="https://cdn-prod.nvidia.com/assets/elements/splash/slack-icon-svg.svg" alt="Slack Logo">
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
@@ -118,7 +118,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <nve-icon name="edit" size="lg" status="accent"></nve-icon>
+            <img src="https://cdn-prod.nvidia.com/assets/elements/splash/gitlab-icon.svg" alt="GitLab Logo">
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
@@ -146,7 +146,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <nve-icon name="shapes" size="lg" status="accent"></nve-icon>
+            <nve-icon name="group-boxes" size="lg" status="success"></nve-icon>
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
