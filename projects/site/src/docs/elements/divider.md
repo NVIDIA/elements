@@ -10,10 +10,6 @@
 
 {% install 'nve-divider' %}
 
-## Standard
-
-{% story 'nve-divider', 'Default' %}
-
 ## Emphasis
 
 {% story 'nve-divider', 'Emphasis' %}

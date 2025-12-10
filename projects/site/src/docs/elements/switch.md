@@ -10,10 +10,6 @@
 
 {% install 'nve-switch' %}
 
-## Standard
-
-{% story 'nve-switch', 'Default' %}
-
 ## Size
 
 {% story 'nve-switch', 'Size' %}

@@ -10,10 +10,6 @@
 
 {% install 'nve-week' %}
 
-## Standard
-
-{% story 'nve-week', 'Default' %}
-
 ## Datalist
 
 {% story 'nve-week', 'Datalist' %}

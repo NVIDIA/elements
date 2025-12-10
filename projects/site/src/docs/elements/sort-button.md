@@ -9,7 +9,3 @@
 ## Installation
 
 {% install 'nve-sort-button' %}
-
-## Standard
-
-{% story 'nve-sort-button', 'Default' %}

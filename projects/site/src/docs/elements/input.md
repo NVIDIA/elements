@@ -10,10 +10,6 @@
 
 {% install 'nve-input' %}
 
-## Standard
-
-{% story 'nve-input', 'Input' %}
-
 ## Layout
 
 {% api 'nve-input', 'property', 'layout' %}

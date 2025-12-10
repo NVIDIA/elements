@@ -10,10 +10,6 @@
 
 {% install 'nve-search' %}
 
-## Standard
-
-{% story 'nve-search', 'Default' %}
-
 ## Inline
 
 {% story 'nve-search', 'Inline' %}

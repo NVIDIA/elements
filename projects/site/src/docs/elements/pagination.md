@@ -10,10 +10,6 @@
 
 {% install 'nve-pagination' %}
 
-## Standard
-
-{% story 'nve-pagination', 'Default' %}
-
 ## Skippable
 
 {% story 'nve-pagination', 'Skippable' %}

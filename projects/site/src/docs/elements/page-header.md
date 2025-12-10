@@ -10,10 +10,6 @@
 
 {% install 'nve-page-header' %}
 
-## Standard
-
-{% story 'nve-page-header', 'Default' %}
-
 ## App Logo
 
 {% story 'nve-page-header', 'AppLogo' %}

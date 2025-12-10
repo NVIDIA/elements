@@ -10,10 +10,6 @@
 
 {% install 'nve-breadcrumb' %}
 
-## Standard
-
-{% story 'nve-breadcrumb', 'Default' %}
-
 ## Icon Button
 
 {% story 'nve-breadcrumb', 'WithIconButton' %}

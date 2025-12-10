@@ -10,10 +10,6 @@
 
 {% install 'nve-password' %}
 
-## Standard
-
-{% story 'nve-password', 'Default' %}
-
 ## Layout
 
 {% api 'nve-password', 'property', 'layout' %}

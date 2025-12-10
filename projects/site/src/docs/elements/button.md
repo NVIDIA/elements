@@ -10,10 +10,6 @@
 
 {% install 'nve-button' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/button/button.examples.json' 'Default' %}
-
 ## Interaction
 
 {% api 'nve-button' 'property' 'interaction' %}

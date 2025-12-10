@@ -13,9 +13,7 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% install 'nve-drawer' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/drawer/drawer.examples.json' 'Default' %}
+## Visual
 
 {% example '@nvidia-elements/core/drawer/drawer.examples.json' 'Visual' '{ "inline": false, "height": "500px" }' %}
 
