@@ -20,4 +20,4 @@
 </main>
 ```
 
-{% story 'nve-grid', 'PanelGrid' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'PanelGrid' %}

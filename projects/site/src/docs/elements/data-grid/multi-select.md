@@ -34,8 +34,8 @@
 
 ## Multi Select
 
-{% story 'nve-grid', 'MultiSelect' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'MultiSelect' %}
 
 ## Multi Select Bulk Actions
 
-{% story 'nve-grid', 'MultiSelectBulkActions' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'MultiSelectBulkActions' %}

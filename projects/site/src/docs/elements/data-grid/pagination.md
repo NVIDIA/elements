@@ -18,4 +18,4 @@
 </nve-grid>
 ```
 
-{% story 'nve-grid', 'Pagination' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'Pagination' %}

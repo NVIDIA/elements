@@ -43,7 +43,6 @@
     "dev": "wireit",
     "build": "wireit",
     "build:watch": "wireit",
-    "build:snippets": "wireit",
     "lint": "wireit"
   },
   "dependencies": {
@@ -92,6 +91,7 @@
     },
     "build": {
       "command": "vite build",
+      "clean": "if-file-deleted",
       "files": [
         "../../elements/dist/**/*.js",
         "../../themes/dist/**/*.css",

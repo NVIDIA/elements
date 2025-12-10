@@ -18,8 +18,8 @@
 
 {% api 'nve-grid', 'property', 'container' %}
 
-{% story 'nve-grid', 'Full' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'Full' %}
 
 ## Flat
 
-{% story 'nve-grid', 'Flat' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'Flat' %}
