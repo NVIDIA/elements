@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { renderBaseHead, renderDocsNav, renderBasePageHeader } from './common.js';
 import { elementSummary, elementStatus, elementDescription, elementSupportButtons } from '../templates/api.js';
+import { exampleShortcode } from '../shortcodes/example.js';
 
 // Define the available tabs for component documentation
 const componentDocTabs = [
@@ -36,7 +37,7 @@ const styles = readFileSync(new URL('./docs.css', import.meta.url), 'utf-8');
  * @param {Object} data - The page data object from 11ty
  * @returns {string} HTML string containing the rendered documentation page
  */
-export function render(data) {
+export async function render(data) {
   return /* html */ `
     <!DOCTYPE html>
     <html lang="en" nve-theme="dark" nve-transition="auto">
@@ -63,7 +64,7 @@ export function render(data) {
           <nve-resize-handle slot="left" min="3" max="300" value="300" step="20" orientation="vertical"></nve-resize-handle>
 
           <main id="docs-main">
-            <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
+            <div id="doc-content" nve-layout="column gap:xl align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
               ${
                 data.tag
                   ? `
@@ -108,11 +109,13 @@ export function render(data) {
                 data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples'))
                   ? `
                 ${elementDescription(data.tag)}
+
+                ${await exampleShortcode(data.tag, 'Default', { summary: false })}
+
+                ${elementSupportButtons(data.tag)}
               `
                   : ''
               }
-
-              ${data.tag ? `${elementSupportButtons(data.tag)}` : ''}
 
               <!-- Page content -->
               ${data.content}

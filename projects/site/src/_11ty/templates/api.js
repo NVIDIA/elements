@@ -42,7 +42,7 @@ md.use(markdownItLink, {
 export function elementDescription(tag) {
   const element = elements.find(d => d.name === tag);
   return element?.manifest?.description
-    ? md.render(element.manifest.description).replace('<p>', '<p nve-text="heading muted sm">')
+    ? md.render(element.manifest.description).replace('<p>', '<p nve-text="body lg">')
     : '';
 }
 
@@ -86,7 +86,7 @@ export function elementSummary(tag) {
     ${badgeLighthouse(lighthouseResults?.scores ?? {}, '', 'Lighthouse:&nbsp;')}
     ${badgeAxe(axeResults?.message ?? '', '')}
 
-    <nve-badge size="sm" status="success"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">${element?.manifest?.metadata?.since ?? ''}</a></nve-badge>
+    <nve-badge size="sm" status="success"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">Released: ${element?.manifest?.metadata?.since ?? ''}</a></nve-badge>
   </section>`;
 }
 
@@ -104,7 +104,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <nve-icon name="hand" size="lg"></nve-icon>
+            <nve-icon name="hand" size="lg" status="accent"></nve-icon>
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
@@ -118,7 +118,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <nve-icon name="edit" size="lg"></nve-icon>
+            <nve-icon name="edit" size="lg" status="accent"></nve-icon>
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
@@ -132,7 +132,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <nve-icon name="person-2" size="lg"></nve-icon>
+            <nve-icon name="person-2" size="lg" status="accent"></nve-icon>
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
@@ -146,7 +146,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <nve-icon name="shapes" size="lg"></nve-icon>
+            <nve-icon name="shapes" size="lg" status="accent"></nve-icon>
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
