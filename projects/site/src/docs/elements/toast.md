@@ -12,9 +12,7 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% install 'nve-toast' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/toast/toast.examples.json' 'Default' %}
+## Visual
 
 {% example '@nvidia-elements/core/toast/toast.examples.json' 'Visual' '{ "inline": false, "height": "130px" }' %}
 

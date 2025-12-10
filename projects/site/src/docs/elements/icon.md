@@ -6,17 +6,15 @@
 }
 ---
 
-The Iconography system is based on exposing an SVG based icon library to a the `icon` element. See the searchable [Interactive Icon Catalog](./docs/foundations/iconography/)
-
 ## Installation
 
 {% install 'nve-icon' %}
 
-## Standard
-
-{% story 'nve-icon', 'Default' %}
-
 ## All Icons
+
+The Iconography system is based on exposing an SVG based icon library to a the `nve-icon` element.
+
+See the searchable [Interactive Icon Catalog](./docs/foundations/iconography/)
 
 <all-icons></all-icons>
 

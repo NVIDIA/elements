@@ -10,10 +10,6 @@
 
 {% install 'nve-checkbox' %}
 
-## Standard
-
-{% story 'nve-checkbox', 'Default' %}
-
 ## Layout
 
 {% api 'nve-checkbox-group', 'property', 'layout' %}

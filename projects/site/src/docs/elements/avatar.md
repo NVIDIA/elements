@@ -10,10 +10,6 @@
 
 {% install 'nve-avatar' %}
 
-## Standard
-
-{% story 'nve-avatar', 'Default' %}
-
 ## Image
 
 {% story 'nve-avatar', 'Image' %}

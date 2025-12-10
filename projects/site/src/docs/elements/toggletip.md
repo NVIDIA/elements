@@ -13,9 +13,7 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% install 'nve-toggletip' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'Default' %}
+## Visual
 
 {% example '@nvidia-elements/core/toggletip/toggletip.examples.json' 'Visual' '{ "inline": false, "height": "250px" }' %}
 

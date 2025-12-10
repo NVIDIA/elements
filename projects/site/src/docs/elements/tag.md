@@ -10,10 +10,6 @@
 
 {% install 'nve-tag' %}
 
-## Standard
-
-{% story 'nve-tag', 'Default' %}
-
 ## Color
 
 {% api 'nve-tag', 'property', 'color' %}

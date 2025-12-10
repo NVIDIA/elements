@@ -11,10 +11,6 @@
 
 {% install 'nve-card' %}
 
-## Standard
-
-{% story 'nve-card', 'Default' %}
-
 ## Card Actions
 
 {% story 'nve-card', 'CardActions' %}

@@ -13,9 +13,7 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% install 'nve-dropdown' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'Default' %}
+## Visual
 
 {% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'Visual' '{ "inline": false, "height": "230px" }' %}
 

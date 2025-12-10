@@ -19,10 +19,6 @@ Additionally, `nve-panel` can be have its `side` property set to `left` or `righ
 
 {% install 'nve-panel' %}
 
-## Standard
-
-{% story 'nve-panel', 'Default' %}
-
 ## Left / Right Side Panels
 
 {% api 'nve-panel', 'property', 'side' %}

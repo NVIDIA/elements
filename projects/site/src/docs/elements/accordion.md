@@ -11,10 +11,6 @@
 
 {% install 'nve-accordion' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/accordion/accordion.examples.json' 'Default' %}
-
 ## Container
 
 {% api 'nve-accordion', 'property' 'container' %}
