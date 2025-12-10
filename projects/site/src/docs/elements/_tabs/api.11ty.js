@@ -47,9 +47,8 @@ export function render(data) {
 
 function renderAllAPIs(element) {
   return `
-<h2 nve-text="heading xl mkd">${element.name}</h2>
 <div nve-layout="column gap:md">
-  <h3 nve-text="heading lg mkd">Properties</h3>
+  <h3 nve-text="heading lg mkd">&lt;${element.name}&gt; :: properties</h3>
   ${renderAPITable(element, 'property', { container: '' })}
 </div>
 
