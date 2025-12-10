@@ -23,8 +23,8 @@
 
 ## Card
 
-{% story 'nve-grid', 'Card' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'Card' %}
 
 ## Card Tabs
 
-{% story 'nve-grid', 'CardTabs' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'CardTabs' %}

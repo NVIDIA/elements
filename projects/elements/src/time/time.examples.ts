@@ -7,6 +7,9 @@ export default {
   component: 'nve-time',
 };
 
+/**
+ * @summary Basic time input with label, min/max time constraints, and help message
+ */
 export const Default = {
   render: () => html`
 <nve-time>
@@ -16,6 +19,9 @@ export const Default = {
 </nve-time>`
 };
 
+/**
+ * @summary Time input with datalist slot for predefined time options users can select from
+ */
 export const Datalist = {
   render: () => html`
 <nve-time>
@@ -31,6 +37,9 @@ export const Datalist = {
   `
 }
 
+/**
+ * @summary Vertical field layout showcasing default, disabled, success, and error states
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg full">
@@ -60,6 +69,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Horizontal field layout with label beside input, showing default, disabled, success, and error states
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg full">

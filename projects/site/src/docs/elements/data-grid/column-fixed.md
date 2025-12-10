@@ -30,16 +30,16 @@
 
 {% api 'nve-grid-column', 'property', 'position' %}
 
-{% story 'nve-grid', 'ColumnFixed' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnFixed' %}
 
 ## Column Multi Fixed
 
-{% story 'nve-grid', 'ColumnMultiFixed' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnMultiFixed' %}
 
 ## Column Stack Fixed
 
-{% story 'nve-grid', 'ColumnStackFixed' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnStackFixed' %}
 
 <!-- TODO ## Column Dynamic Fixed
 
-{% story 'nve-grid', 'ColumnDynamicFixed' %} -->
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnDynamicFixed' %} -->

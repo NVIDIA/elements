@@ -12,7 +12,7 @@
 
 ## Datalist
 
-{% story 'nve-time', 'Datalist' %}
+{% example '@nvidia-elements/core/time/time.examples.json' 'Datalist' %}
 
 ## Layout
 
@@ -20,8 +20,8 @@
 
 ### Vertical
 
-{% story 'nve-time', 'Vertical' %}
+{% example '@nvidia-elements/core/time/time.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-time', 'Horizontal' %}
+{% example '@nvidia-elements/core/time/time.examples.json' 'Horizontal' %}

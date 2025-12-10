@@ -22,4 +22,4 @@
 </section>
 ```
 
-{% story 'nve-grid', 'DisplaySettings' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'DisplaySettings' %}

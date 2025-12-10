@@ -32,4 +32,4 @@
 </nve-page>
 ```
 
-{% story 'nve-grid', 'PanelDetail' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'PanelDetail' %}

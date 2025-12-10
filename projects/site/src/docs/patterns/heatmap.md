@@ -7,4 +7,4 @@
 
 # {{ title }}
 
-{% example '@nvidia-elements/core/grid/grid.stories.json' 'HeatmapPattern' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'HeatmapPattern' %}

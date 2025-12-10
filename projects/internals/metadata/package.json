@@ -353,16 +353,16 @@
         "./src/tasks/examples.ts",
         "./src/tasks/examples.utils.ts",
         "./src/utils/utils.ts",
+        "../patterns/dist/**/*.examples.json",
         "../../elements/dist/**/*.examples.json",
         "../../elements/dist/**/*.stories.json",
         "../../styles/dist/**/*.examples.json",
         "../../themes/dist/**/*.examples.json",
+        "../../monaco/dist/**/*.examples.json",
         "../../labs/brand/dist/**/*.examples.json",
         "../../labs/code/dist/**/*.examples.json",
         "../../labs/forms/dist/**/*.examples.json",
-        "../../labs/markdown/dist/**/*.examples.json",
-        "../../monaco/dist/**/*.examples.json",
-        "../../patterns/dist/**/*.examples.json"
+        "../../labs/markdown/dist/**/*.examples.json"
       ],
       "output": [
         "static/examples.json"
