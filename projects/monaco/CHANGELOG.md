@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.3.2...@nvidia-elements/monaco-v1.4.0) (2025-12-10)
+
+
+### Features
+
+* **monaco:** updated monaco-editor to 0.55.1 ([2f238a7](https://github.com/NVIDIA/elements/commit/2f238a787094bd438cd8dcd757a6d09b873880ca))
+
 ## [@nvidia-elements/monaco-v1.3.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.3.1...@nvidia-elements/monaco-v1.3.2) (2025-12-05)
 
 
