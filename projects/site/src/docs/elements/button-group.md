@@ -10,10 +10,6 @@
 
 {% install 'nve-button-group' %}
 
-## Standard
-
-{% story 'nve-button-group', 'Default' %}
-
 ## Split
 
 {% api 'nve-button-group', 'property', 'interaction' %}

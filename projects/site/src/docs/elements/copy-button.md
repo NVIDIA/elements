@@ -10,10 +10,6 @@
 
 {% install 'nve-copy-button' %}
 
-## Default
-
-{% example '@nvidia-elements/core/copy-button/copy-button.examples.json' 'Default' %}
-
 ## Flat
 
 {% example '@nvidia-elements/core/copy-button/copy-button.examples.json' 'Flat' %}

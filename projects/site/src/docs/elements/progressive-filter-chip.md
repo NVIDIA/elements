@@ -10,10 +10,6 @@
 
 {% install 'nve-progressive-filter-chip' %}
 
-## Standard
-
-{% story 'nve-progressive-filter-chip', 'Default' %}
-
 ## Text Input
 
 {% story 'nve-progressive-filter-chip', 'TextInput' %}

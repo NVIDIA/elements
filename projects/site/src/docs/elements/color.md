@@ -10,10 +10,6 @@
 
 {% install 'nve-color' %}
 
-## Standard
-
-{% story 'nve-color', 'Default' %}
-
 ## Datalist
 
 {% story 'nve-color', 'Datalist' %}

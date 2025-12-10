@@ -17,10 +17,6 @@ The `disabled` attribute can be applied to an item to get the proper visual cues
 
 Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) concerns are handled out of the box. Try using left/right arrow keys on horizontal tabs or up/down on vertical tabs.
 
-## Standard
-
-{% story 'nve-tabs', 'Default' %}
-
 ## Borderless Tabs
 
 By default Tabs will show a blue border on the selected item. You can disable the border by setting `borderless` on the parent `<nve-tabs>`

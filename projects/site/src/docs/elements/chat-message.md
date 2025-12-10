@@ -10,10 +10,6 @@
 
 {% install 'nve-chat-message' %}
 
-## Standard
-
-{% story 'nve-chat-message', 'Default' %}
-
 ## Arrow Position
 
 {% story 'nve-chat-message', 'ArrowPosition' %}

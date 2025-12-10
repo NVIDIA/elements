@@ -26,10 +26,6 @@ import '@nvidia-elements/core/app-header/define.js';
 </nve-app-header>
 ```
 
-## Standard
-
-{% story 'nve-app-header', 'Default' %}
-
 ## App Branding
 
 {% api 'nve-app-header', 'slot', '' %}

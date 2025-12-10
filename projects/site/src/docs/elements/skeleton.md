@@ -10,10 +10,6 @@
 
 {% install 'nve-skeleton' %}
 
-## Standard
-
-{% story 'nve-skeleton', 'Default' %}
-
 ## Effect
 
 {% story 'nve-skeleton', 'Effect' %}

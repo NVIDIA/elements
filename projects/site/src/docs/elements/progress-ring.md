@@ -10,10 +10,6 @@
 
 {% install 'nve-progress-ring' %}
 
-## Standard
-
-{% story 'nve-progress-ring', 'Default' %}
-
 ## Value
 
 {% api 'nve-progress-ring', 'property', 'value' %}

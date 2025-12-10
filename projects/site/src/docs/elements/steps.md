@@ -19,10 +19,6 @@ The `disabled` attribute can be applied to an item to get the proper visual cues
 
 Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) concerns are handled out of the box. Try using left/right arrow keys on horizontal steps or up/down arrow keys on vertical steps.
 
-## Standard
-
-{% story 'nve-steps', 'Default' %}
-
 ## Condensed
 
 {% api 'nve-steps-item', 'property', 'container' %}

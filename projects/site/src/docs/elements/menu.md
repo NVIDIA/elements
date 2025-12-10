@@ -11,10 +11,6 @@
 
 {% install 'nve-menu' %}
 
-## Standard
-
-{% story 'nve-menu', 'Default' %}
-
 ## Selected
 
 {% api 'nve-menu-item', 'property', 'selected' %}

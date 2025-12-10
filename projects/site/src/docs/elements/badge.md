@@ -10,10 +10,6 @@
 
 {% install 'nve-badge' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/badge/badge.examples.json', 'Default' %}
-
 ## Status
 
 {% example '@nvidia-elements/core/badge/badge.examples.json', 'Status' %}

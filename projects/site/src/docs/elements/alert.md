@@ -11,10 +11,6 @@
 
 {% install 'nve-alert' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/alert/alert.examples.json' 'Default' %}
-
 ## Support Status
 
 {% api 'nve-alert-group', 'property', 'status' %}
