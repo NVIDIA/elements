@@ -10,10 +10,6 @@
 
 {% install 'nve-datetime' %}
 
-## Standard
-
-{% story 'nve-datetime', 'Default' %}
-
 ## Datalist
 
 {% story 'nve-datetime', 'Datalist' %}

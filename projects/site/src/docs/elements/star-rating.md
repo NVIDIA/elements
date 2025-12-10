@@ -10,10 +10,6 @@
 
 {% install 'nve-star-rating' %}
 
-## Standard
-
-{% story 'nve-star-rating', 'Default' %}
-
 ## Disabled
 
 {% story 'nve-star-rating', 'Disabled' %}

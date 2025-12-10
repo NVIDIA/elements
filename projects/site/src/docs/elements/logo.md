@@ -10,10 +10,6 @@
 
 {% install 'nve-logo' %}
 
-## Standard
-
-{% story 'nve-logo', 'Default' %}
-
 ## Size
 
 {% api 'nve-logo', 'property', 'size' %}

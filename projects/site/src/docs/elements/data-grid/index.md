@@ -31,8 +31,6 @@ import '@nvidia-elements/core/grid/define.js';
 </nve-grid>
 ```
 
-{% story 'nve-grid', 'Default' %}
-
 ## Column Count
 
 {% dodont %}

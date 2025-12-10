@@ -10,10 +10,6 @@
 
 {% install 'nve-textarea' %}
 
-## Standard
-
-{% story 'nve-textarea', 'Default' %}
-
 ## Layout
 
 {% api 'nve-textarea', 'property', 'layout' %}

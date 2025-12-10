@@ -10,10 +10,6 @@
 
 {% install 'nve-dot' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/dot/dot.examples.json' 'Default' %}
-
 ## Status
 
 {% api 'nve-dot', 'property' 'status' %}

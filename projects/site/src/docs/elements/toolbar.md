@@ -10,10 +10,6 @@
 
 {% install 'nve-toolbar' %}
 
-## Standard
-
-{% story 'nve-toolbar', 'Default' %}
-
 ## Groups
 
 {% story 'nve-toolbar', 'Groups', '{ "inline": false, "height": "300px" }' %}

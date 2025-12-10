@@ -13,9 +13,7 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% install 'nve-notification' %}
 
-## Standard
-
-{% example '@nvidia-elements/core/notification/notification.examples.json' 'Default' '{ "height": "300px" }' %}
+## Visual
 
 {% example '@nvidia-elements/core/notification/notification.examples.json' 'Visual' '{ "inline": false, "height": "250px" }' %}
 

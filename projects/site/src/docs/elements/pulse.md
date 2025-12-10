@@ -10,10 +10,6 @@
 
 {% install 'nve-pulse' %}
 
-## Standard
-
-{% story 'nve-pulse', 'Default' %}
-
 ## Status
 
 {% api 'nve-pulse', 'property', 'status' %}
