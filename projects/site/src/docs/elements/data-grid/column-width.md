@@ -29,8 +29,8 @@
 
 {% api 'nve-grid-column', 'property', 'width' %}
 
-{% story 'nve-grid', 'ColumnWidth' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnWidth' %}
 
 ## Content
 
-{% story 'nve-grid', 'Content' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'Content' %}

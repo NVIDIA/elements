@@ -29,12 +29,12 @@
 
 ## Column Align Center
 
-{% story 'nve-grid', 'ColumnAlignCenter' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnAlignCenter' %}
 
 ## Column Align End
 
-{% story 'nve-grid', 'ColumnAlignEnd' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnAlignEnd' %}
 
 ## Column Align Start
 
-{% story 'nve-grid', 'ColumnAlignStart' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnAlignStart' %}
