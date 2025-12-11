@@ -6,6 +6,10 @@ export default {
   component: 'nve-monaco-editor'
 };
 
+/**
+ * @summary Basic Monaco editor with model creation via the ready event
+ * @tags test-case
+ */
 export const Default = {
   render: () => html`
 <nve-monaco-editor></nve-monaco-editor>

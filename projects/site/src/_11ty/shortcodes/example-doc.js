@@ -23,7 +23,7 @@ export async function exampleDocShortcode(entrypoint, exampleName, config = {}) 
   const isPopover = isPopoverType(element);
 
   return /* html */ `
-  <div class="story-example" nve-layout="column gap:sm" style="width: 100%;">
+  <div class="example-doc" nve-layout="column gap:sm" style="width: 100%;">
     <div nve-layout="row gap:sm align:wrap align:space-between" style="width: 100%;">
       <h3 nve-text="heading lg emphasis" id="${example.id}">${example.name.split(/(?=[A-Z])/).join(' ')}</h3>
       ${await exampleTagsShortcode(example.entrypoint, example.name)}

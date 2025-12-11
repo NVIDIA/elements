@@ -287,8 +287,14 @@ hr {
   width: 100%;
 }
 
+.api-value-table {
+  nve-grid:has(nve-grid-row:nth-child(5)) {
+    --scroll-height: 220px;
+  }
+}
+
 .api-shortcode + .example-shortcode .example-shortcode-summary,
-.story-example:has(.api-description) .example-shortcode-summary,
+.example-doc:has(.api-description) .example-shortcode-summary,
 .split-shortcode:has(.example-shortcode + .api-shortcode) .example-shortcode-summary,
 .split-shortcode:has(.example-shortcode + nve-grid) .example-shortcode-summary {
   display: none;
