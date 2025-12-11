@@ -11,10 +11,6 @@
 
 {% install 'nve-monaco-problems' %}
 
-## Default
-
-{% example '@nvidia-elements/monaco/problems/problems.examples.json', 'Default', '{ "resizable": false, "inline": true }' %}
-
 ## Empty
 
 {% example '@nvidia-elements/monaco/problems/problems.examples.json', 'Empty', '{ "resizable": false, "inline": true }' %}
