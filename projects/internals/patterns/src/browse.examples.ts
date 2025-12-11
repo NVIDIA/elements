@@ -9,6 +9,10 @@ export default {
   component: 'nve-internal-patterns'
 };
 
+/**
+ * @summary Horizontal list item card with thumbnail, title, description, and icon button actions for browsable content lists.
+ * @tags pattern test-case
+ */
 export const ContentRow = {
   render: () => html`
   <nve-card role="listitem" container="full">

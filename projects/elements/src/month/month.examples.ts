@@ -7,6 +7,9 @@ export default {
   component: 'nve-month',
 };
 
+/**
+ * @summary Basic month picker with label and validation message. Use for selecting a month and year in forms, such as expiration dates or report periods.
+ */
 export const Default = {
   render: () => html`
 <nve-month>
@@ -17,6 +20,9 @@ export const Default = {
 `
 };
 
+/**
+ * @summary Month picker with predefined suggestions via datalist. Ideal for guiding users toward common or expected month selections.
+ */
 export const Datalist = {
   render: () => html`
 <nve-month>
@@ -32,6 +38,9 @@ export const Datalist = {
   `
 }
 
+/**
+ * @summary Vertical layout month inputs showing all validation states including disabled, success, and error. Use for stacked form layouts where labels appear above inputs.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg full">
@@ -61,6 +70,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Horizontal layout month inputs with side-by-side labels. Ideal for compact forms or when aligning labels with other horizontal form controls.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg full">

@@ -14,6 +14,10 @@ export default {
   component: 'nve-internal-patterns'
 };
 
+/**
+ * @summary Row of filled icon buttons with directional chevrons for pagination or step navigation controls.
+ * @tags pattern test-case
+ */
 export const ButtonRowFilledIcon = {
   render: () => html`
   <div nve-layout="row gap:xs">
@@ -25,6 +29,10 @@ export const ButtonRowFilledIcon = {
   `
 };
 
+/**
+ * @summary Row of flat icon buttons with minimal spacing for compact toolbar navigation controls.
+ * @tags pattern test-case
+ */
 export const ButtonRowFlatIcon = {
   render: () => html`
   <div nve-layout="row gap:xxxs">
@@ -36,6 +44,10 @@ export const ButtonRowFlatIcon = {
   `
 };
 
+/**
+ * @summary Compact row of small flat icon buttons for space-constrained toolbar or inline controls.
+ * @tags pattern test-case
+ */
 export const ButtonRowSmallFlatIcon = {
   render: () => html`
   <div nve-layout="row gap:xxxs">
@@ -47,6 +59,10 @@ export const ButtonRowSmallFlatIcon = {
   `
 };
 
+/**
+ * @summary Row of flat text buttons with minimal spacing for secondary action groups.
+ * @tags pattern test-case
+ */
 export const ButtonRowFlatText = {
   render: () => html`
   <div nve-layout="row gap:xxxs">
@@ -56,25 +72,33 @@ export const ButtonRowFlatText = {
   `
 };
 
+/**
+ * @summary Row of flat buttons with leading icons for labeled action toolbars like sync, revert, or add operations.
+ * @tags pattern test-case
+ */
 export const ButtonRowFlatTextWithIcon = {
   render: () => html`
   <div nve-layout="row gap:xxxs">
     <nve-button container="flat">
-      <nve-icon name="gear" style="--color: var(--nve-sys-text-muted-color)"></nve-icon>
+      <nve-icon name="gear"></nve-icon>
       Sync MB
     </nve-button>
     <nve-button container="flat">
-      <nve-icon name="undo" style="--color: var(--nve-sys-text-muted-color)"></nve-icon>
+      <nve-icon name="undo"></nve-icon>
       Revert Timestamps
     </nve-button>
     <nve-button container="flat">
-      <nve-icon name="add" style="--color: var(--nve-sys-text-muted-color)"></nve-icon>
+      <nve-icon name="add"></nve-icon>
       Add Event
     </nve-button>
   </div>
   `
 };
 
+/**
+ * @summary Row of filled buttons with emphasis variant and overflow menu for primary action groups.
+ * @tags pattern test-case
+ */
 export const ButtonRowFilledTextWithIcon = {
   render: () => html`
   <div nve-layout="row gap:xs">
@@ -98,7 +122,7 @@ export const ShortcutFilled = {
 
 /**
  * @summary Keyboard shortcut content example for inline text content.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const ShortcutFlat = {
   render: () => html`
@@ -106,6 +130,10 @@ export const ShortcutFlat = {
   `
 };
 
+/**
+ * @summary Dropdown menu with keyboard shortcut hints displayed alongside menu items.
+ * @tags pattern test-case
+ */
 export const ShortcutDropdown = {
   render: () => html`
   <nve-button popover="code-menu">dropdown</nve-button>

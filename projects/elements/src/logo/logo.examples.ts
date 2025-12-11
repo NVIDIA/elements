@@ -6,12 +6,18 @@ export default {
   component: 'nve-logo',
 };
 
+/**
+ * @summary Default NVIDIA logo with aria-label for accessibility. Use for brand identification in headers, footers, and loading states.
+ */
 export const Default = {
   render: () => html`
   <nve-logo aria-label="NVIDIA"></nve-logo>
   `
 };
 
+/**
+ * @summary Logo size variants (sm, md, lg) for different contexts. Use smaller sizes for dense layouts like toolbars, larger sizes for prominent brand placement.
+ */
 export const Size = {
   render: () => html`
 <div nve-layout="row gap:xs">
@@ -27,6 +33,9 @@ export const Size = {
   `
 };
 
+/**
+ * @summary Custom icons slotted into the logo container. Ideal for product icons, team badges, or custom brand marks within the standard logo shape.
+ */
 export const SlottedIcons = {
   render: () => html`
 <div nve-layout="row gap:xs">
@@ -52,6 +61,9 @@ export const SlottedIcons = {
   `
 };
 
+/**
+ * @summary All available logo color options. Use colors to differentiate products, teams, or categories within NVIDIA applications.
+ */
 export const Color = {
   render: () => html`
 <div nve-layout="row gap:xs align:wrap">
@@ -82,6 +94,9 @@ export const Color = {
   `
 };
 
+/**
+ * @summary Logo colors optimized for light theme backgrounds. Ensures proper contrast and visibility when used in light mode interfaces.
+ */
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="row gap:xs align:wrap pad:sm" style="background: var(--nve-sys-layer-container-background) !important;">
@@ -112,6 +127,9 @@ export const LightTheme = {
   `
 }
 
+/**
+ * @summary Logo colors optimized for dark theme backgrounds. Ensures proper contrast and visibility when used in dark mode interfaces.
+ */
 export const DarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="row gap:xs align:wrap pad:sm">

@@ -23,17 +23,17 @@ Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI
 
 {% api 'nve-steps-item', 'property', 'container' %}
 
-{% story 'nve-steps', 'Condensed' %}
+{% example '@nvidia-elements/core/steps/steps.examples.json' 'Condensed' %}
 
 ## Vertical Steps
 
 {% api 'nve-steps', 'property', 'vertical' %}
 
-{% story 'nve-steps', 'VerticalSteps' %}
+{% example '@nvidia-elements/core/steps/steps.examples.json' 'VerticalSteps' %}
 
 ## Vertical Condensed Steps
 
-{% story 'nve-steps', 'VerticalCondensedSteps' %}
+{% example '@nvidia-elements/core/steps/steps.examples.json' 'VerticalCondensedSteps' %}
 
 ## Stateless Steps
 
@@ -43,4 +43,4 @@ We have provided a way to opt in to stateful selection behavior where click even
 In all other examples on this page `behavior-select` is set on the parent `steps` to opt into stateful behavior. The following example
 shows the default stateless behavior, where the host app will have to set/remove the `selected` attribute on child `<nve-steps-item>`.
 
-{% story 'nve-steps', 'StatelessSteps' %}
+{% example '@nvidia-elements/core/steps/steps.examples.json' 'StatelessSteps' %}
