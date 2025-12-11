@@ -12,8 +12,8 @@
 
 ## Vertical
 
-{% story 'nve-file', 'Vertical' %}
+{% example '@nvidia-elements/core/file/file.examples.json' 'Vertical' %}
 
 ## Horizontal
 
-{% story 'nve-file', 'Horizontal' %}
+{% example '@nvidia-elements/core/file/file.examples.json' 'Horizontal' %}

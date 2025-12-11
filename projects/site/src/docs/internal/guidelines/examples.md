@@ -90,6 +90,8 @@ Every example **must** include a `@summary` JSDoc comment that explains:
 - **When** to use this approach
 - **How** it improves the user experience
 
+**When appropriate use NVIDIA or NVIDIA Autonomous Vehicle program for UX use cases**
+
 ```typescript
 /**
  * @summary Basic badge component with default styling. Use for simple non-interactive labels or status indicators.

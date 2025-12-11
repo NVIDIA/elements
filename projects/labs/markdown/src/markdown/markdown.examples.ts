@@ -6,12 +6,27 @@ export default {
   component: 'nve-markdown'
 };
 
+/** @summary Basic example of the markdown component rendering content from a template element */
 export const Default = {
   render: () => html`
-<nve-markdown></nve-markdown>
+<nve-markdown>
+  <template>
+    # Default
+
+    This is a default markdown component in its initial state.
+
+    - List item 1
+    - List item 2
+    - List item 3
+  </template>
+</nve-markdown>
   `
 };
 
+/**
+ * @summary Comprehensive typography demo using template element with headings, lists, links, and inline code
+ * @tags test-case
+ */
 export const KitchenSinkFromTemplate = {
   render: () => html`
 <nve-markdown>
@@ -67,6 +82,10 @@ Inline code like \`const greeting = "Hello";\` is useful for short snippets.
   `
 };
 
+/**
+ * @summary Comprehensive typography demo using JavaScript source property with tables, blockquotes, and status indicators
+ * @tags test-case
+ */
 export const KitchenSinkFromSource = {
   render: () => html`
     <div>
@@ -143,6 +162,10 @@ Inline code like \\\`const greeting = "Hello";\\\` is useful for short snippets.
   `
 };
 
+/**
+ * @summary Basic inline source attribute usage with headings, lists, bold/italic text, and code blocks
+ * @tags test-case
+ */
 export const MarkdownFromSource = {
   render: () => html`
 <nve-markdown source="# This is a heading
@@ -159,6 +182,7 @@ const code = 'example';
   `
 };
 
+/** @summary Markdown content defined inside a template element with nested lists and inline formatting */
 export const MarkdownFromTemplate = {
   render: () => html`
 <nve-markdown>
@@ -192,6 +216,7 @@ This paragraph tests that lists properly end with margin-bottom.
   `
 };
 
+/** @summary Demonstrates mixing raw HTML elements with markdown syntax within a template */
 export const CombinedFromTemplate = {
   render: () => html`
 <nve-markdown>
@@ -217,6 +242,10 @@ This content has <strong>HTML</strong> mixed with markdown.
   `
 };
 
+/**
+ * @summary Progressive streaming demo simulating AI assistant responses with block-by-block content rendering
+ * @tags test-case
+ */
 export const JavaScriptDriven = {
   render: () => html`
     <div>
@@ -299,6 +328,10 @@ The component uses a reactive approach:
   `
 };
 
+/**
+ * @summary Interactive demo with buttons to switch between different source content dynamically
+ * @tags test-case
+ */
 export const DynamicSource = {
   render: () => html`
     <div>
@@ -329,6 +362,10 @@ export const DynamicSource = {
   `
 };
 
+/** 
+ * @summary Full markdown-it feature showcase with all heading levels, horizontal rules, emphasis, blockquotes, and tables
+ * @tags test-case
+ */
 export const MarkdownItDemo = {
   render: () => html`
     <div>
