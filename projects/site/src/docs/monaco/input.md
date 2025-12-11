@@ -11,10 +11,6 @@
 
 {% install 'nve-monaco-input' %}
 
-## Default
-
-{% example '@nvidia-elements/monaco/input/input.examples.json', 'Default', '{ "resizable": false, "inline": true }' %}
-
 ## Optional Features
 
 {% example '@nvidia-elements/monaco/input/input.examples.json', 'WithOptionalAttributes', '{ "resizable": false, "inline": true }' %}

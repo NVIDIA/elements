@@ -19,7 +19,3 @@
 ## Installation
 
 {% install 'nve-monaco-editor' %}
-
-## Default
-
-{% example '@nvidia-elements/monaco/editor/editor.examples.json', 'Default', '{ "resizable": false, "inline": true }' %}
