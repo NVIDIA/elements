@@ -12,12 +12,12 @@
 
 ## Disabled
 
-{% story 'nve-star-rating', 'Disabled' %}
+{% example '@nvidia-elements/core/star-rating/star-rating.examples.json' 'Disabled' %}
 
 ## HalfStar
 
-{% story 'nve-star-rating', 'HalfStar' %}
+{% example '@nvidia-elements/core/star-rating/star-rating.examples.json' 'HalfStar' %}
 
 ## Toggle
 
-{% story 'nve-star-rating', 'Toggle' %}
+{% example '@nvidia-elements/core/star-rating/star-rating.examples.json' 'Toggle' %}

@@ -12,7 +12,7 @@
 
 ## Datalist
 
-{% story 'nve-month', 'Datalist' %}
+{% example '@nvidia-elements/core/month/month.examples.json' 'Datalist' %}
 
 ## Layout
 
@@ -20,8 +20,8 @@
 
 ### Vertical
 
-{% story 'nve-month', 'Vertical' %}
+{% example '@nvidia-elements/core/month/month.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-month', 'Horizontal' %}
+{% example '@nvidia-elements/core/month/month.examples.json' 'Horizontal' %}

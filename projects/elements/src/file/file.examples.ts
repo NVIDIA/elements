@@ -7,6 +7,9 @@ export default {
   component: 'nve-file',
 };
 
+/**
+ * @summary Basic file input with label and validation message. Use for simple file upload fields in forms.
+ */
 export const Default = {
   render: () => html`
 <nve-file>
@@ -17,6 +20,9 @@ export const Default = {
 `
 };
 
+/**
+ * @summary Vertical layout file inputs showing all validation states including disabled, success, and error. Use for stacked form layouts where labels appear above inputs.
+ */
 export const Vertical = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">
@@ -46,6 +52,9 @@ export const Vertical = {
 </div>`
 };
 
+/**
+ * @summary Horizontal layout file inputs with side-by-side labels. Ideal for compact forms or when aligning labels with other horizontal form controls.
+ */
 export const Horizontal = {
   render: () => html`
 <div nve-layout="column gap:lg align:stretch">

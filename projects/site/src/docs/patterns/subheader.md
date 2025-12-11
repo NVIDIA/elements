@@ -7,35 +7,31 @@
 
 # {{ title }}
 
-Intended for use at the top of pages, but below the App Header, the following combinations of components are recommended patterns for composing subheaders.
-
-## Main Page Headers
-
-Page headers used for _main content pages_ should use `<nve-card container="flat">` containing sections for a `<h1>` page title, and sections for action buttons, breadcrumbs, and optional metadata.
+Intended for use at the top of pages, but below the Page Header, the following combinations of components are recommended patterns for composing subheaders.
 
 ### Standard
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'StandardHeaderMainPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'StandardHeaderMainPage' '{ "inline": false, "height": "380px" }' %}
 
 ### Stacked Metadata
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'StackedMetadataHeaderMainPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'StackedMetadataHeaderMainPage' '{ "inline": false, "height": "380px" }' %}
 
 ### Inline Metadata
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'InlineMetadataHeaderMainPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'InlineMetadataHeaderMainPage' '{ "inline": false, "height": "380px" }' %}
 
 ### Tabs
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'TabsHeaderMainPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'TabsHeaderMainPage' '{ "inline": false, "height": "380px" }' %}
 
 ### Kitchen Sink, Stacked
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'StackedKitchenSinkHeaderMainPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'StackedKitchenSinkHeaderMainPage' '{ "inline": false, "height": "380px" }' %}
 
 ### Kitchen Sink, Inline
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'InlineKitchenSinkHeaderMainPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'InlineKitchenSinkHeaderMainPage' '{ "inline": false, "height": "380px" }' %}
 
 ## Detail Page Headers
 
@@ -43,36 +39,36 @@ _Detail pages_ are one level deeper in the navigation and should use `<nve-card 
 
 ### Standard
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'StandardHeaderDetailPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'StandardHeaderDetailPage' '{ "inline": false, "height": "380px" }' %}
 
 ### Stacked Metadata
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'StackedMetadataHeaderDetailPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'StackedMetadataHeaderDetailPage' '{ "inline": false, "height": "380px" }' %}
 
 ### Inline Metadata
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'InlineMetadataHeaderDetailPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'InlineMetadataHeaderDetailPage' '{ "inline": false, "height": "380px" }' %}
 
 ### Tabs
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'TabsHeaderDetailPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'TabsHeaderDetailPage' '{ "inline": false, "height": "380px" }' %}
 
 ### Kitchen Sink, Stacked
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'StackedKitchenSinkHeaderDetailPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'StackedKitchenSinkHeaderDetailPage' '{ "inline": false, "height": "380px" }' %}
 
 ### Kitchen Sink, Inline
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'InlineKitchenSinkHeaderDetailPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'InlineKitchenSinkHeaderDetailPage' '{ "inline": false, "height": "380px" }' %}
 
 ## Viewer Page Headers
 
 ### Standard
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'StandardHeaderViewerPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'StandardHeaderViewerPage' '{ "inline": false, "height": "380px" }' %}
 
 ## Toolbar Page Headers
 
 ### Standard
 
-{% example '@nve-internals/patterns/subheader.examples.json', 'StandardHeaderToolbarPage' %}
+{% example '@nve-internals/patterns/subheader.examples.json' 'StandardHeaderToolbarPage' '{ "inline": false, "height": "380px" }' %}

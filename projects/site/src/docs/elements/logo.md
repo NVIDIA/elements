@@ -14,16 +14,16 @@
 
 {% api 'nve-logo', 'property', 'size' %}
 
-{% story 'nve-logo', 'Size' %}
+{% example '@nvidia-elements/core/logo/logo.examples.json' 'Size' %}
 
 ## Color
 
 {% api 'nve-logo', 'property', 'color' %}
 
-{% story 'nve-logo', 'Color' %}
+{% example '@nvidia-elements/core/logo/logo.examples.json' 'Color' %}
 
 ## Slotted Icon
 
 Slotted icon in logo will inherit logo color and size
 
-{% story 'nve-logo', 'SlottedIcons' %}
+{% example '@nvidia-elements/core/logo/logo.examples.json' 'SlottedIcons' %}
