@@ -60,7 +60,7 @@
 
 /* Tab Styles */
 nve-tabs#doc-tabs {
-  padding: var(--nve-ref-space-sm) 0;
+  padding: var(--nve-ref-space-sm) 0 0;
   border-bottom: 1px solid var(--nve-ref-border-color);
 
   nve-tabs-item {
