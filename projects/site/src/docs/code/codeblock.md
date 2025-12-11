@@ -38,10 +38,6 @@ function getTime(): number {
 </nve-codeblock>
 ```
 
-## Default
-
-{% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Default' %}
-
 ## Code
 
 {% api 'nve-codeblock', 'property', 'code' %}
