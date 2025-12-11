@@ -33,9 +33,7 @@
 
 {% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnSortButtonVisibility' %}
 
-{% svg-logos 'lit' %}
-
-## Lit <svg width="20" height="20"><use href="#lit-svg"></use></svg>
+## Lit {% svg-logo 'lit' '28' %}
 
 ```typescript
 class RowSortDemo extends LitElement {
