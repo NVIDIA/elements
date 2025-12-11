@@ -48,6 +48,8 @@ slot:not([name]) {
   padding: var(--padding);
   overflow: var(--overflow);
   min-height: var(--height);
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
   display: block;
   resize: horizontal;
   min-width: 120px;
@@ -73,7 +75,9 @@ slot[name='suffix'] {
 nve-select[container='flat'] {
   --font-weight: var(--nve-ref-font-weight-semibold);
   --border-bottom: 0;
-  width: 54px;
+  --border: 0;
+  --padding: 0 var(--nve-ref-size-200);
+  width: 9ch;
 }
 
 nve-select::part(_caret) {
