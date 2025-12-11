@@ -46,7 +46,7 @@ body:has(nve-page) #example-container {
   display: contents;
 }
 
-[data-element*='Responsive'] {
+[data-element*='styles-responsive_'] {
   & > [nve-layout] {
     height: 100%;
     width: 100%;
@@ -58,7 +58,7 @@ body:has(nve-page) #example-container {
     --background: oklab(0.3344 -0.0439437 0.00222608);
   }
 
-  &[data-element*='Viewport'] {
+  &[data-element*='styles-responsive_viewport'] {
     nve-card {
       --background: oklab(0.2776 0.0214875 -0.0624042);
     }

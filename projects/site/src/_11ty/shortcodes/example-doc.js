@@ -15,7 +15,7 @@ const md = markdownIt();
  * content available first such as the component API, component description and
  * example summary.
  */
-export async function exampleDocShortcode(entrypoint, exampleName) {
+export async function exampleDocShortcode(entrypoint, exampleName, config = {}) {
   const example = findExample(entrypoint, exampleName);
   const element = findElement(example.element);
   const content = await getBestAvailableContent(example, element);
@@ -29,7 +29,7 @@ export async function exampleDocShortcode(entrypoint, exampleName) {
       ${await exampleTagsShortcode(example.entrypoint, example.name)}
     </div>
     <div nve-layout="grid gap:sm ${largeLayout ? 'span-items:12' : 'span-items:12 &xl|span-items:6'}">
-      ${example.entrypoint ? await exampleShortcode(example.entrypoint, example.name, { summary: false, inline: !isPopover, height: isPopover ? '400px' : undefined }) : ''}
+      ${example.entrypoint ? await exampleShortcode(example.entrypoint, example.name, { summary: false, inline: !isPopover, height: isPopover ? '400px' : undefined, ...config }) : ''}
       <div nve-layout="column gap:sm">${content}</div>
     </div>
   </div>
