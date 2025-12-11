@@ -33,15 +33,13 @@ Each frontend framework typically provides its own guidance and best practices f
 
 See the links below for specific integration patterns for the following frameworks:
 
-{% svg-logos 'lit' 'angular' %}
-
 <section nve-layout="row align:left gap:md">
   <nve-button>
-    <a href="./docs/integrations/lit/#forms"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit Integration</a>
+    <a href="./docs/integrations/lit/#forms">{% svg-logo 'lit' '20' %} Lit Integration</a>
   </nve-button>
 
   <nve-button>
-    <a href="./docs/integrations/angular/#forms"><svg width="20" height="20"><use href="#angular-svg"></use></svg> Angular Integration</a>
+    <a href="./docs/integrations/angular/#forms">{% svg-logo 'angular' '20' %} Angular Integration</a>
   </nve-button>
 </section>
 
