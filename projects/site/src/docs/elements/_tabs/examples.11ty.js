@@ -73,7 +73,7 @@ export async function render(data) {
         overflow-x: hidden;
       }
 
-      .story-example {
+      .example-doc {
         padding-top: var(--nve-ref-space-lg);
 
         h3 {

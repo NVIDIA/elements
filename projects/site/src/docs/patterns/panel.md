@@ -12,16 +12,16 @@ intended for different use-cases.
 
 ### Key Value
 
-{% example '@nve-internals/patterns/panel-patterns.examples.json', 'PanelKeyValue' %}
+{% example '@nve-internals/patterns/panel.examples.json' 'PanelKeyValue' %}
 
 ### Accordion
 
-{% example '@nve-internals/patterns/panel-patterns.examples.json', 'PanelAccordion' %}
+{% example '@nve-internals/patterns/panel.examples.json' 'PanelAccordion' %}
 
 ### Tabbed Header
 
-{% example '@nve-internals/patterns/panel-patterns.examples.json', 'PanelTabbedHeader' %}
+{% example '@nve-internals/patterns/panel.examples.json' 'PanelTabbedHeader' %}
 
 ### Notification Stack
 
-{% example '@nve-internals/patterns/panel-patterns.examples.json', 'PanelNotificationStack' %}
+{% example '@nve-internals/patterns/panel.examples.json' 'PanelNotificationStack' %}
