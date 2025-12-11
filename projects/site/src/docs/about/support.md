@@ -11,17 +11,15 @@
 
 Reach out to our slack support chanel or find additional resources in our Figma libraries.
 
-{% svg-logos %}
-
 <section nve-layout="row gap:sm pad-bottom:lg">
   <nve-button>
-    <a href="http://nv/elements-slack" target="_blank"><svg width="18" height="18"><use href="#slack-icon-svg"></use></svg> Slack Support</a>
+    <a href="http://nv/elements-slack" target="_blank">{% svg-logo 'slack' '18' %} Slack Support</a>
   </nve-button>
   <nve-button>
-    <a href="https://github.com/NVIDIA/elements" target="_blank"><svg width="18" height="18"><use href="#gitlab-svg"></use></svg> Gitlab</a>
+    <a href="https://github.com/NVIDIA/elements" target="_blank">{% svg-logo 'gitlab' '18' %} Gitlab</a>
   </nve-button>
   <nve-button>
-    <a href="http://nv/elements-figma" target="_blank"><svg width="18" height="18"><use href="#figma-svg"></use></svg> Figma Library</a>
+    <a href="http://nv/elements-figma" target="_blank">{% svg-logo 'figma' '18' %} Figma Library</a>
   </nve-button>
   <nve-button>
     <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style="--color: var(--nve-sys-accent-primary-background)"></nve-icon> NPM Package</a>
@@ -34,31 +32,31 @@ Elements [supports a wide variety](https://custom-elements-everywhere.com) of Ja
 
 <section nve-layout="row gap:sm pad-bottom:lg">
   <nve-button>
-    <a href="./docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>
+    <a href="./docs/integrations/typescript/">{% svg-logo 'slack' '18' %} TypeScript</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/lit/"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit</a>
+    {% svg-logo 'lit' '20' %} Lit</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/angular/"><svg width="20" height="20"><use href="#angular-svg"></use></svg> Angular</a>
+    <a href="./docs/integrations/angular/">{% svg-logo 'angular' '20' %} Angular</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/vue/"><svg width="20" height="20"><use href="#vue-svg"></use></svg> Vue</a>
+    <a href="./docs/integrations/vue/">{% svg-logo 'vue' '20' %} Vue</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/preact/"><svg width="20" height="20"><use href="#preact-svg"></use></svg> Preact</a>
+    <a href="./docs/integrations/preact/">{% svg-logo 'preact' '20' %} Preact</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/nextjs/"><svg width="20" height="20"><use href="#nextjs-svg"></use></svg> NextJS</a>
+    <a href="./docs/integrations/nextjs/">{% svg-logo 'nextjs' '20' %} NextJS</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/react/"><svg width="20" height="20"><use href="#react-svg"></use></svg> React</a>
+    <a href="./docs/integrations/react/">{% svg-logo 'react' '20' %} React</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/solidjs/"><svg width="20" height="20"><use href="#solidjs-svg"></use></svg> SolidJS</a>
+    <a href="./docs/integrations/solidjs/">{% svg-logo 'solidjs' '18' %} SolidJS</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/about/installation/"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> JavaScript</a>
+    <a href="./docs/about/installation/">{% svg-logo 'javascript' '18' %} JavaScript</a>
   </nve-button>
 </section>
 
@@ -68,7 +66,7 @@ To enable and support cutting edge features for our users the primary browser su
 
 <section nve-layout="row gap:sm pad-bottom:md">
   <nve-button>
-    <a href="https://www.google.com/chrome/"><svg width="20" height="20"><use href="#chrome-svg"></use></svg> Chrome</a>
+    <a href="https://www.google.com/chrome/">{% svg-logo 'chrome' '20' %} Chrome</a>
   </nve-button>
 </section>
 

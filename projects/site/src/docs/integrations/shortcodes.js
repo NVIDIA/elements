@@ -1,4 +1,4 @@
-import { svgLogosShortcode } from '../../_11ty/shortcodes/svg-logos.js';
+import { svgLogoShortcode } from '../../_11ty/shortcodes/svg-logo.js';
 import { siteData } from '../../index.11tydata.js';
 
 export function renderInstallArtifactoryShortcode() {
@@ -37,8 +37,6 @@ export function renderIntegrationShortcode(integration) {
 
   return integrationData.logo
     ? /* html */ `
-${svgLogosShortcode(integrationData.logo)}
-
 <div nve-layout="row gap:xs">
   ${
     integrationData.playgroundURL
@@ -83,7 +81,7 @@ ${svgLogosShortcode(integrationData.logo)}
     integrationData.documentation
       ? /* html */ `
   <nve-button>
-    <svg width="18" height="18"><use href="#${integrationData.logo}-svg"></use></svg>
+    ${svgLogoShortcode(integrationData.logo, '18')}
     <a target="_blank" href="${integrationData.starterSource}">Documentation</a>
   </nve-button>`
       : ''

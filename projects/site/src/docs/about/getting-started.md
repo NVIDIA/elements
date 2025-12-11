@@ -49,7 +49,7 @@ import '@nvidia-elements/core/button/define.js';
 
 {% svg-logos %}
 
-<section nve-layout="row gap:sm align:center">
+<section nve-layout="row gap:sm align:center align:wrap">
   <nve-button>
     <a href="./docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>
   </nve-button>
@@ -86,9 +86,6 @@ import '@nvidia-elements/core/button/define.js';
   <nve-button>
     <a href="./docs/integrations/installation/"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> JavaScript</a>
   </nve-button>
-</section>
-
-<section nve-layout="row gap:sm align:center">
   <nve-button>
     <a href="./docs/integrations/installation/"><nve-icon name="gear"></nve-icon> Installation</a>
   </nve-button>
@@ -96,7 +93,7 @@ import '@nvidia-elements/core/button/define.js';
     <a href="https://github.com/NVIDIA/elements" target="_blank"><svg width="18" height="18"><use href="#gitlab-svg"></use></svg> Gitlab Repo</a>
   </nve-button>
   <nve-button>
-    <a href="http://nv/elements-slack" target="_blank"><svg width="18" height="18"><use href="#slack-icon-svg"></use></svg> Slack Support</a>
+    <a href="http://nv/elements-slack" target="_blank"><svg width="18" height="18"><use href="#slack-svg"></use></svg> Slack Support</a>
   </nve-button>
   <nve-button>
     <a href="http://nv/elements-figma" target="_blank"><svg width="18" height="18"><use href="#figma-svg"></use></svg> Figma Library</a>

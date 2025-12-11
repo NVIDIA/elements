@@ -22,9 +22,7 @@ Batch rendering allows rows to dynamically be added for improved performance. Th
 
 <!-- todo {% example '@nvidia-elements/core/grid/grid.examples.json' 'PerformanceInfiniteScroll' %} -->
 
-{% svg-logos 'lit' %}
-
-### Lit Example <svg width="20" height="20"><use href="#lit-svg"></use></svg>
+### Lit Example {% svg-logo 'lit' '20' %}
 
 ```typescript
 @customElement('batch-render-demo')
@@ -61,7 +59,7 @@ Virtual Scroll can be achieved using a virtual scroll package such as [@lit-labs
 
 <!-- todo {% example '@nvidia-elements/core/grid/grid.examples.json' 'PerformanceVirtualScroll' %} -->
 
-### Lit Example <svg width="20" height="20"><use href="#lit-svg"></use></svg>
+### Lit Example {% svg-logo 'lit' '18' %}
 
 ```typescript
 @customElement('grid-virtual-scroll-demo')

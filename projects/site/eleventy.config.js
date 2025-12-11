@@ -20,7 +20,7 @@ import {
   renderIntegrationShortcode
 } from './src/docs/integrations/shortcodes.js';
 import { renderArtifactoryUsageShortcode } from './src/_11ty/shortcodes/artifactory-usage.js';
-import { svgLogosShortcode } from './src/_11ty/shortcodes/svg-logos.js';
+import { svgLogoShortcode, svgLogosShortcode } from './src/_11ty/shortcodes/svg-logo.js';
 import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
 import { ApiService } from '@internals/metadata';
@@ -153,6 +153,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);
   eleventyConfig.addAsyncShortcode('install', installShortcode);
   eleventyConfig.addShortcode('svg-logos', svgLogosShortcode);
+  eleventyConfig.addShortcode('svg-logo', svgLogoShortcode);
   eleventyConfig.addShortcode('installation', renderInstallShortcode);
   eleventyConfig.addShortcode('install-artifactory', renderInstallArtifactoryShortcode);
   eleventyConfig.addShortcode('integration', renderIntegrationShortcode);
