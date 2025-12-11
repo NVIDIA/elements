@@ -102,7 +102,9 @@ export async function render(data) {
     <div nve-layout="column gap:lg">
     ${(
       await Promise.all(
-        exampleTemplates.map(async example => await exampleDocShortcode(example.entrypoint, example.name))
+        exampleTemplates.map(
+          async example => await exampleDocShortcode(example.entrypoint, example.name, { editAction: true })
+        )
       )
     ).join('\n')}
     </div>
@@ -115,6 +117,11 @@ export async function render(data) {
       const examples = ${JSON.stringify(exampleTemplates.map(i => ({ id: i.id, template: md.utils.escapeHtml(i.template) })))};
       const exampleId = params.get('example') ?? examples[0].id;
       const example = examples.find(e => e.id === exampleId);
+
+      // ensure url is on correct base path regardless of generated permalink
+      document.querySelectorAll('a[href*="?edit=true"]').forEach(link => {
+        link.href = window.location.pathname + '?' + link.href.split('?')[1];
+      });
 
       if (example) {
         cyclingExample.source = unescapeHtml(example.template);
