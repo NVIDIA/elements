@@ -9,6 +9,9 @@ export default {
   component: 'nve-steps',
 };
 
+/**
+ * @summary Interactive step indicator with status colors for multi-step workflows. Use for wizards, onboarding flows, or process tracking where users can navigate between steps.
+ */
 export const Default = {
   render: () => html`
   <nve-steps behavior-select>
@@ -21,6 +24,9 @@ export const Default = {
   `
 };
 
+/**
+ * @summary Condensed step indicator with reduced visual weight. Ideal for space-constrained layouts or secondary navigation where steps need less prominence.
+ */
 export const Condensed = {
   render: () => html`
   <nve-steps behavior-select container="condensed">
@@ -33,6 +39,9 @@ export const Condensed = {
   `
 };
 
+/**
+ * @summary Vertical step layout for sidebar navigation or tall containers. Use when horizontal space is limited or steps require longer labels.
+ */
 export const VerticalSteps = {
   render: () => html`
   <nve-steps vertical behavior-select style="width: 150px">
@@ -45,6 +54,9 @@ export const VerticalSteps = {
   `
 };
 
+/**
+ * @summary Vertical condensed steps combining both layout options. Ideal for dense sidebar navigation with minimal visual footprint.
+ */
 export const VerticalCondensedSteps = {
   render: () => html`
   <nve-steps vertical container="condensed" behavior-select>
@@ -57,6 +69,9 @@ export const VerticalCondensedSteps = {
   `
 };
 
+/**
+ * @summary Display-only steps without interactive selection behavior. Use for showing progress indicators where step navigation is controlled externally.
+ */
 export const StatelessSteps = {
   render: () => html`
   <nve-steps>

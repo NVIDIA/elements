@@ -6,6 +6,9 @@ export default {
   component: 'nve-pulse',
 };
 
+/**
+ * @summary Animated pulse indicator with aria-label for accessibility. Use to draw attention to live updates, active connections, or real-time status.
+ */
 export const Default = {
   render: () => html`
     <div nve-layout="row align:center">
@@ -13,6 +16,9 @@ export const Default = {
     </div>
 `};
 
+/**
+ * @summary Pulse status variants for different severity levels. Use accent for highlights, warning for caution states, and danger for critical alerts.
+ */
 export const Status = {
   render: () => html`
     <div nve-layout="row gap:sm pad:md">
@@ -23,6 +29,9 @@ export const Status = {
     </div>
 `};
 
+/**
+ * @summary Pulse size variants from extra-small to large. Choose sizes based on context—smaller for inline indicators, larger for prominent status displays.
+ */
 export const Size = {
   render: () => html`
     <div nve-layout="row align:center">
@@ -33,6 +42,9 @@ export const Size = {
     </div>
 `};
 
+/**
+ * @summary Pulse used inline with text labels. Ideal for status indicators in lists, tables, or headers to show real-time or live states.
+ */
 export const Inline = {
   render: () => html`
     <div nve-layout="row gap:xs align:center">

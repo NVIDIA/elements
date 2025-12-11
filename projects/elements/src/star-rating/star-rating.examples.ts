@@ -7,6 +7,9 @@ export default {
   component: 'nve-star-rating'
 };
 
+/**
+ * @summary Basic star rating using a range input. Use for collecting user feedback, product reviews, or satisfaction scores in forms.
+ */
 export const Default = {
   render: () => html`
   <nve-star-rating>
@@ -16,6 +19,9 @@ export const Default = {
   </nve-star-rating>`
 };
 
+/**
+ * @summary Disabled star rating for display-only contexts. Use when showing existing ratings that users cannot modify.
+ */
 export const Disabled = {
   render: () => html`
   <nve-star-rating>
@@ -25,6 +31,9 @@ export const Disabled = {
   </nve-star-rating>`
 };
 
+/**
+ * @summary Half-star increments using step="0.5" for more granular ratings. Ideal when finer rating precision is needed for detailed feedback.
+ */
 export const HalfStar = {
   render: () => html`
   <nve-star-rating>
@@ -35,16 +44,18 @@ export const HalfStar = {
   `
 };
 
+/**
+ * @summary Single star toggle for favorite/bookmark functionality. Use with max="1" for binary on/off states like wishlists or bookmarks.
+ */
 export const Toggle = {
   render: () => html`
   <nve-star-rating>
     <label>toggle/favorite</label>
     <input type="range" max="1" value="0" min="0" />
   </nve-star-rating>
-  
   <script type="module">
-      const input = document.querySelector('#range');
-      input.addEventListener('input', () => console.log('input', input.valueAsNumber));
-      input.addEventListener('change', () => console.log('change', input.valueAsNumber));
-    </script>`
+    const input = document.querySelector('#range');
+    input.addEventListener('input', () => console.log('input', input.valueAsNumber));
+    input.addEventListener('change', () => console.log('change', input.valueAsNumber));
+  </script>`
 };
