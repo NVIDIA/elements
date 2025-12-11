@@ -8,6 +8,9 @@ export default {
   component: 'nve-monaco-diff-input'
 };
 
+/**
+ * @summary Basic diff input comparing original and modified code with input/change event listeners
+ */
 export const Default = {
   render: () => html`
 <nve-monaco-diff-input language="typescript" original="console.log('Hello, World!');"  value="console.log('Hello, world!');"></nve-monaco-diff-input>
@@ -19,24 +22,36 @@ export const Default = {
 `
 };
 
+/**
+ * @summary Diff input with optional features: line numbers, code folding, minimap, and side-by-side layout
+ */
 export const WithOptionalAttributes = {
   render: () => html`
 <nve-monaco-diff-input original="console.log('Hello, World!');" value="console.log('Hello, world!');" line-numbers="on" folding minimap side-by-side></nve-monaco-diff-input>
 `
 };
 
+/**
+ * @summary Read-only diff input for displaying non-editable code comparisons
+ */
 export const ReadOnly = {
   render: () => html`
 <nve-monaco-diff-input original="console.log('Hello, World!');" value="console.log('Hello, world!');" readonly></nve-monaco-diff-input>
 `
 };
 
+/**
+ * @summary Disabled diff input preventing user interaction
+ */
 export const Disabled = {
   render: () => html`
 <nve-monaco-diff-input original="console.log('Hello, World!');" value="console.log('Hello, world!');" disabled></nve-monaco-diff-input>
 `
 };
 
+/**
+ * @summary Diff input integrated with nve-control for form labels and help messages
+ */
 export const Control = {
   render: () => html`
   <nve-control>
@@ -47,6 +62,9 @@ export const Control = {
   `
 };
 
+/**
+ * @summary JSON diff input with schema validation in a form context, blocking submission on errors
+ */
 export const JSONSchemaValidation = {
   render: () => html`
   <form id="json-schema-validation-example" nve-layout="column gap:lg">
@@ -96,6 +114,9 @@ export const JSONSchemaValidation = {
   `
 };
 
+/**
+ * @summary TypeScript diff input with real-time type checking that blocks form submission on errors
+ */
 export const TypeScriptValidation = {
   render: () => html`
   <form id="typescript-validation-example" nve-layout="column gap:lg">

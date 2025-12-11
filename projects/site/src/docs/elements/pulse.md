@@ -14,14 +14,14 @@
 
 {% api 'nve-pulse', 'property', 'status' %}
 
-{% story 'nve-pulse', 'Status' %}
+{% example '@nvidia-elements/core/pulse/pulse.examples.json' 'Status' %}
 
 ## Size
 
 {% api 'nve-pulse', 'property', 'size' %}
 
-{% story 'nve-pulse', 'Size' %}
+{% example '@nvidia-elements/core/pulse/pulse.examples.json' 'Size' %}
 
 ## Inline
 
-{% story 'nve-pulse', 'Inline' %}
+{% example '@nvidia-elements/core/pulse/pulse.examples.json' 'Inline' %}

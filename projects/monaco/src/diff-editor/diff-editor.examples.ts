@@ -6,6 +6,10 @@ export default {
   component: 'nve-monaco-diff-editor'
 };
 
+/**
+ * @summary Basic diff editor comparing original and modified text models with inline highlighting
+ * @tags test-case
+ */
 export const Default = {
   render: () => html`
 <nve-monaco-diff-editor></nve-monaco-diff-editor>
