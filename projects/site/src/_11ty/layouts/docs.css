@@ -147,6 +147,11 @@ code > nve-codeblock {
   width: 100%;
 }
 
+pre:has(nve-codeblock),
+code:has(nve-codeblock) {
+  display: contents;
+}
+
 /* Canvas Styles */
 nvd-canvas {
   min-height: 120px;

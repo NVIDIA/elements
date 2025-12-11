@@ -34,15 +34,13 @@ Some frameworks and libraries may require additional configuration to use the `n
 
 See the links below for specific integration patterns for the following frameworks:
 
-{% svg-logos 'lit' 'angular' %}
-
 <div nve-layout="row align:left gap:md">
   <nve-button>
-    <a href="./docs/integrations/lit/#css-utilities"><svg width="20" height="20"><use href="#lit-svg"></use></svg> Lit Integration</a>
+    <a href="./docs/integrations/lit/#css-utilities">{% svg-logo 'lit' '20' %} Lit Integration</a>
   </nve-button>
 
   <nve-button>
-    <a href="./docs/integrations/angular/#advanced-import-css-source"><svg width="20" height="20"><use href="#angular-svg"></use></svg> Angular Integration</a>
+    <a href="./docs/integrations/angular/#advanced-import-css-source">{% svg-logo 'angular' '20' %} Angular Integration</a>
   </nve-button>
 </div>
 

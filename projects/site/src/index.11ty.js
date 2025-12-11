@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { renderBaseHead, renderBasePageHeader, IS_MR_PREVIEW, IS_DEV_MODE } from './_11ty/layouts/common.js';
-import { svgLogosShortcode } from './_11ty/shortcodes/svg-logos.js';
+import { svgLogoShortcode, svgLogosShortcode } from './_11ty/shortcodes/svg-logo.js';
 
 const BASE_HEAD = renderBaseHead({ title: 'Elements', disableTheme: true });
 const styles = readFileSync(new URL('./index.css', import.meta.url), 'utf-8');
@@ -426,10 +426,7 @@ export function render(data) {
               <div class="contact gradient-card" nve-layout="column gap:lg pad:lg align:space-between">
                 <div nve-layout="row gap:md align:vertical-center">
                   <div>
-                    <img
-                      src="https://cdn-prod.nvidia.com/assets/elements/splash/gitlab-icon.svg"
-                      alt="GitLab Logo"
-                      style="width: 28px;height: 26px;" />
+                    ${svgLogoShortcode('gitlab', '28')}
                   </div>
                   <div nve-text="heading medium emphasis">Gitlab Repo</div>
                 </div>
@@ -444,10 +441,7 @@ export function render(data) {
               <div class="contact gradient-card" nve-layout="column gap:lg pad:lg align:space-between">
                 <div nve-layout="row gap:md align:vertical-center">
                   <div>
-                    <img
-                      src="https://cdn-prod.nvidia.com/assets/elements/splash/slack-icon-svg.svg"
-                      alt="Slack Logo"
-                      style="width: 28px;height: 28px;" />
+                    ${svgLogoShortcode('slack', '28')}
                   </div>
                   <div nve-text="heading medium emphasis">Slack Support</div>
                 </div>
