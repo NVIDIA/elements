@@ -26,7 +26,8 @@ export async function exampleShortcode(
     resizable: true,
     summary: true,
     align: 'start',
-    layer: 'canvas'
+    layer: 'canvas',
+    editAction: false
   };
   const config =
     typeof userConfig === 'string'
@@ -45,8 +46,8 @@ export async function exampleShortcode(
     : '';
 
   const editButton =
-    example && ref.startsWith('nve-')
-      ? `<nve-button container="flat" slot="suffix"><a href="./docs/elements/${ref.replace(/^nve-/, '')}/examples/?edit=true&example=${example.id
+    example && config.editAction
+      ? `<nve-button container="flat" slot="suffix"><a href="?edit=true&example=${example.id
           .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
           .replace(/\s+/g, '-')
           .toLowerCase()}">Edit Example</a></nve-button>`
