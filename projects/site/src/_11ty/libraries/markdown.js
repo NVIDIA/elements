@@ -50,7 +50,7 @@ markdown.renderer.rules.ordered_list_open = renderer;
 
 markdown.use(markdownItLink, {
   matcher(href) {
-    return href.match(/^https?:\/\//);
+    return href.match(/^https?:\/\//) && !href.includes('www.w3.org/2000/svg');
   },
   attrs: {
     target: '_blank',
