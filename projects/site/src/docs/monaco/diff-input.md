@@ -11,10 +11,6 @@
 
 {% install 'nve-monaco-diff-input' %}
 
-## Default
-
-{% example '@nvidia-elements/monaco/diff-input/diff-input.examples.json', 'Default', '{ "resizable": false, "inline": true }' %}
-
 ## Optional Features
 
 {% example '@nvidia-elements/monaco/diff-input/diff-input.examples.json', 'WithOptionalAttributes', '{ "resizable": false, "inline": true }' %}

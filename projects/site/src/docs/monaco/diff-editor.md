@@ -19,7 +19,3 @@
 ## Installation
 
 {% install 'nve-monaco-diff-editor' %}
-
-## Default
-
-{% example '@nvidia-elements/monaco/diff-editor/diff-editor.examples.json', 'Default', '{ "resizable": false, "inline": true }' %}

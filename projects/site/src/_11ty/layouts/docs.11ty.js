@@ -64,7 +64,7 @@ export async function render(data) {
           <nve-resize-handle slot="left" min="3" max="300" value="300" step="20" orientation="vertical"></nve-resize-handle>
 
           <main id="docs-main">
-            <div id="doc-content" nve-layout="column gap:xl align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
+            <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
               ${
                 data.tag
                   ? `
