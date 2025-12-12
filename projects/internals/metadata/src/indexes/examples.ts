@@ -1,13 +1,12 @@
 import MiniSearch from 'minisearch';
 import type { Example } from '../types.js';
-import { isPublicExample, stopWords } from './utils.js';
+import { stopWords } from './utils.js';
 
 export function createIndex(examples: Example[]) {
   const index = new MiniSearch({
-    fields: ['id', 'name', 'summary', 'description', 'template', 'element', 'tags'],
-    storeFields: ['id', 'name', 'summary', 'description', 'template', 'element', 'tags', 'entrypoint'],
+    fields: ['id', 'name', 'summary', 'description', 'template', 'element', 'tags', 'entrypoint'],
     searchOptions: {
-      fuzzy: 0.1,
+      fuzzy: true,
       boost: {
         element: 3,
         summary: 2,
@@ -19,7 +18,7 @@ export function createIndex(examples: Example[]) {
       }
     },
     tokenize: (string, fieldName) => {
-      if (fieldName === 'id') {
+      if (fieldName === 'name' || fieldName === 'element') {
         return string.split(/(?=[A-Z])/).join(' ');
       }
       return MiniSearch.getDefault('tokenize')(string, fieldName);
@@ -35,6 +34,6 @@ export function createIndex(examples: Example[]) {
     }
   });
 
-  index.addAll(examples.filter(isPublicExample));
+  index.addAll(examples);
   return index;
 }

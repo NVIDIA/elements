@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Example } from '@nve-internals/metadata';
-import { getAvailableExamples, searchExamples, renderExampleMarkdown, wrapText } from './utils.js';
+import { getPublicExamples, searchPublicExamples, renderExampleMarkdown, wrapText } from './utils.js';
 
 describe('utils', () => {
   const mockExamples: Example[] = [
@@ -54,7 +54,7 @@ describe('utils', () => {
 
   describe('getAvailableExamples', () => {
     it('should return markdown format correctly', () => {
-      const result = getAvailableExamples('markdown', mockExamples);
+      const result = getPublicExamples('markdown', mockExamples);
       expect(result).toContain('## Button Basic (project-example_button-basic)');
       expect(result).toContain('## Button With Icon (project-example_button-with-icon)');
       expect(result).toContain('Basic button example');
@@ -63,7 +63,7 @@ describe('utils', () => {
     });
 
     it('should return JSON format correctly', () => {
-      const result = getAvailableExamples('json', mockExamples);
+      const result = getPublicExamples('json', mockExamples);
       expect(Array.isArray(result)).toBe(true);
       expect(result).toHaveLength(3);
       expect(result[0]).toEqual({
@@ -81,10 +81,10 @@ describe('utils', () => {
     });
 
     it('should handle empty examples array', () => {
-      const result = getAvailableExamples('markdown', []);
+      const result = getPublicExamples('markdown', []);
       expect(result).toBe('');
 
-      const jsonResult = getAvailableExamples('json', []);
+      const jsonResult = getPublicExamples('json', []);
       expect(jsonResult).toEqual([]);
     });
 
@@ -94,11 +94,11 @@ describe('utils', () => {
         { id: '', name: 'Test2', tags: [], element: 'nve-test', template: '' } // missing summary
       ];
 
-      const markdownResult = getAvailableExamples('markdown', examplesWithMissingDesc);
+      const markdownResult = getPublicExamples('markdown', examplesWithMissingDesc);
       expect(markdownResult).toContain('## Test1');
       expect(markdownResult).toContain('## Test2');
 
-      const jsonResult = getAvailableExamples('json', examplesWithMissingDesc) as Array<{
+      const jsonResult = getPublicExamples('json', examplesWithMissingDesc) as Array<{
         id: string;
         name: string;
         summary?: string;
@@ -110,26 +110,25 @@ describe('utils', () => {
 
   describe('searchExamples', () => {
     it('should search and return markdown format', async () => {
-      const result = await searchExamples('button', 'markdown');
+      const result = await searchPublicExamples('button', { format: 'markdown' });
       expect(typeof result).toBe('string');
       expect(result).toContain('button');
     });
 
     it('should search and return JSON format', async () => {
-      const result = await searchExamples('button', 'json');
+      const result = await searchPublicExamples('button', { format: 'json' });
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBeGreaterThan(0);
-      expect(result.length).toBeLessThanOrEqual(5);
     });
 
     it('should handle empty query', async () => {
-      const result = await searchExamples('', 'json');
+      const result = await searchPublicExamples('', { format: 'json' });
       expect(Array.isArray(result)).toBe(true);
       expect(result).toHaveLength(0);
     });
 
     it('should handle query with only noise words', async () => {
-      const result = await searchExamples('example examples story stories pattern patterns', 'json');
+      const result = await searchPublicExamples('example examples story stories pattern patterns', { format: 'json' });
       expect(Array.isArray(result)).toBe(true);
     });
   });

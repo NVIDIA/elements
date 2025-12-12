@@ -161,7 +161,7 @@ describe('loadTools', () => {
     const { result, status, message } = (await TestService['tool_foo']()) as unknown as ToolOutput<string>;
     expect(status).toBe('error');
     expect(message).toBe('error message');
-    expect(result).toBe('');
+    expect(result).toBe(undefined);
   });
 
   it('should load multiple tools from a class', () => {

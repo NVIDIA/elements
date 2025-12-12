@@ -4,7 +4,13 @@ import {
   type Attribute,
   type Element
 } from '@nve-internals/metadata';
-import { type ElementVersions, type PartialAPIResult, getLatestPublishedVersions, getAvailableAPIs } from './utils.js';
+import {
+  type ElementVersions,
+  type PartialAPIResult,
+  getLatestPublishedVersions,
+  getPublicAPIs,
+  searchPublicAPIs
+} from './utils.js';
 import { service, tool } from '../internal/tools.js';
 
 @service()
@@ -66,7 +72,7 @@ export class ApiService {
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ elements: PartialAPIResult[]; attributes: PartialAPIResult[] } | string> {
     const apis = await MetadataApiService.getData();
-    return getAvailableAPIs(format, apis);
+    return getPublicAPIs(format, apis);
   }
 
   @tool({
@@ -100,7 +106,7 @@ export class ApiService {
     query: string;
     format: 'markdown' | 'json';
   }): Promise<(Element | Attribute)[] | string> {
-    const results = (await MetadataApiService.search(query)).slice(0, 5);
+    const results = await searchPublicAPIs(query, { limit: 8 });
     return format === 'markdown' ? results.map(r => r.markdown).join('\n\n---\n\n') : results;
   }
 
