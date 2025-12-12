@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "dev": "wireit",
-    "dev:mcp": "pnpm dlx @modelcontextprotocol/inspector@0.17.2 nve-mcp",
+    "dev:mcp": "pnpm dlx @modelcontextprotocol/inspector@0.17.5 nve-mcp",
     "ci": "wireit",
     "build": "wireit",
     "lint": "wireit",

@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Attribute, Element, ProjectTypes, Token } from '@internals/metadata';
-import { getAvailableAPIs, getPublishedPackageNames } from './utils.js';
+import { getPublicAPIs, getPublishedPackageNames } from './utils.js';
 
 describe('getPublishedPackageNames', () => {
   const projects = [
@@ -59,7 +59,7 @@ describe('getAvailableAPIs', () => {
   };
 
   it('should return list of available elements APIs in JSON', () => {
-    const apis = getAvailableAPIs('json', metadata);
+    const apis = getPublicAPIs('json', metadata);
     expect(apis).toEqual({
       elements: [
         { name: 'nve-button', behavior: 'button', description: 'button description' },
@@ -70,7 +70,7 @@ describe('getAvailableAPIs', () => {
   });
 
   it('should return list of available elements APIs in markdown', () => {
-    const apis = getAvailableAPIs('markdown', metadata);
+    const apis = getPublicAPIs('markdown', metadata);
     expect(apis).toContain('## nve-button (button)\n\nbutton description');
     expect(apis).toContain('## nve-badge\n\nbadge description');
   });
@@ -82,8 +82,8 @@ describe('Edge cases', () => {
       created: string;
       data: { elements: Element[]; attributes: Attribute[]; tokens: Token[]; types: ProjectTypes[] };
     };
-    expect(getAvailableAPIs('json', emptyMetadata)).toEqual({ elements: [], attributes: [] });
-    expect(getAvailableAPIs('markdown', emptyMetadata)).toBe('');
+    expect(getPublicAPIs('json', emptyMetadata)).toEqual({ elements: [], attributes: [] });
+    expect(getPublicAPIs('markdown', emptyMetadata)).toBe('');
   });
 
   it('should handle projects with no elements for getAvailableAPIs', () => {
@@ -100,12 +100,48 @@ describe('Edge cases', () => {
       data: { elements: Element[]; attributes: Attribute[]; tokens: Token[]; types: ProjectTypes[] };
     };
 
-    expect(getAvailableAPIs('json', metadataNoElements)).toEqual({ elements: [], attributes: [] });
-    expect(getAvailableAPIs('markdown', metadataNoElements)).toBe('');
+    expect(getPublicAPIs('json', metadataNoElements)).toEqual({ elements: [], attributes: [] });
+    expect(getPublicAPIs('markdown', metadataNoElements)).toBe('');
   });
 
   it('should handle empty metadata for getPublishedPackageNames', () => {
     const emptyProjects = [];
     expect(getPublishedPackageNames(emptyProjects)).toEqual([]);
+  });
+});
+
+describe('getLatestPublishedVersions', () => {
+  const projects = [{ name: '@nvidia-elements/core', version: '1.0.0', description: '', readme: '', changelog: '' }];
+
+  beforeEach(() => {
+    vi.resetModules();
+    vi.stubGlobal('fetch', vi.fn());
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
+  });
+
+  it('should throw error when fetch fails and ELEMENTS_ENV is mcp', async () => {
+    vi.stubEnv('ELEMENTS_ENV', 'mcp');
+    vi.mocked(fetch).mockRejectedValue(new Error('Network error'));
+    const { getLatestPublishedVersions } = await import('./utils.js');
+
+    await expect(getLatestPublishedVersions(projects)).rejects.toThrow(
+      'Could not fetch latest versions from https://https://esm.sh'
+    );
+  });
+
+  it('should return fallback version and warn when fetch fails and ELEMENTS_ENV is not mcp', async () => {
+    vi.stubEnv('ELEMENTS_ENV', 'dev');
+    vi.mocked(fetch).mockRejectedValue(new Error('Network error'));
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const { getLatestPublishedVersions } = await import('./utils.js');
+
+    const result = await getLatestPublishedVersions(projects);
+
+    expect(warnSpy).toHaveBeenCalledWith('Could not fetch latest versions from https://https://esm.sh');
+    expect(result).toEqual({ '@nvidia-elements/core': '0.0.0' });
   });
 });
