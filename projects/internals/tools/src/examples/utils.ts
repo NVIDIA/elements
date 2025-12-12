@@ -1,9 +1,10 @@
 import { ExamplesService, type Example } from '@internals/metadata';
 
-export function isValidExample(example: Example) {
+export function isPublicExample(example: Example) {
   return (
     !example.deprecated &&
     !example.id.toLowerCase().includes('theme') &&
+    !example.id.toLowerCase().includes('internal') &&
     !example.tags.includes('anti-pattern') &&
     !example.tags.includes('performance') &&
     !example.tags.includes('test-case') &&
@@ -12,16 +13,20 @@ export function isValidExample(example: Example) {
   );
 }
 
-export function getAvailableExamples(format: 'markdown' | 'json', examples: Partial<Example>[]) {
+export function getPublicExamples(format: 'markdown' | 'json', examples: Partial<Example>[]) {
   const result = examples
-    .filter(isValidExample)
+    .filter(isPublicExample)
     .map(s => ({ id: s.id, name: s.name, summary: s.summary ? s.summary : s.description, element: s.element ?? '' }));
   return format === 'markdown' ? result.map(e => renderExampleHeaderMarkdown(e)).join('\n\n---\n\n') : result;
 }
 
-export async function searchExamples(query: string, format: 'markdown' | 'json') {
-  const result = (await ExamplesService.search(query)).slice(0, 5);
-  return format === 'markdown' ? result.map(e => renderExampleMarkdown(e)).join('\n\n---\n\n') : result;
+export async function searchPublicExamples(
+  query: string,
+  config: { format: 'markdown' | 'json'; limit?: number } = { format: 'markdown', limit: 100 }
+) {
+  const data = (await ExamplesService.search(query)).filter(isPublicExample);
+  const result = data.slice(0, config.limit);
+  return config.format === 'markdown' ? result.map(e => renderExampleMarkdown(e)).join('\n\n---\n\n') : result;
 }
 
 export function renderExampleMarkdown(example: Partial<Example>) {

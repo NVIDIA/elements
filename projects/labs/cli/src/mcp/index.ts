@@ -18,7 +18,7 @@ tools.forEach(tool => {
   const outputSchema = {
     status: z.enum(['complete', 'error']).optional(),
     message: z.string().optional(),
-    result: resultSchema
+    result: resultSchema.optional()
   };
   const config = { title, inputSchema, outputSchema, description: `Elements: ${description}` };
   server.registerTool(toolName, config, async params => {

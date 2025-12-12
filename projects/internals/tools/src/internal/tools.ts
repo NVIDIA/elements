@@ -115,7 +115,7 @@ export function loadTools(obj: any): ManagedToolMethod<unknown>[] {
         try {
           return { status: 'complete', message: '', result: await obj[name](...args) };
         } catch (e) {
-          return { status: 'error', message: e.message, result: '' };
+          return { status: 'error', message: e.message };
         }
       };
       obj[toolName].metadata = obj[name].metadata;
