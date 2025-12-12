@@ -1,4 +1,11 @@
-import { type Attribute, type Project, type Element, type Token, type ProjectTypes } from '@internals/metadata';
+import {
+  ApiService,
+  type Attribute,
+  type Project,
+  type Element,
+  type Token,
+  type ProjectTypes
+} from '@internals/metadata';
 
 export interface PartialAPIResult {
   name: string;
@@ -6,7 +13,7 @@ export interface PartialAPIResult {
   behavior: string;
 }
 
-export function getAvailableAPIs(
+export function getPublicAPIs(
   format: 'markdown' | 'json',
   metadata: {
     created: string;
@@ -38,6 +45,11 @@ export function getAvailableAPIs(
   }
 }
 
+export async function searchPublicAPIs(query: string, config: { limit?: number } = { limit: 100 }) {
+  const data = await ApiService.search(query);
+  return config.limit !== undefined ? data.slice(0, config.limit) : data;
+}
+
 export interface ElementVersions {
   '@nvidia-elements/core': string;
   '@nvidia-elements/core-react': string;
@@ -60,24 +72,27 @@ let versions: ElementVersions | null = null;
 export async function getLatestPublishedVersions(projects: Project[]): Promise<ElementVersions> {
   if (!versions) {
     const names = getPublishedPackageNames(projects);
-    const packageFile = await Promise.all(
-      names
-        .map(name => `https://esm.nvidia.com/${name}@latest/package.json`)
-        .map(url => {
-          const controller = new AbortController();
-          const timeout = setTimeout(() => controller.abort(), 3000);
-          return fetch(url, { signal: controller.signal })
-            .then(res => {
-              clearTimeout(timeout);
-              return res.json();
-            })
-            .catch(() => {
-              console.warn('Could not fetch latest version from https://esm.nvidia.com');
-              return {};
-            });
-        })
+    const packageFiles = await Promise.all(
+      names.map(name => {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 3000);
+        return fetch(`https://esm.nvidia.com/${name}@latest/package.json`, { signal: controller.signal })
+          .then(res => {
+            clearTimeout(timeout);
+            return res.json();
+          })
+          .catch(() => {
+            const message = 'Could not fetch latest versions from https://esm.nvidia.com';
+            if (process.env.ELEMENTS_ENV === 'mcp') {
+              throw new Error(message);
+            } else {
+              console.warn(message);
+              return { name, version: '0.0.0' };
+            }
+          });
+      })
     );
-    versions = packageFile.reduce((acc: Record<string, string>, pkg) => ({ ...acc, [pkg.name]: pkg.version }), {});
+    versions = packageFiles.reduce((acc: Record<string, string>, pkg) => ({ ...acc, [pkg.name]: pkg.version }), {});
   }
   return versions;
 }

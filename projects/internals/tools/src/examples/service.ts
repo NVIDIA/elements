@@ -1,6 +1,6 @@
 import { ExamplesService as ExamplesServiceMetadata, type Example } from '@internals/metadata';
 import { service, tool } from '../internal/tools.js';
-import { getAvailableExamples, searchExamples } from './utils.js';
+import { getPublicExamples, searchPublicExamples } from './utils.js';
 
 @service()
 export class ExamplesService {
@@ -42,7 +42,7 @@ export class ExamplesService {
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ id: string; summary: string }[] | string> {
     const examples = await ExamplesServiceMetadata.getData();
-    return getAvailableExamples(format, examples);
+    return getPublicExamples(format, examples);
   }
 
   @tool({
@@ -92,7 +92,7 @@ export class ExamplesService {
     query: string;
     format?: 'markdown' | 'json';
   }): Promise<Example[] | string> {
-    return await searchExamples(query, format);
+    return await searchPublicExamples(query, { format, limit: 5 });
   }
 
   static async getAll(): Promise<Example[]> {
