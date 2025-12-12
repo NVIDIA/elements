@@ -62,7 +62,7 @@ export const Validation = {
 }
 
 /**
- * @summary Grouped error display showing all validation issues together after submission attempt.
+ * @summary Login form with grouped error display showing all validation issues together after submission attempt.
  */
 export const ValidationErrorGroup = {
   render: () => html`
@@ -90,7 +90,7 @@ export const ValidationErrorGroup = {
 }
 
 /**
- * @summary Success feedback with positive confirmation messages for valid input and successful form submission.
+ * @summary Login form example of success feedback with positive confirmation messages for valid input and successful form submission.
  */
 export const ValidationSuccessGroup = {
   render: () => {
