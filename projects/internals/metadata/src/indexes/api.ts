@@ -4,31 +4,27 @@ import { stopWords } from './utils.js';
 
 export interface ApiSearchDocument {
   id: string;
-  type: 'element' | 'attribute';
   name: string;
-  tagName?: string;
+  type: string;
   description: string;
   behavior?: string;
 }
 
-export type ApiSearchResult = (Element | Attribute)[];
-
 export function createApiIndex(data: { elements: Element[]; attributes: Attribute[] }): MiniSearch<ApiSearchDocument> {
   const index = new MiniSearch<ApiSearchDocument>({
-    fields: ['name', 'tagName', 'description', 'behavior'],
-    storeFields: ['id', 'type', 'name', 'tagName', 'description', 'behavior'],
+    fields: ['name', 'type', 'description', 'behavior'],
     searchOptions: {
       fuzzy: 0.2,
       prefix: true,
       boost: {
+        id: 3,
         name: 3,
-        tagName: 3,
         behavior: 2,
         description: 1
       }
     },
     tokenize: (string, fieldName) => {
-      if (fieldName === 'name' || fieldName === 'tagName') {
+      if (fieldName === 'name') {
         // Split kebab-case and camelCase for better matching
         return string
           .split(/[-_]/)
@@ -52,10 +48,9 @@ export function createApiIndex(data: { elements: Element[]; attributes: Attribut
   for (const element of data.elements) {
     if (element.manifest && !element.manifest.deprecated) {
       documents.push({
-        id: `element:${element.name}`,
-        type: 'element',
+        id: element.name,
         name: element.name,
-        tagName: element.manifest.tagName,
+        type: 'element',
         description: element.manifest.description ?? '',
         behavior: element.manifest.metadata?.behavior ?? ''
       });
@@ -65,9 +60,9 @@ export function createApiIndex(data: { elements: Element[]; attributes: Attribut
   // Index attributes
   for (const attribute of data.attributes) {
     documents.push({
-      id: `attribute:${attribute.name}`,
-      type: 'attribute',
+      id: attribute.name,
       name: attribute.name,
+      type: 'attribute',
       description: attribute.description ?? ''
     });
   }
