@@ -1,6 +1,6 @@
 import type MiniSearch from 'minisearch';
 import type { Attribute, Element, ProjectTypes, Token } from '../types.js';
-import { createApiIndex, type ApiSearchDocument, type ApiSearchResult } from '../indexes/api.js';
+import { createApiIndex, type ApiSearchDocument } from '../indexes/api.js';
 
 type ApiData = {
   created: string;
@@ -32,21 +32,18 @@ export class ApiService {
     return ApiService.#api;
   }
 
-  static async search(query: string): Promise<ApiSearchResult> {
-    const { data } = await this.getData();
-    const results = ApiService.#index!.search(query);
-    const output: ApiSearchResult = [];
+  static async search(query: string): Promise<(Element | Attribute)[]> {
+    const data = await this.getData();
+    const results = ApiService.#index!.search(query).map(result =>
+      [...data.data.elements, ...data.data.attributes].find(d => d.name === result.id)
+    );
 
-    for (const result of results) {
-      if (result.type === 'element') {
-        output.push(data.elements.find(e => e.name === result.name)!);
-      }
-
-      if (result.type === 'attribute') {
-        output.push(data.attributes.find(a => a.name === result.name)!);
-      }
+    const exactMatchIndex = results.findIndex(item => item?.name === query);
+    if (exactMatchIndex > 0) {
+      const [exactMatch] = results.splice(exactMatchIndex, 1);
+      results.unshift(exactMatch);
     }
 
-    return output;
+    return results;
   }
 }
