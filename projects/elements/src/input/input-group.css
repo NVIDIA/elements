@@ -3,6 +3,7 @@
   --color: var(--nve-sys-interaction-field-color);
   --border-radius: var(--nve-ref-border-radius-sm);
   --gap: calc(var(--nve-ref-space-xxxs) / 2);
+  --border: none;
   width: fit-content;
   contain: none;
 }
@@ -11,6 +12,7 @@
   border-radius: var(--border-radius);
   overflow: hidden;
   width: max-content;
+  border: var(--border);
 }
 
 .input-slot {
