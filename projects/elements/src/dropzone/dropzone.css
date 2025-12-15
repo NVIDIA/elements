@@ -3,6 +3,7 @@
   --min-height: 50px;
   --border-radius: var(--nve-ref-border-radius-xs);
   --border-color: var(--nve-ref-border-color);
+  --padding: var(--nve-ref-space-lg);
 }
 
 [internal-host] {
@@ -17,7 +18,7 @@
   justify-content: center;
   gap: var(--nve-ref-space-xs);
   min-height: var(--min-height);
-  padding: var(--nve-ref-space-lg);
+  padding: var(--padding);
   color: var(--nve-sys-text-color);
   position: relative;
   cursor: pointer;
