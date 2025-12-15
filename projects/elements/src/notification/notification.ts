@@ -35,6 +35,7 @@ import styles from './notification.css?inline';
  * @cssprop --width
  * @cssprop --max-width
  * @cssprop --border
+ * @cssprop --status-border
  * @cssprop --gap
  * @cssprop --status-color
  * @storybook https://NVIDIA.github.io/elements/docs/elements/notification/
