@@ -36,7 +36,7 @@ describe('noUnexpectedAttributeValue', () => {
     expect(noUnexpectedAttributeValue.meta.schema).toBeDefined();
     expect(noUnexpectedAttributeValue.meta.messages).toBeDefined();
     expect(noUnexpectedAttributeValue.meta.messages['no-unexpected-attribute-value']).toBe(
-      'Unexpected value "{{value}}" for attribute "{{attribute}}" on <{{tagName}}>'
+      'Unexpected value "{{value}}" for attribute "{{attribute}}" on <{{tagName}}>. Available values: {{validValues}}'
     );
     expect(noUnexpectedAttributeValue.meta.messages['unexpected-attribute-value-alternative']).toBe(
       'Unexpected value "{{value}}" for attribute "{{attribute}}" on <{{tagName}}>. Did you mean "{{alternative}}"?'
@@ -109,7 +109,13 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'no-unexpected-attribute-value',
-              data: { tagName: 'nve-badge', attribute: 'status', value: 'invalid' }
+              data: {
+                tagName: 'nve-badge',
+                attribute: 'status',
+                value: 'invalid',
+                validValues:
+                  '"accent", "warning", "success", "danger", "scheduled", "queued", "pending", "starting", "running", "restarting", "stopping", "finished", "failed", "unknown", "ignored"'
+              }
             }
           ]
         }
