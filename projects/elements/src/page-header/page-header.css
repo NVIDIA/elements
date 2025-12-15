@@ -2,6 +2,7 @@
   --background: var(--nve-sys-layer-shell-background);
   --padding: var(--nve-ref-space-xs) var(--nve-ref-space-lg);
   --border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
+  --margin-inline: var(--nve-ref-space-lg);
   contain: initial;
   height: 48px;
   width: 100%;
@@ -31,7 +32,7 @@ slot {
 
 slot:not([name]) {
   width: 100%;
-  margin-inline: var(--nve-ref-space-lg);
+  margin-inline: var(--margin-inline);
 }
 
 ::slotted(h1[slot='prefix']),
