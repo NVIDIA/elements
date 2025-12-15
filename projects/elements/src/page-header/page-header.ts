@@ -7,12 +7,15 @@ import styles from './page-header.css?inline';
  * @description An element that appears across the top of all pages containing the application name and primary navigation.
  * @entrypoint \@nvidia-elements/core/page-header
  * @since 1.15.0
- * @slot
- * @slot prefix
- * @slot suffix
- * @cssprop --background
- * @cssprop --padding
- * @cssprop --border-bottom
+ * @slot - The default content slot
+ * @slot prefix - Content displayed at the start of the header
+ * @slot suffix - Content displayed at the end of the header
+ * @cssprop --background - Background color of the header
+ * @cssprop --padding - Padding inside the header
+ * @cssprop --border-bottom - Border below the header
+ * @cssprop --gap - Gap between the prefix, default, and suffix slots
+ * @cssprop --margin-inline - left and right margin applied to the default content slot
+
  * @storybook https://NVIDIA.github.io/elements/docs/elements/page-header/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-35&t=c9DaB6YRpkhGAp49-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav
