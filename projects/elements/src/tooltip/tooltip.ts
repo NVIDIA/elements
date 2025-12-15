@@ -29,6 +29,7 @@ import styles from './tooltip.css?inline';
  * @cssprop --padding
  * @cssprop --box-shadow
  * @cssprop --font-size
+ * @cssprop --font-weight
  * @cssprop --arrow-transform
  * @cssprop --width
  * @cssprop --height

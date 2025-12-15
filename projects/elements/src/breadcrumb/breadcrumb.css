@@ -3,10 +3,12 @@
   --height: var(--nve-ref-size-500);
   --font-size: var(--nve-ref-font-size-50);
   --color: var(--nve-sys-text-muted-color);
+  --font-weight: var(--nve-ref-font-weight-medium);
 }
 
 [internal-host] {
   --_font-size: var(--item-text-size, var(--font-size));
+  --_font-weight: var(--font-weight);
   --_color: var(--item-color, var(--color));
   --_height: var(--breadcrumb-height, var(--height));
 }
@@ -37,7 +39,7 @@ li {
   --color: var(--_color);
   --padding: 0 var(--nve-ref-size-100);
   --height: var(--_height);
-  --font-weight: var(--nve-ref-font-weight-medium);
+  --font-weight: var(--_font-weight);
   --text-decoration: none !important;
   --_border-bottom-offset: -0.5;
   --_border-bottom-width: 85%;
@@ -51,6 +53,7 @@ li {
   --height: var(--_height);
   --width: var(--_height);
   --font-size: var(--_font-size);
+  --font-weight: var(--_font-weight);
   --color: var(--_color);
 }
 
