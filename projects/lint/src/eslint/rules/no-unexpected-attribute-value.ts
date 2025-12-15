@@ -16,7 +16,8 @@ const rule = {
     },
     schema: [],
     messages: {
-      ['no-unexpected-attribute-value']: 'Unexpected value "{{value}}" for attribute "{{attribute}}" on <{{tagName}}>',
+      ['no-unexpected-attribute-value']:
+        'Unexpected value "{{value}}" for attribute "{{attribute}}" on <{{tagName}}>. Available values: {{validValues}}',
       ['unexpected-attribute-value-alternative']:
         'Unexpected value "{{value}}" for attribute "{{attribute}}" on <{{tagName}}>. Did you mean "{{alternative}}"?',
       ['suggest-replace-attribute-value']: 'Replace "{{value}}" with "{{alternative}}"'
@@ -70,7 +71,8 @@ const rule = {
                   tagName,
                   attribute: attributeName,
                   value,
-                  alternative
+                  alternative,
+                  validValues: validValues.map(value => `"${value}"`).join(', ')
                 },
                 messageId: alternative ? 'unexpected-attribute-value-alternative' : 'no-unexpected-attribute-value',
                 suggest
