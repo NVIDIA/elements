@@ -33,6 +33,8 @@ import globalStyles from './toggletip.global.css?inline';
  * @cssprop --background
  * @cssprop --color
  * @cssprop --padding
+ * @cssprop --font-size
+ * @cssprop --font-weight
  * @cssprop --box-shadow
  * @cssprop --width
  * @cssprop --min-width
