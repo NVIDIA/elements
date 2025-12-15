@@ -9,6 +9,8 @@
   --border-radius: var(--nve-ref-border-radius-md);
   --background: var(--nve-sys-layer-overlay-background);
   --color: var(--nve-sys-layer-overlay-color);
+  --font-size: var(--nve-ref-font-size-100);
+  --font-weight: var(--nve-ref-font-weight-regular);
   --padding: var(--nve-ref-size-400);
   --box-shadow: var(--nve-ref-shadow-400);
   --width: fit-content;
@@ -21,12 +23,15 @@
 [internal-host] {
   padding: var(--padding);
   border-radius: var(--border-radius);
+  border: var(--border);
   background: var(--background);
   color: var(--color);
   gap: var(--nve-ref-space-sm);
   width: var(--width);
   min-width: var(--min-width);
   outline: 0;
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
 }
 
 [internal-host]::backdrop {

@@ -15,6 +15,7 @@
   --width: fit-content;
   --max-width: fit-content;
   --border: 0;
+  --status-border: 6px solid var(--status-color);
   width: var(--width);
 }
 
@@ -26,7 +27,7 @@
   color: var(--color);
   gap: var(--gap);
   border: var(--border);
-  border-left: 6px solid var(--status-color);
+  border-left: var(--status-border);
   min-width: var(--min-width);
   max-width: var(--max-width);
   display: flex;

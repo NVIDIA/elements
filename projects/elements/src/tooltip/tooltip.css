@@ -10,6 +10,7 @@
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
   --box-shadow: var(--nve-ref-shadow-500);
   --font-size: var(--nve-ref-font-size-100);
+  --font-weight: var(--nve-ref-font-weight-regular);
   --arrow-transform: translate(0, -2px) rotate(-45deg);
   --width: max-content;
   --height: initial;
@@ -27,6 +28,7 @@
   background: var(--background);
   color: var(--color);
   font-size: var(--font-size);
+  font-weight: var(--font-weight);
   width: var(--width);
   height: var(--height);
   border: var(--border);

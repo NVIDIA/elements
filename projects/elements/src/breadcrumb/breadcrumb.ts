@@ -21,6 +21,7 @@ import type { Button } from '@nvidia-elements/core/button';
  * @cssprop --gap
  * @cssprop --height
  * @cssprop --font-size
+ * @cssprop --font-weight
  * @cssprop --color
  * @cssprop --breadcrumb-height - deprecated
  * @cssprop --item-text-size - deprecated
