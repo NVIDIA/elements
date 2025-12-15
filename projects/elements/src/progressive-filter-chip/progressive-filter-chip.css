@@ -9,6 +9,7 @@
   width: fit-content;
   min-width: fit-content;
   contain: initial;
+  --border: none;
 }
 
 [internal-host] {
@@ -17,6 +18,7 @@
   background: var(--background);
   display: flex;
   overflow: hidden;
+  border: var(--border);
 }
 
 [nve-control],

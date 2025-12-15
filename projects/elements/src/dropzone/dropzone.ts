@@ -16,6 +16,7 @@ import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './d
  * @cssprop --background
  * @cssprop --border-color
  * @cssprop --border-radius
+ * @cssprop --padding
  * @cssprop --min-height
  * @slot icon - default slot for icon
  * @slot content - default slot for content
