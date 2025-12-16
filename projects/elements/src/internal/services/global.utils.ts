@@ -1,3 +1,5 @@
+import { getEsmHostedWarning } from '../utils/audit-logs.js';
+
 /* istanbul ignore next -- @preserve */
 export function getEnv(): 'development' | 'production' {
   if (
@@ -16,7 +18,7 @@ export function getHostDetails(): { moduleHost: string; pageHost: string } {
   const isEsmHosted = moduleHost.startsWith('esm.');
 
   if (isEsmHosted && pageHost !== 'localhost' && pageHost !== 'esm.nvidia.com') {
-    console.warn('@nve: Using esm.sh is not supported for production use.');
+    console.warn(getEsmHostedWarning());
   }
 
   return {
