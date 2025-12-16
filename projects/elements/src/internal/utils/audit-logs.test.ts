@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   DOCS_LOG_URL,
   getCrossShadowRootAnchorWarning,
+  getDuplicatePackageGlobalVersionWarning,
   getExcessiveInstanceLimitWarning,
   getIdMatchNotFoundWarning,
   getInvalidParentWarning,
@@ -53,6 +54,14 @@ describe('getCrossShadowRootAnchorWarning', () => {
   it('should return warning message for cross shadow root anchoring', () => {
     expect(getCrossShadowRootAnchorWarning('nve-tooltip')).toBe(
       `(deprecated) nve-tooltip provided an anchor outside of its render root. ${DOCS_LOG_URL}#cross-shadow-root-anchor`
+    );
+  });
+});
+
+describe('getDuplicatePackageGlobalVersionWarning', () => {
+  it('should return warning message for duplicate package version', () => {
+    expect(getDuplicatePackageGlobalVersionWarning()).toBe(
+      `@nve: Multiple versions of Elements loaded, please check for duplicate package versions. ${DOCS_LOG_URL}#duplicate-package-version`
     );
   });
 });
