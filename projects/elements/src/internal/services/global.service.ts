@@ -1,3 +1,4 @@
+import { getDuplicatePackageGlobalVersionWarning } from '../utils/audit-logs.js';
 import { deepMerge } from '../utils/objects.js';
 import { getEnv, getHostDetails } from './global.utils.js';
 
@@ -23,6 +24,13 @@ export class GlobalState {
     /** @deprecated MLV_ELEMENTS */
     globalThis.MLV_ELEMENTS = globalThis.NVE_ELEMENTS;
     globalThis.NVE_ELEMENTS.state.versions = Array.from(new Set([...globalThis.NVE_ELEMENTS.state.versions, '0.0.0']));
+
+    if (globalThis.NVE_ELEMENTS.state.versions.length > 1 && globalThis.NVE_ELEMENTS.state.env !== 'production') {
+      console.warn(
+        getDuplicatePackageGlobalVersionWarning(),
+        `\n\n${JSON.stringify(globalThis.NVE_ELEMENTS.state.versions, null, 2)}`
+      );
+    }
   }
 
   get state() {

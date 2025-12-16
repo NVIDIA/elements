@@ -29,3 +29,11 @@ export function getCrossShadowRootAnchorWarning(localName: string) {
 export function getDuplicatePackageVersionWarning(localName: string, version: string) {
   return `@nve: Element ${localName} version ${version} already defined, please check for duplicate package versions. ${DOCS_LOG_URL}#duplicate-package-version`;
 }
+
+export function getDuplicatePackageGlobalVersionWarning() {
+  return `@nve: Multiple versions of Elements loaded, please check for duplicate package versions. ${DOCS_LOG_URL}#duplicate-package-version`;
+}
+
+export function getEsmHostedWarning() {
+  return '@nve: Using esm.sh is not supported for production use.';
+}
