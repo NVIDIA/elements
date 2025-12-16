@@ -79,7 +79,7 @@ export class ProgressiveFilterChip extends LitElement {
     return html`
     <div internal-host>
       ${this.inputs.map(el => this.#getControlTemplate(el))}
-      ${this.closable ? html`<nve-icon-button part="icon-button" @click=${() => this.#typeClosableController.close()} .ariaLabel=${this.i18n.close} icon-name="cancel"></nve-icon-button>` : nothing}
+      ${this.closable ? html`<nve-icon-button part="icon-button" exportparts="icon:icon-button-icon" @click=${() => this.#typeClosableController.close()} .ariaLabel=${this.i18n.close} icon-name="cancel"></nve-icon-button>` : nothing}
     </div>
     <slot hidden-slot @slotchange=${this.#createItems}></slot>
     `;
