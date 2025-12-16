@@ -3,7 +3,7 @@ nve-page-panel:has(nve-page-panel-header) {
     border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color);
   }
 
-  &::part(_close-btn) {
+  &::part(icon-button) {
     position: relative;
   }
 }

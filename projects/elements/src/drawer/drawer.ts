@@ -122,7 +122,7 @@ export class Drawer extends LitElement {
     return html`
     <div internal-host>
       <div class="header">
-        <nve-icon-button part="icon-button" .hidden=${!this.closable} @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close} container="flat"></nve-icon-button>
+        <nve-icon-button part="icon-button" exportparts="icon:icon-button-icon" .hidden=${!this.closable} @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close} container="flat"></nve-icon-button>
         <slot name="header"></slot>
       </div>
       <div class="content">

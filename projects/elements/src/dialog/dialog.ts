@@ -126,7 +126,7 @@ export class Dialog extends LitElement {
     return html`
     <div internal-host>
       <div class="header">
-        ${this.closable ? html`<nve-icon-button part="close-button" size="sm" @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button part="close-button icon-button" exportparts="icon:icon-button-icon" size="sm" @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
         <slot name="header"></slot>
       </div>
       <div class="content">
