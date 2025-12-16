@@ -5,6 +5,8 @@ import markdownItLink from 'markdown-it-link-attributes';
 import { ESM_ELEMENTS_VERSION } from '../utils/version.js';
 import { siteData } from '../../index.11tydata.js';
 
+import { svgLogoShortcode } from '../shortcodes/svg-logo.js';
+
 const { elements, tests } = siteData;
 
 // Base URL for package releases
@@ -104,7 +106,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <img src="https://cdn-prod.nvidia.com/assets/elements/splash/slack-icon-svg.svg" alt="Slack Logo">
+            ${svgLogoShortcode('slack', '20')}
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
@@ -118,7 +120,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <img src="https://cdn-prod.nvidia.com/assets/elements/splash/gitlab-icon.svg" alt="GitLab Logo">
+            ${svgLogoShortcode('gitlab', '20')}
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
@@ -132,7 +134,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <nve-icon name="person-2" size="lg" status="accent"></nve-icon>
+            ${svgLogoShortcode('w3c', '20')}
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">
@@ -146,7 +148,7 @@ export function elementSupportButtons(tag) {
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
-            <nve-icon name="group-boxes" size="lg" status="success"></nve-icon>
+            ${svgLogoShortcode('figma', '20')}
           </span>
 
           <span nve-layout="pad:sm" nve-text="label md semibold emphasis">

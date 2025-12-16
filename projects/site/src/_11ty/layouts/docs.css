@@ -40,21 +40,15 @@
 
 .support-button-link .support-button-icon {
   width: var(--nve-ref-size-1000);
-  height: var(--nve-ref-size-1000);
+  padding: var(--nve-ref-size-300) 0;
   background: var(--nve-sys-layer-container-accent-background);
-}
-
-.support-button-link img {
-  width: var(--nve-ref-size-500);
-  height: var(--nve-ref-size-500);
 }
 
 .support-button-link,
 .support-button-link nve-card,
 .support-button-link .support-button-icon,
 .support-button-link nve-icon,
-.support-button-link span[nve-text],
-.support-button-link img {
+.support-button-link span[nve-text] {
   cursor: pointer;
 }
 
