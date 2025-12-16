@@ -118,7 +118,7 @@ export class Toggletip extends LitElement {
     return html`
     <div internal-host>
       <slot name="header"></slot>
-      ${this.closable ? html`<nve-icon-button part="icon-button" @click=${this.hidePopover} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
+      ${this.closable ? html`<nve-icon-button part="icon-button" exportparts="icon:icon-button-icon" @click=${this.hidePopover} icon-name="cancel" container="flat" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
       <div id="content" part="_content">
         <slot></slot>
       </div>
