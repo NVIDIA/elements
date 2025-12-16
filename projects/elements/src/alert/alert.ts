@@ -82,7 +82,7 @@ export class Alert extends LitElement {
         <slot name="prefix" ?hidden=${!this.prefixItems.length}></slot>
         <slot></slot>
         <slot name="actions" ?hidden=${!this.actionItems.length}></slot>
-        ${this.closable ? html`<nve-icon-button part="icon-button" @click=${() => this.#typeClosableController.close()} container="flat" icon-name="cancel" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
+        ${this.closable ? html`<nve-icon-button part="icon-button" exportparts="icon:icon-button-icon" @click=${() => this.#typeClosableController.close()} container="flat" icon-name="cancel" size="sm" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
       </div>
       <slot name="content" part="_content"></slot>
     `;
