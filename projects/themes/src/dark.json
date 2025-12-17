@@ -1390,6 +1390,14 @@
         }
       }
     },
+    "interaction-state": {
+      "ratio-hover": {
+        "value": "12%"
+      },
+      "ratio-active": {
+        "value": "7%"
+      }
+    },
     "layer": {
       "canvas": {
         "background": {
