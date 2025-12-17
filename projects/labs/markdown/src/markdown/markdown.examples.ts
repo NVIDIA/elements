@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import '@nvidia-elements/markdown/markdown/define.js';
+import '@nvidia-elements/markdown/styles/index.css';
 
 export default {
   title: 'Elements/Markdown',
@@ -515,5 +516,55 @@ Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
         element.source = markdownContent;
       </script>
     </div>
+  `
+};
+
+/**
+ * @summary CSS utility attribute for applying markdown typography styles to any element without using the web component. Use the nve-markdown attribute on a container and import the styles CSS file separately.
+ * @tags test-case
+ */
+export const CssUtility = {
+  render: () => html`
+    <div nve-markdown>
+      <h1>Heading 1</h1>
+      <h2>Heading 2</h2>
+      <h3>Heading 3</h3>
+      <h4>Heading 4</h4>
+      <h5>Heading 5</h5>
+      <h6>Heading 6</h6>
+      <ul>
+        <li>Unordered list item 1</li>
+        <li>Unordered list item 2</li>
+      </ul>
+      <ol>
+        <li>Ordered list item 1</li>
+        <li>Ordered list item 2</li>
+      </ol>
+      <blockquote>this is a blockqoute</blockquote>
+      <strong>strong</strong>
+      <del>del</del>
+      <em>em</em>
+      <table>
+        <thead>
+          <tr>
+            <th>Syntax</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Header</td>
+            <td>Title</td>
+          </tr>
+          <tr>
+            <td>Paragraph</td>
+            <td>Text</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script type="module">
+      import '@nvidia-elements/markdown/styles/index.css';
+    </script>
   `
 };
