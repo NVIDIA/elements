@@ -1,3 +1,16 @@
+## [@nvidia-elements/core-v1.52.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.51.0...@nvidia-elements/core-v1.52.0) (2025-12-17)
+
+
+### Features
+
+* **elements:** add exportparts to icon-button in multiple components for improved themeing ([e3c6de1](https://github.com/NVIDIA/elements/commit/e3c6de1fd8c880340d5049e4d80acc010fc9f075))
+* **elements:** expose css prop --padding on nve-tabs-item ([9f8f4ca](https://github.com/NVIDIA/elements/commit/9f8f4caa1df568195924e65d8fc4e30be6c2cad4))
+
+
+### Bug Fixes
+
+* **elements:** fix typo in dropzone component description ([26b06ba](https://github.com/NVIDIA/elements/commit/26b06ba1dc95537da1ba667d0b8568933311df36))
+
 ## [@nvidia-elements/core-v1.51.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.50.2...@nvidia-elements/core-v1.51.0) (2025-12-09)
 
 
