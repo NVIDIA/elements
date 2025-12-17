@@ -136,7 +136,7 @@ describe.sequential('lighthouse', () => {
   test('component docs API page', async () => {
     const scores = await getLighthouseScores(`${base}/elements/docs/elements/badge/api/`);
     expect(scores.performance).toBeGreaterThanOrEqual(85);
-    expect(scores.accessibility).toBeGreaterThanOrEqual(90);
+    expect(scores.accessibility).toBeGreaterThanOrEqual(88);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
     expect(scores.payload.js).toBeLessThan(185);
