@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.52.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.52.0...@nvidia-elements/core-v1.52.1) (2025-12-18)
+
+
+### Bug Fixes
+
+* **elements:** version check log ([9b38c79](https://github.com/NVIDIA/elements/commit/9b38c79c9e6c1d3f91787af35035bc0d05121012))
+* **labs-cli:** fix search index ([544d90b](https://github.com/NVIDIA/elements/commit/544d90bf66ceb4acf44aa0cf9b7927d39ab230d5))
+
 ## [@nvidia-elements/core-v1.52.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.51.0...@nvidia-elements/core-v1.52.0) (2025-12-17)
 
 
