@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.53.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.52.1...@nvidia-elements/core-v1.53.0) (2025-12-18)
+
+
+### Features
+
+* **elements:** node export parts & props ([51ebd4e](https://github.com/NVIDIA/elements/commit/51ebd4e137cb48765df16a7976b7aac76c56db15))
+
 ## [@nvidia-elements/core-v1.52.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.52.0...@nvidia-elements/core-v1.52.1) (2025-12-18)
 
 
