@@ -13,10 +13,12 @@
   --gap: var(--nve-ref-space-sm);
   --max-width: 600px;
   --min-height: 250px;
-  width: 100%;
+  --max-height: 100vh;
+  width: 100vw;
+  height: min-content;
   max-width: var(--max-width);
+  max-height: var(--max-height);
   min-height: var(--min-height);
-  height: max-content;
 }
 
 :host([size='sm']) {
@@ -28,14 +30,18 @@
 }
 
 [internal-host] {
-  padding: var(--padding);
   border-radius: var(--border-radius);
   border: var(--border);
   background: var(--background);
   color: var(--color);
   box-shadow: var(--box-shadow);
-  min-height: var(--min-height);
-  width: 100%;
+  padding: var(--padding);
+  max-height: var(--max-height);
+  height: inherit;
+  width: inherit;
+  max-width: inherit;
+  min-height: inherit;
+  min-width: inherit;
 }
 
 :host([modal])::backdrop {
@@ -48,14 +54,18 @@
   gap: var(--gap);
 }
 
-.header:has(nve-icon-button) {
-  min-height: var(--nve-ref-size-300);
-}
-
 .content {
-  gap: var(--gap);
-  display: flex;
-  flex-direction: column;
+  overflow: auto;
+  min-height: inherit;
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
+
+  slot {
+    gap: var(--gap);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 nve-icon-button {
