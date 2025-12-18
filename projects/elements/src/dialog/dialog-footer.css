@@ -3,14 +3,14 @@
   --padding: var(--nve-ref-size-400);
   --gap: var(--nve-ref-space-sm);
   display: block;
-  width: calc(100% + calc(var(--padding) * 2));
-  margin: auto calc(var(--padding) * -1) 0 calc(var(--padding) * -1);
+  width: 100%;
+  margin-top: auto;
 }
 
 [internal-host] {
   border-top: var(--border-top);
-  padding: var(--nve-ref-size-300) var(--padding) 0 var(--padding);
+  padding: var(--padding);
+  gap: var(--gap);
   display: flex;
   justify-content: end;
-  gap: var(--gap);
 }

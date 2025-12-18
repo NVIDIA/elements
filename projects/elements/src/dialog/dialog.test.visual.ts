@@ -21,6 +21,16 @@ describe('dialog visual', () => {
     const report = await visualRunner.render('dialog.height', height());
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
+
+  test('dialog should limit content to scroll container based on dialog height', async () => {
+    const report = await visualRunner.render('dialog.scroll-height', scrollHeight());
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
+
+  test('dialog should apply container padding conditionally to the header and footer components', async () => {
+    const report = await visualRunner.render('dialog.container', container());
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
 });
 
 function template(theme: '' | 'dark' = '') {
@@ -91,8 +101,9 @@ function height() {
   return /* html */ `
   <style>
     body {
-      min-width: 1024px;
-      min-height: 780px;
+      min-width: 100vw;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
   </style>
   <script type="module">
@@ -111,4 +122,67 @@ function height() {
     </nve-dialog-footer>
   </nve-dialog>
   `;
+}
+
+function scrollHeight() {
+  return /* html */ `
+  <script type="module">
+    import '@nvidia-elements/core/dialog/define.js';
+    document.documentElement.setAttribute('nve-theme', 'dark');
+  </script>
+  <div style="width: 100vw; height: 100vh"></div>
+  <nve-dialog id="dialog" modal closable style="height: 400px">
+    <nve-dialog-header>
+      <h3 nve-text="heading semibold">•︎•︎••︎•︎•</h3>
+    </nve-dialog-header>
+    <!-- scroll style will not be visible in snapshot but should see that the content is limited to the dialog height -->
+    <p nve-text="body" style="height: 600px; outline: 1px solid #ccc">
+      •︎•︎••︎•︎•
+    </p>
+    <nve-dialog-footer>
+      <nve-button id="cancel-btn">•︎•︎••︎•︎•</nve-button>
+    </nve-dialog-footer>
+  </nve-dialog>
+  `;
+}
+
+function container() {
+  return /* html */ `
+<script type="module">
+  import '@nvidia-elements/core/dialog/define.js';
+  document.documentElement.setAttribute('nve-theme', 'dark');
+</script>
+<div style="width: 100vw; height: 100vh"></div>
+<nve-dialog size="sm" closable popover="manual" position="top">
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">•︎•︎••︎•︎•</h3>
+  </nve-dialog-header>
+  <p nve-text="body">•︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎•</p>
+  <nve-dialog-footer>
+    <nve-button>•︎•︎••︎•︎•</nve-button>
+  </nve-dialog-footer>
+</nve-dialog>
+
+<nve-dialog size="sm" closable popover="manual" position="right">
+  <h3 nve-text="heading semibold">•︎•︎••︎•︎•</h3>
+  <p nve-text="body">•︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎•</p>
+  <nve-button>•︎•︎••︎•︎•</nve-button>
+</nve-dialog>
+
+<nve-dialog size="sm" closable style="--padding: 0" position="bottom">
+  <h3 nve-text="heading semibold">•︎•︎••︎•︎•</h3>
+  <p nve-text="body">•︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎•</p>
+  <nve-button>•︎•︎••︎•︎•</nve-button>
+</nve-dialog>
+
+<nve-dialog size="sm" closable style="--padding: 48px;" position="left">
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">•︎•︎••︎•︎•</h3>
+  </nve-dialog-header>
+  <p nve-text="body">•︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎• •︎•︎••︎•︎•</p>
+  <nve-dialog-footer>
+    <nve-button>•︎•︎••︎•︎•</nve-button>
+  </nve-dialog-footer>
+</nve-dialog>
+`;
 }
