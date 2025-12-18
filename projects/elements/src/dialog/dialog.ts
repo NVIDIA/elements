@@ -9,9 +9,11 @@ import {
   TypeNativeAnchorController,
   TypeNativePopoverController,
   useStyles,
-  attachInternals
+  attachInternals,
+  appendRootNodeStyle
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
+import globalStyles from './dialog.global.css?inline';
 import styles from './dialog.css?inline';
 
 /**
@@ -124,12 +126,12 @@ export class Dialog extends LitElement {
 
   render() {
     return html`
-    <div internal-host>
+    <div internal-host part="_host">
       <div class="header">
         ${this.closable ? html`<nve-icon-button part="close-button icon-button" exportparts="icon:icon-button-icon" size="sm" @click=${this.hidePopover} icon-name="cancel" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
         <slot name="header"></slot>
       </div>
-      <div class="content">
+      <div class="content" part="_content">
         <slot></slot>
       </div>
       <slot name="footer"></slot>
@@ -141,5 +143,6 @@ export class Dialog extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'dialog';
+    appendRootNodeStyle(this, globalStyles);
   }
 }
