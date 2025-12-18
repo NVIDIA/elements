@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.6.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.6.1...@nvidia-elements/lint-v0.6.2) (2025-12-18)
+
+
+### Bug Fixes
+
+* **labs-lint:** suggested attr values list ([bc2142d](https://github.com/NVIDIA/elements/commit/bc2142df3915bcd905a6cdbfb5e6398a31772730))
+
 ## [@nvidia-elements/lint-v0.6.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.6.0...@nvidia-elements/lint-v0.6.1) (2025-12-05)
 
 
