@@ -307,11 +307,8 @@ export const ScrollContent = {
   <nve-dialog-header>
     <h3 nve-text="heading semibold">title</h3>
   </nve-dialog-header>
-  <div style="overflow: auto; max-height: 350px;">
-    <p nve-text="body" style="height: 400px">
-      some overflow content
-    </p>
-  </div>
+  <p nve-text="body" style="height: 600px">some tall content</p>
+  <p nve-text="body">some overflow content</p>
   <nve-dialog-footer>
     <nve-button id="cancel-btn">cancel</nve-button>
   </nve-dialog-footer>
@@ -366,3 +363,63 @@ export const InertModal = {
 </div>
 `
 };
+
+/**
+ * @summary Dialog with different container styles, demonstrating how to use the dialog with different container styles and padding.
+ * @tags test-case
+ */
+export const ContainerStyles = {
+  render: () => html`
+<nve-dialog id="slots-dialog" closable popover="manual" position="top">
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">default</h3>
+  </nve-dialog-header>
+  <p nve-text="body">default dialog with header and footer components</p>
+  <nve-dialog-footer>
+    <nve-button>button</nve-button>
+  </nve-dialog-footer>
+</nve-dialog>
+
+<nve-dialog id="content-dialog" closable popover="manual" position="right">
+  <h3 nve-text="heading semibold">title</h3>
+  <p nve-text="body">dialog with only content and no header or footer components</p>
+  <nve-button>button</nve-button>
+</nve-dialog>
+
+<nve-dialog id="custom-dialog" closable style="--padding: 0" position="bottom">
+  <h3 nve-text="heading semibold">title</h3>
+  <p nve-text="body">dialog with only content and no header or footer components and --padding set to 0</p>
+  <nve-button>button</nve-button>
+</nve-dialog>
+
+<nve-dialog id="custom-slots" closable style="--padding: 48px;" position="left">
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">title</h3>
+  </nve-dialog-header>
+  <p nve-text="body">dialog with header and footer components with --padding set to 48px</p>
+  <nve-dialog-footer>
+    <nve-button>button</nve-button>
+  </nve-dialog-footer>
+</nve-dialog>
+`
+};
+
+/**
+ * @summary
+ * @tags test-case
+ */
+export const MaxHeight = {
+  render: () => html`
+<nve-dialog id="dialog" modal closable>
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">title</h3>
+  </nve-dialog-header>
+  <p nve-text="body">some overflow content</p>
+  <p nve-text="body" style="min-height: 1000px">some overflow content</p>
+  <nve-button>button</nve-button>
+  <nve-dialog-footer>
+    <nve-button id="cancel-btn">cancel</nve-button>
+  </nve-dialog-footer>
+</nve-dialog>
+  `
+}
