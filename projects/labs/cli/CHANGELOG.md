@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.1.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.9...@nvidia-elements/cli-v0.1.10) (2025-12-18)
+
+
+### Bug Fixes
+
+* **labs-cli:** fix search index ([544d90b](https://github.com/NVIDIA/elements/commit/544d90bf66ceb4acf44aa0cf9b7927d39ab230d5))
+
 ## [@nvidia-elements/cli-v0.1.9](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.8...@nvidia-elements/cli-v0.1.9) (2025-12-05)
 
 
