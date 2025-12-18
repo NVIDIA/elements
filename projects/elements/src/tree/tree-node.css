@@ -2,6 +2,7 @@
   --color: var(--nve-sys-interaction-color);
   --border-radius: var(--nve-ref-border-radius-xs);
   --font-size: var(--nve-ref-font-size-100);
+  --font-weight: var(--nve-ref-font-weight-regular);
   --min-height: var(--nve-ref-size-800);
   --nve-sys-interaction-state-base: var(--background, var(--nve-sys-layer-canvas-background));
   --text-wrap: nowrap;
@@ -12,6 +13,7 @@
 [internal-host] {
   color: var(--color);
   font-size: var(--font-size);
+  font-weight: var(--font-weight);
   text-wrap: var(--text-wrap);
   display: flex;
   align-content: center;
