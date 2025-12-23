@@ -25,6 +25,11 @@
     color: var(--nve-sys-text-muted-color);
   }
 
+  ::part(icon-button) {
+    --width: var(--nve-ref-size-400);
+    --height: var(--nve-ref-size-400);
+  }
+
   #titles {
     display: flex;
     flex-direction: column;
