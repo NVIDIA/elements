@@ -50,14 +50,14 @@ catalog:
   '@eslint/json': 0.13.2
   '@html-eslint/eslint-plugin': 0.47.0
   '@html-eslint/parser': 0.47.0
-  '@lit-labs/eleventy-plugin-lit': 1.0.5
+  '@lit-labs/eleventy-plugin-lit': 1.0.6
   '@lit-labs/scoped-registry-mixin': ^1.0.4
-  '@lit-labs/ssr': ^3.3.1
-  '@lit-labs/ssr-client': ^1.1.7
-  '@lit-labs/ssr-react': ^0.3.3
+  '@lit-labs/ssr': ^4.0.0
+  '@lit-labs/ssr-client': ^1.1.8
+  '@lit-labs/ssr-react': ^0.3.4
   '@lit-labs/virtualizer': ^2.1.1
   '@lit/react': ^1.0.8
-  '@lit/reactive-element': ^2.1.1
+  '@lit/reactive-element': ^2.1.2
   '@rollup/plugin-terser': 0.4.4
   '@sentry/browser': 7.120.3
   '@types/node': 24.9.1
@@ -72,9 +72,9 @@ catalog:
   eslint: 9.38.0
   glob: 11.0.3
   lighthouse: 13.0.1
-  lit: ^3.3.1
-  lit-element: ^4.2.1
-  lit-html: ^3.3.1
+  lit: ^3.3.2
+  lit-element: ^4.2.2
+  lit-html: ^3.3.2
   markdown-it: 14.1.0
   markdown-it-link-attributes: 4.0.1
   playwright: 1.56.1
