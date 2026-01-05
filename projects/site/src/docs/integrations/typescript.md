@@ -9,9 +9,7 @@
 
 {% integration 'typescript' %}
 
-{% installation %}
-
-## Integration
+{% installation 'typescript' %}
 
 Once installation is complete Elements can be imported and used within [TypeScript](https://www.typescriptlang.org/) files. The Element class definitions can be imported via [type imports](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) to use for static type checking.
 

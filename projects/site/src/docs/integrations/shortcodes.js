@@ -19,16 +19,40 @@ npm login
 `;
 }
 
-export function renderInstallShortcode() {
-  return /* html */ `
-${renderInstallArtifactoryShortcode()}
+export function renderInstallShortcode(starter) {
+  const starterInstructions = `
+## Create a New Project
 
-Once the registry is setup and authenticated, install the core dependencies:
+Use the [Elements CLI](docs/cli/) to quickly bootstrap a new${starter ? ` ${starter} ` : ' '}project with the necessary dependencies:
+
+\`\`\`shell
+npm exec --package=@nvidia-elements/cli@latest -- nve project.create ${starter ? `--type=${starter}` : ''}
+\`\`\`
+
+Optionally, install the Elements CLI globally then run the CLI:
+
+\`\`\`shell
+npm install -g @nvidia-elements/cli@latest
+
+nve project.create ${starter ? `--type=${starter}` : ''}
+\`\`\`
+`;
+
+  const dependencyInstructions = `
+## Manual Integration
+
+If installing to an existing project, install the core dependencies:
 
 \`\`\`shell
 # install core dependencies
 npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/core
 \`\`\`  
+`;
+
+  return /* html */ `
+${renderInstallArtifactoryShortcode()}
+${starterInstructions}
+${dependencyInstructions}
 `;
 }
 

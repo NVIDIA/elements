@@ -9,9 +9,7 @@
 
 {% integration 'lit' %}
 
-{% installation %}
-
-## Integration
+{% installation 'lit' %}
 
 ```typescript
 import '@nvidia-elements/core/alert/define.js';

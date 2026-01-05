@@ -9,9 +9,7 @@
 
 {% integration 'preact' %}
 
-{% installation %}
-
-## Integration
+{% installation 'preact' %}
 
 Once installation is complete elements can be imported and used within [Preact](https://preactjs.com/) jsx and tsx files.
 

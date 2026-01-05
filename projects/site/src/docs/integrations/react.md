@@ -9,9 +9,7 @@
 
 {% integration 'react' %}
 
-{% installation %}
-
-## Integration
+{% installation 'react' %}
 
 Once installation is complete Elements can be imported and used within [React](https://react.dev/) jsx and tsx files.
 
