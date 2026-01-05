@@ -9,9 +9,7 @@
 
 {% integration 'nextjs' %}
 
-{% installation %}
-
-## Integration
+{% installation 'nextjs' %}
 
 Once installation is complete Elements can be imported and used within [NextJS](https://nextjs.org/) jsx and tsx files.
 

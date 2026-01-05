@@ -9,9 +9,7 @@
 
 {% integration 'svelte' %}
 
-{% installation %}
-
-## Integration
+{% installation 'svelte' %}
 
 Once installation is complete Elements can be imported and used within [Svelte](https://svelte.dev/) `.svelte` template files.
 
