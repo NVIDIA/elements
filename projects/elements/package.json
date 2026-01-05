@@ -935,7 +935,7 @@
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/snippets": "workspace:*",
     "@nvidia-elements/testing": "workspace:*",
-    "@typescript/lib-dom": "npm:@types/web@0.0.281",
+    "@typescript/lib-dom": "npm:@types/web@0.0.312",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
