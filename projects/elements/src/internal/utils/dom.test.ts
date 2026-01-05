@@ -871,6 +871,17 @@ describe('getAnchorNames', () => {
     element.remove();
   });
 
+  it('should return empty array when anchorNames is undefined or not supported', () => {
+    const element = document.createElement('div');
+    // anchorName may be undefined due to unsupported browser or fallback to floating-ui positioning
+    element.style.anchorName = undefined;
+    document.body.appendChild(element);
+
+    const names = getAnchorNames(element);
+    expect(names).toEqual([]);
+    element.remove();
+  });
+
   it('should filter out "none" value', () => {
     const element = document.createElement('div');
     element.style.anchorName = 'none'; // 'none' is returned by getComputedStyle for empty anchor name

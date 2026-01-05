@@ -325,11 +325,13 @@ export function sameRenderRoot(element1: HTMLElement, element2: HTMLElement) {
   return sameShadowRoot || sameDocumentRoot;
 }
 
-export function getAnchorNames(element: HTMLElement) {
-  return element.style.anchorName
-    .split(',')
-    .map(name => name.trim())
-    .filter(name => name !== 'none' && name !== '');
+export function getAnchorNames(element: HTMLElement): string[] {
+  return (
+    element.style.anchorName
+      ?.split(',')
+      ?.map(name => name.trim())
+      ?.filter(name => name !== 'none' && name !== '') ?? []
+  );
 }
 
 export function removeAnchorName(element: HTMLElement, name: string) {
