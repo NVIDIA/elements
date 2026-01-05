@@ -9,9 +9,7 @@
 
 {% integration 'angular' %}
 
-{% installation %}
-
-## Integration
+{% installation 'angular' %}
 
 To use Elements in your [Angular](https://angular.dev/) components and add `CUSTOM_ELEMENTS_SCHEMA` to the schemas to allow web components to be used within your template.
 
