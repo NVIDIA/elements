@@ -37,9 +37,9 @@ export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> 
       if (this.host.popoverTargetAction === 'hide') {
         popover?.hidePopover();
       } else if (this.host.popoverTargetAction === 'show') {
-        popover?.showPopover();
+        popover?.showPopover({ source: this.host });
       } else {
-        popover?.togglePopover();
+        popover?.togglePopover({ source: this.host });
       }
     }
   };

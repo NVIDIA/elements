@@ -40,6 +40,7 @@ export function render(data) {
 
   const element = elements.find(d => d.name === componentData.tag);
   return `
+  <h2 nve-text="heading xl emphasis mkd">API &lt;${element.name}&gt;</h2>
   ${renderAllAPIs(element)}
   ${componentData.associatedElements?.length ? componentData.associatedElements.map(tag => renderAllAPIs(elements.find(d => d.name === tag))).join('') : ''}
   `;
@@ -48,7 +49,7 @@ export function render(data) {
 function renderAllAPIs(element) {
   return `
 <div nve-layout="column gap:md">
-  <h3 nve-text="heading lg mkd">&lt;${element.name}&gt; :: properties</h3>
+  <h3 nve-text="heading lg mkd">Properties</h3>
   ${renderAPITable(element, 'property', { container: '' })}
 </div>
 
