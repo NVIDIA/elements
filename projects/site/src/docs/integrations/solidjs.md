@@ -9,9 +9,7 @@
 
 {% integration 'solidjs' %}
 
-{% installation %}
-
-## Integration
+{% installation 'solidjs' %}
 
 Once installation is complete Elements can be imported and used within [SolidJS](https://www.solidjs.com/) jsx and tsx files.
 

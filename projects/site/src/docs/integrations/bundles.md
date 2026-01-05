@@ -9,9 +9,7 @@
 
 {% integration 'bundles' %}
 
-{% installation %}
-
-## Integration
+{% installation 'bundles' %}
 
 Bundles are ideal **only** for the following specific use cases:
 

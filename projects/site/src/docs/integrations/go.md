@@ -9,9 +9,7 @@
 
 {% integration 'go' %}
 
-{% installation %}
-
-## Integration
+{% installation 'go' %}
 
 Elements is agnostic to any frontend or backend tooling. To leverage elements in Go based templating two paths are available.
 
