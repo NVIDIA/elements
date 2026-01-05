@@ -7,9 +7,9 @@
 
 # {{ title }}
 
-{% installation %}
+{% integration %}
 
-## Integration
+{% installation %}
 
 Elements is split into multiple small packages. This allows you to choose what
 tools are needed for your application and omit anything unnecessary, improving

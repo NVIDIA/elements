@@ -9,9 +9,7 @@
 
 {% integration 'vue' %}
 
-{% installation %}
-
-## Integration
+{% installation 'vue' %}
 
 Once installation is complete Elements can be imported and used within [Vue](https://vuejs.org/) SFC files.
 
