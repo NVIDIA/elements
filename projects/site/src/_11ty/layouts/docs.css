@@ -85,7 +85,7 @@ h3[nve-text*='mkd']:hover .heading-anchor > nve-icon-button {
   opacity: 1;
 }
 
-h2[nve-text*='mkd']:first-of-type {
+body:has(#doc-tabs) h2[nve-text*='mkd']:first-of-type {
   padding-top: var(--nve-ref-space-xxl);
 }
 
