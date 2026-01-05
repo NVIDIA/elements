@@ -98,4 +98,38 @@ describe('type-native-popover-trigger.controller', () => {
     await elementIsStable(element);
     expect(popover.matches(':popover-open')).toBe(false);
   });
+
+  it('should pass source element in toggle event when action is toggle', async () => {
+    expect(popover.matches(':popover-open')).toBe(false);
+
+    const toggleEvent = untilEvent(popover, 'toggle') as Promise<ToggleEvent>;
+    emulateClick(element);
+    const event = await toggleEvent;
+
+    expect(event.source).toBe(element);
+  });
+
+  it('should pass source element in toggle event when action is show', async () => {
+    element.popoverTargetAction = 'show';
+    expect(popover.matches(':popover-open')).toBe(false);
+
+    const toggleEvent = untilEvent(popover, 'toggle') as Promise<ToggleEvent>;
+    emulateClick(element);
+    const event = await toggleEvent;
+
+    expect(event.source).toBe(element);
+  });
+
+  // source element is not passed back to follow same standard behavior as native button elements
+  it('should not pass source element in toggle event when action is hide', async () => {
+    element.popoverTargetAction = 'hide';
+    popover.showPopover();
+    expect(popover.matches(':popover-open')).toBe(true);
+
+    const toggleEvent = untilEvent(popover, 'toggle') as Promise<ToggleEvent>;
+    emulateClick(element);
+    const event = await toggleEvent;
+
+    expect(event.source).toBeNull();
+  });
 });

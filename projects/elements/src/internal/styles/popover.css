@@ -144,7 +144,8 @@
     position-area: center;
   }
 
-  :host(:state(anchor-body)) {
+  :host([position='center'][alignment='center']:state(anchor-body)) {
+    position-area: unset;
     margin: auto;
   }
 
