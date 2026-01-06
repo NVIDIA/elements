@@ -1,3 +1,10 @@
+/* Sticky Subheader Styles */
+section[slot='subheader'] {
+  background: var(--nve-ref-color-neutral-100);
+  border-bottom: 1px solid var(--nve-ref-border-color);
+}
+
+/* left Side Tree-Navigation Styles */
 #sidenav-panel {
   nve-tree > nve-tree-node:not(:has(> a)),
   nve-tree > nve-tree-node:has(> a) {
@@ -55,7 +62,7 @@
 /* Tab Styles */
 nve-tabs#doc-tabs {
   padding: var(--nve-ref-space-sm) 0 0;
-  border-bottom: 1px solid var(--nve-ref-border-color);
+  width: 100%;
 
   nve-tabs-item {
     --font-size: var(--nve-ref-font-size-300);
@@ -162,8 +169,8 @@ nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
 }
 
 /* Page Panel Styles */
-nve-page-panel[slot='left'] {
-  --width: 250px;
+nve-page-panel[slot='left-aside'] {
+  --max-width: 250px;
 
   nve-page-panel-content {
     --padding: var(--nve-ref-size-600) var(--nve-ref-size-400) var(--nve-ref-size-300) var(--nve-ref-size-400);
@@ -224,8 +231,7 @@ nve-page-panel[slot='left'] {
   }
 }
 
-/* Adjusts layout and anchor generator display for large screens (min-width: 1440px and 1700px), 
-depending on the presence and visibility of the anchor generator and system options panel. */
+/* Adjusts layout and anchor generator display for large screens */
 @media (min-width: 1440px) {
   #anchor-generator {
     display: block;
