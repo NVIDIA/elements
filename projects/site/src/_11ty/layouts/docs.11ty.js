@@ -51,18 +51,22 @@ export async function render(data) {
       </head>
 
       <body nve-text="body trim:none">
+        <!-- nve-page component, anchors for internal navigation links -->
         <nve-page style="anchor-name: --page-anchor;">
+          <!-- renders nve-page-header (logo, top nav buttons, system themes btn...) -->
           ${renderBasePageHeader(data)}
 
-          <!-- Left sidebar navigation -->
+          <!-- Left sidebar, search functionality, and tree navigation -->
           <nve-page-panel slot="left" id="sidenav-panel">
             <nve-page-panel-content>
               <nvd-search id="docs-search" base-url="${BASE_URL}"></nvd-search>
               ${renderDocsNav(data)}
             </nve-page-panel-content>
           </nve-page-panel>
+          
           <nve-resize-handle slot="left" min="3" max="300" value="300" step="20" orientation="vertical"></nve-resize-handle>
 
+          <!-- Docs main content section, currently includes tabs for Overview, API, and Examples, element description, default example, and support button before rendering the page content from markdown files -->
           <main id="docs-main">
             <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
               ${
@@ -131,9 +135,11 @@ export async function render(data) {
               ${data.tag && !data.hideStatus && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
             </div>
             
+            <!-- An 11ty transform that generates anchor links for the page content -->
             <!-- ANCHOR-GENERATOR -->
           </main>
-
+          
+          <!-- Right sidebar, system settings panel -->
           <nve-page-panel closable hidden slot="right" size="sm" id="system-options-panel">
             <nve-page-panel-content>
               <nvd-system-settings></nvd-system-settings>
