@@ -140,6 +140,7 @@ export async function render(data) {
           </main>
           
           <!-- Right sidebar: system settings panel -->
+          <nve-page-panel closable hidden slot="right-aside" size="sm" id="system-options-panel">
             <nve-page-panel-content>
               <nvd-system-settings></nvd-system-settings>
             </nve-page-panel-content>
