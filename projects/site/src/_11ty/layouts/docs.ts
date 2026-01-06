@@ -16,8 +16,8 @@ systemOptionsPanelBtn.addEventListener('click', async () => {
 });
 
 // resize panels
-const handle = globalThis.document.querySelector<HTMLElement>('nve-resize-handle[slot="left"]')!;
-const panel = globalThis.document.querySelector<HTMLElement>('nve-page-panel[slot="left"]')!;
+const handle = globalThis.document.querySelector<HTMLElement>('nve-resize-handle[slot="left-aside"]')!;
+const panel = globalThis.document.querySelector<HTMLElement>('nve-page-panel[slot="left-aside"]')!;
 handle.addEventListener('input', e => (panel.style.width = (e.target as HTMLInputElement).value + 'px'));
 
 // auto-scroll to deep-link headers
