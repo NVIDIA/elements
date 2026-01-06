@@ -31,8 +31,8 @@ export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
 const styles = readFileSync(new URL('./docs.css', import.meta.url), 'utf-8');
 
 /**
- * Main documentation layout template that mimics Storybook docs navigation.
- * Provides a three-column layout with navigation, content, and anchor links.
+ * Main documentation layout template.
+ * Structure: left sidebar (nav), main content with optional subheader (tabs), right sidebar (settings).
  *
  * @param {Object} data - The page data object from 11ty
  * @returns {string} HTML string containing the rendered documentation page
@@ -56,37 +56,30 @@ export async function render(data) {
           <!-- renders nve-page-header (logo, top nav buttons, system themes btn...) -->
           ${renderBasePageHeader(data)}
 
-          <!-- Left sidebar, search functionality, and tree navigation -->
-          <nve-page-panel slot="left" id="sidenav-panel">
+          <!-- Left (aside) sidebar, search functionality, and tree navigation -->
+          <nve-page-panel slot="left-aside" id="sidenav-panel">
             <nve-page-panel-content>
               <nvd-search id="docs-search" base-url="${BASE_URL}"></nvd-search>
               ${renderDocsNav(data)}
             </nve-page-panel-content>
           </nve-page-panel>
           
-          <nve-resize-handle slot="left" min="3" max="300" value="300" step="20" orientation="vertical"></nve-resize-handle>
+          <nve-resize-handle slot="left-aside" min="3" max="300" value="300" step="20" orientation="vertical"></nve-resize-handle>
 
-          <!-- Docs main content section, currently includes tabs for Overview, API, and Examples, element description, default example, and support button before rendering the page content from markdown files -->
-          <main id="docs-main">
-            <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
-              ${
-                data.tag
-                  ? `
-                <div nve-layout="column gap:md align:left">
-                  <h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>
-                  
-                  ${elementSummary(data.tag)}
-                </div>
-              `
-                  : ''
-              }
+          <!-- Subheader: component title, summary, and tab navigation (Overview/API/Examples) -->
+          ${
+            data.tag
+              ? `
+            <section slot="subheader" nve-layout="column gap:md align:left pad-x:lg pad-top:lg">
+              <h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>
+              
+              ${elementSummary(data.tag)}
 
               ${
-                data.tag &&
-                (!data.page.url.includes('/data-grid/') ||
-                  data.page.url.endsWith('/data-grid/') ||
-                  data.page.url.endsWith('/data-grid/api/') ||
-                  data.page.url.endsWith('/data-grid/examples/'))
+                !data.page.url.includes('/data-grid/') ||
+                data.page.url.endsWith('/data-grid/') ||
+                data.page.url.endsWith('/data-grid/api/') ||
+                data.page.url.endsWith('/data-grid/examples/')
                   ? `
               <nve-tabs id="doc-tabs">
                 ${componentDocTabs
@@ -107,8 +100,15 @@ export async function render(data) {
               </nve-tabs>`
                   : ''
               }
+            </section>
+          `
+              : ''
+          }
 
-              <!-- Component description -->
+          <!-- Main content area -->
+          <main id="docs-main">
+            <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
+              <!-- Component description, default example, and support links (Overview tab only) -->
               ${
                 data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples'))
                   ? `
@@ -128,10 +128,10 @@ export async function render(data) {
                   : ''
               }
 
-              <!-- Page content -->
+              <!-- Markdown page content -->
               ${data.content}
 
-              <!-- Component status section if this is a component page -->
+              <!-- Component status (Overview tab only) -->
               ${data.tag && !data.hideStatus && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
             </div>
             
@@ -139,8 +139,7 @@ export async function render(data) {
             <!-- ANCHOR-GENERATOR -->
           </main>
           
-          <!-- Right sidebar, system settings panel -->
-          <nve-page-panel closable hidden slot="right" size="sm" id="system-options-panel">
+          <!-- Right sidebar: system settings panel -->
             <nve-page-panel-content>
               <nvd-system-settings></nvd-system-settings>
             </nve-page-panel-content>
