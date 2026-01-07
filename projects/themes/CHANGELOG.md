@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.10.0...@nvidia-elements/themes-v1.11.0) (2026-01-07)
+
+
+### Features
+
+* **themes:** increase visibility of hover on dark mode ([2fc3e48](https://github.com/NVIDIA/elements/commit/2fc3e483e22e164d29172201cde58bf8db669d7e))
+
 ## [@nvidia-elements/themes-v1.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.9.0...@nvidia-elements/themes-v1.10.0) (2025-11-26)
 
 
