@@ -71,9 +71,11 @@ export async function render(data) {
             data.tag
               ? `
             <section slot="subheader" nve-layout="column gap:md align:left pad-x:lg pad-top:lg">
-              <h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>
-              
-              ${elementSummary(data.tag)}
+              <div nve-layout="row align:vertical-center align:space-between grow">
+                <h1 nve-text="display emphasis mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>
+                
+                ${elementSummary(data.tag)}
+              </div>
 
               ${
                 !data.page.url.includes('/data-grid/') ||
@@ -134,10 +136,10 @@ export async function render(data) {
               <!-- Component status (Overview tab only) -->
               ${data.tag && !data.hideStatus && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
             </div>
-            
-            <!-- An 11ty transform that generates anchor links for the page content -->
-            <!-- ANCHOR-GENERATOR -->
           </main>
+            
+          <!-- An 11ty transform that generates anchor links for the page content -->
+          <!-- ANCHOR-GENERATOR -->
           
           <!-- Right sidebar: system settings panel -->
           <nve-page-panel closable hidden slot="right-aside" size="sm" id="system-options-panel">
