@@ -179,7 +179,7 @@ nve-page-panel[slot='left-aside'] {
 
 /* Main Content Styles */
 #docs-main {
-  padding: var(--nve-ref-space-xl);
+  padding: var(--nve-ref-space-xxl);
   display: flex;
   flex-direction: column;
   align-items: center;
