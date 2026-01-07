@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.53.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.53.0...@nvidia-elements/core-v1.53.1) (2026-01-07)
+
+
+### Bug Fixes
+
+* **elements:** popover anchor position browser support ([065d005](https://github.com/NVIDIA/elements/commit/065d00548bc9d8ec1dae6d118335c63449be09e8))
+
 ## [@nvidia-elements/core-v1.53.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.52.1...@nvidia-elements/core-v1.53.0) (2025-12-18)
 
 
