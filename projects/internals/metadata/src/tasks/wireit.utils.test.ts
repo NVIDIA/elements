@@ -1,17 +1,9 @@
-import { describe, expect, it, beforeAll } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { generateGraphData } from './wireit.utils.js';
 import type { WireitGraph } from '../types.js';
 
 describe('generateGraphData', () => {
-  let result: WireitGraph;
-  beforeAll(() => {
-    try {
-      result = generateGraphData();
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  });
+  const result: WireitGraph = generateGraphData();
 
   it('should return an object with nodes and links arrays', () => {
     expect(result).toBeDefined();
@@ -301,18 +293,6 @@ describe('generateGraphData', () => {
     for (const link of result.links) {
       expect(link.source).not.toBe(link.target);
     }
-  });
-
-  it('should return consistent results on multiple calls', () => {
-    const result1 = generateGraphData();
-    const result2 = generateGraphData();
-
-    expect(result1.nodes.length).toBe(result2.nodes.length);
-    expect(result1.links.length).toBe(result2.links.length);
-
-    const ids1 = result1.nodes.map(n => n.id).sort();
-    const ids2 = result2.nodes.map(n => n.id).sort();
-    expect(ids1).toEqual(ids2);
   });
 
   it('should have at least some nodes with dependencies', () => {

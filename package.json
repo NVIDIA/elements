@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "description": "",
-  "packageManager": "pnpm@10.19.0",
+  "packageManager": "pnpm@10.27.0",
   "engines": {
-    "node": "24.10.0"
+    "node": "24.12.0"
   },
   "scripts": {
     "ci": "wireit",
@@ -54,8 +54,8 @@
   },
   "wireit": {
     "ci": {
+      "script": "pnpm run format",
       "dependencies": [
-        "format",
         "./projects/elements:ci",
         "./projects/elements-react:ci",
         "./projects/labs/behaviors-alpine:ci",
@@ -209,7 +209,7 @@
       ]
     },
     "format": {
-      "command": "prettier --config prettier.config.js --check .",
+      "command": "prettier --config prettier.config.js --check --cache .",
       "files": [
         "./**/*.md",
         "./**/*.js",
@@ -221,6 +221,7 @@
         "!**/vite.*.ts.timestamp*",
         "!**/_site/**",
         "!**/dist/**",
+        "!**/.11ty-vite/**",
         "!**/.eslintcache/**",
         "!**/.wireit/**",
         "!**/.next/**",
@@ -235,7 +236,9 @@
         "!projects/**/.screencast/.auth/*",
         "!projects/starters/nextjs/next-env.d.ts"
       ],
-      "output": []
+      "output": [
+        "node_modules/.cache/prettier/**"
+      ]
     },
     "format:fix": {
       "command": "prettier --config prettier.config.js --write ."
