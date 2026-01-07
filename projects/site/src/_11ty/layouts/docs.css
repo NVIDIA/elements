@@ -214,11 +214,7 @@ nve-page-panel[slot='left-aside'] {
 
 /* Right Side Anchor Generator Styles */
 #anchor-generator {
-  list-style: none !important;
-  position: fixed;
-  top: calc(anchor(--page-anchor top) + 125px);
-  left: calc(anchor(--doc-content-anchor right) + 40px);
-  max-height: calc(100vh - 200px);
+  padding: var(--nve-ref-space-lg) !important;
   overflow-y: auto;
   display: none;
   width: var(--anchor-generator-width);
