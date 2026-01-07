@@ -111,6 +111,6 @@ packageManagerStrictVersion: true
 patchedDependencies:
   monaco-editor: patches/monaco-editor.patch
 
-useNodeVersion: 24.10.0
+useNodeVersion: 24.12.0
 
 verifyDepsBeforeRun: install
