@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.53.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.53.1...@nvidia-elements/core-v1.53.2) (2026-01-08)
+
+
+### Bug Fixes
+
+* **elements:** progress-ring  zero value nonhidden background ([4560496](https://github.com/NVIDIA/elements/commit/45604968d117b1ac1700e79e8dc843d21781fc66))
+
 ## [@nvidia-elements/core-v1.53.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.53.0...@nvidia-elements/core-v1.53.1) (2026-01-07)
 
 
