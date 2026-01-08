@@ -10,11 +10,8 @@ If not yet done, install [NodeJS](https://nodejs.org/en/download/). NodeJS is a 
 <nve-alert status="warning">AVInfra monorepo users skip .npmrc setup/login and use pnpm to install base packages.</nve-alert>
 
 \`\`\`shell
-# setup artifactory registry
-npm config set registry https://registry.npmjs.org
-
-# https://registry.npmjs.org
-npm login
+# login to artifactory
+npm config set registry https://registry.npmjs.org && npm login --auth-type=legacy
 \`\`\`
 `;
 }
