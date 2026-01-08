@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.54.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.53.2...@nvidia-elements/core-v1.54.0) (2026-01-08)
+
+
+### Features
+
+* **elements:**  props for spacing and parts for individually slotted elements spacing ([f25c6d0](https://github.com/NVIDIA/elements/commit/f25c6d0c48e81fbf39f886db3b871623028b7680))
+
 ## [@nvidia-elements/core-v1.53.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.53.1...@nvidia-elements/core-v1.53.2) (2026-01-08)
 
 
