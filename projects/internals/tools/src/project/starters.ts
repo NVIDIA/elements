@@ -314,6 +314,10 @@ export async function startStarter(extractedPath: string) {
         stdio: 'inherit'
       });
     } catch (e) {
+      if (e instanceof Error && 'signal' in e && e.signal === 'SIGINT') {
+        console.log('\n👋 Stopped.');
+        return;
+      }
       console.error(e);
     }
   }

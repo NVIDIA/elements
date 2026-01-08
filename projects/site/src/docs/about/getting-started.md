@@ -15,11 +15,8 @@
 <nve-divider></nve-divider>
 
 ```shell
-# local .npmrc file
-registry=https://registry.npmjs.org
-
-# https://registry.npmjs.org
-npm login
+# login to artifactory
+npm config set registry https://registry.npmjs.org && npm login --auth-type=legacy
 
 # create a new project
 npm exec --package=@nvidia-elements/cli@latest -- nve project.create
