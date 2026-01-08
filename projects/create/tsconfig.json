@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "module": "es2022",
+    "target": "es2022",
+    "lib": ["es2022"],
+    "types": ["node"],
+    "typeRoots": ["./node_modules/@types"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/",
+    "baseUrl": "./",
+    "rootDir": "./",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": false,
+    "isolatedModules": true
+  },
+  "include": ["src/**/*.ts"]
+}

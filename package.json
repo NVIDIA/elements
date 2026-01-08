@@ -56,6 +56,7 @@
     "ci": {
       "script": "pnpm run format",
       "dependencies": [
+        "./projects/create:ci",
         "./projects/elements:ci",
         "./projects/elements-react:ci",
         "./projects/labs/behaviors-alpine:ci",
@@ -121,6 +122,7 @@
     "release": {
       "command": "echo 'Releasing...'",
       "dependencies": [
+        "release:create",
         "release:themes",
         "release:testing",
         "release:elements",
@@ -141,6 +143,12 @@
     },
     "release:testing": {
       "command": "cd projects/testing && HUSKY=0 pnpm exec semantic-release"
+    },
+    "release:create": {
+      "command": "cd projects/create && HUSKY=0 pnpm exec semantic-release",
+      "dependencies": [
+        "release:labs-cli"
+      ]
     },
     "release:elements": {
       "command": "cd projects/elements && HUSKY=0 pnpm exec semantic-release",
@@ -246,6 +254,7 @@
     "lint:fix": {
       "command": "prettier --config prettier.config.js --write .",
       "dependencies": [
+        "./projects/create:lint:fix",
         "./projects/elements:lint:fix",
         "./projects/internals/metadata:lint:fix",
         "./projects/internals/patterns:lint:fix",
