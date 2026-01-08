@@ -32,6 +32,7 @@ function getProjectMetadata(basePath): Project {
 
 export function getProjects(): { created: string; data: Project[] } {
   const projects = [
+    '../../../../create',
     '../../../../elements',
     '../../../../elements-react',
     '../../../../styles',

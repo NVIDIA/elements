@@ -10,6 +10,7 @@ const styles = projects.find(p => p.name === '@nvidia-elements/styles');
 const themes = projects.find(p => p.name === '@nvidia-elements/themes');
 const monaco = projects.find(p => p.name === '@nvidia-elements/monaco');
 const testing = projects.find(p => p.name === '@nvidia-elements/testing');
+const create = projects.find(p => p.name === '@nvidia-elements/create');
 const labsCode = projects.find(p => p.name === '@nvidia-elements/code');
 const labsBrand = projects.find(p => p.name === '@nvidia-elements/brand');
 const labsCli = projects.find(p => p.name === '@nvidia-elements/cli');
@@ -61,6 +62,13 @@ export default [
     version: testing?.version,
     changelog: testing?.changelog,
     description: testing?.description
+  },
+  {
+    title: '@nvidia-elements/create',
+    permalink: '/create/',
+    version: create?.version,
+    changelog: create?.changelog,
+    description: create?.description
   },
   {
     title: '@nvidia-elements/code',

@@ -19,6 +19,7 @@ export default {
         'ci',
         'docs',
         'internals',
+        'create',
         'starters',
         'elements',
         'elements-react',
