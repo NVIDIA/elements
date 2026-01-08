@@ -29,6 +29,7 @@ packages:
   - projects/labs/snippets
   - projects/monaco
   - projects/pages
+  - projects/create
   - projects/elements
   - projects/elements-react
   - projects/styles
