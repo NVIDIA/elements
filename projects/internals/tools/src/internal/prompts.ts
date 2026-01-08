@@ -52,18 +52,13 @@ Give a high level overview of the Elements Design System.
 ### Getting Started with Elements
 
 \`\`\`bash
-# local .npmrc file
-registry=https://registry.npmjs.org
+# login to artifactory
+npm config set registry https://registry.npmjs.org && npm login --auth-type=legacy
 \`\`\`
 
 \`\`\`bash
-# https://registry.npmjs.org
-npm login
-
-# install core dependencies
-npm install -g @nvidia-elements/cli
-
-nve project.create --type=typescript # typescript, angular, react, lit, preact, solidjs, vue, nextjs, go
+# create a new project
+npm exec --package=@nvidia-elements/cli@latest -- nve project.create --type=typescript # typescript, angular, react, lit, preact, solidjs, vue, nextjs, go
 \`\`\`
 
 ### Resources for Users
