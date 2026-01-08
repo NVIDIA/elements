@@ -1,0 +1,93 @@
+{
+  "name": "@nvidia-elements/create",
+  "version": "0.0.0",
+  "description": "Create new Elements projects with 'npm init @nve'. A thin wrapper that delegates to @nvidia-elements/cli for project scaffolding.",
+  "type": "module",
+  "bin": {
+    "create-nve": "./dist/index.js"
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "package.json",
+    "dist/**/*"
+  ],
+  "scripts": {
+    "ci": "wireit",
+    "build": "wireit",
+    "lint": "wireit",
+    "create-nve:install": "pnpm run build && pnpm link --global",
+    "create-nve:uninstall": "pnpm uninstall --global @nvidia-elements/create",
+    "create-nve": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@internals/eslint": "workspace:*",
+    "@internals/vite": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "publint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "lint",
+        "build",
+        "publint"
+      ]
+    },
+    "publint": {
+      "dependencies": [
+        "build"
+      ],
+      "command": "publint",
+      "files": [
+        "package.json"
+      ],
+      "output": []
+    },
+    "build": {
+      "command": "NODE_ENV=production vite build",
+      "files": [
+        "src/**",
+        "!src/**/*.test.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        "../internals/vite:ci",
+        "../labs/cli:build"
+      ]
+    },
+    "build:watch": {
+      "command": "vite build --watch",
+      "service": true,
+      "dependencies": [
+        "build"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/eslint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../internals/eslint:ci"
+      ]
+    }
+  }
+}
