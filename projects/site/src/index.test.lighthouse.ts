@@ -47,6 +47,7 @@ async function getLighthouseScores(path: string) {
   const customConfig = { ...config };
   customConfig.settings!.screenEmulation!.width = viewport.width;
   customConfig.settings!.screenEmulation!.height = viewport.height;
+  customConfig.settings!.skipAudits = ['aria-prohibited-attr', 'aria-required-parent', 'aria-allowed-attr']; // axe does not support ElementInternals AOM yet https://github.com/dequelabs/axe-core/issues/4259
   const result = await lighthouse(path, { output: ['json', 'html'], logLevel: 'error', port: 9222 }, customConfig) as RunnerResult;
 
   if (WRITE_REPORT && !existsSync(`.lighthouse`)) {
@@ -96,7 +97,7 @@ describe.sequential('lighthouse', () => {
   test('landing page', async () => {
     const scores = await getLighthouseScores(`${base}/elements/`);
     expect(scores.performance).toBeGreaterThanOrEqual(85);
-    expect(scores.accessibility).toBeGreaterThanOrEqual(90);
+    expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
     expect(scores.payload.js).toBeLessThan(553);
@@ -106,7 +107,7 @@ describe.sequential('lighthouse', () => {
   test('getting started page', async () => {
     const scores = await getLighthouseScores(`${base}/elements/docs/about/getting-started/`);
     expect(scores.performance).toBeGreaterThanOrEqual(85);
-    expect(scores.accessibility).toBeGreaterThanOrEqual(90);
+    expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
     expect(scores.payload.js).toBeLessThan(170);
@@ -126,7 +127,7 @@ describe.sequential('lighthouse', () => {
   test('component docs overview page', async () => {
     const scores = await getLighthouseScores(`${base}/elements/docs/elements/badge/`);
     expect(scores.performance).toBeGreaterThanOrEqual(90);
-    expect(scores.accessibility).toBeGreaterThanOrEqual(90);
+    expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
     expect(scores.payload.js).toBeLessThan(200);
@@ -136,7 +137,7 @@ describe.sequential('lighthouse', () => {
   test('component docs API page', async () => {
     const scores = await getLighthouseScores(`${base}/elements/docs/elements/badge/api/`);
     expect(scores.performance).toBeGreaterThanOrEqual(85);
-    expect(scores.accessibility).toBeGreaterThanOrEqual(90);
+    expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
     expect(scores.payload.js).toBeLessThan(185);
@@ -146,7 +147,7 @@ describe.sequential('lighthouse', () => {
   test('static content docs page', async () => {
     const scores = await getLighthouseScores(`${base}/elements/docs/api-design/`);
     expect(scores.performance).toBeGreaterThanOrEqual(90);
-    expect(scores.accessibility).toBeGreaterThanOrEqual(90);
+    expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
     expect(scores.payload.js).toBeLessThan(172);
