@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.54.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.54.1...@nvidia-elements/core-v1.54.2) (2026-01-09)
+
+
+### Bug Fixes
+
+* **elements:** improve scroll content behavior of dialog ([1262c60](https://github.com/NVIDIA/elements/commit/1262c60d50ec06f777dd104c63260a26d2130267)), closes [#192](https://github.com/NVIDIA/elements/issues/192) [#191](https://github.com/NVIDIA/elements/issues/191)
+
 ## [@nvidia-elements/core-v1.54.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.54.0...@nvidia-elements/core-v1.54.1) (2026-01-09)
 
 
