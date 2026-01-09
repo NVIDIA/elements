@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.54.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.54.0...@nvidia-elements/core-v1.54.1) (2026-01-09)
+
+
+### Bug Fixes
+
+* **elements:** fix accordion header height ([33cef10](https://github.com/NVIDIA/elements/commit/33cef1032cb9672734713ef9e6ede4d0868c4944))
+
 ## [@nvidia-elements/core-v1.54.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.53.2...@nvidia-elements/core-v1.54.0) (2026-01-08)
 
 
