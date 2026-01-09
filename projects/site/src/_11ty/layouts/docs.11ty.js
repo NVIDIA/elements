@@ -59,9 +59,9 @@ export async function render(data) {
           ${
             data.tag
               ? `
-            <section slot="subheader" nve-layout="column gap:md align:left pad-x:xxl pad-top:xxl">
+            <section slot="subheader" nve-layout="column gap:xl align:left pad-x:xxl pad-top:xxl">
               <div nve-layout="column &lg|row align:space-between gap:lg grow">
-                <h1 nve-text="display sm emphasis semibold mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>
+                <h1 nve-text="display emphasis semibold mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>
                 
                 ${elementSummary(data.tag)}
               </div>

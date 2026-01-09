@@ -1,7 +1,66 @@
+/* CSS Scroll-Driven Animation for Subheader H1 */
+/* Enable CSS custom property interpolation in animations */
+/* See: https://developer.mozilla.org/en-US/docs/Web/CSS/@property */
+@property --subheader-h1-font-size {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 36px; /* approximate display sm size */
+}
+
+@property --subheader-padding-top {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 48px; /* approximate xxl */
+}
+
+@property --subheader-gap {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 32px; /* approximate xl */
+}
+
+@property --subheader-tabs-font-size {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 14px; /* approximate font-size-300 */
+}
+
+@keyframes shrinkSubheader {
+  from {
+    --subheader-h1-font-size: var(--nve-ref-font-size-900);
+    --subheader-padding-top: var(--nve-ref-space-xxl);
+    --subheader-gap: var(--nve-ref-space-xl);
+    --subheader-tabs-font-size: var(--nve-ref-font-size-300);
+  }
+  to {
+    --subheader-h1-font-size: var(--nve-ref-font-size-600);
+    --subheader-padding-top: var(--nve-ref-space-lg);
+    --subheader-gap: var(--nve-ref-space-xs);
+    --subheader-tabs-font-size: var(--nve-ref-font-size-100);
+  }
+}
+
+body {
+  /* Hoist the timeline to body so subheader can use it */
+  timeline-scope: --docs-main-scroll;
+}
+
 /* Sticky Subheader Styles */
 section[slot='subheader'] {
   background: var(--nve-ref-color-neutral-100);
   border-bottom: 1px solid var(--nve-ref-border-color);
+  /* Override nve-layout values with animated values */
+  padding-top: var(--subheader-padding-top) !important;
+  gap: var(--subheader-gap) !important;
+  /* Animation applies to section for padding, gap, and font-size */
+  animation: shrinkSubheader 1ms both;
+  animation-timeline: --docs-main-scroll;
+  animation-range: 200px 650px;
+
+  h1 {
+    font-size: var(--subheader-h1-font-size) !important;
+    margin: 0;
+  }
 }
 
 /* left Side Tree-Navigation Styles */
@@ -61,11 +120,10 @@ section[slot='subheader'] {
 
 /* Tab Styles */
 nve-tabs#doc-tabs {
-  padding: var(--nve-ref-space-sm) 0 0;
   width: 100%;
 
   nve-tabs-item {
-    --font-size: var(--nve-ref-font-size-300);
+    --font-size: var(--subheader-tabs-font-size) !important;
   }
 }
 
@@ -183,6 +241,9 @@ nve-page-panel[slot='left-aside'] {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Define the scroll timeline for the subheader h1 shrink animation */
+  scroll-timeline: --docs-main-scroll y;
+  overflow-y: auto;
 
   #doc-content {
     max-width: 1100px;
