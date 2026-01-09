@@ -180,3 +180,25 @@ export const ShadowRoot = {
 </script>
   `
 };
+
+/**
+ * @summary Body anchor positioning for toast.
+ * @tags test-case
+ */
+export const BodyAnchor = {
+  render: () => html`
+<nve-toast style="--background: red" position="center" alignment="center">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: blue" position="top" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: yellow" position="top">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: green" position="top" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: purple" position="bottom" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: orange" position="bottom">•︎︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: pink" position="bottom" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: brown; margin-left: 150px" position="left" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: gray;" position="left">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: black; margin-left: 150px" position="left" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: red; margin-right: 150px" position="right" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: blue" position="right">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: yellow; margin-right: 150px" position="right" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
+  `
+};
