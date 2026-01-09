@@ -14,6 +14,7 @@
   --box-shadow: var(--nve-ref-shadow-100);
   --gap: var(--nve-ref-space-xs);
   --_gap: var(--gap);
+  height: fit-content;
 }
 
 [internal-host] {

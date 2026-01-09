@@ -173,6 +173,54 @@
     margin-left: var(--nve-sys-layer-popover-offset);
   }
 
+  :host([position='top']:state(anchor-body)) {
+    position-area: bottom center;
+  }
+
+  :host([position='top'][alignment='end']:state(anchor-body)) {
+    position-area: bottom left;
+  }
+
+  :host([position='top'][alignment='start']:state(anchor-body)) {
+    position-area: bottom right;
+  }
+
+  :host([position='bottom']:state(anchor-body)) {
+    position-area: top center;
+  }
+
+  :host([position='bottom'][alignment='end']:state(anchor-body)) {
+    position-area: top left;
+  }
+
+  :host([position='bottom'][alignment='start']:state(anchor-body)) {
+    position-area: top right;
+  }
+
+  :host([position='left']:state(anchor-body)) {
+    position-area: right center;
+  }
+
+  :host([position='left'][alignment='end']:state(anchor-body)) {
+    position-area: top right;
+  }
+
+  :host([position='left'][alignment='start']:state(anchor-body)) {
+    position-area: bottom right;
+  }
+
+  :host([position='right']:state(anchor-body)) {
+    position-area: left center;
+  }
+
+  :host([position='right'][alignment='end']:state(anchor-body)) {
+    position-area: top left;
+  }
+
+  :host([position='right'][alignment='start']:state(anchor-body)) {
+    position-area: bottom left;
+  }
+
   /** top */
   :host([position='top']) {
     position-area: top center;
