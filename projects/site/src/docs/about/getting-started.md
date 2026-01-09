@@ -9,7 +9,7 @@
 
 <div nve-layout="column gap:lg">
   <div nve-layout="row gap:md align:vertical-center"><nve-logo></nve-logo><h1 nve-text="display sm">Elements</h1></div>
-  <h3 nve-text="heading lg">The Design Language for AI/ML Factories Building at the Speed of Light</h3>
+  <h2 nve-text="heading lg">The Design Language for AI/ML Factories Building at the Speed of Light</h2>
 </div>
 
 <nve-divider></nve-divider>
