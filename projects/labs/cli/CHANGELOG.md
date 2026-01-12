@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.1.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.10...@nvidia-elements/cli-v0.1.11) (2026-01-12)
+
+
+### Bug Fixes
+
+* **labs-cli:** handle sigint for long running process ([c909d01](https://github.com/NVIDIA/elements/commit/c909d01babd9dc1e53893cadd26c2a3b2d4e01a6))
+
 ## [@nvidia-elements/cli-v0.1.10](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.9...@nvidia-elements/cli-v0.1.10) (2025-12-18)
 
 
