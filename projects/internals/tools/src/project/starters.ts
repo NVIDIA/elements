@@ -181,7 +181,6 @@ async function exportPackageFromWorkspace(projectDir) {
   const manifest = await readProjectManifestOnly(projectDir);
   let exportable = await createExportableManifest(projectDir, manifest, { catalogs });
   exportable = removeWireitScripts(exportable);
-  exportable.packageManager = 'pnpm@10.6.2';
   return exportable;
 }
 
