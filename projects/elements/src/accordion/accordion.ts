@@ -22,6 +22,7 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
 
 /**
  * @element nve-accordion-header
+ * @description Provides the clickable heading region of an accordion that toggles the visibility of associated content.
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
  * @slot prefix
@@ -74,6 +75,7 @@ export class AccordionHeader extends LitElement {
 
 /**
  * @element nve-accordion-content
+ * @description Contains the collapsible body content that is revealed or hidden when the parent accordion is expanded or collapsed.
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
  * @slot - This is a default/unnamed slot for accordion content content
@@ -227,6 +229,7 @@ export class Accordion extends LitElement implements ContainerElement {
 
 /**
  * @element nve-accordion-group
+ * @description Organizes multiple accordions into a cohesive group, enabling coordinated expand/collapse behavior such as single-item expansion.
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
  * @cssprop --padding

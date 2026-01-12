@@ -4,6 +4,7 @@ import styles from './dropdown-footer.css?inline';
 
 /**
  * @element nve-dropdown-footer
+ * @description Provides a fixed area at the bottom of a dropdown menu for additional actions or supplementary controls.
  * @since 0.36.0
  * @entrypoint \@nvidia-elements/core/dropdown
  * @slot - default slot for the dropdown footer

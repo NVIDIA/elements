@@ -4,6 +4,7 @@ import styles from './page-panel-content.css?inline';
 
 /**
  * @element nve-page-panel-content
+ * @description Contains the scrollable main body content within a page panel region.
  * @entrypoint \@nvidia-elements/core/page
  * @since 1.15.0
  * @slot - default slot for the page-panel content
