@@ -4,6 +4,7 @@ import styles from './page-panel-footer.css?inline';
 
 /**
  * @element nve-page-panel-footer
+ * @description Provides a fixed action area at the bottom of a page panel for persistent controls or status information.
  * @entrypoint \@nvidia-elements/core/page
  * @since 1.15.0
  * @slot - default slot for the page-panel footer

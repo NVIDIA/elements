@@ -5,6 +5,7 @@ import styles from './menu-item.css?inline';
 
 /**
  * @element nve-menu-item
+ * @description Represents a selectable option within a menu, providing an interactive button for navigation or actions.
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/menu
  * @slot - default slot for content

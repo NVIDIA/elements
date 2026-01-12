@@ -4,6 +4,7 @@ import styles from './cell.css?inline';
 
 /**
  * @element nve-grid-cell
+ * @description Represents an individual data cell within a grid row, displaying content aligned to its parent column.
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for content
