@@ -19,7 +19,7 @@ export const data = {
     let dir = 'elements';
     if (filePath.includes('/code/')) dir = 'code';
     else if (filePath.includes('/monaco/')) dir = 'monaco';
-    else if (filePath.includes('/markdown/')) dir = 'labs';
+    else if (filePath.includes('/markdown/')) dir = '';
     return `/docs/${dir}/${data.component.fileSlug}/api/`;
   }
 };
@@ -39,11 +39,13 @@ export function render(data) {
   data.hideExamplesTab = componentData.hideExamplesTab;
 
   const element = elements.find(d => d.name === componentData.tag);
-  return `
+  return element
+    ? `
   <h2 nve-text="heading xl emphasis mkd">API &lt;${element.name}&gt;</h2>
   ${renderAllAPIs(element)}
   ${componentData.associatedElements?.length ? componentData.associatedElements.map(tag => renderAllAPIs(elements.find(d => d.name === tag))).join('') : ''}
-  `;
+  `
+    : '';
 }
 
 function renderAllAPIs(element) {

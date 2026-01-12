@@ -2,8 +2,7 @@
 {
   title: 'Codeblock',
   layout: 'docs.11ty.js',
-  tag: 'nve-codeblock',
-  hideExamplesTab: true
+  tag: 'nve-codeblock'
 }
 ---
 
