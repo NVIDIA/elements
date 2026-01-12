@@ -5,6 +5,7 @@ import styles from './checkbox-group.css?inline';
 
 /**
  * @element nve-checkbox-group
+ * @description Groups related checkboxes together with a shared label and validation messaging for multi-select form inputs.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/checkbox
  * @storybook https://NVIDIA.github.io/elements/docs/elements/checkbox/
