@@ -301,6 +301,12 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url === '/docs/testing/' ? 'highlighted' : ''}><a href="docs/testing/">Testing</a></nve-tree-node>
   </nve-tree-node>
 
+  <nve-tree-node ${data.page.url.includes('/docs/markdown/') ? 'expanded' : ''}>
+    Markdown
+    <nve-tree-node ${data.page.url.endsWith('/docs/markdown/') ? 'highlighted' : ''}><a href="docs/markdown/">Markdown</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/markdown/styles/') ? 'highlighted' : ''}><a href="docs/markdown/styles/">CSS Utility</a></nve-tree-node>
+  </nve-tree-node>
+
   <nve-tree-node ${data.page.url.includes('/docs/labs/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/' ? 'highlighted' : ''}>
     <a href="docs/labs/">Labs</a>
     <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/') ? 'expanded' : ''} ${data.page.url === '/docs/labs/layout/responsive/' ? 'highlighted' : ''}>
@@ -309,7 +315,6 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/container/') ? 'highlighted' : ''}><a href="docs/labs/layout/responsive/container/">Container</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/patterns/') ? 'highlighted' : ''}><a href="docs/labs/layout/responsive/patterns/">Patterns</a></nve-tree-node>
     </nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/markdown/' ? 'highlighted' : ''}><a href="docs/labs/markdown/" nve-layout="row align:vertical-center gap:xs">Markdown <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/brand/' ? 'highlighted' : ''}><a href="docs/labs/brand/" nve-layout="row align:vertical-center gap:xs">Brand <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted' : ''}><a href="docs/labs/behaviors-alpine/" nve-layout="row align:vertical-center gap:xs">Behaviors Alpine <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted' : ''}><a href="docs/labs/forms/" nve-layout="row align:vertical-center gap:xs">Forms <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>

@@ -1,8 +1,7 @@
 ---
 {
   title: 'Elements Lint',
-  layout: 'docs.11ty.js',
-  hideExamplesTab: true
+  layout: 'docs.11ty.js'
 }
 ---
 

@@ -184,7 +184,7 @@ export default function (eleventyConfig) {
       'src/docs/elements/data-grid/index.md',
       'src/docs/code/*.md',
       'src/docs/monaco/*.md',
-      'src/docs/labs/markdown/*.md'
+      'src/docs/markdown/index.md'
     ]);
   });
 

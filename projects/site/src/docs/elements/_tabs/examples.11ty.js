@@ -2,8 +2,6 @@
 
 import markdownIt from 'markdown-it';
 import { siteData } from '../../../index.11tydata.js';
-import { exampleShortcode, exampleTagsShortcode } from '../../../_11ty/shortcodes/example.js';
-import { apiShortcode } from '../../../_11ty/shortcodes/api.js';
 import { exampleDocShortcode } from '../../../_11ty/shortcodes/example-doc.js';
 
 const { examples, elements } = siteData;
@@ -31,7 +29,7 @@ export const data = {
     let dir = 'elements';
     if (filePath.includes('/code/')) dir = 'code';
     else if (filePath.includes('/monaco/')) dir = 'monaco';
-    else if (filePath.includes('/markdown/')) dir = 'markdown';
+    else if (filePath.includes('/markdown/')) dir = '';
     return `/docs/${dir}/${data.component.fileSlug}/examples/`;
   }
 };
@@ -47,16 +45,9 @@ export async function render(data) {
   const componentData = data.component.data;
   const element = elements.find(e => e.name === componentData.tag);
   const exampleTemplates = examples.filter(example => example.element === componentData.tag);
-  const isPopover = [
-    'popover',
-    'dialog',
-    'drawer',
-    'dropdown',
-    'notification',
-    'toast',
-    'toggletip',
-    'tooltip'
-  ].includes(componentData.tag.replace('nve-', ''));
+
+  if (data.component.data.hideExamplesTab || !element) return '';
+
   data.tag = componentData.tag;
   data.title = componentData.title;
   data.page.fileSlug = componentData.page.fileSlug;
@@ -101,9 +92,14 @@ export async function render(data) {
     <div nve-layout="column gap:lg">
     ${(
       await Promise.all(
-        exampleTemplates.map(
-          async example => await exampleDocShortcode(example.entrypoint, example.name, { editAction: true })
-        )
+        exampleTemplates.map(async example => {
+          const config = { editAction: true };
+          if (example.element?.includes('grid')) {
+            config.inline = false;
+            config.height = '540px';
+          }
+          return await exampleDocShortcode(example.entrypoint, example.name, config);
+        })
       )
     ).join('\n')}
     </div>
