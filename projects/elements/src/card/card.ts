@@ -49,6 +49,7 @@ export class Card extends LitElement implements ContainerElement {
 
 /**
  * @element nve-card-header
+ * @description Displays the title and optional actions at the top of a card, establishing the card's identity and purpose.
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
  * @slot - default slot
@@ -92,6 +93,7 @@ export class CardHeader extends LitElement {
 
 /**
  * @element nve-card-content
+ * @description Contains the primary body content of a card, providing a structured region for the main information or media.
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
  * @slot - This is a default/unnamed slot for card content content
@@ -119,6 +121,7 @@ export class CardContent extends LitElement {
 
 /**
  * @element nve-card-footer
+ * @description Provides a designated area at the bottom of a card for actions, metadata, or supplementary information.
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
  * @slot - This is a default/unnamed slot for card footer content

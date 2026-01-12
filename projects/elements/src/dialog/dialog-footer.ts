@@ -4,6 +4,7 @@ import styles from './dialog-footer.css?inline';
 
 /**
  * @element nve-dialog-footer
+ * @description Contains the action buttons and controls at the bottom of a dialog for confirming, canceling, or navigating.
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/dialog
  * @slot - default slot for the dialog footer
