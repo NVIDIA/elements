@@ -107,6 +107,10 @@ export class ButtonGroup extends LitElement {
   }
 
   #selectButton(button) {
+    if (!button.matches?.('nve-button, nve-button, nve-icon-button, nve-icon-button')) {
+      return;
+    }
+
     if (this.behaviorSelect === 'single') {
       this.#buttons.forEach(i => (i.pressed = false));
       button.pressed = true;
