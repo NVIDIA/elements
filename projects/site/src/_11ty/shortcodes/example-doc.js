@@ -50,7 +50,7 @@ async function getBestAvailableContent(example, element) {
   } else if (isPropertyExample) {
     content = await apiShortcode(element.name, 'property', member.name);
   } else {
-    content = md.renderInline(example.summary);
+    content = `<p nve-text="body relaxed">${md.renderInline(example.summary)}</p>`;
   }
 
   return content;

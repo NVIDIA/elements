@@ -2,8 +2,7 @@
 {
   title: 'Markdown',
   layout: 'docs.11ty.js',
-  tag: 'nve-markdown',
-  hideExamplesTab: true
+  tag: 'nve-markdown'
 }
 ---
 

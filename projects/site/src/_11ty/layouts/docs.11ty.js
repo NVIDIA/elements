@@ -7,23 +7,6 @@ import { renderBaseHead, renderDocsNav, renderBasePageHeader } from './common.js
 import { elementSummary, elementStatus, elementDescription, elementSupportButtons } from '../templates/api.js';
 import { exampleShortcode } from '../shortcodes/example.js';
 
-// Define the available tabs for component documentation
-const componentDocTabs = [
-  {
-    label: 'Overview',
-    slug: '/'
-  },
-  {
-    label: 'API',
-    slug: '/api/'
-  },
-  {
-    label: 'Examples',
-    slug: '/examples/',
-    hidden: false
-  }
-];
-
 // Base URL for the documentation site
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
 
@@ -38,6 +21,12 @@ const styles = readFileSync(new URL('./docs.css', import.meta.url), 'utf-8');
  * @returns {string} HTML string containing the rendered documentation page
  */
 export async function render(data) {
+  const baseTabUrl = `${data.page.url
+    .replace('/', '')
+    .replace('/api/', '/')
+    .replace('/examples/', '/')
+    .replace(/(.*\/data-grid\/).+/, '$1')}`;
+
   return /* html */ `
     <!DOCTYPE html>
     <html lang="en" nve-theme="dark" nve-transition="auto">
@@ -77,31 +66,20 @@ export async function render(data) {
                 ${elementSummary(data.tag)}
               </div>
 
-              ${
-                !data.page.url.includes('/data-grid/') ||
-                data.page.url.endsWith('/data-grid/') ||
-                data.page.url.endsWith('/data-grid/api/') ||
-                data.page.url.endsWith('/data-grid/examples/')
-                  ? `
               <nve-tabs id="doc-tabs">
-                ${componentDocTabs
-                  .filter(tab => !tab.hidden)
-                  .filter(tab => !(data.hideExamplesTab && tab.label === 'Examples'))
-                  .map(tabItem => {
-                    const filePath = data.page.url;
-                    let dir = 'elements';
-                    if (filePath.includes('/docs/code/')) dir = 'code';
-                    else if (filePath.includes('/docs/monaco/')) dir = 'monaco';
-                    else if (filePath.includes('/docs/labs/markdown/')) dir = 'labs';
-                    const tabUrl = `docs/${dir}/${data.page.fileSlug}${tabItem.slug}`;
-                    return `<nve-tabs-item ${`/${tabUrl}` === data.page.url ? 'selected' : ''}>
-                        <a href="${tabUrl}">${tabItem.label}</a>
-                      </nve-tabs-item>`;
-                  })
-                  .join('')}
-              </nve-tabs>`
-                  : ''
-              }
+                <nve-tabs-item ${'/' + baseTabUrl === data.page.url ? 'selected' : ''}>
+                  <a href="${baseTabUrl}">Overview</a>
+                </nve-tabs-item>
+                <nve-tabs-item ${'/' + baseTabUrl + 'api/' === data.page.url ? 'selected' : ''}>
+                  <a href="${baseTabUrl + 'api/'}">API</a>
+                </nve-tabs-item>${
+                  data.hideExamplesTab
+                    ? ''
+                    : `<nve-tabs-item ${'/' + baseTabUrl + 'examples/' === data.page.url ? 'selected' : ''}>
+                  <a href="${baseTabUrl + 'examples/'}">Examples</a>
+                </nve-tabs-item>`
+                }
+              </nve-tabs>
             </section>
           `
               : ''
