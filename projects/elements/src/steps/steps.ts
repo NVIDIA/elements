@@ -20,6 +20,7 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 
 /**
  * @element nve-steps-item
+ * @description Represents an individual step within a multi-step workflow, displaying its status and enabling navigation within the parent steps component.
  * @since 0.30.0
  * @entrypoint \@nvidia-elements/core/steps
  * @slot - default slot for step text

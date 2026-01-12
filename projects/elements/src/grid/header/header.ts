@@ -18,6 +18,7 @@ import { GridCell } from '../cell/cell.js';
 
 /**
  * @element nve-grid-header
+ * @description Contains the column headers of a grid, managing column widths and providing structural context for the data rows below.
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/grid
  * @slot - default slot for `nve-grid-column`
