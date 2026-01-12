@@ -4,6 +4,7 @@ import styles from './drawer-footer.css?inline';
 
 /**
  * @element nve-drawer-footer
+ * @description Provides a fixed action area at the bottom of a drawer for primary actions such as save or cancel.
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/drawer
  * @slot - default slot for the drawer footer

@@ -4,6 +4,7 @@ import styles from './toggletip-footer.css?inline';
 
 /**
  * @element nve-toggletip-footer
+ * @description Provides a designated area at the bottom of a toggletip for actions or supplementary information.
  * @since 0.38.0
  * @entrypoint \@nvidia-elements/core/toggletip
  * @slot - default slot for the toggletip footer

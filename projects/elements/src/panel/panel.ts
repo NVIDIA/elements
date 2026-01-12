@@ -16,6 +16,7 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
 
 /**
  * @element nve-panel-header
+ * @description Displays the title, subtitle, and optional action controls at the top of a panel.
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/panel
  * @slot title - Title Text
@@ -57,6 +58,7 @@ export class PanelHeader extends LitElement {
 
 /**
  * @element nve-panel-content
+ * @description Contains the main body content within a panel, providing a structured region for detailed information.
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/panel
  * @slot - This is a default/unnamed slot for panel content content
@@ -82,6 +84,7 @@ export class PanelContent extends LitElement {
 
 /**
  * @element nve-panel-footer
+ * @description Provides a designated area at the bottom of a panel for actions or supplementary controls.
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/panel
  * @slot - This is a default/unnamed slot for panel footer content

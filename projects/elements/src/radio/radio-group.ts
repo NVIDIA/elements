@@ -5,6 +5,7 @@ import styles from './radio-group.css?inline';
 
 /**
  * @element nve-radio-group
+ * @description Groups related radio buttons together with a shared label and validation messaging for single-select form inputs.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/radio
  * @storybook https://NVIDIA.github.io/elements/docs/elements/radio/
