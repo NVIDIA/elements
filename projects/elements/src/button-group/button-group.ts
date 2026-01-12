@@ -3,11 +3,12 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { KeynavListConfig, Interaction, Size } from '@nvidia-elements/core/internal';
-import { attachInternals, keyNavigationList, useStyles, audit } from '@nvidia-elements/core/internal';
+import { attachInternals, keyNavigationList, useStyles, audit, appendRootNodeStyle } from '@nvidia-elements/core/internal';
 import type { IconButton } from '@nvidia-elements/core/icon-button';
 import type { Button } from '@nvidia-elements/core/button';
 import type { Divider } from '@nvidia-elements/core/divider';
 import styles from './button-group.css?inline';
+import globalStyles from './button-group.global.css?inline';
 
 /**
  * @element nve-button-group
@@ -83,6 +84,7 @@ export class ButtonGroup extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     attachInternals(this);
+    appendRootNodeStyle(this, globalStyles);
     this._internals.role = 'group';
     this.addEventListener('click', e => this.#selectButton(e.target));
   }
