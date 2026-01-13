@@ -32,7 +32,7 @@ function template(theme: '' | 'dark' = '') {
     <nve-pulse status="danger"></nve-pulse>
   </div>
 
-  <div align="center">
+  <div nve-layout="row gap:xs">
     <nve-pulse size="xs"></nve-pulse>
     <nve-pulse size="sm"></nve-pulse>
     <nve-pulse size="md"></nve-pulse>
