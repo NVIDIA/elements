@@ -37,7 +37,7 @@ export const startersData = {
   },
   bundles: {
     zip: 'https://NVIDIA.github.io/elements/starters/download/bundles.zip',
-    cli: false
+    cli: true
   },
   eleventy: {
     zip: 'https://NVIDIA.github.io/elements/starters/download/eleventy.zip',
@@ -49,6 +49,10 @@ export const startersData = {
   },
   go: {
     zip: 'https://NVIDIA.github.io/elements/starters/download/go.zip',
+    cli: true
+  },
+  hugo: {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/hugo.zip',
     cli: true
   },
   importmaps: {
@@ -142,9 +146,8 @@ async function createCursorConfig(projectDir) {
   const cursorConfig = {
     mcpServers: {
       elements: {
-        command: 'npx', // npx allows the package to run on latest without requiring a global installation by user
         description: 'Elements API and Custom Element Schema',
-        args: ['-y', '--package=@nvidia-elements/cli@latest', 'nve-mcp'],
+        command: 'npm exec --package=@nvidia-elements/cli@latest -y --prefer-online -- nve-mcp',
         env: {
           npm_config_registry: 'https://registry.npmjs.org'
         }
