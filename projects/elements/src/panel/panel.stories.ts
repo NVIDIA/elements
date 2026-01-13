@@ -6,7 +6,6 @@ import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/notification/define.js';
 
 /* eslint-disable @nvidia-elements/lint/no-restricted-attributes */
-/* eslint-disable @nvidia-elements/lint/no-unexpected-attribute-value */
 
 export default {
   title: 'Elements/Panel',
@@ -70,7 +69,7 @@ export const LeftSidePanel = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm">
       <div nve-theme="root">
-        <nve-panel behavior-expand id expanded side="left" style="width:280px; height:550px">
+        <nve-panel behavior-expand expanded side="left" style="width:280px; height:550px">
 
           <nve-panel-content nve-layout="column gap:md">
             <div nve-layout="column gap:xs">
