@@ -59,6 +59,7 @@
   },
   "peerDependencies": {
     "@nvidia-elements/styles": "workspace:^",
+    "@nvidia-elements/themes": "workspace:^",
     "eslint": ">= 9"
   },
   "devDependencies": {
@@ -111,6 +112,8 @@
       ],
       "dependencies": [
         "../../internals/vite:ci",
+        "../../styles:build",
+        "../../themes:build",
         {
           "script": "../../internals/metadata:build",
           "cascade": false
