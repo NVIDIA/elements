@@ -19,7 +19,7 @@
 npm config set registry https://registry.npmjs.org && npm login --auth-type=legacy
 
 # create a new project
-npm exec --package=@nvidia-elements/cli@latest -- nve project.create
+npm create @nve
 ```
 
 <div nve-layout="grid gap:lg span-items:4 align:stretch">
