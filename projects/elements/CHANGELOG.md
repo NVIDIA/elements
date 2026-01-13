@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.54.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.54.2...@nvidia-elements/core-v1.54.3) (2026-01-13)
+
+
+### Bug Fixes
+
+* **elements:** add missing element descriptions ([37a71ed](https://github.com/NVIDIA/elements/commit/37a71ed78ce56bc39c7df9fe8c9a36e2caf62b64))
+
 ## [@nvidia-elements/core-v1.54.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.54.1...@nvidia-elements/core-v1.54.2) (2026-01-09)
 
 
