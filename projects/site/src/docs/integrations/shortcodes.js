@@ -23,7 +23,7 @@ export function renderInstallShortcode(starter) {
 Use the [Elements CLI](docs/cli/) to quickly bootstrap a new${starter ? ` ${starter} ` : ' '}project with the necessary dependencies:
 
 \`\`\`shell
-npm exec --package=@nvidia-elements/cli@latest -- nve project.create ${starter ? `--type=${starter}` : ''}
+npm create @nve ${starter ? starter : ''}
 \`\`\`
 
 Optionally, install the Elements CLI globally then run the CLI:

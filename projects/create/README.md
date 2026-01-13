@@ -1,21 +1,21 @@
 # @nvidia-elements/create
 
-Create new Elements projects using `npm init @nve`.
+Create new Elements projects using `npm create @nve`.
 
 ## NPM Usage
 
 ```bash
 # Interactive project creation
-npm init @nve
+npm create @nve
 
 # Create a React project
-npm init @nve react
+npm create @nve react
 
 # Create a Angular project
-pnpm init @nve angular
+npm create @nve angular
 
 # Create a Vue project
-npm init @nve vue
+npm create @nve vue
 ```
 
 ### PNPM Usage
