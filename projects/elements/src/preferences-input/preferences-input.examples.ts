@@ -11,6 +11,9 @@ export default {
   component: 'nve-preferences-input'
 };
 
+/**
+ * @summary Preferences input displaying theme settings (color scheme, scale, reduced motion) for user customization.
+ */
 export const Default = {
   render: () => {
     return html`
@@ -19,6 +22,9 @@ export const Default = {
   }
 };
 
+/**
+ * @summary Preferences input integrated with form submission, displaying live JSON value updates.
+ */
 export const Forms = {
   render: () => {
     return html`
@@ -50,6 +56,9 @@ export const Forms = {
   }
 }
 
+/**
+ * @summary Preferences input embedded in a dropdown menu triggered from a page header settings button.
+ */
 export const Dropdown = {
   render: () => {
     return html`
