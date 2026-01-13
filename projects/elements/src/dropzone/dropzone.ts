@@ -65,9 +65,6 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
     [Icon.metadata.tag]: Icon
   };
 
-  /** @private */
-  declare _internals: ElementInternals;
-
   formResetCallback() {
     this.value = [];
     this.requestUpdate();

@@ -92,9 +92,6 @@ export class PreferencesInput extends FormControlMixin<typeof LitElement, Prefer
     [Switch.metadata.tag]: Switch
   };
 
-  /** @private */
-  declare _internals: ElementInternals;
-
   @state() private activePreferences: ReturnType<typeof getActivePreferences> = {
     light: false,
     dark: false,
