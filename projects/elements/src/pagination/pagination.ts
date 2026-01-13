@@ -96,9 +96,6 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
     };
   }
 
-  /** @private */
-  declare _internals: ElementInternals;
-
   get #currentPage() {
     return (this.value - 1) * this.step + this.step;
   }
