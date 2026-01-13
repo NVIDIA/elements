@@ -7,11 +7,17 @@ export default {
   component: 'nve-dropzone'
 };
 
+/**
+ * @summary Basic file dropzone with drag-and-drop area for file upload interactions.
+ */
 export const Default = {
   render: () => html`
 <nve-dropzone name="files" style="--min-height: 200px;"></nve-dropzone>`
 };
 
+/**
+ * @summary Dropzone with custom icon slot showing visual feedback on hover and highlight states.
+ */
 export const Icon = {
   render: () => html`
 <style>
@@ -32,6 +38,9 @@ export const Icon = {
 `
 };
 
+/**
+ * @summary Dropzone integrated with form validation showing file type and size constraint errors.
+ */
 export const Form = {
   render: () => html`
 <form id="form-demo" nve-layout="column gap:lg">

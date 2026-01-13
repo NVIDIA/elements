@@ -405,7 +405,7 @@ export const ContainerStyles = {
 };
 
 /**
- * @summary
+ * @summary Dialog with overflow content demonstrating max-height constraints and scrollable content area.
  * @tags test-case
  */
 export const MaxHeight = {

@@ -9,6 +9,9 @@ export default {
   component: 'nve-progressive-filter-chip',
 };
 
+/**
+ * @summary Basic progressive filter chip with cascading select dropdowns for multi-criteria filtering.
+ */
 export const Default = {
   render: () => html`
     <nve-progressive-filter-chip closable>
@@ -34,6 +37,9 @@ export const Default = {
   `
 }
 
+/**
+ * @summary Progressive filter chip demonstrating proper layer stacking within dropdown contexts.
+ */
 export const Layer = {
   render: () => html`
     <nve-progressive-filter-chip closable>
@@ -59,6 +65,9 @@ export const Layer = {
   `
 }
 
+/**
+ * @summary Progressive filter chip with multi-select dropdown for filtering by multiple values simultaneously.
+ */
 export const Multiple = {
 render: () => html`
     <nve-progressive-filter-chip closable>
@@ -86,6 +95,9 @@ render: () => html`
   `
 }
 
+/**
+ * @summary Progressive filter chip with numeric text input for threshold-based filtering (greater than, less than).
+ */
 export const TextInput = {
   render: () => html`
     <nve-progressive-filter-chip closable>
@@ -109,6 +121,9 @@ export const TextInput = {
   `
 }
 
+/**
+ * @summary Progressive filter chip with date picker inputs for filtering by date range criteria.
+ */
 export const DateRange = {
   render: () => html`
     <nve-progressive-filter-chip>
@@ -128,6 +143,9 @@ export const DateRange = {
     `
 }
 
+/**
+ * @summary Progressive filter chip with custom button trigger opening a map coordinate picker dropdown.
+ */
 export const Custom = {
   render: () => html`
     <nve-progressive-filter-chip closable>
@@ -155,6 +173,9 @@ export const Custom = {
   `
 }
 
+/**
+ * @summary Progressive filter chip with input validation states showing required field and error styling.
+ */
 export const Validation = {
   render: () => html`
 <div nve-layout="column gap:lg">

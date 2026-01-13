@@ -31,4 +31,4 @@ import '@nvidia-elements/core/input/define.js';
 
 ## Range Group
 
-{% story 'nve-input-group', 'FilterGroupRange' %}
+{% example '@nvidia-elements/core/input/input-group.examples.json', 'FilterGroupRange' %}
