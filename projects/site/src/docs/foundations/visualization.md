@@ -57,7 +57,7 @@ new Chart(document.querySelector('canvas'), {
 
 ## Heatmap
 
-{% story 'nve-grid', 'HeatmapPattern', '{ "inline": false, "height": "600px" }' %}
+{% example '@nve-internals/patterns/heatmap.examples.json' 'HeatmapPattern', '{ "inline": false, "height": "600px" }' %}
 
 ## Categorical
 

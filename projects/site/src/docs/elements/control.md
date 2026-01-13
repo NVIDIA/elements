@@ -21,11 +21,11 @@ All control elements are responsive and will adjust to one of the set layouts ba
 
 The element breakpoints are based on the available space to the element rather than the viewport.
 
-{% story '@nvidia-elements/core/forms/control/control.stories.json', 'Responsive' %}
+{% example '@nvidia-elements/core/forms/control/control.examples.json', 'Responsive' %}
 
 ## Prominence Muted
 
-{% story '@nvidia-elements/core/forms/forms.stories.json', 'ProminenceMuted' %}
+{% example '@nvidia-elements/core/forms/forms.examples.json', 'ProminenceMuted' %}
 
 ## Custom Controls
 

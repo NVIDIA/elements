@@ -7,6 +7,18 @@
 
 # {{ title }}
 
-## Playground
+Code editor layouts using the [Monaco Input](./docs/monaco/input/) component
+with [Page](./docs/elements/page/) layouts for building IDE-style interfaces
+in AV and Robotics applications.
 
-{% example '@nvidia-elements/core/page/page.examples.json' 'PageLayoutEditor', '{ "inline": false, "height": "700px" }' %}
+## File Browser
+
+{% example '@nve-internals/patterns/editor.examples.json', 'EditorFileBrowser', '{ "inline": false, "height": "700px" }' %}
+
+## Diff View
+
+{% example '@nve-internals/patterns/editor.examples.json', 'EditorDiffView', '{ "inline": false, "height": "650px" }' %}
+
+## Read-Only Viewer
+
+{% example '@nve-internals/patterns/editor.examples.json', 'EditorReadOnly', '{ "inline": false, "height": "650px" }' %}

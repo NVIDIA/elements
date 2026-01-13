@@ -13,6 +13,9 @@ export default {
   component: 'nve-internal-patterns'
 };
 
+/**
+ * @summary Responsive tabs pattern using @container queries to collapse overflow tabs into a menu.
+ */
 export const ResponsiveTabs = {
   render: () => html`
     <style>
@@ -65,6 +68,9 @@ export const ResponsiveTabs = {
   `
 };
 
+/**
+ * @summary Responsive toolbar pattern using @container queries to collapse actions into overflow menu.
+ */
 export const ResponsiveToolbar = {
   render: () => html`
     <style>
