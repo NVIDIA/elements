@@ -58,7 +58,7 @@ npm config set registry https://registry.npmjs.org && npm login --auth-type=lega
 
 \`\`\`bash
 # create a new project
-npm exec --package=@nvidia-elements/cli@latest -- nve project.create --type=typescript # typescript, angular, react, lit, preact, solidjs, vue, nextjs, go
+npm create @nve typescript # typescript, angular, react, lit, preact, solidjs, vue, nextjs, go
 \`\`\`
 
 ### Resources for Users
