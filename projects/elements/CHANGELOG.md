@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.54.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.54.3...@nvidia-elements/core-v1.54.4) (2026-01-13)
+
+
+### Bug Fixes
+
+* **elements:** popover position for body anchor ([14a36d6](https://github.com/NVIDIA/elements/commit/14a36d6d0f53dfdb349751be150c21c4c9417048))
+
 ## [@nvidia-elements/core-v1.54.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.54.2...@nvidia-elements/core-v1.54.3) (2026-01-13)
 
 
