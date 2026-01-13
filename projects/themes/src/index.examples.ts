@@ -16,6 +16,9 @@ export default {
   component: 'nve-internal-patterns'
 };
 
+/**
+ * @summary Visual demonstration of theme layer stacking (canvas, container, overlay, popover) in light and dark modes.
+ */
 export const Layers = {
   render: () => html`
     <style>
@@ -106,6 +109,9 @@ export const Layers = {
   `
 }
 
+/**
+ * @summary Theme layer object reference showing semantic backgrounds for canvas, container, overlay, and popover.
+ */
 export const Objects = {
   render: () => html`
     <style>
@@ -213,6 +219,9 @@ export const Objects = {
   `
 }
 
+/**
+ * @summary Demonstrates reduced-motion theme setting that disables animations for accessibility.
+ */
 export const ReducedMotion = {
   render: () => html`
 <style>
@@ -270,6 +279,9 @@ export const ReducedMotion = {
 }
 
 
+/**
+ * @summary Theme interaction state system for buttons showing hover, active, selected, and disabled states.
+ */
 export const ButtonInteractions = {
   render() {
     return html`
@@ -321,6 +333,9 @@ export const ButtonInteractions = {
   }
 }
 
+/**
+ * @summary Theme interaction state system for menu items demonstrating all interactive states in both themes.
+ */
 export const Interactions = {
   render: () => html`
     <style>

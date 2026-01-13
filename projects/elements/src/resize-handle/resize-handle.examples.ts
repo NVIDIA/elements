@@ -7,11 +7,17 @@ export default {
   component: 'nve-resize-handle',
 };
 
+/**
+ * @summary Basic horizontal resize handle for draggable panel dividers and split pane interfaces.
+ */
 export const Default = {
   render: () => html`
 <nve-resize-handle></nve-resize-handle>`
 };
 
+/**
+ * @summary Vertical resize handle for side-by-side panel layouts and horizontal split panes.
+ */
 export const Vertical = {
   render: () => html`
 <div style="height: 200px;">
@@ -20,6 +26,9 @@ export const Vertical = {
 `
 };
 
+/**
+ * @summary Horizontal split pane with draggable divider that adjusts top and bottom panel heights.
+ */
 export const SplitHorizontal = {
   render: () => html`
 <section id="split-horizontal-demo" style="display: grid; width: 250px; height: 250px; grid-template-rows: 1fr auto 1fr; border: 1px solid var(--nve-ref-border-color)">
@@ -35,6 +44,9 @@ export const SplitHorizontal = {
 `
 };
 
+/**
+ * @summary Vertical split pane with draggable divider that adjusts left and right panel widths.
+ */
 export const SplitVertical = {
   render: () => html`
 <section id="split-vertical-demo" style="display: grid; width: 250px; height: 250px; grid-template-columns: 1fr auto 1fr; border: 1px solid var(--nve-ref-border-color)">
@@ -50,6 +62,9 @@ export const SplitVertical = {
 `
 };
 
+/**
+ * @summary Resize handle as a form control with name attribute for submitting resize values.
+ */
 export const Form = {
   render: () => html`
 <form id="form-demo" nve-layout="column gap:lg">
@@ -83,6 +98,9 @@ export const Form = {
 `
 };
 
+/**
+ * @summary Demonstrates preventing default toggle behavior for custom resize logic and constraints.
+ */
 export const PreventDefault = {
   render: () => html`
 <form id="prevent-default-demo" nve-layout="column gap:lg">
@@ -108,6 +126,9 @@ export const PreventDefault = {
 `
 };
 
+/**
+ * @summary Custom line width styling for resize handle visibility using CSS custom property.
+ */
 export const LineWidth = {
   render: () => html`
 <div style="height: 200px;">

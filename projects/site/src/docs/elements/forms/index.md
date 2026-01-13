@@ -52,32 +52,32 @@ Vertical is the default label layout for all elements.
 
 {% api 'nve-control', 'property' 'layout' %}
 
-{% story '@nvidia-elements/core/forms/forms.stories.json', 'HorizontalInline' %}
+{% example '@nvidia-elements/core/forms/forms.examples.json' 'HorizontalInline' %}
 
 ### Horizontal
 
 {% api 'nve-control', 'property' 'layout' %}
 
-{% story '@nvidia-elements/core/forms/forms.stories.json', 'Horizontal' %}
+{% example '@nvidia-elements/core/forms/forms.examples.json' 'Horizontal' %}
 
 ### Vertical
 
 {% api 'nve-control', 'property' 'layout' %}
 
-{% story '@nvidia-elements/core/forms/forms.stories.json', 'Vertical' %}
+{% example '@nvidia-elements/core/forms/forms.examples.json' 'Vertical' %}
 
 ### Vertical Inline
 
 {% api 'nve-control', 'property' 'layout' %}
 
-{% story '@nvidia-elements/core/forms/forms.stories.json', 'VerticalInline' %}
+{% example '@nvidia-elements/core/forms/forms.examples.json' 'VerticalInline' %}
 
 ## Fit Text
 
 {% api 'nve-control', 'property' 'fitText' %}
 
-{% story '@nvidia-elements/core/forms/forms.stories.json', 'FitText' %}
+{% example '@nvidia-elements/core/forms/forms.examples.json' 'FitText' %}
 
 ## Kitchen Sink
 
-{% story '@nvidia-elements/core/forms/forms.stories.json', 'KitchenSink' %}
+{% example '@nvidia-elements/core/forms/forms.examples.json' 'KitchenSink' %}
