@@ -86,7 +86,7 @@ catalog:
   react-dom: 19.2.0
   rollup-plugin-html-literals: 2.0.1
   ts-morph: 26.0.0
-  typescript: 5.8.2
+  typescript: 5.9.3
   typescript-eslint: 8.53.0
   vite: 7.3.0
   vite-plugin-dts: 4.5.4
