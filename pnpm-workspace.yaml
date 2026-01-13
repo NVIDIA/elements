@@ -46,11 +46,11 @@ catalog:
   '@11ty/eleventy-plugin-syntaxhighlight': 5.0.2
   '@11ty/eleventy-plugin-vite': 7.0.0
   '@custom-elements-manifest/analyzer': 0.10.10
-  '@eslint/css': 0.13.0
-  '@eslint/js': 9.38.0
-  '@eslint/json': 0.13.2
-  '@html-eslint/eslint-plugin': 0.47.0
-  '@html-eslint/parser': 0.47.0
+  '@eslint/css': 0.14.1
+  '@eslint/js': 9.39.2
+  '@eslint/json': 0.14.0
+  '@html-eslint/eslint-plugin': 0.52.1
+  '@html-eslint/parser': 0.52.0
   '@lit-labs/eleventy-plugin-lit': 1.0.6
   '@lit-labs/scoped-registry-mixin': ^1.0.4
   '@lit-labs/ssr': ^4.0.0
@@ -70,7 +70,7 @@ catalog:
   '@vitest/mocker': 4.0.16
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
   axe-core: 4.11.0
-  eslint: 9.38.0
+  eslint: 9.39.2
   glob: 11.0.3
   lighthouse: 13.0.1
   lit: ^3.3.2
@@ -86,7 +86,7 @@ catalog:
   rollup-plugin-html-literals: 2.0.1
   ts-morph: 26.0.0
   typescript: 5.8.2
-  typescript-eslint: 8.46.2
+  typescript-eslint: 8.53.0
   vite: 7.3.0
   vite-plugin-dts: 4.5.4
   vitest: 4.0.16
