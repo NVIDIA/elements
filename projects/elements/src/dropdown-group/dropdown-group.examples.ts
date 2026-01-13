@@ -10,6 +10,9 @@ export default {
   component: 'nve-dropdown-group',
 };
 
+/**
+ * @summary Cascading dropdown menu group with nested submenus for hierarchical navigation.
+ */
 export const Default = {
   render: () => html`
     <nve-button popovertarget="menu-1">menu</nve-button>
@@ -43,6 +46,9 @@ export const Default = {
   `
 };
 
+/**
+ * @summary Cascading dropdown menu with disabled menu items demonstrating non-interactive states.
+ */
 export const WithDisabledItems = {
   render: () => html`
     <nve-button popovertarget="disabled-menu-1">Disabled Items</nve-button>
@@ -76,6 +82,9 @@ export const WithDisabledItems = {
   `
 };
 
+/**
+ * @summary Cascading dropdown menu with leading icons for visual identification of menu item types.
+ */
 export const WithIcons = {
   render: () => html`
     <nve-button popovertarget="icon-menu-1">Icons Menu</nve-button>
@@ -123,6 +132,9 @@ export const WithIcons = {
   `
 };
 
+/**
+ * @summary Cascading dropdown menu showcasing additional icon varieties for diverse menu actions.
+ */
 export const WithMoreIcons = {
   render: () => html`
     <nve-button popovertarget="more-icon-menu-1">More Icons</nve-button>

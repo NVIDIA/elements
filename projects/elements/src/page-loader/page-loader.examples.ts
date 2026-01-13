@@ -6,12 +6,18 @@ export default {
   component: 'nve-page-loader',
 };
 
+/**
+ * @summary Full-page loading indicator displaying centered spinner for initial page load states.
+ */
 export const Default = {
   render: () => html`
 <nve-page-loader></nve-page-loader>
   `
 };
 
+/**
+ * @summary Interactive page loader that can be triggered programmatically via button click.
+ */
 export const Interactive = {
   inline: false,
   render: () => html`

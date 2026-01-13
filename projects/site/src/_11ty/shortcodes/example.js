@@ -72,6 +72,9 @@ export async function exampleShortcode(
     .replace('nve-text', 'class="example-shortcode-summary" nve-text');
 
   // static canvas is used to ensure what is rendered is local sourced and not from the remote esm.sh
+  // replace all double newlines with single newlines to prevent markdown from processing HTML content
+  // https://github.com/markdown-it/markdown-it/issues/1056
+  // https://spec.commonmark.org/0.31.2/#html-blocks
   return example
     ? /* html */ `
 <div class="example-shortcode" nve-layout="column gap:sm">
@@ -79,7 +82,9 @@ ${config.summary ? summary : ''}
 <nvd-canvas id="${canvasId}" style="--overflow: ${config.resizable ? 'auto' : 'visible'}; --height: ${config.height};" align="${config.align}" layer="${config.layer}">
   <template>${md.utils?.escapeHtml(templateContent)}</template>${template}${editButton}${playgroundButton}
 </nvd-canvas>
-</div>`.trim()
+</div>`
+        .trim()
+        .replace(/\n\n/g, '\n')
     : '';
 }
 

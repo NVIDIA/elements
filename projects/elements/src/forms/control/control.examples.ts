@@ -13,6 +13,7 @@ export default {
 }
 
 /**
+ * @summary Basic form control wrapper with label, input, and validation message structure.
  * @tags test-case
  */
 export const Control = () => {
@@ -25,6 +26,7 @@ export const Control = () => {
 };
 
 /**
+ * @summary Responsive form controls demonstrating layout adaptation in resizable containers.
  * @tags test-case
  */
 export const Responsive = () => {
@@ -78,6 +80,7 @@ export const Responsive = () => {
 };
 
 /**
+ * @summary All control and control-group layout variations (vertical, horizontal, inline) with visual debugging.
  * @tags test-case
  */
 export const ControlLayout = () => {
@@ -264,6 +267,7 @@ export const ControlLayout = () => {
 };
 
 /**
+ * @summary Form control with HTML5 validation showing required field error messaging.
  * @tags test-case
  */
 export const ControlValidation = () => {
@@ -277,6 +281,7 @@ export const ControlValidation = () => {
 }
 
 /**
+ * @summary Form control without visible label using aria-label for accessibility in compact layouts.
  * @tags test-case
  */
 export const NoLabelControl = () => {
@@ -287,6 +292,7 @@ export const NoLabelControl = () => {
 }
 
 /**
+ * @summary Inline control layout with checkbox positioned before its label for toggle-style inputs.
  * @tags test-case
  */
 export const InlineControl = () => {
@@ -298,6 +304,7 @@ export const InlineControl = () => {
 }
 
 /**
+ * @summary Control group organizing related radio buttons and checkboxes with shared label and messaging.
  * @tags test-case
  */
 export const ControlGroup = () => {
@@ -341,6 +348,7 @@ export const ControlGroup = () => {
 }
 
 /**
+ * @summary Form control wrapping a native date input with label and message support.
  * @tags test-case
  */
 export const DateControl = () => {
@@ -353,6 +361,7 @@ export const DateControl = () => {
 };
 
 /**
+ * @summary Form control wrapping a textarea element for multi-line text input.
  * @tags test-case
  */
 export const TextareaControl = () => {
@@ -365,6 +374,7 @@ export const TextareaControl = () => {
 }
 
 /**
+ * @summary Form control with datalist providing autocomplete suggestions for search input.
  * @tags test-case
  */
 export const Datalist = () => {
@@ -381,6 +391,7 @@ export const Datalist = () => {
 };
 
 /**
+ * @summary Form controls showing all status states (default, disabled, success, error) for validation feedback.
  * @tags test-case
  */
 export const Status = () => {
