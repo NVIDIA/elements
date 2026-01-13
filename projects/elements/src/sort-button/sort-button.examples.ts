@@ -6,12 +6,18 @@ export default {
   component: 'nve-sort-button',
 };
 
+/**
+ * @summary Basic sort button in its default unsorted state for column header sorting controls.
+ */
 export const Default = {
   render: () => html`
   <nve-sort-button></nve-sort-button>
   `
 };
 
+/**
+ * @summary Sort button states (unsorted, ascending, descending) displayed on light theme background.
+ */
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="row gap:md pad:md align:wrap">
@@ -22,6 +28,9 @@ export const LightTheme = {
   `
 }
 
+/**
+ * @summary Sort button states (unsorted, ascending, descending) displayed on dark theme background.
+ */
 export const DarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="row gap:md pad:md align:wrap">

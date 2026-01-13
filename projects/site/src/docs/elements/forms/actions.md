@@ -25,12 +25,12 @@ import '@nvidia-elements/core/input/define.js';
 
 ## Actions
 
-{% story '@nvidia-elements/core/forms/actions.stories.json', 'Actions' %}
+{% example '@nvidia-elements/core/forms/actions.examples.json', 'Actions' %}
 
 ## Label Action
 
-{% story '@nvidia-elements/core/forms/actions.stories.json', 'LabelAction' %}
+{% example '@nvidia-elements/core/forms/actions.examples.json', 'LabelAction' %}
 
 ## Prefix/Suffix
 
-{% story '@nvidia-elements/core/forms/actions.stories.json', 'PrefixSuffix' %}
+{% example '@nvidia-elements/core/forms/actions.examples.json', 'PrefixSuffix' %}

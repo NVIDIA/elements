@@ -7,4 +7,4 @@
 }
 ---
 
-{% example '@nvidia-elements/core/grid/grid.examples.json' 'HeatmapPattern', '{ "inline": false, "height": "600px" }' %}
+{% example '@nve-internals/patterns/heatmap.examples.json' 'HeatmapPattern', '{ "inline": false, "height": "600px" }' %}
