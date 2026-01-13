@@ -175,7 +175,6 @@ export const ContainerFlat = {
  */
 export const Audit = {
   /* eslint-disable @nvidia-elements/lint/no-restricted-attributes */
-  /* eslint-disable @nvidia-elements/lint/no-unexpected-attribute-value */
   render: () => html`
   <!-- invalid padding usage -->
   <nve-card nve-layout="pad:md"></nve-card>
