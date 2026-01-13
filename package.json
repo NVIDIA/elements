@@ -193,7 +193,8 @@
     "release:labs-lint": {
       "command": "cd projects/labs/lint && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:themes"
+        "release:themes",
+        "release:styles"
       ]
     },
     "release:labs-markdown": {
