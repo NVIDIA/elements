@@ -1,7 +1,7 @@
 {
   "name": "@nvidia-elements/create",
   "version": "1.0.0",
-  "description": "Create new Elements projects with 'npm init @nve'. A thin wrapper that delegates to @nvidia-elements/cli for project scaffolding.",
+  "description": "Create new Elements projects with 'npm create @nve'. A thin wrapper that delegates to @nvidia-elements/cli for project scaffolding.",
   "type": "module",
   "bin": {
     "create-nve": "./dist/index.js"

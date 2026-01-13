@@ -174,7 +174,7 @@ export function render(data) {
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
-          <img src="/static/images/integrations/go.svg" width="28px" height="28px" alt="go logo" />
+          <img src="/static/images/integrations/go.svg" width="48px" height="48px" alt="go logo" />
         </nve-logo>
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Go</h2>
@@ -192,6 +192,19 @@ export function render(data) {
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Hugo</h2>
           <p nve-text="body sm muted">Starter leveraging Hugo.</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nuxt">
+    <nve-card>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg">
+          <img src="/static/images/integrations/nuxt.svg" width="38px" height="38px" alt="nuxt logo" />
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">Nuxt</h2>
+          <p nve-text="body sm muted">Starter leveraging Nuxt.</p>
         </div>
       </div>
     </nve-card>

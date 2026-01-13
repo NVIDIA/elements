@@ -33,13 +33,13 @@ describe('startersData', () => {
     expect(startersData.nextjs.cli).toBe(true);
     expect(startersData.solidjs.cli).toBe(true);
     expect(startersData.go.cli).toBe(true);
+    expect(startersData.hugo.cli).toBe(true);
     expect(startersData.eleventy.cli).toBe(true);
-
+    expect(startersData.bundles.cli).toBe(true);
     expect(startersData.importmaps.cli).toBe(false);
     expect(startersData.lit.cli).toBe(false);
-    expect(startersData.preact.cli).toBe(false);
-    expect(startersData.bundles.cli).toBe(false);
     expect(startersData.extensions.cli).toBe(false);
+    expect(startersData.preact.cli).toBe(false);
   });
 
   it('should have correct zip URLs for starters with downloads', () => {
@@ -54,6 +54,7 @@ describe('startersData', () => {
     expect(startersData.importmaps.zip).toContain('importmaps.zip');
     expect(startersData.bundles.zip).toContain('bundles.zip');
     expect(startersData.extensions.zip).toContain('scoped-registry.zip');
+    expect(startersData.hugo.zip).toContain('hugo.zip');
   });
 
   it('should have null zip for starters without downloads', () => {
