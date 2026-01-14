@@ -125,6 +125,16 @@
       }
     },
     "color": {
+      "scheme": {
+        "base": {
+          "value": "{ref.color.white}",
+          "type": "color"
+        },
+        "inverse": {
+          "value": "{ref.color.black}",
+          "type": "color"
+        }
+      },
       "white": {
         "value": "oklch(100% 0 0)",
         "type": "color"
@@ -1602,7 +1612,7 @@
           "type": "color"
         },
         "inverse": {
-          "value": "{ref.color.black}",
+          "value": "{ref.color.scheme.inverse}",
           "type": "color"
         }
       }
@@ -1793,7 +1803,7 @@
       },
       "tertiary": {
         "background": {
-          "value": "{ref.color.black}",
+          "value": "{ref.color.scheme.inverse}",
           "type": "color"
         }
       }
@@ -1811,7 +1821,7 @@
       },
       "mute": {
         "color": {
-          "value": "{ref.color.white}",
+          "value": "{ref.color.scheme.base}",
           "type": "color"
         },
         "ratio": {
@@ -1977,7 +1987,7 @@
       },
       "shell": {
         "background": {
-          "value": "{ref.color.white}",
+          "value": "{ref.color.scheme.base}",
           "type": "color"
         },
         "color": {
