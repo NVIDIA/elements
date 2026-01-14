@@ -37,6 +37,7 @@ function App() {
             <NveDivider></NveDivider>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/docs/integrations/go/" target="_blank">Go</a></NveMenuItem>
             <NveMenuItem><a href="https://NVIDIA.github.io/elements/docs/integrations/nextjs/" target="_blank">NextJS</a></NveMenuItem>
+            <NveMenuItem><a href="https://NVIDIA.github.io/elements/docs/integrations/nuxt/">Nuxt</a></NveMenuItem>
           </NveMenu>
         </NvePagePanelContent>
       </NvePagePanel>

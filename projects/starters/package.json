@@ -27,6 +27,7 @@
         "./lit-library/dist/**/*.js",
         "./mpa/dist/**/*.js",
         "./nextjs/dist/**/*.js",
+        "./nuxt/dist/**/*.js",
         "./react/dist/**/*.js",
         "./react-18/dist/**/*.js",
         "./scoped-registry/dist/**/*.js",
@@ -78,6 +79,10 @@
         },
         {
           "script": "./nextjs:build",
+          "cascade": false
+        },
+        {
+          "script": "./nuxt:build",
           "cascade": false
         },
         {
