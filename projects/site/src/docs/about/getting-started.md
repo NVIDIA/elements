@@ -98,4 +98,7 @@ import '@nvidia-elements/core/button/define.js';
   <nve-button>
     <a href="./docs/integrations/svelte/"><svg width="20" height="20"><use href="#svelte-svg"></use></svg> Svelte</a>
   </nve-button>
+  <nve-button>
+    <a href="./docs/integrations/nuxt/"><svg width="20" height="20"><use href="#nuxt-svg"></use></svg> Nuxt</a>
+  </nve-button>
 </section>

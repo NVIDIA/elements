@@ -107,6 +107,14 @@ const integrations = {
     documentation: 'https://nextjs.org',
     playgroundURL: null
   },
+  nuxt: {
+    logo: 'nuxt',
+    starterDemo: null,
+    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/nuxt.zip',
+    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nuxt',
+    documentation: 'https://nuxt.com/',
+    playgroundURL: null
+  },
   preact: {
     logo: 'preact',
     starterDemo: null,
