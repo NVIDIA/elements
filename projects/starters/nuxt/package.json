@@ -1,0 +1,75 @@
+{
+  "name": "nuxt-starter",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "wireit",
+    "ci": "wireit",
+    "lint": "wireit",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
+    "nuxt": "4.2.2",
+    "vue": "3.5.26",
+    "vue-router": "4.6.4"
+  },
+  "devDependencies": {
+    "@nvidia-elements/lint": "workspace:*",
+    "eslint": "catalog:"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build",
+        "lint"
+      ]
+    },
+    "build": {
+      "command": "nuxt build",
+      "files": [
+        "../../elements/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
+        "src/**",
+        "package.json",
+        "tsconfig.json",
+        "nuxt.config.ts"
+      ],
+      "output": [
+        ".output/public/**",
+        ".output/server/**"
+      ],
+      "dependencies": [
+        {
+          "script": "../../elements:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../labs/lint:build"
+      ]
+    }
+  }
+}
