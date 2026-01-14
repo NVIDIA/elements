@@ -81,6 +81,7 @@
         "./projects/starters/lit-library:ci",
         "./projects/starters/mpa:ci",
         "./projects/starters/nextjs:ci",
+        "./projects/starters/nuxt:ci",
         "./projects/starters/react:ci",
         "./projects/starters/react-18:ci",
         "./projects/starters/scoped-registry:ci",
