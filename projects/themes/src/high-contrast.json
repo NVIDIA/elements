@@ -114,7 +114,7 @@
       },
       "tertiary": {
         "background": {
-          "value": "{ref.color.black}",
+          "value": "{ref.color.scheme.inverse}",
           "type": "color"
         }
       }
