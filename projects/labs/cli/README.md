@@ -87,7 +87,7 @@ nve
 | `nve examples.search [query] [format]` | Search for example templates/patterns by name or description.` |
 | `nve playground.validate [template]` | Get validated HTML string for an example template/playground. |
 | `nve playground.create [template] [type] [name] [author] [start]` | Creates a playground url/link generated from a html template string. |
-| `nve project.create [type] [cwd] [start]` | Create a new starter project. |
+| `nve project.create [type] [cwd] [start]` | Create a new starter project. (`angular`, `bundles`, `eleventy`, `extensions`, `go`, `importmaps`, `lit-library`, `lit`, `nextjs`, `nuxt`, `preact`, `react`, `solidjs`, `svelte`, `typescript`, `vue`) |
 | `nve project.update [cwd]` | Update a project to the latest versions of Elements packages. |
 | `nve project.health [type] [cwd]` | Check the health of a project using Elements packages. |
 | `nve tokens.list [format] [format]` | Get available semantic CSS variables / design tokens for theming. |
