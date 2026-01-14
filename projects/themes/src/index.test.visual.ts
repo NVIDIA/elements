@@ -68,7 +68,7 @@ describe('theme visual', () => {
   test('border-color should match visual baseline', async () => {
     const report = await visualRunner.render(
       'theme.border-color',
-      borderColor.map(token => `<div style="border: 1px solid var(${token}); height: 24px;"></div>`).join('\n')
+      borderColor.map(token => `<div style="border: 4px solid var(${token}); height: 24px;"></div>`).join('\n')
     );
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
@@ -144,7 +144,7 @@ describe('dark theme visual', () => {
   test('border-color should match visual baseline', async () => {
     const report = await visualRunner.render(
       'dark.border-color',
-      borderColor.map(token => `<div style="border: 1px solid var(${token}); height: 24px;"></div>`).join('\n') +
+      borderColor.map(token => `<div style="border: 4px solid var(${token}); height: 24px;"></div>`).join('\n') +
         darkThemeScript
     );
     expect(report.maxDiffPercentage).toBeLessThan(1);
