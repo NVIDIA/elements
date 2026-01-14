@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.6.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.6.2...@nvidia-elements/lint-v0.6.3) (2026-01-14)
+
+
+### Bug Fixes
+
+* **labs-lint:** missing peerdep ([c1e781c](https://github.com/NVIDIA/elements/commit/c1e781ccea412a74a18fe6052e40ea69e2f46fab))
+
 ## [@nvidia-elements/lint-v0.6.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.6.1...@nvidia-elements/lint-v0.6.2) (2025-12-18)
 
 
