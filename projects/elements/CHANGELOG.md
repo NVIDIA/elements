@@ -1,3 +1,16 @@
+## [@nvidia-elements/core-v1.55.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.54.4...@nvidia-elements/core-v1.55.0) (2026-01-14)
+
+
+### Features
+
+* **elements:** add animation to nve-button-group single select indicator ([a2e03bd](https://github.com/NVIDIA/elements/commit/a2e03bd71dfc4eb46491e35bbd7603f682b89e97))
+* **elements:** add new css props across multiple components ([a68209e](https://github.com/NVIDIA/elements/commit/a68209ebcd4c3095f6c856fd391534e0ba631642))
+
+
+### Bug Fixes
+
+* **elements:** prevent cross-button drag from clearing nve-button-group selection ([affe1e9](https://github.com/NVIDIA/elements/commit/affe1e9a27b2ebdc0ea045f7771114d22e843935))
+
 ## [@nvidia-elements/core-v1.54.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.54.3...@nvidia-elements/core-v1.54.4) (2026-01-13)
 
 
