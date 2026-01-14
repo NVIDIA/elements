@@ -22,6 +22,7 @@ export type Starter =
   | 'lit-library'
   | 'lit'
   | 'nextjs'
+  | 'nuxt'
   | 'preact'
   | 'react'
   | 'solidjs'
@@ -64,6 +65,10 @@ export const startersData = {
   },
   nextjs: {
     zip: 'https://NVIDIA.github.io/elements/starters/download/nextjs.zip',
+    cli: true
+  },
+  nuxt: {
+    zip: 'https://NVIDIA.github.io/elements/starters/download/nuxt.zip',
     cli: true
   },
   preact: {
