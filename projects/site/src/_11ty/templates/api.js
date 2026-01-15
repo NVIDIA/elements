@@ -176,7 +176,7 @@ export function badgeStatus(status, container = '', content = '') {
   };
 
   return /* html */ `
-  <nve-badge container="${container}" status="${statuses[status]}">
+  <nve-badge ${container ? `container="${container}"` : ''} status="${statuses[status]}">
     <a href="docs/changelog/">${status ? status : 'unknown'}: &nbsp;${content}</a>
   </nve-badge>
   `;
@@ -210,7 +210,7 @@ export function badgeCoverage(value, container = '', content = '') {
   }
 
   return /* html */ `
-    <nve-badge container="${container}" status="${status}">
+    <nve-badge ${container ? `container="${container}"` : ''} status="${status}">
       <a href="docs/metrics/">${content}${formattedValue}</a>
     </nve-badge>
   `;
@@ -236,7 +236,7 @@ export function badgeBundle(value, container = '', content = '') {
   }
 
   return /* html */ `
-    <nve-badge container="${container}" status="${status}">
+    <nve-badge ${container ? `container="${container}"` : ''} status="${status}">
       <a href="docs/metrics/">${content}${value}${value ? 'kb' : ''}</a>
     </nve-badge>
   `;
@@ -267,7 +267,7 @@ export function badgeLighthouse(value, container = '', content = '') {
   }
 
   return /* html */ `
-  <nve-badge status="${status}" container="${container}">
+  <nve-badge status="${status}" ${container ? `container="${container}"` : ''}>
     <a href="https://developer.chrome.com/docs/lighthouse/overview/" target="_blank">${content}${average}</a>
   </nve-badge>
   `;
@@ -281,9 +281,9 @@ export function badgeLighthouse(value, container = '', content = '') {
  */
 export function badgeAxe(value, container = '') {
   return /* html */ `
-  ${value === undefined || value === '' ? /* html */ `<nve-badge container="${container}" status="success"><a href="https://github.com/dequelabs/axe-core" target="_blank">Axe Core</a></nve-badge>` : ''}
-  ${value === false ? /* html */ `<nve-badge container="${container}" status="pending">Pending</nve-badge>` : ''}
-  ${value ? /* html */ `<nve-badge container="${container}" status="warning"><a href="https://dequeuniversity.com/rules/axe/4.8/${value}?application=axeAPI" target="_blank">${value}</a></nve-badge>` : ''}
+  ${value === undefined || value === '' ? /* html */ `<nve-badge ${container ? `container="${container}"` : ''} status="success"><a href="https://github.com/dequelabs/axe-core" target="_blank">Axe Core</a></nve-badge>` : ''}
+  ${value === false ? /* html */ `<nve-badge ${container ? `container="${container}"` : ''} status="pending">Pending</nve-badge>` : ''}
+  ${value ? /* html */ `<nve-badge ${container ? `container="${container}"` : ''} status="warning"><a href="https://dequeuniversity.com/rules/axe/4.8/${value}?application=axeAPI" target="_blank">${value}</a></nve-badge>` : ''}
   `;
 }
 

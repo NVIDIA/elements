@@ -95,6 +95,11 @@ export const renderBaseHead = data => /* html */ `
     gtag('config', 'G-723T2ZTKVT');
     gtag('set', 'content_group', 'elements');
   </script>
+  <script type="module">
+    if (globalThis.document.documentElement.getAttribute('nve-theme')?.includes('brand')) {
+      void import('@nvidia-elements/brand/icons/define.js');
+    }
+  </script>
 `;
 
 export const renderDocsNav = data => /* html */ `

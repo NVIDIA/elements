@@ -120,5 +120,9 @@ export class SystemSettings extends LitElement {
       iframe.contentWindow?.document.documentElement.setAttribute('nve-theme', themes);
       iframe.contentWindow?.document.documentElement.setAttribute('nve-layer', globals.layer);
     });
+
+    if (globals.theme === 'brand') {
+      void import('@nvidia-elements/brand/icons/define.js');
+    }
   }
 }
