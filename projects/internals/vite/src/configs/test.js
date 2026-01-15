@@ -19,6 +19,7 @@ Object.defineProperty(browser, 'name', {
 /** @type {import('vite').UserConfig} */
 export const libraryTestConfig = {
   testTimeout: 60_000,
+  cacheDir: 'node_modules/.vite-unit',
   build: {
     target: 'esnext'
   },
