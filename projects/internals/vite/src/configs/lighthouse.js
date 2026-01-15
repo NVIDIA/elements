@@ -3,6 +3,7 @@ import process from 'process';
 /** @type {import('vite').UserConfig} */
 export const libraryLighthouseTestConfig = {
   logLevel: 'info',
+  cacheDir: 'node_modules/.vite-lighthouse',
   test: {
     retry: 1,
     bail: process.env.CI ? 1 : 0,
