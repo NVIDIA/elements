@@ -3,6 +3,7 @@ import process from 'process';
 /** @type {import('vite').UserConfig} */
 export const libraryVisualTestConfig = {
   logLevel: 'info',
+  cacheDir: 'node_modules/.vite-visual',
   server: {
     fs: {
       strict: false,
