@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.11...@nvidia-elements/cli-v0.2.0) (2026-01-15)
+
+
+### Features
+
+* **labs-cli:** add nuxt starter support ([65e1ea6](https://github.com/NVIDIA/elements/commit/65e1ea6766cdb38df10f38ca0db9c2186fa23e7d))
+
 ## [@nvidia-elements/cli-v0.1.11](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.1.10...@nvidia-elements/cli-v0.1.11) (2026-01-12)
 
 
