@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.12.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.11.0...@nvidia-elements/themes-v1.12.0) (2026-01-15)
+
+
+### Features
+
+* **themes:** add color scheme support and references ([15e8dc8](https://github.com/NVIDIA/elements/commit/15e8dc8ebe0da3678402864c076f55d3dd5f5f47))
+
 ## [@nvidia-elements/themes-v1.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.10.0...@nvidia-elements/themes-v1.11.0) (2026-01-07)
 
 
