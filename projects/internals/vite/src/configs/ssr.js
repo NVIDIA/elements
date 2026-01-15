@@ -2,6 +2,7 @@ import process from 'process';
 
 /** @type {import('vite').UserConfig} */
 export const libraryLitSSRTestConfig = {
+  cacheDir: 'node_modules/.vite-ssr',
   server: {
     fs: {
       strict: false,
