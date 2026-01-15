@@ -87,7 +87,7 @@ export async function render(data) {
 
           <!-- Main content area -->
           <main id="docs-main">
-            <div id="doc-content" nve-layout="column gap:lg align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
+            <div id="doc-content" nve-layout="column gap:xl align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
               <!-- Component description, default example, and support links (Overview tab only) -->
               ${
                 data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples'))
