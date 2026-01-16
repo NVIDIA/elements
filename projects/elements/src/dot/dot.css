@@ -8,6 +8,7 @@
   --height: var(--nve-ref-size-300);
   --width: var(--nve-ref-size-300);
   --padding: 0;
+  --border: 0;
   width: auto;
   display: inline-flex;
 }
@@ -22,6 +23,7 @@
   height: var(--height);
   width: var(--width);
   padding: var(--padding);
+  border: var(--border);
   display: flex;
   align-items: center;
   line-height: 1em;
