@@ -29,6 +29,8 @@ import styles from './pagination.css?inline';
  * @slot - default slot for content
  * @slot suffix-label - slot for overriding the "n of total" label when total is an approximation
  * @cssprop --background
+ * @cssprop --font-size
+ * @cssprop --width
  * @storybook https://NVIDIA.github.io/elements/docs/elements/pagination/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=3689-87177&t=znx8f5Hs8oD2ySWm-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/

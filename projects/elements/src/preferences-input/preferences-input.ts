@@ -49,6 +49,7 @@ export interface PreferencesInputValue {
  * @event input emits when the value has changed
  * @event change emits when the value has changed
  * @cssprop --color
+ * @cssprop --width
  * @csspart control - The control wrapper elements that contain the labels and menus
  * @csspart menu - The menu elements that display color scheme and scale options
  * @csspart menu-item - The individual menu item elements for each selectable option
