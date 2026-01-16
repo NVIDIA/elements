@@ -13,6 +13,14 @@ import styles from './copy-button.css?inline';
  * @entrypoint \@nvidia-elements/core/copy-button
  * @slot - default
  * @slot icon - slot for custom icon
+ * @cssprop --color
+ * @cssprop --background
+ * @cssprop --border-radius
+ * @cssprop --padding
+ * @cssprop --height
+ * @cssprop --min-width
+ * @cssprop --font-size
+ * @cssprop --line-height
  * @storybook https://NVIDIA.github.io/elements/docs/elements/copy-button/
  * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=8776-101652&t=1wXXkUNtvP4Bz5RY-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/

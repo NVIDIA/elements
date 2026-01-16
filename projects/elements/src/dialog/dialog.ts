@@ -35,6 +35,8 @@ import styles from './dialog.css?inline';
  * @cssprop --gap
  * @cssprop --max-width
  * @cssprop --min-height
+ * @cssprop --max-height
+ * @cssprop --animation-duration - Duration of dialog open/close animations
  * @csspart close-button - The inner template reference for the close button of the dialog.
  * @storybook https://NVIDIA.github.io/elements/docs/elements/dialog/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-39&t=CAAM7yEBvG18tRRa-0
