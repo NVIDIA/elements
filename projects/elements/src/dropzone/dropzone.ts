@@ -18,6 +18,7 @@ import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './d
  * @cssprop --border-radius
  * @cssprop --padding
  * @cssprop --min-height
+ * @cssprop --color
  * @slot icon - default slot for icon
  * @slot content - default slot for content
  * @storybook https://NVIDIA.github.io/elements/docs/elements/dropzone/

@@ -33,6 +33,8 @@ import styles from './dropdown.css?inline';
  * @cssprop --width
  * @cssprop --min-width
  * @cssprop --gap
+ * @cssprop --arrow-transform - Transform applied to the popover arrow
+ * @cssprop --animation-duration - Duration of dropdown open/close animations
  * @storybook https://NVIDIA.github.io/elements/docs/elements/dropdown/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-11&t=CAAM7yEBvG18tRRa-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/

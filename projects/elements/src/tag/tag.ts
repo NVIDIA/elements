@@ -30,6 +30,7 @@ import styles from './tag.css?inline';
  * @cssprop --height
  * @cssprop --width
  * @cssprop --max-width
+ * @cssprop --text-decoration
  * @storybook https://NVIDIA.github.io/elements/docs/elements/tag/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-10&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/

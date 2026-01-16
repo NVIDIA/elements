@@ -39,6 +39,9 @@ import styles from './select.css?inline';
  * @cssprop --control-width
  * @cssprop --max-width
  * @cssprop --min-width
+ * @cssprop --box-shadow
+ * @cssprop --max-height
+ * @cssprop --text-transform
  * @csspart tag
  * @storybook https://NVIDIA.github.io/elements/docs/elements/select/
  * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-24&t=clRGqnKDRGNhR0Yu-0
