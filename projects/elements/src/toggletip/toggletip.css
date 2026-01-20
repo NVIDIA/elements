@@ -17,7 +17,6 @@
   --min-width: fit-content;
   --gap: var(--nve-ref-space-sm);
   --_divider-padding: var(--padding);
-  box-shadow: var(--box-shadow);
 }
 
 [internal-host] {
@@ -32,6 +31,7 @@
   outline: 0;
   font-size: var(--font-size);
   font-weight: var(--font-weight);
+  box-shadow: var(--box-shadow);
 }
 
 [internal-host]::backdrop {

@@ -10,8 +10,7 @@ import {
   statusIcons,
   useStyles,
   I18nController,
-  TypeNativePopoverController,
-  TypeNativeAnchorController
+  TypeNativePopoverController
 } from '@nvidia-elements/core/internal';
 import styles from './notification.css?inline';
 
@@ -116,8 +115,6 @@ export class Notification extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  protected typeNativeAnchorController: TypeNativeAnchorController<Notification>;
-
   protected typeNativePopoverController: TypeNativePopoverController<Notification>;
 
   get #popoverContent() {
@@ -157,7 +154,6 @@ export class Notification extends LitElement {
     super.firstUpdated(props);
 
     if (!this.popoverInline) {
-      this.typeNativeAnchorController = new TypeNativeAnchorController<Notification>(this);
       this.typeNativePopoverController = new TypeNativePopoverController<Notification>(this);
     } else {
       this.setAttribute('nve-popover', '');

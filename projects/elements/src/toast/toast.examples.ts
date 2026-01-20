@@ -189,18 +189,18 @@ export const ShadowRoot = {
  */
 export const BodyAnchor = {
   render: () => html`
-<nve-toast style="--background: red" position="center" alignment="center">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: blue" position="top" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: yellow" position="top">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: green" position="top" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: purple" position="bottom" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: orange" position="bottom">•︎︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: pink" position="bottom" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: brown; margin-left: 150px" position="left" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: gray;" position="left">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: black; margin-left: 150px" position="left" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: red; margin-right: 150px" position="right" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: blue" position="right">•︎•︎•︎•︎•︎•︎</nve-toast>
-<nve-toast style="--background: yellow; margin-right: 150px" position="right" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: red" anchor="body" position="center" alignment="center">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: blue" anchor="body" position="top" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: yellow" anchor="body" position="top">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: green" anchor="body" position="top" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: purple" anchor="body" position="bottom" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: orange" anchor="body" position="bottom">•︎︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: pink" anchor="body" position="bottom" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: brown; margin-right: -250px" anchor="body" position="left" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: gray;" anchor="body" position="left">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: black; margin-right: -250px" anchor="body" position="left" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: red; margin-left: -250px" anchor="body" position="right" alignment="start">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: blue" anchor="body" position="right">•︎•︎•︎•︎•︎•︎</nve-toast>
+<nve-toast style="--background: yellow; margin-left: -250px" anchor="body" position="right" alignment="end">•︎•︎•︎•︎•︎•︎</nve-toast>
   `
 };

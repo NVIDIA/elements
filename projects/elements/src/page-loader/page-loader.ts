@@ -1,4 +1,5 @@
 import { LitElement, html } from 'lit';
+import { state } from 'lit/decorators/state.js';
 import type { PopoverPosition, PopoverType } from '@nvidia-elements/core/internal';
 import { popoverStyles, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
 import { ProgressRing } from '@nvidia-elements/core/progress-ring';
@@ -24,6 +25,11 @@ export class PageLoader extends LitElement {
   /** @private */
   protected typeNativePopoverController = new TypeNativePopoverController<PageLoader>(this);
 
+  /**
+   * @private
+   */
+  @state() anchor = globalThis.document?.body;
+
   static styles = useStyles([popoverStyles, styles]);
 
   static readonly metadata = {
@@ -45,10 +51,5 @@ export class PageLoader extends LitElement {
         <slot></slot>
       </div>
     `;
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-    this._internals.states.add('anchor-body');
   }
 }

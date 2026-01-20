@@ -1,12 +1,14 @@
 import type { ReactiveElement, ReactiveController } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
-import { getFlattenedDOMTree, sameRenderRoot } from '../utils/dom.js';
+import { getFlattenedDOMTree } from '../utils/dom.js';
+import { getHostAnchor } from './type-native-popover.utils.js';
 
 export interface NativePopoverTrigger extends ReactiveElement {
   disabled: boolean;
   popoverTargetAction: 'show' | 'hide' | 'toggle';
   popoverTargetElement: HTMLElement;
   popovertarget: string;
+  anchor?: HTMLElement;
 }
 
 export function typeNativePopoverTrigger<T extends NativePopoverTrigger>(): ClassDecorator {
@@ -20,6 +22,7 @@ export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> 
   }
 
   hostConnected() {
+    this.#updatePopoverTargetElement();
     this.host.addEventListener('click', this.#click);
   }
 
@@ -27,19 +30,33 @@ export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> 
     this.host.removeEventListener('click', this.#click);
   }
 
-  #click = () => {
-    const id = this.host.popovertarget?.length ? this.host.popovertarget : this.host.popoverTargetElement?.id;
-    if (id && !this.host.disabled) {
-      const popover = getFlattenedDOMTree(this.host.getRootNode()).find(
-        e => e.id === id && sameRenderRoot(this.host, e)
-      );
+  hostUpdated() {
+    this.#updatePopoverTargetElement();
+  }
 
-      if (this.host.popoverTargetAction === 'hide') {
-        popover?.hidePopover();
-      } else if (this.host.popoverTargetAction === 'show') {
-        popover?.showPopover({ source: this.host });
+  #updatePopoverTargetElement() {
+    if (this.host.popovertarget) {
+      const popover = getFlattenedDOMTree(this.host.getRootNode()).find(e => e.id === this.host.popovertarget);
+      this.host.popoverTargetElement = popover;
+    }
+  }
+
+  #click = () => {
+    const { popoverTargetElement, popoverTargetAction, disabled } = this.host;
+    let source = this.host as HTMLElement;
+
+    // if popover has explicit anchor, use it as the source
+    if ((popoverTargetElement as NativePopoverTrigger)?.anchor) {
+      source = getHostAnchor(popoverTargetElement as NativePopoverTrigger);
+    }
+
+    if (popoverTargetElement && !disabled) {
+      if (popoverTargetAction === 'hide') {
+        popoverTargetElement.hidePopover();
+      } else if (popoverTargetAction === 'show') {
+        popoverTargetElement.showPopover({ source });
       } else {
-        popover?.togglePopover({ source: this.host });
+        popoverTargetElement.togglePopover({ source });
       }
     }
   };
