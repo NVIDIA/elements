@@ -11,6 +11,7 @@ import { dtsBundle } from '../plugins/dts.bundle.js';
  */
 export const libraryBundleConfig = {
   build: {
+    modulePreload: false,
     reportCompressedSize: false,
     cssMinify: 'esbuild',
     minify: false, // https://github.com/vitejs/vite/issues/8848
@@ -20,9 +21,8 @@ export const libraryBundleConfig = {
     target: 'esnext',
     lib: {
       formats: ['es'],
-      name: 'bundle',
       entry: {
-        bundle: resolve('./src/bundle.ts')
+        index: resolve('./src/bundle.ts')
       }
     },
     rollupOptions: {
@@ -31,7 +31,7 @@ export const libraryBundleConfig = {
         assetFileNames: `index.[ext]`,
         entryFileNames: `index.js`,
         inlineDynamicImports: false,
-        chunkFileNames: info => `${info.name ? info.name : 'index'}.js`,
+        chunkFileNames: '[name].js',
         importAttributesKey: 'with'
       },
       plugins: [

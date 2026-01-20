@@ -406,6 +406,7 @@ export const statusIcons: { [key: string]: IconName } = {
 declare global {
   var NVE_ELEMENTS: {
     state: {
+      bundle: boolean;
       env: 'watch' | 'production' | 'development';
       pageHost: string;
       moduleHost: string;

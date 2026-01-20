@@ -12,6 +12,7 @@ export class GlobalState {
           'color: inherit'
         ),
       state: {
+        bundle: false,
         env: getEnv(),
         ...getHostDetails(),
         versions: [],
