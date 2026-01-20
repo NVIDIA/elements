@@ -41,7 +41,7 @@ export async function render(data) {
       import examples from '${data.example.entrypoint}' with { type: 'json' };
       const container = document.querySelector('#example-container');
       const example = examples.items.find(s => s.id === '${data.example.id}');
-      ${process.env.ELEVENTY_RUN_MODE === 'serve' ? 'container.innerHTML = example.template;' : ''}
+      ${process.env.ELEVENTY_RUN_MODE === 'serve' ? 'container.setHTMLUnsafe(example.template);' : ''}
     </script>
   </head>
   <body data-pagefind-ignore="all">

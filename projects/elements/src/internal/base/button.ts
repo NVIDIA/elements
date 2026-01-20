@@ -12,6 +12,7 @@ import { typeNativePopoverTrigger } from '../controllers/type-native-popover-tri
 import { stateCurrent } from '../controllers/state-current.controller.js';
 import { typeCommand } from '../controllers/type-command.controller.js';
 import { attachInternals } from '../utils/a11y.js';
+import { typeInterest } from '../controllers/type-interest.controller.js';
 
 /**
  * Standard button behaviors for custom elements.
@@ -23,6 +24,7 @@ import { attachInternals } from '../utils/a11y.js';
 @typeSubmit<BaseButton & { form: HTMLFormElement | null }>() // override to exclude type string from getter, see comment in getter below
 @typeNativePopoverTrigger<BaseButton>()
 @typeCommand<BaseButton>()
+@typeInterest<BaseButton>()
 @stateActive<BaseButton>()
 @stateCurrent<BaseButton>()
 @statePressed<BaseButton>()
@@ -151,6 +153,12 @@ export class BaseButton extends LitElement {
    * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
    */
   @property({ type: String, attribute: 'command', reflect: true }) command: string;
+
+  /**
+   * The id of the element to which the interest is applied.
+   * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/interestFor
+   */
+  @property({ type: Object }) interestForElement: HTMLElement; // eslint-disable-line local/primitive-property
 
   /**
    * @private
