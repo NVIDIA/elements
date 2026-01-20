@@ -13,10 +13,6 @@ export default defineConfig(() => {
           manualChunks: id => {
             if (id.includes('src/icon/icons')) {
               return 'icons';
-            } else if (id.includes('polyfill')) {
-              return 'polyfills';
-            } else if (id.includes('floating-ui') || id.includes('type-native-anchor-fallback')) {
-              return 'polyfills-popover';
             }
           }
         }

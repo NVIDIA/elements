@@ -3,7 +3,6 @@ import type { PopoverAlign, PopoverPosition } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 import { supportsNativeCSSAnchorPosition } from '../utils/supports.js';
 import { associateAnchor, getHostAnchor } from './type-native-popover.utils.js';
-import { TypeNativeAnchorFallbackController } from './type-native-anchor-fallback.controller.js';
 import { getCrossShadowRootAnchorWarning } from '../utils/audit-logs.js';
 import { LogService } from '../services/log.service.js';
 import { sameRenderRoot } from '../utils/dom.js';
@@ -25,7 +24,7 @@ let crossRootWarning = false;
  */
 export class TypeNativeAnchorController<T extends NativeAnchor> implements ReactiveController {
   // eslint-disable-next-line no-restricted-syntax
-  private typeNativeAnchorFallbackController: TypeNativeAnchorFallbackController<T>;
+  private typeNativeAnchorFallbackController: ReactiveController;
 
   constructor(private host: T) {
     this.host.addController(this);
@@ -50,12 +49,16 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
   }
 
   get #useNativePositioning() {
-    const hostAnchor = getHostAnchor(this.host);
-    return (
-      supportsNativeCSSAnchorPosition() &&
-      (hostAnchor === globalThis.document.body || sameRenderRoot(this.host, hostAnchor)) &&
-      this.host.getAttribute('position-strategy') !== 'absolute'
-    );
+    if (globalThis.NVE_ELEMENTS.state.bundle) {
+      return true;
+    } else {
+      const hostAnchor = getHostAnchor(this.host);
+      return (
+        supportsNativeCSSAnchorPosition() &&
+        (hostAnchor === globalThis.document.body || sameRenderRoot(this.host, hostAnchor)) &&
+        this.host.getAttribute('position-strategy') !== 'absolute'
+      );
+    }
   }
 
   async #render() {
@@ -82,10 +85,12 @@ export class TypeNativeAnchorController<T extends NativeAnchor> implements React
     }
   }
 
-  #renderFallbackPositioning() {
+  async #renderFallbackPositioning() {
     this.host._internals.states.add('anchor-positioning-fallback');
 
-    if (!this.typeNativeAnchorFallbackController) {
+    /* @ts-ignore-next-line */
+    if (!import.meta.env.VITE_BUNDLE_CONFIG && !this.typeNativeAnchorFallbackController) {
+      const { TypeNativeAnchorFallbackController } = await import('./type-native-anchor-fallback.controller.js');
       this.typeNativeAnchorFallbackController = new TypeNativeAnchorFallbackController(this.host);
       this.host.addController(this.typeNativeAnchorFallbackController);
     }
