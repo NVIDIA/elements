@@ -7,7 +7,15 @@ const markdown = markdownIt({
   linkify: true,
   highlight: function (str, lang) {
     lang = lang === 'javascript' ? 'typescript' : lang; // alias javascript to typescript
-    return /* html */ `<nve-codeblock language="${lang}"><template>${markdown.utils.escapeHtml(str)}</template></nve-codeblock>`;
+    return /* html */ `<nve-codeblock language="${lang}"><template>${markdown.utils.escapeHtml(str)}</template></nve-codeblock>
+    <nve-copy-button class="markdown-copy-button" aria-label="copy" behavior-copy container="flat"></nve-copy-button>
+
+    <script type="module">
+      document.querySelectorAll('.markdown-copy-button').forEach(button => {
+        const codeblock = button.previousElementSibling;
+        button.value = codeblock.querySelector('template').content.textContent.trim();
+      });
+    </script>`;
   }
 });
 
