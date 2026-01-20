@@ -115,3 +115,5 @@ export * from '@nvidia-elements/core/toolbar';
 export * from '@nvidia-elements/core/tooltip';
 export * from '@nvidia-elements/core/tree';
 export * from '@nvidia-elements/core/week';
+
+globalThis.NVE_ELEMENTS.state.bundle = true;

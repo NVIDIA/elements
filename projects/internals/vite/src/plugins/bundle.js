@@ -14,7 +14,9 @@ export function bundle() {
           const configPath = hasBundleConfig
             ? resolve(process.cwd(), './vite.bundle.ts')
             : new URL('../configs/build.bundle.js', import.meta.url).toString().replace('file://', '');
-          execSync(`NODE_ENV=production vite build --config ${configPath}`, { stdio: 'inherit' });
+          execSync(`NODE_ENV=production VITE_BUNDLE_CONFIG=true vite build --config ${configPath}`, {
+            stdio: 'inherit'
+          });
         }
       }
     }
