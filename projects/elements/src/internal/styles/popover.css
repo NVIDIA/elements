@@ -9,30 +9,37 @@
   contain: initial;
   width: max-content;
   z-index: 99;
-  pointer-events: none;
-  opacity: 0;
   inset: revert;
+  interest-delay-start: 0.5s;
 }
 
-/* ensure popover is not visible until floating-ui has positioned it */
-:host([position-strategy='absolute']:not([style*='inset:'])) {
+:host([popover]) {
   opacity: 0;
+  pointer-events: none;
 }
 
 /* apply transitions during beforetoggle event to prevent flash of unstyled popover on page load */
 :host(:state(transition-start)) {
-  transition:
-    opacity var(--animation-duration),
-    transform var(--animation-duration) allow-discrete,
-    translate var(--animation-duration) allow-discrete,
-    display var(--animation-duration) allow-discrete;
+  transition-duration: var(--animation-duration);
+  transition-timing-function: ease-in-out;
+  transition-property: opacity, display, overlay, translate, transform;
+  transition-behavior: allow-discrete;
 }
 
-:host(:popover-open),
-:host(:not([popover]):not([hidden])),
-:host(:state(no-trigger):not([hidden])) {
+/** workaround for Safari / Firefox which do not respect transitions on implicit anchor positioning */
+@supports not (container-type: anchored) {
+  :host {
+    --animation-duration: 0;
+  }
+}
+
+:host(:popover-open) {
   opacity: 1;
   pointer-events: initial;
+
+  @starting-style {
+    opacity: 0;
+  }
 }
 
 /* lit SSR ensure popovers are not visible until hydration has happened */
@@ -40,19 +47,6 @@
 :host([defer-hydration]) {
   opacity: 0 !important;
   pointer-events: none !important;
-}
-
-:host(:popover-open),
-:host(:state(no-trigger):not([hidden])) {
-  display: block;
-}
-
-:host::backdrop {
-  opacity: 0;
-}
-
-:host(:popover-open)::backdrop {
-  opacity: 1;
 }
 
 [internal-host] {
@@ -144,81 +138,14 @@
     position-area: center;
   }
 
-  :host([position='center'][alignment='center']:state(anchor-body)) {
-    position-area: unset;
-    margin: auto;
-  }
-
-  :host([position='top']:state(anchor-body)),
-  :host([position='right'][alignment='start']:state(anchor-body)),
-  :host([position='left'][alignment='start']:state(anchor-body)) {
-    margin-top: var(--nve-sys-layer-popover-offset);
-  }
-
-  :host([position='right']:state(anchor-body)),
-  :host([position='bottom'][alignment='end']:state(anchor-body)),
-  :host([position='top'][alignment='end']:state(anchor-body)) {
-    margin-right: var(--nve-sys-layer-popover-offset);
-  }
-
-  :host([position='bottom']:state(anchor-body)),
-  :host([position='right'][alignment='end']:state(anchor-body)),
-  :host([position='left'][alignment='end']:state(anchor-body)) {
-    margin-bottom: var(--nve-sys-layer-popover-offset);
-  }
-
-  :host([position='left']:state(anchor-body)),
-  :host([position='top'][alignment='start']:state(anchor-body)),
-  :host([position='bottom'][alignment='start']:state(anchor-body)) {
-    margin-left: var(--nve-sys-layer-popover-offset);
-  }
-
-  :host([position='top']:state(anchor-body)) {
-    position-area: bottom center;
-  }
-
-  :host([position='top'][alignment='end']:state(anchor-body)) {
-    position-area: bottom left;
-  }
-
-  :host([position='top'][alignment='start']:state(anchor-body)) {
-    position-area: bottom right;
-  }
-
-  :host([position='bottom']:state(anchor-body)) {
-    position-area: top center;
-  }
-
-  :host([position='bottom'][alignment='end']:state(anchor-body)) {
-    position-area: top left;
-  }
-
-  :host([position='bottom'][alignment='start']:state(anchor-body)) {
-    position-area: top right;
-  }
-
-  :host([position='left']:state(anchor-body)) {
-    position-area: right center;
-  }
-
-  :host([position='left'][alignment='end']:state(anchor-body)) {
-    position-area: top right;
-  }
-
-  :host([position='left'][alignment='start']:state(anchor-body)) {
-    position-area: bottom right;
-  }
-
-  :host([position='right']:state(anchor-body)) {
-    position-area: left center;
-  }
-
-  :host([position='right'][alignment='end']:state(anchor-body)) {
-    position-area: top left;
-  }
-
-  :host([position='right'][alignment='start']:state(anchor-body)) {
-    position-area: bottom left;
+  :host {
+    inset: auto !important;
+    place-self: normal !important;
+    /*
+     * This line is critical for shadow root positioning and auto anchor association
+     * https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Anchor_positioning/Using#implicit_anchor_association
+     */
+    position-anchor: auto !important;
   }
 
   /** top */
@@ -360,21 +287,10 @@
   }
 }
 
-:host([popover][modal]:not(:state(anchor-positioning-fallback)))::before {
+:host([popover][modal])::before {
   content: ' ';
   display: block;
   inset: 0;
   z-index: 99;
   position: fixed;
-}
-
-:host(:state(anchor-positioning-fallback)) {
-  margin: 0;
-  position-area: unset !important;
-  position-anchor: unset !important;
-  position-try: unset !important;
-}
-
-:host(:state(anchor-positioning-fallback):not([popover])) {
-  display: contents;
 }

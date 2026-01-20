@@ -5,7 +5,6 @@ import {
   createGhostElement,
   I18nController,
   popoverStyles,
-  TypeNativeAnchorController,
   TypeNativePopoverController,
   typeSSR,
   useStyles
@@ -100,8 +99,6 @@ export class Drawer extends LitElement {
   get popoverDismissible() {
     return !!this.closable;
   }
-
-  protected typeNativeAnchorController = new TypeNativeAnchorController<Drawer>(this);
 
   protected typeNativePopoverController = new TypeNativePopoverController<Drawer>(this);
 
