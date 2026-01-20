@@ -6,7 +6,6 @@ import {
   excessiveInstanceLimit,
   I18nController,
   popoverStyles,
-  TypeNativeAnchorController,
   TypeNativePopoverController,
   useStyles,
   attachInternals,
@@ -105,8 +104,6 @@ export class Dialog extends LitElement {
   get popoverDismissible() {
     return !!this.closable;
   }
-
-  protected typeNativeAnchorController = new TypeNativeAnchorController<Dialog>(this);
 
   protected typeNativePopoverController = new TypeNativePopoverController<Dialog>(this);
 

@@ -8,7 +8,6 @@ import {
   excessiveInstanceLimit,
   popoverStyles,
   TypeNativePopoverController,
-  TypeNativeAnchorController,
   useStyles
 } from '@nvidia-elements/core/internal';
 import styles from './tooltip.css?inline';
@@ -82,9 +81,9 @@ export class Tooltip extends LitElement {
   @property({ type: String, reflect: true }) status: 'muted';
 
   /**
-   * A delayed `open` event will occur determined from the provided millisecond value.
+   * @deprecated Use interest-delay-start css property instead
    */
-  @property({ type: Number, attribute: 'open-delay' }) openDelay = 0;
+  @property({ type: Number, attribute: 'open-delay' }) openDelay: number;
 
   @query('.arrow') popoverArrow: HTMLElement;
 
@@ -92,8 +91,6 @@ export class Tooltip extends LitElement {
   readonly popoverType: PopoverType = 'hint';
 
   protected typeNativePopoverController = new TypeNativePopoverController<Tooltip>(this);
-
-  protected typeNativeAnchorController = new TypeNativeAnchorController<Tooltip>(this);
 
   /** @private */
   declare _internals: ElementInternals;

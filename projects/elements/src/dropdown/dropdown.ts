@@ -8,7 +8,6 @@ import {
   excessiveInstanceLimit,
   I18nController,
   popoverStyles,
-  TypeNativeAnchorController,
   TypeNativePopoverController,
   useStyles
 } from '@nvidia-elements/core/internal';
@@ -102,8 +101,6 @@ export class Dropdown extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   protected typeNativePopoverController = new TypeNativePopoverController<Dropdown>(this);
-
-  protected typeNativeAnchorController = new TypeNativeAnchorController<Dropdown>(this);
 
   /** @private */
   get popoverDismissible() {
