@@ -9,7 +9,6 @@ import {
   I18nController,
   popoverStyles,
   statusIcons,
-  TypeNativeAnchorController,
   TypeNativePopoverController,
   useStyles
 } from '@nvidia-elements/core/internal';
@@ -114,8 +113,6 @@ export class Toast extends LitElement {
 
   /** @private */
   readonly popoverType: PopoverType = 'manual';
-
-  protected typeNativeAnchorController = new TypeNativeAnchorController<Toast>(this);
 
   protected typeNativePopoverController = new TypeNativePopoverController<Toast>(this);
 

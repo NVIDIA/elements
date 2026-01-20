@@ -14,7 +14,7 @@ describe(Tooltip.metadata.tag, () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-tooltip id="tooltip">hello</nve-tooltip>
-      <nve-button popovertarget="trigger">button</nve-button>
+      <nve-button interestfor="tooltip">button</nve-button>
     `);
     element = fixture.querySelector('#tooltip');
     trigger = fixture.querySelector(Button.metadata.tag);
@@ -59,9 +59,14 @@ describe(Tooltip.metadata.tag, () => {
     expect(element._internals.role).toBe('tooltip');
   });
 
-  it('should default with an open delay set to 0', async () => {
+  it('should default with an open delay set to undefined', async () => {
     await elementIsStable(element);
-    expect(element.openDelay).toBe(0);
+    expect(element.openDelay).toBeUndefined();
+  });
+
+  it('should default with an interest delay start set 0.5s', async () => {
+    await elementIsStable(element);
+    expect(getComputedStyle(element).getPropertyValue('interest-delay-start')).toBe('0.5s');
   });
 
   it('if open-delay set, display tooltip after waiting for delayed time', async () => {

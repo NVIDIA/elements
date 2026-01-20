@@ -19,6 +19,7 @@
   height: calc(100vh - var(--top));
   margin: initial !important;
   margin-top: var(--top) !important;
+  position-area: unset !important; /* drawer uses its own fixed positioning with translation */
 }
 
 :host([size='sm']) {

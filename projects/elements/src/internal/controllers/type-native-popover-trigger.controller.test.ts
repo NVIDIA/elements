@@ -77,7 +77,7 @@ describe('type-native-popover-trigger.controller', () => {
     element.popoverTargetElement = popover;
     expect(popover.matches(':popover-open')).toBe(false);
 
-    const event = untilEvent(element, 'click');
+    const event = untilEvent(popover, 'toggle');
     emulateClick(element);
     expect(await event).toBeDefined();
 
@@ -85,18 +85,22 @@ describe('type-native-popover-trigger.controller', () => {
     expect(popover.matches(':popover-open')).toBe(true);
   });
 
-  it('should not trigger popover in cross render roots', async () => {
+  it('should trigger popover in cross render roots', async () => {
     const shadowHost = document.createElement('div');
     shadowHost.attachShadow({ mode: 'open' });
     shadowHost.shadowRoot.appendChild(popover);
     document.body.appendChild(shadowHost);
 
-    const event = untilEvent(element, 'click');
+    const event = untilEvent(popover, 'toggle');
     emulateClick(element);
     expect(await event).toBeDefined();
 
     await elementIsStable(element);
-    expect(popover.matches(':popover-open')).toBe(false);
+    expect(popover.matches(':popover-open')).toBe(true);
+
+    // Cleanup: close popover and remove shadowHost to prevent test pollution
+    popover.hidePopover();
+    shadowHost.remove();
   });
 
   it('should pass source element in toggle event when action is toggle', async () => {
@@ -120,10 +124,10 @@ describe('type-native-popover-trigger.controller', () => {
     expect(event.source).toBe(element);
   });
 
-  // source element is not passed back to follow same standard behavior as native button elements
+  // // source element is not passed back to follow same standard behavior as native button elements
   it('should not pass source element in toggle event when action is hide', async () => {
     element.popoverTargetAction = 'hide';
-    popover.showPopover();
+    popover.showPopover({ source: element });
     expect(popover.matches(':popover-open')).toBe(true);
 
     const toggleEvent = untilEvent(popover, 'toggle') as Promise<ToggleEvent>;

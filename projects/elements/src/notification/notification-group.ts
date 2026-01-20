@@ -1,13 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { PopoverAlign, PopoverType } from '@nvidia-elements/core/internal';
-import {
-  audit,
-  popoverStyles,
-  TypeNativeAnchorController,
-  TypeNativePopoverController,
-  useStyles
-} from '@nvidia-elements/core/internal';
+import { audit, popoverStyles, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
 import styles from './notification-group.css?inline';
 
 /**
@@ -26,7 +20,7 @@ export class NotificationGroup extends LitElement {
    * (optional) By default the popover will automatically anchor itself relative to the trigger element.
    * A optional custom anchor element can be provided by passing an idref string within the same render root or a HTMLElement DOM reference.
    */
-  @property({ type: String }) anchor: string | HTMLElement;
+  @property({ type: String }) anchor: string | HTMLElement = globalThis.document?.body;
 
   /**
    * Sets the position of the popover relative to the anchor element.
@@ -37,8 +31,6 @@ export class NotificationGroup extends LitElement {
    * Sets the alignment of the popover relative to the anchor element.
    */
   @property({ type: String, reflect: true }) alignment: PopoverAlign;
-
-  protected typeNativeAnchorController = new TypeNativeAnchorController<NotificationGroup>(this);
 
   protected typeNativePopoverController = new TypeNativePopoverController<NotificationGroup>(this);
 

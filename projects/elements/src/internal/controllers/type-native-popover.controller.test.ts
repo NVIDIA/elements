@@ -364,6 +364,7 @@ describe('type-popover.controller explicit trigger', () => {
   });
 
   it('should hide popover if hidden attribute is added', async () => {
+    await new Promise(r => requestAnimationFrame(r)); // wait for hidden mutation observer setup
     expect(element.hasAttribute('hidden')).toBe(true);
     expect(element.matches(':popover-open')).toBe(false);
 
@@ -546,7 +547,7 @@ describe('type-popover.controller legacy behavior-trigger', () => {
   });
 });
 
-describe('type-popover.controller - hint', () => {
+describe('type-popover.controller - legacy popovertarget hint', () => {
   let element: TypeNativePopoverControllerTestElement;
   let button: Button;
   let fixture: HTMLElement;
@@ -554,12 +555,11 @@ describe('type-popover.controller - hint', () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
       <nve-button popovertarget="popover">anchor</nve-button>
-      <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
+      <type-native-popover-controller-test-element id="popover" .openDelay=${0} .popoverType=${'hint'}></type-native-popover-controller-test-element>
     `);
     element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
       'type-native-popover-controller-test-element'
     );
-    element.popoverType = 'hint';
     button = fixture.querySelector(Button.metadata.tag);
     await element.updateComplete;
     await button.updateComplete;
@@ -622,7 +622,7 @@ describe('type-popover.controller - hint', () => {
 
     shadowHost.focus();
     await elementIsStable(element);
-    expect(element._activeTrigger).toBe(button);
+    expect(button.matches(':focus')).toBe(true);
   });
 });
 
@@ -697,5 +697,114 @@ describe('type-popover.controller - invoker command support', () => {
     expect(source).toBe(button);
     expect(command).toBe('toggle-popover');
     expect(element.matches(':popover-open')).toBe(true);
+  });
+});
+
+describe('type-popover.controller - interest invoker support', () => {
+  let element: TypeNativePopoverControllerTestElement;
+  let button: Button;
+  let fixture: HTMLElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-button interestfor="popover">anchor</nve-button>
+      <type-native-popover-controller-test-element id="popover" .openDelay=${0}></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    button = fixture.querySelector(Button.metadata.tag);
+    await element.updateComplete;
+    await button.updateComplete;
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should show popover when interest event is dispatched from custom element', async () => {
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    const interestEvent = new Event('interest', { cancelable: true }) as Event & { source: HTMLElement };
+    interestEvent.source = button;
+    element.dispatchEvent(interestEvent);
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+
+  it('should hide popover when loseinterest event is dispatched from custom element', async () => {
+    await elementIsStable(element);
+    element.showPopover();
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(true);
+
+    const loseInterestEvent = new Event('loseinterest', { cancelable: true }) as Event & { source: HTMLElement };
+    loseInterestEvent.source = button;
+    element.dispatchEvent(loseInterestEvent);
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should not show popover when interest event source is not a custom element', async () => {
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    const nativeDiv = document.createElement('div');
+    const interestEvent = new Event('interest', { cancelable: true }) as Event & { source: HTMLElement };
+    interestEvent.source = nativeDiv;
+    element.dispatchEvent(interestEvent);
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should not hide popover when loseinterest event source is not a custom element', async () => {
+    await elementIsStable(element);
+    element.showPopover();
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(true);
+
+    const nativeDiv = document.createElement('div');
+    const loseInterestEvent = new Event('loseinterest', { cancelable: true }) as Event & { source: HTMLElement };
+    loseInterestEvent.source = nativeDiv;
+    element.dispatchEvent(loseInterestEvent);
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+
+  it('should delay showing popover when openDelay is set', async () => {
+    element.openDelay = 20;
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    const interestEvent = new Event('interest', { cancelable: true }) as Event & { source: HTMLElement };
+    interestEvent.source = button;
+    element.dispatchEvent(interestEvent);
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    await new Promise(r => setTimeout(r, 30));
+    expect(element.matches(':popover-open')).toBe(true);
+  });
+
+  it('should cancel delayed show when loseinterest event is dispatched before delay completes', async () => {
+    element.openDelay = 50;
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    const interestEvent = new Event('interest', { cancelable: true }) as Event & { source: HTMLElement };
+    interestEvent.source = button;
+    element.dispatchEvent(interestEvent);
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    // Dispatch loseinterest before delay completes
+    const loseInterestEvent = new Event('loseinterest', { cancelable: true }) as Event & { source: HTMLElement };
+    loseInterestEvent.source = button;
+    element.dispatchEvent(loseInterestEvent);
+
+    // Wait for original delay to pass
+    await new Promise(r => setTimeout(r, 60));
+    expect(element.matches(':popover-open')).toBe(false);
   });
 });

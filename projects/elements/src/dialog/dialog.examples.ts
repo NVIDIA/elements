@@ -265,38 +265,24 @@ export const LegacyBehaviorTrigger = {
  */
 export const ShadowRoot = {
   render: () => html`
-<dialog-test-shadow-root></dialog-test-shadow-root>
-<script type="module">
-  customElements.define('dialog-test-shadow-root', class DialogTestShadowRoot extends HTMLElement {
-    constructor() {
-      super();
-      this._shadow = this.attachShadow({mode: 'open'});
-
-      const template = document.createElement('template');
-      template.innerHTML = \`
-        <style>:host { box-sizing: border-box; width: 100vw; height: 100vh; }</style>
-        <nve-dialog size="sm">center</nve-dialog>
-
-        <nve-dialog size="sm" position="top">top center</nve-dialog>
-        <nve-dialog size="sm" position="top" alignment="start">top start</nve-dialog>
-        <nve-dialog size="sm" position="top" alignment="end">top end</nve-dialog>
-
-        <nve-dialog size="sm" position="right" alignment="start">right start</nve-dialog>
-        <nve-dialog size="sm" position="right">right center</nve-dialog>
-        <nve-dialog size="sm" position="right" alignment="end">right end</nve-dialog>
-
-        <nve-dialog size="sm" position="bottom" alignment="start">bottom start</nve-dialog>
-        <nve-dialog size="sm" position="bottom">bottom center</nve-dialog>
-        <nve-dialog size="sm" position="bottom" alignment="end">bottom end</nve-dialog>
-
-        <nve-dialog size="sm" position="left" alignment="start">left start</nve-dialog>
-        <nve-dialog size="sm" position="left">left center</nve-dialog>
-        <nve-dialog size="sm" position="left" alignment="end">left end</nve-dialog>
-      \`;
-      this._shadow.appendChild(template.content);
-    }
-  });
-</script>
+<dialog-test-shadow-root>
+  <template shadowrootmode="open">
+    <style>:host { box-sizing: border-box; display: block; margin: 25vh auto; width: 400px; height: 400px; background: red; visibility: visible !important; }</style>
+    <nve-dialog size="sm">center</nve-dialog>
+    <nve-dialog size="sm" position="top">top center</nve-dialog>
+    <nve-dialog size="sm" position="top" alignment="start">top start</nve-dialog>
+    <nve-dialog size="sm" position="top" alignment="end">top end</nve-dialog>
+    <nve-dialog size="sm" position="right" alignment="start">right start</nve-dialog>
+    <nve-dialog size="sm" position="right">right center</nve-dialog>
+    <nve-dialog size="sm" position="right" alignment="end">right end</nve-dialog>
+    <nve-dialog size="sm" position="bottom" alignment="start">bottom start</nve-dialog>
+    <nve-dialog size="sm" position="bottom">bottom center</nve-dialog>
+    <nve-dialog size="sm" position="bottom" alignment="end">bottom end</nve-dialog>
+    <nve-dialog size="sm" position="left" alignment="start">left start</nve-dialog>
+    <nve-dialog size="sm" position="left">left center</nve-dialog>
+    <nve-dialog size="sm" position="left" alignment="end">left end</nve-dialog>
+  </template>
+</dialog-test-shadow-root>
   `
 };
 
