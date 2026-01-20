@@ -40,20 +40,30 @@ describe('type-native-anchor.controller', () => {
 
   it('should create a anchor fallback controller if browser does not support native css anchor positioning', async () => {
     const supports = globalThis.CSS?.supports;
-    globalThis.CSS.supports = () => false;
+    const bundle = globalThis.NVE_ELEMENTS.state.bundle;
 
-    const element = document.createElement(
-      'type-native-anchor-controller-test-element'
-    ) as TypeNativeAnchorControllerTestElement;
-    fixture.appendChild(element);
-    await elementIsStable(element);
+    try {
+      globalThis.CSS.supports = () => false;
+      globalThis.NVE_ELEMENTS.state.bundle = false;
 
-    element.dispatchEvent(new CustomEvent('beforetoggle'));
-    await elementIsStable(element);
+      const element = document.createElement(
+        'type-native-anchor-controller-test-element'
+      ) as TypeNativeAnchorControllerTestElement;
+      fixture.appendChild(element);
+      await elementIsStable(element);
 
-    expect(element._internals.states.has('anchor-positioning-fallback')).toBe(true);
-    expect(element['_typeNativeAnchorController']['typeNativeAnchorFallbackController']).toBeTruthy();
-    globalThis.CSS.supports = supports;
+      element.dispatchEvent(new CustomEvent('beforetoggle'));
+      await elementIsStable(element);
+
+      // Wait for the async dynamic import of the fallback controller to complete
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      expect(element._internals.states.has('anchor-positioning-fallback')).toBe(true);
+      expect(element['_typeNativeAnchorController']['typeNativeAnchorFallbackController']).toBeTruthy();
+    } finally {
+      globalThis.CSS.supports = supports;
+      globalThis.NVE_ELEMENTS.state.bundle = bundle;
+    }
   });
 
   it('should associate anchor name to popover and anchor elements', async () => {

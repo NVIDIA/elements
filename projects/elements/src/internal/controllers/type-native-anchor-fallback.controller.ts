@@ -4,6 +4,7 @@ import type { ReactiveController, ReactiveElement } from 'lit';
 import type { PopoverAlign, PopoverPosition } from '../types/index.js';
 import { attachInternals } from '../utils/a11y.js';
 import { getHostAnchor } from './type-native-popover.utils.js';
+import { popoverRenderUpdate, setAnchorPositionFallback } from './type-native-anchor-fallback.utils.js';
 
 export interface NativeAnchorFallback extends ReactiveElement {
   anchor?: HTMLElement | string;
@@ -23,7 +24,6 @@ export class TypeNativeAnchorFallbackController<T extends NativeAnchorFallback> 
   async hostConnected() {
     attachInternals(this.host);
     await this.host.updateComplete;
-    const { popoverRenderUpdate } = await import('./type-native-anchor-fallback.utils.js');
 
     const config = {
       position: this.host.position,
@@ -46,7 +46,6 @@ export class TypeNativeAnchorFallbackController<T extends NativeAnchorFallback> 
   }
 
   async #updatePositon() {
-    const { setAnchorPositionFallback } = await import('./type-native-anchor-fallback.utils.js');
     await setAnchorPositionFallback(this.host, {
       position: this.host.position,
       alignment: this.host.alignment,
