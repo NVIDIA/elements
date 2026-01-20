@@ -119,8 +119,8 @@ nve-select::part(_caret) {
 
 nve-copy-button {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  bottom: var(--nve-ref-space-md);
+  right: var(--nve-ref-space-md);
 }
 
 [internal-host]:has(.code[hidden]) {
