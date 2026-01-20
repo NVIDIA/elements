@@ -207,11 +207,27 @@ code > nve-codeblock {
   --padding: var(--nve-ref-space-lg);
   min-height: 65px;
   width: 100%;
+  anchor-name: --codeblock;
+}
+
+nve-copy-button.markdown-copy-button {
+  position: absolute;
+  position-anchor: --codeblock;
+  bottom: calc(anchor(bottom) + var(--nve-ref-space-md));
+  right: calc(anchor(right) + var(--nve-ref-space-md));
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+
+}
+
+code:has(nve-codeblock:hover) nve-copy-button.markdown-copy-button, nve-copy-button.markdown-copy-button:hover {
+  opacity: 1;
 }
 
 pre:has(nve-codeblock),
 code:has(nve-codeblock) {
   display: contents;
+  anchor-scope: --codeblock;
 }
 
 /* Canvas Styles */
