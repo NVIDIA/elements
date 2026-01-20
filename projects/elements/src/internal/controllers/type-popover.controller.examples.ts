@@ -2,7 +2,7 @@ import { css, html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
 import type { PopoverPosition, PopoverAlign, PopoverType } from '@nvidia-elements/core/internal';
-import { popoverStyles, TypeNativePopoverController, useStyles, TypeNativeAnchorController } from '@nvidia-elements/core/internal';
+import { popoverStyles, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
@@ -54,8 +54,6 @@ class PopoverDemo extends LitElement {
 
   /** @private */
   readonly popoverType: PopoverType = 'auto';
-
-  protected typeNativeAnchorController = new TypeNativeAnchorController<PopoverDemo>(this);
 
   protected typeNativePopoverController = new TypeNativePopoverController<PopoverDemo>(this);
 
@@ -127,18 +125,6 @@ export const TypePopoverControllerAlignmentDemo = {
   <ui-popover popover-type="manual" position="left" alignment="start">left start</ui-popover>
   <ui-popover popover-type="manual" position="left">left center</ui-popover>
   <ui-popover popover-type="manual" position="left" alignment="end">left end</ui-popover>
-  `
-}
-
-/**
- * @tags test-case
- */
-export const AbsolutePositioningFallback = {
-  render: () => html`
-  <div nve-layout="row align:center pad:lg">
-    <nve-dropdown id="dropdown" position-strategy="absolute">dropdown content</nve-dropdown>
-    <nve-icon-button popovertarget="dropdown" icon-name="refresh"></nve-icon-button>
-  </div>
   `
 }
 

@@ -181,7 +181,25 @@ export const Alignment = {
 };
 
 /**
- * @deprecated
+ * @summary Toggletip anchored to elements across shadow DOM boundaries.
+ * @tags test-case
+ */
+export const CrossShadowRootAnchorPosition = {
+  render: () => html`
+<nve-button popovertarget="root-toggletip">document root anchor</nve-button>
+<nve-toggletip id="root-toggletip">document root toggletip</nve-toggletip>
+
+<demo-shadow-root style="visibility: visible !important;">
+  <template shadowrootmode="open">
+    <nve-toggletip id="cross-root-toggletip" hidden>cross root toggletip</nve-toggletip>
+    <slot></slot>
+  </template>
+</demo-shadow-root>
+<nve-button popovertarget="cross-root-toggletip">cross root anchor</nve-button>
+  `
+};
+
+/**
  * @summary Legacy behavior-trigger pattern for automatic toggletip lifecycle management. Deprecated approach with manual trigger attributes, prefer modern popovertarget API for simpler and more maintainable toggletip implementation.
  * @tags test-case
  */

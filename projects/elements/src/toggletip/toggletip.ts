@@ -11,7 +11,6 @@ import {
   popoverStyles,
   TypeNativePopoverController,
   useStyles,
-  TypeNativeAnchorController,
   appendRootNodeStyle
 } from '@nvidia-elements/core/internal';
 import styles from './toggletip.css?inline';
@@ -101,8 +100,6 @@ export class Toggletip extends LitElement {
 
   /** @private */
   readonly popoverType: PopoverType = 'auto';
-
-  protected typeNativeAnchorController = new TypeNativeAnchorController<Toggletip>(this);
 
   protected typeNativePopoverController = new TypeNativePopoverController<Toggletip>(this);
 
