@@ -95,7 +95,6 @@ while subsequent presses have no effect. This behavior is for accessibility, pre
 
 ## Shadow Root Anchoring
 
-Native [CSS Anchor Positioning](https://developer.chrome.com/blog/anchor-positioning-api) allows two elements to be tethered together via a unique identifier. This is commonly used for popover-like elements. However CSS Anchor Positioning is limited to only positioning two elements in the same render root. Examples of rendering accross render roots include in different Shadow Dom Roots or popover top layer instances. This behavior/compatibility issue is being tracked https://github.com/w3c/csswg-drafts/issues/9408.
+Native [CSS Anchor Positioning](https://developer.chrome.com/blog/anchor-positioning-api) allows two elements to be tethered together via a unique identifier. This is commonly used for popover-like elements. CSS Anchor Positioning recently enabled cross root associations. https://github.com/w3c/csswg-drafts/issues/9408.
 
-Element popover positioning will detect instances of cross Shadow Root anchoring attempts and fallback to a JavaScript based positioning system.
-This will allow the popover to anchor correctly but at the cost of render reliability and performance when compared to native CSS Anchor Positioning.
+However the declarative native popover API requires popovers and the trigger/source to still exist within the same render root and not be separated by shadow dom. Elements will attempt to bridge this gap by traversing and making the association for the trigger and popover. This is not 100% reliable, in general popovers should ideally be within the same render root for best performance.
