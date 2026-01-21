@@ -94,7 +94,7 @@ export class Icon extends LitElement {
       await globalThis.customElements.whenDefined(Icon.metadata.tag);
       Icon._iconsRegistry = icons;
       Object.keys(icons).forEach(name =>
-        globalThis?.document?.dispatchEvent(new CustomEvent(`${Icon.metadata.tag}-${name}`))
+        globalThis?.document?.dispatchEvent(new CustomEvent(`${Icon.metadata.tag}-${name}`, { detail: icons }))
       );
     }
   }
@@ -116,11 +116,14 @@ export class Icon extends LitElement {
     super.updated(props);
     await this.#render();
 
-    if (!Icon._iconsRegistry[this.name] || !this.svg) {
-      globalThis?.document?.addEventListener(`${Icon.metadata.tag}-${this.name}`, () => this.requestUpdate(), {
-        once: true
-      });
-    }
+    globalThis?.document?.addEventListener(
+      `${Icon.metadata.tag}-${this.name}`,
+      (event: CustomEvent<{ icons: { [key: string]: IconSVG } }>) => {
+        if (event.detail[this.name]) {
+          this.requestUpdate();
+        }
+      }
+    );
   }
 
   async #render() {
