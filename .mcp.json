@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "elements": {
+      "description": "Elements API and Custom Element Schema",
+      "command": "nve-mcp",
+      "env": {
+        "npm_config_registry": "https://registry.npmjs.org"
+      }
+    }
+  }
+}
