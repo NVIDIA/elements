@@ -15,6 +15,50 @@
 
 {% install-artifactory %}
 
+## Claude Code
+
+Install to Claude Code by adding the configuration to your `.mcp.json` file.
+
+### NPM
+
+Add the following configuration to your `.mcp.json` file (typically located at `~/.config/claude-code/.mcp.json` or `%APPDATA%\claude-code\.mcp.json` on Windows):
+
+```json
+{
+  "mcpServers": {
+    "elements": {
+      "description": "Elements API and Custom Element Schema",
+      "command": "npm",
+      "args": ["exec", "--package=@nvidia-elements/cli@latest", "-y", "--prefer-online", "--", "nve-mcp"],
+      "env": {
+        "npm_config_registry": "https://registry.npmjs.org"
+      }
+    }
+  }
+}
+```
+
+### PNPM
+
+Alternatively, if you prefer using PNPM:
+
+```json
+{
+  "mcpServers": {
+    "elements": {
+      "description": "Elements API and Custom Element Schema",
+      "command": "pnpm",
+      "args": ["--package=@nvidia-elements/cli@latest", "dlx", "nve-mcp"],
+      "env": {
+        "npm_config_registry": "https://registry.npmjs.org"
+      }
+    }
+  }
+}
+```
+
+After adding the configuration, restart Claude Code for the changes to take effect. The Elements MCP tools will be available for use in your conversations.
+
 ## Cursor
 
 Install to Cursor or copy the MCP configuration below.
