@@ -181,4 +181,59 @@ describe(Icon.metadata.tag, () => {
     expect(window.fetch).toHaveBeenCalled();
     window.fetch = original;
   });
+
+  it('should dispatch event with icons detail when adding icons', async () => {
+    const iconName = 'test-svg-with-detail';
+    let receivedDetail: unknown;
+
+    const eventPromise = new Promise<void>(resolve => {
+      document.addEventListener(`${Icon.metadata.tag}-${iconName}`, ((event: CustomEvent) => {
+        receivedDetail = event.detail;
+        resolve();
+      }) as EventListener);
+    });
+
+    await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
+      [iconName]: { svg: () => '<svg id="test-svg-with-detail"><path d=""/></svg>' }
+    });
+
+    await eventPromise;
+    expect(receivedDetail).toBeDefined();
+    expect(receivedDetail[iconName]).toBeDefined();
+  });
+
+  it('should only requestUpdate when event detail contains the icon name', async () => {
+    const spy = vi.spyOn(element, 'requestUpdate');
+    element.name = 'test-svg-specific-icon' as IconName;
+    await elementIsStable(element);
+    spy.mockClear();
+
+    // Add a different icon - should NOT trigger requestUpdate for this element
+    await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
+      'different-icon': { svg: () => '<svg id="different-icon"><path d=""/></svg>' }
+    });
+
+    // Wait for any potential async updates
+    await new Promise(resolve => setTimeout(resolve, 50));
+    await elementIsStable(element);
+
+    // The element should not have called requestUpdate since the added icon
+    // does not match the element's name
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should requestUpdate only when matching icon is added', async () => {
+    const iconName = 'test-svg-matching' as IconName;
+    const spy = vi.spyOn(element, 'requestUpdate');
+    element.name = iconName;
+    await elementIsStable(element);
+    spy.mockClear();
+
+    await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
+      [iconName]: { svg: () => '<svg id="test-svg-matching"><path d=""/></svg>' }
+    });
+
+    await new Promise(resolve => setTimeout(resolve, 50));
+    expect(spy).toHaveBeenCalled();
+  });
 });
