@@ -4,13 +4,20 @@ Releases are automated via Semantic Release, an open source tool for managing au
 
 To wire up a new project to semantic release the following must be completed:
 
-1. Create an initial tag on GitLab https://github.com/NVIDIA/elements/-/tags/new
+1. Add the project to `pnpm-workspace.yaml` in the repository root
+
+```yaml
+packages:
+  - 'projects/labs/my-library'
+```
+
+2. Create an initial tag on GitLab https://github.com/NVIDIA/elements/-/tags/new
 
 ```json
 @nvidia-elements/my-library-v0.0.0
 ```
 
-2. Create a release script in the root `package.json`
+3. Create a release script in the root `package.json`
 
 ```json
 "release": {
@@ -31,13 +38,13 @@ To wire up a new project to semantic release the following must be completed:
 },
 ```
 
-3. Ensure the `index.js` entrypoint of your library exports the following:
+4. Ensure the `index.js` entrypoint of your library exports the following:
 
 ```javascript
 export const VERSION = '0.0.0';
 ```
 
-4. Add the library artifacts to the GitLab CI upload in `.github/workflows/ci.yml`
+5. Add the library artifacts to the GitLab CI upload in `.github/workflows/ci.yml`
 
 ```yml
 artifacts:
@@ -48,7 +55,7 @@ artifacts:
       - projects/labs/my-library/package.json
 ```
 
-5. Add library code coverage reports to GitLab CI upload in `.github/workflows/ci.yml`
+6. Add library code coverage reports to GitLab CI upload in `.github/workflows/ci.yml`
 
 ```yml
 reports:
@@ -56,7 +63,7 @@ reports:
       - projects/labs/my-library/coverage/unit/junit.xml
 ```
 
-6. Add a new commit scope to `commitlint.config.js`
+7. Add a new commit scope to `commitlint.config.js`
 
 ```javascript
 'scope-enum': [
@@ -69,9 +76,9 @@ reports:
 ]
 ```
 
-7. Ensure a `README.md` and empty `CHANGELOG.md` exist in the root of the project.
+8. Ensure a `README.md` and empty `CHANGELOG.md` exist in the root of the project.
 
-8. Create a new MR with the above changes.
+9. Create a new MR with the above changes.
 
 ```shell
 feat(labs-my-library): release
