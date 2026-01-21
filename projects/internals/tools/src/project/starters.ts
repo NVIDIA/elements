@@ -105,6 +105,7 @@ export const startersData = {
 export async function archiveStarter(projectDir, outDir) {
   await copyProject(projectDir);
   await createCursorConfig(projectDir);
+  await createClaudeConfig(projectDir);
   await createVSCodeConfig(projectDir);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
   await writeFile(
@@ -147,7 +148,8 @@ async function createCursorConfig(projectDir) {
     mcpServers: {
       elements: {
         description: 'Elements API and Custom Element Schema',
-        command: 'npm exec --package=@nvidia-elements/cli@latest -y --prefer-online -- nve-mcp',
+        command: 'npm',
+        args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve-mcp'],
         env: {
           npm_config_registry: 'https://registry.npmjs.org'
         }
@@ -160,6 +162,28 @@ async function createCursorConfig(projectDir) {
     mkdirSync(dist, { recursive: true });
   }
   await writeFile(`${dist}/mcp.json`, JSON.stringify(cursorConfig, undefined, 2));
+}
+
+/* istanbul ignore next -- @preserve */
+async function createClaudeConfig(projectDir) {
+  const claudeConfig = {
+    mcpServers: {
+      elements: {
+        description: 'Elements API and Custom Element Schema',
+        command: 'npm',
+        args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve-mcp'],
+        env: {
+          npm_config_registry: 'https://registry.npmjs.org'
+        }
+      }
+    }
+  };
+
+  const dist = `dist/${projectDir}/`;
+  if (!existsSync(dist)) {
+    mkdirSync(dist, { recursive: true });
+  }
+  await writeFile(`${dist}/.mcp.json`, JSON.stringify(claudeConfig, undefined, 2));
 }
 
 /* istanbul ignore next -- @preserve */
