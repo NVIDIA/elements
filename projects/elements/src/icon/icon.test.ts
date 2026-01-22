@@ -199,7 +199,7 @@ describe(Icon.metadata.tag, () => {
 
     await eventPromise;
     expect(receivedDetail).toBeDefined();
-    expect(receivedDetail[iconName]).toBeDefined();
+    expect((receivedDetail as { svg: () => string }).svg).toBeDefined();
   });
 
   it('should only requestUpdate when event detail contains the icon name', async () => {
@@ -224,10 +224,13 @@ describe(Icon.metadata.tag, () => {
 
   it('should requestUpdate only when matching icon is added', async () => {
     const iconName = 'test-svg-matching' as IconName;
-    const spy = vi.spyOn(element, 'requestUpdate');
-    element.name = iconName;
-    await elementIsStable(element);
-    spy.mockClear();
+    // Create a new fixture with the name already set so the event listener is registered correctly
+    removeFixture(fixture);
+    fixture = await createFixture(html`<nve-icon name=${iconName}></nve-icon>`);
+    const el = fixture.querySelector<Icon>(Icon.metadata.tag);
+    await elementIsStable(el);
+
+    const spy = vi.spyOn(el, 'requestUpdate');
 
     await (customElements.get(Icon.metadata.tag) as typeof Icon).add({
       [iconName]: { svg: () => '<svg id="test-svg-matching"><path d=""/></svg>' }
