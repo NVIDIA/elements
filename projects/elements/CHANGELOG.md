@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.55.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.55.2...@nvidia-elements/core-v1.55.3) (2026-01-22)
+
+
+### Bug Fixes
+
+* **elements:** async render updates ([6de1077](https://github.com/NVIDIA/elements/commit/6de1077d91d1b11193e70252adeaacf5afba5819))
+
 ## [@nvidia-elements/core-v1.55.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.55.1...@nvidia-elements/core-v1.55.2) (2026-01-22)
 
 
