@@ -94,6 +94,7 @@ export class SystemSettings extends LitElement {
   }
 
   #writeGlobals(update: Record<string, string>) {
+    const brandThemeSwitched = this.#globals.theme.includes('brand') || update.theme.includes('brand');
     const globals = { ...this.#globals, ...update };
     const themes = [
       globals.theme === 'auto'
@@ -121,8 +122,8 @@ export class SystemSettings extends LitElement {
       iframe.contentWindow?.document.documentElement.setAttribute('nve-layer', globals.layer);
     });
 
-    if (globals.theme === 'brand') {
-      void import('@nvidia-elements/brand/icons/define.js');
+    if (brandThemeSwitched) {
+      globalThis.location.reload();
     }
   }
 }
