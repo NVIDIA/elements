@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.55.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.55.1...@nvidia-elements/core-v1.55.2) (2026-01-22)
+
+
+### Bug Fixes
+
+* **elements:** bundle popovers ([402e113](https://github.com/NVIDIA/elements/commit/402e11304a23ad501b43a98c1c0227d280d7cc00))
+
 ## [@nvidia-elements/core-v1.55.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.55.0...@nvidia-elements/core-v1.55.1) (2026-01-22)
 
 
