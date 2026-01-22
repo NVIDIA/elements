@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.55.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.55.0...@nvidia-elements/core-v1.55.1) (2026-01-22)
+
+
+### Bug Fixes
+
+* **elements:** icon render on registry update ([3798837](https://github.com/NVIDIA/elements/commit/37988377d9e80cb6ab028975c9f89438b9c72451))
+
 ## [@nvidia-elements/core-v1.55.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.54.4...@nvidia-elements/core-v1.55.0) (2026-01-14)
 
 
