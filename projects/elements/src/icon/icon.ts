@@ -87,6 +87,12 @@ export class Icon extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'img';
+    globalThis?.document?.addEventListener(`${Icon.metadata.tag}-${this.name}`, this.#asyncRender.bind(this));
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    globalThis?.document?.removeEventListener(`${Icon.metadata.tag}-${this.name}`, this.#asyncRender.bind(this));
   }
 
   static async add(icons: { [key: string]: IconSVG }) {
@@ -94,7 +100,7 @@ export class Icon extends LitElement {
       await globalThis.customElements.whenDefined(Icon.metadata.tag);
       Icon._iconsRegistry = icons;
       Object.keys(icons).forEach(name =>
-        globalThis?.document?.dispatchEvent(new CustomEvent(`${Icon.metadata.tag}-${name}`, { detail: icons }))
+        globalThis?.document?.dispatchEvent(new CustomEvent(`${Icon.metadata.tag}-${name}`, { detail: icons[name] }))
       );
     }
   }
@@ -106,7 +112,9 @@ export class Icon extends LitElement {
       globalThis.customElements.whenDefined(Icon.metadata.tag).then(() => {
         Object.keys(aliases).forEach(alias => {
           Icon._iconsRegistry[alias] = Icon._iconsRegistry[aliases[alias]];
-          globalThis?.document?.dispatchEvent(new CustomEvent(`${Icon.metadata.tag}-${alias}`));
+          globalThis?.document?.dispatchEvent(
+            new CustomEvent(`${Icon.metadata.tag}-${alias}`, { detail: Icon._iconsRegistry[alias] })
+          );
         });
       });
     }
@@ -115,15 +123,12 @@ export class Icon extends LitElement {
   async updated(props: PropertyValues<this>) {
     super.updated(props);
     await this.#render();
+  }
 
-    globalThis?.document?.addEventListener(
-      `${Icon.metadata.tag}-${this.name}`,
-      (event: CustomEvent<{ icons: { [key: string]: IconSVG } }>) => {
-        if (event.detail[this.name]) {
-          this.requestUpdate();
-        }
-      }
-    );
+  async #asyncRender(event: CustomEvent<IconSVG>) {
+    if (this.isConnected && event.detail && this.svg !== (await event.detail.svg())) {
+      this.#render();
+    }
   }
 
   async #render() {
