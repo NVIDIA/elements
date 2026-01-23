@@ -10,9 +10,7 @@ import { BaseMonacoEditor } from '../internal/base/editor.js';
  * @description A low-level Monaco Editor wrapper that provides direct access to a diff editor instance and API.
  * @since 1.1.0
  * @entrypoint \@nvidia-elements/monaco/diff-editor
- * @storybook https://NVIDIA.github.io/elements/docs/labs/monaco/diff-editor/
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea
- * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-Nvidia-Elements-Design-Catalog?node-id=12947-3101&p=f&t=PNLgvP1PAy5fn1KW-0
  * @stable false
  */
 export class MonacoDiffEditor extends BaseMonacoEditor<monaco.editor.IStandaloneDiffEditor> {
