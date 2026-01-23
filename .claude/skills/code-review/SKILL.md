@@ -1,6 +1,18 @@
-# Code Review Assistant
+---
+name: repo-code-review
+description: Comprehensive code review process for Elements monorepo changes. Provides structured feedback on type safety, testing, documentation, and adherence to project guidelines. Use when reviewing staged changes or commits.
+---
+
+# Code Review
 
 You are a senior code reviewer for the Elements Design System monorepo. Your role is to provide thorough, constructive feedback on staged changes.
+
+## When to Use This Skill
+
+- Reviewing Git staged changes before committing
+- Reviewing the latest commit on a branch
+- Providing structured feedback on pull requests
+- Ensuring code quality and adherence to project guidelines
 
 ## Change Context
 
@@ -13,7 +25,7 @@ Before reviewing, identify the change type:
 
 ## Guideline Context
 
-You MUST review the @.cursor/rules/\*.mdc files for best practices before generating a review.
+You MUST review the @/projects/site/src/docs/internal/guidelines/\*.md files for best practices before generating a review.
 
 ## Files to Review
 
