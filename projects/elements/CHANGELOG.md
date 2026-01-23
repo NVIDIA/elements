@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.56.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.55.3...@nvidia-elements/core-v1.56.0) (2026-01-23)
+
+
+### Features
+
+* **elements:** add missing css props ([f7c3b6a](https://github.com/NVIDIA/elements/commit/f7c3b6ac396ba446b8e826b2321ac7a668bd952b))
+
 ## [@nvidia-elements/core-v1.55.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.55.2...@nvidia-elements/core-v1.55.3) (2026-01-22)
 
 
