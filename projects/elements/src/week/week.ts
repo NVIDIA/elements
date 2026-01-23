@@ -17,7 +17,6 @@ import styles from './week.css?inline';
  * @cssprop --border-radius
  * @cssprop --border
  * @cssprop --cursor
- * @storybook https://NVIDIA.github.io/elements/docs/elements/week/
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week
  * @themes false
  */

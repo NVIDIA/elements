@@ -19,8 +19,6 @@ import { html, nothing, isServer } from 'lit';
  * @cssprop --thumb-height
  * @cssprop --thumb-background
  * @cssprop --thumb-border
- * @storybook https://NVIDIA.github.io/elements/docs/elements/range/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-25&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/slider/
  */
 export class Range extends Control {

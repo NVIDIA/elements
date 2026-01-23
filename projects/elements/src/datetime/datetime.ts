@@ -23,7 +23,6 @@ import styles from './datetime.css?inline';
  * @cssprop --width
  * @cssprop --max-width
  * @cssprop --min-width
- * @storybook https://NVIDIA.github.io/elements/docs/elements/datetime/
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
  * @themes false
  */

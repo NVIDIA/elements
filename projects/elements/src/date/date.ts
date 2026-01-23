@@ -23,8 +23,6 @@ import styles from './date.css?inline';
  * @cssprop --width
  * @cssprop --max-width
  * @cssprop --min-width
- * @storybook https://NVIDIA.github.io/elements/docs/elements/date/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-38&t=CAAM7yEBvG18tRRa-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
  * @themes false
  */
