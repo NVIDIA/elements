@@ -22,8 +22,6 @@ import styles from './icon-button.css?inline';
  * @cssprop --font-size
  * @cssprop --color
  * @cssprop --background
- * @storybook https://NVIDIA.github.io/elements/docs/elements/icon-button/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=77-5741&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
 export class IconButton extends Button {

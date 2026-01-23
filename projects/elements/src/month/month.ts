@@ -17,7 +17,6 @@ import styles from './month.css?inline';
  * @cssprop --border-radius
  * @cssprop --border
  * @cssprop --cursor
- * @storybook https://NVIDIA.github.io/elements/docs/elements/month/
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month
  * @themes false
  */
