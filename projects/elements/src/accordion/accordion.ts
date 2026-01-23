@@ -31,8 +31,6 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
  * @slot subtitle - (deprecated)
  * @slot actions - (deprecated)
  * @cssprop --cursor
- * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
- * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 export class AccordionHeader extends LitElement {
@@ -80,8 +78,6 @@ export class AccordionHeader extends LitElement {
  * @entrypoint \@nvidia-elements/core/accordion
  * @slot - This is a default/unnamed slot for accordion content content
  * @cssprop --padding
- * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
- * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 export class AccordionContent extends LitElement {
@@ -114,8 +110,6 @@ export class AccordionContent extends LitElement {
  * @cssprop --header-padding
  * @cssprop --cursor
  * @cssprop --transition
- * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
- * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 @audit()
@@ -234,8 +228,6 @@ export class Accordion extends LitElement implements ContainerElement {
  * @entrypoint \@nvidia-elements/core/accordion
  * @cssprop --padding
  * @slot - This is a default slot for accordions within the group
- * @storybook https://NVIDIA.github.io/elements/docs/elements/accordion/
- * @figma https://zeroheight.com/4dfee7d25/p/5152ae--accordion/b/992fcd/i/210564630
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 @audit()

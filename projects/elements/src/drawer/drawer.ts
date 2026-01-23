@@ -33,8 +33,6 @@ import styles from './drawer.css?inline';
  * @cssprop --max-width
  * @cssprop --width
  * @cssprop --animation-duration - Duration of drawer open/close animations
- * @storybook https://NVIDIA.github.io/elements/docs/elements/drawer/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=4152%3A86953&mode=dev
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
 @typeSSR()

@@ -35,19 +35,17 @@ import styles from './badge.css?inline';
  * @cssprop --text-transform
  * @cssprop --width
  * @cssprop --height
- * @storybook https://NVIDIA.github.io/elements/docs/elements/badge/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=96-5042&t=UOtcGeukBSZqsnnO-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
 @typeSSR()
 export class Badge extends LitElement {
   /**
-   * Visual treatment to represent a ongoing task, support status. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=48-710&mode=design)
+   * Visual treatment to represent a ongoing task, support status.
    */
   @property({ type: String, reflect: true }) status: TaskStatus | SupportStatus | TrendStatus;
 
   /**
-   * Highlights content to draw attention and convey simple messages. [Figma](https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=56-308&mode=design&t=eeBXUleEIUIAeQQh-0)
+   * Highlights content to draw attention and convey simple messages.
    */
   @property({ type: String, reflect: true }) color: Color;
 

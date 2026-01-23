@@ -20,9 +20,7 @@ import styles from './progress-ring.css?inline';
  * @cssprop --height
  * @cssprop --animation-duration
  * @cssprop --color
- * @storybook https://NVIDIA.github.io/elements/docs/elements/progress-ring/
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29%3A20&mode=dev
  */
 export class ProgressRing extends LitElement {
   static styles = useStyles([styles]);

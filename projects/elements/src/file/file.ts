@@ -19,7 +19,6 @@ import globalStyles from './file.global.css?inline';
  * @cssprop --cursor
  * @cssprop --gap
  * @cssprop --height
- * @storybook https://NVIDIA.github.io/elements/docs/elements/file/
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  */
 export class File extends Control {

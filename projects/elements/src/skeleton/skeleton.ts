@@ -11,7 +11,6 @@ import styles from './skeleton.css?inline';
  * @cssprop --background
  * @cssprop --border-radius
  * @cssprop --min-height
- * @storybook https://NVIDIA.github.io/elements/docs/elements/skeleton/
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-live
  */
 export class Skeleton extends LitElement {
