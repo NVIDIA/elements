@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.56.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.0...@nvidia-elements/core-v1.56.1) (2026-01-23)
+
+
+### Bug Fixes
+
+* **elements:** jsdoc corrections ([75a69a6](https://github.com/NVIDIA/elements/commit/75a69a6b2095aa4fbb0b77f5ab4fc71974e3a946))
+
 ## [@nvidia-elements/core-v1.56.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.55.3...@nvidia-elements/core-v1.56.0) (2026-01-23)
 
 
