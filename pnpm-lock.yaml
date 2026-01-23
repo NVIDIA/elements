@@ -106,8 +106,8 @@ catalogs:
       specifier: 4.0.1
       version: 4.0.1
     playwright:
-      specifier: 1.57.0
-      version: 1.57.0
+      specifier: 1.58.0
+      version: 1.58.0
     postcss:
       specifier: 8.5.6
       version: 8.5.6
@@ -213,7 +213,7 @@ importers:
         version: 15.3.0
       playwright:
         specifier: 'catalog:'
-        version: 1.57.0
+        version: 1.58.0
       prettier:
         specifier: 3.4.2
         version: 3.4.2
@@ -624,7 +624,7 @@ importers:
         version: 4.0.16(vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
       '@vitest/browser-playwright':
         specifier: 'catalog:'
-        version: 4.0.16(playwright@1.57.0)(vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
+        version: 4.0.16(playwright@1.58.0)(vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
         version: 4.0.16(vitest@4.0.16)
@@ -1113,7 +1113,7 @@ importers:
         version: 9.39.2(jiti@2.6.1)
       playwright:
         specifier: 'catalog:'
-        version: 1.57.0
+        version: 1.58.0
       publint:
         specifier: 'catalog:'
         version: 0.3.15
@@ -1335,7 +1335,7 @@ importers:
         version: 1.3.0
       playwright:
         specifier: 'catalog:'
-        version: 1.57.0
+        version: 1.58.0
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -1593,7 +1593,7 @@ importers:
         version: 4.0.16(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
       '@vitest/browser-playwright':
         specifier: 'catalog:'
-        version: 4.0.16(playwright@1.57.0)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
+        version: 4.0.16(playwright@1.58.0)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
       eslint:
         specifier: 'catalog:'
         version: 9.39.2(jiti@2.6.1)
@@ -1815,7 +1815,7 @@ importers:
         version: 4.0.16(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
       '@vitest/browser-playwright':
         specifier: 'catalog:'
-        version: 4.0.16(playwright@1.57.0)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
+        version: 4.0.16(playwright@1.58.0)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
       glob:
         specifier: 'catalog:'
         version: 11.0.3
@@ -10889,13 +10889,13 @@ packages:
     resolution: {integrity: sha512-nDywThFk1i4BQK4twPQ6TA4RT8bDY96yeuCVBWL3ePARCiEKDRSrNGbFIgUJpLp+XeIR65v8ra7WuJOFUBtkMA==, tarball: https://registry.npmjs.org
     engines: {node: '>=8'}
 
-  playwright-core@1.57.0:
-    resolution: {integrity: sha512-agTcKlMw/mjBWOnD6kFZttAAGHgi/Nw0CZ2o6JqWSbMlI219lAFLZZCyqByTsvVAJq5XA5H8cA6PrvBRpBWEuQ==, tarball: https://registry.npmjs.org
+  playwright-core@1.58.0:
+    resolution: {integrity: sha512-aaoB1RWrdNi3//rOeKuMiS65UCcgOVljU46At6eFcOFPFHWtd2weHRRow6z/n+Lec0Lvu0k9ZPKJSjPugikirw==, tarball: https://registry.npmjs.org
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.57.0:
-    resolution: {integrity: sha512-ilYQj1s8sr2ppEJ2YVadYBN0Mb3mdo9J0wQ+UuDhzYqURwSoW4n1Xs5vs7ORwgDGmyEh33tRMeS8KhdkMoLXQw==, tarball: https://registry.npmjs.org
+  playwright@1.58.0:
+    resolution: {integrity: sha512-2SVA0sbPktiIY/MCOPX8e86ehA/e+tDNq+e5Y8qjKYti2Z/JG7xnronT/TXTIkKbYGWlCbuucZ6dziEgkoEjQQ==, tarball: https://registry.npmjs.org
     engines: {node: '>=18'}
     hasBin: true
 
@@ -17671,11 +17671,11 @@ snapshots:
       vite: 7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2)
       vue: 3.5.26(typescript@5.9.3)
 
-  '@vitest/browser-playwright@4.0.16(playwright@1.57.0)(vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)':
+  '@vitest/browser-playwright@4.0.16(playwright@1.58.0)(vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)':
     dependencies:
       '@vitest/browser': 4.0.16(vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
       '@vitest/mocker': 4.0.16(vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))
-      playwright: 1.57.0
+      playwright: 1.58.0
       tinyrainbow: 3.0.3
       vitest: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@24.9.1)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2)
     transitivePeerDependencies:
@@ -17684,11 +17684,11 @@ snapshots:
       - utf-8-validate
       - vite
 
-  '@vitest/browser-playwright@4.0.16(playwright@1.57.0)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)':
+  '@vitest/browser-playwright@4.0.16(playwright@1.58.0)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)':
     dependencies:
       '@vitest/browser': 4.0.16(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
       '@vitest/mocker': 4.0.16(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))
-      playwright: 1.57.0
+      playwright: 1.58.0
       tinyrainbow: 3.0.3
       vitest: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2)
     transitivePeerDependencies:
@@ -23293,11 +23293,11 @@ snapshots:
     dependencies:
       find-up: 3.0.0
 
-  playwright-core@1.57.0: {}
+  playwright-core@1.58.0: {}
 
-  playwright@1.57.0:
+  playwright@1.58.0:
     dependencies:
-      playwright-core: 1.57.0
+      playwright-core: 1.58.0
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -25609,7 +25609,7 @@ snapshots:
     optionalDependencies:
       '@opentelemetry/api': 1.9.0
       '@types/node': 24.9.1
-      '@vitest/browser-playwright': 4.0.16(playwright@1.57.0)(vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
+      '@vitest/browser-playwright': 4.0.16(playwright@1.58.0)(vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
       jsdom: 27.1.0
     transitivePeerDependencies:
       - jiti
@@ -25649,7 +25649,7 @@ snapshots:
     optionalDependencies:
       '@opentelemetry/api': 1.9.0
       '@types/node': 25.0.3
-      '@vitest/browser-playwright': 4.0.16(playwright@1.57.0)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
+      '@vitest/browser-playwright': 4.0.16(playwright@1.58.0)(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
       jsdom: 27.1.0
     transitivePeerDependencies:
       - jiti

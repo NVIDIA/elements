@@ -79,7 +79,7 @@ catalog:
   lit-html: ^3.3.2
   markdown-it: 14.1.0
   markdown-it-link-attributes: 4.0.1
-  playwright: 1.57.0
+  playwright: 1.58.0
   postcss: 8.5.6
   publint: 0.3.15
   react: 19.2.0
@@ -96,6 +96,9 @@ catalog:
 ignorePatchFailures: false
 
 minimumReleaseAge: 1140
+minimumReleaseAgeExclude:
+  - playwright
+  - playwright-core
 
 onlyBuiltDependencies:
   - '@bundled-es-modules/glob'
