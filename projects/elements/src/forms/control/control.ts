@@ -40,8 +40,6 @@ import styles from './control.css?inline';
  * @cssprop --label-font-size
  * @cssprop --control-width
  * @cssprop --control-height
- * @storybook https://NVIDIA.github.io/elements/docs/elements/forms/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-43&t=iOYah8Uct8CFd69k-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals
  * @package true
  */

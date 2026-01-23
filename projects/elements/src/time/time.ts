@@ -17,7 +17,6 @@ import styles from './time.css?inline';
  * @cssprop --border-radius
  * @cssprop --border
  * @cssprop --cursor
- * @storybook https://NVIDIA.github.io/elements/docs/elements/time/
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time
  * @themes false
  */
