@@ -16,8 +16,6 @@ import styles from './page-header.css?inline';
  * @cssprop --gap - Gap between the prefix, default, and suffix slots
  * @cssprop --margin-inline - left and right margin applied to the default content slot
 
- * @storybook https://NVIDIA.github.io/elements/docs/elements/page-header/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=30-35&t=c9DaB6YRpkhGAp49-0
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav
  *
  */

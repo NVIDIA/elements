@@ -24,8 +24,6 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
  * @slot action-icon - Extra Action Button
  * @cssprop --padding
  * @cssprop --border-bottom
- * @storybook https://NVIDIA.github.io/elements/docs/elements/panel/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 export class PanelHeader extends LitElement {
@@ -63,8 +61,6 @@ export class PanelHeader extends LitElement {
  * @entrypoint \@nvidia-elements/core/panel
  * @slot - This is a default/unnamed slot for panel content content
  * @cssprop --padding
- * @storybook https://NVIDIA.github.io/elements/docs/elements/panel/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 export class PanelContent extends LitElement {
@@ -91,8 +87,6 @@ export class PanelContent extends LitElement {
  * @cssprop --padding
  * @cssprop --border-top
  * @cssprop --gap
- * @storybook https://NVIDIA.github.io/elements/docs/elements/panel/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 export class PanelFooter extends LitElement {
@@ -132,8 +126,6 @@ export class PanelFooter extends LitElement {
  * @cssprop --color
  * @cssprop --box-shadow
  * @cssprop --panel-button-border-radius - Border radius of the panel expand/collapse button
- * @storybook https://NVIDIA.github.io/elements/docs/elements/panel/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-54&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 

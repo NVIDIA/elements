@@ -16,8 +16,6 @@ import styles from './resize-handle.css?inline';
  * @cssprop --line-width
  * @cssprop --target-size
  * @cssprop --cursor
- * @storybook https://NVIDIA.github.io/elements/docs/elements/resize-handle/
- * @figma https://www.figma.com/design/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog?node-id=3975-92825&p=f&t=vwCezJmCbI1X94vQ-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/slider/
  *
  */
