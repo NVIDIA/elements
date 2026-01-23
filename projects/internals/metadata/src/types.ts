@@ -201,8 +201,6 @@ export interface CustomElementManifest {
     entrypoint: string;
     package: boolean;
     since: string;
-    storybook: string;
-    figma: string;
     status: ElementStatus;
     behavior: ElementBehavior;
     example: string;
