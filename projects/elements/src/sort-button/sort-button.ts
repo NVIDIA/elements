@@ -21,8 +21,6 @@ const nextSort = {
  * @cssprop --height
  * @cssprop --border-radius
  * @cssprop --color
- * @storybook https://NVIDIA.github.io/elements/docs/elements/sort-button/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?type=design&node-id=127-8456&t=TYtFvncSeBAKHOMe-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/
  */
 export class SortButton extends BaseButton {

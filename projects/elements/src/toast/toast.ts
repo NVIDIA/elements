@@ -39,8 +39,6 @@ import styles from './toast.css?inline';
  * @cssprop --gap
  * @csspart prefix-icon - The prefix icon slot
  * @cssprop --animation-duration - Duration of toast open/close animations
- * @storybook https://NVIDIA.github.io/elements/docs/elements/toast/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=596-34431&t=clRGqnKDRGNhR0Yu-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */
 @audit({ excessiveInstanceLimit })
