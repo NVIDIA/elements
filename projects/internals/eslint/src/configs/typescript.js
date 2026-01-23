@@ -80,9 +80,7 @@ const config = {
         beta: { name: true },
         stable: { name: true },
         themes: { name: true },
-        responsive: { name: true },
-        storybook: { name: true },
-        figma: { name: true }
+        responsive: { name: true }
       }
     }
   }
