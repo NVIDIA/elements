@@ -30,4 +30,8 @@ export function shiftLeft(value: string) {
     .join('\n');
 }
 
-export const DOCS_URL = 'https://NVIDIA.github.io/elements/';
+export let DOCS_URL = '';
+/* @ts-ignore-next-line */
+if (!import.meta.env.VITE_BUNDLE_CONFIG) {
+  DOCS_URL = 'http://nv/elements';
+}

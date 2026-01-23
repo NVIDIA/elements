@@ -60,7 +60,6 @@ function hasProblemsChanged(value: Problem[], oldValue: Problem[] | undefined) {
  * @event problem-context-menu - Dispatched when a problem's context menu is requested.
  * @slot empty - Slot for displaying a message when empty.
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea
- * @storybook https://NVIDIA.github.io/elements/docs/labs/monaco/problems/
  * @stable false
  */
 export class MonacoProblems extends LitElement {

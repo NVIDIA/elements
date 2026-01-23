@@ -217,10 +217,10 @@ nve-copy-button.markdown-copy-button {
   right: calc(anchor(right) + var(--nve-ref-space-md));
   opacity: 0;
   transition: opacity 0.15s ease-in-out;
-
 }
 
-code:has(nve-codeblock:hover) nve-copy-button.markdown-copy-button, nve-copy-button.markdown-copy-button:hover {
+code:has(nve-codeblock:hover) nve-copy-button.markdown-copy-button,
+nve-copy-button.markdown-copy-button:hover {
   opacity: 1;
 }
 
