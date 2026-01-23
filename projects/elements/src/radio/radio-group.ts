@@ -8,8 +8,6 @@ import styles from './radio-group.css?inline';
  * @description Groups related radio buttons together with a shared label and validation messaging for single-select form inputs.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/radio
- * @storybook https://NVIDIA.github.io/elements/docs/elements/radio/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=29-16&t=iOYah8Uct8CFd69k-0
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/radio/
  */
 @audit()

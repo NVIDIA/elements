@@ -18,8 +18,6 @@ import cardFooterStyleSheet from './card-footer.css?inline';
  * @cssprop --border-radius
  * @cssprop --box-shadow
  * @cssprop --border
- * @storybook https://NVIDIA.github.io/elements/docs/elements/card/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
 @audit()
@@ -60,8 +58,6 @@ export class Card extends LitElement implements ContainerElement {
  * @cssprop --border-bottom
  * @cssprop --line-height
  * @cssprop --gap
- * @storybook https://NVIDIA.github.io/elements/docs/elements/card/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
 @audit()
@@ -98,8 +94,6 @@ export class CardHeader extends LitElement {
  * @entrypoint \@nvidia-elements/core/card
  * @slot - This is a default/unnamed slot for card content content
  * @cssprop --padding
- * @storybook https://NVIDIA.github.io/elements/docs/elements/card/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
 @audit()
@@ -127,8 +121,6 @@ export class CardContent extends LitElement {
  * @slot - This is a default/unnamed slot for card footer content
  * @cssprop --padding
  * @cssprop --border-top
- * @storybook https://NVIDIA.github.io/elements/docs/elements/card/
- * @figma https://www.figma.com/file/vbcJuxNZO6t2KScQ8y5H7z/%F0%9F%93%9A-MagLev-Elements-Design-Catalog---WIP?node-id=30-36&t=CAAM7yEBvG18tRRa-0
  * @aria https://github.com/w3c/aria-practices/issues
  */
 @audit()

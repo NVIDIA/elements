@@ -18,7 +18,6 @@ import styles from './password.css?inline';
  * @cssprop --border-radius
  * @cssprop --border
  * @cssprop --cursor
- * @storybook https://NVIDIA.github.io/elements/docs/elements/password/
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password
  */
 export class Password extends Control {
