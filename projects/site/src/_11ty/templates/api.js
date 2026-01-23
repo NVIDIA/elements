@@ -144,7 +144,7 @@ export function elementSupportButtons(tag) {
       </nve-card>
     </a>
 
-    <a href="${element?.manifest?.metadata?.figma ?? ''}" target="_blank" class="support-button-link">
+    <a href="http://nv/elements-figma" target="_blank" class="support-button-link">
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
@@ -296,8 +296,6 @@ export function elementStatus(tag) {
   /** @type {import('@internals/metadata').MetadataCustomElementsManifestDeclaration['metadata']} */
   const elementMetadata = elements.find(d => d.name === tag)?.manifest?.metadata ?? {
     status: 'unknown',
-    figma: '',
-    storybook: '',
     aria: '',
     themes: false,
     performance: false,
@@ -323,9 +321,9 @@ export function elementStatus(tag) {
       <nve-badge status="${elementMetadata.status === 'pre-release' ? 'warning' : 'pending'}">pre-release <nve-icon name="exclamation-triangle"></nve-icon></nve-badge>
       
       <div nve-layout="column gap:xs">
-        <nve-alert status="${elementMetadata.figma ? 'finished' : 'pending'}">Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
-        <nve-alert status="${elementMetadata.storybook ? 'finished' : 'pending'}">Docs Preview</nve-alert>
-        <nve-alert status="${elementMetadata.storybook ? 'finished' : 'pending'}">API Documentation</nve-alert>
+        <nve-alert status="finished">Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
+        <nve-alert status="finished">Docs Preview</nve-alert>
+        <nve-alert status="finished">API Documentation</nve-alert>
         <nve-alert status="${elementMetadata.themes ? 'finished' : 'pending'}">Fully Themeable</nve-alert>
       </div>
     </div>

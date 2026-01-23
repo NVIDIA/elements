@@ -95,7 +95,7 @@ export function render() {
             result => result.file === element.name || result.file?.includes(element.name.split('-')[1])
           )?.branches.pct ?? 0;
         return /* html */ `<nve-grid-row>
-        <nve-grid-cell><a href=${element.manifest?.metadata?.storybook?.replace('https://NVIDIA.github.io/elements/', './')} nve-text="body link no-visit">${element.name.replace('nve-', '')}</a></nve-grid-cell>
+        <nve-grid-cell>${element.name.replace('nve-', '')}</nve-grid-cell>
         <nve-grid-cell>${badgeStatus(element?.manifest?.metadata?.status ?? '', 'flat', ESM_ELEMENTS_VERSION)}</nve-grid-cell>
         <nve-grid-cell>${badgeCoverage(coverageTotal, 'flat')}</nve-grid-cell>
         <nve-grid-cell>${lighthouse?.payload?.javascript?.kb ? /* html */ badgeBundle(lighthouse?.payload?.javascript?.kb, 'flat') : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
@@ -106,7 +106,6 @@ export function render() {
         <nve-grid-cell>${badgeAxe(axe?.failureMessages[0] ?? '', 'flat')}</nve-grid-cell>
         <nve-grid-cell>${getBehaviorCategoryIcon(element.manifest?.metadata?.behavior ?? 'unknown')}&nbsp;&nbsp;<a href=${element.manifest?.metadata?.aria ?? ''} nve-text="link no-visit">${element.manifest?.metadata?.behavior ?? 'unknown'}</a></nve-grid-cell>
         <nve-grid-cell>${element.manifest?.metadata?.since ?? ''}</nve-grid-cell>
-        <nve-grid-cell>${element.manifest?.metadata?.figma ? /* html */ `<a href="${element.manifest.metadata.figma}" nve-text="link no-visit">Figma</a>` : /* html */ `<nve-icon name="exclamation-triangle" status="warning"></nve-icon>`}</nve-grid-cell>
         <nve-grid-cell><nve-badge status="success" container="flat">light/dark</nve-badge></nve-grid-cell>
         <nve-grid-cell>${element.manifest?.metadata?.responsive ? /* html */ `<nve-badge status="success" container="flat">layouts</nve-badge>` : /* html */ `<nve-badge status="warning" container="flat">partial</nve-badge>`}</nve-grid-cell>
       </nve-grid-row>`;
@@ -137,7 +136,6 @@ const columns = {
   axe: { width: '170px', tooltip: 'Accessibility status from Axe Core API' },
   spec: { tooltip: 'Behavior category from W3C and WAI-ARIA Specification', width: '170px' },
   released: { tooltip: 'Version Element was first released', width: '170px' },
-  figma: { width: '170px', tooltip: 'Figma Design File URL' },
   themes: { width: '170px', tooltip: 'Supports base light and dark theme' },
   responsive: { tooltip: 'Provides basic minimal resposive layouts' }
 };
