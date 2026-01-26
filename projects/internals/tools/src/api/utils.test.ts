@@ -71,8 +71,8 @@ describe('getAvailableAPIs', () => {
 
   it('should return list of available elements APIs in markdown', () => {
     const apis = getPublicAPIs('markdown', metadata);
-    expect(apis).toContain('## nve-button (button)\n\nbutton description');
-    expect(apis).toContain('## nve-badge\n\nbadge description');
+    expect(apis).toContain('- **nve-button (button)**: button description');
+    expect(apis).toContain('- **nve-badge**: badge description');
   });
 });
 
