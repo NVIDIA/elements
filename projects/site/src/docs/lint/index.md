@@ -160,6 +160,12 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-popover-trigger</code></nve-grid-cell>
+    <nve-grid-cell>Require popover elements to have a corresponding trigger element.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-global-attribute-value</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of invalid attribute values in HTML</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>

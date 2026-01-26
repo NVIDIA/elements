@@ -600,10 +600,12 @@ const schema = {
   }
 };
 
+
 class ComboboxDemo extends LitElement {  
   @state() private value = [{ name: '', value: '' }];
-
+  
   // todo
+  /* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
   /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
   render() {
     return html`

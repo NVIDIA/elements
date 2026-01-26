@@ -11,6 +11,8 @@ export default {
   }
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 /**
  * @summary Basic toast with auto-dismiss for brief, non-critical feedback messages. Use toasts for lightweight confirmations like "Saved", "Copied", or "Action complete" that inform users without requiring interaction or disrupting workflow.
  */
