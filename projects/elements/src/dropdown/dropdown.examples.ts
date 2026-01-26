@@ -14,13 +14,15 @@ export default {
   component: 'nve-dropdown'
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 /**
  * @summary Basic dropdown implementation using popovertarget attribute to connect trigger and dropdown. Useful for simple dropdown menus.
  */
 export const Default = {
   render: () => html`
-<nve-dropdown id="dropdown">dropdown content</nve-dropdown>
 <nve-button popovertarget="dropdown">button</nve-button>
+<nve-dropdown id="dropdown">dropdown content</nve-dropdown>
   `
 };
 
@@ -44,6 +46,7 @@ export const DropdownMenu = {
 
 /**
  * @summary Dropdown using anchor attribute to reference trigger element by ID. Alternative approach for connecting dropdowns to their triggers.
+ * @tags test-case
  */
 export const Visual = {
   render: () => html`
@@ -54,6 +57,7 @@ export const Visual = {
 
 /**
  * @summary Demonstrates event handling for dropdown open and close events. Useful for adding custom behavior when dropdown state changes.
+ * @tags test-case
  */
 export const Events = {
   inline: false,
@@ -72,6 +76,7 @@ export const Events = {
 
 /**
  * @summary Dropdown with closable attribute that allows users to dismiss the dropdown by clicking close button.
+ * @tags test-case
  */
 export const Closable = {
   render: () => html`
@@ -85,6 +90,7 @@ export const Closable = {
 
 /**
  * @summary Dropdown with structured content using header and footer sections. Perfect for complex dropdown content that needs clear visual hierarchy.
+ * @tags test-case
  */
 export const DropdownLayout = {
   render: () => html`
@@ -172,6 +178,7 @@ export const Alignment = {
 
 /**
  * @summary Dropdown containing a radio group for single-selection options. Perfect for sort controls, filter selections, or preference settings.
+ * @tags test-case
  */
 export const RadioGroup = {
   render: () => html`
@@ -201,6 +208,7 @@ export const RadioGroup = {
 
 /**
  * @summary Dropdown containing a checkbox group for multi-selection options. Ideal for filter controls, feature toggles, or bulk action selections.
+ * @tags test-case
  */
 export const CheckboxGroup = {
   render: () => html`
@@ -228,6 +236,7 @@ export const CheckboxGroup = {
 /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
 
 /**
+ * @deprecated
  * @summary Legacy behavior trigger for dropdown, demonstrating how to use the behavior-trigger attribute to open the dropdown when the button is clicked.
  * @tags test-case
  */
