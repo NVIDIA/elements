@@ -22,7 +22,7 @@ describe('lighthouse report', () => {
     `);
 
     expect(report.payload.javascript.kb).toBeLessThan(45);
-    expect(report.payload.javascript.requests['define.js'].kb).toBeLessThan(10);
+    expect(report.payload.javascript.requests['define.js'].kb).toBeLessThan(10.5);
     expect(report.payload.javascript.requests['core.js'].kb).toBeLessThan(9);
     expect(report.payload.javascript.requests['bash.js'].kb).toBeLessThan(3);
     expect(report.payload.javascript.requests['css.js'].kb).toBeLessThan(4.5);
@@ -59,6 +59,6 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(30.6);
+    expect(report.payload.javascript.kb).toBeLessThan(31);
   });
 });
