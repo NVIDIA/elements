@@ -2,7 +2,7 @@ import { ProjectsService } from '@internals/metadata';
 import { fuzzyMatch } from '../internal/search.js';
 import { service, tool } from '../internal/tools.js';
 
-const MAX_LINE_COUNT = 1024;
+const MAX_LINE_COUNT = 512;
 const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
 const packageNames = projects.map(p => p.name);
 const changelogs = projects.reduce((acc, p) => ({ ...acc, [p.name]: p.changelog }), {});
@@ -86,7 +86,14 @@ export class ChangelogsService {
     name: string;
     format?: 'markdown' | 'json';
   }): Promise<{ [key: string]: string } | string> {
-    const changelog = await searchChangelogs(name, changelogs);
+    const changelog = searchChangelogs(name, changelogs);
+
+    if (!changelog) {
+      const availablePackages = packageNames.map(p => `"${p}"`).join(', ');
+      const message = `No changelog found for "${name}".\n\nAvailable packages: ${availablePackages}\n\nTip: Try using the exact package name from the list above, or search for keywords like "elements", "themes", "cli", "monaco".`;
+      return format && format !== 'markdown' ? { [name]: message } : message;
+    }
+
     const markdown = changelog.split('\n').slice(0, MAX_LINE_COUNT).join('\n');
     return format && format !== 'markdown' ? { [name]: changelog } : markdown;
   }
