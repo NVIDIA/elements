@@ -37,3 +37,34 @@ export function getElementImports(html: string, elements: Element[], lazy = fals
 
   return [...IMPORTS, ...ELEMENTS_CODE_IMPORTS];
 }
+
+export function wrapText(text = '', width = 80) {
+  return text
+    .split('\n')
+    .map(line => {
+      if (line.length <= width) return line;
+
+      const lines: string[] = [];
+      let currentLine = '';
+
+      for (const word of line.split(' ')) {
+        if (currentLine.length + word.length + 1 <= width) {
+          currentLine += (currentLine ? ' ' : '') + word;
+        } else {
+          if (currentLine) {
+            lines.push(currentLine);
+            currentLine = word;
+          } else {
+            lines.push(word);
+          }
+        }
+      }
+
+      if (currentLine) {
+        lines.push(currentLine);
+      }
+
+      return lines.join('\n');
+    })
+    .join('\n');
+}

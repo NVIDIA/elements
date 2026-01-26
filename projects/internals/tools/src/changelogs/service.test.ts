@@ -48,6 +48,20 @@ describe('ChangelogsService', () => {
     expect((ChangelogsService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.name).toBeDefined();
     expect((ChangelogsService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.format).toBeDefined();
   });
+
+  it('should return helpful message when no changelog found (markdown)', async () => {
+    const result = await ChangelogsService.search({ name: 'no-match', format: 'markdown' });
+    expect(result).toContain('No changelog found for');
+    expect(result).toContain('no-match');
+    expect(result).toContain('Available packages:');
+    expect(result).toContain('Tip:');
+  });
+
+  it('should return helpful message when no changelog found (json)', async () => {
+    const result = await ChangelogsService.search({ name: 'no-match', format: 'json' });
+    expect((result as { [key: string]: string })['no-match']).toBeDefined();
+    expect((result as { [key: string]: string })['no-match']).toContain('No changelog found');
+  });
 });
 
 describe('searchChangelogs', () => {
