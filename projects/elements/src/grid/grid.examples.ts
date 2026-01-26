@@ -793,6 +793,8 @@ export const RowSort = {
   `
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 /**
  * @summary CSS anchor positioning for tooltips within grid cells, demonstrating proper tooltip placement and content visibility in constrained grid environments.
  * @tags test-case

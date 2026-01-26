@@ -4,6 +4,8 @@ export const data = {
   permalink: 'docs/foundations/themes/color/index.html'
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 export function render(data) {
   return this.renderTemplate(
     /* html */ `
@@ -68,7 +70,7 @@ ${getColorScale('ref-color-brand-green')}
 ${getColorScale('ref-color-alpha-black')}
 ${getColorScale('ref-color-alpha-white')}
 </div>
-<nve-toast id="color-scale-toast" close-timeout="1500" position="left" hidden>copied!</nve-toast>
+<nve-toast id="color-scale-toast" close-timeout="1500" position="left" hidden>copied!</nve-toast><!-- eslint-disable-line @nvidia-elements/lint/no-missing-popover-trigger -->
 <script type="module">
   const toast = document.querySelector('#color-scale-toast');
   const scale = document.querySelector('.color-scale');

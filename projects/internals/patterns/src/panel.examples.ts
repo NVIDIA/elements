@@ -10,6 +10,8 @@ import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/tabs/define.js';
 import '@nvidia-elements/core/tag/define.js';
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 export default {
   title: 'Patterns/Examples',
   component: 'nve-internal-patterns'
