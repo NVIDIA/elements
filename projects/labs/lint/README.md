@@ -81,6 +81,7 @@ export default [
 | `@nvidia-elements/lint/no-deprecated-slots` | Disallow use of deprecated slot APIs. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-tags` | Disallow use of deprecated elements/tags | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-slotted-elements` | Disallow use of missing slotted elements. | HTML | `error` |
+| `@nvidia-elements/lint/no-missing-popover-trigger` | Require popover elements to have a corresponding trigger element. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attributes` | Disallow use of utility attributes on custom HTML element tags. | HTML | `error` |
 | `@nvidia-elements/lint/no-unexpected-global-attribute-value` | Disallow use of invalid attribute values in HTML | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attributes` | Do not allow invalid use of nve-* attributes | HTML | `error` |
