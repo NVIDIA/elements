@@ -106,7 +106,13 @@ export class ApiService {
     query: string;
     format: 'markdown' | 'json';
   }): Promise<(Element | Attribute)[] | string> {
-    const results = await searchPublicAPIs(query, { limit: 8 });
+    const results = await searchPublicAPIs(query, { limit: 5 });
+
+    if (results.length === 0) {
+      const message = `No components or APIs found matching "${query}".\n\nTip: Try searching for component names (e.g., "button", "input", "grid"), component categories (e.g., "form", "navigation", "popover"), or specific features (e.g., "validation", "slots", "events").`;
+      return format === 'markdown' ? message : results;
+    }
+
     return format === 'markdown' ? results.map(r => r.markdown).join('\n\n---\n\n') : results;
   }
 

@@ -6,6 +6,7 @@ import {
   type Token,
   type ProjectTypes
 } from '@internals/metadata';
+import { wrapText } from '../internal/utils.js';
 
 export interface PartialAPIResult {
   name: string;
@@ -30,16 +31,16 @@ export function getPublicAPIs(
     .map(e => ({ name: e.name, description: e.manifest.description, behavior: e.manifest.metadata?.behavior ?? '' }));
   const elementsMarkdown = elementsResult.map(e => {
     const behavior = e.behavior ? ` (${e.behavior})` : '';
-    return `## ${e.name}${behavior}\n\n${e.description}`;
+    return `- **${e.name}${behavior}**: ${wrapText(e.description)}`;
   });
 
   const attributesResult = metadata.data.attributes
     .filter(a => a.description)
     .map(a => ({ name: a.name, description: a.description, behavior: 'attribute' }));
-  const attributesMarkdown = attributesResult.map(a => `## ${a.name} (${a.behavior})\n\n${a.description}`);
+  const attributesMarkdown = attributesResult.map(a => `- **${a.name} (${a.behavior})**: ${wrapText(a.description)}`);
 
   if (format === 'markdown') {
-    return [...elementsMarkdown, ...attributesMarkdown].join('\n\n---\n\n');
+    return [...elementsMarkdown, ...attributesMarkdown].join('\n');
   } else if (format === 'json') {
     return { elements: elementsResult, attributes: attributesResult };
   }
