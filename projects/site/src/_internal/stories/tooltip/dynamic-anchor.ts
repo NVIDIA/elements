@@ -33,6 +33,7 @@ export class DynamicAnchorPositionDemo extends LitElement {
 
   #anchor: Ref<HTMLElement> = createRef();
 
+  /* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
   render() {
     return html`
       <!-- <div ${ref(this.#anchor)} id="anchor"></div> -->

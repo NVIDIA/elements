@@ -136,7 +136,7 @@ export const ShortcutFlat = {
  */
 export const ShortcutDropdown = {
   render: () => html`
-  <nve-button popover="code-menu">dropdown</nve-button>
+  <nve-button popovertarget="code-menu">dropdown</nve-button>
   <nve-dropdown id="code-menu" hidden>
     <nve-menu>
       <nve-menu-item>
