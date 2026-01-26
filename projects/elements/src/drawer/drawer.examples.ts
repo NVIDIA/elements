@@ -9,6 +9,8 @@ export default {
   inline: false
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 /**
  * @summary Basic modal drawer with header, content, and footer sections. Use for displaying detailed information, forms, or settings that need more space than a dialog, typically sliding in from the side of the screen.
  */
