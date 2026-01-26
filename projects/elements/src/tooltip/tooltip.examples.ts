@@ -22,6 +22,8 @@ export default {
   }
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 /**
  * @summary Basic tooltip triggered by popovertarget attribute. Use for providing brief, contextual information on hover or focus without cluttering the interface.
  */
@@ -299,6 +301,7 @@ export const DynamicAnchorPosition = {
 /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
 
 /**
+ * @deprecated
  * @summary Legacy pattern for dynamic tooltip triggers using behavior-trigger attribute. Demonstrates programmatic anchor and trigger reassignment for backward compatibility with older implementations.
  * @tags test-case
  */
@@ -325,6 +328,7 @@ export const LegacyDynamicTrigger = {
 };
 
 /**
+ * @deprecated
  * @summary Legacy trigger pattern with manual event handling and hidden attribute management. Shows older implementation approach for backward compatibility, prefer using popovertarget for new implementations.
  * @tags test-case
  */
@@ -343,6 +347,7 @@ export const LegacyTrigger = {
 };
 
 /**
+ * @deprecated
  * @summary Legacy behavior-trigger pattern for automatic tooltip lifecycle management. Deprecated approach that auto-manages visibility, prefer modern popovertarget API for new implementations.
  * @tags test-case
  */
@@ -354,6 +359,7 @@ export const LegacyBehaviorTrigger = {
 };
 
 /**
+ * @deprecated
  * @summary Legacy implementation combining behavior-trigger with open-delay for multiple tooltips. Demonstrates older pattern for delayed tooltip appearance, prefer modern popovertarget with open-delay attribute.
  * @tags test-case
  */
@@ -388,6 +394,7 @@ class CrossShadowRootAnchorPositionDemo extends LitElement {
 }
 
 /**
+ * @deprecated
  * @summary Tooltip anchored to elements across shadow DOM boundaries. Demonstrates tooltip positioning when anchor elements exist in different DOM scopes, essential for web component architectures.
  * @tags test-case
  */

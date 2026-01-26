@@ -12,6 +12,8 @@ export default {
   }
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 /**
  * @summary Basic notification with auto-dismiss timeout for temporary feedback messages. Use notifications for system-generated alerts, confirmations, or status updates that don't require immediate user action, automatically dismissing after a set duration.
  */

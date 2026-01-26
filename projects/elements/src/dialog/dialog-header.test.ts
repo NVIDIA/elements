@@ -4,6 +4,8 @@ import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/
 import { DialogHeader } from '@nvidia-elements/core/dialog';
 import '@nvidia-elements/core/dialog/define.js';
 
+/** eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 describe(DialogHeader.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: DialogHeader;
