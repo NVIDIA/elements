@@ -17,6 +17,8 @@ export default {
   }
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 /**
  * @summary Basic toggletip requiring click to open and close. Unlike tooltips that appear on hover, use toggletips for interactive content, additional details, or when users need time to read or interact with the popover content.
  */
@@ -179,6 +181,7 @@ export const Alignment = {
 };
 
 /**
+ * @deprecated
  * @summary Legacy behavior-trigger pattern for automatic toggletip lifecycle management. Deprecated approach with manual trigger attributes, prefer modern popovertarget API for simpler and more maintainable toggletip implementation.
  * @tags test-case
  */

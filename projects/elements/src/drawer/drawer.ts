@@ -60,9 +60,8 @@ export class Drawer extends LitElement {
   @property({ type: Boolean, reflect: true }) modal: boolean;
 
   /**
-   * The anchor provides the element that the popover should position relative to.
-   * Anchor can accept a idref string within the same render root or a HTMLElement DOM reference.
-   * Drawers should default to the document body.
+   * (optional) By default the popover will automatically anchor itself relative to the trigger element.
+   * A optional custom anchor element can be provided by passing an idref string within the same render root or a HTMLElement DOM reference.
    */
   @property({ type: String }) anchor: string | HTMLElement = globalThis.document?.body;
 

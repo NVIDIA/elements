@@ -23,7 +23,8 @@ import styles from './notification-group.css?inline';
 @audit()
 export class NotificationGroup extends LitElement {
   /**
-   * Sets the anchor element to which the popover is attached.
+   * (optional) By default the popover will automatically anchor itself relative to the trigger element.
+   * A optional custom anchor element can be provided by passing an idref string within the same render root or a HTMLElement DOM reference.
    */
   @property({ type: String }) anchor: string | HTMLElement;
 

@@ -13,6 +13,8 @@ export default {
   }
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 /**
  * @summary Basic modal dialog for focused user interactions. Use dialogs for confirmations, simple forms, or important information that requires user attention before continuing, creating a modal overlay that blocks interaction with the underlying page until dismissed.
  */
