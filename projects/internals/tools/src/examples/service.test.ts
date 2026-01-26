@@ -44,4 +44,17 @@ describe('ExampleService', () => {
     const result = await ExamplesService.getAll();
     expect(result.length).toBeGreaterThan(0);
   });
+
+  it('should return helpful message for empty search results (markdown)', async () => {
+    const result = await ExamplesService.search({ query: 'nonexistent-example-xyz', format: 'markdown' });
+    expect(result).toContain('No examples found matching');
+    expect(result).toContain('nonexistent-example-xyz');
+    expect(result).toContain('Tip:');
+  });
+
+  it('should return empty array for empty search results (json)', async () => {
+    const result = await ExamplesService.search({ query: 'nonexistent-example-xyz', format: 'json' });
+    expect(Array.isArray(result)).toBe(true);
+    expect(result).toHaveLength(0);
+  });
 });
