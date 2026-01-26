@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Example } from '@nve-internals/metadata';
-import { getPublicExamples, searchPublicExamples, renderExampleMarkdown, wrapText } from './utils.js';
+import { getPublicExamples, searchPublicExamples, renderExampleMarkdown } from './utils.js';
+import { wrapText } from '../internal/utils.js';
 
 describe('utils', () => {
   const mockExamples: Example[] = [
@@ -55,22 +56,22 @@ describe('utils', () => {
   describe('getAvailableExamples', () => {
     it('should return markdown format correctly', () => {
       const result = getPublicExamples('markdown', mockExamples);
-      expect(result).toContain('## Button Basic (project-example_button-basic)');
-      expect(result).toContain('## Button With Icon (project-example_button-with-icon)');
+      expect(result).toContain('- **project-example_button-basic**: Basic button example');
+      expect(result).toContain('- **project-example_button-with-icon**: Button with icon example');
       expect(result).toContain('Basic button example');
       expect(result).toContain('Button with icon example');
-      expect(result).toContain('---');
     });
 
     it('should return JSON format correctly', () => {
       const result = getPublicExamples('json', mockExamples);
       expect(Array.isArray(result)).toBe(true);
       expect(result).toHaveLength(3);
+      // Array is reversed, so card comes first
       expect(result[0]).toEqual({
-        id: 'project-example_button-basic',
-        name: 'ButtonBasic',
-        element: 'nve-button',
-        summary: 'Basic button example'
+        id: 'project-example_card-component',
+        name: 'CardComponent',
+        element: 'nve-card',
+        summary: 'Card component example'
       });
       expect(result[1]).toEqual({
         id: 'project-example_button-with-icon',
@@ -90,21 +91,23 @@ describe('utils', () => {
 
     it('should handle examples with missing summary', () => {
       const examplesWithMissingDesc: Partial<Example>[] = [
-        { id: '', name: 'Test1', tags: [], element: 'nve-test', template: '', summary: 'Has summary' },
-        { id: '', name: 'Test2', tags: [], element: 'nve-test', template: '' } // missing summary
+        { id: 'test-1', name: 'Test1', tags: [], element: 'nve-test', template: '', summary: 'Has summary' },
+        { id: 'test-2', name: 'Test2', tags: [], element: 'nve-test', template: '' } // missing summary
       ];
 
+      // Markdown only includes examples with summaries
       const markdownResult = getPublicExamples('markdown', examplesWithMissingDesc);
-      expect(markdownResult).toContain('## Test1');
-      expect(markdownResult).toContain('## Test2');
+      expect(markdownResult).toContain('- **test-1**: Has summary');
+      expect(markdownResult).not.toContain('test-2'); // no summary, filtered out
 
       const jsonResult = getPublicExamples('json', examplesWithMissingDesc) as Array<{
         id: string;
         name: string;
         summary?: string;
       }>;
-      expect(jsonResult[0].summary).toBe('Has summary');
-      expect(jsonResult[1].summary).toBeUndefined();
+      // JSON includes all (reversed order)
+      expect(jsonResult[0].summary).toBeUndefined(); // Test2 first (reversed)
+      expect(jsonResult[1].summary).toBe('Has summary'); // Test1 second
     });
   });
 
