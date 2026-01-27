@@ -7,6 +7,7 @@ import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/copy-button/define.js';
+import '@nvidia-elements/core/resize-handle/define.js';
 import '@nvidia-elements/code/codeblock/define.js';
 import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/languages/typescript.js';
@@ -31,9 +32,17 @@ export class Canvas extends LitElement {
 
   @property({ type: String, reflect: true }) layer?: 'container' | 'canvas' | 'highlight';
 
+  @property({ type: Number }) min: number = 200;
+
+  @property({ type: Number }) max: number = 1260;
+
   @state() private showSource = false;
 
   @state() private sourceType: 'html' | 'react' = 'html';
+
+  @state() private previewWidth: number;
+
+  @state() private maxPreviewWidth: number;
 
   static metadata = {
     tag: 'nvd-canvas',
@@ -41,6 +50,23 @@ export class Canvas extends LitElement {
   };
 
   static styles = useStyles([styles]);
+
+  connectedCallback() {
+    super.connectedCallback();
+    // Initialize state values from properties
+    this.previewWidth = this.max;
+    this.maxPreviewWidth = this.max;
+    
+    // Initialize previewWidth based on parent container width if possible
+    requestAnimationFrame(() => {
+      const containerWidth = this.offsetWidth - 3;
+      const maxWidth = Math.min(containerWidth, this.max);
+      if (maxWidth > this.min) {
+        this.maxPreviewWidth = maxWidth;
+        this.previewWidth = maxWidth;
+      }
+    });
+  }
 
   get formattedSource() {
     const source = (this.source ? this.source : this.innerHTML).trim();
@@ -50,9 +76,17 @@ export class Canvas extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <div class="resizer">
+        <div class="resizer" style="--preview-width: ${this.previewWidth}px">
           <slot @slotchange=${() => this.#updateSource()}></slot>
-          <div class="preview-backdrop"></div>
+          <nve-resize-handle 
+            class="preview-resize-handle" 
+            orientation="vertical" 
+            min="${this.min}" 
+            max="${this.maxPreviewWidth}" 
+            value="${this.previewWidth}" 
+            step="1"
+            @input=${this.#handleResize}>
+          </nve-resize-handle>
         </div>
         <div class="code" .hidden=${!this.showSource}>
           ${this.source ? html`<nve-codeblock language="html" .code=${this.formattedSource}></nve-codeblock>` : nothing}
@@ -96,6 +130,17 @@ export class Canvas extends LitElement {
 
   #handleCopyClick() {
     this.#sendAnalyticsEvent('elements-docs-source-copy');
+  }
+
+  #handleResize(event: Event) {
+    const handle = event.target as HTMLInputElement;
+    // Update max based on current container size when user is actively resizing
+    const containerWidth = this.offsetWidth - 3;
+    const maxWidth = Math.min(containerWidth, this.max);
+    if (maxWidth > this.min) {
+      this.maxPreviewWidth = maxWidth;
+    }
+    this.previewWidth = Number(handle.value);
   }
 
   #sendAnalyticsEvent(eventName: string) {
