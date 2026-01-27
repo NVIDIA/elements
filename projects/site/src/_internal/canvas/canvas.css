@@ -19,7 +19,7 @@
 }
 
 :host([layer='highlight']) {
-  slot:not([name]) {
+  .resizer slot:not([name]) {
     background: linear-gradient(to right, #4e54c8, #8f94fb) !important;
   }
 }
@@ -41,7 +41,8 @@ nve-toolbar {
   border-top: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
 }
 
-slot:not([name]) {
+.resizer slot:not([name]) {
+  anchor-name: --preview-slot;
   border-top-left-radius: var(--nve-ref-border-radius-md);
   border-top-right-radius: var(--nve-ref-border-radius-md);
   background: var(--background);
@@ -51,16 +52,15 @@ slot:not([name]) {
   scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
   scrollbar-width: var(--nve-sys-scrollbar-width);
   display: block;
-  resize: horizontal;
   min-width: 120px;
-  width: 100%;
+  width: min(var(--preview-width, 1260px), 100%);
 }
 
 ::slotted(iframe) {
   height: var(--height) !important;
 }
 
-:host([align='center']) slot:not([name]) {
+:host([align='center']) .resizer slot:not([name]) {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,15 +85,9 @@ nve-select::part(_caret) {
 }
 
 .resizer {
-  display: flex;
-  align-items: stretch;
+  position: relative;
   min-height: 80px;
-}
-
-.preview-backdrop {
   background: var(--nve-ref-color-alpha-black-400);
-  min-height: 100%;
-  flex: 1;
 }
 
 [internal-host] {
@@ -127,4 +121,15 @@ nve-copy-button {
   nve-select {
     display: none;
   }
+}
+
+.preview-resize-handle {
+  --target-size: 5px;
+  position: absolute;
+  position-anchor: --preview-slot;
+  left: anchor(right);
+  top: anchor(top);
+  bottom: anchor(bottom);
+  z-index: 100;
+  pointer-events: auto;
 }
