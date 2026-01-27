@@ -23,9 +23,9 @@ Additionally, `nve-panel` can be have its `side` property set to `left` or `righ
 
 {% api 'nve-panel', 'property', 'side' %}
 
-{% story 'nve-panel', 'LeftSidePanel' %}
+{% example '@nvidia-elements/core/panel/panel.examples.json' 'LeftSidePanel' %}
 
-{% story 'nve-panel', 'RightSidePanel' %}
+{% example '@nvidia-elements/core/panel/panel.examples.json' 'RightSidePanel' %}
 
 ## Collapsible Panel with External Trigger
 
@@ -35,21 +35,21 @@ An external trigger can be used to expand/collapse or hide/show a panel. In this
   Collapsible Panel with External Trigger is for use with a fixed position when collapsed, otherwise the button may have a flat side and not be on the edge of the page.
 </nve-alert>
 
-{% story 'nve-panel', 'PanelWithTrigger', '{ "inline": false, "height": "650px" }' %}
+{% example '@nvidia-elements/core/panel/panel.examples.json' 'PanelWithTrigger' '{ "inline": false, "height": "650px" }' %}
 
 ## Closable Panel with External Trigger
 
 {% api 'nve-panel', 'property', 'closable' %}
 
-{% story 'nve-panel', 'ClosablePanel', '{ "inline": false, "height": "650px" }' %}
+{% example '@nvidia-elements/core/panel/panel.examples.json' 'ClosablePanel' '{ "inline": false, "height": "650px" }' %}
 
 ## Panel with Header
 
 The `nve-panel-header` sub-component can be slotted into `nve-panel` to get default border styling, and additional sub slots within the header.
 In this example `nve-panel-header` is further slotted with elements for `slot="title"`, `slot="subtitle"`, `icon-button` with `slot="action-icon"`
 
-{% story 'nve-panel', 'PanelWithFullHeader' %}
+{% example '@nvidia-elements/core/panel/panel.examples.json' 'PanelWithFullHeader' %}
 
 ## Panel with Footer
 
-{% story 'nve-panel', 'PanelWithFooter' %}
+{% example '@nvidia-elements/core/panel/panel.examples.json' 'PanelWithFooter' %}

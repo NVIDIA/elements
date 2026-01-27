@@ -355,7 +355,6 @@
         "./src/utils/utils.ts",
         "../patterns/dist/**/*.examples.json",
         "../../elements/dist/**/*.examples.json",
-        "../../elements/dist/**/*.stories.json",
         "../../styles/dist/**/*.examples.json",
         "../../themes/dist/**/*.examples.json",
         "../../monaco/dist/**/*.examples.json",

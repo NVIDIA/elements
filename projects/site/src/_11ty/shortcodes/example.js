@@ -143,10 +143,9 @@ function reloadScript(example, canvasId) {
 }
 
 function findExample(ref, exampleName) {
-  const example =
-    ref.includes('.stories.json') || ref.includes('.examples.json')
-      ? examples.find(s => s.entrypoint?.includes(ref) && s.name === exampleName)
-      : examples.find(s => s.element === ref && s.name === exampleName);
+  const example = ref.includes('.examples.json')
+    ? examples.find(s => s.entrypoint?.includes(ref) && s.name === exampleName)
+    : examples.find(s => s.element === ref && s.name === exampleName);
 
   if (!example) {
     console.error('Example not found: ', ref, exampleName);

@@ -14,42 +14,42 @@
 
 {% api 'nve-progress-ring', 'property', 'value' %}
 
-{% story 'nve-progress-ring', 'Values' %}
+{% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'Values' %}
 
 ## Max Value
 
 {% api 'nve-progress-ring', 'property', 'max' %}
 
-{% story 'nve-progress-ring', 'Max' %}
+{% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'Max' %}
 
 ## Indicating Status
 
 {% api 'nve-progress-ring', 'property', 'status' %}
 
-{% story 'nve-progress-ring', 'Status' %}
+{% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'Status' %}
 
 When `value` is set to zero, full size status icons are shown with no ring.
 
-{% story 'nve-progress-ring', 'ZeroValueStatus' %}
+{% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'ZeroValueStatus' %}
 
 When used with text, please set `size="xs"`.
 
-{% story 'nve-progress-ring', 'WithText' %}
+{% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'WithText' %}
 
 ## Sizing
 
 {% api 'nve-progress-ring', 'property', 'size' %}
 
-{% story 'nve-progress-ring', 'Sizing' %}
+{% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'Sizing' %}
 
 ## Custom Icon Slotting
 
 The `status-icon` slot can be used within `nve-progress-ring` to create a custom loading indicator.
 
-{% story 'nve-progress-ring', 'SlottedIcon' %}
+{% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'SlottedIcon' %}
 
 ## Using within a Button
 
 When `nve-progress-ring` is used within a `nve-button` the `status` should be set to `neutral` to properly inherit button background color.
 
-{% story 'nve-progress-ring', 'WithButton' %}
+{% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'WithButton' %}

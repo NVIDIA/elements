@@ -17,7 +17,7 @@ Support colors are used in combination of text or iconography to convey status o
 
 ## Icon Support
 
-{% example '@nvidia-elements/core/icon/icon.stories.json' 'Statuses' %}
+{% example '@nvidia-elements/core/icon/icon.examples.json' 'Statuses' %}
 
 ## Dot Support
 

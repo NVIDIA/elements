@@ -12,26 +12,26 @@
 
 ## Text Input
 
-{% story 'nve-progressive-filter-chip', 'TextInput' %}
+{% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'TextInput' %}
 
 ## Multiple
 
-{% story 'nve-progressive-filter-chip', 'Multiple' %}
+{% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'Multiple' %}
 
 ## Date Range
 
-{% story 'nve-progressive-filter-chip', 'DateRange' %}
+{% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'DateRange' %}
 
 ## Layer
 
-{% story 'nve-progressive-filter-chip', 'Layer' %}
+{% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'Layer' %}
 
 ## Custom
 
 Custom filter chips can be created by using the `slot` attribute. A `nve-button` can be used to trigger custom UI.
 
-{% story 'nve-progressive-filter-chip', 'Custom', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'Custom' '{ "inline": false, "height": "400px" }' %}
 
 ## Validation
 
-{% story 'nve-progressive-filter-chip', 'Validation' %}
+{% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'Validation' %}

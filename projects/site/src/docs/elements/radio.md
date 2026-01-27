@@ -16,16 +16,16 @@
 
 ### Vertical Group
 
-{% story 'nve-radio', 'VerticalGroup' %}
+{% example '@nvidia-elements/core/radio/radio.examples.json' 'VerticalGroup' %}
 
 ### Vertical Inline Group
 
-{% story 'nve-radio', 'VerticalInlineGroup' %}
+{% example '@nvidia-elements/core/radio/radio.examples.json' 'VerticalInlineGroup' %}
 
 ### Horizontal Group
 
-{% story 'nve-radio', 'HorizontalGroup' %}
+{% example '@nvidia-elements/core/radio/radio.examples.json' 'HorizontalGroup' %}
 
 ### Horizontal Inline Group
 
-{% story 'nve-radio', 'HorizontalInlineGroup' %}
+{% example '@nvidia-elements/core/radio/radio.examples.json' 'HorizontalInlineGroup' %}

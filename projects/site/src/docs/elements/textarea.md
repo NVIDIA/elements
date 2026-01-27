@@ -16,12 +16,12 @@
 
 ### Vertical
 
-{% story 'nve-textarea', 'Vertical' %}
+{% example '@nvidia-elements/core/textarea/textarea.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-textarea', 'Horizontal' %}
+{% example '@nvidia-elements/core/textarea/textarea.examples.json' 'Horizontal' %}
 
 ### Columns and Rows
 
-{% story 'nve-textarea', 'ColumnsAndRows' %}
+{% example '@nvidia-elements/core/textarea/textarea.examples.json' 'ColumnsAndRows' %}

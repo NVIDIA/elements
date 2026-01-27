@@ -16,8 +16,8 @@
 
 Disable individual menu items using the `disabled` attribute.
 
-{% story 'nve-dropdown-group', 'WithDisabledItems' %}
+{% example '@nvidia-elements/core/dropdown-group/dropdown-group.examples.json' 'WithDisabledItems' %}
 
 ## Icons in Menu Items
 
-{% story 'nve-dropdown-group', 'WithIcons' %}
+{% example '@nvidia-elements/core/dropdown-group/dropdown-group.examples.json' 'WithIcons' %}

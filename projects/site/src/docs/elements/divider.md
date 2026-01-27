@@ -12,16 +12,16 @@
 
 ## Emphasis
 
-{% story 'nve-divider', 'Emphasis' %}
+{% example '@nvidia-elements/core/divider/divider.examples.json' 'Emphasis' %}
 
 ## Muted
 
-{% story 'nve-divider', 'Muted' %}
+{% example '@nvidia-elements/core/divider/divider.examples.json' 'Muted' %}
 
 ## Vertical
 
-{% story 'nve-divider', 'Vertical' %}
+{% example '@nvidia-elements/core/divider/divider.examples.json' 'Vertical' %}
 
 ## Rounded
 
-{% story 'nve-divider', 'Rounded' %}
+{% example '@nvidia-elements/core/divider/divider.examples.json' 'Rounded' %}

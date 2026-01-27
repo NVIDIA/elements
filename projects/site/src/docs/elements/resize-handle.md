@@ -12,20 +12,20 @@
 
 ## Vertical
 
-{% story 'nve-resize-handle', 'Vertical' %}
+{% example '@nvidia-elements/core/resize-handle/resize-handle.examples.json' 'Vertical' %}
 
 ## Split Horizontal
 
-{% story 'nve-resize-handle', 'SplitHorizontal', '{ "inline": false, "height": "250px" }' %}
+{% example '@nvidia-elements/core/resize-handle/resize-handle.examples.json' 'SplitHorizontal' '{ "inline": false, "height": "250px" }' %}
 
 ## Split Vertical
 
-{% story 'nve-resize-handle', 'SplitVertical', '{ "inline": false, "height": "250px" }' %}
+{% example '@nvidia-elements/core/resize-handle/resize-handle.examples.json' 'SplitVertical' '{ "inline": false, "height": "250px" }' %}
 
 ## Form
 
-{% story 'nve-resize-handle', 'Form', '{ "inline": false, "height": "300px" }' %}
+{% example '@nvidia-elements/core/resize-handle/resize-handle.examples.json' 'Form' '{ "inline": false, "height": "300px" }' %}
 
 ## Line Width
 
-{% story 'nve-resize-handle', 'LineWidth' %}
+{% example '@nvidia-elements/core/resize-handle/resize-handle.examples.json' 'LineWidth' %}

@@ -30,12 +30,12 @@ export const Default = {
 };
 
 /**
- * @summary An example of a dropdown menu. [ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
+ * @summary An example of a dropdown menu. Useful for navigation menus, context menus, settings and user actions. [ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
  */
 export const Dropdown = {
   render: () => html`
-  <nve-button id="dropdown-menu-btn">dropdown</nve-button>
-  <nve-dropdown anchor="dropdown-menu-btn">
+  <nve-button popovertarget="dropdown-menu">dropdown</nve-button>
+  <nve-dropdown id="dropdown-menu">
     <nve-menu>
       <nve-menu-item><nve-icon name="person"></nve-icon> profile</nve-menu-item>
       <nve-menu-item><nve-icon name="gear"></nve-icon> settings</nve-menu-item>
@@ -77,6 +77,7 @@ export const Current = {
 
 /**
  * @summary By default Menu will show a blue border on the selected item. You can change the border color by setting `--border-background` on the `<nve-menu-item>`
+ * @tags test-case
  */
 export const BorderBackground = {
   render: () => html`
@@ -91,6 +92,7 @@ export const BorderBackground = {
 
 /**
  * @summary Menu with disabled items showing unavailable options while maintaining visual context.
+ * @tags test-case
  */
 export const Disabled = {
   render: () => html`
@@ -161,11 +163,12 @@ export const Scroll = {
 
 /**
  * @summary Complex dropdown menu with search functionality and branded logos for application selection interfaces.
+ * @tags pattern
  */
 export const Complex = {
   render: () => html`
-  <nve-button id="dropdown-menu-btn">dropdown</nve-button>
-  <nve-dropdown anchor="dropdown-menu-btn">
+  <nve-button popovertarget="dropdown-menu">dropdown</nve-button>
+  <nve-dropdown id="dropdown-menu">
     <nve-search rounded>
       <input type="search" placeholder="search tools" aria-label="search apps" />
     </nve-search>
@@ -252,7 +255,7 @@ export const VerticalNavigationPanel = {
 
 /**
  * @summary Menu item with tooltip integration showing how to provide additional context and warnings.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const MenuItemTooltip = {
   render: () => html`
