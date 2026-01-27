@@ -223,7 +223,6 @@
       "files": [
         "../elements/dist/internal/utils/dom.js",
         "../elements/dist/internal/styles/**",
-        "!../elements/dist/**/*.stories.js",
         "!../elements/dist/**/*.examples.js",
         "../labs/forms/dist/**/*.js",
         "!../labs/forms/dist/**/*.examples.js",
@@ -317,7 +316,7 @@
       "command": "vitest run",
       "files": [
         "dist/**/*.js",
-        "!dist/**/*.stories.js",
+        "!dist/**/*.examples.js",
         "src/**/*.test.ts",
         "!src/**/__screenshots__/**",
         "tsconfig.json",
@@ -337,7 +336,7 @@
       "command": "vitest run --coverage",
       "files": [
         "dist/**/*.js",
-        "!dist/**/*.stories.js",
+        "!dist/**/*.examples.js",
         "src/**/*.test.ts",
         "!src/**/__screenshots__/**",
         "tsconfig.json",
@@ -361,7 +360,7 @@
       "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
       "files": [
         "dist/**/*.js",
-        "!dist/**/*.stories.js",
+        "!dist/**/*.examples.js",
         "src/index.test.lighthouse.ts",
         "src/**/*.test.lighthouse.ts",
         "vitest.lighthouse.html",
@@ -385,7 +384,7 @@
       "command": "vitest run --config=vitest.axe.ts",
       "files": [
         "dist/**/*.js",
-        "!dist/**/*.stories.js",
+        "!dist/**/*.examples.js",
         "src/**/*.test.axe.ts",
         "tsconfig.json",
         "vitest.axe.ts"
@@ -410,7 +409,7 @@
       "clean": false,
       "files": [
         "dist/**/*.js",
-        "!dist/**/*.stories.js",
+        "!dist/**/*.examples.js",
         "src/index.test.visual.ts",
         "src/**/*.test.visual.ts",
         "vitest.visual.html",

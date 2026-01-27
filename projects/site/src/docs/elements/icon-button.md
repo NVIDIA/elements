@@ -12,39 +12,39 @@
 
 ## Interactions
 
-{% story 'nve-icon-button', 'Interactions' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'Interactions' %}
 
 ## Flat Interactions
 
-{% story 'nve-icon-button', 'FlatInteractions' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'FlatInteractions' %}
 
 ## Pressed/Toggle
 
 {% api 'nve-icon-button', 'property', 'pressed' %}
 
-{% story 'nve-icon-button', 'Pressed' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'Pressed' %}
 
 ### Pressed Flat
 
-{% story 'nve-icon-button', 'PressedFlat' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'PressedFlat' %}
 
 ### Pressed Inline
 
-{% story 'nve-icon-button', 'PressedInline' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'PressedInline' %}
 
 ## Selected
 
 {% api 'nve-icon-button', 'property', 'selected' %}
 
-{% story 'nve-icon-button', 'Selected' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'Selected' %}
 
 ### Selected Flat
 
-{% story 'nve-icon-button', 'SelectedFlat' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'SelectedFlat' %}
 
 ### Selected Inline
 
-{% story 'nve-icon-button', 'SelectedInline' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'SelectedInline' %}
 
 ## Link
 
@@ -62,16 +62,16 @@ Anchors can wrap button instances, however its recommended to slot the anchor in
 </a>
 ```
 
-{% story 'nve-icon-button', 'Link' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'Link' %}
 
 ## Custom Icon
 
-{% story 'nve-icon-button', 'CustomIcon' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'CustomIcon' %}
 
 ## Themes
 
-{% story 'nve-icon-button', 'Themes' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'Themes' %}
 
 ## Size
 
-{% story 'nve-icon-button', 'Size' %}
+{% example '@nvidia-elements/core/icon-button/icon-button.examples.json' 'Size' %}

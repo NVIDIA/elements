@@ -81,7 +81,7 @@ Perfect for static content and precise HTML control:
 
 ## Examples
 
-See the [examples](./src/markdown/markdown.stories.ts) for comprehensive usage demonstrations.
+See the [examples](./src/markdown/markdown.examples.ts) for comprehensive usage demonstrations.
 
 ## Development
 

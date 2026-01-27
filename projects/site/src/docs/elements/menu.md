@@ -15,60 +15,60 @@
 
 {% api 'nve-menu-item', 'property', 'selected' %}
 
-{% story 'nve-menu', 'Selected' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Selected' %}
 
 ## Current
 
 {% api 'nve-menu-item', 'property', 'current' %}
 
-{% story 'nve-menu', 'Current' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Current' %}
 
 ## Border Background
 
-{% story 'nve-menu', 'BorderBackground' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'BorderBackground' %}
 
 ## Disabled
 
 {% api 'nve-menu-item', 'property', 'disabled' %}
 
-{% story 'nve-menu', 'Disabled' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Disabled' %}
 
 ## Icons
 
-{% story 'nve-menu', 'Icons' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Icons' %}
 
 ## Scroll
 
-{% story 'nve-menu', 'Scroll' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Scroll' %}
 
 ## Dropdown
 
-{% story 'nve-menu', 'Dropdown', '{ "inline": false, "height": "380px" }' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Dropdown' '{ "inline": false, "height": "380px" }' %}
 
 ## Vertical Navigation Drawer
 
-{% story 'nve-menu', 'VerticalNavigationDrawer', '{ "inline": false, "height": "380px" }' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'VerticalNavigationDrawer' '{ "inline": false, "height": "380px" }' %}
 
 ## Vertical Navigation Panel
 
-{% story 'nve-menu', 'VerticalNavigationPanel' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'VerticalNavigationPanel' %}
 
 ## Menu Item Tooltip
 
-{% story 'nve-menu', 'MenuItemTooltip' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'MenuItemTooltip' %}
 
 ## Complex
 
-{% story 'nve-menu', 'Complex', '{ "inline": false, "height": "300px" }' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Complex' '{ "inline": false, "height": "300px" }' %}
 
 ## Links
 
-{% story 'nve-menu', 'Links' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Links' %}
 
 ## Suffix Slot
 
-{% story 'nve-menu', 'Suffix' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'Suffix' %}
 
 ## Danger Status
 
-{% story 'nve-menu', 'DangerStatus' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'DangerStatus' %}

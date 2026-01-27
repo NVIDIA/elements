@@ -235,8 +235,13 @@ nvd-canvas {
   min-height: 120px;
 }
 
+nvd-canvas:has(nve-page),
 nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
-  --padding: var(--nve-ref-space-xs);
+  --padding: 0;
+
+  nve-page {
+    height: 540px !important;
+  }
 }
 
 [nve-layer='container'] nvd-canvas {

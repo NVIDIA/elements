@@ -12,12 +12,12 @@
 
 ## Effect
 
-{% story 'nve-skeleton', 'Effect' %}
+{% example '@nvidia-elements/core/skeleton/skeleton.examples.json' 'Effect' %}
 
 ## Shape
 
-{% story 'nve-skeleton', 'Shape' %}
+{% example '@nvidia-elements/core/skeleton/skeleton.examples.json' 'Shape' %}
 
 ## Slotted
 
-{% story 'nve-skeleton', 'Slotted' %}
+{% example '@nvidia-elements/core/skeleton/skeleton.examples.json' 'Slotted' %}

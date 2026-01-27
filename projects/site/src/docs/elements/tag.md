@@ -14,34 +14,34 @@
 
 {% api 'nve-tag', 'property', 'color' %}
 
-{% story 'nve-tag', 'Color' %}
+{% example '@nvidia-elements/core/tag/tag.examples.json' 'Color' %}
 
 ## Emphasis
 
 {% api 'nve-tag', 'property', 'prominence' %}
 
-{% story 'nve-tag', 'Prominence' %}
+{% example '@nvidia-elements/core/tag/tag.examples.json' 'Prominence' %}
 
 ## Closable
 
 {% api 'nve-tag', 'property', 'closable' %}
 
-{% story 'nve-tag', 'Closable' %}
+{% example '@nvidia-elements/core/tag/tag.examples.json' 'Closable' %}
 
 ## Readonly
 
 {% api 'nve-tag', 'property', 'readonly' %}
 
-{% story 'nve-tag', 'Readonly' %}
+{% example '@nvidia-elements/core/tag/tag.examples.json' 'Readonly' %}
 
 ## Tag Group
 
-{% story 'nve-tag', 'TagGroup' %}
+{% example '@nvidia-elements/core/tag/tag.examples.json' 'TagGroup' %}
 
 ## Overflow Single
 
-{% story 'nve-tag', 'OverflowSingle' %}
+{% example '@nvidia-elements/core/tag/tag.examples.json' 'OverflowSingle' %}
 
 ## Overflow Max Width
 
-{% story 'nve-tag', 'OverflowMaxWidth' %}
+{% example '@nvidia-elements/core/tag/tag.examples.json' 'OverflowMaxWidth' %}

@@ -12,24 +12,24 @@
 
 ## Image
 
-{% story 'nve-avatar', 'Image' %}
+{% example '@nvidia-elements/core/avatar/avatar.examples.json' 'Image' %}
 
 ## Icon
 
-{% story 'nve-avatar', 'Icon' %}
+{% example '@nvidia-elements/core/avatar/avatar.examples.json' 'Icon' %}
 
 ## Size
 
 {% api 'nve-avatar', 'property', 'size' %}
 
-{% story 'nve-avatar', 'Size' %}
+{% example '@nvidia-elements/core/avatar/avatar.examples.json' 'Size' %}
 
 ## Color
 
 {% api 'nve-avatar', 'property', 'color' %}
 
-{% story 'nve-avatar', 'Color' %}
+{% example '@nvidia-elements/core/avatar/avatar.examples.json' 'Color' %}
 
 ## Avatar Group
 
-{% story 'nve-avatar', 'AvatarGroup' %}
+{% example '@nvidia-elements/core/avatar/avatar.examples.json' 'AvatarGroup' %}

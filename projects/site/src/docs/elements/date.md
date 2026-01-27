@@ -12,7 +12,7 @@
 
 ## Datalist
 
-{% story 'nve-date', 'Datalist' %}
+{% example '@nvidia-elements/core/date/date.examples.json' 'Datalist' %}
 
 ## Layout
 
@@ -20,12 +20,12 @@
 
 ### Vertical
 
-{% story 'nve-date', 'Vertical' %}
+{% example '@nvidia-elements/core/date/date.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-date', 'Horizontal' %}
+{% example '@nvidia-elements/core/date/date.examples.json' 'Horizontal' %}
 
 ## Fit Text
 
-{% story 'nve-date', 'FitText' %}
+{% example '@nvidia-elements/core/date/date.examples.json' 'FitText' %}

@@ -16,15 +16,15 @@ The multiple option behavior preserves the native select value behavior. The `va
 will only reflect the first selected value. To get all selected options check the `selected` property
 on each `<option>` element or the select property `selectedOptions`.
 
-{% story 'nve-select', 'Multiple' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'Multiple' %}
 
 If the multiple tags overflow the parent container a simple text label will be shown instead.
 
-{% story 'nve-select', 'MultipleOverflow' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'MultipleOverflow' %}
 
 ## Flat
 
-{% story 'nve-select', 'Flat' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'Flat' %}
 
 ## Layout
 
@@ -32,51 +32,51 @@ If the multiple tags overflow the parent container a simple text label will be s
 
 ### Vertical
 
-{% story 'nve-select', 'Vertical' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-select', 'Horizontal' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'Horizontal' %}
 
 ## Placeholder
 
-{% story 'nve-select', 'Placeholder' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'Placeholder' %}
 
-{% story 'nve-select', 'PlaceholderMultiple' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'PlaceholderMultiple' %}
 
 ## Disabled
 
-{% story 'nve-select', 'Disabled' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'Disabled' %}
 
 ## Height
 
 Determines the scroll height of selection in open dropdown.
 
-{% story 'nve-select', 'Height' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'Height' %}
 
 ## Size
 
 Enables [size](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/size) attribute on the select element.
 This creates a inline selection at the defined item height.
 
-{% story 'nve-select', 'Size' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'Size' %}
 
 ## Prefix
 
-{% story 'nve-select', 'Prefix' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'Prefix' %}
 
 ## Fit Content
 
 {% api 'nve-select', 'property', 'fitContent' %}
 
-{% story 'nve-select', 'FitContent' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'FitContent' %}
 
 ## Fit Text
 
 {% api 'nve-select', 'property', 'fitText' %}
 
-{% story 'nve-select', 'FitText' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'FitText' %}
 
 ## Performance
 
-{% story 'nve-select', 'Performance' %}
+{% example '@nvidia-elements/core/select/select.examples.json' 'Performance' %}

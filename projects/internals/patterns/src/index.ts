@@ -1,4 +1,4 @@
-// placeholder for patterns so stories can be generated
+// placeholder for patterns so examples can be generated
 customElements.define(
   'nve-internal-patterns',
   class extends HTMLElement {

@@ -13,8 +13,8 @@ export default {
 /**
  * @summary Input group combining select, input, and button for composite controls like domain URL entry.
  */
-export const InputGroup = () => {
-  return html`
+export const Default = {
+  render: () => html`
 <nve-input-group>
   <label>domain</label>
   <nve-select style="width: 130px">
