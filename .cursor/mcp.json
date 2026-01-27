@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "elements": {
-      "command": "nve-mcp",
+      "command": "node ./projects/labs/cli/dist/mcp/index.js",
       "description": "Elements API and Custom Element Schema"
     }
   }
