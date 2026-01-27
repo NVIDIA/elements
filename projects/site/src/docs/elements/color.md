@@ -12,7 +12,7 @@
 
 ## Datalist
 
-{% story 'nve-color', 'Datalist' %}
+{% example '@nvidia-elements/core/color/color.examples.json' 'Datalist' %}
 
 ## Layout
 
@@ -20,8 +20,8 @@
 
 ### Vertical
 
-{% story 'nve-color', 'Vertical' %}
+{% example '@nvidia-elements/core/color/color.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-color', 'Horizontal' %}
+{% example '@nvidia-elements/core/color/color.examples.json' 'Horizontal' %}

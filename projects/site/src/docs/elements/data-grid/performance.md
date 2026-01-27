@@ -14,7 +14,7 @@ The grid leverages several approaches to maximize render performance including [
 
 ## Best Practices
 
-{% story 'nve-grid' 'Performance' '{ "inline": false, "height": "520px" }' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'Performance' '{ "inline": false, "height": "520px" }' %}
 
 ## Infinite Scroll
 

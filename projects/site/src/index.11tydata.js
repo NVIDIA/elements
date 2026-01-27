@@ -23,7 +23,7 @@ const examples = (await ExamplesService.getAll())
   .filter(s => !s.template?.includes('${'))
   .map(example => ({
     id: example.id,
-    story: example.element,
+    example: example.element,
     summary: example.summary,
     description: example.description,
     tags: example.tags.filter(tag => tag !== 'priority'),
@@ -33,7 +33,7 @@ const examples = (await ExamplesService.getAll())
     entrypoint: example.entrypoint,
     name: example.name,
     elementName: example.element?.replace('nve-', ''),
-    permalink: `${example.entrypoint?.replace('.stories.json', '-').replace('.examples.json', '-')}${camelToKebab(example.id)}/`
+    permalink: `${example.entrypoint?.replace('.examples.json', '-')}${camelToKebab(example.id)}/`
   }));
 
 const integrations = {
@@ -177,7 +177,6 @@ export const siteData = {
   BASE_URL,
   elements,
   examples,
-  stories: examples, // deprecated
   integrations,
   tests,
   wireit

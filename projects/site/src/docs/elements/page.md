@@ -17,10 +17,6 @@ To enable smooth transitions between page view, see our [View Transition API](./
 
 ## Header
 
-{% api 'nve-page', 'slot', '' %}
-
-It's recommended to leverage the new [nve-page-header](./docs/elements/page-header/) instead of `nve-app-header` when using the `nve-page` Element.
-
 {% example '@nvidia-elements/core/page/page.examples.json' 'Default' '{ "inline": false, "height": "480px" }' %}
 
 ## Subheader

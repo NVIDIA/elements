@@ -12,8 +12,8 @@
 
 ## Icon Button
 
-{% story 'nve-breadcrumb', 'WithIconButton' %}
+{% example '@nvidia-elements/core/breadcrumb/breadcrumb.examples.json' 'WithIconButton' %}
 
 ## Menu
 
-{% story 'nve-breadcrumb', 'WithMenu' %}
+{% example '@nvidia-elements/core/breadcrumb/breadcrumb.examples.json' 'WithMenu' %}

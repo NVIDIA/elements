@@ -12,56 +12,56 @@
 
 ## Skippable
 
-{% story 'nve-pagination', 'Skippable' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'Skippable' %}
 
 ## Disabled
 
-{% story 'nve-pagination', 'Disabled' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'Disabled' %}
 
 ## Flat
 
-{% story 'nve-pagination', 'Flat' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'Flat' %}
 
 ## Inline
 
-{% story 'nve-pagination', 'Inline' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'Inline' %}
 
 ## Disable Step
 
-{% story 'nve-pagination', 'DisableStep' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'DisableStep' %}
 
 ## Dynamic Items
 
-{% story 'nve-pagination', 'DynamicItems' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'DynamicItems' %}
 
 ## Dynamic Step Size
 
-{% story 'nve-pagination', 'DynamicStepSize' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'DynamicStepSize' %}
 
 ## Suffix Label
 
-{% story 'nve-pagination', 'SuffixLabel' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'SuffixLabel' %}
 
 ## Forms
 
-{% story 'nve-pagination', 'Forms', '{ "inline": false, "height": 300 }' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'Forms' '{ "inline": false, "height": 300 }' %}
 
 ## No Provided Items Count
 
-{% story 'nve-pagination', 'NoItemsCount', '{ "inline": false, "height": 200 }' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'NoItemsCount' '{ "inline": false, "height": 200 }' %}
 
 ## Pattern - Page List
 
-{% story 'nve-pagination', 'PageListPattern' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'PageListPattern' %}
 
 ## Pattern - Page List Skip
 
-{% story 'nve-pagination', 'PageListSkipPattern' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'PageListSkipPattern' %}
 
 ## Pattern - Vertical
 
-{% story 'nve-pagination', 'VerticalPattern' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'VerticalPattern' %}
 
 ## Pattern - Custom Select
 
-{% story 'nve-pagination', 'CustomSelectPattern' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'CustomSelectPattern' %}

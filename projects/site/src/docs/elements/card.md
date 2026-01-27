@@ -13,28 +13,28 @@
 
 ## Card Actions
 
-{% story 'nve-card', 'CardActions' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'CardActions' %}
 
 ## Media Card
 
-{% story 'nve-card', 'MediaCard' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'MediaCard' %}
 
 ## Overflow Content
 
-{% story 'nve-card', 'OverflowContent' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'OverflowContent' %}
 
 ## Card with Header Tabs
 
-{% story 'nve-card', 'CardWithTabs' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'CardWithTabs' %}
 
 ## Card Description List
 
-{% story 'nve-card', 'CardDescriptionList' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'CardDescriptionList' %}
 
 ## Card with Divider
 
-{% story 'nve-card', 'CardWithDivider' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'CardWithDivider' %}
 
 ## Container Full
 
-{% story 'nve-card', 'ContainerFull' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'ContainerFull' %}

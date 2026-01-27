@@ -363,6 +363,8 @@ export const DynamicTree = {
   render: () => html`<test-dynamic-tree></test-dynamic-tree>`
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 /**
  * @summary Tree integrated in vertical navigation drawer, providing structured sidebar navigation for application layouts and content organization.
  */

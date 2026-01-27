@@ -4,28 +4,28 @@ import { ExamplesService } from '@nve-internals/tools/examples';
 import { ApiService } from '@nve-internals/metadata';
 
 const elements = (await ApiService.getData()).data.elements;
-const stories = (await ExamplesService.getAll())
+const examples = (await ExamplesService.getAll())
   .filter(
-    story =>
-      story.name.includes('Default') &&
-      !story.element?.includes('nve-page-loader') &&
-      !story.element?.includes('nve-app-header') &&
-      !story.element?.includes('monaco') &&
-      !story.element?.includes('markdown')
+    example =>
+      example.name.includes('Default') &&
+      !example.element?.includes('nve-page-loader') &&
+      !example.element?.includes('nve-app-header') &&
+      !example.element?.includes('monaco') &&
+      !example.element?.includes('markdown')
   )
-  .map(story => {
-    const element = elements.find(e => e.name === story.element && !e.manifest?.deprecated);
+  .map(example => {
+    const element = elements.find(e => e.name === example.element && !e.manifest?.deprecated);
     return element
       ? {
-          name: story.element,
+          name: example.element,
           entrypoint: element?.manifest?.metadata?.entrypoint,
-          template: story.template
+          template: example.template
             .replaceAll('<label>', '<label slot="label">')
             .replaceAll('<nve-control-message>', '<nve-control-message slot="messages">')
         }
       : null;
   })
-  .filter(story => story !== null);
+  .filter(example => example !== null);
 
 export const data = {
   title: 'Eleventy + Elements + Lit SSR'
@@ -55,21 +55,21 @@ export function render(data) {
     </script>
     <script type="module">
       import '@lit-labs/ssr-client/lit-element-hydrate-support.js';
-      ${stories
-        .filter(story => story.entrypoint)
-        .map(story => `import '${story.entrypoint}/define.js';`)
+      ${examples
+        .filter(example => example.entrypoint)
+        .map(example => `import '${example.entrypoint}/define.js';`)
         .join('\n')}
     </script>
   </head>
   <body nve-layout="column gap:lg pad:md">
     <h1 nve-text="heading xl">${data.title}${globalThis.process?.env?.NODE_ENV ?? ''}</h1>
     <section nve-layout="grid gap:lg align:vertical-stretch span-items:12 &md|span-items:6 &lg|span-items:4">
-      ${stories
-        .map(story => {
+      ${examples
+        .map(example => {
           return /* html */ `
         <div nve-layout="column gap:md align:stretch pad:md" style="border: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted)">
-          <h2 nve-text="heading lg">${story.name}</h2>
-          <div style="max-height: 400px; overflow: hidden;">${story.template}</div>
+          <h2 nve-text="heading lg">${example.name}</h2>
+          <div style="max-height: 400px; overflow: hidden;">${example.template}</div>
         </div>`;
         })
         .join('\n')}

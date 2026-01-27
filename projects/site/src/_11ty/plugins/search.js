@@ -4,7 +4,7 @@ export async function searchPlugin(eleventyConfig, pluginOptions) {
   const { index } = await pagefind.createIndex();
 
   eleventyConfig.addTransform('search-index', async function (content) {
-    const ignoredPaths = ['changelog', 'metrics', 'stories'];
+    const ignoredPaths = ['changelog', 'metrics', 'examples'];
 
     if (!ignoredPaths.find(path => this.page.url.includes(path))) {
       await index.addHTMLFile({

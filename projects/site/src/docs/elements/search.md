@@ -12,11 +12,11 @@
 
 ## Inline
 
-{% story 'nve-search', 'Inline' %}
+{% example '@nvidia-elements/core/search/search.examples.json' 'Inline' %}
 
 ## Datalist
 
-{% story 'nve-search', 'Datalist' %}
+{% example '@nvidia-elements/core/search/search.examples.json' 'Datalist' %}
 
 ## Layout
 
@@ -24,8 +24,8 @@
 
 ### Vertical
 
-{% story 'nve-search', 'Vertical' %}
+{% example '@nvidia-elements/core/search/search.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-search', 'Horizontal' %}
+{% example '@nvidia-elements/core/search/search.examples.json' 'Horizontal' %}

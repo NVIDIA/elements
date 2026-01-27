@@ -7,7 +7,7 @@ export const data = {
 };
 
 const { examples } = siteData;
-const groupedStories = Object.entries(
+const groupedExamples = Object.entries(
   examples.reduce((acc, example) => {
     acc[example.element] = acc[example.element] || [];
     acc[example.element].push(example);
@@ -21,7 +21,7 @@ export function render() {
   <nve-page-panel id="examples-sidenav-panel" slot="left" style="--width: 300px">
     <nve-page-panel-content>
       <ul class="examples">
-      ${groupedStories
+      ${groupedExamples
         .reverse()
         .map(
           example => /* html */ `
