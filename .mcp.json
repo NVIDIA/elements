@@ -2,7 +2,8 @@
   "mcpServers": {
     "elements": {
       "description": "Elements API and Custom Element Schema",
-      "command": "nve-mcp",
+      "command": "node",
+      "args": ["./projects/labs/cli/dist/mcp/index.js"],
       "env": {
         "npm_config_registry": "https://registry.npmjs.org"
       }
