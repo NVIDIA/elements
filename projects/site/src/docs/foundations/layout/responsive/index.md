@@ -142,6 +142,8 @@ Example: `<nav nve-display="@lg|hide">` - Navigation hides on large screens
 
 You can use both systems together for maximum flexibility:
 
+{% example '@nvidia-elements/styles/responsive.examples.json', 'ResponsiveCombined', '{ "inline": false, "resizable": true, "height": "650px" }' %}
+
 <nve-alert-group>
   <nve-alert style="--align-items: start">
     <nve-icon slot="icon" name="academic-cap"></nve-icon>
