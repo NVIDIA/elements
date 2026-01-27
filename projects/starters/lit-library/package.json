@@ -103,7 +103,7 @@
       "files": [
         "../../elements/dist/**/*.js",
         "src/**",
-        "!src/**/*.stories.ts",
+        "!src/**/*.examples.ts",
         "!src/**/*.test.ts",
         "package.json",
         "tsconfig.lib.json",

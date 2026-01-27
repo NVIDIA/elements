@@ -232,7 +232,6 @@
       "command": "NODE_ENV=production vite build",
       "files": [
         "../../elements/dist/**/*.js",
-        "!../../elements/dist/**/*.stories.js",
         "!../../elements/dist/**/*.examples.js",
         "src/**",
         "!src/**/*.test.ts",

@@ -12,15 +12,15 @@
 
 ## Datalist
 
-{% story 'nve-range', 'Datalist' %}
+{% example '@nvidia-elements/core/range/range.examples.json' 'Datalist' %}
 
 ## Step
 
-{% story 'nve-range', 'Step' %}
+{% example '@nvidia-elements/core/range/range.examples.json' 'Step' %}
 
 ## Datalist With Steps
 
-{% story 'nve-range', 'DatalistWithSteps' %}
+{% example '@nvidia-elements/core/range/range.examples.json' 'DatalistWithSteps' %}
 
 ## Layout
 
@@ -28,8 +28,8 @@
 
 ### Vertical
 
-{% story 'nve-range', 'Vertical' %}
+{% example '@nvidia-elements/core/range/range.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-range', 'Horizontal' %}
+{% example '@nvidia-elements/core/range/range.examples.json' 'Horizontal' %}

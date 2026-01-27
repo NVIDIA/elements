@@ -21,32 +21,32 @@ Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI
 
 By default Tabs will show a blue border on the selected item. You can disable the border by setting `borderless` on the parent `<nve-tabs>`
 
-{% story 'nve-tabs', 'BorderlessTabs' %}
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'BorderlessTabs' %}
 
 ## Border Styles
 
 You can change the border styles by overriding `--indicator-background` and `--indicator-border-radius` on `<nve-tabs>`
 
-{% story 'nve-tabs', 'BorderBackground' %}
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'BorderBackground' %}
 
 ## Tabs with Dot Indicators
 
 Dots and icons can be added by simplply slotting in `<nve-icon>` or `<nve-dot>` into your `<nve-tabs-item>`
 
-{% story 'nve-tabs', 'TabsWithDots' %}
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'TabsWithDots' %}
 
 ## Vertical Tabs
 
 Tabs can be used as the foundation for a side menu by enabling vertical mode. Simply set `vertical` on `<nve-tabs>`
 
-{% story 'nve-tabs', 'VerticalTabs' %}
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'VerticalTabs' %}
 
 ## Borderless Vertical Tabs with Icons
 
 This example shows the combination of vertical tabs, set to borderless, with icons slotted.
 An Icon only collapsed version of vertical tabs could be built off this system.
 
-{% story 'nve-tabs', 'BorderlessVerticalTabs' %}
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'BorderlessVerticalTabs' %}
 
 ## Stateless Tabs
 
@@ -56,8 +56,8 @@ We have provided a way to opt in to stateful selection behavior where click even
 In all other examples on this page `behavior-select` is set on the parent `<nve-tabs>` to opt into stateful behavior. The following example
 shows the default stateless behavior, where the host app will have to set/remove the `selected` attribute on child `<nve-tabs-item>`.
 
-{% story 'nve-tabs', 'StatelessTabs' %}
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'StatelessTabs' %}
 
 ## Links
 
-{% story 'nve-tabs', 'Links' %}
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'Links' %}

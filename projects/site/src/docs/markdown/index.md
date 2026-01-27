@@ -48,7 +48,7 @@ The `nve-markdown` component renders markdown content with Elements styling. It 
 - **Elements Styling**: Comprehensive CSS styling that matches the Elements design system
 - **Lazy Loading**: Markdown parser is only loaded when needed for optimal performance
 
-<!-- The below tests direct use of component rather than markdown.stories.ts processing  -->
+<!-- The below tests direct use of component rather than markdown.examples.ts processing  -->
 <!--
 
 <nve-markdown>

@@ -16,20 +16,20 @@
 
 ### Vertical Group
 
-{% story 'nve-checkbox', 'VerticalGroup' %}
+{% example '@nvidia-elements/core/checkbox/checkbox.examples.json' 'VerticalGroup' %}
 
 ### Vertical Inline Group
 
-{% story 'nve-checkbox', 'VerticalInlineGroup' %}
+{% example '@nvidia-elements/core/checkbox/checkbox.examples.json' 'VerticalInlineGroup' %}
 
 ### Horizontal Group
 
-{% story 'nve-checkbox', 'HorizontalGroup' %}
+{% example '@nvidia-elements/core/checkbox/checkbox.examples.json' 'HorizontalGroup' %}
 
 ### Horizontal Inline Group
 
-{% story 'nve-checkbox', 'HorizontalInlineGroup' %}
+{% example '@nvidia-elements/core/checkbox/checkbox.examples.json' 'HorizontalInlineGroup' %}
 
 ## Indeterminate
 
-{% story 'nve-checkbox', 'Indeterminate' %}
+{% example '@nvidia-elements/core/checkbox/checkbox.examples.json' 'Indeterminate' %}

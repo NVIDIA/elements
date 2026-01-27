@@ -12,7 +12,7 @@
 
 ## Datalist
 
-{% story 'nve-week', 'Datalist' %}
+{% example '@nvidia-elements/core/week/week.examples.json' 'Datalist' %}
 
 ## Layout
 
@@ -20,8 +20,8 @@
 
 ### Vertical
 
-{% story 'nve-week', 'Vertical' %}
+{% example '@nvidia-elements/core/week/week.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-week', 'Horizontal' %}
+{% example '@nvidia-elements/core/week/week.examples.json' 'Horizontal' %}

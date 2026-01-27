@@ -5,7 +5,7 @@ import '@nvidia-elements/core/textarea/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/checkbox/define.js';
 import '@nvidia-elements/core/grid/define.js';
-import './csv.stories.js';
+import './csv.examples.js';
 
 export default {
   title: 'Labs/Forms/Examples',

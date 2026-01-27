@@ -30,7 +30,7 @@ import '@nvidia-elements/core/toast/define.js';
 import '@nvidia-elements/core/notification/define.js';
 ```
 
-{% story '@nvidia-elements/core/internal/controllers/popover.stories.json', 'Interactive' %}
+{% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'Interactive' %}
 
 ## Usage
 
@@ -39,7 +39,7 @@ import '@nvidia-elements/core/notification/define.js';
 <nve-button popovertarget="tooltip">button</nve-button>
 ```
 
-{% story 'nve-tooltip', 'Default', '{ "inline": false, "height": "150px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Default' '{ "inline": false, "height": "150px" }' %}
 
 ## Events
 
@@ -49,7 +49,7 @@ to the native `toggle` or `beforetoggle` popover events.
 - [toggle](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
 - [beforetoggle](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
 
-{% story 'nve-tooltip', 'Events', '{ "inline": false, "height": "150px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Events' '{ "inline": false, "height": "150px" }' %}
 
 ## Programmatic Trigger
 
@@ -59,19 +59,19 @@ Popovers can be triggered manually via the native popover APIs.
 - [hidePopover()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/hidePopover)
 - [togglePopover()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/togglePopover)
 
-{% story '@nvidia-elements/core/internal/controllers/popover.stories.json', 'ProgrammaticTrigger', '{ "inline": false, "height": "150px" }' %}
+{% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'ProgrammaticTrigger' '{ "inline": false, "height": "150px" }' %}
 
 ## Positioning
 
 All popovers follow the same `position` and `alignment` APIs. This allows popovers to be positioned relative to their anchor.
 
-{% story 'nve-tooltip', 'Alignment', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Alignment' '{ "inline": false, "height": "400px" }' %}
 
 ## Anchor
 
 The `anchor` property defines what element the popover should position itself relative to. For popovers like modals this defaults to the document body. The Anchor is optional as the popover will use the trigger to determine its anchor by default.
 
-{% story '@nvidia-elements/core/internal/controllers/popover.stories.json', 'Anchor', '{ "inline": false, "height": "250px" }' %}
+{% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'Anchor' '{ "inline": false, "height": "250px" }' %}
 
 For elements like tooltips this is often the same as anchor however the anchor and trigger are not always the same as UX patterns such as guided tours may have trigger elements that are not the anchored position. Both `anchor` and `trigger` can take a string idref or a DOM Element reference.
 
@@ -83,15 +83,15 @@ Many of the popovers provide a closable property option. This will enable a clos
 Unlike some third-party solutions, browser-native popovers are designed to disable escape key prevention for closure, ensuring a seamless user experience. Similarly, native dialogs follow a similar pattern (chromium): only the first press of the escape key can be prevented from closing the dialog,
 while subsequent presses have no effect. This behavior is for accessibility, preventing a popover from closing can prevent the user from navigating the page and block functionality completely.
 
-{% story '@nvidia-elements/core/internal/controllers/popover.stories.json', 'Closable' %}
+{% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'Closable' %}
 
 ## Nested
 
-{% story '@nvidia-elements/core/internal/controllers/popover.stories.json', 'Nested', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'Nested' '{ "inline": false, "height": "400px" }' %}
 
 ## Event Bubbling
 
-{% story '@nvidia-elements/core/internal/controllers/popover.stories.json', 'EventBubbling', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'EventBubbling' '{ "inline": false, "height": "400px" }' %}
 
 ## Shadow Root Anchoring
 

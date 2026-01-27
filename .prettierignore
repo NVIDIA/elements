@@ -6,7 +6,7 @@ coverage
 .wireit
 .lighthouse
 .next
-*.stories.ts
+.output
 *.examples.ts
 *.test.lighthouse.ts
 CHANGELOG.md

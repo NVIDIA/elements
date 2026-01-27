@@ -27,7 +27,7 @@ export default defineConfig(env => {
           root: resolve('.'),
           entryRoot: resolve('./src'),
           outDir: dist(),
-          exclude: ['**/*.test.ts', '**/*.stories.ts']
+          exclude: ['**/*.test.ts', '**/*.examples.ts']
         }),
         enforce: 'pre'
       }

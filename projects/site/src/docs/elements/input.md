@@ -16,28 +16,28 @@
 
 ### Vertical
 
-{% story 'nve-input', 'Vertical' %}
+{% example '@nvidia-elements/core/input/input.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-input', 'Horizontal' %}
+{% example '@nvidia-elements/core/input/input.examples.json' 'Horizontal' %}
 
 ## Rounded
 
-{% story 'nve-input', 'Rounded' %}
+{% example '@nvidia-elements/core/input/input.examples.json' 'Rounded' %}
 
 ## Flat
 
-{% story 'nve-input', 'Flat' %}
+{% example '@nvidia-elements/core/input/input.examples.json' 'Flat' %}
 
 ## Fit Content
 
 {% api 'nve-input', 'property', 'fitContent' %}
 
-{% story 'nve-input', 'FitContent' %}
+{% example '@nvidia-elements/core/input/input.examples.json' 'FitContent' %}
 
 ## Fit Text
 
 {% api 'nve-input', 'property', 'fitText' %}
 
-{% story 'nve-input', 'FitText' %}
+{% example '@nvidia-elements/core/input/input.examples.json' 'FitText' %}

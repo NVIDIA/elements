@@ -14,8 +14,8 @@
 
 Preferences Input is [form associated component](https://web.dev/more-capable-form-controls) and can be used within FormData.
 
-{% story 'nve-preferences-input', 'Forms', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/preferences-input/preferences-input.examples.json' 'Forms' '{ "inline": false, "height": "400px" }' %}
 
 ## Dropdown
 
-{% story 'nve-preferences-input', 'Dropdown', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/preferences-input/preferences-input.examples.json' 'Dropdown' '{ "inline": false, "height": "400px" }' %}

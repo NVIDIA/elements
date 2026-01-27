@@ -13,7 +13,7 @@ export default {
  * @summary Basic text input field with label and message for general text entry and form data collection.
  */
 export const Default = {
-  render: html`
+  render: () => html`
 <nve-input>
   <label>label</label>
   <input type="text" />
@@ -24,8 +24,8 @@ export const Default = {
 /**
  * @summary Text input example demonstrating the standard input structure with label and control message.
  */
-export const Input = () => {
-  return html`
+export const Input = {
+  render: () => html`
 <nve-input>
   <label>label</label>
   <input type="text" />
@@ -36,8 +36,8 @@ export const Input = () => {
 /**
  * @summary Text inputs with vertical layout demonstrating validation states including disabled, success, and error.
  */
-export const Vertical = () => {
-  return html`
+export const Vertical = {
+  render: () => html`
 <div nve-layout="column gap:lg full">
   <nve-input>
     <label>label</label>
@@ -68,8 +68,8 @@ export const Vertical = () => {
 /**
  * @summary Text inputs with horizontal layout showing validation states for inline forms and compact layouts.
  */
-export const Horizontal = () => {
-  return html`
+export const Horizontal = {
+  render: () => html`
 <div nve-layout="column gap:lg full">
   <nve-input layout="horizontal">
     <label>label</label>

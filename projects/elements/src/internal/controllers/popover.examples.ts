@@ -18,6 +18,8 @@ export default {
   }
 }
 
+/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
+
 /**
  * @summary Demonstrates anchor-based positioning where popovers are anchored to specific elements rather than their triggers.
  * @tags test-case

@@ -32,8 +32,8 @@ export const Inline = {
 /**
  * @summary Search input with datalist providing autocomplete suggestions for quick query selection from recent searches.
  */
-export const Datalist = () => {
-  return html`
+export const Datalist = {
+  render: () => html`
 <nve-search rounded>
   <input type="search" aria-label="search" placeholder="search" />
   <datalist>
@@ -41,7 +41,7 @@ export const Datalist = () => {
     <option value="search result 2"></option>
     <option value="search result 3"></option>
   </datalist>
-</nve-search>`;
+</nve-search>`
 };
 
 /**

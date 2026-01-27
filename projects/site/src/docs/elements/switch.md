@@ -12,7 +12,7 @@
 
 ## Size
 
-{% story 'nve-switch', 'Size' %}
+{% example '@nvidia-elements/core/switch/switch.examples.json' 'Size' %}
 
 ## Layout
 
@@ -20,16 +20,16 @@
 
 ### Vertical Group
 
-{% story 'nve-switch', 'VerticalGroup' %}
+{% example '@nvidia-elements/core/switch/switch.examples.json' 'VerticalGroup' %}
 
 ### Vertical Inline Group
 
-{% story 'nve-switch', 'VerticalInlineGroup' %}
+{% example '@nvidia-elements/core/switch/switch.examples.json' 'VerticalInlineGroup' %}
 
 ### Horizontal Group
 
-{% story 'nve-switch', 'HorizontalGroup' %}
+{% example '@nvidia-elements/core/switch/switch.examples.json' 'HorizontalGroup' %}
 
 ### Horizontal Inline Group
 
-{% story 'nve-switch', 'HorizontalInlineGroup' %}
+{% example '@nvidia-elements/core/switch/switch.examples.json' 'HorizontalInlineGroup' %}
