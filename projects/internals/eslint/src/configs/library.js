@@ -9,7 +9,7 @@ const tests = [
   '**/*.test.axe.ts',
   '**/*.test.ssr.ts'
 ];
-const examples = ['**/*.examples.ts', '**/*.stories.ts'];
+const examples = ['**/*.examples.ts'];
 const ignores = [
   'node_modules/',
   'coverage/',

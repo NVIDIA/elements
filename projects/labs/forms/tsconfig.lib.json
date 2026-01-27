@@ -4,12 +4,5 @@
     "rootDir": "./src",
     "types": []
   },
-  "exclude": [
-    "**/*.test.ts",
-    "**/*.test.axe.ts",
-    "**/*.test.ssr.ts",
-    "**/*.test.lighthouse.ts",
-    "**/*.examples.ts",
-    "**/*.stories.ts"
-  ]
+  "exclude": ["**/*.test.ts", "**/*.test.axe.ts", "**/*.test.ssr.ts", "**/*.test.lighthouse.ts", "**/*.examples.ts"]
 }

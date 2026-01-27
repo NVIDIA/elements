@@ -16,21 +16,21 @@ export default {
  * @summary Basic form control wrapper with label, input, and validation message structure.
  * @tags test-case
  */
-export const Control = () => {
-  return html`
+export const Default = {
+  render: () => html`
 <nve-control>
   <label>label</label>
   <input />
   <nve-control-message>message</nve-control-message>
-</nve-control>`;
+</nve-control>`
 };
 
 /**
  * @summary Responsive form controls demonstrating layout adaptation in resizable containers.
  * @tags test-case
  */
-export const Responsive = () => {
-  return html`
+export const Responsive = {
+  render: () => html`
   <div nve-layout="column gap:lg" style="padding: 12px; border: 1px solid #ccc; overflow-y: auto; resize: horizontal; max-width: 600px;">
     <nve-input layout="horizontal">
       <label>text label</label>
@@ -76,15 +76,15 @@ export const Responsive = () => {
       <textarea></textarea>
     </nve-textarea>
   </div>
-  `;
+  `
 };
 
 /**
  * @summary All control and control-group layout variations (vertical, horizontal, inline) with visual debugging.
  * @tags test-case
  */
-export const ControlLayout = () => {
-  return html`
+export const ControlLayout = {
+  render: () => html`
 <style>
   #control-layout {
     display: flex;
@@ -263,52 +263,52 @@ export const ControlLayout = () => {
       <input type="checkbox" name="checkbox-group" value="3" />
     </nve-control>
   </nve-control-group>
-</div>`;
+</div>`
 };
 
 /**
  * @summary Form control with HTML5 validation showing required field error messaging.
  * @tags test-case
  */
-export const ControlValidation = () => {
-  return html`
+export const ControlValidation = {
+  render: () => html`
 <nve-control>
   <label>validation</label>
   <input required />
   <nve-control-message>message</nve-control-message>
   <nve-control-message error="valueMissing">required</nve-control-message>
-</nve-control>`;
-}
+</nve-control>`
+};
 
 /**
  * @summary Form control without visible label using aria-label for accessibility in compact layouts.
  * @tags test-case
  */
-export const NoLabelControl = () => {
-  return html`
+export const NoLabelControl = {
+  render: () => html`
 <nve-control>
   <input type="search" aria-label="search" placeholder="search" />
-</nve-control>`;
-}
+</nve-control>`
+};
 
 /**
  * @summary Inline control layout with checkbox positioned before its label for toggle-style inputs.
  * @tags test-case
  */
-export const InlineControl = () => {
-  return html`
+export const InlineControl = {
+  render: () => html`
 <nve-control>
   <label>enable logging</label>
   <input type="checkbox" checked />
-</nve-control>`;
-}
+</nve-control>`
+};
 
 /**
  * @summary Control group organizing related radio buttons and checkboxes with shared label and messaging.
  * @tags test-case
  */
-export const ControlGroup = () => {
-  return html`
+export const ControlGroup = {
+  render: () => html`
 <nve-control-group>
   <label>environment</label>
   <nve-control>
@@ -344,41 +344,41 @@ export const ControlGroup = () => {
   </nve-control>
   <nve-control-message>message</nve-control-message>
 </nve-control-group>
-`;
-}
+`
+};
 
 /**
  * @summary Form control wrapping a native date input with label and message support.
  * @tags test-case
  */
-export const DateControl = () => {
-  return html`
+export const DateControl = {
+  render: () => html`
 <nve-control>
   <label>date</label>
   <input type="date" />
   <nve-control-message>message</nve-control-message>
-</nve-control>`;
+</nve-control>`
 };
 
 /**
  * @summary Form control wrapping a textarea element for multi-line text input.
  * @tags test-case
  */
-export const TextareaControl = () => {
-  return html`
+export const TextareaControl = {
+  render: () => html`
 <nve-control>
   <label>about</label>
   <textarea></textarea>
   <nve-control-message>message</nve-control-message>
-</nve-control>`;
-}
+</nve-control>`
+};
 
 /**
  * @summary Form control with datalist providing autocomplete suggestions for search input.
  * @tags test-case
  */
-export const Datalist = () => {
-  return html`
+export const Datalist = {
+  render: () => html`
 <nve-control>
   <label>search</label>
   <input type="search" />
@@ -387,15 +387,15 @@ export const Datalist = () => {
     <option value="option 2"></option>
     <option value="option 3"></option>
   </datalist>
-</nve-control>`;
+</nve-control>`
 };
 
 /**
  * @summary Form controls showing all status states (default, disabled, success, error) for validation feedback.
  * @tags test-case
  */
-export const Status = () => {
-  return html`
+export const Status = {
+  render: () => html`
 <div nve-layout="column gap:md">
   <nve-control>
     <label>label</label>
@@ -420,5 +420,5 @@ export const Status = () => {
     <input />
     <nve-control-message status="error">message</nve-control-message>
   </nve-control>
-</div>`;
+</div>`
 };

@@ -85,8 +85,7 @@ function createItem(type: '' | 'models' | 'hardware' | 'system' = ''): DemoItem 
   }
 }
 
-// cache the result to reuse, this prevents storybook from getting stuck in render loops
-// due to to trying to stablize the prior render to the current in React
+// cache the result to reuse
 const data = {
   '': {
     '10': Array(10)
@@ -106,7 +105,7 @@ const data = {
 };
 
 /**
- * demo data for stories only, provides a set of demo object that sync with the storybook data option
+ * demo data for examples only
  */
 export function getItems(rows = 10): DemoItem[] {
   const type = ((window as any).NVE_SB_GLOBALS?.dataTheme as '' | 'models' | 'hardware') ?? ''; // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -121,7 +120,7 @@ export function getItems(rows = 10): DemoItem[] {
   }
 }
 
-/** demo data for datagrid stories only */
+/** demo data for datagrid examples only */
 export function grid(rows = 9, columns = 4) {
   return {
     columns: Array(columns)
