@@ -267,17 +267,17 @@ export const renderDocsNav = data => /* html */ `
 
   <nve-tree-node ${data.page.url.includes('/docs/patterns/') ? 'expanded' : ''} ${data.page.url === '/docs/patterns/' ? 'highlighted' : ''}>
     <a href="docs/patterns/">Patterns</a>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/authentication/') ? 'highlighted selected' : ''}><a href="docs/patterns/authentication/">Authentication</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/browse/') ? 'highlighted selected' : ''}><a href="docs/patterns/browse/">Browse</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/editor/') ? 'highlighted selected' : ''}><a href="docs/patterns/editor/">Editor</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/heatmap/') ? 'highlighted selected' : ''}><a href="docs/patterns/heatmap/">Heatmap</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/subheader/') ? 'highlighted selected' : ''}><a href="docs/patterns/subheader/">Subheader</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/panel/') ? 'highlighted selected' : ''}><a href="docs/patterns/panel/">Panel</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/trend/') ? 'highlighted selected' : ''}><a href="docs/patterns/trend/">Trend</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/keyboard-shortcut/') ? 'highlighted selected' : ''}><a href="docs/patterns/keyboard-shortcut/">Keyboard Shortcut</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/media/') ? 'highlighted selected' : ''}><a href="docs/patterns/media/">Media</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/onboarding/') ? 'highlighted selected' : ''}><a href="docs/patterns/onboarding/">Onboarding</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/patterns/button-row/') ? 'highlighted selected' : ''}><a href="docs/patterns/button-row/">Button Row</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/panel/') ? 'highlighted selected' : ''}><a href="docs/patterns/panel/">Panel</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/responsive/') ? 'highlighted selected' : ''}><a href="docs/patterns/responsive/">Responsive</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/subheader/') ? 'highlighted selected' : ''}><a href="docs/patterns/subheader/">Subheader</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/trend/') ? 'highlighted selected' : ''}><a href="docs/patterns/trend/">Trend</a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/code/') ? 'expanded' : ''}>

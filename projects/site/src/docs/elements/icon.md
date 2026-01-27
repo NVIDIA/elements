@@ -22,38 +22,38 @@ See the searchable [Interactive Icon Catalog](./docs/foundations/iconography/)
 
 {% api 'nve-icon', 'property', 'status' %}
 
-{% story 'nve-icon', 'Statuses' %}
+{% example '@nvidia-elements/core/icon/icon.examples.json' 'Statuses' %}
 
 ## Size
 
 {% api 'nve-icon', 'property', 'size' %}
 
-{% story 'nve-icon', 'Size' %}
+{% example '@nvidia-elements/core/icon/icon.examples.json' 'Size' %}
 
 ## Direction
 
 {% api 'nve-icon', 'property', 'direction' %}
 
-{% story 'nve-icon', 'Direction' %}
+{% example '@nvidia-elements/core/icon/icon.examples.json' 'Direction' %}
 
 ## Themes
 
-{% story 'nve-icon', 'Themes' %}
+{% example '@nvidia-elements/core/icon/icon.examples.json' 'Themes' %}
 
 ## Registration
 
-{% story 'nve-icon', 'Registration' %}
+{% example '@nvidia-elements/core/icon/icon.examples.json' 'Registration' %}
 
 ## Alias
 
-{% story 'nve-icon', 'Alias' %}
+{% example '@nvidia-elements/core/icon/icon.examples.json' 'Alias' %}
 
 ## Brand
 
-{% story 'nve-icon', 'Brand' %}
+{% example '@nvidia-elements/core/icon/icon.examples.json' 'Brand' %}
 
 ## Source
 
-{% story 'nve-icon', 'Source' %}
+{% example '@nvidia-elements/core/icon/icon.examples.json' 'Source' %}
 
 <script type="module" src="/_internal/stories/icon/all-icons.js"></script>

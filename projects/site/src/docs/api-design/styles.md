@@ -403,7 +403,7 @@ However, the `nve-icon-button` internal to `nve-week` has its own internal `nve-
 </nve-week>
 ```
 
-{% example '@nvidia-elements/core/week/week.stories.json' 'ExportParts' %}
+{% example '@nvidia-elements/core/week/week.examples.json' 'ExportParts' %}
 
 ## Responsive
 

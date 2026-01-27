@@ -12,8 +12,8 @@
 
 ## Icon
 
-{% story 'nve-dropzone', 'Icon' %}
+{% example '@nvidia-elements/core/dropzone/dropzone.examples.json' 'Icon' %}
 
 ## Form
 
-{% story 'nve-dropzone', 'Form' %}
+{% example '@nvidia-elements/core/dropzone/dropzone.examples.json' 'Form' %}

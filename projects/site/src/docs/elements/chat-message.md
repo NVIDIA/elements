@@ -12,24 +12,24 @@
 
 ## Arrow Position
 
-{% story 'nve-chat-message', 'ArrowPosition' %}
+{% example '@nvidia-elements/core/chat-message/chat-message.examples.json' 'ArrowPosition' %}
 
 ## Flat
 
-{% story 'nve-chat-message', 'Flat' %}
+{% example '@nvidia-elements/core/chat-message/chat-message.examples.json' 'Flat' %}
 
 ## Prefix/Suffix
 
-{% story 'nve-chat-message', 'PrefixSuffix' %}
+{% example '@nvidia-elements/core/chat-message/chat-message.examples.json' 'PrefixSuffix' %}
 
 ## Codeblock
 
-{% story 'nve-chat-message', 'Codeblock' %}
+{% example '@nvidia-elements/core/chat-message/chat-message.examples.json' 'Codeblock' %}
 
 ## Top Offset
 
-{% story 'nve-chat-message', 'TopOffset' %}
+{% example '@nvidia-elements/core/chat-message/chat-message.examples.json' 'TopOffset' %}
 
 ## Color
 
-{% story 'nve-chat-message', 'Color' %}
+{% example '@nvidia-elements/core/chat-message/chat-message.examples.json' 'Color' %}

@@ -16,8 +16,8 @@
 
 ### Vertical
 
-{% story 'nve-password', 'Vertical' %}
+{% example '@nvidia-elements/core/password/password.examples.json' 'Vertical' %}
 
 ### Horizontal
 
-{% story 'nve-password', 'Horizontal' %}
+{% example '@nvidia-elements/core/password/password.examples.json' 'Horizontal' %}

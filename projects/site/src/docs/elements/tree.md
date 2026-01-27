@@ -15,49 +15,45 @@
 
 {% api 'nve-tree', 'property', 'border' %}
 
-{% story 'nve-tree', 'Border' %}
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'Border' %}
 
 ## Selectable
 
 {% api 'nve-tree-node', 'property', 'selectable' %}
 
-{% story 'nve-tree', 'Selectable' %}
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'Selectable' %}
 
 ## Selectable Multi
 
 {% api 'nve-tree-node', 'property', 'selectable' %}
 
-{% story 'nve-tree', 'SelectableMultiple' %}
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'SelectableMultiple' %}
 
 ## Links
 
-{% story 'nve-tree', 'Links' %}
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'Links' %}
 
 ## Highlight
 
 {% api 'nve-tree-node', 'property', 'highlighted' %}
 
-{% story 'nve-tree', 'Highlight' %}
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'Highlight' %}
 
 ## Async
 
-If data is dynamically loaded for a node use a `progress-ring` to show loading progress.
-
-{% story 'nve-tree', 'Async' %}
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'Async' %}
 
 ## Vertical Nav
 
-{% story 'nve-tree', 'VerticalNav', '{ "inline": false, "height": "500px" }' %}
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'VerticalNav' '{ "inline": false, "height": "500px" }' %}
 
 ## Node Content
 
-{% story 'nve-tree', 'NodeContent' %}
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'NodeContent' %}
 
 ## Dynamic Tree
 
-Using the `open` and `close` events, trees can conditionally render node based on if the node is expanded.
-
-{% story 'nve-tree', 'DynamicTree' %}
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'DynamicTree' %}
 
 Example in lit-html:
 
@@ -70,8 +66,6 @@ Example in lit-html:
 
 ## Overflow
 
-If the tree expands past its container, use overflow on the parent to enable scrolling.
-
-{% story 'nve-tree', 'Overflow' %}
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'Overflow' %}
 
 <script type="module" src="/_internal/stories/tree/dynamic-tree.js"></script>

@@ -138,17 +138,10 @@ function getExample(classDeclaration, path) {
     return classDeclaration.metadata.example;
   } else {
     const examplePath = path.replace('src', 'dist').replace('.ts', '.examples.json');
-    const storyPath = path.replace('src', 'dist').replace('.ts', '.stories.json');
 
     if (fs.existsSync(examplePath)) {
       const exampleJSON = JSON.parse(fs.readFileSync(examplePath, 'utf-8'));
       const example = exampleJSON.items[0]?.template?.trim();
-      return example ? example : '';
-    }
-
-    if (fs.existsSync(storyPath)) {
-      const storyJSON = JSON.parse(fs.readFileSync(storyPath, 'utf-8'));
-      const example = storyJSON.items[0]?.template?.trim();
       return example ? example : '';
     }
   }
@@ -872,7 +865,6 @@ export default {
   exclude: [
     resolve('src/**/*.css'),
     resolve('src/**/*.examples.ts'),
-    resolve('src/**/*.stories.ts'),
     resolve('src/**/*.test.ts'),
     resolve('src/**/*.test.axe.ts'),
     resolve('src/**/*.test.ssr.ts'),

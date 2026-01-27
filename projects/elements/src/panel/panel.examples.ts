@@ -12,6 +12,9 @@ export default {
   component: 'nve-panel'
 };
 
+/**
+ * @summary Basic panel layout with header showing session details and metadata in a collapsible side panel.
+ */
 export const Default = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm">
@@ -65,6 +68,9 @@ export const Default = {
   `
 };
 
+/**
+ * @summary Left-positioned collapsible panel for sidebar navigation and content details.
+ */
 export const LeftSidePanel = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm">
@@ -113,6 +119,9 @@ export const LeftSidePanel = {
   `
 };
 
+/**
+ * @summary Right-positioned collapsible panel for supplementary content and property inspectors.
+ */
 export const RightSidePanel = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm">
@@ -161,6 +170,9 @@ export const RightSidePanel = {
   `
 };
 
+/**
+ * @summary Closable panel with external toggle button for programmatic show/hide control.
+ */
 export const ClosablePanel = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm full">
@@ -219,6 +231,9 @@ export const ClosablePanel = {
   `
 };
 
+/**
+ * @summary Collapsible panel with built-in close button and external toggle for flexible expand/collapse behavior.
+ */
 export const PanelWithTrigger = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm full">
@@ -278,6 +293,9 @@ export const PanelWithTrigger = {
   `
 };
 
+/**
+ * @summary Panel with complete header including title, subtitle, and action icon slots for rich header content.
+ */
 export const PanelWithFullHeader = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm">
@@ -333,6 +351,9 @@ export const PanelWithFullHeader = {
   `
 };
 
+/**
+ * @summary Panel with footer containing action buttons for form submissions and destructive actions.
+ */
 export const PanelWithFooter = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm">
