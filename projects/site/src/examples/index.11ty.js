@@ -28,7 +28,7 @@ export async function render(data) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="${BASE_URL}" />
-    <title data-pagefind-meta="title">Story - ${data.example.permalink}</title>
+    <title data-pagefind-meta="title">Example - ${data.example.permalink}</title>
     <style>
       @import '/examples/index.css';
     </style>

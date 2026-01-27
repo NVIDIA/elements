@@ -13,7 +13,7 @@ export function examplesToJSON(packageFile) {
   return {
     name: 'examples',
     async transform(_code, id) {
-      if (!id.endsWith('.stories.ts') && !id.endsWith('.examples.ts')) {
+      if (!id.endsWith('.examples.ts')) {
         return null;
       }
 
@@ -147,7 +147,7 @@ export function examplesToJSON(packageFile) {
 function generateExampleId(entrypoint, name) {
   const exampleName = name.replace(/([A-Z])/g, '-$1').slice(1);
   const idParts = entrypoint.split('/');
-  const fileName = idParts[idParts.length - 1].replace('.stories.json', '').replace('.examples.json', '');
+  const fileName = idParts[idParts.length - 1].replace('.examples.json', '');
   const formattedFileName = idParts[idParts.length - 2] === fileName ? '' : `-${fileName}`;
   const entrypointName = idParts.slice(1, idParts.length - 1).join('-');
   return `${entrypointName}${formattedFileName}_${exampleName}`.toLowerCase();

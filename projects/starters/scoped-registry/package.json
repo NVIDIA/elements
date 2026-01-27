@@ -98,7 +98,7 @@
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
         "src/**",
-        "!src/**/*.stories.ts",
+        "!src/**/*.examples.ts",
         "package.json",
         "tsconfig.json",
         "vite.config.ts"

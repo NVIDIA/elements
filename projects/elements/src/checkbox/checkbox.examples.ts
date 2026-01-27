@@ -10,8 +10,8 @@ export default {
 /**
  * @summary Basic checkbox component with label for binary selection and form input.
  */
-export const Default = () => {
-  return html`
+export const Default = {
+  render: () => html`
 <nve-checkbox>
   <label>label</label>
   <input type="checkbox" checked />
@@ -21,8 +21,8 @@ export const Default = () => {
 /**
  * @summary Checkbox states including default, disabled, success, and error with control messages for validation feedback.
  */
-export const States = () => {
-  return html`
+export const States = {
+  render: () => html`
 <div nve-layout="column gap:lg align:stretch">
   <nve-checkbox>
     <label>label</label>
@@ -53,8 +53,8 @@ export const States = () => {
 /**
  * @summary Checkbox group with vertical layout for related options stacked in a column with validation states.
  */
-export const VerticalGroup = () => {
-  return html`
+export const VerticalGroup = {
+  render: () => html`
 <div nve-layout="column gap:lg align:stretch">
   <nve-checkbox-group>
     <label>label</label>
@@ -138,8 +138,8 @@ export const VerticalGroup = () => {
 /**
  * @summary Checkbox group with vertical inline layout for compact vertical stacking with inline label positioning.
  */
-export const VerticalInlineGroup = () => {
-  return html`
+export const VerticalInlineGroup = {
+  render: () => html`
 <div nve-layout="column gap:lg align:stretch">
   <nve-checkbox-group layout="vertical-inline">
     <label>label</label>
@@ -223,8 +223,8 @@ export const VerticalInlineGroup = () => {
 /**
  * @summary Checkbox group with horizontal layout for related options arranged in a row, ideal for limited choices.
  */
-export const HorizontalGroup = () => {
-  return html`
+export const HorizontalGroup = {
+  render: () => html`
 <div nve-layout="column gap:lg align:stretch">
   <nve-checkbox-group layout="horizontal">
     <label>label</label>
@@ -308,8 +308,8 @@ export const HorizontalGroup = () => {
 /**
  * @summary Checkbox group with horizontal inline layout for space-efficient horizontal arrangement with inline labels.
  */
-export const HorizontalInlineGroup = () => {
-  return html`
+export const HorizontalInlineGroup = {
+  render: () => html`
 <div nve-layout="column gap:lg align:stretch">
   <nve-checkbox-group layout="horizontal-inline">
     <label>label</label>
@@ -393,8 +393,8 @@ export const HorizontalInlineGroup = () => {
 /**
  * @summary Checkbox with indeterminate state for representing partial selection or mixed values in hierarchical lists.
  */
-export const Indeterminate = () => {
-  return html`
+export const Indeterminate = {
+  render: () => html`
 <nve-checkbox>
   <label>checkbox 1</label>
   <input type="checkbox" checked id="indeterminate" />

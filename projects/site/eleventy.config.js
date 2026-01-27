@@ -143,7 +143,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addAsyncShortcode('example', exampleShortcode);
   eleventyConfig.addAsyncShortcode('example-doc', exampleDocShortcode);
   eleventyConfig.addPairedShortcode('example-group', exampleGroupShortcode);
-  eleventyConfig.addAsyncShortcode('story', exampleShortcode); // deprecated
   eleventyConfig.addAsyncShortcode('example-tags', exampleTagsShortcode);
   eleventyConfig.addAsyncShortcode('api', apiShortcode);
   eleventyConfig.addAsyncShortcode('tokens', tokensShortcode);

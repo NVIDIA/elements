@@ -1,6 +1,6 @@
 import { html, LitElement, nothing, unsafeCSS } from 'lit';
 import { FormControlMixin } from '@nvidia-elements/forms/mixin';
-import './light.stories.js';
+import './light.examples.js';
 
 export default {
   title: 'Labs/Forms/Examples'

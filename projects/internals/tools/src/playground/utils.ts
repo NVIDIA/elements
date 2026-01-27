@@ -59,7 +59,7 @@ export function createDefaultFiles(content, elements: Element[], options: Playgr
     'importmap.json': { content: createImportMap() }
   };
 
-  // Add styles CSS file if this is from layout or responsive stories
+  // Add styles CSS file if this is from layout or responsive examples
   if (options.name?.includes('@nvidia-elements/styles/layout.examples.json')) {
     files['styles.css'] = { content: createLayoutStyles() };
   } else if (options.name?.includes('@nvidia-elements/styles/responsive.examples.json')) {
@@ -157,14 +157,14 @@ function serialize(data, compress = true) {
 }
 
 function createIndexHTML(content: string, options: PlaygroundOptions) {
-  // Check if this is from the layout or responsive stories file
-  const isLayoutStory = options.name?.includes('@nvidia-elements/styles/layout.examples.json');
-  const isResponsiveStory = options.name?.includes('@nvidia-elements/styles/responsive.examples.json');
-  const isResponsivePatternsStory = options.name?.includes('@nvidia-elements/styles/responsive-patterns.examples.json');
+  // Check if this is from the layout or responsive examples file
+  const isLayoutExample = options.name?.includes('@nvidia-elements/styles/layout.examples.json');
+  const isResponsiveExample = options.name?.includes('@nvidia-elements/styles/responsive.examples.json');
+  const isResponsivePatternsExample = options.name?.includes('@nvidia-elements/styles/responsive-patterns.examples.json');
 
   // Add link to styles CSS if needed
   const layoutExamplesStyles =
-    isLayoutStory || isResponsiveStory || isResponsivePatternsStory
+    isLayoutExample || isResponsiveExample || isResponsivePatternsExample
       ? `
     <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/labs/layout-viewport.css" />
     <link rel="stylesheet" type="text/css" href="@nvidia-elements/styles/dist/labs/layout-container.css" />

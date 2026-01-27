@@ -14,26 +14,26 @@
 
 {% api 'nve-progress-bar', 'property', 'status' %}
 
-{% story 'nve-progress-bar', 'Status' %}
+{% example '@nvidia-elements/core/progress-bar/progress-bar.examples.json' 'Status' %}
 
 ## Max Value
 
 {% api 'nve-progress-bar', 'property', 'max' %}
 
-{% story 'nve-progress-bar', 'Max' %}
+{% example '@nvidia-elements/core/progress-bar/progress-bar.examples.json' 'Max' %}
 
 ## Label Display
 
-{% story 'nve-progress-bar', 'Labeled' %}
+{% example '@nvidia-elements/core/progress-bar/progress-bar.examples.json' 'Labeled' %}
 
 ## Indeterminate Animation
 
-{% story 'nve-progress-bar', 'Indeterminate' %}
+{% example '@nvidia-elements/core/progress-bar/progress-bar.examples.json' 'Indeterminate' %}
 
-{% story 'nve-progress-bar', 'IndeterminateStatusColors' %}
+{% example '@nvidia-elements/core/progress-bar/progress-bar.examples.json' 'IndeterminateStatusColors' %}
 
-{% story 'nve-progress-bar', 'IndeterminateCustomColor' %}
+{% example '@nvidia-elements/core/progress-bar/progress-bar.examples.json' 'IndeterminateCustomColor' %}
 
 ## Height Customization
 
-{% story 'nve-progress-bar', 'CustomHeights' %}
+{% example '@nvidia-elements/core/progress-bar/progress-bar.examples.json' 'CustomHeights' %}

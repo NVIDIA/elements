@@ -86,24 +86,24 @@ export const Horizontal = {
 /**
  * @summary Textarea with built-in HTML validation showing required field error messages for form validation.
  */
-export const ControlValidation = () => {
-  return html`
+export const ControlValidation = {
+  render: () => html`
 <nve-textarea>
   <label>validation</label>
   <textarea required></textarea>
   <nve-control-message>message</nve-control-message>
   <nve-control-message error="valueMissing">required</nve-control-message>
-</nve-textarea>`;
-}
+</nve-textarea>`
+};
 
 /**
  * @summary Textarea with custom columns and rows attributes for controlling initial size and dimensions.
  */
-export const ColumnsAndRows = () => {
-  return html`
+export const ColumnsAndRows = {
+  render: () => html`
 <nve-textarea>
   <label>label</label>
   <textarea rows="15" cols="40"></textarea>
   <nve-control-message>message</nve-control-message>
-</nve-textarea>`;
-}
+</nve-textarea>`
+};

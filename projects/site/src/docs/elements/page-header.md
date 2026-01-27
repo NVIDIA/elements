@@ -12,32 +12,32 @@
 
 ## App Logo
 
-{% story 'nve-page-header', 'AppLogo' %}
+{% example '@nvidia-elements/core/page-header/page-header.examples.json' 'AppLogo' %}
 
 ## Menu Button
 
-{% story 'nve-page-header', 'MenuButton' %}
+{% example '@nvidia-elements/core/page-header/page-header.examples.json' 'MenuButton' %}
 
 ## Dropdown Menu
 
-{% story 'nve-page-header', 'DropdownMenu' %}
+{% example '@nvidia-elements/core/page-header/page-header.examples.json' 'DropdownMenu' %}
 
 ## Search
 
-{% story 'nve-page-header', 'Search' %}
+{% example '@nvidia-elements/core/page-header/page-header.examples.json' 'Search' %}
 
 ## Prefix Navigation
 
-{% story 'nve-page-header', 'PrefixNavigation' %}
+{% example '@nvidia-elements/core/page-header/page-header.examples.json' 'PrefixNavigation' %}
 
 ## Center Navigation
 
-{% story 'nve-page-header', 'CenterNavigation' %}
+{% example '@nvidia-elements/core/page-header/page-header.examples.json' 'CenterNavigation' %}
 
 ## Suffix Navigation
 
-{% story 'nve-page-header', 'SuffixNavigation' %}
+{% example '@nvidia-elements/core/page-header/page-header.examples.json' 'SuffixNavigation' %}
 
 ## User Detail
 
-{% story 'nve-page-header', 'UserDetail' %}
+{% example '@nvidia-elements/core/page-header/page-header.examples.json' 'UserDetail' %}

@@ -60,7 +60,6 @@
     "./data.html.json": "./dist/data.html.json",
     "./data.snippets.json": "./dist/data.snippets.json",
     "./*.examples.json": "./dist/*.examples.json",
-    "./*.stories.json": "./dist/*.stories.json",
     "./css/*": "./dist/css/*",
     ".": {
       "types": "./dist/index.d.ts",
@@ -988,7 +987,6 @@
         "../styles/dist/**/*.css",
         "../themes/dist/**/*.css",
         "../labs/forms/dist/**/*.js",
-        "!../labs/forms/dist/**/*.stories.js",
         "public/**",
         "src/**",
         "!src/**/*.test.ts",

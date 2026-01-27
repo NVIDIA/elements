@@ -12,4 +12,4 @@
 
 ## Interactive
 
-{% story 'nve-page-loader', 'Interactive', '{ "inline": false, "height": "400px" }' %}
+{% example '@nvidia-elements/core/page-loader/page-loader.examples.json' 'Interactive' '{ "inline": false, "height": "400px" }' %}

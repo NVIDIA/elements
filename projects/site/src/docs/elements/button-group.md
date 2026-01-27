@@ -14,11 +14,11 @@
 
 {% api 'nve-button-group', 'property', 'interaction' %}
 
-{% story 'nve-button-group', 'ActionSplit' %}
+{% example '@nvidia-elements/core/button-group/button-group.examples.json' 'ActionSplit' %}
 
 ### Split Rounded
 
-{% story 'nve-button-group', 'ActionSplitRounded' %}
+{% example '@nvidia-elements/core/button-group/button-group.examples.json' 'ActionSplitRounded' %}
 
 ## Container
 
@@ -26,23 +26,23 @@
 
 ### Standard
 
-{% story 'nve-button-group', 'Default' %}
+{% example '@nvidia-elements/core/button-group/button-group.examples.json' 'Default' %}
 
 ### Flat
 
 {% api 'nve-button-group', 'property', 'container' %}
 
-{% story 'nve-button-group', 'Flat' %}
+{% example '@nvidia-elements/core/button-group/button-group.examples.json' 'Flat' %}
 
 ### Rounded
 
 {% api 'nve-button-group', 'property', 'container' %}
 
-{% story 'nve-button-group', 'Rounded' %}
+{% example '@nvidia-elements/core/button-group/button-group.examples.json' 'Rounded' %}
 
 ### Rounded Icon
 
-{% story 'nve-button-group', 'RoundedIcon' %}
+{% example '@nvidia-elements/core/button-group/button-group.examples.json' 'RoundedIcon' %}
 
 ## Selection
 
@@ -50,18 +50,18 @@
 
 ### Single Select
 
-{% story 'nve-button-group', 'SingleSelect' %}
+{% example '@nvidia-elements/core/button-group/button-group.examples.json' 'SingleSelect' %}
 
 ### Multi Select
 
-{% story 'nve-button-group', 'MultiSelect' %}
+{% example '@nvidia-elements/core/button-group/button-group.examples.json' 'MultiSelect' %}
 
 ### Disabled
 
-{% story 'nve-button-group', 'Disabled' %}
+{% example '@nvidia-elements/core/button-group/button-group.examples.json' 'Disabled' %}
 
 ## Orientation
 
 {% api 'nve-button-group', 'property', 'orientation' %}
 
-{% story 'nve-button-group', 'OrientationVertical' %}
+{% example '@nvidia-elements/core/button-group/button-group.examples.json' 'OrientationVertical' %}

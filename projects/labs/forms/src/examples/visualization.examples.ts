@@ -3,7 +3,7 @@ import { FormControlMixin } from '@nvidia-elements/forms/mixin';
 import '@nvidia-elements/core/color/define.js';
 import '@nvidia-elements/core/radio/define.js';
 import '@nvidia-elements/core/range/define.js';
-import './visualization.stories.js';
+import './visualization.examples.js';
 
 export default {
   title: 'Labs/Forms/Examples'
