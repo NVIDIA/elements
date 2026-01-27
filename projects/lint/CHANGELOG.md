@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.6.3...@nvidia-elements/lint-v0.7.0) (2026-01-27)
+
+
+### Features
+
+* **labs-lint:** add popover anchor rule ([63656e1](https://github.com/NVIDIA/elements/commit/63656e130020dc753801fe11e9c08d50845664b5))
+
 ## [@nvidia-elements/lint-v0.6.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.6.2...@nvidia-elements/lint-v0.6.3) (2026-01-14)
 
 
