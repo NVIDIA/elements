@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.56.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.1...@nvidia-elements/core-v1.56.2) (2026-01-28)
+
+
+### Bug Fixes
+
+* **combobox:** eliminate quadratic options scanning in suffixContent ([77e6f47](https://github.com/NVIDIA/elements/commit/77e6f473f5e3884247c5dba20cc26902ab8877d5))
+
 ## [@nvidia-elements/core-v1.56.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.0...@nvidia-elements/core-v1.56.1) (2026-01-23)
 
 
