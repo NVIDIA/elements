@@ -134,7 +134,7 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   get #largeOptionsList() {
-    return this.#options.length > 50;
+    return (this.#datalist?.options?.length ?? 0) > 50;
   }
 
   get #isPristine() {
@@ -142,25 +142,26 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   protected get suffixContent() {
-    return !isServer
-      ? html`
+    if (isServer) return nothing;
+    const options = this.#options;
+    const largeOptionsList = this.#largeOptionsList;
+    const isPristine = this.#isPristine;
+    const visibleOptions = options.filter(o => !o.hidden).filter(o => !(o.value === '' && o.disabled));
+    const hasNoResults = visibleOptions.filter(o => !o.disabled).length === 0;
+    return html`
     <nve-dropdown part="dropdown" .popoverType=${'manual'} .modal=${false} @open=${e => (e.target.hidden = false)} @close=${this.#closeListBox} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
       <nve-menu part="menu" role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
-        ${this.#options
-          .filter(o => !o.hidden)
-          .filter(o => !(o.value === '' && o.disabled))
-          .map(
+        ${visibleOptions.map(
             o => html`
           <nve-menu-item part="menu-item" .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
             ${this.#getOptionCheckbox(o)}
-            ${this.#largeOptionsList || this.#isPristine ? getDisplayValue(o) : html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>`}
+            ${largeOptionsList || isPristine ? getDisplayValue(o) : html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>`}
           </nve-menu-item>`
           )}
-        ${this.#options.filter(o => !o.disabled && !o.hidden).length === 0 ? html`<nve-menu-item part="menu-item" .value=${''} disabled>${this.i18n.noResults}</nve-menu-item>` : nothing}
+        ${hasNoResults ? html`<nve-menu-item part="menu-item" .value=${''} disabled>${this.i18n.noResults}</nve-menu-item>` : nothing}
       </nve-menu>
       <slot name="footer"></slot>
-    </nve-dropdown>`
-      : nothing;
+    </nve-dropdown>`;
   }
 
   #getOptionCheckbox(o: HTMLOptionElement) {
