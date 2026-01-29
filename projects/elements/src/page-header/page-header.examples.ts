@@ -173,7 +173,7 @@ export const Search = {
   <nve-button container="flat"><a href="#">Link 1</a></nve-button>
   <nve-button container="flat"><a href="#">Link 2</a></nve-button>
   <nve-search slot="suffix" rounded style="width: 220px">
-    <input type="search" />
+    <input type="search" aria-label="search" />
   </nve-search>
   <nve-button slot="suffix" container="flat"><a href="#">Login</a></nve-button>
 </nve-page-header>

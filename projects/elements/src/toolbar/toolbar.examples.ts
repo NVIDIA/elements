@@ -164,7 +164,7 @@ export const Filter = {
         </select>
       </nve-progressive-filter-chip>
       <nve-combobox container="flat">
-        <input type="search" placeholder="Add Filter" />
+        <input type="search" placeholder="Add Filter" aria-label="add filter" />
         <datalist>
           <option value="Status"></option>
           <option value="Priority"></option>
@@ -226,7 +226,7 @@ export const Scroll = {
         <input type="date" value="2022-12-07" aria-label="end date" />
       </nve-progressive-filter-chip>
       <nve-combobox container="flat">
-        <input type="search" placeholder="Add Filter" />
+        <input type="search" placeholder="Add Filter" aria-label="add filter" />
         <datalist>
           <option value="Status"></option>
           <option value="Priority"></option>
@@ -288,7 +288,7 @@ export const Wrap = {
         <input type="date" value="2022-12-07" aria-label="end date" />
       </nve-progressive-filter-chip>
       <nve-combobox container="flat">
-        <input type="search" placeholder="Add Filter" />
+        <input type="search" placeholder="Add Filter" aria-label="add filter" />
         <datalist>
           <option value="Status"></option>
           <option value="Priority"></option>
@@ -341,13 +341,13 @@ export const Container = {
         <nve-icon-button icon-name="copy"></nve-icon-button>
         <nve-copy-button></nve-copy-button>
         <nve-switch prominence="muted">
-          <input type="checkbox" checked />
+          <input type="checkbox" checked aria-label="switch" />
         </nve-switch>
         <nve-checkbox prominence="muted">
-          <input type="checkbox" checked />
+          <input type="checkbox" checked aria-label="checkbox" />
         </nve-checkbox>
         <nve-input>
-          <input />
+          <input aria-label="input" />
         </nve-input>
       </nve-toolbar>
 
@@ -357,13 +357,13 @@ export const Container = {
         <nve-icon-button icon-name="copy"></nve-icon-button>
         <nve-copy-button></nve-copy-button>
         <nve-switch prominence="muted">
-          <input type="checkbox" checked />
+          <input type="checkbox" checked aria-label="switch" />
         </nve-switch>
         <nve-checkbox prominence="muted">
-          <input type="checkbox" checked />
+          <input type="checkbox" checked aria-label="checkbox" />
         </nve-checkbox>
         <nve-input>
-          <input />
+          <input aria-label="input" />
         </nve-input>
       </nve-toolbar>
 
@@ -373,13 +373,13 @@ export const Container = {
         <nve-icon-button icon-name="copy"></nve-icon-button>
         <nve-copy-button></nve-copy-button>
         <nve-switch prominence="muted">
-          <input type="checkbox" checked />
+          <input type="checkbox" checked aria-label="switch" />
         </nve-switch>
         <nve-checkbox prominence="muted">
-          <input type="checkbox" checked />
+          <input type="checkbox" checked aria-label="checkbox" />
         </nve-checkbox>
         <nve-input>
-          <input />
+          <input aria-label="input" />
         </nve-input>
       </nve-toolbar>
     </div>
