@@ -143,6 +143,58 @@ ${authoringContext}
 ---
 `;
 
+const doctorContext = `
+# Elements Design System Doctor / Setup Check
+
+Instructions for ensuring the Elements Design System is setup correctly
+
+## Tools to use
+- \`projects_health\`: check the health of a project using Elements packages
+
+## MCP Checks
+
+Ensure the MCP is properly configured and working as expected.
+
+### Cursor
+
+\`.cursor/mcp.json\`
+
+\`\`\`json
+{
+  "mcpServers": {
+    "elements": {
+      "description": "Elements API and Custom Element Schema",
+      "command": "npm exec --package=@nvidia-elements/cli@latest -y --prefer-online -- nve-mcp",
+      "env": {
+        "npm_config_registry": "https://registry.npmjs.org"
+      }
+    }
+  }
+}
+\`\`\`
+
+### Claude Code
+
+\`./.mcp.json\`
+
+\`\`\`json
+{
+  "mcpServers": {
+    "elements": {
+      "description": "Elements API and Custom Element Schema",
+      "command": "npm",
+      "args": ["exec", "--package=@nvidia-elements/cli@latest", "-y", "--prefer-online", "--", "nve-mcp"],
+      "env": {
+        "npm_config_registry": "https://registry.npmjs.org"
+      }
+    }
+  }
+}
+\`\`\`
+
+---
+`;
+
 /**
  * https://github.com/modelcontextprotocol/typescript-sdk?tab=readme-ov-file#prompts
  */
@@ -174,6 +226,22 @@ export const prompts: Prompt[] = [
           content: {
             type: 'text',
             text: aboutContext
+          }
+        }
+      ]
+    })
+  },
+  {
+    name: 'doctor',
+    title: 'Elements Design System Doctor / Setup Check',
+    description: 'Instructions for ensuring the Elements Design System is setup correctly',
+    handler: () => ({
+      messages: [
+        {
+          role: 'user',
+          content: {
+            type: 'text',
+            text: doctorContext
           }
         }
       ]

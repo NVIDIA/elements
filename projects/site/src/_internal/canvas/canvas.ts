@@ -56,7 +56,7 @@ export class Canvas extends LitElement {
     // Initialize state values from properties
     this.previewWidth = this.max;
     this.maxPreviewWidth = this.max;
-    
+
     // Initialize previewWidth based on parent container width if possible
     requestAnimationFrame(() => {
       const containerWidth = this.offsetWidth - 3;
