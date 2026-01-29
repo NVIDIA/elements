@@ -5,6 +5,9 @@ const REQUIRED_SLOTTED_ELEMENTS = {
   'nve-input': {
     required: ['input']
   },
+  'nve-combobox': {
+    required: ['input[type="search"]', 'option']
+  },
   'nve-date': {
     required: ['input[type="date"]']
   },
@@ -38,20 +41,26 @@ const REQUIRED_SLOTTED_ELEMENTS = {
   'nve-color': {
     required: ['input[type="color"]']
   },
-  'nve-checkbox-group': {
-    required: ['nve-checkbox']
-  },
   'nve-radio': {
     required: ['input[type="radio"]']
   },
+  'nve-radio-group': {
+    required: ['nve-radio']
+  },
   'nve-checkbox': {
     required: ['input[type="checkbox"]']
+  },
+  'nve-checkbox-group': {
+    required: ['nve-checkbox']
   },
   'nve-range': {
     required: ['input[type="range"]']
   },
   'nve-switch': {
     required: ['input[type="checkbox"]']
+  },
+  'nve-switch-group': {
+    required: ['nve-switch']
   }
 };
 
