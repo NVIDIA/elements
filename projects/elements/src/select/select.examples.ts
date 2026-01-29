@@ -78,7 +78,7 @@ export const Prefix = {
   render: () => html`
   <nve-select>
     <nve-button container="flat" readonly>location</nve-button>
-    <select>
+    <select aria-label="location">
       <option value="1">Option 1</option>
       <option value="2">Option 2</option>
       <option value="3">Option 3</option>

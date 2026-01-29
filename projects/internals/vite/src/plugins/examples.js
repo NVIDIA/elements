@@ -72,7 +72,7 @@ export function examplesToJSON(packageFile) {
                   .getJsDocs()
                   .flatMap(doc => doc.getTags())
                   .filter(tag => tag.getTagName() === 'summary')
-                  .map(tag => tag.getCommentText())[0] ?? '';
+                  .map(tag => tag.getCommentText().replace(/\n/g, ' '))[0] ?? '';
 
               const description =
                 example

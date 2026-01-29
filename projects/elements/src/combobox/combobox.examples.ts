@@ -59,7 +59,7 @@ export const Vertical = () => {
 
   <nve-combobox>
     <label>disabled</label>
-    <input disabled />
+    <input type="search" disabled />
     <datalist>
       <option value="status"></option>
       <option value="priority"></option>
@@ -123,7 +123,7 @@ export const Horizontal = () => {
 
   <nve-combobox layout="horizontal">
     <label>disabled</label>
-    <input disabled />
+    <input type="search" disabled />
     <datalist>
       <option value="status"></option>
       <option value="priority"></option>
@@ -172,7 +172,7 @@ export const Flat = () => {
   return html`
   <nve-combobox container="flat">
     <nve-icon name="filter" slot="prefix-icon"></nve-icon>
-    <input type="search">
+    <input type="search" aria-label="search">
     <datalist>
       <option value="status"></option>
       <option value="priority"></option>
@@ -546,6 +546,7 @@ export const Form = () => {
   `
 };
 
+/* eslint-disable @nvidia-elements/lint/no-missing-slotted-elements */
 /**
  * @summary Performance test with 1000 options to demonstrate filtering efficiency with large datasets.
  * @tags test-case performance
@@ -553,7 +554,7 @@ export const Form = () => {
 export const Performance = () => {
   return html`
 <nve-combobox id="performance-combobox">
-  <input type="search">
+  <input type="search" aria-label="performance test">
   <datalist></datalist>
 </nve-combobox>
 <script type="module">
@@ -647,15 +648,15 @@ class ProgressiveFilterDemo extends LitElement {
       <nve-progressive-filter-chip closable @close=${() => this.#removeFilter(filter)}>
         <nve-combobox>
           <span slot="prefix-icon"></span>
-          <input type="search" placeholder="filter" .value=${filter.name} @change=${e => this.#createfilter(e.target.value, filter)} />
+          <input type="search" placeholder="filter" .value=${filter.name} @change=${e => this.#createfilter(e.target.value, filter)} aria-label="filter" />
           <datalist>${this.#unusedFilters.map(([key]) => html`<option .value=${key}>${key}</option>`)}</datalist>
         </nve-combobox>
         ${choose(this.schema[filter.name]?.type, [
-          ['text', () => html`<nve-combobox><input type="text" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} placeholder="value" /></nve-combobox>`],
-          ['number', () => html`<nve-combobox><input type="number" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} /></nve-combobox>`],
-          ['date', () => html`<nve-date><input type="date" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} /></nve-date>`],
-          ['select', () => html`<nve-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value}>${this.schema[filter.name]?.options?.map(v => html`<option value=${v}>${v}</option>`)}</select></nve-select>`]
-        ], () => html`<nve-combobox><input type="text" placeholder="value" disabled /></nve-combobox>`)}
+          ['text', () => html`<nve-combobox><input type="text" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} placeholder="value" aria-label="filter value" /></nve-combobox>`],
+          ['number', () => html`<nve-combobox><input type="number" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} aria-label="filter value" /></nve-combobox>`],
+          ['date', () => html`<nve-date><input type="date" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} aria-label="filter value" /></nve-date>`],
+          ['select', () => html`<nve-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value} aria-label="filter value">${this.schema[filter.name]?.options?.map(v => html`<option value=${v}>${v}</option>`)}</select></nve-select>`]
+        ], () => html`<nve-combobox><input type="text" placeholder="value" disabled aria-label="filter value" /></nve-combobox>`)}
       </nve-progressive-filter-chip>`)}
       <nve-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || !!this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
         <nve-icon name="add"></nve-icon> Add Filter

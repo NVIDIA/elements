@@ -76,27 +76,13 @@ See the links below for specific integration patterns for the following framewor
 
 {% example '@nvidia-elements/styles/typography.examples.json' 'UnstyledList' %}
 
+## Description List
+
+{% example '@nvidia-elements/styles/typography.examples.json' 'DescriptionList' %}
+
 ## Navigation List
 
 {% example '@nvidia-elements/styles/typography.examples.json' 'NavList' %}
-
-```html
-<!-- Navigation List -->
-<ul nve-text="list nav">
-  ...
-  <li>
-    <a nve-text="link" href="#" aria-current="page">Top Level Link</a>
-  </li>
-
-  <li>
-    <ul>
-      <li><a nve-text="link" href="#">2nd Level Link</a></li>
-      <li><a nve-text="link" href="#">2nd Level Link</a></li>
-    </ul>
-  </li>
-  ...
-</ul>
-```
 
 ## Headings
 

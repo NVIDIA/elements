@@ -16,7 +16,7 @@ import '@nvidia-elements/core/page-header/define.js';
 
 export default {
   title: 'Patterns/Examples',
-  component: 'nve-internal-patterns'
+  component: 'nve-patterns'
 };
 
 /**

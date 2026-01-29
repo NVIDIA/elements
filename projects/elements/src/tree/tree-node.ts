@@ -118,6 +118,7 @@ export class TreeNode extends LitElement {
 
   declare _internals: ElementInternals;
 
+  /* eslint-disable @nvidia-elements/lint/no-missing-control-label */
   render() {
     return html`
       <div internal-host @slotchange=${this.#nodeUpdate}>
