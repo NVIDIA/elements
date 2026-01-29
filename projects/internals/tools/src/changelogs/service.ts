@@ -1,6 +1,7 @@
 import { ProjectsService } from '@internals/metadata';
 import { fuzzyMatch } from '../internal/search.js';
 import { service, tool } from '../internal/tools.js';
+import { markdownDescription } from '../internal/utils.js';
 
 const MAX_LINE_COUNT = 512;
 const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
@@ -16,6 +17,7 @@ export class ChangelogsService {
       properties: {
         format: {
           type: 'string',
+          description: markdownDescription,
           enum: ['markdown', 'json'],
           default: 'markdown'
         }
@@ -58,7 +60,7 @@ export class ChangelogsService {
         },
         format: {
           type: 'string',
-          description: 'Format of the output contents. `markdown` | `json`',
+          description: markdownDescription,
           enum: ['markdown', 'json'],
           default: 'markdown'
         }

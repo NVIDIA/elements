@@ -1,6 +1,7 @@
 import { ApiService } from '@internals/metadata';
 import { service, tool } from '../internal/tools.js';
 import { getSemanticTokens } from './utils.js';
+import { markdownDescription } from '../internal/utils.js';
 
 @service()
 export class TokensService {
@@ -11,7 +12,7 @@ export class TokensService {
       properties: {
         format: {
           type: 'string',
-          description: 'Format of the output contents. `markdown` | `json`',
+          description: markdownDescription,
           enum: ['markdown', 'json'],
           default: 'markdown'
         }
