@@ -14,7 +14,7 @@ import '@nvidia-elements/core/password/define.js';
 
 export default {
   title: 'Patterns/Authentication',
-  component: 'nve-internal-patterns'
+  component: 'nve-patterns'
 };
 
 
@@ -135,3 +135,23 @@ export const LoginPage = {
     `
   }
 }
+
+
+/**
+ * @summary Permission denied state informing users of access restrictions with contact option.
+ * @tags pattern
+ */
+export const NoAccess = {
+  render: () => html`
+    <div nve-layout="column gap:lg pad:lg align:center">
+      <nve-icon name="lock" size="xl"></nve-icon>
+      <div nve-layout="column align:center gap:sm">
+        <h2 nve-text="heading lg">Access Restricted</h2>
+        <p nve-text="body muted center" style="max-width: 400px">
+          You don't have permission to view this configuration. Contact your administrator to request access.
+        </p>
+      </div>
+      <nve-button >Request Access</nve-button>
+    </div>
+  `
+};

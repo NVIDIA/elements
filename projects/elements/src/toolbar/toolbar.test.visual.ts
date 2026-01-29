@@ -121,13 +121,13 @@ function template(theme: '' | 'dark' = '') {
     <nve-icon-button icon-name="copy"></nve-icon-button>
     <nve-copy-button></nve-copy-button>
     <nve-switch prominence="muted">
-      <input type="checkbox" checked />
+      <input type="checkbox" checked aria-label="switch" />
     </nve-switch>
     <nve-checkbox prominence="muted">
-      <input type="checkbox" checked />
+      <input type="checkbox" checked aria-label="checkbox" />
     </nve-checkbox>
     <nve-input>
-      <input />
+      <input aria-label="input" />
     </nve-input>
   </nve-toolbar>
   `;

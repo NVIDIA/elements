@@ -6,7 +6,7 @@ import '@nvidia-elements/core/divider/define.js';
 
 export default {
   title: 'Patterns/Examples',
-  component: 'nve-internal-patterns'
+  component: 'nve-patterns'
 };
 
 /**

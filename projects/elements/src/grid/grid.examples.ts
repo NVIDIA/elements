@@ -1107,27 +1107,6 @@ export const Placeholder = {
 };
 
 /**
- * @summary Error or empty state placeholder with actionable recovery options. Use empty state placeholders when no data is available (due to errors, empty results, or failed filters) with clear messaging and actions like retry or filter adjustment, helping users understand why data is missing and how to resolve it.
- */
-export const PlaceholderRetry = {
-  render: () => html`
-<nve-grid style="min-height: 400px">
-  <nve-grid-header>
-    <nve-grid-column></nve-grid-column>
-  </nve-grid-header>
-  <nve-grid-placeholder>
-    <div nve-layout="column gap:md align:center">
-      <h2 nve-text="heading">Data not found</h2>
-      <p nve-text="body">Try adjusting filter settings or try again later.</p>
-      <nve-button>Retry</nve-button>
-    </div>
-  </nve-grid-placeholder>
-  <nve-grid-footer>footer</nve-grid-footer>
-</nve-grid>
-  `
-};
-
-/**
  * @summary Full-width grid container for maximum space utilization, providing edge-to-edge data display for comprehensive information presentation.
  */
 export const Full = {

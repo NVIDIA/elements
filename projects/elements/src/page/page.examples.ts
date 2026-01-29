@@ -900,88 +900,6 @@ export const PageLayoutCardGrid = {
 };
 
 /**
- * @summary Demonstrates a video player layout with controls and panels.
- * @tags pattern
- */
-export const PageLayoutVideo = {
-  render: () => html`
-<nve-page style="--padding: 0">
-  <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
-    <nve-button selected container="flat">Link 1</nve-button>
-    <nve-button container="flat">Link 2</nve-button>
-    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
-  </nve-page-header>
-
-  <nve-page-panel slot="subheader">
-    <nve-page-panel-content>
-      <div nve-layout="column gap:md align:stretch">
-        <div nve-layout="row align:space-between align:vertical-center">
-          <section nve-layout="row gap:sm align:vertical-center">
-            <nve-icon-button icon-name="arrow" direction="left" size="sm" container="flat"></nve-icon-button>
-            <h2 nve-text="heading lg">Subheader</h2>
-          </section>
-          <section nve-layout="row gap:sm align:vertical-center">
-            <nve-button>Default</nve-button>
-            <nve-icon-button icon-name="more-actions"></nve-icon-button>
-          </section>
-        </div>
-      </div>
-    </nve-page-panel-content>
-  </nve-page-panel>
-
-  <nve-page-panel slot="right" size="sm">
-    <nve-page-panel-content>
-      content...
-    </nve-page-panel-content>
-  </nve-page-panel>
-
-  <video playsinline muted loop width="100%" style="max-height: 100%; margin: auto;">
-    <source src="video/background-nv.mp4" type="video/mp4">
-  </video>
-
-  <nve-page-panel slot="bottom" style="max-height: 100px">
-    <nve-page-panel-content>
-      <div nve-layout="column align:center" style="max-width: 1024px; margin: 0 auto;">
-        <nve-range>
-          <input type="range" min="0" max="100" value="0" />
-        </nve-range>
-        <nve-button-group container="flat">
-          <nve-icon-button icon-name="start" aria-label="start"></nve-icon-button>
-          <nve-icon-button icon-name="play" aria-label="play/pause"></nve-icon-button>
-          <nve-icon-button icon-name="start" direction="down" aria-label="end"></nve-icon-button>
-        </nve-button-group>
-      </div>
-    </nve-page-panel-content>
-  </nve-page-panel>
-</nve-page>
-<script type="module">
-  const video = document.querySelector('video')
-  const playButton = document.querySelector('nve-icon-button[aria-label="play/pause"]');
-  const startButton = document.querySelector('nve-icon-button[aria-label="start"]');
-  const endButton = document.querySelector('nve-icon-button[aria-label="end"]');
-  const range = document.querySelector('nve-range input');
-  
-  video.addEventListener('timeupdate', e => (range.value = (video.currentTime / video.duration) * 100));
-  range.addEventListener('input', e => (video.currentTime = video.duration * (range.value / 100)));
-  startButton.addEventListener('click', () => (video.currentTime = 0));
-  endButton.addEventListener('click', () => (video.currentTime = video.duration));
-
-  playButton.addEventListener('click', () => {
-    if (video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2) {
-      playButton.iconName = 'play';
-      video.pause();
-    } else {
-      playButton.iconName = 'pause';
-      video.play();
-    }
-  });
-</script>
-  `
-};
-
-/**
  * @summary Shows a multi-video grid layout with synchronized controls.
  * @tags pattern
  */
@@ -1084,7 +1002,7 @@ export const PageLayoutMultiVideo = {
     <nve-page-panel-content>
       <div nve-layout="column align:center" style="max-width: 1024px; margin: 0 auto;">
         <nve-range>
-          <input type="range" min="0" max="100" value="0" />
+          <input type="range" min="0" max="100" value="0" aria-label="video playback" />
         </nve-range>
         <nve-button-group container="flat">
           <nve-icon-button icon-name="start" aria-label="start"></nve-icon-button>

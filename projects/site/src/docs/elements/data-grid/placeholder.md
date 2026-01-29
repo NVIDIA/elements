@@ -26,4 +26,4 @@
 
 ## Retry
 
-{% example '@nvidia-elements/core/grid/grid.examples.json' 'PlaceholderRetry' %}
+{% example '@internals/patterns/empty-states.examples.json' 'DataGridRetry' %}

@@ -270,6 +270,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/patterns/authentication/') ? 'highlighted selected' : ''}><a href="docs/patterns/authentication/">Authentication</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/browse/') ? 'highlighted selected' : ''}><a href="docs/patterns/browse/">Browse</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/editor/') ? 'highlighted selected' : ''}><a href="docs/patterns/editor/">Editor</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/empty-states/') ? 'highlighted selected' : ''}><a href="docs/patterns/empty-states/">Empty States</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/heatmap/') ? 'highlighted selected' : ''}><a href="docs/patterns/heatmap/">Heatmap</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/keyboard-shortcut/') ? 'highlighted selected' : ''}><a href="docs/patterns/keyboard-shortcut/">Keyboard Shortcut</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/media/') ? 'highlighted selected' : ''}><a href="docs/patterns/media/">Media</a></nve-tree-node>
