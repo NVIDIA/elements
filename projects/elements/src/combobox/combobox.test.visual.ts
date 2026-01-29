@@ -36,7 +36,7 @@ function template(theme: '' | 'dark' = '') {
 
   <nve-combobox>
     <label>•︎•︎•︎•︎•︎•︎</label>
-    <input disabled />
+    <input type="search" disabled />
     <datalist>
       <option value="status"></option>
       <option value="priority"></option>
@@ -92,7 +92,7 @@ function template(theme: '' | 'dark' = '') {
 
   <nve-combobox container="flat">
     <nve-icon name="filter" slot="prefix-icon"></nve-icon>
-    <input type="search">
+    <input type="search" aria-label="filter">
     <datalist>
       <option value="status"></option>
       <option value="priority"></option>

@@ -7,10 +7,36 @@
 
 # {{ title }}
 
-## Single Video Layout
+Media patterns for video playback, sensor visualization, and robot monitoring in AV/Robotics applications.
 
-{% example '@nvidia-elements/core/page/page.examples.json' 'PageLayoutVideo' '{ "inline": false, "height": "640px" }' %}
+## Playback Control
 
-## Multi Video Layout
+{% example '@nve-internals/patterns/media.examples.json' 'PlaybackControl' %}
 
-{% example '@nvidia-elements/core/page/page.examples.json' 'PageLayoutMultiVideo' '{ "inline": false, "height": "720px" }' %}
+## Playback Speed Control
+
+{% example '@nve-internals/patterns/media.examples.json' 'PlaybackSpeedControl' %}
+
+## Playback Speed Menu Control
+
+{% example '@nve-internals/patterns/media.examples.json' 'PlaybackSpeedMenuControl' %}
+
+## Volume Control
+
+{% example '@nve-internals/patterns/media.examples.json' 'VolumeControl' %}
+
+## Time Scrubber Control
+
+{% example '@nve-internals/patterns/media.examples.json' 'TimeScrubberControl' %}
+
+## Video Player Card
+
+{% example '@nve-internals/patterns/media.examples.json' 'VideoPlayerCard' %}
+
+## Audio Player Card
+
+{% example '@nve-internals/patterns/media.examples.json' 'AudioPlayerCard' %}
+
+## Page Video Layout
+
+{% example '@nve-internals/patterns/media.examples.json' 'PageLayoutVideo' '{ "inline": false, "height": "680px" }' %}

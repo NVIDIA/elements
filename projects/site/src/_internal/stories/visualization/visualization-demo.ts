@@ -187,7 +187,7 @@ export class VisualizationDemo extends LitElement {
         <nve-card-content>
           <div nve-layout="column gap:md align:stretch">
             <nve-select>
-              <select id="chart-type" @change=${this.#handleChartTypeChange} .value=${this.chartType}>
+              <select id="chart-type" @change=${this.#handleChartTypeChange} .value=${this.chartType} aria-label="chart type">
                 <option value="line">line</option>
                 <option value="bar">bar</option>
                 <option value="bubble">bubble</option>
