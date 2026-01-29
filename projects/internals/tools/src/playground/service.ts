@@ -84,7 +84,7 @@ export class PlaygroundService {
 
   @tool({
     description:
-      'Creates a playground url/link generated from a html template string. Returns URL only if template passes validation, otherwise returns errors to correct.',
+      'Creates a playground url/link generated from a html template string. Returns URL only if template passes validation, otherwise returns errors to correct. Use the "playground_validate" tool to check if the template is valid before creating a playground.',
     inputSchema: {
       type: 'object',
       properties: {
