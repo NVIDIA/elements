@@ -166,7 +166,7 @@ export const Custom = {
     <nve-dropdown id="map-dropdown">
       <nve-input>
         <nve-icon-button icon-name="map-pin" readonly></nve-icon-button>
-        <input value="37.3706254,-121.9671894" disabled />
+        <input value="37.3706254,-121.9671894" disabled aria-label="map coordinates" />
       </nve-input>
       <img src="static/images/test-map-2.webp" width="300px" alt="non-interactive demo map" />
     </nve-dropdown>
@@ -181,20 +181,20 @@ export const Validation = {
 <div nve-layout="column gap:lg">
   <nve-progressive-filter-chip closable>
     <nve-input>
-      <input type="text" value="validation" required />
+      <input type="text" value="validation" required aria-label="validation" />
       <nve-control-message error="valueMissing">required</nve-control-message>
     </nve-input>
     <nve-input>
-      <input type="text" />
+      <input type="text" aria-label="validation" />
     </nve-input>
   </nve-progressive-filter-chip>
 
   <nve-progressive-filter-chip closable>
     <nve-input status="error">
-      <input type="text" value="manual validation" formnovalidate />
+      <input type="text" value="manual validation" formnovalidate aria-label="manual validation" />
     </nve-input>
     <nve-input>
-      <input type="text" />
+      <input type="text" aria-label="validation" />
     </nve-input>
   </nve-progressive-filter-chip>
 </div>

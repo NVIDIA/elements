@@ -257,3 +257,21 @@ export const LineHeightFixed = {
 </div>
   `
 }
+
+/**
+ * @summary Demonstrates the description list layout with consistent spacing and typography styles.
+ */
+export const DescriptionList = {
+  render: () => html`
+<dl nve-layout="column gap:md">
+  <dt nve-text="body muted medium">Knot</dt>
+  <dd nve-text="body">Knot is a unit of speed equaling 1 nautical mile per hour.</dd>
+
+  <dt nve-text="body muted medium">Port</dt>
+  <dd nve-text="body">Port is the nautical term that refers to the left side of a ship, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+
+  <dt nve-text="body muted medium">Starboard</dt>
+  <dd nve-text="body">Starboard is the nautical term that refers to the right side of a vessel, as perceived by a person facing towards the bow (the front of the vessel).</dd>
+</dl>
+  `
+}

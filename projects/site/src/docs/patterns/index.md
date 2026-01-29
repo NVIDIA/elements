@@ -59,6 +59,19 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
+  <a href="docs/patterns/empty-states/">
+    <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
+          <nve-icon name="question-mark-circle-stroke"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">Empty States</h2>
+          <p nve-text="body sm muted">Patterns and messaging for unavailable or missing data</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
   <a href="docs/patterns/heatmap/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">

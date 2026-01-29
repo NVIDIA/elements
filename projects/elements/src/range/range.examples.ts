@@ -155,6 +155,6 @@ export const CustomStyles = {
 --thumb-border: inset 0 0 0 2px white;
 --thumb-width: 14px;
 --thumb-height: 14px;">
-  <input type="range" />
+  <input type="range" aria-label="range" />
 </nve-range>`
 };
