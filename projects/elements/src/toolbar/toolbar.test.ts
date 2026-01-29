@@ -177,7 +177,7 @@ describe(`${Toolbar.metadata.tag}: container`, () => {
         </nve-select>
 
         <nve-input>
-          <input />
+          <input aria-label="input" />
         </nve-input>
 
         <nve-button-group>
