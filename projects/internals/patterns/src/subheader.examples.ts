@@ -13,7 +13,7 @@ import '@nvidia-elements/core/tabs/define.js';
 
 export default {
   title: 'Patterns/Examples',
-  component: 'nve-internal-patterns'
+  component: 'nve-patterns'
 };
 
 /**
@@ -821,7 +821,7 @@ export const StandardHeaderViewerPage = {
 
             <section nve-layout="row align:center align:vertical-center gap:xxxs">
               <nve-select container="flat" style="--border-bottom: 0">
-                <select>
+                <select aria-label="zoom level">
                   <option value="1">100%</option>
                   <option value="2">75%</option>
                   <option value="3">50%</option>

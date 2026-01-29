@@ -230,7 +230,7 @@ export const CustomSelectPattern = {
   render: () => html`
     <nve-toolbar container="inset">
       <nve-select style="--width: 80px">
-        <select>
+        <select aria-label="page size">
           <option value="10">1-10</option>
         </select>
       </nve-select>

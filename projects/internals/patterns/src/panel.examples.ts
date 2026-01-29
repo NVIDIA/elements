@@ -14,7 +14,7 @@ import '@nvidia-elements/core/tag/define.js';
 
 export default {
   title: 'Patterns/Examples',
-  component: 'nve-internal-patterns'
+  component: 'nve-patterns'
 };
 /**
  * @summary Side panel with labeled key-value pairs for displaying metadata like release info, dates, status badges, and links.
@@ -100,7 +100,7 @@ export const PanelAccordion = {
         <nve-page-panel-content>
           <div nve-layout="column gap:sm align:horizontal-stretch">
             <nve-search rounded>
-              <input type="search" aria-label="search" placeholder="Search for xyz" />
+              <input type="search" aria-label="search" placeholder="search" />
             </nve-search>
 
             <nve-accordion-group container="inset" behavior-expand>
@@ -225,7 +225,7 @@ export const PanelNotificationStack = {
         <nve-page-panel-content style="--padding: 0">
           <div nve-layout="row pad:sm gap:sm">
             <nve-search rounded>
-              <input type="search" aria-label="search" placeholder="Search for xyz" />
+              <input type="search" aria-label="search" placeholder="search" />
             </nve-search>
             <nve-icon-button icon-name="filter"></nve-icon-button>
             <nve-icon-button icon-name="gear"></nve-icon-button>

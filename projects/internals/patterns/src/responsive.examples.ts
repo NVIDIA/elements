@@ -10,7 +10,7 @@ import '@nvidia-elements/core/icon-button/define.js';
 
 export default {
   title: 'Patterns/Responsive',
-  component: 'nve-internal-patterns'
+  component: 'nve-patterns'
 };
 
 /**
@@ -102,7 +102,7 @@ export const ResponsiveToolbar = {
     <div class="demo-section">
       <nve-toolbar>
         <nve-search>
-          <input type="search" placeholder="Search..." />
+          <input type="search" placeholder="Search..." aria-label="search" />
         </nve-search>
         
         <nve-button container="flat" slot="suffix">
