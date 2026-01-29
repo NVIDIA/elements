@@ -1,6 +1,9 @@
 import { ExamplesService as ExamplesServiceMetadata, type Example } from '@internals/metadata';
 import { service, tool } from '../internal/tools.js';
 import { getPublicExamples, searchPublicExamples } from './utils.js';
+import { markdownDescription } from '../internal/utils.js';
+
+const MAX_RESULT_LIMIT = 5;
 
 @service()
 export class ExamplesService {
@@ -11,6 +14,7 @@ export class ExamplesService {
       properties: {
         format: {
           type: 'string',
+          description: markdownDescription,
           enum: ['markdown', 'json'],
           default: 'markdown'
         }
@@ -50,10 +54,13 @@ export class ExamplesService {
     inputSchema: {
       type: 'object',
       properties: {
-        query: { type: 'string', description: 'Search query for matching example templates/patterns' },
+        query: {
+          type: 'string',
+          description: `Search query for matching example templates/patterns. Maximum ${MAX_RESULT_LIMIT} results will be returned.`
+        },
         format: {
           type: 'string',
-          description: 'Format of the output contents. `markdown` | `json`',
+          description: markdownDescription,
           enum: ['markdown', 'json'],
           default: 'markdown'
         }
@@ -92,7 +99,7 @@ export class ExamplesService {
     query: string;
     format?: 'markdown' | 'json';
   }): Promise<Example[] | string> {
-    return await searchPublicExamples(query, { format, limit: 5 });
+    return await searchPublicExamples(query, { format, limit: MAX_RESULT_LIMIT });
   }
 
   static async getAll(): Promise<Example[]> {

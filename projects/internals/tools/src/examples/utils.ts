@@ -23,9 +23,9 @@ export function getPublicExamples(format: 'markdown' | 'json', examples: Partial
     ? result
         .filter(example => example.summary)
         .map(example => {
-          return `- **${example.id}**: ${wrapText(example.summary)}`;
+          return `- **${example.id.replace('elements-', '')}** ${wrapText(example.summary)}`;
         })
-        .join('\n\n')
+        .join('\n')
     : result;
 }
 

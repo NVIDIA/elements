@@ -31,7 +31,7 @@ export function getPublicAPIs(
     .map(e => ({ name: e.name, description: e.manifest.description, behavior: e.manifest.metadata?.behavior ?? '' }));
   const elementsMarkdown = elementsResult.map(e => {
     const behavior = e.behavior ? ` (${e.behavior})` : '';
-    return `- **${e.name}${behavior}**: ${wrapText(e.description)}`;
+    return `- **${e.name}${behavior}** ${wrapText(e.description)}`;
   });
 
   const attributesResult = metadata.data.attributes

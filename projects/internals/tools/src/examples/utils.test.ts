@@ -56,8 +56,8 @@ describe('utils', () => {
   describe('getAvailableExamples', () => {
     it('should return markdown format correctly', () => {
       const result = getPublicExamples('markdown', mockExamples);
-      expect(result).toContain('- **project-example_button-basic**: Basic button example');
-      expect(result).toContain('- **project-example_button-with-icon**: Button with icon example');
+      expect(result).toContain('- **project-example_button-basic** Basic button example');
+      expect(result).toContain('- **project-example_button-with-icon** Button with icon example');
       expect(result).toContain('Basic button example');
       expect(result).toContain('Button with icon example');
     });
@@ -97,7 +97,7 @@ describe('utils', () => {
 
       // Markdown only includes examples with summaries
       const markdownResult = getPublicExamples('markdown', examplesWithMissingDesc);
-      expect(markdownResult).toContain('- **test-1**: Has summary');
+      expect(markdownResult).toContain('- **test-1** Has summary');
       expect(markdownResult).not.toContain('test-2'); // no summary, filtered out
 
       const jsonResult = getPublicExamples('json', examplesWithMissingDesc) as Array<{

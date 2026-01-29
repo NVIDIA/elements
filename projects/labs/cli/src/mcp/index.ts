@@ -23,7 +23,12 @@ tools.forEach(tool => {
   const config = { title, inputSchema, outputSchema, description: `Elements: ${description}` };
   server.registerTool(toolName, config, async params => {
     const structuredContent = (await tool(params)) as unknown as { [x: string]: unknown };
-    return { structuredContent, content: [{ type: 'text', text: JSON.stringify(structuredContent) }] };
+    // https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1624
+    const text =
+      typeof structuredContent.result === 'string' && structuredContent.status !== 'error'
+        ? structuredContent.result
+        : JSON.stringify(structuredContent.result);
+    return { structuredContent, content: [{ type: 'text', text }] };
   });
 });
 
