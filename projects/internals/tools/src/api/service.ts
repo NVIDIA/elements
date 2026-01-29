@@ -12,6 +12,9 @@ import {
   searchPublicAPIs
 } from './utils.js';
 import { service, tool } from '../internal/tools.js';
+import { markdownDescription } from '../internal/utils.js';
+
+const MAX_RESULT_LIMIT = 5;
 
 @service()
 export class ApiService {
@@ -22,7 +25,7 @@ export class ApiService {
       properties: {
         format: {
           type: 'string',
-          description: 'Format of the output contents. `markdown` | `json`',
+          description: markdownDescription,
           enum: ['markdown', 'json'],
           default: 'markdown'
         }
@@ -82,11 +85,11 @@ export class ApiService {
       properties: {
         query: {
           type: 'string',
-          description: 'User query requesting for information about how to use nve-* APIs'
+          description: `User query requesting for information about how to use nve-* APIs. Maximum ${MAX_RESULT_LIMIT} results will be returned.`
         },
         format: {
           type: 'string',
-          description: 'Format of the output. `markdown` | `json`',
+          description: markdownDescription,
           enum: ['markdown', 'json'],
           default: 'markdown'
         }
@@ -106,7 +109,7 @@ export class ApiService {
     query: string;
     format: 'markdown' | 'json';
   }): Promise<(Element | Attribute)[] | string> {
-    const results = await searchPublicAPIs(query, { limit: 5 });
+    const results = await searchPublicAPIs(query, { limit: MAX_RESULT_LIMIT });
 
     if (results.length === 0) {
       const message = `No components or APIs found matching "${query}".\n\nTip: Try searching for component names (e.g., "button", "input", "grid"), component categories (e.g., "form", "navigation", "popover"), or specific features (e.g., "validation", "slots", "events").`;

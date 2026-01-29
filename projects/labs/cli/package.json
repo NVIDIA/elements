@@ -28,7 +28,7 @@
   "dependencies": {
     "@nvidia-elements/lint": "workspace:^",
     "@inquirer/prompts": "8.0.1",
-    "@modelcontextprotocol/sdk": "1.23.0",
+    "@modelcontextprotocol/sdk": "1.25.3",
     "adm-zip": "0.5.16",
     "archiver": "7.0.1",
     "glob": "catalog:",
