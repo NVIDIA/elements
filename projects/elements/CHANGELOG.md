@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.56.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.2...@nvidia-elements/core-v1.56.3) (2026-01-30)
+
+
+### Bug Fixes
+
+* **elements:** remove fallback anchor positioning logic and related dependencies ([6aacad8](https://github.com/NVIDIA/elements/commit/6aacad8be108cfecd6f79591ad13e35f381e4e93))
+
 ## [@nvidia-elements/core-v1.56.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.1...@nvidia-elements/core-v1.56.2) (2026-01-28)
 
 
