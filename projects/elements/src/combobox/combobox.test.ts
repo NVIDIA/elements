@@ -1795,3 +1795,39 @@ describe(`${Combobox.metadata.tag}: select shows all options on focus`, () => {
     expect(options[2].hidden).toBe(false);
   });
 });
+
+describe(`${Combobox.metadata.tag}: dropdown source`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should pass input container as source when opening dropdown', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    const inputContainer = element.shadowRoot.querySelector<HTMLDivElement>('[input]');
+
+    const openEvent = untilEvent<CustomEvent>(dropdown, 'open');
+    emulateClick(input);
+    const event = await openEvent;
+
+    expect(event.detail.trigger).toBe(inputContainer);
+  });
+});

@@ -411,3 +411,31 @@ export const MaxHeight = {
 </nve-dialog>
   `
 }
+
+/**
+ * @summary Legacy DOM Creation
+ * @deprecated
+ * @tags test-case
+ */
+export const LegacyDOMCreation = {
+  render: () => html`
+<nve-button id="dialog-btn">button</nve-button>
+<script type="module">
+  import '@nvidia-elements/core/dialog/define.js';
+  import '@nvidia-elements/core/button/define.js';
+
+  document.querySelector('#dialog-btn').addEventListener('click', () => {
+    const dialog = document.createElement('nve-dialog');
+    dialog.id = 'dialog-dom-creation';
+    dialog.modal = true;
+    dialog.closable = true;
+    
+    dialog.addEventListener('close', () => {
+      document.body.removeChild(dialog);
+    }, { once: true });
+
+    document.body.appendChild(dialog);
+  });
+</script>
+`
+};
