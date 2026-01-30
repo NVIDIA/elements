@@ -46,6 +46,22 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   constructor(private host: T) {
     this.host.addController(this);
+
+    const showPopover = this.host.showPopover;
+    this.host.showPopover = (options?: ShowPopoverOptions) => {
+      // provide legacy fallback for source anchor or trigger if not provided, this can happen if the popover is dynamically created in the DOM without the use of the standard popover api or legacy trigger based api
+      let source: HTMLElement | Element = options?.source;
+      if (!source) {
+        if (this.host.anchor) {
+          source = getHostAnchor(this.host);
+        } else if (this.host.trigger) {
+          source = getHostTrigger(this.host, this.host.trigger);
+        } else {
+          source = globalThis.document.activeElement;
+        }
+      }
+      showPopover.call(this.host, { source });
+    };
   }
 
   async hostConnected() {
@@ -118,11 +134,11 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
         if (interestDelayStart) {
           timeout = setTimeout(() => {
             if (this.host.isConnected) {
-              this.#showPopover(e.source);
+              this.host.showPopover({ source: e.source as HTMLElement });
             }
           }, interestDelayStart);
         } else {
-          this.#showPopover(e.source);
+          this.host.showPopover({ source: e.source as HTMLElement });
         }
       }
     });
@@ -150,12 +166,6 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   hostDisconnected() {
     this.#observers.forEach(observer => observer.disconnect());
-  }
-
-  #showPopover(source: HTMLElement) {
-    if (this.host.isConnected) {
-      this.host.showPopover(source ? { source } : undefined);
-    }
   }
 
   #pointerdownWithinModal = false;
@@ -195,8 +205,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.#observers.push(
       getAttributeListChanges(this.host, ['hidden'], () => {
         if (this.host.isConnected && !this.host.hidden && !this.host.matches(':popover-open')) {
-          const source = this.#legacyHostTrigger;
-          this.#showPopover(source);
+          this.host.showPopover();
         }
 
         if (this.host.isConnected && this.host.hidden && this.host.matches(':popover-open')) {
@@ -213,8 +222,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
       !this.host.matches(':popover-open')
     ) {
       this.host.popover = 'manual';
-      const source = this.#legacyHostTrigger ?? getHostAnchor(this.host);
-      this.#showPopover(source);
+      this.host.showPopover();
     }
   }
 
@@ -233,7 +241,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     // if not a hint type setup native popovertarget
     if (trigger) {
       if (this.host.popoverType === 'hint') {
-        trigger.addEventListener('mouseenter', () => this.#showPopover(trigger));
+        trigger.addEventListener('mouseenter', () => this.host.showPopover({ source: trigger as HTMLElement }));
         trigger.addEventListener('mouseleave', () => this.host.hidePopover());
         trigger.addEventListener('focusout', () => this.host.hidePopover());
       } else {

@@ -355,7 +355,7 @@ describe('type-popover.controller explicit trigger', () => {
   });
 
   it('should show popover if hidden attribute is removed', async () => {
-    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(r => requestAnimationFrame(r)); // wait for hidden mutation observer setup
     await elementIsStable(element);
     const open = untilEvent(element, 'open');
     element.removeAttribute('hidden');
@@ -365,6 +365,7 @@ describe('type-popover.controller explicit trigger', () => {
 
   it('should hide popover if hidden attribute is added', async () => {
     await new Promise(r => requestAnimationFrame(r)); // wait for hidden mutation observer setup
+    await elementIsStable(element);
     expect(element.hasAttribute('hidden')).toBe(true);
     expect(element.matches(':popover-open')).toBe(false);
 
@@ -806,5 +807,185 @@ describe('type-popover.controller - interest invoker support', () => {
     // Wait for original delay to pass
     await new Promise(r => setTimeout(r, 60));
     expect(element.matches(':popover-open')).toBe(false);
+  });
+});
+
+describe('type-popover.controller - showPopover source fallback', () => {
+  let element: TypeNativePopoverControllerTestElement;
+  let fixture: HTMLElement;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should use explicitly provided source when calling showPopover with options', async () => {
+    fixture = await createFixture(html`
+      <nve-button id="explicit-source">source</nve-button>
+      <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    const sourceButton = fixture.querySelector<Button>('#explicit-source');
+    await elementIsStable(element);
+    await elementIsStable(sourceButton);
+
+    const openEvent = untilEvent<CustomEvent>(element, 'open');
+    element.showPopover({ source: sourceButton });
+    const event = await openEvent;
+    expect(event.detail.trigger).toBe(sourceButton);
+  });
+
+  it('should fallback to anchor property when showPopover is called without source', async () => {
+    fixture = await createFixture(html`
+      <nve-button id="anchor-btn">anchor</nve-button>
+      <type-native-popover-controller-test-element id="popover" .anchor=${'anchor-btn'}></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    const anchorButton = fixture.querySelector<Button>('#anchor-btn');
+    await elementIsStable(element);
+    await elementIsStable(anchorButton);
+
+    const openEvent = untilEvent<CustomEvent>(element, 'open');
+    element.showPopover();
+    const event = await openEvent;
+    expect(event.detail.trigger).toBe(anchorButton);
+  });
+
+  it('should fallback to trigger property when showPopover is called without source and no anchor', async () => {
+    fixture = await createFixture(html`
+      <nve-button id="trigger-btn">trigger</nve-button>
+      <type-native-popover-controller-test-element id="popover" .trigger=${'trigger-btn'} hidden></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    const triggerButton = fixture.querySelector<Button>('#trigger-btn');
+    await elementIsStable(element);
+    await elementIsStable(triggerButton);
+
+    const openEvent = untilEvent<CustomEvent>(element, 'open');
+    element.showPopover();
+    const event = await openEvent;
+    expect(event.detail.trigger).toBe(triggerButton);
+  });
+
+  it('should fallback to document.activeElement when showPopover is called without source, anchor, or trigger', async () => {
+    fixture = await createFixture(html`
+      <nve-button id="focused-btn">focused</nve-button>
+      <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    const focusedButton = fixture.querySelector<Button>('#focused-btn');
+    await elementIsStable(element);
+    await elementIsStable(focusedButton);
+
+    focusedButton.focus();
+    await elementIsStable(focusedButton);
+
+    const openEvent = untilEvent<CustomEvent>(element, 'open');
+    element.showPopover();
+    const event = await openEvent;
+    expect(event.detail.trigger).toBe(focusedButton);
+  });
+
+  it('should prefer explicit source over anchor property', async () => {
+    fixture = await createFixture(html`
+      <nve-button id="explicit-source">explicit</nve-button>
+      <nve-button id="anchor-btn">anchor</nve-button>
+      <type-native-popover-controller-test-element id="popover" .anchor=${'anchor-btn'}></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    const explicitSource = fixture.querySelector<Button>('#explicit-source');
+    const anchorButton = fixture.querySelector<Button>('#anchor-btn');
+    await elementIsStable(element);
+    await elementIsStable(explicitSource);
+    await elementIsStable(anchorButton);
+
+    const openEvent = untilEvent<CustomEvent>(element, 'open');
+    element.showPopover({ source: explicitSource });
+    const event = await openEvent;
+    expect(event.detail.trigger).toBe(explicitSource);
+    expect(event.detail.trigger).not.toBe(anchorButton);
+  });
+
+  it('should prefer anchor over trigger property', async () => {
+    fixture = await createFixture(html`
+      <nve-button id="anchor-btn">anchor</nve-button>
+      <nve-button id="trigger-btn">trigger</nve-button>
+      <type-native-popover-controller-test-element id="popover" .anchor=${'anchor-btn'} .trigger=${'trigger-btn'} hidden></type-native-popover-controller-test-element>
+    `);
+    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    const anchorButton = fixture.querySelector<Button>('#anchor-btn');
+    const triggerButton = fixture.querySelector<Button>('#trigger-btn');
+    await elementIsStable(element);
+    await elementIsStable(anchorButton);
+    await elementIsStable(triggerButton);
+
+    const openEvent = untilEvent<CustomEvent>(element, 'open');
+    element.showPopover();
+    const event = await openEvent;
+    expect(event.detail.trigger).toBe(anchorButton);
+    expect(event.detail.trigger).not.toBe(triggerButton);
+  });
+});
+
+describe('type-popover.controller - dynamic DOM creation', () => {
+  let fixture: HTMLElement;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should open popover when dynamically created without trigger or anchor', async () => {
+    fixture = await createFixture(html`<nve-button id="focus-target">focus</nve-button>`);
+    const focusTarget = fixture.querySelector<Button>('#focus-target');
+    await elementIsStable(focusTarget);
+
+    focusTarget.focus();
+
+    const element = document.createElement(
+      'type-native-popover-controller-test-element'
+    ) as TypeNativePopoverControllerTestElement;
+    element.id = 'dynamic-popover';
+    fixture.appendChild(element);
+    await element.updateComplete;
+    await elementIsStable(element);
+
+    const openEvent = untilEvent<CustomEvent>(element, 'open');
+    element.showPopover();
+    const event = await openEvent;
+
+    expect(element.matches(':popover-open')).toBe(true);
+    expect(event.detail.trigger).toBe(focusTarget);
+  });
+
+  it('should open popover when dynamically created with explicit source', async () => {
+    fixture = await createFixture(html`<nve-button id="source-btn">source</nve-button>`);
+    const sourceButton = fixture.querySelector<Button>('#source-btn');
+    await elementIsStable(sourceButton);
+
+    const element = document.createElement(
+      'type-native-popover-controller-test-element'
+    ) as TypeNativePopoverControllerTestElement;
+    element.id = 'dynamic-popover';
+    fixture.appendChild(element);
+    await element.updateComplete;
+    await elementIsStable(element);
+
+    const openEvent = untilEvent<CustomEvent>(element, 'open');
+    element.showPopover({ source: sourceButton });
+    const event = await openEvent;
+
+    expect(element.matches(':popover-open')).toBe(true);
+    expect(event.detail.trigger).toBe(sourceButton);
   });
 });
