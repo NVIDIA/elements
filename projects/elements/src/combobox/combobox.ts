@@ -362,7 +362,8 @@ export class Combobox extends Control implements ContainerElement {
         this.#filterOptions();
       }
       this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
-      this.#dropdown.showPopover();
+      // explicity provide source as the performance optimizations in the suffixContent getter prevent the anchor/trigger of the dropdown from being set reliably
+      this.#dropdown.showPopover({ source: this.#input as HTMLElement });
       this.#dropdown.tabIndex = -1;
     }
   }
