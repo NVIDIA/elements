@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.3.0...@nvidia-elements/cli-v0.4.0) (2026-01-30)
+
+
+### Features
+
+* **labs-cli:** improve context usage ([a01c713](https://github.com/NVIDIA/elements/commit/a01c71381ba1d31828dd806fa0edaa24decf1620))
+
 ## [@nvidia-elements/cli-v0.3.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.2.0...@nvidia-elements/cli-v0.3.0) (2026-01-27)
 
 
