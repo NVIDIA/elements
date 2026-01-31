@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.56.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.3...@nvidia-elements/core-v1.56.4) (2026-01-31)
+
+
+### Bug Fixes
+
+* **elements:** popover triggers and combobox dropdown ([f414038](https://github.com/NVIDIA/elements/commit/f4140385ecf11e2841bec63b5b07613d1af6d6aa))
+
 ## [@nvidia-elements/core-v1.56.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.2...@nvidia-elements/core-v1.56.3) (2026-01-30)
 
 
