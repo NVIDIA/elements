@@ -26,6 +26,7 @@ packages:
   - projects/labs/forms
   - projects/labs/lint
   - projects/labs/markdown
+  - projects/labs/media
   - projects/labs/playwright-screencast
   - projects/labs/snippets
   - projects/monaco

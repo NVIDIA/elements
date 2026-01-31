@@ -45,6 +45,7 @@ export function getProjects(): { created: string; data: Project[] } {
     '../../../../labs/lint',
     '../../../../labs/forms',
     '../../../../labs/markdown',
+    '../../../../labs/media',
     '../../../../labs/playwright-screencast',
     '../../../../monaco',
     '../../../../internals/metadata',
