@@ -31,16 +31,16 @@ describe('dialog visual', () => {
     const report = await visualRunner.render('dialog.container', container());
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
+
+  test('dialog should center to the viewport regardless of the body height', async () => {
+    const report = await visualRunner.render('dialog.center-alignment', centerAlignment());
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
 });
 
 function template(theme: '' | 'dark' = '') {
   return /* html */ `
-  <style>
-    body {
-      min-width: 1024px;
-      min-height: 780px;
-    }
-  </style>
+  <div style="width: 100vw; height: 100vh"></div>
   <script type="module">
     import '@nvidia-elements/core/dialog/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
@@ -184,5 +184,26 @@ function container() {
     <nve-button>•︎•︎••︎•︎•</nve-button>
   </nve-dialog-footer>
 </nve-dialog>
+`;
+}
+
+function centerAlignment() {
+  return /* html */ `
+  <script type="module">
+    import '@nvidia-elements/core/dialog/define.js';
+    document.documentElement.setAttribute('nve-theme', 'dark');
+  </script>
+  <style>
+    body {
+      height: 200vh;
+    }
+  </style>
+  <!-- if the dialog is not center within the red div the dialog is not centered to the viewport but likely incorrectly centered to the body -->
+  <div style="width: 100vw; height: 100vh; background: red;"></div>
+  <nve-dialog id="center-alignment-dialog" size="sm" closable popover="manual" position="center" alignment="center">
+    <nve-dialog-header>
+      <h3 nve-text="heading semibold">•︎•︎••︎•︎•</h3>
+    </nve-dialog-header>
+  </nve-dialog>
 `;
 }
