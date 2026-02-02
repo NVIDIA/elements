@@ -192,6 +192,11 @@ export const Alignment = {
  */
 export const Position = {
   render: () => html`
+  <style>
+    body {
+      min-height: 200vh;
+    }
+  </style>
 <nve-dialog size="sm" position="bottom" alignment="end" closable>
   <h3 nve-text="heading">Position</h3>
   <p nve-text="body">some text content in a small dialog</p>
@@ -437,5 +442,34 @@ export const LegacyDOMCreation = {
     document.body.appendChild(dialog);
   });
 </script>
+`
+};
+
+
+/**
+ * @summary Center alignment with anchor body
+ * @tags test-case
+ */
+export const CenterAlignment = {
+  render: () => html`
+<style>
+  body {
+    min-height: 200vh;
+  }
+</style>
+<nve-button popovertarget="dialog">button</nve-button>
+<nve-dialog id="dialog" closable>
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">title</h3>
+  </nve-dialog-header>
+  <p nve-text="body">some text content in a closable dialog</p>
+  <nve-select>
+    <select aria-label="select">
+      <option>one</option>
+      <option>two</option>
+      <option>three</option>
+    </select>
+  </nve-select>
+</nve-dialog>
 `
 };

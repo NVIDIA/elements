@@ -225,6 +225,12 @@
   }
 }
 
+:host([position='center'][alignment='center']) {
+  position-area: unset !important;
+  margin: auto !important;
+  inset: 0 !important;
+}
+
 /*
  * Remove the following @supports block after Chrome 145 is stable.
  * This is to compensate for a change in Chrome 144 for how anchor positioning with transforms works.
