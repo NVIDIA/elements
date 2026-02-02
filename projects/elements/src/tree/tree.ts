@@ -23,6 +23,9 @@ import globalStyles from './tree.global.css?inline';
  * @slot - tree nodes
  * @cssprop --max-width
  * @cssprop --node-border - Border style for tree node depth indicator
+ * @event open - Dispatched from a child nve-tree-node when it is opened.
+ * @event close - Dispatched from a child nve-tree-node when it is closed.
+ * @event select - Dispatched from a child nve-tree-node when its selection state changes.
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  *
  */
