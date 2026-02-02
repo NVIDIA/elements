@@ -1,3 +1,10 @@
+## [@nvidia-elements/markdown-v0.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/markdown-v0.1.2...@nvidia-elements/markdown-v0.2.0) (2026-02-02)
+
+
+### Features
+
+* **labs-markdown:** move nve-markdown css ([b49c828](https://github.com/NVIDIA/elements/commit/b49c82802f3cefcbaa480bf1c80079877901cfd0))
+
 ## [@nvidia-elements/markdown-v0.1.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/markdown-v0.1.1...@nvidia-elements/markdown-v0.1.2) (2025-10-02)
 
 
