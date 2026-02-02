@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture } from '@nvidia-elements/testing';
 import { Tree, TreeNode } from '@nvidia-elements/core/tree';
 import '@nvidia-elements/core/tree/define.js';
@@ -360,5 +360,101 @@ describe(TreeNode.metadata.tag, () => {
     await elementIsStable(element);
 
     expect(element.expanded).toBe(false);
+  });
+
+  it('should dispatch select event when single selecting via Space key', async () => {
+    element.selectable = 'single';
+    element.behaviorSelect = true;
+    await elementIsStable(element);
+
+    const selectHandler = vi.fn();
+    element.addEventListener('select', selectHandler);
+
+    element.focus();
+    element.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space', bubbles: true }));
+    await elementIsStable(element);
+
+    expect(selectHandler).toHaveBeenCalledTimes(1);
+    expect(selectHandler.mock.calls[0][0].detail).toBe(element);
+  });
+
+  it('should dispatch select event when multi selecting via Space key', async () => {
+    nestedNodeElement.selectable = 'multi';
+    nestedNodeElement.behaviorSelect = true;
+    await elementIsStable(nestedNodeElement);
+
+    const selectHandler = vi.fn();
+    nestedNodeElement.addEventListener('select', selectHandler);
+
+    nestedNodeElement.focus();
+    nestedNodeElement.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space', bubbles: true }));
+    await elementIsStable(nestedNodeElement);
+
+    expect(selectHandler).toHaveBeenCalledTimes(1);
+    expect(selectHandler.mock.calls[0][0].detail).toBe(nestedNodeElement);
+  });
+
+  it('should dispatch select event when clicking node header with single select', async () => {
+    tree.selectable = 'single';
+    tree.behaviorSelect = true;
+    await elementIsStable(tree);
+
+    const selectHandler = vi.fn();
+    nestedNodeElement.addEventListener('select', selectHandler);
+
+    emulateClick(nestedNodeElement.shadowRoot.querySelector('.node-title'));
+    await elementIsStable(nestedNodeElement);
+
+    expect(selectHandler).toHaveBeenCalledTimes(1);
+    expect(selectHandler.mock.calls[0][0].detail).toBe(nestedNodeElement);
+  });
+
+  it('should dispatch select event when clicking checkbox with multi select', async () => {
+    tree.selectable = 'multi';
+    tree.behaviorSelect = true;
+    await elementIsStable(tree);
+    await elementIsStable(element);
+
+    const selectHandler = vi.fn();
+    element.addEventListener('select', selectHandler);
+
+    const checkbox = element.shadowRoot.querySelector<HTMLInputElement>('nve-checkbox input');
+    checkbox.click();
+    await elementIsStable(element);
+
+    expect(selectHandler).toHaveBeenCalledTimes(1);
+    expect(selectHandler.mock.calls[0][0].detail).toBe(element);
+  });
+
+  it('should bubble select event to parent tree', async () => {
+    tree.selectable = 'single';
+    tree.behaviorSelect = true;
+    await elementIsStable(tree);
+
+    const selectHandler = vi.fn();
+    tree.addEventListener('select', selectHandler);
+
+    emulateClick(element.shadowRoot.querySelector('.node-title'));
+    await elementIsStable(element);
+
+    expect(selectHandler).toHaveBeenCalledTimes(1);
+    expect(selectHandler.mock.calls[0][0].detail).toBe(element);
+  });
+
+  it('should dispatch select event even when behaviorSelect is false', async () => {
+    element.selectable = 'single';
+    element.behaviorSelect = false;
+    await elementIsStable(element);
+
+    const selectHandler = vi.fn();
+    element.addEventListener('select', selectHandler);
+
+    element.focus();
+    element.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space', bubbles: true }));
+    await elementIsStable(element);
+
+    // Event should still fire even though selected state doesn't change
+    expect(selectHandler).toHaveBeenCalledTimes(1);
+    expect(element.selected).toBe(false);
   });
 });

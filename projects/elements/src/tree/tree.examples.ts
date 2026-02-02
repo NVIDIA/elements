@@ -164,6 +164,59 @@ export const SelectableMultiple = {
 };
 
 /**
+ * @summary Interactive selection handling using the select event, demonstrating how to respond to node selection changes.
+ * @tags test-case
+ */
+export const SelectEvent = {
+  render: () => html`
+    <div nve-layout="column gap:md">
+      <div nve-layout="row gap:md">
+        <nve-tree id="select-event-tree" selectable="single" behavior-expand behavior-select border>
+          <nve-tree-node expanded>
+            Documents
+            <nve-tree-node>Annual Report.pdf</nve-tree-node>
+            <nve-tree-node>Budget.xlsx</nve-tree-node>
+            <nve-tree-node expanded>
+              Projects
+              <nve-tree-node>Project Alpha</nve-tree-node>
+              <nve-tree-node>Project Beta</nve-tree-node>
+              <nve-tree-node>Project Gamma</nve-tree-node>
+            </nve-tree-node>
+          </nve-tree-node>
+          <nve-tree-node>
+            Images
+            <nve-tree-node>photo-001.jpg</nve-tree-node>
+            <nve-tree-node>photo-002.jpg</nve-tree-node>
+            <nve-tree-node>screenshot.png</nve-tree-node>
+          </nve-tree-node>
+        </nve-tree>
+        <div nve-layout="column gap:sm">
+          <p nve-text="body sm"><strong>Selected:</strong> <span id="selected-node">None</span></p>
+          <p nve-text="body sm"><strong>History:</strong></p>
+          <ul id="selection-history" nve-text="body sm">
+            <li>No selections yet</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script type="module">
+      const tree = document.querySelector('#select-event-tree');
+      const selectedDisplay = document.querySelector('#selected-node');
+      const historyList = document.querySelector('#selection-history');
+      const history = [];
+      tree.addEventListener('select', (e) => {
+        const node = e.detail;
+        const nodeText = node.textContent?.trim().split('\\n')[0] ?? 'Unknown';
+        selectedDisplay.textContent = nodeText;
+        history.push(nodeText);
+        if (history.length > 5) history.shift();
+        historyList.innerHTML = history.map(item => '<li>' + item + '</li>').join('');
+      });
+    </script>
+  `
+};
+
+/**
  * @summary Tree with highlighted nodes for emphasizing specific items, providing visual focus and search result indication in hierarchical data.
  */
 export const Highlight = {

@@ -29,6 +29,10 @@
 
 {% example '@nvidia-elements/core/tree/tree.examples.json' 'SelectableMultiple' %}
 
+## Select Event
+
+{% example '@nvidia-elements/core/tree/tree.examples.json' 'SelectEvent' %}
+
 ## Links
 
 {% example '@nvidia-elements/core/tree/tree.examples.json' 'Links' %}
