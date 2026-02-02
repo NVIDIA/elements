@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.56.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.4...@nvidia-elements/core-v1.56.5) (2026-02-02)
+
+
+### Bug Fixes
+
+* **elements:** dialog centering fix ([dc9fbde](https://github.com/NVIDIA/elements/commit/dc9fbde08272bb75a7882876b306655f4a7ad855))
+* **elements:** tree events ([519bcae](https://github.com/NVIDIA/elements/commit/519bcae847c571aa7691a9b3458db8916e22ae59))
+
 ## [@nvidia-elements/core-v1.56.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.3...@nvidia-elements/core-v1.56.4) (2026-01-31)
 
 
