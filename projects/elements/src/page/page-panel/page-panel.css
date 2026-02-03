@@ -72,7 +72,8 @@
   align-items: center;
 }
 
-nve-icon-button {
+slot[name='actions'] {
+  display: block;
   margin-left: auto;
   position: fixed;
   top: 0;
@@ -91,7 +92,8 @@ nve-icon-button {
 
 /* animations */
 :host([slot='left'][hidden]),
-:host([slot='right'][hidden]) {
+:host([slot='right'][hidden]),
+:host([slot='bottom'][hidden]) {
   pointer-events: none;
   display: block !important;
 }
@@ -112,4 +114,13 @@ nve-icon-button {
 
 :host([slot='right'][hidden]) {
   margin-right: calc(-1 * var(--max-width));
+}
+
+:host([slot='bottom']) {
+  transition: margin-bottom var(--animation-duration) ease-in-out;
+  margin-bottom: 0;
+}
+
+:host([slot='bottom'][hidden]) {
+  margin-bottom: calc(-1 * var(--max-height));
 }
