@@ -15,12 +15,29 @@ export type TypeSelectable = ReactiveElement & {
  * @property behaviorSelect - determines if stateful auto behavior should be enabled
  */
 export class TypeSelectableController<T extends TypeSelectable> implements ReactiveController {
+  #commandTriggered = false;
   constructor(private host: T) {
     this.host.addController(this);
   }
 
   hostConnected() {
     attachInternals(this.host);
+
+    this.host.addEventListener('command', (e: CommandEvent) => {
+      this.#commandTriggered = true;
+      if (e.command === '--toggle') {
+        this.toggle();
+      }
+
+      if (e.command === '--select') {
+        this.select();
+      }
+
+      if (e.command === '--deselect') {
+        this.host.selected = false;
+      }
+      this.#commandTriggered = false;
+    });
   }
 
   hostUpdated() {
@@ -33,18 +50,26 @@ export class TypeSelectableController<T extends TypeSelectable> implements React
   }
 
   select() {
-    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: this.host }));
-
-    if (this.host.behaviorSelect) {
+    if (this.host.behaviorSelect || this.#commandTriggered) {
       this.host.selected = true;
     }
+
+    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: this.host }));
+  }
+
+  deselect() {
+    if (this.host.behaviorSelect || this.#commandTriggered) {
+      this.host.selected = false;
+    }
+
+    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: this.host }));
   }
 
   toggle() {
-    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: this.host }));
-
-    if (this.host.behaviorSelect) {
-      this.host.selected = !this.host.selected;
+    if (this.host.selected) {
+      this.deselect();
+    } else {
+      this.select();
     }
   }
 }
