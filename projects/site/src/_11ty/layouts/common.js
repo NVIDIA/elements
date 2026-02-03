@@ -64,7 +64,7 @@ export const renderBaseHead = data => /* html */ `
   <script type="module" defer>
     import { BrowserClient, getCurrentScope, defaultStackParser, makeFetchTransport, breadcrumbsIntegration, browserApiErrorsIntegration, dedupeIntegration, functionToStringIntegration, globalHandlersIntegration, httpContextIntegration, browserTracingIntegration } from '@sentry/browser';
     const client = new BrowserClient({
-      dsn: 'https://aeb149467b30cd6b4e34711e88727b1f@sentry.perflab.nvidia.com/3418',
+      dsn: 'https://44d4951c98e9732238fdd17c5a4d56ed@sentry.nvidia.com/142',
       enabled: process.env.NODE_ENV !== 'development',
       tracesSampleRate: 1.0,
       tracePropagationTargets: ['https://localhost:4173', 'https://NVIDIA.github.io/elements/'],
