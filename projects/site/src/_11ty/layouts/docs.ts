@@ -62,6 +62,11 @@ docsSearch.addEventListener('search-focus', () => toggleSideNav(false));
 docsSearch.addEventListener('search-blur', () => !isSearching && toggleSideNav(true));
 
 const toggleSideNav = (state: boolean) => {
+  if (!state) {
+    // Preserve panel width before hiding nav
+    const currentWidth = panel.getBoundingClientRect().width;
+    panel.style.width = `${currentWidth}px`;
+  }
   docsNav.style.display = state ? docsNavDisplay : 'none';
 };
 
@@ -70,6 +75,18 @@ const query = searchParams.get('q');
 if (query) {
   if (globalThis.gtag) {
     globalThis.gtag('event', 'elements-docs-search', { query: query });
+  }
+
+  // Pre-load search from URL query param
+  await customElements.whenDefined('nvd-search');
+  await docsSearch.updateComplete;
+  const searchInput = docsSearch.shadowRoot?.querySelector<HTMLInputElement>('#search-input');
+  if (searchInput) {
+    searchInput.value = query;
+    searchInput.focus();
+    toggleSideNav(false);
+    isSearching = true;
+    void docsSearch.search(query);
   }
 }
 
