@@ -989,3 +989,59 @@ describe('type-popover.controller - dynamic DOM creation', () => {
     expect(event.detail.trigger).toBe(sourceButton);
   });
 });
+
+describe('type-popover.controller - disconnected element handling', () => {
+  let fixture: HTMLElement;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should not throw when showPopover is called on a disconnected element', async () => {
+    fixture = await createFixture(html`
+      <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
+    `);
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    await elementIsStable(element);
+
+    element.remove();
+
+    expect(() => element.showPopover()).not.toThrow();
+    expect(element.isConnected).toBe(false);
+  });
+
+  it('should not open popover when showPopover is called on a disconnected element', async () => {
+    fixture = await createFixture(html`
+      <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
+    `);
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    await elementIsStable(element);
+
+    element.remove();
+    element.showPopover();
+
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should not throw when showPopover is called with options on a disconnected element', async () => {
+    fixture = await createFixture(html`
+      <nve-button id="source-btn">source</nve-button>
+      <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
+    `);
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    const sourceButton = fixture.querySelector<Button>('#source-btn');
+    await elementIsStable(element);
+    await elementIsStable(sourceButton);
+
+    element.remove();
+
+    expect(() => element.showPopover({ source: sourceButton })).not.toThrow();
+    expect(element.isConnected).toBe(false);
+  });
+});
