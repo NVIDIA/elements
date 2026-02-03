@@ -32,13 +32,13 @@
 }
 
 /* center content when popovers are present to prevent iframe clipping */
-#example-container:has([nve-popover]) {
+#example-container:has([nve-popover]):not(:has(nve-page)) {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-body:has(#iframe-links:not([hidden])) #example-container {
+body:has(#iframe-links:not([hidden])):not(:has(nve-page)) #example-container {
   padding: var(--nve-ref-space-lg);
 }
 
