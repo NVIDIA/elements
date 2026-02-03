@@ -29,17 +29,34 @@ if (initialWidth) {
 handle.addEventListener('input', e => (panel.style.width = (e.target as HTMLInputElement).value + 'px'));
 
 // auto-scroll to deep-link headers
+const docsMain = globalThis.document.querySelector<HTMLElement>('#docs-main')!;
+
+/**
+ * Scrolls to an element by ID within the #docs-main container.
+ * Uses manual scroll calculation to avoid scrollIntoView scrolling ancestor elements
+ * like nve-page which has overflow:hidden but can still be scrolled programmatically.
+ */
+function scrollToHeading(headerId: string, behavior: ScrollBehavior = 'smooth') {
+  if (!headerId) return;
+  const heading = globalThis.document.getElementById(headerId);
+  if (!heading || !docsMain) return;
+
+  // Calculate the scroll position relative to the scrollable container
+  const headingRect = heading.getBoundingClientRect();
+  const containerRect = docsMain.getBoundingClientRect();
+  const scrollTop = docsMain.scrollTop + (headingRect.top - containerRect.top);
+
+  docsMain.scrollTo({ top: scrollTop, behavior });
+}
+
 setTimeout(() => {
   const url = new URL(globalThis.window.parent.location.href);
   const isExamplesRoute = url.pathname.includes('/examples');
   const isEditMode = url.searchParams.get('edit') === 'true' || url.searchParams.get('edit') === '1';
   if (isExamplesRoute && isEditMode) return;
 
-  const headerId = new URL(globalThis.window.parent.location.href).hash.replace('#', '');
-  globalThis.document.getElementById(headerId)?.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
+  const headerId = url.hash.replace('#', '');
+  scrollToHeading(headerId);
 }, 500);
 
 // preserve scroll position between page transitions
@@ -90,7 +107,7 @@ if (query) {
   // Pre-load search from URL query param
   await customElements.whenDefined('nvd-search');
   await docsSearch.updateComplete;
-  const searchInput = docsSearch.shadowRoot?.querySelector<HTMLInputElement>('#search-input');
+  const searchInput = docsSearch.shadowRoot?.querySelector('#search-input');
   if (searchInput) {
     searchInput.value = query;
     searchInput.focus();
@@ -120,7 +137,15 @@ function addHeadingAnchors() {
     anchor.innerHTML = '<nve-icon-button container="inline" icon-name="link"></nve-icon-button>';
 
     // Add click handler
-    anchor.addEventListener('click', _e => {
+    anchor.addEventListener('click', e => {
+      e.preventDefault();
+
+      // Update URL hash without triggering default scroll
+      globalThis.history.pushState(null, '', `${globalThis.window.location.pathname}#${id}`);
+
+      // Scroll to heading using controlled scroll
+      scrollToHeading(id);
+
       // Copy to clipboard
       if (globalThis.navigator.clipboard) {
         void globalThis.navigator.clipboard.writeText(
