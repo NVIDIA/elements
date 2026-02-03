@@ -71,6 +71,7 @@ const config = {
         slot: { name: true },
         cssprop: { name: true },
         csspart: { name: true },
+        command: { name: true },
         entrypoint: { name: true },
         tags: { name: true },
         aria: { name: true },
