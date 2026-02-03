@@ -15,6 +15,7 @@ import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/progress-ring/define.js';
 import '@nvidia-elements/core/search/define.js';
+import '@nvidia-elements/core/tag/define.js';
 
 export interface Pagefind {
   search: (term: string) => Promise<PagefindSearchResults>;
@@ -82,6 +83,17 @@ export class DocsSearch extends LitElement {
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+    }
+
+    .search-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--nve-ref-space-xs);
+      padding: var(--nve-ref-space-xs) 0;
+    }
+
+    .search-filters nve-tag {
+      cursor: pointer;
     }`
   ];
 
@@ -109,6 +121,9 @@ export class DocsSearch extends LitElement {
   @state()
   private currentSearchTerm = '';
 
+  @state()
+  private activeFilter: string | null = null;
+
   #pagefind!: Pagefind;
   #searchCache = new Map<string, PagefindSearchFragment[]>();
 
@@ -129,6 +144,7 @@ export class DocsSearch extends LitElement {
     this.isSearching = false;
     this.noResults = false;
     this.currentSearchTerm = '';
+    this.activeFilter = null;
     this.dispatchEvent(new Event('search-reset', { bubbles: true, composed: true }));
   }
 
@@ -214,6 +230,8 @@ export class DocsSearch extends LitElement {
   }
 
   render() {
+    const filteredResults = this.#getFilteredResults();
+
     return html`
     <nve-search>
       <input id="search-input" type="search" aria-label="search" placeholder="search" @input="${this.#handleChange}" @focus="${this.#handleFocus}" @blur="${this.#handleBlur}" />
@@ -228,7 +246,20 @@ export class DocsSearch extends LitElement {
       }
       <nve-icon-button id="search-reset" aria-label="clear selection" icon-name="cancel" container="inline" @click="${this.#handleReset}"></nve-icon-button>
     </nve-search>
-    ${this.results.map(result => {
+    ${
+      this.results.length > 0
+        ? html`
+      <div class="search-filters">
+        <nve-tag color=${!this.activeFilter ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter(null)}>All</nve-tag>
+        <nve-tag color=${this.activeFilter === 'elements' ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter('elements')}>Elements</nve-tag>
+        <nve-tag color=${this.activeFilter === 'foundations' ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter('foundations')}>Foundations</nve-tag>
+        <nve-tag color=${this.activeFilter === 'patterns' ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter('patterns')}>Patterns</nve-tag>
+        <nve-tag color=${this.activeFilter === 'integrations' ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter('integrations')}>Integrations</nve-tag>
+      </div>
+    `
+        : ''
+    }
+    ${filteredResults.map(result => {
       const searchResult = this.#getSearchResult(result);
       const headings = this.#getHeadings(result);
 
@@ -238,14 +269,23 @@ export class DocsSearch extends LitElement {
       `;
     })}
     ${
-      this.noResults
+      this.noResults || (this.results.length > 0 && filteredResults.length === 0)
         ? html`
       <div nve-layout="row gap:sm pad-top:sm pad-left:xs">
-        <nve-alert>No Results Found</nve-alert>
+        <nve-alert>${this.activeFilter ? `No results in "${this.activeFilter}"` : 'No Results Found'}</nve-alert>
       </div>`
         : html``
     }
   `;
+  }
+
+  #setFilter(filter: string | null) {
+    this.activeFilter = filter;
+  }
+
+  #getFilteredResults(): PagefindSearchFragment[] {
+    if (!this.activeFilter) return this.results;
+    return this.results.filter(result => result.meta?.section === this.activeFilter);
   }
 
   #renderSearchResult(result: SearchResult) {
