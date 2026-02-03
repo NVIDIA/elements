@@ -92,4 +92,102 @@ describe('type-selectable.controller', () => {
     await elementIsStable(element);
     expect(element.selected).toBe(undefined);
   });
+
+  it('should have updated state before select event is dispatched when behaviorSelect is active', async () => {
+    element.behaviorSelect = true;
+    element.selected = false;
+    await elementIsStable(element);
+
+    let stateAtEventTime: boolean | undefined;
+    element.addEventListener('select', () => {
+      stateAtEventTime = element.selected;
+    });
+
+    element.select();
+    await elementIsStable(element);
+
+    expect(stateAtEventTime).toBe(true);
+  });
+
+  it('should have updated state before select event is dispatched when toggling with behaviorSelect', async () => {
+    element.behaviorSelect = true;
+    element.selected = false;
+    await elementIsStable(element);
+
+    let stateAtEventTime: boolean | undefined;
+    element.addEventListener('select', () => {
+      stateAtEventTime = element.selected;
+    });
+
+    element.toggle();
+    await elementIsStable(element);
+
+    expect(stateAtEventTime).toBe(true);
+  });
+
+  it('should emit select event with element detail when toggle is called', async () => {
+    const event = untilEvent<CustomEvent>(element, 'select');
+    element.toggle();
+    const result = await event;
+    expect(result.detail).toBe(element);
+  });
+
+  describe('invoker command support', () => {
+    it('should toggle state when receiving --toggle command', async () => {
+      element.selected = false;
+      await elementIsStable(element);
+
+      element.dispatchEvent(new CommandEvent('command', { command: '--toggle' }));
+      await elementIsStable(element);
+      expect(element.selected).toBe(true);
+
+      element.dispatchEvent(new CommandEvent('command', { command: '--toggle' }));
+      await elementIsStable(element);
+      expect(element.selected).toBe(false);
+    });
+
+    it('should select when receiving --select command', async () => {
+      element.selected = false;
+      await elementIsStable(element);
+
+      const event = untilEvent(element, 'select');
+      element.dispatchEvent(new CommandEvent('command', { command: '--select' }));
+      expect(await event).toBeDefined();
+      expect(element.selected).toBe(true);
+    });
+
+    it('should deselect when receiving --deselect command', async () => {
+      element.selected = true;
+      await elementIsStable(element);
+
+      element.dispatchEvent(new CommandEvent('command', { command: '--deselect' }));
+      await elementIsStable(element);
+      expect(element.selected).toBe(false);
+    });
+
+    it('should emit select event when receiving --toggle command', async () => {
+      element.selected = false;
+      await elementIsStable(element);
+
+      const event = untilEvent<CustomEvent>(element, 'select');
+      element.dispatchEvent(new CommandEvent('command', { command: '--toggle' }));
+      const result = await event;
+      expect(result.detail).toBe(element);
+    });
+
+    it('should have updated state before select event when receiving command', async () => {
+      element.selected = false;
+      await elementIsStable(element);
+
+      let stateAtEventTime: boolean | undefined;
+      element.addEventListener('select', () => {
+        stateAtEventTime = element.selected;
+      });
+
+      element.dispatchEvent(new CommandEvent('command', { command: '--select' }));
+      await elementIsStable(element);
+
+      expect(stateAtEventTime).toBe(true);
+    });
+  });
 });
