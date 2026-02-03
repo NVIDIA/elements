@@ -55,6 +55,7 @@ export interface SearchResult {
   subtitle: string;
   icon: IconName;
   style: string;
+  excerpt?: string;
 }
 
 @customElement('nvd-search')
@@ -65,8 +66,30 @@ export class DocsSearch extends LitElement {
     css`
     nve-search:has(input:placeholder-shown) nve-icon-button {
       display: none;
+    }
+
+    mark {
+      background-color: var(--nve-ref-color-yellow-amber-500);
+      color: var(--nve-ref-color-gray-1200);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    .search-excerpt {
+      max-width: 280px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
     }`
   ];
+
+  /** Maximum number of search results to display */
+  static readonly MAX_RESULTS = 20;
+
+  /** Maximum size of the search cache */
+  static readonly CACHE_MAX_SIZE = 50;
 
   @property({ type: String, attribute: 'base-url' })
   baseUrl!: string;
@@ -83,7 +106,11 @@ export class DocsSearch extends LitElement {
   @state()
   noResults = false;
 
+  @state()
+  private currentSearchTerm = '';
+
   #pagefind!: Pagefind;
+  #searchCache = new Map<string, PagefindSearchFragment[]>();
 
   async #handleChange(event: CustomEvent) {
     event.preventDefault();
@@ -101,6 +128,7 @@ export class DocsSearch extends LitElement {
     this.searchInput.value = '';
     this.isSearching = false;
     this.noResults = false;
+    this.currentSearchTerm = '';
     this.dispatchEvent(new Event('search-reset', { bubbles: true, composed: true }));
   }
 
@@ -127,6 +155,13 @@ export class DocsSearch extends LitElement {
     if (this.baseUrl) {
       this.baseUrl = this.baseUrl.replace(/\/$/, '');
     }
+
+    // Preload PageFind on idle for faster first search
+    if ('requestIdleCallback' in globalThis) {
+      requestIdleCallback(() => this.#loadPagefind(), { timeout: 3000 });
+    } else {
+      setTimeout(() => this.#loadPagefind(), 2000);
+    }
   }
 
   async #loadPagefind() {
@@ -139,22 +174,37 @@ export class DocsSearch extends LitElement {
 
   async search(term: string) {
     void (await this.#loadPagefind());
+    this.currentSearchTerm = term;
 
     if (this.#pagefind) {
+      // Check cache first for instant results on repeated searches
+      const cached = this.#searchCache.get(term);
+      if (cached) {
+        this.isSearching = false;
+        this.results = cached;
+        this.noResults = this.results.length === 0;
+        return;
+      }
+
       this.results = [];
       this.noResults = false;
 
       const query = await this.#pagefind.debouncedSearch(term);
       if (query !== null) {
-        const queryResults = [];
-        for (const result of query.results) {
-          const data = await result.data();
-          queryResults.push(data);
-        }
+        // Limit results and fetch in parallel for better performance
+        const limitedResults = query.results.slice(0, DocsSearch.MAX_RESULTS);
+        const queryResults = await Promise.all(limitedResults.map(result => result.data()));
 
         this.isSearching = false;
         // assign a new array reference to trigger reactive updates
         this.results = [...queryResults];
+
+        // Update cache with size limit (FIFO eviction)
+        if (this.#searchCache.size >= DocsSearch.CACHE_MAX_SIZE) {
+          const firstKey = this.#searchCache.keys().next().value;
+          if (firstKey) this.#searchCache.delete(firstKey);
+        }
+        this.#searchCache.set(term, this.results);
 
         if (this.results.length === 0) {
           this.noResults = true;
@@ -206,6 +256,7 @@ export class DocsSearch extends LitElement {
           <div nve-layout="column gap:xs">
             <p nve-text="body medium">${result.title}</p>
             <p nve-text="body muted">${result.subtitle}</p>
+            ${result.excerpt ? html`<p class="search-excerpt" nve-text="body sm muted" .innerHTML=${result.excerpt}></p>` : ''}
           </div>
         </div>
       </a>
@@ -222,26 +273,26 @@ export class DocsSearch extends LitElement {
       title: result.meta?.title,
       subtitle: result.raw_url || '',
       icon: icon,
-      style: style
+      style: style,
+      excerpt: result.excerpt
     };
   }
 
   #getHeadings(result: PagefindSearchFragment): SearchResult[] {
-    const headings: SearchResult[] = [];
+    const normalizedTerm = this.currentSearchTerm.toLowerCase();
+    const MAX_HEADINGS = 3;
 
-    for (const anchor of result.anchors) {
-      if (anchor.element === 'h2') {
-        headings.push({
-          url: result.raw_url + this.#getQueryParam() + '#' + anchor.id,
-          title: result.meta.title + ' - ' + anchor.text,
-          subtitle: result.raw_url + '#' + anchor.id,
-          icon: 'bookmark',
-          style: '--color: var(--nve-ref-color-teal-seafoam-1000);'
-        });
-      }
-    }
-
-    return headings;
+    // Only show headings that match the search term to reduce result clutter
+    return result.anchors
+      .filter(anchor => anchor.element === 'h2' && anchor.text?.toLowerCase().includes(normalizedTerm))
+      .slice(0, MAX_HEADINGS)
+      .map(anchor => ({
+        url: result.raw_url + this.#getQueryParam() + '#' + anchor.id,
+        title: result.meta.title + ' - ' + anchor.text,
+        subtitle: result.raw_url + '#' + anchor.id,
+        icon: 'bookmark' as IconName,
+        style: '--color: var(--nve-ref-color-teal-seafoam-1000);'
+      }));
   }
 
   #getQueryParam(): string {
