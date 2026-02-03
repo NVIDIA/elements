@@ -69,14 +69,7 @@ export class DocsSearch extends LitElement {
       display: none;
     }
 
-    mark {
-      background-color: var(--nve-ref-color-yellow-amber-500);
-      color: var(--nve-ref-color-gray-1200);
-      border-radius: 2px;
-      padding: 0 2px;
-    }
-
-    .search-excerpt {
+    /* .search-excerpt {
       max-width: 280px;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -84,17 +77,14 @@ export class DocsSearch extends LitElement {
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
-
-    .search-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--nve-ref-space-xs);
-      padding: var(--nve-ref-space-xs) 0;
-    }
-
-    .search-filters nve-tag {
-      cursor: pointer;
-    }`
+    
+    .search-filters mark {
+      background-color: var(--nve-ref-color-yellow-amber-500);
+      color: var(--nve-ref-color-gray-1200);
+      border-radius: 2px;
+      padding: 0 2px;
+    } */
+    `
   ];
 
   /** Maximum number of search results to display */
@@ -249,12 +239,12 @@ export class DocsSearch extends LitElement {
     ${
       this.results.length > 0
         ? html`
-      <div class="search-filters">
+      <div nve-layout="row gap:xs pad:xs align:wrap">
         <nve-tag color=${!this.activeFilter ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter(null)}>All</nve-tag>
         <nve-tag color=${this.activeFilter === 'elements' ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter('elements')}>Elements</nve-tag>
-        <nve-tag color=${this.activeFilter === 'foundations' ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter('foundations')}>Foundations</nve-tag>
         <nve-tag color=${this.activeFilter === 'patterns' ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter('patterns')}>Patterns</nve-tag>
-        <nve-tag color=${this.activeFilter === 'integrations' ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter('integrations')}>Integrations</nve-tag>
+        <nve-tag color=${this.activeFilter === 'foundations' ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter('foundations')}>Foundations</nve-tag>
+        <!-- <nve-tag color=${this.activeFilter === 'integrations' ? 'brand-green' : 'gray-slate'} @click=${() => this.#setFilter('integrations')}>Integrations</nve-tag> -->
       </div>
     `
         : ''
@@ -290,13 +280,13 @@ export class DocsSearch extends LitElement {
 
   #renderSearchResult(result: SearchResult) {
     return html`
-      <a href="${this.baseUrl}${result.url}">
+      <a href="${this.baseUrl}${result.url}" nve-layout="column pad-top:xs">
         <div nve-layout="row gap:sm pad-top:xs pad-left:xs">
           <nve-icon name="${result.icon}" size="md" style="${result.style}"></nve-icon>
           <div nve-layout="column gap:xs">
-            <p nve-text="body medium">${result.title}</p>
-            <p nve-text="body muted">${result.subtitle}</p>
-            ${result.excerpt ? html`<p class="search-excerpt" nve-text="body sm muted" .innerHTML=${result.excerpt}></p>` : ''}
+            <p nve-text="heading xs">${result.title}</p>
+            <p nve-text="body muted sm">${result.subtitle}</p>
+            <!-- ${result.excerpt ? html`<p class="search-excerpt" nve-text="body sm muted" .innerHTML=${result.excerpt}></p>` : ''} -->
           </div>
         </div>
       </a>

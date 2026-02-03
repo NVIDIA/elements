@@ -18,6 +18,14 @@ systemOptionsPanelBtn.addEventListener('click', async () => {
 // resize panels
 const handle = globalThis.document.querySelector<HTMLElement>('nve-resize-handle[slot="left-aside"]')!;
 const panel = globalThis.document.querySelector<HTMLElement>('nve-page-panel[slot="left-aside"]')!;
+const DEFAULT_PANEL_WIDTH = 250;
+const SEARCH_PANEL_WIDTH = 345;
+
+// Set initial panel width from handle's value attribute
+const initialWidth = handle.getAttribute('value');
+if (initialWidth) {
+  panel.style.width = `${initialWidth}px`;
+}
 handle.addEventListener('input', e => (panel.style.width = (e.target as HTMLInputElement).value + 'px'));
 
 // auto-scroll to deep-link headers
@@ -62,10 +70,12 @@ docsSearch.addEventListener('search-focus', () => toggleSideNav(false));
 docsSearch.addEventListener('search-blur', () => !isSearching && toggleSideNav(true));
 
 const toggleSideNav = (state: boolean) => {
-  if (!state) {
-    // Preserve panel width before hiding nav
-    const currentWidth = panel.getBoundingClientRect().width;
-    panel.style.width = `${currentWidth}px`;
+  if (state) {
+    // Showing nav - shrink panel to default width
+    panel.style.width = `${DEFAULT_PANEL_WIDTH}px`;
+  } else {
+    // Hiding nav for search - expand panel for search results
+    panel.style.width = `${SEARCH_PANEL_WIDTH}px`;
   }
   docsNav.style.display = state ? docsNavDisplay : 'none';
 };
