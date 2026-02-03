@@ -16,12 +16,35 @@ export type TypeExpandable = ReactiveElement & {
  * @property behaviorExpand - determines if stateful auto behavior should be enabled
  */
 export class TypeExpandableController<T extends TypeExpandable> implements ReactiveController {
-  constructor(private host: T) {
+  #commandTriggered = false;
+  #useHidden = false;
+
+  constructor(
+    private host: T,
+    config: { useHidden?: boolean } = {}
+  ) {
+    this.#useHidden = config.useHidden ?? false;
     this.host.addController(this);
   }
 
   hostConnected() {
     attachInternals(this.host);
+
+    this.host.addEventListener('command', (e: CommandEvent) => {
+      this.#commandTriggered = true;
+      if (e.command === '--toggle') {
+        this.toggle();
+      }
+
+      if (e.command === '--open') {
+        this.open();
+      }
+
+      if (e.command === '--close') {
+        this.close();
+      }
+      this.#commandTriggered = false;
+    });
   }
 
   hostUpdated() {
@@ -31,23 +54,31 @@ export class TypeExpandableController<T extends TypeExpandable> implements React
   }
 
   open() {
-    this.host.dispatchEvent(new CustomEvent('open', { bubbles: true }));
-
-    if (this.host.behaviorExpand) {
+    if (this.host.behaviorExpand || this.#commandTriggered) {
       this.host.expanded = true;
+
+      if (this.#useHidden) {
+        this.host.hidden = false;
+      }
     }
+
+    this.host.dispatchEvent(new CustomEvent('open', { bubbles: true }));
   }
 
   close() {
-    this.host.dispatchEvent(new CustomEvent('close', { bubbles: true }));
-
-    if (this.host.behaviorExpand) {
+    if (this.host.behaviorExpand || this.#commandTriggered) {
       this.host.expanded = false;
+
+      if (this.#useHidden) {
+        this.host.hidden = true;
+      }
     }
+
+    this.host.dispatchEvent(new CustomEvent('close', { bubbles: true }));
   }
 
   toggle() {
-    if (this.host.expanded) {
+    if (this.host.expanded || (this.#useHidden && !this.host.hidden)) {
       this.close();
     } else {
       this.open();
