@@ -20,12 +20,37 @@ const styles = readFileSync(new URL('./docs.css', import.meta.url), 'utf-8');
  * @param {Object} data - The page data object from 11ty
  * @returns {string} HTML string containing the rendered documentation page
  */
+/**
+ * Derives the section name from the page URL for search filtering.
+ * @param {string} url - The page URL
+ * @returns {string} The section name
+ */
+function getSection(url) {
+  const match = url.match(/\/docs\/([^/]+)\//);
+  if (match) {
+    const section = match[1];
+    // Map section paths to display-friendly names
+    if (section === 'elements') return 'elements';
+    if (section === 'about') return 'about';
+    if (section === 'integrations') return 'integrations';
+    if (section === 'foundations') return 'foundations';
+    if (section === 'patterns') return 'patterns';
+    if (section === 'code' || section === 'monaco' || section === 'markdown') return 'code';
+    if (section === 'labs') return 'labs';
+    if (section === 'internal' || section === 'api-design') return 'internal';
+    if (section === 'cli' || section === 'mcp' || section === 'lint' || section === 'testing') return 'tools';
+    return section;
+  }
+  return 'docs';
+}
+
 export async function render(data) {
   const baseTabUrl = `${data.page.url
     .replace('/', '')
     .replace('/api/', '/')
     .replace('/examples/', '/')
     .replace(/(.*\/data-grid\/).+/, '$1')}`;
+  const section = getSection(data.page.url);
 
   return /* html */ `
     <!DOCTYPE html>
@@ -39,7 +64,7 @@ export async function render(data) {
         </script>
       </head>
 
-      <body nve-text="body trim:none">
+      <body nve-text="body trim:none" data-pagefind-meta="section:${section}">
         <!-- nve-page component, anchors for internal navigation links -->
         <nve-page style="anchor-name: --page-anchor;">
           <!-- renders nve-page-header (logo, top nav buttons, system themes btn...) -->
