@@ -28,6 +28,30 @@ export default {
 };
 
 /**
+ * @summary Basic nve-page layout with a header and main content.
+ */
+export const Default = {
+  render: () => html`
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
+  <nve-page-panel slot="left" size="sm">
+    <nve-page-panel-content>panel</nve-page-panel-content>
+  </nve-page-panel>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">page content</p>
+  </main>
+</nve-page>
+  `
+};
+
+/**
  * @summary Demonstrates all slot areas and debug backgrounds for nve-page.
  * @tags test-case
  */
@@ -35,72 +59,68 @@ export const Content = {
   render: () => html`
 <style>
   nve-page[debug] {
-    div {
-      padding: 12px;
-      width: 100%;
-      height: 100%;
+    nve-page-panel-content {
       font-size: var(--nve-ref-font-size-100);
     }
 
     main {
-      font-size: var(--nve-ref-font-size-100);
+      min-height: 100vh;
+      padding: var(--nve-ref-space-md);
     }
 
     [slot='left'],
     [slot='right'],
     [slot='bottom'] {
-      background: var(--nve-ref-color-green-grass-400);
+      --background: var(--nve-ref-color-green-grass-400);
     }
 
     [slot='left-aside'],
     [slot='right-aside'] {
-      background: var(--nve-ref-color-purple-lavender-400);
+      --background: var(--nve-ref-color-purple-lavender-400);
     }
 
     [slot='header'],
     [slot='footer'] {
-      background: var(--nve-ref-color-red-tomato-400);
+      --background: var(--nve-ref-color-red-tomato-400);
     }
 
     [slot='subheader'],
     [slot='subfooter'] {
-      background: var(--nve-ref-color-blue-cobalt-400);
+      --background: var(--nve-ref-color-blue-cobalt-400);
     }
   }
 </style>
 <nve-page debug>
-  <div slot="header">header</div>
-  <div slot="subheader">subheader</div>
-  <div slot="left-aside">left-aside</div>
-  <div slot="left" style="min-width: 180px;">left</div>
-  <main style="height: 100%">main</main>
-  <div slot="bottom" style="min-height: 140px;">bottom</div>
-  <div slot="right" style="min-width: 180px;">right</div>
-  <div slot="right-aside">right-aside</div>
-  <div slot="subfooter">subfooter</div>
-  <div slot="footer">footer</div>
-</nve-page>
-  `
-};
-
-/**
- * @summary Basic nve-page layout with a header and main content.
- */
-export const Default = {
-  render: () => html`
-<nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
-    <nve-button selected container="flat">Link 1</nve-button>
-    <nve-button container="flat">Link 2</nve-button>
-    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+    <h2 slot="prefix">header</h2>
   </nve-page-header>
-
-  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
-    <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  <nve-page-panel slot="subheader">
+    <nve-page-panel-content>subheader</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="left-aside">
+    <nve-page-panel-content>left-aside</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="left" size="sm">
+    <nve-page-panel-content>left</nve-page-panel-content>
+  </nve-page-panel>
+  <main>
+    <p nve-text="body">main content</p>
   </main>
+  <nve-page-panel slot="bottom" size="sm">
+    <nve-page-panel-content>bottom</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="right" size="sm">
+    <nve-page-panel-content>right</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="right-aside">
+    <nve-page-panel-content>right-aside</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="subfooter">
+    <nve-page-panel-content>subfooter</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="footer">
+    <nve-page-panel-content>footer</nve-page-panel-content>
+  </nve-page-panel>
 </nve-page>
   `
 };
@@ -117,7 +137,7 @@ export const SlotBanner = {
     </nve-alert>
   </nve-alert-group>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -126,7 +146,7 @@ export const SlotBanner = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 </nve-page>
   `
@@ -139,7 +159,7 @@ export const SlotSubheader = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -153,7 +173,7 @@ export const SlotSubheader = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 </nve-page>
   `
@@ -166,7 +186,7 @@ export const SlotSubheaderLarge = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -206,7 +226,7 @@ export const SlotSubheaderLarge = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 </nve-page>
   `
@@ -219,25 +239,19 @@ export const SlotLeft = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
-
-  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
-    <h1 nve-text="heading">main</h1>
-    <p nve-text="body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-      magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat.
-    </p>
-  </main>
-
   <nve-page-panel slot="left" size="sm">
     <nve-page-panel-content>left</nve-page-panel-content>
   </nve-page-panel>
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">page content</p>
+  </main>
 </nve-page>
   `
 };
@@ -249,7 +263,7 @@ export const SlotRight = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -258,7 +272,7 @@ export const SlotRight = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 
   <nve-page-panel slot="right" size="sm">
@@ -275,7 +289,7 @@ export const SlotBottom = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -284,7 +298,7 @@ export const SlotBottom = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 
   <nve-page-panel slot="bottom" size="sm">
@@ -301,7 +315,7 @@ export const SlotLeftAside = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -318,7 +332,7 @@ export const SlotLeftAside = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 </nve-page>
   `
@@ -331,7 +345,7 @@ export const SlotRightAside = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -348,7 +362,7 @@ export const SlotRightAside = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 </nve-page>
   `
@@ -361,7 +375,7 @@ export const SlotSubfooter = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -370,7 +384,7 @@ export const SlotSubfooter = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 
   <nve-toolbar slot="right-aside" orientation="vertical">
@@ -396,7 +410,7 @@ export const SlotFooter = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -405,7 +419,7 @@ export const SlotFooter = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 
   <nve-toolbar slot="right-aside" orientation="vertical">
@@ -426,33 +440,67 @@ export const SlotFooter = {
 };
 
 /**
- * @summary Shows expandable page panels in left, right, and bottom slots.
+ * @summary Use Page Panel with Invoker Command API to dynamically open and close page panels.
+ */
+export const InvokerCommand = {
+  render: () => html`
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-icon-button slot="suffix" commandfor="invoker-example" command="--toggle" container="flat" icon-name="menu" aria-label="menu"></nve-icon-button>
+  </nve-page-header>
+
+  <nve-page-panel id="invoker-example" slot="left" size="sm" hidden>
+    <nve-icon-button commandfor="invoker-example" command="--close" slot="actions" container="inline" icon-name="cancel" aria-label="close"></nve-icon-button>
+    <nve-page-panel-content>
+      <p nve-text="body">panel content</p>
+    </nve-page-panel-content>
+  </nve-page-panel>
+
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">page content</p>
+  </main>
+</nve-page>
+  `
+};
+
+/**
+ * @summary Shows expandable style page panels in left, right, and bottom slots.
  */
 export const PagePanelExpandable = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <nve-page-panel expandable slot="left" size="sm">
+  <nve-page-panel id="panel-left" slot="left" size="sm">
+    <nve-icon-button commandfor="panel-left" command="--close" slot="actions" container="inline" icon-name="double-chevron" direction="left" aria-label="close"></nve-icon-button>
     <nve-page-panel-content>left</nve-page-panel-content>
   </nve-page-panel>
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div nve-layout="row gap:xs">
+      <nve-button commandfor="panel-left" command="--toggle">Toggle Left Panel</nve-button>
+      <nve-button commandfor="panel-right" command="--toggle">Toggle Right Panel</nve-button>
+      <nve-button commandfor="panel-bottom" command="--toggle">Toggle Bottom Panel</nve-button>
+    </div>
   </main>
 
-  <nve-page-panel expandable slot="right" size="sm">
+  <nve-page-panel id="panel-right" slot="right" size="sm">
+    <nve-icon-button commandfor="panel-right" command="--close" slot="actions" container="inline" icon-name="double-chevron" direction="right" aria-label="close"></nve-icon-button>
     <nve-page-panel-content>right</nve-page-panel-content>
   </nve-page-panel>
 
-  <nve-page-panel expandable slot="bottom" size="sm">
+  <nve-page-panel id="panel-bottom" slot="bottom" size="sm">
+    <nve-icon-button commandfor="panel-bottom" command="--close" slot="actions" container="inline" icon-name="double-chevron" direction="down" aria-label="close"></nve-icon-button>
     <nve-page-panel-content>bottom</nve-page-panel-content>
   </nve-page-panel>
 </nve-page>
@@ -460,33 +508,40 @@ export const PagePanelExpandable = {
 };
 
 /**
- * @summary Shows closable page panels in left, right, and bottom slots.
+ * @summary Shows closable style page panels in left, right, and bottom slots.
  */
 export const PagePanelClosable = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
 
-  <nve-page-panel closable slot="left" size="sm">
+  <nve-page-panel id="panel-left" slot="left" size="sm">
+    <nve-icon-button commandfor="panel-left" command="--close" slot="actions" container="inline" icon-name="cancel" aria-label="close"></nve-icon-button>
     <nve-page-panel-content>left</nve-page-panel-content>
   </nve-page-panel>
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div nve-layout="row gap:xs">
+      <nve-button commandfor="panel-left" command="--toggle">Toggle Left Panel</nve-button>
+      <nve-button commandfor="panel-right" command="--toggle">Toggle Right Panel</nve-button>
+      <nve-button commandfor="panel-bottom" command="--toggle">Toggle Bottom Panel</nve-button>
+    </div>
   </main>
 
-  <nve-page-panel closable slot="right" size="sm">
+  <nve-page-panel id="panel-right" slot="right" size="sm">
+    <nve-icon-button commandfor="panel-right" command="--close" slot="actions" container="inline" icon-name="cancel" aria-label="close"></nve-icon-button>
     <nve-page-panel-content>right</nve-page-panel-content>
   </nve-page-panel>
 
-  <nve-page-panel closable slot="bottom" size="sm">
+  <nve-page-panel id="panel-bottom" slot="bottom" size="sm">
+    <nve-icon-button commandfor="panel-bottom" command="--close" slot="actions" container="inline" icon-name="cancel" aria-label="close"></nve-icon-button>
     <nve-page-panel-content>bottom</nve-page-panel-content>
   </nve-page-panel>
 </nve-page>
@@ -494,71 +549,14 @@ export const PagePanelClosable = {
 };
 
 /**
- * @summary Demonstrates tabs in a page panel header for contextual navigation.
+ * @summary Use Drawer to create navigation that is outside the context of the current view.
  */
-export const PagePanelTabs = {
+export const InteractionDrawer = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
-    <nve-button selected container="flat">Link 1</nve-button>
-    <nve-button container="flat">Link 2</nve-button>
-    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
-  </nve-page-header>
-
-  <nve-page-panel slot="left" size="sm" expandable>
-    <nve-page-panel-header>
-      <nve-tabs behavior-select>
-        <nve-tabs-item selected>Tab 1</nve-tabs-item>
-        <nve-tabs-item>Tab 2</nve-tabs-item>
-        <nve-tabs-item>Tab 3</nve-tabs-item>
-      </nve-tabs>
-    </nve-page-panel-header>
-    <nve-page-panel-content>
-      Panel Content
-    </nve-page-panel-content>
-  </nve-page-panel>
-</nve-page>
-  `
-};
-
-/**
- * @summary Shows headings in a page panel header for context.
- */
-export const PagePanelHeadings = {
-  render: () => html`
-<nve-page>
-  <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
-    <nve-button selected container="flat">Link 1</nve-button>
-    <nve-button container="flat">Link 2</nve-button>
-    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
-  </nve-page-header>
-  <nve-page-panel slot="right" size="sm" closable>
-    <nve-page-panel-header>
-      <div nve-layout="column gap:xs">
-        <h3 nve-text="heading medium sm">Header</h3>
-        <h4 nve-text="body muted">Sub Header</h4>
-      </div>
-    </nve-page-panel-header>
-    <nve-page-panel-content>
-      Panel Content
-    </nve-page-panel-content>
-  </nve-page-panel>
-</nve-page>
-  `
-};
-
-/**
- * @summary Use document scroll for static content sites that do not require a fixed navigation.
- */
-export const DocumentScroll = {
-  render: () => html`
-<nve-page document-scroll>
-  <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-icon-button popovertarget="drawer" slot="prefix" container="flat" icon-name="menu" aria-label="menu"></nve-icon-button>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -567,54 +565,21 @@ export const DocumentScroll = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body" style="min-height: 110vh">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 
-  <nve-toolbar slot="footer">
-    <a href="#" nve-text="link sm">docmentation</a>
-    <a href="#" nve-text="link sm">logging</a>
-    <a href="#" nve-text="link sm">contact</a>
-  </nve-toolbar>
+  <nve-drawer id="drawer" slot="left-aside" position="left" size="sm" closable style="--top: 48px">
+    <nve-drawer-header>
+      <h3 nve-text="heading medium sm">Drawer Header</h3>
+    </nve-drawer-header>
+    <nve-drawer-content>
+      <p nve-text="body">drawer content</p>
+    </nve-drawer-content>
+    <nve-drawer-footer>
+      <p nve-text="body">drawer footer</p>
+    </nve-drawer-footer>
+  </nve-drawer>
 </nve-page>
-  `
-};
-
-/**
- * @summary Use Page Panel to create navigation that is within the context of the current view.
- */
-export const InteractionPanel = {
-  render: () => html`
-<nve-page>
-  <nve-page-header slot="header">
-    <nve-icon-button slot="prefix" container="flat" icon-name="menu" aria-label="menu"></nve-icon-button>
-    <nve-logo slot="prefix" size="sm"></nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
-    <nve-button selected container="flat">Link 1</nve-button>
-    <nve-button container="flat">Link 2</nve-button>
-    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
-  </nve-page-header>
-
-  <nve-page-panel slot="left" size="sm" closable hidden>
-    <nve-page-panel-header>
-      <h3 nve-text="heading medium sm">Panel Header</h3>
-    </nve-page-panel-header>  
-    <nve-page-panel-content>
-    <p nve-text="body">Panel Content</p>
-    </nve-page-panel-content>
-  </nve-page-panel>
-
-  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
-    <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-  </main>
-</nve-page>
-<script type="module">
-  const button = document.querySelector('[aria-label="menu"]');
-  const panel = document.querySelector('nve-page-panel');
-
-  button.addEventListener('click', () => panel.hidden = !panel.hidden);
-  panel.addEventListener('close', () => panel.hidden = true);
-</script>
   `
 };
 
@@ -625,7 +590,7 @@ export const InteractionPanelNavigation = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -634,13 +599,14 @@ export const InteractionPanelNavigation = {
 
   <nve-toolbar slot="left-aside" orientation="vertical">
     <nve-button-group>
-      <nve-icon-button value="repo" icon-name="branch"></nve-icon-button>
-      <nve-icon-button value="ai" icon-name="sparkles"></nve-icon-button>
-      <nve-icon-button value="settings" icon-name="gear"></nve-icon-button>
+      <nve-icon-button commandfor="nav-panel" command="--open" value="repo" icon-name="branch"></nve-icon-button>
+      <nve-icon-button commandfor="nav-panel" command="--open" value="ai" icon-name="sparkles"></nve-icon-button>
+      <nve-icon-button commandfor="nav-panel" command="--open" value="settings" icon-name="gear"></nve-icon-button>
     </nve-button-group>
   </nve-toolbar>
 
-  <nve-page-panel slot="left" size="sm" expandable hidden>
+  <nve-page-panel id="nav-panel" slot="left" size="sm" hidden>
+    <nve-icon-button commandfor="nav-panel" command="--close" slot="actions" container="inline" icon-name="double-chevron" direction="left" aria-label="close"></nve-icon-button>
     <nve-page-panel-header>
       <h3 nve-text="heading medium sm">git</h3>
     </nve-page-panel-header>
@@ -665,20 +631,16 @@ export const InteractionPanelNavigation = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 </nve-page>
 <script type="module">
   const toolbar = document.querySelector('nve-toolbar');
-  const panel = document.querySelector('nve-page-panel');
   const panelHeader = document.querySelector('nve-page-panel h3');
   const menus = Array.from(document.querySelectorAll('nve-page-panel nve-menu'));
 
-  panel.addEventListener('close', () => (panel.hidden = true));
-
   toolbar.addEventListener('click', e => {
     if (e.target.localName === 'nve-icon-button') {
-      panel.hidden = false;
       panelHeader.textContent = e.target.value;
       menus.forEach(i => (i.hidden = true));
       menus.find(i => i.id === e.target.value).hidden = false;
@@ -689,14 +651,71 @@ export const InteractionPanelNavigation = {
 };
 
 /**
- * @summary Use Drawer to create navigation that is outside the context of the current view.
+ * @summary Demonstrates tabs in a page panel header for contextual navigation.
  */
-export const InteractionDrawer = {
+export const PagePanelTabs = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-icon-button popovertarget="drawer" slot="prefix" container="flat" icon-name="menu" aria-label="menu"></nve-icon-button>
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
+
+  <nve-page-panel slot="left" size="sm">
+    <nve-page-panel-header>
+      <nve-tabs behavior-select>
+        <nve-tabs-item selected>Tab 1</nve-tabs-item>
+        <nve-tabs-item>Tab 2</nve-tabs-item>
+        <nve-tabs-item>Tab 3</nve-tabs-item>
+      </nve-tabs>
+    </nve-page-panel-header>
+    <nve-page-panel-content>
+      Panel Content
+    </nve-page-panel-content>
+  </nve-page-panel>
+</nve-page>
+  `
+};
+
+/**
+ * @summary Shows headings in a page panel header for context.
+ */
+export const PagePanelHeadings = {
+  render: () => html`
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
+  <nve-page-panel slot="right" size="sm">
+    <nve-page-panel-header>
+      <div nve-layout="column gap:xs">
+        <h3 nve-text="heading medium sm">Header</h3>
+        <h4 nve-text="body muted">Sub Header</h4>
+      </div>
+    </nve-page-panel-header>
+    <nve-page-panel-content>
+      Panel Content
+    </nve-page-panel-content>
+  </nve-page-panel>
+</nve-page>
+  `
+};
+
+/**
+ * @summary Use document scroll for static content sites that do not require a fixed navigation.
+ */
+export const DocumentScroll = {
+  render: () => html`
+<nve-page document-scroll>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -705,20 +724,14 @@ export const InteractionDrawer = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body" style="min-height: 110vh">page content</p>
   </main>
 
-  <nve-drawer id="drawer" slot="left-aside" position="left" size="sm" closable style="--top: 48px">
-    <nve-drawer-header>
-      <h3 nve-text="heading medium sm">Drawer Header</h3>
-    </nve-drawer-header>
-    <nve-drawer-content>
-      <p nve-text="body">drawer content</p>
-    </nve-drawer-content>
-    <nve-drawer-footer>
-      <p nve-text="body">drawer footer</p>
-    </nve-drawer-footer>
-  </nve-drawer>
+  <nve-toolbar slot="footer">
+    <a href="#" nve-text="link sm">docmentation</a>
+    <a href="#" nve-text="link sm">logging</a>
+    <a href="#" nve-text="link sm">contact</a>
+  </nve-toolbar>
 </nve-page>
   `
 };
@@ -731,7 +744,7 @@ export const KitchenSink = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -787,7 +800,7 @@ export const KitchenSink = {
     </nve-button-group>
   </nve-toolbar>
 
-  <nve-page-panel slot="left" closable size="sm">
+  <nve-page-panel slot="left" size="sm">
     <nve-page-panel-content>
       <nve-tree behavior-expand>
         <nve-tree-node><a href="#">Browse</a></nve-tree-node>
@@ -819,15 +832,15 @@ export const KitchenSink = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
     <div style="min-height: 100vh; width: 1px;"></div>
   </main>
 
-  <nve-page-panel closable slot="bottom" size="sm">
+  <nve-page-panel slot="bottom" size="sm">
     <nve-page-panel-content>bottom</nve-page-panel-content>
   </nve-page-panel>
 
-  <nve-page-panel closable slot="right" size="sm">
+  <nve-page-panel slot="right" size="sm">
     <nve-page-panel-content>right</nve-page-panel-content>
   </nve-page-panel>
 
@@ -860,7 +873,7 @@ export const PageLayoutCardGrid = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -924,7 +937,7 @@ export const PageLayoutMultiVideo = {
 </style>
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -1135,7 +1148,7 @@ export const PageLayoutEditor = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Playground</h2>
     <nve-button container="flat">Browse</nve-button>
     <nve-button container="flat">Editor</nve-button>
@@ -1181,10 +1194,11 @@ export const PageLayoutEditor = {
 
   <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
     <h1 nve-text="heading">main</h1>
-    <p nve-text="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <p nve-text="body">page content</p>
   </main>
 
-  <nve-page-panel closable slot="bottom" size="sm">
+  <nve-page-panel id="console-panel" slot="bottom" size="sm">
+    <nve-icon-button commandfor="console-panel" command="--close" slot="actions" container="inline" icon-name="cancel" aria-label="close"></nve-icon-button>
     <nve-page-panel-content>console output</nve-page-panel-content>
   </nve-page-panel>
 
@@ -1204,7 +1218,7 @@ export const PageLayoutSteps = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Employee</h2>
     <nve-button selected container="flat">Benefits</nve-button>
     <nve-button container="flat">Account</nve-button>
@@ -1248,7 +1262,7 @@ export const Resize = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -1276,7 +1290,7 @@ export const ResizeMulti = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -1322,7 +1336,7 @@ export const ResizeSnap = {
   render: () => html`
 <nve-page style="--padding: var(--nve-ref-space-lg)">
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
@@ -1331,18 +1345,126 @@ export const ResizeSnap = {
 
   <p nve-text="body">Double click the resize handle to snap to the min or max.</p>
 
-  <nve-resize-handle slot="right" dir="rtl" min="2" max="900" value="320" orientation="vertical"></nve-resize-handle>
-  <nve-page-panel style="width: 320px" slot="right">
-    <nve-page-panel-content></nve-page-panel-content>
+  <nve-page-panel style="width: 320px" slot="left">
+    <nve-page-panel-content>left</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-resize-handle slot="left" orientation="vertical" min="100" max="480" value="320" step="20"></nve-resize-handle>
+</nve-page>
+<script type="module">
+  const leftHandle = document.querySelector('nve-resize-handle[slot=left]');
+  const leftPanel = document.querySelector('nve-page-panel[slot=left]');
+  leftHandle.addEventListener('input', e => leftPanel.style.width = e.target.value + 'px');
+</script>
+  `
+};
+
+/**
+ * @summary Example of using explicit event listeners to control the state of a page panel.
+ * @deprecated Use Page Panel with Invoker Command API to dynamically open and close page panels.
+ * @tags test-case
+ */
+export const InteractionPanel = {
+  render: () => html`
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-icon-button slot="prefix" container="flat" icon-name="menu" aria-label="menu"></nve-icon-button>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
+
+  <nve-page-panel slot="left" size="sm" closable hidden>
+    <nve-page-panel-header>
+      <h3 nve-text="heading medium sm">Panel Header</h3>
+    </nve-page-panel-header>  
+    <nve-page-panel-content>
+    <p nve-text="body">Panel Content</p>
+    </nve-page-panel-content>
+  </nve-page-panel>
+
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">page content</p>
+  </main>
+</nve-page>
+<script type="module">
+  const button = document.querySelector('[aria-label="menu"]');
+  const panel = document.querySelector('nve-page-panel');
+
+  button.addEventListener('click', () => panel.hidden = !panel.hidden);
+  panel.addEventListener('close', () => panel.hidden = true);
+</script>
+  `
+};
+
+/**
+ * @summary Shows expandable page panels in left, right, and bottom slots.
+ * @deprecated Use Page Panel with Invoker Command API to dynamically open and close page panels with slotted icon buttons.
+ */
+export const PagePanelExpandableState = {
+  render: () => html`
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
+
+  <nve-page-panel expandable slot="left" size="sm">
+    <nve-page-panel-content>left</nve-page-panel-content>
+  </nve-page-panel>
+
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">page content</p>
+  </main>
+
+  <nve-page-panel expandable slot="right" size="sm">
+    <nve-page-panel-content>right</nve-page-panel-content>
+  </nve-page-panel>
+
+  <nve-page-panel expandable slot="bottom" size="sm">
+    <nve-page-panel-content>bottom</nve-page-panel-content>
   </nve-page-panel>
 </nve-page>
+  `
+};
 
-<script type="module">
-  const handle = document.querySelector('nve-resize-handle');
-  const panel = document.querySelector('nve-page-panel');
-  handle.addEventListener('input', e => {
-    panel.style.width = e.target.value + 'px';
-  });
-</script>
+/**
+ * @summary Shows closable page panels in left, right, and bottom slots.
+ * @deprecated Use Page Panel with Invoker Command API to dynamically open and close page panels with slotted icon buttons.
+ */
+export const PagePanelClosableState = {
+  render: () => html`
+<nve-page>
+  <nve-page-header slot="header">
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+    <h2 slot="prefix">Infrastructure</h2>
+    <nve-button selected container="flat">Link 1</nve-button>
+    <nve-button container="flat">Link 2</nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
+  </nve-page-header>
+
+  <nve-page-panel closable slot="left" size="sm">
+    <nve-page-panel-content>left</nve-page-panel-content>
+  </nve-page-panel>
+
+  <main nve-layout="column gap:lg pad:lg align:horizontal-stretch">
+    <h1 nve-text="heading">main</h1>
+    <p nve-text="body">page content</p>
+  </main>
+
+  <nve-page-panel closable slot="right" size="sm">
+    <nve-page-panel-content>right</nve-page-panel-content>
+  </nve-page-panel>
+
+  <nve-page-panel closable slot="bottom" size="sm">
+    <nve-page-panel-content>bottom</nve-page-panel-content>
+  </nve-page-panel>
+</nve-page>
   `
 };
