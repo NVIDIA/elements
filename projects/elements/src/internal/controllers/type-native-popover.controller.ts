@@ -49,18 +49,21 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
     const showPopover = this.host.showPopover;
     this.host.showPopover = (options?: ShowPopoverOptions) => {
-      // provide legacy fallback for source anchor or trigger if not provided, this can happen if the popover is dynamically created in the DOM without the use of the standard popover api or legacy trigger based api
-      let source: HTMLElement | Element = options?.source;
-      if (!source) {
-        if (this.host.anchor) {
-          source = getHostAnchor(this.host);
-        } else if (this.host.trigger) {
-          source = getHostTrigger(this.host, this.host.trigger);
-        } else {
-          source = globalThis.document.activeElement;
+      if (this.host.isConnected) {
+        // provide legacy fallback for source anchor or trigger if not provided, this can happen if the popover is dynamically created in the DOM without the use of the standard popover api or legacy trigger based api
+        let source: HTMLElement | Element = options?.source;
+        if (!source) {
+          if (this.host.anchor) {
+            source = getHostAnchor(this.host);
+          } else if (this.host.trigger) {
+            source = getHostTrigger(this.host, this.host.trigger);
+          } else {
+            source = globalThis.document.activeElement;
+          }
         }
+
+        showPopover.call(this.host, { source });
       }
-      showPopover.call(this.host, { source });
     };
   }
 
