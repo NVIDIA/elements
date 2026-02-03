@@ -15,12 +15,16 @@ import globalStyles from './page-panel.global.css?inline';
 
 /**
  * @element nve-page-panel
- * @description Child panel for embeded panels within the page component. Typically used for left/right/bottom page slot positions.
+ * @description Child panel for embedded panels within the page component. Typically used for left/right/bottom page slot positions.
  * @entrypoint \@nvidia-elements/core/page
  * @since 1.15.0
  * @event open
  * @event close
- * @slot default content slot
+ * @slot - default content slot
+ * @slot actions - slot for action / dismiss buttons
+ * @command --open
+ * @command --close
+ * @command --toggle
  * @cssprop --background
  * @cssprop --border
  * @cssprop --color
@@ -43,11 +47,13 @@ export class PagePanel extends LitElement {
 
   /**
    * Determines if a closable button should render within page panel.
+   * @deprecated use the `actions` slot instead
    */
   @property({ type: Boolean }) closable: boolean;
 
   /**
    * Determines if a expandable button should render within page panel.
+   * @deprecated use the `actions` slot instead
    */
   @property({ type: Boolean }) expandable: boolean;
 
@@ -70,7 +76,7 @@ export class PagePanel extends LitElement {
     [IconButton.metadata.tag]: IconButton
   };
 
-  #typeExpandableController = new TypeExpandableController(this);
+  #typeExpandableController = new TypeExpandableController(this, { useHidden: true });
 
   get #position() {
     const position = {
@@ -104,7 +110,9 @@ export class PagePanel extends LitElement {
     <div internal-host>
       <div part="_header">
         <slot name="header"></slot>
-        ${this.closable || this.expandable ? html`<nve-icon-button part="icon-button" exportparts="icon:icon-button-icon" @click=${() => this.#typeExpandableController.close()} .iconName=${this.#closableIconName} .direction=${this.#closableIconDirection} aria-label=${this.i18n.close} container="inline" role="button"></nve-icon-button>` : nothing}
+        <slot name="actions">
+          ${this.closable || this.expandable ? html`<nve-icon-button part="icon-button" exportparts="icon:icon-button-icon" @click=${() => this.#typeExpandableController.close()} .iconName=${this.#closableIconName} .direction=${this.#closableIconDirection} aria-label=${this.i18n.close} container="inline" role="button"></nve-icon-button>` : nothing}
+        </slot>
       </div>
       <div class="content">
         <slot></slot>
