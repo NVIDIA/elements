@@ -78,7 +78,7 @@ export async function render(data) {
             </nve-page-panel-content>
           </nve-page-panel>
           
-          <nve-resize-handle slot="left-aside" min="3" max="300" value="300" step="20" orientation="vertical"></nve-resize-handle>
+          <nve-resize-handle slot="left-aside" min="5" max="345" value="250" step="5" orientation="vertical"></nve-resize-handle>
 
           <!-- Subheader: component title, summary, and tab navigation (Overview/API/Examples) -->
           ${
