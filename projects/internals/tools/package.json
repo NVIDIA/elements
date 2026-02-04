@@ -56,13 +56,13 @@
       "types": "./dist/project/index.d.ts",
       "default": "./dist/project/index.js"
     },
-    "./changelogs": {
-      "types": "./dist/changelogs/index.d.ts",
-      "default": "./dist/changelogs/index.js"
+    "./packages": {
+      "types": "./dist/packages/index.d.ts",
+      "default": "./dist/packages/index.js"
     },
-    "./changelogs/index.js": {
-      "types": "./dist/changelogs/index.d.ts",
-      "default": "./dist/changelogs/index.js"
+    "./packages/index.js": {
+      "types": "./dist/packages/index.d.ts",
+      "default": "./dist/packages/index.js"
     },
     "./tokens": {
       "types": "./dist/tokens/index.d.ts",

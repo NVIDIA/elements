@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { startersData, removeWireitScripts } from './starters.js';
-import { getNPMClient } from '../internal/node.js';
-import { isCommandAvailable } from '../internal/node.js';
+import { getNPMClient, isCommandAvailable, getPackageJson } from '../internal/node.js';
 
 describe('startersData', () => {
   it('should provide a list of starter metadata', () => {
@@ -170,5 +169,17 @@ describe('isCommandAvailable', () => {
 
   it('should return false if the command is not available', async () => {
     expect(await isCommandAvailable('not-a-command')).toBe(false);
+  });
+});
+
+describe('getPackageJson', () => {
+  it('should throw error when package.json does not exist', () => {
+    expect(() => getPackageJson('/nonexistent/path')).toThrow('No package.json found in the project.');
+  });
+
+  it('should return package.json contents when it exists', () => {
+    const result = getPackageJson(process.cwd());
+    expect(result).toBeDefined();
+    expect(result.name).toBe('@nve-internals/tools');
   });
 });

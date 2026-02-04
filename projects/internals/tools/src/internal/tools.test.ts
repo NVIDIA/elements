@@ -58,8 +58,8 @@ describe('metadata', () => {
 
     const test = new Test();
     expect((test.getData as ToolMethod<string>).metadata.command).toBe('data');
-    expect((test.processUserInput as ToolMethod<string>).metadata.command).toBe('process-user-input');
-    expect((test.simpleMethod as ToolMethod<string>).metadata.command).toBe('simple-method');
+    expect((test.processUserInput as ToolMethod<string>).metadata.command).toBe('process.user.input');
+    expect((test.simpleMethod as ToolMethod<string>).metadata.command).toBe('simple.method');
   });
 
   it('should generate correct title from method name', () => {
@@ -646,7 +646,7 @@ describe('jsonSchemaToZod', () => {
     expect(invalidResult3.success).toBe(false);
   });
 
-  it('should handle additionalProperties', () => {
+  it('should handle additionalProperties false', () => {
     const schema = {
       type: 'object' as const,
       properties: {
@@ -656,5 +656,66 @@ describe('jsonSchemaToZod', () => {
     };
     const result = jsonSchemaToZod(schema);
     expect(result).toBeDefined();
+  });
+
+  it('should handle object type with additionalProperties true', () => {
+    const schema = {
+      type: 'object' as const,
+      additionalProperties: true,
+      description: 'An object allowing any properties'
+    };
+    const result = jsonSchemaToZod(schema);
+    expect(result).toBeDefined();
+
+    // Test that objects with any properties pass validation
+    const validData = { name: 'John', age: 30, nested: { foo: 'bar' } };
+    const validResult = result.safeParse(validData);
+    expect(validResult.success).toBe(true);
+
+    // Test that empty objects pass validation
+    const emptyData = {};
+    const emptyResult = result.safeParse(emptyData);
+    expect(emptyResult.success).toBe(true);
+
+    // Test that objects with dynamic keys pass validation
+    const dynamicData = { key1: 'value1', key2: 123, key3: true, key4: null };
+    const dynamicResult = result.safeParse(dynamicData);
+    expect(dynamicResult.success).toBe(true);
+  });
+
+  it('should handle object type with additionalProperties true in oneOf', () => {
+    const schema = {
+      oneOf: [{ type: 'string' as const }, { type: 'object' as const, additionalProperties: true }],
+      description: 'String or any object'
+    };
+    const result = jsonSchemaToZod(schema);
+    expect(result).toBeDefined();
+
+    const stringData = 'hello';
+    const stringResult = result.safeParse(stringData);
+    expect(stringResult.success).toBe(true);
+
+    // Test that objects with any properties pass validation
+    const objectData = { name: 'test', count: 42, nested: { deep: true } };
+    const objectResult = result.safeParse(objectData);
+    expect(objectResult.success).toBe(true);
+
+    // Test that empty objects pass validation
+    const emptyObjectData = {};
+    const emptyObjectResult = result.safeParse(emptyObjectData);
+    expect(emptyObjectResult.success).toBe(true);
+  });
+
+  it('should handle bare object type without additionalProperties (default behavior)', () => {
+    const schema = {
+      type: 'object' as const,
+      description: 'A bare object'
+    };
+    const result = jsonSchemaToZod(schema);
+    expect(result).toBeDefined();
+
+    const emptyData = {};
+    const emptyResult = result.safeParse(emptyData);
+    expect(emptyResult.success).toBe(true);
   });
 });

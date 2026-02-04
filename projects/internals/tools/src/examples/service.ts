@@ -8,7 +8,8 @@ const MAX_RESULT_LIMIT = 5;
 @service()
 export class ExamplesService {
   @tool({
-    description: 'Get list of available example templates/patterns.',
+    description:
+      'Get a summary list of available Elements (nve-*) component/pattern usage examples and code snippets. Use this to browse all available examples.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -50,7 +51,7 @@ export class ExamplesService {
   }
 
   @tool({
-    description: 'Search for example templates/patterns by name or description.',
+    description: `Search Elements (nve-*) pattern usage examples by name, element type, or keywords. Returns up to ${MAX_RESULT_LIMIT} matching examples with full template code.`,
     inputSchema: {
       type: 'object',
       properties: {

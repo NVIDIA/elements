@@ -7,7 +7,7 @@ const authoringContext = `
 - Do NOT use event handler content attributes such as \`onclick\` or \`onchange\` attributes. Use JavaScript event listeners instead.
 - Avoid applying custom CSS to nve-* elements, only use them for native HTML elements
 - Prefer Elements APIs over custom CSS. If CSS is required, use design tokens via the \`tokens_list\` tool.
-- Verify that each Elements API usage is correct by checking the API documentation via the \`api_search\` tool
+- Verify that each Elements API usage is correct by checking the API documentation via the \`api_get\` or \`api_search\` tool
 
 ### API Gotchas
 - Use \`nve-grid\` for tabular data, lists, and keyboard-navigable collections. Do NOT use it for page layout, use \`nve-page\` and \`nve-layout\` instead.
@@ -36,14 +36,14 @@ const aboutContext = `
 Give a high level overview of the Elements Design System.
 
 **Structure the content as:**
-1. **What is Elements?** - Explain it's NVIDIA's design system for AI/ML applications, built for speed and scale
-2. **Why use Elements?** - Benefits for AI/ML teams: consistency, accessibility, performance, framework agnostic
+1. **What is Elements?** - Explain it's NVIDIA's design system for AI/Robotics applications, built for speed and scale
+2. **Why use Elements?** - Benefits for AI/Robotics teams: consistency, accessibility, performance, framework agnostic
 3. **Getting Started** - Where to get started with Elements
 4. **Additional Resources** - Where to find additional resources for the Elements Design System
 
 **Do NOT create any files** Just provide the content.
 
-**Target audience:** Developers new to Elements, especially those working on AI/ML applications who need a robust, accessible design system.
+**Target audience:** Developers new to Elements, especially those working on AI/Robotics applications who need a robust, accessible design system.
 
 **Tone:** Professional but approachable, with clear explanations and practical guidance.
 
@@ -68,10 +68,22 @@ npm create @nve typescript # typescript, angular, react, lit, preact, solidjs, v
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 
 ### Resources for Agent - Available MCP Tools
-- \`api_version\`: lookup the version of any component
-- \`api_list\`: lookup available APIs before implementation
-- \`changelogs_list\`: lookup changelogs for any component
-- \`changelogs_search\`: search for specific changelogs
+- \`api_list\`: get list of all available Elements (nve-*) APIs and components
+- \`api_search\`: search and retrieve Elements components and APIs using keywords
+- \`api_get\`: get documentation for a specific component by name
+- \`api_template_validate\`: validate HTML templates for correct API usage
+- \`api_changelogs\`: get changelog details for a specific component or API
+- \`packages_versions_list\`: get latest published versions of all Elements packages
+- \`packages_changelogs_list\`: get changelogs for all @nve packages
+- \`packages_changelogs_search\`: search for package changelogs by name
+- \`examples_list\`: get list of available usage examples and code snippets
+- \`examples_search\`: search examples by name, element type, or keywords
+- \`playground_validate\`: validate HTML templates for playground demos
+- \`playground_create\`: create a shareable playground URL from HTML template
+- \`project_create\`: create a new starter project
+- \`project_update\`: update project to latest Elements package versions
+- \`project_validate\`: validate project setup and check for issues
+- \`tokens_list\`: get available CSS variables / design tokens for theming
 
 ---
 `;
@@ -84,8 +96,9 @@ Explain the API in a way that is easy to understand and follow
 ### Tools to use
 - Use the \`api_list\` tool to lookup available APIs before implementation
 - Use the \`api_search\` tool to understand components and their API details before using them
+- Use the \`api_get\` tool to get documentation for a specific component by name
 - Use the \`tokens_list\` tool to lookup design tokens for any custom CSS
-- Use the \`api_examples_search\` tool to search for specific examples of patterns and compositions of APIs
+- Use the \`examples_search\` tool to search for specific examples of patterns and compositions of APIs
 
 ### Best practices
 - Provide a playground example for the user via the \`playground_create\` tool
@@ -104,9 +117,10 @@ Best practices and guidelines for creating an Elements Playground.
 ### Tools to use
 - \`api_list\`: lookup available APIs before implementation
 - \`api_search\`: understand components and their API details before using them
+- \`api_get\`: get documentation for a specific component by name
 - \`examples_list\`: lookup available examples before implementation
 - \`examples_search\`: search for specific examples/patterns
-- \`tokens_search\`: lookup design tokens for any custom CSS
+- \`tokens_list\`: lookup design tokens for any custom CSS
 - \`playground_validate\`: validate the template before creating the playground
 - \`playground_create\`: create the playground, only include content that is within the body element
 
@@ -124,17 +138,17 @@ Best practices and guidelines for creating an Elements Starter Project.
 
 ### Tools to use
 
-- \`projects_create\`: create a new starter project
-- \`projects_update\`: update a project to the latest versions of Elements packages
-- \`projects_health\`: check the health of a project using Elements packages
+- \`project_create\`: create a new starter project
+- \`project_update\`: update a project to the latest versions of Elements packages
+- \`project_validate\`: validate project setup and check for configuration issues
 
 ### Gotchas
-- Do NOT use the \`start\` parameter for \`projects_update\` tool as this will prevent the tool from exiting.
+- Do NOT use the \`start\` parameter for \`project_create\` tool as this will prevent the tool from exiting.
 
 ### Steps
 
-1. Use the \`projects_create\` tool to create a new starter project
-2. Use the \`projects_update\` tool to update a project to the latest versions of Elements packages
+1. Use the \`project_create\` tool to create a new starter project
+2. Use the \`project_update\` tool to update a project to the latest versions of Elements packages
 3. Run \`pnpm run dev\` or \`npm run dev\` to start the project. This will start the project in development mode and be a long running process.
 4. If there is an available Playwright MCP tool use it to verify the project locally is working as expected.
 
@@ -149,7 +163,7 @@ const doctorContext = `
 Instructions for ensuring the Elements Design System is setup correctly
 
 ## Tools to use
-- \`projects_health\`: check the health of a project using Elements packages
+- \`project_validate\`: validate project setup and check for configuration issues
 
 ## MCP Checks
 
