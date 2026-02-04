@@ -27,7 +27,7 @@ tools.forEach(tool => {
     const text =
       typeof structuredContent.result === 'string' && structuredContent.status !== 'error'
         ? structuredContent.result
-        : JSON.stringify(structuredContent.result);
+        : JSON.stringify(structuredContent);
     return { structuredContent, content: [{ type: 'text', text }] };
   });
 });

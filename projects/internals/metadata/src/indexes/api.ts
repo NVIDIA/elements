@@ -18,7 +18,7 @@ export function createApiIndex(data: { elements: Element[]; attributes: Attribut
       prefix: true,
       boost: {
         id: 3,
-        name: 3,
+        name: 4,
         behavior: 2,
         description: 1
       }

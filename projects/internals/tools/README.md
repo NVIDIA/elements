@@ -40,7 +40,7 @@ projects/internals/tools/src/
 #### **ApiService** (`/api/service.ts`)
 - `list()` - Get all available component APIs and attributes
 - `search()` - Search for specific APIs by query
-- `version()` - Get latest published versions of all @nve packages
+- `version()` - Get latest published versions of all Elements packages
 - Returns markdown or JSON format
 
 #### **ExamplesService** (`/examples/service.ts`)
