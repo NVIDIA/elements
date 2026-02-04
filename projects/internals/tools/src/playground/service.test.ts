@@ -19,7 +19,7 @@ describe('PlaygroundService', () => {
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.name).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.command).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.description).toBe(
-      'Returns a list of potential errors in a playground template.'
+      'Validates HTML templates for playground examples. Enforces additional constraints to prevent common mistakes when generating standalone demos. Use this before calling playground_create.'
     );
     expect(
       (PlaygroundService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.template
@@ -42,7 +42,7 @@ describe('PlaygroundService', () => {
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.name).toBe('create');
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.command).toBe('create');
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.description).toBe(
-      'Creates a playground url/link generated from a html template string. Returns URL only if template passes validation, otherwise returns errors to correct. Use the "playground_validate" tool to check if the template is valid before creating a playground.'
+      'Create a shareable playground URL from an HTML template. Returns URL if valid, or validation errors if invalid. Tip: Use playground_validate first to check for issues.'
     );
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.inputSchema?.properties?.template).toBeDefined();
   });

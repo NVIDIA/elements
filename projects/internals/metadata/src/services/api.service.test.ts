@@ -18,4 +18,22 @@ describe('ApiService', () => {
     expect(Array.isArray(results)).toBe(true);
     expect(results.length).toBeGreaterThan(0);
   });
+
+  it('should ignore nve- prefix and match on meaningful name parts', async () => {
+    const results = await ApiService.search('nve-badge');
+    expect(results).toBeDefined();
+    expect(results.length).toBeGreaterThan(0);
+
+    // First result should be badge-related, not an unrelated element
+    const firstResult = results[0];
+    expect(firstResult.name.toLowerCase()).toContain('badge');
+  });
+
+  it('should return same results for "badge" and "nve-badge"', async () => {
+    const badgeResults = await ApiService.search('badge');
+    const nveBadgeResults = await ApiService.search('nve-badge');
+
+    // Both searches should return the same top results since "nve" is a stop word
+    expect(badgeResults[0]?.name).toBe(nveBadgeResults[0]?.name);
+  });
 });

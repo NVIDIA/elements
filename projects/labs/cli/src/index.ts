@@ -45,7 +45,7 @@ tools.forEach(tool => {
 
   // todo: make positionals use <> syntax and continue to fallback to inquirer/prompts
   const command =
-    `${tool.metadata.command} ${[...requiredArgs.map(key => `[${key}]`), ...optionalArgs.map(key => `[${key}]`)].join(' ')}`.trim();
+    `${tool.metadata.command} ${[...requiredArgs.map(key => `<${key}>`), ...optionalArgs.map(key => `[${key}]`)].join(' ')}`.trim();
 
   yargsInstance.command(
     command,
