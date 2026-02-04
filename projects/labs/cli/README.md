@@ -36,21 +36,24 @@ nve
 
 ## Usage
 
-| Command                                                           | Description                                                          |
-| ----------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `nve api.list [format] [format]`                                  | Get list of all available APIs and components.                       |
-| `nve api.search [query] [format]`                                 | Get API information for specific APIs and components.                |
-| `nve api.version`                                                 | Get latest versions of elements/@nve packages.                       |
-| `nve changelogs.list [format]`                                    | Get changelog details for all @nve packages.                         |
-| `nve changelogs.search [name] [format]`                           | Get changelog details for specific @nve package.                     |
-| `nve examples.list [format]`                                      | Get list of available example templates/patterns.                    |
-| `nve examples.search [query] [format]`                            | Search for example templates/patterns by name or description.        |
-| `nve playground.validate [template]`                              | Get validated HTML string for an example template/playground.        |
-| `nve playground.create [template] [type] [name] [author] [start]` | Creates a playground url/link generated from a html template string. |
-| `nve project.create [type] [cwd] [start]`                         | Create a new starter project.                                        |
-| `nve project.update [cwd]`                                        | Update a project to the latest versions of Elements packages.        |
-| `nve project.health [type] [cwd]`                                 | Check the health of a project using Elements packages.               |
-| `nve tokens.list [format] [format]`                               | Get available semantic CSS variables / design tokens for theming.    |
+| Command                                                           | Description                                                                                        |
+| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `nve api.list [format]`                                           | Get list of all available Elements (nve-*) APIs and components.                                    |
+| `nve api.search [query] [format]`                                 | Search and retrieve a list of Elements (nve-*) components and APIs using keywords.                 |
+| `nve api.get [name] [format]`                                     | Get the documentation of a known Elements component or API by its name.                            |
+| `nve api.template.validate [template]`                            | Validates HTML templates using Elements APIs and components. Checks for invalid API usage.         |
+| `nve api.changelogs [name]`                                       | Get the changelog details for a specific component or API.                                         |
+| `nve packages.versions.list`                                      | Get latest published versions of all Elements packages.                                            |
+| `nve packages.changelogs.list [format]`                           | Get changelog details for all @nve packages.                                                       |
+| `nve packages.changelogs.search [name] [format]`                  | Search for and retrieve changelog details by package name (supports fuzzy matching).               |
+| `nve examples.list [format]`                                      | Get a summary list of available component/pattern usage examples.                                  |
+| `nve examples.search [query] [format]`                            | Search Elements pattern usage examples by name, element type, or keywords.                         |
+| `nve playground.validate [template]`                              | Validates HTML templates for playground examples. Enforces additional constraints for demos.       |
+| `nve playground.create [template] [type] [name] [author] [start]` | Create a shareable playground URL from an HTML template.                                           |
+| `nve project.create [type] [cwd] [start]`                         | Create a new starter project.                                                                      |
+| `nve project.update [cwd]`                                        | Update a project to the latest versions of Elements packages.                                      |
+| `nve project.validate [type] [cwd]`                               | Validate project setup and check for configuration issues, outdated dependencies.                  |
+| `nve tokens.list [format]`                                        | Get available semantic CSS variables / design tokens for theming.                                  |
 
 ## MCP
 
@@ -99,27 +102,31 @@ Install to Cursor with the MCP configuration below.
 | Prompt | Description | Example Prompt |
 | ------ | ----------- | -------------- |
 | `/about` | A brief introduction to Elements | `/about` |
+| `/doctor` | Verify Elements setup and MCP configuration | `/doctor` |
 | `/playground` | Context for creating playground prototypes | `/playground` Create an example login form |
 | `/search` | Context for searching Elements APIs | `/search` What could I use for notifying user of a long running process? |
-| `/new-project` | Context for creating a new Elements project. | `/new-project` Create a Angular todo app |
+| `/new-project` | Context for creating a new Elements project. | `/new-project` Create an Angular todo app |
 
 ### Tools
 
 | Tool | Description |
 | ---- | ----------- |
-| `api_list [format] [format]` | Get list of all available APIs and components. |
-| `api_search [query] [format]` | Get API information for specific APIs and components. |
-| `api_version` | Get latest versions of elements/@nve packages. |
-| `changelogs_list [format]` | Get changelog details for all @nve packages. |
-| `changelogs_search [name] [format]` | Get changelog details for specific @nve package. |
-| `examples_list [format]` | Get list of available example templates/patterns. |
-| `examples_search [query] [format]` | Search for example templates/patterns by name or description.` |
-| `playground_validate [template]` | Get validated HTML string for an example template/playground. |
-| `playground_create [template] [type] [name] [author] [start]` | Creates a playground url/link generated from a html template string. |
-| `project_create [type] [cwd] [start]` | Create a new starter project. (`angular`, `bundles`, `eleventy`, `extensions`, `go`, `importmaps`, `lit-library`, `lit`, `nextjs`, `nuxt`, `preact`, `react`, `solidjs`, `svelte`, `typescript`, `vue`) |
-| `project_update [cwd]` | Update a project to the latest versions of Elements packages. |
-| `project_health [type] [cwd]` | Check the health of a project using Elements packages. |
-| `tokens_list [format] [format]` | Get available semantic CSS variables / design tokens for theming. |
+| `api_list` | Get list of all available Elements (nve-*) APIs and components. |
+| `api_search` | Search and retrieve a list of Elements (nve-*) components and APIs using keywords. |
+| `api_get` | Get the documentation of a known Elements component or API by its name. |
+| `api_template_validate` | Validates HTML templates using Elements APIs and components (nve-*). |
+| `api_changelogs` | Get the changelog details for a specific component or API. |
+| `packages_versions_list` | Get latest published versions of all Elements packages. |
+| `packages_changelogs_list` | Get changelog details for all @nve packages. |
+| `packages_changelogs_search` | Search for and retrieve changelog details by package name (supports fuzzy matching). |
+| `examples_list` | Get a summary list of available component/pattern usage examples. |
+| `examples_search` | Search Elements pattern usage examples by name, element type, or keywords. |
+| `playground_validate` | Validates HTML templates for playground examples. |
+| `playground_create` | Create a shareable playground URL from an HTML template. |
+| `project_create` | Create a new starter project. |
+| `project_update` | Update a project to the latest versions of Elements packages. |
+| `project_validate` | Validate project setup and check for configuration issues, outdated dependencies. |
+| `tokens_list` | Get available semantic CSS variables / design tokens for theming. |
 
 ## Architecture
 
