@@ -10,7 +10,7 @@ describe('ExampleService', () => {
     expect((ExamplesService.list as ToolMethod<unknown>).metadata.name).toBe('list');
     expect((ExamplesService.list as ToolMethod<unknown>).metadata.command).toBe('list');
     expect((ExamplesService.list as ToolMethod<unknown>).metadata.description).toBe(
-      'Get list of available example templates/patterns.'
+      'Get a summary list of available Elements (nve-*) component/pattern usage examples and code snippets. Use this to browse all available examples.'
     );
     expect((ExamplesService.list as ToolMethod<unknown>).metadata.inputSchema?.properties?.format).toBeDefined();
   });
@@ -21,7 +21,7 @@ describe('ExampleService', () => {
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.name).toBe('search');
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.command).toBe('search');
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.description).toBe(
-      'Search for example templates/patterns by name or description.'
+      'Search Elements (nve-*) pattern usage examples by name, element type, or keywords. Returns up to 5 matching examples with full template code.'
     );
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.query).toBeDefined();
   });
@@ -35,7 +35,7 @@ describe('ExampleService', () => {
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.name).toBe('search');
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.command).toBe('search');
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.description).toBe(
-      'Search for example templates/patterns by name or description.'
+      'Search Elements (nve-*) pattern usage examples by name, element type, or keywords. Returns up to 5 matching examples with full template code.'
     );
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.query).toBeDefined();
   });

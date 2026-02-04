@@ -15,7 +15,6 @@
   ],
   "scripts": {
     "dev": "wireit",
-    "dev:mcp": "pnpm dlx @modelcontextprotocol/inspector@0.18.0 node ./dist/mcp/index.js",
     "ci": "wireit",
     "build": "wireit",
     "lint": "wireit",
@@ -102,7 +101,7 @@
       ]
     },
     "dev": {
-      "command": "nve --version",
+      "command": "pnpm dlx @modelcontextprotocol/inspector@0.19.0 node ./dist/mcp/index.js",
       "dependencies": [
         "build"
       ]

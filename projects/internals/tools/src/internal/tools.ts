@@ -78,9 +78,9 @@ export function tool({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function (originalMethod: ToolMethod<any>, _context: ClassMethodDecoratorContext) {
     const command = originalMethod.name
-      .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+      .replaceAll(/([a-z0-9])([A-Z])/g, '$1.$2')
       .toLowerCase()
-      .replace('get-', '');
+      .replace('get.', '');
 
     const metadata = {
       description,
@@ -209,6 +209,10 @@ export function jsonSchemaToZod(schema: Schema) {
       return enumSchema.default(schema.default);
     }
     return enumSchema;
+  }
+
+  if (schema.type === 'object' && schema.additionalProperties === true) {
+    return z.record(z.string(), z.any()).describe(schema.description);
   }
 
   return z[schema.type as string]().describe(schema.description);

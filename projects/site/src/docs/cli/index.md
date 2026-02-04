@@ -81,43 +81,55 @@ A visual indicator that communicates a status description of an associated compo
     <nve-grid-column>Description</nve-grid-column>
   </nve-grid-header>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve api.list [format] [format]</code></nve-grid-cell>
-    <nve-grid-cell>Get list of all available APIs and components.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve api.list [format]</code></nve-grid-cell>
+    <nve-grid-cell>Get list of all available Elements (nve-*) APIs and components.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve api.search [query] [format]</code></nve-grid-cell>
-    <nve-grid-cell>Get API information for specific APIs and components.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve api.search &lt;query&gt; [format]</code></nve-grid-cell>
+    <nve-grid-cell>Search and retrieve a list of Elements (nve-*) components and APIs using keywords or natural language.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve api.version</code></nve-grid-cell>
-    <nve-grid-cell>Get latest versions of elements/@nve packages.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve api.get &lt;name&gt; [format]</code></nve-grid-cell>
+    <nve-grid-cell>Get the documentation of a known Elements component or API by its name (nve-*).</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve changelogs.list [format]</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve api.template.validate &lt;template&gt;</code></nve-grid-cell>
+    <nve-grid-cell>Validates HTML templates using Elements APIs and components (nve-*). Checks for invalid API usage and UX patterns.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">nve api.changelogs &lt;name&gt;</code></nve-grid-cell>
+    <nve-grid-cell>Get the changelog details for a specific component or API.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">nve packages.versions.list</code></nve-grid-cell>
+    <nve-grid-cell>Get latest published versions of all Elements packages.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">nve packages.changelogs.list [format]</code></nve-grid-cell>
     <nve-grid-cell>Get changelog details for all @nve packages.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve changelogs.search [name] [format]</code></nve-grid-cell>
-    <nve-grid-cell>Get changelog details for specific @nve package.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve packages.changelogs.search &lt;name&gt; [format]</code></nve-grid-cell>
+    <nve-grid-cell>Search for and retrieve changelog details by package name (supports fuzzy matching).</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve examples.list [format]</code></nve-grid-cell>
-    <nve-grid-cell>Get list of available example templates/patterns.</nve-grid-cell>
+    <nve-grid-cell>Get a summary list of available Elements (nve-*) component/pattern usage examples and code snippets.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve examples.search [query] [format]</code></nve-grid-cell>
-    <nve-grid-cell>Search for example templates/patterns by name or description.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve examples.search &lt;query&gt; [format]</code></nve-grid-cell>
+    <nve-grid-cell>Search Elements (nve-*) pattern usage examples by name, element type, or keywords.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve playground.validate [template]</code></nve-grid-cell>
-    <nve-grid-cell>Get validated HTML string for an example template/playground.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve playground.validate &lt;template&gt;</code></nve-grid-cell>
+    <nve-grid-cell>Validates HTML templates for playground examples. Enforces additional constraints to prevent common mistakes when generating standalone demos.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve playground.create [template] [type] [name] [author] [start]</code></nve-grid-cell>
-    <nve-grid-cell>Creates a playground url/link generated from a html template string.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve playground.create &lt;template&gt; [type] [name] [author] [start]</code></nve-grid-cell>
+    <nve-grid-cell>Create a shareable playground URL from an HTML template. Returns URL if valid, or validation errors if invalid.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve project.create [type] [cwd] [start]</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve project.create &lt;type&gt; [cwd] [start]</code></nve-grid-cell>
     <nve-grid-cell>Create a new starter project.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
@@ -125,11 +137,11 @@ A visual indicator that communicates a status description of an associated compo
     <nve-grid-cell>Update a project to the latest versions of Elements packages.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve project.health [type] [cwd]</code></nve-grid-cell>
-    <nve-grid-cell>Check the health of a project using Elements packages.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve project.validate &lt;type&gt; [cwd]</code></nve-grid-cell>
+    <nve-grid-cell>Validate project setup and check for configuration issues, outdated dependencies, or missing required packages.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">nve tokens.list [format] [format]</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">nve tokens.list [format]</code></nve-grid-cell>
     <nve-grid-cell>Get available semantic CSS variables / design tokens for theming.</nve-grid-cell>
   </nve-grid-row>
 </nve-grid>

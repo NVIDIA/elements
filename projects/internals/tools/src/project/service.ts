@@ -67,7 +67,8 @@ export class ProjectService {
   }
 
   @tool({
-    description: 'Check the health of a project using Elements packages.',
+    description:
+      'Validate project setup and check for configuration issues, outdated dependencies, or missing required packages.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -85,7 +86,7 @@ export class ProjectService {
       required: ['type']
     }
   })
-  static async health({ cwd, type }: { cwd: string; type: 'application' | 'library' }): Promise<Report> {
+  static async validate({ cwd, type }: { cwd: string; type: 'application' | 'library' }): Promise<Report> {
     return await getHealthReport(cwd, type);
   }
 }

@@ -135,6 +135,11 @@ Install to Cursor or copy the MCP configuration below.
     <nve-grid-cell><code nve-text="code"><strong>/about</strong></code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">/doctor</code></nve-grid-cell>
+    <nve-grid-cell>Verify Elements setup and MCP configuration</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code"><strong>/doctor</strong></code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">/playground</code></nve-grid-cell>
     <nve-grid-cell>Context for creating playground prototypes</nve-grid-cell>
     <nve-grid-cell><code nve-text="code"><strong>/playground</strong> Create an example login form</code></nve-grid-cell>
@@ -160,43 +165,51 @@ Install to Cursor or copy the MCP configuration below.
   </nve-grid-header>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">api_list</code></nve-grid-cell>
-    <nve-grid-cell>Get list of all available APIs and components.</nve-grid-cell>
+    <nve-grid-cell>Get list of all available Elements (nve-*) APIs and components.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">api_search</code></nve-grid-cell>
-    <nve-grid-cell>Get API information for specific APIs and components.</nve-grid-cell>
+    <nve-grid-cell>Search and retrieve a list of Elements (nve-*) components and APIs using keywords or natural language.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">api_version</code></nve-grid-cell>
-    <nve-grid-cell>Get latest versions of elements/@nve packages.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">api_get</code></nve-grid-cell>
+    <nve-grid-cell>Get the documentation of a known Elements component or API by its name (nve-*).</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">api_search</code></nve-grid-cell>
-    <nve-grid-cell>understand components and their API details before using them</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">api_template_validate</code></nve-grid-cell>
+    <nve-grid-cell>Validates HTML templates using Elements APIs and components (nve-*). Checks for invalid API usage and UX patterns.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">changelogs_list</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">api_changelogs</code></nve-grid-cell>
+    <nve-grid-cell>Get the changelog details for a specific component or API.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">packages_versions_list</code></nve-grid-cell>
+    <nve-grid-cell>Get latest published versions of all Elements packages.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">packages_changelogs_list</code></nve-grid-cell>
     <nve-grid-cell>Get changelog details for all @nve packages.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">changelogs_search</code></nve-grid-cell>
-    <nve-grid-cell>Get changelog details for specific @nve package.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">packages_changelogs_search</code></nve-grid-cell>
+    <nve-grid-cell>Search for and retrieve changelog details by package name (supports fuzzy matching).</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">examples_list</code></nve-grid-cell>
-    <nve-grid-cell>Get list of available example templates/patterns.</nve-grid-cell>
+    <nve-grid-cell>Get a summary list of available Elements (nve-*) component/pattern usage examples and code snippets.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">examples_search</code></nve-grid-cell>
-    <nve-grid-cell>Search for example templates/patterns by name or description.</nve-grid-cell>
+    <nve-grid-cell>Search Elements (nve-*) pattern usage examples by name, element type, or keywords.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">playground_validate</code></nve-grid-cell>
-    <nve-grid-cell>Get validated HTML string for an example template/playground.</nve-grid-cell>
+    <nve-grid-cell>Validates HTML templates for playground examples. Enforces additional constraints to prevent common mistakes when generating standalone demos.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">playground_create</code></nve-grid-cell>
-    <nve-grid-cell>Creates a playground url/link generated from a html template string.</nve-grid-cell>
+    <nve-grid-cell>Create a shareable playground URL from an HTML template. Returns URL if valid, or validation errors if invalid.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">project_create</code></nve-grid-cell>
@@ -207,8 +220,8 @@ Install to Cursor or copy the MCP configuration below.
     <nve-grid-cell>Update a project to the latest versions of Elements packages.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">project_health</code></nve-grid-cell>
-    <nve-grid-cell>Check the health of a project using Elements packages.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">project_validate</code></nve-grid-cell>
+    <nve-grid-cell>Validate project setup and check for configuration issues, outdated dependencies, or missing required packages.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">tokens_list</code></nve-grid-cell>
