@@ -1,7 +1,7 @@
 import { PlaygroundService } from './playground/service.js';
 import { ExamplesService } from './examples/service.js';
 import { ApiService } from './api/service.js';
-import { ChangelogsService } from './changelogs/service.js';
+import { PackagesService } from './packages/service.js';
 import { ProjectService } from './project/service.js';
 import { TokensService } from './tokens/service.js';
 import { loadTools } from './internal/tools.js';
@@ -16,9 +16,11 @@ export {
   jsonSchemaToZod
 } from './internal/tools.js';
 
+export { getNPMClient } from './internal/node.js';
+
 export const tools = [
   ApiService,
-  ChangelogsService,
+  PackagesService,
   ExamplesService,
   PlaygroundService,
   ProjectService,

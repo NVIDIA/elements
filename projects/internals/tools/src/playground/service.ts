@@ -1,8 +1,9 @@
 import { ApiService } from '@internals/metadata';
 import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
 import { createPlaygroundURL, type PlaygroundType, playgroundTypes } from './utils.js';
-import { type Schema, service, tool } from '../internal/tools.js';
+import { service, tool } from '../internal/tools.js';
 import { ELEMENTS_ENV_ICON } from '../internal/utils.js';
+import { eslintSchema } from '../internal/schema.js';
 
 export interface PlaygroundOptions {
   template: string;
@@ -11,52 +12,21 @@ export interface PlaygroundOptions {
   start?: boolean;
 }
 
-const eslintSchema: Schema = {
-  type: 'object',
-  properties: {
-    id: { type: 'string' },
-    severity: { type: 'string' },
-    message: { type: 'string' },
-    line: { type: 'number' },
-    column: { type: 'number' },
-    endLine: { type: 'number' },
-    endColumn: { type: 'number' },
-    fix: { type: 'object' },
-    suggestions: {
-      type: 'array',
-      items: {
-        type: 'object',
-        properties: {
-          desc: { type: 'string' },
-          fix: {
-            type: 'object',
-            properties: {
-              range: { type: 'array', items: { type: 'number' } },
-              text: { type: 'string' }
-            }
-          },
-          messageId: { type: 'string' }
-        }
-      }
-    }
-  },
-  required: ['id', 'severity', 'message', 'line', 'column', 'endLine', 'endColumn'],
-  additionalProperties: false
-};
-
 const defaultTemplate =
   '<nve-page>\n  <nve-page-header slot="header">\n    <nve-logo slot="prefix" size="sm"></nve-logo>\n    <h2 slot="prefix">NVIDIA</h2>\n  </nve-page-header>\n  <main nve-layout="column gap:lg pad:lg">\n    <!-- template content here -->\n  </main>\n</nve-page>';
 
 @service()
 export class PlaygroundService {
   @tool({
-    description: 'Returns a list of potential errors in a playground template.',
+    description:
+      'Validates HTML templates for playground examples. Enforces additional constraints to prevent common mistakes when generating standalone demos. Use this before calling playground_create.',
     inputSchema: {
       type: 'object',
       properties: {
         template: {
           type: 'string',
-          description: 'HTML template/snippet to be validated.'
+          description:
+            'HTML template for a playground example. Should not include <html> or <body> tags. Must use only standard Elements patterns and components.'
         }
       },
       required: ['template']
@@ -84,7 +54,7 @@ export class PlaygroundService {
 
   @tool({
     description:
-      'Creates a playground url/link generated from a html template string. Returns URL only if template passes validation, otherwise returns errors to correct. Use the "playground_validate" tool to check if the template is valid before creating a playground.',
+      'Create a shareable playground URL from an HTML template. Returns URL if valid, or validation errors if invalid. Tip: Use playground_validate first to check for issues.',
     inputSchema: {
       type: 'object',
       properties: {

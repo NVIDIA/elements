@@ -47,8 +47,14 @@ export function getPublicAPIs(
 }
 
 export async function searchPublicAPIs(query: string, config: { limit?: number } = { limit: 100 }) {
-  const data = await ApiService.search(query);
+  const data = (await ApiService.search(query)).map(r => ({ ...r, changelog: undefined }));
   return config.limit !== undefined ? data.slice(0, config.limit) : data;
+}
+
+export async function findPublicAPIChangelog(name: string): Promise<string | undefined> {
+  const data = await ApiService.search(name);
+  const result = data.find(r => r.name === name) as Element | (Attribute & { changelog: string }) | undefined;
+  return result?.changelog ?? undefined;
 }
 
 export interface ElementVersions {

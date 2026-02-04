@@ -1,4 +1,6 @@
 export const stopWords = new Set([
+  'nve',
+  'elements',
   'example',
   'examples',
   'story',

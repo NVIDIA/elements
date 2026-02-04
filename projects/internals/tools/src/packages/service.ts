@@ -2,6 +2,7 @@ import { ProjectsService } from '@internals/metadata';
 import { fuzzyMatch } from '../internal/search.js';
 import { service, tool } from '../internal/tools.js';
 import { markdownDescription } from '../internal/utils.js';
+import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.js';
 
 const MAX_LINE_COUNT = 512;
 const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
@@ -9,7 +10,22 @@ const packageNames = projects.map(p => p.name);
 const changelogs = projects.reduce((acc, p) => ({ ...acc, [p.name]: p.changelog }), {});
 
 @service()
-export class ChangelogsService {
+export class PackagesService {
+  @tool({
+    description: 'Get latest published versions of all Elements packages.',
+    outputSchema: {
+      type: 'object',
+      patternProperties: {
+        '^.*$': { type: 'string' }
+      },
+      additionalProperties: false
+    }
+  })
+  static async versionsList(): Promise<ElementVersions> {
+    const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
+    return await getLatestPublishedVersions(projects);
+  }
+
   @tool({
     description: 'Get changelog details for all @nve packages.',
     inputSchema: {
@@ -38,7 +54,7 @@ export class ChangelogsService {
       additionalProperties: false
     }
   })
-  static async list(
+  static async changelogsList(
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ [key: string]: string } | string> {
     const maxLength = MAX_LINE_COUNT / Object.keys(projects).length;
@@ -49,7 +65,7 @@ export class ChangelogsService {
   }
 
   @tool({
-    description: 'Get changelog details for specific @nve package.',
+    description: 'Search for and retrieve changelog details by package name (supports fuzzy matching).',
     inputSchema: {
       type: 'object',
       properties: {
@@ -81,7 +97,7 @@ export class ChangelogsService {
       additionalProperties: false
     }
   })
-  static async search({
+  static async changelogsSearch({
     name,
     format
   }: {

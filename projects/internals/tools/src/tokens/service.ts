@@ -17,7 +17,6 @@ export class TokensService {
           default: 'markdown'
         }
       },
-      required: ['format'],
       additionalProperties: false
     },
     outputSchema: {
