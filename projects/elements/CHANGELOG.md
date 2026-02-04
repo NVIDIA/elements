@@ -1,3 +1,16 @@
+## [@nvidia-elements/core-v1.57.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.5...@nvidia-elements/core-v1.57.0) (2026-02-04)
+
+
+### Features
+
+* **elements:** add support for invoker commands for expandable and selectable controller types ([56ebb0d](https://github.com/NVIDIA/elements/commit/56ebb0dc2b4a824bbbb3785035ebf90400c01962))
+* **elements:** page commands and animation fix ([ad3e4fb](https://github.com/NVIDIA/elements/commit/ad3e4fbeeee805e6ab7a7f9762086620026c5aef))
+
+
+### Bug Fixes
+
+* **elements:** popover connected before open check ([9f16bda](https://github.com/NVIDIA/elements/commit/9f16bda3aeb9035af87fcb8f111cbf0738ee3822))
+
 ## [@nvidia-elements/core-v1.56.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.4...@nvidia-elements/core-v1.56.5) (2026-02-02)
 
 
