@@ -1,4 +1,4 @@
-import { ESLint } from 'eslint';
+import { ESLint, type Linter } from 'eslint';
 import { elementsHtmlConfig } from '../configs/html.js';
 
 /** @private Internal APIs, not supported for external use */
@@ -22,6 +22,20 @@ export interface TemplateLintMessage {
 }
 
 export async function lintPlaygroundTemplate(code: string): Promise<TemplateLintMessage[]> {
+  // additional restrictions/rules as agents rarely use these advanced APIs correctly for playground generation out of context of an established project
+  // '@nvidia-elements/lint/no-unexpected-style-customization': ['error']
+  const rules: Partial<Linter.RulesRecord> = {
+    '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error', { 'nve-layout': ['@', '|', '&', 'xx'] }],
+    '@nvidia-elements/lint/no-missing-slotted-elements': ['error', { 'nve-card': { required: ['nve-card-content'] } }]
+  };
+  return lintString(code, rules);
+}
+
+export async function lintTemplate(code: string): Promise<TemplateLintMessage[]> {
+  return lintString(code);
+}
+
+async function lintString(code: string, rules: Partial<Linter.RulesRecord> = {}): Promise<TemplateLintMessage[]> {
   const eslint = new ESLint({
     overrideConfigFile: true,
     overrideConfig: {
@@ -29,10 +43,7 @@ export async function lintPlaygroundTemplate(code: string): Promise<TemplateLint
       plugins: elementsHtmlConfig.plugins,
       rules: {
         ...elementsHtmlConfig.rules,
-        // additional restrictions/rules as models rarely use these APIs correctly
-        // '@nvidia-elements/lint/no-unexpected-style-customization': ['error']
-        '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error', { 'nve-layout': ['@', '|', '&', 'xx'] }],
-        '@nvidia-elements/lint/no-missing-slotted-elements': ['error', { 'nve-card': { required: ['nve-card-content'] } }]
+        ...rules
       }
     }
   });
