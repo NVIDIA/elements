@@ -252,11 +252,14 @@ nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
 
 /* Page Panel Styles */
 nve-page-panel[slot='left-aside'] {
-  --max-width: 345px;
-  transition: width 0.25s ease-out;
-
   nve-page-panel-content {
     --padding: var(--nve-ref-size-600) var(--nve-ref-size-400) var(--nve-ref-size-300) var(--nve-ref-size-400);
+  }
+}
+
+nve-page:not(:has(nve-resize-handle:state(active))) {
+  nve-page-panel[slot='left-aside'] {
+    transition: width 0.25s ease-out;
   }
 }
 

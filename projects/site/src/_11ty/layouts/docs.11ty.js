@@ -71,7 +71,7 @@ export async function render(data) {
           ${renderBasePageHeader(data)}
 
           <!-- Left (aside) sidebar, search functionality, and tree navigation -->
-          <nve-page-panel slot="left-aside" id="sidenav-panel">
+          <nve-page-panel slot="left-aside" id="sidenav-panel" style="width: 250px;">
             <nve-page-panel-content>
               <nvd-search id="docs-search" base-url="${BASE_URL}"></nvd-search>
               ${renderDocsNav(data)}
