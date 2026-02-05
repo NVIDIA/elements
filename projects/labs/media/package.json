@@ -179,7 +179,9 @@
         "vite.config.ts",
         "vitest.config.ts"
       ],
-      "output": [],
+      "output": [
+        "coverage/unit/**"
+      ],
       "dependencies": [
         "../../testing:build",
         "../../internals/vite:ci",
