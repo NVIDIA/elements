@@ -52,7 +52,9 @@ slot:not(:has-slotted) {
   min-height: var(--min-height);
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--nve-ref-space-xxs);
 }
 
 [part='_node-header'] {
