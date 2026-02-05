@@ -68,22 +68,6 @@ export class DocsSearch extends LitElement {
     nve-search:has(input:placeholder-shown) nve-icon-button {
       display: none;
     }
-
-    /* .search-excerpt {
-      max-width: 280px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
-    
-    .search-filters mark {
-      background-color: var(--nve-ref-color-yellow-amber-500);
-      color: var(--nve-ref-color-gray-1200);
-      border-radius: 2px;
-      padding: 0 2px;
-    } */
     `
   ];
 
@@ -173,8 +157,12 @@ export class DocsSearch extends LitElement {
   async #loadPagefind() {
     if (!this.#pagefind) {
       const url = `${this.baseUrl}/.pagefind/pagefind.js`;
-      this.#pagefind = await import(/* @vite-ignore */ url);
-      this.#pagefind.init();
+      try {
+        this.#pagefind = await import(/* @vite-ignore */ url);
+        this.#pagefind.init();
+      } catch {
+        // ignore error as pagefind is not available in dev mode
+      }
     }
   }
 

@@ -1,3 +1,6 @@
+import type { ResizeHandle } from '@nvidia-elements/core/resize-handle';
+import type { Tree } from '@nvidia-elements/core/tree';
+import type { DocsSearch } from '../../_internal/search/search.js';
 import '/_internal/canvas/canvas.js';
 
 void import('/_internal/search/search.js');
@@ -16,16 +19,8 @@ systemOptionsPanelBtn.addEventListener('click', async () => {
 });
 
 // resize panels
-const handle = globalThis.document.querySelector<HTMLElement>('nve-resize-handle[slot="left-aside"]')!;
+const handle = globalThis.document.querySelector<ResizeHandle>('nve-resize-handle[slot="left-aside"]')!;
 const panel = globalThis.document.querySelector<HTMLElement>('nve-page-panel[slot="left-aside"]')!;
-const DEFAULT_PANEL_WIDTH = 250;
-const SEARCH_PANEL_WIDTH = 345;
-
-// Set initial panel width from handle's value attribute
-const initialWidth = handle.getAttribute('value');
-if (initialWidth) {
-  panel.style.width = `${initialWidth}px`;
-}
 handle.addEventListener('input', e => (panel.style.width = (e.target as HTMLInputElement).value + 'px'));
 
 // auto-scroll to deep-link headers
@@ -76,9 +71,8 @@ if (savedPosition) {
 
 // search
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const docsSearch = globalThis.document.querySelector<any>('#docs-search')!;
-const docsNav = globalThis.document.querySelector<HTMLElement>('#docs-nav')!;
-const docsNavDisplay = docsNav.style.display;
+const docsSearch = globalThis.document.querySelector<DocsSearch>('#docs-search')!;
+const docsNav = globalThis.document.querySelector<Tree>('#docs-nav')!;
 
 let isSearching = false;
 docsSearch.addEventListener('search-change', (event: CustomEvent) => (isSearching = event.detail.length > 0));
@@ -86,15 +80,17 @@ docsSearch.addEventListener('search-reset', () => ((isSearching = false), toggle
 docsSearch.addEventListener('search-focus', () => toggleSideNav(false));
 docsSearch.addEventListener('search-blur', () => !isSearching && toggleSideNav(true));
 
+let prevWidth = panel.style.width;
 const toggleSideNav = (state: boolean) => {
   if (state) {
     // Showing nav - shrink panel to default width
-    panel.style.width = `${DEFAULT_PANEL_WIDTH}px`;
+    panel.style.width = prevWidth;
   } else {
     // Hiding nav for search - expand panel for search results
-    panel.style.width = `${SEARCH_PANEL_WIDTH}px`;
+    prevWidth = panel.style.width;
+    panel.style.width = `${handle.max}px`;
   }
-  docsNav.style.display = state ? docsNavDisplay : 'none';
+  docsNav.hidden = !state;
 };
 
 const searchParams = new URLSearchParams(globalThis.location.search);
