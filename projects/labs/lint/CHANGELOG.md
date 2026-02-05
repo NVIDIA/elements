@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.8.0...@nvidia-elements/lint-v0.9.0) (2026-02-05)
+
+
+### Features
+
+* **labs-cli:** validate tool support and restructure tool services ([1d207f1](https://github.com/NVIDIA/elements/commit/1d207f17daddf29b6e4ba062fcff74c27642c5de))
+
 ## [@nvidia-elements/lint-v0.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.7.0...@nvidia-elements/lint-v0.8.0) (2026-01-30)
 
 
