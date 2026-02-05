@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.57.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.57.0...@nvidia-elements/core-v1.57.1) (2026-02-05)
+
+
+### Bug Fixes
+
+* **elements:** tree title flex direction ([e8e71bf](https://github.com/NVIDIA/elements/commit/e8e71bfc17400fd2dcf192b272234c4c79d91231))
+
 ## [@nvidia-elements/core-v1.57.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.56.5...@nvidia-elements/core-v1.57.0) (2026-02-04)
 
 
