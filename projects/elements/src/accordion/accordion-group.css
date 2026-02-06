@@ -1,6 +1,7 @@
 :host {
   --padding: var(--nve-ref-size-400) var(--nve-ref-size-500) var(--nve-ref-size-500);
-  width: 100%;
+  width: 100%; /* fallback safari */
+  width: stretch;
 }
 
 [internal-host] {
