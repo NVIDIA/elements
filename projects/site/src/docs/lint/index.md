@@ -118,6 +118,12 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-css-variable</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated --mlv-* CSS theme variables.</nve-grid-cell>
+    <nve-grid-cell>CSS</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-global-attributes</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of deprecated global utility attributes in HTML.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
@@ -149,13 +155,19 @@ export default [
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-tags</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of deprecated elements/tags.</nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated elements in HTML.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-slotted-elements</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of missing slotted elements.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-invalid-invoker-triggers</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of invoker trigger attributes on non-button nve-* elements.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-control-label</code></nve-grid-cell>
+    <nve-grid-cell>Require form controls to have an accessible label.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
@@ -166,20 +178,50 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-global-attribute-value</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of invalid attribute values in HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-slotted-elements</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of missing slotted elements.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-restricted-attributes</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of utility attributes on custom HTML element tags.</nve-grid-cell>
+    <nve-grid-cell>Disallow use of invalid API attributes or utility attributes on custom HTML element tags.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-attribute-value</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of invalid attribute values for nve-* elements.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-css-value</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of invalid CSS values.</nve-grid-cell>
+    <nve-grid-cell>CSS</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-css-variable</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of invalid CSS theme variables.</nve-grid-cell>
+    <nve-grid-cell>CSS</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-global-attribute-value</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of invalid attribute values in HTML.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-input-type</code></nve-grid-cell>
+    <nve-grid-cell>Disallow slotted input elements with a type that does not match the parent Elements component.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-library-dependencies</code></nve-grid-cell>
-    <nve-grid-cell>Disallow incorrect dependency usage of @nve packages in consuming libraries</nve-grid-cell>
+    <nve-grid-cell>Disallow incorrect dependency usage of @nve packages in consuming libraries.</nve-grid-cell>
     <nve-grid-cell>JSON</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
@@ -193,17 +235,17 @@ export default [
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-style-customization</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of style customization in Elements playground template.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">off</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unknown-css-variable</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of unknown --nve-* CSS theme variables.</nve-grid-cell>
+    <nve-grid-cell>CSS</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unknown-tags</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of unknown nve-* tags.</nve-grid-cell>
-    <nve-grid-cell>HTML</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-attribute-value</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of invalid attribute values for nve-* elements.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>

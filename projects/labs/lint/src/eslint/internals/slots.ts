@@ -10,6 +10,15 @@ export function hasSlot(tagName: string, slot: string) {
   }
 }
 
+export function hasDefaultSlot(tagName: string) {
+  const element = elements.find(element => element.name === tagName);
+  return !!element?.manifest?.slots?.find(s => s.name === '');
+}
+
+export function isKnownElement(tagName: string) {
+  return !!elements.find(element => element.name === tagName);
+}
+
 export function getRecommendedSlotName(slot: string, tagName: string) {
   const element = elements.find(element => element.name === tagName);
   const slots = element?.manifest?.slots?.map(s => s.name)?.filter(s => s !== undefined) ?? [];
