@@ -245,6 +245,40 @@ function getSpecUrl(classDeclaration) {
   return '#';
 }
 
+function commandPlugin() {
+  return {
+    name: 'command',
+    analyzePhase({ ts, node, moduleDoc }) {
+      switch (node.kind) {
+        case ts.SyntaxKind.ClassDeclaration:
+          const classDeclaration = moduleDoc.declarations.find(
+            declaration => declaration.name === node.name?.getText()
+          );
+
+          const commands = [];
+          node.jsDoc?.forEach(jsDoc => {
+            jsDoc.tags?.forEach(tag => {
+              if (tag.tagName?.getText() === 'command') {
+                const comment = tag.comment?.trim();
+                if (comment) {
+                  const parts = comment.split(/\s+-\s+/);
+                  const name = parts[0].trim();
+                  const description = parts[1]?.trim() ?? '';
+                  commands.push({ name, description });
+                }
+              }
+            });
+          });
+
+          if (commands.length) {
+            classDeclaration.commands = commands;
+          }
+          break;
+      }
+    }
+  };
+}
+
 function basePathPlugin() {
   return {
     name: 'base',
@@ -877,6 +911,7 @@ export default {
     extensionPlugin(),
     orderPlugin(),
     metadataPlugin(),
+    commandPlugin(),
     rewriteExportedStringLiteralTypeAliasesPlugin(),
     publicPropertiesPlugin(),
     superClassMetadataPlugin(),
