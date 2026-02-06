@@ -53,9 +53,20 @@ nve
 | `nve project.create [type] [cwd] [start]`                         | Create a new starter project.                                                                      |
 | `nve project.update [cwd]`                                        | Update a project to the latest versions of Elements packages.                                      |
 | `nve project.validate [type] [cwd]`                               | Validate project setup and check for configuration issues, outdated dependencies.                  |
+| `nve project.setup.mcp <ide> [cwd]`                               | Configure Elements MCP server for Cursor or Claude Code.                                           |
 | `nve tokens.list [format]`                                        | Get available semantic CSS variables / design tokens for theming.                                  |
 
 ## MCP
+
+### Quick Setup
+
+The fastest way to configure MCP is with the `setup-mcp` command:
+
+```shell
+npx --package=@nvidia-elements/cli -y nve-setup-mcp
+```
+
+This will detect your package manager and prompt you to select an IDE (Cursor, Claude Code, or both), then write the appropriate MCP configuration file.
 
 ### Claude Code
 
@@ -126,16 +137,18 @@ Install to Cursor with the MCP configuration below.
 | `project_create` | Create a new starter project. |
 | `project_update` | Update a project to the latest versions of Elements packages. |
 | `project_validate` | Validate project setup and check for configuration issues, outdated dependencies. |
+| `project_setup_mcp` | Configure Elements MCP server for Cursor or Claude Code. |
 | `tokens_list` | Get available semantic CSS variables / design tokens for theming. |
 
 ## Architecture
 
-### Dual Entry Points
+### Entry Points
 
-The package has two main entry points:
+The package has three entry points:
 
 - **`./dist/index.js`** (`nve` command) - Interactive CLI using Yargs with Inquirer for prompts
 - **`./dist/mcp/index.js`** (`nve-mcp` command) - MCP server using @modelcontextprotocol/sdk
+- **`./dist/setup-mcp/index.js`** (`nve-setup-mcp` command) - Quick setup wrapper that spawns `nve project.setup.mcp`
 
 ### Tool System
 
