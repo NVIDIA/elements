@@ -36,6 +36,9 @@ describe('noUnexpectedSlotValue', () => {
     expect(noUnexpectedSlotValue.meta.messages['unexpected-slot-value']).toBe(
       'Unexpected slot "{{slotName}}" on "{{tagName}}" for element "{{parentTagName}}"'
     );
+    expect(noUnexpectedSlotValue.meta.messages['no-default-slot']).toBe(
+      'Element <{{tagName}}> does not have a default slot. Remove the child content or use a named slot if available.'
+    );
   });
 
   it('should allow valid use of slot values', () => {
@@ -110,6 +113,88 @@ describe('noUnexpectedSlotValue', () => {
           ]
         }
       ]
+    });
+  });
+
+  it('should report text content in elements without a default slot', () => {
+    tester.run('text content without default slot', rule, {
+      valid: [],
+      invalid: [
+        {
+          code: '<nve-sort-button>Node ID</nve-sort-button>',
+          errors: [{ messageId: 'no-default-slot', data: { tagName: 'nve-sort-button' } }]
+        }
+      ]
+    });
+  });
+
+  it('should report unslotted child elements in elements without a default slot', () => {
+    tester.run('unslotted child elements without default slot', rule, {
+      valid: [],
+      invalid: [
+        {
+          code: '<nve-sort-button><span>Node ID</span></nve-sort-button>',
+          errors: [{ messageId: 'no-default-slot', data: { tagName: 'nve-sort-button' } }]
+        }
+      ]
+    });
+  });
+
+  it('should allow content in elements with a default slot', () => {
+    tester.run('content in elements with default slot', rule, {
+      valid: [
+        '<nve-card>Content</nve-card>',
+        '<nve-card><div>Content</div></nve-card>',
+        '<nve-badge>Badge Text</nve-badge>'
+      ],
+      invalid: []
+    });
+  });
+
+  it('should allow empty elements without a default slot', () => {
+    tester.run('empty elements without default slot', rule, {
+      valid: ['<nve-sort-button></nve-sort-button>'],
+      invalid: []
+    });
+  });
+
+  it('should allow whitespace-only content in elements without a default slot', () => {
+    tester.run('whitespace-only content without default slot', rule, {
+      valid: ['<nve-sort-button>   </nve-sort-button>', '<nve-sort-button>\n</nve-sort-button>'],
+      invalid: []
+    });
+  });
+
+  it('should skip elements with template syntax', () => {
+    tester.run('template syntax in elements without default slot', rule, {
+      valid: [
+        '<nve-sort-button>${label}</nve-sort-button>',
+        '<nve-sort-button>{{label}}</nve-sort-button>',
+        '<nve-sort-button>{% label %}</nve-sort-button>'
+      ],
+      invalid: []
+    });
+  });
+
+  it('should ignore non-nve elements', () => {
+    tester.run('non-nve elements', rule, {
+      valid: [
+        '<custom-button>Content</custom-button>',
+        '<div>Content</div>',
+        '<my-element><span>Text</span></my-element>'
+      ],
+      invalid: []
+    });
+  });
+
+  it('should not report no-default-slot for children assigned to named slots', () => {
+    tester.run('named slots on children', rule, {
+      valid: [
+        // nve-badge has named slots (prefix-icon, suffix-icon) and a default slot
+        // children with slot attributes go to their named slot, not the default slot
+        '<nve-badge><nve-icon slot="prefix-icon"></nve-icon></nve-badge>'
+      ],
+      invalid: []
     });
   });
 });
