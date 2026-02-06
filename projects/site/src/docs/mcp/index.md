@@ -15,6 +15,14 @@
 
 {% install-artifactory %}
 
+## Quick Setup
+
+The fastest way to configure the Elements MCP is with the setup command. This will detect your package manager and prompt you to select an IDE (Cursor, Claude Code, or both).
+
+```shell
+npx --package=@nvidia-elements/cli -y nve-setup-mcp
+```
+
 ## Claude Code
 
 Install to Claude Code by adding the configuration to your `.mcp.json` file.
@@ -222,6 +230,10 @@ Install to Cursor or copy the MCP configuration below.
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">project_validate</code></nve-grid-cell>
     <nve-grid-cell>Validate project setup and check for configuration issues, outdated dependencies, or missing required packages.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">project_setup_mcp</code></nve-grid-cell>
+    <nve-grid-cell>Configure Elements MCP server for Cursor or Claude Code.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">tokens_list</code></nve-grid-cell>
