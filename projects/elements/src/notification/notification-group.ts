@@ -9,7 +9,7 @@ import styles from './notification-group.css?inline';
  * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status.
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/notification
- * @slot default slot for `nve-notification`
+ * @slot - default slot for `nve-notification`
  * @cssprop --box-shadow
  * @cssprop --animation-duration - Duration of notification group open/close animations
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
