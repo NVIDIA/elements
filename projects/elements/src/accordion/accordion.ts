@@ -25,8 +25,9 @@ import accordionGroupStyleSheet from './accordion-group.css?inline';
  * @description Provides the clickable heading region of an accordion that toggles the visibility of associated content.
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
- * @slot prefix
- * @slot suffix
+ * @slot - default content slot
+ * @slot prefix - slot for prefix content
+ * @slot suffix - slot for suffix content
  * @slot title - (deprecated)
  * @slot subtitle - (deprecated)
  * @slot actions - (deprecated)
