@@ -16,7 +16,6 @@ const nextSort = {
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/sort-button
  * @event sort - Dispatched when the sort button is clicked, returns the current sort value and the next sort value.
- * @slot - default slot for content
  * @cssprop --width
  * @cssprop --height
  * @cssprop --border-radius

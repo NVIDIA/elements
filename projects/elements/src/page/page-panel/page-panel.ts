@@ -22,9 +22,9 @@ import globalStyles from './page-panel.global.css?inline';
  * @event close
  * @slot - default content slot
  * @slot actions - slot for action / dismiss buttons
- * @command --open
- * @command --close
- * @command --toggle
+ * @command --open - use to open the panel
+ * @command --close - use to close the panel
+ * @command --toggle - use to toggle the panel
  * @cssprop --background
  * @cssprop --border
  * @cssprop --color

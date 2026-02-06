@@ -19,9 +19,6 @@ function template(theme: '' | 'dark' = '') {
     import '@nvidia-elements/core/resize-handle/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
-
-  <nve-resize-handle>
-    <input type="range" />
-  </nve-resize-handle>
+  <nve-resize-handle></nve-resize-handle>
   `;
 }

@@ -24,6 +24,12 @@ export class Checkbox extends Control {
 
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
+  /** @private - disable for inline control */
+  fitText;
+
+  /** @private - disable for inline control */
+  fitContent;
+
   static readonly metadata = {
     tag: 'nve-checkbox',
     version: '0.0.0',
