@@ -24,7 +24,7 @@ import styles from './toast.css?inline';
  * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
  * @event open - Dispatched when the toast is opened.
  * @event close - Dispatched when the toast is closed.
- * @slot default content slot
+ * @slot - default content slot
  * @slot prefix - custom status icon slot
  * @cssprop --padding
  * @cssprop --justify-content

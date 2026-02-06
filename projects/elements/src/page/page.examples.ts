@@ -440,7 +440,7 @@ export const SlotFooter = {
 };
 
 /**
- * @summary Use Page Panel with Invoker Command API to dynamically open and close page panels.
+ * @summary Use Page Panel with Invoker Command API to dynamically open and close page panels. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API)
  */
 export const InvokerCommand = {
   render: () => html`

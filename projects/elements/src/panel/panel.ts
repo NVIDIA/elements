@@ -19,6 +19,7 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
  * @description Displays the title, subtitle, and optional action controls at the top of a panel.
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/panel
+ * @slot - default content slot
  * @slot title - Title Text
  * @slot subtitle - Subtitle Text
  * @slot action-icon - Extra Action Button
