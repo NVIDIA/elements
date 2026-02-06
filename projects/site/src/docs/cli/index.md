@@ -141,6 +141,10 @@ A visual indicator that communicates a status description of an associated compo
     <nve-grid-cell>Validate project setup and check for configuration issues, outdated dependencies, or missing required packages.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">nve project.setup.mcp &lt;ide&gt; [cwd]</code></nve-grid-cell>
+    <nve-grid-cell>Configure Elements MCP server for Cursor or Claude Code.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve tokens.list [format]</code></nve-grid-cell>
     <nve-grid-cell>Get available semantic CSS variables / design tokens for theming.</nve-grid-cell>
   </nve-grid-row>
