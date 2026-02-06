@@ -19,6 +19,7 @@
   justify-content: start;
   overflow: hidden;
   contain: none;
+  width: stretch;
 }
 
 [internal-host] {
