@@ -23,7 +23,7 @@ import styles from './notification.css?inline';
  * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
  * @event open - Dispatched when the notification is opened.
  * @event close - Dispatched when the notification is closed.
- * @slot default content slot
+ * @slot - default content slot
  * @slot icon - content slot for the status icon
  * @cssprop --border-radius
  * @cssprop --background

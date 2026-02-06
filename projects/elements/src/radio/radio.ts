@@ -22,6 +22,12 @@ import styles from './radio.css?inline';
 export class Radio extends Control {
   @hostAttr({ attribute: 'nve-control' }) protected nveControl = 'inline';
 
+  /** @private - disable for inline control */
+  fitText;
+
+  /** @private - disable for inline control */
+  fitContent;
+
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 
   static readonly metadata = {

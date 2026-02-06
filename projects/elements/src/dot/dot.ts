@@ -9,7 +9,7 @@ import styles from './dot.css?inline';
  * @description A visual indicator that communicates a status or notification of an associated component.
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/dot
- * @slot - default content
+ * @slot - default text content no more than 2 characters in length
  * @cssprop --gap
  * @cssprop --font-size
  * @cssprop --font-weight
