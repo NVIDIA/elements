@@ -23,6 +23,7 @@
     ]
   },
   "scripts": {
+    "postinstall": "node postinstall.mjs || exit 0",
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
@@ -43,6 +44,7 @@
     "README.md",
     "CHANGELOG.md",
     "package.json",
+    "postinstall.mjs",
     "dist/**/*"
   ],
   "sideEffects": [
