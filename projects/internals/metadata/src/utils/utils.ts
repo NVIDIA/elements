@@ -146,7 +146,15 @@ ${attribute.example ? `\`\`\`html\n${attribute.example.trim()}\n\`\`\`` : 'No ex
 | name | type | value  |
 | ---- | ---- | ------ |
 | \`${attribute.name}\` | \`string\` |${attribute.values
-    .filter(v => !v.name.includes('|') && !v.name.includes('@') && !v.name.includes('&'))
+    .filter(
+      v =>
+        !v.name.includes('|') &&
+        !v.name.includes('@') &&
+        !v.name.includes('&') &&
+        !v.name.includes('xx') &&
+        !v.name.includes('-y:') &&
+        !v.name.includes(':none')
+    )
     .map(value => '`' + value.name + '`')
     .join(', ')} |`.trim();
 }
