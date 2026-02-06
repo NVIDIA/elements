@@ -1,7 +1,29 @@
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
-import { getRecommendedSlotName, hasSlot } from '../internals/slots.js';
-import { isNVElement } from '../internals/utils.js';
+import { getRecommendedSlotName, hasDefaultSlot, isKnownElement, hasSlot } from '../internals/slots.js';
+import { hasTemplateSyntax, isNVElement } from '../internals/utils.js';
+
+/**
+ * Check if a node has child content that would be projected into the default slot.
+ * This includes non-whitespace text nodes and element nodes without a slot attribute.
+ */
+function hasUnslottedContent(node): boolean {
+  if (!node.children || !Array.isArray(node.children)) {
+    return false;
+  }
+
+  return node.children.some(child => {
+    if (child.type === 'Text' && child.value?.trim()) {
+      return true;
+    }
+
+    if (child.type === 'Tag' && !findAttr(child, 'slot')) {
+      return true;
+    }
+
+    return false;
+  });
+}
 
 const rule = {
   meta: {
@@ -17,15 +39,19 @@ const rule = {
     messages: {
       ['unexpected-slot-value']: 'Unexpected slot "{{slotName}}" on "{{tagName}}" for element "{{parentTagName}}"',
       ['suggest-replace-slot-value']: 'Replace "{{slotName}}" with "{{alternative}}"',
-      ['suggest-remove-slot-value']: 'Remove "{{slotName}}"'
+      ['suggest-remove-slot-value']: 'Remove "{{slotName}}"',
+      ['no-default-slot']:
+        'Element <{{tagName}}> does not have a default slot. Remove the child content or use a named slot if available.'
     }
   },
   create(context) {
     return createVisitors(context, {
       Tag(node) {
+        const tagName = node.name;
+
+        // Check for invalid slot attribute values on children of nve-* elements
         const slotAttr = findAttr(node, 'slot');
         const slotName = slotAttr?.value?.value ?? '';
-        const tagName = node.name;
         const parentTagName = node.parent?.name;
 
         if (slotAttr && isNVElement(parentTagName) && !hasSlot(parentTagName, slotName)) {
@@ -69,6 +95,17 @@ const rule = {
             messageId: 'unexpected-slot-value',
             suggest
           });
+        }
+
+        // Check for unslotted child content on nve-* elements without a default slot
+        if (isNVElement(tagName) && isKnownElement(tagName) && !hasDefaultSlot(tagName)) {
+          if (!hasTemplateSyntax(node) && hasUnslottedContent(node)) {
+            context.report({
+              node,
+              data: { tagName },
+              messageId: 'no-default-slot'
+            });
+          }
         }
       }
     });
