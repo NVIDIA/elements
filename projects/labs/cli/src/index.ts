@@ -6,8 +6,12 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { tools, type Schema } from '@nve-internals/tools';
 import { banner, colors, getArgValue, renderResult, runAsyncTool } from './utils.js';
+import { checkForUpdates, notifyIfUpdateAvailable } from './update.js';
 
 export const VERSION = '0.0.0';
+
+// Check for updates in the background (non-blocking)
+const updateCheck = checkForUpdates(VERSION);
 
 process.on('SIGINT', () => process.exit(0));
 
@@ -32,6 +36,7 @@ yargsInstance.command(
   async () => {
     const greeting = colors.complete(`\x1b[?7l\n${JSON.parse(banner)}\n\n`);
     console.log(`${greeting}${colors.complete('@nvidia-elements/cli version ' + VERSION)}\n${await yargsInstance.getHelp()}`);
+    await notifyIfUpdateAvailable(VERSION, updateCheck);
   }
 );
 
@@ -68,6 +73,7 @@ tools.forEach(tool => {
 
       if (status === 'complete') {
         await renderResult(result);
+        await notifyIfUpdateAvailable(VERSION, updateCheck);
         process.exit(0);
       } else {
         console.log(colors.error(message ?? 'unknown error'));
