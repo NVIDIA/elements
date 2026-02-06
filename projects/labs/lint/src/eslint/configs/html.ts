@@ -15,6 +15,8 @@ import noMissingPopoverTrigger from '../rules/no-missing-popover-trigger.js';
 import noUnexpectedSlotValue from '../rules/no-unexpected-slot-value.js';
 import noUnknownTags from '../rules/no-unknown-tags.js';
 import noUnexpectedAttributeValue from '../rules/no-unexpected-attribute-value.js';
+import noUnexpectedInputType from '../rules/no-unexpected-input-type.js';
+import noInvalidInvokerTriggers from '../rules/no-invalid-invoker-triggers.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
 
@@ -57,7 +59,9 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-unexpected-style-customization': noUnexpectedStyleCustomization,
         'no-unexpected-slot-value': noUnexpectedSlotValue,
         'no-unknown-tags': noUnknownTags,
-        'no-unexpected-attribute-value': noUnexpectedAttributeValue
+        'no-unexpected-attribute-value': noUnexpectedAttributeValue,
+        'no-unexpected-input-type': noUnexpectedInputType,
+        'no-invalid-invoker-triggers': noInvalidInvokerTriggers
       }
     }
   },
@@ -76,6 +80,8 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error'],
     '@nvidia-elements/lint/no-unexpected-slot-value': ['error'],
     '@nvidia-elements/lint/no-unknown-tags': ['error'],
-    '@nvidia-elements/lint/no-unexpected-attribute-value': ['error']
+    '@nvidia-elements/lint/no-unexpected-attribute-value': ['error'],
+    '@nvidia-elements/lint/no-unexpected-input-type': ['error'],
+    '@nvidia-elements/lint/no-invalid-invoker-triggers': ['error']
   }
 };
