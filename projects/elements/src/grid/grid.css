@@ -12,9 +12,10 @@
   --scroll-width: 0;
   --grid-template-column: initial;
   --grid-auto-flow: column;
-  width: 100%;
   display: grid;
   contain: none;
+  width: 100%; /* fallback safari */
+  width: stretch;
 }
 
 [internal-host] {
