@@ -25,10 +25,9 @@ import styles from './column.css?inline';
  */
 export class GridColumn extends LitElement {
   /**
-   * Columns can individually have set widths using the `width` property or attribute and a valid CSS value type.
+   * Only set a fixed px width when the grid width is known. Most cases this should remain unset.
    * If the total width of all columns is less than the grid width then the last column will fill the remaining space.
-   * By default columns are evenly devided unless width is explicitly provided. Content within a cell of a given
-   * column will wrap content to fit the width of the column.
+   * By default column widths are evenly divided unless width is explicitly provided.
    */
   @property({ type: String, reflect: true }) width: string;
 

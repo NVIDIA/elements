@@ -21,7 +21,7 @@ import styles from './drawer.css?inline';
  * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
  * @event open - Dispatched when the drawer is opened.
  * @event close - Dispatched when the drawer is closed.
- * @slot default content slot
+ * @slot - default content slot
  * @cssprop --border
  * @cssprop --background
  * @cssprop --color

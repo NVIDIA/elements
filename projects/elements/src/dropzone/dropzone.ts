@@ -13,6 +13,7 @@ import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './d
  * @since 1.29.0
  * @entrypoint \@nvidia-elements/core/dropzone
  * @event change emits when the value has changed (files located in event.target)
+ * @slot - use only when custom messaging is needed
  * @cssprop --background
  * @cssprop --border-color
  * @cssprop --border-radius
