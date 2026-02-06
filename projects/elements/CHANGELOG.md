@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.57.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.57.2...@nvidia-elements/core-v1.57.3) (2026-02-06)
+
+
+### Bug Fixes
+
+* **elements:** add postinstall script ([2b064c0](https://github.com/NVIDIA/elements/commit/2b064c062e7edd167cc63199397499420cc25178))
+
 ## [@nvidia-elements/core-v1.57.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.57.1...@nvidia-elements/core-v1.57.2) (2026-02-06)
 
 
