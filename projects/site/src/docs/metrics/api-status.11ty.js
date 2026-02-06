@@ -68,7 +68,6 @@ export function render() {
         .map(
           ([name, column]) => /* html */ `<nve-grid-column
         id="${name}"
-        popovertarget="tooltip-${name}"
         width="${column.width ? column.width : '160px'}">
         ${name
           .replace(/([A-Z]+)/g, ' $1')
