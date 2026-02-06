@@ -11,7 +11,9 @@ describe('PlaygroundService', () => {
     });
     expect(Array.isArray(result)).toBe(true);
     expect(result.length).toBe(1);
-    expect(result[0].message).toBe('Unexpected use of restricted attribute nve-layout on custom HTML element.');
+    expect(result[0].message).toBe(
+      'Unexpected use of restricted attribute "nve-layout" on <nve-button>. Remove the attribute.'
+    );
     expect(result[0].line).toBe(1);
     expect(result[0].column).toBe(13);
     expect(result[0].endLine).toBe(1);
@@ -67,7 +69,7 @@ describe('PlaygroundService', () => {
       expect(Array.isArray(result)).toBe(true);
       expect((result as unknown[]).length).toBeGreaterThan(0);
       expect((result as { message: string }[])[0].message).toBe(
-        'Unexpected use of restricted attribute nve-layout on custom HTML element.'
+        'Unexpected use of restricted attribute "nve-layout" on <nve-button>. Remove the attribute.'
       );
     });
 

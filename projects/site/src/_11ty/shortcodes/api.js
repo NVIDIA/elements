@@ -6,6 +6,7 @@ import { siteData } from '../../index.11tydata.js';
 const { elements } = siteData;
 
 const typeAliasMap = {
+  command: 'commands',
   description: 'description',
   event: 'events',
   property: 'members',

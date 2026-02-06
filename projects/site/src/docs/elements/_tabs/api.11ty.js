@@ -67,6 +67,11 @@ function renderAllAPIs(element) {
 </div>
 
 <div nve-layout="column gap:md">
+  <h3 nve-text="heading lg mkd">Invoker Commands</h3>
+  ${renderAPITable(element, 'command', { container: '' })}
+</div>
+
+<div nve-layout="column gap:md">
   <h3 nve-text="heading lg mkd">CSS Properties</h3>
   ${renderAPITable(element, 'css-property', { container: '' })}
 </div>
