@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.9.0...@nvidia-elements/lint-v0.10.0) (2026-02-06)
+
+
+### Features
+
+* **labs-lint:** new rules for default slots, input types and invokers ([5524bb0](https://github.com/NVIDIA/elements/commit/5524bb0ee35333cf16185ff66e2fe2e305ccf693))
+
 ## [@nvidia-elements/lint-v0.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.8.0...@nvidia-elements/lint-v0.9.0) (2026-02-05)
 
 
