@@ -8,6 +8,7 @@ import styles from './skeleton.css?inline';
  * @description A loading placeholder component that displays animated placeholder shapes while content loads.
  * @since 1.44.0
  * @entrypoint \@nvidia-elements/core/skeleton
+ * @slot - default content slot
  * @cssprop --background
  * @cssprop --border-radius
  * @cssprop --min-height
