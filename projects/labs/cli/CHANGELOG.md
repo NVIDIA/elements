@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.5.0...@nvidia-elements/cli-v0.6.0) (2026-02-06)
+
+
+### Features
+
+* **labs-cli:** update check ([6263e56](https://github.com/NVIDIA/elements/commit/6263e560bfb88b66be71580aedf4cd1af4d19a1e))
+
 ## [@nvidia-elements/cli-v0.5.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.4.0...@nvidia-elements/cli-v0.5.0) (2026-02-05)
 
 
