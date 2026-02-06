@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.57.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.57.1...@nvidia-elements/core-v1.57.2) (2026-02-06)
+
+
+### Bug Fixes
+
+* **elements:** improved block element behavior ([33c050b](https://github.com/NVIDIA/elements/commit/33c050bf0a929b712f50bf6f84d6ca4ecc3a730b))
+* **elements:** slot api documentation ([a929024](https://github.com/NVIDIA/elements/commit/a929024501476cd08515fdc5aff6c49ca4c357d7))
+
 ## [@nvidia-elements/core-v1.57.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.57.0...@nvidia-elements/core-v1.57.1) (2026-02-05)
 
 
