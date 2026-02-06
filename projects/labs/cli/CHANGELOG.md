@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.6.0...@nvidia-elements/cli-v0.7.0) (2026-02-06)
+
+
+### Features
+
+* **labs-cli:** add setup tool ([c91511f](https://github.com/NVIDIA/elements/commit/c91511f5a133dc5033167c2e52d437b28514ad8d))
+
 ## [@nvidia-elements/cli-v0.6.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.5.0...@nvidia-elements/cli-v0.6.0) (2026-02-06)
 
 
