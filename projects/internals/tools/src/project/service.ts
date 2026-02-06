@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { tool, service } from '../internal/tools.js';
 import type { Report } from '../internal/types.js';
 import { getHealthReport } from './health.js';
+import { setupMcpConfig, type IDE } from './setup-mcp.js';
 import { createStarter, startStarter, startersData, type Starter } from './starters.js';
 import { updateProject } from './update.js';
 
@@ -88,5 +89,28 @@ export class ProjectService {
   })
   static async validate({ cwd, type }: { cwd: string; type: 'application' | 'library' }): Promise<Report> {
     return await getHealthReport(cwd, type);
+  }
+
+  @tool({
+    description: 'Configure Elements MCP server for Cursor or Claude Code.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        ide: {
+          type: 'string',
+          description: 'The IDE to configure MCP for.',
+          enum: ['cursor', 'claude-code', 'both'],
+          default: 'both'
+        },
+        cwd: {
+          type: 'string',
+          description: 'Provide the current working directory.',
+          default: cwd()
+        }
+      }
+    }
+  })
+  static async setupMcp({ ide, cwd }: { ide: IDE; cwd: string }): Promise<Report> {
+    return await setupMcpConfig(resolve(cwd), ide);
   }
 }
