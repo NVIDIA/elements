@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.7.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.7.0...@nvidia-elements/code-v0.7.1) (2026-02-06)
+
+
+### Bug Fixes
+
+* **labs-code:** missing slot documentation ([07bc095](https://github.com/NVIDIA/elements/commit/07bc0954e238d68046aac86c3d51162d84ce8f61))
+
 ## [@nvidia-elements/code-v0.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.6.0...@nvidia-elements/code-v0.7.0) (2025-11-26)
 
 
