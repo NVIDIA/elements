@@ -40,6 +40,7 @@ export const Datalist = {
 
 /**
  * @summary Week pickers with vertical layout demonstrating validation states including disabled, success, and error.
+ * @tags test-case
  */
 export const Vertical = {
   render: () => html`
@@ -72,6 +73,7 @@ export const Vertical = {
 
 /**
  * @summary Week pickers with horizontal layout showing validation states for inline forms and compact layouts.
+ * @tags test-case
  */
 export const Horizontal = {
   render: () => html`

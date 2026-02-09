@@ -112,9 +112,6 @@ const playgroundCreateContext = `
 
 Best practices and guidelines for creating an Elements Playground.
 
-- Use \`api_list\` and  to lookup available APIs before using \`api_search\`.
-- Use \`examples_list\` to lookup available examples before using \`examples_search\`.
-
 ### Tools to use
 - \`api_list\`: lookup available APIs before implementation
 - \`api_search\`: understand components and their API details before using them
@@ -122,8 +119,8 @@ Best practices and guidelines for creating an Elements Playground.
 - \`examples_list\`: lookup available examples before implementation
 - \`examples_search\`: search for specific examples/patterns
 - \`tokens_list\`: lookup design tokens for any custom CSS
+- \`playground_create\`: to create the playground. Will return a URL if no template validation errors are found
 - \`playground_validate\`: validate the template before creating the playground
-- \`playground_create\`: create the playground, only include content that is within the body element
 
 ## Authoring Guidelines
 

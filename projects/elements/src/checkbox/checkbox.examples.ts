@@ -137,6 +137,7 @@ export const VerticalGroup = {
 
 /**
  * @summary Checkbox group with vertical inline layout for compact vertical stacking with inline label positioning.
+ * @tags test-case
  */
 export const VerticalInlineGroup = {
   render: () => html`
@@ -222,6 +223,7 @@ export const VerticalInlineGroup = {
 
 /**
  * @summary Checkbox group with horizontal layout for related options arranged in a row, ideal for limited choices.
+ * @tags test-case
  */
 export const HorizontalGroup = {
   render: () => html`
@@ -307,6 +309,7 @@ export const HorizontalGroup = {
 
 /**
  * @summary Checkbox group with horizontal inline layout for space-efficient horizontal arrangement with inline labels.
+ * @tags test-case
  */
 export const HorizontalInlineGroup = {
   render: () => html`
@@ -392,6 +395,7 @@ export const HorizontalInlineGroup = {
 
 /**
  * @summary Checkbox with indeterminate state for representing partial selection or mixed values in hierarchical lists.
+ * @tags test-case
  */
 export const Indeterminate = {
   render: () => html`

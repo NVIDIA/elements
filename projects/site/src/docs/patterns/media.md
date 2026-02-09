@@ -25,6 +25,10 @@ Media patterns for video playback, sensor visualization, and robot monitoring in
 
 {% example '@nve-internals/patterns/media.examples.json' 'VolumeControl' %}
 
+## Zoom Control
+
+{% example '@nve-internals/patterns/media.examples.json' 'ZoomControl' %}
+
 ## Time Scrubber Control
 
 {% example '@nve-internals/patterns/media.examples.json' 'TimeScrubberControl' %}

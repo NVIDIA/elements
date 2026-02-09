@@ -707,6 +707,7 @@ export const HorizontalInline = () => {
 
 /**
  * @summary Demonstrates form controls that automatically adjust their width to fit content, optimizing space usage for dynamic or variable-length inputs.
+ * @tags test-case
  */
 export const FitText = {
   render: () => html`

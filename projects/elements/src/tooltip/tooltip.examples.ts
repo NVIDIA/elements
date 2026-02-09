@@ -35,6 +35,7 @@ export const Default = {
 
 /**
  * @summary Tooltip using anchor attribute to reference the trigger element. Use when you need to explicitly connect tooltips to their triggers by ID for better control over relationships.
+ * @tags test-case
  */
 export const Visual = {
   render: () => html`
@@ -45,6 +46,7 @@ export const Visual = {
 
 /**
  * @summary Tooltip positioning options for optimal placement relative to trigger elements. Use different positions based on available screen space and content layout to ensure tooltips remain visible and don't obscure important content.
+ * @tags test-case
  */
 export const Position = {
   render: () => html`
@@ -58,6 +60,7 @@ export const Position = {
 
 /**
  * @summary Fine-grained tooltip alignment combined with positioning for precise placement control. Use to align tooltips to specific edges of trigger elements, improving visual hierarchy and reducing overlap with other UI elements.
+ * @tags test-case
  */
 export const Alignment = {
   render: () => html`
@@ -162,6 +165,7 @@ export const Status = {
 
 /**
  * @summary Tooltip with constrained width for controlled text wrapping. Use when tooltip content is longer than a single line, but prefer keeping tooltips brief for better scannability and user experience.
+ * @tags test-case
  */
 export const Wrap = {
   render: () => html`

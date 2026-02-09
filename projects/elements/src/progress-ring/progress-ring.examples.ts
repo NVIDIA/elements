@@ -20,6 +20,7 @@ export const Default = {
 
 /**
  * @summary Progress rings displaying various completion percentages from indeterminate to 0%, 33%, 66%, and 100%.
+ * @tags test-case
  */
 export const Values = {
   render: () => html`
@@ -38,6 +39,7 @@ export const Values = {
 
 /**
  * @summary Progress rings with custom maximum values demonstrating proportional progress within a defined scale.
+ * @tags test-case
  */
 export const Max = {
   render: () => html`
@@ -49,7 +51,7 @@ export const Max = {
       <nve-progress-ring status="accent" max="20" value="15"></nve-progress-ring>
     </div>
 `};
-    
+
 /**
  * @summary Progress rings with warning and danger status colors for indicating critical or cautionary states.
  */
@@ -65,9 +67,10 @@ export const Status = {
       <nve-progress-ring status="danger"></nve-progress-ring>
     </div>
 `};
-    
+
 /**
  * @summary Progress rings at zero completion showing success, warning, and danger states for status indication.
+ * @tags test-case
  */
 export const ZeroValueStatus = {
   render: () => html`
@@ -79,7 +82,7 @@ export const ZeroValueStatus = {
       <nve-progress-ring status="danger" value="0"></nve-progress-ring>
     </div>
 `};
-    
+
 /**
  * @summary Progress rings paired with descriptive text labels for communicating loading states and outcomes.
  */
@@ -107,9 +110,10 @@ export const WithText = {
       </div>
     </div>
 `};
-    
+
 /**
  * @summary Progress ring with custom status icon slotted in the center for enhanced visual communication.
+ * @tags test-case
  */
 export const SlottedIcon = {
   render: () => html`
@@ -119,9 +123,10 @@ export const SlottedIcon = {
       </nve-progress-ring>
     </div>
 `};
-    
+
 /**
  * @summary Progress rings in multiple sizes from extra-extra-small to extra-large for different UI contexts.
+ * @tags test-case
  */
 export const Sizing = {
   render: () => html`
@@ -142,7 +147,7 @@ export const Sizing = {
       <nve-progress-ring status="danger" size="lg"></nve-progress-ring>
     </div>
 `};
-    
+
 /**
  * @summary Progress rings integrated within buttons to show loading states during actions and operations.
  */
