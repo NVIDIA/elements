@@ -52,6 +52,46 @@ export const Default = {
 };
 
 /**
+ * @summary Demonstrates available slots for nve-page and standard usage of nve-page-panel and nve-page-header.
+ */
+export const Slots = {
+  render: () => html`
+<nve-page>
+  <nve-page-header slot="header">
+    <h2 slot="prefix">header</h2>
+  </nve-page-header>
+  <nve-page-panel slot="subheader">
+    <nve-page-panel-content>subheader</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="left-aside">
+    <nve-page-panel-content>left-aside</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="left" size="sm">
+    <nve-page-panel-content>left</nve-page-panel-content>
+  </nve-page-panel>
+  <main>
+    <p nve-text="body">main content</p>
+  </main>
+  <nve-page-panel slot="bottom" size="sm">
+    <nve-page-panel-content>bottom</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="right" size="sm">
+    <nve-page-panel-content>right</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="right-aside">
+    <nve-page-panel-content>right-aside</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="subfooter">
+    <nve-page-panel-content>subfooter</nve-page-panel-content>
+  </nve-page-panel>
+  <nve-page-panel slot="footer">
+    <nve-page-panel-content>footer</nve-page-panel-content>
+  </nve-page-panel>
+</nve-page>
+  `
+};
+
+/**
  * @summary Demonstrates all slot areas and debug backgrounds for nve-page.
  * @tags test-case
  */
@@ -127,6 +167,7 @@ export const Content = {
 
 /**
  * @summary Shows a warning banner in the header slot above the page header.
+ * @tags test-case
  */
 export const SlotBanner = {
   render: () => html`
@@ -154,6 +195,7 @@ export const SlotBanner = {
 
 /**
  * @summary Demonstrates the subheader slot with a toolbar below the header.
+ * @tags test-case
  */
 export const SlotSubheader = {
   render: () => html`
@@ -234,6 +276,7 @@ export const SlotSubheaderLarge = {
 
 /**
  * @summary Demonstrates the left slot with a page panel for side navigation or content.
+ * @tags test-case
  */
 export const SlotLeft = {
   render: () => html`
@@ -258,6 +301,7 @@ export const SlotLeft = {
 
 /**
  * @summary Demonstrates the right slot with a page panel for side content.
+ * @tags test-case
  */
 export const SlotRight = {
   render: () => html`
@@ -284,6 +328,7 @@ export const SlotRight = {
 
 /**
  * @summary Shows the bottom slot with a page panel for footer or additional content.
+ * @tags test-case
  */
 export const SlotBottom = {
   render: () => html`
@@ -310,6 +355,7 @@ export const SlotBottom = {
 
 /**
  * @summary Demonstrates the left-aside slot with a vertical toolbar for navigation.
+ * @tags test-case
  */
 export const SlotLeftAside = {
   render: () => html`
@@ -340,6 +386,7 @@ export const SlotLeftAside = {
 
 /**
  * @summary Demonstrates the right-aside slot with a vertical toolbar for actions or navigation.
+ * @tags test-case
  */
 export const SlotRightAside = {
   render: () => html`
@@ -370,6 +417,7 @@ export const SlotRightAside = {
 
 /**
  * @summary Shows the subfooter slot with a toolbar for status or metadata.
+ * @tags test-case
  */
 export const SlotSubfooter = {
   render: () => html`
@@ -405,6 +453,7 @@ export const SlotSubfooter = {
 
 /**
  * @summary Demonstrates the footer slot with a toolbar for links or actions.
+ * @tags test-case
  */
 export const SlotFooter = {
   render: () => html`

@@ -38,22 +38,6 @@
 
 {% example '@nvidia-elements/core/toolbar/toolbar.examples.json' 'ContainerFull' '{ "inline": false, "height": "200px" }' %}
 
-## Filter
-
-{% example '@nvidia-elements/core/toolbar/toolbar.examples.json' 'Filter' '{ "inline": false, "height": "350px" }' %}
-
-## Scroll
-
-{% api 'nve-toolbar', 'property', 'content' %}
-
-{% example '@nvidia-elements/core/toolbar/toolbar.examples.json' 'Scroll' '{ "inline": false, "height": "350px" }' %}
-
-## Wrap
-
-{% api 'nve-toolbar', 'property', 'content' %}
-
-{% example '@nvidia-elements/core/toolbar/toolbar.examples.json' 'Wrap' '{ "inline": false, "height": "350px" }' %}
-
 ## Status
 
 {% api 'nve-toolbar', 'property', 'status' %}

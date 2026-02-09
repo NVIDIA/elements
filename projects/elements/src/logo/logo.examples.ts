@@ -17,6 +17,7 @@ export const Default = {
 
 /**
  * @summary Logo size variants (sm, md, lg) for different contexts. Use smaller sizes for dense layouts like toolbars, larger sizes for prominent brand placement.
+ * @tags test-case
  */
 export const Size = {
   render: () => html`
@@ -35,6 +36,7 @@ export const Size = {
 
 /**
  * @summary Custom icons slotted into the logo container. Ideal for product icons, team badges, or custom brand marks within the standard logo shape.
+ * @tags test-case
  */
 export const SlottedIcons = {
   render: () => html`
@@ -96,6 +98,7 @@ export const Color = {
 
 /**
  * @summary Logo colors optimized for light theme backgrounds. Ensures proper contrast and visibility when used in light mode interfaces.
+ * @tags test-case
  */
 export const LightTheme = {
   render: () => html`
@@ -129,6 +132,7 @@ export const LightTheme = {
 
 /**
  * @summary Logo colors optimized for dark theme backgrounds. Ensures proper contrast and visibility when used in dark mode interfaces.
+ * @tags test-case
  */
 export const DarkTheme = {
   render: () => html`

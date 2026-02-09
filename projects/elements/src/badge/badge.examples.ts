@@ -18,6 +18,7 @@ export const Default = {
 
 /**
  * @summary Badges with predefined status colors for different states. Ideal for showing job status, task progress, or system states.
+ * @tags test-case
  */
 export const Status = {
   render: () => html`
@@ -39,6 +40,7 @@ export const Status = {
 
 /**
  * @summary Flat container badges with status colors for a more subtle appearance. Perfect for dense layouts or when you want less visual weight.
+ * @tags test-case
  */
 export const StatusFlat = {
   render: () => html`
@@ -139,7 +141,7 @@ export const StatusDarkTheme = {
 
 /**
  * @summary Trend badges for displaying data changes and metrics. Perfect for dashboards, analytics, or financial data showing positive, negative, or neutral trends.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const Trend = {
   render: () => html`
@@ -153,6 +155,7 @@ export const Trend = {
 
 /**
  * @summary Badges with color variants for categorization and theming. Use for organizing content by color-coded categories.
+ * @tags test-case
  */
 export const Color = {
   render: () => html`

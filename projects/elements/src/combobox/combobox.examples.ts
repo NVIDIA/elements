@@ -39,6 +39,7 @@ export const Default = () => {
 
 /**
  * @summary Vertical layout showing different combobox states (normal, disabled, success, error) stacked for comparison.
+ * @tags test-case
  */
 export const Vertical = () => {
   return html`

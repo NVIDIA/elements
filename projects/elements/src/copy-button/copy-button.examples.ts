@@ -20,6 +20,7 @@ export const Default = {
 
 /**
  * @summary Copy button in disabled state. Useful for showing when copying is not available or when the user doesn't have permission to copy.
+ * @tags test-case
  */
 export const Disabled = {
   render: () => html`
@@ -29,6 +30,7 @@ export const Disabled = {
 
 /**
  * @summary Copy buttons with flat container styling, showing both enabled and disabled states. Ideal for inline usage where minimal visual impact is desired.
+ * @tags test-case
  */
 export const Flat = {
   render: () => html`
@@ -48,6 +50,7 @@ export const BehaviorCopy = {
 
 /**
  * @summary Copy buttons in different sizes (small, default, large). Useful for adapting to different UI contexts and design requirements.
+ * @tags test-case
  */
 export const Size = {
   render: () => html`

@@ -62,6 +62,7 @@ export const CustomStatus = {
 
 /**
  * @summary Visual example of notification structure with centered positioning. Demonstrates the standard notification layout with title and body content for consistent implementation patterns.
+ * @tags test-case
  */
 export const Visual = {
   render: () => html`
@@ -74,6 +75,7 @@ export const Visual = {
 
 /**
  * @summary Notification with text wrapping for longer content. Use when notification messages exceed single-line length, but keep content concise for better readability and user comprehension.
+ * @tags test-case
  */
 export const ContentWrap = {
   render: () => html`
@@ -86,6 +88,7 @@ export const ContentWrap = {
 
 /**
  * @summary Demonstrates event handling for notification events. Useful for adding custom behavior when notification state changes.
+ * @tags test-case
  */
 export const Events = {
   render: () => html`
@@ -162,6 +165,7 @@ export const Status = {
 
 /**
  * @summary Notification positioning and alignment options for flexible screen placement. Use consistent positioning for notification types: bottom-right for success confirmations, top-center for warnings, accommodating different screen sizes and user attention patterns.
+ * @tags test-case
  */
 export const Alignment = {
   render: () => html`
@@ -221,6 +225,7 @@ export const Alignment = {
 
 /**
  * @summary Basic notification positioning at screen edges without alignment specification. Use edge positions for standard notification placement, choosing position based on content importance and user workflow patterns.
+ * @tags test-case
  */
 export const Position = {
   render: () => html`
@@ -245,6 +250,7 @@ export const Position = {
 
 /**
  * @summary Grouped notifications with consistent positioning for stacking multiple messages. Use notification groups to manage multiple alerts in an organized queue, maintaining visual consistency and providing users with a clear notification center.
+ * @tags test-case
  */
 export const PositionGroup = {
   render: () => html`
@@ -312,6 +318,7 @@ export const PositionGroup = {
 
 /**
  * @summary Notification center pattern using drawer for persistent notification management. Perfect for applications with frequent notifications, allowing users to review, manage, and act on multiple notifications in a dedicated space with bulk actions.
+ * @tags test-case
  */
 export const Drawer = {
   render: () => html`

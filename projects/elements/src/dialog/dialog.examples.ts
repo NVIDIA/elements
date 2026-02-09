@@ -32,6 +32,7 @@ export const Default = {
 
 /**
  * @summary Dialog with event listeners for state change tracking. Use dialog events (beforetoggle, toggle, open, close) to trigger side effects like loading data on open, cleaning up resources on close, or preventing closure based on validation state.
+ * @tags test-case
  */
 export const Events = {
   inline: false,
@@ -72,6 +73,7 @@ export const Visual = {
 
 /**
  * @summary Dialog with primary and secondary actions in footer. Use cancel + emphasized action pattern for confirmations or decisions where you need to present a choice, with emphasis on the primary action guiding users toward the preferred or expected path.
+ * @tags test-case
  */
 export const Content = {
   inline: false,
@@ -91,6 +93,7 @@ export const Content = {
 
 /**
  * @summary Small dialog size for brief confirmations or single-field inputs. Use size="sm" for simple yes/no confirmations, quick edits, or minimal interactions that don't require significant screen space, keeping the interface uncluttered.
+ * @tags test-case
  */
 export const Small = {
   render: () => html`
@@ -103,6 +106,7 @@ export const Small = {
 
 /**
  * @summary Medium dialog size (default) for standard forms and content. Use size="md" for typical dialogs containing short forms (3-5 fields), moderate content, or standard user interactions that need balanced space without overwhelming the interface.
+ * @tags test-case
  */
 export const Medium = {
   render: () => html`
@@ -115,6 +119,7 @@ export const Medium = {
 
 /**
  * @summary Large dialog size for complex forms or extensive content. Use size="lg" for multi-section forms, detailed settings panels, or content-rich interactions where users need more space to work comfortably, but consider using a drawer for very large content areas.
+ * @tags test-case
  */
 export const Large = {
   render: () => html`
@@ -145,6 +150,7 @@ export const TextWrap = {
 
 /**
  * @summary Non-closable dialog requiring explicit action through buttons. Use non-closable dialogs sparingly for critical decisions (like irreversible deletions) or required acknowledgments where you must ensure users make a conscious choice rather than accidentally dismissing the dialog.
+ * @tags test-case
  */
 export const NonClosable = {
   render: () => html`
@@ -161,6 +167,7 @@ export const NonClosable = {
 
 /**
  * @summary Dialog positioning and alignment options for contextual placement. While center positioning is standard, use edge positioning (top/bottom/left/right) for contextually relevant dialogs that relate to specific interface regions or when working with limited vertical space.
+ * @tags test-case
  */
 export const Alignment = {
   inline: false,
@@ -293,6 +300,7 @@ export const ShadowRoot = {
 
 /**
  * @summary Dialog with scrollable content while keeping header and footer fixed. Use scrollable content areas for dialogs with variable or lengthy content (like terms of service or detailed descriptions) while keeping action buttons always visible, ensuring users can complete the task without scrolling to find buttons.
+ * @tags test-case
  */
 export const ScrollContent = {
   render: () => html`

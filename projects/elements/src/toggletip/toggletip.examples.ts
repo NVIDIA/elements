@@ -31,6 +31,7 @@ export const Default = {
 
 /**
  * @summary Visual example using anchor attribute for explicit trigger-target relationship. Demonstrates standard toggletip structure for consistent implementation across your application.
+ * @tags test-case
  */
 export const Visual = {
   render: () => html`
@@ -76,6 +77,7 @@ export const ContentWithFooter = {
 
 /**
  * @summary Toggletip with header for titled content sections. Use when toggletip information benefits from a clear title or heading to establish context, improving content scannability and understanding.
+ * @tags test-case
  */
 export const ContentWithHeader = {
   render: () => html`
@@ -109,6 +111,7 @@ export const Events = {
 
 /**
  * @summary Closable toggletip with explicit close button for user control. Use when content is complex enough that users may want to dismiss it independently of clicking outside, providing clear exit paths for longer-form content.
+ * @tags test-case
  */
 export const Closable = {
   render: () => html`
@@ -123,6 +126,7 @@ export const Closable = {
 
 /**
  * @summary Toggletip with alert header for error states or critical messaging. Perfect for displaying error details with recovery actions, combining status communication with actionable next steps in a compact format.
+ * @tags test-case
  */
 export const AlertGroup = {
   inline: false,
@@ -144,6 +148,7 @@ export const AlertGroup = {
 
 /**
  * @summary Toggletip positioning options relative to trigger element. Choose position based on available screen space and content type, ensuring toggletips remain visible and don't extend beyond viewport boundaries.
+ * @tags test-case
  */
 export const Position = {
   render: () => html`
@@ -157,6 +162,7 @@ export const Position = {
 
 /**
  * @summary Precise toggletip alignment combined with positioning for optimal placement control. Use alignment to fine-tune toggletip placement relative to trigger edges, improving visual flow and reducing content overlap in dense layouts.
+ * @tags test-case
  */
 export const Alignment = {
   render: () => html`
@@ -202,6 +208,7 @@ export const CrossShadowRootAnchorPosition = {
 /**
  * @summary Legacy behavior-trigger pattern for automatic toggletip lifecycle management. Deprecated approach with manual trigger attributes, prefer modern popovertarget API for simpler and more maintainable toggletip implementation.
  * @tags test-case
+ * @deprecated
  */
 export const LegacyBehaviorTrigger = {
   render: () => html`

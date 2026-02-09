@@ -31,6 +31,7 @@ export const Status = {
 
 /**
  * @summary Pulse size variants from extra-small to large. Choose sizes based on context—smaller for inline indicators, larger for prominent status displays.
+ * @tags test-case
  */
 export const Size = {
   render: () => html`
