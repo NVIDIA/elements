@@ -45,6 +45,7 @@ export const Datalist = {
 
 /**
  * @summary Date pickers with vertical layout demonstrating validation states including disabled, success, and error.
+ * @tags test-case
  */
 export const Vertical = {
   render: () => html`
@@ -77,6 +78,7 @@ export const Vertical = {
 
 /**
  * @summary Date pickers with horizontal layout showing validation states for inline forms and compact layouts.
+ * @tags test-case
  */
 export const Horizontal = {
   render: () => html`
@@ -177,6 +179,7 @@ export const Types = {
 
 /**
  * @summary Date picker with fit-text styling that adjusts width to match the selected date value for compact displays.
+ * @tags test-case
  */
 export const FitText = {
   render: () => html`

@@ -24,7 +24,7 @@ export const StandardHeaderMainPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -66,7 +66,7 @@ export const TabsHeaderMainPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -115,7 +115,7 @@ export const StackedMetadataHeaderMainPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -181,7 +181,7 @@ export const InlineMetadataHeaderMainPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -251,7 +251,7 @@ export const InlineKitchenSinkHeaderMainPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -325,13 +325,13 @@ export const InlineKitchenSinkHeaderMainPage = {
 
 /**
  * @summary Feature-rich main page subheader with back navigation, stacked metadata row, and tabbed navigation. Alternative to inline layout for data-heavy contexts.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const StackedKitchenSinkHeaderMainPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -407,7 +407,7 @@ export const StandardHeaderDetailPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -453,7 +453,7 @@ export const TabsHeaderDetailPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -506,7 +506,7 @@ export const StackedMetadataHeaderDetailPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -575,7 +575,7 @@ export const InlineMetadataHeaderDetailPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -642,13 +642,13 @@ export const InlineMetadataHeaderDetailPage = {
 
 /**
  * @summary Comprehensive detail page subheader with inline metadata, divider, and tabs. Maximum feature density for complex entity views.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const InlineKitchenSinkHeaderDetailPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -722,13 +722,13 @@ export const InlineKitchenSinkHeaderDetailPage = {
 
 /**
  * @summary Comprehensive detail page subheader with stacked metadata row and tabs. Better vertical organization when metadata items are numerous.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const StackedKitchenSinkHeaderDetailPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -804,7 +804,7 @@ export const StandardHeaderViewerPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
@@ -860,7 +860,7 @@ export const StandardHeaderToolbarPage = {
   render: () => html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>

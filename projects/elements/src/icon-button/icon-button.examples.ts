@@ -29,6 +29,7 @@ export const Interactions = {
 
 /**
  * @summary Icon buttons in different sizes (small, medium, large) for varying contexts and visual hierarchy.
+ * @tags test-case
  */
 export const Size = {
   render: () => html`
@@ -40,6 +41,7 @@ export const Size = {
 
 /**
  * @summary Flat container icon buttons with interaction styles for minimal visual weight in dense toolbars.
+ * @tags test-case
  */
 export const FlatInteractions = {
   render: () => html`
@@ -62,6 +64,7 @@ export const Pressed = {
 
 /**
  * @summary Flat icon buttons with pressed state for low-emphasis toggles and compact toggle controls.
+ * @tags test-case
  */
 export const PressedFlat = {
   render: () => html`
@@ -72,6 +75,7 @@ export const PressedFlat = {
 
 /**
  * @summary Inline icon buttons with pressed state for minimal toggle controls within text or content flows.
+ * @tags test-case
  */
 export const PressedInline = {
   render: () => html`
@@ -93,6 +97,7 @@ export const Selected = {
 
 /**
  * @summary Flat icon buttons with selected state for low-emphasis mode selection in compact toolbars.
+ * @tags test-case
  */
 export const SelectedFlat = {
   render: () => html`
@@ -104,6 +109,7 @@ export const SelectedFlat = {
 
 /**
  * @summary Inline icon buttons with selected state for minimal mode selection within content flows.
+ * @tags test-case
  */
 export const SelectedInline = {
   render: () => html`
@@ -115,6 +121,7 @@ export const SelectedInline = {
 
 /**
  * @summary Icon buttons with custom content like text initials, emojis, or symbols for personalized actions.
+ * @tags test-case
  */
 export const CustomIcon = {
   render: () => html`
@@ -131,16 +138,9 @@ export const CustomIcon = {
  */
 export const Link = {
   render: () => html`
-    <!-- do -->
-    <nve-icon-button icon-name="menu">
-      <a href="#" aria-label="link to page"></a>
-    </nve-icon-button>
-
-    <!-- don't -->
-    <a href="#" aria-label="link to page">
-      <nve-icon-button container="flat" icon-name="menu"></nve-icon-button>
-    </a>
-  `
+<nve-icon-button icon-name="menu">
+  <a href="#" aria-label="link to page"></a>
+</nve-icon-button>`
 }
 
 /**

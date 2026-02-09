@@ -11,12 +11,12 @@ export default {
  */
 export const Default = {
   render: () => html`
-  <nve-sort-button></nve-sort-button>
-  `
+<nve-sort-button></nve-sort-button>`
 };
 
 /**
  * @summary Sort button states (unsorted, ascending, descending) displayed on light theme background.
+ * @tags test-case
  */
 export const LightTheme = {
   render: () => html`
@@ -30,6 +30,7 @@ export const LightTheme = {
 
 /**
  * @summary Sort button states (unsorted, ascending, descending) displayed on dark theme background.
+ * @tags test-case
  */
 export const DarkTheme = {
   render: () => html`

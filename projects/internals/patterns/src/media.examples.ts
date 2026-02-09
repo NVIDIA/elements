@@ -87,6 +87,22 @@ export const VolumeControl = {
 };
 
 /**
+ * @summary Zoom level control for video and canvas content.
+ * @tags pattern
+ */
+export const ZoomControl = {
+  render: () => html`
+<div aria-label="zoom level controls" role="group" nve-layout="row gap:xs align:vertical-center">
+  <nve-icon-button aria-label="zoom out" icon-name="zoom-out" size="sm" container="flat"></nve-icon-button>
+  <nve-range>
+    <input aria-label="zoom level" type="range" min="0" max="200" value="100" />
+  </nve-range>
+  <nve-icon-button aria-label="zoom in" icon-name="zoom-in" size="sm" container="flat"></nve-icon-button>
+</div>
+  `
+};
+
+/**
  * @summary Time scrubber control for audio and video playback.
  * @tags pattern
  */
@@ -211,7 +227,7 @@ export const PageLayoutVideo = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
     <h2 slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
