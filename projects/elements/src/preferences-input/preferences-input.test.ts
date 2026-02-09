@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@internals/testing';
 import { PreferencesInput } from '@nvidia-elements/core/preferences-input';
 import '@nvidia-elements/core/preferences-input/define.js';
 import { type Control } from '@nvidia-elements/core/forms';

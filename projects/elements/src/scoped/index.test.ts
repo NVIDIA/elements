@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable } from '@internals/testing';
 import { define } from '@nvidia-elements/core/internal';
 import { scope } from './index.js';
 

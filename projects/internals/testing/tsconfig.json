@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "module": "es2022",
+    "allowJs": true,
+    "target": "es2022",
+    "lib": ["es2022", "dom", "dom.iterable"],
+    "typeRoots": ["./node_modules/@types"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/",
+    "baseUrl": "./",
+    "rootDir": "./",
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "isolatedModules": true,
+    "paths": {
+      "@internals/testing/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*.ts"]
+}

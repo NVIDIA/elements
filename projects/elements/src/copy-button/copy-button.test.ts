@@ -1,6 +1,12 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, emulateMouseEnter, emulateMouseLeave } from '@nvidia-elements/testing';
+import {
+  createFixture,
+  elementIsStable,
+  removeFixture,
+  emulateMouseEnter,
+  emulateMouseLeave
+} from '@internals/testing';
 import { CopyButton } from '@nvidia-elements/core/copy-button';
 import { Toast } from '@nvidia-elements/core/toast';
 import { Tooltip } from '@nvidia-elements/core/tooltip';

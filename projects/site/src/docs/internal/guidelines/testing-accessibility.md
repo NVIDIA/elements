@@ -11,7 +11,7 @@ Accessibility compliance tests using axe-core.
 
 **Key Patterns:**
 
-- Use `runAxe` from `@nvidia-elements/testing/axe`
+- Use `runAxe` from `@internals/testing/axe`
 - Expect zero violations: `expect(results.violations.length).toBe(0)`
 
 **Example:**
@@ -19,8 +19,8 @@ Accessibility compliance tests using axe-core.
 ```typescript
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { runAxe } from '@nvidia-elements/testing/axe';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
+import { runAxe } from '@internals/testing/axe';
 import { Badge } from '@nvidia-elements/core/badge';
 import '@nvidia-elements/core/badge/define.js';
 

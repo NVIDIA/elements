@@ -61,7 +61,7 @@
   "devDependencies": {
     "@eslint/js": "catalog:",
     "@nvidia-elements/styles": "workspace:*",
-    "@nvidia-elements/testing": "workspace:*",
+    "@internals/testing": "workspace:*",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",

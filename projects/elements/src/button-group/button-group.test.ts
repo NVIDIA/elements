@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, emulateClick, removeFixture } from '@internals/testing';
 import { ButtonGroup } from '@nvidia-elements/core/button-group';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Divider } from '@nvidia-elements/core/divider';
