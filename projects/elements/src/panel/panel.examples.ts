@@ -70,6 +70,7 @@ export const Default = {
 
 /**
  * @summary Left-positioned collapsible panel for sidebar navigation and content details.
+ * @tags test-case
  */
 export const LeftSidePanel = {
   render: () => html`
@@ -121,6 +122,7 @@ export const LeftSidePanel = {
 
 /**
  * @summary Right-positioned collapsible panel for supplementary content and property inspectors.
+ * @tags test-case
  */
 export const RightSidePanel = {
   render: () => html`
@@ -172,6 +174,7 @@ export const RightSidePanel = {
 
 /**
  * @summary Closable panel with external toggle button for programmatic show/hide control.
+ * @tags test-case
  */
 export const ClosablePanel = {
   render: () => html`
@@ -233,6 +236,7 @@ export const ClosablePanel = {
 
 /**
  * @summary Collapsible panel with built-in close button and external toggle for flexible expand/collapse behavior.
+ * @tags test-case
  */
 export const PanelWithTrigger = {
   render: () => html`
@@ -295,6 +299,7 @@ export const PanelWithTrigger = {
 
 /**
  * @summary Panel with complete header including title, subtitle, and action icon slots for rich header content.
+ * @tags test-case
  */
 export const PanelWithFullHeader = {
   render: () => html`
@@ -353,6 +358,7 @@ export const PanelWithFullHeader = {
 
 /**
  * @summary Panel with footer containing action buttons for form submissions and destructive actions.
+ * @tags test-case
  */
 export const PanelWithFooter = {
   render: () => html`

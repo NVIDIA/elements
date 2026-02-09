@@ -120,6 +120,7 @@ export const VerticalGroup = {
 
 /**
  * @summary Radio groups with vertical inline layout for compact vertical stacking with inline label positioning.
+ * @tags test-case
  */
 export const VerticalInlineGroup = {
   render: () => html`
@@ -205,6 +206,7 @@ export const VerticalInlineGroup = {
 
 /**
  * @summary Radio groups with horizontal layout for options arranged in a row, ideal for limited choices.
+ * @tags test-case
  */
 export const HorizontalGroup = {
   render: () => html`
@@ -290,6 +292,7 @@ export const HorizontalGroup = {
 
 /**
  * @summary Radio groups with horizontal inline layout for space-efficient horizontal arrangement with inline labels.
+ * @tags test-case
  */
 export const HorizontalInlineGroup = {
   render: () => html`

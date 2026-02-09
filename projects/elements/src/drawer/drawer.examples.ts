@@ -33,6 +33,7 @@ export const Default = {
 
 /**
  * @summary Visual example of drawer structure with all available sections. Demonstrates the complete drawer layout pattern with header, scrollable content, and footer for consistent drawer implementations.
+ * @tags test-case
  */
 export const Visual = {
   render: () => html`
@@ -52,6 +53,7 @@ export const Visual = {
 
 /**
  * @summary Drawer with scrollable content demonstrating overflow behavior. Use when drawer content exceeds viewport height, ensuring header and footer remain fixed while content scrolls independently.
+ * @tags test-case
  */
 export const Scroll = {
   render: () => html`
@@ -71,6 +73,7 @@ export const Scroll = {
 
 /**
  * @summary Demonstrates event handling for drawer events. Useful for adding custom behavior when drawer state changes.
+ * @tags test-case
  */
 export const Events = {
   render: () => html`
@@ -95,6 +98,7 @@ export const Events = {
 
 /**
  * @summary Small drawer size for compact side panels and quick actions. Ideal for navigation menus, filters, or supplementary information that shouldn't dominate the screen.
+ * @tags test-case
  */
 export const Small = {
   render: () => html`
@@ -114,6 +118,7 @@ export const Small = {
 
 /**
  * @summary Large drawer size for comprehensive content like detailed forms or settings panels. Use when users need significant screen space for complex tasks without leaving the current page context.
+ * @tags test-case
  */
 export const Large = {
   render: () => html`
@@ -133,6 +138,7 @@ export const Large = {
 
 /**
  * @summary Non-closable drawer requiring explicit user action to close. Use for critical workflows or multi-step processes where users must complete or explicitly cancel actions, preventing accidental dismissal.
+ * @tags test-case
  */
 export const NonClosable = {
   render: () => html`
@@ -160,6 +166,7 @@ export const NonClosable = {
 
 /**
  * @summary Drawer positioning from all four screen edges. Use position based on content type and user workflow: right for details/settings, left for navigation, top/bottom for notifications or quick actions that span the width.
+ * @tags test-case
  */
 export const Position = {
   inline: false,
@@ -298,6 +305,7 @@ export const LegacyPosition = {
 
 /**
  * @summary Inline drawer constrained within a parent container rather than full viewport. Perfect for detail panels within cards or sections, maintaining context without overlaying the entire application.
+ * @tags test-case
  */
 export const Inline = {
   render: () => html`
@@ -328,6 +336,7 @@ export const Inline = {
 
 /**
  * @summary Inline drawer in persistent open state for always-visible side panels. Use for navigation, filters, or contextual information that should remain accessible while users interact with main content.
+ * @tags test-case
  */
 export const InlineVisible = {
   render: () => html`

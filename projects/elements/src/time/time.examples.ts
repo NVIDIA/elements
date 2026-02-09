@@ -39,6 +39,7 @@ export const Datalist = {
 
 /**
  * @summary Vertical field layout showcasing default, disabled, success, and error states
+ * @tags test-case
  */
 export const Vertical = {
   render: () => html`
@@ -71,6 +72,7 @@ export const Vertical = {
 
 /**
  * @summary Horizontal field layout with label beside input, showing default, disabled, success, and error states
+ * @tags test-case
  */
 export const Horizontal = {
   render: () => html`
