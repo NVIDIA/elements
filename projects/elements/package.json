@@ -912,7 +912,6 @@
   },
   "dependencies": {
     "@nvidia-elements/forms": "workspace:^",
-    "composed-offset-position": "^0.0.4",
     "lit": "catalog:",
     "lit-html": "catalog:"
   },
