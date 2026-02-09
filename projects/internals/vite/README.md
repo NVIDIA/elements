@@ -52,7 +52,7 @@ export default mergeConfig(libraryTestConfig, {
 // dot.test.ts
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Dot } from '@nvidia-elements/core/dot';
 import '@nvidia-elements/core/dot/define.js';
 
@@ -104,8 +104,8 @@ export default mergeConfig(libraryAxeTestConfig, {
 // dot.test.axe.ts
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { runAxe } from '@nvidia-elements/testing/axe';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
+import { runAxe } from '@internals/testing/axe';
 import { Dot } from '@nvidia-elements/core/dot';
 import '@nvidia-elements/core/dot/define.js';
 

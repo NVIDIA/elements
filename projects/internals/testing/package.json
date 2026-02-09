@@ -1,0 +1,90 @@
+{
+  "name": "@internals/testing",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Testing utilities for Elements web components, providing DOM fixtures, event simulation, and accessibility testing with axe-core. Includes specialized helpers for Lit components and custom element lifecycle management.",
+  "type": "module",
+  "scripts": {
+    "ci": "wireit",
+    "lint": "wireit",
+    "lint:fix": "wireit",
+    "build": "wireit"
+  },
+  "peerDependencies": {
+    "lit": "catalog:"
+  },
+  "devDependencies": {
+    "@eslint/js": "catalog:",
+    "@internals/eslint": "workspace:*",
+    "@internals/vite": "workspace:*",
+    "axe-core": "catalog:",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  },
+  "optionalDependencies": {
+    "axe-core": "catalog:"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./index.js": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./axe": {
+      "types": "./dist/axe/index.d.ts",
+      "default": "./dist/axe/index.js"
+    },
+    "./axe/index.js": {
+      "types": "./dist/axe/index.d.ts",
+      "default": "./dist/axe/index.js"
+    }
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "lint",
+        "build"
+      ]
+    },
+    "build": {
+      "clean": false,
+      "command": "vite build",
+      "files": [
+        "src/**",
+        "tsconfig.json",
+        "tsconfig.lib.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist"
+      ],
+      "dependencies": [
+        "../vite:ci"
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../eslint:ci"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../eslint:ci",
+        "../../labs/lint:build"
+      ]
+    }
+  },
+  "customElements": "dist/custom-elements.json"
+}

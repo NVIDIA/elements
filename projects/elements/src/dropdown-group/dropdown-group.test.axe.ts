@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { runAxe } from '@nvidia-elements/testing/axe';
+import { createFixture, removeFixture, elementIsStable } from '@internals/testing';
+import { runAxe } from '@internals/testing/axe';
 import { DropdownGroup } from '@nvidia-elements/core/dropdown-group';
 import '@nvidia-elements/core/dropdown-group/define.js';
 import '@nvidia-elements/core/dropdown/define.js';

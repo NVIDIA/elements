@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
-import { elementIsStable, createFixture, removeFixture, emulateClick } from '@nvidia-elements/testing';
+import { elementIsStable, createFixture, removeFixture, emulateClick } from '@internals/testing';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { keyNavigationList } from '@nvidia-elements/core/internal';
 

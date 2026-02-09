@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Breadcrumb } from '@nvidia-elements/core/breadcrumb';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Button } from '@nvidia-elements/core/button';

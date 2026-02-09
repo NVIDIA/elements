@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@internals/testing';
 import { TypeNativePopoverTriggerController } from '@nvidia-elements/core/internal';
 
 @customElement('type-native-popover-trigger-controller-test-element')
