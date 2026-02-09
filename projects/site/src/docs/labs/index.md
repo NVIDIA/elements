@@ -39,7 +39,7 @@ main @nve package scope. Labs projects may be deprecated or removed at any time.
     <nve-grid-cell>In Development</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/forms" target="_blank"><code nve-text="code">@nvidia-elements/forms</code></a></nve-grid-cell>
+    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/forms" target="_blank"><code nve-text="code">@nvidia-elements/forms</code></a></nve-grid-cell>
     <nve-grid-cell>Utilities for building custom form control APIs.</nve-grid-cell>
     <nve-grid-cell>Available / In Development</nve-grid-cell>
   </nve-grid-row>
