@@ -27,8 +27,8 @@ export const EditorFileBrowser = {
   render: () => html`
 <nve-page style="height: 650px">
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
-    <h2 slot="prefix">AV Config Editor</h2>
+    <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
+    <h2 slot="prefix">Config Editor</h2>
     <nve-button container="flat" selected>Sensors</nve-button>
     <nve-button container="flat">Vehicle</nve-button>
     <nve-button container="flat">Perception</nve-button>
@@ -148,7 +148,7 @@ export const EditorDiffView = {
   render: () => html`
 <nve-page style="height: 600px">
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
     <h2 slot="prefix">Sensor Calibration</h2>
     <nve-icon-button slot="suffix" interaction="emphasis" size="sm">AV</nve-icon-button>
   </nve-page-header>
@@ -284,7 +284,7 @@ export const EditorReadOnly = {
   render: () => html`
 <nve-page style="height: 600px">
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
     <h2 slot="prefix">Session Viewer</h2>
     <nve-icon-button slot="suffix" icon-name="download" container="flat"></nve-icon-button>
     <nve-icon-button slot="suffix" icon-name="copy" container="flat"></nve-icon-button>

@@ -154,6 +154,7 @@ export const VerticalGroup = {
 
 /**
  * @summary Switch groups with vertical inline layout for compact vertical stacking with inline label positioning.
+ * @tags test-case
  */
 export const VerticalInlineGroup = {
   render: () => html`
@@ -239,6 +240,7 @@ export const VerticalInlineGroup = {
 
 /**
  * @summary Switch groups with horizontal layout for multiple toggles arranged in a row, ideal for limited options.
+ * @tags test-case
  */
 export const HorizontalGroup = {
   render: () => html`
@@ -324,6 +326,7 @@ export const HorizontalGroup = {
 
 /**
  * @summary Switch groups with horizontal inline layout for space-efficient horizontal arrangement with inline labels.
+ * @tags test-case
  */
 export const HorizontalInlineGroup = {
   render: () => html`
