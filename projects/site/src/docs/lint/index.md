@@ -82,30 +82,6 @@ export default [
     <nve-grid-column>Severity</nve-grid-column>
   </nve-grid-header>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-css-variable</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of invalid CSS theme variables</nve-grid-cell>
-    <nve-grid-cell>CSS</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-css-value</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of invalid CSS value</nve-grid-cell>
-    <nve-grid-cell>CSS</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unknown-css-variable</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of unknown --nve-* CSS theme variables</nve-grid-cell>
-    <nve-grid-cell>CSS</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-css-variable</code></nve-grid-cell>
-    <nve-grid-cell>Disallow use of deprecated --mlv-* CSS theme variables.</nve-grid-cell>
-    <nve-grid-cell>CSS</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-attributes</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of deprecated attributes in HTML.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
@@ -170,6 +146,12 @@ export default [
     <nve-grid-cell>Require form controls to have an accessible label.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-gap-space</code></nve-grid-cell>
+    <nve-grid-cell>Require gap spacing on row and column layouts.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">off</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-popover-trigger</code></nve-grid-cell>

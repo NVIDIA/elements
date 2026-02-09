@@ -26,7 +26,8 @@ export async function lintPlaygroundTemplate(code: string): Promise<TemplateLint
   // '@nvidia-elements/lint/no-unexpected-style-customization': ['error']
   const rules: Partial<Linter.RulesRecord> = {
     '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error', { 'nve-layout': ['@', '|', '&', 'xx'] }],
-    '@nvidia-elements/lint/no-missing-slotted-elements': ['error', { 'nve-card': { required: ['nve-card-content'] } }]
+    '@nvidia-elements/lint/no-missing-slotted-elements': ['error', { 'nve-card': { required: ['nve-card-content'] } }],
+    '@nvidia-elements/lint/no-missing-gap-space': ['error']
   };
   return lintString(code, rules);
 }

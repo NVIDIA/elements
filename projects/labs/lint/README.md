@@ -80,6 +80,7 @@ export default [
 | `@nvidia-elements/lint/no-deprecated-tags` | Disallow use of deprecated elements in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-invoker-triggers` | Disallow use of invoker trigger attributes on non-button nve-* elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-control-label` | Require form controls to have an accessible label. | HTML | `error` |
+| `@nvidia-elements/lint/no-missing-gap-space` | Require gap spacing on row and column layouts. | HTML | `off` |
 | `@nvidia-elements/lint/no-missing-popover-trigger` | Require popover elements to have a corresponding trigger element. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-slotted-elements` | Disallow use of missing slotted elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attributes` | Disallow use of invalid API attributes or utility attributes on custom HTML element tags. | HTML | `error` |
