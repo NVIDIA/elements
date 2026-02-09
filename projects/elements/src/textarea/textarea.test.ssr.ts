@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Textarea } from '@nvidia-elements/core/textarea';
 import '@nvidia-elements/core/textarea/define.js';
 

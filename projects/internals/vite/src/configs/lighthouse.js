@@ -16,7 +16,7 @@ export const libraryLighthouseTestConfig = {
       }
     },
     reporters: ['default', 'junit', 'json'],
-    globalSetup: ['@nve-internals/vite/setup/lighthouse.js'],
+    globalSetup: ['@internals/vite/setup/lighthouse.js'],
     outputFile: {
       json: './coverage/lighthouse/summary.json',
       junit: './coverage/lighthouse/junit.xml'

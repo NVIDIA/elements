@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { visualRunner } from '@nve-internals/vite';
+import { visualRunner } from '@internals/vite';
 import tokenJSON from '@nvidia-elements/themes/index.json';
 
 const tokens = Object.keys(tokenJSON).map(k => `--${k}`);

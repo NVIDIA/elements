@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { visualRunner } from '@nve-internals/vite';
+import { visualRunner } from '@internals/vite';
 
 describe('dropzone visual', () => {
   test('dropzone should match visual baseline', async () => {

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Dot } from '@nvidia-elements/core/dot';
 import type { SupportStatus, TaskStatus, Size } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/dot/define.js';

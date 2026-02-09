@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { lighthouseRunner } from '@nve-internals/vite';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('progressive-filter-chip lighthouse report', () => {
   test('progressive-filter-chip should meet lighthouse benchmarks', async () => {

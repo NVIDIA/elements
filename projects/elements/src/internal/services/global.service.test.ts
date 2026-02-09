@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { untilEvent } from '@nvidia-elements/testing';
+import { untilEvent } from '@internals/testing';
 import { GlobalStateService } from './global.service.js';
 
 describe('GlobalStateService', () => {

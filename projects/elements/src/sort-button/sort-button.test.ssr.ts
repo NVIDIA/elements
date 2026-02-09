@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { SortButton } from '@nvidia-elements/core/sort-button';
 import '@nvidia-elements/core/sort-button/define.js';
 

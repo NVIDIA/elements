@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Skeleton } from '@nvidia-elements/core/skeleton';
 import '@nvidia-elements/core/skeleton/define.js';
 

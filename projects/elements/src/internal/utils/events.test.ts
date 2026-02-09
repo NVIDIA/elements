@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createFixture, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, removeFixture } from '@internals/testing';
 import { debounce, onChildListMutation, stopEvent, throttle } from '@nvidia-elements/core/internal';
 
 describe('stopEvent', () => {

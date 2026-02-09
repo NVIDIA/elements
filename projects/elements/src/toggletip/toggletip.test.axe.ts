@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
-import { runAxe } from '@nvidia-elements/testing/axe';
+import { createFixture, removeFixture, elementIsStable } from '@internals/testing';
+import { runAxe } from '@internals/testing/axe';
 import { Toggletip } from '@nvidia-elements/core/toggletip';
 import '@nvidia-elements/core/toggletip/define.js';
 

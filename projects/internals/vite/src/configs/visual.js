@@ -17,7 +17,7 @@ export const libraryVisualTestConfig = {
     maxWorkers: process.env.CI ? 1 : undefined,
     maxConcurrency: process.env.CI ? 1 : undefined,
     reporters: ['default', 'junit', 'json'],
-    setupFiles: ['@nve-internals/vite/setup/visual.js'],
+    setupFiles: ['@internals/vite/setup/visual.js'],
     outputFile: {
       json: './coverage/visual/summary.json',
       junit: './coverage/visual/junit.xml'

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Divider } from '@nvidia-elements/core/divider';
 import '@nvidia-elements/core/divider/define.js';
 

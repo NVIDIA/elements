@@ -30,7 +30,7 @@
     "dist/**/*"
   ],
   "devDependencies": {
-    "@nve-internals/vite": "workspace:*",
+    "@internals/vite": "workspace:*",
     "cssnano": "7.1.1",
     "glob": "catalog:",
     "lit": "catalog:",

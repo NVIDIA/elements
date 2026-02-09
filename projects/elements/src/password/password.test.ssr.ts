@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Password } from '@nvidia-elements/core/password';
 import '@nvidia-elements/core/password/define.js';
 

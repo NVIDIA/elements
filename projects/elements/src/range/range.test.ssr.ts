@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Range } from '@nvidia-elements/core/range';
 import '@nvidia-elements/core/range/define.js';
 

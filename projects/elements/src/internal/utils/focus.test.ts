@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createFixture, emulateClick, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, emulateClick, removeFixture } from '@internals/testing';
 import { focusElement, isFocusable, onListboxActivate } from '@nvidia-elements/core/internal';
 
 describe('isFocusable', () => {
