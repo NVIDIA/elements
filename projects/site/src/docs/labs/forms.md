@@ -7,7 +7,7 @@
 
 # Forms
 
-The forms utility library provides a base mixin to make it easy to create form associated custom elements. Form associated custom elements enable components to integrate and participate in form value state and validation. This creates a reliable and predictable API contract for components. This project is in the very early stages of exploration. [Project Source](https://github.com/NVIDIA/elements/-/tree/main/projects/labs/forms)
+The forms utility library provides a base mixin to make it easy to create form associated custom elements. Form associated custom elements enable components to integrate and participate in form value state and validation. This creates a reliable and predictable API contract for components. This project is in the very early stages of exploration. [Project Source](https://github.com/NVIDIA/elements/-/tree/main/projects/forms)
 
 ## Getting Started
 

@@ -133,7 +133,7 @@
       ],
       "dependencies": [
         "build:snippets",
-        "../../internals/vite:ci"
+        "../internals/vite:ci"
       ]
     },
     "build:watch": {
@@ -152,7 +152,7 @@
         "dist/data.snippets.json"
       ],
       "dependencies": [
-        "../snippets:build"
+        "../labs/snippets:build"
       ]
     },
     "test": {
@@ -170,9 +170,9 @@
       ],
       "output": [],
       "dependencies": [
-        "../../testing:build",
-        "../../internals/vite:ci",
-        "../../elements:build"
+        "../testing:build",
+        "../internals/vite:ci",
+        "../elements:build"
       ]
     },
     "test:coverage": {
@@ -190,9 +190,9 @@
       ],
       "output": [],
       "dependencies": [
-        "../../testing:build",
-        "../../internals/vite:ci",
-        "../../elements:build"
+        "../testing:build",
+        "../internals/vite:ci",
+        "../elements:build"
       ]
     },
     "test:watch": {
@@ -212,7 +212,7 @@
       ],
       "dependencies": [
         "build",
-        "../../internals/vite:ci"
+        "../internals/vite:ci"
       ],
       "env": {
         "NODE_ENV": "production"
@@ -226,15 +226,15 @@
       ],
       "output": [],
       "dependencies": [
-        "../../internals/eslint:ci",
-        "../lint:build"
+        "../internals/eslint:ci",
+        "../labs/lint:build"
       ]
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
-        "../../internals/eslint:ci",
-        "../lint:build"
+        "../internals/eslint:ci",
+        "../labs/lint:build"
       ]
     }
   }

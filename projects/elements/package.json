@@ -987,7 +987,7 @@
       "files": [
         "../styles/dist/**/*.css",
         "../themes/dist/**/*.css",
-        "../labs/forms/dist/**/*.js",
+        "../forms/dist/**/*.js",
         "public/**",
         "src/**",
         "!src/**/*.test.ts",
@@ -1024,7 +1024,7 @@
           "cascade": false
         },
         {
-          "script": "../labs/forms:build",
+          "script": "../forms:build",
           "cascade": false
         }
       ]
