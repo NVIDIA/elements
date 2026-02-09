@@ -59,11 +59,11 @@
         "./projects/create:ci",
         "./projects/elements:ci",
         "./projects/elements-react:ci",
+        "./projects/forms:ci",
         "./projects/labs/behaviors-alpine:ci",
         "./projects/labs/brand:ci",
         "./projects/labs/cli:ci",
         "./projects/labs/code:ci",
-        "./projects/labs/forms:ci",
         "./projects/labs/lint:ci",
         "./projects/labs/markdown:ci",
         "./projects/labs/media:ci",
@@ -105,9 +105,9 @@
         "./projects/styles:test:lighthouse",
         "./projects/themes:test:lighthouse",
         "./projects/elements:test:lighthouse",
+        "./projects/forms:test:lighthouse",
         "./projects/labs/brand:test:lighthouse",
         "./projects/labs/code:test:lighthouse",
-        "./projects/labs/forms:test:lighthouse",
         "./projects/labs/markdown:test:lighthouse",
         "./projects/labs/media:test:lighthouse",
         "./projects/monaco:test:lighthouse"
@@ -191,7 +191,7 @@
       ]
     },
     "release:labs-forms": {
-      "command": "cd projects/labs/forms && HUSKY=0 pnpm exec semantic-release"
+      "command": "cd projects/forms && HUSKY=0 pnpm exec semantic-release"
     },
     "release:labs-lint": {
       "command": "cd projects/labs/lint && HUSKY=0 pnpm exec semantic-release",
@@ -266,6 +266,7 @@
       "dependencies": [
         "./projects/create:lint:fix",
         "./projects/elements:lint:fix",
+        "./projects/forms:lint:fix",
         "./projects/internals/metadata:lint:fix",
         "./projects/internals/patterns:lint:fix",
         "./projects/internals/tools:lint:fix",
@@ -273,7 +274,6 @@
         "./projects/labs/brand:lint:fix",
         "./projects/labs/cli:lint:fix",
         "./projects/labs/code:lint:fix",
-        "./projects/labs/forms:lint:fix",
         "./projects/labs/lint:lint:fix",
         "./projects/labs/markdown:lint:fix",
         "./projects/labs/media:lint:fix",
