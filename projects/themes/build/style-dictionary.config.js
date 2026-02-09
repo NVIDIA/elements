@@ -152,6 +152,28 @@ StyleDictionary.registerFormat({
 });
 
 StyleDictionary.registerFormat({
+  name: 'custom/metadata-json',
+  format: ({ dictionary }) => {
+    const tokenMap = new Map(dictionary.allTokens.map(t => [t.name, t]));
+    const lines = formattedVariables({ format: 'json', dictionary, outputReferences: true })
+      .replaceAll(';', '')
+      .split('\n');
+
+    const metadata = lines.map(line => {
+      const [name, rawValue] = line.split(' = ');
+      const value = rawValue?.includes('calc') ? rawValue.replace('calc(', '').replace(')', '') : rawValue;
+      const token = tokenMap.get(name);
+      const entry = { name, value };
+      if (token?.type) entry.type = token.type;
+      if (token?.description) entry.description = token.description;
+      return entry;
+    });
+
+    return JSON.stringify(metadata, null, 2);
+  }
+});
+
+StyleDictionary.registerFormat({
   name: 'custom/javascript',
   transformGroup: 'web',
   format: ({ dictionary }) => {
@@ -185,6 +207,7 @@ async function buildTokens() {
     platforms: {
       css: cssOutput(`${buildPath}index.css`),
       json: jsonOutput(`${buildPath}index.json`),
+      metadataJson: metadataJsonOutput(`${buildPath}index.metadata.json`),
       schema: schemaOutput(`${buildPath}schema.json`),
       javascript: javascriptOutput(`${buildPath}index.js`)
     }
@@ -247,6 +270,23 @@ function jsonOutput(destination) {
     options: {
       outputReferences: true,
       theme
+    }
+  };
+}
+
+function metadataJsonOutput(destination) {
+  return {
+    prefix: 'nve',
+    transformGroup: 'web',
+    transforms: ['attribute/cti', 'name/kebab', 'size/px', 'color/css', 'custom/validate'],
+    files: [
+      {
+        format: 'custom/metadata-json',
+        destination
+      }
+    ],
+    options: {
+      outputReferences: true
     }
   };
 }
