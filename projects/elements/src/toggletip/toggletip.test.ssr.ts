@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Toggletip } from '@nvidia-elements/core/toggletip';
 import '@nvidia-elements/core/toggletip/define.js';
 

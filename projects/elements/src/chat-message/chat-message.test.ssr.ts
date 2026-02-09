@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { ChatMessage } from '@nvidia-elements/core/chat-message';
 import '@nvidia-elements/core/chat-message/define.js';
 

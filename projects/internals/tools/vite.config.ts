@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { UserConfig, defineConfig, mergeConfig } from 'vite';
-import { libraryNodeBuildConfig } from '@nve-internals/vite';
+import { libraryNodeBuildConfig } from '@internals/vite';
 
 export default defineConfig(() => {
   const config: UserConfig = {

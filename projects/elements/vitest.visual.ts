@@ -1,5 +1,5 @@
 import { mergeConfig } from 'vitest/config';
-import { libraryVisualTestConfig } from '@nve-internals/vite/configs/visual.js';
+import { libraryVisualTestConfig } from '@internals/vite/configs/visual.js';
 
 export default mergeConfig(libraryVisualTestConfig, {
   root: import.meta.dirname,

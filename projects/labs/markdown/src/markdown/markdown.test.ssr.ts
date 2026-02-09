@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Markdown } from '@nvidia-elements/markdown/markdown';
 import '@nvidia-elements/markdown/markdown/define.js';
 

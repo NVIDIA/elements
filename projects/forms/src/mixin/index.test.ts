@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { createFixture, removeFixture, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, untilEvent } from '@internals/testing';
 import { FormControlMixin } from './index.js';
 import { requiredValidator } from '../validators/index.js';
 

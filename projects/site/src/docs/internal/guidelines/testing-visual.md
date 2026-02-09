@@ -20,7 +20,7 @@ Visual regression tests using Playwright screenshots.
 
 ```typescript
 import { expect, test, describe } from 'vitest';
-import { visualRunner } from '@nve-internals/vite';
+import { visualRunner } from '@internals/vite';
 
 describe('badge visual', () => {
   test('badge should match visual baseline', async () => {

@@ -67,11 +67,11 @@
     "@nvidia-elements/core": "workspace:*"
   },
   "devDependencies": {
-    "@nve-internals/vite": "workspace:*",
+    "@internals/vite": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "@nvidia-elements/testing": "workspace:*",
+    "@internals/testing": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
     "@rollup/plugin-terser": "catalog:",
     "@vitest/browser": "catalog:",

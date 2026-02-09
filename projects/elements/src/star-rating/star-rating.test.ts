@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable } from '@internals/testing';
 import { StarRating } from '@nvidia-elements/core/star-rating';
 import '@nvidia-elements/core/star-rating/define.js';
 import '@nvidia-elements/core/forms/define.js';

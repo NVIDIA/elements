@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { ProgressiveFilterChip } from '@nvidia-elements/core/progressive-filter-chip';
 import '@nvidia-elements/core/progressive-filter-chip/define.js';
 

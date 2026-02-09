@@ -1,5 +1,5 @@
 import { defineConfig, mergeConfig } from 'vite';
-import { libraryNodeBuildConfig } from '@nve-internals/vite';
+import { libraryNodeBuildConfig } from '@internals/vite';
 import { builtinModules } from 'node:module';
 
 const NODE_BUILT_IN_MODULES = builtinModules.filter(m => !m.startsWith('_'));

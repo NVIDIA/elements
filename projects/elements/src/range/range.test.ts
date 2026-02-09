@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable } from '@internals/testing';
 import { Range } from '@nvidia-elements/core/range';
 import '@nvidia-elements/core/range/define.js';
 

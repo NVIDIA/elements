@@ -63,7 +63,7 @@ export const libraryTestConfig = {
       if (log.startsWith('[Error: Expected error]')) return false;
       if (log.startsWith('Ignored')) return false;
     },
-    setupFiles: ['@nve-internals/vite/setup/library.js'], // todo: this should be project specific
+    setupFiles: ['@internals/vite/setup/library.js'], // todo: this should be project specific
     browser: {
       fileParallelism: !process.env.CI, // Disable file parallelism in CI to reduce browser instances
       enabled: true,

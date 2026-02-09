@@ -95,6 +95,7 @@
         "./projects/themes:ci",
         "./projects/internals/metadata:ci",
         "./projects/internals/patterns:ci",
+        "./projects/internals/testing:ci",
         "./projects/internals/tools:ci"
       ],
       "files": []
@@ -269,6 +270,7 @@
         "./projects/forms:lint:fix",
         "./projects/internals/metadata:lint:fix",
         "./projects/internals/patterns:lint:fix",
+        "./projects/internals/testing:lint:fix",
         "./projects/internals/tools:lint:fix",
         "./projects/labs/behaviors-alpine:lint:fix",
         "./projects/labs/brand:lint:fix",

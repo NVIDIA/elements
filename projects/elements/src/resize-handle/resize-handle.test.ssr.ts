@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { ResizeHandle } from '@nvidia-elements/core/resize-handle';
 import '@nvidia-elements/core/resize-handle/define.js';
 
