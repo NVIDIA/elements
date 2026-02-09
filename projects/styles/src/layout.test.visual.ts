@@ -27,6 +27,16 @@ describe('column visual', () => {
           <div></div>
           <div></div>
         </section>
+        <section nve-layout="column align:left">
+          <div></div>
+          <div></div>
+          <div></div>
+        </section>
+        <section nve-layout="column align:right">
+          <div></div>
+          <div></div>
+          <div></div>
+        </section>
       </section>
     `
     );
