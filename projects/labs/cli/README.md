@@ -138,7 +138,7 @@ Install to Cursor with the MCP configuration below.
 | `project_update` | Update a project to the latest versions of Elements packages. |
 | `project_validate` | Validate project setup and check for configuration issues, outdated dependencies. |
 | `project_setup_mcp` | Configure Elements MCP server for Cursor or Claude Code. |
-| `tokens_list` | Get available semantic CSS variables / design tokens for theming. |
+| `tokens_list` | Get available semantic CSS variables / design tokens for theming with descriptions. |
 
 ## Architecture
 
