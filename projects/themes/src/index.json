@@ -3,145 +3,179 @@
   "config": {
     "color-scheme": {
       "light": {
-        "value": "true"
+        "value": "true",
+        "description": "Use when configuring a light color scheme theme"
       }
     }
   },
   "ref": {
     "scale": {
       "text": {
-        "value": "1"
+        "value": "1",
+        "description": "Use for scaling all text size tokens proportionally across your application"
       },
       "size": {
-        "value": "1"
+        "value": "1",
+        "description": "Use for scaling all element sizing tokens proportionally across your application"
       },
       "space": {
-        "value": "1"
+        "value": "1",
+        "description": "Use for scaling all layout spacing tokens proportionally across your application"
       },
       "border-radius": {
-        "value": "1"
+        "value": "1",
+        "description": "Use for scaling all border radius tokens proportionally across your application"
       },
       "border-width": {
-        "value": "1"
+        "value": "1",
+        "description": "Use for scaling all border width tokens proportionally across your application"
       },
       "line-height": {
-        "value": "1"
+        "value": "1",
+        "description": "Use for scaling all line height tokens proportionally across your application"
       }
     },
     "size": {
       "50": {
         "value": "{ref.scale.size} * 2px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for minimal padding and margins within compact elements"
       },
       "100": {
         "value": "{ref.scale.size} * 4px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for tight padding and margins within small elements"
       },
       "150": {
         "value": "{ref.scale.size} * 6px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for compact padding and margins within elements"
       },
       "200": {
         "value": "{ref.scale.size} * 8px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for standard padding and margins within form controls and small components"
       },
       "250": {
         "value": "{ref.scale.size} * 10px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for comfortable padding and margins within medium elements"
       },
       "300": {
         "value": "{ref.scale.size} * 12px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for standard padding and margins within buttons and interactive elements"
       },
       "400": {
         "value": "{ref.scale.size} * 16px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for comfortable padding and margins within cards and panels"
       },
       "500": {
         "value": "{ref.scale.size} * 20px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for generous padding and margins within larger components"
       },
       "600": {
         "value": "{ref.scale.size} * 24px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for spacious padding and margins within containers"
       },
       "700": {
         "value": "{ref.scale.size} * 28px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for extra padding and margins within large components"
       },
       "800": {
         "value": "{ref.scale.size} * 32px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for standard height of form inputs and buttons"
       },
       "900": {
         "value": "{ref.scale.size} * 36px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for extra large padding and margins within oversized elements"
       },
       "1000": {
         "value": "{ref.scale.size} * 40px",
-        "type": "sizing"
+        "type": "sizing",
+        "description": "Use for maximum padding and margins within very large containers"
       }
     },
     "space": {
       "none": {
         "value": "{ref.scale.space} * 0px",
-        "type": "spacing"
+        "type": "spacing",
+        "description": "Use when no spacing is needed between elements"
       },
       "xxxs": {
         "value": "{ref.scale.space} * 2px",
-        "type": "spacing"
+        "type": "spacing",
+        "description": "Use for minimal gaps between tightly grouped elements"
       },
       "xxs": {
         "value": "{ref.scale.space} * 4px",
-        "type": "spacing"
+        "type": "spacing",
+        "description": "Use for very small gaps between closely related elements"
       },
       "xs": {
         "value": "{ref.scale.space} * 8px",
-        "type": "spacing"
+        "type": "spacing",
+        "description": "Use for small gaps between form fields and related content"
       },
       "sm": {
         "value": "{ref.scale.space} * 12px",
-        "type": "spacing"
+        "type": "spacing",
+        "description": "Use for standard gaps between form fields and sibling elements in layouts"
       },
       "md": {
         "value": "{ref.scale.space} * 16px",
-        "type": "spacing"
+        "type": "spacing",
+        "description": "Use for comfortable gaps between sections and groups of elements"
       },
       "lg": {
         "value": "{ref.scale.space} * 24px",
-        "type": "spacing"
+        "type": "spacing",
+        "description": "Use for generous gaps between major sections and content blocks"
       },
       "xl": {
         "value": "{ref.scale.space} * 32px",
-        "type": "spacing"
+        "type": "spacing",
+        "description": "Use for large gaps between distinct page sections"
       },
       "xxl": {
         "value": "{ref.scale.space} * 48px",
-        "type": "spacing"
+        "type": "spacing",
+        "description": "Use for extra large gaps between major page regions"
       },
       "xxxl": {
         "value": "{ref.scale.space} * 64px",
-        "type": "spacing"
+        "type": "spacing",
+        "description": "Use for maximum gaps between completely separate page areas"
       }
     },
     "color": {
       "scheme": {
         "base": {
           "value": "{ref.color.white}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for light backgrounds and containers"
         },
         "inverse": {
           "value": "{ref.color.black}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for dark backgrounds and inverse elements"
         }
       },
       "white": {
         "value": "oklch(100% 0 0)",
-        "type": "color"
+        "type": "color",
+        "description": "Use for pure white backgrounds or text"
       },
       "black": {
         "value": "oklch(0% 0 0)",
-        "type": "color"
+        "type": "color",
+        "description": "Use for pure black backgrounds or text"
       },
       "alpha": {
         "white": {
@@ -1399,149 +1433,184 @@
     "font": {
       "family": {
         "@": {
-          "value": "{ref.font.family.inter}"
+          "value": "{ref.font.family.inter}",
+          "description": "Use for default body text and UI elements"
         },
         "inter": {
           "value": "'Inter', Roboto, 'Open Sans', 'Helvetica Neue', sans-serif",
-          "type": "fontFamilies"
+          "type": "fontFamilies",
+          "description": "Use for body text and UI elements"
         },
         "roboto-mono": {
           "value": "'Roboto Mono', 'Lucida Console', Monaco, monospace, sans-serif",
-          "type": "fontFamilies"
+          "type": "fontFamilies",
+          "description": "Use for code snippets and monospace text"
         }
       },
       "weight": {
         "light": {
           "value": "200",
-          "type": "fontWeights"
+          "type": "fontWeights",
+          "description": "Use for subtle text emphasis"
         },
         "regular": {
           "value": "400",
-          "type": "fontWeights"
+          "type": "fontWeights",
+          "description": "Use for body text and default content"
         },
         "medium": {
           "value": "500",
-          "type": "fontWeights"
+          "type": "fontWeights",
+          "description": "Use for labels and medium emphasis"
         },
         "semibold": {
           "value": "600",
-          "type": "fontWeights"
+          "type": "fontWeights",
+          "description": "Use for navigation and strong emphasis"
         },
         "bold": {
           "value": "700",
-          "type": "fontWeights"
+          "type": "fontWeights",
+          "description": "Use for strong text emphasis"
         },
         "extra-bold": {
           "value": "800",
-          "type": "fontWeights"
+          "type": "fontWeights",
+          "description": "Use for maximum text emphasis"
         }
       },
       "size": {
         "50": {
           "value": "{ref.scale.text} * 10px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for very small labels or compact UI text"
         },
         "100": {
           "value": "{ref.scale.text} * 12px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for small body text or compact labels"
         },
         "200": {
           "value": "{ref.scale.text} * 14px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for default body text, labels, and small headings"
         },
         "300": {
           "value": "{ref.scale.text} * 16px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for large body text or small headings"
         },
         "400": {
           "value": "{ref.scale.text} * 18px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for default headings or extra large body text"
         },
         "500": {
           "value": "{ref.scale.text} * 20px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for large headings"
         },
         "600": {
           "value": "{ref.scale.text} * 24px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for extra large headings"
         },
         "700": {
           "value": "{ref.scale.text} * 28px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for very large headings"
         },
         "800": {
           "value": "{ref.scale.text} * 32px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for prominent headings"
         },
         "900": {
           "value": "{ref.scale.text} * 36px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for small display text"
         },
         "1000": {
           "value": "{ref.scale.text} * 40px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for default display text"
         },
         "1100": {
           "value": "{ref.scale.text} * 44px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for large display text"
         },
         "1200": {
           "value": "{ref.scale.text} * 50px",
-          "type": "fontSizes"
+          "type": "fontSizes",
+          "description": "Use for extra large display text"
         }
       },
       "line-height": {
         "tight": {
           "value": "1.12",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use when vertical space is limited"
         },
         "snug": {
           "value": "1.25",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use for compact text layouts"
         },
         "moderate": {
           "value": "1.375",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use for balanced text readability"
         },
         "relaxed": {
           "value": "1.5",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use for comfortable text reading"
         },
         "loose": {
           "value": "1.625",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use for spacious text layouts"
         },
         "300": {
           "value": "{ref.scale.line-height} * 12px",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use when precise vertical spacing is needed for compact text"
         },
         "400": {
           "value": "{ref.scale.line-height} * 16px",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use when precise vertical spacing is needed for small text"
         },
         "500": {
           "value": "{ref.scale.line-height} * 20px",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use when precise vertical spacing is needed for body text"
         },
         "600": {
           "value": "{ref.scale.line-height} * 24px",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use when precise vertical spacing is needed for large text"
         },
         "700": {
           "value": "{ref.scale.line-height} * 28px",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use when precise vertical spacing is needed for headings"
         },
         "800": {
           "value": "{ref.scale.line-height} * 32px",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use when precise vertical spacing is needed for large headings"
         },
         "900": {
           "value": "{ref.scale.line-height} * 36px",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use when precise vertical spacing is needed for display text"
         },
         "1000": {
           "value": "{ref.scale.line-height} * 40px",
-          "type": "lineHeights"
+          "type": "lineHeights",
+          "description": "Use when precise vertical spacing is needed for large display text"
         }
       }
     },
@@ -1549,241 +1618,292 @@
       "radius": {
         "none": {
           "value": "{ref.scale.border-radius} * 0px",
-          "type": "borderRadius"
+          "type": "borderRadius",
+          "description": "Use for square corners with no rounding"
         },
         "xs": {
           "value": "{ref.scale.border-radius} * 4px",
-          "type": "borderRadius"
+          "type": "borderRadius",
+          "description": "Use for subtle corner rounding on compact elements"
         },
         "sm": {
           "value": "{ref.scale.border-radius} * 6px",
-          "type": "borderRadius"
+          "type": "borderRadius",
+          "description": "Use for slight corner rounding on form controls and small components"
         },
         "md": {
           "value": "{ref.scale.border-radius} * 8px",
-          "type": "borderRadius"
+          "type": "borderRadius",
+          "description": "Use for standard corner rounding on cards and panels"
         },
         "lg": {
           "value": "{ref.scale.border-radius} * 14px",
-          "type": "borderRadius"
+          "type": "borderRadius",
+          "description": "Use for generous corner rounding on large containers"
         },
         "xl": {
           "value": "{ref.scale.border-radius} * 24px",
-          "type": "borderRadius"
+          "type": "borderRadius",
+          "description": "Use for very rounded corners on prominent containers"
         },
         "xxl": {
           "value": "{ref.scale.border-radius} * 48px",
-          "type": "borderRadius"
+          "type": "borderRadius",
+          "description": "Use for maximum corner rounding on large containers"
         },
         "full": {
           "value": "999px",
-          "type": "borderRadius"
+          "type": "borderRadius",
+          "description": "Use for fully rounded pill-shaped elements like buttons and badges"
         }
       },
       "width": {
         "sm": {
           "value": "{ref.scale.border-width} * 1px",
-          "type": "borderWidth"
+          "type": "borderWidth",
+          "description": "Use for subtle borders on cards and dividers"
         },
         "md": {
           "value": "{ref.scale.border-width} * 2px",
-          "type": "borderWidth"
+          "type": "borderWidth",
+          "description": "Use for standard borders on containers and panels"
         },
         "lg": {
           "value": "{ref.scale.border-width} * 3px",
-          "type": "borderWidth"
+          "type": "borderWidth",
+          "description": "Use for prominent borders on emphasized containers"
         },
         "xl": {
           "value": "{ref.scale.border-width} * 4px",
-          "type": "borderWidth"
+          "type": "borderWidth",
+          "description": "Use for very thick borders on highly emphasized elements"
         }
       },
       "color": {
         "@": {
           "value": "{ref.color.neutral.800}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for default borders that match the standard color scheme"
         },
         "emphasis": {
           "value": "{ref.color.neutral.1000}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for borders that need high contrast and emphasis"
         },
         "muted": {
           "value": "{ref.color.neutral.700}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for subtle borders that blend with backgrounds"
         },
         "inverse": {
           "value": "{ref.color.scheme.inverse}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for borders on inverse color scheme backgrounds"
         }
       }
     },
     "opacity": {
       "0": {
         "value": "0",
-        "type": "opacity"
+        "type": "opacity",
+        "description": "Use for completely transparent elements and hidden overlays"
       },
       "150": {
         "value": "0.15",
-        "type": "opacity"
+        "type": "opacity",
+        "description": "Use for very subtle transparency effects on disabled states"
       },
       "200": {
         "value": "0.2",
-        "type": "opacity"
+        "type": "opacity",
+        "description": "Use for subtle transparency on overlays and disabled content"
       },
       "300": {
         "value": "0.3",
-        "type": "opacity"
+        "type": "opacity",
+        "description": "Use for light transparency on secondary content"
       },
       "400": {
         "value": "0.4",
-        "type": "opacity"
+        "type": "opacity",
+        "description": "Use for moderate transparency on muted content"
       },
       "500": {
         "value": "0.5",
-        "type": "opacity"
+        "type": "opacity",
+        "description": "Use for balanced transparency on semi-transparent overlays"
       },
       "600": {
         "value": "0.6",
-        "type": "opacity"
+        "type": "opacity",
+        "description": "Use for noticeable transparency while maintaining readability"
       },
       "700": {
         "value": "0.7",
-        "type": "opacity"
+        "type": "opacity",
+        "description": "Use for reduced transparency on emphasized content"
       },
       "800": {
         "value": "0.8",
-        "type": "opacity"
+        "type": "opacity",
+        "description": "Use for slight transparency on primary content"
       },
       "900": {
         "value": "0.9",
-        "type": "opacity"
+        "type": "opacity",
+        "description": "Use for minimal transparency on nearly opaque content"
       }
     },
     "shadow": {
       "100": {
         "value": "0px 16px 32px 0px oklch(12.6% 0.022 276.4 / 0.02)",
-        "type": "boxShadow"
+        "type": "boxShadow",
+        "description": "Use for subtle elevation on cards and floating elements"
       },
       "200": {
         "value": "0px 16px 32px 0px oklch(12.6% 0.022 276.4 / 0.05)",
-        "type": "boxShadow"
+        "type": "boxShadow",
+        "description": "Use for light elevation on raised panels and modals"
       },
       "300": {
         "value": "0px 16px 32px 0px oklch(12.6% 0.022 276.4 / 0.08)",
-        "type": "boxShadow"
+        "type": "boxShadow",
+        "description": "Use for moderate elevation on dialogs and overlays"
       },
       "400": {
         "value": "0px 16px 32px 0px oklch(12.6% 0.022 276.4 / 0.12)",
-        "type": "boxShadow"
+        "type": "boxShadow",
+        "description": "Use for prominent elevation on important floating content"
       },
       "500": {
         "value": "0px 16px 32px 0px oklch(12.6% 0.022 276.4 / 0.17)",
-        "type": "boxShadow"
+        "type": "boxShadow",
+        "description": "Use for maximum elevation on top-level modals and popovers"
       }
     },
     "outline": {
       "@": {
         "value": "Highlight solid 2px",
-        "description": "https://coryrylan.com/blog/dont-override-css-outline-focus-styles"
+        "description": "Use for default focus indicators"
       },
       "webkit": {
-        "value": "5px auto -webkit-focus-ring-color"
+        "value": "5px auto -webkit-focus-ring-color",
+        "description": "Use for WebKit browser focus indicators"
       }
     },
     "animation": {
       "duration": {
         "100": {
-          "value": "0"
+          "value": "0",
+          "description": "Use for instant transitions or reduced motion preferences"
         },
         "150": {
-          "value": "150ms"
+          "value": "150ms",
+          "description": "Use for quick UI transitions"
         },
         "200": {
-          "value": "200ms"
+          "value": "200ms",
+          "description": "Use for standard UI transitions"
         },
         "250": {
-          "value": "250ms"
+          "value": "250ms",
+          "description": "Use for slightly slower transitions"
         },
         "300": {
-          "value": "400ms"
+          "value": "400ms",
+          "description": "Use for slower, deliberate transitions"
         },
         "400": {
-          "value": "800ms"
+          "value": "800ms",
+          "description": "Use for very slow, dramatic transitions"
         }
       },
       "easing": {
         "100": {
-          "value": "ease-in-out"
+          "value": "ease-in-out",
+          "description": "Use for smooth transitions"
         }
       }
     }
   },
   "sys": {
     "color-scheme": {
-      "value": "auto"
+      "value": "auto",
+      "description": "Use when configuring automatic theme detection based on user preferences"
     },
     "text": {
       "color": {
         "value": "{ref.color.neutral.1200}",
-        "type": "color"
+        "type": "color",
+        "description": "Use for default body text and general content"
       },
       "muted": {
         "color": {
           "value": "{ref.color.neutral.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for secondary text, labels, and less prominent content"
         }
       },
       "emphasis": {
         "color": {
           "value": "{ref.color.neutral.1200}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for highlighted text, selected items, and high-priority content"
         }
       },
       "placeholder": {
         "color": {
           "value": "{ref.color.neutral.900}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for placeholder text in input fields and form controls"
         }
       },
       "white": {
         "color": {
           "value": "{ref.color.white}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text that must appear on dark backgrounds"
         }
       },
       "black": {
         "color": {
           "value": "{ref.color.black}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text that must appear on light backgrounds"
         }
       },
       "link": {
         "color": {
           "value": "{ref.color.neutral.1200}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for default link text color"
         },
         "hover": {
           "color": {
             "value": "{ref.color.blue-cobalt.1100}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for link text when hovered or focused"
           }
         },
         "visited": {
           "color": {
             "value": "{ref.color.purple-lavender.1000}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for visited link text"
           }
         },
         "disabled": {
           "color": {
             "value": "{ref.color.neutral.400}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for disabled link text"
           }
         },
         "emphasis": {
           "color": {
             "value": "{ref.color.blue-cobalt.1000}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for emphasized link text"
           }
         }
       }
@@ -1792,19 +1912,22 @@
       "primary": {
         "background": {
           "value": "{ref.color.brand-green.900}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for primary accent backgrounds and key visual elements"
         }
       },
       "secondary": {
         "background": {
           "value": "{ref.color.blue-cobalt.1000}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for secondary accent backgrounds and supporting visual elements"
         }
       },
       "tertiary": {
         "background": {
           "value": "{ref.color.scheme.inverse}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for tertiary accent backgrounds and subtle visual elements"
         }
       }
     },
@@ -1812,259 +1935,313 @@
       "emphasis": {
         "color": {
           "value": "{ref.color.white}",
-          "type": "color"
+          "type": "color",
+          "description": "Use when mixing colors for emphasized interactive states"
         },
         "ratio": {
           "value": "100%",
-          "type": "percentage"
+          "type": "percentage",
+          "description": "Use when calculating color-mix ratios for emphasized states"
         }
       },
       "mute": {
         "color": {
           "value": "{ref.color.scheme.base}",
-          "type": "color"
+          "type": "color",
+          "description": "Use when mixing colors for muted or subdued backgrounds"
         },
         "ratio": {
           "value": "18%",
-          "type": "percentage"
+          "type": "percentage",
+          "description": "Use when calculating color-mix ratios for muted states"
         }
       }
     },
     "interaction": {
       "color": {
         "value": "{ref.color.neutral.1200}",
-        "type": "color"
+        "type": "color",
+        "description": "Use for default interactive element text color"
       },
       "background": {
         "value": "{ref.color.neutral.600}",
-        "type": "color"
+        "type": "color",
+        "description": "Use for default interactive element backgrounds"
       },
       "background-100": {
         "value": "{ref.color.neutral.600}",
-        "type": "color"
+        "type": "color",
+        "description": "Use for subtle interactive element backgrounds"
       },
       "background-200": {
         "value": "{ref.color.neutral.500}",
-        "type": "color"
+        "type": "color",
+        "description": "Use for standard interactive element backgrounds"
       },
       "background-300": {
         "value": "{ref.color.neutral.500}",
-        "type": "color"
+        "type": "color",
+        "description": "Use for elevated interactive element backgrounds"
       },
       "field": {
         "color": {
           "value": "{sys.interaction.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color in form inputs and text fields"
         },
         "background": {
           "value": "{sys.interaction.background}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for background color in form inputs and text fields"
         },
         "background-100": {
           "value": "{sys.interaction.background-100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for subtle form input backgrounds"
         },
         "background-200": {
           "value": "{sys.interaction.background-200}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for standard form input backgrounds"
         },
         "background-300": {
           "value": "{sys.interaction.background-300}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for elevated form input backgrounds"
         },
         "height": {
           "value": "{ref.size.800}",
-          "type": "sizing"
+          "type": "sizing",
+          "description": "Use for standard height of form inputs and buttons"
         }
       },
       "emphasis": {
         "color": {
           "value": "{sys.text.black.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color in primary call-to-action buttons"
         },
         "background": {
           "value": "{sys.accent.primary.background}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for background color in primary call-to-action buttons"
         }
       },
       "destructive": {
         "color": {
           "value": "{sys.text.white.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color in destructive action buttons"
         },
         "background": {
           "value": "{ref.color.red-cardinal.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for background color in destructive action buttons"
         }
       },
       "highlighted": {
         "color": {
           "value": "{sys.interaction.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color in highlighted interactive elements"
         },
         "background": {
           "value": "{ref.color.blue-cobalt.500}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for background color in highlighted interactive elements"
         },
         "muted": {
           "background": {
             "value": "{ref.color.blue-cobalt.300}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for subtle highlighted element backgrounds"
           }
         }
       },
       "disabled": {
         "color": {
           "value": "{ref.color.neutral.800}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color in disabled interactive elements"
         },
         "background": {
           "value": "{ref.color.neutral.600}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for background color in disabled interactive elements"
         }
       },
       "hover": {
         "color": {
           "value": "{sys.text.emphasis.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color when hovering over interactive elements"
         },
         "background": {
           "value": "{sys.interaction.background}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for background color when hovering over interactive elements"
         }
       },
       "selected": {
         "color": {
           "value": "{sys.text.emphasis.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color in selected interactive elements"
         },
         "background": {
           "value": "{sys.interaction.background}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for background color in selected interactive elements"
         }
       }
     },
     "interaction-state": {
       "base": {
         "value": "{sys.interaction.background}",
-        "type": "color"
+        "type": "color",
+        "description": "Use as the base color when computing dynamic interaction states"
       },
       "mix": {
-        "value": "{ref.color.neutral.1200}"
+        "value": "{ref.color.neutral.1200}",
+        "description": "Use as the mix color when computing dynamic interaction states"
       },
       "ratio": {
-        "value": "initial"
+        "value": "initial",
+        "description": "Use as the default ratio when computing dynamic interaction states"
       },
       "ratio-hover": {
-        "value": "4%"
+        "value": "4%",
+        "description": "Use as the ratio when computing hover interaction states"
       },
       "ratio-disabled": {
-        "value": "4%"
+        "value": "4%",
+        "description": "Use as the ratio when computing disabled interaction states"
       },
       "ratio-active": {
-        "value": "8%"
+        "value": "8%",
+        "description": "Use as the ratio when computing active interaction states"
       },
       "ratio-selected": {
-        "value": "8%"
+        "value": "8%",
+        "description": "Use as the ratio when computing selected interaction states"
       }
     },
     "layer": {
       "canvas": {
         "background": {
           "value": "{ref.color.neutral.300}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for page body background, the base surface in the layer hierarchy"
         },
         "color": {
           "value": "{sys.text.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color on the page body background"
         },
         "accent": {
           "background": {
             "value": "{ref.color.neutral.400}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for subtle accent backgrounds on the page body"
           }
         }
       },
       "shell": {
         "background": {
           "value": "{ref.color.scheme.base}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for application shell or navigation bar backgrounds"
         },
         "color": {
           "value": "{sys.text.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color on the application shell"
         },
         "accent": {
           "background": {
             "value": "{ref.color.neutral.100}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for subtle accent backgrounds on the application shell"
           }
         }
       },
       "container": {
         "background": {
           "value": "{ref.color.white}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for card, panel, and tab container backgrounds"
         },
         "color": {
           "value": "{sys.text.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color on container surfaces"
         },
         "accent": {
           "background": {
             "value": "{ref.color.neutral.100}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for subtle accent backgrounds within containers"
           }
         }
       },
       "overlay": {
         "background": {
           "value": "{ref.color.white}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for modal, drawer, and dropdown menu backgrounds"
         },
         "color": {
           "value": "{sys.text.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color on overlay surfaces"
         },
         "accent": {
           "background": {
             "value": "{ref.color.neutral.100}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for subtle accent backgrounds within overlays"
           }
         }
       },
       "backdrop": {
         "background": {
           "value": "{ref.color.alpha.black.400}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for backdrop behind modals and overlays to dim the background"
         }
       },
       "popover": {
         "background": {
           "value": "{ref.color.neutral.1200}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for tooltip, toast, and notification backgrounds"
         },
         "color": {
           "value": "{sys.text.white.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for text color on popover surfaces"
         },
         "accent": {
           "background": {
             "value": "{ref.color.neutral.1100}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for subtle accent backgrounds within popovers"
           }
         },
         "offset": {
           "value": "{ref.size.50}",
-          "type": "spacing"
+          "type": "spacing",
+          "description": "Use for spacing between popover and its anchor element"
         },
         "arrow-offset": {
           "value": "{ref.size.100}",
-          "type": "spacing"
+          "type": "spacing",
+          "description": "Use for positioning popover arrow indicators"
         },
         "arrow-padding": {
           "value": "{ref.size.150}",
-          "type": "spacing"
+          "type": "spacing",
+          "description": "Use for padding around popover arrow indicators"
         }
       }
     },
@@ -2072,162 +2249,189 @@
       "@": {
         "color": {
           "value": "{ref.color.neutral.1000}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for default task status indicators"
         }
       },
       "scheduled": {
         "color": {
           "value": "{ref.color.purple-violet.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for scheduled task status indicators"
         }
       },
       "queued": {
         "color": {
           "value": "{ref.color.blue-indigo.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for queued task status indicators"
         }
       },
       "pending": {
         "color": {
           "value": "{ref.color.neutral.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for pending task status indicators"
         }
       },
       "starting": {
         "color": {
           "value": "{ref.color.green-mint.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for starting task status indicators"
         }
       },
       "running": {
         "color": {
           "value": "{ref.color.blue-cobalt.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for running task status indicators"
         }
       },
       "restarting": {
         "color": {
           "value": "{ref.color.yellow-amber.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for restarting task status indicators"
         }
       },
       "stopping": {
         "color": {
           "value": "{ref.color.pink-rose.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for stopping task status indicators"
         }
       },
       "finished": {
         "color": {
           "value": "{ref.color.green-grass.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for finished task status indicators"
         }
       },
       "failed": {
         "color": {
           "value": "{ref.color.red-cardinal.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for failed task status indicators"
         }
       },
       "unknown": {
         "color": {
           "value": "{sys.text.black.color}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for unknown task status indicators"
         }
       },
       "ignored": {
         "color": {
           "value": "{ref.color.neutral.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for ignored task status indicators"
         }
       }
     },
     "support": {
       "color": {
         "value": "{ref.color.neutral.1000}",
-        "type": "color"
+        "type": "color",
+        "description": "Use for default UI feedback text and icons"
       },
       "muted": {
         "color": {
           "value": "{ref.color.neutral.600}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for subtle default UI feedback text and icons"
         }
       },
       "emphasis": {
         "color": {
           "value": "{ref.color.neutral.1000}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for emphasized default UI feedback text and icons"
         }
       },
       "accent": {
         "color": {
           "value": "{sys.accent.secondary.background}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for accent UI feedback text and icons"
         },
         "muted": {
           "color": {
             "value": "{ref.color.blue-cobalt.400}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for subtle accent UI feedback text and icons"
           }
         },
         "emphasis": {
           "color": {
             "value": "{ref.color.blue-cobalt.1100}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for emphasized accent UI feedback text and icons"
           }
         }
       },
       "success": {
         "color": {
           "value": "{ref.color.green-grass.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for success feedback text and icons in alerts and badges"
         },
         "muted": {
           "color": {
             "value": "{ref.color.green-grass.400}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for subtle success feedback text and icons"
           }
         },
         "emphasis": {
           "color": {
             "value": "{ref.color.green-grass.1100}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for emphasized success feedback text and icons"
           }
         }
       },
       "danger": {
         "color": {
           "value": "{ref.color.red-cardinal.1100}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for error feedback text and icons in alerts and badges"
         },
         "muted": {
           "color": {
             "value": "{ref.color.red-cardinal.400}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for subtle error feedback text and icons"
           }
         },
         "emphasis": {
           "color": {
             "value": "{ref.color.red-cardinal.1100}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for emphasized error feedback text and icons"
           }
         }
       },
       "warning": {
         "color": {
           "value": "{ref.color.yellow-nova.800}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for warning feedback text and icons in alerts and badges"
         },
         "muted": {
           "color": {
             "value": "{ref.color.yellow-nova.300}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for subtle warning feedback text and icons"
           }
         },
         "emphasis": {
           "color": {
             "value": "{ref.color.yellow-nova.1000}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for emphasized warning feedback text and icons"
           }
         }
       }
@@ -2236,51 +2440,63 @@
       "categorical": {
         "violet": {
           "value": "{ref.color.purple-violet.1000}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "lavender": {
           "value": "{ref.color.purple-lavender.900}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "rose": {
           "value": "{ref.color.pink-rose.900}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "red": {
           "value": "{ref.color.red-cardinal.1000}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "pumpkin": {
           "value": "{ref.color.orange-pumpkin.900}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "amber": {
           "value": "{ref.color.yellow-amber.1000}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "nova": {
           "value": "{ref.color.yellow-nova.800}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "pear": {
           "value": "{ref.color.lime-pear.900}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "grass": {
           "value": "{ref.color.green-grass.1000}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "seafoam": {
           "value": "{ref.color.teal-seafoam.900}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "cyan": {
           "value": "{ref.color.teal-cyan.800}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         },
         "slate": {
           "value": "{ref.color.neutral.1000}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for categorical data visualization when representing distinct groups"
         }
       },
       "sequential": {
@@ -2288,101 +2504,125 @@
           "virdis": {
             "100": {
               "value": "oklch(91.8% 0.187 102.2)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for the highest values in a sequential viridis scale"
             },
             "200": {
               "value": "oklch(85.9% 0.19 115)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for very high values in a sequential viridis scale"
             },
             "300": {
               "value": "oklch(82.1% 0.194 126.8)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for high values in a sequential viridis scale"
             },
             "400": {
               "value": "oklch(77.5% 0.187 137.2)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for moderately high values in a sequential viridis scale"
             },
             "500": {
               "value": "oklch(73.4% 0.164 147.5)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for upper-mid range values in a sequential viridis scale"
             },
             "600": {
               "value": "oklch(69.1% 0.145 157.3)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for mid-range values in a sequential viridis scale"
             },
             "700": {
               "value": "oklch(64.6% 0.12 169.6)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for lower-mid range values in a sequential viridis scale"
             },
             "800": {
               "value": "oklch(60.2% 0.1 184.4)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for moderately low values in a sequential viridis scale"
             },
             "900": {
               "value": "oklch(56.8% 0.087 200.1)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for low values in a sequential viridis scale"
             },
             "1000": {
               "value": "oklch(49.1% 0.083 242.3)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for very low values in a sequential viridis scale"
             },
             "1100": {
               "value": "oklch(45.3% 0.094 261.6)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for near-minimum values in a sequential viridis scale"
             },
             "1200": {
               "value": "oklch(41.9% 0.108 278.7)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for very low values approaching the bottom of a viridis scale"
             },
             "1300": {
               "value": "oklch(37.1% 0.124 293.4)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for near-bottom values in a sequential viridis scale"
             },
             "1400": {
               "value": "oklch(33.3% 0.134 306.3)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for minimal values in a sequential viridis scale"
             },
             "1500": {
               "value": "oklch(27.6% 0.132 318.4)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for the lowest values in a sequential viridis scale"
             }
           },
           "red-green": {
             "100": {
               "value": "oklch(49.9% 0.159 23.4)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for the most extreme negative values in a diverging red-green scale"
             },
             "200": {
               "value": "oklch(59.6% 0.195 23.8)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for strong negative values that deviate significantly from center"
             },
             "300": {
               "value": "oklch(68.4% 0.193 22)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for moderate negative values below the neutral midpoint"
             },
             "400": {
               "value": "oklch(83.3% 0.083 18.1)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for slight negative values just below the center point"
             },
             "500": {
               "value": "{ref.color.neutral.400}",
-              "type": "color"
+              "type": "color",
+              "description": "Use for neutral values at the center point of a diverging scale"
             },
             "600": {
               "value": "oklch(86.4% 0.117 148.8)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for slight positive values just above the center point"
             },
             "700": {
               "value": "oklch(72.5% 0.176 148.7)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for moderate positive values above the neutral midpoint"
             },
             "800": {
               "value": "oklch(62.7% 0.157 148.3)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for strong positive values that deviate significantly from center"
             },
             "900": {
               "value": "oklch(47.5% 0.109 150.4)",
-              "type": "color"
+              "type": "color",
+              "description": "Use for the most extreme positive values in a diverging red-green scale"
             }
           }
         }
@@ -2391,21 +2631,25 @@
         "negative": {
           "color": {
             "value": "{ref.color.red-cardinal.1000}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for negative trend indicators in data visualizations"
           },
           "emphasis-color": {
             "value": "{ref.color.red-cardinal.1100}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for emphasized negative trend indicators in data visualizations"
           }
         },
         "positive": {
           "color": {
             "value": "{ref.color.green-grass.1000}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for positive trend indicators in data visualizations"
           },
           "emphasis-color": {
             "value": "{ref.color.green-grass.1100}",
-            "type": "color"
+            "type": "color",
+            "description": "Use for emphasized positive trend indicators in data visualizations"
           }
         }
       }
@@ -2414,18 +2658,21 @@
       "thumb": {
         "color": {
           "value": "{ref.border.color.muted}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for scrollbar thumb color in scrollable containers"
         }
       },
       "track": {
         "color": {
           "value": "{ref.color.alpha.black.200}",
-          "type": "color"
+          "type": "color",
+          "description": "Use for scrollbar track color in scrollable containers"
         }
       },
       "width": {
         "value": "thin",
-        "type": "borderWidth"
+        "type": "borderWidth",
+        "description": "Use for scrollbar width in scrollable containers"
       }
     }
   }
