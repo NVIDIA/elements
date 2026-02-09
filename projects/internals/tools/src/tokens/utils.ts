@@ -21,9 +21,9 @@ export function getSemanticTokens(format: 'markdown' | 'json', tokens: Token[]) 
 
   if (format === 'markdown') {
     return `## CSS Variables\n\nAvailable semantic design tokens for theming.
-| name     | value |
-| -------- | ----- |
-${filteredTokens.map(token => `| ${token.name} | ${token.value} |`).join('\n')}`;
+| name     | value | Description |
+| -------- | ----- | ----------- |
+${filteredTokens.map(token => `| ${token.name} | ${token.value} | ${token.description} |`).join('\n')}`;
   } else if (format === 'json') {
     return filteredTokens;
   }

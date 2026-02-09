@@ -71,24 +71,24 @@ function getElementsStandardAPIProperties(): ProjectTypes[] {
 }
 
 function getTokens(): Token[] {
-  const tokensJSON: { [key: string]: string } = JSON.parse(
-    readFileSync(new URL('../../../../themes/dist/index.json', import.meta.url), 'utf8')
+  const tokensJSON: { name: string; value: string; type?: string; description?: string }[] = JSON.parse(
+    readFileSync(new URL('../../../../themes/dist/index.metadata.json', import.meta.url), 'utf8')
   );
 
-  return Object.entries(tokensJSON).map(([key, v]) => {
-    let value = v;
+  return tokensJSON.map(token => {
+    let value = token.value;
     if (value.includes('ref-scale')) {
       value = value.split(' * ')[1].replace(')', '').trim();
     }
 
     if (value.includes('nve')) {
-      value = `var(--nve-${value})`;
+      value = `var(--${value})`;
     }
 
     return {
-      name: `--${key}`,
+      name: `--${token.name}`,
       value,
-      description: ''
+      description: token.description ?? ''
     };
   });
 }
