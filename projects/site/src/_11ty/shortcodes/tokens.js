@@ -1,21 +1,26 @@
-import tokens from '@nvidia-elements/themes/index.json' with { type: 'json' };
+import metadata from '@nvidia-elements/themes/index.metadata.json' with { type: 'json' };
 
 export async function tokensShortcode(...tokenArgs) {
-  const formattedTokens = Object.entries(tokens)
-    .filter(([name]) =>
-      tokenArgs.some(token => {
-        if (token.startsWith('=')) {
-          const exactToken = token.substring(1);
-          return name.endsWith(exactToken);
+  const formattedTokens = metadata
+    .filter(token =>
+      tokenArgs.some(arg => {
+        if (arg.startsWith('=')) {
+          const exactToken = arg.substring(1);
+          return token.name.endsWith(exactToken);
         }
-        return name.includes(token);
+        return token.name.includes(arg);
       })
     )
-    .map(([name, value]) => [`--${name}`, `--${value}`]);
+    .map(token => ({
+      name: `--${token.name}`,
+      value: `--${token.value}`,
+      description: token.description ?? ''
+    }));
   return renderTokenTable(formattedTokens);
 }
 
 function renderTokenTable(tokens) {
+  const hasDescriptions = tokens.some(token => token.description);
   return /* html */ `
   <style>
     .tokens-table {
@@ -50,6 +55,11 @@ function renderTokenTable(tokens) {
       td:hover nve-copy-button {
         opacity: 1;
       }
+
+      .token-description {
+        color: var(--nve-sys-text-muted-color);
+        font-size: var(--nve-ref-font-size-100);
+      }
     }
   </style>
   <table class="tokens-table">
@@ -57,13 +67,15 @@ function renderTokenTable(tokens) {
       <tr>
         <th>Token</th>
         <th>Value</th>
+        ${hasDescriptions ? '<th>Description</th>' : ''}
         <th>Demo</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       ${tokens
-        .map(([name, value]) => {
+        .map(token => {
+          const { name, value, description } = token;
           return /* html */ `<tr>
         <td nve-layout="row gap:xs align:vertical-center">
           ${name} <nve-copy-button aria-label="Copy to clipboard" value="${name}" container="flat" behavior-copy></nve-copy-button>
@@ -71,6 +83,7 @@ function renderTokenTable(tokens) {
         <td>
           <code style="user-select: none">${value}</code>
         </td>
+        ${hasDescriptions ? `<td class="token-description">${description}</td>` : ''}
         <td>
           ${name.includes('ref-size') || name.includes('ref-space') ? /* html */ `<div style="width: var(${name})"></div>` : ''}
           ${name.includes('ref-color') || name.includes('sys-visualization') ? /* html */ `<div style="background: var(${name})"></div>` : ''}
