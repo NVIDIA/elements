@@ -35,6 +35,7 @@ export const Input = {
 
 /**
  * @summary Text inputs with vertical layout demonstrating validation states including disabled, success, and error.
+ * @tags test-case
  */
 export const Vertical = {
   render: () => html`
@@ -67,6 +68,7 @@ export const Vertical = {
 
 /**
  * @summary Text inputs with horizontal layout showing validation states for inline forms and compact layouts.
+ * @tags test-case
  */
 export const Horizontal = {
   render: () => html`
@@ -111,6 +113,7 @@ export const Rounded = {
 
 /**
  * @summary Text input with fit-text styling that adjusts width to match the input value for compact displays.
+ * @tags test-case
  */
 export const FitText = {
   render: () => html`
@@ -123,6 +126,7 @@ export const FitText = {
 
 /**
  * @summary Text input with fit-content sizing that automatically adjusts width based on available space.
+ * @tags test-case
  */
 export const FitContent = {
   render: () => html`

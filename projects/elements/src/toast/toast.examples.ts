@@ -25,6 +25,7 @@ export const Default = {
 
 /**
  * @summary Visual example of toast structure with anchor positioning. Demonstrates standard toast appearance and placement for consistent implementation patterns across your application.
+ * @tags test-case
  */
 export const Visual = {
   render: () => html`
@@ -95,6 +96,7 @@ export const Events = {
 
 /**
  * @summary Toast positioning options relative to screen edges or anchor elements. Position toasts in consistent locations where they won't obscure important content, typically bottom-center or top-right for global feedback.
+ * @tags test-case
  */
 export const Position = {
   render: () => html`
@@ -108,6 +110,7 @@ export const Position = {
 
 /**
  * @summary Fine-grained toast alignment for precise placement control. Use alignment to position toasts relative to anchor edges, useful for contextual feedback that should appear near specific UI elements.
+ * @tags test-case
  */
 export const Alignment = {
   render: () => html`
@@ -132,6 +135,7 @@ export const Alignment = {
 /**
  * @summary Legacy behavior-trigger pattern for automatic toast lifecycle management. Deprecated approach with manual trigger attributes, prefer modern popovertarget API for simpler toast implementation and better maintainability.
  * @tags test-case
+ * @deprecated
  */
 export const LegacyBehaviorTrigger = {
   render: () => html`

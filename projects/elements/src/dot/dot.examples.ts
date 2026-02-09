@@ -17,6 +17,7 @@ export const Default = {
 
 /**
  * @summary Different dot sizes to accommodate various layout contexts, from compact indicators to prominent status displays.
+ * @tags test-case
  */
 export const Size = {
   render: () => html`

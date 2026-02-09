@@ -117,6 +117,7 @@ export const Flat = {
 
 /**
  * @summary Vertical layout showcasing various states: default, disabled, success, and error.
+ * @tags test-case
  */
 export const Vertical = {
   render: () => html`
@@ -165,6 +166,7 @@ export const Vertical = {
 
 /**
  * @summary Horizontal layout showcasing various states: default, disabled, success, and error.
+ * @tags test-case
  */
 export const Horizontal = {
   render: () => html`
@@ -333,6 +335,7 @@ export const Height = {
 
 /**
  * @summary Select width dynamically adjusts to fit the currently selected option text.
+ * @tags test-case
  */
 export const FitText = {
   render: () => html`
@@ -349,6 +352,7 @@ export const FitText = {
 
 /**
  * @summary Select width adjusts to fit the longest option in both vertical and horizontal layouts.
+ * @tags test-case
  */
 export const FitContent = {
   render: () => html`

@@ -42,6 +42,7 @@ export const Icon = {
 
 /**
  * @summary Different avatar sizes to accommodate various layout contexts, from compact lists to prominent user profiles.
+ * @tags test-case
  */
 export const Size = {
   render: () => html`
@@ -67,6 +68,7 @@ export const AvatarGroup = {
 
 /**
  * @summary Comprehensive color palette for avatar backgrounds, enabling visual distinction and brand consistency across user representations.
+ * @tags test-case
  */
 export const Color = {
   render: () => html`
