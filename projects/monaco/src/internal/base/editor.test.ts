@@ -1,7 +1,7 @@
 import { describe, it, beforeEach, afterEach, expect, vi } from 'vitest';
 import { html } from 'lit';
 import type { TemplateResult } from 'lit';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
 
 import '@nvidia-elements/monaco/diff-editor/define.js';
 import { MonacoDiffEditor } from '@nvidia-elements/monaco/diff-editor';

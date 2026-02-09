@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-The Elements library uses a comprehensive testing strategy with multiple test types to ensure quality, accessibility, and performance. All tests follow consistent patterns and use shared utilities from `@nvidia-elements/testing` and `@nve-internals/vite`.
+The Elements library uses a comprehensive testing strategy with multiple test types to ensure quality, accessibility, and performance. All tests follow consistent patterns and use shared utilities from `@internals/testing` and `@internals/vite`.
 
 ## Running Tests
 
@@ -64,7 +64,7 @@ Lighthouse and Visual tests require HTML templates:
 
 ## Testing Utilities
 
-### @nvidia-elements/testing
+### @internals/testing
 
 Core testing utilities for DOM manipulation and element stability:
 

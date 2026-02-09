@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Panel } from '@nvidia-elements/core/panel';
 import '@nvidia-elements/core/panel/define.js';
 

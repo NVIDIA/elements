@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryLitSSRTestConfig } from '@nve-internals/vite/configs/ssr.js';
+import { libraryLitSSRTestConfig } from '@internals/vite/configs/ssr.js';
 
 export default mergeConfig(libraryLitSSRTestConfig, {
   resolve: {

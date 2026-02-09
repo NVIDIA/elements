@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { lighthouseRunner } from '@nve-internals/vite';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('lighthouse report', () => {
   test('@nvidia-elements/forms-element JS Bundles should remain within compressed bundle limits', async () => {

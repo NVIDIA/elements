@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-Basic functionality tests using Vitest and `@nvidia-elements/testing` utilities.
+Basic functionality tests using Vitest and `@internals/testing` utilities.
 
 **Key Patterns:**
 
@@ -20,7 +20,7 @@ Basic functionality tests using Vitest and `@nvidia-elements/testing` utilities.
 ```typescript
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Badge } from '@nvidia-elements/core/badge';
 import '@nvidia-elements/core/badge/define.js';
 
@@ -46,7 +46,7 @@ describe(Badge.metadata.tag, () => {
 
 ## Testing Utilities
 
-### @nvidia-elements/testing
+### @internals/testing
 
 Core testing utilities for DOM manipulation and element stability:
 

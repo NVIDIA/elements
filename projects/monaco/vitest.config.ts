@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryTestConfig } from '@nve-internals/vite/configs/test.js';
+import { libraryTestConfig } from '@internals/vite/configs/test.js';
 
 export default mergeConfig(libraryTestConfig, {
   root: import.meta.dirname,

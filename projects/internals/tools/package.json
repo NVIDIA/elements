@@ -194,8 +194,8 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@nve-internals/eslint": "workspace:*",
-    "@nve-internals/vite": "workspace:*",
+    "@internals/eslint": "workspace:*",
+    "@internals/vite": "workspace:*",
     "@nve-internals/metadata": "workspace:*",
     "@types/node": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",

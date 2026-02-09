@@ -3,7 +3,7 @@ import { property } from 'lit/decorators/property.js';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attachInternals, typeSubmit } from '@nvidia-elements/core/internal';
-import { elementIsStable, createFixture, removeFixture, emulateClick, untilEvent } from '@nvidia-elements/testing';
+import { elementIsStable, createFixture, removeFixture, emulateClick, untilEvent } from '@internals/testing';
 
 @typeSubmit<TypeSubmitControllerTestElement>()
 @customElement('type-submit-controller-test-element')

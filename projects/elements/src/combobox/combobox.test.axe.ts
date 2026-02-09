@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { runAxe } from '@nvidia-elements/testing/axe';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
+import { runAxe } from '@internals/testing/axe';
 import { Combobox } from '@nvidia-elements/core/combobox';
 import '@nvidia-elements/core/combobox/define.js';
 

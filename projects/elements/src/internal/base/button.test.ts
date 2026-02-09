@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { BaseButton } from '@nvidia-elements/core/internal';
-import { createFixture, elementIsStable, emulateClick, untilEvent, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, emulateClick, untilEvent, removeFixture } from '@internals/testing';
 
 @customElement('base-button-test-element')
 class BaseButtonTestElement extends BaseButton {}

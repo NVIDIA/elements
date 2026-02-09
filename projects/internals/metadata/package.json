@@ -544,8 +544,8 @@
     "minisearch": "7.2.0"
   },
   "devDependencies": {
-    "@nve-internals/eslint": "workspace:*",
-    "@nve-internals/vite": "workspace:*",
+    "@internals/eslint": "workspace:*",
+    "@internals/vite": "workspace:*",
     "@types/node": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "eslint": "catalog:",

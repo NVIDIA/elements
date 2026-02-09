@@ -1,4 +1,4 @@
-# @nve-internals/vite
+# @internals/vite
 
 This project is a private and internal API for the elements repo. This provides default Vite build and test configs for our projects.
 
@@ -18,7 +18,7 @@ The default configs are standard Vite configuration objects. The objects can be 
 // vite.config.ts
 import { resolve } from 'path';
 import { UserConfig, defineConfig, mergeConfig } from 'vite';
-import { libraryBuildConfig } from '@nve-internals/vite';
+import { libraryBuildConfig } from '@internals/vite';
 
 export default defineConfig(() => {
   const config: UserConfig = {
@@ -38,7 +38,7 @@ export default defineConfig(() => {
 // vitest.config.ts
 import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryTestConfig } from '@nve-internals/vite';
+import { libraryTestConfig } from '@internals/vite';
 
 export default mergeConfig(libraryTestConfig, {
   test: {
@@ -52,7 +52,7 @@ export default mergeConfig(libraryTestConfig, {
 // dot.test.ts
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Dot } from '@nvidia-elements/core/dot';
 import '@nvidia-elements/core/dot/define.js';
 
@@ -90,7 +90,7 @@ vitest run --config=vitest.ts
 // vitest.axe.ts
 import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryAxeTestConfig } from '@nve-internals/vite';
+import { libraryAxeTestConfig } from '@internals/vite';
 
 export default mergeConfig(libraryAxeTestConfig, {
   test: {
@@ -104,8 +104,8 @@ export default mergeConfig(libraryAxeTestConfig, {
 // dot.test.axe.ts
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
-import { runAxe } from '@nvidia-elements/testing/axe';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
+import { runAxe } from '@internals/testing/axe';
 import { Dot } from '@nvidia-elements/core/dot';
 import '@nvidia-elements/core/dot/define.js';
 
@@ -134,7 +134,7 @@ vitest run --config=vitest.axe.ts
 ```typescript
 // vitest.lighthouse.ts
 import { mergeConfig } from 'vitest/config';
-import { libraryLighthouseConfig } from '@nve-internals/vite';
+import { libraryLighthouseConfig } from '@internals/vite';
 
 export default mergeConfig(libraryLighthouseConfig, {
   test: {
@@ -171,7 +171,7 @@ Create a base template for lighthouse to run tests in `vitest.lighthouse.html`
 ```typescript
 // dot.test.lighthouse.ts
 import { expect, test, describe } from 'vitest';
-import { lighthouseRunner } from '@nve-internals/vite';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('dot lighthouse report', () => {
   test('dot should meet lighthouse benchmarks', async () => {
@@ -201,7 +201,7 @@ vitest run --config=vitest.lighthouse.ts
 ```typescript
 // vitest.visual.ts
 import { mergeConfig } from 'vitest/config';
-import { libraryVisualTestConfig } from '@nve-internals/vite';
+import { libraryVisualTestConfig } from '@internals/vite';
 
 export default mergeConfig(libraryVisualTestConfig, {
   test: {
@@ -242,7 +242,7 @@ Create a test file example: `src/dot/dot.test.visual.ts`
 
 ```typescript
 import { expect, test, describe } from 'vitest';
-import { visualRunner } from '@nve-internals/vite';
+import { visualRunner } from '@internals/vite';
 
 describe('dot visual', () => {
   test('dot should match visual baseline', async () => {
@@ -270,7 +270,7 @@ Ensure Lit based components successfully can be server side rendered (SSR).
 ```typescript
 // vitest.ssr.ts
 import { mergeConfig } from 'vitest/config';
-import { libraryLitSSRTestConfig } from '@nve-internals/vite';
+import { libraryLitSSRTestConfig } from '@internals/vite';
 
 export default mergeConfig(libraryLitSSRTestConfig, {
   test: {
@@ -288,7 +288,7 @@ export default mergeConfig(libraryLitSSRTestConfig, {
 // dot.test.ssr.ts
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Dot } from '@nvidia-elements/core/dot';
 import '@nvidia-elements/core/dot/define.js';
 

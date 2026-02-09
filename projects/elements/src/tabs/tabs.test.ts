@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@internals/testing';
 import { TabsItem, Tabs } from '@nvidia-elements/core/tabs';
 import { getAnchorNames } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/tabs/define.js';

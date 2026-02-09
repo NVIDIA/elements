@@ -1,7 +1,7 @@
 import { html, LitElement, css } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
 import type { StateScrollConfig } from '@nvidia-elements/core/internal';
 import { stateScroll } from '@nvidia-elements/core/internal';
 

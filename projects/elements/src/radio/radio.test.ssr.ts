@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Radio } from '@nvidia-elements/core/radio';
 import '@nvidia-elements/core/radio/define.js';
 

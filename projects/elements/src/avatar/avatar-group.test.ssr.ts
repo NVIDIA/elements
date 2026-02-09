@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { AvatarGroup } from '@nvidia-elements/core/avatar';
 import '@nvidia-elements/core/avatar/define.js';
 

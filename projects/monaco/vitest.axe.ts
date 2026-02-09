@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryAxeTestConfig } from '@nve-internals/vite/configs/axe.js';
+import { libraryAxeTestConfig } from '@internals/vite/configs/axe.js';
 
 // currently disabled in ci likely due to this issue https://github.com/vitest-dev/vitest/issues/8447
 export default mergeConfig(libraryAxeTestConfig, {

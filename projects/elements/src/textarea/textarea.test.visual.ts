@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { visualRunner } from '@nve-internals/vite';
+import { visualRunner } from '@internals/vite';
 
 describe('textarea visual', () => {
   test('textarea should match visual baseline', async () => {

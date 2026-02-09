@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { mergeConfig } from 'vitest/config';
-import { libraryAxeTestConfig } from '@nve-internals/vite/configs/axe.js';
+import { libraryAxeTestConfig } from '@internals/vite/configs/axe.js';
 
 export default mergeConfig(libraryAxeTestConfig, {
   root: import.meta.dirname,

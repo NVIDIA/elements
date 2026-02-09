@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
 import { typeTouch } from '@nvidia-elements/core/internal';
 import type { NveTouchEvent } from '@nvidia-elements/core/internal';
 

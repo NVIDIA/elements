@@ -1,5 +1,5 @@
 import { expect, test, describe, beforeAll } from 'vitest';
-import { lighthouseRunner } from '@nve-internals/vite';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('lighthouse report', () => {
   let report: { payload: { css: { kb: number, requests: { [key: string]: { kb: number } } } } };
