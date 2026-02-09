@@ -114,8 +114,8 @@
         "../../labs/brand/dist/custom-elements.json",
         "../../labs/code/package.json",
         "../../labs/code/dist/custom-elements.json",
-        "../../labs/forms/package.json",
-        "../../labs/forms/dist/custom-elements.json",
+        "../../forms/package.json",
+        "../../forms/dist/custom-elements.json",
         "../../labs/behaviors-alpine/package.json",
         "../../labs/behaviors-alpine/dist/custom-elements.json",
         "../../labs/markdown/package.json",
@@ -162,7 +162,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/forms:build",
+          "script": "../../forms:build",
           "cascade": false
         },
         {
@@ -201,9 +201,9 @@
         "../../labs/code/package.json",
         "../../labs/code/README.md",
         "../../labs/code/CHANGELOG.md",
-        "../../labs/forms/package.json",
-        "../../labs/forms/README.md",
-        "../../labs/forms/CHANGELOG.md",
+        "../../forms/package.json",
+        "../../forms/README.md",
+        "../../forms/CHANGELOG.md",
         "../../labs/behaviors-alpine/package.json",
         "../../labs/behaviors-alpine/README.md",
         "../../labs/behaviors-alpine/CHANGELOG.md",
@@ -251,8 +251,8 @@
         "../../labs/code/coverage/unit/summary.json",
         "../../labs/code/coverage/visual/summary.json",
         "../../labs/code/coverage/ssr/summary.json",
-        "../../labs/forms/coverage/unit/coverage-summary.json",
-        "../../labs/forms/coverage/unit/summary.json",
+        "../../forms/coverage/unit/coverage-summary.json",
+        "../../forms/coverage/unit/summary.json",
         "../../labs/behaviors-alpine/coverage/unit/coverage-summary.json",
         "../../labs/behaviors-alpine/coverage/unit/summary.json",
         "../../labs/markdown/coverage/unit/coverage-summary.json",
@@ -313,7 +313,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/forms:test:coverage",
+          "script": "../../forms:test:coverage",
           "cascade": false
         },
         {
@@ -360,7 +360,7 @@
         "../../monaco/dist/**/*.examples.json",
         "../../labs/brand/dist/**/*.examples.json",
         "../../labs/code/dist/**/*.examples.json",
-        "../../labs/forms/dist/**/*.examples.json",
+        "../../forms/dist/**/*.examples.json",
         "../../labs/markdown/dist/**/*.examples.json"
       ],
       "output": [
@@ -396,7 +396,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/forms:build",
+          "script": "../../forms:build",
           "cascade": false
         },
         {

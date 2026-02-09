@@ -80,8 +80,8 @@
         "../labs/brand/dist/**/*.examples.json",
         "../labs/code/dist/**/*.js",
         "../labs/code/dist/**/*.examples.json",
-        "../labs/forms/dist/**/*.js",
-        "../labs/forms/dist/**/*.examples.json",
+        "../forms/dist/**/*.js",
+        "../forms/dist/**/*.examples.json",
         "../labs/markdown/dist/**/*.js",
         "../labs/markdown/dist/**/*.examples.json",
         "../monaco/dist/**/*.js",
@@ -115,7 +115,7 @@
           "cascade": false
         },
         {
-          "script": "../labs/forms:build",
+          "script": "../forms:build",
           "cascade": false
         },
         {
