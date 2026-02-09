@@ -224,8 +224,8 @@
         "../elements/dist/internal/utils/dom.js",
         "../elements/dist/internal/styles/**",
         "!../elements/dist/**/*.examples.js",
-        "../labs/forms/dist/**/*.js",
-        "!../labs/forms/dist/**/*.examples.js",
+        "../forms/dist/**/*.js",
+        "!../forms/dist/**/*.examples.js",
         "../themes/dist/**/*.css",
         "src/**",
         "!src/**/*.test.ts",
@@ -255,7 +255,7 @@
           "cascade": false
         },
         {
-          "script": "../labs/forms:build",
+          "script": "../forms:build",
           "cascade": false
         },
         {

@@ -261,7 +261,7 @@ importers:
     dependencies:
       '@nvidia-elements/forms':
         specifier: workspace:^
-        version: link:../labs/forms
+        version: link:../forms
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -397,6 +397,58 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vite:
+        specifier: 'catalog:'
+        version: 7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2)
+
+  projects/forms:
+    dependencies:
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.2
+    devDependencies:
+      '@eslint/js':
+        specifier: 'catalog:'
+        version: 9.39.2
+      '@nve-internals/eslint':
+        specifier: workspace:*
+        version: link:../internals/eslint
+      '@nve-internals/vite':
+        specifier: workspace:*
+        version: link:../internals/vite
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../labs/lint
+      '@nvidia-elements/snippets':
+        specifier: workspace:*
+        version: link:../labs/snippets
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../styles
+      '@nvidia-elements/testing':
+        specifier: workspace:*
+        version: link:../testing
+      '@vitest/browser':
+        specifier: 'catalog:'
+        version: 4.0.16(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
+      '@vitest/coverage-istanbul':
+        specifier: 'catalog:'
+        version: 4.0.16(vitest@4.0.16)
+      axe-core:
+        specifier: 'catalog:'
+        version: 4.11.0
+      eslint:
+        specifier: 'catalog:'
+        version: 9.39.2(jiti@2.6.1)
+      publint:
+        specifier: 'catalog:'
+        version: 0.3.15
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -929,58 +981,6 @@ importers:
         specifier: 'catalog:'
         version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2)
 
-  projects/labs/forms:
-    dependencies:
-      lit:
-        specifier: 'catalog:'
-        version: 3.3.2
-    devDependencies:
-      '@eslint/js':
-        specifier: 'catalog:'
-        version: 9.39.2
-      '@nve-internals/eslint':
-        specifier: workspace:*
-        version: link:../../internals/eslint
-      '@nve-internals/vite':
-        specifier: workspace:*
-        version: link:../../internals/vite
-      '@nvidia-elements/lint':
-        specifier: workspace:*
-        version: link:../lint
-      '@nvidia-elements/snippets':
-        specifier: workspace:*
-        version: link:../snippets
-      '@nvidia-elements/styles':
-        specifier: workspace:*
-        version: link:../../styles
-      '@nvidia-elements/testing':
-        specifier: workspace:*
-        version: link:../../testing
-      '@vitest/browser':
-        specifier: 'catalog:'
-        version: 4.0.16(vite@7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2))(vitest@4.0.16)
-      '@vitest/coverage-istanbul':
-        specifier: 'catalog:'
-        version: 4.0.16(vitest@4.0.16)
-      axe-core:
-        specifier: 'catalog:'
-        version: 4.11.0
-      eslint:
-        specifier: 'catalog:'
-        version: 9.39.2(jiti@2.6.1)
-      publint:
-        specifier: 'catalog:'
-        version: 0.3.15
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      vite:
-        specifier: 'catalog:'
-        version: 7.3.0(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2)
-      vitest:
-        specifier: 'catalog:'
-        version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.0.3)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2)
-
   projects/labs/lint:
     dependencies:
       '@eslint/css':
@@ -1214,7 +1214,7 @@ importers:
     dependencies:
       '@nvidia-elements/forms':
         specifier: workspace:^
-        version: link:../labs/forms
+        version: link:../forms
       lit:
         specifier: 'catalog:'
         version: 3.3.2
@@ -1345,7 +1345,7 @@ importers:
         version: link:../labs/code
       '@nvidia-elements/forms':
         specifier: workspace:*
-        version: link:../labs/forms
+        version: link:../forms
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../labs/lint

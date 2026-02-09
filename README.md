@@ -135,7 +135,7 @@ git commit -a -m "fix(elements): disabled multi-select"
 | `labs-brand`                 | `/labs/brand`                 |
 | `labs-cli`                   | `/labs/cli`                   |
 | `labs-code`                  | `/labs/code`                  |
-| `labs-forms`                 | `/labs/forms`                 |
+| `forms`                      | `/projects/forms`             |
 
 Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
 

@@ -23,7 +23,6 @@ packages:
   - projects/labs/brand
   - projects/labs/cli
   - projects/labs/code
-  - projects/labs/forms
   - projects/labs/lint
   - projects/labs/markdown
   - projects/labs/media
@@ -34,6 +33,7 @@ packages:
   - projects/create
   - projects/elements
   - projects/elements-react
+  - projects/forms
   - projects/styles
   - projects/testing
   - projects/themes
