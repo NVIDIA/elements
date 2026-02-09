@@ -73,7 +73,7 @@ export const LoginPage = {
     return html`
 <nve-page style="height: 600px">
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
     <h2 slot="prefix" nve-text="heading sm">Developer Portal</h2>
     <nve-button container="flat"><a href="#">Documentation</a></nve-button>
     <nve-button container="flat"><a href="#">APIs</a></nve-button>

@@ -98,6 +98,19 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
+  <a href="docs/patterns/logging/">
+    <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
+          <nve-icon name="terminal"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">Logging</h2>
+          <p nve-text="body sm muted">Common logging and timeline lists</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
   <a href="docs/patterns/media/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">
@@ -146,6 +159,19 @@ Patterns are an essential component of creating a cohesive and consistent user e
         <div nve-layout="column pad:xs gap:xs">
           <h2 nve-text="label medium">Responsive</h2>
           <p nve-text="body sm muted">Adaptive overflow with container queries</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
+  <a href="docs/patterns/search/">
+    <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
+          <nve-icon name="search"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">Search</h2>
+          <p nve-text="body sm muted">Search and progressive filtering</p>
         </div>
       </div>
     </nve-card>

@@ -12,41 +12,40 @@ export default {
  */
 export const Default = {
   render: () => html`
-  <nve-tag>topic-tag</nve-tag>
-  `
+<nve-tag>topic-tag</nve-tag>`
 };
 
 /**
  * @summary Closable tags with comprehensive color palette, enabling user interaction for filtering, selection, and dynamic content management.
+ * @tags test-case
  */
 export const Closable = {
   render: () => html`
-  <div nve-layout="row gap:xs align:wrap">
-    <nve-tag closable>default-color</nve-tag>
-    <nve-tag closable color="red-cardinal">red-cardinal</nve-tag>
-    <nve-tag closable color="gray-slate">gray-slate</nve-tag>
-    <nve-tag closable color="gray-denim">gray-denim</nve-tag>
-    <nve-tag closable color="blue-indigo">blue-indigo</nve-tag>
-    <nve-tag closable color="blue-cobalt">blue-cobalt</nve-tag>
-    <nve-tag closable color="blue-sky">blue-sky</nve-tag>
-    <nve-tag closable color="teal-cyan">teal-cyan</nve-tag>
-    <nve-tag closable color="green-mint">green-mint</nve-tag>
-    <nve-tag closable color="teal-seafoam">teal-seafoam</nve-tag>
-    <nve-tag closable color="green-grass">green-grass</nve-tag>
-    <nve-tag closable color="yellow-amber">yellow-amber</nve-tag>
-    <nve-tag closable color="orange-pumpkin">orange-pumpkin</nve-tag>
-    <nve-tag closable color="red-tomato">red-tomato</nve-tag>
-    <nve-tag closable color="pink-magenta">pink-magenta</nve-tag>
-    <nve-tag closable color="purple-plum">purple-plum</nve-tag>
-    <nve-tag closable color="purple-violet">purple-violet</nve-tag>
-    <nve-tag closable color="purple-lavender">purple-lavender</nve-tag>
-    <nve-tag closable color="pink-rose">pink-rose</nve-tag>
-    <nve-tag closable color="green-jade">green-jade</nve-tag>
-    <nve-tag closable color="lime-pear">lime-pear</nve-tag>
-    <nve-tag closable color="yellow-nova">yellow-nova</nve-tag>
-    <nve-tag closable color="brand-green">brand-green</nve-tag>
-  </div>
-  `
+<div nve-layout="row gap:xs align:wrap">
+  <nve-tag closable>default-color</nve-tag>
+  <nve-tag closable color="red-cardinal">red-cardinal</nve-tag>
+  <nve-tag closable color="gray-slate">gray-slate</nve-tag>
+  <nve-tag closable color="gray-denim">gray-denim</nve-tag>
+  <nve-tag closable color="blue-indigo">blue-indigo</nve-tag>
+  <nve-tag closable color="blue-cobalt">blue-cobalt</nve-tag>
+  <nve-tag closable color="blue-sky">blue-sky</nve-tag>
+  <nve-tag closable color="teal-cyan">teal-cyan</nve-tag>
+  <nve-tag closable color="green-mint">green-mint</nve-tag>
+  <nve-tag closable color="teal-seafoam">teal-seafoam</nve-tag>
+  <nve-tag closable color="green-grass">green-grass</nve-tag>
+  <nve-tag closable color="yellow-amber">yellow-amber</nve-tag>
+  <nve-tag closable color="orange-pumpkin">orange-pumpkin</nve-tag>
+  <nve-tag closable color="red-tomato">red-tomato</nve-tag>
+  <nve-tag closable color="pink-magenta">pink-magenta</nve-tag>
+  <nve-tag closable color="purple-plum">purple-plum</nve-tag>
+  <nve-tag closable color="purple-violet">purple-violet</nve-tag>
+  <nve-tag closable color="purple-lavender">purple-lavender</nve-tag>
+  <nve-tag closable color="pink-rose">pink-rose</nve-tag>
+  <nve-tag closable color="green-jade">green-jade</nve-tag>
+  <nve-tag closable color="lime-pear">lime-pear</nve-tag>
+  <nve-tag closable color="yellow-nova">yellow-nova</nve-tag>
+  <nve-tag closable color="brand-green">brand-green</nve-tag>
+</div>`
 };
 
 /**
@@ -54,8 +53,7 @@ export const Closable = {
  */
 export const Readonly = {
   render: () => html`
-  <nve-tag readonly>topic-tag</nve-tag>
-  `
+<nve-tag readonly>topic-tag</nve-tag>`
 };
 
 /**
@@ -63,14 +61,13 @@ export const Readonly = {
  */
 export const TagGroup = {
   render: () => html`
-   <div nve-layout="row gap:xs align:vertical-center">
-    <nve-tag>topic-tag</nve-tag>
-    <nve-tag>topic-tag</nve-tag>
-    <nve-tag>topic-tag</nve-tag>
-    <nve-tag>3+</nve-tag>
-    <nve-icon-button container="flat" size="sm" icon-name="add"></nve-icon-button>
-  </div>
-  `
+<div nve-layout="row gap:xs align:vertical-center">
+  <nve-tag>topic-tag</nve-tag>
+  <nve-tag>topic-tag</nve-tag>
+  <nve-tag>topic-tag</nve-tag>
+  <nve-tag>3+</nve-tag>
+  <nve-icon-button container="flat" size="sm" icon-name="add"></nve-icon-button>
+</div>`
 };
 
 /**
@@ -134,8 +131,7 @@ export const Prominence = {
   <nve-tag prominence="emphasis" color="lime-pear">lime-pear</nve-tag>
   <nve-tag prominence="emphasis" color="yellow-nova">yellow-nova</nve-tag>
   <nve-tag prominence="emphasis" color="brand-green">brand-green</nve-tag>
-</div>
-  `
+</div>`
 };
 
 
@@ -145,8 +141,7 @@ export const Prominence = {
  */
 export const OverflowSingle = {
   render: () => html`
-  <nve-tag style="--width: 150px">some really long content</nve-tag>
-  `
+<nve-tag style="--width: 150px">some really long content</nve-tag>`
 };
 
 
@@ -161,9 +156,7 @@ export const OverflowMaxWidth= {
       --max-width: 100px;
     }
   </style>
-
   <nve-tag class="limit-width">two words</nve-tag>
   <nve-tag class="limit-width">three words here</nve-tag>
-  <nve-tag class="limit-width">four words long here</nve-tag>
-  `
+  <nve-tag class="limit-width">four words long here</nve-tag>`
 };

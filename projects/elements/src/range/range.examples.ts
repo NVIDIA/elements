@@ -79,6 +79,7 @@ export const Step = {
 
 /**
  * @summary Vertical layout configuration for stacked form arrangements, displaying label, slider, and message in a column format with support for various states including disabled, success, and error feedback.
+ * @tags test-case
  */
 export const Vertical = {
   render: () => html`
@@ -111,6 +112,7 @@ export const Vertical = {
 
 /**
  * @summary Horizontal layout configuration for inline form arrangements, positioning label and slider side-by-side for compact displays with support for various states including disabled, success, and error feedback.
+ * @tags test-case
  */
 export const Horizontal = {
   render: () => html`

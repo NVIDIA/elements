@@ -21,6 +21,7 @@ export const Default = {
 
 /**
  * @summary Textareas with vertical layout demonstrating validation states including disabled, success, and error.
+ * @tags test-case
  */
 export const Vertical = {
   render: () => html`
@@ -53,6 +54,7 @@ export const Vertical = {
 
 /**
  * @summary Textareas with horizontal layout showing validation states for inline forms and compact layouts.
+ * @tags test-case
  */
 export const Horizontal = {
   render: () => html`

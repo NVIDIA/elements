@@ -19,6 +19,7 @@ export const Default = {
 
 /**
  * @summary Divider with emphasis color styling for stronger visual separation between content sections.
+ * @tags test-case
  */
 export const Emphasis = {
   render: () => html`
@@ -28,6 +29,7 @@ export const Emphasis = {
 
 /**
  * @summary Divider with muted color styling for subtle, low-contrast separation in dense layouts.
+ * @tags test-case
  */
 export const Muted = {
   render: () => html`
@@ -50,6 +52,7 @@ export const Vertical = {
 
 /**
  * @summary Divider with custom rounded styling, thicker border, and accent color for decorative separation.
+ * @tags test-case
  */
 export const Rounded = {
   render: () => html`

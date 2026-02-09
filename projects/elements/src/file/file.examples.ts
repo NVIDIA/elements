@@ -22,6 +22,7 @@ export const Default = {
 
 /**
  * @summary Vertical layout file inputs showing all validation states including disabled, success, and error. Use for stacked form layouts where labels appear above inputs.
+ * @tags test-case
  */
 export const Vertical = {
   render: () => html`
@@ -54,6 +55,7 @@ export const Vertical = {
 
 /**
  * @summary Horizontal layout file inputs with side-by-side labels. Ideal for compact forms or when aligning labels with other horizontal form controls.
+ * @tags test-case
  */
 export const Horizontal = {
   render: () => html`
