@@ -10,7 +10,7 @@ describe('PlaygroundService', () => {
       template: '<nve-button nve-layout="column">hello there</nve-button>'
     });
     expect(Array.isArray(result)).toBe(true);
-    expect(result.length).toBe(1);
+    expect(result.length).toBe(2);
     expect(result[0].message).toBe(
       'Unexpected use of restricted attribute "nve-layout" on <nve-button>. Remove the attribute.'
     );
@@ -18,6 +18,9 @@ describe('PlaygroundService', () => {
     expect(result[0].column).toBe(13);
     expect(result[0].endLine).toBe(1);
     expect(result[0].endColumn).toBe(32);
+    expect(result[1].message).toBe(
+      'Layout "column" is missing gap spacing. Add a gap value such as "xs", "sm", "md", "lg", "xl"'
+    );
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.name).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.command).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.description).toBe(
