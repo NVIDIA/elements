@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@internals/testing';
 import { Accordion, AccordionContent, AccordionGroup, AccordionHeader } from '@nvidia-elements/core/accordion';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import '@nvidia-elements/core/accordion/define.js';

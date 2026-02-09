@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { lighthouseRunner } from '@nve-internals/vite';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('accordion lighthouse report', () => {
   test('accordion should meet a lighthouse performance score of 100', async () => {

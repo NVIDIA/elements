@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { lighthouseRunner } from '@nve-internals/vite';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('page-header lighthouse report', () => {
   test('page-header should meet lighthouse benchmarks', async () => {

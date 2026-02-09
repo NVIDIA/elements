@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Skeleton } from '@nvidia-elements/core/skeleton';
 import '@nvidia-elements/core/skeleton/define.js';
 

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
 import { Tree } from '@nvidia-elements/core/tree';
 import { TreeNode } from '@nvidia-elements/core/tree';
 import '@nvidia-elements/core/tree/define.js';

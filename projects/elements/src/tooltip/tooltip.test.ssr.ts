@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Tooltip } from '@nvidia-elements/core/tooltip';
 import '@nvidia-elements/core/tooltip/define.js';
 

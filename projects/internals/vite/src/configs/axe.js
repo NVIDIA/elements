@@ -76,7 +76,7 @@ export const libraryAxeTestConfig = {
       if (log.startsWith('[Error: Expected error]')) return false;
       if (log.startsWith('Ignored')) return false;
     },
-    setupFiles: ['@nve-internals/vite/setup/axe.js'], // todo: this should be project specific
+    setupFiles: ['@internals/vite/setup/axe.js'], // todo: this should be project specific
     browser: {
       isolate: false,
       enabled: true,

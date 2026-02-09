@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { visualRunner } from '@nve-internals/vite';
+import { visualRunner } from '@internals/vite';
 import { template as inputTemplate, readyCheck as inputReadyCheck } from './input/input.test.visual.js';
 import { template as editorTemplate, readyCheck as editorReadyCheck } from './editor/editor.test.visual.js';
 import {

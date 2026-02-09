@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Tree } from '@nvidia-elements/core/tree';
 import '@nvidia-elements/core/tree/define.js';
 

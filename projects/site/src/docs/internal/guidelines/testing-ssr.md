@@ -20,7 +20,7 @@ Server-side rendering compatibility tests.
 ```typescript
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Badge } from '@nvidia-elements/core/badge';
 import '@nvidia-elements/core/badge/define.js';
 

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import '@nvidia-elements/core/dropdown-group/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/button/define.js';

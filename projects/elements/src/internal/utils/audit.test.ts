@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { auditSlots, auditParentElement } from './audit.js';
-import { createFixture, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, removeFixture } from '@internals/testing';
 
 @customElement('audit-test-element')
 class AuditTestElement extends LitElement {

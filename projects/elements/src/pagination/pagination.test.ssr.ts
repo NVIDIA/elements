@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Pagination } from '@nvidia-elements/core/pagination';
 import '@nvidia-elements/core/pagination/define.js';
 

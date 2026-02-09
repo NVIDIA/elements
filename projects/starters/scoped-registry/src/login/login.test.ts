@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import type { DomainLogin } from 'scoped-registry/login';
 import '@webcomponents/scoped-custom-element-registry';
 import 'scoped-registry/login/define.js';

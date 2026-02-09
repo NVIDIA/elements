@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable } from '@internals/testing';
 import { statusIcons } from '@nvidia-elements/core/internal';
 import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 import { Icon } from '@nvidia-elements/core/icon';

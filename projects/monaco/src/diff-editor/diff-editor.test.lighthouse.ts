@@ -1,5 +1,5 @@
 import { expect, test, describe } from 'vitest';
-import { lighthouseRunner } from '@nve-internals/vite';
+import { lighthouseRunner } from '@internals/vite';
 
 describe('monaco-diff-editor lighthouse report', () => {
   test('monaco-diff-editor should meet lighthouse benchmarks', async () => {

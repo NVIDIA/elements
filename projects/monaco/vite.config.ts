@@ -1,6 +1,6 @@
 import { resolve } from 'path';
 import { UserConfig, defineConfig, mergeConfig } from 'vite';
-import { libraryBuildConfig } from '@nve-internals/vite';
+import { libraryBuildConfig } from '@internals/vite';
 
 const prod = process.env.NODE_ENV === 'production';
 

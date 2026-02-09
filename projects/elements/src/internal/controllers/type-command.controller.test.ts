@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, untilEvent, emulateClick } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, untilEvent, emulateClick } from '@internals/testing';
 import { TypeCommandController } from '@nvidia-elements/core/internal';
 
 @customElement('type-command-controller-test-element')

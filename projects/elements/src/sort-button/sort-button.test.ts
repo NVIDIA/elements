@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, emulateClick, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture, emulateClick, untilEvent } from '@internals/testing';
 import { SortButton } from '@nvidia-elements/core/sort-button';
 import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/sort-button/define.js';

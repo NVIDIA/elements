@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { StarRating } from '@nvidia-elements/core/star-rating';
 import '@nvidia-elements/core/star-rating/define.js';
 

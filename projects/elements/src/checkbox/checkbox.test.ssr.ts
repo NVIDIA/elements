@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { Checkbox } from '@nvidia-elements/core/checkbox';
 import '@nvidia-elements/core/checkbox/define.js';
 

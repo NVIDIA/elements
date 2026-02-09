@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
 import { ControlMessage } from '../control-message/control-message.js';
 import { Control } from '../control/control.js';
 import { ControlGroup } from '../control-group/control-group.js';

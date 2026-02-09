@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it } from 'vitest';
-import { ssrRunner } from '@nve-internals/vite';
+import { ssrRunner } from '@internals/vite';
 import { ButtonGroup } from '@nvidia-elements/core/button-group';
 import '@nvidia-elements/core/button-group/define.js';
 
