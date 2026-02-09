@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@internals/testing';
 import { Combobox } from '@nvidia-elements/core/combobox';
 import { Menu, MenuItem } from '@nvidia-elements/core/menu';
 import { Dropdown } from '@nvidia-elements/core/dropdown';

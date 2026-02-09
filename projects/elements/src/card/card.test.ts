@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Card, CardHeader, CardFooter, CardContent } from '@nvidia-elements/core/card';
 import { getFlatDOMTree } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/card/define.js';

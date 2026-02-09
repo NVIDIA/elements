@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Badge } from '@nvidia-elements/core/badge';
 import { Icon } from '@nvidia-elements/core/icon';
 import type { TaskStatus, TrendStatus } from '@nvidia-elements/core/internal';

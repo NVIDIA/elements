@@ -174,7 +174,7 @@
     "@nvidia-elements/snippets": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
-    "@nvidia-elements/testing": "workspace:*",
+    "@internals/testing": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@types/node": "catalog:",
     "@vitest/browser": "catalog:",

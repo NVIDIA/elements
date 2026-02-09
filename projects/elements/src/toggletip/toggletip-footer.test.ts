@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable } from '@internals/testing';
 import { ToggletipFooter } from '@nvidia-elements/core/toggletip';
 import '@nvidia-elements/core/toggletip/define.js';
 

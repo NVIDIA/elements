@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
 import { ResizeHandle } from '@nvidia-elements/core/resize-handle';
 import '@nvidia-elements/core/resize-handle/define.js';
 

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
 import { Grid, GridColumn } from '@nvidia-elements/core/grid';
 import '@nvidia-elements/core/grid/define.js';
 import '@nvidia-elements/core/icon-button/define.js';

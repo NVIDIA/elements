@@ -63,13 +63,13 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "@nvidia-elements/testing": "workspace:*",
+    "@internals/testing": "workspace:*",
     "@webcomponents/scoped-custom-element-registry": "catalog:",
     "lit": "catalog:"
   },
   "devDependencies": {
     "@internals/vite": "workspace:*",
-    "@nvidia-elements/testing": "workspace:*",
+    "@internals/testing": "workspace:*",
     "@vitest/browser": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "glob": "catalog:",

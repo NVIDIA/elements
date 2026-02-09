@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@nvidia-elements/themes": "workspace:*",
-    "@nvidia-elements/testing": "workspace:*",
+    "@internals/testing": "workspace:*",
     "@internals/vite": "workspace:*",
     "@vitest/browser": "catalog:",
     "lit": "catalog:",

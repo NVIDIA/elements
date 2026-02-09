@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach, vi, type MockInstance } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Markdown } from '@nvidia-elements/markdown/markdown';
 import '@nvidia-elements/markdown/markdown/define.js';
 // Import CSS variables data for testing

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, untilEvent } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
 import { MonacoInput } from '@nvidia-elements/monaco/input';
 import { MonacoEditor } from '@nvidia-elements/monaco/editor';
 
