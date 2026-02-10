@@ -127,7 +127,7 @@ export class BaseButton extends LitElement {
    * Establishing a relationship between a popover and its invoker button.
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/popoverTargetElement
    */
-  @property({ type: Object }) popoverTargetElement: HTMLElement; // eslint-disable-line local/primitive-property
+  @property({ type: Object }) popoverTargetElement: HTMLElement = null; // eslint-disable-line local/primitive-property
 
   /**
    * The id of the element to which the popover is applied.
@@ -146,7 +146,7 @@ export class BaseButton extends LitElement {
    * The id of the element to which the command is applied.
    * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
    */
-  @property({ type: String, attribute: 'commandfor', reflect: true }) commandForElement: string;
+  @property({ type: String, attribute: 'commandfor', reflect: true }) commandForElement: string = null;
 
   /**
    * The command to be applied to the element.
@@ -156,9 +156,9 @@ export class BaseButton extends LitElement {
 
   /**
    * The id of the element to which the interest is applied.
-   * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/interestFor
+   * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/interestForElement
    */
-  @property({ type: Object }) interestForElement: HTMLElement; // eslint-disable-line local/primitive-property
+  @property({ type: Object }) interestForElement: HTMLElement = null; // eslint-disable-line local/primitive-property
 
   /**
    * @private

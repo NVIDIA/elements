@@ -29,22 +29,6 @@ export class TypeInterestController<T extends Interest> implements ReactiveContr
 
   async hostConnected() {
     await this.host.updateComplete;
-    const interestForIdRef = this.host.getAttribute('interestfor');
-    if (interestForIdRef) {
-      this.host.interestForElement = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(
-        el => el.id === interestForIdRef
-      );
-    }
-
-    // legacy behavior that allows popovertarget to trigger interestfor behavior for hint type popovers
-    const popovertargetIdRef = this.host.getAttribute('popovertarget');
-    if (popovertargetIdRef && !interestForIdRef) {
-      const target = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(el => el.id === popovertargetIdRef);
-      if (target && target.popover === 'hint') {
-        this.host.interestForElement = target;
-      }
-    }
-
     this.host.addEventListener('mouseenter', this.#triggerInterest);
     this.host.addEventListener('mouseleave', this.#triggerLoseInterest);
     this.host.addEventListener('focus', this.#triggerInterest);
@@ -59,6 +43,7 @@ export class TypeInterestController<T extends Interest> implements ReactiveContr
   }
 
   #triggerInterest = () => {
+    this.#updateInterestForElement();
     if (this.host.interestForElement) {
       const event = new Event('interest', { cancelable: true }) as InterestEvent;
       event.source = this.host;
@@ -67,10 +52,30 @@ export class TypeInterestController<T extends Interest> implements ReactiveContr
   };
 
   #triggerLoseInterest = () => {
+    this.#updateInterestForElement();
     if (this.host.interestForElement) {
       const event = new Event('loseinterest', { cancelable: true }) as InterestEvent;
       event.source = this.host;
       this.host.interestForElement.dispatchEvent(event);
     }
   };
+
+  // we can only do this on interaction as its too costly to do this on every getter or update of the interestfor attribute, this diverges from the native behavior of the interestfor attribute
+  #updateInterestForElement() {
+    const interestForIdRef = this.host.getAttribute('interestfor');
+    if (interestForIdRef && !this.host.interestForElement) {
+      this.host.interestForElement = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(
+        el => el.id === interestForIdRef
+      );
+    }
+
+    // legacy behavior that allows popovertarget to trigger interestfor behavior for hint type popovers
+    const popovertargetIdRef = this.host.getAttribute('popovertarget');
+    if (popovertargetIdRef && !interestForIdRef) {
+      const target = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(el => el.id === popovertargetIdRef);
+      if (target && target.popover === 'hint') {
+        this.host.interestForElement = target;
+      }
+    }
+  }
 }
