@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.13.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.13.0...@nvidia-elements/styles-v1.13.1) (2026-02-10)
+
+
+### Bug Fixes
+
+* **styles:** overlapping/duplicate align start rule ([d093eb1](https://github.com/NVIDIA/elements/commit/d093eb1c09cb14e20dd1aef61472b644c07ad8f6))
+
 ## [@nvidia-elements/styles-v1.13.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.12.5...@nvidia-elements/styles-v1.13.0) (2025-11-26)
 
 
