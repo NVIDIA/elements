@@ -22,7 +22,6 @@ export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> 
   }
 
   hostConnected() {
-    this.#updatePopoverTargetElement();
     this.host.addEventListener('click', this.#click);
   }
 
@@ -30,30 +29,25 @@ export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> 
     this.host.removeEventListener('click', this.#click);
   }
 
-  hostUpdated() {
-    this.#updatePopoverTargetElement();
-  }
-
-  #updatePopoverTargetElement() {
-    if (this.host.popovertarget) {
-      const popover = getFlattenedDOMTree(this.host.getRootNode()).find(e => e.id === this.host.popovertarget);
-      this.host.popoverTargetElement = popover;
-    }
-  }
-
   #click = () => {
-    const { popoverTargetElement, popoverTargetAction, disabled } = this.host;
     let source = this.host as HTMLElement;
+    let popoverTargetElement = this.host.popoverTargetElement;
+
+    // we can only do this on interaction as its too costly to do this on every getter or update of the popovertarget attribute, this diverges from the native behavior of the popovertarget attribute
+    if (!this.host.popoverTargetElement) {
+      popoverTargetElement = getFlattenedDOMTree(this.host.getRootNode()).find(e => e.id === this.host.popovertarget);
+      this.host.popoverTargetElement = popoverTargetElement ?? null;
+    }
 
     // if popover has explicit anchor, use it as the source
     if ((popoverTargetElement as NativePopoverTrigger)?.anchor) {
       source = getHostAnchor(popoverTargetElement as NativePopoverTrigger);
     }
 
-    if (popoverTargetElement && !disabled) {
-      if (popoverTargetAction === 'hide') {
+    if (popoverTargetElement && !this.host.disabled) {
+      if (this.host.popoverTargetAction === 'hide') {
         popoverTargetElement.hidePopover();
-      } else if (popoverTargetAction === 'show') {
+      } else if (this.host.popoverTargetAction === 'show') {
         popoverTargetElement.showPopover({ source });
       } else {
         popoverTargetElement.togglePopover({ source });
