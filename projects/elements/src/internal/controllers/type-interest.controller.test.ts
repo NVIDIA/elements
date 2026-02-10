@@ -2,7 +2,7 @@ import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { createFixture, removeFixture, untilEvent, elementIsStable } from '@internals/testing';
+import { createFixture, removeFixture, untilEvent, elementIsStable, emulateMouseEnter } from '@internals/testing';
 import { TypeInterestController, type InterestEvent } from '@nvidia-elements/core/internal';
 
 @customElement('type-interest-controller-test-element')
@@ -35,7 +35,9 @@ describe('type-interest.controller', () => {
       await elementIsStable(element);
     });
 
-    it('should set interestForElement from interestfor attribute', () => {
+    it('should set interestForElement from interestfor attribute', async () => {
+      emulateMouseEnter(element);
+      await elementIsStable(element);
       expect(element.interestForElement).toBe(target);
     });
 
@@ -81,7 +83,9 @@ describe('type-interest.controller', () => {
       await elementIsStable(element);
     });
 
-    it('should set interestForElement from popovertarget when target has popover="hint" but used popovertarget attribute', () => {
+    it('should set interestForElement from popovertarget when target has popover="hint" but used popovertarget attribute', async () => {
+      emulateMouseEnter(element);
+      await elementIsStable(element);
       expect(element.interestForElement).toBe(target);
     });
 
@@ -131,7 +135,9 @@ describe('type-interest.controller', () => {
       await elementIsStable(element);
     });
 
-    it('should use interestfor over popovertarget', () => {
+    it('should use interestfor over popovertarget', async () => {
+      emulateMouseEnter(element);
+      await elementIsStable(element);
       expect(element.interestForElement).toBe(target);
       expect(element.interestForElement).not.toBe(hintTarget);
     });
