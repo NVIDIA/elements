@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.57.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.57.3...@nvidia-elements/core-v1.57.4) (2026-02-10)
+
+
+### Bug Fixes
+
+* **elements:** popover element reference lookup performance fix ([bd37cce](https://github.com/NVIDIA/elements/commit/bd37cce709c426c891e2e8f2ae7d22d6173f92aa))
+
 ## [@nvidia-elements/core-v1.57.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.57.2...@nvidia-elements/core-v1.57.3) (2026-02-06)
 
 
