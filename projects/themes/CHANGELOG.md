@@ -1,3 +1,10 @@
+## [@nvidia-elements/themes-v1.12.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.12.0...@nvidia-elements/themes-v1.12.1) (2026-02-10)
+
+
+### Bug Fixes
+
+* **themes:** add missing project metadata ([ff31534](https://github.com/NVIDIA/elements/commit/ff3153472fc4dfcae2897c3e4e28fbd6dfa68f51))
+
 ## [@nvidia-elements/themes-v1.12.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.11.0...@nvidia-elements/themes-v1.12.0) (2026-01-15)
 
 
