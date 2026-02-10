@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.10.0...@nvidia-elements/lint-v0.11.0) (2026-02-10)
+
+
+### Features
+
+* **labs-lint:** layout lint rule for playgrounds ([46744b0](https://github.com/NVIDIA/elements/commit/46744b098c1c0efc48347b0c9bfe17f5e4150a62))
+
 ## [@nvidia-elements/lint-v0.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.9.0...@nvidia-elements/lint-v0.10.0) (2026-02-06)
 
 
