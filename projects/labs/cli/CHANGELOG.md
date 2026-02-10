@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.8.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.7.0...@nvidia-elements/cli-v0.8.0) (2026-02-10)
+
+
+### Features
+
+* **labs-cli:** support token description metadata ([7c6eff4](https://github.com/NVIDIA/elements/commit/7c6eff4d004d90c9cb0fc19ea2048db58e4b18aa))
+
 ## [@nvidia-elements/cli-v0.7.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.6.0...@nvidia-elements/cli-v0.7.0) (2026-02-06)
 
 
