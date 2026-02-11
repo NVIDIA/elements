@@ -41,6 +41,12 @@ import styles from './combobox.css?inline';
  * @cssprop --border-color
  * @cssprop --max-height
  * @cssprop --text-transform
+ * @csspart tag - The tag element for selected items
+ * @csspart dropdown - The dropdown popup element
+ * @csspart menu - The menu element
+ * @csspart menu-item - The menu item elements
+ * @csspart checkbox - The checkbox element
+ * @csspart icon - The icon element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/
  */
 export class Combobox extends Control implements ContainerElement {

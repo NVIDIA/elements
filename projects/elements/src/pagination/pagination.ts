@@ -31,6 +31,12 @@ import styles from './pagination.css?inline';
  * @cssprop --background
  * @cssprop --font-size
  * @cssprop --width
+ * @csspart icon-button - Base part applied to all icon button elements
+ * @csspart previous-icon-button - The previous page icon button
+ * @csspart next-icon-button - The next page icon button
+ * @csspart start-icon-button - The first page icon button
+ * @csspart end-icon-button - The last page icon button
+ * @csspart select - The page size select element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
  * @property {number} value - value the current page number
  */

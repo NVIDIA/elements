@@ -37,6 +37,7 @@ import styles from './dialog.css?inline';
  * @cssprop --max-height
  * @cssprop --animation-duration - Duration of dialog open/close animations
  * @csspart close-button - The inner template reference for the close button of the dialog.
+ * @csspart icon-button - The icon button element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
 @audit({ excessiveInstanceLimit })

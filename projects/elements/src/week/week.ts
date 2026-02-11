@@ -17,6 +17,7 @@ import styles from './week.css?inline';
  * @cssprop --border-radius
  * @cssprop --border
  * @cssprop --cursor
+ * @csspart icon-button - The calendar icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week
  * @themes false
  */
