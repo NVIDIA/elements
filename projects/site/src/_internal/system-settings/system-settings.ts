@@ -20,6 +20,7 @@ export class SystemSettings extends LitElement {
       animation: '',
       layer: '',
       sourceType: 'html',
+      showAdvancedApi: '',
       ...JSON.parse(localStorage.getItem('elements-sb-globals') ?? '{}')
     };
   }
@@ -87,6 +88,10 @@ export class SystemSettings extends LitElement {
             <label>Debug</label>
             <input type="checkbox" value="debug" .checked=${this.#globals.debug === 'debug'} @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ debug: e.target.checked ? 'debug' : '' })} />
           </nve-switch>
+          <nve-switch>
+            <label>Show Advanced API</label>
+            <input type="checkbox" value="show-advanced-api" .checked=${this.#globals.showAdvancedApi === 'show-advanced-api'} @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ showAdvancedApi: e.target.checked ? 'show-advanced-api' : '' })} />
+          </nve-switch>
         </nve-switch-group>
       </form>
       <nve-tooltip id="demo-layer-tooltip" position="left">The background layer color for examples and how they are displayed in the browser.</nve-tooltip>
@@ -94,7 +99,7 @@ export class SystemSettings extends LitElement {
   }
 
   #writeGlobals(update: Record<string, string>) {
-    const brandThemeSwitched = this.#globals.theme.includes('brand') || update.theme.includes('brand');
+    const brandThemeSwitched = this.#globals.theme.includes('brand') || update.theme?.includes('brand');
     const globals = { ...this.#globals, ...update };
     const themes = [
       globals.theme === 'auto'
@@ -117,9 +122,11 @@ export class SystemSettings extends LitElement {
     this.#globals = globals;
     globalThis.document.documentElement.setAttribute('nve-theme', themes);
     globalThis.document.documentElement.setAttribute('nve-layer', globals.layer);
+      globalThis.document.documentElement.setAttribute('show-advanced-api', globals.showAdvancedApi);
     globalThis.document.querySelectorAll('iframe').forEach(iframe => {
       iframe.contentWindow?.document.documentElement.setAttribute('nve-theme', themes);
       iframe.contentWindow?.document.documentElement.setAttribute('nve-layer', globals.layer);
+      iframe.contentWindow?.document.documentElement.setAttribute('show-advanced-api', globals.showAdvancedApi);
     });
 
     if (brandThemeSwitched) {
