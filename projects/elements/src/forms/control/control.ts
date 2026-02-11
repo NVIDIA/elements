@@ -40,10 +40,7 @@ import styles from './control.css?inline';
  * @cssprop --label-font-size
  * @cssprop --control-width
  * @cssprop --control-height
- * @csspart _internal-host - Internal: The root host container element
- * @csspart _label - Internal: The label slot container
- * @csspart _input - Internal: The input slot container
- * @csspart _messages - Internal: The messages slot container
+
  * @aria https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals
  * @package true
  */

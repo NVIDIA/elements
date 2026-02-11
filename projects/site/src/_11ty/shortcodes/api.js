@@ -79,6 +79,13 @@ export function renderAPINameTable(apiValue) {
   </div>`;
 }
 
+export function hasAPIData(element, type) {
+  const items =
+    element.manifest[typeAliasMap[type]]
+      ?.filter(i => !i.name?.startsWith?.('nve-') && i.privacy !== 'private' && i.privacy !== 'protected') ?? [];
+  return items.length > 0;
+}
+
 export function renderAPITable(element, type, options = { container: 'flat' }) {
   const items =
     element.manifest[typeAliasMap[type]]
