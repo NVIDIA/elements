@@ -369,7 +369,7 @@ export function renderGlobalsScript(data = { disableTheme: false }) {
     : /* html */ `
 <script>
   (() => {
-    const SB_GLOBALS = { theme: 'dark', font: '', layer: '', scale: '', debug: '', animation: '', sourceType: 'html', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
+    const SB_GLOBALS = { theme: 'dark', font: '', layer: '', scale: '', debug: '', animation: '', sourceType: 'html', showAdvancedApi: '', ...(JSON.parse(localStorage.getItem('elements-sb-globals'), null, 2) ?? { }) };
     const themes = [
       SB_GLOBALS.theme === 'auto'
         ? globalThis.matchMedia('(prefers-color-scheme: light)').matches
@@ -388,6 +388,7 @@ export function renderGlobalsScript(data = { disableTheme: false }) {
       .trim();
       globalThis.document.documentElement.setAttribute('nve-theme', themes);\
       globalThis.document.documentElement.setAttribute('nve-layer', SB_GLOBALS.layer);
+      globalThis.document.documentElement.setAttribute('show-advanced-api', SB_GLOBALS.showAdvancedApi);
   })();
 </script>
   `;
