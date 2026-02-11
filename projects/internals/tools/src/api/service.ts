@@ -1,4 +1,4 @@
-import { ApiService as MetadataApiService, type Attribute, type Element } from '@nve-internals/metadata';
+import { ApiService as MetadataApiService, type Attribute, type Element } from '@internals/metadata';
 import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
 import { type PartialAPIResult, findPublicAPIChangelog, getPublicAPIs, searchPublicAPIs } from './utils.js';
 import { service, tool } from '../internal/tools.js';

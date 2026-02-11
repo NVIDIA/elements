@@ -1,6 +1,6 @@
 // @ts-check
 
-import { ProjectsService } from '@nve-internals/metadata';
+import { ProjectsService } from '@internals/metadata';
 
 const metadata = await ProjectsService.getData();
 const projects = metadata.data;

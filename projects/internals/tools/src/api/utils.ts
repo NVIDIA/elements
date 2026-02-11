@@ -5,7 +5,7 @@ import {
   type Element,
   type Token,
   type ProjectTypes
-} from '@nve-internals/metadata';
+} from '@internals/metadata';
 import { wrapText } from '../internal/utils.js';
 
 export interface PartialAPIResult {

@@ -170,9 +170,9 @@ export class MetricsCarousel extends LitElement {
 
   async #getMetrics(): Promise<MetricsCarouselItem[]> {
     // todo: this should be computed at build time with 11ty and not at runtime as this is a node library atm
-    const { UsageService } = await import('@nve-internals/metadata/services/usage.service.js');
-    const { TestsService } = await import('@nve-internals/metadata/services/tests.service.js');
-    const { ApiService } = await import('@nve-internals/metadata/services/api.service.js');
+    const { UsageService } = await import('@internals/metadata/services/usage.service.js');
+    const { TestsService } = await import('@internals/metadata/services/tests.service.js');
+    const { ApiService } = await import('@internals/metadata/services/api.service.js');
     const tests = await TestsService.getData();
     const elements = await ApiService.getData();
     const totalElements = elements.data.elements.length;

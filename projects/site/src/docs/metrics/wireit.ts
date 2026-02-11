@@ -1,5 +1,5 @@
 import ForceGraph3D from '3d-force-graph';
-import type { WireitGraph, WireitGraphNode } from '@nve-internals/metadata';
+import type { WireitGraph, WireitGraphNode } from '@internals/metadata';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/search/define.js';
 import '@nvidia-elements/core/button/define.js';

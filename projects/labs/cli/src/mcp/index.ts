@@ -4,7 +4,7 @@ process.env.ELEMENTS_ENV = 'mcp';
 /* istanbul ignore file -- @preserve */
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { tools, prompts, jsonSchemaToZod } from '@nve-internals/tools';
+import { tools, prompts, jsonSchemaToZod } from '@internals/tools';
 import z, { type ZodObject } from 'zod';
 
 export const VERSION = '0.0.0';

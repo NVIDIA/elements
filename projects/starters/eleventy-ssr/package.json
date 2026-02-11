@@ -19,8 +19,8 @@
     "@11ty/eleventy-plugin-vite": "catalog:",
     "@lit-labs/eleventy-plugin-lit": "catalog:",
     "@lit-labs/ssr-client": "catalog:",
-    "@nve-internals/tools": "workspace:*",
-    "@nve-internals/metadata": "workspace:*",
+    "@internals/tools": "workspace:*",
+    "@internals/metadata": "workspace:*",
     "typescript": "catalog:",
     "vite": "catalog:"
   },

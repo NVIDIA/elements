@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { Attribute, Element, ProjectTypes, Token } from '@nve-internals/metadata';
+import type { Attribute, Element, ProjectTypes, Token } from '@internals/metadata';
 import { getPublicAPIs, getPublishedPackageNames } from './utils.js';
 
 describe('getPublishedPackageNames', () => {
@@ -26,7 +26,7 @@ describe('getPublishedPackageNames', () => {
       changelog: 'code changelog'
     },
     {
-      name: '@nve-internals/metadata',
+      name: '@internals/metadata',
       version: '0.0.0',
       description: 'metadata description',
       readme: 'metadata readme',

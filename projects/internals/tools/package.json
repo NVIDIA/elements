@@ -1,5 +1,5 @@
 {
-  "name": "@nve-internals/tools",
+  "name": "@internals/tools",
   "version": "0.0.0",
   "type": "module",
   "private": true,
@@ -196,7 +196,7 @@
   "devDependencies": {
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
-    "@nve-internals/metadata": "workspace:*",
+    "@internals/metadata": "workspace:*",
     "@types/node": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "eslint": "catalog:",

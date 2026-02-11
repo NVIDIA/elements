@@ -1,5 +1,5 @@
 import { publint as publintFn } from 'publint';
-import { ProjectsService } from '@nve-internals/metadata';
+import { ProjectsService } from '@internals/metadata';
 import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.js';
 import type { ReportCheck, Report, PackageData } from '../internal/types.js';
 import { getPackageJson } from '../internal/node.js';

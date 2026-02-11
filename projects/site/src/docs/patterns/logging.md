@@ -11,4 +11,4 @@ Logging patterns for displaying event timelines, activity feeds, and audit logs 
 
 ## Event Timeline
 
-{% example '@nve-internals/patterns/logging.examples.json', 'EventTimeline' %}
+{% example '@internals/patterns/logging.examples.json', 'EventTimeline' %}

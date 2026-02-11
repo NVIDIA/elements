@@ -1,6 +1,6 @@
 // @ts-check
 
-import { UsageService, DownloadsService, ReleasesService, TestsService, ApiService } from '@nve-internals/metadata';
+import { UsageService, DownloadsService, ReleasesService, TestsService, ApiService } from '@internals/metadata';
 
 export const data = {
   title: 'Metrics',

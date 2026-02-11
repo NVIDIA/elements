@@ -1,5 +1,5 @@
 import markdownIt from 'markdown-it';
-import { PlaygroundService } from '@nve-internals/tools/playground';
+import { PlaygroundService } from '@internals/tools/playground';
 import markdown from '../libraries/markdown.js';
 import { siteData } from '../../index.11tydata.js';
 

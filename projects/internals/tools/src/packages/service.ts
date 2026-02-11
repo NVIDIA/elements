@@ -1,4 +1,4 @@
-import { ProjectsService } from '@nve-internals/metadata';
+import { ProjectsService } from '@internals/metadata';
 import { fuzzyMatch } from '../internal/search.js';
 import { service, tool } from '../internal/tools.js';
 import { markdownDescription } from '../internal/utils.js';

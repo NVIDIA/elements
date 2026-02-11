@@ -5,7 +5,7 @@ import { libraryNodeBuildConfig } from '@internals/vite';
 export default defineConfig(() => {
   const config: UserConfig = {
     resolve: {
-      alias: { '@nve-internals/metadata': resolve(import.meta.dirname, './src') }
+      alias: { '@internals/metadata': resolve(import.meta.dirname, './src') }
     }
   };
 

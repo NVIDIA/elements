@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Example } from '@nve-internals/metadata';
+import type { Example } from '@internals/metadata';
 import { getPublicExamples, searchPublicExamples, renderExampleMarkdown } from './utils.js';
 import { wrapText } from '../internal/utils.js';
 

@@ -13,12 +13,12 @@ in AV and Robotics applications.
 
 ## File Browser
 
-{% example '@nve-internals/patterns/editor.examples.json', 'EditorFileBrowser', '{ "inline": false, "height": "700px" }' %}
+{% example '@internals/patterns/editor.examples.json', 'EditorFileBrowser', '{ "inline": false, "height": "700px" }' %}
 
 ## Diff View
 
-{% example '@nve-internals/patterns/editor.examples.json', 'EditorDiffView', '{ "inline": false, "height": "650px" }' %}
+{% example '@internals/patterns/editor.examples.json', 'EditorDiffView', '{ "inline": false, "height": "650px" }' %}
 
 ## Read-Only Viewer
 
-{% example '@nve-internals/patterns/editor.examples.json', 'EditorReadOnly', '{ "inline": false, "height": "650px" }' %}
+{% example '@internals/patterns/editor.examples.json', 'EditorReadOnly', '{ "inline": false, "height": "650px" }' %}

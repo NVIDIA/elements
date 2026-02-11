@@ -6,7 +6,7 @@
     "build": "wireit"
   },
   "dependencies": {
-    "@nve-internals/tools": "workspace:*"
+    "@internals/tools": "workspace:*"
   },
   "wireit": {
     "ci": {

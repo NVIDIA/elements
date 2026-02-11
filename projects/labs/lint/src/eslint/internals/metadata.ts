@@ -1,5 +1,5 @@
 // eslint-disable-next-line @@/no-restricted-imports
-import { ApiService } from '@nve-internals/metadata';
+import { ApiService } from '@internals/metadata';
 
 const apis = await ApiService.getData();
 

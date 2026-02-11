@@ -8,7 +8,7 @@ import {
   TestsService,
   type ProjectUsage,
   ApiService
-} from '@nve-internals/metadata';
+} from '@internals/metadata';
 
 const tokens = getThemeTokens();
 const usageMetrics = await UsageService.getData();

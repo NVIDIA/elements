@@ -12,7 +12,7 @@ import '@nvidia-elements/core/resize-handle/define.js';
 import '@nvidia-elements/monaco/input/define.js';
 import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/define.js';
-import { PlaygroundService } from '@nve-internals/tools/playground';
+import { PlaygroundService } from '@internals/tools/playground';
 
 // eslint-disable-next-line no-inline-css/no-restricted-imports
 import themeStyles from '@nvidia-elements/themes/index.css?inline'; // temporary workaround as latest version is not published yet
