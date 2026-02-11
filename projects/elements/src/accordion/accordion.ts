@@ -111,6 +111,7 @@ export class AccordionContent extends LitElement {
  * @cssprop --header-padding
  * @cssprop --cursor
  * @cssprop --transition
+ * @csspart icon-button - The toggle icon button element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 @audit()

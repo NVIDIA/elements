@@ -31,6 +31,10 @@ import styles from './progressive-filter-chip.css?inline';
  * @cssprop --font-weight
  * @cssprop --padding
  * @cssprop --width
+ * @csspart select - The select element
+ * @csspart date - The date input element
+ * @csspart input - The input element
+ * @csspart icon-button - The icon button element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
  */
 @typeSSR()

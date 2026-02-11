@@ -21,6 +21,7 @@ const statusIcons = {
  * @cssprop --color
  * @cssprop --font-weight
  * @cssprop --font-size
+ * @csspart icon - The icon element
  * @aria https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals
  * @package true
  */

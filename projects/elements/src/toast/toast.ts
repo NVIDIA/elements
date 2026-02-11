@@ -37,6 +37,7 @@ import styles from './toast.css?inline';
  * @cssprop --box-shadow
  * @cssprop --gap
  * @csspart prefix-icon - The prefix icon slot
+ * @csspart icon-button - The close icon button element
  * @cssprop --animation-duration - Duration of toast open/close animations
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */

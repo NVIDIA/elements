@@ -38,6 +38,8 @@ import styles from './notification.css?inline';
  * @cssprop --gap
  * @cssprop --status-color
  * @cssprop --animation-duration - Duration of notification open/close animations
+ * @csspart status-icon - The status icon element
+ * @csspart icon-button - The close icon button element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
  */
 export class Notification extends LitElement {
