@@ -24,6 +24,7 @@ import styles from './menu-item.css?inline';
  * @cssprop --cursor
  * @cssprop --opacity
  * @cssprop --text-transform
+ * @csspart _internal - Internal container wrapping the menu item content
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
 @audit()

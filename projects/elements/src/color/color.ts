@@ -12,6 +12,7 @@ import styles from './color.css?inline';
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/color
  * @cssprop --cursor
+ * @csspart icon-button - The eye dropper icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color
  * @themes false
  */

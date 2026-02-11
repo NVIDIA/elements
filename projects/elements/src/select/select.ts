@@ -43,6 +43,11 @@ import styles from './select.css?inline';
  * @cssprop --max-height
  * @cssprop --text-transform
  * @csspart tag
+ * @csspart menu - The dropdown menu element
+ * @csspart menu-item - The menu item elements
+ * @csspart icon - The icon element
+ * @csspart caret - The caret/chevron icon element
+ * @csspart dropdown - The dropdown popup element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
  */
 @i18n<Select>()

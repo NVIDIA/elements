@@ -32,6 +32,7 @@ import styles from './drawer.css?inline';
  * @cssprop --max-width
  * @cssprop --width
  * @cssprop --animation-duration - Duration of drawer open/close animations
+ * @csspart icon-button - The close icon button element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
 @typeSSR()
