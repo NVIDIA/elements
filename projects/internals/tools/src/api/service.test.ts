@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
-import type { Attribute, Element } from '@nve-internals/metadata';
+import type { Attribute, Element } from '@internals/metadata';
 import type { ToolMethod } from '../internal/tools.js';
 import { ApiService } from './service.js';
 

@@ -152,7 +152,7 @@ The package has three entry points:
 
 ### Tool System
 
-The CLI **dynamically loads tools from `@nve-internals/tools`** at runtime rather than defining tools itself. This architecture provides:
+The CLI **dynamically loads tools from `@internals/tools`** at runtime rather than defining tools itself. This architecture provides:
 
 - **Decorator-based discovery** - Tools marked with `@tool()` decorator are auto-discovered
 - **Schema-driven** - JSON Schema definitions drive argument parsing and validation
@@ -214,7 +214,7 @@ Components Build → custom-elements.json
                 ↓
          Static JSON Files
                 ↓
-      @nve-internals/tools (services)
+      @internals/tools (services)
                 ↓
          @nvidia-elements/cli
                 ↓

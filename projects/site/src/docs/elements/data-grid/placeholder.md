@@ -26,4 +26,4 @@
 
 ## Retry
 
-{% example '@nve-internals/patterns/empty-states.examples.json' 'DataGridRetry' %}
+{% example '@internals/patterns/empty-states.examples.json' 'DataGridRetry' %}

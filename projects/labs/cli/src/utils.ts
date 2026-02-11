@@ -1,5 +1,5 @@
 import { select, input, confirm, editor } from '@inquirer/prompts';
-import { type ManagedToolMethod } from '@nve-internals/tools';
+import { type ManagedToolMethod } from '@internals/tools';
 import ora, { type Ora } from 'ora';
 import { marked } from 'marked';
 import { markedTerminal } from 'marked-terminal';

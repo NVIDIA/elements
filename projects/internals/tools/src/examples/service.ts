@@ -1,4 +1,4 @@
-import { ExamplesService as ExamplesServiceMetadata, type Example } from '@nve-internals/metadata';
+import { ExamplesService as ExamplesServiceMetadata, type Example } from '@internals/metadata';
 import { service, tool } from '../internal/tools.js';
 import { getPublicExamples, searchPublicExamples } from './utils.js';
 import { markdownDescription } from '../internal/utils.js';

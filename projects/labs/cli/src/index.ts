@@ -4,7 +4,7 @@ process.env.ELEMENTS_ENV = 'cli';
 /* istanbul ignore file -- @preserve */
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { tools, type Schema } from '@nve-internals/tools';
+import { tools, type Schema } from '@internals/tools';
 import { banner, colors, getArgValue, renderResult, runAsyncTool } from './utils.js';
 import { checkForUpdates, notifyIfUpdateAvailable } from './update.js';
 

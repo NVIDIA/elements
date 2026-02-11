@@ -293,7 +293,7 @@ export function badgeAxe(value, container = '') {
  * @returns {string} HTML string containing the component status section
  */
 export function elementStatus(tag) {
-  /** @type {import('@nve-internals/metadata').MetadataCustomElementsManifestDeclaration['metadata']} */
+  /** @type {import('@internals/metadata').MetadataCustomElementsManifestDeclaration['metadata']} */
   const elementMetadata = elements.find(d => d.name === tag)?.manifest?.metadata ?? {
     status: 'unknown',
     aria: '',

@@ -1,4 +1,4 @@
-import type { Token } from '@nve-internals/metadata';
+import type { Token } from '@internals/metadata';
 
 export function getSemanticTokens(format: 'markdown' | 'json', tokens: Token[]) {
   const filteredTokens: Token[] = tokens

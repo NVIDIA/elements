@@ -1,6 +1,6 @@
 # Tools
 
-The **@nve-internals/tools** project is a shared utility library that provides standardized tools, utilities, and services for the Elements Design System ecosystem. It serves as the infrastructure layer that enables automation, documentation generation, and programmatic access to Elements metadata.
+The **@internals/tools** project is a shared utility library that provides standardized tools, utilities, and services for the Elements Design System ecosystem. It serves as the infrastructure layer that enables automation, documentation generation, and programmatic access to Elements metadata.
 
 ## Purpose
 
@@ -46,7 +46,7 @@ projects/internals/tools/src/
 #### **ExamplesService** (`/examples/service.ts`)
 - `list()` - Get list of available example templates/patterns
 - `search()` - Search example templates by name or description
-- Pulls from `@nve-internals/metadata`
+- Pulls from `@internals/metadata`
 
 #### **PlaygroundService** (`/playground/service.ts`)
 - `validate()` - Lint and validate HTML templates for playground compliance
@@ -134,13 +134,13 @@ The package provides modular entry points for tree-shaking:
 
 Users can import specific services:
 ```typescript
-import { ApiService } from '@nve-internals/tools/api';
-import { PlaygroundService } from '@nve-internals/tools/playground';
+import { ApiService } from '@internals/tools/api';
+import { PlaygroundService } from '@internals/tools/playground';
 ```
 
 ## Relationship to Other Projects
 
-### **@nve-internals/metadata**
+### **@internals/metadata**
 Tools depends on metadata services to access:
 - Component API information (ApiService)
 - Published package information (ProjectsService)
@@ -175,9 +175,9 @@ Starter templates use tools for:
 ## Data Flow
 
 ```
-@nve-internals/metadata (raw data)
+@internals/metadata (raw data)
     ↓
-@nve-internals/tools (services + utilities)
+@internals/tools (services + utilities)
     ↓
     ├─→ @nvidia-elements/cli (commands + MCP tools)
     ├─→ projects/site (11ty shortcodes + build)

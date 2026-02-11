@@ -9,8 +9,8 @@
 
 ## Trend
 
-{% example '@nve-internals/patterns/trend.examples.json', 'Trend' %}
+{% example '@internals/patterns/trend.examples.json', 'Trend' %}
 
 ## Trend Data
 
-{% example '@nve-internals/patterns/trend.examples.json', 'TrendData' %}
+{% example '@internals/patterns/trend.examples.json', 'TrendData' %}

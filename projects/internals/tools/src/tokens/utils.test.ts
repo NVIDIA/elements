@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Token } from '@nve-internals/metadata';
+import type { Token } from '@internals/metadata';
 import { getSemanticTokens } from './utils.js';
 
 describe('getSemanticTokens', () => {

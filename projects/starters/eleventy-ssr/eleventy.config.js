@@ -1,7 +1,7 @@
 import { EleventyRenderPlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
-import { ApiService } from '@nve-internals/metadata';
+import { ApiService } from '@internals/metadata';
 
 const apis = await ApiService.getData();
 const entrypoints = apis.data.elements

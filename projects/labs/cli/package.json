@@ -42,7 +42,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@nve-internals/tools": "workspace:*",
+    "@internals/tools": "workspace:*",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@vitest/coverage-istanbul": "catalog:",

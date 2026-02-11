@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { ProjectElement } from '@nve-internals/metadata';
+import type { ProjectElement } from '@internals/metadata';
 import { getElementImports, getAvailableElementTags, wrapText } from './utils.js';
 
 describe('getElementImports', () => {

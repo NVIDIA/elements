@@ -5,7 +5,7 @@ import { libraryBuildConfig } from '@internals/vite';
 export default defineConfig(() => {
   const config: UserConfig = {
     resolve: {
-      alias: { '@nve-internals/patterns': resolve(import.meta.dirname, './src') }
+      alias: { '@internals/patterns': resolve(import.meta.dirname, './src') }
     }
   };
 

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import type { Project } from '@nve-internals/metadata';
+import type { Project } from '@internals/metadata';
 import type { Result } from 'publint';
 import {
   checkDependencies,
@@ -24,7 +24,7 @@ vi.mock('../internal/node.js', () => ({
 }));
 
 // Mock the metadata service
-vi.mock('@nve-internals/metadata', () => ({
+vi.mock('@internals/metadata', () => ({
   ProjectsService: {
     getData: vi.fn()
   }
@@ -600,7 +600,7 @@ describe('getHealthReport', () => {
 
   it('should return health report for application type with only dependencies check', async () => {
     const { getPackageJson } = await import('../internal/node.js');
-    const { ProjectsService } = await import('@nve-internals/metadata');
+    const { ProjectsService } = await import('@internals/metadata');
     const { getLatestPublishedVersions } = await import('../api/utils.js');
 
     vi.mocked(ProjectsService.getData).mockResolvedValue({ created: '', data: [] } as {
@@ -625,7 +625,7 @@ describe('getHealthReport', () => {
 
   it('should return health report for library type with all checks', async () => {
     const { getPackageJson } = await import('../internal/node.js');
-    const { ProjectsService } = await import('@nve-internals/metadata');
+    const { ProjectsService } = await import('@internals/metadata');
     const { getLatestPublishedVersions } = await import('../api/utils.js');
     const { publint } = await import('publint');
 
@@ -653,7 +653,7 @@ describe('getHealthReport', () => {
 
   it('should include publint checks for library type', async () => {
     const { getPackageJson } = await import('../internal/node.js');
-    const { ProjectsService } = await import('@nve-internals/metadata');
+    const { ProjectsService } = await import('@internals/metadata');
     const { getLatestPublishedVersions } = await import('../api/utils.js');
     const { publint } = await import('publint');
 
@@ -690,7 +690,7 @@ describe('getHealthReport', () => {
 
   it('should show libraryPublint success when no publint issues are found', async () => {
     const { getPackageJson } = await import('../internal/node.js');
-    const { ProjectsService } = await import('@nve-internals/metadata');
+    const { ProjectsService } = await import('@internals/metadata');
     const { getLatestPublishedVersions } = await import('../api/utils.js');
     const { publint } = await import('publint');
 
@@ -716,7 +716,7 @@ describe('getHealthReport', () => {
 
   it('should handle multiple publint warnings and errors', async () => {
     const { getPackageJson } = await import('../internal/node.js');
-    const { ProjectsService } = await import('@nve-internals/metadata');
+    const { ProjectsService } = await import('@internals/metadata');
     const { getLatestPublishedVersions } = await import('../api/utils.js');
     const { publint } = await import('publint');
 
@@ -768,7 +768,7 @@ describe('getHealthReport', () => {
 
   it('should handle library with peer dependency issues', async () => {
     const { getPackageJson } = await import('../internal/node.js');
-    const { ProjectsService } = await import('@nve-internals/metadata');
+    const { ProjectsService } = await import('@internals/metadata');
     const { getLatestPublishedVersions } = await import('../api/utils.js');
     const { publint } = await import('publint');
 
@@ -793,7 +793,7 @@ describe('getHealthReport', () => {
 
   it('should handle library with semantic dependency issues', async () => {
     const { getPackageJson } = await import('../internal/node.js');
-    const { ProjectsService } = await import('@nve-internals/metadata');
+    const { ProjectsService } = await import('@internals/metadata');
     const { getLatestPublishedVersions } = await import('../api/utils.js');
     const { publint } = await import('publint');
 
@@ -818,7 +818,7 @@ describe('getHealthReport', () => {
 
   it('should handle outdated dependencies in application type', async () => {
     const { getPackageJson } = await import('../internal/node.js');
-    const { ProjectsService } = await import('@nve-internals/metadata');
+    const { ProjectsService } = await import('@internals/metadata');
     const { getLatestPublishedVersions } = await import('../api/utils.js');
 
     vi.mocked(ProjectsService.getData).mockResolvedValue({ created: '', data: [] } as {
@@ -845,7 +845,7 @@ describe('getHealthReport', () => {
 
   it('should pass publint with correct pack option for library type', async () => {
     const { getPackageJson } = await import('../internal/node.js');
-    const { ProjectsService } = await import('@nve-internals/metadata');
+    const { ProjectsService } = await import('@internals/metadata');
     const { getLatestPublishedVersions } = await import('../api/utils.js');
     const { publint } = await import('publint');
 

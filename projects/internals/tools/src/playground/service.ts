@@ -1,4 +1,4 @@
-import { ApiService } from '@nve-internals/metadata';
+import { ApiService } from '@internals/metadata';
 import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
 import { createPlaygroundURL, type PlaygroundType, playgroundTypes } from './utils.js';
 import { service, tool } from '../internal/tools.js';

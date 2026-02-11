@@ -1,7 +1,7 @@
 // @ts-check
 
-import { ApiService } from '@nve-internals/metadata';
-import { getElementImports } from '@nve-internals/tools';
+import { ApiService } from '@internals/metadata';
+import { getElementImports } from '@internals/tools';
 
 const apis = await ApiService.getData();
 

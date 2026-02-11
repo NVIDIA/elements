@@ -2,7 +2,7 @@ import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { homedir } from 'node:os';
 import * as semver from 'semver';
-import { getNPMClient } from '@nve-internals/tools';
+import { getNPMClient } from '@internals/tools';
 import { colors } from './utils.js';
 
 const CONFIG_DIR = join(homedir(), '.nve');

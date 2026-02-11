@@ -5,7 +5,7 @@ import { libraryNodeTestConfig } from '@internals/vite/configs/test.node.js';
 export default mergeConfig(libraryNodeTestConfig, {
   root: import.meta.dirname,
   resolve: {
-    alias: { '@nve-internals/metadata': resolve(import.meta.dirname, './src') }
+    alias: { '@internals/metadata': resolve(import.meta.dirname, './src') }
   },
   test: {
     include: ['./src/**/*.test.ts'],

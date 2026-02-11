@@ -1,22 +1,22 @@
 // @ts-check
 
 import { join } from 'node:path';
-import { ApiService, TestsService, WireitService } from '@nve-internals/metadata';
-import { PlaygroundService } from '@nve-internals/tools/playground';
-import { ExamplesService } from '@nve-internals/tools/examples';
+import { ApiService, TestsService, WireitService } from '@internals/metadata';
+import { PlaygroundService } from '@internals/tools/playground';
+import { ExamplesService } from '@internals/tools/examples';
 import { camelToKebab } from './_11ty/utils/index.js';
 
 const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
 const apiMetrics = await ApiService.getData();
 
-/** @type {import('@nve-internals/metadata').Element[]} */
+/** @type {import('@internals/metadata').Element[]} */
 const elements = apiMetrics.data.elements;
 
-/** @type {import('@nve-internals/metadata').ProjectsTestSummary} */
+/** @type {import('@internals/metadata').ProjectsTestSummary} */
 const tests = await TestsService.getData();
 
-/** @type {import('@nve-internals/metadata').ProjectTestSummary} */
+/** @type {import('@internals/metadata').ProjectTestSummary} */
 const wireit = await WireitService.getData();
 
 const examples = (await ExamplesService.getAll())

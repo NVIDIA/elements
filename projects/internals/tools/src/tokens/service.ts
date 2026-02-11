@@ -1,4 +1,4 @@
-import { ApiService } from '@nve-internals/metadata';
+import { ApiService } from '@internals/metadata';
 import { service, tool } from '../internal/tools.js';
 import { getSemanticTokens } from './utils.js';
 import { markdownDescription } from '../internal/utils.js';

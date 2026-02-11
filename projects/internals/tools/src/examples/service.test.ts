@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Example } from '@nve-internals/metadata';
+import type { Example } from '@internals/metadata';
 import { ExamplesService } from './service.js';
 import type { ToolMethod } from '../internal/tools.js';
 

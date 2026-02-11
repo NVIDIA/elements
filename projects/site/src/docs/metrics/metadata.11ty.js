@@ -40,7 +40,7 @@ export function render() {
 </div>
 <script type="module">
   import '@nvidia-elements/monaco/input/index.js';
-  import { ApiService } from '@nve-internals/metadata/services/api.service.js';
+  import { ApiService } from '@internals/metadata/services/api.service.js';
   const metrics = await ApiService.getData();
   document.querySelector('nve-monaco-input').value = JSON.stringify(metrics, null, 2);
 </script> `;

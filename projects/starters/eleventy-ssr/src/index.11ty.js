@@ -1,7 +1,7 @@
 // @ts-check
 
-import { ExamplesService } from '@nve-internals/tools/examples';
-import { ApiService } from '@nve-internals/metadata';
+import { ExamplesService } from '@internals/tools/examples';
+import { ApiService } from '@internals/metadata';
 
 const elements = (await ApiService.getData()).data.elements;
 const examples = (await ExamplesService.getAll())

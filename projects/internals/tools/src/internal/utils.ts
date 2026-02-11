@@ -1,4 +1,4 @@
-import type { Element } from '@nve-internals/metadata';
+import type { Element } from '@internals/metadata';
 
 export type ELEMENTS_ENV = 'mcp' | 'cli' | 'browser' | 'docs';
 

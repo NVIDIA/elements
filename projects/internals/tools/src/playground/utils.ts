@@ -1,6 +1,6 @@
 import { gzipSync } from 'fflate';
 import format from 'html-format';
-import type { Element } from '@nve-internals/metadata';
+import type { Element } from '@internals/metadata';
 import { getElementImports } from '../internal/utils.js';
 import { validateTemplate } from '../internal/validate.js';
 
