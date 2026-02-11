@@ -33,6 +33,8 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
  * @cssprop --border-radius
  * @cssprop --color
  * @cssprop --text-transform
+ * @csspart icon-button - The icon button element
+ * @csspart progress-ring - The progress ring element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  */
 @audit()

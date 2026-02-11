@@ -127,6 +127,7 @@ export class PanelFooter extends LitElement {
  * @cssprop --color
  * @cssprop --box-shadow
  * @cssprop --panel-button-border-radius - Border radius of the panel expand/collapse button
+ * @csspart icon-button - The expand/collapse icon button element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 
