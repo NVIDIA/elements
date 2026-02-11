@@ -33,7 +33,7 @@ import globalStyles from './grid.global.css?inline';
  * @cssprop --font-size
  * @cssprop --row-height
  * @cssprop --scroll-height
- * @csspart _scrollbox - Internal scrollable container element
+
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  */
 @audit()
