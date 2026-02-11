@@ -1,4 +1,4 @@
-import { renderAPITable } from '../../../_11ty/shortcodes/api.js';
+import { renderAPITable, hasAPIData } from '../../../_11ty/shortcodes/api.js';
 import { siteData } from '../../../index.11tydata.js';
 
 const { elements } = siteData;
@@ -47,37 +47,22 @@ export function render(data) {
     : '';
 }
 
+function renderAPISection(element, type, title, extraAttrs = '') {
+  if (!hasAPIData(element, type)) return '';
+  return `
+<div nve-layout="column gap:md${type === 'css-part' ? ' pad-bottom:xxl' : ''}"${extraAttrs}>
+  <h3 nve-text="heading lg mkd">${title}</h3>
+  ${renderAPITable(element, type, { container: '' })}
+</div>`;
+}
+
 function renderAllAPIs(element) {
   return `
 <h2 nve-text="heading lg mkd" style="padding: 0 !important;">&lt;${element.name}&gt;</h2>
-
-<div nve-layout="column gap:md">
-  <h3 nve-text="heading lg mkd">Properties</h3>
-  ${renderAPITable(element, 'property', { container: '' })}
-</div>
-
-<div nve-layout="column gap:md">
-  <h3 nve-text="heading lg mkd">Events</h3>
-  ${renderAPITable(element, 'event', { container: '' })}
-</div>
-
-<div nve-layout="column gap:md">
-  <h3 nve-text="heading lg mkd">Slots</h3>
-  ${renderAPITable(element, 'slot', { container: '' })}
-</div>
-
-<div nve-layout="column gap:md">
-  <h3 nve-text="heading lg mkd">Invoker Commands</h3>
-  ${renderAPITable(element, 'command', { container: '' })}
-</div>
-
-<div nve-layout="column gap:md">
-  <h3 nve-text="heading lg mkd">CSS Properties</h3>
-  ${renderAPITable(element, 'css-property', { container: '' })}
-</div>
-
-<div nve-layout="column gap:md pad-bottom:xxl" data-api-section="css-parts">
-  <h3 nve-text="heading lg mkd">CSS Parts</h3>
-  ${renderAPITable(element, 'css-part', { container: '' })}
-</div>`;
+${renderAPISection(element, 'property', 'Properties')}
+${renderAPISection(element, 'event', 'Events')}
+${renderAPISection(element, 'slot', 'Slots')}
+${renderAPISection(element, 'command', 'Invoker Commands')}
+${renderAPISection(element, 'css-property', 'CSS Properties')}
+${renderAPISection(element, 'css-part', 'CSS Parts', ' data-api-section="css-parts"')}`;
 }
