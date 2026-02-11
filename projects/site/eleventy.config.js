@@ -23,7 +23,7 @@ import { renderArtifactoryUsageShortcode } from './src/_11ty/shortcodes/artifact
 import { svgLogoShortcode, svgLogosShortcode } from './src/_11ty/shortcodes/svg-logo.js';
 import { tokensShortcode } from './src/_11ty/shortcodes/tokens.js';
 import markdown from './src/_11ty/libraries/markdown.js';
-import { ApiService } from '@nve-internals/metadata';
+import { ApiService } from '@internals/metadata';
 
 const apis = await ApiService.getData();
 

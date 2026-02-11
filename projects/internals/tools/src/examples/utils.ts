@@ -1,4 +1,4 @@
-import { ExamplesService, type Example } from '@nve-internals/metadata';
+import { ExamplesService, type Example } from '@internals/metadata';
 import { wrapText } from '../internal/utils.js';
 
 export function isPublicExample(example: Example) {

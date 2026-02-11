@@ -17,9 +17,9 @@
     "isolatedModules": true,
     "allowImportingTsExtensions": true,
     "paths": {
-      "@nve-internals/tools": ["./src/index.js"],
-      "@nve-internals/tools/*": ["./src/*"],
-      "@nve-internals/tools/*.js": ["./src/*.js"]
+      "@internals/tools": ["./src/index.js"],
+      "@internals/tools/*": ["./src/*"],
+      "@internals/tools/*.js": ["./src/*.js"]
     }
   },
   "include": ["src/**/*.ts"]

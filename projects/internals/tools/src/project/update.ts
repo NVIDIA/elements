@@ -1,7 +1,7 @@
 import { execSync } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { ProjectsService } from '@nve-internals/metadata';
+import { ProjectsService } from '@internals/metadata';
 import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.js';
 import { getNPMClient, getPackageJson } from '../internal/node.js';
 import type { Report, PackageData } from '../internal/types.js';

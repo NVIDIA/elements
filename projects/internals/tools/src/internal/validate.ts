@@ -1,4 +1,4 @@
-import type { Element } from '@nve-internals/metadata';
+import type { Element } from '@internals/metadata';
 import sanitizeHtml from 'sanitize-html';
 import { getAvailableElementTags } from './utils.js';
 

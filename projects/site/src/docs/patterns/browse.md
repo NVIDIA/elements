@@ -13,4 +13,4 @@
 
 ## Content Row
 
-{% example '@nve-internals/patterns/browse.examples.json', 'ContentRow' %}
+{% example '@internals/patterns/browse.examples.json', 'ContentRow' %}

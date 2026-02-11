@@ -180,6 +180,6 @@ describe('getPackageJson', () => {
   it('should return package.json contents when it exists', () => {
     const result = getPackageJson(process.cwd());
     expect(result).toBeDefined();
-    expect(result.name).toBe('@nve-internals/tools');
+    expect(result.name).toBe('@internals/tools');
   });
 });

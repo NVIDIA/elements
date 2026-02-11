@@ -2,7 +2,7 @@
 /* eslint-env node */
 /* global process */
 
-import { PlaygroundService } from '@nve-internals/tools/playground';
+import { PlaygroundService } from '@internals/tools/playground';
 import { renderGlobalsScript } from '../_11ty/layouts/common.js';
 import { siteData } from '../index.11tydata.js';
 

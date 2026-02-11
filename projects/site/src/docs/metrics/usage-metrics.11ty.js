@@ -1,6 +1,6 @@
 // @ts-check
 
-import { UsageService } from '@nve-internals/metadata';
+import { UsageService } from '@internals/metadata';
 import { compareVersions } from 'compare-versions';
 
 export const data = {

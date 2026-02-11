@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { ProjectElement } from '@nve-internals/metadata';
+import type { ProjectElement } from '@internals/metadata';
 import {
   createPlaygroundURL,
   createAngularFiles,

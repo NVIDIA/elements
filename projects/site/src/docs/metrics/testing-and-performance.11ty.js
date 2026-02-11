@@ -1,6 +1,6 @@
 // @ts-check
 
-import { TestsService } from '@nve-internals/metadata';
+import { TestsService } from '@internals/metadata';
 import { badgeCoverage, badgeBundle, badgeLighthouse } from '../../_11ty/templates/api.js';
 
 export const data = {
@@ -8,7 +8,7 @@ export const data = {
   layout: 'docs.11ty.js'
 };
 
-/** @type {import('@nve-internals/metadata').ProjectsTestSummary} */
+/** @type {import('@internals/metadata').ProjectsTestSummary} */
 const tests = await TestsService.getData();
 
 const reportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
