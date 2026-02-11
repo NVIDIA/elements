@@ -20,6 +20,7 @@ import styles from './progress-ring.css?inline';
  * @cssprop --height
  * @cssprop --animation-duration
  * @cssprop --color
+ * @csspart icon - The icon element
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
  */
 export class ProgressRing extends LitElement {

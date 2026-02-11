@@ -13,6 +13,7 @@ import styles from './page-loader.css?inline';
  * @slot - default slot for content
  * @cssprop --gap
  * @cssprop --animation-duration - Duration of page loader open/close animations
+ * @csspart progress-ring - The progress ring element
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
  */
 export class PageLoader extends LitElement {

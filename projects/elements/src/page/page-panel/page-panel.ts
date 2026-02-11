@@ -35,6 +35,8 @@ import globalStyles from './page-panel.global.css?inline';
  * @cssprop --max-width
  * @cssprop --max-height
  * @cssprop --animation-duration - Duration of panel open/close animations
+ * @csspart _header - Internal header container wrapping header and action slots
+ * @csspart icon-button - The close/collapse icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/region_role
  *
  */

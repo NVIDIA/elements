@@ -31,6 +31,7 @@ import styles from './tag.css?inline';
  * @cssprop --width
  * @cssprop --max-width
  * @cssprop --text-decoration
+ * @csspart icon - The icon element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
 export class Tag extends BaseButton {

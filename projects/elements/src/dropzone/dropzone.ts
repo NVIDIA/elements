@@ -22,6 +22,7 @@ import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './d
  * @cssprop --color
  * @slot icon - default slot for icon
  * @slot content - default slot for content
+ * @csspart icon - The upload icon element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  * @stable false
  */
