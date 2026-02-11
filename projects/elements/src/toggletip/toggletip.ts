@@ -40,7 +40,7 @@ import globalStyles from './toggletip.global.css?inline';
  * @cssprop --gap
  * @cssprop --animation-duration - Duration of toggletip open/close animations
  * @csspart icon-button - The close icon button element
- * @csspart _content - Internal content container element
+
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  *
  */
