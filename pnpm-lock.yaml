@@ -658,12 +658,12 @@ importers:
       '@internals/eslint':
         specifier: workspace:*
         version: link:../eslint
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../vite
       '@internals/metadata':
         specifier: workspace:*
         version: link:../metadata
+      '@internals/vite':
+        specifier: workspace:*
+        version: link:../vite
       '@types/node':
         specifier: 'catalog:'
         version: 24.9.1
@@ -912,12 +912,12 @@ importers:
       '@internals/eslint':
         specifier: workspace:*
         version: link:../../internals/eslint
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../../internals/vite
       '@internals/tools':
         specifier: workspace:*
         version: link:../../internals/tools
+      '@internals/vite':
+        specifier: workspace:*
+        version: link:../../internals/vite
       '@types/node':
         specifier: 'catalog:'
         version: 24.9.1
@@ -1034,12 +1034,12 @@ importers:
       '@internals/eslint':
         specifier: workspace:*
         version: link:../../internals/eslint
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../../internals/vite
       '@internals/metadata':
         specifier: workspace:*
         version: link:../../internals/metadata
+      '@internals/vite':
+        specifier: workspace:*
+        version: link:../../internals/vite
       '@types/node':
         specifier: 'catalog:'
         version: 24.9.1
@@ -1345,15 +1345,6 @@ importers:
       '@internals/eslint':
         specifier: workspace:*
         version: link:../internals/eslint
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../internals/vite
-      '@lit-labs/eleventy-plugin-lit':
-        specifier: 'catalog:'
-        version: 1.0.6(@types/node@24.9.1)
-      '@lit-labs/ssr-client':
-        specifier: 'catalog:'
-        version: 1.1.8
       '@internals/metadata':
         specifier: workspace:*
         version: link:../internals/metadata
@@ -1363,6 +1354,15 @@ importers:
       '@internals/tools':
         specifier: workspace:*
         version: link:../internals/tools
+      '@internals/vite':
+        specifier: workspace:*
+        version: link:../internals/vite
+      '@lit-labs/eleventy-plugin-lit':
+        specifier: 'catalog:'
+        version: 1.0.6(@types/node@24.9.1)
+      '@lit-labs/ssr-client':
+        specifier: 'catalog:'
+        version: 1.1.8
       '@nvidia-elements/brand':
         specifier: workspace:*
         version: link:../labs/brand
@@ -1580,18 +1580,18 @@ importers:
       '@11ty/eleventy-plugin-vite':
         specifier: 'catalog:'
         version: 7.0.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2)
-      '@lit-labs/eleventy-plugin-lit':
-        specifier: 'catalog:'
-        version: 1.0.6(@types/node@24.9.1)
-      '@lit-labs/ssr-client':
-        specifier: 'catalog:'
-        version: 1.1.8
       '@internals/metadata':
         specifier: workspace:*
         version: link:../../internals/metadata
       '@internals/tools':
         specifier: workspace:*
         version: link:../../internals/tools
+      '@lit-labs/eleventy-plugin-lit':
+        specifier: 'catalog:'
+        version: 1.0.6(@types/node@24.9.1)
+      '@lit-labs/ssr-client':
+        specifier: 'catalog:'
+        version: 1.1.8
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
