@@ -384,3 +384,9 @@ hr {
 .split-shortcode:has(.example-shortcode + nve-grid) .example-shortcode-summary {
   display: none;
 }
+
+/* Hide CSS Parts section and anchor link by default, show when advanced API is enabled */
+:root:not([show-advanced-api='show-advanced-api']) [data-api-section='css-parts'],
+:root:not([show-advanced-api='show-advanced-api']) #anchor-generator li:has(a[href$='#css-parts']) {
+  display: none;
+}
