@@ -76,7 +76,7 @@ function renderAllAPIs(element) {
   ${renderAPITable(element, 'css-property', { container: '' })}
 </div>
 
-<div nve-layout="column gap:md pad-bottom:xxl">
+<div nve-layout="column gap:md pad-bottom:xxl" data-api-section="css-parts">
   <h3 nve-text="heading lg mkd">CSS Parts</h3>
   ${renderAPITable(element, 'css-part', { container: '' })}
 </div>`;
