@@ -1,6 +1,6 @@
 # Metadata
 
-The **@nve-internals/metadata** project is the metadata aggregation and generation system for the Elements monorepo. It serves as the central metadata hub that powers documentation, analytics, and development tools throughout the project.
+The **@internals/metadata** project is the metadata aggregation and generation system for the Elements monorepo. It serves as the central metadata hub that powers documentation, analytics, and development tools throughout the project.
 
 ## Purpose
 

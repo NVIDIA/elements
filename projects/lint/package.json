@@ -63,7 +63,7 @@
     "eslint": ">= 9"
   },
   "devDependencies": {
-    "@nve-internals/metadata": "workspace:*",
+    "@internals/metadata": "workspace:*",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@types/node": "catalog:",

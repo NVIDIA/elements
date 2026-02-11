@@ -238,9 +238,9 @@ describe('generateTestSummary', () => {
       '@nvidia-elements/markdown',
       '@nvidia-elements/playwright-screencast',
       '@nvidia-elements/monaco',
-      '@nve-internals/metadata',
-      '@nve-internals/patterns',
-      '@nve-internals/tools'
+      '@internals/metadata',
+      '@internals/patterns',
+      '@internals/tools'
     ];
 
     expectedProjects.forEach(project => {
@@ -249,7 +249,7 @@ describe('generateTestSummary', () => {
   });
 
   it('should have correct structure for each project', () => {
-    const project = summary.projects['@nve-internals/metadata'];
+    const project = summary.projects['@internals/metadata'];
 
     expect(project).toHaveProperty('coverage');
     expect(project).toHaveProperty('unit');
@@ -260,7 +260,7 @@ describe('generateTestSummary', () => {
   });
 
   it('should have correct coverage structure', () => {
-    const project = summary.projects['@nve-internals/metadata'];
+    const project = summary.projects['@internals/metadata'];
 
     expect(project.coverage).toHaveProperty('total');
     expect(project.coverage).toHaveProperty('testResults');
@@ -271,7 +271,7 @@ describe('generateTestSummary', () => {
   });
 
   it('should have correct test summary structure', () => {
-    const project = summary.projects['@nve-internals/metadata'];
+    const project = summary.projects['@internals/metadata'];
 
     const testSummary = project.unit;
     expect(testSummary).toHaveProperty('numTotalTestSuites');
@@ -289,7 +289,7 @@ describe('generateTestSummary', () => {
   });
 
   it('should have normalized paths in test results', () => {
-    const project = summary.projects['@nve-internals/metadata'];
+    const project = summary.projects['@internals/metadata'];
 
     if (project.unit.testResults && project.unit.testResults.length > 0) {
       const testResult = project.unit.testResults[0];
@@ -300,7 +300,7 @@ describe('generateTestSummary', () => {
   });
 
   it('should have coverageMap set to undefined in unit test results', () => {
-    const project = summary.projects['@nve-internals/metadata'];
+    const project = summary.projects['@internals/metadata'];
     expect(project.unit.coverageMap).toBeUndefined();
   });
 });
