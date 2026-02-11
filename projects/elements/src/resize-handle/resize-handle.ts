@@ -16,6 +16,7 @@ import styles from './resize-handle.css?inline';
  * @cssprop --line-width
  * @cssprop --target-size
  * @cssprop --cursor
+ * @csspart _line - Internal resize handle line element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/slider/
  *
  */

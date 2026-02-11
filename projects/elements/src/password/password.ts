@@ -18,6 +18,7 @@ import styles from './password.css?inline';
  * @cssprop --border-radius
  * @cssprop --border
  * @cssprop --cursor
+ * @csspart icon-button - The visibility toggle icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password
  */
 export class Password extends Control {

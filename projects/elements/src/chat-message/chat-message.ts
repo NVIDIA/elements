@@ -23,6 +23,7 @@ import globalStyles from './chat-message.global.css?inline';
  * @cssprop --line-height
  * @cssprop --overflow
  * @cssprop --top-offset - Vertical offset for aligning message with avatar
+ * @csspart _message - Internal: The default slot message container
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
  * @stable false
  */

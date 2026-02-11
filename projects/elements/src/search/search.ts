@@ -19,6 +19,7 @@ import styles from './search.css?inline';
  * @cssprop --border-radius
  * @cssprop --border
  * @cssprop --cursor
+ * @csspart icon-button - The icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/search
  */
 export class Search extends Control implements ContainerElement {
