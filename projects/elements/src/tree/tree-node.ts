@@ -38,6 +38,13 @@ import { updateNodeSelection } from './utils.js';
  * @cssprop --text-wrap
  * @cssprop --font-weight
  * @cssprop --width
+ * @csspart _node - Internal node container element
+ * @csspart icon-button - The icon button element
+ * @csspart icon - The icon element
+ * @csspart checkbox - The checkbox element
+ * @csspart _node-header - Internal node header element
+ * @csspart _content - Internal content container element
+ * @csspart _nodes - Internal child nodes container element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  *
  */

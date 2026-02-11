@@ -23,6 +23,7 @@ import styles from './datetime.css?inline';
  * @cssprop --width
  * @cssprop --max-width
  * @cssprop --min-width
+ * @csspart icon-button - The calendar icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
  * @themes false
  */

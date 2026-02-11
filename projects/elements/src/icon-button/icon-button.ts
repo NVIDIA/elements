@@ -22,6 +22,7 @@ import styles from './icon-button.css?inline';
  * @cssprop --font-size
  * @cssprop --color
  * @cssprop --background
+ * @csspart icon - The icon element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
 export class IconButton extends Button {

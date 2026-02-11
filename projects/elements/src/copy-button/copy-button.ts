@@ -21,6 +21,9 @@ import styles from './copy-button.css?inline';
  * @cssprop --min-width
  * @cssprop --font-size
  * @cssprop --line-height
+ * @csspart icon - The icon element
+ * @csspart toast - The toast notification element
+ * @csspart tooltip - The tooltip element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  *
  */

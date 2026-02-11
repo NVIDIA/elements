@@ -34,6 +34,7 @@ import styles from './dropdown.css?inline';
  * @cssprop --gap
  * @cssprop --arrow-transform - Transform applied to the popover arrow
  * @cssprop --animation-duration - Duration of dropdown open/close animations
+ * @csspart icon-button - The close icon button element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
 @audit({ excessiveInstanceLimit })

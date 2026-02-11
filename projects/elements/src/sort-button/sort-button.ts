@@ -20,6 +20,7 @@ const nextSort = {
  * @cssprop --height
  * @cssprop --border-radius
  * @cssprop --color
+ * @csspart icon - The icon element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/
  */
 export class SortButton extends BaseButton {

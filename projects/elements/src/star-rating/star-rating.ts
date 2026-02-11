@@ -16,6 +16,7 @@ import styles from './star-rating.css?inline';
  * @cssprop --stroke-color
  * @cssprop --width
  * @cssprop --height
+ * @csspart icon - The icon element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
  *
  */
