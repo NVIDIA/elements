@@ -1,9 +1,18 @@
-import { execSync } from 'node:child_process';
+import { execSync, spawnSync } from 'node:child_process';
 import { describe, it, expect } from 'vitest';
 import { VERSION } from './index.js';
 
 describe('index', () => {
   const output = execSync('node dist/index.js').toString();
+
+  function runWithoutRequiredArgs(command: string) {
+    const result = spawnSync('node', ['dist/index.js', command], {
+      timeout: 3000,
+      encoding: 'utf-8',
+      input: '' // close stdin so prompts don't hang
+    });
+    return `${result.stdout}${result.stderr}`;
+  }
 
   it('should have a version', () => {
     expect(VERSION).toBe('0.0.0');
@@ -63,5 +72,25 @@ describe('index', () => {
 
   it('should provide tokens.list', () => {
     expect(output).toContain('nve tokens.list [format]');
+  });
+
+  describe('interactive fallback for missing required args', () => {
+    it('should not exit with validation error for project.create without <type>', () => {
+      const output = runWithoutRequiredArgs('project.create');
+      expect(output).not.toContain('Not enough non-option arguments');
+      expect(output).not.toContain('Missing required argument');
+    });
+
+    it('should not exit with validation error for api.search without <query>', () => {
+      const output = runWithoutRequiredArgs('api.search');
+      expect(output).not.toContain('Not enough non-option arguments');
+      expect(output).not.toContain('Missing required argument');
+    });
+
+    it('should not exit with validation error for project.validate without <type>', () => {
+      const output = runWithoutRequiredArgs('project.validate');
+      expect(output).not.toContain('Not enough non-option arguments');
+      expect(output).not.toContain('Missing required argument');
+    });
   });
 });

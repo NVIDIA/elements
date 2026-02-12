@@ -246,9 +246,9 @@ ${getElementImports(content, elements).join('\n')}
 
 function App() {
   return (
-    <div>
+    <>
       ${content}
-    </div>
+    </>
   );
 }
 
@@ -273,9 +273,9 @@ ${getElementImports(content, elements).join('\n')}
 
 function App() {
   return (
-    <div>
+    <>
       ${content}
-    </div>
+    </>
   );
 }
 render(<App />, document.getElementById('root'));`;
