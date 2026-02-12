@@ -185,6 +185,10 @@ export interface CustomElementManifest {
     name: string;
     description: string;
   }[];
+  commands: {
+    name: string;
+    description: string;
+  }[];
   superclass: {
     name: string;
     package: string;
@@ -204,6 +208,7 @@ export interface CustomElementManifest {
     status: ElementStatus;
     behavior: ElementBehavior;
     example: string;
+    markdown: string;
   };
 }
 
