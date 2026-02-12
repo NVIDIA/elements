@@ -63,7 +63,7 @@ export const libraryConfig = [
                   'Inline CSS utils are not allowed in library APIs to prevent performance issues, use shadow DOM encapsulated CSS instead'
               },
               {
-                group: ['@nve-internals/'],
+                group: ['@internals/'],
                 message: 'Repository internal utilities and libraries cannot be used in published packages.'
               }
             ]

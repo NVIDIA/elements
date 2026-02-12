@@ -114,7 +114,7 @@ function createLabel(packageName, scriptName) {
   const shortName = packageName
     .replace('@nvidia-elements/', '')
     .replace('@nvidia-elements/', 'labs/')
-    .replace('@nve-internals/', 'internals/');
+    .replace('@internals/', 'internals/');
   return `${shortName}:${scriptName}`;
 }
 
