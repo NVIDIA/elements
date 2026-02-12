@@ -178,12 +178,12 @@ describe('generateGraphData', () => {
     }
   });
 
-  it('should format labels by replacing @nve-internals/ with internals/', () => {
-    const internalsPackages = result.nodes.filter(n => n.packageName.startsWith('@nve-internals/'));
+  it('should format labels by replacing @internals/ with internals/', () => {
+    const internalsPackages = result.nodes.filter(n => n.packageName.startsWith('@internals/'));
 
     for (const node of internalsPackages) {
       expect(node.label).toContain('internals/');
-      expect(node.label).not.toContain('@nve-internals/');
+      expect(node.label).not.toContain('@internals/');
     }
   });
 
