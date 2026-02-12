@@ -29,6 +29,11 @@ import { updateNodeSelection } from './utils.js';
  * @event open - Dispatched when the node is opened.
  * @event close - Dispatched when the node is closed.
  * @event select - Dispatched when the node selection state changes.
+ * @command --select - use to select the node
+ * @command --deselect - use to deselect the node
+ * @command --open - use to open the node
+ * @command --close - use to close the node
+ * @command --toggle - use to toggle open / closed state of the node
  * @slot - Use default slot for basic text content or nested <nve-tree-node> elements.
  * @slot content - Use for extended long form content containing interactive elements or form inputs.
  * @cssprop --color

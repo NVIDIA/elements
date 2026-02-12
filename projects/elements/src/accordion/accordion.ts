@@ -101,6 +101,9 @@ export class AccordionContent extends LitElement {
  * @description An accordion is a vertical stack of interactive headings used to toggle the display of further information.
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
+ * @command --open - use to open the accordion
+ * @command --close - use to close the accordion
+ * @command --toggle - use to toggle the accordion
  * @slot - This is a default/unnamed slot for accordion content
  * @slot icon-button - icon elements to display for expand/collapse
  * @slot header - header element (Use `accordion-header` or custom content)
