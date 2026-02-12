@@ -69,7 +69,7 @@ const FILTER_OPTIONS = [
   { value: null, label: 'All', countKey: 'all' },
   { value: 'elements', label: 'Elements', countKey: 'elements' },
   { value: 'patterns', label: 'Patterns', countKey: 'patterns' },
-  { value: 'foundations', label: 'Foundations', countKey: 'foundations' },
+  { value: 'foundations', label: 'Foundations', countKey: 'foundations' }
 ];
 
 @customElement('nvd-search')
@@ -194,8 +194,7 @@ export class DocsSearch extends LitElement {
       const filterValue = this.filter;
 
       // Only apply if it's a valid filter value, otherwise clear it
-      const isValidFilter =
-        filterValue && FILTER_VALUES.includes(filterValue as (typeof FILTER_VALUES)[number]);
+      const isValidFilter = filterValue && FILTER_VALUES.includes(filterValue as (typeof FILTER_VALUES)[number]);
 
       this.activeFilter = isValidFilter ? filterValue : null;
     }
@@ -210,8 +209,7 @@ export class DocsSearch extends LitElement {
     }
 
     // Apply initial filter from attribute (typically set from URL parameter on page load)
-    const isValidInitialFilter =
-      this.filter && FILTER_VALUES.includes(this.filter as (typeof FILTER_VALUES)[number]);
+    const isValidInitialFilter = this.filter && FILTER_VALUES.includes(this.filter as (typeof FILTER_VALUES)[number]);
 
     if (isValidInitialFilter) {
       this.activeFilter = this.filter;
@@ -333,10 +331,10 @@ export class DocsSearch extends LitElement {
                   return html`
                     <nve-tag
                       .pressed=${active}
-                      color=${ifDefined(active ? 'green-grass' : 'gray-denim')}
+                      color=${ifDefined(active ? undefined : 'gray-denim')}
                       @click=${() => this.#setFilter(value)}
                     >
-                      <span nve-layout="row gap:xs align:center">${label} <nve-dot size="sm" status=${ifDefined(active ? 'success' : undefined)}>${resultCounts[countKey]}</nve-dot></span>
+                      <span nve-layout="row gap:xs align:center">${label} <nve-dot size="sm" status=${ifDefined(active ? 'accent' : undefined)}>${resultCounts[countKey]}</nve-dot></span>
                     </nve-tag>
                   `;
                 })}
