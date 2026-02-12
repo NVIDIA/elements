@@ -47,14 +47,20 @@ export function getPublicAPIs(
 }
 
 export async function searchPublicAPIs(query: string, config: { limit?: number } = { limit: 100 }) {
-  const data = (await ApiService.search(query)).map(r => ({ ...r, changelog: undefined }));
+  const data = (await ApiService.search(query)).map(r => {
+    if ((r as Element).manifest) {
+      (r as Element).changelog = undefined;
+      (r as Element).manifest.metadata.markdown = undefined;
+    }
+    return r;
+  });
   return config.limit !== undefined ? data.slice(0, config.limit) : data;
 }
 
 export async function findPublicAPIChangelog(name: string): Promise<string | undefined> {
   const data = await ApiService.search(name);
   const result = data.find(r => r.name === name) as Element | (Attribute & { changelog: string }) | undefined;
-  return result?.changelog ?? undefined;
+  return result?.changelog ?? JSON.stringify(result, null, 2);
 }
 
 export interface ElementVersions {
@@ -106,6 +112,6 @@ export async function getLatestPublishedVersions(projects: Project[]): Promise<E
 
 export function getPublishedPackageNames(projects: Project[]) {
   return projects
-    .filter(p => p.name.startsWith('@nve') && !p.name.startsWith('@nve-internals') && p.version !== '0.0.0')
+    .filter(p => p.name.startsWith('@nve') && !p.name.startsWith('@internals') && p.version !== '0.0.0')
     .map(p => p.name);
 }

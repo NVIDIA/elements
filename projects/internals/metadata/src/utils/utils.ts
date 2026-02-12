@@ -1,4 +1,4 @@
-import type { Attribute, CustomElementManifest } from '../types.js';
+import type { Attribute } from '../types.js';
 
 export function getElementChangelog(name: string, changelog: string) {
   const changelogJSON = changelogMarkdownToJSON(changelog);
@@ -59,76 +59,6 @@ export function changelogMarkdownToJSON(changelog: string) {
         : [];
       return { title, bugFixes, features, breakingChanges };
     });
-}
-
-export function elementMetadataToMarkdown(manifest: CustomElementManifest) {
-  if (manifest.tagName) {
-    const slots = manifest.slots?.filter(i => !i.description?.includes('deprecated')) ?? [];
-    const members = manifest.members?.filter(i => !i.deprecated) ?? [];
-    return `
-## ${manifest.tagName}
-${manifest.description ? `\n${manifest.description}\n` : ''}
-### Example
-
-${manifest.metadata.example ? `\`\`\`html\n${manifest.metadata.example}\n\`\`\`` : 'No example available.'}
-
-### Import
-
-\`\`\`javascript
-import '${manifest.metadata.entrypoint}/define.js';
-\`\`\`
-
-### Slots
-${
-  slots.length
-    ? `
-| name | value | description |
-| ---- | ----- | ----------- |
-${slots.map(i => `| ${i.name} | \`string\` | ${i.description?.replace(/\|/g, '\\|') ?? ''} |`).join('\n')}`
-    : 'No slots available.'
-}
-
-### Properties / Attributes
-${
-  members.length
-    ? `
-| property (attribute) | value | description |
-| -------------------- | ----- | ----------- |
-${members
-  .map(i => {
-    const type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
-    const description = i.description?.replace(/\|/g, '\\|')?.split('\n')?.join(' ') ?? '';
-    return `| ${i.name}${i.attribute && i.attribute !== i.name ? ` (${i.attribute})` : ''} | ${type} | ${description} |`;
-  })
-  .join('\n')}`
-    : '\nNo Properties available.'
-}
-
-### Events
-${
-  manifest.events?.length
-    ? `
-| name | value | description |
-| ---- | ----- | ----------- |
-${manifest.events
-  .map(i => {
-    const description = i.description?.replace(/\|/g, '\\|')?.split('\n')?.join(' ') ?? '';
-    return `| ${i.name} | \`CustomEvent\` | ${description} |`;
-  })
-  .join('\n')}`
-    : '\nNo Custom Events available.'
-}
-
-### CSS Properties
-${
-  manifest.cssProperties?.length
-    ? `
-| name | value | description |
-| ---- | ----- | ----------- |
-${manifest.cssProperties.map(i => `| ${i.name} | \`string\` | ${i.description?.replace(/\|/g, '\\|') ?? ''} |`).join('\n')}`
-    : '\nNo CSS Properties available.'
-}`.trim();
-  }
 }
 
 export function attributeMetadataToMarkdown(attribute: Attribute) {
