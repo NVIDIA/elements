@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.58.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.57.4...@nvidia-elements/core-v1.58.0) (2026-02-12)
+
+
+### Features
+
+* **elements:** add css parts to custom elements data ([c6e1c88](https://github.com/NVIDIA/elements/commit/c6e1c884b739a8d78af1c92794deb7a7f1082b25))
+
 ## [@nvidia-elements/core-v1.57.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.57.3...@nvidia-elements/core-v1.57.4) (2026-02-10)
 
 
