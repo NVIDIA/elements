@@ -21,6 +21,11 @@ const yargsInstance = yargs(hideBin(process.argv))
   .version(VERSION)
   .recommendCommands()
   .fail(message => {
+    // allow missing positionals to fall through to interactive prompts
+    if (message?.includes('Not enough non-option arguments') || message?.includes('Missing required argument')) {
+      return;
+    }
+
     if (message !== null) {
       console.log(colors.error(message));
     }
@@ -48,7 +53,6 @@ tools.forEach(tool => {
     key => !required?.includes(key) || properties?.[key].default
   );
 
-  // todo: make positionals use <> syntax and continue to fallback to inquirer/prompts
   const command =
     `${tool.metadata.command} ${[...requiredArgs.map(key => `<${key}>`), ...optionalArgs.map(key => `[${key}]`)].join(' ')}`.trim();
 
@@ -80,7 +84,7 @@ tools.forEach(tool => {
         process.exit(1);
       }
     },
-    // middleware to get interactive arguments
+    // middleware to get interactive arguments when missing
     [
       async argv => {
         const interactive = !!requiredArgs.find(p => !argv[p]);

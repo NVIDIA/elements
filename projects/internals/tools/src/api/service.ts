@@ -193,10 +193,10 @@ export class ApiService {
       properties: {
         name: {
           type: 'string',
-          description: ''
+          description: `A single component or attribute name (e.g., "nve-button", "nve-grid", "nve-layout"). Use the list tool to get a list of all available components and attributes or search tool for semantic searching.`
         }
       },
-      required: ['template']
+      required: ['name']
     },
     outputSchema: { type: 'string' }
   })
@@ -204,7 +204,7 @@ export class ApiService {
     const result = await findPublicAPIChangelog(name);
 
     if (!result) {
-      return `No components or APIs found matching "${name}".\n\nTip: Use the list tool to get a list of all available components and attributes.`;
+      return `No components or API changelogs found matching "${name}".\n\nTip: Use the list tool to get a list of all available components and attributes.`;
     }
 
     return result;

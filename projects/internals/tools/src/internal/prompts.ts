@@ -1,6 +1,8 @@
 import { type Schema } from './tools.js';
 
 const authoringContext = `
+## Authoring Guidelines
+
 ### Best practices
 - Prefer stateless/static HTML when possible
 - Use plain HTML/CSS and JavaScript unless specifically requested (angular, react, vue, lit, etc)
@@ -85,8 +87,6 @@ npm create @nve typescript # typescript, angular, react, lit, preact, solidjs, v
 - \`project_update\`: update project to latest Elements package versions
 - \`project_validate\`: validate project setup and check for issues
 - \`tokens_list\`: get available CSS variables / design tokens for theming
-
----
 `;
 
 const searchContext = `
@@ -103,8 +103,6 @@ Explain the API in a way that is easy to understand and follow
 
 ### Best practices
 - Provide a playground example for the user via the \`playground_create\` tool
-
----
 `;
 
 const playgroundCreateContext = `
@@ -121,12 +119,6 @@ Best practices and guidelines for creating an Elements Playground.
 - \`tokens_list\`: lookup design tokens for any custom CSS
 - \`playground_create\`: to create the playground. Will return a URL if no template validation errors are found
 - \`playground_validate\`: validate the template before creating the playground
-
-## Authoring Guidelines
-
-${authoringContext}
-
----
 `;
 
 const newStarterContext = `
@@ -149,10 +141,6 @@ Best practices and guidelines for creating an Elements Starter Project.
 2. Use the \`project_update\` tool to update a project to the latest versions of Elements packages
 3. Run \`pnpm run dev\` or \`npm run dev\` to start the project. This will start the project in development mode and be a long running process.
 4. If there is an available Playwright MCP tool use it to verify the project locally is working as expected.
-
-${authoringContext}
-
----
 `;
 
 const doctorContext = `
@@ -203,8 +191,6 @@ Ensure the MCP is properly configured and working as expected.
   }
 }
 \`\`\`
-
----
 `;
 
 /**
@@ -253,7 +239,7 @@ export const prompts: Prompt[] = [
           role: 'user',
           content: {
             type: 'text',
-            text: doctorContext
+            text: `${doctorContext}\n---`
           }
         }
       ]
@@ -269,7 +255,7 @@ export const prompts: Prompt[] = [
           role: 'user',
           content: {
             type: 'text',
-            text: `${searchContext}${playgroundCreateContext}`
+            text: `${searchContext}\n---`
           }
         }
       ]
@@ -285,7 +271,7 @@ export const prompts: Prompt[] = [
           role: 'user',
           content: {
             type: 'text',
-            text: playgroundCreateContext
+            text: `${playgroundCreateContext}${authoringContext}\n---`
           }
         }
       ]
@@ -301,7 +287,7 @@ export const prompts: Prompt[] = [
           role: 'user',
           content: {
             type: 'text',
-            text: newStarterContext
+            text: `${newStarterContext}${authoringContext}\n---`
           }
         }
       ]

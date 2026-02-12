@@ -269,9 +269,7 @@ async function setupStarterGit(extractedDir: string) {
   const hasGit = await isCommandAvailable('git');
   if (hasGit && !isGitRepository(extractedDir)) {
     console.log('🔄 Initializing git...');
-    execSync(`cd ${extractedDir} && git init`, {
-      stdio: 'inherit'
-    });
+    execSync(`cd ${extractedDir} && git init`, { stdio: 'pipe' });
   } else {
     console.log('🔄 Skipping git initialization...');
   }
@@ -308,7 +306,8 @@ async function setupStarterNPM(extractedDir: string) {
       await loginRegistry(extractedDir);
       await installFromRegistry(extractedDir);
     } catch (e) {
-      console.error(e);
+      const stderr = (e as { stderr?: Buffer })?.stderr?.toString?.().trim();
+      console.error(stderr || e);
       console.error(
         `⚠️ Error installing dependencies, in the "${extractedDir}" directory run "${npmClient} login" then "${npmClient} install"`
       );
@@ -329,9 +328,7 @@ async function loginRegistry(extractedDir: string) {
 async function installFromRegistry(extractedDir: string) {
   const npmClient = await getNPMClient();
   console.log('📦 Installing dependencies...');
-  execSync(`cd ${extractedDir} && ${npmClient} install`, {
-    stdio: 'inherit'
-  });
+  execSync(`cd ${extractedDir} && ${npmClient} install`, { stdio: 'pipe' });
 }
 
 /* istanbul ignore next -- @preserve */
