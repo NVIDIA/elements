@@ -37,12 +37,13 @@ export function render(data) {
   data.title = componentData.title;
   data.page.fileSlug = componentData.page.fileSlug;
   data.hideExamplesTab = componentData.hideExamplesTab;
+  data.isApiTab = true; // Flag to indicate this is an API tab page
 
   const element = elements.find(d => d.name === componentData.tag);
   return element
     ? `
-  ${renderAllAPIs(element)}
-  ${componentData.associatedElements?.length ? componentData.associatedElements.map(tag => renderAllAPIs(elements.find(d => d.name === tag))).join('') : ''}
+  ${renderAllAPIs(element, true)}
+  ${componentData.associatedElements?.length ? componentData.associatedElements.map(tag => renderAllAPIs(elements.find(d => d.name === tag), false)).join('') : ''}
   `
     : '';
 }
@@ -56,9 +57,10 @@ function renderAPISection(element, type, title, extraAttrs = '') {
 </div>`;
 }
 
-function renderAllAPIs(element) {
+function renderAllAPIs(element, isFirst = false) {
+  const metaAttr = isFirst ? ' data-pagefind-meta="tab:api"' : '';
   return `
-<h2 nve-text="heading lg mkd" style="padding: 0 !important;">&lt;${element.name}&gt;</h2>
+<h2 nve-text="heading lg mkd" style="padding: 0 !important;"${metaAttr}>&lt;${element.name}&gt;</h2>
 ${renderAPISection(element, 'property', 'Properties')}
 ${renderAPISection(element, 'event', 'Events')}
 ${renderAPISection(element, 'slot', 'Slots')}
