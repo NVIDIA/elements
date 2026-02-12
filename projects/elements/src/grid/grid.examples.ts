@@ -185,7 +185,7 @@ export const MultiSelect = {
  */
 export const MultiSelectBulkActions = {
   render: () => html`
-<nve-grid style="--scroll-height: 402px">
+<nve-grid style="height: 400px">
   <nve-grid-header>
     <nve-grid-column width="max-content" position="fixed">
       <nve-checkbox>
@@ -354,30 +354,8 @@ export const RowGroups = {
  * @summary The footer can be used to display contextual information or additional user actions such as pagination.
  */
 export const Footer = {
-render: () => html`
-<nve-grid>
-  <nve-grid-header>
-    ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column> `)}
-  </nve-grid-header>
-  ${Array(8).fill('').map((_, r) => html`
-    <nve-grid-row>
-      ${Array(5).fill('').map((_, c) => html`<nve-grid-cell>cell ${r}-${c}</nve-grid-cell> `)}
-    </nve-grid-row>
-  `)}
-  <nve-grid-footer>
-    <p nve-text="body">footer content</p>
-  </nve-grid-footer>
-</nve-grid>
-  `
-};
-
-/**
- * @summary The footer can be used to display contextual information or additional user actions such as pagination.
- * @tags test-case
- */
-export const FooterScrollbar = {
   render: () => html`
-<nve-grid style="--scroll-height: 402px">
+<nve-grid style="height: 400px">
   <nve-grid-header>
     ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column> `)}
   </nve-grid-header>
@@ -400,7 +378,7 @@ export const FooterScrollbar = {
  */
 export const Pagination = {
   render: () => html`
-<nve-grid style="--scroll-height: 370px">
+<nve-grid style="height: 370px">
   <nve-grid-header>
     ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column> `)}
   </nve-grid-header>
@@ -418,6 +396,7 @@ export const Pagination = {
 
 /**
  * @summary Fixed-height scrollable grid with persistent header and footer. Use scrollable grids when displaying large datasets where users need to maintain context of column headers and footer controls (like pagination) while scrolling through many rows, improving navigation without losing orientation.
+ * @tags test-case
  */
 export const Scroll = {
   render: () => html`
@@ -467,6 +446,7 @@ export const ScrollPosition = {
  * @summary Using `nve-layout="column"` the grid to fill any remaining space
  * of a parent containing element. This is helpful for preserving the grid
  * height/fill while dynamic content above can freely change.
+ * @tags test-case
  */
 export const FullHeight = {
   render: () => html`
@@ -524,7 +504,7 @@ export const ColumnAction = {
  */
 export const ColumnWidth = {
   render: () => html`
-<nve-grid style="--scroll-height: 402px">
+<nve-grid style="height: 400px">
   <nve-grid-header>
     ${Array(5).fill('').map((_, i) => html`<nve-grid-column width=${i !== 4 ? '300px' : ''}>column ${i}</nve-grid-column> `)}
   </nve-grid-header>
@@ -540,6 +520,7 @@ export const ColumnWidth = {
 
 /**
  * @summary Basic grid content display with evenly distributed columns, demonstrating standard data presentation and cell content wrapping behavior.
+ * @tags test-case
  */
 export const Content = {
   render: () => html`
@@ -562,7 +543,7 @@ export const Content = {
  */
 export const ColumnFixed = {
   render: () => html`
-<nve-grid style="--scroll-height: 402px; max-width: 800px">
+<nve-grid style="height: 400px; max-width: 800px">
   <nve-grid-header>
     ${Array(5).fill('').map((_, i) => html`<nve-grid-column position=${i === 0 ? 'fixed' : ''} width="200px">column ${i}</nve-grid-column> `)}
   </nve-grid-header>
@@ -581,7 +562,7 @@ export const ColumnFixed = {
  */
 export const ColumnMultiFixed = {
   render: () => html`
-<nve-grid style="--scroll-height: 402px; max-width: 800px">
+<nve-grid style="height: 400px; max-width: 800px">
   <nve-grid-header>
     ${Array(5).fill('').map((_, i) => html`<nve-grid-column position=${(i === 0) || (i === 4) ? 'fixed' : ''} width="200px">column ${i}</nve-grid-column>`)}
   </nve-grid-header>
@@ -600,7 +581,7 @@ export const ColumnMultiFixed = {
  */
 export const ColumnStackFixed = {
   render: () => html`
-<nve-grid style="--scroll-height: 402px; max-width: 800px">
+<nve-grid style="height: 400px; max-width: 800px">
   <nve-grid-header>
     <nve-grid-column position="fixed" width="100px">Column 1</nve-grid-column>
     <nve-grid-column position="fixed" width="100px">Column 2</nve-grid-column>
@@ -625,7 +606,7 @@ export const ColumnStackFixed = {
  */
 export const ColumnDynamicFixed = {
   render: () => html`
-<nve-grid id="column-dynamic-fixed-grid" style="--scroll-height: 402px;">
+<nve-grid id="column-dynamic-fixed-grid" style="height: 400px;">
   <nve-grid-header>
     ${Array(5).fill('').map((_, i) => html`<nve-grid-column width="200px" position=${(i === 0) || (i === 4) ? 'fixed' : ''}>column ${i}</nve-grid-column>`)}
   </nve-grid-header>
@@ -665,6 +646,7 @@ export const ColumnDynamicFixed = {
 
 /**
  * @summary Center-aligned column content for improved visual balance and data presentation, enhancing readability for numeric and centered data types.
+ * @tags test-case
  */
 export const ColumnAlignCenter = {
   render: () => html`
@@ -683,6 +665,7 @@ export const ColumnAlignCenter = {
 
 /**
  * @summary Right-aligned column content for numeric data and values, providing consistent visual alignment and improved data scanning for financial or metric displays.
+ * @tags test-case
  */
 export const ColumnAlignEnd = {
   render: () => html`
@@ -701,6 +684,7 @@ export const ColumnAlignEnd = {
 
 /**
  * @summary Left-aligned column content for text data and labels, providing consistent visual alignment and improved readability for textual information.
+ * @tags test-case
  */
 export const ColumnAlignStart = {
   render: () => html`
@@ -886,7 +870,7 @@ class InfiniteScrollDemo extends LitElement {
 
   render() {
     return html`
-      <nve-grid style="--scroll-height: 400px" @scrollboxend=${() => this.#loadGroup()}>
+      <nve-grid style="height: 400px" @scrollboxend=${() => this.#loadGroup()}>
         <nve-grid-header>
           ${this.grid.columns.map(column => html`<nve-grid-column>${column.label}</nve-grid-column>`)}
         </nve-grid-header>
@@ -954,7 +938,7 @@ export const Performance = {
         existingGrid.remove();
       } else {
         const grid = document.createElement('nve-grid');
-        grid.style.setProperty('--scroll-height', '400px');
+        grid.style.setProperty('height', '400px');
         grid.style.setProperty('max-width', '1024px');
 
         const header = document.createElement('nve-grid-header');
@@ -1020,6 +1004,7 @@ export const PerformanceVirtualScroll = {
 
 /**
  * @summary Alternating row background colors for improved scanability. Use striped rows in dense grids or when users frequently scan horizontally across many columns, as the alternating backgrounds help maintain visual alignment and reduce reading errors in wide tables.
+ * @tags test-case
  */
 export const Stripe = {
   render: () => html`
@@ -1048,7 +1033,7 @@ export const Card = {
     <h2 nve-text="heading sm bold">Data Grid</h2>
     <h3 nve-text="body muted">Card Example</h3>
   </nve-card-header>
-  <nve-grid container="flat" style="--scroll-height: 325px">
+  <nve-grid container="flat" style="height: 325px">
     <nve-grid-header>
       ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column>`)}
     </nve-grid-header>
@@ -1064,6 +1049,7 @@ export const Card = {
 
 /**
  * @summary Grid integrated with tabs for organized data presentation, enabling multiple data views within a single interface for comprehensive information display.
+ * @tags test-case
  */
 export const CardTabs = {
   render: () => html`
@@ -1076,7 +1062,7 @@ export const CardTabs = {
       <nve-tabs-item>tab 3</nve-tabs-item>
     </nve-tabs>
   </nve-card-header>
-  <nve-grid container="flat" style="--scroll-height: 325px">
+  <nve-grid container="flat" style="height: 325px">
     <nve-grid-header>
       ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column>`)}
     </nve-grid-header>
@@ -1111,7 +1097,7 @@ export const Placeholder = {
  */
 export const Full = {
   render: () => html`
-<nve-grid container="full" style="--scroll-height: 402px">
+<nve-grid container="full" style="height: 400px">
   <nve-grid-header>
     ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column>`)}
   </nve-grid-header>
@@ -1129,7 +1115,7 @@ export const Full = {
  */
 export const Flat = {
   render: () => html`
-<nve-grid container="flat" style="--scroll-height: 402px">
+<nve-grid container="flat" style="height: 400px">
   <nve-grid-header>
     ${Array(5).fill('').map((_, i) => html`<nve-grid-column>column ${i}</nve-grid-column>`)}
   </nve-grid-header>
@@ -1175,7 +1161,7 @@ export const FocusTypes = {
 };
 
 /**
- * @summary Use a right aligned [panel](docs/elements/page/#panels) when
+ * @summary Use a right aligned nve-page-panel when
  * displaying advanced filtering or display settings for the grid. Item detail
  * panels should be open using a action button placed at the end of the grid row.
  */
@@ -1332,7 +1318,6 @@ export const InvalidDOM = {
 </nve-grid>
   `
 };
-
 
 /**
  * @summary Examples of invalid grid usage patterns for testing and documentation purposes, showing what not to do when implementing grids.
