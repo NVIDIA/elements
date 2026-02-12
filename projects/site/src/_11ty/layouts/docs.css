@@ -157,6 +157,7 @@ h2[nve-text*='mkd'],
 h3[nve-text*='mkd'] {
   position: relative;
   padding-top: var(--nve-ref-space-xl);
+  scroll-margin-top: var(--nve-ref-space-lg);
   display: flex;
   align-items: center;
   gap: var(--nve-ref-space-sm);

@@ -1,6 +1,6 @@
 import type { ResizeHandle } from '@nvidia-elements/core/resize-handle';
 import type { Tree } from '@nvidia-elements/core/tree';
-import type { DocsSearch } from '../../_internal/search/search.js';
+import { FILTER_VALUES, type DocsSearch } from '../../_internal/search/search.js';
 import '/_internal/canvas/canvas.js';
 
 void import('/_internal/search/search.js');
@@ -37,9 +37,11 @@ function scrollToHeading(headerId: string, behavior: ScrollBehavior = 'smooth') 
   if (!heading || !docsMain) return;
 
   // Calculate the scroll position relative to the scrollable container
+  // Respect the element's scroll-margin-top for consistent padding above the heading
   const headingRect = heading.getBoundingClientRect();
   const containerRect = docsMain.getBoundingClientRect();
-  const scrollTop = docsMain.scrollTop + (headingRect.top - containerRect.top);
+  const scrollMargin = parseFloat(getComputedStyle(heading).scrollMarginTop) || 0;
+  const scrollTop = docsMain.scrollTop + (headingRect.top - containerRect.top) - scrollMargin;
 
   docsMain.scrollTo({ top: scrollTop, behavior });
 }
@@ -69,48 +71,139 @@ if (savedPosition) {
   content.scrollTop = parseInt(savedPosition);
 }
 
-// search
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const docsSearch = globalThis.document.querySelector<DocsSearch>('#docs-search')!;
 const docsNav = globalThis.document.querySelector<Tree>('#docs-nav')!;
 
+// Track the current search and filter state
 let isSearching = false;
-docsSearch.addEventListener('search-change', (event: CustomEvent) => (isSearching = event.detail.length > 0));
-docsSearch.addEventListener('search-reset', () => ((isSearching = false), toggleSideNav(true)));
-docsSearch.addEventListener('search-focus', () => toggleSideNav(false));
+let currentFilter: string | null = null;
+
+/**
+ * Syncs the current search query and active filter to URL parameters.
+ * Updates browser history without triggering navigation or adding new entries.
+ */
+function syncSearchStateToUrl(query: string, filter: string | null) {
+  const currentUrl = new URL(globalThis.location.href);
+  let urlHasChanged = false;
+
+  // Handle search query parameter
+  if (query.length > 0) {
+    currentUrl.searchParams.set('q', query);
+    urlHasChanged = true;
+  } else if (currentUrl.searchParams.has('q')) {
+    currentUrl.searchParams.delete('q');
+    urlHasChanged = true;
+  }
+
+  // Handle filter parameter (only if it's a valid filter value)
+  const isValidFilter = filter && FILTER_VALUES.includes(filter as (typeof FILTER_VALUES)[number]);
+
+  if (isValidFilter) {
+    currentUrl.searchParams.set('filter', filter);
+    urlHasChanged = true;
+  } else if (currentUrl.searchParams.has('filter')) {
+    currentUrl.searchParams.delete('filter');
+    urlHasChanged = true;
+  }
+
+  // Only update browser history if something actually changed
+  if (urlHasChanged) {
+    const newUrl = currentUrl.pathname + currentUrl.search + currentUrl.hash;
+    globalThis.history.replaceState(null, '', newUrl);
+  }
+}
+
+// Listen for any search state change (query input, filter selection, or reset)
+// The search component emits a single 'search-change' event for all state transitions
+docsSearch.addEventListener('search-change', ((event: CustomEvent) => {
+  const { query, filter } = event.detail as { query: string; filter: string | null };
+
+  isSearching = query.length > 0;
+  currentFilter = filter;
+  syncSearchStateToUrl(query, filter);
+
+  // Restore navigation when search is fully cleared (no query and no filter)
+  if (!isSearching && filter === null) {
+    toggleSideNav(true);
+  }
+}) as EventListener);
+
+// Listen for search results loaded
+// Hides the navigation tree and expands the side panel to accommodate results
+docsSearch.addEventListener('search-results', () => {
+  toggleSideNav(false);
+});
+
+// Listen for no results found
+// Restores the navigation tree since there are no results to display
+docsSearch.addEventListener('search-no-results', () => {
+  toggleSideNav(true);
+});
+
+// Listen for search input blur
+// Restores navigation if user is not actively searching
 docsSearch.addEventListener('search-blur', () => !isSearching && toggleSideNav(true));
 
-let prevWidth = panel.style.width;
+const defaultWidth = handle.getAttribute('value') + 'px';
 const toggleSideNav = (state: boolean) => {
   if (state) {
     // Showing nav - shrink panel to default width
-    panel.style.width = prevWidth;
+    panel.style.width = defaultWidth;
   } else {
     // Hiding nav for search - expand panel for search results
-    prevWidth = panel.style.width;
     panel.style.width = `${handle.max}px`;
   }
   docsNav.hidden = !state;
 };
 
+// Initialize search from URL parameters (if present)
+// This allows for shareable search links with pre-filled queries and filters
 const searchParams = new URLSearchParams(globalThis.location.search);
-const query = searchParams.get('q');
-if (query) {
+const searchQuery = searchParams.get('q');
+const filterParam = searchParams.get('filter');
+
+// Validate and apply filter from URL
+const isValidFilterParam = filterParam && FILTER_VALUES.includes(filterParam as (typeof FILTER_VALUES)[number]);
+
+if (isValidFilterParam) {
+  currentFilter = filterParam;
+}
+
+// If there's a search query in the URL, initialize the search component
+if (searchQuery) {
+  // Track search analytics if Google Analytics is available
   if (globalThis.gtag) {
-    globalThis.gtag('event', 'elements-docs-search', { query: query });
+    globalThis.gtag('event', 'elements-docs-search', { query: searchQuery });
   }
 
-  // Pre-load search from URL query param
+  // Wait for the search component to be defined and ready
   await customElements.whenDefined('nvd-search');
   await docsSearch.updateComplete;
-  const searchInput = docsSearch.shadowRoot?.querySelector('#search-input');
-  if (searchInput) {
-    searchInput.value = query;
-    searchInput.focus();
+
+  // Apply filter if one was specified in the URL
+  if (currentFilter) {
+    docsSearch.filter = currentFilter;
+  }
+
+  // Populate the search input and trigger the search
+  const searchInputElement = docsSearch.shadowRoot?.querySelector<HTMLInputElement>('#search-input');
+
+  if (searchInputElement) {
+    searchInputElement.value = searchQuery;
+    searchInputElement.focus();
+
+    // Hide navigation and show search results
     toggleSideNav(false);
     isSearching = true;
-    void docsSearch.search(query);
+
+    void docsSearch.search(searchQuery);
   }
+} else if (currentFilter) {
+  // If there's only a filter (no query), just apply the filter
+  await customElements.whenDefined('nvd-search');
+  await docsSearch.updateComplete;
+
+  docsSearch.filter = currentFilter;
 }
 
 // Add clickable anchor links to headings
