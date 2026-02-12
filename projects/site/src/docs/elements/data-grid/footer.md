@@ -31,7 +31,3 @@
 {% api 'nve-grid-footer', 'description' %}
 
 {% example '@nvidia-elements/core/grid/grid.examples.json' 'Footer' %}
-
-## Scrollbar
-
-{% example '@nvidia-elements/core/grid/grid.examples.json' 'FooterScrollbar' %}
