@@ -10,7 +10,7 @@ import type {
   Token,
   Attribute
 } from '../types.js';
-import { attributeMetadataToMarkdown, elementMetadataToMarkdown, getElementChangelog } from '../utils/utils.ts';
+import { attributeMetadataToMarkdown, getElementChangelog } from '../utils/utils.ts';
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
 
@@ -103,7 +103,7 @@ function getProjectElements(basePath: string): Element[] {
     .map(d => d.tagName)
     .reduce((elements: CustomElementManifest[], name) => {
       const manifest = elementDeclarations.find(e => e.tagName === name);
-      const markdown = manifest.metadata ? elementMetadataToMarkdown(manifest) : '';
+      const markdown = manifest.metadata?.markdown ?? '';
       const changelog = getElementChangelog(name, changelogFile);
       const metadata: Element = {
         name,

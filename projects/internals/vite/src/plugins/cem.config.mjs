@@ -35,7 +35,6 @@ function metadataPlugin() {
         'stable',
         'performance',
         'package',
-        'description',
         'since',
         'axe',
         'entrypoint',
@@ -50,7 +49,13 @@ function metadataPlugin() {
 
           node.jsDoc?.forEach(jsDoc => {
             jsDoc.tags?.forEach(tag => {
-              if (metadata.find(m => m === tag.tagName?.getText())) {
+              const tagName = tag.tagName?.getText();
+
+              if (tagName === 'description') {
+                classDeclaration.description = tag.comment?.trim() ?? '';
+              }
+
+              if (metadata.find(m => m === tagName)) {
                 let value = tag.comment;
                 if (value === 'true') {
                   value = true;
@@ -60,8 +65,7 @@ function metadataPlugin() {
                   value = false;
                 }
 
-                classDeclaration.metadata = { ...classDeclaration.metadata, [tag.tagName?.getText()]: value };
-                classDeclaration.description = classDeclaration.metadata.description;
+                classDeclaration.metadata = { ...classDeclaration.metadata, [tagName]: value };
               }
             });
           });
@@ -418,6 +422,91 @@ function cssPropsPlugin() {
         });
     }
   };
+}
+
+function elementMetadataToMarkdownPlugin() {
+  return {
+    name: 'element-metadata-to-markdown',
+    packageLinkPhase({ customElementsManifest }) {
+      customElementsManifest.modules.forEach(module => {
+        module.declarations
+          .filter(declaration => declaration.tagName)
+          .forEach(declaration => {
+            if (!declaration.metadata) {
+              declaration.metadata = {};
+            }
+            declaration.metadata.markdown = elementMetadataToMarkdown(declaration);
+          });
+      });
+    }
+  };
+}
+
+function elementMetadataToMarkdown(manifest) {
+  if (manifest.tagName) {
+    const slots = manifest.slots?.filter(i => !i.description?.includes('deprecated')) ?? [];
+    const members = manifest.members?.filter(i => !i.deprecated) ?? [];
+    return `
+## ${manifest.tagName}
+${manifest.description ? `\n${manifest.description}\n` : ''}${manifest.metadata.example ? `\n### Example\n\n\`\`\`html\n${manifest.metadata.example}\n\`\`\`\n` : ''}
+### Import
+
+\`\`\`javascript
+import '${manifest.metadata.entrypoint}/define.js';
+\`\`\`
+
+${
+  slots.length
+    ? `### Slots\n
+| name | value | description |
+| ---- | ----- | ----------- |
+${slots.map(i => `| ${i.name || '(default)'} | \`string\` | ${formatDescription(i.description)} |`).join('\n')}\n`
+    : ''
+}
+
+${
+  members.length
+    ? `### Properties / Attributes\n
+| property (attribute) | value | description |
+| -------------------- | ----- | ----------- |
+${members
+  .map(i => {
+    const type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
+    return `| ${i.name}${i.attribute && i.attribute !== i.name ? ` (${i.attribute})` : ''} | ${type} | ${formatDescription(i.description)} |`;
+  })
+  .join('\n')}\n`
+    : ''
+}
+
+${
+  manifest.events?.length
+    ? `### Events\n
+| name | value | description |
+| ---- | ----- | ----------- |
+${manifest.events.map(i => `| ${i.name} | \`CustomEvent\` | ${formatDescription(i.description)} |`).join('\n')}\n`
+    : ''
+}
+
+${
+  manifest.commands?.length
+    ? `### Invoker Commands\n
+| name | value | description |
+| ---- | ----- | ----------- |
+${manifest.commands.map(i => `| ${i.name} | \`CommandEvent\` | ${formatDescription(i.description)} |`).join('\n')}\n`
+    : ''
+}
+
+${
+  manifest.cssProperties?.length
+    ? `### CSS Properties\n
+| name | value | description |
+| ---- | ----- | ----------- |
+${manifest.cssProperties.map(i => `| ${i.name} | \`string\` | ${formatDescription(i.description)} |`).join('\n')}`
+    : ''
+}`
+      .trim()
+      .replace(/(?:\r\n|\r|\n){2,}/g, '\n\n');
+  }
 }
 
 /**
@@ -894,6 +983,18 @@ function superClassMetadataPlugin() {
   };
 }
 
+function formatDescription(description) {
+  if (description == null || description === '') return '';
+  return removeMdnLinks(description).replace(/\s+/g, ' ').trim().replace(/\|/g, '\\|');
+}
+
+function removeMdnLinks(description) {
+  return description
+    .replaceAll('https://developer.mozilla.org/en-US/docs/Web/Accessibility/', 'https://mdn.dev/')
+    .replaceAll('https://developer.mozilla.org/en-US/docs/Web/API/', 'https://mdn.dev/')
+    .replaceAll('https://developer.mozilla.org/en-US/docs/Web/', 'https://mdn.dev/');
+}
+
 export default {
   globs: [resolve('./src')],
   exclude: [
@@ -917,7 +1018,8 @@ export default {
     superClassMetadataPlugin(),
     deprecatedPlugin(),
     jsxTypesPlugin(),
-    cssPropsPlugin()
+    cssPropsPlugin(),
+    elementMetadataToMarkdownPlugin()
   ],
   overrideModuleCreation: ({ ts, globs }) => {
     const configFile = ts.findConfigFile(process.cwd(), ts.sys.fileExists, resolve('tsconfig.json'));
