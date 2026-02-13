@@ -103,6 +103,23 @@ export const AlertGroupStatus = {
 }
 
 /**
+ * @summary Use Invoker Command API to close alerts.
+ */
+export const InvokerCommand = {
+  render: () => html`
+<nve-alert-group>
+  <nve-alert id="alert-1">
+    Alert Notification Message 1
+    <nve-icon-button commandfor="alert-1" command="--close" slot="actions" container="flat" icon-name="cancel" size="sm" aria-label="close"></nve-icon-button>
+  </nve-alert>
+  <nve-alert id="alert-2">
+    Alert Notification Message 2
+    <nve-icon-button commandfor="alert-2" command="--close" slot="actions" container="flat" icon-name="cancel" size="sm" aria-label="close"></nve-icon-button>
+  </nve-alert>
+</nve-alert-group>`
+};
+
+/**
  * @summary Closable alerts that users can dismiss. Use closable alerts for messages that become irrelevant after reading (like onboarding tips, one-time announcements, or acknowledged warnings), but avoid for critical errors that need to remain visible until resolved.
  */
 export const Closable = {
