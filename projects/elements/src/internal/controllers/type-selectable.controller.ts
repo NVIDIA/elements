@@ -25,7 +25,7 @@ export class TypeSelectableController<T extends TypeSelectable> implements React
 
     this.host.addEventListener('command', (e: CommandEvent) => {
       this.#commandTriggered = true;
-      if (e.command === '--toggle') {
+      if (e.command === '--toggle-select') {
         this.toggle();
       }
 

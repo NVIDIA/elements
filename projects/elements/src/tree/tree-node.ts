@@ -31,6 +31,7 @@ import { updateNodeSelection } from './utils.js';
  * @event select - Dispatched when the node selection state changes.
  * @command --select - use to select the node
  * @command --deselect - use to deselect the node
+ * @command --toggle-select - use to toggle the node selection state
  * @command --open - use to open the node
  * @command --close - use to close the node
  * @command --toggle - use to toggle open / closed state of the node
