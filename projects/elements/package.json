@@ -90,6 +90,9 @@
     "./custom-elements-jsx": {
       "types": "./dist/custom-elements-jsx.d.ts"
     },
+    "./custom-elements-vue": {
+      "types": "./dist/custom-elements-vue.d.ts"
+    },
     "./accordion": {
       "types": "./dist/accordion/index.d.ts",
       "default": "./dist/accordion/index.js"

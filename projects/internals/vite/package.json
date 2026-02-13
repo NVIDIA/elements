@@ -22,6 +22,7 @@
     "axe-core": "catalog:",
     "custom-element-jsx-integration": "1.6.0",
     "custom-element-vs-code-integration": "1.5.0",
+    "custom-element-vuejs-integration": "1.4.0",
     "dts-bundle-generator": "9.5.1",
     "glob": "catalog:",
     "lighthouse": "catalog:",
