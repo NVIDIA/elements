@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "ci": "wireit",
+    "build": "wireit",
     "dev": "wireit",
     "preview": "wireit",
     "lint": "wireit",
@@ -14,18 +15,18 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "vue": "3.5.22"
+    "vue": "3.5.28"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
     "@tsconfig/node20": "20.1.6",
     "@types/node": "catalog:",
-    "@vitejs/plugin-vue": "6.0.1",
+    "@vitejs/plugin-vue": "6.0.4",
     "@vue/tsconfig": "0.8.1",
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vue-tsc": "3.1.1"
+    "vue-tsc": "3.2.4"
   },
   "wireit": {
     "ci": {
@@ -47,7 +48,10 @@
         "src/**",
         "public/**",
         "vite.config.ts",
-        "tsconfig.json"
+        "tsconfig.json",
+        "tsconfig.app.json",
+        "tsconfig.node.json",
+        "env.d.ts"
       ],
       "output": [
         "./dist/**"

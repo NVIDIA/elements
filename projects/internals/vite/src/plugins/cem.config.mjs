@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { Project, SyntaxKind } from 'ts-morph';
 import { customElementJsxPlugin } from 'custom-element-jsx-integration';
+import { customElementVuejsPlugin } from 'custom-element-vuejs-integration';
 
 const resolve = rel => path.resolve(process.cwd(), rel);
 const pkg = JSON.parse(fs.readFileSync(resolve('./package.json'), 'utf-8'));
@@ -349,6 +350,13 @@ function jsxTypesPlugin() {
       onPointerUp?: (event: PointerEvent) => void;
       onPointerMove?: (event: PointerEvent) => void;
     `
+  });
+}
+
+function vueTypesPlugin() {
+  return customElementVuejsPlugin({
+    outdir: resolve('dist'),
+    fileName: 'custom-elements-vue.d.ts'
   });
 }
 
@@ -1018,6 +1026,7 @@ export default {
     superClassMetadataPlugin(),
     deprecatedPlugin(),
     jsxTypesPlugin(),
+    vueTypesPlugin(),
     cssPropsPlugin(),
     elementMetadataToMarkdownPlugin()
   ],

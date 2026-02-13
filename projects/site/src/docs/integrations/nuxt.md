@@ -13,6 +13,27 @@
 
 Once installation is complete Elements can be imported and used within [Nuxt](https://nuxt.com/) Vue SFC files. Since Nuxt is built on top of Vue, the same Vue template syntax applies.
 
+## TypeScript types
+
+To get type checking and autocomplete for Elements in templates (and to have invalid props reported by the IDE and build), add a reference to the custom-elements Vue types.
+
+Create or update `env.d.ts` in your project root:
+
+```typescript
+/// <reference path="./node_modules/@nvidia-elements/core/dist/custom-elements-vue.d.ts" />
+```
+
+Nuxt will include this file when running `nuxi typecheck`. To fail the build on type errors, run type checking before the build:
+
+```json
+// package.json
+{
+  "scripts": {
+    "build": "nuxi typecheck && nuxt build"
+  }
+}
+```
+
 ## Configuration
 
 Configure `nuxt.config.ts` to recognize Elements as custom elements and set up the global theme attributes.
