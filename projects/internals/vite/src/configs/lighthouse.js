@@ -6,7 +6,6 @@ export const libraryLighthouseTestConfig = {
   cacheDir: 'node_modules/.vite-lighthouse',
   test: {
     retry: 1,
-    bail: process.env.CI ? 1 : 0,
     isolate: false,
     maxWorkers: 1,
     fileParallelism: false,
