@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.58.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.58.0...@nvidia-elements/core-v1.58.1) (2026-02-13)
+
+
+### Bug Fixes
+
+* **elements:** invoker command docs ([b0b9cff](https://github.com/NVIDIA/elements/commit/b0b9cffec344fe37ee7d4ce90ed074716c377147))
+
 ## [@nvidia-elements/core-v1.58.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.57.4...@nvidia-elements/core-v1.58.0) (2026-02-12)
 
 
