@@ -122,7 +122,7 @@ export class SystemSettings extends LitElement {
     this.#globals = globals;
     globalThis.document.documentElement.setAttribute('nve-theme', themes);
     globalThis.document.documentElement.setAttribute('nve-layer', globals.layer);
-      globalThis.document.documentElement.setAttribute('show-advanced-api', globals.showAdvancedApi);
+    globalThis.document.documentElement.setAttribute('show-advanced-api', globals.showAdvancedApi);
     globalThis.document.querySelectorAll('iframe').forEach(iframe => {
       iframe.contentWindow?.document.documentElement.setAttribute('nve-theme', themes);
       iframe.contentWindow?.document.documentElement.setAttribute('nve-layer', globals.layer);

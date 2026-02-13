@@ -43,7 +43,18 @@ export function render(data) {
   return element
     ? `
   ${renderAllAPIs(element, true)}
-  ${componentData.associatedElements?.length ? componentData.associatedElements.map(tag => renderAllAPIs(elements.find(d => d.name === tag), false)).join('') : ''}
+  ${
+    componentData.associatedElements?.length
+      ? componentData.associatedElements
+          .map(tag =>
+            renderAllAPIs(
+              elements.find(d => d.name === tag),
+              false
+            )
+          )
+          .join('')
+      : ''
+  }
   `
     : '';
 }
