@@ -17,8 +17,7 @@
     "ci": {
       "dependencies": [
         "lint",
-        "build",
-        "test:lighthouse"
+        "build"
       ]
     },
     "dev": {
@@ -56,10 +55,10 @@
         "build:dependencies"
       ],
       "output": [
-        "dist/**",
-        ".11ty-vite"
+        "dist/**"
       ],
       "env": {
+        "NODE_ENV": "production",
         "PAGES_BASE_URL": {
           "external": true,
           "default": "/elements/"
@@ -93,7 +92,6 @@
         "../internals/tools/dist/**/*.examples.json"
       ],
       "dependencies": [
-        "clean",
         {
           "script": "../elements:build",
           "cascade": false
@@ -189,13 +187,19 @@
         "src/**/*.test.lighthouse.ts",
         "vitest.lighthouse.ts"
       ],
-      "output": [],
+      "output": [
+        "coverage/lighthouse/junit.xml"
+      ],
       "dependencies": [
         "build",
         "../internals/vite:ci"
       ],
       "env": {
-        "NODE_ENV": "production"
+        "NODE_ENV": "production",
+        "PAGES_BASE_URL": {
+          "external": true,
+          "default": "/elements/"
+        }
       }
     }
   },

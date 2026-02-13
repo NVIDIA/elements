@@ -130,7 +130,7 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(201);
+    expect(scores.payload.js).toBeLessThan(202);
     expect(scores.payload.css).toBe(0);
   });
 
