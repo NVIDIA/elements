@@ -23,6 +23,7 @@ import styles from './alert.css?inline';
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/alert
  * @event close - Dispatched when the alert is closed within a alert group.
+ * @command --close - Use to set the alert closed/hidden state.
  * @slot icon - Icon slot is placed on the left side of the alert. Icons are typically used to represent the alert's status.
  * @slot prefix - Prefix slot is placed between the icon and the content. Prefixes are typically used to represent the alert's status.
  * @slot actions - Actions are placed on the right side of the alert. Actions are typically buttons, but can also be links. Actions should be used for actions that the user can take to resolve the alert.
