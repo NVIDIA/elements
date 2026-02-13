@@ -13,11 +13,20 @@ export class TypeClosableController<T extends TypeClosable> implements ReactiveC
 
   hostConnected() {
     attachInternals(this.host);
+
+    this.host.addEventListener('command', () => {
+      this.host.hidden = true;
+      this.#dispatchEvent();
+    });
   }
 
   close() {
     if (this.host.closable) {
-      this.host.dispatchEvent(new CustomEvent('close', { bubbles: true }));
+      this.#dispatchEvent();
     }
+  }
+
+  #dispatchEvent() {
+    this.host.dispatchEvent(new CustomEvent('close', { bubbles: true }));
   }
 }
