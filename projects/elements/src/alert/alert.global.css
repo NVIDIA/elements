@@ -2,3 +2,8 @@ nve-alert:has([slot='content'])::part(_content),
 nve-alert:has([slot='content'])::part(_content) {
   display: block;
 }
+
+nve-alert-group:not(:has(nve-alert)),
+nve-alert-group:not(:has(nve-alert:not([hidden]))) {
+  display: none;
+}

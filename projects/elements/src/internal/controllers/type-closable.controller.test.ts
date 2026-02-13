@@ -30,18 +30,41 @@ describe('type-closable.controller', () => {
     removeFixture(fixture);
   });
 
-  it('should emit close event when close button clicked', async () => {
+  it('should attach element internals when host connects', async () => {
+    await elementIsStable(element);
+    const host = element as unknown as { _internals?: ElementInternals };
+    expect(host._internals).toBeDefined();
+  });
+
+  it('should set hidden and emit close when command event is dispatched', async () => {
+    await elementIsStable(element);
+    const closePromise = untilEvent(element, 'close');
+    element.dispatchEvent(new CustomEvent('command', { bubbles: true }));
+
+    const closeEvent = await closePromise;
+    expect(closeEvent).toBeDefined();
+    expect(closeEvent.bubbles).toBe(true);
+    expect(element.hidden).toBe(true);
+  });
+
+  it('should emit close when close() is called and closable is true', async () => {
     element.closable = true;
     await elementIsStable(element);
 
-    const event = untilEvent(element, 'close');
+    const eventPromise = untilEvent(element, 'close');
     element.close();
-    expect(await event).toBeDefined();
+    const closeEvent = await eventPromise;
+    expect(closeEvent).toBeDefined();
+    expect(closeEvent.bubbles).toBe(true);
+  });
 
-    let call = false;
-    element.addEventListener('close', () => (call = true));
+  it('should not emit close when close() is called and closable is false', async () => {
     element.closable = false;
+    await elementIsStable(element);
+
+    let closed = false;
+    element.addEventListener('close', () => (closed = true));
     element.close();
-    expect(call).toBe(false);
+    expect(closed).toBe(false);
   });
 });
