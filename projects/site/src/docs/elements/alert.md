@@ -33,6 +33,10 @@
 
 {% example '@nvidia-elements/core/alert/alert.examples.json' 'AlertGroupStatus' %}
 
+## Invoker Command
+
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'InvokerCommand' %}
+
 ## Closable
 
 {% api 'nve-alert', 'property', 'closable' %}
