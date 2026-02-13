@@ -133,15 +133,15 @@ describe('type-selectable.controller', () => {
   });
 
   describe('invoker command support', () => {
-    it('should toggle state when receiving --toggle command', async () => {
+    it('should toggle state when receiving --toggle-select command', async () => {
       element.selected = false;
       await elementIsStable(element);
 
-      element.dispatchEvent(new CommandEvent('command', { command: '--toggle' }));
+      element.dispatchEvent(new CommandEvent('command', { command: '--toggle-select' }));
       await elementIsStable(element);
       expect(element.selected).toBe(true);
 
-      element.dispatchEvent(new CommandEvent('command', { command: '--toggle' }));
+      element.dispatchEvent(new CommandEvent('command', { command: '--toggle-select' }));
       await elementIsStable(element);
       expect(element.selected).toBe(false);
     });
@@ -165,12 +165,12 @@ describe('type-selectable.controller', () => {
       expect(element.selected).toBe(false);
     });
 
-    it('should emit select event when receiving --toggle command', async () => {
+    it('should emit select event when receiving --toggle-select command', async () => {
       element.selected = false;
       await elementIsStable(element);
 
       const event = untilEvent<CustomEvent>(element, 'select');
-      element.dispatchEvent(new CommandEvent('command', { command: '--toggle' }));
+      element.dispatchEvent(new CommandEvent('command', { command: '--toggle-select' }));
       const result = await event;
       expect(result.detail).toBe(element);
     });
