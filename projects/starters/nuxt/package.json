@@ -14,13 +14,15 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "nuxt": "4.2.2",
-    "vue": "3.5.26",
-    "vue-router": "4.6.4"
+    "nuxt": "4.3.1",
+    "vue": "3.5.28",
+    "vue-router": "5.0.2"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
-    "eslint": "catalog:"
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vue-tsc": "3.2.4"
   },
   "wireit": {
     "ci": {
@@ -30,12 +32,14 @@
       ]
     },
     "build": {
-      "command": "nuxt build",
+      "command": "nuxi typecheck && nuxt build",
       "files": [
         "../../elements/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
+        "app/**",
         "src/**",
+        "env.d.ts",
         "package.json",
         "tsconfig.json",
         "nuxt.config.ts"
