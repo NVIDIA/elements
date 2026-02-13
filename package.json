@@ -111,10 +111,11 @@
         "./projects/labs/code:test:lighthouse",
         "./projects/labs/markdown:test:lighthouse",
         "./projects/labs/media:test:lighthouse",
-        "./projects/monaco:test:lighthouse"
+        "./projects/monaco:test:lighthouse",
+        "./projects/site:test:lighthouse"
       ],
       "output": [
-        ".metrics/metrics.txt"
+        ".metrics/metrics.lighthouse.txt"
       ],
       "env": {
         "NODE_ENV": "production"
