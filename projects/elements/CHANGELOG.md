@@ -1,3 +1,15 @@
+## [@nvidia-elements/core-v1.59.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.58.1...@nvidia-elements/core-v1.59.0) (2026-02-13)
+
+
+### Features
+
+* **elements:** add close command for closable type controller ([d633940](https://github.com/NVIDIA/elements/commit/d633940489ea5781f20cf2a3e6fa5f11fbc1ab02))
+
+
+### Bug Fixes
+
+* **elements:** fix command event collision ([447c1a7](https://github.com/NVIDIA/elements/commit/447c1a7e56bf553e285e2d1b8bf052b593e84f57))
+
 ## [@nvidia-elements/core-v1.58.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.58.0...@nvidia-elements/core-v1.58.1) (2026-02-13)
 
 
