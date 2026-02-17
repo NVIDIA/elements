@@ -12,9 +12,5 @@ declare global {
     'nve-card-header': CardHeader;
     'nve-card-content': CardContent;
     'nve-card-footer': CardFooter;
-    'nve-card': Card;
-    'nve-card-header': CardHeader;
-    'nve-card-content': CardContent;
-    'nve-card-footer': CardFooter;
   }
 }

@@ -7,6 +7,5 @@ define(AppHeader);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-app-header': AppHeader;
-    'nve-app-header': AppHeader;
   }
 }

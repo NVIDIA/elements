@@ -6,6 +6,5 @@ define(Dot);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-dot': Dot;
-    'nve-dot': Dot;
   }
 }

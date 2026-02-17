@@ -13,9 +13,5 @@ declare global {
     'nve-drawer-footer': DrawerFooter;
     'nve-drawer-header': DrawerHeader;
     'nve-drawer-content': DrawerContent;
-    'nve-drawer': Drawer;
-    'nve-drawer-footer': DrawerFooter;
-    'nve-drawer-header': DrawerHeader;
-    'nve-drawer-content': DrawerContent;
   }
 }
