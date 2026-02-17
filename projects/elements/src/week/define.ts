@@ -8,6 +8,5 @@ define(Week);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-week': Week;
-    'nve-week': Week;
   }
 }

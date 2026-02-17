@@ -13,9 +13,5 @@ declare global {
     'nve-accordion-header': AccordionHeader;
     'nve-accordion-content': AccordionContent;
     'nve-accordion-group': AccordionGroup;
-    'nve-accordion': Accordion;
-    'nve-accordion-header': AccordionHeader;
-    'nve-accordion-content': AccordionContent;
-    'nve-accordion-group': AccordionGroup;
   }
 }

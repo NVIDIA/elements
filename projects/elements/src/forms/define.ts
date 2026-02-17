@@ -11,8 +11,5 @@ declare global {
     'nve-control': Control;
     'nve-control-group': ControlGroup;
     'nve-control-message': ControlMessage;
-    'nve-control': Control;
-    'nve-control-group': ControlGroup;
-    'nve-control-message': ControlMessage;
   }
 }

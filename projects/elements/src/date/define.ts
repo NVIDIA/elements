@@ -8,6 +8,5 @@ define(Date);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-date': Date;
-    'nve-date': Date;
   }
 }

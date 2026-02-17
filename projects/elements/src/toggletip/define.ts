@@ -11,8 +11,5 @@ declare global {
     'nve-toggletip': Toggletip;
     'nve-toggletip-footer': ToggletipFooter;
     'nve-toggletip-header': ToggletipHeader;
-    'nve-toggletip': Toggletip;
-    'nve-toggletip-footer': ToggletipFooter;
-    'nve-toggletip-header': ToggletipHeader;
   }
 }
