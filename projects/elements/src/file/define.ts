@@ -7,6 +7,5 @@ define(File);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-file': File;
-    'mlv-file': File;
   }
 }

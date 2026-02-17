@@ -8,7 +8,5 @@ declare global {
   interface HTMLElementTagNameMap {
     'nve-tabs-item': TabsItem;
     'nve-tabs': Tabs;
-    'mlv-tabs-item': TabsItem;
-    'mlv-tabs': Tabs;
   }
 }

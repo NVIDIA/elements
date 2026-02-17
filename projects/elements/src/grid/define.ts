@@ -20,12 +20,5 @@ declare global {
     'nve-grid-footer': GridFooter;
     'nve-grid-header': GridHeader;
     'nve-grid-placeholder': GridPlaceholder;
-    'mlv-grid': Grid;
-    'mlv-grid-column': GridColumn;
-    'mlv-grid-row': GridRow;
-    'mlv-grid-cell': GridCell;
-    'mlv-grid-footer': GridFooter;
-    'mlv-grid-header': GridHeader;
-    'mlv-grid-placeholder': GridPlaceholder;
   }
 }

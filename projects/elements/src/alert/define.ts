@@ -11,8 +11,5 @@ declare global {
   interface HTMLElementTagNameMap {
     'nve-alert': Alert;
     'nve-alert-group': AlertGroup;
-    'mlv-alert': Alert;
-    'mlv-alert-group': AlertGroup;
-    'mlv-alert-banner': AlertBanner;
   }
 }

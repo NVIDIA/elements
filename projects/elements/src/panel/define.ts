@@ -13,9 +13,5 @@ declare global {
     'nve-panel-header': PanelHeader;
     'nve-panel-content': PanelContent;
     'nve-panel-footer': PanelFooter;
-    'mlv-panel': Panel /** @deprecated */;
-    'mlv-panel-header': PanelHeader /** @deprecated */;
-    'mlv-panel-content': PanelContent /** @deprecated */;
-    'mlv-panel-footer': PanelFooter /** @deprecated */;
   }
 }

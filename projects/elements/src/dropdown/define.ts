@@ -11,8 +11,5 @@ declare global {
     'nve-dropdown': Dropdown;
     'nve-dropdown-footer': DropdownFooter;
     'nve-dropdown-header': DropdownHeader;
-    'mlv-dropdown': Dropdown;
-    'mlv-dropdown-footer': DropdownFooter;
-    'mlv-dropdown-header': DropdownHeader;
   }
 }

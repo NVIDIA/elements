@@ -6,6 +6,5 @@ define(ButtonGroup);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-button-group': ButtonGroup;
-    'mlv-button-group': ButtonGroup;
   }
 }

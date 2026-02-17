@@ -11,6 +11,5 @@ define(ProgressiveFilterChip);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-progressive-filter-chip': ProgressiveFilterChip;
-    'mlv-progressive-filter-chip': ProgressiveFilterChip /** @deprecated */;
   }
 }

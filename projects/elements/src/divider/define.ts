@@ -6,6 +6,5 @@ define(Divider);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-divider': Divider;
-    'mlv-divider': Divider;
   }
 }

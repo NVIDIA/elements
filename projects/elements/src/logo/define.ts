@@ -6,6 +6,5 @@ define(Logo);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-logo': Logo;
-    'mlv-logo': Logo;
   }
 }

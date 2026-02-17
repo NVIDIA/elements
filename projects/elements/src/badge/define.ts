@@ -7,6 +7,5 @@ define(Badge);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-badge': Badge;
-    'mlv-badge': Badge;
   }
 }

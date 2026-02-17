@@ -9,7 +9,5 @@ declare global {
   interface HTMLElementTagNameMap {
     'nve-checkbox': Checkbox;
     'nve-checkbox-group': CheckboxGroup;
-    'mlv-checkbox': Checkbox;
-    'mlv-checkbox-group': CheckboxGroup;
   }
 }

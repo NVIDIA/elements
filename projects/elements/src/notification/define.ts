@@ -9,7 +9,5 @@ declare global {
   interface HTMLElementTagNameMap {
     'nve-notification': Notification;
     'nve-notification-group': NotificationGroup;
-    'mlv-notification': Notification;
-    'mlv-notification-group': NotificationGroup;
   }
 }
