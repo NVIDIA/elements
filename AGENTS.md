@@ -130,7 +130,7 @@ Components export both the class and auto-define:
 
 ```typescript
 // component-name.ts
-export class ComponentName extends BaseElement {
+export class ComponentName extends LitElement {
   static styles = useStyles([styles]);
   static readonly metadata = { tag: 'nve-component-name', version: '0.0.0' };
 
@@ -142,8 +142,16 @@ export class ComponentName extends BaseElement {
 }
 
 // define.ts
-import { ComponentName } from './component-name.js';
-customElements.define(ComponentName.metadata.tag, ComponentName);
+import { define } from '@nvidia-elements/core/internal';
+import { ComponentName } from '@nvidia-elements/core/component-name';
+
+define(ComponentName);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'nve-component-name': ComponentName;
+  }
+}
 ```
 
 ### Build System
