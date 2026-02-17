@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.60.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.59.0...@nvidia-elements/core-v1.60.0) (2026-02-17)
+
+
+### Features
+
+* **elements:** support vue and nuxt type checking ([becf7f0](https://github.com/NVIDIA/elements/commit/becf7f05af71475dd32111939843eaa441338ac3))
+
 ## [@nvidia-elements/core-v1.59.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.58.1...@nvidia-elements/core-v1.59.0) (2026-02-13)
 
 
