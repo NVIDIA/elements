@@ -11,6 +11,5 @@ define(Combobox);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-combobox': Combobox;
-    'nve-combobox': Combobox;
   }
 }

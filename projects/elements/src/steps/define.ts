@@ -10,7 +10,5 @@ declare global {
   interface HTMLElementTagNameMap {
     'nve-steps-item': StepsItem;
     'nve-steps': Steps;
-    'nve-steps-item': StepsItem;
-    'nve-steps': Steps;
   }
 }
