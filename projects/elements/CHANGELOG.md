@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.60.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.0...@nvidia-elements/core-v1.60.1) (2026-02-17)
+
+
+### Bug Fixes
+
+* **elements:** grid column positioning ([fca48b7](https://github.com/NVIDIA/elements/commit/fca48b74be05a08694a3ba589c7ec2a72b3f0eff))
+
 ## [@nvidia-elements/core-v1.60.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.59.0...@nvidia-elements/core-v1.60.0) (2026-02-17)
 
 
