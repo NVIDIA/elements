@@ -358,6 +358,8 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-lighthouse/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-lighthouse/">Lighthouse Testing</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-ssr/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-ssr/">SSR Testing</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-visual/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-visual/">Visual Testing</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/troubleshooting/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/troubleshooting/">Troubleshooting</a></nve-tree-node>
+      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/component-creation/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/component-creation/">Component Creation</a></nve-tree-node>
     </nve-tree-node>
   </nve-tree-node>
 </nve-tree>
