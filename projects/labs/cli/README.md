@@ -117,6 +117,7 @@ Install to Cursor with the MCP configuration below.
 | `/playground` | Context for creating playground prototypes | `/playground` Create an example login form |
 | `/search` | Context for searching Elements APIs | `/search` What could I use for notifying user of a long running process? |
 | `/new-project` | Context for creating a new Elements project. | `/new-project` Create an Angular todo app |
+| `/migrate` | Context for migrating from deprecated Elements APIs | `/migrate` Migrate my project from deprecated Elements APIs |
 
 ### Tools
 
@@ -190,7 +191,7 @@ tools.forEach(tool => {
 - Sets `process.env.ELEMENTS_ENV = 'mcp'`
 - Creates MCP server instance with stdio transport
 - **Tool registration** - Registers all tools with MCP server using Zod schemas
-- **Prompt registration** - Registers 4 built-in prompts (about, search, playground, new-project)
+- **Prompt registration** - Registers 6 built-in prompts (about, doctor, search, playground, new-project, migrate)
 - **Structured output** - Returns results with status, message, and structured content
 
 Example MCP tool registration:
