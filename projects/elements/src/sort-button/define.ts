@@ -7,6 +7,5 @@ define(SortButton);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-sort-button': SortButton;
-    'nve-sort-button': SortButton;
   }
 }
