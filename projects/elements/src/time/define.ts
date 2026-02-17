@@ -8,6 +8,5 @@ define(Time);
 declare global {
   interface HTMLElementTagNameMap {
     'nve-time': Time;
-    'nve-time': Time;
   }
 }

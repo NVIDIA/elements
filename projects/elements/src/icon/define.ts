@@ -42,6 +42,5 @@ Icon.alias({
 declare global {
   interface HTMLElementTagNameMap {
     'nve-icon': Icon;
-    'nve-icon': Icon;
   }
 }
