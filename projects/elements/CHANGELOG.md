@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.60.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.1...@nvidia-elements/core-v1.60.2) (2026-02-18)
+
+
+### Bug Fixes
+
+* **elements:** dialog content height ([611e305](https://github.com/NVIDIA/elements/commit/611e305c1f8f70dcec34c273dd481a54e6d76ade))
+
 ## [@nvidia-elements/core-v1.60.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.0...@nvidia-elements/core-v1.60.1) (2026-02-17)
 
 
