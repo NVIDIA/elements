@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.8.1...@nvidia-elements/cli-v0.9.0) (2026-02-18)
+
+
+### Features
+
+* **labs-cli:** migration support ([30355e5](https://github.com/NVIDIA/elements/commit/30355e50e2a6ee7f3e5c3b2a03c929d238c9cbb8))
+
 ## [@nvidia-elements/cli-v0.8.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.8.0...@nvidia-elements/cli-v0.8.1) (2026-02-13)
 
 
