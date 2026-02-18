@@ -6,6 +6,7 @@ import {
   createLitFiles,
   createReactFiles,
   createPreactFiles,
+  createVueFiles,
   createDefaultFiles,
   formatTemplate,
   playgroundTypes
@@ -248,6 +249,64 @@ describe('createLitPlaygroundURL', () => {
   });
 });
 
+describe('createVuePlaygroundURL', () => {
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
+    },
+    {
+      name: 'nve-monaco',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/monaco' } }
+    }
+  ] as ProjectElement[];
+
+  it('should create a Vue playground URL', () => {
+    const result = createPlaygroundURL('nve-button', elements, { type: 'vue' });
+    expect(result.includes('?version=1&layout=vertical-split&name=vue&file=index.ts&files=')).toBe(true);
+  });
+
+  it('should create a Vue playground URL with a custom name', () => {
+    const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button', type: 'vue' });
+    expect(result.includes('?version=1&layout=vertical-split&name=vue%20nve-button&file=index.ts&files=')).toBe(true);
+  });
+
+  it('should create a Vue playground URL with a referer', () => {
+    const result = createPlaygroundURL('nve-button', elements, {
+      name: 'nve-button',
+      type: 'vue',
+      referer: 'https://www.nvidia.com'
+    });
+    expect(
+      result.includes(
+        '?version=1&layout=vertical-split&name=vue%20nve-button&file=index.ts&ref=https://www.nvidia.com&files='
+      )
+    ).toBe(true);
+  });
+
+  it('should bootstrap Vue files needed for the playground', () => {
+    const files = createVueFiles('<nve-button></nve-button>', elements, { name: 'nve-button', theme: 'light' });
+    expect(files['index.html'].content).toContain('<div id="app"');
+    expect(files['index.ts'].content).toContain(`import { createApp, ref } from 'vue/dist/vue.esm-browser.js'`);
+    expect(files['index.ts'].content).toContain(`.mount('#app')`);
+    expect(files['importmap.json'].content).toContain('"vue": "https://https://esm.sh/vue@3"');
+  });
+
+  it('should wrap content in Vue app container with counter button', () => {
+    const files = createVueFiles('<nve-button></nve-button>', elements, {});
+    expect(files['index.html'].content).toContain('nve-layout="column gap:md align:left"');
+    expect(files['index.html'].content).toContain('@click="count++"');
+    expect(files['index.html'].content).toContain('{{ count }}');
+  });
+
+  it('should include element imports in index.ts', () => {
+    const files = createVueFiles('<nve-button></nve-button>', elements, {});
+    expect(files['index.ts'].content).toContain('@nvidia-elements/core/button');
+  });
+});
+
 describe('createDefaultFiles', () => {
   const elements: ProjectElement[] = [
     {
@@ -325,7 +384,7 @@ describe('formatTemplate', () => {
 
 describe('playgroundTypes', () => {
   it('should contain all expected playground types', () => {
-    expect(playgroundTypes).toEqual(['default', 'react', 'preact', 'angular', 'lit']);
+    expect(playgroundTypes).toEqual(['default', 'react', 'preact', 'angular', 'lit', 'vue']);
   });
 
   it('should have correct type definition', () => {
@@ -477,6 +536,13 @@ describe('createImportMap with different frameworks', () => {
     expect(importmap.imports['lit']).toBe('https://https://esm.sh/lit@latest');
   });
 
+  it('should include Vue dependencies for Vue framework', () => {
+    const files = createVueFiles('<nve-button></nve-button>', elements, {});
+    const importmap = JSON.parse(files['importmap.json'].content);
+    expect(importmap.imports['vue']).toBe('https://https://esm.sh/vue@3');
+    expect(importmap.imports['vue/']).toBe('https://https://esm.sh/vue@3/');
+  });
+
   it('should include all NVE packages for all frameworks', () => {
     const files = createDefaultFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
@@ -529,5 +595,71 @@ describe('Edge cases and error handling', () => {
     expect(result.includes('&name=&')).toBe(false);
     expect(result.includes('&theme=&')).toBe(false);
     expect(result.includes('&ref=&')).toBe(false);
+  });
+
+  it('should treat name "undefined" as empty string', () => {
+    const result = createPlaygroundURL('<nve-button></nve-button>', elements, { name: 'undefined' });
+    expect(result.includes('&name=undefined')).toBe(false);
+  });
+});
+
+describe('createIndexHTML theme handling', () => {
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
+    }
+  ] as ProjectElement[];
+
+  it('should set nve-theme attribute from options', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, { theme: 'dark' });
+    expect(files['index.html'].content).toContain('nve-theme="dark"');
+  });
+
+  it('should set empty nve-theme when no theme provided', () => {
+    const files = createDefaultFiles('<nve-button></nve-button>', elements, {});
+    expect(files['index.html'].content).toContain('nve-theme=""');
+  });
+});
+
+describe('framework file content details', () => {
+  const elements: ProjectElement[] = [
+    {
+      name: 'nve-button',
+      markdown: ' ### Import ',
+      manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } }
+    }
+  ] as ProjectElement[];
+
+  it('should include CUSTOM_ELEMENTS_SCHEMA in Angular files', () => {
+    const files = createAngularFiles('<nve-button></nve-button>', elements, {});
+    expect(files['index.ts'].content).toContain('CUSTOM_ELEMENTS_SCHEMA');
+    expect(files['index.ts'].content).toContain("selector: 'app-root'");
+    expect(files['index.ts'].content).toContain('bootstrapApplication(App)');
+  });
+
+  it('should include @customElement decorator in Lit files', () => {
+    const files = createLitFiles('<nve-button></nve-button>', elements, {});
+    expect(files['index.ts'].content).toContain("@customElement('app-root')");
+    expect(files['index.ts'].content).toContain('extends LitElement');
+  });
+
+  it('should include createRoot in React files', () => {
+    const files = createReactFiles('<nve-button></nve-button>', elements, {});
+    expect(files['index.tsx'].content).toContain("createRoot(document.getElementById('root'))");
+    expect(files['index.tsx'].content).toContain('root.render(<App />)');
+  });
+
+  it('should include render call in Preact files', () => {
+    const files = createPreactFiles('<nve-button></nve-button>', elements, {});
+    expect(files['index.tsx'].content).toContain("render(<App />, document.getElementById('root'))");
+    expect(files['index.tsx'].content).toContain('/** @jsxImportSource preact */');
+  });
+
+  it('should include reactive state setup in Vue files', () => {
+    const files = createVueFiles('<nve-button></nve-button>', elements, {});
+    expect(files['index.ts'].content).toContain('count: ref(0)');
+    expect(files['index.ts'].content).toContain('setup()');
   });
 });
