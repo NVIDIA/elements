@@ -13,7 +13,7 @@ const apiMetrics = await ApiService.getData();
 /** @type {import('@internals/metadata').Element[]} */
 const elements = apiMetrics.data.elements;
 
-/** @type {import('@internals/metadata').ProjectsTestSummary} */
+/** @type {import('@internals/metadata').ProjectTestSummary} */
 const tests = await TestsService.getData();
 
 /** @type {import('@internals/metadata').ProjectTestSummary} */
@@ -169,7 +169,10 @@ const integrations = {
     starterDownload: 'https://NVIDIA.github.io/elements/starters/download/vue.zip',
     starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/vue',
     documentation: 'https://vuejs.org',
-    playgroundURL: null
+    playgroundURL: await PlaygroundService.create({
+      template: '<nve-alert status="success">Elements + Vue</nve-alert>',
+      type: 'vue'
+    })
   }
 };
 
