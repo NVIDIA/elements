@@ -44,7 +44,7 @@ export async function exampleShortcode(
 
   const playgroundURL = await PlaygroundService.create({
     template: example?.template ?? '',
-    name: `${example.entrypoint}_${exampleName}`
+    name: example.id
   });
 
   const playgroundButton = example
@@ -65,7 +65,7 @@ export async function exampleShortcode(
   const templateContent = example?.template.replace(/\n\n/g, '\n');
   const reload = globalThis.process.env.ELEVENTY_RUN_MODE === 'serve' ? reloadScript(example, canvasId) : '';
   const inlineTemplate = /* html */ `<div id="${canvasId}_content">${templateContent}</div>${reload}`;
-  const iframeTemplate = /* html */ `<iframe loading="lazy" src="examples/${example?.permalink}index.html" style="height: 100%; width: 100%; border: none;" />`;
+  const iframeTemplate = /* html */ `<iframe loading="lazy" src="examples/${example?.permalink}index.html" style="height: 100%; width: 100%; border: none;"></iframe>`;
   const template = config.inline ? inlineTemplate : iframeTemplate;
   const summary = markdown
     .render(example.description || example.summary || '')

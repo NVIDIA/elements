@@ -13,10 +13,13 @@ interface PlaygroundOptions {
   trustedContent?: boolean;
 }
 
-export const playgroundTypes = ['default', 'react', 'preact', 'angular', 'lit'] as const;
+export const playgroundTypes = ['default', 'react', 'preact', 'angular', 'lit', 'vue'] as const;
 export type PlaygroundType = (typeof playgroundTypes)[number];
 
-export function createPlaygroundURL(source: string, elements: Element[], options: PlaygroundOptions = {}) {
+export function createPlaygroundURL(source: string, elements: Element[], opts: PlaygroundOptions = {}) {
+  const options: PlaygroundOptions = { name: '', type: 'default', ...opts };
+  options.name = options.name && options.name !== 'undefined' ? options.name : '';
+  options.type = options.type || 'default';
   const result = options.trustedContent ? source : validateTemplate(source, elements);
   const formattedSource = formatTemplate(result);
   let url = '';
@@ -25,25 +28,31 @@ export function createPlaygroundURL(source: string, elements: Element[], options
     url = createURL(serialize(createReactFiles(formattedSource, elements, options)), {
       ...options,
       openFile: 'index.tsx',
-      name: `react ${options.name ?? ''}`
+      name: `react ${options.name}`.trim()
     });
   } else if (options.type === 'preact') {
     url = createURL(serialize(createPreactFiles(formattedSource, elements, options)), {
       ...options,
       openFile: 'index.tsx',
-      name: `preact ${options.name ?? ''}`
+      name: `preact ${options.name}`.trim()
     });
   } else if (options.type === 'angular') {
     url = createURL(serialize(createAngularFiles(formattedSource, elements, options)), {
       ...options,
       openFile: 'index.ts',
-      name: `angular ${options.name ?? ''}`
+      name: `angular ${options.name}`.trim()
     });
   } else if (options.type === 'lit') {
     url = createURL(serialize(createLitFiles(formattedSource, elements, options)), {
       ...options,
       openFile: 'index.ts',
-      name: `lit ${options.name ?? ''}`
+      name: `lit ${options.name}`.trim()
+    });
+  } else if (options.type === 'vue') {
+    url = createURL(serialize(createVueFiles(formattedSource, elements, options)), {
+      ...options,
+      openFile: 'index.ts',
+      name: `vue ${options.name}`.trim()
     });
   } else {
     url = createURL(serialize(createDefaultFiles(formattedSource, elements, options)), options);
@@ -102,6 +111,14 @@ export function createLitFiles(content, elements: Element[], options: Playground
     'index.html': { content: createIndexHTML(`<app-root></app-root>`, options) },
     'index.ts': { content: createLitIndexTS(content, elements) },
     'importmap.json': { content: createImportMap('lit') }
+  };
+}
+
+export function createVueFiles(content, elements: Element[], options: PlaygroundOptions) {
+  return {
+    'index.html': { content: createIndexHTML(createVueHTML(content), options) },
+    'index.ts': { content: createVueIndexTS(content, elements) },
+    'importmap.json': { content: createImportMap('vue') }
   };
 }
 
@@ -192,7 +209,7 @@ ${content.trim()}
 </html>`;
 }
 
-function createImportMap(framework: 'react' | 'preact' | 'angular' | 'lit' | 'vanilla' = 'vanilla') {
+function createImportMap(framework: 'react' | 'preact' | 'angular' | 'lit' | 'vue' | 'vanilla' = 'vanilla') {
   const CDN_MODULES_URL = `https://esm.nvidia.com`;
 
   const importmap = {
@@ -234,6 +251,11 @@ function createImportMap(framework: 'react' | 'preact' | 'angular' | 'lit' | 'va
   if (framework === 'lit') {
     importmap.imports['lit'] = `${CDN_MODULES_URL}/lit@latest`;
     importmap.imports['lit/'] = `${CDN_MODULES_URL}/lit@latest/`;
+  }
+
+  if (framework === 'vue') {
+    importmap.imports['vue'] = `${CDN_MODULES_URL}/vue@3`;
+    importmap.imports['vue/'] = `${CDN_MODULES_URL}/vue@3/`;
   }
 
   return JSON.stringify(importmap, null, 2);
@@ -333,6 +355,28 @@ export class App extends LitElement {
     \`;
   }
 }`;
+}
+
+function createVueIndexTS(content: string, elements: Element[]) {
+  return `import { createApp, ref } from 'vue/dist/vue.esm-browser.js';
+import '@nvidia-elements/core/button/define.js';
+${getElementImports(content, elements).join('\n')}
+
+createApp({
+  setup() {
+    return {
+      count: ref(0)
+    }
+  }
+}).mount('#app');`;
+}
+
+function createVueHTML(content: string) {
+  return /* html */ `
+<div id="app" nve-layout="column gap:md align:left">
+  ${content}
+  <nve-button @click="count++">Count is: {{ count }}</nve-button>
+</div>`.trim();
 }
 
 export function formatTemplate(source: string) {
