@@ -250,6 +250,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/select/') ? 'highlighted selected' : ''}><a href="docs/elements/select/">Select</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/skeleton/') ? 'highlighted selected' : ''}><a href="docs/elements/skeleton/">Skeleton</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/sort-button/') ? 'highlighted selected' : ''}><a href="docs/elements/sort-button/">Sort Button</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/sparkline/') ? 'highlighted selected' : ''}><a href="docs/elements/sparkline/">Sparkline</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/star-rating/') ? 'highlighted selected' : ''}><a href="docs/elements/star-rating/">Star Rating</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/steps/') ? 'highlighted selected' : ''}><a href="docs/elements/steps/">Steps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/switch/') ? 'highlighted selected' : ''}><a href="docs/elements/switch/">Switch</a></nve-tree-node>

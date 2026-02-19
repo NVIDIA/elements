@@ -305,3 +305,4 @@ VSCode
 pseudorandomized
 esm
 ESM
+Sparkline
