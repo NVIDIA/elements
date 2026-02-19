@@ -20,7 +20,7 @@ export default {
         properties.forEach(node => {
           const props = node.expression.arguments.flatMap(args => args.properties);
           const propName = node.parent.key.name;
-          const noExceptions = !['i18n', 'stepSizes'].find(i => i === propName);
+          const noExceptions = !['data', 'i18n', 'stepSizes'].find(i => i === propName);
 
           props.forEach(prop => {
             const propType = prop.value.name;
