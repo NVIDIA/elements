@@ -1,4 +1,6 @@
 import { html } from 'lit';
+import { property } from 'lit/decorators/property.js';
+import type { ContainerElement } from '@nvidia-elements/core/internal';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -19,9 +21,14 @@ import styles from './time.css?inline';
  * @cssprop --cursor
  * @csspart icon-button - The clock icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time
- * @themes false
  */
-export class Time extends Control {
+export class Time extends Control implements ContainerElement {
+  /**
+   * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.
+   * Use when embedding within another container such as a toolbar.
+   */
+  @property({ type: String, reflect: true }) container?: 'flat';
+
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
   static readonly metadata = {

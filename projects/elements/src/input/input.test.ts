@@ -26,4 +26,12 @@ describe(Input.metadata.tag, () => {
   it('should define element', () => {
     expect(customElements.get(Input.metadata.tag)).toBeDefined();
   });
+
+  it('should have a flat container option', async () => {
+    expect(element.container).toBe(undefined);
+    element.container = 'flat';
+    await elementIsStable(element);
+    expect(element.container).toBe('flat');
+    expect(element.hasAttribute('container')).toBe(true);
+  });
 });

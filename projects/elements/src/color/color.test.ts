@@ -76,4 +76,12 @@ describe(Color.metadata.tag, () => {
 
     (window as any).EyeDropper = original; // eslint-disable-line @typescript-eslint/no-explicit-any
   });
+
+  it('should have a flat container option', async () => {
+    expect(element.container).toBe(undefined);
+    element.container = 'flat';
+    await elementIsStable(element);
+    expect(element.container).toBe('flat');
+    expect(element.hasAttribute('container')).toBe(true);
+  });
 });
