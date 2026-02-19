@@ -66,6 +66,7 @@ describe('lighthouse report', () => {
         import '@nvidia-elements/core/select/define.js';
         import '@nvidia-elements/core/skeleton/define.js';
         import '@nvidia-elements/core/sort-button/define.js';
+        import '@nvidia-elements/core/sparkline/define.js';
         import '@nvidia-elements/core/steps/define.js';
         import '@nvidia-elements/core/switch/define.js';
         import '@nvidia-elements/core/tabs/define.js';
@@ -84,6 +85,6 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(76.1);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(78.7);
   });
 });

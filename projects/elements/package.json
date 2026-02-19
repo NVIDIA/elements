@@ -717,6 +717,18 @@
       "types": "./dist/sort-button/define.d.ts",
       "default": "./dist/sort-button/define.js"
     },
+    "./sparkline": {
+      "types": "./dist/sparkline/index.d.ts",
+      "default": "./dist/sparkline/index.js"
+    },
+    "./sparkline/index.js": {
+      "types": "./dist/sparkline/index.d.ts",
+      "default": "./dist/sparkline/index.js"
+    },
+    "./sparkline/define.js": {
+      "types": "./dist/sparkline/define.d.ts",
+      "default": "./dist/sparkline/define.js"
+    },
     "./star-rating": {
       "types": "./dist/star-rating/index.d.ts",
       "default": "./dist/star-rating/index.js"
