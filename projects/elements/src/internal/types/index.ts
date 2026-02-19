@@ -66,6 +66,13 @@ export type Container = 'inline' | 'flat' | 'inset' | 'full' | 'condensed';
  */
 export type SupportStatus = 'accent' | 'warning' | 'success' | 'danger';
 
+/** Controls how the chart connects intermediate values between points in a data series.
+ * - `linear` - Connects points with straight line segments.
+ * - `smooth` - Connects points with smooth bezier curves.
+ * - `step` - Connects points with horizontal and vertical step segments.
+ */
+export type Interpolation = 'linear' | 'smooth' | 'step';
+
 /** Determines the orientation of an element. */
 export type Orientation = 'vertical' | 'horizontal';
 
@@ -143,6 +150,15 @@ export type ControlLayout = 'vertical' | 'vertical-inline' | 'horizontal' | 'hor
  * - `step` - Marks the current step within a multi-step process or workflow.
  */
 export type Current = 'page' | 'step';
+
+/** Controls how data points are visually encoded in a sparkline chart.
+ * - `line` - Renders data as a connected line to emphasize macro trend.
+ * - `area` - Renders data as a filled area beneath a line to emphasize magnitude over time.
+ * - `gradient` - Renders a line with gradient color treatment to communicate value intensity across the series.
+ * - `column` - Renders data as vertical columns for easy comparison of discrete values.
+ * - `winloss` - Renders outcomes as binary or ternary bars to highlight wins, losses, and optional ties.
+ */
+export type SparklineMark = 'line' | 'area' | 'gradient' | 'column' | 'winloss';
 
 export interface NveElement {
   /**
@@ -379,6 +395,11 @@ export interface ContainerElement {
   container?: Partial<Container>;
 }
 
+/** An element that renders complex data structures (e.g., arrays, series, matrices) rather than composable UI content and values expressible with primitive attributes. */
+export interface DataElement<T extends unknown[] | Record<string, unknown>> {
+  data?: T;
+}
+
 export const statusIcons: { [key: string]: IconName } = {
   '': 'information-circle-stroke',
   undefined: 'information-circle-stroke',
@@ -437,6 +458,18 @@ export interface Point {
 export interface OffsetPoint {
   offsetX: number;
   offsetY: number;
+}
+
+export interface Dimensions {
+  width: number;
+  height: number;
+}
+
+export type Rect = Point & Dimensions;
+
+export interface Scale {
+  min: number;
+  max: number;
 }
 
 /** https://github.com/tc39/proposal-decorators */
