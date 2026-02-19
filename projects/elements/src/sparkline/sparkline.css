@@ -1,0 +1,114 @@
+:host {
+  --height: 1em;
+  --line-color: var(--status-color);
+  --line-width: 1.5px;
+  --fill-color: var(--status-color);
+  --gradient-max-color: color-mix(in oklab, var(--line-color), transparent 35%);
+  --gradient-min-color: color-mix(in oklab, var(--line-color), transparent 95%);
+  --zero-line-color: var(--line-color);
+  --zero-line-width: 1.5px;
+  --win-color: var(--nve-sys-status-finished-color);
+  --loss-color: var(--nve-sys-status-failed-color);
+  --draw-color: var(--nve-sys-status-pending-color);
+  --accent-radius: 3px;
+  --accent-color: var(--nve-sys-support-accent-emphasis-color);
+  --accent-border-color: var(--nve-sys-support-accent-emphasis-color);
+  --accent-border-width: 1;
+  --_aspect-ratio: 1;
+  display: inline-flex;
+  height: var(--height);
+  aspect-ratio: var(--_aspect-ratio);
+  max-width: 100%;
+  contain: layout style;
+}
+
+:host([size='xs']) {
+  --height: var(--nve-ref-size-200);
+}
+
+:host([size='sm']) {
+  --height: var(--nve-ref-size-300);
+}
+
+:host([size='md']) {
+  --height: var(--nve-ref-size-400);
+}
+
+:host([size='lg']) {
+  --height: var(--nve-ref-size-500);
+}
+
+:host([size='xl']) {
+  --height: var(--nve-ref-size-600);
+}
+
+[internal-host] {
+  position: relative;
+  container-type: size;
+  width: 100%;
+  height: 100%;
+
+  --_vbw: calc(100 * var(--_aspect-ratio));
+  --_vbh: 100;
+  --_svg-unit-size: min(calc(100cqw / var(--_vbw)), calc(100cqh / var(--_vbh)));
+  --_svg-origin-x: calc((100cqw - (var(--_vbw) * var(--_svg-unit-size))) / 2);
+  --_svg-origin-y: calc((100cqh - (var(--_vbh) * var(--_svg-unit-size))) / 2);
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.line {
+  stroke: var(--line-color);
+  stroke-width: var(--line-width);
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.area {
+  fill: color-mix(in oklab, var(--fill-color) 20%, transparent);
+  stroke: none;
+}
+
+.zero-line {
+  stroke: var(--zero-line-color);
+  stroke-width: var(--zero-line-width);
+}
+
+.column {
+  fill: var(--fill-color);
+  stroke: none;
+}
+
+.win {
+  fill: var(--win-color);
+  stroke: none;
+}
+
+.loss {
+  fill: var(--loss-color);
+  stroke: none;
+}
+
+.draw {
+  fill: var(--draw-color);
+  stroke: none;
+}
+
+.accent {
+  position: absolute;
+  box-sizing: content-box;
+  left: calc(var(--_svg-origin-x) + (var(--x) * var(--_svg-unit-size)));
+  top: calc(var(--_svg-origin-y) + (var(--y) * var(--_svg-unit-size)));
+  width: calc(2 * var(--accent-radius));
+  height: calc(2 * var(--accent-radius));
+  transform: translate(-50%, -50%);
+  background: var(--accent-color);
+  border: var(--accent-border-width) solid var(--accent-border-color);
+  border-radius: 50%;
+  user-select: none;
+}
