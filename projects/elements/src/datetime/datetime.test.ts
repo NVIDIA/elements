@@ -37,4 +37,12 @@ describe(Datetime.metadata.tag, () => {
     await elementIsStable(element);
     expect(element.input.matches(':focus')).toBe(false);
   });
+
+  it('should have a flat container option', async () => {
+    expect(element.container).toBe(undefined);
+    element.container = 'flat';
+    await elementIsStable(element);
+    expect(element.container).toBe('flat');
+    expect(element.hasAttribute('container')).toBe(true);
+  });
 });
