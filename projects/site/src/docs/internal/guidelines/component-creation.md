@@ -81,7 +81,7 @@ export class ComponentName extends LitElement {
 - `@description` - What the component does
 - `@since` - Version when added (use 0.0.0 for new)
 - `@entrypoint` - Import path
-- `@slot` - Slot descriptions
+- `@slot` - Slot descriptions (required only when the component exposes one or more slots)
 - `@cssprop` - CSS custom properties
 - `@aria` - ARIA pattern reference (optional)
 
