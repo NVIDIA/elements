@@ -50,7 +50,10 @@ import styles from './combobox.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/
  */
 export class Combobox extends Control implements ContainerElement {
-  /** Flat container option is used when embedding component within another containing element */
+  /**
+   * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.
+   * Use when embedding within another container such as a toolbar.
+   */
   @property({ type: String, reflect: true }) accessor container: 'flat';
 
   /** Disable rendering of inline tags for multiple select */

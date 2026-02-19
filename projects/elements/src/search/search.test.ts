@@ -31,4 +31,12 @@ describe(Search.metadata.tag, () => {
   it('should render search prefix icon', () => {
     expect(element.shadowRoot.querySelector(IconButton.metadata.tag).getAttribute('icon-name')).toBe('search');
   });
+
+  it('should have a flat container option', async () => {
+    expect(element.container).toBe(undefined);
+    element.container = 'flat';
+    await elementIsStable(element);
+    expect(element.container).toBe('flat');
+    expect(element.hasAttribute('container')).toBe(true);
+  });
 });

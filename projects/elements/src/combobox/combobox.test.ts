@@ -43,6 +43,14 @@ describe(Combobox.metadata.tag, () => {
     expect(customElements.get(Combobox.metadata.tag)).toBeDefined();
   });
 
+  it('should have a flat container option', async () => {
+    expect(element.container).toBe(undefined);
+    element.container = 'flat';
+    await elementIsStable(element);
+    expect(element.container).toBe('flat');
+    expect(element.hasAttribute('container')).toBe(true);
+  });
+
   it('should remove native data list association', async () => {
     expect(input.getAttribute('list')).toBe('');
     element.shadowRoot.dispatchEvent(new Event('slotchange'));
