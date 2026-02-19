@@ -50,4 +50,12 @@ describe(Password.metadata.tag, () => {
     await elementIsStable(element);
     expect(button.ariaLabel).toBe('show');
   });
+
+  it('should have a flat container option', async () => {
+    expect(element.container).toBe(undefined);
+    element.container = 'flat';
+    await elementIsStable(element);
+    expect(element.container).toBe('flat');
+    expect(element.hasAttribute('container')).toBe(true);
+  });
 });

@@ -24,7 +24,8 @@ import styles from './search.css?inline';
  */
 export class Search extends Control implements ContainerElement {
   /**
-   * Flat container option is used when embeding component within another containing element
+   * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.
+   * Use when embedding within another container such as a toolbar.
    */
   @property({ type: String, reflect: true }) container?: 'flat';
 
