@@ -1,5 +1,7 @@
 import { html } from 'lit';
 import { state } from 'lit/decorators/state.js';
+import { property } from 'lit/decorators/property.js';
+import type { ContainerElement } from '@nvidia-elements/core/internal';
 import { useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { inputStyles } from '@nvidia-elements/core/input';
@@ -21,7 +23,13 @@ import styles from './password.css?inline';
  * @csspart icon-button - The visibility toggle icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password
  */
-export class Password extends Control {
+export class Password extends Control implements ContainerElement {
+  /**
+   * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.
+   * Use when embedding within another container such as a toolbar.
+   */
+  @property({ type: String, reflect: true }) container?: 'flat';
+
   @state() private pressed = false;
 
   static styles = useStyles([...Control.styles, inputStyles, styles]);
