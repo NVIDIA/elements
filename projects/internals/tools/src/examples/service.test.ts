@@ -40,6 +40,53 @@ describe('ExampleService', () => {
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.query).toBeDefined();
   });
 
+  it('should provide get tool', async () => {
+    const examples = (await ExamplesService.list({ format: 'json' })) as { id: string }[];
+    const result = await ExamplesService.get({ id: examples[0].id, format: 'markdown' });
+    expect(result).toBeDefined();
+    expect((ExamplesService.get as ToolMethod<unknown>).metadata.name).toBe('get');
+    expect((ExamplesService.get as ToolMethod<unknown>).metadata.command).toBe('get');
+    expect((ExamplesService.get as ToolMethod<unknown>).metadata.description).toBe(
+      'Get the full template of a known example or pattern by id.'
+    );
+    expect((ExamplesService.get as ToolMethod<unknown>).metadata.inputSchema?.properties?.id).toBeDefined();
+    expect((ExamplesService.get as ToolMethod<unknown>).metadata.inputSchema?.properties?.format).toBeDefined();
+    expect((ExamplesService.get as ToolMethod<unknown>).metadata.inputSchema?.required).toContain('id');
+  });
+
+  it('should return markdown for a known example id', async () => {
+    const examples = (await ExamplesService.list({ format: 'json' })) as Example[];
+    const result = await ExamplesService.get({ id: examples[0].id, format: 'markdown' });
+    expect(typeof result).toBe('string');
+    expect(result).toContain(examples[0].id);
+  });
+
+  it('should return json for a known example id', async () => {
+    const examples = (await ExamplesService.list({ format: 'json' })) as Example[];
+    const result = (await ExamplesService.get({ id: examples[0].id, format: 'json' })) as Example;
+    expect(result).toBeDefined();
+    expect(result.id).toBe(examples[0].id);
+    expect(result.template).toBeTruthy();
+  });
+
+  it('should match example id case-insensitively', async () => {
+    const examples = (await ExamplesService.list({ format: 'json' })) as Example[];
+    const upperId = examples[0].id.toUpperCase();
+    const result = (await ExamplesService.get({ id: upperId, format: 'json' })) as Example;
+    expect(result).toBeDefined();
+    expect(result.id.toLowerCase()).toBe(examples[0].id.toLowerCase());
+  });
+
+  it('should return not-found message for unknown example id (markdown)', async () => {
+    const result = await ExamplesService.get({ id: 'nonexistent-example-xyz', format: 'markdown' });
+    expect(result).toBe('Example not found. Use the list tool to get a list of all available examples and patterns.');
+  });
+
+  it('should return undefined for unknown example id (json)', async () => {
+    const result = await ExamplesService.get({ id: 'nonexistent-example-xyz', format: 'json' });
+    expect(result).toBeUndefined();
+  });
+
   it('should provide getAll tool for internal usage', async () => {
     const result = await ExamplesService.getAll();
     expect(result.length).toBeGreaterThan(0);

@@ -11,6 +11,7 @@ import { glob } from 'glob';
 import archiver from 'archiver';
 import AdmZip from 'adm-zip';
 import { isCommandAvailable, getNPMClient } from '../internal/node.js';
+import { skills } from '../skills/index.js';
 
 export type Starter =
   | 'angular'
@@ -107,6 +108,7 @@ export async function archiveStarter(projectDir, outDir) {
   await createCursorConfig(projectDir);
   await createClaudeConfig(projectDir);
   await createVSCodeConfig(projectDir);
+  await createCoreSkill(projectDir);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
   await writeFile(
     `${`${outDir}/${projectDir}`}/.npmrc`,
@@ -147,7 +149,7 @@ async function createCursorConfig(projectDir) {
   const cursorConfig = {
     mcpServers: {
       elements: {
-        description: 'Elements API and Custom Element Schema',
+        description: 'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples',
         command: 'npm',
         args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve-mcp'],
         env: {
@@ -166,10 +168,10 @@ async function createCursorConfig(projectDir) {
 
 /* istanbul ignore next -- @preserve */
 async function createClaudeConfig(projectDir) {
-  const claudeConfig = {
+  const claudeMCPConfig = {
     mcpServers: {
       elements: {
-        description: 'Elements API and Custom Element Schema',
+        description: 'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples',
         command: 'npm',
         args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve-mcp'],
         env: {
@@ -179,11 +181,12 @@ async function createClaudeConfig(projectDir) {
     }
   };
 
-  const dist = `dist/${projectDir}/`;
+  const dist = `dist/${projectDir}/.claude`;
   if (!existsSync(dist)) {
     mkdirSync(dist, { recursive: true });
   }
-  await writeFile(`${dist}/.mcp.json`, JSON.stringify(claudeConfig, undefined, 2));
+  await writeFile(`${dist}/settings.json`, JSON.stringify(claudeProjectSettings, undefined, 2));
+  await writeFile(`dist/${projectDir}/.mcp.json`, JSON.stringify(claudeMCPConfig, undefined, 2));
 }
 
 /* istanbul ignore next -- @preserve */
@@ -203,6 +206,25 @@ async function createVSCodeConfig(projectDir) {
     mkdirSync(dist, { recursive: true });
   }
   await writeFile(`${dist}/settings.json`, JSON.stringify(vscodeConfig, undefined, 2));
+}
+
+/* istanbul ignore next -- @preserve */
+export async function createCoreSkill(projectDir: string) {
+  const skill = skills.find(skill => skill.name === 'elements');
+  const dist = `dist/${projectDir}/.claude/skills/${skill.name}`;
+  if (!existsSync(dist)) {
+    mkdirSync(dist, { recursive: true });
+  }
+  await writeFile(
+    `${dist}/SKILL.md`,
+    `
+---
+name: ${skill.name}
+title: ${skill.title}
+description: ${skill.description}
+---
+${skill.context}`.trim()
+  );
 }
 
 /* istanbul ignore next -- @preserve */
@@ -350,3 +372,31 @@ export async function startStarter(extractedPath: string) {
     }
   }
 }
+
+export const claudeProjectSettings = {
+  $schema: 'https://json.schemastore.org/claude-code-settings.json',
+  permissions: {
+    allow: [
+      'mcp__elements__api_list',
+      'mcp__elements__api_get',
+      'mcp__elements__api_template_validate',
+      'mcp__elements__api_imports_get',
+      'mcp__elements__api_changelogs',
+      'mcp__elements__api_changelogs_get',
+      'mcp__elements__examples_list',
+      'mcp__elements__examples_get',
+      'mcp__elements__examples_search',
+      'mcp__elements__playground_validate',
+      'mcp__elements__playground_create',
+      'mcp__elements__project_create',
+      'mcp__elements__project_update',
+      'mcp__elements__project_validate',
+      'mcp__elements__project_setup_mcp',
+      'mcp__elements__packages_versions_list',
+      'mcp__elements__packages_changelogs_list',
+      'mcp__elements__packages_changelogs_search',
+      'mcp__elements__tokens_list'
+    ]
+  },
+  enabledMcpjsonServers: ['elements']
+};

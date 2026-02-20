@@ -26,10 +26,6 @@ describe('index', () => {
     expect(output).toContain('nve api.list [format]');
   });
 
-  it('should provide api.search', () => {
-    expect(output).toContain('nve api.search <query> [format]');
-  });
-
   it('should provide packages.changelogs.list', () => {
     expect(output).toContain('nve packages.changelogs.list [format]');
   });
@@ -44,6 +40,10 @@ describe('index', () => {
 
   it('should provide examples.list', () => {
     expect(output).toContain('nve examples.list [format]');
+  });
+
+  it('should provide examples.get', () => {
+    expect(output).toContain('nve examples.get <id> [format]');
   });
 
   it('should provide examples.search', () => {
@@ -91,6 +91,20 @@ describe('index', () => {
       const output = runWithoutRequiredArgs('project.validate');
       expect(output).not.toContain('Not enough non-option arguments');
       expect(output).not.toContain('Missing required argument');
+    });
+  });
+
+  describe('comma-separated array argument parsing', () => {
+    it('should split a comma-separated string into individual values for array-type args', () => {
+      const result = spawnSync('node', ['dist/index.js', 'api.get', 'nve-foo,nve-bar'], {
+        timeout: 10000,
+        encoding: 'utf-8',
+        input: ''
+      });
+      const output = `${result.stdout}${result.stderr}`;
+      expect(output).not.toContain('"nve-foo,nve-bar"');
+      expect(output).toContain('nve-foo');
+      expect(output).toContain('nve-bar');
     });
   });
 });

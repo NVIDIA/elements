@@ -1,5 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { getMcpServerConfig, getConfigPath, writeMcpConfig, setupMcpConfig } from './setup-mcp.js';
+import {
+  getMcpServerConfig,
+  getConfigPath,
+  writeMcpConfig,
+  writeClaudeSettings,
+  writeElementsSkill,
+  setupMcpConfig
+} from './setup-mcp.js';
 
 vi.mock('node:fs', () => ({
   existsSync: vi.fn(),
@@ -12,9 +19,30 @@ vi.mock('../internal/node.js', () => ({
   getNPMClient: vi.fn()
 }));
 
+vi.mock('./starters.js', () => ({
+  claudeProjectSettings: {
+    $schema: 'https://json.schemastore.org/claude-code-settings.json',
+    permissions: {
+      allow: ['mcp__elements__api_list', 'mcp__elements__api_get']
+    },
+    enabledMcpjsonServers: ['elements']
+  }
+}));
+
+vi.mock('../skills/index.js', () => ({
+  skills: [
+    {
+      name: 'elements',
+      title: 'Elements Design System (nve)',
+      description: 'Build UI with NVIDIA Elements',
+      context: '## Elements Context'
+    }
+  ]
+}));
+
 describe('setup-mcp', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    vi.resetAllMocks();
   });
 
   describe('getMcpServerConfig', () => {
@@ -51,7 +79,9 @@ describe('setup-mcp', () => {
         getMcpServerConfig('pnpm', 'claude-code')
       ];
       for (const config of configs) {
-        expect(config.description).toBe('Elements API and Custom Element Schema');
+        expect(config.description).toBe(
+          'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples'
+        );
       }
     });
   });
@@ -119,7 +149,9 @@ describe('setup-mcp', () => {
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.mcpServers.elements.command).toContain('npm exec');
-      expect(written.mcpServers.elements.description).toBe('Elements API and Custom Element Schema');
+      expect(written.mcpServers.elements.description).toBe(
+        'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples'
+      );
     });
 
     it('should preserve non-mcpServers properties in existing config', async () => {
@@ -170,6 +202,166 @@ describe('setup-mcp', () => {
     });
   });
 
+  describe('writeClaudeSettings', () => {
+    it('should create new settings file when none exists', async () => {
+      const { existsSync, writeFileSync, mkdirSync } = await import('node:fs');
+      vi.mocked(existsSync).mockReturnValue(false);
+
+      writeClaudeSettings('/project');
+
+      expect(mkdirSync).toHaveBeenCalled();
+      expect(writeFileSync).toHaveBeenCalled();
+
+      const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
+      expect(written.$schema).toBe('https://json.schemastore.org/claude-code-settings.json');
+      expect(written.permissions.allow).toContain('mcp__elements__api_list');
+      expect(written.enabledMcpjsonServers).toContain('elements');
+    });
+
+    it('should merge permissions.allow without removing existing entries', async () => {
+      const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
+      const existing = {
+        permissions: {
+          allow: ['user_custom_permission']
+        }
+      };
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue(JSON.stringify(existing));
+
+      writeClaudeSettings('/project');
+
+      const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
+      expect(written.permissions.allow).toContain('user_custom_permission');
+      expect(written.permissions.allow).toContain('mcp__elements__api_list');
+      expect(written.permissions.allow).toContain('mcp__elements__api_get');
+    });
+
+    it('should deduplicate permissions.allow entries', async () => {
+      const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
+      const existing = {
+        permissions: {
+          allow: ['mcp__elements__api_list', 'user_custom']
+        }
+      };
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue(JSON.stringify(existing));
+
+      writeClaudeSettings('/project');
+
+      const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
+      const apiListCount = written.permissions.allow.filter((p: string) => p === 'mcp__elements__api_list').length;
+      expect(apiListCount).toBe(1);
+    });
+
+    it('should merge enabledMcpjsonServers without removing existing entries', async () => {
+      const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
+      const existing = {
+        enabledMcpjsonServers: ['other-server']
+      };
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue(JSON.stringify(existing));
+
+      writeClaudeSettings('/project');
+
+      const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
+      expect(written.enabledMcpjsonServers).toContain('other-server');
+      expect(written.enabledMcpjsonServers).toContain('elements');
+    });
+
+    it('should preserve other existing permissions properties', async () => {
+      const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
+      const existing = {
+        permissions: {
+          allow: [],
+          deny: ['some_denied_tool']
+        }
+      };
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue(JSON.stringify(existing));
+
+      writeClaudeSettings('/project');
+
+      const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
+      expect(written.permissions.deny).toEqual(['some_denied_tool']);
+    });
+
+    it('should preserve other top-level properties', async () => {
+      const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
+      const existing = {
+        customProperty: 'value',
+        permissions: { allow: [] }
+      };
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue(JSON.stringify(existing));
+
+      writeClaudeSettings('/project');
+
+      const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
+      expect(written.customProperty).toBe('value');
+    });
+
+    it('should handle invalid JSON in existing settings gracefully', async () => {
+      const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
+
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(readFileSync).mockReturnValue('not valid json');
+
+      writeClaudeSettings('/project');
+
+      const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
+      expect(written.permissions.allow).toContain('mcp__elements__api_list');
+    });
+
+    it('should return the settings file path', async () => {
+      const { existsSync } = await import('node:fs');
+      vi.mocked(existsSync).mockReturnValue(false);
+
+      const result = writeClaudeSettings('/project');
+      expect(result).toContain('.claude');
+      expect(result).toContain('settings.json');
+    });
+  });
+
+  describe('writeElementsSkill', () => {
+    it('should create skill file with correct content', async () => {
+      const { writeFileSync, mkdirSync } = await import('node:fs');
+
+      writeElementsSkill('/project');
+
+      expect(mkdirSync).toHaveBeenCalled();
+      expect(writeFileSync).toHaveBeenCalled();
+
+      const skillPath = vi.mocked(writeFileSync).mock.calls[0][0] as string;
+      expect(skillPath).toContain('.claude/skills/elements/SKILL.md');
+
+      const content = vi.mocked(writeFileSync).mock.calls[0][1] as string;
+      expect(content).toContain('name: elements');
+      expect(content).toContain('title: Elements Design System (nve)');
+      expect(content).toContain('description: Build UI with NVIDIA Elements');
+      expect(content).toContain('## Elements Context');
+    });
+
+    it('should create .claude/skills/elements directory', async () => {
+      const { mkdirSync } = await import('node:fs');
+
+      writeElementsSkill('/project');
+
+      const dirArg = vi.mocked(mkdirSync).mock.calls[0][0] as string;
+      expect(dirArg).toContain('.claude/skills/elements');
+      expect(vi.mocked(mkdirSync).mock.calls[0][1]).toEqual({ recursive: true });
+    });
+
+    it('should return the skill file path', () => {
+      const result = writeElementsSkill('/project');
+      expect(result).toContain('.claude/skills/elements/SKILL.md');
+    });
+  });
+
   describe('setupMcpConfig', () => {
     it('should return danger report when no package manager is found', async () => {
       const { getNPMClient } = await import('../internal/node.js');
@@ -194,7 +386,7 @@ describe('setup-mcp', () => {
       expect(report.cursor.message).toContain('Restart Cursor');
     });
 
-    it('should configure claude-code IDE successfully', async () => {
+    it('should configure claude-code IDE successfully with settings', async () => {
       const { getNPMClient } = await import('../internal/node.js');
       const { existsSync } = await import('node:fs');
       vi.mocked(getNPMClient).mockResolvedValue('pnpm');
@@ -205,6 +397,9 @@ describe('setup-mcp', () => {
       expect(report['claude-code'].status).toBe('success');
       expect(report['claude-code'].message).toContain('Claude Code MCP configured');
       expect(report['claude-code'].message).toContain('Restart Claude Code');
+      expect(report['claude-settings']).toBeDefined();
+      expect(report['claude-settings'].status).toBe('success');
+      expect(report['claude-settings'].message).toContain('settings configured');
     });
 
     it('should configure both IDEs when ide is "both"', async () => {
@@ -218,6 +413,8 @@ describe('setup-mcp', () => {
       expect(report.cursor.status).toBe('success');
       expect(report['claude-code']).toBeDefined();
       expect(report['claude-code'].status).toBe('success');
+      expect(report['claude-settings']).toBeDefined();
+      expect(report['claude-settings'].status).toBe('success');
     });
 
     it('should return danger report when writeMcpConfig throws for cursor', async () => {
@@ -268,6 +465,34 @@ describe('setup-mcp', () => {
       const report = await setupMcpConfig('/project', 'both');
       expect(report.cursor.status).toBe('success');
       expect(report['claude-code'].status).toBe('danger');
+    });
+
+    it('should always configure elements skill regardless of IDE', async () => {
+      const { getNPMClient } = await import('../internal/node.js');
+      const { existsSync } = await import('node:fs');
+      vi.mocked(getNPMClient).mockResolvedValue('npm');
+      vi.mocked(existsSync).mockReturnValue(false);
+
+      for (const ide of ['cursor', 'claude-code', 'both'] as const) {
+        vi.clearAllMocks();
+        vi.mocked(getNPMClient).mockResolvedValue('npm');
+        vi.mocked(existsSync).mockReturnValue(false);
+
+        const report = await setupMcpConfig('/project', ide);
+        expect(report['elements-skill']).toBeDefined();
+        expect(report['elements-skill'].status).toBe('success');
+        expect(report['elements-skill'].message).toContain('Elements skill file configured');
+      }
+    });
+
+    it('should not configure claude settings for cursor IDE', async () => {
+      const { getNPMClient } = await import('../internal/node.js');
+      const { existsSync } = await import('node:fs');
+      vi.mocked(getNPMClient).mockResolvedValue('npm');
+      vi.mocked(existsSync).mockReturnValue(false);
+
+      const report = await setupMcpConfig('/project', 'cursor');
+      expect(report['claude-settings']).toBeUndefined();
     });
   });
 });

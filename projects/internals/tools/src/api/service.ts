@@ -2,10 +2,13 @@ import { ApiService as MetadataApiService, type Attribute, type Element } from '
 import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
 import { type PartialAPIResult, findPublicAPIChangelog, getPublicAPIs, searchPublicAPIs } from './utils.js';
 import { service, tool } from '../internal/tools.js';
-import { markdownDescription } from '../internal/utils.js';
+import { getElementImports, markdownDescription } from '../internal/utils.js';
 import { eslintSchema } from '../internal/schema.js';
 
 const MAX_RESULT_LIMIT = 5;
+
+const listToolHelpfulTip =
+  'Tip: Use the list tool to get a summary list of all available components and attribute APIs.';
 
 @service()
 export class ApiService {
@@ -69,14 +72,16 @@ export class ApiService {
   }
 
   @tool({
-    description:
-      'Search and retrieve a list of Elements (nve-*) components and APIs using keywords or natural language.',
+    description: `Get the documentation for up to ${MAX_RESULT_LIMIT} known Elements components or attribute APIs by name (nve-*).`,
     inputSchema: {
       type: 'object',
       properties: {
-        query: {
-          type: 'string',
-          description: `Search query (e.g., "button", "form validation", "navigation components"). Maximum ${MAX_RESULT_LIMIT} results returned.`
+        names: {
+          type: 'array',
+          items: { type: 'string' },
+          minItems: 1,
+          maxItems: MAX_RESULT_LIMIT,
+          description: `1 to ${MAX_RESULT_LIMIT} component or attribute names (e.g., ["nve-button"] or ["nve-button", "nve-text"]).\n\n${listToolHelpfulTip}`
         },
         format: {
           type: 'string',
@@ -85,70 +90,42 @@ export class ApiService {
           default: 'markdown'
         }
       },
-      required: ['query'],
+      required: ['names'],
       additionalProperties: false
     },
     outputSchema: {
       oneOf: [{ type: 'string' }, { type: 'array', items: { type: 'object', additionalProperties: true } }]
     }
   })
-  static async search({
-    query,
+  static async get({
+    names,
     format
   }: {
-    query: string;
+    names: string | string[];
     format: 'markdown' | 'json';
   }): Promise<(Element | Attribute)[] | string> {
-    const results = await searchPublicAPIs(query, { limit: MAX_RESULT_LIMIT });
+    const nameList = Array.isArray(names) ? names : [names];
+    const results = await Promise.all(
+      nameList.map(async name => {
+        const matches = await searchPublicAPIs(name, { limit: 1 });
+        return matches.find(r => r.name === name) ?? name;
+      })
+    );
 
-    if (results.length === 0) {
-      const message = `No components or APIs found matching "${query}".\n\nTip: Use the list tool to get a list of all available components and attribute APIs.`;
-      return format === 'markdown' ? message : results;
+    const found = results.filter((r): r is Element | Attribute => typeof r !== 'string').slice(0, MAX_RESULT_LIMIT);
+    const notFound = results.filter((r): r is string => typeof r === 'string');
+
+    if (found.length === 0) {
+      return `No components or APIs found matching "${notFound.join('", "')}".\n\n${listToolHelpfulTip}`;
     }
 
-    return format === 'json'
-      ? results.map(r => ({ ...r, markdown: undefined }))
-      : results.map(r => r.markdown).join('\n\n---\n\n');
-  }
-
-  @tool({
-    description: 'Get the documentation of a known Elements component or API by its name (nve-*).',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        name: {
-          type: 'string',
-          description: `A single component or attribute name (e.g., "nve-button", "nve-grid", "nve-layout"). Use the list tool to get a list of all available components and attributes or search tool for semantic searching.`
-        },
-        format: {
-          type: 'string',
-          description: markdownDescription,
-          enum: ['markdown', 'json'],
-          default: 'markdown'
-        }
-      },
-      required: ['name'],
-      additionalProperties: false
-    },
-    outputSchema: {
-      oneOf: [{ type: 'string' }, { type: 'object', additionalProperties: true }]
-    }
-  })
-  static async get({
-    name,
-    format
-  }: {
-    name: string;
-    format: 'markdown' | 'json';
-  }): Promise<Element | Attribute | string> {
-    const results = await searchPublicAPIs(name, { limit: 1 });
-    const result = results.find(r => r.name === name);
-
-    if (!result) {
-      return `No components or APIs found matching "${name}".\n\nTip: Use the list tool to get a list of all available components and attributes.`;
+    if (format === 'json') {
+      return found.map(r => ({ ...r, markdown: undefined }));
     }
 
-    return format === 'json' ? { ...result, markdown: undefined } : result.markdown;
+    const markdown = found.map(r => r.markdown).join('\n\n---\n\n');
+    const notFoundNote = notFound.length > 0 ? `\n\n---\n\nNot found: ${notFound.join(', ')}` : '';
+    return markdown + notFoundNote;
   }
 
   @tool({
@@ -208,5 +185,45 @@ export class ApiService {
     }
 
     return result;
+  }
+
+  @tool({
+    description: 'Get the esm imports for a given HTML template using Elements APIs and components (nve-*).',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        template: {
+          type: 'string'
+        }
+      },
+      required: ['template']
+    },
+    outputSchema: {
+      type: 'array',
+      items: { type: 'string' }
+    }
+  })
+  static async importsGet({ template }: { template: string }): Promise<string[]> {
+    const elements = await MetadataApiService.getData();
+    return getElementImports(template, elements.data.elements);
+  }
+
+  static async search({
+    query,
+    format
+  }: {
+    query: string;
+    format: 'markdown' | 'json';
+  }): Promise<(Element | Attribute)[] | string> {
+    const results = await searchPublicAPIs(query, { limit: MAX_RESULT_LIMIT });
+
+    if (results.length === 0) {
+      const message = `No components or APIs found matching "${query}".\n\n${listToolHelpfulTip}`;
+      return format === 'markdown' ? message : results;
+    }
+
+    return format === 'json'
+      ? results.map(r => ({ ...r, markdown: undefined }))
+      : results.map(r => r.markdown).join('\n\n---\n\n');
   }
 }
