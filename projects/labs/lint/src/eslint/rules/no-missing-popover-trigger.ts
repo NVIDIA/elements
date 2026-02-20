@@ -72,6 +72,7 @@ interface PopoverNode {
   node: HtmlNode;
   id: string | undefined;
   hasBindingId: boolean;
+  hasHidden: boolean;
   anchorAttr: { node: HtmlNode; value: string | undefined } | undefined;
 }
 
@@ -87,7 +88,7 @@ const rule = {
     schema: [],
     messages: {
       ['missing-popover-trigger']:
-        'Popover element <{{tag}}> is missing a trigger element. Add a button with popovertarget="{{id}}" or commandfor="{{id}}".',
+        'Popover element <{{tag}}> is missing a trigger element. Add a button with popovertarget="{{id}}" or commandfor="{{id}}". If programmatically controlling the popover with JavaScript, add a hidden attribute to the popover element.',
       ['missing-popover-id']:
         'Popover element <{{tag}}> is missing an id attribute. Add an id to enable trigger association.',
       ['empty-anchor-with-trigger']:
@@ -125,10 +126,12 @@ const rule = {
         if (POPOVER_ELEMENTS.includes(tagName as (typeof POPOVER_ELEMENTS)[number])) {
           const { attr: idAttr, hasBinding: hasBindingId } = findAttrWithBinding(node, 'id');
           const anchorAttr = findAttr(node, 'anchor');
+          const hiddenAttr = findAttr(node, 'hidden');
           popovers.push({
             node,
             id: idAttr?.value?.value,
             hasBindingId,
+            hasHidden: !!hiddenAttr,
             anchorAttr: anchorAttr ? { node: anchorAttr, value: anchorAttr.value?.value } : undefined
           });
         }
@@ -143,6 +146,11 @@ const rule = {
 
           // Skip validation if any trigger uses data binding (could match this popover)
           if (hasDynamicTrigger) {
+            continue;
+          }
+
+          // Skip validation if popover has hidden attribute (programmatically controlled)
+          if (popover.hasHidden) {
             continue;
           }
 
