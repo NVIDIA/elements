@@ -217,6 +217,31 @@ describe('utils', () => {
       expect(result).toBe('input value');
       expect(input).toHaveBeenCalledWith({ message: 'Enter testArg:' });
     });
+
+    it('should split comma-separated input into array for array properties', async () => {
+      vi.mocked(input).mockResolvedValue('nve-button, nve-badge');
+      const schema = { type: 'array', items: { type: 'string' } };
+      const result = await getArgValue('names', schema);
+
+      expect(result).toEqual(['nve-button', 'nve-badge']);
+      expect(input).toHaveBeenCalledWith({ message: 'Enter names:' });
+    });
+
+    it('should handle single value input for array properties', async () => {
+      vi.mocked(input).mockResolvedValue('nve-button');
+      const schema = { type: 'array', items: { type: 'string' } };
+      const result = await getArgValue('names', schema);
+
+      expect(result).toEqual(['nve-button']);
+    });
+
+    it('should filter empty entries from array input', async () => {
+      vi.mocked(input).mockResolvedValue('nve-button,,nve-badge,');
+      const schema = { type: 'array', items: { type: 'string' } };
+      const result = await getArgValue('names', schema);
+
+      expect(result).toEqual(['nve-button', 'nve-badge']);
+    });
   });
 
   describe('input functions', async () => {

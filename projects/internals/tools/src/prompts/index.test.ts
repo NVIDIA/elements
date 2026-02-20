@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { prompts, type Prompt } from './prompts.js';
+import { prompts, type Prompt } from './index.js';
 
 describe('prompts', () => {
   it('should export an array of prompts', () => {

@@ -63,6 +63,13 @@ describe('getElementImports', () => {
     const imports = getElementImports('', elements);
     expect(imports).toHaveLength(0);
   });
+
+  it('should deduplicate imports when element appears multiple times', () => {
+    const html = '<nve-button>one</nve-button> <nve-button>two</nve-button>';
+    const imports = getElementImports(html, elements);
+    expect(imports).toHaveLength(1);
+    expect(imports[0]).toBe(`import '@nvidia-elements/core/button/define.js';`);
+  });
 });
 
 describe('getAvailableElementTags', () => {
