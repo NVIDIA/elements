@@ -60,7 +60,12 @@ describe('noUnexpectedAttributeValue', () => {
 
   it('should allow non-enum attribute values', () => {
     tester.run('should allow non-enum attribute values', rule, {
-      valid: [`<nve-button>Button</nve-button>`, `<nve-icon name="check"></nve-icon>`, `<nve-badge>Badge</nve-badge>`],
+      valid: [
+        `<nve-button>Button</nve-button>`,
+        `<nve-icon name="check"></nve-icon>`,
+        `<nve-badge>Badge</nve-badge>`,
+        `<nve-sparkline data="[14, 18, 17, 20, 19, 24, 21]"></nve-sparkline>`
+      ],
       invalid: []
     });
   });
@@ -114,7 +119,7 @@ describe('noUnexpectedAttributeValue', () => {
                 attribute: 'status',
                 value: 'invalid',
                 validValues:
-                  '"accent", "warning", "success", "danger", "scheduled", "queued", "pending", "starting", "running", "restarting", "stopping", "finished", "failed", "unknown", "ignored"'
+                  '"accent", "danger", "failed", "finished", "ignored", "pending", "queued", "restarting", "running", "scheduled", "starting", "stopping", "success", "unknown", "warning"'
               }
             }
           ]
