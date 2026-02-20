@@ -236,8 +236,7 @@ export const MultiSelect = () => {
 };
 
 /**
- * @summary The default behavior of a native select element selects the first option if no default `selected` option exists.
- * For an empty initial value, provide an empty value option that has the disabled and selected attributes.
+ * @summary Combobox with an empty initial value using a disabled placeholder option. Use when no default selection should be applied and the user must make an explicit choice.
  */
 export const EmptyDefault = () => {
   return html`
@@ -259,11 +258,7 @@ export const EmptyDefault = () => {
 };
 
 /**
- * @summary Options by default provide a value for the user input.
- * An optional label can appear with each option. If an option label exists, the label
- * displays to the user rather than the value. When using labels the
- * text input value will be the option label rather than the option value.
- * The select input will continue to use option value.
+ * @summary Combobox options with display labels that differ from underlying values. Use when option values are IDs or codes but users need to see human-readable text in the input.
  */
 export const Label = () => {
   return html`

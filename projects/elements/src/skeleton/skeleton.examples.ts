@@ -19,7 +19,7 @@ export const Default = {
 };
 
 /**
- * @summary Effects available for the skeleton.
+ * @summary Skeleton loading effects including pulse and shimmer animations. Use pulse for subtle breathing motion or shimmer for a scanning highlight that conveys active content loading.
  */
 export const Effect = {
   render: () => html`
@@ -31,7 +31,7 @@ export const Effect = {
 }
 
 /**
- * @summary Shapes available for the skeleton.
+ * @summary Skeleton shape variants including default rectangle, pill, and round. Use pill for button or tag placeholders and round for avatar or icon placeholders to match the final content shape.
  */
 export const Shape = {
   render: () => html`
@@ -43,7 +43,7 @@ export const Shape = {
 }
 
 /**
- * @summary Slotting content will hide the skeleton.
+ * @summary Skeleton with slotted content that automatically hides the placeholder when real content is provided. Use to wrap lazy-loaded content so the skeleton disappears once data arrives without manual state management.
  */
 export const Slotted = {
   render: () => html`

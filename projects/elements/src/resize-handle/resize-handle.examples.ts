@@ -99,7 +99,7 @@ export const Form = {
 };
 
 /**
- * @summary Preventing default toggle behavior for custom resize logic and constraints.
+ * @summary Resize handle with prevented default toggle to disable snap-to-boundary on double-click. Use when the default collapse/expand behavior conflicts with custom resize constraints or when you need full control over toggle logic.
  */
 export const PreventDefault = {
   render: () => html`
