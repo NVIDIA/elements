@@ -295,7 +295,7 @@ export const BackgroundOverride = {
 };
 
 /**
- * @summary To make a button a link, slot the anchor tag into the button.
+ * @summary Button styled as a link by slotting an anchor tag inside. Use when an action needs button visual treatment while maintaining semantic link navigation and accessibility.
  */
 export const ValidLinkButton = {
   render: () => html`

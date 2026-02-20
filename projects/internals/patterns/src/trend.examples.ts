@@ -25,7 +25,7 @@ export const Trend = {
 /**
  * @summary Displays a metric with a trend indicator. Ideal for dashboards
  * and analytics where users need to quickly assess changes and understand the
- * scale of change at a glance.
+ * magnitude of change at a glance.
  * 
  * @tags pattern
  */

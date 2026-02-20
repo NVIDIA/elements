@@ -52,7 +52,7 @@ export const Default = {
 };
 
 /**
- * @summary Available slots for nve-page with standard usage of nve-page-panel and nve-page-header.
+ * @summary Page layout slot reference showing all available panel positions including header, subheader, left, right, bottom, and aside regions. Use as a starting point for understanding how to compose complex application layouts.
  */
 export const Slots = {
   render: () => html`
@@ -222,7 +222,7 @@ export const SlotSubheader = {
 };
 
 /**
- * @summary Large subheader using nve-page-panel in the subheader slot.
+ * @summary Large subheader panel with back navigation, title, metadata, and action buttons. Use for detail pages that need prominent context like entity names, status badges, and key-value metadata above the main content.
  */
 export const SlotSubheaderLarge = {
   render: () => html`
@@ -516,7 +516,7 @@ export const InvokerCommand = {
 };
 
 /**
- * @summary Expandable style page panels in left, right, and bottom slots.
+ * @summary Expandable page panels that collapse to a slim strip and toggle open with chevron buttons. Use when panels contain supplementary content that users access intermittently, preserving main content space while keeping panels accessible.
  */
 export const PagePanelExpandable = {
   render: () => html`
@@ -557,7 +557,7 @@ export const PagePanelExpandable = {
 };
 
 /**
- * @summary Closable style page panels in left, right, and bottom slots.
+ * @summary Closable page panels that fully remove from the layout when dismissed. Use when panels are opened on demand for temporary tasks like viewing item details or applying filters, and the user needs maximum main content space when done.
  */
 export const PagePanelClosable = {
   render: () => html`
@@ -700,7 +700,7 @@ export const InteractionPanelNavigation = {
 };
 
 /**
- * @summary Tabs in a page panel header for contextual navigation.
+ * @summary Page panel with tabbed header for switching between categorized content views within a sidebar. Use when a panel contains multiple related sections like outline, search, and settings that share the same screen region.
  */
 export const PagePanelTabs = {
   render: () => html`
@@ -730,7 +730,7 @@ export const PagePanelTabs = {
 };
 
 /**
- * @summary Headings in a page panel header for context.
+ * @summary Page panel with title and subtitle headings in the header for labeling panel content. Use to provide clear context about what the panel contains, such as a details pane or properties inspector.
  */
 export const PagePanelHeadings = {
   render: () => html`
@@ -915,7 +915,7 @@ export const KitchenSink = {
 };
 
 /**
- * @summary Card grid layout pattern inside nve-page for dashboard-style content.
+ * @summary Card grid page layout for browsable collections like infrastructure dashboards, asset catalogs, or media galleries. Use with view-mode toggles for switching between grid and table presentations.
  * @tags pattern
  */
 export const PageLayoutCardGrid = {
@@ -962,7 +962,7 @@ export const PageLayoutCardGrid = {
 };
 
 /**
- * @summary Multi-video grid layout with synchronized controls for media playback pages.
+ * @summary Multi-video grid layout with synchronized playback controls for monitoring and review workflows. Ideal for surveillance dashboards, AV sensor feeds, or simulation playback where multiple streams need simultaneous viewing.
  * @tags pattern
  */
 export const PageLayoutMultiVideo = {
@@ -1190,7 +1190,7 @@ export const PageLayoutMultiVideo = {
 };
 
 /**
- * @summary Editor layout with outline, main, and console panels.
+ * @summary IDE-style editor layout with file outline, main editor, and console panels. Use for code playgrounds, configuration editors, or development tools that need a split-pane workspace with toolbar controls.
  * @tags pattern
  */
 export const PageLayoutEditor = {
@@ -1260,7 +1260,7 @@ export const PageLayoutEditor = {
 };
 
 /**
- * @summary Stepper pattern layout for multi-step processes like wizards or onboarding flows.
+ * @summary Multi-step wizard layout with progress stepper for guided workflows. Use for onboarding flows, enrollment forms, or configuration processes where users complete sequential steps with clear progress indication.
  * @tags pattern
  */
 export const PageLayoutSteps = {
@@ -1305,7 +1305,7 @@ export const PageLayoutSteps = {
 };
 
 /**
- * @summary Resizable left page panel using a resize handle.
+ * @summary Resizable left panel with drag handle for adjustable sidebar width. Use when users need to control the balance between navigation or outline panels and main content area.
  */
 export const Resize = {
   render: () => html`
@@ -1333,7 +1333,7 @@ export const Resize = {
 };
 
 /**
- * @summary Resizable left, right, and bottom panels with resize handles.
+ * @summary Multi-panel resizable layout with independent drag handles on left, right, and bottom panels. Use for complex workspaces like IDEs or dashboards where users need to customize the size of multiple content regions simultaneously.
  */
 export const ResizeMulti = {
   render: () => html`
@@ -1379,7 +1379,7 @@ export const ResizeMulti = {
 };
 
 /**
- * @summary Snap-to-min or snap-to-max panel width using double-click on the resize handle.
+ * @summary Resize handle with snap-to-boundary behavior on double-click for quickly toggling a panel between collapsed and expanded states. Use for detail panels that users frequently show and hide.
  */
 export const ResizeSnap = {
   render: () => html`

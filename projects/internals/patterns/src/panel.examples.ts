@@ -149,7 +149,7 @@ export const PanelTabbedHeader = {
   render: () => html`
     <nve-page style="height: 550px">
       <nve-page-panel slot="left" size="sm">
-        <nve-page-panel-header style="--padding: var(--nve-ref-spacing-100) var(--nve-ref-spacing-200)">
+        <nve-page-panel-header style="--padding: var(--nve-ref-size-100) var(--nve-ref-size-200)">
           <nve-tabs>
             <nve-tabs-item>Tab 1</nve-tabs-item>
             <nve-tabs-item selected>Tab 2</nve-tabs-item>
