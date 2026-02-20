@@ -42,7 +42,8 @@ nve
 | `nve api.search [query] [format]`                                 | Search and retrieve a list of Elements (nve-*) components and APIs using keywords.                 |
 | `nve api.get [name] [format]`                                     | Get the documentation of a known Elements component or API by its name.                            |
 | `nve api.template.validate [template]`                            | Validates HTML templates using Elements APIs and components. Checks for invalid API usage.         |
-| `nve api.changelogs [name]`                                       | Get the changelog details for a specific component or API.                                         |
+| `nve api.imports.get [template]`                                  | Get the ESM imports for a given HTML template using Elements APIs and components (nve-*).           |
+| `nve api.changelogs.get [name]`                                   | Get the changelog details for a specific component or API.                                         |
 | `nve packages.versions.list`                                      | Get latest published versions of all Elements packages.                                            |
 | `nve packages.changelogs.list [format]`                           | Get changelog details for all @nve packages.                                                       |
 | `nve packages.changelogs.search [name] [format]`                  | Search for and retrieve changelog details by package name (supports fuzzy matching).               |
@@ -76,7 +77,7 @@ Install to Claude Code by adding the configuration to your `.mcp.json` file. Add
 {
   "mcpServers": {
     "elements": {
-      "description": "Elements API and Custom Element Schema",
+      "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "npm",
       "args": ["exec", "--package=@nvidia-elements/cli@latest", "-y", "--prefer-online", "--", "nve-mcp"],
       "env": {
@@ -98,7 +99,7 @@ Install to Cursor with the MCP configuration below.
 {
   "mcpServers": {
     "elements": {
-      "description": "Elements API and Custom Element Schema",
+      "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "npm exec --package=@nvidia-elements/cli@latest -y --prefer-online -- nve-mcp",
       "env": {
         "npm_config_registry": "https://registry.npmjs.org"
@@ -119,19 +120,28 @@ Install to Cursor with the MCP configuration below.
 | `/new-project` | Context for creating a new Elements project. | `/new-project` Create an Angular todo app |
 | `/migrate` | Context for migrating from deprecated Elements APIs | `/migrate` Migrate my project from deprecated Elements APIs |
 
+### Skills
+
+Skills provide persistent context to AI agents for building UI with Elements.
+
+| Skill | Description |
+| ----- | ----------- |
+| `elements` | Build UI with NVIDIA Elements (NVE). Provides authoring guidelines, workflow steps, and API best practices for creating, editing, or reviewing HTML templates that use nve-* components. |
+
 ### Tools
 
 | Tool | Description |
 | ---- | ----------- |
 | `api_list` | Get list of all available Elements (nve-*) APIs and components. |
-| `api_search` | Search and retrieve a list of Elements (nve-*) components and APIs using keywords. |
 | `api_get` | Get the documentation of a known Elements component or API by its name. |
 | `api_template_validate` | Validates HTML templates using Elements APIs and components (nve-*). |
-| `api_changelogs` | Get the changelog details for a specific component or API. |
+| `api_imports_get` | Get the ESM imports for a given HTML template using Elements APIs and components (nve-*). |
+| `api_changelogs_get` | Get the changelog details for a specific component or API. |
 | `packages_versions_list` | Get latest published versions of all Elements packages. |
 | `packages_changelogs_list` | Get changelog details for all @nve packages. |
 | `packages_changelogs_search` | Search for and retrieve changelog details by package name (supports fuzzy matching). |
 | `examples_list` | Get a summary list of available component/pattern usage examples. |
+| `examples_get` | Get the full template of a known example or pattern by id. |
 | `examples_search` | Search Elements pattern usage examples by name, element type, or keywords. |
 | `playground_validate` | Validates HTML templates for playground examples. |
 | `playground_create` | Create a shareable playground URL from an HTML template. |

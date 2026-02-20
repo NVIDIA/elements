@@ -96,6 +96,11 @@ tools.forEach(tool => {
             const propertySchema = properties?.[argName];
             const v = await getArgValue(argName, propertySchema);
             argv[argName] = v;
+          } else if (properties?.[argName]?.type === 'array' && typeof argv[argName] === 'string') {
+            argv[argName] = (argv[argName] as string)
+              .split(',')
+              .map(s => s.trim())
+              .filter(Boolean);
           }
         }
       }

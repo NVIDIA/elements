@@ -71,8 +71,7 @@ export class PackagesService {
       properties: {
         name: {
           type: 'string',
-          description: `Available packages: ${packageNames.map(p => `\`${p}\``).join(' | ')}`,
-          enum: packageNames
+          description: `Available package changelogs.`
         },
         format: {
           type: 'string',
