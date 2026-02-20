@@ -2,6 +2,22 @@
 
 This file provides guidance to AI Agents when working with code in this repository.
 
+## Instruction Precedence for Agents
+
+When instructions conflict, follow this order (highest to lowest):
+
+1. Runtime or platform constraints from the agent host
+2. Repository agent rules in `AGENTS.md`
+3. Task-specific skill instructions in `.claude/skills/*/SKILL.md`
+4. Documents explicitly required by a selected skill (for example, docs in `projects/site/src/docs/internal/guidelines/`)
+5. General project documentation such as `README.md`
+
+Notes:
+
+- `README.md` is primarily for orientation and setup; it does not override agent policy.
+- If a skill says you MUST review a referenced guideline, treat that guideline as required for that task.
+- If two same-level sources conflict, prefer the more specific and recently maintained source, and note the assumption in your response.
+
 ## Repository Overview
 
 Elements is a design language for AI/ML factories built as a monorepo containing framework agnostic Web Components (Lit), themes, styles, testing utilities, and starter templates. The repository uses pnpm workspaces with Wireit for build orchestration and Semantic Release for automated versioning/publishing.
@@ -59,7 +75,7 @@ pnpm run lint:vale
 
 ### Individual Project Commands
 
-All projects under `projects/` support these commands:
+All projects under `projects/` support these commands. These should be run from within the specific project directory (e.g., `cd projects/elements`):
 
 ```shell
 # Development watch mode
@@ -192,13 +208,33 @@ git checkout -b topic/fix-button-accessibility
 
 ### Commit Messages
 
-Follow conventional commit format:
+Follow conventional commit format with **lowercase subjects** (enforced by commitlint):
 
 ```shell
 git commit -m "fix(elements): resolve keyboard navigation in dropdown"
 git commit -m "feat(themes): add dark mode color tokens"
 git commit -m "chore(docs): update component examples"
 ```
+
+**Important:** The subject line (first line after `type(scope):`) must be entirely lowercase. Avoid starting with proper nouns or using uppercase letters (e.g., use "add feature" not "Add feature", "update api" not "Update API").
+
+**Commit types:**
+
+- `fix` - Bug fixes, performance fixes (triggers patch release)
+- `feat` - New features, components, APIs (triggers minor release)
+- `chore` - Non-production code modifications, build tooling, documentation (no release)
+
+**Common scopes:**
+
+- `docs` - 11ty docs site and landing page (`/projects/site`)
+- `elements` - Core Elements library (`/projects/elements`)
+- `elements-react` - React wrapper (`/projects/elements-react`)
+- `themes` - Theme tokens (`/projects/themes`)
+- `styles` - CSS utilities (`/projects/styles`)
+- `testing` - Testing utilities (`/projects/testing`)
+- `starters` - Starter templates (`/projects/starters`)
+- `labs-*` - Lab projects (e.g., `labs-cli`, `labs-forms`, `labs-code`)
+- `ci` - Build/CI tooling (`/projects/internals`)
 
 ### Prose Linting (Vale)
 
