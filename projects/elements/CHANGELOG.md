@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.60.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.2...@nvidia-elements/core-v1.60.3) (2026-02-20)
+
+
+### Bug Fixes
+
+* **elements:** missing container attribute reflection for text input types ([377de4c](https://github.com/NVIDIA/elements/commit/377de4ccbe71f34f3b7ec9983046e00b6f447542))
+
 ## [@nvidia-elements/core-v1.60.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.1...@nvidia-elements/core-v1.60.2) (2026-02-18)
 
 
