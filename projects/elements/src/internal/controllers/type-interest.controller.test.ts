@@ -143,6 +143,52 @@ describe('type-interest.controller', () => {
     });
   });
 
+  describe('disconnect and reconnect', () => {
+    beforeEach(async () => {
+      fixture = await createFixture(
+        html`
+          <type-interest-controller-test-element interestfor="target"></type-interest-controller-test-element>
+          <div id="target"></div>
+        `
+      );
+      element = fixture.querySelector<TypeInterestControllerTestElement>('type-interest-controller-test-element');
+      target = fixture.querySelector<HTMLElement>('#target');
+      await elementIsStable(element);
+    });
+
+    it('should not fire duplicate interest events after disconnect and reconnect', async () => {
+      element.remove();
+      fixture.appendChild(element);
+      await elementIsStable(element);
+
+      let interestCount = 0;
+      target.addEventListener('interest', () => interestCount++);
+      element.dispatchEvent(new MouseEvent('mouseenter'));
+      expect(interestCount).toBe(1);
+    });
+
+    it('should continue dispatching interest events after disconnect and reconnect', async () => {
+      element.remove();
+      fixture.appendChild(element);
+      await elementIsStable(element);
+
+      const event = untilEvent<InterestEvent>(target, 'interest');
+      element.dispatchEvent(new MouseEvent('mouseenter'));
+      const result = await event;
+      expect(result.source).toBe(element);
+    });
+
+    it('should not dispatch interest events while disconnected', async () => {
+      element.interestForElement = target;
+      element.remove();
+
+      let interestFired = false;
+      target.addEventListener('interest', () => (interestFired = true));
+      element.dispatchEvent(new MouseEvent('mouseenter'));
+      expect(interestFired).toBe(false);
+    });
+  });
+
   describe('no target element', () => {
     beforeEach(async () => {
       fixture = await createFixture(
