@@ -16,7 +16,7 @@ describe('noDeprecatedTags', () => {
     expect(noDeprecatedTags.meta.schema).toBeDefined();
     expect(noDeprecatedTags.meta.messages).toBeDefined();
     expect(noDeprecatedTags.meta.messages['unexpected-deprecated-tag']).toBe(
-      'Unexpected use of deprecated tag <{{tag}}>'
+      'Unexpected use of deprecated tag <{{tag}}>. Use <{{replacement}}> instead.'
     );
   });
 
@@ -35,15 +35,75 @@ describe('noDeprecatedTags', () => {
       invalid: [
         {
           code: '<nve-app-header></nve-app-header>',
-          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-app-header' } }]
+          errors: [
+            { messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-app-header', replacement: 'nve-page-header' } }
+          ]
         },
         {
           code: '<nve-alert-banner></nve-alert-banner>',
-          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-alert-banner' } }]
+          errors: [
+            {
+              messageId: 'unexpected-deprecated-tag',
+              data: { tag: 'nve-alert-banner', replacement: 'nve-alert-group' }
+            }
+          ]
         },
         {
           code: '<nve-json-view></nve-json-view>',
-          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-json-view' } }]
+          errors: [
+            { messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-json-view', replacement: 'nve-monaco-editor' } }
+          ]
+        }
+      ]
+    });
+  });
+
+  it('should report unexpected use of deprecated v0 mlv-* tags', () => {
+    const tester = new RuleTester({
+      languageOptions: {
+        parser: htmlParser,
+        parserOptions: {
+          frontmatter: true
+        }
+      }
+    });
+
+    tester.run('unexpected use of deprecated v0 tag', noDeprecatedTags as unknown as JSRuleDefinition, {
+      valid: [],
+      invalid: [
+        {
+          code: '<mlv-button></mlv-button>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-button', replacement: 'nve-button' } }]
+        },
+        {
+          code: '<mlv-input></mlv-input>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-input', replacement: 'nve-input' } }]
+        },
+        {
+          code: '<mlv-dialog></mlv-dialog>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-dialog', replacement: 'nve-dialog' } }]
+        },
+        {
+          code: '<mlv-grid></mlv-grid>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-grid', replacement: 'nve-grid' } }]
+        },
+        {
+          code: '<mlv-tabs></mlv-tabs>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-tabs', replacement: 'nve-tabs' } }]
+        },
+        {
+          code: '<mlv-accordion></mlv-accordion>',
+          errors: [
+            { messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-accordion', replacement: 'nve-accordion' } }
+          ]
+        },
+        {
+          code: '<mlv-menu></mlv-menu>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-menu', replacement: 'nve-menu' } }]
+        },
+        {
+          code: '<mlv-tooltip></mlv-tooltip>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-tooltip', replacement: 'nve-tooltip' } }]
         }
       ]
     });
