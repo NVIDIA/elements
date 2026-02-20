@@ -19,7 +19,8 @@ export default {
 
 
 /**
- * @summary Real-time validation with contextual error messages and disabled submit until form is valid.
+ * @summary Login form with email and password fields demonstrating credential validation. Use for authentication entry points where real-time feedback guides users through sign-in requirements.
+ * @tags pattern
  */
 export const LoginForm = {
   render() {
