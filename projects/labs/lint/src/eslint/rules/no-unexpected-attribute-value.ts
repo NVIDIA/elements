@@ -45,7 +45,7 @@ const rule = {
             const attrInfo = getElementAttribute(tagName, attributeName);
 
             if (attrInfo?.isEnum && !attrInfo.deprecated && !attrInfo.values.includes(value)) {
-              const validValues = attrInfo.values;
+              const validValues = [...attrInfo.values].sort((a, b) => a.localeCompare(b));
               const alternative = getRecommendedValue(value, validValues);
               const suggest = alternative
                 ? [
