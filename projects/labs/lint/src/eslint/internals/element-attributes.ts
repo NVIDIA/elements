@@ -27,7 +27,7 @@ export function getElementAttribute(tagName: string, attributeName: string): Att
     };
   }
 
-  const values = attr.type?.values?.map(v => v.value).filter(v => v !== undefined) ?? [];
+  const values = extractLiteralUnionValues(attr.type?.text ?? '');
   const isEnum = values.length > 0;
 
   return {
@@ -63,6 +63,16 @@ export function getRecommendedValue(value: string, validValues: string[]): strin
   if (partialMatch) return partialMatch;
 
   return null;
+}
+
+function extractLiteralUnionValues(typeText: string): string[] {
+  if (!typeText) return [];
+
+  const values = [...typeText.matchAll(/['"]([^'"]+)['"]/g)]
+    .map(([, value]) => value?.trim())
+    .filter((value): value is string => Boolean(value));
+
+  return [...new Set(values)];
 }
 
 function hasArbitraryTypeInText(typeText: string): boolean {
