@@ -569,6 +569,30 @@ export const Performance = () => {
 </script>`
 }
 
+/* eslint-disable @nvidia-elements/lint/no-missing-slotted-elements */
+/**
+ * @summary Performance test with 1000 options to demonstrate filtering efficiency with large datasets.
+ * @tags test-case performance
+ */
+export const PerformanceSelect = () => {
+  return html`
+<div nve-layout="pad:lg">
+  <nve-combobox id="performance-combobox">
+    <input type="search" aria-label="performance test">
+    <select multiple></select>
+  </nve-combobox>
+</div>
+<script type="module">
+  const select = document.querySelector('#performance-combobox select');
+  const options = new Array(1000).fill('').map((_, i) => {
+    const option = document.createElement('option');
+    option.value = i + ' item';
+    return option;
+  });
+  select.append(...options);
+</script>`
+}
+
 /**
  * @summary Interactive demo showing progressive filter chips with dynamic combobox creation for complex filtering interfaces.
  * @tags test-case

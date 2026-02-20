@@ -24,4 +24,21 @@ describe('combobox lighthouse report', () => {
     expect(report.scores.bestPractices).toBe(100);
     expect(report.payload.javascript.kb).toBeLessThan(36);
   });
+
+  test('combobox multi select with large dataset should meet lighthouse benchmarks', async () => {
+    const options = new Array(1000).fill('').map((_, i) => `<option value="${i} item"></option>`).join('');
+    const report = await lighthouseRunner.getReport('nve-combobox-performance', /* html */`
+      <nve-combobox>
+        <input type="search" aria-label="performance test" />
+        <select multiple>${options}</select>
+      </nve-combobox>
+      <script type="module">
+        import '@nvidia-elements/core/combobox/define.js';
+      </script>
+    `);
+
+    expect(report.scores.performance).toBe(100);
+    expect(report.scores.bestPractices).toBe(100);
+    expect(report.payload.javascript.kb).toBeLessThan(36);
+  });
 });

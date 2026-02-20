@@ -23,19 +23,37 @@ export type Interest = ReactiveElement &
   };
 
 export class TypeInterestController<T extends Interest> implements ReactiveController {
+  #interestSetupComplete = false;
+
   constructor(private host: T) {
     this.host.addController(this);
   }
 
   async hostConnected() {
-    await this.host.updateComplete;
-    this.host.addEventListener('mouseenter', this.#triggerInterest);
-    this.host.addEventListener('mouseleave', this.#triggerLoseInterest);
-    this.host.addEventListener('focus', this.#triggerInterest);
-    this.host.addEventListener('blur', this.#triggerLoseInterest);
+    await this.#setupInterestEvents();
+  }
+
+  async hostUpdated() {
+    await this.#setupInterestEvents();
   }
 
   hostDisconnected() {
+    this.#teardownInterestEvents();
+  }
+
+  async #setupInterestEvents() {
+    await this.host.updateComplete;
+    if (!this.#interestSetupComplete) {
+      this.#interestSetupComplete = true;
+      this.host.addEventListener('mouseenter', this.#triggerInterest);
+      this.host.addEventListener('mouseleave', this.#triggerLoseInterest);
+      this.host.addEventListener('focus', this.#triggerInterest);
+      this.host.addEventListener('blur', this.#triggerLoseInterest);
+    }
+  }
+
+  #teardownInterestEvents() {
+    this.#interestSetupComplete = false;
     this.host.removeEventListener('mouseenter', this.#triggerInterest);
     this.host.removeEventListener('mouseleave', this.#triggerLoseInterest);
     this.host.removeEventListener('focus', this.#triggerInterest);
