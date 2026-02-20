@@ -96,3 +96,56 @@ Complex types cause compatibility and usability issues as it can require the dev
 <nve-alert><nve-icon slot="icon">🎓</nve-icon>
 Learn about <a href="https://developers.google.com/web/fundamentals/web-components/best-practices#attributes-properties" nve-text="link">Web Fundamentals Attributes vs Properties</a>.
 </nve-alert>
+
+## Data Elements
+
+Some components exist as a representational view of a pure data structure that cannot be meaningfully distilled into primitive attributes or expressed declaratively with child HTML elements. In these cases a complex type property is acceptable.
+
+A component qualifies as a Data Element when **all** of the following are true:
+
+1. The component renders a **data structure** (arrays, series, matrices) rather than composable UI content.
+2. The data **cannot be represented** with a reasonable number of primitive attributes or slotted children.
+3. The component is a **leaf node** -- it does not compose other application-level elements.
+
+```html
+<!-- sparkline plots a numeric series — no sensible way to express this as attributes or children -->
+<nve-sparkline data="[14, 18, 17, 20, 19, 24, 21]"></nve-sparkline>
+```
+
+Components that meet this criteria should implement the `DataElement` interface so the pattern is consistent and discoverable across the library.
+
+```typescript
+/** An element that implements a representational view of complex data. */
+export interface DataElement<T extends unknown[] | Record<string, unknown>> {
+  data?: T;
+}
+```
+
+The `data` property should use Lit's `@property` decorator **without** the `reflect` option to avoid serializing large structures back to the DOM attribute.
+
+```typescript
+export class Sparkline extends LitElement implements DataElement<number[]> {
+  @property({ type: Array }) data?: number[];
+}
+```
+
+{% dodont %}
+
+```html
+<!-- data element: the series is a pure data structure with no declarative alternative -->
+<nve-sparkline data="[14, 18, 17, 20, 19, 24, 21]"></nve-sparkline>
+```
+
+```html
+<!-- alert content is composable UI — use primitives and slots instead -->
+<nve-alert data='{"status":"success","message":"hello"}'>
+</nve-alert>
+```
+
+{% enddodont %}
+
+<nve-alert status="warning">
+  <p nve-text="relaxed">
+    Warning: only use <code>DataElement</code> for data structures that have no reasonable declarative HTML representation. If content can be expressed with primitive attributes, slots, or child elements, prefer those approaches.
+  </p>
+</nve-alert>
