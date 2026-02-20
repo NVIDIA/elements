@@ -123,6 +123,7 @@ export class SystemSettings extends LitElement {
     globalThis.document.documentElement.setAttribute('nve-theme', themes);
     globalThis.document.documentElement.setAttribute('nve-layer', globals.layer);
     globalThis.document.documentElement.setAttribute('show-advanced-api', globals.showAdvancedApi);
+    globalThis.document.dispatchEvent(new CustomEvent('nve-theme-change', { detail: { theme: themes } }));
     globalThis.document.querySelectorAll('iframe').forEach(iframe => {
       iframe.contentWindow?.document.documentElement.setAttribute('nve-theme', themes);
       iframe.contentWindow?.document.documentElement.setAttribute('nve-layer', globals.layer);
