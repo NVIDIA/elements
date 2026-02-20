@@ -34,7 +34,7 @@ export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> 
     let popoverTargetElement = this.host.popoverTargetElement;
 
     // we can only do this on interaction as its too costly to do this on every getter or update of the popovertarget attribute, this diverges from the native behavior of the popovertarget attribute
-    if (!this.host.popoverTargetElement) {
+    if (!popoverTargetElement && this.host.popovertarget) {
       popoverTargetElement = getFlattenedDOMTree(this.host.getRootNode()).find(e => e.id === this.host.popovertarget);
       this.host.popoverTargetElement = popoverTargetElement ?? null;
     }
