@@ -18,6 +18,7 @@ import noUnexpectedAttributeValue from '../rules/no-unexpected-attribute-value.j
 import noUnexpectedInputType from '../rules/no-unexpected-input-type.js';
 import noInvalidInvokerTriggers from '../rules/no-invalid-invoker-triggers.js';
 import noMissingGapSpace from '../rules/no-missing-gap-space.js';
+import noUnknownCssVariable from '../rules/no-unknown-css-variable.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
 
@@ -63,7 +64,8 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-unexpected-attribute-value': noUnexpectedAttributeValue,
         'no-unexpected-input-type': noUnexpectedInputType,
         'no-invalid-invoker-triggers': noInvalidInvokerTriggers,
-        'no-missing-gap-space': noMissingGapSpace
+        'no-missing-gap-space': noMissingGapSpace,
+        'no-unknown-css-variable': noUnknownCssVariable
       }
     }
   },
@@ -85,6 +87,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-unexpected-attribute-value': ['error'],
     '@nvidia-elements/lint/no-unexpected-input-type': ['error'],
     '@nvidia-elements/lint/no-invalid-invoker-triggers': ['error'],
-    '@nvidia-elements/lint/no-missing-gap-space': ['off']
+    '@nvidia-elements/lint/no-missing-gap-space': ['off'],
+    '@nvidia-elements/lint/no-unknown-css-variable': ['error']
   }
 };
