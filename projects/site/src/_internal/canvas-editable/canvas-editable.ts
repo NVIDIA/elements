@@ -14,18 +14,6 @@ import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/define.js';
 import { PlaygroundService } from '@internals/tools/playground';
 
-// eslint-disable-next-line no-inline-css/no-restricted-imports
-import themeStyles from '@nvidia-elements/themes/index.css?inline'; // temporary workaround as latest version is not published yet
-// eslint-disable-next-line no-inline-css/no-restricted-imports
-import darkThemeStyles from '@nvidia-elements/themes/dark.css?inline'; // temporary workaround as latest version is not published yet
-// eslint-disable-next-line no-inline-css/no-restricted-imports
-import typographyStyles from '@nvidia-elements/styles/typography.css?inline'; // temporary workaround as latest version is not published yet
-// eslint-disable-next-line no-inline-css/no-restricted-imports
-import layoutStyles from '@nvidia-elements/styles/layout.css?inline'; // temporary workaround as latest version is not published yet
-// eslint-disable-next-line no-inline-css/no-restricted-imports
-import layoutLabsViewportStyles from '@nvidia-elements/styles/labs/layout-viewport.css?inline'; // temporary workaround as latest version is not published yet
-// eslint-disable-next-line no-inline-css/no-restricted-imports
-import layoutLabsContainerStyles from '@nvidia-elements/styles/labs/layout-container.css?inline'; // temporary workaround as latest version is not published yet
 import styles from './canvas-editable.css?inline';
 
 declare global {
@@ -58,6 +46,12 @@ export class CanvasEditable extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.editableSource = this.source;
+    globalThis.document.addEventListener('nve-theme-change', this.#handleThemeChange);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    globalThis.document.removeEventListener('nve-theme-change', this.#handleThemeChange);
   }
 
   willUpdate(changedProperties: Map<PropertyKey, unknown>) {
@@ -133,10 +127,7 @@ export class CanvasEditable extends LitElement {
 
   #renderSandboxedPreview() {
     // Use an iframe to sandbox the preview content
-    // We use a key to force re-render when editableSource changes
     const srcdoc = this.editableSource ?? '';
-    // Use a unique key to force iframe reload on source change
-    const key = String(srcdoc.length) + String(Date.now());
     return html`
       <iframe
         sandbox="allow-scripts allow-modals allow-forms allow-popups allow-same-origin"
@@ -145,24 +136,28 @@ export class CanvasEditable extends LitElement {
           <html nve-theme="${globalThis.document.documentElement.getAttribute('nve-theme')}" nve-transition="auto">
             <head>
               <style>
-                ${themeStyles}
-                ${darkThemeStyles}
-                ${typographyStyles}
-                ${layoutStyles}
-                ${layoutLabsViewportStyles}
-                ${layoutLabsContainerStyles}
+                :root { color-scheme: light dark; }
+                html, body { margin: 0; min-height: 100%; }
+                body {
+                  transition: opacity 120ms ease-out;
+                  opacity: 1;
+                }
+                body:has(:not(:defined)) {
+                  opacity: 0;
+                }
                 body:has([nve-popover]) { display: flex; align-items: center; justify-content: center; height: 100vh; width: 100vw; }
               </style>
 
-              <script async type="module" src="https://esm.nvidia.com/@nvidia-elements/core@latest/dist/bundles/index.js"></script>
+              <!-- TODO: UPDATE TO LATEST VERSION ONCE WHEN WE HAVE A CI AUTO RELEASE -->
+              <script async type="module" src="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/core/1.57.1/dist/bundles/index.js"></script>
+              <link rel="stylesheet" type="text/css" href="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/themes/1.12.0/dist/bundles/index.css" />
+              <link rel="stylesheet" type="text/css" href="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/styles/1.13.0/dist/bundles/index.css" />
             </head>
             <body>
               ${srcdoc}
             </body>
           </html>
         `}
-        loading="lazy"
-        key=${key}
       ></iframe>
     `;
   }
@@ -177,6 +172,12 @@ export class CanvasEditable extends LitElement {
       return html`<div class="error">Error rendering preview</div>`;
     }
   }
+  #handleThemeChange = (e: Event) => {
+    const theme = (e as CustomEvent).detail.theme;
+    const iframe = this.shadowRoot?.querySelector('iframe');
+    iframe?.contentDocument?.documentElement.setAttribute('nve-theme', theme);
+  };
+
   #handleSourceClick() {
     this.showSource = !this.showSource;
     this.#sendAnalyticsEvent('elements-docs-source-click');
