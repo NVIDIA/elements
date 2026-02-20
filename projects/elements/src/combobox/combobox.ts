@@ -78,23 +78,32 @@ export class Combobox extends Control implements ContainerElement {
    * If a <select> is provided, on focus all options will be shown by default.
    * If a <datalist> is provided, on focus only options that match the current input value will be shown.
    */
+
+  #_datalist: HTMLSelectElement;
   get #datalist(): HTMLSelectElement {
-    return this.shadowRoot
-      ? ((this.shadowRoot
-          .querySelector('slot')
-          ?.assignedElements({ flatten: true })
-          ?.find(i => i.tagName === 'DATALIST' || i.tagName === 'SELECT') ??
-          this.querySelector('datalist, select')) as HTMLSelectElement)
-      : null;
+    if (!this.#_datalist) {
+      this.#_datalist = this.shadowRoot
+        ? ((this.shadowRoot
+            .querySelector('slot')
+            ?.assignedElements({ flatten: true })
+            ?.find(i => i.tagName === 'DATALIST' || i.tagName === 'SELECT') ??
+            this.querySelector('datalist, select')) as HTMLSelectElement)
+        : null;
+    }
+    return this.#_datalist;
   }
 
+  #_select: HTMLSelectElement;
   get #select(): HTMLSelectElement {
-    return this.shadowRoot
-      ? ((this.shadowRoot
-          .querySelector('slot')
-          ?.assignedElements({ flatten: true })
-          ?.find(i => i.tagName === 'SELECT') ?? this.querySelector('select')) as HTMLSelectElement)
-      : null;
+    if (!this.#_select) {
+      this.#_select = this.shadowRoot
+        ? ((this.shadowRoot
+            .querySelector('slot')
+            ?.assignedElements({ flatten: true })
+            ?.find(i => i.tagName === 'SELECT') ?? this.querySelector('select')) as HTMLSelectElement)
+        : null;
+    }
+    return this.#_select;
   }
 
   get #options(): HTMLOptionElement[] {
@@ -162,7 +171,7 @@ export class Combobox extends Control implements ContainerElement {
       <nve-menu part="menu" role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
         ${visibleOptions.map(
           o => html`
-          <nve-menu-item part="menu-item" .value=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
+          <nve-menu-item part="menu-item" .option=${getDisplayValue(o)} role="option" @click=${() => this.#selectValue(o)} ?selected=${o.selected} aria-selected=${o.selected ? 'true' : 'false'} ?disabled=${o.disabled} aria-label=${getDisplayValue(o)}>
             ${this.#getOptionCheckbox(o)}
             ${largeOptionsList || isPristine ? getDisplayValue(o) : html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>`}
           </nve-menu-item>`
@@ -189,6 +198,10 @@ export class Combobox extends Control implements ContainerElement {
 
   async firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
+    this.shadowRoot.addEventListener('slotchange', () => {
+      this.#_datalist = null;
+      this.#_select = null;
+    });
     await this.updateComplete;
     this.#setupSingleSelect();
     this.#setupMultipleSelect();
@@ -283,8 +296,13 @@ export class Combobox extends Control implements ContainerElement {
       if (e.code === 'Tab') {
         if (this.#hasAvailableOptions && this.#dropdown.matches(':popover-open') && this.input.value !== '') {
           e.preventDefault();
-          this.#setInputValue(this.#items[0].value);
-          this.#setSelectValue(this.#options.find(o => (o.label ? o.label : o.value) === this.#items[0].value));
+          // the option value is cached/stored on the menu item option property instead of value to prevent unnecessary lit lifecycle updates for each menu item
+          this.#setInputValue((this.#items[0] as MenuItem & { option: string }).option);
+          this.#setSelectValue(
+            this.#options.find(
+              o => (o.label ? o.label : o.value) === (this.#items[0] as MenuItem & { option: string }).option
+            )
+          );
         }
         this.#dropdown.hidePopover();
       }
@@ -413,7 +431,10 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupOverflowListener() {
     if (this.#select?.multiple && !this.notags) {
-      this.#updateMultipleOverflow(this.#tags.getBoundingClientRect().width);
+      if (this.#select.selectedOptions.length > 1) {
+        // only calculate initial overflow if multiple tags exist
+        this.#updateMultipleOverflow(this.#tags.getBoundingClientRect().width);
+      }
       const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0].contentRect.width));
       this.#observers.push(observer);
       observer.observe(this.#tags);

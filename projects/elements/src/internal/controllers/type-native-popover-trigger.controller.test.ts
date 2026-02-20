@@ -136,4 +136,38 @@ describe('type-native-popover-trigger.controller', () => {
 
     expect(event.source).toBeNull();
   });
+
+  it('should not throw when clicking without any popover target configured', async () => {
+    fixture = await createFixture(
+      html`<type-native-popover-trigger-controller-test-element></type-native-popover-trigger-controller-test-element>`
+    );
+    element = fixture.querySelector<TypeNativePopoverTriggerControllerTestElement>(
+      'type-native-popover-trigger-controller-test-element'
+    );
+    await elementIsStable(element);
+
+    expect(() => emulateClick(element)).not.toThrow();
+  });
+
+  it('should not attempt DOM lookup when popoverTargetElement is already set', async () => {
+    element.popoverTargetElement = popover;
+    element.popovertarget = 'nonexistent-id';
+    await elementIsStable(element);
+
+    expect(popover.matches(':popover-open')).toBe(false);
+    emulateClick(element);
+    await elementIsStable(element);
+
+    expect(popover.matches(':popover-open')).toBe(true);
+  });
+
+  it('should not toggle popover when disabled', async () => {
+    element.disabled = true;
+    expect(popover.matches(':popover-open')).toBe(false);
+
+    emulateClick(element);
+    await elementIsStable(element);
+
+    expect(popover.matches(':popover-open')).toBe(false);
+  });
 });
