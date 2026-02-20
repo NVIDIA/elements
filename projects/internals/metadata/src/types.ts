@@ -69,6 +69,7 @@ export interface Example {
   template: string;
   summary: string;
   description: string;
+  composition: boolean;
   tags: ExampleTag[];
   deprecated?: boolean;
   entrypoint?: string;

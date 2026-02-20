@@ -97,6 +97,10 @@ A visual indicator that communicates a status description of an associated compo
     <nve-grid-cell>Validates HTML templates using Elements APIs and components (nve-*). Checks for invalid API usage and UX patterns.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">nve api.imports.get &lt;template&gt;</code></nve-grid-cell>
+    <nve-grid-cell>Get the ESM imports for a given HTML template using Elements APIs and components (nve-*).</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve api.changelogs &lt;name&gt;</code></nve-grid-cell>
     <nve-grid-cell>Get the changelog details for a specific component or API.</nve-grid-cell>
   </nve-grid-row>

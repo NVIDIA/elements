@@ -56,8 +56,14 @@ export async function runAsyncTool(args: Record<string, unknown>, fn: ManagedToo
   return value;
 }
 
-export async function getArgValue(argName: string, propertySchema): Promise<string | boolean> {
-  if (propertySchema.type === 'string' && propertySchema.enum) {
+export async function getArgValue(argName: string, propertySchema): Promise<string | boolean | string[]> {
+  if (propertySchema.type === 'array') {
+    const value = await getInput(argName);
+    return value
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+  } else if (propertySchema.type === 'string' && propertySchema.enum) {
     return getSelect(argName, propertySchema);
   } else if (propertySchema.type === 'boolean') {
     return getBoolean(argName, propertySchema);

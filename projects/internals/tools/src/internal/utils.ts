@@ -38,7 +38,7 @@ export function getElementImports(html: string, elements: Element[], lazy = fals
       ]
     : [];
 
-  return [...IMPORTS, ...ELEMENTS_CODE_IMPORTS];
+  return Array.from(new Set([...IMPORTS, ...ELEMENTS_CODE_IMPORTS]));
 }
 
 export function wrapText(text = '', width = 80) {
