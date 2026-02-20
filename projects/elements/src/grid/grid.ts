@@ -31,8 +31,8 @@ import globalStyles from './grid.global.css?inline';
  * @cssprop --border-radius
  * @cssprop --box-shadow
  * @cssprop --font-size
- * @cssprop --row-height
- * @cssprop --scroll-height
+ * @cssprop --row-height - fixed height of each row
+ * @cssprop --scroll-height - height of the scrollable area
 
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/grid/
  */
@@ -105,6 +105,9 @@ export class Grid extends LitElement implements ContainerElement {
     appendRootNodeStyle(this, globalStyles);
   }
 
+  /**
+   * Scroll to a specific position in the grid.
+   */
   scrollTo(options?: ScrollToOptions): Promise<void>;
   scrollTo(x: number, y: number): Promise<void>;
   async scrollTo(...args: [options?: ScrollToOptions] | [x: number, y: number]): Promise<void> {
