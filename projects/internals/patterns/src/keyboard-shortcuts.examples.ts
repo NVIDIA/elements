@@ -15,7 +15,7 @@ export default {
 };
 
 /**
- * @summary Keyboard shortcut content example.
+ * @summary Keyboard shortcut badge with filled styling for displaying key combinations. Use in help dialogs, onboarding tooltips, or documentation to communicate available shortcuts to users.
  * @tags pattern
  */
 export const ShortcutFilled = {
