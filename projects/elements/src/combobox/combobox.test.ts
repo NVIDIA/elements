@@ -248,6 +248,24 @@ describe(Combobox.metadata.tag, () => {
     expect(element.shadowRoot.querySelector('slot[name="prefix-icon"]')).toBeTruthy();
   });
 
+  it('should invalidate cached datalist reference when slot content changes', async () => {
+    const datalist = fixture.querySelector('datalist');
+    datalist.remove();
+
+    const newDatalist = document.createElement('datalist');
+    newDatalist.innerHTML = '<option value="New A"></option><option value="New B"></option>';
+    element.appendChild(newDatalist);
+
+    await elementIsStable(element);
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const updatedItems = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(updatedItems.length).toBe(2);
+    expect(updatedItems[0].textContent.trim()).toBe('New A');
+    expect(updatedItems[1].textContent.trim()).toBe('New B');
+  });
+
   it('should filter out menu items when corresponding option is disabled', async () => {
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
     expect(items[0].disabled).toBe(false);
@@ -449,6 +467,21 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     expect(element.shadowRoot.querySelector<MenuItem>(`${MenuItem.metadata.tag}[disabled]`).textContent).toBe(
       'no results'
     );
+  });
+
+  it('should reflect dynamically added options after slotchange invalidates cache', async () => {
+    const option = document.createElement('option');
+    option.value = 'option 4';
+    select.appendChild(option);
+
+    element.shadowRoot.dispatchEvent(new Event('slotchange'));
+    await elementIsStable(element);
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(`${MenuItem.metadata.tag}[role='option']`);
+    expect(items.length).toBe(4);
+    expect(items[3].textContent.trim()).toBe('option 4');
   });
 });
 
@@ -987,6 +1020,31 @@ describe(`${Combobox.metadata.tag}: option labels for single select`, () => {
     expect(options[0].selected).toBe(false);
     expect(options[1].selected).toBe(false);
     expect(options[2].selected).toBe(false);
+  });
+
+  it('should store display value on menu item option property instead of value to sidestep unnecessary lit lifecycle updates for each menu item', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect((items[0] as MenuItem & { option: string }).option).toBe('option one');
+    expect((items[1] as MenuItem & { option: string }).option).toBe('option two');
+    expect((items[2] as MenuItem & { option: string }).option).toBe('option three');
+  });
+
+  it('should autocomplete on tab using option label instead of value', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+    element.dispatchEvent(new KeyboardEvent('keydown'));
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+
+    input.value = 'option';
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Tab' }));
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(false);
+    expect(input.value).toBe('option one');
+    expect(select.value).toBe('1');
   });
 
   it('should filter menu items against provided option labels', async () => {
