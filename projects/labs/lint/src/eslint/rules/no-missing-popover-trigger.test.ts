@@ -35,7 +35,7 @@ describe('noMissingPopoverTrigger', () => {
     expect(noMissingPopoverTrigger.meta.schema).toBeDefined();
     expect(noMissingPopoverTrigger.meta.messages).toBeDefined();
     expect(noMissingPopoverTrigger.meta.messages['missing-popover-trigger']).toBe(
-      'Popover element <{{tag}}> is missing a trigger element. Add a button with popovertarget="{{id}}" or commandfor="{{id}}".'
+      'Popover element <{{tag}}> is missing a trigger element. Add a button with popovertarget="{{id}}" or commandfor="{{id}}". If programmatically controlling the popover with JavaScript, add a hidden attribute to the popover element.'
     );
     expect(noMissingPopoverTrigger.meta.messages['missing-popover-id']).toBe(
       'Popover element <{{tag}}> is missing an id attribute. Add an id to enable trigger association.'
@@ -56,6 +56,17 @@ describe('noMissingPopoverTrigger', () => {
          <nve-tooltip id="tooltip">Tooltip content</nve-tooltip>`,
         `<button popovertarget="toggletip">Click</button>
          <nve-toggletip id="toggletip">Toggletip content</nve-toggletip>`
+      ],
+      invalid: []
+    });
+  });
+
+  it('should allow popover elements with hidden attribute', () => {
+    tester.run('valid hidden attribute', rule, {
+      valid: [
+        `<nve-dropdown id="dropdown" hidden></nve-dropdown>`,
+        `<nve-tooltip id="tooltip" hidden>Tooltip content</nve-tooltip>`,
+        `<nve-toggletip id="toggletip" hidden>Toggletip content</nve-toggletip>`
       ],
       invalid: []
     });
