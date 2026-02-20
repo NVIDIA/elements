@@ -9,7 +9,12 @@ import z, { type ZodObject } from 'zod';
 
 export const VERSION = '0.0.0';
 
-const server = new McpServer({ name: 'nve-mcp', version: VERSION });
+const server = new McpServer({
+  name: 'nve-mcp',
+  version: VERSION,
+  description:
+    'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples. Use the "elements" skill for more guidance if available.'
+});
 
 tools.forEach(tool => {
   const { description, title, toolName } = tool.metadata;

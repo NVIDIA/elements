@@ -35,7 +35,7 @@ Add the following configuration to your `.mcp.json` file (typically located at `
 {
   "mcpServers": {
     "elements": {
-      "description": "Elements API and Custom Element Schema",
+      "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "npm",
       "args": ["exec", "--package=@nvidia-elements/cli@latest", "-y", "--prefer-online", "--", "nve-mcp"],
       "env": {
@@ -54,7 +54,7 @@ Alternatively, if you prefer using PNPM:
 {
   "mcpServers": {
     "elements": {
-      "description": "Elements API and Custom Element Schema",
+      "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "pnpm",
       "args": ["--package=@nvidia-elements/cli@latest", "dlx", "nve-mcp"],
       "env": {
@@ -82,7 +82,7 @@ Install to Cursor or copy the MCP configuration below.
 {
   "mcpServers": {
     "elements": {
-      "description": "Elements API and Custom Element Schema",
+      "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "npm exec --package=@nvidia-elements/cli@latest -y --prefer-online -- nve-mcp",
       "env": {
         "npm_config_registry": "https://registry.npmjs.org"
@@ -103,7 +103,7 @@ Install to Cursor or copy the MCP configuration below.
 {
   "mcpServers": {
     "elements": {
-      "description": "Elements API and Custom Element Schema",
+      "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "pnpm --package=@nvidia-elements/cli@latest dlx nve-mcp",
       "env": {
         "npm_config_registry": "https://registry.npmjs.org"
@@ -162,6 +162,26 @@ Install to Cursor or copy the MCP configuration below.
     <nve-grid-cell>Context for creating a new Elements project.</nve-grid-cell>
     <nve-grid-cell><code nve-text="code"><strong>/new-project</strong> Create an Angular todo app</code></nve-grid-cell>
   </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">/migrate</code></nve-grid-cell>
+    <nve-grid-cell>Context for migrating from deprecated Elements APIs</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code"><strong>/migrate</strong> Migrate my project from deprecated Elements APIs</code></nve-grid-cell>
+  </nve-grid-row>
+</nve-grid>
+
+### Skills
+
+Skills provide persistent context to AI agents for building UI with Elements. Unlike prompts (invoked on demand) or tools (callable functions), skills give agents background knowledge about Elements components, workflows, and best practices.
+
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column width="250px">Skill</nve-grid-column>
+    <nve-grid-column>Description</nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">elements</code></nve-grid-cell>
+    <nve-grid-cell>Build UI with NVIDIA Elements (NVE). Provides authoring guidelines, workflow steps, and API best practices for creating, editing, or reviewing HTML templates that use nve-* components.</nve-grid-cell>
+  </nve-grid-row>
 </nve-grid>
 
 ### Tools
@@ -176,10 +196,6 @@ Install to Cursor or copy the MCP configuration below.
     <nve-grid-cell>Get list of all available Elements (nve-*) APIs and components.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">api_search</code></nve-grid-cell>
-    <nve-grid-cell>Search and retrieve a list of Elements (nve-*) components and APIs using keywords or natural language.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">api_get</code></nve-grid-cell>
     <nve-grid-cell>Get the documentation of a known Elements component or API by its name (nve-*).</nve-grid-cell>
   </nve-grid-row>
@@ -188,7 +204,11 @@ Install to Cursor or copy the MCP configuration below.
     <nve-grid-cell>Validates HTML templates using Elements APIs and components (nve-*). Checks for invalid API usage and UX patterns.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">api_changelogs</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">api_imports_get</code></nve-grid-cell>
+    <nve-grid-cell>Get the ESM imports for a given HTML template using Elements APIs and components (nve-*).</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">api_changelogs_get</code></nve-grid-cell>
     <nve-grid-cell>Get the changelog details for a specific component or API.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
@@ -206,6 +226,10 @@ Install to Cursor or copy the MCP configuration below.
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">examples_list</code></nve-grid-cell>
     <nve-grid-cell>Get a summary list of available Elements (nve-*) component/pattern usage examples and code snippets.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">examples_get</code></nve-grid-cell>
+    <nve-grid-cell>Get the full template of a known example or pattern by id.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">examples_search</code></nve-grid-cell>

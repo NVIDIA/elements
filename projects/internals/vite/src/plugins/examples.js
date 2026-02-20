@@ -88,6 +88,8 @@ export function examplesToJSON(packageFile) {
                 ? true
                 : undefined;
 
+              const composition = templateIsComposition(example.template);
+
               const tags =
                 example
                   .getJsDocs()
@@ -114,6 +116,7 @@ export function examplesToJSON(packageFile) {
                 summary,
                 description,
                 deprecated,
+                composition,
                 tags
               };
             })
@@ -144,8 +147,25 @@ export function examplesToJSON(packageFile) {
   };
 }
 
+function templateIsComposition(template) {
+  const tags = template?.match(/<nve-[\w-]+/g);
+  if (!tags) return false;
+
+  const unique = [...new Set(tags)].map(t => t.slice(1));
+  unique.sort((a, b) => a.length - b.length);
+
+  const roots = [];
+  for (const tag of unique) {
+    if (!roots.some(root => tag.startsWith(root + '-'))) {
+      roots.push(tag);
+    }
+  }
+
+  return roots.length > 2;
+}
+
 function generateExampleId(entrypoint, name) {
-  const exampleName = name.replace(/([A-Z])/g, '-$1').slice(1);
+  const exampleName = name.replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2').replace(/([a-z\d])([A-Z])/g, '$1-$2');
   const idParts = entrypoint.split('/');
   const fileName = idParts[idParts.length - 1].replace('.examples.json', '');
   const formattedFileName = idParts[idParts.length - 2] === fileName ? '' : `-${fileName}`;

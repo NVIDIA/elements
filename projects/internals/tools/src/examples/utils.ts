@@ -1,8 +1,8 @@
 import { ExamplesService, type Example } from '@internals/metadata';
 import { wrapText } from '../internal/utils.js';
 
-export function isPublicExample(example: Example) {
-  return (
+export function isContextExample(example: Example) {
+  const passedExclusionChecks =
     !example.deprecated &&
     !example.id.toLowerCase().includes('theme') &&
     !example.id.toLowerCase().includes('internal') &&
@@ -10,20 +10,50 @@ export function isPublicExample(example: Example) {
     !example.tags.includes('performance') &&
     !example.tags.includes('test-case') &&
     !example.element?.includes('internal') &&
-    !example.element?.includes('responsive')
-  );
+    !example.element?.includes('responsive');
+
+  const passedTypeChecks =
+    example.composition ||
+    example.id.includes('default') ||
+    example.id.includes('forms') ||
+    example.id.includes('popover') ||
+    example.id.includes('page') ||
+    example.id.includes('grid') ||
+    example.id.includes('invoker') ||
+    example.id.includes('styles-typography') ||
+    example.id.includes('styles-layout') ||
+    example.tags.includes('pattern');
+  return passedExclusionChecks && passedTypeChecks;
+}
+
+function rankExample(example: Partial<Example>) {
+  const name = example.id.replace('elements-', '');
+  if (name.startsWith('pattern')) {
+    return 0;
+  }
+  if (name.startsWith('page')) {
+    return 1;
+  }
+  return 2;
 }
 
 export function getPublicExamples(format: 'markdown' | 'json', examples: Partial<Example>[]) {
   const result = examples
-    .filter(isPublicExample)
+    .filter(isContextExample)
     .reverse()
-    .map(s => ({ id: s.id, name: s.name, summary: s.summary ? s.summary : s.description, element: s.element ?? '' }));
+    .map(s => ({
+      id: s.id,
+      name: s.name,
+      summary: s.summary ? s.summary : s.description,
+      element: s.element ?? '',
+      template: s.template ?? ''
+    }))
+    .sort((a, b) => rankExample(a) - rankExample(b) || (a.id ?? '').localeCompare(b.id ?? ''));
   return format === 'markdown'
     ? result
         .filter(example => example.summary)
         .map(example => {
-          return `- **${example.id.replace('elements-', '')}** ${wrapText(example.summary)}`;
+          return `- **${example.id}** ${wrapText(example.summary)}`;
         })
         .join('\n')
     : result;
@@ -33,7 +63,7 @@ export async function searchPublicExamples(
   query: string,
   config: { format: 'markdown' | 'json'; limit?: number } = { format: 'markdown', limit: 100 }
 ) {
-  const data = (await ExamplesService.search(query)).filter(isPublicExample);
+  const data = (await ExamplesService.search(query)).filter(isContextExample);
   const result = data.slice(0, config.limit);
 
   if (result.length === 0) {
@@ -45,11 +75,129 @@ export async function searchPublicExamples(
 }
 
 export function renderExampleMarkdown(example: Partial<Example>) {
-  return `${renderExampleHeaderMarkdown(example)}${example.template ? `\n\n` : ''}${example.template ? `\`\`\`html\n${example.template.trim()}\n\`\`\`` : ''}`;
+  const template = example.template ? condenseTemplate(example.template.trim()) : '';
+  return `${renderExampleHeaderMarkdown(example)}${template ? `\n\n` : ''}${template ? `\`\`\`html\n${template}\n\`\`\`` : ''}`;
 }
 
 export function renderExampleHeaderMarkdown(example: Partial<Example>) {
   const content = example.summary ? example.summary : example.description;
   const formattedContent = content ? `${wrapText(content)}` : '';
   return `## ${example.name.replace(/([A-Z])/g, ' $1').trim()} (${example.id})${formattedContent ? '\n\n' : ''}${formattedContent}`;
+}
+
+const VOID_ELEMENTS = new Set([
+  'area',
+  'base',
+  'br',
+  'col',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'link',
+  'meta',
+  'source',
+  'track',
+  'wbr'
+]);
+
+/**
+ * Reduces repeated sibling elements in an HTML template to save tokens.
+ * Groups of consecutive same-tag siblings exceeding `maxRepeat` are
+ * truncated and replaced with an HTML comment indicating how many were omitted.
+ */
+export function condenseTemplate(template: string, maxRepeat = 3): string {
+  if (!template || maxRepeat < 1) {
+    return template;
+  }
+  return condenseLines(template.split('\n'), maxRepeat).join('\n');
+}
+
+function condenseLines(lines: string[], maxRepeat: number): string[] {
+  const result: string[] = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const openMatch = lines[i].match(/^(\s*)<([\w][\w-]*)([\s>/])/);
+
+    if (!openMatch || lines[i].trim() === '') {
+      result.push(lines[i]);
+      i++;
+      continue;
+    }
+
+    const indent = openMatch[1];
+    const tag = openMatch[2];
+
+    const siblings: Array<{ start: number; end: number }> = [];
+    let cursor = i;
+
+    while (cursor < lines.length) {
+      if (lines[cursor]?.trim() === '') {
+        cursor++;
+        continue;
+      }
+
+      const sibMatch = lines[cursor].match(/^(\s*)<([\w][\w-]*)([\s>/])/);
+      if (sibMatch && sibMatch[1] === indent && sibMatch[2] === tag) {
+        const sibEnd = findBlockEnd(lines, cursor, tag);
+        siblings.push({ start: cursor, end: sibEnd });
+        cursor = sibEnd + 1;
+      } else {
+        break;
+      }
+    }
+
+    const kept = Math.min(siblings.length, maxRepeat);
+    for (let k = 0; k < kept; k++) {
+      const { start, end } = siblings[k];
+      if (start === end) {
+        result.push(lines[start]);
+      } else {
+        result.push(lines[start]);
+        result.push(...condenseLines(lines.slice(start + 1, end), maxRepeat));
+        result.push(lines[end]);
+      }
+    }
+
+    if (siblings.length > maxRepeat) {
+      const remaining = siblings.length - maxRepeat;
+      result.push(`${indent}<!-- ... ${remaining} more <${tag}> elements ... -->`);
+    }
+
+    i = cursor;
+  }
+
+  return result;
+}
+
+function findBlockEnd(lines: string[], start: number, tag: string): number {
+  const line = lines[start];
+
+  if (line.trimEnd().endsWith('/>')) {
+    return start;
+  }
+
+  if (line.includes(`</${tag}>`)) {
+    return start;
+  }
+
+  if (VOID_ELEMENTS.has(tag.toLowerCase())) {
+    return start;
+  }
+
+  let depth = 1;
+  for (let i = start + 1; i < lines.length; i++) {
+    const l = lines[i];
+    const opens = (l.match(new RegExp(`<${tag}[\\s>]`, 'g')) || []).length;
+    const selfCloses = (l.match(new RegExp(`<${tag}[^>]*/>`, 'g')) || []).length;
+    const closes = (l.match(new RegExp(`</${tag}>`, 'g')) || []).length;
+    depth += opens - selfCloses - closes;
+
+    if (depth <= 0) {
+      return i;
+    }
+  }
+
+  return start;
 }

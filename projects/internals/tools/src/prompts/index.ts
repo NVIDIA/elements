@@ -1,15 +1,15 @@
-import { type Schema } from './tools.js';
+import type { Schema } from '../internal/tools.js';
 
-const authoringContext = `
+const authoringContext = /* markdown */ `
 ## Authoring Guidelines
 
 ### Best practices
 - Prefer stateless/static HTML when possible
 - Use plain HTML/CSS and JavaScript unless specifically requested (angular, react, vue, lit, etc)
 - Do NOT use event handler content attributes such as \`onclick\` or \`onchange\` attributes. Use JavaScript event listeners instead.
-- Avoid applying custom CSS to nve-* elements, only use them for native HTML elements
+- Avoid applying custom CSS to nve-* elements unless necessary for task completion.
 - Prefer Elements APIs over custom CSS. If CSS is required, use design tokens via the \`tokens_list\` tool.
-- Verify that each Elements API usage is correct by checking the API documentation via the \`api_get\` or \`api_search\` tool
+- Verify that each Elements API usage is correct by checking the API documentation via the \`api_get\` tool.
 
 ### API Gotchas
 - Use \`nve-grid\` for tabular data, lists, and keyboard-navigable collections. Do NOT use it for page layout, use \`nve-page\` and \`nve-layout\` instead.
@@ -18,8 +18,7 @@ const authoringContext = `
 - Prefer using \`gap:*\` space utilities over \`pad:*\` padding utilities when using \`nve-layout\` based layouts.
 - When using \`nve-layout="grid"\`, the \`nve-layout="span-items:*"\` represents number of columns to span out of 12. Example: "span-items:6" will span 6 out of 12 columns or 50% of the grid row.
 
-### Starter Template
-
+### Starter Layout
 \`\`\`html
 <nve-page>
   <nve-page-header slot="header">
@@ -33,7 +32,21 @@ const authoringContext = `
 \`\`\`
 `;
 
-const aboutContext = `
+const searchContext = /* markdown */ `
+## Searching Elements API Documentation
+
+Best practices for searching Elements API documentation.
+
+### Tools to use
+- \`api_list\`: list all available Elements APIs
+- \`api_get\`: get documentation for a specific component by name
+- \`examples_list\`: list all available usage examples and patterns
+- \`examples_get\`: get documentation for a specific example by name
+- \`examples_search\`: search for specific examples of patterns and compositions of APIs
+- \`tokens_list\`: list all available CSS variables / design tokens for theming
+`;
+
+const aboutContext = /* markdown */ `
 ## Elements Design System
 
 Give a high level overview of the Elements Design System.
@@ -69,59 +82,32 @@ npm create @nve typescript # typescript, angular, react, lit, preact, solidjs, v
 - [Gitlab Repo](https://github.com/NVIDIA/elements)
 - [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-
-### Resources for Agent - Available MCP Tools
-- \`api_list\`: get list of all available Elements (nve-*) APIs and components
-- \`api_search\`: search and retrieve Elements components and APIs using keywords
-- \`api_get\`: get documentation for a specific component by name
-- \`api_template_validate\`: validate HTML templates for correct API usage
-- \`api_changelogs\`: get changelog details for a specific component or API
-- \`packages_versions_list\`: get latest published versions of all Elements packages
-- \`packages_changelogs_list\`: get changelogs for all @nve packages
-- \`packages_changelogs_search\`: search for package changelogs by name
-- \`examples_list\`: get list of available usage examples and code snippets
-- \`examples_search\`: search examples by name, element type, or keywords
-- \`playground_validate\`: validate HTML templates for playground demos
-- \`playground_create\`: create a shareable playground URL from HTML template
-- \`project_create\`: create a new starter project
-- \`project_update\`: update project to latest Elements package versions
-- \`project_validate\`: validate project setup and check for issues
-- \`tokens_list\`: get available CSS variables / design tokens for theming
 `;
 
-const searchContext = `
-## Searching and Providing Elements API Documentation
+const authoringWorkflowContext = /* markdown */ `
+## Authoring UI Workflow
+Best practices and guidelines for creating UI with NVIDIA Elements.
 
-Explain the API in a way that is easy to understand and follow
-
-### Tools to use
-- Use the \`api_list\` tool to lookup available APIs before implementation
-- Use the \`api_search\` tool to understand components and their API details before using them
-- Use the \`api_get\` tool to get documentation for a specific component by name
-- Use the \`tokens_list\` tool to lookup design tokens for any custom CSS
-- Use the \`examples_search\` tool to search for specific examples of patterns and compositions of APIs
-
-### Best practices
-- Provide a playground example for the user via the \`playground_create\` tool
+1. **Search** patterns and compositions (tools: \`examples_list\`, \`examples_get\`, \`examples_search\`)
+2. **Search** available components and APIs (tools: \`api_list\`, \`api_get\`)
+3. **Look Up** full API details and documentation (tools: \`api_get\`)
+4. **Write** the HTML using \`nve-*\` components (tools: \`api_imports_get\`)
+5. **Validate** the template (tools: \`api_template_validate\`)
 `;
 
-const playgroundCreateContext = `
-## Creating an Elements Playground
+const playgroundWorkflowContext = /* markdown */ `
+## Playground UI Workflow
+Best practices and guidelines for creating an Elements Playground, a in browser sandbox for rapid UI prototyping.
 
-Best practices and guidelines for creating an Elements Playground.
-
-### Tools to use
-- \`api_list\`: lookup available APIs before implementation
-- \`api_search\`: understand components and their API details before using them
-- \`api_get\`: get documentation for a specific component by name
-- \`examples_list\`: lookup available examples before implementation
-- \`examples_search\`: search for specific examples/patterns
-- \`tokens_list\`: lookup design tokens for any custom CSS
-- \`playground_create\`: to create the playground. Will return a URL if no template validation errors are found
-- \`playground_validate\`: validate the template before creating the playground
+1. **Search** patterns and compositions (tools: \`examples_list\`, \`examples_get\`, \`examples_search\`) 
+2. **Search** available components and APIs (tools: \`api_list\`)
+3. **Look up** full API details and documentation (tools: \`api_get\`)
+5. **Write** the HTML using \`nve-*\` components (tools: \`api_imports_get\`)
+6. **Validate** the template (tools: \`playground_validate\`)
+7. **Create** the playground (tools: \`playground_create\`)
 `;
 
-const newStarterContext = `
+const newStarterContext = /* markdown */ `
 ## Initializing an Elements Starter Project
 
 Best practices and guidelines for creating an Elements Starter Project.
@@ -143,7 +129,7 @@ Best practices and guidelines for creating an Elements Starter Project.
 4. If there is an available Playwright MCP tool use it to verify the project locally is working as expected.
 `;
 
-const migrationContext = `
+const migrationContext = /* markdown */ `
 # Elements Migration Guide
 
 Instructions for migrating a project from deprecated Elements APIs to the latest versions. This workflow uses the \`@nvidia-elements/lint\` ESLint package for static analysis and MCP tools for project health.
@@ -357,11 +343,11 @@ After applying all fixes:
 - \`packages_versions_list\`: check latest published versions
 - \`packages_changelogs_search\`: search changelogs for migration-relevant changes
 - \`api_template_validate\`: validate HTML templates for correct API usage
+- \`api_list\`: list all available Elements APIs
 - \`api_get\`: get documentation for a specific component
-- \`api_search\`: search for component APIs
 `;
 
-const doctorContext = `
+const doctorContext = /* markdown */ `
 # Elements Design System Doctor / Setup Check
 
 Instructions for ensuring the Elements Design System is setup correctly
@@ -381,7 +367,7 @@ Ensure the MCP is properly configured and working as expected.
 {
   "mcpServers": {
     "elements": {
-      "description": "Elements API and Custom Element Schema",
+      "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "npm exec --package=@nvidia-elements/cli@latest -y --prefer-online -- nve-mcp",
       "env": {
         "npm_config_registry": "https://registry.npmjs.org"
@@ -399,7 +385,7 @@ Ensure the MCP is properly configured and working as expected.
 {
   "mcpServers": {
     "elements": {
-      "description": "Elements API and Custom Element Schema",
+      "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
       "command": "npm",
       "args": ["exec", "--package=@nvidia-elements/cli@latest", "-y", "--prefer-online", "--", "nve-mcp"],
       "env": {
@@ -409,6 +395,24 @@ Ensure the MCP is properly configured and working as expected.
   }
 }
 \`\`\`
+`;
+
+const mcpContext = /* markdown */ `
+## Elements MCP
+The Elements MCP server provides tools to discover, look up, and validate components. **Use these before writing any nve-* HTML.**
+`;
+
+export const coreContext = /* markdown */ `
+# Building UI with NVIDIA Elements
+
+**PRIORITIZE DISCIPLINE AND QUALITY OVER SPEED**
+
+Elements is NVIDIA's design system for AI and Robotics applications, built for speed and scale. It provides a comprehensive library of web components (nve-*) that work across any framework. Elements covers the full spectrum of UI needs: layout primitives, typography, form controls, data grids, navigation, dialogs, theming, and accessibility.
+
+${mcpContext}
+${authoringWorkflowContext}
+${playgroundWorkflowContext}
+${authoringContext}
 `;
 
 /**
@@ -441,7 +445,7 @@ export const prompts: Prompt[] = [
           role: 'user',
           content: {
             type: 'text',
-            text: aboutContext
+            text: `${aboutContext}${mcpContext}\n---`
           }
         }
       ]
@@ -489,7 +493,7 @@ export const prompts: Prompt[] = [
           role: 'user',
           content: {
             type: 'text',
-            text: `${playgroundCreateContext}${authoringContext}\n---`
+            text: `${playgroundWorkflowContext}${authoringContext}${mcpContext}\n---`
           }
         }
       ]
