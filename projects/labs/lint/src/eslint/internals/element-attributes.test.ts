@@ -40,6 +40,13 @@ describe('getElementAttribute', () => {
     expect(status?.values).toContain('accent');
   });
 
+  it('should return isEnum false for array-typed attributes', () => {
+    const data = getElementAttribute('nve-sparkline', 'data');
+    expect(data).not.toBeNull();
+    expect(data?.isEnum).toBe(false);
+    expect(data?.values).toEqual([]);
+  });
+
   it('should return attribute name correctly', () => {
     const status = getElementAttribute('nve-badge', 'status');
     expect(status?.name).toBe('status');
