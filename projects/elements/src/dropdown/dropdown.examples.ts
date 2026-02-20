@@ -27,7 +27,7 @@ export const Default = {
 };
 
 /**
- * @summary Dropdown menu with icon-labeled items for navigation, context menus, settings, and user actions.
+ * @summary Dropdown with popover-positioned menu for trigger-based actions. Use for context menus, settings, and user actions where content appears on demand relative to a trigger button.
  */
 export const DropdownMenu = {
   render: () => html`

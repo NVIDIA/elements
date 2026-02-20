@@ -167,7 +167,7 @@ export const EditorDiffView = {
   </nve-toolbar>
 
   <main nve-layout="column">
-    <nve-toolbar container="full" style="--background: var(--nve-sys-color-surface-muted)">
+    <nve-toolbar container="full" style="--background: var(--nve-sys-layer-canvas-accent-background)">
       <div slot="prefix" nve-layout="row gap:sm align:vertical-center">
         <nve-icon-button icon-name="branch" size="sm" container="flat"></nve-icon-button>
         <span nve-text="body sm">release/v2.3.0</span>

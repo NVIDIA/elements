@@ -414,7 +414,7 @@ export const Scroll = {
 };
 
 /**
- * @summary Control scroll position via the `scrollTo` API.
+ * @summary Programmatic scroll control using the grid `scrollTo` API. Use to implement scroll-to-top buttons, jump-to-row navigation, or restore scroll position after data refreshes in large datasets.
  */
 export const ScrollPosition = {
   render: () => html`

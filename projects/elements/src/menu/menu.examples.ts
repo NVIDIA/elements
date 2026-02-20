@@ -30,7 +30,8 @@ export const Default = {
 };
 
 /**
- * @summary Dropdown menu with icon-labeled items for navigation, context menus, settings, and user actions. [ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
+ * @summary Menu with keyboard navigation and ARIA disclosure pattern inside a dropdown. Use when menu items need accessible focus management and arrow key navigation. [ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
+ * @tags pattern
  */
 export const Dropdown = {
   render: () => html`

@@ -103,7 +103,7 @@ export const AlertGroupStatus = {
 }
 
 /**
- * @summary Use Invoker Command API to close alerts.
+ * @summary Dismissible alerts using the Invoker Command API for declarative close behavior. Use `commandfor` and `command="--close"` on action buttons to dismiss individual alerts without custom JavaScript event handling.
  */
 export const InvokerCommand = {
   render: () => html`
