@@ -29,4 +29,4 @@ export const tools = [
 
 // temporary exports
 export { getElementImports } from './internal/utils.js';
-export { prompts } from './internal/prompts.js';
+export { prompts } from './prompts/index.js';

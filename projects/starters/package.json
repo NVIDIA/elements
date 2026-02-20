@@ -17,8 +17,8 @@
     "build": {
       "command": "node ./index.js",
       "files": [
-        "../internals/tools/dist/**/starter/**",
-        "../internals/tools/dist/starter/**/*.js",
+        "../internals/tools/dist/**/project/**",
+        "../internals/tools/dist/**/prompts.*",
         "./angular/dist/**/*.js",
         "./bundles/dist/**/*.js",
         "./importmaps/dist/**/*.js",
