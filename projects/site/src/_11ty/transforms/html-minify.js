@@ -56,7 +56,8 @@ function minifyHTML(html) {
     removeStyleLinkTypeAttributes: true,
     sortClassName: true,
     useShortDoctype: true,
-    collapseWhitespace: true
+    collapseWhitespace: true,
+    conservativeCollapse: true
   });
 
   // Restore template contents
