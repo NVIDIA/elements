@@ -16,6 +16,7 @@ export default {
 
 /**
  * @summary Real-time validation with contextual error messages and disabled submit until form is valid.
+ * @tags pattern
  */
 export const Validation = {
   render() {
