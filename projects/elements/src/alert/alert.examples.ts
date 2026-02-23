@@ -344,46 +344,46 @@ export const CustomColorCombinations = {
   render: () => html`
     <div nve-layout="column gap:md">
       <nve-alert-group color="blue-indigo">
-        <nve-alert closable>Custom <code>color</code> will theme the <code>closable</code> icon.</nve-alert>
+        <nve-alert closable>Custom <code nve-text="code">color</code> will theme the <code nve-text="code">closable</code> icon.</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group color="teal-seafoam">
         <nve-alert>
-          Custom <code>color</code> is compatible with <code>actions</code> button.
+          Custom <code nve-text="code">color</code> is compatible with <code nve-text="code">actions</code> button.
           <nve-button slot="actions" container="flat">action</nve-button>
         </nve-alert>
       </nve-alert-group>
 
       <nve-alert-group color="pink-rose" status="accent">
-        <nve-alert>Combining custom <code>color="pink-rose"</code> with <code>status</code> yields the status icon with custom alert color.</nve-alert>
+        <nve-alert>Combining custom <code nve-text="code">color="pink-rose"</code> with <code nve-text="code">status</code> yields the status icon with custom alert color.</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group color="pink-rose" status="success">
-        <nve-alert>Combining custom <code>color="pink-rose"</code> with <code>status</code> yields the status icon with custom alert color.</nve-alert>
+        <nve-alert>Combining custom <code nve-text="code">color="pink-rose"</code> with <code nve-text="code">status</code> yields the status icon with custom alert color.</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group color="pink-rose" status="warning">
-        <nve-alert>Combining custom <code>color="pink-rose"</code> with <code>status</code> yields the status icon with custom alert color.</nve-alert>
+        <nve-alert>Combining custom <code nve-text="code">color="pink-rose"</code> with <code nve-text="code">status</code> yields the status icon with custom alert color.</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group color="pink-rose" status="danger">
-        <nve-alert>Combining custom <code>color="pink-rose"</code> with <code>status</code> yields the status icon with custom alert color.</nve-alert>
+        <nve-alert>Combining custom <code nve-text="code">color="pink-rose"</code> with <code nve-text="code">status</code> yields the status icon with custom alert color.</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group color="blue-indigo" status="accent" prominence="emphasis">
-        <nve-alert>Combining custom <code>color="blue-indigo"</code> with <code>status</code> and <code>prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
+        <nve-alert>Combining custom <code nve-text="code">color="blue-indigo"</code> with <code nve-text="code">status</code> and <code nve-text="code">prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group color="blue-indigo" status="success" prominence="emphasis">
-        <nve-alert>Combining custom <code>color="blue-indigo"</code> with <code>status</code> and <code>prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
+        <nve-alert>Combining custom <code nve-text="code">color="blue-indigo"</code> with <code nve-text="code">status</code> and <code nve-text="code">prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group color="blue-indigo" status="warning" prominence="emphasis">
-        <nve-alert>Combining custom <code>color="blue-indigo"</code> with <code>status</code> and <code>prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
+        <nve-alert>Combining custom <code nve-text="code">color="blue-indigo"</code> with <code nve-text="code">status</code> and <code nve-text="code">prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
       </nve-alert-group>
 
       <nve-alert-group color="blue-indigo" status="danger" prominence="emphasis">
-        <nve-alert>Combining custom <code>color="blue-indigo"</code> with <code>status</code> and <code>prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
+        <nve-alert>Combining custom <code nve-text="code">color="blue-indigo"</code> with <code nve-text="code">status</code> and <code nve-text="code">prominence</code> yields the status icon with an <em>emphasized</em> custom alert color.</nve-alert>
       </nve-alert-group>
     </div>
   `

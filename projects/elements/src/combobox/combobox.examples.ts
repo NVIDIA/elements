@@ -236,7 +236,7 @@ export const MultiSelect = () => {
 };
 
 /**
- * @summary Combobox with an empty initial value using a disabled placeholder option. Use when no default selection should be applied and the user must make an explicit choice.
+ * @summary Combobox with an empty initial value using a disabled placeholder option. Use when no default selection exists and the user must make an explicit choice.
  */
 export const EmptyDefault = () => {
   return html`
@@ -626,7 +626,6 @@ class ComboboxDemo extends LitElement {
   @state() private value = [{ name: '', value: '' }];
   
   // todo
-  /* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
   /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
   render() {
     return html`

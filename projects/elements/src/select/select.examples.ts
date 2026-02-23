@@ -47,21 +47,21 @@ export const CustomOptionRender = {
   </select>
     <div slot="option-1" nve-layout="row gap:xs align:vertical-center">
       <nve-logo color="pink-rose">Db</nve-logo>
-      <p nve-layout="column gap:xs">
+      <p nve-text="body" nve-layout="column gap:xs">
         <span nve-text="label">Debugger</span>
         <span nve-text="body muted">some details on option 1</span>
       </p>
     </div>
     <div slot="option-2" nve-layout="row gap:xs align:vertical-center">
       <nve-logo color="blue-cobalt">TM</nve-logo>
-      <p nve-layout="column gap:xs">
+      <p nve-text="body" nve-layout="column gap:xs">
         <span nve-text="label">Task Manager</span>
         <span nve-text="body muted">some details on option 2</span>
       </p>
     </div>
     <div slot="option-3" nve-layout="row gap:xs align:vertical-center">
       <nve-logo color="green-mint">CI</nve-logo>
-      <p nve-layout="column gap:xs">
+      <p nve-text="body" nve-layout="column gap:xs">
         <span nve-text="label">CI Services</span>
         <span nve-text="body muted">some details on option 3</span>
       </p>

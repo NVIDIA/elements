@@ -414,7 +414,7 @@ export const Scroll = {
 };
 
 /**
- * @summary Programmatic scroll control using the grid `scrollTo` API. Use to implement scroll-to-top buttons, jump-to-row navigation, or restore scroll position after data refreshes in large datasets.
+ * @summary Programmatic scroll control using the grid `scrollTo` API. Use for scroll-to-top buttons, jump-to-row navigation, or restoring scroll position after data refreshes in large datasets.
  */
 export const ScrollPosition = {
   render: () => html`
@@ -878,7 +878,7 @@ class InfiniteScrollDemo extends LitElement {
           ${row.cells.map(cell => html`<nve-grid-cell>${cell.label}</nve-grid-cell> `)}
         </nve-grid-row>`)}
         <nve-grid-footer>
-          <p>Items ${this.grid.rows.length} / 10000</p>
+          <p nve-text="body">Items ${this.grid.rows.length} / 10000</p>
         </nve-grid-footer>
       </nve-grid>
     `
@@ -1169,7 +1169,7 @@ export const PanelDetail = {
 <nve-page id="grid-panel-demo" style="max-height: 500px;">
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm"></nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
   </nve-page-header>
   <section nve-layout="column gap:md pad:md full">
     <nve-grid>
@@ -1244,7 +1244,7 @@ export const PanelGrid = {
     <nve-page style="max-height: 500px;">
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm"></nve-logo>
-        <h2 slot="prefix">Infrastructure</h2>
+        <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
       </nve-page-header>
       <section nve-layout="column gap:md pad:md full">
         page content

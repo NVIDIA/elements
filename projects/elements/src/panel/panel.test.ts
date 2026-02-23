@@ -17,11 +17,11 @@ describe(Panel.metadata.tag, () => {
     fixture = await createFixture(html`
       <nve-panel>
         <nve-panel-footer></nve-panel-footer>
-        <p>content</p>
+        <p nve-text="body">content</p>
         <nve-panel-header>
           <nve-icon-button container="flat" slot="action-icon" icon-name="more-actions"></nve-icon-button>
-          <h3 slot="subtitle">subtitle</h3>
-          <h2 slot="title">title</h2>
+          <h3 nve-text="heading" slot="subtitle">subtitle</h3>
+          <h2 nve-text="heading" slot="title">title</h2>
         </nve-panel-header>
       </nve-panel>
     `);
