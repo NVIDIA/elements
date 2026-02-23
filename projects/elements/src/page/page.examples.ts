@@ -35,7 +35,7 @@ export const Default = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -58,7 +58,7 @@ export const Slots = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
-    <h2 slot="prefix">header</h2>
+    <h2 nve-text="heading" slot="prefix">header</h2>
   </nve-page-header>
   <nve-page-panel slot="subheader">
     <nve-page-panel-content>subheader</nve-page-panel-content>
@@ -132,7 +132,7 @@ export const Content = {
 </style>
 <nve-page debug>
   <nve-page-header slot="header">
-    <h2 slot="prefix">header</h2>
+    <h2 nve-text="heading" slot="prefix">header</h2>
   </nve-page-header>
   <nve-page-panel slot="subheader">
     <nve-page-panel-content>subheader</nve-page-panel-content>
@@ -179,7 +179,7 @@ export const SlotBanner = {
   </nve-alert-group>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -202,7 +202,7 @@ export const SlotSubheader = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -229,7 +229,7 @@ export const SlotSubheaderLarge = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -283,7 +283,7 @@ export const SlotLeft = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -308,7 +308,7 @@ export const SlotRight = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -335,7 +335,7 @@ export const SlotBottom = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -362,7 +362,7 @@ export const SlotLeftAside = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -393,7 +393,7 @@ export const SlotRightAside = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -424,7 +424,7 @@ export const SlotSubfooter = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -460,7 +460,7 @@ export const SlotFooter = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -496,7 +496,7 @@ export const InvokerCommand = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-icon-button slot="suffix" commandfor="invoker-example" command="--toggle" container="flat" icon-name="menu" aria-label="menu"></nve-icon-button>
   </nve-page-header>
 
@@ -523,7 +523,7 @@ export const PagePanelExpandable = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -557,14 +557,14 @@ export const PagePanelExpandable = {
 };
 
 /**
- * @summary Closable page panels that fully remove from the layout when dismissed. Use when panels are opened on demand for temporary tasks like viewing item details or applying filters, and the user needs maximum main content space when done.
+ * @summary Closable page panels that fully remove from the layout when dismissed. Use when panels open on demand for temporary tasks like viewing item details or applying filters, and the user needs full main content space when done.
  */
 export const PagePanelClosable = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -606,7 +606,7 @@ export const InteractionDrawer = {
   <nve-page-header slot="header">
     <nve-icon-button popovertarget="drawer" slot="prefix" container="flat" icon-name="menu" aria-label="menu"></nve-icon-button>
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -640,7 +640,7 @@ export const InteractionPanelNavigation = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -700,14 +700,14 @@ export const InteractionPanelNavigation = {
 };
 
 /**
- * @summary Page panel with tabbed header for switching between categorized content views within a sidebar. Use when a panel contains multiple related sections like outline, search, and settings that share the same screen region.
+ * @summary Page panel with tabbed header for switching between categorized content views within a sidebar. Use when a panel contains related sections like outline, search, and settings that share the same screen region.
  */
 export const PagePanelTabs = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -737,7 +737,7 @@ export const PagePanelHeadings = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -765,7 +765,7 @@ export const DocumentScroll = {
 <nve-page document-scroll>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -794,7 +794,7 @@ export const KitchenSink = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -923,7 +923,7 @@ export const PageLayoutCardGrid = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -945,7 +945,7 @@ export const PageLayoutCardGrid = {
       <nve-card style="height: 100%; width: 100%;">
         <img src="static/images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" />
         <nve-card-content>
-          <p>•︎•︎•︎ •︎•︎•︎ •︎•︎•︎</p>
+          <p nve-text="body">•︎•︎•︎ •︎•︎•︎ •︎•︎•︎</p>
         </nve-card-content>
         <nve-card-footer>
           <div nve-layout="grid span-items:6 gap:xs">
@@ -962,7 +962,7 @@ export const PageLayoutCardGrid = {
 };
 
 /**
- * @summary Multi-video grid layout with synchronized playback controls for monitoring and review workflows. Ideal for surveillance dashboards, AV sensor feeds, or simulation playback where multiple streams need simultaneous viewing.
+ * @summary Multi-video grid layout with synchronized playback controls for monitoring and review workflows. Ideal for surveillance dashboards, AV sensor feeds, or simulation playback where concurrent streams need simultaneous viewing.
  * @tags pattern
  */
 export const PageLayoutMultiVideo = {
@@ -987,7 +987,7 @@ export const PageLayoutMultiVideo = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -1198,7 +1198,7 @@ export const PageLayoutEditor = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Playground</h2>
+    <h2 nve-text="heading" slot="prefix">Playground</h2>
     <nve-button container="flat">Browse</nve-button>
     <nve-button container="flat">Editor</nve-button>
     <nve-button container="flat">Elements</nve-button>
@@ -1260,7 +1260,7 @@ export const PageLayoutEditor = {
 };
 
 /**
- * @summary Multi-step wizard layout with progress stepper for guided workflows. Use for onboarding flows, enrollment forms, or configuration processes where users complete sequential steps with clear progress indication.
+ * @summary Multi-step wizard layout with progress stepper for guided workflows. Use for onboarding flows, enrollment forms, or configuration processes where users complete sequential steps with clear progress tracking.
  * @tags pattern
  */
 export const PageLayoutSteps = {
@@ -1268,7 +1268,7 @@ export const PageLayoutSteps = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Employee</h2>
+    <h2 nve-text="heading" slot="prefix">Employee</h2>
     <nve-button selected container="flat">Benefits</nve-button>
     <nve-button container="flat">Account</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -1312,7 +1312,7 @@ export const Resize = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -1333,14 +1333,14 @@ export const Resize = {
 };
 
 /**
- * @summary Multi-panel resizable layout with independent drag handles on left, right, and bottom panels. Use for complex workspaces like IDEs or dashboards where users need to customize the size of multiple content regions simultaneously.
+ * @summary Multi-panel resizable layout with independent drag handles on left, right, and bottom panels. Use for complex workspaces like IDEs or dashboards where users need to customize the size of each content region independently.
  */
 export const ResizeMulti = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -1386,7 +1386,7 @@ export const ResizeSnap = {
 <nve-page style="--padding: var(--nve-ref-space-lg)">
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -1418,7 +1418,7 @@ export const InteractionPanel = {
   <nve-page-header slot="header">
     <nve-icon-button slot="prefix" container="flat" icon-name="menu" aria-label="menu"></nve-icon-button>
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -1457,7 +1457,7 @@ export const PagePanelExpandableState = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -1492,7 +1492,7 @@ export const PagePanelClosableState = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>

@@ -87,49 +87,6 @@ export class ExamplesService {
     return markdown;
   }
 
-  @tool({
-    description: `Search Elements (nve-*) pattern usage examples by name, element type, or keywords. Returns up to ${MAX_RESULT_LIMIT} matching examples with full template code.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        query: {
-          type: 'string',
-          description: `Search query for matching example templates/patterns. Maximum ${MAX_RESULT_LIMIT} results will be returned.`
-        },
-        format: {
-          type: 'string',
-          description: markdownDescription,
-          enum: ['markdown', 'json'],
-          default: 'markdown'
-        }
-      },
-      required: ['query']
-    },
-    outputSchema: {
-      oneOf: [
-        { type: 'string' },
-        {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              id: { type: 'string' },
-              name: { type: 'string' },
-              summary: { type: 'string' },
-              description: { type: 'string' },
-              template: { type: 'string' },
-              entrypoint: { type: 'string' },
-              element: { type: 'string' },
-              tags: { type: 'array', items: { type: 'string' } }
-            },
-            additionalProperties: false,
-            required: ['id', 'name', 'summary', 'element']
-          }
-        }
-      ],
-      additionalProperties: false
-    }
-  })
   static async search({
     query,
     format = 'markdown'

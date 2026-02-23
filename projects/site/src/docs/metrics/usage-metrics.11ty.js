@@ -96,9 +96,9 @@ export function render() {
     <dd nve-layout="span:8" nve-text="body">A reference a Elements library module import. (js, ts, css)</dd>
     <dt nve-layout="span:4" nve-text="body muted medium">Style Reference</dt>
     <dd nve-layout="span:8" nve-text="body">A reference to a CSS theme variable. (--nve-)</dd>
-    <dt nve-layout="span:4" nve-text="body muted medium"><code>unknown</code></dt>
+    <dt nve-layout="span:4" nve-text="body muted medium"><code nve-text="code">unknown</code></dt>
     <dd nve-layout="span:8" nve-text="body">The project has not been reported yet or a reference could not be determined yet.</dd>
-    <dt nve-layout="span:4" nve-text="body muted medium">(<code>-</code>)</dt>
+    <dt nve-layout="span:4" nve-text="body muted medium">(<code nve-text="code">-</code>)</dt>
     <dd nve-layout="span:8" nve-text="body">The project references are already accounted for in a parent directory project.</dd>
   </dl>
 </nve-dialog>`,

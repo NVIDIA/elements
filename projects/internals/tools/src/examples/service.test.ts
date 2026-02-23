@@ -21,7 +21,7 @@ describe('ExampleService', () => {
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.name).toBe('search');
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.command).toBe('search');
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.description).toBe(
-      'Search Elements (nve-*) pattern usage examples by name, element type, or keywords. Returns up to 5 matching examples with full template code.'
+      'Search Elements (nve-*) pattern usage examples by name, element type, or keywords. Returns up to 5 matching examples with full template code. Hint: use the list tool to get a list of all available examples and patterns first if unsure of what to search.'
     );
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.query).toBeDefined();
   });
@@ -35,7 +35,7 @@ describe('ExampleService', () => {
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.name).toBe('search');
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.command).toBe('search');
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.description).toBe(
-      'Search Elements (nve-*) pattern usage examples by name, element type, or keywords. Returns up to 5 matching examples with full template code.'
+      'Search Elements (nve-*) pattern usage examples by name, element type, or keywords. Returns up to 5 matching examples with full template code. Hint: use the list tool to get a list of all available examples and patterns first if unsure of what to search.'
     );
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.query).toBeDefined();
   });

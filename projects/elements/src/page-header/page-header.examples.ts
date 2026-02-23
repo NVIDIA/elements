@@ -88,7 +88,7 @@ export const AppLogo = {
   render: () => html`
 <nve-page-header>
   <nve-logo slot="prefix" size="sm" color="yellow-nova">AV</nve-logo>
-  <h2 slot="prefix">Infrastructure</h2>
+  <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
   <nve-button container="flat" selected><a href="#">Link 1</a></nve-button>
   <nve-button container="flat"><a href="#">Link 2</a></nve-button>
   <nve-icon-button slot="suffix" container="flat" icon-name="chat-bubble"></nve-icon-button>

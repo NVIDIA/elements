@@ -24,7 +24,7 @@ export default {
 };
 
 /**
- * @summary Playback control with buttons for start, rewind, play, fast forward, and go to end.
+ * @summary Playback transport controls with start, rewind, play, fast forward, and end buttons in a flat button group. Use as the core navigation component in media players, simulation reviewers, or timeline-based interfaces.
  * @tags pattern
  */
 export const PlaybackControl = {
@@ -40,7 +40,7 @@ export const PlaybackControl = {
 };
 
 /**
- * @summary Playback speed control for audio and video playback.
+ * @summary Playback speed control using a rounded button group with preset speed options for audio and video playback. Use when toolbar space allows discrete speed buttons and users need to see all options at once.
  * @tags pattern
  */
 export const PlaybackSpeedControl = {
@@ -55,7 +55,7 @@ export const PlaybackSpeedControl = {
 };
 
 /**
- * @summary Compact playback speed control for audio and video playback.
+ * @summary Compact playback speed control using a flat select dropdown for audio and video playback. Use when toolbar space is tight and a dropdown works better than a button group for speed selection.
  * @tags pattern
  */
 export const PlaybackSpeedMenuControl = {
@@ -72,7 +72,7 @@ export const PlaybackSpeedMenuControl = {
 };
 
 /**
- * @summary Volume control for audio playback.
+ * @summary Volume control with mute toggle and range slider for audio playback. Use in media players, video reviewers, or any interface where users need fine-grained audio level control.
  * @tags pattern
  */
 export const VolumeControl = {
@@ -87,7 +87,7 @@ export const VolumeControl = {
 };
 
 /**
- * @summary Zoom level control for video and canvas content.
+ * @summary Zoom level control with zoom-out, range slider, and zoom-in buttons for video and canvas content. Use in media viewers, map interfaces, or image editors where users need precise zoom control.
  * @tags pattern
  */
 export const ZoomControl = {
@@ -103,7 +103,7 @@ export const ZoomControl = {
 };
 
 /**
- * @summary Time scrubber control for audio and video playback.
+ * @summary Time scrubber with current position, range slider, and total duration for audio and video playback. Use in media players where users need to seek to a specific timestamp or scan through recorded content.
  * @tags pattern
  */
 export const TimeScrubberControl = {
@@ -228,7 +228,7 @@ export const PageLayoutVideo = {
 <nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
-    <h2 slot="prefix">Infrastructure</h2>
+    <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
     <nve-button selected container="flat">Link 1</nve-button>
     <nve-button container="flat">Link 2</nve-button>
     <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>

@@ -6,13 +6,13 @@ describe('card lighthouse report', () => {
     const report = await lighthouseRunner.getReport('nve-card', /* html */`
       <nve-card>
         <nve-card-header>
-          <h2>header</h2>
+          <h2 nve-text="heading">header</h2>
         </nve-card-header>
         <nve-card-content>
-          <p>content</p>
+          <p nve-text="body">content</p>
         </nve-card-content>
         <nve-card-footer>
-          <p>footer</p>
+          <p nve-text="body">footer</p>
         </nve-card-footer>
       </nve-card>
       <script type="module">

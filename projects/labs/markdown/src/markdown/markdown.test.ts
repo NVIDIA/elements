@@ -6,6 +6,8 @@ import '@nvidia-elements/markdown/markdown/define.js';
 // Import CSS variables data for testing
 import cssVars from '@nvidia-elements/themes/data.css-vars.json';
 
+/* eslint-disable @nvidia-elements/lint/no-unstyled-typography */
+
 // Helper function to wait for async markdown parsing to complete
 async function waitForMarkdownParsing(element: Markdown) {
   await elementIsStable(element);
