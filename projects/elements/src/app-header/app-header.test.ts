@@ -11,6 +11,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
 /* eslint-disable @nvidia-elements/lint/no-deprecated-tags */
+/* eslint-disable @nvidia-elements/lint/no-unstyled-typography */
 
 describe(AppHeader.metadata.tag, () => {
   let fixture: HTMLElement;

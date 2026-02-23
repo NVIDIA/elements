@@ -25,7 +25,7 @@ export const StandardHeaderMainPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -67,7 +67,7 @@ export const TabsHeaderMainPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -116,7 +116,7 @@ export const StackedMetadataHeaderMainPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -182,7 +182,7 @@ export const InlineMetadataHeaderMainPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -252,7 +252,7 @@ export const InlineKitchenSinkHeaderMainPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -332,7 +332,7 @@ export const StackedKitchenSinkHeaderMainPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -408,7 +408,7 @@ export const StandardHeaderDetailPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -454,7 +454,7 @@ export const TabsHeaderDetailPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -507,7 +507,7 @@ export const StackedMetadataHeaderDetailPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -576,7 +576,7 @@ export const InlineMetadataHeaderDetailPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -649,7 +649,7 @@ export const InlineKitchenSinkHeaderDetailPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -729,7 +729,7 @@ export const StackedKitchenSinkHeaderDetailPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -805,7 +805,7 @@ export const StandardHeaderViewerPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
@@ -861,7 +861,7 @@ export const StandardHeaderToolbarPage = {
     <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
-        <h2 slot="prefix">Application</h2>
+        <h2 nve-text="heading" slot="prefix">Application</h2>
         <nve-button selected container="flat">Link 1</nve-button>
         <nve-button container="flat">Link 2</nve-button>
         <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>

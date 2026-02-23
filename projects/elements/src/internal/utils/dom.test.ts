@@ -44,7 +44,7 @@ class TestComponent extends LitElement {
     return html`
       <slot name="one">one</slot>
       <button>two</button>
-      <p>three</p>
+      <p nve-text="body">three</p>
       <slot>four</slot>
       <button>five</button>
     `;
@@ -365,7 +365,7 @@ class TraversalTest extends LitElement {
     return html`
       <slot name="slot-two">slot 2</slot>
       <button>shadow dom 1</button>
-      <p>shadow dom</p>
+      <p nve-text="body">shadow dom</p>
       <slot>slot</slot>
       <button>shadow dom 2</button>
     `;
@@ -379,7 +379,7 @@ describe('getFlattenedFocusableItems', () => {
     fixture = await createFixture(html`
       <traversal-test-element>
         <button>light dom 2</button>
-        <p>light dom</p>
+        <p nve-text="body">light dom</p>
         <button slot="slot-two">light dom 1</button>
       </traversal-test-element>
     `);

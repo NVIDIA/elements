@@ -34,7 +34,7 @@ describe('audit', () => {
   beforeEach(async () => {
     fixture = await createFixture(html`
     <audit-test-parent-element>
-      <audit-test-element><p></p></audit-test-element>
+      <audit-test-element><p nve-text="body"></p></audit-test-element>
     </audit-test-parent-element>`);
     element = fixture.querySelector('audit-test-element') as AuditTestElement;
     parent = fixture.querySelector('audit-test-parent-element') as AuditTestParentElement;

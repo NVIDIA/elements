@@ -8,7 +8,7 @@ describe(PageHeader.metadata.tag, () => {
   it('should pass baseline ssr check', async () => {
     const result = await ssrRunner.render(html`
       <nve-page-header>
-        <h2 slot="prefix">header</h2>
+        <h2 nve-text="heading" slot="prefix">header</h2>
       </nve-page-header>
     `);
     expect(result.includes('shadowroot="open"')).toBe(true);

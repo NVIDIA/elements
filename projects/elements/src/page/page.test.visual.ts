@@ -34,7 +34,7 @@ function template(theme: '' | 'dark' = '') {
   <nve-page>
     <nve-page-header slot="header">
       <nve-logo slot="prefix" size="sm"></nve-logo>
-      <h2 slot="prefix">•︎•︎•︎•︎•︎•︎</h2>
+      <h2 nve-text="heading" slot="prefix">•︎•︎•︎•︎•︎•︎</h2>
     </nve-page-header>
 
     <nve-page-panel slot="subheader">
