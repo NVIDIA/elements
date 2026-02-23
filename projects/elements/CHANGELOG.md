@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.60.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.3...@nvidia-elements/core-v1.60.4) (2026-02-23)
+
+
+### Bug Fixes
+
+* **elements:** combobox and popover trigger performance improvements ([c45551c](https://github.com/NVIDIA/elements/commit/c45551cee1f93012c7b74519dd32875301b4f5d8))
+
 ## [@nvidia-elements/core-v1.60.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.2...@nvidia-elements/core-v1.60.3) (2026-02-20)
 
 
