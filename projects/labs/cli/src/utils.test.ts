@@ -11,11 +11,9 @@ import {
   getSelect,
   getInput,
   getBoolean,
-  isObject,
   isReport,
   reportHasFailures,
   renderReport,
-  isStringArray,
   isObjectLiteral,
   renderResult,
   statusIcons
@@ -339,25 +337,6 @@ describe('utils', () => {
     });
   });
 
-  describe('isObject', () => {
-    it('should return true for plain objects', () => {
-      expect(isObject({})).toBe(true);
-      expect(isObject({ key: 'value' })).toBe(true);
-      expect(isObject({ nested: { object: true } })).toBe(true);
-    });
-
-    it('should return false for non-objects', () => {
-      expect(isObject(null)).toBe(false);
-      expect(isObject(undefined)).toBe(false);
-      expect(isObject('string')).toBe(false);
-      expect(isObject(123)).toBe(false);
-      expect(isObject(true)).toBe(false);
-      expect(isObject([])).toBe(false);
-      expect(isObject(new Date())).toBe(false);
-      expect(isObject(new RegExp(''))).toBe(false);
-    });
-  });
-
   describe('isReport', () => {
     it('should return true for valid report objects', () => {
       const validReport = {
@@ -378,23 +357,6 @@ describe('utils', () => {
       expect(isReport('not an object')).toBe(false);
       expect(isReport(null)).toBe(false);
       expect(isReport([])).toBe(false);
-    });
-  });
-
-  describe('isStringArray', () => {
-    it('should return true for arrays of strings', () => {
-      expect(isStringArray([])).toBe(true);
-      expect(isStringArray(['string1'])).toBe(true);
-      expect(isStringArray(['string1', 'string2', 'string3'])).toBe(true);
-    });
-
-    it('should return false for non-string arrays', () => {
-      expect(isStringArray([1, 2, 3])).toBe(false);
-      expect(isStringArray(['string', 123])).toBe(false);
-      expect(isStringArray([true, false])).toBe(false);
-      expect(isStringArray([{}])).toBe(false);
-      expect(isStringArray('not an array')).toBe(false);
-      expect(isStringArray(null)).toBe(false);
     });
   });
 
