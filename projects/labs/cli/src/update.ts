@@ -111,7 +111,7 @@ export async function notifyIfUpdateAvailable(
   try {
     // Check if background fetch found an update
     const latestVersion = await checkPromise;
-    if (latestVersion && isUpdateAvailable(currentVersion, latestVersion)) {
+    if (latestVersion) {
       await showUpdateNotification(currentVersion, latestVersion);
       return;
     }
