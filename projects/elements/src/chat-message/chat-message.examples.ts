@@ -87,7 +87,7 @@ export const Codeblock = {
     Here's the steps you need to do follow to use the chat message component
     <nve-codeblock language="typescript">
     import '@nvidia-elements/core/chat-message/define.js';
-    <code><nve-chat-message></nve-chat-message></code>
+    <code nve-text="code"><nve-chat-message></nve-chat-message></code>
     </nve-codeblock>
   </nve-chat-message>
 </section>

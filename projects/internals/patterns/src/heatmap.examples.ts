@@ -518,7 +518,7 @@ export const JointUtilizationHeatmap = {
 };
 
 /**
- * @summary Grid heatmap displaying occupancy probability for dynamic obstacle detection.
+ * @summary Grid heatmap displaying occupancy probability for dynamic obstacle detection across a spatial coordinate grid. Ideal for robotics and AV perception teams visualizing sensor fusion output to identify high-occupancy zones and detection blind spots using viridis scale.
  * @tags pattern
  */
 export const OccupancyDetectionHeatmap = {
@@ -712,7 +712,7 @@ export const OccupancyDetectionHeatmap = {
 
 
 /**
- * @summary Grid heatmap for displaying thermal distribution across robotic arm joints and actuators
+ * @summary Grid heatmap displaying thermal distribution across robotic arm joints and actuators over time. Essential for monitoring overheating risks during extended operation cycles and validating cooling system performance using viridis scale.
  * @tags pattern
  */
 export const ThermalHeatmap = {

@@ -28,7 +28,7 @@ describe('onChildListMutation', () => {
   let list: HTMLUListElement;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<ul><li></li></ul>`);
+    fixture = await createFixture(html`<ul nve-text="list"><li></li></ul>`);
     list = fixture.querySelector('ul');
   });
 

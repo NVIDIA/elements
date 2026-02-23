@@ -208,7 +208,7 @@ export const InvokerCommand = {
 export const EventBubbling = {
   render: () => html`
     <div style="width: 100vw; height: 100vh;">
-      <p id="event-example">event:</p>
+      <p nve-text="body" id="event-example">event:</p>
       <nve-button popovertarget="event-example-dialog">open</nve-button>
 
       <nve-dialog id="event-example-dialog" closable modal (close)="close($event)" (open)="open($event)">

@@ -5,6 +5,8 @@ import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Icon } from '@nvidia-elements/core/icon';
 import '@nvidia-elements/core/icon-button/define.js';
 
+/* eslint-disable @nvidia-elements/lint/no-missing-icon-name */
+
 describe(IconButton.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: IconButton;

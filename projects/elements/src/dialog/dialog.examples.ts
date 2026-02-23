@@ -343,7 +343,6 @@ export const InertModal = {
         <button>btn</button>
       </nve-dropdown>
       <p nve-text="body">some text content in a closable dialog</p>
-      <button onclick="alert('!')">btn</button>
       <button>btn</button>
       <button>btn</button>
     </nve-dialog>
