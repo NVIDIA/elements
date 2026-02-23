@@ -1,5 +1,6 @@
 import type { Linter } from 'eslint';
 import htmlParser from '@html-eslint/parser';
+import noComplexPopovers from '../rules/no-complex-popovers.js';
 import noDeprecatedTags from '../rules/no-deprecated-tags.js';
 import noDeprecatedAttributes from '../rules/no-deprecated-attributes.js';
 import noDeprecatedIconNames from '../rules/no-deprecated-icon-names.js';
@@ -11,14 +12,17 @@ import noRestrictedAttributes from '../rules/no-restricted-attributes.js';
 import noDeprecatedSlots from '../rules/no-deprecated-slots.js';
 import noMissingSlottedElements from '../rules/no-missing-slotted-elements.js';
 import noMissingControlLabel from '../rules/no-missing-control-label.js';
+import noMissingIconName from '../rules/no-missing-icon-name.js';
 import noMissingPopoverTrigger from '../rules/no-missing-popover-trigger.js';
 import noUnexpectedSlotValue from '../rules/no-unexpected-slot-value.js';
 import noUnknownTags from '../rules/no-unknown-tags.js';
 import noUnexpectedAttributeValue from '../rules/no-unexpected-attribute-value.js';
 import noUnexpectedInputType from '../rules/no-unexpected-input-type.js';
+import noInvalidEventListeners from '../rules/no-invalid-event-listeners.js';
 import noInvalidInvokerTriggers from '../rules/no-invalid-invoker-triggers.js';
 import noMissingGapSpace from '../rules/no-missing-gap-space.js';
 import noUnknownCssVariable from '../rules/no-unknown-css-variable.js';
+import noUnstyledTypography from '../rules/no-unstyled-typography.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
 
@@ -47,6 +51,7 @@ export const elementsHtmlConfig: Linter.Config = {
   plugins: {
     '@nvidia-elements/lint': {
       rules: {
+        'no-complex-popovers': noComplexPopovers,
         'no-deprecated-tags': noDeprecatedTags,
         'no-deprecated-attributes': noDeprecatedAttributes,
         'no-deprecated-icon-names': noDeprecatedIconNames,
@@ -55,6 +60,7 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-deprecated-slots': noDeprecatedSlots,
         'no-missing-slotted-elements': noMissingSlottedElements,
         'no-missing-control-label': noMissingControlLabel,
+        'no-missing-icon-name': noMissingIconName,
         'no-missing-popover-trigger': noMissingPopoverTrigger,
         'no-restricted-attributes': noRestrictedAttributes,
         'no-unexpected-global-attribute-value': noUnexpectedGlobalAttributeValue,
@@ -63,13 +69,16 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-unknown-tags': noUnknownTags,
         'no-unexpected-attribute-value': noUnexpectedAttributeValue,
         'no-unexpected-input-type': noUnexpectedInputType,
+        'no-invalid-event-listeners': noInvalidEventListeners,
         'no-invalid-invoker-triggers': noInvalidInvokerTriggers,
         'no-missing-gap-space': noMissingGapSpace,
-        'no-unknown-css-variable': noUnknownCssVariable
+        'no-unknown-css-variable': noUnknownCssVariable,
+        'no-unstyled-typography': noUnstyledTypography
       }
     }
   },
   rules: {
+    '@nvidia-elements/lint/no-complex-popovers': ['error'],
     '@nvidia-elements/lint/no-unexpected-style-customization': ['off'],
     '@nvidia-elements/lint/no-deprecated-tags': ['error'],
     '@nvidia-elements/lint/no-deprecated-attributes': ['error'],
@@ -79,6 +88,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-deprecated-slots': ['error'],
     '@nvidia-elements/lint/no-missing-slotted-elements': ['error'],
     '@nvidia-elements/lint/no-missing-control-label': ['error'],
+    '@nvidia-elements/lint/no-missing-icon-name': ['error'],
     '@nvidia-elements/lint/no-missing-popover-trigger': ['error'],
     '@nvidia-elements/lint/no-restricted-attributes': ['error'],
     '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error'],
@@ -86,8 +96,10 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-unknown-tags': ['error'],
     '@nvidia-elements/lint/no-unexpected-attribute-value': ['error'],
     '@nvidia-elements/lint/no-unexpected-input-type': ['error'],
+    '@nvidia-elements/lint/no-invalid-event-listeners': ['error'],
     '@nvidia-elements/lint/no-invalid-invoker-triggers': ['error'],
     '@nvidia-elements/lint/no-missing-gap-space': ['off'],
-    '@nvidia-elements/lint/no-unknown-css-variable': ['error']
+    '@nvidia-elements/lint/no-unknown-css-variable': ['error'],
+    '@nvidia-elements/lint/no-unstyled-typography': ['error']
   }
 };
