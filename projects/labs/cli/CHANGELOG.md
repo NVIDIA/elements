@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.9.0...@nvidia-elements/cli-v0.10.0) (2026-02-23)
+
+
+### Features
+
+* **labs-cli:** improved tool schemas and context management ([c3afe7b](https://github.com/NVIDIA/elements/commit/c3afe7b14d9b72e9964a0cf085df2a1625c68825))
+
 ## [@nvidia-elements/cli-v0.9.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.8.1...@nvidia-elements/cli-v0.9.0) (2026-02-18)
 
 
