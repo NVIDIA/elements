@@ -69,6 +69,7 @@ export default [
 
 | Rule | Description | Language | Severity |
 | ---- | ----------- | -------- | -------- |
+| `@nvidia-elements/lint/no-complex-popovers` | Disallow excessive DOM complexity inside popover elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-attributes` | Disallow use of deprecated attributes in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-css-imports` | Disallow use of deprecated CSS import paths. | CSS | `error` |
 | `@nvidia-elements/lint/no-deprecated-css-variable` | Disallow use of deprecated --nve-* CSS theme variables. | CSS | `error` |
@@ -78,9 +79,11 @@ export default [
 | `@nvidia-elements/lint/no-deprecated-popover-attributes` | Disallow use of deprecated popover attributes. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-slots` | Disallow use of deprecated slot APIs. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-tags` | Disallow use of deprecated elements in HTML. | HTML | `error` |
+| `@nvidia-elements/lint/no-invalid-event-listeners` | Disallow inline event handler attributes in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-invalid-invoker-triggers` | Disallow use of invoker trigger attributes on non-button nve-* elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-control-label` | Require form controls to have an accessible label. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-gap-space` | Require gap spacing on row and column layouts. | HTML | `off` |
+| `@nvidia-elements/lint/no-missing-icon-name` | Require icon elements to have an icon name attribute. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-popover-trigger` | Require popover elements to have a corresponding trigger element. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-slotted-elements` | Disallow use of missing slotted elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attributes` | Disallow use of invalid API attributes or utility attributes on custom HTML element tags. | HTML | `error` |
@@ -94,3 +97,4 @@ export default [
 | `@nvidia-elements/lint/no-unexpected-style-customization` | Disallow use of style customization in Elements playground template. | HTML | `off` |
 | `@nvidia-elements/lint/no-unknown-css-variable` | Disallow use of unknown --nve-* CSS theme variables. | CSS | `error` |
 | `@nvidia-elements/lint/no-unknown-tags` | Disallow use of unknown nve-* tags. | HTML | `error` |
+| `@nvidia-elements/lint/no-unstyled-typography` | Require typography elements to have nve-text styling applied. | HTML | `error` |
