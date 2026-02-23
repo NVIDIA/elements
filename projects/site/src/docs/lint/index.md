@@ -82,6 +82,12 @@ export default [
     <nve-grid-column>Severity</nve-grid-column>
   </nve-grid-header>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-complex-popovers</code></nve-grid-cell>
+    <nve-grid-cell>Disallow excessive DOM complexity inside popover elements.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-attributes</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of deprecated attributes in HTML.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
@@ -136,6 +142,12 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-invalid-event-listeners</code></nve-grid-cell>
+    <nve-grid-cell>Disallow inline event handler attributes in HTML.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-invalid-invoker-triggers</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of invoker trigger attributes on non-button nve-* elements.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
@@ -152,6 +164,12 @@ export default [
     <nve-grid-cell>Require gap spacing on row and column layouts.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">off</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-icon-name</code></nve-grid-cell>
+    <nve-grid-cell>Require icon elements to have an icon name attribute.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-missing-popover-trigger</code></nve-grid-cell>
@@ -228,6 +246,12 @@ export default [
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unknown-tags</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of unknown nve-* tags.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unstyled-typography</code></nve-grid-cell>
+    <nve-grid-cell>Require typography elements to have nve-text styling applied.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
