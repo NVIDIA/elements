@@ -9,10 +9,10 @@ export const banner = `"░██████████ ░██             
 export type ArgInputType = 'string' | 'number' | 'boolean' | 'object' | 'array';
 
 export const colors = {
-  info: value => `\x1b[34m${value}\x1b[0m`,
-  error: value => `\x1b[31m${value}\x1b[0m`,
-  warning: value => `\x1b[33m${value}\x1b[0m`,
-  complete: value => `\x1b[32m${value}\x1b[0m`
+  info: (value: string) => `\x1b[34m${value}\x1b[0m`,
+  error: (value: string) => `\x1b[31m${value}\x1b[0m`,
+  warning: (value: string) => `\x1b[33m${value}\x1b[0m`,
+  complete: (value: string) => `\x1b[32m${value}\x1b[0m`
 };
 
 export function getSpinnerProgressMessage() {
@@ -56,7 +56,19 @@ export async function runAsyncTool(args: Record<string, unknown>, fn: ManagedToo
   return value;
 }
 
-export async function getArgValue(argName: string, propertySchema): Promise<string | boolean | string[]> {
+interface PropertySchema {
+  type?: ArgInputType;
+  enum?: string[];
+  description?: string;
+  default?: unknown;
+  defaultTemplate?: string;
+  filename?: string;
+}
+
+export async function getArgValue(
+  argName: string,
+  propertySchema: PropertySchema
+): Promise<string | boolean | string[]> {
   if (propertySchema.type === 'array') {
     const value = await getInput(argName);
     return value
@@ -101,15 +113,6 @@ export function getBoolean(value: string, prop: { description?: string }) {
   return confirm({ message: `(${value}) ${prop.description ?? ''}:` });
 }
 
-export function isObject(value: unknown) {
-  return (
-    typeof value === 'object' && // Check if it's an object (includes null, arrays)
-    value !== null && // Exclude null
-    !Array.isArray(value) && // Exclude arrays
-    Object.prototype.toString.call(value) === '[object Object]' // Ensure it's a plain object
-  );
-}
-
 interface Report {
   [key: string]: {
     message: string;
@@ -127,15 +130,15 @@ export const statusIcons = {
 };
 
 export function isReport(result: unknown) {
-  return (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    isObject(result) && Object.entries(result).every(([_, value]: [string, any]) => value?.status && value?.message)
-  );
+  if (!isObjectLiteral(result)) return false;
+  return Object.entries(result as Record<string, unknown>).every(([, value]) => {
+    const entry = value as Record<string, unknown>;
+    return entry?.status && entry?.message;
+  });
 }
 
 export function reportHasFailures(result: Report) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return Object.entries(result).some(([_, value]: [string, any]) => value?.status === 'danger');
+  return Object.values(result).some(value => value.status === 'danger');
 }
 
 export function renderReport(result: Report) {
@@ -156,16 +159,35 @@ export function renderReport(result: Report) {
   }
 }
 
-export function isStringArray(result: unknown) {
-  return Array.isArray(result) && result.every(item => typeof item === 'string');
-}
-
-export function isObjectLiteral(item) {
+export function isObjectLiteral(item: unknown) {
   if (!item || typeof item !== 'object' || Array.isArray(item)) {
     return false;
   }
   const proto = Object.getPrototypeOf(item);
   return proto === null || proto === Object.prototype;
+}
+
+let markedConfigured = false;
+
+function configureMarkedTerminal() {
+  if (markedConfigured) return;
+  markedConfigured = true;
+  const colWidth = Math.floor((process.stdout.columns ?? 80) / 4);
+  const nameWidth = Math.max(24, colWidth);
+  const valueWidth = Math.max(24, colWidth);
+  const descriptionWidth = (process.stdout.columns ?? 80) - nameWidth - valueWidth - 4;
+  marked.use(
+    markedTerminal({
+      reflowText: true,
+      tableOptions: {
+        wordWrap: true,
+        colWidths: [nameWidth, valueWidth, descriptionWidth],
+        style: {
+          head: ['bold']
+        }
+      }
+    })
+  );
 }
 
 export async function renderResult(result: unknown) {
@@ -174,24 +196,9 @@ export async function renderResult(result: unknown) {
   } else if (Array.isArray(result) || isObjectLiteral(result)) {
     console.log(JSON.stringify(result, null, 2));
   } else if (typeof result === 'string' && result.trim().startsWith('http') && !result.includes('\n')) {
-    console.log(colors.complete(result.match(/.{1,80}/g).join('\n')));
+    console.log(colors.complete((result.match(/.{1,80}/g) ?? [result]).join('\n')));
   } else if (typeof result === 'string') {
-    const colWidth = Math.floor(process.stdout.columns / 4);
-    const nameWidth = Math.max(24, colWidth);
-    const valueWidth = Math.max(24, colWidth);
-    const descriptionWidth = process.stdout.columns - nameWidth - valueWidth - 4;
-    marked.use(
-      markedTerminal({
-        reflowText: true,
-        tableOptions: {
-          wordWrap: true,
-          colWidths: [nameWidth, valueWidth, descriptionWidth],
-          style: {
-            head: ['bold']
-          }
-        }
-      })
-    );
+    configureMarkedTerminal();
     console.log(await marked.parse(result));
   } else {
     console.log(result);

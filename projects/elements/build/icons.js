@@ -84,7 +84,7 @@ function writeSSRIconRegistry(icons) {
 // 
 // We could use a top level await in icon.js like the following
 // const { ICON_IMPORTS } = await (isServer ? import('./icons.server.js') : import('./icons.js'));
-// however due to downstream consumer tools that use esbuild/iffe modules, top level await is not supported
+// due to downstream consumer tools that use esbuild/iffe modules, top level await is not supported
 globalThis._NVE_SSR_ICON_REGISTRY = {\n${Object.keys(icons)
         .map(i => `  '${i}': '${icons[i]}',`)
         .join('\n')}\n};
