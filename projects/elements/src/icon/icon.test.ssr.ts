@@ -7,7 +7,7 @@ import '@nvidia-elements/core/icon/define.js';
 describe(Icon.metadata.tag, () => {
   it('should pass baseline ssr check', async () => {
     const result = await ssrRunner.render(html`
-      <nve-icon></nve-icon>
+      <nve-icon name="add"></nve-icon>
       <nve-icon name="person"></nve-icon>
     `);
     expect(result.includes('shadowroot="open"')).toBe(true);

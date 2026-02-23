@@ -5,4 +5,15 @@ htmlConfig[1].rules['html/element-newline'] = 'off'; // todo
 htmlConfig[1].rules['html/require-img-alt'] = 'off'; // disabled due to not following role presentation
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [...elementsRecommended, ...htmlConfig, ...browserTypescriptConfig, ...appConfig];
+export default [
+  ...elementsRecommended,
+  ...htmlConfig,
+  ...browserTypescriptConfig,
+  ...appConfig,
+  {
+    files: ['src/_11ty/**/*.js'],
+    rules: {
+      '@nvidia-elements/lint/no-unstyled-typography': 'off'
+    }
+  }
+];

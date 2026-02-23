@@ -51,8 +51,8 @@ class DemoKeyNavigationGridController extends LitElement {
 
   render() {
     return html`
-      <p>Selected: ${this.selected}</p>
-      <p>Active: ${this.active}</p>
+      <p nve-text="body">Selected: ${this.selected}</p>
+      <p nve-text="body">Active: ${this.active}</p>
       <section @nve-key-change=${e => (this.active = e.detail.activeItem.textContent)}>
         ${Array.from(Array(10).keys()).map(() => Array.from(Array(10).keys())).map((r, ri) => html`<div class="row">
           ${r.map(c => html`<div class="cell">

@@ -10,7 +10,7 @@ describe(Icon.metadata.tag, () => {
   let element: Icon;
 
   beforeEach(async () => {
-    fixture = await createFixture(html`<nve-icon></nve-icon>`);
+    fixture = await createFixture(html`<nve-icon></nve-icon>`); /* eslint-disable-line @nvidia-elements/lint/no-missing-icon-name */
     element = fixture.querySelector(Icon.metadata.tag);
     await elementIsStable(element);
   });

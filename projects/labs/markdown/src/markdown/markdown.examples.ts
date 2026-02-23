@@ -2,6 +2,8 @@ import { html } from 'lit';
 import '@nvidia-elements/markdown/markdown/define.js';
 import '@nvidia-elements/markdown/styles/index.css';
 
+/* eslint-disable @nvidia-elements/lint/no-unstyled-typography */
+
 export default {
   title: 'Elements/Markdown',
   component: 'nve-markdown'
