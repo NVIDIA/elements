@@ -13,11 +13,11 @@ describe(Dialog.metadata.tag, () => {
     fixture = await createFixture(html`
       <nve-dialog closable modal>
         <nve-dialog-header>
-          <h3>header</h3>
+          <h3 nve-text="heading">header</h3>
         </nve-dialog-header>
-        <p>content</p>
+        <p nve-text="body">content</p>
         <nve-dialog-footer>
-          <p>footer</p>
+          <p nve-text="body">footer</p>
         </nve-dialog-footer>
       </nve-dialog>
     `);

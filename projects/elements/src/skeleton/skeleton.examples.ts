@@ -43,7 +43,7 @@ export const Shape = {
 }
 
 /**
- * @summary Skeleton with slotted content that automatically hides the placeholder when real content is provided. Use to wrap lazy-loaded content so the skeleton disappears once data arrives without manual state management.
+ * @summary Skeleton with slotted content that automatically hides the placeholder when real content arrives. Use to wrap lazy-loaded content so the skeleton disappears once data loads without manual state management.
  */
 export const Slotted = {
   render: () => html`

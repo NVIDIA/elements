@@ -568,7 +568,7 @@ export class TestDynamicTree extends LitElement {
 
   render() {
     return html`
-    <p>total nodes: 10,000</p>
+    <p nve-text="body">total nodes: 10,000</p>
     <nve-tree border expandable>
       ${this.nodes.map(node => this.#getNodeList(node))}
     </nve-tree>`;

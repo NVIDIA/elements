@@ -65,6 +65,7 @@ export class Breadcrumb extends LitElement {
   @state() private breadcrumbItems: Element[] = [];
 
   render() {
+    /* eslint-disable @nvidia-elements/lint/no-unstyled-typography */
     return html`
     <ol internal-host>
       ${this.breadcrumbItems.map(

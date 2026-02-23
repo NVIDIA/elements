@@ -16,7 +16,7 @@ export const Default = {
 };
 
 /**
- * @summary Interactive page loader that triggers programmatically via button click.
+ * @summary Interactive page loader that starts programmatically via button click. Use when user actions such as form submissions, data refreshes, or navigation events start loading states rather than on initial page load.
  */
 export const Interactive = {
   inline: false,

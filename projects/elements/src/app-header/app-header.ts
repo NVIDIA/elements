@@ -7,6 +7,8 @@ import type { IconButton } from '@nvidia-elements/core/icon-button';
 import type { Button } from '@nvidia-elements/core/button';
 import styles from './app-header.css?inline';
 
+/* eslint-disable @nvidia-elements/lint/no-unstyled-typography */
+
 /**
  * @deprecated use `nve-page-header` instead
  * @element nve-app-header
