@@ -13,6 +13,7 @@ import '@nvidia-elements/monaco/input/define.js';
 import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/define.js';
 import { PlaygroundService } from '@internals/tools/playground';
+import { PackagesService } from '@internals/tools/packages';
 
 import styles from './canvas-editable.css?inline';
 
@@ -30,6 +31,15 @@ export class CanvasEditable extends LitElement {
   @state() private showSource = false;
   @state() private editableSource: string = '';
   @state() private previewWidth: number = 500;
+  @state() private packageVersions: {
+    elements: string;
+    themes: string;
+    styles: string;
+  } = {
+    elements: '1.57.1',
+    themes: '1.12.0',
+    styles: '1.13.0'
+  };
 
   protected firstUpdated() {
     // Set previewWidth after determining if the layout is horizontal or not
@@ -46,6 +56,7 @@ export class CanvasEditable extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.editableSource = this.source;
+    void this.#loadPackageVersions();
     globalThis.document.addEventListener('nve-theme-change', this.#handleThemeChange);
   }
 
@@ -130,7 +141,7 @@ export class CanvasEditable extends LitElement {
     const srcdoc = this.editableSource ?? '';
     return html`
       <iframe
-        sandbox="allow-scripts allow-modals allow-forms allow-popups allow-same-origin"
+        sandbox=${'allow-scripts allow-modals allow-forms allow-popups allow-same-origin' as unknown as 'allow-scripts'}
         .srcdoc=${`
           <!DOCTYPE html>
           <html nve-theme="${globalThis.document.documentElement.getAttribute('nve-theme')}" nve-transition="auto">
@@ -148,10 +159,9 @@ export class CanvasEditable extends LitElement {
                 body:has([nve-popover]) { display: flex; align-items: center; justify-content: center; height: 100vh; width: 100vw; }
               </style>
 
-              <!-- TODO: UPDATE TO LATEST VERSION ONCE WHEN WE HAVE A CI AUTO RELEASE -->
-              <script async type="module" src="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/core/1.57.1/dist/bundles/index.js"></script>
-              <link rel="stylesheet" type="text/css" href="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/themes/1.12.0/dist/bundles/index.css" />
-              <link rel="stylesheet" type="text/css" href="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/styles/1.13.0/dist/bundles/index.css" />
+              <script async type="module" src="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/core/${this.packageVersions.elements}/dist/bundles/index.js"></script>
+              <link rel="stylesheet" type="text/css" href="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/themes/${this.packageVersions.themes}/dist/bundles/index.css" />
+              <link rel="stylesheet" type="text/css" href="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/styles/${this.packageVersions.styles}/dist/bundles/index.css" />
             </head>
             <body>
               ${srcdoc}
@@ -202,10 +212,26 @@ export class CanvasEditable extends LitElement {
     this.previewWidth = Number(handle.value);
   }
 
-  async #handlePlaygroundClick() {
-    const playgroundUrl = await PlaygroundService.create({ template: this.editableSource });
+  async #loadPackageVersions() {
+    try {
+      const versions = await PackagesService.versionsList();
+      this.packageVersions = {
+        elements: versions['@nvidia-elements/core'] ?? this.packageVersions.elements,
+        themes: versions['@nvidia-elements/themes'] ?? this.packageVersions.themes,
+        styles: versions['@nvidia-elements/styles'] ?? this.packageVersions.styles
+      };
+    } catch (error) {
+      console.warn('Unable to load latest package versions for canvas preview.', error);
+    }
+  }
 
-    globalThis.open(playgroundUrl, '_blank');
+  async #handlePlaygroundClick() {
+    const playgroundResult = await PlaygroundService.create({ template: this.editableSource });
+    if (typeof playgroundResult !== 'string') {
+      return;
+    }
+
+    globalThis.open(playgroundResult, '_blank');
 
     this.#sendAnalyticsEvent('elements-docs-source-playground');
   }
