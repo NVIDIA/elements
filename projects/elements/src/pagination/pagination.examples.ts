@@ -66,7 +66,7 @@ export const DisableStep = {
 };
 
 /**
- * @summary Pagination is [form associated component](https://web.dev/more-capable-form-controls)
+ * @summary Pagination as a form associated component that participates in form submission and emits change, input, and step-change events. Use when page selection needs to integrate with form data collection or server-side form handling.
  */
 export const Forms = {
   render: () => html`

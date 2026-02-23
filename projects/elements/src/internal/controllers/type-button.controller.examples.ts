@@ -94,7 +94,14 @@ export const TypeButtonDemo = {
 <ui-button disabled>disabled</ui-button>
 <ui-button><a href="#">link</a></ui-button>
 
-<form onsubmit="alert('submit!'); return false;" style="display: inline-flex;">
+<form id="type-button-demo-form" style="display: inline-flex;">
   <ui-button type="submit">submit</ui-button>
-</form>`
+</form>
+<script type="module">
+  const form = document.querySelector('#type-button-demo-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('submit!');
+  });
+</script>`
 };

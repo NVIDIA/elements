@@ -51,8 +51,8 @@ class DemoKeyNavigationList extends LitElement {
 
   render() {
     return html`
-      <p>Selected: ${this.selected}</p>
-      <p>Active: ${this.active}</p>
+      <p nve-text="body">Selected: ${this.selected}</p>
+      <p nve-text="body">Active: ${this.active}</p>
       <section @nve-key-change=${e => (this.active = e.detail.activeItem.textContent)}>
         ${Array.from(Array(10).keys()).map(i => html`<div>
           <button ?selected=${this.selected === `${i}`} @click=${e => (this.selected = e.target.innerText)}>${i}</button>
@@ -86,8 +86,8 @@ class DemoKeyNavigationListVertical extends LitElement {
 
   render() {
     return html`
-      <p>Selected: ${this.selected}</p>
-      <p>Active: ${this.active}</p>
+      <p nve-text="body">Selected: ${this.selected}</p>
+      <p nve-text="body">Active: ${this.active}</p>
       <section class="vertical" @nve-key-change=${e => (this.active = e.detail.activeItem.textContent)}>
         ${Array.from(Array(10).keys()).map(i => html`<div>
           <button ?selected=${this.selected === `${i}`} @click=${e => (this.selected = e.target.innerText)}>${i}</button>
@@ -123,8 +123,8 @@ class DemoKeyNavigationListLoop extends LitElement {
 
   render() {
     return html`
-      <p>Selected: ${this.selected}</p>
-      <p>Active: ${this.active}</p>
+      <p nve-text="body">Selected: ${this.selected}</p>
+      <p nve-text="body">Active: ${this.active}</p>
       <section class="vertical" @nve-key-change=${e => (this.active = e.detail.activeItem.textContent)}>
         ${Array.from(Array(10).keys()).map(i => html`<div>
           <button ?selected=${this.selected === `${i}`} @click=${e => (this.selected = e.target.innerText)}>${i}</button>

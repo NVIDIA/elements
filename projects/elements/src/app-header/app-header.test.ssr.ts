@@ -5,6 +5,7 @@ import { AppHeader } from '@nvidia-elements/core/app-header';
 import '@nvidia-elements/core/app-header/define.js';
 
 /* eslint-disable @nvidia-elements/lint/no-deprecated-tags */
+/* eslint-disable @nvidia-elements/lint/no-unstyled-typography */
 
 describe(AppHeader.metadata.tag, () => {
   it('should pass baseline ssr check', async () => {

@@ -17,7 +17,7 @@ describe(Panel.metadata.tag, () => {
           <div slot="subtitle"></div>
         </nve-panel-header>
         <nve-panel-content>
-          <p>content</p>
+          <p nve-text="body">content</p>
         </nve-panel-content>
       </nve-panel>
     `);

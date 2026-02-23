@@ -4,8 +4,6 @@ export const data = {
   permalink: 'docs/foundations/themes/color/index.html'
 };
 
-/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
-
 export function render(data) {
   return this.renderTemplate(
     /* html */ `
