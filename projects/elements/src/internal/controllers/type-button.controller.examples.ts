@@ -82,6 +82,7 @@ customElements.get('ui-button') || customElements.define('ui-button', UIButton);
  * Example of custom element button using the base button and controllers.
  * When a custom element extends the base button it will inherit all the
  * necessary button behaviors and states.
+ * @summary Custom button element using BaseButton with pressed, expanded, disabled, and link states.
  * @tags test-case
  */
 export const TypeButtonDemo = {

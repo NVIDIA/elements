@@ -1,0 +1,16 @@
+extends: existence
+message: "Summary describes mechanics without explaining when or why. Add usage guidance (e.g., 'Use for...', 'Ideal for...'). Found: '%s'"
+level: suggestion
+ignorecase: true
+tokens:
+  - 'that can be applied to'
+  - 'that can be used to'
+  - 'that can be set on'
+  - 'that can be set to'
+  - 'available for the \w+'
+  - 'will hide the'
+  - 'will show the'
+  - 'will display the'
+  - 'will toggle the'
+  - 'will enable the'
+  - 'will disable the'

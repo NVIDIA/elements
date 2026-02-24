@@ -67,6 +67,7 @@ class DemoKeyNavigationGridController extends LitElement {
 customElements.get('demo-key-navigation-grid') || customElements.define('demo-key-navigation-grid', DemoKeyNavigationGridController);
 
 /**
+ * @summary Grid-based keyboard navigation controller with arrow key support across rows and columns.
  * @tags test-case
  */
 export const keyNavigationGridControllerDemo = {

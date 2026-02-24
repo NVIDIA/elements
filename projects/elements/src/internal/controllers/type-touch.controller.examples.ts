@@ -26,6 +26,7 @@ class TypeTouchControllerDemoElement extends LitElement {
 customElements.get('type-touch-controller-demo-element') || customElements.define('type-touch-controller-demo-element', TypeTouchControllerDemoElement);
 
 /**
+ * @summary Touch controller with drag-to-move behavior dispatching start, move, and end events.
  * @tags test-case
  */
 export const TypeTouchControllerDemo = {
