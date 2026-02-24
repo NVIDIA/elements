@@ -30,7 +30,7 @@ export class Avatar extends LitElement {
     version: '0.0.0'
   };
 
-  /** Sets size of the avatar component. Size can also be updated using the `width + height` css props. */
+  /** Sets size of the avatar component. Update size through the `width + height` css props as an alternative. */
   @property({ type: String, reflect: true }) size?: Size | 'xs';
 
   /** Sets the color of the avatar component. */

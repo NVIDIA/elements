@@ -251,7 +251,7 @@ export const Flat = {
 };
 
 /**
- * @summary Badge with constrained width to demonstrate text overflow behavior. Use when you need to control badge width in constrained layouts or responsive designs.
+ * @summary Badge with constrained width to show text overflow behavior. Use when you need to control badge width in constrained layouts or responsive designs.
  * @tags test-case
  */
 export const Overflow = {

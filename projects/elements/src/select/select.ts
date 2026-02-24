@@ -67,12 +67,12 @@ export class Select extends Control {
     [Tag.metadata.tag]: Tag
   };
 
-  /** Flat container option is used when embeding component within another containing element */
+  /** Flat container option applies when embedding the component within another containing element */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
-  /** Enables internal string values to be updated for internationalization. */
+  /** Updates internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   get #select() {

@@ -25,7 +25,7 @@ import styles from './combobox.css?inline';
  * @since 0.17.0
  * @entrypoint \@nvidia-elements/core/combobox
  * @slot - default slot for an input and a datalist/select element
- * @slot prefix-icon - slot for icon to be placed before the input
+ * @slot prefix-icon - slot for icon before the input
  * @slot footer - slot for dropdown footer content
  * @cssprop --scroll-height
  * @cssprop --padding
@@ -56,7 +56,7 @@ export class Combobox extends Control implements ContainerElement {
    */
   @property({ type: String, reflect: true }) accessor container: 'flat';
 
-  /** Disable rendering of inline tags for multiple select */
+  /** Disable rendering of inline tags for many-item select */
   @property({ type: Boolean, reflect: true }) accessor notags: boolean;
 
   static styles = useStyles([...Control.styles, inputStyles, styles]);
@@ -75,8 +75,8 @@ export class Combobox extends Control implements ContainerElement {
   };
 
   /**
-   * If a <select> is provided, on focus all options will be shown by default.
-   * If a <datalist> is provided, on focus only options that match the current input value will be shown.
+   * If a <select> exists, on focus all options show by default.
+   * If a <datalist> exists, on focus only options that match the current input value show.
    */
 
   #_datalist: HTMLSelectElement;
@@ -296,7 +296,7 @@ export class Combobox extends Control implements ContainerElement {
       if (e.code === 'Tab') {
         if (this.#hasAvailableOptions && this.#dropdown.matches(':popover-open') && this.input.value !== '') {
           e.preventDefault();
-          // the option value is cached/stored on the menu item option property instead of value to prevent unnecessary lit lifecycle updates for each menu item
+          // the menu item option property caches/stores the option value instead of value to prevent unnecessary lit lifecycle updates for each menu item
           this.#setInputValue((this.#items[0] as MenuItem & { option: string }).option);
           this.#setSelectValue(
             this.#options.find(
@@ -389,7 +389,7 @@ export class Combobox extends Control implements ContainerElement {
         this.#filterOptions();
       }
       this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
-      // explicity provide source as the performance optimizations in the suffixContent getter prevent the anchor/trigger of the dropdown from being set reliably
+      // explicitly provide source as the performance optimizations in the suffixContent getter prevent the dropdown from setting its anchor/trigger reliably
       this.#dropdown.showPopover({ source: this.#input as HTMLElement });
       this.#dropdown.tabIndex = -1;
     }
@@ -432,7 +432,7 @@ export class Combobox extends Control implements ContainerElement {
   #setupOverflowListener() {
     if (this.#select?.multiple && !this.notags) {
       if (this.#select.selectedOptions.length > 1) {
-        // only calculate initial overflow if multiple tags exist
+        // only calculate initial overflow if many tags exist
         this.#updateMultipleOverflow(this.#tags.getBoundingClientRect().width);
       }
       const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0].contentRect.width));

@@ -14,13 +14,13 @@ import styles from './drawer.css?inline';
 
 /**
  * @element nve-drawer
- * @description Drawer are to display content that is out of context of the rest of the page (notifications, navigation, settings). Alternatively [Panel](./docs/elements/panel/) is inline as its content is coupled or closely related to the content on the page (details, additional actions/options). [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
+ * @description Drawer are to display content that is out of context of the rest of the page (notifications, navigation, settings). Or use [Panel](./docs/elements/panel/) inline as its content couples with or closely relates to the content on the page (details, extra actions/options). [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/drawer
- * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
- * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
- * @event open - Dispatched when the drawer is opened.
- * @event close - Dispatched when the drawer is closed.
+ * @event beforetoggle - Dispatched on a popover just before showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
+ * @event open - Dispatched when the drawer opens.
+ * @event close - Dispatched when the drawer closes.
  * @slot - default content slot
  * @cssprop --border
  * @cssprop --background
@@ -44,13 +44,13 @@ export class Drawer extends LitElement {
   @property({ type: String, reflect: true }) position: 'left' | 'right' | 'bottom' | 'top' = 'left';
 
   /**
-   * Sets the maximum size of the drawer.
+   * Sets the max size of the drawer.
    */
   @property({ type: String, reflect: true }) size?: Size;
 
   /**
    * Determines if a close button should render within drawer. Non-closable
-   * drawers can be used for drawers that require user confirmation steps.
+   * drawers suit drawers that require user confirmation steps.
    */
   @property({ type: Boolean }) closable: boolean;
 
@@ -61,7 +61,7 @@ export class Drawer extends LitElement {
 
   /**
    * (optional) By default the popover will automatically anchor itself relative to the trigger element.
-   * A optional custom anchor element can be provided by passing an idref string within the same render root or a HTMLElement DOM reference.
+   * Pass an optional custom anchor element as an idref string within the same render root or a HTMLElement DOM reference.
    */
   @property({ type: String }) anchor: string | HTMLElement = globalThis.document?.body;
 
@@ -87,7 +87,7 @@ export class Drawer extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables internal string values to update for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

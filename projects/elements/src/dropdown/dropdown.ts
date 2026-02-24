@@ -18,10 +18,10 @@ import styles from './dropdown.css?inline';
  * @description Generic dropdown element for rendering a variety of different content such as interactive navigation or form controls. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/dropdown
- * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
- * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
- * @event open - Dispatched when the dropdown is opened.
- * @event close - Dispatched when the dropdown is closed.
+ * @event beforetoggle - Dispatched on a popover just before showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
+ * @event open - Dispatched when the dropdown opens.
+ * @event close - Dispatched when the dropdown closes.
  * @slot - default slot for dropdown content
  * @cssprop --border
  * @cssprop --border-radius
@@ -52,7 +52,7 @@ export class Dropdown extends LitElement {
 
   /**
    * (optional) By default the popover will automatically anchor itself relative to the trigger element.
-   * A optional custom anchor element can be provided by passing an idref string within the same render root or a HTMLElement DOM reference.
+   * Pass an optional custom anchor element as an idref string within the same render root or a HTMLElement DOM reference.
    */
   @property({ type: String }) anchor: string | HTMLElement;
 
@@ -82,12 +82,12 @@ export class Dropdown extends LitElement {
 
   /**
    * Determines if a close button should render within dropdown. Non-closable
-   * dropdowns can be used for menu or selection patterns.
+   * dropdowns suit menu or selection patterns.
    */
   @property({ type: Boolean }) closable = false;
 
   /**
-   * Determines if an arrow should be rendered.
+   * Determines if an arrow renders.
    */
   @property({ type: Boolean }) arrow = false;
 
@@ -109,7 +109,7 @@ export class Dropdown extends LitElement {
   }
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables internal string values to update for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

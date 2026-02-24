@@ -10,14 +10,14 @@ export default {
 };
 
 /**
- * @summary Basic button component demonstrating standard appearance and behavior for primary user actions.
+ * @summary Basic button component with standard appearance and behavior for primary user actions.
  */
 export const Default = {
   render: () => html`<nve-button>standard</nve-button>`
 };
 
 /**
- * @summary Demonstrates the various interaction states of the button.
+ * @summary Button interaction states including hover, focus, pressed, selected, and disabled.
  * @tags test-case
  */
 export const GroupStates = {
@@ -32,7 +32,7 @@ export const GroupStates = {
 }
 
 /**
- * @summary Shows different interaction states to communicate button hierarchy, importance, and availability to users.
+ * @summary Interaction states that communicate button hierarchy, importance, and availability to users.
  */
 export const Interaction = {
   render: () => html`
@@ -45,7 +45,7 @@ export const Interaction = {
 }
 
 /**
- * @summary Demonstrates different container styles for buttons to accommodate various visual weight and context.
+ * @summary Container style variants for buttons to accommodate different visual weight and context.
  */
 export const Container = {
   render: () => html`
@@ -58,7 +58,7 @@ export const Container = {
 }
 
 /**
- * @summary Demonstrates different button sizes to accommodate various layout densities and touch target requirements.
+ * @summary Button size variants to accommodate layout densities and touch target requirements.
  */
 export const Size = {
   render: () => html`
@@ -71,7 +71,7 @@ export const Size = {
 }
 
 /**
- * @summary Shows pressed state for toggle buttons to indicate active/selected state and provide clear visual feedback.
+ * @summary Pressed state for toggle buttons marking active/selected state with clear visual feedback.
  */
 export const Pressed = {
   render: () => html`
@@ -84,7 +84,7 @@ export const Pressed = {
 }
 
 /**
- * @summary Demonstrates different button selection states to accommodate various visual weight and context.
+ * @summary Button selection states to accommodate different visual weight and context.
  */
 export const Selected = {
   render: () => html`
@@ -97,7 +97,7 @@ export const Selected = {
 }
 
 /**
- * @summary Demonstrates different button disabled states to accommodate various visual weight and context.
+ * @summary Button disabled states to accommodate different visual weight and context.
  */
 export const Disabled = {
   render: () => html`
@@ -110,7 +110,7 @@ export const Disabled = {
 }
 
 /**
- * @summary This example demonstrates how to use the `commandfor` and `command` attributes to create a button that can be used to rotate an image.
+ * @summary Use the `commandfor` and `command` attributes to trigger custom Invoker Commands, such as rotating an image.
  * [MDN Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API)
  * [MDN Invoker Commands API - Creating Custom Commands](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#creating_custom_commands)
  */
@@ -137,7 +137,7 @@ export const InvokerCommand = {
 };
 
 /**
- * @summary Demonstrates button with icons positioned before or after text to enhance visual clarity and user understanding.
+ * @summary Button with icons positioned before or after text to enhance visual clarity and user understanding.
  */
 export const ButtonWithIcon = {
   render: () => html`
@@ -214,7 +214,7 @@ export const LinkFlat = {
 }
 
 /**
- * @summary Demonstrates text wrapping behavior in constrained widths, showing how content adapts to available space.
+ * @summary Text wrapping behavior in constrained widths, where content adapts to available space.
  * @tags test-case
  */
 export const NoWrap = {
@@ -227,7 +227,7 @@ export const NoWrap = {
 }
 
 /**
- * @summary Form submission button demonstrating proper form integration and data handling for user input processing.
+ * @summary Form submission button with proper form integration and data handling for user input processing.
  */
 export const FormSubmit = {
   render: () => html`
@@ -248,7 +248,7 @@ export const FormSubmit = {
 }
 
 /**
- * @summary Form control option allows a button to be styled like a control field. This is helpful for using button to trigger custom form control components or dropdowns.
+ * @summary Form control option allows a button to adopt control field styling. This helps when using a button to trigger custom form control components or dropdowns.
  */
 export const FormControl = {
   render: () => html`
@@ -262,7 +262,7 @@ export const FormControl = {
 }
 
 /**
- * @summary Button integrated with popover API to trigger contextual overlays, providing additional information or controls.
+ * @summary Button integrated with popover API to trigger contextual overlays, providing extra information or controls.
  * @tags test-case
  */
 export const Popover = {
@@ -273,7 +273,7 @@ export const Popover = {
 }
 
 /**
- * @summary Custom styling example showing how to override button appearance for brand-specific designs while maintaining functionality.
+ * @summary Override button appearance with custom CSS properties for brand-specific designs while maintaining functionality.
  * @tags test-case
  */
 export const BackgroundOverride = {

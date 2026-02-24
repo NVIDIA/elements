@@ -68,7 +68,7 @@ export const Indeterminate = {
 };
 
 /**
- * @summary Progress bars may will display as an animated loading indicator when no `value` attribute is set.
+ * @summary Progress bars display as an animated loading indicator when no `value` attribute exists.
  * @tags test-case
  */
 export const IndeterminateStatusColors = {
@@ -92,7 +92,7 @@ export const IndeterminateCustomColor = {
 /**
  * @summary Progress bars with custom heights for different visual prominence levels and layout requirements.
  * @tags test-case
- * @description The progress bar's height can be customized using the `--height` CSS custom property. This allows you to create progress bars that match your application's visual hierarchy and emphasis needs. For consistency and theming, we recommend using our design system tokens—but you're free to use any value that suits your layout.
+ * @description The progress bar's height accepts customization through the `--height` CSS custom property. This allows you to create progress bars that match your application's visual hierarchy and emphasis needs. For consistency and theming, use design system tokens, but any value that suits your layout also works.
  */
 export const CustomHeights = {
   render: () => html`

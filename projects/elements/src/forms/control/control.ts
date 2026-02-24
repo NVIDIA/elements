@@ -64,7 +64,7 @@ export class Control extends LitElement {
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
-  /** Enables internal string values to be updated for internationalization. */
+  /** Enables internal string values to update for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   /** Set the visual prominence of the control */

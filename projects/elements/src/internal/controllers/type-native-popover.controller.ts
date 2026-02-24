@@ -199,7 +199,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   }
 
   /**
-   * @deprecated this is deprecated behavior to allow popovers to be show as open by default when using the legacy trigger based api
+   * @deprecated Legacy behavior that allows popovers to show as open by default when using the legacy trigger based api
    */
   async #setupLegacyTriggers() {
     await new Promise(r => requestAnimationFrame(r));
@@ -230,7 +230,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   }
 
   /**
-   * @deprecated this is deprecated behavior to allow popovers to be show as open by default when using the legacy trigger based api
+   * @deprecated Legacy behavior that allows popovers to show as open by default when using the legacy trigger based api
    */
   #updateLegacyTriggers() {
     const trigger = this.#legacyHostTrigger as HTMLButtonElement;
@@ -258,7 +258,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   #toggleFocus(open: boolean, target: HTMLElement) {
     if (open) {
-      // only focus popover if it is not the active element and it does not contain the active element already
+      // only focus popover if not the active element and not containing the active element already
       if ((this.host.getRootNode() as Document).activeElement !== this.host && !this.host.shadowRoot.activeElement) {
         focusElement(this.host);
       }

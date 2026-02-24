@@ -3,7 +3,7 @@ import { render } from 'lit';
 
 /**
  * Creates a test fixture DOM element for testing.
- * Fixture is ready when all custom elements have been defined.
+ * Fixture is ready when the registry defines all custom elements.
  */
 export async function createFixture(template?: TemplateResult): Promise<HTMLElement> {
   const container = globalThis.document.createElement('div');
@@ -28,7 +28,7 @@ export function removeFixture(fixture: HTMLElement) {
 
 /**
  * Find all elements not defined in the custom elements registry and wait until
- * all elements have been added to registry https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined
+ * the registry adds all elements https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/whenDefined
  */
 export async function waitForCustomElementsToBeDefined(): Promise<void> {
   const pendingElements = new Set(

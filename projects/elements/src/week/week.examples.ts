@@ -39,7 +39,7 @@ export const Datalist = {
 }
 
 /**
- * @summary Week pickers with vertical layout demonstrating validation states including disabled, success, and error.
+ * @summary Week pickers with vertical layout including validation states for disabled, success, and error.
  * @tags test-case
  */
 export const Vertical = {
@@ -105,7 +105,7 @@ export const Horizontal = {
 };
 
 /**
- * @summary Example showing advanced theme usage of [CSS export parts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Parts_and_Slots/Using_CSS_parts) to access nested shadow root elements.
+ * @summary Use [CSS export parts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Parts_and_Slots/Using_CSS_parts) for advanced theming of nested shadow root elements.
  * @tags test-case
  */
 export const ExportParts = {

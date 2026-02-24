@@ -22,7 +22,7 @@ export const Default = {
 };
 
 /**
- * @summary Text input example demonstrating the standard input structure with label and control message.
+ * @summary Text input with the standard input structure, label, and control message.
  */
 export const Input = {
   render: () => html`
@@ -34,7 +34,7 @@ export const Input = {
 };
 
 /**
- * @summary Text inputs with vertical layout demonstrating validation states including disabled, success, and error.
+ * @summary Text inputs with vertical layout including validation states for disabled, success, and error.
  * @tags test-case
  */
 export const Vertical = {

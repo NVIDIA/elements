@@ -118,7 +118,7 @@ function qualityValidator(value: QualityControlValue) {
 }
 
 /**
- * Example of a custom element that uses the FormControlMixin with LitElement
+ * Custom element integrating the FormControlMixin with LitElement for form validation.
  */
 export class QualityControl extends FormControlMixin<typeof LitElement, QualityControlValue>(LitElement) {
   static styles = [

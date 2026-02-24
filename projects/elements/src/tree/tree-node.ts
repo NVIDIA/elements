@@ -23,11 +23,11 @@ import { updateNodeSelection } from './utils.js';
 
 /**
  * @element nve-tree-node
- * @description A tree view widget presents a hierarchical list. Any item in the hierarchy may have child items, and items that have children may be expanded or collapsed to show or hide the children.
+ * @description A tree view widget presents a hierarchical list. Any item in the hierarchy may have child items, and items that have children can expand or collapse to show or hide the children.
  * @since 1.2.0
  * @entrypoint \@nvidia-elements/core/tree
- * @event open - Dispatched when the node is opened.
- * @event close - Dispatched when the node is closed.
+ * @event open - Dispatched when the node opens.
+ * @event close - Dispatched when the node closes.
  * @event select - Dispatched when the node selection state changes.
  * @command --select - use to select the node
  * @command --deselect - use to deselect the node
@@ -80,14 +80,14 @@ export class TreeNode extends LitElement {
   @property({ type: String }) selectable: 'single' | 'multi';
 
   /**
-   * Determines the highlighted state of the element. Highlighted states are for non-interactive selections where nodes may be related to other selected portions of the UI.
+   * Determines the highlighted state of the element. Highlighted states serve non-interactive selections where nodes may relate to other selected portions of the UI.
    */
   @property({ type: Boolean }) highlighted = false;
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Updates internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
