@@ -74,6 +74,7 @@ class PopoverDemo extends LitElement {
 customElements.get('ui-popover') || customElements.define('ui-popover', PopoverDemo);
 
 /**
+ * @summary Basic popover toggled by a button using the native popovertarget API.
  * @tags test-case
  */
 export const TypePopoverControllerDemo = {
@@ -94,6 +95,7 @@ export const TypePopoverControllerDemo = {
 };
 
 /**
+ * @summary Popover positioning and alignment options across all anchor and viewport placements.
  * @tags test-case
  */
 export const TypePopoverControllerAlignmentDemo = {

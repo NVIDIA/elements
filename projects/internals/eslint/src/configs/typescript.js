@@ -3,6 +3,7 @@ import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
 import jsdoc from 'eslint-plugin-jsdoc';
 import deadCode from '../local/dead-code.js';
+import exampleMetadata from '../local/example-metadata.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -36,7 +37,8 @@ const config = {
     jsdoc,
     'local-typescript': {
       rules: {
-        'no-dead-code': deadCode
+        'no-dead-code': deadCode,
+        'example-metadata': exampleMetadata
       }
     }
   },
@@ -105,6 +107,12 @@ export const browserTypescriptConfig = [
         ...globals.browser
       }
     }
+  },
+  {
+    files: ['**/*.examples.ts'],
+    rules: {
+      'local-typescript/example-metadata': ['error']
+    }
   }
 ];
 
@@ -125,6 +133,12 @@ export const nodeTypescriptConfig = [
       globals: {
         ...globals.node
       }
+    }
+  },
+  {
+    files: ['**/*.examples.ts'],
+    rules: {
+      'local-typescript/example-metadata': ['error']
     }
   }
 ];

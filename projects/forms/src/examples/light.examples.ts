@@ -7,6 +7,7 @@ export default {
 };
 
 /**
+ * @summary Light card form control with toggle and dim range inputs.
  * @tags test-case
  */
 export const Light = {
@@ -36,6 +37,7 @@ export const Light = {
 };
 
 /**
+ * @summary Light card form events including submit, reset, and invalid state handling.
  * @tags test-case
  */
 export const Events = {
