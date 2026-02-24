@@ -6,6 +6,7 @@ export default {
 };
 
 /**
+ * @summary Quality control form with checkbox inputs and schema-based validation.
  * @tags test-case
  */
 export const Simple = {
@@ -35,6 +36,7 @@ export const Simple = {
 };
 
 /**
+ * @summary Quality control form events with strict mode toggle and invalid state handling.
  * @tags test-case
  */
 export const SimpleEvents = {

@@ -1,0 +1,10 @@
+extends: substitution
+message: Use '%s' instead of '%s'.
+level: error
+ignorecase: false
+# Ignore email addresses and URLs containing nvidia
+nonword: true
+swap:
+  '(?<![.@/])nvidia(?![.@/])': NVIDIA
+  '(?<![.@/])Nvidia(?![.@/])': NVIDIA
+  '(?<![.@/])NVidia(?![.@/])': NVIDIA

@@ -63,6 +63,7 @@ class DemoKeyNavigationList extends LitElement {
 customElements.get('demo-key-navigation-list') || customElements.define('demo-key-navigation-list', DemoKeyNavigationList);
 
 /**
+ * @summary Horizontal list keyboard navigation controller with arrow key support.
  * @tags test-case
  */
 export const KeyNavigationListControllerDemo = {
@@ -98,6 +99,7 @@ class DemoKeyNavigationListVertical extends LitElement {
 customElements.get('demo-key-navigation-list-vertical') || customElements.define('demo-key-navigation-list-vertical', DemoKeyNavigationListVertical);
 
 /**
+ * @summary Vertical list keyboard navigation controller with up and down arrow key support.
  * @tags test-case
  */
 export const KeyNavigationListControllerVerticalDemo = {
@@ -133,6 +135,7 @@ class DemoKeyNavigationListLoop extends LitElement {
 customElements.get('demo-key-navigation-list-loop') || customElements.define('demo-key-navigation-list-loop', DemoKeyNavigationListLoop);
 
 /**
+ * @summary Vertical list keyboard navigation with looping enabled to wrap from last item to first.
  * @tags test-case
  */
 export const KeyNavigationListLoopControllerDemo = {

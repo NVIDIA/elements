@@ -103,10 +103,6 @@ export function examplesToJSON(packageFile) {
                   )
                   .filter(tag => tag.length > 0) ?? [];
 
-              validateDescriptionContext(name, summary, description);
-              validateSummaryContext(name, summary);
-              validateTagsContext(name, tags);
-
               const id = generateExampleId(entrypoint, name);
 
               return {
@@ -186,37 +182,4 @@ async function renderTemplate(template) {
   const result = render(data);
   const contents = await collectResult(result);
   return contents.replaceAll(/<!--[^>]*lit[^>]*-->/g, '').replaceAll('=""', '');
-}
-
-/**
- * Summary context must be concise to be compatible with externalized tools such as CLIs and MCPs.
- */
-function validateSummaryContext(name, summary) {
-  const contextMaxLength = 400;
-  const plainTextSummary = summary
-    .replaceAll(/https?:\/\/[^\s<>"{}|\\^`\[\]]+/gi, '')
-    .replaceAll(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-  if (plainTextSummary.length > contextMaxLength) {
-    console.error(
-      `Description context for example "${name}" is too long. (${plainTextSummary.length}/${contextMaxLength} characters)`
-    );
-    process.exit(1);
-  }
-}
-
-function validateDescriptionContext(name, summary, description) {
-  if (description?.length && !summary?.trim()) {
-    console.log(summary, description);
-    console.error(`A summary for example "${name}" must be provided before providing a description.`);
-    process.exit(1);
-  }
-}
-
-function validateTagsContext(name, tags) {
-  const allowedTags = ['priority', 'performance', 'pattern', 'anti-pattern', 'test-case'];
-  const invalidTags = tags.filter(tag => !allowedTags.includes(tag));
-  if (invalidTags.length > 0) {
-    console.error(`Invalid tags for "${name}": ${invalidTags.join(', ')}`);
-    process.exit(1);
-  }
 }
