@@ -65,6 +65,7 @@ class I18nDemo extends LitElement {
 customElements.get('i18n-demo') || customElements.define('i18n-demo', I18nDemo);
 
 /**
+ * @summary Internationalization controller with dynamic language switching between English and French.
  * @tags test-case
  */
 export const I18nControllerDemo = {

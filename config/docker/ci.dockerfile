@@ -25,6 +25,9 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
   rm -rf package.json pnpm-lock.yaml node_modules /var/cache/pnpm-store && \
   apt-get -y autoremove --purge && apt-get -y clean
 
+# install vale
+RUN curl -sfL https://github.com/errata-ai/vale/releases/download/v3.13.0/vale_3.13.0_Linux_64-bit.tar.gz | tar xz -C /usr/local/bin vale
+
 # install/setup vault
 RUN curl https://registry.npmjs.org -L -o vault.zip && \
   unzip vault.zip -d /root && \

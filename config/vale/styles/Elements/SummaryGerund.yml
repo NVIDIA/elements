@@ -1,0 +1,7 @@
+extends: existence
+message: "Rewrite to remove filler gerund '%s'. Use a direct clause instead (e.g., 'with X support' or 'for X')."
+level: error
+ignorecase: true
+tokens:
+  - demonstrating
+  - illustrating

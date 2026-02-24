@@ -19,7 +19,9 @@
     "playwright": "wireit",
     "prepare": "wireit",
     "release": "wireit",
-    "commitlint": "commitlint --edit"
+    "commitlint": "commitlint --edit",
+    "lint:vale": "wireit",
+    "lint:vale:sync": "config/vale/bin/vale sync"
   },
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
@@ -48,14 +50,16 @@
     "semantic-release-monorepo": "8.0.2",
     "semantic-release-replace-plugin": "1.2.7",
     "tar": "7.4.3",
+    "unzipper": "0.12.3",
     "wireit": "0.14.12"
   },
   "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
+    "**/*": "prettier --write --ignore-unknown",
+    "**/*.{ts,md}": "pnpm run lint:vale"
   },
   "wireit": {
     "ci": {
-      "script": "pnpm run format",
+      "script": "pnpm run format && pnpm run lint:vale",
       "dependencies": [
         "./projects/create:ci",
         "./projects/elements:ci",
@@ -288,11 +292,14 @@
         "./projects/testing:lint:fix"
       ]
     },
+    "lint:vale": {
+      "command": "config/vale/bin/vale --config .vale.ini projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'"
+    },
     "playwright": {
       "command": "pnpm exec playwright install chromium --with-deps chromium"
     },
     "prepare": {
-      "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs)"
+      "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs) ; node config/vale/install.mjs"
     }
   }
 }
