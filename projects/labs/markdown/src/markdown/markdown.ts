@@ -24,15 +24,15 @@ const CONFIG = {
 } as const;
 
 /**
- * A web component that renders markdown content.
+ * A Web Component that renders markdown content.
  *
  * Supports two input modes:
- * - `source` property: Markdown content that can be set programmatically
+ * - `source` property: Markdown content set programmatically
  * - `<template>` slot: Markdown content inside a template element
  *
  * @element nve-markdown
  * @cssprop --padding - The padding of the component
- * @description A web component that inputs markdown content and renders it as HTML formatted with Elements styles.
+ * @description A Web Component that inputs markdown content and renders it as HTML formatted with Elements styles.
  * @since 0.0.0
  * @entrypoint \@nvidia-elements/markdown/markdown
  * @slot - The slot can contain a template element with markdown content
@@ -49,7 +49,7 @@ export class Markdown extends LitElement {
   static elementDefinitions = {};
 
   /**
-   * Markdown content source that can be set programmatically
+   * Markdown content source, settable programmatically
    */
   @property({ type: String }) source = '';
 
@@ -93,7 +93,7 @@ export class Markdown extends LitElement {
             console.debug('Markdown parsing failed, keeping previous content');
           });
       } else {
-        // Source was cleared, check for slotted content or clear completely
+        // Source cleared, check for slotted content or clear rendered output
         this.renderedHtml = '';
         this.#processSlottedContent();
       }

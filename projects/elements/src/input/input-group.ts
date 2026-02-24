@@ -6,7 +6,7 @@ import styles from './input-group.css?inline';
 
 /**
  * @element nve-input-group
- * @description Visually combines multiple related input controls into a unified composite field with shared styling.
+ * @description Visually combines many related input controls into a unified composite field with shared styling.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/input
  * @cssprop --background

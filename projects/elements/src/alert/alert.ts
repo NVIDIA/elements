@@ -22,11 +22,11 @@ import styles from './alert.css?inline';
  * @description Alert is an element that displays a brief, important message in a way that attracts the user's attention without interrupting the user's task.
  * @since 0.3.0
  * @entrypoint \@nvidia-elements/core/alert
- * @event close - Dispatched when the alert is closed within a alert group.
+ * @event close - Dispatched when the alert closes within an alert group.
  * @command --close - Use to set the alert closed/hidden state.
- * @slot icon - Icon slot is placed on the left side of the alert. Icons are typically used to represent the alert's status.
- * @slot prefix - Prefix slot is placed between the icon and the content. Prefixes are typically used to represent the alert's status.
- * @slot actions - Actions are placed on the right side of the alert. Actions are typically buttons, but can also be links. Actions should be used for actions that the user can take to resolve the alert.
+ * @slot icon - Icon slot renders on the left side of the alert. Icons typically represent the alert's status.
+ * @slot prefix - Prefix slot renders between the icon and the content. Prefixes typically represent the alert's status.
+ * @slot actions - Actions render on the right side of the alert. Actions are typically buttons, but can also be links. Use actions for steps the user can take to resolve the alert.
  * @slot content - Content for large overflow text.
  * @slot - Default content placed inside of the alert.
  * @cssprop --gap
@@ -59,14 +59,14 @@ export class Alert extends LitElement {
   /** Defines visual treatment to represent a ongoing task or support status. */
   @property({ type: String, reflect: true }) status?: SupportStatus | TaskStatus | 'muted';
 
-  /** When used in an `alert-group` the `closable` property enables alerts to be dismissed within the same group. */
+  /** When used in an `alert-group` the `closable` property enables dismissing alerts within the same group. */
   @property({ type: Boolean }) closable = false;
 
   #typeClosableController = new TypeClosableController(this);
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
-  /** Enables internal string values to be updated for internationalization. */
+  /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   @queryAssignedElements({ slot: 'prefix', flatten: true }) private prefixItems!: HTMLElement[];

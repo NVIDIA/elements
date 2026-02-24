@@ -22,7 +22,7 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
   }
 
   get #slottedAnchor() {
-    // return elements that have been nested in a slot
+    // return elements that nest in a slot
     return this.host.shadowRoot
       .querySelector<HTMLSlotElement>('slot, slot[name=anchor]')
       ?.assignedElements()

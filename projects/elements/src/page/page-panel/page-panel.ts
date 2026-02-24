@@ -43,7 +43,7 @@ import globalStyles from './page-panel.global.css?inline';
 @audit()
 export class PagePanel extends LitElement {
   /**
-   * Sets the maximum size of the panel.
+   * Sets the max size of the panel.
    */
   @property({ type: String, reflect: true }) size?: Size;
 
@@ -62,7 +62,7 @@ export class PagePanel extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables updating internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

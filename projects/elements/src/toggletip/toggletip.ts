@@ -21,10 +21,10 @@ import globalStyles from './toggletip.global.css?inline';
  * @description Generic toggletip element for rendering a variety of different interactive content. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.38.0
  * @entrypoint \@nvidia-elements/core/toggletip
- * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
- * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
- * @event open - Dispatched when the toggletip is opened.
- * @event close - Dispatched when the toggletip is closed.
+ * @event beforetoggle - Dispatched on a popover just before showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
+ * @event open - Dispatched when the toggletip opens.
+ * @event close - Dispatched when the toggletip closes.
  * @slot - default slot for toggletip content
  * @cssprop --arrow-transform
  * @cssprop --border
@@ -58,8 +58,8 @@ export class Toggletip extends LitElement {
   };
 
   /**
-   * (optional) By default the popover will automatically anchor itself relative to the trigger element.
-   * A optional custom anchor element can be provided by passing an idref string within the same render root or a HTMLElement DOM reference.
+   * (optional) By default the popover automatically anchors itself relative to the trigger element.
+   * Pass an optional custom anchor element as an idref string within the same render root or a HTMLElement DOM reference.
    */
   @property({ type: String }) anchor: string | HTMLElement;
 
@@ -93,7 +93,7 @@ export class Toggletip extends LitElement {
   @property({ type: Boolean }) closable = false;
 
   /**
-   * Determines if an arrow should be rendered.
+   * Determines if the component renders an arrow.
    */
   @property({ type: Boolean }) arrow = true;
 
@@ -107,7 +107,7 @@ export class Toggletip extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Updates internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

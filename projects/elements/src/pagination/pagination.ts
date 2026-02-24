@@ -58,24 +58,24 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   @property({ type: Number }) items: number;
 
   /**
-   * Whether or not the pagination is skippable to start/end.
+   * Whether the pagination is skippable to start/end.
    */
   @property({ type: Boolean }) skippable: boolean;
 
   /**
-   * Whether or not the step selector is disabled.
+   * Whether the step selector has a disabled state.
    */
   @property({ type: Boolean, attribute: 'disable-step' }) disableStep: boolean;
 
   /**
-   * Determines the container styles of component. Flat is used for nesting within other containers. Inline is used to inline within other inline content.
+   * Determines the container styles of component. Flat applies when nesting within other containers. Inline applies when placing within other inline content.
    */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables updating internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

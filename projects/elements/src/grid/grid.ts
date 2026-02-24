@@ -40,7 +40,7 @@ import globalStyles from './grid.global.css?inline';
 @keyNavigationGrid<Grid>()
 export class Grid extends LitElement implements ContainerElement {
   /**
-   * Determines the container styles of component. Flat is used for nesting the grid within other containers. Full can be used for full edge to edge viewport width grids.
+   * Determines the container styles of component. Flat nests the grid within other containers. Full spans the full edge-to-edge viewport width.
    */
   @property({ type: String, reflect: true }) container?: 'flat' | 'full';
 

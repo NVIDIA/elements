@@ -40,7 +40,7 @@ export const Condensed = {
 };
 
 /**
- * @summary Vertical step layout for sidebar navigation or tall containers. Use when horizontal space is limited or steps require longer labels.
+ * @summary Vertical step layout for sidebar navigation or tall containers. Use when horizontal space constrains layout or steps require longer labels.
  */
 export const VerticalSteps = {
   render: () => html`
@@ -70,7 +70,7 @@ export const VerticalCondensedSteps = {
 };
 
 /**
- * @summary Display-only steps without interactive selection behavior. Use for showing progress indicators where step navigation is controlled externally.
+ * @summary Display-only steps without interactive selection behavior. Use for showing progress indicators where external logic controls step navigation.
  */
 export const StatelessSteps = {
   render: () => html`

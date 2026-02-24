@@ -41,17 +41,17 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 @stateSelected<StepsItem>()
 export class StepsItem extends BaseButton {
   /**
-   * Determines which item is selected, defaults to false.
+   * Determines which item the user selects, defaults to false.
    */
   @property({ type: Boolean, reflect: true }) selected = false;
 
   /**
-   * There are four visual treatments that represent the `status` of varius tasks. When `status` is set to `warning`, `success` or `danger`, appropriate icons are embedded.
+   * Four visual treatments represent the `status` of tasks. When `status` has a value of `warning`, `success`, or `danger`, the component embeds appropriate icons.
    */
   @property({ type: String, reflect: true }) status?: 'accent' | 'danger' | 'success' | 'pending';
 
   /**
-   * Determines whether or not the steps should display in condensed format with no text labels.
+   * Determines whether the steps should display in condensed format with no text labels.
    */
   @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
 
@@ -109,17 +109,17 @@ export class StepsItem extends BaseButton {
 @keyNavigationList<Steps>()
 export class Steps extends LitElement {
   /**
-   * Determines whether or not the steps should display in a vertical layout vs. defaulting to horizontal.
+   * Determines whether the steps should display in a vertical layout vs. defaulting to horizontal.
    */
   @property({ type: Boolean, reflect: true }) vertical = false;
 
   /**
-   * Determines whether or not the steps should display in condensed format with no text labels.
+   * Determines whether the steps should display in condensed format with no text labels.
    */
   @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
 
   /**
-   * Determines whether or not the steps should handle selection behavior vs. defaults to off.
+   * Determines whether the steps should handle selection behavior vs. defaults to off.
    */
   @property({ type: Boolean, attribute: 'behavior-select' }) behaviorSelect = false;
 

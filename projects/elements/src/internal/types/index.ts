@@ -34,11 +34,11 @@ export type Color =
 export type Size = 'sm' | 'md' | 'lg';
 
 /** Controls the visual scale of an element to match its importance and available space.
- * - `xs` - Extra small size for very small elements or very dense layouts.
+ * - `xs` - Extra small size for minimal elements or highly dense layouts.
  * - `sm` - Compact size for dense layouts or secondary elements with less visual prominence.
  * - `md` - Standard size that works well in most contexts and provides balanced visibility.
  * - `lg` - Larger size for emphasizing important elements or improving touch targets in spacious layouts.
- * - `xl` - Extra extra large size for very large elements or very sparse layouts.
+ * - `xl` - Extra large size for emphasizing elements or sparse layouts.
  */
 export type SizeExpanded = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -51,10 +51,10 @@ export type Prominence = 'emphasis' | 'muted';
 /**
  * Determines the container bounds of the element
  * - `flat` Element has white space bounds but reduced visual container.
- * - `inline` Element container is reduced to fit within inline content such as a block of text.
- * - `inset` Element container is optimized for embedding or being inset inside another containing element.
- * - `full` Element container is optimized for filling its container bounds.
- * - `condensed` Element container is optimized for small, summarized or contained spaces.
+ * - `inline` Element container reduces to fit within inline content such as a block of text.
+ * - `inset` Element container optimizes for embedding or inset placement inside another containing element.
+ * - `full` Element container optimizes for filling its container bounds.
+ * - `condensed` Element container optimizes for small, summarized or contained spaces.
  */
 export type Container = 'inline' | 'flat' | 'inset' | 'full' | 'condensed';
 
@@ -70,16 +70,16 @@ export type SupportStatus = 'accent' | 'warning' | 'success' | 'danger';
 export type Orientation = 'vertical' | 'horizontal';
 
 /** Communicates the current state of a task or process to keep users informed of progress and outcomes.
- * - `scheduled` - Task has been scheduled for future execution at a specific time.
+ * - `scheduled` - Task has a scheduled future execution at a specific time.
  * - `queued` - Task is waiting in line to begin after other tasks complete.
  * - `pending` - Task is awaiting approval, user input, or external conditions before proceeding.
  * - `starting` - Task is initializing and preparing to begin active execution.
  * - `running` - Task is actively executing and making progress.
- * - `restarting` - Task is being restarted after an interruption or reset.
+ * - `restarting` - Task restarts after an interruption or reset.
  * - `stopping` - Task is gracefully shutting down and completing cleanup operations.
  * - `finished` - Task has completed successfully with the expected outcome.
  * - `failed` - Task encountered an error and did not complete as intended.
- * - `unknown` - Task status cannot be determined or is unavailable.
+ * - `unknown` - Task status remains unknown or unavailable.
  * - `ignored` - Task was intentionally skipped or excluded from execution.
  */
 export type TaskStatus =
@@ -127,7 +127,7 @@ export type PopoverSides = 'top' | 'bottom' | 'left' | 'right';
  */
 export type PopoverPosition = 'center' | 'top' | 'bottom' | 'left' | 'right';
 
-/** Determines the overall position of an element relative to its anchor */
+/** Determines the position of an element relative to its anchor */
 export type Placement = PopoverPosition | `${PopoverSides}-${PopoverAlign}`;
 
 /** Controls the directional arrangement and spacing behavior of the element's content.
@@ -146,55 +146,55 @@ export type Current = 'page' | 'step';
 
 export interface NveElement {
   /**
-   * This Boolean attribute prevents the user from interacting with the element: it cannot be pressed or focused. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled)
-   * - `true` - The element is disabled and cannot be interacted with.
-   * - `false` - The element is enabled and can be interacted with.
+   * This Boolean attribute prevents the user from interacting with the element: it cannot receive press or focus events. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-disabled)
+   * - `true` - The element has a disabled state and does not accept interaction.
+   * - `false` - The element has an enabled state and accepts interaction.
    */
   disabled?: boolean;
 
-  /** Indicates whether the element is currently being actively engaged through user interaction. [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/:active)
-   * - `true` - Element is being pressed or activated by the user (mousedown, keydown, or touch).
-   * - `false` - Element is not currently being actively engaged by the user.
+  /** Indicates whether the element is currently actively engaged through user interaction. [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/:active)
+   * - `true` - The user is pressing or activating the element (mousedown, keydown, or touch).
+   * - `false` - No active user engagement on the element.
    */
   active?: boolean;
 
   /** Indicates whether collapsible content is currently visible or hidden from the user. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded)
-   * - `true` - The associated content is expanded and visible to the user.
-   * - `false` - The associated content is collapsed and hidden from the user.
+   * - `true` - The associated content expands and becomes visible to the user.
+   * - `false` - The associated content collapses and hides from the user.
    */
   expanded?: boolean;
 
-  /** Indicates the current state of a toggle button that can be switched on or off. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed)
+  /** Indicates the current state of a toggle button that switches on or off. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed)
    * - `true` - The button is in the pressed (on) state and the associated action or setting is active.
    * - `false` - The button is in the unpressed (off) state and the associated action or setting is inactive.
    */
   pressed?: boolean;
 
-  /** Indicates whether an element is currently chosen within a multi-option selection group. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected)
-   * - `true` - The element is selected and represents the user's current choice within the group.
-   * - `false` - The element is not selected and is available to be chosen by the user.
+  /** Indicates whether an element currently holds selection within a multi-option selection group. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected)
+   * - `true` - The element holds selection and represents the user's current choice within the group.
+   * - `false` - The element does not hold selection and the user can choose it.
    */
   selected?: boolean;
 
-  /** Indicates whether the element's value can be modified by the user while remaining visible and focusable. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly)
-   * - `true` - The element is readonly and its value cannot be changed, but can still be focused and copied.
-   * - `false` - The element is editable and the user can modify its value through interaction.
+  /** Indicates whether the user can change the element's value while it remains visible and focusable. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly)
+   * - `true` - The element has a readonly state: the user cannot change its value, but can still focus and copy it.
+   * - `false` - The element allows editing and the user can change its value through interaction.
    */
   readonly?: boolean;
 
-  /** Defines the value associated with the element's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value) */
+  /** Defines the value associated with the element's name when submitting the form data. The server receives this value in params when the form submits through this button. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value) */
   value?: string;
 
   /** The name of the element, submitted as a pair with the element value as part of the form data. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name) */
   name?: string;
 
-  /** Indicates whether the element can be dismissed or closed by the user.
-   * - `true` - The element displays a close control and can be dismissed by the user.
-   * - `false` - The element cannot be closed by the user and requires programmatic dismissal.
+  /** Indicates whether the user can dismiss or close the element.
+   * - `true` - The element displays a close control and the user can dismiss it.
+   * - `false` - The user cannot close the element and must dismiss it programmatically.
    */
   closable?: boolean;
 
-  /** Enables internal string values to be updated for internationalization. */
+  /** Enables updating internal string values for internationalization. */
   i18n?: Partial<I18nStrings & { __set: boolean }>;
 
   /** Indicates the element that represents the user's current location or position within a set. [MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-current)
@@ -226,8 +226,8 @@ export interface NveElement {
   layout?: 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
 
   /** Controls the directional flow of the element's layout and interaction pattern.
-   * - `vertical` - Element is oriented vertically with top-to-bottom flow.
-   * - `horizontal` - Element is oriented horizontally with left-to-right flow.
+   * - `vertical` - Element orients vertically with top-to-bottom flow.
+   * - `horizontal` - Element orients horizontally with left-to-right flow.
    */
   orientation?: 'vertical' | 'horizontal';
 
@@ -237,9 +237,9 @@ export interface NveElement {
    */
   prominence?: 'emphasis' | 'muted';
 
-  /** The Interaction type provides a way to indicate the intent of an interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors.
-   * - `emphasis` Indicates the interaction is intended to be used for emphasis or highlighting primary actions.
-   * - `destructive` Indicates the interaction is intended to be used for destructive actions such as deleting or removing.
+  /** The Interaction type provides a way to show the intent of an interactive element. This can help users quickly understand what each interaction does and reduce the potential for confusion or errors.
+   * - `emphasis` Shows the interaction targets emphasis or highlighting primary actions.
+   * - `destructive` Shows the interaction targets destructive actions such as deleting or removing.
    */
   interaction?: 'emphasis' | 'destructive';
 
@@ -284,11 +284,11 @@ export interface NveElement {
   size?: 'sm' | 'md' | 'lg';
 
   /**
-   * Demonstrates different container styles to accommodate various visual weight and context.
+   * Demonstrates different container styles to accommodate visual weight and context.
    * - `flat` Element has white space bounds but reduced visual container.
-   * - `inline` Element container is reduced to fit within inline content such as a block of text.
-   * - `inset` Element container is optimized for embedding or being inset inside another containing element.
-   * - `full` Element container is optimized for filling its container bounds.
+   * - `inline` Element container reduces to fit within inline content such as a block of text.
+   * - `inset` Element container optimizes for embedding or inset placement inside another containing element.
+   * - `full` Element container optimizes for filling its container bounds.
    */
   container?: 'inline' | 'flat' | 'inset' | 'full';
 
@@ -343,7 +343,7 @@ export interface NveElement {
    */
   openDelay?: number;
 
-  /** @private A instance of `ElementInternals` that is set dynamically by the applied decorators/controllers */
+  /** @private An instance of `ElementInternals` that decorators/controllers set dynamically */
   _internals: ElementInternals;
 
   render: TemplateResult;
@@ -360,18 +360,18 @@ export interface NveElement {
  */
 export type SlotName = 'default' | 'prefix' | 'suffix' | 'header' | 'footer' | 'actions' | 'icon';
 
-/** @deprecated Determines the interaction type of a flat container element. */
+/** @deprecated Determines the flat container element interaction. */
 export type FlatInteraction = 'flat' | 'flat-emphasize' | `${'flat'}-${Interaction}`;
 
-/** @deprecated Determines if an element is rendered with an inverse contrast. */
+/** @deprecated Determines if an element renders with an inverse contrast. */
 export type Inverse = 'inverse';
 
 /** @deprecated Determines the trend status of an element. Should convey the trend of a metric. */
 export type TrendStatus = 'trend-down' | 'trend-up' | 'trend-neutral';
 
-/** The Interaction type provides a way to indicate the intent of an interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors.
- * - `emphasis` Indicates the interaction is intended to be used for emphasis or highlighting primary actions.
- * - `destructive` Indicates the interaction is intended to be used for destructive actions such as deleting or removing.
+/** The Interaction type provides a way to show the intent of an interactive element. This can help users quickly understand what each interaction does and reduce the potential for confusion or errors.
+ * - `emphasis` Shows the interaction targets emphasis or highlighting primary actions.
+ * - `destructive` Shows the interaction targets destructive actions such as deleting or removing.
  */
 export type Interaction = 'emphasis' | 'destructive';
 

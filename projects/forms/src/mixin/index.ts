@@ -41,13 +41,13 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
       return this.getAttribute('disabled') !== null;
     }
 
-    // unknown is used to force generation of get/set in type defs see https://github.com/microsoft/TypeScript/issues/58790
+    // unknown forces generation of get/set in type defs see https://github.com/microsoft/TypeScript/issues/58790
     set disabled(value: boolean | unknown) {
       this.toggleAttribute('disabled', value as boolean);
       this.#requestUpdate();
     }
 
-    /** determine if component value is required */
+    /** determine if the component value requires input */
     get required(): boolean {
       return this.getAttribute('required') !== null;
     }
@@ -109,7 +109,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
       return this.#internals.form;
     }
 
-    /** determine if component will validate */
+    /** determine if the component is a candidate for constraint checking */
     get willValidate() {
       return this.#internals.willValidate;
     }
@@ -175,7 +175,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
 
       this.tabIndex = 0;
       this.#updateFormState();
-      // 'input' event is composed but not 'change' https://github.com/whatwg/html/issues/5453
+      // 'input' event composes but 'change' does not https://github.com/whatwg/html/issues/5453
       this.shadowRoot?.addEventListener('input', e => e.stopPropagation());
       this.shadowRoot?.addEventListener('change', e => e.stopPropagation());
     }

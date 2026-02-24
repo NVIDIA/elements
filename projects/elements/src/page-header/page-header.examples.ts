@@ -15,7 +15,7 @@ export default {
 };
 
 /**
- * @summary Basic page header with logo, navigation links, and user actions demonstrating standard layout structure.
+ * @summary Basic page header with logo, navigation links, and user actions in a standard layout structure.
  */
 export const Default = {
   render: () => {
@@ -35,7 +35,7 @@ export const Default = {
 };
 
 /**
- * @summary Use dropdowns and menus to allow progressive disclosure of additional navigation or global user actions.
+ * @summary Use dropdowns and menus to allow progressive disclosure of extra navigation or global user actions.
  */
 export const DropdownMenu = {
   render: () => {

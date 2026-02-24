@@ -6,7 +6,7 @@ export default {
 };
 
 /**
- * @summary Demonstrates the foundational layout types available via the nve-layout attribute.
+ * @summary Foundational layout types (row, column, grid) available via the nve-layout attribute.
  * @tags priority
  */
 export const Default = {
@@ -31,7 +31,7 @@ export const Default = {
 }
 
 /**
- * @summary Demonstrates the gap spacing available via the nve-layout attribute.
+ * @summary Gap spacing options (xs through xl) available via the nve-layout attribute.
  * @tags priority
  */
 export const LayoutGap = {

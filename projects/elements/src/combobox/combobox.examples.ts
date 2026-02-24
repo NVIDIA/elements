@@ -210,7 +210,7 @@ export const Select = () => {
 };
 
 /**
- * @summary Multi select allows users to select multiple options from a
+ * @summary Multi select allows users to select many options from a
  * predefined list. The select `value` will only reflect the first selected value.
  * To get all selected options check the `selected` property on each `<option>`
  * or the select property [selectedOptions](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions).
@@ -236,8 +236,8 @@ export const MultiSelect = () => {
 };
 
 /**
- * @summary The default behavior of a native select element is to select the first option if no default `selected` option is provided.
- * If an empty initial value is desired, provide a empty value option that is disabled and selected.
+ * @summary The default behavior of a native select element selects the first option if no default `selected` option exists.
+ * For an empty initial value, provide an empty value option that has the disabled and selected attributes.
  */
 export const EmptyDefault = () => {
   return html`
@@ -260,8 +260,8 @@ export const EmptyDefault = () => {
 
 /**
  * @summary Options by default provide a value for the user input.
- * An optional label can be provided. If an option label is provided, the label
- * will be displayed to the user rather than the value. When using labels the
+ * An optional label can appear with each option. If an option label exists, the label
+ * displays to the user rather than the value. When using labels the
  * text input value will be the option label rather than the option value.
  * The select input will continue to use option value.
  */
@@ -305,7 +305,7 @@ export const LabelMultiSelect = () => {
 };
 
 /**
- * @summary If the multiple tags overflow the parent container a simple text label will be shown instead.
+ * @summary Overflow behavior where many tags collapse into a simple text label when the parent container is too narrow.
  * @tags test-case
  */
 export const Overflow = () => {
@@ -327,7 +327,7 @@ export const Overflow = () => {
 };
 
 /**
- * @summary Demonstrates how long option text is handled in constrained width containers.
+ * @summary Combobox handling of long option text in constrained width containers.
  * @tags test-case
  */
 export const PopoverOverflow = () => {
@@ -377,7 +377,7 @@ export const Reset = () => {
 };
 
 /**
- * @summary Multi-select with footer action button for additional operations on selected items.
+ * @summary Multi-select with footer action button for extra operations on selected items.
  */
 export const Footer = () => {
   return html`
@@ -549,7 +549,7 @@ export const Form = () => {
 
 /* eslint-disable @nvidia-elements/lint/no-missing-slotted-elements */
 /**
- * @summary Performance test with 1000 options to demonstrate filtering efficiency with large datasets.
+ * @summary Performance test with 1000 options to show filtering efficiency with large datasets.
  * @tags test-case performance
  */
 export const Performance = () => {
@@ -571,7 +571,7 @@ export const Performance = () => {
 
 /* eslint-disable @nvidia-elements/lint/no-missing-slotted-elements */
 /**
- * @summary Performance test with 1000 options to demonstrate filtering efficiency with large datasets.
+ * @summary Performance test with 1000 options to show filtering efficiency with large datasets.
  * @tags test-case performance
  */
 export const PerformanceSelect = () => {

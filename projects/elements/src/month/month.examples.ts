@@ -8,7 +8,7 @@ export default {
 };
 
 /**
- * @summary Basic month picker with label and validation message. Use for selecting a month and year in forms, such as expiration dates or report periods.
+ * @summary Basic month picker with label and validation message. Use for selecting a month and year in forms, such as expiry dates or report periods.
  */
 export const Default = {
   render: () => html`

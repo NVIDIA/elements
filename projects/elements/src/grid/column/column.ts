@@ -25,15 +25,15 @@ import styles from './column.css?inline';
  */
 export class GridColumn extends LitElement {
   /**
-   * Only set a fixed px width when the grid width is known. Most cases this should remain unset.
-   * If the total width of all columns is less than the grid width then the last column will fill the remaining space.
+   * Only set a fixed px width when you know the grid width. Most cases this should remain unset.
+   * If the total width of all columns is less than the grid width then the last column fills the remaining space.
    * By default column widths are evenly divided unless width is explicitly provided.
    */
   @property({ type: String, reflect: true }) width: string;
 
   /**
-   * The `position` property or attribute can be set to `fixed` or `sticky` to make the column fixed or sticky.
-   * Fixed columns will not scroll horizontally with the grid. Sticky columns will scroll horizontally with the grid
+   * Set the `position` property or attribute to `fixed` or `sticky` to make the column fixed or sticky.
+   * Fixed columns do not scroll horizontally with the grid. Sticky columns scroll horizontally with the grid
    * until the column reaches the edge of the grid.
    */
   @property({ type: String, reflect: true }) position: 'fixed' | 'sticky' | '';

@@ -47,7 +47,7 @@ export const SearchFilterToolbar = {
 };
 
 /**
- * @summary Toolbar with multiple filter chips and date inputs demonstrating horizontal scrolling behavior when content overflows.
+ * @summary Toolbar with many filter chips and date inputs showing horizontal scrolling behavior when content overflows.
  * @tags pattern test-case
  */
 export const SearchFilterToolbarScroll = {

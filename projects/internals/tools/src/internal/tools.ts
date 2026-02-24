@@ -29,7 +29,7 @@ export interface Schema {
   additionalProperties?: boolean;
   items?: Schema;
   required?: string[];
-  service?: boolean; // if the tool is a long running process, it should be marked as true
+  service?: boolean; // set to true if the tool runs a long-running process
 }
 
 export type ManagedToolMethod<T> = {

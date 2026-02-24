@@ -17,13 +17,13 @@ import styles from './dialog.css?inline';
 
 /**
  * @element nve-dialog
- * @description Dialog is a component that appears above main content. A modal dialog is used to display critical information that requires users attention that interrupts user flow. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
+ * @description Dialog is a component that appears above main content. A modal dialog displays critical information that requires user attention and interrupts user flow. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/dialog
- * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
- * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
- * @event open - Dispatched when the dialog is opened.
- * @event close - Dispatched when the dialog is closed.
+ * @event beforetoggle - Dispatched on a popover just before showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
+ * @event open - Dispatched when the dialog opens.
+ * @event close - Dispatched when the dialog closes.
  * @slot - default content slot
  * @cssprop --border
  * @cssprop --border-radius
@@ -55,13 +55,13 @@ export class Dialog extends LitElement {
   @property({ type: String, reflect: true }) alignment: PopoverAlign = 'center';
 
   /**
-   * Sets the maximum size of the dialog.
+   * Sets the max size of the dialog.
    */
   @property({ type: String, reflect: true }) size?: Size;
 
   /**
    * Determines if a close button should render within dialog. Non-closable
-   * dialogs can be used for dialogs that require user confirmation steps.
+   * dialogs suit dialogs that require user confirmation steps.
    */
   @property({ type: Boolean }) closable: boolean;
 
@@ -72,7 +72,7 @@ export class Dialog extends LitElement {
 
   /**
    * (optional) By default the popover will automatically anchor itself relative to the trigger element.
-   * A optional custom anchor element can be provided by passing an idref string within the same render root or a HTMLElement DOM reference.
+   * Pass an optional custom anchor element as an idref string within the same render root or a HTMLElement DOM reference.
    */
   @property({ type: String }) anchor: string | HTMLElement = globalThis.document?.body;
 
@@ -92,7 +92,7 @@ export class Dialog extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables internal string values to update for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

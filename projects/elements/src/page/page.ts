@@ -13,10 +13,10 @@ import styles from './page.css?inline';
  * @slot subheader - A secondary section below the header, often used for breadcrumbs, filters, or other contextual information.
  * @slot left-aside - A narrow section on the left side of the page, commonly used for navigation, filters, or other secondary content.
  * @slot left - The main content area on the left side of the page, typically containing primary navigation or features.
- * @slot bottom - A section for additional tooling outputs such as console outputs.
+ * @slot bottom - A section for extra tooling outputs such as console outputs.
  * @slot right - The main content area on the right side of the page, typically containing secondary navigation or features.
  * @slot right-aside - A narrow section on the right side of the page, commonly used for navigation, filters, or other secondary content.
- * @slot subfooter - A secondary section below the main content area, often used for additional information or calls to action.
+ * @slot subfooter - A secondary section below the main content area, often used for more information or calls to action.
  * @slot footer - The bottommost section of the page, typically containing global elements, such as copyright information.
  * @cssprop --padding
  * @cssprop --background

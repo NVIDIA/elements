@@ -92,7 +92,7 @@ export class CardHeader extends LitElement {
  * @description Contains the primary body content of a card, providing a structured region for the main information or media.
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/card
- * @slot - This is a default/unnamed slot for card content content
+ * @slot - This is a default/unnamed slot for card content
  * @cssprop --padding
  * @aria https://github.com/w3c/aria-practices/issues
  */

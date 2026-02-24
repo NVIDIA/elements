@@ -7,7 +7,7 @@ export default {
 };
 
 /**
- * @summary Basic skeleton component for text content. Shows placeholder lines while content loads.
+ * @summary Basic skeleton component for text content. Placeholder lines appear while content loads.
  */
 export const Default = {
   render: () => html`
@@ -19,7 +19,7 @@ export const Default = {
 };
 
 /**
- * @summary Effects that can be applied to the skeleton.
+ * @summary Effects available for the skeleton.
  */
 export const Effect = {
   render: () => html`
@@ -31,7 +31,7 @@ export const Effect = {
 }
 
 /**
- * @summary Shapes that can be applied to the skeleton.
+ * @summary Shapes available for the skeleton.
  */
 export const Shape = {
   render: () => html`

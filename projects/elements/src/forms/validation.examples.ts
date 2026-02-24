@@ -208,7 +208,7 @@ export class AppLogin extends LitElement {
 }
 
 /**
- * @summary Forms can be used with LitElement
+ * @summary Forms work with LitElement
  * @tags test-case
  */
 export const LitForms = {

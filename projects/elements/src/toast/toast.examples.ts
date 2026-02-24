@@ -24,7 +24,7 @@ export const Default = {
 };
 
 /**
- * @summary Visual example of toast structure with anchor positioning. Demonstrates standard toast appearance and placement for consistent implementation patterns across your application.
+ * @summary Visual example of toast structure with anchor positioning for consistent implementation patterns across your application.
  * @tags test-case
  */
 export const Visual = {
@@ -78,7 +78,7 @@ export const Actions = {
 };
 
 /**
- * @summary Demonstrates event handling for toast events. Useful for adding custom behavior when toast state changes.
+ * @summary Event handling for toast lifecycle events. Useful for adding custom behavior when toast state changes.
  */
 export const Events = {
   render: () => html`
@@ -147,7 +147,7 @@ export const LegacyBehaviorTrigger = {
 };
 
 /**
- * @summary Toast functionality within shadow DOM for web component architectures. Demonstrates proper toast positioning and behavior in encapsulated component environments, essential for component library implementations.
+ * @summary Toast functionality within shadow DOM for Web Component architectures. Proper toast positioning and behavior in encapsulated component environments, essential for component library implementations.
  * @tags test-case
  */
 export const ShadowRoot = {
