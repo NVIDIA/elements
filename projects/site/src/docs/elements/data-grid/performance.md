@@ -10,7 +10,7 @@
 
 ## Approach
 
-The grid leverages several approaches to maximize render performance including [CSS Contain](https://developer.mozilla.org/en-US/docs/Web/CSS/contain) and [Element Internal States](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states) Performance is tied to the type of elements rendered within the grid its self. Average performance of 1000 rows and 4000 cells is around 250-300ms in a typical application. Additional elements within cells will add the the overall render time. Use pagination or batch rendering to improve overall initial render performance.
+The grid leverages two approaches to maximize render performance including [CSS Contain](https://developer.mozilla.org/en-US/docs/Web/CSS/contain) and [Element Internal States](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states) Performance depends on the elements rendered within the grid itself. Average performance of 1000 rows and 4000 cells is around 250–300 ms in a typical application. Extra elements within cells add to the total render time. Use pagination or batch rendering to improve total initial render performance.
 
 ## Best Practices
 
@@ -18,7 +18,7 @@ The grid leverages several approaches to maximize render performance including [
 
 ## Infinite Scroll
 
-Batch rendering allows rows to dynamically be added for improved performance. The grid will dispatch a `scrollboxend` event when the user has scrolled to the end of the current scroll box. When the event occurs additional rows can be appended.
+Batch rendering allows you to dynamically add rows for improved performance. The grid dispatches a `scrollboxend` event when the user has scrolled to the end of the current scroll box. When the event occurs you can append more rows.
 
 <!-- todo {% example '@nvidia-elements/core/grid/grid.examples.json' 'PerformanceInfiniteScroll' %} -->
 
@@ -51,10 +51,10 @@ class BatchRenderDemo extends LitElement {
 
 ## Virtual Scroll
 
-Virtual Scroll can be achieved using a virtual scroll package such as [@lit-labs/virtualizer](https://www.npmjs.com/package/@lit-labs/virtualizer) or [@angular/cdk](https://material.angular.io/cdk/scrolling/overview). When using a virtual scroll container apply the `scroller` attribute for the grid to know the assigned scrolling container.
+You can add Virtual Scroll using a virtual scroll package such as [@lit-labs/virtualizer](https://www.npmjs.com/package/@lit-labs/virtualizer) or [@angular/cdk](https://material.angular.io/cdk/scrolling/overview). When using a virtual scroll container apply the `scroller` attribute for the grid to know the assigned scrolling container.
 
 <nve-alert status="warning">
-  Warning: Using advanced features may be unavailable such as keyboard navigation shortcuts. Be aware of <a nve-text="link" href="https://adrianroselli.com/2014/05/so-you-think-you-built-good-infinite.html">accessibility risks</a>.
+  Warning: using advanced features may be unavailable such as keyboard navigation shortcuts. Be aware of <a nve-text="link" href="https://adrianroselli.com/2014/05/so-you-think-you-built-good-infinite.html">accessibility risks</a>.
 </nve-alert>
 
 <!-- todo {% example '@nvidia-elements/core/grid/grid.examples.json' 'PerformanceVirtualScroll' %} -->

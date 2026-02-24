@@ -38,7 +38,7 @@ CSS Grid provides two-dimensional control over both rows and columns. The Elemen
 
 Grid layout creates structured, magazine-style layouts where precise placement and alignment matter. Unlike flexbox which is primarily one-dimensional, grid provides control over both dimensions simultaneously.
 
-The Elements grid system is based on a **12-column layout**, a standard approach that provides flexibility for common design patterns.
+The Elements grid system uses a **12-column layout**, a standard approach that provides flexibility for common design patterns.
 
 ## When to Use Grid
 
@@ -53,7 +53,7 @@ Choose grid layout when you need:
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      <strong>Grid vs Flexbox:</strong> Use grid when you need to control both rows <em>and</em> columns. Use flexbox for one-dimensional layouts (either row <em>or</em> column). Both systems can be combined – use grid for overall page structure and flexbox for component internals.
+      <strong>Grid vs Flexbox:</strong> use grid when you need to control both rows <em>and</em> columns. Use flexbox for one-dimensional layouts (either row <em>or</em> column). You can combine both systems—use grid for page structure and flexbox for component internals.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -96,7 +96,7 @@ The 12-column system offers these common patterns:
 
 ## Grid Alignment
 
-Similar to flexbox layouts, grid supports comprehensive alignment options that control how items are positioned within the grid container:
+Like flexbox layouts, grid supports comprehensive alignment options that control how items position themselves within the grid container:
 
 - `align:left`
 - `align:right`
@@ -140,7 +140,7 @@ Use `span-items` on the grid container when:
 - **Gallery grids**: Photo galleries, card grids, or product listings
 - **Predictable patterns**: Dashboard widgets, metric cards, or feature boxes
 - **Simplified markup**: You want cleaner HTML without span attributes on each child
-- **Dynamic content**: When items are generated dynamically and should maintain consistent sizing
+- **Dynamic content**: When the system generates items dynamically and they should maintain consistent sizing
 
 ```html
 <!-- All children automatically span 4 columns (3 per row) -->
@@ -174,7 +174,7 @@ Use individual `span` attributes on grid items when:
 
 ### Combining Both Approaches
 
-You can mix both approaches for maximum flexibility. Items with explicit `span` values will override the parent's `span-items` setting:
+You can mix both approaches for the most flexibility. Items with explicit `span` values override the parent's `span-items` setting:
 
 ```html
 <!-- Most items span 4 columns, but some override -->
@@ -317,13 +317,13 @@ You can mix both approaches for maximum flexibility. Items with explicit `span` 
 1. **Start with 12 columns**: This provides flexibility for responsive design patterns
 2. **Use semantic HTML**: Apply grid to meaningful containers like `<main>`, `<section>`, `<nav>`
 3. **Consistent gaps**: Use standard gap spacing throughout your layout
-4. **Plan for responsiveness**: Consider how your grid will adapt on smaller screens
+4. **Plan for responsiveness**: Consider how your grid adapts on smaller screens
 5. **Combine with flexbox**: Use grid for layout structure, flexbox for component details
 
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      <strong>Browser Support:</strong> CSS Grid is supported in all modern browsers. For older browser support, ensure you have appropriate fallbacks or polyfills in place.
+      <strong>Browser Support:</strong> all modern browsers support CSS Grid. For older browser support, ensure you have appropriate fallbacks or polyfills in place.
     </div>
   </nve-alert>
 </nve-alert-group>

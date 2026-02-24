@@ -12,7 +12,7 @@
 
 ## All Icons
 
-The Iconography system is based on exposing an SVG based icon library to a the `nve-icon` element.
+The Iconography system exposes an SVG based icon library to the `nve-icon` element.
 
 See the searchable [Interactive Icon Catalog](./docs/foundations/iconography/)
 

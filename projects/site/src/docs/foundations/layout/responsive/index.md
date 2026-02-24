@@ -14,9 +14,9 @@
 
 # {{title}}
 
-Fluid page layouts can be achieved through the [abstracted CSS flexbox and grid APIs](docs/foundations/layout/), allowing pages built with `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
+You can create fluid page layouts through the [abstracted CSS flexbox and grid APIs](docs/foundations/layout/), allowing pages built with `nve-layout` attributes to automatically grow and shrink with the browser viewport width.
 
-However, the layout system can be extended with true responsive capabilities using two different approaches: **Container Queries** and **Viewport Queries**.
+But you can extend the layout system with true responsive capabilities using two different approaches, **Container Queries** and **Viewport Queries**.
 
 ## Installation
 
@@ -108,7 +108,7 @@ Viewport queries respond to the **browser window width**, providing traditional 
 - **Familiar**: Traditional responsive design approach developers know
 - **Global consistency**: All elements respond to the same viewport breakpoints
 - **Broad support**: Works in all modern browsers
-- **Page-level control**: Ideal for overall page layout decisions
+- **Page-level control**: Ideal for page layout decisions
 
 **Cons:**
 
@@ -131,7 +131,7 @@ Example: `<nve-button nve-display="&sm|hide">` - Button hides when its container
 
 **Use Viewport Queries (`@`) when:**
 
-- Designing overall page layouts
+- Designing page layouts
 - All instances should respond to viewport
 - Navigation bars, page headers, global layout
 - Traditional responsive design
@@ -140,7 +140,7 @@ Example: `<nav nve-display="@lg|hide">` - Navigation hides on large screens
 
 ### Combining Both Systems
 
-You can use both systems together for maximum flexibility:
+You can use both systems together for the most flexibility:
 
 {% example '@nvidia-elements/styles/responsive.examples.json', 'ResponsiveCombined', '{ "inline": false, "resizable": true, "height": "650px" }' %}
 
@@ -216,7 +216,7 @@ Hiding and showing elements uses the `nve-display` attribute instead of `nve-lay
 
 The responsive system uses two distinct attributes:
 
-- **`nve-layout`**: Controls layout properties that affect how children are arranged (gap, padding, flex direction, grid structure)
+- **`nve-layout`**: Controls layout properties that affect how the parent arranges children (gap, padding, flex direction, grid structure)
 - **`nve-display`**: Controls visibility of individual elements (hide/show)
 
-This separation exists because hiding an element only affects its own display, not the layout of its children. By using `nve-display` for visibility control, we maintain a clear distinction between layout utilities that affect child arrangement and display utilities that affect element visibility.
+This separation exists because hiding an element only affects its own display, not the layout of its children. By using `nve-display` for visibility control, the system maintains a clear distinction between layout utilities that affect child arrangement and display utilities that affect element visibility.

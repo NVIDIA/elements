@@ -7,13 +7,13 @@
 
 # {{ title }}
 
-The following are the active deprecations. These deprecations will be removed in the next major release. Read more about our <a nve-text="link mkd" href="docs/about/support/#versioning">versioning and deprecation cycle policy</a>.
+The following are the active deprecations. The next major release removes these deprecations. Read more about the <a nve-text="link mkd" href="docs/about/support/#versioning">versioning and deprecation cycle policy</a>.
 
 ## MLV/NVE Scope <nve-badge status="warning">1.0 deprecation</nve-badge>
 
-These steps are not required to initially migrate and use 1.0. If migrating from 0.x to 1.x please see our [migration guide](docs/about/migration/).
+These steps are not required to initially migrate and use 1.0. If migrating from 0.x to 1.x please see the [migration guide](docs/about/migration/).
 
-With the release of 1.0 the scope and namespace for Element APIs are now prefixed nve. All prior mlv prefixes are deprecated. The CSS bundle is now divided into smaller independent bundles. This allows you to choose only what utilities and themes are needed for your application, improving overall application performance.
+With the release of 1.0 the scope and namespace for Element APIs now use the nve prefix. All prior mlv prefixes no longer apply. The CSS bundle now divides into smaller independent bundles. This allows you to choose only the utilities and themes your application needs, improving application performance.
 
 ```css
 /* before */
@@ -87,7 +87,7 @@ Update HTML elements
 
 ## Alert Banner <nve-badge status="warning">1.0 deprecation</nve-badge>
 
-The alert banner component is deprecated. Use `nve-alert-group` with the `prominence="emphasis"` option.
+The alert banner component no longer exists. Use `nve-alert-group` with the `prominence="emphasis"` option.
 
 <nve-alert status="danger">Before:</nve-alert>
 
@@ -111,7 +111,7 @@ The alert banner component is deprecated. Use `nve-alert-group` with the `promin
 
 ## Popover Behavior Triggers <nve-badge status="warning">1.0 deprecation</nve-badge>
 
-Prior to native HTML popovers popovers required `behaviorTrigger` or `behavior-trigger` to be used for stateful popovers. This is replaced with the native [HTML popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API).
+Before native HTML popovers, popovers required `behaviorTrigger` or `behavior-trigger` for stateful popovers. The native [HTML popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) replaces this approach.
 
 <nve-alert status="danger">Before:</nve-alert>
 
@@ -129,11 +129,11 @@ Prior to native HTML popovers popovers required `behaviorTrigger` or `behavior-t
 
 ## JSON Viewer <nve-badge status="warning">1.0 deprecation</nve-badge>
 
-The JSON viewer element is an internal API. This API can be accessed via the public exports but should be avoided. Use `nve-codeblock` or `nve-monaco-input` for JSON content rendering.
+The JSON viewer element is an internal API. You can access this API via the public exports but should avoid using it. Use `nve-codeblock` or `nve-monaco-input` for JSON content rendering.
 
 ## Layout Full <nve-badge status="warning">1.0 deprecation</nve-badge>
 
-The `grow` property is deprecated in favor of `full` to avoid confusion with flexbox grow behavior.
+The `grow` property now uses `full` instead to avoid confusion with flexbox grow behavior.
 
 <nve-alert status="danger">Before:</nve-alert>
 
@@ -149,7 +149,7 @@ The `grow` property is deprecated in favor of `full` to avoid confusion with fle
 
 ## Typography "eyebrow" <nve-badge status="warning">1.0 deprecation</nve-badge>
 
-The typography `eyebrow` utility was deprecated to align with the standardized semantic names and size options available.
+The typography `eyebrow` utility no longer exists, to align with the standardized semantic names and size options available.
 
 <nve-alert status="danger">Before:</nve-alert>
 
@@ -165,8 +165,9 @@ The typography `eyebrow` utility was deprecated to align with the standardized s
 
 ## Icon Names <nve-badge status="warning">1.0 deprecation</nve-badge>
 
-The following icons have been renamed:
+The following icons now use new names:
 
+<!-- vale write-good.TooWordy = NO -->
 <style>table { max-width: 400px }</style>
 
 | before             | after                     |
@@ -202,6 +203,8 @@ The following icons have been renamed:
 | video-stop         | stop                      |
 | visible            | eye                       |
 | warning            | exclamation-triangle      |
+
+<!-- vale write-good.TooWordy = YES -->
 
 ## Icon Button Name Directions <nve-badge status="warning">1.0 deprecation</nve-badge>
 
@@ -258,7 +261,7 @@ import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent
 
 ## Scoped Tags <nve-badge status="warning">1.0 deprecation</nve-badge>
 
-The `defineScopedElement` is deprecated in favor of consuming application defining their own tag name. This allows the consuming application to have more control of the `@lit-labs/scoped-registry-mixin` package version.
+The `defineScopedElement` helper no longer exists. Instead, consuming applications define their own tag name. This allows the consuming application to have more control of the `@lit-labs/scoped-registry-mixin` package version.
 
 <nve-alert status="danger">Before:</nve-alert>
 

@@ -33,7 +33,7 @@ Heatmap patterns visualize data intensity across a matrix using color gradients.
 
 {% example '@internals/patterns/heatmap.examples.json' 'InferenceLatencyHeatmap' '{ "inline": false, "height": "400px" }' %}
 
-## Joint Utilization
+## Joint Usage
 
 {% example '@internals/patterns/heatmap.examples.json' 'JointUtilizationHeatmap' '{ "inline": false, "height": "340px" }' %}
 

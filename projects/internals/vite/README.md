@@ -1,10 +1,10 @@
 # @internals/vite
 
-This project is a private and internal API for the elements repo. This provides default Vite build and test configs for our projects.
+This project is a private and internal API for the elements repo. This provides default Vite build and test configs for all Elements projects.
 
-The default configs are standard Vite configuration objects. The objects can be overridden per project level. The configs provide common standard options for our libraries including library API/performance optimizations and test coverage requirements.
+The default configs are standard Vite configuration objects. The objects can be overridden per project level. The configs provide common standard options for the libraries including library API/performance optimizations and test coverage requirements.
 
-- `configs/`: base vite configs for various vite builds and tests
+- `configs/`: base vite configs for vite builds and tests
 - `playwright/`: playwright specific scripts
 - `plugins/`: vite plugins for build pipelines such as TS and minification
 - `runners/`: test runners for run time evaluation steps, lighthouse or visual
@@ -190,7 +190,7 @@ describe('dot lighthouse report', () => {
 });
 ```
 
-The tests will return a report containing the lighthouse score results in performance, best practices and accesibility. (`pnpm run test:lighthouse`)
+The tests return a report containing the lighthouse score results in performance, best practices, and accessibility. (`pnpm run test:lighthouse`)
 
 ```shell
 vitest run --config=vitest.lighthouse.ts
@@ -257,7 +257,7 @@ describe('dot visual', () => {
 });
 ```
 
-The tests will generate a `.visual` directory with the baseline snapshots. These generated images will be used to compare any subsequent tests. If a test needs to be updated, simply delete the image that needs to be regenerated and rerun the test. (`pnpm run test:visual`)
+The tests generate a `.visual` directory with the baseline snapshots. Later tests compare against these generated images. If a test needs updating, simply delete the image that needs regenerating and rerun the test. (`pnpm run test:visual`)
 
 ```shell
 vitest run --config=vitest.visual.ts

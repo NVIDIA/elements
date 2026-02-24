@@ -13,7 +13,7 @@ This project extracts, aggregates, and indexes comprehensive metadata about all 
 
 ## Architecture
 
-The project is organized into three main functional layers:
+The project organizes into three main functional layers:
 
 ### 1. Task Generators (`src/tasks/`)
 
@@ -77,7 +77,7 @@ Services (ApiService, ExamplesService, etc.)
 Documentation Site / CLI / Tools
 ```
 
-The metadata scripts generate common metadata about projects in the repo. This information is then consumed in a variety of ways such as displaying information our [documentation](https://NVIDIA.github.io/elements/docs/metrics/) or reporting to [GitLab](https://github.com/NVIDIA/elements/-/graphs/main/charts).
+The metadata scripts generate common metadata about projects in the repo. This information is then consumed in a variety of ways such as displaying information on the [documentation](https://NVIDIA.github.io/elements/docs/metrics/) site or reporting to [GitLab](https://github.com/NVIDIA/elements/-/graphs/main/charts).
 
 ## Generate Report Commands
 
@@ -93,5 +93,5 @@ Due to some of the metadata reports being expensive to run some are source contr
 
 - `pnpm run generate:releases`: runs the releases metadata script gathering all the package release information based on the git history.
 - `pnpm run generate:lighthouse`: runs all lighthouse tests and generates the source controlled `/static/lighthouse.json` metadata.
-- `pnpm run generate:downloads`: fetches download statistics for all configured packages (e.g., @nvidia-elements/core, @nvidia-elements/core-react) from multiple Artifactory instances and generates the source controlled `/static/downloads.json` metadata. Requires `URM_ARTIFACTORY_TOKEN` and `MAGLEV_ARTIFACTORY_TOKEN` environment variables to be set. Each package can be tracked across different instances and repositories.
-- `pnpm run generate:usage`: fetches all known projects in Gitlab and AVInfra (elements) repos using elements then searches for any source code references. Requires `GITLAB_TOKEN` environment variable to be set. Warning: this is a very slow and intensive script. Monitor Gitlab request failures as we need to throttle usage.
+- `pnpm run generate:downloads`: fetches download statistics for all configured packages (for example, @nvidia-elements/core, @nvidia-elements/core-react) from many Artifactory instances and generates the source controlled `/static/downloads.json` metadata. Requires the `URM_ARTIFACTORY_TOKEN` and `MAGLEV_ARTIFACTORY_TOKEN` environment variables. Each package can track across different instances and repositories.
+- `pnpm run generate:usage`: fetches all known projects in Gitlab and AVInfra (elements) repos using elements then searches for any source code references. Requires the `GITLAB_TOKEN` environment variable. Warning: this is a slow and intensive script. Watch for Gitlab request failures as the script needs to throttle usage.

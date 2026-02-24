@@ -24,7 +24,7 @@ All UI interactions contain a default set of six interactive states.
 - `focused`
 
 Below are HTML & CSS demonstrating how to consume the interaction design tokens.
-Demos will be replaced with custom elements over time.
+Custom elements replace demos over time.
 
 ## Interactions
 

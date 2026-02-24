@@ -1,6 +1,6 @@
 # @nvidia-elements/markdown
 
-A web component for rendering markdown content with full styling support.
+A Web Component for rendering markdown content with full styling support.
 
 ## Features
 

@@ -11,13 +11,13 @@
 
 {% installation 'svelte' %}
 
-Once installation is complete Elements can be imported and used within [Svelte](https://svelte.dev/) `.svelte` template files.
+Once installed import and use Elements within [Svelte](https://svelte.dev/) `.svelte` template files.
 
 ```typescript
 import '@nvidia-elements/core/alert/define.js';
 ```
 
-Once added, properties and events can be used via the standard template syntax.
+Properties and events then work via the standard template syntax.
 
 ```typescript
 // - status - HTML attribute

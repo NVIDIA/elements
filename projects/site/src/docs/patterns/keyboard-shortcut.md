@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-Use `nve-text="code"` on a `<kbd>` element for displaying keyboard shourtcut codes.
+Use `nve-text="code"` on a `<kbd>` element for displaying keyboard shortcut codes.
 
 ## Standard Styling
 

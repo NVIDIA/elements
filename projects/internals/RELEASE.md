@@ -1,8 +1,8 @@
 # Release
 
-Releases are automated via Semantic Release, an open source tool for managing automatic publishing and deployment of libraries and packages following semver. Executes a release in the CI environment after every successful build. No human is directly involved in the release process and the releases are guaranteed to be unromantic and unsentimental.
+Semantic Release automates releases, providing an open source tool for managing automatic publishing and deployment of libraries and packages following semver. It executes a release in the CI environment after every successful build. No human is directly involved in the release process and the tool guarantees releases remain unromantic and unsentimental.
 
-To wire up a new project to semantic release the following must be completed:
+To wire up a new project to semantic release, complete the following:
 
 1. Add the project to `pnpm-workspace.yaml` in the repository root
 

@@ -24,6 +24,6 @@
 
 ## Slotted Icon
 
-Slotted icon in logo will inherit logo color and size
+Slotted icon in logo inherits logo color and size
 
 {% example '@nvidia-elements/core/logo/logo.examples.json' 'SlottedIcons' %}

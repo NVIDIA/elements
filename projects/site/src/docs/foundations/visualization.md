@@ -7,11 +7,11 @@
 
 # {{ title }}
 
-The visualization design tokens provide a consistent color palette for theming various data visualization UI tools and libraries. Elements does not support data visualizations as part of the core library, but does provide a set of tokens that can be used to theme various data visualization libraries.
+The visualization design tokens provide a consistent color palette for theming data visualization UI tools and libraries. Elements does not support data visualizations as part of the core library, but does provide a set of tokens that you can use to theme data visualization libraries.
 
 ## Usage
 
-Tokens can be consumed via CSS Custom Properties, however data visualizatiion libraries often are themed via JavaScript based APIs. To make it easier to theme these libraries a utility function is provided to convert the active theme tokens to a JavaScript object.
+You can consume tokens via CSS Custom Properties, but data visualization libraries often use JavaScript based APIs for theming. To make it easier to theme these libraries, a utility function converts the active theme tokens to a JavaScript object.
 
 ```typescript
 import { getThemeTokens } from '@nvidia-elements/core';
@@ -61,13 +61,13 @@ new Chart(document.querySelector('canvas'), {
 
 ## Categorical
 
-The categorical tokens are used for visualizations that represent various categories or groups. These values are useful when the data has distinct groups but no natural numerical order.
+The categorical tokens apply to visualizations that represent distinct categories or groups. These values are useful when the data has distinct groups but no natural numerical order.
 
 {% tokens 'sys-visualization-categorical' %}
 
 ## Sequential Diverging Virdis
 
-The diverging tokens are used for visualizations that represent two opposing values or groups of data. This can be useful for data with a natural center and the goal is to highlight the differences or deviations from the center.
+The diverging tokens apply to visualizations that represent two opposing values or groups of data. This can be useful for data with a natural center and the goal is to highlight the differences or deviations from the center.
 
 {% tokens 'sys-visualization-sequential-diverging-virdis' %}
 

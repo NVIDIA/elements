@@ -49,7 +49,7 @@ projects/internals/tools/src/
 - Pulls from `@internals/metadata`
 
 #### **PlaygroundService** (`/playground/service.ts`)
-- `validate()` - Lint and validate HTML templates for playground compliance
+- `validate()` - Lint and check HTML templates for playground compliance
 - `create()` - Generate shareable playground URLs with framework support
 - Supports vanilla HTML, React, Preact, Angular, and Lit templates
 - Creates complete file structures with import maps and styling

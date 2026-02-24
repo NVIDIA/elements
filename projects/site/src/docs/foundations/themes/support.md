@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-Support colors are used in combination of text or iconography to convey status of an element or interation. Status type components inlcude `alerts`, `badges`, `tags` and `form control` messages.
+Support colors combine with text or iconography to convey the status of an element or interaction. Status type components include `alerts`, `badges`, `tags` and `form control` messages.
 
 - `default`
 - `accent`

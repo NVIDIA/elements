@@ -9,7 +9,7 @@
 
 ## Installation
 
-To enable smooth transitions between page view, see our [View Transition API](./docs/foundations/view-transitions/) documentation.
+To enable smooth transitions between page view, see the [View Transition API](./docs/foundations/view-transitions/) documentation.
 
 {% install 'nve-page' %}
 

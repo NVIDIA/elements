@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-Status colors are used in combination of text or iconography to convey status of a task.
+Status colors combine with text or iconography to convey the status of a task.
 
 ## Dot Status
 

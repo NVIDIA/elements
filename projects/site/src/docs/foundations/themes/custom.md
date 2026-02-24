@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-Custom themes can be created by overriding the global CSS properties.
+You can create custom themes by overriding the global CSS properties.
 
 ```css
 :root {
