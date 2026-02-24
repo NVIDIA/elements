@@ -13,11 +13,11 @@
 
 By showing less information at a time, multi-step workflows allow users to focus better on the content pertinent to each step and decrease the chance of errors.
 
-The Steps component is composed of a `steps` parent element and multiple `steps-item` elements slotted as children. The `selected` attribute applied by the host application will give the selected step the proper selected styles.
+The Steps component consists of a `steps` parent element and many `steps-item` elements slotted as children. The `selected` attribute applied by the host application gives the selected step the proper selected styles.
 
-The `disabled` attribute can be applied to an item to get the proper visual cues and prevent interaction. All default interaction, hover and active states are handled by the elements.
+Apply the `disabled` attribute to an item to get the proper visual cues and prevent interaction. The elements handle all default interaction, hover, and active states.
 
-Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) concerns are handled out of the box. Try using left/right arrow keys on horizontal steps or up/down arrow keys on vertical steps.
+Additionally, the component handles all keyboard navigation and [accessibility](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/) concerns out of the box. Try using left/right arrow keys on horizontal steps or up/down arrow keys on vertical steps.
 
 ## Condensed
 
@@ -37,10 +37,10 @@ Additionally, all keyboard navigation and [accessibility](https://www.w3.org/WAI
 
 ## Stateless Steps
 
-By default Steps will be stateless. This means selection behavior will have to be handled by the host application.
-We have provided a way to opt in to stateful selection behavior where click events and keyboard enter will trigger the selection state.
+By default Steps is stateless. This means the host application must handle selection behavior.
+The component provides a way to opt in to stateful selection behavior where click events and keyboard enter trigger the selection state.
 
-In all other examples on this page `behavior-select` is set on the parent `steps` to opt into stateful behavior. The following example
-shows the default stateless behavior, where the host app will have to set/remove the `selected` attribute on child `<nve-steps-item>`.
+All other examples on this page set `behavior-select` on the parent `steps` to opt into stateful behavior. The following example
+shows the default stateless behavior, where the host app has to set/remove the `selected` attribute on child `<nve-steps-item>`.
 
 {% example '@nvidia-elements/core/steps/steps.examples.json' 'StatelessSteps' %}

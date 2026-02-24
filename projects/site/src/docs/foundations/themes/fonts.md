@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-By default themes provide a default font family globally. For Elements default `light` and `dark` theme this is `Inter`. For our experimenal `brand` and `brand-dark` theme it defaults to `NVIDIA Sans`. Font styles can be overriden for a given theme by loading the appropriate font stylesheet and setting the font theme value.
+By default themes provide a default font family globally. For Elements default `light` and `dark` theme this is `Inter`. For the experimental `brand` and `brand-dark` theme it defaults to `NVIDIA Sans`. Font styles can be overridden for a given theme by loading the appropriate font stylesheet and setting the font theme value.
 
 ```css
 /* import the global CSS into your project (import may vary based on build tools) */

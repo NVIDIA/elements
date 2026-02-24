@@ -13,12 +13,12 @@ Examples are stateless HTML templates demonstrating UI patterns for the Elements
 
 ### Example Title
 
-The example title name should be no more than three words. This name is the name that is referenced in the function as well as rendered in various API/Documentation endpoints.
+The example title name should be no more than three words. This name references the function and renders in API/Documentation endpoints.
 
 #### Naming Format
 
-- **Use PascalCase** for all example names (e.g., `Default`, `StatusFlat`, `FormSubmit`)
-- Names should describe **what** the example shows, not **how** it works, how should be explained in the summary.
+- **Use PascalCase** for all example names (for example, `Default`, `StatusFlat`, `FormSubmit`)
+- Names should describe **what** the example shows, not **how** it works; explain how in the summary.
 
 #### Single-Word Names
 
@@ -57,7 +57,7 @@ Use compound PascalCase for combinations or specific features and patterns:
 - ❌ **Component names in titles**: Use `Status` not `BadgeStatus`
 - ❌ **Implementation details**: Use `ScrollContent` not `OverflowAutoScrollContent`
 - ❌ **Vague names**: Use `DynamicTrigger` not `Example1`
-- ❌ **Overly long names**: Keep to 3 words maximum
+- ❌ **Overly long names**: Keep to 3 words max
 
 #### Examples
 
@@ -78,7 +78,7 @@ export const TestCase = { /* ... */ };
 export const DefaultBadgeWithStatusColors = { /* ... */ };
 ```
 
-When examples are built for API consumption they will automatically have additional metadata attached to them such as the associated element/component they reference and a UUID to ensure each example has a unique identifier across all projects.
+When the build produces examples for API consumption, it automatically attaches extra metadata such as the associated element/component reference and a UUID to ensure each example has a unique identifier across all projects.
 
 ### Use `@summary` JSDoc Comments
 
@@ -101,7 +101,7 @@ export const Default = {
 };
 ```
 
-<nve-alert status="warning">Summaries are limited to a maximum of 400 characters. This restriction is necessary to ensure the documentation is portable across all platforms including docs, CLI and MCPs.</nve-alert>
+<nve-alert status="warning">Limit summaries to a max of 400 characters. This restriction ensures the documentation stays portable across all platforms including docs, CLI and MCPs.</nve-alert>
 
 ### Stateless Examples by Default
 
@@ -272,7 +272,7 @@ export const ComplexPattern = {
 
 ### Avoid Poor Summaries or Unclear Use Cases
 
-Summaries should provide UX intent. Do not describe what can be inferred already by the source code.
+Summaries should provide UX intent. Do not describe what the reader can already infer from the source code.
 
 ```typescript
 /**
@@ -286,7 +286,7 @@ Summaries should provide UX intent. Do not describe what can be inferred already
 
 ### Avoid Overly Complex State
 
-Avoid complex/stateful examples. Use cases vary widely across frameworks/tools so simple stateless examples are necessary to support all of our users.
+Avoid complex/stateful examples. Use cases vary widely across frameworks/tools so simple stateless examples are necessary to support all users.
 
 ```typescript
 export const OverlyComplex = {
@@ -303,13 +303,13 @@ export const OverlyComplex = {
 5. **Include accessibility notes** - Use ARIA attributes when appropriate
 6. **Provide context** - Explain the UX benefits and use cases
 7. **Keep examples focused** - One clear concept per example
-8. **Use semantic naming** - Example names should clearly indicate their purpose
+8. **Use semantic naming** - Example names should show their purpose
 
 ## Example Checklist
 
 Before submitting an example, ensure:
 
-- [ ] Example title is provided
+- [ ] Example includes a title
 - [ ] `@summary` JSDoc comment is present and comprehensive
 - [ ] Description explains the UX intent and use cases
 - [ ] Example is stateless (unless demonstrating specific state patterns)

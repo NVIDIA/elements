@@ -57,6 +57,6 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 {% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'CheckboxGroup' '{ "inline": false, "height": "320px" }' %}
 
-## Multiple Triggers
+## Many Triggers
 
 {% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'MultipleTriggers' '{ "inline": false, "height": "320px" }' %}

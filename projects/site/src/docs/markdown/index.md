@@ -40,8 +40,8 @@ The `nve-markdown` component renders markdown content with Elements styling. It 
 
 ## Features
 
-- **Markdown Processing**: All content is processed through markdown parser
-- **HTML Support**: HTML tags within markdown are preserved and rendered
+- **Markdown Processing**: The markdown parser processes all content
+- **HTML Support**: The renderer preserves and renders HTML tags within markdown
 - **Two Input Methods**:
   - `source` property for programmatic content
   - `<template>` slot for declarative content

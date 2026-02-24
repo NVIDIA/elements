@@ -1,23 +1,19 @@
 # Build, Infrastructure, and CI/CD
 
-This is an outline of the tooling that runs the Elements monorepo. This tooling powers a fully automated continuous deployment of multiple NPM/Artifactory packages as well as documentation. This configuration enables:
+This is an outline of the tooling that runs the Elements monorepo. This tooling powers a fully automated continuous deployment of many NPM/Artifactory packages as well as documentation. This configuration enables:
 
 - Building 30+ libraries, packages and starter projects
 - 1400+ unit tests, visual regressions tests and performance lighthouse tests
 - Fully automated deployment, versioning and publishing of packages and documentation
 
-The **CI pipeline takes an average of [~10 minutes](https://github.com/NVIDIA/elements/-/pipelines/12762390)** from the moment a MR is merged to being deployed and available to end users. The average clone, install and build of the **CI pipeline locally takes about ~1-2 mins** on a Macbook M1.
+The **CI pipeline takes an average of [~10 minutes](https://github.com/NVIDIA/elements/-/pipelines/12762390)** from the moment a MR merges to deploying and becoming available to end users. The average clone, install, and build of the **CI pipeline locally takes about ~1-2 min** on a MacBook M1.
 
-The local CI job is the same CI job run in the GitLab Pipeline, this ensures that if it passes locally, there is a very high probability it will pass in CI without issue.
+The local CI job is the same CI job run in the GitLab Pipeline, this ensures that if it passes locally, there is a high probability it passes in CI without issue.
 
 ## GitLab Features and Integrations
 
 The Elements repo uses standard GitLab tooling to run its CI/CD pipeline.
-The configuration for the entire pipeline can be found in the root [.github/workflows/ci.yml](https://github.com/NVIDIA/elements/-/blob/main/.github/workflows/ci.yml?ref_type=heads).
-
-- [NV Code Critic](https://confluence.nvidia.com/display/APE/CodeCritic)
-
-  Internal Nvidia LLM code review bot to provided feedback on pull requests.
+The root [.github/workflows/ci.yml](https://github.com/NVIDIA/elements/-/blob/main/.github/workflows/ci.yml?ref_type=heads) contains the configuration for the entire pipeline.
 
 - [GitLab Pages Hosting / MR Previews](https://gitlab.com/gitlab-org/gitlab/-/issues/422145)
 
@@ -25,23 +21,23 @@ The configuration for the entire pipeline can be found in the root [.github/work
 
 - [GitLab Page Redirects](https://docs.gitlab.com/ee/user/project/pages/redirects.html)
 
-  Gitlab Page redirects for redirecting urls between deployment URLs.
+  Gitlab Page redirects for redirecting URLs between deployment URLs.
 
 - [GitLab Slack Notifications](https://docs.gitlab.com/ee/user/project/integrations/slack.html)
 
-  This provides notifications any time a release is published to the support slack.
+  This sends notifications to the support Slack channel any time a release publishes.
 
 - [Unit Test Reporting](https://docs.gitlab.com/ee/ci/testing/unit_test_reports.html)
 
-  When opening MRs a test report is generated in the GitLab UI to quickly see any potential issues.
+  When opening MRs GitLab generates a test report in the UI to quickly see any potential issues.
 
 - [Code Coverage Reporting](https://docs.gitlab.com/ee/ci/testing/code_coverage.html)
 
-  When opening MRs a test report is generated in the GitLab UI to quickly see uncovered branches.
+  When opening MRs GitLab generates a coverage report in the UI to quickly see uncovered branches.
 
 - [CI Caching](https://docs.gitlab.com/ee/ci/caching/)
 
-  We leverage GitLab CI Cache to cache our PNPM installations between jobs, this drastically improves our CI speed.
+  The pipeline leverages GitLab CI Cache to cache PNPM installations between jobs, which drastically improves CI speed.
 
 - [Issue Templates](https://docs.gitlab.com/ee/user/project/description_templates.html)
 
@@ -49,7 +45,7 @@ The configuration for the entire pipeline can be found in the root [.github/work
 
 - [Security Audits](https://docs.gitlab.com/ee/user/application_security/sast/index.html)
 
-  Security audits such as runtime, dependency and secret detection scanning.
+  Security audits such as runtime, dependency, and secret detection scanning.
 
 - [Open Metrics](https://docs.gitlab.com/ee/ci/testing/metrics_reports.html)
 
@@ -57,7 +53,7 @@ The configuration for the entire pipeline can be found in the root [.github/work
 
 - [Git LFS (Large File System)](https://docs.gitlab.com/ee/topics/git/lfs/)
 
-  Standardized way to source control large files without bloating git histroy. Useful for visual regression baseline images.
+  Standardized way to source control large files without bloating git history. Useful for visual regression baseline images.
 
 - [GitLab Runners/Docker Containers](https://docs.gitlab.com/ee/ci/docker/using_docker_images.html)
 
@@ -73,19 +69,19 @@ The configuration for the entire pipeline can be found in the root [.github/work
 
 - [GitLab Job Artifacts](https://docs.gitlab.com/ee/ci/jobs/job_artifacts.html)
 
-  Ability to upload job [build artifacts](https://github.com/NVIDIA/elements/-/artifacts) and outputs to be referenced in other jobs or CI jobs.
+  Ability to upload job [build artifacts](https://github.com/NVIDIA/elements/-/artifacts) and outputs that other jobs or CI jobs can reference.
 
 - [Gitlab Releases](https://docs.gitlab.com/ee/user/project/releases/)
 
-  Tag artifacts with specific Git tags for standardized release aritfact [history and tracking](https://github.com/NVIDIA/elements/-/releases).
+  Tag artifacts with specific Git tags for standardized release artifact [history and tracking](https://github.com/NVIDIA/elements/-/releases).
 
-- [GitLab Env Variables](https://github.com/help/ci/variables/index) + [NVault](https://confluence.nvidia.com/pages/viewpage.action?spaceKey=IPPSEC&title=GitLab+Secrets+using+Vault+Plugin+for+GitLab) (wip)
+- [GitLab Env Variables](https://github.com/help/ci/variables/index) + [NVault](https://confluence.nvidia.com/pages/viewpage.action?spaceKey=IPPSEC&title=GitLab+Secrets+using+Vault+Plugin+for+GitLab) (WIP)
 
   Standardized way to store API keys/secrets.
 
 - [GitLab Runners](https://docs.gitlab.com/runner/)
 
-  Spin up [self managed VMs](https://confluence.nvidia.com/pages/viewpage.action?pageId=1227431373) for creating GitLab Runners. Perflab provides basic shared [managed runners](https://confluence.nvidia.com/display/PERFLABGRP/Perflab+GitLab+Runner+Tagging+Standard). There is a initiative for a [company wide managed GitLab Runner farm](https://docs.google.com/document/d/1UJE_bHzGgAn9KZZlXh7uQnd7gFz2h-igC0xLyypFZqo/edit?tab=t.0).
+  Spin up [self managed VMs](https://confluence.nvidia.com/pages/viewpage.action?pageId=1227431373) for creating GitLab Runners. Perflab provides basic shared [managed runners](https://confluence.nvidia.com/display/PERFLABGRP/Perflab+GitLab+Runner+Tagging+Standard). An initiative exists for a [company wide managed GitLab Runner farm](https://docs.google.com/document/d/1UJE_bHzGgAn9KZZlXh7uQnd7gFz2h-igC0xLyypFZqo/edit?tab=t.0).
 
 - [GitLab Analytics](https://docs.gitlab.com/ee/user/analytics/)
 
@@ -101,7 +97,7 @@ The following are the repo wide tools that apply to all source code and projects
 
 - [NodeJS/Corepack](https://nodejs.org/api/corepack.html)
 
-  Corepack is a tool to help with managing versions of your package managers. It identifies the package manager is configured for the repo, transparently install it if needed, and run it without requiring explicit user interactions. This ensures that everyone will use exactly the same package manager version without them having to manually synchronize it each time an update is made.
+  Corepack is a tool to help with managing versions of your package managers. It identifies the package manager configured for the repo, transparently installs it if needed, and runs it without requiring explicit user interactions. This ensures that everyone uses exactly the same package manager version without them having to manually synchronize it each time someone makes an update.
 
 - [PNPM Package Manager](https://pnpm.io/)
 
@@ -109,11 +105,11 @@ The following are the repo wide tools that apply to all source code and projects
 
 - [Wireit](https://github.com/google/wireit)
 
-  Wireit provides a way to unify node based build tooling across the repo, enabling build caching and dependency based build systems similar to Bazel.
+  Wireit provides a way to unify node based build tooling across the repo, enabling build caching and dependency based build systems like Bazel.
 
 - [Semantic Release](https://github.com/semantic-release/semantic-release)
 
-  A open source tool for managing automatic publishing and deployment of libraries and packages following semver. Executes a release in the CI environment after every successful build. No human is directly involved in the release process and the releases are guaranteed to be unromantic and unsentimental.
+  An open source tool for managing automatic publishing and deployment of libraries and packages following semver. Executes a release in the CI environment after every successful build. No human is directly involved in the release process and the tool guarantees releases remain unromantic and unsentimental.
 
 - [Vite](https://vite.dev/)
 
@@ -123,7 +119,7 @@ The following are the repo wide tools that apply to all source code and projects
 
 - [Husky](https://github.com/typicode/husky)
 
-  Husky provides Git hooks to ensure pre code check ins are run such as linting and commit formatting. This reduces the turnaround time catching errors before they land in a CI job.
+  Husky provides Git hooks to run pre code check ins such as linting and commit formatting. This reduces the turnaround time catching errors before they land in a CI job.
 
 - [Lint Staged](https://github.com/lint-staged/lint-staged)
 
@@ -132,6 +128,10 @@ The following are the repo wide tools that apply to all source code and projects
 - [Prettier](https://prettier.io/)
 
   Ensures consistent code formatting for the entire repo.
+
+- [Vale](https://vale.sh/)
+
+  Prose linter for documentation and JSDoc comments. Enforces consistent technical writing using the Google developer documentation style guide and write-good rules. Configuration is in `.vale.ini` with custom vocabulary and rules in `config/vale/styles/`. Vale runs against `*.md` and `*.ts` files in `projects/` source directories. The Vale binary is auto-installed via `config/vale/install.mjs` during `pnpm install`.
 
 ## Testing
 
@@ -145,11 +145,11 @@ The following are the repo wide tools that apply to all source code and projects
 
 - [Lighthouse](https://github.com/GoogleChrome/lighthouse)
 
-  An open source project providing a suite of e2e tests for performance, accessibility and general best practices for web development.
+  An open source project providing a suite of e2e tests for performance, accessibility, and general best practices for web development.
 
 ## Repo Configuration
 
-The following GitLab settings are configured for optimal code quality and stability within the repo.
+The following GitLab settings optimize code quality and stability within the repo.
 
 - [Protected Tags](https://github.com/help/user/project/protected_tags)
 
@@ -157,7 +157,7 @@ The following GitLab settings are configured for optimal code quality and stabil
 
 - [Protected Branches](https://github.com/help/user/project/protected_branches)
 
-  Ensures the `main` branch is protected and must go through the MR Review/CI Pipeline process.
+  Protects the `main` branch and requires going through the MR Review/CI Pipeline process.
 
 - [Push Rules](https://github.com/help/user/project/repository/push_rules)
 
@@ -169,19 +169,19 @@ The following GitLab settings are configured for optimal code quality and stabil
 
 - [Disable Squash and Merge](https://github.com/help/user/project/merge_requests/squash_and_merge)
 
-  Disable squashing commits in a MR ensures MRs with multple small isolated change commits do not lose their commit history on merge to main.
+  Disable squashing commits in a MR ensures MRs with many small isolated change commits do not lose their commit history on merge to main.
 
 - [Pipelines must succeed](https://github.com/help/user/project/merge_requests/merge_when_pipeline_succeeds.md#require-a-successful-pipeline-for-merge)
 
-  Ensure the MR passes the CI pipeline which includes automated unit, integration and performance tests.
+  Ensure the MR passes the CI pipeline which includes automated unit, integration, and performance tests.
 
 - [Git strategy to fetch](https://github.com/help/ci/pipelines/settings#choose-the-default-git-strategy)
 
-  To improve speed of the CI jobs, the CI will fetch and update a repo if existing already in the runner rather than a full clone.
+  To improve speed of the CI jobs, the CI fetches and updates a repo if existing already in the runner rather than a full clone.
 
 - [Git shallow clone](https://github.com/help/ci/pipelines/settings#limit-the-number-of-changes-fetched-during-clone)
 
-  If a Git fetch is not possible then a shallow clone occurs with the latest 10 commits. This improves the overall CI job speed.
+  If a Git fetch is not possible then a shallow clone occurs with the latest 10 commits. This improves CI job speed.
 
 - [GitLab Pages](https://docs.gitlab.com/ee/user/project/pages/)
 
@@ -189,16 +189,16 @@ The following GitLab settings are configured for optimal code quality and stabil
 
 - [GitLab Scheduled Pipelines](https://docs.gitlab.com/ee/ci/pipelines/schedules.html)
 
-  We use scheduled pipelines to run nightly builds of the documentation as well as full runs of [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) against [each of the 50+ components](https://github.com/NVIDIA/elements/-/jobs/82739890) in the Elements library.
+  Scheduled pipelines run nightly builds of the documentation as well as full runs of [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) against [each of the 50+ components](https://github.com/NVIDIA/elements/-/jobs/82739890) in the Elements library.
 
 ## Release
 
-[Semantic Release](https://github.com/semantic-release/semantic-release) is a open source tool for managing automatic publishing and deployment of libraries and packages following [SEMVER](https://semver.org/). This enables a fix or feature to be available in Artifactory within minutes of it merging and passing the CI automated tests. To integrate into GitLab the following must be completed:
+[Semantic Release](https://github.com/semantic-release/semantic-release) is an open source tool for managing automatic publishing and deployment of libraries and packages following [SEMVER](https://semver.org/). This enables a fix or feature to appear in Artifactory within minutes of it merging and passing the CI automated tests. To integrate into GitLab, complete the following:
 
 - Create `GITLAB_TOKEN` with maintainer permissions using a GitLab service account
 - Generate Artifactory Identity Token via a service account named `NPM_TOKEN`
 - Add tokens `GITLAB_TOKEN` and `NPM_TOKEN` to the [repo variables](https://github.com/help/ci/variables/index)
-- Note, the bot name ran by Semantic Release will be the [name of your provided GitLab Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#bot-users-for-projects) (`GITLAB_TOKEN`) you can change this default if desired.
+- Note, the bot name ran by Semantic Release is the [name of your provided GitLab Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#bot-users-for-projects) (`GITLAB_TOKEN`) you can change this default if desired.
 - Follow standard [Semantic Release](https://github.com/semantic-release/semantic-release) tooling/configuration. To see an example of this look at the Elements [.releaserc.cjs](https://github.com/NVIDIA/elements/-/blob/main/.releaserc.cjs?ref_type=heads) file.
 
 ## Git LFS
@@ -213,7 +213,7 @@ projects/site/assets/**/*.webm filter=lfs diff=lfs merge=lfs -text
 projects/site/assets/**/*.webp filter=lfs diff=lfs merge=lfs -text
 ```
 
-2. Once `.gitattributes` is committed, add the assets as a followup commit to ensure they are stored via Git LFS.
+2. Once you commit `.gitattributes`, add the assets as a followup commit to ensure Git LFS stores them.
 
 ## Resources
 
@@ -223,11 +223,11 @@ projects/site/assets/**/*.webp filter=lfs diff=lfs merge=lfs -text
 
 ## Migrating to GitLab
 
-Below are the steps taken to migrate to GitLab from a larger mono-repo. If your existing repo is moved in its entirety to GitLab then this process is not needed.
+Below are the steps taken to migrate to GitLab from a larger mono-repo. If you move your existing repo in its entirety to GitLab then this process is not needed.
 
-1. Clone repo to be migrated
+1. Clone the repo for migration
 2. Install [git-filter-repo](https://github.com/newren/git-filter-repo) (Install via brew)
-3. Update the following script to run the entire process at once. See git-filter-repo documentation for details on API.
+3. Update the following script to run the entire process at once. See the git-filter-repo documentation for API details.
 
 ```bash
 #! /bin/bash
@@ -263,4 +263,4 @@ echo "Migration complete! 🎉"
 
 ### Resources
 
-- [Splitting a Subfolder Out Into a New Repository (Github)](https://docs.github.com/en/get-started/using-git/splitting-a-subfolder-out-into-a-new-repository)
+- [Splitting a Subfolder Out Into a New Repository (GitHub)](https://docs.github.com/en/get-started/using-git/splitting-a-subfolder-out-into-a-new-repository)

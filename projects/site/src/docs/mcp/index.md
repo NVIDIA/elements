@@ -17,7 +17,7 @@
 
 ## Quick Setup
 
-The fastest way to configure the Elements MCP is with the setup command. This will detect your package manager and prompt you to select an IDE (Cursor, Claude Code, or both).
+The fastest way to configure the Elements MCP is with the setup command. This detects your package manager and prompts you to select an IDE (Cursor, Claude Code, or both).
 
 ```shell
 npx --package=@nvidia-elements/cli -y nve-setup-mcp
@@ -48,7 +48,7 @@ Add the following configuration to your `.mcp.json` file (typically located at `
 
 ### PNPM
 
-Alternatively, if you prefer using PNPM:
+Or, if you prefer using PNPM:
 
 ```json
 {
@@ -65,7 +65,7 @@ Alternatively, if you prefer using PNPM:
 }
 ```
 
-After adding the configuration, restart Claude Code for the changes to take effect. The Elements MCP tools will be available for use in your conversations.
+After adding the configuration, restart Claude Code for the changes to take effect. The Elements MCP tools are then available for use in your conversations.
 
 ## Cursor
 
@@ -155,7 +155,7 @@ Install to Cursor or copy the MCP configuration below.
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">/search</code></nve-grid-cell>
     <nve-grid-cell>Context for searching Elements APIs</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code"><strong>/search</strong> What could I use for notifying user of a long running process?</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code"><strong>/search</strong> What notifies a user of a long running process?</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">/new-project</code></nve-grid-cell>
@@ -165,7 +165,7 @@ Install to Cursor or copy the MCP configuration below.
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">/migrate</code></nve-grid-cell>
     <nve-grid-cell>Context for migrating from deprecated Elements APIs</nve-grid-cell>
-    <nve-grid-cell><code nve-text="code"><strong>/migrate</strong> Migrate my project from deprecated Elements APIs</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code"><strong>/migrate</strong> Migrate this project from deprecated Elements APIs</code></nve-grid-cell>
   </nve-grid-row>
 </nve-grid>
 
@@ -237,7 +237,7 @@ Skills provide persistent context to AI agents for building UI with Elements. Un
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">playground_validate</code></nve-grid-cell>
-    <nve-grid-cell>Validates HTML templates for playground examples. Enforces additional constraints to prevent common mistakes when generating standalone demos.</nve-grid-cell>
+    <nve-grid-cell>Validates HTML templates for playground examples. Enforces extra constraints to prevent common mistakes when generating standalone demos.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">playground_create</code></nve-grid-cell>
@@ -253,7 +253,7 @@ Skills provide persistent context to AI agents for building UI with Elements. Un
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">project_validate</code></nve-grid-cell>
-    <nve-grid-cell>Validate project setup and check for configuration issues, outdated dependencies, or missing required packages.</nve-grid-cell>
+    <nve-grid-cell>Check project setup for configuration issues, outdated dependencies, or missing required packages.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">project_setup_mcp</code></nve-grid-cell>

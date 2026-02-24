@@ -29,7 +29,7 @@ nve
 
 ### Project Creation
 
-The CLI can be used to quickly bootstrap frontend UIs pre-configured with Elements.
+Use the CLI to quickly bootstrap frontend UIs pre-configured with Elements.
 
 ```shell
 # generate a vite/typescript project and start dev server once created
@@ -126,7 +126,7 @@ A visual indicator that communicates a status description of an associated compo
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve playground.validate &lt;template&gt;</code></nve-grid-cell>
-    <nve-grid-cell>Validates HTML templates for playground examples. Enforces additional constraints to prevent common mistakes when generating standalone demos.</nve-grid-cell>
+    <nve-grid-cell>Validates HTML templates for playground examples. Enforces extra constraints to prevent common mistakes when generating standalone demos.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve playground.create &lt;template&gt; [type] [name] [author] [start]</code></nve-grid-cell>
@@ -142,7 +142,7 @@ A visual indicator that communicates a status description of an associated compo
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve project.validate &lt;type&gt; [cwd]</code></nve-grid-cell>
-    <nve-grid-cell>Validate project setup and check for configuration issues, outdated dependencies, or missing required packages.</nve-grid-cell>
+    <nve-grid-cell>Check project setup for configuration issues, outdated dependencies, or missing required packages.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve project.setup.mcp &lt;ide&gt; [cwd]</code></nve-grid-cell>

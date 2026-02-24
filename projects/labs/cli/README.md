@@ -49,11 +49,11 @@ nve
 | `nve packages.changelogs.search [name] [format]`                  | Search for and retrieve changelog details by package name (supports fuzzy matching).               |
 | `nve examples.list [format]`                                      | Get a summary list of available component/pattern usage examples.                                  |
 | `nve examples.search [query] [format]`                            | Search Elements pattern usage examples by name, element type, or keywords.                         |
-| `nve playground.validate [template]`                              | Validates HTML templates for playground examples. Enforces additional constraints for demos.       |
+| `nve playground.validate [template]`                              | Validates HTML templates for playground examples. Enforces extra constraints for demos.       |
 | `nve playground.create [template] [type] [name] [author] [start]` | Create a shareable playground URL from an HTML template.                                           |
 | `nve project.create [type] [cwd] [start]`                         | Create a new starter project.                                                                      |
 | `nve project.update [cwd]`                                        | Update a project to the latest versions of Elements packages.                                      |
-| `nve project.validate [type] [cwd]`                               | Validate project setup and check for configuration issues, outdated dependencies.                  |
+| `nve project.validate [type] [cwd]`                               | Check project setup for configuration issues, outdated dependencies.                  |
 | `nve project.setup.mcp <ide> [cwd]`                               | Configure Elements MCP server for Cursor or Claude Code.                                           |
 | `nve tokens.list [format]`                                        | Get available semantic CSS variables / design tokens for theming.                                  |
 
@@ -67,7 +67,7 @@ The fastest way to configure MCP is with the `setup-mcp` command:
 npx --package=@nvidia-elements/cli -y nve-setup-mcp
 ```
 
-This will detect your package manager and prompt you to select an IDE (Cursor, Claude Code, or both), then write the appropriate MCP configuration file.
+This detects your package manager and prompts you to select an IDE (Cursor, Claude Code, or both), then writes the appropriate MCP configuration file.
 
 ### Claude Code
 
@@ -88,7 +88,7 @@ Install to Claude Code by adding the configuration to your `.mcp.json` file. Add
 }
 ```
 
-After adding the configuration, restart Claude Code for the changes to take effect. The Elements MCP tools will be available for use in your conversations.
+After adding the configuration, restart Claude Code for the changes to take effect. The Elements MCP tools are then available for use in your conversations.
 
 ### Cursor
 
@@ -116,9 +116,9 @@ Install to Cursor with the MCP configuration below.
 | `/about` | A brief introduction to Elements | `/about` |
 | `/doctor` | Verify Elements setup and MCP configuration | `/doctor` |
 | `/playground` | Context for creating playground prototypes | `/playground` Create an example login form |
-| `/search` | Context for searching Elements APIs | `/search` What could I use for notifying user of a long running process? |
+| `/search` | Context for searching Elements APIs | `/search` What works for notifying a user of a long running process? |
 | `/new-project` | Context for creating a new Elements project. | `/new-project` Create an Angular todo app |
-| `/migrate` | Context for migrating from deprecated Elements APIs | `/migrate` Migrate my project from deprecated Elements APIs |
+| `/migrate` | Context for migrating from deprecated Elements APIs | `/migrate` Migrate this project from deprecated Elements APIs |
 
 ### Skills
 
@@ -147,7 +147,7 @@ Skills provide persistent context to AI agents for building UI with Elements.
 | `playground_create` | Create a shareable playground URL from an HTML template. |
 | `project_create` | Create a new starter project. |
 | `project_update` | Update a project to the latest versions of Elements packages. |
-| `project_validate` | Validate project setup and check for configuration issues, outdated dependencies. |
+| `project_validate` | Check project setup for configuration issues, outdated dependencies. |
 | `project_setup_mcp` | Configure Elements MCP server for Cursor or Claude Code. |
 | `tokens_list` | Get available semantic CSS variables / design tokens for theming with descriptions. |
 

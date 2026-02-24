@@ -27,7 +27,7 @@ add `nve-markdown` attribute to the element.
 - Headings (`h1`, `h2`, `h3`, `h4`, `h5`, `h6`)
 - Unordered Lists (`ul`, `li`)
 - Ordered Lists (`ol`, `li`)
-- Blockqoute (`blockquote`)
+- Blockquote (`blockquote`)
 - Code (`pre`, `code`)
 - Table (`table`, `thead`, `th`, `tr`, `td`)
 - Image (`img`)

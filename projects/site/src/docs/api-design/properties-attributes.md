@@ -17,7 +17,7 @@ Properties/attributes represent an element's visual state. Examples:
 <nve-alert status="success"></nve-alert>
 ```
 
-Properties (`@property`) in lit enables the property to be set on the element via JavaScript or HTML Attributes.
+Properties (`@property`) in Lit enable setting the property on the element via JavaScript or HTML Attributes.
 
 ```html
 <nve-alert status="success"></nve-alert>
@@ -30,12 +30,12 @@ Properties (`@property`) in lit enables the property to be set on the element vi
 
 <nve-alert>
   <nve-icon slot="icon">🎓</nve-icon> 
-  <p nve-text="body">Learn: By default when a property is set Lit will not update the corresponding attribute in the DOM for performance. If the attribute is used as a style hook example, <code nve-text="code">:host([disabled])</code> then the <code nve-text="code">reflect</code> option can be set on the property decorator.</p>
+  <p nve-text="body">Learn: by default when you set a property, Lit does not update the corresponding attribute in the DOM for performance. If the attribute serves as a style hook example, <code nve-text="code">:host([disabled])</code> then you can add the <code nve-text="code">reflect</code> option to the property decorator.</p>
 </nve-alert>
 
 ## Impossible states
 
-Properties/Attributes should avoid enabling “impossible states”. Impossible states are caused by conflicting APIs on a single element.
+Properties/Attributes should avoid enabling “impossible states”. Conflicting APIs on a single element cause impossible states.
 
 {% dodont %}
 
@@ -55,7 +55,7 @@ Properties/Attributes should avoid enabling “impossible states”. Impossible 
 
 {% enddodont %}
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn:&nbsp;<a href="https://kentcdodds.com/blog/make-impossible-states-impossible" nve-text="link">Make impossible states impossible</a></nve-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn:&nbsp;<a href="https://kentcdodds.com/blog/make-impossible-states-impossible" nve-text="link">make impossible states impossible</a></nve-alert>
 
 ## Boolean Types
 
@@ -70,12 +70,12 @@ Boolean property/attribute type behave the same as native HTML element boolean t
 </nve-alert>
 
 <nve-alert status="warning">
-  Warning: a custom coercion function is needed for react support which will set boolean attributes to a value of “false” <a href="https://github.com/vmware-clarity/core/blob/main/projects/core/src/internal/utils/dom.ts#L268" nve-text="link">example</a> <a href="https://github.com/facebook/react/issues/9230" nve-text="link">react issue</a>.
+  Warning: supporting React requires a custom coercion function that sets boolean attributes to a value of “false” <a href=”https://github.com/vmware-clarity/core/blob/main/projects/core/src/internal/utils/dom.ts#L268” nve-text=”link”>example</a> <a href=”https://github.com/facebook/react/issues/9230” nve-text=”link”>React issue</a>.
 </nve-alert>
 
 ## Primitive Types
 
-<nve-alert status="accent">Note: Primitive type guidance is for atomic and highly reusable element libraries</nve-alert>
+<nve-alert status="accent">Note: primitive type guidance is for atomic and highly reusable element libraries</nve-alert>
 
 While Lit keeps both properties and attributes in sync, do not use complex types like `object` and `array` on the API. Since HTML cannot represent JavaScript objects, Lit must JSON parse attributes and reflect them anytime there is a change to ensure the JavaScript property and HTML attribute are in sync. This can be expensive to parse when using an object or array and cause unexpected behaviors such as lost object references for the user.
 
@@ -94,5 +94,5 @@ Complex types cause compatibility and usability issues as it can require the dev
 </nve-alert>
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon>
-Learn: <a href="https://developers.google.com/web/fundamentals/web-components/best-practices#attributes-properties" nve-text="link">Web Fundamentals Attributes vs Properties</a>
+Learn about <a href="https://developers.google.com/web/fundamentals/web-components/best-practices#attributes-properties" nve-text="link">Web Fundamentals Attributes vs Properties</a>.
 </nve-alert>

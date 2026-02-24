@@ -12,7 +12,7 @@
 
 ## Forms
 
-Preferences Input is [form associated component](https://web.dev/more-capable-form-controls) and can be used within FormData.
+Preferences Input is a [form associated component](https://web.dev/more-capable-form-controls) and works within FormData.
 
 {% example '@nvidia-elements/core/preferences-input/preferences-input.examples.json' 'Forms' '{ "inline": false, "height": "400px" }' %}
 

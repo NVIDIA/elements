@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-Design tokens are the visual design atoms of the design system – specifically, they are named entities that store visual design attributes. We use these tokens in place of hard-coded values to ensure flexibility and consistency across all product experiences.
+Design tokens are the visual design atoms of the design system—specifically, named entities that store visual design attributes. Use these tokens in place of hard-coded values to ensure flexibility and consistency across all product experiences.
 
 ### reference tokens (foundation, `--nve-ref-*`)
 
