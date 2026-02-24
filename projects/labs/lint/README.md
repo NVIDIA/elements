@@ -48,7 +48,7 @@ eslint -c ./eslint.config.js --color
 
 ## Severity
 
-Rules can individually be adjusted for lint severity. By default rules are set to `error`.
+You can individually adjust rules for lint severity. By default rules use `error` severity.
 
 ```javascript
 import { elementsHtmlConfig, elementsCssConfig } from '@nvidia-elements/lint/eslint';

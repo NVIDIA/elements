@@ -50,7 +50,7 @@ npm install @nvidia-elements/styles @nvidia-elements/themes
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      The base layout system provides static layouts. For responsive behavior, additional modules will be made available for container and viewport breakpoint-based responsive design.
+      The base layout system provides static layouts. For responsive behavior, the team plans extra modules for container and viewport breakpoint-based responsive design.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -93,14 +93,14 @@ Each layout mode supports spacing, alignment, and responsive behavior through a 
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Elements components are built using Web Components with Shadow DOM encapsulation. Many components manage their own internal layout, for example: <code>nve-card</code> components have built-in layout for <code>nve-card-header</code>, <code>nve-card-content</code>, and <code>nve-card-footer</code>. Applying <code>nve-layout</code> directly to these components may not work as expected due to Shadow DOM boundaries.
+      Elements components use Web Components with Shadow DOM encapsulation. Many components manage their own internal layout, for example: <code>nve-card</code> components have built-in layout for <code>nve-card-header</code>, <code>nve-card-content</code>, and <code>nve-card-footer</code>. Applying <code>nve-layout</code> directly to these components may not work as expected due to Shadow DOM boundaries.
     </div>
   </nve-alert>
 </nve-alert-group>
 
-The `nve-layout` attribute is designed to be applied to **native HTML elements** rather than Elements components. Use semantic HTML elements like `<section>`, `<main>`, `<nav>`, `<aside>`, or generic containers like `<div>` as your layout containers. Similarly, [form components have built-in layout capabilities](/elements/docs/elements/forms/#form-layouts).
+Apply the `nve-layout` attribute to **native HTML elements** rather than Elements components. Use semantic HTML elements like `<section>`, `<main>`, `<nav>`, `<aside>`, or generic containers like `<div>` as your layout containers. Similarly, [form components have built-in layout capabilities](/elements/docs/elements/forms/#form-layouts).
 
-For more details, see our documentation on the [internal-host pattern](/elements/docs/api-design/styles/#internal-host) and [slots](/elements/docs/api-design/slots/) which is used in the development of our library, as well as [MDN docs](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) on the Shadow DOM.
+For more details, see the documentation on the [internal-host pattern](/elements/docs/api-design/styles/#internal-host) and [slots](/elements/docs/api-design/slots/) which the library uses in development, as well as [MDN docs](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM) on the Shadow DOM.
 
 ```html
 <!-- ✓ Correct: Apply to native HTML elements -->
@@ -212,14 +212,14 @@ Add internal spacing to containers using the same t-shirt sizing system:
 - `pad:xxl`
 - `pad:xxxl`
 
-By default padding will apply to all 4 sides of container, to specify padding on a single side use:
+By default padding applies to all 4 sides of container, to specify padding on a single side use:
 
 - `pad-top:md`
 - `pad-right:md`
 - `pad-bottom:md`
 - `pad-left:md`
 
-Or alternatively use the short hand to just pad the x and y axes.
+Or use the short hand to just pad the x and y axes.
 
 - `pad-x:md`
 - `pad-y:md`
@@ -303,7 +303,7 @@ Or alternatively use the short hand to just pad the x and y axes.
 
 ## Full width/height on container
 
-For convenience a `full` option can be set to give the container 100% width & height. This is often useful for giving the root element of a page full height.
+For convenience you can set a `full` option to give the container 100% width & height. This is often useful for giving the root element of a page full height.
 
 ```html
 <section nve-layout="full">
@@ -313,7 +313,7 @@ For convenience a `full` option can be set to give the container 100% width & he
 
 ## Layout Composition
 
-Layout attributes can be composed to create sophisticated designs:
+You can compose layout attributes to create sophisticated designs:
 
 ```html
 <!-- Centered hero section with vertical layout -->

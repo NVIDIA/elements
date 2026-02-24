@@ -18,9 +18,9 @@ Bundles are ideal **only** for the following specific use cases:
 - CMS systems
 - Static Site Generators (see `typescript` demo folder as an alternative)
 
-This approach should only be used if the application development environment does not support a Web-based build system such as Rollup, Vite, ESBuild or Webpack.
+Only use this approach if the application development environment does not support a Web-based build system such as Rollup, Vite, ESBuild or Webpack.
 
-Using the single bundle approach can make simple HTML prototypes easy but prevent performance optimizations such as tree shaking. Lack of these optimizations means your users will incur a performance penalty loading all components regardless if they are used in the UI.
+Using the single bundle approach can make simple HTML prototypes easy but prevent performance optimizations such as tree shaking. Lack of these optimizations means your users incur a performance penalty loading all components regardless if the UI uses them.
 
 ```html
 <!doctype html>

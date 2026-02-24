@@ -7,11 +7,11 @@
 }
 ---
 
-The Data Grid is designed to be declarative to enable apps to choose the best rendering techniques that fit their use cases. When using a framework or library such as Angular, leverage the frameworks default syntax and conventions for rendering lists of DOM elements.
+The Data Grid uses a declarative approach to enable apps to choose the best rendering techniques that fit their use cases. When using a framework or library such as Angular, leverage the frameworks default syntax and conventions for rendering lists of DOM elements.
 
 ## Angular {% svg-logo 'angular' '20' %}
 
-In Angular you can use `*ngFor` directive and have full render control of when and how rows are created. This enables more advanced performance optomizations such as [trackBy](https://angular.io/api/core/TrackByFunction#description).
+In Angular you can use `*ngFor` directive and have full render control of when and how the framework creates rows. This enables more advanced performance optimizations such as [trackBy](https://angular.io/api/core/TrackByFunction#description).
 
 ```typescript
 @Component({
@@ -38,7 +38,7 @@ export class App {
 
 ## Lit {% svg-logo 'lit' '18' %}
 
-Creating dynamic grid rows adn cells in Lit uses the [standard array syntax](https://lit.dev/docs/templates/lists/).
+Creating dynamic grid rows and cells in Lit uses the [standard array syntax](https://lit.dev/docs/templates/lists/).
 
 ```typescript
 @customElement('demo-grid')

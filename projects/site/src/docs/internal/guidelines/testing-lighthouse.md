@@ -39,7 +39,7 @@ describe('badge lighthouse report', () => {
 
 ## Running Tests
 
-Test scripts should be run in the root directory of the project where the `package.json` is located.
+Run test scripts from the root directory of the project where the `package.json` lives.
 
 ```shell
 # run all tests

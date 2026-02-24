@@ -11,13 +11,13 @@
 
 {% installation 'react' %}
 
-Once installation is complete Elements can be imported and used within [React](https://react.dev/) jsx and tsx files.
+Once installed import and use Elements within [React](https://react.dev/) jsx and tsx files.
 
 ```typescript
 import '@nvidia-elements/core/alert/define.js';
 ```
 
-Once added, properties and events can be used via the standard JSX syntax.
+Properties and events then work via the standard JSX syntax.
 
 ```typescript
 // - status - HTML attribute
@@ -58,8 +58,8 @@ import '@lit-labs/ssr-react/enable-lit-ssr.js';
 ## React 18
 
 To use Elements in [React v18](https://legacy.reactjs.org/versions/) follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
-elements can be imported and used within React jsx and tsx files via the `@nvidia-elements/core-react` package. This package must be used to enable React 18 compatibility with Custom Elements.
-This package will wrap the custom elements into a React component, mapping the standard events and properties in a way that React can understand.
+import and use Elements within React jsx and tsx files via the `@nvidia-elements/core-react` package. Use this package to enable React 18 compatibility with Custom Elements.
+This package wraps the custom elements into a React component, mapping the standard events and properties in a way that React can understand.
 
 <nve-alert status="warning">The `@nvidia-elements/core-react` package is no longer needed as of React version 19. Using Elements directly improves compatibility and performance.</nve-alert>
 
@@ -79,7 +79,7 @@ import { NveDialog } from '@nvidia-elements/core-react/dialog';
 </NveDialog>
 ```
 
-Documented events are prefixed with `on` in the `elements-react` package. Example, the event `close` will map to `onclose`. Imports also map 1:1 with the core library.
+Documented events use the `on` prefix in the `elements-react` package. Example, the event `close` maps to `onclose`. Imports also map 1:1 with the core library.
 
 ```typescript
 // Standard Web Component

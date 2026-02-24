@@ -7,11 +7,11 @@
 }
 ---
 
-Panels provide a way to make additional content available alongside the primary page layout,
+Panels provide a way to make extra content available alongside the primary page layout,
 in a way that is accessible and minimizable.
 
-Panels will always be minimizable, either by closing or collapsing. The proper close/collapse icon button will display depending on the
-whether or not the `closable` attribute is set. By default `closable` is false and the panel will collapse down to just an expand icon.
+Panels are always minimizable, either by closing or collapsing. The proper close/collapse icon button displays depending on the
+whether you set the `closable` attribute. By default `closable` is false and the panel collapses down to just an expand icon.
 
 Additionally, `nve-panel` can be have its `side` property set to `left` or `right` to get the proper collapse/expand icon and animation.
 
@@ -29,7 +29,7 @@ Additionally, `nve-panel` can be have its `side` property set to `left` or `righ
 
 ## Collapsible Panel with External Trigger
 
-An external trigger can be used to expand/collapse or hide/show a panel. In this example clicking the button toggles the `expanded` attribute on the `nve-panel` between `true` and `false`.
+An external trigger supports expanding/collapsing or hiding/showing a panel. In this example clicking the button toggles the `expanded` attribute on the `nve-panel` between `true` and `false`.
 
 <nve-alert status="warning">
   Collapsible Panel with External Trigger is for use with a fixed position when collapsed, otherwise the button may have a flat side and not be on the edge of the page.
@@ -45,7 +45,7 @@ An external trigger can be used to expand/collapse or hide/show a panel. In this
 
 ## Panel with Header
 
-The `nve-panel-header` sub-component can be slotted into `nve-panel` to get default border styling, and additional sub slots within the header.
+The `nve-panel-header` sub-component can be slotted into `nve-panel` to get default border styling, and extra sub slots within the header.
 In this example `nve-panel-header` is further slotted with elements for `slot="title"`, `slot="subtitle"`, `icon-button` with `slot="action-icon"`
 
 {% example '@nvidia-elements/core/panel/panel.examples.json' 'PanelWithFullHeader' %}

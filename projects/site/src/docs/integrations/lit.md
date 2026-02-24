@@ -15,7 +15,7 @@
 import '@nvidia-elements/core/alert/define.js';
 ```
 
-Once added, properties and events can be used via the standard lit template syntax.
+Properties and events then work via the standard lit template syntax.
 
 ```typescript
 // - ?hidden - HTML Boolean attribute
@@ -34,7 +34,7 @@ Once added, properties and events can be used via the standard lit template synt
 
 Elements provides [layout](./docs/foundations/layout/) and [typography](./docs/foundations/typography/) utilities to make it easy to style your UI.
 
-These utilities are global CSS attributes that can be applied to any element. <br />
+These utilities are global CSS attributes that apply to any element. <br />
 To use these utilities within a Lit element, you need to import the styles, so they
 are available in your elements Shadow DOM.
 
@@ -83,8 +83,8 @@ manage form state and validation.
 
 <app-login></app-login>
 
-Events can be attached to the form element to capture `submit` and `input` events.
-Using `FormData` the `name` of the input is referenced as the key for our form values.
+Attach events to the form element to capture `submit` and `input` events.
+Using `FormData`, the `name` of the input serves as the key for the form values.
 
 ```typescript
 @customElement('app-login')
