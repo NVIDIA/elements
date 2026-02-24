@@ -8,8 +8,8 @@ export default {
 
 /**
  * @summary Monaco Problems element rendering hint, info, warning and error
- * problems assigned from various different sources and files. Also 
- * demonstrates listening for when the user selects, activates, or triggers
+ * problems assigned from different sources and files. Also supports
+ * listening for when the user selects, activates, or triggers
  * the context menu for a problem.
  */
 export const Default = {
@@ -84,7 +84,7 @@ export const Default = {
 
 /**
  * @summary Monaco Problems element with the default message shown
- * when no problems are assigned.
+ * when no problems exist.
  */
 export const Empty = {
   render: () => html`
@@ -94,7 +94,7 @@ export const Empty = {
 
 /**
  * @summary Monaco Problems element with a custom message in the empty slot
- * shown when no problems are assigned.
+ * shown when no problems exist.
  */
 export const CustomEmptySlot = {
   render: () => html`

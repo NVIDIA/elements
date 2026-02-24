@@ -172,7 +172,7 @@ export class AnimatedBuild extends LitElement {
   }
 
   #startAnimationLoop() {
-    // Wait for the component to be rendered
+    // Wait for the component to render
     requestAnimationFrame(() => {
       const wrapper = this.shadowRoot?.getElementById('hero-scene-wrapper');
       if (!wrapper) return;

@@ -43,7 +43,7 @@ const rule = {
         // Remove quotes and whitespace to get the actual path
         const importPath = preludeText.replace(/^['"]|['"]$/g, '').trim();
 
-        // Check if this import path is deprecated
+        // Check if this import path has a deprecated status
         if (importPath in deprecatedImports) {
           context.report({
             node,

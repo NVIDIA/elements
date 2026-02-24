@@ -35,10 +35,10 @@ export class AlertGroup extends LitElement {
   /** Defines visual treatment to represent a ongoing task or support status. */
   @property({ type: String, reflect: true }) status?: SupportStatus;
 
-  /** Determines the visual prominence or weight, emphasis is used for banner style alerts */
+  /** Determines the visual prominence or weight, emphasis applies banner style alerts */
   @property({ type: String, reflect: true }) prominence?: Extract<Prominence, 'emphasis'>;
 
-  /** Allows for colors not defined by semantic status definitions to be used in non-status instances, such as callouts for tutorials or tips on a documentation site. */
+  /** Allows colors not defined by semantic status definitions for non-status instances, such as callouts for tutorials or tips on a documentation site. */
   @property({ type: String, reflect: true }) color: Color;
 
   /** Determines the container bounds of the element */

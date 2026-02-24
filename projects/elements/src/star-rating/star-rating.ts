@@ -93,7 +93,7 @@ export class StarRating extends Control {
   }
 
   #getStepValue(index: number, starValue: number) {
-    // If we're hovering (active is set), use that value
+    // If hovering (active has a value), use that value
     if (this.active > 0) {
       return this.active;
     }

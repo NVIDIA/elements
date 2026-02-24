@@ -29,7 +29,7 @@ const docsMain = globalThis.document.querySelector<HTMLElement>('#docs-main')!;
 /**
  * Scrolls to an element by ID within the #docs-main container.
  * Uses manual scroll calculation to avoid scrollIntoView scrolling ancestor elements
- * like nve-page which has overflow:hidden but can still be scrolled programmatically.
+ * like nve-page which has overflow:hidden but can still scroll programmatically.
  */
 function scrollToHeading(headerId: string, behavior: ScrollBehavior = 'smooth') {
   if (!headerId) return;
@@ -162,7 +162,7 @@ const searchParams = new URLSearchParams(globalThis.location.search);
 const searchQuery = searchParams.get('q');
 const filterParam = searchParams.get('filter');
 
-// Validate and apply filter from URL
+// Check and apply filter from URL
 const isValidFilterParam = filterParam && FILTER_VALUES.includes(filterParam as (typeof FILTER_VALUES)[number]);
 
 if (isValidFilterParam) {
@@ -176,11 +176,11 @@ if (searchQuery) {
     globalThis.gtag('event', 'elements-docs-search', { query: searchQuery });
   }
 
-  // Wait for the search component to be defined and ready
+  // Wait for the search component to register and become ready
   await customElements.whenDefined('nvd-search');
   await docsSearch.updateComplete;
 
-  // Apply filter if one was specified in the URL
+  // Apply filter if the URL contains one
   if (currentFilter) {
     docsSearch.filter = currentFilter;
   }

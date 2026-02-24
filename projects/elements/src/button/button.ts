@@ -9,7 +9,7 @@ import styles from './button.css?inline';
  * @description A button is a widget that enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/button
- * @slot - slot for button text content or icon, icon placement determined by whether `icon` is inserted before or after text content.
+ * @slot - slot for button text content or icon, icon placement depends on whether `icon` appears before or after text content.
  * @cssprop --background
  * @cssprop --color
  * @cssprop --padding
@@ -37,7 +37,7 @@ export class Button extends BaseButton {
   };
 
   /**
-   * Determines the container of the button. Flat is used for nesting within other containers or more muted style. Inline is used for inline content such as text.
+   * Determines the container of the button. Flat suits nesting within other containers or more muted style. Inline suits inline content such as text.
    */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
@@ -47,7 +47,7 @@ export class Button extends BaseButton {
   @property({ type: String, reflect: true }) size?: Size;
 
   /**
-   * The Interaction type provides a way to indicate the intended use case for a button or other interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors.
+   * The Interaction type provides a way to show the intended use case for a button or other interactive element. This can help users quickly understand what each interaction will do and reduce the potential for confusion or errors.
    */
   @property({ type: String, reflect: true }) interaction: Interaction | FlatInteraction | Inverse;
 

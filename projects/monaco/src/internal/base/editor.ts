@@ -16,8 +16,8 @@ import styles from './editor.css?inline';
  * Base class for Monaco editor wrapper custom elements.
  * @cssprop --background
  * @cssprop --min-height
- * @event canceled - Dispatched when editor initialization is canceled.
- * @event ready - Dispatched when the editor is initialized and ready.
+ * @event canceled - Dispatched when the editor cancels initialization.
+ * @event ready - Dispatched when the editor finishes initialization and becomes ready.
  */
 export abstract class BaseMonacoEditor<T extends monaco.editor.IEditor> extends LitElement {
   /** @private */

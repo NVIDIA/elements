@@ -3,7 +3,7 @@ import { isFocusable } from './focus.js';
 
 /**
  * Preserves visual DOM ordering when using slots within Shadow DOM
- * See additional information/resources on Shadow DOM linear traversal
+ * See more information/resources on Shadow DOM linear traversal
  * https://nolanlawson.com/2021/02/13/managing-focus-in-the-shadow-dom/
  * https://www.abeautifulsite.net/posts/querying-through-shadow-roots/
  */
@@ -61,7 +61,7 @@ export function getAttributeListChanges(element: HTMLElement, attrs: string[], f
 
 /**
  * Appends styles to the render root of a given element. This is useful for
- * styles that need to be applied outside the scope of the element's shadow
+ * styles that apply outside the scope of the element's shadow
  * root such as UA styles --webkit-* that won't work in a ::slotted selector
  */
 export function appendRootNodeStyle(host: HTMLElement, styles: string) {
@@ -106,7 +106,7 @@ export function getElementUpdate(element: HTMLElement, key: string, callback: (v
         }
       });
     } catch {
-      // try/catch for cases where prop may have already been defined
+      // try/catch for cases where another call already defined the prop
     }
   }
 
@@ -230,7 +230,7 @@ export function getThemeTokens(element = globalThis.document.querySelector(':roo
   const styles = getComputedStyle(element);
   let parent = [];
 
-  // check for parent iframe, same domain iframes change how style sheets are accessed
+  // check for parent iframe, same domain iframes change how the browser accesses style sheets
   try {
     parent = Array.from(globalThis.parent.document.styleSheets);
   } catch {

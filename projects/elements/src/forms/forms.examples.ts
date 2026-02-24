@@ -25,7 +25,7 @@ export default {
 }
 
 /**
- * @summary Comprehensive showcase of all form controls in a grid layout, demonstrating various input types, states, and advanced patterns for complete form design reference.
+ * @summary Comprehensive showcase of all form controls in a grid layout, including input types, states, and advanced patterns for complete form design reference.
  */
 export const KitchenSink = {
   render: () => html`
@@ -592,7 +592,7 @@ export const Horizontal = () => {
 };
 
 /**
- * @summary Space-efficient horizontal layout with inline labels, ideal for dense forms where vertical space is limited and quick scanning is important.
+ * @summary Space-efficient horizontal layout with inline labels, ideal for dense forms with tight vertical space where quick scanning matters.
  */
 export const HorizontalInline = () => {
   return html`
@@ -706,7 +706,7 @@ export const HorizontalInline = () => {
 };
 
 /**
- * @summary Demonstrates form controls that automatically adjust their width to fit content, optimizing space usage for dynamic or variable-length inputs.
+ * @summary Form controls that automatically adjust their width to fit content, optimizing space usage for dynamic or variable-length inputs.
  * @tags test-case
  */
 export const FitText = {
@@ -738,7 +738,7 @@ export const FitText = {
 };
 
 /**
- * @summary Demonstrates hiding of status icon of the control message to be used in form controls.
+ * @summary Hidden status icon on the control message in form controls.
  * @tags test-case
  */
 export const HiddenControlMessageIcon = {

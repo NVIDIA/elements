@@ -16,7 +16,7 @@ export const Default = {
 };
 
 /**
- * @summary Different dot sizes to accommodate various layout contexts, from compact indicators to prominent status displays.
+ * @summary Different dot sizes to accommodate layout contexts from compact indicators to prominent status displays.
  * @tags test-case
  */
 export const Size = {

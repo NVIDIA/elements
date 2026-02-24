@@ -16,7 +16,7 @@ export const Default = {
 };
 
 /**
- * @summary Interactive page loader that can be triggered programmatically via button click.
+ * @summary Interactive page loader that triggers programmatically via button click.
  */
 export const Interactive = {
   inline: false,

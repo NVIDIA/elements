@@ -220,7 +220,7 @@ export const Objects = {
 }
 
 /**
- * @summary Demonstrates reduced-motion theme setting that disables animations for accessibility.
+ * @summary Reduced-motion theme setting that disables animations for accessibility.
  */
 export const ReducedMotion = {
   render: () => html`
@@ -334,7 +334,7 @@ export const ButtonInteractions = {
 }
 
 /**
- * @summary Theme interaction state system for menu items demonstrating all interactive states in both themes.
+ * @summary Theme interaction state system for menu items with all interactive states in both themes.
  */
 export const Interactions = {
   render: () => html`

@@ -17,14 +17,14 @@ export default {
 /* eslint-disable @nvidia-elements/lint/no-unexpected-attribute-value */
 
 /**
- * @summary Basic icon component demonstrating standard appearance and usage for visual communication and interface navigation.
+ * @summary Basic icon component with standard appearance and usage for visual communication and interface navigation.
  */
 export const Default = {
   render: () => html`<nve-icon name="person"></nve-icon>`
 };
 
 /**
- * @summary Demonstrates semantic color variations to communicate different states, priorities, and contextual meanings in user interfaces.
+ * @summary Semantic color variations to communicate different states, priorities, and contextual meanings in user interfaces.
  */
 export const Statuses = {
   render: () => html`
@@ -37,7 +37,7 @@ export const Statuses = {
 }
 
 /**
- * @summary Shows different icon sizes to accommodate various layout densities, touch targets, and visual hierarchy requirements.
+ * @summary Icon size variants to accommodate layout densities, touch targets, and visual hierarchy requirements.
  */
 export const Size = {
   render: () => html`
@@ -48,7 +48,7 @@ export const Size = {
 }
 
 /**
- * @summary Demonstrates directional icons for navigation, movement, and spatial relationships, providing clear visual cues for user actions.
+ * @summary Directional icons for navigation, movement, and spatial relationships, providing clear visual cues for user actions.
  */
 export const Direction = {
   render: () => html`
@@ -70,7 +70,7 @@ export const Direction = {
 }
 
 /**
- * @summary Shows icon appearance across light and dark themes, ensuring proper contrast and visibility in different visual environments.
+ * @summary Icon appearance across light and dark themes, ensuring proper contrast and visibility in different visual environments.
  * @tags test-case
  */
 export const Themes = {
@@ -93,7 +93,7 @@ export const Themes = {
 }
 
 /**
- * @summary SVG paths can be registered and made accessible to the `<nve-icon>` element. Icons can be defined via a string or async function returning the resulting string.
+ * @summary Register SVG paths and make them accessible to the `<nve-icon>` element. Define icons via a string or async function returning the resulting string.
  * @tags test-case
  */
 export const Registration = {
@@ -115,7 +115,7 @@ export const Registration = {
 }
 
 /**
- * @summary Icons can be aliased to a different name. This can be useful for context specific names or migrations between icon sets.
+ * @summary Alias icons to a different name. This supports context-specific names or migrations between icon sets.
  * @tags test-case
  */
 export const Alias = {
@@ -132,7 +132,7 @@ export const Alias = {
 }
 
 /**
- * @summary Direct SVG paths can be provided for rendering.
+ * @summary Provide direct SVG paths for rendering.
  * @tags test-case
  */
 export const Source = {
@@ -142,7 +142,7 @@ export const Source = {
 }
 
 /**
- * @summary Comprehensive showcase of NVIDIA Brand Assets icons, demonstrating the extensive icon library available for professional applications and branding.
+ * @summary Comprehensive showcase of NVIDIA Brand Assets icons, featuring the extensive icon library available for professional applications and branding.
  * @tags test-case
  */
 export const Brand = {

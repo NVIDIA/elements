@@ -72,7 +72,7 @@ export const CustomOptionRender = {
 }
 
 /**
- * @summary Select with a prefix button to provide additional context or categorization.
+ * @summary Select with a prefix button to provide extra context or categorization.
  */
 export const Prefix = {
   render: () => html`
@@ -88,7 +88,7 @@ export const Prefix = {
 };
 
 /**
- * @summary Flat container style for single and multiple select, providing a minimal visual treatment.
+ * @summary Flat container style for single and multi select, providing a minimal visual treatment.
  */
 export const Flat = {
   render: () => html`
@@ -116,7 +116,7 @@ export const Flat = {
 };
 
 /**
- * @summary Vertical layout showcasing various states: default, disabled, success, and error.
+ * @summary Vertical layout showcasing states: default, disabled, success, and error.
  * @tags test-case
  */
 export const Vertical = {
@@ -165,7 +165,7 @@ export const Vertical = {
 };
 
 /**
- * @summary Horizontal layout showcasing various states: default, disabled, success, and error.
+ * @summary Horizontal layout showcasing states: default, disabled, success, and error.
  * @tags test-case
  */
 export const Horizontal = {
@@ -214,7 +214,7 @@ export const Horizontal = {
 };
 
 /**
- * @summary Multiple selection mode allowing users to select several options simultaneously.
+ * @summary Many-selection mode allowing users to select many options simultaneously.
  */
 export const Multiple = {
   render: () => html`
@@ -232,7 +232,7 @@ export const Multiple = {
 };
 
 /**
- * @summary Multiple selection in disabled state, showing read-only selected options.
+ * @summary Multi-selection in disabled state, showing read-only selected options.
  */
 export const MultipleDisabled = {
   render: () => html`
@@ -250,7 +250,7 @@ export const MultipleDisabled = {
 };
 
 /**
- * @summary Multiple selection with constrained width to demonstrate overflow handling of selected options.
+ * @summary Multi-selection with constrained width to show overflow handling of selected options.
  */
 export const MultipleOverflow = {
   render: () => html`
@@ -380,7 +380,7 @@ export const FitContent = {
 };
 
 /**
- * @summary Placeholder text prompts users to make a selection when no option is chosen.
+ * @summary Placeholder text prompts users to make a selection when no option exists yet.
  */
 export const Placeholder = {
   render: () => html`
@@ -397,7 +397,7 @@ export const Placeholder = {
 };
 
 /**
- * @summary Placeholder text in multiple selection mode guides users before any selections are made.
+ * @summary Placeholder text in multi-selection mode guides users before they select any options.
  */
 export const PlaceholderMultiple = {
   render: () => html`
@@ -414,7 +414,7 @@ export const PlaceholderMultiple = {
 };
 
 /**
- * @summary Individual options can be disabled to prevent selection while remaining visible.
+ * @summary Disable individual options to prevent selection while keeping them visible.
  */
 export const Disabled = {
   render: () => html`

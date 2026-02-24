@@ -15,7 +15,7 @@ export type { IconName, IconNames, IconSVG } from './icons.js';
  * @element nve-icon
  * @since 0.1.3
  * @entrypoint \@nvidia-elements/core/icon
- * @description An icon is a graphic symbol designed to visually indicate the purpose of an interface element.
+ * @description An icon is a graphic symbol designed to visually show the purpose of an interface element.
  * @cssprop --color
  * @cssprop --width
  * @cssprop --height
@@ -143,7 +143,7 @@ export function mergeIcons(RegisteredIcon: typeof Icon) {
     const registered = parseVersion(RegisteredIcon.metadata.version);
     const current = parseVersion('0.0.0');
 
-    // determine if a older icon was registered and if so, merge the icons with the latest svgs
+    // determine if an older icon already registered and if so, merge the icons with the latest svgs
     if (registered.minor <= current.minor && registered.major <= current.major) {
       RegisteredIcon._icons = { ...RegisteredIcon._icons, ...ICON_IMPORTS };
     }

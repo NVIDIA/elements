@@ -7,7 +7,7 @@ export default {
   component: 'nve-markdown'
 };
 
-/** @summary Basic example of the markdown component rendering content from a template element */
+/** @summary Markdown component rendering content from a template element. */
 export const Default = {
   render: () => html`
 <nve-markdown>
@@ -217,7 +217,7 @@ This paragraph tests that lists properly end with margin-bottom.
   `
 };
 
-/** @summary Demonstrates mixing raw HTML elements with markdown syntax within a template */
+/** @summary Mixing raw HTML elements with markdown syntax within a template */
 export const CombinedFromTemplate = {
   render: () => html`
 <nve-markdown>
@@ -520,7 +520,7 @@ Autoconverted link https://github.com/nodeca/pica (enable linkify to see)
 };
 
 /**
- * @summary CSS utility attribute for applying markdown typography styles to any element without using the web component. Use the nve-markdown attribute on a container and import the styles CSS file separately.
+ * @summary CSS utility attribute for applying markdown typography styles to any element without using the Web Component. Use the nve-markdown attribute on a container and import the styles CSS file separately.
  * @tags test-case
  */
 export const CssUtility = {

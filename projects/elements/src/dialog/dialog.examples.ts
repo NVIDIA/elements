@@ -118,7 +118,7 @@ export const Medium = {
 };
 
 /**
- * @summary Large dialog size for complex forms or extensive content. Use size="lg" for multi-section forms, detailed settings panels, or content-rich interactions where users need more space to work comfortably, but consider using a drawer for very large content areas.
+ * @summary Large dialog size for complex forms or extensive content. Use size="lg" for multi-section forms, detailed settings panels, or content-rich interactions where users need more space to work comfortably, but consider using a drawer for large content areas.
  * @tags test-case
  */
 export const Large = {
@@ -131,7 +131,7 @@ export const Large = {
 };
 
 /**
- * @summary Dialog with text wrapping behavior, demonstrating how content adapts to dialog constraints and maintains readability in limited space.
+ * @summary Dialog with text wrapping behavior, where content adapts to dialog constraints and maintains readability in limited space.
  * @tags test-case
  */
 export const TextWrap = {
@@ -194,7 +194,7 @@ export const Alignment = {
 };
 
 /**
- * @summary Specific dialog positioning example, demonstrating how to place dialogs in optimal locations for user interaction and visual hierarchy.
+ * @summary Specific dialog positioning example, with placement in optimal locations for user interaction and visual hierarchy.
  * @tags test-case
  */
 export const Position = {
@@ -215,7 +215,7 @@ export const Position = {
 
 /**
  * @deprecated
- * @summary Legacy trigger mechanism for dialog opening, demonstrating backward compatibility and alternative interaction patterns for dialog activation.
+ * @summary Legacy trigger mechanism for dialog opening, with backward compatibility and alternative interaction patterns for dialog activation.
  * @tags test-case
  */
 export const LegacyTrigger = {
@@ -272,7 +272,7 @@ export const LegacyBehaviorTrigger = {
 };
 
 /**
- * @summary Dialog functionality within shadow DOM, demonstrating proper dialog behavior in encapsulated component environments and custom elements.
+ * @summary Dialog functionality within shadow DOM, with proper dialog behavior in encapsulated component environments and custom elements.
  * @tags test-case
  */
 export const ShadowRoot = {
@@ -318,7 +318,7 @@ export const ScrollContent = {
 };
 
 /**
- * @summary Modal dialog with inert behavior, demonstrating proper focus management and accessibility compliance for modal overlays and user interaction.
+ * @summary Modal dialog with inert behavior, including proper focus management and accessibility compliance for modal overlays and user interaction.
  * @tags test-case
  */
 export const InertModal = {
@@ -366,7 +366,7 @@ export const InertModal = {
 };
 
 /**
- * @summary Dialog with different container styles, demonstrating how to use the dialog with different container styles and padding.
+ * @summary Dialog with different container styles, including custom padding and layout options.
  * @tags test-case
  */
 export const ContainerStyles = {
@@ -406,7 +406,7 @@ export const ContainerStyles = {
 };
 
 /**
- * @summary Dialog with overflow content demonstrating max-height constraints and scrollable content area.
+ * @summary Dialog with overflow content, including max-height constraints and a scrollable content area.
  * @tags test-case
  */
 export const MaxHeight = {

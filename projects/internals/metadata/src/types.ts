@@ -31,7 +31,7 @@ export interface Element {
 }
 
 /**
- * @summary Elements in HTML have attributes; these are additional values that configure the elements or adjust their behavior in various ways to meet the criteria the users want.
+ * @summary Elements in HTML have attributes; these are extra values that configure the elements or adjust their behavior to meet the criteria the users want.
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes
  */
 export interface Attribute {
@@ -46,7 +46,7 @@ export interface Attribute {
 }
 
 /**
- * @summary A token is a named value that can be used in a CSS theme.
+ * @summary A token is a named value for a CSS theme.
  * @see https://www.designtokens.org/
  */
 export interface Token {
@@ -61,7 +61,7 @@ export interface Token {
 export type ExampleTag = 'priority' | 'performance' | 'pattern' | 'anti-pattern' | 'test-case';
 
 /**
- * @summary An example is a template that can be used to demonstrate an API, specific use case, or pattern.
+ * @summary An example is a template that can show an API, specific use case, or pattern.
  */
 export interface Example {
   id: string;
@@ -219,7 +219,7 @@ export interface CustomElementManifest {
 export type ElementStatus = 'unknown' | 'pre-release' | 'beta' | 'stable';
 
 /**
- * @summary The behavior of an element is a category that describes how the element is used in the UI based on Web API specifications.
+ * @summary The behavior of an element is a category that describes how the element operates in the UI based on Web API specifications.
  */
 export type ElementBehavior =
   | 'button'

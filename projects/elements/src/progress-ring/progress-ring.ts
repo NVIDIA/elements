@@ -8,7 +8,7 @@ import styles from './progress-ring.css?inline';
 
 /**
  * @element nve-progress-ring
- * @description The `progress-ring` component is used to indicate the status of a pending task. It also serves the basis of the page loading element.
+ * @description The `progress-ring` component shows the status of a pending task. It also serves the basis of the page loading element.
  * @since 0.17.0
  * @entrypoint \@nvidia-elements/core/progress-ring
  * @slot status-icon
@@ -44,7 +44,7 @@ export class ProgressRing extends LitElement {
   /** The `max` value of the progress ring that the `value` is proportionaly scaled to. */
   @property({ type: Number }) max? = 100;
 
-  /** There are four visual treatments that represent the `status` of varius tasks. When `status` is set to `warning`, `success` or `danger`, appropriate icons are embedded. */
+  /** Four visual treatments represent the `status` of tasks. When `status` changes to `warning`, `success`, or `danger`, the component embeds appropriate icons. */
   @property({ type: String, reflect: true }) status?: SupportStatus | 'neutral' = 'neutral';
 
   /** T-shirt `size` of the progress indicator, used to scale the ring. */
@@ -52,7 +52,7 @@ export class ProgressRing extends LitElement {
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
-  /** Enables internal string values to be updated for internationalization. */
+  /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   render() {
