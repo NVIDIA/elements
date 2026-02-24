@@ -7,28 +7,28 @@
 
 # {{ title }}
 
-This document describes the various runtime logs and warnings from the Element libraries. These warnings help identify potential issues with component usage and implementation.
+This document describes the runtime logs and warnings from the Element libraries. These warnings help identify potential issues with component usage and implementation.
 
 ## Duplicate Package Version
 
-This warning appears when multiple versions of Elements or its dependencies are bundled or imported within the same runtime. This can create unexpected compatibility issues and bug at runtime. To resolve, ensure dependencies are up to date and list their dependencies or peer dependencies if they internally depend on Elements.
+This warning appears when the application bundles or imports many versions of Elements or its dependencies within the same runtime. This can create unexpected compatibility issues and bug at runtime. To resolve, ensure dependencies are up to date and list their dependencies or peer dependencies if they internally depend on Elements.
 
 <nve-alert status="accent">Read more about [library packaging best practices](docs/api-design/packaging/).</nve-alert>
 
 ## Excessive Instance Limit
 
-This warning appears when too many instances of a component are rendered in the DOM. This can impact application performance. Common components that can have an excessive amount of instances include `nve-grid-row/cell` and `nve-tree-item`.
+This warning appears when the DOM contains too many instances of a component. This can impact application performance. Common components that can have an excessive amount of instances include `nve-grid-row/cell` and `nve-tree-item`.
 
 To resolve this warning:
 
 - Consider reusing existing elements instead of creating new ones
-- Implement virtualization or pagination of elements
+- Use virtualization or pagination of elements
 - [Data Grid Performance Documentation](docs/elements/data-grid/performance/)
 - [Dynamic Tree Documentation](docs/elements/tree/#dynamic-tree)
 
 ## Invalid Parent
 
-This warning occurs when a component is used as a child of an unsupported parent element. Example a `nve-card-header` element can only be used as a direct child of `nve-card`.
+This warning occurs when a consumer places a component as a child of an unsupported parent element. Example, a `nve-card-header` element can only appear as a direct child of `nve-card`.
 
 <nve-alert status="success">Valid</nve-alert>
 
@@ -48,7 +48,7 @@ This warning occurs when a component is used as a child of an unsupported parent
 
 To resolve this warning:
 
-- Ensure the component is placed directly under the correct parent element
+- Place the component directly under the correct parent element
 - Review the component's API for parent element requirements
 
 ## Invalid Slotted Children
@@ -86,7 +86,7 @@ This warning appears when invalid elements are slotted into a component. Example
 To resolve this warning:
 
 - Check the component's documentation for allowed slotted elements
-- Ensure only supported elements are placed in slots
+- Place only supported elements in slots
 
 ## ID Match Not Found
 
@@ -109,14 +109,14 @@ This warning appears when a component tries to reference an element by ID that d
 To resolve this warning:
 
 - Ensure the referenced element exists in the DOM
-- Check that the ID is spelled correctly
-- Verify the element is rendered before the reference is made
+- Check that the ID uses the correct spelling
+- Verify the element renders before the component references it
 
 ## Cross Shadow Root Anchor
 
-Native CSS Anchor Positioning allows two elements to be tethered together via a unique identifier. This is commonly used for popover-like elements. However CSS Anchor Positioning is limited to only positioning two elements in the same render root. Examples of rendering across render roots include in different Shadow Dom Roots or popover top layer instances. This behavior/compatibility issue is being tracked https://github.com/w3c/csswg-drafts/issues/9408.
+Native CSS Anchor Positioning allows two elements to tether together via a unique identifier. This is commonly used for popover-like elements. But CSS Anchor Positioning only supports positioning two elements in the same render root. Examples of rendering across render roots include in different Shadow Dom Roots or popover top layer instances. The CSSWG tracks this behavior/compatibility issue at https://github.com/w3c/csswg-drafts/issues/9408.
 
-Element popover positioning will detect instances of cross Shadow Root anchoring attempts and fallback to a JavaScript based positioning system. This will allow the popover to anchor correctly but at the cost of render reliability and performance when compared to native CSS Anchor Positioning.
+Element popover positioning detects instances of cross Shadow Root anchoring attempts and falls back to a JavaScript based positioning system. This allows the popover to anchor correctly but at the cost of render reliability and performance when compared to native CSS Anchor Positioning.
 
 ## SSR Mismatch
 

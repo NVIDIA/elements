@@ -28,7 +28,7 @@
 
 {% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'Status' %}
 
-When `value` is set to zero, full size status icons are shown with no ring.
+When `value` equals zero, full size status icons appear with no ring.
 
 {% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'ZeroValueStatus' %}
 
@@ -44,12 +44,12 @@ When used with text, please set `size="xs"`.
 
 ## Custom Icon Slotting
 
-The `status-icon` slot can be used within `nve-progress-ring` to create a custom loading indicator.
+The `status-icon` slot within `nve-progress-ring` creates a custom loading indicator.
 
 {% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'SlottedIcon' %}
 
 ## Using within a Button
 
-When `nve-progress-ring` is used within a `nve-button` the `status` should be set to `neutral` to properly inherit button background color.
+When using `nve-progress-ring` within a `nve-button`, set the `status` to `neutral` to properly inherit button background color.
 
 {% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'WithButton' %}

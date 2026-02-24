@@ -13,7 +13,7 @@ the API simple without obfuscating the native browser APIs.
 
 ## Installation
 
-The form elements are split into individual sub imports/entrypoints.
+The form elements use individual sub imports/entrypoints.
 
 ```typescript
 import '@nvidia-elements/core/input/define.js';

@@ -8,7 +8,7 @@
 
 ## Installation
 
-Note: language must be imported before codeblock
+Note: import the language before the codeblock
 
 ```typescript
 // only import languages that you need
@@ -51,7 +51,7 @@ function getTime(): number {
 
 ## Theme
 
-A Theme can be set independent of the global theme using the `nve-theme` attribute.
+You can set a Theme independent of the global theme using the `nve-theme` attribute.
 
 {% example '@nvidia-elements/code/codeblock/codeblock.examples.json', 'Theme' %}
 

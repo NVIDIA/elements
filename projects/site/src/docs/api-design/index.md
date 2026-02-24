@@ -9,11 +9,11 @@
 
 ## What this document is
 
-This document outlines the API best practices and guidelines for creating highly reusable UI components/elements that work in any framework or library. The best practices defined here are tailored to low level leaf components and may not be applicable to all use cases of an application or plugin.
+This document outlines the API best practices and guidelines for creating highly reusable UI components/elements that work in any framework or library. The best practices defined here target low level leaf components and may not apply to all use cases of an application or plugin.
 
 ## What this document is not
 
-This document is not intended to define the best practices and API design of higher level UI components used at the micro-frontend/plugin/application level. While some of the recommendations and best practices outlined in this document are applicable, not all will apply outside of the reusable UI element library use case.
+This document is not intended to define the best practices and API design of higher level UI components used at the micro-frontend/plugin/application level. While some of the recommendations and best practices outlined in this document are applicable, not all apply outside of the reusable UI element library use case.
 
 ## Legend
 
@@ -29,9 +29,9 @@ This document is not intended to define the best practices and API design of hig
 
 ## Terminology
 
-- Element: a web component defined within the public API of the library
+- Element: a Web Component defined within the public API of the library
 - Component: higher level UI web/framework components in plugins/apps
-- Pattern: combination of elements to create a UI rather creating new additional elements
+- Pattern: combination of elements to create a UI rather than creating new extra elements
 - Pattern Library: packaged library of patterns/behaviors composed of low level elements
 - Plugin/Application: code that consumes or uses the elements
 - Consumers: developers/designers that use the UI elements within their products
@@ -90,5 +90,5 @@ Consistent element APIs provide consistent developer experience. The recommendat
 ```
 
 <nve-alert status="accent">
-  See example of how a Web Component based design system can be used by <a href="https://NVIDIA.github.io/elements/starters/">many frameworks</a>.
+  See an example of how many <a href="https://NVIDIA.github.io/elements/starters/">frameworks</a> can use a Web Component based design system.
 </nve-alert>

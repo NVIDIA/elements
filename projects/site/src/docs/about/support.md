@@ -9,7 +9,7 @@
 
 ## Libraries and Community
 
-Reach out to our slack support chanel or find additional resources in our Figma libraries.
+Reach out to the Slack support channel or find more resources in the Figma libraries.
 
 <section nve-layout="row gap:sm pad-bottom:lg">
   <nve-button>
@@ -28,7 +28,7 @@ Reach out to our slack support chanel or find additional resources in our Figma 
 
 ## Frameworks
 
-Elements [supports a wide variety](https://custom-elements-everywhere.com) of JavaScript frameworks and libraries as well as vanilla JS. Read more at our [installation](./docs/about/installation/) page.
+Elements [supports a wide variety](https://custom-elements-everywhere.com) of JavaScript frameworks and libraries as well as vanilla JS. Read more at the [installation](./docs/about/installation/) page.
 
 <section nve-layout="row gap:sm pad-bottom:lg">
   <nve-button>
@@ -62,7 +62,7 @@ Elements [supports a wide variety](https://custom-elements-everywhere.com) of Ja
 
 ## Browsers
 
-To enable and support cutting edge features for our users the primary browser support is Chrome.
+To enable and support cutting edge features for all users the primary browser support is Chrome.
 
 <section nve-layout="row gap:sm pad-bottom:md">
   <nve-button>
@@ -70,7 +70,7 @@ To enable and support cutting edge features for our users the primary browser su
   </nve-button>
 </section>
 
-If a browser API is reasonably supported via a polyfill then it may be added to our optional polyfill bundle.
+If a polyfill reasonably supports a browser API then the team may add it to the optional polyfill bundle.
 
 ```typescript
 import '@nvidia-elements/core/polyfills';
@@ -78,11 +78,11 @@ import '@nvidia-elements/core/polyfills';
 
 ## Versioning
 
-The Elements package follows [semantic versioning](https://semver.org/) and is now in its stable 1.x release cycle. Changes can be found in the [Changelog](./docs/changelog/). A debug utility is available
-on the global window object to help identify the active versions being used at runtime. This log will list out all the registered elements and active versions.
+The Elements package follows [semantic versioning](https://semver.org/) and is now in its stable 1.x release cycle. You can find changes in the [Changelog](./docs/changelog/). A debug utility is available
+on the global window object to help identify the active versions in use at runtime. This log lists all the registered elements and active versions.
 
-- API <strong>Breaking</strong> changes are maximum once per <strong>three months</strong>.
-- API <strong>Deprecations</strong> are supported for minimum of <strong>three months</strong>.
+- API <strong>Breaking</strong> changes are at most once per <strong>three months</strong>.
+- API <strong>Deprecations</strong> remain supported for at least <strong>three months</strong>.
 
 ```typescript
 window.NVE_ELEMENTS.debug()

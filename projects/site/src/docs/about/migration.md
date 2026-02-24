@@ -9,13 +9,13 @@
 
 ## Why nve?
 
-Elements has been gradually transitioning its libraries to use the `@nvidia-elements/*` package scope and namespace. This change began in early 2024 with Elements, which already employed the `nve` namespace internally. The shift to `@nvidia-elements/*` aims to establish a clear ownership boundary and signal of support for our libraries. As we expand into new projects through [@nve-labs](./docs/labs/), this namespace will continue to signify which projects have the backing of the Elements team.
+Elements has been gradually transitioning its libraries to use the `@nvidia-elements/*` package scope and namespace. This change began in early 2024 with Elements, which already employed the `nve` namespace internally. The shift to `@nvidia-elements/*` aims to establish a clear ownership boundary and signal of support for the Elements libraries. As the team expands into new projects through [@nve-labs](./docs/labs/), this namespace continues to signify which projects have the backing of the Elements team.
 
 The [1.0 release](./docs/changelog/#nve-elements-v1-0-0-2024-07-31) addresses a long standing issue where peer dependencies are inadvertently overlooked by package managers when the package itself has a '0.x' version number. [(npm)](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies) [(semver)](https://semver.org/#spec-item-9)
 
 ## Migration Steps (required)
 
-It is recommended to update to the latest 0.x release before migration to a 1.x release. To migrate from a 0.x release to 1.x follow the following steps:
+Update to the latest 0.x release before migration to a 1.x release. To migrate from a 0.x release to 1.x follow the following steps:
 
 ### 1. Update Packages
 
@@ -53,15 +53,15 @@ import '@nvidia-elements/core/button/define.js';
 
 <nve-alert-group status="accent">
   <nve-alert>
-    <p nve-text="body lg medium">The "mlv" API prefix <strong>will continue to be supported</strong> throughout 1.0 and its <a nve-text="link mkd" href="docs/about/support/#versioning">deprecation cycle</a>.</p>
+    <p nve-text="body lg medium">The "mlv" API prefix <strong>continues to work</strong> throughout 1.0 and its <a nve-text="link mkd" href="docs/about/support/#versioning">deprecation cycle</a>.</p>
   </nve-alert>
 </nve-alert-group>
 
-With the release of 1.0 the scope and namespace for Element APIs are now prefixed `nve`. All prior `mlv` prefixes are deprecated. These steps are not required to initially migrate and use 1.0. To incrementally migrate to the new prefix follow the following steps:
+With the release of 1.0 the scope and namespace for Element APIs now use the `nve` prefix. All prior `mlv` prefixes have entered deprecation. These steps are not required to initially migrate and use 1.0. To incrementally migrate to the new prefix follow the following steps:
 
 ### 1. Update CSS Imports
 
-The CSS bundle is now divided into smaller independent bundles. This allows you to choose only what utilities and themes are needed for your application, improving overall application performance.
+The CSS bundle is now divided into smaller independent bundles. This allows you to choose only the utilities and themes your application needs, improving application performance.
 
 ```css
 /* before */

@@ -7,7 +7,7 @@
 
 # Forms
 
-The forms utility library provides a base mixin to make it easy to create form associated custom elements. Form associated custom elements enable components to integrate and participate in form value state and validation. This creates a reliable and predictable API contract for components. This project is in the very early stages of exploration. [Project Source](https://github.com/NVIDIA/elements/-/tree/main/projects/forms)
+The forms utility library provides a base mixin to make it easy to create form associated custom elements. Form associated custom elements enable components to integrate with form value state and validation. This creates a reliable and predictable API contract for components. This project is in the early stages of exploration. [Project Source](https://github.com/NVIDIA/elements/-/tree/main/projects/forms)
 
 ## Getting Started
 
@@ -39,7 +39,7 @@ npm install @nvidia-elements/forms
 - `name` name associated to parent form
 - `noValidate` getter to check if component is in a no validation state
 - `form` getter to get a reference to component parent form
-- `willValidate` determine if component will validate
+- `willValidate` determine if component validates
 - `validity` validity state of the component
 - `validationMessage` current validation message of the component
 - `valueAsString` stringified value of the component

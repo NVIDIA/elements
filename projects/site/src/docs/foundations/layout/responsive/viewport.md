@@ -14,7 +14,7 @@
 
 # {{title}}
 
-By optionally importing the responsive viewport layout module, the `nve-layout` this system is extended using [CSS Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@media) for adaptive responsive design based on the browser viewport width rather than the container element's width.
+By optionally importing the responsive viewport layout module, you extend the `nve-layout` system using [CSS Media Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@media) for adaptive responsive design based on the browser viewport width rather than the container element's width.
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
@@ -27,7 +27,7 @@ By optionally importing the responsive viewport layout module, the `nve-layout` 
 
 The responsive layout API applies conditional styling based on browser viewport width. Supported features include `gap`, `padding`, `row vs column`, `reversing` flex direction, and varying `grid` structure across defined pixel width breakpoints.
 
-The following set of viewport `breakpoint-values` are defined as:
+The following set of viewport `breakpoint-values` defines:
 
 - `sm = 576px`
 - `md = 768px`
@@ -71,7 +71,7 @@ The following media query breakpoints are available for gap, replace `...` with 
 
 ## Responsive Padding
 
-The following media query breakpoints are available for padding, replace `...` with one of the 9 padding [padding](docs/foundations/layout/#layout-padding) values:
+The following media query breakpoints are available for padding, replace `...` with one of the 9 [padding](docs/foundations/layout/#layout-padding) values:
 
 - `@sm|pad:...`
 - `@md|pad:...`
@@ -105,7 +105,7 @@ The following media query breakpoints are available for swapping flex direction:
 
 ### Reverse Direction
 
-In addition to the above, you can also use the following syntax for flipping the flex direction:
+Also, you can use the following syntax for flipping the flex direction:
 
 - `@...|row-reverse`
 - `@...|column-reverse`
@@ -114,7 +114,7 @@ In addition to the above, you can also use the following syntax for flipping the
 
 ## Responsive Grid
 
-Grid structure can be varied based on viewport size using the following syntax with `nve-layout=grid...`:
+You can vary grid structure based on viewport size using the following syntax with `nve-layout=grid...`:
 
 ```html
 <section nve-layout="grid gap:md span-items:12 @sm|span-items:6 @md|span-items:4 @lg|span-items:3">
@@ -150,12 +150,12 @@ Or:
 
 ## Hiding Elements Based on Viewport Size
 
-Since hiding elements only affects the display of the element itself and not the layout of its children, we use the `nve-display` attribute for responsive visibility control.
+Since hiding elements only affects the display of the element itself and not the layout of its children, responsive visibility control uses the `nve-display` attribute.
 
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Element visibility (hiding) uses the separate <code>nve-display</code> attribute rather than <code>nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how children are arranged.
+      Element visibility (hiding) uses the separate <code>nve-display</code> attribute rather than <code>nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how the parent arranges children.
     </div>
   </nve-alert>
 </nve-alert-group>

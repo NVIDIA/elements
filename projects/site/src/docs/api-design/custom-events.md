@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-Events are used to communicate user intent to the host application. Examples include, `close`, or `change`. Events should be **stateless** only relaying user interaction and avoid changing the state of the element.
+Events communicate user intent to the host application. Examples include `close` or `change`. Events should be **stateless** only relaying user interaction and avoid changing the state of the element.
 
 ```html
 <nve-alert closable></nve-alert>

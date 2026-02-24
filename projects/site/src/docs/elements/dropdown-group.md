@@ -6,7 +6,7 @@
 }
 ---
 
-<nve-alert status="warning">Note: Hover-based interactions are not currently supported due to added complexity and accessibility concerns. Support may be considered in future iterations with improved popover APIs.</nve-alert>
+<nve-alert status="warning">Note: hover-based interactions are not currently supported due to added complexity and accessibility concerns. Future iterations with improved popover APIs may add support.</nve-alert>
 
 ## Installation
 

@@ -14,7 +14,7 @@
 
 {% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'TextInput' %}
 
-## Multiple
+## Many
 
 {% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'Multiple' %}
 
@@ -28,7 +28,7 @@
 
 ## Custom
 
-Custom filter chips can be created by using the `slot` attribute. A `nve-button` can be used to trigger custom UI.
+Create custom filter chips by using the `slot` attribute. A `nve-button` works as a trigger for custom UI.
 
 {% example '@nvidia-elements/core/progressive-filter-chip/progressive-filter-chip.examples.json' 'Custom' '{ "inline": false, "height": "400px" }' %}
 

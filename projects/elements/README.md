@@ -7,7 +7,7 @@
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [Gitlab Repo](https://github.com/NVIDIA/elements)
 - [Package Artifactory URM](https://registry.npmjs.org
-- [Package Artifactory Maglev](ui/packages/npm:%2F%2F@nvidia-elements%2Fcore)
+- [Package Artifactory NVDA](ui/packages/npm:%2F%2F@nvidia-elements%2Fcore)
 
 ## Getting Started
 
@@ -53,7 +53,7 @@ import '@nvidia-elements/core/button/define.js';
 - `build`: run library build
 - `dev`: run build in watch mode
 - `test`: run unit tests
-- `test:watch`: run unit tets in watch mode
+- `test:watch`: run unit tests in watch mode
 
 All component development is currently done within the docs site. Run each
 site and elements dev mode in a independent terminal.

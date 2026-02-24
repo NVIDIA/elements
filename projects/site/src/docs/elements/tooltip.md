@@ -62,7 +62,7 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 ## Dynamic Anchor Position
 
-A popover will follow its assigned anchor event when the anchor position is dynamically changed.
+A popover follows its assigned anchor event when the anchor position is dynamically changed.
 
 <!-- {% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'DynamicAnchorPosition' %} -->
 

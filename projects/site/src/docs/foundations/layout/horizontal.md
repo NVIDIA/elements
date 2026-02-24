@@ -53,7 +53,7 @@ Choose horizontal layout (`row`) for:
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      <strong>Note:</strong> Horizontal layouts work well for components that need to respond to available space. Items can wrap, stretch, or maintain fixed sizes while the layout handles spacing automatically.
+      <strong>Note:</strong> horizontal layouts work well for components that need to respond to available space. Items can wrap, stretch, or maintain fixed sizes while the layout handles spacing automatically.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -107,16 +107,16 @@ Horizontal layouts support alignment along both axes:
 
 - `align:center` - Center both horizontally and vertically
 - `align:stretch` - Stretch in both dimensions
-- Multiple values can be combined: `align:vertical-center align:right`
+- You can combine many values: `align:vertical-center align:right`
 
 ### Special Options
 
-- `align:wrap` - Allow items to wrap to multiple lines when needed
+- `align:wrap` - Allow items to wrap to many lines when needed
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      <strong>Alignment mental model:</strong> Think of horizontal layouts as having a main axis (left-to-right) and a cross axis (top-to-bottom). This helps predict how alignment values will behave.
+      <strong>Alignment mental model:</strong> think of horizontal layouts as having a main axis (left-to-right) and a cross axis (top-to-bottom). This helps predict how alignment values behave.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -202,7 +202,7 @@ Horizontal layouts support alignment along both axes:
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      <strong>Accessibility note:</strong> Ensure logical tab order when using visual reordering with flexbox. Screen readers follow DOM order, not visual order.
+      <strong>Accessibility note:</strong> ensure logical tab order when using visual reordering with flexbox. Screen readers follow DOM order, not visual order.
     </div>
   </nve-alert>
 </nve-alert-group>

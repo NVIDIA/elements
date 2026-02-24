@@ -7,12 +7,12 @@
 
 # {{ title }}
 
-Layers define the position of an element on the z-axis in the UI. Layer types are categories of elements that build up to higher layers as they are stacked or nested. Read more about the [popover explainer](https://open-ui.org/components/popup.research.explainer).
+Layers define the position of an element on the z-axis in the UI. Layer types are categories of elements that build up to higher layers as they stack or nest. Read more about the [popover explainer](https://open-ui.org/components/popup.research.explainer).
 
 The layers in order of stacking are the following:
 
 - `canvas` - body, document
-- `container` - cards, stepss, tabs
+- `container` - cards, steps, tabs
 - `overlay` - modals, drawers, dropdowns (menus, filters, combobox)
 - `popover` - tooltips, toasts, notifications
 

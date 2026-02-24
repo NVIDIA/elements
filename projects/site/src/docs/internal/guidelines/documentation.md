@@ -76,9 +76,11 @@ Renders an example template and its corresponding metadata.
 {% endraw %}
 ```
 
+<!-- vale Google.Quotes = NO -->
 <div class="shortcode-demo">
 {% example '@nvidia-elements/core/button/button.examples.json' 'Default' '{ "height": "150px", "align": "center", "summary": false, "layer": "highlight" }' %}
 </div>
+<!-- vale Google.Quotes = YES -->
 
 </div>
 
@@ -107,12 +109,12 @@ Render the metadata tags of a given Example template.
 
 ## Example Group Shortcode
 
-The `example-group` shortcode visualizes multiple related examples in a single layout. Each example summary/description will be rendered alongside its example.
+The `example-group` shortcode visualizes many related examples in a single layout. Each example renders its summary/description alongside its example.
 
 | Parameter    | Description                                                     | Type     |
 | ------------ | --------------------------------------------------------------- | -------- |
 | Paths        | Fully qualified paths to the examples file and its example name | `string` |
-| Content Slot | Additional context about related examples in example group      | `string` |
+| Content Slot | Extra context about related examples in example group           | `string` |
 
 ```html
 {% raw %}
@@ -120,7 +122,7 @@ The `example-group` shortcode visualizes multiple related examples in a single l
 
 {% example-group '@nvidia-elements/core/accordion/accordion.examples.json:Single' '@nvidia-elements/core/accordion/accordion.examples.json:Multiple' %}
 
-Accordions may be leveraged alone or in conjunction with others to create various progressive disclosure patterns.
+Leverage accordions alone or in conjunction with others to create progressive disclosure patterns.
 
 {% endexample-group %}
 {% endraw %}
@@ -132,7 +134,7 @@ Accordions may be leveraged alone or in conjunction with others to create variou
 
 {% example-group '@nvidia-elements/core/accordion/accordion.examples.json:Single' '@nvidia-elements/core/accordion/accordion.examples.json:Multiple' %}
 
-Accordions may be leveraged alone or in conjunction with others to create various progressive disclosure patterns.
+Leverage accordions alone or in conjunction with others to create progressive disclosure patterns.
 
 {% endexample-group %}
 
@@ -140,7 +142,7 @@ Accordions may be leveraged alone or in conjunction with others to create variou
 
 ## API Shortcode
 
-Renders the description metadata of a given API. The identifier of the referenced API is optional. If no identifier is provided then all API references of provided type are displayed.
+Renders the description metadata of a given API. The identifier of the referenced API is optional. If you omit the identifier, the shortcode displays all API references of the provided type.
 
 | Parameter  | Description              | Type                                                                             |
 | ---------- | ------------------------ | -------------------------------------------------------------------------------- |
@@ -262,7 +264,7 @@ Renders the description metadata of a given API. The identifier of the reference
 
 ### API Type
 
-If no identifier is provided then all API references of provided type are displayed.
+If you omit the identifier, the shortcode displays all API references of the provided type.
 
 <div nve-layout="column gap:md full">
 
