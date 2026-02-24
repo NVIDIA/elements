@@ -16,7 +16,7 @@ export default {
 };
 
 /**
- * @summary Basic menu with simple text items demonstrating the default menu structure and styling.
+ * @summary Basic menu with simple text items for the default menu structure and styling.
  */
 export const Default = {
   render: () => html`
@@ -30,7 +30,7 @@ export const Default = {
 };
 
 /**
- * @summary An example of a dropdown menu. Useful for navigation menus, context menus, settings and user actions. [ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
+ * @summary Dropdown menu with icon-labeled items for navigation, context menus, settings, and user actions. [ARIA Spec](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-navigation/)
  */
 export const Dropdown = {
   render: () => html`
@@ -106,7 +106,7 @@ export const Disabled = {
 };
 
 /**
- * @summary Menu items with icons demonstrating how to add visual context and improve usability.
+ * @summary Menu items with icons to add visual context and improve usability.
  */
 export const Icons = {
   render: () => html`
@@ -120,7 +120,7 @@ export const Icons = {
 };
 
 /**
- * @summary Menu items with links demonstrating navigation functionality within menu structures.
+ * @summary Menu items with links for navigation functionality within menu structures.
  */
 export const Links = {
   render: () => html`
@@ -254,7 +254,7 @@ export const VerticalNavigationPanel = {
 };
 
 /**
- * @summary Menu item with tooltip integration showing how to provide additional context and warnings.
+ * @summary Menu item with tooltip integration showing how to provide extra context and warnings.
  * @tags pattern test-case
  */
 export const MenuItemTooltip = {

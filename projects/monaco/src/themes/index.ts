@@ -35,7 +35,7 @@ export function applyThemeForColorScheme(monaco: Monaco, rootEl: HTMLElement) {
 }
 
 export function updateThemeForColorScheme(monaco: Monaco, rootEl: HTMLElement) {
-  // NOTE: intentionally do nothing if a different theme has been applied
+  // NOTE: intentionally do nothing if the consumer applied a different theme
   if (['elements-dark', 'elements-light'].includes(monaco.editor.getTheme())) {
     applyThemeForColorScheme(monaco, rootEl);
   }

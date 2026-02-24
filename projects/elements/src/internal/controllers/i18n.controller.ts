@@ -30,7 +30,7 @@ export class I18nController<T extends I18n> implements ReactiveController {
 
   hostUpdated() {
     if (this.host.i18n.__set === undefined) {
-      // if set is undefined then an override has been applied
+      // if set equals undefined then the caller applied an override
       this.#overides = this.host.i18n;
       this.#update();
     }

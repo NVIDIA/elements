@@ -10,7 +10,7 @@ import styles from './json-viewer.css?inline';
 /**
  * @deprecated use `nve-monaco-input` instead
  * @element nve-json-viewer
- * @description The JSON Viewer is a custom element that renders JSON data in a easy to read format. This can be used for prototyping and quickly displaying and debugging data. The JSON View is not a substitute for treeview patterns.
+ * @description The JSON Viewer is a custom element that renders JSON data in a easy to read format. Use it for prototyping and quickly displaying and debugging data. The JSON View is not a substitute for treeview patterns.
  * @since 0.16.0
  * @slot - default slot for json
  * @csspart json-node - The json node elements
@@ -18,7 +18,7 @@ import styles from './json-viewer.css?inline';
  * @package false
  */
 export class JSONViewer extends LitElement {
-  /** JSON value to be displayed */
+  /** JSON value to display */
   @property({ type: Object }) value = {}; // eslint-disable-line
 
   /** expand all nodes */

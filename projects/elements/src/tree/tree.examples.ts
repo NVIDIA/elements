@@ -126,7 +126,7 @@ export const Selectable = {
 };
 
 /**
- * @summary Multi-selection tree for choosing multiple items from hierarchical options, enabling bulk operations and comprehensive content management.
+ * @summary Multi-selection tree for choosing many items from hierarchical options, enabling bulk operations and comprehensive content management.
  */
 export const SelectableMultiple = {
   render: () => html`
@@ -164,7 +164,7 @@ export const SelectableMultiple = {
 };
 
 /**
- * @summary Interactive selection handling using the select event, demonstrating how to respond to node selection changes.
+ * @summary Interactive selection handling using the select event, with callbacks for node selection changes.
  * @tags test-case
  */
 export const SelectEvent = {
@@ -217,7 +217,7 @@ export const SelectEvent = {
 };
 
 /**
- * @summary Tree with highlighted nodes for emphasizing specific items, providing visual focus and search result indication in hierarchical data.
+ * @summary Tree with highlighted nodes for emphasizing specific items, providing visual focus and search result signal in hierarchical data.
  */
 export const Highlight = {
   render: () => html`
@@ -285,7 +285,7 @@ export const Links = {
 };
 
 /**
- * @summary Tree with loading states for asynchronous data, demonstrating progress indicators and dynamic content loading in hierarchical structures.
+ * @summary Tree with loading states for asynchronous data, including progress indicators and dynamic content loading in hierarchical structures.
  */
 export const Async = {
   render: () => html`
@@ -409,7 +409,7 @@ export const NodeContent = {
 };
 
 /**
- * @summary Dynamic tree with programmatic node creation and management, demonstrating scalable hierarchical data handling for large datasets.
+ * @summary Dynamic tree with programmatic node creation and management, for scalable hierarchical data handling with large datasets.
  * @tags test-case
  */
 export const DynamicTree = {
@@ -456,7 +456,7 @@ export const VerticalNav = {
 };
 
 /**
- * @summary Tree with scrollable container for handling deep hierarchies and large datasets, ensuring optimal space utilization and navigation.
+ * @summary Tree with scrollable container for handling deep hierarchies and large datasets, ensuring optimal space usage and navigation.
  * @tags test-case
  */
 export const Overflow = {
@@ -521,7 +521,7 @@ export const Overflow = {
 };
 
 /**
- * @summary Tree with bulk node creation for performance testing, demonstrating efficient handling of large numbers of nodes and dynamic expansion.
+ * @summary Tree with bulk node creation for performance testing, verifying efficient handling of large numbers of nodes and dynamic expansion.
  * @tags test-case performance
  */
 export const BulkCreation = {

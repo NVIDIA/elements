@@ -43,7 +43,7 @@ export class Toolbar extends LitElement implements ContainerElement {
   static elementDefinitions = {};
 
   /**
-   * Determines the container styles of component. Flat is used for nesting elements within other containers or more muted style. Full is used when the element expands the full width of the viewport.
+   * Determines the container styles of component. Flat applies when nesting elements within other containers or for a more muted style. Full applies when the element expands the full width of the viewport.
    */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inset' | 'full';
 
@@ -53,7 +53,7 @@ export class Toolbar extends LitElement implements ContainerElement {
   @property({ type: String, reflect: true }) content?: 'scroll' | 'wrap' = 'scroll';
 
   /**
-   * Determines the orientation direction of the toolbar. Vertical toolbars are limited to icon buttons only.
+   * Determines the orientation direction of the toolbar. Vertical toolbars support icon buttons only.
    */
   @property({ type: String, reflect: true }) orientation?: 'horizontal' | 'vertical' = 'horizontal';
 

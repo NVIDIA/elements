@@ -104,7 +104,7 @@ export function validateSchema(schema: Schema, value: unknown): { validity: Part
           };
         }
 
-        // validate each item in the array
+        // check each item in the array
         for (const item of value) {
           const result = validateSchema(schema.items, item);
           if (!result.validity.valid) {
@@ -126,7 +126,7 @@ export function validateSchema(schema: Schema, value: unknown): { validity: Part
       const valueProperties = Object.keys(value as object);
       const schemaProperties = Object.keys(schema.properties);
 
-      // Check for additional properties not in schema
+      // Check for extra properties not in schema
       const additionalProps = valueProperties.filter(prop => !schemaProperties.includes(prop));
       if (additionalProps.length > 0 && !schema.additionalProperties) {
         return {
@@ -135,7 +135,7 @@ export function validateSchema(schema: Schema, value: unknown): { validity: Part
         };
       }
 
-      // Validate each property
+      // Check each property
       for (const [prop, propSchema] of Object.entries(schema.properties)) {
         const propValue = (value as any)[prop]; // eslint-disable-line @typescript-eslint/no-explicit-any
 

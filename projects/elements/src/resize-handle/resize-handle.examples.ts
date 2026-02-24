@@ -99,7 +99,7 @@ export const Form = {
 };
 
 /**
- * @summary Demonstrates preventing default toggle behavior for custom resize logic and constraints.
+ * @summary Preventing default toggle behavior for custom resize logic and constraints.
  */
 export const PreventDefault = {
   render: () => html`

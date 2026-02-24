@@ -47,7 +47,7 @@ export const Default = {
 };
 
 /**
- * @summary Cascading dropdown menu with disabled menu items demonstrating non-interactive states.
+ * @summary Cascading dropdown menu with disabled menu items in non-interactive states.
  */
 export const WithDisabledItems = {
   render: () => html`
@@ -133,7 +133,7 @@ export const WithIcons = {
 };
 
 /**
- * @summary Cascading dropdown menu showcasing additional icon varieties for diverse menu actions.
+ * @summary Cascading dropdown menu showcasing extra icon varieties for diverse menu actions.
  */
 export const WithMoreIcons = {
   render: () => html`

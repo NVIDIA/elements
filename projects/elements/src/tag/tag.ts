@@ -46,7 +46,7 @@ export class Tag extends BaseButton {
     [Icon.metadata.tag]: Icon
   };
 
-  /** Determines if tag is closable, if true, a close icon will be rendered. */
+  /** Determines if tag is closable, if true, the component renders a close icon. */
   @property({ type: Boolean }) closable = false;
 
   /** Determines the color of the tag. */
@@ -57,7 +57,7 @@ export class Tag extends BaseButton {
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
-  /** Enables internal string values to be updated for internationalization. */
+  /** Updates internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   #typeClosableController = new TypeClosableController(this);

@@ -38,7 +38,7 @@ export const Default = {
 }
 
 /**
- * @summary Progressive filter chip demonstrating proper layer stacking within dropdown contexts.
+ * @summary Progressive filter chip with proper layer stacking within dropdown contexts.
  */
 export const Layer = {
   render: () => html`
@@ -66,7 +66,7 @@ export const Layer = {
 }
 
 /**
- * @summary Progressive filter chip with multi-select dropdown for filtering by multiple values simultaneously.
+ * @summary Progressive filter chip with multi-select dropdown for filtering by many values simultaneously.
  */
 export const Multiple = {
 render: () => html`

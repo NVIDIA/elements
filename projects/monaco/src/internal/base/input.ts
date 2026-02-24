@@ -66,8 +66,8 @@ function setJSONSchemaForModel(monaco: Monaco, model: monaco.editor.ITextModel, 
  * @cssprop --border-radius
  * @cssprop --min-height
  * @cssprop --padding
- * @event canceled - Dispatched when editor initialization is canceled.
- * @event ready - Dispatched when the editor is initialized and ready.
+ * @event canceled - Dispatched when the editor cancels initialization.
+ * @event ready - Dispatched when the editor finishes initialization and becomes ready.
  * @event input - Emitted when the element's value changes as a result of a user action.
  * @event change - Emitted when the user modifies and commits the element's value.
  * @event reset - Emitted when the control state is reset to its initial value.
@@ -86,7 +86,7 @@ export abstract class BaseMonacoInput<
   #isProgrammaticChange = false;
 
   /**
-   * Defines the programming language to be used for syntax highlighting and validation.
+   * Defines the programming language for syntax highlighting and validation.
    */
   @property({ type: String })
   get language(): SuggestedLanguages | string {
@@ -99,7 +99,7 @@ export abstract class BaseMonacoInput<
   #language: SuggestedLanguages | string = 'javascript';
 
   /**
-   * Determines whether the input is disabled and cannot be edited.
+   * Determines whether the input prevents editing.
    */
   get disabled(): boolean {
     return super.disabled;
@@ -110,7 +110,7 @@ export abstract class BaseMonacoInput<
   }
 
   /**
-   * Determines whether code folding is enabled in the editor.
+   * Determines whether the editor supports code folding.
    */
   @property({ type: Boolean })
   get folding(): boolean {
@@ -173,7 +173,7 @@ export abstract class BaseMonacoInput<
   }
 
   /**
-   * Determines whether the input is required to have a value.
+   * Determines whether the input requires a value.
    */
   get required(): boolean {
     return super.required;
@@ -184,7 +184,7 @@ export abstract class BaseMonacoInput<
   }
 
   /**
-   * JSON schema to use for validation when language is set to 'json'.
+   * JSON schema for validation when the language equals 'json'.
    * https://json-schema.org/
    */
   @property({ type: Object })
@@ -225,7 +225,7 @@ export abstract class BaseMonacoInput<
   }
 
   /**
-   * Controls how text wrapping is handled in the editor.
+   * Controls how the editor wraps text.
    */
   @property({ attribute: 'word-wrap', type: String, reflect: true })
   get wordWrap(): WordWrapOptions {
@@ -316,7 +316,7 @@ export abstract class BaseMonacoInput<
 
   abstract render(): TemplateResult;
 
-  // NOTE: We don't use Lit's lifecycle to apply properties that overlap with updateOptions(), in order to avoid batched updates becoming desynchronized.
+  // NOTE: We don't use Lit's lifecycle to apply properties that overlap with updateOptions(), to avoid batched updates becoming desynchronized.
   updateEditorOptions(options: monaco.editor.IEditorOptions & monaco.editor.IGlobalEditorOptions) {
     if ('folding' in options) {
       this.#folding = options.folding;

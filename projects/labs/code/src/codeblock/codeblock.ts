@@ -36,12 +36,12 @@ export class CodeBlock extends LitElement implements ContainerElement {
   };
 
   /**
-   * Determines the container styles of component. Flat is used for nesting within other containers.
+   * Determines the container styles of component. Flat enables nesting within other containers.
    */
   @property({ type: String, reflect: true }) container?: 'flat' | 'inline';
 
   /**
-   * Programming language to be used to process the codeblock.
+   * Programming language that processes the codeblock.
    */
   @property({ type: String }) language:
     | 'bash'
@@ -70,7 +70,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
 
   /**
    * Adds styling to highlight the provided code lines.
-   * For multiple lines: use Comma seperated values, ex: (1,5,7).
+   * For many lines: use Comma seperated values, ex: (1,5,7).
    * For range of lines, use hyphen seperated values, ex: (1-5).
    * You can combine both such as: ex: (1,5,10-15,20).
    */

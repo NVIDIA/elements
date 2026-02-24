@@ -27,7 +27,7 @@ export const Default = {
 };
 
 /**
- * @summary An example of a dropdown menu. Useful for navigation menus, context menus, settings and user actions.
+ * @summary Dropdown menu with icon-labeled items for navigation, context menus, settings, and user actions.
  */
 export const DropdownMenu = {
   render: () => html`
@@ -56,7 +56,7 @@ export const Visual = {
 };
 
 /**
- * @summary Demonstrates event handling for dropdown open and close events. Useful for adding custom behavior when dropdown state changes.
+ * @summary Event handling for dropdown open and close events. Useful for adding custom behavior when dropdown state changes.
  * @tags test-case
  */
 export const Events = {
@@ -108,7 +108,7 @@ export const DropdownLayout = {
 };
 
 /**
- * @summary Dropdown with multiple triggers, demonstrating how to use the popovertarget attribute to connect multiple triggers to the same dropdown.
+ * @summary Dropdown with many triggers, showing how to use the popovertarget attribute to connect many triggers to the same dropdown.
  * @tags test-case
  */
 export const MultipleTriggers = {
@@ -123,7 +123,7 @@ export const MultipleTriggers = {
 };
 
 /**
- * @summary Dropdown position, demonstrating how to use the position attribute to position the dropdown when the trigger is not visible.
+ * @summary Dropdown position, with the position attribute controlling placement when the trigger is not visible.
  * @tags test-case
  */
 export const Position = {
@@ -149,7 +149,7 @@ export const Position = {
 };
 
 /**
- * @summary Dropdown alignment, demonstrating how to use the alignment attribute to position the dropdown when the trigger is not visible.
+ * @summary Dropdown alignment, with the alignment attribute controlling horizontal placement relative to the trigger.
  * @tags test-case
  */
 export const Alignment = {
@@ -237,7 +237,7 @@ export const CheckboxGroup = {
 
 /**
  * @deprecated
- * @summary Legacy behavior trigger for dropdown, demonstrating how to use the behavior-trigger attribute to open the dropdown when the button is clicked.
+ * @summary Legacy behavior trigger for dropdown, using the behavior-trigger attribute to open the dropdown on button click.
  * @tags test-case
  */
 export const LegacyBehaviorTrigger = {
@@ -252,7 +252,7 @@ export const LegacyBehaviorTrigger = {
 
 /**
  * @deprecated
- * @summary Dropdown hint, demonstrating how to use the tooltip element to display a hint when the dropdown is opened.
+ * @summary Dropdown hint, using the tooltip element to display a hint when the dropdown opens.
  * @tags test-case
  */
 export const DropdownHint = {
@@ -268,7 +268,7 @@ export const DropdownHint = {
 };
 
 /**
- * @summary Dropdown position fallback, demonstrating how to use the position and alignment attributes to position the dropdown when the trigger is not visible.
+ * @summary Dropdown position fallback, using the position and alignment attributes to reposition the dropdown when the trigger is not visible.
  * @tags test-case
  */
 export const DropdownPositionFallback = {

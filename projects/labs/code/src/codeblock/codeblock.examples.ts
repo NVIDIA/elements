@@ -35,7 +35,7 @@ export const Flat = {
 };
 
 /**
- * @summary Demonstrates light and dark theme variations for different UI contexts.
+ * @summary Light and dark theme variations for different UI contexts.
  */
 export const Theme = {
   render: () => html`
@@ -109,7 +109,7 @@ function getTime(): number {
 }
 
 /**
- * @summary Codeblock with constrained height demonstrating scrollable overflow behavior for long code.
+ * @summary Codeblock with constrained height for scrollable overflow behavior with long code.
  * @tags test-case
  */
 export const Overflow = {

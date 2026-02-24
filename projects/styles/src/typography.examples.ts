@@ -7,7 +7,7 @@ export default {
 };
 
 /**
- * @summary Demonstrates the foundational text types available in the design system for establishing visual hierarchy.
+ * @summary Foundational text types (display, heading, body, label) for establishing visual hierarchy in the design system.
  * @tags priority
  */
 export const Default = {
@@ -22,7 +22,7 @@ export const Default = {
 }
 
 /**
- * @summary Shows how text types can be applied to semantic HTML heading elements for accessible content structure.
+ * @summary Text types applied to semantic HTML heading elements for accessible content structure.
  * @tags priority
  */
 export const Headings = {
@@ -64,7 +64,7 @@ export const Size = {
 }
 
 /**
- * @summary Illustrates color variations for text to convey importance levels and ensure proper contrast in light and dark themes.
+ * @summary Color variations for text to convey importance levels and ensure proper contrast in light and dark themes.
  * @tags test-case
  */
 export const Color = {
@@ -84,7 +84,7 @@ export const Color = {
 }
 
 /**
- * @summary Demonstrates available font weight options for creating visual emphasis and hierarchy within text content.
+ * @summary Available font weight options for creating visual emphasis and hierarchy within text content.
  */
 export const Weights = {
   render: () => html`
@@ -99,7 +99,7 @@ export const Weights = {
 }
 
 /**
- * @summary Demonstrates the default styled unordered list with consistent spacing and bullet markers.
+ * @summary Styled unordered list with consistent spacing and bullet markers.
  */
 export const List = {
   render: () => html`
@@ -113,7 +113,7 @@ export const List = {
 }
 
 /**
- * @summary Shows the styled ordered list format with sequential numbering for step-by-step or prioritized content.
+ * @summary Styled ordered list with sequential numbering for step-by-step or prioritized content.
  */
 export const OrderedList = {
   render: () => html`
@@ -183,7 +183,7 @@ export const NavList = {
 }
 
 /**
- * @summary Demonstrates link styles including states, emphasis levels, and sizes for clear interactive affordances.
+ * @summary Link styles including states, emphasis levels, and sizes for clear interactive affordances.
  * @tags test-case
  */
 export const Link = {
@@ -211,7 +211,7 @@ export const Link = {
 }
 
 /**
- * @summary Shows text transformation utilities for case changes and truncation to handle overflow gracefully.
+ * @summary Text transformation utilities for case changes and truncation to handle overflow gracefully.
  */
 export const Transforms = {
   render: () => html`
@@ -225,7 +225,7 @@ export const Transforms = {
 }
 
 /**
- * @summary Illustrates relative line height options that scale with font size, optimizing readability for different text densities.
+ * @summary Relative line height options that scale with font size, optimizing readability for different text densities.
  * @tags test-case
  */
 export const LineHeightRelative = {
@@ -259,7 +259,7 @@ export const LineHeightFixed = {
 }
 
 /**
- * @summary Demonstrates the description list layout with consistent spacing and typography styles.
+ * @summary Description list layout with consistent spacing and typography styles.
  */
 export const DescriptionList = {
   render: () => html`

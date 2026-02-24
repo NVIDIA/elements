@@ -57,7 +57,7 @@ export const Readonly = {
 };
 
 /**
- * @summary Tag group layout with overflow handling and add functionality, ideal for managing multiple categories with space constraints.
+ * @summary Tag group layout with overflow handling and add functionality, ideal for managing many categories with space constraints.
  */
 export const TagGroup = {
   render: () => html`
@@ -136,7 +136,7 @@ export const Prominence = {
 
 
 /**
- * @summary Single tag with constrained width, demonstrating text overflow behavior and content truncation in limited space.
+ * @summary Single tag with constrained width, with text overflow behavior and content truncation in limited space.
  * @tags test-case
  */
 export const OverflowSingle = {
@@ -146,7 +146,7 @@ export const OverflowSingle = {
 
 
 /**
- * @summary Multiple tags with maximum width constraints, showing how content adapts to space limitations and maintains visual consistency.
+ * @summary Many tags with max width constraints, showing how content adapts to space limitations and maintains visual consistency.
  * @tags test-case
  */
 export const OverflowMaxWidth= {

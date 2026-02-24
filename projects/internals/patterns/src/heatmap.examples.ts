@@ -430,7 +430,7 @@ export const PathPlanningHeatmap = {
 };
 
 /**
- * @summary Grid heatmap displaying robot joint utilization for multi-axis manipulator arms across motion profiles.
+ * @summary Grid heatmap displaying robot joint usage for multi-axis manipulator arms across motion profiles.
  * Essential for robotics engineers optimizing arm trajectories and preventing mechanical wear using viridis scale.
  * @tags pattern
  */
@@ -871,7 +871,7 @@ export const ThermalHeatmap = {
 };
 
 /**
- * @summary Example of a dynamic heatmap pattern with programmatic data generation and management via JavaScript.
+ * @summary Dynamic heatmap pattern with programmatic data generation and management via JavaScript.
  * @tags pattern test-case
  */
 export const DynamicHeatmap = {

@@ -10,10 +10,10 @@ export type TypeExpandable = ReactiveElement & {
 
 /**
  * Controller for enabling expandable behavior for elements.
- * @event open - Dispatched when the expandable element is opened.
- * @event close - Dispatched when the expandable element is closed.
+ * @event open - Dispatched when the expandable element opens.
+ * @event close - Dispatched when the expandable element closes.
  * @property expanded - expanded state
- * @property behaviorExpand - determines if stateful auto behavior should be enabled
+ * @property behaviorExpand - determines if stateful auto behavior should enable
  */
 export class TypeExpandableController<T extends TypeExpandable> implements ReactiveController {
   #commandTriggered = false;

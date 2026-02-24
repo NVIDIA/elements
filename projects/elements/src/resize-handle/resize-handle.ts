@@ -28,12 +28,12 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
   @property({ type: String, reflect: true }) orientation?: 'horizontal' | 'vertical' = 'horizontal';
 
   /**
-   * Determines the minimum resize value.
+   * Determines the min resize value.
    */
   @property({ type: Number, reflect: true }) min = 0;
 
   /**
-   * Determines the maximum resize value.
+   * Determines the max resize value.
    */
   @property({ type: Number, reflect: true }) max = 100;
 
@@ -59,7 +59,7 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Updates internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

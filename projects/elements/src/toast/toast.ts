@@ -20,10 +20,10 @@ import styles from './toast.css?inline';
  * @description A contextual popup that displays a status. Toasts are [triggered](https://w3c.github.io/aria/#tooltip) by clicking, focusing, or tapping an element and cannot have interactive elements within them. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/toast
- * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
- * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
- * @event open - Dispatched when the toast is opened.
- * @event close - Dispatched when the toast is closed.
+ * @event beforetoggle - Dispatched on a popover just before showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
+ * @event open - Dispatched when the toast opens.
+ * @event close - Dispatched when the toast closes.
  * @slot - default content slot
  * @slot prefix - custom status icon slot
  * @cssprop --padding
@@ -56,8 +56,8 @@ export class Toast extends LitElement {
   };
 
   /**
-   * (optional) By default the popover will automatically anchor itself relative to the trigger element.
-   * A optional custom anchor element can be provided by passing an idref string within the same render root or a HTMLElement DOM reference.
+   * (optional) By default the popover automatically anchors itself relative to the trigger element.
+   * Pass an optional custom anchor element as an idref string within the same render root or a HTMLElement DOM reference.
    */
   @property({ type: String }) anchor: string | HTMLElement;
 
@@ -95,7 +95,7 @@ export class Toast extends LitElement {
   @property({ type: Boolean }) closable = false;
 
   /**
-   * A delayed `close` event will occur determined from the provided millisecond value.
+   * A delayed `close` event occurs after the provided millisecond value elapses.
    */
   @property({ type: Number, attribute: 'close-timeout' }) closeTimeout = 0;
 
@@ -108,7 +108,7 @@ export class Toast extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Updates internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
