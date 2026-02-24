@@ -26,7 +26,7 @@ export const Default = {
 };
 
 /**
- * @summary Responsive form controls demonstrating layout adaptation in resizable containers.
+ * @summary Responsive form controls with layout adaptation in resizable containers.
  * @tags test-case
  */
 export const Responsive = {

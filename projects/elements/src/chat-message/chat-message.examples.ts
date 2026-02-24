@@ -18,7 +18,7 @@ export const Default = {
 `};
 
 /**
- * @summary Demonstrates different arrow positions for chat messages. Useful for creating chat bubbles that point to specific elements or users.
+ * @summary Different arrow positions for chat messages. Useful for creating chat bubbles that point to specific elements or users.
  * @tags test-case
  */
 export const ArrowPosition = {

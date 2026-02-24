@@ -58,7 +58,7 @@ export const Status = {
 }
 
 /**
- * @summary Alert group for visually organizing related messages with shared styling. Use alert groups to present multiple related messages as a cohesive unit, improving scannability and visual hierarchy.
+ * @summary Alert group for visually organizing related messages with shared styling. Use alert groups to present many related messages as a cohesive unit, improving scannability and visual hierarchy.
  */
 export const AlertGroupDefault = {
   render: () => html`
@@ -69,7 +69,7 @@ export const AlertGroupDefault = {
 };
 
 /**
- * @summary Alert groups with inherited status styling for all children. Applying status at the group level ensures visual consistency across related messages, perfect for form validation where multiple fields share the same error context.
+ * @summary Alert groups with inherited status styling for all children. Applying status at the group level ensures visual consistency across related messages, perfect for form validation where many fields share the same error context.
  */
 export const AlertGroupStatus = {
   render: () => html`
@@ -189,7 +189,7 @@ export const Actions = {
 }
 
 /**
- * @summary High-prominence alerts with emphasis styling for full-width banners. Use prominence="emphasis" for system-wide announcements like maintenance windows, feature launches, or critical security updates that need maximum visibility and impact across the entire interface.
+ * @summary High-prominence alerts with emphasis styling for full-width banners. Use prominence="emphasis" for system-wide announcements like maintenance windows, feature launches, or critical security updates that need max visibility and impact across the entire interface.
  */
 export const Prominence = {
   render: () => html`
@@ -239,7 +239,7 @@ export const Content = {
 }
 
 /**
- * @summary Custom color variants for brand-specific styling or additional visual differentiation beyond standard status colors. Use custom colors when standard semantic colors don't match your use case, such as category labels, team assignments, or brand-specific messaging.
+ * @summary Custom color variants for brand-specific styling or extra visual differentiation beyond standard status colors. Use custom colors when standard semantic colors don't match your use case, such as category labels, team assignments, or brand-specific messaging.
  * @tags test-case
  */
 export const Color = {
@@ -337,7 +337,7 @@ export const Color = {
 }
 
 /**
- * @summary Combining custom colors with status icons and prominence for advanced theming. Demonstrates how custom colors interact with status icons and emphasis styling, useful for maintaining brand consistency while preserving semantic meaning through status indicators.
+ * @summary Custom color combinations with status icons and prominence for advanced theming. Custom colors interact with status icons and emphasis styling, useful for maintaining brand consistency while preserving semantic meaning through status indicators.
  * @tags test-case
  */
 export const CustomColorCombinations = {

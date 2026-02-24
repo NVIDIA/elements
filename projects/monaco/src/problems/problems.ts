@@ -53,11 +53,11 @@ function hasProblemsChanged(value: Problem[], oldValue: Problem[] | undefined) {
  * @entrypoint \@nvidia-elements/monaco/problems
  * @cssprop --background
  * @cssprop --min-height
- * @event canceled - Dispatched when editor initialization is canceled.
- * @event ready - Dispatched when the editor is initialized and ready.
- * @event problem-selected - Dispatched when a problem is selected.
- * @event problem-activated - Dispatched when a problem is activated.
- * @event problem-context-menu - Dispatched when a problem's context menu is requested.
+ * @event canceled - Dispatched when the editor cancels initialization.
+ * @event ready - Dispatched when the editor finishes initialization and becomes ready.
+ * @event problem-selected - Dispatched when the user selects a problem.
+ * @event problem-activated - Dispatched when the user activates a problem.
+ * @event problem-context-menu - Dispatched when the user requests a problem's context menu.
  * @slot empty - Slot for displaying a message when empty.
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/textarea
  * @stable false

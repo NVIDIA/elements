@@ -13,7 +13,7 @@ import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './d
  * @since 1.29.0
  * @entrypoint \@nvidia-elements/core/dropzone
  * @event change emits when the value has changed (files located in event.target)
- * @slot - use only when custom messaging is needed
+ * @slot - use only when custom messaging requires it
  * @cssprop --background
  * @cssprop --border-color
  * @cssprop --border-radius
@@ -36,7 +36,7 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables internal string values to update for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

@@ -17,7 +17,7 @@ import styles from './badge.css?inline';
 
 /**
  * @element nve-badge
- * @description A visual indicator that communicates a status description of an associated component. Status badges use short text, color, and icons for quick recognition and are placed near the relevant content.
+ * @description A visual indicator that communicates a status description of an associated component. Status badges use short text, color, and icons for quick recognition and render near the relevant content.
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/badge
  * @slot - default slot for content
@@ -50,7 +50,7 @@ export class Badge extends LitElement {
   @property({ type: String, reflect: true }) color: Color;
 
   /**
-   * Determines the container styles of component. Flat is used for nesting within other containers.
+   * Determines the container styles of component. Flat suits nesting within other containers.
    */
   @property({ type: String, reflect: true }) container?: 'flat';
 
@@ -78,7 +78,7 @@ export class Badge extends LitElement {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables updating internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

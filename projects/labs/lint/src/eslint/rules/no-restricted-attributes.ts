@@ -4,7 +4,7 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 const RESTRICTED_GLOBAL_ATTRIBUTES = ['nve-text', 'nve-layout', 'mlv-text', 'mlv-layout'];
 const RESTRICTED_ELEMENT_API_ATTRIBUTES = ['variant'];
 
-// External box-model attribute values that are allowed on custom elements
+// External box-model attribute values that custom elements allow
 function isExternalBoxModelValue(value: string) {
   return value
     .trim()

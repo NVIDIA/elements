@@ -17,14 +17,14 @@ import globalStyles from './tree.global.css?inline';
 
 /**
  * @element nve-tree
- * @description A tree view widget presents a hierarchical list. Any item in the hierarchy may have child items, and items that have children may be expanded or collapsed to show or hide the children.
+ * @description A tree view widget presents a hierarchical list. Any item in the hierarchy may have child items, and items that have children can expand or collapse to show or hide the children.
  * @since 1.2.0
  * @entrypoint \@nvidia-elements/core/tree
  * @slot - tree nodes
  * @cssprop --max-width
  * @cssprop --node-border - Border style for tree node depth indicator
- * @event open - Dispatched from a child nve-tree-node when it is opened.
- * @event close - Dispatched from a child nve-tree-node when it is closed.
+ * @event open - Dispatched from a child nve-tree-node when opened.
+ * @event close - Dispatched from a child nve-tree-node when closed.
  * @event select - Dispatched from a child nve-tree-node when its selection state changes.
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/treeview/
  *
@@ -38,17 +38,17 @@ export class Tree extends LitElement {
   @property({ type: String }) selectable: 'single' | 'multi';
 
   /**
-   * Determines whether or not the tree nodes should handle auto-expanding behavior.
+   * Determines whether the tree nodes should handle auto-expanding behavior.
    */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
 
   /**
-   * Determines whether or not the tree nodes should handle auto-select behavior.
+   * Determines whether the tree nodes should handle auto-select behavior.
    */
   @property({ type: Boolean, attribute: 'behavior-select' }) behaviorSelect = false;
 
   /**
-   * Determines if node depth border is rendered.
+   * Determines if the node depth border renders.
    */
   @property({ type: Boolean, reflect: true }) border = false;
 

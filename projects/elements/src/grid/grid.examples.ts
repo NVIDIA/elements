@@ -31,7 +31,7 @@ export default {
 };
 
 /**
- * @summary Basic data grid for tabular data display with columns and rows. Use grids for presenting structured datasets where users need to scan, compare, and analyze information across multiple columns, such as dashboards, reports, or data management interfaces.
+ * @summary Basic data grid for tabular data display with columns and rows. Use grids for presenting structured datasets where users need to scan, compare, and analyze information across many columns, such as dashboards, reports, or data management interfaces.
  */
 export const Default = {
   render: () => html`
@@ -152,7 +152,7 @@ export const Keynav = {
 };
 
 /**
- * @summary Multi-select rows with checkboxes for bulk operations. Use multi-select when users need to perform actions on multiple items simultaneously (like delete, export, or bulk edit), placing checkboxes as the first column and setting the selected attribute for proper accessibility.
+ * @summary Multi-select rows with checkboxes for bulk operations. Use multi-select when users need to perform actions on many items at once (like delete, export, or bulk edit), placing checkboxes as the first column and setting the selected attribute for proper accessibility.
  */
 export const MultiSelect = {
   render: () => html`
@@ -180,8 +180,8 @@ export const MultiSelect = {
 };
 
 /**
- * @summary Use bulk actions for operations on multiple items. Display only
- * when rows are selected. Closing bulk actions deselects all selected rows.
+ * @summary Use bulk actions for operations on many items. Display only
+ * when rows have a selection. Closing bulk actions deselects all selected rows.
  */
 export const MultiSelectBulkActions = {
   render: () => html`
@@ -217,7 +217,7 @@ export const MultiSelectBulkActions = {
 /**
  * @summary A single select datagrid allows users to choose exactly one row
  * from a data table by providing radio buttons in the first column, ensuring
- * only one item can be selected at a time. To enable single select, place `nve-radio`
+ * only one item has a selection at a time. To enable single select, place `nve-radio`
  * input as the first grid cell of each row. Set `name` attribute on each radio
  * to ensure to associate the same radio group.
  */
@@ -243,7 +243,7 @@ export const SingleSelect = {
 };
 
 /**
- * @summary Row actions enable additional user actions specific to a given row.
+ * @summary Row actions enable extra user actions specific to a given row.
  * Place a `nve-icon-button` at the end of the grid row for actions.
  */
 export const RowAction = {
@@ -351,7 +351,7 @@ export const RowGroups = {
 };
 
 /**
- * @summary The footer can be used to display contextual information or additional user actions such as pagination.
+ * @summary The footer displays contextual information or extra user actions such as pagination.
  */
 export const Footer = {
   render: () => html`
@@ -372,9 +372,8 @@ export const Footer = {
 };
 
 /**
- * @summary The pagination pattern should be used when working with large
- * data sets that need to be incrementally loaded or filtered for performance or
- * useability.
+ * @summary Use the pagination pattern when working with large data sets
+ * that need incremental loading or filtering for performance or useability.
  */
 export const Pagination = {
   render: () => html`
@@ -415,7 +414,7 @@ export const Scroll = {
 };
 
 /**
- * @summary Scroll position can be controlled via the `scrollTo` API.
+ * @summary Control scroll position via the `scrollTo` API.
  */
 export const ScrollPosition = {
   render: () => html`
@@ -469,8 +468,8 @@ export const FullHeight = {
 };
 
 /**
- * @summary Column actions can be created by using the `nve-icon-button` to
- * trigger dropdowns or panels to reveal additional actions to the user.
+ * @summary Create column actions by using the `nve-icon-button` to
+ * trigger dropdowns or panels that reveal more actions to the user.
  */
 export const ColumnAction = {
   render: () => html`
@@ -500,7 +499,7 @@ export const ColumnAction = {
 };
 
 /**
- * @summary Column width control for responsive grid layouts, enabling flexible content sizing and optimal space utilization across different screen sizes.
+ * @summary Column width control for responsive grid layouts, enabling flexible content sizing and optimal space usage across different screen sizes.
  */
 export const ColumnWidth = {
   render: () => html`
@@ -519,7 +518,7 @@ export const ColumnWidth = {
 };
 
 /**
- * @summary Basic grid content display with evenly distributed columns, demonstrating standard data presentation and cell content wrapping behavior.
+ * @summary Basic grid content display with evenly distributed columns, including standard data presentation and cell content wrapping behavior.
  * @tags test-case
  */
 export const Content = {
@@ -538,8 +537,8 @@ export const Content = {
 };
 
 /**
- * @summary Columns can be fixed to any given side, however fixed columns should
- * not span past the half way point of the grid.
+ * @summary Fix columns to any given side, but keep fixed columns from
+ * spanning past the half way point of the grid.
  */
 export const ColumnFixed = {
   render: () => html`
@@ -557,8 +556,8 @@ export const ColumnFixed = {
 };
 
 /**
- * @summary Multiple Columns can fixed to any given side, however fixed columns
- * should not span past the half way point of the grid.
+ * @summary Fix many columns to any given side, but keep fixed columns from
+ * spanning past the half way point of the grid.
  */
 export const ColumnMultiFixed = {
   render: () => html`
@@ -576,8 +575,8 @@ export const ColumnMultiFixed = {
 };
 
 /**
- * @summary Multiple columns can be stacked and fixed to any given side, however
- * fixed columns should not span past the half way point of the grid.
+ * @summary Stack and fix many columns to any given side, but keep fixed
+ * columns from spanning past the half way point of the grid.
  */
 export const ColumnStackFixed = {
   render: () => html`
@@ -602,7 +601,7 @@ export const ColumnStackFixed = {
 };
 
 /**
- * @summary Dynamic column management with programmatic addition and positioning, demonstrating flexible grid configuration for evolving data requirements.
+ * @summary Dynamic column management with programmatic addition and positioning, for flexible grid configuration with evolving data requirements.
  */
 export const ColumnDynamicFixed = {
   render: () => html`
@@ -780,7 +779,7 @@ export const RowSort = {
 /* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
 
 /**
- * @summary CSS anchor positioning for tooltips within grid cells, demonstrating proper tooltip placement and content visibility in constrained grid environments.
+ * @summary CSS anchor positioning for tooltips within grid cells, with proper tooltip placement and content visibility in constrained grid environments.
  * @tags test-case
  */
 export const ContentVisibilityCSSAnchor = {
@@ -854,7 +853,7 @@ class RowSortDemo extends LitElement {
 customElements.get('row-sort-demo') || customElements.define('row-sort-demo', RowSortDemo);
 
 /**
- * @summary Row sort can be used to sort the rows of the grid.
+ * @summary Row sort sorts the rows of the grid.
  * @tags test-case
  */
 export const RowSortInteractive = {
@@ -905,7 +904,7 @@ class InfiniteScrollDemo extends LitElement {
 customElements.get('infinite-scroll-demo') || customElements.define('infinite-scroll-demo', InfiniteScrollDemo);
 
 /**
- * @summary Infinite scroll can be used to load data as the user scrolls down the grid.
+ * @summary Infinite scroll loads data as the user scrolls down the grid.
  * @tags test-case performance
  */
 export const PerformanceInfiniteScroll = {
@@ -915,7 +914,7 @@ export const PerformanceInfiniteScroll = {
 /**
  * @summary Datagrid performance is heavily dependent on the content within the grid as well as the host environment.
  * @tags performance
- * @description When rendering large datasets, it is important to use the appropriate techniques to maintain good performance.
+ * @description When rendering large datasets, using the appropriate techniques to maintain good performance matters.
  * - Use pagination or lazy loading to reduce initial render time
  * - Use virtual scroll or batch rendering to improve render performance
  * - Use fixed width columns to improve render performance and reduce layout shift
@@ -995,7 +994,7 @@ class GridVirtualScrollDemo extends LitElement {
 customElements.get('grid-virtual-scroll-demo') || customElements.define('grid-virtual-scroll-demo', GridVirtualScrollDemo);
 
 /**
- * @summary Performance virtual scroll can be used to test the performance of the grid.
+ * @summary Performance virtual scroll tests the performance of the grid.
  * @tags test-case performance
  */
 export const PerformanceVirtualScroll = {
@@ -1022,9 +1021,9 @@ export const Stripe = {
 };
 
 /**
- * @summary Grid can be nested in Cards for various UI patterns such as card
- * tab groups. Use the `container="flat"` attribute to enable proper styling of
- * the grid when nested within a card.
+ * @summary Nest Grid in Cards for UI patterns such as card tab groups. Use
+ * the `container="flat"` attribute to enable proper styling of the grid when
+ * nested within a card.
  */
 export const Card = {
   render: () => html`
@@ -1048,7 +1047,7 @@ export const Card = {
 };
 
 /**
- * @summary Grid integrated with tabs for organized data presentation, enabling multiple data views within a single interface for comprehensive information display.
+ * @summary Grid integrated with tabs for organized data presentation, enabling many data views within a single interface for comprehensive information display.
  * @tags test-case
  */
 export const CardTabs = {
@@ -1093,7 +1092,7 @@ export const Placeholder = {
 };
 
 /**
- * @summary Full-width grid container for maximum space utilization, providing edge-to-edge data display for comprehensive information presentation.
+ * @summary Full-width grid container for max space use, providing edge-to-edge data display for comprehensive information presentation.
  */
 export const Full = {
   render: () => html`
@@ -1129,7 +1128,7 @@ export const Flat = {
 };
 
 /**
- * @summary Different focusable element types within grid cells, demonstrating keyboard navigation and accessibility support for various interactive content.
+ * @summary Different focusable element types within grid cells, with keyboard navigation and accessibility support for interactive content.
  * @tags test-case
  */
 export const FocusTypes = {
@@ -1236,8 +1235,8 @@ export const PanelDetail = {
 };
 
 /**
- * @summary Panel Grid can be used to display key value type data sets for
- * details of a given item in a collection.
+ * @summary Panel Grid displays key value type data sets for details of a
+ * given item in a collection.
  */
 export const PanelGrid = {
   render() {
@@ -1385,7 +1384,7 @@ export const ValidColumnCount = {
 };
 
 /**
- * @summary Grid row sort can be implemented via the `nve-sort-button`.
+ * @summary Use the `nve-sort-button` to add grid row sort.
  * The grid follows the [ARIA sort spec](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/)
  * and automatically sets the appropriate accessibility related attributes to convey the current sorting state.
  */

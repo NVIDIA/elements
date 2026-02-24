@@ -60,7 +60,7 @@ export class PanelHeader extends LitElement {
  * @description Contains the main body content within a panel, providing a structured region for detailed information.
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/panel
- * @slot - This is a default/unnamed slot for panel content content
+ * @slot - This is a default/unnamed slot for panel content
  * @cssprop --padding
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
@@ -114,11 +114,11 @@ export class PanelFooter extends LitElement {
 
 /**
  * @element nve-panel
- * @description Panel is inline container for content that is coupled to the content on the page (details, additional actions/options). Alternatively [Drawer](./docs/elements/drawer/) is out of context of the rest of the page (notifications, navigations, settings).
+ * @description Panel is inline container for content that couples to the content on the page (details, extra actions/options). Or [Drawer](./docs/elements/drawer/) is out of context of the rest of the page (notifications, navigations, settings).
  * @since 0.10.0
  * @entrypoint \@nvidia-elements/core/panel
- * @event open - Dispatched when the panel is opened.
- * @event close - Dispatched when the panel is closed.
+ * @event open - Dispatched when the panel opens.
+ * @event close - Dispatched when the panel closes.
  * @slot - This is a default/unnamed slot for panel content
  * @slot header - header element (Use `panel-header` or custom content)
  * @slot content - content element (Use `panel-content` or custom content)
@@ -134,22 +134,22 @@ export class PanelFooter extends LitElement {
 @stateExpanded<Panel>()
 export class Panel extends LitElement {
   /**
-   * Determines whether or not the panel is fully expanded, displaying its contents, or not.
+   * Determines whether the panel is fully expanded, displaying its contents, or not.
    */
   @property({ type: Boolean, reflect: true }) expanded = false;
 
   /**
-   * Determines whether or not the panel will collapse down to an expand icon, or fully hide.
+   * Determines whether the panel collapses down to an expand icon, or fully hides.
    */
   @property({ type: Boolean }) closable = false;
 
   /**
-   * Determines whether or not the panel should handle auto-closing behavior vs. defaults to off.
+   * Determines whether the panel should handle auto-closing behavior vs. defaults to off.
    */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
 
   /**
-   * Sets the proper collapse icon and collapse animation, based on what side of the page the panel will be used.
+   * Sets the proper collapse icon and collapse animation, based on which side of the page the panel occupies.
    */
   @property({ type: String }) side: 'left' | 'right' = 'left';
 
@@ -171,7 +171,7 @@ export class Panel extends LitElement {
   #typeExpandableController = new TypeExpandableController(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables updating internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

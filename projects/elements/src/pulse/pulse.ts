@@ -7,7 +7,7 @@ import styles from './pulse.css?inline';
 
 /**
  * @element nve-pulse
- * @description Pulse component is used for signaling/attention for a particular area of a UI. This is helpful for tutorial/getting started guides for new users.
+ * @description Pulse component signals attention for a particular area of a UI. This helps with tutorial/getting started guides for new users.
  * @since 1.16.3
  * @entrypoint \@nvidia-elements/core/pulse
  * @cssprop --background
@@ -38,10 +38,10 @@ export class Pulse extends LitElement {
     this._internals.role = 'alert';
   }
 
-  /** Sets size of the pulse component. Size can also be updated using the `width + height` css props. */
+  /** Sets size of the pulse component. You can also update size using the `width + height` css props. */
   @property({ type: String, reflect: true }) size?: Size | 'xs';
 
-  /** These are visual treatments that represent the `status` of varius tasks. When `status` is set to `accent`,  `warning` or `danger`, appropriate colors are embedded. */
+  /** These visual treatments represent the `status` of different tasks. When `status` changes to `accent`, `warning` or `danger`, the component embeds appropriate colors. */
   @property({ type: String, reflect: true }) status?: 'accent' | 'warning' | 'danger';
 
   render() {

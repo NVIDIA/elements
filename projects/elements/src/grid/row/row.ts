@@ -18,7 +18,7 @@ import styles from './row.css?inline';
 @audit()
 export class GridRow extends LitElement {
   /**
-   * The `selected` property or attribute can be set to `true` to indicate that the row is in a selected state.
+   * Setting the `selected` property or attribute to `true` shows the row in a selected state.
    */
   @property({ type: Boolean }) selected: boolean;
 

@@ -32,7 +32,7 @@ export const Default = {
 };
 
 /**
- * @summary Visual example of drawer structure with all available sections. Demonstrates the complete drawer layout pattern with header, scrollable content, and footer for consistent drawer implementations.
+ * @summary Complete drawer layout pattern with header, scrollable content, and footer sections for consistent drawer structure.
  * @tags test-case
  */
 export const Visual = {
@@ -52,7 +52,7 @@ export const Visual = {
 };
 
 /**
- * @summary Drawer with scrollable content demonstrating overflow behavior. Use when drawer content exceeds viewport height, ensuring header and footer remain fixed while content scrolls independently.
+ * @summary Drawer with scrollable content for overflow behavior. Use when drawer content exceeds viewport height, ensuring header and footer remain fixed while content scrolls independently.
  * @tags test-case
  */
 export const Scroll = {
@@ -72,7 +72,7 @@ export const Scroll = {
 };
 
 /**
- * @summary Demonstrates event handling for drawer events. Useful for adding custom behavior when drawer state changes.
+ * @summary Event handling for drawer open, close, and toggle events. Useful for adding custom behavior when drawer state changes.
  * @tags test-case
  */
 export const Events = {
@@ -229,7 +229,7 @@ export const Position = {
 };
 
 /**
- * @summary Legacy drawer positioning with manual visibility management. Demonstrates older pattern with programmatic position control and event handling for backward compatibility.
+ * @summary Legacy drawer positioning with manual visibility management. Uses an older pattern with programmatic position control and event handling for backward compatibility.
  * @tags test-case
  */
 export const LegacyPosition = {
@@ -366,7 +366,7 @@ export const InlineVisible = {
 };
 
 /**
- * @summary Legacy inline drawer pattern with manual visibility control. Shows older implementation for inline drawer management, prefer modern popovertarget API for new implementations.
+ * @summary Legacy inline drawer pattern with manual visibility control. Uses an older implementation for inline drawer management; prefer the modern popovertarget API for new implementations.
  * @tags test-case
  */
 export const LegacyInline = {

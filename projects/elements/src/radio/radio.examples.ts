@@ -8,7 +8,7 @@ export default {
 };
 
 /**
- * @summary Basic radio button group for mutually exclusive single-choice selection from multiple options.
+ * @summary Basic radio button group for mutually exclusive single-choice selection from many options.
  */
 export const Default = {
   render: () => html`
@@ -34,7 +34,7 @@ export const Default = {
 }
 
 /**
- * @summary Radio groups with vertical layout demonstrating validation states including disabled, success, and error.
+ * @summary Radio groups with vertical layout including validation states for disabled, success, and error.
  */
 export const VerticalGroup = {
   render: () => html`

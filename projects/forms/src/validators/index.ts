@@ -2,13 +2,13 @@ import { validateSchema } from '../internal/schema.js';
 import type { FormControl, ValidatorResult } from '../internal/types.js';
 
 /**
- * Given a json schema validate the value against the schema
+ * Given a json schema, check the value against the schema
  * JSON Schema follows the OpenAI JSON Schema for structured outputs
  * https://platform.openai.com/docs/guides/structured-outputs
  *
- * - All fields or function parameters must be specified as required
- * - Require additionalProperties: false to be set on all objects
- * - The following types are supported for Structured Outputs:
+ * - All fields or function parameters must specify required
+ * - Require additionalProperties: false on all objects
+ * - Structured Outputs support the following types:
  *   - String
  *   - Number
  *   - Boolean

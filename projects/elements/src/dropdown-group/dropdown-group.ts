@@ -17,8 +17,8 @@ import globalStyles from './dropdown-group.global.css?inline';
  * @since 1.30.1
  * @entrypoint \@nvidia-elements/core/dropdown-group
  * @slot - default slot for dropdown content
- * @event open - Dispatched when a dropdown in the group is opened
- * @event close - Dispatched when a dropdown in the group is closed
+ * @event open - Dispatched when a dropdown in the group opens
+ * @event close - Dispatched when a dropdown in the group closes
  * @cssprop --nve-dropdown-group-spacing
  * @cssprop --nve-dropdown-group-transition
  * @cssprop --arrow-transform - Transform applied to the popover arrow

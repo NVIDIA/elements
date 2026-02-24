@@ -28,7 +28,7 @@ export class Skeleton extends LitElement {
   /** The shape of the skeleton */
   @property({ type: String, reflect: true }) shape: 'round' | 'pill';
 
-  /** Whether the skeleton is hidden */
+  /** Whether the skeleton hides its content */
   @property({ type: Boolean, reflect: true }) hidden = false;
 
   /** @private */
