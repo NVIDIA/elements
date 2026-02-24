@@ -20,3 +20,8 @@ __screenshots__
 vite.*.ts.timestamp*
 .11ty-vite
 .gitlab/scripts/
+
+# Vale
+config/vale/bin
+config/vale/styles/Google
+config/vale/styles/write-good

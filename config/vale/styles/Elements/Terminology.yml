@@ -1,0 +1,10 @@
+extends: substitution
+message: Use '%s' instead of '%s'.
+level: warning
+ignorecase: true
+swap:
+  web component: Web Component
+  web components: Web Components
+  style guide: style guide
+  dark-mode: dark mode
+  light-mode: light mode
