@@ -1,6 +1,6 @@
 /**
  * @experimental
- * Runs axe-core to meet minimum WCAG compliance requirements
+ * Runs axe-core to meet min WCAG compliance requirements
  * https://wcag.com/legal/
  *
  * Finds on average 57% of WCAG issues automatically

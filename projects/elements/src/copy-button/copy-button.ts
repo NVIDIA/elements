@@ -37,7 +37,7 @@ export class CopyButton extends Button {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables internal string values to update for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
@@ -47,7 +47,7 @@ export class CopyButton extends Button {
   @property({ type: Boolean, reflect: true, attribute: 'behavior-copy' }) behaviorCopy: boolean;
 
   /**
-   * Defines the value to be copied to user clipboard. Use `aria-label` to set the tooltip hint.
+   * Defines the value that copies to the user clipboard. Use `aria-label` to set the tooltip hint.
    */
   @property({ type: String }) value: string;
 

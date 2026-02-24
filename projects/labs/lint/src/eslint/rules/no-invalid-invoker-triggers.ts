@@ -3,7 +3,7 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { isNVElement } from '../internals/utils.js';
 
 /**
- * Invoker attributes that should only be used on button-type elements.
+ * Invoker attributes that apply only to button-type elements.
  */
 const INVOKER_ATTRIBUTES = ['popovertarget', 'commandfor', 'interestfor'] as const;
 

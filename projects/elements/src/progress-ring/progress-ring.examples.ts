@@ -19,7 +19,7 @@ export const Default = {
 `};
 
 /**
- * @summary Progress rings displaying various completion percentages from indeterminate to 0%, 33%, 66%, and 100%.
+ * @summary Progress rings displaying completion percentages from indeterminate to 0%, 33%, 66%, and 100%.
  * @tags test-case
  */
 export const Values = {
@@ -38,7 +38,7 @@ export const Values = {
 `};
 
 /**
- * @summary Progress rings with custom maximum values demonstrating proportional progress within a defined scale.
+ * @summary Progress rings with custom max values for proportional progress within a defined scale.
  * @tags test-case
  */
 export const Max = {
@@ -69,7 +69,7 @@ export const Status = {
 `};
 
 /**
- * @summary Progress rings at zero completion showing success, warning, and danger states for status indication.
+ * @summary Progress rings at zero completion showing success, warning, and danger states for status signal.
  * @tags test-case
  */
 export const ZeroValueStatus = {
@@ -125,7 +125,7 @@ export const SlottedIcon = {
 `};
 
 /**
- * @summary Progress rings in multiple sizes from extra-extra-small to extra-large for different UI contexts.
+ * @summary Progress rings in many sizes from extra-extra-small to extra-large for different UI contexts.
  * @tags test-case
  */
 export const Sizing = {

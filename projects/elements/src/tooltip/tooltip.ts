@@ -17,10 +17,10 @@ import styles from './tooltip.css?inline';
  * @description A contextual popup that displays a plaintext description. Tooltips are [triggered](https://w3c.github.io/aria/#tooltip) by hovering, focusing, or tapping an element and cannot have interactive elements within them. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/tooltip
- * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
- * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
- * @event open - Dispatched when the tooltip is opened.
- * @event close - Dispatched when the tooltip is closed.
+ * @event beforetoggle - Dispatched on a popover just before showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
+ * @event open - Dispatched when the tooltip opens.
+ * @event close - Dispatched when the tooltip closes.
  * @slot - default content slot
  * @cssprop --border-radius
  * @cssprop --background
@@ -47,8 +47,8 @@ export class Tooltip extends LitElement {
   };
 
   /**
-   * (optional) By default the popover will automatically anchor itself relative to the trigger element.
-   * A optional custom anchor element can be provided by passing an idref string within the same render root or a HTMLElement DOM reference.
+   * (optional) By default the popover automatically anchors itself relative to the trigger element.
+   * Pass an optional custom anchor element as an idref string within the same render root or a HTMLElement DOM reference.
    */
   @property({ type: String }) anchor: string | HTMLElement;
 

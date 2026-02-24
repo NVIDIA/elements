@@ -104,7 +104,7 @@ const VOID_ELEMENTS = new Set([
 /**
  * Reduces repeated sibling elements in an HTML template to save tokens.
  * Groups of consecutive same-tag siblings exceeding `maxRepeat` are
- * truncated and replaced with an HTML comment indicating how many were omitted.
+ * truncated and replaced with an HTML comment indicating the omitted count.
  */
 export function condenseTemplate(template: string, maxRepeat = 3): string {
   if (!template || maxRepeat < 1) {

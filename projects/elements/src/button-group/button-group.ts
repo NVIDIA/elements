@@ -39,13 +39,13 @@ export class ButtonGroup extends LitElement {
   /** By default the button group is stateless. Add the `behavior-select` attribute and set to `single` or `multi` to enable stateful selction handling. */
   @property({ type: String, attribute: 'behavior-select' }) behaviorSelect: 'single' | 'multi';
 
-  /** Set the style of the button group using the `container` property. Options are the default display when the attribute is left off, `flat` or `rounded`. */
+  /** Set the style of the button group using the `container` property. Options are the default display when omitting the attribute, `flat` or `rounded`. */
   @property({ type: String, reflect: true }) container?: 'flat' | 'rounded';
 
-  /** Determines the orientation direction of the group. Vertical groups are limited to icon buttons only. */
+  /** Determines the orientation direction of the group. Vertical groups support icon buttons only. */
   @property({ type: String, reflect: true }) orientation?: 'horizontal' | 'vertical' = 'horizontal';
 
-  /** The `interaction` property is intended to be used on `button-group` in combination with `divider` for color-coded split buttons */
+  /** Use the `interaction` property on `button-group` in combination with `divider` for color-coded split buttons */
   @property({ type: String, reflect: true }) interaction: Interaction;
 
   /** Determines size of button */

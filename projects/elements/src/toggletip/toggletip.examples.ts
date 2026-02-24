@@ -20,7 +20,7 @@ export default {
 /* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
 
 /**
- * @summary Basic toggletip requiring click to open and close. Unlike tooltips that appear on hover, use toggletips for interactive content, additional details, or when users need time to read or interact with the popover content.
+ * @summary Basic toggletip requiring click to open and close. Unlike tooltips that appear on hover, use toggletips for interactive content, extra details, or when users need time to read or interact with the popover content.
  */
 export const Default = {
   render: () => html`
@@ -30,7 +30,7 @@ export const Default = {
 };
 
 /**
- * @summary Visual example using anchor attribute for explicit trigger-target relationship. Demonstrates standard toggletip structure for consistent implementation across your application.
+ * @summary Visual example using anchor attribute for explicit trigger-target relationship and consistent toggletip implementation across your application.
  * @tags test-case
  */
 export const Visual = {
@@ -41,7 +41,7 @@ export const Visual = {
 };
 
 /**
- * @summary Toggletip with complete structure including header, content, and footer sections. Perfect for rich interactive content like quick forms, action menus, or detailed explanations that benefit from organized layout.
+ * @summary Toggletip with complete structure including header, content, and footer sections. Perfect for rich interactive content like quick forms, action menus, or detailed explanations that gain from organized layout.
  */
 export const Content = {
   render: () => html`
@@ -60,7 +60,7 @@ export const Content = {
 };
 
 /**
- * @summary Toggletip with footer for action buttons or supplementary links. Use when toggletip content needs follow-up actions, navigation, or additional context links without requiring a header section.
+ * @summary Toggletip with footer for action buttons or supplementary links. Use when toggletip content needs follow-up actions, navigation, or extra context links without requiring a header section.
  */
 export const ContentWithFooter = {
   render: () => html`
@@ -93,7 +93,7 @@ export const ContentWithHeader = {
 };
 
 /**
- * @summary Demonstrates event handling for toggletip events. Useful for adding custom behavior when toggletip state changes.
+ * @summary Event handling for toggletip lifecycle events. Useful for adding custom behavior when toggletip state changes.
  */
 export const Events = {
   render: () => html`

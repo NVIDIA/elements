@@ -74,10 +74,10 @@ export class AccordionHeader extends LitElement {
 
 /**
  * @element nve-accordion-content
- * @description Contains the collapsible body content that is revealed or hidden when the parent accordion is expanded or collapsed.
+ * @description Contains the collapsible body content that reveals or hides when the parent accordion expands or collapses.
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
- * @slot - This is a default/unnamed slot for accordion content content
+ * @slot - This is a default/unnamed slot for accordion content
  * @cssprop --padding
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
@@ -139,17 +139,17 @@ export class Accordion extends LitElement implements ContainerElement {
   #typeExpandableController = new TypeExpandableController(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables updating internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
   /**
-   * Determines the container styles of component. Flat is used for nesting accordions within other containers. Inset can be used for more complex accordions where content is distinctly separated.
+   * Determines the container styles of component. Flat suits nesting accordions within other containers. Inset suits more complex accordions where content needs distinct separation.
    */
   @property({ type: String, reflect: true }) container?: Extract<Container, 'flat' | 'inset'>;
 
   /**
-   * Determines whether the accordion is expanded, displaying its contents, or not.
+   * Determines whether the accordion expands to display its contents.
    */
   @property({ type: Boolean, reflect: true }) expanded = false;
 
@@ -159,7 +159,7 @@ export class Accordion extends LitElement implements ContainerElement {
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
-   * Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)
+   * Determines whether the accordion should opt-in to stateful expansion behavior (defaults to stateless)
    */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
 
@@ -228,7 +228,7 @@ export class Accordion extends LitElement implements ContainerElement {
 
 /**
  * @element nve-accordion-group
- * @description Organizes multiple accordions into a cohesive group, enabling coordinated expand/collapse behavior such as single-item expansion.
+ * @description Organizes many accordions into a cohesive group, enabling coordinated expand/collapse behavior such as single-item expansion.
  * @since 0.12.0
  * @entrypoint \@nvidia-elements/core/accordion
  * @cssprop --padding
@@ -241,12 +241,12 @@ export class AccordionGroup extends LitElement {
   static styles = useStyles([accordionGroupStyleSheet]);
 
   /**
-   * Determines whether or not the accordion should opt-in to stateful expansion behavior (defaults to stateless)
+   * Determines whether the accordion should opt-in to stateful expansion behavior (defaults to stateless)
    */
   @property({ type: Boolean, attribute: 'behavior-expand' }) behaviorExpand = false;
 
   /**
-   * Determines whether or not the accordion should opt-in to stateful expansion of a single accordion at a time
+   * Determines whether the accordion should opt-in to stateful expansion of a single accordion at a time
    */
   @property({ type: Boolean, attribute: 'behavior-expand-single' }) behaviorExpandSingle = false;
 

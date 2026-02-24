@@ -244,7 +244,7 @@ export const InlineMetadataHeaderMainPage = {
 }
 
 /**
- * @summary Feature-rich main page subheader combining back navigation, inline metadata, divider, and tabbed navigation. Demonstrates maximum subheader complexity.
+ * @summary Feature-rich main page subheader combining back navigation, inline metadata, divider, and tabbed navigation at max complexity.
  * @tags pattern test-case
  */
 export const InlineKitchenSinkHeaderMainPage = {
@@ -446,7 +446,7 @@ export const StandardHeaderDetailPage = {
 }
 
 /**
- * @summary Detail page subheader with back navigation and tabbed content sections. Ideal for entity detail views with multiple data categories.
+ * @summary Detail page subheader with back navigation and tabbed content sections. Ideal for entity detail views with many data categories.
  * @tags pattern
  */
 export const TabsHeaderDetailPage = {
@@ -641,7 +641,7 @@ export const InlineMetadataHeaderDetailPage = {
 }
 
 /**
- * @summary Comprehensive detail page subheader with inline metadata, divider, and tabs. Maximum feature density for complex entity views.
+ * @summary Comprehensive detail page subheader with inline metadata, divider, and tabs. Max feature density for complex entity views.
  * @tags pattern test-case
  */
 export const InlineKitchenSinkHeaderDetailPage = {
@@ -721,7 +721,7 @@ export const InlineKitchenSinkHeaderDetailPage = {
 }
 
 /**
- * @summary Comprehensive detail page subheader with stacked metadata row and tabs. Better vertical organization when metadata items are numerous.
+ * @summary Comprehensive detail page subheader with stacked metadata row and tabs. Better vertical organization when metadata items are many.
  * @tags pattern test-case
  */
 export const StackedKitchenSinkHeaderDetailPage = {

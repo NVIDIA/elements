@@ -173,7 +173,7 @@ export const OverflowTabs = {
 };
 
 /**
- * @summary Example test case demonstrating how the tabs selection state and a popover can be used together without any CSS Anchor Positioning collisions.
+ * @summary Tabs selection state and a popover working together without any CSS Anchor Positioning collisions.
  * @tags test-case
  */
 export const WithTooltips = {

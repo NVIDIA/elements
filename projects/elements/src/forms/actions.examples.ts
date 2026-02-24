@@ -26,7 +26,7 @@ export const Actions = {
 }
 
 /**
- * @summary Label with an information button to provide contextual help or additional details about the field.
+ * @summary Label with an information button to provide contextual help or more details about the field.
  */
 export const LabelAction = {
   render: () => {

@@ -64,7 +64,7 @@ export class PreferencesInput extends FormControlMixin<typeof LitElement, Prefer
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables updating internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 

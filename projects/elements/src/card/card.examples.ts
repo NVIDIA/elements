@@ -31,7 +31,7 @@ export const Default = {
 };
 
 /**
- * @summary Card with action buttons in the footer, demonstrating how to create interactive cards with primary and secondary actions.
+ * @summary Card with action buttons in the footer, including primary and secondary actions for interactive card layouts.
  */
 export const CardActions = {
   render: () => html`
@@ -123,7 +123,7 @@ export const CardDescriptionList = {
 }
 
 /**
- * @summary Card with integrated tabs in the header, demonstrating how to create multi-panel content within a single card interface.
+ * @summary Card with integrated tabs in the header for multi-panel content within a single card interface.
  */
 export const CardWithTabs = {
   render: () => html`
@@ -194,7 +194,7 @@ export const Audit = {
 };
 
 /**
- * @summary Card with overflow content, demonstrating how the card content can scroll when the content exceeds the height of the card.
+ * @summary Card with overflow content, where the card body scrolls when content exceeds the card height.
  */
 export const OverflowContent = {
   render: () => html`

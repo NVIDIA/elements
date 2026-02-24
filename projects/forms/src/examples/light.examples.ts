@@ -143,7 +143,7 @@ export interface LightCardValue {
 }
 
 /**
- * Example of a custom element that uses the FormControlMixin with LitElement
+ * Custom element integrating the FormControlMixin with LitElement for form validation.
  */
 export class LightCard extends FormControlMixin<typeof LitElement, LightCardValue>(LitElement) {
   static readonly metadata = {

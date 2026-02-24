@@ -85,8 +85,8 @@ export function setupControlValidationStates(control: Control, messages: Control
  * :state(checked) form control is in a checked state
  * :state(disabled) form control is in a disabled state
  * :state(readonly) form control is in a readonly state
- * :state(touched) form control was focused and then blurred
- * :state(dirty) form control was modified by user
+ * :state(touched) form control received focus and then blurred
+ * :state(dirty) user modified the form control
  */
 export function setupControlStates(control: Control) {
   const observers: MutationObserver[] = [];

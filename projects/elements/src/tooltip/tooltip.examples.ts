@@ -85,7 +85,7 @@ export const Alignment = {
 };
 
 /**
- * @summary Demonstrates event handling for tooltip events. Useful for adding custom behavior when tooltip state changes.
+ * @summary Event handling for tooltip lifecycle events. Useful for adding custom behavior when tooltip state changes.
  */
 export const Events = {
   render: () => html`
@@ -115,7 +115,7 @@ export const Content = {
 };
 
 /**
- * @summary Single tooltip shared across multiple triggers with dynamic content updates. Use to reduce DOM nodes and improve performance when many similar elements need contextual help, updating tooltip content based on which trigger activated it.
+ * @summary Single tooltip shared across many triggers with dynamic content updates. Use to reduce DOM nodes and improve performance when many similar elements need contextual help, updating tooltip content based on which trigger activated it.
  */
 export const DynamicTrigger = {
   render: () => html`
@@ -177,7 +177,7 @@ export const Wrap = {
 };
 
 /**
- * @summary demonstrates tooltip anchoring to a dynamically created anchor element.
+ * @summary Tooltip anchoring to a dynamically created anchor element.
  * @tags test-case
  */
 export const AsyncTrigger = {
@@ -210,7 +210,7 @@ export const PositionStrategyAbsolute = {
 };
 
 /**
- * @summary Tooltip behavior within scrollable containers demonstrating automatic repositioning. Tooltips maintain visibility and proper positioning even when anchor elements scroll, ensuring consistent user experience in scrollable interfaces.
+ * @summary Tooltip behavior within scrollable containers with automatic repositioning. Tooltips maintain visibility and proper positioning even when anchor elements scroll, ensuring consistent user experience in scrollable interfaces.
  * @tags test-case
  */
 export const ScrollContainer = {
@@ -284,7 +284,7 @@ class DynamicAnchorPositionDemo extends LitElement { /* eslint no-unused-vars: 0
 }
 
 /**
- * @summary Tooltip that follows a dynamically positioned anchor element. Demonstrates real-time tooltip repositioning as the anchor moves, useful for cursor-following tooltips or drag-and-drop interfaces.
+ * @summary Tooltip that follows a dynamically positioned anchor element. Real-time tooltip repositioning as the anchor moves, useful for cursor-following tooltips or drag-and-drop interfaces.
  * @deprecated
  * @tags test-case
  */
@@ -298,7 +298,7 @@ export const DynamicAnchorPosition = {
 
 /**
  * @deprecated
- * @summary Legacy pattern for dynamic tooltip triggers using behavior-trigger attribute. Demonstrates programmatic anchor and trigger reassignment for backward compatibility with older implementations.
+ * @summary Legacy pattern for dynamic tooltip triggers using behavior-trigger attribute. Programmatic anchor and trigger reassignment for backward compatibility with older implementations.
  * @deprecated
  * @tags test-case
  */
@@ -326,7 +326,7 @@ export const LegacyDynamicTrigger = {
 
 /**
  * @deprecated
- * @summary Legacy trigger pattern with manual event handling and hidden attribute management. Shows older implementation approach for backward compatibility, prefer using popovertarget for new implementations.
+ * @summary Legacy trigger pattern with manual event handling and hidden attribute management. Older implementation approach for backward compatibility; prefer using popovertarget for new implementations.
  * @deprecated
  * @tags test-case
  */
@@ -359,7 +359,7 @@ export const LegacyBehaviorTrigger = {
 
 /**
  * @deprecated
- * @summary Legacy implementation combining behavior-trigger with open-delay for multiple tooltips. Demonstrates older pattern for delayed tooltip appearance, prefer modern popovertarget with open-delay attribute.
+ * @summary Legacy implementation combining behavior-trigger with open-delay for many tooltips. Older pattern for delayed tooltip appearance; prefer modern popovertarget with open-delay attribute.
  * @deprecated
  * @tags test-case
  */
@@ -377,7 +377,7 @@ export const LegacyOpenDelay = {
 };
 
 /**
- * @summary Tooltip functionality within modal dialogs with multiple triggers. Ensures tooltips work correctly in layered UI contexts, maintaining proper z-index stacking and interaction behavior within modal overlays.
+ * @summary Tooltip functionality within modal dialogs with many triggers. Ensures tooltips work correctly in layered UI contexts, maintaining proper z-index stacking and interaction behavior within modal overlays.
  * @tags test-case
  */
 export const NestedDynamic = {
@@ -394,7 +394,7 @@ export const NestedDynamic = {
 };
 
 /**
- * @summary Tooltip functionality using interest invokers. Demonstrates how to use interest invokers to show and hide tooltips.
+ * @summary Tooltip functionality using interest invokers to control tooltip visibility on hover and focus.
  * @tags test-case
  */
 export const InterestInvokers = {
@@ -424,7 +424,7 @@ export const OpenDelay = {
 };
 
 /**
- * @summary Legacy behavior that allowed tooltip to be triggered via popovertarget attribute instead of interestfor attribute with hover events.
+ * @summary Legacy behavior that allowed tooltip triggering via popovertarget attribute instead of interestfor attribute with hover events.
  * @deprecated
  * @tags test-case
  */
