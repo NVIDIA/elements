@@ -1,8 +1,8 @@
 # Element Labs
 
-Labs projects are experimental packages we are actively seeking feedback on. They may not be ready for production use and APIs may change frequently.
+Labs projects are experimental packages the team is actively seeking feedback on. They may not be ready for production use and APIs may change frequently.
 
-Once a lab project is considered stable, it will be moved from `@nve-labs` to the main `@nve` package scope. Labs projects may be deprecated or removed at any time.
+Once a lab project reaches stability, it moves from `@nve-labs` to the main `@nve` package scope. The team may deprecate or remove labs projects at any time.
 
 Indicators of Labs project maturation:
 
@@ -12,4 +12,4 @@ Indicators of Labs project maturation:
 - Has accessibility.
 - Has Snippets.
 - Has high test coverage.
-- Has been used in a project and received feedback.
+- Has real-world project usage and received feedback.

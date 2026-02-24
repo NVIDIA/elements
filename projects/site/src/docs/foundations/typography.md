@@ -30,7 +30,7 @@ npm install @nvidia-elements/themes @nvidia-elements/styles
 
 ## Framework Integrations
 
-Some frameworks and libraries may require additional configuration to use the `nve-text` attribute.
+Some frameworks and libraries may require extra configuration to use the `nve-text` attribute.
 
 See the links below for specific integration patterns for the following frameworks:
 
@@ -98,6 +98,6 @@ Use different attributes with `nve-text` like `loose`, `relaxed`, `moderate`, `s
 
 {% example '@nvidia-elements/styles/typography.examples.json' 'LineHeightRelative' %}
 
-Use different attributes with `nve-text` like `line-height-3` and `line-height-4` to give an element a fixed line-height, irrespective of the current font-size. These are useful when you need very precise control over an element’s final size.
+Use different attributes with `nve-text` like `line-height-3` and `line-height-4` to give an element a fixed line-height, irrespective of the current font-size. These are useful when you need exact control over an element’s final size.
 
 {% example '@nvidia-elements/styles/typography.examples.json' 'LineHeightFixed' %}

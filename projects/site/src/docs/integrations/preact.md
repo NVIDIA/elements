@@ -11,13 +11,13 @@
 
 {% installation 'preact' %}
 
-Once installation is complete elements can be imported and used within [Preact](https://preactjs.com/) jsx and tsx files.
+Once installed import and use Elements within [Preact](https://preactjs.com/) jsx and tsx files.
 
 ```typescript
 import '@nvidia-elements/core/alert/define.js';
 ```
 
-Once added, properties and events can be used via the standard Preact template syntax.
+Properties and events then work via the standard Preact template syntax.
 
 ```typescript
 // - status - HTML attribute

@@ -7,15 +7,15 @@
 
 # {{ title }}
 
-Slots enable dynamic content to be rendered into the template of a given element.
+Slots enable rendering dynamic content into the template of a given element.
 
-📘 Tip: general rule, if the text will be visible to the user then likely the API should use a Slot.
+📘 Tip: general rule, if the text is visible to the user then likely the API should use a Slot.
 
 📘 Tip: slot projection of text content, enables apps to use i18n strategy of their choice
 
 ## Flexibility
 
-Slots provide flexibility for content that is controlled by the host application and cannot be guaranteed to be represented accurately through a specific element API.
+Slots provide flexibility for content controlled by the host application that a specific element API cannot guarantee to represent accurately.
 
 ```html
 <nve-alert status="success">

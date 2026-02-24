@@ -14,7 +14,7 @@
 
 # {{title}}
 
-By optionally importing the responsive container layout module, the `nve-layout` system is extended using [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) for adaptive responsive design based on the container element's width rather than just the browser width.
+By optionally importing the responsive container layout module, you extend the `nve-layout` system using [CSS Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/@container) for adaptive responsive design based on the container element's width rather than just the browser width.
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
@@ -27,7 +27,7 @@ By optionally importing the responsive container layout module, the `nve-layout`
 
 The responsive layout API applies conditional styling based on parent element width. Supported features include `gap`, `padding`, `row vs column`, `reversing` flex direction, and varying `grid` structure across defined pixel width breakpoints.
 
-The following set of container `breakpoint-values` are defined as:
+The following set of container `breakpoint-values` defines:
 
 - `xs = 160px`
 - `sm = 320px`
@@ -55,7 +55,7 @@ Conditional gap sizing example: `nve-layout="row &sm|gap:xxxs &md|gap:md &lg|gap
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      The extra <code>div</code> wrapper explicitly defines the container element for queries. This design keeps the utility minimal — elements with <code>&</code> syntax automatically use their parent as the container without requiring manual container specification.
+      The extra <code>div</code> wrapper explicitly defines the container element for queries. This design keeps the utility minimal—elements with <code>&</code> syntax automatically use their parent as the container without requiring manual container specification.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -75,7 +75,7 @@ The following container query breakpoints are available for gap, replace `...` w
 
 ## Responsive Padding
 
-The following container query breakpoints are available for padding, replace `...` with one of the 9 padding [padding](docs/foundations/layout/#layout-padding) values:
+The following container query breakpoints are available for padding, replace `...` with one of the 9 [padding](docs/foundations/layout/#layout-padding) values:
 
 - `&xs|pad:...`
 - `&sm|pad:...`
@@ -112,7 +112,7 @@ The following container query breakpoints are available for swapping flex direct
 
 ### Reverse Direction
 
-In addition to the above, you can also use the following syntax for flipping the flex direction:
+Also, you can use the following syntax for flipping the flex direction:
 
 - `&...|row-reverse`
 - `&...|column-reverse`
@@ -121,7 +121,7 @@ In addition to the above, you can also use the following syntax for flipping the
 
 ## Responsive Grid
 
-Grid structure can be varied based on container size using the following syntax with `nve-layout=grid...`:
+You can vary grid structure based on container size using the following syntax with `nve-layout=grid...`:
 
 ```html
 <section nve-layout="grid gap:md span-items:12 &sm|span-items:6 &md|span-items:4 &lg|span-items:3">
@@ -157,12 +157,12 @@ Or:
 
 ## Hiding Elements Based on Container Size
 
-Since hiding elements only affects the display of the element itself and not the layout of its children, we use the `nve-display` attribute for responsive visibility control.
+Since hiding elements only affects the display of the element itself and not the layout of its children, responsive visibility control uses the `nve-display` attribute.
 
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      Element visibility (hiding) uses the separate <code>nve-display</code> attribute rather than <code>nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how children are arranged.
+      Element visibility (hiding) uses the separate <code>nve-display</code> attribute rather than <code>nve-layout</code>. This distinction exists because visibility control only affects the element itself, while layout properties affect how the parent arranges children.
     </div>
   </nve-alert>
 </nve-alert-group>

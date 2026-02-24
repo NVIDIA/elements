@@ -48,7 +48,7 @@
 
 ## Link
 
-Anchors can wrap button instances, however its recommended to slot the anchor into the button.
+Anchors can wrap button instances, but its recommended to slot the anchor into the button.
 
 ```html
 <!-- do -->

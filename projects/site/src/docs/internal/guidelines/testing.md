@@ -7,11 +7,11 @@
 
 # {{ title }}
 
-The Elements library uses a comprehensive testing strategy with multiple test types to ensure quality, accessibility, and performance. All tests follow consistent patterns and use shared utilities from `@internals/testing` and `@internals/vite`.
+The Elements library uses a comprehensive testing strategy with many test types to ensure quality, accessibility, and performance. All tests follow consistent patterns and use shared utilities from `@internals/testing` and `@internals/vite`.
 
 ## Running Tests
 
-Test scripts should be run in the root directory of the project where the `package.json` is located.
+Run test scripts from the root directory of the project where the `package.json` lives.
 
 ```shell
 # Unit tests
