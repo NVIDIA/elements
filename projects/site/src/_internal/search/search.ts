@@ -88,10 +88,10 @@ export class DocsSearch extends LitElement {
     `
   ];
 
-  /** Maximum number of search results to display */
+  /** Max number of search results to display */
   static readonly MAX_RESULTS = 20;
 
-  /** Maximum size of the search cache */
+  /** Max size of the search cache */
   static readonly CACHE_MAX_SIZE = 50;
 
   @property({ type: String, attribute: 'base-url' })
@@ -182,14 +182,14 @@ export class DocsSearch extends LitElement {
   }
 
   /**
-   * Lit lifecycle method called after properties are updated.
+   * Lit lifecycle method called after property updates complete.
    * Syncs the 'filter' attribute (from URL/external) to the internal activeFilter state.
    */
   override updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties);
 
     // When the filter attribute changes (e.g., from URL parameter),
-    // validate and apply it to activeFilter
+    // check and apply it to activeFilter
     if (changedProperties.has('filter')) {
       const filterValue = this.filter;
 
@@ -438,7 +438,7 @@ export class DocsSearch extends LitElement {
 
   /**
    * Counts the number of visible search results in each section category.
-   * Includes both page-level results and heading sub-results to match what is rendered.
+   * Includes both page-level results and heading sub-results to match the rendered output.
    * @returns Object with counts for all sections plus total count
    */
   #getFilterCounts(): Record<string, number> {
@@ -545,8 +545,8 @@ export class DocsSearch extends LitElement {
         }
 
         // For multi-word searches, require ALL words to appear across the
-        // combined page title + heading text so that irrelevant sub-results
-        // like "Logo - Slots" are filtered out while "Card - Slots" is kept.
+        // combined page title + heading text so that the filter removes irrelevant
+        // sub-results like "Logo - Slots" while keeping "Card - Slots".
         if (searchWords.length > 1) {
           const combinedText = pageTitle + ' ' + anchorText;
           return combinedText.includes(normalizedTerm) || searchWords.every(word => combinedText.includes(word));

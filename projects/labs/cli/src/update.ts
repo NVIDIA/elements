@@ -116,7 +116,7 @@ export async function notifyIfUpdateAvailable(
       return;
     }
 
-    // Fallback to cached config (for subsequent runs within check interval)
+    // Fallback to cached config (for later runs within check interval)
     const config = readConfig();
     if (config && isUpdateAvailable(currentVersion, config.latestVersion)) {
       await showUpdateNotification(currentVersion, config.latestVersion);

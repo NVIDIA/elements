@@ -41,7 +41,7 @@ export const Icon = {
 `};
 
 /**
- * @summary Different avatar sizes to accommodate various layout contexts, from compact lists to prominent user profiles.
+ * @summary Different avatar sizes to accommodate layout contexts from compact lists to prominent user profiles.
  * @tags test-case
  */
 export const Size = {
@@ -54,7 +54,7 @@ export const Size = {
 `};
 
 /**
- * @summary Avatar group component for displaying multiple users with overflow indicator, ideal for team displays and collaboration interfaces.
+ * @summary Avatar group component for displaying many users with overflow indicator, ideal for team displays and collaboration interfaces.
  */
 export const AvatarGroup = {
   render: () => html`

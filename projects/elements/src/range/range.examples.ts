@@ -78,7 +78,7 @@ export const Step = {
 }
 
 /**
- * @summary Vertical layout configuration for stacked form arrangements, displaying label, slider, and message in a column format with support for various states including disabled, success, and error feedback.
+ * @summary Vertical layout configuration for stacked form arrangements, displaying label, slider, and message in a column format with support for states including disabled, success, and error feedback.
  * @tags test-case
  */
 export const Vertical = {
@@ -111,7 +111,7 @@ export const Vertical = {
 };
 
 /**
- * @summary Horizontal layout configuration for inline form arrangements, positioning label and slider side-by-side for compact displays with support for various states including disabled, success, and error feedback.
+ * @summary Horizontal layout configuration for inline form arrangements, positioning label and slider side-by-side for compact displays with support for states including disabled, success, and error feedback.
  * @tags test-case
  */
 export const Horizontal = {
@@ -144,7 +144,7 @@ export const Horizontal = {
 };
 
 /**
- * @summary Range component can have its visual styles overwritten to accomplish custom themes.
+ * @summary Range component can have its visual styles overwritten to achieve custom themes.
  * @tags test-case
  */
 export const CustomStyles = {

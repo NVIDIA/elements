@@ -20,7 +20,7 @@ export const Default = {
 };
 
 /**
- * @summary Textareas with vertical layout demonstrating validation states including disabled, success, and error.
+ * @summary Textareas with vertical layout including validation states for disabled, success, and error.
  * @tags test-case
  */
 export const Vertical = {

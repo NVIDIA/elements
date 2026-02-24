@@ -45,7 +45,7 @@ import tabsStyleSheet from './tabs.css?inline';
 @stateSelected<TabsItem>()
 export class TabsItem extends BaseButton {
   /**
-   * Determines which tab item is selected, defaults to false.
+   * Determines which tab item the user selects, defaults to false.
    */
   @property({ type: Boolean, reflect: true }) selected = false;
 
@@ -104,17 +104,17 @@ export class TabsItem extends BaseButton {
 @keyNavigationList<Tabs>()
 export class Tabs extends LitElement {
   /**
-   * Determines whether or not the tabs should display in a vertical layout vs. defaulting to horizontal.
+   * Determines whether the tabs should display in a vertical layout vs. defaulting to horizontal.
    */
   @property({ type: Boolean, reflect: true }) vertical = false;
 
   /**
-   * Determines whether or not the tabs should display a border on selected items vs. defaults to show border.
+   * Determines whether the tabs should display a border on selected items vs. defaults to show border.
    */
   @property({ type: Boolean, reflect: true }) borderless = false;
 
   /**
-   * Determines whether or not the tabs should handle selection behavior vs. defaults to off.
+   * Determines whether the tabs should handle selection behavior vs. defaults to off.
    */
   @property({ type: Boolean, attribute: 'behavior-select' }) behaviorSelect = false;
 

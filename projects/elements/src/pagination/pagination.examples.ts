@@ -125,8 +125,8 @@ export const LargeValues = {
 }
 
 /**
- * @summary If the upper bound of items is unknown the `last-page` event can
- * be used to determine when to load additional data and update the pagination
+ * @summary If the upper bound of items is unknown, use the `last-page` event
+ * to determine when to load more data and update the pagination
  * with the latest total of items.
  * @tags test-case
  */
@@ -151,8 +151,8 @@ export const DynamicItems = {
 }
 
 /**
- * @summary When custom step is provided, the select options dynamically
- * adapt to the step and is appended to the default option list.
+ * @summary When a custom step exists, the select options dynamically
+ * adapt to the step and append to the default option list.
  */
 export const DynamicStepSize = {
   render: () => html`

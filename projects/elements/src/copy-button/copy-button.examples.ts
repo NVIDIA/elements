@@ -10,7 +10,7 @@ export default {
 };
 
 /**
- * @summary Demonstrates the standard usage for copying text to clipboard.
+ * @summary Standard copy button for copying text to the clipboard on click.
  */
 export const Default = {
   render: () => html`
@@ -29,7 +29,7 @@ export const Disabled = {
 }
 
 /**
- * @summary Copy buttons with flat container styling, showing both enabled and disabled states. Ideal for inline usage where minimal visual impact is desired.
+ * @summary Copy buttons with flat container styling, showing both enabled and disabled states. Ideal for inline usage where minimal visual impact matters.
  * @tags test-case
  */
 export const Flat = {
@@ -61,7 +61,7 @@ export const Size = {
 }
 
 /**
- * @summary Copy button integrated with text content, showing how to copy truncated values like commit hashes. Perfect for code snippets, IDs, or other long text that needs to be copied while displaying a shortened version.
+ * @summary Copy button integrated with text content, showing how to copy truncated values like commit hashes. Perfect for code snippets, IDs, or other long text that users copy while viewing a shortened version.
  */
 export const Hint = {
   render: () => html`
@@ -73,7 +73,7 @@ export const Hint = {
 }
 
 /**
- * @summary Copy button with custom icon in the icon slot. Demonstrates how to customize the button appearance while maintaining copy functionality. Useful for context-specific icons like git branches, URLs, or other specialized content.
+ * @summary Copy button with custom icon in the icon slot. Customizes the button appearance while maintaining copy functionality. Useful for context-specific icons like git branches, URLs, or other specialized content.
  */
 export const Icon = {
   render: () => html`
@@ -84,7 +84,7 @@ export const Icon = {
 }
 
 /**
- * @summary Advanced pattern/example demonstrating how to handle long-running copy to clipboard operations.
+ * @summary Advanced pattern for handling long-running copy to clipboard operations.
  * @tags test-case
  */
 export const AsyncCopy = {
@@ -108,7 +108,7 @@ export const AsyncCopy = {
 }
 
 /**
- * @summary Demonstrates override of popover position in a copy button.
+ * @summary Popover position override in a copy button.
  * @tags test-case
  */
 export const TooltipPositionOverride = {

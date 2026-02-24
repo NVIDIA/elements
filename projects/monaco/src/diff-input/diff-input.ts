@@ -31,7 +31,7 @@ export class MonacoDiffInput extends BaseMonacoInput<MonacoDiffEditor, monaco.ed
   };
 
   /**
-   * Determines whether the input is disabled and cannot be edited.
+   * Determines whether the input prevents editing.
    */
   get disabled(): boolean {
     return super.disabled;
@@ -42,7 +42,7 @@ export class MonacoDiffInput extends BaseMonacoInput<MonacoDiffEditor, monaco.ed
   }
 
   /**
-   * Defines the programming language to be used for syntax highlighting and validation.
+   * Defines the programming language for syntax highlighting and validation.
    */
   get language(): SuggestedLanguages | string {
     return super.language;
@@ -69,7 +69,7 @@ export class MonacoDiffInput extends BaseMonacoInput<MonacoDiffEditor, monaco.ed
   #original: string = '';
 
   /**
-   * Defines the programming language to be used for syntax highlighting for the original value.
+   * Defines the programming language for syntax highlighting of the original value.
    * Falls back to the language property if not set.
    */
   @property({ type: String })
@@ -94,7 +94,7 @@ export class MonacoDiffInput extends BaseMonacoInput<MonacoDiffEditor, monaco.ed
   }
 
   /**
-   * Defines whether to render the diff in side-by-side mode (if sufficient width is available).
+   * Defines whether to render the diff in side-by-side mode (if enough width is available).
    */
   @property({ type: Boolean, attribute: 'side-by-side' })
   get sideBySide(): boolean {

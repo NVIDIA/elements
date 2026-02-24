@@ -1,4 +1,4 @@
-// placeholder for patterns so examples can be generated
+// placeholder for patterns so the build can generate examples
 customElements.define(
   'nve-patterns',
   class extends HTMLElement {

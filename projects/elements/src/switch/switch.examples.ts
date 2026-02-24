@@ -20,7 +20,7 @@ export const Default = {
 
 
 /**
- * @summary Size variants of toggle switches can be achieved with custom CSS properties.
+ * @summary Size variants of toggle switches use custom CSS properties.
  * @tags test-case
  */
 export const Size = {
@@ -68,7 +68,7 @@ export const States = {
 };
 
 /**
- * @summary Switch groups with vertical layout for multiple related toggles stacked in a column with validation states.
+ * @summary Switch groups with vertical layout for many related toggles stacked in a column with validation states.
  */
 export const VerticalGroup = {
   render: () => html`
@@ -239,7 +239,7 @@ export const VerticalInlineGroup = {
 };
 
 /**
- * @summary Switch groups with horizontal layout for multiple toggles arranged in a row, ideal for limited options.
+ * @summary Switch groups with horizontal layout for many toggles arranged in a row, ideal for limited options.
  * @tags test-case
  */
 export const HorizontalGroup = {

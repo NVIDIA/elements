@@ -3,7 +3,7 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { type HtmlNode } from '../internals/utils.js';
 
 /**
- * Patterns that indicate data binding in attribute values.
+ * Patterns that show data binding in attribute values.
  * When these are present, we can't statically determine the value.
  */
 const DATA_BINDING_PATTERNS = [
@@ -64,7 +64,7 @@ const POPOVER_ELEMENTS = [
 ] as const;
 
 /**
- * Attributes that can be used to reference a popover target.
+ * Attributes that reference a popover target.
  */
 const TRIGGER_ATTRIBUTES = ['popovertarget', 'commandfor'] as const;
 
@@ -149,7 +149,7 @@ const rule = {
           const hasTrigger = popover.id && triggerMap.has(popover.id);
 
           if (!popover.id) {
-            // Popover has no ID - can't be targeted by a trigger
+            // Popover has no ID - no trigger can target it
             context.report({
               node: popover.node,
               messageId: 'missing-popover-id',

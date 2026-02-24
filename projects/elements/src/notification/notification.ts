@@ -19,10 +19,10 @@ import styles from './notification.css?inline';
  * @description Displays real time updates without interrupting the user's workflow to communicate an important message or status. [MDN Popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API)
  * @since 0.6.0
  * @entrypoint \@nvidia-elements/core/notification
- * @event beforetoggle - Dispatched on a popover just before it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
- * @event toggle - Dispatched on a popover element just after it is shown or hidden. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
- * @event open - Dispatched when the notification is opened.
- * @event close - Dispatched when the notification is closed.
+ * @event beforetoggle - Dispatched on a popover just before showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/beforetoggle_event)
+ * @event toggle - Dispatched on a popover element just after showing or hiding. [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/toggle_event)
+ * @event open - Dispatched when the notification opens.
+ * @event close - Dispatched when the notification closes.
  * @slot - default content slot
  * @slot icon - content slot for the status icon
  * @cssprop --border-radius
@@ -45,7 +45,7 @@ import styles from './notification.css?inline';
 export class Notification extends LitElement {
   /**
    * (optional) By default the popover will automatically anchor itself relative to the trigger element.
-   * A optional custom anchor element can be provided by passing an idref string within the same render root or a HTMLElement DOM reference.
+   * Pass an optional custom anchor element as an idref string within the same render root or a HTMLElement DOM reference.
    */
   @property({ type: String }) anchor: string | HTMLElement = globalThis.document?.body;
 
@@ -88,14 +88,14 @@ export class Notification extends LitElement {
   @property({ type: String, reflect: true }) status: SupportStatus;
 
   /**
-   * Flat container option is used when embeding within another containing element such as a drawer.
+   * Flat container option applies when embedding within another containing element such as a drawer.
    */
   @property({ type: String, reflect: true }) container?: 'flat';
 
   #i18nController: I18nController<this> = new I18nController<this>(this);
 
   /**
-   * Enables internal string values to be updated for internationalization.
+   * Enables updating internal string values for internationalization.
    */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
@@ -177,8 +177,8 @@ export class Notification extends LitElement {
 
   /**
    * The popover controller provides this functionality.
-   * However when the notification is in inline mode the
-   * controller is not run so we must manually set this up here.
+   * But when the notification is in inline mode the
+   * controller does not run so this sets it up directly.
    */
   #setupCloseTimeout() {
     if (this.popoverInline && this.closeTimeout && !this.hidden) {

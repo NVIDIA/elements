@@ -41,7 +41,7 @@ export function determineReleaseType(
 }
 
 /**
- * Use local git of this repo, get all the commits and filter down the the semantic release commits.
+ * Use local git of this repo, get all the commits and filter down the semantic release commits.
  */
 export function getReleases(): Release[] {
   try {

@@ -21,7 +21,7 @@ export default {
 /* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
 
 /**
- * @summary Demonstrates anchor-based positioning where popovers are anchored to specific elements rather than their triggers.
+ * @summary Anchor-based positioning where popovers anchor to specific elements rather than their triggers.
  * @tags test-case
  */
 export const Anchor = {
@@ -36,7 +36,7 @@ export const Anchor = {
 }
 
 /**
- * @summary Shows nested popovers within dialogs and notifications, demonstrating proper layering and z-index management.
+ * @summary Nested popovers within dialogs and notifications, with proper layering and z-index management.
  * @tags test-case
  */
 export const Nested = {
@@ -67,7 +67,7 @@ export const Nested = {
 }
 
 /**
- * @summary Demonstrates programmatic popover control with async operations before showing the popover.
+ * @summary Programmatic popover control with async operations before showing the popover.
  * @tags test-case
  */
 export const ProgrammaticTrigger = {
@@ -173,7 +173,7 @@ export const LegacyInteractive = {
 }
 
 /**
- * @summary Simple modal dialog demonstrating keyboard accessibility with escape key to close functionality.
+ * @summary Simple modal dialog with keyboard accessibility, including escape key to close functionality.
  * @tags test-case
  */
 export const Closable = {

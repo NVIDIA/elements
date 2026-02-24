@@ -14,8 +14,8 @@ import styles from './app-header.css?inline';
  * @since 0.11.0
  * @slot - Use the default slot in `logo` to create an app logo badge within the app header. Include a `<span>` element inside `app-header` to change the default application title.
  * @slot title
- * @slot nav-items - For `button` and `icon-button` elements used for navigation behavior. Use the `active` attribute to indicate the current page.
- * @slot nav-actions - For `icon-button` elements. This will place them in the section of the app header where supplemental actions are located.
+ * @slot nav-items - For `button` and `icon-button` elements used for navigation behavior. Use the `active` attribute to show the current page.
+ * @slot nav-actions - For `icon-button` elements. Places them in the supplemental actions section of the app header.
  * @cssprop --background
  * @cssprop --padding
  * @cssprop --border-bottom

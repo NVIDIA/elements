@@ -4,7 +4,7 @@ import { getRecommendedSlotName, hasDefaultSlot, isKnownElement, hasSlot } from 
 import { hasTemplateSyntax, isNVElement } from '../internals/utils.js';
 
 /**
- * Check if a node has child content that would be projected into the default slot.
+ * Check if a node has child content that projects into the default slot.
  * This includes non-whitespace text nodes and element nodes without a slot attribute.
  */
 function hasUnslottedContent(node): boolean {

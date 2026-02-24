@@ -20,7 +20,7 @@ export const Default = {
 };
 
 /**
- * @summary Disabled star rating for display-only contexts. Use when showing existing ratings that users cannot modify.
+ * @summary Disabled star rating for display-only contexts. Use when showing existing ratings that users cannot change.
  * @tags test-case
  */
 export const Disabled = {
@@ -33,7 +33,7 @@ export const Disabled = {
 };
 
 /**
- * @summary Half-star increments using step="0.5" for more granular ratings. Ideal when finer rating precision is needed for detailed feedback.
+ * @summary Half-star increments using step="0.5" for more granular ratings. Ideal when detailed feedback requires finer rating precision.
  */
 export const HalfStar = {
   render: () => html`

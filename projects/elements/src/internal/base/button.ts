@@ -35,19 +35,19 @@ export class BaseButton extends LitElement {
   static formAssociated = true;
 
   /**
-   * Use for buttons that are toggle button types.
+   * Use for toggle button types.
    * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-pressed
    */
   @property({ type: Boolean, reflect: true }) pressed: boolean;
 
   /**
-   * Use for button that are used for expanding/collapsing content.
+   * Use for buttons that expand/collapse content.
    * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded
    */
   @property({ type: Boolean, reflect: true }) expanded: boolean;
 
   /**
-   * Similar to input readonly, sets a button semantically as visual treatment only
+   * Like input readonly, sets a button semantically as visual treatment only
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly
    */
   @property({ type: Boolean, reflect: true }) readonly: boolean;
@@ -55,7 +55,7 @@ export class BaseButton extends LitElement {
   #form: string | HTMLFormElement = null;
 
   /**
-   * Similar to input form, sets a button to submit a form outside its parent form.
+   * Like input form, sets a button to submit a form outside its parent form.
    * Returns a reference to the form element if available.
    * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/form
    */
@@ -76,7 +76,7 @@ export class BaseButton extends LitElement {
   }
 
   get form(): HTMLFormElement | null | string {
-    // string should be removed but without it the type is not derived from the setter correctly
+    // string should drop from the type but without it the type does not derive from the setter correctly
     if (this.#form && typeof this.#form !== 'string') {
       return this.#form;
     } else if (typeof this.#form === 'string' && !isServer) {
@@ -88,13 +88,13 @@ export class BaseButton extends LitElement {
   }
 
   /**
-   * The name of the button, submitted as a pair with the button's value as part of the form data, when that button is used to submit the form.
+   * The name of the button, submitted as a pair with the button's value as part of the form data, when that button submits the form.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-name
    */
   @property({ type: String, reflect: true }) name: string;
 
   /**
-   * Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.
+   * Defines the value associated with the button's name when submitting the form data. The server receives this value in params when the form submits through this button.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-value
    */
   @property({ type: String, reflect: true }) value: string;
@@ -106,13 +106,13 @@ export class BaseButton extends LitElement {
   @property({ type: String, reflect: true }) type: 'button' | 'submit' | 'reset';
 
   /**
-   * This Boolean attribute prevents the user from interacting with the button: it cannot be pressed or focused.
+   * This Boolean attribute prevents the user from interacting with the button: it cannot receive press or focus events.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-disabled
    */
   @property({ type: Boolean, reflect: true }) disabled = false;
 
   /**
-   * This Boolean attribute prevents the selected state if button is part of a multi choice selection group
+   * This Boolean attribute prevents the selected state when the button belongs to a multi-choice selection group
    * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-selected
    */
   @property({ type: Boolean, reflect: true }) selected: boolean;
@@ -130,39 +130,39 @@ export class BaseButton extends LitElement {
   @property({ type: Object }) popoverTargetElement: HTMLElement = null; // eslint-disable-line local/primitive-property
 
   /**
-   * The id of the element to which the popover is applied.
+   * The id of the element that receives the popover.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#popovertarget
    */
   @property({ type: String, attribute: 'popovertarget', reflect: true }) popovertarget: string;
 
   /**
-   * The popover target action to be applied to the popover target element.
+   * The popover target action to perform on the popover target element.
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/popoverTargetAction
    */
   @property({ type: String, attribute: 'popovertargetaction', reflect: true })
   popoverTargetAction: 'show' | 'hide' | 'toggle';
 
   /**
-   * The id of the element to which the command is applied.
+   * The id of the element that receives the command.
    * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
    */
   @property({ type: String, attribute: 'commandfor', reflect: true }) commandForElement: string = null;
 
   /**
-   * The command to be applied to the element.
+   * The command to execute on the element.
    * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
    */
   @property({ type: String, attribute: 'command', reflect: true }) command: string;
 
   /**
-   * The id of the element to which the interest is applied.
+   * The id of the element that receives the interest.
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/interestForElement
    */
   @property({ type: Object }) interestForElement: HTMLElement = null; // eslint-disable-line local/primitive-property
 
   /**
    * @private
-   * A instance of `ElementInternals` that is set dynamically by the applied decorators/controllers
+   * An instance of `ElementInternals` that decorators/controllers set dynamically
    */
   declare _internals: ElementInternals;
 
