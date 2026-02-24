@@ -11,13 +11,13 @@
 
 {% installation 'vue' %}
 
-Once installation is complete Elements can be imported and used within [Vue](https://vuejs.org/) SFC files.
+Once installed import and use Elements within [Vue](https://vuejs.org/) SFC files.
 
 ```typescript
 import '@nvidia-elements/core/alert/define.js';
 ```
 
-Once added, properties and events can be used via the standard Vue template syntax.
+Properties and events then work via the standard Vue template syntax.
 
 ## TypeScript types
 
@@ -30,7 +30,7 @@ Create or update `env.d.ts` in your project root:
 /// <reference path="./node_modules/@nvidia-elements/core/dist/custom-elements-vue.d.ts" />
 ```
 
-Ensure this file is included by your app tsconfig (e.g. `tsconfig.app.json` with `"include": ["env.d.ts", "src/**/*", "src/**/*.vue"]`). The path reference loads the types that augment Vue’s `GlobalComponents`, so tags such as `<nve-page-panel size="sm">` are typed and invalid values are reported.
+Ensure your app tsconfig includes this file (for example, `tsconfig.app.json` with `"include": ["env.d.ts", "src/**/*", "src/**/*.vue"]`). The path reference loads the types that augment Vue’s `GlobalComponents`, so tags such as `<nve-page-panel size="sm">` have type checking and the IDE reports invalid values.
 
 If your build does not already run the type checker, run `vue-tsc` before the build (for example: `vue-tsc --noEmit && vite build`) so type errors fail the build.
 

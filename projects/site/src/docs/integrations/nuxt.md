@@ -11,7 +11,7 @@
 
 {% installation 'nuxt' %}
 
-Once installation is complete Elements can be imported and used within [Nuxt](https://nuxt.com/) Vue SFC files. Since Nuxt is built on top of Vue, the same Vue template syntax applies.
+Once installed import and use Elements within [Nuxt](https://nuxt.com/) Vue SFC files. Since Nuxt builds on top of Vue, the same Vue template syntax applies.
 
 ## TypeScript types
 
@@ -23,7 +23,7 @@ Create or update `env.d.ts` in your project root:
 /// <reference path="./node_modules/@nvidia-elements/core/dist/custom-elements-vue.d.ts" />
 ```
 
-Nuxt will include this file when running `nuxi typecheck`. To fail the build on type errors, run type checking before the build:
+Nuxt includes this file when running `nuxi typecheck`. To fail the build on type errors, run type checking before the build:
 
 ```json
 // package.json
@@ -81,7 +81,7 @@ Import element definitions in the `<script setup>` block of your Vue SFC files.
 import '@nvidia-elements/core/alert/define.js';
 ```
 
-Once added, properties and events can be used via the standard Vue template syntax.
+Properties and events then work via the standard Vue template syntax.
 
 ```typescript
 // - status - HTML attribute
@@ -97,7 +97,7 @@ Once added, properties and events can be used via the standard Vue template synt
 
 ## Layouts
 
-Elements can be used within Nuxt layouts to create consistent page structures.
+Use Elements within Nuxt layouts to create consistent page structures.
 
 ```html
 <!-- layouts/default.vue -->

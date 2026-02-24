@@ -11,7 +11,7 @@
 
 {% installation 'angular' %}
 
-To use Elements in your [Angular](https://angular.dev/) components and add `CUSTOM_ELEMENTS_SCHEMA` to the schemas to allow web components to be used within your template.
+To use Elements in your [Angular](https://angular.dev/) components, add `CUSTOM_ELEMENTS_SCHEMA` to the schemas to allow Web Components within your template.
 
 ```typescript
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -27,7 +27,7 @@ import '@nvidia-elements/core/alert/define.js';
 export class AppComponent { }
 ```
 
-Once added, properties and events can be used via the standard Angular template syntax.
+Properties and events then work via the standard Angular template syntax.
 
 ```html
 <!--
@@ -46,7 +46,7 @@ Once added, properties and events can be used via the standard Angular template 
 
 Elements provides a suite of form components that leverage standard HTML input types. This enables frameworks to take advantage of built in framework features like [Angular Reactive Forms](https://angular.io/guide/reactive-forms) for managing form validation and state.
 
-<nve-alert>To integrate custom form control types into Elements checkout our <a nve-text="link" href="./docs/elements/forms/controls/#custom-controls" onClick="location.reload()">custom control</a> documentation.</nve-alert>
+<nve-alert>To integrate custom form control types into Elements checkout the <a nve-text="link" href="./docs/elements/forms/controls/#custom-controls" onClick="location.reload()">custom control</a> documentation.</nve-alert>
 
 ```html
 <form [formGroup]="form" (ngSubmit)="submit()">
@@ -91,13 +91,13 @@ export class AppComponent  {
 ### Angular 12
 
 <nve-alert-group status="danger">
-  <nve-alert>Angular 12 is past its support lifecycle and will not receive security updates. Applications should migrate as soon as possible to the <a nve-text="link" href="https://angular.dev/update">latest release</a>.</nve-alert>
+  <nve-alert>Angular 12 is past its support lifecycle and does not receive security updates. Applications should migrate as soon as possible to the <a nve-text="link" href="https://angular.dev/update">latest release</a>.</nve-alert>
 </nve-alert-group>
 
 Angular 12 is not officially supported due to its older dependencies (ESBuild, Webpack) not supporting browser standard JavaScript (es2020) and CSS features.
-To use elements in Angular 12 when upgrading is not possible, the [static import bundles](https://github.com/NVIDIA/elements/-/tree/main/projects/starters/bundles) can be copied into the Angular CLI assets and referenced.
+To use elements in Angular 12 when upgrading is not possible, copy the [static import bundles](https://github.com/NVIDIA/elements/-/tree/main/projects/starters/bundles) into the Angular CLI assets and reference them.
 
-<nve-alert status="warning">Static bundles are strongly discouraged as it will include all component code and not support any performance optimizations
+<nve-alert status="warning">Static bundles are strongly discouraged as they include all component code and do not support any performance optimizations
 such as tree-shaking.</nve-alert>
 
 ```json
@@ -148,7 +148,7 @@ If you don't have a global `styles.scss` add one to your app's `angular.json` co
 
 ### TypeScript
 
-If you are not on typescript >= version `4.5.x` you will need to add this type declaration to use isolated element imports:
+If you are not on typescript >= version `4.5.x` you need to add this type declaration to use isolated element imports:
 
 ```typescript
 /* ./src/declarations.d.ts */
@@ -158,7 +158,7 @@ interface ElementInternals {
 }
 ```
 
-If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig#paths) likely you will need to enable the [skipLibCheck](https://www.typescriptlang.org/tsconfig#skipLibCheck) to avoid type definition collisions within the monorepo. Alternatively, to avoid `skipLibCheck` use `npm` workspaces instead of tsconfig path mapping.
+If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig#paths) you likely need to enable the [skipLibCheck](https://www.typescriptlang.org/tsconfig#skipLibCheck) to avoid type definition collisions within the monorepo. Or, to avoid `skipLibCheck` use `npm` workspaces instead of tsconfig path mapping.
 
 ```json
 {
@@ -170,11 +170,11 @@ If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig
 
 ## Advanced - Import CSS Source
 
-[Lit](https://lit.dev) as a standard TypeScript based library works mostly out of the box when imported and used within an Angular application source code.
-This enables Lit based Web Components to be authored directly within your Angular application but not require a standalone library/project.
-If you are authoring Lit based components and would like to import external CSS files (similar to [Vite Inlined Imports](https://vitejs.dev/guide/features.html#disabling-css-injection-into-the-page)) additonal Angular CLI configuration is needed.
+[Lit](https://lit.dev) as a standard TypeScript based library works out of the box when imported and used within an Angular application source code.
+This enables you to author Lit based Web Components directly within your Angular application without requiring a standalone library/project.
+If you are authoring Lit based components and would like to import external CSS files (like [Vite Inlined Imports](https://vitejs.dev/guide/features.html#disabling-css-injection-into-the-page)) you need extra Angular CLI configuration.
 
-<nve-alert status="accent">Imports like Webpack !raw-loader and Vite ?inline are not Web standard and likely to be migrated in the future to <a nve-text="link" href="https://web.dev/css-module-scripts/">Import Assertions</a></nve-alert>
+<nve-alert status="accent">Imports like Webpack !raw-loader and Vite ?inline are not Web standard and are likely to migrate in the future to <a nve-text="link" href="https://web.dev/css-module-scripts/">Import Assertions</a></nve-alert>
 
 ### 1. Install
 

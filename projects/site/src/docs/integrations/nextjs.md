@@ -11,13 +11,13 @@
 
 {% installation 'nextjs' %}
 
-Once installation is complete Elements can be imported and used within [NextJS](https://nextjs.org/) jsx and tsx files.
+Once installed import and use Elements within [NextJS](https://nextjs.org/) jsx and tsx files.
 
 ```typescript
 import '@nvidia-elements/core/alert/define.js';
 ```
 
-Once added, properties and events can be used via the standard JSX syntax.
+Properties and events then work via the standard JSX syntax.
 
 ```typescript
 // - status - HTML attribute

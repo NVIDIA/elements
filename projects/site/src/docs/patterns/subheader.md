@@ -7,7 +7,7 @@
 
 # {{ title }}
 
-Intended for use at the top of pages, but below the Page Header, the following combinations of components are recommended patterns for composing subheaders.
+Intended for use at the top of pages, but below the Page Header, the following component combinations serve as recommended patterns for composing subheaders.
 
 ### Standard
 

@@ -17,7 +17,7 @@ Elements provides a set of popover type components built on the native browser [
 - [dialog](./docs/elements/dialog/): large interactive content, interrupts user flow
 - [toast](./docs/elements/toast/): contextual notification
 - [notification](./docs/elements/notification/): async non contextual notification
-- [drawer](./docs/elements/drawer/): interactive navigation or additional contextual content
+- [drawer](./docs/elements/drawer/): interactive navigation or extra contextual content
 
 ## Installation
 
@@ -53,7 +53,7 @@ to the native `toggle` or `beforetoggle` popover events.
 
 ## Programmatic Trigger
 
-Popovers can be triggered manually via the native popover APIs.
+You can trigger popovers manually via the native popover APIs.
 
 - [showPopover()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/showPopover)
 - [hidePopover()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/hidePopover)
@@ -63,25 +63,25 @@ Popovers can be triggered manually via the native popover APIs.
 
 ## Positioning
 
-All popovers follow the same `position` and `alignment` APIs. This allows popovers to be positioned relative to their anchor.
+All popovers follow the same `position` and `alignment` APIs. This allows popovers to position themselves relative to their anchor.
 
 {% example '@nvidia-elements/core/tooltip/tooltip.examples.json' 'Alignment' '{ "inline": false, "height": "400px" }' %}
 
 ## Anchor
 
-The `anchor` property defines what element the popover should position itself relative to. For popovers like modals this defaults to the document body. The Anchor is optional as the popover will use the trigger to determine its anchor by default.
+The `anchor` property defines what element the popover should position itself relative to. For popovers like modals this defaults to the document body. The Anchor is optional as the popover uses the trigger to determine its anchor by default.
 
 {% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'Anchor' '{ "inline": false, "height": "250px" }' %}
 
-For elements like tooltips this is often the same as anchor however the anchor and trigger are not always the same as UX patterns such as guided tours may have trigger elements that are not the anchored position. Both `anchor` and `trigger` can take a string idref or a DOM Element reference.
+For elements like tooltips this is often the same as anchor but the anchor and trigger are not always the same as UX patterns such as guided tours may have trigger elements that are not the anchored position. Both `anchor` and `trigger` can take a string idref or a DOM Element reference.
 
 ## Closable
 
 <!-- https://github.com/NVIDIA/elements/-/issues/86#note_27211667 -->
 
-Many of the popovers provide a closable property option. This will enable a close button on the popover. When using native HTML popover APIs, it's important to understand how they handle closure via the escape key.
-Unlike some third-party solutions, browser-native popovers are designed to disable escape key prevention for closure, ensuring a seamless user experience. Similarly, native dialogs follow a similar pattern (chromium): only the first press of the escape key can be prevented from closing the dialog,
-while subsequent presses have no effect. This behavior is for accessibility, preventing a popover from closing can prevent the user from navigating the page and block functionality completely.
+Many of the popovers provide a closable property option. This enables a close button on the popover. When using native HTML popover APIs, it's important to understand how they handle closure via the escape key.
+Unlike some third-party solutions, browser-native popovers disable escape key prevention for closure by design, ensuring a seamless user experience. Similarly, native dialogs follow a similar pattern (chromium): only the first press of the escape key can prevent the dialog from closing,
+while later presses have no effect. This behavior is for accessibility, preventing a popover from closing can prevent the user from navigating the page and block functionality.
 
 {% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'Closable' %}
 
@@ -95,6 +95,6 @@ while subsequent presses have no effect. This behavior is for accessibility, pre
 
 ## Shadow Root Anchoring
 
-Native [CSS Anchor Positioning](https://developer.chrome.com/blog/anchor-positioning-api) allows two elements to be tethered together via a unique identifier. This is commonly used for popover-like elements. CSS Anchor Positioning recently enabled cross root associations. https://github.com/w3c/csswg-drafts/issues/9408.
+Native [CSS Anchor Positioning](https://developer.chrome.com/blog/anchor-positioning-api) allows two elements to tether together via a unique identifier. This is commonly used for popover-like elements. CSS Anchor Positioning recently enabled cross root associations. https://github.com/w3c/csswg-drafts/issues/9408.
 
-However the declarative native popover API requires popovers and the trigger/source to still exist within the same render root and not be separated by shadow dom. Elements will attempt to bridge this gap by traversing and making the association for the trigger and popover. This is not 100% reliable, in general popovers should ideally be within the same render root for best performance.
+But the declarative native popover API requires popovers and the trigger/source to still exist within the same render root and not separate by shadow dom. Elements attempts to bridge this gap by traversing and making the association for the trigger and popover. This is not 100% reliable, in general popovers should ideally be within the same render root for best performance.

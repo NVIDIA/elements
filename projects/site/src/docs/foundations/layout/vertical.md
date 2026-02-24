@@ -53,7 +53,7 @@ Choose vertical layout (`column`) for:
 <nve-alert-group status="accent">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      <strong>Note:</strong> Vertical layouts are inherently mobile-friendly. Content that stacks vertically works naturally on narrow screens and can be enhanced for larger displays.
+      <strong>Note:</strong> vertical layouts are inherently mobile-friendly. Content that stacks vertically works naturally on narrow screens, and you can enhance it for larger displays.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -113,13 +113,13 @@ Vertical layouts support alignment along both axes:
 
 - `align:center` - Center both horizontally and vertically
 - `align:stretch` - Stretch in both dimensions
-- Multiple values can be combined: `align:horizontal-center align:bottom`
+- You can combine many values: `align:horizontal-center align:bottom`
 
 <nve-alert-group>
   <nve-alert style="--align-items: start">
     <nve-icon slot="icon" name="academic-cap"></nve-icon>
     <div nve-text="relaxed">
-      <strong>Alignment mental model:</strong> In vertical layouts, the main axis runs top-to-bottom and the cross axis runs left-to-right. This reversal from horizontal layouts is key to understanding alignment behavior.
+      <strong>Alignment mental model:</strong> in vertical layouts, the main axis runs top-to-bottom and the cross axis runs left-to-right. This reversal from horizontal layouts is key to understanding alignment behavior.
     </div>
   </nve-alert>
 </nve-alert-group>
@@ -236,7 +236,7 @@ Use alignment to control vertical rhythm:
 <nve-alert-group status="warning">
   <nve-alert style="--align-items: start">
     <div nve-text="relaxed">
-      <strong>Performance tip:</strong> When creating scrollable regions, constrain the height of the container rather than relying on max-height. This provides better performance and more predictable behavior.
+      <strong>Performance tip:</strong> when creating scrollable regions, constrain the height of the container rather than relying on max-height. This provides better performance and more predictable behavior.
     </div>
   </nve-alert>
 </nve-alert-group>

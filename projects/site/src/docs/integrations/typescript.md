@@ -11,7 +11,7 @@
 
 {% installation 'typescript' %}
 
-Once installation is complete Elements can be imported and used within [TypeScript](https://www.typescriptlang.org/) files. The Element class definitions can be imported via [type imports](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) to use for static type checking.
+Once installed import and use Elements within [TypeScript](https://www.typescriptlang.org/) files. Import the Element class definitions via [type imports](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) for static type checking.
 
 ```typescript
 import '@nvidia-elements/core/alert/define.js'; // import and register element to DOM
@@ -34,7 +34,7 @@ alert!.addEventListener('close', e => console.log(e.target));
 
 ## Advanced Installation
 
-If you are not on typescript >= version `4.5.x` you will need to add this type declaration to use isolated element imports:
+If you are not on typescript >= version `4.5.x` you need to add this type declaration to use isolated element imports:
 
 ```typescript
 /* ./src/declarations.d.ts */
@@ -44,7 +44,7 @@ interface ElementInternals {
 }
 ```
 
-If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig#paths) likely you will need to enable the [skipLibCheck](https://www.typescriptlang.org/tsconfig#skipLibCheck) to avoid type definition collisions within the monorepo. Alternatively, to avoid `skipLibCheck` use `npm` workspaces instead of tsconfig path mapping.
+If you are using [tsconfig path mapping](https://www.typescriptlang.org/tsconfig#paths) you likely need to enable the [skipLibCheck](https://www.typescriptlang.org/tsconfig#skipLibCheck) to avoid type definition collisions within the monorepo. Or, to avoid `skipLibCheck` use `npm` workspaces instead of tsconfig path mapping.
 
 ```typescript
 {

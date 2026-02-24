@@ -63,7 +63,7 @@ pnpm run ci
 
 #### Troubleshooting
 
-If you are coming from development from a different repository, you may need to install a new version of node in `nvm`. If you see an error message to this effect, [refer to the nvm docs](https://github.com/nvm-sh/nvm?tab=readme-ov-file#usage) for installing the missing node version and for directions on switching between versions of `node` using `nvm`. Once `nvm` is installed you can switch to the repository defined node and pnpm verisons by re-running the [setup/install step](#setup) above.
+If you are coming from development from a different repository, you may need to install a new version of node in `nvm`. If you see an error message to this effect, [refer to the nvm docs](https://github.com/nvm-sh/nvm?tab=readme-ov-file#usage) for installing the missing node version and for directions on switching between versions of `node` using `nvm`. Once `nvm` is installed you can switch to the repository defined node and pnpm versions by re-running the [setup/install step](#setup) above.
 
 If you actively work/switch between different repositories run `nvm use && corepack prepare --activate` in the root of the project to ensure use of the correct node/pnpm version.
 
@@ -104,7 +104,7 @@ Once your branch is created, make your source code changes. Once your changes ar
 
 ### Commit Messages
 
-The repo uses [Semantic Release](https://semantic-release.gitbook.io/semantic-release/) to manage package changes. Commit messages determine the type of release on merge. [Commit Lint](https://commitlint.js.org/) will enforce and catch any formating issues in commits.
+The repo uses [Semantic Release](https://semantic-release.gitbook.io/semantic-release/) to manage package changes. Commit messages determine the type of release on merge. [Commit Lint](https://commitlint.js.org/) will enforce and catch any formatting issues in commits.
 
 ```shell
 git commit -a -m "fix(core): disabled multi-select"
@@ -141,7 +141,7 @@ Keep commit names focused on the changes you are making as the commit message is
 
 ### Opening a Merge Request
 
-Once you have commited your changes to your branch locally, push them to the remote Gitlab repository.
+Once you have committed your changes to your branch locally, push them to the remote Gitlab repository.
 
 ```bash
 git push --set-upstream origin topic/bug-fix
