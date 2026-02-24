@@ -13,6 +13,7 @@ Elements is a design language for AI/ML factories built as a monorepo containing
 - **pnpm**: 10.27.0 (managed via Corepack 0.34.5)
 - **Git LFS**: Required for visual test screenshots and videos (`.gitattributes` defines tracked files)
 - **Playwright**: Browser-based testing uses Chromium (installed via prepare script)
+- **Vale**: Prose linter for documentation and JSDoc (installed via prepare script)
 
 ## Common Commands
 
@@ -51,6 +52,9 @@ pnpm run ci:reset
 # Format code
 pnpm run format
 pnpm run format:fix
+
+# Prose lint (documentation and JSDoc)
+pnpm run lint:vale
 ```
 
 ### Individual Project Commands
@@ -195,6 +199,19 @@ git commit -m "fix(elements): resolve keyboard navigation in dropdown"
 git commit -m "feat(themes): add dark mode color tokens"
 git commit -m "chore(docs): update component examples"
 ```
+
+### Prose Linting (Vale)
+
+Vale enforces consistent technical writing across documentation (`*.md`) and JSDoc comments (`*.ts`). It uses the Google developer documentation style guide and write-good rules with project-specific customizations.
+
+Key files:
+
+- `.vale.ini`: Root configuration defining style guides, disabled rules, and file-type settings
+- `config/vale/styles/Elements/`: Custom rules (branding, terminology)
+- `config/vale/styles/config/vocabularies/Elements/accept.txt`: Accepted vocabulary (project terms, component names, tech jargon)
+- `config/vale/install.mjs`: Cross-platform binary installer
+
+When adding new technical terms, component names, or abbreviations that Vale flags as misspelled, add them to `accept.txt`. Run `pnpm run lint:vale` to verify changes pass. Vale also runs as a pre-commit hook on markdown files via lint-staged.
 
 ## Documentation References
 

@@ -1,0 +1,17 @@
+extends: existence
+message: "Avoid weak summary openers. Lead with what the example does or when to use it, not '%s'."
+level: error
+ignorecase: true
+tokens:
+  - This example demonstrates
+  - This example shows
+  - Example of a
+  - Example of the
+  - Example showing
+  - Demonstrates
+  - Shows
+  - Illustrates
+  - A simple example
+  - A basic example
+  - Default example
+  - Default variant
