@@ -10,6 +10,7 @@ export default {
 };
 
 /**
+ * @summary Animated canvas visualization driven by form controls for color, shape, scale, and particle count.
  * @tags test-case
  */
 export const Visualization = {
