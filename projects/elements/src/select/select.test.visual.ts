@@ -104,5 +104,25 @@ function template(theme: '' | 'dark' = '') {
     </select>
     <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
   </nve-select>
+
+  <nve-select container="flat">
+    <label>•︎•︎•︎•︎•︎•︎</label>
+    <select>
+      <option value="1">•︎•︎•︎•︎•︎•︎</option>
+      <option value="2">•︎•︎•︎•︎•︎•︎</option>
+      <option value="3">•︎•︎•︎•︎•︎•︎</option>
+    </select>
+    <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
+  </nve-select>
+
+  <nve-select container="flat">
+    <label>•︎•︎•︎•︎•︎•︎</label>
+    <select multiple>
+      <option selected value="1">•︎•︎•︎•︎•︎•︎</option>
+      <option selected value="2">•︎•︎•︎•︎•︎•︎</option>
+      <option selected value="3">•︎•︎•︎•︎•︎•︎</option>
+    </select>
+    <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
+  </nve-select>
 `;
 }

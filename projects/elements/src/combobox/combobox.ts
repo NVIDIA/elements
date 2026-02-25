@@ -419,7 +419,8 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setSelectValue(option: { value?: string; selected?: boolean }) {
-    [...this.#options, { value: '', selected: null }].find(o => o.value === option.value).selected = option.selected;
+    const found = [...this.#options, { value: '', selected: null }].find(o => o.value === option.value);
+    if (found) found.selected = option.selected;
 
     if (this.#select && !this.#select.multiple) {
       this.#select.value = option.value;
