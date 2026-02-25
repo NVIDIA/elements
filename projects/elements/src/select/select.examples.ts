@@ -112,6 +112,18 @@ export const Flat = {
     </select>
     <nve-control-message>message</nve-control-message>
   </nve-select>
+
+  <nve-select container="flat">
+    <label>multiple + size</label>
+    <select multiple size="5">
+      <option selected value="1">Option 1</option>
+      <option selected value="2">Option 2</option>
+      <option selected value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-select>
 </div>`
 };
 

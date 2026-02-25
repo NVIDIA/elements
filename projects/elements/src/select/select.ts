@@ -111,14 +111,12 @@ export class Select extends Control {
 
   get #multipleSelectLabel() {
     const option = this.#placeholderOption;
-    const label = option
-      ? this.#placeholderOption.innerText
-      : `${this.#select.selectedOptions.length} ${this.i18n.selected}`;
-    return html`<div class="tags-label ${this.#placeholderOption ? 'placeholder' : ''}" aria-hidden="true">${label}</div>`;
+    const label = option ? option.innerText : `${this.#select.selectedOptions.length} ${this.i18n.selected}`;
+    return html`<div class="tags-label ${option ? 'placeholder' : ''}" aria-hidden="true">${label}</div>`;
   }
 
   protected get prefixContent() {
-    return this.#select?.multiple
+    return this.#select?.multiple && this.#select?.size === 0
       ? html`
     ${this.#multipleSelectLabel}
     <div class="tags">
@@ -252,7 +250,8 @@ export class Select extends Control {
   }
 
   #updateMultipleOverflow(width: number) {
-    if (this.#select?.multiple && this.#tags.getBoundingClientRect().width > width - 48) {
+    const tags = this.#tags;
+    if (this.#select?.multiple && tags && tags.getBoundingClientRect().width > width - 48) {
       this._internals.states.add('multiple-overflow');
     } else {
       this._internals.states.delete('multiple-overflow');
