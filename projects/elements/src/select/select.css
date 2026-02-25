@@ -118,6 +118,11 @@
   display: block !important;
 }
 
+:host([size]:state(multiple)) .tags,
+:host([size]:state(multiple)) .tags-label {
+  display: none !important;
+}
+
 :host(:state(multiple)) ::slotted(select[multiple]) {
   opacity: 0 !important;
 }
@@ -214,6 +219,10 @@ slot[name*='option-'] {
 
 :host([container='flat']:focus-within) {
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-emphasis);
+}
+
+:host([container='flat'][size]) {
+  --border-bottom: 0 !important;
 }
 
 :host([container='flat']:focus-within) [input] {
