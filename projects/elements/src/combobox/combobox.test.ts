@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@internals/testing';
 import { Combobox } from '@nvidia-elements/core/combobox';
 import { Menu, MenuItem } from '@nvidia-elements/core/menu';
@@ -483,6 +483,22 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     expect(items.length).toBe(4);
     expect(items[3].textContent.trim()).toBe('option 4');
   });
+
+  it('should clear input and reset select when reset() is called', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(select.value).toBe('option 1');
+    expect(input.value).toBe('option 1');
+
+    emulateClick(input);
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+
+    element.reset();
+    await elementIsStable(element);
+    expect(input.value).toBe('');
+    expect(select.selectedIndex).toBe(-1);
+    expect(dropdown.matches(':popover-open')).toBe(false);
+  });
 });
 
 describe(`${Combobox.metadata.tag}: single select empty default option`, () => {
@@ -551,6 +567,7 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
     input = fixture.querySelector('input');
     select = fixture.querySelector('select');
     options = Array.from(fixture.querySelectorAll('option'));
+    await elementIsStable(element);
   });
 
   afterEach(() => {
@@ -888,6 +905,22 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
     select.options[0].value = '1-updated';
     await elementIsStable(element);
     expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag)[0].innerText).toBe('Option 1 Updated');
+  });
+
+  it('should dispatch input and change events on select when a tag is clicked', async () => {
+    const inputHandler = vi.fn();
+    const changeHandler = vi.fn();
+    select.addEventListener('input', inputHandler);
+    select.addEventListener('change', changeHandler);
+
+    const tags = element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags.length).toBe(2);
+
+    emulateClick(tags[0]);
+    await elementIsStable(element);
+
+    expect(inputHandler).toHaveBeenCalled();
+    expect(changeHandler).toHaveBeenCalled();
   });
 });
 
