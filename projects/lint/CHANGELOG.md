@@ -1,3 +1,15 @@
+## [@nvidia-elements/lint-v0.12.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.11.0...@nvidia-elements/lint-v0.12.0) (2026-02-25)
+
+
+### Features
+
+* **labs-lint:** add new lint rules ([60ae033](https://github.com/NVIDIA/elements/commit/60ae03390db16d09234b84ece6338d5a3d6da27d))
+
+
+### Bug Fixes
+
+* **labs-lint:** improve lint deprecation rules ([cb9c67b](https://github.com/NVIDIA/elements/commit/cb9c67b40b668086f3b4489629c8d3d34ae158df))
+
 ## [@nvidia-elements/lint-v0.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.10.0...@nvidia-elements/lint-v0.11.0) (2026-02-10)
 
 
