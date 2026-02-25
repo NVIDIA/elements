@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@internals/testing';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Select } from '@nvidia-elements/core/select';
@@ -467,6 +467,48 @@ describe(Select.metadata.tag, () => {
       'span-right bottom'
     );
   });
+
+  it('should dispatch input and change events when a menu item is selected', async () => {
+    const inputHandler = vi.fn();
+    const changeHandler = vi.fn();
+    select.addEventListener('input', inputHandler);
+    select.addEventListener('change', changeHandler);
+
+    emulateClick(select);
+    await elementIsStable(element);
+    emulateClick(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1]);
+    await element.updateComplete;
+
+    expect(inputHandler).toHaveBeenCalledOnce();
+    expect(changeHandler).toHaveBeenCalledOnce();
+  });
+
+  it('should dispatch input and change events when a tag is clicked in multiple select', async () => {
+    const inputHandler = vi.fn();
+    const changeHandler = vi.fn();
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+    await elementIsStable(element);
+
+    select.addEventListener('input', inputHandler);
+    select.addEventListener('change', changeHandler);
+
+    emulateClick(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag)[0]);
+    await element.updateComplete;
+
+    expect(inputHandler).toHaveBeenCalledOnce();
+    expect(changeHandler).toHaveBeenCalledOnce();
+  });
+
+  it('should prevent interaction with disabled menu items via pointer-events', async () => {
+    select.options[1].disabled = true;
+    await elementIsStable(element);
+
+    const disabledItem = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag)[1];
+    expect(disabledItem.disabled).toBe(true);
+    expect(getComputedStyle(disabledItem).pointerEvents).toBe('none');
+  });
 });
 
 describe(`${Select.metadata.tag}: size`, () => {
@@ -509,5 +551,75 @@ describe(`${Select.metadata.tag}: size`, () => {
 
   it('should set --size property', () => {
     expect(getComputedStyle(element).getPropertyValue('--size')).toBe('3.75'); // size (3) + 0.75 buffer
+  });
+
+  it('should not render tags when using multiple with size', async () => {
+    const select = fixture.querySelector('select');
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll<Tag>(Tag.metadata.tag).length).toBe(0);
+  });
+
+  it('should not render tags overflow label when using multiple with size', async () => {
+    const select = fixture.querySelector('select');
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.tags-label')).toBe(null);
+  });
+
+  it('should not set multiple-overflow state when using multiple with size', async () => {
+    const select = fixture.querySelector('select');
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+    element.style.setProperty('--width', '50px');
+
+    await elementIsStable(element);
+    await new Promise(r => requestAnimationFrame(r));
+    await new Promise(resolve => setTimeout(resolve, 0));
+    expect(element.matches(':state(multiple-overflow)')).toBe(false);
+  });
+});
+
+describe(`${Select.metadata.tag}: container`, () => {
+  let fixture: HTMLElement;
+  let element: Select;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should reflect the container attribute', async () => {
+    fixture = await createFixture(html`
+      <nve-select container="flat">
+        <label>label</label>
+        <select>
+          <option value="1">Option 1</option>
+        </select>
+      </nve-select>
+    `);
+    element = fixture.querySelector(Select.metadata.tag);
+    await elementIsStable(element);
+    expect(element.getAttribute('container')).toBe('flat');
+  });
+
+  it('should support inline container', async () => {
+    fixture = await createFixture(html`
+      <nve-select container="inline">
+        <label>label</label>
+        <select>
+          <option value="1">Option 1</option>
+        </select>
+      </nve-select>
+    `);
+    element = fixture.querySelector(Select.metadata.tag);
+    await elementIsStable(element);
+    expect(element.getAttribute('container')).toBe('inline');
   });
 });
