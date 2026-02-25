@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.10.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.0...@nvidia-elements/cli-v0.10.1) (2026-02-25)
+
+
+### Bug Fixes
+
+* **labs-cli:** simplify update notification logic and markdown render ([ffad57e](https://github.com/NVIDIA/elements/commit/ffad57e552165f127a2813f204e6b2baefbb0065))
+
 ## [@nvidia-elements/cli-v0.10.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.9.0...@nvidia-elements/cli-v0.10.0) (2026-02-23)
 
 
