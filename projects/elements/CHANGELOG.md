@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.60.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.4...@nvidia-elements/core-v1.60.5) (2026-02-25)
+
+
+### Bug Fixes
+
+* **elements:** minor page layout and grid api doc ([ffc364f](https://github.com/NVIDIA/elements/commit/ffc364f5465a89c46d8fada50b4770d1b7fa8c4a))
+* **labs-cli:** simplify update notification logic and markdown render ([ffad57e](https://github.com/NVIDIA/elements/commit/ffad57e552165f127a2813f204e6b2baefbb0065))
+
 ## [@nvidia-elements/core-v1.60.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.3...@nvidia-elements/core-v1.60.4) (2026-02-23)
 
 
