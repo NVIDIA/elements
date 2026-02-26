@@ -4,4 +4,4 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const nve = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'index.js');
-spawn('node', [nve, 'project.setup.mcp'], { stdio: 'inherit' }).on('close', code => process.exit(code ?? 0));
+spawn('node', [nve, 'project.setup'], { stdio: 'inherit' }).on('close', code => process.exit(code ?? 0));

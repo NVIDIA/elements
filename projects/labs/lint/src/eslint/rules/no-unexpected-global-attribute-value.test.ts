@@ -2,9 +2,17 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { RuleTester } from 'eslint';
 import type { JSRuleDefinition } from 'eslint';
 import html from '@html-eslint/eslint-plugin';
-import noUnexpectedGlobalAttributeValue from './no-unexpected-global-attribute-value.js';
+import noUnexpectedGlobalAttributeValue, {
+  SIMPLE_NVE_TEXT_VALUES,
+  SIMPLE_NVE_LAYOUT_VALUES,
+  SIMPLE_NVE_DISPLAY_VALUES
+} from './no-unexpected-global-attribute-value.js';
 
 const rule = noUnexpectedGlobalAttributeValue as unknown as JSRuleDefinition;
+
+const textValidValues = SIMPLE_NVE_TEXT_VALUES.map(v => `"${v}"`).join(', ');
+const layoutValidValues = SIMPLE_NVE_LAYOUT_VALUES.map(v => `"${v}"`).join(', ');
+const displayValidValues = SIMPLE_NVE_DISPLAY_VALUES.map(v => `"${v}"`).join(', ');
 
 describe('noUnexpectedAttributeValue', () => {
   let tester: RuleTester;
@@ -36,7 +44,7 @@ describe('noUnexpectedAttributeValue', () => {
     expect(noUnexpectedGlobalAttributeValue.meta.schema).toBeDefined();
     expect(noUnexpectedGlobalAttributeValue.meta.messages).toBeDefined();
     expect(noUnexpectedGlobalAttributeValue.meta.messages['unexpected-attribute-value']).toBe(
-      'Unexpected value "{{value}}" in "{{attribute}}" attribute'
+      'Unexpected value "{{value}}" in "{{attribute}}" attribute. Available values: {{validValues}}'
     );
     expect(noUnexpectedGlobalAttributeValue.meta.messages['unexpected-attribute-value-alternative']).toBe(
       'Unexpected value "{{value}}" in "{{attribute}}" attribute. Use "{{alternative}}" instead.'
@@ -116,7 +124,7 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-text', value: 'unknown' },
+              data: { attribute: 'nve-text', value: 'unknown', validValues: textValidValues },
               suggestions: []
             }
           ]
@@ -126,7 +134,7 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-text', value: 'unknown sm muted' },
+              data: { attribute: 'nve-text', value: 'unknown sm muted', validValues: textValidValues },
               suggestions: []
             }
           ]
@@ -160,7 +168,7 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'unknown' },
+              data: { attribute: 'nve-layout', value: 'unknown', validValues: layoutValidValues },
               suggestions: []
             }
           ]
@@ -170,7 +178,11 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'grid gap:md grid-cols:4 flex:1' },
+              data: {
+                attribute: 'nve-layout',
+                value: 'grid gap:md grid-cols:4 flex:1',
+                validValues: layoutValidValues
+              },
               suggestions: []
             }
           ]
@@ -316,6 +328,13 @@ describe('noUnexpectedAttributeValue', () => {
   });
 
   it('should not allow additional invalid symbols in nve-layout attribute values', () => {
+    const withoutAmp = SIMPLE_NVE_LAYOUT_VALUES.filter(v => !v.includes('&'))
+      .map(v => `"${v}"`)
+      .join(', ');
+    const withoutPipe = SIMPLE_NVE_LAYOUT_VALUES.filter(v => !v.includes('|'))
+      .map(v => `"${v}"`)
+      .join(', ');
+
     tester.run('should not allow additional invalid symbols in nve-layout attribute values', rule, {
       valid: [],
       invalid: [
@@ -325,7 +344,7 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'row &lg|row' }
+              data: { attribute: 'nve-layout', value: 'row &lg|row', validValues: withoutAmp }
             }
           ]
         },
@@ -335,7 +354,7 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'row &lg|row' }
+              data: { attribute: 'nve-layout', value: 'row &lg|row', validValues: withoutPipe }
             }
           ]
         },
@@ -345,7 +364,7 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'row @lg|row' }
+              data: { attribute: 'nve-layout', value: 'row @lg|row', validValues: withoutPipe }
             }
           ]
         }
@@ -359,7 +378,12 @@ describe('noUnexpectedAttributeValue', () => {
       invalid: [
         {
           code: '<div nve-display="row"></div>',
-          errors: [{ messageId: 'unexpected-attribute-value', data: { attribute: 'nve-display', value: 'row' } }]
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value',
+              data: { attribute: 'nve-display', value: 'row', validValues: displayValidValues }
+            }
+          ]
         }
       ]
     });

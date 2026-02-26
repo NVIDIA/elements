@@ -32,3 +32,17 @@ export const eslintSchema: Schema = {
   required: ['id', 'severity', 'message', 'line', 'column', 'endLine', 'endColumn'],
   additionalProperties: false
 };
+
+export const jsonReportSchema: Schema = {
+  type: 'object',
+  patternProperties: {
+    '.*': {
+      type: 'object',
+      properties: {
+        message: { type: 'string' },
+        status: { type: 'string', enum: ['success', 'danger', 'info', 'warning', 'log'] }
+      },
+      required: ['message', 'status']
+    }
+  }
+};

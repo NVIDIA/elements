@@ -11,9 +11,10 @@ describe('PlaygroundService', () => {
     });
     expect(Array.isArray(result)).toBe(true);
     expect(result.length).toBe(2);
-    expect(result[0].message).toBe(
+    expect(result[0].message).toContain(
       'Unexpected use of restricted attribute "nve-layout" on <nve-button>. Remove the attribute.'
     );
+    expect(result[0].message).toContain('Supported attributes:');
     expect(result[0].line).toBe(1);
     expect(result[0].column).toBe(13);
     expect(result[0].endLine).toBe(1);
@@ -24,11 +25,31 @@ describe('PlaygroundService', () => {
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.name).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.command).toBe('validate');
     expect((PlaygroundService.validate as ToolMethod<unknown>).metadata.description).toBe(
-      'Validates HTML templates for playground examples. Enforces additional constraints to prevent common mistakes when generating standalone demos. Use this before calling playground_create.'
+      'Validates HTML templates specifically for playground examples. Includes all checks from the "api_template_validate" tool with additional constraints to prevent common mistakes when generating standalone demos and playgrounds. Use this before calling playground_create.'
     );
     expect(
       (PlaygroundService.validate as ToolMethod<unknown>).metadata.inputSchema?.properties?.template
     ).toBeDefined();
+    process.env.ELEMENTS_ENV = env;
+  });
+
+  it('should return warning for empty template', async () => {
+    const env = process.env.ELEMENTS_ENV;
+    process.env.ELEMENTS_ENV = 'mcp';
+    const result = await PlaygroundService.validate({ template: '' });
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe('empty-template');
+    expect(result[0].severity).toBe('warn');
+    expect(result[0].message).toContain('Template is empty');
+    process.env.ELEMENTS_ENV = env;
+  });
+
+  it('should return warning for whitespace-only template', async () => {
+    const env = process.env.ELEMENTS_ENV;
+    process.env.ELEMENTS_ENV = 'mcp';
+    const result = await PlaygroundService.validate({ template: '   \n  ' });
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe('empty-template');
     process.env.ELEMENTS_ENV = env;
   });
 
@@ -71,7 +92,7 @@ describe('PlaygroundService', () => {
       });
       expect(Array.isArray(result)).toBe(true);
       expect((result as unknown[]).length).toBeGreaterThan(0);
-      expect((result as { message: string }[])[0].message).toBe(
+      expect((result as { message: string }[])[0].message).toContain(
         'Unexpected use of restricted attribute "nve-layout" on <nve-button>. Remove the attribute.'
       );
     });

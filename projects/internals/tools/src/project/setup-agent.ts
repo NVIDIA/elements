@@ -3,7 +3,7 @@ import { join, resolve } from 'node:path';
 import { getNPMClient } from '../internal/node.js';
 import type { Report } from '../internal/types.js';
 import { claudeProjectSettings } from './starters.js';
-import { skills } from '../skills/index.js';
+import { skills } from '../context/index.js';
 
 export type IDE = 'cursor' | 'claude-code' | 'both';
 
@@ -133,7 +133,8 @@ ${skill.context}`;
   return skillPath;
 }
 
-export async function setupMcpConfig(cwd: string, ide: IDE): Promise<Report> {
+export async function setupAgent(cwd: string, ide: IDE): Promise<Report> {
+  const dir = resolve(cwd);
   const client = await getNPMClient();
 
   if (!client) {
@@ -150,24 +151,24 @@ export async function setupMcpConfig(cwd: string, ide: IDE): Promise<Report> {
 
   for (const target of ides) {
     try {
-      const configPath = writeMcpConfig(cwd, target, client);
+      const configPath = writeMcpConfig(dir, target, client);
       const label = target === 'cursor' ? 'Cursor' : 'Claude Code';
       report[target] = {
-        message: `${label} MCP configured at ${configPath}. Restart ${label} to activate.`,
+        message: `${label} configured. Restart ${label} to activate.\n\`${configPath}\``,
         status: 'success'
       };
 
       if (target === 'claude-code') {
-        const settingsPath = writeClaudeSettings(cwd);
+        const settingsPath = writeClaudeSettings(dir);
         report['claude-settings'] = {
-          message: `Claude Code project settings configured at ${settingsPath}.`,
+          message: `Claude Code project settings configured.\n\`${settingsPath}\``,
           status: 'success'
         };
       }
     } catch (e) {
       const label = target === 'cursor' ? 'Cursor' : 'Claude Code';
       report[target] = {
-        message: `Failed to configure ${label} MCP. ${e}`,
+        message: `**Failed to configure ${label} MCP**: ${e}`,
         status: 'danger'
       };
     }
@@ -176,7 +177,7 @@ export async function setupMcpConfig(cwd: string, ide: IDE): Promise<Report> {
   try {
     const skillPath = writeElementsSkill(cwd);
     report['elements-skill'] = {
-      message: `Elements skill file configured at ${skillPath}.`,
+      message: `Elements skill file configured.\n\`${skillPath}\``,
       status: 'success'
     };
   } catch (e) {

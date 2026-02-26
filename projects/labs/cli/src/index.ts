@@ -4,14 +4,17 @@ process.env.ELEMENTS_ENV = 'cli';
 /* istanbul ignore file -- @preserve */
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { tools, type Schema } from '@internals/tools';
+import { tools, ToolSupport, type Schema } from '@internals/tools';
 import { banner, colors, getArgValue, renderResult, runAsyncTool } from './utils.js';
 import { checkForUpdates, notifyIfUpdateAvailable } from './update.js';
 
 export const VERSION = '0.0.0';
 
-// Check for updates in the background (non-blocking)
-const updateCheck = checkForUpdates(VERSION);
+let updateCheck: Promise<string | null>;
+function getUpdateCheck() {
+  updateCheck ??= checkForUpdates(VERSION);
+  return updateCheck;
+}
 
 process.on('SIGINT', () => process.exit(0));
 
@@ -41,71 +44,73 @@ yargsInstance.command(
   async () => {
     const greeting = colors.complete(`\x1b[?7l\n${JSON.parse(banner)}\n\n`);
     console.log(`${greeting}${colors.complete('@nvidia-elements/cli version ' + VERSION)}\n${await yargsInstance.getHelp()}`);
-    await notifyIfUpdateAvailable(VERSION, updateCheck);
+    await notifyIfUpdateAvailable(VERSION, getUpdateCheck());
   }
 );
 
-tools.forEach(tool => {
-  const { inputSchema, description } = tool.metadata;
-  const { properties, required } = inputSchema ?? {};
-  const requiredArgs = Object.keys(properties ?? {}).filter(key => required?.includes(key));
-  const optionalArgs = Object.keys(properties ?? {}).filter(
-    key => !required?.includes(key) || properties?.[key].default
-  );
+tools
+  .filter(tool => tool.metadata.support & ToolSupport.CLI)
+  .forEach(tool => {
+    const { inputSchema, summary } = tool.metadata;
+    const { properties, required } = inputSchema ?? {};
+    const requiredArgs = Object.keys(properties ?? {}).filter(key => required?.includes(key));
+    const optionalArgs = Object.keys(properties ?? {}).filter(
+      key => !required?.includes(key) || properties?.[key].default
+    );
 
-  const command =
-    `${tool.metadata.command} ${[...requiredArgs.map(key => `<${key}>`), ...optionalArgs.map(key => `[${key}]`)].join(' ')}`.trim();
+    const command =
+      `${tool.metadata.command} ${[...requiredArgs.map(key => `<${key}>`), ...optionalArgs.map(key => `[${key}]`)].join(' ')}`.trim();
 
-  yargsInstance.command(
-    command,
-    description,
-    // builder to add arguments metadata
-    async builder => {
-      const argOptions = (prop: Schema) => ({
-        describe: prop.description,
-        type: prop.type as 'string' | 'number' | 'boolean',
-        choices: prop.enum ?? undefined,
-        default: prop.default
-      });
+    yargsInstance.command(
+      command,
+      summary,
+      // builder to add arguments metadata
+      async builder => {
+        const argOptions = (prop: Schema) => ({
+          describe: prop.description,
+          type: prop.type as 'string' | 'number' | 'boolean',
+          choices: prop.enum ?? undefined,
+          default: prop.default
+        });
 
-      requiredArgs.forEach(key => builder.positional(key, argOptions(properties[key])));
-      optionalArgs.forEach(key => builder.option(key, argOptions(properties[key])));
-    },
-    // main handler for the command
-    async args => {
-      const { result, status, message } = await runAsyncTool(args, tool);
+        requiredArgs.forEach(key => builder.positional(key, argOptions(properties[key])));
+        optionalArgs.forEach(key => builder.option(key, argOptions(properties[key])));
+      },
+      // main handler for the command
+      async args => {
+        const { result, status, message } = await runAsyncTool(args, tool);
 
-      if (status === 'complete') {
-        await renderResult(result);
-        await notifyIfUpdateAvailable(VERSION, updateCheck);
-        process.exit(0);
-      } else {
-        console.log(colors.error(message ?? 'unknown error'));
-        process.exit(1);
-      }
-    },
-    // middleware to get interactive arguments when missing
-    [
-      async argv => {
-        const interactive = !!requiredArgs.find(p => !argv[p]);
-        const argNames = interactive
-          ? [...requiredArgs, ...optionalArgs.filter(key => properties?.[key].default === undefined)]
-          : requiredArgs;
-        for (const argName of argNames) {
-          if (!argv[argName]) {
-            const propertySchema = properties?.[argName];
-            const v = await getArgValue(argName, propertySchema);
-            argv[argName] = v;
-          } else if (properties?.[argName]?.type === 'array' && typeof argv[argName] === 'string') {
-            argv[argName] = (argv[argName] as string)
-              .split(',')
-              .map(s => s.trim())
-              .filter(Boolean);
+        if (status === 'complete') {
+          await renderResult(result);
+          await notifyIfUpdateAvailable(VERSION, getUpdateCheck());
+          process.exit(0);
+        } else {
+          console.log(colors.error(message ?? 'unknown error'));
+          process.exit(1);
+        }
+      },
+      // middleware to get interactive arguments when missing
+      [
+        async argv => {
+          const interactive = !!requiredArgs.find(p => !argv[p]);
+          const argNames = interactive
+            ? [...requiredArgs, ...optionalArgs.filter(key => properties?.[key].default === undefined)]
+            : requiredArgs;
+          for (const argName of argNames) {
+            if (!argv[argName]) {
+              const propertySchema = properties?.[argName];
+              const v = await getArgValue(argName, propertySchema);
+              argv[argName] = v;
+            } else if (properties?.[argName]?.type === 'array' && typeof argv[argName] === 'string') {
+              argv[argName] = (argv[argName] as string)
+                .split(',')
+                .map(s => s.trim())
+                .filter(Boolean);
+            }
           }
         }
-      }
-    ]
-  );
-});
+      ]
+    );
+  });
 
 void yargsInstance.parse();

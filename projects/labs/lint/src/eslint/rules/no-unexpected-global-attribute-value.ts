@@ -2,10 +2,28 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import {
   VALID_NVE_DISPLAY_VALUES,
+  VALID_NVE_LAYOUT_VALUES,
+  VALID_NVE_TEXT_VALUES,
   VALUE_BINDINGS,
   recommendedNveTextValue,
   recommendedNveLayoutValue
 } from '../internals/attributes.js';
+
+// also used in @internals/metadata, these are values that often confuse agents due to complexity in playground template generation within the same context window
+export function isComplexAttributeValue(value: string) {
+  return (
+    value.includes('|') ||
+    value.includes('@') ||
+    value.includes('&') ||
+    value.includes('xx') ||
+    value.includes('-y:') ||
+    value.includes(':none')
+  );
+}
+
+export const SIMPLE_NVE_TEXT_VALUES = [...VALID_NVE_TEXT_VALUES].filter(v => !isComplexAttributeValue(v));
+export const SIMPLE_NVE_LAYOUT_VALUES = VALID_NVE_LAYOUT_VALUES.filter(v => !isComplexAttributeValue(v));
+export const SIMPLE_NVE_DISPLAY_VALUES = [...VALID_NVE_DISPLAY_VALUES].filter(v => !isComplexAttributeValue(v));
 
 const rule = {
   meta: {
@@ -19,7 +37,8 @@ const rule = {
     },
     schema: [{ type: 'object' }],
     messages: {
-      ['unexpected-attribute-value']: 'Unexpected value "{{value}}" in "{{attribute}}" attribute',
+      ['unexpected-attribute-value']:
+        'Unexpected value "{{value}}" in "{{attribute}}" attribute. Available values: {{validValues}}',
       ['unexpected-attribute-value-alternative']:
         'Unexpected value "{{value}}" in "{{attribute}}" attribute. Use "{{alternative}}" instead.',
       ['suggest-replace-attribute-value']: 'Replace "{{value}}" with "{{alternative}}"'
@@ -38,7 +57,8 @@ const rule = {
               data: {
                 attribute: 'nve-text',
                 value,
-                alternative
+                alternative,
+                validValues: [...SIMPLE_NVE_TEXT_VALUES].map(v => `"${v}"`).join(', ')
               },
               messageId: alternative ? 'unexpected-attribute-value-alternative' : 'unexpected-attribute-value',
               suggest: alternative
@@ -68,12 +88,16 @@ const rule = {
           const invalidSymbols = context.options[0]?.['nve-layout'] ?? [];
           const alternative = recommendedNveLayoutValue(value, invalidSymbols);
           if (alternative !== value) {
+            const layoutValidValues = SIMPLE_NVE_LAYOUT_VALUES.filter(
+              v => !invalidSymbols.some(symbol => v.includes(symbol))
+            );
             context.report({
               node: layoutAttr,
               data: {
                 attribute: 'nve-layout',
                 value,
-                alternative
+                alternative,
+                validValues: layoutValidValues.map(v => `"${v}"`).join(', ')
               },
               messageId: alternative ? 'unexpected-attribute-value-alternative' : 'unexpected-attribute-value',
               suggest: alternative
@@ -107,7 +131,8 @@ const rule = {
               node,
               data: {
                 attribute: 'nve-display',
-                value
+                value,
+                validValues: [...SIMPLE_NVE_DISPLAY_VALUES].map(v => `"${v}"`).join(', ')
               },
               messageId: 'unexpected-attribute-value'
             });

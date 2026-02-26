@@ -1,5 +1,5 @@
 import { select, input, confirm, editor } from '@inquirer/prompts';
-import { type ManagedToolMethod } from '@internals/tools';
+import { type ManagedToolMethod, type Report } from '@internals/tools';
 import ora, { type Ora } from 'ora';
 import { marked } from 'marked';
 import { markedTerminal } from 'marked-terminal';
@@ -50,7 +50,7 @@ export async function runAsyncTool(args: Record<string, unknown>, fn: ManagedToo
   const value = await fn(args);
 
   if (isInteractive) {
-    await new Promise(resolve => setTimeout(resolve, 1000 - (Date.now() - startTime)));
+    await new Promise(resolve => setTimeout(resolve, Math.max(0, 1000 - (Date.now() - startTime))));
     spinner?.stop();
   }
   return value;
@@ -113,13 +113,6 @@ export function getBoolean(value: string, prop: { description?: string }) {
   return confirm({ message: `(${value}) ${prop.description ?? ''}:` });
 }
 
-interface Report {
-  [key: string]: {
-    message: string;
-    status: 'success' | 'danger' | 'info' | 'log' | 'warning';
-  };
-}
-
 export const statusIcons = {
   success: '✅',
   danger: '❌',
@@ -141,22 +134,40 @@ export function reportHasFailures(result: Report) {
   return Object.values(result).some(value => value.status === 'danger');
 }
 
-export function renderReport(result: Report) {
+export async function renderReport(result: Report) {
   const report = Object.entries(result)
     .map(([key, value]) => {
       const label = key
         .replace(/([A-Z])/g, ' $1')
         .trim()
         .toLowerCase();
-      return `${statusIcons[value.status]} (${label}): ${value.message}`;
+      return `${statusIcons[value.status]} (**${label}**): ${value.message}`;
     })
-    .join('\n');
+    .join('\n\n');
 
-  console.log(report);
+  console.log(await marked.parse(report));
 
   if (reportHasFailures(result)) {
     process.exit(1);
   }
+}
+
+export function wrapUrl(url: string, maxWidth = 80): string {
+  if (url.length <= maxWidth) return url;
+  const segments = url.split('/');
+  const lines: string[] = [];
+  let line = segments[0];
+  for (let i = 1; i < segments.length; i++) {
+    const next = '/' + segments[i];
+    if ((line + next).length > maxWidth && line.length > 0) {
+      lines.push(line);
+      line = next;
+    } else {
+      line += next;
+    }
+  }
+  if (line) lines.push(line);
+  return lines.join('\n');
 }
 
 export function isObjectLiteral(item: unknown) {
@@ -192,11 +203,12 @@ function configureMarkedTerminal() {
 
 export async function renderResult(result: unknown) {
   if (isReport(result)) {
-    renderReport(result as unknown as Report);
+    configureMarkedTerminal();
+    await renderReport(result as unknown as Report);
   } else if (Array.isArray(result) || isObjectLiteral(result)) {
     console.log(JSON.stringify(result, null, 2));
   } else if (typeof result === 'string' && result.trim().startsWith('http') && !result.includes('\n')) {
-    console.log(colors.complete((result.match(/.{1,80}/g) ?? [result]).join('\n')));
+    console.log(colors.complete(wrapUrl(result)));
   } else if (typeof result === 'string') {
     configureMarkedTerminal();
     console.log(await marked.parse(result));

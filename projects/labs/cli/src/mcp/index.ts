@@ -4,8 +4,9 @@ process.env.ELEMENTS_ENV = 'mcp';
 /* istanbul ignore file -- @preserve */
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { tools, prompts, jsonSchemaToZod } from '@internals/tools';
+import { tools, prompts, jsonSchemaToZod, ToolSupport } from '@internals/tools';
 import z, { type ZodObject } from 'zod';
+import { type ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 
 export const VERSION = '0.0.0';
 
@@ -16,26 +17,44 @@ const server = new McpServer({
     'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples. Use the "elements" skill for more guidance if available.'
 });
 
-tools.forEach(tool => {
-  const { description, title, toolName } = tool.metadata;
-  const inputSchema = (jsonSchemaToZod(tool.metadata.inputSchema) as ZodObject<{}>).shape;
-  const resultSchema = tool.metadata.outputSchema ? jsonSchemaToZod(tool.metadata.outputSchema) : z.any();
-  const outputSchema = {
-    status: z.enum(['complete', 'error']).optional(),
-    message: z.string().optional(),
-    result: resultSchema.optional()
-  };
-  const config = { title, inputSchema, outputSchema, description: `Elements: ${description}` };
-  server.registerTool(toolName, config, async params => {
-    const structuredContent = (await tool(params)) as unknown as { [x: string]: unknown };
-    // https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1624
-    const text =
-      typeof structuredContent.result === 'string' && structuredContent.status !== 'error'
-        ? structuredContent.result
-        : JSON.stringify(structuredContent);
-    return { structuredContent, content: [{ type: 'text', text }] };
+tools
+  .filter(tool => tool.metadata.support & ToolSupport.MCP)
+  .forEach(tool => {
+    const { summary, description, title, toolName } = tool.metadata;
+    const inputSchema = tool.metadata.inputSchema
+      ? (jsonSchemaToZod(tool.metadata.inputSchema) as ZodObject<{}>).shape
+      : {};
+    const resultSchema = tool.metadata.outputSchema ? jsonSchemaToZod(tool.metadata.outputSchema) : z.any();
+    const outputSchema = {
+      status: z.enum(['complete', 'error']).optional(),
+      message: z.string().optional(),
+      result: resultSchema.optional()
+    };
+
+    const config = {
+      title,
+      inputSchema,
+      outputSchema,
+      description: description ? description : summary,
+      annotations: {
+        title,
+        readOnlyHint: true, // If true, the tool does not change its environment
+        idempotentHint: true, // If true, repeated calls with same args have no extra effect
+        destructiveHint: false, // If true, the tool may perform destructive/irreversible updates
+        openWorldHint: false, // If true, tool interacts with external entities
+        ...tool.metadata.annotations
+      } as ToolAnnotations
+    };
+    server.registerTool(toolName, config, async params => {
+      const structuredContent = (await tool(params)) as unknown as { [x: string]: unknown };
+      // https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1624
+      const text =
+        typeof structuredContent.result === 'string' && structuredContent.status !== 'error'
+          ? structuredContent.result
+          : JSON.stringify(structuredContent);
+      return { structuredContent, content: [{ type: 'text', text }] };
+    });
   });
-});
 
 prompts.forEach(prompt => {
   const argsSchema = jsonSchemaToZod(prompt.argsSchema).shape;

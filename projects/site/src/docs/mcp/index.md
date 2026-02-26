@@ -17,7 +17,7 @@
 
 ## Quick Setup
 
-The fastest way to configure the Elements MCP is with the setup command. This detects your package manager and prompts you to select an IDE (Cursor, Claude Code, or both).
+The fastest way to configure the Elements MCP is with the setup command. This detects your package manager, configures the MCP server for both Cursor and Claude Code, and adds Elements core dependencies to the project.
 
 ```shell
 npx --package=@nvidia-elements/cli -y nve-setup-mcp
@@ -197,70 +197,72 @@ Skills provide persistent context to AI agents for building UI with Elements. Un
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">api_get</code></nve-grid-cell>
-    <nve-grid-cell>Get the documentation of a known Elements component or API by its name (nve-*).</nve-grid-cell>
+    <nve-grid-cell>Get documentation known components or attributes by name (nve-*).</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">api_template_validate</code></nve-grid-cell>
-    <nve-grid-cell>Validates HTML templates using Elements APIs and components (nve-*). Checks for invalid API usage and UX patterns.</nve-grid-cell>
+    <nve-grid-cell>Validates HTML templates using Elements APIs and components (nve-*).</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">api_imports_get</code></nve-grid-cell>
-    <nve-grid-cell>Get the ESM imports for a given HTML template using Elements APIs and components (nve-*).</nve-grid-cell>
+    <nve-grid-cell>Get esm imports for a given HTML template using Elements APIs (nve-*).</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">api_changelogs_get</code></nve-grid-cell>
-    <nve-grid-cell>Get the changelog details for a specific component or API.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">api_tokens_list</code></nve-grid-cell>
+    <nve-grid-cell>Get available semantic CSS variables / design tokens for theming.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">packages_versions_list</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">packages_list</code></nve-grid-cell>
     <nve-grid-cell>Get latest published versions of all Elements packages.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">packages_changelogs_list</code></nve-grid-cell>
-    <nve-grid-cell>Get changelog details for all @nve packages.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">packages_get</code></nve-grid-cell>
+    <nve-grid-cell>Get details for a specific Elements package.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">packages_changelogs_search</code></nve-grid-cell>
-    <nve-grid-cell>Search for and retrieve changelog details by package name (supports fuzzy matching).</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">packages_changelogs_get</code></nve-grid-cell>
+    <nve-grid-cell>Retrieve changelog details by package name.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">examples_list</code></nve-grid-cell>
-    <nve-grid-cell>Get a summary list of available Elements (nve-*) component/pattern usage examples and code snippets.</nve-grid-cell>
+    <nve-grid-cell>Get list of available Elements (nve-*) patterns and examples.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">examples_get</code></nve-grid-cell>
     <nve-grid-cell>Get the full template of a known example or pattern by id.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">examples_search</code></nve-grid-cell>
-    <nve-grid-cell>Search Elements (nve-*) pattern usage examples by name, element type, or keywords.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">playground_validate</code></nve-grid-cell>
-    <nve-grid-cell>Validates HTML templates for playground examples. Enforces extra constraints to prevent common mistakes when generating standalone demos.</nve-grid-cell>
+    <nve-grid-cell>Validates HTML templates specifically for playground examples.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">playground_create</code></nve-grid-cell>
-    <nve-grid-cell>Create a shareable playground URL from an HTML template. Returns URL if valid, or validation errors if invalid.</nve-grid-cell>
+    <nve-grid-cell>Create a shareable playground URL from an HTML template.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">project_create</code></nve-grid-cell>
     <nve-grid-cell>Create a new starter project.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">project_update</code></nve-grid-cell>
-    <nve-grid-cell>Update a project to the latest versions of Elements packages.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">project_validate</code></nve-grid-cell>
-    <nve-grid-cell>Check project setup for configuration issues, outdated dependencies, or missing required packages.</nve-grid-cell>
+    <nve-grid-cell>Check project for configuration issues and dependencies.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">project_setup_mcp</code></nve-grid-cell>
-    <nve-grid-cell>Configure Elements MCP server for Cursor or Claude Code.</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><code nve-text="code">tokens_list</code></nve-grid-cell>
-    <nve-grid-cell>Get available semantic CSS variables / design tokens for theming.</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">project_setup</code></nve-grid-cell>
+    <nve-grid-cell>Setup or update a project to use Elements.</nve-grid-cell>
   </nve-grid-row>
 </nve-grid>
+
+## Troubleshooting
+
+### 403 Forbidden
+
+A `403 Forbidden` error means your Artifactory token has expired. Re-authenticate to resolve it.
+
+```shell
+npm config set registry https://registry.npmjs.org && npm login --auth-type=legacy
+```
+
+### Unsupported Engine
+
+An `Unsupported engine` warning means your Node.js version is out of date. The CLI requires Node.js v20 or later. Update Node.js and try again.
