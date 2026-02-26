@@ -11,7 +11,8 @@ import { glob } from 'glob';
 import archiver from 'archiver';
 import AdmZip from 'adm-zip';
 import { isCommandAvailable, getNPMClient } from '../internal/node.js';
-import { skills } from '../skills/index.js';
+import { skills } from '../context/index.js';
+import type { Report } from '../internal/types.js';
 
 export type Starter =
   | 'angular'
@@ -257,16 +258,30 @@ export function removeWireitScripts(exportable) {
 }
 
 /* istanbul ignore next -- @preserve */
-export async function createStarter(starter: Starter, outDir: string = resolve(cwd())) {
-  const downloadPath = startersData[starter].zip;
-  const archivePath = `${outDir}/${starter}.zip`;
-  const extractedPath = `${outDir}/${starter}`;
-  await downloadStarter(downloadPath, archivePath);
-  await extractStarter(archivePath, extractedPath);
-  await setupStarterGit(extractedPath);
-  await setupStarterNPM(extractedPath);
-  console.log('🎉 Starter created successfully');
-  return extractedPath;
+export async function createStarter(starter: Starter, outDir: string = resolve(cwd())): Promise<Report> {
+  try {
+    const downloadPath = startersData[starter].zip;
+    const archivePath = `${outDir}/${starter}.zip`;
+    const extractedPath = `${outDir}/${starter}`;
+    await downloadStarter(downloadPath, archivePath);
+    await extractStarter(archivePath, extractedPath);
+    await setupStarterGit(extractedPath);
+    await setupStarterNPM(extractedPath);
+    console.log('🎉 Starter created successfully');
+    return {
+      create: {
+        message: 'Starter created successfully',
+        status: 'success'
+      }
+    };
+  } catch (error) {
+    return {
+      create: {
+        message: `Failed to create starter: ${error.message}`,
+        status: 'danger'
+      }
+    };
+  }
 }
 
 /* istanbul ignore next -- @preserve */
@@ -381,21 +396,17 @@ export const claudeProjectSettings = {
       'mcp__elements__api_get',
       'mcp__elements__api_template_validate',
       'mcp__elements__api_imports_get',
-      'mcp__elements__api_changelogs',
-      'mcp__elements__api_changelogs_get',
+      'mcp__elements__api_tokens_list',
       'mcp__elements__examples_list',
       'mcp__elements__examples_get',
-      'mcp__elements__examples_search',
       'mcp__elements__playground_validate',
       'mcp__elements__playground_create',
       'mcp__elements__project_create',
-      'mcp__elements__project_update',
+      'mcp__elements__project_setup',
       'mcp__elements__project_validate',
-      'mcp__elements__project_setup_mcp',
-      'mcp__elements__packages_versions_list',
-      'mcp__elements__packages_changelogs_list',
-      'mcp__elements__packages_changelogs_search',
-      'mcp__elements__tokens_list'
+      'mcp__elements__packages_list',
+      'mcp__elements__packages_get',
+      'mcp__elements__packages_changelogs_get'
     ]
   },
   enabledMcpjsonServers: ['elements']

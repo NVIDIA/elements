@@ -9,7 +9,7 @@ describe('metadata', () => {
 
   it('should add metadata to the method', () => {
     class Test {
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       method() {
         return new Promise(resolve => resolve('test'));
       }
@@ -17,7 +17,7 @@ describe('metadata', () => {
 
     const test = new Test();
     expect((test.method as ToolMethod<string>).metadata).toBeDefined();
-    expect((test.method as ToolMethod<string>).metadata.description).toBe('test');
+    expect((test.method as ToolMethod<string>).metadata.summary).toBe('test');
     expect((test.method as ToolMethod<string>).metadata.name).toBe('method');
     expect((test.method as ToolMethod<string>).metadata.command).toBe('method');
   });
@@ -27,7 +27,7 @@ describe('metadata', () => {
     const outputSchema = { type: 'number' as const, description: 'output' };
 
     class Test {
-      @tool({ description: 'test', inputSchema, outputSchema })
+      @tool({ summary: 'test', inputSchema, outputSchema })
       method() {
         return new Promise(resolve => resolve(42));
       }
@@ -40,17 +40,17 @@ describe('metadata', () => {
 
   it('should generate correct command from method name', () => {
     class Test {
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       getData() {
         return new Promise(resolve => resolve('data'));
       }
 
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       processUserInput() {
         return new Promise(resolve => resolve('processed'));
       }
 
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       simpleMethod() {
         return new Promise(resolve => resolve('simple'));
       }
@@ -64,12 +64,12 @@ describe('metadata', () => {
 
   it('should generate correct title from method name', () => {
     class Test {
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       getUserData() {
         return new Promise(resolve => resolve('data'));
       }
 
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       processInput() {
         return new Promise(resolve => resolve('processed'));
       }
@@ -127,7 +127,7 @@ describe('loadTools', () => {
   it('should load tools from a class', async () => {
     @service()
     class TestService {
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       static foo() {
         return new Promise(resolve => resolve('bar'));
       }
@@ -146,7 +146,7 @@ describe('loadTools', () => {
   it('should load tools from a class with error', async () => {
     @service()
     class TestService {
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       static foo() {
         return new Promise(() => {
           throw new Error('error message');
@@ -167,17 +167,17 @@ describe('loadTools', () => {
   it('should load multiple tools from a class', () => {
     @service()
     class TestService {
-      @tool({ description: 'test1' })
+      @tool({ summary: 'test1' })
       static method1() {
         return new Promise(resolve => resolve('result1'));
       }
 
-      @tool({ description: 'test2' })
+      @tool({ summary: 'test2' })
       static method2() {
         return new Promise(resolve => resolve('result2'));
       }
 
-      @tool({ description: 'test3' })
+      @tool({ summary: 'test3' })
       static method3() {
         return new Promise(resolve => resolve('result3'));
       }
@@ -191,7 +191,7 @@ describe('loadTools', () => {
   it('should transform metadata correctly', () => {
     @service()
     class TestService {
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       static foo() {
         return new Promise(resolve => resolve('bar'));
       }
@@ -206,7 +206,7 @@ describe('loadTools', () => {
   it('should filter out non-tool methods', () => {
     @service()
     class TestService {
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       static toolMethod() {
         return new Promise(resolve => resolve('result'));
       }
@@ -229,7 +229,7 @@ describe('loadTools', () => {
   it('should handle methods with arguments', async () => {
     @service()
     class TestService {
-      @tool({ description: 'test' })
+      @tool({ summary: 'test' })
       static add(a: number, b: number) {
         return new Promise(resolve => resolve(a + b));
       }

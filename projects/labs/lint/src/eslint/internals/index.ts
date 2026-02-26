@@ -37,6 +37,21 @@ export async function lintTemplate(code: string): Promise<TemplateLintMessage[]>
 }
 
 async function lintString(code: string, rules: Partial<Linter.RulesRecord> = {}): Promise<TemplateLintMessage[]> {
+  if (!code?.trim()) {
+    return [
+      {
+        id: 'empty-template',
+        severity: 'warn',
+        message: 'Template is empty. Add Elements components to validate.',
+        suggestions: [],
+        line: 1,
+        column: 1,
+        endLine: 1,
+        endColumn: 1
+      }
+    ];
+  }
+
   const eslint = new ESLint({
     overrideConfigFile: true,
     overrideConfig: {

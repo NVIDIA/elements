@@ -1,8 +1,8 @@
 import { ProjectsService } from '@internals/metadata';
-import { fuzzyMatch } from '../internal/search.js';
+import type { ElementVersions } from '../api/utils.js';
 import { service, tool } from '../internal/tools.js';
 import { markdownDescription } from '../internal/utils.js';
-import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.js';
+import { getAvailablePackages, getPackage, getVersions, limitChangelogVersions, searchChangelogs } from './utils.js';
 
 const MAX_LINE_COUNT = 512;
 const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
@@ -11,61 +11,38 @@ const changelogs = projects.reduce((acc, p) => ({ ...acc, [p.name]: p.changelog 
 
 @service()
 export class PackagesService {
-  @tool({
-    description: 'Get latest published versions of all Elements packages.',
-    outputSchema: {
-      type: 'object',
-      patternProperties: {
-        '^.*$': { type: 'string' }
-      },
-      additionalProperties: false
-    }
-  })
-  static async versionsList(): Promise<ElementVersions> {
-    const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
-    return await getLatestPublishedVersions(projects);
+  static async versions(): Promise<ElementVersions> {
+    return await getVersions();
   }
 
   @tool({
-    description: 'Get changelog details for all @nve packages.',
+    summary: 'Get latest published versions of all Elements packages.',
+    outputSchema: { type: 'string' }
+  })
+  static async list(): Promise<string> {
+    return await getAvailablePackages();
+  }
+
+  @tool({
+    summary: 'Get details for a specific Elements package.',
     inputSchema: {
       type: 'object',
       properties: {
-        format: {
+        name: {
           type: 'string',
-          description: markdownDescription,
-          enum: ['markdown', 'json'],
-          default: 'markdown'
+          description: `Available packages.`
         }
       },
-      additionalProperties: false
+      required: ['name']
     },
-    outputSchema: {
-      oneOf: [
-        { type: 'string' },
-        {
-          type: 'object',
-          patternProperties: {
-            '^.*$': { type: 'string' }
-          },
-          additionalProperties: false
-        }
-      ],
-      additionalProperties: false
-    }
+    outputSchema: { type: 'string' }
   })
-  static async changelogsList(
-    { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
-  ): Promise<{ [key: string]: string } | string> {
-    const maxLength = MAX_LINE_COUNT / Object.keys(projects).length;
-    const markdown = Object.entries(changelogs)
-      .map(([key, value]: [string, string]) => `# ${key}\n\n${value.split('\n').slice(0, maxLength).join('\n')}`)
-      .join('\n\n---\n\n');
-    return format && format !== 'markdown' ? changelogs : markdown;
+  static async get({ name }: { name: string }): Promise<string> {
+    return await getPackage(name);
   }
 
   @tool({
-    description: 'Search for and retrieve changelog details by package name (supports fuzzy matching).',
+    summary: 'Retrieve changelog details by package name.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -78,6 +55,11 @@ export class PackagesService {
           description: markdownDescription,
           enum: ['markdown', 'json'],
           default: 'markdown'
+        },
+        limit: {
+          type: 'number',
+          description: 'Max number of versions to return.',
+          default: 10
         }
       },
       required: ['name']
@@ -96,27 +78,25 @@ export class PackagesService {
       additionalProperties: false
     }
   })
-  static async changelogsSearch({
+  static async changelogsGet({
     name,
-    format
+    format,
+    limit = 10
   }: {
     name: string;
     format?: 'markdown' | 'json';
+    limit?: number;
   }): Promise<{ [key: string]: string } | string> {
     const changelog = searchChangelogs(name, changelogs);
 
     if (!changelog) {
       const availablePackages = packageNames.map(p => `"${p}"`).join(', ');
-      const message = `No changelog found for "${name}".\n\nAvailable packages: ${availablePackages}\n\nTip: Try using the exact package name from the list above, or search for keywords like "elements", "themes", "cli", "monaco".`;
+      const message = `No changelog found for "${name}".\n\nAvailable packages: ${availablePackages}`;
       return format && format !== 'markdown' ? { [name]: message } : message;
     }
 
-    const markdown = changelog.split('\n').slice(0, MAX_LINE_COUNT).join('\n');
-    return format && format !== 'markdown' ? { [name]: changelog } : markdown;
+    const limited = limitChangelogVersions(changelog, limit);
+    const markdown = limited.split('\n').slice(0, MAX_LINE_COUNT).join('\n');
+    return format && format !== 'markdown' ? { [name]: limited } : markdown;
   }
-}
-
-export function searchChangelogs(query: string, changelogs: { [key: string]: string }) {
-  const matches = fuzzyMatch(query, Object.keys(changelogs));
-  return changelogs[matches[0]];
 }
