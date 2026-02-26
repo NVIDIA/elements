@@ -5,8 +5,8 @@ import {
   writeMcpConfig,
   writeClaudeSettings,
   writeElementsSkill,
-  setupMcpConfig
-} from './setup-mcp.js';
+  setupAgent
+} from './setup-agent.js';
 
 vi.mock('node:fs', () => ({
   existsSync: vi.fn(),
@@ -29,7 +29,7 @@ vi.mock('./starters.js', () => ({
   }
 }));
 
-vi.mock('../skills/index.js', () => ({
+vi.mock('../context/index.js', () => ({
   skills: [
     {
       name: 'elements',
@@ -367,7 +367,7 @@ describe('setup-mcp', () => {
       const { getNPMClient } = await import('../internal/node.js');
       vi.mocked(getNPMClient).mockResolvedValue(null);
 
-      const report = await setupMcpConfig('/project', 'cursor');
+      const report = await setupAgent('/project', 'cursor');
       expect(report.setup).toBeDefined();
       expect(report.setup.status).toBe('danger');
       expect(report.setup.message).toContain('No package manager found');
@@ -379,11 +379,11 @@ describe('setup-mcp', () => {
       vi.mocked(getNPMClient).mockResolvedValue('npm');
       vi.mocked(existsSync).mockReturnValue(false);
 
-      const report = await setupMcpConfig('/project', 'cursor');
+      const report = await setupAgent('/project', 'cursor');
       expect(report.cursor).toBeDefined();
       expect(report.cursor.status).toBe('success');
-      expect(report.cursor.message).toContain('Cursor MCP configured');
-      expect(report.cursor.message).toContain('Restart Cursor');
+      expect(report.cursor.message).toContain('Cursor configured');
+      expect(report.cursor.message).toContain('Restart Cursor to activate');
     });
 
     it('should configure claude-code IDE successfully with settings', async () => {
@@ -392,11 +392,11 @@ describe('setup-mcp', () => {
       vi.mocked(getNPMClient).mockResolvedValue('pnpm');
       vi.mocked(existsSync).mockReturnValue(false);
 
-      const report = await setupMcpConfig('/project', 'claude-code');
+      const report = await setupAgent('/project', 'claude-code');
       expect(report['claude-code']).toBeDefined();
       expect(report['claude-code'].status).toBe('success');
-      expect(report['claude-code'].message).toContain('Claude Code MCP configured');
-      expect(report['claude-code'].message).toContain('Restart Claude Code');
+      expect(report['claude-code'].message).toContain('Claude Code configured');
+      expect(report['claude-code'].message).toContain('Restart Claude Code to activate');
       expect(report['claude-settings']).toBeDefined();
       expect(report['claude-settings'].status).toBe('success');
       expect(report['claude-settings'].message).toContain('settings configured');
@@ -408,7 +408,7 @@ describe('setup-mcp', () => {
       vi.mocked(getNPMClient).mockResolvedValue('npm');
       vi.mocked(existsSync).mockReturnValue(false);
 
-      const report = await setupMcpConfig('/project', 'both');
+      const report = await setupAgent('/project', 'both');
       expect(report.cursor).toBeDefined();
       expect(report.cursor.status).toBe('success');
       expect(report['claude-code']).toBeDefined();
@@ -425,7 +425,7 @@ describe('setup-mcp', () => {
         throw new Error('Permission denied');
       });
 
-      const report = await setupMcpConfig('/project', 'cursor');
+      const report = await setupAgent('/project', 'cursor');
       expect(report.cursor).toBeDefined();
       expect(report.cursor.status).toBe('danger');
       expect(report.cursor.message).toContain('Failed to configure Cursor MCP');
@@ -440,7 +440,7 @@ describe('setup-mcp', () => {
         throw new Error('Disk full');
       });
 
-      const report = await setupMcpConfig('/project', 'claude-code');
+      const report = await setupAgent('/project', 'claude-code');
       expect(report['claude-code']).toBeDefined();
       expect(report['claude-code'].status).toBe('danger');
       expect(report['claude-code'].message).toContain('Failed to configure Claude Code MCP');
@@ -462,7 +462,7 @@ describe('setup-mcp', () => {
         throw new Error('Permission denied'); // claude-code fails
       });
 
-      const report = await setupMcpConfig('/project', 'both');
+      const report = await setupAgent('/project', 'both');
       expect(report.cursor.status).toBe('success');
       expect(report['claude-code'].status).toBe('danger');
     });
@@ -478,7 +478,7 @@ describe('setup-mcp', () => {
         vi.mocked(getNPMClient).mockResolvedValue('npm');
         vi.mocked(existsSync).mockReturnValue(false);
 
-        const report = await setupMcpConfig('/project', ide);
+        const report = await setupAgent('/project', ide);
         expect(report['elements-skill']).toBeDefined();
         expect(report['elements-skill'].status).toBe('success');
         expect(report['elements-skill'].message).toContain('Elements skill file configured');
@@ -491,7 +491,7 @@ describe('setup-mcp', () => {
       vi.mocked(getNPMClient).mockResolvedValue('npm');
       vi.mocked(existsSync).mockReturnValue(false);
 
-      const report = await setupMcpConfig('/project', 'cursor');
+      const report = await setupAgent('/project', 'cursor');
       expect(report['claude-settings']).toBeUndefined();
     });
   });

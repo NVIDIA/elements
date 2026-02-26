@@ -63,14 +63,6 @@
     "./packages/index.js": {
       "types": "./dist/packages/index.d.ts",
       "default": "./dist/packages/index.js"
-    },
-    "./tokens": {
-      "types": "./dist/tokens/index.d.ts",
-      "default": "./dist/tokens/index.js"
-    },
-    "./tokens/index.js": {
-      "types": "./dist/tokens/index.d.ts",
-      "default": "./dist/tokens/index.js"
     }
   },
   "wireit": {

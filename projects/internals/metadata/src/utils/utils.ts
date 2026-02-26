@@ -76,15 +76,21 @@ ${attribute.example ? `\`\`\`html\n${attribute.example.trim()}\n\`\`\`` : 'No ex
 | name | type | value  |
 | ---- | ---- | ------ |
 | \`${attribute.name}\` | \`string\` |${attribute.values
-    .filter(
-      v =>
-        !v.name.includes('|') &&
-        !v.name.includes('@') &&
-        !v.name.includes('&') &&
-        !v.name.includes('xx') &&
-        !v.name.includes('-y:') &&
-        !v.name.includes(':none')
-    )
+    .filter(v => !isComplexAttributeValue(v.name))
     .map(value => '`' + value.name + '`')
     .join(', ')} |`.trim();
+}
+
+export function isComplexAttributeValue(value: string) {
+  return (
+    value.includes('|') ||
+    value.includes('@') ||
+    value.includes('&') ||
+    value.includes('xx') ||
+    value.includes('-y:') ||
+    value.includes(':none') ||
+    value.includes('debug') ||
+    value.includes('mkd') ||
+    value.includes('md')
+  );
 }
