@@ -450,10 +450,22 @@ function elementMetadataToMarkdownPlugin() {
   };
 }
 
+/** Deduplicate members by name, preferring entries that have a description (handles TS method overloads). */
+function deduplicateByName(members) {
+  const seen = new Map();
+  for (const member of members) {
+    const existing = seen.get(member.name);
+    if (!existing || (!existing.description && member.description)) {
+      seen.set(member.name, member);
+    }
+  }
+  return [...seen.values()];
+}
+
 function elementMetadataToMarkdown(manifest) {
   if (manifest.tagName) {
     const slots = manifest.slots?.filter(i => !i.description?.includes('deprecated')) ?? [];
-    const members = manifest.members?.filter(i => !i.deprecated) ?? [];
+    const members = deduplicateByName(manifest.members?.filter(i => !i.deprecated) ?? []);
     return `
 ## ${manifest.tagName}
 ${manifest.description ? `\n${manifest.description}\n` : ''}${manifest.metadata.example ? `\n### Example\n\n\`\`\`html\n${manifest.metadata.example}\n\`\`\`\n` : ''}

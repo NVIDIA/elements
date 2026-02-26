@@ -303,3 +303,5 @@ sanitization
 injectable
 VSCode
 pseudorandomized
+esm
+ESM

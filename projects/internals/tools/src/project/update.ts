@@ -6,27 +6,52 @@ import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.j
 import { getNPMClient, getPackageJson } from '../internal/node.js';
 import type { Report, PackageData } from '../internal/types.js';
 
-export function updatePackageJson(packageJson: PackageData, currentVersions: ElementVersions) {
+export interface PackageUpdate {
+  name: string;
+  from: string;
+  to: string;
+}
+
+export function updatePackageJson(
+  packageJson: PackageData,
+  currentVersions: ElementVersions
+): { packageJson: PackageData; updated: PackageUpdate[] } {
   const packageNames = Object.keys(currentVersions);
+  const updated: PackageUpdate[] = [];
 
   packageNames.forEach(packageName => {
     if (
       packageJson.peerDependencies?.[packageName] &&
       !packageJson.peerDependencies[packageName]?.includes('catalog')
     ) {
-      packageJson.peerDependencies[packageName] = `^${currentVersions[packageName]}`;
+      const from = packageJson.peerDependencies[packageName];
+      const to = `^${currentVersions[packageName]}`;
+      if (from !== to) {
+        updated.push({ name: packageName, from, to });
+        packageJson.peerDependencies[packageName] = to;
+      }
     }
 
     if (packageJson.dependencies?.[packageName] && !packageJson.dependencies[packageName]?.includes('catalog')) {
-      packageJson.dependencies[packageName] = currentVersions[packageName];
+      const from = packageJson.dependencies[packageName];
+      const to = currentVersions[packageName];
+      if (from !== to) {
+        updated.push({ name: packageName, from, to });
+        packageJson.dependencies[packageName] = to;
+      }
     }
 
     if (packageJson.devDependencies?.[packageName] && !packageJson.devDependencies[packageName]?.includes('catalog')) {
-      packageJson.devDependencies[packageName] = currentVersions[packageName];
+      const from = packageJson.devDependencies[packageName];
+      const to = currentVersions[packageName];
+      if (from !== to) {
+        updated.push({ name: packageName, from, to });
+        packageJson.devDependencies[packageName] = to;
+      }
     }
   });
 
-  return packageJson;
+  return { packageJson, updated };
 }
 
 /* istanbul ignore next -- @preserve */
@@ -34,7 +59,19 @@ export async function updateProject(cwd: string): Promise<Report> {
   const packageJson = getPackageJson(cwd);
   const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
   const packageManager = await getNPMClient();
-  const updatedPackageJson = updatePackageJson(packageJson, await getLatestPublishedVersions(projects));
+  const { packageJson: updatedPackageJson, updated } = updatePackageJson(
+    packageJson,
+    await getLatestPublishedVersions(projects)
+  );
+
+  if (updated.length === 0) {
+    return {
+      dependencies: {
+        message: `All packages are already up to date.\n\`${resolve(join(cwd, 'package.json'))}\``,
+        status: 'success'
+      }
+    };
+  }
 
   try {
     writeFileSync(resolve(join(cwd, 'package.json')), JSON.stringify(updatedPackageJson, null, 2));
@@ -48,9 +85,10 @@ export async function updateProject(cwd: string): Promise<Report> {
     };
   }
 
+  const changes = updated.map(u => `${u.name}: ${u.from} → ${u.to}`).join('\n');
   return {
     dependencies: {
-      message: 'Successfully updated.',
+      message: `Updated ${updated.length} package(s):\n${changes}`,
       status: 'success'
     }
   };
