@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.60.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.5...@nvidia-elements/core-v1.60.6) (2026-02-26)
+
+
+### Bug Fixes
+
+* **elements:** select input with flat and size options ([62a5ace](https://github.com/NVIDIA/elements/commit/62a5aceb2be73ae6cd927b0458aed244b65dd0d7))
+
 ## [@nvidia-elements/core-v1.60.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.4...@nvidia-elements/core-v1.60.5) (2026-02-25)
 
 
