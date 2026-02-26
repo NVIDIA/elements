@@ -301,5 +301,10 @@
     "prepare": {
       "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs) ; node config/vale/install.mjs"
     }
+  },
+  "pnpm": {
+    "overrides": {
+      "archiver>glob": "catalog:"
+    }
   }
 }
