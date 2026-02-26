@@ -16,7 +16,8 @@ import {
   renderReport,
   isObjectLiteral,
   renderResult,
-  statusIcons
+  statusIcons,
+  wrapUrl
 } from './utils.js';
 
 vi.mock('ora');
@@ -337,6 +338,31 @@ describe('utils', () => {
     });
   });
 
+  describe('wrapUrl', () => {
+    it('should return short URLs unchanged', () => {
+      const url = 'https://example.com/short';
+      expect(wrapUrl(url)).toBe(url);
+    });
+
+    it('should wrap long URLs at path boundaries', () => {
+      const url =
+        'https://example.com/very/long/url/that/should/be/wrapped/at/eighty/characters/for/better/readability';
+      expect(wrapUrl(url)).toBe(
+        'https://example.com/very/long/url/that/should/be/wrapped/at/eighty/characters\n/for/better/readability'
+      );
+    });
+
+    it('should respect custom maxWidth', () => {
+      const url = 'https://example.com/path/to/resource';
+      expect(wrapUrl(url, 30)).toBe('https://example.com/path/to\n/resource');
+    });
+
+    it('should handle URLs at exactly maxWidth', () => {
+      const url = 'https://example.com'; // 19 chars
+      expect(wrapUrl(url, 19)).toBe(url);
+    });
+  });
+
   describe('isReport', () => {
     it('should return true for valid report objects', () => {
       const validReport = {
@@ -402,35 +428,39 @@ describe('utils', () => {
   });
 
   describe('renderReport', () => {
-    it('should log formatted report and not exit on success', () => {
+    beforeEach(() => {
+      vi.mocked(marked.parse).mockImplementation(input => Promise.resolve(String(input)));
+    });
+
+    it('should log formatted report and not exit on success', async () => {
       const report = {
         testCase: { status: 'success' as const, message: 'Test passed' },
         anotherTest: { status: 'info' as const, message: 'Information' }
       };
 
-      renderReport(report);
+      await renderReport(report);
 
-      expect(console.log).toHaveBeenCalledWith('✅ (test case): Test passed\n💡 (another test): Information');
+      expect(console.log).toHaveBeenCalledWith('✅ (**test case**): Test passed\n\n💡 (**another test**): Information');
       expect(process.exit).not.toHaveBeenCalled();
     });
 
-    it('should log formatted report and exit on failure', () => {
+    it('should log formatted report and exit on failure', async () => {
       const report = {
         failedTest: { status: 'danger' as const, message: 'Test failed' }
       };
 
-      expect(() => renderReport(report)).toThrow('process.exit called');
-      expect(console.log).toHaveBeenCalledWith('❌ (failed test): Test failed');
+      await expect(() => renderReport(report)).rejects.toThrow('process.exit called');
+      expect(console.log).toHaveBeenCalledWith('❌ (**failed test**): Test failed');
     });
 
-    it('should format camelCase keys to readable labels', () => {
+    it('should format camelCase keys to readable labels', async () => {
       const report = {
         camelCaseTestName: { status: 'success' as const, message: 'Formatted correctly' }
       };
 
-      renderReport(report);
+      await renderReport(report);
 
-      expect(console.log).toHaveBeenCalledWith('✅ (camel case test name): Formatted correctly');
+      expect(console.log).toHaveBeenCalledWith('✅ (**camel case test name**): Formatted correctly');
     });
   });
 
@@ -445,7 +475,7 @@ describe('utils', () => {
       };
 
       await renderResult(report);
-      expect(console.log).toHaveBeenCalledWith('✅ (test): Test passed');
+      expect(console.log).toHaveBeenCalledWith('parsed markdown');
     });
 
     it('should render arrays as JSON', async () => {
@@ -460,11 +490,15 @@ describe('utils', () => {
       expect(console.log).toHaveBeenCalledWith(JSON.stringify(obj, null, 2));
     });
 
-    it('should render HTTP URLs with line wrapping', async () => {
+    it('should render HTTP URLs with line wrapping at path boundaries', async () => {
       const url =
         'https://example.com/very/long/url/that/should/be/wrapped/at/eighty/characters/for/better/readability';
       await renderResult(url);
-      expect(console.log).toHaveBeenCalledWith(colors.complete(url.match(/.{1,80}/g)!.join('\n')));
+      expect(console.log).toHaveBeenCalledWith(
+        colors.complete(
+          'https://example.com/very/long/url/that/should/be/wrapped/at/eighty/characters\n/for/better/readability'
+        )
+      );
     });
 
     it('should render multiline strings as markdown', async () => {

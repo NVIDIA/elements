@@ -2,17 +2,23 @@ import { cwd } from 'node:process';
 import { resolve } from 'node:path';
 import { tool, service } from '../internal/tools.js';
 import type { Report } from '../internal/types.js';
+import { jsonReportSchema } from '../internal/schema.js';
 import { getHealthReport } from './health.js';
-import { setupMcpConfig, type IDE } from './setup-mcp.js';
+import { setupAgent } from './setup-agent.js';
 import { createStarter, startStarter, startersData, type Starter } from './starters.js';
 import { updateProject } from './update.js';
+import { setupProject } from './setup.js';
 
 const starters = Object.keys(startersData).filter(starter => startersData[starter].cli) as Starter[];
 
 @service()
 export class ProjectService {
   @tool({
-    description: 'Create a new starter project.',
+    summary: 'Create a new starter project.',
+    annotations: {
+      destructiveHint: true,
+      idempotentHint: false
+    },
     inputSchema: {
       type: 'object',
       properties: {
@@ -37,21 +43,33 @@ export class ProjectService {
       },
       required: ['type']
     },
-    outputSchema: {
-      type: 'string',
-      description: 'Starter project path/directory.'
-    }
+    outputSchema: jsonReportSchema
   })
-  static async create({ type, cwd, start }: { type: Starter; cwd: string; start: boolean }): Promise<string> {
-    const result = await createStarter(type, resolve(cwd));
+  static async create({ type, cwd, start }: { type: Starter; cwd: string; start: boolean }): Promise<Report> {
+    const dir = resolve(cwd);
+    const createReport = await createStarter(type, dir);
+    const agentReport = await setupAgent(dir, 'both');
+    const setupProjectReport = await setupProject(dir);
+    const updateReport = await updateProject(dir);
     if (start) {
       await startStarter(type);
     }
-    return result;
+    return {
+      ...createReport,
+      ...agentReport,
+      ...setupProjectReport,
+      ...updateReport
+    };
   }
 
   @tool({
-    description: 'Update a project to the latest versions of Elements packages.',
+    summary: 'Setup or update a project to use Elements.',
+    description:
+      'Setup or update a project to use Elements. Configures MCP, adds core dependencies if missing, and updates packages to the latest versions.',
+    annotations: {
+      destructiveHint: true,
+      idempotentHint: true
+    },
     inputSchema: {
       type: 'object',
       properties: {
@@ -61,13 +79,23 @@ export class ProjectService {
           default: cwd()
         }
       }
-    }
+    },
+    outputSchema: jsonReportSchema
   })
-  static async update({ cwd }: { cwd: string }): Promise<Report> {
-    return await updateProject(cwd);
+  static async setup({ cwd }: { cwd: string }): Promise<Report> {
+    const dir = resolve(cwd);
+    const agentReport = await setupAgent(dir, 'both');
+    const setupProjectReport = await setupProject(dir);
+    const updateReport = await updateProject(dir);
+    return {
+      ...agentReport,
+      ...setupProjectReport,
+      ...updateReport
+    };
   }
 
   @tool({
+    summary: 'Validate project, check for configuration issues and dependencies.',
     description:
       'Validate project setup and check for configuration issues, outdated dependencies, or missing required packages.',
     inputSchema: {
@@ -85,32 +113,10 @@ export class ProjectService {
         }
       },
       required: ['type']
-    }
+    },
+    outputSchema: jsonReportSchema
   })
   static async validate({ cwd, type }: { cwd: string; type: 'application' | 'library' }): Promise<Report> {
-    return await getHealthReport(cwd, type);
-  }
-
-  @tool({
-    description: 'Configure Elements MCP server for Cursor or Claude Code.',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        ide: {
-          type: 'string',
-          description: 'The IDE to configure MCP for.',
-          enum: ['cursor', 'claude-code', 'both'],
-          default: 'both'
-        },
-        cwd: {
-          type: 'string',
-          description: 'Provide the current working directory.',
-          default: cwd()
-        }
-      }
-    }
-  })
-  static async setupMcp({ ide, cwd }: { ide: IDE; cwd: string }): Promise<Report> {
-    return await setupMcpConfig(resolve(cwd), ide);
+    return await getHealthReport(resolve(cwd), type);
   }
 }

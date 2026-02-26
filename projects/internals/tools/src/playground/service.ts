@@ -13,13 +13,14 @@ export interface PlaygroundOptions {
 }
 
 const defaultTemplate =
-  '<nve-page>\n  <nve-page-header slot="header">\n    <nve-logo slot="prefix" size="sm"></nve-logo>\n    <h2 slot="prefix">NVIDIA</h2>\n  </nve-page-header>\n  <main nve-layout="column gap:lg pad:lg">\n    <!-- template content here -->\n  </main>\n</nve-page>';
+  '<nve-page>\n  <nve-page-header slot="header">\n    <nve-logo slot="prefix" size="sm"></nve-logo>\n    <h2 slot="prefix" nve-text="heading">NVIDIA</h2>\n  </nve-page-header>\n  <main nve-layout="column gap:lg pad:lg">\n    <!-- template content here -->\n  </main>\n</nve-page>';
 
 @service()
 export class PlaygroundService {
   @tool({
+    summary: 'Validates HTML templates specifically for playground examples.',
     description:
-      'Validates HTML templates for playground examples. Enforces additional constraints to prevent common mistakes when generating standalone demos. Use this before calling playground_create.',
+      'Validates HTML templates specifically for playground examples. Includes all checks from the "api_template_validate" tool with additional constraints to prevent common mistakes when generating standalone demos and playgrounds. Use this before calling playground_create.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -53,6 +54,7 @@ export class PlaygroundService {
   }
 
   @tool({
+    summary: 'Create a shareable playground URL from an HTML template.',
     description:
       'Create a shareable playground URL from an HTML template. Returns URL if valid, or validation errors if invalid. Tip: Use playground_validate first to check for issues.',
     inputSchema: {
@@ -80,12 +82,6 @@ export class PlaygroundService {
           type: 'string',
           description: 'Name of the author or LLM model that created the playground.',
           default: ''
-        },
-        start: {
-          type: 'boolean',
-          description:
-            'Open the playground url in browser after creation. Note: URL is returned regardless of this setting when template is valid.',
-          default: false
         }
       },
       required: ['template']
@@ -106,7 +102,6 @@ export class PlaygroundService {
     template,
     name,
     type,
-    start,
     author
   }: PlaygroundOptions & { author?: string }): Promise<string | TemplateLintMessage[]> {
     if (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli') {
@@ -123,7 +118,7 @@ export class PlaygroundService {
     const formattedName = `${name}${author ? ` - (${author})` : ''}${environment ? ` ${environment}` : ''}`;
     const result = createPlaygroundURL(template, apis.data.elements, { name: formattedName, type });
 
-    if (!process.env.CI && (process.env.ELEMENTS_ENV === 'mcp' || (process.env.ELEMENTS_ENV === 'cli' && start))) {
+    if (!process.env.CI && (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli')) {
       const openBrowser = await import('open');
       void openBrowser.default(result);
     }

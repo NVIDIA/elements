@@ -1,13 +1,31 @@
 import { z } from 'zod';
+export interface ToolAnnotations {
+  readOnlyHint?: boolean; //  If true, the tool does not change its environment
+  destructiveHint?: boolean; // If true, the tool may perform destructive/irreversible updates
+  idempotentHint?: boolean; // If true, repeated calls with same args have no extra effect
+  openWorldHint?: boolean; // If true, tool interacts with external entities
+}
+
+export const ToolSupport = {
+  None: 0,
+  MCP: 1 << 0,
+  CLI: 1 << 1,
+  All: (1 << 0) | (1 << 1)
+} as const;
+
+export type ToolSupportFlags = number;
 
 export interface ToolMetadata {
   inputSchema?: Schema;
   outputSchema?: Schema;
-  description: string;
+  summary: string;
+  description?: string;
+  annotations?: ToolAnnotations;
   name: string;
   title: string;
   command: string;
   toolName: string;
+  support: ToolSupportFlags;
 }
 
 export interface Schema {
@@ -67,13 +85,19 @@ export function service() {
  * APIs dynamically for invoking available services and tools.
  */
 export function tool({
+  summary,
   description,
+  annotations,
   inputSchema,
-  outputSchema
+  outputSchema,
+  support
 }: {
-  description: string;
+  summary: string;
+  description?: string;
+  annotations?: ToolAnnotations;
   inputSchema?: Schema;
   outputSchema?: Schema;
+  support?: ToolSupportFlags;
 }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function (originalMethod: ToolMethod<any>, _context: ClassMethodDecoratorContext) {
@@ -83,7 +107,10 @@ export function tool({
       .replace('get.', '');
 
     const metadata = {
+      support: support ?? ToolSupport.All,
+      summary,
       description,
+      annotations,
       inputSchema,
       outputSchema,
       name: originalMethod.name,

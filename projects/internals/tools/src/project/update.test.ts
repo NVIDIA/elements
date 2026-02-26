@@ -33,13 +33,14 @@ describe('updatePackageJson', () => {
     });
 
     const result = updatePackageJson(packageJson, latestVersions);
-    expect(result).toEqual({
+    expect(result.packageJson).toEqual({
       dependencies: {},
       devDependencies: {},
       peerDependencies: {
         '@nvidia-elements/core': '^2.0.0'
       }
     });
+    expect(result.updated).toContainEqual({ name: '@nvidia-elements/core', from: '1.0.0', to: '^2.0.0' });
   });
 
   it('should update dependencies when package exists', () => {
@@ -58,7 +59,7 @@ describe('updatePackageJson', () => {
     });
 
     const result = updatePackageJson(packageJson, latestVersions);
-    expect(result).toEqual({
+    expect(result.packageJson).toEqual({
       dependencies: {
         '@nvidia-elements/core': '2.0.0',
         '@nvidia-elements/styles': '1.0.0'
@@ -66,6 +67,8 @@ describe('updatePackageJson', () => {
       devDependencies: {},
       peerDependencies: {}
     });
+    expect(result.updated).toContainEqual({ name: '@nvidia-elements/core', from: '1.0.0', to: '2.0.0' });
+    expect(result.updated).toContainEqual({ name: '@nvidia-elements/styles', from: '0.5.0', to: '1.0.0' });
   });
 
   it('should update devDependencies when package exists', () => {
@@ -84,7 +87,7 @@ describe('updatePackageJson', () => {
     });
 
     const result = updatePackageJson(packageJson, latestVersions);
-    expect(result).toEqual({
+    expect(result.packageJson).toEqual({
       dependencies: {},
       devDependencies: {
         '@nvidia-elements/core': '2.0.0',
@@ -92,6 +95,8 @@ describe('updatePackageJson', () => {
       },
       peerDependencies: {}
     });
+    expect(result.updated).toContainEqual({ name: '@nvidia-elements/core', from: '1.0.0', to: '2.0.0' });
+    expect(result.updated).toContainEqual({ name: '@nvidia-elements/themes', from: '0.3.0', to: '0.4.0' });
   });
 
   it('should not update packages with catalog versions', () => {
@@ -114,7 +119,7 @@ describe('updatePackageJson', () => {
     });
 
     const result = updatePackageJson(packageJson, latestVersions);
-    expect(result).toEqual({
+    expect(result.packageJson).toEqual({
       dependencies: {
         '@nvidia-elements/core': 'catalog:latest'
       },
@@ -125,6 +130,7 @@ describe('updatePackageJson', () => {
         '@nvidia-elements/themes': 'catalog:peer'
       }
     });
+    expect(result.updated).toEqual([]);
   });
 
   it('should update multiple packages across different dependency types', () => {
@@ -148,7 +154,7 @@ describe('updatePackageJson', () => {
     });
 
     const result = updatePackageJson(packageJson, latestVersions);
-    expect(result).toEqual({
+    expect(result.packageJson).toEqual({
       dependencies: {
         '@nvidia-elements/core': '2.0.0',
         'other-package': '1.0.0'
@@ -160,6 +166,7 @@ describe('updatePackageJson', () => {
         '@nvidia-elements/themes': '^0.4.0'
       }
     });
+    expect(result.updated).toHaveLength(3);
   });
 
   it('should handle packages that do not exist in any dependency type', () => {
@@ -177,13 +184,14 @@ describe('updatePackageJson', () => {
     });
 
     const result = updatePackageJson(packageJson, latestVersions);
-    expect(result).toEqual({
+    expect(result.packageJson).toEqual({
       dependencies: {
         'other-package': '1.0.0'
       },
       devDependencies: {},
       peerDependencies: {}
     });
+    expect(result.updated).toEqual([]);
   });
 
   it('should handle empty dependency objects', () => {
@@ -198,11 +206,12 @@ describe('updatePackageJson', () => {
     });
 
     const result = updatePackageJson(packageJson, latestVersions);
-    expect(result).toEqual({
+    expect(result.packageJson).toEqual({
       dependencies: {},
       devDependencies: {},
       peerDependencies: {}
     });
+    expect(result.updated).toEqual([]);
   });
 
   it('should handle missing dependency properties', () => {
@@ -219,13 +228,14 @@ describe('updatePackageJson', () => {
     });
 
     const result = updatePackageJson(packageJson, latestVersions);
-    expect(result).toEqual({
+    expect(result.packageJson).toEqual({
       dependencies: {
         '@nvidia-elements/core': '2.0.0'
       },
       devDependencies: {},
       peerDependencies: {}
     });
+    expect(result.updated).toContainEqual({ name: '@nvidia-elements/core', from: '1.0.0', to: '2.0.0' });
   });
 
   it('should preserve non-NVE packages', () => {
@@ -252,7 +262,7 @@ describe('updatePackageJson', () => {
     });
 
     const result = updatePackageJson(packageJson, latestVersions);
-    expect(result).toEqual({
+    expect(result.packageJson).toEqual({
       dependencies: {
         '@nvidia-elements/core': '2.0.0',
         react: '18.0.0',
@@ -267,5 +277,24 @@ describe('updatePackageJson', () => {
         vue: '3.0.0'
       }
     });
+    expect(result.updated).toHaveLength(3);
+  });
+
+  it('should not report updates when versions already match', () => {
+    const packageJson = {
+      dependencies: {
+        '@nvidia-elements/core': '2.0.0'
+      },
+      devDependencies: {},
+      peerDependencies: {}
+    };
+
+    const latestVersions = createMockElementVersions({
+      '@nvidia-elements/core': '2.0.0'
+    });
+
+    const result = updatePackageJson(packageJson, latestVersions);
+    expect(result.packageJson.dependencies['@nvidia-elements/core']).toBe('2.0.0');
+    expect(result.updated).toEqual([]);
   });
 });

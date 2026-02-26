@@ -74,7 +74,7 @@ catalog:
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
   axe-core: 4.11.0
   eslint: 9.39.2
-  glob: 11.0.3
+  glob: 13.0.6
   lighthouse: 13.0.1
   lit: ^3.3.2
   lit-element: ^4.2.2
@@ -98,6 +98,7 @@ catalog:
 ignorePatchFailures: false
 
 minimumReleaseAge: 1140
+
 minimumReleaseAgeExclude:
   - playwright
   - playwright-core

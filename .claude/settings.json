@@ -4,23 +4,20 @@
     "allow": [
       "mcp__elements__api_list",
       "mcp__elements__api_get",
-      "mcp__elements__api_search",
       "mcp__elements__api_template_validate",
       "mcp__elements__api_imports_get",
-      "mcp__elements__api_changelogs",
-      "mcp__elements__api_changelogs_get",
+      "mcp__elements__api_tokens_list",
       "mcp__elements__examples_list",
-      "mcp__elements__examples_search",
+      "mcp__elements__examples_get",
       "mcp__elements__playground_validate",
       "mcp__elements__playground_create",
       "mcp__elements__project_create",
+      "mcp__elements__project_setup",
       "mcp__elements__project_update",
       "mcp__elements__project_validate",
-      "mcp__elements__project_setup_mcp",
-      "mcp__elements__packages_versions_list",
-      "mcp__elements__packages_changelogs_list",
-      "mcp__elements__packages_changelogs_search",
-      "mcp__elements__tokens_list"
+      "mcp__elements__packages_list",
+      "mcp__elements__packages_get",
+      "mcp__elements__packages_changelogs_get"
     ]
   },
   "enabledMcpjsonServers": ["elements"]

@@ -7,6 +7,16 @@ export default mergeConfig(libraryNodeTestConfig, {
   resolve: {
     alias: { '@internals/tools': resolve(import.meta.dirname, './src') }
   },
+  plugins: [
+    {
+      name: 'markdown-loader',
+      transform(code, id) {
+        if (id.split('?')[0].endsWith('.md')) {
+          return `export default ${JSON.stringify(code)};`;
+        }
+      }
+    }
+  ],
   test: {
     include: ['./src/**/*.test.ts'],
     coverage: {

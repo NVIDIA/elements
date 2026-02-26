@@ -26,28 +26,12 @@ describe('index', () => {
     expect(output).toContain('nve api.list [format]');
   });
 
-  it('should provide packages.changelogs.list', () => {
-    expect(output).toContain('nve packages.changelogs.list [format]');
-  });
-
-  it('should provide packages.changelogs.search', () => {
-    expect(output).toContain('nve packages.changelogs.search <name> [format]');
-  });
-
-  it('should provide packages.versions.list', () => {
-    expect(output).toContain('nve packages.versions.list');
-  });
-
   it('should provide examples.list', () => {
-    expect(output).toContain('nve examples.list [format]');
+    expect(output).toContain('nve examples.list');
   });
 
   it('should provide examples.get', () => {
     expect(output).toContain('nve examples.get <id> [format]');
-  });
-
-  it('should provide examples.search', () => {
-    expect(output).toContain('nve examples.search <query> [format]');
   });
 
   it('should provide playground.validate', () => {
@@ -55,15 +39,15 @@ describe('index', () => {
   });
 
   it('should provide playground.create', () => {
-    expect(output).toContain('nve playground.create <template> [type] [name] [author] [start]');
+    expect(output).toContain('nve playground.create <template> [type] [name] [author]');
   });
 
   it('should provide project.create', () => {
     expect(output).toContain('nve project.create <type> [cwd] [start]');
   });
 
-  it('should provide project.update', () => {
-    expect(output).toContain('nve project.update [cwd]');
+  it('should provide project.setup', () => {
+    expect(output).toContain('nve project.setup [cwd]');
   });
 
   it('should provide project.validate', () => {
@@ -71,7 +55,7 @@ describe('index', () => {
   });
 
   it('should provide tokens.list', () => {
-    expect(output).toContain('nve tokens.list [format]');
+    expect(output).toContain('nve api.tokens.list [format]');
   });
 
   describe('interactive fallback for missing required args', () => {
@@ -81,8 +65,8 @@ describe('index', () => {
       expect(output).not.toContain('Missing required argument');
     });
 
-    it('should not exit with validation error for api.search without <query>', () => {
-      const output = runWithoutRequiredArgs('api.search');
+    it('should not exit with validation error for api.get without <names>', () => {
+      const output = runWithoutRequiredArgs('api.get');
       expect(output).not.toContain('Not enough non-option arguments');
       expect(output).not.toContain('Missing required argument');
     });
@@ -91,6 +75,18 @@ describe('index', () => {
       const output = runWithoutRequiredArgs('project.validate');
       expect(output).not.toContain('Not enough non-option arguments');
       expect(output).not.toContain('Missing required argument');
+    });
+  });
+
+  describe('fail handler', () => {
+    it('should exit with code 1 for invalid positional choice values', () => {
+      const result = spawnSync('node', ['dist/index.js', 'project.create', 'not-a-valid-type'], {
+        timeout: 5000,
+        encoding: 'utf-8',
+        input: ''
+      });
+      expect(result.status).toBe(1);
+      expect(result.stderr + result.stdout).toContain('Invalid values');
     });
   });
 

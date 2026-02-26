@@ -10,7 +10,7 @@ describe('ApiService', () => {
     expect(result).toContain('- **nve-button');
     expect((ApiService.list as ToolMethod<unknown>).metadata.name).toBe('list');
     expect((ApiService.list as ToolMethod<unknown>).metadata.command).toBe('list');
-    expect((ApiService.list as ToolMethod<unknown>).metadata.description).toBe(
+    expect((ApiService.list as ToolMethod<unknown>).metadata.summary).toBe(
       'Get list of all available Elements (nve-*) APIs and components.'
     );
   });
@@ -20,7 +20,7 @@ describe('ApiService', () => {
     expect(result).toBeDefined();
     expect((ApiService.list as ToolMethod<unknown>).metadata.name).toBe('list');
     expect((ApiService.list as ToolMethod<unknown>).metadata.command).toBe('list');
-    expect((ApiService.list as ToolMethod<unknown>).metadata.description).toBe(
+    expect((ApiService.list as ToolMethod<unknown>).metadata.summary).toBe(
       'Get list of all available Elements (nve-*) APIs and components.'
     );
   });
@@ -54,7 +54,7 @@ describe('ApiService', () => {
       expect((ApiService.get as ToolMethod<unknown>).metadata.name).toBe('get');
       expect((ApiService.get as ToolMethod<unknown>).metadata.command).toBe('get');
       expect((ApiService.get as ToolMethod<unknown>).metadata.description).toContain(
-        'Get the documentation for up to 5 known Elements components or attribute APIs by name (nve-*).'
+        'Get documentation known components or attributes by name (nve-*). Limit: 5'
       );
       expect((ApiService.get as ToolMethod<unknown>).metadata.inputSchema?.properties?.names).toBeDefined();
       expect((ApiService.get as ToolMethod<unknown>).metadata.inputSchema?.required).toContain('names');
@@ -167,6 +167,22 @@ describe('ApiService', () => {
       expect((ApiService.templateValidate as ToolMethod<unknown>).metadata.inputSchema?.required).toContain('template');
     });
 
+    it('should return warning for empty template', async () => {
+      process.env.ELEMENTS_ENV = 'mcp';
+      const result = await ApiService.templateValidate({ template: '' });
+      expect(result).toHaveLength(1);
+      expect(result[0].id).toBe('empty-template');
+      expect(result[0].severity).toBe('warn');
+      expect(result[0].message).toContain('Template is empty');
+    });
+
+    it('should return warning for whitespace-only template', async () => {
+      process.env.ELEMENTS_ENV = 'mcp';
+      const result = await ApiService.templateValidate({ template: '   \n  ' });
+      expect(result).toHaveLength(1);
+      expect(result[0].id).toBe('empty-template');
+    });
+
     it('should return empty array when ELEMENTS_ENV is not set', async () => {
       const result = await ApiService.templateValidate({ template: '<nve-button>Test</nve-button>' });
       expect(Array.isArray(result)).toBe(true);
@@ -216,8 +232,8 @@ describe('ApiService', () => {
     it('should have correct metadata', () => {
       expect((ApiService.importsGet as ToolMethod<unknown>).metadata.name).toBe('importsGet');
       expect((ApiService.importsGet as ToolMethod<unknown>).metadata.command).toBe('imports.get');
-      expect((ApiService.importsGet as ToolMethod<unknown>).metadata.description).toContain(
-        'Get the esm imports for a given HTML template'
+      expect((ApiService.importsGet as ToolMethod<unknown>).metadata.summary).toContain(
+        'Get esm imports for a given HTML template using Elements APIs (nve-*)'
       );
       expect((ApiService.importsGet as ToolMethod<unknown>).metadata.inputSchema?.properties?.template).toBeDefined();
       expect((ApiService.importsGet as ToolMethod<unknown>).metadata.inputSchema?.required).toContain('template');
@@ -234,6 +250,22 @@ describe('ApiService', () => {
       const result = await ApiService.importsGet({ template: '<div>plain html</div>' });
       expect(Array.isArray(result)).toBe(true);
       expect(result).toHaveLength(0);
+    });
+  });
+
+  describe('tokensList', () => {
+    it('should have correct metadata', () => {
+      expect((ApiService.tokensList as ToolMethod<unknown>).metadata.name).toBe('tokensList');
+      expect((ApiService.tokensList as ToolMethod<unknown>).metadata.command).toBe('tokens.list');
+      expect((ApiService.tokensList as ToolMethod<unknown>).metadata.summary).toBe(
+        'Get available semantic CSS variables / design tokens for theming.'
+      );
+    });
+
+    it('should provide list tool', async () => {
+      const result = await ApiService.tokensList();
+      expect(result).toBeDefined();
+      expect(result).toContain('## CSS Variables');
     });
   });
 });
