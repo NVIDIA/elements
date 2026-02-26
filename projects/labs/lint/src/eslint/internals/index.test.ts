@@ -74,14 +74,18 @@ describe('lintPlaygroundTemplate', () => {
     expect(typeof message.endColumn).toBe('number');
   });
 
-  it('should handle empty string input', async () => {
+  it('should return warning for empty string input', async () => {
     const result = await lintPlaygroundTemplate('');
-    expect(result).toEqual([]);
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe('empty-template');
+    expect(result[0].severity).toBe('warn');
+    expect(result[0].message).toContain('Template is empty');
   });
 
-  it('should handle whitespace-only input', async () => {
+  it('should return warning for whitespace-only input', async () => {
     const result = await lintPlaygroundTemplate('   \n\t  ');
-    expect(result).toEqual([]);
+    expect(result).toHaveLength(1);
+    expect(result[0].id).toBe('empty-template');
   });
 
   it('should handle malformed HTML gracefully', async () => {

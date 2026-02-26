@@ -88,12 +88,12 @@ describe('prompts', () => {
       expect(result?.messages[0].content.text).toContain('playground');
     });
 
-    it('should have "new-project" prompt for starter projects', () => {
-      const newProjectPrompt = prompts.find(p => p.name === 'new-project');
-      expect(newProjectPrompt).toBeDefined();
-      expect(newProjectPrompt?.description).toContain('Starter');
+    it('should have "create-project" prompt for starter projects', () => {
+      const createProjectPrompt = prompts.find(p => p.name === 'create-project');
+      expect(createProjectPrompt).toBeDefined();
+      expect(createProjectPrompt?.description).toContain('Starter');
 
-      const result = newProjectPrompt?.handler({});
+      const result = createProjectPrompt?.handler({});
       expect(result?.messages[0].content.text).toContain('project_create');
     });
   });

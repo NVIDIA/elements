@@ -1,6 +1,6 @@
 import { ApiService as MetadataApiService, type Attribute, type Element } from '@internals/metadata';
 import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
-import { type PartialAPIResult, findPublicAPIChangelog, getPublicAPIs, searchPublicAPIs } from './utils.js';
+import { type PartialAPIResult, getPublicAPIs, getSemanticTokens, searchPublicAPIs } from './utils.js';
 import { service, tool } from '../internal/tools.js';
 import { getElementImports, markdownDescription } from '../internal/utils.js';
 import { eslintSchema } from '../internal/schema.js';
@@ -13,7 +13,7 @@ const listToolHelpfulTip =
 @service()
 export class ApiService {
   @tool({
-    description: 'Get list of all available Elements (nve-*) APIs and components.',
+    summary: 'Get list of all available Elements (nve-*) APIs and components.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -72,7 +72,8 @@ export class ApiService {
   }
 
   @tool({
-    description: `Get the documentation for up to ${MAX_RESULT_LIMIT} known Elements components or attribute APIs by name (nve-*).`,
+    summary: `Get documentation known components or attributes by name (nve-*).`,
+    description: `Get documentation known components or attributes by name (nve-*). Limit: ${MAX_RESULT_LIMIT}`,
     inputSchema: {
       type: 'object',
       properties: {
@@ -129,6 +130,7 @@ export class ApiService {
   }
 
   @tool({
+    summary: 'Validates HTML templates using Elements APIs and components (nve-*).',
     description:
       'Validates HTML templates using Elements APIs and components (nve-*). Checks for invalid API usage and UX patterns. Use this to catch errors before rendering.',
     inputSchema: {
@@ -164,31 +166,7 @@ export class ApiService {
   }
 
   @tool({
-    description: 'Get the changelog details for a specific component or API.',
-    inputSchema: {
-      type: 'object',
-      properties: {
-        name: {
-          type: 'string',
-          description: `A single component or attribute name (e.g., "nve-button", "nve-grid", "nve-layout"). Use the list tool to get a list of all available components and attributes or search tool for semantic searching.`
-        }
-      },
-      required: ['name']
-    },
-    outputSchema: { type: 'string' }
-  })
-  static async changelogsGet({ name }: { name: string }): Promise<string> {
-    const result = await findPublicAPIChangelog(name);
-
-    if (!result) {
-      return `No components or API changelogs found matching "${name}".\n\nTip: Use the list tool to get a list of all available components and attributes.`;
-    }
-
-    return result;
-  }
-
-  @tool({
-    description: 'Get the esm imports for a given HTML template using Elements APIs and components (nve-*).',
+    summary: 'Get esm imports for a given HTML template using Elements APIs (nve-*).',
     inputSchema: {
       type: 'object',
       properties: {
@@ -206,6 +184,46 @@ export class ApiService {
   static async importsGet({ template }: { template: string }): Promise<string[]> {
     const elements = await MetadataApiService.getData();
     return getElementImports(template, elements.data.elements);
+  }
+
+  @tool({
+    summary: 'Get available semantic CSS variables / design tokens for theming.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        format: {
+          type: 'string',
+          description: markdownDescription,
+          enum: ['markdown', 'json'],
+          default: 'markdown'
+        }
+      },
+      additionalProperties: false
+    },
+    outputSchema: {
+      oneOf: [
+        { type: 'string' },
+        {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              name: { type: 'string' },
+              value: { type: 'string' },
+              description: { type: 'string' }
+            },
+            additionalProperties: false
+          }
+        }
+      ],
+      additionalProperties: false
+    }
+  })
+  static async tokensList(
+    { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
+  ): Promise<{ name: string; description: string }[] | string> {
+    const apis = await MetadataApiService.getData();
+    return getSemanticTokens(format, apis.data.tokens);
   }
 
   static async search({

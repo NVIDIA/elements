@@ -35,7 +35,7 @@ export function getPublicAPIs(
   });
 
   const attributesResult = metadata.data.attributes
-    .filter(a => a.description)
+    .filter(a => a.description && a.example)
     .map(a => ({ name: a.name, description: a.description, behavior: 'attribute' }));
   const attributesMarkdown = attributesResult.map(a => `- **${a.name} (${a.behavior})**: ${wrapText(a.description)}`);
 
@@ -55,12 +55,6 @@ export async function searchPublicAPIs(query: string, config: { limit?: number }
     return r;
   });
   return config.limit !== undefined ? data.slice(0, config.limit) : data;
-}
-
-export async function findPublicAPIChangelog(name: string): Promise<string | undefined> {
-  const data = await ApiService.search(name);
-  const result = data.find(r => r.name === name) as Element | (Attribute & { changelog: string }) | undefined;
-  return result?.changelog ?? JSON.stringify(result, null, 2);
 }
 
 export interface ElementVersions {
@@ -114,4 +108,33 @@ export function getPublishedPackageNames(projects: Project[]) {
   return projects
     .filter(p => p.name.startsWith('@nve') && !p.name.startsWith('@internals') && p.version !== '0.0.0')
     .map(p => p.name);
+}
+
+export function getSemanticTokens(format: 'markdown' | 'json', tokens: Token[]) {
+  const filteredTokens: Token[] = tokens
+    .filter(
+      token =>
+        !token.name.includes('nve-config-') &&
+        !token.name.includes('ref-color') &&
+        !token.name.includes('ref-scale') &&
+        !token.name.includes('ref-opacity') &&
+        !token.name.includes('ref-outline') &&
+        !token.name.includes('ref-font-family-') &&
+        !token.name.includes('sys-color-scheme') &&
+        !token.name.includes('sys-contrast') &&
+        !token.name.includes('line-height') &&
+        !token.name.includes('ratio') &&
+        !token.name.includes('-xxx') &&
+        !token.name.includes('-xx')
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  if (format === 'markdown') {
+    return `## CSS Variables\n\nAvailable semantic design tokens for theming.
+| name     | value | Description |
+| -------- | ----- | ----------- |
+${filteredTokens.map(token => `| ${token.name} | ${token.value} | ${token.description} |`).join('\n')}`;
+  } else if (format === 'json') {
+    return filteredTokens;
+  }
 }

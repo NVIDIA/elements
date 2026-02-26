@@ -1,6 +1,6 @@
 export interface ReportCheck {
   message: string;
-  status: 'success' | 'danger' | 'info' | 'warning';
+  status: 'success' | 'danger' | 'info' | 'warning' | 'log';
 }
 
 export interface Report {
