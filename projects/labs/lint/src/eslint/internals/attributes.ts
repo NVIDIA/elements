@@ -1,22 +1,22 @@
 import { globalAttributes } from './metadata.js';
 
-const EXCEPTIONS = ['debug', 'mkd', 'md']; // internal scopes
+export const ATTRIBUTE_EXCEPTIONS = ['debug', 'mkd', 'md']; // internal scopes
 
 export const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
 
 export const VALID_NVE_TEXT_VALUES = new Set([
   ...(globalAttributes.find(attribute => attribute.name === 'nve-text')?.values?.map(value => value.name) ?? []),
-  ...EXCEPTIONS
+  ...ATTRIBUTE_EXCEPTIONS
 ]);
 
 export const VALID_NVE_LAYOUT_VALUES = [
   ...globalAttributes.find(attribute => attribute.name === 'nve-layout')?.values?.map(value => value.name),
-  ...EXCEPTIONS
+  ...ATTRIBUTE_EXCEPTIONS
 ];
 
 export const VALID_NVE_DISPLAY_VALUES = new Set([
   ...(globalAttributes.find(attribute => attribute.name === 'nve-display')?.values?.map(value => value.name) ?? []),
-  ...EXCEPTIONS
+  ...ATTRIBUTE_EXCEPTIONS
 ]);
 
 export function recommendedNveTextValue(attributeValue: string): string {
