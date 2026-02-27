@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.12.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.12.1...@nvidia-elements/lint-v0.12.2) (2026-02-27)
+
+
+### Bug Fixes
+
+* **labs-lint:** remove unnecessary peer dep ([3937c60](https://github.com/NVIDIA/elements/commit/3937c60a998b66c7d0776dbf408f5f99bb4777ca))
+
 ## [@nvidia-elements/lint-v0.12.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.12.0...@nvidia-elements/lint-v0.12.1) (2026-02-27)
 
 
