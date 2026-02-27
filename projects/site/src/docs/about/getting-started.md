@@ -66,7 +66,7 @@ import '@nvidia-elements/core/button/define.js';
     <a href="http://nv/elements-figma" target="_blank"><svg width="18" height="18"><use href="#figma-svg"></use></svg> Figma Library</a>
   </nve-button>
   <nve-button>
-    <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style="--color: var(--nve-sys-accent-primary-background)"></nve-icon> NPM Package</a>
+    <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style="--color: var(--nve-sys-accent-primary-background)"></nve-icon> npm Package</a>
   </nve-button>
   <nve-button>
     <a href="./docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>

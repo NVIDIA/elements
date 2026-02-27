@@ -46,8 +46,8 @@ export interface PreferencesInputValue {
  * @description A preferences input is a widget for controlling apperance. Stylesheets register to the preferences input by including a css-property, see Standard for an example.
  * @since 1.23.7
  * @entrypoint \@nvidia-elements/core/preferences-input
- * @event input emits when the value has changed
- * @event change emits when the value has changed
+ * @event input - Dispatched when the value has changed
+ * @event change - Dispatched when the value has changed
  * @cssprop --color
  * @cssprop --width
  * @csspart control - The control wrapper elements that contain the labels and menus

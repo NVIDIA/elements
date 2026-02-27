@@ -15,10 +15,10 @@ type Constructor = (new (...args: any[]) => HTMLElement & {
 
 /**
  * @description A mixin that adds form control functionality to a component.
- * @event input - Emitted when the value of the component changes as a result of a user action.
- * @event change - Emitted when the user modifies and commits the element's value.
- * @event reset - Emitted when the control state was reset to its initial value.
- * @event invalid - Emitted when the control is invalid.
+ * @event input - Dispatched when the value of the component changes as a result of a user action.
+ * @event change - Dispatched when the user modifies and commits the element's value.
+ * @event reset - Dispatched when the control state was reset to its initial value.
+ * @event invalid - Dispatched when the control is invalid.
  */
 export function FormControlMixin<TBase extends Constructor, T extends FormControlValue>(SuperClass: TBase) {
   return class FormControlBase extends SuperClass {
