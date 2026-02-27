@@ -1,5 +1,13 @@
 # @nvidia-elements/monaco
 
+Integration with VS Code's Monaco editor for code editing, syntax highlighting, and diff visualization.
+
+- [Documentation](https://NVIDIA.github.io/elements/docs/monaco/)
+- [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
+- [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
+- [GitLab Repo](https://github.com/NVIDIA/elements)
+- [Artifactory](https://registry.npmjs.org
+
 ## Getting Started
 
 ```bash
@@ -9,9 +17,10 @@ registry=https://registry.npmjs.org
 # https://registry.npmjs.org
 npm login
 
-# install core dependencies
 npm install @nvidia-elements/monaco
 ```
+
+## Usage
 
 ```javascript
 import '@nvidia-elements/monaco/editor/define.js';
@@ -20,11 +29,3 @@ import '@nvidia-elements/monaco/editor/define.js';
 ```html
 <nve-monaco-editor></nve-monaco-editor>
 ```
-
-## Development
-
-| Command          | Description                                            |
-| ---------------- | ------------------------------------------------------ |
-| `pnpm run build` | Build library source                                   |
-| `pnpm run test`  | Run library tests                                      |
-| `pnpm run ci`    | Build and run all library CI requirements (build/test) |
