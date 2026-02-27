@@ -47,7 +47,7 @@ export const ResponsiveTabs = {
       </nve-dropdown>
     </div>
 
-    <p>Resize the container to see tabs hide and the "more" menu appear on smaller container sizes.</p>
+    <p nve-text="body">Resize the container to see tabs hide and the "more" menu appear on smaller container sizes.</p>
   `
 };
 
@@ -66,7 +66,7 @@ export const ResponsiveToolbar = {
     <div class="responsive-toolbar" nve-layout="pad:md">
       <nve-toolbar>
         <nve-search>
-          <input type="search" placeholder="Search..." />
+          <input type="search" placeholder="Search..." aria-label="Search" />
         </nve-search>
         
         <nve-button container="flat" slot="suffix">
@@ -101,7 +101,7 @@ export const ResponsiveToolbar = {
       </nve-dropdown>
     </div>
 
-    <p>Resize the container to see toolbar actions collapse into the "more actions" menu on smaller container sizes.</p>
+    <p nve-text="body">Resize the container to see toolbar actions collapse into the "more actions" menu on smaller container sizes.</p>
   `
 };
 
@@ -128,7 +128,7 @@ export const ResponsiveNavigation = {
 
     <div class="demo-section">
       <div class="nav-header">
-        <h3>My Application</h3>
+        <h3 nve-text="heading">My Application</h3>
         <nve-icon-button 
           icon-name="bars-3" 
           aria-label="Menu" 
@@ -158,6 +158,6 @@ export const ResponsiveNavigation = {
       </nve-dropdown>
     </div>
 
-    <p>Resize the container to see navigation switch between tabs (desktop) and hamburger menu (mobile).</p>
+    <p nve-text="body">Resize the container to see navigation switch between tabs (desktop) and hamburger menu (mobile).</p>
   `
 };

@@ -680,11 +680,11 @@ export const Spacing = {
   }
 </style>
 <div nve-layout="column gap:lg align:stretch">
-  <h2>Space Around</h2>
+  <h2 nve-text="heading">Space Around</h2>
   <section nve-layout="row gap:md align:space-around">
     <div nve-layout="row gap:sm">
       <nve-search>
-        <input placeholder="Search" type="search" />
+        <input placeholder="Search" type="search" aria-label="Search" />
       </nve-search>
     </div>
     <div nve-layout="row gap:sm">
@@ -693,7 +693,7 @@ export const Spacing = {
     </div>
   </section>
 
-  <h2>Space Between</h2>
+  <h2 nve-text="heading">Space Between</h2>
   <section nve-layout="row gap:md align:space-between">
     <div nve-layout="row gap:sm">
       <nve-card></nve-card>
@@ -705,11 +705,11 @@ export const Spacing = {
     </div>
   </section>
 
-  <h2>Space Between + Full</h2>
+  <h2 nve-text="heading">Space Between + Full</h2>
   <section nve-layout="row gap:md align:space-between">
     <div nve-layout="row full gap:sm">
       <nve-search>
-        <input placeholder="Search" type="search" />
+        <input placeholder="Search" type="search" aria-label="Search" />
       </nve-search>
     </div>
     <div nve-layout="row gap:sm">
@@ -718,7 +718,7 @@ export const Spacing = {
     </div>
   </section>
 
-  <h2>Space Evenly</h2>
+  <h2 nve-text="heading">Space Evenly</h2>
   <section nve-layout="row gap:md align:space-evenly">
     <div nve-layout="row gap:sm">
       <nve-card></nve-card>
@@ -730,7 +730,7 @@ export const Spacing = {
     </div>
   </section>
 
-  <h2>Nested Rows</h2>
+  <h2 nve-text="heading">Nested Rows</h2>
   <section nve-layout="row gap:md">
     <div nve-layout="row gap:sm">
       <nve-card></nve-card>
@@ -742,7 +742,7 @@ export const Spacing = {
     </div>
   </section>
 
-  <h2>Rows</h2>
+  <h2 nve-text="heading">Rows</h2>
   <section nve-layout="row gap:sm">
     <nve-card></nve-card>
     <nve-card></nve-card>

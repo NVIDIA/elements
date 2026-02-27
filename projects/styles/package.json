@@ -46,6 +46,7 @@
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
+    "lint": "wireit",
     "test:lighthouse": "wireit",
     "test:visual": "wireit"
   },
@@ -53,10 +54,13 @@
     "@nvidia-elements/themes": "workspace:^"
   },
   "devDependencies": {
+    "@eslint/js": "catalog:",
     "@nvidia-elements/themes": "workspace:*",
+    "@nvidia-elements/lint": "workspace:*",
     "@internals/testing": "workspace:*",
     "@internals/vite": "workspace:*",
     "@vitest/browser": "catalog:",
+    "eslint": "catalog:",
     "lit": "catalog:",
     "postcss": "catalog:",
     "postcss-each": "1.1.0",
@@ -70,6 +74,7 @@
   "wireit": {
     "ci": {
       "dependencies": [
+        "lint",
         "build",
         "publint",
         "test:visual"
@@ -152,6 +157,24 @@
           "script": "build",
           "cascade": false
         }
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**/*.ts",
+        "eslint.config.js",
+        "!src/**/__screenshots__/**"
+      ],
+      "output": [],
+      "dependencies": [
+        "../labs/lint:build"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../labs/lint:build"
       ]
     }
   }
