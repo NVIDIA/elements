@@ -1,40 +1,61 @@
-# Elements
+# @nvidia-elements/core
 
-### The Design Language for AI/ML Factories Building at the Speed of Light
+The design language for AI/ML factories. Provides a set of accessible, theme-ready UI elements.
 
 - [Documentation](https://NVIDIA.github.io/elements/)
 - [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-- [Gitlab Repo](https://github.com/NVIDIA/elements)
-- [Package Artifactory URM](https://registry.npmjs.org
-- [Package Artifactory NVDA](ui/packages/npm:%2F%2F@nvidia-elements%2Fcore)
+- [GitLab Repo](https://github.com/NVIDIA/elements)
+- [Artifactory](https://registry.npmjs.org
 
 ## Getting Started
 
-```bash
+```shell
 # local .npmrc file
 registry=https://registry.npmjs.org
 
 # https://registry.npmjs.org
 npm login
 
-# install core dependencies
-npm install @nvidia-elements/themes @nvidia-elements/core
+npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/core
 ```
+
+Elements ships as many small packages. This allows you to choose what tools your application needs and omit anything unnecessary, improving application performance.
+
+## Usage
 
 ```css
-/* import the global CSS into your project */
+/* base theme */
 @import '@nvidia-elements/themes/fonts/inter.css';
 @import '@nvidia-elements/themes/index.css';
+
+/* optional themes */
+@import '@nvidia-elements/themes/high-contrast.css';
+@import '@nvidia-elements/themes/reduced-motion.css';
+@import '@nvidia-elements/themes/compact.css';
 @import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/themes/debug.css';
+
+/* optional CSS utilities */
+@import '@nvidia-elements/styles/typography.css';
+@import '@nvidia-elements/styles/layout.css';
+@import '@nvidia-elements/styles/view-transitions.css';
 ```
 
-```javascript
-// Load via JavaScript imports to make available in HTML templates
+```typescript
+// Load via typescript imports to make available in HTML templates
 import '@nvidia-elements/core/button/define.js';
+import '@nvidia-elements/core/dot/define.js';
+...
 ```
 
 ```html
+<!-- set global theme -->
+<html nve-theme="dark" nve-transition="auto">
+```
+
+```html
+<!-- use component in HTML template -->
 <nve-button>hello there</nve-button>
 ```
 
@@ -46,36 +67,3 @@ import '@nvidia-elements/core/button/define.js';
 - [React](https://NVIDIA.github.io/elements/docs/integrations/react/)
 - [TypeScript](https://NVIDIA.github.io/elements/docs/integrations/typescript/)
 - [Vue](https://NVIDIA.github.io/elements/docs/integrations/vue/)
-
-## Development
-
-- `ci`: run full build/lint/test
-- `build`: run library build
-- `dev`: run build in watch mode
-- `test`: run unit tests
-- `test:watch`: run unit tests in watch mode
-
-All component development is currently done within the docs site. Run each
-site and elements dev mode in a independent terminal.
-
-```bash
-pnpm dev # /projects/elements
-
-pnpm dev # /projects/site
-```
-
-<br />
-
-## Testing
-
-Run unit tests with coverage report:
-
-```bash
-pnpm test
-```
-
-Develop unit tests with watcher enabled:
-
-```bash
-pnpm test:watch
-```

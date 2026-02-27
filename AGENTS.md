@@ -75,7 +75,7 @@ pnpm run lint:vale
 
 ### Individual Project Commands
 
-All projects under `projects/` support these commands. These should be run from within the specific project directory (e.g., `cd projects/elements`):
+Each project has a `DEVELOPMENT.md` file with the authoritative list of available pnpm scripts for that project. Consult `projects/<name>/DEVELOPMENT.md` before running commands. The common commands below are a quick reference. Run them from within the specific project directory (for example, `cd projects/elements`):
 
 ```shell
 # Development watch mode
@@ -266,5 +266,6 @@ When adding new technical terms, component names, or abbreviations that Vale fla
 - `/projects/site/src/docs/api-design/properties-attributes.md` - When adding or modifying component properties/attributes; covers @property decorator, reflect option, impossible states
 - `/projects/site/src/docs/api-design/styles.md` - When working with component styles or CSS custom properties; covers theming strategies and custom property patterns
 - `/projects/site/src/docs/api-design/registration.md` - When naming components or working with tag registration; covers tag prefixes and naming conventions
+- `projects/*/DEVELOPMENT.md` - When working within a specific project; lists all available pnpm scripts for that project
 - `/projects/internals/BUILD.md` - When modifying build configuration, Wireit scripts, or CI/CD pipeline
 - `/projects/internals/RELEASE.md` - When creating new projects or modifying release process; covers semantic release setup, GitLab CI artifacts, commit scopes, initial tags
