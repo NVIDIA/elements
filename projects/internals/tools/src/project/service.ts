@@ -65,7 +65,7 @@ export class ProjectService {
   @tool({
     summary: 'Setup or update a project to use Elements.',
     description:
-      'Setup or update a project to use Elements. Configures MCP, adds core dependencies if missing, and updates packages to the latest versions.',
+      'Setup or update a project to use Elements. Configures MCP, adds core dependencies if missing, and updates packages to the latest versions. Use the packages_get tool to get package specific integration and installation steps.',
     annotations: {
       destructiveHint: true,
       idempotentHint: true
