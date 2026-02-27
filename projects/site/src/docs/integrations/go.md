@@ -14,7 +14,7 @@
 Elements is agnostic to any frontend or backend tooling. To leverage elements in Go based templating two paths are available.
 
 1. Static bundles with little to no JavScript ecosystem tooling
-2. Build time tooling with NodeJS and NPM/Artifactory packages
+2. Build time tooling with NodeJS and npm/Artifactory packages
 
 The current simple [Go starter](https://github.com/NVIDIA/elements/-/tree/main/projects/starters/go) provides an example of a basic Go web server leveraging the pre-built JS and CSS bundles. This enables Go generated HTML pages with minimal NodeJS/JavaScript ecosystem tooling.
 

@@ -22,10 +22,10 @@ import styles from './pagination.css?inline';
  * @description Pagination is a control that enables users to navigate through pages of content.
  * @since 0.11.0
  * @entrypoint \@nvidia-elements/core/pagination
- * @event input emits when the value (page) has changed
- * @event change emits when the value (page) has changed
- * @event first-page emits when the first page is active
- * @event last-page emits when the last page is active
+ * @event input - Dispatched when the value (page) has changed
+ * @event change - Dispatched when the value (page) has changed
+ * @event first-page - Dispatched when the first page is active
+ * @event last-page - Dispatched when the last page is active
  * @slot - default slot for content
  * @slot suffix-label - slot for overriding the "n of total" label when total is an approximation
  * @cssprop --background

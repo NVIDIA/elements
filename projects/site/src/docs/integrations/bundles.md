@@ -20,7 +20,7 @@ Bundles are ideal **only** for the following specific use cases:
 
 Only use this approach if the application development environment does not support a Web-based build system such as Rollup, Vite, ESBuild or Webpack.
 
-Using the single bundle approach can make simple HTML prototypes easy but prevent performance optimizations such as tree shaking. Lack of these optimizations means your users incur a performance penalty loading all components regardless if the UI uses them.
+Using the single bundle approach can make simple HTML prototypes easy but prevent performance optimizations such as tree-shaking. Lack of these optimizations means your users incur a performance penalty loading all components regardless if the UI uses them.
 
 ```html
 <!doctype html>

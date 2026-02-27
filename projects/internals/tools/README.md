@@ -30,7 +30,7 @@ projects/internals/tools/src/
 ├── playground/       # Playground creation and validation service
 ├── project/          # Project creation, update, and health checks
 ├── changelogs/       # Release notes and changelog service
-├── tokens/           # Design tokens/CSS variables service
+├── tokens/           # Design tokens/CSS custom properties service
 ├── internal/         # Core infrastructure and utilities
 └── index.ts          # Main entry point exporting all tools
 ```
@@ -64,7 +64,7 @@ projects/internals/tools/src/
 - `search()` - Find changelogs for specific packages using fuzzy matching
 
 #### **TokensService** (`/tokens/service.ts`)
-- `list()` - Get available semantic CSS variables and design tokens
+- `list()` - Get available semantic CSS custom properties and design tokens
 - Returns tokens in markdown or JSON format
 
 ### Tool System Architecture
