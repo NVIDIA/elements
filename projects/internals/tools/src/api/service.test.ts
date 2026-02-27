@@ -258,7 +258,7 @@ describe('ApiService', () => {
       expect((ApiService.tokensList as ToolMethod<unknown>).metadata.name).toBe('tokensList');
       expect((ApiService.tokensList as ToolMethod<unknown>).metadata.command).toBe('tokens.list');
       expect((ApiService.tokensList as ToolMethod<unknown>).metadata.summary).toBe(
-        'Get available semantic CSS variables / design tokens for theming.'
+        'Get available semantic CSS custom properties / design tokens for theming.'
       );
     });
 

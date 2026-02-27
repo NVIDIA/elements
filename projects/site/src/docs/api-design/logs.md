@@ -114,7 +114,7 @@ To resolve this warning:
 
 ## Cross Shadow Root Anchor
 
-Native CSS Anchor Positioning allows two elements to tether together via a unique identifier. This is commonly used for popover-like elements. But CSS Anchor Positioning only supports positioning two elements in the same render root. Examples of rendering across render roots include in different Shadow Dom Roots or popover top layer instances. The CSSWG tracks this behavior/compatibility issue at https://github.com/w3c/csswg-drafts/issues/9408.
+Native CSS Anchor Positioning allows two elements to tether together via a unique identifier. This is commonly used for popover-like elements. But CSS Anchor Positioning only supports positioning two elements in the same render root. Examples of rendering across render roots include in different Shadow DOM Roots or popover top layer instances. The CSSWG tracks this behavior/compatibility issue at https://github.com/w3c/csswg-drafts/issues/9408.
 
 Element popover positioning detects instances of cross Shadow Root anchoring attempts and falls back to a JavaScript based positioning system. This allows the popover to anchor correctly but at the cost of render reliability and performance when compared to native CSS Anchor Positioning.
 

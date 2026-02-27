@@ -68,10 +68,10 @@ function setJSONSchemaForModel(monaco: Monaco, model: monaco.editor.ITextModel, 
  * @cssprop --padding
  * @event canceled - Dispatched when the editor cancels initialization.
  * @event ready - Dispatched when the editor finishes initialization and becomes ready.
- * @event input - Emitted when the element's value changes as a result of a user action.
- * @event change - Emitted when the user modifies and commits the element's value.
- * @event reset - Emitted when the control state is reset to its initial value.
- * @event invalid - Emitted when the control is invalid.
+ * @event input - Dispatched when the element's value changes as a result of a user action.
+ * @event change - Dispatched when the user modifies and commits the element's value.
+ * @event reset - Dispatched when the control state is reset to its initial value.
+ * @event invalid - Dispatched when the control is invalid.
  * @event syntax-validation-changed - Dispatched when syntax validation state changes.
  */
 export abstract class BaseMonacoInput<

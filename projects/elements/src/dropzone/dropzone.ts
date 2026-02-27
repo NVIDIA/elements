@@ -12,7 +12,7 @@ import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './d
  * @description A dropzone form control that enables users to drag and drop files onto it.
  * @since 1.29.0
  * @entrypoint \@nvidia-elements/core/dropzone
- * @event change emits when the value has changed (files located in event.target)
+ * @event change - Dispatched when the value has changed (files located in event.target)
  * @slot - use only when custom messaging requires it
  * @cssprop --background
  * @cssprop --border-color

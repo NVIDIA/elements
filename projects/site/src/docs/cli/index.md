@@ -102,7 +102,7 @@ A visual indicator that communicates a status description of an associated compo
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve api.tokens.list [format]</code></nve-grid-cell>
-    <nve-grid-cell>Get available semantic CSS variables / design tokens for theming.</nve-grid-cell>
+    <nve-grid-cell>Get available semantic CSS custom properties / design tokens for theming.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve packages.list</code></nve-grid-cell>

@@ -8,7 +8,7 @@
 # {{ title }}
 
 Examples of the [Panel](./docs/elements/panel/) component with different content
-intended for different use-cases.
+intended for different use cases.
 
 ### Key Value
 
