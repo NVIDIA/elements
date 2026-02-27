@@ -187,7 +187,7 @@ export class ApiService {
   }
 
   @tool({
-    summary: 'Get available semantic CSS variables / design tokens for theming.',
+    summary: 'Get available semantic CSS custom properties / design tokens for theming.',
     inputSchema: {
       type: 'object',
       properties: {

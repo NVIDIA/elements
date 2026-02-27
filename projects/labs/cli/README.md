@@ -51,7 +51,7 @@ nve
 | `nve api.get [names] [format]`                                    | Get documentation known components or attributes by name (nve-*).                                  |
 | `nve api.template.validate [template]`                            | Validates HTML templates using Elements APIs and components (nve-*).                               |
 | `nve api.imports.get [template]`                                  | Get esm imports for a given HTML template using Elements APIs (nve-*).                             |
-| `nve api.tokens.list [format]`                                    | Get available semantic CSS variables / design tokens for theming.                                   |
+| `nve api.tokens.list [format]`                                    | Get available semantic CSS custom properties / design tokens for theming.                                   |
 | `nve packages.list`                                               | Get latest published versions of all Elements packages.                                            |
 | `nve packages.get [name]`                                         | Get details for a specific Elements package.                                                       |
 | `nve packages.changelogs.get [name] [format]`                     | Retrieve changelog details by package name.                                                        |
@@ -141,7 +141,7 @@ Skills provide persistent context to AI agents for building UI with Elements.
 | `api_get` | Get documentation known components or attributes by name (nve-*). |
 | `api_template_validate` | Validates HTML templates using Elements APIs and components (nve-*). |
 | `api_imports_get` | Get esm imports for a given HTML template using Elements APIs (nve-*). |
-| `api_tokens_list` | Get available semantic CSS variables / design tokens for theming. |
+| `api_tokens_list` | Get available semantic CSS custom properties / design tokens for theming. |
 | `packages_list` | Get latest published versions of all Elements packages. |
 | `packages_get` | Get details for a specific Elements package. |
 | `packages_changelogs_get` | Retrieve changelog details by package name. |
