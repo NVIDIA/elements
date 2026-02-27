@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.10.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.2...@nvidia-elements/cli-v0.10.3) (2026-02-27)
+
+
+### Bug Fixes
+
+* **labs-cli:** add missing readme and install context ([927a2b2](https://github.com/NVIDIA/elements/commit/927a2b2ba403ed54bfa224a7a590b4abc7897387))
+
 ## [@nvidia-elements/cli-v0.10.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.1...@nvidia-elements/cli-v0.10.2) (2026-02-27)
 
 
