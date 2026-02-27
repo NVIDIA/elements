@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.13.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.13.1...@nvidia-elements/styles-v1.13.2) (2026-02-27)
+
+
+### Bug Fixes
+
+* **styles:** lint and space token usage ([fc6ddb8](https://github.com/NVIDIA/elements/commit/fc6ddb8adf5f7718169d0a240965674d23b84fb5))
+
 ## [@nvidia-elements/styles-v1.13.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.13.0...@nvidia-elements/styles-v1.13.1) (2026-02-10)
 
 
