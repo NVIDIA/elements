@@ -17,7 +17,10 @@ export function isComplexAttributeValue(value: string) {
     value.includes('&') ||
     value.includes('xx') ||
     value.includes('-y:') ||
-    value.includes(':none')
+    value.includes(':none') ||
+    value.includes('debug') ||
+    value.includes('mkd') ||
+    value.includes('md')
   );
 }
 
