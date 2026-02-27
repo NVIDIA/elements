@@ -1,9 +1,28 @@
 import { describe, expect, it, vi } from 'vitest';
-import { searchChangelogs, findPublicAPIChangelog, limitChangelogVersions } from './utils.js';
+import { searchChangelogs, findPublicAPIChangelog, limitChangelogVersions, getPackage } from './utils.js';
 
 vi.mock('@internals/metadata', () => ({
-  ApiService: { search: vi.fn() }
+  ApiService: { search: vi.fn() },
+  ProjectsService: {
+    getData: vi.fn().mockResolvedValue({
+      data: [
+        { name: '@nvidia-elements/core', version: '2.0.0', description: 'Core elements', readme: '# Elements\nReadme content' },
+        { name: '@nvidia-elements/themes', version: '1.5.0', description: 'Theme tokens', readme: '# Themes\nTheme readme' }
+      ]
+    })
+  }
 }));
+
+vi.mock('../api/utils.js', async importOriginal => {
+  const actual = (await importOriginal()) as Record<string, unknown>;
+  return {
+    ...actual,
+    getLatestPublishedVersions: vi.fn().mockResolvedValue({
+      '@nvidia-elements/core': '2.0.0',
+      '@nvidia-elements/themes': '1.5.0'
+    })
+  };
+});
 
 describe('searchChangelogs', () => {
   const changelogs = {
@@ -147,5 +166,41 @@ describe('findPublicAPIChangelog', () => {
 
     const result = await findPublicAPIChangelog('nve-button');
     expect(result).toBeUndefined();
+  });
+});
+
+describe('getPackage', () => {
+  it('should return formatted markdown for a known package', async () => {
+    const result = await getPackage('@nvidia-elements/core');
+    expect(result).toContain('# @nvidia-elements/core v2.0.0');
+    expect(result).toContain('Core elements');
+    expect(result).toContain('Readme content');
+  });
+
+  it('should strip the first line of the readme', async () => {
+    const result = await getPackage('@nvidia-elements/themes');
+    expect(result).not.toContain('# Themes');
+    expect(result).toContain('Theme readme');
+  });
+
+  it('should throw an error for an unknown package', async () => {
+    await expect(getPackage('unknown-package')).rejects.toThrow('No package found for "unknown-package"');
+  });
+
+  it('should list available packages in the error message', async () => {
+    await expect(getPackage('unknown-package')).rejects.toThrow('Available packages:');
+    await expect(getPackage('unknown-package')).rejects.toThrow('"@nvidia-elements/core"');
+    await expect(getPackage('unknown-package')).rejects.toThrow('"@nvidia-elements/themes"');
+  });
+
+  it('should handle package with no readme', async () => {
+    const { ProjectsService } = await import('@internals/metadata');
+    vi.mocked(ProjectsService.getData).mockResolvedValueOnce({
+      data: [{ name: '@nvidia-elements/core', version: '1.0.0', description: 'No readme pkg' }]
+    } as never);
+
+    const result = await getPackage('@nvidia-elements/core');
+    expect(result).toContain('# @nvidia-elements/core v1.0.0');
+    expect(result).toContain('No readme pkg');
   });
 });
