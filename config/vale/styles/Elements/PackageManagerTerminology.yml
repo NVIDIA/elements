@@ -1,0 +1,7 @@
+extends: substitution
+message: "Use '%s' instead of '%s'. The official branding uses lowercase."
+level: warning
+ignorecase: false
+swap:
+  NPM: npm
+  PNPM: pnpm
