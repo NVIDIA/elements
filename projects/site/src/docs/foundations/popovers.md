@@ -97,4 +97,4 @@ while later presses have no effect. This behavior is for accessibility, preventi
 
 Native [CSS Anchor Positioning](https://developer.chrome.com/blog/anchor-positioning-api) allows two elements to tether together via a unique identifier. This is commonly used for popover-like elements. CSS Anchor Positioning recently enabled cross root associations. https://github.com/w3c/csswg-drafts/issues/9408.
 
-But the declarative native popover API requires popovers and the trigger/source to still exist within the same render root and not separate by shadow dom. Elements attempts to bridge this gap by traversing and making the association for the trigger and popover. This is not 100% reliable, in general popovers should ideally be within the same render root for best performance.
+But the declarative native popover API requires popovers and the trigger/source to still exist within the same render root and not separate by Shadow DOM. Elements attempts to bridge this gap by traversing and making the association for the trigger and popover. This is not 100% reliable, in general popovers should ideally be within the same render root for best performance.

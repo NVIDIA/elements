@@ -2,7 +2,7 @@
 
 Create new Elements projects using `npm create @nve`.
 
-## NPM Usage
+## npm Usage
 
 ```bash
 # Interactive project creation
@@ -18,7 +18,7 @@ npm create @nve angular
 npm create @nve vue
 ```
 
-### PNPM Usage
+### pnpm Usage
 
 ```bash
 # Interactive project creation

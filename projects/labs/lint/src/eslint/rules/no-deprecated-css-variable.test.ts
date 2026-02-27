@@ -37,8 +37,8 @@ describe('noDeprecatedCssVariable', () => {
     expect(noDeprecatedCssVariable.meta.messages).toBeDefined();
   });
 
-  it('should allow valid use of CSS variables', () => {
-    tester.run('should allow valid use of CSS variables', rule, {
+  it('should allow valid use of CSS custom properties', () => {
+    tester.run('should allow valid use of CSS custom properties', rule, {
       valid: [
         ':root { margin: var(--nve-ref-space-md); }',
         ':root { gap: var(--nve-ref-space-md); }',
@@ -51,8 +51,8 @@ describe('noDeprecatedCssVariable', () => {
     });
   });
 
-  it('should not allow use of deprecated CSS variables', () => {
-    tester.run('should not allow use of deprecated CSS variables', rule, {
+  it('should not allow use of deprecated CSS custom properties', () => {
+    tester.run('should not allow use of deprecated CSS custom properties', rule, {
       valid: [],
       invalid: [
         {

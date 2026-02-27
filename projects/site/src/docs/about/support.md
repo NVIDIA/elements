@@ -22,7 +22,7 @@ Reach out to the Slack support channel or find more resources in the Figma libra
     <a href="http://nv/elements-figma" target="_blank">{% svg-logo 'figma' '18' %} Figma Library</a>
   </nve-button>
   <nve-button>
-    <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style="--color: var(--nve-sys-accent-primary-background)"></nve-icon> NPM Package</a>
+    <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style="--color: var(--nve-sys-accent-primary-background)"></nve-icon> npm Package</a>
   </nve-button>
 </section>
 
