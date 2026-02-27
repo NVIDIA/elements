@@ -1,6 +1,12 @@
 # @nvidia-elements/forms
 
-The forms utility library provides a base mixin to make it easy to create form associated custom elements. Form associated custom elements enable components to integrate with form value state and validation. This creates a reliable and predictable API contract for components. This project is in the early stages of exploration. [Documentation](https://NVIDIA.github.io/elements/docs/labs/forms/)
+Form control utilities providing mixins, validation, and schema support for custom elements.
+
+- [Documentation](https://NVIDIA.github.io/elements/docs/elements/forms/)
+- [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
+- [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
+- [GitLab Repo](https://github.com/NVIDIA/elements)
+- [Artifactory](https://registry.npmjs.org
 
 ## Getting Started
 
@@ -11,6 +17,11 @@ registry=https://registry.npmjs.org
 # https://registry.npmjs.org
 npm login
 
-# install
 npm install @nvidia-elements/forms
+```
+
+## Usage
+
+```javascript
+import { FormControl } from '@nvidia-elements/forms';
 ```
