@@ -1,3 +1,11 @@
+## [@nvidia-elements/lint-v0.12.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.12.0...@nvidia-elements/lint-v0.12.1) (2026-02-27)
+
+
+### Bug Fixes
+
+* **labs-cli:** update package dependencies and improve tool accuracy ([d87ccac](https://github.com/NVIDIA/elements/commit/d87ccacbd1d751a43b8fc04fcadf4497a510fbb3))
+* **labs-lint:** enhance attribute handling and linting rules ([3cf3ada](https://github.com/NVIDIA/elements/commit/3cf3ada4844844c5366411a51fdac7b583bd5052))
+
 ## [@nvidia-elements/lint-v0.12.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.11.0...@nvidia-elements/lint-v0.12.0) (2026-02-25)
 
 
