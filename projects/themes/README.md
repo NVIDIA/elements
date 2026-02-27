@@ -1,9 +1,12 @@
 # @nvidia-elements/themes
 
-Built in design tokens and theme for Elements
+Themes for the Elements design system, providing comprehensive color palettes, typography, and spacing.
 
-[![Latest Release](https://github.com/NVIDIA/elements/-/badges/release.svg)](https://github.com/NVIDIA/elements/-/releases)
-[![pipeline status](https://github.com/NVIDIA/elements/badges/main/pipeline.svg)](https://github.com/NVIDIA/elements/-/commits/main)
+- [Documentation](https://NVIDIA.github.io/elements/docs/foundations/themes/)
+- [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
+- [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
+- [GitLab Repo](https://github.com/NVIDIA/elements)
+- [Artifactory](https://registry.npmjs.org
 
 ## Getting Started
 
@@ -14,9 +17,10 @@ registry=https://registry.npmjs.org
 # https://registry.npmjs.org
 npm login
 
-# install core dependencies
 npm install @nvidia-elements/themes
 ```
+
+## Usage
 
 ```css
 /* import the theme CSS into your project */
@@ -30,8 +34,3 @@ npm install @nvidia-elements/themes
 | `@nvidia-elements/themes/reduced-motion.css` | Reduced motion theme |
 | `@nvidia-elements/themes/compact.css`        | Compact theme        |
 | `@nvidia-elements/themes/dark.css`           | Dark theme           |
-
-## Development
-
-- `ci`: run full build/lint/test
-- `build`: run library build
