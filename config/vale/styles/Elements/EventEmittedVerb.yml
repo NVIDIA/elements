@@ -1,0 +1,7 @@
+extends: substitution
+message: "Use '%s' for event descriptions instead of '%s'. Elements uses 'Dispatched when' as the standard event verb."
+level: warning
+ignorecase: false
+swap:
+  Emitted when: Dispatched when
+  Fired when: Dispatched when

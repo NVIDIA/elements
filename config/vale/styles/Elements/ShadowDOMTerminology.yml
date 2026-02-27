@@ -1,0 +1,8 @@
+extends: substitution
+message: "Use '%s' instead of '%s'. 'DOM' should always be fully capitalized."
+level: warning
+ignorecase: false
+swap:
+  shadow dom: Shadow DOM
+  Shadow dom: Shadow DOM
+  Shadow Dom: Shadow DOM

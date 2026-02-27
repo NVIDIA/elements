@@ -115,7 +115,7 @@ The repository is organized as a top-level workspace with individual project dir
 
 - `/projects/elements` - Core Elements Web Components library (Lit-based)
 - `/projects/elements-react` - React 18 wrapper components for Elements
-- `/projects/themes` - Theme tokens and CSS variables
+- `/projects/themes` - Theme tokens and CSS custom properties
 - `/projects/styles` - CSS utilities for layout and typography
 - `/projects/testing` - Shared testing utilities for Lit components
 - `/projects/starters` - Starter templates for various frameworks (React, Angular, Vue, Svelte, etc.)
