@@ -69,7 +69,7 @@ If you actively work/switch between different repositories run `nvm use && corep
 
 ### Building
 
-Both the top-level repository and each project has a set of standardized NPM scripts. To build and test all projects run `pnpm run ci` at the root of repository.
+Both the top-level repository and each project has a set of standardized npm scripts. To build and test all projects run `pnpm run ci` at the root of repository.
 
 #### Top-Level Repository
 
