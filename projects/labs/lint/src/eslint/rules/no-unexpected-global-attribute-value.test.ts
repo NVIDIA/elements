@@ -328,12 +328,7 @@ describe('noUnexpectedAttributeValue', () => {
   });
 
   it('should not allow additional invalid symbols in nve-layout attribute values', () => {
-    const withoutAmp = SIMPLE_NVE_LAYOUT_VALUES.filter(v => !v.includes('&'))
-      .map(v => `"${v}"`)
-      .join(', ');
-    const withoutPipe = SIMPLE_NVE_LAYOUT_VALUES.filter(v => !v.includes('|'))
-      .map(v => `"${v}"`)
-      .join(', ');
+    const validValues = SIMPLE_NVE_LAYOUT_VALUES.map(v => `"${v}"`).join(', ');
 
     tester.run('should not allow additional invalid symbols in nve-layout attribute values', rule, {
       valid: [],
@@ -344,7 +339,7 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'row &lg|row', validValues: withoutAmp }
+              data: { attribute: 'nve-layout', value: 'row &lg|row', validValues }
             }
           ]
         },
@@ -354,7 +349,7 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'row &lg|row', validValues: withoutPipe }
+              data: { attribute: 'nve-layout', value: 'row &lg|row', validValues }
             }
           ]
         },
@@ -364,7 +359,7 @@ describe('noUnexpectedAttributeValue', () => {
           errors: [
             {
               messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'row @lg|row', validValues: withoutPipe }
+              data: { attribute: 'nve-layout', value: 'row @lg|row', validValues }
             }
           ]
         }
