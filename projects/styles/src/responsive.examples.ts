@@ -214,7 +214,7 @@ export const ResponsiveCombined = {
             </nve-card-header>
             <nve-card-content>
               <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
-              <p>This card demonstrates combining container and viewport queries.</p>
+              <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
 
@@ -224,7 +224,7 @@ export const ResponsiveCombined = {
             </nve-card-header>
             <nve-card-content>
               <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
-              <p>This card demonstrates combining container and viewport queries.</p>
+              <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
 
@@ -234,7 +234,7 @@ export const ResponsiveCombined = {
             </nve-card-header>
             <nve-card-content>
               <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
-              <p>This card demonstrates combining container and viewport queries.</p>
+              <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
 
@@ -244,7 +244,7 @@ export const ResponsiveCombined = {
             </nve-card-header>
             <nve-card-content>
               <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
-              <p>This card demonstrates combining container and viewport queries.</p>
+              <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
 
@@ -254,7 +254,7 @@ export const ResponsiveCombined = {
             </nve-card-header>
             <nve-card-content>
               <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
-              <p>This card demonstrates combining container and viewport queries.</p>
+              <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
           
@@ -264,7 +264,7 @@ export const ResponsiveCombined = {
             </nve-card-header>
             <nve-card-content>
               <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
-              <p>This card demonstrates combining container and viewport queries.</p>
+              <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
         </section>

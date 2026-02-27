@@ -149,7 +149,7 @@ export const NavList = {
 
   <li><a nve-text="link" href="#navigation-list" aria-current="page">Installation</a></li>
   <li>
-    <ul>
+    <ul nve-text="list">
       <li><a nve-text="link" href="#navigation-list">Installing Dependencies</a></li>
       <li><a nve-text="link" href="#navigation-list">Configure Library</a></li>
     </ul>
@@ -157,7 +157,7 @@ export const NavList = {
 
   <li><a nve-text="link" href="#navigation-list">Basic Usage</a></li>
   <li>
-    <ul>
+    <ul nve-text="list">
       <li><a nve-text="link" href="#navigation-list">Architecture</a></li>
       <li><a nve-text="link" href="#navigation-list">Reference</a></li>
       <li><a nve-text="link" href="#navigation-list">API</a></li>
@@ -166,12 +166,12 @@ export const NavList = {
 
   <li>External Links</li>
   <li>
-    <ul>
+    <ul nve-text="list">
       <li><a nve-text="link" href="#navigation-list">Join the Community</a></li>
 
       <li>Submit an Issue</li>
       <li>
-        <ul>
+        <ul nve-text="list">
           <li><a nve-text="link" href="#navigation-list">Feature</a></li>
           <li><a nve-text="link" href="#navigation-list">Fix</a></li>
         </ul>
