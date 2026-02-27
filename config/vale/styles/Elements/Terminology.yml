@@ -8,3 +8,8 @@ swap:
   style guide: style guide
   dark-mode: dark mode
   light-mode: light mode
+  use-case: use case
+  use-cases: use cases
+  tree shaking: tree-shaking
+  CSS variables: CSS custom properties
+  CSS variable: CSS custom property

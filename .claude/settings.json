@@ -19,5 +19,29 @@
       "mcp__elements__packages_changelogs_get"
     ]
   },
-  "enabledMcpjsonServers": ["elements"]
+  "enabledMcpjsonServers": ["elements"],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format-prettier.sh",
+            "statusMessage": "Running Prettier formatter..."
+          },
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/lint-eslint.sh",
+            "statusMessage": "Running ESLint linter..."
+          },
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/lint-vale.sh",
+            "statusMessage": "Running Vale prose linter..."
+          }
+        ]
+      }
+    ]
+  }
 }
