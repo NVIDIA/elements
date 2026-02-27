@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.61.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.6...@nvidia-elements/core-v1.61.0) (2026-02-27)
+
+
+### Features
+
+* **elements:** add sparkline element ([c527198](https://github.com/NVIDIA/elements/commit/c527198ed16811c81ab1d341e0f6642a05016a4b))
+
 ## [@nvidia-elements/core-v1.60.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.5...@nvidia-elements/core-v1.60.6) (2026-02-26)
 
 
