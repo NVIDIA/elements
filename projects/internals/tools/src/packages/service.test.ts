@@ -37,10 +37,10 @@ describe('PackagesService', () => {
     );
   });
 
-  it('should return result for unknown package in get tool', async () => {
-    const result = await PackagesService.get({ name: 'unknown-package' });
-    expect(result).toBeDefined();
-    expect(typeof result).toBe('string');
+  it('should throw error for unknown package in get tool', async () => {
+    await expect(PackagesService.get({ name: 'unknown-package' })).rejects.toThrow(
+      'No package found for "unknown-package"'
+    );
   });
 
   it('should provide changelogs get tool', async () => {
