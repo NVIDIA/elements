@@ -1,5 +1,13 @@
 # @nvidia-elements/code
 
+Syntax-highlighted code block components supporting many programming languages.
+
+- [Documentation](https://NVIDIA.github.io/elements/docs/code/)
+- [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
+- [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
+- [GitLab Repo](https://github.com/NVIDIA/elements)
+- [Artifactory](https://registry.npmjs.org
+
 ## Getting Started
 
 ```bash
@@ -9,9 +17,10 @@ registry=https://registry.npmjs.org
 # https://registry.npmjs.org
 npm login
 
-# install core dependencies
 npm install @nvidia-elements/code
 ```
+
+## Usage
 
 ```javascript
 // import only languages needed
@@ -39,11 +48,3 @@ import '@nvidia-elements/code/codeblock/define.js';
   </template>
 </nve-codeblock>
 ```
-
-## Development
-
-| Command          | Description                                            |
-| ---------------- | ------------------------------------------------------ |
-| `pnpm run build` | Build library source                                   |
-| `pnpm run test`  | Run library tests                                      |
-| `pnpm run ci`    | Build and run all library CI requirements (build/test) |
