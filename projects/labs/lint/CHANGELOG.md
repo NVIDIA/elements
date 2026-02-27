@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.12.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.12.2...@nvidia-elements/lint-v0.12.3) (2026-02-27)
+
+
+### Bug Fixes
+
+* **labs-lint:** avoid non-literal enum [secure] positives ([71f953e](https://github.com/NVIDIA/elements/commit/71f953e3a9cf517213a009ea539a61bf900056ed))
+
 ## [@nvidia-elements/lint-v0.12.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.12.1...@nvidia-elements/lint-v0.12.2) (2026-02-27)
 
 
