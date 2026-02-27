@@ -58,7 +58,6 @@
     "@eslint/json": "catalog:"
   },
   "peerDependencies": {
-    "@nvidia-elements/styles": "workspace:^",
     "@nvidia-elements/themes": "workspace:^",
     "eslint": ">= 9"
   },
