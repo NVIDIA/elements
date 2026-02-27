@@ -1,13 +1,12 @@
-# Elements Styles
+# @nvidia-elements/styles
+
+Core CSS foundation for the Elements design system, providing layout utilities, typography styles, and view transitions.
 
 - [Documentation](https://NVIDIA.github.io/elements/)
 - [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-- [Gitlab Repo](https://github.com/NVIDIA/elements)
-- [Package Artifactory URM](https://registry.npmjs.org
-- [Package Artifactory Maglev](ui/packages/npm:%2F%2F@nvidia-elements%2Fstyles)
-
-Standalone CSS utilities for typography and layout.
+- [GitLab Repo](https://github.com/NVIDIA/elements)
+- [Artifactory](https://registry.npmjs.org
 
 ## Getting Started
 
@@ -18,17 +17,13 @@ registry=https://registry.npmjs.org
 # https://registry.npmjs.org
 npm login
 
-# install core dependencies
 npm install @nvidia-elements/styles
 ```
 
+## Usage
+
 ```css
 /* import the global CSS into your project */
-@import '@nvidia-elements/styles/dist/typography.css';
-@import '@nvidia-elements/styles/dist/layout.css';
+@import '@nvidia-elements/styles/typography.css';
+@import '@nvidia-elements/styles/layout.css';
 ```
-
-## Development
-
-- `ci`: run full build/lint/test against final output
-- `build`: run library build
