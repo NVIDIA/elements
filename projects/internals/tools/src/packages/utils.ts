@@ -50,10 +50,16 @@ export async function getPackage(name: string) {
   const packages = (await PackageService.getData())?.data ?? [];
   const publicPackages = await getLatestPublishedVersions((await PackageService.getData())?.data ?? []);
 
-  const pkg = packages
+  const available = packages
     .filter(p => publicPackages[p.name] !== undefined)
-    .sort((a, b) => scopeOrder(a.name) - scopeOrder(b.name) || a.name.localeCompare(b.name))
-    .find(p => p.name === name);
+    .sort((a, b) => scopeOrder(a.name) - scopeOrder(b.name) || a.name.localeCompare(b.name));
 
-  return `${pkg?.name} v${pkg?.version}\n${pkg?.description}`;
+  const pkg = available.find(p => p.name === name);
+
+  if (!pkg) {
+    const names = available.map(p => `"${p.name}"`).join(', ');
+    throw new Error(`No package found for "${name}".\n\nAvailable packages: ${names}`);
+  }
+
+  return `# ${pkg.name} v${pkg.version}\n\n${pkg.description}\n---\n${pkg.readme?.replace(/^.*\n/, '') ?? ''}`;
 }
