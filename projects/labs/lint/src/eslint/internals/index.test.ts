@@ -21,7 +21,9 @@ describe('lintPlaygroundTemplate', () => {
     const result = await lintPlaygroundTemplate(codeWithRestrictedAttribute);
 
     expect(result.length).toBeGreaterThan(0);
-    expect(result.some(msg => msg.id === 'no-restricted-attributes')).toBe(true);
+    expect(
+      result.some(msg => msg.id === 'no-restricted-attributes' || msg.id === 'no-restricted-attributes-with-supported')
+    ).toBe(true);
     expect(result.some(msg => msg.message.includes('nve-layout'))).toBe(true);
   });
 
@@ -102,8 +104,8 @@ describe('lintPlaygroundTemplate', () => {
     const result = await lintPlaygroundTemplate(codeWithMultipleViolations);
 
     expect(result.length).toBeGreaterThan(1);
-    expect(result[0].id).toBe('no-restricted-attributes');
-    expect(result[1].id).toBe('no-restricted-attributes');
+    expect(result[0].id).toBe('no-restricted-attributes-with-supported');
+    expect(result[1].id).toBe('no-restricted-attributes-with-supported');
   });
 
   it('should handle suggestions', async () => {

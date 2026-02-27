@@ -1,5 +1,6 @@
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+import { getElementAttributeNames } from '../internals/element-attributes.js';
 
 const RESTRICTED_GLOBAL_ATTRIBUTES = ['nve-text', 'nve-layout', 'mlv-text', 'mlv-layout'];
 const RESTRICTED_ELEMENT_API_ATTRIBUTES = ['variant'];
@@ -24,7 +25,9 @@ const rule = {
     schema: [],
     messages: {
       ['no-restricted-attributes']:
-        'Unexpected use of restricted attribute "{{attribute}}" on <{{element}}>. Remove the attribute.'
+        'Unexpected use of restricted attribute "{{attribute}}" on <{{element}}>. Remove the attribute.',
+      ['no-restricted-attributes-with-supported']:
+        'Unexpected use of restricted attribute "{{attribute}}" on <{{element}}>. Remove the attribute. Supported attributes: {{supportedAttributes}}'
     }
   },
   create(context) {
@@ -42,14 +45,7 @@ const rule = {
               }
             }
 
-            context.report({
-              messageId: 'no-restricted-attributes',
-              node: attr,
-              data: {
-                attribute,
-                element: node.name
-              }
-            });
+            reportRestricted(context, attr, attribute, node.name);
           }
         });
 
@@ -57,19 +53,36 @@ const rule = {
           const attr = findAttr(node, attribute);
           const isElementAPI = node.name.startsWith('nve-') && attr;
           if (isElementAPI) {
-            context.report({
-              messageId: 'no-restricted-attributes',
-              node: attr,
-              data: {
-                attribute,
-                element: node.name
-              }
-            });
+            reportRestricted(context, attr, attribute, node.name);
           }
         });
       }
     });
   }
 } as const;
+
+function reportRestricted(context, attr, attribute: string, elementName: string) {
+  const supported = getElementAttributeNames(elementName);
+  if (supported.length > 0) {
+    context.report({
+      messageId: 'no-restricted-attributes-with-supported',
+      node: attr,
+      data: {
+        attribute,
+        element: elementName,
+        supportedAttributes: supported.map(a => `"${a}"`).join(', ')
+      }
+    });
+  } else {
+    context.report({
+      messageId: 'no-restricted-attributes',
+      node: attr,
+      data: {
+        attribute,
+        element: elementName
+      }
+    });
+  }
+}
 
 export default rule;

@@ -3,8 +3,15 @@ import { RuleTester } from 'eslint';
 import type { JSRuleDefinition } from 'eslint';
 import htmlParser from '@html-eslint/parser';
 import noRestrictedAttributes from './no-restricted-attributes.js';
+import { getElementAttributeNames } from '../internals/element-attributes.js';
 
 const rule = noRestrictedAttributes as unknown as JSRuleDefinition;
+
+function supportedAttrs(tagName: string) {
+  return getElementAttributeNames(tagName)
+    .map(a => `"${a}"`)
+    .join(', ');
+}
 
 describe('noRestrictedAttributes', () => {
   let tester: RuleTester;
@@ -34,6 +41,9 @@ describe('noRestrictedAttributes', () => {
     expect(noRestrictedAttributes.meta.messages['no-restricted-attributes']).toBe(
       'Unexpected use of restricted attribute "{{attribute}}" on <{{element}}>. Remove the attribute.'
     );
+    expect(noRestrictedAttributes.meta.messages['no-restricted-attributes-with-supported']).toBe(
+      'Unexpected use of restricted attribute "{{attribute}}" on <{{element}}>. Remove the attribute. Supported attributes: {{supportedAttributes}}'
+    );
   });
 
   it('should allow global utility attributes on native HTML elements', () => {
@@ -56,15 +66,34 @@ describe('noRestrictedAttributes', () => {
       invalid: [
         {
           code: '<nve-button nve-layout="pad:md"></nve-button>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'nve-layout', element: 'nve-button' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: {
+                attribute: 'nve-layout',
+                element: 'nve-button',
+                supportedAttributes: supportedAttrs('nve-button')
+              }
+            }
+          ]
         },
         {
           code: '<nve-card nve-layout="column"></nve-card>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'nve-layout', element: 'nve-card' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'nve-layout', element: 'nve-card', supportedAttributes: supportedAttrs('nve-card') }
+            }
+          ]
         },
         {
           code: '<nve-card nve-layout="row gap:md"></nve-card>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'nve-layout', element: 'nve-card' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'nve-layout', element: 'nve-card', supportedAttributes: supportedAttrs('nve-card') }
+            }
+          ]
         }
       ]
     });
@@ -76,11 +105,21 @@ describe('noRestrictedAttributes', () => {
       invalid: [
         {
           code: '<nve-button nve-text="body"></nve-button>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'nve-text', element: 'nve-button' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'nve-text', element: 'nve-button', supportedAttributes: supportedAttrs('nve-button') }
+            }
+          ]
         },
         {
           code: '<nve-card nve-text="heading"></nve-card>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'nve-text', element: 'nve-card' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'nve-text', element: 'nve-card', supportedAttributes: supportedAttrs('nve-card') }
+            }
+          ]
         }
       ]
     });
@@ -92,7 +131,12 @@ describe('noRestrictedAttributes', () => {
       invalid: [
         {
           code: '<nve-card mlv-layout="row"></nve-card>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'mlv-layout', element: 'nve-card' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'mlv-layout', element: 'nve-card', supportedAttributes: supportedAttrs('nve-card') }
+            }
+          ]
         },
         {
           code: '<custom-element mlv-layout="column"></custom-element>',
@@ -110,7 +154,12 @@ describe('noRestrictedAttributes', () => {
       invalid: [
         {
           code: '<nve-badge mlv-text="body"></nve-badge>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'mlv-text', element: 'nve-badge' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'mlv-text', element: 'nve-badge', supportedAttributes: supportedAttrs('nve-badge') }
+            }
+          ]
         },
         {
           code: '<custom-element mlv-text="caption"></custom-element>',
@@ -141,11 +190,21 @@ describe('noRestrictedAttributes', () => {
       invalid: [
         {
           code: '<nve-card nve-layout="full pad:md"></nve-card>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'nve-layout', element: 'nve-card' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'nve-layout', element: 'nve-card', supportedAttributes: supportedAttrs('nve-card') }
+            }
+          ]
         },
         {
           code: '<nve-card nve-layout="row span:6"></nve-card>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'nve-layout', element: 'nve-card' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'nve-layout', element: 'nve-card', supportedAttributes: supportedAttrs('nve-card') }
+            }
+          ]
         }
       ]
     });
@@ -157,11 +216,21 @@ describe('noRestrictedAttributes', () => {
       invalid: [
         {
           code: '<nve-button variant="primary"></nve-button>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'variant', element: 'nve-button' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'variant', element: 'nve-button', supportedAttributes: supportedAttrs('nve-button') }
+            }
+          ]
         },
         {
           code: '<nve-badge variant="outlined"></nve-badge>',
-          errors: [{ messageId: 'no-restricted-attributes', data: { attribute: 'variant', element: 'nve-badge' } }]
+          errors: [
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'variant', element: 'nve-badge', supportedAttributes: supportedAttrs('nve-badge') }
+            }
+          ]
         }
       ]
     });
@@ -199,8 +268,14 @@ describe('noRestrictedAttributes', () => {
         {
           code: '<nve-card nve-layout="row" nve-text="body"></nve-card>',
           errors: [
-            { messageId: 'no-restricted-attributes', data: { attribute: 'nve-layout', element: 'nve-card' } },
-            { messageId: 'no-restricted-attributes', data: { attribute: 'nve-text', element: 'nve-card' } }
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'nve-layout', element: 'nve-card', supportedAttributes: supportedAttrs('nve-card') }
+            },
+            {
+              messageId: 'no-restricted-attributes-with-supported',
+              data: { attribute: 'nve-text', element: 'nve-card', supportedAttributes: supportedAttrs('nve-card') }
+            }
           ]
         }
       ]
