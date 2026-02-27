@@ -1,6 +1,6 @@
 # Build, Infrastructure, and CI/CD
 
-This is an outline of the tooling that runs the Elements monorepo. This tooling powers a fully automated continuous deployment of many NPM/Artifactory packages as well as documentation. This configuration enables:
+This is an outline of the tooling that runs the Elements monorepo. This tooling powers a fully automated continuous deployment of many npm/Artifactory packages as well as documentation. This configuration enables:
 
 - Building 30+ libraries, packages and starter projects
 - 1400+ unit tests, visual regressions tests and performance lighthouse tests
@@ -37,7 +37,7 @@ The root [.github/workflows/ci.yml](https://github.com/NVIDIA/elements/-/blob/ma
 
 - [CI Caching](https://docs.gitlab.com/ee/ci/caching/)
 
-  The pipeline leverages GitLab CI Cache to cache PNPM installations between jobs, which drastically improves CI speed.
+  The pipeline leverages GitLab CI Cache to cache pnpm installations between jobs, which drastically improves CI speed.
 
 - [Issue Templates](https://docs.gitlab.com/ee/user/project/description_templates.html)
 
@@ -99,9 +99,9 @@ The following are the repo wide tools that apply to all source code and projects
 
   Corepack is a tool to help with managing versions of your package managers. It identifies the package manager configured for the repo, transparently installs it if needed, and runs it without requiring explicit user interactions. This ensures that everyone uses exactly the same package manager version without them having to manually synchronize it each time someone makes an update.
 
-- [PNPM Package Manager](https://pnpm.io/)
+- [pnpm Package Manager](https://pnpm.io/)
 
-  PNPM is a NodeJS package manager that enables highly cacheable and fast installs of Node packages.
+  pnpm is a NodeJS package manager that enables highly cacheable and fast installs of Node packages.
 
 - [Wireit](https://github.com/google/wireit)
 

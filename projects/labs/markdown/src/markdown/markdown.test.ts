@@ -3,7 +3,7 @@ import { describe, expect, it, beforeEach, afterEach, vi, type MockInstance } fr
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Markdown } from '@nvidia-elements/markdown/markdown';
 import '@nvidia-elements/markdown/markdown/define.js';
-// Import CSS variables data for testing
+// Import CSS custom properties data for testing
 import cssVars from '@nvidia-elements/themes/data.css-vars.json';
 
 /* eslint-disable @nvidia-elements/lint/no-unstyled-typography */
@@ -634,7 +634,7 @@ This is a paragraph with **bold** and *italic* text.
 
       expect(emStyles.fontStyle).toBe('italic');
 
-      // Verify we can access CSS variables for font weights
+      // Verify we can access CSS custom properties for font weights
       const semiboldWeight = cssVars['--nve-ref-font-weight-semibold']?.values?.[''] || '600';
       expect(semiboldWeight).toBe('600'); // Verify token value is correct
 
