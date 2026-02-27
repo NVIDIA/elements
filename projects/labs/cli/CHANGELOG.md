@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.10.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.1...@nvidia-elements/cli-v0.10.2) (2026-02-27)
+
+
+### Bug Fixes
+
+* **labs-cli:** update package dependencies and improve tool accuracy ([d87ccac](https://github.com/NVIDIA/elements/commit/d87ccacbd1d751a43b8fc04fcadf4497a510fbb3))
+
 ## [@nvidia-elements/cli-v0.10.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.0...@nvidia-elements/cli-v0.10.1) (2026-02-25)
 
 
