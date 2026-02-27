@@ -1,0 +1,6 @@
+extends: existence
+message: "Use '@event name - Dispatched when ...' format instead of '%s'. Events should use 'Dispatched when' with a dash separator."
+level: warning
+ignorecase: true
+tokens:
+  - 'emits when'
