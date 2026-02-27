@@ -13,7 +13,6 @@
       "mcp__elements__playground_create",
       "mcp__elements__project_create",
       "mcp__elements__project_setup",
-      "mcp__elements__project_update",
       "mcp__elements__project_validate",
       "mcp__elements__packages_list",
       "mcp__elements__packages_get",
