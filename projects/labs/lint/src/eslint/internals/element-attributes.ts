@@ -38,6 +38,13 @@ export function getElementAttribute(tagName: string, attributeName: string): Att
   };
 }
 
+export function getElementAttributeNames(tagName: string): string[] {
+  const element = elements.find(e => e.name === tagName);
+  if (!element?.manifest?.attributes) return [];
+
+  return element.manifest.attributes.filter(a => !a.deprecated).map(a => a.name);
+}
+
 export function getRecommendedValue(value: string, validValues: string[]): string | null {
   if (validValues.length === 0) return null;
 
