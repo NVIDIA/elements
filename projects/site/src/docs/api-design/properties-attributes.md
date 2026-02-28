@@ -99,12 +99,12 @@ Learn about <a href="https://developers.google.com/web/fundamentals/web-componen
 
 ## Data Elements
 
-Some components exist as a representational view of a pure data structure that cannot be meaningfully distilled into primitive attributes or expressed declaratively with child HTML elements. In these cases a complex type property is acceptable.
+Some components exist as a representational view of a pure data structure that cannot be meaningfully distilled into primitive attributes or expressed declaratively as HTML child elements. In these cases a complex type property is acceptable.
 
-A component qualifies as a Data Element when **all** of the following are true:
+A component qualifies as a Data Element when **all** the following are true:
 
 1. The component renders a **data structure** (arrays, series, matrices) rather than composable UI content.
-2. The data **cannot be represented** with a reasonable number of primitive attributes or slotted children.
+2. The data **is not representable** using a reasonable number of primitive attributes or slotted children.
 3. The component is a **leaf node** -- it does not compose other application-level elements.
 
 ```html
@@ -146,6 +146,6 @@ export class Sparkline extends LitElement implements DataElement<number[]> {
 
 <nve-alert status="warning">
   <p nve-text="relaxed">
-    Warning: only use <code>DataElement</code> for data structures that have no reasonable declarative HTML representation. If content can be expressed with primitive attributes, slots, or child elements, prefer those approaches.
+    Warning: only use <code>DataElement</code> for data structures that have no reasonable declarative HTML representation. If primitive attributes, slots, or child elements can represent the content, prefer those approaches.
   </p>
 </nve-alert>
