@@ -306,3 +306,9 @@ pseudorandomized
 esm
 ESM
 Sparkline
+declaratively
+implement
+implements
+minimum
+maximum
+magnitude
