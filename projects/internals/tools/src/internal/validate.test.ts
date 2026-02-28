@@ -36,6 +36,13 @@ const elements: ProjectElement[] = [
       metadata: { entrypoint: '@nvidia-elements/core/grid' },
       attributes: [{ name: 'width', type: { text: `number` } }]
     } as ProjectElement['manifest']
+  },
+  {
+    name: 'nve-sparkline',
+    manifest: {
+      metadata: { entrypoint: '@nvidia-elements/core/sparkline' },
+      attributes: [{ name: 'data', type: { text: `number[]` } }]
+    } as ProjectElement['manifest']
   }
 ];
 
@@ -113,6 +120,12 @@ describe('validateTemplate', () => {
     const template = '<nve-grid-column width="100">hello there</nve-grid-column>';
     const result = validateTemplate(template, elements);
     expect(result).toBe('<nve-grid-column width="100">hello there</nve-grid-column>');
+  });
+
+  it('should allow array-like attribute values for array-typed attributes', () => {
+    const template = '<nve-sparkline data="[5, -3, 2, -1, 4, 0, 3]"></nve-sparkline>';
+    const result = validateTemplate(template, elements);
+    expect(result).toBe('<nve-sparkline data="[5, -3, 2, -1, 4, 0, 3]"></nve-sparkline>');
   });
 
   it('should allow boolean type attributes', () => {
