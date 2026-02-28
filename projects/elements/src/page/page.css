@@ -123,6 +123,10 @@ slot {
 ::slotted(nve-toolbar) {
   --border-radius: 0;
   --box-shadow: none;
+}
+
+::slotted(nve-toolbar[slot='subheader']) ::slotted(nve-toolbar[slot='subfooter']),
+::slotted(nve-toolbar[slot='footer']) {
   height: fit-content;
 }
 
