@@ -10,6 +10,9 @@ import reservedEventNames from '../local/reserved-event-names.js';
 import statelessProperty from '../local/stateless-property.js';
 import requiredCssParts from '../local/required-css-parts.js';
 import noInvalidCssParts from '../local/no-invalid-css-parts.js';
+import requireComponentMetadata from '../local/require-component-metadata.js';
+import requireInternalHost from '../local/require-internal-host.js';
+import requireElementDefinitions from '../local/require-element-definitions.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -52,7 +55,10 @@ export const litConfig = [
           'reserved-event-names': reservedEventNames,
           'stateless-property': statelessProperty,
           'required-css-parts': requiredCssParts,
-          'no-invalid-css-parts': noInvalidCssParts
+          'no-invalid-css-parts': noInvalidCssParts,
+          'require-component-metadata': requireComponentMetadata,
+          'require-internal-host': requireInternalHost,
+          'require-element-definitions': requireElementDefinitions
         }
       }
     },
@@ -116,7 +122,10 @@ export const litConfig = [
       'local/reserved-event-names': ['error'],
       'local/stateless-property': ['error'],
       'local/required-css-parts': ['error'],
-      'local/no-invalid-css-parts': ['error']
+      'local/no-invalid-css-parts': ['error'],
+      'local/require-component-metadata': ['error'],
+      'local/require-internal-host': ['error'],
+      'local/require-element-definitions': ['error']
     }
   }
 ];
