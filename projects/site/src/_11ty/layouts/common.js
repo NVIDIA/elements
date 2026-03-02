@@ -117,9 +117,13 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/about/deprecations/') ? 'highlighted selected' : ''}><a href="docs/about/deprecations/">Deprecations</a></nve-tree-node>
   </nve-tree-node>
   
-  <nve-tree-node ${data.page.url.includes('/docs/integrations/') || data.page.url.includes('/starters/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/integrations/') || data.page.url.includes('/starters/') || data.page.url.includes('/docs/cli/') || data.page.url.includes('/docs/mcp/') || data.page.url.includes('/docs/lint/') || data.page.url.includes('/docs/testing/') ? 'expanded' : ''}>
     <a href="docs/integrations/installation/">Integrations</a>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/installation/') ? 'highlighted selected' : ''}><a href="docs/integrations/installation/">Installation</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'highlighted selected' : ''}><a href="docs/mcp/">MCP</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'highlighted selected' : ''}><a href="docs/cli/">CLI</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'highlighted selected' : ''}><a href="docs/lint/">Lint</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/testing/' ? 'highlighted selected' : ''}><a href="docs/testing/">Testing</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted selected' : ''}><a href="docs/integrations/angular/">Angular</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'highlighted selected' : ''}><a href="docs/integrations/bundles/">Bundles</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/extensions/') ? 'highlighted selected' : ''}><a href="docs/integrations/extensions/">Extensions</a></nve-tree-node>
@@ -302,14 +306,6 @@ export const renderDocsNav = data => /* html */ `
     Markdown
     <nve-tree-node ${data.page.url.includes('/docs/markdown/markdown/') ? 'highlighted selected' : ''}><a href="docs/markdown/markdown/">Markdown</a></nve-tree-node>
   </nve-tree-node> -->
-
-  <nve-tree-node ${data.page.url.includes('cli') || data.page.url.includes('mcp') || data.page.url.includes('lint') || data.page.url.includes('testing') ? 'expanded' : ''}>
-    <a href="docs/cli/">Tools</a>
-    <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'highlighted selected' : ''}><a href="docs/cli/" nve-layout="row align:vertical-center gap:xs">CLI <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'highlighted selected' : ''}><a href="docs/mcp/" nve-layout="row align:vertical-center gap:xs">MCP <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'highlighted selected' : ''}><a href="docs/lint/" nve-layout="row align:vertical-center gap:xs">Lint <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/testing/' ? 'highlighted selected' : ''}><a href="docs/testing/">Testing</a></nve-tree-node>
-  </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/markdown/') ? 'expanded' : ''}>
     <a href="docs/markdown/">Markdown</a>
