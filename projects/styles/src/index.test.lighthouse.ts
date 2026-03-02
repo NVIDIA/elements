@@ -16,23 +16,23 @@ describe('lighthouse report', () => {
   });
 
   test('layout.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['layout.css'].kb).toBeLessThan(1.8);
+    expect(report.payload.css.requests['layout.css']!.kb).toBeLessThan(1.8);
   });
 
   test('typography.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['typography.css'].kb).toBeLessThan(1.65);
+    expect(report.payload.css.requests['typography.css']!.kb).toBeLessThan(1.65);
   });
 
   test('view-transitions.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['view-transitions.css'].kb).toBeLessThan(1);
+    expect(report.payload.css.requests['view-transitions.css']!.kb).toBeLessThan(1);
   });
 
   test('labs/layout-container.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['layout-container.css'].kb).toBeLessThan(1.93);
+    expect(report.payload.css.requests['layout-container.css']!.kb).toBeLessThan(1.93);
   });
 
   test('labs/layout-viewport.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['layout-viewport.css'].kb).toBeLessThan(1.7);
+    expect(report.payload.css.requests['layout-viewport.css']!.kb).toBeLessThan(1.7);
   });
 });
 
@@ -47,6 +47,6 @@ describe('lighthouse bundle report', () => {
   });
 
   test('bundles/index.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['index.css'].kb).toBeLessThan(3.1);
+    expect(report.payload.css.requests['index.css']!.kb).toBeLessThan(3.1);
   });
 });
