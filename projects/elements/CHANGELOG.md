@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.61.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.0...@nvidia-elements/core-v1.61.1) (2026-03-02)
+
+
+### Bug Fixes
+
+* **elements:** page toolbar alignment ([0fc73e0](https://github.com/NVIDIA/elements/commit/0fc73e0cecded1ec92eefc383a2ac06af214ca26))
+
 ## [@nvidia-elements/core-v1.61.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.60.6...@nvidia-elements/core-v1.61.0) (2026-02-27)
 
 
