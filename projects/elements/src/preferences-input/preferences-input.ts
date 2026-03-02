@@ -3,7 +3,7 @@ import { property } from 'lit/decorators/property.js';
 import { I18nController, useStyles } from '@nvidia-elements/core/internal';
 import { state } from 'lit/decorators/state.js';
 import { FormControlMixin } from '@nvidia-elements/forms/mixin';
-import type { IconName } from '@nvidia-elements/core/icon';
+import { type IconName, Icon } from '@nvidia-elements/core/icon';
 import { Control } from '@nvidia-elements/core/forms';
 import { Divider } from '@nvidia-elements/core/divider';
 import { Menu, MenuItem } from '@nvidia-elements/core/menu';
@@ -86,6 +86,7 @@ export class PreferencesInput extends FormControlMixin<typeof LitElement, Prefer
   static elementDefinitions = {
     [Control.metadata.tag]: Control,
     [Divider.metadata.tag]: Divider,
+    [Icon.metadata.tag]: Icon,
     [Menu.metadata.tag]: Menu,
     [MenuItem.metadata.tag]: MenuItem,
     [Switch.metadata.tag]: Switch
