@@ -17,6 +17,7 @@ import { Menu, MenuItem } from '@nvidia-elements/core/menu';
 import { Dropdown } from '@nvidia-elements/core/dropdown';
 import { Tag } from '@nvidia-elements/core/tag';
 import { Icon } from '@nvidia-elements/core/icon';
+import { Checkbox } from '@nvidia-elements/core/checkbox';
 import styles from './combobox.css?inline';
 
 /**
@@ -67,6 +68,7 @@ export class Combobox extends Control implements ContainerElement {
   };
 
   static elementDefinitions = {
+    [Checkbox.metadata.tag]: Checkbox,
     [Icon.metadata.tag]: Icon,
     [Dropdown.metadata.tag]: Dropdown,
     [Menu.metadata.tag]: Menu,
