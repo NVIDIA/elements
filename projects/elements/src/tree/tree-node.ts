@@ -17,6 +17,9 @@ import {
   typeSSR,
   useStyles
 } from '@nvidia-elements/core/internal';
+import { IconButton } from '@nvidia-elements/core/icon-button';
+import { Icon } from '@nvidia-elements/core/icon';
+import { Checkbox } from '@nvidia-elements/core/checkbox';
 import type { Tree } from './tree.js';
 import styles from './tree-node.css?inline';
 import { updateNodeSelection } from './utils.js';
@@ -124,6 +127,12 @@ export class TreeNode extends LitElement {
     tag: 'nve-tree-node',
     version: '0.0.0',
     parents: ['nve-tree', 'nve-tree-node']
+  };
+
+  static elementDefinitions = {
+    [IconButton.metadata.tag]: IconButton,
+    [Icon.metadata.tag]: Icon,
+    [Checkbox.metadata.tag]: Checkbox
   };
 
   static styles = useStyles([styles]);

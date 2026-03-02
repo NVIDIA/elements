@@ -4,6 +4,8 @@ import { state } from 'lit/decorators/state.js';
 import { useStyles, I18nController } from '@nvidia-elements/core/internal';
 import { Button } from '@nvidia-elements/core/button';
 import { Icon } from '@nvidia-elements/core/icon';
+import { Toast } from '@nvidia-elements/core/toast';
+import { Tooltip } from '@nvidia-elements/core/tooltip';
 import styles from './copy-button.css?inline';
 
 /**
@@ -59,7 +61,9 @@ export class CopyButton extends Button {
   };
 
   static elementDefinitions = {
-    [Icon.metadata.tag]: Icon
+    [Icon.metadata.tag]: Icon,
+    [Toast.metadata.tag]: Toast,
+    [Tooltip.metadata.tag]: Tooltip
   };
 
   // todo
