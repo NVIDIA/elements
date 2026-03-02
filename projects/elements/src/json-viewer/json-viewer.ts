@@ -47,7 +47,7 @@ export class JSONViewer extends LitElement {
 
   render() {
     return html`
-    <div class=${classMap(this.#classMap)}>
+    <div internal-host class=${classMap(this.#classMap)}>
       <slot @slotchange=${this.#slotchange} hidden></slot>
       ${Object.entries(this.value)
         .filter(v => v[1] !== null)

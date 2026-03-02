@@ -42,7 +42,7 @@ export class ProgressBar extends LitElement {
     };
 
     return html`
-      <progress .max=${this.max as number} .value=${this.value === undefined ? (100 as number) : (this.value as number)} class=${classMap(classes)}></progress>
+      <progress internal-host .max=${this.max as number} .value=${this.value === undefined ? (100 as number) : (this.value as number)} class=${classMap(classes)}></progress>
     `;
   }
 }
