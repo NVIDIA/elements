@@ -4,6 +4,9 @@ import importPlugin from 'eslint-plugin-import';
 import jsdoc from 'eslint-plugin-jsdoc';
 import deadCode from '../local/dead-code.js';
 import exampleMetadata from '../local/example-metadata.js';
+import exampleNaming from '../local/example-naming.js';
+import requireFixtureCleanup from '../local/require-fixture-cleanup.js';
+import requireElementStable from '../local/require-element-stable.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -38,7 +41,10 @@ const config = {
     'local-typescript': {
       rules: {
         'no-dead-code': deadCode,
-        'example-metadata': exampleMetadata
+        'example-metadata': exampleMetadata,
+        'example-naming': exampleNaming,
+        'require-fixture-cleanup': requireFixtureCleanup,
+        'require-element-stable': requireElementStable
       }
     }
   },
@@ -50,6 +56,7 @@ const config = {
     '@typescript-eslint/no-floating-promises': ['error'],
     '@typescript-eslint/no-explicit-any': ['error'],
     '@typescript-eslint/explicit-member-accessibility': ['error', { accessibility: 'no-public' }],
+    '@typescript-eslint/switch-exhaustiveness-check': ['error', { requireDefaultForNonUnion: false }],
     'no-restricted-syntax': [
       'error',
       {
@@ -109,9 +116,17 @@ export const browserTypescriptConfig = [
     }
   },
   {
+    files: [...tests],
+    rules: {
+      'local-typescript/require-fixture-cleanup': ['error'],
+      'local-typescript/require-element-stable': ['off'] // temporarily disabled, will enable in followup
+    }
+  },
+  {
     files: ['**/*.examples.ts'],
     rules: {
-      'local-typescript/example-metadata': ['error']
+      'local-typescript/example-metadata': ['error'],
+      'local-typescript/example-naming': ['error']
     }
   }
 ];
@@ -136,9 +151,17 @@ export const nodeTypescriptConfig = [
     }
   },
   {
+    files: [...tests],
+    rules: {
+      'local-typescript/require-fixture-cleanup': ['error'],
+      'local-typescript/require-element-stable': ['off'] // temporarily disabled, will enable in followup
+    }
+  },
+  {
     files: ['**/*.examples.ts'],
     rules: {
-      'local-typescript/example-metadata': ['error']
+      'local-typescript/example-metadata': ['error'],
+      'local-typescript/example-naming': ['error']
     }
   }
 ];
