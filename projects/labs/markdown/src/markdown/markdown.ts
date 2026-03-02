@@ -145,7 +145,7 @@ export class Markdown extends LitElement {
 
     // Lazy-load markdown-it instance only when needed
     if (!this.#markdownIt) {
-      this.#markdownIt = new this.#MarkdownItConstructor(CONFIG);
+      this.#markdownIt = new this.#MarkdownItConstructor!(CONFIG);
     }
 
     try {
