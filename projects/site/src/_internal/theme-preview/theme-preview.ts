@@ -315,6 +315,8 @@ export class ThemePreview extends LitElement {
       case 'high-contrast':
         this.setAttribute('nve-theme', `root light ${value}`);
         break;
+      case 'light':
+      case 'dark':
       default:
         this.setAttribute('nve-theme', `root ${value}`);
         break;
