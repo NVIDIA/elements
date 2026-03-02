@@ -6,7 +6,7 @@ import { attachInternals, useStyles } from '@nvidia-elements/core/internal';
 
 import type * as monaco from '@nvidia-elements/monaco';
 import type { Monaco } from '@nvidia-elements/monaco';
-import type { MonacoEditor } from '@nvidia-elements/monaco/editor';
+import { MonacoEditor } from '@nvidia-elements/monaco/editor';
 
 import {
   toHoveredLineDecorations,
@@ -71,6 +71,10 @@ export class MonacoProblems extends LitElement {
   static readonly metadata = {
     tag: 'nve-monaco-problems',
     version: '0.0.0'
+  };
+
+  static elementDefinitions = {
+    [MonacoEditor.metadata.tag]: MonacoEditor
   };
 
   @property({ type: Array, hasChanged: hasProblemsChanged })
