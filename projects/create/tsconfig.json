@@ -14,7 +14,11 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "useDefineForClassFields": false,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true
   },
   "include": ["src/**/*.ts"]
 }
