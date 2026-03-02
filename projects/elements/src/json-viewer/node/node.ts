@@ -68,7 +68,7 @@ export class JSONNode extends LitElement {
   static styles = useStyles([styles]);
 
   render() {
-    return html`<div class=${classMap(this.#classMap)}>
+    return html`<div internal-host class=${classMap(this.#classMap)}>
     ${
       this.#isArray || this.#isObject
         ? html`

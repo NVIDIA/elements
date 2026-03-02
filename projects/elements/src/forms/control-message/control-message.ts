@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
+import { Icon } from '@nvidia-elements/core/icon';
 import { type ValidityStateError } from '../utils/types.js';
 import styles from './control-message.css?inline';
 
@@ -42,6 +43,10 @@ export class ControlMessage extends LitElement {
   static readonly metadata = {
     tag: 'nve-control-message',
     version: '0.0.0'
+  };
+
+  static elementDefinitions = {
+    [Icon.metadata.tag]: Icon
   };
 
   @hostAttr() slot = 'messages';
