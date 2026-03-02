@@ -6,8 +6,13 @@
  * Finds on average 57% of WCAG issues automatically
  * https://github.com/dequelabs/axe-core
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const axeGlobal = globalThis as any as {
+  axe: { run: (selectors: string[], config: object) => Promise<{ violations: unknown[] }> };
+};
+
 export async function runAxe(selectors: string[], config = {}) {
-  return await globalThis.axe.run(selectors, {
+  return await axeGlobal.axe.run(selectors, {
     rules: {
       // axe does not support ElementInternals AOM yet https://github.com/dequelabs/axe-core/issues/4259
       'aria-prohibited-attr': { enabled: false }
