@@ -803,18 +803,6 @@ export const ContentVisibilityCSSAnchor = {
   `
 };
 
-export function sortStringKeys<T>(list: T[], key: string, sortType: 'none' | 'ascending' | 'descending') {
-  if (sortType === 'ascending') {
-    return list.sort((a: {}, b: {}) => a[key].localeCompare(b[key]));
-  }
-
-  if (sortType === 'descending') {
-    return list.sort((a: {}, b: {}) => a[key].localeCompare(b[key])).reverse();
-  }
-
-  return list;
-}
-
 class RowSortDemo extends LitElement {
   @state() private sort: 'none' | 'ascending' | 'descending' = 'none';
 
