@@ -20,6 +20,11 @@ case "$FILE_PATH" in
   *.test.*|*/starters/*|*/404/*|*/vendor/*|*/changelog/*|*/icons/*|*/generated/*|*/dist/*|*/LICENSE*|*/CHANGELOG*) exit 0 ;;
 esac
 
+# Skip Claude plan files
+case "$FILE_PATH" in
+  */.claude/plans/*) exit 0 ;;
+esac
+
 # Run Vale on the specific file
 OUTPUT=$(cd "$CLAUDE_PROJECT_DIR" && config/vale/bin/vale --config .vale.ini "$FILE_PATH" 2>&1) || EXIT_CODE=$?
 
