@@ -1,4 +1,4 @@
-export function isObjectLiteral(item) {
+export function isObjectLiteral(item: unknown) {
   if (!item || typeof item !== 'object' || Array.isArray(item)) {
     return false;
   }

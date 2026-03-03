@@ -74,9 +74,9 @@ export class CSVExample extends FormControlMixin<typeof LitElement, CSVValue>(Li
   ];
 
   get #getCSV() {
-    const rows = this.value.trim().split('\n');
+    const rows = this.value!.trim().split('\n');
     return {
-      columns: rows[0].split(','),
+      columns: rows[0]!.split(','),
       rows: rows.slice(1).map(row => row.split(','))
     };
   }
@@ -97,8 +97,8 @@ export class CSVExample extends FormControlMixin<typeof LitElement, CSVValue>(Li
 
 customElements.get('ui-csv-grid') || customElements.define('ui-csv-grid', CSVExample);
 
-function csvStringValidator(value: string): ValidatorResult {
-  const message = isValidCSV(value);
+function csvStringValidator(value: unknown): ValidatorResult {
+  const message = isValidCSV(value as string);
   if (message !== true) {
     return { validity: { badInput: true }, message };
   } else {
@@ -112,11 +112,11 @@ function isValidCSV(csvString: string): true | string {
   }
 
   const lines = csvString.split('\n');
-  const firstLine = lines[0];
+  const firstLine = lines[0]!;
   const columnCount = (firstLine.match(/,/g) || []).length + 1;
 
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
+    const line = lines[i]!;
 
     // Skip empty lines
     if (line.trim().length === 0) {
@@ -126,7 +126,7 @@ function isValidCSV(csvString: string): true | string {
     // Check for unclosed quotes
     let inQuotes = false;
     for (let j = 0; j < line.length; j++) {
-      const char = line[j];
+      const char = line[j]!;
 
       if (char === '"') {
         // Check for escaped quotes

@@ -285,7 +285,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
           this.#internals?.setFormValue(`${this.value}`);
         } else if (isObjectLiteral(this.value)) {
           const formData = new FormData();
-          Object.entries(this.value)
+          Object.entries(this.value as Record<string, unknown>)
             .filter(([key]) => key !== 'value')
             .forEach(([key, value]) => {
               formData.set(`${this.name}-${key}`, `${value}`);
