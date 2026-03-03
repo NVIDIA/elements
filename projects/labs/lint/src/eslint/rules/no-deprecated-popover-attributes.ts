@@ -1,5 +1,7 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const DEPRECATED_POPOVER_ATTRIBUTES = {
   'nve-dialog': ['trigger', 'behavior-trigger'],
@@ -25,9 +27,9 @@ const rule = {
         'Unexpected use of deprecated popover attribute {{attribute}}. Use native HTML popover API instead.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         Object.entries(DEPRECATED_POPOVER_ATTRIBUTES).forEach(([tag, attributes]) => {
           if (node.name === tag) {
             attributes.forEach(attribute => {

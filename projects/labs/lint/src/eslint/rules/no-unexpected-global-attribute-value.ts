@@ -1,3 +1,4 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import {
@@ -8,6 +9,7 @@ import {
   recommendedNveTextValue,
   recommendedNveLayoutValue
 } from '../internals/attributes.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 // also used in @internals/metadata, these are values that often confuse agents due to complexity in playground template generation within the same context window
 export function isComplexAttributeValue(value: string) {
@@ -47,9 +49,9 @@ const rule = {
       ['suggest-replace-attribute-value']: 'Replace "{{value}}" with "{{alternative}}"'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const textAttr = findAttr(node, 'nve-text');
         if (textAttr) {
           const value = textAttr.value?.value ?? '';
@@ -92,7 +94,7 @@ const rule = {
           const alternative = recommendedNveLayoutValue(value, invalidSymbols);
           if (alternative !== value) {
             const layoutValidValues = SIMPLE_NVE_LAYOUT_VALUES.filter(
-              v => !invalidSymbols.some(symbol => v.includes(symbol))
+              v => !invalidSymbols.some((symbol: string) => v.includes(symbol))
             );
             context.report({
               node: layoutAttr,
@@ -127,7 +129,7 @@ const rule = {
         const displayAttr = findAttr(node, 'nve-display');
         if (displayAttr) {
           const values = displayAttr.value?.value?.split(' ') ?? [];
-          const value = values.find(value => !VALID_NVE_DISPLAY_VALUES.has(value));
+          const value = values.find((value: string) => !VALID_NVE_DISPLAY_VALUES.has(value));
           const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
           if (value && !isValueBinding) {
             context.report({

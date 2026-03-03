@@ -1,6 +1,8 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { isNVElement } from '../internals/utils.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 /**
  * Invoker attributes that apply only to button-type elements.
@@ -36,9 +38,9 @@ const rule = {
         'Unexpected use of "{{attribute}}" on <{{element}}>. Invoker attributes are only valid on button-type elements: {{validElements}}.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const tagName = node.name.toLowerCase();
 
         if (!isNVElement(tagName)) {
