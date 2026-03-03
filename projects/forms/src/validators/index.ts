@@ -21,8 +21,11 @@ export function valueSchemaValidator(value: unknown, element: FormControl): Vali
   return validateSchema(metadata.valueSchema, value);
 }
 
-export function requiredValidator<T>(value: T, element: FormControl & { required: boolean }): ValidatorResult {
-  if (element.required && (value === undefined || value === null || value === '')) {
+export function requiredValidator<T>(value: T, element: FormControl): ValidatorResult {
+  if (
+    (element as unknown as { required: boolean }).required &&
+    (value === undefined || value === null || value === '')
+  ) {
     return { validity: { valueMissing: true, valid: false }, message: 'This field is required' };
   }
   return { validity: { valid: true }, message: '' };
