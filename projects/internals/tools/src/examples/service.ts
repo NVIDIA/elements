@@ -14,9 +14,9 @@ export class ExamplesService {
     inputSchema: {},
     outputSchema: { type: 'string' }
   })
-  static async list(): Promise<{ id: string; summary: string }[] | string> {
+  static async list(): Promise<string> {
     const examples = await ExamplesServiceMetadata.getData();
-    return getPublicExamples('markdown', examples);
+    return getPublicExamples('markdown', examples) as string;
   }
 
   @tool({
@@ -42,7 +42,7 @@ export class ExamplesService {
       oneOf: [{ type: 'string' }, { type: 'object', additionalProperties: true }]
     }
   })
-  static async get({ id, format }: { id: string; format: 'markdown' | 'json' }): Promise<Example | string> {
+  static async get({ id, format }: { id: string; format: 'markdown' | 'json' }): Promise<Example | string | undefined> {
     const results = (await getPublicExamples('json', await ExamplesServiceMetadata.getData())) as Example[];
     const found = results.find(r => r.id.toLocaleLowerCase() === id.toLowerCase());
 

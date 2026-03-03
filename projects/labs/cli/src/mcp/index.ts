@@ -57,7 +57,7 @@ tools
   });
 
 prompts.forEach(prompt => {
-  const argsSchema = jsonSchemaToZod(prompt.argsSchema).shape;
+  const argsSchema = (jsonSchemaToZod(prompt.argsSchema) as ZodObject<{}>).shape;
   const config = { title: prompt.title, description: prompt.description, argsSchema };
   server.registerPrompt(prompt.name, config, async params => prompt.handler(params));
 });

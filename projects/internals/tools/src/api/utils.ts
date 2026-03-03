@@ -27,8 +27,8 @@ export function getPublicAPIs(
   }
 ): { elements: PartialAPIResult[]; attributes: PartialAPIResult[] } | string {
   const elementsResult = metadata.data.elements
-    .filter(e => !e.manifest?.deprecated && e.manifest.description)
-    .map(e => ({ name: e.name, description: e.manifest.description, behavior: e.manifest.metadata?.behavior ?? '' }));
+    .filter(e => !e.manifest?.deprecated && e.manifest?.description)
+    .map(e => ({ name: e.name, description: e.manifest!.description, behavior: e.manifest!.metadata?.behavior ?? '' }));
   const elementsMarkdown = elementsResult.map(e => {
     const behavior = e.behavior ? ` (${e.behavior})` : '';
     return `- **${e.name}${behavior}** ${wrapText(e.description)}`;
@@ -44,13 +44,15 @@ export function getPublicAPIs(
   } else if (format === 'json') {
     return { elements: elementsResult, attributes: attributesResult };
   }
+  return '';
 }
 
 export async function searchPublicAPIs(query: string, config: { limit?: number } = { limit: 100 }) {
-  const data = (await ApiService.search(query)).map(r => {
-    if ((r as Element).manifest) {
-      (r as Element).changelog = undefined;
-      (r as Element).manifest.metadata.markdown = undefined;
+  const data = (await ApiService.search(query)).map((r: Element | Attribute) => {
+    const el = r as Element;
+    if (el.manifest) {
+      el.changelog = undefined;
+      el.manifest.metadata.markdown = '';
     }
     return r;
   });
@@ -99,9 +101,12 @@ export async function getLatestPublishedVersions(projects: Project[]): Promise<E
           });
       })
     );
-    versions = packageFiles.reduce((acc: Record<string, string>, pkg) => ({ ...acc, [pkg.name]: pkg.version }), {});
+    versions = packageFiles.reduce(
+      (acc: Record<string, string>, pkg: { name: string; version: string }) => ({ ...acc, [pkg.name]: pkg.version }),
+      {}
+    ) as ElementVersions;
   }
-  return versions;
+  return versions!;
 }
 
 export function getPublishedPackageNames(projects: Project[]) {
@@ -110,7 +115,7 @@ export function getPublishedPackageNames(projects: Project[]) {
     .map(p => p.name);
 }
 
-export function getSemanticTokens(format: 'markdown' | 'json', tokens: Token[]) {
+export function getSemanticTokens(format: 'markdown' | 'json', tokens: Token[]): string | Token[] | undefined {
   const filteredTokens: Token[] = tokens
     .filter(
       token =>
@@ -137,4 +142,6 @@ ${filteredTokens.map(token => `| ${token.name} | ${token.value} | ${token.descri
   } else if (format === 'json') {
     return filteredTokens;
   }
+
+  return undefined;
 }

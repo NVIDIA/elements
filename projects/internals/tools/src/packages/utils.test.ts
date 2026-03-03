@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { searchChangelogs, findPublicAPIChangelog, limitChangelogVersions, getPackage } from './utils.js';
+import { searchChangelogs, findPublicAPIChangelog, limitChangelogVersions, getPackage, scopeOrder } from './utils.js';
 
 vi.mock('@internals/metadata', () => ({
   ApiService: { search: vi.fn() },
@@ -166,6 +166,23 @@ describe('findPublicAPIChangelog', () => {
 
     const result = await findPublicAPIChangelog('nve-button');
     expect(result).toBeUndefined();
+  });
+});
+
+describe('scopeOrder', () => {
+  it('should return -1 for @nvidia-elements/ packages', () => {
+    expect(scopeOrder('@nvidia-elements/core')).toBe(-1);
+    expect(scopeOrder('@nvidia-elements/themes')).toBe(-1);
+  });
+
+  it('should return 1 for @nvidia-elements/ packages', () => {
+    expect(scopeOrder('@nvidia-elements/forms')).toBe(1);
+    expect(scopeOrder('@nvidia-elements/code')).toBe(1);
+  });
+
+  it('should return 0 for unrecognized scopes', () => {
+    expect(scopeOrder('some-package')).toBe(0);
+    expect(scopeOrder('@other/package')).toBe(0);
   });
 });
 

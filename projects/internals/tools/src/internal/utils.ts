@@ -22,7 +22,7 @@ export function getElementImports(html: string, elements: Element[], lazy = fals
       .filter(element => html?.includes(`<${element.name}`))
       .filter(element => element.manifest?.deprecated !== 'true' && element.manifest?.metadata.entrypoint)
       .map(element => {
-        const path = `${element.manifest.metadata.entrypoint}/define.js`;
+        const path = `${element.manifest!.metadata.entrypoint}/define.js`;
         return lazy ? `import('${path}');` : `import '${path}';`;
       })
   ];
