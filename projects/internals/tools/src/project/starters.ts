@@ -104,7 +104,7 @@ export const startersData = {
 };
 
 /* istanbul ignore next -- @preserve */
-export async function archiveStarter(projectDir, outDir) {
+export async function archiveStarter(projectDir: string, outDir: string) {
   await copyProject(projectDir);
   await createCursorConfig(projectDir);
   await createClaudeConfig(projectDir);
@@ -120,7 +120,7 @@ export async function archiveStarter(projectDir, outDir) {
 }
 
 /* istanbul ignore next -- @preserve */
-async function zipProject(outDir) {
+async function zipProject(outDir: string) {
   const output = createWriteStream(`${outDir}.zip`);
   output.on('error', err => console.error('Error writing to zip file:', err));
 
@@ -133,7 +133,7 @@ async function zipProject(outDir) {
 }
 
 /* istanbul ignore next -- @preserve */
-async function copyProject(projectDir) {
+async function copyProject(projectDir: string) {
   if (!existsSync(`dist/${projectDir}`)) {
     mkdirSync(`dist/${projectDir}`, { recursive: true });
   }
@@ -146,7 +146,7 @@ async function copyProject(projectDir) {
 }
 
 /* istanbul ignore next -- @preserve */
-async function createCursorConfig(projectDir) {
+async function createCursorConfig(projectDir: string) {
   const cursorConfig = {
     mcpServers: {
       elements: {
@@ -168,7 +168,7 @@ async function createCursorConfig(projectDir) {
 }
 
 /* istanbul ignore next -- @preserve */
-async function createClaudeConfig(projectDir) {
+async function createClaudeConfig(projectDir: string) {
   const claudeMCPConfig = {
     mcpServers: {
       elements: {
@@ -191,7 +191,7 @@ async function createClaudeConfig(projectDir) {
 }
 
 /* istanbul ignore next -- @preserve */
-async function createVSCodeConfig(projectDir) {
+async function createVSCodeConfig(projectDir: string) {
   const vscodeConfig = {
     'html.customData': [
       './node_modules/@nvidia-elements/styles/dist/data.html.json',
@@ -212,6 +212,9 @@ async function createVSCodeConfig(projectDir) {
 /* istanbul ignore next -- @preserve */
 export async function createCoreSkill(projectDir: string) {
   const skill = skills.find(skill => skill.name === 'elements');
+  if (!skill) {
+    throw new Error('Elements skill not found');
+  }
   const dist = `dist/${projectDir}/.claude/skills/${skill.name}`;
   if (!existsSync(dist)) {
     mkdirSync(dist, { recursive: true });
@@ -229,28 +232,31 @@ ${skill.context}`.trim()
 }
 
 /* istanbul ignore next -- @preserve */
-async function exportPackageFromWorkspace(projectDir) {
+async function exportPackageFromWorkspace(projectDir: string) {
   const REPO_WORKSPACE_DIR = '../../';
   const workspace = await readWorkspaceManifest(REPO_WORKSPACE_DIR);
   const catalogs = getCatalogsFromWorkspaceManifest(workspace);
   const manifest = await readProjectManifestOnly(projectDir);
   let exportable = await createExportableManifest(projectDir, manifest, { catalogs });
-  exportable = removeWireitScripts(exportable);
+  exportable = removeWireitScripts(
+    exportable as unknown as { scripts: Record<string, string>; wireit?: Record<string, { command: string }> }
+  );
   return exportable;
 }
 
-export function removeWireitScripts(exportable) {
+export function removeWireitScripts(exportable: {
+  scripts: Record<string, string>;
+  wireit?: Record<string, { command: string }>;
+}) {
   Object.keys(exportable.scripts)
-    .filter(key => exportable.scripts[key] === 'wireit' && exportable.wireit[key])
+    .filter(key => exportable.scripts[key] === 'wireit' && exportable.wireit?.[key])
     .forEach(key => {
-      exportable.scripts[key] = exportable.wireit[key].command;
+      exportable.scripts[key] = exportable.wireit![key]!.command;
 
-      if (exportable.scripts[key] && exportable.scripts[key].match(/playwright-lock '(.*?)'/g)) {
-        exportable.scripts[key] = exportable.scripts[key]
-          .match(/playwright-lock '(.*?)'/g)[0]
-          .replace('playwright-lock', '')
-          .replaceAll(`'`, '')
-          .trim();
+      const scriptValue = exportable.scripts[key];
+      if (scriptValue && scriptValue.match(/playwright-lock '(.*?)'/g)) {
+        const match = scriptValue.match(/playwright-lock '(.*?)'/g);
+        exportable.scripts[key] = (match?.[0] ?? '').replace('playwright-lock', '').replaceAll(`'`, '').trim();
       }
     });
   exportable.wireit = undefined;
@@ -261,6 +267,9 @@ export function removeWireitScripts(exportable) {
 export async function createStarter(starter: Starter, outDir: string = resolve(cwd())): Promise<Report> {
   try {
     const downloadPath = startersData[starter].zip;
+    if (!downloadPath) {
+      throw new Error(`No download URL for starter "${starter}"`);
+    }
     const archivePath = `${outDir}/${starter}.zip`;
     const extractedPath = `${outDir}/${starter}`;
     await downloadStarter(downloadPath, archivePath);
@@ -277,7 +286,7 @@ export async function createStarter(starter: Starter, outDir: string = resolve(c
   } catch (error) {
     return {
       create: {
-        message: `Failed to create starter: ${error.message}`,
+        message: `Failed to create starter: ${(error as Error).message}`,
         status: 'danger'
       }
     };
@@ -313,7 +322,7 @@ async function setupStarterGit(extractedDir: string) {
 }
 
 /* istanbul ignore next -- @preserve */
-export function isGitRepository(directoryPath) {
+export function isGitRepository(directoryPath: string) {
   // Check if .git directory exists directly in the given path
   const gitDirPath = join(directoryPath, '.git');
   if (existsSync(gitDirPath)) {

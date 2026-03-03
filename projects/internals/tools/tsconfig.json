@@ -16,6 +16,9 @@
     "useDefineForClassFields": false,
     "isolatedModules": true,
     "allowImportingTsExtensions": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
     "paths": {
       "@internals/tools": ["./src/index.js"],
       "@internals/tools/*": ["./src/*"],

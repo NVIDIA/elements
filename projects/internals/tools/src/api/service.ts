@@ -109,22 +109,24 @@ export class ApiService {
     const results = await Promise.all(
       nameList.map(async name => {
         const matches = await searchPublicAPIs(name, { limit: 1 });
-        return matches.find(r => r.name === name) ?? name;
+        return matches.find((r: Element | Attribute) => r.name === name) ?? name;
       })
     );
 
-    const found = results.filter((r): r is Element | Attribute => typeof r !== 'string').slice(0, MAX_RESULT_LIMIT);
-    const notFound = results.filter((r): r is string => typeof r === 'string');
+    const found = results
+      .filter((r: Element | Attribute | string): r is Element | Attribute => typeof r !== 'string')
+      .slice(0, MAX_RESULT_LIMIT);
+    const notFound = results.filter((r: Element | Attribute | string): r is string => typeof r === 'string');
 
     if (found.length === 0) {
       return `No components or APIs found matching "${notFound.join('", "')}".\n\n${listToolHelpfulTip}`;
     }
 
     if (format === 'json') {
-      return found.map(r => ({ ...r, markdown: undefined }));
+      return found.map((r: Element | Attribute) => ({ ...r, markdown: undefined }));
     }
 
-    const markdown = found.map(r => r.markdown).join('\n\n---\n\n');
+    const markdown = found.map((r: Element | Attribute) => r.markdown).join('\n\n---\n\n');
     const notFoundNote = notFound.length > 0 ? `\n\n---\n\nNot found: ${notFound.join(', ')}` : '';
     return markdown + notFoundNote;
   }
@@ -223,7 +225,7 @@ export class ApiService {
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ name: string; description: string }[] | string> {
     const apis = await MetadataApiService.getData();
-    return getSemanticTokens(format, apis.data.tokens);
+    return getSemanticTokens(format, apis.data.tokens) ?? '';
   }
 
   static async search({
@@ -241,7 +243,7 @@ export class ApiService {
     }
 
     return format === 'json'
-      ? results.map(r => ({ ...r, markdown: undefined }))
-      : results.map(r => r.markdown).join('\n\n---\n\n');
+      ? results.map((r: Element | Attribute) => ({ ...r, markdown: undefined }))
+      : results.map((r: Element | Attribute) => r.markdown).join('\n\n---\n\n');
   }
 }

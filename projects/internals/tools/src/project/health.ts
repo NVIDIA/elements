@@ -6,7 +6,7 @@ import { getPackageJson } from '../internal/node.js';
 
 export async function getHealthReport(cwd: string, type: 'application' | 'library') {
   const packageJson = getPackageJson(cwd);
-  const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
+  const projects = (await ProjectsService.getData()).data.filter((p: { changelog: string }) => p.changelog);
   const currentVersions = await getLatestPublishedVersions(projects);
 
   let report: Report = {
@@ -39,10 +39,11 @@ export async function getVersionHealth(packageData: PackageData, currentVersions
   const report: { [key: string]: { version: string; latest: string; status: 'success' | 'warning' | 'danger' } } = {};
 
   Object.entries(projectDependencies).forEach(([packageName, packageVersion]) => {
+    const versions = currentVersions as unknown as Record<string, string>;
     report[packageName] = {
       version: packageVersion,
-      latest: currentVersions[packageName],
-      status: getVersionStatus(packageVersion, currentVersions[packageName])
+      latest: versions[packageName]!,
+      status: getVersionStatus(packageVersion, versions[packageName]!)
     };
   });
   return report;
@@ -70,9 +71,9 @@ export function getVersionNum(value: string): { major: number; minor: number; pa
     .split('.')
     .map(s => parseFloat(s));
   return {
-    major: version[0],
-    minor: version[1],
-    patch: version[2]
+    major: version[0]!,
+    minor: version[1]!,
+    patch: version[2]!
   };
 }
 

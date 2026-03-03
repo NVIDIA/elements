@@ -8,7 +8,7 @@ export async function getNPMClient() {
   return hasPNPM ? 'pnpm' : hasNPM ? 'npm' : null;
 }
 
-export async function isCommandAvailable(command) {
+export async function isCommandAvailable(command: string) {
   return new Promise(resolve => {
     const child = spawn(command, ['--version']);
     child.on('error', () => resolve(false));
