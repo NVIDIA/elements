@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.61.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.1...@nvidia-elements/core-v1.61.2) (2026-03-03)
+
+
+### Bug Fixes
+
+* **elements:** lint errors and missing scope registry tags ([6a572ad](https://github.com/NVIDIA/elements/commit/6a572ade8353c4f0e205d4c9c6e7db69f41363f2))
+
 ## [@nvidia-elements/core-v1.61.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.0...@nvidia-elements/core-v1.61.1) (2026-03-02)
 
 
