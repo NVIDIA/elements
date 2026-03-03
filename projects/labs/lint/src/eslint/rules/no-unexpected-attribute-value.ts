@@ -1,6 +1,8 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { getElementAttribute, getRecommendedValue } from '../internals/element-attributes.js';
 import { isNVElement } from '../internals/utils.js';
+import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
 const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
 
@@ -23,9 +25,9 @@ const rule = {
       ['suggest-replace-attribute-value']: 'Replace "{{value}}" with "{{alternative}}"'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const tagName = node.name;
 
         if (!isNVElement(tagName)) {
@@ -39,8 +41,8 @@ const rule = {
               attr.key?.value &&
               !VALUE_BINDINGS.some(binding => attr.value?.value?.includes(binding))
           )
-          .forEach(attr => {
-            const attributeName = attr.key.value;
+          .forEach((attr: HtmlAttribute) => {
+            const attributeName = attr.key!.value;
             const value = attr.value?.value ?? '';
             const attrInfo = getElementAttribute(tagName, attributeName);
 
@@ -55,9 +57,9 @@ const rule = {
                         value,
                         alternative
                       },
-                      fix: fixer => {
+                      fix: (fixer: Rule.RuleFixer) => {
                         return fixer.replaceText(
-                          attr,
+                          attr as unknown as Rule.Node,
                           `${attributeName}=${attr.startWrapper?.value ?? '"'}${alternative}${attr.endWrapper?.value ?? '"'}`
                         );
                       }

@@ -20,7 +20,8 @@ export function hasTemplateSyntax(node: HtmlNode): boolean {
   function checkNodeForTemplate(n: HtmlNode): boolean {
     // Check text content
     if (n.type === 'Text' && n.value) {
-      if (templatePatterns.some(pattern => pattern.test(n.value))) {
+      const text = n.value;
+      if (templatePatterns.some(pattern => pattern.test(text))) {
         return true;
       }
     }
@@ -49,7 +50,7 @@ export function parseSelector(selector: string): { tag: string; attrs?: Record<s
     return { tag: selector };
   }
 
-  const tag = match[1];
+  const tag = match[1]!;
   const attrString = match[2];
 
   if (!attrString) {
@@ -65,7 +66,7 @@ export function parseSelector(selector: string): { tag: string; attrs?: Record<s
   return {
     tag,
     attrs: {
-      [attrMatch[1]]: attrMatch[2]
+      [attrMatch[1]!]: attrMatch[2]!
     }
   };
 }

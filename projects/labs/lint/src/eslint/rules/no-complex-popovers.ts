@@ -1,5 +1,7 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { hasTemplateSyntax, type HtmlNode } from '../internals/utils.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const POPOVER_MAX_NODES: Record<string, number> = {
   'nve-drawer': 100,
@@ -68,9 +70,9 @@ const rule = {
         '<{{child}}> should not be used inside <{{element}}>. Popover content should be simple for accessibility and UX.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const tagName = node.name.toLowerCase();
         const maxNodes = POPOVER_MAX_NODES[tagName];
         if (maxNodes === undefined) return;

@@ -1,4 +1,6 @@
+import type { Rule } from 'eslint';
 import { theme } from '@nvidia-elements/themes';
+import type { CssDeclarationNode } from '../rule-types.js';
 
 const rule = {
   meta: {
@@ -15,20 +17,19 @@ const rule = {
       ['deprecated-css-var']: 'Use of deprecated {{value}}. Use {{alternative}} instead.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return {
-      Declaration(node) {
+      Declaration(node: CssDeclarationNode) {
         // unknown-css-var
         const child = node.value.children
           ?.filter(child => child.name === 'var')
           ?.flatMap(child => child.children)
           ?.find(child => child?.name?.includes('--mlv'));
 
-        const deprecatedName = child?.name ? theme[child.name.replace('--mlv-', 'nve-')] : false;
-        if (deprecatedName) {
+        if (child?.name && theme[child.name.replace('--mlv-', 'nve-')]) {
           context.report({
             messageId: 'deprecated-css-var',
-            node: child,
+            node: child as unknown as Rule.Node,
             data: {
               value: child.name,
               alternative: child.name.replace('--mlv-', '--nve-')

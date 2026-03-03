@@ -1,4 +1,6 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const DEPRECATED_TAGS: Record<string, string> = {
   // v1
@@ -109,9 +111,9 @@ const rule = {
       ['unexpected-deprecated-tag']: 'Unexpected use of deprecated tag <{{tag}}>. Use <{{replacement}}> instead.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const replacement = DEPRECATED_TAGS[node.name];
         if (replacement) {
           context.report({

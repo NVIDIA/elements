@@ -1,42 +1,44 @@
+import type { Rule } from 'eslint';
 import { theme } from '@nvidia-elements/themes';
+import type { CssDeclarationNode } from '../rule-types.js';
 
 const spaceTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-space'))
-  .map(([id, value]: [string, string]) => ({
+  .map(([id, value]) => ({
     id,
     value: parseInt(value.replace('calc(var(--nve-ref-scale-space) * ', '').replace(')', '').replace('px', '')),
     name: `var(--${id})`
   }));
 
-const maxSpaceToken = spaceTokens.sort((a, b) => b.value - a.value)[0]; // 64
-const minSpaceToken = spaceTokens.sort((a, b) => a.value - b.value)[0]; // 1
+const maxSpaceToken = spaceTokens.sort((a, b) => b.value - a.value)[0]!;
+const minSpaceToken = spaceTokens.sort((a, b) => a.value - b.value)[0]!;
 
 const sizeTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-size'))
-  .map(([id, value]: [string, string]) => ({
+  .map(([id, value]) => ({
     id,
     value: parseInt(value.replace('calc(var(--nve-ref-scale-size) * ', '').replace(')', '').replace('px', '')),
     name: `var(--${id})`
   }));
 
-const maxSizeToken = sizeTokens.sort((a, b) => b.value - a.value)[0]; // 40
-const minSizeToken = sizeTokens.sort((a, b) => a.value - b.value)[0]; // 1
+const maxSizeToken = sizeTokens.sort((a, b) => b.value - a.value)[0]!;
+const minSizeToken = sizeTokens.sort((a, b) => a.value - b.value)[0]!;
 
 const fontSizeTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-font-size'))
-  .map(([id, value]: [string, string]) => ({
+  .map(([id, value]) => ({
     id,
     value: parseInt(value.replace('calc(var(--nve-ref-scale-text) * ', '').replace(')', '').replace('px', '')),
     name: `var(--${id})`
   }));
 
-const maxFontSizeToken = fontSizeTokens.sort((a, b) => b.value - a.value)[0]; // 50
-const minFontSizeToken = fontSizeTokens.sort((a, b) => a.value - b.value)[1]; // 12
+const maxFontSizeToken = fontSizeTokens.sort((a, b) => b.value - a.value)[0]!;
+const minFontSizeToken = fontSizeTokens.sort((a, b) => a.value - b.value)[1]!;
 
 const fontWeightTokens = [
   ...Object.entries(theme)
     .filter(([key]) => key.includes('nve-ref-font-weight'))
-    .map(([id, value]: [string, string]) => ({
+    .map(([id, value]) => ({
       value,
       name: `var(--${id})`
     })),
@@ -63,44 +65,40 @@ const fontWeightTokens = [
 ];
 
 const borderRadiusTokens = Object.entries(theme)
-  .filter(([key, value]: [string, string]) => key.includes('nve-ref-border-radius') && !value.includes('999'))
-  .map(([id, value]: [string, string]) => ({
+  .filter(([key, value]) => key.includes('nve-ref-border-radius') && !value.includes('999'))
+  .map(([id, value]) => ({
     id,
     value: parseInt(value.replace('calc(var(--nve-ref-scale-border-radius) * ', '').replace(')', '').replace('px', '')),
     name: `var(--${id})`
   }));
 
-const maxBorderRadiusToken = borderRadiusTokens.sort((a, b) => b.value - a.value)[0]; // 48
-const minBorderRadiusToken = borderRadiusTokens.sort((a, b) => a.value - b.value)[0]; // 0
+const maxBorderRadiusToken = borderRadiusTokens.sort((a, b) => b.value - a.value)[0]!;
+const minBorderRadiusToken = borderRadiusTokens.sort((a, b) => a.value - b.value)[0]!;
 
 const borderWidthTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-border-width'))
-  .map(([key, value]: [string, string]) => [
-    key,
-    parseInt(value.replace('calc(var(--nve-ref-scale-border-width) * ', '').replace(')', '').replace('px', ''))
-  ])
-  .map(([id, value]: [string, number]) => ({
-    id,
-    value,
-    name: `var(--${id})`
+  .map(([key, value]) => ({
+    id: key,
+    value: parseInt(value.replace('calc(var(--nve-ref-scale-border-width) * ', '').replace(')', '').replace('px', '')),
+    name: `var(--${key})`
   }));
 
-const maxBorderWidthToken = borderWidthTokens.sort((a, b) => b.value - a.value)[0]; // 4
-const minBorderWidthToken = borderWidthTokens.sort((a, b) => a.value - b.value)[0]; // 1
+const maxBorderWidthToken = borderWidthTokens.sort((a, b) => b.value - a.value)[0]!;
+const minBorderWidthToken = borderWidthTokens.sort((a, b) => a.value - b.value)[0]!;
 
 const lineHeightTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-font-line-height'))
-  .map(([id, value]: [string, string]) => ({
+  .map(([id, value]) => ({
     value: parseInt(value.replace('calc(var(--nve-ref-scale-line-height) * ', '').replace(')', '').replace('px', '')),
     name: `var(--${id})`
   }));
 
-const maxLineHeightToken = lineHeightTokens.sort((a, b) => b.value - a.value)[0];
-const minLineHeightToken = lineHeightTokens.sort((a, b) => a.value - b.value)[0];
+const maxLineHeightToken = lineHeightTokens.sort((a, b) => b.value - a.value)[0]!;
+const minLineHeightToken = lineHeightTokens.sort((a, b) => a.value - b.value)[0]!;
 
 const opacityTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-opacity'))
-  .map(([id, value]: [string, string]) => ({
+  .map(([id, value]) => ({
     value,
     name: `var(--${id})`
   }));
@@ -121,16 +119,16 @@ const rule = {
         'Unexpected use of {{value}}{{unit}} value for CSS {{property}}. Use {{alternate}} option instead.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return {
-      Declaration(node) {
+      Declaration(node: CssDeclarationNode) {
         const property = node.property;
         const propertyName = property.replace('--', '');
 
         // unexpected-css-value space
         if (propertyName.includes('margin') || propertyName.includes('gap')) {
           const child = node.value.children?.find(child => {
-            const value = parseInt(child.value);
+            const value = parseInt(child.value ?? '');
             const isDimension = child.type === 'Dimension';
             const isPixelUnit = child.unit === 'px';
             const isWithinSizeTokenRange = value <= maxSpaceToken.value && value >= minSpaceToken.value && value !== 1;
@@ -138,7 +136,7 @@ const rule = {
           });
 
           if (child) {
-            const alternate = spaceTokens.find(token => token.value === parseInt(child.value))?.name;
+            const alternate = spaceTokens.find(token => token.value === parseInt(child.value ?? ''))?.name;
             context.report({
               messageId: 'unexpected-css-value',
               node,
@@ -156,7 +154,7 @@ const rule = {
         // unexpected-css-value size
         if (propertyName === 'width' || propertyName === 'height') {
           const child = node.value.children?.find(child => {
-            const value = parseInt(child.value);
+            const value = parseInt(child.value ?? '');
             const isDimension = child.type === 'Dimension';
             const isPixelUnit = child.unit === 'px';
             const isWithinSizeTokenRange = value <= maxSizeToken.value && value >= minSizeToken.value;
@@ -164,7 +162,7 @@ const rule = {
           });
 
           if (child) {
-            const alternate = sizeTokens.find(token => token.value === parseInt(child.value))?.name;
+            const alternate = sizeTokens.find(token => token.value === parseInt(child.value ?? ''))?.name;
             context.report({
               messageId: 'unexpected-css-value',
               node,
@@ -182,14 +180,14 @@ const rule = {
         // unexpected-css-value font-size
         if (propertyName === 'font-size') {
           const child = node.value.children?.find(child => {
-            const value = parseInt(child.value);
+            const value = parseInt(child.value ?? '');
             const isDimension = child.type === 'Dimension';
             const isPixelUnit = child.unit === 'px';
             const isWithinFontSizeTokenRange = value <= maxFontSizeToken.value && value >= minFontSizeToken.value;
             return isDimension && isPixelUnit && isWithinFontSizeTokenRange;
           });
           if (child) {
-            const alternate = fontSizeTokens.find(token => token.value === parseInt(child.value))?.name;
+            const alternate = fontSizeTokens.find(token => token.value === parseInt(child.value ?? ''))?.name;
             context.report({
               messageId: 'unexpected-css-value',
               node,
@@ -228,7 +226,7 @@ const rule = {
         // unexpected-css-value line-height
         if (propertyName === 'line-height') {
           const child = node.value.children?.find(child => {
-            const value = parseInt(child.value);
+            const value = parseInt(child.value ?? '');
             const isDimension = child.type === 'Dimension';
             const isPixelUnit = child.unit === 'px';
             const isWithinLineHeightTokenRange = value <= maxLineHeightToken.value && value >= minLineHeightToken.value;
@@ -236,7 +234,7 @@ const rule = {
           });
 
           if (child) {
-            const alternate = lineHeightTokens.find(token => token.value === parseInt(child.value))?.name;
+            const alternate = lineHeightTokens.find(token => token.value === parseInt(child.value ?? ''))?.name;
             context.report({
               messageId: 'unexpected-css-value',
               node,
@@ -279,7 +277,7 @@ const rule = {
           let unit = '';
 
           const child = node.value.children?.find(child => {
-            const value = parseInt(child.value);
+            const value = parseInt(child.value ?? '');
             const isDimension = child.type === 'Dimension' && child.unit === 'px';
             const isNumber = child.type === 'Number' && child.unit === undefined;
             const isWithinBorderRadiusTokenRange =
@@ -288,8 +286,8 @@ const rule = {
           });
 
           if (child) {
-            value = child.value;
-            unit = child.unit;
+            value = child.value ?? '';
+            unit = child.unit ?? '';
           }
 
           if (node.property.startsWith('--')) {
@@ -318,7 +316,7 @@ const rule = {
         // unexpected-css-value border-width
         if (propertyName === 'border-width') {
           const child = node.value.children?.find(child => {
-            const value = parseInt(child.value);
+            const value = parseInt(child.value ?? '');
             const isDimension = child.type === 'Dimension';
             const isPixelUnit = child.unit === 'px';
             const isWithinBorderWidthTokenRange =
@@ -327,7 +325,7 @@ const rule = {
           });
 
           if (child) {
-            const alternate = borderWidthTokens.find(token => token.value === parseInt(child.value))?.name;
+            const alternate = borderWidthTokens.find(token => token.value === parseInt(child.value ?? ''))?.name;
             context.report({
               messageId: 'unexpected-css-value',
               node,
@@ -370,7 +368,7 @@ const rule = {
           );
 
           if (child) {
-            value = child.type === 'Hash' ? `#${child.value.trim()}` : child.name.trim();
+            value = child.type === 'Hash' ? `#${(child.value ?? '').trim()}` : child.name.trim();
             unit = child.type === 'Hash' ? '' : child.name.trim();
           }
 
