@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.4.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.4.0...@nvidia-elements/monaco-v1.4.1) (2026-03-03)
+
+
+### Bug Fixes
+
+* **monaco:** lint errors and missing scope registry tags ([0dd01c3](https://github.com/NVIDIA/elements/commit/0dd01c3ca5e1670acac5b18e46b37c246208632e))
+
 ## [@nvidia-elements/monaco-v1.4.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.3.2...@nvidia-elements/monaco-v1.4.0) (2025-12-10)
 
 
