@@ -142,17 +142,17 @@ export function loadTools(obj: any): ManagedToolMethod<unknown>[] {
         try {
           return { status: 'complete', message: '', result: await obj[name](...args) };
         } catch (e) {
-          return { status: 'error', message: e.message };
+          return { status: 'error', message: (e as Error).message };
         }
       };
       obj[toolName].metadata = obj[name].metadata;
       obj[toolName].metadata.command = `${obj.metadata.name}.${obj[name].metadata.command}`;
       obj[toolName].metadata.toolName = `${obj[toolName].metadata.command}`.replaceAll('.', '_').replaceAll('-', '_');
     });
-  return Array.from(methods).map((m: string) => obj[`tool_${m}`]);
+  return Array.from(methods).map(m => obj[`tool_${m as string}`]);
 }
 
-export function jsonSchemaToZod(schema: Schema) {
+export function jsonSchemaToZod(schema: Schema): z.ZodTypeAny {
   if (!schema) {
     return z.any();
   }
@@ -190,7 +190,7 @@ export function jsonSchemaToZod(schema: Schema) {
   if (Object.keys(propertiesSchema).length > 0 && Object.keys(patternPropertiesSchema).length > 0) {
     const baseSchema = z.object(propertiesSchema);
     const patternValues = Object.values(patternPropertiesSchema);
-    const patternValueSchema = patternValues.length > 0 ? patternValues[0] : z.any();
+    const patternValueSchema = patternValues.length > 0 ? patternValues[0]! : z.any();
     const patternSchema = z.record(z.string(), patternValueSchema);
     return z.intersection(baseSchema, patternSchema);
   }
@@ -201,12 +201,12 @@ export function jsonSchemaToZod(schema: Schema) {
 
   if (Object.keys(patternPropertiesSchema).length > 0) {
     const patternValues = Object.values(patternPropertiesSchema);
-    const patternValueSchema = patternValues.length > 0 ? patternValues[0] : z.any();
+    const patternValueSchema = patternValues.length > 0 ? patternValues[0]! : z.any();
     return z.record(z.string(), patternValueSchema);
   }
 
   if (schema.type === 'array') {
-    let arraySchema = z.array(jsonSchemaToZod(schema.items));
+    let arraySchema = z.array(jsonSchemaToZod(schema.items!));
 
     if (typeof schema.minItems === 'number' && schema.minItems > 0) {
       arraySchema = arraySchema.min(schema.minItems);
@@ -216,22 +216,22 @@ export function jsonSchemaToZod(schema: Schema) {
       arraySchema = arraySchema.max(schema.maxItems);
     }
 
-    return arraySchema.describe(schema.description);
+    return arraySchema.describe(schema.description ?? '');
   }
 
   if (schema.oneOf && Array.isArray(schema.oneOf)) {
     const unionSchemas = schema.oneOf.map(item => jsonSchemaToZod(item));
     if (unionSchemas.length === 0) {
-      return z.any().describe(schema.description);
+      return z.any().describe(schema.description ?? '');
     }
     if (unionSchemas.length === 1) {
-      return unionSchemas[0].describe(schema.description);
+      return unionSchemas[0]!.describe(schema.description ?? '');
     }
-    return z.union(unionSchemas as [z.ZodTypeAny, z.ZodTypeAny, ...z.ZodTypeAny[]]).describe(schema.description);
+    return z.union(unionSchemas as [z.ZodTypeAny, z.ZodTypeAny, ...z.ZodTypeAny[]]).describe(schema.description ?? '');
   }
 
   if (schema.type === 'string' && schema.enum) {
-    const enumSchema = z.enum(schema.enum as [string, ...string[]]).describe(schema.description);
+    const enumSchema = z.enum(schema.enum as [string, ...string[]]).describe(schema.description ?? '');
     if (typeof schema.default === 'string') {
       return enumSchema.default(schema.default);
     }
@@ -239,8 +239,8 @@ export function jsonSchemaToZod(schema: Schema) {
   }
 
   if (schema.type === 'object' && schema.additionalProperties === true) {
-    return z.record(z.string(), z.any()).describe(schema.description);
+    return z.record(z.string(), z.any()).describe(schema.description ?? '');
   }
 
-  return z[schema.type as string]().describe(schema.description);
+  return (z[schema.type as keyof typeof z] as () => z.ZodTypeAny)().describe(schema.description ?? '');
 }

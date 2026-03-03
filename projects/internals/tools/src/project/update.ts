@@ -16,7 +16,8 @@ export function updatePackageJson(
   packageJson: PackageData,
   currentVersions: ElementVersions
 ): { packageJson: PackageData; updated: PackageUpdate[] } {
-  const packageNames = Object.keys(currentVersions);
+  const versions = currentVersions as unknown as Record<string, string>;
+  const packageNames = Object.keys(versions);
   const updated: PackageUpdate[] = [];
 
   packageNames.forEach(packageName => {
@@ -24,8 +25,8 @@ export function updatePackageJson(
       packageJson.peerDependencies?.[packageName] &&
       !packageJson.peerDependencies[packageName]?.includes('catalog')
     ) {
-      const from = packageJson.peerDependencies[packageName];
-      const to = `^${currentVersions[packageName]}`;
+      const from = packageJson.peerDependencies[packageName]!;
+      const to = `^${versions[packageName]!}`;
       if (from !== to) {
         updated.push({ name: packageName, from, to });
         packageJson.peerDependencies[packageName] = to;
@@ -33,8 +34,8 @@ export function updatePackageJson(
     }
 
     if (packageJson.dependencies?.[packageName] && !packageJson.dependencies[packageName]?.includes('catalog')) {
-      const from = packageJson.dependencies[packageName];
-      const to = currentVersions[packageName];
+      const from = packageJson.dependencies[packageName]!;
+      const to = versions[packageName]!;
       if (from !== to) {
         updated.push({ name: packageName, from, to });
         packageJson.dependencies[packageName] = to;
@@ -42,8 +43,8 @@ export function updatePackageJson(
     }
 
     if (packageJson.devDependencies?.[packageName] && !packageJson.devDependencies[packageName]?.includes('catalog')) {
-      const from = packageJson.devDependencies[packageName];
-      const to = currentVersions[packageName];
+      const from = packageJson.devDependencies[packageName]!;
+      const to = versions[packageName]!;
       if (from !== to) {
         updated.push({ name: packageName, from, to });
         packageJson.devDependencies[packageName] = to;
@@ -57,7 +58,7 @@ export function updatePackageJson(
 /* istanbul ignore next -- @preserve */
 export async function updateProject(cwd: string): Promise<Report> {
   const packageJson = getPackageJson(cwd);
-  const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
+  const projects = (await ProjectsService.getData()).data.filter((p: { changelog: string }) => p.changelog);
   const packageManager = await getNPMClient();
   const { packageJson: updatedPackageJson, updated } = updatePackageJson(
     packageJson,

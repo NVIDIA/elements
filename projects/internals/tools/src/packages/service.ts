@@ -5,9 +5,12 @@ import { markdownDescription } from '../internal/utils.js';
 import { getAvailablePackages, getPackage, getVersions, limitChangelogVersions, searchChangelogs } from './utils.js';
 
 const MAX_LINE_COUNT = 512;
-const projects = (await ProjectsService.getData()).data.filter(p => p.changelog);
-const packageNames = projects.map(p => p.name);
-const changelogs = projects.reduce((acc, p) => ({ ...acc, [p.name]: p.changelog }), {});
+const projects = (await ProjectsService.getData()).data.filter((p: { changelog: string }) => p.changelog);
+const packageNames = projects.map((p: { name: string }) => p.name);
+const changelogs: Record<string, string> = projects.reduce(
+  (acc: Record<string, string>, p: { name: string; changelog: string }) => ({ ...acc, [p.name]: p.changelog ?? '' }),
+  {}
+);
 
 @service()
 export class PackagesService {
@@ -90,7 +93,7 @@ export class PackagesService {
     const changelog = searchChangelogs(name, changelogs);
 
     if (!changelog) {
-      const availablePackages = packageNames.map(p => `"${p}"`).join(', ');
+      const availablePackages = packageNames.map((p: string) => `"${p}"`).join(', ');
       const message = `No changelog found for "${name}".\n\nAvailable packages: ${availablePackages}`;
       return format && format !== 'markdown' ? { [name]: message } : message;
     }

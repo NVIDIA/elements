@@ -116,5 +116,56 @@ describe('PlaygroundService', () => {
       expect(typeof result).toBe('string');
       expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
     });
+
+    it('should return URL when template passes lint in mcp environment', async () => {
+      process.env.ELEMENTS_ENV = 'mcp';
+      const result = await PlaygroundService.create({
+        template: '<nve-button>valid</nve-button>',
+        start: false
+      });
+      expect(typeof result).toBe('string');
+      expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+    });
+
+    it('should include author in formatted name when provided', async () => {
+      process.env.ELEMENTS_ENV = 'browser';
+      const result = await PlaygroundService.create({
+        template: '<nve-button>test</nve-button>',
+        author: 'Claude',
+        start: false
+      });
+      expect(typeof result).toBe('string');
+      expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+    });
+
+    it('should handle undefined ELEMENTS_ENV', async () => {
+      delete process.env.ELEMENTS_ENV;
+      const result = await PlaygroundService.create({
+        template: '<nve-button>test</nve-button>',
+        start: false
+      });
+      expect(typeof result).toBe('string');
+      expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+    });
+  });
+
+  describe('validate', () => {
+    let originalEnv: string | undefined;
+
+    beforeEach(() => {
+      originalEnv = process.env.ELEMENTS_ENV;
+    });
+
+    afterEach(() => {
+      process.env.ELEMENTS_ENV = originalEnv;
+    });
+
+    it('should return empty array when not in mcp or cli environment', async () => {
+      process.env.ELEMENTS_ENV = 'browser';
+      const result = await PlaygroundService.validate({
+        template: '<nve-button nve-layout="column">hello</nve-button>'
+      });
+      expect(result).toEqual([]);
+    });
   });
 });
