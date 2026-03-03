@@ -31,6 +31,21 @@ export const Default = {
 };
 
 /**
+ * @summary Use the `commandfor` and `command` attributes to trigger custom Invoker Commands, such as toggling a dialog.
+ */
+export const InvokerCommand = {
+  render: () => html`
+<nve-button commandfor="dialog" command="toggle-popover">toggle popover</nve-button>
+<nve-dialog id="dialog" modal closable>
+  <nve-dialog-header>
+    <h3 nve-text="heading semibold">title</h3>
+  </nve-dialog-header>
+  <p nve-text="body">some text content in a closable dialog</p>
+</nve-dialog>
+`
+};
+
+/**
  * @summary Dialog with event listeners for state change tracking. Use dialog events (beforetoggle, toggle, open, close) to trigger side effects like loading data on open, cleaning up resources on close, or preventing closure based on validation state.
  * @tags test-case
  */

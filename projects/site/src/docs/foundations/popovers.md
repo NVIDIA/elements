@@ -30,7 +30,7 @@ import '@nvidia-elements/core/toast/define.js';
 import '@nvidia-elements/core/notification/define.js';
 ```
 
-{% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'Interactive' %}
+{% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'Interactive' '{ "inline": false, "height": "450px" }' %}
 
 ## Usage
 
@@ -83,7 +83,7 @@ Many of the popovers provide a closable property option. This enables a close bu
 Unlike some third-party solutions, browser-native popovers disable escape key prevention for closure by design, ensuring a seamless user experience. Similarly, native dialogs follow a similar pattern (chromium): only the first press of the escape key can prevent the dialog from closing,
 while later presses have no effect. This behavior is for accessibility, preventing a popover from closing can prevent the user from navigating the page and block functionality.
 
-{% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'Closable' %}
+{% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'Closable' '{ "inline": false, "height": "400px" }' %}
 
 ## Nested
 
@@ -92,6 +92,12 @@ while later presses have no effect. This behavior is for accessibility, preventi
 ## Event Bubbling
 
 {% example '@nvidia-elements/core/internal/controllers/popover.examples.json' 'EventBubbling' '{ "inline": false, "height": "400px" }' %}
+
+## Invoker Commands
+
+The Invoker Command APIs can also dispatch command events to show and hide popovers.
+
+{% example '@nvidia-elements/core/dialog/dialog.examples.json' 'InvokerCommand' '{ "inline": false, "height": "400px" }' %}
 
 ## Shadow Root Anchoring
 
