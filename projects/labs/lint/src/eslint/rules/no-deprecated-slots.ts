@@ -1,5 +1,7 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const DEPRECATED_SLOTS = {
   'nve-accordion-header': {
@@ -24,10 +26,10 @@ const rule = {
       ['unexpected-deprecated-slots']: 'Unexpected use of deprecated slot "{{slot}}"'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
-        const deprecatedSlotConfig = DEPRECATED_SLOTS[node.name];
+      Tag(node: HtmlTagNode) {
+        const deprecatedSlotConfig = DEPRECATED_SLOTS[node.name as keyof typeof DEPRECATED_SLOTS];
         if (deprecatedSlotConfig && node.children) {
           node.children.forEach(child => {
             if (child.type === 'Tag') {

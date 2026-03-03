@@ -10,7 +10,7 @@ export const VALID_NVE_TEXT_VALUES = new Set([
 ]);
 
 export const VALID_NVE_LAYOUT_VALUES = [
-  ...globalAttributes.find(attribute => attribute.name === 'nve-layout')?.values?.map(value => value.name),
+  ...(globalAttributes.find(attribute => attribute.name === 'nve-layout')?.values?.map(value => value.name) ?? []),
   ...ATTRIBUTE_EXCEPTIONS
 ];
 
@@ -19,7 +19,7 @@ export const VALID_NVE_DISPLAY_VALUES = new Set([
   ...ATTRIBUTE_EXCEPTIONS
 ]);
 
-export function recommendedNveTextValue(attributeValue: string): string {
+export function recommendedNveTextValue(attributeValue: string): string | null {
   if (VALUE_BINDINGS.some(binding => attributeValue.includes(binding))) {
     return attributeValue;
   }
