@@ -17,6 +17,7 @@ export function typeInterest<T extends Interest>(): ClassDecorator {
 
 export type Interest = ReactiveElement &
   HTMLElement & {
+    interestfor: string;
     interestForElement: HTMLElement;
     readonly: boolean;
     disabled: boolean;
