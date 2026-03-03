@@ -1,5 +1,7 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+import type { HtmlTagNode } from '../rule-types.js';
 import type { HtmlNode } from '../internals/utils.js';
 
 /**
@@ -78,9 +80,9 @@ const rule = {
         'Unexpected <input type="{{ type }}"> inside <{{ parent }}>. Use <{{ expected }}> instead.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const tagName = node.name.toLowerCase();
         const allowedTypes = componentToAllowedTypes[tagName];
 

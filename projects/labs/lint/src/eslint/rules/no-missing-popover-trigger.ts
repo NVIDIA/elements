@@ -1,3 +1,4 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { type HtmlNode } from '../internals/utils.js';
@@ -95,7 +96,7 @@ const rule = {
         'Popover element <{{tag}}> has an empty anchor attribute. Remove the anchor attribute as it will be automatically anchored to the trigger element.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     const popovers: PopoverNode[] = [];
     // Map from popover ID to trigger element ID
     const triggerMap = new Map<string, string>();
@@ -103,7 +104,7 @@ const rule = {
     let hasDynamicTrigger = false;
 
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlNode) {
         const tagName = node.name.toLowerCase();
 
         // Collect trigger targets from all elements

@@ -1,6 +1,8 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
-import { type HtmlNode } from '../internals/utils.js';
+import type { HtmlTagNode } from '../rule-types.js';
+import type { HtmlNode } from '../internals/utils.js';
 
 const DATA_BINDING_PATTERNS = [/\$\{[^}]*\}/, /\{\{[^}]*\}\}/, /^\{[^}]+\}$/];
 
@@ -51,9 +53,9 @@ const rule = {
         '<{{element}}> is missing an icon name. Add a {{attribute}} attribute to specify which icon to display.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const tagName = node.name.toLowerCase();
         const config = ICON_ELEMENTS[tagName];
 

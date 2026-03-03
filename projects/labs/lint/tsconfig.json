@@ -16,6 +16,9 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "isolatedModules": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
     "paths": {
       "@nvidia-elements/lint": ["./src/index.js"],
       "@nvidia-elements/lint/*": ["./src/*"],

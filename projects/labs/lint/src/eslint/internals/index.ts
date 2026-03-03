@@ -69,7 +69,7 @@ async function lintString(code: string, rules: Partial<Linter.RulesRecord> = {})
     .flatMap(result => result.messages)
     .map(message => {
       return {
-        id: message.messageId,
+        id: message.messageId ?? '',
         severity: message.severity === 2 ? 'error' : 'warn',
         message: message.message,
         suggestions:
@@ -83,8 +83,8 @@ async function lintString(code: string, rules: Partial<Linter.RulesRecord> = {})
           })) ?? [],
         line: message.line,
         column: message.column,
-        endLine: message.endLine,
-        endColumn: message.endColumn
+        endLine: message.endLine ?? message.line,
+        endColumn: message.endColumn ?? message.column
       };
     });
 }
