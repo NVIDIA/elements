@@ -1,3 +1,6 @@
+import type { Rule } from 'eslint';
+import type { HtmlTagNode } from '../rule-types.js';
+
 type Messages = 'unexpected-dependency-missing' | 'unexpected-dependency-pinned' | 'unexpected-dependency-type';
 
 const rule = {
@@ -15,9 +18,9 @@ const rule = {
       ['unexpected-dependency-type']: 'Libraries dependent on @nve packages must list them as peer dependencies.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return {
-      Document(node) {
+      Document(node: HtmlTagNode) {
         if (context.filename.includes('package.json')) {
           const packageJson = JSON.parse(context.getSourceCode().getText());
           const isLibrary = packageJson.exports !== undefined;
@@ -28,7 +31,7 @@ const rule = {
             if (messageId) {
               context.report({
                 messageId,
-                loc: node.loc
+                loc: node.loc!
               });
             }
           }
@@ -51,12 +54,13 @@ function checkPeerDependencies(packageJson: {
   const hasDevDependencies = devDependencies.some(dependency => dependency.includes('@nve'));
   const hasDependencies = dependencies.some(dependency => dependency.includes('@nve'));
   const hasPeerDependencies = peerDependencies.some(dependency => dependency.includes('@nve'));
+  const peerDeps = packageJson.peerDependencies ?? {};
   const hasPinnedVersion = peerDependencies.find(
     n =>
       n.startsWith('@nve') &&
-      !packageJson.peerDependencies[n].startsWith('^') &&
-      !packageJson.peerDependencies[n].startsWith('workspace:') &&
-      !packageJson.peerDependencies[n].startsWith('catalog:')
+      !peerDeps[n]?.startsWith('^') &&
+      !peerDeps[n]?.startsWith('workspace:') &&
+      !peerDeps[n]?.startsWith('catalog:')
   );
 
   if (!hasPeerDependencies && (hasDependencies || hasDevDependencies)) {
@@ -66,4 +70,6 @@ function checkPeerDependencies(packageJson: {
   } else if (hasPinnedVersion) {
     return 'unexpected-dependency-pinned';
   }
+
+  return undefined;
 }

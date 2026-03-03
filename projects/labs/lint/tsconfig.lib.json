@@ -1,8 +1,16 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "strict": true,
     "rootDir": "./src",
     "types": ["node"]
   },
-  "exclude": ["**/*.test.ts"]
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test.axe.ts",
+    "**/*.test.visual.ts",
+    "**/*.test.ssr.ts",
+    "**/*.test.lighthouse.ts",
+    "**/*.examples.ts"
+  ]
 }
