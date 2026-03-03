@@ -114,7 +114,9 @@ export class PlaygroundService {
     }
 
     const apis = await ApiService.getData();
-    const environment = ELEMENTS_ENV_ICON[process.env.ELEMENTS_ENV];
+    const environment = process.env.ELEMENTS_ENV
+      ? ELEMENTS_ENV_ICON[process.env.ELEMENTS_ENV as keyof typeof ELEMENTS_ENV_ICON]
+      : undefined;
     const formattedName = `${name}${author ? ` - (${author})` : ''}${environment ? ` ${environment}` : ''}`;
     const result = createPlaygroundURL(template, apis.data.elements, { name: formattedName, type });
 

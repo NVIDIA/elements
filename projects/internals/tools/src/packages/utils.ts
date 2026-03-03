@@ -10,12 +10,15 @@ export function searchChangelogs(query: string, changelogs: { [key: string]: str
   if (match) return changelogs[match];
 
   const fuzzy = fuzzyMatch(query, keys);
-  return changelogs[fuzzy[0]];
+  return fuzzy[0] !== undefined ? changelogs[fuzzy[0]] : undefined;
 }
 
 export async function findPublicAPIChangelog(name: string): Promise<string | undefined> {
   const data = await ApiService.search(name);
-  const result = data.find(r => r.name === name) as Element | (Attribute & { changelog: string }) | undefined;
+  const result = data.find((r: Element | Attribute) => r.name === name) as
+    | Element
+    | (Attribute & { changelog: string })
+    | undefined;
   return result?.changelog ?? JSON.stringify(result, null, 2);
 }
 
@@ -33,9 +36,12 @@ export async function getAvailablePackages(): Promise<string> {
   const publicPackages = await getLatestPublishedVersions((await PackageService.getData())?.data ?? []);
 
   return packages
-    .filter(p => publicPackages[p.name] !== undefined)
-    .sort((a, b) => scopeOrder(a.name) - scopeOrder(b.name) || a.name.localeCompare(b.name))
-    .map(p => `## ${p.name} v${p.version}\n${p.description}`)
+    .filter((p: { name: string }) => publicPackages[p.name as keyof ElementVersions] !== undefined)
+    .sort(
+      (a: { name: string }, b: { name: string }) =>
+        scopeOrder(a.name) - scopeOrder(b.name) || a.name.localeCompare(b.name)
+    )
+    .map((p: { name: string; version: string; description: string }) => `## ${p.name} v${p.version}\n${p.description}`)
     .join('\n\n');
 }
 
@@ -51,13 +57,16 @@ export async function getPackage(name: string) {
   const publicPackages = await getLatestPublishedVersions((await PackageService.getData())?.data ?? []);
 
   const available = packages
-    .filter(p => publicPackages[p.name] !== undefined)
-    .sort((a, b) => scopeOrder(a.name) - scopeOrder(b.name) || a.name.localeCompare(b.name));
+    .filter((p: { name: string }) => publicPackages[p.name as keyof ElementVersions] !== undefined)
+    .sort(
+      (a: { name: string }, b: { name: string }) =>
+        scopeOrder(a.name) - scopeOrder(b.name) || a.name.localeCompare(b.name)
+    );
 
-  const pkg = available.find(p => p.name === name);
+  const pkg = available.find((p: { name: string }) => p.name === name);
 
   if (!pkg) {
-    const names = available.map(p => `"${p.name}"`).join(', ');
+    const names = available.map((p: { name: string }) => `"${p.name}"`).join(', ');
     throw new Error(`No package found for "${name}".\n\nAvailable packages: ${names}`);
   }
 

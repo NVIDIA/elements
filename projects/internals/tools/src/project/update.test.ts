@@ -280,6 +280,22 @@ describe('updatePackageJson', () => {
     expect(result.updated).toHaveLength(3);
   });
 
+  it('should handle packageJson without peerDependencies or devDependencies', () => {
+    const packageJson = {
+      dependencies: {
+        '@nvidia-elements/core': '1.0.0'
+      }
+    } as Parameters<typeof updatePackageJson>[0];
+
+    const latestVersions = createMockElementVersions({
+      '@nvidia-elements/core': '2.0.0'
+    });
+
+    const result = updatePackageJson(packageJson, latestVersions);
+    expect(result.updated).toContainEqual({ name: '@nvidia-elements/core', from: '1.0.0', to: '2.0.0' });
+    expect(result.updated).toHaveLength(1);
+  });
+
   it('should not report updates when versions already match', () => {
     const packageJson = {
       dependencies: {

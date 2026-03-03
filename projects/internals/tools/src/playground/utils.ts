@@ -61,7 +61,7 @@ export function createPlaygroundURL(source: string, elements: Element[], opts: P
   return url;
 }
 
-export function createDefaultFiles(content, elements: Element[], options: PlaygroundOptions) {
+export function createDefaultFiles(content: string, elements: Element[], options: PlaygroundOptions) {
   const files: Record<string, { content: string }> = {
     'index.html': { content: createIndexHTML(content, options) },
     'index.ts': { content: `${getElementImports(content, elements).join('\n')}` },
@@ -80,7 +80,7 @@ export function createDefaultFiles(content, elements: Element[], options: Playgr
   return files;
 }
 
-export function createReactFiles(content, elements: Element[], options: PlaygroundOptions) {
+export function createReactFiles(content: string, elements: Element[], options: PlaygroundOptions) {
   return {
     'index.html': { content: createIndexHTML(`<div id="root"></div>`, options) },
     'index.tsx': { content: createReactIndexTSX(content, elements) },
@@ -89,7 +89,7 @@ export function createReactFiles(content, elements: Element[], options: Playgrou
   };
 }
 
-export function createPreactFiles(content, elements: Element[], options: PlaygroundOptions) {
+export function createPreactFiles(content: string, elements: Element[], options: PlaygroundOptions) {
   return {
     'index.html': { content: createIndexHTML(`<div id="root"></div>`, options) },
     'index.tsx': { content: createPreactIndexTSX(content, elements) },
@@ -98,7 +98,7 @@ export function createPreactFiles(content, elements: Element[], options: Playgro
   };
 }
 
-export function createAngularFiles(content, elements: Element[], options: PlaygroundOptions) {
+export function createAngularFiles(content: string, elements: Element[], options: PlaygroundOptions) {
   return {
     'index.html': { content: createIndexHTML(`<app-root></app-root>`, options) },
     'index.ts': { content: createAngularIndexTS(content, elements) },
@@ -106,7 +106,7 @@ export function createAngularFiles(content, elements: Element[], options: Playgr
   };
 }
 
-export function createLitFiles(content, elements: Element[], options: PlaygroundOptions) {
+export function createLitFiles(content: string, elements: Element[], options: PlaygroundOptions) {
   return {
     'index.html': { content: createIndexHTML(`<app-root></app-root>`, options) },
     'index.ts': { content: createLitIndexTS(content, elements) },
@@ -114,7 +114,7 @@ export function createLitFiles(content, elements: Element[], options: Playground
   };
 }
 
-export function createVueFiles(content, elements: Element[], options: PlaygroundOptions) {
+export function createVueFiles(content: string, elements: Element[], options: PlaygroundOptions) {
   return {
     'index.html': { content: createIndexHTML(createVueHTML(content), options) },
     'index.ts': { content: createVueIndexTS(content, elements) },
@@ -166,7 +166,7 @@ nve-logo.large {
 `;
 }
 
-function serialize(data, compress = true) {
+function serialize(data: Record<string, { content: string }>, compress = true) {
   const encoded = new TextEncoder().encode(JSON.stringify(data));
   const array = compress ? gzipSync(encoded) : encoded;
   const base64 = globalThis.btoa(String.fromCharCode(...array));
@@ -212,7 +212,7 @@ ${content.trim()}
 function createImportMap(framework: 'react' | 'preact' | 'angular' | 'lit' | 'vue' | 'vanilla' = 'vanilla') {
   const CDN_MODULES_URL = `https://esm.nvidia.com`;
 
-  const importmap = {
+  const importmap: { imports: Record<string, string> } = {
     imports: {
       '@nvidia-elements/core': `${CDN_MODULES_URL}/@nvidia-elements/core@latest`,
       '@nvidia-elements/core/': `${CDN_MODULES_URL}/@nvidia-elements/core@latest/`,

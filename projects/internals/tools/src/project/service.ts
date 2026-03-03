@@ -9,7 +9,9 @@ import { createStarter, startStarter, startersData, type Starter } from './start
 import { updateProject } from './update.js';
 import { setupProject } from './setup.js';
 
-const starters = Object.keys(startersData).filter(starter => startersData[starter].cli) as Starter[];
+const starters = Object.keys(startersData).filter(
+  starter => startersData[starter as keyof typeof startersData]?.cli
+) as Starter[];
 
 @service()
 export class ProjectService {

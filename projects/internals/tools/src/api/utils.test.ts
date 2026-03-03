@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Attribute, Element, ProjectTypes, Token } from '@internals/metadata';
-import { getPublicAPIs, getPublishedPackageNames, getSemanticTokens } from './utils.js';
+import { getPublicAPIs, getPublishedPackageNames, getSemanticTokens, type PartialAPIResult } from './utils.js';
 
 describe('getPublishedPackageNames', () => {
   const projects = [
@@ -36,6 +36,14 @@ describe('getPublishedPackageNames', () => {
 
   it('should get published package names', () => {
     expect(getPublishedPackageNames(projects)).toEqual(['@nvidia-elements/core', '@nvidia-elements/monaco', '@nvidia-elements/code']);
+  });
+
+  it('should exclude @nve packages with version 0.0.0', () => {
+    const withUnpublished = [
+      ...projects,
+      { name: '@nvidia-elements/unpublished', version: '0.0.0', description: '', readme: '', changelog: '' }
+    ];
+    expect(getPublishedPackageNames(withUnpublished)).toEqual(['@nvidia-elements/core', '@nvidia-elements/monaco', '@nvidia-elements/code']);
   });
 });
 
@@ -73,6 +81,54 @@ describe('getAvailableAPIs', () => {
     const apis = getPublicAPIs('markdown', metadata);
     expect(apis).toContain('- **nve-button (button)** button description');
     expect(apis).toContain('- **nve-badge** badge description');
+  });
+});
+
+describe('getPublicAPIs edge cases', () => {
+  it('should return empty string for unsupported format', () => {
+    const metadata = {
+      created: '2025-01-01',
+      data: { elements: [], attributes: [], tokens: [], types: [] }
+    } as {
+      created: string;
+      data: { elements: Element[]; attributes: Attribute[]; tokens: Token[]; types: ProjectTypes[] };
+    };
+    // @ts-expect-error - testing invalid format
+    expect(getPublicAPIs('yaml', metadata)).toBe('');
+  });
+
+  it('should handle attributes with description and example', () => {
+    const metadata = {
+      created: '2025-01-01',
+      data: {
+        elements: [],
+        attributes: [{ name: 'nve-layout', description: 'Layout utility', example: '<div nve-layout>' }],
+        tokens: [],
+        types: []
+      }
+    } as {
+      created: string;
+      data: { elements: Element[]; attributes: Attribute[]; tokens: Token[]; types: ProjectTypes[] };
+    };
+    const result = getPublicAPIs('markdown', metadata);
+    expect(result).toContain('**nve-layout (attribute)**');
+  });
+
+  it('should filter out attributes without example', () => {
+    const metadata = {
+      created: '2025-01-01',
+      data: {
+        elements: [],
+        attributes: [{ name: 'nve-layout', description: 'Layout utility' }],
+        tokens: [],
+        types: []
+      }
+    } as {
+      created: string;
+      data: { elements: Element[]; attributes: Attribute[]; tokens: Token[]; types: ProjectTypes[] };
+    };
+    const result = getPublicAPIs('json', metadata) as { elements: PartialAPIResult[]; attributes: PartialAPIResult[] };
+    expect(result.attributes).toEqual([]);
   });
 });
 
