@@ -4,7 +4,7 @@ import { parseControlValue, validateSchema } from './schema.js';
 
 describe('valueSchemaValidator', () => {
   it('should validate an invalid schema', () => {
-    const schema: Schema = null;
+    const schema: Schema = null as unknown as Schema;
     const value = 'test';
     const result = validateSchema(schema, value);
     expect(result.validity.valid).toBe(false);
@@ -279,7 +279,7 @@ describe('parseControlValue', () => {
   it('should parse a valid falsy boolean', () => {
     const schema: Schema = { type: 'boolean' };
     const value = null;
-    const result = parseControlValue(value, schema);
+    const result = parseControlValue(value as unknown as string, schema);
     expect(result).toBe(false);
   });
 
@@ -314,7 +314,7 @@ describe('parseControlValue', () => {
   it('should parse an invalid schema', () => {
     const schema = { type: 'unknown' };
     const value = null;
-    const result = parseControlValue(value, schema as Schema);
+    const result = parseControlValue(value as unknown as string, schema as Schema);
     expect(result).toBeUndefined();
   });
 });
