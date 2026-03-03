@@ -1,5 +1,7 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const svgElements = [
   'svg',
@@ -34,15 +36,15 @@ const rule = {
       ['unexpected-style-tag-customization']: 'Unexpected use of style tag in template. Avoid custom CSS styles.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      StyleTag(node) {
+      StyleTag(node: HtmlTagNode) {
         context.report({
           node,
           messageId: 'unexpected-style-tag-customization'
         });
       },
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const match = findAttr(node, 'style');
 
         // only allow style attribute on svg elements

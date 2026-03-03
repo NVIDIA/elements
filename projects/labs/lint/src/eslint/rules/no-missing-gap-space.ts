@@ -1,6 +1,8 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { VALUE_BINDINGS } from '../internals/attributes.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 /** Spacing alignment values that manage their own distribution and override gap */
 const SPACING_ALIGNMENTS = ['align:space-around', 'align:space-between', 'align:space-evenly'];
@@ -24,9 +26,9 @@ const rule = {
       ['suggest-add-gap']: 'Add "gap:{{size}}" to the layout'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const layoutAttr = findAttr(node, 'nve-layout');
         if (!layoutAttr) return;
 
@@ -34,15 +36,15 @@ const rule = {
 
         if (VALUE_BINDINGS.some(binding => value.includes(binding))) return;
 
-        const segments = value.split(' ').filter(s => s !== '');
+        const segments = value.split(' ').filter((s: string) => s !== '');
 
         const isRowOrColumn = segments.includes('row') || segments.includes('column');
         if (!isRowOrColumn) return;
 
-        const hasGap = segments.some(s => s.startsWith('gap:'));
+        const hasGap = segments.some((s: string) => s.startsWith('gap:'));
         if (hasGap) return;
 
-        const hasSpacingAlignment = segments.some(s => SPACING_ALIGNMENTS.includes(s));
+        const hasSpacingAlignment = segments.some((s: string) => SPACING_ALIGNMENTS.includes(s));
         if (hasSpacingAlignment) return;
 
         context.report({

@@ -1,6 +1,8 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { hasMatchingChild, hasTemplateSyntax, type HtmlNode } from '../internals/utils.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 /**
  * Form controls that require a label for accessibility.
@@ -96,9 +98,9 @@ const rule = {
         '<{{element}}> is missing an accessible label. Add a aria-label attribute on the native input.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const options = context.options[0] ?? {};
         const tagName = node.name.toLowerCase();
 

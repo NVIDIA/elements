@@ -1,5 +1,7 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const DEPRECATED_GLOBAL_ATTRIBUTES = ['nve-text', 'nve-layout', 'nve-theme'];
 
@@ -21,9 +23,9 @@ const rule = {
       ['suggest-replace-deprecated-attribute']: 'Replace {{attribute}} with {{alternative}}'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         DEPRECATED_GLOBAL_ATTRIBUTES.forEach(attribute => {
           const attr = findAttr(node, attribute);
           if (attr) {

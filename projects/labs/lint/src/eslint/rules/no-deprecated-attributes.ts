@@ -1,5 +1,7 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const DEPRECATED_ATTRIBUTES = {
   'nve-badge': {
@@ -21,10 +23,11 @@ const rule = {
       ['unexpected-deprecated-attribute']: 'Unexpected use of deprecated value "{{value}}" in attribute "{{attribute}}"'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
-        const deprecatedAttributes: Record<string, string[]> | undefined = DEPRECATED_ATTRIBUTES[node.name];
+      Tag(node: HtmlTagNode) {
+        const deprecatedAttributes: Record<string, string[]> | undefined =
+          DEPRECATED_ATTRIBUTES[node.name as keyof typeof DEPRECATED_ATTRIBUTES];
         if (deprecatedAttributes) {
           Object.entries(deprecatedAttributes).forEach(([attribute, values]) => {
             const attr = findAttr(node, attribute);
