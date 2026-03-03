@@ -155,13 +155,13 @@ export class Draw extends FormControlMixin<typeof LitElement, DrawValue>(LitElem
   }
 
   firstUpdated() {
-    this.#canvas = this.renderRoot.querySelector('canvas');
+    this.#canvas = this.renderRoot.querySelector('canvas') ?? undefined;
     this.#startAnimation();
   }
 
   updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties);
-    if (this.value.particleCount !== this.#shapes.length) {
+    if (this.value && this.value.particleCount !== this.#shapes.length) {
       this.#shapes = new Array(this.value.particleCount).fill(0).map(() => {
         return { x: Math.random() * 400, y: Math.random() * 400, rotation: Math.random() * Math.PI * 2 };
       });
@@ -177,15 +177,17 @@ export class Draw extends FormControlMixin<typeof LitElement, DrawValue>(LitElem
 
   #startAnimation() {
     const animate = () => {
-      this.#render(this.value);
+      if (this.value) {
+        this.#render(this.value);
+      }
       this.#animationFrame = requestAnimationFrame(animate);
     };
     animate();
   }
 
   #render(value: DrawValue) {
-    const ctx = this.#canvas.getContext('2d');
-    ctx.clearRect(0, 0, this.#canvas.width, this.#canvas.height);
+    const ctx = this.#canvas!.getContext('2d')!;
+    ctx.clearRect(0, 0, this.#canvas!.width, this.#canvas!.height);
 
     const size = value.scale / 2.5;
     this.#shapes.forEach((shape, i) => {

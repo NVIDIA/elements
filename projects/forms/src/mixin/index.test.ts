@@ -28,7 +28,7 @@ describe('FormControlMixin', () => {
         <ui-test-element></ui-test-element>
       </form>
     `);
-    element = fixture.querySelector('ui-test-element');
+    element = fixture.querySelector('ui-test-element')!;
   });
 
   afterEach(() => {
@@ -162,7 +162,7 @@ describe('FormControlMixin', () => {
   it('should set form value', () => {
     element.name = 'test';
     element.value = 'test';
-    expect(element.form.elements['test'].value).toBe('test');
+    expect((element.form!.elements as unknown as Record<string, HTMLInputElement>)['test']!.value).toBe('test');
   });
 
   it('should throw an error if value is set to a non-string value', () => {
@@ -234,7 +234,7 @@ describe('mixin - validators', () => {
       </form>
     `);
 
-    element = fixture.querySelector('ui-validator-test-element');
+    element = fixture.querySelector('ui-validator-test-element')!;
   });
 
   afterEach(() => {
@@ -291,8 +291,8 @@ describe('mixin - complex value', () => {
         <ui-complex-value name="test"></ui-complex-value>
       </form>
     `);
-    element = fixture.querySelector('ui-complex-value');
-    form = fixture.querySelector('form');
+    element = fixture.querySelector('ui-complex-value')!;
+    form = fixture.querySelector('form')!;
   });
 
   afterEach(() => {
@@ -316,7 +316,7 @@ describe('mixin - complex value', () => {
 
   it('should set form value', () => {
     element.value = { name: 'Jane', age: 31 };
-    expect(Object.fromEntries(new FormData(element.form))).toEqual({ 'test-name': 'Jane', 'test-age': '31' });
+    expect(Object.fromEntries(new FormData(element.form!))).toEqual({ 'test-name': 'Jane', 'test-age': '31' });
   });
 });
 
@@ -343,8 +343,8 @@ describe('mixin - number value', () => {
         <ui-number-value name="test" value="0"></ui-number-value>
       </form>
     `);
-    element = fixture.querySelector('ui-number-value');
-    form = fixture.querySelector('form');
+    element = fixture.querySelector('ui-number-value')!;
+    form = fixture.querySelector('form')!;
   });
 
   afterEach(() => {
@@ -359,7 +359,7 @@ describe('mixin - number value', () => {
 
   it('should set form value', () => {
     element.value = 10;
-    expect(Object.fromEntries(new FormData(element.form))).toEqual({ test: '10' });
+    expect(Object.fromEntries(new FormData(element.form!))).toEqual({ test: '10' });
   });
 
   it('should return a stringified value', () => {
@@ -418,8 +418,8 @@ describe('mixin - file value', () => {
       <ui-file-value name="test"></ui-file-value>
     </form>`);
 
-    element = fixture.querySelector<FileValueTestElement>('ui-file-value');
-    form = fixture.querySelector('form');
+    element = fixture.querySelector<FileValueTestElement>('ui-file-value')!;
+    form = fixture.querySelector('form')!;
   });
 
   afterEach(() => {
@@ -482,8 +482,8 @@ describe('mixin - multiple files', () => {
       <ui-multiple-file-value name="file-input"></ui-multiple-file-value>
     </form>`);
 
-    element = fixture.querySelector<MultipleFileValueTestElement>('ui-multiple-file-value');
-    form = fixture.querySelector('form');
+    element = fixture.querySelector<MultipleFileValueTestElement>('ui-multiple-file-value')!;
+    form = fixture.querySelector('form')!;
   });
 
   afterEach(() => {
@@ -498,8 +498,8 @@ describe('mixin - multiple files', () => {
   });
 
   it('should set form data on initialization with flat form data value', async () => {
-    expect(element.value[0]).toEqual(new File([''], 'test1.txt', { type: 'text/plain' }));
-    expect(element.value[1]).toEqual(new File([''], 'test2.txt', { type: 'text/plain' }));
+    expect(element.value![0]).toEqual(new File([''], 'test1.txt', { type: 'text/plain' }));
+    expect(element.value![1]).toEqual(new File([''], 'test2.txt', { type: 'text/plain' }));
     expect((new FormData(form).getAll('file-input')[0] as File).name).toBe('test1.txt');
     expect((new FormData(form).getAll('file-input')[1] as File).name).toBe('test2.txt');
   });
