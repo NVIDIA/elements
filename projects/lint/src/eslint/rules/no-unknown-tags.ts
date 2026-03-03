@@ -1,4 +1,6 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
+import type { HtmlTagNode } from '../rule-types.js';
 import { elements } from '../internals/metadata.js';
 
 const rule = {
@@ -15,9 +17,9 @@ const rule = {
       ['unknown-tag']: 'Unexpected use of unknown tag <{{tag}}>'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         if (!node.name.startsWith('nve-')) {
           return;
         }

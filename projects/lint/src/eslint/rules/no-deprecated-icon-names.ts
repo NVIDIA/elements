@@ -1,5 +1,7 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const DEPRECATED_ICONS = {
   'chevron-right': 'chevron',
@@ -50,14 +52,14 @@ const rule = {
         'Unexpected use of deprecated icon name of {{deprecated}}. Use {{alternative}} instead.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         if (node.name === 'nve-icon') {
           const attr = findAttr(node, 'name');
           if (attr) {
             const deprecated = ((attr.value && attr.value.value) || '').toLowerCase();
-            const alternative = DEPRECATED_ICONS[deprecated];
+            const alternative = DEPRECATED_ICONS[deprecated as keyof typeof DEPRECATED_ICONS];
 
             if (alternative) {
               context.report({

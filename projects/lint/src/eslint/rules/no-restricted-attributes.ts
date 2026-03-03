@@ -1,6 +1,8 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { getElementAttributeNames } from '../internals/element-attributes.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const RESTRICTED_GLOBAL_ATTRIBUTES = ['nve-text', 'nve-layout', 'nve-text', 'nve-layout'];
 const RESTRICTED_ELEMENT_API_ATTRIBUTES = ['variant'];
@@ -30,9 +32,9 @@ const rule = {
         'Unexpected use of restricted attribute "{{attribute}}" on <{{element}}>. Remove the attribute. Supported attributes: {{supportedAttributes}}'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         RESTRICTED_GLOBAL_ATTRIBUTES.forEach(attribute => {
           const attr = findAttr(node, attribute);
           const isCustomElement = node.name.includes('-') && attr;
@@ -61,7 +63,7 @@ const rule = {
   }
 } as const;
 
-function reportRestricted(context, attr, attribute: string, elementName: string) {
+function reportRestricted(context: Rule.RuleContext, attr: Rule.Node, attribute: string, elementName: string) {
   const supported = getElementAttributeNames(elementName);
   if (supported.length > 0) {
     context.report({

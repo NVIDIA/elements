@@ -1,5 +1,7 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { hasMatchingChild, hasTemplateSyntax } from '../internals/utils.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const REQUIRED_SLOTTED_ELEMENTS = {
   'nve-input': {
@@ -78,14 +80,17 @@ const rule = {
       ['unexpected-missing-slotted-element']: 'Unexpected use of missing slotted element <{{element}}>'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const options = context.options[0] ?? {};
         const tagName = node.name.toLowerCase();
 
         const additionalRequirements = options[tagName]?.required ?? [];
-        const required = [...(REQUIRED_SLOTTED_ELEMENTS[tagName]?.required ?? []), ...additionalRequirements];
+        const required = [
+          ...(REQUIRED_SLOTTED_ELEMENTS[tagName as keyof typeof REQUIRED_SLOTTED_ELEMENTS]?.required ?? []),
+          ...additionalRequirements
+        ];
 
         if (!required.length) {
           return;

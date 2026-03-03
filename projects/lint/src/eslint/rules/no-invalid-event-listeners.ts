@@ -1,4 +1,6 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 const INLINE_EVENT_HANDLER = /^on[a-z]+$/i;
 
@@ -17,9 +19,9 @@ const rule = {
         'Unexpected inline event handler "{{attribute}}". Use addEventListener() or a framework event binding instead.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         (node.attributes ?? []).forEach(attr => {
           if (attr.type !== 'Attribute' || !attr.key?.value) return;
 

@@ -1,13 +1,15 @@
+import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { getRecommendedSlotName, hasDefaultSlot, isKnownElement, hasSlot } from '../internals/slots.js';
 import { hasTemplateSyntax, isNVElement } from '../internals/utils.js';
+import type { HtmlTagNode } from '../rule-types.js';
 
 /**
  * Check if a node has child content that projects into the default slot.
  * This includes non-whitespace text nodes and element nodes without a slot attribute.
  */
-function hasUnslottedContent(node): boolean {
+function hasUnslottedContent(node: HtmlTagNode): boolean {
   if (!node.children || !Array.isArray(node.children)) {
     return false;
   }
@@ -44,9 +46,9 @@ const rule = {
         'Element <{{tagName}}> does not have a default slot. Remove the child content or use a named slot if available.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return createVisitors(context, {
-      Tag(node) {
+      Tag(node: HtmlTagNode) {
         const tagName = node.name;
 
         // Check for invalid slot attribute values on children of nve-* elements
@@ -54,7 +56,7 @@ const rule = {
         const slotName = slotAttr?.value?.value ?? '';
         const parentTagName = node.parent?.name;
 
-        if (slotAttr && isNVElement(parentTagName) && !hasSlot(parentTagName, slotName)) {
+        if (slotAttr && parentTagName && isNVElement(parentTagName) && !hasSlot(parentTagName, slotName)) {
           const alternative = getRecommendedSlotName(slotName, parentTagName);
           let suggest = [];
 
@@ -65,8 +67,8 @@ const rule = {
                 slotName,
                 alternative
               },
-              fix: fixer => {
-                return fixer.replaceText(slotAttr, '');
+              fix: (fixer: Rule.RuleFixer) => {
+                return fixer.replaceText(slotAttr as unknown as Rule.Node, '');
               }
             });
           } else if (alternative) {
@@ -76,10 +78,10 @@ const rule = {
                 slotName,
                 alternative
               },
-              fix: fixer => {
+              fix: (fixer: Rule.RuleFixer) => {
                 return fixer.replaceText(
-                  slotAttr,
-                  `slot=${slotAttr.startWrapper.value}${alternative}${slotAttr.endWrapper.value}`
+                  slotAttr as unknown as Rule.Node,
+                  `slot=${slotAttr.startWrapper?.value ?? '"'}${alternative}${slotAttr.endWrapper?.value ?? '"'}`
                 );
               }
             });

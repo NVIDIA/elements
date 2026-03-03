@@ -1,3 +1,6 @@
+import type { Rule } from 'eslint';
+import type { HtmlTagNode } from '../rule-types.js';
+
 const rule = {
   meta: {
     type: 'problem' as const,
@@ -11,9 +14,9 @@ const rule = {
       ['unexpected-deprecated-package']: 'Use of deprecated package {{package}}, upgrade to {{alternative}} instead.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return {
-      Document(node) {
+      Document(node: HtmlTagNode) {
         if (context.filename.includes('package.json')) {
           const packageJson = JSON.parse(context.getSourceCode().getText());
           const dependencies = Object.keys(packageJson.dependencies ?? {});
@@ -26,7 +29,7 @@ const rule = {
           if (hasDeprecatedPeerDependencies || hasDeprecatedDependencies || hasDeprecatedDevDependencies) {
             context.report({
               messageId: 'unexpected-deprecated-package',
-              loc: node.loc,
+              loc: node.loc!,
               data: {
                 package: '@mlv/elements',
                 alternative: '@nvidia-elements/core'

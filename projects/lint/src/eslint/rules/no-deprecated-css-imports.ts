@@ -1,3 +1,6 @@
+import type { Rule } from 'eslint';
+import type { CssAtRuleNode } from '../rule-types.js';
+
 const deprecatedImports: Record<string, string> = {
   '@nvidia-elements/core/index.css': `@import '@nvidia-elements/themes/fonts/inter.css';\n@import '@nvidia-elements/themes/index.css';\n@import '@nvidia-elements/themes/dark.css';\n@import '@nvidia-elements/styles/typography.css';\n@import '@nvidia-elements/styles/layout.css';`,
   '@nvidia-elements/core/css/module.layout.css': `@import '@nvidia-elements/styles/layout.css';`,
@@ -22,37 +25,33 @@ const rule = {
       ['deprecated-css-import']: 'Use of deprecated path {{value}}. Use {{alternative}} instead.'
     }
   },
-  create(context) {
+  create(context: Rule.RuleContext) {
     return {
-      Atrule(node) {
-        // Check if this is an @import rule
+      Atrule(node: CssAtRuleNode) {
         if (node.name !== 'import') {
           return;
         }
 
-        // Extract the import path from the prelude
         const prelude = node.prelude;
         if (!prelude) {
           return;
         }
 
-        // Get the text content of the prelude
         const sourceCode = context.sourceCode || context.getSourceCode();
-        const preludeText = sourceCode.getText(prelude).trim();
+        const preludeText = sourceCode.getText(prelude as unknown as Rule.Node).trim();
 
-        // Remove quotes and whitespace to get the actual path
         const importPath = preludeText.replace(/^['"]|['"]$/g, '').trim();
 
-        // Check if this import path has a deprecated status
         if (importPath in deprecatedImports) {
           context.report({
-            node,
+            node: node as unknown as Rule.Node,
             messageId: 'deprecated-css-import',
             data: {
               value: importPath,
               alternative: deprecatedImports[importPath]
             },
-            fix: fixer => fixer.replaceText(node, deprecatedImports[importPath])
+            fix: (fixer: Rule.RuleFixer) =>
+              fixer.replaceText(node as unknown as Rule.Node, deprecatedImports[importPath]!)
           });
         }
       }
