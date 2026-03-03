@@ -7,6 +7,7 @@ import { TypeInterestController, type InterestEvent } from '@nvidia-elements/cor
 
 @customElement('type-interest-controller-test-element')
 class TypeInterestControllerTestElement extends LitElement {
+  @property({ type: String, reflect: true }) interestfor: string;
   @property({ type: Object }) interestForElement: HTMLElement;
   @property({ type: Boolean }) readonly: boolean;
   @property({ type: Boolean }) disabled: boolean;
