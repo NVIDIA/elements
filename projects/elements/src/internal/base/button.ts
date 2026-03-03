@@ -130,7 +130,7 @@ export class BaseButton extends LitElement {
   @property({ type: Object }) popoverTargetElement: HTMLElement = null; // eslint-disable-line local/primitive-property
 
   /**
-   * The id of the element that receives the popover.
+   * The idref of the element that receives the popover.
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/button#popovertarget
    */
   @property({ type: String, attribute: 'popovertarget', reflect: true }) popovertarget: string;
@@ -143,10 +143,16 @@ export class BaseButton extends LitElement {
   popoverTargetAction: 'show' | 'hide' | 'toggle';
 
   /**
-   * The id of the element that receives the command.
+   * The element that receives the command.
    * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
    */
-  @property({ type: String, attribute: 'commandfor', reflect: true }) commandForElement: string = null;
+  @property({ type: Object }) commandForElement: HTMLElement = null; // eslint-disable-line local/primitive-property
+
+  /**
+   * The idref of the element that receives the command.
+   * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
+   */
+  @property({ type: String, attribute: 'commandfor', reflect: true }) commandfor: string = null;
 
   /**
    * The command to execute on the element.
@@ -155,10 +161,16 @@ export class BaseButton extends LitElement {
   @property({ type: String, attribute: 'command', reflect: true }) command: string;
 
   /**
-   * The id of the element that receives the interest.
+   * The element that receives the interest.
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/interestForElement
    */
   @property({ type: Object }) interestForElement: HTMLElement = null; // eslint-disable-line local/primitive-property
+
+  /**
+   * The idref of the element that receives the interest.
+   * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/interestForElement
+   */
+  @property({ type: String, reflect: true }) interestfor: string = null;
 
   /**
    * @private
