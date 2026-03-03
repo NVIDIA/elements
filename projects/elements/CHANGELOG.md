@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.61.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.2...@nvidia-elements/core-v1.61.3) (2026-03-03)
+
+
+### Bug Fixes
+
+* **elements:** popover and invoker types ([9abc259](https://github.com/NVIDIA/elements/commit/9abc259ff596f0c0e6d154bd693a2a21d2f31eca))
+
 ## [@nvidia-elements/core-v1.61.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.1...@nvidia-elements/core-v1.61.2) (2026-03-03)
 
 
