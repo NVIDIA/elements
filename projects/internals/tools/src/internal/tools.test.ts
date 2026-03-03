@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { loadTools, service, tool, jsonSchemaToZod } from './tools.js';
+import { loadTools, service, tool, jsonSchemaToZod, ToolSupport } from './tools.js';
 import type { ToolMethod, ToolOutput, Schema } from './tools.js';
 
 describe('metadata', () => {
@@ -60,6 +60,18 @@ describe('metadata', () => {
     expect((test.getData as ToolMethod<string>).metadata.command).toBe('data');
     expect((test.processUserInput as ToolMethod<string>).metadata.command).toBe('process.user.input');
     expect((test.simpleMethod as ToolMethod<string>).metadata.command).toBe('simple.method');
+  });
+
+  it('should use explicit support flag when provided', () => {
+    class Test {
+      @tool({ summary: 'test', support: ToolSupport.MCP })
+      method() {
+        return new Promise(resolve => resolve('test'));
+      }
+    }
+
+    const test = new Test();
+    expect((test.method as ToolMethod<string>).metadata.support).toBe(ToolSupport.MCP);
   });
 
   it('should generate correct title from method name', () => {
@@ -704,6 +716,52 @@ describe('jsonSchemaToZod', () => {
     const emptyObjectData = {};
     const emptyObjectResult = result.safeParse(emptyObjectData);
     expect(emptyObjectResult.success).toBe(true);
+  });
+
+  it('should handle array type without description', () => {
+    const schema = {
+      type: 'array' as const,
+      items: { type: 'string' as const }
+    };
+    const result = jsonSchemaToZod(schema);
+    expect(result).toBeDefined();
+    expect(result.safeParse(['a']).success).toBe(true);
+  });
+
+  it('should handle oneOf without description', () => {
+    const schema = {
+      oneOf: [{ type: 'string' as const }, { type: 'number' as const }]
+    };
+    const result = jsonSchemaToZod(schema);
+    expect(result).toBeDefined();
+    expect(result.safeParse('hello').success).toBe(true);
+  });
+
+  it('should handle single oneOf without description', () => {
+    const schema = {
+      oneOf: [{ type: 'string' as const }]
+    };
+    const result = jsonSchemaToZod(schema);
+    expect(result).toBeDefined();
+    expect(result.safeParse('hello').success).toBe(true);
+  });
+
+  it('should handle empty oneOf without description', () => {
+    const schema = {
+      oneOf: [] as Schema[]
+    };
+    const result = jsonSchemaToZod(schema);
+    expect(result).toBeDefined();
+  });
+
+  it('should handle enum type without description', () => {
+    const schema = {
+      type: 'string' as const,
+      enum: ['a', 'b']
+    };
+    const result = jsonSchemaToZod(schema);
+    expect(result).toBeDefined();
+    expect(result.safeParse('a').success).toBe(true);
   });
 
   it('should handle bare object type without additionalProperties (default behavior)', () => {

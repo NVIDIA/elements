@@ -157,9 +157,9 @@ export function validateTemplate(
     ...(mergedConfig.allowGlobalElements ? globalElements : [])
   ];
 
-  const customElementsAllowedAttributes: AllowedAttributes = elements.reduce((acc, element) => {
+  const customElementsAllowedAttributes: AllowedAttributes = elements.reduce((acc: AllowedAttributes, element) => {
     const customAttrs =
-      element.manifest.attributes?.map(attribute => {
+      element.manifest?.attributes?.map(attribute => {
         const typeText = attribute.type?.text ?? '';
 
         // allow arbitrary values for boolean, string, number, and icon name attributes
@@ -168,7 +168,7 @@ export function validateTemplate(
         }
 
         // allow declared literal values for enum attributes, any value for complex types such as DataElement data
-        const values = [...typeText.matchAll(/['"]([^'"]+)['"]/g)].map(([, v]) => v.trim());
+        const values = [...typeText.matchAll(/['"]([^'"]+)['"]/g)].map(([, v]) => v!.trim());
         if (values.length === 0) {
           return attribute.name;
         }
@@ -183,10 +183,10 @@ export function validateTemplate(
     return acc;
   }, {});
 
-  const allowedSvgAttributes: AllowedAttributes = svgElements.reduce((acc, element) => {
+  const allowedSvgAttributes: AllowedAttributes = svgElements.reduce((acc: AllowedAttributes, element) => {
     acc[element] = svgAttrs;
     return acc;
-  }, {});
+  }, {} as AllowedAttributes);
 
   const allowedAttributes: AllowedAttributes = {
     ...sanitizeHtml.defaults.allowedAttributes,
@@ -195,14 +195,14 @@ export function validateTemplate(
     body: ['nve-text', 'nve-layout', 'nve-theme'],
     ...customElementsAllowedAttributes,
     ...allowedSvgAttributes,
-    ...formElements.reduce((acc, element) => {
+    ...formElements.reduce((acc: AllowedAttributes, element) => {
       acc[element] = [...nativeElementAttrs, ...formAttrs];
       return acc;
-    }, {}),
-    ...nativeElements.reduce((acc, element) => {
+    }, {} as AllowedAttributes),
+    ...nativeElements.reduce((acc: AllowedAttributes, element) => {
       acc[element] = [...(acc[element] ?? []), ...nativeElementAttrs];
       return acc;
-    }, {}),
+    }, {} as AllowedAttributes),
     '*': [
       'slot',
       'id',
@@ -220,7 +220,7 @@ export function validateTemplate(
     .filter(i => typeof i !== 'string')
     .flatMap(i => (Array.isArray(i?.values) ? i.values : []));
 
-  const nonBooleanAttributes = sanitizeHtml.defaults.nonBooleanAttributes.filter(attr => attr !== 'hidden');
+  const nonBooleanAttributes = sanitizeHtml.defaults.nonBooleanAttributes.filter((attr: string) => attr !== 'hidden');
 
   source = removeBodyStyleSelectors(source);
 

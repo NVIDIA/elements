@@ -1,33 +1,33 @@
 import { ExamplesService, type Example } from '@internals/metadata';
 import { wrapText } from '../internal/utils.js';
 
-export function isContextExample(example: Example) {
+export function isContextExample(example: Partial<Example>) {
   const passedExclusionChecks =
     !example.deprecated &&
-    !example.id.toLowerCase().includes('theme') &&
-    !example.id.toLowerCase().includes('internal') &&
-    !example.tags.includes('anti-pattern') &&
-    !example.tags.includes('performance') &&
-    !example.tags.includes('test-case') &&
+    !example.id?.toLowerCase().includes('theme') &&
+    !example.id?.toLowerCase().includes('internal') &&
+    !example.tags?.includes('anti-pattern') &&
+    !example.tags?.includes('performance') &&
+    !example.tags?.includes('test-case') &&
     !example.element?.includes('internal') &&
     !example.element?.includes('responsive');
 
   const passedTypeChecks =
     example.composition ||
-    example.id.includes('default') ||
-    example.id.includes('forms') ||
-    example.id.includes('popover') ||
-    example.id.includes('page') ||
-    example.id.includes('grid') ||
-    example.id.includes('invoker') ||
-    example.id.includes('styles-typography') ||
-    example.id.includes('styles-layout') ||
-    example.tags.includes('pattern');
+    example.id?.includes('default') ||
+    example.id?.includes('forms') ||
+    example.id?.includes('popover') ||
+    example.id?.includes('page') ||
+    example.id?.includes('grid') ||
+    example.id?.includes('invoker') ||
+    example.id?.includes('styles-typography') ||
+    example.id?.includes('styles-layout') ||
+    example.tags?.includes('pattern');
   return passedExclusionChecks && passedTypeChecks;
 }
 
 function rankExample(example: Partial<Example>) {
-  const name = example.id.replace('elements-', '');
+  const name = (example.id ?? '').replace('elements-', '');
   if (name.startsWith('pattern')) {
     return 0;
   }
@@ -41,10 +41,10 @@ export function getPublicExamples(format: 'markdown' | 'json', examples: Partial
   const result = examples
     .filter(isContextExample)
     .reverse()
-    .map(s => ({
-      id: s.id,
-      name: s.name,
-      summary: s.summary ? s.summary : s.description,
+    .map((s: Partial<Example>) => ({
+      id: s.id ?? '',
+      name: s.name ?? '',
+      summary: s.summary ?? s.description,
       element: s.element ?? '',
       template: s.template ?? ''
     }))
@@ -71,7 +71,9 @@ export async function searchPublicExamples(
     return config.format === 'markdown' ? message : result;
   }
 
-  return config.format === 'markdown' ? result.map(e => renderExampleMarkdown(e)).join('\n') : result;
+  return config.format === 'markdown'
+    ? result.map((e: Partial<Example>) => renderExampleMarkdown(e)).join('\n')
+    : result;
 }
 
 export function renderExampleMarkdown(example: Partial<Example>) {
@@ -82,7 +84,7 @@ export function renderExampleMarkdown(example: Partial<Example>) {
 export function renderExampleHeaderMarkdown(example: Partial<Example>) {
   const content = example.summary ? example.summary : example.description;
   const formattedContent = content ? `${wrapText(content)}` : '';
-  return `## ${example.name.replace(/([A-Z])/g, ' $1').trim()} (${example.id})${formattedContent ? '\n\n' : ''}${formattedContent}`;
+  return `## ${(example.name ?? '').replace(/([A-Z])/g, ' $1').trim()} (${example.id})${formattedContent ? '\n\n' : ''}${formattedContent}`;
 }
 
 const VOID_ELEMENTS = new Set([
@@ -118,16 +120,17 @@ function condenseLines(lines: string[], maxRepeat: number): string[] {
   let i = 0;
 
   while (i < lines.length) {
-    const openMatch = lines[i].match(/^(\s*)<([\w][\w-]*)([\s>/])/);
+    const currentLine = lines[i]!;
+    const openMatch = currentLine.match(/^(\s*)<([\w][\w-]*)([\s>/])/);
 
-    if (!openMatch || lines[i].trim() === '') {
-      result.push(lines[i]);
+    if (!openMatch || currentLine.trim() === '') {
+      result.push(currentLine);
       i++;
       continue;
     }
 
-    const indent = openMatch[1];
-    const tag = openMatch[2];
+    const indent = openMatch[1]!;
+    const tag = openMatch[2]!;
 
     const siblings: Array<{ start: number; end: number }> = [];
     let cursor = i;
@@ -138,7 +141,7 @@ function condenseLines(lines: string[], maxRepeat: number): string[] {
         continue;
       }
 
-      const sibMatch = lines[cursor].match(/^(\s*)<([\w][\w-]*)([\s>/])/);
+      const sibMatch = lines[cursor]!.match(/^(\s*)<([\w][\w-]*)([\s>/])/);
       if (sibMatch && sibMatch[1] === indent && sibMatch[2] === tag) {
         const sibEnd = findBlockEnd(lines, cursor, tag);
         siblings.push({ start: cursor, end: sibEnd });
@@ -150,13 +153,13 @@ function condenseLines(lines: string[], maxRepeat: number): string[] {
 
     const kept = Math.min(siblings.length, maxRepeat);
     for (let k = 0; k < kept; k++) {
-      const { start, end } = siblings[k];
+      const { start, end } = siblings[k]!;
       if (start === end) {
-        result.push(lines[start]);
+        result.push(lines[start]!);
       } else {
-        result.push(lines[start]);
+        result.push(lines[start]!);
         result.push(...condenseLines(lines.slice(start + 1, end), maxRepeat));
-        result.push(lines[end]);
+        result.push(lines[end]!);
       }
     }
 
@@ -172,7 +175,7 @@ function condenseLines(lines: string[], maxRepeat: number): string[] {
 }
 
 function findBlockEnd(lines: string[], start: number, tag: string): number {
-  const line = lines[start];
+  const line = lines[start]!;
 
   if (line.trimEnd().endsWith('/>')) {
     return start;
@@ -188,7 +191,7 @@ function findBlockEnd(lines: string[], start: number, tag: string): number {
 
   let depth = 1;
   for (let i = start + 1; i < lines.length; i++) {
-    const l = lines[i];
+    const l = lines[i]!;
     const opens = (l.match(new RegExp(`<${tag}[\\s>]`, 'g')) || []).length;
     const selfCloses = (l.match(new RegExp(`<${tag}[^>]*/>`, 'g')) || []).length;
     const closes = (l.match(new RegExp(`</${tag}>`, 'g')) || []).length;
