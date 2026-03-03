@@ -109,8 +109,9 @@ export interface QualityControlValue {
   cheap: boolean;
 }
 
-function qualityValidator(value: QualityControlValue) {
-  if (value.good && value.fast && value.cheap) {
+function qualityValidator(value: unknown) {
+  const v = value as QualityControlValue;
+  if (v.good && v.fast && v.cheap) {
     return {
       validity: { badInput: true },
       message: 'at least one value must be false'
