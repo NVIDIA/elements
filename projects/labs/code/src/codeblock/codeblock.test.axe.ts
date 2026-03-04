@@ -13,8 +13,8 @@ describe(CodeBlock.metadata.tag, () => {
       </nve-codeblock>
     `);
 
-    await elementIsStable(fixture.querySelector(CodeBlock.metadata.tag));
-    const results = await runAxe([CodeBlock.metadata.tag]);
+    await elementIsStable(fixture.querySelector(CodeBlock.metadata.tag)!);
+    const results = (await runAxe([CodeBlock.metadata.tag])) as { violations: { length: number }[] };
     expect(results.violations.length).toBe(0);
     removeFixture(fixture);
   });
