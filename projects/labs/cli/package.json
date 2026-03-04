@@ -6,7 +6,7 @@
   "bin": {
     "nve": "./dist/index.js",
     "nve-mcp": "./dist/mcp/index.js",
-    "nve-setup-mcp": "./dist/setup-mcp/index.js"
+    "nve-setup": "./dist/setup/index.js"
   },
   "files": [
     "README.md",

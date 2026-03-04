@@ -69,7 +69,7 @@ nve
 The fastest way to configure MCP is with the `setup` command:
 
 ```shell
-npx --package=@nvidia-elements/cli -y nve-setup-mcp
+npx --package=@nvidia-elements/cli -y nve-setup
 ```
 
 This detects your package manager, configures the MCP server for both Cursor and Claude Code, and adds Elements core dependencies to the project.
