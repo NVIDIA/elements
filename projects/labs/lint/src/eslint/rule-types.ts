@@ -2,9 +2,9 @@
  * Cast a parser-specific node (HTML or CSS) to a type compatible with ESLint APIs
  * (context.report, fixer.replaceText, sourceCode.getText, etc.).
  *
- * This is needed because @html-eslint and CSS parsers produce nodes that are
- * structurally similar to ESTree nodes but do not extend them in the type system.
- * The return type must be `any` to satisfy all ESLint API signatures.
+ * Required because @html-eslint and CSS parsers produce nodes that are
+ * structurally like ESTree nodes but do not extend them in the type system.
+ * The return type must be `any` to match all ESLint API signatures.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function asNode(node: unknown): any {
