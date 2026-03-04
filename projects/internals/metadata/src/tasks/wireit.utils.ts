@@ -4,7 +4,7 @@ import { join, relative, resolve, dirname } from 'path';
 const rootDir = resolve(import.meta.dirname, '../../../../../');
 const wireitScripts = new Map(); // key: "package-path:script-name", value: script config
 
-function findPackageJsonFiles(dir, results = []) {
+function findPackageJsonFiles(dir: string, results: string[] = []): string[] {
   try {
     const items = readdirSync(dir);
 
@@ -29,8 +29,8 @@ function findPackageJsonFiles(dir, results = []) {
   return results;
 }
 
-function parseDependency(dep, currentPackagePath) {
-  let scriptRef = dep;
+function parseDependency(dep: string | { script: string; cascade?: boolean }, currentPackagePath: string) {
+  let scriptRef: string = typeof dep === 'string' ? dep : dep.script;
   let cascade = true;
 
   if (typeof dep === 'object' && dep.script) {
@@ -46,7 +46,7 @@ function parseDependency(dep, currentPackagePath) {
 
   if (isCrossPackageRef) {
     const [path, scriptName] = scriptRef.split(':');
-    const absolutePath = resolve(dirname(currentPackagePath), path);
+    const absolutePath = resolve(dirname(currentPackagePath), path!);
     const packagePath = findPackageJsonInDir(absolutePath);
     return { packagePath, scriptName, cascade };
   } else {
@@ -54,7 +54,7 @@ function parseDependency(dep, currentPackagePath) {
   }
 }
 
-function findPackageJsonInDir(dir) {
+function findPackageJsonInDir(dir: string): string | null {
   let currentDir = resolve(dir);
   const root = resolve('/');
 
@@ -71,7 +71,7 @@ function findPackageJsonInDir(dir) {
   return null;
 }
 
-function extractWireitScripts(packageJsonPath) {
+function extractWireitScripts(packageJsonPath: string) {
   try {
     const content = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
     const wireit = content.wireit || {};
@@ -88,7 +88,7 @@ function extractWireitScripts(packageJsonPath) {
       });
     }
   } catch (err) {
-    console.error(`Error reading ${packageJsonPath}:`, err.message);
+    console.error(`Error reading ${packageJsonPath}:`, (err as Error).message);
   }
 }
 
@@ -104,13 +104,13 @@ function buildDependencyGraph() {
           script.dependencies.push(depKey);
         }
       } catch (err) {
-        console.error(`error parsing dependency in ${key}:`, err.message);
+        console.error(`error parsing dependency in ${key}:`, (err as Error).message);
       }
     }
   }
 }
 
-function createLabel(packageName, scriptName) {
+function createLabel(packageName: string, scriptName: string) {
   const shortName = packageName
     .replace('@nvidia-elements/', '')
     .replace('@nvidia-elements/', 'labs/')

@@ -22,7 +22,7 @@ function getChangelog(basePath: string): string {
   const changelog = existsSync(new URL(basePath + '/CHANGELOG.md', import.meta.url))
     ? readFileSync(new URL(basePath + '/CHANGELOG.md', import.meta.url), 'utf8')
     : '';
-  return changelog.includes('@elements') ? changelog.split('@elements')[0] : changelog;
+  return changelog.includes('@elements') ? (changelog.split('@elements')[0] ?? '') : changelog;
 }
 
 function getManifestDeclarations(customElementsManifest: CustomElementsManifest): CustomElementManifest[] {
@@ -36,7 +36,7 @@ function getManifestDeclarations(customElementsManifest: CustomElementsManifest)
   ).filter(d => d.tagName);
 }
 
-function getCustomElementsManifest(basePath: string): CustomElementsManifest {
+function getCustomElementsManifest(basePath: string): CustomElementsManifest | null {
   const customElementsManifestPath = new URL(basePath + '/dist/custom-elements.json', import.meta.url);
   return existsSync(customElementsManifestPath)
     ? JSON.parse(readFileSync(new URL(customElementsManifestPath, import.meta.url), 'utf8'))
@@ -78,7 +78,7 @@ function getTokens(): Token[] {
   return tokensJSON.map(token => {
     let value = token.value;
     if (value.includes('ref-scale')) {
-      value = value.split(' * ')[1].replace(')', '').trim();
+      value = (value.split(' * ')[1] ?? '').replace(')', '').trim();
     }
 
     if (value.includes('nve')) {
@@ -101,9 +101,9 @@ function getProjectElements(basePath: string): Element[] {
 
   return elementDeclarations
     .map(d => d.tagName)
-    .reduce((elements: CustomElementManifest[], name) => {
+    .reduce((elements: Element[], name: string) => {
       const manifest = elementDeclarations.find(e => e.tagName === name);
-      const markdown = manifest.metadata?.markdown ?? '';
+      const markdown = manifest?.metadata?.markdown ?? '';
       const changelog = getElementChangelog(name, changelogFile);
       const metadata: Element = {
         name,
@@ -116,7 +116,7 @@ function getProjectElements(basePath: string): Element[] {
 
       return [...elements, metadata];
     }, [])
-    .sort((a, b) => (a.name < b.name ? -1 : 1));
+    .sort((a: Element, b: Element) => (a.name < b.name ? -1 : 1));
 }
 
 export async function getApi(): Promise<{
