@@ -5,13 +5,13 @@
 }
 ---
 
-<nve-alert-group status="warning">
-  <nve-alert>
-    <nve-icon name="beaker" slot="icon" style="--color:inherit"></nve-icon> Labs projects are experimental packages available for early feedback.
-  </nve-alert>
-</nve-alert-group>
+<nve-alert>
+  <nve-icon name="beaker" slot="icon" status="accent"></nve-icon> Labs projects are experimental packages available for early feedback.
+</nve-alert>
 
 # Elements CLI
+
+<h2 nve-text="heading sm muted">The Elements CLI provides command-line access to the Elements design system. Use it to scaffold new projects pre-configured with Elements, look up component APIs and design tokens, validate templates, and generate shareable playgrounds -- all without leaving your terminal</h2>
 
 {% install-artifactory %}
 

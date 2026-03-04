@@ -5,13 +5,13 @@
 }
 ---
 
-<nve-alert-group status="warning">
-  <nve-alert>
-    <nve-icon name="beaker" slot="icon" style="--color:inherit"></nve-icon> Labs projects are experimental packages available for early feedback.
-  </nve-alert>
-</nve-alert-group>
+<nve-alert>
+  <nve-icon name="beaker" slot="icon" status="accent"></nve-icon> Labs projects are experimental packages available for early feedback.
+</nve-alert>
 
-# Elements MCP
+# {{title}}
+
+<h2 nve-text="heading sm muted">The Elements MCP server connects AI coding assistants to the Elements design system. It gives tools like Claude Code and Cursor direct access to component APIs, design tokens, template validation, and project scaffolding so your AI assistant can build with Elements effectively</h2>
 
 {% install-artifactory %}
 
@@ -20,18 +20,25 @@
 The fastest way to configure the Elements MCP is with the setup command. This detects your package manager, configures the MCP server for both Cursor and Claude Code, and adds Elements core dependencies to the project.
 
 ```shell
-npx --package=@nvidia-elements/cli -y nve-setup-mcp
+npx --package=@nvidia-elements/cli -y nve-setup
 ```
 
-## Claude Code
-
-Install to Claude Code by adding the configuration to your `.mcp.json` file.
-
-### npm
+## Manual Setup - Claude Code
 
 Add the following configuration to your `.mcp.json` file (typically located at `~/.config/claude-code/.mcp.json` or `%APPDATA%\claude-code\.mcp.json` on Windows):
 
+<section id="claude-tab-group" style="height: 300px;">
+  <nve-tabs id="claude-tabs">
+    <nve-tabs-item selected value="claude-npm">npm</nve-tabs-item>
+    <nve-tabs-item value="claude-pnpm">Pnpm</nve-tabs-item>
+  </nve-tabs>
+  <nve-divider></nve-divider>
+  <br />
+
+<div id="claude-npm">
+
 ```json
+// .mcp.json
 {
   "mcpServers": {
     "elements": {
@@ -46,11 +53,12 @@ Add the following configuration to your `.mcp.json` file (typically located at `
 }
 ```
 
-### pnpm
+</div>
 
-Or, if you prefer using pnpm:
+<div id="claude-pnpm" hidden>
 
 ```json
+// .mcp.json
 {
   "mcpServers": {
     "elements": {
@@ -65,17 +73,42 @@ Or, if you prefer using pnpm:
 }
 ```
 
+  </div>
+</section>
+
 After adding the configuration, restart Claude Code for the changes to take effect. The Elements MCP tools are then available for use in your conversations.
 
-## Cursor
+<script type="module">
+  const tabs = document.querySelector('#claude-tab-group');
+  const tabItems = document.querySelectorAll('#claude-tabs nve-tabs-item');
+  const panels = Array.from(document.querySelectorAll('#claude-tab-group div'));
+  tabs.addEventListener('click', e => {
+    if (e.target.localName === 'nve-tabs-item') {
+      tabItems.forEach(t => t.selected = false);
+      panels.forEach(i => i.hidden = true);
+      e.target.selected = true;
+      document.querySelector('#' + e.target.value).hidden = false;
+    }
+  });
+</script>
+
+## Manual Setup - Cursor
 
 Install to Cursor or copy the MCP configuration below.
 
-<div>
-  <nve-button>
-    <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=elements&config=eyJkZXNjcmlwdGlvbiI6IkVsZW1lbnRzIEFQSSBhbmQgQ3VzdG9tIEVsZW1lbnQgU2NoZW1hIiwiZW52Ijp7Im5wbV9jb25maWdfcmVnaXN0cnkiOiJodHRwczovL3VybS5udmlkaWEuY29tL2FydGlmYWN0b3J5L2FwaS9ucG0vc3ctbmdjLXVuaWZpZWQtbnBtLXByb3h5LyJ9LCJjb21tYW5kIjoibnBtIGV4ZWMgLS1wYWNrYWdlPUBudmUtbGFicy9jbGlAbGF0ZXN0IC15IC0tcHJlZmVyLW9ubGluZSAtLSBudmUtbWNwIn0%3D">Add to Cursor with npm</a>
-  </nve-button>
-</div>
+<section id="cursor-tab-group" style="height: 300px;">
+  <nve-tabs id="cursor-tabs">
+    <nve-tabs-item selected value="cursor-npm">npm</nve-tabs-item>
+    <nve-tabs-item value="cursor-pnpm">Pnpm</nve-tabs-item>
+  </nve-tabs>
+  <nve-divider></nve-divider>
+  <br />
+
+<div id="cursor-npm">
+
+<nve-button>
+  <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=elements&config=eyJkZXNjcmlwdGlvbiI6IkVsZW1lbnRzIEFQSSBhbmQgQ3VzdG9tIEVsZW1lbnQgU2NoZW1hIiwiZW52Ijp7Im5wbV9jb25maWdfcmVnaXN0cnkiOiJodHRwczovL3VybS5udmlkaWEuY29tL2FydGlmYWN0b3J5L2FwaS9ucG0vc3ctbmdjLXVuaWZpZWQtbnBtLXByb3h5LyJ9LCJjb21tYW5kIjoibnBtIGV4ZWMgLS1wYWNrYWdlPUBudmUtbGFicy9jbGlAbGF0ZXN0IC15IC0tcHJlZmVyLW9ubGluZSAtLSBudmUtbWNwIn0%3D">Add to Cursor with npm</a>
+</nve-button>
 
 ```json
 // .cursor/mcp.json
@@ -92,11 +125,13 @@ Install to Cursor or copy the MCP configuration below.
 }
 ```
 
-<div>
-  <nve-button>
-    <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=elements&config=eyJkZXNjcmlwdGlvbiI6IkVsZW1lbnRzIEFQSSBhbmQgQ3VzdG9tIEVsZW1lbnQgU2NoZW1hIiwiZW52Ijp7Im5wbV9jb25maWdfcmVnaXN0cnkiOiJodHRwczovL3VybS5udmlkaWEuY29tL2FydGlmYWN0b3J5L2FwaS9ucG0vc3ctbmdjLXVuaWZpZWQtbnBtLXByb3h5LyJ9LCJjb21tYW5kIjoicG5wbSAtLXBhY2thZ2U9QG52ZS1sYWJzL2NsaUBsYXRlc3QgZGx4IG52ZS1tY3AifQ%3D%3D">Add to Cursor with pnpm</a>
-  </nve-button>
 </div>
+
+<div id="cursor-pnpm" hidden>
+
+<nve-button>
+  <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=elements&config=eyJkZXNjcmlwdGlvbiI6IkVsZW1lbnRzIEFQSSBhbmQgQ3VzdG9tIEVsZW1lbnQgU2NoZW1hIiwiZW52Ijp7Im5wbV9jb25maWdfcmVnaXN0cnkiOiJodHRwczovL3VybS5udmlkaWEuY29tL2FydGlmYWN0b3J5L2FwaS9ucG0vc3ctbmdjLXVuaWZpZWQtbnBtLXByb3h5LyJ9LCJjb21tYW5kIjoicG5wbSAtLXBhY2thZ2U9QG52ZS1sYWJzL2NsaUBsYXRlc3QgZGx4IG52ZS1tY3AifQ%3D%3D">Add to Cursor with pnpm</a>
+</nve-button>
 
 ```json
 // .cursor/mcp.json
@@ -113,17 +148,20 @@ Install to Cursor or copy the MCP configuration below.
 }
 ```
 
-<script type="module">
-  const tabs = document.querySelector('#cursor-install-tabs');
-  const tabPanels = {
-    npm: document.querySelector('#cursor-npm-install'),
-    pnpm: document.querySelector('#cursor-pnpm-install')
-  };
+ </div>
+</section>
 
+<script type="module">
+  const tabs = document.querySelector('#cursor-tab-group');
+  const tabItems = document.querySelectorAll('#cursor-tabs nve-tabs-item');
+  const panels = Array.from(document.querySelectorAll('#cursor-tab-group > div'));
   tabs.addEventListener('click', e => {
-    tabPanels.npm.hidden = true;
-    tabPanels.pnpm.hidden = true;
-    tabPanels[e.target.value].hidden = false;
+    if (e.target.localName === 'nve-tabs-item') {
+      tabItems.forEach(t => t.selected = false);
+      panels.forEach(i => i.hidden = true);
+      e.target.selected = true;
+      document.querySelector('#' + e.target.value).hidden = false;
+    }
   });
 </script>
 
