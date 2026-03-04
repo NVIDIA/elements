@@ -56,6 +56,7 @@ export class AnimatedBuild extends LitElement {
           position: absolute;
           top: 20px;
           right: 20px;
+          width: auto;
         }
       }
 
