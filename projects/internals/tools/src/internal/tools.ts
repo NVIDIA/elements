@@ -52,7 +52,7 @@ export interface Schema {
 
 export type ManagedToolMethod<T> = {
   (...args: any[]): Promise<ToolOutput<T>>; // eslint-disable-line @typescript-eslint/no-explicit-any
-  metadata?: ToolMetadata;
+  metadata: ToolMetadata;
 };
 
 export type ToolMethod<T> = {
