@@ -1,3 +1,6 @@
+import { writeFileSync, unlinkSync, mkdtempSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { ToolMethod } from '../internal/tools.js';
 import { PlaygroundService } from './service.js';
@@ -166,6 +169,98 @@ describe('PlaygroundService', () => {
         template: '<nve-button nve-layout="column">hello</nve-button>'
       });
       expect(result).toEqual([]);
+    });
+  });
+
+  describe('path input', () => {
+    let tempDir: string;
+    let tempFile: string;
+    let originalEnv: string | undefined;
+
+    beforeEach(() => {
+      originalEnv = process.env.ELEMENTS_ENV;
+      tempDir = mkdtempSync(join(tmpdir(), 'playground-test-'));
+      tempFile = join(tempDir, 'template.html');
+    });
+
+    afterEach(() => {
+      process.env.ELEMENTS_ENV = originalEnv;
+      try {
+        unlinkSync(tempFile);
+      } catch {
+        // already cleaned up
+      }
+    });
+
+    it('should expose path in validate inputSchema', () => {
+      const metadata = (PlaygroundService.validate as ToolMethod<unknown>).metadata;
+      expect(metadata.inputSchema?.properties?.path).toBeDefined();
+      expect(metadata.inputSchema?.properties?.path.type).toBe('string');
+    });
+
+    it('should expose path in create inputSchema', () => {
+      const metadata = (PlaygroundService.create as ToolMethod<unknown>).metadata;
+      expect(metadata.inputSchema?.properties?.path).toBeDefined();
+      expect(metadata.inputSchema?.properties?.path.type).toBe('string');
+    });
+
+    it('should not require template or path in validate inputSchema', () => {
+      const metadata = (PlaygroundService.validate as ToolMethod<unknown>).metadata;
+      expect(metadata.inputSchema?.required).toBeUndefined();
+    });
+
+    it('should not require template or path in create inputSchema', () => {
+      const metadata = (PlaygroundService.create as ToolMethod<unknown>).metadata;
+      expect(metadata.inputSchema?.required).toBeUndefined();
+    });
+
+    it('validate should read template from file path', async () => {
+      process.env.ELEMENTS_ENV = 'mcp';
+      writeFileSync(tempFile, '<nve-button>hello</nve-button>', 'utf8');
+      const result = await PlaygroundService.validate({ path: tempFile });
+      expect(Array.isArray(result)).toBe(true);
+      expect(result).toHaveLength(0);
+    });
+
+    it('validate should return lint errors from file path', async () => {
+      process.env.ELEMENTS_ENV = 'mcp';
+      writeFileSync(tempFile, '<nve-button nve-layout="column">hello</nve-button>', 'utf8');
+      const result = await PlaygroundService.validate({ path: tempFile });
+      expect(result.length).toBeGreaterThan(0);
+      expect(result[0].message).toContain('Unexpected use of restricted attribute "nve-layout"');
+    });
+
+    it('create should read template from file path', async () => {
+      process.env.ELEMENTS_ENV = 'browser';
+      writeFileSync(tempFile, '<nve-button>hello</nve-button>', 'utf8');
+      const result = await PlaygroundService.create({ path: tempFile, start: false });
+      expect(typeof result).toBe('string');
+      expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+    });
+
+    it('create should return lint errors from file path in mcp environment', async () => {
+      process.env.ELEMENTS_ENV = 'mcp';
+      writeFileSync(tempFile, '<nve-button nve-layout="column">hello</nve-button>', 'utf8');
+      const result = await PlaygroundService.create({ path: tempFile, start: false });
+      expect(Array.isArray(result)).toBe(true);
+      expect((result as { message: string }[])[0].message).toContain(
+        'Unexpected use of restricted attribute "nve-layout"'
+      );
+    });
+
+    it('should throw when both template and path are provided', async () => {
+      writeFileSync(tempFile, '<nve-button>hello</nve-button>', 'utf8');
+      await expect(
+        PlaygroundService.validate({ template: '<nve-button>hello</nve-button>', path: tempFile })
+      ).rejects.toThrow('Provide either "template" or "path", not both.');
+    });
+
+    it('should throw when neither template nor path is provided', async () => {
+      await expect(PlaygroundService.validate({})).rejects.toThrow('Either "template" or "path" is required.');
+    });
+
+    it('should throw when file does not exist', async () => {
+      await expect(PlaygroundService.validate({ path: '/nonexistent/file.html' })).rejects.toThrow();
     });
   });
 });

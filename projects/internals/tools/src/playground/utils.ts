@@ -14,7 +14,31 @@ interface PlaygroundOptions {
 }
 
 export const playgroundTypes = ['default', 'react', 'preact', 'angular', 'lit', 'vue'] as const;
+
 export type PlaygroundType = (typeof playgroundTypes)[number];
+
+export const defaultTemplate =
+  '<nve-page>\n  <nve-page-header slot="header">\n    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>\n    <h2 slot="prefix" nve-text="heading">NVIDIA</h2>\n  </nve-page-header>\n  <main nve-layout="column gap:lg pad:lg">\n    <!-- template content here -->\n  </main>\n</nve-page>';
+
+export async function resolveTemplate({ template, path }: { template?: string; path?: string }): Promise<string> {
+  const hasInvalidTemplate = template && template.length > 0 && template !== defaultTemplate;
+
+  if (hasInvalidTemplate && path) {
+    throw new Error('Provide either "template" or "path", not both.');
+  }
+
+  // only load in node environment when caller supplies a path
+  if (path) {
+    const { readFileSync } = await import('node:fs');
+    return readFileSync(path, 'utf8');
+  }
+
+  if (template !== undefined) {
+    return template;
+  }
+
+  throw new Error('Either "template" or "path" is required.');
+}
 
 export function createPlaygroundURL(source: string, elements: Element[], opts: PlaygroundOptions = {}) {
   const options: PlaygroundOptions = { name: '', type: 'default', ...opts };
