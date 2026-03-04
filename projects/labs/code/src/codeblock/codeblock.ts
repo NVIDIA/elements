@@ -84,18 +84,18 @@ export class CodeBlock extends LitElement implements ContainerElement {
     const textContent = this.shadowRoot
       ?.querySelector('slot')
       ?.assignedNodes()
-      .reduce((p, n: HTMLElement | HTMLTemplateElement | Text) => {
+      .reduce((p: string[], n) => {
         let template = '';
         if (n instanceof HTMLTemplateElement) {
-          template = n.content.textContent;
+          template = n.content.textContent ?? '';
         } else if (n instanceof HTMLElement) {
           template = n.innerHTML;
         } else {
-          template = n.textContent;
+          template = n.textContent ?? '';
         }
 
         return [...p, template];
-      }, [])
+      }, [] as string[])
       .join('');
 
     return shiftLeft(this.code ?? (textContent as string));
@@ -119,7 +119,7 @@ export class CodeBlock extends LitElement implements ContainerElement {
   }
 
   #updateCode(): void {
-    const code = this.#source.trim();
+    const code = this.#source?.trim();
     if (!code) {
       return;
     }
@@ -156,12 +156,12 @@ export class CodeBlock extends LitElement implements ContainerElement {
   }
 
   #getLinesToHighlight() {
-    const range = [];
-    const lines = this.highlight.split(',');
+    const range: number[] = [];
+    const lines = this.highlight!.split(',');
     for (const l in lines) {
-      const [startStr, endStr] = lines[l].split('-');
-      const start = parseInt(startStr);
-      let end = parseInt(endStr);
+      const [startStr, endStr] = lines[l]!.split('-');
+      const start = parseInt(startStr!);
+      let end = parseInt(endStr!);
       if (!end) {
         end = start;
       }
