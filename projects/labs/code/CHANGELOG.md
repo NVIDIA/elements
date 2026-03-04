@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.7.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.7.1...@nvidia-elements/code-v0.7.2) (2026-03-04)
+
+
+### Bug Fixes
+
+* **labs-code:** align tsconfig ([4515606](https://github.com/NVIDIA/elements/commit/45156069c8b455d22f8195fdb027f8cf5f09e2a8))
+
 ## [@nvidia-elements/code-v0.7.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.7.0...@nvidia-elements/code-v0.7.1) (2026-02-06)
 
 
