@@ -14,9 +14,24 @@ export interface Skill {
   context: string;
 }
 
-const mcpContext = /* markdown */ `
+const mcpContext = `
 ## Elements MCP
-The Elements MCP server provides tools to discover, look up, and validate components. **Use these before writing any nve-* HTML.**
+
+The MCP server provides tools to discover, look up, and validate components. **Use these before writing any nve-* HTML.**
+`;
+
+const cliContext = `
+## Elements CLI (\`nve\`)
+
+The CLI provides tools to create, setup, and validate projects. Use \`nve --help\` to see the available commands. **Can be use as an alternative to the MCP.**
+
+\`\`\`shell
+nve --help
+\`\`\`
+
+\`\`\`shell
+nve project.create --help
+\`\`\`
 `;
 
 /**
@@ -146,16 +161,14 @@ const elementsSkill: Skill = {
   title: 'Elements Design System (nve)',
   description:
     'Build UI with NVIDIA Elements (NVE). Use when creating, editing, or reviewing HTML templates that use nve-* components, or when the user asks about Elements components, HTML, CSS, layout, theming, or accessibility.',
-  context: `# Building UI with NVIDIA Elements
+  context: `
+# Building UI with NVIDIA Elements
 
 Elements is NVIDIA's design system for AI and Robotics applications, built for speed and scale. It provides a comprehensive library of web components (nve-*) that work across any framework. Elements covers the full spectrum of UI needs: layout primitives, typography, form controls, data grids, navigation, dialogs, theming, and accessibility.
-
-${authoringContext}
-
 ${mcpContext}
-
+${cliContext}
+${authoringContext}
 ${playgroundContext}
-
 ${integrationContext}`
 };
 
