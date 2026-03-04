@@ -7,10 +7,9 @@
 Best practices and guidelines for creating UI with NVIDIA Elements.
 
 1. **Search** patterns and compositions (tools: `examples_list`, `examples_get`)
-2. **Search** available components and APIs (tools: `api_list`, `api_get`)
-3. **Look Up** full API details and documentation (tools: `api_get`)
-4. **Write** the HTML using `nve-*` components (tools: `api_imports_get`)
-5. **Check** the template (tools: `api_template_validate`)
+2. **Search** components and API documentation (tools: `api_list`, `api_get`)
+3. **Write** the HTML using `nve-*` components (tools: `api_imports_get`)
+4. **Check** the template (tools: `api_template_validate`)
 
 ### Best practices
 
@@ -35,7 +34,7 @@ Best practices and guidelines for creating UI with NVIDIA Elements.
 ```html
 <nve-page>
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm">NV</nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix" nve-text="heading">Infrastructure</h2>
   </nve-page-header>
   <main nve-layout="column gap:lg pad:lg">
