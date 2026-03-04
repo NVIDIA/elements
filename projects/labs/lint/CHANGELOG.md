@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.12.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.12.3...@nvidia-elements/lint-v0.12.4) (2026-03-04)
+
+
+### Bug Fixes
+
+* **labs-lint:** improved runtime checking and type checking ([9352bb3](https://github.com/NVIDIA/elements/commit/9352bb3b69fbd9c79fb572b2c9cc05ea8f291276))
+
 ## [@nvidia-elements/lint-v0.12.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.12.2...@nvidia-elements/lint-v0.12.3) (2026-02-27)
 
 
