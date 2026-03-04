@@ -17,6 +17,11 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "isolatedModules": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
     "paths": {
       "@internals/testing/*": ["./src/*"]
     }
