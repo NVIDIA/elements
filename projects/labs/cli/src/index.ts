@@ -55,7 +55,7 @@ tools
     const { properties, required } = inputSchema ?? {};
     const requiredArgs = Object.keys(properties ?? {}).filter(key => required?.includes(key));
     const optionalArgs = Object.keys(properties ?? {}).filter(
-      key => !required?.includes(key) || properties?.[key].default
+      key => !required?.includes(key) || properties?.[key]?.default
     );
 
     const command =
@@ -66,6 +66,8 @@ tools
       summary,
       // builder to add arguments metadata
       async builder => {
+        if (!properties) return;
+
         const argOptions = (prop: Schema) => ({
           describe: prop.description,
           type: prop.type as 'string' | 'number' | 'boolean',
@@ -73,8 +75,8 @@ tools
           default: prop.default
         });
 
-        requiredArgs.forEach(key => builder.positional(key, argOptions(properties[key])));
-        optionalArgs.forEach(key => builder.option(key, argOptions(properties[key])));
+        requiredArgs.forEach(key => builder.positional(key, argOptions(properties[key]!)));
+        optionalArgs.forEach(key => builder.option(key, argOptions(properties[key]!)));
       },
       // main handler for the command
       async args => {
@@ -94,11 +96,11 @@ tools
         async argv => {
           const interactive = !!requiredArgs.find(p => !argv[p]);
           const argNames = interactive
-            ? [...requiredArgs, ...optionalArgs.filter(key => properties?.[key].default === undefined)]
+            ? [...requiredArgs, ...optionalArgs.filter(key => properties?.[key]?.default === undefined)]
             : requiredArgs;
           for (const argName of argNames) {
             if (!argv[argName]) {
-              const propertySchema = properties?.[argName];
+              const propertySchema = properties?.[argName] ?? {};
               const v = await getArgValue(argName, propertySchema);
               argv[argName] = v;
             } else if (properties?.[argName]?.type === 'array' && typeof argv[argName] === 'string') {
