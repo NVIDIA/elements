@@ -1154,7 +1154,7 @@ export const FocusTypes = {
  */
 export const PanelDetail = {
   render: () => html`
-<nve-page id="grid-panel-demo" style="max-height: 500px;">
+<nve-page id="grid-panel-demo">
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm"></nve-logo>
     <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
@@ -1229,7 +1229,7 @@ export const PanelDetail = {
 export const PanelGrid = {
   render() {
     return html`
-    <nve-page style="max-height: 500px;">
+    <nve-page>
       <nve-page-header slot="header">
         <nve-logo slot="prefix" size="sm"></nve-logo>
         <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
