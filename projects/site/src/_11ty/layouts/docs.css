@@ -237,11 +237,11 @@ nvd-canvas {
 }
 
 nvd-canvas:has(nve-page),
-nvd-canvas:has(iframe[src*='@nvidia-elements/core/page']) {
+nvd-canvas:has(iframe[src*='page']) {
   --padding: 0;
 
   nve-page {
-    height: 540px !important;
+    height: 580px !important;
   }
 }
 

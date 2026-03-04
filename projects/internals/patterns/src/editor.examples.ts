@@ -25,7 +25,7 @@ export default {
  */
 export const EditorFileBrowser = {
   render: () => html`
-<nve-page style="height: 650px">
+<nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
     <h2 slot="prefix" nve-text="heading">Config Editor</h2>
@@ -146,7 +146,7 @@ class LidarProcessingConfig:
  */
 export const EditorDiffView = {
   render: () => html`
-<nve-page style="height: 600px">
+<nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
     <h2 slot="prefix" nve-text="heading">Sensor Calibration</h2>
@@ -282,7 +282,7 @@ radar:
  */
 export const EditorReadOnly = {
   render: () => html`
-<nve-page style="height: 600px">
+<nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
     <h2 slot="prefix" nve-text="heading">Session Viewer</h2>
