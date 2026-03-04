@@ -7,9 +7,7 @@
  * https://github.com/dequelabs/axe-core
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const axeGlobal = globalThis as any as {
-  axe: { run: (selectors: string[], config: object) => Promise<{ violations: unknown[] }> };
-};
+const axeGlobal = globalThis as any as { axe: { run: (selectors: string[], config: object) => Promise<unknown> } };
 
 export async function runAxe(selectors: string[], config = {}) {
   return await axeGlobal.axe.run(selectors, {
