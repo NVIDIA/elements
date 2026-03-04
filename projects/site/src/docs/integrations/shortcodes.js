@@ -7,10 +7,8 @@ export function renderInstallArtifactoryShortcode() {
 
 If not yet done, install [NodeJS](https://nodejs.org/en/download/). NodeJS is a JavaScript runtime that has a large ecosystem of tooling and packages for Web Development. Once installed the Node Package Manager (NPM) will be available for use.
 
-<nve-alert status="warning">AVInfra monorepo users skip .npmrc setup/login and use pnpm to install base packages.</nve-alert>
-
 \`\`\`shell
-# login to artifactory
+# login to artifactory (AVInfra monorepo users can skip this step)
 npm config set registry https://registry.npmjs.org && npm login --auth-type=legacy
 \`\`\`
 `;
@@ -25,13 +23,15 @@ Use the [Elements CLI](docs/cli/) to quickly bootstrap a new${starter ? ` ${star
 \`\`\`shell
 npm create @nve ${starter ? starter : ''}
 \`\`\`
+`;
 
-Optionally, install the Elements CLI globally then run the CLI:
+  const setupInstructions = `
+## Setup an Existing Project
+
+Setup an existing project to use Elements you can use the setup command to add the necessary dependencies and configure the MCP server.
 
 \`\`\`shell
-npm install -g @nvidia-elements/cli@latest
-
-nve project.create ${starter ? `--type=${starter}` : ''}
+npx --package=@nvidia-elements/cli -y nve-setup
 \`\`\`
 `;
 
@@ -49,6 +49,7 @@ npm install @nvidia-elements/themes @nvidia-elements/styles @nvidia-elements/cor
   return /* html */ `
 ${renderInstallArtifactoryShortcode()}
 ${starterInstructions}
+${setupInstructions}
 ${dependencyInstructions}
 `;
 }

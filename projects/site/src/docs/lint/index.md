@@ -5,15 +5,13 @@
 }
 ---
 
-<nve-alert-group status="warning">
-  <nve-alert>
-    <nve-icon name="beaker" slot="icon" style="--color:inherit"></nve-icon> Labs projects are experimental packages available for early feedback.
-  </nve-alert>
-</nve-alert-group>
+<nve-alert>
+  <nve-icon name="beaker" slot="icon" status="accent"></nve-icon> Labs projects are experimental packages available for early feedback.
+</nve-alert>
 
-# Elements Lint
+# {{title}}
 
-The `@nvidia-elements/lint` package is a utility library that provides Elements-specific lint rules to enforce best practices and prevent common errors when using Elements.
+<h2 nve-text="heading sm muted">The @nvidia-elements/lint package is a utility library that provides Elements-specific lint rules to enforce best practices and prevent common errors when using Elements</h2>
 
 {% install-artifactory %}
 

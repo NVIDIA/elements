@@ -270,14 +270,19 @@ nve-page:not(:has(nve-resize-handle:state(active))) {
   display: flex;
   flex-direction: column;
   align-items: center;
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
   /* Define the scroll timeline for the subheader h1 shrink animation */
   scroll-timeline: --docs-main-scroll y;
-  overflow-y: auto;
 
   #doc-content {
     max-width: 1100px;
     width: 100%;
   }
+}
+
+body:has(#doc-tabs) #docs-main {
+  overflow-y: auto;
 }
 
 #docs-main:has([docs-full-width]) {
