@@ -22,7 +22,7 @@ export default {
  */
 export const PanelKeyValue = {
   render: () => html`
-    <nve-page style="height: 550px">
+    <nve-page>
       <nve-page-panel slot="left" size="sm">
         <nve-page-panel-header>
           <h3 nve-text="heading medium sm">Details</h3>
@@ -91,7 +91,7 @@ export const PanelAccordion = {
       }
     </style>
 
-    <nve-page style="height: 550px">
+    <nve-page>
       <nve-page-panel slot="left" size="sm">
         <nve-page-panel-header>
           <h3 nve-text="heading medium sm">Details</h3>
@@ -147,7 +147,7 @@ export const PanelAccordion = {
  */
 export const PanelTabbedHeader = {
   render: () => html`
-    <nve-page style="height: 550px">
+    <nve-page>
       <nve-page-panel slot="left" size="sm">
         <nve-page-panel-header style="--padding: var(--nve-ref-size-100) var(--nve-ref-size-200)">
           <nve-tabs>
@@ -216,7 +216,7 @@ export const PanelTabbedHeader = {
  */
 export const PanelNotificationStack = {
   render: () => html`
-    <nve-page style="height: 550px">
+    <nve-page>
       <nve-page-panel slot="left" size="md" closable>
         <nve-page-panel-header>
           <h3 nve-text="heading medium sm">5 Notifications</h3>

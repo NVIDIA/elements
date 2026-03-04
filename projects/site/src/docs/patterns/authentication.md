@@ -17,4 +17,4 @@
 
 ## Login Page
 
-{% example '@internals/patterns/authentication.examples.json' 'LoginPage' %}
+{% example '@internals/patterns/authentication.examples.json' 'LoginPage' '{ "inline": false, "height": "600px" }' %}

@@ -72,7 +72,7 @@ export const LoginForm = {
 export const LoginPage = {
   render() {
     return html`
-<nve-page style="height: 600px">
+<nve-page>
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">AV</nve-logo>
     <h2 slot="prefix" nve-text="heading sm">Developer Portal</h2>
