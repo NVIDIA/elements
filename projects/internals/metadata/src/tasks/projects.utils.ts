@@ -9,14 +9,14 @@ function getChangelog(basePath: string): string {
   const changelog = existsSync(new URL(basePath + '/CHANGELOG.md', import.meta.url))
     ? readFileSync(new URL(basePath + '/CHANGELOG.md', import.meta.url), 'utf8')
     : '';
-  return changelog.includes('@elements') ? changelog.split('@elements')[0] : changelog;
+  return changelog.includes('@elements') ? (changelog.split('@elements')[0] ?? '') : changelog;
 }
 
 function getReadMe(basePath: string): string {
   return readFileSync(new URL(basePath + '/README.md', import.meta.url), 'utf8');
 }
 
-function getProjectMetadata(basePath): Project {
+function getProjectMetadata(basePath: string): Project {
   const packageFile = getPackageFile(basePath);
   const changelog = getChangelog(basePath);
   const readme = getReadMe(basePath);

@@ -34,28 +34,28 @@ export function changelogMarkdownToJSON(changelog: string) {
     .split('## [')
     .map(release => `## [${release}`)
     .map(releaseString => {
-      const title = releaseString.split('\n')[0].replace('## [', '[');
+      const title = (releaseString.split('\n')[0] ?? '').replace('## [', '[');
       const releaseBody = releaseString.split('\n').slice(1).join('\n');
       const bugFixes = releaseBody.includes('### Bug Fixes')
-        ? releaseBody
+        ? (releaseBody
             .split('### Bug Fixes')[1]
             ?.trim()
             ?.split('\n')
-            .map(line => line.trim())
+            .map(line => line.trim()) ?? [])
         : [];
       const features = releaseBody.includes('### Features')
-        ? releaseBody
+        ? (releaseBody
             .split('### Features')[1]
             ?.trim()
             ?.split('\n')
-            .map(line => line.trim())
+            .map(line => line.trim()) ?? [])
         : [];
       const breakingChanges = releaseBody.includes('### Breaking Changes')
-        ? releaseBody
+        ? (releaseBody
             .split('### Breaking Changes')[1]
             ?.trim()
             ?.split('\n')
-            .map(line => line.trim())
+            .map(line => line.trim()) ?? [])
         : [];
       return { title, bugFixes, features, breakingChanges };
     });

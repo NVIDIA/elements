@@ -5,9 +5,9 @@ export function parseVersion(version: string): { major: number; minor: number; p
   const match = version.match(/^(\d+)\.(\d+)\.(\d+)/);
   if (!match) return null;
   return {
-    major: parseInt(match[1], 10),
-    minor: parseInt(match[2], 10),
-    patch: parseInt(match[3], 10)
+    major: parseInt(match[1]!, 10),
+    minor: parseInt(match[2]!, 10),
+    patch: parseInt(match[3]!, 10)
   };
 }
 
@@ -72,12 +72,13 @@ export function getReleases(): Release[] {
 
       const versionMatch = tagName.match(/^(.+)-v(\d+\.\d+\.\d+.*)$/);
       if (versionMatch) {
-        const [, packageName, version] = versionMatch;
+        const packageName = versionMatch[1]!;
+        const version = versionMatch[2]!;
 
         rawReleases.push({
           name: tagName,
-          version: version,
-          date: date,
+          version,
+          date,
           packageName
         });
       }
@@ -88,22 +89,22 @@ export function getReleases(): Release[] {
         if (!acc[release.packageName]) {
           acc[release.packageName] = [];
         }
-        acc[release.packageName].push(release);
+        acc[release.packageName]!.push(release);
         return acc;
       },
       {} as Record<string, typeof rawReleases>
     );
 
     for (const packageName in releasesByPackage) {
-      releasesByPackage[packageName].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+      releasesByPackage[packageName]!.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     }
 
     const releases: Release[] = [];
     for (const packageName in releasesByPackage) {
-      const packageReleases = releasesByPackage[packageName];
+      const packageReleases = releasesByPackage[packageName]!;
 
       for (let i = 0; i < packageReleases.length; i++) {
-        const release = packageReleases[i];
+        const release = packageReleases[i]!;
         const previousRelease = i > 0 ? packageReleases[i - 1] : undefined;
         const type = determineReleaseType(release.version, previousRelease?.version);
 
