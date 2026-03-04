@@ -18,7 +18,7 @@ The package has three entry points:
 
 - **`./dist/index.js`** (`nve` command) - Interactive CLI using Yargs with Inquirer for prompts
 - **`./dist/mcp/index.js`** (`nve-mcp` command) - MCP server using @modelcontextprotocol/sdk
-- **`./dist/setup-mcp/index.js`** (`nve-setup-mcp` command) - Quick setup wrapper that spawns `nve project.setup`
+- **`./dist/setup-mcp/index.js`** (`nve-setup` command) - Quick setup wrapper that spawns `nve project.setup`
 
 ### Tool System
 
