@@ -13,21 +13,22 @@ type ApiData = {
 };
 
 export class ApiService {
-  static #api: ApiData | null = null;
+  static #api: ApiData = {
+    created: '',
+    data: {
+      elements: [],
+      attributes: [],
+      tokens: [],
+      types: []
+    }
+  };
   static #index: MiniSearch<ApiSearchDocument> | null = null;
 
   static async getData(): Promise<ApiData> {
-    if (!ApiService.#api) {
-      try {
-        ApiService.#api = (await import('../../static/api.json', { with: { type: 'json' } })).default as ApiData;
-      } catch {
-        /* istanbul ignore next -- @preserve */
-        ApiService.#api = await fetch(
-          'https://NVIDIA.github.io/elements/metadata/apis.json'
-        ).then(res => res.json());
-      }
-
-      ApiService.#index = createApiIndex(ApiService.#api.data);
+    if (ApiService.#api.created === '') {
+      ApiService.#api = (await import('../../static/api.json', { with: { type: 'json' } }))
+        .default as unknown as ApiData;
+      ApiService.#index = createApiIndex(ApiService.#api!.data);
     }
     return ApiService.#api;
   }
@@ -44,6 +45,6 @@ export class ApiService {
       results.unshift(exactMatch);
     }
 
-    return results;
+    return results.filter((r): r is Element | Attribute => r !== undefined);
   }
 }
