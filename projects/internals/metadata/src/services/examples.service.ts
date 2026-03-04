@@ -3,29 +3,21 @@ import type { Example } from '../types.js';
 import { createIndex } from '../indexes/examples.js';
 
 export class ExamplesService {
-  static #data: Example[] = null;
-  static #index: MiniSearch<Example> = null;
+  static #data: Example[] = [];
+  static #index: MiniSearch<Example> | null = null;
 
   static async getData(): Promise<Example[]> {
-    if (!ExamplesService.#data) {
-      try {
-        ExamplesService.#data = (await import('../../static/examples.json', { with: { type: 'json' } }))
-          .default as Example[];
-      } catch {
-        /* istanbul ignore next -- @preserve */
-        ExamplesService.#data = await fetch(
-          'https://NVIDIA.github.io/elements/metadata/examples.json'
-        ).then(res => res.json());
-      }
-
+    if (ExamplesService.#data.length === 0) {
+      ExamplesService.#data = (await import('../../static/examples.json', { with: { type: 'json' } }))
+        .default as Example[];
       ExamplesService.#index = createIndex(ExamplesService.#data);
     }
     return ExamplesService.#data;
   }
 
-  static async search(query: string) {
+  static async search(query: string): Promise<Example[]> {
     const data = await this.getData();
-    const results = ExamplesService.#index.search(query) as unknown as Example[];
-    return results.map(result => data.find(d => d.id === result.id));
+    const results = ExamplesService.#index!.search(query);
+    return results.map(result => data.find(d => d.id === result.id)).filter(e => !!e);
   }
 }

@@ -7,7 +7,7 @@ export function getExamples(): Example[] {
     .filter(path => !path.includes('node_modules'))
     .flatMap(path => {
       const examples = JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
-      return examples.items.map(s => ({
+      return examples.items.map((s: Record<string, unknown>) => ({
         ...s,
         element: examples.element ?? '',
         entrypoint: examples.entrypoint ?? ''

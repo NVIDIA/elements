@@ -62,7 +62,7 @@ export function getPublicExamples(format: 'markdown' | 'json', examples: Partial
 export async function searchPublicExamples(
   query: string,
   config: { format: 'markdown' | 'json'; limit?: number } = { format: 'markdown', limit: 100 }
-) {
+): Promise<string | Example[]> {
   const data = (await ExamplesService.search(query)).filter(isContextExample);
   const result = data.slice(0, config.limit);
 
@@ -71,9 +71,7 @@ export async function searchPublicExamples(
     return config.format === 'markdown' ? message : result;
   }
 
-  return config.format === 'markdown'
-    ? result.map((e: Partial<Example>) => renderExampleMarkdown(e)).join('\n')
-    : result;
+  return config.format === 'markdown' ? result.map(e => renderExampleMarkdown(e)).join('\n') : result;
 }
 
 export function renderExampleMarkdown(example: Partial<Example>) {
