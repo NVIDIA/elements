@@ -1,3 +1,10 @@
+## [@nvidia-elements/forms-v1.0.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v1.0.1...@nvidia-elements/forms-v1.0.2) (2026-03-04)
+
+
+### Bug Fixes
+
+* **labs-forms:** improve type checking ([b01e809](https://github.com/NVIDIA/elements/commit/b01e809237ce100253ec0e56dfbcf995241f7567))
+
 ## [@nvidia-elements/forms-v1.0.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/forms-v1.0.0...@nvidia-elements/forms-v1.0.1) (2025-05-28)
 
 
