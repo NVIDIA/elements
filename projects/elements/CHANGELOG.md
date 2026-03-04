@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.61.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.3...@nvidia-elements/core-v1.61.4) (2026-03-04)
+
+
+### Bug Fixes
+
+* **elements:** postinstall command rename ([68a54b2](https://github.com/NVIDIA/elements/commit/68a54b2f81ff86d960b507ca53a1889a867efa16))
+
 ## [@nvidia-elements/core-v1.61.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.2...@nvidia-elements/core-v1.61.3) (2026-03-03)
 
 
