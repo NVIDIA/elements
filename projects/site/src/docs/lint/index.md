@@ -188,6 +188,12 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-restricted-page-sizing</code></nve-grid-cell>
+    <nve-grid-cell>Disallow custom height or width styles on nve-page.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-attribute-value</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of invalid attribute values for nve-* elements.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
