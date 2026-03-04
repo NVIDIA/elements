@@ -1,4 +1,5 @@
 .pnpm-store
+.playground
 .playwright
 .wireit
 .eslintcache

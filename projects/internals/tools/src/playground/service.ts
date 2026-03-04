@@ -1,19 +1,23 @@
 import { ApiService } from '@internals/metadata';
 import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
-import { createPlaygroundURL, type PlaygroundType, playgroundTypes } from './utils.js';
+import {
+  createPlaygroundURL,
+  defaultTemplate,
+  type PlaygroundType,
+  playgroundTypes,
+  resolveTemplate
+} from './utils.js';
 import { service, tool } from '../internal/tools.js';
 import { ELEMENTS_ENV_ICON } from '../internal/utils.js';
 import { eslintSchema } from '../internal/schema.js';
 
 export interface PlaygroundOptions {
-  template: string;
+  template?: string;
+  path?: string;
   type?: PlaygroundType;
   name?: string;
   start?: boolean;
 }
-
-const defaultTemplate =
-  '<nve-page>\n  <nve-page-header slot="header">\n    <nve-logo slot="prefix" size="sm"></nve-logo>\n    <h2 slot="prefix" nve-text="heading">NVIDIA</h2>\n  </nve-page-header>\n  <main nve-layout="column gap:lg pad:lg">\n    <!-- template content here -->\n  </main>\n</nve-page>';
 
 @service()
 export class PlaygroundService {
@@ -27,10 +31,13 @@ export class PlaygroundService {
         template: {
           type: 'string',
           description:
-            'HTML template for a playground example. Should not include <html> or <body> tags. Must use only standard Elements patterns and components.'
+            'HTML template for a playground example. Should not include <html> or <body> tags. Must use only standard Elements patterns and components. Provide either "template" or "path", not both.'
+        },
+        path: {
+          type: 'string',
+          description: 'Absolute file path to an HTML template file. Provide either "template" or "path", not both.'
         }
-      },
-      required: ['template']
+      }
     },
     outputSchema: {
       oneOf: [
@@ -44,10 +51,12 @@ export class PlaygroundService {
       ]
     }
   })
-  static async validate({ template }: { template: string }): Promise<TemplateLintMessage[]> {
+  static async validate({ template, path }: { template?: string; path?: string }): Promise<TemplateLintMessage[]> {
+    const templateContent = await resolveTemplate({ template, path });
+
     if (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli') {
       const { lintPlaygroundTemplate } = await import('@nvidia-elements/lint/eslint/internals');
-      return await lintPlaygroundTemplate(template);
+      return await lintPlaygroundTemplate(templateContent);
     } else {
       return [];
     }
@@ -63,8 +72,12 @@ export class PlaygroundService {
         template: {
           type: 'string',
           description:
-            'HTML template/snippet. Do NOT include `html`, `body` tags. Must use valid NVE Elements components and pass validation to receive a playground URL.',
+            'HTML template/snippet. Do NOT include `html`, `body` tags. Must use valid NVE Elements components and pass validation to receive a playground URL. Provide either "template" or "path", not both.',
           defaultTemplate
+        },
+        path: {
+          type: 'string',
+          description: 'Absolute file path to an HTML template file. Provide either "template" or "path", not both.'
         },
         type: {
           type: 'string',
@@ -83,8 +96,7 @@ export class PlaygroundService {
           description: 'Name of the author or LLM model that created the playground.',
           default: ''
         }
-      },
-      required: ['template']
+      }
     },
     outputSchema: {
       oneOf: [
@@ -100,13 +112,16 @@ export class PlaygroundService {
   })
   static async create({
     template,
+    path,
     name,
     type,
     author
   }: PlaygroundOptions & { author?: string }): Promise<string | TemplateLintMessage[]> {
+    const templateContent = await resolveTemplate({ template, path });
+
     if (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli') {
       const { lintPlaygroundTemplate } = await import('@nvidia-elements/lint/eslint/internals');
-      const lintResult = await lintPlaygroundTemplate(template);
+      const lintResult = await lintPlaygroundTemplate(templateContent);
 
       if (lintResult.length > 0) {
         return lintResult;
@@ -118,7 +133,7 @@ export class PlaygroundService {
       ? ELEMENTS_ENV_ICON[process.env.ELEMENTS_ENV as keyof typeof ELEMENTS_ENV_ICON]
       : undefined;
     const formattedName = `${name}${author ? ` - (${author})` : ''}${environment ? ` ${environment}` : ''}`;
-    const result = createPlaygroundURL(template, apis.data.elements, { name: formattedName, type });
+    const result = createPlaygroundURL(templateContent, apis.data.elements, { name: formattedName, type });
 
     if (!process.env.CI && (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli')) {
       const openBrowser = await import('open');

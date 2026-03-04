@@ -35,11 +35,11 @@ describe('index', () => {
   });
 
   it('should provide playground.validate', () => {
-    expect(output).toContain('nve playground.validate <template>');
+    expect(output).toContain('nve playground.validate [template] [path]');
   });
 
   it('should provide playground.create', () => {
-    expect(output).toContain('nve playground.create <template> [type] [name] [author]');
+    expect(output).toContain('nve playground.create [template] [path] [type] [name] [author]');
   });
 
   it('should provide project.create', () => {
