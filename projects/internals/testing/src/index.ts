@@ -9,7 +9,7 @@ export async function createFixture(template?: TemplateResult): Promise<HTMLElem
   const container = globalThis.document.createElement('div');
   globalThis.document.body.appendChild(container);
 
-  if (template.values) {
+  if (template?.values) {
     render(template, container);
   }
 
@@ -64,7 +64,7 @@ export async function elementIsStable(element: HTMLElement & { updateComplete?: 
   }
 }
 
-function retry<T>(fn: () => Promise<T>, maxTries = 10) {
+function retry<T>(fn: () => Promise<T>, maxTries = 10): Promise<T> {
   return fn().catch(() => (maxTries > 0 ? retry(fn, maxTries--) : Promise.reject('Max attempts reached')));
 }
 
@@ -105,6 +105,10 @@ export function emulateMouseLeave(component: HTMLElement | Element) {
 /**
  * Creates a promise that will return an event result from a given element.
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function untilEvent<T = Event>(element: HTMLElement | Document, event: string) {
-  return new Promise<T & { detail?: any }>(resolve => element.addEventListener(event, e => resolve(e as T))); // eslint-disable-line @typescript-eslint/no-explicit-any
+  return new Promise<T & { detail?: any }>(resolve =>
+    element.addEventListener(event, e => resolve(e as unknown as T & { detail?: any }))
+  );
 }
+/* eslint-enable @typescript-eslint/no-explicit-any */
