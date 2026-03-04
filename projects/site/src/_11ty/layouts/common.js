@@ -142,7 +142,9 @@ export const renderDocsNav = data => /* html */ `
   </nve-tree-node>
   
   <nve-tree-node ${data.page.url.includes('/docs/foundations/') ? 'expanded' : ''}>
-    <a href="docs/foundations/themes/">Foundations</a>
+    <a href="docs/foundations/typography/">Foundations</a>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/typography/') ? 'highlighted selected' : ''}><a href="docs/foundations/typography/">Typography</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/foundations/iconography/') ? 'highlighted selected' : ''}><a href="docs/foundations/iconography/">Iconography</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/') ? 'expanded' : ''} ${data.page.url === '/docs/foundations/themes/' ? 'highlighted' : ''}>
       <a href="docs/foundations/themes/">Themes</a>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/themes/tokens/') ? 'highlighted selected' : ''}><a href="docs/foundations/themes/tokens/">Design Tokens</a></nve-tree-node>
@@ -163,8 +165,6 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/vertical/') ? 'highlighted selected' : ''}><a href="docs/foundations/layout/vertical/">Vertical</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/foundations/layout/grid/') ? 'highlighted selected' : ''}><a href="docs/foundations/layout/grid/">Grid</a></nve-tree-node>
     </nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/foundations/typography/') ? 'highlighted selected' : ''}><a href="docs/foundations/typography/">Typography</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/foundations/iconography/') ? 'highlighted selected' : ''}><a href="docs/foundations/iconography/">Iconography</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/popovers/' ? 'highlighted selected' : ''}><a href="docs/foundations/popovers/">Popovers</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/i18n/' ? 'highlighted selected' : ''}><a href="docs/foundations/i18n/">i18n</a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/foundations/visualization/' ? 'highlighted selected' : ''}><a href="docs/foundations/visualization/">Visualization</a></nve-tree-node>
