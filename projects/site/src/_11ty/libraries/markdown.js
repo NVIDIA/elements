@@ -24,7 +24,7 @@ const formats = {
   h2: 'heading xl emphasis',
   h3: 'heading lg emphasis',
   h4: 'heading',
-  h5: 'heading',
+  h5: 'heading sm',
   h6: 'heading sm',
   p: 'body relaxed',
   a: 'link',
