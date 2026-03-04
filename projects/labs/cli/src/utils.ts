@@ -39,7 +39,7 @@ export function getSpinnerProgressMessage() {
 
 export async function runAsyncTool(args: Record<string, unknown>, fn: ManagedToolMethod<unknown>) {
   const isInteractive = !args.start && !args.log && !process.env.CI;
-  let spinner: Ora;
+  let spinner: Ora | undefined;
 
   const startTime = Date.now();
   if (isInteractive) {
@@ -156,7 +156,7 @@ export function wrapUrl(url: string, maxWidth = 80): string {
   if (url.length <= maxWidth) return url;
   const segments = url.split('/');
   const lines: string[] = [];
-  let line = segments[0];
+  let line = segments[0] ?? '';
   for (let i = 1; i < segments.length; i++) {
     const next = '/' + segments[i];
     if ((line + next).length > maxWidth && line.length > 0) {
