@@ -59,14 +59,14 @@ function getTime(): number {
     element.language = 'typescript';
     element.innerHTML = typescript;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('.hljs-title')).toBeTruthy();
+    expect(element.shadowRoot!.querySelector('.hljs-title')).toBeTruthy();
   });
 
   it('should render source code if set via the code property', async () => {
     element.language = 'typescript';
     element.code = typescript;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('.hljs-title')).toBeTruthy();
+    expect(element.shadowRoot!.querySelector('.hljs-title')).toBeTruthy();
   });
 
   it('should render HTML source code if slotted within a <template> tag', async () => {
@@ -75,7 +75,7 @@ function getTime(): number {
    ${typescript}
     </template>`;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('.hljs-title')).toBeTruthy();
+    expect(element.shadowRoot!.querySelector('.hljs-title')).toBeTruthy();
   });
 
   it('should render HTML source code if slotted HTML content', async () => {
@@ -83,15 +83,15 @@ function getTime(): number {
     const div = document.createElement('div');
     div.textContent = 'hello';
     element.append(div);
-    element.shadowRoot.querySelector('slot').dispatchEvent(new Event('slotchange'));
+    element.shadowRoot!.querySelector('slot')!.dispatchEvent(new Event('slotchange'));
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('slot').assignedNodes()[0]).toBe(div);
+    expect(element.shadowRoot!.querySelector('slot')!.assignedNodes()[0]).toBe(div);
   });
 
   it('should not render any line numbers by default', async () => {
     await elementIsStable(element);
     expect(element.lineNumbers).toBeFalsy();
-    expect(element.shadowRoot.querySelector('.hljs-linenumber')).toBeFalsy();
+    expect(element.shadowRoot!.querySelector('.hljs-linenumber')).toBeFalsy();
   });
 
   it('should render line-numbers', async () => {
@@ -100,13 +100,13 @@ function getTime(): number {
     element.lineNumbers = true;
     await elementIsStable(element);
     expect(element.lineNumbers).toBeTruthy();
-    expect(element.shadowRoot.querySelector('.hljs-linenumber')).toBeTruthy();
+    expect(element.shadowRoot!.querySelector('.hljs-linenumber')).toBeTruthy();
   });
 
   it('should not render any highlights by default', async () => {
     await elementIsStable(element);
     expect(element.highlight).toBeFalsy();
-    expect(element.shadowRoot.querySelector('.hljs-highlight')).toBeFalsy();
+    expect(element.shadowRoot!.querySelector('.hljs-highlight')).toBeFalsy();
   });
 
   it('should highlight single line', async () => {
@@ -115,7 +115,7 @@ function getTime(): number {
     element.highlight = '3';
     await elementIsStable(element);
     expect(element.highlight).toBe('3');
-    expect(element.shadowRoot.querySelector('.hljs-highlight')).toBeTruthy();
+    expect(element.shadowRoot!.querySelector('.hljs-highlight')).toBeTruthy();
   });
 
   it('should highlight a line group', async () => {
@@ -124,7 +124,7 @@ function getTime(): number {
     element.highlight = '3-6';
     await elementIsStable(element);
     expect(element.highlight).toBe('3-6');
-    expect(element.shadowRoot.querySelectorAll('.hljs-highlight').length).toBe(4);
+    expect(element.shadowRoot!.querySelectorAll('.hljs-highlight').length).toBe(4);
   });
 
   it('should highlight a multiple line groups', async () => {
@@ -133,11 +133,11 @@ function getTime(): number {
     element.highlight = '1,3-5,7';
     await elementIsStable(element);
     expect(element.highlight).toBe('1,3-5,7');
-    expect(element.shadowRoot.querySelectorAll('.hljs-highlight').length).toBe(5);
+    expect(element.shadowRoot!.querySelectorAll('.hljs-highlight').length).toBe(5);
   });
 
   it('should provide actions slot', async () => {
-    expect(element.shadowRoot.querySelector('slot[name="actions"]')).toBeTruthy();
+    expect(element.shadowRoot!.querySelector('slot[name="actions"]')).toBeTruthy();
   });
 
   it('should render actions slot', async () => {
@@ -145,18 +145,18 @@ function getTime(): number {
     element.innerHTML = `${typescript}\n${slot}`;
     await elementIsStable(element);
     expect(element.innerHTML.includes(slot)).toBeTruthy();
-    expect(element.shadowRoot.querySelector('.hljs-title')).toBeTruthy();
-    expect(element.shadowRoot.querySelector('nve-icon-button')).toBeFalsy();
+    expect(element.shadowRoot!.querySelector('.hljs-title')).toBeTruthy();
+    expect(element.shadowRoot!.querySelector('nve-icon-button')).toBeFalsy();
   });
 
   it('should not assign a language classname if no language was set or provided', async () => {
     element.language = 'typescript';
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('code').className).toBe('typescript');
+    expect(element.shadowRoot!.querySelector('code')!.className).toBe('typescript');
 
-    element.language = undefined;
+    element.language = undefined as unknown as typeof element.language;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('code').className).toBe('');
+    expect(element.shadowRoot!.querySelector('code')!.className).toBe('');
   });
 
   it('should not run highlight logic if no source was provided', async () => {

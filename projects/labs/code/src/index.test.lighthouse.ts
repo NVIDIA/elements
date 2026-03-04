@@ -22,19 +22,19 @@ describe('lighthouse report', () => {
     `);
 
     expect(report.payload.javascript.kb).toBeLessThan(45);
-    expect(report.payload.javascript.requests['define.js'].kb).toBeLessThan(10.5);
-    expect(report.payload.javascript.requests['core.js'].kb).toBeLessThan(9);
-    expect(report.payload.javascript.requests['bash.js'].kb).toBeLessThan(3);
-    expect(report.payload.javascript.requests['css.js'].kb).toBeLessThan(4.5);
-    expect(report.payload.javascript.requests['html.js'].kb).toBeLessThan(0.5);
-    expect(report.payload.javascript.requests['javascript.js'].kb).toBeLessThan(3.1);
-    expect(report.payload.javascript.requests['json.js'].kb).toBeLessThan(1);
-    expect(report.payload.javascript.requests['markdown.js'].kb).toBeLessThan(1.5);
-    expect(report.payload.javascript.requests['python.js'].kb).toBeLessThan(2);
-    expect(report.payload.javascript.requests['toml.js'].kb).toBeLessThan(1.5);
-    expect(report.payload.javascript.requests['typescript.js'].kb).toBeLessThan(3.5);
-    expect(report.payload.javascript.requests['xml.js'].kb).toBeLessThan(0.5);
-    expect(report.payload.javascript.requests['yaml.js'].kb).toBeLessThan(1.5);
+    expect(report.payload.javascript.requests['define.js']!.kb).toBeLessThan(10.5);
+    expect(report.payload.javascript.requests['core.js']!.kb).toBeLessThan(9);
+    expect(report.payload.javascript.requests['bash.js']!.kb).toBeLessThan(3);
+    expect(report.payload.javascript.requests['css.js']!.kb).toBeLessThan(4.5);
+    expect(report.payload.javascript.requests['html.js']!.kb).toBeLessThan(0.5);
+    expect(report.payload.javascript.requests['javascript.js']!.kb).toBeLessThan(3.1);
+    expect(report.payload.javascript.requests['json.js']!.kb).toBeLessThan(1);
+    expect(report.payload.javascript.requests['markdown.js']!.kb).toBeLessThan(1.5);
+    expect(report.payload.javascript.requests['python.js']!.kb).toBeLessThan(2);
+    expect(report.payload.javascript.requests['toml.js']!.kb).toBeLessThan(1.5);
+    expect(report.payload.javascript.requests['typescript.js']!.kb).toBeLessThan(3.5);
+    expect(report.payload.javascript.requests['xml.js']!.kb).toBeLessThan(0.5);
+    expect(report.payload.javascript.requests['yaml.js']!.kb).toBeLessThan(1.5);
   });
 
   test('JS Bundles should remain within compressed bundle limits', async () => {
@@ -47,7 +47,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]].kb).toBeLessThan(30);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]!]!.kb).toBeLessThan(30);
   });
 });
 
