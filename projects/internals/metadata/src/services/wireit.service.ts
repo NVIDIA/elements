@@ -1,5 +1,7 @@
+import type { WireitGraph } from '../types.js';
+
 export class WireitService {
-  static #graph = null;
+  static #graph: WireitGraph | null = null;
 
   static async getData() {
     if (!WireitService.#graph) {
