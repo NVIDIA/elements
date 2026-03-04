@@ -15,7 +15,10 @@
     "allowSyntheticDefaultImports": true,
     "useDefineForClassFields": false,
     "isolatedModules": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true
   },
   "include": ["src/**/*.ts"]
 }
