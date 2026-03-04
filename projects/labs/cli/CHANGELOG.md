@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.10.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.3...@nvidia-elements/cli-v0.10.4) (2026-03-04)
+
+
+### Bug Fixes
+
+* **labs-cli:** rename setup command ([1ae32dc](https://github.com/NVIDIA/elements/commit/1ae32dc8e7010fa9df1f1e32948e8c4dfd62ee29))
+
 ## [@nvidia-elements/cli-v0.10.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.2...@nvidia-elements/cli-v0.10.3) (2026-02-27)
 
 
