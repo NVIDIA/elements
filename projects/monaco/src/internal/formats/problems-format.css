@@ -2,12 +2,15 @@
   .cursor {
     display: none !important;
   }
+
   .inline-folded {
     display: none !important;
   }
+
   .view-overlays {
     --vscode-editor-foldBackground: transparent;
   }
+
   .view-lines {
     cursor: pointer !important;
   }
@@ -51,12 +54,15 @@
     &.codicon-hint {
       color: var(--nve-ref-color-gray-denim-1000);
     }
+
     &.codicon-info {
       color: var(--nve-ref-color-gray-denim-1000);
     }
+
     &.codicon-warning {
       color: var(--nve-ref-color-yellow-nova-800);
     }
+
     &.codicon-error {
       color: var(--nve-ref-color-red-cardinal-800);
     }
