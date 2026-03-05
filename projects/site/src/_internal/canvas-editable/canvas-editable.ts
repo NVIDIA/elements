@@ -214,7 +214,7 @@ export class CanvasEditable extends LitElement {
 
   async #loadPackageVersions() {
     try {
-      const versions = await PackagesService.versionsList();
+      const versions = await PackagesService.versions();
       this.packageVersions = {
         elements: versions['@nvidia-elements/core'] ?? this.packageVersions.elements,
         themes: versions['@nvidia-elements/themes'] ?? this.packageVersions.themes,
