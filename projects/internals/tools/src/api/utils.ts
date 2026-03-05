@@ -31,16 +31,16 @@ export function getPublicAPIs(
     .map(e => ({ name: e.name, description: e.manifest!.description, behavior: e.manifest!.metadata?.behavior ?? '' }));
   const elementsMarkdown = elementsResult.map(e => {
     const behavior = e.behavior ? ` (${e.behavior})` : '';
-    return `- **${e.name}${behavior}** ${wrapText(e.description)}`;
+    return `\`${e.name}\`${behavior}: ${wrapText(e.description)}`;
   });
 
   const attributesResult = metadata.data.attributes
     .filter(a => a.description && a.example)
     .map(a => ({ name: a.name, description: a.description, behavior: 'attribute' }));
-  const attributesMarkdown = attributesResult.map(a => `- **${a.name} (${a.behavior})**: ${wrapText(a.description)}`);
+  const attributesMarkdown = attributesResult.map(a => `\`${a.name}\` (${a.behavior}): ${wrapText(a.description)}`);
 
   if (format === 'markdown') {
-    return [...elementsMarkdown, ...attributesMarkdown].join('\n');
+    return [...elementsMarkdown, ...attributesMarkdown].join('\n\n');
   } else if (format === 'json') {
     return { elements: elementsResult, attributes: attributesResult };
   }

@@ -62,8 +62,8 @@ describe('utils', () => {
   describe('getAvailableExamples', () => {
     it('should return markdown format correctly', () => {
       const result = getPublicExamples('markdown', mockExamples);
-      expect(result).toContain('- **project_button-default** Default button example');
-      expect(result).toContain('- **project_card-default** Default card example');
+      expect(result).toContain('`project_button-default`: Default button example');
+      expect(result).toContain('`project_card-default`: Default card example');
     });
 
     it('should return JSON format correctly', () => {
@@ -137,7 +137,7 @@ describe('utils', () => {
       ];
 
       const markdownResult = getPublicExamples('markdown', examplesWithMissingDesc);
-      expect(markdownResult).toContain('- **test-default-1** Has summary');
+      expect(markdownResult).toContain('`test-default-1`: Has summary');
       expect(markdownResult).not.toContain('test-default-2');
 
       const jsonResult = getPublicExamples('json', examplesWithMissingDesc) as Array<{
@@ -146,7 +146,7 @@ describe('utils', () => {
         summary?: string;
       }>;
       expect(jsonResult[0].summary).toBe('Has summary');
-      expect(jsonResult[1].summary).toBeUndefined();
+      expect(jsonResult[1]).toBe(undefined);
     });
   });
 
