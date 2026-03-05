@@ -37,7 +37,7 @@ export class ProgressBar extends LitElement {
   render() {
     const classes = {
       full: this.value === this.max,
-      minWidth: this.value > 0,
+      'min-width': this.value > 0,
       indeterminate: this.value === undefined
     };
 

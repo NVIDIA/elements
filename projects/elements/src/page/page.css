@@ -154,7 +154,6 @@ slot:not([name]) {
   flex-direction: column;
   align-items: start;
   overflow: auto;
-  overflow: auto;
 
   slot {
     display: contents;

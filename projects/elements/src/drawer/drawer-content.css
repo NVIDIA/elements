@@ -7,7 +7,6 @@
   justify-content: stretch;
   flex-direction: column;
   display: flex;
-  flex-grow: 1;
   overflow: auto;
   gap: var(--gap);
   contain: none;

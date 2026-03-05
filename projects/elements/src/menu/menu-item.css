@@ -80,7 +80,7 @@
   --color: var(--nve-sys-support-danger-emphasis-color) !important;
 }
 
-:host(:state(current)) [internal-host]:after {
+:host(:state(current)) [internal-host]::after {
   width: var(--nve-ref-border-width-xl);
   border-radius: var(--border-radius);
   background: var(--border-background);
@@ -112,8 +112,8 @@
   position: absolute;
 }
 
-::slotted(*:not(a):not(nve-icon)),
-::slotted(*:not(a):not(nve-icon)) {
+::slotted(*:not(a, nve-icon)),
+::slotted(*:not(a, nve-icon)) {
   pointer-events: none;
 }
 

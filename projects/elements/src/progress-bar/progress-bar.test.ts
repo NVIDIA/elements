@@ -42,6 +42,6 @@ describe(ProgressBar.metadata.tag, () => {
     const nativeProgress = element.shadowRoot.querySelector('progress') as HTMLProgressElement;
 
     expect(nativeProgress.classList.contains('full')).toBe(true);
-    expect(nativeProgress.classList.contains('minWidth')).toBe(true);
+    expect(nativeProgress.classList.contains('min-width')).toBe(true);
   });
 });
