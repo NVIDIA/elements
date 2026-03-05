@@ -27,7 +27,6 @@
   height: var(--height);
   text-transform: var(--text-transform);
   display: inline-flex;
-  align-items: center;
   line-height: 1em;
   place-items: center;
 }

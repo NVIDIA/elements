@@ -12,16 +12,14 @@
   border-bottom: var(--border-bottom);
   display: flex;
   flex-direction: row;
-  justify-items: flex-start;
-  align-items: center;
+  place-items: center flex-start;
   justify-content: space-between;
 }
 
 [app-branding] {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-items: center;
+  place-items: center;
   justify-content: center;
   gap: var(--nve-ref-space-xs);
   margin: 0;
@@ -41,8 +39,7 @@ slot[name='title'] h2 {
 slot {
   display: flex;
   flex-direction: row;
-  justify-items: flex-start;
-  align-items: flex-start;
+  place-items: flex-start;
   margin: 0;
   min-height: 0;
 }

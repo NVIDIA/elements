@@ -26,21 +26,21 @@
   --box-shadow: none;
 }
 
-:host(:not([closable]):not(:state(expanded))) [internal-host] {
+:host(:not([closable], :state(expanded))) [internal-host] {
   width: var(--nve-ref-size-800) !important;
   height: var(--nve-ref-size-800) !important;
   background: none;
 }
 
-:host(:not([closable]):not(:state(expanded))) {
+:host(:not([closable], :state(expanded))) {
   pointer-events: none;
 }
 
-:host(:not([closable]):not(:state(expanded))) slot {
+:host(:not([closable], :state(expanded))) slot {
   display: none;
 }
 
-:host(:not([closable]):not(:state(expanded))) nve-icon-button {
+:host(:not([closable], :state(expanded))) nve-icon-button {
   position: initial;
   pointer-events: auto;
   border-radius: var(--panel-button-border-radius);
@@ -57,7 +57,7 @@
   float: right;
 }
 
-:host(:not([closable]):not(:state(expanded))[side='right']) nve-icon-button {
+:host(:not([closable], :state(expanded))[side='right']) nve-icon-button {
   --panel-button-border-radius: var(--nve-ref-border-radius-full) 0 0 var(--nve-ref-border-radius-full);
 }
 

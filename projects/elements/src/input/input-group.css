@@ -18,8 +18,7 @@
 .input-slot {
   background: var(--background);
   border-radius: var(--border-radius);
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: row nowrap;
   gap: var(--gap);
 }
 

@@ -19,7 +19,6 @@
   --nve-sys-interaction-background: var(--nve-sys-interaction-background-100);
   --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-100);
   --background: transparent;
-  --padding: var(--nve-ref-size-100);
   --border-bottom: var(--nve-ref-border-width-md) solid var(--nve-ref-border-color-muted);
   --box-shadow: none;
   --border-radius: 0;
@@ -75,7 +74,6 @@
 
 :host([orientation='vertical']) {
   --padding: var(--nve-ref-size-100) 0;
-  --width: var(--nve-ref-size-1000);
   --gap: var(--nve-ref-space-xs);
   --width: fit-content;
 }
@@ -135,8 +133,7 @@ slot:not([name]) {
   display: flex;
   align-items: center;
   text-wrap: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden;
   scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
   scrollbar-width: var(--nve-sys-scrollbar-width);
 }

@@ -36,7 +36,7 @@
 }
 
 :host(:state(scrolling)) {
-  --scroll-shadow: 0 0 4px hsla(0, 0%, 0%, 0.4);
+  --scroll-shadow: 0 0 4px hsl(0 0% 0% / 0.4);
 }
 
 [name='columns'] {

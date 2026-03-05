@@ -77,8 +77,7 @@ nve-icon-button {
 ::slotted(nve-button[container='flat']),
 ::slotted(nve-button[container='inline']) {
   --color: inherit;
-  margin-inline-end: calc(var(--_gap) / -2);
-  margin-inline-start: calc(var(--_gap) * 2);
+  margin-inline: calc(var(--_gap) * 2) calc(var(--_gap) / -2);
 }
 
 ::slotted([nve-text]),

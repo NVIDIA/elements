@@ -25,7 +25,6 @@
   padding: var(--padding);
   border: var(--border);
   display: flex;
-  align-items: center;
   line-height: 1em;
   place-items: center;
   place-content: center;
