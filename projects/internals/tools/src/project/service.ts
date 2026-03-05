@@ -1,5 +1,5 @@
 import { cwd } from 'node:process';
-import { resolve } from 'node:path';
+import { join, resolve } from 'node:path';
 import { tool, service } from '../internal/tools.js';
 import type { Report } from '../internal/types.js';
 import { jsonReportSchema } from '../internal/schema.js';
@@ -49,13 +49,23 @@ export class ProjectService {
   })
   static async create({ type, cwd, start }: { type: Starter; cwd: string; start: boolean }): Promise<Report> {
     const dir = resolve(cwd);
+    const projectDir = resolve(join(cwd, type));
+
     const createReport = await createStarter(type, dir);
-    const agentReport = await setupAgent(dir, 'both');
-    const setupProjectReport = await setupProject(dir);
-    const updateReport = await updateProject(dir);
-    if (start) {
-      await startStarter(type);
+    const agentReport = await setupAgent(projectDir, 'both');
+    const setupProjectReport = await setupProject(projectDir);
+    const updateReport = await updateProject(projectDir);
+    const reports = [createReport, agentReport, setupProjectReport, updateReport];
+
+    const failedReport = reports.find(report => Object.values(report).some(value => value.status === 'danger'));
+    if (failedReport) {
+      return failedReport;
     }
+
+    if (start) {
+      await startStarter(projectDir);
+    }
+
     return {
       ...createReport,
       ...agentReport,
