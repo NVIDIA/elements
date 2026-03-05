@@ -69,45 +69,13 @@ export const Status = {
 `};
 
 /**
- * @summary Progress rings at zero completion showing success, warning, and danger states for status signal.
- * @tags test-case
- */
-export const ZeroValueStatus = {
-  render: () => html`
-    <div nve-layout="row gap:sm">
-      <nve-progress-ring status="success" value="0"></nve-progress-ring>
-
-      <nve-progress-ring status="warning" value="0"></nve-progress-ring>
-
-      <nve-progress-ring status="danger" value="0"></nve-progress-ring>
-    </div>
-`};
-
-/**
- * @summary Progress rings paired with descriptive text labels for communicating loading states and outcomes.
+ * @summary Progress ring paired inline with descriptive text label for communicating loading state.
  */
 export const WithText = {
   render: () => html`
-    <div nve-layout="column gap:sm" nve-text="medium">
-      <div nve-layout="row gap:xs align:center">
-        <nve-progress-ring size="xs" status="success" value="0"></nve-progress-ring>
-        Loading Successful
-      </div>
-
-      <div nve-layout="row gap:xs align:center">
-        <nve-progress-ring size="xs" status="warning" value="0"></nve-progress-ring>
-        Loading Timeout
-      </div>
-
-      <div nve-layout="row gap:xs align:center">
-        <nve-progress-ring size="xs" status="danger" value="0"></nve-progress-ring>
-        Loading Error
-      </div>
-
-      <div nve-layout="row gap:xs align:center">
-        <nve-progress-ring status="accent" size="xs"></nve-progress-ring>
-        Active Loading
-      </div>
+    <div nve-layout="row gap:xs align:vertical-center" nve-text="medium">
+      <nve-progress-ring status="accent" size="xs" aria-labelledby="processing-label"></nve-progress-ring>
+      <span id="processing-label">Processing...</span>
     </div>
 `};
 
