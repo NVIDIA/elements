@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/cli",
-  "version": "0.10.5",
+  "version": "0.10.6",
   "description": "Command-line interface for Elements development and tooling, providing interactive prompts, project scaffolding, and integration with AI assistants via Model Context Protocol.",
   "type": "module",
   "bin": {
