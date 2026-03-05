@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.10.6](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.5...@nvidia-elements/cli-v0.10.6) (2026-03-05)
+
+
+### Bug Fixes
+
+* **labs-cli:** start command cwd failure ([1c8d1a8](https://github.com/NVIDIA/elements/commit/1c8d1a8289ecb16078b58072df169bc2b01fe32c))
+
 ## [@nvidia-elements/cli-v0.10.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.4...@nvidia-elements/cli-v0.10.5) (2026-03-05)
 
 
