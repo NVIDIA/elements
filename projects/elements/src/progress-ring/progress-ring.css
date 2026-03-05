@@ -76,28 +76,16 @@ circle.ring {
 :host([status='success']) {
   --ring-color: var(--nve-sys-support-success-emphasis-color);
   --background-color: var(--nve-sys-support-success-muted-color);
-
-  [zeroValue] svg[role='presentation'] {
-    display: none;
-  }
 }
 
 :host([status='warning']) {
   --ring-color: var(--nve-sys-support-warning-emphasis-color);
   --background-color: var(--nve-sys-support-warning-muted-color);
-
-  [zeroValue] svg[role='presentation'] {
-    display: none;
-  }
 }
 
 :host([status='danger']) {
   --ring-color: var(--nve-sys-support-danger-emphasis-color);
   --background-color: var(--nve-sys-support-danger-muted-color);
-
-  [zeroValue] svg[role='presentation'] {
-    display: none;
-  }
 }
 
 :host([status='neutral']) {
@@ -130,21 +118,12 @@ circle.ring {
   animation: var(--animation-duration) linear 0s infinite normal none running spin-infinite;
 }
 
-[internal-host][zeroValue] circle.ring {
-  display: none;
-}
-
 ::slotted(mlv-icon),
 ::slotted(nve-icon),
 nve-icon {
   --width: 50cqw;
   --height: 50cqh;
   --color: var(--ring-color);
-}
-
-[internal-host][zeroValue] nve-icon {
-  --width: 100cqw;
-  --height: 100cqh;
 }
 
 @keyframes spin-infinite {
