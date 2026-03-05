@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import type { Example } from '@internals/metadata';
 import { ExamplesService } from './service.js';
 import { getPublicExamples } from './utils.js';
 import type { ToolMethod } from '../internal/tools.js';
@@ -15,7 +16,7 @@ describe('ExampleService', () => {
   });
 
   it('should provide search tool', async () => {
-    const result = await ExamplesService.search({ query: 'button' });
+    const result = await ExamplesService.search({ query: 'button', format: 'markdown' });
     expect(result).toBeDefined();
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.name).toBe('search');
     expect((ExamplesService.search as ToolMethod<unknown>).metadata.command).toBe('search');
@@ -39,11 +40,41 @@ describe('ExampleService', () => {
     expect((ExamplesService.get as ToolMethod<unknown>).metadata.inputSchema?.required).toContain('id');
   });
 
+  it('should provide search tool with JSON format', async () => {
+    const results = await ExamplesService.search({ query: 'button', format: 'json' });
+    const { id, entrypoint, template } = results[0] as Example;
+    expect(id).toBeTruthy();
+    expect(entrypoint).toBeTruthy();
+    expect(template).toBeTruthy();
+    expect((ExamplesService.search as ToolMethod<unknown>).metadata.name).toBe('search');
+    expect((ExamplesService.search as ToolMethod<unknown>).metadata.command).toBe('search');
+    expect((ExamplesService.search as ToolMethod<unknown>).metadata.description).toBe(
+      'Search Elements (nve-*) pattern usage examples by name, element type, or keywords. Returns up to 5 matching examples with full template code. Hint: use the list tool to get a list of all available examples and patterns first if unsure of what to search.'
+    );
+    expect((ExamplesService.search as ToolMethod<unknown>).metadata.inputSchema?.properties?.query).toBeDefined();
+  });
+
   it('should return markdown for a known example id', async () => {
     const examples = getPublicExamples('json', await ExamplesService.getAll()) as { id: string }[];
     const result = await ExamplesService.get({ id: examples[0].id, format: 'markdown' });
     expect(typeof result).toBe('string');
     expect(result).toContain(examples[0].id);
+  });
+
+  it('should return json for a known example id', async () => {
+    const examples = (await ExamplesService.list({ format: 'json' })) as Example[];
+    const result = (await ExamplesService.get({ id: examples[0].id, format: 'json' })) as Example;
+    expect(result).toBeDefined();
+    expect(result.id).toBe(examples[0].id);
+    expect(result.template).toBeTruthy();
+  });
+
+  it('should match example id case-insensitively', async () => {
+    const examples = (await ExamplesService.list({ format: 'json' })) as Example[];
+    const upperId = examples[0].id.toUpperCase();
+    const result = (await ExamplesService.get({ id: upperId, format: 'json' })) as Example;
+    expect(result).toBeDefined();
+    expect(result.id.toLowerCase()).toBe(examples[0].id.toLowerCase());
   });
 
   it('should return not-found message for unknown example id (markdown)', async () => {
@@ -62,7 +93,7 @@ describe('ExampleService', () => {
   });
 
   it('should return helpful message for empty search results (markdown)', async () => {
-    const result = await ExamplesService.search({ query: 'nonexistent-example-xyz' });
+    const result = await ExamplesService.search({ query: 'nonexistent-example-xyz', format: 'markdown' });
     expect(result).toContain('No examples found matching');
     expect(result).toContain('nonexistent-example-xyz');
     expect(result).toContain('Tip:');
