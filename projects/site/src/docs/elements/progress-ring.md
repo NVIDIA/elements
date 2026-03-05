@@ -28,10 +28,6 @@
 
 {% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'Status' %}
 
-When `value` equals zero, full size status icons appear with no ring.
-
-{% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'ZeroValueStatus' %}
-
 When used with text, please set `size="xs"`.
 
 {% example '@nvidia-elements/core/progress-ring/progress-ring.examples.json' 'WithText' %}
