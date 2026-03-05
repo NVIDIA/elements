@@ -119,7 +119,7 @@ export const SlottedIcon = {
   render: () => html`
     <div nve-layout="row gap:sm">
       <nve-progress-ring status="accent">
-        <nve-icon name="pause" status="accent" slot="status-icon"></nve-icon>
+        <nve-icon name="pause" status="accent"></nve-icon>
       </nve-progress-ring>
     </div>
 `};
