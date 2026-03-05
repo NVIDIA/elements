@@ -2,7 +2,7 @@
   nve-button-group,
   nve-button-group {
     /* prettier-ignore */
-    &:has(> :state(pressed)):not(:has(> :state(pressed) ~ :state(pressed))):not(:has(> [container])):not(:has(> [interaction])) {
+    &:has(> :state(pressed)):not(:has(> :state(pressed) ~ :state(pressed)), :has(> [container]), :has(> [interaction])) {
       --indicator-background: var(--nve-sys-support-accent-color);
       --indicator-border-radius: var(--nve-ref-border-radius-sm);
 

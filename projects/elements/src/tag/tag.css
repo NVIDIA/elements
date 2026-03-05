@@ -31,7 +31,6 @@
   width: var(--width);
   max-width: var(--max-width);
   display: inline-flex;
-  align-items: center;
   line-height: 1.1em;
   place-items: center;
   place-content: center;

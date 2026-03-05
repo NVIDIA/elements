@@ -40,7 +40,7 @@ slot {
   min-height: var(--min-height);
 }
 
-slot:not([name='actions']):not([name='prefix']):not([name='icon']) {
+slot:not([name='actions'], [name='prefix'], [name='icon']) {
   flex-grow: 1;
 }
 
