@@ -67,7 +67,6 @@ nve-toolbar {
 }
 
 slot[name='suffix'] {
-  display: block;
   gap: var(--nve-ref-space-xs);
   display: flex;
 }
