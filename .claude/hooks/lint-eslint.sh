@@ -9,9 +9,9 @@ if [[ -z "$FILE_PATH" ]]; then
   exit 0
 fi
 
-# Only lint .ts and .js files
+# Only lint .ts, .js, and .css files
 case "$FILE_PATH" in
-  *.ts|*.js) ;;
+  *.ts|*.js|*.css) ;;
   *) exit 0 ;;
 esac
 
