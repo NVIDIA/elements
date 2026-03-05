@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.10.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.4...@nvidia-elements/cli-v0.10.5) (2026-03-05)
+
+
+### Bug Fixes
+
+* **labs-cli:** improve playground generation ([a3e5280](https://github.com/NVIDIA/elements/commit/a3e528078d1df857339f11ba09297ac7765a1484))
+
 ## [@nvidia-elements/cli-v0.10.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.3...@nvidia-elements/cli-v0.10.4) (2026-03-04)
 
 
