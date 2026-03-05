@@ -135,17 +135,17 @@ export function reportHasFailures(result: Report) {
 }
 
 export async function renderReport(result: Report) {
-  const report = Object.entries(result)
-    .map(([key, value]) => {
-      const label = key
-        .replace(/([A-Z])/g, ' $1')
-        .trim()
-        .toLowerCase();
-      return `${statusIcons[value.status]} (**${label}**): ${value.message}`;
-    })
-    .join('\n\n');
+  const reports = Object.entries(result).map(([key, value]) => {
+    const label = key
+      .replace(/([A-Z])/g, ' $1')
+      .trim()
+      .toLowerCase();
+    return `${statusIcons[value.status]} (**${label}**): ${value.message}`;
+  });
 
-  console.log(await marked.parse(report));
+  const results = await Promise.all(reports.map(report => marked.parse(report)));
+
+  console.log(results.map(r => r.trim()).join('\n'));
 
   if (reportHasFailures(result)) {
     process.exit(1);
