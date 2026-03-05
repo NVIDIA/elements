@@ -3,7 +3,7 @@
 @font-face {
   font-family: codicon;
   font-display: block;
-  src: url(../node_modules/monaco-editor/esm/vs/base/browser/ui/codicons/codicon/codicon.ttf) format('truetype');
+  src: url('../node_modules/monaco-editor/esm/vs/base/browser/ui/codicons/codicon/codicon.ttf') format('truetype');
 }
 
 [nve-theme*='reduced-motion'] {
