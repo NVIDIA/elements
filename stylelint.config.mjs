@@ -10,50 +10,18 @@ export default {
     '**/src/vendor/**',
     '**/src/css/**' // elements legacy css
   ],
+  // elements specific rules and best practices are managed by @nvidia-elements/lint
   rules: {
-    // 'custom-property-pattern': /^(_)?((nve-)?[a-z][a-z0-9]*(-[a-z0-9]+)*)$/,
-    'custom-property-pattern': null,
-    // todo
-    'declaration-empty-line-before': null,
-    'rule-empty-line-before': null,
-    'custom-property-empty-line-before': null,
-    'no-descending-specificity': null,
-    'declaration-block-no-duplicate-properties': null,
-    'declaration-block-no-redundant-longhand-properties': null,
-    'selector-pseudo-element-colon-notation': null,
-    'declaration-block-no-duplicate-custom-properties': null,
-    'declaration-block-no-shorthand-property-overrides': null,
-    'no-duplicate-selectors': null,
-    'shorthand-property-no-redundant-values': null,
-    'comment-empty-line-before': null,
-    'property-no-unknown': null,
-    'selector-class-pattern': null,
-    'selector-not-notation': null,
-    'selector-type-no-unknown': null,
-    'selector-pseudo-class-no-unknown': null,
-    'property-no-vendor-prefix': null,
-    'keyframes-name-pattern': null,
-    'alpha-value-notation': null,
-    'hue-degree-notation': null,
-    'color-function-alias-notation': null,
-    'color-function-notation': null,
-    'selector-pseudo-class-no-unknown': null,
-    'value-keyword-case': null,
-    'comment-whitespace-inside': null,
-    'media-feature-range-notation': null,
-    'media-query-no-invalid': null,
-    'at-rule-no-unknown': null,
-    'length-zero-no-unit': null,
-    'selector-attribute-quotes': null,
-    'keyframe-selector-notation': null,
-    'function-url-quotes': null,
-    'font-family-name-quotes': null,
-    'at-rule-empty-line-before': null,
-    'declaration-property-value-no-unknown': null,
-    'property-no-deprecated': null,
-    'color-hex-length': null,
-    'font-family-no-missing-generic-family-keyword': null,
-    'import-notation': null,
-    'number-max-precision': null
+    'alpha-value-notation': 'number',
+    'hue-degree-notation': 'number',
+    'property-no-vendor-prefix': null, // custom internals style
+    'declaration-empty-line-before': null, // prettier
+    'custom-property-empty-line-before': null, // prettier
+    'import-notation': null, // vite
+    'custom-property-pattern': '^(_?[a-z][a-z0-9]*(-[a-z0-9]+)*|vscode-.+)$', // convention
+    'value-keyword-case': ['lower', { ignoreKeywords: ['Roboto', 'currentColor'] }], // convention
+    'declaration-block-no-redundant-longhand-properties': [true, { ignoreShorthands: ['grid-template'] }], // grid layouts are more readable as separate long hand syntax
+    'no-duplicate-selectors': null, // selectors repeated across sections for readability
+    'no-descending-specificity': null // repeated across sections for readability
   }
 };
