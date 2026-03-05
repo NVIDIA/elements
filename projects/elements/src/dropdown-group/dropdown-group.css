@@ -1,4 +1,4 @@
-:slotted(nve-dropdown) {
+::slotted(nve-dropdown) {
   --nve-sys-layer-popover-arrow-padding: 0px;
   --nve-sys-layer-popover-arrow-offset: 0px;
   --nve-sys-layer-popover-offset: 0px;

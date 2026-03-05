@@ -69,19 +69,22 @@
 }
 
 :host(:state(checked):state(dirty)) [input] slot::after {
-  animation: thumbBounce var(--nve-ref-animation-duration-250) cubic-bezier(0.12, 0.32, 0.54, 2);
+  animation: thumb-bounce var(--nve-ref-animation-duration-250) cubic-bezier(0.12, 0.32, 0.54, 2);
 }
 
-@keyframes thumbBounce {
+@keyframes thumb-bounce {
   0% {
     transform: translate(0, 0) scale(1);
   }
+
   20% {
     transform: translate(calc(var(--width) / 4), 0) scale(1.15);
   }
+
   60% {
     transform: translate(calc(var(--width) / 1.8), 0) scale(0.95);
   }
+
   100% {
     transform: translate(calc(var(--width) / 2), 0) scale(1);
   }

@@ -13,8 +13,7 @@
 
 ::slotted(nve-alert-group),
 ::slotted(nve-alert-group) {
-  margin: calc(var(--nve-ref-size-400) * -1) calc(var(--nve-ref-size-400) * -1) calc(var(--nve-ref-size-400) * -1)
-    calc(var(--nve-ref-size-400) * -1);
+  margin: calc(var(--nve-ref-size-400) * -1);
   width: calc(100% + var(--nve-ref-size-800));
   --border-radius: var(--nve-ref-border-radius-md) var(--nve-ref-border-radius-md) 0 0;
 }

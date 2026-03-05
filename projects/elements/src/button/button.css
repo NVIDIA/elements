@@ -140,12 +140,12 @@
   --color: var(--nve-sys-interaction-selected-color);
 }
 
-:host(:state(pressed):not([interaction]):not([container])) {
+:host(:state(pressed):not([interaction], [container])) {
   --background: var(--nve-sys-support-accent-color);
   --color: var(--nve-sys-text-white-color);
 }
 
-:host(:hover:not([interaction]):not([disabled]):not([readonly])) {
+:host(:hover:not([interaction], [disabled], [readonly])) {
   --color: var(--nve-sys-interaction-hover-color);
 }
 
@@ -299,10 +299,11 @@
   --color: var(--nve-sys-interaction-emphasis-background);
 }
 
-@keyframes inlineUnderline {
+@keyframes inline-underline {
   from {
     transform: translateX(-50%) scaleX(0);
   }
+
   to {
     transform: translateX(-50%) scaleX(1);
   }
@@ -312,6 +313,7 @@
   content: '';
   position: absolute;
   left: 50%;
+
   /* private API for inline underline border-bottom to customize underline downstream */
   bottom: calc(var(--_border-bottom-offset, -2) * var(--nve-ref-border-width-md));
   width: var(--_border-bottom-width, 100%);

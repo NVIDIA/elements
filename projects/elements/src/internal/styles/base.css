@@ -44,7 +44,7 @@ slot {
   outline: 0 !important;
 }
 
-:host(:focus-within:not(:focus-visible):not([readonly])) [focus-within]:not([focusable='active']),
+:host(:focus-within:not(:focus-visible, [readonly])) [focus-within]:not([focusable='active']),
 :host(:focus:not(:focus-visible)) [focusable]:not([focusable='active']),
 :host([tabindex='0']:focus:not(:focus-visible)) [focusable]:not([focusable='active']) {
   outline: none !important;
