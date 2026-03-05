@@ -55,12 +55,12 @@ body:has(nve-page) #example-container {
   nve-card {
     min-width: 120px;
     min-height: 120px;
-    --background: oklab(33.44% -0.0439437 0.00222608);
+    --background: oklab(33.44% -0.0439 0.0022);
   }
 
   &[data-element*='styles-responsive_viewport'] {
     nve-card {
-      --background: oklab(27.76% 0.0214875 -0.0624042);
+      --background: oklab(27.76% 0.0215 -0.0624);
     }
   }
 }
