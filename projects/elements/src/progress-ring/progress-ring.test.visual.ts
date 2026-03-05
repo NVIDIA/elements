@@ -16,6 +16,7 @@ describe('progress-ring visual', () => {
 function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
+    import '@nvidia-elements/core/icon/define.js';
     import '@nvidia-elements/core/progress-ring/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
@@ -35,6 +36,27 @@ function template(theme: '' | 'dark' = '') {
     <nve-progress-ring value="50" status="accent" size="md"></nve-progress-ring>
     <nve-progress-ring value="50" status="accent" size="lg"></nve-progress-ring>
     <nve-progress-ring value="50" status="accent" size="xl"></nve-progress-ring>
+  </div>
+
+  <div nve-layout="row gap:xs">
+    <nve-progress-ring value="50" status="accent" size="xxs">
+      <nve-icon name="pause" status="accent"></nve-icon>
+    </nve-progress-ring>
+    <nve-progress-ring value="50" status="accent" size="xs">
+      <nve-icon name="pause" status="accent"></nve-icon>
+    </nve-progress-ring>
+    <nve-progress-ring value="50" status="accent" size="sm">
+      <nve-icon name="pause" status="accent"></nve-icon>
+    </nve-progress-ring>
+    <nve-progress-ring value="50" status="accent" size="md">
+      <nve-icon name="pause" status="accent"></nve-icon>
+    </nve-progress-ring>
+    <nve-progress-ring value="50" status="accent" size="lg">
+      <nve-icon name="pause" status="accent"></nve-icon>
+    </nve-progress-ring>
+    <nve-progress-ring value="50" status="accent" size="xl">
+      <nve-icon name="pause" status="accent"></nve-icon>
+    </nve-progress-ring>
   </div>
   `;
 }
