@@ -35,7 +35,7 @@
   align-self: center !important;
 }
 
-::slotted(label:first-letter) {
+::slotted(label::first-letter) {
   text-transform: capitalize;
 }
 
@@ -49,7 +49,7 @@
   --opacity: var(--nve-ref-opacity-500);
 }
 
-:host(:state(invalid)) ::slotted(nve-control-message:not([error]):not([status])) {
+:host(:state(invalid)) ::slotted(nve-control-message:not([error], [status])) {
   display: none;
 }
 

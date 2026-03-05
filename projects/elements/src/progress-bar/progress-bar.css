@@ -52,7 +52,7 @@ progress[value].full::-webkit-progress-value {
   border-bottom-right-radius: var(--nve-ref-border-radius-full);
 }
 
-progress[value].minWidth::-webkit-progress-value {
+progress[value].min-width::-webkit-progress-value {
   min-width: 5px;
 }
 
@@ -87,22 +87,27 @@ progress[value].indeterminate::-webkit-progress-value {
     transform: scaleX(0.015);
     transform-origin: 0% 0%;
   }
+
   25% {
     transform: scaleX(0.4);
   }
+
   50% {
     transform: scaleX(0.015);
     transform-origin: 100% 0%;
     background-image: var(--indeterminate-gradient);
   }
+
   50.1% {
     transform: scaleX(0.015);
     transform-origin: 100% 0%;
     background-image: var(--indeterminate-gradient-reverse);
   }
+
   75% {
     transform: scaleX(0.4);
   }
+
   100% {
     transform: scaleX(0.015);
     transform-origin: 0% 0%;
