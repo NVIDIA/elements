@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.61.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.4...@nvidia-elements/core-v1.61.5) (2026-03-05)
+
+
+### Bug Fixes
+
+* **elements:** resolve sparkline examples not rendering in docs preview ([1e46961](https://github.com/NVIDIA/elements/commit/1e46961af204f1c87e677f8c279412dc53145ded))
+
 ## [@nvidia-elements/core-v1.61.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.3...@nvidia-elements/core-v1.61.4) (2026-03-04)
 
 
