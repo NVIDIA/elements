@@ -185,6 +185,8 @@
     "esbuild": "0.25.5",
     "eslint": "catalog:",
     "monaco-editor": "0.55.1",
+    "stylelint": "catalog:",
+    "stylelint-config-standard": "catalog:",
     "postcss": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",
@@ -428,6 +430,12 @@
       ]
     },
     "lint": {
+      "dependencies": [
+        "lint:eslint",
+        "lint:style"
+      ]
+    },
+    "lint:eslint": {
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
       "files": [
         "src/**/*.ts",
@@ -441,6 +449,15 @@
         "../internals/eslint:ci",
         "../labs/lint:build"
       ]
+    },
+    "lint:style": {
+      "command": "stylelint 'src/**/*.css' --config=../../stylelint.config.mjs",
+      "files": [
+        "src/**/*.css",
+        "!src/vendor/**",
+        "../../stylelint.config.mjs"
+      ],
+      "output": []
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",

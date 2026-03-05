@@ -197,6 +197,8 @@
     "axe-core": "catalog:",
     "eslint": "catalog:",
     "publint": "catalog:",
+    "stylelint": "catalog:",
+    "stylelint-config-standard": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:"
@@ -365,6 +367,12 @@
       }
     },
     "lint": {
+      "dependencies": [
+        "lint:eslint",
+        "lint:style"
+      ]
+    },
+    "lint:eslint": {
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
       "files": [
         "src/**/*.ts",
@@ -375,6 +383,14 @@
         "../../internals/eslint:ci",
         "../lint:build"
       ]
+    },
+    "lint:style": {
+      "command": "stylelint 'src/**/*.css' --config=../../../stylelint.config.mjs",
+      "files": [
+        "src/**/*.css",
+        "../../../stylelint.config.mjs"
+      ],
+      "output": []
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",
