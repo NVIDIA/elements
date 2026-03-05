@@ -12,9 +12,9 @@
   contain: content;
 }
 
-@media (max-width: 350px) {
+@media (width <= 350px) {
   [internal-host] {
-    flex-direction: column; /*Stack vertically*/
+    flex-direction: column; /* Stack vertically */
   }
 }
 

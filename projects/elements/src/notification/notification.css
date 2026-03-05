@@ -91,7 +91,6 @@ nve-icon-button::part(icon) {
 }
 
 :host([status='warning']) {
-  --status-color: var(--nve-sys-support-warning-color);
   --status-color: color-mix(in oklab, var(--nve-sys-support-warning-color) 90%, var(--nve-sys-contrast-mute-color));
 }
 

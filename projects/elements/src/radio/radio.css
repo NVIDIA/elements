@@ -28,13 +28,15 @@
   position: relative;
 }
 
-@keyframes radioSelectPop {
+@keyframes radio-select-pop {
   0% {
     transform: scale(0.8);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
@@ -69,7 +71,7 @@
 }
 
 :host(:state(checked):state(dirty)) [input] slot {
-  animation: radioSelectPop var(--nve-ref-animation-duration-200) ease-out;
+  animation: radio-select-pop var(--nve-ref-animation-duration-200) ease-out;
 }
 
 :host(:state(checked)) [input] slot::before {

@@ -141,6 +141,7 @@
   :host {
     inset: auto !important;
     place-self: normal !important;
+
     /*
      * This line is critical for shadow root positioning and auto anchor association
      * https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Anchor_positioning/Using#implicit_anchor_association

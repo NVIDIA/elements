@@ -48,6 +48,7 @@
 :host(:state(expanded)) #content {
   /* fallback for browsers that do not support intrinsic sizing keywords with calc-size() */
   height: auto;
+
   /* https://developer.chrome.com/docs/css-ui/animate-to-height-auto#animate_to_and_from_intrinsic_sizing_keywords_with_calc-size */
   height: calc-size(max-content, size);
 }

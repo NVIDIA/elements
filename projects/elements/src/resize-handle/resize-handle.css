@@ -23,7 +23,6 @@
 }
 
 .line {
-  height: var(--line-width);
   transition:
     background-color var(--nve-ref-animation-duration-200) ease-in,
     outline-color var(--nve-ref-animation-duration-200) ease-in;

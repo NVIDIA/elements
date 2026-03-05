@@ -76,7 +76,7 @@
   --cursor: not-allowed;
 }
 
-:host(:is(:focus, focused)) [internal-host] {
+:host(:is(:focus, :state(focused))) [internal-host] {
   outline-offset: -3px;
   outline: 5px auto -webkit-focus-ring-color; /* var(--nve-ref-outline-webkit) */
   outline: Highlight solid 2px; /* --nve-ref-outline */
