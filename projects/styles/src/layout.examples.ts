@@ -750,3 +750,76 @@ export const Spacing = {
 </div>
   `
 }
+
+export const NestedLayouts = {
+  render: () => html`
+<div nve-layout="column gap:lg pad:lg">
+  <!-- should be width of buttons side by side -->
+  <div nve-layout="row gap:md">
+    <nve-button>123</nve-button>
+    <nve-button>123</nve-button>
+    <nve-button>123</nve-button>
+  </div>
+
+  <!-- should be width of buttons stacked -->
+  <div nve-layout="column gap:md">
+    <nve-button>123</nve-button>
+    <nve-button>123</nve-button>
+    <nve-button>123</nve-button>
+  </div>
+
+  <!-- should be width of buttons side by side -->
+  <div nve-layout="row gap:md">
+    <div nve-layout="column gap:md">
+      <nve-button>123</nve-button>
+      <nve-button>123</nve-button>
+      <nve-button>123</nve-button>
+    </div>
+    <div nve-layout="column gap:md">
+      <nve-button>123</nve-button>
+      <nve-button>123</nve-button>
+      <nve-button>123</nve-button>
+    </div>
+  </div>
+
+  <!-- should be side by side 50% -->
+  <div nve-layout="grid span-items:6 gap:md">
+    <div nve-layout="column gap:md">
+      <nve-card>
+        <nve-card-content>123</nve-card-content>
+      </nve-card>
+      <nve-card>
+        <nve-card-content>123</nve-card-content>
+      </nve-card>
+      <nve-card>
+        <nve-card-content>123</nve-card-content>
+      </nve-card>
+    </div>
+    <div nve-layout="column gap:md">
+      <nve-card>
+        <nve-card-content>123</nve-card-content>
+      </nve-card>
+      <nve-card>
+        <nve-card-content>123</nve-card-content>
+      </nve-card>
+      <nve-card>
+        <nve-card-content>123</nve-card-content>
+      </nve-card>
+    </div>
+  </div>
+
+  <!-- should be full width -->
+  <div nve-layout="column gap:md">
+    <nve-card>
+      <nve-card-content>123</nve-card-content>
+    </nve-card>
+    <nve-card>
+      <nve-card-content>123</nve-card-content>
+    </nve-card>
+    <nve-card>
+      <nve-card-content>123</nve-card-content>
+    </nve-card>
+  </div>
+</div>
+  `
+}
