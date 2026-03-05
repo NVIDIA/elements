@@ -639,6 +639,66 @@ describe('row visual', () => {
 
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
+
+  test('nested column layouts should have a initial width within rows', async () => {
+    const report = await visualRunner.render(
+      'nested-column-layouts-within-rows',
+      /* html */ `
+<section nve-layout="column gap:lg pad:lg">
+  <!-- should be width of buttons side by side -->
+  <section nve-layout="row gap:md">
+    <div></div>
+    <div></div>
+    <div></div>
+  </section>
+
+  <!-- should be width of buttons stacked -->
+  <section nve-layout="column gap:md">
+    <div></div>
+    <div></div>
+    <div></div>
+  </section>
+
+  <!-- should be content width side by side -->
+  <div nve-layout="row gap:md">
+    <section nve-layout="column gap:md">
+      <div></div>
+      <div></div>
+      <div></div>
+    </section>
+    <section nve-layout="column gap:md">
+      <div></div>
+      <div></div>
+      <div></div>
+    </section>
+  </div>
+
+  <!-- should be side by side 50% filling the column width -->
+  <div nve-layout="grid span-items:6 gap:md">
+    <section nve-layout="column gap:md">
+      <div style="width: 100%"></div>
+      <div style="width: 100%"></div>
+      <div style="width: 100%"></div>
+    </section>
+    <section nve-layout="column gap:md">
+      <div style="width: 100%"></div>
+      <div style="width: 100%"></div>
+      <div style="width: 100%"></div>
+    </section>
+  </div>
+
+  <!-- should be full width -->
+  <section nve-layout="column gap:md">
+    <div style="width: 100%"></div>
+    <div style="width: 100%"></div>
+    <div style="width: 100%"></div>
+  </section>
+</section>
+    `
+    );
+
+    expect(report.maxDiffPercentage).toBeLessThan(1);
+  });
 });
 
 describe('grid visual', () => {
