@@ -942,13 +942,13 @@
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
-    "@lit-labs/virtualizer": "catalog:",
-    "@nvidia-elements/styles": "workspace:^",
     "@internals/eslint": "workspace:*",
+    "@internals/testing": "workspace:*",
     "@internals/vite": "workspace:*",
+    "@lit-labs/virtualizer": "catalog:",
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/snippets": "workspace:*",
-    "@internals/testing": "workspace:*",
+    "@nvidia-elements/styles": "workspace:^",
     "@typescript/lib-dom": "npm:@types/web@0.0.312",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
@@ -956,6 +956,8 @@
     "eslint": "catalog:",
     "lit-analyzer": "2.0.3",
     "publint": "catalog:",
+    "stylelint": "catalog:",
+    "stylelint-config-standard": "catalog:",
     "svgo": "3.0.2",
     "ts-lit-plugin": "2.0.2",
     "typescript": "catalog:",
@@ -1219,6 +1221,7 @@
     "lint": {
       "dependencies": [
         "lint:eslint",
+        "lint:style",
         "lint:analyzer"
       ]
     },
@@ -1235,6 +1238,14 @@
         "../internals/eslint:ci",
         "../labs/lint:build"
       ]
+    },
+    "lint:style": {
+      "command": "stylelint 'src/**/*.css' --config=../../stylelint.config.mjs",
+      "files": [
+        "src/**/*.css",
+        "../../stylelint.config.mjs"
+      ],
+      "output": []
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",

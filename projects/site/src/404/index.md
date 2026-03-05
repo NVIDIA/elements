@@ -6,7 +6,6 @@
 }
 ---
 
-<link rel="stylesheet" href="./404/index.css" />
 <script type="module" src="./404/index.ts"></script>
 
 <div nve-layout="column gap:lg pad:lg">

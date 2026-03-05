@@ -20,6 +20,7 @@
     "ci": "wireit",
     "build": "wireit",
     "dev": "wireit",
+    "lint": "wireit",
     "test:lighthouse": "wireit",
     "test:visual": "wireit"
   },
@@ -31,6 +32,8 @@
   ],
   "devDependencies": {
     "@internals/vite": "workspace:*",
+    "stylelint": "catalog:",
+    "stylelint-config-standard": "catalog:",
     "cssnano": "7.1.1",
     "glob": "catalog:",
     "lit": "catalog:",
@@ -121,6 +124,19 @@
       "dependencies": [
         "build:styledictionary"
       ]
+    },
+    "lint": {
+      "dependencies": [
+        "lint:style"
+      ]
+    },
+    "lint:style": {
+      "command": "stylelint 'src/**/*.css' --config=../../stylelint.config.mjs",
+      "files": [
+        "src/**/*.css",
+        "../../stylelint.config.mjs"
+      ],
+      "output": []
     },
     "test:lighthouse": {
       "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
