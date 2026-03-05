@@ -1,3 +1,15 @@
+## [@nvidia-elements/core-v1.62.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.5...@nvidia-elements/core-v1.62.0) (2026-03-05)
+
+
+### Features
+
+* **elements:** open progress ring center to slotted content ([113cad7](https://github.com/NVIDIA/elements/commit/113cad764033a7f8c465bb1eb4dba43001f71469))
+
+
+### Bug Fixes
+
+* **elements:** progress ring layout shift ([4411cb3](https://github.com/NVIDIA/elements/commit/4411cb3994e311cd0ba352249f2ed37d8018a88d))
+
 ## [@nvidia-elements/core-v1.61.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.4...@nvidia-elements/core-v1.61.5) (2026-03-05)
 
 
