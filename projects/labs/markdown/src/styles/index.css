@@ -6,9 +6,6 @@
   color: var(--nve-sys-text-color);
   line-height: var(--nve-ref-font-line-height-relaxed);
   padding: var(--padding);
-  /* display: block;
-    height: 100%;
-    overflow-y: auto; */
 }
 
 /* Remove bottom margin from last elements to prevent extra spacing */
@@ -25,6 +22,7 @@ img:last-child {
 /* ==========================================================================
      HEADINGS
      ========================================================================== */
+
 /* Base heading styles */
 h1,
 h2,
