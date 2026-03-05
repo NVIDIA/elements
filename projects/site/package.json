@@ -161,6 +161,12 @@
       "dependencies": []
     },
     "lint": {
+      "dependencies": [
+        "lint:eslint",
+        "lint:style"
+      ]
+    },
+    "lint:eslint": {
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
       "files": [
         "src/**/*.js",
@@ -172,6 +178,14 @@
         "../internals/eslint:ci",
         "../labs/lint:build"
       ]
+    },
+    "lint:style": {
+      "command": "stylelint 'src/**/*.css' --config=../../stylelint.config.mjs",
+      "files": [
+        "src/**/*.css",
+        "../../stylelint.config.mjs"
+      ],
+      "output": []
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",
@@ -232,6 +246,8 @@
     "@sentry/browser": "catalog:",
     "compare-versions": "6.1.1",
     "eslint": "catalog:",
+    "stylelint": "catalog:",
+    "stylelint-config-standard": "catalog:",
     "html-minifier": "4.0.0",
     "lighthouse": "catalog:",
     "lightningcss": "1.30.2",
