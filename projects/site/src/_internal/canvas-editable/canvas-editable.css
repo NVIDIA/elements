@@ -55,6 +55,7 @@
   min-height: var(--height);
   border: none;
 }
+
 .preview-backdrop {
   background: var(--nve-ref-color-neutral-200);
   flex: 1;
