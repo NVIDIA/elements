@@ -62,6 +62,8 @@
     "@vitest/browser": "catalog:",
     "eslint": "catalog:",
     "lit": "catalog:",
+    "stylelint": "catalog:",
+    "stylelint-config-standard": "catalog:",
     "postcss": "catalog:",
     "postcss-each": "1.1.0",
     "postcss-load-config": "6.0.1",
@@ -160,6 +162,11 @@
       ]
     },
     "lint": {
+      "dependencies": [
+        "lint:eslint"
+      ]
+    },
+    "lint:eslint": {
       "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
       "files": [
         "src/**/*.ts",
