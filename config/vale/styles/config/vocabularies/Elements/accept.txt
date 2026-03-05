@@ -13,6 +13,8 @@ Vitest
 WCAG
 ARIA
 aria
+aria-labelledby
+labelledby
 SSR
 ssr
 axe
