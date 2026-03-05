@@ -8,6 +8,7 @@
 nve-page {
   --background: var(--nve-sys-layer-shell-background);
 }
+
 [nve-theme='light'] nve-page {
   --background: var(--nve-sys-layer-accent-canvas-background);
 }
@@ -45,7 +46,7 @@ section {
   }
 }
 
-@media only screen and (min-width: 960px) {
+@media only screen and (width >= 960px) {
   section {
     > .content {
       &.leading {
@@ -59,6 +60,7 @@ section {
           }
         }
       }
+
       &.trailing {
         grid-area: 1 / 3 / 2 / 4;
 
@@ -93,8 +95,7 @@ section {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr;
-    justify-items: center;
-    align-items: center;
+    place-items: center;
 
     #hero-text {
       grid-area: 1 / 1 / 2 / 3;
@@ -115,7 +116,7 @@ section {
   }
 }
 
-@media only screen and (min-width: 1280px) {
+@media only screen and (width >= 1280px) {
   #hero {
     .layout {
       gap: var(--nve-ref-space-none);
@@ -141,13 +142,14 @@ section {
 .video-container {
   position: relative;
   backdrop-filter: blur(20px);
-  background: rgba(24, 26, 32, 0.11); /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
+  background: rgb(24 26 32 / 0.11); /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
   border-radius: var(--nve-ref-border-radius-lg);
   padding: var(--nve-ref-size-200);
+
   /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-value */
   box-shadow:
-    inset 0 1px 1px 0 rgba(72, 78, 88, 0.2),
-    inset 0 24px 48px 0 rgba(40, 46, 54, 0.02);
+    inset 0 1px 1px 0 rgb(72 78 88 / 0.2),
+    inset 0 24px 48px 0 rgb(40 46 54 / 0.02);
 }
 
 video {
@@ -195,7 +197,7 @@ video {
 /* Gradients */
 
 .silver-gradient {
-  background: linear-gradient(130deg, rgba(161, 161, 170, 0.6) 0%, #fff 66%);
+  background: linear-gradient(130deg, rgb(161 161 170 / 0.6) 0%, #fff 66%);
 }
 
 .coral-yellow-gradient {
@@ -231,6 +233,7 @@ video {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 .gradient-line {
   position: absolute;
   top: 0%;
@@ -238,15 +241,16 @@ video {
   right: 3rem;
   height: 1px;
   transform: translateY(-50%);
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(to right, transparent, rgb(255 255 255 / 0.3), transparent);
 }
+
 .radial-gradient-overlay {
   position: absolute;
   left: 0;
   top: 0%;
   width: 100%;
   height: 100%;
-  background: radial-gradient(35% 96px at 50% 0%, rgba(245, 245, 245, 0.08), transparent);
+  background: radial-gradient(35% 96px at 50% 0%, rgb(245 245 245 / 0.08), transparent);
 }
 
 .gradient-card {
@@ -260,6 +264,7 @@ video {
     )
   );
 }
+
 .gradient-layer {
   position: absolute;
   border-radius: 50%;
@@ -291,6 +296,7 @@ video {
     &.horizontal {
       padding-top: 2px;
     }
+
     &.vertical {
       padding-left: 2px;
     }
@@ -311,7 +317,7 @@ video {
 .grid-box-container {
   position: relative;
   width: 100%;
-  background: radial-gradient(35% 350px at 50% 40%, rgba(245, 245, 245, 0.08), transparent);
+  background: radial-gradient(35% 350px at 50% 40%, rgb(245 245 245 / 0.08), transparent);
 }
 
 .grid-box-bg {
@@ -321,8 +327,8 @@ video {
   width: 100%;
   height: 100%;
   background-size: 50px 50px;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
   opacity: var(--nve-ref-opacity-600);
 }
 
@@ -345,39 +351,45 @@ video {
   color: var(--nve-sys-layer-canvas-color);
 
   &:has(img[src*='vite']) {
-    --background-img: url(/static/images/integrations/vite.svg);
+    --background-img: url('/static/images/integrations/vite.svg');
+
     /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-value */
-    --background: linear-gradient(135deg, rgba(144, 116, 240, 0.45) 0%, rgba(144, 116, 240, 0.15) 100%);
+    --background: linear-gradient(135deg, rgb(144 116 240 / 0.45) 0%, rgb(144 116 240 / 0.15) 100%);
   }
 
   &:has(img[src*='angular']) {
-    --background-img: url(/static/images/integrations/angular.svg);
+    --background-img: url('/static/images/integrations/angular.svg');
+
     /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-value */
-    --background: linear-gradient(135deg, rgba(236, 72, 153, 0.45) 0%, rgba(236, 72, 153, 0.15) 100%);
+    --background: linear-gradient(135deg, rgb(236 72 153 / 0.45) 0%, rgb(236 72 153 / 0.15) 100%);
   }
 
   &:has(img[src*='nextjs']) {
-    --background-img: url(/static/images/integrations/nextjs.svg);
+    --background-img: url('/static/images/integrations/nextjs.svg');
+
     /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-value */
-    --background: linear-gradient(135deg, rgba(31, 31, 31, 0.45) 0%, rgba(144, 116, 240, 0.1) 100%);
+    --background: linear-gradient(135deg, rgb(31 31 31 / 0.45) 0%, rgb(144 116 240 / 0.1) 100%);
   }
 
   &:has(img[src*='react']) {
-    --background-img: url(/static/images/integrations/react.svg);
+    --background-img: url('/static/images/integrations/react.svg');
+
     /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-value */
-    --background: linear-gradient(135deg, rgba(97, 218, 251, 0.45) 0%, rgba(144, 116, 240, 0.1) 100%);
+    --background: linear-gradient(135deg, rgb(97 218 251 / 0.45) 0%, rgb(144 116 240 / 0.1) 100%);
   }
 
   &:has(img[src*='eleventy']) {
-    --background-img: url(/static/images/integrations/eleventy.svg);
+    --background-img: url('/static/images/integrations/eleventy.svg');
+
     /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-value */
-    --background: linear-gradient(135deg, rgba(125, 145, 190, 0.45) 0%, rgba(125, 145, 190, 0.15) 100%);
+    --background: linear-gradient(135deg, rgb(125 145 190 / 0.45) 0%, rgb(125 145 190 / 0.15) 100%);
   }
 
   &:has(img[src*='vue']) {
-    --background-img: url(/static/images/integrations/vue.svg);
+    --background-img: url('/static/images/integrations/vue.svg');
+
     /* eslint-disable-next-line @nvidia-elements/lint/no-unexpected-css-value */
-    --background: linear-gradient(135deg, rgba(65, 184, 131, 0.45) 0%, rgba(144, 116, 240, 0.1) 100%);
+    --background: linear-gradient(135deg, rgb(65 184 131 / 0.45) 0%, rgb(144 116 240 / 0.1) 100%);
   }
 
   &::before {
@@ -401,8 +413,8 @@ video {
 
   .btn {
     padding: var(--nve-ref-size-200);
-    border: var(--nve-ref-border-width-sm) solid rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.14); /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
+    border: var(--nve-ref-border-width-sm) solid rgb(255 255 255 / 0.18);
+    background: rgb(255 255 255 / 0.14); /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
     border-radius: var(--nve-ref-border-radius-full);
     font-size: var(--nve-ref-font-size-100);
     color: var(--nve-sys-interaction-color);
@@ -418,6 +430,6 @@ video {
   }
 
   &:hover .btn {
-    background: rgba(255, 255, 255, 0.2); /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
+    background: rgb(255 255 255 / 0.2); /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
   }
 }
