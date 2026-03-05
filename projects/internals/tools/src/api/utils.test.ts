@@ -79,8 +79,8 @@ describe('getAvailableAPIs', () => {
 
   it('should return list of available elements APIs in markdown', () => {
     const apis = getPublicAPIs('markdown', metadata);
-    expect(apis).toContain('- **nve-button (button)** button description');
-    expect(apis).toContain('- **nve-badge** badge description');
+    expect(apis).toContain('`nve-button` (button): button description');
+    expect(apis).toContain('`nve-badge`: badge description');
   });
 });
 
@@ -111,7 +111,7 @@ describe('getPublicAPIs edge cases', () => {
       data: { elements: Element[]; attributes: Attribute[]; tokens: Token[]; types: ProjectTypes[] };
     };
     const result = getPublicAPIs('markdown', metadata);
-    expect(result).toContain('**nve-layout (attribute)**');
+    expect(result).toContain('`nve-layout` (attribute): Layout utility');
   });
 
   it('should filter out attributes without example', () => {

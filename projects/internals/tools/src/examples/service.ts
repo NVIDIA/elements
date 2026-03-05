@@ -11,12 +11,47 @@ export class ExamplesService {
     summary: 'Get list of available Elements (nve-*) patterns and examples.',
     description:
       'Get a summary list of available Elements (nve-*) component/pattern usage examples and code snippets. Use this to browse all available examples.',
-    inputSchema: {},
-    outputSchema: { type: 'string' }
+    inputSchema: {
+      type: 'object',
+      properties: {
+        format: {
+          type: 'string',
+          description: markdownDescription,
+          enum: ['markdown', 'json'],
+          default: 'markdown'
+        }
+      },
+      additionalProperties: false
+    },
+    outputSchema: {
+      oneOf: [
+        { type: 'string' },
+        {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'string' },
+              summary: { type: 'string' }
+            },
+            additionalProperties: false
+          }
+        }
+      ],
+      additionalProperties: false
+    }
   })
-  static async list(): Promise<string> {
+  static async list(
+    { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
+  ): Promise<{ id: string; summary: string }[] | string> {
     const examples = await ExamplesServiceMetadata.getData();
-    return getPublicExamples('markdown', examples) as string;
+    const results = getPublicExamples(format, examples);
+
+    if (format === 'json') {
+      return (results as Example[]).map(e => ({ id: e.id, summary: e.summary }));
+    }
+
+    return results as string;
   }
 
   @tool({
@@ -66,14 +101,44 @@ export class ExamplesService {
         query: {
           type: 'string',
           description: `Search query for matching example templates/patterns. Maximum ${MAX_RESULT_LIMIT} results will be returned.`
+        },
+        format: {
+          type: 'string',
+          description: markdownDescription,
+          enum: ['markdown', 'json'],
+          default: 'markdown'
         }
       },
-      required: ['query']
+      required: ['query'],
+      additionalProperties: false
     },
-    outputSchema: { type: 'string' }
+    outputSchema: {
+      oneOf: [
+        { type: 'string' },
+        {
+          type: 'array',
+          items: {
+            type: 'object',
+            properties: {
+              id: { type: 'string' },
+              name: { type: 'string' },
+              summary: { type: 'string' },
+              description: { type: 'string' },
+              template: { type: 'string' },
+              entrypoint: { type: 'string' },
+              element: { type: 'string' },
+              tags: { type: 'array', items: { type: 'string' } }
+            },
+            additionalProperties: false,
+            required: ['id', 'name', 'summary', 'element']
+          }
+        }
+      ],
+      additionalProperties: false
+    }
   })
-  static async search({ query }: { query: string }): Promise<string> {
-    return (await searchPublicExamples(query, { format: 'markdown', limit: MAX_RESULT_LIMIT })) as string;
+  static async search({ query, format }: { query: string; format: 'markdown' | 'json' }): Promise<Example[] | string> {
+    return await searchPublicExamples(query, { format, limit: MAX_RESULT_LIMIT });
   }
 
   static async getAll(): Promise<Example[]> {
