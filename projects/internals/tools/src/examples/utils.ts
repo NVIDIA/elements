@@ -23,7 +23,7 @@ export function isContextExample(example: Partial<Example>) {
     example.id?.includes('styles-typography') ||
     example.id?.includes('styles-layout') ||
     example.tags?.includes('pattern');
-  return passedExclusionChecks && passedTypeChecks;
+  return passedExclusionChecks && passedTypeChecks && example.summary?.length;
 }
 
 function rankExample(example: Partial<Example>) {
@@ -44,18 +44,17 @@ export function getPublicExamples(format: 'markdown' | 'json', examples: Partial
     .map((s: Partial<Example>) => ({
       id: s.id ?? '',
       name: s.name ?? '',
-      summary: s.summary ?? s.description,
+      summary: s.summary ?? s.description ?? '',
       element: s.element ?? '',
       template: s.template ?? ''
     }))
     .sort((a, b) => rankExample(a) - rankExample(b) || (a.id ?? '').localeCompare(b.id ?? ''));
   return format === 'markdown'
     ? result
-        .filter(example => example.summary)
         .map(example => {
-          return `- **${example.id}** ${wrapText(example.summary)}`;
+          return `\`${example.id}\`: ${wrapText(example.summary)}`;
         })
-        .join('\n')
+        .join('\n\n')
     : result;
 }
 

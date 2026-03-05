@@ -7,7 +7,7 @@ describe('ApiService', () => {
   it('should provide list tool', async () => {
     const result = await ApiService.list();
     expect(result).toBeDefined();
-    expect(result).toContain('- **nve-button');
+    expect(result).toContain('`nve-button` (button):');
     expect((ApiService.list as ToolMethod<unknown>).metadata.name).toBe('list');
     expect((ApiService.list as ToolMethod<unknown>).metadata.command).toBe('list');
     expect((ApiService.list as ToolMethod<unknown>).metadata.summary).toBe(
