@@ -1,3 +1,10 @@
+## [@nvidia-elements/styles-v1.13.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.13.2...@nvidia-elements/styles-v1.13.3) (2026-03-05)
+
+
+### Bug Fixes
+
+* **styles:** prevent stretch of flex items of direct column children ([962f5f8](https://github.com/NVIDIA/elements/commit/962f5f87f5af583fb323049d741810f81455a014))
+
 ## [@nvidia-elements/styles-v1.13.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/styles-v1.13.1...@nvidia-elements/styles-v1.13.2) (2026-02-27)
 
 
