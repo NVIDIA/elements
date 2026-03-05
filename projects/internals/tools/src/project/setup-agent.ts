@@ -151,17 +151,17 @@ export async function setupAgent(cwd: string, ide: IDE): Promise<Report> {
 
   for (const target of ides) {
     try {
-      const configPath = writeMcpConfig(dir, target, client);
+      writeMcpConfig(dir, target, client);
       const label = target === 'cursor' ? 'Cursor' : 'Claude Code';
       report[target] = {
-        message: `${label} configured. Restart ${label} to activate.\n\`${configPath}\``,
+        message: `${label} configured. Restart ${label} to activate`,
         status: 'success'
       };
 
       if (target === 'claude-code') {
-        const settingsPath = writeClaudeSettings(dir);
+        writeClaudeSettings(dir);
         report['claude-settings'] = {
-          message: `Claude Code project settings configured.\n\`${settingsPath}\``,
+          message: `Claude Code project settings configured`,
           status: 'success'
         };
       }
@@ -175,9 +175,9 @@ export async function setupAgent(cwd: string, ide: IDE): Promise<Report> {
   }
 
   try {
-    const skillPath = writeElementsSkill(cwd);
+    writeElementsSkill(cwd);
     report['elements-skill'] = {
-      message: `Elements skill file configured.\n\`${skillPath}\``,
+      message: `Elements skill file configured`,
       status: 'success'
     };
   } catch (e) {

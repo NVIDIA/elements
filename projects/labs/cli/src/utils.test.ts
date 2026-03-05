@@ -440,7 +440,7 @@ describe('utils', () => {
 
       await renderReport(report);
 
-      expect(console.log).toHaveBeenCalledWith('✅ (**test case**): Test passed\n\n💡 (**another test**): Information');
+      expect(console.log).toHaveBeenCalledWith('✅ (**test case**): Test passed\n💡 (**another test**): Information');
       expect(process.exit).not.toHaveBeenCalled();
     });
 
