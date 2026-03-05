@@ -64,14 +64,14 @@ describe(ProgressRing.metadata.tag, () => {
     expect(nveIcon.name).toBe(statusIcons[element.status]);
   });
 
-  it('should set indeterminate and zeroValue states', async () => {
+  it('should set indeterminate state when value is undefined', async () => {
     const internalHost = element.shadowRoot.querySelector('[internal-host]') as HTMLElement;
     expect(internalHost.hasAttribute('indeterminate')).toBe(true);
 
     element.value = 0;
     await elementIsStable(element);
 
-    expect(internalHost.hasAttribute('zerovalue')).toBe(true);
+    expect(internalHost.hasAttribute('indeterminate')).toBe(false);
   });
 
   it('should assign slotted content to the default slot, distinct from the internal status icon', async () => {
