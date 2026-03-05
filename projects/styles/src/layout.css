@@ -23,7 +23,7 @@
 
     &[nve-layout~='full'],
     &[nve-layout~='grow'] {
-      /** @deprecated - grow is deprecated in favor of full, to distance confustion of flexbox grow behavior */
+      /** @deprecated - grow is deprecated in favor of full, to distance confusion of flexbox grow behavior */
       height: 100%;
       width: 100%;
       /* https://defensivecss.dev/tip/flexbox-min-content-size/ */
@@ -81,6 +81,8 @@
     /* Vertical Layout */
     &[nve-layout~='column'] {
       flex-direction: column;
+      width: 100%;
+      align-items: start;
       justify-content: flex-start;
 
       &[nve-layout~='align:left'] {
@@ -119,6 +121,10 @@
           flex-grow: 1;
         }
       }
+    }
+
+    &[nve-layout~='row'] > [nve-layout~='column'] {
+      width: initial;
     }
 
     /* Centered */
