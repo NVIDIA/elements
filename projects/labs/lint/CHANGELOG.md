@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.13.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.12.4...@nvidia-elements/lint-v0.13.0) (2026-03-05)
+
+
+### Features
+
+* **labs-lint:** no-restricted-page-sizing ([d425793](https://github.com/NVIDIA/elements/commit/d4257935374f6820a2a3a17d006d073f9eb6f845))
+
 ## [@nvidia-elements/lint-v0.12.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.12.3...@nvidia-elements/lint-v0.12.4) (2026-03-04)
 
 
