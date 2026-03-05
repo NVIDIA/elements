@@ -1,6 +1,7 @@
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { Size, SupportStatus } from '@nvidia-elements/core/internal';
 import { attachInternals, I18nController, statusIcons, useStyles } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
@@ -11,7 +12,8 @@ import styles from './progress-ring.css?inline';
  * @description The `progress-ring` component shows the status of a pending task. It also serves the basis of the page loading element.
  * @since 0.17.0
  * @entrypoint \@nvidia-elements/core/progress-ring
- * @slot status-icon
+ * @slot - Content to display in the ring center. Defaults to a status icon.
+ * @slot status-icon - (deprecated) Use the default slot instead.
  * @cssprop --background-color
  * @cssprop --ring-color
  * @cssprop --ring-background-opacity
@@ -41,7 +43,7 @@ export class ProgressRing extends LitElement {
   /** The current `value` of the progress ring. When not set, an indeterminate animation will show. */
   @property({ type: Number }) value?: number;
 
-  /** The `max` value of the progress ring that the `value` is proportionaly scaled to. */
+  /** The `max` value of the progress ring that the `value` is proportionally scaled to. */
   @property({ type: Number }) max? = 100;
 
   /** Four visual treatments represent the `status` of tasks. When `status` changes to `warning`, `success`, or `danger`, the component embeds appropriate icons. */
@@ -55,6 +57,14 @@ export class ProgressRing extends LitElement {
   /** Enables updating internal string values for internationalization. */
   @property({ type: Object }) i18n = this.#i18nController.i18n;
 
+  @queryAssignedElements({ slot: 'status-icon' })
+  private _deprecatedStatusIconSlot!: Element[];
+
+  /**
+   * Tracks presence of content presence in deprecated status-icon slot.
+   */
+  #hasStatusIconContent = false;
+
   render() {
     return html`
       <div internal-host ?indeterminate=${this.value === undefined} ?zeroValue=${this.value === 0}>
@@ -64,9 +74,14 @@ export class ProgressRing extends LitElement {
             stroke-dasharray=${(this.value / this.max) * 44 + 'px' + ' ' + '44px'}>
           </circle>
         </svg>
-        <slot name="status-icon">
-          ${this.status !== 'accent' ? html`<nve-icon part="icon" .name=${statusIcons[this.status]} .status=${this.status as SupportStatus} aria-hidden="true"></nve-icon>` : ''}
+        <slot>
+          ${
+            this.status !== 'accent' && !this.#hasStatusIconContent
+              ? html`<nve-icon part="icon" .name=${statusIcons[this.status]} .status=${this.status as SupportStatus} aria-hidden="true"></nve-icon>`
+              : ''
+          }
         </slot>
+        <slot name="status-icon" @slotchange=${this.#updateStatusIcon}></slot>
       </div>
     `;
   }
@@ -83,5 +98,10 @@ export class ProgressRing extends LitElement {
     this._internals.ariaValueMax = `${this.max}`;
     this._internals.ariaLabel =
       this.i18n[this.status] && this.i18n[this.status] !== 'neutral' ? this.i18n[this.status] : this.i18n.information;
+  }
+
+  #updateStatusIcon() {
+    this.#hasStatusIconContent = this._deprecatedStatusIconSlot.length > 0;
+    this.requestUpdate();
   }
 }
