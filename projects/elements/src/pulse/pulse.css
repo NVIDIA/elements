@@ -41,7 +41,6 @@
 
 [internal-host] {
   display: flex;
-  align-items: center;
   place-items: center;
   place-content: center;
   height: 100%;
@@ -60,6 +59,7 @@ svg {
   transform-box: fill-box;
   transform-origin: center center;
 }
+
 .c1,
 .c2,
 .c3 {

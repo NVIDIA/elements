@@ -16,7 +16,7 @@
   :host([color]) [internal-host] {
     --background: var(--color);
     border: 1px solid transparent;
-    background-image: linear-gradient(hsla(0, 0%, 0%, 0.8) 0 0) !important;
+    background-image: linear-gradient(hsl(0 0% 0% / 0.8) 0 0) !important;
   }
 }
 
@@ -29,7 +29,6 @@
   height: var(--height);
   border-radius: var(--border-radius);
   display: inline-flex;
-  align-items: center;
   place-items: center;
   place-content: center;
   line-height: 0;

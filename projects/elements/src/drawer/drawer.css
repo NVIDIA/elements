@@ -13,7 +13,6 @@
   --top: 0px;
   --max-width: 400px;
   --width: 100vw;
-  height: 100%;
   width: var(--width);
   max-width: var(--max-width);
   height: calc(100vh - var(--top));
@@ -69,7 +68,7 @@
 
 :host([modal])::backdrop {
   /* --nve-sys-layer-backdrop-background (not available on top layer) */
-  background: hsla(0, 0%, 0%, 0.07); /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
+  background: hsl(0 0% 0% / 0.07); /* eslint-disable-line @nvidia-elements/lint/no-unexpected-css-value */
 }
 
 .header {
@@ -113,9 +112,9 @@ nve-icon-button {
 }
 
 :host([position='top']) {
-  inset: 0 auto auto auto;
+  inset: 0 auto auto;
 }
 
 :host([position='bottom']) {
-  inset: auto auto 0 auto;
+  inset: auto auto 0;
 }

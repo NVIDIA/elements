@@ -85,7 +85,7 @@
   grid-template-areas: 'input label label';
 }
 
-[nve-control='inline']:not(:has(label)):not(:has(nve-control-message:not([hidden])))::part(_internal-host) {
+[nve-control='inline']:not(:has(label), :has(nve-control-message:not([hidden])))::part(_internal-host) {
   grid-template-areas: 'input input input';
 }
 
