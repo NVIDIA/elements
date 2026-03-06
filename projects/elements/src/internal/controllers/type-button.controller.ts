@@ -12,7 +12,7 @@ export function typeButton<T extends Button>(): ClassDecorator {
 
 export interface Button extends ReactiveElement {
   readonly: boolean;
-  disabled;
+  disabled: boolean;
   _internals?: ElementInternals;
 }
 

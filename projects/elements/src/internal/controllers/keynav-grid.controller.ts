@@ -9,7 +9,7 @@ import {
   getFlattenedDOMTree,
   getFlattenedFocusableItems,
   KeynavCode,
-  isValidDOMGrid
+  hasInvalidDOMGrid
 } from '../utils/dom.js';
 import {
   focusElement,
@@ -99,7 +99,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
     const rows = Array.from(this.#hostRows);
     const cells = Array.from(this.#hostCells);
 
-    if (GlobalStateService.state.env !== 'production' && isValidDOMGrid(rows)) {
+    if (GlobalStateService.state.env !== 'production' && hasInvalidDOMGrid(rows)) {
       LogService.warn('Invalid grid structure, all rows must have the same number of cells');
       return;
     }

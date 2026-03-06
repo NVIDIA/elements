@@ -26,7 +26,7 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
   }
 
   get #offset() {
-    return this.host.stateScrollConfig?.scrollOffset ? this.host.stateScrollConfig?.scrollOffset : 0;
+    return this.host.stateScrollConfig?.scrollOffset ?? 0;
   }
 
   constructor(private host: T) {
@@ -38,17 +38,22 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
     attachInternals(this.host);
 
     this.#startScroll();
-
-    this.#target.addEventListener('scrollend', () => {
-      this.host._internals.states.delete('scrolling');
-
-      if (endOfScrollBox(this.#target, this.#offset)) {
-        this.host.dispatchEvent(new CustomEvent('scrollboxend'));
-      }
-
-      this.#startScroll();
-    });
+    this.#target.addEventListener('scrollend', this.#onScrollEnd);
   }
+
+  hostDisconnected() {
+    this.#target.removeEventListener('scrollend', this.#onScrollEnd);
+  }
+
+  #onScrollEnd = () => {
+    this.host._internals.states.delete('scrolling');
+
+    if (endOfScrollBox(this.#target, this.#offset)) {
+      this.host.dispatchEvent(new CustomEvent('scrollboxend'));
+    }
+
+    this.#startScroll();
+  };
 
   #startScroll() {
     this.#target.addEventListener('scroll', () => this.host._internals.states.add('scrolling'), { once: true });
