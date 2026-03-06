@@ -122,20 +122,12 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     });
 
     // https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using_interest_invokers
-    let timeout = null;
     this.host.addEventListener('interest', (e: InterestEvent) => {
       const isCustomElement = e.source?.localName.includes('-');
       if (isCustomElement) {
-        const interestDelayStart =
-          this.host.openDelay ??
-          parseInt(
-            (getComputedStyle(this.host) as unknown as { interestDelayStart: string }).interestDelayStart
-              .replace('ms', '')
-              .replace('0.', '')
-              .replace('s', '00')
-          );
+        const interestDelayStart = this.host.openDelay ?? this.#parseInterestDelay();
         if (interestDelayStart) {
-          timeout = setTimeout(() => {
+          this.#interestTimeout = setTimeout(() => {
             if (this.host.isConnected) {
               this.host.showPopover({ source: e.source as HTMLElement });
             }
@@ -152,13 +144,14 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
         this.host.hidePopover();
       }
 
-      if (timeout) {
-        clearTimeout(timeout);
-        timeout = null;
+      if (this.#interestTimeout) {
+        clearTimeout(this.#interestTimeout);
+        this.#interestTimeout = null;
       }
     });
   }
 
+  #interestTimeout: ReturnType<typeof setTimeout> | null = null;
   #observers: MutationObserver[] = [];
   #previousLegacyTrigger: HTMLButtonElement | null = null;
 
@@ -169,6 +162,21 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   hostDisconnected() {
     this.#observers.forEach(observer => observer.disconnect());
+
+    if (this.#interestTimeout) {
+      clearTimeout(this.#interestTimeout);
+      this.#interestTimeout = null;
+    }
+  }
+
+  #parseInterestDelay(): number {
+    const style = getComputedStyle(this.host);
+    const raw = (style as unknown as { interestDelayStart: string }).interestDelayStart;
+    if (!raw) {
+      return 0;
+    }
+    const value = parseFloat(raw);
+    return raw.endsWith('ms') ? value : value * 1000;
   }
 
   #pointerdownWithinModal = false;
