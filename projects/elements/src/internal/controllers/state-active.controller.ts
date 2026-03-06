@@ -18,17 +18,13 @@ export class StateActiveController<T extends Active> implements ReactiveControll
     this.host.addController(this);
   }
 
-  async hostConnected() {
-    if (!this.#initialized) {
-      attachInternals(this.host);
-      await this.host.updateComplete;
-      this.host.addEventListener('keypress', this.#emulateActive);
-      this.host.addEventListener('mousedown', this.#emulateActive);
-      this.host.addEventListener('keyup', this.#emulateInactive);
-      this.host.addEventListener('blur', this.#emulateInactive);
-      this.host.addEventListener('mouseup', this.#emulateInactive);
-      this.#initialized = true;
-    }
+  hostConnected() {
+    attachInternals(this.host);
+    this.host.addEventListener('keypress', this.#emulateActive);
+    this.host.addEventListener('mousedown', this.#emulateActive);
+    this.host.addEventListener('keyup', this.#emulateInactive);
+    this.host.addEventListener('blur', this.#emulateInactive);
+    this.host.addEventListener('mouseup', this.#emulateInactive);
   }
 
   hostDisconnected() {

@@ -990,6 +990,55 @@ describe('type-popover.controller - dynamic DOM creation', () => {
   });
 });
 
+describe('type-popover.controller - interest timeout cleanup on disconnect', () => {
+  let fixture: HTMLElement;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should cancel pending interest timeout when element is disconnected', async () => {
+    fixture = await createFixture(html`
+      <nve-button interestfor="popover">anchor</nve-button>
+      <type-native-popover-controller-test-element id="popover" .openDelay=${50}></type-native-popover-controller-test-element>
+    `);
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    const button = fixture.querySelector<Button>(Button.metadata.tag);
+    await elementIsStable(element);
+    await elementIsStable(button);
+
+    // Trigger interest with a delay
+    const interestEvent = new Event('interest', { cancelable: true }) as Event & { source: HTMLElement };
+    interestEvent.source = button;
+    element.dispatchEvent(interestEvent);
+    await elementIsStable(element);
+    expect(element.matches(':popover-open')).toBe(false);
+
+    // Disconnect element before delay completes
+    element.disconnectedCallback();
+
+    // Wait for original delay to pass
+    await new Promise(r => setTimeout(r, 60));
+
+    // Popover should not have opened since timeout was cleared on disconnect
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should not throw when disconnecting with no pending interest timeout', async () => {
+    fixture = await createFixture(html`
+      <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
+    `);
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+      'type-native-popover-controller-test-element'
+    );
+    await elementIsStable(element);
+
+    expect(() => element.disconnectedCallback()).not.toThrow();
+  });
+});
+
 describe('type-popover.controller - disconnected element handling', () => {
   let fixture: HTMLElement;
 
