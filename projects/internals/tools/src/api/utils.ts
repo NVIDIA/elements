@@ -31,13 +31,15 @@ export function getPublicAPIs(
     .map(e => ({ name: e.name, description: e.manifest!.description, behavior: e.manifest!.metadata?.behavior ?? '' }));
   const elementsMarkdown = elementsResult.map(e => {
     const behavior = e.behavior ? ` (${e.behavior})` : '';
-    return `\`${e.name}\`${behavior}: ${wrapText(e.description)}`;
+    return `\`${e.name}\`${behavior}: ${getAPIDescriptionMarkdown(e)}`;
   });
 
   const attributesResult = metadata.data.attributes
     .filter(a => a.description && a.example)
     .map(a => ({ name: a.name, description: a.description, behavior: 'attribute' }));
-  const attributesMarkdown = attributesResult.map(a => `\`${a.name}\` (${a.behavior}): ${wrapText(a.description)}`);
+  const attributesMarkdown = attributesResult.map(
+    a => `\`${a.name}\` (${a.behavior}): ${getAPIDescriptionMarkdown(a)}`
+  );
 
   if (format === 'markdown') {
     return [...elementsMarkdown, ...attributesMarkdown].join('\n\n');
@@ -45,6 +47,11 @@ export function getPublicAPIs(
     return { elements: elementsResult, attributes: attributesResult };
   }
   return '';
+}
+
+export function getAPIDescriptionMarkdown(api: PartialAPIResult) {
+  const description = (api.description ?? '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
+  return wrapText(description).trim();
 }
 
 export async function searchPublicAPIs(query: string, config: { limit?: number } = { limit: 100 }) {
