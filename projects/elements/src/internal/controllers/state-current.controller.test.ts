@@ -84,4 +84,46 @@ describe('state-current.controller', () => {
 
     expect(a.getAttribute('aria-current')).toBe('page');
   });
+
+  it('should not set aria-current on host internals when anchor state is active', async () => {
+    const a = document.createElement('a');
+    a.href = '#';
+    element.appendChild(a);
+    element.current = 'page';
+    element._internals.states.add('anchor');
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    expect(element._internals.ariaCurrent).toBe(null);
+    expect(element.matches(':state(current)')).toBe(true);
+    expect(a.getAttribute('aria-current')).toBe('page');
+  });
+
+  it('should prioritize readonly over anchor state', async () => {
+    const a = document.createElement('a');
+    a.href = '#';
+    element.appendChild(a);
+    element.current = 'page';
+    element.readonly = true;
+    element._internals.states.add('anchor');
+    element.requestUpdate();
+    await elementIsStable(element);
+
+    expect(element._internals.ariaCurrent).toBe(null);
+    expect(element.matches(':state(current)')).toBe(false);
+    expect(a.getAttribute('aria-current')).toBe(null);
+  });
+
+  it('should restore current state when readonly is removed', async () => {
+    element.current = 'page';
+    element.readonly = true;
+    await elementIsStable(element);
+    expect(element._internals.ariaCurrent).toBe(null);
+    expect(element.matches(':state(current)')).toBe(false);
+
+    element.readonly = false;
+    await elementIsStable(element);
+    expect(element._internals.ariaCurrent).toBe('page');
+    expect(element.matches(':state(current)')).toBe(true);
+  });
 });

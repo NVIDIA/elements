@@ -14,7 +14,7 @@ export class I18nController<T extends I18n> implements ReactiveController {
     return { ...I18nService.i18n, ...this.host.i18n, __set: false };
   }
 
-  #overides: Partial<I18nStrings> = {};
+  #overrides: Partial<I18nStrings> = {};
 
   constructor(private host: T) {
     this.host.addController(this);
@@ -30,13 +30,13 @@ export class I18nController<T extends I18n> implements ReactiveController {
 
   hostUpdated() {
     if (this.host.i18n.__set === undefined) {
-      // if set equals undefined then the caller applied an override
-      this.#overides = this.host.i18n;
+      // if set is undefined then an override has been applied
+      this.#overrides = this.host.i18n;
       this.#update();
     }
   }
 
   #update = () => {
-    this.host.i18n = { ...I18nService.i18n, ...this.#overides, __set: true };
+    this.host.i18n = { ...I18nService.i18n, ...this.#overrides, __set: true };
   };
 }

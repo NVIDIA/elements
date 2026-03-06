@@ -74,6 +74,17 @@ describe('i18n.controller', () => {
     });
   });
 
+  it('should update i18n when global NVE_ELEMENTS_I18N_UPDATE event is dispatched', async () => {
+    await elementIsStable(element);
+    const initialI18n = { ...element.i18n };
+
+    document.dispatchEvent(new Event('NVE_ELEMENTS_I18N_UPDATE'));
+    await elementIsStable(element);
+
+    expect(element.i18n.__set).toBe(true);
+    expect(element.i18n.close).toBe(initialI18n.close);
+  });
+
   it('should merge global default and element instance override', async () => {
     element.i18n = { close: 'close override' };
     await elementIsStable(element);

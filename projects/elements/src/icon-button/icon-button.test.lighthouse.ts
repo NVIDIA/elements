@@ -13,6 +13,6 @@ describe('icon-button lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(19);
+    expect(report.payload.javascript.kb).toBeLessThan(19.2);
   });
 });

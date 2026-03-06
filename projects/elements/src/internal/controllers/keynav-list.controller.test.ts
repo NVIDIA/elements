@@ -228,6 +228,44 @@ describe('keynav-list.controller', () => {
     expect(element.keynavListConfig.items[5].tabIndex).toBe(-1);
   });
 
+  it('should dispatch nve-key-change event with detail on keyboard navigation', async () => {
+    await elementIsStable(element);
+
+    let eventDetail: Record<string, unknown>;
+    element.shadowRoot.addEventListener('nve-key-change', ((e: CustomEvent) => {
+      eventDetail = e.detail;
+    }) as EventListener);
+
+    element.keynavListConfig.items[0].dispatchEvent(
+      new KeyboardEvent('keydown', { code: 'ArrowRight', bubbles: true, composed: true })
+    );
+    await elementIsStable(element);
+
+    expect(eventDetail).toBeDefined();
+    expect(eventDetail.code).toBe('ArrowRight');
+    expect(eventDetail.metaKey).toBe(false);
+    expect(eventDetail.activeItem).toBe(element.keynavListConfig.items[1]);
+    expect(eventDetail.items).toBeDefined();
+  });
+
+  it('should dispatch nve-key-change event with null code on pointer click', async () => {
+    await elementIsStable(element);
+
+    let eventDetail: Record<string, unknown>;
+    element.shadowRoot.addEventListener('nve-key-change', ((e: CustomEvent) => {
+      eventDetail = e.detail;
+    }) as EventListener);
+
+    element.keynavListConfig.items[2].dispatchEvent(
+      new PointerEvent('pointerup', { bubbles: true, composed: true, buttons: 1 })
+    );
+    await elementIsStable(element);
+
+    expect(eventDetail).toBeDefined();
+    expect(eventDetail.code).toBe(null);
+    expect(eventDetail.activeItem).toBe(element.keynavListConfig.items[2]);
+  });
+
   it('should disable key nav if host has nve-keynav-disabled attribute', async () => {
     element.setAttribute('nve-keynav-disabled', '');
 
