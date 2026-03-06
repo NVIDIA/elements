@@ -38,7 +38,7 @@ describe('state-scroll.controller', () => {
 
   afterEach(async () => {
     removeFixture(fixture);
-    element._internals.states.delete(':state(scrolling)');
+    element._internals.states.delete('scrolling');
   });
 
   it('should initialize with no scrolling state', async () => {

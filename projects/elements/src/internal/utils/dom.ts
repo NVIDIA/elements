@@ -183,7 +183,7 @@ export enum KeynavCode {
   ArrowRight = 'ArrowRight'
 }
 
-export function isValidDOMGrid(rows: HTMLElement[]) {
+export function hasInvalidDOMGrid(rows: HTMLElement[]) {
   return rows.some(row => row.children.length !== rows[0].children.length);
 }
 
