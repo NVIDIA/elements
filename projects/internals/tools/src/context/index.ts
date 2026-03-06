@@ -14,23 +14,28 @@ export interface Skill {
   context: string;
 }
 
-const mcpContext = `
-## Elements MCP
+const toolsContext = `
+## Elements MCP & CLI
 
-The MCP server provides tools to discover, look up, and validate components. **Use these before writing any nve-* HTML.**
-`;
-
-const cliContext = `
-## Elements CLI (\`nve\`)
-
-The CLI provides tools to create, setup, and validate projects. Use \`nve --help\` to see the available commands. **Can be use as an alternative to the MCP.**
+Elements provides a CLI and MCP server (\`@nvidia-elements/cli\`) to help you create, setup, and validate projects.
+Tools and CLI commands are interchangeable and map 1:1. Prefer the MCP over the CLI if available.
 
 \`\`\`shell
-nve --help
+# MCP Tool
+api_get
+
+# CLI Tool
+nve api.get
 \`\`\`
 
+Use \`nve --help\` to see the available commands.
+
 \`\`\`shell
-nve project.create --help
+# all available commands
+nve --help
+
+# specific command help
+nve api.get --help
 \`\`\`
 `;
 
@@ -63,7 +68,7 @@ const aboutPrompt: Prompt = {
         role: 'user',
         content: {
           type: 'text',
-          text: `${aboutContext}\n${mcpContext}\n---`
+          text: `${aboutContext}\n${toolsContext}\n---`
         }
       }
     ]
@@ -114,7 +119,7 @@ const playgroundPrompt: Prompt = {
         role: 'user',
         content: {
           type: 'text',
-          text: `${playgroundContext}\n${authoringContext}\n${mcpContext}\n---`
+          text: `${toolsContext}\n${playgroundContext}\n${authoringContext}\n---`
         }
       }
     ]
@@ -165,8 +170,7 @@ const elementsSkill: Skill = {
 # Building UI with NVIDIA Elements
 
 Elements is NVIDIA's design system for AI and Robotics applications, built for speed and scale. It provides a comprehensive library of web components (nve-*) that work across any framework. Elements covers the full spectrum of UI needs: layout primitives, typography, form controls, data grids, navigation, dialogs, theming, and accessibility.
-${mcpContext}
-${cliContext}
+${toolsContext}
 ${authoringContext}
 ${playgroundContext}
 ${integrationContext}`
