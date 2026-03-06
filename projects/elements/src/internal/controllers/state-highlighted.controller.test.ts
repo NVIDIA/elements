@@ -37,4 +37,33 @@ describe('state-highlighted.controller', () => {
     await elementIsStable(element);
     expect(element.matches(':state(highlighted)')).toBe(true);
   });
+
+  it('should remove highlighted state when set to false', async () => {
+    element.highlighted = true;
+    await elementIsStable(element);
+    expect(element.matches(':state(highlighted)')).toBe(true);
+
+    element.highlighted = false;
+    await elementIsStable(element);
+    expect(element.matches(':state(highlighted)')).toBe(false);
+  });
+
+  it('should not have highlighted state when initialized without highlighted', async () => {
+    await elementIsStable(element);
+    expect(element.matches(':state(highlighted)')).toBe(false);
+  });
+
+  it('should toggle highlighted state on and off', async () => {
+    element.highlighted = true;
+    await elementIsStable(element);
+    expect(element.matches(':state(highlighted)')).toBe(true);
+
+    element.highlighted = false;
+    await elementIsStable(element);
+    expect(element.matches(':state(highlighted)')).toBe(false);
+
+    element.highlighted = true;
+    await elementIsStable(element);
+    expect(element.matches(':state(highlighted)')).toBe(true);
+  });
 });

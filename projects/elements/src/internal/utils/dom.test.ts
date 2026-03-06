@@ -30,7 +30,7 @@ import {
   sameRenderRoot,
   generateId,
   styleSheetToString,
-  isValidDOMGrid,
+  hasInvalidDOMGrid,
   slotContainsOnlyWhitespace,
   tagSelector,
   getAnchorNames,
@@ -735,21 +735,21 @@ describe('styleSheetToString', () => {
   });
 });
 
-describe('isValidDOMGrid', () => {
-  it('should return false in production environment', () => {
+describe('hasInvalidDOMGrid', () => {
+  it('should return false when all rows have the same number of children', () => {
     const rows = [{ children: { length: 3 } }, { children: { length: 3 } }] as HTMLElement[];
 
-    expect(isValidDOMGrid(rows)).toBe(false);
+    expect(hasInvalidDOMGrid(rows)).toBe(false);
   });
 
-  it('should return true when all rows have same number of children', () => {
+  it('should return false when all three rows have the same number of children', () => {
     const rows = [
       { children: { length: 3 } },
       { children: { length: 3 } },
       { children: { length: 3 } }
     ] as HTMLElement[];
 
-    expect(isValidDOMGrid(rows)).toBe(false);
+    expect(hasInvalidDOMGrid(rows)).toBe(false);
   });
 
   it('should return true when rows have different number of children', () => {
@@ -759,7 +759,7 @@ describe('isValidDOMGrid', () => {
       { children: { length: 3 } }
     ] as HTMLElement[];
 
-    expect(isValidDOMGrid(rows)).toBe(true);
+    expect(hasInvalidDOMGrid(rows)).toBe(true);
   });
 });
 

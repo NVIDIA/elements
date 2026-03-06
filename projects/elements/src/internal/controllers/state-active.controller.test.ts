@@ -83,4 +83,28 @@ describe('state-active.controller', () => {
     element.dispatchEvent(new KeyboardEvent('keyup'));
     expect(element.matches(':state(active)')).toBe(false);
   });
+
+  it('should remove active state on blur', async () => {
+    element.dispatchEvent(new MouseEvent('mousedown'));
+    expect(element.matches(':state(active)')).toBe(true);
+
+    element.dispatchEvent(new Event('blur'));
+    expect(element.matches(':state(active)')).toBe(false);
+  });
+
+  it('should not add active state on mousedown when disabled', async () => {
+    element.disabled = true;
+    await elementIsStable(element);
+
+    element.dispatchEvent(new MouseEvent('mousedown'));
+    expect(element.matches(':state(active)')).toBe(false);
+  });
+
+  it('should not add active state on keypress when disabled', async () => {
+    element.disabled = true;
+    await elementIsStable(element);
+
+    element.dispatchEvent(new KeyboardEvent('keypress', { code: 'Enter' }));
+    expect(element.matches(':state(active)')).toBe(false);
+  });
 });
