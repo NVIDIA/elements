@@ -52,7 +52,7 @@ export function getPublicExamples(format: 'markdown' | 'json', examples: Partial
   return format === 'markdown'
     ? result
         .map(example => {
-          return `\`${example.id}\`: ${wrapText(example.summary)}`;
+          return `\`${example.id}\`: ${getExampleSummaryMarkdown(example)}`;
         })
         .join('\n\n')
     : result;
@@ -79,9 +79,13 @@ export function renderExampleMarkdown(example: Partial<Example>) {
 }
 
 export function renderExampleHeaderMarkdown(example: Partial<Example>) {
-  const content = example.summary ? example.summary : example.description;
-  const formattedContent = content ? `${wrapText(content)}` : '';
+  const formattedContent = getExampleSummaryMarkdown(example);
   return `## ${(example.name ?? '').replace(/([A-Z])/g, ' $1').trim()} (${example.id})${formattedContent ? '\n\n' : ''}${formattedContent}`;
+}
+
+export function getExampleSummaryMarkdown(example: Partial<Example>) {
+  const summary = (example.summary ?? example.description ?? '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
+  return wrapText(summary).trim();
 }
 
 const VOID_ELEMENTS = new Set([
