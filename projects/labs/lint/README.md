@@ -91,6 +91,7 @@ export default [
 | `@nvidia-elements/lint/no-missing-icon-name` | Require icon elements to have an icon name attribute. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-popover-trigger` | Require popover elements to have a corresponding trigger element. | HTML | `error` |
 | `@nvidia-elements/lint/no-missing-slotted-elements` | Disallow use of missing slotted elements. | HTML | `error` |
+| `@nvidia-elements/lint/no-nested-container-types` | Require nested container components to use flat container mode. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attributes` | Disallow use of invalid API attributes or utility attributes on custom HTML element tags. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-page-sizing` | Disallow custom height or width styles on nve-page. | HTML | `error` |
 | `@nvidia-elements/lint/no-unexpected-attribute-value` | Disallow use of invalid attribute values for nve-* elements. | HTML | `error` |
