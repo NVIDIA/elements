@@ -213,6 +213,12 @@ file_with_underscores.ts /test/path/file_with_underscores.ts 1
       expect(result.decorations.length).toEqual(27);
     });
 
+    it('should handle problems with root-path-only URIs', () => {
+      const rootPathProblem = createMockProblem({ resource: 'file:///' });
+      const result = toProblemsFormat(monaco, [rootPathProblem]);
+      expect(result.text).toContain('[Ln 1, Col 1]');
+    });
+
     it('should throw if supplied an invalid severity number', () => {
       const problems = [{ ...createMockProblem(), severity: 9 }];
       expect(() => toProblemsFormat(monaco, problems as Problem[])).toThrow('Unknown severity: 9');

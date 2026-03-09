@@ -88,7 +88,7 @@ interface DecoratedLine {
 }
 
 function basename(path: string): string {
-  return path.split('/').filter(Boolean).pop();
+  return path.split('/').filter(Boolean).pop() ?? '';
 }
 
 function toFileLine(monaco: Monaco, lineNumber: number, uri: string, problems: Problem[]): DecoratedLine {

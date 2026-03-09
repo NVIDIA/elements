@@ -48,7 +48,9 @@ function setJSONSchemaForModel(monaco: Monaco, model: monaco.editor.ITextModel, 
   const options = monaco.json.jsonDefaults.diagnosticsOptions;
   const uri = model.uri.toString();
 
-  const otherSchemas = options.schemas.filter(({ fileMatch }) => fileMatch.length === 1 && fileMatch[0] !== uri);
+  const otherSchemas = options.schemas!.filter(
+    ({ fileMatch }) => fileMatch && fileMatch.length === 1 && fileMatch[0] !== uri
+  );
   const schemasForThisModel = schema ? [{ uri, fileMatch: [uri], schema }] : [];
 
   monaco.json.jsonDefaults.setDiagnosticsOptions({
@@ -270,7 +272,7 @@ export abstract class BaseMonacoInput<
 
     this.#editor?.dispose();
     this.#editor = undefined;
-    this.#model = undefined;
+    this.#model = null;
 
     this._internals.states.delete('ready');
   }
@@ -319,25 +321,25 @@ export abstract class BaseMonacoInput<
   // NOTE: We don't use Lit's lifecycle to apply properties that overlap with updateOptions(), to avoid batched updates becoming desynchronized.
   updateEditorOptions(options: monaco.editor.IEditorOptions & monaco.editor.IGlobalEditorOptions) {
     if ('folding' in options) {
-      this.#folding = options.folding;
+      this.#folding = options.folding!;
     }
     if ('insertSpaces' in options) {
-      this.#insertSpaces = options.insertSpaces;
+      this.#insertSpaces = options.insertSpaces!;
     }
     if ('lineNumbers' in options) {
-      this.#lineNumbers = options.lineNumbers;
+      this.#lineNumbers = options.lineNumbers!;
     }
     if ('minimap' in options) {
-      this.#minimap = options.minimap.enabled;
+      this.#minimap = options.minimap?.enabled!;
     }
     if ('readOnly' in options) {
-      super.readOnly = options.readOnly;
+      super.readOnly = options.readOnly!;
     }
     if ('tabSize' in options) {
-      this.#tabSize = options.tabSize;
+      this.#tabSize = options.tabSize!;
     }
     if ('wordWrap' in options) {
-      this.#wordWrap = options.wordWrap;
+      this.#wordWrap = options.wordWrap!;
     }
     this._updateEditorOptions(options);
   }
@@ -399,10 +401,9 @@ export abstract class BaseMonacoInput<
   #editorReady = (event: Event) => {
     const editorEl = event.target as MonacoEditor;
 
-    const monaco = editorEl.monaco;
-
+    const monaco = editorEl.monaco!;
     const editor = this._createEditor(monaco);
-    const model = editor.getModel();
+    const model = editor.getModel()!;
 
     // Tweak the default options to be more visually and behaviorally consistent with an input control
     editor.updateOptions({
@@ -454,8 +455,8 @@ export abstract class BaseMonacoInput<
         return;
       }
 
-      const markers = monaco.editor.getModelMarkers({ resource: model.uri });
-      const errors = markers.filter(m => m.severity === monaco.MarkerSeverity.Error);
+      const markers = this.#monaco!.editor.getModelMarkers({ resource: model.uri });
+      const errors = markers.filter(m => m.severity === this.#monaco!.MarkerSeverity.Error);
 
       if (errors.length > 0) {
         this.#setSyntaxValidationError(errors.map(e => e.message));
