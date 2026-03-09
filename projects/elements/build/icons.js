@@ -8,6 +8,29 @@ const scriptPath = path.dirname(fileURLToPath(import.meta.url));
 const inputPath = path.join(scriptPath, '../src/icon/icons/');
 const outputPath = path.join(scriptPath, '../src/icon/');
 
+const frequentIcons = [
+  'placeholder',
+  'caret',
+  'person',
+  'menu',
+  'cancel',
+  'gear',
+  'chevron',
+  'logout',
+  'copy',
+  'more-actions',
+  'add',
+  'arrow',
+  'delete',
+  'download',
+  'search',
+  'split-vertical',
+  'sparkles',
+  'branch',
+  'refresh',
+  'double-chevron'
+];
+
 let icons = readIconFiles();
 icons = await repairViewBoxScales(icons);
 icons = Object.entries(icons)
@@ -57,7 +80,7 @@ function iconImport(iconImport: () => Promise<{default: string}>): IconSVG {
   }
 }
 
-export const ICON_IMPORTS = {\n${Object.keys(icons)
+export const ICON_IMPORTS = {\n${sortIconKeys(Object.keys(icons))
         .map(i => `  '${i}': iconImport(() => import('./icons/${i}.svg?raw')),`)
         .join('\n')}\n};
 
@@ -85,7 +108,7 @@ function writeSSRIconRegistry(icons) {
 // We could use a top level await in icon.js like the following
 // const { ICON_IMPORTS } = await (isServer ? import('./icons.server.js') : import('./icons.js'));
 // due to downstream consumer tools that use esbuild/iffe modules, top level await is not supported
-globalThis._NVE_SSR_ICON_REGISTRY = {\n${Object.keys(icons)
+globalThis._NVE_SSR_ICON_REGISTRY = {\n${sortIconKeys(Object.keys(icons))
         .map(i => `  '${i}': '${icons[i]}',`)
         .join('\n')}\n};
 `,
@@ -93,6 +116,15 @@ globalThis._NVE_SSR_ICON_REGISTRY = {\n${Object.keys(icons)
       r
     );
   });
+}
+
+function sortIconKeys(keys) {
+  const prioritySet = new Set(frequentIcons);
+  const priority = keys
+    .filter(k => prioritySet.has(k))
+    .sort((a, b) => frequentIcons.indexOf(a) - frequentIcons.indexOf(b));
+  const rest = keys.filter(k => !prioritySet.has(k)).sort();
+  return [...priority, ...rest];
 }
 
 function repairSVGColors(svg) {
