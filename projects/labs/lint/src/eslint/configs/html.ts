@@ -23,6 +23,7 @@ import noInvalidInvokerTriggers from '../rules/no-invalid-invoker-triggers.js';
 import noMissingGapSpace from '../rules/no-missing-gap-space.js';
 import noUnknownCssVariable from '../rules/no-unknown-css-variable.js';
 import noRestrictedPageSizing from '../rules/no-restricted-page-sizing.js';
+import noNestedContainerTypes from '../rules/no-nested-container-types.js';
 import noUnstyledTypography from '../rules/no-unstyled-typography.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
@@ -75,6 +76,7 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-invalid-invoker-triggers': noInvalidInvokerTriggers,
         'no-missing-gap-space': noMissingGapSpace,
         'no-unknown-css-variable': noUnknownCssVariable,
+        'no-nested-container-types': noNestedContainerTypes,
         'no-unstyled-typography': noUnstyledTypography
       }
     }
@@ -103,6 +105,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-invalid-invoker-triggers': ['error'],
     '@nvidia-elements/lint/no-missing-gap-space': ['off'],
     '@nvidia-elements/lint/no-unknown-css-variable': ['error'],
+    '@nvidia-elements/lint/no-nested-container-types': ['error'],
     '@nvidia-elements/lint/no-unstyled-typography': ['error']
   }
 };
