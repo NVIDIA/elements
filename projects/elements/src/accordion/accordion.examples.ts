@@ -16,9 +16,9 @@ export const Default = {
 <nve-accordion-group behavior-expand>
   <nve-accordion>
     <nve-accordion-header>
-      <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
+      <h2 nve-text="heading xs medium" slot="prefix">Workspace Settings</h2>
     </nve-accordion-header>
-    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+    <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
   </nve-accordion>
 </nve-accordion-group>
   `
@@ -31,10 +31,10 @@ export const Disabled = {
   render: () => html`
 <nve-accordion behavior-expand disabled>
   <nve-accordion-header>
-    <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
-    <p nve-text="body">some additional content</p>
+    <h2 nve-text="heading xs medium" slot="prefix">Admin Settings</h2>
+    <p nve-text="body">Requires administrator access</p>
   </nve-accordion-header>
-  <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+  <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
 </nve-accordion>
   `
 };
@@ -49,43 +49,43 @@ export const Container = {
   <nve-accordion-group behavior-expand>
     <nve-accordion>
       <nve-accordion-header>
-        <h2 nve-text="heading xs medium" slot="prefix">Heading 1</h2>
+        <h2 nve-text="heading xs medium" slot="prefix">General</h2>
       </nve-accordion-header>
-      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+      <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
     </nve-accordion>
     <nve-accordion>
       <nve-accordion-header>
-        <h2 nve-text="heading xs medium" slot="prefix">Heading 2</h2>
+        <h2 nve-text="heading xs medium" slot="prefix">Settings</h2>
       </nve-accordion-header>
-      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+      <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
     </nve-accordion>
   </nve-accordion-group>
   <nve-accordion-group container="inset" behavior-expand>
     <nve-accordion>
       <nve-accordion-header>
-        <h2 nve-text="heading xs medium" slot="prefix">Heading 1</h2>
+        <h2 nve-text="heading xs medium" slot="prefix">General</h2>
       </nve-accordion-header>
-      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+      <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
     </nve-accordion>
     <nve-accordion>
       <nve-accordion-header>
-        <h2 nve-text="heading xs medium" slot="prefix">Heading 2</h2>
+        <h2 nve-text="heading xs medium" slot="prefix">Settings</h2>
       </nve-accordion-header>
-      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+      <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
     </nve-accordion>
   </nve-accordion-group>
   <nve-accordion-group container="flat" behavior-expand>
     <nve-accordion>
       <nve-accordion-header>
-        <h2 nve-text="heading xs medium" slot="prefix">Heading 1</h2>
+        <h2 nve-text="heading xs medium" slot="prefix">General</h2>
       </nve-accordion-header>
-      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+      <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
     </nve-accordion>
     <nve-accordion>
       <nve-accordion-header>
-        <h2 nve-text="heading xs medium" slot="prefix">Heading 2</h2>
+        <h2 nve-text="heading xs medium" slot="prefix">Settings</h2>
       </nve-accordion-header>
-      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+      <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
     </nve-accordion>
   </nve-accordion-group>
 </div>
@@ -100,10 +100,10 @@ export const Animated = {
   render: () => html`
     <nve-accordion behavior-expand style="--transition: height 0.3s ease-in-out">
       <nve-accordion-header>
-        <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
-        <p nve-text="body">some additional content</p>
+        <h2 nve-text="heading xs medium" slot="prefix">Release Notes</h2>
+        <p nve-text="body">Version 3.2.0</p>
       </nve-accordion-header>
-      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+      <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
     </nve-accordion>
   `
 };
@@ -116,15 +116,15 @@ export const BehaviorExpandSingle = {
 <nve-accordion-group behavior-expand-single>
   <nve-accordion>
     <nve-accordion-header>
-      <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
+      <h2 nve-text="heading xs medium" slot="prefix">Account Settings</h2>
     </nve-accordion-header>
-    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+    <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
   </nve-accordion>
   <nve-accordion>
     <nve-accordion-header>
-      <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
+      <h2 nve-text="heading xs medium" slot="prefix">Security</h2>
     </nve-accordion-header>
-    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+    <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
   </nve-accordion>
 </nve-accordion-group>
   `
@@ -139,9 +139,9 @@ export const CustomIconButtonInteractive = {
 <nve-accordion id="custom-icon-button-accordion">
   <nve-icon-button slot="icon-button" icon-name="add" size="sm" container="flat"></nve-icon-button>
   <nve-accordion-header>
-    <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
+    <h2 nve-text="heading xs medium" slot="prefix">Additional Resources</h2>
   </nve-accordion-header>
-  <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+  <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
 </nve-accordion>
 <script type="module">
   const accordion = document.querySelector('#custom-icon-button-accordion');
@@ -165,12 +165,12 @@ export const WithActions = {
   render: () => html`
     <nve-accordion behavior-expand>
       <nve-accordion-header>
-        <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
-        <p nve-text="body">some additional content <nve-button container="inline">button</nve-button></p>
+        <h2 nve-text="heading xs medium" slot="prefix">Pipeline Configuration</h2>
+        <p nve-text="body">Last updated 2 hours ago <nve-button container="inline">view history</nve-button></p>
         <nve-icon-button container="flat" icon-name="add" size="sm" slot="suffix"></nve-icon-button>
         <nve-icon-button container="flat" icon-name="delete" size="sm" slot="suffix"></nve-icon-button>
       </nve-accordion-header>
-      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+      <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
     </nve-accordion>
   `
 };
@@ -183,7 +183,7 @@ export const NestedOpenEvent = {
   render: () => html`
     <nve-accordion-group behavior-expand-single>
       <nve-accordion>
-        <nve-accordion-header>accordion</nve-accordion-header>
+        <nve-accordion-header>Details</nve-accordion-header>
         <nve-accordion-content>
           <nve-tooltip id="tooltip">tooltip</nve-tooltip>
           <nve-button popovertarget="tooltip">button</nve-button>
@@ -203,12 +203,12 @@ export const DeprecatedSlots = {
   render: () => html`
     <nve-accordion behavior-expand>
       <nve-accordion-header>
-        <div slot="title">Heading</div>
-        <div slot="subtitle">Subheading</div>
+        <div slot="title">Project Details</div>
+        <div slot="subtitle">Last modified today</div>
         <nve-icon-button container="flat" icon-name="add" size="sm" slot="actions"></nve-icon-button>
         <nve-icon-button container="flat" icon-name="delete" size="sm" slot="actions"></nve-icon-button>
       </nve-accordion-header>
-      <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+      <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
     </nve-accordion>
   `
 };
@@ -222,9 +222,9 @@ export const Single = {
 <nve-accordion-group behavior-expand>
   <nve-accordion>
     <nve-accordion-header>
-      <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
+      <h2 nve-text="heading xs medium" slot="prefix">Appearance</h2>
     </nve-accordion-header>
-    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+    <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
   </nve-accordion>
 </nve-accordion-group>
   `
@@ -239,15 +239,15 @@ export const Multiple = {
 <nve-accordion-group behavior-expand>
   <nve-accordion>
     <nve-accordion-header>
-      <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
+      <h2 nve-text="heading xs medium" slot="prefix">Account Settings</h2>
     </nve-accordion-header>
-    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+    <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
   </nve-accordion>
   <nve-accordion>
     <nve-accordion-header>
-      <h2 nve-text="heading xs medium" slot="prefix">Heading 2</h2>
+      <h2 nve-text="heading xs medium" slot="prefix">Privacy</h2>
     </nve-accordion-header>
-    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+    <nve-accordion-content>Adjust workspace preferences and project configurations to customize your experience.</nve-accordion-content>
   </nve-accordion>
 </nve-accordion-group>
   `

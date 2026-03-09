@@ -105,7 +105,7 @@ export const Horizontal = {
 };
 
 /**
- * @summary Use [CSS export parts](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Parts_and_Slots/Using_CSS_parts) for advanced theming of nested shadow root elements.
+ * @summary Use CSS export parts for advanced theming of nested shadow root elements.
  * @tags test-case
  */
 export const ExportParts = {
