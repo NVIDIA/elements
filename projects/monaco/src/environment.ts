@@ -1,6 +1,6 @@
 export function createMonacoEnvironment() {
   return {
-    async getWorker(_, label: string) {
+    async getWorker(_: string, label: string) {
       switch (label) {
         case 'json':
           return new (await import('./workers/json.worker.js?worker&inline')).default();

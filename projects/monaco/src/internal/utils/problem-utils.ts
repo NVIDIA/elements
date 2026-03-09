@@ -16,5 +16,5 @@ export function equalsProblem(a: Problem, b: Problem): boolean {
 }
 
 export function equalsProblems(a: Problem[], b: Problem[]): boolean {
-  return a.length === b.length && a.every((problem, index) => equalsProblem(problem, b[index]));
+  return a.length === b.length && a.every((problem, index) => equalsProblem(problem, b[index]!));
 }

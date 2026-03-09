@@ -6,7 +6,7 @@ import * as monaco from './vendor/monaco-editor/editor/editor.main.js';
 
 import { createMonacoEnvironment } from './environment.js';
 
-globalThis.MonacoEnvironment ??= createMonacoEnvironment();
+(globalThis as Record<string, unknown>).MonacoEnvironment ??= createMonacoEnvironment();
 
 // Pre-configured TypeScript compiler options with modern defaults suitable for in-browser validation
 monaco.typescript.typescriptDefaults.setCompilerOptions({

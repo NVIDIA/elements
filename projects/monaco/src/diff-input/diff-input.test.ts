@@ -171,6 +171,12 @@ describe('nve-monaco-diff-input', () => {
       );
     });
 
+    it('should preserve sideBySide when updateOptions receives undefined renderSideBySide', async () => {
+      element.sideBySide = true;
+      element.updateOptions({ renderSideBySide: undefined });
+      expect(element.sideBySide).toBe(true);
+    });
+
     it('should force originalEditable to false even when set to true', async () => {
       const options = {
         originalEditable: true

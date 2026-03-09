@@ -92,9 +92,9 @@ export class MonacoProblems extends LitElement {
   #editor?: monaco.editor.IStandaloneCodeEditor;
   #model?: monaco.editor.ITextModel;
 
-  #lineDecorations: monaco.editor.IEditorDecorationsCollection;
-  #selectedLineDecorations: monaco.editor.IEditorDecorationsCollection;
-  #hoveredLineDecorations: monaco.editor.IEditorDecorationsCollection;
+  #lineDecorations?: monaco.editor.IEditorDecorationsCollection;
+  #selectedLineDecorations?: monaco.editor.IEditorDecorationsCollection;
+  #hoveredLineDecorations?: monaco.editor.IEditorDecorationsCollection;
 
   #selectedLineNumber: number | undefined = undefined;
   #downLineNumber: number | undefined = undefined;
@@ -129,7 +129,7 @@ export class MonacoProblems extends LitElement {
     const problemsCSS = await import('../internal/formats/problems-format.css?inline');
     const problemsStyles = new CSSStyleSheet();
     problemsStyles.replaceSync(problemsCSS.default);
-    editorEl.shadowRoot.adoptedStyleSheets = [problemsStyles, ...editorEl.shadowRoot.adoptedStyleSheets];
+    editorEl.shadowRoot!.adoptedStyleSheets = [problemsStyles, ...editorEl.shadowRoot!.adoptedStyleSheets];
     this.#injectedStyles = true;
   };
 
@@ -138,11 +138,12 @@ export class MonacoProblems extends LitElement {
 
     await this.#injectStyles(editorEl);
 
-    const { editor, monaco } = editorEl;
+    const editor = editorEl.editor!;
+    const monaco = editorEl.monaco!;
 
     this.#monaco = monaco;
     this.#editor = editor;
-    this.#model = editor.getModel();
+    this.#model = editor.getModel()!;
 
     this.#lineDecorations = editor.createDecorationsCollection([]);
     this.#selectedLineDecorations = editor.createDecorationsCollection([]);
@@ -151,7 +152,7 @@ export class MonacoProblems extends LitElement {
     this.#selectedLineNumber = undefined;
     this.#downLineNumber = undefined;
 
-    this.#setupEditor(this.#editor);
+    this.#setupEditor(editor);
 
     this.requestUpdate('problems');
 
@@ -166,7 +167,7 @@ export class MonacoProblems extends LitElement {
   #setupEditor(editor: monaco.editor.IStandaloneCodeEditor) {
     editor.updateOptions(EDITOR_OPTIONS);
 
-    const editorEl = editor.getDomNode();
+    const editorEl = editor.getDomNode()!;
     editorEl.addEventListener('contextmenu', this.#onContextMenu);
 
     const onDidChangeModelContentListener = editor.onDidChangeModelContent(this.#onDidChangeModelContent);
@@ -177,7 +178,7 @@ export class MonacoProblems extends LitElement {
     const onMouseMoveListener = editor.onMouseMove(this.#onMouseMove);
     const onMouseLeaveListener = editor.onMouseLeave(this.#onMouseLeave);
 
-    const hoverProvider = this.#monaco.languages.registerHoverProvider('*', {
+    const hoverProvider = this.#monaco!.languages.registerHoverProvider('*', {
       provideHover: this.#provideHover
     });
 
@@ -224,10 +225,10 @@ export class MonacoProblems extends LitElement {
 
   #isProblemCodeDecoration(position: monaco.Position): boolean {
     const { lineNumber, column } = position;
-    const decorations = this.#editor.getDecorationsInRange(
-      new this.#monaco.Range(lineNumber, column, lineNumber, column)
+    const decorations = this.#editor!.getDecorationsInRange(
+      new this.#monaco!.Range(lineNumber, column, lineNumber, column)
     );
-    return decorations.some(decoration => decoration.options.inlineClassName?.includes('problem-source-target'));
+    return decorations!.some(decoration => decoration.options.inlineClassName?.includes('problem-source-target'));
   }
 
   #provideHover = (
@@ -238,11 +239,11 @@ export class MonacoProblems extends LitElement {
       return;
     }
     const { lineNumber } = position;
-    const problem = this.#getProblemByLine(lineNumber);
+    const problem = this.#getProblemByLine?.(lineNumber);
     if (!problem) {
       return;
     }
-    const range = new this.#monaco.Range(lineNumber, 1, lineNumber, 1);
+    const range = new this.#monaco!.Range(lineNumber, 1, lineNumber, 1);
 
     // code with target
     if (this.#isProblemCodeDecoration(position)) {
@@ -270,19 +271,19 @@ export class MonacoProblems extends LitElement {
   }
 
   #isEmptyModel() {
-    return this.#model.getLineCount() === 1 && this.#model.getLineLength(1) === 0;
+    return this.#model!.getLineCount() === 1 && this.#model!.getLineLength(1) === 0;
   }
 
   #toggleFold() {
-    this.#editor.trigger('api', 'editor.toggleFold', {});
+    this.#editor!.trigger('api', 'editor.toggleFold', {});
   }
 
   #selectLine(lineNumber: number) {
     this.#selectedLineNumber = lineNumber;
-    const range = new this.#monaco.Range(this.#selectedLineNumber, 1, this.#selectedLineNumber, 1);
-    this.#editor.setPosition(range.getStartPosition());
-    this.#editor.setSelection(range);
-    this.#selectedLineDecorations.set(toSelectedLineDecorations(this.#monaco, this.#selectedLineNumber));
+    const range = new this.#monaco!.Range(this.#selectedLineNumber, 1, this.#selectedLineNumber, 1);
+    this.#editor!.setPosition(range.getStartPosition());
+    this.#editor!.setSelection(range);
+    this.#selectedLineDecorations!.set(toSelectedLineDecorations(this.#monaco!, this.#selectedLineNumber));
   }
 
   #onContextMenu = (e: PointerEvent) => {
@@ -296,12 +297,12 @@ export class MonacoProblems extends LitElement {
 
   #onDidChangeCursorSelection = (e: monaco.editor.ICursorSelectionChangedEvent) => {
     if (e.source === 'keyboard') {
-      const selection = this.#editor.getSelection();
-      if (selection.startLineNumber === selection.endLineNumber) {
+      const selection = this.#editor!.getSelection();
+      if (selection && selection.startLineNumber === selection.endLineNumber) {
         this.#selectedLineNumber = selection.startLineNumber;
       }
     }
-    this.#selectedLineDecorations.set(toSelectedLineDecorations(this.#monaco, this.#selectedLineNumber));
+    this.#selectedLineDecorations!.set(toSelectedLineDecorations(this.#monaco!, this.#selectedLineNumber));
   };
 
   #onKeyUp = (e: monaco.IKeyboardEvent) => {
@@ -311,18 +312,18 @@ export class MonacoProblems extends LitElement {
 
     const { key, shiftKey } = e.browserEvent;
 
-    const positionLineNumber = this.#editor.getPosition().lineNumber;
+    const positionLineNumber = this.#editor!.getPosition()!.lineNumber;
 
     this.#selectLine(positionLineNumber);
 
     if (key === 'ArrowUp' || key === 'ArrowDown') {
-      const problem = this.#getProblemByLine(positionLineNumber);
+      const problem = this.#getProblemByLine?.(positionLineNumber);
       if (problem) {
         this.#selectProblem(problem);
       }
     }
     if (key === 'Enter' || key === ' ') {
-      const problem = this.#getProblemByLine(positionLineNumber);
+      const problem = this.#getProblemByLine?.(positionLineNumber);
       if (problem) {
         this.#activateProblem(problem);
       } else {
@@ -330,7 +331,7 @@ export class MonacoProblems extends LitElement {
       }
     }
     if (shiftKey && key === 'F10') {
-      const problem = this.#getProblemByLine(positionLineNumber);
+      const problem = this.#getProblemByLine?.(positionLineNumber);
       if (problem) {
         this.#toggleContextMenu(problem);
       }
@@ -358,16 +359,16 @@ export class MonacoProblems extends LitElement {
     const { element, position } = e.target;
     const lineNumber = position?.lineNumber;
 
-    if (this.#downLineNumber !== lineNumber || lineNumber === undefined) {
+    if (this.#downLineNumber !== lineNumber || lineNumber === undefined || !element) {
       return;
     }
 
     this.#selectLine(lineNumber);
 
-    const problem = this.#getProblemByLine(lineNumber);
+    const problem = this.#getProblemByLine?.(lineNumber);
     if (problem) {
       if (leftButton) {
-        if (this.#isProblemCodeDecoration(position)) {
+        if (this.#isProblemCodeDecoration(position!)) {
           globalThis.open((problem.code as ProblemCode).target.toString(), '_blank');
           return;
         }
@@ -394,11 +395,11 @@ export class MonacoProblems extends LitElement {
   #onMouseMove = (e: monaco.editor.IEditorMouseEvent) => {
     const { element, position } = e.target;
     const lineNumber =
-      !this.#isEmptyModel() && !element.classList.contains('view-lines') ? position?.lineNumber : undefined;
-    this.#hoveredLineDecorations.set(toHoveredLineDecorations(this.#monaco, lineNumber));
+      !this.#isEmptyModel() && element && !element.classList.contains('view-lines') ? position?.lineNumber : undefined;
+    this.#hoveredLineDecorations!.set(toHoveredLineDecorations(this.#monaco!, lineNumber));
   };
 
   #onMouseLeave = () => {
-    this.#hoveredLineDecorations.set(toHoveredLineDecorations(this.#monaco, undefined));
+    this.#hoveredLineDecorations!.set(toHoveredLineDecorations(this.#monaco!, undefined));
   };
 }

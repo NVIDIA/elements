@@ -32,8 +32,8 @@ export class MonacoInput extends BaseMonacoInput<MonacoEditor, monaco.editor.ISt
     return this.shadowRoot?.querySelector<MonacoEditor>(MonacoEditor.metadata.tag)!;
   }
 
-  protected _createEditor(_monaco: Monaco): monaco.editor.IStandaloneCodeEditor | undefined {
-    return this.shadowRoot?.querySelector<MonacoEditor>(MonacoEditor.metadata.tag)?.editor;
+  protected _createEditor(_monaco: Monaco): monaco.editor.IStandaloneCodeEditor {
+    return this.shadowRoot!.querySelector<MonacoEditor>(MonacoEditor.metadata.tag)!.editor!;
   }
 
   /* eslint-disable local/required-css-parts */
