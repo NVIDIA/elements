@@ -49,7 +49,7 @@ export const Default = {
 };
 
 /**
- * @summary The datagrid follows the [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/grid/examples/data-grids/#kbd_label) for standardized keyboard navigation.
+ * @summary The datagrid follows the ARIA Authoring Practices Guide for standardized keyboard navigation.
  */
 export const Keynav = {
   render: () => html`
@@ -1373,8 +1373,8 @@ export const ValidColumnCount = {
 
 /**
  * @summary Use the `nve-sort-button` to add grid row sort.
- * The grid follows the [ARIA sort spec](https://www.w3.org/WAI/ARIA/apg/patterns/table/examples/sortable-table/)
- * and automatically sets the appropriate accessibility related attributes to convey the current sorting state.
+ * The grid follows the ARIA sort spec and automatically sets the appropriate
+ * accessibility related attributes to convey the current sorting state.
  */
 export const ColumnSortButtonVisibility = {
   render: () => html `
