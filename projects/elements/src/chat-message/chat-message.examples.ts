@@ -13,7 +13,7 @@ export default {
 export const Default = {
   render: () => html`
 <nve-chat-message>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  Your deployment completed successfully. All services are running as expected.
 </nve-chat-message>
 `};
 
@@ -24,11 +24,11 @@ export const Default = {
 export const ArrowPosition = {
   render: () => html`
 <section nve-layout="column gap:lg">
-  <nve-chat-message>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message arrow-position="top-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message arrow-position="top-end">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message arrow-position="bottom-start">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message arrow-position="bottom-end">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
+  <nve-chat-message>Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message arrow-position="top-start">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message arrow-position="top-end">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message arrow-position="bottom-start">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message arrow-position="bottom-end">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
 </section>
 `};
 
@@ -40,12 +40,12 @@ export const Flat = {
 <section nve-layout="column gap:lg full">
   <nve-chat-message container="flat">
     <nve-avatar slot="prefix" color="green-grass">AI</nve-avatar>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    Your deployment completed successfully. All services are running as expected.
   </nve-chat-message>
 
   <nve-chat-message container="flat" style="width: 300px">
     <nve-avatar slot="prefix" color="green-grass">AI</nve-avatar>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    The build pipeline finished processing all stages. Tests passed with 98% coverage, and the deployment to staging was successful. Review the detailed logs in the CI dashboard for more information.
   </nve-chat-message>
 </section>
 `};
@@ -114,28 +114,28 @@ export const TopOffset = {
 export const Color = {
   render: () => html`
 <section nve-layout="column gap:md">
-  <nve-chat-message>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="red-cardinal">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="gray-slate">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="gray-denim">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="blue-indigo">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="blue-cobalt">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="blue-sky">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="teal-cyan">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="green-mint">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="teal-seafoam">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="green-grass">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="yellow-amber">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="orange-pumpkin">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="red-tomato">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="pink-magenta">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="purple-plum">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="purple-violet">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="purple-lavender">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="pink-rose">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="green-jade">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="lime-pear">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="yellow-nova">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
-  <nve-chat-message color="brand-green">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</nve-chat-message>
+  <nve-chat-message>Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="red-cardinal">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="gray-slate">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="gray-denim">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="blue-indigo">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="blue-cobalt">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="blue-sky">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="teal-cyan">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="green-mint">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="teal-seafoam">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="green-grass">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="yellow-amber">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="orange-pumpkin">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="red-tomato">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="pink-magenta">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="purple-plum">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="purple-violet">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="purple-lavender">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="pink-rose">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="green-jade">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="lime-pear">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="yellow-nova">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
+  <nve-chat-message color="brand-green">Your deployment completed successfully. All services are running as expected.</nve-chat-message>
 </section>`
 }

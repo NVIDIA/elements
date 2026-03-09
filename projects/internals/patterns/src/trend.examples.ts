@@ -126,7 +126,7 @@ export const TrendGrid = {
         <nve-sparkline data="[28, 32, 36, 38, 40, 41, 42.8]" mark="line" interpolation="smooth" status="success" size="md"></nve-sparkline>
       </div>
     </nve-grid-cell>
-    <nve-grid-cell><nve-badge status="running">Current</nve-badge></nve-grid-cell>
+    <nve-grid-cell><nve-badge status="running" container="flat">Current</nve-badge></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>ckpt-010</nve-grid-cell>
@@ -144,7 +144,7 @@ export const TrendGrid = {
         <nve-sparkline data="[28, 32, 36, 38, 40, 41.2]" mark="line" interpolation="smooth" status="success" size="md"></nve-sparkline>
       </div>
     </nve-grid-cell>
-    <nve-grid-cell><nve-badge status="finished">Best</nve-badge></nve-grid-cell>
+    <nve-grid-cell><nve-badge status="finished" container="flat">Best</nve-badge></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>ckpt-005</nve-grid-cell>
@@ -162,7 +162,7 @@ export const TrendGrid = {
         <nve-sparkline data="[28, 32, 35.6]" mark="line" interpolation="smooth" size="md"></nve-sparkline>
       </div>
     </nve-grid-cell>
-    <nve-grid-cell><nve-badge status="finished">Saved</nve-badge></nve-grid-cell>
+    <nve-grid-cell><nve-badge status="finished" container="flat">Saved</nve-badge></nve-grid-cell>
   </nve-grid-row>
 </nve-grid>
   `
