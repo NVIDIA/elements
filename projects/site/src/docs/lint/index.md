@@ -182,6 +182,12 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-nested-container-types</code></nve-grid-cell>
+    <nve-grid-cell>Require nested container components to use flat container mode.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-restricted-attributes</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of invalid API attributes or utility attributes on custom HTML element tags.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
