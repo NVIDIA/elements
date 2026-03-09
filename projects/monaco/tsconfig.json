@@ -15,6 +15,10 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "isolatedModules": true,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
     "paths": {
       "@nvidia-elements/monaco": ["./src/index.js"],
       "@nvidia-elements/monaco/*": ["./src/*"],

@@ -446,6 +446,18 @@ describe('nve-monaco-problems', () => {
     await expectFileRowActionEvents(3);
   });
 
+  it('should handle keyboard-based multi-line selection without errors', async () => {
+    element.problems = problems;
+    await elementIsStable(element);
+    await expect.poll(() => editorEl.shadowRoot.querySelectorAll('.view-line').length).toBe(expectedRows.length);
+
+    // Trigger a keyboard-sourced multi-line selection (covers the branch where
+    // selection.startLineNumber !== selection.endLineNumber in #onDidChangeCursorSelection)
+    expect(() => {
+      editor.trigger('keyboard', 'cursorMove', { to: 'down', by: 'line', value: 1, select: true });
+    }).not.toThrow();
+  });
+
   it('should gracefully ignore smart select expand and retain existing selection', async () => {
     element.problems = problems;
     await elementIsStable(element);
