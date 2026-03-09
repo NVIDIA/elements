@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.62.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.62.0...@nvidia-elements/core-v1.62.1) (2026-03-09)
+
+
+### Bug Fixes
+
+* **elements:** controller behavior and event cleanup ([0b768c0](https://github.com/NVIDIA/elements/commit/0b768c0a135354d59fb5b03257745bd905defbb7))
+
 ## [@nvidia-elements/core-v1.62.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.61.5...@nvidia-elements/core-v1.62.0) (2026-03-05)
 
 
