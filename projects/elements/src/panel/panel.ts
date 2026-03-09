@@ -26,6 +26,7 @@ import panelFooterStyleSheet from './panel-footer.css?inline';
  * @cssprop --padding
  * @cssprop --border-bottom
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
+ * @deprecated use `nve-page-panel` with `nve-page` instead
  */
 export class PanelHeader extends LitElement {
   static styles = useStyles([panelHeaderStyleSheet]);
