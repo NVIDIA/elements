@@ -46,11 +46,11 @@ export abstract class BaseMonacoEditor<T extends monaco.editor.IEditor> extends 
   #loadedEditorStyles = false;
 
   get #colorSchemeProbe(): HTMLElement | null {
-    return this.shadowRoot?.querySelector('#color-scheme-probe');
+    return this.shadowRoot!.querySelector('#color-scheme-probe');
   }
 
   get #editorContainer(): HTMLElement | null {
-    return this.shadowRoot?.querySelector('#editor');
+    return this.shadowRoot!.querySelector('#editor');
   }
 
   protected abstract _createEditor(container: HTMLElement, monaco: Monaco): T;

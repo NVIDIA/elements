@@ -114,7 +114,7 @@ export class MonacoDiffInput extends BaseMonacoInput<MonacoDiffEditor, monaco.ed
     return this.shadowRoot?.querySelector<MonacoDiffEditor>(MonacoDiffEditor.metadata.tag)!;
   }
 
-  protected _createEditor(monaco: Monaco): monaco.editor.IStandaloneCodeEditor | undefined {
+  protected _createEditor(monaco: Monaco): monaco.editor.IStandaloneCodeEditor {
     this.#monaco = monaco;
 
     this.#diffEditor = this.shadowRoot?.querySelector<MonacoDiffEditor>(MonacoDiffEditor.metadata.tag)?.editor;
@@ -133,16 +133,18 @@ export class MonacoDiffInput extends BaseMonacoInput<MonacoDiffEditor, monaco.ed
     this.#diffModel = { original, modified };
     this.#diffEditor?.setModel(this.#diffModel);
 
-    const didDisposeListener = this.#diffEditor.onDidDispose(() => {
+    const diffEditor = this.#diffEditor!;
+
+    const didDisposeListener = diffEditor.onDidDispose(() => {
       didDisposeListener.dispose();
-      this.#diffEditor.setModel(null);
+      diffEditor.setModel(null);
       original.dispose();
       modified.dispose();
     });
 
     this.#applyOptions();
 
-    return this.#diffEditor?.getModifiedEditor();
+    return this.#diffEditor?.getModifiedEditor()!;
   }
 
   disconnectedCallback() {
@@ -164,7 +166,7 @@ export class MonacoDiffInput extends BaseMonacoInput<MonacoDiffEditor, monaco.ed
 
   updateOptions(options: monaco.editor.IDiffEditorOptions) {
     if ('renderSideBySide' in options) {
-      this.#sideBySide = options.renderSideBySide;
+      this.#sideBySide = options.renderSideBySide ?? this.#sideBySide;
     }
     if ('originalEditable' in options && options.originalEditable) {
       console.warn('Editing the original model is not supported, use nve-monaco-editor instead.');
