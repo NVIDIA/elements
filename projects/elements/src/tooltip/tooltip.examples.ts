@@ -170,7 +170,7 @@ export const Status = {
 export const Wrap = {
   render: () => html`
 <nve-tooltip anchor="btn" style="--width: 200px">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  Tooltips provide contextual help for interface elements. Keep content brief and descriptive to help users understand available actions.
 </nve-tooltip>
 <nve-button id="btn">button</nve-button>
   `

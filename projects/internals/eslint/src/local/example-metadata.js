@@ -1,5 +1,13 @@
 const allowedTags = ['priority', 'performance', 'pattern', 'anti-pattern', 'test-case'];
 const contextMaxLength = 400;
+const placeholderPatterns = [
+  /lorem ipsum/i,
+  /dolor sit amet/i,
+  /consectetur adipiscing/i,
+  /velit officia consequat/i,
+  /exercitation veniam consequat/i,
+  /eiusmod tempor incididunt/i
+];
 
 export default {
   meta: {
@@ -13,7 +21,11 @@ export default {
       'summary-too-long':
         '@summary plain text exceeds {{max}} characters ({{length}}/{{max}}). Strip URLs and markdown links before counting.',
       'invalid-tags': 'Invalid @tags: {{invalid}}. Allowed: {{allowed}}.',
-      'missing-summary': 'Exported examples require a @summary JSDoc tag.'
+      'missing-summary': 'Exported examples require a @summary JSDoc tag.',
+      'no-links':
+        '@summary must not contain links. Inline the relevant text instead so context is preserved for agents.',
+      'no-placeholder-text':
+        'Example contains placeholder text ("{{match}}"). Replace with realistic, meaningful content.'
     }
   },
   create(context) {
@@ -45,7 +57,15 @@ export default {
           return;
         }
 
-        // Summary must be ≤ 400 characters (plain text: URLs stripped, markdown links reduced to text)
+        // Summary must not contain links (URLs or markdown links)
+        // This is to save context with agents especially when they have training on web platform concepts by default.
+        const hasUrl = /https?:\/\/[^\s<>"{}|\\^`[\]]+/i.test(summary);
+        const hasMdLink = /\[([^\]]+)\]\([^)]+\)/.test(summary);
+        if (hasUrl || hasMdLink) {
+          context.report({ node, messageId: 'no-links' });
+        }
+
+        // Summary must be ≤ 400 characters (plain text)
         const plainText = summary
           .replace(/https?:\/\/[^\s<>"{}|\\^`[\]]+/gi, '')
           .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
@@ -66,6 +86,20 @@ export default {
               messageId: 'invalid-tags',
               data: { invalid: invalid.join(', '), allowed: allowedTags.join(', ') }
             });
+          }
+        }
+
+        // Detect lorem ipsum placeholder text in export source
+        const sourceText = context.sourceCode.getText(node);
+        for (const pattern of placeholderPatterns) {
+          const match = sourceText.match(pattern);
+          if (match) {
+            context.report({
+              node,
+              messageId: 'no-placeholder-text',
+              data: { match: match[0] }
+            });
+            break;
           }
         }
       }

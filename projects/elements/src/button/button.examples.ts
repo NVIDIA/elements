@@ -111,8 +111,6 @@ export const Disabled = {
 
 /**
  * @summary Use the `commandfor` and `command` attributes to trigger custom Invoker Commands, such as rotating an image.
- * [MDN Invoker Commands API](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API)
- * [MDN Invoker Commands API - Creating Custom Commands](https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#creating_custom_commands)
  */
 export const InvokerCommand = {
   render: () => html`

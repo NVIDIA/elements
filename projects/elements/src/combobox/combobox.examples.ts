@@ -213,7 +213,7 @@ export const Select = () => {
  * @summary Multi select allows users to select many options from a
  * predefined list. The select `value` will only reflect the first selected value.
  * To get all selected options check the `selected` property on each `<option>`
- * or the select property [selectedOptions](https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions).
+ * or the select property `selectedOptions`.
  * On focus all options will show until the user starts typing. Select is the
  * selection value of the combobox. The input is the filter value.
  */
