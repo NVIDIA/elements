@@ -491,7 +491,16 @@ ${
 | -------------------- | ----- | ----------- |
 ${members
   .map(i => {
-    const type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
+    let type = i.type?.text ? `\`${i.type?.text.replace(/\|/g, '\\|')}\`` : '';
+
+    if (manifest.tagName.startsWith('nve-icon') && i.name === 'name') {
+      const values = i.type?.values
+        ?.slice(0, 20)
+        .map(v => `\`${v.value}\``)
+        .join(' \\| ');
+      type = `${values} ... (use \`icons_list\` tool for full list)`;
+    }
+
     return `| ${i.name}${i.attribute && i.attribute !== i.name ? ` (${i.attribute})` : ''} | ${type} | ${formatDescription(i.description)} |`;
   })
   .join('\n')}\n`
@@ -595,10 +604,12 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
 
     const rewrittenTypes = new Set();
     let performRewrite = false;
+    const sourceAliases = [];
     for (const type of types) {
       const stringLiterals = stringLiteralsByTypeAlias.get(type);
       if (stringLiterals !== undefined) {
         performRewrite = true;
+        sourceAliases.push(type);
         for (const stringLiteral of stringLiterals) {
           // NOTE: This has() check is necessary to retain TypeScript's first-declaration-wins ordering.
           if (!rewrittenTypes.has(stringLiteral)) {
@@ -612,6 +623,8 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
     if (performRewrite) {
       entry.type.text = Array.from(rewrittenTypes).join(' | ');
     }
+
+    entry.type._sourceAliases = sourceAliases;
 
     entry.type.text = entry.type.text
       .split(' | ')
@@ -700,13 +713,10 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
         });
       });
     } else if (isStringLiteralUnion) {
-      // Check all type aliases to handle unions of multiple types (e.g., TaskStatus | SupportStatus)
-      for (const [typeAlias, valueDescriptions] of valueDescriptionsByTypeAlias.entries()) {
-        // Check if the type text contains values from this type alias
-        const typeAliasValues = stringLiteralsByTypeAlias.get(typeAlias) || [];
-        const hasMatchingValues = typeAliasValues.some(literal => entry.type.text.includes(literal));
+      const sourceAliases = entry.type._sourceAliases || [];
 
-        if (hasMatchingValues && Object.keys(valueDescriptions).length > 0) {
+      for (const [typeAlias, valueDescriptions] of valueDescriptionsByTypeAlias.entries()) {
+        if (sourceAliases.includes(typeAlias) && Object.keys(valueDescriptions).length > 0) {
           hasAnyDescriptions = true;
 
           // Add descriptions for values that match this type alias
@@ -928,7 +938,13 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
           switch (declaration.kind) {
             case 'class':
               for (const member of declaration.members ?? []) {
-                if (baseInterface[member.name] && baseInterface[member.name].docs.length) {
+                // name is excluded due to icon overloading it for svg icon name
+                if (
+                  member.name !== 'name' &&
+                  member.name !== 'direction' &&
+                  baseInterface[member.name] &&
+                  baseInterface[member.name].docs.length
+                ) {
                   member.description = baseInterface[member.name].docs[0]?.description;
                 }
                 rewriteTypesText(member);
