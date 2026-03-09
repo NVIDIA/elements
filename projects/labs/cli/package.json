@@ -104,7 +104,7 @@
       ]
     },
     "dev": {
-      "command": "pnpm dlx @modelcontextprotocol/inspector@0.19.0 node ./dist/mcp/index.js",
+      "command": "pnpm dlx @modelcontextprotocol/inspector@0.21.1 node ./dist/mcp/index.js",
       "dependencies": [
         "build"
       ]
