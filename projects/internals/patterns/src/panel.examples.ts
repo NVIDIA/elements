@@ -109,7 +109,7 @@ export const PanelAccordion = {
                   <h2 nve-text="heading xs medium" slot="prefix">Heading 1</h2>
                 </nve-accordion-header>
                 <nve-accordion-content>
-                  Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                  Adjust workspace preferences and project configurations to customize your experience.
                 </nve-accordion-content>
               </nve-accordion>
 
@@ -118,7 +118,7 @@ export const PanelAccordion = {
                   <h2 nve-text="heading xs medium" slot="prefix">Heading 2</h2>
                 </nve-accordion-header>
                 <nve-accordion-content>
-                  Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                  Adjust workspace preferences and project configurations to customize your experience.
                 </nve-accordion-content>
               </nve-accordion>
 
@@ -127,7 +127,7 @@ export const PanelAccordion = {
                   <h2 nve-text="heading xs medium" slot="prefix">Heading 3</h2>
                 </nve-accordion-header>
                 <nve-accordion-content>
-                  Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                  Adjust workspace preferences and project configurations to customize your experience.
                 </nve-accordion-content>
               </nve-accordion>
             </nve-accordion-group>

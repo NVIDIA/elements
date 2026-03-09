@@ -245,7 +245,7 @@ export const LegacyTrigger = {
     <nve-accordion-header>
       <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
     </nve-accordion-header>
-    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+    <nve-accordion-content>Adjust workspace preferences including theme, notification settings, and default project configurations to customize your experience.</nve-accordion-content>
   </nve-accordion>
 </nve-dialog>
 <script type="module">
@@ -280,7 +280,7 @@ export const LegacyBehaviorTrigger = {
     <nve-accordion-header>
       <h2 nve-text="heading xs medium" slot="prefix">Heading</h2>
     </nve-accordion-header>
-    <nve-accordion-content>Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</nve-accordion-content>
+    <nve-accordion-content>Adjust workspace preferences including theme, notification settings, and default project configurations to customize your experience.</nve-accordion-content>
   </nve-accordion>
 </nve-dialog>
   `
