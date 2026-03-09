@@ -228,6 +228,40 @@ export class ApiService {
     return getSemanticTokens(format, apis.data.tokens) ?? '';
   }
 
+  @tool({
+    summary: 'Get list of all available icon names for nve-icon and nve-icon-button.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        format: {
+          type: 'string',
+          description: markdownDescription,
+          enum: ['markdown', 'json'],
+          default: 'markdown'
+        }
+      },
+      additionalProperties: false
+    },
+    outputSchema: {
+      oneOf: [{ type: 'string' }, { type: 'array', items: { type: 'string' } }]
+    }
+  })
+  static async iconsList(
+    { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
+  ): Promise<string[] | string> {
+    const apis = await MetadataApiService.getData();
+    const iconElement = apis.data.elements.find(e => e.name === 'nve-icon');
+    const values = iconElement?.manifest?.members?.find(m => m.name === 'name')?.type?.values ?? [];
+    const iconNames = values
+      .map(v => ('value' in v ? (v as { value: string }).value : (v as { name: string }).name))
+      .filter(Boolean);
+
+    if (format === 'json') {
+      return iconNames;
+    }
+    return `## Available Icons (${iconNames.length})\n\n${iconNames.map(n => `\`${n}\``).join(', ')}`;
+  }
+
   static async search({
     query,
     format
