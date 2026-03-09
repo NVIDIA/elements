@@ -122,12 +122,15 @@ describe('PlaygroundService', () => {
 
     it('should return URL when template passes lint in mcp environment', async () => {
       process.env.ELEMENTS_ENV = 'mcp';
+      const CI = process.env.CI;
+      process.env.CI = 'true';
       const result = await PlaygroundService.create({
         template: '<nve-button>valid</nve-button>',
         start: false
       });
       expect(typeof result).toBe('string');
       expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+      process.env.CI = CI;
     });
 
     it('should include author in formatted name when provided', async () => {

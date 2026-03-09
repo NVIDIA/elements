@@ -268,4 +268,46 @@ describe('ApiService', () => {
       expect(result).toContain('## CSS Variables');
     });
   });
+
+  describe('iconsList', () => {
+    it('should have correct metadata', () => {
+      expect((ApiService.iconsList as ToolMethod<unknown>).metadata.name).toBe('iconsList');
+      expect((ApiService.iconsList as ToolMethod<unknown>).metadata.command).toBe('icons.list');
+      expect((ApiService.iconsList as ToolMethod<unknown>).metadata.summary).toBe(
+        'Get list of all available icon names for nve-icon and nve-icon-button.'
+      );
+    });
+
+    it('should return markdown with all icon names', async () => {
+      const result = await ApiService.iconsList();
+      expect(typeof result).toBe('string');
+      expect(result as string).toContain('## Available Icons');
+    });
+
+    it('should return json array of icon names', async () => {
+      const result = await ApiService.iconsList({ format: 'json' });
+      expect(Array.isArray(result)).toBe(true);
+      expect((result as string[]).length).toBeGreaterThan(0);
+      expect(typeof (result as string[])[0]).toBe('string');
+    });
+  });
+
+  describe('get with large enum truncation', () => {
+    it('should not truncate large enum values in json format', async () => {
+      const result = (await ApiService.get({ names: ['nve-icon'], format: 'json' })) as Element[];
+      expect(Array.isArray(result)).toBe(true);
+      const iconEl = result[0] as Element;
+      const nameMember = iconEl.manifest?.members?.find(m => m.name === 'name');
+      if (nameMember?.type?.values && nameMember.type.values.length > 0) {
+        expect(nameMember.type.values.length).toBeGreaterThan(20);
+      }
+    });
+
+    it('should truncate large enum values in markdown format', async () => {
+      const result = (await ApiService.get({ names: ['nve-icon'], format: 'markdown' })) as string;
+      expect(result).toContain('icons_list');
+      // The full union of 274 icon names should not appear in the type column
+      expect(result).not.toMatch(/'[a-z]+-[a-z]+'( \\?\| '[a-z]+-[a-z]+'){50,}/);
+    });
+  });
 });
