@@ -187,8 +187,6 @@ export const Closable = {
 
 /**
  * @summary example of declarative popovers using the Invoker Commands API
- * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
- * https://open-ui.org/components/invokers.explainer/#defaults
  */
 export const InvokerCommand = {
   render: () => html`
