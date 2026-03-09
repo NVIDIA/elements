@@ -9,6 +9,9 @@ const DEPRECATED_SLOTS = {
   },
   'nve-card-header': {
     slots: ['title', 'subtitle', 'header-action']
+  },
+  'nve-progress-ring': {
+    slots: ['status-icon']
   }
 };
 
