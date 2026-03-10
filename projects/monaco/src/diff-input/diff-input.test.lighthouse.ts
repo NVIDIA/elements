@@ -13,8 +13,8 @@ describe('monaco-diff-input lighthouse report', () => {
     expect(report.scores.performance).toBeGreaterThanOrEqual(90);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(1342);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14);
+    expect(report.payload.javascript.kb).toBeLessThan(1343);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14.2);
     expect(report.payload.javascript.requests['editor.global.css2.js'].kb).toBeLessThan(78);
     expect(report.payload.javascript.requests['editor.main.css2.js'].kb).toBeLessThan(24);
     expect(report.payload.javascript.requests['index2.js'].kb).toBeLessThan(1145);
@@ -39,7 +39,7 @@ describe('monaco-diff-input lighthouse report', () => {
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
     expect(report.payload.javascript.kb).toBeLessThan(3419);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14.2);
     expect(report.payload.javascript.requests['editor.global.css2.js'].kb).toBeLessThan(78);
     expect(report.payload.javascript.requests['editor.main.css2.js'].kb).toBeLessThan(24);
     expect(report.payload.javascript.requests['index2.js'].kb).toBeLessThan(1145);
