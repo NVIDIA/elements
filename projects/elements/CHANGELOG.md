@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.62.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.62.1...@nvidia-elements/core-v1.62.2) (2026-03-10)
+
+
+### Bug Fixes
+
+* **elements:** css corrections ([57f22b3](https://github.com/NVIDIA/elements/commit/57f22b34830627f8cdba0c5554b9e5093c616560))
+* **elements:** sort icon names by usage ([62c0abf](https://github.com/NVIDIA/elements/commit/62c0abf6aa87dbaf70c00a0dfb77e9835c99e323))
+
 ## [@nvidia-elements/core-v1.62.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.62.0...@nvidia-elements/core-v1.62.1) (2026-03-09)
 
 
