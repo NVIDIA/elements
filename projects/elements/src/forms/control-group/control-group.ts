@@ -89,7 +89,7 @@ export class ControlGroup extends LitElement {
       ...setupControlStatusStates(this, this.#messages)
     ];
     this.#updateAssociations();
-    this.shadowRoot.addEventListener('slotchange', () => this.#updateAssociations());
+    this.shadowRoot!.addEventListener('slotchange', () => this.#updateAssociations());
   }
 
   disconnectedCallback() {
@@ -99,7 +99,7 @@ export class ControlGroup extends LitElement {
 
   #updateAssociations() {
     this.#assignLabel();
-    associateAriaLabel(this.label, this);
+    associateAriaLabel(this.label as HTMLElement, this);
     associateAriaDescribedBy(
       Array.from(this.querySelectorAll<ControlMessage>(tagSelector('nve-control-message'))),
       this

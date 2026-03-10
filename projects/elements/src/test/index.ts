@@ -43,7 +43,7 @@ async function waitForAllElementsToBeDefined() {
     )
   ];
   return new Promise((resolve, reject) => {
-    const undefinedElements = [];
+    const undefinedElements: string[] = [];
     Promise.all(pendingElements.map(e => customElements.whenDefined(e)))
       .then(() => resolve(''))
       .catch(e => reject(e));
@@ -72,7 +72,8 @@ export async function elementIsStable(element: any) {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function retry(fn: () => Promise<any>, maxTries = 10) {
+function retry(fn: () => Promise<any>, maxTries = 10): Promise<any> {
+  // eslint-disable-line @typescript-eslint/no-explicit-any
   return fn().catch(() => (maxTries > 0 ? retry(fn, maxTries--) : Promise.reject('Max attempts reached')));
 }
 

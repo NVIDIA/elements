@@ -6,7 +6,8 @@ import { attachInternals, endOfScrollBox } from '@nvidia-elements/core/internal'
  * Adds active scroll state detection
  */
 export function stateScroll<T extends Scroll>(): ClassDecorator {
-  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new StateScrollController(instance));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer!((instance: T) => new StateScrollController(instance));
 }
 
 export interface StateScrollConfig {
@@ -46,7 +47,7 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
   }
 
   #onScrollEnd = () => {
-    this.host._internals.states.delete('scrolling');
+    this.host._internals!.states.delete('scrolling');
 
     if (endOfScrollBox(this.#target, this.#offset)) {
       this.host.dispatchEvent(new CustomEvent('scrollboxend'));
@@ -56,6 +57,6 @@ export class StateScrollController<T extends Scroll> implements ReactiveControll
   };
 
   #startScroll() {
-    this.#target.addEventListener('scroll', () => this.host._internals.states.add('scrolling'), { once: true });
+    this.#target.addEventListener('scroll', () => this.host._internals!.states.add('scrolling'), { once: true });
   }
 }

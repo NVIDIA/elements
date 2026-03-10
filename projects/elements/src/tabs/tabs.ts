@@ -139,12 +139,12 @@ export class Tabs extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  #selectTab(tabItem) {
+  #selectTab(tabItem: HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean }) {
     if (!this.behaviorSelect || !tabItem.matches('nve-tabs-item, nve-tabs-item') || tabItem.disabled) {
       return;
     }
 
-    this.keynavListConfig.items.forEach((i: TabsItem) => (i.selected = false));
+    this.keynavListConfig.items.forEach((i: HTMLElement) => ((i as TabsItem).selected = false));
     tabItem.selected = true;
   }
 
@@ -161,7 +161,9 @@ export class Tabs extends LitElement {
     appendRootNodeStyle(this, globalStyles);
     attachInternals(this);
     this._internals.role = 'tablist';
-    this.addEventListener('click', (e: CustomEvent) => this.#selectTab(e.target));
+    this.addEventListener('click', (e: Event) =>
+      this.#selectTab(e.target as HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean })
+    );
   }
 
   updated(props: PropertyValues<this>) {

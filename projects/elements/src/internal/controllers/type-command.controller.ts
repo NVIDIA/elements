@@ -7,14 +7,15 @@ import { getFlatDOMTree } from '../utils/dom.js';
  * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
  */
 export function typeCommand<T extends Command>(): ClassDecorator {
-  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new TypeCommandController(instance));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer!((instance: T) => new TypeCommandController(instance));
 }
 
 export type Command = ReactiveElement &
   HTMLElement & {
     command: string;
-    commandfor: string;
-    commandForElement: HTMLElement;
+    commandfor: string | null;
+    commandForElement: HTMLElement | null;
     readonly: boolean;
     disabled: boolean;
   };

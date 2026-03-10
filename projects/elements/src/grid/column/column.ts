@@ -59,7 +59,7 @@ export class GridColumn extends LitElement {
   declare _internals: ElementInternals;
 
   get #grid() {
-    return this.parentElement.parentElement as Grid;
+    return this.parentElement!.parentElement as Grid;
   }
 
   render() {
@@ -75,7 +75,7 @@ export class GridColumn extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'columnheader';
-    this.addEventListener('sort', (e: CustomEvent) => (this.ariaSort = e.detail.next));
+    this.addEventListener('sort', ((e: CustomEvent) => (this.ariaSort = e.detail.next)) as EventListener);
   }
 
   async updated(props: PropertyValues<this>) {
@@ -103,7 +103,9 @@ export class GridColumn extends LitElement {
 
   #computeColumnPositions() {
     if (this.position === 'fixed') {
-      const columns = Array.from(this.parentElement.querySelectorAll<GridColumn>(tagSelector(GridColumn.metadata.tag)));
+      const columns = Array.from(
+        this.parentElement!.querySelectorAll<GridColumn>(tagSelector(GridColumn.metadata.tag))
+      );
       const rightColumns = columns.slice(columns.indexOf(this) + 1, columns.length);
       const position = this.getBoundingClientRect();
       const gridPosition = this.#grid.getBoundingClientRect();

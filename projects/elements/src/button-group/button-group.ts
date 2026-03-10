@@ -85,7 +85,7 @@ export class ButtonGroup extends LitElement {
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
     this._internals.role = 'group';
-    this.addEventListener('click', e => this.#selectButton(e.target));
+    this.addEventListener('click', e => this.#selectButton(e.target as HTMLElement & { pressed?: boolean }));
   }
 
   updated(props: PropertyValues<this>) {
@@ -105,7 +105,7 @@ export class ButtonGroup extends LitElement {
     this.dividers.length ? this._internals.states.add('split') : this._internals.states.delete('split');
   }
 
-  #selectButton(button) {
+  #selectButton(button: HTMLElement & { pressed?: boolean }) {
     if (!button.matches?.('nve-button, nve-button, nve-icon-button, nve-icon-button')) {
       return;
     }

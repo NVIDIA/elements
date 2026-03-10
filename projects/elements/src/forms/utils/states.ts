@@ -31,14 +31,14 @@ export function setupControlValidationStates(control: Control, messages: Control
       if (control.input.validity?.valid) {
         control._internals.states.delete('invalid');
         control._internals.states.add('valid');
-        control.status = null;
+        control.status = null!;
       }
 
       hideInactiveValidationMessages(control, messages);
     };
 
     const resetValidityState = () => {
-      control.status = null;
+      control.status = null!;
       control._internals.states.delete('valid');
       control._internals.states.delete('invalid');
       hideAllValidationMessages(messages);
@@ -68,7 +68,7 @@ export function setupControlValidationStates(control: Control, messages: Control
     control.input.form?.addEventListener('reset', () => resetValidityState());
   }
 
-  control.shadowRoot.addEventListener('slotchange', () => {
+  control.shadowRoot!.addEventListener('slotchange', () => {
     const messages = Array.from(control.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)));
     control._internals.states.delete('valid');
     control._internals.states.delete('invalid');
@@ -154,10 +154,7 @@ export function toggleControlGroupDisabledState(controlGroup: ControlGroup) {
  * :state(success) form control is in a success state
  */
 export function setupControlStatusStates(control: Control | ControlGroup, messages: ControlMessage[]) {
-  updateControlStatusState(
-    control,
-    messages.find(m => !m.hidden)
-  );
+  updateControlStatusState(control, messages.find(m => !m.hidden)!);
   const observers: MutationObserver[] = [];
   observers.push(
     getAttributeListChanges(control, ['hidden', 'status'], mutation => {
@@ -168,13 +165,13 @@ export function setupControlStatusStates(control: Control | ControlGroup, messag
     })
   );
 
-  control.shadowRoot.addEventListener('slotchange', () => {
+  control.shadowRoot!.addEventListener('slotchange', () => {
     const messages = Array.from(control.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)));
     const message = messages.find(m => m.status && !m.hidden);
     control._internals.states.delete('error');
     control._internals.states.delete('success');
     if (message) {
-      control._internals.states.add(message.status);
+      control._internals.states.add(message.status!);
     }
   });
 
@@ -199,11 +196,11 @@ export function hideAllValidationMessages(messages: ControlMessage[]) {
 }
 
 export function showActiveValidationMessages(control: Control, messages: ControlMessage[]) {
-  messages.find(m => control.input.validity[m.error])?.removeAttribute('hidden');
+  messages.find(m => m.error && control.input.validity[m.error])?.removeAttribute('hidden');
 }
 
 export function hideInactiveValidationMessages(control: Control, messages: ControlMessage[]) {
   if (messages.find(m => m.error) && control.input.validity.valid) {
-    messages.filter(m => m.error && !control.input.validity[m.error]).forEach(m => m.setAttribute('hidden', ''));
+    messages.filter(m => m.error && !control.input.validity[m.error!]).forEach(m => m.setAttribute('hidden', ''));
   }
 }

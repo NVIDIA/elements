@@ -109,7 +109,7 @@ export class PreferencesInput extends FormControlMixin<typeof LitElement, Prefer
           ${colorSchemes.map(
             value => html`
             <nve-menu-item part="menu-item"
-              .selected=${this.value['color-scheme'] === value}
+              .selected=${this.value?.['color-scheme'] === value}
               .value=${value}
               @click=${() => this.#setColorScheme(value)}
             >
@@ -129,7 +129,7 @@ export class PreferencesInput extends FormControlMixin<typeof LitElement, Prefer
           ${scales.map(
             value => html`
             <nve-menu-item part="menu-item"
-              .selected=${this.value['scale'] === value}
+              .selected=${this.value?.['scale'] === value}
               .value=${value}
               @click=${() => this.#setScale(value)}
             >
@@ -151,7 +151,7 @@ export class PreferencesInput extends FormControlMixin<typeof LitElement, Prefer
           <input
             type="checkbox"
             value="reduced-motion"
-            .checked=${this.value['reduced-motion']}
+            .checked=${this.value?.['reduced-motion']}
             @change=${(e: { target: HTMLInputElement }) => this.#setReducedMotion(e.target.checked)}
           />
         </nve-switch>`

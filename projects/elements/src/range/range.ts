@@ -38,7 +38,7 @@ export class Range extends Control {
     super.firstUpdated(props);
     this.#setTrackWidth();
     this.input.addEventListener('input', () => this.#setTrackWidth());
-    getElementUpdate(this.input, 'value', (value: number) => this.#setTrackWidth(value));
+    getElementUpdate(this.input, 'value', (value: unknown) => this.#setTrackWidth(value as number));
   }
 
   #setTrackWidth(val?: number) {

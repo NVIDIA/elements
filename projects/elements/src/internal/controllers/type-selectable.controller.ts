@@ -23,7 +23,7 @@ export class TypeSelectableController<T extends TypeSelectable> implements React
   hostConnected() {
     attachInternals(this.host);
 
-    this.host.addEventListener('command', (e: CommandEvent) => {
+    this.host.addEventListener('command', ((e: CommandEvent) => {
       this.#commandTriggered = true;
       if (e.command === '--toggle-select') {
         this.toggle();
@@ -37,16 +37,16 @@ export class TypeSelectableController<T extends TypeSelectable> implements React
         this.host.selected = false;
       }
       this.#commandTriggered = false;
-    });
+    }) as EventListener);
   }
 
   hostUpdated() {
     this.host.selectable === 'single'
-      ? this.host._internals.states.add('selectable-single')
-      : this.host._internals.states.delete('selectable-single');
+      ? this.host._internals!.states.add('selectable-single')
+      : this.host._internals!.states.delete('selectable-single');
     this.host.selectable === 'multi'
-      ? this.host._internals.states.add('selectable-multi')
-      : this.host._internals.states.delete('selectable-multi');
+      ? this.host._internals!.states.add('selectable-multi')
+      : this.host._internals!.states.delete('selectable-multi');
   }
 
   select() {
