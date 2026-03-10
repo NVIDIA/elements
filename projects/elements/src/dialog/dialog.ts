@@ -9,7 +9,8 @@ import {
   TypeNativePopoverController,
   useStyles,
   attachInternals,
-  appendRootNodeStyle
+  appendRootNodeStyle,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import globalStyles from './dialog.global.css?inline';
@@ -41,6 +42,7 @@ import styles from './dialog.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
 @audit({ excessiveInstanceLimit })
+@scopedRegistry()
 export class Dialog extends LitElement {
   /**
    * Sets the side position of the popover relative to the provided anchor element.
@@ -50,7 +52,7 @@ export class Dialog extends LitElement {
 
   /**
    * Sets the alignment of the popover relative to the provided anchor element.
-   * If an arrow exists the alginment will be relative to the arrow against the anchor.
+   * If an arrow exists the alignment will be relative to the arrow against the anchor.
    */
   @property({ type: String, reflect: true }) alignment: PopoverAlign = 'center';
 

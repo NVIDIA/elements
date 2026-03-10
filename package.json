@@ -89,7 +89,6 @@
         "./projects/starters/nuxt:ci",
         "./projects/starters/react:ci",
         "./projects/starters/react-18:ci",
-        "./projects/starters/scoped-registry:ci",
         "./projects/starters/solidjs:ci",
         "./projects/starters/svelte:ci",
         "./projects/starters/typescript:ci",

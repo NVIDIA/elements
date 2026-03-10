@@ -1,6 +1,11 @@
 import { html, LitElement, unsafeCSS } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { Input } from '@nvidia-elements/core/input';
+import { Checkbox } from '@nvidia-elements/core/checkbox';
+import { Password } from '@nvidia-elements/core/password';
+import { ControlMessage } from '@nvidia-elements/core/forms';
 import styles from './login.css?inline';
+import { define, libraryRegistry } from '../internal/index.js';
 
 export class DomainLogin extends LitElement {
   @property({ type: String }) value = `{ "email": "", "password": "" }`;
@@ -42,6 +47,19 @@ export class DomainLogin extends LitElement {
   }
 
   #internals = this.attachInternals();
+
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    customElementRegistry: libraryRegistry
+  };
+
+  constructor() {
+    super();
+    define('nve-input', Input, libraryRegistry);
+    define('nve-checkbox', Checkbox, libraryRegistry);
+    define('nve-password', Password, libraryRegistry);
+    define('nve-control-message', ControlMessage, libraryRegistry);
+  }
 
   render() {
     return html`

@@ -10,6 +10,7 @@ import {
   audit,
   getFlattenedFocusableItems,
   hostAttr,
+  scopedRegistry,
   stateExpanded,
   stateHighlighted,
   stateSelected,
@@ -60,6 +61,7 @@ import { updateNodeSelection } from './utils.js';
 @typeAnchor()
 @stateSelected()
 @stateExpanded()
+@scopedRegistry()
 @stateHighlighted()
 export class TreeNode extends LitElement {
   /**

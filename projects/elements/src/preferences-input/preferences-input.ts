@@ -1,6 +1,6 @@
 import { html, isServer, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { I18nController, useStyles } from '@nvidia-elements/core/internal';
+import { I18nController, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
 import { state } from 'lit/decorators/state.js';
 import { FormControlMixin } from '@nvidia-elements/forms/mixin';
 import { type IconName, Icon } from '@nvidia-elements/core/icon';
@@ -60,6 +60,7 @@ export interface PreferencesInputValue {
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/listbox/
  *
  */
+@scopedRegistry()
 export class PreferencesInput extends FormControlMixin<typeof LitElement, PreferencesInputValue>(LitElement) {
   #i18nController: I18nController<this> = new I18nController<this>(this);
 

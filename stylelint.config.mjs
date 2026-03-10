@@ -22,6 +22,7 @@ export default {
     'value-keyword-case': ['lower', { ignoreKeywords: ['Roboto', 'currentColor'] }], // convention
     'declaration-block-no-redundant-longhand-properties': [true, { ignoreShorthands: ['grid-template'] }], // grid layouts are more readable as separate long hand syntax
     'no-duplicate-selectors': null, // selectors repeated across sections for readability
-    'no-descending-specificity': null // repeated across sections for readability
+    'no-descending-specificity': null, // repeated across sections for readability
+    'comment-empty-line-before': null
   }
 };

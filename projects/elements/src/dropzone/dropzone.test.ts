@@ -251,7 +251,7 @@ describe(Dropzone.metadata.tag, () => {
   });
 
   it('should render custom icon slot content', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-dropzone><div slot="icon" id="test">Test</div></nve-dropzone>
     `);
     element = fixture.querySelector(Dropzone.metadata.tag);
@@ -263,10 +263,12 @@ describe(Dropzone.metadata.tag, () => {
     const slottedContent = element.querySelector('#test');
     expect(slottedContent).to.exist;
     expect(slottedContent.textContent).to.equal('Test');
+
+    removeFixture(fixture);
   });
 
   it('should render custom content slot', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-dropzone>
         <div>Custom Content</div>
       </nve-dropzone>
@@ -280,10 +282,12 @@ describe(Dropzone.metadata.tag, () => {
     const slottedContent = element.querySelector('div');
     expect(slottedContent).to.exist;
     expect(slottedContent.textContent).to.equal('Custom Content');
+
+    removeFixture(fixture);
   });
 
   it('should not render blank slot content', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-dropzone>
         <div slot="icon" id="test">Test</div>
       </nve-dropzone>
@@ -293,5 +297,7 @@ describe(Dropzone.metadata.tag, () => {
 
     const slot = element.shadowRoot.querySelector('slot[name="icon"]');
     expect(slot).to.exist;
+
+    removeFixture(fixture);
   });
 });
