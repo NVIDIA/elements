@@ -9,7 +9,7 @@ import { attachInternals } from '../utils/a11y.js';
  */
 export function stateExpanded<T extends Expanded>(): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new StateExpandedController(instance));
+    target.addInitializer!((instance: T) => new StateExpandedController(instance));
 }
 
 export type Expanded = ReactiveElement & { expanded: boolean; readonly?: boolean; _internals?: ElementInternals };
@@ -25,18 +25,18 @@ export class StateExpandedController<T extends Expanded> implements ReactiveCont
 
   hostUpdated() {
     if (this.host.expanded !== null && this.host.expanded !== undefined) {
-      this.host._internals.ariaExpanded = `${this.host.expanded}`;
+      this.host._internals!.ariaExpanded = `${this.host.expanded}`;
     }
 
     if (this.host.expanded) {
-      this.host._internals.states.add('expanded');
+      this.host._internals!.states.add('expanded');
     } else {
-      this.host._internals.states.delete('expanded');
+      this.host._internals!.states.delete('expanded');
     }
 
     if (this.host.readonly) {
-      this.host._internals.ariaExpanded = null;
-      this.host._internals.states.delete('expanded');
+      this.host._internals!.ariaExpanded = null;
+      this.host._internals!.states.delete('expanded');
     }
   }
 }

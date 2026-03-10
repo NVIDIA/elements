@@ -422,7 +422,7 @@ export const statusIcons: { [key: string]: IconName } = {
   'trend-down': 'trend-down',
   'trend-neutral': 'minus',
   ignored: 'circle-angled-line'
-};
+} as const;
 
 declare global {
   var NVE_ELEMENTS: {
@@ -441,7 +441,7 @@ declare global {
         };
       }>;
     };
-    debug: (log?: (...args) => void) => void;
+    debug: (log?: (...args: unknown[]) => void) => void;
   };
 
   interface HTMLElement {

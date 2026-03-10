@@ -214,13 +214,13 @@ export class TreeNode extends LitElement {
     });
   }
 
-  #nodeHeaderClick(e) {
-    const hasFocusableElements = getFlattenedFocusableItems(e.currentTarget).length;
+  #nodeHeaderClick(e: Event) {
+    const hasFocusableElements = getFlattenedFocusableItems(e.currentTarget as HTMLElement).length;
     if (this.#isExpandable && !this.selectable && !hasFocusableElements) {
       this.#toggleExpand();
     }
 
-    if (this.selectable && (!hasFocusableElements || e.target.localName === 'a')) {
+    if (this.selectable && (!hasFocusableElements || (e.target as HTMLElement).localName === 'a')) {
       this.#toggleSelection();
     }
   }
@@ -242,7 +242,7 @@ export class TreeNode extends LitElement {
   #toggleSingleSelection() {
     this.#typeSelectableController.toggle();
     if (this.behaviorSelect) {
-      this.#tree.nodes.filter(n => n !== this).forEach(n => (n.selected = false));
+      this.#tree!.nodes.filter(n => n !== this).forEach(n => (n.selected = false));
     }
   }
 
@@ -254,7 +254,7 @@ export class TreeNode extends LitElement {
         n.selected = this.selected;
         n.indeterminate = false;
       });
-      this.#tree.nodes.forEach(node => updateNodeSelection(node));
+      this.#tree!.nodes.forEach(node => updateNodeSelection(node));
     }
   }
 }

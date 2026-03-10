@@ -9,7 +9,7 @@ import { attachInternals } from '../utils/a11y.js';
  */
 export function stateSelected<T extends Selected>(): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new StateSelectedController(instance));
+    target.addInitializer!((instance: T) => new StateSelectedController(instance));
 }
 
 export type Selected = ReactiveElement & { selected: boolean; readonly?: boolean; _internals?: ElementInternals };
@@ -25,26 +25,26 @@ export class StateSelectedController<T extends Selected> implements ReactiveCont
 
   hostUpdated() {
     if (this.host.readonly) {
-      this.host._internals.ariaSelected = null;
-      this.host._internals.states.delete('selected');
+      this.host._internals!.ariaSelected = null;
+      this.host._internals!.states.delete('selected');
       return;
     }
 
     if (this.host._internals?.states.has('anchor') && this.host.selected) {
-      this.host._internals.ariaSelected = null;
-      this.host._internals.states.add('selected');
+      this.host._internals!.ariaSelected = null;
+      this.host._internals!.states.add('selected');
       this.host.querySelector('a')?.setAttribute('aria-current', 'page');
       return;
     }
 
     if (this.host.selected !== null && this.host.selected !== undefined) {
-      this.host._internals.ariaSelected = `${this.host.selected}`;
+      this.host._internals!.ariaSelected = `${this.host.selected}`;
     }
 
     if (this.host.selected) {
-      this.host._internals.states.add('selected');
+      this.host._internals!.states.add('selected');
     } else {
-      this.host._internals.states.delete('selected');
+      this.host._internals!.states.delete('selected');
     }
   }
 }

@@ -121,7 +121,7 @@ export class Notification extends LitElement {
 
   get #popoverContent() {
     return html`
-    <slot name="icon"><nve-icon .name=${statusIcons[this.status]} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information} part="status-icon"></nve-icon></slot>
+    <slot name="icon"><nve-icon .name=${statusIcons[this.status]} .ariaLabel=${(this.status ? (this.i18n as Record<string, string>)[this.status] : undefined) ?? this.i18n.information} part="status-icon"></nve-icon></slot>
     ${this.closable ? html`<nve-icon-button part="icon-button" @click=${this.hidePopover} icon-name="cancel" size="sm" container="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : ''}
     <slot></slot>`;
   }

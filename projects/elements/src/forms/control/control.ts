@@ -91,7 +91,7 @@ export class Control extends LitElement {
         this.querySelector('slot')
           ?.assignedElements()
           ?.find(i => i.matches(inputQuery)) ??
-        Array.from(this.shadowRoot.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i =>
+        Array.from(this.shadowRoot!.querySelector('slot')?.assignedElements({ flatten: true }) ?? []).find(i =>
           i.matches(inputQuery)
         );
       this.#input = (slotted ? slotted : this.querySelector(inputQuery)) as HTMLInputElement;
@@ -153,7 +153,7 @@ export class Control extends LitElement {
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
 
-    this.shadowRoot.addEventListener('slotchange', () => {
+    this.shadowRoot!.addEventListener('slotchange', () => {
       this.#updateStyleStates();
 
       if (this.input && this.#observers.length === 0) {
@@ -170,7 +170,7 @@ export class Control extends LitElement {
 
   /** Resets control value to initial attribute value and clears any active validation rules. */
   reset() {
-    this.input.value = this.input.getAttribute('value');
+    this.input.value = this.input.getAttribute('value') ?? '';
     this.requestUpdate();
     this.dispatchEvent(new CustomEvent('reset', { bubbles: true }));
   }
@@ -187,7 +187,7 @@ export class Control extends LitElement {
 
     this.#polyfillShowPicker();
     this.#updateAssociations();
-    this.shadowRoot.addEventListener('slotchange', () => {
+    this.shadowRoot!.addEventListener('slotchange', () => {
       this.#updateStyleStates();
       this.#updateAssociations();
     });
@@ -209,7 +209,7 @@ export class Control extends LitElement {
     } else if (this.input.tagName === 'SELECT') {
       this.style.setProperty(
         '--control-width',
-        `${(this.input as unknown as HTMLSelectElement).options[(this.input as unknown as HTMLSelectElement).selectedIndex].textContent.length + 4}ch`
+        `${(this.input as unknown as HTMLSelectElement).options[(this.input as unknown as HTMLSelectElement).selectedIndex]!.textContent!.length + 4}ch`
       );
     }
   }
@@ -233,17 +233,16 @@ export class Control extends LitElement {
     associateAriaDescribedBy(Array.from(this.#messages), this.input);
 
     if (this._associateDatalist) {
-      associateDataList(this.querySelector<HTMLDataListElement>('datalist'), this.input);
+      associateDataList(this.querySelector<HTMLDataListElement>('datalist')!, this.input);
     }
   }
 
   #assignLabel() {
     const label =
       this.querySelector('label') ||
-      (this.shadowRoot
-        .querySelector('slot')
+      (this.shadowRoot!.querySelector('slot')!
         .assignedNodes({ flatten: true })
-        .find((i: HTMLElement) => i.tagName === 'LABEL') as HTMLLabelElement);
+        .find((i: Node) => (i as HTMLElement).tagName === 'LABEL') as HTMLLabelElement);
     if (label) {
       label.slot = 'label';
     }

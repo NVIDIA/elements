@@ -2,6 +2,11 @@ import { getDuplicatePackageGlobalVersionWarning } from '../utils/audit-logs.js'
 import { deepMerge } from '../utils/objects.js';
 import { getEnv, getHostDetails } from './global.utils.js';
 
+declare global {
+  // eslint-disable-next-line no-var
+  var MLV_ELEMENTS: typeof NVE_ELEMENTS;
+}
+
 export class GlobalState {
   constructor() {
     globalThis.NVE_ELEMENTS ??= {
@@ -39,7 +44,10 @@ export class GlobalState {
   }
 
   dispatch(type: string, state: Partial<typeof globalThis.NVE_ELEMENTS.state>) {
-    globalThis.NVE_ELEMENTS.state = deepMerge(globalThis.NVE_ELEMENTS.state, state);
+    globalThis.NVE_ELEMENTS.state = deepMerge(
+      globalThis.NVE_ELEMENTS.state as unknown as Record<string, unknown>,
+      state as unknown as Record<string, unknown>
+    ) as unknown as typeof globalThis.NVE_ELEMENTS.state;
     globalThis?.document?.dispatchEvent(new CustomEvent(type, { detail: globalThis.NVE_ELEMENTS.state }));
   }
 }

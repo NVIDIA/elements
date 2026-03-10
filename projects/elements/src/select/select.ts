@@ -84,23 +84,23 @@ export class Select extends Control {
   }
 
   get #dropdown() {
-    return this.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    return this.shadowRoot!.querySelector<Dropdown>(Dropdown.metadata.tag);
   }
 
   get #menuItems() {
-    return this.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    return this.shadowRoot!.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
   }
 
   get #input() {
-    return this.shadowRoot.querySelector<HTMLElement>('[input]');
+    return this.shadowRoot!.querySelector<HTMLElement>('[input]');
   }
 
   get #tags() {
-    return this.shadowRoot.querySelector('.tags');
+    return this.shadowRoot!.querySelector('.tags');
   }
 
   get #caret() {
-    return this.shadowRoot.querySelector<Icon>('[name="caret"]');
+    return this.shadowRoot!.querySelector<Icon>('[name="caret"]');
   }
 
   get #placeholderOption() {
@@ -204,27 +204,27 @@ export class Select extends Control {
     if (this.#select?.size === 0) {
       onListboxActivate(this.#select, () => {
         this.requestUpdate(); // update menu items
-        this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
-        this.#dropdown.showPopover();
-        focusElementTimeout(this.#menuItems[0]);
+        this.#dropdown!.style.setProperty('--min-width', `${this.#input!.getBoundingClientRect().width}px`);
+        this.#dropdown!.showPopover();
+        focusElementTimeout(this.#menuItems[0] as HTMLElement);
       });
     }
   }
 
   #openDropdown() {
-    this.#dropdown.hidden = false;
-    this.#caret.direction = 'up';
+    this.#dropdown!.hidden = false;
+    this.#caret!.direction = 'up';
   }
 
   #closeDropdown() {
-    this.#dropdown.hidden = true;
-    this.#caret.direction = 'down';
+    this.#dropdown!.hidden = true;
+    this.#caret!.direction = 'down';
   }
 
   #setupOverflowListener() {
-    const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0].contentRect.width));
+    const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0]!.contentRect.width));
     this.#observers.push(observer);
-    observer.observe(this.#input);
+    observer.observe(this.#input!);
   }
 
   async #selectValue(option: HTMLOptionElement, selected: boolean) {
@@ -245,7 +245,7 @@ export class Select extends Control {
       this.#dropdown.hidePopover();
     } else {
       await this.updateComplete;
-      this.#updateMultipleOverflow(this.#input.getBoundingClientRect().width);
+      this.#updateMultipleOverflow(this.#input!.getBoundingClientRect().width);
     }
   }
 

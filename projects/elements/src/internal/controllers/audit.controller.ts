@@ -30,7 +30,7 @@ async function log(message: string) {
 
 export function audit<T extends Audit>(options: AuditOptions = {}): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new AuditController(instance, options));
+    target.addInitializer!((instance: T) => new AuditController(instance, options));
 }
 
 export type Audit = ReactiveElement;
@@ -80,16 +80,16 @@ export class AuditController<T extends Audit> implements ReactiveController {
   async #auditExcessiveInstanceLimit() {
     if (this.options.excessiveInstanceLimit !== undefined) {
       if (
-        this.#hostAuditState.count > this.options.excessiveInstanceLimit &&
+        this.#hostAuditState.count! > this.options.excessiveInstanceLimit &&
         !this.#hostAuditState.excessiveInstanceLimitAudited
       ) {
         const { getExcessiveInstanceLimitWarning } = await import('../utils/audit-logs.js');
-        void log(getExcessiveInstanceLimitWarning(this.#hostAuditState.count, this.host.localName));
+        void log(getExcessiveInstanceLimitWarning(this.#hostAuditState.count!, this.host.localName));
         this.#update({
-          [this.host.localName]: { count: this.#hostAuditState.count + 1, excessiveInstanceLimitAudited: true }
+          [this.host.localName]: { count: this.#hostAuditState.count! + 1, excessiveInstanceLimitAudited: true }
         });
       } else {
-        this.#update({ [this.host.localName]: { count: this.#hostAuditState.count + 1 } });
+        this.#update({ [this.host.localName]: { count: this.#hostAuditState.count! + 1 } });
       }
     }
   }
@@ -97,13 +97,15 @@ export class AuditController<T extends Audit> implements ReactiveController {
   #cleanupExcessiveInstanceLimit() {
     if (this.options.excessiveInstanceLimit) {
       this.#update({
-        [this.host.localName]: { count: this.#hostAuditState.count - 1, excessiveInstanceLimitAudited: false }
+        [this.host.localName]: { count: this.#hostAuditState.count! - 1, excessiveInstanceLimitAudited: false }
       });
     }
   }
 
-  #update(audit: Partial<AuditRegistry>) {
-    GlobalStateService.dispatch('NVE_ELEMENTS_AUDIT_UPDATE', { audit });
+  #update(audit: AuditRegistry) {
+    GlobalStateService.dispatch('NVE_ELEMENTS_AUDIT_UPDATE', { audit } as Partial<
+      typeof globalThis.NVE_ELEMENTS.state
+    >);
   }
 
   async #auditSlots() {
