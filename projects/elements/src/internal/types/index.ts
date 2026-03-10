@@ -432,6 +432,7 @@ declare global {
       pageHost: string;
       moduleHost: string;
       versions: string[];
+      scopedRegistry: { [key: string]: CustomElementRegistry };
       elementRegistry: Readonly<{ [key: string]: string }>;
       i18nRegistry: Readonly<{ [key: string]: string }>;
       audit: Readonly<{
@@ -444,10 +445,28 @@ declare global {
     debug: (log?: (...args: unknown[]) => void) => void;
   };
 
+  /** @deprecated use NVE_ELEMENTS */
+  var MLV_ELEMENTS: typeof NVE_ELEMENTS;
+
   interface HTMLElement {
     'nve-text': string;
     'nve-layout': string;
   }
+
+  interface CustomElementRegistry {
+    initialize(root: ShadowRoot | Document): void;
+  }
+
+  var CustomElementRegistry: {
+    new (): CustomElementRegistry;
+    prototype: CustomElementRegistry;
+  };
+}
+
+export interface ElementDefinition extends CustomElementConstructor {
+  metadata: { version: string; tag: string };
+  elementDefinitions?: { [key: string]: ElementDefinition };
+  shadowRootOptions?: { customElementRegistry?: CustomElementRegistry | null };
 }
 
 export interface Point {

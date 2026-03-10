@@ -1,4 +1,5 @@
 import { GlobalStateService } from '../services/global.service.js';
+import type { ElementDefinition } from '../types/index.js';
 import { isFocusable } from './focus.js';
 
 /**
@@ -123,22 +124,52 @@ export function parseTokenNumber(value: string) {
   return parseInt(value.includes('calc') ? value.split('*')[1]!.replace('px)', '').trim() : value, 10) || 0;
 }
 
-export function define(Element: CustomElementConstructor & { metadata: { version: string; tag: string } }) {
-  defineInternal(Element, Element.metadata.tag.replace('nve', 'mlv'));
-  defineInternal(class extends Element {}, Element.metadata.tag.replace('mlv', 'nve'));
+/** true if the browser supports scoped custom element registries */
+export const supportsScopedRegistry =
+  globalThis.CustomElementRegistry && 'initialize' in CustomElementRegistry.prototype;
+
+/** defines an element with the given custom element registry */
+export function defineElement(element: ElementDefinition, customElementRegistry: CustomElementRegistry) {
+  Object.entries(element.elementDefinitions ?? {})
+    .filter(([_tag, e]) => !customElementRegistry.get(e.metadata.tag))
+    .forEach(([_tag, e]) => {
+      defineElement(e, customElementRegistry);
+    });
+
+  if (!customElementRegistry.get(element.metadata.tag)) {
+    customElementRegistry.define(element.metadata.tag, element);
+
+    if (customElementRegistry === customElements) {
+      GlobalStateService.dispatch('NVE_ELEMENT_DEFINE', {
+        elementRegistry: { [element.metadata.tag]: element.metadata.version }
+      });
+    }
+  }
 }
 
-function defineInternal(element: CustomElementConstructor & { metadata: { version: string } }, tagName: string) {
+/** defines an element with the global custom element registry */
+export function define(element: ElementDefinition) {
   const { version } = element.metadata;
-  const tag = tagName.replace('nve-', '').replace('nve-', '');
-  if (!customElements.get(tagName)) {
-    customElements.define(tagName, element);
-    GlobalStateService.dispatch('NVE_ELEMENT_DEFINE', { elementRegistry: { [tag]: version } });
-  } else if (
-    GlobalStateService.state.elementRegistry[tag] !== version &&
+
+  // if scoped registry supported, register only the root element to global registry
+  if (supportsScopedRegistry && !customElements.get(element.metadata.tag)) {
+    customElements.define(element.metadata.tag, element);
+    GlobalStateService.dispatch('NVE_ELEMENT_DEFINE', {
+      elementRegistry: { [element.metadata.tag]: element.metadata.version }
+    });
+  } else {
+    // if scoped registry not supported, register the element and all its children to the global registry
+    defineElement(element, customElements);
+  }
+
+  // warn on duplicate version
+  if (
+    GlobalStateService.state.elementRegistry[element.metadata.tag] !== version &&
     globalThis?.location?.hostname === 'localhost'
   ) {
-    void import('./audit-logs.js').then(m => console.warn(m.getDuplicatePackageVersionWarning(tag, version)));
+    void import('./audit-logs.js').then(m =>
+      console.warn(m.getDuplicatePackageVersionWarning(element.metadata.tag, version))
+    );
   }
 }
 

@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit';
 import { state } from 'lit/decorators/state.js';
 import type { PopoverPosition, PopoverType } from '@nvidia-elements/core/internal';
-import { popoverStyles, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
+import { popoverStyles, scopedRegistry, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
 import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 import styles from './page-loader.css?inline';
 
@@ -16,6 +16,7 @@ import styles from './page-loader.css?inline';
  * @csspart progress-ring - The progress ring element
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
  */
+@scopedRegistry()
 export class PageLoader extends LitElement {
   /** @private */
   readonly position: PopoverPosition = 'center';

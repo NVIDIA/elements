@@ -1,6 +1,5 @@
 import { define, TransitionService } from '@nvidia-elements/core/internal';
 import { Page, PagePanel, PagePanelContent, PagePanelFooter, PagePanelHeader } from '@nvidia-elements/core/page';
-import '@nvidia-elements/core/icon-button/define.js';
 
 define(Page);
 define(PagePanel);

@@ -2,10 +2,10 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { useStyles } from '@nvidia-elements/core/internal';
-import { JSONNode } from './node/node.js';
 import styles from './json-viewer.css?inline';
 
 /* eslint-disable @nvidia-elements/lint/no-unknown-tags */
+/* eslint-disable local/require-element-definitions */
 
 /**
  * @deprecated use `nve-monaco-input` instead
@@ -31,10 +31,6 @@ export class JSONViewer extends LitElement {
   static readonly metadata = {
     tag: 'nve-json-viewer',
     version: '0.0.0'
-  };
-
-  static elementDefinitions = {
-    [JSONNode.metadata.tag]: JSONNode
   };
 
   get #classMap() {
