@@ -62,7 +62,7 @@
       ],
       "dependencies": [
         "../internals/vite:ci",
-        "../labs/cli:build"
+        "../cli:build"
       ]
     },
     "build:watch": {
