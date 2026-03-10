@@ -1,4 +1,5 @@
 packages:
+  - projects/code
   - projects/starters
   - projects/starters/angular
   - projects/starters/bundles
@@ -22,8 +23,7 @@ packages:
   - projects/labs/behaviors-alpine
   - projects/labs/brand
   - projects/cli
-  - projects/labs/code
-  - projects/labs/markdown
+  - projects/code
   - projects/labs/playwright-screencast
   - projects/lint
   - projects/snippets

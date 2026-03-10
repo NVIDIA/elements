@@ -99,6 +99,8 @@
         "./src/tasks/api.ts",
         "./src/tasks/api.utils.ts",
         "./src/utils/utils.ts",
+        "../../code/package.json",
+        "../../code/dist/custom-elements.json",
         "../../elements/src/internal/types/index.ts",
         "../../elements/package.json",
         "../../elements/dist/custom-elements.json",
@@ -112,8 +114,6 @@
         "../../themes/dist/custom-elements.json",
         "../../labs/brand/package.json",
         "../../labs/brand/dist/custom-elements.json",
-        "../../labs/code/package.json",
-        "../../labs/code/dist/custom-elements.json",
         "../../forms/package.json",
         "../../forms/dist/custom-elements.json",
         "../../labs/behaviors-alpine/package.json",
@@ -158,7 +158,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/code:build",
+          "script": "../../code:build",
           "cascade": false
         },
         {
@@ -198,9 +198,9 @@
         "../../labs/brand/package.json",
         "../../labs/brand/README.md",
         "../../labs/brand/CHANGELOG.md",
-        "../../labs/code/package.json",
-        "../../labs/code/README.md",
-        "../../labs/code/CHANGELOG.md",
+        "../../code/package.json",
+        "../../code/README.md",
+        "../../code/CHANGELOG.md",
         "../../forms/package.json",
         "../../forms/README.md",
         "../../forms/CHANGELOG.md",
@@ -247,10 +247,10 @@
         "../../cli/coverage/unit/summary.json",
         "../../lint/coverage/unit/coverage-summary.json",
         "../../lint/coverage/unit/summary.json",
-        "../../labs/code/coverage/unit/coverage-summary.json",
-        "../../labs/code/coverage/unit/summary.json",
-        "../../labs/code/coverage/visual/summary.json",
-        "../../labs/code/coverage/ssr/summary.json",
+        "../../code/coverage/unit/coverage-summary.json",
+        "../../code/coverage/unit/summary.json",
+        "../../code/coverage/visual/summary.json",
+        "../../code/coverage/ssr/summary.json",
         "../../forms/coverage/unit/coverage-summary.json",
         "../../forms/coverage/unit/summary.json",
         "../../labs/behaviors-alpine/coverage/unit/coverage-summary.json",
@@ -311,7 +311,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/code:test:coverage",
+          "script": "../../code:test:coverage",
           "cascade": false
         },
         {
@@ -361,7 +361,7 @@
         "../../themes/dist/**/*.examples.json",
         "../../monaco/dist/**/*.examples.json",
         "../../labs/brand/dist/**/*.examples.json",
-        "../../labs/code/dist/**/*.examples.json",
+        "../../code/dist/**/*.examples.json",
         "../../forms/dist/**/*.examples.json",
         "../../markdown/dist/**/*.examples.json"
       ],
@@ -394,7 +394,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/code:build",
+          "script": "../../code:build",
           "cascade": false
         },
         {

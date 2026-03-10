@@ -19,7 +19,7 @@ main @nve package scope. The team may deprecate or remove labs projects at any t
     <nve-grid-column>Status</nve-grid-column>
   </nve-grid-header>
   <nve-grid-row>
-    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/code" target="_blank"><code nve-text="code">@nvidia-elements/code</code></a></nve-grid-cell>
+    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/code" target="_blank"><code nve-text="code">@nvidia-elements/code</code></a></nve-grid-cell>
     <nve-grid-cell>A package containing UI components for displaying and editing source code.</nve-grid-cell>
     <nve-grid-cell>Available / In Development</nve-grid-cell>
   </nve-grid-row>
