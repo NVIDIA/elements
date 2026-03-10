@@ -16,30 +16,33 @@ The rest of this guide focuses on how to integrate specifically for Element inte
 
 ## Scoped Registry
 
-By default Web Components, specifically the custom elements spec, defines elements on a global registry.
-This can introduce tag name collisions if the browser loads many versions of the same library. To avoid this,
-use a scoped registry. This allows you to define your own registry and ensure the Elements you
-depend on are only registered to the scope of your component and not the global registry.
-
-The lit team provides the `@lit-labs/scoped-registry-mixin` package which provides a mixin for creating
-a scoped registry based on the in progress [Scoped Custom Element Registries](https://github.com/webcomponents/polyfills/tree/master/packages/scoped-custom-element-registry) spec.
+By default Web Components, specifically the custom elements spec, defines elements on a global registry. This can introduce tag name collisions if the browser loads many versions of the same library. To avoid this, use a [scoped registry](https://developer.chrome.com/blog/scoped-registries). This allows you to define your own registry and ensure the Elements you depend on are only registered to the scope of your component and not the global registry.
 
 ```typescript
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
-import { scope } from '@nvidia-elements/core/scoped';
 import { Input } from '@nvidia-elements/core/input';
 import { Password } from '@nvidia-elements/core/password';
 import { Button } from '@nvidia-elements/core/button';
-import '@webcomponents/scoped-custom-element-registry';
+
+const libraryRegistry =
+  globalThis.CustomElementRegistry && 'initialize' in CustomElementRegistry.prototype
+    ? new CustomElementRegistry()
+    : customElements;
 
 @customElement('domain-login')
-export class DomainLogin extends ScopedRegistryHost(LitElement) {
-  static elementDefinitions = {
-    'nve-input': scope(Input, ScopedRegistryHost),
-    'nve-password': scope(Password, ScopedRegistryHost),
-    'nve-button': scope(Button, ScopedRegistryHost)
+export class DomainLogin extends LitElement {
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    customElementRegistry: libraryRegistry
+  };
+
+  constructor() {
+    super();
+    libraryRegistry.get('domain-login') || libraryRegistry.define('domain-login', DomainLogin);
+    libraryRegistry.get('nve-input') || libraryRegistry.define('nve-input', Input);
+    libraryRegistry.get('nve-password') || libraryRegistry.define('nve-password', Password);
+    libraryRegistry.get('nve-button') || libraryRegistry.define('nve-button', Button);
   }
 
   render() {
@@ -60,7 +63,34 @@ export class DomainLogin extends ScopedRegistryHost(LitElement) {
 }
 ```
 
-The static `elementDefinitions` property defines the elements that the scoped registry registers.
-The `scope` function wraps the element definition with the `ScopedRegistryHost` mixin. This step ensures
-all Elements in the entire DOM tree register to the scoped registry. Once completed the `domain-login` component
-works in any framework that supports Web Components.
+```typescript
+// define.ts
+import { DomainLogin } from './login.js';
+
+// register the component globally for your users to import and consume
+customElements.get('domain-login') || customElements.define('domain-login', DomainLogin);
+
+declare global {
+  interface HTMLElementTagNameMap {
+    ['domain-login']: DomainLogin;
+  }
+}
+```
+
+```typescript
+// internal/index.ts
+
+// shared private registry for all of the library sub dependencies/components
+export const libraryRegistry =
+  globalThis.CustomElementRegistry && 'initialize' in CustomElementRegistry.prototype
+    ? new CustomElementRegistry()
+    : customElements;
+
+export function define(
+  tag: string,
+  element: CustomElementConstructor,
+  registry: CustomElementRegistry = customElements
+) {
+  registry.get(tag) || registry.define(tag, element);
+}
+```
