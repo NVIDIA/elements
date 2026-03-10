@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.10.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.7...@nvidia-elements/cli-v0.10.8) (2026-03-10)
+
+
+### Bug Fixes
+
+* **labs-cli:** context formatting fixes ([a2975c8](https://github.com/NVIDIA/elements/commit/a2975c88f91e1111ed45125c45df443e487c57d6))
+
 ## [@nvidia-elements/cli-v0.10.7](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.6...@nvidia-elements/cli-v0.10.7) (2026-03-09)
 
 
