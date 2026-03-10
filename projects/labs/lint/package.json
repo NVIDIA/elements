@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/lint",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Lint configurations and custom rules for Elements projects, providing Elements-specific HTML and CSS validations.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {

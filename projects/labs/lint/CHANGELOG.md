@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.14.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.13.0...@nvidia-elements/lint-v0.14.0) (2026-03-10)
+
+
+### Features
+
+* **labs-lint:** no-nested-container-types ([d6f43c8](https://github.com/NVIDIA/elements/commit/d6f43c88b4000ffffa04eea6461dd1651ca6b3ce))
+
 ## [@nvidia-elements/lint-v0.13.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.12.4...@nvidia-elements/lint-v0.13.0) (2026-03-05)
 
 
