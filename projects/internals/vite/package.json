@@ -27,6 +27,7 @@
     "glob": "catalog:",
     "lighthouse": "catalog:",
     "lit": "catalog:",
+    "parse5": "7.1.2",
     "pixelmatch": "6.0.0",
     "pngjs": "7.0.0",
     "rollup": "4.52.5",

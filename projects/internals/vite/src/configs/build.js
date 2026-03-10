@@ -7,6 +7,7 @@ import minifyHTML from 'rollup-plugin-html-literals';
 
 import { tsc } from '../plugins/tsc.js';
 import { cem } from '../plugins/cem.js';
+import { snippets } from '../plugins/snippets.js';
 import { dts } from '../plugins/dts.js';
 import { bundle } from '../plugins/bundle.js';
 import { initial } from '../plugins/initial.js';
@@ -25,7 +26,7 @@ const packageFile = JSON.parse(packageFilePath);
  * @type {import('vite').UserConfig}
  */
 export const libraryBuildConfig = {
-  plugins: [initial(), tsc(), dts(), bundle(), examplesToJSON(packageFile), cem()],
+  plugins: [initial(), tsc(), dts(), bundle(), examplesToJSON(packageFile), cem(), snippets()],
   build: {
     reportCompressedSize: false,
     cssMinify: prod ? 'esbuild' : false,
