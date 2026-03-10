@@ -90,7 +90,7 @@
         "../metadata/static/api.json",
         "../metadata/static/projects.json",
         "../metadata/static/examples.json",
-        "../../labs/lint/dist/**",
+        "../../lint/dist/**",
         "src/**",
         "!src/**/*.test.ts",
         "package.json",
@@ -108,7 +108,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/lint:build",
+          "script": "../../lint:build",
           "cascade": false
         }
       ]
@@ -128,7 +128,7 @@
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
         "../eslint:ci",
-        "../../labs/lint:build"
+        "../../lint:build"
       ]
     },
     "test": {

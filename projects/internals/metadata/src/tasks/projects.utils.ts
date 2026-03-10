@@ -42,11 +42,12 @@ export function getProjects(): { created: string; data: Project[] } {
     '../../../../labs/brand',
     '../../../../labs/code',
     '../../../../cli',
-    '../../../../labs/lint',
+    '../../../../lint',
     '../../../../forms',
     '../../../../labs/markdown',
     '../../../../labs/media',
     '../../../../labs/playwright-screencast',
+    '../../../../lint',
     '../../../../monaco',
     '../../../../internals/metadata',
     '../../../../internals/patterns'

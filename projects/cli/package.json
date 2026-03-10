@@ -89,7 +89,7 @@
       ],
       "dependencies": [
         "../internals/vite:ci",
-        "../labs/lint:build",
+        "../lint:build",
         {
           "script": "../internals/tools:build",
           "cascade": false
@@ -124,7 +124,7 @@
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
         "../internals/eslint:ci",
-        "../labs/lint:build"
+        "../lint:build"
       ]
     },
     "test": {
