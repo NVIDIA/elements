@@ -133,7 +133,7 @@ git commit -a -m "fix(elements): disabled multi-select"
 | `labs-behaviors-alpine`      | `/labs/behaviors-alpine`      |
 | `labs-playwright-screencast` | `/labs/playwright-screencast` |
 | `labs-brand`                 | `/labs/brand`                 |
-| `labs-cli`                   | `/labs/cli`                   |
+| `labs-cli`                   | `/cli`                        |
 | `labs-code`                  | `/labs/code`                  |
 | `forms`                      | `/projects/forms`             |
 

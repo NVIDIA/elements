@@ -41,7 +41,7 @@ export function getProjects(): { created: string; data: Project[] } {
     '../../../../labs/behaviors-alpine',
     '../../../../labs/brand',
     '../../../../labs/code',
-    '../../../../labs/cli',
+    '../../../../cli',
     '../../../../labs/lint',
     '../../../../forms',
     '../../../../labs/markdown',
