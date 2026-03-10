@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import type { PopoverAlign, PopoverType } from '@nvidia-elements/core/internal';
+import type { PopoverAlign, PopoverPosition, PopoverType } from '@nvidia-elements/core/internal';
 import { audit, popoverStyles, TypeNativePopoverController, useStyles } from '@nvidia-elements/core/internal';
 import styles from './notification-group.css?inline';
 
@@ -25,7 +25,7 @@ export class NotificationGroup extends LitElement {
   /**
    * Sets the position of the popover relative to the anchor element.
    */
-  @property({ type: String, reflect: true }) position;
+  @property({ type: String, reflect: true }) position: PopoverPosition;
 
   /**
    * Sets the alignment of the popover relative to the anchor element.

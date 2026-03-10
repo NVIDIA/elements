@@ -6,14 +6,14 @@ import { getHostAnchor } from './type-native-popover.utils.js';
 export interface NativePopoverTrigger extends ReactiveElement {
   disabled: boolean;
   popoverTargetAction: 'show' | 'hide' | 'toggle';
-  popoverTargetElement: HTMLElement;
+  popoverTargetElement: HTMLElement | null;
   popovertarget: string;
   anchor?: HTMLElement;
 }
 
 export function typeNativePopoverTrigger<T extends NativePopoverTrigger>(): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new TypeNativePopoverTriggerController(instance));
+    target.addInitializer!((instance: T) => new TypeNativePopoverTriggerController(instance));
 }
 
 export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> implements ReactiveController {
@@ -35,7 +35,7 @@ export class TypeNativePopoverTriggerController<T extends NativePopoverTrigger> 
 
     // we can only do this on interaction as its too costly to do this on every getter or update of the popovertarget attribute, this diverges from the native behavior of the popovertarget attribute
     if (!popoverTargetElement && this.host.popovertarget) {
-      popoverTargetElement = getFlattenedDOMTree(this.host.getRootNode()).find(e => e.id === this.host.popovertarget);
+      popoverTargetElement = getFlattenedDOMTree(this.host.getRootNode()).find(e => e.id === this.host.popovertarget)!;
       this.host.popoverTargetElement = popoverTargetElement ?? null;
     }
 

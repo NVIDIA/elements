@@ -45,7 +45,7 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
   static styles = useStyles([styles]);
 
   get #range() {
-    return this.shadowRoot.querySelector('input');
+    return this.shadowRoot!.querySelector('input')!;
   }
 
   static readonly metadata = {
@@ -69,7 +69,7 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
     return html`
       <div internal-host>
         <div class="line" part="_line"></div>
-        <input aria-label=${ifDefined(this.ariaLabel ?? this.i18n.resize)} type="range" min=${this.min} max=${this.max} .valueAsNumber=${this.valueAsNumber} @input=${e => this.#setInput(e.target.valueAsNumber)} @change=${e => this.#setChange(e.target.valueAsNumber)} step=${this.step} />
+        <input aria-label=${ifDefined(this.ariaLabel ?? this.i18n.resize)} type="range" min=${this.min} max=${this.max} .valueAsNumber=${this.valueAsNumber} @input=${(e: Event) => this.#setInput((e.target as HTMLInputElement).valueAsNumber)} @change=${(e: Event) => this.#setChange((e.target as HTMLInputElement).valueAsNumber)} step=${this.step} />
       </div>
     `;
   }
@@ -89,7 +89,7 @@ export class ResizeHandle extends FormControlMixin<typeof LitElement, number>(Li
     super.firstUpdated(props);
     this.addEventListener('nve-touch-start', () => this.#touchStart());
     this.addEventListener('nve-touch-end', () => this.#touchEnd());
-    this.addEventListener('nve-touch-move', (e: NveTouchEvent) => this.#touchMove(e));
+    this.addEventListener('nve-touch-move', ((e: NveTouchEvent) => this.#touchMove(e)) as EventListener);
     this.addEventListener('dblclick', () => {
       if (!this.dispatchEvent(new CustomEvent('toggle', { cancelable: true, bubbles: true, composed: true }))) {
         return;

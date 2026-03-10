@@ -19,5 +19,5 @@ export function updateNodeSelection(node: SelectableNode) {
     }
   }
 
-  nodes.forEach((n: SelectableNode) => updateNodeSelection(n));
+  nodes.forEach(n => updateNodeSelection(n as SelectableNode));
 }

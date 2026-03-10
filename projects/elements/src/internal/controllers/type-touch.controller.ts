@@ -23,7 +23,7 @@ export class NveTouchEvent extends Event {
  * @event nve-touch-end
  */
 export function typeTouch<T extends ReactiveElement>(): ClassDecorator {
-  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new TypeTouchController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer!((instance: T) => new TypeTouchController(instance));
 }
 
 export class TypeTouchController<T extends ReactiveElement> implements ReactiveController {
@@ -69,7 +69,7 @@ export class TypeTouchController<T extends ReactiveElement> implements ReactiveC
       globalThis.document.removeEventListener('pointermove', this.#move, false);
       this.host.dispatchEvent(new NveTouchEvent('nve-touch-end', this.#getCoordinatesFromPointerEvent(e)));
       this.host.releasePointerCapture(this.#pointerId);
-      this.#pointerId = null;
+      this.#pointerId = null as unknown as number;
     }
   };
 

@@ -23,11 +23,11 @@ export function onChildListMutation(
   return observer;
 }
 
-export function throttle(func, limit, ...args) {
+export function throttle(func: (...args: unknown[]) => void, limit: number, ...args: unknown[]) {
   let wait = true;
   return () => {
     if (wait) {
-      func.apply(this, ...args);
+      func(...args);
       wait = false;
       /* istanbul ignore next */
       setTimeout(() => (wait = true), limit);
@@ -35,13 +35,13 @@ export function throttle(func, limit, ...args) {
   };
 }
 
-export function debounce(func, timeout = 0) {
-  let timer;
-  return (...args) => {
+export function debounce(func: (...args: unknown[]) => void, timeout = 0) {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  return (...args: unknown[]) => {
     clearTimeout(timer);
     /* istanbul ignore next */
     timer = setTimeout(() => {
-      func.apply(this, args);
+      func(...args);
     }, timeout);
   };
 }

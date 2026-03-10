@@ -71,13 +71,13 @@ export class ProgressRing extends LitElement {
         <svg viewBox="0 0 16 16" role="presentation">
           <circle cx="8px" cy="8px" r="6.5px" class="background"></circle>
           <circle cx="8px" cy="8px" r="6.5px" class="ring"
-            stroke-dasharray=${(this.value / this.max) * 44 + 'px' + ' ' + '44px'}>
+            stroke-dasharray=${((this.value ?? 0) / (this.max ?? 100)) * 44 + 'px' + ' ' + '44px'}>
           </circle>
         </svg>
         <slot>
           ${
             this.status !== 'accent' && !this.#hasStatusIconContent
-              ? html`<nve-icon part="icon" .name=${statusIcons[this.status]} .status=${this.status as SupportStatus} aria-hidden="true"></nve-icon>`
+              ? html`<nve-icon part="icon" .name=${this.status ? statusIcons[this.status] : undefined} .status=${this.status as SupportStatus} aria-hidden="true"></nve-icon>`
               : ''
           }
         </slot>
@@ -96,8 +96,11 @@ export class ProgressRing extends LitElement {
     super.updated(props);
     this._internals.ariaValueNow = `${this.value === undefined ? '' : this.value}`;
     this._internals.ariaValueMax = `${this.max}`;
+    const i18nRecord = this.i18n as Record<string, string | undefined>;
     this._internals.ariaLabel =
-      this.i18n[this.status] && this.i18n[this.status] !== 'neutral' ? this.i18n[this.status] : this.i18n.information;
+      (this.status && i18nRecord[this.status] && i18nRecord[this.status] !== 'neutral'
+        ? i18nRecord[this.status]!
+        : this.i18n.information) ?? null;
   }
 
   #updateStatusIcon() {

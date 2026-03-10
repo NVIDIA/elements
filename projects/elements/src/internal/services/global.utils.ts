@@ -1,5 +1,10 @@
 import { getEsmHostedWarning } from '../utils/audit-logs.js';
 
+declare global {
+  // eslint-disable-next-line no-var
+  var process: { env?: { NODE_ENV?: string } } | undefined;
+}
+
 /* istanbul ignore next -- @preserve */
 export function getEnv(): 'development' | 'production' {
   if (

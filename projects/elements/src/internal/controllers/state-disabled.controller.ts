@@ -9,7 +9,7 @@ import { attachInternals } from '../utils/a11y.js';
  */
 export function stateDisabled<T extends Disabled>(): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new StateDisabledController(instance));
+    target.addInitializer!((instance: T) => new StateDisabledController(instance));
 }
 
 export type Disabled = ReactiveElement & { disabled: boolean; readonly?: boolean; _internals?: ElementInternals };
@@ -25,19 +25,19 @@ export class StateDisabledController<T extends Disabled> implements ReactiveCont
 
   hostUpdated() {
     if (this.host.disabled !== null && this.host.disabled !== undefined) {
-      this.host._internals.ariaDisabled = `${this.host.disabled}`;
+      this.host._internals!.ariaDisabled = `${this.host.disabled}`;
     } else {
-      this.host._internals.ariaDisabled = null;
+      this.host._internals!.ariaDisabled = null;
     }
 
     if (this.host.disabled) {
-      this.host._internals.states.add('disabled');
+      this.host._internals!.states.add('disabled');
     } else {
-      this.host._internals.states.delete('disabled');
+      this.host._internals!.states.delete('disabled');
     }
 
     if (this.host.readonly) {
-      this.host._internals.ariaDisabled = null;
+      this.host._internals!.ariaDisabled = null;
     }
   }
 }
