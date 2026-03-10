@@ -86,10 +86,7 @@
   },
   "wireit": {
     "dev": {
-      "command": "vite",
-      "dependencies": [
-        "build"
-      ]
+      "command": "vite"
     },
     "ci": {
       "dependencies": [
