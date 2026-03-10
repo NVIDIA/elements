@@ -245,8 +245,8 @@
         "../../labs/brand/coverage/visual/summary.json",
         "../../cli/coverage/unit/coverage-summary.json",
         "../../cli/coverage/unit/summary.json",
-        "../../labs/lint/coverage/unit/coverage-summary.json",
-        "../../labs/lint/coverage/unit/summary.json",
+        "../../lint/coverage/unit/coverage-summary.json",
+        "../../lint/coverage/unit/summary.json",
         "../../labs/code/coverage/unit/coverage-summary.json",
         "../../labs/code/coverage/unit/summary.json",
         "../../labs/code/coverage/visual/summary.json",
@@ -261,6 +261,8 @@
         "../../labs/markdown/coverage/ssr/summary.json",
         "../../labs/playwright-screencast/coverage/unit/coverage-summary.json",
         "../../labs/playwright-screencast/coverage/unit/summary.json",
+        "../../lint/coverage/unit/coverage-summary.json",
+        "../../lint/coverage/unit/summary.json",
         "../../monaco/coverage/unit/coverage-summary.json",
         "../../monaco/coverage/unit/summary.json",
         "../../monaco/coverage/visual/summary.json",
@@ -337,7 +339,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/lint:test:coverage",
+          "script": "../../lint:test:coverage",
           "cascade": false
         },
         {
@@ -497,7 +499,7 @@
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
         "../eslint:ci",
-        "../../labs/lint:build"
+        "../../lint:build"
       ]
     },
     "test": {

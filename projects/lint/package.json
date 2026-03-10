@@ -110,11 +110,11 @@
         "dist/**"
       ],
       "dependencies": [
-        "../../internals/vite:ci",
-        "../../styles:build",
-        "../../themes:build",
+        "../internals/vite:ci",
+        "../styles:build",
+        "../themes:build",
         {
-          "script": "../../internals/metadata:build",
+          "script": "../internals/metadata:build",
           "cascade": false
         }
       ]
@@ -137,7 +137,7 @@
       "output": [],
       "dependencies": [
         "build",
-        "../../testing:build"
+        "../testing:build"
       ]
     },
     "test:coverage": {
@@ -153,7 +153,7 @@
       ],
       "dependencies": [
         "build",
-        "../../testing:build"
+        "../testing:build"
       ]
     },
     "test:watch": {
@@ -168,14 +168,14 @@
       ],
       "output": [],
       "dependencies": [
-        "../../internals/eslint:ci",
-        "../../styles:build"
+        "../internals/eslint:ci",
+        "../styles:build"
       ]
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
-        "../../internals/eslint:ci"
+        "../internals/eslint:ci"
       ]
     }
   }

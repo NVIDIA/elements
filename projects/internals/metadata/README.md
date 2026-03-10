@@ -59,7 +59,7 @@ Provides full-text search capabilities:
 - **`projects/site`** - Documentation site uses ApiService, TestsService, UsageService, DownloadsService, ReleasesService to display metrics pages, API reference, and usage analytics
 - **`projects/cli`** - CLI uses metadata services to power interactive commands and MCP tools
 - **`projects/internals/tools`** - Tools package wraps metadata services with higher-level utilities for playground creation, validation, and project management
-- **`projects/labs/lint`** - ESLint rules use ApiService for metadata-driven validations
+- **`projects/lint`** - ESLint rules use ApiService for metadata-driven validations
 
 ## Data Flow
 
