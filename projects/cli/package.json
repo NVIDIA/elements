@@ -76,7 +76,7 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
-        "../../internals/tools/dist/**/*.js",
+        "../internals/tools/dist/**/*.js",
         "src/**",
         "!src/**/*.test.ts",
         "package.json",
@@ -88,10 +88,10 @@
         "dist/**"
       ],
       "dependencies": [
-        "../../internals/vite:ci",
-        "../lint:build",
+        "../internals/vite:ci",
+        "../labs/lint:build",
         {
-          "script": "../../internals/tools:build",
+          "script": "../internals/tools:build",
           "cascade": false
         }
       ]
@@ -117,14 +117,14 @@
       ],
       "output": [],
       "dependencies": [
-        "../../internals/eslint:ci"
+        "../internals/eslint:ci"
       ]
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
-        "../../internals/eslint:ci",
-        "../../labs/lint:build"
+        "../internals/eslint:ci",
+        "../labs/lint:build"
       ]
     },
     "test": {
@@ -137,8 +137,8 @@
       ],
       "output": [],
       "dependencies": [
-        "../../testing:build",
-        "../../internals/vite:ci",
+        "../testing:build",
+        "../internals/vite:ci",
         {
           "script": "build",
           "cascade": false
@@ -161,8 +161,8 @@
         "coverage/unit/**"
       ],
       "dependencies": [
-        "../../testing:build",
-        "../../internals/vite:ci",
+        "../testing:build",
+        "../internals/vite:ci",
         {
           "script": "build",
           "cascade": false

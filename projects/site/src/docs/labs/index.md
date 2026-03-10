@@ -34,7 +34,7 @@ main @nve package scope. The team may deprecate or remove labs projects at any t
     <nve-grid-cell>Available / In Development</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/cli" target="_blank"><code nve-text="code">@nvidia-elements/cli</code></a></nve-grid-cell>
+    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/cli" target="_blank"><code nve-text="code">@nvidia-elements/cli</code></a></nve-grid-cell>
     <nve-grid-cell>CLI tooling for Elements based projects.</nve-grid-cell>
     <nve-grid-cell>In Development</nve-grid-cell>
   </nve-grid-row>
