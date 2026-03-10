@@ -73,7 +73,6 @@
         "./projects/labs/markdown:ci",
         "./projects/labs/media:ci",
         "./projects/labs/playwright-screencast:ci",
-        "./projects/labs/snippets:ci",
         "./projects/monaco:ci",
         "./projects/pages:ci",
         "./projects/site:ci",
@@ -286,7 +285,6 @@
         "./projects/labs/markdown:lint:fix",
         "./projects/labs/media:lint:fix",
         "./projects/labs/playwright-screencast:lint:fix",
-        "./projects/labs/snippets:lint:fix",
         "./projects/monaco:lint:fix",
         "./projects/site:lint:fix",
         "./projects/testing:lint:fix"

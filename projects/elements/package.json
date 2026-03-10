@@ -28,8 +28,6 @@
     "dev": "wireit",
     "build": "wireit",
     "build:icons": "wireit",
-    "build:snippets": "wireit",
-    "build:snippets:watch": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
     "test:axe": "wireit",
@@ -947,7 +945,6 @@
     "@internals/vite": "workspace:*",
     "@lit-labs/virtualizer": "catalog:",
     "@nvidia-elements/lint": "workspace:*",
-    "@nvidia-elements/snippets": "workspace:*",
     "@nvidia-elements/styles": "workspace:^",
     "@typescript/lib-dom": "npm:@types/web@0.0.312",
     "@vitest/browser": "catalog:",
@@ -991,7 +988,6 @@
       "service": true,
       "dependencies": [
         "build:icons",
-        "build:snippets",
         "../themes:build",
         "../styles:build",
         "../internals/vite:ci"
@@ -1011,7 +1007,6 @@
         "!src/**/*.test.visual.ts",
         "!src/**/*.test.axe.ts",
         "!src/**/*.test.ssr.ts",
-        "!src/**/*.snippets.html",
         "!src/icon/{server,icons}.ts",
         "!src/**/__screenshots__/**",
         "package.json",
@@ -1024,12 +1019,10 @@
       "output": [
         "dist/**",
         "!dist/inter.css",
-        "!dist/inter.woff",
-        "!dist/data.snippets.json"
+        "!dist/inter.woff"
       ],
       "dependencies": [
         "build:icons",
-        "build:snippets",
         "../internals/vite:ci",
         {
           "script": "../styles:build",
@@ -1057,24 +1050,6 @@
       "output": [
         "src/icon/icons.ts",
         "src/icon/server.ts"
-      ]
-    },
-    "build:snippets": {
-      "command": "@nve-snippets",
-      "files": [
-        "src/**/*.snippets.html"
-      ],
-      "output": [
-        "dist/data.snippets.json"
-      ],
-      "dependencies": [
-        "../labs/snippets:build"
-      ]
-    },
-    "build:snippets:watch": {
-      "command": "@nve-snippets --watch",
-      "dependencies": [
-        "../labs/snippets:build"
       ]
     },
     "test": {
