@@ -57,7 +57,7 @@ export async function generateLighthouseReport(): Promise<LighthouseScores> {
     '@nvidia-elements/styles': await loadLighthouseReport('../../../../styles'),
     '@nvidia-elements/testing': await loadLighthouseReport('../../../../testing'),
     '@nvidia-elements/themes': await loadLighthouseReport('../../../../themes'),
-    '@nvidia-elements/code': await loadLighthouseReport('../../../../labs/code'),
+    '@nvidia-elements/code': await loadLighthouseReport('../../../../code'),
     '@nvidia-elements/behaviors-alpine': await loadLighthouseReport('../../../../labs/behaviors-alpine'),
     '@nvidia-elements/brand': await loadLighthouseReport('../../../../labs/brand'),
     '@nvidia-elements/forms': await loadLighthouseReport('../../../../forms'),
