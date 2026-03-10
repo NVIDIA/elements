@@ -44,7 +44,7 @@ main @nve package scope. The team may deprecate or remove labs projects at any t
     <nve-grid-cell>Available / In Development</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
-    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/lint" target="_blank"><code nve-text="code">@nvidia-elements/lint</code></a></nve-grid-cell>
+    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/lint" target="_blank"><code nve-text="code">@nvidia-elements/lint</code></a></nve-grid-cell>
     <nve-grid-cell>Utility library for Elements specific lint rules.</nve-grid-cell>
     <nve-grid-cell>In Development</nve-grid-cell>
   </nve-grid-row>

@@ -23,10 +23,10 @@ packages:
   - projects/labs/brand
   - projects/cli
   - projects/labs/code
-  - projects/labs/lint
   - projects/labs/markdown
   - projects/labs/media
   - projects/labs/playwright-screencast
+  - projects/lint
   - projects/snippets
   - projects/monaco
   - projects/pages
