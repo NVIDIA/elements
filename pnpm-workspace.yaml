@@ -21,7 +21,7 @@ packages:
   - projects/site
   - projects/labs/behaviors-alpine
   - projects/labs/brand
-  - projects/labs/cli
+  - projects/cli
   - projects/labs/code
   - projects/labs/lint
   - projects/labs/markdown

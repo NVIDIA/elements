@@ -57,7 +57,7 @@ Provides full-text search capabilities:
 **Consumers of this package:**
 
 - **`projects/site`** - Documentation site uses ApiService, TestsService, UsageService, DownloadsService, ReleasesService to display metrics pages, API reference, and usage analytics
-- **`projects/labs/cli`** - CLI uses metadata services to power interactive commands and MCP tools
+- **`projects/cli`** - CLI uses metadata services to power interactive commands and MCP tools
 - **`projects/internals/tools`** - Tools package wraps metadata services with higher-level utilities for playground creation, validation, and project management
 - **`projects/labs/lint`** - ESLint rules use ApiService for metadata-driven validations
 
