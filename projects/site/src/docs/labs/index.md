@@ -58,9 +58,4 @@ main @nve package scope. The team may deprecate or remove labs projects at any t
     <nve-grid-cell>A package containing utilities for recording screencasts using Playwright.</nve-grid-cell>
     <nve-grid-cell>In Development</nve-grid-cell>
   </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell><a href="https://github.com/NVIDIA/elements/-/tree/main/projects/labs/snippets" target="_blank"><code nve-text="code">@nvidia-elements/snippets</code></a></nve-grid-cell>
-    <nve-grid-cell>A CLI tool for generating IntelliSense snippets.</nve-grid-cell>
-    <nve-grid-cell>In Development</nve-grid-cell>
-  </nve-grid-row>
 </nve-grid>

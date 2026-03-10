@@ -37,7 +37,6 @@ export default {
         'labs-markdown',
         'labs-media',
         'labs-playwright-screencast',
-        'labs-snippets',
         'monaco'
       ]
     ]

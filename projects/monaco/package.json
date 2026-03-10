@@ -148,7 +148,6 @@
     "build": "wireit",
     "build:watch": "wireit",
     "build:prebundle": "wireit",
-    "build:snippets": "wireit",
     "build:themes": "wireit",
     "lint": "wireit",
     "test": "wireit",
@@ -171,7 +170,6 @@
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
-    "@nvidia-elements/snippets": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@internals/testing": "workspace:*",
@@ -249,7 +247,6 @@
       ],
       "dependencies": [
         "build:prebundle",
-        "build:snippets",
         "build:themes",
         "../internals/vite:ci",
         {
@@ -282,18 +279,6 @@
       ],
       "output": [
         "src/vendor/monaco-editor/**"
-      ]
-    },
-    "build:snippets": {
-      "command": "@nve-snippets",
-      "files": [
-        "**/*.snippets.html"
-      ],
-      "output": [
-        "dist/data.snippets.json"
-      ],
-      "dependencies": [
-        "../labs/snippets:build"
       ]
     },
     "build:themes": {

@@ -61,7 +61,6 @@
     "dev": "wireit",
     "build": "wireit",
     "build:watch": "wireit",
-    "build:snippets": "wireit",
     "lint": "wireit",
     "test": "wireit",
     "test:axe": "wireit",
@@ -84,7 +83,6 @@
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
-    "@nvidia-elements/snippets": "workspace:*",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
@@ -137,11 +135,9 @@
         "vite.config.ts"
       ],
       "output": [
-        "dist/**",
-        "!dist/data.snippets.json"
+        "dist/**"
       ],
       "dependencies": [
-        "build:snippets",
         "../../internals/vite:ci",
         {
           "script": "../../elements:build",
@@ -154,18 +150,6 @@
       "service": true,
       "dependencies": [
         "build"
-      ]
-    },
-    "build:snippets": {
-      "command": "@nve-snippets",
-      "files": [
-        "**/*.snippets.html"
-      ],
-      "output": [
-        "dist/data.snippets.json"
-      ],
-      "dependencies": [
-        "../snippets:build"
       ]
     },
     "test": {
