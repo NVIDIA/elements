@@ -68,7 +68,7 @@ export class Toolbar extends LitElement implements ContainerElement {
   #observers: (MutationObserver | ResizeObserver)[] = [];
 
   get #scrollbox() {
-    return this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
+    return this.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])');
   }
 
   @queryAssignedElements({ slot: 'prefix' }) private prefixElements!: HTMLElement[];
@@ -128,7 +128,7 @@ export class Toolbar extends LitElement implements ContainerElement {
   }
 
   #setScrollbarState() {
-    if (hasHorizontalScrollBar(this.#scrollbox)) {
+    if (hasHorizontalScrollBar(this.#scrollbox as HTMLElement)) {
       this._internals.states.add('scrollbar');
     } else {
       this._internals.states.delete('scrollbar');
@@ -153,6 +153,6 @@ export class Toolbar extends LitElement implements ContainerElement {
       .forEach(divider => (divider.orientation = this.orientation === 'horizontal' ? 'vertical' : 'horizontal'));
     slottedElements
       .filter(e => e.matches('nve-button-group, nve-button-group'))
-      .forEach(group => (group.orientation = this.orientation));
+      .forEach(group => (group.orientation = this.orientation!));
   }
 }

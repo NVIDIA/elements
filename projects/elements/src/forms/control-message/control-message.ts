@@ -36,7 +36,7 @@ export class ControlMessage extends LitElement {
    * Validation error code for current form control
    * https://developer.mozilla.org/en-US/docs/Web/API/ValidityState
    */
-  @property({ type: String, reflect: true }) error: ValidityStateError = null;
+  @property({ type: String, reflect: true }) error: ValidityStateError | null = null;
 
   static styles = useStyles([styles]);
 
@@ -54,7 +54,7 @@ export class ControlMessage extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot name="icon"><nve-icon part="icon" name=${this.error ? statusIcons.error : statusIcons[this.status]}></nve-icon></slot>
+        <slot name="icon"><nve-icon part="icon" name=${this.error ? statusIcons.error : statusIcons[this.status!]}></nve-icon></slot>
         <slot></slot>
       </div>
     `;

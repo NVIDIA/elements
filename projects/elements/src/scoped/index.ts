@@ -1,7 +1,7 @@
 import { ScopedRegistryHost } from '@lit-labs/scoped-registry-mixin';
 import type { LitElement } from 'lit';
 
-type LitElementConstructor = new (...args) => LitElement;
+type LitElementConstructor = new (...args: any[]) => LitElement; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 /**
  * Utility for applying mixin recursively to all Elements, used for scoped element registry polyfills and shims

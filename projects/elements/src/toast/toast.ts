@@ -123,7 +123,7 @@ export class Toast extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot name="prefix">${this.status !== 'muted' ? html`<nve-icon part="prefix-icon" .name=${statusIcons[this.status] as IconName} .ariaLabel=${this.i18n[this.status] ?? this.i18n.information}></nve-icon>` : nothing}</slot>
+        <slot name="prefix">${this.status !== 'muted' ? html`<nve-icon part="prefix-icon" .name=${statusIcons[this.status] as IconName} .ariaLabel=${(this.i18n as Record<string, string>)[this.status] ?? this.i18n.information}></nve-icon>` : nothing}</slot>
         ${this.closable ? html`<nve-icon-button part="icon-button" exportparts="icon:icon-button-icon" @click=${this.hidePopover} icon-name="cancel" container="flat" .ariaLabel=${this.i18n.close}></nve-icon-button>` : nothing}
         <slot></slot>
       </div>

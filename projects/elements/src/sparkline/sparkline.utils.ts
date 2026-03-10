@@ -112,7 +112,7 @@ export function toInterpolation(interpolation: unknown): Interpolation {
 export function toLinePath(points: Point[], interpolation: Interpolation, viewWidth: number): string {
   if (points.length === 0) return '';
   if (points.length === 1) {
-    const y = points[0].y.toFixed(PRECISION);
+    const y = points[0]!.y.toFixed(PRECISION);
     return `M 0 ${y} L ${viewWidth.toFixed(PRECISION)} ${y}`;
   }
 
@@ -150,8 +150,8 @@ export function toAreaPath(points: Point[], interpolation: Interpolation, viewHe
     }
   }
 
-  const last = points[points.length - 1];
-  const first = points[0];
+  const last = points[points.length - 1]!;
+  const first = points[0]!;
   openPath += ` L ${last.x.toFixed(PRECISION)} ${viewHeight.toFixed(PRECISION)}`;
   openPath += ` L ${first.x.toFixed(PRECISION)} ${viewHeight.toFixed(PRECISION)} Z`;
   return openPath;
@@ -212,7 +212,7 @@ function toSmoothOpenPath(points: Point[]): string {
     if (index === 0) {
       return `M ${point.x.toFixed(PRECISION)} ${point.y.toFixed(PRECISION)}`;
     }
-    const previous = points[index - 1];
+    const previous = points[index - 1]!;
     const deltaX = (point.x - previous.x) / 3;
     const p = PRECISION;
     return `C ${(previous.x + deltaX).toFixed(p)} ${previous.y.toFixed(p)} ${(point.x - deltaX).toFixed(p)} ${point.y.toFixed(p)} ${point.x.toFixed(p)} ${point.y.toFixed(p)}`;
@@ -221,9 +221,9 @@ function toSmoothOpenPath(points: Point[]): string {
 }
 
 function toStepOpenPath(points: Point[]): string {
-  let path = `M ${points[0].x.toFixed(PRECISION)} ${points[0].y.toFixed(PRECISION)}`;
+  let path = `M ${points[0]!.x.toFixed(PRECISION)} ${points[0]!.y.toFixed(PRECISION)}`;
   for (let index = 1; index < points.length; index++) {
-    const point = points[index];
+    const point = points[index]!;
     path += ` H ${point.x.toFixed(PRECISION)} V ${point.y.toFixed(PRECISION)}`;
   }
   return path;

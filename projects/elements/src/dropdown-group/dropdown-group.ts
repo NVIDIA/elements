@@ -45,15 +45,15 @@ export class DropdownGroup extends LitElement {
     `;
   }
 
-  #_pointerup = e => this.#pointerup(e);
+  #_pointerup = (e: PointerEvent) => this.#pointerup(e);
 
   connectedCallback() {
     super.connectedCallback();
     appendRootNodeStyle(this, globalStyles);
     globalThis.document?.addEventListener('pointerup', this.#_pointerup);
     this.addEventListener('keydown', this.#keydown);
-    this.addEventListener('open', this.#onOpen);
-    this.addEventListener('close', this.#onClose);
+    this.addEventListener('open', this.#onOpen as EventListener);
+    this.addEventListener('close', this.#onClose as EventListener);
   }
 
   disconnectedCallback() {

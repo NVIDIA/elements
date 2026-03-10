@@ -8,7 +8,7 @@ import { onKeys } from '../utils/keynav.js';
  * https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event
  */
 export function typeSubmit<T extends Submit>(): ClassDecorator {
-  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new TypeSubmitController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer!((instance: T) => new TypeSubmitController(instance));
 }
 
 export type Submit = ReactiveElement &
@@ -76,15 +76,15 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
 
   #requestSubmit() {
     this.#createSubmitter();
-    this.host.form.addEventListener(
+    this.host.form!.addEventListener(
       'submit',
       () => {
         setTimeout(() => this.#submitter.remove(), 0);
       },
       { once: true }
     );
-    this.host.form.appendChild(this.#submitter);
-    this.host.form.requestSubmit(this.#submitter);
+    this.host.form!.appendChild(this.#submitter);
+    this.host.form!.requestSubmit(this.#submitter);
   }
 
   #submitter: HTMLButtonElement;

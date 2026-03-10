@@ -97,17 +97,17 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   /** @private */
   get keynavListConfig(): KeynavListConfig {
     return {
-      items: this.shadowRoot.querySelectorAll<HTMLElement>(`${IconButton.metadata.tag}, input, select`),
+      items: this.shadowRoot!.querySelectorAll<HTMLElement>(`${IconButton.metadata.tag}, input, select`),
       layout: 'horizontal'
     };
   }
 
   get #currentPage() {
-    return (this.value - 1) * this.step + this.step;
+    return (this.value! - 1) * this.step + this.step;
   }
 
   get #isLastPage() {
-    return this.items / this.value === this.step;
+    return this.items / this.value! === this.step;
   }
 
   get #isFirstPage() {
@@ -115,8 +115,8 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   }
 
   get #selectLabel() {
-    return `${formatStandardNumber(Math.max(1, (this.value - 1) * this.step))}-${formatStandardNumber(
-      (this.value - 1) * this.step + this.step
+    return `${formatStandardNumber(Math.max(1, (this.value! - 1) * this.step))}-${formatStandardNumber(
+      (this.value! - 1) * this.step + this.step
     )}`;
   }
 
@@ -128,7 +128,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
 
   get #previousButton() {
     return html`<nve-icon-button part="icon-button previous-icon-button"
-      @click=${() => this.#setValue(this.value - 1)}
+      @click=${() => this.#setValue(this.value! - 1)}
       .disabled=${this.disabled || this.#currentPage <= this.step}
       .ariaLabel=${this.i18n.previous}
       container="inline"
@@ -139,7 +139,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
 
   get #nextButton() {
     return html`<nve-icon-button part="icon-button next-icon-button"
-      @click=${() => this.#setValue(this.value + 1)}
+      @click=${() => this.#setValue(this.value! + 1)}
       .disabled=${this.disabled || this.#currentPage >= this.items}
       .ariaLabel=${this.i18n.next}
       container="inline"
@@ -162,7 +162,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   get #endButton() {
     return html`<nve-icon-button part="icon-button end-icon-button"
       @click=${() => this.#setValue(this.items / this.step)}
-      .disabled=${this.disabled || (this.value - 1) * this.step + this.step >= this.items}
+      .disabled=${this.disabled || (this.value! - 1) * this.step + this.step >= this.items}
       .ariaLabel=${this.i18n.end}
       container="inline"
       icon-name="arrow-stop"
@@ -179,7 +179,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
           <nve-select part="select" .container=${this.container}>
             <select
               .ariaLabel=${this.i18n.currentPage}
-              @change=${e => this.#setStep(parseInt(e.target.value, 10))}
+              @change=${(e: Event) => this.#setStep(parseInt((e.target as HTMLSelectElement).value, 10))}
               value=${this.step}
               .disabled=${this.disabled || this.disableStep}
             >
@@ -224,11 +224,11 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   }
 
   #setupLabelWidth() {
-    const label = this.shadowRoot.querySelector('.select-label');
-    const select = this.shadowRoot.querySelector('select');
+    const label = this.shadowRoot!.querySelector('.select-label');
+    const select = this.shadowRoot!.querySelector('select');
     if (label && select) {
       this.#resizeObserver = new ResizeObserver(
-        entries => (select.style.minWidth = `${entries[0].contentRect.width + 36}px`)
+        entries => (select!.style.minWidth = `${entries[0]!.contentRect.width + 36}px`)
       );
       this.#resizeObserver.observe(label);
     }
@@ -238,7 +238,7 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
     /* eslint-disable-next-line */
     this.step = value; // stateful due to internalized select element
     this.dispatchEvent(new CustomEvent('step-change', { detail: this.step, bubbles: true, composed: true }));
-    this.#setValue(this.value);
+    this.#setValue(this.value!);
   }
 
   #setValue(value: number) {

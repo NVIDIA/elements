@@ -89,8 +89,10 @@ export class I18nService_ {
     }
   }
 
-  update(i18nRegistry: Partial<typeof globalThis.window.NVE_ELEMENTS.state.i18nRegistry>) {
-    GlobalStateService.dispatch('NVE_ELEMENTS_I18N_UPDATE', { i18nRegistry });
+  update(i18nRegistry: Partial<typeof globalThis.NVE_ELEMENTS.state.i18nRegistry>) {
+    GlobalStateService.dispatch('NVE_ELEMENTS_I18N_UPDATE', { i18nRegistry } as Partial<
+      typeof globalThis.NVE_ELEMENTS.state
+    >);
   }
 }
 

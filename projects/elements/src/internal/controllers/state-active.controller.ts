@@ -7,7 +7,8 @@ import { attachInternals } from '../utils/a11y.js';
  * https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/states
  */
 export function stateActive<T extends Active>(): ClassDecorator {
-  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new StateActiveController(instance));
+  return (target: LegacyDecoratorTarget) =>
+    target.addInitializer!((instance: T) => new StateActiveController(instance));
 }
 
 type Active = ReactiveElement & { disabled: boolean; _internals?: ElementInternals };
@@ -20,16 +21,16 @@ export class StateActiveController<T extends Active> implements ReactiveControll
 
   hostConnected() {
     attachInternals(this.host);
-    this.host.addEventListener('keypress', this.#emulateActive);
-    this.host.addEventListener('mousedown', this.#emulateActive);
+    this.host.addEventListener('keypress', this.#emulateActive as EventListener);
+    this.host.addEventListener('mousedown', this.#emulateActive as EventListener);
     this.host.addEventListener('keyup', this.#emulateInactive);
     this.host.addEventListener('blur', this.#emulateInactive);
     this.host.addEventListener('mouseup', this.#emulateInactive);
   }
 
   hostDisconnected() {
-    this.host.removeEventListener('keypress', this.#emulateActive);
-    this.host.removeEventListener('mousedown', this.#emulateActive);
+    this.host.removeEventListener('keypress', this.#emulateActive as EventListener);
+    this.host.removeEventListener('mousedown', this.#emulateActive as EventListener);
     this.host.removeEventListener('keyup', this.#emulateInactive);
     this.host.removeEventListener('blur', this.#emulateInactive);
     this.host.removeEventListener('mouseup', this.#emulateInactive);
@@ -37,7 +38,7 @@ export class StateActiveController<T extends Active> implements ReactiveControll
 
   #emulateActive = (e: KeyboardEvent | PointerEvent) => {
     if (!this.host.disabled && this.#isValidKeyEvent(e)) {
-      this.host._internals.states.add('active');
+      this.host._internals!.states.add('active');
     }
 
     if (e instanceof KeyboardEvent && e.code === 'Space' && e.target === this.host) {
@@ -46,7 +47,7 @@ export class StateActiveController<T extends Active> implements ReactiveControll
   };
 
   #emulateInactive = () => {
-    this.host._internals.states.delete('active');
+    this.host._internals!.states.delete('active');
   };
 
   #isValidKeyEvent(e: KeyboardEvent | PointerEvent) {

@@ -79,7 +79,7 @@ export class Alert extends LitElement {
   render() {
     return html`
       <div internal-host @slotchange=${() => this.requestUpdate()}>
-        <slot name="icon"><nve-icon part="icon" role="img" name=${statusIcons[this.status]} aria-label=${this.i18n[this.status] ?? this.i18n.information}></nve-icon></slot>
+        <slot name="icon"><nve-icon part="icon" role="img" .name=${statusIcons[this.status as string] ?? statusIcons['']} aria-label=${(this.status ? (this.i18n as Record<string, string>)[this.status] : undefined) ?? this.i18n.information ?? 'information'}></nve-icon></slot>
         <slot name="prefix" ?hidden=${!this.prefixItems.length}></slot>
         <slot></slot>
         <slot name="actions" ?hidden=${!this.actionItems.length}></slot>

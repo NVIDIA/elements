@@ -182,7 +182,7 @@ export class Accordion extends LitElement implements ContainerElement {
     return html`
       <div internal-host class=${this.#hasAction ? 'has-action' : ''}>
         <div id="header"
-          @click=${e => this.#toggle(e.target)}
+          @click=${(e: Event) => this.#toggle(e.target as HTMLElement)}
           .ariaLabel=${this.expanded ? this.i18n.close : this.i18n.expand}
           .ariaControls=${'content'}
           >
