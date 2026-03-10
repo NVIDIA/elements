@@ -258,7 +258,7 @@ importers:
         version: 1.27.1(zod@4.3.6)
       '@nvidia-elements/lint':
         specifier: workspace:^
-        version: link:../labs/lint
+        version: link:../lint
       adm-zip:
         specifier: 0.5.16
         version: 0.5.16
@@ -383,7 +383,7 @@ importers:
         version: 2.1.1
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../labs/lint
+        version: link:../lint
       '@nvidia-elements/styles':
         specifier: workspace:^
         version: link:../styles
@@ -521,7 +521,7 @@ importers:
         version: link:../internals/vite
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../labs/lint
+        version: link:../lint
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../styles
@@ -646,7 +646,7 @@ importers:
         version: link:../vite
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../../elements
@@ -702,7 +702,7 @@ importers:
     dependencies:
       '@nvidia-elements/lint':
         specifier: workspace:^
-        version: link:../../labs/lint
+        version: link:../../lint
       '@pnpm/catalogs.config':
         specifier: 0.1.0
         version: 0.1.0
@@ -935,7 +935,7 @@ importers:
         version: link:../../internals/vite
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../lint
+        version: link:../../lint
       '@nvidia-elements/themes':
         specifier: workspace:*
         version: link:../../themes
@@ -996,7 +996,7 @@ importers:
         version: link:../../internals/vite
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../lint
+        version: link:../../lint
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../../elements
@@ -1034,58 +1034,6 @@ importers:
         specifier: 'catalog:'
         version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
 
-  projects/labs/lint:
-    dependencies:
-      '@eslint/css':
-        specifier: 'catalog:'
-        version: 0.14.1
-      '@eslint/js':
-        specifier: 'catalog:'
-        version: 9.39.2
-      '@eslint/json':
-        specifier: 'catalog:'
-        version: 0.14.0
-      '@html-eslint/eslint-plugin':
-        specifier: 'catalog:'
-        version: 0.52.1(eslint@9.39.2(jiti@2.6.1))(jiti@2.6.1)
-      '@html-eslint/parser':
-        specifier: 'catalog:'
-        version: 0.52.0(jiti@2.6.1)
-      '@nvidia-elements/themes':
-        specifier: workspace:^
-        version: link:../../themes
-    devDependencies:
-      '@internals/eslint':
-        specifier: workspace:*
-        version: link:../../internals/eslint
-      '@internals/metadata':
-        specifier: workspace:*
-        version: link:../../internals/metadata
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../../internals/vite
-      '@types/node':
-        specifier: 'catalog:'
-        version: 24.9.1
-      '@vitest/coverage-istanbul':
-        specifier: 'catalog:'
-        version: 4.0.16(vitest@4.0.16)
-      eslint:
-        specifier: 'catalog:'
-        version: 9.39.2(jiti@2.6.1)
-      publint:
-        specifier: 'catalog:'
-        version: 0.3.15
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      vite:
-        specifier: 'catalog:'
-        version: 7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
-      vitest:
-        specifier: 'catalog:'
-        version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@24.9.1)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
-
   projects/labs/markdown:
     dependencies:
       '@nvidia-elements/core':
@@ -1115,7 +1063,7 @@ importers:
         version: link:../../internals/vite
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../lint
+        version: link:../../lint
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1176,7 +1124,7 @@ importers:
         version: link:../../internals/vite
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../lint
+        version: link:../../lint
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1244,6 +1192,58 @@ importers:
         specifier: 'catalog:'
         version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@24.9.1)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
 
+  projects/lint:
+    dependencies:
+      '@eslint/css':
+        specifier: 'catalog:'
+        version: 0.14.1
+      '@eslint/js':
+        specifier: 'catalog:'
+        version: 9.39.2
+      '@eslint/json':
+        specifier: 'catalog:'
+        version: 0.14.0
+      '@html-eslint/eslint-plugin':
+        specifier: 'catalog:'
+        version: 0.52.1(eslint@9.39.2(jiti@2.6.1))(jiti@2.6.1)
+      '@html-eslint/parser':
+        specifier: 'catalog:'
+        version: 0.52.0(jiti@2.6.1)
+      '@nvidia-elements/themes':
+        specifier: workspace:^
+        version: link:../themes
+    devDependencies:
+      '@internals/eslint':
+        specifier: workspace:*
+        version: link:../internals/eslint
+      '@internals/metadata':
+        specifier: workspace:*
+        version: link:../internals/metadata
+      '@internals/vite':
+        specifier: workspace:*
+        version: link:../internals/vite
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.9.1
+      '@vitest/coverage-istanbul':
+        specifier: 'catalog:'
+        version: 4.0.16(vitest@4.0.16)
+      eslint:
+        specifier: 'catalog:'
+        version: 9.39.2(jiti@2.6.1)
+      publint:
+        specifier: 'catalog:'
+        version: 0.3.15
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vite:
+        specifier: 'catalog:'
+        version: 7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@24.9.1)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
+
   projects/monaco:
     dependencies:
       '@nvidia-elements/forms':
@@ -1267,7 +1267,7 @@ importers:
         version: link:../internals/vite
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../labs/lint
+        version: link:../lint
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../elements
@@ -1385,7 +1385,7 @@ importers:
         version: link:../forms
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../labs/lint
+        version: link:../lint
       '@nvidia-elements/markdown':
         specifier: workspace:*
         version: link:../labs/markdown
@@ -1503,7 +1503,7 @@ importers:
         version: 21.0.8(@angular/compiler@21.0.8)(typescript@5.9.3)
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       eslint:
         specifier: 'catalog:'
         version: 9.39.2(jiti@2.6.1)
@@ -1565,7 +1565,7 @@ importers:
         version: 1.1.8
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       eslint:
         specifier: 'catalog:'
         version: 9.39.2(jiti@2.6.1)
@@ -1679,7 +1679,7 @@ importers:
         version: link:../../internals/vite
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../../elements
@@ -1734,7 +1734,7 @@ importers:
     devDependencies:
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       eslint:
         specifier: 'catalog:'
         version: 9.39.2(jiti@2.6.1)
@@ -1771,7 +1771,7 @@ importers:
     devDependencies:
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.2
@@ -1811,7 +1811,7 @@ importers:
     devDependencies:
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       eslint:
         specifier: 'catalog:'
         version: 9.39.2(jiti@2.6.1)
@@ -1842,7 +1842,7 @@ importers:
     devDependencies:
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       '@types/react':
         specifier: 'catalog:'
         version: 19.2.2
@@ -1959,7 +1959,7 @@ importers:
     devDependencies:
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       eslint:
         specifier: 'catalog:'
         version: 9.39.2(jiti@2.6.1)
@@ -1990,7 +1990,7 @@ importers:
     devDependencies:
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       '@sveltejs/vite-plugin-svelte':
         specifier: 6.2.1
         version: 6.2.1(svelte@5.41.1)(vite@7.3.0(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2))
@@ -2027,7 +2027,7 @@ importers:
     devDependencies:
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       eslint:
         specifier: 'catalog:'
         version: 9.39.2(jiti@2.6.1)
@@ -2055,7 +2055,7 @@ importers:
     devDependencies:
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../../labs/lint
+        version: link:../../lint
       '@tsconfig/node20':
         specifier: 20.1.6
         version: 20.1.6
@@ -2094,7 +2094,7 @@ importers:
         version: link:../internals/vite
       '@nvidia-elements/lint':
         specifier: workspace:*
-        version: link:../labs/lint
+        version: link:../lint
       '@nvidia-elements/themes':
         specifier: workspace:*
         version: link:../themes
@@ -14975,7 +14975,7 @@ snapshots:
   '@commitlint/config-validator@19.8.1':
     dependencies:
       '@commitlint/types': 19.8.1
-      ajv: 8.17.1
+      ajv: 8.18.0
 
   '@commitlint/ensure@19.8.1':
     dependencies:
@@ -15485,7 +15485,7 @@ snapshots:
     dependencies:
       '@eslint/object-schema': 2.1.7
       debug: 4.4.3
-      minimatch: 3.1.2
+      minimatch: 3.1.4
     transitivePeerDependencies:
       - supports-color
 
@@ -15517,7 +15517,7 @@ snapshots:
       ignore: 5.3.2
       import-fresh: 3.3.1
       js-yaml: 4.1.1
-      minimatch: 3.1.2
+      minimatch: 3.1.4
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
@@ -16264,8 +16264,8 @@ snapshots:
   '@modelcontextprotocol/sdk@1.25.2(hono@4.11.9)(zod@4.1.13)':
     dependencies:
       '@hono/node-server': 1.19.8(hono@4.11.9)
-      ajv: 8.17.1
-      ajv-formats: 3.0.1(ajv@8.17.1)
+      ajv: 8.18.0
+      ajv-formats: 3.0.1(ajv@8.18.0)
       content-type: 1.0.5
       cors: 2.8.5
       cross-spawn: 7.0.6
@@ -18402,7 +18402,7 @@ snapshots:
   '@tufjs/models@4.1.0':
     dependencies:
       '@tufjs/canonical-json': 2.0.0
-      minimatch: 10.1.1
+      minimatch: 10.2.3
 
   '@tweenjs/tween.js@25.0.0': {}
 
@@ -19993,7 +19993,7 @@ snapshots:
       '@types/http-cache-semantics': 4.0.4
       get-stream: 9.0.1
       http-cache-semantics: 4.2.0
-      keyv: 5.5.5
+      keyv: 5.6.0
       mimic-response: 4.0.0
       normalize-url: 8.1.1
       responselike: 4.0.2
@@ -21364,7 +21364,7 @@ snapshots:
       is-glob: 4.0.3
       json-stable-stringify-without-jsonify: 1.0.1
       lodash.merge: 4.6.2
-      minimatch: 3.1.2
+      minimatch: 3.1.4
       natural-compare: 1.4.0
       optionator: 0.9.4
     optionalDependencies:
@@ -21917,7 +21917,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.1.2
+      minimatch: 3.1.4
       once: 1.4.0
       path-is-absolute: 1.0.1
 
@@ -22275,7 +22275,7 @@ snapshots:
 
   ignore-walk@8.0.0:
     dependencies:
-      minimatch: 10.1.1
+      minimatch: 10.2.3
 
   ignore@5.3.2: {}
 
@@ -23399,7 +23399,7 @@ snapshots:
       array-differ: 1.0.0
       array-union: 1.0.2
       arrify: 1.0.1
-      minimatch: 3.1.2
+      minimatch: 3.1.4
 
   mdn-data@2.0.28: {}
 
@@ -23501,7 +23501,6 @@ snapshots:
   minimatch@3.1.4:
     dependencies:
       brace-expansion: 1.1.12
-    optional: true
 
   minimatch@5.1.6:
     dependencies:
@@ -24863,7 +24862,7 @@ snapshots:
   postcss@8.4.31:
     dependencies:
       nanoid: 3.3.11
-      picocolors: 1.0.1
+      picocolors: 1.1.1
       source-map-js: 1.2.1
 
   postcss@8.5.6:
@@ -27017,7 +27016,7 @@ snapshots:
 
   vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2):
     dependencies:
-      esbuild: 0.27.2
+      esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.6
@@ -27035,7 +27034,7 @@ snapshots:
 
   vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2):
     dependencies:
-      esbuild: 0.27.2
+      esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.6
@@ -27053,7 +27052,7 @@ snapshots:
 
   vite@7.3.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2):
     dependencies:
-      esbuild: 0.27.2
+      esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.6
@@ -27071,7 +27070,7 @@ snapshots:
 
   vite@7.3.0(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2):
     dependencies:
-      esbuild: 0.27.2
+      esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.6
@@ -27089,7 +27088,7 @@ snapshots:
 
   vite@7.3.1(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2):
     dependencies:
-      esbuild: 0.27.2
+      esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.6
@@ -27107,7 +27106,7 @@ snapshots:
 
   vite@7.3.1(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.44.0)(yaml@2.8.2):
     dependencies:
-      esbuild: 0.27.2
+      esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.6
@@ -27125,7 +27124,7 @@ snapshots:
 
   vite@7.3.1(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2):
     dependencies:
-      esbuild: 0.27.2
+      esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.6
@@ -27143,7 +27142,7 @@ snapshots:
 
   vite@7.3.1(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2):
     dependencies:
-      esbuild: 0.27.2
+      esbuild: 0.27.3
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
       postcss: 8.5.6

@@ -71,7 +71,7 @@
       ],
       "output": [],
       "dependencies": [
-        "../../labs/lint:build"
+        "../../lint:build"
       ]
     }
   }
