@@ -134,7 +134,7 @@ git commit -a -m "fix(elements): disabled multi-select"
 | `labs-playwright-screencast` | `/labs/playwright-screencast` |
 | `labs-brand`                 | `/labs/brand`                 |
 | `labs-cli`                   | `/cli`                        |
-| `labs-code`                  | `/labs/code`                  |
+| `labs-code`                  | `/code`                       |
 | `forms`                      | `/projects/forms`             |
 
 Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
@@ -178,7 +178,7 @@ You may have to resolve any merge conflicts that arise from this process. Once c
 
 ### New Project
 
-When creating a new project, ex: `./projects/labs/code`, make sure to add the project to the `pnpm-workspace.yaml` located at the root directory.
+When creating a new project, ex: `./projects/code`, make sure to add the project to the `pnpm-workspace.yaml` located at the root directory.
 
 ### Release
 

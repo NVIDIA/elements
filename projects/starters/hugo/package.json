@@ -33,7 +33,7 @@
         "../../elements/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
-        "../../labs/code/dist/**/*.js",
+        "../../code/dist/**/*.js",
         "archetypes/**",
         "content/**",
         "layouts/**",
@@ -45,7 +45,7 @@
       ],
       "dependencies": [
         {
-          "script": "../../labs/code:build",
+          "script": "../../code:build",
           "cascade": false
         },
         {

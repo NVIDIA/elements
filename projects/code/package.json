@@ -250,9 +250,9 @@
         "dist/**"
       ],
       "dependencies": [
-        "../../internals/vite:ci",
+        "../internals/vite:ci",
         {
-          "script": "../../elements:build",
+          "script": "../elements:build",
           "cascade": false
         }
       ]
@@ -279,9 +279,9 @@
       ],
       "output": [],
       "dependencies": [
-        "../../testing:build",
-        "../../internals/vite:ci",
-        "../../elements:build"
+        "../testing:build",
+        "../internals/vite:ci",
+        "../elements:build"
       ]
     },
     "test:coverage": {
@@ -299,9 +299,9 @@
       ],
       "output": [],
       "dependencies": [
-        "../../testing:build",
-        "../../internals/vite:ci",
-        "../../elements:build"
+        "../testing:build",
+        "../internals/vite:ci",
+        "../elements:build"
       ]
     },
     "test:watch": {
@@ -321,7 +321,7 @@
       ],
       "dependencies": [
         "build",
-        "../../internals/vite:ci"
+        "../internals/vite:ci"
       ],
       "env": {
         "NODE_ENV": "production"
@@ -339,8 +339,8 @@
         "coverage/axe/**"
       ],
       "dependencies": [
-        "../../testing:build",
-        "../../internals/vite:ci",
+        "../testing:build",
+        "../internals/vite:ci",
         {
           "script": "build",
           "cascade": false
@@ -364,23 +364,23 @@
       ],
       "output": [],
       "dependencies": [
-        "../../internals/eslint:ci",
-        "../../lint:build"
+        "../internals/eslint:ci",
+        "../lint:build"
       ]
     },
     "lint:style": {
-      "command": "stylelint 'src/**/*.css' --config=../../../stylelint.config.mjs",
+      "command": "stylelint 'src/**/*.css' --config=../../stylelint.config.mjs",
       "files": [
         "src/**/*.css",
-        "../../../stylelint.config.mjs"
+        "../../stylelint.config.mjs"
       ],
       "output": []
     },
     "lint:fix": {
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
-        "../../internals/eslint:ci",
-        "../../lint:build"
+        "../internals/eslint:ci",
+        "../lint:build"
       ]
     }
   }
