@@ -75,7 +75,7 @@ export function onListboxActivate(
   element: HTMLElement & { disabled?: boolean },
   fn: (event: KeyboardEvent | PointerEvent) => void
 ) {
-  const validKey = e => e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'ArrowDown';
+  const validKey = (e: KeyboardEvent) => e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'ArrowDown';
 
   element.addEventListener('pointerdown', (e: PointerEvent) => {
     e.preventDefault();

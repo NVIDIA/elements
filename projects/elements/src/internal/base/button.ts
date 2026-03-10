@@ -52,7 +52,7 @@ export class BaseButton extends LitElement {
    */
   @property({ type: Boolean, reflect: true }) readonly: boolean;
 
-  #form: string | HTMLFormElement = null;
+  #form: string | HTMLFormElement | null = null;
 
   /**
    * Like input form, sets a button to submit a form outside its parent form.
@@ -127,7 +127,7 @@ export class BaseButton extends LitElement {
    * Establishing a relationship between a popover and its invoker button.
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/popoverTargetElement
    */
-  @property({ type: Object }) popoverTargetElement: HTMLElement = null; // eslint-disable-line local/primitive-property
+  @property({ type: Object }) popoverTargetElement: HTMLElement | null = null; // eslint-disable-line local/primitive-property
 
   /**
    * The idref of the element that receives the popover.
@@ -146,13 +146,13 @@ export class BaseButton extends LitElement {
    * The element that receives the command.
    * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
    */
-  @property({ type: Object }) commandForElement: HTMLElement = null; // eslint-disable-line local/primitive-property
+  @property({ type: Object }) commandForElement: HTMLElement | null = null; // eslint-disable-line local/primitive-property
 
   /**
    * The idref of the element that receives the command.
    * https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API
    */
-  @property({ type: String, attribute: 'commandfor', reflect: true }) commandfor: string = null;
+  @property({ type: String, attribute: 'commandfor', reflect: true }) commandfor: string | null = null;
 
   /**
    * The command to execute on the element.
@@ -164,13 +164,13 @@ export class BaseButton extends LitElement {
    * The element that receives the interest.
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/interestForElement
    */
-  @property({ type: Object }) interestForElement: HTMLElement = null; // eslint-disable-line local/primitive-property
+  @property({ type: Object }) interestForElement: HTMLElement | null = null; // eslint-disable-line local/primitive-property
 
   /**
    * The idref of the element that receives the interest.
    * https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/interestForElement
    */
-  @property({ type: String, reflect: true }) interestfor: string = null;
+  @property({ type: String, reflect: true }) interestfor: string | null = null;
 
   /**
    * @private

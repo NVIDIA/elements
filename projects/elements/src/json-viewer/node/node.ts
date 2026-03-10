@@ -1,3 +1,4 @@
+import type { PropertyValues } from 'lit';
 import { html, nothing, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -26,7 +27,7 @@ export class JSONNode extends LitElement {
     version: '0.0.0'
   };
 
-  static elementDefinitions = {
+  static elementDefinitions: Record<string, typeof LitElement> = {
     [Button.metadata.tag]: Button,
     [IconButton.metadata.tag]: IconButton,
     [JSONNode.metadata.tag]: JSONNode
@@ -51,7 +52,7 @@ export class JSONNode extends LitElement {
   }
 
   get #arrayNode() {
-    return html`${this.value.filter(i => i !== null).map(value => html`<nve-json-node part="json-node" .value=${value} .expandedAll=${this.expandedAll}></nve-json-node>`)}`;
+    return html`${(this.value as unknown[]).filter(i => i !== null).map(value => html`<nve-json-node part="json-node" .value=${value} .expandedAll=${this.expandedAll}></nve-json-node>`)}`;
   }
 
   get #objectNode() {
@@ -80,7 +81,7 @@ export class JSONNode extends LitElement {
     </div>`;
   }
 
-  async updated(props) {
+  async updated(props: PropertyValues<this>) {
     super.updated(props);
     await this.updateComplete;
     if (props.has('expandedAll') && this.expandedAll) {
@@ -89,7 +90,7 @@ export class JSONNode extends LitElement {
     }
   }
 
-  #getValue(value) {
+  #getValue(value: unknown) {
     if (typeof value === 'string' && value.startsWith('http')) {
       return html`<a href=${value} target="_blank">${value}</a>`;
     } else if (typeof value === 'string' && value.length > 100) {

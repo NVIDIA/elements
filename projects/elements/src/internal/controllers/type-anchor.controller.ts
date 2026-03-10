@@ -7,7 +7,7 @@ import { attachInternals } from '../utils/a11y.js';
  * Adds anchor/link support for interactive custom elements.
  */
 export function typeAnchor<T extends Anchor>(): ClassDecorator {
-  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new TypeAnchorController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer!((instance: T) => new TypeAnchorController(instance));
 }
 
 export interface Anchor extends ReactiveElement {
@@ -23,8 +23,8 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
 
   get #slottedAnchor() {
     // return elements that nest in a slot
-    return this.host.shadowRoot
-      .querySelector<HTMLSlotElement>('slot, slot[name=anchor]')
+    return this.host
+      .shadowRoot!.querySelector<HTMLSlotElement>('slot, slot[name=anchor]')
       ?.assignedElements()
       ?.find(e => e?.tagName === 'A');
   }
@@ -34,11 +34,11 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
   }
 
   get #defaultSlot() {
-    return this.host.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
+    return this.host.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])');
   }
 
   get #anchorSlot() {
-    return this.host.shadowRoot.querySelector<HTMLSlotElement>('slot[name=anchor]');
+    return this.host.shadowRoot!.querySelector<HTMLSlotElement>('slot[name=anchor]');
   }
 
   constructor(private host: T) {

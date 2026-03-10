@@ -4,7 +4,7 @@ import type { I18nStrings } from '../services/i18n.service.js';
 import { I18nService } from '../services/i18n.service.js';
 
 export function i18n<T extends I18n>(): ClassDecorator {
-  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new I18nController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer!((instance: T) => new I18nController(instance));
 }
 
 export type I18n = ReactiveElement & { i18n: Partial<I18nStrings> & { __set?: boolean } };

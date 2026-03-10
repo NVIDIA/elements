@@ -8,7 +8,7 @@ import { attachInternals } from '../utils/a11y.js';
  */
 export function stateCurrent<T extends Current>(): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new StateCurrentController(instance));
+    target.addInitializer!((instance: T) => new StateCurrentController(instance));
 }
 
 type Current = ReactiveElement & { current: 'page' | 'step'; readonly?: boolean; _internals?: ElementInternals };
@@ -24,26 +24,26 @@ export class StateCurrentController<T extends Current> implements ReactiveContro
 
   hostUpdated() {
     if (this.host.readonly) {
-      this.host._internals.ariaCurrent = null;
-      this.host._internals.states.delete('current');
+      this.host._internals!.ariaCurrent = null;
+      this.host._internals!.states.delete('current');
       return;
     }
 
     if (this.host._internals?.states.has('anchor') && this.host.current) {
-      this.host._internals.ariaCurrent = null;
-      this.host._internals.states.add('current');
+      this.host._internals!.ariaCurrent = null;
+      this.host._internals!.states.add('current');
       this.host.querySelector('a')?.setAttribute('aria-current', 'page');
       return;
     }
 
     if (this.host.current !== null && this.host.current !== undefined) {
-      this.host._internals.ariaCurrent = `${this.host.current}`;
+      this.host._internals!.ariaCurrent = `${this.host.current}`;
     }
 
     if (this.host.current) {
-      this.host._internals.states.add('current');
+      this.host._internals!.states.add('current');
     } else {
-      this.host._internals.states.delete('current');
+      this.host._internals!.states.delete('current');
     }
   }
 }

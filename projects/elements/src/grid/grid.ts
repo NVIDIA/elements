@@ -62,7 +62,7 @@ export class Grid extends LitElement implements ContainerElement {
   get keynavGridConfig() {
     return {
       columns: this.#columns,
-      rows: [this.#header, ...this.#rows],
+      rows: [this.#header!, ...this.#rows],
       cells: [...this.#columns, ...this.#cells]
     };
   }
@@ -111,6 +111,6 @@ export class Grid extends LitElement implements ContainerElement {
   scrollTo(options?: ScrollToOptions): Promise<void>;
   scrollTo(x: number, y: number): Promise<void>;
   async scrollTo(...args: [options?: ScrollToOptions] | [x: number, y: number]): Promise<void> {
-    await this.shadowRoot.querySelector('[part="_scrollbox"]')?.scrollTo(...(args as [ScrollToOptions]));
+    await this.shadowRoot!.querySelector('[part="_scrollbox"]')?.scrollTo(...(args as [ScrollToOptions]));
   }
 }

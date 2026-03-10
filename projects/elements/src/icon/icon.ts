@@ -11,6 +11,11 @@ import styles from './icon.css?inline';
 
 export type { IconName, IconNames, IconSVG } from './icons.js';
 
+declare global {
+  // eslint-disable-next-line no-var
+  var _NVE_SSR_ICON_REGISTRY: Record<string, string> | undefined;
+}
+
 /**
  * @element nve-icon
  * @since 0.1.3
@@ -72,7 +77,7 @@ export class Icon extends LitElement {
   declare _internals: ElementInternals;
 
   get #iconString() {
-    return isServer && globalThis._NVE_SSR_ICON_REGISTRY ? globalThis._NVE_SSR_ICON_REGISTRY[this.name] : this.svg;
+    return isServer && globalThis._NVE_SSR_ICON_REGISTRY ? globalThis._NVE_SSR_ICON_REGISTRY[this.name!] : this.svg;
   }
 
   render() {
@@ -85,12 +90,18 @@ export class Icon extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'img';
-    globalThis?.document?.addEventListener(`${Icon.metadata.tag}-${this.name}`, this.#asyncRender.bind(this));
+    globalThis?.document?.addEventListener(
+      `${Icon.metadata.tag}-${this.name}`,
+      this.#asyncRender.bind(this) as unknown as EventListener
+    );
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    globalThis?.document?.removeEventListener(`${Icon.metadata.tag}-${this.name}`, this.#asyncRender.bind(this));
+    globalThis?.document?.removeEventListener(
+      `${Icon.metadata.tag}-${this.name}`,
+      this.#asyncRender.bind(this) as unknown as EventListener
+    );
   }
 
   static async add(icons: { [key: string]: IconSVG }) {
@@ -109,7 +120,7 @@ export class Icon extends LitElement {
       /* eslint-disable @typescript-eslint/no-floating-promises */
       globalThis.customElements.whenDefined(Icon.metadata.tag).then(() => {
         Object.keys(aliases).forEach(alias => {
-          Icon._iconsRegistry[alias] = Icon._iconsRegistry[aliases[alias]];
+          Icon._iconsRegistry[alias] = Icon._iconsRegistry[aliases[alias]!]!;
           globalThis?.document?.dispatchEvent(
             new CustomEvent(`${Icon.metadata.tag}-${alias}`, { detail: Icon._iconsRegistry[alias] })
           );
@@ -130,7 +141,8 @@ export class Icon extends LitElement {
   }
 
   async #render() {
-    const svg = await (this.name?.endsWith('.svg')
+    if (!this.name) return;
+    const svg = await (this.name.endsWith('.svg')
       ? fetch(this.name).then(res => res.text())
       : (Icon._iconsRegistry[this.name]?.svg() ?? Promise.resolve('')));
     Icon._iconsRegistry[this.name] = { svg: () => svg, ...Icon._iconsRegistry[this.name] };
@@ -139,7 +151,7 @@ export class Icon extends LitElement {
 }
 
 export function mergeIcons(RegisteredIcon: typeof Icon) {
-  if (globalThis.customElements?.get) {
+  if (typeof globalThis.customElements?.get === 'function') {
     const registered = parseVersion(RegisteredIcon.metadata.version);
     const current = parseVersion('0.0.0');
 

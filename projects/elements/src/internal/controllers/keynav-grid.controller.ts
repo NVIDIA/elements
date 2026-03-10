@@ -36,7 +36,7 @@ export interface KeynavGridElement {
  */
 export function keyNavigationGrid<T extends ReactiveElement & KeynavGridElement>(): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new KeyNavigationGridController(instance));
+    target.addInitializer!((instance: T) => new KeyNavigationGridController(instance));
 }
 
 export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridElement> implements ReactiveController {
@@ -111,7 +111,9 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
         dir: this.host.dir
       });
 
-      const nextCell = Array.from(getFlattenedDOMTree(rows[y])).filter(c => !!cells.find(i => i === c))[x];
+      const nextCell = Array.from(getFlattenedDOMTree(rows[y]!)).filter(c => !!cells.find(i => i === c))[
+        x
+      ] as HTMLElement;
       this.#setActiveCell(e, nextCell);
       e.preventDefault();
     }
@@ -124,7 +126,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
     const simpleItems = items.filter(i => isSimpleFocusable(i));
 
     if (simpleItems.length === 1 && items.length === 1) {
-      focusElement(simpleItems[0]);
+      focusElement(simpleItems[0]!);
     } else {
       focusElement(activeCell);
     }
@@ -140,7 +142,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
     }
 
     if (e.code === 'Enter' && activeCell === e.composedPath()[0]) {
-      getFlattenedFocusableItems(activeCell as Node)[0]?.focus();
+      getFlattenedFocusableItems(activeCell as HTMLElement)[0]?.focus();
     }
   }
 }

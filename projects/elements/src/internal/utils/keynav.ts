@@ -12,7 +12,7 @@ export function createLightDismiss(options: { element: HTMLElement; focusElement
     if (
       !options.element.hidden &&
       clickOutsideElementBounds(e, options.element) &&
-      clickOutsideElementBounds(e, options.focusElement)
+      clickOutsideElementBounds(e, options.focusElement!)
     ) {
       fn();
     }
@@ -21,7 +21,7 @@ export function createLightDismiss(options: { element: HTMLElement; focusElement
   options.element.addEventListener('keydown', (e: KeyboardEvent) => {
     if (!options.element.hidden && e.code === 'Escape') {
       e.preventDefault();
-      focusElementTimeout(options.focusElement);
+      focusElementTimeout(options.focusElement!);
       fn();
     }
   });
