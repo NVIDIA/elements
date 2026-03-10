@@ -5,7 +5,11 @@ import { Checkbox } from '@nvidia-elements/core/checkbox';
 import { Password } from '@nvidia-elements/core/password';
 import { ControlMessage } from '@nvidia-elements/core/forms';
 import styles from './login.css?inline';
-import { define, libraryRegistry } from '../internal/index.js';
+
+const libraryRegistry =
+  globalThis.CustomElementRegistry && 'initialize' in CustomElementRegistry.prototype
+    ? new CustomElementRegistry()
+    : customElements;
 
 export class DomainLogin extends LitElement {
   @property({ type: String }) value = `{ "email": "", "password": "" }`;
@@ -55,10 +59,11 @@ export class DomainLogin extends LitElement {
 
   constructor() {
     super();
-    define('nve-input', Input, libraryRegistry);
-    define('nve-checkbox', Checkbox, libraryRegistry);
-    define('nve-password', Password, libraryRegistry);
-    define('nve-control-message', ControlMessage, libraryRegistry);
+    libraryRegistry.get('domain-login') || libraryRegistry.define('domain-login', DomainLogin);
+    libraryRegistry.get('nve-input') || libraryRegistry.define('nve-input', Input);
+    libraryRegistry.get('nve-checkbox') || libraryRegistry.define('nve-checkbox', Checkbox);
+    libraryRegistry.get('nve-password') || libraryRegistry.define('nve-password', Password);
+    libraryRegistry.get('nve-control-message') || libraryRegistry.define('nve-control-message', ControlMessage);
   }
 
   render() {

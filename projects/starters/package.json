@@ -30,7 +30,6 @@
         "./nuxt/dist/**/*.js",
         "./react/dist/**/*.js",
         "./react-18/dist/**/*.js",
-        "./scoped-registry/dist/**/*.js",
         "./solidjs/dist/**/*.js",
         "./svelte/dist/**/*.js",
         "./typescript/dist/**/*.js",
@@ -91,10 +90,6 @@
         },
         {
           "script": "./react-18:build",
-          "cascade": false
-        },
-        {
-          "script": "./scoped-registry:build",
           "cascade": false
         },
         {
