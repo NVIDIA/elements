@@ -9,6 +9,7 @@ import {
   getDisplayValue,
   getElementUpdate,
   onChildListMutation,
+  scopedRegistry,
   useStyles
 } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
@@ -50,6 +51,7 @@ import styles from './combobox.css?inline';
  * @csspart icon - The icon element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/
  */
+@scopedRegistry()
 export class Combobox extends Control implements ContainerElement {
   /**
    * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.

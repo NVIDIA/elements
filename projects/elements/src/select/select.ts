@@ -9,7 +9,8 @@ import {
   i18n,
   I18nController,
   onChildListMutation,
-  getElementUpdate
+  getElementUpdate,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { Icon } from '@nvidia-elements/core/icon';
@@ -51,6 +52,7 @@ import styles from './select.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
  */
 @i18n<Select>()
+@scopedRegistry()
 export class Select extends Control {
   static styles = useStyles([...Control.styles, styles]);
 

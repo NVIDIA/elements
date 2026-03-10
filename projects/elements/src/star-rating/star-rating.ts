@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import type { PropertyValues } from 'lit';
 import { state } from 'lit/decorators/state.js';
-import { useStyles, getElementUpdate } from '@nvidia-elements/core/internal';
+import { useStyles, getElementUpdate, scopedRegistry } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './star-rating.css?inline';
@@ -20,6 +20,7 @@ import styles from './star-rating.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range
  *
  */
+@scopedRegistry()
 export class StarRating extends Control {
   static styles = useStyles([...Control.styles, styles]);
 
