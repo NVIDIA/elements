@@ -12,7 +12,8 @@ import {
   useStyles,
   statusStateStyles,
   supportStateStyles,
-  appendRootNodeStyle
+  appendRootNodeStyle,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import globalStyles from './alert.global.css?inline';
 import styles from './alert.css?inline';
@@ -43,6 +44,7 @@ import styles from './alert.css?inline';
  * @cssprop --width
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alert/
  */
+@scopedRegistry()
 export class Alert extends LitElement {
   static styles = useStyles([styles, statusStateStyles, supportStateStyles]);
 

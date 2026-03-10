@@ -3,6 +3,7 @@ import { html, nothing, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { useStyles } from '@nvidia-elements/core/internal';
+import type { ElementDefinition } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Button } from '@nvidia-elements/core/button';
 import styles from './node.css?inline';
@@ -27,10 +28,9 @@ export class JSONNode extends LitElement {
     version: '0.0.0'
   };
 
-  static elementDefinitions: Record<string, typeof LitElement> = {
+  static elementDefinitions: Record<string, ElementDefinition> = {
     [Button.metadata.tag]: Button,
-    [IconButton.metadata.tag]: IconButton,
-    [JSONNode.metadata.tag]: JSONNode
+    [IconButton.metadata.tag]: IconButton
   };
 
   get #isArray() {

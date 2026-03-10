@@ -1,7 +1,7 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
-import { formatFileSize, useStyles, removeEmptyTextNode, I18nController } from '@nvidia-elements/core/internal';
+import { formatFileSize, useStyles, removeEmptyTextNode, I18nController, scopedRegistry } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './dropzone.css?inline';
 import { FormControlMixin } from '@nvidia-elements/forms/mixin';
@@ -26,6 +26,7 @@ import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './d
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file
  * @stable false
  */
+@scopedRegistry()
 export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitElement) {
   @property()
   accept: string = `image/gif, image/jpeg, image/png, image/svg+xml`;

@@ -11,7 +11,8 @@ import {
   colorStateStyles,
   attachInternals,
   I18nController,
-  typeSSR
+  typeSSR,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import styles from './badge.css?inline';
 
@@ -38,6 +39,7 @@ import styles from './badge.css?inline';
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
 @typeSSR()
+@scopedRegistry()
 export class Badge extends LitElement {
   /**
    * Visual treatment to represent a ongoing task, support status.

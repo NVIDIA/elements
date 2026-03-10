@@ -8,7 +8,8 @@ import {
   formatStandardNumber,
   keyNavigationList,
   typeSSR,
-  useStyles
+  useStyles,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import { Select } from '@nvidia-elements/core/select';
@@ -42,6 +43,7 @@ import styles from './pagination.css?inline';
  */
 @typeSSR()
 @keyNavigationList<Pagination>()
+@scopedRegistry()
 export class Pagination extends FormControlMixin<typeof LitElement, number>(LitElement) {
   /**
    * The number of items per page.

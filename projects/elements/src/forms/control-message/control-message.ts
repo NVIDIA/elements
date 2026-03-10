@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
+import { hostAttr, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import { type ValidityStateError } from '../utils/types.js';
 import styles from './control-message.css?inline';
@@ -26,6 +26,7 @@ const statusIcons = {
  * @aria https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals
  * @package true
  */
+@scopedRegistry()
 export class ControlMessage extends LitElement {
   /**
    * Visual treatment for current form control validation status

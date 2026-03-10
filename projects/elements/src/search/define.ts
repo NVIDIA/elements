@@ -1,6 +1,5 @@
 import { define } from '@nvidia-elements/core/internal';
 import { Search } from '@nvidia-elements/core/search';
-import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/forms/define.js';
 
 define(Search);
