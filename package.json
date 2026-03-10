@@ -61,14 +61,14 @@
     "ci": {
       "script": "pnpm run format && pnpm run lint:vale",
       "dependencies": [
+        "./projects/code:ci",
+        "./projects/cli:ci",
         "./projects/create:ci",
         "./projects/elements:ci",
         "./projects/elements-react:ci",
         "./projects/forms:ci",
         "./projects/labs/behaviors-alpine:ci",
         "./projects/labs/brand:ci",
-        "./projects/cli:ci",
-        "./projects/labs/code:ci",
         "./projects/labs/playwright-screencast:ci",
         "./projects/lint:ci",
         "./projects/markdown:ci",
@@ -107,12 +107,12 @@
     "lighthouse": {
       "command": "node ./projects/internals/gitlab/metrics.lighthouse.js",
       "dependencies": [
+        "./projects/code:test:lighthouse",
         "./projects/styles:test:lighthouse",
         "./projects/themes:test:lighthouse",
         "./projects/elements:test:lighthouse",
         "./projects/forms:test:lighthouse",
         "./projects/labs/brand:test:lighthouse",
-        "./projects/labs/code:test:lighthouse",
         "./projects/markdown:test:lighthouse",
         "./projects/media:test:lighthouse",
         "./projects/monaco:test:lighthouse",
@@ -131,6 +131,8 @@
     "release": {
       "command": "echo 'Releasing...'",
       "dependencies": [
+        "release:cli",
+        "release:code",
         "release:create",
         "release:themes",
         "release:testing",
@@ -138,11 +140,9 @@
         "release:elements-react",
         "release:labs-behaviors-alpine",
         "release:labs-brand",
-        "release:labs-code",
-        "release:cli",
+        "release:lint",
         "release:labs-forms",
-        "release:labs-lint",
-        "release:labs-markdown",
+        "release:markdown",
         "release:monaco",
         "release:styles"
       ]
@@ -190,8 +190,8 @@
         "release:lint"
       ]
     },
-    "release:labs-code": {
-      "command": "cd projects/labs/code && HUSKY=0 pnpm exec semantic-release",
+    "release:code": {
+      "command": "cd projects/code && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
       ]
@@ -270,6 +270,7 @@
     "lint:fix": {
       "command": "prettier --config prettier.config.js --write .",
       "dependencies": [
+        "./projects/code:lint:fix",
         "./projects/create:lint:fix",
         "./projects/elements:lint:fix",
         "./projects/forms:lint:fix",
@@ -280,7 +281,6 @@
         "./projects/labs/behaviors-alpine:lint:fix",
         "./projects/labs/brand:lint:fix",
         "./projects/cli:lint:fix",
-        "./projects/labs/code:lint:fix",
         "./projects/labs/playwright-screencast:lint:fix",
         "./projects/lint:lint:fix",
         "./projects/markdown:lint:fix",
