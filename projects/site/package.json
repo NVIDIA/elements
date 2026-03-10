@@ -77,8 +77,8 @@
         "../themes/dist/**/*.json",
         "../labs/brand/dist/**/*.css",
         "../labs/brand/dist/**/*.examples.json",
-        "../labs/code/dist/**/*.js",
-        "../labs/code/dist/**/*.examples.json",
+        "../code/dist/**/*.js",
+        "../code/dist/**/*.examples.json",
         "../forms/dist/**/*.js",
         "../forms/dist/**/*.examples.json",
         "../markdown/dist/**/*.js",
@@ -109,7 +109,7 @@
           "cascade": false
         },
         {
-          "script": "../labs/code:build",
+          "script": "../code:build",
           "cascade": false
         },
         {

@@ -171,7 +171,7 @@ importers:
         version: 19.5.0
       '@nvidia-elements/code':
         specifier: workspace:*
-        version: link:projects/labs/code
+        version: link:projects/code
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:projects/elements
@@ -326,6 +326,73 @@ importers:
       vitest:
         specifier: 'catalog:'
         version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@24.9.1)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
+
+  projects/code:
+    dependencies:
+      '@nvidia-elements/themes':
+        specifier: workspace:^
+        version: link:../themes
+      highlight.js:
+        specifier: 11.10.0
+        version: 11.10.0
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.2
+      lit-html:
+        specifier: 'catalog:'
+        version: 3.3.2
+    devDependencies:
+      '@eslint/js':
+        specifier: 'catalog:'
+        version: 9.39.2
+      '@internals/eslint':
+        specifier: workspace:*
+        version: link:../internals/eslint
+      '@internals/testing':
+        specifier: workspace:*
+        version: link:../internals/testing
+      '@internals/vite':
+        specifier: workspace:*
+        version: link:../internals/vite
+      '@nvidia-elements/lint':
+        specifier: workspace:*
+        version: link:../lint
+      '@nvidia-elements/core':
+        specifier: workspace:*
+        version: link:../elements
+      '@nvidia-elements/styles':
+        specifier: workspace:*
+        version: link:../styles
+      '@vitest/browser':
+        specifier: 'catalog:'
+        version: 4.0.16(vite@7.3.0(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2))(vitest@4.0.16)
+      '@vitest/coverage-istanbul':
+        specifier: 'catalog:'
+        version: 4.0.16(vitest@4.0.16)
+      axe-core:
+        specifier: 'catalog:'
+        version: 4.11.0
+      eslint:
+        specifier: 'catalog:'
+        version: 9.39.2(jiti@2.6.1)
+      publint:
+        specifier: 'catalog:'
+        version: 0.3.15
+      stylelint:
+        specifier: 'catalog:'
+        version: 17.4.0(typescript@5.9.3)
+      stylelint-config-standard:
+        specifier: 'catalog:'
+        version: 40.0.0(stylelint@17.4.0(typescript@5.9.3))
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vite:
+        specifier: 'catalog:'
+        version: 7.3.0(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
+      vitest:
+        specifier: 'catalog:'
+        version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
 
   projects/create:
     devDependencies:
@@ -967,73 +1034,6 @@ importers:
         specifier: 'catalog:'
         version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
 
-  projects/labs/code:
-    dependencies:
-      '@nvidia-elements/themes':
-        specifier: workspace:^
-        version: link:../../themes
-      highlight.js:
-        specifier: 11.10.0
-        version: 11.10.0
-      lit:
-        specifier: 'catalog:'
-        version: 3.3.2
-      lit-html:
-        specifier: 'catalog:'
-        version: 3.3.2
-    devDependencies:
-      '@eslint/js':
-        specifier: 'catalog:'
-        version: 9.39.2
-      '@internals/eslint':
-        specifier: workspace:*
-        version: link:../../internals/eslint
-      '@internals/testing':
-        specifier: workspace:*
-        version: link:../../internals/testing
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../../internals/vite
-      '@nvidia-elements/lint':
-        specifier: workspace:*
-        version: link:../../lint
-      '@nvidia-elements/core':
-        specifier: workspace:*
-        version: link:../../elements
-      '@nvidia-elements/styles':
-        specifier: workspace:*
-        version: link:../../styles
-      '@vitest/browser':
-        specifier: 'catalog:'
-        version: 4.0.16(vite@7.3.0(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2))(vitest@4.0.16)
-      '@vitest/coverage-istanbul':
-        specifier: 'catalog:'
-        version: 4.0.16(vitest@4.0.16)
-      axe-core:
-        specifier: 'catalog:'
-        version: 4.11.0
-      eslint:
-        specifier: 'catalog:'
-        version: 9.39.2(jiti@2.6.1)
-      publint:
-        specifier: 'catalog:'
-        version: 0.3.15
-      stylelint:
-        specifier: 'catalog:'
-        version: 17.4.0(typescript@5.9.3)
-      stylelint-config-standard:
-        specifier: 'catalog:'
-        version: 40.0.0(stylelint@17.4.0(typescript@5.9.3))
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      vite:
-        specifier: 'catalog:'
-        version: 7.3.0(@types/node@25.3.0)(jiti@2.6.1)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
-      vitest:
-        specifier: 'catalog:'
-        version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
-
   projects/labs/playwright-screencast:
     devDependencies:
       '@internals/eslint':
@@ -1379,7 +1379,7 @@ importers:
         version: link:../labs/brand
       '@nvidia-elements/code':
         specifier: workspace:*
-        version: link:../labs/code
+        version: link:../code
       '@nvidia-elements/forms':
         specifier: workspace:*
         version: link:../forms
@@ -1622,7 +1622,7 @@ importers:
     dependencies:
       '@nvidia-elements/code':
         specifier: workspace:*
-        version: link:../../labs/code
+        version: link:../../code
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../../elements

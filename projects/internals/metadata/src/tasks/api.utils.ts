@@ -133,7 +133,7 @@ export async function getApi(): Promise<{
     '../../../../styles',
     '../../../../themes',
     '../../../../labs/brand',
-    '../../../../labs/code',
+    '../../../../code',
     '../../../../markdown',
     '../../../../monaco'
   ];
