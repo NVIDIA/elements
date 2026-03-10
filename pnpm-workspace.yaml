@@ -27,6 +27,7 @@ packages:
   - projects/labs/playwright-screencast
   - projects/lint
   - projects/snippets
+  - projects/markdown
   - projects/media
   - projects/monaco
   - projects/pages

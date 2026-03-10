@@ -81,8 +81,8 @@
         "../labs/code/dist/**/*.examples.json",
         "../forms/dist/**/*.js",
         "../forms/dist/**/*.examples.json",
-        "../labs/markdown/dist/**/*.js",
-        "../labs/markdown/dist/**/*.examples.json",
+        "../markdown/dist/**/*.js",
+        "../markdown/dist/**/*.examples.json",
         "../monaco/dist/**/*.js",
         "../monaco/dist/**/*.examples.json",
         "../internals/metadata/static/**",
@@ -117,7 +117,7 @@
           "cascade": false
         },
         {
-          "script": "../labs/markdown:build",
+          "script": "../markdown:build",
           "cascade": false
         },
         {
