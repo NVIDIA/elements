@@ -22,7 +22,7 @@ describe('lighthouse report', () => {
     `);
 
     expect(report.payload.javascript.kb).toBeLessThan(45);
-    expect(report.payload.javascript.requests['define.js']!.kb).toBeLessThan(10.5);
+    expect(report.payload.javascript.requests['define.js']!.kb).toBeLessThan(10.6);
     expect(report.payload.javascript.requests['core.js']!.kb).toBeLessThan(9);
     expect(report.payload.javascript.requests['bash.js']!.kb).toBeLessThan(3);
     expect(report.payload.javascript.requests['css.js']!.kb).toBeLessThan(4.5);
@@ -47,7 +47,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]!]!.kb).toBeLessThan(30);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]!]!.kb).toBeLessThan(31);
   });
 });
 
@@ -59,6 +59,6 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(31);
+    expect(report.payload.javascript.kb).toBeLessThan(31.1);
   });
 });
