@@ -67,7 +67,7 @@
         "./projects/forms:ci",
         "./projects/labs/behaviors-alpine:ci",
         "./projects/labs/brand:ci",
-        "./projects/labs/cli:ci",
+        "./projects/cli:ci",
         "./projects/labs/code:ci",
         "./projects/labs/lint:ci",
         "./projects/labs/markdown:ci",
@@ -139,7 +139,7 @@
         "release:labs-behaviors-alpine",
         "release:labs-brand",
         "release:labs-code",
-        "release:labs-cli",
+        "release:cli",
         "release:labs-forms",
         "release:labs-lint",
         "release:labs-markdown",
@@ -156,7 +156,7 @@
     "release:create": {
       "command": "cd projects/create && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:labs-cli"
+        "release:cli"
       ]
     },
     "release:elements": {
@@ -184,8 +184,8 @@
         "release:themes"
       ]
     },
-    "release:labs-cli": {
-      "command": "cd projects/labs/cli && HUSKY=0 pnpm exec semantic-release",
+    "release:cli": {
+      "command": "cd projects/cli && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:labs-lint"
       ]
@@ -279,7 +279,7 @@
         "./projects/internals/tools:lint:fix",
         "./projects/labs/behaviors-alpine:lint:fix",
         "./projects/labs/brand:lint:fix",
-        "./projects/labs/cli:lint:fix",
+        "./projects/cli:lint:fix",
         "./projects/labs/code:lint:fix",
         "./projects/labs/lint:lint:fix",
         "./projects/labs/markdown:lint:fix",
