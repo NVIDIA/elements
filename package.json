@@ -69,10 +69,10 @@
         "./projects/labs/brand:ci",
         "./projects/cli:ci",
         "./projects/labs/code:ci",
-        "./projects/labs/lint:ci",
         "./projects/labs/markdown:ci",
         "./projects/labs/media:ci",
         "./projects/labs/playwright-screencast:ci",
+        "./projects/lint:ci",
         "./projects/monaco:ci",
         "./projects/pages:ci",
         "./projects/site:ci",
@@ -187,7 +187,7 @@
     "release:cli": {
       "command": "cd projects/cli && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:labs-lint"
+        "release:lint"
       ]
     },
     "release:labs-code": {
@@ -199,8 +199,8 @@
     "release:labs-forms": {
       "command": "cd projects/forms && HUSKY=0 pnpm exec semantic-release"
     },
-    "release:labs-lint": {
-      "command": "cd projects/labs/lint && HUSKY=0 pnpm exec semantic-release",
+    "release:lint": {
+      "command": "cd projects/lint && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:themes",
         "release:styles"
@@ -281,10 +281,10 @@
         "./projects/labs/brand:lint:fix",
         "./projects/cli:lint:fix",
         "./projects/labs/code:lint:fix",
-        "./projects/labs/lint:lint:fix",
         "./projects/labs/markdown:lint:fix",
         "./projects/labs/media:lint:fix",
         "./projects/labs/playwright-screencast:lint:fix",
+        "./projects/lint:lint:fix",
         "./projects/monaco:lint:fix",
         "./projects/site:lint:fix",
         "./projects/testing:lint:fix"
