@@ -82,7 +82,7 @@
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
         "../eslint:ci",
-        "../../labs/lint:build"
+        "../../lint:build"
       ]
     }
   },

@@ -365,7 +365,7 @@
       "output": [],
       "dependencies": [
         "../../internals/eslint:ci",
-        "../lint:build"
+        "../../lint:build"
       ]
     },
     "lint:style": {
@@ -380,7 +380,7 @@
       "command": "eslint -c ./eslint.config.js --fix",
       "dependencies": [
         "../../internals/eslint:ci",
-        "../lint:build"
+        "../../lint:build"
       ]
     }
   }
