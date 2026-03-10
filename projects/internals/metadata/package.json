@@ -243,8 +243,8 @@
         "../../labs/brand/coverage/unit/coverage-summary.json",
         "../../labs/brand/coverage/unit/summary.json",
         "../../labs/brand/coverage/visual/summary.json",
-        "../../labs/cli/coverage/unit/coverage-summary.json",
-        "../../labs/cli/coverage/unit/summary.json",
+        "../../cli/coverage/unit/coverage-summary.json",
+        "../../cli/coverage/unit/summary.json",
         "../../labs/lint/coverage/unit/coverage-summary.json",
         "../../labs/lint/coverage/unit/summary.json",
         "../../labs/code/coverage/unit/coverage-summary.json",
@@ -333,7 +333,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/cli:test:coverage",
+          "script": "../../cli:test:coverage",
           "cascade": false
         },
         {
