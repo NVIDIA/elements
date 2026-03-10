@@ -118,12 +118,12 @@
         "../../forms/dist/custom-elements.json",
         "../../labs/behaviors-alpine/package.json",
         "../../labs/behaviors-alpine/dist/custom-elements.json",
-        "../../labs/markdown/package.json",
-        "../../labs/markdown/dist/custom-elements.json",
         "../../labs/playwright-screencast/package.json",
         "../../labs/playwright-screencast/README.md",
         "../../labs/playwright-screencast/CHANGELOG.md",
         "../../labs/playwright-screencast/dist/custom-elements.json",
+        "../../markdown/package.json",
+        "../../markdown/dist/custom-elements.json",
         "../../monaco/package.json",
         "../../monaco/dist/custom-elements.json",
         "../../patterns/package.json",
@@ -166,7 +166,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/markdown:build",
+          "script": "../../markdown:build",
           "cascade": false
         },
         {
@@ -207,9 +207,9 @@
         "../../labs/behaviors-alpine/package.json",
         "../../labs/behaviors-alpine/README.md",
         "../../labs/behaviors-alpine/CHANGELOG.md",
-        "../../labs/markdown/package.json",
-        "../../labs/markdown/README.md",
-        "../../labs/markdown/CHANGELOG.md",
+        "../../markdown/package.json",
+        "../../markdown/README.md",
+        "../../markdown/CHANGELOG.md",
         "../../labs/playwright-screencast/package.json",
         "../../labs/playwright-screencast/README.md",
         "../../labs/playwright-screencast/CHANGELOG.md",
@@ -255,14 +255,14 @@
         "../../forms/coverage/unit/summary.json",
         "../../labs/behaviors-alpine/coverage/unit/coverage-summary.json",
         "../../labs/behaviors-alpine/coverage/unit/summary.json",
-        "../../labs/markdown/coverage/unit/coverage-summary.json",
-        "../../labs/markdown/coverage/unit/summary.json",
-        "../../labs/markdown/coverage/visual/summary.json",
-        "../../labs/markdown/coverage/ssr/summary.json",
         "../../labs/playwright-screencast/coverage/unit/coverage-summary.json",
         "../../labs/playwright-screencast/coverage/unit/summary.json",
         "../../lint/coverage/unit/coverage-summary.json",
         "../../lint/coverage/unit/summary.json",
+        "../../markdown/coverage/unit/coverage-summary.json",
+        "../../markdown/coverage/unit/summary.json",
+        "../../markdown/coverage/visual/summary.json",
+        "../../markdown/coverage/ssr/summary.json",
         "../../monaco/coverage/unit/coverage-summary.json",
         "../../monaco/coverage/unit/summary.json",
         "../../monaco/coverage/visual/summary.json",
@@ -319,7 +319,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/markdown:test:coverage",
+          "script": "../../markdown:test:coverage",
           "cascade": false
         },
         {
@@ -363,7 +363,7 @@
         "../../labs/brand/dist/**/*.examples.json",
         "../../labs/code/dist/**/*.examples.json",
         "../../forms/dist/**/*.examples.json",
-        "../../labs/markdown/dist/**/*.examples.json"
+        "../../markdown/dist/**/*.examples.json"
       ],
       "output": [
         "static/examples.json"
