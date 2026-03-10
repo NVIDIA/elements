@@ -1,8 +1,8 @@
-export function isObject(item) {
-  return item && typeof item === 'object' && !Array.isArray(item);
+export function isObject(item: unknown): item is Record<string, unknown> {
+  return !!item && typeof item === 'object' && !Array.isArray(item);
 }
 
-export function isObjectLiteral(item) {
+export function isObjectLiteral(item: unknown): item is Record<string, unknown> {
   if (!item || typeof item !== 'object' || Array.isArray(item)) {
     return false;
   }
@@ -10,7 +10,10 @@ export function isObjectLiteral(item) {
   return proto === null || proto === Object.prototype;
 }
 
-export function deepMerge(target, ...sources) {
+export function deepMerge(
+  target: Record<string, unknown>,
+  ...sources: Record<string, unknown>[]
+): Record<string, unknown> {
   if (!sources.length) {
     return target;
   }

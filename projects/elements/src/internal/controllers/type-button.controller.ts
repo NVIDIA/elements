@@ -7,7 +7,7 @@ import { attachInternals } from '../utils/a11y.js';
  * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/button_role
  */
 export function typeButton<T extends Button>(): ClassDecorator {
-  return (target: LegacyDecoratorTarget) => target.addInitializer((instance: T) => new TypeButtonController(instance));
+  return (target: LegacyDecoratorTarget) => target.addInitializer!((instance: T) => new TypeButtonController(instance));
 }
 
 export interface Button extends ReactiveElement {
@@ -34,15 +34,15 @@ export class TypeButtonController<T extends Button> implements ReactiveControlle
   async hostUpdated() {
     await this.host.updateComplete;
 
-    if (!this.host._internals.role) {
-      this.host._internals.role = 'button';
+    if (!this.host._internals!.role) {
+      this.host._internals!.role = 'button';
     }
 
     this.host.tabIndex = this.host.disabled ? -1 : this.#initialTabIndex;
 
     if (this.host.readonly) {
-      this.host._internals.role = 'none';
-      this.host.tabIndex = null;
+      this.host._internals!.role = 'none';
+      this.host.tabIndex = -1;
       this.host.removeAttribute('tabindex');
     }
   }

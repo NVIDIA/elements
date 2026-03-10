@@ -41,20 +41,20 @@ export class StarRating extends Control {
   firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
 
-    getElementUpdate(this.input, 'max', (max: string) => {
+    getElementUpdate(this.input, 'max', (max: unknown) => {
       if (max) {
-        this.max = parseInt(max);
+        this.max = parseInt(max as string);
       }
     });
 
-    getElementUpdate(this.input, 'min', (min: string) => {
+    getElementUpdate(this.input, 'min', (min: unknown) => {
       if (min) {
-        this.min = parseInt(min);
+        this.min = parseInt(min as string);
       }
     });
 
-    getElementUpdate(this.input, 'value', (value: string) => {
-      this.#setValue(value ? parseFloat(value) : this.input.valueAsNumber);
+    getElementUpdate(this.input, 'value', (value: unknown) => {
+      this.#setValue(value ? parseFloat(value as string) : this.input.valueAsNumber);
     });
 
     this.input.addEventListener('input', () => (this.value = this.input.valueAsNumber));

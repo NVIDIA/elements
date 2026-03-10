@@ -50,8 +50,8 @@ customStateSetPolyfill();
 function customStateSetPolyfill() {
   const attachInternals = HTMLElement.prototype.attachInternals;
   Object.defineProperty(HTMLElement.prototype, 'attachInternals', {
-    value: function (...args) {
-      const internals = attachInternals.call(this, args) as ElementInternals;
+    value: function (..._args: unknown[]) {
+      const internals = attachInternals.call(this) as unknown as ElementInternals;
       Object.defineProperty(internals, 'states', { value: new CustomStateSetPolyfill(internals.states, this) });
       return internals;
     }

@@ -15,6 +15,10 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "isolatedModules": true,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
     "paths": {
       "@nvidia-elements/core": ["./src/index.js"],
       "@nvidia-elements/core/*": ["./src/*"],
@@ -32,7 +36,8 @@
           "no-unknown-property": "off",
           "no-property-visibility-mismatch": "off",
           "no-complex-attribute-binding": "off",
-          "no-incompatible-type-binding": "off"
+          "no-incompatible-type-binding": "off",
+          "no-invalid-css": "off"
         }
       }
     ]

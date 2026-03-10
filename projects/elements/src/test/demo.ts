@@ -16,11 +16,11 @@ function createItem(type: '' | 'models' | 'hardware' | 'system' = ''): DemoItem 
   );
 
   if (type === 'models') {
-    const status = ['finished', 'pending', 'running', 'queued'][Math.floor(Math.random() * 4)];
-    const nodes = [1, 4, 16, 32][Math.floor(Math.random() * 4)];
+    const status = ['finished', 'pending', 'running', 'queued'][Math.floor(Math.random() * 4)]!;
+    const nodes = [1, 4, 16, 32][Math.floor(Math.random() * 4)]!;
     const model = ['GPT-2', 'BioBERT', 'PeopleNet', 'VehicleTypeNet', 'BioMegatron', 'FinMegatron'][
       Math.floor(Math.random() * 6)
-    ];
+    ]!;
     return {
       field1: { label: 'id', value: id },
       field2: { label: 'status', value: status },
@@ -72,33 +72,33 @@ function createItem(type: '' | 'models' | 'hardware' | 'system' = ''): DemoItem 
         field4: { label: 'cores', value: 3072 },
         field5: { label: 'created', value: created }
       }
-    ][Math.floor(Math.random() * 6)];
+    ][Math.floor(Math.random() * 6)]!;
   } else {
     // default "infrastructure"
     return {
       field1: { label: 'id', value: id },
-      field2: { label: 'task', value: ['build', 'test', 'integration'][Math.floor(Math.random() * 3)] },
-      field3: { label: 'status', value: ['finished', 'pending', 'running', 'queued'][Math.floor(Math.random() * 4)] },
-      field4: { label: 'priority', value: ['p0', 'p1', 'p2'][Math.floor(Math.random() * 3)] },
+      field2: { label: 'task', value: ['build', 'test', 'integration'][Math.floor(Math.random() * 3)]! },
+      field3: { label: 'status', value: ['finished', 'pending', 'running', 'queued'][Math.floor(Math.random() * 4)]! },
+      field4: { label: 'priority', value: ['p0', 'p1', 'p2'][Math.floor(Math.random() * 3)]! },
       field5: { label: 'created', value: created }
     };
   }
 }
 
 // cache the result to reuse
-const data = {
+const data: Record<string, Record<number, DemoItem[]>> = {
   '': {
-    '10': Array(10)
+    10: Array(10)
       .fill('')
       .map(() => createItem('')) // infrastructure
   },
   models: {
-    '10': Array(10)
+    10: Array(10)
       .fill('')
       .map(() => createItem('models'))
   },
   hardware: {
-    '10': Array(10)
+    10: Array(10)
       .fill('')
       .map(() => createItem('hardware'))
   }
@@ -110,13 +110,14 @@ const data = {
 export function getItems(rows = 10): DemoItem[] {
   const type = ((window as any).NVE_SB_GLOBALS?.dataTheme as '' | 'models' | 'hardware') ?? ''; // eslint-disable-line @typescript-eslint/no-explicit-any
 
-  if (data[type][rows]) {
-    return [...data[type][rows]];
+  const typeData = data[type]!;
+  if (typeData[rows]) {
+    return [...typeData[rows]];
   } else {
-    data[type][rows] = Array(rows)
+    typeData[rows] = Array(rows)
       .fill('')
       .map(() => createItem(type));
-    return [...data[type][rows]];
+    return [...typeData[rows]];
   }
 }
 

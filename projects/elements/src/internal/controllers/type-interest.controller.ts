@@ -12,13 +12,13 @@ export type InterestEvent = Event & {
  */
 export function typeInterest<T extends Interest>(): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new TypeInterestController(instance));
+    target.addInitializer!((instance: T) => new TypeInterestController(instance));
 }
 
 export type Interest = ReactiveElement &
   HTMLElement & {
-    interestfor: string;
-    interestForElement: HTMLElement;
+    interestfor: string | null;
+    interestForElement: HTMLElement | null;
     readonly: boolean;
     disabled: boolean;
   };
@@ -85,7 +85,7 @@ export class TypeInterestController<T extends Interest> implements ReactiveContr
     if (interestForIdRef && !this.host.interestForElement) {
       this.host.interestForElement = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(
         el => el.id === interestForIdRef
-      );
+      )!;
     }
 
     // legacy behavior that allows popovertarget to trigger interestfor behavior for hint type popovers

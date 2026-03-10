@@ -51,7 +51,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     this.host.showPopover = (options?: ShowPopoverOptions) => {
       if (this.host.isConnected) {
         // provide legacy fallback for source anchor or trigger if not provided, this can happen if the popover is dynamically created in the DOM without the use of the standard popover api or legacy trigger based api
-        let source: HTMLElement | Element = options?.source;
+        let source: HTMLElement | Element | null = options?.source ?? null;
         if (!source) {
           if (this.host.anchor) {
             source = getHostAnchor(this.host);
@@ -62,14 +62,14 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
           }
         }
 
-        showPopover.call(this.host, { source });
+        showPopover.call(this.host, { source: source as HTMLElement });
       }
     };
   }
 
   async hostConnected() {
     attachInternals(this.host);
-    this.host.popover = this.host.popoverType;
+    this.host.popover = this.host.popoverType ?? null;
     await this.host.updateComplete;
     this.host.setAttribute('nve-popover', '');
     this.#updateLegacyTriggers();
@@ -79,7 +79,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
     this.host.addEventListener('beforetoggle', e => {
       if (e.newState === 'open') {
-        this.host._internals.states.add('transition-start');
+        this.host._internals!.states.add('transition-start');
       }
     });
 
@@ -107,7 +107,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     });
 
     // https://developer.mozilla.org/en-US/docs/Web/API/Invoker_Commands_API#creating_declarative_popovers
-    this.host.addEventListener('command', (e: CommandEvent) => {
+    this.host.addEventListener('command', ((e: CommandEvent) => {
       if (e.command === 'toggle-popover') {
         this.host.togglePopover({ source: e.source as HTMLElement });
       }
@@ -119,10 +119,10 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
       if (e.command === 'show-popover') {
         this.host.showPopover({ source: e.source as HTMLElement });
       }
-    });
+    }) as EventListener);
 
     // https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using_interest_invokers
-    this.host.addEventListener('interest', (e: InterestEvent) => {
+    this.host.addEventListener('interest', ((e: InterestEvent) => {
       const isCustomElement = e.source?.localName.includes('-');
       if (isCustomElement) {
         const interestDelayStart = this.host.openDelay ?? this.#parseInterestDelay();
@@ -136,9 +136,9 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
           this.host.showPopover({ source: e.source as HTMLElement });
         }
       }
-    });
+    }) as EventListener);
 
-    this.host.addEventListener('loseinterest', (e: InterestEvent) => {
+    this.host.addEventListener('loseinterest', ((e: InterestEvent) => {
       const isCustomElement = e.source?.localName.includes('-');
       if (isCustomElement) {
         this.host.hidePopover();
@@ -148,7 +148,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
         clearTimeout(this.#interestTimeout);
         this.#interestTimeout = null;
       }
-    });
+    }) as EventListener);
   }
 
   #interestTimeout: ReturnType<typeof setTimeout> | null = null;
@@ -156,7 +156,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #previousLegacyTrigger: HTMLButtonElement | null = null;
 
   async hostUpdated() {
-    this.host.popover = this.host.popoverType;
+    this.host.popover = this.host.popoverType ?? null;
     this.#updateLegacyTriggers();
   }
 
@@ -202,7 +202,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     });
   }
 
-  get #legacyHostTrigger(): HTMLElement {
+  get #legacyHostTrigger(): HTMLElement | null {
     return this.host.trigger ? (getHostTrigger(this.host, this.host.trigger) as HTMLButtonElement) : null;
   }
 
@@ -267,7 +267,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
   #toggleFocus(open: boolean, target: HTMLElement) {
     if (open) {
       // only focus popover if not the active element and not containing the active element already
-      if ((this.host.getRootNode() as Document).activeElement !== this.host && !this.host.shadowRoot.activeElement) {
+      if ((this.host.getRootNode() as Document).activeElement !== this.host && !this.host.shadowRoot!.activeElement) {
         focusElement(this.host);
       }
     } else {

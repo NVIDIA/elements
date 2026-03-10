@@ -81,7 +81,7 @@ export class PagePanel extends LitElement {
   #typeExpandableController = new TypeExpandableController(this, { useHidden: true });
 
   get #position() {
-    const position = {
+    const position: Record<string, string> = {
       left: 'left',
       right: 'right',
       bottom: 'bottom'
@@ -95,7 +95,7 @@ export class PagePanel extends LitElement {
   }
 
   get #closableIconDirection() {
-    const directions = {
+    const directions: Record<string, string> = {
       left: 'left',
       right: 'right',
       bottom: 'down'

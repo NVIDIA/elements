@@ -19,7 +19,7 @@ export interface KeynavListElement {
 /** https://webaim.org/techniques/keyboard/ */
 export function keyNavigationList<T extends ReactiveElement & KeynavListElement>(): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new KeyNavigationListController(instance));
+    target.addInitializer!((instance: T) => new KeyNavigationListController(instance));
 }
 
 export class KeyNavigationListController<T extends ReactiveElement & KeynavListElement> implements ReactiveController {
@@ -80,7 +80,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
         });
 
         if (next !== previous) {
-          this.#setActiveItem(e, items[next], items[previous]);
+          this.#setActiveItem(e, items[next]!, items[previous]);
         }
       }
     }

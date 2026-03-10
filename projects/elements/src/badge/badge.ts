@@ -69,7 +69,7 @@ export class Badge extends LitElement {
   };
 
   get #size() {
-    return statusIcons[this.status] === 'dot' ? 'sm' : 'md';
+    return this.status && statusIcons[this.status] === 'dot' ? 'sm' : 'md';
   }
 
   /** @private */
@@ -85,7 +85,7 @@ export class Badge extends LitElement {
   render() {
     return html`
       <div internal-host>
-        <slot name="prefix-icon">${this.status && !this.status?.includes('trend') ? html`<nve-icon part="_icon" name=${statusIcons[this.status]} .size=${this.#size} aria-hidden="true"></nve-icon>` : nothing}</slot>
+        <slot name="prefix-icon">${this.status && !this.status?.includes('trend') ? html`<nve-icon part="_icon" .name=${statusIcons[this.status] ?? ''} .size=${this.#size} aria-hidden="true"></nve-icon>` : nothing}</slot>
         <slot @slotchange=${this.#slotChange}></slot>
         <slot name="suffix-icon">
           ${this.status?.includes('trend') ? html`<nve-icon part="_icon" .name=${statusIcons[this.status]} aria-hidden="true"></nve-icon>` : nothing}
@@ -111,13 +111,14 @@ export class Badge extends LitElement {
   }
 
   #assignAriaLabel() {
-    const trend = this.status?.includes('trend') ? ` ${this.i18n.trend} ${this.i18n[this.status.split('-')[1]]}` : '';
+    const trend = this.status?.includes('trend')
+      ? ` ${this.i18n.trend} ${(this.i18n as Record<string, string>)[this.status!.split('-')[1]!]}`
+      : '';
     this._internals.ariaLabel = this.textContent + trend;
   }
 
   #assignDefaultIcon() {
-    const unassignedIcon = this.shadowRoot
-      .querySelector<HTMLSlotElement>('slot:not([name])')
+    const unassignedIcon = this.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])')!
       .assignedElements()
       .find(i => i.matches('nve-icon, nve-icon') && !i.slot);
     if (unassignedIcon) {

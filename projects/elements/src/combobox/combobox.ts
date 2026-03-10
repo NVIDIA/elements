@@ -81,8 +81,8 @@ export class Combobox extends Control implements ContainerElement {
    * If a <datalist> exists, on focus only options that match the current input value show.
    */
 
-  #_datalist: HTMLSelectElement;
-  get #datalist(): HTMLSelectElement {
+  #_datalist: HTMLSelectElement | null;
+  get #datalist(): HTMLSelectElement | null {
     if (!this.#_datalist) {
       this.#_datalist = this.shadowRoot
         ? ((this.shadowRoot
@@ -95,8 +95,8 @@ export class Combobox extends Control implements ContainerElement {
     return this.#_datalist;
   }
 
-  #_select: HTMLSelectElement;
-  get #select(): HTMLSelectElement {
+  #_select: HTMLSelectElement | null;
+  get #select(): HTMLSelectElement | null {
     if (!this.#_select) {
       this.#_select = this.shadowRoot
         ? ((this.shadowRoot
@@ -113,19 +113,19 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   get #items() {
-    return Array.from(this.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag));
+    return Array.from(this.shadowRoot!.querySelectorAll<MenuItem>(MenuItem.metadata.tag));
   }
 
   get #dropdown() {
-    return this.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    return this.shadowRoot!.querySelector<Dropdown>(Dropdown.metadata.tag);
   }
 
   get #input() {
-    return this.shadowRoot.querySelector('[input]');
+    return this.shadowRoot!.querySelector('[input]');
   }
 
   get #tags() {
-    return this.shadowRoot.querySelector('.tags');
+    return this.shadowRoot!.querySelector('.tags');
   }
 
   get #hasAvailableOptions() {
@@ -169,7 +169,7 @@ export class Combobox extends Control implements ContainerElement {
     const visibleOptions = options.filter(o => !o.hidden).filter(o => !(o.value === '' && o.disabled));
     const hasNoResults = visibleOptions.filter(o => !o.disabled).length === 0;
     return html`
-    <nve-dropdown part="dropdown" .popoverType=${'manual'} .modal=${false} @open=${e => (e.target.hidden = false)} @close=${this.#closeListBox} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
+    <nve-dropdown part="dropdown" .popoverType=${'manual'} .modal=${false} @open=${(e: Event) => ((e.target as HTMLElement).hidden = false)} @close=${this.#closeListBox} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
       <nve-menu part="menu" role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
         ${visibleOptions.map(
           o => html`
@@ -200,7 +200,7 @@ export class Combobox extends Control implements ContainerElement {
 
   async firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
-    this.shadowRoot.addEventListener('slotchange', () => {
+    this.shadowRoot!.addEventListener('slotchange', () => {
       this.#_datalist = null;
       this.#_select = null;
     });
@@ -223,7 +223,7 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   reset() {
-    this.#dropdown.hidePopover();
+    this.#dropdown!.hidePopover();
     if (this.#select) {
       this.#select.selectedIndex = -1;
     }
@@ -234,8 +234,8 @@ export class Combobox extends Control implements ContainerElement {
   selectAll() {
     this.#options.forEach(o => (o.selected = true));
     this.requestUpdate();
-    this.#select.dispatchEvent(new Event('input', { bubbles: true }));
-    this.#select.dispatchEvent(new Event('change', { bubbles: true }));
+    this.#select!.dispatchEvent(new Event('input', { bubbles: true }));
+    this.#select!.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
   #setupSingleSelect() {
@@ -256,30 +256,30 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setupInitialValue() {
-    const selected = Array.from(this.#select.selectedOptions).find((o: HTMLOptionElement) =>
+    const selected = Array.from(this.#select!.selectedOptions).find((o: HTMLOptionElement) =>
       o.hasAttribute('selected')
     );
-    if (selected && !this.#select.multiple && !this.input.defaultValue) {
+    if (selected && !this.#select!.multiple && !this.input.defaultValue) {
       this.input.value = getDisplayValue(selected);
     }
   }
 
   #updateInputValue() {
-    if (!this.#select.multiple && !this.input.defaultValue) {
+    if (!this.#select!.multiple && !this.input.defaultValue) {
       this.input.value = getDisplayValue(
-        Array.from(this.#select.selectedOptions).find(o => o.value === this.#select.value)
+        Array.from(this.#select!.selectedOptions).find(o => o.value === this.#select!.value)!
       );
     }
   }
 
   #syncSelectValueStates() {
     this.#observers.push(
-      getElementUpdate(this.#select, 'value', () => {
+      getElementUpdate(this.#select!, 'value', () => {
         this.#updateInputValue();
         this.requestUpdate();
       }),
-      onChildListMutation(this.#select, () => this.requestUpdate(), { attributes: true, subtree: true }),
-      onChildListMutation(this.#select, () => this.#syncOptionSelectedStates(), { subtree: true })
+      onChildListMutation(this.#select!, () => this.requestUpdate(), { attributes: true, subtree: true }),
+      onChildListMutation(this.#select!, () => this.#syncOptionSelectedStates(), { subtree: true })
     );
   }
 
@@ -296,36 +296,36 @@ export class Combobox extends Control implements ContainerElement {
   #setupAutoCompleteKeyEvents() {
     this.addEventListener('keydown', (e: KeyboardEvent) => {
       if (e.code === 'Tab') {
-        if (this.#hasAvailableOptions && this.#dropdown.matches(':popover-open') && this.input.value !== '') {
+        if (this.#hasAvailableOptions && this.#dropdown!.matches(':popover-open') && this.input.value !== '') {
           e.preventDefault();
           // the menu item option property caches/stores the option value instead of value to prevent unnecessary lit lifecycle updates for each menu item
           this.#setInputValue((this.#items[0] as MenuItem & { option: string }).option);
           this.#setSelectValue(
             this.#options.find(
               o => (o.label ? o.label : o.value) === (this.#items[0] as MenuItem & { option: string }).option
-            )
+            )!
           );
         }
-        this.#dropdown.hidePopover();
+        this.#dropdown!.hidePopover();
       }
     });
   }
 
   #setupMenuItemUpdateEvents() {
     this.input.addEventListener('input', () => this.#filterOptions());
-    this.shadowRoot.addEventListener('slotchange', () => this.#filterOptions());
+    this.shadowRoot!.addEventListener('slotchange', () => this.#filterOptions());
   }
 
   async #setupLightDismiss() {
-    const dropdown = this.#dropdown;
+    const dropdown = this.#dropdown!;
     await dropdown.updateComplete;
     const options = {
-      element: dropdown?.shadowRoot.querySelector<HTMLElement>('[internal-host]'),
+      element: dropdown.shadowRoot!.querySelector<HTMLElement>('[internal-host]')!,
       focusElement: this.input
     };
     createLightDismiss(options, () => {
-      if (this.#dropdown.matches(':popover-open')) {
-        this.#dropdown.hidePopover();
+      if (this.#dropdown!.matches(':popover-open')) {
+        this.#dropdown!.hidePopover();
       }
     });
   }
@@ -341,7 +341,7 @@ export class Combobox extends Control implements ContainerElement {
       }
 
       if (e?.code === 'ArrowDown' && (this.getRootNode() as ShadowRoot).activeElement === this.input) {
-        this.#dropdown.tabIndex = 0;
+        this.#dropdown!.tabIndex = 0;
         this.#items[0]?.focus();
         e.preventDefault();
       }
@@ -351,7 +351,7 @@ export class Combobox extends Control implements ContainerElement {
   #selectValue(option: { selected?: boolean; label?: string; value?: string }) {
     if (!this.#select?.multiple) {
       this.#setInputValue(getDisplayValue(option));
-      this.#dropdown.hidePopover();
+      this.#dropdown!.hidePopover();
       focusElementTimeout(this.input);
     }
 
@@ -367,13 +367,14 @@ export class Combobox extends Control implements ContainerElement {
     if (this.#hasAvailableOptions) {
       return this.input.value.toLowerCase()[index]?.toLowerCase() === character.toLowerCase();
     }
+    return false;
   }
 
   #filterOptions() {
     this.#options.forEach(option => {
-      const hasLabel = option.textContent.trim().length;
+      const hasLabel = option.textContent!.trim().length;
       if (hasLabel) {
-        const matchesLabel = option.textContent.toLocaleLowerCase().includes(this.input?.value.toLowerCase());
+        const matchesLabel = option.textContent!.toLocaleLowerCase().includes(this.input?.value.toLowerCase());
         option.hidden = !matchesLabel;
       } else {
         const matchesValue = option.value.toLocaleLowerCase().includes(this.input?.value.toLowerCase());
@@ -384,21 +385,21 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #openListBox() {
-    if (!this.input.disabled && !this.#dropdown.matches(':popover-open')) {
+    if (!this.input.disabled && !this.#dropdown!.matches(':popover-open')) {
       if (this.#select) {
         this.#options.forEach(option => (option.hidden = false));
       } else {
         this.#filterOptions();
       }
-      this.#dropdown.style.setProperty('--min-width', `${this.#input.getBoundingClientRect().width}px`);
+      this.#dropdown!.style.setProperty('--min-width', `${this.#input!.getBoundingClientRect().width}px`);
       // explicitly provide source as the performance optimizations in the suffixContent getter prevent the dropdown from setting its anchor/trigger reliably
-      this.#dropdown.showPopover({ source: this.#input as HTMLElement });
-      this.#dropdown.tabIndex = -1;
+      this.#dropdown!.showPopover({ source: this.#input as HTMLElement });
+      this.#dropdown!.tabIndex = -1;
     }
   }
 
   #closeListBox() {
-    this.#dropdown.hidePopover();
+    this.#dropdown!.hidePopover();
     this.#validateSingleSelectValue();
   }
 
@@ -421,11 +422,13 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setSelectValue(option: { value?: string; selected?: boolean }) {
-    const found = [...this.#options, { value: '', selected: null }].find(o => o.value === option.value);
-    if (found) found.selected = option.selected;
+    const found = [...this.#options, { value: '', selected: null as boolean | null }].find(
+      o => o.value === option.value
+    );
+    if (found) found.selected = option.selected ?? null;
 
     if (this.#select && !this.#select.multiple) {
-      this.#select.value = option.value;
+      this.#select.value = option.value!;
     }
 
     this.#select?.dispatchEvent(new Event('input', { bubbles: true }));
@@ -436,17 +439,17 @@ export class Combobox extends Control implements ContainerElement {
     if (this.#select?.multiple && !this.notags) {
       if (this.#select.selectedOptions.length > 1) {
         // only calculate initial overflow if many tags exist
-        this.#updateMultipleOverflow(this.#tags.getBoundingClientRect().width);
+        this.#updateMultipleOverflow(this.#tags!.getBoundingClientRect().width);
       }
-      const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0].contentRect.width));
+      const observer = new ResizeObserver(entries => this.#updateMultipleOverflow(entries[0]!.contentRect.width));
       this.#observers.push(observer);
-      observer.observe(this.#tags);
+      observer.observe(this.#tags!);
     }
   }
 
   #updateMultipleOverflow(tagWidth: number) {
     const INPUT_MIN_WIDTH = 100;
-    if (this.#select?.multiple && tagWidth > this.#input.getBoundingClientRect().width - INPUT_MIN_WIDTH) {
+    if (this.#select?.multiple && tagWidth > this.#input!.getBoundingClientRect().width - INPUT_MIN_WIDTH) {
       this._internals.states.add('multiple-overflow');
     } else {
       this._internals.states.delete('multiple-overflow');
@@ -455,7 +458,7 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupSlotStates() {
     this.#setSlotStates();
-    this.shadowRoot.addEventListener('slotchange', () => this.#setSlotStates());
+    this.shadowRoot!.addEventListener('slotchange', () => this.#setSlotStates());
   }
 
   #setSlotStates() {
