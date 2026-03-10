@@ -305,9 +305,6 @@ importers:
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../labs/lint
-      '@nvidia-elements/snippets':
-        specifier: workspace:*
-        version: link:../labs/snippets
       '@nvidia-elements/styles':
         specifier: workspace:^
         version: link:../styles
@@ -446,9 +443,6 @@ importers:
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../labs/lint
-      '@nvidia-elements/snippets':
-        specifier: workspace:*
-        version: link:../labs/snippets
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../styles
@@ -748,6 +742,9 @@ importers:
       lit:
         specifier: 'catalog:'
         version: 3.3.2
+      parse5:
+        specifier: 7.1.2
+        version: 7.1.2
       pixelmatch:
         specifier: 6.0.0
         version: 6.0.0
@@ -860,9 +857,6 @@ importers:
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint
-      '@nvidia-elements/snippets':
-        specifier: workspace:*
-        version: link:../snippets
       '@nvidia-elements/themes':
         specifier: workspace:*
         version: link:../../themes
@@ -1003,9 +997,6 @@ importers:
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint
-      '@nvidia-elements/snippets':
-        specifier: workspace:*
-        version: link:../snippets
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../../elements
@@ -1125,9 +1116,6 @@ importers:
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint
-      '@nvidia-elements/snippets':
-        specifier: workspace:*
-        version: link:../snippets
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1189,9 +1177,6 @@ importers:
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../lint
-      '@nvidia-elements/snippets':
-        specifier: workspace:*
-        version: link:../snippets
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1259,28 +1244,6 @@ importers:
         specifier: 'catalog:'
         version: 4.0.16(@opentelemetry/api@1.9.0)(@types/node@24.9.1)(@vitest/browser-playwright@4.0.16)(jiti@2.6.1)(jsdom@27.1.0)(lightningcss@1.31.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2)
 
-  projects/labs/snippets:
-    dependencies:
-      chokidar:
-        specifier: 4.0.1
-        version: 4.0.1
-      glob:
-        specifier: 'catalog:'
-        version: 13.0.6
-      parse5:
-        specifier: 7.1.2
-        version: 7.1.2
-      picocolors:
-        specifier: 1.0.1
-        version: 1.0.1
-    devDependencies:
-      '@internals/eslint':
-        specifier: workspace:*
-        version: link:../../internals/eslint
-      eslint:
-        specifier: 'catalog:'
-        version: 9.39.2(jiti@2.6.1)
-
   projects/monaco:
     dependencies:
       '@nvidia-elements/forms':
@@ -1305,9 +1268,6 @@ importers:
       '@nvidia-elements/lint':
         specifier: workspace:*
         version: link:../labs/lint
-      '@nvidia-elements/snippets':
-        specifier: workspace:*
-        version: link:../labs/snippets
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../elements
