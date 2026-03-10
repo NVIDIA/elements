@@ -12,7 +12,8 @@ import {
   generateId,
   isFocusable,
   hostAttr,
-  audit
+  audit,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import accordionStyleSheet from './accordion.css?inline';
@@ -118,6 +119,7 @@ export class AccordionContent extends LitElement {
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 @audit()
+@scopedRegistry()
 @stateExpanded<Accordion>()
 export class Accordion extends LitElement implements ContainerElement {
   static styles = useStyles([accordionStyleSheet]);

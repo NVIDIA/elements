@@ -6,7 +6,8 @@ import {
   I18nController,
   TypeExpandableController,
   useStyles,
-  attachInternals
+  attachInternals,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import { IconButton } from '@nvidia-elements/core/icon-button';
 import panelStyleSheet from './panel.css?inline';
@@ -132,6 +133,7 @@ export class PanelFooter extends LitElement {
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
  */
 
+@scopedRegistry()
 @stateExpanded<Panel>()
 export class Panel extends LitElement {
   /**

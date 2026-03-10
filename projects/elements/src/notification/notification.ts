@@ -10,7 +10,8 @@ import {
   statusIcons,
   useStyles,
   I18nController,
-  TypeNativePopoverController
+  TypeNativePopoverController,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import styles from './notification.css?inline';
 
@@ -42,6 +43,7 @@ import styles from './notification.css?inline';
  * @csspart icon-button - The close icon button element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/alertdialog/
  */
+@scopedRegistry()
 export class Notification extends LitElement {
   /**
    * (optional) By default the popover will automatically anchor itself relative to the trigger element.

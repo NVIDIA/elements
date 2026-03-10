@@ -2,9 +2,9 @@ import { getDuplicatePackageGlobalVersionWarning } from '../utils/audit-logs.js'
 import { deepMerge } from '../utils/objects.js';
 import { getEnv, getHostDetails } from './global.utils.js';
 
-declare global {
-  // eslint-disable-next-line no-var
-  var MLV_ELEMENTS: typeof NVE_ELEMENTS;
+function createScopedRegistry(): CustomElementRegistry {
+  const supported = globalThis.CustomElementRegistry && 'initialize' in CustomElementRegistry.prototype;
+  return supported ? new CustomElementRegistry() : customElements;
 }
 
 export class GlobalState {
@@ -21,6 +21,7 @@ export class GlobalState {
         env: getEnv(),
         ...getHostDetails(),
         versions: [],
+        scopedRegistry: {},
         elementRegistry: {},
         i18nRegistry: {},
         audit: {}
@@ -30,6 +31,7 @@ export class GlobalState {
     /** @deprecated MLV_ELEMENTS */
     globalThis.MLV_ELEMENTS = globalThis.NVE_ELEMENTS;
     globalThis.NVE_ELEMENTS.state.versions = Array.from(new Set([...globalThis.NVE_ELEMENTS.state.versions, '0.0.0']));
+    globalThis.NVE_ELEMENTS.state.scopedRegistry['0.0.0'] = createScopedRegistry();
 
     if (globalThis.NVE_ELEMENTS.state.versions.length > 1 && globalThis.NVE_ELEMENTS.state.env !== 'production') {
       console.warn(

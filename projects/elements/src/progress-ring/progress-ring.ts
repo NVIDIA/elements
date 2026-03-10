@@ -3,7 +3,7 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { Size, SupportStatus } from '@nvidia-elements/core/internal';
-import { attachInternals, I18nController, statusIcons, useStyles } from '@nvidia-elements/core/internal';
+import { attachInternals, I18nController, scopedRegistry, statusIcons, useStyles } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './progress-ring.css?inline';
 
@@ -25,6 +25,7 @@ import styles from './progress-ring.css?inline';
  * @csspart icon - The icon element
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
  */
+@scopedRegistry()
 export class ProgressRing extends LitElement {
   static styles = useStyles([styles]);
 

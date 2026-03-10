@@ -8,6 +8,7 @@ import {
   excessiveInstanceLimit,
   I18nController,
   popoverStyles,
+  scopedRegistry,
   TypeNativePopoverController,
   useStyles
 } from '@nvidia-elements/core/internal';
@@ -38,6 +39,7 @@ import styles from './dropdown.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
 @audit({ excessiveInstanceLimit })
+@scopedRegistry()
 export class Dropdown extends LitElement {
   static styles = useStyles([popoverStyles, styles]);
 

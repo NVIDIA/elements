@@ -27,6 +27,7 @@ export * from './controllers/type-ssr.controller.js';
 export * from './controllers/type-submit.controller.js';
 export * from './controllers/type-touch.controller.js';
 export * from './decorators/host-attr.js';
+export * from './decorators/scoped-registry.js';
 export * from './styles/index.js';
 export * from './styles/popover.js';
 export * from './services/global.service.js';
