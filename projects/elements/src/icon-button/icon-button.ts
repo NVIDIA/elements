@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Size } from '@nvidia-elements/core/internal';
-import { removeEmptySlotWhitespace, useStyles } from '@nvidia-elements/core/internal';
+import { removeEmptySlotWhitespace, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
 import { Button } from '@nvidia-elements/core/button';
 import type { IconName } from '@nvidia-elements/core/icon';
 import { Icon } from '@nvidia-elements/core/icon';
@@ -25,6 +25,7 @@ import styles from './icon-button.css?inline';
  * @csspart icon - The icon element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
+@scopedRegistry()
 export class IconButton extends Button {
   /**
    * Sets the icon name, which determines which icon to display.

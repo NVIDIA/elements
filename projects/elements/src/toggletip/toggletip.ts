@@ -11,7 +11,8 @@ import {
   popoverStyles,
   TypeNativePopoverController,
   useStyles,
-  appendRootNodeStyle
+  appendRootNodeStyle,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import styles from './toggletip.css?inline';
 import globalStyles from './toggletip.global.css?inline';
@@ -44,6 +45,7 @@ import globalStyles from './toggletip.global.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  *
  */
+@scopedRegistry()
 @audit({ excessiveInstanceLimit })
 export class Toggletip extends LitElement {
   static styles = useStyles([popoverStyles, styles]);

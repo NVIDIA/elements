@@ -1,6 +1,6 @@
 import { html, LitElement } from 'lit';
 import type { SupportStatus } from '@nvidia-elements/core/internal';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
 import { property } from 'lit/decorators/property.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './progress-bar.css?inline';
@@ -17,6 +17,7 @@ import styles from './progress-bar.css?inline';
  * @cssprop --indeterminate-gradient - Gradient used for indeterminate state animation
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/progressbar_role
  */
+@scopedRegistry()
 export class ProgressBar extends LitElement {
   static styles = useStyles([styles]);
 

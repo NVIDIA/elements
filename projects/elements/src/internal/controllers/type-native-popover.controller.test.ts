@@ -811,19 +811,12 @@ describe('type-popover.controller - interest invoker support', () => {
 });
 
 describe('type-popover.controller - showPopover source fallback', () => {
-  let element: TypeNativePopoverControllerTestElement;
-  let fixture: HTMLElement;
-
-  afterEach(() => {
-    removeFixture(fixture);
-  });
-
   it('should use explicitly provided source when calling showPopover with options', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-button id="explicit-source">source</nve-button>
       <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
     `);
-    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
       'type-native-popover-controller-test-element'
     );
     const sourceButton = fixture.querySelector<Button>('#explicit-source');
@@ -837,11 +830,11 @@ describe('type-popover.controller - showPopover source fallback', () => {
   });
 
   it('should fallback to anchor property when showPopover is called without source', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-button id="anchor-btn">anchor</nve-button>
       <type-native-popover-controller-test-element id="popover" .anchor=${'anchor-btn'}></type-native-popover-controller-test-element>
     `);
-    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
       'type-native-popover-controller-test-element'
     );
     const anchorButton = fixture.querySelector<Button>('#anchor-btn');
@@ -852,14 +845,15 @@ describe('type-popover.controller - showPopover source fallback', () => {
     element.showPopover();
     const event = await openEvent;
     expect(event.detail.trigger).toBe(anchorButton);
+    removeFixture(fixture);
   });
 
   it('should fallback to trigger property when showPopover is called without source and no anchor', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-button id="trigger-btn">trigger</nve-button>
       <type-native-popover-controller-test-element id="popover" .trigger=${'trigger-btn'} hidden></type-native-popover-controller-test-element>
     `);
-    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
       'type-native-popover-controller-test-element'
     );
     const triggerButton = fixture.querySelector<Button>('#trigger-btn');
@@ -870,14 +864,15 @@ describe('type-popover.controller - showPopover source fallback', () => {
     element.showPopover();
     const event = await openEvent;
     expect(event.detail.trigger).toBe(triggerButton);
+    removeFixture(fixture);
   });
 
   it('should fallback to document.activeElement when showPopover is called without source, anchor, or trigger', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-button id="focused-btn">focused</nve-button>
       <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
     `);
-    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
       'type-native-popover-controller-test-element'
     );
     const focusedButton = fixture.querySelector<Button>('#focused-btn');
@@ -891,15 +886,16 @@ describe('type-popover.controller - showPopover source fallback', () => {
     element.showPopover();
     const event = await openEvent;
     expect(event.detail.trigger).toBe(focusedButton);
+    removeFixture(fixture);
   });
 
   it('should prefer explicit source over anchor property', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-button id="explicit-source">explicit</nve-button>
       <nve-button id="anchor-btn">anchor</nve-button>
       <type-native-popover-controller-test-element id="popover" .anchor=${'anchor-btn'}></type-native-popover-controller-test-element>
     `);
-    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
       'type-native-popover-controller-test-element'
     );
     const explicitSource = fixture.querySelector<Button>('#explicit-source');
@@ -913,15 +909,16 @@ describe('type-popover.controller - showPopover source fallback', () => {
     const event = await openEvent;
     expect(event.detail.trigger).toBe(explicitSource);
     expect(event.detail.trigger).not.toBe(anchorButton);
+    removeFixture(fixture);
   });
 
   it('should prefer anchor over trigger property', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-button id="anchor-btn">anchor</nve-button>
       <nve-button id="trigger-btn">trigger</nve-button>
       <type-native-popover-controller-test-element id="popover" .anchor=${'anchor-btn'} .trigger=${'trigger-btn'} hidden></type-native-popover-controller-test-element>
     `);
-    element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
+    const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
       'type-native-popover-controller-test-element'
     );
     const anchorButton = fixture.querySelector<Button>('#anchor-btn');
@@ -935,18 +932,13 @@ describe('type-popover.controller - showPopover source fallback', () => {
     const event = await openEvent;
     expect(event.detail.trigger).toBe(anchorButton);
     expect(event.detail.trigger).not.toBe(triggerButton);
+    removeFixture(fixture);
   });
 });
 
 describe('type-popover.controller - dynamic DOM creation', () => {
-  let fixture: HTMLElement;
-
-  afterEach(() => {
-    removeFixture(fixture);
-  });
-
   it('should open popover when dynamically created without trigger or anchor', async () => {
-    fixture = await createFixture(html`<nve-button id="focus-target">focus</nve-button>`);
+    const fixture = await createFixture(html`<nve-button id="focus-target">focus</nve-button>`);
     const focusTarget = fixture.querySelector<Button>('#focus-target');
     await elementIsStable(focusTarget);
 
@@ -966,10 +958,11 @@ describe('type-popover.controller - dynamic DOM creation', () => {
 
     expect(element.matches(':popover-open')).toBe(true);
     expect(event.detail.trigger).toBe(focusTarget);
+    removeFixture(fixture);
   });
 
   it('should open popover when dynamically created with explicit source', async () => {
-    fixture = await createFixture(html`<nve-button id="source-btn">source</nve-button>`);
+    const fixture = await createFixture(html`<nve-button id="source-btn">source</nve-button>`);
     const sourceButton = fixture.querySelector<Button>('#source-btn');
     await elementIsStable(sourceButton);
 
@@ -987,18 +980,13 @@ describe('type-popover.controller - dynamic DOM creation', () => {
 
     expect(element.matches(':popover-open')).toBe(true);
     expect(event.detail.trigger).toBe(sourceButton);
+    removeFixture(fixture);
   });
 });
 
 describe('type-popover.controller - interest timeout cleanup on disconnect', () => {
-  let fixture: HTMLElement;
-
-  afterEach(() => {
-    removeFixture(fixture);
-  });
-
   it('should cancel pending interest timeout when element is disconnected', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-button interestfor="popover">anchor</nve-button>
       <type-native-popover-controller-test-element id="popover" .openDelay=${50}></type-native-popover-controller-test-element>
     `);
@@ -1024,10 +1012,11 @@ describe('type-popover.controller - interest timeout cleanup on disconnect', () 
 
     // Popover should not have opened since timeout was cleared on disconnect
     expect(element.matches(':popover-open')).toBe(false);
+    removeFixture(fixture);
   });
 
   it('should not throw when disconnecting with no pending interest timeout', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
     `);
     const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
@@ -1036,18 +1025,13 @@ describe('type-popover.controller - interest timeout cleanup on disconnect', () 
     await elementIsStable(element);
 
     expect(() => element.disconnectedCallback()).not.toThrow();
+    removeFixture(fixture);
   });
 });
 
 describe('type-popover.controller - disconnected element handling', () => {
-  let fixture: HTMLElement;
-
-  afterEach(() => {
-    removeFixture(fixture);
-  });
-
   it('should not throw when showPopover is called on a disconnected element', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
     `);
     const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
@@ -1059,10 +1043,11 @@ describe('type-popover.controller - disconnected element handling', () => {
 
     expect(() => element.showPopover()).not.toThrow();
     expect(element.isConnected).toBe(false);
+    removeFixture(fixture);
   });
 
   it('should not open popover when showPopover is called on a disconnected element', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
     `);
     const element = fixture.querySelector<TypeNativePopoverControllerTestElement>(
@@ -1074,10 +1059,11 @@ describe('type-popover.controller - disconnected element handling', () => {
     element.showPopover();
 
     expect(element.matches(':popover-open')).toBe(false);
+    removeFixture(fixture);
   });
 
   it('should not throw when showPopover is called with options on a disconnected element', async () => {
-    fixture = await createFixture(html`
+    const fixture = await createFixture(html`
       <nve-button id="source-btn">source</nve-button>
       <type-native-popover-controller-test-element id="popover"></type-native-popover-controller-test-element>
     `);
@@ -1092,5 +1078,6 @@ describe('type-popover.controller - disconnected element handling', () => {
 
     expect(() => element.showPopover({ source: sourceButton })).not.toThrow();
     expect(element.isConnected).toBe(false);
+    removeFixture(fixture);
   });
 });

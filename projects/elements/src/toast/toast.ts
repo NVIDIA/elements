@@ -8,6 +8,7 @@ import {
   excessiveInstanceLimit,
   I18nController,
   popoverStyles,
+  scopedRegistry,
   statusIcons,
   TypeNativePopoverController,
   useStyles
@@ -41,6 +42,7 @@ import styles from './toast.css?inline';
  * @cssprop --animation-duration - Duration of toast open/close animations
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
  */
+@scopedRegistry()
 @audit({ excessiveInstanceLimit })
 export class Toast extends LitElement {
   static styles = useStyles([popoverStyles, styles]);

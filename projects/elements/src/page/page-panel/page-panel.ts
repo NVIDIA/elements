@@ -6,6 +6,7 @@ import {
   attachInternals,
   audit,
   I18nController,
+  scopedRegistry,
   TypeExpandableController,
   useStyles
 } from '@nvidia-elements/core/internal';
@@ -41,6 +42,7 @@ import globalStyles from './page-panel.global.css?inline';
  *
  */
 @audit()
+@scopedRegistry()
 export class PagePanel extends LitElement {
   /**
    * Sets the max size of the panel.

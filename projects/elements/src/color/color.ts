@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { appendRootNodeStyle, openEyeDropper, useStyles } from '@nvidia-elements/core/internal';
+import { appendRootNodeStyle, openEyeDropper, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -17,6 +17,7 @@ import styles from './color.css?inline';
  * @csspart icon-button - The eye dropper icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color
  */
+@scopedRegistry()
 export class Color extends Control implements ContainerElement {
   /**
    * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.

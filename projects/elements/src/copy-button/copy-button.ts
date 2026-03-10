@@ -1,7 +1,7 @@
 import { html, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
-import { useStyles, I18nController } from '@nvidia-elements/core/internal';
+import { useStyles, I18nController, scopedRegistry } from '@nvidia-elements/core/internal';
 import { Button } from '@nvidia-elements/core/button';
 import { Icon } from '@nvidia-elements/core/icon';
 import { Toast } from '@nvidia-elements/core/toast';
@@ -29,6 +29,7 @@ import styles from './copy-button.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  *
  */
+@scopedRegistry()
 export class CopyButton extends Button {
   @state() private copied = false;
 

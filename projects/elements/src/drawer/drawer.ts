@@ -5,6 +5,7 @@ import {
   createGhostElement,
   I18nController,
   popoverStyles,
+  scopedRegistry,
   TypeNativePopoverController,
   typeSSR,
   useStyles
@@ -36,6 +37,7 @@ import styles from './drawer.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
 @typeSSR()
+@scopedRegistry()
 export class Drawer extends LitElement {
   /**
    * Sets the side position of the popover relative to the provided anchor element.

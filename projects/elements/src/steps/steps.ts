@@ -11,7 +11,8 @@ import {
   useStyles,
   keyNavigationList,
   attachInternals,
-  audit
+  audit,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import stepsItemStyleSheet from './steps-item.css?inline';
 import stepsStyleSheet from './steps.css?inline';
@@ -38,6 +39,7 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
  */
 @audit()
+@scopedRegistry()
 @stateSelected<StepsItem>()
 export class StepsItem extends BaseButton {
   /**
