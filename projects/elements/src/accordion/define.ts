@@ -1,6 +1,5 @@
 import { define } from '@nvidia-elements/core/internal';
 import { Accordion, AccordionHeader, AccordionContent, AccordionGroup } from '@nvidia-elements/core/accordion';
-import '@nvidia-elements/core/icon-button/define.js';
 
 define(Accordion);
 define(AccordionHeader);

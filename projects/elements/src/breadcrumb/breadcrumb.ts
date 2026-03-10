@@ -7,7 +7,8 @@ import {
   attachInternals,
   generateId,
   isFocusable,
-  typeSSR
+  typeSSR,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import styles from './breadcrumb.css?inline';
 import { Icon } from '@nvidia-elements/core/icon';
@@ -38,6 +39,7 @@ import type { Button } from '@nvidia-elements/core/button';
  * @aria https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/navigation_role
  */
 @typeSSR()
+@scopedRegistry()
 @keyNavigationList<Breadcrumb>()
 export class Breadcrumb extends LitElement {
   get keynavListConfig(): KeynavListConfig {

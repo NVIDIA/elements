@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { ContainerElement } from '@nvidia-elements/core/internal';
-import { useStyles } from '@nvidia-elements/core/internal';
+import { scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
 import { inputStyles } from '@nvidia-elements/core/input';
 import { IconButton } from '@nvidia-elements/core/icon-button';
@@ -28,6 +28,7 @@ import styles from './date.css?inline';
  * @csspart icon-button - The calendar icon button element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date
  */
+@scopedRegistry()
 export class Date extends Control implements ContainerElement {
   /**
    * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.

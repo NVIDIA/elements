@@ -6,6 +6,7 @@ import {
   attachInternals,
   generateId,
   I18nController,
+  scopedRegistry,
   TypeClosableController,
   typeSSR,
   useStyles
@@ -38,6 +39,7 @@ import styles from './progressive-filter-chip.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/
  */
 @typeSSR()
+@scopedRegistry()
 export class ProgressiveFilterChip extends LitElement {
   static readonly metadata = {
     tag: 'nve-progressive-filter-chip',

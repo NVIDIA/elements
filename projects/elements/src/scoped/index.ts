@@ -4,6 +4,7 @@ import type { LitElement } from 'lit';
 type LitElementConstructor = new (...args: any[]) => LitElement; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 /**
+ * @deprecated
  * Utility for applying mixin recursively to all Elements, used for scoped element registry polyfills and shims
  */
 export function scope(

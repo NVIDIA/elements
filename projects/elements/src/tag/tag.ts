@@ -7,7 +7,8 @@ import {
   BaseButton,
   TypeClosableController,
   useStyles,
-  colorStateStyles
+  colorStateStyles,
+  scopedRegistry
 } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './tag.css?inline';
@@ -34,6 +35,7 @@ import styles from './tag.css?inline';
  * @csspart icon - The icon element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
+@scopedRegistry()
 export class Tag extends BaseButton {
   static styles = useStyles([colorStateStyles, styles]);
 

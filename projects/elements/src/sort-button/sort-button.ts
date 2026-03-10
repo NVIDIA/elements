@@ -1,7 +1,7 @@
 import { html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { Icon } from '@nvidia-elements/core/icon';
-import { useStyles, BaseButton, I18nController } from '@nvidia-elements/core/internal';
+import { useStyles, BaseButton, I18nController, scopedRegistry } from '@nvidia-elements/core/internal';
 import styles from './sort-button.css?inline';
 
 const nextSort = {
@@ -23,6 +23,7 @@ const nextSort = {
  * @csspart icon - The icon element
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/
  */
+@scopedRegistry()
 export class SortButton extends BaseButton {
   static styles = useStyles([styles]);
 

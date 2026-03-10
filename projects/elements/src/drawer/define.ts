@@ -1,6 +1,5 @@
 import { define } from '@nvidia-elements/core/internal';
 import { Drawer, DrawerContent, DrawerFooter, DrawerHeader } from '@nvidia-elements/core/drawer';
-import '@nvidia-elements/core/icon-button/define.js';
 
 define(Drawer);
 define(DrawerFooter);
