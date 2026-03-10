@@ -24,10 +24,10 @@ packages:
   - projects/cli
   - projects/labs/code
   - projects/labs/markdown
-  - projects/labs/media
   - projects/labs/playwright-screencast
   - projects/lint
   - projects/snippets
+  - projects/media
   - projects/monaco
   - projects/pages
   - projects/create
