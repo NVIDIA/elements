@@ -29,8 +29,10 @@ export class InputGroup extends ControlGroup {
     appendRootNodeStyle(this, globalStyles);
     super.connectedCallback();
     await this.updateComplete;
-    const controls = Array.from(this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements());
-    controls[0].setAttribute('first-control', '');
-    controls[controls.length - 1].setAttribute('last-control', '');
+    const controls = Array.from(
+      this.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])')!.assignedElements()
+    );
+    controls[0]?.setAttribute('first-control', '');
+    controls[controls.length - 1]?.setAttribute('last-control', '');
   }
 }

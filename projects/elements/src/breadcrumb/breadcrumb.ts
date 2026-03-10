@@ -42,7 +42,7 @@ import type { Button } from '@nvidia-elements/core/button';
 export class Breadcrumb extends LitElement {
   get keynavListConfig(): KeynavListConfig {
     return {
-      items: Array.from(this.shadowRoot.querySelectorAll('slot'))
+      items: Array.from(this.shadowRoot!.querySelectorAll('slot'))
         .flatMap(slot => slot.assignedElements())
         .filter(e => isFocusable(e)) as HTMLElement[]
     };
@@ -86,28 +86,28 @@ export class Breadcrumb extends LitElement {
     this._internals.role = 'navigation';
   }
 
-  #removeItem(e) {
-    if (!e.target.assignedElements().length) {
+  #removeItem(e: Event) {
+    if (!(e.target as HTMLSlotElement).assignedElements().length) {
       this.#resetItems();
     }
   }
 
-  #createItems(e) {
-    if (e.target && e.target.assignedElements().length) {
+  #createItems(e: Event) {
+    if (e.target && (e.target as HTMLSlotElement).assignedElements().length) {
       this.#resetItems();
-      const items = this.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])').assignedElements();
+      const items = this.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])')!.assignedElements();
       items
         .filter(i => i.matches('nve-button, nve-icon-button, nve-button, nve-icon-button, span, a'))
         .forEach(i => (i.slot = generateId()));
       items
         .filter(i => i.matches('nve-button, nve-icon-button, nve-button, nve-icon-button'))
-        .forEach((i: Button) => (i.container = 'inline'));
+        .forEach((i: Element) => ((i as Button).container = 'inline'));
       this.breadcrumbItems = items.length ? items : this.breadcrumbItems;
     }
   }
 
   #resetItems() {
-    Array.from(this.shadowRoot.querySelectorAll('slot'))
+    Array.from(this.shadowRoot!.querySelectorAll('slot'))
       .flatMap(i => i.assignedElements())
       .forEach(i => (i.slot = ''));
   }

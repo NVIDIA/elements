@@ -30,7 +30,7 @@ export class TypeExpandableController<T extends TypeExpandable> implements React
   hostConnected() {
     attachInternals(this.host);
 
-    this.host.addEventListener('command', (e: CommandEvent) => {
+    this.host.addEventListener('command', ((e: CommandEvent) => {
       this.#commandTriggered = true;
       if (e.command === '--toggle') {
         this.toggle();
@@ -44,13 +44,13 @@ export class TypeExpandableController<T extends TypeExpandable> implements React
         this.close();
       }
       this.#commandTriggered = false;
-    });
+    }) as EventListener);
   }
 
   hostUpdated() {
     this.host.expandable
-      ? this.host._internals.states.add('expandable')
-      : this.host._internals.states.delete('expandable');
+      ? this.host._internals!.states.add('expandable')
+      : this.host._internals!.states.delete('expandable');
   }
 
   open() {

@@ -117,21 +117,21 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
     this.#preventDefaults(event);
     this.#toggleHighlighted(false);
 
-    const files = Array.from(event.dataTransfer.files);
+    const files = Array.from(event.dataTransfer!.files);
     this.#addFiles(files);
   }
 
   #handleFileInputChange(event: Event) {
     this.#preventDefaults(event);
 
-    const files = Array.from(this.fileInput.files);
+    const files = Array.from(this.fileInput.files!);
     this.#addFiles(files);
 
     this.fileInput.value = '';
   }
 
   #addFiles(files: File[]) {
-    this.value = [...this.value, ...files];
+    this.value = [...(this.value ?? []), ...files];
     this.dispatchChangeEvent();
   }
 
@@ -139,19 +139,19 @@ export class Dropzone extends FormControlMixin<typeof LitElement, File[]>(LitEle
     const types = getFileTypeSpecifiers(acceptTypes);
 
     if (types.length === 1) {
-      return types[0].toUpperCase();
+      return types[0]!.toUpperCase();
     }
 
     const lastType = types.pop();
-    return `${types.join(', ').toUpperCase()} or ${lastType.toUpperCase()}`;
+    return `${types.join(', ').toUpperCase()} or ${lastType!.toUpperCase()}`;
   }
 
   #toggleHighlighted(highlighted: boolean) {
     this.toggleAttribute('highlighted', highlighted);
   }
 
-  #removeEmptyNodes(e) {
-    e.target.assignedNodes().forEach(node => removeEmptyTextNode(node));
+  #removeEmptyNodes(e: Event) {
+    (e.target as HTMLSlotElement).assignedNodes().forEach((node: Node) => removeEmptyTextNode(node));
   }
 
   render() {

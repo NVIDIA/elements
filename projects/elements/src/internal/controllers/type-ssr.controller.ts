@@ -17,7 +17,9 @@ type UnprotectedLitElement = ReactiveElement & {
  */
 export function typeSSR<T extends UnprotectedLitElement>(options: { log?: boolean } = { log: true }): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T & { _internals: ElementInternals }) => new TypeSSRController(instance, options));
+    target.addInitializer!(
+      (instance: T & { _internals: ElementInternals }) => new TypeSSRController(instance, options)
+    );
 }
 
 export class TypeSSRController<T extends ReactiveElement> implements ReactiveController {
@@ -35,13 +37,13 @@ export class TypeSSRController<T extends ReactiveElement> implements ReactiveCon
       const options = this.options;
       const updateOriginal = host.update;
       Object.defineProperty(host, 'update', {
-        value: function (...args) {
+        value: function () {
           try {
-            updateOriginal.call(host, args);
+            updateOriginal.call(host);
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
           } catch (_) {
             const renderRoot = host.renderRoot as HTMLElement;
-            renderRoot.innerHTML = renderRoot.innerHTML.split('<!--lit-part ')[0];
+            renderRoot.innerHTML = renderRoot.innerHTML.split('<!--lit-part ')[0]!;
             render(host.render(), renderRoot, host.renderOptions);
 
             if (getEnv() !== 'production' && options.log) {

@@ -23,10 +23,10 @@ export class Radio extends Control {
   @hostAttr({ attribute: 'nve-control' }) protected nveControl = 'inline';
 
   /** @private - disable for inline control */
-  fitText;
+  declare fitText: boolean;
 
   /** @private - disable for inline control */
-  fitContent;
+  declare fitContent: boolean;
 
   static styles: CSSResult[] = useStyles([...Control.styles, styles]);
 

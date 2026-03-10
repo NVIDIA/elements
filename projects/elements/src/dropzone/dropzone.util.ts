@@ -2,20 +2,20 @@ import { formatFileSize } from '@nvidia-elements/core/internal';
 import type { Dropzone } from './dropzone';
 import type { ValidatorResult } from '@nvidia-elements/forms';
 
-export function getFileTypeSpecifiers(acceptTypes) {
-  const types = acceptTypes.split(',').map(value => {
+export function getFileTypeSpecifiers(acceptTypes: string) {
+  const types = acceptTypes.split(',').map((value: string) => {
     value = value.trim();
     if (value.startsWith('.')) {
       value = value.slice(1);
     }
     if (value.endsWith('/*')) {
-      value = value.split('/')[0];
+      value = value.split('/')[0]!;
     }
     if (value.includes('/')) {
-      value = value.split('/')[1];
+      value = value.split('/')[1]!;
     }
     if (value.includes('+')) {
-      value = value.split('+')[0];
+      value = value.split('+')[0]!;
     }
     return value;
   });
@@ -52,7 +52,7 @@ export function fileTypeValidator(value: unknown, element: unknown): ValidatorRe
   const acceptedTypes = getFileTypeSpecifiers(dropzone.accept);
 
   const invalidFiles = files.filter(file => {
-    return !acceptedTypes.some(acceptedType => {
+    return !acceptedTypes.some((acceptedType: string) => {
       return file.type.includes(acceptedType);
     });
   });

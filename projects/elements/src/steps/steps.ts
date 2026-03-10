@@ -56,7 +56,7 @@ export class StepsItem extends BaseButton {
   @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
 
   /** @private */
-  @state() index;
+  @state() index: number;
 
   static styles = useStyles([stepsItemStyleSheet]);
 
@@ -144,12 +144,12 @@ export class Steps extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  #selectTab(stepsItem) {
+  #selectTab(stepsItem: HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean }) {
     if (!this.behaviorSelect || !stepsItem.matches('nve-steps-item, nve-steps-item') || stepsItem.disabled) {
       return;
     }
 
-    this.keynavListConfig.items.forEach((i: StepsItem) => (i.selected = false));
+    this.keynavListConfig.items.forEach((i: HTMLElement) => ((i as StepsItem).selected = false));
     stepsItem.selected = true;
   }
 
@@ -165,10 +165,12 @@ export class Steps extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'tablist';
-    this.addEventListener('click', (e: CustomEvent) => this.#selectTab(e.target));
+    this.addEventListener('click', (e: Event) =>
+      this.#selectTab(e.target as HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean })
+    );
   }
 
-  firstUpdated(props) {
+  firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
 
     this.steps.forEach((item, i) => {

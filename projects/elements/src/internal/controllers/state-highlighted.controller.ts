@@ -8,7 +8,7 @@ import { attachInternals } from '../utils/a11y.js';
  */
 export function stateHighlighted<T extends Highlighted>(): ClassDecorator {
   return (target: LegacyDecoratorTarget) =>
-    target.addInitializer((instance: T) => new StateHighlightedController(instance));
+    target.addInitializer!((instance: T) => new StateHighlightedController(instance));
 }
 
 export type Highlighted = ReactiveElement & { highlighted: boolean; _internals?: ElementInternals };
@@ -24,9 +24,9 @@ export class StateHighlightedController<T extends Highlighted> implements Reacti
 
   hostUpdated() {
     if (this.host.highlighted) {
-      this.host._internals.states.add('highlighted');
+      this.host._internals!.states.add('highlighted');
     } else {
-      this.host._internals.states.delete('highlighted');
+      this.host._internals!.states.delete('highlighted');
     }
   }
 }
