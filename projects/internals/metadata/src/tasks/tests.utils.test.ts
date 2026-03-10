@@ -78,7 +78,7 @@ describe('normalizeTestResults', () => {
             title: 'visual test',
             status: 'failed',
             meta: {
-              failScreenshotPath: '/topic-branch/projects/labs/markdown/screenshots/test.png'
+              failScreenshotPath: '/topic-branch/projects/markdown/screenshots/test.png'
             }
           }
         ]
@@ -87,7 +87,7 @@ describe('normalizeTestResults', () => {
 
     const result = normalizeTestResults(input);
 
-    expect(result[0].assertionResults[0].meta.failScreenshotPath).toBe('/projects/labs/markdown/screenshots/test.png');
+    expect(result[0].assertionResults[0].meta.failScreenshotPath).toBe('/projects/markdown/screenshots/test.png');
   });
 
   it('should handle test results without assertionResults', () => {
