@@ -70,9 +70,9 @@
         "./projects/cli:ci",
         "./projects/labs/code:ci",
         "./projects/labs/markdown:ci",
-        "./projects/labs/media:ci",
         "./projects/labs/playwright-screencast:ci",
         "./projects/lint:ci",
+        "./projects/media:ci",
         "./projects/monaco:ci",
         "./projects/pages:ci",
         "./projects/site:ci",
@@ -114,7 +114,7 @@
         "./projects/labs/brand:test:lighthouse",
         "./projects/labs/code:test:lighthouse",
         "./projects/labs/markdown:test:lighthouse",
-        "./projects/labs/media:test:lighthouse",
+        "./projects/media:test:lighthouse",
         "./projects/monaco:test:lighthouse",
         "./projects/site:test:lighthouse"
       ],
@@ -212,8 +212,8 @@
         "release:elements"
       ]
     },
-    "release:labs-media": {
-      "command": "cd projects/labs/media && HUSKY=0 pnpm exec semantic-release",
+    "release:media": {
+      "command": "cd projects/media && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:elements"
       ]
@@ -282,9 +282,9 @@
         "./projects/cli:lint:fix",
         "./projects/labs/code:lint:fix",
         "./projects/labs/markdown:lint:fix",
-        "./projects/labs/media:lint:fix",
         "./projects/labs/playwright-screencast:lint:fix",
         "./projects/lint:lint:fix",
+        "./projects/media:lint:fix",
         "./projects/monaco:lint:fix",
         "./projects/site:lint:fix",
         "./projects/testing:lint:fix"

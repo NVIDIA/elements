@@ -35,8 +35,8 @@ export default {
         'labs-forms',
         'labs-lint',
         'labs-markdown',
-        'labs-media',
         'labs-playwright-screencast',
+        'media',
         'monaco'
       ]
     ]
