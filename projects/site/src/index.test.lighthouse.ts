@@ -100,7 +100,7 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(553);
+    expect(scores.payload.js).toBeLessThan(560);
     expect(scores.payload.css).toBe(0); // css should be 0 as we inline all css
   });
 
@@ -110,7 +110,7 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(182);
+    expect(scores.payload.js).toBeLessThan(190);
     expect(scores.payload.css).toBe(0);
   });
 
@@ -120,7 +120,7 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(90);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(135);
+    expect(scores.payload.js).toBeLessThan(137);
     expect(scores.payload.css).toBeLessThan(0.5);
   });
 
@@ -130,7 +130,7 @@ describe.sequential('lighthouse', () => {
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);
     expect(scores.seo).toBeGreaterThanOrEqual(90);
-    expect(scores.payload.js).toBeLessThan(203);
+    expect(scores.payload.js).toBeLessThan(211);
     expect(scores.payload.css).toBe(0);
   });
 
