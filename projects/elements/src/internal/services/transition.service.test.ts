@@ -28,4 +28,26 @@ describe('TransitionService', () => {
     await new Promise(r => setTimeout(() => r(null)));
     expect(globalThis.document.querySelector('#nve-speculationrules')).toBeFalsy();
   });
+
+  it('should not throw when disable() is called without prior enable()', () => {
+    expect(() => TransitionService.disable()).not.toThrow();
+  });
+
+  it('should not add speculation rules when nve-transition="manual"', () => {
+    globalThis.document.documentElement.setAttribute('nve-transition', 'manual');
+    TransitionService.enable();
+    expect(globalThis.document.querySelector('#nve-speculationrules')).toBeFalsy();
+    TransitionService.disable();
+  });
+
+  it('should not orphan observers when enable() is called twice', async () => {
+    globalThis.document.documentElement.setAttribute('nve-transition', 'auto');
+
+    TransitionService.enable();
+    TransitionService.enable();
+    expect(globalThis.document.querySelector('#nve-speculationrules')).toBeTruthy();
+
+    TransitionService.disable();
+    expect(globalThis.document.querySelector('#nve-speculationrules')).toBeFalsy();
+  });
 });
