@@ -11,6 +11,7 @@ class TransitionService_ {
 
   enable() {
     if (globalThis.document) {
+      this.#observer?.disconnect();
       this.#toggleSpeculationRules();
       this.#observer = new MutationObserver(() => this.#toggleSpeculationRules());
       this.#observer.observe(globalThis.document.documentElement, {
@@ -21,12 +22,14 @@ class TransitionService_ {
 
   disable() {
     this.#removeSpeculationRules();
-    this.#observer.disconnect();
+    this.#observer?.disconnect();
   }
 
   #toggleSpeculationRules() {
-    if (globalThis.document && this.#nveTransition === 'auto' && !this.#hasSpeculationRules) {
-      this.#appendSpeculationRules();
+    if (globalThis.document && this.#nveTransition === 'auto') {
+      if (!this.#hasSpeculationRules) {
+        this.#appendSpeculationRules();
+      }
     } else {
       this.#removeSpeculationRules();
     }

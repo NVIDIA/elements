@@ -12,18 +12,18 @@ export class LogService {
   static warn(value: string, ...args: unknown[]) {
     if (GlobalStateService.state.env !== 'production') {
       console.warn(`${prefix}${value}`, ...args);
-      this.#dispatch(value, ...args);
+      this.#dispatch('warn', value, ...args);
     }
   }
 
   static error(value: string, ...args: unknown[]) {
     if (GlobalStateService.state.env !== 'production') {
       console.error(`${prefix}${value}`, ...args);
-      this.#dispatch(value, ...args);
+      this.#dispatch('error', value, ...args);
     }
   }
 
-  static #dispatch(value: string, ...args: unknown[]) {
-    globalThis.document.dispatchEvent(new CustomEvent('NVE_ELEMENTS_LOG', { detail: { type: 'warn', value, args } }));
+  static #dispatch(type: 'warn' | 'error', value: string, ...args: unknown[]) {
+    globalThis.document.dispatchEvent(new CustomEvent('NVE_ELEMENTS_LOG', { detail: { type, value, args } }));
   }
 }
