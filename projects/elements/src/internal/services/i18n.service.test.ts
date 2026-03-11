@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { I18nService, I18nService_ } from './i18n.service.js';
 
-describe('GlobalStateService', () => {
+describe('I18nService', () => {
   beforeEach(() => {
     window.NVE_ELEMENTS.state.versions = ['0.0.0'];
     window.NVE_ELEMENTS.state.elementRegistry = {};
