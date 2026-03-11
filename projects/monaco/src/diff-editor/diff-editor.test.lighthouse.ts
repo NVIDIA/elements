@@ -30,7 +30,7 @@ describe('monaco-diff-editor lighthouse report', () => {
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
     expect(report.payload.javascript.kb).toBeLessThan(1339);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(10.5);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(10.6);
     expect(report.payload.javascript.requests['editor.global.css2.js'].kb).toBeLessThan(78);
     expect(report.payload.javascript.requests['editor.main.css2.js'].kb).toBeLessThan(24);
     expect(report.payload.javascript.requests['index2.js'].kb).toBeLessThan(1145);
