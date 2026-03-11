@@ -2,21 +2,6 @@ import { GlobalStateService } from '../services/global.service.js';
 import type { ElementDefinition } from '../types/index.js';
 import { isFocusable } from './focus.js';
 
-/**
- * Preserves visual DOM ordering when using slots within Shadow DOM
- * See more information/resources on Shadow DOM linear traversal
- * https://nolanlawson.com/2021/02/13/managing-focus-in-the-shadow-dom/
- * https://www.abeautifulsite.net/posts/querying-through-shadow-roots/
- */
-export function getFlatDOMTree(node: Node, depth = 10): HTMLElement[] {
-  return (
-    Array.from(getChildren(node)).reduce((prev: unknown[], next: Node) => {
-      const nextChild = Array.from(getChildren(next)).map(i => [i, getFlatDOMTree(i, depth)]);
-      return [...prev, [next, [...nextChild]]];
-    }, []) as unknown as HTMLElement[]
-  ).flat(depth);
-}
-
 export function getChildren(node: Document | Node | HTMLElement): Element[] {
   if (node instanceof Document && node.documentElement) {
     return Array.from(node.documentElement.children); // root document children
@@ -98,16 +83,16 @@ export function getElementUpdate(element: HTMLElement, key: string, callback: (v
 
   const updatedProp = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element), key);
   if (updatedProp) {
-    try {
+    const ownDescriptor = Object.getOwnPropertyDescriptor(element, key);
+    if (!ownDescriptor || ownDescriptor.configurable !== false) {
       Object.defineProperty(element, key, {
+        configurable: true,
         get: updatedProp.get,
         set: val => {
           updatedProp.set!.call(element, val);
           callback(val);
         }
       });
-    } catch {
-      // try/catch for cases where another call already defined the prop
     }
   }
 
@@ -181,6 +166,12 @@ export function getFlattenedFocusableItems(element: Node, depth = 10) {
   return getFlattenedDOMTree(element, depth).filter((e: HTMLElement) => isFocusable(e)) as HTMLElement[];
 }
 
+/**
+ * Preserves visual DOM ordering when using slots within Shadow DOM
+ * See more information/resources on Shadow DOM linear traversal
+ * https://nolanlawson.com/2021/02/13/managing-focus-in-the-shadow-dom/
+ * https://www.abeautifulsite.net/posts/querying-through-shadow-roots/
+ */
 export function getFlattenedDOMTree(node: Node, depth = 10): HTMLElement[] {
   return (
     Array.from(getChildren(node)).reduce(
@@ -194,16 +185,7 @@ export function getFlattenedDOMTree(node: Node, depth = 10): HTMLElement[] {
 }
 
 export function validKeyNavigationCode(e: KeyboardEvent) {
-  return (
-    e.code === KeynavCode.End ||
-    e.code === KeynavCode.Home ||
-    e.code === KeynavCode.PageUp ||
-    e.code === KeynavCode.PageDown ||
-    e.code === KeynavCode.ArrowUp ||
-    e.code === KeynavCode.ArrowDown ||
-    e.code === KeynavCode.ArrowLeft ||
-    e.code === KeynavCode.ArrowRight
-  );
+  return keynavCodes.has(e.code);
 }
 
 export enum KeynavCode {
@@ -216,6 +198,8 @@ export enum KeynavCode {
   ArrowLeft = 'ArrowLeft',
   ArrowRight = 'ArrowRight'
 }
+
+const keynavCodes: Set<string> = new Set(Object.values(KeynavCode));
 
 export function hasInvalidDOMGrid(rows: HTMLElement[]) {
   return rows.some(row => row.children.length !== rows[0]!.children.length);
@@ -241,7 +225,7 @@ export function scrollBarWidth() {
 }
 
 export function hasScrollBar(el: HTMLElement) {
-  return !!(el.scrollTop || (++el.scrollTop && el.scrollTop--));
+  return el.scrollHeight > el.clientHeight;
 }
 
 export function hasHorizontalScrollBar(el: HTMLElement) {
@@ -328,12 +312,8 @@ export function applySlotContentStates(slot: HTMLSlotElement, element: HTMLEleme
   }
 }
 
-export function getDisplayValue(option: { label?: string; value?: string }): string {
-  if (option) {
-    return option.label ? option.label : (option.value ?? '');
-  } else {
-    return '';
-  }
+export function getDisplayValue(option?: { label?: string; value?: string }): string {
+  return option?.label || option?.value || '';
 }
 
 /** returns a combination of nve and mlv for a prefixed tag selector */

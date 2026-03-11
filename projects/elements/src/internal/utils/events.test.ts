@@ -70,6 +70,22 @@ describe('throttle', () => {
     await new Promise(r => setTimeout(() => r(null), 10));
     expect(argFn).toBeCalledTimes(1);
   });
+
+  it('should allow function to be called again after timeout expires', async () => {
+    const argFn = vi.fn();
+    const fn = throttle(argFn, 10);
+    fn();
+    await new Promise(r => setTimeout(() => r(null), 20));
+    fn();
+    expect(argFn).toBeCalledTimes(2);
+  });
+
+  it('should forward arguments to the throttled function', () => {
+    const argFn = vi.fn();
+    const fn = throttle(argFn, 10);
+    fn('a', 'b');
+    expect(argFn).toHaveBeenCalledWith('a', 'b');
+  });
 });
 
 describe('debounce', () => {
@@ -79,5 +95,21 @@ describe('debounce', () => {
     fn();
     await new Promise(r => setTimeout(() => r(null), 10));
     expect(argFn).toBeCalledTimes(1);
+  });
+
+  it('should only invoke once for rapid successive calls then allow subsequent calls', async () => {
+    const argFn = vi.fn();
+    const fn = debounce(argFn, 10);
+    fn();
+    fn();
+    fn();
+    fn();
+    fn();
+    await new Promise(r => setTimeout(() => r(null), 20));
+    expect(argFn).toBeCalledTimes(1);
+
+    fn();
+    await new Promise(r => setTimeout(() => r(null), 20));
+    expect(argFn).toBeCalledTimes(2);
   });
 });

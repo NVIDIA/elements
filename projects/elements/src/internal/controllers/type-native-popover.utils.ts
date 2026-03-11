@@ -1,6 +1,6 @@
 import { LogService } from '../services/log.service.js';
 import { getIdMatchNotFoundWarning } from '../utils/audit-logs.js';
-import { generateId, getFlatDOMTree, getFlattenedDOMTree, getAnchorNames, appendAnchorName } from '../utils/dom.js';
+import { generateId, getFlattenedDOMTree, getAnchorNames, appendAnchorName } from '../utils/dom.js';
 
 export function associateAnchor(host: HTMLElement, anchor: HTMLElement) {
   const anchorNames = getAnchorNames(anchor);
@@ -15,7 +15,7 @@ export function associateAnchor(host: HTMLElement, anchor: HTMLElement) {
 export function getHostTrigger(element: HTMLElement, trigger: HTMLElement | string) {
   if (typeof trigger === 'string') {
     return (
-      (getFlatDOMTree(element.parentNode as HTMLElement)
+      (getFlattenedDOMTree(element.parentNode as HTMLElement)
         .filter(el => el?.id !== '')
         .find(el => el.id === trigger) as HTMLButtonElement) ?? globalThis.document.body
     );
@@ -28,7 +28,7 @@ export function getHostAnchor(host: HTMLElement & { anchor?: HTMLElement | strin
   const anchor = host.anchor ?? host._activeTrigger;
 
   if (typeof anchor === 'string' && anchor?.length) {
-    const match = getFlatDOMTree(host.parentNode as HTMLElement).find(el => el.id === anchor);
+    const match = getFlattenedDOMTree(host.parentNode as HTMLElement).find(el => el.id === anchor);
 
     if (!match) {
       LogService.warn(getIdMatchNotFoundWarning(anchor));
