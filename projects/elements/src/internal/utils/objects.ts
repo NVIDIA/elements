@@ -20,10 +20,10 @@ export function deepMerge(
 
   const source = sources.shift();
 
-  if (isObject(target) && isObject(source)) {
+  if (isObjectLiteral(target) && isObjectLiteral(source)) {
     for (const key in source) {
-      if (isObject(source[key])) {
-        if (isObject(target[key])) {
+      if (isObjectLiteral(source[key])) {
+        if (isObjectLiteral(target[key])) {
           deepMerge(target[key], source[key]);
         } else {
           target[key] = source[key];
@@ -38,8 +38,11 @@ export function deepMerge(
 }
 
 export function parseVersion(version: string) {
-  const [major, minor, patch] = version.split('.').map(v => parseInt(v, 10));
-  return { major: major ? major : -1, minor: minor ? minor : -1, patch: patch ? patch : -1 };
+  const [major, minor, patch] = version.split('.').map(v => {
+    const n = parseInt(v, 10);
+    return Number.isNaN(n) ? -1 : n;
+  });
+  return { major: major ?? -1, minor: minor ?? -1, patch: patch ?? -1 };
 }
 
 export function formatStandardNumber(number: number) {

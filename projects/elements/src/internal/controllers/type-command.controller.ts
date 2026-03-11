@@ -1,6 +1,6 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
-import { getFlatDOMTree } from '../utils/dom.js';
+import { getFlattenedDOMTree } from '../utils/dom.js';
 
 /**
  * Adds Invoker Commands API support for interactive custom elements.
@@ -44,7 +44,7 @@ export class TypeCommandController<T extends Command> implements ReactiveControl
 
   #triggerCommand = () => {
     if ((this.host.commandfor || this.host.commandForElement) && globalThis.CommandEvent) {
-      const match = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(
+      const match = getFlattenedDOMTree(this.host.getRootNode() as HTMLElement).find(
         el => el.id === this.host.commandfor || el === this.host.commandForElement
       );
       if (!match) {
