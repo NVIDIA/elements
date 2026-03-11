@@ -6,6 +6,10 @@ describe('getEnv', () => {
     const env = getEnv();
     expect(env === 'development' || env === 'production').toBe(true);
   });
+
+  it('should return development when hostname is localhost', () => {
+    expect(getEnv()).toBe('development');
+  });
 });
 
 describe('getHostDetails', () => {
