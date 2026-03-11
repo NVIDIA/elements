@@ -1,10 +1,9 @@
 import { html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import {
   getChildren,
-  getFlatDOMTree,
   getAttributeChanges,
   getAttributeListChanges,
   appendRootNodeStyle,
@@ -35,7 +34,8 @@ import {
   tagSelector,
   getAnchorNames,
   removeAnchorName,
-  appendAnchorName
+  appendAnchorName,
+  applySlotContentStates
 } from '@nvidia-elements/core/internal';
 
 @customElement('dom-test-element')
@@ -103,7 +103,7 @@ describe('getChildren', () => {
   });
 });
 
-describe('getFlatDOMTree', () => {
+describe('getFlattenedDOMTree', () => {
   let fixture: HTMLElement;
 
   beforeEach(async () => {
@@ -120,12 +120,12 @@ describe('getFlatDOMTree', () => {
   });
 
   it('gets all children in document', () => {
-    const children = getFlatDOMTree(document);
+    const children = getFlattenedDOMTree(document);
     expect(children.length > 0).toBe(true);
   });
 
   it('gets all children in light and shadow DOM a flattened DOM tree', () => {
-    const children = getFlatDOMTree(fixture);
+    const children = getFlattenedDOMTree(fixture);
     expect(children[0].tagName.toLowerCase()).toBe('dom-test-element');
     expect(children[1].textContent).toBe('one');
     expect(children[2].textContent).toBe('slot one');
@@ -979,5 +979,78 @@ describe('appendAnchorName', () => {
     const names = getAnchorNames(element);
     expect(names).toEqual(['--my-anchor']);
     element.remove();
+  });
+});
+
+describe('appendRootNodeStyle deduplication', () => {
+  it('should only add one stylesheet when called twice with the same styles', () => {
+    const host = document.createElement('div');
+    const shadow = host.attachShadow({ mode: 'open' });
+    const child = document.createElement('span');
+    shadow.appendChild(child);
+
+    const initialCount = shadow.adoptedStyleSheets.length;
+    appendRootNodeStyle(child, '.dedup-test { color: green }');
+    appendRootNodeStyle(child, '.dedup-test { color: green }');
+
+    expect(shadow.adoptedStyleSheets.length - initialCount).toBe(1);
+  });
+});
+
+describe('getElementUpdate error path', () => {
+  it('should not throw when property is non-configurable on the instance', () => {
+    const element = document.createElement('div') as unknown as HTMLElement & { foo: string };
+
+    Object.defineProperty(element, 'foo', {
+      configurable: false,
+      writable: true,
+      value: 'initial'
+    });
+
+    expect(() => {
+      getElementUpdate(element, 'foo', () => {});
+    }).not.toThrow();
+  });
+});
+
+describe('applySlotContentStates', () => {
+  it('should add has-<name> state when slot has assigned nodes', () => {
+    const addSpy = vi.fn();
+    const deleteSpy = vi.fn();
+
+    const element = {
+      _internals: {
+        states: { add: addSpy, delete: deleteSpy }
+      }
+    } as unknown as HTMLElement & { _internals: ElementInternals };
+
+    const slot = {
+      assignedNodes: () => [document.createTextNode('content')],
+      name: 'header'
+    } as unknown as HTMLSlotElement;
+
+    applySlotContentStates(slot, element);
+    expect(addSpy).toHaveBeenCalledWith('has-header');
+    expect(deleteSpy).not.toHaveBeenCalled();
+  });
+
+  it('should delete has-<name> state when slot has no assigned nodes', () => {
+    const addSpy = vi.fn();
+    const deleteSpy = vi.fn();
+
+    const element = {
+      _internals: {
+        states: { add: addSpy, delete: deleteSpy }
+      }
+    } as unknown as HTMLElement & { _internals: ElementInternals };
+
+    const slot = {
+      assignedNodes: () => [],
+      name: 'header'
+    } as unknown as HTMLSlotElement;
+
+    applySlotContentStates(slot, element);
+    expect(deleteSpy).toHaveBeenCalledWith('has-header');
+    expect(addSpy).not.toHaveBeenCalled();
   });
 });

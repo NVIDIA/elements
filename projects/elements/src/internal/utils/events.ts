@@ -23,9 +23,9 @@ export function onChildListMutation(
   return observer;
 }
 
-export function throttle(func: (...args: unknown[]) => void, limit: number, ...args: unknown[]) {
+export function throttle(func: (...args: unknown[]) => void, limit: number) {
   let wait = true;
-  return () => {
+  return (...args: unknown[]) => {
     if (wait) {
       func(...args);
       wait = false;

@@ -52,6 +52,7 @@
         "./eleventy.config.js"
       ],
       "dependencies": [
+        "clean",
         "build:dependencies"
       ],
       "output": [
