@@ -1,6 +1,6 @@
 import type { ReactiveController, ReactiveElement } from 'lit';
 import type { LegacyDecoratorTarget } from '../types/index.js';
-import { getFlatDOMTree } from '../utils/dom.js';
+import { getFlattenedDOMTree } from '../utils/dom.js';
 
 export type InterestEvent = Event & {
   source: HTMLElement;
@@ -83,7 +83,7 @@ export class TypeInterestController<T extends Interest> implements ReactiveContr
   #updateInterestForElement() {
     const interestForIdRef = this.host.getAttribute('interestfor');
     if (interestForIdRef && !this.host.interestForElement) {
-      this.host.interestForElement = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(
+      this.host.interestForElement = getFlattenedDOMTree(this.host.getRootNode() as HTMLElement).find(
         el => el.id === interestForIdRef
       )!;
     }
@@ -91,7 +91,9 @@ export class TypeInterestController<T extends Interest> implements ReactiveContr
     // legacy behavior that allows popovertarget to trigger interestfor behavior for hint type popovers
     const popovertargetIdRef = this.host.getAttribute('popovertarget');
     if (popovertargetIdRef && !interestForIdRef) {
-      const target = getFlatDOMTree(this.host.getRootNode() as HTMLElement).find(el => el.id === popovertargetIdRef);
+      const target = getFlattenedDOMTree(this.host.getRootNode() as HTMLElement).find(
+        el => el.id === popovertargetIdRef
+      );
       if (target && target.popover === 'hint') {
         this.host.interestForElement = target;
       }

@@ -3,7 +3,7 @@ import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Panel, PanelHeader, PanelFooter } from '@nvidia-elements/core/panel';
 import { IconButton } from '@nvidia-elements/core/icon-button';
-import { getFlatDOMTree } from '@nvidia-elements/core/internal';
+import { getFlattenedDOMTree } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/panel/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 
@@ -53,7 +53,7 @@ describe(Panel.metadata.tag, () => {
     await elementIsStable(panelHeader);
     await elementIsStable(panelFooter);
 
-    const [header, footer] = getFlatDOMTree(panel).filter(e =>
+    const [header, footer] = getFlattenedDOMTree(panel).filter(e =>
       e.tagName.toLocaleLowerCase().includes(Panel.metadata.tag)
     );
     expect(header).toBe(panelHeader);
@@ -63,7 +63,7 @@ describe(Panel.metadata.tag, () => {
   it('should have panel header preserve the title/subtitle/action DOM order via slots', async () => {
     await elementIsStable(panelHeader);
 
-    const [titleElement, subtitleElement, actionElement] = getFlatDOMTree(panelHeader).filter(e =>
+    const [titleElement, subtitleElement, actionElement] = getFlattenedDOMTree(panelHeader).filter(e =>
       e.hasAttribute('slot')
     );
     expect(titleElement).toBe(panelHeader.querySelector('[slot="title"'));
