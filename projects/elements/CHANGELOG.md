@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.63.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.62.2...@nvidia-elements/core-v1.63.0) (2026-03-11)
+
+
+### Features
+
+* **elements:** support native scoped registries ([ade4f63](https://github.com/NVIDIA/elements/commit/ade4f637b5d0170817194d3f90e7528422150d9c))
+
 ## [@nvidia-elements/core-v1.62.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.62.1...@nvidia-elements/core-v1.62.2) (2026-03-10)
 
 
