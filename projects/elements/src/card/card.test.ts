@@ -2,7 +2,7 @@ import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { Card, CardHeader, CardFooter, CardContent } from '@nvidia-elements/core/card';
-import { getFlatDOMTree } from '@nvidia-elements/core/internal';
+import { getFlattenedDOMTree } from '@nvidia-elements/core/internal';
 import '@nvidia-elements/core/card/define.js';
 
 describe(Card.metadata.tag, () => {
@@ -63,7 +63,7 @@ describe(Card.metadata.tag, () => {
     await elementIsStable(cardHeader);
     await elementIsStable(cardFooter);
 
-    const [header, content, footer] = getFlatDOMTree(card).filter(e => e.tagName.includes('NVE'));
+    const [header, content, footer] = getFlattenedDOMTree(card).filter(e => e.tagName.includes('NVE'));
     expect(header).toBe(cardHeader);
     expect(content).toBe(cardContent);
     expect(footer).toBe(cardFooter);
@@ -72,7 +72,7 @@ describe(Card.metadata.tag, () => {
   it('should have card header preserve the title/subtitle/default/action DOM order via slots', async () => {
     await elementIsStable(cardHeader);
 
-    const [titleElement, subtitleElement, actionElement] = getFlatDOMTree(cardHeader).filter(e =>
+    const [titleElement, subtitleElement, actionElement] = getFlattenedDOMTree(cardHeader).filter(e =>
       e.hasAttribute('slot')
     );
     expect(titleElement).toBe(cardHeader.querySelector('[slot="title"]'));
