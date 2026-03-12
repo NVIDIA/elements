@@ -96,7 +96,8 @@ nve-select::part(_caret) {
 
 .code {
   position: relative;
-  margin-top: 1px;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  margin-block-start: 1px;
 }
 
 .toolbar {
@@ -107,7 +108,7 @@ nve-select::part(_caret) {
 }
 
 .source-button {
-  margin-right: auto;
+  margin-inline-end: auto;
 }
 
 nve-copy-button {

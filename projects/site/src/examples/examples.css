@@ -12,7 +12,7 @@
   }
 
   h2 {
-    margin-bottom: var(--nve-ref-space-sm) !important;
+    margin-block-end: var(--nve-ref-space-sm) !important;
   }
 
   ul[nve-text~='nav'] li {
@@ -24,7 +24,7 @@
   }
 
   & > li {
-    padding-bottom: var(--nve-ref-space-lg);
+    padding-block-end: var(--nve-ref-space-lg);
   }
 
   a {
