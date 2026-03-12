@@ -258,7 +258,7 @@ export const VerticalNavigationPanel = {
  * @summary Menu item with tooltip integration showing how to provide extra context and warnings.
  * @tags pattern test-case
  */
-export const MenuItemTooltip = {
+export const ItemTooltip = {
   render: () => html`
   <nve-menu>
     <nve-menu-item>item 1</nve-menu-item>

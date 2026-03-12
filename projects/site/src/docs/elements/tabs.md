@@ -33,7 +33,7 @@ You can change the border styles by overriding `--indicator-background` and `--i
 
 Add dots and icons by simply slotting in `<nve-icon>` or `<nve-dot>` into your `<nve-tabs-item>`
 
-{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'TabsWithDots' %}
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'WithDots' %}
 
 ## Vertical Tabs
 

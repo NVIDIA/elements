@@ -36,7 +36,7 @@
 
 ## Tag Group
 
-{% example '@nvidia-elements/core/tag/tag.examples.json' 'TagGroup' %}
+{% example '@nvidia-elements/core/tag/tag.examples.json' 'Group' %}
 
 ## Overflow Single
 

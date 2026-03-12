@@ -23,7 +23,7 @@ export default {
  * @summary IDE-style layout with file tree navigation, code editor, and output panel. Ideal for browsing and editing AV sensor configuration files in a familiar development environment.
  * @tags pattern
  */
-export const EditorFileBrowser = {
+export const FileBrowser = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
@@ -144,7 +144,7 @@ class LidarProcessingConfig:
  * @summary Side-by-side diff view for comparing configuration changes between releases. Essential for reviewing updates before deploying new AV sensor calibrations or robot parameters.
  * @tags pattern
  */
-export const EditorDiffView = {
+export const DiffView = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
@@ -280,7 +280,7 @@ radar:
  * @summary Read-only code viewer for reviewing deployed configurations or viewing robot test session logs. Prevents accidental edits while allowing full code navigation and search.
  * @tags pattern
  */
-export const EditorReadOnly = {
+export const ReadOnly = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">

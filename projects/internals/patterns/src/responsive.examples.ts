@@ -16,7 +16,7 @@ export default {
 /**
  * @summary Responsive tabs pattern using container queries to collapse overflow tabs into a menu.
  */
-export const ResponsiveTabs = {
+export const CollapsibleTabs = {
   render: () => html`
     <style>
       .demo-section {
@@ -71,7 +71,7 @@ export const ResponsiveTabs = {
 /**
  * @summary Responsive toolbar pattern using container queries to collapse actions into overflow menu.
  */
-export const ResponsiveToolbar = {
+export const CollapsibleToolbar = {
   render: () => html`
     <style>
       .demo-section {
