@@ -148,5 +148,6 @@ slot:not([name]) {
 }
 
 :host(:state(scrollbar)) slot:not([name]) {
-  margin-bottom: -14px;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  margin-block-end: -14px;
 }

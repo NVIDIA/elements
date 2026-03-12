@@ -68,7 +68,7 @@
 }
 
 :host(:state(expanded)) .header {
-  border-bottom: var(--border-bottom);
+  border-block-end: var(--border-bottom);
 }
 
 .content {
@@ -79,8 +79,7 @@
 }
 
 nve-icon-button {
-  margin-top: var(--nve-ref-space-xxs);
-  margin-right: var(--nve-ref-space-xxs);
-  margin-left: auto;
+  margin-block-start: var(--nve-ref-space-xxs);
+  margin-inline: auto var(--nve-ref-space-xxs);
   z-index: 99;
 }
