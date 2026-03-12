@@ -15,6 +15,7 @@
 
 [internal-host].horizontal-layout {
   display: flex;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
   gap: 1px;
   height: 100%;
 }
@@ -27,7 +28,8 @@
 
 [internal-host].horizontal-layout .code {
   flex: 1;
-  margin-left: 1px;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  margin-inline-start: 1px;
 }
 
 [internal-host].horizontal-layout .code nve-monaco-input {
@@ -63,7 +65,8 @@
 
 .code {
   position: relative;
-  margin-top: 1px;
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  margin-block-start: 1px;
 }
 
 .code nve-copy-button {
