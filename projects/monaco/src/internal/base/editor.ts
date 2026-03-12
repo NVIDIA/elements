@@ -96,7 +96,7 @@ export abstract class BaseMonacoEditor<T extends monaco.editor.IEditor> extends 
     const monaco = await loadMonaco();
 
     if (!this.isConnected) {
-      this.dispatchEvent(new CustomEvent('canceled', { bubbles: true }));
+      this.dispatchEvent(new CustomEvent('canceled', { bubbles: true })); // eslint-disable-line local/require-composed-events -- internal base class event, must not cross shadow DOM
       return;
     }
 
@@ -108,7 +108,7 @@ export abstract class BaseMonacoEditor<T extends monaco.editor.IEditor> extends 
     this.#updateThemeForColorScheme();
 
     this._internals.states.add('ready');
-    this.dispatchEvent(new CustomEvent('ready', { bubbles: true }));
+    this.dispatchEvent(new CustomEvent('ready', { bubbles: true })); // eslint-disable-line local/require-composed-events -- internal base class event, must not cross shadow DOM
   }
 
   #updateThemeForColorScheme = () => {
