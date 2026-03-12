@@ -1,3 +1,10 @@
+## [@nvidia-elements/code-v0.7.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.7.2...@nvidia-elements/code-v0.7.3) (2026-03-12)
+
+
+### Bug Fixes
+
+* **labs-code:** align css logical properties ([8e1aa63](https://github.com/NVIDIA/elements/commit/8e1aa6329560cc8e6a5143e3c8a8972d500f5d16))
+
 ## [@nvidia-elements/code-v0.7.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/code-v0.7.1...@nvidia-elements/code-v0.7.2) (2026-03-04)
 
 
