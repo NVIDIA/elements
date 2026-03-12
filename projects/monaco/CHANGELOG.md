@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.4.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.4.2...@nvidia-elements/monaco-v1.4.3) (2026-03-12)
+
+
+### Bug Fixes
+
+* **monaco:** align css logical properties ([977debe](https://github.com/NVIDIA/elements/commit/977debefe1e9639f94e47a6272067d4268042e1a))
+
 ## [@nvidia-elements/monaco-v1.4.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.4.1...@nvidia-elements/monaco-v1.4.2) (2026-03-12)
 
 
