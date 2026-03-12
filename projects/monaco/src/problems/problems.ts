@@ -157,11 +157,11 @@ export class MonacoProblems extends LitElement {
     this.requestUpdate('problems');
 
     this._internals.states.add('ready');
-    this.dispatchEvent(new CustomEvent('ready', { bubbles: true }));
+    this.dispatchEvent(new CustomEvent('ready', { bubbles: true, composed: true }));
   };
 
   #editorCanceled = (_event: Event) => {
-    this.dispatchEvent(new CustomEvent('canceled', { bubbles: true }));
+    this.dispatchEvent(new CustomEvent('canceled', { bubbles: true, composed: true }));
   };
 
   #setupEditor(editor: monaco.editor.IStandaloneCodeEditor) {
@@ -259,15 +259,15 @@ export class MonacoProblems extends LitElement {
   };
 
   #selectProblem(problem: Problem) {
-    this.dispatchEvent(new CustomEvent('problem-selected', { bubbles: true, detail: { problem } }));
+    this.dispatchEvent(new CustomEvent('problem-selected', { bubbles: true, composed: true, detail: { problem } }));
   }
 
   #activateProblem(problem: Problem) {
-    this.dispatchEvent(new CustomEvent('problem-activated', { bubbles: true, detail: { problem } }));
+    this.dispatchEvent(new CustomEvent('problem-activated', { bubbles: true, composed: true, detail: { problem } }));
   }
 
   #toggleContextMenu(problem: Problem) {
-    this.dispatchEvent(new CustomEvent('problem-context-menu', { bubbles: true, detail: { problem } }));
+    this.dispatchEvent(new CustomEvent('problem-context-menu', { bubbles: true, composed: true, detail: { problem } }));
   }
 
   #isEmptyModel() {
