@@ -2,8 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--nve-ref-space-md);
-  padding-top: var(--nve-ref-size-400);
-  padding-bottom: var(--nve-ref-size-400);
+  padding-block: var(--nve-ref-size-400);
 }
 
 nve-preferences-input {
