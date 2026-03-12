@@ -10,7 +10,7 @@ export default {
  * @summary Light card form control with toggle and dim range inputs.
  * @tags test-case
  */
-export const Light = {
+export const CardToggle = {
   render: () => html`
 <form nve-layout="column gap:lg pad:lg">
   <ui-light-card value='{"status": "on", "dim": 75}' name="office-light"></ui-light-card>

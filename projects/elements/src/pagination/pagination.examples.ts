@@ -195,7 +195,7 @@ export const PageListPattern = {
 /**
  * @summary Enhanced pagination pattern with first/last page buttons and numbered page navigation.
  */
-export const PageListSkipPattern = {
+export const SkipPattern = {
   render: () => html`
     <nve-toolbar container="inset">
       <nve-icon-button container="flat" icon-name="arrow-stop" direction="left" aria-label="first" disabled></nve-icon-button>

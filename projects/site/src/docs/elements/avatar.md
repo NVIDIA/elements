@@ -32,4 +32,4 @@
 
 ## Avatar Group
 
-{% example '@nvidia-elements/core/avatar/avatar.examples.json' 'AvatarGroup' %}
+{% example '@nvidia-elements/core/avatar/avatar.examples.json' 'Group' %}

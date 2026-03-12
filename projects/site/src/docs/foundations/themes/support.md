@@ -33,7 +33,7 @@ Support colors combine with text or iconography to convey the status of an eleme
 
 ## Alert Group
 
-{% example '@nvidia-elements/core/alert/alert.examples.json' 'AlertGroupStatus' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'GroupStatus' %}
 
 ## Alert Group Banner
 

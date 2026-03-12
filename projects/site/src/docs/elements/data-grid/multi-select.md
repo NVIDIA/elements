@@ -38,4 +38,4 @@
 
 ## Multi Select Bulk Actions
 
-{% example '@nvidia-elements/core/grid/grid.examples.json' 'MultiSelectBulkActions' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'BulkActions' %}

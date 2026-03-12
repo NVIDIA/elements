@@ -169,7 +169,7 @@ Inline code like \\\`const greeting = "Hello";\\\` is useful for short snippets.
  * @summary Basic inline source attribute usage with headings, lists, bold/italic text, and code blocks
  * @tags test-case
  */
-export const MarkdownFromSource = {
+export const FromSource = {
   render: () => html`
 <nve-markdown source="# This is a heading
 
@@ -186,7 +186,7 @@ const code = 'example';
 };
 
 /** @summary Markdown content defined inside a template element with nested lists and inline formatting */
-export const MarkdownFromTemplate = {
+export const FromTemplate = {
   render: () => html`
 <nve-markdown>
   <template>
@@ -369,7 +369,7 @@ export const DynamicSource = {
  * @summary Full markdown-it feature showcase with all heading levels, horizontal rules, emphasis, blockquotes, and tables
  * @tags test-case
  */
-export const MarkdownItDemo = {
+export const FullFeature = {
   render: () => html`
     <div>
       <nve-markdown id="markdown-it-demo"></nve-markdown>
