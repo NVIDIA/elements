@@ -1,6 +1,6 @@
 ---
 name: repo-component-creation
-description: Guide for creating new Elements components with all required files, base classes, metadata patterns, and test boilerplate. Use when creating new components or understanding component structure.
+description: Guide for creating new Elements components with all required files, base classes, metadata patterns, and test boilerplate. Use this skill whenever the user wants to create, scaffold, or set up a new component from scratch, needs to understand the required 10-file structure, asks about base classes (LitElement vs BaseButton), define.ts vs index.ts patterns, static metadata, component registration, or sub-component parent relationships. Also trigger when the user mentions creating test boilerplate for all 5 test types.
 ---
 
 # Component Creation
@@ -22,20 +22,20 @@ Read the [component creation guide](projects/site/src/docs/internal/guidelines/c
 
 ## Workflow
 
-1. **Gather requirements** — confirm the component name (kebab-case), purpose, and which base class to use (`LitElement` for most components, `BaseButton` for button-like interactive components).
-2. **Study a reference** — read the closest reference component listed below to understand the pattern in practice.
+1. **Gather requirements**:confirm the component name (kebab-case), purpose, and which base class to use (`LitElement` for most components, `BaseButton` for button-like interactive components).
+2. **Study a reference**:read the closest reference component listed below to understand the pattern in practice.
 3. **Create the 10 required files** in `projects/elements/src/<component-name>/`:
-   - `component-name.ts` — component class with metadata, JSDoc, and render method
-   - `component-name.css` — styles using CSS custom properties
-   - `component-name.examples.ts` — example templates with `@summary` JSDoc
-   - `component-name.test.ts` — unit tests
-   - `component-name.test.axe.ts` — accessibility tests
-   - `component-name.test.visual.ts` — visual regression tests
-   - `component-name.test.ssr.ts` — SSR tests
-   - `component-name.test.lighthouse.ts` — lighthouse tests
-   - `define.ts` — registration using `define()` helper with `HTMLElementTagNameMap`
-   - `index.ts` — side-effect-free export
-4. **Verify** — confirm all files follow the templates in the component creation guide, run `pnpm run lint` and `pnpm run test` from the elements project.
+   - `component-name.ts`:component class with metadata, JSDoc, and render method
+   - `component-name.css`:styles using CSS custom properties
+   - `component-name.examples.ts`:example templates with `@summary` JSDoc
+   - `component-name.test.ts`:unit tests
+   - `component-name.test.axe.ts`:accessibility tests
+   - `component-name.test.visual.ts`:visual regression tests
+   - `component-name.test.ssr.ts`:SSR tests
+   - `component-name.test.lighthouse.ts`:lighthouse tests
+   - `define.ts`:registration using `define()` helper with `HTMLElementTagNameMap`
+   - `index.ts`:side-effect-free export
+4. **Verify**:confirm all files follow the templates in the component creation guide, run `pnpm run lint` and `pnpm run test` from the elements project.
 
 ## Additional References
 
