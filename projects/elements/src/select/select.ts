@@ -49,6 +49,7 @@ import styles from './select.css?inline';
  * @csspart icon - The icon element
  * @csspart caret - The caret/chevron icon element
  * @csspart dropdown - The dropdown popup element
+ * @slot - Select input element
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select
  */
 @i18n<Select>()
