@@ -109,7 +109,7 @@ export class KeyNavigationListController<T extends ReactiveElement & KeynavListE
       metaKey: e.ctrlKey || e.metaKey,
       items
     };
-    activeItem.dispatchEvent(new CustomEvent('nve-key-change', { bubbles: true, detail }));
+    activeItem.dispatchEvent(new CustomEvent('nve-key-change', { bubbles: true, composed: true, detail }));
   }
 }
 
