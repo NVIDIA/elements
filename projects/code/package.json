@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/code",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "Code authoring related components. Providing syntax-highlighted code blocks with support for multiple programming languages.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
