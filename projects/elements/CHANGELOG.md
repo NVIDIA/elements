@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.63.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.63.1...@nvidia-elements/core-v1.63.2) (2026-03-12)
+
+
+### Bug Fixes
+
+* **elements:** align css logical properties ([7e84377](https://github.com/NVIDIA/elements/commit/7e84377e142b53104c74a75e4a2a6acc42e7a13b))
+
 ## [@nvidia-elements/core-v1.63.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.63.0...@nvidia-elements/core-v1.63.1) (2026-03-12)
 
 
