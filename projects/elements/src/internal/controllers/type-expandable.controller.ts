@@ -62,7 +62,7 @@ export class TypeExpandableController<T extends TypeExpandable> implements React
       }
     }
 
-    this.host.dispatchEvent(new CustomEvent('open', { bubbles: true }));
+    this.host.dispatchEvent(new CustomEvent('open', { bubbles: true, composed: true }));
   }
 
   close() {
@@ -74,7 +74,7 @@ export class TypeExpandableController<T extends TypeExpandable> implements React
       }
     }
 
-    this.host.dispatchEvent(new CustomEvent('close', { bubbles: true }));
+    this.host.dispatchEvent(new CustomEvent('close', { bubbles: true, composed: true }));
   }
 
   toggle() {
