@@ -33,7 +33,7 @@
 }
 
 [internal-host]:has(nve-icon-button) {
-  padding-right: var(--nve-ref-size-800);
+  padding-inline-end: var(--nve-ref-size-800);
 }
 
 :host([status='accent']) {
@@ -67,8 +67,8 @@ nve-icon {
 nve-icon-button {
   --color: inherit;
   position: absolute;
-  top: 2px;
-  right: 2px;
+  inset-block-start: var(--nve-ref-size-50);
+  inset-inline-end: var(--nve-ref-size-50);
 }
 
 ::slotted(nve-button[interaction='flat']), /* deprecated */

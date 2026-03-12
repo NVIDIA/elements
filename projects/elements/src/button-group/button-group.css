@@ -35,7 +35,7 @@
 
 ::slotted(nve-divider),
 ::slotted(nve-divider) {
-  margin-top: calc(-1 * var(--padding));
+  margin-block-start: calc(-1 * var(--padding));
   height: calc(100% + var(--padding));
   --color: color-mix(in oklab, var(--nve-sys-interaction-background) 100%, var(--nve-sys-interaction-color) 50%);
 }

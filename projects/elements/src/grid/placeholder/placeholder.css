@@ -2,7 +2,7 @@
   --color: var(--nve-sys-layer-canvas-color);
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
   position: absolute;
-  inset: 28px 0 0;
+  inset: var(--nve-ref-size-700) 0 0;
 }
 
 [internal-host] {

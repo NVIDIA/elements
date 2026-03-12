@@ -17,7 +17,7 @@
   max-width: var(--max-width);
   height: calc(100vh - var(--top));
   margin: initial !important;
-  margin-top: var(--top) !important;
+  margin-block-start: var(--top) !important;
   position-area: unset !important; /* drawer uses its own fixed positioning with translation */
 }
 
@@ -87,8 +87,8 @@
 
 nve-icon-button {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: var(--nve-ref-size-200);
+  right: var(--nve-ref-size-200);
   z-index: 99;
 }
 

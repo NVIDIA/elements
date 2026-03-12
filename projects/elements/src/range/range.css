@@ -84,11 +84,11 @@
 }
 
 [input]:has(.datalist-labels)::before {
-  margin-top: var(--track-height);
+  margin-block-start: var(--track-height);
 }
 
 [input]:has(.datalist-labels)::after {
-  margin-top: var(--track-height);
+  margin-block-start: var(--track-height);
 }
 
 .datalist-labels {
