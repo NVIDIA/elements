@@ -54,7 +54,7 @@ section[slot='subheader'] {
   border-bottom: 1px solid var(--nve-ref-border-color);
 
   /* Override nve-layout values with animated values */
-  padding-top: var(--subheader-padding-top) !important;
+  padding-block-start: var(--subheader-padding-top) !important;
   gap: var(--subheader-gap) !important;
 
   /* Animation applies to section for padding, gap, and font-size */
@@ -80,26 +80,27 @@ section[slot='subheader'] {
     --font-size: 11px;
     --border-radius: var(--nve-ref-border-radius-xs);
     font-weight: var(--nve-ref-font-weight-regular);
-    margin-bottom: var(--nve-ref-space-sm);
+    margin-block-end: var(--nve-ref-space-sm);
     text-transform: uppercase;
     letter-spacing: 1.76px;
     cursor: pointer;
   }
 
   nve-tree-node > nve-tree-node {
-    margin-top: var(--nve-ref-space-xxxs);
+    margin-block-start: var(--nve-ref-space-xxxs);
   }
 
   nvd-search {
     display: block;
     min-height: 32px;
-    margin-bottom: var(--nve-ref-space-sm);
+    margin-block-end: var(--nve-ref-space-sm);
   }
 }
 
 /* Navigation Tree Styles */
 #docs-nav nve-tree-node:not([expanded]) > a {
   &::after {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
     inset: 0 0 0 -24px !important;
   }
 }
@@ -162,7 +163,7 @@ h3[nve-text*='mkd']:hover .heading-anchor > nve-icon-button {
 h2[nve-text*='mkd'],
 h3[nve-text*='mkd'] {
   position: relative;
-  padding-top: var(--nve-ref-space-xl);
+  padding-block-start: var(--nve-ref-space-xl);
   scroll-margin-top: var(--nve-ref-space-lg);
   display: flex;
   align-items: center;
@@ -170,11 +171,11 @@ h3[nve-text*='mkd'] {
 }
 
 h2#installation {
-  padding-top: var(--nve-ref-space-xxl);
+  padding-block-start: var(--nve-ref-space-xxl);
 }
 
 h3[nve-text*='mkd'] {
-  padding-top: var(--nve-ref-space-md);
+  padding-block-start: var(--nve-ref-space-md);
 }
 
 /* Link and List Styles */
