@@ -74,10 +74,10 @@
 
 slot[name='actions'] {
   display: block;
-  margin-left: auto;
+  margin-inline-start: auto;
   position: fixed;
-  top: 0;
-  right: 0;
+  inset-block-start: 0;
+  inset-inline-end: 0;
   z-index: 99;
 }
 
@@ -99,28 +99,28 @@ slot[name='actions'] {
 }
 
 :host([slot='left']) {
-  transition: margin-left var(--animation-duration) ease-in-out;
-  margin-left: 0;
+  transition: margin-inline-start var(--animation-duration) ease-in-out;
+  margin-inline-start: 0;
 }
 
 :host([slot='left'][hidden]) {
-  margin-left: calc(-1 * var(--max-width));
+  margin-inline-start: calc(-1 * var(--max-width));
 }
 
 :host([slot='right']) {
-  transition: margin-right var(--animation-duration) ease-in-out;
-  margin-right: 0;
+  transition: margin-inline-end var(--animation-duration) ease-in-out;
+  margin-inline-end: 0;
 }
 
 :host([slot='right'][hidden]) {
-  margin-right: calc(-1 * var(--max-width));
+  margin-inline-end: calc(-1 * var(--max-width));
 }
 
 :host([slot='bottom']) {
-  transition: margin-bottom var(--animation-duration) ease-in-out;
-  margin-bottom: 0;
+  transition: margin-block-end var(--animation-duration) ease-in-out;
+  margin-block-end: 0;
 }
 
 :host([slot='bottom'][hidden]) {
-  margin-bottom: calc(-1 * var(--max-height));
+  margin-block-end: calc(-1 * var(--max-height));
 }
