@@ -9,7 +9,7 @@ export default {
  * @summary Quality control form with checkbox inputs and schema-based validation.
  * @tags test-case
  */
-export const Simple = {
+export const QualityCheck = {
   render: () => html`
 <form nve-layout="column gap:lg pad:lg">
   <ui-quality-control value='{"good": true, "fast": true, "cheap": false}' name="quality"></ui-quality-control>
@@ -39,7 +39,7 @@ export const Simple = {
  * @summary Quality control form events with strict mode toggle and invalid state handling.
  * @tags test-case
  */
-export const SimpleEvents = {
+export const Events = {
   render: () => html`
 <form id="simple-events-form" nve-layout="column gap:lg pad:lg">
   <ui-quality-control name="quality" value='{"good": true, "fast": true, "cheap": false}'></ui-quality-control>

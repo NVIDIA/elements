@@ -13,7 +13,7 @@ export default {
  * @summary Animated canvas visualization driven by form controls for color, shape, scale, and particle count.
  * @tags test-case
  */
-export const Visualization = {
+export const CanvasParticles = {
   render: () => html`
 <section nve-layout="row gap:lg pad:lg align:center">
   <form nve-layout="column gap:lg pad:lg">

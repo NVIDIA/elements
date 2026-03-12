@@ -66,7 +66,7 @@ customElements.get('demo-key-navigation-list') || customElements.define('demo-ke
  * @summary Horizontal list keyboard navigation controller with arrow key support.
  * @tags test-case
  */
-export const KeyNavigationListControllerDemo = {
+export const ListDemo = {
   render: () => html`<demo-key-navigation-list></demo-key-navigation-list>`
 };
 
@@ -102,7 +102,7 @@ customElements.get('demo-key-navigation-list-vertical') || customElements.define
  * @summary Vertical list keyboard navigation controller with up and down arrow key support.
  * @tags test-case
  */
-export const KeyNavigationListControllerVerticalDemo = {
+export const VerticalDemo = {
   render: () => html`<demo-key-navigation-list-vertical></demo-key-navigation-list-vertical>`
 };
 
@@ -138,6 +138,6 @@ customElements.get('demo-key-navigation-list-loop') || customElements.define('de
  * @summary Vertical list keyboard navigation with looping enabled to wrap from last item to first.
  * @tags test-case
  */
-export const KeyNavigationListLoopControllerDemo = {
+export const LoopDemo = {
   render: () => html`<demo-key-navigation-list-loop></demo-key-navigation-list-loop>`
 };

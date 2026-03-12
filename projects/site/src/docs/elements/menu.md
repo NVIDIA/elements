@@ -55,7 +55,7 @@
 
 ## Menu Item Tooltip
 
-{% example '@nvidia-elements/core/menu/menu.examples.json' 'MenuItemTooltip' %}
+{% example '@nvidia-elements/core/menu/menu.examples.json' 'ItemTooltip' %}
 
 ## Complex
 

@@ -134,7 +134,7 @@ export const BehaviorExpandSingle = {
  * @summary Accordion with custom icon button that changes based on state. Use custom icons to provide more semantic indicators (e.g., plus/minus for add/remove patterns, chevron for expand/collapse).
  * @tags test-case
  */
-export const CustomIconButtonInteractive = {
+export const CustomIconButton = {
   render: () => html`
 <nve-accordion id="custom-icon-button-accordion">
   <nve-icon-button slot="icon-button" icon-name="add" size="sm" container="flat"></nve-icon-button>

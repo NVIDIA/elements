@@ -12,7 +12,7 @@ export default {
 /**
  * @summary Input with action buttons for search and clear, providing quick access to common operations.
  */
-export const Actions = {
+export const SearchClear = {
   render: () => {
     return html`
 <nve-input>

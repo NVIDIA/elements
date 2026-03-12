@@ -43,11 +43,11 @@ Learn more about native [Popover APIs](docs/foundations/popovers/).
 
 ## Layout
 
-{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'DropdownLayout' '{ "inline": false, "height": "450px" }' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'Layout' '{ "inline": false, "height": "450px" }' %}
 
 ## Dropdown Menu
 
-{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'DropdownMenu' '{ "inline": false, "height": "450px" }' %}
+{% example '@nvidia-elements/core/dropdown/dropdown.examples.json' 'Menu' '{ "inline": false, "height": "450px" }' %}
 
 ## Radio Group Pattern
 
