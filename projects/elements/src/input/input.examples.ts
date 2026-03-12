@@ -24,7 +24,7 @@ export const Default = {
 /**
  * @summary Text input with the standard input structure, label, and control message.
  */
-export const Input = {
+export const Standard = {
   render: () => html`
 <nve-input>
   <label>label</label>

@@ -35,7 +35,7 @@ An external trigger supports expanding/collapsing or hiding/showing a panel. In 
   Collapsible Panel with External Trigger is for use with a fixed position when collapsed, otherwise the button may have a flat side and not be on the edge of the page.
 </nve-alert>
 
-{% example '@nvidia-elements/core/panel/panel.examples.json' 'PanelWithTrigger' '{ "inline": false, "height": "650px" }' %}
+{% example '@nvidia-elements/core/panel/panel.examples.json' 'WithTrigger' '{ "inline": false, "height": "650px" }' %}
 
 ## Closable Panel with External Trigger
 
@@ -48,8 +48,8 @@ An external trigger supports expanding/collapsing or hiding/showing a panel. In 
 The `nve-panel-header` sub-component can be slotted into `nve-panel` to get default border styling, and extra sub slots within the header.
 In this example `nve-panel-header` is further slotted with elements for `slot="title"`, `slot="subtitle"`, `icon-button` with `slot="action-icon"`
 
-{% example '@nvidia-elements/core/panel/panel.examples.json' 'PanelWithFullHeader' %}
+{% example '@nvidia-elements/core/panel/panel.examples.json' 'WithFullHeader' %}
 
 ## Panel with Footer
 
-{% example '@nvidia-elements/core/panel/panel.examples.json' 'PanelWithFooter' %}
+{% example '@nvidia-elements/core/panel/panel.examples.json' 'WithFooter' %}

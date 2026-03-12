@@ -25,13 +25,13 @@
 
 ## Alert Group
 
-{% example '@nvidia-elements/core/alert/alert.examples.json' 'AlertGroupDefault' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'GroupDefault' %}
 
 ## Alert Group Status
 
 {% api 'nve-alert-group', 'property', 'status' %}
 
-{% example '@nvidia-elements/core/alert/alert.examples.json' 'AlertGroupStatus' %}
+{% example '@nvidia-elements/core/alert/alert.examples.json' 'GroupStatus' %}
 
 ## Invoker Command
 

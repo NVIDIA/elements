@@ -238,7 +238,7 @@ export const ClosablePanel = {
  * @summary Collapsible panel with built-in close button and external toggle for flexible expand/collapse behavior.
  * @tags test-case
  */
-export const PanelWithTrigger = {
+export const WithTrigger = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm full">
       <div nve-theme="root">
@@ -301,7 +301,7 @@ export const PanelWithTrigger = {
  * @summary Panel with complete header including title, subtitle, and action icon slots for rich header content.
  * @tags test-case
  */
-export const PanelWithFullHeader = {
+export const WithFullHeader = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm">
       <div nve-theme="root">
@@ -360,7 +360,7 @@ export const PanelWithFullHeader = {
  * @summary Panel with footer containing action buttons for form submissions and destructive actions.
  * @tags test-case
  */
-export const PanelWithFooter = {
+export const WithFooter = {
   render: () => html`
     <section nve-layout="row align:space-between pad:sm">
       <div nve-theme="root">

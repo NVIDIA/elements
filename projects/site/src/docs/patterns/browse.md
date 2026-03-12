@@ -9,7 +9,7 @@
 
 ## Card Grid
 
-{% example '@nvidia-elements/core/page/page.examples.json', 'PageLayoutCardGrid', '{ "inline": false, "height": "640px" }' %}
+{% example '@nvidia-elements/core/page/page.examples.json', 'LayoutCardGrid', '{ "inline": false, "height": "640px" }' %}
 
 ## Content Row
 

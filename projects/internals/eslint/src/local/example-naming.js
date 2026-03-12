@@ -26,10 +26,21 @@ export default {
       'too-many-words':
         'Example export `{{name}}` has {{count}} words. Maximum is 6 words (split on uppercase boundaries).',
       'blocklisted-word':
-        'Example export `{{name}}` contains the blocklisted word `{{word}}`. Use a more descriptive name.'
+        'Example export `{{name}}` contains the blocklisted word `{{word}}`. Use a more descriptive name.',
+      'component-prefix':
+        'Example export `{{name}}` should not start with the component name `{{prefix}}`. Remove the prefix.'
     }
   },
   create(context) {
+    const filename = context.filename;
+    const dirMatch = filename.match(/([^/]+)\.examples\.ts$/);
+    const componentPrefix = dirMatch
+      ? dirMatch[1]
+          .split('-')
+          .map(w => w[0].toUpperCase() + w.slice(1))
+          .join('')
+      : null;
+
     return {
       ExportNamedDeclaration(node) {
         if (!node.declaration) {
@@ -55,6 +66,11 @@ export default {
         if (!pascalCasePattern.test(name)) {
           context.report({ node, messageId: 'not-pascal-case', data: { name } });
           return;
+        }
+
+        // Check component-prefix
+        if (componentPrefix && name.startsWith(componentPrefix)) {
+          context.report({ node, messageId: 'component-prefix', data: { name, prefix: componentPrefix } });
         }
 
         // Check word count (split on PascalCase boundaries, treating acronyms as one word)

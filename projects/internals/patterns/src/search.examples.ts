@@ -9,7 +9,7 @@ export default {
  * @summary Search toolbar with filter functionality including progressive filter chips and search combobox for data filtering scenarios.
  * @tags pattern
  */
-export const SearchFilterToolbar = {
+export const FilterToolbar = {
   render: () => html`
     <nve-toolbar container="flat">
       <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
@@ -50,7 +50,7 @@ export const SearchFilterToolbar = {
  * @summary Toolbar with many filter chips and date inputs showing horizontal scrolling behavior when content overflows.
  * @tags pattern test-case
  */
-export const SearchFilterToolbarScroll = {
+export const FilterToolbarScroll = {
   render: () => html`
     <nve-toolbar container="flat">
       <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>
@@ -113,7 +113,7 @@ export const SearchFilterToolbarScroll = {
  * @summary Toolbar with content wrapping enabled to handle overflow by wrapping items to new lines instead of scrolling.
  * @tags pattern test-case
  */
-export const SearchFilterToolbarWrap = {
+export const FilterToolbarWrap = {
   render: () => html`
     <nve-toolbar container="flat" content="wrap">
       <nve-icon-button readonly icon-name="filter" container="flat" slot="prefix"></nve-icon-button>

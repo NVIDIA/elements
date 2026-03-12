@@ -56,7 +56,7 @@
 
 ## Pattern - Page List Skip
 
-{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'PageListSkipPattern' %}
+{% example '@nvidia-elements/core/pagination/pagination.examples.json' 'SkipPattern' %}
 
 ## Pattern - Vertical
 

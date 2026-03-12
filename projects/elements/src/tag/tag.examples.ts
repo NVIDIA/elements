@@ -59,7 +59,7 @@ export const Readonly = {
 /**
  * @summary Tag group layout with overflow handling and add functionality, ideal for managing many categories with space constraints.
  */
-export const TagGroup = {
+export const Group = {
   render: () => html`
 <div nve-layout="row gap:xs align:vertical-center">
   <nve-tag>topic-tag</nve-tag>

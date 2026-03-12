@@ -10,7 +10,7 @@ export default {
  * Ideal for CI/CD dashboards tracking autonomous vehicle stack validation using red-green diverging tokens.
  * @tags pattern
  */
-export const HeatmapPattern = {
+export const ModulePassRate = {
   render: () => html`
 <nve-grid container="flat">
   <style>

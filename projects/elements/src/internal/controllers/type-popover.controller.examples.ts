@@ -77,7 +77,7 @@ customElements.get('ui-popover') || customElements.define('ui-popover', PopoverD
  * @summary Basic popover toggled by a button using the native popovertarget API.
  * @tags test-case
  */
-export const TypePopoverControllerDemo = {
+export const Default = {
   render: () => html`
     <style>
       #root-inner {
@@ -98,7 +98,7 @@ export const TypePopoverControllerDemo = {
  * @summary Popover positioning and alignment options across all anchor and viewport placements.
  * @tags test-case
  */
-export const TypePopoverControllerAlignmentDemo = {
+export const Alignment = {
   render: () => html`
   <nve-card id="card" style="width: 450px; height: 300px;"></nve-card>
   <ui-popover anchor="card" popover-type="manual" position="top" alignment="start">top start</ui-popover>
