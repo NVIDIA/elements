@@ -49,7 +49,7 @@
 
 ## With Icon
 
-{% example '@nvidia-elements/core/button/button.examples.json' 'ButtonWithIcon' %}
+{% example '@nvidia-elements/core/button/button.examples.json' 'WithIcon' %}
 
 ## Form Control
 

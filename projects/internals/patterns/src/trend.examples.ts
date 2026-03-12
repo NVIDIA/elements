@@ -12,7 +12,7 @@ export default {
  *
  * @tags pattern
  */
-export const TrendBadge = {
+export const Badge = {
   render: () => html`
 <div nve-layout="row gap:md">
   <nve-badge>0%</nve-badge>
@@ -29,7 +29,7 @@ export const TrendBadge = {
  * 
  * @tags pattern
  */
-export const TrendBadgeDetail = {
+export const BadgeDetail = {
   render: () => html`
   <div nve-layout="column gap:sm">
     <label nve-text="label medium sm muted">Label</label>
@@ -49,7 +49,7 @@ export const TrendBadgeDetail = {
  * 
  * @tags pattern
  */
-export const TrendCard = {
+export const Card = {
   render: () => html`
 <div nve-layout="grid span-items:6 gap:sm" style="max-width: 600px;">
   <nve-card>
@@ -99,7 +99,7 @@ export const TrendCard = {
  * 
  * @tags pattern
  */
-export const TrendGrid = {
+export const Grid = {
   render: () => html`
 <nve-grid>
   <nve-grid-header>

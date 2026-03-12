@@ -13,7 +13,7 @@
 
 ## Card Actions
 
-{% example '@nvidia-elements/core/card/card.examples.json' 'CardActions' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'Actions' %}
 
 ## Media Card
 
@@ -25,15 +25,15 @@
 
 ## Card with Header Tabs
 
-{% example '@nvidia-elements/core/card/card.examples.json' 'CardWithTabs' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'WithTabs' %}
 
 ## Card Description List
 
-{% example '@nvidia-elements/core/card/card.examples.json' 'CardDescriptionList' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'DescriptionList' %}
 
 ## Card with Divider
 
-{% example '@nvidia-elements/core/card/card.examples.json' 'CardWithDivider' %}
+{% example '@nvidia-elements/core/card/card.examples.json' 'WithDivider' %}
 
 ## Container Full
 

@@ -9,7 +9,7 @@ export default {
  * @summary Dashboard masonry layout for monitoring workflows with KPI cards, sparkline trends, and a checkpoint evaluation grid. Use for real-time operational views where users need to scan progress and spot anomalies at a glance.
  * @tags pattern
  */
-export const Dashboard = {
+export const TrainingMonitor = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">

@@ -18,7 +18,7 @@ export default {
  * @summary Real-time validation with contextual error messages and disabled submit until form is valid.
  * @tags pattern
  */
-export const Validation = {
+export const LoginForm = {
   render() {
     return html`
 <form id="validation" nve-layout="column gap:md" style="max-width: 350px;">
@@ -65,7 +65,7 @@ export const Validation = {
 /**
  * @summary Login form with grouped error display showing all validation issues together after submission attempt.
  */
-export const ValidationErrorGroup = {
+export const ErrorGroup = {
   render: () => html`
 <form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
   <nve-input status="error">
@@ -93,7 +93,7 @@ export const ValidationErrorGroup = {
 /**
  * @summary Login form example of success feedback with positive confirmation messages for valid input and successful form submission.
  */
-export const ValidationSuccessGroup = {
+export const SuccessGroup = {
   render: () => {
     return html`
 <form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
@@ -121,7 +121,7 @@ export const ValidationSuccessGroup = {
 /**
  * @summary Form reset functionality allowing users to clear individual fields or reset the entire form.
  */
-export const ValidationReset = {
+export const ResetForm = {
   render: () => {
     return html`
 <form nve-layout="column gap:md" style="max-width: 350px;">

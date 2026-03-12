@@ -83,7 +83,7 @@ export const Responsive = {
  * @summary All control and control-group layout variations (vertical, horizontal, inline) with visual debugging.
  * @tags test-case
  */
-export const ControlLayout = {
+export const Layout = {
   render: () => html`
 <style>
   #control-layout {
@@ -270,7 +270,7 @@ export const ControlLayout = {
  * @summary Form control with HTML5 validation showing required field error messaging.
  * @tags test-case
  */
-export const ControlValidation = {
+export const RequiredField = {
   render: () => html`
 <nve-control>
   <label>validation</label>
@@ -307,7 +307,7 @@ export const InlineControl = {
  * @summary Control group organizing related radio buttons and checkboxes with shared label and messaging.
  * @tags test-case
  */
-export const ControlGroup = {
+export const Group = {
   render: () => html`
 <nve-control-group>
   <label>environment</label>

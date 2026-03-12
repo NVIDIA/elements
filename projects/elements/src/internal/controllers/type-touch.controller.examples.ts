@@ -8,8 +8,8 @@ export default {
   title: 'Internal/Controllers'
 }
 
-@typeTouch<TypeTouchControllerDemoElement>()
-class TypeTouchControllerDemoElement extends LitElement {
+@typeTouch<TouchDemoElement>()
+class TouchDemoElement extends LitElement {
   static styles = [
     css`
       :host {
@@ -23,13 +23,13 @@ class TypeTouchControllerDemoElement extends LitElement {
   ];
 }
 
-customElements.get('type-touch-controller-demo-element') || customElements.define('type-touch-controller-demo-element', TypeTouchControllerDemoElement);
+customElements.get('type-touch-controller-demo-element') || customElements.define('type-touch-controller-demo-element', TouchDemoElement);
 
 /**
  * @summary Touch controller with drag-to-move behavior dispatching start, move, and end events.
  * @tags test-case
  */
-export const TypeTouchControllerDemo = {
+export const TouchDemo = {
   render: () => html`
   <type-touch-controller-demo-element></type-touch-controller-demo-element>
   <script type="module">

@@ -33,7 +33,7 @@
 
 {% api 'nve-accordion', 'slot' 'icon-button' %}
 
-{% example '@nvidia-elements/core/accordion/accordion.examples.json' 'CustomIconButtonInteractive' %}
+{% example '@nvidia-elements/core/accordion/accordion.examples.json' 'CustomIconButton' %}
 
 ## Actions
 

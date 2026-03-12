@@ -20,7 +20,7 @@ export default {
  * @summary Side panel with labeled key-value pairs for displaying metadata like release info, dates, status badges, and links.
  * @tags pattern
  */
-export const PanelKeyValue = {
+export const KeyValue = {
   render: () => html`
     <nve-page>
       <nve-page-panel slot="left" size="sm">
@@ -83,7 +83,7 @@ export const PanelKeyValue = {
  * @summary Panel with search input and expandable accordion sections for organizing filterable, collapsible content groups.
  * @tags pattern
  */
-export const PanelAccordion = {
+export const Accordion = {
   render: () => html`
     <style>
       nve-accordion {
@@ -145,7 +145,7 @@ export const PanelAccordion = {
  * @summary Panel with tabbed navigation in the header for switching between categorized detail views.
  * @tags pattern
  */
-export const PanelTabbedHeader = {
+export const TabbedHeader = {
   render: () => html`
     <nve-page>
       <nve-page-panel slot="left" size="sm">
@@ -214,7 +214,7 @@ export const PanelTabbedHeader = {
  * @summary Notification drawer panel with stacked alerts, search/filter controls, and bulk action buttons in the footer.
  * @tags pattern test-case
  */
-export const PanelNotificationStack = {
+export const NotificationStack = {
   render: () => html`
     <nve-page>
       <nve-page-panel slot="left" size="md" closable>

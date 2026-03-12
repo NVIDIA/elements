@@ -518,7 +518,7 @@ export const InvokerCommand = {
 /**
  * @summary Expandable page panels that collapse to a slim strip and toggle open with chevron buttons. Use when panels contain supplementary content that users access intermittently, preserving main content space while keeping panels accessible.
  */
-export const PagePanelExpandable = {
+export const PanelExpandable = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
@@ -559,7 +559,7 @@ export const PagePanelExpandable = {
 /**
  * @summary Closable page panels that fully remove from the layout when dismissed. Use when panels open on demand for temporary tasks like viewing item details or applying filters, and the user needs full main content space when done.
  */
-export const PagePanelClosable = {
+export const PanelClosable = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
@@ -702,7 +702,7 @@ export const InteractionPanelNavigation = {
 /**
  * @summary Page panel with tabbed header for switching between categorized content views within a sidebar. Use when a panel contains related sections like outline, search, and settings that share the same screen region.
  */
-export const PagePanelTabs = {
+export const PanelTabs = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
@@ -732,7 +732,7 @@ export const PagePanelTabs = {
 /**
  * @summary Page panel with title and subtitle headings in the header for labeling panel content. Use to provide clear context about what the panel contains, such as a details pane or properties inspector.
  */
-export const PagePanelHeadings = {
+export const PanelHeadings = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
@@ -918,7 +918,7 @@ export const KitchenSink = {
  * @summary Card grid page layout for browsable collections like infrastructure dashboards, asset catalogs, or media galleries. Use with view-mode toggles for switching between grid and table presentations.
  * @tags pattern
  */
-export const PageLayoutCardGrid = {
+export const LayoutCardGrid = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
@@ -965,7 +965,7 @@ export const PageLayoutCardGrid = {
  * @summary Multi-video grid layout with synchronized playback controls for monitoring and review workflows. Ideal for surveillance dashboards, AV sensor feeds, or simulation playback where concurrent streams need simultaneous viewing.
  * @tags pattern
  */
-export const PageLayoutMultiVideo = {
+export const LayoutMultiVideo = {
   render: () => html`
 <style>
   nve-page {
@@ -1193,7 +1193,7 @@ export const PageLayoutMultiVideo = {
  * @summary IDE-style editor layout with file outline, main editor, and console panels. Use for code playgrounds, configuration editors, or development tools that need a split-pane workspace with toolbar controls.
  * @tags pattern
  */
-export const PageLayoutEditor = {
+export const LayoutEditor = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
@@ -1263,7 +1263,7 @@ export const PageLayoutEditor = {
  * @summary Multi-step wizard layout with progress stepper for guided workflows. Use for onboarding flows, enrollment forms, or configuration processes where users complete sequential steps with clear progress tracking.
  * @tags pattern
  */
-export const PageLayoutSteps = {
+export const LayoutSteps = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
@@ -1453,7 +1453,7 @@ export const InteractionPanel = {
  * @summary Expandable page panels in left, right, and bottom slots.
  * @deprecated Use Page Panel with Invoker Command API to dynamically open and close page panels with slotted icon buttons.
  */
-export const PagePanelExpandableState = {
+export const PanelExpandableState = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">
@@ -1488,7 +1488,7 @@ export const PagePanelExpandableState = {
  * @summary Closable page panels in left, right, and bottom slots.
  * @deprecated Use Page Panel with Invoker Command API to dynamically open and close page panels with slotted icon buttons.
  */
-export const PagePanelClosableState = {
+export const PanelClosableState = {
   render: () => html`
 <nve-page>
   <nve-page-header slot="header">

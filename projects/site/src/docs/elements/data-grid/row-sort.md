@@ -31,7 +31,7 @@
 
 ## Column Sort Button Visibility
 
-{% example '@nvidia-elements/core/grid/grid.examples.json' 'ColumnSortButtonVisibility' %}
+{% example '@nvidia-elements/core/grid/grid.examples.json' 'SortVisibility' %}
 
 ## Lit {% svg-logo 'lit' '28' %}
 

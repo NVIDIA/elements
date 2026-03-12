@@ -87,11 +87,11 @@ To enable smooth transitions between page view, see the [View Transition API](./
 
 ### Expandable Panel
 
-{% example '@nvidia-elements/core/page/page.examples.json' 'PagePanelExpandable' '{ "inline": false, "height": "480px" }' %}
+{% example '@nvidia-elements/core/page/page.examples.json' 'PanelExpandable' '{ "inline": false, "height": "480px" }' %}
 
 ### Closable Panel
 
-{% example '@nvidia-elements/core/page/page.examples.json' 'PagePanelClosable' '{ "inline": false, "height": "480px" }' %}
+{% example '@nvidia-elements/core/page/page.examples.json' 'PanelClosable' '{ "inline": false, "height": "480px" }' %}
 
 ### Interaction Drawer
 
@@ -117,11 +117,11 @@ To enable smooth transitions between page view, see the [View Transition API](./
 
 ### Page Panel Tabs
 
-{% example '@nvidia-elements/core/page/page.examples.json' 'PagePanelTabs' '{ "inline": false, "height": "480px" }' %}
+{% example '@nvidia-elements/core/page/page.examples.json' 'PanelTabs' '{ "inline": false, "height": "480px" }' %}
 
 ### Page Panel Headings
 
-{% example '@nvidia-elements/core/page/page.examples.json' 'PagePanelHeadings' '{ "inline": false, "height": "480px" }' %}
+{% example '@nvidia-elements/core/page/page.examples.json' 'PanelHeadings' '{ "inline": false, "height": "480px" }' %}
 
 ### Document Scroll
 
