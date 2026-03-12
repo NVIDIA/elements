@@ -29,7 +29,7 @@ export const Default = {
 /**
  * @summary Dropdown with popover-positioned menu for trigger-based actions. Use for context menus, settings, and user actions where content appears on demand relative to a trigger button.
  */
-export const DropdownMenu = {
+export const Menu = {
   render: () => html`
   <nve-button popovertarget="dropdown-menu">dropdown</nve-button>
   <nve-dropdown id="dropdown-menu">
@@ -92,7 +92,7 @@ export const Closable = {
  * @summary Dropdown with structured content using header and footer sections. Perfect for complex dropdown content that needs clear visual hierarchy.
  * @tags test-case
  */
-export const DropdownLayout = {
+export const Layout = {
   render: () => html`
 <nve-dropdown anchor="btn">
   <nve-dropdown-header>
@@ -255,7 +255,7 @@ export const LegacyBehaviorTrigger = {
  * @summary Dropdown hint, using the tooltip element to display a hint when the dropdown opens.
  * @tags test-case
  */
-export const DropdownHint = {
+export const Hint = {
   render: () => html`
 <nve-dropdown id="dropdown">
   dropdown content
@@ -271,7 +271,7 @@ export const DropdownHint = {
  * @summary Dropdown position fallback, using the position and alignment attributes to reposition the dropdown when the trigger is not visible.
  * @tags test-case
  */
-export const DropdownPositionFallback = {
+export const PositionFallback = {
   render: () => html`
 <style>
   body {

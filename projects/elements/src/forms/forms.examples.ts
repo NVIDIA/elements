@@ -741,7 +741,7 @@ export const FitText = {
  * @summary Hidden status icon on the control message in form controls.
  * @tags test-case
  */
-export const HiddenControlMessageIcon = {
+export const HiddenMessageIcon = {
   render: () => html`
 <style>
   .hidden-icon::part(icon) {

@@ -183,7 +183,7 @@ export const MultiSelect = {
  * @summary Use bulk actions for operations on many items. Display only
  * when rows have a selection. Closing bulk actions deselects all selected rows.
  */
-export const MultiSelectBulkActions = {
+export const BulkActions = {
   render: () => html`
 <nve-grid style="height: 400px">
   <nve-grid-header>
@@ -782,7 +782,7 @@ export const RowSort = {
  * @summary CSS anchor positioning for tooltips within grid cells, with proper tooltip placement and content visibility in constrained grid environments.
  * @tags test-case
  */
-export const ContentVisibilityCSSAnchor = {
+export const CSSAnchor = {
   render: () => html`
   <nve-grid style="height: 200px;">
     <nve-grid-header>
@@ -1376,7 +1376,7 @@ export const ValidColumnCount = {
  * The grid follows the ARIA sort spec and automatically sets the appropriate
  * accessibility related attributes to convey the current sorting state.
  */
-export const ColumnSortButtonVisibility = {
+export const SortVisibility = {
   render: () => html `
 <nve-grid>
   <nve-grid-header>

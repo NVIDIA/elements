@@ -60,7 +60,7 @@ export const BorderBackground = {
 /**
  * @summary Tabs with notification dots for indicating unread content or alerts within tab sections.
  */
-export const TabsWithDots = {
+export const WithDots = {
   render: () => html`
 <nve-tabs behavior-select>
   <nve-tabs-item>Tab 1</nve-tabs-item>

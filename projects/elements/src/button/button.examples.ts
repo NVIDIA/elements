@@ -137,7 +137,7 @@ export const InvokerCommand = {
 /**
  * @summary Button with icons positioned before or after text to enhance visual clarity and user understanding.
  */
-export const ButtonWithIcon = {
+export const WithIcon = {
   render: () => html`
     <nve-button><nve-icon name="person"></nve-icon> button</nve-button>
     <nve-button>button <nve-icon name="person"></nve-icon></nve-button>
