@@ -27,7 +27,7 @@
   color: var(--color);
   gap: var(--gap);
   border: var(--border);
-  border-left: var(--status-border);
+  border-inline-start: var(--status-border);
   min-width: var(--min-width);
   max-width: var(--max-width);
   display: flex;
@@ -36,13 +36,13 @@
 }
 
 [internal-host]:has(nve-icon-button) {
-  padding-right: var(--nve-ref-size-1000);
+  padding-inline-end: var(--nve-ref-size-1000);
 }
 
 nve-icon-button {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  inset-block-start: var(--nve-ref-size-150);
+  inset-inline-end: var(--nve-ref-size-150);
 }
 
 nve-icon-button::part(icon) {
@@ -52,8 +52,8 @@ nve-icon-button::part(icon) {
 [part='status-icon'],
 ::slotted([slot='icon']) {
   position: absolute;
-  top: 16px;
-  left: 12px;
+  inset-block-start: var(--nve-ref-size-400);
+  inset-inline-start: var(--nve-ref-size-300);
   --color: var(--status-color);
 }
 
@@ -79,7 +79,7 @@ nve-icon-button::part(icon) {
 }
 
 :host([container='flat']) .popover {
-  border-bottom: var(--border);
+  border-block-end: var(--border);
 }
 
 :host([status='accent']) {

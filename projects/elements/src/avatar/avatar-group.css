@@ -8,10 +8,10 @@
 }
 
 ::slotted(nve-avatar) {
-  margin-left: -6px;
+  margin-inline-start: calc(-1 * var(--nve-ref-size-150));
   --border: 1px solid var(--nve-sys-contrast-mute-color);
 }
 
 ::slotted(:first-child) {
-  margin-left: 0; /* Remove the negative margin for the first slotted nve-avatar */
+  margin-inline-start: 0; /* Remove the negative margin for the first slotted nve-avatar */
 }

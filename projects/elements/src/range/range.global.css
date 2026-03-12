@@ -5,7 +5,7 @@ nve-range input[type='range']::-webkit-slider-thumb {
   background: var(--thumb-background);
   border-radius: 50%;
   box-shadow: var(--thumb-border);
-  margin-top: calc((var(--track-height) - var(--thumb-height)) / 2);
+  margin-block-start: calc((var(--track-height) - var(--thumb-height)) / 2);
   appearance: var(--_appearance);
   filter: var(--filter);
 }

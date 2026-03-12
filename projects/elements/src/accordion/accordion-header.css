@@ -40,6 +40,6 @@
     display: flex;
     flex-direction: row;
     gap: var(--nve-ref-space-xs);
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 }
