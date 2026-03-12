@@ -13,6 +13,8 @@ import noInvalidCssParts from '../local/no-invalid-css-parts.js';
 import requireComponentMetadata from '../local/require-component-metadata.js';
 import requireInternalHost from '../local/require-internal-host.js';
 import requireElementDefinitions from '../local/require-element-definitions.js';
+import requireTestCompleteness from '../local/require-test-completeness.js';
+import requireComposedEvents from '../local/require-composed-events.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -58,7 +60,9 @@ export const litConfig = [
           'no-invalid-css-parts': noInvalidCssParts,
           'require-component-metadata': requireComponentMetadata,
           'require-internal-host': requireInternalHost,
-          'require-element-definitions': requireElementDefinitions
+          'require-element-definitions': requireElementDefinitions,
+          'require-test-completeness': requireTestCompleteness,
+          'require-composed-events': requireComposedEvents
         }
       }
     },
@@ -125,7 +129,14 @@ export const litConfig = [
       'local/no-invalid-css-parts': ['error'],
       'local/require-component-metadata': ['error'],
       'local/require-internal-host': ['error'],
-      'local/require-element-definitions': ['error']
+      'local/require-element-definitions': ['error'],
+      'local/require-composed-events': ['error'],
+      'local/require-test-completeness': [
+        'error',
+        {
+          exclude: ['json-viewer', 'panel', 'dropdown-group', 'progressive-filter-chip']
+        }
+      ]
     }
   }
 ];
