@@ -29,7 +29,7 @@
 }
 
 ::slotted([slot='action-icon']) {
-  margin-top: calc((var(--nve-ref-size-300) * -1) + var(--nve-ref-size-100)); /* not nve-ref-size-300 */
+  margin-block-start: calc((var(--nve-ref-size-300) * -1) + var(--nve-ref-size-100)); /* not nve-ref-size-300 */
   align-self: self-start;
   z-index: 99;
 }

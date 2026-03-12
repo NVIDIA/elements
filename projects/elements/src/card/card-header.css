@@ -37,5 +37,5 @@
 
 ::slotted(nve-tabs),
 ::slotted(nve-tabs) {
-  margin-bottom: calc(-1 * var(--padding));
+  margin-block-end: calc(-1 * var(--padding));
 }

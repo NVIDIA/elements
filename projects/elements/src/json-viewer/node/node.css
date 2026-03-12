@@ -1,7 +1,7 @@
 :host {
   display: block;
   border-left: var(--nve-ref-border-width-sm) solid var(--_muted-color);
-  padding-left: var(--nve-ref-size-400);
+  padding-inline-start: var(--nve-ref-size-400);
   color: inherit;
 }
 
@@ -17,7 +17,7 @@
 .array,
 .object {
   flex-direction: column;
-  padding-bottom: var(--nve-ref-size-500);
+  padding-block-end: var(--nve-ref-size-500);
 }
 
 .value {
@@ -27,7 +27,7 @@
 }
 
 .value div {
-  padding: 2px 0 0;
+  padding: var(--nve-ref-size-50) 0 0;
 }
 
 nve-button {
@@ -66,7 +66,7 @@ nve-icon-button {
   --height: var(--nve-ref-size-500);
   --width: var(--nve-ref-size-400);
   --color: var(--_muted-color);
-  margin-left: calc(-1 * var(--nve-ref-size-100));
+  margin-inline-start: calc(-1 * var(--nve-ref-size-100));
 }
 
 .array nve-button::after {
