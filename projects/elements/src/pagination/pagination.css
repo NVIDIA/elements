@@ -23,7 +23,7 @@ label {
   padding: 0 var(--nve-ref-size-200);
   font-size: var(--font-size);
   position: absolute;
-  inset: 2px;
+  inset: var(--nve-ref-size-50);
   display: flex;
   place-items: center;
   pointer-events: none;

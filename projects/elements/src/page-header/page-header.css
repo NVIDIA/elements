@@ -63,13 +63,13 @@ slot {
 }
 
 ::slotted([slot='prefix']:not([container='flat'])) {
-  margin-right: var(--gap) !important;
+  margin-inline-end: var(--gap) !important;
 }
 
 ::slotted([slot='suffix']:not([container='flat'])) {
-  margin-left: var(--gap) !important;
+  margin-inline-start: var(--gap) !important;
 }
 
 ::slotted(nve-icon-button[interaction][slot='suffix']:last-child) {
-  margin-left: var(--nve-ref-space-md) !important;
+  margin-inline-start: var(--nve-ref-space-md) !important;
 }

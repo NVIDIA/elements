@@ -11,15 +11,15 @@ nve-tree-node:has(> [slot='nodes']):not([expanded])::part(_nodes) {
 }
 
 nve-tree-node > nve-tree-node:state(is-expandable) {
-  margin-left: calc(-1 * var(--nve-ref-size-400));
+  margin-inline-start: calc(-1 * var(--nve-ref-size-400));
   width: calc(100% + var(--nve-ref-size-400));
 }
 
 nve-tree-node > nve-tree-node:state(is-expandable):state(selectable-multi) {
-  margin-left: calc(-1 * var(--nve-ref-size-500));
+  margin-inline-start: calc(-1 * var(--nve-ref-size-500));
   width: calc(100% + var(--nve-ref-size-500));
 }
 
 nve-tree-node:has(nve-tree-node:state(is-expandable))::part(_nodes) {
-  padding-left: var(--nve-ref-size-400);
+  padding-inline-start: var(--nve-ref-size-400);
 }
