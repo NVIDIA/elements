@@ -16,7 +16,7 @@ pre:last-child,
 blockquote:last-child,
 table:last-child,
 img:last-child {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 /* ==========================================================================
@@ -41,7 +41,7 @@ h6 {
 h1 {
   font-size: var(--nve-ref-font-size-1000);
   letter-spacing: -0.02em;
-  margin-bottom: var(--nve-ref-space-lg);
+  margin-block-end: var(--nve-ref-space-lg);
 }
 
 /* Extra large heading (h2) */
@@ -49,31 +49,31 @@ h2 {
   font-size: var(--nve-ref-font-size-600);
   padding: var(--nve-ref-space-xl) 0 var(--nve-ref-space-xs);
   border-bottom: 1px solid var(--nve-ref-border-color);
-  margin-bottom: var(--nve-ref-space-md);
+  margin-block-end: var(--nve-ref-space-md);
 }
 
 h2:first-child {
-  padding-top: 0;
+  padding-block-start: 0;
 }
 
 /* Large heading (h3) */
 h3 {
   font-size: var(--nve-ref-font-size-500);
-  padding-top: var(--nve-ref-space-md);
-  margin-bottom: var(--nve-ref-space-sm);
+  padding-block-start: var(--nve-ref-space-md);
+  margin-block-end: var(--nve-ref-space-sm);
 }
 
 /* Regular heading (h4, h5) */
 h4,
 h5 {
   font-size: var(--nve-ref-font-size-400);
-  margin-bottom: var(--nve-ref-space-sm);
+  margin-block-end: var(--nve-ref-space-sm);
 }
 
 /* Small heading (h6) */
 h6 {
   font-size: var(--nve-ref-font-size-300);
-  margin-bottom: var(--nve-ref-space-xs);
+  margin-block-end: var(--nve-ref-space-xs);
 }
 
 /* ==========================================================================
@@ -95,7 +95,7 @@ p {
 ul,
 ol {
   margin: 0 0 var(--nve-ref-space-md);
-  padding-left: var(--nve-ref-space-lg);
+  padding-inline-start: var(--nve-ref-space-lg);
   display: flex;
   flex-direction: column;
   gap: var(--nve-ref-space-xs);
@@ -108,8 +108,7 @@ li {
 /* Nested lists */
 li > ul,
 li > ol {
-  margin-top: var(--nve-ref-space-xs);
-  margin-bottom: 0;
+  margin-block: var(--nve-ref-space-xs) 0;
 }
 
 /* ==========================================================================
@@ -185,7 +184,7 @@ blockquote {
 }
 
 blockquote p:last-child {
-  margin-bottom: 0;
+  margin-block-end: 0;
 }
 
 /* ==========================================================================
@@ -260,12 +259,12 @@ dl {
 
 dt {
   font-weight: var(--nve-ref-font-weight-semibold);
-  margin-bottom: var(--nve-ref-space-xs);
+  margin-block-end: var(--nve-ref-space-xs);
 }
 
 dd {
-  margin-left: var(--nve-ref-space-lg);
-  margin-bottom: var(--nve-ref-space-sm);
+  margin-inline-start: var(--nve-ref-space-lg);
+  margin-block-end: var(--nve-ref-space-sm);
 }
 
 /* ==========================================================================
@@ -285,7 +284,7 @@ summary {
   font-weight: var(--nve-ref-font-weight-semibold);
   padding: var(--nve-ref-space-xs);
   margin: calc(-1 * var(--nve-ref-space-sm));
-  margin-bottom: var(--nve-ref-space-sm);
+  margin-block-end: var(--nve-ref-space-sm);
 }
 
 summary:hover {
@@ -294,8 +293,8 @@ summary:hover {
 
 details[open] summary {
   border-bottom: 1px solid var(--nve-ref-border-color);
-  margin-bottom: var(--nve-ref-space-sm);
-  padding-bottom: var(--nve-ref-space-sm);
+  margin-block-end: var(--nve-ref-space-sm);
+  padding-block-end: var(--nve-ref-space-sm);
 }
 
 /* ==========================================================================
@@ -310,7 +309,7 @@ kbd {
   border-radius: var(--nve-ref-border-radius-xs);
   display: inline-block;
   font-size: 0.875em;
-  padding: 2px 6px;
+  padding: var(--nve-ref-size-50) var(--nve-ref-size-150);
   white-space: nowrap;
 }
 
@@ -318,7 +317,7 @@ kbd {
 mark {
   background: var(--nve-sys-interaction-field-background);
   color: var(--nve-sys-text-color);
-  padding: 2px 4px;
+  padding: var(--nve-ref-size-50) var(--nve-ref-size-100);
   border-radius: var(--nve-ref-border-radius-xs);
 }
 
@@ -334,7 +333,7 @@ samp {
   background: var(--nve-sys-layer-shell-background);
   border-radius: var(--nve-ref-border-radius-xs);
   font-size: 0.875em;
-  padding: 2px 4px;
+  padding: var(--nve-ref-size-50) var(--nve-ref-size-100);
 }
 
 /* Variables */
@@ -387,7 +386,7 @@ figure {
 figcaption {
   font-size: var(--nve-ref-font-size-200);
   color: var(--nve-sys-text-muted-color);
-  margin-top: var(--nve-ref-space-sm);
+  margin-block-start: var(--nve-ref-space-sm);
   font-style: italic;
 }
 
