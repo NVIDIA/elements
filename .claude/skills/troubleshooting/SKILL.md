@@ -1,6 +1,6 @@
 ---
 name: repo-troubleshooting
-description: Diagnose and resolve common issues including test failures, build errors, performance regressions, and development environment problems. Use when debugging failures or investigating unexpected behavior.
+description: Diagnose and resolve common issues including test failures, build errors, performance regressions, and development environment problems. Use this skill whenever the user reports something broken, failing, timing out, hanging, or producing unexpected results. Trigger on test failures (elementIsStable timeouts, flaky tests, screenshot diffs), build errors (Cannot find module, wireit cache issues, stale output), CI/CD failures, Git LFS problems, port conflicts, lighthouse score regressions, SSR errors, or environment setup issues.
 ---
 
 # Troubleshooting
@@ -26,10 +26,10 @@ Read the [troubleshooting guide](projects/site/src/docs/internal/guidelines/trou
 
 1. **Identify the symptom category:**
 
-   - **Test failure** — unit, axe, visual, SSR, or lighthouse?
-   - **Build failure** — Wireit cache, dependency resolution, TypeScript, or circular imports?
-   - **Environment issue** — Node version, pnpm version, Git LFS, or port conflict?
-   - **Performance regression** — slow tests, slow builds, or large bundles?
+   - **Test failure**:unit, axe, visual, SSR, or lighthouse?
+   - **Build failure**:Wireit cache, dependency resolution, TypeScript, or circular imports?
+   - **Environment issue**:Node version, pnpm version, Git LFS, or port conflict?
+   - **Performance regression**:slow tests, slow builds, or large bundles?
 
 2. **Run the relevant diagnostic commands:**
 
