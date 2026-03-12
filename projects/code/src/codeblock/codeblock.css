@@ -45,8 +45,8 @@ code {
 [name='actions'] {
   display: block;
   position: fixed;
-  top: 4px;
-  right: 4px;
+  top: var(--nve-ref-size-100);
+  right: var(--nve-ref-size-100);
 }
 
 :host([container='flat']) {
@@ -188,7 +188,7 @@ code {
 
 .hljs-linenumber {
   color: var(--nve-ref-color-gray-slate-1100);
-  margin-right: var(--nve-ref-space-lg);
+  margin-inline-end: var(--nve-ref-space-lg);
   display: inline-block;
   width: var(--nve-ref-size-600);
   text-align: right;
