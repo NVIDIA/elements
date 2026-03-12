@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.63.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.63.0...@nvidia-elements/core-v1.63.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* **elements:** add missing composed for better event propagation ([7589d5e](https://github.com/NVIDIA/elements/commit/7589d5e40071837bd88679a23a1fb8b5058fbae6))
+
 ## [@nvidia-elements/core-v1.63.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.62.2...@nvidia-elements/core-v1.63.0) (2026-03-11)
 
 
