@@ -1,6 +1,6 @@
 ---
 name: repo-documentation
-description: Guidelines for writing documentation files including 11ty templates, Eleventy shortcodes, JSDoc annotations, and markdown content. Use when creating or modifying documentation site content.
+description: Guidelines for writing documentation files including 11ty templates, Eleventy shortcodes, JSDoc annotations, and markdown content. Use this skill whenever the user works with documentation markdown files, Vale prose linting errors, Eleventy shortcodes (dodont, example), frontmatter, JSDoc annotations that must pass Vale, or the documentation site. Also trigger when the user mentions Vale errors, adding terms to the vocabulary, suppressing Vale rules, or writing and fixing prose in .md or .ts files.
 ---
 
 # Documentation (`*.md`)
@@ -28,15 +28,15 @@ You MUST review @projects/site/src/docs/internal/guidelines/documentation.md bef
 
 ### How Vale Runs
 
-- **Pre-commit** (via lint-staged) — automatically lints staged `*.ts` and `*.md` files
-- **CI** — runs as part of `pnpm run ci`
-- **Manual** — `pnpm run lint:vale` from the repo root (pass specific files as args to narrow scope)
+- **Pre-commit** (via lint-staged):automatically lints staged `*.ts` and `*.md` files
+- **CI**:runs as part of `pnpm run ci`
+- **Manual**:`pnpm run lint:vale` from the repo root (pass specific files as args to narrow scope)
 
 ### Rule Sets by File Type
 
-- `*.md` — Vale, Google, write-good, Elements (full rule set)
-- `*.ts` — Vale, write-good, Elements (no Google rules; spelling disabled to reduce noise on code identifiers)
-- `*.examples.ts` — same as `*.ts` plus three summary rules: `SummaryStyle`, `SummaryActionable`, `SummaryGerund`
+- `*.md`:Vale, Google, write-good, Elements (full rule set)
+- `*.ts`:Vale, write-good, Elements (no Google rules; spelling disabled to reduce noise on code identifiers)
+- `*.examples.ts`:same as `*.ts` plus three summary rules: `SummaryStyle`, `SummaryActionable`, `SummaryGerund`
 
 ### Common Errors and Fixes
 
@@ -62,9 +62,9 @@ content here
 
 ### Key Files
 
-- `.vale.ini` — root config (rule toggles, file-type scopes, token ignores)
-- `config/vale/styles/Elements/` — custom rules (Branding, Terminology, Summary\*)
-- `config/vale/styles/config/vocabularies/Elements/accept.txt` — approved vocabulary
+- `.vale.ini`:root config (rule toggles, file-type scopes, token ignores)
+- `config/vale/styles/Elements/`:custom rules (Branding, Terminology, Summary\*)
+- `config/vale/styles/config/vocabularies/Elements/accept.txt`:approved vocabulary
 
 ## References
 
