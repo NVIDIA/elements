@@ -1,3 +1,10 @@
+## [@nvidia-elements/monaco-v1.4.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.4.1...@nvidia-elements/monaco-v1.4.2) (2026-03-12)
+
+
+### Bug Fixes
+
+* **monaco:** add missing composed for better event propagation ([4c27ac7](https://github.com/NVIDIA/elements/commit/4c27ac7e008d588beeb6e5e4221e918cf62bbe30))
+
 ## [@nvidia-elements/monaco-v1.4.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/monaco-v1.4.0...@nvidia-elements/monaco-v1.4.1) (2026-03-03)
 
 
