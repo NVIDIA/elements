@@ -54,7 +54,7 @@ export class TypeSelectableController<T extends TypeSelectable> implements React
       this.host.selected = true;
     }
 
-    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: this.host }));
+    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, composed: true, detail: this.host }));
   }
 
   deselect() {
@@ -62,7 +62,7 @@ export class TypeSelectableController<T extends TypeSelectable> implements React
       this.host.selected = false;
     }
 
-    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, detail: this.host }));
+    this.host.dispatchEvent(new CustomEvent('select', { bubbles: true, composed: true, detail: this.host }));
   }
 
   toggle() {

@@ -172,7 +172,7 @@ export class Control extends LitElement {
   reset() {
     this.input.value = this.input.getAttribute('value') ?? '';
     this.requestUpdate();
-    this.dispatchEvent(new CustomEvent('reset', { bubbles: true }));
+    this.dispatchEvent(new CustomEvent('reset', { bubbles: true, composed: true }));
   }
 
   #setupInput() {

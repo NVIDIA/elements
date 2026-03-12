@@ -68,7 +68,11 @@ export class SortButton extends BaseButton {
     this.addEventListener('click', () => {
       this._internals.ariaLabel = `${this.#i18nController.i18n.sort} ${nextSort[this.sort]}`;
       this.dispatchEvent(
-        new CustomEvent('sort', { detail: { value: this.sort, next: nextSort[this.sort] }, bubbles: true })
+        new CustomEvent('sort', {
+          detail: { value: this.sort, next: nextSort[this.sort] },
+          bubbles: true,
+          composed: true
+        })
       );
     });
   }

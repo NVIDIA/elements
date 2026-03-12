@@ -24,6 +24,7 @@ declare global {
  * @cssprop --color
  * @cssprop --width
  * @cssprop --height
+ * @slot - Custom SVG content to override the named icon
  * @aria https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img
  */
 export class Icon extends LitElement {
