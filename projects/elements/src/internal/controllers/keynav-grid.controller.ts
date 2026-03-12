@@ -132,7 +132,7 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
     }
 
     const detail = { code: e instanceof KeyboardEvent ? e.code : null, shiftKey: e.shiftKey, activeItem: activeCell };
-    activeCell.dispatchEvent(new CustomEvent('nve-key-change', { bubbles: true, detail }));
+    activeCell.dispatchEvent(new CustomEvent('nve-key-change', { bubbles: true, composed: true, detail }));
   }
 
   #updateCellActivation(e: KeyboardEvent) {
