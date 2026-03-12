@@ -70,6 +70,6 @@ customElements.get('demo-key-navigation-grid') || customElements.define('demo-ke
  * @summary Grid-based keyboard navigation controller with arrow key support across rows and columns.
  * @tags test-case
  */
-export const KeyNavigationGridControllerDemo = {
+export const GridDemo = {
   render: () => html`<demo-key-navigation-grid></demo-key-navigation-grid>`
 };

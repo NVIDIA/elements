@@ -33,7 +33,7 @@ export const Default = {
 /**
  * @summary Card with action buttons in the footer, including primary and secondary actions for interactive card layouts.
  */
-export const CardActions = {
+export const Actions = {
   render: () => html`
   <nve-card>
     <nve-card-header>
@@ -80,7 +80,7 @@ export const MediaCard = {
 /**
  * @summary Card with a divider separating different content sections, useful for organizing related but distinct information within a single card.
  */
-export const CardWithDivider = {
+export const WithDivider = {
   render: () => html`
     <nve-card style="width: 400px; height: 300px;">
       <nve-card-header>
@@ -100,7 +100,7 @@ export const CardWithDivider = {
 /**
  * @summary Card containing a description list layout, perfect for displaying key-value pairs, definitions, or structured data in a readable format.
  */
-export const CardDescriptionList = {
+export const DescriptionList = {
   render: () => html`
   <nve-card style="width: 650px">
     <nve-card-header>
@@ -125,7 +125,7 @@ export const CardDescriptionList = {
 /**
  * @summary Card with integrated tabs in the header for multi-panel content within a single card interface.
  */
-export const CardWithTabs = {
+export const WithTabs = {
   render: () => html`
   <nve-card style="width:400px; height:200px">
     <nve-card-header>

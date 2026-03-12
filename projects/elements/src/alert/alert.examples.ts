@@ -60,7 +60,7 @@ export const Status = {
 /**
  * @summary Alert group for visually organizing related messages with shared styling. Use alert groups to present many related messages as a cohesive unit, improving scannability and visual hierarchy.
  */
-export const AlertGroupDefault = {
+export const GroupDefault = {
   render: () => html`
   <nve-alert-group>
     <nve-alert>alert message</nve-alert>
@@ -71,7 +71,7 @@ export const AlertGroupDefault = {
 /**
  * @summary Alert groups with inherited status styling for all children. Applying status at the group level ensures visual consistency across related messages, perfect for form validation where many fields share the same error context.
  */
-export const AlertGroupStatus = {
+export const GroupStatus = {
   render: () => html`
   <div nve-layout="column gap:md">
     <nve-alert-group>
