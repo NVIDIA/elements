@@ -40,8 +40,8 @@
 
 nve-icon-button {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: var(--nve-ref-size-200);
+  right: var(--nve-ref-size-200);
   z-index: 99;
 }
 

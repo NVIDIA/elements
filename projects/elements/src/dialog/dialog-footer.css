@@ -4,7 +4,7 @@
   --gap: var(--nve-ref-space-sm);
   display: block;
   width: 100%;
-  margin-top: auto;
+  margin-block-start: auto;
 }
 
 [internal-host] {

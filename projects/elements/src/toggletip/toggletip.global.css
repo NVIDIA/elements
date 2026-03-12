@@ -1,7 +1,7 @@
 nve-toggletip:not(:has([slot='footer'])):has([slot='header'])::part(_content) {
-  margin-bottom: calc(var(--padding) * 0.5);
+  margin-block-end: calc(var(--padding) * 0.5);
 }
 
 nve-toggletip:not(:has([slot='header'])):has([slot='footer'])::part(_content) {
-  margin-top: calc(var(--padding) * 0.5);
+  margin-block-start: calc(var(--padding) * 0.5);
 }

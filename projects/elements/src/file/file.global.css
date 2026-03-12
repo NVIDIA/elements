@@ -16,7 +16,7 @@ nve-file > input::file-selector-button {
   font-size: var(--font-size);
   cursor: var(--cursor);
   gap: var(--gap);
-  margin-right: var(--nve-ref-space-sm);
+  margin-inline-end: var(--nve-ref-space-sm);
   display: inline-flex;
   place-items: center;
   appearance: none;

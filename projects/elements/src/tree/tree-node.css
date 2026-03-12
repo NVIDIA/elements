@@ -28,7 +28,7 @@ slot {
 }
 
 slot[name='nodes'] {
-  padding-left: var(--nve-ref-size-500);
+  padding-inline-start: var(--nve-ref-size-500);
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -46,8 +46,8 @@ slot:not(:has-slotted) {
 
 .node-title {
   border-radius: var(--border-radius);
-  border-left: var(--nve-ref-border-width-md) solid transparent;
-  margin-left: var(--nve-ref-space-xxxs);
+  border-inline-start: var(--nve-ref-border-width-md) solid transparent;
+  margin-inline-start: var(--nve-ref-space-xxxs);
   padding: var(--nve-ref-size-200) var(--nve-ref-size-100);
   min-height: var(--min-height);
   width: 100%;
@@ -80,7 +80,7 @@ slot:not(:has-slotted) {
   width: 100%;
   position: relative;
   display: block;
-  padding-left: var(--nve-ref-size-200);
+  padding-inline-start: var(--nve-ref-size-200);
   overflow: hidden;
   transition: height var(--nve-ref-animation-duration-200) cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -94,13 +94,12 @@ slot:not(:has-slotted) {
 }
 
 [part='_nodes']::before {
-  border-left: var(--node-border);
-  left: var(--nve-ref-size-150);
-  top: 0;
+  border-inline-start: var(--node-border);
+  inset-inline-start: var(--nve-ref-size-150);
+  inset-block: 0;
   display: block;
   content: '';
   position: absolute;
-  bottom: 0;
 }
 
 nve-icon-button {
@@ -113,8 +112,8 @@ nve-icon[name='caret'] {
 }
 
 nve-checkbox {
-  margin-left: var(--nve-ref-space-xxs);
-  margin-top: var(--nve-ref-space-xs);
+  margin-inline-start: var(--nve-ref-space-xxs);
+  margin-block-start: var(--nve-ref-space-xs);
   align-self: start;
 }
 
@@ -147,8 +146,8 @@ input {
   display: block;
   position: absolute;
   height: 80%;
-  top: 10%;
-  left: calc(var(--nve-ref-size-50) * -1);
+  inset-block-start: 10%;
+  inset-inline-start: calc(var(--nve-ref-size-50) * -1);
 }
 
 :host(:state(selectable-single)) .node-title {
@@ -161,11 +160,11 @@ input {
   }
 
   slot[name='nodes'] {
-    padding-left: var(--nve-ref-size-700);
+    padding-inline-start: var(--nve-ref-size-700);
   }
 
   [role='group']::before {
-    left: var(--nve-ref-size-200);
+    inset-inline-start: var(--nve-ref-size-200);
   }
 }
 

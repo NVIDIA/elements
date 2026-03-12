@@ -89,7 +89,7 @@
 ::slotted(nve-toolbar) {
   position: fixed;
   z-index: 99;
-  left: 12px;
-  bottom: 12px;
+  left: var(--nve-ref-size-300);
+  bottom: var(--nve-ref-size-300);
   width: calc(100% - 24px);
 }

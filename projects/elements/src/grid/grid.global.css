@@ -49,7 +49,7 @@ nve-grid-cell:has(> nve-radio) {
 
 nve-grid:has(nve-toolbar:not([hidden]))::part(_scrollbox),
 nve-grid:has(nve-toolbar:not([hidden]))::part(_scrollbox) {
-  padding-bottom: var(--nve-ref-size-1000);
+  padding-block-end: var(--nve-ref-size-1000);
 }
 
 nve-grid:has(nve-toolbar:not([hidden])),

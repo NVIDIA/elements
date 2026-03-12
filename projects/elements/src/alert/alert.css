@@ -28,8 +28,8 @@
 
 slot[part='_content'] {
   display: contents;
-  padding-left: var(--nve-ref-size-600);
-  padding-bottom: var(--nve-ref-size-200);
+  padding-inline-start: var(--nve-ref-size-600);
+  padding-block-end: var(--nve-ref-size-200);
 }
 
 slot {
@@ -77,7 +77,7 @@ nve-icon[size='sm'] {
 
 nve-icon-button {
   --color: var(--icon-color);
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 
 ::slotted([nve-text]),
