@@ -1,3 +1,10 @@
+## [@nvidia-elements/markdown-v0.2.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/markdown-v0.2.0...@nvidia-elements/markdown-v0.2.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* **labs-markdown:** align css logical properties ([7787a02](https://github.com/NVIDIA/elements/commit/7787a02d0baca42ead8969771b7f83d63e8ef82b))
+
 ## [@nvidia-elements/markdown-v0.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/markdown-v0.1.2...@nvidia-elements/markdown-v0.2.0) (2026-02-02)
 
 
