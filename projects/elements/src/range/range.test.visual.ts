@@ -74,5 +74,31 @@ function template(theme: '' | 'dark' = '') {
     </datalist>
     <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
   </nve-range>
+
+  <div style="height: 200px; display: flex; gap: 24px">
+    <nve-range orientation="vertical">
+      <label>•︎•︎•︎•︎•︎•︎</label>
+      <input type="range" />
+      <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
+    </nve-range>
+
+    <nve-range orientation="vertical">
+      <label>•︎•︎•︎•︎•︎•︎</label>
+      <input type="range" disabled />
+      <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
+    </nve-range>
+
+    <nve-range orientation="vertical">
+      <label>•︎•︎•︎•︎•︎•︎</label>
+      <input type="range" min="0" max="100" value="50" list="datalist-v" />
+      <datalist id="datalist-v">
+        <option value="0">0</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="75">75</option>
+        <option value="100">100</option>
+      </datalist>
+    </nve-range>
+  </div>
   `;
 }

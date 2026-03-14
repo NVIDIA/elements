@@ -33,3 +33,15 @@
 ### Horizontal
 
 {% example '@nvidia-elements/core/range/range.examples.json' 'Horizontal' %}
+
+## Orientation
+
+{% api 'nve-range', 'property', 'orientation' %}
+
+### Vertical
+
+{% example '@nvidia-elements/core/range/range.examples.json' 'OrientationVertical' %}
+
+### Vertical Datalist
+
+{% example '@nvidia-elements/core/range/range.examples.json' 'OrientationVerticalDatalist' %}
