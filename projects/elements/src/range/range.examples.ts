@@ -144,7 +144,41 @@ export const Horizontal = {
 };
 
 /**
- * @summary Range component can have its visual styles overwritten to achieve custom themes.
+ * @summary Vertical range slider for space-constrained layouts or controls where bottom-to-top value selection is intuitive, such as volume or equalizer adjustments.
+ */
+export const OrientationVertical = {
+  render: () => html`
+<div style="height: 200px">
+  <nve-range orientation="vertical">
+    <label>label</label>
+    <input type="range" />
+    <nve-control-message>message</nve-control-message>
+  </nve-range>
+</div>`
+};
+
+/**
+ * @summary Vertical range slider with datalist tick marks and labeled values for precise value selection in vertical layouts.
+ */
+export const OrientationVerticalDatalist = {
+  render: () => html`
+<div style="height: 250px">
+  <nve-range orientation="vertical">
+    <label>label</label>
+    <input type="range" />
+    <datalist>
+      <option value="0">0</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+      <option value="75">75</option>
+      <option value="100">100</option>
+    </datalist>
+  </nve-range>
+</div>`
+};
+
+/**
+ * @summary Range component can have its visual styles overwritten to accomplish custom themes.
  * @tags test-case
  */
 export const CustomStyles = {

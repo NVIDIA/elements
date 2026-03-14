@@ -83,4 +83,53 @@ describe(Range.metadata.tag, () => {
     expect(ticks[1].textContent).toBe('50');
     expect(ticks[1].style.left).toBe('50%');
   });
+
+  it('should default orientation to horizontal', async () => {
+    expect(element.orientation).toBe('horizontal');
+    expect(element.getAttribute('orientation')).toBe('horizontal');
+  });
+
+  it('should set aria-orientation to horizontal by default', async () => {
+    expect(element._internals.ariaOrientation).toBe('horizontal');
+  });
+
+  it('should reflect orientation attribute', async () => {
+    element.orientation = 'vertical';
+    await elementIsStable(element);
+    expect(element.getAttribute('orientation')).toBe('vertical');
+  });
+
+  it('should update aria-orientation when orientation changes', async () => {
+    element.orientation = 'vertical';
+    await elementIsStable(element);
+    expect(element._internals.ariaOrientation).toBe('vertical');
+  });
+
+  it('should set track width in vertical mode', async () => {
+    element.orientation = 'vertical';
+    element.querySelector('input').value = '50';
+    await elementIsStable(element);
+    expect(element.style.getPropertyValue('--track-width')).toBe('0.5');
+  });
+
+  it('should position datalist ticks with bottom for vertical orientation', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <nve-range orientation="vertical" style="height: 200px">
+        <label>label</label>
+        <input type="range" value="50" />
+        <datalist>
+          <option value="0">0</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </datalist>
+      </nve-range>
+    `);
+    element = fixture.querySelector(Range.metadata.tag);
+    await elementIsStable(element);
+
+    const ticks = element.shadowRoot.querySelectorAll('.datalist-tick');
+    expect(ticks.length).toBe(3);
+    expect(ticks[1].style.bottom).toBe('50%');
+  });
 });
