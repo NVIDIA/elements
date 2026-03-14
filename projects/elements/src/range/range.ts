@@ -1,5 +1,6 @@
 import { appendRootNodeStyle, getElementUpdate, useStyles } from '@nvidia-elements/core/internal';
 import { Control } from '@nvidia-elements/core/forms';
+import { property } from 'lit/decorators/property.js';
 import globalStyles from './range.global.css?inline';
 import styles from './range.css?inline';
 import type { PropertyValues } from 'lit';
@@ -29,9 +30,13 @@ export class Range extends Control {
     version: '0.0.0'
   };
 
+  /** Determines the orientation of the range slider. */
+  @property({ type: String, reflect: true }) orientation: 'vertical' | 'horizontal' = 'horizontal';
+
   connectedCallback() {
     super.connectedCallback();
     appendRootNodeStyle(this, globalStyles);
+    this._internals.ariaOrientation = this.orientation;
   }
 
   firstUpdated(props: PropertyValues<this>) {
@@ -39,6 +44,13 @@ export class Range extends Control {
     this.#setTrackWidth();
     this.input.addEventListener('input', () => this.#setTrackWidth());
     getElementUpdate(this.input, 'value', (value: unknown) => this.#setTrackWidth(value as number));
+  }
+
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    if (props.has('orientation')) {
+      this._internals.ariaOrientation = this.orientation;
+    }
   }
 
   #setTrackWidth(val?: number) {
@@ -59,7 +71,10 @@ export class Range extends Control {
         ${options.map(option => {
           const value = parseFloat(option.value);
           const position = ((value - min) / (max - min)) * 100;
-          const style = `left: ${position}%; transform: translateX(-${position}%)`;
+          const style =
+            this.orientation === 'vertical'
+              ? `bottom: ${position}%; transform: translateY(${position}%)`
+              : `left: ${position}%; transform: translateX(-${position}%)`;
           const template = html`<span class="datalist-tick" style=${style}>${option.textContent || value}</span>`;
           return template;
         })}
