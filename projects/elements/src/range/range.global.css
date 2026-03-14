@@ -21,3 +21,21 @@ nve-range input[type='range']::-webkit-slider-runnable-track {
 nve-range:has(datalist) input[type='range']::-webkit-slider-container {
   min-block-size: auto;
 }
+
+nve-range[orientation='vertical'] input[type='range']::-webkit-slider-container,
+nve-range[orientation='vertical'] input[type='range']::-webkit-slider-container {
+  display: flex;
+  align-items: center;
+  overflow: visible;
+}
+
+nve-range[orientation='vertical'] input[type='range']::-webkit-slider-runnable-track,
+nve-range[orientation='vertical'] input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 100%;
+}
+
+nve-range[orientation='vertical'] input[type='range']::-webkit-slider-thumb,
+nve-range[orientation='vertical'] input[type='range']::-webkit-slider-thumb {
+  margin: 0;
+}
