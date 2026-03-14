@@ -28,4 +28,18 @@ describe(Range.metadata.tag, () => {
     const results = await runAxe([Range.metadata.tag]);
     expect(results.violations.length).toBe(0);
   });
+
+  it('should pass axe check for vertical orientation', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <nve-range orientation="vertical" style="height: 200px">
+        <label>label</label>
+        <input type="range" value="50" />
+      </nve-range>
+    `);
+    element = fixture.querySelector(Range.metadata.tag);
+    await elementIsStable(element);
+    const results = await runAxe([Range.metadata.tag]);
+    expect(results.violations.length).toBe(0);
+  });
 });
