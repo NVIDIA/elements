@@ -116,3 +116,74 @@
   border-radius: var(--nve-ref-border-radius-md);
   background: var(--nve-sys-interaction-background);
 }
+
+:host([orientation='vertical']) {
+  width: fit-content;
+  height: 100%;
+  contain: layout;
+}
+
+:host([orientation='vertical']) [internal-host] {
+  height: 100%;
+}
+
+:host([orientation='vertical']) [input] {
+  height: 100%;
+}
+
+:host([orientation='vertical']) ::slotted(input) {
+  writing-mode: vertical-lr !important;
+  direction: rtl !important;
+  width: var(--thumb-width) !important;
+  height: calc(100% - var(--track-height) * 2) !important;
+  margin: var(--track-height) auto !important;
+  align-self: auto !important;
+}
+
+:host([orientation='vertical']) [input]::before {
+  width: var(--track-height);
+  height: calc(100% - var(--track-height) * 2);
+  left: 50%;
+  top: var(--track-height);
+  transform: translateX(-50%);
+  align-self: auto;
+}
+
+:host([orientation='vertical']) [input]::after {
+  width: var(--track-height);
+  height: calc(var(--track-width) * (100% - var(--track-height) * 2) - var(--track-width) * var(--thumb-height) / 2);
+  left: 50%;
+  top: auto;
+  bottom: var(--track-height);
+  transform: translateX(-50%);
+  align-self: auto;
+  border-radius: var(--nve-ref-border-radius-none) var(--nve-ref-border-radius-none) var(--track-border-radius)
+    var(--track-border-radius);
+}
+
+:host([orientation='vertical']) [input]:has(.datalist-labels) {
+  flex-direction: row;
+}
+
+:host([orientation='vertical']) [input]:has(.datalist-labels)::before,
+:host([orientation='vertical']) [input]:has(.datalist-labels)::after {
+  margin-block-start: 0;
+}
+
+:host([orientation='vertical']) .datalist-labels {
+  flex-direction: column;
+  height: calc(100% - var(--track-height) * 2);
+  margin-block: var(--track-height);
+  position: absolute;
+  left: calc(50% + var(--thumb-width) / 2 + var(--nve-ref-space-xxs) / 2);
+}
+
+:host([orientation='vertical']) .datalist-tick {
+  flex-direction: row;
+  transform: none;
+}
+
+:host([orientation='vertical']) .datalist-tick::before {
+  width: var(--nve-ref-size-150);
+  height: var(--nve-ref-size-100);
+}
