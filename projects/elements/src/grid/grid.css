@@ -75,8 +75,8 @@
   --background: inherit;
 }
 
-:host([stripe]) ::slotted(nve-grid-row:nth-of-type),
-:host([stripe]) ::slotted(nve-grid-row:nth-of-type(odd)) {
+:host([stripe]) ::slotted(nve-grid-row:nth-child(odd)),
+:host([stripe]) ::slotted(nve-grid-row:nth-child(odd)) {
   --background: var(--nve-sys-layer-container-accent-background);
 }
 
