@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.63.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.63.3...@nvidia-elements/core-v1.63.4) (2026-03-16)
+
+
+### Bug Fixes
+
+* **elements:** cleanup utility functions and tests ([d6b8392](https://github.com/NVIDIA/elements/commit/d6b83924257e3ac0f48378f9136b02b2ea744463))
+
 ## [@nvidia-elements/core-v1.63.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.63.2...@nvidia-elements/core-v1.63.3) (2026-03-16)
 
 
