@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.63.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.63.2...@nvidia-elements/core-v1.63.3) (2026-03-16)
+
+
+### Bug Fixes
+
+* **elements:** restore grid stripe css selector ([def2f1d](https://github.com/NVIDIA/elements/commit/def2f1d8be10c95d1ba686dfe8ac003909b5e5aa))
+
 ## [@nvidia-elements/core-v1.63.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.63.1...@nvidia-elements/core-v1.63.2) (2026-03-12)
 
 
