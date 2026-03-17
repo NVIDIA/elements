@@ -7,10 +7,10 @@ NODE_BUILT_IN_MODULES.push(...NODE_BUILT_IN_MODULES.map(m => `node:${m}`));
 
 export default defineConfig(() => {
   const libConfig = libraryNodeBuildConfig;
-  if (libConfig.build?.rollupOptions?.external) {
-    libConfig.build.rollupOptions.external = NODE_BUILT_IN_MODULES;
-    if (libConfig.build.rollupOptions.output) {
-      libConfig.build.rollupOptions.output[0].preserveModules = false;
+  if (libConfig.build?.rolldownOptions?.external) {
+    libConfig.build.rolldownOptions.external = NODE_BUILT_IN_MODULES;
+    if (libConfig.build.rolldownOptions.output) {
+      libConfig.build.rolldownOptions.output[0].preserveModules = false;
     }
   }
 

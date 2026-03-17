@@ -23,7 +23,7 @@ export default mergeConfig(libraryTestConfig, {
       'highlight.js/lib/languages/xml',
       'highlight.js/lib/languages/yaml'
     ],
-    esbuildOptions: {
+    rolldownOptions: {
       mainFields: ['module', 'main']
     }
   },

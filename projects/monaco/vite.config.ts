@@ -12,7 +12,7 @@ export default defineConfig(() => {
       preserveSymlinks: true
     },
     build: {
-      minify: prod ? 'esbuild' : false,
+      minify: prod,
       lib: {
         entry: {
           // monaco-editor environment entry point
@@ -35,11 +35,5 @@ export default defineConfig(() => {
     }
   };
 
-  const merged = mergeConfig(libraryBuildConfig, config);
-  merged.build.rollupOptions.plugins = [
-    // Disable terser rollup plugin in favor of esbuild minification to workaround CI OOM issues
-    ...merged.build.rollupOptions.plugins.filter(p => p.name !== 'terser')
-  ];
-
-  return merged;
+  return mergeConfig(libraryBuildConfig, config);
 });

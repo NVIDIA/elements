@@ -1,4 +1,5 @@
-import { extname } from 'path';
+import { extname, resolve } from 'path';
+import { writeFileSync, mkdirSync } from 'fs';
 
 const cache = {};
 
@@ -7,6 +8,9 @@ const cache = {};
  * This optimization prevents unnecessary file system writes and downstream rebuilds
  * when content remains identical.
  *
+ * Uses writeBundle instead of generateBundle for Rolldown compatibility
+ * (Rolldown does not support mutating the bundle object).
+ *
  * @param {Object} options - Plugin options
  * @param {string} options.outDir - Output directory path
  * @returns {Object} Vite plugin object
@@ -14,15 +18,22 @@ const cache = {};
 export function writeIfChanged(options = {}) {
   return {
     name: 'write-if-changed',
-    generateBundle(_options, bundles) {
-      for (const [key, bundleFile] of Object.entries(bundles)) {
-        const path = `${options.outDir}/${bundleFile.fileName}`;
-
-        if (extname(path) === '.js' && cache[path] !== bundleFile.code) {
-          cache[path] = bundleFile.code;
-        } else {
-          delete bundles[key];
+    writeBundle(outputOptions, bundle) {
+      const dir = outputOptions.dir || options.outDir;
+      for (const [, bundleFile] of Object.entries(bundle)) {
+        if (extname(bundleFile.fileName) !== '.js' || bundleFile.type !== 'chunk') {
+          continue;
         }
+
+        const filePath = resolve(dir, bundleFile.fileName);
+
+        if (cache[filePath] === bundleFile.code) {
+          continue;
+        }
+
+        cache[filePath] = bundleFile.code;
+        mkdirSync(resolve(dir, bundleFile.fileName, '..'), { recursive: true });
+        writeFileSync(filePath, bundleFile.code);
       }
     }
   };

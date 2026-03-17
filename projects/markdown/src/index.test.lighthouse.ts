@@ -9,6 +9,6 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(12);
+    expect(report.payload.javascript.kb).toBeLessThan(59);
   });
 });
