@@ -48,7 +48,14 @@ describe(Pagination.metadata.tag, () => {
 
     element.value = 5;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('.select-label').textContent).toBe('40-50');
+    expect(element.shadowRoot.querySelector('.select-label').textContent).toBe('41-50');
+  });
+
+  it('should cap the select label end value at total items', async () => {
+    element.items = 95;
+    element.value = 10;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.select-label').textContent).toBe('91-95');
   });
 
   it('should number format items label', async () => {
@@ -96,7 +103,7 @@ describe(Pagination.metadata.tag, () => {
     element.skippable = true;
     element.value = 10;
     await elementIsStable(element);
-    expect(element.shadowRoot.querySelector('.select-label').textContent).toBe('90-100');
+    expect(element.shadowRoot.querySelector('.select-label').textContent).toBe('91-100');
     expect(element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="right"]').disabled).toBe(
       true
     );
@@ -221,12 +228,12 @@ describe(Pagination.metadata.tag, () => {
     const selectLabel = element.shadowRoot.querySelector('.select-label');
     element.value = 2;
     await elementIsStable(element);
-    expect(selectLabel.textContent).toBe('10-20');
+    expect(selectLabel.textContent).toBe('11-20');
 
     select.value = '50';
     select.dispatchEvent(new Event('change'));
     await element.updateComplete;
-    expect(selectLabel.textContent).toBe('50-100');
+    expect(selectLabel.textContent).toBe('51-100');
   });
 
   it('should select first option by default and render all options passed as step-sizes', async () => {
@@ -234,7 +241,7 @@ describe(Pagination.metadata.tag, () => {
     const selectLabel = element2.shadowRoot.querySelector('.select-label');
     element2.value = 2;
     await elementIsStable(element2);
-    expect(selectLabel.textContent).toBe('100-200');
+    expect(selectLabel.textContent).toBe('101-200');
     expect(select.options[0].selected).toBe(true);
 
     // Check if options are rendered based on step-sizes provided
