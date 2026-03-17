@@ -3,6 +3,7 @@ import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/toggletip/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/search/define.js';
+import '@nvidia-elements/core/progress-ring/define.js';
 
 export default {
   title: 'Elements/Button',
@@ -248,7 +249,7 @@ export const FormSubmit = {
 }
 
 /**
- * @summary Form control option allows a button to adopt control field styling. This helps when using a button to trigger custom form control components or dropdowns.
+ * @summary The form control option allows a button to be styled like a control field. This is helpful for using button to trigger custom form control components like dropdowns, filter menus, or pickers to enusre the UI feels cohesive and a button is perceived as part of the form.
  */
 export const FormControl = {
   render: () => html`
@@ -312,3 +313,52 @@ export const InvalidLinkButton = {
     <a href="#"><nve-button>default</nve-button></a>
   `
 }
+
+/**
+ * @summary Use a progress ring within a button to communicate that an action is processing and prevent repeated submissions. Limit this pattern to short, indeterminate actions (about five seconds or less); for longer or determinate tasks, use a progress bar or ring outside the button.
+ * @tags pattern
+ */
+export const ProgressDisclosure = {
+  render: () => html`
+    <nve-button>
+      <nve-progress-ring status="neutral" size="xxs"></nve-progress-ring>
+      Submitting
+    </nve-button>
+  `
+};
+
+/**
+ * @summary To ensure max contrast of a button with the background, leverage standard interaction styling. Many styles in development are computed dynamically, this asserts the use of the correct static button color for light or dark themes.
+ * @tags pattern
+ */
+export const ContrastColoredBackgrounds = {
+  render: () => html`
+    <div nve-layout="column gap:lg" style="width: 280px">
+            <nve-toolbar status="accent">
+              <div nve-text="label medium sm">10 Selected</div>
+              <nve-button slot="suffix">Edit</nve-button></nve-toolbar
+            >
+
+            <nve-alert-group status="danger">
+              <nve-alert> Error Detected <nve-button slot="actions" container="flat">Review</nve-button> </nve-alert>
+            </nve-alert-group>
+
+            <nve-card style="width: 280px">
+              <nve-card-content 
+              style="width: 100%;
+              height: 100%;
+              aspect-ratio: 16/9;
+              object-fit: cover;
+              background: repeating-conic-gradient(var(--nve-sys-layer-overlay-background) 0% 25%, transparent 0% 50%) 50% / 40px 40px;
+              background-position: center;
+              border-style: hidden;"> </nve-card-content>
+              <nve-card-footer>
+                <div nve-layout="row gap:xs">
+                  <nve-button container="flat" style="margin-left: auto">Cancel</nve-button>
+                  <nve-button>action</nve-button>
+                </div>
+              </nve-card-footer>
+            </nve-card>
+          </div>
+  `
+};
