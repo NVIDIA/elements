@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "elements": {
-      "command": "node ./projects/cli/dist/mcp/index.js",
-      "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples"
+      "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
+      "command": "node ./projects/cli/dist/index.js mcp"
     }
   }
 }

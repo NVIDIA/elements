@@ -14,7 +14,7 @@ This package serves two primary modes:
    - Changelog and version information
    - Design token access
 
-2. **MCP Server (`nve-mcp` command)** - Model Context Protocol server that:
+2. **MCP Server (`nve mcp` command)** - Model Context Protocol server that:
    - Exposes all CLI tools to AI assistants (Claude, Cursor, etc.)
    - Provides context-specific prompts for common tasks
    - Enables AI-assisted development with Elements components
@@ -69,7 +69,7 @@ nve
 The fastest way to configure MCP is with the `setup` command:
 
 ```shell
-npx --package=@nvidia-elements/cli -y nve-setup
+nve project.setup
 ```
 
 This detects your package manager, configures the MCP server for both Cursor and Claude Code, and adds Elements core dependencies to the project.
@@ -83,11 +83,8 @@ Install to Claude Code by adding the configuration to your `.mcp.json` file. Add
   "mcpServers": {
     "elements": {
       "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
-      "command": "npm",
-      "args": ["exec", "--package=@nvidia-elements/cli@latest", "-y", "--prefer-online", "--", "nve-mcp"],
-      "env": {
-        "npm_config_registry": "https://registry.npmjs.org"
-      }
+      "command": "nve",
+      "args": ["mcp"]
     }
   }
 }
@@ -105,10 +102,7 @@ Install to Cursor with the MCP configuration below.
   "mcpServers": {
     "elements": {
       "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
-      "command": "npm exec --package=@nvidia-elements/cli@latest -y --prefer-online -- nve-mcp",
-      "env": {
-        "npm_config_registry": "https://registry.npmjs.org"
-      }
+      "command": "nve mcp"
     }
   }
 }
