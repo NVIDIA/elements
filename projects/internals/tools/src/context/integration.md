@@ -25,7 +25,7 @@ Setup an existing project to use Elements you can use the setup command to add t
 
 ```shell
 # use the CLI
-npx --package=@nvidia-elements/cli -y nve-setup
+nve project.setup
 
 # or use the MCP tool
 project_setup

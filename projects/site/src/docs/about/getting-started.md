@@ -15,11 +15,11 @@
 <nve-divider></nve-divider>
 
 ```shell
-# login to artifactory
-npm config set registry https://registry.npmjs.org && npm login --auth-type=legacy
+# install CLI
+curl -fsSL https://NVIDIA.github.io/elements/install.sh | bash
 
 # create a new project
-npm create @nve
+nve project.create
 ```
 
 <div nve-layout="grid gap:lg span-items:4 align:stretch">

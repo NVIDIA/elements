@@ -6,7 +6,9 @@ import {
   isUpdateAvailable,
   shouldCheckForUpdates,
   checkForUpdates,
-  notifyIfUpdateAvailable
+  notifyIfUpdateAvailable,
+  upgrade,
+  updateCommands
 } from './update.js';
 
 // Mock node:fs
@@ -15,6 +17,11 @@ vi.mock('node:fs', () => ({
   readFileSync: vi.fn(),
   writeFileSync: vi.fn(),
   mkdirSync: vi.fn()
+}));
+
+// Mock node:child_process
+vi.mock('node:child_process', () => ({
+  execSync: vi.fn()
 }));
 
 // Mock node:os
@@ -301,6 +308,38 @@ describe('update-check', () => {
     it('should silently handle errors', async () => {
       await notifyIfUpdateAvailable('1.0.0', Promise.reject(new Error('test')));
       expect(console.log).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('upgrade', () => {
+    let exitSpy: ReturnType<typeof vi.spyOn>;
+
+    beforeEach(async () => {
+      exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
+    });
+
+    it('should run macos/linux install command when not on windows', async () => {
+      const { execSync } = await import('node:child_process');
+      const originalPlatform = process.platform;
+      Object.defineProperty(process, 'platform', { value: 'darwin', configurable: true });
+
+      upgrade();
+
+      expect(execSync).toHaveBeenCalledWith(updateCommands['macos/linux'], { stdio: 'inherit' });
+      expect(exitSpy).toHaveBeenCalledWith(0);
+      Object.defineProperty(process, 'platform', { value: originalPlatform, configurable: true });
+    });
+
+    it('should run windows install command on win32', async () => {
+      const { execSync } = await import('node:child_process');
+      const originalPlatform = process.platform;
+      Object.defineProperty(process, 'platform', { value: 'win32', configurable: true });
+
+      upgrade();
+
+      expect(execSync).toHaveBeenCalledWith(updateCommands['windows-cmd'], { stdio: 'inherit' });
+      expect(exitSpy).toHaveBeenCalledWith(0);
+      Object.defineProperty(process, 'platform', { value: originalPlatform, configurable: true });
     });
   });
 });

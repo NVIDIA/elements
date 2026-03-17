@@ -13,17 +13,7 @@
 
 <h2 nve-text="heading sm muted">The Elements CLI provides command-line access to the Elements design system. Use it to scaffold new projects pre-configured with Elements, look up component APIs and design tokens, validate templates, and generate shareable playgrounds -- all without leaving your terminal</h2>
 
-{% install-artifactory %}
-
-Once the registry is setup and authenticated, install the CLI:
-
-```shell
-# install CLI
-npm install -g @nvidia-elements/cli@latest
-
-# run cli
-nve
-```
+{% install-cli %}
 
 ## Usage
 
@@ -80,6 +70,10 @@ A visual indicator that communicates a status description of an associated compo
     <nve-grid-column>Command</nve-grid-column>
     <nve-grid-column>Description</nve-grid-column>
   </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">nve --upgrade</code></nve-grid-cell>
+    <nve-grid-cell>Upgrade to the latest CLI release.</nve-grid-cell>
+  </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">nve api.list [format]</code></nve-grid-cell>
     <nve-grid-cell>Get list of all available Elements (nve-*) APIs and components.</nve-grid-cell>

@@ -1,8 +1,8 @@
 import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
+import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 import { homedir } from 'node:os';
 import * as semver from 'semver';
-import { getNPMClient } from '@internals/tools';
 import { colors } from './utils.js';
 
 const CONFIG_DIR = join(homedir(), '.nve');
@@ -77,9 +77,22 @@ export async function checkForUpdates(currentVersion: string): Promise<string | 
   return config && isUpdateAvailable(currentVersion, config.latestVersion) ? config.latestVersion : null;
 }
 
+export const updateCommands = {
+  'macos/linux': 'curl -fsSL https://NVIDIA.github.io/elements/install.sh | bash',
+  'windows-cmd':
+    'curl -fsSL https://NVIDIA.github.io/elements/install.cmd -o install.cmd && install.cmd && del install.cmd',
+  nodejs: 'npm install -g @nvidia-elements/cli'
+};
+
+export function upgrade(): void {
+  const command = process.platform === 'win32' ? updateCommands['windows-cmd'] : updateCommands['macos/linux'];
+  console.log(colors.info('Upgrading nve CLI...'));
+  execSync(command, { stdio: 'inherit' });
+  process.exit(0);
+}
+
 async function showUpdateNotification(currentVersion: string, latestVersion: string): Promise<void> {
   const border = '─'.repeat(50);
-  const npmClient = await getNPMClient();
   console.log(
     [
       '',
@@ -88,7 +101,7 @@ async function showUpdateNotification(currentVersion: string, latestVersion: str
         colors.error(currentVersion) +
         colors.warning(' → ') +
         colors.complete(latestVersion),
-      colors.warning('  Run ') + colors.info(`${npmClient} install -g @nvidia-elements/cli`) + colors.warning(' to update'),
+      colors.warning('  Run ') + colors.info(`nve --upgrade`) + colors.warning(' to update'),
       colors.warning(border),
       ''
     ].join('\n')

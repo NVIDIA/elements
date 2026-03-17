@@ -46,38 +46,26 @@ describe('setup-mcp', () => {
   });
 
   describe('getMcpServerConfig', () => {
-    it('should return npm config for cursor (single command string)', () => {
-      const config = getMcpServerConfig('npm', 'cursor');
-      expect(config.command).toBe('npm exec --package=@nvidia-elements/cli@latest -y --prefer-online -- nve-mcp');
-      expect(config.args).toBeUndefined();
-      expect(config.env.npm_config_registry).toContain('registry.npmjs.org');
-    });
-
-    it('should return pnpm config for cursor (single command string)', () => {
-      const config = getMcpServerConfig('pnpm', 'cursor');
-      expect(config.command).toBe('pnpm --package=@nvidia-elements/cli@latest dlx nve-mcp');
+    it('should return config for cursor (single command string)', () => {
+      const config = getMcpServerConfig('cursor');
+      expect(config.command).toBe('nve mcp');
       expect(config.args).toBeUndefined();
     });
 
-    it('should return npm config for claude-code (command + args)', () => {
-      const config = getMcpServerConfig('npm', 'claude-code');
-      expect(config.command).toBe('npm');
-      expect(config.args).toEqual(['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve-mcp']);
+    it('should return config for claude-code (command + args)', () => {
+      const config = getMcpServerConfig('claude-code');
+      expect(config.command).toBe('nve');
+      expect(config.args).toEqual(['mcp']);
     });
 
     it('should return pnpm config for claude-code (command + args)', () => {
-      const config = getMcpServerConfig('pnpm', 'claude-code');
-      expect(config.command).toBe('pnpm');
-      expect(config.args).toEqual(['--package=@nvidia-elements/cli@latest', 'dlx', 'nve-mcp']);
+      const config = getMcpServerConfig('claude-code');
+      expect(config.command).toBe('nve');
+      expect(config.args).toEqual(['mcp']);
     });
 
     it('should include description in all configs', () => {
-      const configs = [
-        getMcpServerConfig('npm', 'cursor'),
-        getMcpServerConfig('pnpm', 'cursor'),
-        getMcpServerConfig('npm', 'claude-code'),
-        getMcpServerConfig('pnpm', 'claude-code')
-      ];
+      const configs = [getMcpServerConfig('cursor'), getMcpServerConfig('claude-code')];
       for (const config of configs) {
         expect(config.description).toBe(
           'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples'
@@ -105,14 +93,14 @@ describe('setup-mcp', () => {
       const { existsSync, writeFileSync, mkdirSync } = await import('node:fs');
       vi.mocked(existsSync).mockReturnValue(false);
 
-      writeMcpConfig('/project', 'claude-code', 'npm');
+      writeMcpConfig('/project', 'claude-code');
 
       expect(mkdirSync).toHaveBeenCalled();
       expect(writeFileSync).toHaveBeenCalled();
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.mcpServers.elements).toBeDefined();
-      expect(written.mcpServers.elements.command).toBe('npm');
+      expect(written.mcpServers.elements.command).toBe('nve');
     });
 
     it('should merge into existing config preserving other servers', async () => {
@@ -126,12 +114,12 @@ describe('setup-mcp', () => {
       vi.mocked(existsSync).mockReturnValue(true);
       vi.mocked(readFileSync).mockReturnValue(JSON.stringify(existing));
 
-      writeMcpConfig('/project', 'claude-code', 'pnpm');
+      writeMcpConfig('/project', 'claude-code');
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.mcpServers['other-server']).toEqual({ command: 'other', description: 'Other MCP' });
       expect(written.mcpServers.elements).toBeDefined();
-      expect(written.mcpServers.elements.command).toBe('pnpm');
+      expect(written.mcpServers.elements.command).toBe('nve');
     });
 
     it('should overwrite existing elements config', async () => {
@@ -145,10 +133,10 @@ describe('setup-mcp', () => {
       vi.mocked(existsSync).mockReturnValue(true);
       vi.mocked(readFileSync).mockReturnValue(JSON.stringify(existing));
 
-      writeMcpConfig('/project', 'cursor', 'npm');
+      writeMcpConfig('/project', 'cursor');
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
-      expect(written.mcpServers.elements.command).toContain('npm exec');
+      expect(written.mcpServers.elements.command).toBe('nve mcp');
       expect(written.mcpServers.elements.description).toBe(
         'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples'
       );
@@ -164,7 +152,7 @@ describe('setup-mcp', () => {
       vi.mocked(existsSync).mockReturnValue(true);
       vi.mocked(readFileSync).mockReturnValue(JSON.stringify(existing));
 
-      writeMcpConfig('/project', 'claude-code', 'npm');
+      writeMcpConfig('/project', 'claude-code');
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.someOtherProperty).toBe(true);
@@ -176,7 +164,7 @@ describe('setup-mcp', () => {
       vi.mocked(existsSync).mockReturnValue(true);
       vi.mocked(readFileSync).mockReturnValue('not valid json');
 
-      writeMcpConfig('/project', 'claude-code', 'npm');
+      writeMcpConfig('/project', 'claude-code');
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.mcpServers.elements).toBeDefined();
@@ -186,7 +174,7 @@ describe('setup-mcp', () => {
       const { existsSync, mkdirSync } = await import('node:fs');
       vi.mocked(existsSync).mockReturnValue(false);
 
-      writeMcpConfig('/project', 'cursor', 'npm');
+      writeMcpConfig('/project', 'cursor');
 
       const dirArg = vi.mocked(mkdirSync).mock.calls[0][0] as string;
       expect(dirArg).toContain('.cursor');
@@ -196,7 +184,7 @@ describe('setup-mcp', () => {
       const { existsSync } = await import('node:fs');
       vi.mocked(existsSync).mockReturnValue(false);
 
-      const result = writeMcpConfig('/project', 'cursor', 'npm');
+      const result = writeMcpConfig('/project', 'cursor');
       expect(result).toContain('.cursor');
       expect(result).toContain('mcp.json');
     });

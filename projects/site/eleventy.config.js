@@ -17,6 +17,7 @@ import { apiShortcode } from './src/_11ty/shortcodes/api.js';
 import {
   renderInstallShortcode,
   renderInstallArtifactoryShortcode,
+  renderInstallCLIShortcode,
   renderIntegrationShortcode
 } from './src/docs/integrations/shortcodes.js';
 import { renderArtifactoryUsageShortcode } from './src/_11ty/shortcodes/artifactory-usage.js';
@@ -151,6 +152,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode('svg-logo', svgLogoShortcode);
   eleventyConfig.addShortcode('installation', renderInstallShortcode);
   eleventyConfig.addShortcode('install-artifactory', renderInstallArtifactoryShortcode);
+  eleventyConfig.addShortcode('install-cli', renderInstallCLIShortcode);
   eleventyConfig.addShortcode('integration', renderIntegrationShortcode);
   eleventyConfig.addShortcode('artifactory-usage', renderArtifactoryUsageShortcode);
   eleventyConfig.addPairedShortcode('dodont', doDontShortcode);
