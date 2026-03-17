@@ -180,7 +180,7 @@
     "axe-core": "catalog:",
     "colorjs.io": "0.5.2",
     "dts-bundle-generator": "9.5.1",
-    "esbuild": "0.25.5",
+    "esbuild": "0.27.4",
     "eslint": "catalog:",
     "monaco-editor": "0.55.1",
     "stylelint": "catalog:",

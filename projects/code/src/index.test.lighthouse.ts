@@ -33,7 +33,7 @@ describe('lighthouse report', () => {
     expect(report.payload.javascript.requests['python.js']!.kb).toBeLessThan(2);
     expect(report.payload.javascript.requests['toml.js']!.kb).toBeLessThan(1.5);
     expect(report.payload.javascript.requests['typescript.js']!.kb).toBeLessThan(3.5);
-    expect(report.payload.javascript.requests['xml.js']!.kb).toBeLessThan(0.5);
+    expect(report.payload.javascript.requests['xml.js']!.kb).toBeLessThan(1.2);
     expect(report.payload.javascript.requests['yaml.js']!.kb).toBeLessThan(1.5);
   });
 

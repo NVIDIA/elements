@@ -1,13 +1,17 @@
 import { html } from 'lit';
 import { render } from '@lit-labs/ssr';
 import { collectResult } from '@lit-labs/ssr/lib/render-result.js';
-import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
+import { readFile, writeFile, mkdir } from 'fs/promises';
+import { createHash } from 'crypto';
 import path from 'path';
 import { Project, SyntaxKind } from 'ts-morph';
 import * as prettier from 'prettier';
 
+const project = new Project();
+const cache = new Map();
+
 /**
- * Outputs *.examples.ts and *.examples.ts files to *.examples.json and *.examples.json metadata format
+ * Outputs *.examples.ts files to *.examples.json metadata format
  */
 export function examplesToJSON(packageFile) {
   return {
@@ -19,13 +23,19 @@ export function examplesToJSON(packageFile) {
 
       // have to read the file from disk instead of `code` from vite due to esbuild stripping out comments
       // https://github.com/evanw/esbuild/issues/516
-      const source = readFileSync(id, 'utf-8');
+      const source = await readFile(id, 'utf-8');
+      const hash = createHash('md5').update(source).digest('hex');
+      const cached = cache.get(id);
+
+      if (cached?.hash === hash) {
+        await writeOutput(id, cached.json);
+        return { code: `export default ''`, map: null };
+      }
 
       try {
         const file = id.split('src/')[1]?.replace('.ts', '.json');
         const entrypoint = `${packageFile.name}/${file}`;
-        const project = new Project();
-        const tempFile = project.createSourceFile('temp.ts', source);
+        const tempFile = project.createSourceFile('temp.ts', source, { overwrite: true });
         const examplesVariableStatement = tempFile.getChildrenOfKind(SyntaxKind.VariableStatement);
         const element = tempFile
           .getChildrenOfKind(SyntaxKind.ExportAssignment)[0]
@@ -67,46 +77,33 @@ export function examplesToJSON(packageFile) {
                 }
               }
 
+              const jsTags = example.getJsDocs().flatMap(doc => doc.getTags());
               const summary =
-                example
-                  .getJsDocs()
-                  .flatMap(doc => doc.getTags())
-                  .filter(tag => tag.getTagName() === 'summary')
-                  .map(tag => tag.getCommentText().replace(/\n/g, ' '))[0] ?? '';
-
+                jsTags
+                  .find(t => t.getTagName() === 'summary')
+                  ?.getCommentText()
+                  ?.replace(/\n/g, ' ') ?? '';
               const description =
-                example
-                  .getJsDocs()
-                  .flatMap(doc => doc.getTags())
-                  .filter(tag => tag.getTagName() === 'description')
-                  .map(tag => tag.getCommentText().replace(/\n/g, ' '))[0] ?? '';
+                jsTags
+                  .find(t => t.getTagName() === 'description')
+                  ?.getCommentText()
+                  ?.replace(/\n/g, ' ') ?? '';
+              const deprecated = jsTags.some(t => t.getTagName() === 'deprecated') || undefined;
+              const composition = templateIsComposition(template);
+              const tags = jsTags
+                .filter(t => t.getTagName() === 'tags')
+                .flatMap(t =>
+                  t
+                    .getCommentText()
+                    .split(' ')
+                    .map(s => s.trim())
+                )
+                .filter(Boolean);
 
-              const deprecated = example
-                .getJsDocs()
-                .flatMap(doc => doc.getTags())
-                .find(tag => tag.getTagName() === 'deprecated')
-                ? true
-                : undefined;
-
-              const composition = templateIsComposition(example.template);
-
-              const tags =
-                example
-                  .getJsDocs()
-                  .flatMap(doc => doc.getTags())
-                  .filter(tag => tag.getTagName() === 'tags')
-                  .flatMap(tag =>
-                    tag
-                      .getCommentText()
-                      .split(' ')
-                      .map(t => t.trim())
-                  )
-                  .filter(tag => tag.length > 0) ?? [];
-
-              const id = generateExampleId(entrypoint, name);
+              const exampleId = generateExampleId(entrypoint, name);
 
               return {
-                id,
+                id: exampleId,
                 name,
                 template,
                 summary,
@@ -125,11 +122,8 @@ export function examplesToJSON(packageFile) {
           items
         };
 
-        // Calculate the output path relative to dist
-        const srcPath = path.relative(process.cwd(), id);
-        const distPath = path.join(srcPath.replace('.ts', '.json').replace('src', 'dist'));
-        createDirectoryIfNotExists(distPath);
-        writeFileSync(distPath, JSON.stringify(json, null, 2));
+        cache.set(id, { hash, json });
+        await writeOutput(id, json);
 
         return {
           code: `export default ''`,
@@ -141,6 +135,13 @@ export function examplesToJSON(packageFile) {
       }
     }
   };
+}
+
+async function writeOutput(id, json) {
+  const srcPath = path.relative(process.cwd(), id);
+  const distPath = path.join(srcPath.replace('.ts', '.json').replace('src', 'dist'));
+  await mkdir(path.dirname(distPath), { recursive: true });
+  await writeFile(distPath, JSON.stringify(json, null, 2));
 }
 
 function templateIsComposition(template) {
@@ -167,14 +168,6 @@ function generateExampleId(entrypoint, name) {
   const formattedFileName = idParts[idParts.length - 2] === fileName ? '' : `-${fileName}`;
   const entrypointName = idParts.slice(1, idParts.length - 1).join('-');
   return `${entrypointName}${formattedFileName}_${exampleName}`.toLowerCase();
-}
-
-function createDirectoryIfNotExists(filePath) {
-  const directoryPath = path.dirname(filePath);
-
-  if (!existsSync(directoryPath)) {
-    mkdirSync(directoryPath, { recursive: true });
-  }
 }
 
 async function renderTemplate(template) {

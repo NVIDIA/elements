@@ -5,6 +5,7 @@
 .eslintcache
 .metrics
 .DS_store
+.vitest-attachments
 node_modules
 dist
 .lighthouse

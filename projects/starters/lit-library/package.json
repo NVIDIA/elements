@@ -73,7 +73,6 @@
     "@nvidia-elements/themes": "workspace:*",
     "@internals/testing": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
-    "@rollup/plugin-terser": "catalog:",
     "@vitest/browser": "catalog:",
     "@vitest/browser-playwright": "catalog:",
     "eslint": "catalog:",
