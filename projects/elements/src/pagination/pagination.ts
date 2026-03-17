@@ -117,9 +117,9 @@ export class Pagination extends FormControlMixin<typeof LitElement, number>(LitE
   }
 
   get #selectLabel() {
-    return `${formatStandardNumber(Math.max(1, (this.value! - 1) * this.step))}-${formatStandardNumber(
-      (this.value! - 1) * this.step + this.step
-    )}`;
+    const start = (this.value! - 1) * this.step + 1;
+    const end = Math.min(this.value! * this.step, this.items || Infinity);
+    return `${formatStandardNumber(start)}-${formatStandardNumber(end)}`;
   }
 
   get #label() {
