@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.64.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.63.4...@nvidia-elements/core-v1.64.0) (2026-03-17)
+
+
+### Features
+
+* **elements:** add vertical orientation support to nve-range ([bde1544](https://github.com/NVIDIA/elements/commit/bde1544f7f71ae7d930b4f8f1d39b8921deca253))
+
 ## [@nvidia-elements/core-v1.63.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.63.3...@nvidia-elements/core-v1.63.4) (2026-03-16)
 
 
