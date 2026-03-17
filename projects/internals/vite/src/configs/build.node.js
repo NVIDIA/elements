@@ -5,6 +5,9 @@ import { globSync } from 'glob';
 
 import { tsc } from '../plugins/tsc.js';
 import { dts } from '../plugins/dts.js';
+import { jsonDynamicImports } from '../plugins/json-dynamic-imports.js';
+import { transpileDecorators } from '../plugins/decorators.js';
+import { markdown } from '../plugins/markdown.js';
 
 const NODE_BUILT_IN_MODULES = builtinModules.filter(m => !m.startsWith('_'));
 NODE_BUILT_IN_MODULES.push(...NODE_BUILT_IN_MODULES.map(m => `node:${m}`));
@@ -23,7 +26,7 @@ export const libraryNodeBuildConfig = {
   optimizeDeps: {
     exclude: NODE_BUILT_IN_MODULES
   },
-  plugins: [tsc(), dts()],
+  plugins: [tsc(), dts(), transpileDecorators(), markdown()],
   build: {
     reportCompressedSize: false,
     watch: mode === 'watch' ? {} : undefined,
@@ -41,7 +44,7 @@ export const libraryNodeBuildConfig = {
         }, {})
       }
     },
-    rollupOptions: {
+    rolldownOptions: {
       preserveEntrySignatures: 'strict',
       external: [
         ...NODE_BUILT_IN_MODULES,
@@ -54,10 +57,10 @@ export const libraryNodeBuildConfig = {
           format: 'esm',
           preserveModules: true,
           assetFileNames: '[name].[ext]',
-          entryFileNames: '[name].js',
-          importAttributesKey: 'with'
+          entryFileNames: '[name].js'
         }
-      ]
+      ],
+      plugins: [jsonDynamicImports()]
     }
   }
 };

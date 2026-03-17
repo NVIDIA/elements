@@ -9,7 +9,7 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(1147);
-    expect(report.payload.javascript.requests['index2.js'].kb).toBeLessThan(1145);
+    expect(report.payload.javascript.kb).toBeLessThan(1115);
+    expect(report.payload.javascript.requests['dist.js'].kb).toBeLessThan(1114);
   });
 });

@@ -24,7 +24,21 @@ const LIGHTHOUSE_CONFIG = {
 export class LighthouseRunner {
   #runner = new VitePlaywrightRunner({
     runnerID: RUNNER_ID,
-    chromiumArgs: ['--headless', '--remote-debugging-port=9222']
+    chromiumArgs: [
+      '--headless',
+      '--remote-debugging-port=9222',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--disable-extensions',
+      '--disable-background-networking',
+      '--disable-default-apps',
+      '--disable-sync',
+      '--disable-translate',
+      '--metrics-recording-only',
+      '--mute-audio',
+      '--no-first-run',
+      '--safebrowsing-disable-auto-update'
+    ]
   });
 
   async open() {

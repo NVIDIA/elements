@@ -1,14 +1,14 @@
 import type { UserConfig } from 'vite';
 
-export declare function libraryBuildConfig(config?: UserConfig): UserConfig;
-export declare function libraryNodeBuildConfig(config?: UserConfig): UserConfig;
-export declare function libraryBundleConfig(config?: UserConfig): UserConfig;
-export declare function libraryTestConfig(config?: UserConfig): UserConfig;
-export declare function libraryNodeTestConfig(config?: UserConfig): UserConfig;
-export declare function libraryAxeTestConfig(config?: UserConfig): UserConfig;
-export declare function libraryLitSSRTestConfig(config?: UserConfig): UserConfig;
-export declare function libraryVisualTestConfig(config?: UserConfig): UserConfig;
-export declare function libraryLighthouseTestConfig(config?: UserConfig): UserConfig;
+export declare const libraryBuildConfig: UserConfig;
+export declare const libraryNodeBuildConfig: UserConfig;
+export declare const libraryBundleConfig: UserConfig;
+export declare const libraryTestConfig: UserConfig;
+export declare const libraryNodeTestConfig: UserConfig;
+export declare const libraryAxeTestConfig: UserConfig;
+export declare const libraryLitSSRTestConfig: UserConfig;
+export declare const libraryVisualTestConfig: UserConfig;
+export declare const libraryLighthouseTestConfig: UserConfig;
 
 export declare const lighthouseRunner: {
   open(): Promise<void>;

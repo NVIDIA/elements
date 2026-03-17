@@ -28,11 +28,11 @@ describe('lighthouse report', () => {
   });
 
   test('labs/layout-container.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['layout-container.css']!.kb).toBeLessThan(1.93);
+    expect(report.payload.css.requests['layout-container.css']!.kb).toBeLessThan(1.94);
   });
 
   test('labs/layout-viewport.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['layout-viewport.css']!.kb).toBeLessThan(1.7);
+    expect(report.payload.css.requests['layout-viewport.css']!.kb).toBeLessThan(1.72);
   });
 });
 

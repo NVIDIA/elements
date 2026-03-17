@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
-import terser from '@rollup/plugin-terser';
 import minifyHTML from 'rollup-plugin-html-literals';
 import dts from 'vite-plugin-dts';
 import { globSync } from 'glob';
@@ -34,7 +33,7 @@ export default defineConfig(env => {
     ],
     build: {
       cssCodeSplit: true,
-      minify: false, // https://github.com/vitejs/vite/issues/8848
+      minify: true,
       watch: mode === 'watch' ? {} : undefined,
       outDir: dist(),
       emptyOutDir: false,
@@ -49,7 +48,7 @@ export default defineConfig(env => {
           }, {})
         }
       },
-      rollupOptions: {
+      rolldownOptions: {
         treeshake: false,
         preserveEntrySignatures: 'strict',
         external: [
@@ -65,12 +64,7 @@ export default defineConfig(env => {
             entryFileNames: '[name].js'
           }
         ],
-        plugins: [
-          mode === 'production' ? minifyHTML() : false,
-          mode === 'production'
-            ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
-            : false // https://github.com/vitejs/vite/issues/8848
-        ]
+        plugins: [mode === 'production' ? minifyHTML() : false]
       }
     }
   };

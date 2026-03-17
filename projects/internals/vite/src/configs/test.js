@@ -21,7 +21,12 @@ export const libraryTestConfig = {
   testTimeout: 60_000,
   cacheDir: 'node_modules/.vite-unit',
   build: {
-    target: 'esnext'
+    target: 'esnext',
+    rolldownOptions: {
+      output: {
+        codeSplitting: false
+      }
+    }
   },
   optimizeDeps: {
     noDiscovery: true
@@ -30,13 +35,6 @@ export const libraryTestConfig = {
     fs: {
       strict: false,
       allow: [process.cwd(), '/']
-    }
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        inlineDynamicImports: true
-      }
     }
   },
   test: {

@@ -3,7 +3,6 @@ import path from 'path';
 import { globSync } from 'glob';
 import { chromium } from 'playwright';
 import { preview, build } from 'vite';
-import virtualHtml from 'vite-plugin-virtual-html';
 
 const resolve = rel => path.resolve(process.cwd(), rel);
 
@@ -99,33 +98,59 @@ export class VitePlaywrightRunner {
   }
 }
 
-/** Builds a given test fixture/template for test runner environments. */
-export function buildPage(testName, runnerID, render) {
-  return build({
-    configFile: false,
-    logLevel: 'error',
-    base: `/${testName}`,
-    build: {
-      target: 'esnext',
-      cssCodeSplit: true,
-      outDir: `.${runnerID}/dist/${testName}`,
-      rollupOptions: {
-        output: {
-          entryFileNames: `assets/[name].js`,
-          chunkFileNames: `assets/[name].js`,
-          assetFileNames: assetInfo => `assets/${assetInfo.names}`
-        }
-      }
-    },
-    plugins: [
-      virtualHtml({
-        pages: {
-          index: {
-            template: `/vitest.${runnerID}.html`,
-            render
+/**
+ * Builds a given test fixture/template for test runner environments.
+ *
+ * Vite 8/Rolldown does not emit JS from inline `<script type="module">` in
+ * HTML (html-proxy modules). This function works around the limitation by
+ * reading the template, applying the render callback, extracting every inline
+ * module script to a real temporary `.js` file, and building from real files.
+ */
+export async function buildPage(testName, runnerID, render) {
+  const template = fs.readFileSync(resolve(`vitest.${runnerID}.html`), 'utf8');
+  let html = render(template);
+
+  const tmpDir = resolve(`.${runnerID}/.tmp-${testName}`);
+  if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
+
+  let scriptIdx = 0;
+  const scriptRe = /<script\s+type=["']module["']>([\s\S]*?)<\/script>/g;
+  html = html.replace(scriptRe, (_match, content) => {
+    const name = `_entry${scriptIdx++}.js`;
+    fs.writeFileSync(path.join(tmpDir, name), content.trim());
+    return `<script type="module" src="./${name}"></script>`;
+  });
+
+  fs.writeFileSync(path.join(tmpDir, 'index.html'), html);
+
+  const outDir = `.${runnerID}/dist/${testName}`;
+  try {
+    await build({
+      configFile: false,
+      logLevel: 'error',
+      root: tmpDir,
+      base: `/${testName}`,
+      css: { postcss: {} },
+      build: {
+        target: 'esnext',
+        cssCodeSplit: true,
+        cssMinify: 'esbuild',
+        outDir: resolve(outDir),
+        emptyOutDir: true,
+        rolldownOptions: {
+          output: {
+            entryFileNames: `assets/[name].js`,
+            chunkFileNames: `assets/[name].js`,
+            assetFileNames: assetInfo => {
+              const original = assetInfo.originalFileNames?.[0];
+              if (original) return `assets/${original.split('/').pop()}`;
+              return `assets/${assetInfo.names?.[0] ?? 'asset'}`;
+            }
           }
         }
-      })
-    ]
-  });
+      }
+    });
+  } finally {
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+  }
 }
