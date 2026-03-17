@@ -1,4 +1,6 @@
 import process from 'process';
+import { transpileDecorators } from '../plugins/decorators.js';
+import { markdown } from '../plugins/markdown.js';
 
 const watch = process.argv.findIndex(i => i === '--watch') !== -1;
 const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
@@ -55,5 +57,6 @@ export const libraryNodeTestConfig = {
         'vitest.*.ts'
       ]
     }
-  }
+  },
+  plugins: [transpileDecorators(), markdown()]
 };

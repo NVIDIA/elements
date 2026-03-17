@@ -4,7 +4,7 @@ import { getEnv, getHostDetails } from './global.utils.js';
 
 function createScopedRegistry(): CustomElementRegistry {
   const supported = globalThis.CustomElementRegistry && 'initialize' in CustomElementRegistry.prototype;
-  return supported ? new CustomElementRegistry() : customElements;
+  return supported ? new CustomElementRegistry() : globalThis.customElements;
 }
 
 export class GlobalState {
