@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.64.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.64.0...@nvidia-elements/core-v1.64.1) (2026-03-17)
+
+
+### Bug Fixes
+
+* **elements:** correct off-by-one and end cap in pagination label ([4913595](https://github.com/NVIDIA/elements/commit/491359561059fd2b770425fa495694bff051b95e))
+
 ## [@nvidia-elements/core-v1.64.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.63.4...@nvidia-elements/core-v1.64.0) (2026-03-17)
 
 
