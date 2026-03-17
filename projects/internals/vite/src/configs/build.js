@@ -1,6 +1,5 @@
 import fs from 'fs';
 import process from 'process';
-import terser from '@rollup/plugin-terser';
 import { resolve } from 'path';
 import { globSync } from 'glob';
 import minifyHTML from 'rollup-plugin-html-literals';
@@ -31,7 +30,7 @@ export const libraryBuildConfig = {
     reportCompressedSize: false,
     cssMinify: prod ? 'esbuild' : false,
     cssCodeSplit: true,
-    minify: false, // https://github.com/vitejs/vite/issues/8848
+    minify: true,
     outDir: dist(),
     emptyOutDir: false,
     sourcemap: prod,
@@ -51,7 +50,8 @@ export const libraryBuildConfig = {
         }, {})
       }
     },
-    rollupOptions: {
+    rolldownOptions: {
+      platform: 'neutral', // https://github.com/evanw/esbuild/issues/2649
       preserveEntrySignatures: 'strict',
       external: [
         ...Object.keys(packageFile.dependencies || {}),
@@ -63,20 +63,10 @@ export const libraryBuildConfig = {
           format: 'esm',
           preserveModules: true,
           assetFileNames: '[name].[ext]',
-          entryFileNames: '[name].js',
-          importAttributesKey: 'with'
+          entryFileNames: '[name].js'
         }
       ],
-      plugins: [
-        prod ? false : writeIfChanged(),
-        prod ? minifyHTML() : false,
-        prod
-          ? terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } })
-          : false // https://github.com/vitejs/vite/issues/8848
-      ]
+      plugins: [prod ? false : writeIfChanged(), prod ? minifyHTML() : false]
     }
-  },
-  esbuild: {
-    platform: 'neutral' // https://github.com/evanw/esbuild/issues/2649
   }
 };

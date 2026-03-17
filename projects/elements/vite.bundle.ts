@@ -8,12 +8,10 @@ export default defineConfig(() => {
       alias: { '@nvidia-elements/core': resolve(import.meta.dirname, './src') }
     },
     build: {
-      rollupOptions: {
+      rolldownOptions: {
         output: {
-          manualChunks: id => {
-            if (id.includes('src/icon/icons')) {
-              return 'icons';
-            }
+          codeSplitting: {
+            groups: [{ name: 'icons', test: /src\/icon\/icons/ }]
           }
         }
       }

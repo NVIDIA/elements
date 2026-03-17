@@ -57,10 +57,10 @@ export class Combobox extends Control implements ContainerElement {
    * Reduces the visual container for a minimal borderless appearance while preserving whitespace bounds.
    * Use when embedding within another container such as a toolbar.
    */
-  @property({ type: String, reflect: true }) accessor container: 'flat';
+  @property({ type: String, reflect: true }) container: 'flat';
 
   /** Disable rendering of inline tags for many-item select */
-  @property({ type: Boolean, reflect: true }) accessor notags: boolean;
+  @property({ type: Boolean, reflect: true }) notags: boolean;
 
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 

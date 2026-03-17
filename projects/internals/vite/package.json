@@ -18,7 +18,6 @@
   "dependencies": {
     "@lit-labs/ssr": "catalog:",
     "@custom-elements-manifest/analyzer": "catalog:",
-    "@rollup/plugin-terser": "catalog:",
     "axe-core": "catalog:",
     "custom-element-jsx-integration": "1.6.0",
     "custom-element-vs-code-integration": "1.5.0",
@@ -30,10 +29,9 @@
     "parse5": "7.1.2",
     "pixelmatch": "6.0.0",
     "pngjs": "7.0.0",
-    "rollup": "4.52.5",
+    "rollup": "4.59.0",
     "rollup-plugin-html-literals": "catalog:",
-    "rollup-plugin-visualizer": "6.0.5",
-    "terser": "5.44.0",
+    "rollup-plugin-visualizer": "7.0.1",
     "ts-morph": "catalog:",
     "vite-plugin-dts": "catalog:",
     "vite-plugin-virtual-html": "1.2.7"
