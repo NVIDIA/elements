@@ -1,4 +1,3 @@
-import terser from '@rollup/plugin-terser';
 import minifyHTML from 'rollup-plugin-html-literals';
 import { resolve } from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
@@ -14,7 +13,7 @@ export const libraryBundleConfig = {
     modulePreload: false,
     reportCompressedSize: false,
     cssMinify: 'esbuild',
-    minify: false, // https://github.com/vitejs/vite/issues/8848
+    minify: true,
     outDir: 'dist/bundles/',
     emptyOutDir: false,
     sourcemap: false,
@@ -25,19 +24,16 @@ export const libraryBundleConfig = {
         index: resolve('./src/bundle.ts')
       }
     },
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         format: 'esm',
         assetFileNames: `index.[ext]`,
         entryFileNames: `index.js`,
-        inlineDynamicImports: false,
-        chunkFileNames: '[name].js',
-        importAttributesKey: 'with'
+        chunkFileNames: '[name].js'
       },
       plugins: [
         dtsBundle(),
         minifyHTML(),
-        terser({ module: true, format: { comments: false }, compress: { ecma: 2020, unsafe: true, passes: 2 } }),
         visualizer({
           filename: 'coverage/size/index.html',
           gzipSize: true,

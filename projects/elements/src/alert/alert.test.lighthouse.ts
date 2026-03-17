@@ -13,7 +13,7 @@ describe('alert lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(23);
+    expect(report.payload.javascript.kb).toBeLessThan(23.3);
   });
 
   test('alert-group should meet lighthouse benchmarks', async () => {
@@ -30,6 +30,6 @@ describe('alert lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(23);
+    expect(report.payload.javascript.kb).toBeLessThan(23.2);
   });
 });

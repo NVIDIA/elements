@@ -9,7 +9,7 @@ export default defineConfig({
     sourcemap: true,
     outDir: '../dist',
     emptyOutDir: true,
-    rollupOptions: {
+    rolldownOptions: {
       input: {
         main: resolve(__dirname, './src/index.html'),
         about: resolve(__dirname, './src/about/index.html'),
