@@ -152,7 +152,7 @@ async function createCursorConfig(projectDir: string) {
       elements: {
         description: 'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples',
         command: 'npm',
-        args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve-mcp'],
+        args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve', 'mcp'],
         env: {
           npm_config_registry: 'https://registry.npmjs.org'
         }
@@ -174,7 +174,7 @@ async function createClaudeConfig(projectDir: string) {
       elements: {
         description: 'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples',
         command: 'npm',
-        args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve-mcp'],
+        args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve', 'mcp'],
         env: {
           npm_config_registry: 'https://registry.npmjs.org'
         }

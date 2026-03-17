@@ -302,6 +302,18 @@
   "pnpm": {
     "overrides": {
       "archiver>glob": "catalog:"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "@bundled-es-modules/glob",
+      "@parcel/watcher",
+      "bun",
+      "esbuild",
+      "hugo-bin",
+      "lmdb",
+      "msgpackr-extract",
+      "rs-module-lexer",
+      "sharp",
+      "style-dictionary"
+    ]
   }
 }
