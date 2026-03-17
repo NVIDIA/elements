@@ -94,25 +94,29 @@ describe('MCP server', () => {
   });
 
   it('should set ELEMENTS_ENV to "mcp"', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     expect(process.env.ELEMENTS_ENV).toBe('mcp');
   });
 
   it('should only register tools with MCP support', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     expect(mockRegisterTool).toHaveBeenCalledTimes(2);
     expect(mockRegisterTool).toHaveBeenCalledWith('mcp_tool', expect.any(Object), expect.any(Function));
     expect(mockRegisterTool).toHaveBeenCalledWith('all_tool', expect.any(Object), expect.any(Function));
   });
 
   it('should not register CLI-only tools', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     const registeredNames = mockRegisterTool.mock.calls.map(call => call[0]);
     expect(registeredNames).not.toContain('cli_tool');
   });
 
   it('should register tools with correct config', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     const allToolCall = mockRegisterTool.mock.calls.find(call => call[0] === 'all_tool');
     expect(allToolCall[1]).toEqual(
       expect.objectContaining({
@@ -123,14 +127,16 @@ describe('MCP server', () => {
   });
 
   it('should handle tools without inputSchema', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     // mcpTool has no inputSchema — should still register without error
     const mcpToolCall = mockRegisterTool.mock.calls.find(call => call[0] === 'mcp_tool');
     expect(mcpToolCall[1].inputSchema).toEqual({});
   });
 
   it('should register prompts', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     expect(mockRegisterPrompt).toHaveBeenCalledTimes(1);
     expect(mockRegisterPrompt).toHaveBeenCalledWith(
       'test-prompt',
@@ -143,7 +149,8 @@ describe('MCP server', () => {
   });
 
   it('should invoke prompt handler with params', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     const handler = mockRegisterPrompt.mock.calls[0][2];
     const result = await handler({ arg: 'value' });
     expect(mockPrompt.handler).toHaveBeenCalledWith({ arg: 'value' });
@@ -151,12 +158,14 @@ describe('MCP server', () => {
   });
 
   it('should connect to stdio transport', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     expect(mockConnect).toHaveBeenCalledTimes(1);
   });
 
   it('should return string result as text content', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     const handler = mockRegisterTool.mock.calls[0][2];
     const result = await handler({});
     expect(result).toEqual({
@@ -166,7 +175,8 @@ describe('MCP server', () => {
   });
 
   it('should return JSON for error responses', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     const handler = mockRegisterTool.mock.calls[0][2];
     const errorResult = { status: 'error', message: 'failed' };
     mcpTool.mockResolvedValueOnce(errorResult);
@@ -175,7 +185,8 @@ describe('MCP server', () => {
   });
 
   it('should return JSON for non-string results', async () => {
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
     const handler = mockRegisterTool.mock.calls[0][2];
     const objResult = { status: 'complete', result: { key: 'value' } };
     mcpTool.mockResolvedValueOnce(objResult);
@@ -188,7 +199,8 @@ describe('MCP server', () => {
     const exitSpy = vi.spyOn(process, 'exit').mockImplementation(() => undefined as never);
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
-    await import('./index.js');
+    const { startMcpServer } = await import('./mcp.js');
+    await startMcpServer();
 
     expect(errorSpy).toHaveBeenCalledWith(expect.any(Error));
     expect(exitSpy).toHaveBeenCalledWith(1);

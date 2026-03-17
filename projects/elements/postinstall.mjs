@@ -92,7 +92,7 @@ try {
     ` Supercharge your development with API search, template validation,`,
     ` project scaffolding, and AI assistant integration.`,
     '',
-    ` ${c}npx --package=@nvidia-elements/cli -y nve-setup${r}`,
+    ` ${c}nve project.setup${r}`,
     '',
     ` ${d}https://NVIDIA.github.io/elements/docs/mcp/${r}`,
     rule,
