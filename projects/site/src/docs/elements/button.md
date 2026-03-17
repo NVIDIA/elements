@@ -10,47 +10,59 @@
 
 {% install 'nve-button' %}
 
-## Interaction
+## Options
+
+### Interaction
 
 {% api 'nve-button' 'property' 'interaction' %}
 {% example '@nvidia-elements/core/button/button.examples.json' 'Interaction' %}
 
-## Container
+### Container
 
 {% api 'nve-button' 'property' 'container' %}
 {% example '@nvidia-elements/core/button/button.examples.json' 'Container' %}
 
-## Size
+### Size
 
 {% api 'nve-button' 'property' 'size' %}
 {% example '@nvidia-elements/core/button/button.examples.json' 'Size' %}
 
-## Pressed
+### Pressed
 
 {% api 'nve-button' 'property' 'pressed' %}
 {% example '@nvidia-elements/core/button/button.examples.json' 'Pressed' %}
 
-## Selected
+### Selected
 
 {% api 'nve-button' 'property' 'selected' %}
 {% example '@nvidia-elements/core/button/button.examples.json' 'Selected' %}
 
-## Disabled
+### Disabled
 
 {% api 'nve-button' 'property' 'disabled' %}
 {% example '@nvidia-elements/core/button/button.examples.json' 'Disabled' %}
 
-## Linked Buttons
+## Guidelines
+
+### Icon Usage
+
+{% example '@nvidia-elements/core/button/button.examples.json' 'WithIcon' %}
+
+### Triggering Custom Form Controls
+
+{% example '@nvidia-elements/core/button/button.examples.json' 'FormControl' %}
+
+### Disclosing Progress
+
+{% example '@nvidia-elements/core/button/button.examples.json' 'ProgressDisclosure' %}
+
+### Ensure Contrast on Colored Background
+
+{% example '@nvidia-elements/core/button/button.examples.json' 'ContrastColoredBackgrounds' %}
+
+### Creating Linked Buttons
 
 {% dodont %}
 {% example '@nvidia-elements/core/button/button.examples.json', 'ValidLinkButton' %}
 {% example '@nvidia-elements/core/button/button.examples.json', 'InvalidLinkButton' %}
 {% enddodont %}
-
-## With Icon
-
-{% example '@nvidia-elements/core/button/button.examples.json' 'WithIcon' %}
-
-## Form Control
-
-{% example '@nvidia-elements/core/button/button.examples.json' 'FormControl' %}
