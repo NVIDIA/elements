@@ -13,35 +13,22 @@ interface McpServerConfig {
   description: string;
   command: string;
   args?: string[];
-  env: Record<string, string>;
+  env?: Record<string, string>;
 }
 
-export function getMcpServerConfig(client: 'npm' | 'pnpm', ide: 'cursor' | 'claude-code'): McpServerConfig {
-  const env = { npm_config_registry: 'https://registry.npmjs.org' };
-
+export function getMcpServerConfig(ide: 'cursor' | 'claude-code'): McpServerConfig {
   if (ide === 'cursor') {
-    const command =
-      client === 'pnpm'
-        ? 'pnpm --package=@nvidia-elements/cli@latest dlx nve-mcp'
-        : 'npm exec --package=@nvidia-elements/cli@latest -y --prefer-online -- nve-mcp';
-    return { description: DESCRIPTION, command, env };
-  }
-
-  // Claude Code uses command + args array
-  if (client === 'pnpm') {
     return {
       description: DESCRIPTION,
-      command: 'pnpm',
-      args: ['--package=@nvidia-elements/cli@latest', 'dlx', 'nve-mcp'],
-      env
+      command: 'nve mcp'
     };
   }
 
+  // Claude Code uses command + args array
   return {
     description: DESCRIPTION,
-    command: 'npm',
-    args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve-mcp'],
-    env
+    command: 'nve',
+    args: ['mcp']
   };
 }
 
@@ -49,9 +36,9 @@ export function getConfigPath(cwd: string, ide: 'cursor' | 'claude-code'): strin
   return ide === 'cursor' ? resolve(join(cwd, '.cursor', 'mcp.json')) : resolve(join(cwd, '.mcp.json'));
 }
 
-export function writeMcpConfig(cwd: string, ide: 'cursor' | 'claude-code', client: 'npm' | 'pnpm'): string {
+export function writeMcpConfig(cwd: string, ide: 'cursor' | 'claude-code'): string {
   const configPath = getConfigPath(cwd, ide);
-  const serverConfig = getMcpServerConfig(client, ide);
+  const serverConfig = getMcpServerConfig(ide);
 
   let existing: { mcpServers?: Record<string, unknown> } = {};
   try {
@@ -151,7 +138,7 @@ export async function setupAgent(cwd: string, ide: IDE): Promise<Report> {
 
   for (const target of ides) {
     try {
-      writeMcpConfig(dir, target, client);
+      writeMcpConfig(dir, target);
       const label = target === 'cursor' ? 'Cursor' : 'Claude Code';
       report[target] = {
         message: `${label} configured. Restart ${label} to activate`,

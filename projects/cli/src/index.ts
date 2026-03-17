@@ -6,7 +6,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { tools, ToolSupport, type Schema } from '@internals/tools';
 import { banner, colors, getArgValue, renderResult, runAsyncTool } from './utils.js';
-import { checkForUpdates, notifyIfUpdateAvailable } from './update.js';
+import { checkForUpdates, notifyIfUpdateAvailable, upgrade } from './update.js';
 
 export const VERSION = '0.0.0';
 
@@ -18,10 +18,15 @@ function getUpdateCheck() {
 
 process.on('SIGINT', () => process.exit(0));
 
+if (process.argv.includes('--upgrade')) {
+  upgrade();
+}
+
 const yargsInstance = yargs(hideBin(process.argv))
   .scriptName('nve')
   .usage('$0 <cmd> [args]')
   .version(VERSION)
+  .option('upgrade', { type: 'boolean', describe: 'Upgrade nve CLI to the latest version' })
   .recommendCommands()
   .fail(message => {
     // allow missing positionals to fall through to interactive prompts
@@ -114,5 +119,15 @@ tools
       ]
     );
   });
+
+yargsInstance.command(
+  'mcp',
+  'Start the MCP server',
+  () => {},
+  async () => {
+    const { startMcpServer } = await import('./mcp/mcp.js');
+    await startMcpServer();
+  }
+);
 
 void yargsInstance.parse();

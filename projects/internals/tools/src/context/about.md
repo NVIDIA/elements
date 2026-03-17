@@ -26,7 +26,7 @@ npm config set registry https://registry.npmjs.org && npm login --auth-type=lega
 
 ```bash
 # create a new project
-npm create @nve typescript # typescript, angular, react, lit, preact, solidjs, vue, nextjs, go
+nve project.create # typescript, angular, react, lit, preact, solidjs, vue, nextjs, go
 ```
 
 ### Resources for Users

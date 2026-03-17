@@ -15,6 +15,18 @@ cpSync('../internals/metadata/static/api.json', './dist/metadata/api.json');
 cpSync('../internals/metadata/static/examples.json', './dist/metadata/examples.json');
 cpSync('../internals/metadata/static/projects.json', './dist/metadata/projects.json');
 
+cpSync('../cli/install.sh', './dist/install.sh');
+cpSync('../cli/install.cmd', './dist/install.cmd');
+if (existsSync('../cli/dist')) {
+  mkdirSync('./dist/cli', { recursive: true });
+  for (const bin of ['nve-macos-arm64', 'nve-linux-x64', 'nve-linux-arm64', 'nve-windows-x64']) {
+    const src = `../cli/dist/${bin}`;
+    if (existsSync(src)) {
+      cpSync(src, `./dist/cli/${bin}`);
+    }
+  }
+}
+
 cpSync('../starters/dist/', './dist/starters/download/', { recursive: true });
 cpSync('../starters/angular/dist/angular-starter/browser/', './dist/starters/angular/', { recursive: true });
 cpSync('../starters/bundles/dist/', './dist/starters/bundles/', { recursive: true });
