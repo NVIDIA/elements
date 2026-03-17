@@ -256,7 +256,6 @@ export const JavaScriptDriven = {
       
       <script type="module">
         const element = document.getElementById('programmatic-markdown');
-        
         // Complete markdown content to stream
         const fullContent = \`# AI Assistant Response
 \\n
@@ -307,11 +306,9 @@ The component uses a reactive approach:
 - **Memory optimization** through proper cleanup
 \\n
 > Perfect for AI assistants and real-time documentation!\`;
-
         // Split content into blocks/paragraphs for progressive display
         const blocks = fullContent.split('\\n');
         let currentBlockIndex = 0;
-        
         function streamContent() {
           if (currentBlockIndex < blocks.length) {
             // Add 1 block at a time to preserve markdown structure
@@ -323,7 +320,6 @@ The component uses a reactive approach:
             setTimeout(streamContent, 300);
           }
         }
-        
         // Start streaming after a brief delay
         setTimeout(streamContent, 1000);
       </script>
