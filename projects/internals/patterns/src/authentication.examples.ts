@@ -139,7 +139,7 @@ export const LoginPage = {
 
 
 /**
- * @summary Permission denied state informing users of access restrictions with contact option.
+ * @summary Use for permission denied states informing users of access restrictions with a contact option.
  * @tags pattern
  */
 export const NoAccess = {

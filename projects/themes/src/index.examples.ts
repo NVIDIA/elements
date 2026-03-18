@@ -17,7 +17,7 @@ export default {
 };
 
 /**
- * @summary Visual demonstration of theme layer stacking (canvas, container, overlay, popover) in light and dark modes.
+ * @summary Theme layer stacking (canvas, container, overlay, popover) in light and dark modes.
  */
 export const Layers = {
   render: () => html`

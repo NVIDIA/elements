@@ -39,12 +39,12 @@ To manage validation manually use the `novalidate` attribute to disable HTML5 va
 
 Individual controls can be reset by calling the `reset()` method on the control element. If controls are in a HTML Form then calling `reset()` on the form resets all child controls.
 
-{% example '@nvidia-elements/core/forms/validation.examples.json' 'ValidationReset' %}
+{% example '@nvidia-elements/core/forms/validation.examples.json' 'ResetForm' %}
 
 ## Error Groups
 
-{% example '@nvidia-elements/core/forms/validation.examples.json' 'ValidationErrorGroup' %}
+{% example '@nvidia-elements/core/forms/validation.examples.json' 'ErrorGroup' %}
 
 ## Success Groups
 
-{% example '@nvidia-elements/core/forms/validation.examples.json' 'ValidationSuccessGroup' %}
+{% example '@nvidia-elements/core/forms/validation.examples.json' 'SuccessGroup' %}

@@ -12,16 +12,16 @@ intended for different use cases.
 
 ### Key Value
 
-{% example '@internals/patterns/panel.examples.json' 'PanelKeyValue' %}
+{% example '@internals/patterns/panel.examples.json' 'KeyValue' %}
 
 ### Accordion
 
-{% example '@internals/patterns/panel.examples.json' 'PanelAccordion' %}
+{% example '@internals/patterns/panel.examples.json' 'Accordion' %}
 
 ### Tabbed Header
 
-{% example '@internals/patterns/panel.examples.json' 'PanelTabbedHeader' %}
+{% example '@internals/patterns/panel.examples.json' 'TabbedHeader' %}
 
 ### Notification Stack
 
-{% example '@internals/patterns/panel.examples.json' 'PanelNotificationStack' %}
+{% example '@internals/patterns/panel.examples.json' 'NotificationStack' %}

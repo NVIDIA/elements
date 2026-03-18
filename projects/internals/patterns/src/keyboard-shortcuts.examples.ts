@@ -25,7 +25,7 @@ export const ShortcutFilled = {
 };
 
 /**
- * @summary Keyboard shortcut content example for inline text content.
+ * @summary Use for displaying keyboard shortcuts as inline text content.
  * @tags pattern test-case
  */
 export const ShortcutFlat = {
@@ -35,7 +35,7 @@ export const ShortcutFlat = {
 };
 
 /**
- * @summary Dropdown menu with keyboard shortcut hints displayed alongside menu items.
+ * @summary Use for dropdown menus with keyboard shortcut hints displayed alongside menu items.
  * @tags pattern test-case
  */
 export const ShortcutDropdown = {

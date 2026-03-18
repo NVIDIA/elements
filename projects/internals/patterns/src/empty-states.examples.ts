@@ -38,7 +38,7 @@ export const DataGridRetry = {
 };
 
 /**
- * @summary Empty data state with illustration and call-to-action for first-time use or empty collections.
+ * @summary Use for first-time or empty collection states with an illustration and call-to-action to guide users.
  * @tags pattern
  */
 export const EmptyData = {
@@ -53,7 +53,7 @@ export const EmptyData = {
 };
 
 /**
- * @summary No search results state with suggestions for refining filters or clearing search criteria.
+ * @summary Use when no search results match to suggest refining filters or clearing search criteria.
  * @tags pattern
  */
 export const NoResults = {
@@ -71,7 +71,7 @@ export const NoResults = {
 };
 
 /**
- * @summary Offline mode indicator with information about limited functionality and last sync time.
+ * @summary Use to show offline mode with information about limited functionality and last sync time.
  * @tags pattern
  */
 export const OfflineMode = {

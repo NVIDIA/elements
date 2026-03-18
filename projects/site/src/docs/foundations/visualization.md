@@ -57,7 +57,7 @@ new Chart(document.querySelector('canvas'), {
 
 ## Heatmap
 
-{% example '@internals/patterns/heatmap.examples.json' 'HeatmapPattern', '{ "inline": false, "height": "600px" }' %}
+{% example '@internals/patterns/heatmap.examples.json' 'ModulePassRate', '{ "inline": false, "height": "600px" }' %}
 
 ## Categorical
 

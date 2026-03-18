@@ -163,7 +163,7 @@ export const Scroll = {
 };
 
 /**
- * @summary Complex dropdown menu with search functionality and branded logos for application selection interfaces.
+ * @summary Use a dropdown menu with search and branded logos for application selection interfaces.
  * @tags pattern
  */
 export const Complex = {
@@ -193,7 +193,7 @@ export const Complex = {
 };
 
 /**
- * @summary Navigation drawers overlay the existing page content. Navigation is for out of page context navigation.
+ * @summary Use a navigation drawer to overlay page content for out-of-context navigation.
  * @tags pattern
  */
 export const VerticalNavigationDrawer = {
@@ -224,7 +224,7 @@ export const VerticalNavigationDrawer = {
 };
 
 /**
- * @summary Navigation panels are inline to the page and push the existing page content to the side. Navigation should be relevant and contextual to the page content.
+ * @summary Use an inline navigation panel to push page content aside when navigation is contextual to the page.
  * @tags pattern
  */
 export const VerticalNavigationPanel = {
@@ -255,7 +255,7 @@ export const VerticalNavigationPanel = {
 };
 
 /**
- * @summary Menu item with tooltip integration showing how to provide extra context and warnings.
+ * @summary Use a tooltip on a menu item to provide extra context and warnings.
  * @tags pattern test-case
  */
 export const ItemTooltip = {

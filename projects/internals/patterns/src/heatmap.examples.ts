@@ -8,7 +8,7 @@ export default {
 /**
  * @summary Grid heatmap displaying simulation test pass rates for AV software modules across driving scenarios.
  * Ideal for CI/CD dashboards tracking autonomous vehicle stack validation using red-green diverging tokens.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const ModulePassRate = {
   render: () => html`
@@ -228,7 +228,7 @@ export const SensorCoverageHeatmap = {
 /**
  * @summary Grid heatmap visualizing object detection latency for robotics perception pipelines using viridis colors.
  * Helps robotics engineers identify inference bottlenecks across object classes and model configurations.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const InferenceLatencyHeatmap = {
   render: () => html`
@@ -329,7 +329,7 @@ export const InferenceLatencyHeatmap = {
 /**
  * @summary Grid heatmap showing path planning success rates for autonomous navigation across environmental conditions.
  * Ideal for AV validation teams comparing planner behavior in edge cases like fog, snow, and night driving.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const PathPlanningHeatmap = {
   render: () => html`
@@ -432,7 +432,7 @@ export const PathPlanningHeatmap = {
 /**
  * @summary Grid heatmap displaying robot joint usage for multi-axis manipulator arms across motion profiles.
  * Essential for robotics engineers optimizing arm trajectories and preventing mechanical wear using viridis scale.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const JointUtilizationHeatmap = {
   render: () => html`
@@ -871,7 +871,7 @@ export const ThermalHeatmap = {
 };
 
 /**
- * @summary Dynamic heatmap pattern with programmatic data generation and management via JavaScript.
+ * @summary Use for dynamic heatmaps with programmatic data generation and management via JavaScript.
  * @tags pattern test-case
  */
 export const DynamicHeatmap = {

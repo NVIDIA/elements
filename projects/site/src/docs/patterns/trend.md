@@ -9,16 +9,16 @@
 
 ## Trend Badge
 
-{% example '@internals/patterns/trend.examples.json', 'TrendBadge' %}
+{% example '@internals/patterns/trend.examples.json', 'Badge' %}
 
 ## Trend Badge Detail
 
-{% example '@internals/patterns/trend.examples.json', 'TrendBadgeDetail' %}
+{% example '@internals/patterns/trend.examples.json', 'BadgeDetail' %}
 
 ## Trend Card
 
-{% example '@internals/patterns/trend.examples.json', 'TrendCard' %}
+{% example '@internals/patterns/trend.examples.json', 'Card' %}
 
 ## Trend Grid
 
-{% example '@internals/patterns/trend.examples.json', 'TrendGrid' %}
+{% example '@internals/patterns/trend.examples.json', 'Grid' %}
