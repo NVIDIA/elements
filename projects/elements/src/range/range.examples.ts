@@ -178,7 +178,7 @@ export const OrientationVerticalDatalist = {
 };
 
 /**
- * @summary Range component can have its visual styles overwritten to accomplish custom themes.
+ * @summary Range component can have its visual styles overwritten to achieve custom themes.
  * @tags test-case
  */
 export const CustomStyles = {

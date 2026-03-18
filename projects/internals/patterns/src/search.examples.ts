@@ -47,7 +47,7 @@ export const FilterToolbar = {
 };
 
 /**
- * @summary Toolbar with many filter chips and date inputs showing horizontal scrolling behavior when content overflows.
+ * @summary Use for toolbars with many filter chips and date inputs where horizontal scrolling helps when content overflows.
  * @tags pattern test-case
  */
 export const FilterToolbarScroll = {
@@ -110,7 +110,7 @@ export const FilterToolbarScroll = {
 };
 
 /**
- * @summary Toolbar with content wrapping enabled to handle overflow by wrapping items to new lines instead of scrolling.
+ * @summary Use as an alternative to scrolling toolbars by wrapping filter items to new lines when content overflows.
  * @tags pattern test-case
  */
 export const FilterToolbarWrap = {

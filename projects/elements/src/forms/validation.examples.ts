@@ -15,7 +15,7 @@ export default {
 };
 
 /**
- * @summary Real-time validation with contextual error messages and disabled submit until form is valid.
+ * @summary Use real-time validation with contextual error messages to disable submit until form is valid.
  * @tags pattern
  */
 export const LoginForm = {

@@ -16,11 +16,11 @@ The `nve-markdown` component renders markdown content with Elements styling. It 
 
 ### Markdown from Source Property
 
-{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'MarkdownFromSource' %}
+{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'FromSource' %}
 
 ### Markdown from Template
 
-{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'MarkdownFromTemplate' %}
+{% example '@nvidia-elements/markdown/markdown/markdown.examples.json', 'FromTemplate' %}
 
 ## Advanced Examples
 
