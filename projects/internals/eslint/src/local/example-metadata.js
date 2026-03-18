@@ -1,5 +1,24 @@
 const allowedTags = ['priority', 'performance', 'pattern', 'anti-pattern', 'test-case'];
 const contextMaxLength = 400;
+const guidanceIndicators = [
+  /\buse\s+(to|for|when|if|in|as)\b/i,
+  /\buse\s+.+?\s+(to|for|when|if|in|as)\b/i,
+  /\bideal for\b/i,
+  /\bperfect for\b/i,
+  /\buseful for\b/i,
+  /\bsuitable for\b/i,
+  /\bdesigned for\b/i,
+  /\bessential for\b/i,
+  /\bhelps\b/i,
+  /\blimit this\b/i,
+  /\bavoid\b/i,
+  /\bprefer\b/i,
+  /\binstead\s+(of|,)\b/i,
+  /\balternative to\b/i,
+  /\b(when|if)\s+.+?\s+(use|prefer|choose)\b/i,
+  /\bfor\s+.+?\s+(tasks|scenarios|cases|actions|operations|workflows)\b/i
+];
+
 const placeholderPatterns = [
   /lorem ipsum/i,
   /dolor sit amet/i,
@@ -25,7 +44,9 @@ export default {
       'no-links':
         '@summary must not contain links. Inline the relevant text instead so context is preserved for agents.',
       'no-placeholder-text':
-        'Example contains placeholder text ("{{match}}"). Replace with realistic, meaningful content.'
+        'Example contains placeholder text ("{{match}}"). Replace with realistic, meaningful content.',
+      'pattern-missing-guidance':
+        '@summary for @tags pattern must include UX guidance (e.g., "Use … to/for/when", "Ideal for", "Limit this to", "Avoid"). If this is a visual demonstration or test case rather than a reusable UX pattern, remove the pattern tag or use @tags test-case instead.'
     }
   },
   create(context) {
@@ -87,6 +108,11 @@ export default {
               data: { invalid: invalid.join(', '), allowed: allowedTags.join(', ') }
             });
           }
+        }
+
+        // Pattern-tagged examples must contain actionable UX guidance
+        if (tags.includes('pattern') && !guidanceIndicators.some(re => re.test(summary))) {
+          context.report({ node, messageId: 'pattern-missing-guidance' });
         }
 
         // Detect lorem ipsum placeholder text in export source
