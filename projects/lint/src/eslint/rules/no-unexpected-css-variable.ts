@@ -34,99 +34,73 @@ const rule = {
     }
   },
   create(context: Rule.RuleContext) {
+    function findVarChild(node: CssDeclarationNode, pattern: RegExp) {
+      return node.value.children
+        ?.filter((child: CssValueChild) => child.name === 'var')
+        ?.flatMap((child: CssValueChild) => child.children ?? [])
+        ?.find((child: CssValueChild) => child?.name?.match(pattern));
+    }
+
+    function checkSizeVarInSpaceProperty(node: CssDeclarationNode) {
+      if (!node.property.includes('margin') && !node.property.includes('gap')) return;
+      const child = findVarChild(node, /^--nve-ref-size-/);
+      if (!child) return;
+      const sizeToken = sizeTokens.find(token => token.name.includes(child.name));
+      const alternate = spaceTokens.find(spaceToken => spaceToken.value === sizeToken?.value)?.name;
+      context.report({
+        messageId: 'unexpected-css-var',
+        node: node as unknown as Rule.Node,
+        data: { value: child.name, property: node.property, alternate: alternate ?? 'var(--nve-ref-space-*)' },
+        fix: alternate
+          ? (fixer: Rule.RuleFixer) => fixer.replaceText(node as unknown as Rule.Node, `${node.property}: ${alternate}`)
+          : undefined
+      });
+    }
+
+    function checkSpaceVarInSizeProperty(node: CssDeclarationNode) {
+      if (node.property !== 'width' && node.property !== 'height') return;
+      const child = findVarChild(node, /^--nve-ref-space-/);
+      if (!child) return;
+      const spaceToken = spaceTokens.find(token => token.name.includes(child.name));
+      const alternate = sizeTokens.find(sizeToken => sizeToken.value === spaceToken?.value)?.name;
+      context.report({
+        messageId: 'unexpected-css-var',
+        node: node as unknown as Rule.Node,
+        data: { value: child.name, property: node.property, alternate: alternate ?? 'var(--nve-ref-size-*)' },
+        fix: alternate
+          ? (fixer: Rule.RuleFixer) => fixer.replaceText(node as unknown as Rule.Node, `${node.property}: ${alternate}`)
+          : undefined
+      });
+    }
+
+    function checkColorVarInBackground(node: CssDeclarationNode) {
+      if (node.property !== 'background') return;
+      const child = findVarChild(node, /^--nve-.*-color$/);
+      if (!child) return;
+      context.report({
+        messageId: 'unexpected-css-var',
+        node: node as unknown as Rule.Node,
+        data: { value: child.name, property: node.property, alternate: 'var(--nve-*-background)' }
+      });
+    }
+
+    function checkBackgroundVarInColor(node: CssDeclarationNode) {
+      if (node.property !== 'color') return;
+      const child = findVarChild(node, /^--nve-.*-background$/);
+      if (!child) return;
+      context.report({
+        messageId: 'unexpected-css-var',
+        node: node as unknown as Rule.Node,
+        data: { value: child.name, property: node.property, alternate: 'var(--nve-*-color)' }
+      });
+    }
+
     return {
       Declaration(node: CssDeclarationNode) {
-        // unexpected-css-var size
-        if (node.property.includes('margin') || node.property.includes('gap')) {
-          const child = node.value.children
-            ?.filter((child: CssValueChild) => child.name === 'var')
-            ?.flatMap((child: CssValueChild) => child.children ?? [])
-            ?.find((child: CssValueChild) => child?.name?.match(/^--nve-ref-size-/));
-
-          if (child) {
-            const sizeToken = sizeTokens.find(token => token.name.includes(child.name));
-            const alternate = spaceTokens.find(spaceToken => spaceToken.value === sizeToken?.value)?.name;
-            context.report({
-              messageId: 'unexpected-css-var',
-              node: node as unknown as Rule.Node,
-              data: {
-                value: child.name,
-                property: node.property,
-                alternate: alternate ?? 'var(--nve-ref-space-*)'
-              },
-              fix: alternate
-                ? (fixer: Rule.RuleFixer) =>
-                    fixer.replaceText(node as unknown as Rule.Node, `${node.property}: ${alternate}`)
-                : undefined
-            });
-          }
-        }
-
-        // unexpected-css-var space
-        if (node.property === 'width' || node.property === 'height') {
-          const child = node.value.children
-            ?.filter((child: CssValueChild) => child.name === 'var')
-            ?.flatMap((child: CssValueChild) => child.children ?? [])
-            ?.find((child: CssValueChild) => child?.name?.match(/^--nve-ref-space-/));
-
-          if (child) {
-            const spaceToken = spaceTokens.find(token => token.name.includes(child.name));
-            const alternate = sizeTokens.find(sizeToken => sizeToken.value === spaceToken?.value)?.name;
-            context.report({
-              messageId: 'unexpected-css-var',
-              node: node as unknown as Rule.Node,
-              data: {
-                value: child.name,
-                property: node.property,
-                alternate: alternate ?? 'var(--nve-ref-size-*)'
-              },
-              fix: alternate
-                ? (fixer: Rule.RuleFixer) =>
-                    fixer.replaceText(node as unknown as Rule.Node, `${node.property}: ${alternate}`)
-                : undefined
-            });
-          }
-        }
-
-        // unexpected-css-var color
-        if (node.property === 'background') {
-          const child = node.value.children
-            ?.filter((child: CssValueChild) => child.name === 'var')
-            ?.flatMap((child: CssValueChild) => child.children ?? [])
-            ?.find((child: CssValueChild) => child?.name?.match(/^--nve-.*-color$/));
-
-          if (child) {
-            context.report({
-              messageId: 'unexpected-css-var',
-              node: node as unknown as Rule.Node,
-              data: {
-                value: child.name,
-                property: node.property,
-                alternate: 'var(--nve-*-background)'
-              }
-            });
-          }
-        }
-
-        // unexpected-css-var background
-        if (node.property === 'color') {
-          const child = node.value.children
-            ?.filter((child: CssValueChild) => child.name === 'var')
-            ?.flatMap((child: CssValueChild) => child.children ?? [])
-            ?.find((child: CssValueChild) => child?.name?.match(/^--nve-.*-background$/));
-
-          if (child) {
-            context.report({
-              messageId: 'unexpected-css-var',
-              node: node as unknown as Rule.Node,
-              data: {
-                value: child.name,
-                property: node.property,
-                alternate: 'var(--nve-*-color)'
-              }
-            });
-          }
-        }
+        checkSizeVarInSpaceProperty(node);
+        checkSpaceVarInSizeProperty(node);
+        checkColorVarInBackground(node);
+        checkBackgroundVarInColor(node);
       }
     };
   }
