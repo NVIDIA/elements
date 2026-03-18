@@ -74,63 +74,84 @@ export class CanvasEditable extends LitElement {
   render() {
     return html`
       <div internal-host class=${this.horizontalLayout ? 'horizontal-layout' : ''}>
-        <div class="resizer">
-          <div class="preview-wrapper" style=${!this.horizontalLayout ? `width: ${this.previewWidth}px` : ''}>
-            <div class="preview" style=${this.horizontalLayout ? `width: ${this.previewWidth}px` : ''}>
-              ${this.readonly && !this.#isPopoverElement(this.tag) ? this.#renderInlinePreview() : this.#renderSandboxedPreview()}
-            </div>
-            ${
-              !this.horizontalLayout
-                ? html`<nve-resize-handle 
-              class="preview-resize-handle" 
-              orientation="vertical" 
-              min="300" 
-              max="1260" 
-              value="${this.previewWidth}" 
-              step="1"
-              @input=${this.#handleResize}></nve-resize-handle>`
-                : ''
-            }
-          </div>
-          <div class="preview-backdrop" .hidden=${this.horizontalLayout}></div>
-        </div>
+        ${this.#renderResizer()}
+        ${this.#renderHorizontalResizeHandle()}
+        ${this.#renderCodeSection()}
+        ${this.#renderToolbar()}
+      </div>
+    `;
+  }
 
+  #renderResizer() {
+    return html`
+      <div class="resizer">
+        <div class="preview-wrapper" style=${!this.horizontalLayout ? `width: ${this.previewWidth}px` : ''}>
+          <div class="preview" style=${this.horizontalLayout ? `width: ${this.previewWidth}px` : ''}>
+            ${this.readonly && !this.#isPopoverElement(this.tag) ? this.#renderInlinePreview() : this.#renderSandboxedPreview()}
+          </div>
+          ${this.#renderVerticalResizeHandle()}
+        </div>
+        <div class="preview-backdrop" .hidden=${this.horizontalLayout}></div>
+      </div>
+    `;
+  }
+
+  #renderVerticalResizeHandle() {
+    if (!this.horizontalLayout) {
+      return html`<nve-resize-handle 
+        class="preview-resize-handle" 
+        orientation="vertical" 
+        min="300" 
+        max="1260" 
+        value="${this.previewWidth}" 
+        step="1"
+        @input=${this.#handleResize}></nve-resize-handle>`;
+    }
+    return '';
+  }
+
+  #renderHorizontalResizeHandle() {
+    if (this.horizontalLayout) {
+      return html`<nve-resize-handle 
+        class="horizontal-resize-handle"
+        orientation="vertical" 
+        min="150" 
+        max="800" 
+        value="${this.previewWidth}" 
+        step="1"
+        @input=${this.#handleResize}></nve-resize-handle>`;
+    }
+    return '';
+  }
+
+  #renderCodeSection() {
+    return html`
+      <div class="code" .hidden=${!this.horizontalLayout && !this.showSource}>
         ${
-          this.horizontalLayout
-            ? html`<nve-resize-handle 
-          class="horizontal-resize-handle"
-          orientation="vertical" 
-          min="150" 
-          max="800" 
-          value="${this.previewWidth}" 
-          step="1"
-          @input=${this.#handleResize}></nve-resize-handle>`
-            : ''
+          !this.readonly
+            ? html`<nve-monaco-input 
+                language="html" 
+                .value=${this.editableSource}
+                line-numbers="on"
+                @input=${this.#handleInput}
+                @change=${this.#handleChange}></nve-monaco-input>`
+            : html`<nve-codeblock language="html" .code=${this.editableSource}></nve-codeblock>`
         }
+        <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.editableSource}></nve-copy-button>
+        <nve-button .hidden=${!this.horizontalLayout} @click=${this.#handlePlaygroundClick}>Open in Playground</nve-button>
+      </div>
+    `;
+  }
 
-        <div class="code" .hidden=${!this.horizontalLayout && !this.showSource}>
-          ${
-            !this.readonly
-              ? html`<nve-monaco-input 
-                  language="html" 
-                  .value=${this.editableSource}
-                  line-numbers="on"
-                  @input=${this.#handleInput}
-                  @change=${this.#handleChange}></nve-monaco-input>`
-              : html`<nve-codeblock language="html" .code=${this.editableSource}></nve-codeblock>`
-          }
-          <nve-copy-button container="flat" @click=${this.#handleCopyClick} behavior-copy .value=${this.editableSource}></nve-copy-button>
-          <nve-button .hidden=${!this.horizontalLayout} @click=${this.#handlePlaygroundClick}>Open in Playground</nve-button>
-        </div>
-        
-        <div class="toolbar" .hidden=${this.horizontalLayout}>
-          <nve-button container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
+  #renderToolbar() {
+    return html`
+      <div class="toolbar" .hidden=${this.horizontalLayout}>
+        <nve-button container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
 
-          <div>
-            <slot name="suffix"></slot>
+        <div>
+          <slot name="suffix"></slot>
 
-            <nve-button container="flat" .hidden=${this.horizontalLayout} @click=${this.#handlePlaygroundClick}>Open in Playground</nve-button>
-          </div>
+          <nve-button container="flat" .hidden=${this.horizontalLayout} @click=${this.#handlePlaygroundClick}>Open in Playground</nve-button>
         </div>
       </div>
     `;
