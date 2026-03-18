@@ -377,7 +377,7 @@ export const LegacyOpenDelay = {
 };
 
 /**
- * @summary Tooltip functionality within modal dialogs with many triggers. Ensures tooltips work correctly in layered UI contexts, maintaining proper z-index stacking and interaction behavior within modal overlays.
+ * @summary Tooltip functionality within modal dialogs with many triggers. Ensures tooltips work correctly in layered UI contexts, maintaining proper stacking order and interaction behavior within modal overlays.
  * @tags test-case
  */
 export const NestedDynamic = {
