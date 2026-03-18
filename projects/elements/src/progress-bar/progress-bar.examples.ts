@@ -44,7 +44,7 @@ export const Max = {
 };
 
 /**
- * @summary Progress bar with descriptive label and percentage display for clear communication of upload or task status.
+ * @summary Use a labeled progress bar with percentage display to communicate upload or task status.
  * @tags pattern
  */
 export const Labeled = {

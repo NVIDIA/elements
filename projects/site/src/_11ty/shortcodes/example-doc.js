@@ -68,7 +68,7 @@ function findExample(ref, exampleName) {
   const example = examples.find(s => s.entrypoint?.includes(ref) && s.name === exampleName);
 
   if (!example) {
-    console.error('Example not found: ', ref, exampleName);
+    throw new Error(`Example not found: ${ref} ${exampleName}`);
   }
 
   return example;

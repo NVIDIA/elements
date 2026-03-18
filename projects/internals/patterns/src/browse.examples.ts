@@ -19,7 +19,7 @@ export default {
 };
 
 /**
- * @summary Horizontal list item card with thumbnail, title, description, and icon button actions for browsable content lists.
+ * @summary Use for browsable content lists with a horizontal card showing thumbnail, title, description, and icon button actions.
  * @tags pattern test-case
  */
 export const ContentRow = {

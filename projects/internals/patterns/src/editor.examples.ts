@@ -277,7 +277,7 @@ radar:
 };
 
 /**
- * @summary Read-only code viewer for reviewing deployed configurations or viewing robot test session logs. Prevents accidental edits while allowing full code navigation and search.
+ * @summary Use for reviewing deployed configurations or viewing session logs in a read-only code viewer. Prevents accidental edits while allowing full code navigation and search.
  * @tags pattern
  */
 export const ReadOnly = {
