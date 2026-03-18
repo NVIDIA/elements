@@ -1351,32 +1351,30 @@ const dependencyCounts: Record<string, number> = {
   other: 0
 };
 
+const knownFrameworks = [
+  'angular',
+  'react',
+  'vue',
+  'svelte',
+  'solid',
+  'preact',
+  'alpinejs',
+  'hybrids',
+  'htmx',
+  'lit'
+] as const;
+
 usageMetrics.projects.forEach((project: ProjectUsage) => {
   const deps = (project as ProjectUsage & { projectDependencies?: Record<string, boolean> }).projectDependencies;
   if (deps) {
-    if (deps.angular) dependencyCounts.angular++;
-    if (deps.react) dependencyCounts.react++;
-    if (deps.vue) dependencyCounts.vue++;
-    if (deps.svelte) dependencyCounts.svelte++;
-    if (deps.solid) dependencyCounts.solid++;
-    if (deps.preact) dependencyCounts.preact++;
-    if (deps.alpinejs) dependencyCounts.alpinejs++;
-    if (deps.hybrids) dependencyCounts.hybrids++;
-    if (deps.htmx) dependencyCounts.htmx++;
-    if (deps.lit) dependencyCounts.lit++;
-
-    if (
-      !deps.angular &&
-      !deps.react &&
-      !deps.vue &&
-      !deps.svelte &&
-      !deps.solid &&
-      !deps.preact &&
-      !deps.lit &&
-      !deps.alpinejs &&
-      !deps.hybrids &&
-      !deps.htmx
-    ) {
+    let matchedAny = false;
+    for (const framework of knownFrameworks) {
+      if (deps[framework]) {
+        dependencyCounts[framework]++;
+        matchedAny = true;
+      }
+    }
+    if (!matchedAny) {
       dependencyCounts.other++;
     }
   }

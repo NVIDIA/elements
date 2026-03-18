@@ -50,6 +50,7 @@ const config = {
   },
   rules: {
     ...tseslint.configs.recommended.rules,
+    complexity: ['error', { max: 10 }], // https://en.wikipedia.org/wiki/Cyclomatic_complexity
     'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
     '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T', argsIgnorePattern: '^_' }],
     '@typescript-eslint/consistent-type-imports': ['error'],
