@@ -1,6 +1,6 @@
 import type { Rule } from 'eslint';
 import { theme } from '@nvidia-elements/themes';
-import type { CssDeclarationNode } from '../rule-types.js';
+import type { CssDeclarationNode, CssValueChild } from '../rule-types.js';
 
 const spaceTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-space'))
@@ -103,6 +103,205 @@ const opacityTokens = Object.entries(theme)
     name: `var(--${id})`
   }));
 
+type TokenEntry = { id?: string; value: number | string; name: string };
+
+function findPixelDimensionChild(
+  node: CssDeclarationNode,
+  min: number,
+  max: number,
+  extraCheck?: (v: number) => boolean
+) {
+  return node.value.children?.find(child => {
+    const value = parseInt(child.value ?? '');
+    const isMatch = child.type === 'Dimension' && child.unit === 'px' && value <= max && value >= min;
+    return isMatch && (!extraCheck || extraCheck(value));
+  });
+}
+
+function reportTokenViolation(
+  context: Rule.RuleContext,
+  node: CssDeclarationNode,
+  data: { value: string; unit: string; alternate: string }
+) {
+  const { alternate } = data;
+  const hasAlternate =
+    !alternate.includes('*') && (alternate.includes('var(--nve-ref-') || alternate.includes('var(--nve-sys-'));
+  context.report({
+    messageId: 'unexpected-css-value',
+    node,
+    data: { ...data, property: node.property },
+    fix: hasAlternate ? fixer => fixer.replaceText(node, `${node.property}: ${alternate}`) : undefined
+  });
+}
+
+function findTokenAlternate(tokens: TokenEntry[], value: number): string | undefined {
+  return tokens.find(token => token.value === value)?.name;
+}
+
+function checkDimensionProperty(
+  context: Rule.RuleContext,
+  node: CssDeclarationNode,
+  min: number,
+  max: number,
+  tokens: TokenEntry[],
+  fallback: string,
+  extraCheck?: (v: number) => boolean
+) {
+  const child = findPixelDimensionChild(node, min, max, extraCheck);
+  if (!child) return;
+  const alternate = findTokenAlternate(tokens, parseInt(child.value ?? '')) ?? fallback;
+  reportTokenViolation(context, node, { value: child.value ?? '', unit: child.unit ?? '', alternate });
+}
+
+function checkSpaceValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
+  if (!propertyName.includes('margin') && !propertyName.includes('gap')) return;
+  checkDimensionProperty(
+    context,
+    node,
+    minSpaceToken.value,
+    maxSpaceToken.value,
+    spaceTokens,
+    'var(--nve-ref-space-*)',
+    v => v !== 1
+  );
+}
+
+function checkSizeValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
+  if (propertyName !== 'width' && propertyName !== 'height') return;
+  checkDimensionProperty(context, node, minSizeToken.value, maxSizeToken.value, sizeTokens, 'var(--nve-ref-size-*)');
+}
+
+function checkFontSizeValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
+  if (propertyName !== 'font-size') return;
+  checkDimensionProperty(
+    context,
+    node,
+    minFontSizeToken.value,
+    maxFontSizeToken.value,
+    fontSizeTokens,
+    'var(--nve-ref-font-size-*)'
+  );
+}
+
+function checkFontWeightValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
+  if (propertyName !== 'font-weight') return;
+  const child = node.value.children?.find(child => child.name !== 'var');
+  if (!child) return;
+  const alternate =
+    fontWeightTokens.find(token => token.value === child.value || token.value === child.name)?.name ??
+    'var(--nve-ref-font-weight-*)';
+  reportTokenViolation(context, node, { value: child.value ?? '', unit: child.name ?? '', alternate });
+}
+
+function checkLineHeightValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
+  if (propertyName !== 'line-height') return;
+  checkDimensionProperty(
+    context,
+    node,
+    minLineHeightToken.value,
+    maxLineHeightToken.value,
+    lineHeightTokens,
+    'var(--nve-ref-font-line-height-*)'
+  );
+}
+
+function checkOpacityValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
+  if (propertyName !== 'opacity') return;
+  const child = node.value.children?.find(
+    child => child.type === 'Number' && child.value !== '0' && child.value !== '1'
+  );
+  if (!child) return;
+  const alternate = opacityTokens.find(token => token.value === child.value)?.name ?? 'var(--nve-ref-opacity-*)';
+  reportTokenViolation(context, node, { value: child.value ?? '', unit: child.unit ?? '', alternate });
+}
+
+function checkBorderRadiusValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
+  if (propertyName !== 'border-radius') return;
+  let value = '';
+  let unit = '';
+
+  const child = node.value.children?.find(child => {
+    const v = parseInt(child.value ?? '');
+    const isDimensionOrNumber =
+      (child.type === 'Dimension' && child.unit === 'px') || (child.type === 'Number' && child.unit === undefined);
+    return isDimensionOrNumber && v <= maxBorderRadiusToken.value && v >= minBorderRadiusToken.value;
+  });
+
+  if (child) {
+    value = child.value ?? '';
+    unit = child.unit ?? '';
+  }
+
+  if (node.property.startsWith('--') && node.value.value.trim().includes('px')) {
+    value = node.value.value.trim();
+  }
+
+  if (!value) return;
+  const alternate = findTokenAlternate(borderRadiusTokens, parseInt(value)) ?? 'var(--nve-ref-border-radius-*)';
+  reportTokenViolation(context, node, { value, unit, alternate });
+}
+
+function checkBorderWidthValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
+  if (propertyName !== 'border-width') return;
+  checkDimensionProperty(
+    context,
+    node,
+    minBorderWidthToken.value,
+    maxBorderWidthToken.value,
+    borderWidthTokens,
+    'var(--nve-ref-border-width-*)'
+  );
+}
+
+function checkBoxShadowValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
+  if (propertyName !== 'box-shadow') return;
+  const child = node.value.children?.find(child => child.type === 'Dimension');
+  if (!child || JSON.stringify(node.value).includes('Highlight')) return;
+  context.report({
+    messageId: 'unexpected-css-value',
+    node,
+    data: { value: child.value, unit: child.unit, property: node.property, alternate: 'var(--nve-ref-shadow-*)' }
+  });
+}
+
+const COLOR_PATTERNS = ['#', 'hsl', 'rgb'];
+
+function isColorFunctionChild(child: CssValueChild): boolean {
+  return child.type === 'Hash' || !!child.name?.includes('hsl') || !!child.name?.includes('rgb');
+}
+
+function extractColorFromChild(child: CssValueChild): { value: string; unit: string } {
+  if (child.type === 'Hash') {
+    return { value: `#${(child.value ?? '').trim()}`, unit: '' };
+  }
+  return { value: child.name.trim(), unit: child.name.trim() };
+}
+
+function extractColorFromCustomProperty(node: CssDeclarationNode): { value: string; unit: string } | undefined {
+  if (!node.property.startsWith('--')) return undefined;
+  const rawValue = node.value.value.trim();
+  if (COLOR_PATTERNS.some(p => rawValue.includes(p))) {
+    return { value: rawValue, unit: '' };
+  }
+  return undefined;
+}
+
+function checkColorValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
+  if (propertyName !== 'color' && propertyName !== 'background') return;
+
+  const child = node.value.children?.find(isColorFunctionChild);
+  const fromChild = child ? extractColorFromChild(child) : undefined;
+  const fromCustomProp = extractColorFromCustomProperty(node);
+  const result = fromCustomProp ?? fromChild;
+
+  if (!result) return;
+  context.report({
+    messageId: 'unexpected-css-value',
+    node,
+    data: { value: result.value, unit: result.unit, property: node.property, alternate: `var(--nve-*-${propertyName})` }
+  });
+}
+
 const rule = {
   meta: {
     type: 'problem' as const,
@@ -122,277 +321,17 @@ const rule = {
   create(context: Rule.RuleContext) {
     return {
       Declaration(node: CssDeclarationNode) {
-        const property = node.property;
-        const propertyName = property.replace('--', '');
-
-        // unexpected-css-value space
-        if (propertyName.includes('margin') || propertyName.includes('gap')) {
-          const child = node.value.children?.find(child => {
-            const value = parseInt(child.value ?? '');
-            const isDimension = child.type === 'Dimension';
-            const isPixelUnit = child.unit === 'px';
-            const isWithinSizeTokenRange = value <= maxSpaceToken.value && value >= minSpaceToken.value && value !== 1;
-            return isDimension && isPixelUnit && isWithinSizeTokenRange;
-          });
-
-          if (child) {
-            const alternate = spaceTokens.find(token => token.value === parseInt(child.value ?? ''))?.name;
-            context.report({
-              messageId: 'unexpected-css-value',
-              node,
-              data: {
-                value: child.value,
-                unit: child.unit,
-                property: property,
-                alternate: alternate ?? 'var(--nve-ref-space-*)'
-              },
-              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
-            });
-          }
-        }
-
-        // unexpected-css-value size
-        if (propertyName === 'width' || propertyName === 'height') {
-          const child = node.value.children?.find(child => {
-            const value = parseInt(child.value ?? '');
-            const isDimension = child.type === 'Dimension';
-            const isPixelUnit = child.unit === 'px';
-            const isWithinSizeTokenRange = value <= maxSizeToken.value && value >= minSizeToken.value;
-            return isDimension && isPixelUnit && isWithinSizeTokenRange;
-          });
-
-          if (child) {
-            const alternate = sizeTokens.find(token => token.value === parseInt(child.value ?? ''))?.name;
-            context.report({
-              messageId: 'unexpected-css-value',
-              node,
-              data: {
-                value: child.value,
-                unit: child.unit,
-                property: property,
-                alternate: alternate ?? 'var(--nve-ref-size-*)'
-              },
-              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
-            });
-          }
-        }
-
-        // unexpected-css-value font-size
-        if (propertyName === 'font-size') {
-          const child = node.value.children?.find(child => {
-            const value = parseInt(child.value ?? '');
-            const isDimension = child.type === 'Dimension';
-            const isPixelUnit = child.unit === 'px';
-            const isWithinFontSizeTokenRange = value <= maxFontSizeToken.value && value >= minFontSizeToken.value;
-            return isDimension && isPixelUnit && isWithinFontSizeTokenRange;
-          });
-          if (child) {
-            const alternate = fontSizeTokens.find(token => token.value === parseInt(child.value ?? ''))?.name;
-            context.report({
-              messageId: 'unexpected-css-value',
-              node,
-              data: {
-                value: child.value,
-                unit: child.unit,
-                property: property,
-                alternate: alternate ?? 'var(--nve-ref-font-size-*)'
-              },
-              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
-            });
-          }
-        }
-
-        // unexpected-css-value font-weight
-        if (propertyName === 'font-weight') {
-          const child = node.value.children?.find(child => child.name !== 'var');
-          if (child) {
-            const alternate = fontWeightTokens.find(
-              token => token.value === child.value || token.value === child.name
-            )?.name;
-            context.report({
-              messageId: 'unexpected-css-value',
-              node,
-              data: {
-                value: child.value ?? '',
-                unit: child.name ?? '',
-                property: property,
-                alternate: alternate ?? 'var(--nve-ref-font-weight-*)'
-              },
-              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
-            });
-          }
-        }
-
-        // unexpected-css-value line-height
-        if (propertyName === 'line-height') {
-          const child = node.value.children?.find(child => {
-            const value = parseInt(child.value ?? '');
-            const isDimension = child.type === 'Dimension';
-            const isPixelUnit = child.unit === 'px';
-            const isWithinLineHeightTokenRange = value <= maxLineHeightToken.value && value >= minLineHeightToken.value;
-            return isDimension && isPixelUnit && isWithinLineHeightTokenRange;
-          });
-
-          if (child) {
-            const alternate = lineHeightTokens.find(token => token.value === parseInt(child.value ?? ''))?.name;
-            context.report({
-              messageId: 'unexpected-css-value',
-              node,
-              data: {
-                value: child.value,
-                unit: child.unit,
-                property: property,
-                alternate: alternate ?? 'var(--nve-ref-font-line-height-*)'
-              },
-              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
-            });
-          }
-        }
-
-        // unexpected-css-value opacity
-        if (propertyName === 'opacity') {
-          const child = node.value.children?.find(
-            child => child.type === 'Number' && child.value !== '0' && child.value !== '1'
-          );
-
-          if (child) {
-            const alternate = opacityTokens.find(token => token.value === child.value)?.name;
-            context.report({
-              messageId: 'unexpected-css-value',
-              node,
-              data: {
-                value: child.value ?? '',
-                unit: child.unit ?? '',
-                property: property,
-                alternate: alternate ?? 'var(--nve-ref-opacity-*)'
-              },
-              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
-            });
-          }
-        }
-
-        // unexpected-css-value border-radius
-        if (propertyName === 'border-radius') {
-          let value = '';
-          let unit = '';
-
-          const child = node.value.children?.find(child => {
-            const value = parseInt(child.value ?? '');
-            const isDimension = child.type === 'Dimension' && child.unit === 'px';
-            const isNumber = child.type === 'Number' && child.unit === undefined;
-            const isWithinBorderRadiusTokenRange =
-              value <= maxBorderRadiusToken.value && value >= minBorderRadiusToken.value;
-            return (isDimension || isNumber) && isWithinBorderRadiusTokenRange;
-          });
-
-          if (child) {
-            value = child.value ?? '';
-            unit = child.unit ?? '';
-          }
-
-          if (node.property.startsWith('--')) {
-            const rawValue = node.value.value.trim();
-            if (rawValue.includes('px')) {
-              value = rawValue;
-            }
-          }
-
-          if (value) {
-            const alternate = borderRadiusTokens.find(token => token.value === parseInt(value))?.name;
-            context.report({
-              messageId: 'unexpected-css-value',
-              node,
-              data: {
-                value,
-                unit,
-                property: property,
-                alternate: alternate ?? 'var(--nve-ref-border-radius-*)'
-              },
-              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
-            });
-          }
-        }
-
-        // unexpected-css-value border-width
-        if (propertyName === 'border-width') {
-          const child = node.value.children?.find(child => {
-            const value = parseInt(child.value ?? '');
-            const isDimension = child.type === 'Dimension';
-            const isPixelUnit = child.unit === 'px';
-            const isWithinBorderWidthTokenRange =
-              value <= maxBorderWidthToken.value && value >= minBorderWidthToken.value;
-            return isDimension && isPixelUnit && isWithinBorderWidthTokenRange;
-          });
-
-          if (child) {
-            const alternate = borderWidthTokens.find(token => token.value === parseInt(child.value ?? ''))?.name;
-            context.report({
-              messageId: 'unexpected-css-value',
-              node,
-              data: {
-                value: child.value,
-                unit: child.unit,
-                property: property,
-                alternate: alternate ?? 'var(--nve-ref-border-width-*)'
-              },
-              fix: alternate ? fixer => fixer.replaceText(node, `${property}: ${alternate}`) : undefined
-            });
-          }
-        }
-
-        // unexpected-css-value box-shadow
-        if (propertyName === 'box-shadow') {
-          const child = node.value.children?.find(child => child.type === 'Dimension');
-
-          if (child && !JSON.stringify(node.value).includes('Highlight')) {
-            context.report({
-              messageId: 'unexpected-css-value',
-              node,
-              data: {
-                value: child.value,
-                unit: child.unit,
-                property: property,
-                alternate: 'var(--nve-ref-shadow-*)'
-              }
-            });
-          }
-        }
-
-        // unexpected-css-value color
-        if (propertyName === 'color' || propertyName === 'background') {
-          let value = '';
-          let unit = '';
-
-          const child = node.value.children?.find(
-            child => child.type === 'Hash' || child.name?.includes('hsl') || child.name?.includes('rgb')
-          );
-
-          if (child) {
-            value = child.type === 'Hash' ? `#${(child.value ?? '').trim()}` : child.name.trim();
-            unit = child.type === 'Hash' ? '' : child.name.trim();
-          }
-
-          if (node.property.startsWith('--')) {
-            const rawValue = node.value.value.trim();
-            if (rawValue.includes('#') || rawValue.includes('hsl') || rawValue.includes('rgb')) {
-              value = rawValue;
-              unit = '';
-            }
-          }
-
-          if (value) {
-            context.report({
-              messageId: 'unexpected-css-value',
-              node,
-              data: {
-                value,
-                unit,
-                property: node.property,
-                alternate: `var(--nve-*-${propertyName})`
-              }
-            });
-          }
-        }
+        const propertyName = node.property.replace('--', '');
+        checkSpaceValue(context, node, propertyName);
+        checkSizeValue(context, node, propertyName);
+        checkFontSizeValue(context, node, propertyName);
+        checkFontWeightValue(context, node, propertyName);
+        checkLineHeightValue(context, node, propertyName);
+        checkOpacityValue(context, node, propertyName);
+        checkBorderRadiusValue(context, node, propertyName);
+        checkBorderWidthValue(context, node, propertyName);
+        checkBoxShadowValue(context, node, propertyName);
+        checkColorValue(context, node, propertyName);
       }
     };
   }

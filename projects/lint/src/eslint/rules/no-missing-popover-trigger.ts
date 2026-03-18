@@ -103,91 +103,65 @@ const rule = {
     // Track if any trigger uses data binding (could match any popover)
     let hasDynamicTrigger = false;
 
+    function collectTriggerInfo(node: HtmlNode) {
+      for (const attr of TRIGGER_ATTRIBUTES) {
+        const { attr: found, hasBinding } = findAttrWithBinding(node, attr);
+        if (!found) continue;
+        if (hasBinding) {
+          hasDynamicTrigger = true;
+        } else if (found.value?.value) {
+          const triggerId = findAttr(node, 'id')?.value?.value;
+          triggerMap.set(found.value.value, triggerId ?? found.value.value);
+        }
+      }
+    }
+
+    function collectPopoverInfo(node: HtmlNode) {
+      const tagName = node.name.toLowerCase();
+      if (!POPOVER_ELEMENTS.includes(tagName as (typeof POPOVER_ELEMENTS)[number])) return;
+      const { attr: idAttr, hasBinding: hasBindingId } = findAttrWithBinding(node, 'id');
+      const anchorAttr = findAttr(node, 'anchor');
+      const hiddenAttr = findAttr(node, 'hidden');
+      popovers.push({
+        node,
+        id: idAttr?.value?.value,
+        hasBindingId,
+        hasHidden: !!hiddenAttr,
+        anchorAttr: anchorAttr ? { node: anchorAttr, value: anchorAttr.value?.value } : undefined
+      });
+    }
+
+    function validatePopover(popover: PopoverNode) {
+      if (popover.hasBindingId || hasDynamicTrigger || popover.hasHidden) return;
+      const hasTrigger = popover.id && triggerMap.has(popover.id);
+
+      if (!popover.id) {
+        context.report({ node: popover.node, messageId: 'missing-popover-id', data: { tag: popover.node.name } });
+      } else if (!hasTrigger) {
+        context.report({
+          node: popover.node,
+          messageId: 'missing-popover-trigger',
+          data: { tag: popover.node.name, id: popover.id }
+        });
+      }
+
+      if (hasTrigger && popover.anchorAttr && !popover.anchorAttr.value) {
+        context.report({
+          node: popover.anchorAttr.node,
+          messageId: 'empty-anchor-with-trigger',
+          data: { tag: popover.node.name }
+        });
+      }
+    }
+
     return createVisitors(context, {
       Tag(node: HtmlNode) {
-        const tagName = node.name.toLowerCase();
-
-        // Collect trigger targets from all elements
-        for (const attr of TRIGGER_ATTRIBUTES) {
-          const { attr: found, hasBinding } = findAttrWithBinding(node, attr);
-          if (found) {
-            if (hasBinding) {
-              // Trigger uses data binding - could target any popover
-              hasDynamicTrigger = true;
-            } else if (found.value?.value) {
-              const targetId = found.value.value;
-              const triggerId = findAttr(node, 'id')?.value?.value;
-              // Store the trigger's ID (if it has one) for the target popover
-              triggerMap.set(targetId, triggerId ?? targetId);
-            }
-          }
-        }
-
-        // Track popover elements
-        if (POPOVER_ELEMENTS.includes(tagName as (typeof POPOVER_ELEMENTS)[number])) {
-          const { attr: idAttr, hasBinding: hasBindingId } = findAttrWithBinding(node, 'id');
-          const anchorAttr = findAttr(node, 'anchor');
-          const hiddenAttr = findAttr(node, 'hidden');
-          popovers.push({
-            node,
-            id: idAttr?.value?.value,
-            hasBindingId,
-            hasHidden: !!hiddenAttr,
-            anchorAttr: anchorAttr ? { node: anchorAttr, value: anchorAttr.value?.value } : undefined
-          });
-        }
+        collectTriggerInfo(node);
+        collectPopoverInfo(node);
       },
       'Program:exit'() {
-        // Check each popover for a corresponding trigger
         for (const popover of popovers) {
-          // Skip validation if popover ID uses data binding (can't statically match)
-          if (popover.hasBindingId) {
-            continue;
-          }
-
-          // Skip validation if any trigger uses data binding (could match this popover)
-          if (hasDynamicTrigger) {
-            continue;
-          }
-
-          // Skip validation if popover has hidden attribute (programmatically controlled)
-          if (popover.hasHidden) {
-            continue;
-          }
-
-          const hasTrigger = popover.id && triggerMap.has(popover.id);
-
-          if (!popover.id) {
-            // Popover has no ID - no trigger can target it
-            context.report({
-              node: popover.node,
-              messageId: 'missing-popover-id',
-              data: {
-                tag: popover.node.name
-              }
-            });
-          } else if (!hasTrigger) {
-            // Popover has ID but no trigger references it
-            context.report({
-              node: popover.node,
-              messageId: 'missing-popover-trigger',
-              data: {
-                tag: popover.node.name,
-                id: popover.id
-              }
-            });
-          }
-
-          // Check for empty anchor attribute when a trigger exists
-          if (hasTrigger && popover.anchorAttr && !popover.anchorAttr.value) {
-            context.report({
-              node: popover.anchorAttr.node,
-              messageId: 'empty-anchor-with-trigger',
-              data: {
-                tag: popover.node.name
-              }
-            });
-          }
+          validatePopover(popover);
         }
       }
     });
