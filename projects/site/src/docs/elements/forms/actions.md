@@ -25,7 +25,7 @@ import '@nvidia-elements/core/input/define.js';
 
 ## Actions
 
-{% example '@nvidia-elements/core/forms/actions.examples.json', 'Actions' %}
+{% example '@nvidia-elements/core/forms/actions.examples.json', 'SearchClear' %}
 
 ## Label Action
 

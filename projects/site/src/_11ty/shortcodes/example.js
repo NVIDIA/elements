@@ -99,8 +99,7 @@ export async function exampleTagsShortcode(ref, exampleName) {
   };
 
   if (!example) {
-    console.error('Example not found: ', ref, exampleName);
-    return '';
+    throw new Error(`Example not found: ${ref} ${exampleName}`);
   }
 
   return /* html */ `<div nve-layout="row gap:xs align:wrap">${example.tags.map(tag => /* html */ `<nve-tag readonly color="${tagStatus[tag]}">${tag}</nve-tag>`).join('')}</div>`;
@@ -148,7 +147,7 @@ function findExample(ref, exampleName) {
     : examples.find(s => s.element === ref && s.name === exampleName);
 
   if (!example) {
-    console.error('Example not found: ', ref, exampleName);
+    throw new Error(`Example not found: ${ref} ${exampleName}`);
   }
 
   return example;
