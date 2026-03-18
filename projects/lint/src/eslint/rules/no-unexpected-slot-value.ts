@@ -3,7 +3,7 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { getRecommendedSlotName, hasDefaultSlot, isKnownElement, hasSlot } from '../internals/slots.js';
 import { hasTemplateSyntax, isNVElement } from '../internals/utils.js';
-import type { HtmlTagNode } from '../rule-types.js';
+import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
 /**
  * Check if a node has child content that projects into the default slot.
@@ -47,68 +47,56 @@ const rule = {
     }
   },
   create(context: Rule.RuleContext) {
+    function buildSlotSuggestion(slotAttr: HtmlAttribute, slotName: string, alternative: string | undefined) {
+      if (alternative === '') {
+        return [
+          {
+            messageId: 'suggest-remove-slot-value',
+            data: { slotName, alternative },
+            fix: (fixer: Rule.RuleFixer) => fixer.replaceText(slotAttr as unknown as Rule.Node, '')
+          }
+        ];
+      }
+      if (alternative) {
+        return [
+          {
+            messageId: 'suggest-replace-slot-value',
+            data: { slotName, alternative },
+            fix: (fixer: Rule.RuleFixer) =>
+              fixer.replaceText(
+                slotAttr as unknown as Rule.Node,
+                `slot=${slotAttr.startWrapper?.value ?? '"'}${alternative}${slotAttr.endWrapper?.value ?? '"'}`
+              )
+          }
+        ];
+      }
+      return [];
+    }
+
+    function checkInvalidSlotValue(node: HtmlTagNode) {
+      const slotAttr = findAttr(node, 'slot');
+      const slotName = slotAttr?.value?.value ?? '';
+      const parentTagName = node.parent?.name;
+      if (!slotAttr || !parentTagName || !isNVElement(parentTagName) || hasSlot(parentTagName, slotName)) return;
+      const alternative = getRecommendedSlotName(slotName, parentTagName);
+      context.report({
+        node: slotAttr,
+        data: { slotName, tagName: node.name, parentTagName },
+        messageId: 'unexpected-slot-value',
+        suggest: buildSlotSuggestion(slotAttr as unknown as HtmlAttribute, slotName, alternative)
+      });
+    }
+
+    function checkMissingDefaultSlot(node: HtmlTagNode) {
+      if (!isNVElement(node.name) || !isKnownElement(node.name) || hasDefaultSlot(node.name)) return;
+      if (hasTemplateSyntax(node) || !hasUnslottedContent(node)) return;
+      context.report({ node, data: { tagName: node.name }, messageId: 'no-default-slot' });
+    }
+
     return createVisitors(context, {
       Tag(node: HtmlTagNode) {
-        const tagName = node.name;
-
-        // Check for invalid slot attribute values on children of nve-* elements
-        const slotAttr = findAttr(node, 'slot');
-        const slotName = slotAttr?.value?.value ?? '';
-        const parentTagName = node.parent?.name;
-
-        if (slotAttr && parentTagName && isNVElement(parentTagName) && !hasSlot(parentTagName, slotName)) {
-          const alternative = getRecommendedSlotName(slotName, parentTagName);
-          let suggest = [];
-
-          if (alternative === '') {
-            suggest.push({
-              messageId: 'suggest-remove-slot-value',
-              data: {
-                slotName,
-                alternative
-              },
-              fix: (fixer: Rule.RuleFixer) => {
-                return fixer.replaceText(slotAttr as unknown as Rule.Node, '');
-              }
-            });
-          } else if (alternative) {
-            suggest.push({
-              messageId: 'suggest-replace-slot-value',
-              data: {
-                slotName,
-                alternative
-              },
-              fix: (fixer: Rule.RuleFixer) => {
-                return fixer.replaceText(
-                  slotAttr as unknown as Rule.Node,
-                  `slot=${slotAttr.startWrapper?.value ?? '"'}${alternative}${slotAttr.endWrapper?.value ?? '"'}`
-                );
-              }
-            });
-          }
-
-          context.report({
-            node: slotAttr,
-            data: {
-              slotName,
-              tagName,
-              parentTagName
-            },
-            messageId: 'unexpected-slot-value',
-            suggest
-          });
-        }
-
-        // Check for unslotted child content on nve-* elements without a default slot
-        if (isNVElement(tagName) && isKnownElement(tagName) && !hasDefaultSlot(tagName)) {
-          if (!hasTemplateSyntax(node) && hasUnslottedContent(node)) {
-            context.report({
-              node,
-              data: { tagName },
-              messageId: 'no-default-slot'
-            });
-          }
-        }
+        checkInvalidSlotValue(node);
+        checkMissingDefaultSlot(node);
       }
     });
   }

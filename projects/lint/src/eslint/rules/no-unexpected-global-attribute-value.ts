@@ -50,99 +50,95 @@ const rule = {
     }
   },
   create(context: Rule.RuleContext) {
+    function checkNveText(node: HtmlTagNode) {
+      const textAttr = findAttr(node, 'nve-text');
+      if (!textAttr) return;
+      const value = textAttr.value?.value ?? '';
+      const alternative = recommendedNveTextValue(value);
+      if (alternative === value) return;
+      context.report({
+        node: textAttr,
+        data: {
+          attribute: 'nve-text',
+          value,
+          alternative,
+          validValues: [...SIMPLE_NVE_TEXT_VALUES].map(v => `"${v}"`).join(', ')
+        },
+        messageId: alternative ? 'unexpected-attribute-value-alternative' : 'unexpected-attribute-value',
+        suggest: alternative
+          ? [
+              {
+                messageId: 'suggest-replace-attribute-value',
+                data: { value, alternative },
+                fix: fixer =>
+                  fixer.replaceText(
+                    textAttr,
+                    `nve-text=${textAttr.startWrapper.value}${alternative}${textAttr.endWrapper.value}`
+                  )
+              }
+            ]
+          : []
+      });
+    }
+
+    function checkNveLayout(node: HtmlTagNode) {
+      const layoutAttr = findAttr(node, 'nve-layout');
+      if (!layoutAttr) return;
+      const value = layoutAttr.value?.value ?? '';
+      const invalidSymbols = context.options[0]?.['nve-layout'] ?? [];
+      const alternative = recommendedNveLayoutValue(value, invalidSymbols);
+      if (alternative === value) return;
+      const layoutValidValues = SIMPLE_NVE_LAYOUT_VALUES.filter(
+        v => !invalidSymbols.some((symbol: string) => v.includes(symbol))
+      );
+      context.report({
+        node: layoutAttr,
+        data: {
+          attribute: 'nve-layout',
+          value,
+          alternative,
+          validValues: layoutValidValues.map(v => `"${v}"`).join(', ')
+        },
+        messageId: alternative ? 'unexpected-attribute-value-alternative' : 'unexpected-attribute-value',
+        suggest: alternative
+          ? [
+              {
+                messageId: 'suggest-replace-attribute-value',
+                data: { value, alternative },
+                fix: fixer =>
+                  fixer.replaceText(
+                    layoutAttr,
+                    `nve-layout=${layoutAttr.startWrapper.value}${alternative}${layoutAttr.endWrapper.value}`
+                  )
+              }
+            ]
+          : []
+      });
+    }
+
+    function checkNveDisplay(node: HtmlTagNode) {
+      const displayAttr = findAttr(node, 'nve-display');
+      if (!displayAttr) return;
+      const values = displayAttr.value?.value?.split(' ') ?? [];
+      const value = values.find((value: string) => !VALID_NVE_DISPLAY_VALUES.has(value));
+      const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
+      if (!value || isValueBinding) return;
+      context.report({
+        node,
+        data: {
+          attribute: 'nve-display',
+          value,
+          validValues: [...SIMPLE_NVE_DISPLAY_VALUES].map(v => `"${v}"`).join(', ')
+        },
+        messageId: 'unexpected-attribute-value'
+      });
+    }
+
     return createVisitors(context, {
       Tag(node: HtmlTagNode) {
-        const textAttr = findAttr(node, 'nve-text');
-        if (textAttr) {
-          const value = textAttr.value?.value ?? '';
-          const alternative = recommendedNveTextValue(value);
-          if (alternative !== value) {
-            context.report({
-              node: textAttr,
-              data: {
-                attribute: 'nve-text',
-                value,
-                alternative,
-                validValues: [...SIMPLE_NVE_TEXT_VALUES].map(v => `"${v}"`).join(', ')
-              },
-              messageId: alternative ? 'unexpected-attribute-value-alternative' : 'unexpected-attribute-value',
-              suggest: alternative
-                ? [
-                    {
-                      messageId: 'suggest-replace-attribute-value',
-                      data: {
-                        value,
-                        alternative
-                      },
-                      fix: fixer => {
-                        return fixer.replaceText(
-                          textAttr,
-                          `nve-text=${textAttr.startWrapper.value}${alternative}${textAttr.endWrapper.value}`
-                        );
-                      }
-                    }
-                  ]
-                : []
-            });
-          }
-        }
-
-        const layoutAttr = findAttr(node, 'nve-layout');
-        if (layoutAttr) {
-          const value = layoutAttr.value?.value ?? '';
-          const invalidSymbols = context.options[0]?.['nve-layout'] ?? [];
-          const alternative = recommendedNveLayoutValue(value, invalidSymbols);
-          if (alternative !== value) {
-            const layoutValidValues = SIMPLE_NVE_LAYOUT_VALUES.filter(
-              v => !invalidSymbols.some((symbol: string) => v.includes(symbol))
-            );
-            context.report({
-              node: layoutAttr,
-              data: {
-                attribute: 'nve-layout',
-                value,
-                alternative,
-                validValues: layoutValidValues.map(v => `"${v}"`).join(', ')
-              },
-              messageId: alternative ? 'unexpected-attribute-value-alternative' : 'unexpected-attribute-value',
-              suggest: alternative
-                ? [
-                    {
-                      messageId: 'suggest-replace-attribute-value',
-                      data: {
-                        value,
-                        alternative
-                      },
-                      fix: fixer => {
-                        return fixer.replaceText(
-                          layoutAttr,
-                          `nve-layout=${layoutAttr.startWrapper.value}${alternative}${layoutAttr.endWrapper.value}`
-                        );
-                      }
-                    }
-                  ]
-                : []
-            });
-          }
-        }
-
-        const displayAttr = findAttr(node, 'nve-display');
-        if (displayAttr) {
-          const values = displayAttr.value?.value?.split(' ') ?? [];
-          const value = values.find((value: string) => !VALID_NVE_DISPLAY_VALUES.has(value));
-          const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
-          if (value && !isValueBinding) {
-            context.report({
-              node,
-              data: {
-                attribute: 'nve-display',
-                value,
-                validValues: [...SIMPLE_NVE_DISPLAY_VALUES].map(v => `"${v}"`).join(', ')
-              },
-              messageId: 'unexpected-attribute-value'
-            });
-          }
-        }
+        checkNveText(node);
+        checkNveLayout(node);
+        checkNveDisplay(node);
       }
     });
   }
