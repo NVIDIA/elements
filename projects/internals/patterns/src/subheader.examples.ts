@@ -17,7 +17,7 @@ export default {
 };
 
 /**
- * @summary Basic main page subheader with breadcrumb, page title, and action buttons in a clean two-row layout.
+ * @summary Use for main page subheaders with breadcrumb, page title, and action buttons in a clean two-row layout.
  * @tags pattern
  */
 export const StandardHeaderMainPage = {
@@ -59,7 +59,7 @@ export const StandardHeaderMainPage = {
 }
 
 /**
- * @summary Main page subheader with tabbed navigation below the title. Uses custom padding to align tabs flush with panel edges.
+ * @summary Use for main page subheaders with tabbed navigation below the title. Uses custom padding to align tabs flush with panel edges.
  * @tags pattern test-case
  */
 export const TabsHeaderMainPage = {
@@ -174,7 +174,7 @@ export const StackedMetadataHeaderMainPage = {
 }
 
 /**
- * @summary Main page subheader with metadata columns inline beside the title. Uses vertical divider to separate metadata from action buttons.
+ * @summary Use for main page subheaders with metadata columns inline beside the title. Uses vertical divider to separate metadata from action buttons.
  * @tags pattern test-case
  */
 export const InlineMetadataHeaderMainPage = {
@@ -244,7 +244,7 @@ export const InlineMetadataHeaderMainPage = {
 }
 
 /**
- * @summary Feature-rich main page subheader combining back navigation, inline metadata, divider, and tabbed navigation at max complexity.
+ * @summary Use for feature-rich main page subheaders combining back navigation, inline metadata, divider, and tabbed navigation at max complexity.
  * @tags pattern test-case
  */
 export const InlineKitchenSinkHeaderMainPage = {
@@ -499,7 +499,7 @@ export const TabsHeaderDetailPage = {
 }
 
 /**
- * @summary Detail page subheader with stacked metadata row showing entity attributes. Displays key-value pairs horizontally below the title row.
+ * @summary Use for detail page subheaders with a stacked metadata row showing entity attributes as key-value pairs horizontally below the title.
  * @tags pattern test-case
  */
 export const StackedMetadataHeaderDetailPage = {
@@ -568,7 +568,7 @@ export const StackedMetadataHeaderDetailPage = {
 }
 
 /**
- * @summary Detail page subheader with inline metadata columns beside the title. Uses vertical divider to visually separate metadata from action buttons.
+ * @summary Use for detail page subheaders with inline metadata columns beside the title. Uses vertical divider to visually separate metadata from action buttons.
  * @tags pattern test-case
  */
 export const InlineMetadataHeaderDetailPage = {
@@ -641,7 +641,7 @@ export const InlineMetadataHeaderDetailPage = {
 }
 
 /**
- * @summary Comprehensive detail page subheader with inline metadata, divider, and tabs. Max feature density for complex entity views.
+ * @summary Use for comprehensive detail page subheaders with inline metadata, divider, and tabs. Ideal for complex entity views needing max feature density.
  * @tags pattern test-case
  */
 export const InlineKitchenSinkHeaderDetailPage = {
@@ -721,7 +721,7 @@ export const InlineKitchenSinkHeaderDetailPage = {
 }
 
 /**
- * @summary Comprehensive detail page subheader with stacked metadata row and tabs. Better vertical organization when metadata items are many.
+ * @summary Use for comprehensive detail page subheaders with stacked metadata row and tabs. Ideal for better vertical organization when metadata items are many.
  * @tags pattern test-case
  */
 export const StackedKitchenSinkHeaderDetailPage = {

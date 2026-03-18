@@ -435,7 +435,7 @@ export const LegacyBehaviorTrigger = {
 };
 
 /**
- * @summary Notification z-index layering with modal dialogs for proper stacking context. Ensures notifications appear above dialogs without interfering with modal interactions, crucial for complex UI layering scenarios.
+ * @summary Notification layering with modal dialogs for proper stacking context. Ensures notifications appear above dialogs without interfering with modal interactions, crucial for complex UI layering scenarios.
  * @tags test-case
  */
 export const Layers = {

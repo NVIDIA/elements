@@ -17,7 +17,7 @@ export default {
   component: 'nve-patterns'
 };
 /**
- * @summary Side panel with labeled key-value pairs for displaying metadata like release info, dates, status badges, and links.
+ * @summary Use for displaying metadata like release info, dates, status badges, and links in a side panel with labeled key-value pairs.
  * @tags pattern
  */
 export const KeyValue = {
@@ -80,7 +80,7 @@ export const KeyValue = {
 }
 
 /**
- * @summary Panel with search input and expandable accordion sections for organizing filterable, collapsible content groups.
+ * @summary Use for organizing filterable, collapsible content groups in a panel with search input and expandable accordion sections.
  * @tags pattern
  */
 export const Accordion = {
@@ -142,7 +142,7 @@ export const Accordion = {
 }
 
 /**
- * @summary Panel with tabbed navigation in the header for switching between categorized detail views.
+ * @summary Use for switching between categorized detail views with tabbed navigation in the panel header.
  * @tags pattern
  */
 export const TabbedHeader = {
@@ -211,7 +211,7 @@ export const TabbedHeader = {
 }
 
 /**
- * @summary Notification drawer panel with stacked alerts, search/filter controls, and bulk action buttons in the footer.
+ * @summary Use for notification drawers with stacked alerts, search/filter controls, and bulk action buttons in the footer.
  * @tags pattern test-case
  */
 export const NotificationStack = {

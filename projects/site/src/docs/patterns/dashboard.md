@@ -9,7 +9,7 @@
 
 ## Dashboard
 
-{% example '@internals/patterns/dashboard.examples.json', 'Dashboard' '{ "height": "540px" }' %}
+{% example '@internals/patterns/dashboard.examples.json', 'TrainingMonitor' '{ "height": "540px" }' %}
 
 ## Project Board
 
