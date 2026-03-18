@@ -91,7 +91,7 @@ catalog:
   stylelint-config-standard: 40.0.0
   ts-morph: 26.0.0
   typescript: 5.9.3
-  typescript-eslint: 8.53.0
+  typescript-eslint: 8.57.0
   vite: 8.0.0
   vite-plugin-dts: 4.5.4
   vitest: 4.1.0
