@@ -11,7 +11,7 @@ Heatmap patterns visualize data intensity across a matrix using color gradients.
 
 ## Heatmap
 
-{% example '@internals/patterns/heatmap.examples.json' 'HeatmapPattern' '{ "inline": false, "height": "400px" }' %}
+{% example '@internals/patterns/heatmap.examples.json' 'ModulePassRate' '{ "inline": false, "height": "400px" }' %}
 
 ## Sensor Coverage Analysis
 

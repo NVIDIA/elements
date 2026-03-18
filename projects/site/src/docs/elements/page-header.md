@@ -20,7 +20,7 @@
 
 ## Dropdown Menu
 
-{% example '@nvidia-elements/core/page-header/page-header.examples.json' 'Menu' %}
+{% example '@nvidia-elements/core/page-header/page-header.examples.json' 'DropdownMenu' %}
 
 ## Search
 

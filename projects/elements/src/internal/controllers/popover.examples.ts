@@ -36,7 +36,7 @@ export const Anchor = {
 }
 
 /**
- * @summary Nested popovers within dialogs and notifications, with proper layering and z-index management.
+ * @summary Nested popovers within dialogs and notifications, with proper layering and stacking order.
  * @tags test-case
  */
 export const Nested = {

@@ -9,8 +9,8 @@
 
 ## Responsive Tabs
 
-{% example '@internals/patterns/responsive.examples.json', 'ResponsiveTabs' %}
+{% example '@internals/patterns/responsive.examples.json', 'CollapsibleTabs' %}
 
 ## Responsive Toolbar
 
-{% example '@internals/patterns/responsive.examples.json', 'ResponsiveToolbar' %}
+{% example '@internals/patterns/responsive.examples.json', 'CollapsibleToolbar' %}

@@ -12,7 +12,6 @@ import styles from './icon.css?inline';
 export type { IconName, IconNames, IconSVG } from './icons.js';
 
 declare global {
-  // eslint-disable-next-line no-var
   var _NVE_SSR_ICON_REGISTRY: Record<string, string> | undefined;
 }
 
