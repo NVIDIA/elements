@@ -104,24 +104,12 @@
         "../../elements/src/internal/types/index.ts",
         "../../elements/package.json",
         "../../elements/dist/custom-elements.json",
-        "../../elements-react/package.json",
-        "../../elements-react/dist/custom-elements.json",
         "../../styles/package.json",
         "../../styles/dist/custom-elements.json",
-        "../../testing/package.json",
-        "../../testing/dist/custom-elements.json",
         "../../themes/package.json",
         "../../themes/dist/custom-elements.json",
-        "../../labs/brand/package.json",
-        "../../labs/brand/dist/custom-elements.json",
         "../../forms/package.json",
         "../../forms/dist/custom-elements.json",
-        "../../labs/behaviors-alpine/package.json",
-        "../../labs/behaviors-alpine/dist/custom-elements.json",
-        "../../labs/playwright-screencast/package.json",
-        "../../labs/playwright-screencast/README.md",
-        "../../labs/playwright-screencast/CHANGELOG.md",
-        "../../labs/playwright-screencast/dist/custom-elements.json",
         "../../markdown/package.json",
         "../../markdown/dist/custom-elements.json",
         "../../monaco/package.json",
@@ -138,23 +126,11 @@
           "cascade": false
         },
         {
-          "script": "../../elements-react:build",
-          "cascade": false
-        },
-        {
           "script": "../../styles:build",
           "cascade": false
         },
         {
-          "script": "../../testing:build",
-          "cascade": false
-        },
-        {
           "script": "../../themes:build",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/brand:build",
           "cascade": false
         },
         {
@@ -183,36 +159,21 @@
         "../../elements/package.json",
         "../../elements/README.md",
         "../../elements/CHANGELOG.md",
-        "../../elements-react/package.json",
-        "../../elements-react/README.md",
-        "../../elements-react/CHANGELOG.md",
         "../../styles/package.json",
         "../../styles/README.md",
         "../../styles/CHANGELOG.md",
-        "../../testing/package.json",
-        "../../testing/README.md",
-        "../../testing/CHANGELOG.md",
         "../../themes/package.json",
         "../../themes/README.md",
         "../../themes/CHANGELOG.md",
-        "../../labs/brand/package.json",
-        "../../labs/brand/README.md",
-        "../../labs/brand/CHANGELOG.md",
         "../../code/package.json",
         "../../code/README.md",
         "../../code/CHANGELOG.md",
         "../../forms/package.json",
         "../../forms/README.md",
         "../../forms/CHANGELOG.md",
-        "../../labs/behaviors-alpine/package.json",
-        "../../labs/behaviors-alpine/README.md",
-        "../../labs/behaviors-alpine/CHANGELOG.md",
         "../../markdown/package.json",
         "../../markdown/README.md",
         "../../markdown/CHANGELOG.md",
-        "../../labs/playwright-screencast/package.json",
-        "../../labs/playwright-screencast/README.md",
-        "../../labs/playwright-screencast/CHANGELOG.md",
         "../../monaco/package.json",
         "../../monaco/README.md",
         "../../monaco/CHANGELOG.md",
@@ -236,13 +197,8 @@
         "../../elements/coverage/unit/summary.json",
         "../../elements/coverage/visual/summary.json",
         "../../elements/coverage/ssr/summary.json",
-        "../../elements-react/coverage/unit/coverage-summary.json",
-        "../../elements-react/coverage/unit/summary.json",
         "../../styles/coverage/visual/summary.json",
         "../../themes/coverage/visual/summary.json",
-        "../../labs/brand/coverage/unit/coverage-summary.json",
-        "../../labs/brand/coverage/unit/summary.json",
-        "../../labs/brand/coverage/visual/summary.json",
         "../../cli/coverage/unit/coverage-summary.json",
         "../../cli/coverage/unit/summary.json",
         "../../lint/coverage/unit/coverage-summary.json",
@@ -253,10 +209,6 @@
         "../../code/coverage/ssr/summary.json",
         "../../forms/coverage/unit/coverage-summary.json",
         "../../forms/coverage/unit/summary.json",
-        "../../labs/behaviors-alpine/coverage/unit/coverage-summary.json",
-        "../../labs/behaviors-alpine/coverage/unit/summary.json",
-        "../../labs/playwright-screencast/coverage/unit/coverage-summary.json",
-        "../../labs/playwright-screencast/coverage/unit/summary.json",
         "../../lint/coverage/unit/coverage-summary.json",
         "../../lint/coverage/unit/summary.json",
         "../../markdown/coverage/unit/coverage-summary.json",
@@ -291,23 +243,11 @@
           "cascade": false
         },
         {
-          "script": "../../elements-react:test:coverage",
-          "cascade": false
-        },
-        {
           "script": "../../styles:test:visual",
           "cascade": false
         },
         {
           "script": "../../themes:test:visual",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/brand:test",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/brand:test:visual",
           "cascade": false
         },
         {
@@ -324,14 +264,6 @@
         },
         {
           "script": "../../monaco:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/behaviors-alpine:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/playwright-screencast:test:coverage",
           "cascade": false
         },
         {
@@ -360,7 +292,6 @@
         "../../styles/dist/**/*.examples.json",
         "../../themes/dist/**/*.examples.json",
         "../../monaco/dist/**/*.examples.json",
-        "../../labs/brand/dist/**/*.examples.json",
         "../../code/dist/**/*.examples.json",
         "../../forms/dist/**/*.examples.json",
         "../../markdown/dist/**/*.examples.json"
@@ -374,23 +305,11 @@
           "cascade": false
         },
         {
-          "script": "../../elements-react:build",
-          "cascade": false
-        },
-        {
           "script": "../../styles:build",
           "cascade": false
         },
         {
-          "script": "../../testing:build",
-          "cascade": false
-        },
-        {
           "script": "../../themes:build",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/brand:build",
           "cascade": false
         },
         {
@@ -403,14 +322,6 @@
         },
         {
           "script": "../../monaco:build",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/behaviors-alpine:build",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/playwright-screencast:build",
           "cascade": false
         },
         {

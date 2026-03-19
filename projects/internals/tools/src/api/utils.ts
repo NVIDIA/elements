@@ -68,12 +68,8 @@ export async function searchPublicAPIs(query: string, config: { limit?: number }
 
 export interface ElementVersions {
   '@nvidia-elements/core': string;
-  '@nvidia-elements/core-react': string;
   '@nvidia-elements/styles': string;
-  '@nvidia-elements/testing': string;
   '@nvidia-elements/themes': string;
-  '@nvidia-elements/behaviors-alpine': string;
-  '@nvidia-elements/brand': string;
   '@nvidia-elements/code': string;
   '@nvidia-elements/cli': string;
   '@nvidia-elements/lint': string;
