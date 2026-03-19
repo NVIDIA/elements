@@ -8,15 +8,11 @@ function loadLighthouseReport(basePath: string) {
 export interface LighthouseScores {
   created: string;
   '@nvidia-elements/core': { [key: string]: LighthouseElementReport };
-  '@nvidia-elements/core-react': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/styles': { [key: string]: LighthouseElementReport };
-  '@nvidia-elements/testing': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/themes': { [key: string]: LighthouseElementReport };
-  '@nvidia-elements/brand': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/code': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/forms': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/markdown': { [key: string]: LighthouseElementReport };
-  '@nvidia-elements/behaviors-alpine': { [key: string]: LighthouseElementReport };
   '@nvidia-elements/monaco': { [key: string]: LighthouseElementReport };
 }
 
@@ -53,13 +49,9 @@ export async function generateLighthouseReport(): Promise<LighthouseScores> {
   return {
     created: new Date().toISOString(),
     '@nvidia-elements/core': await loadLighthouseReport('../../../../elements'),
-    '@nvidia-elements/core-react': await loadLighthouseReport('../../../../elements-react'),
     '@nvidia-elements/styles': await loadLighthouseReport('../../../../styles'),
-    '@nvidia-elements/testing': await loadLighthouseReport('../../../../testing'),
     '@nvidia-elements/themes': await loadLighthouseReport('../../../../themes'),
     '@nvidia-elements/code': await loadLighthouseReport('../../../../code'),
-    '@nvidia-elements/behaviors-alpine': await loadLighthouseReport('../../../../labs/behaviors-alpine'),
-    '@nvidia-elements/brand': await loadLighthouseReport('../../../../labs/brand'),
     '@nvidia-elements/forms': await loadLighthouseReport('../../../../forms'),
     '@nvidia-elements/markdown': await loadLighthouseReport('../../../../markdown'),
     '@nvidia-elements/monaco': await loadLighthouseReport('../../../../monaco')
