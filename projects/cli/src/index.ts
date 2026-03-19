@@ -9,10 +9,11 @@ import { banner, colors, getArgValue, renderResult, runAsyncTool } from './utils
 import { checkForUpdates, notifyIfUpdateAvailable, upgrade } from './update.js';
 
 export const VERSION = '0.0.0';
+export const BUILD_SHA = '__NVE_BUILD_CHECKSUM__';
 
-let updateCheck: Promise<string | null>;
+let updateCheck: Promise<boolean>;
 function getUpdateCheck() {
-  updateCheck ??= checkForUpdates(VERSION);
+  updateCheck ??= checkForUpdates(BUILD_SHA);
   return updateCheck;
 }
 
@@ -49,7 +50,7 @@ yargsInstance.command(
   async () => {
     const greeting = colors.complete(`\x1b[?7l\n${JSON.parse(banner)}\n\n`);
     console.log(`${greeting}${colors.complete('@nvidia-elements/cli version ' + VERSION)}\n${await yargsInstance.getHelp()}`);
-    await notifyIfUpdateAvailable(VERSION, getUpdateCheck());
+    await notifyIfUpdateAvailable(getUpdateCheck());
   }
 );
 
@@ -89,7 +90,7 @@ tools
 
         if (status === 'complete') {
           await renderResult(result);
-          await notifyIfUpdateAvailable(VERSION, getUpdateCheck());
+          await notifyIfUpdateAvailable(getUpdateCheck());
           process.exit(0);
         } else {
           console.log(colors.error(message ?? 'unknown error'));

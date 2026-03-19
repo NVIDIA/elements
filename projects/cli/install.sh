@@ -139,12 +139,7 @@ else
 fi
 
 # --- Verify ---
-if nve --version >/dev/null 2>&1; then
-  VERSION="$(nve --version)"
-  printf "\n${GREEN}${BOLD}Elements CLI %s installed successfully!${RESET}\n" "$VERSION"
-else
-  printf "\n${GREEN}${BOLD}Elements CLI installed successfully!${RESET}\n"
-fi
+printf "\n${GREEN}${BOLD}Elements CLI installed successfully!${RESET}\n"
 
 printf "\n  Run ${CYAN}nve${RESET} to get started.\n"
 
