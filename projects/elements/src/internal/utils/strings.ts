@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 /** formats a file size in bytes to a human readable string */
 export function formatFileSize(size: number): string {
   const thresholds = new Map<number, string>([
@@ -33,5 +36,5 @@ export function shiftLeft(value: string) {
 export let DOCS_URL = '';
 /* @ts-ignore-next-line */
 if (!import.meta.env.VITE_BUNDLE_CONFIG) {
-  DOCS_URL = 'http://nv/elements';
+  DOCS_URL = 'https://NVIDIA.github.io/elements';
 }

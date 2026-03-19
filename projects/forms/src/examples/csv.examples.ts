@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { css, html, LitElement, nothing } from 'lit';
 import type { ValidatorResult } from '@nvidia-elements/forms';
 import { FormControlMixin } from '@nvidia-elements/forms/mixin';

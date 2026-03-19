@@ -10,10 +10,8 @@
     "generate:api": "wireit",
     "generate:tests": "wireit",
     "generate:examples": "wireit",
-    "generate:usage": "wireit",
     "generate:lighthouse": "wireit",
     "generate:wireit": "wireit",
-    "generate:downloads": "wireit",
     "generate:releases": "wireit",
     "generate:projects": "wireit",
     "test": "wireit",
@@ -41,10 +39,6 @@
     "./services/tests.service.js": {
       "types": "./dist/services/tests.service.d.ts",
       "default": "./dist/src/services/tests.service.js"
-    },
-    "./services/usage.service.js": {
-      "types": "./dist/services/usage.service.d.ts",
-      "default": "./dist/src/services/usage.service.js"
     }
   },
   "wireit": {
@@ -71,12 +65,9 @@
       "files": [
         "src/**",
         "!src/**/*.test.ts",
-        "static/downloads.json",
         "static/lighthouse.json",
         "static/releases.json",
         "static/tests.json",
-        "static/usage.av-infra.json",
-        "static/usage.gitlab.json",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
@@ -138,15 +129,11 @@
           "cascade": false
         },
         {
-          "script": "../../elements-react:build",
-          "cascade": false
-        },
-        {
           "script": "../../styles:build",
           "cascade": false
         },
         {
-          "script": "../../testing:build",
+          "script": "../../internals/testing:build",
           "cascade": false
         },
         {
@@ -154,23 +141,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/brand:build",
-          "cascade": false
-        },
-        {
-          "script": "../../code:build",
-          "cascade": false
-        },
-        {
           "script": "../../forms:build",
-          "cascade": false
-        },
-        {
-          "script": "../../markdown:build",
-          "cascade": false
-        },
-        {
-          "script": "../../monaco:build",
           "cascade": false
         }
       ]
@@ -291,10 +262,6 @@
           "cascade": false
         },
         {
-          "script": "../../elements-react:test:coverage",
-          "cascade": false
-        },
-        {
           "script": "../../styles:test:visual",
           "cascade": false
         },
@@ -303,47 +270,11 @@
           "cascade": false
         },
         {
-          "script": "../../labs/brand:test",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/brand:test:visual",
-          "cascade": false
-        },
-        {
-          "script": "../../code:test:coverage",
-          "cascade": false
-        },
-        {
           "script": "../../forms:test:coverage",
           "cascade": false
         },
         {
-          "script": "../../markdown:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../../monaco:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/behaviors-alpine:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/playwright-screencast:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../../cli:test:coverage",
-          "cascade": false
-        },
-        {
           "script": "../../lint:test:coverage",
-          "cascade": false
-        },
-        {
-          "script": "../tools:test:coverage",
           "cascade": false
         }
       ]
@@ -374,15 +305,11 @@
           "cascade": false
         },
         {
-          "script": "../../elements-react:build",
-          "cascade": false
-        },
-        {
           "script": "../../styles:build",
           "cascade": false
         },
         {
-          "script": "../../testing:build",
+          "script": "../../internals/testing:build",
           "cascade": false
         },
         {
@@ -390,31 +317,7 @@
           "cascade": false
         },
         {
-          "script": "../../labs/brand:build",
-          "cascade": false
-        },
-        {
-          "script": "../../code:build",
-          "cascade": false
-        },
-        {
           "script": "../../forms:build",
-          "cascade": false
-        },
-        {
-          "script": "../../monaco:build",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/behaviors-alpine:build",
-          "cascade": false
-        },
-        {
-          "script": "../../labs/playwright-screencast:build",
-          "cascade": false
-        },
-        {
-          "script": "../patterns:build",
           "cascade": false
         }
       ]
@@ -433,21 +336,6 @@
         "../../../:lighthouse"
       ]
     },
-    "generate:usage": {
-      "command": "node --experimental-strip-types ./src/tasks/usage.ts",
-      "clean": false,
-      "files": [
-        "src/tasks/usage.ts",
-        "src/tasks/usage.utils.ts"
-      ],
-      "output": [
-        "static/usage.json"
-      ],
-      "dependencies": [
-        "generate:api",
-        "generate:projects"
-      ]
-    },
     "generate:wireit": {
       "command": "node --experimental-strip-types ./src/tasks/wireit.ts",
       "clean": false,
@@ -457,18 +345,6 @@
       ],
       "output": [
         "static/wireit.json"
-      ],
-      "dependencies": []
-    },
-    "generate:downloads": {
-      "command": "node --experimental-strip-types ./src/tasks/downloads.ts",
-      "clean": false,
-      "files": [
-        "src/tasks/downloads.ts",
-        "src/tasks/downloads.utils.ts"
-      ],
-      "output": [
-        "static/downloads.json"
       ],
       "dependencies": []
     },

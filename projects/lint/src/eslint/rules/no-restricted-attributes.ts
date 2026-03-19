@@ -1,10 +1,13 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { getElementAttributeNames } from '../internals/element-attributes.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-const RESTRICTED_GLOBAL_ATTRIBUTES = ['nve-text', 'nve-layout', 'nve-text', 'nve-layout'];
+const RESTRICTED_GLOBAL_ATTRIBUTES = ['nve-text', 'nve-layout', 'mlv-text', 'mlv-layout'];
 const RESTRICTED_ELEMENT_API_ATTRIBUTES = ['variant'];
 
 // External box-model attribute values that custom elements allow

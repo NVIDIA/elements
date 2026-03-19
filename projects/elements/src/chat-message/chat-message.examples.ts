@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { html } from 'lit';
 import '@nvidia-elements/core/chat-message/define.js';
 import '@nvidia-elements/core/avatar/define.js';
@@ -67,9 +70,9 @@ export const PrefixSuffix = {
   <nve-chat-message style="max-width: 70%">
     <nve-avatar slot="prefix" color="gray-denim">AI</nve-avatar>
     <p nve-text="body">To use the <code nve-text="code">nve-chat-message</code> first import the element.</p>
-    <nve-codeblock language="typescript">
+    <pre><code nve-text="code">
       import '@nvidia-elements/code/codeblock/define.js';
-    </nve-codeblock>
+    </code></pre>
   </nve-chat-message>
 </section>
 `};
@@ -85,10 +88,10 @@ export const Codeblock = {
   </nve-chat-message>
   <nve-chat-message container="flat">
     Here's the steps you need to do follow to use the chat message component
-    <nve-codeblock language="typescript">
+    <pre><code nve-text="code">
     import '@nvidia-elements/core/chat-message/define.js';
     <code nve-text="code"><nve-chat-message></nve-chat-message></code>
-    </nve-codeblock>
+    </code></pre>
   </nve-chat-message>
 </section>
   `

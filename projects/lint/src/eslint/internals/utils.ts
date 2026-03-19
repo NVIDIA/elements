@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 
 export interface HtmlNode {

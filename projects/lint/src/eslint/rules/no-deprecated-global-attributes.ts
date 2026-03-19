@@ -1,9 +1,12 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
-const DEPRECATED_GLOBAL_ATTRIBUTES = ['nve-text', 'nve-layout', 'nve-theme'];
+const DEPRECATED_GLOBAL_ATTRIBUTES = ['mlv-text', 'mlv-layout', 'mlv-theme'];
 
 const rule = {
   meta: {
@@ -29,7 +32,7 @@ const rule = {
         DEPRECATED_GLOBAL_ATTRIBUTES.forEach(attribute => {
           const attr = findAttr(node, attribute);
           if (attr) {
-            const newAttributeName = attribute.replace('nve-', 'nve-');
+            const newAttributeName = attribute.replace('mlv-', 'nve-');
 
             context.report({
               messageId: 'unexpected-deprecated-global-attribute',

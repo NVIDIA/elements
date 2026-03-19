@@ -66,10 +66,7 @@ module.exports = {
     [
       '@semantic-release/exec',
       {
-        publishCmd: [
-          `pnpm publish --no-git-checks --registry=$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
-          `pnpm publish --no-git-checks --registry=$MAGLEV_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`
-        ].join(' && ')
+        publishCmd: `pnpm publish --no-git-checks --registry=https://registry.npmjs.org ${DRY_RUN ? '--dry-run' : ''}`
       }
     ],
     [
@@ -80,7 +77,7 @@ module.exports = {
       }
     ],
     [
-      '@semantic-release/gitlab',
+      '@semantic-release/github',
       {
         successComment:
           '🎉 This issue has been resolved in version ${nextRelease.version} 🎉\n\n[Changelog](https://NVIDIA.github.io/elements/docs/changelog/)',
@@ -88,7 +85,8 @@ module.exports = {
           {
             label: packageFile.name,
             type: 'package',
-            url: `https://registry.npmjs.org'/', '%2F')}`
+            name: `${packageFile.name.replace('/', '-')}-\${nextRelease.version}.tgz`,
+            path: `${packageFile.name.replace('/', '-')}-\${nextRelease.version}.tgz`
           }
         ]
       }

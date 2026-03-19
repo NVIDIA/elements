@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { DOCS_URL } from './strings.js';
 
 export const DOCS_LOG_URL = `${DOCS_URL}docs/api-design/logs/`;

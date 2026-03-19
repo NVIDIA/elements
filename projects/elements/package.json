@@ -14,23 +14,15 @@
       "customData": [
         "./dist/data.html.json"
       ]
-    },
-    "snippets": [
-      {
-        "language": "html",
-        "path": "./dist/data.snippets.json"
-      }
-    ]
+    }
   },
   "scripts": {
-    "postinstall": "node postinstall.mjs || exit 0",
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
     "build:icons": "wireit",
     "test": "wireit",
     "test:watch": "wireit",
-    "test:axe": "wireit",
     "test:ssr": "wireit",
     "test:coverage": "wireit",
     "test:lighthouse": "wireit",
@@ -58,7 +50,6 @@
     "./CHANGELOG.md": "./CHANGELOG.md",
     "./custom-elements.json": "./dist/custom-elements.json",
     "./data.html.json": "./dist/data.html.json",
-    "./data.snippets.json": "./dist/data.snippets.json",
     "./*.examples.json": "./dist/*.examples.json",
     "./css/*": "./dist/css/*",
     ".": {
@@ -949,7 +940,6 @@
     "@typescript/lib-dom": "npm:@types/web@0.0.312",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
-    "axe-core": "catalog:",
     "eslint": "catalog:",
     "lit-analyzer": "2.0.3",
     "publint": "catalog:",
@@ -967,7 +957,6 @@
         "lint",
         "build",
         "publint",
-        "test:axe",
         "test:ssr",
         "test:coverage",
         "test:visual"
@@ -1063,7 +1052,7 @@
       ],
       "output": [],
       "dependencies": [
-        "../testing:build",
+        "../internals/testing:build",
         "../internals/vite:ci",
         {
           "script": "build",
@@ -1087,7 +1076,7 @@
         "coverage/unit/**"
       ],
       "dependencies": [
-        "../testing:build",
+        "../internals/testing:build",
         "../internals/vite:ci",
         {
           "script": "build",
@@ -1142,29 +1131,6 @@
           "cascade": false
         }
       ]
-    },
-    "test:axe": {
-      "command": "vitest run --config=vitest.axe.ts",
-      "files": [
-        "dist/**/*.js",
-        "src/**/*.test.axe.ts",
-        "tsconfig.json",
-        "vitest.axe.ts"
-      ],
-      "output": [
-        "coverage/axe/**"
-      ],
-      "dependencies": [
-        "../testing:build",
-        "../internals/vite:ci",
-        {
-          "script": "build",
-          "cascade": false
-        }
-      ],
-      "env": {
-        "NODE_ENV": "production"
-      }
     },
     "test:ssr": {
       "command": "vitest run --config=vitest.ssr.ts",

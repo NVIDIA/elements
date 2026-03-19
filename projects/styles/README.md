@@ -5,8 +5,8 @@ Core CSS foundation for the Elements design system, providing layout utilities, 
 - [Documentation](https://NVIDIA.github.io/elements/)
 - [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-- [GitLab Repo](https://github.com/NVIDIA/elements)
-- [Artifactory](https://registry.npmjs.org
+- [GitHub Repo](https://github.com/NVIDIA/elements)
+- [NPM](https://registry.npmjs.org
 
 ## Getting Started
 

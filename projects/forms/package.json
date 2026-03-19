@@ -14,13 +14,7 @@
       "customData": [
         "./dist/data.html.json"
       ]
-    },
-    "snippets": [
-      {
-        "language": "html",
-        "path": "./dist/data.snippets.json"
-      }
-    ]
+    }
   },
   "files": [
     "README.md",
@@ -80,7 +74,6 @@
     "@nvidia-elements/lint": "workspace:*",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
-    "axe-core": "catalog:",
     "eslint": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",
@@ -154,7 +147,7 @@
       ],
       "output": [],
       "dependencies": [
-        "../testing:build",
+        "../internals/testing:build",
         "../internals/vite:ci",
         "../elements:build"
       ]
@@ -174,7 +167,7 @@
       ],
       "output": [],
       "dependencies": [
-        "../testing:build",
+        "../internals/testing:build",
         "../internals/vite:ci",
         "../elements:build"
       ]

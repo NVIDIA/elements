@@ -17,13 +17,9 @@
     "@eslint/js": "catalog:",
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
-    "axe-core": "catalog:",
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:"
-  },
-  "optionalDependencies": {
-    "axe-core": "catalog:"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -34,14 +30,6 @@
     "./index.js": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./axe": {
-      "types": "./dist/axe/index.d.ts",
-      "default": "./dist/axe/index.js"
-    },
-    "./axe/index.js": {
-      "types": "./dist/axe/index.d.ts",
-      "default": "./dist/axe/index.js"
     }
   },
   "wireit": {

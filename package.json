@@ -10,7 +10,6 @@
   },
   "scripts": {
     "ci": "wireit",
-    "ci:all": "PAGES_BASE_URL=/elements/ pnpm run ci && PAGES_BASE_URL=/elements/ node ./projects/internals/gitlab/cache-validate.js ci",
     "ci:reset": "pnpm run clean && pnpm i --frozen-lockfile --prefer-offline",
     "lighthouse": "wireit",
     "clean": "git clean -dfX",
@@ -33,7 +32,6 @@
     "@semantic-release/commit-analyzer": "12.0.0",
     "@semantic-release/exec": "6.0.3",
     "@semantic-release/git": "10.0.1",
-    "@semantic-release/gitlab": "13.2.1",
     "@semantic-release/npm": "12.0.0",
     "@semantic-release/release-notes-generator": "13.0.0",
     "@weiran.zsd/multi-eslint-rule-config": "0.0.6",
@@ -49,7 +47,8 @@
     "semantic-release-replace-plugin": "1.2.7",
     "tar": "7.5.11",
     "unzipper": "0.12.3",
-    "wireit": "0.14.12"
+    "wireit": "0.14.12",
+    "@semantic-release/github": "12.0.3"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
@@ -59,88 +58,26 @@
     "ci": {
       "script": "pnpm run format && pnpm run lint:vale",
       "dependencies": [
-        "./projects/code:ci",
-        "./projects/cli:ci",
-        "./projects/create:ci",
         "./projects/elements:ci",
-        "./projects/elements-react:ci",
         "./projects/forms:ci",
-        "./projects/labs/behaviors-alpine:ci",
-        "./projects/labs/brand:ci",
-        "./projects/labs/playwright-screencast:ci",
         "./projects/lint:ci",
-        "./projects/markdown:ci",
-        "./projects/media:ci",
-        "./projects/monaco:ci",
-        "./projects/pages:ci",
-        "./projects/site:ci",
-        "./projects/starters:ci",
-        "./projects/starters/angular:ci",
-        "./projects/starters/bundles:ci",
-        "./projects/starters/eleventy:ci",
-        "./projects/starters/eleventy-ssr:ci",
-        "./projects/starters/hugo:ci",
-        "./projects/starters/importmaps:ci",
-        "./projects/starters/lit-library:ci",
-        "./projects/starters/mpa:ci",
-        "./projects/starters/nextjs:ci",
-        "./projects/starters/nuxt:ci",
-        "./projects/starters/react:ci",
-        "./projects/starters/react-18:ci",
-        "./projects/starters/solidjs:ci",
-        "./projects/starters/svelte:ci",
-        "./projects/starters/typescript:ci",
-        "./projects/starters/vue:ci",
         "./projects/styles:ci",
-        "./projects/testing:ci",
-        "./projects/themes:ci",
-        "./projects/internals/metadata:ci",
-        "./projects/internals/patterns:ci",
         "./projects/internals/testing:ci",
-        "./projects/internals/tools:ci"
+        "./projects/themes:ci",
+        "./projects/internals/metadata:ci"
       ],
       "files": []
-    },
-    "lighthouse": {
-      "command": "node ./projects/internals/gitlab/metrics.lighthouse.js",
-      "dependencies": [
-        "./projects/code:test:lighthouse",
-        "./projects/styles:test:lighthouse",
-        "./projects/themes:test:lighthouse",
-        "./projects/elements:test:lighthouse",
-        "./projects/forms:test:lighthouse",
-        "./projects/labs/brand:test:lighthouse",
-        "./projects/markdown:test:lighthouse",
-        "./projects/media:test:lighthouse",
-        "./projects/monaco:test:lighthouse",
-        "./projects/site:test:lighthouse"
-      ],
-      "output": [
-        ".metrics/metrics.lighthouse.txt"
-      ],
-      "env": {
-        "NODE_ENV": "production"
-      },
-      "files": [
-        "./projects/internals/gitlab/metrics.lighthouse.js"
-      ]
     },
     "release": {
       "command": "echo 'Releasing...'",
       "dependencies": [
-        "release:cli",
-        "release:code",
-        "release:create",
         "release:themes",
         "release:testing",
         "release:elements",
-        "release:elements-react",
         "release:labs-behaviors-alpine",
         "release:labs-brand",
         "release:lint",
         "release:labs-forms",
-        "release:markdown",
-        "release:monaco",
         "release:styles"
       ]
     },
@@ -148,49 +85,13 @@
       "command": "cd projects/themes && HUSKY=0 pnpm exec semantic-release"
     },
     "release:testing": {
-      "command": "cd projects/testing && HUSKY=0 pnpm exec semantic-release"
-    },
-    "release:create": {
-      "command": "cd projects/create && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:cli"
-      ]
+      "command": "cd projects/internals/testing && HUSKY=0 pnpm exec semantic-release"
     },
     "release:elements": {
       "command": "cd projects/elements && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:themes",
         "release:labs-forms"
-      ]
-    },
-    "release:elements-react": {
-      "command": "cd projects/elements-react && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:elements"
-      ]
-    },
-    "release:labs-behaviors-alpine": {
-      "command": "cd projects/labs/behaviors-alpine && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:elements"
-      ]
-    },
-    "release:labs-brand": {
-      "command": "cd projects/labs/brand && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:themes"
-      ]
-    },
-    "release:cli": {
-      "command": "cd projects/cli && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:lint"
-      ]
-    },
-    "release:code": {
-      "command": "cd projects/code && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:elements"
       ]
     },
     "release:labs-forms": {
@@ -201,26 +102,6 @@
       "dependencies": [
         "release:themes",
         "release:styles"
-      ]
-    },
-    "release:markdown": {
-      "command": "cd projects/markdown && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:elements"
-      ]
-    },
-    "release:media": {
-      "command": "cd projects/media && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:elements"
-      ]
-    },
-    "release:monaco": {
-      "command": "cd projects/monaco && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:elements",
-        "release:themes",
-        "release:labs-forms"
       ]
     },
     "release:styles": {
@@ -267,28 +148,12 @@
     "lint:fix": {
       "command": "prettier --config prettier.config.js --write .",
       "dependencies": [
-        "./projects/code:lint:fix",
-        "./projects/create:lint:fix",
         "./projects/elements:lint:fix",
         "./projects/forms:lint:fix",
         "./projects/internals/metadata:lint:fix",
-        "./projects/internals/patterns:lint:fix",
         "./projects/internals/testing:lint:fix",
-        "./projects/internals/tools:lint:fix",
-        "./projects/labs/behaviors-alpine:lint:fix",
-        "./projects/labs/brand:lint:fix",
-        "./projects/cli:lint:fix",
-        "./projects/labs/playwright-screencast:lint:fix",
-        "./projects/lint:lint:fix",
-        "./projects/markdown:lint:fix",
-        "./projects/media:lint:fix",
-        "./projects/monaco:lint:fix",
-        "./projects/site:lint:fix",
-        "./projects/testing:lint:fix"
+        "./projects/lint:lint:fix"
       ]
-    },
-    "lint:vale": {
-      "command": "config/vale/bin/vale --config .vale.ini projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'"
     },
     "playwright": {
       "command": "pnpm exec playwright install chromium --with-deps chromium"
@@ -299,7 +164,8 @@
   },
   "pnpm": {
     "overrides": {
-      "archiver>glob": "catalog:"
+      "archiver>glob": "catalog:",
+      "eslint": "catalog:"
     }
   }
 }

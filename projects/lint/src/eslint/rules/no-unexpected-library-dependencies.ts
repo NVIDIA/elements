@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { Rule } from 'eslint';
 import type { HtmlTagNode } from '../rule-types.js';
 
@@ -7,15 +10,15 @@ const rule = {
   meta: {
     type: 'problem' as const,
     docs: {
-      description: 'Disallow incorrect dependency usage of @nve packages in consuming libraries.',
+      description: 'Disallow incorrect dependency usage of @nvidia-elements packages in consuming libraries.',
       recommended: true,
       url: 'https://NVIDIA.github.io/elements/docs/lint/'
     },
     schema: [],
     messages: {
-      ['unexpected-dependency-missing']: 'No @nve packages found in the project.',
-      ['unexpected-dependency-pinned']: 'Libraries dependent on @nve packages must contain caret (^) prefix.',
-      ['unexpected-dependency-type']: 'Libraries dependent on @nve packages must list them as peer dependencies.'
+      ['unexpected-dependency-missing']: 'No @nvidia-elements packages found in the project.',
+      ['unexpected-dependency-pinned']: 'Libraries dependent on @nvidia-elements packages must contain caret (^) prefix.',
+      ['unexpected-dependency-type']: 'Libraries dependent on @nvidia-elements packages must list them as peer dependencies.'
     }
   },
   create(context: Rule.RuleContext) {
@@ -24,7 +27,7 @@ const rule = {
         if (context.filename.includes('package.json')) {
           const packageJson = JSON.parse(context.getSourceCode().getText());
           const isLibrary = packageJson.exports !== undefined;
-          const ownedPackage = packageJson.name && packageJson.name.startsWith('@nve');
+          const ownedPackage = packageJson.name && packageJson.name.startsWith('@nvidia-elements');
 
           if (isLibrary && !ownedPackage) {
             const messageId = checkPeerDependencies(packageJson);
@@ -51,13 +54,13 @@ function checkPeerDependencies(packageJson: {
   const dependencies = Object.keys(packageJson.dependencies ?? {});
   const devDependencies = Object.keys(packageJson.devDependencies ?? {});
   const peerDependencies = Object.keys(packageJson.peerDependencies ?? {});
-  const hasDevDependencies = devDependencies.some(dependency => dependency.includes('@nve'));
-  const hasDependencies = dependencies.some(dependency => dependency.includes('@nve'));
-  const hasPeerDependencies = peerDependencies.some(dependency => dependency.includes('@nve'));
+  const hasDevDependencies = devDependencies.some(dependency => dependency.includes('@nvidia-elements'));
+  const hasDependencies = dependencies.some(dependency => dependency.includes('@nvidia-elements'));
+  const hasPeerDependencies = peerDependencies.some(dependency => dependency.includes('@nvidia-elements'));
   const peerDeps = packageJson.peerDependencies ?? {};
   const hasPinnedVersion = peerDependencies.find(
     n =>
-      n.startsWith('@nve') &&
+      n.startsWith('@nvidia-elements') &&
       !peerDeps[n]?.startsWith('^') &&
       !peerDeps[n]?.startsWith('workspace:') &&
       !peerDeps[n]?.startsWith('catalog:')

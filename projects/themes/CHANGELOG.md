@@ -150,7 +150,6 @@
 
 ### Features
 
-* **themes:** add full nvidia-sans font-weight support ([6977da4](https://github.com/NVIDIA/elements/commit/6977da4ee89f52627e30e035da2b1f358afb4adf))
 
 ## [@nvidia-elements/themes-v1.2.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/themes-v1.1.4...@nvidia-elements/themes-v1.2.0) (2024-09-18)
 

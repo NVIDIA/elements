@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 :host {
   --background: var(--nve-ref-color-gray-slate-1100);
   --width: var(--nve-ref-size-1000);

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { LitElement, html } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import type { Color } from '@nvidia-elements/core/internal';

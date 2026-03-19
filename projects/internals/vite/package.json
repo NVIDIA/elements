@@ -18,7 +18,6 @@
   "dependencies": {
     "@lit-labs/ssr": "catalog:",
     "@custom-elements-manifest/analyzer": "catalog:",
-    "axe-core": "catalog:",
     "custom-element-jsx-integration": "1.6.0",
     "custom-element-vs-code-integration": "1.5.0",
     "custom-element-vuejs-integration": "1.4.0",
@@ -51,5 +50,8 @@
         "!src/playwright/locks"
       ]
     }
+  },
+  "devDependencies": {
+    "esbuild": "catalog:"
   }
 }

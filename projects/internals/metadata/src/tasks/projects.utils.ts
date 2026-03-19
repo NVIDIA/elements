@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { readFileSync, existsSync } from 'node:fs';
 import type { Package, Project } from '../types.js';
 
@@ -9,7 +12,7 @@ function getChangelog(basePath: string): string {
   const changelog = existsSync(new URL(basePath + '/CHANGELOG.md', import.meta.url))
     ? readFileSync(new URL(basePath + '/CHANGELOG.md', import.meta.url), 'utf8')
     : '';
-  return changelog.includes('@elements') ? (changelog.split('@elements')[0] ?? '') : changelog;
+  return changelog.includes('@maglev') ? (changelog.split('@maglev')[0] ?? '') : changelog;
 }
 
 function getReadMe(basePath: string): string {
@@ -32,25 +35,13 @@ function getProjectMetadata(basePath: string): Project {
 
 export function getProjects(): { created: string; data: Project[] } {
   const projects = [
-    '../../../../create',
     '../../../../elements',
-    '../../../../elements-react',
     '../../../../styles',
-    '../../../../testing',
     '../../../../themes',
-    '../../../../labs/behaviors-alpine',
-    '../../../../labs/brand',
-    '../../../../cli',
-    '../../../../code',
-    '../../../../lint',
     '../../../../forms',
-    '../../../../markdown',
-    '../../../../labs/playwright-screencast',
     '../../../../lint',
-    '../../../../media',
-    '../../../../monaco',
     '../../../../internals/metadata',
-    '../../../../internals/patterns'
+    '../../../../internals/vite'
   ];
 
   return {

@@ -84,51 +84,6 @@ To run the tests run `pnpm run test`
 vitest run --config=vitest.ts
 ```
 
-### Axe
-
-```typescript
-// vitest.axe.ts
-import { resolve } from 'path';
-import { mergeConfig } from 'vitest/config';
-import { libraryAxeTestConfig } from '@internals/vite';
-
-export default mergeConfig(libraryAxeTestConfig, {
-  test: {
-    include: ['./src/**/*.test.axe.ts'],
-    alias: { '@nvidia-elements/library': resolve(import.meta.dirname, './dist') },
-  }
-});
-```
-
-```typescript
-// dot.test.axe.ts
-import { html } from 'lit';
-import { describe, expect, it } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
-import { runAxe } from '@internals/testing/axe';
-import { Dot } from '@nvidia-elements/core/dot';
-import '@nvidia-elements/core/dot/define.js';
-
-describe(Dot.metadata.tag, () => {
-  it('should pass axe check for status', async () => {
-    const fixture = await createFixture(html`
-      <nve-dot></nve-dot>
-    `);
-
-    await elementIsStable(fixture.querySelector(Dot.metadata.tag));
-    const results = await runAxe([Dot.metadata.tag]);
-    expect(results.violations.length).toBe(0);
-    removeFixture(fixture);
-  });
-});
-```
-
-To run the tests run `pnpm run test:axe`
-
-```shell
-vitest run --config=vitest.axe.ts
-```
-
 ### Lighthouse
 
 ```typescript

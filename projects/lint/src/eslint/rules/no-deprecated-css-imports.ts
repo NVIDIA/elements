@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { Rule } from 'eslint';
 import type { CssAtRuleNode } from '../rule-types.js';
 
@@ -5,9 +8,9 @@ const deprecatedImports: Record<string, string> = {
   '@nvidia-elements/core/index.css': `@import '@nvidia-elements/themes/fonts/inter.css';\n@import '@nvidia-elements/themes/index.css';\n@import '@nvidia-elements/themes/dark.css';\n@import '@nvidia-elements/styles/typography.css';\n@import '@nvidia-elements/styles/layout.css';`,
   '@nvidia-elements/core/css/module.layout.css': `@import '@nvidia-elements/styles/layout.css';`,
   '@nvidia-elements/core/css/module.typography.css': `@import '@nvidia-elements/styles/typography.css';`,
-  '@elements/elements/index.css': `@import '@nvidia-elements/themes/fonts/inter.css';\n@import '@nvidia-elements/themes/index.css';\n@import '@nvidia-elements/themes/dark.css';\n@import '@nvidia-elements/styles/typography.css';\n@import '@nvidia-elements/styles/layout.css';`,
-  '@elements/elements/css/module.layout.css': `@import '@nvidia-elements/styles/layout.css';`,
-  '@elements/elements/css/module.typography.css': `@import '@nvidia-elements/styles/typography.css';`
+  '@maglev/elements/index.css': `@import '@nvidia-elements/themes/fonts/inter.css';\n@import '@nvidia-elements/themes/index.css';\n@import '@nvidia-elements/themes/dark.css';\n@import '@nvidia-elements/styles/typography.css';\n@import '@nvidia-elements/styles/layout.css';`,
+  '@maglev/elements/css/module.layout.css': `@import '@nvidia-elements/styles/layout.css';`,
+  '@maglev/elements/css/module.typography.css': `@import '@nvidia-elements/styles/typography.css';`
 };
 
 const rule = {
