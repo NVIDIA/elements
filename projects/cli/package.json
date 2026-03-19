@@ -77,7 +77,7 @@
       "output": []
     },
     "build": {
-      "command": "bun build --compile --minify src/index.ts --target=bun-darwin-arm64 --outfile dist/nve-macos-arm64 && bun build --compile --minify src/index.ts --target=bun-darwin-x64 --outfile dist/nve-macos-x64 && bun build --compile --minify --target=bun-linux-x64 ./src/index.ts --outfile dist/nve-linux-x64 && bun build --compile --minify --target=bun-linux-arm64 ./src/index.ts --outfile dist/nve-linux-arm64 && bun build --compile --minify --target=bun-windows-x64-modern ./src/index.ts --outfile dist/nve-windows-x64",
+      "command": "bun build --compile --minify dist/index.js --target=bun-darwin-arm64 --outfile dist/nve-macos-arm64 && bun build --compile --minify dist/index.js --target=bun-darwin-x64 --outfile dist/nve-macos-x64 && bun build --compile --minify --target=bun-linux-x64 dist/index.js --outfile dist/nve-linux-x64 && bun build --compile --minify --target=bun-linux-arm64 dist/index.js --outfile dist/nve-linux-arm64 && bun build --compile --minify --target=bun-windows-x64-modern dist/index.js --outfile dist/nve-windows-x64",
       "files": [
         "../internals/tools/dist/**/*.js",
         "src/**",

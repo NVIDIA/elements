@@ -6,7 +6,7 @@ rem Usage: curl -fsSL https://NVIDIA.github.io/elements/install.cmd -o install.c
 
 set "BASE_URL=https://NVIDIA.github.io/elements/cli"
 set "BINARY=nve-windows-x64"
-set "INSTALL_DIR=%USERPROFILE%\.nve\bin"
+set "INSTALL_DIR=%LOCALAPPDATA%\Programs\nve"
 set "BIN_NAME=nve.exe"
 
 echo Installing Elements CLI...
