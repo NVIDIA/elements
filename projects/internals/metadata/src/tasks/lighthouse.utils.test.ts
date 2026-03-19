@@ -17,10 +17,7 @@ describe('Lighthouse Metadata', () => {
     expect(summary.created).toBeDefined();
     expect(summary.created.length).toBeGreaterThan(0);
     expect(summary['@nvidia-elements/core']).toBeDefined();
-    expect(summary['@nvidia-elements/core-react']).toBeDefined();
-    expect(summary['@nvidia-elements/testing']).toBeDefined();
     expect(summary['@nvidia-elements/code']).toBeDefined();
-    expect(summary['@nvidia-elements/behaviors-alpine']).toBeDefined();
   });
 
   it('should return a element report', async () => {

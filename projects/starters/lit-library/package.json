@@ -133,7 +133,7 @@
       "output": [],
       "dependencies": [
         "build",
-        "../../testing:build"
+        "../../internals/testing:build"
       ]
     },
     "test:watch": {

@@ -225,18 +225,13 @@ describe('generateTestSummary', () => {
   it('should contain all expected projects', () => {
     const expectedProjects = [
       '@nvidia-elements/core',
-      '@nvidia-elements/core-react',
       '@nvidia-elements/styles',
-      '@nvidia-elements/testing',
       '@nvidia-elements/themes',
-      '@nvidia-elements/behaviors-alpine',
-      '@nvidia-elements/brand',
       '@nvidia-elements/code',
       '@nvidia-elements/cli',
       '@nvidia-elements/lint',
       '@nvidia-elements/forms',
       '@nvidia-elements/markdown',
-      '@nvidia-elements/playwright-screencast',
       '@nvidia-elements/monaco',
       '@internals/metadata',
       '@internals/patterns',
