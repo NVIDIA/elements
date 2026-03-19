@@ -66,6 +66,16 @@ module.exports = {
     [
       '@semantic-release/exec',
       {
+        prepareCmd: [
+          'test -f dist/nve-macos-arm64',
+          '&& bun build --compile --minify dist/index.js --target=bun-darwin-arm64 --outfile dist/nve-macos-arm64',
+          '&& bun build --compile --minify dist/index.js --target=bun-darwin-x64 --outfile dist/nve-macos-x64',
+          '&& bun build --compile --minify --target=bun-linux-x64 dist/index.js --outfile dist/nve-linux-x64',
+          '&& bun build --compile --minify --target=bun-linux-arm64 dist/index.js --outfile dist/nve-linux-arm64',
+          '&& bun build --compile --minify --target=bun-windows-x64-modern dist/index.js --outfile dist/nve-windows-x64',
+          '|| true'
+        ].join(' '),
+
         publishCmd: [
           `pnpm publish --no-git-checks --registry=$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
           `pnpm publish --no-git-checks --registry=$MAGLEV_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`
