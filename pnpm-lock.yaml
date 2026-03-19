@@ -172,9 +172,6 @@ importers:
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:projects/elements
-      '@nvidia-elements/core-react':
-        specifier: workspace:*
-        version: link:projects/elements-react
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:projects/styles
@@ -506,61 +503,6 @@ importers:
       formdata-polyfill:
         specifier: ^4.0.10
         version: 4.0.10
-
-  projects/elements-react:
-    dependencies:
-      '@lit/react':
-        specifier: ^1.0.6
-        version: 1.0.8(@types/react@18.3.12)
-      '@nvidia-elements/core':
-        specifier: workspace:^
-        version: link:../elements
-    devDependencies:
-      '@eslint/js':
-        specifier: 'catalog:'
-        version: 9.39.2
-      '@internals/eslint':
-        specifier: workspace:*
-        version: link:../internals/eslint
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../internals/vite
-      '@types/react':
-        specifier: 18.3.12
-        version: 18.3.12
-      '@types/react-dom':
-        specifier: 18.3.1
-        version: 18.3.1
-      '@vitest/browser':
-        specifier: 'catalog:'
-        version: 4.1.0(vite@8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2))(vitest@4.1.0)
-      '@vitest/coverage-istanbul':
-        specifier: 'catalog:'
-        version: 4.1.0(vitest@4.1.0)
-      eslint:
-        specifier: 'catalog:'
-        version: 9.39.2(jiti@2.6.1)
-      glob:
-        specifier: 'catalog:'
-        version: 13.0.6
-      publint:
-        specifier: 'catalog:'
-        version: 0.3.15
-      react:
-        specifier: 18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: 18.3.1
-        version: 18.3.1(react@18.3.1)
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      vite:
-        specifier: 'catalog:'
-        version: 8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2)
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(@vitest/browser-playwright@4.1.0)(jsdom@27.1.0)(vite@8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2))
 
   projects/forms:
     dependencies:
@@ -916,145 +858,6 @@ importers:
         specifier: 'catalog:'
         version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.0)(jsdom@27.1.0)(vite@8.0.0(@types/node@24.9.1)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2))
 
-  projects/labs/behaviors-alpine:
-    devDependencies:
-      '@eslint/js':
-        specifier: 'catalog:'
-        version: 9.39.2
-      '@internals/eslint':
-        specifier: workspace:*
-        version: link:../../internals/eslint
-      '@internals/testing':
-        specifier: workspace:*
-        version: link:../../internals/testing
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../../internals/vite
-      '@nvidia-elements/core':
-        specifier: workspace:*
-        version: link:../../elements
-      '@nvidia-elements/styles':
-        specifier: workspace:*
-        version: link:../../styles
-      '@nvidia-elements/themes':
-        specifier: workspace:*
-        version: link:../../themes
-      '@types/alpinejs':
-        specifier: ^3.13.10
-        version: 3.13.11
-      '@vitest/browser':
-        specifier: 'catalog:'
-        version: 4.1.0(vite@8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2))(vitest@4.1.0)
-      '@vitest/coverage-istanbul':
-        specifier: 'catalog:'
-        version: 4.1.0(vitest@4.1.0)
-      alpinejs:
-        specifier: ^3.14.1
-        version: 3.15.3
-      eslint:
-        specifier: 'catalog:'
-        version: 9.39.2(jiti@2.6.1)
-      lit:
-        specifier: 'catalog:'
-        version: 3.3.2
-      publint:
-        specifier: 'catalog:'
-        version: 0.3.15
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      vite:
-        specifier: 'catalog:'
-        version: 8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2)
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(@vitest/browser-playwright@4.1.0)(jsdom@27.1.0)(vite@8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2))
-
-  projects/labs/brand:
-    dependencies:
-      lit:
-        specifier: 'catalog:'
-        version: 3.3.2
-    devDependencies:
-      '@eslint/js':
-        specifier: 'catalog:'
-        version: 9.39.2
-      '@internals/eslint':
-        specifier: workspace:*
-        version: link:../../internals/eslint
-      '@internals/testing':
-        specifier: workspace:*
-        version: link:../../internals/testing
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../../internals/vite
-      '@nvidia-elements/lint':
-        specifier: workspace:*
-        version: link:../../lint
-      '@nvidia-elements/themes':
-        specifier: workspace:*
-        version: link:../../themes
-      '@vitest/browser':
-        specifier: 'catalog:'
-        version: 4.1.0(vite@8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2))(vitest@4.1.0)
-      '@vitest/coverage-istanbul':
-        specifier: 'catalog:'
-        version: 4.1.0(vitest@4.1.0)
-      eslint:
-        specifier: 'catalog:'
-        version: 9.39.2(jiti@2.6.1)
-      publint:
-        specifier: 'catalog:'
-        version: 0.3.15
-      stylelint:
-        specifier: 'catalog:'
-        version: 17.4.0(typescript@5.9.3)
-      stylelint-config-standard:
-        specifier: 'catalog:'
-        version: 40.0.0(stylelint@17.4.0(typescript@5.9.3))
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      vite:
-        specifier: 'catalog:'
-        version: 8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2)
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(@vitest/browser-playwright@4.1.0)(jsdom@27.1.0)(vite@8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2))
-
-  projects/labs/playwright-screencast:
-    devDependencies:
-      '@internals/eslint':
-        specifier: workspace:*
-        version: link:../../internals/eslint
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../../internals/vite
-      '@types/node':
-        specifier: 'catalog:'
-        version: 24.9.1
-      '@vitest/coverage-istanbul':
-        specifier: 'catalog:'
-        version: 4.1.0(vitest@4.1.0)
-      eslint:
-        specifier: 'catalog:'
-        version: 9.39.2(jiti@2.6.1)
-      playwright:
-        specifier: 'catalog:'
-        version: 1.58.0
-      publint:
-        specifier: 'catalog:'
-        version: 0.3.15
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      vite:
-        specifier: 'catalog:'
-        version: 8.0.0(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2)
-      vitest:
-        specifier: 'catalog:'
-        version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.0)(jsdom@27.1.0)(vite@8.0.0(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2))
-
   projects/lint:
     dependencies:
       '@eslint/css':
@@ -1363,8 +1166,8 @@ importers:
         specifier: 'catalog:'
         version: 1.1.8
       '@nvidia-elements/brand':
-        specifier: workspace:*
-        version: link:../labs/brand
+        specifier: latest
+        version: 1.2.5
       '@nvidia-elements/code':
         specifier: workspace:*
         version: link:../code
@@ -1377,9 +1180,6 @@ importers:
       '@nvidia-elements/markdown':
         specifier: workspace:*
         version: link:../markdown
-      '@nvidia-elements/playwright-screencast':
-        specifier: workspace:*
-        version: link:../labs/playwright-screencast
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../elements
@@ -1850,8 +1650,8 @@ importers:
         specifier: workspace:*
         version: link:../../elements
       '@nvidia-elements/core-react':
-        specifier: workspace:*
-        version: link:../../elements-react
+        specifier: latest
+        version: 1.12.0(@nvidia-elements/core@projects+elements)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -2073,38 +1873,6 @@ importers:
       vitest:
         specifier: 'catalog:'
         version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(@vitest/browser-playwright@4.1.0)(jsdom@27.1.0)(vite@8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2))
-
-  projects/testing:
-    dependencies:
-      lit:
-        specifier: 'catalog:'
-        version: 3.3.2
-    devDependencies:
-      '@eslint/js':
-        specifier: 'catalog:'
-        version: 9.39.2
-      '@internals/eslint':
-        specifier: workspace:*
-        version: link:../internals/eslint
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../internals/vite
-      eslint:
-        specifier: 'catalog:'
-        version: 9.39.2(jiti@2.6.1)
-      publint:
-        specifier: 'catalog:'
-        version: 0.3.15
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      vite:
-        specifier: 'catalog:'
-        version: 8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2)
-    optionalDependencies:
-      axe-core:
-        specifier: 'catalog:'
-        version: 4.11.0
 
   projects/themes:
     devDependencies:
@@ -4374,6 +4142,16 @@ packages:
       rolldown:
         optional: true
 
+  '@nvidia-elements/brand@1.2.5':
+    resolution: {integrity: sha512-i0KjotQECW0SPu/5GkckatvWZmqe2WcAnPgH5bIcphwhRZfOjBOkSWVq6lHRamhBfw3JOgpxRNOwqGXUria6BA==, tarball: https://registry.npmjs.org
+
+  '@nvidia-elements/core-react@1.12.0':
+    resolution: {integrity: sha512-J4duH/7Cniq3MNjn0rratubp2uq5f6nRJ3Uwt8EY8f9uMtlR05cN0gkM7XVp5gN9mDMd9e8C/7f+u58fQAIzgg==, tarball: https://registry.npmjs.org
+    peerDependencies:
+      '@nvidia-elements/core': ^1.47.0
+      react: '>= 18.2.0'
+      react-dom: '>= 18.2.0'
+
   '@octokit/auth-token@4.0.0':
     resolution: {integrity: sha512-tY/msAuJo6ARbK6SPIxZrPBms3xPbfwBrulZe0Wtr/DIY9lje2HeV1uoebShn6mx7SjCHif6EjMvoREj+gZ+SA==, tarball: https://registry.npmjs.org
     engines: {node: '>= 18'}
@@ -6169,9 +5947,6 @@ packages:
   '@tybys/wasm-util@0.10.1':
     resolution: {integrity: sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==, tarball: https://registry.npmjs.org
 
-  '@types/alpinejs@3.13.11':
-    resolution: {integrity: sha512-3KhGkDixCPiLdL3Z/ok1GxHwLxEWqQOKJccgaQL01wc0EVM2tCTaqlC3NIedmxAXkVzt/V6VTM8qPgnOHKJ1MA==, tarball: https://registry.npmjs.org
-
   '@types/argparse@1.0.38':
     resolution: {integrity: sha512-ebDJ9b0e702Yr7pWgB0jzm+CX4Srzz8RcXtLJDJB+BSccqMa36uyH/zUsSYao5+BD1ytv3k3rPYCq4mAE1hsXA==, tarball: https://registry.npmjs.org
 
@@ -6559,9 +6334,6 @@ packages:
   '@vue/language-core@3.2.6':
     resolution: {integrity: sha512-xYYYX3/aVup576tP/23sEUpgiEnujrENaoNRbaozC1/MA9I6EGFQRJb4xrt/MmUCAGlxTKL2RmT8JLTPqagCkg==, tarball: https://registry.npmjs.org
 
-  '@vue/reactivity@3.1.5':
-    resolution: {integrity: sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==, tarball: https://registry.npmjs.org
-
   '@vue/reactivity@3.5.28':
     resolution: {integrity: sha512-gr5hEsxvn+RNyu9/9o1WtdYdwDjg5FgjUSBEkZWqgTKlo/fvwZ2+8W6AfKsc9YN2k/+iHYdS9vZYAhpi10kNaw==, tarball: https://registry.npmjs.org
 
@@ -6589,9 +6361,6 @@ packages:
     resolution: {integrity: sha512-v+R34icapydRwbZRD0sXwtHqrQJv38JuMB4JxbOxd8NEpGLny7cncMp53W9UH/zo4j8eDHjQ1dEJXwzFQknjtQ==, tarball: https://registry.npmjs.org
     peerDependencies:
       vue: 3.5.30
-
-  '@vue/shared@3.1.5':
-    resolution: {integrity: sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==, tarball: https://registry.npmjs.org
 
   '@vue/shared@3.5.26':
     resolution: {integrity: sha512-7Z6/y3uFI5PRoKeorTOSXKcDj0MSasfNNltcslbFrPpcw6aXRUALq4IfJlaTRspiWIUOEZbrpM+iQGmCOiWe4A==, tarball: https://registry.npmjs.org
@@ -6911,9 +6680,6 @@ packages:
 
   alien-signals@3.1.2:
     resolution: {integrity: sha512-d9dYqZTS90WLiU0I5c6DHj/HcKkF8ZyGN3G5x8wSbslulz70KOxaqCT0hQCo9KOyhVqzqGojvNdJXoTumZOtcw==, tarball: https://registry.npmjs.org
-
-  alpinejs@3.15.3:
-    resolution: {integrity: sha512-fSI6F5213FdpMC4IWaup92KhuH3jBX0VVqajRJ6cOTCy1cL6888KyXdGO+seAAkn+g6fnrxBqQEx6gRpQ5EZoQ==, tarball: https://registry.npmjs.org
 
   ansi-colors@4.1.3:
     resolution: {integrity: sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw==, tarball: https://registry.npmjs.org
@@ -16538,6 +16304,19 @@ snapshots:
       - vue-tsc
       - yaml
 
+  '@nvidia-elements/brand@1.2.5':
+    dependencies:
+      lit: 3.3.2
+
+  '@nvidia-elements/core-react@1.12.0(@nvidia-elements/core@projects+elements)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@lit/react': 1.0.8(@types/react@18.3.12)
+      '@nvidia-elements/core': link:projects/elements
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+
   '@octokit/auth-token@4.0.0': {}
 
   '@octokit/core@5.2.2':
@@ -18172,8 +17951,6 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@types/alpinejs@3.13.11': {}
-
   '@types/argparse@1.0.38': {}
 
   '@types/babel__core@7.20.5':
@@ -18943,10 +18720,6 @@ snapshots:
       path-browserify: 1.0.1
       picomatch: 4.0.3
 
-  '@vue/reactivity@3.1.5':
-    dependencies:
-      '@vue/shared': 3.1.5
-
   '@vue/reactivity@3.5.28':
     dependencies:
       '@vue/shared': 3.5.28
@@ -18990,8 +18763,6 @@ snapshots:
       '@vue/compiler-ssr': 3.5.30
       '@vue/shared': 3.5.30
       vue: 3.5.30(typescript@5.9.3)
-
-  '@vue/shared@3.1.5': {}
 
   '@vue/shared@3.5.26': {}
 
@@ -19365,10 +19136,6 @@ snapshots:
   alien-signals@0.4.14: {}
 
   alien-signals@3.1.2: {}
-
-  alpinejs@3.15.3:
-    dependencies:
-      '@vue/reactivity': 3.1.5
 
   ansi-colors@4.1.3: {}
 
