@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.65.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.64.1...@nvidia-elements/core-v1.65.0) (2026-03-19)
+
+
+### Features
+
+* **labs-cli:** support cross platform binaries and upgrade command ([1a762a3](https://github.com/NVIDIA/elements/commit/1a762a33079d1e1f7e41b2a7a1b104dc3012422e))
+
 ## [@nvidia-elements/core-v1.64.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.64.0...@nvidia-elements/core-v1.64.1) (2026-03-17)
 
 
