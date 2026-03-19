@@ -4,7 +4,7 @@
 set -eu
 
 BASE_URL="https://NVIDIA.github.io/elements/cli"
-INSTALL_DIR="$HOME/.nve/bin"
+INSTALL_DIR="$HOME/.local/bin"
 BIN_NAME="nve"
 
 # --- Colors ---
@@ -146,14 +146,14 @@ else
   printf "\n${GREEN}${BOLD}Elements CLI installed successfully!${RESET}\n"
 fi
 
-printf "\n  Run ${CYAN}nve --help${RESET} to get started.\n"
+printf "\n  Run ${CYAN}nve${RESET} to get started.\n"
 
 if [ "$IN_PATH" -eq 0 ]; then
-  printf "  Restart your shell or run ${CYAN}source ~/%s${RESET} to update PATH.\n" \
-    "$(case "$(basename "$SHELL" 2>/dev/null)" in
-        zsh) echo ".zshrc" ;;
-        fish) echo ".config/fish/config.fish" ;;
-        *) echo ".bashrc" ;;
-      esac)"
+  SHELL_RC=".bashrc"
+  case "$(basename "$SHELL" 2>/dev/null)" in
+    zsh)  SHELL_RC=".zshrc" ;;
+    fish) SHELL_RC=".config/fish/config.fish" ;;
+  esac
+  printf "  Restart your shell or run ${CYAN}source ~/%s${RESET} to update PATH.\n" "$SHELL_RC"
 fi
 printf "\n"
