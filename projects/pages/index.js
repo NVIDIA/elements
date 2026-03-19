@@ -25,6 +25,9 @@ if (existsSync('../cli/dist')) {
       cpSync(src, `./dist/cli/${bin}`);
     }
   }
+  if (existsSync('../cli/dist/manifest.json')) {
+    cpSync('../cli/dist/manifest.json', './dist/cli/manifest.json');
+  }
 }
 
 cpSync('../starters/dist/', './dist/starters/download/', { recursive: true });
