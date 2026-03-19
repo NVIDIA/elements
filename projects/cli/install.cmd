@@ -46,16 +46,8 @@ if %errorlevel% equ 0 (
     echo   npm login --auth-type=legacy
 )
 
-rem Verify installation
-"%INSTALL_DIR%\%BIN_NAME%" --version >nul 2>&1
-if %errorlevel% equ 0 (
-    for /f "tokens=*" %%v in ('"%INSTALL_DIR%\%BIN_NAME%" --version') do set "VERSION=%%v"
-    echo.
-    echo Elements CLI %VERSION% installed successfully!
-) else (
-    echo.
-    echo Elements CLI installed successfully!
-)
+echo.
+echo Elements CLI installed successfully!
 
 echo.
 echo   Run "nve --help" to get started.

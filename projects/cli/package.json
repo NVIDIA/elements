@@ -22,15 +22,14 @@
     "test": "wireit",
     "test:watch": "wireit",
     "test:coverage": "wireit",
-    "nve:install": "sudo cp dist/nve-macos-arm64 /usr/local/bin/nve",
-    "nve:uninstall": "sudo rm -f /usr/local/bin/nve",
+    "nve:install": "mkdir -p $HOME/.local/bin && cp dist/nve-macos-arm64 $HOME/.local/bin/nve",
+    "nve:uninstall": "rm -f $HOME/.local/bin/nve",
     "nve:install:node": "test -n \"$CI\" || pnpm link --global",
     "nve:uninstall:node": "pnpm uninstall --global @nvidia-elements/cli"
   },
   "dependencies": {
     "@nvidia-elements/lint": "workspace:^",
     "@inquirer/prompts": "8.3.0",
-    "semver": "7.7.4",
     "@modelcontextprotocol/sdk": "1.27.1",
     "adm-zip": "0.5.16",
     "archiver": "7.0.1",
@@ -49,7 +48,6 @@
     "@internals/vite": "workspace:*",
     "@vitest/coverage-istanbul": "catalog:",
     "@types/node": "catalog:",
-    "@types/semver": "7.7.1",
     "@types/yargs": "17.0.35",
     "bun": "1.3.10",
     "eslint": "catalog:",
@@ -110,7 +108,8 @@
       ],
       "output": [
         "dist/**/*.js",
-        "dist/**/*.d.ts"
+        "dist/**/*.d.ts",
+        "dist/manifest.json"
       ],
       "dependencies": [
         "../internals/vite:ci",
