@@ -2,15 +2,15 @@ import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { join } from 'node:path';
 import { homedir } from 'node:os';
-import * as semver from 'semver';
 import { colors } from './utils.js';
 
 const CONFIG_DIR = join(homedir(), '.nve');
 const CONFIG_FILE = join(CONFIG_DIR, 'update-check.json');
+const MANIFEST_URL = 'https://NVIDIA.github.io/elements/cli/manifest.json';
 
 interface UpdateCheckConfig {
   lastCheck: number;
-  latestVersion: string;
+  latestSha: string;
 }
 
 export function readConfig(): UpdateCheckConfig | null {
@@ -33,48 +33,42 @@ export function saveConfig(config: UpdateCheckConfig): void {
   }
 }
 
-export async function fetchLatestVersion(): Promise<string> {
+export async function fetchLatestSha(): Promise<string> {
   try {
-    const res = await fetch(`https://esm.nvidia.com/@nvidia-elements/cli@latest/package.json`, {
+    const res = await fetch(MANIFEST_URL, {
       signal: AbortSignal.timeout(2000)
     });
     if (!res.ok) {
       throw new Error(`HTTP ${res.status}`);
     }
-    return ((await res.json()) as { version: string }).version;
+    return ((await res.json()) as { sha: string }).sha;
   } catch {
-    throw new Error('Failed to fetch latest version');
+    throw new Error('Failed to fetch latest build info');
   }
 }
 
-export function isUpdateAvailable(currentVersion: string, latestVersion: string): boolean {
-  try {
-    return semver.gt(latestVersion, currentVersion);
-  } catch {
-    return false;
-  }
+export function isUpdateAvailable(currentSha: string, latestSha: string): boolean {
+  return latestSha !== '' && currentSha !== latestSha;
 }
 
 export function shouldCheckForUpdates(config: UpdateCheckConfig | null): boolean {
   return !config || Date.now() - config.lastCheck >= 24 * 60 * 60 * 1000; // 24 hours
 }
 
-export async function checkForUpdates(currentVersion: string): Promise<string | null> {
+export async function checkForUpdates(currentSha: string): Promise<boolean> {
   if (process.env.CI) {
-    return null;
+    return false;
   }
 
   const config = readConfig();
 
-  // Refresh cache in background if stale (fire and forget)
   if (shouldCheckForUpdates(config)) {
-    fetchLatestVersion()
-      .then(latestVersion => saveConfig({ lastCheck: Date.now(), latestVersion }))
+    fetchLatestSha()
+      .then(latestSha => saveConfig({ lastCheck: Date.now(), latestSha }))
       .catch(() => {});
   }
 
-  // Return cached version if update available
-  return config && isUpdateAvailable(currentVersion, config.latestVersion) ? config.latestVersion : null;
+  return config ? isUpdateAvailable(currentSha, config.latestSha) : false;
 }
 
 export const updateCommands = {
@@ -91,17 +85,13 @@ export function upgrade(): void {
   process.exit(0);
 }
 
-async function showUpdateNotification(currentVersion: string, latestVersion: string): Promise<void> {
+function showUpdateNotification(): void {
   const border = '─'.repeat(50);
   console.log(
     [
       '',
       colors.warning(border),
-      colors.warning('  Update available: ') +
-        colors.error(currentVersion) +
-        colors.warning(' → ') +
-        colors.complete(latestVersion),
-      colors.warning('  Run ') + colors.info(`nve --upgrade`) + colors.warning(' to update'),
+      colors.warning('  Update available! Run ') + colors.info(`nve --upgrade`) + colors.warning(' to update.'),
       colors.warning(border),
       ''
     ].join('\n')
@@ -109,30 +99,18 @@ async function showUpdateNotification(currentVersion: string, latestVersion: str
 }
 
 /**
- * Shows update notification if a newer version is available.
+ * Shows update notification if a newer build is available.
  * Call after command execution with the promise from checkForUpdates().
  */
-export async function notifyIfUpdateAvailable(
-  currentVersion: string,
-  checkPromise: Promise<string | null>
-): Promise<void> {
-  // Skip in non-interactive environments
+export async function notifyIfUpdateAvailable(checkPromise: Promise<boolean>): Promise<void> {
   if (process.env.CI || !process.stdout.isTTY) {
     return;
   }
 
   try {
-    // Check if background fetch found an update
-    const latestVersion = await checkPromise;
-    if (latestVersion) {
-      await showUpdateNotification(currentVersion, latestVersion);
-      return;
-    }
-
-    // Fallback to cached config (for later runs within check interval)
-    const config = readConfig();
-    if (config && isUpdateAvailable(currentVersion, config.latestVersion)) {
-      await showUpdateNotification(currentVersion, config.latestVersion);
+    const updateAvailable = await checkPromise;
+    if (updateAvailable) {
+      showUpdateNotification();
     }
   } catch {
     // ignore errors - update check should never break CLI
