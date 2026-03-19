@@ -114,10 +114,8 @@ pnpm run lint:fix
 The repository is organized as a top-level workspace with individual project directories:
 
 - `/projects/elements` - Core Elements Web Components library (Lit-based)
-- `/projects/elements-react` - React 18 wrapper components for Elements
 - `/projects/themes` - Theme tokens and CSS custom properties
 - `/projects/styles` - CSS utilities for layout and typography
-- `/projects/testing` - Shared testing utilities for Lit components
 - `/projects/starters` - Starter templates for various frameworks (React, Angular, Vue, Svelte, etc.)
 - `/projects/labs` - Experimental packages (forms, CLI, markdown, code, brand, etc.)
 - `/projects/monaco` - Monaco editor integration
@@ -228,10 +226,8 @@ git commit -m "chore(docs): update component examples"
 
 - `docs` - 11ty docs site and landing page (`/projects/site`)
 - `elements` - Core Elements library (`/projects/elements`)
-- `elements-react` - React wrapper (`/projects/elements-react`)
 - `themes` - Theme tokens (`/projects/themes`)
 - `styles` - CSS utilities (`/projects/styles`)
-- `testing` - Testing utilities (`/projects/testing`)
 - `starters` - Starter templates (`/projects/starters`)
 - `labs-*` - Lab projects (e.g., `labs-cli`, `labs-forms`, `labs-code`)
 - `ci` - Build/CI tooling (`/projects/internals`)

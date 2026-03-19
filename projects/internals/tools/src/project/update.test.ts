@@ -4,13 +4,12 @@ import type { ElementVersions } from '../api/utils.js';
 
 function createMockElementVersions(versions: Partial<ElementVersions>): ElementVersions {
   return {
+    '@nvidia-elements/cli': '1.0.0',
+    '@nvidia-elements/lint': '1.0.0',
+    '@nvidia-elements/markdown': '1.0.0',
     '@nvidia-elements/core': '1.0.0',
-    '@nvidia-elements/core-react': '1.0.0',
     '@nvidia-elements/styles': '1.0.0',
-    '@nvidia-elements/testing': '1.0.0',
     '@nvidia-elements/themes': '1.0.0',
-    '@nvidia-elements/behaviors-alpine': '1.0.0',
-    '@nvidia-elements/brand': '1.0.0',
     '@nvidia-elements/code': '1.0.0',
     '@nvidia-elements/forms': '1.0.0',
     '@nvidia-elements/monaco': '1.0.0',

@@ -147,7 +147,7 @@
       ],
       "output": [],
       "dependencies": [
-        "../testing:build",
+        "../internals/testing:build",
         "../internals/vite:ci",
         "../elements:build"
       ]
@@ -169,7 +169,7 @@
         "coverage/unit/**"
       ],
       "dependencies": [
-        "../testing:build",
+        "../internals/testing:build",
         "../internals/vite:ci",
         "../elements:build"
       ]
@@ -209,7 +209,7 @@
         "coverage/axe/**"
       ],
       "dependencies": [
-        "../testing:build",
+        "../internals/testing:build",
         "../internals/vite:ci",
         {
           "script": "build",

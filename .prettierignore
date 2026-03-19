@@ -17,7 +17,6 @@ tsconfig.*.tsbuildinfo
 projects/code/index.html
 projects/elements/src/css/*.css
 projects/elements/src/icon/server.ts
-projects/elements-react/src/**/*
 projects/internals/metadata/static/*.json
 projects/monaco/src/themes/generated/*
 projects/starters/angular/.angular/**/*
