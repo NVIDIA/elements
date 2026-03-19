@@ -27,8 +27,6 @@ Examples of projects include:
 
 - `/projects/starters` - Suite of standardized starter apps for Elements and Patterns
 - `/projects/elements` - Elements library: curated UI maintained by the Elements team
-- `/projects/elements-react` - Elements React library for React compatibility/support
-- `/projects/testing` - A set of testing utilities for Lit based Web Components.
 - `/projects/themes` - Elements Theme library: provides a set of supported themes for Element based projects
 - `/projects/styles` - Elements Styles library: provides a set of CSS utilities for layout and typography
 
@@ -123,16 +121,10 @@ git commit -a -m "fix(elements): disabled multi-select"
 | `ci`                         | `/projects/internals`         |
 | `starters`                   | `/projects/starters`          |
 | `elements`                   | `/projects/elements`          |
-| `elements-react`             | `/projects/elements-react`    |
 | `pages`                      | `/projects/pages`             |
 | `playground`                 | `/projects/playground`        |
-| `testing`                    | `/projects/testing`           |
 | `themes`                     | `/projects/themes`            |
 | `monaco`                     | `/projects/monaco`            |
-| `labs`                       | `/projects/labs`              |
-| `labs-behaviors-alpine`      | `/labs/behaviors-alpine`      |
-| `labs-playwright-screencast` | `/labs/playwright-screencast` |
-| `labs-brand`                 | `/labs/brand`                 |
 | `labs-cli`                   | `/cli`                        |
 | `labs-code`                  | `/code`                       |
 | `forms`                      | `/projects/forms`             |

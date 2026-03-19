@@ -76,8 +76,6 @@
         "../themes/dist/**/*.css",
         "../themes/dist/**/*.examples.json",
         "../themes/dist/**/*.json",
-        "../labs/brand/dist/**/*.css",
-        "../labs/brand/dist/**/*.examples.json",
         "../code/dist/**/*.js",
         "../code/dist/**/*.examples.json",
         "../forms/dist/**/*.js",
@@ -103,10 +101,6 @@
         },
         {
           "script": "../themes:build",
-          "cascade": false
-        },
-        {
-          "script": "../labs/brand:build",
           "cascade": false
         },
         {
@@ -234,12 +228,11 @@
     "@internals/tools": "workspace:*",
     "@internals/patterns": "workspace:*",
     "@internals/vite": "workspace:*",
-    "@nvidia-elements/brand": "workspace:*",
+    "@nvidia-elements/brand": "latest",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/forms": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/markdown": "workspace:*",
-    "@nvidia-elements/playwright-screencast": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",

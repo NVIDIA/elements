@@ -58,24 +58,13 @@ export async function generateTestSummary(): Promise<ProjectsTestSummary> {
     created: new Date().toISOString(),
     projects: {
       '@nvidia-elements/core': await getTestReport('@nvidia-elements/core', '../../../../elements'),
-      '@nvidia-elements/core-react': await getTestReport('@nvidia-elements/core-react', '../../../../elements-react'),
       '@nvidia-elements/styles': await getTestReport('@nvidia-elements/styles', '../../../../styles'),
-      '@nvidia-elements/testing': await getTestReport('@nvidia-elements/testing', '../../../../testing'),
       '@nvidia-elements/themes': await getTestReport('@nvidia-elements/themes', '../../../../themes'),
-      '@nvidia-elements/behaviors-alpine': await getTestReport(
-        '@nvidia-elements/behaviors-alpine',
-        '../../../../labs/behaviors-alpine'
-      ),
-      '@nvidia-elements/brand': await getTestReport('@nvidia-elements/brand', '../../../../labs/brand'),
       '@nvidia-elements/code': await getTestReport('@nvidia-elements/code', '../../../../code'),
       '@nvidia-elements/cli': await getTestReport('@nvidia-elements/cli', '../../../../cli'),
       '@nvidia-elements/lint': await getTestReport('@nvidia-elements/lint', '../../../../lint'),
       '@nvidia-elements/forms': await getTestReport('@nvidia-elements/forms', '../../../../forms'),
       '@nvidia-elements/markdown': await getTestReport('@nvidia-elements/markdown', '../../../../markdown'),
-      '@nvidia-elements/playwright-screencast': await getTestReport(
-        '@nvidia-elements/playwright-screencast',
-        '../../../../labs/playwright-screencast'
-      ),
       '@nvidia-elements/monaco': await getTestReport('@nvidia-elements/monaco', '../../../../monaco'),
       '@internals/metadata': await getTestReport('@internals/metadata', '../../../../internals/metadata'),
       '@internals/patterns': await getTestReport('@internals/patterns', '../../../../internals/patterns'),

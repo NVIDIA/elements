@@ -8,7 +8,7 @@ To wire up a new project to semantic release, complete the following:
 
 ```yaml
 packages:
-  - 'projects/labs/my-library'
+  - 'projects/my-library'
 ```
 
 2. Create an initial tag on GitLab https://github.com/NVIDIA/elements/-/tags/new
@@ -24,14 +24,14 @@ packages:
   "command": "echo 'Releasing...'",
   "dependencies": [
     ...
-    "release:labs-my-library"
+    "release:my-library"
   ]
 },
 ```
 
 ```json
-"release:labs-my-library": {
-  "command": "cd projects/labs/my-library && pnpm exec semantic-release",
+"release:my-library": {
+  "command": "cd projects/my-library && pnpm exec semantic-release",
   "dependencies": [
     "release:elements"
   ]
@@ -51,8 +51,8 @@ artifacts:
     expire_in: 1 week
     paths:
       ...
-      - projects/labs/my-library/dist
-      - projects/labs/my-library/package.json
+      - projects/my-library/dist
+      - projects/my-library/package.json
 ```
 
 6. Add library code coverage reports to GitLab CI upload in `.github/workflows/ci.yml`
@@ -60,7 +60,7 @@ artifacts:
 ```yml
 reports:
     junit:
-      - projects/labs/my-library/coverage/unit/junit.xml
+      - projects/my-library/coverage/unit/junit.xml
 ```
 
 7. Add a new commit scope to `commitlint.config.js`

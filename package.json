@@ -28,7 +28,6 @@
     "@commitlint/config-conventional": "19.5.0",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
-    "@nvidia-elements/core-react": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@semantic-release/changelog": "6.0.3",
@@ -65,11 +64,7 @@
         "./projects/cli:ci",
         "./projects/create:ci",
         "./projects/elements:ci",
-        "./projects/elements-react:ci",
         "./projects/forms:ci",
-        "./projects/labs/behaviors-alpine:ci",
-        "./projects/labs/brand:ci",
-        "./projects/labs/playwright-screencast:ci",
         "./projects/lint:ci",
         "./projects/markdown:ci",
         "./projects/media:ci",
@@ -94,7 +89,6 @@
         "./projects/starters/typescript:ci",
         "./projects/starters/vue:ci",
         "./projects/styles:ci",
-        "./projects/testing:ci",
         "./projects/themes:ci",
         "./projects/internals/metadata:ci",
         "./projects/internals/patterns:ci",
@@ -111,7 +105,6 @@
         "./projects/themes:test:lighthouse",
         "./projects/elements:test:lighthouse",
         "./projects/forms:test:lighthouse",
-        "./projects/labs/brand:test:lighthouse",
         "./projects/markdown:test:lighthouse",
         "./projects/media:test:lighthouse",
         "./projects/monaco:test:lighthouse",
@@ -134,11 +127,7 @@
         "release:code",
         "release:create",
         "release:themes",
-        "release:testing",
         "release:elements",
-        "release:elements-react",
-        "release:labs-behaviors-alpine",
-        "release:labs-brand",
         "release:lint",
         "release:labs-forms",
         "release:markdown",
@@ -148,9 +137,6 @@
     },
     "release:themes": {
       "command": "cd projects/themes && HUSKY=0 pnpm exec semantic-release"
-    },
-    "release:testing": {
-      "command": "cd projects/testing && HUSKY=0 pnpm exec semantic-release"
     },
     "release:create": {
       "command": "cd projects/create && HUSKY=0 pnpm exec semantic-release",
@@ -163,24 +149,6 @@
       "dependencies": [
         "release:themes",
         "release:labs-forms"
-      ]
-    },
-    "release:elements-react": {
-      "command": "cd projects/elements-react && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:elements"
-      ]
-    },
-    "release:labs-behaviors-alpine": {
-      "command": "cd projects/labs/behaviors-alpine && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:elements"
-      ]
-    },
-    "release:labs-brand": {
-      "command": "cd projects/labs/brand && HUSKY=0 pnpm exec semantic-release",
-      "dependencies": [
-        "release:themes"
       ]
     },
     "release:cli": {
@@ -253,7 +221,6 @@
         "!**/node_modules/**",
         "!projects/elements/src/icon/{icons,server}.ts",
         "!projects/internals/metadata/static/**",
-        "!projects/elements-react/src/**/*",
         "!projects/monaco/src/themes/generated/**",
         "!projects/**/src/vendor/**/*",
         "!projects/**/.screencast/.auth/*",
@@ -277,16 +244,12 @@
         "./projects/internals/patterns:lint:fix",
         "./projects/internals/testing:lint:fix",
         "./projects/internals/tools:lint:fix",
-        "./projects/labs/behaviors-alpine:lint:fix",
-        "./projects/labs/brand:lint:fix",
         "./projects/cli:lint:fix",
-        "./projects/labs/playwright-screencast:lint:fix",
         "./projects/lint:lint:fix",
         "./projects/markdown:lint:fix",
         "./projects/media:lint:fix",
         "./projects/monaco:lint:fix",
-        "./projects/site:lint:fix",
-        "./projects/testing:lint:fix"
+        "./projects/site:lint:fix"
       ]
     },
     "lint:vale": {

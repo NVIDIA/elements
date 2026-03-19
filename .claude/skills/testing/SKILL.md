@@ -11,7 +11,7 @@ You MUST review @projects/site/src/docs/internal/guidelines/testing.md before ma
 
 - Creating new test files for components (`.test.ts`, `.test.axe.ts`, `.test.visual.ts`, `.test.ssr.ts`, `.test.lighthouse.ts`)
 - Debugging test failures or updating existing tests
-- Understanding testing utilities from `@nvidia-elements/testing`
+- Understanding testing utilities from `@internals/testing`
 - Setting up test configurations or HTML templates
 - Writing tests that follow project patterns
 
@@ -41,5 +41,4 @@ Read the specific guideline based on the test type you're working with:
 - [Lighthouse Testing](/projects/site/src/docs/internal/guidelines/testing-lighthouse.md)
 - [SSR Testing](/projects/site/src/docs/internal/guidelines/testing-ssr.md)
 - [Visual Testing](/projects/site/src/docs/internal/guidelines/testing-visual.md)
-- [Testing Package](/projects/testing/README.md)
 - [Vite Internals](/projects/internals/vite/README.md)
