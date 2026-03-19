@@ -1,3 +1,10 @@
+## [@nvidia-elements/cli-v0.11.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.8...@nvidia-elements/cli-v0.11.0) (2026-03-19)
+
+
+### Features
+
+* **labs-cli:** support cross platform binaries and upgrade command ([1a762a3](https://github.com/NVIDIA/elements/commit/1a762a33079d1e1f7e41b2a7a1b104dc3012422e))
+
 ## [@nvidia-elements/cli-v0.10.8](https://github.com/NVIDIA/elements/compare/@nvidia-elements/cli-v0.10.7...@nvidia-elements/cli-v0.10.8) (2026-03-10)
 
 
