@@ -26,9 +26,7 @@
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
     "@commitlint/config-conventional": "19.5.0",
-    "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
-    "@nvidia-elements/core-react": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@semantic-release/changelog": "6.0.3",

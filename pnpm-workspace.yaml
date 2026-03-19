@@ -1,91 +1,38 @@
 packages:
-  - projects/code
-  - projects/starters
-  - projects/starters/angular
-  - projects/starters/bundles
-  - projects/starters/eleventy
-  - projects/starters/eleventy-ssr
-  - projects/starters/go
-  - projects/starters/hugo
-  - projects/starters/importmaps
-  - projects/starters/lit-library
-  - projects/starters/mpa
-  - projects/starters/nextjs
-  - projects/starters/nuxt
-  - projects/starters/react
-  - projects/starters/react-18
-  - projects/starters/scoped-registry
-  - projects/starters/solidjs
-  - projects/starters/svelte
-  - projects/starters/typescript
-  - projects/starters/vue
-  - projects/site
-  - projects/labs/behaviors-alpine
-  - projects/labs/brand
-  - projects/cli
-  - projects/code
-  - projects/labs/playwright-screencast
-  - projects/lint
-  - projects/snippets
-  - projects/markdown
-  - projects/media
-  - projects/monaco
-  - projects/pages
-  - projects/create
   - projects/elements
-  - projects/elements-react
-  - projects/forms
   - projects/styles
-  - projects/testing
   - projects/themes
+  - projects/internals/vite
+  - projects/internals/testing
   - projects/internals/eslint
   - projects/internals/metadata
-  - projects/internals/patterns
-  - projects/internals/testing
-  - projects/internals/vite
-  - projects/internals/tools
+  - projects/forms
+  - projects/lint
 
 catalog:
-  '@11ty/eleventy': 3.1.2
-  '@11ty/eleventy-plugin-syntaxhighlight': 5.0.2
-  '@11ty/eleventy-plugin-vite': 7.0.0
   '@custom-elements-manifest/analyzer': 0.10.10
   '@eslint/css': 0.14.1
   '@eslint/js': 9.39.2
   '@eslint/json': 0.14.0
   '@html-eslint/eslint-plugin': 0.52.1
   '@html-eslint/parser': 0.52.0
-  '@lit-labs/eleventy-plugin-lit': 1.0.6
   '@lit-labs/scoped-registry-mixin': ^1.0.4
   '@lit-labs/ssr': ^4.0.0
-  '@lit-labs/ssr-client': ^1.1.8
-  '@lit-labs/ssr-react': ^0.3.4
   '@lit-labs/virtualizer': ^2.1.1
-  '@lit/react': ^1.0.8
-  '@lit/reactive-element': ^2.1.2
-  '@sentry/browser': 7.120.3
   '@types/node': 24.9.1
-  '@types/react': 19.2.2
-  '@types/react-dom': 19.2.2
   '@vitest/browser': 4.1.0
   '@vitest/browser-playwright': 4.1.0
   '@vitest/coverage-istanbul': 4.1.0
-  '@vitest/mocker': 4.1.0
   '@webcomponents/scoped-custom-element-registry': ^0.0.9
-  axe-core: 4.11.0
+  esbuild: 0.27.4
   eslint: 9.39.2
   glob: 13.0.6
   lighthouse: 13.0.3
   lit: ^3.3.2
-  lit-element: ^4.2.2
   lit-html: ^3.3.2
-  markdown-it: 14.1.0
-  markdown-it-link-attributes: 4.0.1
   playwright: 1.58.0
   postcss: 8.5.6
   publint: 0.3.15
-  react: 19.2.0
-  react-dom: 19.2.0
   rollup-plugin-html-literals: 2.0.1
   stylelint: 17.4.0
   stylelint-config-standard: 40.0.0
@@ -95,32 +42,7 @@ catalog:
   vite: 8.0.0
   vite-plugin-dts: 4.5.4
   vitest: 4.1.0
-  zod: 4.3.6
-
-ignorePatchFailures: false
-
-minimumReleaseAge: 1140
-
-minimumReleaseAgeExclude:
-  - playwright
-  - playwright-core
 
 onlyBuiltDependencies:
-  - '@bundled-es-modules/glob'
-  - '@parcel/watcher'
   - esbuild
-  - hugo-bin
-  - lmdb
-  - msgpackr-extract
   - rs-module-lexer
-  - sharp
-  - style-dictionary
-
-packageManagerStrictVersion: true
-
-patchedDependencies:
-  monaco-editor: patches/monaco-editor.patch
-
-useNodeVersion: 24.12.0
-
-verifyDepsBeforeRun: install
