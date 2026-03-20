@@ -194,7 +194,7 @@ export class Combobox extends Control implements ContainerElement {
       /* eslint-disable @nvidia-elements/lint/no-missing-control-label */
       return html`<nve-checkbox part="checkbox"><input aria-hidden="true" type="checkbox" .checked=${o.selected} .disabled=${o.disabled} .name=${o.selected ? 'check' : undefined} /></nve-checkbox>`;
     } else if (select) {
-      return html`<nve-icon part="icon" .name=${o.selected ? 'check' : undefined} size="sm"></nve-icon>`;
+      return html`<nve-icon part="icon" name="check" size="sm"></nve-icon>`;
     } else {
       return nothing;
     }
@@ -217,6 +217,20 @@ export class Combobox extends Control implements ContainerElement {
     await this.#setupLightDismiss();
     this.input.setAttribute('list', '');
     this.input.autocomplete = 'off';
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.#observers.push(
+      onChildListMutation(
+        this,
+        () => {
+          this.#syncOptionSelectedStates();
+          this.requestUpdate();
+        },
+        { attributes: true, subtree: true }
+      )
+    );
   }
 
   disconnectedCallback() {
@@ -279,9 +293,7 @@ export class Combobox extends Control implements ContainerElement {
       getElementUpdate(this.#select!, 'value', () => {
         this.#updateInputValue();
         this.requestUpdate();
-      }),
-      onChildListMutation(this.#select!, () => this.requestUpdate(), { attributes: true, subtree: true }),
-      onChildListMutation(this.#select!, () => this.#syncOptionSelectedStates(), { subtree: true })
+      })
     );
   }
 
@@ -402,6 +414,7 @@ export class Combobox extends Control implements ContainerElement {
 
   #closeListBox() {
     this.#dropdown!.hidePopover();
+    this._internals.states.delete('dirty');
     this.#validateSingleSelectValue();
   }
 
