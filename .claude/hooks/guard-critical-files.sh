@@ -14,7 +14,6 @@ REL_PATH="${FILE_PATH#"$CLAUDE_PROJECT_DIR"/}"
 
 # Protected slow-layer infrastructure files
 PROTECTED_FILES=(
-  ".github/workflows/ci.yml"
   "pnpm-workspace.yaml"
   "commitlint.config.js"
   "release.config.cjs"
@@ -22,7 +21,6 @@ PROTECTED_FILES=(
   "pnpm-lock.yaml"
   ".nvmrc"
   ".husky"
-  ".gitlab"
   "config"
 )
 
