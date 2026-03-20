@@ -106,45 +106,48 @@ function csvStringValidator(value: unknown): ValidatorResult {
   }
 }
 
+function hasUnclosedQuotes(line: string): boolean {
+  let inQuotes = false;
+  for (let j = 0; j < line.length; j++) {
+    if (line[j] === '"' && !(j > 0 && line[j - 1] === '\\')) {
+      inQuotes = !inQuotes;
+    }
+  }
+  return inQuotes;
+}
+
+function countColumns(line: string): number {
+  return (line.match(/,/g) || []).length + 1;
+}
+
+function validateLine(line: string, expectedColumns: number): true | string {
+  if (hasUnclosedQuotes(line)) {
+    return 'csv contains unclosed quotes';
+  }
+
+  if (countColumns(line) !== expectedColumns) {
+    return 'csv contains invalid column count';
+  }
+
+  return true;
+}
+
 function isValidCSV(csvString: string): true | string {
   if (!csvString || csvString.trim().length === 0) {
     return 'empty';
   }
 
   const lines = csvString.split('\n');
-  const firstLine = lines[0]!;
-  const columnCount = (firstLine.match(/,/g) || []).length + 1;
+  const columnCount = countColumns(lines[0]!);
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]!;
-
-    // Skip empty lines
+  for (const line of lines) {
     if (line.trim().length === 0) {
       continue;
     }
 
-    // Check for unclosed quotes
-    let inQuotes = false;
-    for (let j = 0; j < line.length; j++) {
-      const char = line[j]!;
-
-      if (char === '"') {
-        // Check for escaped quotes
-        if (j > 0 && line[j - 1] === '\\') {
-          continue;
-        }
-        inQuotes = !inQuotes;
-      }
-    }
-
-    if (inQuotes) {
-      return 'csv contains unclosed quotes';
-    }
-
-    // Check if the number of columns matches the first line
-    const currentColumnCount = (line.match(/,/g) || []).length + 1;
-    if (currentColumnCount !== columnCount) {
-      return 'csv contains invalid column count';
+    const result = validateLine(line, columnCount);
+    if (result !== true) {
+      return result;
     }
   }
 
