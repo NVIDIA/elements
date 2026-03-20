@@ -12,8 +12,7 @@ export default [
   // Disable no-missing-popover-trigger globally, only enable for examples
   {
     rules: {
-      '@nvidia-elements/lint/no-missing-popover-trigger': ['off'],
-      complexity: 'off' // todo
+      '@nvidia-elements/lint/no-missing-popover-trigger': ['off']
     }
   },
   {
