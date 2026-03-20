@@ -343,7 +343,28 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
   it('should show a check icon when the option is selected', async () => {
     expect(options[0].selected).toBe(true);
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
-    expect(items[0].querySelector('nve-icon[name="check"]')).toBeTruthy();
+    expect(getComputedStyle(items[0].querySelector('nve-icon[name="check"]') as HTMLElement).opacity).toBe('1');
+  });
+
+  it('should show a check icon for only the selected option', async () => {
+    expect(options[0].selected).toBe(true);
+    expect(options[1].selected).toBe(false);
+    input.dispatchEvent(new Event('pointerdown', { bubbles: true }));
+    await elementIsStable(element);
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(getComputedStyle(items[0].querySelector<HTMLElement>('nve-icon[name="check"]') as HTMLElement).opacity).toBe(
+      '1'
+    );
+    expect(getComputedStyle(items[1].querySelector<HTMLElement>('nve-icon[name="check"]') as HTMLElement).opacity).toBe(
+      '0'
+    );
+
+    emulateClick(items[1]);
+    await elementIsStable(element);
+    await elementIsStable(items[0]);
+    await elementIsStable(items[1]);
+    expect(options[0].selected).toBe(false);
+    expect(options[1].selected).toBe(true);
   });
 
   it('should show all options initially when input is active', async () => {
@@ -1155,6 +1176,44 @@ describe(`${Combobox.metadata.tag}: character matching`, () => {
     expect(matchesSpans.length).toBe(3);
   });
 
+  it('should delete dirty state when dropdown is closed to hide matches on next open', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+          <option value="Option 2"></option>
+          <option value="Option 3"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    input.value = 'Opt';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const matchesSpans = items[0].querySelectorAll('span[matches]');
+    expect(matchesSpans.length).toBe(3);
+
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    dropdown.dispatchEvent(new CustomEvent('close', { bubbles: true }));
+    await elementIsStable(element);
+
+    expect(element._internals.states.has('dirty')).toBe(false);
+
+    emulateClick(input);
+    await elementIsStable(element);
+    expect(element._internals.states.has('dirty')).toBe(false);
+  });
+
   it('should not apply matches attribute when options list is large (>50 options)', async () => {
     const optionsHtml = Array(51)
       .fill(0)
@@ -1783,9 +1842,9 @@ describe(`${Combobox.metadata.tag}: single select icon`, () => {
     await elementIsStable(element);
 
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
-    expect(items[0].querySelector('nve-icon[name="check"]')).toBeTruthy();
-    expect(items[1].querySelector('nve-icon[name="check"]')).toBeFalsy();
-    expect(items[2].querySelector('nve-icon[name="check"]')).toBeFalsy();
+    expect(getComputedStyle(items[0].querySelector('nve-icon[name="check"]') as HTMLElement).opacity).toBe('1');
+    expect(getComputedStyle(items[1].querySelector('nve-icon[name="check"]') as HTMLElement).opacity).toBe('0');
+    expect(getComputedStyle(items[2].querySelector('nve-icon[name="check"]') as HTMLElement).opacity).toBe('0');
   });
 
   it('should update check icon when selection changes', async () => {
@@ -1793,8 +1852,8 @@ describe(`${Combobox.metadata.tag}: single select icon`, () => {
     await elementIsStable(element);
 
     let items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
-    expect(items[0].querySelector('nve-icon[name="check"]')).toBeTruthy();
-    expect(items[1].querySelector('nve-icon[name="check"]')).toBeFalsy();
+    expect(getComputedStyle(items[0].querySelector('nve-icon[name="check"]') as HTMLElement).opacity).toBe('1');
+    expect(getComputedStyle(items[1].querySelector('nve-icon[name="check"]') as HTMLElement).opacity).toBe('0');
 
     emulateClick(items[1]);
     await elementIsStable(element);
@@ -1803,8 +1862,8 @@ describe(`${Combobox.metadata.tag}: single select icon`, () => {
     await elementIsStable(element);
 
     items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
-    expect(items[0].querySelector('nve-icon[name="check"]')).toBeFalsy();
-    expect(items[1].querySelector('nve-icon[name="check"]')).toBeTruthy();
+    expect(getComputedStyle(items[0].querySelector('nve-icon[name="check"]') as HTMLElement).opacity).toBe('0');
+    expect(getComputedStyle(items[1].querySelector('nve-icon[name="check"]') as HTMLElement).opacity).toBe('1');
   });
 });
 
@@ -1892,6 +1951,101 @@ describe(`${Combobox.metadata.tag}: select shows all options on focus`, () => {
     expect(options[0].hidden).toBe(false);
     expect(options[1].hidden).toBe(false);
     expect(options[2].hidden).toBe(false);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: dynamic options`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should render dynamically added options in open dropdown', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag).length).toBe(1);
+
+    const datalist = fixture.querySelector('datalist');
+    const option = document.createElement('option');
+    option.value = 'Option 2';
+    datalist.appendChild(option);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items.length).toBe(2);
+    expect(items[1].textContent.trim()).toBe('Option 2');
+  });
+
+  it('should render dynamically added options before dropdown opens', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    const datalist = fixture.querySelector('datalist');
+    const option = document.createElement('option');
+    option.value = 'Option 2';
+    datalist.appendChild(option);
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items.length).toBe(2);
+  });
+
+  it('should render dynamically added options in open dropdown (select)', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select>
+          <option value="Option 1"></option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag).length).toBe(1);
+
+    const select = fixture.querySelector('select');
+    const option = document.createElement('option');
+    option.value = 'Option 2';
+    select.appendChild(option);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items.length).toBe(2);
+    expect(items[1].textContent.trim()).toBe('Option 2');
   });
 });
 
