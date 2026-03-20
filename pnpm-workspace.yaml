@@ -13,7 +13,6 @@ packages:
   - projects/starters/nextjs
   - projects/starters/nuxt
   - projects/starters/react
-  - projects/starters/react-18
   - projects/starters/scoped-registry
   - projects/starters/solidjs
   - projects/starters/svelte
