@@ -118,23 +118,24 @@ export function getPublishedPackageNames(projects: Project[]) {
     .map(p => p.name);
 }
 
+const excludedTokenPatterns = [
+  'nve-config-',
+  'ref-color',
+  'ref-scale',
+  'ref-opacity',
+  'ref-outline',
+  'ref-font-family-',
+  'sys-color-scheme',
+  'sys-contrast',
+  'line-height',
+  'ratio',
+  '-xxx',
+  '-xx'
+];
+
 export function getSemanticTokens(format: 'markdown' | 'json', tokens: Token[]): string | Token[] | undefined {
   const filteredTokens: Token[] = tokens
-    .filter(
-      token =>
-        !token.name.includes('nve-config-') &&
-        !token.name.includes('ref-color') &&
-        !token.name.includes('ref-scale') &&
-        !token.name.includes('ref-opacity') &&
-        !token.name.includes('ref-outline') &&
-        !token.name.includes('ref-font-family-') &&
-        !token.name.includes('sys-color-scheme') &&
-        !token.name.includes('sys-contrast') &&
-        !token.name.includes('line-height') &&
-        !token.name.includes('ratio') &&
-        !token.name.includes('-xxx') &&
-        !token.name.includes('-xx')
-    )
+    .filter(token => !excludedTokenPatterns.some(pattern => token.name.includes(pattern)))
     .sort((a, b) => a.name.localeCompare(b.name));
 
   if (format === 'markdown') {

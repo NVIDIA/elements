@@ -40,49 +40,41 @@ export async function resolveTemplate({ template, path }: { template?: string; p
   throw new Error('Either "template" or "path" is required.');
 }
 
+const frameworkConfigs: Record<
+  string,
+  {
+    createFiles: (
+      content: string,
+      elements: Element[],
+      options: PlaygroundOptions
+    ) => Record<string, { content: string }>;
+    openFile: string;
+  }
+> = {
+  react: { createFiles: createReactFiles, openFile: 'index.tsx' },
+  preact: { createFiles: createPreactFiles, openFile: 'index.tsx' },
+  angular: { createFiles: createAngularFiles, openFile: 'index.ts' },
+  lit: { createFiles: createLitFiles, openFile: 'index.ts' },
+  vue: { createFiles: createVueFiles, openFile: 'index.ts' }
+};
+
 export function createPlaygroundURL(source: string, elements: Element[], opts: PlaygroundOptions = {}) {
   const options: PlaygroundOptions = { name: '', type: 'default', ...opts };
   options.name = options.name && options.name !== 'undefined' ? options.name : '';
   options.type = options.type || 'default';
   const result = options.trustedContent ? source : validateTemplate(source, elements);
   const formattedSource = formatTemplate(result);
-  let url = '';
 
-  if (options.type === 'react') {
-    url = createURL(serialize(createReactFiles(formattedSource, elements, options)), {
+  const config = frameworkConfigs[options.type!];
+  if (config) {
+    return createURL(serialize(config.createFiles(formattedSource, elements, options)), {
       ...options,
-      openFile: 'index.tsx',
-      name: `react ${options.name}`.trim()
+      openFile: config.openFile,
+      name: `${options.type} ${options.name}`.trim()
     });
-  } else if (options.type === 'preact') {
-    url = createURL(serialize(createPreactFiles(formattedSource, elements, options)), {
-      ...options,
-      openFile: 'index.tsx',
-      name: `preact ${options.name}`.trim()
-    });
-  } else if (options.type === 'angular') {
-    url = createURL(serialize(createAngularFiles(formattedSource, elements, options)), {
-      ...options,
-      openFile: 'index.ts',
-      name: `angular ${options.name}`.trim()
-    });
-  } else if (options.type === 'lit') {
-    url = createURL(serialize(createLitFiles(formattedSource, elements, options)), {
-      ...options,
-      openFile: 'index.ts',
-      name: `lit ${options.name}`.trim()
-    });
-  } else if (options.type === 'vue') {
-    url = createURL(serialize(createVueFiles(formattedSource, elements, options)), {
-      ...options,
-      openFile: 'index.ts',
-      name: `vue ${options.name}`.trim()
-    });
-  } else {
-    url = createURL(serialize(createDefaultFiles(formattedSource, elements, options)), options);
   }
 
-  return url;
+  return createURL(serialize(createDefaultFiles(formattedSource, elements, options)), options);
 }
 
 export function createDefaultFiles(content: string, elements: Element[], options: PlaygroundOptions) {
