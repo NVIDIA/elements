@@ -10,6 +10,7 @@ node_modules
 dist
 .lighthouse
 .visual/dist
+.visual/.tmp-*
 *.diff.png
 coverage
 vendor/
