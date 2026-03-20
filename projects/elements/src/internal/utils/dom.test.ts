@@ -698,6 +698,15 @@ describe('sameRenderRoot', () => {
     expect(sameRenderRoot(btnShadowRoot1, btnShadowRoot2)).toBe(true);
     expect(sameRenderRoot(btnShadowRoot1, btnRoot)).toBe(false);
   });
+
+  it('should return true for elements created but not attached to the DOM', () => {
+    const detached1 = document.createElement('div');
+    const detached2 = document.createElement('div');
+    const container = document.createElement('div');
+    container.appendChild(detached1);
+    container.appendChild(detached2);
+    expect(sameRenderRoot(detached1, detached2)).toBe(true);
+  });
 });
 
 describe('generateId', () => {
