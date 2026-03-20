@@ -20,9 +20,9 @@ case "$FILE_PATH" in
   *.test.*|*/starters/*|*/404/*|*/vendor/*|*/changelog/*|*/icons/*|*/generated/*|*/dist/*|*/LICENSE*|*/CHANGELOG*) exit 0 ;;
 esac
 
-# Skip Claude plan files
+# Skip Claude plan and memory files
 case "$FILE_PATH" in
-  */.claude/plans/*) exit 0 ;;
+  */.claude/plans/*|*/.claude/projects/*) exit 0 ;;
 esac
 
 # Run Vale on the specific file
