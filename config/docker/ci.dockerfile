@@ -2,7 +2,7 @@ ARG NODE_VERSION
 
 FROM node:${NODE_VERSION}
 
-# Use the browser path provided by .gitlab-ci.yaml to story the browsers
+# Use the browser path provided by ci configuration to store the browsers
 ENV PLAYWRIGHT_BROWSERS_PATH /var/cache/ms-playwright
 
 COPY package.json pnpm-lock.yaml ./

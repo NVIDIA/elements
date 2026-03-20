@@ -77,7 +77,7 @@ export const Hint = {
  */
 export const Icon = {
   render: () => html`
-    <nve-copy-button value="ssh://git@github.com:12051/NVIDIA/elements.git" aria-label="copy git branch" behavior-copy>
+    <nve-copy-button value="ssh://elements.git" aria-label="copy git branch" behavior-copy>
       <nve-icon name="branch" slot="icon"></nve-icon>
     </nve-copy-button>
   `
