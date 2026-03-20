@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.65.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.65.0...@nvidia-elements/core-v1.65.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* **elements:** scoped registry object fallback ([4bdf4a0](https://github.com/NVIDIA/elements/commit/4bdf4a07e4521d5a0fffe716d209c40001f77d89))
+
 ## [@nvidia-elements/core-v1.65.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.64.1...@nvidia-elements/core-v1.65.0) (2026-03-19)
 
 
