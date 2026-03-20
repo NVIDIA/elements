@@ -152,90 +152,98 @@ export function loadTools(obj: any): ManagedToolMethod<unknown>[] {
   return Array.from(methods).map(m => obj[`tool_${m as string}`]);
 }
 
-export function jsonSchemaToZod(schema: Schema): z.ZodTypeAny {
-  if (!schema) {
-    return z.any();
+function buildPropertiesSchema(schema: Schema): Record<string, z.ZodTypeAny> {
+  if (!schema.properties) {
+    return {};
   }
+  const requiredFields = schema.required || [];
+  return Object.fromEntries(
+    Object.entries(schema.properties).map(([propertyName, propertySchema]) => {
+      let zodSchema = jsonSchemaToZod(propertySchema);
 
-  const requiredFields = schema?.required || [];
+      if (!requiredFields.includes(propertyName)) {
+        zodSchema = zodSchema.optional();
+      }
 
-  const propertiesSchema = schema?.properties
-    ? Object.fromEntries(
-        Object.entries(schema.properties).map(([propertyName, propertySchema]) => {
-          let zodSchema = jsonSchemaToZod(propertySchema);
+      if (propertySchema.default !== undefined) {
+        zodSchema = zodSchema.default(propertySchema.default);
+      }
 
-          if (!requiredFields.includes(propertyName)) {
-            zodSchema = zodSchema.optional();
-          }
+      if (propertySchema.defaultTemplate !== undefined) {
+        zodSchema = zodSchema.default(propertySchema.defaultTemplate);
+      }
 
-          if (propertySchema.default !== undefined) {
-            zodSchema = zodSchema.default(propertySchema.default);
-          }
+      return [propertyName, zodSchema];
+    })
+  );
+}
 
-          if (propertySchema.defaultTemplate !== undefined) {
-            zodSchema = zodSchema.default(propertySchema.defaultTemplate);
-          }
-
-          return [propertyName, zodSchema];
-        })
-      )
-    : {};
-
-  const patternPropertiesSchema: Record<string, z.ZodTypeAny> = schema?.patternProperties
-    ? Object.fromEntries(
-        Object.entries(schema.patternProperties).map(([pattern, value]) => [pattern, jsonSchemaToZod(value)])
-      )
-    : {};
-
-  if (Object.keys(propertiesSchema).length > 0 && Object.keys(patternPropertiesSchema).length > 0) {
-    const baseSchema = z.object(propertiesSchema);
-    const patternValues = Object.values(patternPropertiesSchema);
-    const patternValueSchema = patternValues.length > 0 ? patternValues[0]! : z.any();
-    const patternSchema = z.record(z.string(), patternValueSchema);
-    return z.intersection(baseSchema, patternSchema);
+function buildPatternPropertiesSchema(schema: Schema): Record<string, z.ZodTypeAny> {
+  if (!schema.patternProperties) {
+    return {};
   }
+  return Object.fromEntries(
+    Object.entries(schema.patternProperties).map(([pattern, value]) => [pattern, jsonSchemaToZod(value)])
+  );
+}
 
-  if (Object.keys(propertiesSchema).length > 0) {
+function resolveObjectSchema(
+  propertiesSchema: Record<string, z.ZodTypeAny>,
+  patternPropertiesSchema: Record<string, z.ZodTypeAny>
+): z.ZodTypeAny | undefined {
+  const hasProps = Object.keys(propertiesSchema).length > 0;
+  const hasPatterns = Object.keys(patternPropertiesSchema).length > 0;
+  const patternValueSchema = hasPatterns ? (Object.values(patternPropertiesSchema)[0] ?? z.any()) : z.any();
+
+  if (hasProps && hasPatterns) {
+    return z.intersection(z.object(propertiesSchema), z.record(z.string(), patternValueSchema));
+  }
+  if (hasProps) {
     return z.object(propertiesSchema);
   }
-
-  if (Object.keys(patternPropertiesSchema).length > 0) {
-    const patternValues = Object.values(patternPropertiesSchema);
-    const patternValueSchema = patternValues.length > 0 ? patternValues[0]! : z.any();
+  if (hasPatterns) {
     return z.record(z.string(), patternValueSchema);
   }
+  return undefined;
+}
 
-  if (schema.type === 'array') {
-    let arraySchema = z.array(jsonSchemaToZod(schema.items!));
-
-    if (typeof schema.minItems === 'number' && schema.minItems > 0) {
-      arraySchema = arraySchema.min(schema.minItems);
-    }
-
-    if (typeof schema.maxItems === 'number' && schema.maxItems >= 0) {
-      arraySchema = arraySchema.max(schema.maxItems);
-    }
-
-    return arraySchema.describe(schema.description ?? '');
+function convertArraySchema(schema: Schema): z.ZodTypeAny {
+  let arraySchema = z.array(jsonSchemaToZod(schema.items!));
+  if (typeof schema.minItems === 'number' && schema.minItems > 0) {
+    arraySchema = arraySchema.min(schema.minItems);
   }
+  if (typeof schema.maxItems === 'number' && schema.maxItems >= 0) {
+    arraySchema = arraySchema.max(schema.maxItems);
+  }
+  return arraySchema.describe(schema.description ?? '');
+}
 
+function convertOneOfSchema(schema: Schema): z.ZodTypeAny {
+  const unionSchemas = schema.oneOf!.map(item => jsonSchemaToZod(item));
+  if (unionSchemas.length === 0) {
+    return z.any().describe(schema.description ?? '');
+  }
+  if (unionSchemas.length === 1) {
+    return unionSchemas[0]!.describe(schema.description ?? '');
+  }
+  return z.union(unionSchemas as [z.ZodTypeAny, z.ZodTypeAny, ...z.ZodTypeAny[]]).describe(schema.description ?? '');
+}
+
+function convertEnumSchema(schema: Schema): z.ZodTypeAny {
+  const enumSchema = z.enum(schema.enum as [string, ...string[]]).describe(schema.description ?? '');
+  if (typeof schema.default === 'string') {
+    return enumSchema.default(schema.default);
+  }
+  return enumSchema;
+}
+
+function convertLeafSchema(schema: Schema): z.ZodTypeAny {
   if (schema.oneOf && Array.isArray(schema.oneOf)) {
-    const unionSchemas = schema.oneOf.map(item => jsonSchemaToZod(item));
-    if (unionSchemas.length === 0) {
-      return z.any().describe(schema.description ?? '');
-    }
-    if (unionSchemas.length === 1) {
-      return unionSchemas[0]!.describe(schema.description ?? '');
-    }
-    return z.union(unionSchemas as [z.ZodTypeAny, z.ZodTypeAny, ...z.ZodTypeAny[]]).describe(schema.description ?? '');
+    return convertOneOfSchema(schema);
   }
 
   if (schema.type === 'string' && schema.enum) {
-    const enumSchema = z.enum(schema.enum as [string, ...string[]]).describe(schema.description ?? '');
-    if (typeof schema.default === 'string') {
-      return enumSchema.default(schema.default);
-    }
-    return enumSchema;
+    return convertEnumSchema(schema);
   }
 
   if (schema.type === 'object' && schema.additionalProperties === true) {
@@ -243,4 +251,21 @@ export function jsonSchemaToZod(schema: Schema): z.ZodTypeAny {
   }
 
   return (z[schema.type as keyof typeof z] as () => z.ZodTypeAny)().describe(schema.description ?? '');
+}
+
+export function jsonSchemaToZod(schema: Schema): z.ZodTypeAny {
+  if (!schema) {
+    return z.any();
+  }
+
+  const objectResult = resolveObjectSchema(buildPropertiesSchema(schema), buildPatternPropertiesSchema(schema));
+  if (objectResult) {
+    return objectResult;
+  }
+
+  if (schema.type === 'array') {
+    return convertArraySchema(schema);
+  }
+
+  return convertLeafSchema(schema);
 }

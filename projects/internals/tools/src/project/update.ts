@@ -20,36 +20,21 @@ export function updatePackageJson(
   const packageNames = Object.keys(versions);
   const updated: PackageUpdate[] = [];
 
+  function updateDeps(deps: Record<string, string> | undefined, packageName: string, targetVersion: string) {
+    if (!deps?.[packageName] || deps[packageName]?.includes('catalog')) {
+      return;
+    }
+    const from = deps[packageName]!;
+    if (from !== targetVersion) {
+      updated.push({ name: packageName, from, to: targetVersion });
+      deps[packageName] = targetVersion;
+    }
+  }
+
   packageNames.forEach(packageName => {
-    if (
-      packageJson.peerDependencies?.[packageName] &&
-      !packageJson.peerDependencies[packageName]?.includes('catalog')
-    ) {
-      const from = packageJson.peerDependencies[packageName]!;
-      const to = `^${versions[packageName]!}`;
-      if (from !== to) {
-        updated.push({ name: packageName, from, to });
-        packageJson.peerDependencies[packageName] = to;
-      }
-    }
-
-    if (packageJson.dependencies?.[packageName] && !packageJson.dependencies[packageName]?.includes('catalog')) {
-      const from = packageJson.dependencies[packageName]!;
-      const to = versions[packageName]!;
-      if (from !== to) {
-        updated.push({ name: packageName, from, to });
-        packageJson.dependencies[packageName] = to;
-      }
-    }
-
-    if (packageJson.devDependencies?.[packageName] && !packageJson.devDependencies[packageName]?.includes('catalog')) {
-      const from = packageJson.devDependencies[packageName]!;
-      const to = versions[packageName]!;
-      if (from !== to) {
-        updated.push({ name: packageName, from, to });
-        packageJson.devDependencies[packageName] = to;
-      }
-    }
+    updateDeps(packageJson.peerDependencies, packageName, `^${versions[packageName]!}`);
+    updateDeps(packageJson.dependencies, packageName, versions[packageName]!);
+    updateDeps(packageJson.devDependencies, packageName, versions[packageName]!);
   });
 
   return { packageJson, updated };
