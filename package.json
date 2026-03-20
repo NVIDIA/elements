@@ -21,7 +21,8 @@
     "release": "wireit",
     "commitlint": "commitlint --edit",
     "lint:vale": "wireit",
-    "lint:vale:sync": "config/vale/bin/vale sync"
+    "lint:vale:sync": "config/vale/bin/vale sync",
+    "agent:stop": "wireit"
   },
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
@@ -93,6 +94,33 @@
         "./projects/internals/patterns:ci",
         "./projects/internals/testing:ci",
         "./projects/internals/tools:ci"
+      ],
+      "files": []
+    },
+    "agent:stop": {
+      "script": "echo 'Running quick checks...'",
+      "dependencies": [
+        "format",
+        "lint:vale",
+        "./projects/code:build",
+        "./projects/code:test",
+        "./projects/cli:build",
+        "./projects/cli:test",
+        "./projects/create:build",
+        "./projects/elements:build",
+        "./projects/elements:test",
+        "./projects/forms:build",
+        "./projects/forms:test",
+        "./projects/lint:build",
+        "./projects/lint:test",
+        "./projects/markdown:build",
+        "./projects/markdown:test",
+        "./projects/media:build",
+        "./projects/media:test",
+        "./projects/monaco:build",
+        "./projects/monaco:test",
+        "./projects/styles:build",
+        "./projects/themes:build"
       ],
       "files": []
     },

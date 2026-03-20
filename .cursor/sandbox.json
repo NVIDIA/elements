@@ -1,0 +1,8 @@
+{
+  "disableTmpWrite": true,
+  "enableSharedBuildCache": true,
+  "networkPolicy": {
+    "default": "deny",
+    "allow": ["registry.npmjs.org", "*.githubusercontent.com"]
+  }
+}
