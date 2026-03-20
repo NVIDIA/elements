@@ -341,3 +341,8 @@ untilEvent
 runAxe
 args
 ci
+worktree
+worktrees
+Worktree
+Worktrees
+unmerged
