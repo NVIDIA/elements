@@ -827,6 +827,7 @@ describe('type-popover.controller - showPopover source fallback', () => {
     element.showPopover({ source: sourceButton });
     const event = await openEvent;
     expect(event.detail.trigger).toBe(sourceButton);
+    removeFixture(fixture);
   });
 
   it('should fallback to anchor property when showPopover is called without source', async () => {
