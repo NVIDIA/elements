@@ -190,28 +190,33 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
         super.attributeChangedCallback(name, oldValue, newValue);
       }
 
-      if (name === 'value' && newValue !== oldValue) {
-        this.value = parseValueSchema<T>(this.localName, newValue, this.#metadata.valueSchema);
-
-        if (this.#initialValue === undefined) {
-          this.#initialValue = this.value;
-        }
+      if (newValue === oldValue) {
+        return;
       }
 
-      if (name === 'readonly' && newValue !== oldValue) {
-        this.readOnly = newValue !== null;
-      }
+      this.#handleAttributeChange(name, newValue);
+    }
 
-      if (name === 'disabled' && newValue !== oldValue) {
-        this.disabled = newValue !== null;
-      }
-
-      if (name === 'required' && newValue !== oldValue) {
-        this.required = newValue !== null;
-      }
-
-      if (name === 'name' && newValue !== oldValue) {
-        this.name = newValue;
+    #handleAttributeChange(name: string, newValue: string) {
+      switch (name) {
+        case 'value':
+          this.value = parseValueSchema<T>(this.localName, newValue, this.#metadata.valueSchema);
+          if (this.#initialValue === undefined) {
+            this.#initialValue = this.value;
+          }
+          break;
+        case 'readonly':
+          this.readOnly = newValue !== null;
+          break;
+        case 'disabled':
+          this.disabled = newValue !== null;
+          break;
+        case 'required':
+          this.required = newValue !== null;
+          break;
+        case 'name':
+          this.name = newValue;
+          break;
       }
     }
 
