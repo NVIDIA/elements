@@ -33,7 +33,7 @@ describe('noMissingSlottedElements', () => {
     expect(noMissingSlottedElements.meta.schema).toBeDefined();
     expect(noMissingSlottedElements.meta.messages).toBeDefined();
     expect(noMissingSlottedElements.meta.messages['unexpected-missing-slotted-element']).toBe(
-      'Unexpected use of missing slotted element <{{element}}>'
+      'Unexpected use of missing slotted element {{selector}}'
     );
   });
 
@@ -53,7 +53,15 @@ describe('noMissingSlottedElements', () => {
         </nve-button>`,
         `<nve-input>\${}</nve-input>`,
         `<nve-input>{{ }}</nve-input>`,
-        `<nve-input>{% %}</nve-input>`
+        `<nve-input>{% %}</nve-input>`,
+        `<nve-combobox>
+          <input type="search" />
+          <datalist></datalist>
+        </nve-combobox>`,
+        `<nve-combobox>
+          <input type="search" />
+          <select><option value="a"></option></select>
+        </nve-combobox>`
       ],
       invalid: []
     });
@@ -65,23 +73,31 @@ describe('noMissingSlottedElements', () => {
       invalid: [
         {
           code: `<nve-input></nve-input>`,
-          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { element: 'input' } }]
+          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { selector: 'input' } }]
         },
         {
           code: `<nve-textarea></nve-textarea>`,
-          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { element: 'textarea' } }]
+          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { selector: 'textarea' } }]
         },
         {
           code: `<nve-checkbox></nve-checkbox>`,
-          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { element: 'input[type="checkbox"]' } }]
+          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { selector: 'input[type="checkbox"]' } }]
         },
         {
           code: `<nve-radio></nve-radio>`,
-          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { element: 'input[type="radio"]' } }]
+          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { selector: 'input[type="radio"]' } }]
         },
         {
           code: `<nve-range></nve-range>`,
-          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { element: 'input[type="range"]' } }]
+          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { selector: 'input[type="range"]' } }]
+        },
+        {
+          code: `<nve-combobox><input type="search" /></nve-combobox>`,
+          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { selector: 'datalist, select' } }]
+        },
+        {
+          code: `<nve-combobox><datalist></datalist></nve-combobox>`,
+          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { selector: 'input[type="search"]' } }]
         }
       ]
     });
@@ -94,7 +110,7 @@ describe('noMissingSlottedElements', () => {
         {
           options: [{ 'nve-card': { required: ['nve-card-content'] } }],
           code: `<nve-card></nve-card>`,
-          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { element: 'nve-card-content' } }]
+          errors: [{ messageId: 'unexpected-missing-slotted-element', data: { selector: 'nve-card-content' } }]
         }
       ]
     });
