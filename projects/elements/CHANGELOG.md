@@ -1,3 +1,11 @@
+## [@nvidia-elements/core-v1.65.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.65.2...@nvidia-elements/core-v1.65.3) (2026-03-20)
+
+
+### Bug Fixes
+
+* **elements:** fallback registry ([4275d09](https://github.com/NVIDIA/elements/commit/4275d09d71ed656c3867f89500ff61250d7bcd46))
+* **elements:** support for dynamically added options in combobox ([2254bb2](https://github.com/NVIDIA/elements/commit/2254bb2a0d8d25b18d52be48f09cf18dfd5679e1))
+
 ## [@nvidia-elements/core-v1.65.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.65.1...@nvidia-elements/core-v1.65.2) (2026-03-20)
 
 
