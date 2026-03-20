@@ -8,7 +8,7 @@ const REQUIRED_SLOTTED_ELEMENTS = {
     required: ['input']
   },
   'nve-combobox': {
-    required: ['input[type="search"]', 'option']
+    required: ['input[type="search"]', 'datalist, select']
   },
   'nve-date': {
     required: ['input[type="date"]']
@@ -77,7 +77,7 @@ const rule = {
     },
     schema: [{ type: 'object' }],
     messages: {
-      ['unexpected-missing-slotted-element']: 'Unexpected use of missing slotted element <{{element}}>'
+      ['unexpected-missing-slotted-element']: 'Unexpected use of missing slotted element {{selector}}'
     }
   },
   create(context: Rule.RuleContext) {
@@ -100,16 +100,17 @@ const rule = {
           return;
         }
 
-        // Check each required element
+        // Check each required selector
         for (const requiredSelector of required) {
-          const hasRequiredElement = hasMatchingChild(node, requiredSelector);
+          const selectors = requiredSelector.split(',').map((s: string) => s.trim());
+          const hasRequiredElement = selectors.some((sel: string) => hasMatchingChild(node, sel));
 
           if (!hasRequiredElement) {
             context.report({
               node: node,
               messageId: 'unexpected-missing-slotted-element',
               data: {
-                element: requiredSelector
+                selector: requiredSelector
               }
             });
           }

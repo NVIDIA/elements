@@ -72,7 +72,7 @@ export function parseSelector(selector: string): { tag: string; attrs?: Record<s
 }
 
 /**
- * Check if a node has a child that matches the given selector
+ * Check if a node has a child that matches the given selector.
  */
 export function hasMatchingChild(node: HtmlNode, selector: string): boolean {
   const { tag, attrs } = parseSelector(selector);
