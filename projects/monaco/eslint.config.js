@@ -11,8 +11,7 @@ export default [
     files: ['src/**/*.ts'],
     ignores: ['**/*.test.ts', '**/*.test.*.ts', '**/*.examples.ts'],
     rules: {
-      'local/require-test-completeness': ['error', { skipSuffixes: ['.test.ssr.ts'] }],
-      complexity: 'off' // todo
+      'local/require-test-completeness': ['error', { skipSuffixes: ['.test.ssr.ts'] }]
     }
   }
 ];
