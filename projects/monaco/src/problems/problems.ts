@@ -310,33 +310,44 @@ export class MonacoProblems extends LitElement {
       return;
     }
 
-    const { key, shiftKey } = e.browserEvent;
-
     const positionLineNumber = this.#editor!.getPosition()!.lineNumber;
 
     this.#selectLine(positionLineNumber);
-
-    if (key === 'ArrowUp' || key === 'ArrowDown') {
-      const problem = this.#getProblemByLine?.(positionLineNumber);
-      if (problem) {
-        this.#selectProblem(problem);
-      }
-    }
-    if (key === 'Enter' || key === ' ') {
-      const problem = this.#getProblemByLine?.(positionLineNumber);
-      if (problem) {
-        this.#activateProblem(problem);
-      } else {
-        this.#toggleFold();
-      }
-    }
-    if (shiftKey && key === 'F10') {
-      const problem = this.#getProblemByLine?.(positionLineNumber);
-      if (problem) {
-        this.#toggleContextMenu(problem);
-      }
-    }
+    this.#handleKey(e.browserEvent, positionLineNumber);
   };
+
+  #handleKey(event: KeyboardEvent, lineNumber: number) {
+    const { key, shiftKey } = event;
+
+    if (shiftKey && key === 'F10') {
+      return this.#handleKeyProblemAction(lineNumber, p => this.#toggleContextMenu(p));
+    }
+
+    switch (key) {
+      case 'ArrowUp':
+      case 'ArrowDown':
+        return this.#handleKeyProblemAction(lineNumber, p => this.#selectProblem(p));
+      case 'Enter':
+      case ' ':
+        return this.#handleKeyActivateOrFold(lineNumber);
+    }
+  }
+
+  #handleKeyProblemAction(lineNumber: number, action: (problem: Problem) => void) {
+    const problem = this.#getProblemByLine?.(lineNumber);
+    if (problem) {
+      action(problem);
+    }
+  }
+
+  #handleKeyActivateOrFold(lineNumber: number) {
+    const problem = this.#getProblemByLine?.(lineNumber);
+    if (problem) {
+      this.#activateProblem(problem);
+    } else {
+      this.#toggleFold();
+    }
+  }
 
   #onMouseDown = (e: monaco.editor.IEditorMouseEvent) => {
     if (this.#isEmptyModel()) {
@@ -355,7 +366,6 @@ export class MonacoProblems extends LitElement {
       return;
     }
 
-    const { detail: clickCount, leftButton, rightButton } = e.event;
     const { element, position } = e.target;
     const lineNumber = position?.lineNumber;
 
@@ -367,30 +377,38 @@ export class MonacoProblems extends LitElement {
 
     const problem = this.#getProblemByLine?.(lineNumber);
     if (problem) {
-      if (leftButton) {
-        if (this.#isProblemCodeDecoration(position!)) {
-          globalThis.open((problem.code as ProblemCode).target.toString(), '_blank');
-          return;
-        }
-        if (clickCount === 1) {
-          this.#selectProblem(problem);
-        }
-        if (clickCount === 2) {
-          this.#activateProblem(problem);
-        }
-      }
-      if (rightButton) {
-        this.#toggleContextMenu(problem);
-      }
+      this.#handleProblemClick(e.event, position!, problem);
     } else {
-      if (
-        !element.classList.contains('codicon-folding-expanded') &&
-        !element.classList.contains('codicon-folding-collapsed')
-      ) {
-        this.#toggleFold();
-      }
+      this.#handleNonProblemClick(element);
     }
   };
+
+  #handleProblemClick(event: monaco.IMouseEvent, position: monaco.Position, problem: Problem) {
+    if (event.leftButton) {
+      if (this.#isProblemCodeDecoration(position)) {
+        globalThis.open((problem.code as ProblemCode).target.toString(), '_blank');
+        return;
+      }
+      if (event.detail === 1) {
+        this.#selectProblem(problem);
+      }
+      if (event.detail === 2) {
+        this.#activateProblem(problem);
+      }
+    }
+    if (event.rightButton) {
+      this.#toggleContextMenu(problem);
+    }
+  }
+
+  #handleNonProblemClick(element: HTMLElement) {
+    if (
+      !element.classList.contains('codicon-folding-expanded') &&
+      !element.classList.contains('codicon-folding-collapsed')
+    ) {
+      this.#toggleFold();
+    }
+  }
 
   #onMouseMove = (e: monaco.editor.IEditorMouseEvent) => {
     const { element, position } = e.target;
