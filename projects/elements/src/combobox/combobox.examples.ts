@@ -542,6 +542,58 @@ export const Form = () => {
   `
 };
 
+/**
+ * @summary Fetches options asynchronously as the user types, cancelling stale requests with AbortController. Use for server-backed search where the full option set is too large to load up front.
+ * @tags pattern
+ */
+export const DynamicTypeaheadSearch = () => {
+  return html`
+<nve-combobox id="combobox">
+  <label>GPU Search</label>
+  <input type="search" placeholder="Type to search…" />
+  <datalist>
+    <option disabled selected></option>
+  </datalist>
+</nve-combobox>
+
+<script type="module">
+  const combobox = document.getElementById('combobox');
+  const input = combobox.querySelector('input');
+  const datalist = combobox.querySelector('datalist');
+
+  let controller = null;
+  input.addEventListener('input', async () => {
+    if (controller) controller.abort();
+    controller = new AbortController();
+
+    const query = input.value.trim();
+    if (!query) {
+      datalist.innerHTML = '';
+      return;
+    }
+    try {
+      const results = await mockFetch(query, controller.signal);
+      datalist.innerHTML = results.map((v) => '<option value="' + v + '">').join('');
+    } catch (err) {
+      if (err.name !== 'AbortError') datalist.innerHTML = '';
+    }
+  });
+
+  function mockFetch(query, signal) {
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        resolve(['A100 GPU', 'H100 GPU', 'H200 GPU', 'DGX A100', 'DGX H100', 'CUDA Toolkit'].filter((v) => v.toLowerCase().startsWith(query.toLowerCase())));
+      }, 500);
+      signal.addEventListener('abort', () => {
+        clearTimeout(timer);
+        reject(new DOMException('Aborted', 'AbortError'));
+      });
+    });
+  }
+</script>
+  `
+}
+
 /* eslint-disable @nvidia-elements/lint/no-missing-slotted-elements */
 /**
  * @summary Performance test with 1000 options to show filtering efficiency with large datasets.
@@ -589,6 +641,33 @@ export const PerformanceSelect = () => {
 }
 
 /**
+ * @summary Dynamic options with datalist and select variants of combobox.
+ * @tags test-case
+ */
+export const DynamicOptions = () => {
+  return html`
+<nve-combobox id="dynamic-options-combobox">
+  <input type="search" aria-label="performance test" />
+  <datalist>
+    <option>default</option>
+  </datalist>
+</nve-combobox>
+<script type="module">
+  let i = 0;
+  setInterval(function() {
+    if (i > 100) clearInterval(interval);
+    const datalist = document.querySelector("#dynamic-options-combobox datalist");
+    const option = document.createElement("option");
+    option.value = i + " item";
+    datalist.append(option);
+    i++;
+    console.log('append');
+  }, 1000);
+</script>
+  `
+}
+
+/**
  * @summary Interactive demo showing progressive filter chips with dynamic combobox creation for complex filtering interfaces.
  * @tags test-case
  */
@@ -622,9 +701,9 @@ const schema = {
 };
 
 
-class ComboboxDemo extends LitElement {  
+class ComboboxDemo extends LitElement {
   @state() private value = [{ name: '', value: '' }];
-  
+
   // todo
   /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
   render() {
@@ -653,7 +732,7 @@ class ProgressiveFilterDemo extends LitElement {
     }
   `)];
 
-  @property({ type: Object }) schema = { };
+  @property({ type: Object }) schema = {};
 
   @property({ type: Array }) value: { name: string, value: string }[] = [{ name: '', value: '' }];
 
@@ -671,11 +750,11 @@ class ProgressiveFilterDemo extends LitElement {
           <datalist>${this.#unusedFilters.map(([key]) => html`<option .value=${key}>${key}</option>`)}</datalist>
         </nve-combobox>
         ${choose(this.schema[filter.name]?.type, [
-          ['text', () => html`<nve-combobox><input type="text" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} placeholder="value" aria-label="filter value" /></nve-combobox>`],
-          ['number', () => html`<nve-combobox><input type="number" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} aria-label="filter value" /></nve-combobox>`],
-          ['date', () => html`<nve-date><input type="date" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} aria-label="filter value" /></nve-date>`],
-          ['select', () => html`<nve-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value} aria-label="filter value">${this.schema[filter.name]?.options?.map(v => html`<option value=${v}>${v}</option>`)}</select></nve-select>`]
-        ], () => html`<nve-combobox><input type="text" placeholder="value" disabled aria-label="filter value" /></nve-combobox>`)}
+      ['text', () => html`<nve-combobox><input type="text" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} placeholder="value" aria-label="filter value" /></nve-combobox>`],
+      ['number', () => html`<nve-combobox><input type="number" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} aria-label="filter value" /></nve-combobox>`],
+      ['date', () => html`<nve-date><input type="date" @change=${e => this.#updateFilter(e.target.value, filter)} .value=${filter.value} aria-label="filter value" /></nve-date>`],
+      ['select', () => html`<nve-select><select @change=${e => this.#updateFilter(e.target.value, filter)} value=${filter.value} aria-label="filter value">${this.schema[filter.name]?.options?.map(v => html`<option value=${v}>${v}</option>`)}</select></nve-select>`]
+    ], () => html`<nve-combobox><input type="text" placeholder="value" disabled aria-label="filter value" /></nve-combobox>`)}
       </nve-progressive-filter-chip>`)}
       <nve-button container="flat" @click=${this.#addFilter} .disabled=${this.#unusedFilters.length === 0 || !!this.value.find(v => v.name === '')} style="align: center; margin-top: 12px;">
         <nve-icon name="add"></nve-icon> Add Filter
