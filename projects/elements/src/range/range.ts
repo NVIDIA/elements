@@ -62,25 +62,24 @@ export class Range extends Control {
 
   protected get suffixContent() {
     const datalist = !isServer ? this.querySelector<HTMLDataListElement>('datalist') : null;
-    if (datalist) {
-      const options = Array.from(datalist?.options ?? []);
-      const min = this.input?.min ? parseFloat(this.input?.min) : 0;
-      const max = this.input?.max ? parseFloat(this.input?.max) : 100;
+    return datalist ? this.#renderDatalistTicks(datalist) : nothing;
+  }
 
-      return html`<div class="datalist-labels">
-        ${options.map(option => {
-          const value = parseFloat(option.value);
-          const position = ((value - min) / (max - min)) * 100;
-          const style =
-            this.orientation === 'vertical'
-              ? `bottom: ${position}%; transform: translateY(${position}%)`
-              : `left: ${position}%; transform: translateX(-${position}%)`;
-          const template = html`<span class="datalist-tick" style=${style}>${option.textContent || value}</span>`;
-          return template;
-        })}
-      </div>`;
-    } else {
-      return nothing;
-    }
+  #renderDatalistTicks(datalist: HTMLDataListElement) {
+    const options = Array.from(datalist.options);
+    const min = this.input?.min ? parseFloat(this.input.min) : 0;
+    const max = this.input?.max ? parseFloat(this.input.max) : 100;
+
+    return html`<div class="datalist-labels">
+      ${options.map(option => {
+        const value = parseFloat(option.value);
+        const position = ((value - min) / (max - min)) * 100;
+        const style =
+          this.orientation === 'vertical'
+            ? `bottom: ${position}%; transform: translateY(${position}%)`
+            : `left: ${position}%; transform: translateX(-${position}%)`;
+        return html`<span class="datalist-tick" style=${style}>${option.textContent || value}</span>`;
+      })}
+    </div>`;
   }
 }

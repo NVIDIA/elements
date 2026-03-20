@@ -120,35 +120,64 @@ interface KeyListConfig {
   dir: string | null | undefined;
 }
 
-export function getNextKeyListItem(item: HTMLElement, items: HTMLElement[], config: KeyListConfig) {
-  const { code, layout, loop, dir } = config;
-  let next = items.indexOf(item);
-  const previous = next;
+function resolveArrowDirection(config: KeyListConfig): 'backward' | 'forward' | null {
+  const { code, layout, dir } = config;
   const start = dir === 'rtl' ? KeynavCode.ArrowRight : KeynavCode.ArrowLeft;
   const end = dir === 'rtl' ? KeynavCode.ArrowLeft : KeynavCode.ArrowRight;
-  const itemCount = items.length - 1;
 
-  if (layout !== 'horizontal' && code === KeynavCode.ArrowUp && next !== 0) {
-    next = next - 1;
-  } else if (layout !== 'horizontal' && code === KeynavCode.ArrowUp && next === 0 && loop) {
-    next = itemCount;
-  } else if (layout !== 'horizontal' && code === KeynavCode.ArrowDown && next < itemCount) {
-    next = next + 1;
-  } else if (layout !== 'horizontal' && code === KeynavCode.ArrowDown && next === itemCount && loop) {
-    next = 0;
-  } else if (layout !== 'vertical' && code === start && next !== 0) {
-    next = next - 1;
-  } else if (layout !== 'vertical' && code === end && next < itemCount) {
-    next = next + 1;
-  } else if (code === KeynavCode.End) {
-    next = itemCount;
-  } else if (code === KeynavCode.Home) {
-    next = 0;
-  } else if (code === KeynavCode.PageUp) {
-    next = next - 4 > 0 ? next - 4 : 0;
-  } else if (code === KeynavCode.PageDown) {
-    next = next + 4 < itemCount ? next + 4 : itemCount;
+  if (layout !== 'horizontal') {
+    if (code === KeynavCode.ArrowUp) return 'backward';
+    if (code === KeynavCode.ArrowDown) return 'forward';
   }
 
-  return { next: next, previous };
+  if (layout !== 'vertical') {
+    if (code === start) return 'backward';
+    if (code === end) return 'forward';
+  }
+
+  return null;
+}
+
+function resolveSpecialKey(code: KeynavCode): 'home' | 'end' | 'pageup' | 'pagedown' | null {
+  if (code === KeynavCode.End) return 'end';
+  if (code === KeynavCode.Home) return 'home';
+  if (code === KeynavCode.PageUp) return 'pageup';
+  if (code === KeynavCode.PageDown) return 'pagedown';
+  return null;
+}
+
+function navigateWithLoop(current: number, limit: number, step: number, loop: boolean | undefined) {
+  const next = current + step;
+  if (next >= 0 && next <= limit) return next;
+  return loop ? (step < 0 ? limit : 0) : current;
+}
+
+export function getNextKeyListItem(item: HTMLElement, items: HTMLElement[], config: KeyListConfig) {
+  let next = items.indexOf(item);
+  const previous = next;
+  const itemCount = items.length - 1;
+  const direction = resolveArrowDirection(config);
+
+  switch (direction ?? resolveSpecialKey(config.code)) {
+    case 'backward':
+      next = navigateWithLoop(next, itemCount, -1, config.loop);
+      break;
+    case 'forward':
+      next = navigateWithLoop(next, itemCount, 1, config.loop);
+      break;
+    case 'end':
+      next = itemCount;
+      break;
+    case 'home':
+      next = 0;
+      break;
+    case 'pageup':
+      next = Math.max(0, next - 4);
+      break;
+    case 'pagedown':
+      next = Math.min(itemCount, next + 4);
+      break;
+  }
+
+  return { next, previous };
 }
