@@ -1,3 +1,10 @@
+## [@nvidia-elements/lint-v0.14.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.14.0...@nvidia-elements/lint-v0.14.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* **labs-lint:** correct combobox [secure] positives in validator and lint ([71c441c](https://github.com/NVIDIA/elements/commit/71c441c2d20a8ac06e95e13ed313236257614540))
+
 ## [@nvidia-elements/lint-v0.14.0](https://github.com/NVIDIA/elements/compare/@nvidia-elements/lint-v0.13.0...@nvidia-elements/lint-v0.14.0) (2026-03-10)
 
 
