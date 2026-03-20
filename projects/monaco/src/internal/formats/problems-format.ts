@@ -161,23 +161,7 @@ function toProblemLine(monaco: Monaco, lineNumber: number, problem: Problem): De
   text += ' ';
 
   // source + code
-  if (source.length > 0 || code.length > 0) {
-    const sourceStart = text.length + 1;
-    text += source;
-    if (code.length > 0) {
-      const codeStart = text.length + 1;
-      text += `(${code})`;
-      if (target) {
-        decorations.push(
-          toRangeDecoration(monaco, lineNumber, codeStart + 1, codeStart + code.length + 1, 'problem-source-target')
-        );
-      }
-    }
-    decorations.push(toRangeDecoration(monaco, lineNumber, sourceStart, text.length + 1, 'problem-source-code'));
-
-    // separator
-    text += ' ';
-  }
+  text = appendSourceCode(monaco, lineNumber, decorations, text, source, code, target);
 
   // position
   const positionStart = text.length + 1;
@@ -185,6 +169,36 @@ function toProblemLine(monaco: Monaco, lineNumber: number, problem: Problem): De
   decorations.push(toRangeDecoration(monaco, lineNumber, positionStart, text.length + 1, 'problem-position'));
 
   return { text, decorations };
+}
+
+function appendSourceCode(
+  monaco: Monaco,
+  lineNumber: number,
+  decorations: monaco.editor.IModelDeltaDecoration[],
+  text: string,
+  source: string,
+  code: string,
+  target: string | { toString(): string } | undefined
+): string {
+  if (source.length === 0 && code.length === 0) {
+    return text;
+  }
+
+  const sourceStart = text.length + 1;
+  text += source;
+  if (code.length > 0) {
+    const codeStart = text.length + 1;
+    text += `(${code})`;
+    if (target) {
+      decorations.push(
+        toRangeDecoration(monaco, lineNumber, codeStart + 1, codeStart + code.length + 1, 'problem-source-target')
+      );
+    }
+  }
+  decorations.push(toRangeDecoration(monaco, lineNumber, sourceStart, text.length + 1, 'problem-source-code'));
+  text += ' ';
+
+  return text;
 }
 
 export function toSelectedLineDecorations(
