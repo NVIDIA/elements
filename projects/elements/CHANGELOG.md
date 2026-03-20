@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.65.2](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.65.1...@nvidia-elements/core-v1.65.2) (2026-03-20)
+
+
+### Bug Fixes
+
+* **elements:** grid column max-content ([122a6f5](https://github.com/NVIDIA/elements/commit/122a6f5ddb2203c6f9c9b1527563e9019ca772c3))
+
 ## [@nvidia-elements/core-v1.65.1](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.65.0...@nvidia-elements/core-v1.65.1) (2026-03-20)
 
 
