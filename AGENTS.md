@@ -264,4 +264,4 @@ When adding new technical terms, component names, or abbreviations that Vale fla
 - `/projects/site/src/docs/api-design/registration.md` - When naming components or working with tag registration; covers tag prefixes and naming conventions
 - `projects/*/DEVELOPMENT.md` - When working within a specific project; lists all available pnpm scripts for that project
 - `/projects/internals/BUILD.md` - When modifying build configuration, Wireit scripts, or CI/CD pipeline
-- `/projects/internals/RELEASE.md` - When creating new projects or modifying release process; covers semantic release setup, GitLab CI artifacts, commit scopes, initial tags
+- `/projects/internals/RELEASE.md` - When creating new projects or modifying release process; covers semantic release setup, CI artifacts, commit scopes, initial tags

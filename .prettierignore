@@ -35,7 +35,6 @@ projects/starters/importmaps/src/index.html
 projects/starters/mpa/src/**/*.html
 projects/starters/nextjs/src/pages/index.tsx
 projects/starters/react/src/App.tsx
-projects/starters/react-18/src/App.tsx
 projects/starters/solidjs/src/App.tsx
 projects/starters/typescript/src/index.html
 projects/starters/vue/src/App.vue

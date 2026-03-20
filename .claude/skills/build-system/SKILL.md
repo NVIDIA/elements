@@ -21,7 +21,7 @@ You MUST review the build system documentation before modifying build configurat
 ### Common Commands
 
 ```shell
-# Full CI locally (lint, build, test):same as GitLab pipeline
+# Full CI locally (lint, build, test):same as CI pipeline
 pnpm run ci
 
 # Clean everything (node_modules, dist, .wireit caches)

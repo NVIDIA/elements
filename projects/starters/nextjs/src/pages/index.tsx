@@ -22,21 +22,9 @@ export default function Home() {
       <nve-page-panel slot="left" size="sm">
         <nve-page-panel-content>
           <nve-menu>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/angular/">Angular</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/bundles/">Bundles</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/eleventy/">Eleventy</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/hugo/">Hugo</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/importmaps/">Import Maps</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/mpa/">MPA</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/react/">React</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/solidjs/">SolidJS</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/svelte/">Svelte</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/typescript/">TypeScript</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/starters/vue/">Vue</a></nve-menu-item>
-            <nve-divider></nve-divider>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/docs/integrations/go/" target="_blank">Go</a></nve-menu-item>
-            <nve-menu-item current="page"><a href="https://NVIDIA.github.io/elements/docs/integrations/nextjs/" target="_blank">NextJS</a></nve-menu-item>
-            <nve-menu-item><a href="https://NVIDIA.github.io/elements/docs/integrations/nuxt/">Nuxt</a></nve-menu-item>
+            <nve-menu-item><a target="_blank" href="https://NVIDIA.github.io/elements/docs/integrations/nextjs/">Documentation</a></nve-menu-item>
+            <nve-menu-item><a target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nextjs">Source</a></nve-menu-item>
+            <nve-menu-item><a download href="https://NVIDIA.github.io/elements/starters/download/nextjs.zip">Download</a></nve-menu-item>
           </nve-menu>
         </nve-page-panel-content>
       </nve-page-panel>
