@@ -10,7 +10,7 @@
   },
   "scripts": {
     "ci": "wireit",
-    "ci:all": "PAGES_BASE_URL=/elements/ pnpm run ci && PAGES_BASE_URL=/elements/ node ./projects/internals/gitlab/cache-validate.js ci",
+    "ci:all": "PAGES_BASE_URL=/elements/ pnpm run ci && PAGES_BASE_URL=/elements/ node ./projects/internals/ci/cache-validate.js ci",
     "ci:reset": "pnpm run clean && pnpm i --frozen-lockfile --prefer-offline",
     "lighthouse": "wireit",
     "clean": "git clean -dfX",
@@ -83,7 +83,6 @@
         "./projects/starters/nextjs:ci",
         "./projects/starters/nuxt:ci",
         "./projects/starters/react:ci",
-        "./projects/starters/react-18:ci",
         "./projects/starters/solidjs:ci",
         "./projects/starters/svelte:ci",
         "./projects/starters/typescript:ci",
@@ -98,7 +97,7 @@
       "files": []
     },
     "lighthouse": {
-      "command": "node ./projects/internals/gitlab/metrics.lighthouse.js",
+      "command": "node ./projects/internals/ci/metrics.lighthouse.js",
       "dependencies": [
         "./projects/code:test:lighthouse",
         "./projects/styles:test:lighthouse",
@@ -117,7 +116,7 @@
         "NODE_ENV": "production"
       },
       "files": [
-        "./projects/internals/gitlab/metrics.lighthouse.js"
+        "./projects/internals/ci/metrics.lighthouse.js"
       ]
     },
     "release": {
