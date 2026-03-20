@@ -87,7 +87,18 @@ const svgAttrs = [
   'patternUnits',
   'points'
 ];
-const formElements = ['label', 'form', 'optgroup', 'fieldset', 'input', 'textarea', 'button', 'select', 'option'];
+const formElements = [
+  'label',
+  'form',
+  'optgroup',
+  'fieldset',
+  'input',
+  'textarea',
+  'button',
+  'select',
+  'option',
+  'datalist'
+];
 const nativeElementAttrs = [
   'nve-text',
   'nve-layout',
