@@ -345,7 +345,8 @@ export function sameRenderRoot(element1: HTMLElement, element2: HTMLElement) {
   const root2 = element2.getRootNode();
   const sameShadowRoot = root1 instanceof ShadowRoot && root2 instanceof ShadowRoot && root1 === root2;
   const sameDocumentRoot = root1 === globalThis.document && root2 === globalThis.document;
-  return sameShadowRoot || sameDocumentRoot;
+  const sameUnattachedRoot = root1 === root2;
+  return sameShadowRoot || sameDocumentRoot || sameUnattachedRoot;
 }
 
 export function getAnchorNames(element: HTMLElement): string[] {
