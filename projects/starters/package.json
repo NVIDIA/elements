@@ -29,7 +29,6 @@
         "./nextjs/dist/**/*.js",
         "./nuxt/dist/**/*.js",
         "./react/dist/**/*.js",
-        "./react-18/dist/**/*.js",
         "./solidjs/dist/**/*.js",
         "./svelte/dist/**/*.js",
         "./typescript/dist/**/*.js",
@@ -86,10 +85,6 @@
         },
         {
           "script": "./react:build",
-          "cascade": false
-        },
-        {
-          "script": "./react-18:build",
           "cascade": false
         },
         {
