@@ -147,6 +147,38 @@ export class KeyNavigationGridController<T extends ReactiveElement & KeynavGridE
   }
 }
 
+function getGridDelta(code: KeynavCode | string, dir: string): { dx: number; dy: number } | null {
+  const start = dir === 'rtl' ? KeynavCode.ArrowRight : KeynavCode.ArrowLeft;
+  const end = dir === 'rtl' ? KeynavCode.ArrowLeft : KeynavCode.ArrowRight;
+
+  if (code === KeynavCode.ArrowUp) return { dx: 0, dy: -1 };
+  if (code === KeynavCode.ArrowDown) return { dx: 0, dy: 1 };
+  if (code === start) return { dx: -1, dy: 0 };
+  if (code === end) return { dx: 1, dy: 0 };
+  if (code === KeynavCode.PageUp) return { dx: 0, dy: -4 };
+  if (code === KeynavCode.PageDown) return { dx: 0, dy: 4 };
+  return null;
+}
+
+function applyGridHomeEnd(
+  code: KeynavCode | string,
+  x: number,
+  y: number,
+  columnCount: number,
+  rowCount: number,
+  ctrlKey: boolean
+) {
+  if (code === KeynavCode.End) {
+    return { x: columnCount, y: ctrlKey ? rowCount : y };
+  }
+
+  if (code === KeynavCode.Home) {
+    return { x: 0, y: ctrlKey ? 0 : y };
+  }
+
+  return { x, y };
+}
+
 export function getNextKeyGridItem(
   cells: HTMLElement[],
   rows: HTMLElement[],
@@ -161,33 +193,12 @@ export function getNextKeyGridItem(
   let x = currentRowCells.indexOf(currentCell);
   let y = rows.indexOf(currentRow);
 
-  const start = config.dir === 'rtl' ? KeynavCode.ArrowRight : KeynavCode.ArrowLeft;
-  const end = config.dir === 'rtl' ? KeynavCode.ArrowLeft : KeynavCode.ArrowRight;
-
-  if (config.code === KeynavCode.ArrowUp && y !== 0) {
-    y = y - 1;
-  } else if (config.code === KeynavCode.ArrowDown && y < rowCount) {
-    y = y + 1;
-  } else if (config.code === start && x !== 0) {
-    x = x - 1;
-  } else if (config.code === end && x < columnCount) {
-    x = x + 1;
-  } else if (config.code === KeynavCode.End) {
-    x = columnCount;
-
-    if (config.ctrlKey) {
-      y = rowCount;
-    }
-  } else if (config.code === KeynavCode.Home) {
-    x = 0;
-
-    if (config.ctrlKey) {
-      y = 0;
-    }
-  } else if (config.code === KeynavCode.PageUp) {
-    y = y - 4 > 0 ? y - 4 : 0;
-  } else if (config.code === KeynavCode.PageDown) {
-    y = y + 4 < rowCount ? y + 4 : rowCount;
+  const delta = getGridDelta(config.code, config.dir);
+  if (delta) {
+    x = Math.max(0, Math.min(columnCount, x + delta.dx));
+    y = Math.max(0, Math.min(rowCount, y + delta.dy));
+  } else {
+    ({ x, y } = applyGridHomeEnd(config.code, x, y, columnCount, rowCount, config.ctrlKey));
   }
 
   return { x, y };
