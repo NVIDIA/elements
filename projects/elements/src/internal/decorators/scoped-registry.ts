@@ -6,6 +6,7 @@ import { defineElement, supportsScopedRegistry } from '../utils/dom.js';
 export function scopedRegistry(): ClassDecorator {
   return (target: LegacyDecoratorTarget) => {
     const element = target as unknown as ElementDefinition;
+    GlobalStateService.state.scopedRegistry ??= {};
     const customElementRegistry = GlobalStateService.state.scopedRegistry[element.metadata.version]!;
     if (supportsScopedRegistry) {
       Object.defineProperty(element, 'shadowRootOptions', {
