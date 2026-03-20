@@ -1,28 +1,30 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { GlobalStateService } from '../services/global.service.js';
 import type { ElementDefinition } from '../types/index.js';
-
-const mockDefineElement = vi.hoisted(() => vi.fn());
-
-vi.mock('../utils/dom.js', async importOriginal => {
-  const actual = await importOriginal<Record<string, unknown>>();
-  return { ...actual, supportsScopedRegistry: true, defineElement: mockDefineElement };
-});
-
+import { supportsScopedRegistry } from '../utils/dom.js';
 import { scopedRegistry } from './scoped-registry.js';
 
-function createMockElement(overrides?: Partial<ElementDefinition>): ElementDefinition {
-  return {
-    metadata: { version: '0.0.0', tag: 'nve-test-scoped' },
-    ...overrides
-  } as ElementDefinition;
+const uid = Math.random().toString(36).slice(2, 8);
+let counter = 0;
+
+function createMockElement(overrides?: Pick<Partial<ElementDefinition>, 'shadowRootOptions'>): ElementDefinition {
+  const tag = `nve-test-scoped-${uid}-${counter++}`;
+  const el = class extends HTMLElement {
+    static metadata = { version: '0.0.0', tag };
+  };
+  if (overrides?.shadowRootOptions) {
+    Object.defineProperty(el, 'shadowRootOptions', {
+      configurable: true,
+      value: overrides.shadowRootOptions
+    });
+  }
+  return el as unknown as ElementDefinition;
 }
 
 describe('scopedRegistry', () => {
   let savedScopedRegistry: { [key: string]: CustomElementRegistry };
 
   beforeEach(() => {
-    mockDefineElement.mockClear();
     savedScopedRegistry = GlobalStateService.state.scopedRegistry;
   });
 
@@ -47,16 +49,16 @@ describe('scopedRegistry', () => {
     expect(GlobalStateService.state.scopedRegistry).toBe(savedScopedRegistry);
   });
 
-  it('should call defineElement with element and its version registry', () => {
+  it('should register element in its version registry', () => {
     const element = createMockElement();
     const registry = GlobalStateService.state.scopedRegistry['0.0.0'];
 
     scopedRegistry()(element as unknown as Function);
 
-    expect(mockDefineElement).toHaveBeenCalledWith(element, registry);
+    expect(registry.get(element.metadata.tag)).toBe(element);
   });
 
-  it('should set shadowRootOptions with customElementRegistry', () => {
+  it.skipIf(!supportsScopedRegistry)('should set shadowRootOptions with customElementRegistry', () => {
     const element = createMockElement();
 
     scopedRegistry()(element as unknown as Function);
@@ -65,7 +67,7 @@ describe('scopedRegistry', () => {
     expect(element.shadowRootOptions!.customElementRegistry).toBe(GlobalStateService.state.scopedRegistry['0.0.0']);
   });
 
-  it('should default to mode open when no existing shadowRootOptions', () => {
+  it.skipIf(!supportsScopedRegistry)('should default to mode open when no existing shadowRootOptions', () => {
     const element = createMockElement();
 
     scopedRegistry()(element as unknown as Function);
@@ -73,7 +75,7 @@ describe('scopedRegistry', () => {
     expect((element.shadowRootOptions as ShadowRootInit).mode).toBe('open');
   });
 
-  it('should preserve existing shadowRootOptions', () => {
+  it.skipIf(!supportsScopedRegistry)('should preserve existing shadowRootOptions', () => {
     const existing = { mode: 'closed' as const, customElementRegistry: null };
     const element = createMockElement({ shadowRootOptions: existing });
 
