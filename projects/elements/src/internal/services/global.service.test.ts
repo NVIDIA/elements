@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { untilEvent } from '@internals/testing';
-import { GlobalStateService } from './global.service.js';
+import { GlobalState, GlobalStateService } from './global.service.js';
 
 describe('GlobalStateService', () => {
   beforeEach(() => {
@@ -72,6 +72,13 @@ describe('GlobalStateService', () => {
     expect(console.log).toHaveBeenCalled();
 
     console.log = original;
+  });
+
+  it('should initialize scopedRegistry when prior version did not define it', () => {
+    delete (window.NVE_ELEMENTS.state as any).scopedRegistry; // eslint-disable-line @typescript-eslint/no-explicit-any
+    const instance = new GlobalState();
+    expect(instance.state.scopedRegistry).toBeDefined();
+    expect(instance.state.scopedRegistry['0.0.0']).toBeDefined();
   });
 
   it('should log out state when debug() is called on NVE_ELEMENTS', async () => {
