@@ -31,6 +31,7 @@ export class GlobalState {
     /** @deprecated MLV_ELEMENTS */
     globalThis.MLV_ELEMENTS = globalThis.NVE_ELEMENTS;
     globalThis.NVE_ELEMENTS.state.versions = Array.from(new Set([...globalThis.NVE_ELEMENTS.state.versions, '0.0.0']));
+    globalThis.NVE_ELEMENTS.state.scopedRegistry ??= {}; // if older versions used, they may not have a scopedRegistry
     globalThis.NVE_ELEMENTS.state.scopedRegistry['0.0.0'] = createScopedRegistry();
 
     if (globalThis.NVE_ELEMENTS.state.versions.length > 1 && globalThis.NVE_ELEMENTS.state.env !== 'production') {
