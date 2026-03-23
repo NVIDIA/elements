@@ -75,7 +75,7 @@ pnpm run lint:vale
 
 ### Individual Project Commands
 
-Each project has a `DEVELOPMENT.md` file with the authoritative list of available pnpm scripts for that project. Consult `projects/<name>/DEVELOPMENT.md` before running commands. The common commands below are a quick reference. Run them from within the specific project directory (for example, `cd projects/elements`):
+Each project has a `DEVELOPMENT.md` file with the authoritative list of available pnpm scripts for that project. Consult `projects/<name>/DEVELOPMENT.md` before running commands. The common commands below are a quick reference. Run them from within the specific project directory (for example, `cd projects/core`):
 
 ```shell
 # Development watch mode
@@ -113,7 +113,7 @@ pnpm run lint:fix
 
 The repository is organized as a top-level workspace with individual project directories:
 
-- `/projects/elements` - Core Elements Web Components library (Lit-based)
+- `/projects/core` - Core Elements Web Components library (Lit-based)
 - `/projects/themes` - Theme tokens and CSS custom properties
 - `/projects/styles` - CSS utilities for layout and typography
 - `/projects/starters` - Starter templates for various frameworks (React, Angular, Vue, Svelte, etc.)
@@ -124,7 +124,7 @@ The repository is organized as a top-level workspace with individual project dir
 
 ### Component Architecture
 
-Each component in `/projects/elements/src/` follows this structure:
+Each component in `/projects/core/src/` follows this structure:
 
 ```
 component-name/
@@ -225,7 +225,7 @@ git commit -m "chore(docs): update component examples"
 **Common scopes:**
 
 - `docs` - 11ty docs site and landing page (`/projects/site`)
-- `elements` - Core Elements library (`/projects/elements`)
+- `elements` - Core Elements library (`/projects/core`)
 - `themes` - Theme tokens (`/projects/themes`)
 - `styles` - CSS utilities (`/projects/styles`)
 - `starters` - Starter templates (`/projects/starters`)

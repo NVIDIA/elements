@@ -34,7 +34,7 @@
     "build": {
       "command": "nuxi typecheck && nuxt build",
       "files": [
-        "../../elements/dist/**/*.js",
+        "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
         "app/**",
@@ -50,7 +50,7 @@
       ],
       "dependencies": [
         {
-          "script": "../../elements:build",
+          "script": "../../core:build",
           "cascade": false
         },
         {

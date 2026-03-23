@@ -15,8 +15,8 @@ describe('normalizePath', () => {
   });
 
   it('should handle path with /projects in the middle', () => {
-    const input = '/home/user/workspace/projects/elements/src/button/button.ts';
-    const expected = '/projects/elements/src/button/button.ts';
+    const input = '/home/user/workspace/projects/core/src/button/button.ts';
+    const expected = '/projects/core/src/button/button.ts';
     expect(normalizePath(input)).toBe(expected);
   });
 
@@ -48,7 +48,7 @@ describe('normalizeTestResults', () => {
   it('should remove failureMessages from assertionResults', () => {
     const input = [
       {
-        name: '/Users/dev/projects/elements/src/test.ts',
+        name: '/Users/dev/projects/core/src/test.ts',
         assertionResults: [
           {
             title: 'test case',
@@ -72,7 +72,7 @@ describe('normalizeTestResults', () => {
   it('should normalize failScreenshotPath in meta', () => {
     const input = [
       {
-        name: '/Users/dev/projects/elements/src/test.ts',
+        name: '/Users/dev/projects/core/src/test.ts',
         assertionResults: [
           {
             title: 'visual test',
@@ -93,21 +93,21 @@ describe('normalizeTestResults', () => {
   it('should handle test results without assertionResults', () => {
     const input = [
       {
-        name: '/Users/dev/projects/elements/src/test.ts',
+        name: '/Users/dev/projects/core/src/test.ts',
         status: 'passed'
       }
     ];
 
     const result = normalizeTestResults(input);
 
-    expect(result[0].name).toBe('/projects/elements/src/test.ts');
+    expect(result[0].name).toBe('/projects/core/src/test.ts');
     expect(result[0]).not.toHaveProperty('assertionResults');
   });
 
   it('should handle assertionResults without meta', () => {
     const input = [
       {
-        name: '/Users/dev/projects/elements/src/test.ts',
+        name: '/Users/dev/projects/core/src/test.ts',
         assertionResults: [
           {
             title: 'test case',
@@ -126,7 +126,7 @@ describe('normalizeTestResults', () => {
   it('should handle multiple test results with mixed data', () => {
     const input = [
       {
-        name: '/Users/dev/projects/elements/src/button.test.ts',
+        name: '/Users/dev/projects/core/src/button.test.ts',
         assertionResults: [
           {
             title: 'renders correctly',
@@ -136,14 +136,14 @@ describe('normalizeTestResults', () => {
         ]
       },
       {
-        name: '/Users/dev/projects/elements/src/input.test.ts',
+        name: '/Users/dev/projects/core/src/input.test.ts',
         assertionResults: [
           {
             title: 'visual regression',
             status: 'failed',
             failureMessages: ['Visual diff detected'],
             meta: {
-              failScreenshotPath: '/Users/dev/projects/elements/screenshots/input.png'
+              failScreenshotPath: '/Users/dev/projects/core/screenshots/input.png'
             }
           }
         ]
@@ -153,10 +153,10 @@ describe('normalizeTestResults', () => {
     const result = normalizeTestResults(input);
 
     expect(result).toHaveLength(2);
-    expect(result[0].name).toBe('/projects/elements/src/button.test.ts');
+    expect(result[0].name).toBe('/projects/core/src/button.test.ts');
     expect(result[0].assertionResults[0]).toHaveProperty('failureMessages');
     expect(result[0].assertionResults[0].failureMessages).toHaveLength(0);
-    expect(result[1].name).toBe('/projects/elements/src/input.test.ts');
+    expect(result[1].name).toBe('/projects/core/src/input.test.ts');
     expect(result[1].assertionResults[0]).toHaveProperty('failureMessages');
     expect(result[1].assertionResults[0].failureMessages).toHaveLength(1);
     expect(result[1].assertionResults[0].failureMessages[0]).toBe('Visual diff detected');
@@ -165,7 +165,7 @@ describe('normalizeTestResults', () => {
     expect(secondAssertion.meta).toBeDefined();
     if (secondAssertion.meta && typeof secondAssertion.meta === 'object') {
       const meta = secondAssertion.meta as Record<string, unknown>;
-      expect(meta.failScreenshotPath).toBe('/projects/elements/screenshots/input.png');
+      expect(meta.failScreenshotPath).toBe('/projects/core/screenshots/input.png');
     }
   });
 
