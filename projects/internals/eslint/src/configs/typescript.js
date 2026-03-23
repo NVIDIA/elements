@@ -49,8 +49,10 @@ const config = {
     }
   },
   rules: {
-    ...tseslint.configs.recommended.rules,
+    ...Object.assign({}, ...tseslint.configs.strictTypeChecked.map(c => c.rules)),
     complexity: ['error', { max: 10 }], // https://en.wikipedia.org/wiki/Cyclomatic_complexity
+    '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
+    '@typescript-eslint/no-confusing-void-expression': 'off',
     'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
     '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T', argsIgnorePattern: '^_' }],
     '@typescript-eslint/consistent-type-imports': ['error'],
@@ -70,7 +72,34 @@ const config = {
     'jsdoc/no-types': ['error'],
     'jsdoc/valid-types': ['error'],
     'jsdoc/check-tag-names': ['error'],
-    'local-typescript/no-dead-code': ['warn'] // todo, this should be migrated to the internal playground template config
+    'local-typescript/no-dead-code': ['warn'], // todo, this should be migrated to the internal playground template config
+
+    // todo: enable these rules incrementally as the codebase is cleaned up
+    '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+    '@typescript-eslint/no-misused-promises': 'off',
+    '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/require-await': 'off',
+    '@typescript-eslint/await-thenable': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-argument': 'off',
+    '@typescript-eslint/no-unsafe-enum-comparison': 'off',
+    '@typescript-eslint/prefer-promise-reject-errors': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
+    '@typescript-eslint/no-redundant-type-constituents': 'off',
+    '@typescript-eslint/no-unnecessary-condition': 'off',
+    '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off',
+    '@typescript-eslint/no-useless-default-assignment': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-extraneous-class': 'off',
+    '@typescript-eslint/no-unnecessary-template-expression': 'off',
+    '@typescript-eslint/no-deprecated': 'off',
+    '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
+    '@typescript-eslint/no-unnecessary-type-conversion': 'off',
+    '@typescript-eslint/prefer-reduce-type-parameter': 'off',
+    '@typescript-eslint/no-unnecessary-type-parameters': 'off'
   },
   settings: {
     jsdoc: {
@@ -119,6 +148,7 @@ export const browserTypescriptConfig = [
   {
     files: [...tests],
     rules: {
+      '@typescript-eslint/no-unused-expressions': 'off', // (chai's expect().to.exist uses this)
       'local-typescript/require-fixture-cleanup': ['error'],
       'local-typescript/require-element-stable': ['off'] // temporarily disabled, will enable in followup
     }
@@ -154,6 +184,7 @@ export const nodeTypescriptConfig = [
   {
     files: [...tests],
     rules: {
+      '@typescript-eslint/no-unused-expressions': 'off', // (chai's expect().to.exist uses this)
       'local-typescript/require-fixture-cleanup': ['error'],
       'local-typescript/require-element-stable': ['off'] // temporarily disabled, will enable in followup
     }
