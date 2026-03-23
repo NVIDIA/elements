@@ -158,7 +158,7 @@ export function wrapUrl(url: string, maxWidth = 80): string {
   const lines: string[] = [];
   let line = segments[0] ?? '';
   for (let i = 1; i < segments.length; i++) {
-    const next = '/' + segments[i];
+    const next = `/${segments[i]}`;
     if ((line + next).length > maxWidth && line.length > 0) {
       lines.push(line);
       line = next;
