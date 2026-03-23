@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.65.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.65.4...@nvidia-elements/core-v1.65.5) (2026-03-23)
+
+
+### Bug Fixes
+
+* **elements:** duplicate version fallback check ([50153f4](https://github.com/NVIDIA/elements/commit/50153f4e72dd55312a31476ed04081054e312353))
+
 ## [@nvidia-elements/core-v1.65.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.65.3...@nvidia-elements/core-v1.65.4) (2026-03-23)
 
 
