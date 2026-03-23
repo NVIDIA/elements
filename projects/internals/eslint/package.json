@@ -14,10 +14,10 @@
     "@eslint/css": "catalog:",
     "@eslint/js": "catalog:",
     "eslint-plugin-import": "2.32.0",
-    "eslint-plugin-jsdoc": "61.1.5",
-    "eslint-plugin-lit": "2.1.1",
+    "eslint-plugin-jsdoc": "62.8.0",
+    "eslint-plugin-lit": "2.2.1",
     "eslint-plugin-lit-a11y": "5.1.1",
-    "eslint-plugin-wc": "3.0.2",
+    "eslint-plugin-wc": "3.1.0",
     "globals": "16.4.0",
     "typescript-eslint": "catalog:"
   },
