@@ -66,7 +66,7 @@ globalThis.document.querySelectorAll('.content:has(video)').forEach(video => {
       if (entry.isIntersecting) {
         void video.play();
       } else {
-        void video.pause();
+        video.pause();
       }
     });
   });
