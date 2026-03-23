@@ -492,6 +492,7 @@ export interface Scale {
 }
 
 /** https://github.com/tc39/proposal-decorators */
+// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export type LegacyDecoratorTarget = Function & {
   addInitializer?: (initializer: (instance: any) => void) => void; // eslint-disable-line @typescript-eslint/no-explicit-any
 };

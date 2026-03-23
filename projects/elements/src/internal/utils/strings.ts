@@ -31,7 +31,7 @@ export function shiftLeft(value: string) {
 }
 
 export let DOCS_URL = '';
-/* @ts-ignore-next-line */
+/* @ts-expect-error -- VITE_BUNDLE_CONFIG is only defined at build time */
 if (!import.meta.env.VITE_BUNDLE_CONFIG) {
   DOCS_URL = 'http://nv/elements';
 }
