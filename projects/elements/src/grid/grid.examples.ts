@@ -877,7 +877,7 @@ class InfiniteScrollDemo extends LitElement {
     this.#loadGroup();
   }
 
-  #group(items: {}[], size: number) {
+  #group(items: object[], size: number) {
     return [...Array(Math.ceil(items.length / size))].map((_, i) => items.slice(size * i, size + size * i));
   }
 
