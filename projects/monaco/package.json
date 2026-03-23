@@ -221,9 +221,9 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
-        "../elements/dist/internal/utils/dom.js",
-        "../elements/dist/internal/styles/**",
-        "!../elements/dist/**/*.examples.js",
+        "../core/dist/internal/utils/dom.js",
+        "../core/dist/internal/styles/**",
+        "!../core/dist/**/*.examples.js",
         "../forms/dist/**/*.js",
         "!../forms/dist/**/*.examples.js",
         "../themes/dist/**/*.css",
@@ -250,7 +250,7 @@
         "build:themes",
         "../internals/vite:ci",
         {
-          "script": "../elements:build",
+          "script": "../core:build",
           "cascade": false
         },
         {

@@ -17,7 +17,7 @@
     "build": {
       "command": "node build.js",
       "files": [
-        "../../elements/dist/**/*.js",
+        "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
         "src/index.html",
@@ -28,7 +28,7 @@
       ],
       "dependencies": [
         {
-          "script": "../../elements:build",
+          "script": "../../core:build",
           "cascade": false
         },
         {

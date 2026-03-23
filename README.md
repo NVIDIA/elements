@@ -26,7 +26,7 @@ Project directories have their own `package.json` and commands. But all setup fo
 Examples of projects include:
 
 - `/projects/starters` - Suite of standardized starter apps for Elements and Patterns
-- `/projects/elements` - Elements library: curated UI maintained by the Elements team
+- `/projects/core` - Elements library: curated UI maintained by the Elements team
 - `/projects/themes` - Elements Theme library: provides a set of supported themes for Element based projects
 - `/projects/styles` - Elements Styles library: provides a set of CSS utilities for layout and typography
 
@@ -120,7 +120,7 @@ git commit -a -m "fix(elements): disabled multi-select"
 | ---------------------------- | ----------------------------- |
 | `ci`                         | `/projects/internals`         |
 | `starters`                   | `/projects/starters`          |
-| `elements`                   | `/projects/elements`          |
+| `elements`                   | `/projects/core`          |
 | `pages`                      | `/projects/pages`             |
 | `playground`                 | `/projects/playground`        |
 | `themes`                     | `/projects/themes`            |

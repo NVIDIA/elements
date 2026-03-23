@@ -12,7 +12,7 @@ import type {
 } from '../types.js';
 import { attributeMetadataToMarkdown, getElementChangelog } from '../utils/utils.ts';
 
-const BASE_ELEMENT_INTERFACE_PATH = resolve('../../elements/src/internal/types/index.ts');
+const BASE_ELEMENT_INTERFACE_PATH = resolve('../../core/src/internal/types/index.ts');
 
 function getPackageFile(basePath: string): Package {
   return JSON.parse(readFileSync(new URL(basePath + '/package.json', import.meta.url), 'utf8'));
@@ -129,7 +129,7 @@ export async function getApi(): Promise<{
   };
 }> {
   const projects = [
-    '../../../../elements',
+    '../../../../core',
     '../../../../styles',
     '../../../../themes',
     '../../../../code',
