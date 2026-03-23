@@ -224,8 +224,9 @@ export class ThemeGeneratorDemo extends LitElement {
     const values: Record<string, string | number> = {};
 
     formData.forEach((value, key) => {
+      if (typeof value !== 'string') return;
       const numValue = Number(value);
-      values[key] = isNaN(numValue) ? value.toString() : numValue;
+      values[key] = isNaN(numValue) ? value : numValue;
     });
 
     this.#setFormValues(values);

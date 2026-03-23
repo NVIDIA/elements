@@ -28,8 +28,8 @@ type LinkType = {
   target?: string | number | Record<string, unknown>;
 };
 
-let allNodes = [...rawData.nodes];
-let allLinks = [...rawData.links];
+const allNodes = [...rawData.nodes];
+const allLinks = [...rawData.links];
 let visibleNodeIds = new Set(allNodes.map(n => n.id));
 let showCongestion = true;
 let hoveredNode: WireitGraphNode | null = null;

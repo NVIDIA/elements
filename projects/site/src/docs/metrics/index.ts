@@ -319,7 +319,7 @@ const coverageTestResults = Object.values(testMetrics.projects)
   });
 const lighthouseTestResults = Object.values(testMetrics.projects).flatMap(n => n.lighthouse.testResults);
 
-const coverageByComponent = new Map();
+const coverageByComponent = new Map<string, { branches: number; coverage: number; count: number }>();
 const lighthouseByComponent = new Map();
 coverageTestResults.forEach(result => {
   if (result.file !== 'total') {
@@ -559,7 +559,7 @@ new Chart(globalThis.document.getElementById('repo-adoption-chart') as HTMLCanva
             const data = chart.data;
             if (data.labels && data.datasets.length) {
               return data.labels.map((label, i) => {
-                const value = data.datasets[0].data[i];
+                const value = data.datasets[0].data[i] as number;
                 const backgroundColor = data.datasets[0].backgroundColor;
                 const fillStyle = Array.isArray(backgroundColor) ? backgroundColor[i] : backgroundColor;
                 return {
@@ -789,7 +789,7 @@ new Chart(globalThis.document.getElementById('total-downloads-chart') as HTMLCan
             const data = chart.data;
             if (data.labels && data.datasets.length) {
               return data.labels.map((label, i) => {
-                const value = data.datasets[0].data[i];
+                const value = data.datasets[0].data[i] as number;
                 const backgroundColor = data.datasets[0].backgroundColor;
                 const fillStyle = Array.isArray(backgroundColor) ? backgroundColor[i] : backgroundColor;
                 return {
@@ -836,7 +836,7 @@ new Chart(globalThis.document.getElementById('api-references-chart') as HTMLCanv
             const data = chart.data;
             if (data.labels && data.datasets.length) {
               return data.labels.map((label, i) => {
-                const value = data.datasets[0].data[i];
+                const value = data.datasets[0].data[i] as number;
                 const backgroundColor = data.datasets[0].backgroundColor;
                 const fillStyle = Array.isArray(backgroundColor) ? backgroundColor[i] : backgroundColor;
                 return {
