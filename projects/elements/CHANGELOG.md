@@ -1,3 +1,10 @@
+## [@nvidia-elements/core-v1.65.4](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.65.3...@nvidia-elements/core-v1.65.4) (2026-03-23)
+
+
+### Bug Fixes
+
+* **elements:** incorrect root node warning ([b59bdaa](https://github.com/NVIDIA/elements/commit/b59bdaa4358f4b17e3a09b1bd3ad102360af0dd1)), closes [#72](https://github.com/NVIDIA/elements/issues/72)
+
 ## [@nvidia-elements/core-v1.65.3](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.65.2...@nvidia-elements/core-v1.65.3) (2026-03-20)
 
 
