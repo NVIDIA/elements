@@ -259,7 +259,7 @@ export interface TestSummary {
   numTodoTests: number;
   startTime: number;
   success: boolean;
-  coverageMap?: {};
+  coverageMap?: object;
   testResults: {
     assertionResults: {
       ancestorTitles: string[];
