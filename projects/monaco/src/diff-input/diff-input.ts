@@ -111,7 +111,7 @@ export class MonacoDiffInput extends BaseMonacoInput<MonacoDiffEditor, monaco.ed
   #diffModel: monaco.editor.IDiffEditorModel | undefined;
 
   protected get _editor(): MonacoDiffEditor {
-    return this.shadowRoot?.querySelector<MonacoDiffEditor>(MonacoDiffEditor.metadata.tag)!;
+    return this.shadowRoot!.querySelector<MonacoDiffEditor>(MonacoDiffEditor.metadata.tag)!;
   }
 
   protected _createEditor(monaco: Monaco): monaco.editor.IStandaloneCodeEditor {
@@ -144,7 +144,7 @@ export class MonacoDiffInput extends BaseMonacoInput<MonacoDiffEditor, monaco.ed
 
     this.#applyOptions();
 
-    return this.#diffEditor?.getModifiedEditor()!;
+    return this.#diffEditor!.getModifiedEditor();
   }
 
   disconnectedCallback() {
