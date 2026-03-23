@@ -80,7 +80,7 @@ export class ThemeForm extends LitElement {
   }
 
   #input() {
-    const form = this.shadowRoot?.querySelector<HTMLFormElement>('form')!;
+    const form = this.shadowRoot!.querySelector<HTMLFormElement>('form')!;
     this.value = Object.fromEntries(new FormData(form)) as unknown as ThemePreviewSettings;
     this.dispatchEvent(new CustomEvent('input', { detail: this.value }));
   }

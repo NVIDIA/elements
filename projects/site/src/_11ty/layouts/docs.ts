@@ -144,7 +144,7 @@ docsSearch.addEventListener('search-no-results', () => {
 // Restores navigation if user is not actively searching
 docsSearch.addEventListener('search-blur', () => !isSearching && toggleSideNav(true));
 
-const defaultWidth = handle.getAttribute('value') + 'px';
+const defaultWidth = `${handle.getAttribute('value')}px`;
 const toggleSideNav = (state: boolean) => {
   if (state) {
     // Showing nav - shrink panel to default width

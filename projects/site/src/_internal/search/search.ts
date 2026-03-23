@@ -166,7 +166,7 @@ export class DocsSearch extends LitElement {
   }
 
   async #handleFocus(event: Event) {
-    void (await this.#loadPagefind());
+    await this.#loadPagefind();
     event.preventDefault();
 
     this.dispatchEvent(new Event('search-focus', { bubbles: true, composed: true }));
@@ -237,7 +237,7 @@ export class DocsSearch extends LitElement {
   }
 
   async search(term: string) {
-    void (await this.#loadPagefind());
+    await this.#loadPagefind();
     this.currentSearchTerm = term;
 
     if (this.#pagefind) {
@@ -509,7 +509,7 @@ export class DocsSearch extends LitElement {
     const style = `--color: var(--nve-ref-color-${colorToken}-1000);`;
 
     return {
-      url: result.raw_url + this.#getQueryParam() || '',
+      url: `${result.raw_url ?? ''}${this.#getQueryParam()}`,
       title: result.meta?.title,
       subtitle: result.raw_url || '',
       icon: icon,
@@ -557,9 +557,9 @@ export class DocsSearch extends LitElement {
       })
       .slice(0, MAX_HEADINGS)
       .map(anchor => ({
-        url: result.raw_url + this.#getQueryParam() + '#' + anchor.id,
-        title: result.meta.title + ' - ' + anchor.text,
-        subtitle: result.raw_url + '#' + anchor.id,
+        url: `${result.raw_url ?? ''}${this.#getQueryParam()}#${anchor.id}`,
+        title: `${result.meta?.title} - ${anchor.text}`,
+        subtitle: `${result.raw_url ?? ''}#${anchor.id}`,
         icon: icon,
         style: style
       }));

@@ -156,7 +156,7 @@ export class VisualizationDemo extends LitElement {
           '--nve-sys-visualization-categorical-' + label
         );
         function applyOpacityToColor(color: string, opacity: number) {
-          return 'color-mix(in oklch, ' + color + ', transparent ' + (100 - opacity * 100) + '%)';
+          return `color-mix(in oklch, ${color}, transparent ${100 - opacity * 100}%)`;
         }
 
         const opacity = type === 'line' || type === 'bar' || type === 'bubble' ? 1 : 0.5;
