@@ -23,7 +23,7 @@ export async function startMcpServer() {
     .forEach(tool => {
       const { summary, description, title, toolName } = tool.metadata;
       const inputSchema = tool.metadata.inputSchema
-        ? (jsonSchemaToZod(tool.metadata.inputSchema) as ZodObject<{}>).shape
+        ? (jsonSchemaToZod(tool.metadata.inputSchema) as ZodObject<Record<string, never>>).shape
         : {};
       const resultSchema = tool.metadata.outputSchema ? jsonSchemaToZod(tool.metadata.outputSchema) : z.any();
       const outputSchema = {
@@ -58,7 +58,7 @@ export async function startMcpServer() {
     });
 
   prompts.forEach(prompt => {
-    const argsSchema = (jsonSchemaToZod(prompt.argsSchema ?? {}) as ZodObject<{}>).shape;
+    const argsSchema = (jsonSchemaToZod(prompt.argsSchema ?? {}) as ZodObject<Record<string, never>>).shape;
     const config = { title: prompt.title, description: prompt.description, argsSchema };
     server.registerPrompt(prompt.name, config, async params => prompt.handler(params));
   });
