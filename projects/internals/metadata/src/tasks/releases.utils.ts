@@ -84,16 +84,13 @@ export function getReleases(): Release[] {
       }
     }
 
-    const releasesByPackage = rawReleases.reduce(
-      (acc, release) => {
-        if (!acc[release.packageName]) {
-          acc[release.packageName] = [];
-        }
-        acc[release.packageName]!.push(release);
-        return acc;
-      },
-      {} as Record<string, typeof rawReleases>
-    );
+    const releasesByPackage = rawReleases.reduce<Record<string, typeof rawReleases>>((acc, release) => {
+      if (!acc[release.packageName]) {
+        acc[release.packageName] = [];
+      }
+      acc[release.packageName]!.push(release);
+      return acc;
+    }, {});
 
     for (const packageName in releasesByPackage) {
       releasesByPackage[packageName]!.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
