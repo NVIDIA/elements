@@ -15,8 +15,8 @@ pnpm-lock.yaml
 vite.*.ts.timestamp*
 tsconfig.*.tsbuildinfo
 projects/code/index.html
-projects/elements/src/css/*.css
-projects/elements/src/icon/server.ts
+projects/core/src/css/*.css
+projects/core/src/icon/server.ts
 projects/internals/metadata/static/*.json
 projects/monaco/src/themes/generated/*
 projects/starters/angular/.angular/**/*
