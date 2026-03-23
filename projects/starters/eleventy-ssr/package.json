@@ -42,7 +42,7 @@
       "files": [
         "../../internals/metadata/dist/**/*.js",
         "../../internals/tools/dist/**/*.js",
-        "../../elements/dist/**/*.js",
+        "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
         "src",
@@ -63,7 +63,7 @@
           "cascade": false
         },
         {
-          "script": "../../elements:build",
+          "script": "../../core:build",
           "cascade": false
         },
         {

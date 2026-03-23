@@ -171,7 +171,7 @@ importers:
         version: link:projects/code
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:projects/elements
+        version: link:projects/core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:projects/styles
@@ -350,7 +350,7 @@ importers:
         version: link:../lint
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../elements
+        version: link:../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../styles
@@ -385,31 +385,7 @@ importers:
         specifier: 'catalog:'
         version: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(@vitest/browser-playwright@4.1.0)(jsdom@27.1.0)(vite@8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2))
 
-  projects/create:
-    devDependencies:
-      '@internals/eslint':
-        specifier: workspace:*
-        version: link:../internals/eslint
-      '@internals/vite':
-        specifier: workspace:*
-        version: link:../internals/vite
-      '@types/node':
-        specifier: 'catalog:'
-        version: 24.9.1
-      eslint:
-        specifier: 'catalog:'
-        version: 9.39.2(jiti@2.6.1)
-      publint:
-        specifier: 'catalog:'
-        version: 0.3.15
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      vite:
-        specifier: 'catalog:'
-        version: 8.0.0(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2)
-
-  projects/elements:
+  projects/core:
     dependencies:
       '@nvidia-elements/forms':
         specifier: workspace:^
@@ -503,6 +479,30 @@ importers:
       formdata-polyfill:
         specifier: ^4.0.10
         version: 4.0.10
+
+  projects/create:
+    devDependencies:
+      '@internals/eslint':
+        specifier: workspace:*
+        version: link:../internals/eslint
+      '@internals/vite':
+        specifier: workspace:*
+        version: link:../internals/vite
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.9.1
+      eslint:
+        specifier: 'catalog:'
+        version: 9.39.2(jiti@2.6.1)
+      publint:
+        specifier: 'catalog:'
+        version: 0.3.15
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      vite:
+        specifier: 'catalog:'
+        version: 8.0.0(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2)
 
   projects/forms:
     dependencies:
@@ -652,7 +652,7 @@ importers:
         version: link:../../lint
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -914,7 +914,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:^
-        version: link:../elements
+        version: link:../core
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -978,7 +978,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:^
-        version: link:../elements
+        version: link:../core
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
@@ -1061,7 +1061,7 @@ importers:
         version: link:../lint
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../elements
+        version: link:../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../styles
@@ -1182,7 +1182,7 @@ importers:
         version: link:../markdown
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../elements
+        version: link:../core
       '@nvidia-elements/monaco':
         specifier: workspace:*
         version: link:../monaco
@@ -1266,7 +1266,7 @@ importers:
         version: 21.0.8(@angular/common@21.0.8(@angular/core@21.0.8(@angular/compiler@21.0.8)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.0.8(@angular/compiler@21.0.8)(rxjs@7.8.2))(@angular/platform-browser@21.0.8(@angular/common@21.0.8(@angular/core@21.0.8(@angular/compiler@21.0.8)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.0.8(@angular/compiler@21.0.8)(rxjs@7.8.2)))(rxjs@7.8.2)
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1309,7 +1309,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1328,7 +1328,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1371,7 +1371,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1413,7 +1413,7 @@ importers:
         version: link:../../code
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1432,7 +1432,7 @@ importers:
         version: 2.1.2
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1470,7 +1470,7 @@ importers:
         version: link:../../lint
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1509,7 +1509,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1537,7 +1537,7 @@ importers:
         version: 0.2.4(@types/node@24.9.1)(@types/react@19.2.2)(next@15.5.3(@opentelemetry/api@1.9.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.2))(react@19.2.0)(webpack@5.104.1(esbuild@0.27.4))
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1577,7 +1577,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1611,7 +1611,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1648,7 +1648,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1682,7 +1682,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1719,7 +1719,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -1744,7 +1744,7 @@ importers:
     dependencies:
       '@nvidia-elements/core':
         specifier: workspace:*
-        version: link:../../elements
+        version: link:../../core
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles
@@ -11019,9 +11019,6 @@ packages:
     resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==, tarball: https://registry.npmjs.org
     engines: {node: '>=4'}
 
-  picocolors@1.0.1:
-    resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==, tarball: https://registry.npmjs.org
-
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==, tarball: https://registry.npmjs.org
 
@@ -18219,7 +18216,7 @@ snapshots:
       magicast: 0.5.2
       obug: 2.1.1
       tinyrainbow: 3.0.3
-      vitest: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@25.3.0)(@vitest/browser-playwright@4.1.0)(jsdom@27.1.0)(vite@8.0.0(@types/node@25.3.0)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.6))(terser@5.46.0)(yaml@2.8.2))
+      vitest: 4.1.0(@opentelemetry/api@1.9.0)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.0)(jsdom@27.1.0)(vite@8.0.0(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.93.2)(sugarss@5.0.1(postcss@8.5.8))(terser@5.46.0)(yaml@2.8.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -24009,8 +24006,6 @@ snapshots:
       postgres-date: 1.0.7
       postgres-interval: 1.2.0
 
-  picocolors@1.0.1: {}
-
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
@@ -25804,7 +25799,7 @@ snapshots:
       css-select: 5.2.2
       css-tree: 2.3.1
       csso: 5.0.5
-      picocolors: 1.0.1
+      picocolors: 1.1.1
 
   svgo@4.0.0:
     dependencies:
