@@ -72,7 +72,7 @@ export class ProgressRing extends LitElement {
         <svg viewBox="0 0 16 16" role="presentation">
           <circle cx="8px" cy="8px" r="6.5px" class="background"></circle>
           <circle cx="8px" cy="8px" r="6.5px" class="ring"
-            stroke-dasharray=${((this.value ?? 0) / (this.max ?? 100)) * 44 + 'px' + ' ' + '44px'}>
+            stroke-dasharray=${`${((this.value ?? 0) / (this.max ?? 100)) * 44}px 44px`}>
           </circle>
         </svg>
         <slot>
