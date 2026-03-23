@@ -11,8 +11,8 @@ import { glob } from 'glob';
 import archiver from 'archiver';
 import AdmZip from 'adm-zip';
 import { isCommandAvailable, getNPMClient } from '../internal/node.js';
-import { skills } from '../context/index.js';
 import type { Report } from '../internal/types.js';
+import { writeAllAgentConfigs } from './setup-agent.js';
 
 export type Starter =
   | 'angular'
@@ -105,18 +105,13 @@ export const startersData = {
 
 /* istanbul ignore next -- @preserve */
 export async function archiveStarter(projectDir: string, outDir: string) {
+  const dist = `${outDir}/${projectDir}`;
   await copyProject(projectDir);
-  await createCursorConfig(projectDir);
-  await createClaudeConfig(projectDir);
-  await createVSCodeConfig(projectDir);
-  await createCoreSkill(projectDir);
+  writeAllAgentConfigs(dist);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
-  await writeFile(
-    `${`${outDir}/${projectDir}`}/.npmrc`,
-    'registry=https://registry.npmjs.org'
-  );
-  await writeFile(`${`${outDir}/${projectDir}`}/package.json`, JSON.stringify(packageJSON, undefined, 2));
-  await zipProject(`${outDir}/${projectDir}`);
+  await writeFile(`${dist}/.npmrc`, 'registry=https://registry.npmjs.org');
+  await writeFile(`${dist}/package.json`, JSON.stringify(packageJSON, undefined, 2));
+  await zipProject(dist);
 }
 
 /* istanbul ignore next -- @preserve */
@@ -143,92 +138,6 @@ async function copyProject(projectDir: string) {
     ignore: ['**/dist/**', '**/node_modules/**', '**/.wireit/**']
   });
   files.forEach(file => cpSync(file, `dist/${projectDir}${file.replace(projectDir, '')}`, { recursive: true }));
-}
-
-/* istanbul ignore next -- @preserve */
-async function createCursorConfig(projectDir: string) {
-  const cursorConfig = {
-    mcpServers: {
-      elements: {
-        description: 'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples',
-        command: 'npm',
-        args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve', 'mcp'],
-        env: {
-          npm_config_registry: 'https://registry.npmjs.org'
-        }
-      }
-    }
-  };
-
-  const dist = `dist/${projectDir}/.cursor`;
-  if (!existsSync(dist)) {
-    mkdirSync(dist, { recursive: true });
-  }
-  await writeFile(`${dist}/mcp.json`, JSON.stringify(cursorConfig, undefined, 2));
-}
-
-/* istanbul ignore next -- @preserve */
-async function createClaudeConfig(projectDir: string) {
-  const claudeMCPConfig = {
-    mcpServers: {
-      elements: {
-        description: 'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples',
-        command: 'npm',
-        args: ['exec', '--package=@nvidia-elements/cli@latest', '-y', '--prefer-online', '--', 'nve', 'mcp'],
-        env: {
-          npm_config_registry: 'https://registry.npmjs.org'
-        }
-      }
-    }
-  };
-
-  const dist = `dist/${projectDir}/.claude`;
-  if (!existsSync(dist)) {
-    mkdirSync(dist, { recursive: true });
-  }
-  await writeFile(`${dist}/settings.json`, JSON.stringify(claudeProjectSettings, undefined, 2));
-  await writeFile(`dist/${projectDir}/.mcp.json`, JSON.stringify(claudeMCPConfig, undefined, 2));
-}
-
-/* istanbul ignore next -- @preserve */
-async function createVSCodeConfig(projectDir: string) {
-  const vscodeConfig = {
-    'html.customData': [
-      './node_modules/@nvidia-elements/styles/dist/data.html.json',
-      './node_modules/@nvidia-elements/core/dist/data.html.json',
-      './node_modules/@nvidia-elements/monaco/dist/data.html.json',
-      './node_modules/@nvidia-elements/code/dist/data.html.json',
-      './node_modules/@nvidia-elements/markdown/dist/data.html.json'
-    ]
-  };
-
-  const dist = `dist/${projectDir}/.vscode`;
-  if (!existsSync(dist)) {
-    mkdirSync(dist, { recursive: true });
-  }
-  await writeFile(`${dist}/settings.json`, JSON.stringify(vscodeConfig, undefined, 2));
-}
-
-/* istanbul ignore next -- @preserve */
-export async function createCoreSkill(projectDir: string) {
-  const skill = skills.find(skill => skill.name === 'elements');
-  if (!skill) {
-    throw new Error('Elements skill not found');
-  }
-  const dist = `dist/${projectDir}/.claude/skills/${skill.name}`;
-  if (!existsSync(dist)) {
-    mkdirSync(dist, { recursive: true });
-  }
-  await writeFile(
-    `${dist}/SKILL.md`,
-    `
----
-name: ${skill.name}
-title: ${skill.title}
-description: ${skill.description}
----
-${skill.context}`.trim()
-  );
 }
 
 /* istanbul ignore next -- @preserve */
