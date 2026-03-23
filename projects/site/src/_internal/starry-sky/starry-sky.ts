@@ -92,8 +92,8 @@ export class StarrySky extends LitElement {
       const svg = globalThis.document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 
       for (let i = 0; i < 200; i++) {
-        const cx = Math.random() * 100 + '%';
-        const cy = Math.random() * 100 + '%';
+        const cx = `${Math.random() * 100}%`;
+        const cy = `${Math.random() * 100}%`;
         const r: number = (Math.random() + 0.5) * 1.2;
 
         const circle = globalThis.document.createElementNS('http://www.w3.org/2000/svg', 'circle');
