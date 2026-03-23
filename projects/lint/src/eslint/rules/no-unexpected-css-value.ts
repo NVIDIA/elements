@@ -267,7 +267,7 @@ function checkBoxShadowValue(context: Rule.RuleContext, node: CssDeclarationNode
 const COLOR_PATTERNS = ['#', 'hsl', 'rgb'];
 
 function isColorFunctionChild(child: CssValueChild): boolean {
-  return child.type === 'Hash' || !!child.name?.includes('hsl') || !!child.name?.includes('rgb');
+  return child.type === 'Hash' || child.name?.includes('hsl') === true || child.name?.includes('rgb') === true;
 }
 
 function extractColorFromChild(child: CssValueChild): { value: string; unit: string } {
