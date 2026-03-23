@@ -125,7 +125,7 @@ export function generateGraphData() {
   const nodes = [];
   const links = [];
 
-  const dependencyCounts = new Map();
+  const dependencyCounts = new Map<string, number>();
   for (const script of wireitScripts.values()) {
     for (const depKey of script.dependencies) {
       dependencyCounts.set(depKey, (dependencyCounts.get(depKey) || 0) + 1);
