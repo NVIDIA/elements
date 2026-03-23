@@ -330,7 +330,7 @@ export abstract class BaseMonacoInput<
       this.#lineNumbers = options.lineNumbers!;
     }
     if ('minimap' in options) {
-      this.#minimap = options.minimap?.enabled!;
+      this.#minimap = options.minimap!.enabled!;
     }
     if ('readOnly' in options) {
       super.readOnly = options.readOnly!;

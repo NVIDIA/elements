@@ -29,7 +29,7 @@ export class MonacoInput extends BaseMonacoInput<MonacoEditor, monaco.editor.ISt
   };
 
   protected get _editor(): MonacoEditor {
-    return this.shadowRoot?.querySelector<MonacoEditor>(MonacoEditor.metadata.tag)!;
+    return this.shadowRoot!.querySelector<MonacoEditor>(MonacoEditor.metadata.tag)!;
   }
 
   protected _createEditor(_monaco: Monaco): monaco.editor.IStandaloneCodeEditor {
