@@ -614,4 +614,4 @@ function createNodeList(nodes: number) {
   return new Array(nodes).fill('').map((_, i) => ({ label: `${i}`, expanded: false, nodes: [] }));
 }
 
-customElements.get('test-dynamic-tree') ?? customElements.define('test-dynamic-tree', TestDynamicTree);
+customElements.get('test-dynamic-tree') || customElements.define('test-dynamic-tree', TestDynamicTree);
