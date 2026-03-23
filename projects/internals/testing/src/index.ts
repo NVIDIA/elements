@@ -41,7 +41,7 @@ export async function waitForCustomElementsToBeDefined(): Promise<void> {
       [...pendingElements].map(e => globalThis.customElements.whenDefined(e).then(() => pendingElements.delete(e)))
     )
       .then(() => resolve())
-      .catch(e => reject(e));
+      .catch((e: unknown) => reject(e));
     setTimeout(() => {
       if (pendingElements.size) {
         reject('Timed out waiting 5000ms for custom elements to be defined');

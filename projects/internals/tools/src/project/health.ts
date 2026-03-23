@@ -29,12 +29,9 @@ export async function getVersionHealth(packageData: PackageData, currentVersions
     ...packageData.peerDependencies
   })
     .filter(([key]) => key.includes('@nvidia-elements/') || key.includes('@nvidia-elements/'))
-    .reduce(
-      (acc, [key, value]) => {
-        return { ...acc, [key]: value as string };
-      },
-      {} as Record<string, string>
-    );
+    .reduce<Record<string, string>>((acc, [key, value]) => {
+      return { ...acc, [key]: value as string };
+    }, {});
 
   const report: { [key: string]: { version: string; latest: string; status: 'success' | 'warning' | 'danger' } } = {};
 
