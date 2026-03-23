@@ -338,9 +338,9 @@ When creating a new component, ensure:
 
 Study these complete examples:
 
-- `/projects/elements/src/button/` - BaseButton pattern, interactive component
-- `/projects/elements/src/badge/` - LitElement pattern, simple component
-- `/projects/elements/src/card/` - Composition pattern with slots
+- `/projects/core/src/button/` - BaseButton pattern, interactive component
+- `/projects/core/src/badge/` - LitElement pattern, simple component
+- `/projects/core/src/card/` - Composition pattern with slots
 
 ## Related Guidelines
 

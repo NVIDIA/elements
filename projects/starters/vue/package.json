@@ -42,7 +42,7 @@
     "build": {
       "command": "vue-tsc --build --force && vite build",
       "files": [
-        "../../elements/dist/**/*.js",
+        "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
         "src/**",
@@ -58,7 +58,7 @@
       ],
       "dependencies": [
         {
-          "script": "../../elements:build",
+          "script": "../../core:build",
           "cascade": false
         },
         {

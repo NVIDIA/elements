@@ -28,7 +28,7 @@ packages:
   - projects/monaco
   - projects/pages
   - projects/create
-  - projects/elements
+  - projects/core
   - projects/forms
   - projects/styles
   - projects/themes

@@ -93,7 +93,7 @@
       "command": "vite build",
       "clean": "if-file-deleted",
       "files": [
-        "../../elements/dist/**/*.js",
+        "../../core/dist/**/*.js",
         "../../themes/dist/**/*.css",
         "src/**",
         "package.json",
@@ -107,7 +107,7 @@
       "dependencies": [
         "../vite:ci",
         {
-          "script": "../../elements:build",
+          "script": "../../core:build",
           "cascade": false
         },
         {

@@ -48,7 +48,7 @@ export interface LighthouseElementReport {
 export async function generateLighthouseReport(): Promise<LighthouseScores> {
   return {
     created: new Date().toISOString(),
-    '@nvidia-elements/core': await loadLighthouseReport('../../../../elements'),
+    '@nvidia-elements/core': await loadLighthouseReport('../../../../core'),
     '@nvidia-elements/styles': await loadLighthouseReport('../../../../styles'),
     '@nvidia-elements/themes': await loadLighthouseReport('../../../../themes'),
     '@nvidia-elements/code': await loadLighthouseReport('../../../../code'),

@@ -24,7 +24,7 @@ Read the [component creation guide](projects/site/src/docs/internal/guidelines/c
 
 1. **Gather requirements**:confirm the component name (kebab-case), purpose, and which base class to use (`LitElement` for most components, `BaseButton` for button-like interactive components).
 2. **Study a reference**:read the closest reference component listed below to understand the pattern in practice.
-3. **Create the 10 required files** in `projects/elements/src/<component-name>/`:
+3. **Create the 10 required files** in `projects/core/src/<component-name>/`:
    - `component-name.ts`:component class with metadata, JSDoc, and render method
    - `component-name.css`:styles using CSS custom properties
    - `component-name.examples.ts`:example templates with `@summary` JSDoc
@@ -48,6 +48,6 @@ Read the [component creation guide](projects/site/src/docs/internal/guidelines/c
 
 ### Reference Components
 
-- `/projects/elements/src/button/` - BaseButton pattern example
-- `/projects/elements/src/badge/` - LitElement pattern example
-- `/projects/elements/src/card/` - Composition with slots example
+- `/projects/core/src/button/` - BaseButton pattern example
+- `/projects/core/src/badge/` - LitElement pattern example
+- `/projects/core/src/card/` - Composition with slots example

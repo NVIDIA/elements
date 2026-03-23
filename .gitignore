@@ -14,8 +14,8 @@ dist
 *.diff.png
 coverage
 vendor/
-projects/elements/src/icon/icons.ts
-projects/elements/index.html
+projects/core/src/icon/icons.ts
+projects/core/index.html
 projects/monaco/src/themes/generated
 projects/themes/index.html
 v8-compile-cache-0

@@ -101,9 +101,9 @@
         "./src/utils/utils.ts",
         "../../code/package.json",
         "../../code/dist/custom-elements.json",
-        "../../elements/src/internal/types/index.ts",
-        "../../elements/package.json",
-        "../../elements/dist/custom-elements.json",
+        "../../core/src/internal/types/index.ts",
+        "../../core/package.json",
+        "../../core/dist/custom-elements.json",
         "../../styles/package.json",
         "../../styles/dist/custom-elements.json",
         "../../themes/package.json",
@@ -122,7 +122,7 @@
       ],
       "dependencies": [
         {
-          "script": "../../elements:build",
+          "script": "../../core:build",
           "cascade": false
         },
         {
@@ -156,9 +156,9 @@
       "files": [
         "./src/tasks/projects.ts",
         "./src/tasks/projects.utils.ts",
-        "../../elements/package.json",
-        "../../elements/README.md",
-        "../../elements/CHANGELOG.md",
+        "../../core/package.json",
+        "../../core/README.md",
+        "../../core/CHANGELOG.md",
         "../../styles/package.json",
         "../../styles/README.md",
         "../../styles/CHANGELOG.md",
@@ -193,10 +193,10 @@
         "./static/lighthouse.json",
         "./coverage/unit/coverage-summary.json",
         "./coverage/unit/summary.json",
-        "../../elements/coverage/unit/coverage-summary.json",
-        "../../elements/coverage/unit/summary.json",
-        "../../elements/coverage/visual/summary.json",
-        "../../elements/coverage/ssr/summary.json",
+        "../../core/coverage/unit/coverage-summary.json",
+        "../../core/coverage/unit/summary.json",
+        "../../core/coverage/visual/summary.json",
+        "../../core/coverage/ssr/summary.json",
         "../../styles/coverage/visual/summary.json",
         "../../themes/coverage/visual/summary.json",
         "../../cli/coverage/unit/coverage-summary.json",
@@ -231,15 +231,15 @@
           "cascade": false
         },
         {
-          "script": "../../elements:test:coverage",
+          "script": "../../core:test:coverage",
           "cascade": false
         },
         {
-          "script": "../../elements:test:ssr",
+          "script": "../../core:test:ssr",
           "cascade": false
         },
         {
-          "script": "../../elements:test:visual",
+          "script": "../../core:test:visual",
           "cascade": false
         },
         {
@@ -288,7 +288,7 @@
         "./src/tasks/examples.utils.ts",
         "./src/utils/utils.ts",
         "../patterns/dist/**/*.examples.json",
-        "../../elements/dist/**/*.examples.json",
+        "../../core/dist/**/*.examples.json",
         "../../styles/dist/**/*.examples.json",
         "../../themes/dist/**/*.examples.json",
         "../../monaco/dist/**/*.examples.json",
@@ -301,7 +301,7 @@
       ],
       "dependencies": [
         {
-          "script": "../../elements:build",
+          "script": "../../core:build",
           "cascade": false
         },
         {

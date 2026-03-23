@@ -156,7 +156,7 @@
       "dependencies": [
         "../internals/testing:build",
         "../internals/vite:ci",
-        "../elements:build"
+        "../core:build"
       ]
     },
     "test:coverage": {
@@ -176,7 +176,7 @@
       "dependencies": [
         "../internals/testing:build",
         "../internals/vite:ci",
-        "../elements:build"
+        "../core:build"
       ]
     },
     "test:watch": {

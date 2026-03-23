@@ -31,7 +31,7 @@
     "build": {
       "command": "ng build --base-href ${PAGES_BASE_URL}starters/angular/",
       "files": [
-        "../../elements/dist/**/*.js",
+        "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
         "src/**",
@@ -45,7 +45,7 @@
       ],
       "dependencies": [
         {
-          "script": "../../elements:build",
+          "script": "../../core:build",
           "cascade": false
         },
         {
