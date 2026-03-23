@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { GlobalStateService } from '../services/global.service.js';
 import type { ElementDefinition } from '../types/index.js';

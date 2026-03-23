@@ -594,7 +594,6 @@ export const DynamicTypeaheadSearch = () => {
   `
 }
 
-/* eslint-disable @nvidia-elements/lint/no-missing-slotted-elements */
 /**
  * @summary Performance test with 1000 options to show filtering efficiency with large datasets.
  * @tags test-case performance
