@@ -429,7 +429,7 @@ describe('utils', () => {
 
   describe('renderReport', () => {
     beforeEach(() => {
-      vi.mocked(marked.parse).mockImplementation(input => Promise.resolve(String(input)));
+      vi.mocked(marked.parse).mockImplementation(input => Promise.resolve(input));
     });
 
     it('should log formatted report and not exit on success', async () => {
