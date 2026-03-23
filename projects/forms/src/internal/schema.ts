@@ -1,6 +1,7 @@
 import type { Schema } from './types.js';
 import { FormControlError } from './errors.js';
 
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- caller specifies T for typed return
 export function parseValueSchema<T>(formControlName: string, value: string, schema: Schema): T {
   const parsedValue = parseControlValue(value, schema);
   if (parsedValue === undefined) {
@@ -156,6 +157,7 @@ export function validateSchema(schema: Schema, value: unknown): ValidationResult
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- caller specifies T for typed return
 export function parseControlValue<T>(value: string, schema: Schema): T | undefined {
   const schemaType = schema.type;
   let parsedValue: unknown;

@@ -1,4 +1,4 @@
-export type FormControlValue = string | number | File | File[] | null | {};
+export type FormControlValue = string | number | File | File[] | null | object;
 
 interface SchemaBase {
   type: string;
