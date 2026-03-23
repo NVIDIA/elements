@@ -12,12 +12,11 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-    "baseUrl": "../",
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "paths": {
-      "@nvidia-elements/*": ["../*"]
+      "@nvidia-elements/*": ["../../*"]
     }
   },
   "include": ["./**/*.ts"]

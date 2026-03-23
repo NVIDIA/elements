@@ -17,6 +17,7 @@ class TypeSubmitControllerTestElement extends LitElement {
   #form: HTMLFormElement;
 
   @property({ type: Object })
+  // eslint-disable-next-line @typescript-eslint/related-getter-setter-pairs
   get form(): HTMLFormElement | null {
     return this.#form ? this.#form : this._internals.form;
   }
