@@ -44,7 +44,7 @@
       }
     },
     "build": {
-      "command": "pnpm exec eleventy",
+      "command": "rm -rf dist .11ty-vite && pnpm exec eleventy",
       "files": [
         "src",
         "!src/**/*.test.lighthouse.ts",
@@ -52,7 +52,6 @@
         "./eleventy.config.js"
       ],
       "dependencies": [
-        "clean",
         "build:dependencies"
       ],
       "output": [
@@ -148,12 +147,6 @@
           "default": "/elements/preview/"
         }
       }
-    },
-    "clean": {
-      "command": "rm -rf dist && rm -rf .11ty-vite",
-      "files": [],
-      "output": [],
-      "dependencies": []
     },
     "lint": {
       "dependencies": [

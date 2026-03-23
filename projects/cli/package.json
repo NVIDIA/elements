@@ -25,7 +25,7 @@
     "test": "wireit",
     "test:watch": "wireit",
     "test:coverage": "wireit",
-    "nve:install": "mkdir -p $HOME/.local/bin && cp dist/nve-macos-arm64 $HOME/.local/bin/nve",
+    "nve:install": "pnpm run build && mkdir -p $HOME/.local/bin && cp dist/nve-macos-arm64 $HOME/.local/bin/nve",
     "nve:uninstall": "rm -f $HOME/.local/bin/nve",
     "nve:install:node": "test -n \"$CI\" || pnpm link --global",
     "nve:uninstall:node": "pnpm uninstall --global @nvidia-elements/cli"
