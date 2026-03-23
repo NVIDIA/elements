@@ -128,7 +128,7 @@ export class ApiService {
 
     const markdown = found.map((r: Element | Attribute) => r.markdown).join('\n\n---\n\n');
     const notFoundNote = notFound.length > 0 ? `\n\n---\n\nNot found: ${notFound.join(', ')}` : '';
-    return markdown + notFoundNote;
+    return `${markdown}${notFoundNote}`;
   }
 
   @tool({

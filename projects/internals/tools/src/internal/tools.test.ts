@@ -227,7 +227,6 @@ describe('loadTools', () => {
         return 'not a tool';
       }
 
-      constructor() {}
       arguments = {};
       caller = {};
       callee = {};

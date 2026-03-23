@@ -194,10 +194,10 @@ export function validateTemplate(
     return acc;
   }, {});
 
-  const allowedSvgAttributes: AllowedAttributes = svgElements.reduce((acc: AllowedAttributes, element) => {
+  const allowedSvgAttributes: AllowedAttributes = svgElements.reduce<AllowedAttributes>((acc, element) => {
     acc[element] = svgAttrs;
     return acc;
-  }, {} as AllowedAttributes);
+  }, {});
 
   const allowedAttributes: AllowedAttributes = {
     ...sanitizeHtml.defaults.allowedAttributes,
@@ -206,14 +206,14 @@ export function validateTemplate(
     body: ['nve-text', 'nve-layout', 'nve-theme'],
     ...customElementsAllowedAttributes,
     ...allowedSvgAttributes,
-    ...formElements.reduce((acc: AllowedAttributes, element) => {
+    ...formElements.reduce<AllowedAttributes>((acc, element) => {
       acc[element] = [...nativeElementAttrs, ...formAttrs];
       return acc;
-    }, {} as AllowedAttributes),
-    ...nativeElements.reduce((acc: AllowedAttributes, element) => {
+    }, {}),
+    ...nativeElements.reduce<AllowedAttributes>((acc, element) => {
       acc[element] = [...(acc[element] ?? []), ...nativeElementAttrs];
       return acc;
-    }, {} as AllowedAttributes),
+    }, {}),
     '*': [
       'slot',
       'id',
