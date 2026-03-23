@@ -40,3 +40,4 @@ projects/starters/react/src/App.tsx
 projects/starters/solidjs/src/App.tsx
 projects/starters/typescript/src/index.html
 projects/starters/vue/src/App.vue
+projects/starters/nuxt/.nuxt/**/*

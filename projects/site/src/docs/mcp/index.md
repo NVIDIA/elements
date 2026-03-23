@@ -11,13 +11,13 @@
 
 # {{title}}
 
-<h2 nve-text="heading sm muted">The Elements MCP server connects AI coding assistants to the Elements design system. It gives tools like Claude Code and Cursor direct access to component APIs, design tokens, template validation, and project scaffolding so your AI assistant can build with Elements effectively</h2>
+<h2 nve-text="heading sm muted">The Elements MCP server connects AI coding assistants to the Elements design system. It gives tools like Claude Code, Cursor, and Codex direct access to component APIs, design tokens, template validation, and project scaffolding so your AI assistant can build with Elements effectively</h2>
 
 {% install-cli %}
 
 ## Quick Setup
 
-After you install the CLI, the fastest way to configure the Elements MCP uses the setup command. This detects your package manager, configures the MCP server for both Cursor and Claude Code, and adds Elements core dependencies to the project.
+After you install the CLI, the fastest way to configure the Elements MCP uses the setup command. This detects your package manager, configures the MCP server for Cursor, Claude Code, and Codex, and adds Elements core dependencies to the project.
 
 ```shell
 nve project.setup
@@ -29,6 +29,7 @@ nve project.setup
   <nve-tabs id="manual-tabs">
     <nve-tabs-item selected value="claude-code">Claude Code</nve-tabs-item>
     <nve-tabs-item value="cursor">Cursor</nve-tabs-item>
+    <nve-tabs-item value="codex">Codex</nve-tabs-item>
   </nve-tabs>
   <nve-divider></nve-divider>
   <br />
@@ -70,6 +71,21 @@ After adding the configuration in your project's .cursor directory, enable the M
     }
   }
 }
+```
+
+  </div>
+
+<div id="codex" hidden>
+
+After adding the configuration in the root of your project, restart Codex for the changes to take effect. The Elements MCP tools are then available for use in your conversations.
+
+<br />
+
+```shell
+# .codex/config.toml
+[mcp_servers.elements]
+command = "nve"
+args = ["mcp"]
 ```
 
   </div>
