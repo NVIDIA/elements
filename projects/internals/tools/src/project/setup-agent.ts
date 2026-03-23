@@ -5,40 +5,23 @@ import type { Report } from '../internal/types.js';
 import { claudeProjectSettings } from './starters.js';
 import { skills } from '../context/index.js';
 
-export type IDE = 'cursor' | 'claude-code' | 'both';
+export type IDE = 'cursor' | 'claude-code' | 'codex' | 'all';
 
 const DESCRIPTION = 'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples';
 
-interface McpServerConfig {
+export interface McpServerConfig {
   description: string;
   command: string;
   args?: string[];
   env?: Record<string, string>;
 }
 
-export function getMcpServerConfig(ide: 'cursor' | 'claude-code'): McpServerConfig {
-  if (ide === 'cursor') {
-    return {
-      description: DESCRIPTION,
-      command: 'nve mcp'
-    };
-  }
-
-  // Claude Code uses command + args array
-  return {
+export function writeMcpJsonConfig(configPath: string): string {
+  const jsonConfig: McpServerConfig = {
     description: DESCRIPTION,
     command: 'nve',
     args: ['mcp']
   };
-}
-
-export function getConfigPath(cwd: string, ide: 'cursor' | 'claude-code'): string {
-  return ide === 'cursor' ? resolve(join(cwd, '.cursor', 'mcp.json')) : resolve(join(cwd, '.mcp.json'));
-}
-
-export function writeMcpConfig(cwd: string, ide: 'cursor' | 'claude-code'): string {
-  const configPath = getConfigPath(cwd, ide);
-  const serverConfig = getMcpServerConfig(ide);
 
   let existing: { mcpServers?: Record<string, unknown> } = {};
   try {
@@ -53,13 +36,34 @@ export function writeMcpConfig(cwd: string, ide: 'cursor' | 'claude-code'): stri
     ...existing,
     mcpServers: {
       ...existing.mcpServers,
-      elements: serverConfig
+      elements: jsonConfig
     }
   };
 
   const dir = configPath.substring(0, configPath.lastIndexOf('/'));
   mkdirSync(dir, { recursive: true });
   writeFileSync(configPath, JSON.stringify(updated, null, 2) + '\n');
+  return configPath;
+}
+
+export function writeMcpTomlConfig(configPath: string): string {
+  let existing = '';
+  try {
+    if (existsSync(configPath)) {
+      existing = readFileSync(configPath, 'utf-8');
+    }
+  } catch {
+    // start fresh
+  }
+
+  const sectionRegex = new RegExp(`\\[mcp_servers\\.elements\\][\\s\\S]*?(?=\\n\\[|$)`);
+  const content = existing.replace(sectionRegex, '').trimEnd();
+  const block = `\n\n[mcp_servers.elements]\ncommand = "nve"\nargs = ["mcp"]\n`;
+  const updated = (content + block).trimStart();
+  const dir = configPath.substring(0, configPath.lastIndexOf('/'));
+
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(configPath, updated);
   return configPath;
 }
 
@@ -99,13 +103,12 @@ export function writeClaudeSettings(cwd: string): string {
   return settingsPath;
 }
 
-export function writeElementsSkill(cwd: string): string {
+export function writeElementsSkill(skillDir: string): string {
   const skill = skills.find(s => s.name === 'elements');
   if (!skill) {
     throw new Error('Elements skill not found');
   }
 
-  const skillDir = resolve(join(cwd, '.claude', 'skills', skill.name));
   mkdirSync(skillDir, { recursive: true });
 
   const skillPath = join(skillDir, 'SKILL.md');
@@ -118,6 +121,47 @@ ${skill.context}`;
 
   writeFileSync(skillPath, content);
   return skillPath;
+}
+
+const VSCODE_HTML_CUSTOM_DATA = [
+  './node_modules/@nvidia-elements/styles/dist/data.html.json',
+  './node_modules/@nvidia-elements/core/dist/data.html.json',
+  './node_modules/@nvidia-elements/monaco/dist/data.html.json',
+  './node_modules/@nvidia-elements/code/dist/data.html.json',
+  './node_modules/@nvidia-elements/markdown/dist/data.html.json'
+];
+
+export function writeVSCodeSettings(cwd: string): string {
+  const settingsPath = resolve(join(cwd, '.vscode', 'settings.json'));
+
+  let existing: Record<string, unknown> = {};
+  try {
+    if (existsSync(settingsPath)) {
+      existing = JSON.parse(readFileSync(settingsPath, 'utf-8'));
+    }
+  } catch {
+    // start fresh if file is invalid
+  }
+
+  const updated = {
+    ...existing,
+    'html.customData': VSCODE_HTML_CUSTOM_DATA
+  };
+
+  const dir = settingsPath.substring(0, settingsPath.lastIndexOf('/'));
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(settingsPath, JSON.stringify(updated, null, 2) + '\n');
+  return settingsPath;
+}
+
+export function writeAllAgentConfigs(dir: string): void {
+  writeClaudeSettings(dir);
+  writeMcpJsonConfig(resolve(join(dir, '.mcp.json')));
+  writeMcpJsonConfig(resolve(join(dir, '.cursor', 'mcp.json')));
+  writeMcpTomlConfig(resolve(join(dir, '.codex', 'config.toml')));
+  writeElementsSkill(resolve(join(dir, '.agents', 'skills', 'elements')));
+  writeElementsSkill(resolve(join(dir, '.claude', 'skills', 'elements')));
+  writeVSCodeSettings(dir);
 }
 
 export async function setupAgent(cwd: string, ide: IDE): Promise<Report> {
@@ -133,43 +177,51 @@ export async function setupAgent(cwd: string, ide: IDE): Promise<Report> {
     };
   }
 
-  const ides: Array<'cursor' | 'claude-code'> = ide === 'both' ? ['cursor', 'claude-code'] : [ide];
+  const ides: Array<'cursor' | 'claude-code' | 'codex'> = ide === 'all' ? ['cursor', 'claude-code', 'codex'] : [ide];
   const report: Report = {};
+  const labels: Record<string, string> = { cursor: 'Cursor', 'claude-code': 'Claude Code', codex: 'Codex' };
 
   for (const target of ides) {
     try {
-      writeMcpConfig(dir, target);
-      const label = target === 'cursor' ? 'Cursor' : 'Claude Code';
-      report[target] = {
-        message: `${label} configured. Restart ${label} to activate`,
-        status: 'success'
-      };
-
+      let message = `${labels[target]} configured. Restart ${labels[target]} to activate`;
       if (target === 'claude-code') {
         writeClaudeSettings(dir);
-        report['claude-settings'] = {
-          message: `Claude Code project settings configured`,
-          status: 'success'
-        };
+        writeElementsSkill(resolve(join(dir, '.claude', 'skills', 'elements')));
+        writeMcpJsonConfig(resolve(join(dir, '.mcp.json')));
       }
-    } catch (e) {
-      const label = target === 'cursor' ? 'Cursor' : 'Claude Code';
+
+      if (target === 'codex') {
+        writeElementsSkill(resolve(join(dir, '.agents', 'skills', 'elements')));
+        writeMcpTomlConfig(resolve(join(dir, '.codex', 'config.toml')));
+      }
+
+      if (target === 'cursor') {
+        writeElementsSkill(resolve(join(dir, '.agents', 'skills', 'elements')));
+        writeMcpJsonConfig(resolve(join(dir, '.cursor', 'mcp.json')));
+        message = `${labels[target]} configured. Enable the MCP in the ${labels[target]} settings to activate`;
+      }
+
       report[target] = {
-        message: `**Failed to configure ${label} MCP**: ${e}`,
+        message,
+        status: 'success'
+      };
+    } catch (e) {
+      report[target] = {
+        message: `**Failed to configure ${labels[target]}**: ${e}`,
         status: 'danger'
       };
     }
   }
 
   try {
-    writeElementsSkill(cwd);
-    report['elements-skill'] = {
-      message: `Elements skill file configured`,
+    writeVSCodeSettings(dir);
+    report['vscode-settings'] = {
+      message: 'VSCode settings configured',
       status: 'success'
     };
   } catch (e) {
-    report['elements-skill'] = {
-      message: `Failed to configure Elements skill file. ${e}`,
+    report['vscode-settings'] = {
+      message: `Failed to configure VSCode settings. ${e}`,
       status: 'danger'
     };
   }

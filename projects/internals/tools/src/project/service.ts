@@ -52,7 +52,7 @@ export class ProjectService {
     const projectDir = resolve(join(cwd, type));
 
     const createReport = await createStarter(type, dir);
-    const agentReport = await setupAgent(projectDir, 'both');
+    const agentReport = await setupAgent(projectDir, 'all');
     const setupProjectReport = await setupProject(projectDir);
     const updateReport = await updateProject(projectDir);
     const reports = [createReport, agentReport, setupProjectReport, updateReport];
@@ -96,7 +96,7 @@ export class ProjectService {
   })
   static async setup({ cwd }: { cwd: string }): Promise<Report> {
     const dir = resolve(cwd);
-    const agentReport = await setupAgent(dir, 'both');
+    const agentReport = await setupAgent(dir, 'all');
     const setupProjectReport = await setupProject(dir);
     const updateReport = await updateProject(dir);
     return {

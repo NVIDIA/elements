@@ -4,6 +4,7 @@ import '@nvidia-elements/code/codeblock/define.js';
 import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/languages/typescript.js';
 import '@nvidia-elements/code/codeblock/languages/xml.js';
+import '@nvidia-elements/code/codeblock/languages/toml.js';
 import type { CodeBlock } from '@nvidia-elements/code/codeblock/index.js';
 
 import './_internal/animated-build/animated-build.js';
