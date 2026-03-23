@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="./declarations.d.ts" />
 
 import '@nvidia-elements/code/codeblock/languages/bash.js';

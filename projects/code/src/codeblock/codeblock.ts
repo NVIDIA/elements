@@ -158,8 +158,8 @@ export class CodeBlock extends LitElement implements ContainerElement {
   #getLinesToHighlight() {
     const range: number[] = [];
     const lines = this.highlight!.split(',');
-    for (const l in lines) {
-      const [startStr, endStr] = lines[l]!.split('-');
+    for (const line of lines) {
+      const [startStr, endStr] = line.split('-');
       const start = parseInt(startStr!);
       let end = parseInt(endStr!);
       if (!end) {
