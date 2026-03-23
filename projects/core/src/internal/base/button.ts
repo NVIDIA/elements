@@ -75,6 +75,7 @@ export class BaseButton extends LitElement {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/related-getter-setter-pairs
   get form(): HTMLFormElement | null | string {
     // string should drop from the type but without it the type does not derive from the setter correctly
     if (this.#form && typeof this.#form !== 'string') {

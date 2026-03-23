@@ -7,7 +7,6 @@
     "lib": ["esnext", "DOM", "DOM.Iterable"],
     "moduleResolution": "bundler",
     "strict": true,
-    "baseUrl": "./",
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "isolatedModules": true,

@@ -9,7 +9,6 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "dist/",
-    "baseUrl": "./",
     "rootDir": "./",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,

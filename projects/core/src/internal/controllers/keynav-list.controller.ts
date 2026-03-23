@@ -177,6 +177,8 @@ export function getNextKeyListItem(item: HTMLElement, items: HTMLElement[], conf
     case 'pagedown':
       next = Math.min(itemCount, next + 4);
       break;
+    case null:
+      break;
   }
 
   return { next, previous };

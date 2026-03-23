@@ -128,7 +128,8 @@ function toFileLine(monaco: Monaco, lineNumber: number, uri: string, problems: P
 
 function toProblemLine(monaco: Monaco, lineNumber: number, problem: Problem): DecoratedLine {
   const severity = toSeverityLabel(problem.severity);
-  const message = problem.message.split('\n')[0];
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const message = problem.message.split('\n')[0]!;
   const source = problem.source ?? '';
   const code = (typeof problem.code === 'object' ? problem.code?.value : problem.code) ?? '';
   const target = typeof problem.code === 'object' ? problem.code?.target : undefined;
