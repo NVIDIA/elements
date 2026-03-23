@@ -21,7 +21,7 @@ export function valueSchemaValidator(value: unknown, element: FormControl): Vali
   return validateSchema(metadata.valueSchema, value);
 }
 
-export function requiredValidator<T>(value: T, element: FormControl): ValidatorResult {
+export function requiredValidator(value: unknown, element: FormControl): ValidatorResult {
   if (
     (element as unknown as { required: boolean }).required &&
     (value === undefined || value === null || value === '')
