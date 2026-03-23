@@ -3,7 +3,7 @@ import path from 'path';
 import * as url from 'url';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-const elements = readFileSync(path.resolve(__dirname, '../../../../elements/coverage/size/index.html'), 'utf8');
+const elements = readFileSync(path.resolve(__dirname, '../../../../core/coverage/size/index.html'), 'utf8');
 
 export const data = {
   title: 'Bundle Explorer Report',

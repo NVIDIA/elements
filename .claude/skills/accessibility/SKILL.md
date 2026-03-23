@@ -17,7 +17,7 @@ When the user invokes this skill for a component, perform the following layers o
 Run ESLint on the component source and check for `lit-a11y` rule violations:
 
 ```shell
-cd projects/elements && pnpm exec eslint --no-warn-ignored src/<component>/<component>.ts
+cd projects/core && pnpm exec eslint --no-warn-ignored src/<component>/<component>.ts
 ```
 
 Review the component template for common issues:
@@ -32,7 +32,7 @@ Review the component template for common issues:
 Verify `<component>.test.axe.ts` exists and covers all component variants:
 
 ```
-Read path="projects/elements/src/<component>/<component>.test.axe.ts"
+Read path="projects/core/src/<component>/<component>.test.axe.ts"
 ```
 
 Check that the test:
@@ -56,7 +56,7 @@ Identify which WAI-ARIA Authoring Practices pattern the component implements. Ve
 Check if the component uses the `keynav` reactive controller from `@nvidia-elements/core/internal`:
 
 ```
-Grep pattern="keynav|keyNavigationList|KeyNav" path="projects/elements/src/<component>/"
+Grep pattern="keynav|keyNavigationList|KeyNav" path="projects/core/src/<component>/"
 ```
 
 Verify keyboard interactions match the ARIA pattern:
@@ -72,7 +72,7 @@ Verify keyboard interactions match the ARIA pattern:
 Check that the component uses theme tokens rather than hardcoded colors:
 
 ```
-Grep pattern="rgb|#[0-9a-fA-F]|hsl" path="projects/elements/src/<component>/<component>.css"
+Grep pattern="rgb|#[0-9a-fA-F]|hsl" path="projects/core/src/<component>/<component>.css"
 ```
 
 Flag any hardcoded color values. Verify CSS custom properties map to theme tokens that meet WCAG 2.1 AA contrast ratios (4.5:1 for normal text, 3:1 for large text).

@@ -8,7 +8,7 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const resolve = rel => path.resolve(__dirname, rel);
 const DIST_DIR = resolve('../../../.metrics');
 
-const elementsLighthouse = JSON.parse(readFileSync(resolve('../../elements/.lighthouse/dist/report.json')));
+const elementsLighthouse = JSON.parse(readFileSync(resolve('../../core/.lighthouse/dist/report.json')));
 const themesLighthouse = JSON.parse(readFileSync(resolve('../../themes/.lighthouse/dist/report.json')));
 const stylesLighthouse = JSON.parse(readFileSync(resolve('../../styles/.lighthouse/dist/report.json')));
 const monacoLighthouse = JSON.parse(readFileSync(resolve('../../monaco/.lighthouse/dist/report.json')));

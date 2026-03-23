@@ -28,10 +28,10 @@ pnpm run ci
 pnpm run ci:reset
 
 # Build a single project
-cd projects/elements && pnpm run build
+cd projects/core && pnpm run build
 
 # Dev mode with watch
-cd projects/elements && pnpm run dev
+cd projects/core && pnpm run dev
 ```
 
 ### Wireit Basics

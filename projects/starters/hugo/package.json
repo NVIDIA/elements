@@ -30,7 +30,7 @@
     "build": {
       "command": "hugo --baseURL \"${PAGES_BASE_URL:-/}\"",
       "files": [
-        "../../elements/dist/**/*.js",
+        "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
         "../../code/dist/**/*.js",
@@ -49,7 +49,7 @@
           "cascade": false
         },
         {
-          "script": "../../elements:build",
+          "script": "../../core:build",
           "cascade": false
         },
         {

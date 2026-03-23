@@ -34,7 +34,7 @@
     "build": {
       "command": "vite build",
       "files": [
-        "../../elements/dist/bundles/index.js",
+        "../../core/dist/bundles/index.js",
         "../../themes/dist/bundles/index.css",
         "../../themes/dist/fonts/inter.css",
         "../../styles/dist/bundles/index.css",
@@ -47,7 +47,7 @@
       ],
       "dependencies": [
         {
-          "script": "../../elements:build",
+          "script": "../../core:build",
           "cascade": false
         },
         {

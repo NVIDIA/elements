@@ -69,8 +69,8 @@
     "build:dependencies": {
       "command": "echo 'building dependencies...'",
       "files": [
-        "../elements/dist/**/*.js",
-        "../elements/dist/**/*.examples.json",
+        "../core/dist/**/*.js",
+        "../core/dist/**/*.examples.json",
         "../styles/dist/**/*.css",
         "../styles/dist/**/*.examples.json",
         "../themes/dist/**/*.css",
@@ -92,7 +92,7 @@
       ],
       "dependencies": [
         {
-          "script": "../elements:build",
+          "script": "../core:build",
           "cascade": false
         },
         {

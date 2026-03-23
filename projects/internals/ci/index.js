@@ -6,7 +6,7 @@ import * as url from 'url';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 const resolve = rel => path.resolve(__dirname, rel);
 
-const elementsCoverage = JSON.parse(readFileSync(resolve('../../elements/coverage/unit/coverage-summary.json')));
+const elementsCoverage = JSON.parse(readFileSync(resolve('../../core/coverage/unit/coverage-summary.json')));
 const labsCodeCoverage = JSON.parse(readFileSync(resolve('../../code/coverage/unit/coverage-summary.json')));
 const monacoCoverage = JSON.parse(readFileSync(resolve('../../monaco/coverage/unit/coverage-summary.json')));
 const labsFormsCoverage = JSON.parse(readFileSync(resolve('../../forms/coverage/unit/coverage-summary.json')));

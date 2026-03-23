@@ -64,7 +64,7 @@
         "./projects/code:ci",
         "./projects/cli:ci",
         "./projects/create:ci",
-        "./projects/elements:ci",
+        "./projects/core:ci",
         "./projects/forms:ci",
         "./projects/lint:ci",
         "./projects/markdown:ci",
@@ -107,8 +107,8 @@
         "./projects/cli:build",
         "./projects/cli:test",
         "./projects/create:build",
-        "./projects/elements:build",
-        "./projects/elements:test",
+        "./projects/core:build",
+        "./projects/core:test",
         "./projects/forms:build",
         "./projects/forms:test",
         "./projects/lint:build",
@@ -130,7 +130,7 @@
         "./projects/code:test:lighthouse",
         "./projects/styles:test:lighthouse",
         "./projects/themes:test:lighthouse",
-        "./projects/elements:test:lighthouse",
+        "./projects/core:test:lighthouse",
         "./projects/forms:test:lighthouse",
         "./projects/markdown:test:lighthouse",
         "./projects/media:test:lighthouse",
@@ -154,7 +154,7 @@
         "release:code",
         "release:create",
         "release:themes",
-        "release:elements",
+        "release:core",
         "release:lint",
         "release:labs-forms",
         "release:markdown",
@@ -171,8 +171,8 @@
         "release:cli"
       ]
     },
-    "release:elements": {
-      "command": "cd projects/elements && HUSKY=0 pnpm exec semantic-release",
+    "release:core": {
+      "command": "cd projects/core && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
         "release:themes",
         "release:labs-forms"
@@ -187,7 +187,7 @@
     "release:code": {
       "command": "cd projects/code && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:elements"
+        "release:core"
       ]
     },
     "release:labs-forms": {
@@ -203,19 +203,19 @@
     "release:markdown": {
       "command": "cd projects/markdown && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:elements"
+        "release:core"
       ]
     },
     "release:media": {
       "command": "cd projects/media && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:elements"
+        "release:core"
       ]
     },
     "release:monaco": {
       "command": "cd projects/monaco && HUSKY=0 pnpm exec semantic-release",
       "dependencies": [
-        "release:elements",
+        "release:core",
         "release:themes",
         "release:labs-forms"
       ]
@@ -246,7 +246,7 @@
         "!**/__screenshots__/**",
         "!**/coverage/**",
         "!**/node_modules/**",
-        "!projects/elements/src/icon/{icons,server}.ts",
+        "!projects/core/src/icon/{icons,server}.ts",
         "!projects/internals/metadata/static/**",
         "!projects/monaco/src/themes/generated/**",
         "!projects/**/src/vendor/**/*",
@@ -265,7 +265,7 @@
       "dependencies": [
         "./projects/code:lint:fix",
         "./projects/create:lint:fix",
-        "./projects/elements:lint:fix",
+        "./projects/core:lint:fix",
         "./projects/forms:lint:fix",
         "./projects/internals/metadata:lint:fix",
         "./projects/internals/patterns:lint:fix",

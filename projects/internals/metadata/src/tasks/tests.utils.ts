@@ -57,7 +57,7 @@ export async function generateTestSummary(): Promise<ProjectsTestSummary> {
   return {
     created: new Date().toISOString(),
     projects: {
-      '@nvidia-elements/core': await getTestReport('@nvidia-elements/core', '../../../../elements'),
+      '@nvidia-elements/core': await getTestReport('@nvidia-elements/core', '../../../../core'),
       '@nvidia-elements/styles': await getTestReport('@nvidia-elements/styles', '../../../../styles'),
       '@nvidia-elements/themes': await getTestReport('@nvidia-elements/themes', '../../../../themes'),
       '@nvidia-elements/code': await getTestReport('@nvidia-elements/code', '../../../../code'),

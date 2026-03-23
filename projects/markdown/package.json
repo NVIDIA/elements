@@ -121,8 +121,8 @@
     "build": {
       "command": "NODE_ENV=production vite build",
       "files": [
-        "../elements/dist/**/*.js",
-        "!../elements/dist/**/*.examples.js",
+        "../core/dist/**/*.js",
+        "!../core/dist/**/*.examples.js",
         "src/**",
         "!src/**/*.test.ts",
         "!src/**/*.test.lighthouse.ts",
@@ -140,7 +140,7 @@
       "dependencies": [
         "../internals/vite:ci",
         {
-          "script": "../elements:build",
+          "script": "../core:build",
           "cascade": false
         }
       ]
@@ -169,7 +169,7 @@
       "dependencies": [
         "../internals/testing:build",
         "../internals/vite:ci",
-        "../elements:build"
+        "../core:build"
       ]
     },
     "test:coverage": {
@@ -189,7 +189,7 @@
       "dependencies": [
         "../internals/testing:build",
         "../internals/vite:ci",
-        "../elements:build"
+        "../core:build"
       ]
     },
     "test:watch": {
