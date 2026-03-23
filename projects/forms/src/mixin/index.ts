@@ -33,7 +33,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
 
     set readOnly(value: boolean | unknown) {
       this.toggleAttribute('readonly', value as boolean);
-      this.#requestUpdate();
+      this._requestUpdate();
     }
 
     /** determine if component is in disabled state */
@@ -44,7 +44,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
     // unknown forces generation of get/set in type defs see https://github.com/microsoft/TypeScript/issues/58790
     set disabled(value: boolean | unknown) {
       this.toggleAttribute('disabled', value as boolean);
-      this.#requestUpdate();
+      this._requestUpdate();
     }
 
     /** determine if the component value requires input */
@@ -54,7 +54,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
 
     set required(value: T | unknown) {
       this.toggleAttribute('required', value as boolean);
-      this.#requestUpdate();
+      this._requestUpdate();
     }
 
     /** name associated to parent form */
@@ -64,64 +64,65 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
 
     set name(value: string) {
       this.setAttribute('name', value);
-      this.#requestUpdate();
+      this._requestUpdate();
     }
 
     /** get determine if component is in no validation state */
     get noValidate(): boolean {
-      return this.getAttribute('novalidate') !== null || this.#internals.form?.noValidate === true;
+      return this.getAttribute('novalidate') !== null || this._formInternals.form?.noValidate === true;
     }
 
     /** set determine if component is in no validation state */
     set noValidate(value: boolean | unknown) {
       this.toggleAttribute('novalidate', value as boolean);
-      this.#requestUpdate();
+      this._requestUpdate();
     }
 
-    #value: T | undefined;
+    /** @internal */
+    _value: T | undefined;
 
     /** value state of the component */
     set value(value: T | unknown) {
       this.updateValue(value as T);
-      this.#requestUpdate();
+      this._requestUpdate();
     }
 
     get value(): T | undefined {
-      return this.#value;
+      return this._value;
     }
 
     /** @protected */
     updateValue(value: T) {
-      const previousValue = this.#value;
-      this.#value = structuredClone(value);
+      const previousValue = this._value;
+      this._value = structuredClone(value);
       const valid = this.checkValidity();
 
-      if (!valid && this.#metadata.strict) {
-        this.#value = previousValue;
+      if (!valid && this._metadata.strict) {
+        this._value = previousValue;
         console.error('FormControlError: (strict mode)', this.validationMessage);
       }
 
-      this.#updateFormState();
+      this._updateFormState();
     }
 
     /** associated parent form */
     get form() {
-      return this.#internals.form;
+      return this._formInternals.form;
     }
 
     /** determine if the component is a candidate for constraint checking */
     get willValidate() {
-      return this.#internals.willValidate;
+      return this._formInternals.willValidate;
     }
 
     /** validity state of the component */
     get validity() {
-      return this.#internals.validity;
+      return this._formInternals.validity;
     }
 
     /** validation message of the component */
     get validationMessage() {
-      return this.#internals.validationMessage;
+      return this._formInternals.validationMessage;
     }
 
     /** stringified value of the component */
@@ -135,7 +136,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
     }
 
     set valueAsNumber(value: number) {
-      if (typeof this.#value === 'number' && typeof value === 'number') {
+      if (typeof this._value === 'number' && typeof value === 'number') {
         this.value = value as T;
       } else {
         throw new FormControlError(this.localName, 'cannot set number value on non-number type');
@@ -146,26 +147,30 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
       return this.localName;
     }
 
-    get #metadata() {
+    /** @internal */
+    get _metadata() {
       return (this.constructor as FormControl).metadata;
     }
 
-    #internals = this.attachInternals();
-    #initialValue: T | undefined;
+    /** @internal */
+    _formInternals = this.attachInternals();
+    /** @internal */
+    _initialValue: T | undefined;
 
-    get #validators() {
-      return this.#metadata.validators ?? [];
+    /** @internal */
+    get _validators() {
+      return this._metadata.validators ?? [];
     }
 
     /** @protected */
     get _internals() {
-      return this.#internals;
+      return this._formInternals;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(...args: any[]) {
       super(...args);
-      this.#initialValue = this.value;
+      this._initialValue = this.value;
     }
 
     connectedCallback() {
@@ -174,7 +179,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
       }
 
       this.tabIndex = 0;
-      this.#updateFormState();
+      this._updateFormState();
       // 'input' event composes but 'change' does not https://github.com/whatwg/html/issues/5453
       this.shadowRoot?.addEventListener('input', e => e.stopPropagation());
       this.shadowRoot?.addEventListener('change', e => e.stopPropagation());
@@ -194,15 +199,16 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
         return;
       }
 
-      this.#handleAttributeChange(name, newValue);
+      this._handleAttributeChange(name, newValue);
     }
 
-    #handleAttributeChange(name: string, newValue: string) {
+    /** @internal */
+    _handleAttributeChange(name: string, newValue: string) {
       switch (name) {
         case 'value':
-          this.value = parseValueSchema<T>(this.localName, newValue, this.#metadata.valueSchema);
-          if (this.#initialValue === undefined) {
-            this.#initialValue = this.value;
+          this.value = parseValueSchema<T>(this.localName, newValue, this._metadata.valueSchema);
+          if (this._initialValue === undefined) {
+            this._initialValue = this.value;
           }
           break;
         case 'readonly':
@@ -222,7 +228,7 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
 
     /** @protected */
     formResetCallback() {
-      this.value = this.#initialValue;
+      this.value = this._initialValue;
       this.checkValidity();
     }
 
@@ -234,35 +240,35 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
 
     /** report validity of the component */
     reportValidity() {
-      return this.#internals.reportValidity();
+      return this._formInternals.reportValidity();
     }
 
     /** check validity of the component */
     checkValidity() {
       if (this.noValidate) {
-        this.#internals.setValidity({});
+        this._formInternals.setValidity({});
       } else {
-        for (const validator of this.#validators) {
+        for (const validator of this._validators) {
           const result = validator(this.value, this as unknown as FormControl);
           if (!result.validity.valid) {
-            this.#internals.setValidity(
+            this._formInternals.setValidity(
               result.validity,
               result.message,
               (this.shadowRoot?.activeElement as HTMLElement) ?? undefined
             );
             break;
           } else {
-            this.#internals.setValidity({});
+            this._formInternals.setValidity({});
           }
         }
       }
 
-      return this.#internals.checkValidity();
+      return this._formInternals.checkValidity();
     }
 
     /** @protected */
     setValidity(validity: Partial<ValidityState>, message?: string) {
-      this.#internals.setValidity(validity, message);
+      this._formInternals.setValidity(validity, message);
     }
 
     /** @protected */
@@ -284,10 +290,11 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
       }
     }
 
-    #updateFormState() {
+    /** @internal */
+    _updateFormState() {
       if (this.name) {
         if (typeof this.value === 'number') {
-          this.#internals?.setFormValue(`${this.value}`);
+          this._formInternals?.setFormValue(`${this.value}`);
         } else if (isObjectLiteral(this.value)) {
           const formData = new FormData();
           Object.entries(this.value as Record<string, unknown>)
@@ -295,18 +302,19 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
             .forEach(([key, value]) => {
               formData.set(`${this.name}-${key}`, `${value}`);
             });
-          this.#internals?.setFormValue(formData);
+          this._formInternals?.setFormValue(formData);
         } else if (Array.isArray(this.value)) {
           const formData = new FormData();
           this.value.forEach(i => formData.append(`${this.name}`, i));
-          this.#internals?.setFormValue(formData);
+          this._formInternals?.setFormValue(formData);
         } else {
-          this.#internals?.setFormValue(this.value as null | string | File);
+          this._formInternals?.setFormValue(this.value as null | string | File);
         }
       }
     }
 
-    #requestUpdate() {
+    /** @internal */
+    _requestUpdate() {
       if (this.requestUpdate) {
         this.requestUpdate();
       }

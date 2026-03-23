@@ -102,7 +102,7 @@
     "@nvidia-elements/lint": "workspace:*",
     "eslint": "catalog:",
     "jsdom": "27.1.0",
-    "typescript": "catalog:",
+    "typescript": "5.9.3",
     "vitest": "catalog:"
   }
 }
