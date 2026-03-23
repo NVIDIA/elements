@@ -7,7 +7,6 @@
     "lib": ["ESNext", "DOM"],
     "moduleResolution": "bundler",
     "strict": true,
-    "baseUrl": "./",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,

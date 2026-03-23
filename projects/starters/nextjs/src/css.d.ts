@@ -3,7 +3,4 @@ declare module '*.css' {
   export default content;
 }
 
-declare module '*.css?inline' {
-  const content: string;
-  export = content;
-}
+declare module '@lit-labs/ssr-react/enable-lit-ssr.js';
