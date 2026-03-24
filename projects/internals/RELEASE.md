@@ -31,7 +31,7 @@ packages:
 
 ```json
 "release:my-library": {
-  "command": "cd projects/my-library && pnpm exec semantic-release",
+  "command": "cd projects/my-library && pnpm exec semantic-release-monorepo",
   "dependencies": [
     "release:elements"
   ]
