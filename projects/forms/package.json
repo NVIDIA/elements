@@ -1,6 +1,9 @@
 {
   "name": "@nvidia-elements/forms",
   "version": "1.0.2",
+  "release": {
+    "extends": "../../release.config.js"
+  },
   "description": "Form control utilities and validation providing mixins, validators, and schema-based validation. Includes form association, event handling, and support for complex data types.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
