@@ -1,6 +1,6 @@
 // @ts-check
 
-import { UsageService, DownloadsService, ReleasesService, TestsService, ApiService } from '@internals/metadata';
+import { ReleasesService, TestsService, ApiService } from '@internals/metadata';
 
 export const data = {
   title: 'Metrics',
@@ -9,15 +9,12 @@ export const data = {
 
 const releases = await ReleasesService.getData();
 const testMetrics = await TestsService.getData();
-const downloads = await DownloadsService.getData();
-const usageMetrics = await UsageService.getData();
 const apiMetrics = await ApiService.getData();
 
-const usageMetricsReportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
-  new Date(usageMetrics.created)
+const releasesReportDate = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium', timeStyle: 'long' }).format(
+  new Date(releases.created)
 );
 
-const referenceTotal = usageMetrics.projects.reduce((p, n) => p + n.referenceTotal, 0);
 const elementTotal = apiMetrics.data.elements.length;
 
 const totalTests = Object.values(testMetrics.projects).reduce(
@@ -76,43 +73,15 @@ export function render() {
       <nve-tabs-item selected><a href="docs/metrics/">Metrics</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/api-status/">API Status</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/testing-and-performance/">Testing &amp; Performance</a></nve-tabs-item>
-      <nve-tabs-item><a href="docs/metrics/usage-metrics/">Usage &amp; Adoption</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/wireit/">Wireit Explorer</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/bundle-explorer/">Bundle Explorer</a></nve-tabs-item>
       <nve-tabs-item><a href="docs/metrics/metadata/">Raw Metadata</a></nve-tabs-item>
     </nve-tabs>
     <nve-divider></nve-divider>
     <p nve-text="body muted sm" nve-layout="pad-y:xs">
-      Metrics last updated on ${usageMetricsReportDate}.
+      Metrics last updated on ${releasesReportDate}.
     </p>
     <div class="dashboard">
-      <nve-card>
-        <nve-card-header>
-          <h3 nve-text="heading sm medium">Top Components by Template Reference</h3>
-          <p nve-text="body muted sm">Top 25 components found and referenced in HTML templates</p>
-        </nve-card-header>
-        <nve-card-content>
-          <canvas id="top-components-chart"></canvas>
-        </nve-card-content>
-      </nve-card>
-      <nve-card>
-        <nve-card-header>
-        <h3 nve-text="heading sm medium"><span nve-text="emphasis">${usageMetrics.projects.length}</span> Dependents / Projects</h3>
-          <p nve-text="body muted sm">Top projects with the most found source code API references</p>
-        </nve-card-header>
-        <nve-card-content>
-          <canvas id="top-projects-by-adoption-chart"></canvas>
-        </nve-card-content>
-      </nve-card>
-      <nve-card>
-        <nve-card-header>
-          <h3 nve-text="heading sm medium"><span nve-text="emphasis">${downloads.totalDownloads.toLocaleString()}</span> Package Downloads</h3>
-          <p nve-text="body muted sm">Downloads per package, segmented by Artifactory registry instance</p>
-        </nve-card-header>
-        <nve-card-content>
-          <canvas id="downloads-by-instance-chart"></canvas>
-        </nve-card-content>
-      </nve-card>
       <nve-card>
         <nve-card-header>
           <h3 nve-text="heading sm medium">${releases.data.length.toLocaleString()} Total Cumulative Releases</h3>
@@ -133,29 +102,11 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium"><span nve-text="emphasis">Adoption Curve</h3>
-          <p nve-text="body muted sm">Number of downloads relative to number of releases</p>
-        </nve-card-header>
-        <nve-card-content>
-          <canvas id="relative-adoption-chart"></canvas>
-        </nve-card-content>
-      </nve-card>
-      <nve-card>
-        <nve-card-header>
           <h3 nve-text="heading sm medium">Release Distribution</h3>
           <p nve-text="body muted sm">Distribution of semantic release types across all packages</p>
         </nve-card-header>
         <nve-card-content>
           <canvas id="release-type-distribution-chart"></canvas>
-        </nve-card-content>
-      </nve-card>
-      <nve-card>
-        <nve-card-header>
-          <h3 nve-text="heading sm medium">Version Distribution</h3>
-          <p nve-text="body muted sm">Adoption of different version ranges of the Elements packages</p>
-        </nve-card-header>
-        <nve-card-content>
-          <canvas id="version-adoption-chart" style="margin: auto;" width="350" height="270"></canvas>
         </nve-card-content>
       </nve-card>
       <nve-card>
@@ -179,65 +130,11 @@ export function render() {
       </nve-card>
       <nve-card>
         <nve-card-header>
-          <h3 nve-text="heading sm medium"><span nve-text="emphasis">${referenceTotal.toLocaleString()}</span> API Source Code References</h3>
-          <p nve-text="body muted sm">Known API source code references across all known projects</p>
-        </nve-card-header>
-        <nve-card-content>
-          <canvas id="api-references-chart" style="margin: auto;" width="440"></canvas>
-        </nve-card-content>
-      </nve-card>
-      <nve-card>
-        <nve-card-header>
-          <h3 nve-text="heading sm medium">Most Downloaded Versions</h3>
-          <p nve-text="body muted sm">Top downloaded versions across all packages</p>
-        </nve-card-header>
-        <nve-card-content>
-          <canvas id="top-versions-chart"></canvas>
-        </nve-card-content>
-      </nve-card>
-      <nve-card>
-        <nve-card-header>
           <h3 nve-text="heading sm medium"><span nve-text="emphasis">${totalTests.toLocaleString()}</span> Tests and Type Distribution</h3>
           <p nve-text="body muted sm">Distribution of test types across all projects.</p>
         </nve-card-header>
         <nve-card-content>
           <canvas id="test-distribution-chart" style="margin: auto;" width="440"></canvas>
-        </nve-card-content>
-      </nve-card>
-      <nve-card>
-        <nve-card-header>
-          <h3 nve-text="heading sm medium">Project Adoption by Repository</h3>
-          <p nve-text="body muted sm">Number of projects found using Elements grouped by Git platform/repository.</p>
-        </nve-card-header>
-        <nve-card-content>
-          <canvas id="repo-adoption-chart" style="margin: auto;" width="440"></canvas>
-        </nve-card-content>
-      </nve-card>
-      <nve-card>
-        <nve-card-header>
-          <h3 nve-text="heading sm medium">Total Downloads by Repository</h3>
-          <p nve-text="body muted sm">Total downloads across all packages and Artifactory instances</p>
-        </nve-card-header>
-        <nve-card-content>
-          <canvas id="total-downloads-chart" style="margin: auto;" width="440"></canvas>
-        </nve-card-content>
-      </nve-card>
-      <nve-card>
-        <nve-card-header>
-          <h3 nve-text="heading sm medium"><span nve-text="emphasis">Frontend Dependencies Distribution</h3>
-          <p nve-text="body muted sm">Distribution of popular frontend frameworks and libraries across all projects</p>
-        </nve-card-header>
-        <nve-card-content style="--padding: 0;">
-          <canvas id="frontend-dependencies-distribution-chart" style="margin: auto;" width="440"></canvas>
-        </nve-card-content>
-      </nve-card>
-      <nve-card>
-        <nve-card-header>
-          <h3 nve-text="heading sm medium"><span nve-text="emphasis">${downloads.packages.length}</span> Published Packages</h3>
-          <p nve-text="body muted sm">Relative download distribution across published packages</p>
-        </nve-card-header>
-        <nve-card-content style="--padding: 0;">
-          <canvas id="package-distribution-chart" height="370"></canvas>
         </nve-card-content>
       </nve-card>
     </div>
