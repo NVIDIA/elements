@@ -6,12 +6,12 @@ const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
 
 /**
  * https://github.com/semantic-release/semantic-release
- * https://github.com/pmowrer/semantic-release-monorepo
+ * https://github.com/RimacTechnology/semantic-release-monorepo
  */
 module.exports = {
   dryRun: DRY_RUN,
   // ci: false, // enable to bypass local dry run https://github.com/semantic-release/semantic-release/issues/1316
-  extends: 'semantic-release-monorepo',
+  tagFormat: `${packageFile.name}-v\${version}`,
   branches: ['main'],
   plugins: [
     [

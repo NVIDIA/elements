@@ -32,12 +32,13 @@
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@semantic-release/changelog": "6.0.3",
-    "@semantic-release/commit-analyzer": "12.0.0",
-    "@semantic-release/exec": "6.0.3",
+    "@rimac-technology/semantic-release-monorepo": "1.2.10",
+    "@semantic-release/commit-analyzer": "13.0.1",
+    "@semantic-release/exec": "7.1.0",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/gitlab": "13.2.1",
     "@semantic-release/npm": "12.0.0",
-    "@semantic-release/release-notes-generator": "13.0.0",
+    "@semantic-release/release-notes-generator": "14.1.0",
     "@weiran.zsd/multi-eslint-rule-config": "0.0.6",
     "commitlint": "19.5.0",
     "glob": "catalog:",
@@ -46,8 +47,7 @@
     "playwright": "catalog:",
     "prettier": "3.4.2",
     "proper-lockfile": "4.1.2",
-    "semantic-release": "22.0.12",
-    "semantic-release-monorepo": "8.0.2",
+    "semantic-release": "24.2.9",
     "semantic-release-replace-plugin": "1.2.7",
     "tar": "7.5.11",
     "unzipper": "0.12.3",
@@ -163,57 +163,57 @@
       ]
     },
     "release:themes": {
-      "command": "cd projects/themes && HUSKY=0 pnpm exec semantic-release"
+      "command": "cd projects/themes && HUSKY=0 pnpm exec semantic-release-monorepo"
     },
     "release:create": {
-      "command": "cd projects/create && HUSKY=0 pnpm exec semantic-release",
+      "command": "cd projects/create && HUSKY=0 pnpm exec semantic-release-monorepo",
       "dependencies": [
         "release:cli"
       ]
     },
     "release:core": {
-      "command": "cd projects/core && HUSKY=0 pnpm exec semantic-release",
+      "command": "cd projects/core && HUSKY=0 pnpm exec semantic-release-monorepo",
       "dependencies": [
         "release:themes",
         "release:labs-forms"
       ]
     },
     "release:cli": {
-      "command": "cd projects/cli && HUSKY=0 pnpm exec semantic-release",
+      "command": "cd projects/cli && HUSKY=0 pnpm exec semantic-release-monorepo",
       "dependencies": [
         "release:lint"
       ]
     },
     "release:code": {
-      "command": "cd projects/code && HUSKY=0 pnpm exec semantic-release",
+      "command": "cd projects/code && HUSKY=0 pnpm exec semantic-release-monorepo",
       "dependencies": [
         "release:core"
       ]
     },
     "release:labs-forms": {
-      "command": "cd projects/forms && HUSKY=0 pnpm exec semantic-release"
+      "command": "cd projects/forms && HUSKY=0 pnpm exec semantic-release-monorepo"
     },
     "release:lint": {
-      "command": "cd projects/lint && HUSKY=0 pnpm exec semantic-release",
+      "command": "cd projects/lint && HUSKY=0 pnpm exec semantic-release-monorepo",
       "dependencies": [
         "release:themes",
         "release:styles"
       ]
     },
     "release:markdown": {
-      "command": "cd projects/markdown && HUSKY=0 pnpm exec semantic-release",
+      "command": "cd projects/markdown && HUSKY=0 pnpm exec semantic-release-monorepo",
       "dependencies": [
         "release:core"
       ]
     },
     "release:media": {
-      "command": "cd projects/media && HUSKY=0 pnpm exec semantic-release",
+      "command": "cd projects/media && HUSKY=0 pnpm exec semantic-release-monorepo",
       "dependencies": [
         "release:core"
       ]
     },
     "release:monaco": {
-      "command": "cd projects/monaco && HUSKY=0 pnpm exec semantic-release",
+      "command": "cd projects/monaco && HUSKY=0 pnpm exec semantic-release-monorepo",
       "dependencies": [
         "release:core",
         "release:themes",
@@ -221,7 +221,7 @@
       ]
     },
     "release:styles": {
-      "command": "cd projects/styles && HUSKY=0 pnpm exec semantic-release",
+      "command": "cd projects/styles && HUSKY=0 pnpm exec semantic-release-monorepo",
       "dependencies": [
         "release:themes"
       ]
