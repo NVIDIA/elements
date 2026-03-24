@@ -199,7 +199,7 @@ The following GitLab settings optimize code quality and stability within the rep
 - Generate Artifactory Identity Token via a service account named `NPM_TOKEN`
 - Add tokens `GITLAB_TOKEN` and `NPM_TOKEN` to the [repo variables](https://github.com/help/ci/variables/index)
 - Note, the bot name ran by Semantic Release is the [name of your provided GitLab Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#bot-users-for-projects) (`GITLAB_TOKEN`) you can change this default if desired.
-- Follow standard [Semantic Release](https://github.com/semantic-release/semantic-release) tooling/configuration. To see an example of this look at the Elements [.releaserc.cjs](https://github.com/NVIDIA/elements/-/blob/main/.releaserc.cjs?ref_type=heads) file.
+- Follow standard [Semantic Release](https://github.com/semantic-release/semantic-release) tooling/configuration. To see an example of this look at the Elements [release.config.cjs](https://github.com/NVIDIA/elements/-/blob/main/release.config.cjs?ref_type=heads) file.
 
 ## Git LFS
 
