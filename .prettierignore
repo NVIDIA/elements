@@ -21,9 +21,11 @@ projects/internals/metadata/static/*.json
 projects/monaco/src/themes/generated/*
 projects/starters/angular/.angular/**/*
 projects/starters/hugo/**/*
+projects/starters/nuxt/.nuxt/**/*
 projects/**/src/vendor/**/*
 projects/**/.screencast/.auth/*
 .vscode/*.json.code-snippets
+.output/**/*
 
 # ignore starter templates as they are used for project generation and formatting is picky
 projects/starters/angular/src/app/app.component.html

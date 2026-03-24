@@ -1,6 +1,9 @@
 {
   "name": "@nvidia-elements/monaco",
   "version": "1.4.3",
+  "release": {
+    "extends": "../../release.config.js"
+  },
   "description": "Provides integration with VS Code's Monaco editor for code editing, syntax highlighting, and diff visualization.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
