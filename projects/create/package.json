@@ -1,6 +1,9 @@
 {
   "name": "@nvidia-elements/create",
   "version": "1.0.0",
+  "release": {
+    "extends": "../../release.config.js"
+  },
   "description": "Create new Elements projects with 'npm create @nve'. A thin wrapper that delegates to @nvidia-elements/cli for project scaffolding.",
   "type": "module",
   "bin": {
