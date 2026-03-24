@@ -136,7 +136,12 @@
           {
             "type": "command",
             "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/stop.sh",
-            "statusMessage": "Verifying build..."
+            "statusMessage": "Verifying repository state..."
+          },
+          {
+            "type": "agent",
+            "prompt": "Verify that the repository is in a good state via `pnpm run ci` in the root of the repository.",
+            "timeout": 120
           }
         ]
       }

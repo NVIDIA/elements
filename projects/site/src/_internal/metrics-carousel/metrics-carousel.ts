@@ -170,7 +170,6 @@ export class MetricsCarousel extends LitElement {
 
   async #getMetrics(): Promise<MetricsCarouselItem[]> {
     // todo: 11ty should compute this at build time, not at runtime, as this is a node library atm
-    const { UsageService } = await import('@internals/metadata/services/usage.service.js');
     const { TestsService } = await import('@internals/metadata/services/tests.service.js');
     const { ApiService } = await import('@internals/metadata/services/api.service.js');
     const tests = await TestsService.getData();
@@ -194,13 +193,6 @@ export class MetricsCarousel extends LitElement {
     ).length;
     const totalAutomatedTests =
       totalUnitTests + totalAxeTests + totalVisualTests + totalSsrTests + totalLighthouseTests;
-
-    const usageMetrics = await UsageService.getData();
-
-    let totalUsageMetrics = 0;
-    for (const project of usageMetrics.projects) {
-      totalUsageMetrics += project.elementReferenceTotal;
-    }
 
     return [
       {
@@ -256,12 +248,6 @@ export class MetricsCarousel extends LitElement {
         title: 'SSR Tests',
         label: 'View SSR test results',
         metricCount: totalSsrTests
-      },
-      {
-        href: '/elements/docs/metrics/usage-metrics/',
-        title: 'Instances Used Today',
-        label: 'View adoption metrics',
-        metricCount: totalUsageMetrics
       }
     ];
   }
