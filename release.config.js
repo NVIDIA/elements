@@ -23,17 +23,17 @@ export default {
       '@semantic-release/commit-analyzer',
       {
         releaseRules: [
-          // Scope-matched rules
-          { breaking: true, scope, release: 'major' },
-          { type: 'feat', scope, release: 'minor' },
-          { type: 'fix', scope, release: 'patch' },
-          // Catch-all: suppress default rules for all other commits
+          // Catch-all first: suppress default rules (false acts as baseline)
           { breaking: true, release: false },
           { type: 'feat', release: false },
           { type: 'fix', release: false },
           { type: 'perf', release: false },
           { type: 'revert', release: false },
-          { type: 'chore', release: false }
+          { type: 'chore', release: false },
+          // Scope-matched rules last: override false for matching scope
+          { breaking: true, scope, release: 'major' },
+          { type: 'feat', scope, release: 'minor' },
+          { type: 'fix', scope, release: 'patch' }
         ]
       }
     ],
