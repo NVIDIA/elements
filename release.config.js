@@ -1,14 +1,19 @@
-const fs = require('node:fs');
+import fs from 'node:fs';
 
 const DRY_RUN = false;
 const packageFilePath = `${process.cwd()}/package.json`;
 const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
+// @nvidia-elements/core -> elements, @nvidia-elements/cli -> labs-cli
+const [org, pkg] = packageFile.name.split('/');
+const scope = org === '@nve-labs' ? `labs-${pkg}` : pkg;
 
 /**
  * https://github.com/semantic-release/semantic-release
- * https://github.com/RimacTechnology/semantic-release-monorepo
+ *
+ * Monorepo support: scope-based filtering via releaseRules (commit-analyzer)
+ * and ignoreCommits (release-notes-generator). Wireit handles release ordering.
  */
-module.exports = {
+export default {
   dryRun: DRY_RUN,
   // ci: false, // enable to bypass local dry run https://github.com/semantic-release/semantic-release/issues/1316
   tagFormat: `${packageFile.name}-v\${version}`,
@@ -18,9 +23,16 @@ module.exports = {
       '@semantic-release/commit-analyzer',
       {
         releaseRules: [
-          { breaking: true, release: 'major' },
-          { type: 'fix', release: 'patch' },
-          { type: 'feat', release: 'minor' },
+          // Scope-matched rules
+          { breaking: true, scope, release: 'major' },
+          { type: 'feat', scope, release: 'minor' },
+          { type: 'fix', scope, release: 'patch' },
+          // Catch-all: suppress default rules for all other commits
+          { breaking: true, release: false },
+          { type: 'feat', release: false },
+          { type: 'fix', release: false },
+          { type: 'perf', release: false },
+          { type: 'revert', release: false },
           { type: 'chore', release: false }
         ]
       }
@@ -28,7 +40,10 @@ module.exports = {
     [
       '@semantic-release/release-notes-generator',
       {
-        preset: 'conventionalcommits'
+        preset: 'conventionalcommits',
+        presetConfig: {
+          ignoreCommits: `^(?![^]*\\(${scope}\\))(?![^]*\\[${scope}\\]).*$`
+        }
       }
     ],
     [
