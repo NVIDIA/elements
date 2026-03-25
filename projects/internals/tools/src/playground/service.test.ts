@@ -62,8 +62,7 @@ describe('PlaygroundService', () => {
       type: 'default',
       start: false
     });
-    // https://elements-stage.nvidia.com/ui/elements-playground
-    expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+    expect(result).has.string('?version=1');
     expect(result).has.string('?version=1');
     expect(result).has.string('&layout=vertical-split');
     expect(result).has.string('&file=index.html');
@@ -117,7 +116,7 @@ describe('PlaygroundService', () => {
         start: false
       });
       expect(typeof result).toBe('string');
-      expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+      expect(result).has.string('?version=1');
     });
 
     it('should return URL when template passes lint in mcp environment', async () => {
@@ -129,7 +128,7 @@ describe('PlaygroundService', () => {
         start: false
       });
       expect(typeof result).toBe('string');
-      expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+      expect(result).has.string('?version=1');
       process.env.CI = CI;
     });
 
@@ -141,7 +140,7 @@ describe('PlaygroundService', () => {
         start: false
       });
       expect(typeof result).toBe('string');
-      expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+      expect(result).has.string('?version=1');
     });
 
     it('should handle undefined ELEMENTS_ENV', async () => {
@@ -151,7 +150,7 @@ describe('PlaygroundService', () => {
         start: false
       });
       expect(typeof result).toBe('string');
-      expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+      expect(result).has.string('?version=1');
     });
   });
 
@@ -238,7 +237,7 @@ describe('PlaygroundService', () => {
       writeFileSync(tempFile, '<nve-button>hello</nve-button>', 'utf8');
       const result = await PlaygroundService.create({ path: tempFile, start: false });
       expect(typeof result).toBe('string');
-      expect(result).has.string('https://elements-stage.nvidia.com/ui/elements-playground');
+      expect(result).has.string('?version=1');
     });
 
     it('create should return lint errors from file path in mcp environment', async () => {

@@ -10,9 +10,7 @@ describe('startersData', () => {
     expect(startersData.typescript.zip).toBeDefined();
     expect(startersData.typescript.cli).toBeDefined();
     expect(startersData.typescript.cli).toBe(true);
-    expect(startersData.typescript.zip).toBe(
-      'https://NVIDIA.github.io/elements/starters/download/typescript.zip'
-    );
+    expect(startersData.typescript.zip).toContain('/starters/download/typescript.zip');
     expect(startersData.typescript.cli).toBe(true);
   });
 

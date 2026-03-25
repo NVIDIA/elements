@@ -26,6 +26,11 @@ const packageFile = JSON.parse(packageFilePath);
  */
 export const libraryBuildConfig = {
   plugins: [initial(), tsc(), dts(), bundle(), examplesToJSON(packageFile), cem(), snippets()],
+  define: {
+    __ELEMENTS_PLAYGROUND_BASE_URL__: JSON.stringify(process.env.ELEMENTS_PLAYGROUND_BASE_URL || ''),
+    __ELEMENTS_REPO_BASE_URL__: JSON.stringify(process.env.ELEMENTS_REPO_BASE_URL || ''),
+    __ELEMENTS_PAGES_BASE_URL__: JSON.stringify(process.env.ELEMENTS_PAGES_BASE_URL || '')
+  },
   build: {
     reportCompressedSize: false,
     cssMinify: prod ? 'esbuild' : false,
