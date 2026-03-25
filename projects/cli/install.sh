@@ -66,7 +66,7 @@ info "Installing Elements CLI ($BINARY)..."
 
 mkdir -p "$INSTALL_DIR"
 
-info "Downloading $DOWNLOAD_URL"
+info "Downloading..."
 download "$DOWNLOAD_URL" > "$INSTALL_DIR/$BIN_NAME"
 chmod +x "$INSTALL_DIR/$BIN_NAME"
 
@@ -75,7 +75,7 @@ if [ "$OS" = "Darwin" ] && command -v codesign >/dev/null 2>&1; then
   codesign --sign - --force "$INSTALL_DIR/$BIN_NAME" 2>/dev/null || warn "Ad-hoc code signing failed — binary may not run."
 fi
 
-ok "Binary installed to $INSTALL_DIR/$BIN_NAME"
+info "Binary installed to $INSTALL_DIR/$BIN_NAME"
 
 # --- PATH setup ---
 add_to_path() {
@@ -126,25 +126,8 @@ if [ "$IN_PATH" -eq 0 ]; then
   export PATH="$INSTALL_DIR:$PATH"
 fi
 
-# --- npm registry check ---
-REGISTRY_URL="https://registry.npmjs.org"
-
-if command -v npm >/dev/null 2>&1; then
-  CURRENT_REGISTRY="$(npm config get registry 2>/dev/null || echo "")"
-  if [ "$CURRENT_REGISTRY" != "$REGISTRY_URL" ]; then
-    info "Configuring npm registry for NVIDIA Artifactory..."
-    npm config set registry "$REGISTRY_URL"
-    ok "npm registry set to $REGISTRY_URL"
-    warn "Run 'npm login --auth-type=legacy' to authenticate if you haven't already."
-  fi
-else
-  warn "npm not found. After installing Node.js, run:"
-  warn "  npm config set registry $REGISTRY_URL"
-  warn "  npm login --auth-type=legacy"
-fi
-
 # --- Verify ---
-printf "\n${GREEN}${BOLD}Elements CLI installed successfully!${RESET}\n"
+printf "${GREEN}${BOLD}Elements CLI installed successfully!${RESET}\n"
 
 printf "\n  Run ${CYAN}nve${RESET} to get started.\n"
 
