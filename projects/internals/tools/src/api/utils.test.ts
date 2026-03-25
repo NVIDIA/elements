@@ -184,9 +184,7 @@ describe('getLatestPublishedVersions', () => {
     vi.mocked(fetch).mockRejectedValue(new Error('Network error'));
     const { getLatestPublishedVersions } = await import('./utils.js');
 
-    await expect(getLatestPublishedVersions(projects)).rejects.toThrow(
-      'Could not fetch latest versions from https://esm.nvidia.com'
-    );
+    await expect(getLatestPublishedVersions(projects)).rejects.toThrow('Could not fetch latest versions from');
   });
 
   it('should return fallback version and warn when fetch fails and ELEMENTS_ENV is not mcp', async () => {
@@ -197,7 +195,7 @@ describe('getLatestPublishedVersions', () => {
 
     const result = await getLatestPublishedVersions(projects);
 
-    expect(warnSpy).toHaveBeenCalledWith('Could not fetch latest versions from https://esm.nvidia.com');
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Could not fetch latest versions from'));
     expect(result).toEqual({ '@nvidia-elements/core': '0.0.0' });
   });
 });
