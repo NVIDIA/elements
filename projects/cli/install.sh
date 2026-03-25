@@ -70,6 +70,11 @@ info "Downloading $DOWNLOAD_URL"
 download "$DOWNLOAD_URL" > "$INSTALL_DIR/$BIN_NAME"
 chmod +x "$INSTALL_DIR/$BIN_NAME"
 
+# macOS requires ad-hoc code signature for binaries to execute
+if [ "$OS" = "Darwin" ] && command -v codesign >/dev/null 2>&1; then
+  codesign --sign - --force "$INSTALL_DIR/$BIN_NAME" 2>/dev/null || warn "Ad-hoc code signing failed — binary may not run."
+fi
+
 ok "Binary installed to $INSTALL_DIR/$BIN_NAME"
 
 # --- PATH setup ---

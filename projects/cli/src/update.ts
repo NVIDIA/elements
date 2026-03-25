@@ -33,6 +33,10 @@ export function saveConfig(config: UpdateCheckConfig): void {
   }
 }
 
+export function clearConfig(): void {
+  saveConfig({ lastCheck: 0, latestSha: '' });
+}
+
 export async function fetchLatestSha(): Promise<string> {
   try {
     const res = await fetch(MANIFEST_URL, {
@@ -82,6 +86,7 @@ export function upgrade(): void {
   const command = process.platform === 'win32' ? updateCommands['windows-cmd'] : updateCommands['macos/linux'];
   console.log(colors.info('Upgrading nve CLI...'));
   execSync(command, { stdio: 'inherit' });
+  clearConfig();
   process.exit(0);
 }
 

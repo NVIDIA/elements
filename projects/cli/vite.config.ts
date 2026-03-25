@@ -14,7 +14,7 @@ function buildChecksumPlugin(): Plugin {
       const file = 'dist/index.js';
       const content = readFileSync(file, 'utf-8');
       const hash = createHash('sha256').update(content).digest('hex').slice(0, 12);
-      writeFileSync(file, content.replace('__NVE_BUILD_CHECKSUM__', hash));
+      writeFileSync(file, content.replaceAll('__NVE_BUILD_CHECKSUM__', hash));
       writeFileSync('dist/manifest.json', JSON.stringify({ sha: hash }));
     }
   };
