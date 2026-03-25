@@ -326,38 +326,39 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted selected' : ''}><a href="docs/labs/forms/" nve-layout="row align:vertical-center gap:xs">Forms <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
   </nve-tree-node>
 
-  <nve-tree-node ${data.page.url.includes('/docs/internal/') || data.page.url.includes('/docs/api-design/') ? 'expanded' : ''} ${data.page.url === '/docs/internal/' ? 'highlighted' : ''}>
-    <a href="docs/internal/">Internal</a>
-    <nve-tree-node><a href="examples/">Examples</a></nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''} ${data.page.url === '/docs/api-design/' ? 'highlighted' : ''}>
+    <a href="docs/api-design/">API Design</a>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/properties-attributes/') ? 'highlighted selected' : ''}><a href="docs/api-design/properties-attributes/">Properties & Attributes</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/slots/') ? 'highlighted selected' : ''}><a href="docs/api-design/slots/">Slots</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/registration/') ? 'highlighted selected' : ''}><a href="docs/api-design/registration/">Registration</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/custom-events/') ? 'highlighted selected' : ''}><a href="docs/api-design/custom-events/">CustomEvents</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/stateless/') ? 'highlighted selected' : ''}><a href="docs/api-design/stateless/">Stateless</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/composition/') ? 'highlighted selected' : ''}><a href="docs/api-design/composition/">Composition</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/styles/') ? 'highlighted selected' : ''}><a href="docs/api-design/styles/">Styles</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/packaging/') ? 'highlighted selected' : ''}><a href="docs/api-design/packaging/">Packaging</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/glossary/') ? 'highlighted selected' : ''}><a href="docs/api-design/glossary/">Glossary</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/api-design/logs/') ? 'highlighted selected' : ''}><a href="docs/api-design/logs/">Logs</a></nve-tree-node>
+  </nve-tree-node>
 
-    <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''} ${data.page.url === '/docs/api-design/' ? 'highlighted' : ''}>
-      <a href="docs/api-design/">API Design</a>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/properties-attributes/') ? 'highlighted selected' : ''}><a href="docs/api-design/properties-attributes/">Properties & Attributes</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/slots/') ? 'highlighted selected' : ''}><a href="docs/api-design/slots/">Slots</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/registration/') ? 'highlighted selected' : ''}><a href="docs/api-design/registration/">Registration</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/custom-events/') ? 'highlighted selected' : ''}><a href="docs/api-design/custom-events/">CustomEvents</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/stateless/') ? 'highlighted selected' : ''}><a href="docs/api-design/stateless/">Stateless</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/composition/') ? 'highlighted selected' : ''}><a href="docs/api-design/composition/">Composition</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/styles/') ? 'highlighted selected' : ''}><a href="docs/api-design/styles/">Styles</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/packaging/') ? 'highlighted selected' : ''}><a href="docs/api-design/packaging/">Packaging</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/glossary/') ? 'highlighted selected' : ''}><a href="docs/api-design/glossary/">Glossary</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/api-design/logs/') ? 'highlighted selected' : ''}><a href="docs/api-design/logs/">Logs</a></nve-tree-node>
-    </nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines') ? 'expanded' : ''} ${data.page.url === '/docs/internal/guidelines/' ? 'highlighted' : ''}>
+    <a href="docs/internal/guidelines/agent-harness/">Internal Guidelines</a>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-harness/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/agent-harness/">Agent Harness</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/documentation/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/documentation/">Documentation</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/examples/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/examples/">Examples</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/typescript/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/typescript/">TypeScript</a></nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/internal/guidelines/testing/' ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing/">Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-unit/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-unit/">Unit Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-accessibility/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-accessibility/">Accessibility Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-lighthouse/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-lighthouse/">Lighthouse Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-ssr/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-ssr/">SSR Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-visual/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-visual/">Visual Testing</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/troubleshooting/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/troubleshooting/">Troubleshooting</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/component-creation/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/component-creation/">Component Creation</a></nve-tree-node>
+  </nve-tree-node>
 
-    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines') ? 'expanded' : ''} ${data.page.url === '/docs/internal/guidelines/' ? 'highlighted' : ''}>
-      Guidelines
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/documentation/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/documentation/">Documentation</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/examples/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/examples/">Examples</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/typescript/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/typescript/">TypeScript</a></nve-tree-node>
-      <nve-tree-node ${data.page.url === '/docs/internal/guidelines/testing/' ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing/">Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-unit/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-unit/">Unit Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-accessibility/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-accessibility/">Accessibility Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-lighthouse/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-lighthouse/">Lighthouse Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-ssr/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-ssr/">SSR Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/testing-visual/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/testing-visual/">Visual Testing</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/troubleshooting/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/troubleshooting/">Troubleshooting</a></nve-tree-node>
-      <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/component-creation/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/component-creation/">Component Creation</a></nve-tree-node>
-    </nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('examples/') ? 'expanded' : ''} ${data.page.url === 'examples/' ? 'highlighted' : ''}>
+    <a href="examples/">Internal Examples</a>
+    <nve-tree-node ${data.page.url.includes('examples/') ? 'highlighted selected' : ''}><a href="examples/">All Examples</a></nve-tree-node>
   </nve-tree-node>
 </nve-tree>
 `;
