@@ -32,6 +32,14 @@
       "types": "./dist/api/index.d.ts",
       "default": "./dist/api/index.js"
     },
+    "./cli": {
+      "types": "./dist/cli/index.d.ts",
+      "default": "./dist/cli/index.js"
+    },
+    "./cli/index.js": {
+      "types": "./dist/cli/index.d.ts",
+      "default": "./dist/cli/index.js"
+    },
     "./examples": {
       "types": "./dist/examples/index.d.ts",
       "default": "./dist/examples/index.js"

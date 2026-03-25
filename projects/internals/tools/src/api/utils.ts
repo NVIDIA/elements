@@ -8,6 +8,8 @@ import {
 } from '@internals/metadata';
 import { wrapText } from '../internal/utils.js';
 
+declare const __ELEMENTS_ESM_CDN_BASE_URL__: string;
+
 export interface PartialAPIResult {
   name: string;
   description: string;
@@ -88,13 +90,13 @@ export async function getLatestPublishedVersions(projects: Project[]): Promise<E
       names.map(name => {
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 3000);
-        return fetch(`https://esm.nvidia.com/${name}@latest/package.json`, { signal: controller.signal })
+        return fetch(`${__ELEMENTS_ESM_CDN_BASE_URL__}/${name}@latest/package.json`, { signal: controller.signal })
           .then(res => {
             clearTimeout(timeout);
             return res.json();
           })
           .catch(() => {
-            const message = 'Could not fetch latest versions from https://esm.nvidia.com';
+            const message = `Could not fetch latest versions from ${__ELEMENTS_ESM_CDN_BASE_URL__}`;
             if (process.env.ELEMENTS_ENV === 'mcp') {
               throw new Error(message);
             } else {
