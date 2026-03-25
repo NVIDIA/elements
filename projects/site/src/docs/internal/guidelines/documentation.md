@@ -14,6 +14,10 @@
     padding: var(--nve-ref-space-md);
     outline: var(--nve-ref-border-width-md) dashed var(--nve-ref-border-color-muted);
   }
+
+  pre {
+    display: block !important;
+  }
 </style>
 
 # {{ title }}
