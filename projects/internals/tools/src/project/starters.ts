@@ -1,6 +1,7 @@
 import { dirname, join, parse, resolve } from 'node:path';
-import { execSync } from 'node:child_process';
+import { exec, execSync } from 'node:child_process';
 import { cwd } from 'node:process';
+
 import { writeFile } from 'fs/promises';
 import { mkdirSync, existsSync, unlinkSync, writeFileSync, cpSync, createWriteStream, rmSync } from 'fs';
 import { readWorkspaceManifest } from '@pnpm/workspace.read-manifest';
@@ -13,6 +14,9 @@ import AdmZip from 'adm-zip';
 import { isCommandAvailable, getNPMClient } from '../internal/node.js';
 import type { Report } from '../internal/types.js';
 import { writeAllAgentConfigs } from './setup-agent.js';
+
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
+declare const __ELEMENTS_REGISTRY_URL__: string;
 
 export type Starter =
   | 'angular'
@@ -34,35 +38,35 @@ export type Starter =
 
 export const startersData = {
   angular: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/angular.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/angular.zip`,
     cli: true
   },
   bundles: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/bundles.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/bundles.zip`,
     cli: true
   },
   eleventy: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/eleventy.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/eleventy.zip`,
     cli: true
   },
   extensions: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/scoped-registry.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/scoped-registry.zip`,
     cli: false
   },
   go: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/go.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/go.zip`,
     cli: true
   },
   hugo: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/hugo.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/hugo.zip`,
     cli: true
   },
   importmaps: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/importmaps.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/importmaps.zip`,
     cli: false
   },
   'lit-library': {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/lit-library.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/lit-library.zip`,
     cli: false
   },
   lit: {
@@ -70,11 +74,11 @@ export const startersData = {
     cli: false
   },
   nextjs: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/nextjs.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/nextjs.zip`,
     cli: true
   },
   nuxt: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/nuxt.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/nuxt.zip`,
     cli: true
   },
   preact: {
@@ -82,23 +86,23 @@ export const startersData = {
     cli: false
   },
   react: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/react.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/react.zip`,
     cli: true
   },
   solidjs: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/solidjs.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/solidjs.zip`,
     cli: true
   },
   svelte: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/svelte.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/svelte.zip`,
     cli: true
   },
   typescript: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/typescript.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/typescript.zip`,
     cli: true
   },
   vue: {
-    zip: 'https://NVIDIA.github.io/elements/starters/download/vue.zip',
+    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/vue.zip`,
     cli: true
   }
 };
@@ -109,7 +113,7 @@ export async function archiveStarter(projectDir: string, outDir: string) {
   await copyProject(projectDir);
   writeAllAgentConfigs(dist);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
-  await writeFile(`${dist}/.npmrc`, 'registry=https://registry.npmjs.org');
+  await writeFile(`${dist}/.npmrc`, `registry=${__ELEMENTS_REGISTRY_URL__}/`);
   await writeFile(`${dist}/package.json`, JSON.stringify(packageJSON, undefined, 2));
   await zipProject(dist);
 }
@@ -224,7 +228,11 @@ async function setupStarterGit(extractedDir: string) {
   const hasGit = await isCommandAvailable('git');
   if (hasGit && !isGitRepository(extractedDir)) {
     console.log('🔄 Initializing git...');
-    execSync(`cd ${extractedDir} && git init`, { stdio: 'pipe' });
+    await new Promise<void>((resolve, reject) => {
+      const child = exec(`cd ${extractedDir} && git init`);
+      child.on('close', code => (code === 0 ? resolve() : reject(new Error(`git init exited with code ${code}`))));
+      child.on('error', reject);
+    });
   } else {
     console.log('🔄 Skipping git initialization...');
   }
@@ -283,7 +291,13 @@ async function loginRegistry(extractedDir: string) {
 async function installFromRegistry(extractedDir: string) {
   const npmClient = await getNPMClient();
   console.log('📦 Installing dependencies...');
-  execSync(`cd ${extractedDir} && ${npmClient} install`, { stdio: 'pipe' });
+  await new Promise<void>((resolve, reject) => {
+    const child = exec(`cd ${extractedDir} && ${npmClient} install`);
+    child.on('close', code =>
+      code === 0 ? resolve() : reject(new Error(`${npmClient} install exited with code ${code}`))
+    );
+    child.on('error', reject);
+  });
 }
 
 /* istanbul ignore next -- @preserve */
