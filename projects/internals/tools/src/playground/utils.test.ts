@@ -105,7 +105,7 @@ describe('createReactPlaygroundURL', () => {
     expect(files['index.html'].content.includes('<div id="root"></div>')).toBe(true);
     expect(files['index.tsx'].content.includes(`import React from 'react'`)).toBe(true);
     expect(files['global.ts'].content.includes(`declare module 'react' {`)).toBe(true);
-    expect(files['importmap.json'].content.includes('"react-dom": "https://esm.nvidia.com/react-dom@19"')).toBe(true);
+    expect(files['importmap.json'].content.includes('"react-dom": "/react-dom@19"')).toBe(true);
   });
 });
 
@@ -153,7 +153,7 @@ describe('createPreactPlaygroundURL', () => {
     expect(files['index.html'].content.includes('<div id="root"></div>')).toBe(true);
     expect(files['index.tsx'].content.includes(`import { render } from 'preact'`)).toBe(true);
     expect(files['global.ts'].content.includes(`namespace preact.JSX`)).toBe(true);
-    expect(files['importmap.json'].content.includes('"preact": "https://esm.nvidia.com/preact@10"')).toBe(true);
+    expect(files['importmap.json'].content.includes('"preact": "/preact@10"')).toBe(true);
   });
 });
 
@@ -200,7 +200,7 @@ describe('createAngularPlaygroundURL', () => {
     const files = createAngularFiles('<nve-button></nve-button>', elements, { name: 'nve-button', theme: 'light' });
     expect(files['index.html'].content.includes('<app-root></app-root>')).toBe(true);
     expect(files['index.ts'].content.includes(`import 'zone.js'`)).toBe(true);
-    expect(files['importmap.json'].content.includes('"@angular/core": "https://esm.nvidia.com/@angular/core@')).toBe(true);
+    expect(files['importmap.json'].content.includes('"@angular/core": "/@angular/core@')).toBe(true);
   });
 });
 
@@ -245,7 +245,7 @@ describe('createLitPlaygroundURL', () => {
     const files = createLitFiles('<nve-button></nve-button>', elements, { name: 'nve-button', theme: 'light' });
     expect(files['index.html'].content.includes('<app-root></app-root>')).toBe(true);
     expect(files['index.ts'].content.includes(`import { LitElement, html } from 'lit'`)).toBe(true);
-    expect(files['importmap.json'].content.includes('"lit": "https://esm.nvidia.com/lit@latest"')).toBe(true);
+    expect(files['importmap.json'].content.includes('"lit": "/lit@latest"')).toBe(true);
   });
 });
 
@@ -291,7 +291,7 @@ describe('createVuePlaygroundURL', () => {
     expect(files['index.html'].content).toContain('<div id="app"');
     expect(files['index.ts'].content).toContain(`import { createApp, ref } from 'vue/dist/vue.esm-browser.js'`);
     expect(files['index.ts'].content).toContain(`.mount('#app')`);
-    expect(files['importmap.json'].content).toContain('"vue": "https://esm.nvidia.com/vue@3"');
+    expect(files['importmap.json'].content).toContain('"vue": "/vue@3"');
   });
 
   it('should wrap content in Vue app container with counter button', () => {
@@ -513,45 +513,45 @@ describe('createImportMap with different frameworks', () => {
   it('should include React dependencies for React framework', () => {
     const files = createReactFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
-    expect(importmap.imports['react']).toBe('https://esm.nvidia.com/react@19');
-    expect(importmap.imports['react-dom']).toBe('https://esm.nvidia.com/react-dom@19');
+    expect(importmap.imports['react']).toBe('/react@19');
+    expect(importmap.imports['react-dom']).toBe('/react-dom@19');
   });
 
   it('should include Preact dependencies for Preact framework', () => {
     const files = createPreactFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
-    expect(importmap.imports['preact']).toBe('https://esm.nvidia.com/preact@10');
+    expect(importmap.imports['preact']).toBe('/preact@10');
   });
 
   it('should include Angular dependencies for Angular framework', () => {
     const files = createAngularFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
-    expect(importmap.imports['@angular/core']).toBe('https://esm.nvidia.com/@angular/core@20.0.0');
-    expect(importmap.imports['zone.js']).toBe('https://esm.nvidia.com/zone.js');
+    expect(importmap.imports['@angular/core']).toBe('/@angular/core@20.0.0');
+    expect(importmap.imports['zone.js']).toBe('/zone.js');
   });
 
   it('should include Lit dependencies for Lit framework', () => {
     const files = createLitFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
-    expect(importmap.imports['lit']).toBe('https://esm.nvidia.com/lit@latest');
+    expect(importmap.imports['lit']).toBe('/lit@latest');
   });
 
   it('should include Vue dependencies for Vue framework', () => {
     const files = createVueFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
-    expect(importmap.imports['vue']).toBe('https://esm.nvidia.com/vue@3');
-    expect(importmap.imports['vue/']).toBe('https://esm.nvidia.com/vue@3/');
+    expect(importmap.imports['vue']).toBe('/vue@3');
+    expect(importmap.imports['vue/']).toBe('/vue@3/');
   });
 
   it('should include all NVE packages for all frameworks', () => {
     const files = createDefaultFiles('<nve-button></nve-button>', elements, {});
     const importmap = JSON.parse(files['importmap.json'].content);
-    expect(importmap.imports['@nvidia-elements/core']).toBe('https://esm.nvidia.com/@nvidia-elements/core@latest');
-    expect(importmap.imports['@nvidia-elements/styles']).toBe('https://esm.nvidia.com/@nvidia-elements/styles@latest');
-    expect(importmap.imports['@nvidia-elements/themes']).toBe('https://esm.nvidia.com/@nvidia-elements/themes@latest');
-    expect(importmap.imports['@nvidia-elements/monaco']).toBe('https://esm.nvidia.com/@nvidia-elements/monaco@latest');
-    expect(importmap.imports['@nvidia-elements/code']).toBe('https://esm.nvidia.com/@nvidia-elements/code@latest');
-    expect(importmap.imports['@nvidia-elements/forms']).toBe('https://esm.nvidia.com/@nvidia-elements/forms@latest');
+    expect(importmap.imports['@nvidia-elements/core']).toBe('/@nvidia-elements/core@latest');
+    expect(importmap.imports['@nvidia-elements/styles']).toBe('/@nvidia-elements/styles@latest');
+    expect(importmap.imports['@nvidia-elements/themes']).toBe('/@nvidia-elements/themes@latest');
+    expect(importmap.imports['@nvidia-elements/monaco']).toBe('/@nvidia-elements/monaco@latest');
+    expect(importmap.imports['@nvidia-elements/code']).toBe('/@nvidia-elements/code@latest');
+    expect(importmap.imports['@nvidia-elements/forms']).toBe('/@nvidia-elements/forms@latest');
   });
 });
 

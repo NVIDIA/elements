@@ -4,6 +4,9 @@ import type { Element } from '@internals/metadata';
 import { getElementImports } from '../internal/utils.js';
 import { validateTemplate } from '../internal/validate.js';
 
+declare const __ELEMENTS_PLAYGROUND_BASE_URL__: string;
+declare const __ELEMENTS_ESM_CDN_BASE_URL__: string;
+
 interface PlaygroundOptions {
   type?: PlaygroundType;
   theme?: string;
@@ -141,7 +144,7 @@ export function createVueFiles(content: string, elements: Element[], options: Pl
 function createURL(files: string, options: PlaygroundOptions) {
   const defaultOptions = { openFile: 'index.html', ...options };
   return encodeURI(
-    `https://elements-stage.nvidia.com/ui/elements-playground/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim()}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`
+    `${__ELEMENTS_PLAYGROUND_BASE_URL__}/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim()}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`
   );
 }
 
@@ -226,7 +229,7 @@ ${content.trim()}
 }
 
 function createImportMap(framework: 'react' | 'preact' | 'angular' | 'lit' | 'vue' | 'vanilla' = 'vanilla') {
-  const CDN_MODULES_URL = `https://esm.nvidia.com`;
+  const CDN_MODULES_URL = __ELEMENTS_ESM_CDN_BASE_URL__;
 
   const importmap: { imports: Record<string, string> } = {
     imports: {
