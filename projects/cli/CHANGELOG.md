@@ -1,3 +1,7 @@
+## <small>0.12.1 (2026-03-25)</small>
+
+* fix(labs-cli): add code signing for macos binaries ([7bac056](https://github.com/NVIDIA/elements/commit/7bac056))
+
 ## 0.12.0 (2026-03-24)
 
 * chore(ci): drop react 18 starter ([3edf758](https://github.com/NVIDIA/elements/commit/3edf758))
