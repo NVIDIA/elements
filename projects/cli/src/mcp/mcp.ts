@@ -46,7 +46,20 @@ export async function startMcpServer() {
           ...tool.metadata.annotations
         } as ToolAnnotations
       };
-      server.registerTool(toolName, config, async params => {
+      server.registerTool(toolName, config, async (params, extra) => {
+        const progressToken = extra?._meta?.progressToken;
+        let progressCount = 0;
+        if (progressToken !== undefined) {
+          (params as Record<string, unknown>).onProgress = (message: string) => {
+            progressCount++;
+            extra
+              .sendNotification({
+                method: 'notifications/progress',
+                params: { progressToken, progress: progressCount, message }
+              })
+              .catch(() => {});
+          };
+        }
         const structuredContent = (await tool(params)) as unknown as { [x: string]: unknown };
         // https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1624
         const text =

@@ -4,9 +4,9 @@ process.env.ELEMENTS_ENV = 'cli';
 /* istanbul ignore file -- @preserve */
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { tools, ToolSupport, type Schema } from '@internals/tools';
+import { type ManagedToolMethod, tools, ToolSupport, type Schema } from '@internals/tools';
 import { banner, colors, getArgValue, renderResult, runAsyncTool } from './utils.js';
-import { checkForUpdates, notifyIfUpdateAvailable, upgrade } from './update.js';
+import { checkForUpdates, notifyIfUpdateAvailable } from './update.js';
 
 export const VERSION = '0.0.0';
 export const BUILD_SHA = '__NVE_BUILD_CHECKSUM__';
@@ -19,15 +19,11 @@ function getUpdateCheck() {
 
 process.on('SIGINT', () => process.exit(0));
 
-if (process.argv.includes('--upgrade')) {
-  upgrade();
-}
-
 const yargsInstance = yargs(hideBin(process.argv))
   .scriptName('nve')
   .usage('$0 <cmd> [args]')
   .version(VERSION)
-  .option('upgrade', { type: 'boolean', describe: 'Upgrade nve CLI to the latest version' })
+  .option('upgrade', { type: 'boolean', describe: 'Upgrade Elements CLI (nve) to the latest version' })
   .recommendCommands()
   .fail(message => {
     // allow missing positionals to fall through to interactive prompts
@@ -48,9 +44,21 @@ yargsInstance.command(
   'About and help',
   () => {},
   async () => {
-    const greeting = colors.complete(`\x1b[?7l\n${JSON.parse(banner)}\n\n`);
-    console.log(`${greeting}${colors.complete(`@nvidia-elements/cli (${BUILD_SHA})`)}\n\n${await yargsInstance.getHelp()}`);
-    await notifyIfUpdateAvailable(getUpdateCheck());
+    if (process.argv.includes('--upgrade')) {
+      const upgradeTool = tools.find(tool => tool.metadata.command === 'cli.upgrade') as ManagedToolMethod<unknown>;
+      const { result, status, message } = await runAsyncTool({}, upgradeTool);
+      if (status === 'complete') {
+        await renderResult(result);
+        process.exit(0);
+      } else {
+        console.log(colors.error(message ?? 'unknown error'));
+        process.exit(1);
+      }
+    } else {
+      const greeting = colors.complete(`\x1b[?7l\n${JSON.parse(banner)}\n\n`);
+      console.log(`${greeting}${colors.complete(`@nvidia-elements/cli (${BUILD_SHA})`)}\n\n${await yargsInstance.getHelp()}`);
+      await notifyIfUpdateAvailable(getUpdateCheck());
+    }
   }
 );
 
