@@ -42,16 +42,24 @@ export async function runAsyncTool(args: Record<string, unknown>, fn: ManagedToo
   let spinner: Ora | undefined;
 
   const startTime = Date.now();
+  const originalConsole = console.log;
   if (isInteractive) {
     spinner = ora({ spinner: 'star', color: 'green', text: getSpinnerProgressMessage() });
     spinner.start();
+    await new Promise(resolve => setTimeout(resolve, Math.max(0, 1000 - (Date.now() - startTime))));
+    console.log = (...args: unknown[]) => (spinner!.text = `${spinner!.text}\n${args.join(' ')}`);
+    args.onProgress ??= (message: string) => {
+      if (message) {
+        spinner!.text = `${spinner!.text}\n${message}`;
+      }
+    };
   }
 
   const value = await fn(args);
 
   if (isInteractive) {
-    await new Promise(resolve => setTimeout(resolve, Math.max(0, 1000 - (Date.now() - startTime))));
     spinner?.stop();
+    console.log = originalConsole;
   }
   return value;
 }

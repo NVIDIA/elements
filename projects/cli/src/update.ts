@@ -1,40 +1,13 @@
-import { writeFileSync, readFileSync, mkdirSync, existsSync } from 'node:fs';
-import { execSync } from 'node:child_process';
-import { join } from 'node:path';
-import { homedir } from 'node:os';
+import { readNveConfig, saveNveConfig, type UpdateConfig } from '@internals/tools';
 import { colors } from './utils.js';
 
-const CONFIG_DIR = join(homedir(), '.nve');
-const CONFIG_FILE = join(CONFIG_DIR, 'update-check.json');
-const MANIFEST_URL = 'https://NVIDIA.github.io/elements/cli/manifest.json';
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 
-interface UpdateCheckConfig {
-  lastCheck: number;
-  latestSha: string;
-}
+const MANIFEST_URL = `${__ELEMENTS_PAGES_BASE_URL__}/cli/manifest.json`;
 
-export function readConfig(): UpdateCheckConfig | null {
-  try {
-    if (existsSync(CONFIG_FILE)) {
-      return JSON.parse(readFileSync(CONFIG_FILE, 'utf-8')) as UpdateCheckConfig;
-    }
-  } catch {
-    // ignore read errors
-  }
-  return null;
-}
-
-export function saveConfig(config: UpdateCheckConfig): void {
-  try {
-    mkdirSync(CONFIG_DIR, { recursive: true });
-    writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2));
-  } catch {
-    // ignore write errors
-  }
-}
-
-export function clearConfig(): void {
-  saveConfig({ lastCheck: 0, latestSha: '' });
+export function clearUpdateConfig(): void {
+  const config = readNveConfig();
+  saveNveConfig({ ...config, update: { lastCheck: 0, latestSha: '' } });
 }
 
 export async function fetchLatestSha(): Promise<string> {
@@ -55,8 +28,8 @@ export function isUpdateAvailable(currentSha: string, latestSha: string): boolea
   return latestSha !== '' && currentSha !== latestSha;
 }
 
-export function shouldCheckForUpdates(config: UpdateCheckConfig | null): boolean {
-  return !config || Date.now() - config.lastCheck >= 24 * 60 * 60 * 1000; // 24 hours
+export function shouldCheckForUpdates(update: UpdateConfig): boolean {
+  return update.lastCheck === 0 || Date.now() - update.lastCheck >= 24 * 60 * 60 * 1000; // 24 hours
 }
 
 export async function checkForUpdates(currentSha: string): Promise<boolean> {
@@ -64,43 +37,16 @@ export async function checkForUpdates(currentSha: string): Promise<boolean> {
     return false;
   }
 
-  const config = readConfig();
+  const config = readNveConfig();
+  const { update } = config;
 
-  if (shouldCheckForUpdates(config)) {
+  if (shouldCheckForUpdates(update)) {
     fetchLatestSha()
-      .then(latestSha => saveConfig({ lastCheck: Date.now(), latestSha }))
+      .then(latestSha => saveNveConfig({ ...config, update: { lastCheck: Date.now(), latestSha } }))
       .catch(() => {});
   }
 
-  return config ? isUpdateAvailable(currentSha, config.latestSha) : false;
-}
-
-export const updateCommands = {
-  'macos/linux': 'curl -fsSL https://NVIDIA.github.io/elements/install.sh | bash',
-  'windows-cmd':
-    'curl -fsSL https://NVIDIA.github.io/elements/install.cmd -o install.cmd && install.cmd && del install.cmd',
-  nodejs: 'npm install -g @nvidia-elements/cli'
-};
-
-export function upgrade(): void {
-  const command = process.platform === 'win32' ? updateCommands['windows-cmd'] : updateCommands['macos/linux'];
-  console.log(colors.info('Upgrading nve CLI...'));
-  execSync(command, { stdio: 'inherit' });
-  clearConfig();
-  process.exit(0);
-}
-
-function showUpdateNotification(): void {
-  const border = '─'.repeat(50);
-  console.log(
-    [
-      '',
-      colors.warning(border),
-      colors.warning('  Update available! Run ') + colors.info(`nve --upgrade`) + colors.warning(' to update.'),
-      colors.warning(border),
-      ''
-    ].join('\n')
-  );
+  return isUpdateAvailable(currentSha, update.latestSha);
 }
 
 /**
@@ -115,7 +61,16 @@ export async function notifyIfUpdateAvailable(checkPromise: Promise<boolean>): P
   try {
     const updateAvailable = await checkPromise;
     if (updateAvailable) {
-      showUpdateNotification();
+      const border = '─'.repeat(50);
+      console.log(
+        [
+          '',
+          colors.warning(border),
+          colors.warning('  Update available! Run ') + colors.info(`nve --upgrade`) + colors.warning(' to update.'),
+          colors.warning(border),
+          ''
+        ].join('\n')
+      );
     }
   } catch {
     // ignore errors - update check should never break CLI

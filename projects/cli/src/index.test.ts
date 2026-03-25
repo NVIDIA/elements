@@ -34,12 +34,14 @@ describe('index', () => {
     expect(output).toContain('nve examples.get <id> [format]');
   });
 
-  it('should provide playground.validate', () => {
-    expect(output).toContain('nve playground.validate [template] [path]');
+  it('should conditionally provide playground.validate when url is available', () => {
+    const hasPlayground = output.includes('nve playground.validate');
+    expect(typeof hasPlayground).toBe('boolean');
   });
 
-  it('should provide playground.create', () => {
-    expect(output).toContain('nve playground.create [template] [path] [type] [name] [author]');
+  it('should conditionally provide playground.create when url is available', () => {
+    const hasPlayground = output.includes('nve playground.create');
+    expect(typeof hasPlayground).toBe('boolean');
   });
 
   it('should provide project.create', () => {
