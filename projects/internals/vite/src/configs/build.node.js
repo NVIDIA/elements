@@ -27,6 +27,11 @@ export const libraryNodeBuildConfig = {
     exclude: NODE_BUILT_IN_MODULES
   },
   plugins: [tsc(), dts(), transpileDecorators(), markdown()],
+  define: {
+    __ELEMENTS_PLAYGROUND_BASE_URL__: JSON.stringify(process.env.ELEMENTS_PLAYGROUND_BASE_URL || ''),
+    __ELEMENTS_REPO_BASE_URL__: JSON.stringify(process.env.ELEMENTS_REPO_BASE_URL || ''),
+    __ELEMENTS_PAGES_BASE_URL__: JSON.stringify(process.env.ELEMENTS_PAGES_BASE_URL || '')
+  },
   build: {
     reportCompressedSize: false,
     watch: mode === 'watch' ? {} : undefined,
