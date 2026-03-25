@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/cli",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "release": {
     "extends": "../../release.config.js"
   },
