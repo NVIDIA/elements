@@ -18,7 +18,7 @@
     "dist/**/*"
   ],
   "scripts": {
-    "dev": "wireit",
+    "dev": "pnpm run nve:install && pnpm dlx @modelcontextprotocol/inspector@0.21.1 node ./dist/index.js mcp",
     "ci": "wireit",
     "build": "wireit",
     "lint": "wireit",
@@ -126,12 +126,6 @@
     "build:watch": {
       "command": "vite build --watch",
       "service": true,
-      "dependencies": [
-        "build"
-      ]
-    },
-    "dev": {
-      "command": "pnpm dlx @modelcontextprotocol/inspector@0.21.1 node ./dist/index.js mcp",
       "dependencies": [
         "build"
       ]

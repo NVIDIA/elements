@@ -28,24 +28,6 @@ if %errorlevel% neq 0 (
     echo Added %INSTALL_DIR% to user PATH.
 )
 
-rem Check npm registry
-set "REGISTRY_URL=https://registry.npmjs.org"
-
-where npm >nul 2>&1
-if %errorlevel% equ 0 (
-    for /f "tokens=*" %%r in ('npm config get registry 2^>nul') do set "CURRENT_REGISTRY=%%r"
-    if /i not "%CURRENT_REGISTRY%"=="%REGISTRY_URL%" (
-        echo Configuring npm registry for NVIDIA Artifactory...
-        npm config set registry %REGISTRY_URL%
-        echo npm registry configured.
-        echo NOTE: Run "npm login --auth-type=legacy" to authenticate.
-    )
-) else (
-    echo WARNING: npm not found. After installing Node.js, run:
-    echo   npm config set registry %REGISTRY_URL%
-    echo   npm login --auth-type=legacy
-)
-
 echo.
 echo Elements CLI installed successfully!
 
