@@ -25,7 +25,7 @@
     "test": "wireit",
     "test:watch": "wireit",
     "test:coverage": "wireit",
-    "nve:install": "pnpm run build && mkdir -p $HOME/.local/bin && cp dist/nve-macos-arm64 $HOME/.local/bin/nve",
+    "nve:install": "pnpm run build && mkdir -p $HOME/.local/bin && cp dist/nve-macos-arm64 $HOME/.local/bin/nve && codesign --sign - --force $HOME/.local/bin/nve",
     "nve:uninstall": "rm -f $HOME/.local/bin/nve",
     "nve:install:node": "test -n \"$CI\" || pnpm link --global",
     "nve:uninstall:node": "pnpm uninstall --global @nvidia-elements/cli"
@@ -78,7 +78,7 @@
       "output": []
     },
     "build": {
-      "command": "bun build --compile --minify dist/index.js --target=bun-darwin-arm64 --outfile dist/nve-macos-arm64 && bun build --compile --minify dist/index.js --target=bun-darwin-x64 --outfile dist/nve-macos-x64 && bun build --compile --minify --target=bun-linux-x64 dist/index.js --outfile dist/nve-linux-x64 && bun build --compile --minify --target=bun-linux-arm64 dist/index.js --outfile dist/nve-linux-arm64 && bun build --compile --minify --target=bun-windows-x64-modern dist/index.js --outfile dist/nve-windows-x64",
+      "command": "bun build --compile --minify dist/index.js --target=bun-darwin-arm64 --outfile dist/nve-macos-arm64 && (command -v codesign >/dev/null && codesign --sign - --force dist/nve-macos-arm64 || true) && bun build --compile --minify dist/index.js --target=bun-darwin-x64 --outfile dist/nve-macos-x64 && (command -v codesign >/dev/null && codesign --sign - --force dist/nve-macos-x64 || true) && bun build --compile --minify --target=bun-linux-x64 dist/index.js --outfile dist/nve-linux-x64 && bun build --compile --minify --target=bun-linux-arm64 dist/index.js --outfile dist/nve-linux-arm64 && bun build --compile --minify --target=bun-windows-x64-modern dist/index.js --outfile dist/nve-windows-x64",
       "files": [
         "../internals/tools/dist/**/*.js",
         "src/**",
