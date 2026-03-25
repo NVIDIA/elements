@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {
   readConfig,
   saveConfig,
+  clearConfig,
   fetchLatestSha,
   isUpdateAvailable,
   shouldCheckForUpdates,
@@ -309,6 +310,30 @@ describe('update-check', () => {
       expect(execSync).toHaveBeenCalledWith(updateCommands['windows-cmd'], { stdio: 'inherit' });
       expect(exitSpy).toHaveBeenCalledWith(0);
       Object.defineProperty(process, 'platform', { value: originalPlatform, configurable: true });
+    });
+
+    it('should clear update-check config after upgrade', async () => {
+      const { writeFileSync } = await import('node:fs');
+
+      upgrade();
+
+      expect(writeFileSync).toHaveBeenCalledWith(
+        '/mock/home/.nve/update-check.json',
+        JSON.stringify({ lastCheck: 0, latestSha: '' }, null, 2)
+      );
+    });
+  });
+
+  describe('clearConfig', () => {
+    it('should reset config to empty state', async () => {
+      const { writeFileSync } = await import('node:fs');
+
+      clearConfig();
+
+      expect(writeFileSync).toHaveBeenCalledWith(
+        '/mock/home/.nve/update-check.json',
+        JSON.stringify({ lastCheck: 0, latestSha: '' }, null, 2)
+      );
     });
   });
 });
