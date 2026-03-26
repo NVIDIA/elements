@@ -32,6 +32,12 @@ describe(Range.metadata.tag, () => {
     expect(element.style.getPropertyValue('--track-width')).toBe('0.5');
   });
 
+  it('should reflect --track-background when set on the host', async () => {
+    element.style.setProperty('--track-background', 'rgb(255, 0, 0)');
+    await elementIsStable(element);
+    expect(getComputedStyle(element).getPropertyValue('--track-background').trim()).toBe('rgb(255, 0, 0)');
+  });
+
   it('should update the custom track width', async () => {
     element.querySelector('input').value = '99';
     await elementIsStable(element);

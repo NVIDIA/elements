@@ -185,6 +185,7 @@ export const CustomStyles = {
   render: () => html`
 <nve-range style="
 --background: #76b900;
+--track-background: red;
 --track-height: 4px;
 --track-border-radius: 16px;
 --thumb-background: black;
