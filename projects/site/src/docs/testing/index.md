@@ -13,7 +13,7 @@ available for external use. Find the testing utilities at the following entrypoi
 
 ```shell
 # add internal registry to local .npmrc file
-registry=https://registry.npmjs.org
+registry={{ELEMENTS_REGISTRY_URL}}
 ```
 
 ```typescript

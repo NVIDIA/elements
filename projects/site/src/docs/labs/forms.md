@@ -7,13 +7,13 @@
 
 # Forms
 
-The forms utility library provides a base mixin to make it easy to create form associated custom elements. Form associated custom elements enable components to integrate with form value state and validation. This creates a reliable and predictable API contract for components. This project is in the early stages of exploration. [Project Source](https://github.com/NVIDIA/elements/-/tree/main/projects/forms)
+The forms utility library provides a base mixin to make it easy to create form associated custom elements. Form associated custom elements enable components to integrate with form value state and validation. This creates a reliable and predictable API contract for components. This project is in the early stages of exploration. [Project Source]({{ELEMENTS_REPO_BASE_URL}}/-/tree/main/projects/forms)
 
 ## Getting Started
 
 ```shell
 # local .npmrc file
-registry=https://registry.npmjs.org
+registry={{ELEMENTS_REGISTRY_URL}}
 
 # https://registry.npmjs.org
 npm login

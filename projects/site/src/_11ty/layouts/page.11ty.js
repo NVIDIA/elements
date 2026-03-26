@@ -1,4 +1,5 @@
 import { renderBaseHead } from './common.js';
+import { ELEMENTS_PLAYGROUND_BASE_URL, ELEMENTS_REPO_BASE_URL } from '../utils/env.js';
 
 /**
  * Basic page layout template that aligns with Starters page header.
@@ -21,9 +22,9 @@ export function render(data) {
             <nve-logo slot="prefix" size="sm"></nve-logo>
             <a slot="prefix" href=".">Elements</a>
             <nve-button container="flat"><a href="docs/about/getting-started/">Catalog</a></nve-button>
-            <nve-button container="flat"><a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>
+            <nve-button container="flat"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>
             <nve-button container="flat"><a href="starters/">Starters</a></nve-button>
-            <nve-button container="flat"><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button>
+            <nve-button container="flat"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Gitlab</a></nve-button>
             <nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>
           </nve-page-header>
 

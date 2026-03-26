@@ -1,4 +1,5 @@
 import changelogs from './index.11tydata.js';
+import { ELEMENTS_REPO_BASE_URL } from '../../_11ty/utils/env.js';
 
 export const data = {
   title: 'Changelog',
@@ -19,9 +20,9 @@ export function render() {
 # Changelog
 
 <div nve-layout="row gap:sm" style="height: 24px">
-  <a href="https://github.com/NVIDIA/elements/-/releases"><img src="https://github.com/NVIDIA/elements/-/badges/release.svg?value_width=200" alt="release"></a>
-  <a href="https://github.com/NVIDIA/elements/-/commits/main"><img src="https://github.com/NVIDIA/elements/badges/main/pipeline.svg" alt="pipeline status"></a>
-  <a href="https://github.com/NVIDIA/elements/-/graphs/main/charts"><img src="https://github.com/NVIDIA/elements/badges/main/coverage.svg?min_good=90&amp;key_text=coverage" alt="coverage"></a>
+  <a href="${ELEMENTS_REPO_BASE_URL}/-/releases"><img src="${ELEMENTS_REPO_BASE_URL}/-/badges/release.svg?value_width=200" alt="release"></a>
+  <a href="${ELEMENTS_REPO_BASE_URL}/-/commits/main"><img src="${ELEMENTS_REPO_BASE_URL}/badges/main/pipeline.svg" alt="pipeline status"></a>
+  <a href="${ELEMENTS_REPO_BASE_URL}/-/graphs/main/charts"><img src="${ELEMENTS_REPO_BASE_URL}/badges/main/coverage.svg?min_good=90&amp;key_text=coverage" alt="coverage"></a>
 </div>
 
 <section nve-layout="grid span-items:12 &sm|span-items:6 &lg|span-items:4 gap:sm align:vertical-stretch">

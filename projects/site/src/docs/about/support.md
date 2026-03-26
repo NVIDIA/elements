@@ -16,7 +16,7 @@ Reach out to the Slack support channel or find more resources in the Figma libra
     <a href="http://nv/elements-slack" target="_blank">{% svg-logo 'slack' '18' %} Slack Support</a>
   </nve-button>
   <nve-button>
-    <a href="https://github.com/NVIDIA/elements" target="_blank">{% svg-logo 'gitlab' '18' %} Gitlab</a>
+    <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank">{% svg-logo 'gitlab' '18' %} Gitlab</a>
   </nve-button>
   <nve-button>
     <a href="http://nv/elements-figma" target="_blank">{% svg-logo 'figma' '18' %} Figma Library</a>
