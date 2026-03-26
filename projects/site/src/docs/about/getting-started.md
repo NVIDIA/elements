@@ -16,7 +16,7 @@
 
 ```shell
 # install CLI
-curl -fsSL https://NVIDIA.github.io/elements/install.sh | bash
+curl -fsSL {{ELEMENTS_PAGES_BASE_URL}}/install.sh | bash
 
 # create a new project
 nve project.create
@@ -57,7 +57,7 @@ import '@nvidia-elements/core/button/define.js';
     <a href="docs/mcp/"><svg width="18" height="18"><use href="#claude-svg"></use></svg> Add to Claude</a>
   </nve-button>
   <nve-button>
-    <a href="https://github.com/NVIDIA/elements" target="_blank"><svg width="18" height="18"><use href="#gitlab-svg"></use></svg> Gitlab Repo</a>
+    <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank"><svg width="18" height="18"><use href="#gitlab-svg"></use></svg> Gitlab Repo</a>
   </nve-button>
   <nve-button>
     <a href="http://nv/elements-slack" target="_blank"><svg width="18" height="18"><use href="#slack-svg"></use></svg> Slack Support</a>
