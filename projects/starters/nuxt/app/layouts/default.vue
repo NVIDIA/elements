@@ -9,9 +9,6 @@
         ></nve-button
       >
       <nve-button container="flat"
-        ><a href="https://elements-stage.nvidia.com/ui/elements-playground" target="_blank">Playground</a></nve-button
-      >
-      <nve-button container="flat"
         ><a href="https://NVIDIA.github.io/elements/starters/">Starters</a></nve-button
       >
       <nve-button container="flat"
