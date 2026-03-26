@@ -1,5 +1,7 @@
 // @ts-check
 
+import { ELEMENTS_PAGES_BASE_URL } from '../../_11ty/utils/env.js';
+
 export const data = {
   title: 'Metadata',
   layout: 'docs.11ty.js'
@@ -30,7 +32,7 @@ export function render() {
     <div nve-layout="column gap:xs">
       <div nve-layout="row gap:xs align:vertical-center full">
         <nve-alert style="--color: var(--nve-sys-text-muted-color)" status="warning">The schema for this metadata is currently subject to change.</nve-alert>
-        <nve-button style="margin-left: auto;"><a target="_blank" href="https://NVIDIA.github.io/elements/metadata/index.json">Download</a></nve-button>
+        <nve-button style="margin-left: auto;"><a target="_blank" href="${ELEMENTS_PAGES_BASE_URL}/metadata/index.json">Download</a></nve-button>
       </div>
       
       <nve-monaco-input style="--min-height: calc(100vh - 300px);" folding language="json" readonly minimap></nve-monaco-input>

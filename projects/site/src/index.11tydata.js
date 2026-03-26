@@ -5,6 +5,12 @@ import { ApiService, TestsService, WireitService } from '@internals/metadata';
 import { PlaygroundService } from '@internals/tools/playground';
 import { ExamplesService } from '@internals/tools/examples';
 import { camelToKebab } from './_11ty/utils/index.js';
+import {
+  ELEMENTS_PAGES_BASE_URL,
+  ELEMENTS_REPO_BASE_URL,
+  ELEMENTS_PLAYGROUND_BASE_URL,
+  ELEMENTS_REGISTRY_URL
+} from './_11ty/utils/env.js';
 
 const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/'); // eslint-disable-line no-undef
 
@@ -39,9 +45,9 @@ const examples = (await ExamplesService.getAll())
 const integrations = {
   angular: {
     logo: 'angular',
-    starterDemo: 'https://NVIDIA.github.io/elements/starters/angular/',
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/angular.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/angular',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/angular/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/angular.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/angular`,
     documentation: 'https://angular.dev',
     playgroundURL: await PlaygroundService.create({
       template: '<nve-alert status="success">Elements + Angular</nve-alert>',
@@ -50,41 +56,41 @@ const integrations = {
   },
   bundles: {
     logo: 'javascript',
-    starterDemo: 'https://NVIDIA.github.io/elements/starters/bundles/',
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/bundles.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/bundles',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/bundles/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/bundles.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/bundles`,
     documentation: 'https://vite.dev',
     playgroundURL: null
   },
   extensions: {
     logo: 'javascript',
     starterDemo: null,
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/scoped-registry.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/scoped-registry',
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/scoped-registry.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/scoped-registry`,
     documentation: 'https://github.com/WICG/webcomponents/blob/gh-pages/proposals/Scoped-Custom-Element-Registries.md',
     playgroundURL: null
   },
   go: {
     logo: 'go',
     starterDemo: null,
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/go.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/go',
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/go.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/go`,
     documentation: 'https://go.dev',
     playgroundURL: null
   },
   hugo: {
     logo: 'hugo',
-    starterDemo: 'https://NVIDIA.github.io/elements/starters/hugo/',
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/hugo.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/hugo',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/hugo/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/hugo.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/hugo`,
     documentation: 'https://gohugo.io',
     playgroundURL: null
   },
   importmaps: {
     logo: 'javascript',
-    starterDemo: 'https://NVIDIA.github.io/elements/starters/importmaps/',
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/importmaps.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/importmaps',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/importmaps/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/importmaps.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/importmaps`,
     documentation: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap',
     playgroundURL: null
   },
@@ -102,16 +108,16 @@ const integrations = {
   nextjs: {
     logo: 'nextjs',
     starterDemo: null,
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/nextjs.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nextjs',
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/nextjs.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/nextjs`,
     documentation: 'https://nextjs.org',
     playgroundURL: null
   },
   nuxt: {
     logo: 'nuxt',
     starterDemo: null,
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/nuxt.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nuxt',
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/nuxt.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/nuxt`,
     documentation: 'https://nuxt.com/',
     playgroundURL: null
   },
@@ -128,9 +134,9 @@ const integrations = {
   },
   react: {
     logo: 'react',
-    starterDemo: 'https://NVIDIA.github.io/elements/starters/react/',
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/react.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/react',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/react/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/react.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/react`,
     documentation: 'https://react.dev',
     playgroundURL: await PlaygroundService.create({
       template: '<nve-alert status="success">Elements + React</nve-alert>',
@@ -139,25 +145,25 @@ const integrations = {
   },
   solidjs: {
     logo: 'solidjs',
-    starterDemo: 'https://NVIDIA.github.io/elements/starters/solidjs/',
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/solidjs.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/solidjs',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/solidjs/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/solidjs.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/solidjs`,
     documentation: 'https://www.solidjs.com',
     playgroundURL: null
   },
   svelte: {
     logo: 'svelte',
-    starterDemo: 'https://NVIDIA.github.io/elements/starters/svelte/',
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/svelte.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/svelte',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/svelte/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/svelte.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/svelte`,
     documentation: 'https://svelte.dev',
     playgroundURL: null
   },
   typescript: {
     logo: 'typescript',
-    starterDemo: 'https://NVIDIA.github.io/elements/starters/typescript/',
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/typescript.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/typescript',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/typescript/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/typescript.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/typescript`,
     documentation: 'https://www.typescriptlang.org',
     playgroundURL: await PlaygroundService.create({
       template: '<nve-alert status="success">Elements</nve-alert>'
@@ -165,9 +171,9 @@ const integrations = {
   },
   vue: {
     logo: 'vue',
-    starterDemo: 'https://NVIDIA.github.io/elements/starters/vue/',
-    starterDownload: 'https://NVIDIA.github.io/elements/starters/download/vue.zip',
-    starterSource: 'https://github.com/NVIDIA/elements/-/tree/main/projects/starters/vue',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/vue/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/vue.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/vue`,
     documentation: 'https://vuejs.org',
     playgroundURL: await PlaygroundService.create({
       template: '<nve-alert status="success">Elements + Vue</nve-alert>',
@@ -178,6 +184,10 @@ const integrations = {
 
 export const siteData = {
   BASE_URL,
+  ELEMENTS_PAGES_BASE_URL,
+  ELEMENTS_REPO_BASE_URL,
+  ELEMENTS_PLAYGROUND_BASE_URL,
+  ELEMENTS_REGISTRY_URL,
   elements,
   examples,
   integrations,

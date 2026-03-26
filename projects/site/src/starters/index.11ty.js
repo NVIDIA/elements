@@ -1,3 +1,5 @@
+import { ELEMENTS_REPO_BASE_URL } from '../_11ty/utils/env.js';
+
 export const data = {
   title: 'Starters',
   layout: 'docs.11ty.js'
@@ -144,7 +146,7 @@ export function render(data) {
       </div>
     </nve-card>
   </a>
-  <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nextjs">
+  <a href="${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/nextjs">
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
@@ -170,7 +172,7 @@ export function render(data) {
       </div>
     </nve-card>
   </a>
-  <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/go">
+  <a href="${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/go">
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
@@ -183,7 +185,7 @@ export function render(data) {
       </div>
     </nve-card>
   </a>
-  <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/hugo">
+  <a href="${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/hugo">
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">
@@ -196,7 +198,7 @@ export function render(data) {
       </div>
     </nve-card>
   </a>
-  <a href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nuxt">
+  <a href="${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/nuxt">
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">
         <nve-logo color="gray-denim" size="lg">

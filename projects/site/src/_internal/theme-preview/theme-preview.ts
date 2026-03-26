@@ -2,6 +2,8 @@ import { css, html, LitElement } from 'lit';
 import type { PropertyValues } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
+
+declare const __ELEMENTS_CDN_BASE_URL__: string;
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/button-group/define.js';
@@ -208,7 +210,7 @@ export class ThemePreview extends LitElement {
             <div class="bento-box-column">
               <nve-card>
                 <img
-                  src="https://cdn-stage.nvidia.com/assets/elements/test-image-2.webp"
+                  src="${__ELEMENTS_CDN_BASE_URL__}/assets/elements/test-image-2.webp"
                   alt="example visualization for media card demo"
                   loading="lazy"
                   style="width: calc(var(--nve-ref-scale-size) * 160px + var(--nve-ref-scale-text) * 160px); object-fit: cover; aspect-ratio: 16 / 9;" />
