@@ -3,6 +3,7 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { type HtmlNode } from '../internals/utils.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 /**
  * Patterns that show data binding in attribute values.
  * When these are present, we can't statically determine the value.
@@ -84,7 +85,7 @@ const rule = {
       description: 'Require popover elements to have a corresponding trigger element.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

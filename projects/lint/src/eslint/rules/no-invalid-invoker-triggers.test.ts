@@ -29,9 +29,7 @@ describe('noInvalidInvokerTriggers', () => {
     );
     expect(noInvalidInvokerTriggers.meta.docs.category).toBe('Best Practice');
     expect(noInvalidInvokerTriggers.meta.docs.recommended).toBe(true);
-    expect(noInvalidInvokerTriggers.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noInvalidInvokerTriggers.meta.docs.url).toContain('/docs/lint/');
     expect(noInvalidInvokerTriggers.meta.schema).toEqual([]);
     expect(noInvalidInvokerTriggers.meta.messages).toBeDefined();
     expect(noInvalidInvokerTriggers.meta.messages['no-invalid-invoker-triggers']).toBe(

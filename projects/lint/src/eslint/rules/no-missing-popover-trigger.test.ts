@@ -29,9 +29,7 @@ describe('noMissingPopoverTrigger', () => {
     );
     expect(noMissingPopoverTrigger.meta.docs.category).toBe('Best Practice');
     expect(noMissingPopoverTrigger.meta.docs.recommended).toBe(true);
-    expect(noMissingPopoverTrigger.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noMissingPopoverTrigger.meta.docs.url).toContain('/docs/lint/');
     expect(noMissingPopoverTrigger.meta.schema).toBeDefined();
     expect(noMissingPopoverTrigger.meta.messages).toBeDefined();
     expect(noMissingPopoverTrigger.meta.messages['missing-popover-trigger']).toBe(

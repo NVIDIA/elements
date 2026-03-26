@@ -27,7 +27,7 @@ describe('noMissingIconName', () => {
     expect(noMissingIconName.meta.docs.description).toBe('Require icon elements to have an icon name attribute.');
     expect(noMissingIconName.meta.docs.category).toBe('Best Practice');
     expect(noMissingIconName.meta.docs.recommended).toBe(true);
-    expect(noMissingIconName.meta.docs.url).toBe('https://NVIDIA.github.io/elements/docs/lint/');
+    expect(noMissingIconName.meta.docs.url).toContain('/docs/lint/');
     expect(noMissingIconName.meta.schema).toBeDefined();
     expect(noMissingIconName.meta.messages).toBeDefined();
     expect(noMissingIconName.meta.messages['missing-icon-name']).toBe(

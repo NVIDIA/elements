@@ -24,9 +24,7 @@ describe('noUnexpectedLibraryDependencies', () => {
     expect(noDeprecatedPackages.meta.docs).toBeDefined();
     expect(noDeprecatedPackages.meta.docs.description).toBe('Disallow usage of deprecated packages.');
     expect(noDeprecatedPackages.meta.docs.recommended).toBe(true);
-    expect(noDeprecatedPackages.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noDeprecatedPackages.meta.docs.url).toContain('/docs/lint/');
     expect(noDeprecatedPackages.meta.schema).toBeDefined();
     expect(noDeprecatedPackages.meta.messages).toBeDefined();
     expect(noDeprecatedPackages.meta.messages['unexpected-deprecated-package']).toBe(

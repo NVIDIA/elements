@@ -26,9 +26,7 @@ describe('noUnexpectedLibraryDependencies', () => {
       'Disallow incorrect dependency usage of @nve packages in consuming libraries.'
     );
     expect(noUnexpectedLibraryDependencies.meta.docs.recommended).toBe(true);
-    expect(noUnexpectedLibraryDependencies.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noUnexpectedLibraryDependencies.meta.docs.url).toContain('/docs/lint/');
     expect(noUnexpectedLibraryDependencies.meta.schema).toBeDefined();
     expect(noUnexpectedLibraryDependencies.meta.messages).toBeDefined();
   });

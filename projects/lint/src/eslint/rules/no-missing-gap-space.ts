@@ -4,6 +4,7 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { VALUE_BINDINGS } from '../internals/attributes.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 /** Spacing alignment values that manage their own distribution and override gap */
 const SPACING_ALIGNMENTS = ['align:space-around', 'align:space-between', 'align:space-evenly'];
 
@@ -18,7 +19,7 @@ const rule = {
       description: 'Require gap spacing on row and column layouts.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

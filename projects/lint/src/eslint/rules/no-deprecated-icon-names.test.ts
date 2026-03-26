@@ -27,9 +27,7 @@ describe('noDeprecatedIconNames', () => {
     expect(noDeprecatedIconNames.meta.docs.description).toBe('Disallow use of deprecated icon names.');
     expect(noDeprecatedIconNames.meta.docs.category).toBe('Best Practice');
     expect(noDeprecatedIconNames.meta.docs.recommended).toBe(true);
-    expect(noDeprecatedIconNames.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noDeprecatedIconNames.meta.docs.url).toContain('/docs/lint/');
     expect(noDeprecatedIconNames.meta.schema).toBeDefined();
     expect(noDeprecatedIconNames.meta.messages).toBeDefined();
     expect(noDeprecatedIconNames.meta.messages['unexpected-deprecated-icon-attribute']).toBe(

@@ -3,6 +3,7 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import type { HtmlTagNode } from '../rule-types.js';
 import { elements } from '../internals/metadata.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const rule = {
   meta: {
     type: 'problem' as const,
@@ -10,7 +11,7 @@ const rule = {
       description: 'Disallow use of unknown <nve-*> tags.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {
