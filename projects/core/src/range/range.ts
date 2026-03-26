@@ -16,6 +16,7 @@ import { html, nothing, isServer } from 'lit';
  * @cssprop --track-width
  * @cssprop --track-height
  * @cssprop --track-border-radius
+ * @cssprop --track-background
  * @cssprop --thumb-width
  * @cssprop --thumb-height
  * @cssprop --thumb-background
