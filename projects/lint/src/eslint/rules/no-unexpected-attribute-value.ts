@@ -4,6 +4,7 @@ import { getElementAttribute, getRecommendedValue } from '../internals/element-a
 import { isNVElement } from '../internals/utils.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
 
 const rule = {
@@ -14,7 +15,7 @@ const rule = {
       description: 'Disallow use of invalid attribute values for nve-* elements.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

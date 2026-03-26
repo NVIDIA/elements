@@ -3,6 +3,7 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const svgElements = [
   'svg',
   'path',
@@ -27,7 +28,7 @@ const rule = {
       description: 'Disallow use of style customization in Elements playground template.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

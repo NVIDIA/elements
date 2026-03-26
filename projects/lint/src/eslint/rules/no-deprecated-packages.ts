@@ -1,13 +1,14 @@
 import type { Rule } from 'eslint';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const rule = {
   meta: {
     type: 'problem' as const,
     docs: {
       description: 'Disallow usage of deprecated packages.',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

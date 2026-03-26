@@ -30,9 +30,7 @@ describe('noUnexpectedStyleCustomization', () => {
     );
     expect(noUnexpectedStyleCustomization.meta.docs.category).toBe('Best Practice');
     expect(noUnexpectedStyleCustomization.meta.docs.recommended).toBe(true);
-    expect(noUnexpectedStyleCustomization.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noUnexpectedStyleCustomization.meta.docs.url).toContain('/docs/lint/');
     expect(noUnexpectedStyleCustomization.meta.schema).toBeDefined();
     expect(noUnexpectedStyleCustomization.meta.messages).toBeDefined();
   });

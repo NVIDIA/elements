@@ -31,9 +31,7 @@ describe('noUnstyledTypography', () => {
     );
     expect(noUnstyledTypography.meta.docs.category).toBe('Best Practice');
     expect(noUnstyledTypography.meta.docs.recommended).toBe(true);
-    expect(noUnstyledTypography.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noUnstyledTypography.meta.docs.url).toContain('/docs/lint/');
     expect(noUnstyledTypography.meta.schema).toEqual([]);
     expect(noUnstyledTypography.meta.messages).toBeDefined();
     expect(noUnstyledTypography.meta.messages['unstyled-typography']).toBe(

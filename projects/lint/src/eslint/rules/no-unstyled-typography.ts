@@ -3,6 +3,7 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const TYPOGRAPHY_ELEMENTS: Record<string, string> = {
   h1: 'heading',
   h2: 'heading',
@@ -26,7 +27,7 @@ const rule = {
       description: 'Require typography elements to have nve-text styling applied.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {
