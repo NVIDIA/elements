@@ -17,6 +17,8 @@ import { PackagesService } from '@internals/tools/packages';
 
 import styles from './canvas-editable.css?inline';
 
+declare const __ELEMENTS_CDN_COMPONENTS_BASE_URL__: string;
+
 declare global {
   var gtag: (command: string, action: string, params?: Record<string, unknown>) => void;
 }
@@ -208,11 +210,10 @@ export class CanvasEditable extends LitElement {
       };
     }
 
-    const cdn = 'https://cdn-elements.prod.nvidia.com/packages';
     return {
-      elements: `${cdn}/@nvidia-elements/core/${this.packageVersions.elements}/dist/bundles/index.js`,
-      themes: `${cdn}/@nvidia-elements/themes/${this.packageVersions.themes}/dist/bundles/index.css`,
-      styles: `${cdn}/@nvidia-elements/styles/${this.packageVersions.styles}/dist/bundles/index.css`
+      elements: `${__ELEMENTS_CDN_COMPONENTS_BASE_URL__}/@nvidia-elements/core/${this.packageVersions.elements}/dist/bundles/index.js`,
+      themes: `${__ELEMENTS_CDN_COMPONENTS_BASE_URL__}/@nvidia-elements/themes/${this.packageVersions.themes}/dist/bundles/index.css`,
+      styles: `${__ELEMENTS_CDN_COMPONENTS_BASE_URL__}/@nvidia-elements/styles/${this.packageVersions.styles}/dist/bundles/index.css`
     };
   }
 

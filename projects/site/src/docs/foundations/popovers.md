@@ -77,7 +77,7 @@ For elements like tooltips this is often the same as anchor but the anchor and t
 
 ## Closable
 
-<!-- https://github.com/NVIDIA/elements/-/issues/86#note_27211667 -->
+<!-- {{ELEMENTS_REPO_BASE_URL}}/-/issues/86#note_27211667 -->
 
 Many of the popovers provide a closable property option. This enables a close button on the popover. When using native HTML popover APIs, it's important to understand how they handle closure via the escape key.
 Unlike some third-party solutions, browser-native popovers disable escape key prevention for closure by design, ensuring a seamless user experience. Similarly, native dialogs follow a similar pattern (chromium): only the first press of the escape key can prevent the dialog from closing,

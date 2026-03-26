@@ -2,6 +2,7 @@
 /* global process */
 
 import { join } from 'node:path';
+import { ELEMENTS_PAGES_BASE_URL, ELEMENTS_PLAYGROUND_BASE_URL, ELEMENTS_REPO_BASE_URL } from '../utils/env.js';
 
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
 
@@ -20,7 +21,7 @@ export const renderBaseHead = data => /* html */ `
   <meta property="og:url" content="${data.page?.url ?? ''}">
   <meta property="og:description" content="NVIDIA Elements is a flexible, framework-agnostic design system and toolkit that empowers teams to build exceptional user experiences.">
   <meta property="og:image" content="/favicon.svg">
-  <meta property="og:site_name" content="https://NVIDIA.github.io/elements/">
+  <meta property="og:site_name" content="${ELEMENTS_PAGES_BASE_URL}/">
   <meta property="og:type" content="website">
   <link rel="icon" href="/favicon.svg">
   ${renderGlobalsScript(data)}
@@ -67,7 +68,7 @@ export const renderBaseHead = data => /* html */ `
       dsn: 'https://44d4951c98e9732238fdd17c5a4d56ed@sentry.nvidia.com/142',
       enabled: process.env.NODE_ENV !== 'development',
       tracesSampleRate: 1.0,
-      tracePropagationTargets: ['https://localhost:4173', 'https://NVIDIA.github.io/elements/'],
+      tracePropagationTargets: ['https://localhost:4173', '${ELEMENTS_PAGES_BASE_URL}/'],
       transport: makeFetchTransport,
       stackParser: defaultStackParser,
       integrations: [
@@ -400,9 +401,9 @@ export function renderBasePageHeader(data) {
   <nve-logo slot="prefix" size="sm"></nve-logo>
   <a slot="prefix" href=".">Elements</a>
   <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''}><a href="docs/about/getting-started/">Catalog</a></nve-button>
-  <nve-button container="flat"><a href="https://elements-stage.nvidia.com/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>
+  <nve-button container="flat"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>
   <nve-button container="flat" ${data.page.url.includes('starters') ? 'selected' : ''}><a href="starters/">Starters</a></nve-button>
-  <nve-button container="flat"><a href="https://github.com/NVIDIA/elements" target="_blank">Gitlab</a></nve-button>
+  <nve-button container="flat"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Gitlab</a></nve-button>
   ${data.page.url !== '/' ? /* html */ `<nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>` : ''}
 </nve-page-header>
   `;

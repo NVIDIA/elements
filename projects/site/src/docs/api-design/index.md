@@ -90,5 +90,5 @@ Consistent element APIs provide consistent developer experience. The recommendat
 ```
 
 <nve-alert status="accent">
-  See an example of how many <a href="https://NVIDIA.github.io/elements/starters/">frameworks</a> can use a Web Component based design system.
+  See an example of how many <a href="{{ELEMENTS_PAGES_BASE_URL}}/starters/">frameworks</a> can use a Web Component based design system.
 </nve-alert>
