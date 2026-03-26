@@ -25,6 +25,7 @@ export const libraryBundleConfig = {
       }
     },
     rolldownOptions: {
+      treeshake: false,
       output: {
         format: 'esm',
         assetFileNames: `index.[ext]`,

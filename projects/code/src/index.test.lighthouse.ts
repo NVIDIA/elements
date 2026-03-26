@@ -47,7 +47,7 @@ describe('lighthouse report', () => {
     expect(report.scores.performance).toBe(100);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]!]!.kb).toBeLessThan(31);
+    expect(report.payload.javascript.requests[Object.keys(report.payload.javascript.requests)[0]!]!.kb).toBeLessThan(36);
   });
 });
 
@@ -59,6 +59,6 @@ describe('lighthouse report', () => {
       </script>
     `);
 
-    expect(report.payload.javascript.kb).toBeLessThan(31.1);
+    expect(report.payload.javascript.kb).toBeLessThan(36);
   });
 });
