@@ -4,6 +4,7 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { CssDeclarationNode, HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 // internal/private theme variables
 const globals = new Set([
   '--nve-debug-outline-width',
@@ -41,7 +42,7 @@ const rule = {
       description: 'Disallow use of unknown --nve-* CSS theme variables.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

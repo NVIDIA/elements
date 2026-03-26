@@ -2,6 +2,7 @@ import type { Rule } from 'eslint';
 import { theme } from '@nvidia-elements/themes';
 import type { CssDeclarationNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const rule = {
   meta: {
     type: 'problem' as const,
@@ -9,7 +10,7 @@ const rule = {
       description: 'Disallow use of deprecated --nve-* CSS theme variables.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     fixable: 'code' as const,
     schema: [],

@@ -21,7 +21,7 @@ export function getHostDetails(): { moduleHost: string; pageHost: string } {
   const moduleHost = new URL(import.meta.url).hostname;
   const isEsmHosted = moduleHost.startsWith('esm.');
 
-  if (isEsmHosted && pageHost !== 'localhost' && pageHost !== 'https://esm.sh') {
+  if (isEsmHosted && pageHost !== 'localhost' && !pageHost.includes('esm.')) {
     console.warn(getEsmHostedWarning());
   }
 

@@ -3,6 +3,7 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const DEPRECATED_POPOVER_ATTRIBUTES = {
   'nve-dialog': ['trigger', 'behavior-trigger'],
   'nve-tooltip': ['trigger', 'behavior-trigger'],
@@ -19,7 +20,7 @@ const rule = {
       description: 'Disallow use of deprecated popover attributes.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

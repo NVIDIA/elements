@@ -26,9 +26,7 @@ describe('noUnexpectedCssValue', () => {
     expect(noUnexpectedCssValue.meta.docs.description).toBe('Disallow use of invalid CSS values.');
     expect(noUnexpectedCssValue.meta.docs.category).toBe('Best Practice');
     expect(noUnexpectedCssValue.meta.docs.recommended).toBe(true);
-    expect(noUnexpectedCssValue.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noUnexpectedCssValue.meta.docs.url).toContain('/docs/lint/');
     expect(noUnexpectedCssValue.meta.schema).toBeDefined();
     expect(noUnexpectedCssValue.meta.messages).toBeDefined();
   });
