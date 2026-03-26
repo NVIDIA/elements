@@ -36,9 +36,9 @@ export class CanvasEditable extends LitElement {
     themes: string;
     styles: string;
   } = {
-    elements: '1.57.1',
-    themes: '1.12.0',
-    styles: '1.13.0'
+    elements: '1.65.6',
+    themes: '1.12.1',
+    styles: '1.13.3'
   };
 
   protected firstUpdated() {
