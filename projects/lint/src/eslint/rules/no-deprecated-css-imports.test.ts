@@ -28,9 +28,7 @@ describe('noDeprecatedCssImports', () => {
     expect(noDeprecatedCssImports.meta.docs.description).toBe('Disallow use of deprecated CSS import paths.');
     expect(noDeprecatedCssImports.meta.docs.category).toBe('Best Practice');
     expect(noDeprecatedCssImports.meta.docs.recommended).toBe(true);
-    expect(noDeprecatedCssImports.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noDeprecatedCssImports.meta.docs.url).toContain('/docs/lint/');
     expect(noDeprecatedCssImports.meta.schema).toBeDefined();
     expect(noDeprecatedCssImports.meta.messages).toBeDefined();
   });

@@ -1,6 +1,7 @@
 import type { Rule } from 'eslint';
 import type { CssAtRuleNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const deprecatedImports: Record<string, string> = {
   '@nvidia-elements/core/index.css': `@import '@nvidia-elements/themes/fonts/inter.css';\n@import '@nvidia-elements/themes/index.css';\n@import '@nvidia-elements/themes/dark.css';\n@import '@nvidia-elements/styles/typography.css';\n@import '@nvidia-elements/styles/layout.css';`,
   '@nvidia-elements/core/css/module.layout.css': `@import '@nvidia-elements/styles/layout.css';`,
@@ -17,7 +18,7 @@ const rule = {
       description: 'Disallow use of deprecated CSS import paths.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     fixable: 'code' as const,
     schema: [],

@@ -27,9 +27,7 @@ describe('noMissingSlottedElements', () => {
     expect(noMissingSlottedElements.meta.docs.description).toBe('Disallow use of missing slotted elements.');
     expect(noMissingSlottedElements.meta.docs.category).toBe('Best Practice');
     expect(noMissingSlottedElements.meta.docs.recommended).toBe(true);
-    expect(noMissingSlottedElements.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noMissingSlottedElements.meta.docs.url).toContain('/docs/lint/');
     expect(noMissingSlottedElements.meta.schema).toBeDefined();
     expect(noMissingSlottedElements.meta.messages).toBeDefined();
     expect(noMissingSlottedElements.meta.messages['unexpected-missing-slotted-element']).toBe(

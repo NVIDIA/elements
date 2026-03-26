@@ -29,9 +29,7 @@ describe('noUnexpectedInputType', () => {
     );
     expect(noUnexpectedInputType.meta.docs.category).toBe('Best Practice');
     expect(noUnexpectedInputType.meta.docs.recommended).toBe(true);
-    expect(noUnexpectedInputType.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noUnexpectedInputType.meta.docs.url).toContain('/docs/lint/');
     expect(noUnexpectedInputType.meta.schema).toBeDefined();
     expect(noUnexpectedInputType.meta.messages).toBeDefined();
   });

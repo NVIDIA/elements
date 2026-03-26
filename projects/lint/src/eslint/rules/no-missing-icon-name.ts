@@ -4,6 +4,7 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 import type { HtmlNode } from '../internals/utils.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const DATA_BINDING_PATTERNS = [/\$\{[^}]*\}/, /\{\{[^}]*\}\}/, /^\{[^}]+\}$/];
 
 function hasDataBinding(value: string | undefined): boolean {
@@ -45,7 +46,7 @@ const rule = {
       description: 'Require icon elements to have an icon name attribute.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

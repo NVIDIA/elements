@@ -27,9 +27,7 @@ describe('noInvalidEventListeners', () => {
     expect(noInvalidEventListeners.meta.docs.description).toBe('Disallow inline event handler attributes in HTML.');
     expect(noInvalidEventListeners.meta.docs.category).toBe('Best Practice');
     expect(noInvalidEventListeners.meta.docs.recommended).toBe(true);
-    expect(noInvalidEventListeners.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noInvalidEventListeners.meta.docs.url).toContain('/docs/lint/');
     expect(noInvalidEventListeners.meta.schema).toEqual([]);
     expect(noInvalidEventListeners.meta.messages).toBeDefined();
     expect(noInvalidEventListeners.meta.messages['no-inline-event-handler']).toBe(

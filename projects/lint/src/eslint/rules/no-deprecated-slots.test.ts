@@ -27,7 +27,7 @@ describe('noDeprecatedAttributes', () => {
     expect(noDeprecatedSlots.meta.docs.description).toBe('Disallow use of deprecated slot APIs.');
     expect(noDeprecatedSlots.meta.docs.category).toBe('Best Practice');
     expect(noDeprecatedSlots.meta.docs.recommended).toBe(true);
-    expect(noDeprecatedSlots.meta.docs.url).toBe('https://NVIDIA.github.io/elements/docs/lint/');
+    expect(noDeprecatedSlots.meta.docs.url).toContain('/docs/lint/');
     expect(noDeprecatedSlots.meta.schema).toBeDefined();
     expect(noDeprecatedSlots.meta.messages).toBeDefined();
     expect(noDeprecatedSlots.meta.messages['unexpected-deprecated-slots']).toBe(

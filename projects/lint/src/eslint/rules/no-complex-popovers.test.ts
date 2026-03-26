@@ -31,7 +31,7 @@ describe('noComplexPopovers', () => {
     expect(noComplexPopovers.meta.docs.description).toBe('Disallow excessive DOM complexity inside popover elements.');
     expect(noComplexPopovers.meta.docs.category).toBe('Best Practice');
     expect(noComplexPopovers.meta.docs.recommended).toBe(true);
-    expect(noComplexPopovers.meta.docs.url).toBe('https://NVIDIA.github.io/elements/docs/lint/');
+    expect(noComplexPopovers.meta.docs.url).toContain('/docs/lint/');
     expect(noComplexPopovers.meta.schema).toEqual([]);
     expect(noComplexPopovers.meta.messages).toBeDefined();
     expect(noComplexPopovers.meta.messages['complex-popover']).toBe(

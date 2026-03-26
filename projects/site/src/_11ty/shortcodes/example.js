@@ -47,9 +47,10 @@ export async function exampleShortcode(
     name: example.id
   });
 
-  const playgroundButton = example
-    ? `<nve-button container="flat" slot="suffix"><a href="${playgroundURL}" target="_blank">Open in Playground</a></nve-button>`
-    : '';
+  const playgroundButton =
+    example && playgroundURL?.length > 0
+      ? `<nve-button container="flat" slot="suffix"><a href="${playgroundURL}" target="_blank">Open in Playground</a></nve-button>`
+      : '';
 
   const editButton =
     example && config.editAction

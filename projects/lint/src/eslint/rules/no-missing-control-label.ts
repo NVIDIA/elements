@@ -4,6 +4,7 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { hasMatchingChild, hasTemplateSyntax, type HtmlNode } from '../internals/utils.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 /**
  * Form controls that require a label for accessibility.
  * Each control needs either:
@@ -79,7 +80,7 @@ const rule = {
       description: 'Require form controls to have an accessible label.',
       category: 'Accessibility',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [
       {

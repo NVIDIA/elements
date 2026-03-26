@@ -87,7 +87,11 @@ export async function getLatestPublishedVersions(projects: Project[]): Promise<E
   if (!versions) {
     const names = getPublishedPackageNames(projects);
     const packageFiles = await Promise.all(
-      names.map(name => {
+      names.map(async name => {
+        if (!__ELEMENTS_ESM_CDN_BASE_URL__?.length) {
+          return Promise.resolve({ name, version: '0.0.0' });
+        }
+
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 3000);
         return fetch(`${__ELEMENTS_ESM_CDN_BASE_URL__}/${name}@latest/package.json`, { signal: controller.signal })
