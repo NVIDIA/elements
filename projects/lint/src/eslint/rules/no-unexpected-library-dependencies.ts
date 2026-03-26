@@ -1,6 +1,7 @@
 import type { Rule } from 'eslint';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 type Messages = 'unexpected-dependency-missing' | 'unexpected-dependency-pinned' | 'unexpected-dependency-type';
 
 const rule = {
@@ -9,7 +10,7 @@ const rule = {
     docs: {
       description: 'Disallow incorrect dependency usage of @nve packages in consuming libraries.',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

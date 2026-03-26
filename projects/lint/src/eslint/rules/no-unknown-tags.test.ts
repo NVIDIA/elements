@@ -27,7 +27,7 @@ describe('noUnknownTags', () => {
     expect(noUnknownTags.meta.docs.description).toBe('Disallow use of unknown <nve-*> tags.');
     expect(noUnknownTags.meta.docs.category).toBe('Best Practice');
     expect(noUnknownTags.meta.docs.recommended).toBe(true);
-    expect(noUnknownTags.meta.docs.url).toBe('https://NVIDIA.github.io/elements/docs/lint/');
+    expect(noUnknownTags.meta.docs.url).toContain('/docs/lint/');
     expect(noUnknownTags.meta.schema).toBeDefined();
     expect(noUnknownTags.meta.messages).toBeDefined();
     expect(noUnknownTags.meta.messages['unknown-tag']).toBe('Unexpected use of unknown tag <{{tag}}>');

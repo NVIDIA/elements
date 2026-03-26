@@ -27,9 +27,7 @@ describe('noMissingControlLabel', () => {
     expect(noMissingControlLabel.meta.docs.description).toBe('Require form controls to have an accessible label.');
     expect(noMissingControlLabel.meta.docs.category).toBe('Accessibility');
     expect(noMissingControlLabel.meta.docs.recommended).toBe(true);
-    expect(noMissingControlLabel.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noMissingControlLabel.meta.docs.url).toContain('/docs/lint/');
     expect(noMissingControlLabel.meta.schema).toBeDefined();
     expect(noMissingControlLabel.meta.messages).toBeDefined();
     expect(noMissingControlLabel.meta.messages['missing-control-label']).toBe(

@@ -12,7 +12,7 @@ describe('noDeprecatedTags', () => {
     expect(noDeprecatedTags.meta.docs.description).toBe('Disallow use of deprecated elements in HTML.');
     expect(noDeprecatedTags.meta.docs.category).toBe('Best Practice');
     expect(noDeprecatedTags.meta.docs.recommended).toBe(true);
-    expect(noDeprecatedTags.meta.docs.url).toBe('https://NVIDIA.github.io/elements/docs/lint/');
+    expect(noDeprecatedTags.meta.docs.url).toContain('/docs/lint/');
     expect(noDeprecatedTags.meta.schema).toBeDefined();
     expect(noDeprecatedTags.meta.messages).toBeDefined();
     expect(noDeprecatedTags.meta.messages['unexpected-deprecated-tag']).toBe(

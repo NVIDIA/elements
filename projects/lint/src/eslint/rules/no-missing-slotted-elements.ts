@@ -3,6 +3,7 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { hasMatchingChild, hasTemplateSyntax } from '../internals/utils.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const REQUIRED_SLOTTED_ELEMENTS = {
   'nve-input': {
     required: ['input']
@@ -73,7 +74,7 @@ const rule = {
       description: 'Disallow use of missing slotted elements.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [{ type: 'object' }],
     messages: {

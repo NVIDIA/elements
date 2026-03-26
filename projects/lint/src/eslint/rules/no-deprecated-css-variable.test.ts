@@ -30,9 +30,7 @@ describe('noDeprecatedCssVariable', () => {
     );
     expect(noDeprecatedCssVariable.meta.docs.category).toBe('Best Practice');
     expect(noDeprecatedCssVariable.meta.docs.recommended).toBe(true);
-    expect(noDeprecatedCssVariable.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noDeprecatedCssVariable.meta.docs.url).toContain('/docs/lint/');
     expect(noDeprecatedCssVariable.meta.schema).toBeDefined();
     expect(noDeprecatedCssVariable.meta.messages).toBeDefined();
   });

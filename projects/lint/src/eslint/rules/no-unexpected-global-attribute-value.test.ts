@@ -38,9 +38,7 @@ describe('noUnexpectedAttributeValue', () => {
     );
     expect(noUnexpectedGlobalAttributeValue.meta.docs.category).toBe('Best Practice');
     expect(noUnexpectedGlobalAttributeValue.meta.docs.recommended).toBe(true);
-    expect(noUnexpectedGlobalAttributeValue.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noUnexpectedGlobalAttributeValue.meta.docs.url).toContain('/docs/lint/');
     expect(noUnexpectedGlobalAttributeValue.meta.schema).toBeDefined();
     expect(noUnexpectedGlobalAttributeValue.meta.messages).toBeDefined();
     expect(noUnexpectedGlobalAttributeValue.meta.messages['unexpected-attribute-value']).toBe(

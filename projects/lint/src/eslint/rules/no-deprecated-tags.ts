@@ -2,6 +2,7 @@ import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const DEPRECATED_TAGS: Record<string, string> = {
   // v1
   'nve-app-header': 'nve-page-header',
@@ -104,7 +105,7 @@ const rule = {
       description: 'Disallow use of deprecated elements in HTML.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {
