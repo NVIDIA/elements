@@ -11,6 +11,7 @@ import {
 } from '../internals/attributes.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 // also used in @internals/metadata, these are values that often confuse agents due to complexity in playground template generation within the same context window
 export function isComplexAttributeValue(value: string) {
   return (
@@ -38,7 +39,7 @@ const rule = {
       description: 'Disallow use of invalid attribute values in HTML.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [{ type: 'object' }],
     messages: {

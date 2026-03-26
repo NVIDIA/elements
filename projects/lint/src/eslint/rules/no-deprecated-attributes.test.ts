@@ -27,9 +27,7 @@ describe('noDeprecatedAttributes', () => {
     expect(noDeprecatedAttributes.meta.docs.description).toBe('Disallow use of deprecated attributes in HTML.');
     expect(noDeprecatedAttributes.meta.docs.category).toBe('Best Practice');
     expect(noDeprecatedAttributes.meta.docs.recommended).toBe(true);
-    expect(noDeprecatedAttributes.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noDeprecatedAttributes.meta.docs.url).toContain('/docs/lint/');
     expect(noDeprecatedAttributes.meta.schema).toBeDefined();
     expect(noDeprecatedAttributes.meta.messages).toBeDefined();
     expect(noDeprecatedAttributes.meta.messages['unexpected-deprecated-attribute']).toBe(

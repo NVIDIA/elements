@@ -94,21 +94,10 @@ export class Canvas extends LitElement {
         </div>
         <div class="toolbar">
           <nve-button class="source-button" container="flat" @click=${this.#handleSourceClick}>Source <nve-icon name="caret" size="sm" .direction=${this.showSource ? 'up' : 'down'}></nve-icon></nve-button>
-          <nve-select container="flat" fit-text>
-            <select @change=${(e: Event) => this.#updateSourceType(e)} aria-label="source type">
-              <option value="html">HTML&nbsp;</option>
-              <option value="react">React</option>
-            </select>
-          </nve-select>
           <slot name="suffix"></slot>
         </div>
       </div>
     `;
-  }
-
-  #updateSourceType(event: Event) {
-    this.sourceType = (event.target as HTMLSelectElement).value as 'html' | 'react';
-    this.showSource = true;
   }
 
   get #template() {

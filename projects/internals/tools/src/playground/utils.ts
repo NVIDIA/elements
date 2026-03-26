@@ -143,9 +143,11 @@ export function createVueFiles(content: string, elements: Element[], options: Pl
 
 function createURL(files: string, options: PlaygroundOptions) {
   const defaultOptions = { openFile: 'index.html', ...options };
-  return encodeURI(
-    `${__ELEMENTS_PLAYGROUND_BASE_URL__}/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim()}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`
-  );
+  return __ELEMENTS_PLAYGROUND_BASE_URL__?.length > 0
+    ? encodeURI(
+        `${__ELEMENTS_PLAYGROUND_BASE_URL__}/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim()}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`
+      )
+    : '';
 }
 
 function createLayoutStyles() {

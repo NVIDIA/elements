@@ -2,6 +2,7 @@ import type { Rule } from 'eslint';
 import { theme } from '@nvidia-elements/themes';
 import type { CssDeclarationNode, CssValueChild } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const spaceTokens = Object.entries(theme)
   .filter(([key]) => key.includes('nve-ref-space'))
   .map(([id, value]) => ({
@@ -309,7 +310,7 @@ const rule = {
       description: 'Disallow use of invalid CSS values.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     fixable: 'code' as const,
     schema: [],

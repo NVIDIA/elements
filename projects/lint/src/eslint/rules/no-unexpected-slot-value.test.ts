@@ -28,9 +28,7 @@ describe('noUnexpectedSlotValue', () => {
     expect(noUnexpectedSlotValue.meta.docs.description).toBe('Disallow use of invalid slot values in HTML.');
     expect(noUnexpectedSlotValue.meta.docs.category).toBe('Best Practice');
     expect(noUnexpectedSlotValue.meta.docs.recommended).toBe(true);
-    expect(noUnexpectedSlotValue.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noUnexpectedSlotValue.meta.docs.url).toContain('/docs/lint/');
     expect(noUnexpectedSlotValue.meta.schema).toBeDefined();
     expect(noUnexpectedSlotValue.meta.messages).toBeDefined();
     expect(noUnexpectedSlotValue.meta.messages['unexpected-slot-value']).toBe(

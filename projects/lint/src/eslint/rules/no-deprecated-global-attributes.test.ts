@@ -28,9 +28,7 @@ describe('noDeprecatedGlobalAttributes', () => {
     );
     expect(noDeprecatedGlobalAttributes.meta.docs.category).toBe('Best Practice');
     expect(noDeprecatedGlobalAttributes.meta.docs.recommended).toBe(true);
-    expect(noDeprecatedGlobalAttributes.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noDeprecatedGlobalAttributes.meta.docs.url).toContain('/docs/lint/');
     expect(noDeprecatedGlobalAttributes.meta.schema).toBeDefined();
     expect(noDeprecatedGlobalAttributes.meta.messages).toBeDefined();
     expect(noDeprecatedGlobalAttributes.meta.messages['unexpected-deprecated-global-attribute']).toBe(

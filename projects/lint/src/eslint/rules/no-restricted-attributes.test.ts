@@ -33,9 +33,7 @@ describe('noRestrictedAttributes', () => {
     );
     expect(noRestrictedAttributes.meta.docs.category).toBe('Best Practice');
     expect(noRestrictedAttributes.meta.docs.recommended).toBe(true);
-    expect(noRestrictedAttributes.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noRestrictedAttributes.meta.docs.url).toContain('/docs/lint/');
     expect(noRestrictedAttributes.meta.schema).toEqual([]);
     expect(noRestrictedAttributes.meta.messages).toBeDefined();
     expect(noRestrictedAttributes.meta.messages['no-restricted-attributes']).toBe(

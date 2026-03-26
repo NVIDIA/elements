@@ -9,6 +9,8 @@ export default {
   component: 'nve-button'
 };
 
+declare const __ELEMENTS_REPO_BASE_URL__: string;
+
 /**
  * @summary Basic button component with standard appearance and behavior for primary user actions.
  */
@@ -114,7 +116,7 @@ export const Disabled = {
  */
 export const InvokerCommand = {
   render: () => html`
-    <img id="logo" src="https://NVIDIA.github.io/elements/favicon.svg" alt="logo" style="width: 100px; height: 100px;" />
+    <img id="logo" src="${__ELEMENTS_REPO_BASE_URL__}/favicon.svg" alt="logo" style="width: 100px; height: 100px;" />
     <section>
       <nve-button commandfor="logo" command="--rotate-left">Rotate left</nve-button>
       <nve-button commandfor="logo" command="--rotate-right">Rotate right</nve-button>

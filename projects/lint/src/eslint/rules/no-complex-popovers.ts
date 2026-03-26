@@ -3,6 +3,7 @@ import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visit
 import { hasTemplateSyntax, type HtmlNode } from '../internals/utils.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const POPOVER_MAX_NODES: Record<string, number> = {
   'nve-drawer': 100,
   'nve-dialog': 50,
@@ -60,7 +61,7 @@ const rule = {
       description: 'Disallow excessive DOM complexity inside popover elements.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

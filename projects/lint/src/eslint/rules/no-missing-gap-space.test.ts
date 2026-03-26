@@ -39,7 +39,7 @@ describe('noMissingGapSpace', () => {
     expect(noMissingGapSpace.meta.docs.description).toBe('Require gap spacing on row and column layouts.');
     expect(noMissingGapSpace.meta.docs.category).toBe('Best Practice');
     expect(noMissingGapSpace.meta.docs.recommended).toBe(true);
-    expect(noMissingGapSpace.meta.docs.url).toBe('https://NVIDIA.github.io/elements/docs/lint/');
+    expect(noMissingGapSpace.meta.docs.url).toContain('/docs/lint/');
     expect(noMissingGapSpace.meta.schema).toBeDefined();
     expect(noMissingGapSpace.meta.messages).toBeDefined();
     expect(noMissingGapSpace.meta.messages['missing-gap-space']).toBe(

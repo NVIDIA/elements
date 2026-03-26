@@ -2,6 +2,7 @@ import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const INLINE_EVENT_HANDLER = /^on[a-z]+$/i;
 
 const rule = {
@@ -11,7 +12,7 @@ const rule = {
       description: 'Disallow inline event handler attributes in HTML.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

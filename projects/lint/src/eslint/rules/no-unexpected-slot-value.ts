@@ -5,6 +5,7 @@ import { getRecommendedSlotName, hasDefaultSlot, isKnownElement, hasSlot } from 
 import { hasTemplateSyntax, isNVElement } from '../internals/utils.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 /**
  * Check if a node has child content that projects into the default slot.
  * This includes non-whitespace text nodes and element nodes without a slot attribute.
@@ -35,7 +36,7 @@ const rule = {
       description: 'Disallow use of invalid slot values in HTML.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

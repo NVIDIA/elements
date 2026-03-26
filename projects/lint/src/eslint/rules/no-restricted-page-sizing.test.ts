@@ -28,9 +28,7 @@ describe('noRestrictedPageSizing', () => {
     expect(noRestrictedPageSizing.meta.docs.description).toBe('Disallow custom height or width styles on nve-page.');
     expect(noRestrictedPageSizing.meta.docs.category).toBe('Best Practice');
     expect(noRestrictedPageSizing.meta.docs.recommended).toBe(true);
-    expect(noRestrictedPageSizing.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noRestrictedPageSizing.meta.docs.url).toContain('/docs/lint/');
     expect(noRestrictedPageSizing.meta.schema).toBeDefined();
     expect(noRestrictedPageSizing.meta.messages).toBeDefined();
   });

@@ -4,6 +4,7 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { getElementAttributeNames } from '../internals/element-attributes.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const RESTRICTED_GLOBAL_ATTRIBUTES = ['nve-text', 'nve-layout', 'nve-text', 'nve-layout'];
 const RESTRICTED_ELEMENT_API_ATTRIBUTES = ['variant'];
 
@@ -22,7 +23,7 @@ const rule = {
       description: 'Disallow use of invalid API attributes or utility attributes on custom HTML element tags.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

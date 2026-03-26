@@ -15,9 +15,7 @@ describe('noUnknownCssVariable', () => {
     expect(noUnknownCssVariable.meta.docs.description).toBe('Disallow use of unknown --nve-* CSS theme variables.');
     expect(noUnknownCssVariable.meta.docs.category).toBe('Best Practice');
     expect(noUnknownCssVariable.meta.docs.recommended).toBe(true);
-    expect(noUnknownCssVariable.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noUnknownCssVariable.meta.docs.url).toContain('/docs/lint/');
     expect(noUnknownCssVariable.meta.schema).toBeDefined();
     expect(noUnknownCssVariable.meta.messages).toBeDefined();
   });

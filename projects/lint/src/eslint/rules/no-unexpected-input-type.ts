@@ -4,6 +4,7 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import type { HtmlTagNode } from '../rule-types.js';
 import type { HtmlNode } from '../internals/utils.js';
 
+declare const __ELEMENTS_PAGES_BASE_URL__: string;
 /**
  * Maps each nve-* component to the input types it accepts as slotted children.
  */
@@ -72,7 +73,7 @@ const rule = {
       description: 'Disallow slotted <input> elements with a type that does not match the parent Elements component.',
       category: 'Best Practice',
       recommended: true,
-      url: 'https://NVIDIA.github.io/elements/docs/lint/'
+      url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
     },
     schema: [],
     messages: {

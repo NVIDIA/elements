@@ -37,9 +37,7 @@ describe('noNestedContainerTypes', () => {
     );
     expect(noNestedContainerTypes.meta.docs.category).toBe('Best Practice');
     expect(noNestedContainerTypes.meta.docs.recommended).toBe(true);
-    expect(noNestedContainerTypes.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noNestedContainerTypes.meta.docs.url).toContain('/docs/lint/');
     expect(noNestedContainerTypes.meta.schema).toBeDefined();
     expect(noNestedContainerTypes.meta.messages).toBeDefined();
     expect(noNestedContainerTypes.meta.messages['no-nested-container-types']).toBe(

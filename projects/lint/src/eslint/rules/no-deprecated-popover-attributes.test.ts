@@ -27,9 +27,7 @@ describe('noDeprecatedPopoverAttributes', () => {
     expect(noDeprecatedPopoverAttributes.meta.docs.description).toBe('Disallow use of deprecated popover attributes.');
     expect(noDeprecatedPopoverAttributes.meta.docs.category).toBe('Best Practice');
     expect(noDeprecatedPopoverAttributes.meta.docs.recommended).toBe(true);
-    expect(noDeprecatedPopoverAttributes.meta.docs.url).toBe(
-      'https://NVIDIA.github.io/elements/docs/lint/'
-    );
+    expect(noDeprecatedPopoverAttributes.meta.docs.url).toContain('/docs/lint/');
     expect(noDeprecatedPopoverAttributes.meta.schema).toBeDefined();
     expect(noDeprecatedPopoverAttributes.meta.messages).toBeDefined();
     expect(noDeprecatedPopoverAttributes.meta.messages['unexpected-deprecated-popover-attribute']).toBe(
