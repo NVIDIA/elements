@@ -6,11 +6,12 @@ import { ESM_ELEMENTS_VERSION } from '../utils/version.js';
 import { siteData } from '../../index.11tydata.js';
 
 import { svgLogoShortcode } from '../shortcodes/svg-logo.js';
+import { ELEMENTS_REPO_BASE_URL } from '../utils/env.js';
 
 const { elements, tests } = siteData;
 
 // Base URL for package releases
-const PACKAGE_URL = 'https://github.com/NVIDIA/elements/-/releases';
+const PACKAGE_URL = `${ELEMENTS_REPO_BASE_URL}/-/releases`;
 
 // Initialize markdown parser and metadata service
 const md = markdown();
@@ -116,7 +117,7 @@ export function elementSupportButtons(tag) {
       </nve-card>
     </a>
 
-    <a href="https://github.com/NVIDIA/elements/-/issues/new?issuable_template=chore&issue[title]=chore(docs): update ${tag} component documentation" target="_blank" class="support-button-link">
+    <a href="${ELEMENTS_REPO_BASE_URL}/-/issues/new?issuable_template=chore&issue[title]=chore(docs): update ${tag} component documentation" target="_blank" class="support-button-link">
       <nve-card>
         <div nve-layout="row align:vertical-center">
           <span class="support-button-icon" nve-layout="row align:center">
