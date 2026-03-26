@@ -5,6 +5,7 @@
   --track-width: 0.5;
   --track-height: var(--nve-ref-size-150);
   --track-border-radius: var(--nve-ref-border-radius-md);
+  --track-background: var(--nve-sys-interaction-background);
   --thumb-width: var(--nve-ref-size-400);
   --thumb-height: var(--nve-ref-size-400);
   --thumb-background: var(--nve-sys-text-muted-color);
@@ -53,7 +54,7 @@
   display: block;
   width: 100%;
   height: var(--track-height);
-  background: var(--nve-sys-interaction-background);
+  background: var(--track-background);
   border-radius: var(--track-border-radius);
   filter: var(--filter);
   position: absolute;
