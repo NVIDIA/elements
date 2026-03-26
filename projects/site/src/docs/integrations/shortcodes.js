@@ -1,5 +1,6 @@
 import { svgLogoShortcode } from '../../_11ty/shortcodes/svg-logo.js';
 import { siteData } from '../../index.11tydata.js';
+import { ELEMENTS_PAGES_BASE_URL, ELEMENTS_REGISTRY_URL } from '../../_11ty/utils/env.js';
 
 export function renderInstallArtifactoryShortcode() {
   return /* html */ `
@@ -7,7 +8,7 @@ If not yet done, install [NodeJS](https://nodejs.org/en/download/). NodeJS is a 
 
 \`\`\`shell
 # login to artifactory (AVInfra monorepo users can skip this step)
-npm config set registry https://registry.npmjs.org && npm login --auth-type=legacy
+npm config set registry ${ELEMENTS_REGISTRY_URL} && npm login --auth-type=legacy
 \`\`\`
 `;
 }
@@ -30,7 +31,7 @@ Install the Elements CLI to your system. This will add the \`nve\` command to yo
 <div id="install-cli-macos" style="height: 65px">
 
 \`\`\`shell
-curl -fsSL https://NVIDIA.github.io/elements/install.sh | bash
+curl -fsSL ${ELEMENTS_PAGES_BASE_URL}/install.sh | bash
 \`\`\`
 
 </div>
@@ -38,7 +39,7 @@ curl -fsSL https://NVIDIA.github.io/elements/install.sh | bash
 <div id="install-cli-windows" hidden style="height: 65px">
 
 \`\`\`shell
-curl -fsSL https://NVIDIA.github.io/elements/install.cmd -o install.cmd && install.cmd && del install.cmd
+curl -fsSL ${ELEMENTS_PAGES_BASE_URL}/install.cmd -o install.cmd && install.cmd && del install.cmd
 \`\`\`
 
 </div>
@@ -47,7 +48,7 @@ curl -fsSL https://NVIDIA.github.io/elements/install.cmd -o install.cmd && insta
 
 \`\`\`shell
 # login to artifactory (AVInfra monorepo users can skip this step)
-npm config set registry https://registry.npmjs.org && npm login --auth-type=legacy
+npm config set registry ${ELEMENTS_REGISTRY_URL} && npm login --auth-type=legacy
 
 # install the CLI
 npm install -g @nvidia-elements/cli
