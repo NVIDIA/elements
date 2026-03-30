@@ -1,3 +1,9 @@
+## 1.66.0 (2026-03-30)
+
+* feat(docs): use local bundle builds for iframe previews on localhost ([700883b](https://github.com/NVIDIA/elements/commit/700883b))
+* feat(elements): add --track-background for nve-range unfilled track ([0348b0a](https://github.com/NVIDIA/elements/commit/0348b0a))
+* fix(docs): update stale cdn fallback versions in canvas-editable ([c413797](https://github.com/NVIDIA/elements/commit/c413797))
+
 ## <small>1.65.6 (2026-03-30)</small>
 
 * fix(elements): bundle side effects import ([3081267](https://github.com/NVIDIA/elements/commit/3081267))
