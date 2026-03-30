@@ -158,8 +158,8 @@ export class CanvasEditable extends LitElement {
   }
 
   #renderSandboxedPreview() {
-    // Use an iframe to sandbox the preview content
     const srcdoc = this.editableSource ?? '';
+    const { elements, themes, styles } = this.#bundleUrls;
     return html`
       <iframe
         sandbox=${'allow-scripts allow-modals allow-forms allow-popups allow-same-origin' as unknown as 'allow-scripts'}
@@ -180,9 +180,9 @@ export class CanvasEditable extends LitElement {
                 body:has([nve-popover]) { display: flex; align-items: center; justify-content: center; height: 100vh; width: 100vw; }
               </style>
 
-              <script async type="module" src="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/core/${this.packageVersions.elements}/dist/bundles/index.js"></script>
-              <link rel="stylesheet" type="text/css" href="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/themes/${this.packageVersions.themes}/dist/bundles/index.css" />
-              <link rel="stylesheet" type="text/css" href="https://cdn-elements.prod.nvidia.com/packages/@nvidia-elements/styles/${this.packageVersions.styles}/dist/bundles/index.css" />
+              <script async type="module" src="${elements}"></script>
+              <link rel="stylesheet" type="text/css" href="${themes}" />
+              <link rel="stylesheet" type="text/css" href="${styles}" />
             </head>
             <body>
               ${srcdoc}
@@ -191,6 +191,29 @@ export class CanvasEditable extends LitElement {
         `}
       ></iframe>
     `;
+  }
+
+  /**
+   * On localhost, loads bundles from the local Eleventy dev server
+   * (passthrough-copied from dist/bundles/) so iframe previews reflect
+   * local builds. In production, falls back to the versioned CDN.
+   */
+  get #bundleUrls() {
+    if (globalThis.location?.hostname === 'localhost') {
+      const base = globalThis.document.querySelector('base')?.getAttribute('href') ?? '/elements/';
+      return {
+        elements: `${base}local-bundles/elements/index.js`,
+        themes: `${base}local-bundles/themes/index.css`,
+        styles: `${base}local-bundles/styles/index.css`
+      };
+    }
+
+    const cdn = 'https://cdn-elements.prod.nvidia.com/packages';
+    return {
+      elements: `${cdn}/@nvidia-elements/core/${this.packageVersions.elements}/dist/bundles/index.js`,
+      themes: `${cdn}/@nvidia-elements/themes/${this.packageVersions.themes}/dist/bundles/index.css`,
+      styles: `${cdn}/@nvidia-elements/styles/${this.packageVersions.styles}/dist/bundles/index.css`
+    };
   }
 
   #renderInlinePreview() {
