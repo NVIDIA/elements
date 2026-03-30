@@ -79,6 +79,13 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
   eleventyConfig.addPassthroughCopy('src/**/*.css');
 
+  // Expose locally built bundles so iframe previews can load them on localhost
+  // instead of fetching from the CDN. Allows testing local component changes in
+  // the editable canvas without a publish cycle. See canvas-editable.ts #bundleUrls.
+  eleventyConfig.addPassthroughCopy({ '../core/dist/bundles': 'local-bundles/elements' });
+  eleventyConfig.addPassthroughCopy({ '../themes/dist/bundles': 'local-bundles/themes' });
+  eleventyConfig.addPassthroughCopy({ '../styles/dist/bundles': 'local-bundles/styles' });
+
   // Configure Lit SSR plugin for web components
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',
