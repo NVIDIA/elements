@@ -1,3 +1,28 @@
+## <small>1.65.6 (2026-03-30)</small>
+
+* fix(elements): bundle side effects import ([3081267](https://github.com/NVIDIA/elements/commit/3081267))
+* fix(labs-cli): add code signing for macos binaries ([7bac056](https://github.com/NVIDIA/elements/commit/7bac056))
+* chore(ci): migrate and remove internal metrics ([4935f2d](https://github.com/NVIDIA/elements/commit/4935f2d))
+* chore(ci): rename directory ([badaef5](https://github.com/NVIDIA/elements/commit/badaef5))
+* chore(ci): semantic release scope ([b3cf91a](https://github.com/NVIDIA/elements/commit/b3cf91a))
+* chore(ci): semantic release update ([ddc80d2](https://github.com/NVIDIA/elements/commit/ddc80d2))
+* chore(ci): update project configuration and add worktree management scripts ([1b0e261](https://github.com/NVIDIA/elements/commit/1b0e261))
+* chore(ci): update semantic release deps ([15f1602](https://github.com/NVIDIA/elements/commit/15f1602))
+* chore(ci): update to typescript 6.0 ([41b0ae9](https://github.com/NVIDIA/elements/commit/41b0ae9))
+* chore(docs): add agent harness guidelines doc and context file ([bdab193](https://github.com/NVIDIA/elements/commit/bdab193))
+* chore(docs): typescript type enabled lint rules ([d0be3a5](https://github.com/NVIDIA/elements/commit/d0be3a5))
+* chore(elements): typescript type enabled lint rules ([f1d9e50](https://github.com/NVIDIA/elements/commit/f1d9e50))
+* chore(internals): typescript type enabled lint rules ([ceae81d](https://github.com/NVIDIA/elements/commit/ceae81d))
+* chore(internals): typescript type enabled lint rules ([3bc0b7d](https://github.com/NVIDIA/elements/commit/3bc0b7d))
+* chore(labs-cli): typescript type enabled lint rules ([f8b37d7](https://github.com/NVIDIA/elements/commit/f8b37d7))
+* chore(labs-code): typescript type enabled lint rules ([88d52e3](https://github.com/NVIDIA/elements/commit/88d52e3))
+* chore(labs-forms): typescript type enabled lint rules ([3f2e501](https://github.com/NVIDIA/elements/commit/3f2e501))
+* chore(labs-lint): typescript type enabled lint rules ([3a3e7d9](https://github.com/NVIDIA/elements/commit/3a3e7d9))
+* chore(monaco): typescript type enabled lint rules ([0fd16e2](https://github.com/NVIDIA/elements/commit/0fd16e2))
+* chore(release): @nvidia-elements/cli-v0.12.0 [skip ci] ([0bd6053](https://github.com/NVIDIA/elements/commit/0bd6053))
+* chore(release): @nvidia-elements/cli-v0.12.1 [skip ci] ([7e63dd2](https://github.com/NVIDIA/elements/commit/7e63dd2))
+* feat(labs-cli): support codex project setup ([cf8492a](https://github.com/NVIDIA/elements/commit/cf8492a))
+
 ## [@nvidia-elements/core-v1.65.5](https://github.com/NVIDIA/elements/compare/@nvidia-elements/core-v1.65.4...@nvidia-elements/core-v1.65.5) (2026-03-23)
 
 
