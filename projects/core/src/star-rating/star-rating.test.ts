@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable } from '@internals/testing';
 import { StarRating } from '@nvidia-elements/core/star-rating';
 import '@nvidia-elements/core/star-rating/define.js';
@@ -238,5 +238,19 @@ describe(StarRating.metadata.tag, () => {
     expect(element3['active']).toBe(3);
 
     thirdStar.getBoundingClientRect = originalGetBoundingClientRect;
+  });
+
+  it('should dispatch input and change events on native input when star is clicked', async () => {
+    const inputHandler = vi.fn();
+    const changeHandler = vi.fn();
+    input.addEventListener('input', inputHandler);
+    input.addEventListener('change', changeHandler);
+
+    const starToClick = icons[2];
+    starToClick.dispatchEvent(new MouseEvent('click'));
+    await element.updateComplete;
+
+    expect(inputHandler).toHaveBeenCalled();
+    expect(changeHandler).toHaveBeenCalled();
   });
 });

@@ -24,20 +24,28 @@ describe(Pulse.metadata.tag, () => {
     expect(customElements.get(Pulse.metadata.tag)).toBeDefined();
   });
 
-  it('should set size attribute', async () => {
+  it('should reflect size attribute to DOM', async () => {
+    expect(element.hasAttribute('size')).toBe(false);
     element.size = 'xs';
     await elementIsStable(element);
-    expect(element.size).toBe('xs');
+    expect(element.getAttribute('size')).toBe('xs');
   });
 
-  it('should set status attribute', async () => {
+  it('should reflect status attribute to DOM', async () => {
+    expect(element.hasAttribute('status')).toBe(false);
     element.status = 'warning';
     await elementIsStable(element);
-    expect(element.status).toBe('warning');
+    expect(element.getAttribute('status')).toBe('warning');
   });
 
   it('should provide a aria role of alert to describe content', async () => {
     await elementIsStable(element);
     expect(element._internals.role).toBe('alert');
+  });
+
+  it('should render SVG with 4 circle elements', async () => {
+    await elementIsStable(element);
+    const circles = element.shadowRoot.querySelectorAll('circle');
+    expect(circles.length).toBe(4);
   });
 });

@@ -101,25 +101,14 @@
       "dependencies": [
         "format",
         "lint:vale",
-        "./projects/code:build",
         "./projects/code:test",
-        "./projects/cli:build",
         "./projects/cli:test",
-        "./projects/create:build",
-        "./projects/core:build",
         "./projects/core:test",
-        "./projects/forms:build",
         "./projects/forms:test",
-        "./projects/lint:build",
         "./projects/lint:test",
-        "./projects/markdown:build",
         "./projects/markdown:test",
-        "./projects/media:build",
         "./projects/media:test",
-        "./projects/monaco:build",
-        "./projects/monaco:test",
-        "./projects/styles:build",
-        "./projects/themes:build"
+        "./projects/monaco:test"
       ],
       "files": []
     },

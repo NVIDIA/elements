@@ -54,7 +54,7 @@ describe(CopyButton.metadata.tag, () => {
     mockClipboard.mockRestore();
   });
 
-  it('should enable copy functionality and show toast when clicked', async () => {
+  it('should show toast with success status after copy', async () => {
     const mockClipboard = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
     element.click();
     await elementIsStable(element);
@@ -103,6 +103,34 @@ describe(CopyButton.metadata.tag, () => {
 
     consoleErrorSpy.mockRestore();
     Object.defineProperty(navigator, 'clipboard', { value: originalClipboard });
+  });
+
+  it('should not copy to clipboard when behavior-copy is not set', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`<nve-copy-button value="hello"></nve-copy-button>`);
+    element = fixture.querySelector(CopyButton.metadata.tag);
+    await elementIsStable(element);
+
+    const mockClipboard = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
+    element.click();
+    await elementIsStable(element);
+
+    expect(mockClipboard).not.toHaveBeenCalled();
+    expect(element.shadowRoot.querySelector<Toast>(Toast.metadata.tag)).toBeFalsy();
+
+    mockClipboard.mockRestore();
+  });
+
+  it('should show ariaLabel text in tooltip when set', async () => {
+    element.ariaLabel = 'Copy code';
+    emulateMouseEnter(element);
+    await elementIsStable(element);
+    const tooltip = element.shadowRoot.querySelector<Tooltip>(Tooltip.metadata.tag);
+    expect(tooltip).toBeTruthy();
+    expect(tooltip.textContent.trim()).toBe('Copy code');
+
+    emulateMouseLeave(element);
+    await elementIsStable(element);
   });
 
   it('should allow event listeners and event bubbling when behavior-copy is active', async () => {

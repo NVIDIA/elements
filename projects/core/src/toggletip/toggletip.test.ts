@@ -37,7 +37,13 @@ describe(Toggletip.metadata.tag, () => {
 
   it('should render arrow by default', async () => {
     expect(element.shadowRoot.querySelector('.arrow').tagName).toBe('DIV');
+  });
+
+  it('should remove arrow when arrow is set to false', async () => {
+    expect(element.shadowRoot.querySelector('.arrow')).toBeTruthy();
     element.arrow = false;
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.arrow')).toBe(null);
   });
 
   // https://open-ui.org/components/popup.research.explainer#api-shape

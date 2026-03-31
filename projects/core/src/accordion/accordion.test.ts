@@ -179,6 +179,67 @@ describe(Accordion.metadata.tag, () => {
     await elementIsStable(childElement1);
     expect(childElement1.shadowRoot.querySelector('#content').ariaHidden).toBe('false');
   });
+
+  it('should reflect expanded attribute to DOM', async () => {
+    expect(childElement1.hasAttribute('expanded')).toBe(false);
+    childElement1.expanded = true;
+    await elementIsStable(childElement1);
+    expect(childElement1.hasAttribute('expanded')).toBe(true);
+
+    childElement1.expanded = false;
+    await elementIsStable(childElement1);
+    expect(childElement1.hasAttribute('expanded')).toBe(false);
+  });
+
+  it('should reflect container attribute to DOM on individual accordion', async () => {
+    expect(childElement1.hasAttribute('container')).toBe(false);
+    childElement1.container = 'flat';
+    await elementIsStable(childElement1);
+    expect(childElement1.getAttribute('container')).toBe('flat');
+  });
+});
+
+describe(`${Accordion.metadata.tag} - event contracts`, () => {
+  let fixture: HTMLElement;
+  let element: Accordion;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-accordion behavior-expand>
+        <nve-accordion-header>heading</nve-accordion-header>
+        <nve-accordion-content>content</nve-accordion-content>
+      </nve-accordion>
+    `);
+    element = fixture.querySelector<Accordion>(Accordion.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should dispatch open event with bubbles and composed when expanded', async () => {
+    const event = untilEvent(element, 'open');
+    const trigger = element.shadowRoot.querySelector('#header') as HTMLElement;
+    emulateClick(trigger);
+    const e = await event;
+    expect(e).toBeDefined();
+    expect((e as Event).bubbles).toBe(true);
+    expect((e as Event).composed).toBe(true);
+  });
+
+  it('should dispatch close event with bubbles and composed when collapsed', async () => {
+    element.expanded = true;
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'close');
+    const trigger = element.shadowRoot.querySelector('#header') as HTMLElement;
+    emulateClick(trigger);
+    const e = await event;
+    expect(e).toBeDefined();
+    expect((e as Event).bubbles).toBe(true);
+    expect((e as Event).composed).toBe(true);
+  });
 });
 
 describe(`${Accordion.metadata.tag} - Actions`, () => {

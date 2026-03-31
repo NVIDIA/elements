@@ -236,6 +236,47 @@ describe(Pagination.metadata.tag, () => {
     expect(selectLabel.textContent).toBe('51-100');
   });
 
+  it('should disable navigation buttons when items is 0', async () => {
+    element.items = 0;
+    await elementIsStable(element);
+
+    const prevBtn = element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="left"]');
+    const nextBtn = element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="right"]');
+
+    expect(prevBtn.disabled).toBe(true);
+    expect(nextBtn.disabled).toBe(true);
+  });
+
+  it('should hide start and end buttons when items is 0 even if skippable', async () => {
+    element.skippable = true;
+    await elementIsStable(element);
+
+    element.items = 0;
+    await elementIsStable(element);
+
+    const startBtn = element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="left"]');
+    const endBtn = element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="right"]');
+
+    expect(startBtn).toBe(null);
+    expect(endBtn).toBe(null);
+  });
+
+  it('should disable all buttons when disabled is set', async () => {
+    element.disabled = true;
+    element.skippable = true;
+    await elementIsStable(element);
+
+    const prevBtn = element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="left"]');
+    const nextBtn = element.shadowRoot.querySelector<IconButton>('[icon-name="chevron"][direction="right"]');
+    const startBtn = element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="left"]');
+    const endBtn = element.shadowRoot.querySelector<IconButton>('[icon-name="arrow-stop"][direction="right"]');
+
+    expect(prevBtn.disabled).toBe(true);
+    expect(nextBtn.disabled).toBe(true);
+    expect(startBtn.disabled).toBe(true);
+    expect(endBtn.disabled).toBe(true);
+  });
+
   it('should select first option by default and render all options passed as step-sizes', async () => {
     const select = element2.shadowRoot.querySelector<HTMLSelectElement>('select');
     const selectLabel = element2.shadowRoot.querySelector('.select-label');

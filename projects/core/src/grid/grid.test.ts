@@ -60,6 +60,24 @@ describe(Grid.metadata.tag, () => {
     expect(element.keynavGridConfig.cells[0].tabIndex).toBe(0);
     expect(element.keynavGridConfig.cells[1].tabIndex).toBe(-1);
   });
+
+  it('should reflect container attribute to DOM', async () => {
+    expect(element.hasAttribute('container')).toBe(false);
+    element.container = 'flat';
+    await elementIsStable(element);
+    expect(element.getAttribute('container')).toBe('flat');
+  });
+
+  it('should reflect stripe attribute to DOM', async () => {
+    expect(element.hasAttribute('stripe')).toBe(false);
+    element.stripe = true;
+    await elementIsStable(element);
+    expect(element.hasAttribute('stripe')).toBe(true);
+  });
+
+  it('should provide a footer slot', async () => {
+    expect(element.shadowRoot.querySelector('slot[name="footer"]')).toBeTruthy();
+  });
 });
 
 describe(`${Grid.metadata.tag}: id check`, () => {

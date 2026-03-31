@@ -26,21 +26,21 @@ describe(ChatMessage.metadata.tag, () => {
     expect(customElements.get(ChatMessage.metadata.tag)).toBeDefined();
   });
 
-  it('should set color attribute', async () => {
+  it('should reflect color attribute to DOM', async () => {
     element.color = 'red-cardinal';
     await elementIsStable(element);
-    expect(element.color).toBe('red-cardinal');
+    expect(element.getAttribute('color')).toBe('red-cardinal');
   });
 
-  it('should set container attribute', async () => {
+  it('should reflect container attribute to DOM', async () => {
     element.container = 'flat';
     await elementIsStable(element);
-    expect(element.container).toBe('flat');
+    expect(element.getAttribute('container')).toBe('flat');
   });
 
-  it('should set arrow-position attribute', async () => {
+  it('should reflect arrow-position attribute to DOM', async () => {
     element.arrowPosition = 'top-start';
     await elementIsStable(element);
-    expect(element.arrowPosition).toBe('top-start');
+    expect(element.getAttribute('arrow-position')).toBe('top-start');
   });
 });

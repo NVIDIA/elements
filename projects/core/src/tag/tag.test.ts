@@ -61,4 +61,22 @@ describe(Tag.metadata.tag, () => {
     element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).click();
     expect(await event).toBeDefined();
   });
+
+  it('should emit close event with bubbles and composed', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const event = untilEvent(element, 'close');
+    element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).click();
+    const e = await event;
+    expect((e as Event).bubbles).toBe(true);
+    expect((e as Event).composed).toBe(true);
+  });
+
+  it('should reflect prominence attribute to DOM', async () => {
+    expect(element.hasAttribute('prominence')).toBe(false);
+    element.prominence = 'emphasis';
+    await elementIsStable(element);
+    expect(element.getAttribute('prominence')).toBe('emphasis');
+  });
 });

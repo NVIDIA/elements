@@ -105,4 +105,54 @@ describe(Toast.metadata.tag, () => {
     element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).click();
     expect(await event).toBeDefined();
   });
+
+  it('should reflect status attribute to DOM', async () => {
+    expect(element.getAttribute('status')).toBe(null);
+    element.status = 'warning';
+    await elementIsStable(element);
+    expect(element.getAttribute('status')).toBe('warning');
+  });
+
+  it('should render default information icon when no status is set', async () => {
+    await elementIsStable(element);
+    const icon = element.shadowRoot.querySelector<Icon>(Icon.metadata.tag);
+    expect(icon).toBeTruthy();
+    expect(icon.name).toBe('information-circle-stroke');
+  });
+
+  it('should include detail in open event', async () => {
+    await elementIsStable(element);
+    const event = untilEvent(element, 'open');
+    element.showPopover();
+    const e = await event;
+    expect(e).toBeDefined();
+    expect((e as CustomEvent).detail).toBeDefined();
+  });
+
+  it('should not be inert when open and should be inert after close', async () => {
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    await open;
+    expect(element.inert).toBe(false);
+
+    const close = untilEvent(element, 'close');
+    element.hidePopover();
+    await close;
+    expect(element.inert).toBe(true);
+  });
+
+  it('should auto-close after closeTimeout elapses', async () => {
+    element.closeTimeout = 50;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    await open;
+
+    const close = untilEvent(element, 'close');
+    const e = await close;
+    expect(e).toBeDefined();
+  });
 });

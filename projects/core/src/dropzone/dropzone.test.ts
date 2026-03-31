@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
+import { createFixture, removeFixture, elementIsStable, untilEvent, emulateClick } from '@internals/testing';
 import { Dropzone } from '@nvidia-elements/core/dropzone';
 import '@nvidia-elements/core/dropzone/define.js';
 
@@ -284,6 +284,20 @@ describe(Dropzone.metadata.tag, () => {
     expect(slottedContent.textContent).to.equal('Custom Content');
 
     removeFixture(fixture);
+  });
+
+  it('should open file picker on Enter key press', async () => {
+    const container: HTMLElement = element.shadowRoot.querySelector('.container');
+    let clickCalled = false;
+    const originalClick = input.click.bind(input);
+    input.click = () => {
+      clickCalled = true;
+      originalClick();
+    };
+
+    container.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true, composed: true }));
+    emulateClick(container);
+    expect(clickCalled).toBe(true);
   });
 
   it('should not render blank slot content', async () => {
