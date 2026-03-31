@@ -157,6 +157,34 @@ describe(`${Tree.metadata.tag} slots`, () => {
     expect(node1.selected).toBe(false);
   });
 
+  it('should clear children indeterminate state when parent is toggled in multi-select', async () => {
+    element.selectable = 'multi';
+    element.behaviorSelect = true;
+    await elementIsStable(element);
+
+    // manually set child indeterminate
+    node1.indeterminate = true;
+    node2.indeterminate = true;
+    await elementIsStable(node1);
+    await elementIsStable(node2);
+    expect(node1.indeterminate).toBe(true);
+    expect(node2.indeterminate).toBe(true);
+
+    // toggle parent selection via checkbox click
+    const checkbox = node0.shadowRoot.querySelector('input[type="checkbox"]') as HTMLInputElement;
+    checkbox.click();
+    await elementIsStable(element);
+    await elementIsStable(node0);
+    await elementIsStable(node1);
+    await elementIsStable(node2);
+
+    expect(node0.selected).toBe(true);
+    expect(node1.selected).toBe(true);
+    expect(node2.selected).toBe(true);
+    expect(node1.indeterminate).toBe(false);
+    expect(node2.indeterminate).toBe(false);
+  });
+
   it('should update node expandable state if slotted content changes', async () => {
     expect(node0.shadowRoot.querySelector('nve-icon-button')).toBeTruthy();
     await elementIsStable(element);

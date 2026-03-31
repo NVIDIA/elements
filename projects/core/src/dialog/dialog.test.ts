@@ -109,6 +109,21 @@ describe(Dialog.metadata.tag, () => {
     expect(await event).toBeDefined();
   });
 
+  it('should include detail in open and close events', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const openEvent = untilEvent(element, 'open');
+    element.showPopover();
+    const oe = await openEvent;
+    expect((oe as CustomEvent).detail).toBeDefined();
+
+    const closeEvent = untilEvent(element, 'close');
+    element.hidePopover();
+    const ce = await closeEvent;
+    expect((ce as CustomEvent).detail).toBeDefined();
+  });
+
   it('should emit close event when hidePopover is called', async () => {
     element.closable = true;
     await elementIsStable(element);
@@ -120,6 +135,43 @@ describe(Dialog.metadata.tag, () => {
     const close = untilEvent(element, 'close');
     element.hidePopover();
     expect(await close).toBeDefined();
+  });
+
+  it('should close modal dialog on outside click (light dismiss)', async () => {
+    element.modal = true;
+    element.closable = true;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    await open;
+    expect(element.matches(':popover-open')).toBe(true);
+
+    const close = untilEvent(element, 'close');
+    // dispatch pointer events on the host element with coordinates outside its bounds
+    element.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: -10, clientY: -10 }));
+    element.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, clientX: -10, clientY: -10 }));
+    await close;
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should not close non-modal dialog on outside click', async () => {
+    expect(element.modal).toBe(undefined);
+    element.closable = true;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    await open;
+    expect(element.matches(':popover-open')).toBe(true);
+
+    // outside pointer events should not close manual popover
+    element.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: -10, clientY: -10 }));
+    element.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, clientX: -10, clientY: -10 }));
+    await new Promise(resolve => setTimeout(resolve, 100));
+    expect(element.matches(':popover-open')).toBe(true);
+
+    element.hidePopover();
   });
 
   it('should emit close event when close button clicked', async () => {

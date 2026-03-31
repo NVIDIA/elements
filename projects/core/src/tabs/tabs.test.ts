@@ -160,6 +160,18 @@ describe(Tabs.metadata.tag, () => {
     childElement.remove();
   });
 
+  it('should not select a disabled tab when behaviorSelect is true', async () => {
+    parentElement.behaviorSelect = true;
+    childElement.disabled = true;
+    await elementIsStable(parentElement);
+    await elementIsStable(childElement);
+
+    expect(childElement.selected).toBe(false);
+    emulateClick(childElement);
+    await elementIsStable(childElement);
+    expect(childElement.selected).toBe(false);
+  });
+
   it('should preserve other anchor names when removing --selected', async () => {
     document.body.appendChild(childElement);
     childElement.style.anchorName = '--my-custom-anchor, --selected';
@@ -174,5 +186,43 @@ describe(Tabs.metadata.tag, () => {
     expect(anchorNames).toContain('--my-custom-anchor');
 
     childElement.remove();
+  });
+});
+
+describe(`${Tabs.metadata.tag} - multi tab selection`, () => {
+  let fixture: HTMLElement;
+  let tabs: Tabs;
+  let tab1: TabsItem;
+  let tab2: TabsItem;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-tabs behavior-select>
+        <nve-tabs-item id="tab1">Tab 1</nve-tabs-item>
+        <nve-tabs-item id="tab2">Tab 2</nve-tabs-item>
+      </nve-tabs>
+    `);
+    tabs = fixture.querySelector(Tabs.metadata.tag);
+    tab1 = fixture.querySelector<TabsItem>('#tab1');
+    tab2 = fixture.querySelector<TabsItem>('#tab2');
+    await elementIsStable(tabs);
+    await elementIsStable(tab1);
+    await elementIsStable(tab2);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should deselect other tabs when a new tab is selected', async () => {
+    emulateClick(tab1);
+    await elementIsStable(tabs);
+    expect(tab1.selected).toBe(true);
+    expect(tab2.selected).toBe(false);
+
+    emulateClick(tab2);
+    await elementIsStable(tabs);
+    expect(tab1.selected).toBe(false);
+    expect(tab2.selected).toBe(true);
   });
 });

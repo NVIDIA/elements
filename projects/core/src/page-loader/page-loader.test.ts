@@ -28,4 +28,14 @@ describe(PageLoader.metadata.tag, () => {
     await elementIsStable(element);
     expect(element.position).toBe('center');
   });
+
+  it('should use manual popover type', async () => {
+    await elementIsStable(element);
+    expect(element.popoverType).toBe('manual');
+  });
+
+  it('should default anchor to document.body', async () => {
+    await elementIsStable(element);
+    expect(element.anchor).toBe(document.body);
+  });
 });

@@ -32,6 +32,21 @@ describe(Breadcrumb.metadata.tag, () => {
     expect(customElements.get(Breadcrumb.metadata.tag)).toBeDefined();
   });
 
+  it('should have navigation role', async () => {
+    await elementIsStable(element);
+    expect(element._internals.role).toBe('navigation');
+  });
+
+  it('should render separator icons between items but not after last', async () => {
+    const slot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
+    slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as CustomEventInit<HTMLSlotElement>));
+    await elementIsStable(element);
+
+    const separators = element.shadowRoot.querySelectorAll('[separator]');
+    const items = element.shadowRoot.querySelectorAll('li');
+    expect(separators.length).toBe(items.length - 1);
+  });
+
   it('should assign elements to defined slot', async () => {
     const slot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
     slot.dispatchEvent(new CustomEvent('slotchange', { target: slot } as CustomEventInit<HTMLSlotElement>));
