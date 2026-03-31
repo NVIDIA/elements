@@ -51,6 +51,6 @@ Using [Import Maps](https://web.dev/import-maps-in-all-modern-browsers/) you can
 </html>
 ```
 
-## Artifactory Usage Guidelines
+## Registry Usage Guidelines
 
 {% artifactory-usage %}

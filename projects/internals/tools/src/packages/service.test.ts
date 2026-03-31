@@ -90,4 +90,11 @@ describe('PackagesService', () => {
     expect((result as { [key: string]: string })['no-match']).toBeDefined();
     expect((result as { [key: string]: string })['no-match']).toContain('No changelog found');
   });
+
+  it('should provide versions method', async () => {
+    const result = await PackagesService.versions();
+    expect(result).toBeDefined();
+    expect(typeof result).toBe('object');
+    expect(result['@nvidia-elements/core']).toBe('1.0.0');
+  });
 });
