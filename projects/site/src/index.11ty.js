@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { renderBaseHead, renderBasePageHeader, IS_MR_PREVIEW, IS_DEV_MODE } from './_11ty/layouts/common.js';
-import { svgLogoShortcode, svgLogosShortcode } from './_11ty/shortcodes/svg-logo.js';
-import { ELEMENTS_ASSETS_CDN_BASE_URL, ELEMENTS_PAGES_BASE_URL, ELEMENTS_REPO_BASE_URL } from './_11ty/utils/env.js';
+import { svgLogosShortcode } from './_11ty/shortcodes/svg-logo.js';
+import { ELEMENTS_ASSETS_CDN_BASE_URL, ELEMENTS_PAGES_BASE_URL } from './_11ty/utils/env.js';
 
 const BASE_HEAD = renderBaseHead({ title: 'Elements', disableTheme: true });
 const styles = readFileSync(new URL('./index.css', import.meta.url), 'utf-8');
@@ -412,48 +412,6 @@ export function render(data) {
                 </div>
                 <h3 nve-text="heading medium lg">Vue (v3)</h3>
               </a>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section : Loop -->
-        <section id="loop">
-          <div class="content" nve-layout="column align:center gap:xxl">
-            <div nve-text="semibold emphasis display center">
-              Stay in the
-              <span class="amber-orange-gradient gradient-txt">Loop.</span>
-            </div>
-            <div nve-layout="column &md|row gap:lg align:stretch">
-              <div class="contact gradient-card" nve-layout="column gap:lg pad:lg align:space-between">
-                <div nve-layout="row gap:md align:vertical-center">
-                  <div>
-                    ${svgLogoShortcode('gitlab', '28')}
-                  </div>
-                  <div nve-text="heading medium emphasis">Gitlab Repo</div>
-                </div>
-                <div nve-text="body medium muted">Explore the code. Submit issues. Help shape what's next.</div>
-                <nve-button container="inline">
-                  <a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">
-                    View
-                    <nve-icon name="arrow" direction="right"></nve-icon>
-                  </a>
-                </nve-button>
-              </div>
-              <div class="contact gradient-card" nve-layout="column gap:lg pad:lg align:space-between">
-                <div nve-layout="row gap:md align:vertical-center">
-                  <div>
-                    ${svgLogoShortcode('slack', '28')}
-                  </div>
-                  <div nve-text="heading medium emphasis">Slack Support</div>
-                </div>
-                <div nve-text="body medium muted">Join the conversation. Get help, share ideas, and connect.</div>
-                <nve-button container="inline">
-                  <a href="http://nv/elements-slack" target="_blank">
-                    View
-                    <nve-icon name="arrow" direction="right"></nve-icon>
-                  </a>
-                </nve-button>
-              </div>
             </div>
           </div>
         </section>

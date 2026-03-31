@@ -9,17 +9,9 @@
 
 ## Libraries and Community
 
-Reach out to the Slack support channel or find more resources in the Figma libraries.
-
 <section nve-layout="row gap:sm pad-bottom:lg">
   <nve-button>
-    <a href="http://nv/elements-slack" target="_blank">{% svg-logo 'slack' '18' %} Slack Support</a>
-  </nve-button>
-  <nve-button>
-    <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank">{% svg-logo 'gitlab' '18' %} Gitlab</a>
-  </nve-button>
-  <nve-button>
-    <a href="http://nv/elements-figma" target="_blank">{% svg-logo 'figma' '18' %} Figma Library</a>
+    <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank">{% svg-logo 'gitlab' '18' %} Repo</a>
   </nve-button>
   <nve-button>
     <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style="--color: var(--nve-sys-accent-primary-background)"></nve-icon> npm Package</a>
@@ -32,7 +24,7 @@ Elements [supports a wide variety](https://custom-elements-everywhere.com) of Ja
 
 <section nve-layout="row gap:sm pad-bottom:lg">
   <nve-button>
-    <a href="./docs/integrations/typescript/">{% svg-logo 'slack' '18' %} TypeScript</a>
+    <a href="./docs/integrations/typescript/">{% svg-logo 'typescript' '18' %} TypeScript</a>
   </nve-button>
   <nve-button>
     {% svg-logo 'lit' '20' %} Lit</a>
