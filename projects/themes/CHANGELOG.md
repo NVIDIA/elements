@@ -201,8 +201,6 @@
 
 * **themes:** release to 1.0 stable
 
-Signed-off-by: Cory Rylan <crylan@nvidia.com>
-
 ### Features
 
 * **themes:** stable branch ([c48e1b5](https://github.com/NVIDIA/elements/commit/c48e1b5668842e713ac35a90a695afa86eaf142f))

@@ -140,7 +140,7 @@ A visual indicator that communicates a status description of an associated compo
 
 ### 403 Forbidden
 
-A `403 Forbidden` error means your Artifactory token has expired. Re-authenticate to resolve it.
+A `403 Forbidden` error means your token has expired. Re-authenticate to resolve it.
 
 ```shell
 npm config set registry {{ELEMENTS_REGISTRY_URL}} && npm login --auth-type=legacy
