@@ -21,8 +21,11 @@ if (existsSync('../cli/dist')) {
   mkdirSync('./dist/cli', { recursive: true });
   for (const bin of ['nve-macos-arm64', 'nve-linux-x64', 'nve-linux-arm64', 'nve-windows-x64']) {
     const src = `../cli/dist/${bin}`;
+    const srcExe = `../cli/dist/${bin}.exe`;
     if (existsSync(src)) {
       cpSync(src, `./dist/cli/${bin}`);
+    } else if (existsSync(srcExe)) {
+      cpSync(srcExe, `./dist/cli/${bin}`);
     }
   }
   if (existsSync('../cli/dist/manifest.json')) {
