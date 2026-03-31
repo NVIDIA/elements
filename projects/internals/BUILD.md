@@ -1,6 +1,6 @@
 # Build, Infrastructure, and CI/CD
 
-This is an outline of the tooling that runs the Elements monorepo. This tooling powers a fully automated continuous deployment of many npm/Artifactory packages as well as documentation. This configuration enables:
+This is an outline of the tooling that runs the Elements monorepo. This tooling powers a fully automated continuous deployment of many npm packages as well as documentation. This configuration enables:
 
 - Building 30+ libraries, packages and starter projects
 - 1400+ unit tests, visual regressions tests and performance lighthouse tests
@@ -193,10 +193,10 @@ The following GitLab settings optimize code quality and stability within the rep
 
 ## Release
 
-[Semantic Release](https://github.com/semantic-release/semantic-release) is an open source tool for managing automatic publishing and deployment of libraries and packages following [SEMVER](https://semver.org/). This enables a fix or feature to appear in Artifactory within minutes of it merging and passing the CI automated tests. To integrate into GitLab, complete the following:
+[Semantic Release](https://github.com/semantic-release/semantic-release) is an open source tool for managing automatic publishing and deployment of libraries and packages following [SEMVER](https://semver.org/). This enables a fix or feature to available within minutes of it merging and passing the CI automated tests. To integrate into GitLab, complete the following:
 
 - Create `GITLAB_TOKEN` with maintainer permissions using a GitLab service account
-- Generate Artifactory Identity Token via a service account named `NPM_TOKEN`
+- Generate Identity Token via a service account named `NPM_TOKEN`
 - Add tokens `GITLAB_TOKEN` and `NPM_TOKEN` to the [repo variables](https://github.com/help/ci/variables/index)
 - Note, the bot name ran by Semantic Release is the [name of your provided GitLab Access Token](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html#bot-users-for-projects) (`GITLAB_TOKEN`) you can change this default if desired.
 - Follow standard [Semantic Release](https://github.com/semantic-release/semantic-release) tooling/configuration. To see an example of this look at the Elements [release.config.cjs](https://github.com/NVIDIA/elements/-/blob/main/release.config.cjs?ref_type=heads) file.

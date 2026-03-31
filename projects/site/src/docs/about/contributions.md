@@ -7,13 +7,9 @@
 
 # {{ title }}
 
-This guide facilitates and streamlines your contribution process and helps ensure
-that every contribution adheres to the high standards of code and design quality.
-In this system, unit testing is highly valued to maintain a reliable, robust design system.
+This guide facilitates and streamlines your contribution process and helps ensure that every contribution adheres to the high standards of code and design quality. In this system, unit testing is highly valued to maintain a reliable, robust design system.
 
-The team may not accept all contributions or may need more time before implementation.
-Take into account that a design system component or pattern requires a significant amount of time.
-Each use case, many apps, frameworks, API design, and guidelines applicable to all must be carefully considered.
+The team may not accept all contributions or may need more time before implementation. Take into account that a design system component or pattern requires a significant amount of time. Each use case, many apps, frameworks, API design, and guidelines applicable to all must be carefully considered.
 The main focus is to enable you to deliver value to your users.
 
 <img src="static/images/contributions.drawio.svg" style="padding: 12px 0 0 0" />
@@ -40,15 +36,15 @@ The main focus is to enable you to deliver value to your users.
 
 ## Bug Reporting
 
-1. **Create a new issue** using the [bug template on Gitlab]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=default), providing as much detail as you can about the problem and how to reproduce it. Use the [Elements Playground]({{ELEMENTS_PLAYGROUND_BASE_URL}}/ui/elements-playground) to provide a minimal reproducible example if possible.
+1. **Create a new issue** using the [bug template]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=default), providing as much detail as you can about the problem and how to reproduce it. Use the [Elements Playground]({{ELEMENTS_PLAYGROUND_BASE_URL}}/ui/elements-playground) to provide a minimal reproducible example if possible.
 
 ## Feature Requests
 
-1. **Proposing a Feature**: If you believe a new feature would benefit the design system, please create a new issue using File an issue with the [feature template on Gitlab]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=feature)
+1. **Proposing a Feature**: If you believe a new feature would benefit the design system, please create a new issue using File an issue with the [feature template]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=feature)
 
 ## Bug Fixes
 
-1. **Create a new issue** using the [bug template on Gitlab]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=default), providing as much detail as you can about the problem and how to reproduce it. Use the [Elements Playground]({{ELEMENTS_PLAYGROUND_BASE_URL}}/ui/elements-playground) to provide a minimal reproducible example.
+1. **Create a new issue** using the [bug template]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=default), providing as much detail as you can about the problem and how to reproduce it.
 
 2. **Resolve the Bug**: Once you have a solution for the bug, please ensure that your code is clear, concise, and adheres to the coding guidelines.
 
@@ -58,7 +54,7 @@ The main focus is to enable you to deliver value to your users.
 
 ## New Components / Feature
 
-1. **Proposing a New Component**: For a new component you would like to contribute, please create a new issue via the [Slack Workflow](https://nvidia.slack.com/archives/C03BDL2UCGK).
+1. **Proposing a New Component**: For a new component you would like to contribute, please create a new issue.
 
 2. **Design Review**: The initial MVP design passes review and is ready for implementation.
 
@@ -68,4 +64,4 @@ The main focus is to enable you to deliver value to your users.
 
 5. **Unit Testing**: As with other contributions, all new components should have appropriate unit tests to verify their functionality and performance.
 
-File an issue with the [feature template on Gitlab]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=feature).
+File an issue with the [feature template]({{ELEMENTS_REPO_BASE_URL}}/-/issues/new?issuable_template=feature).

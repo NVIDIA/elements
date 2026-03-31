@@ -3,7 +3,6 @@
 Themes for the Elements design system, providing comprehensive color palettes, typography, and spacing.
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/foundations/themes/)
-- [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [GitLab Repo](https://github.com/NVIDIA/elements)
 - [Artifactory](https://registry.npmjs.org

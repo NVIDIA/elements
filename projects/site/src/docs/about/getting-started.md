@@ -8,7 +8,7 @@
 <p id="getting-started-img"></p>
 
 <div nve-layout="column gap:lg">
-  <div nve-layout="row gap:md align:vertical-center"><nve-logo></nve-logo><h1 nve-text="display sm">Elements</h1></div>
+  <h1 nve-text="display sm">Elements</h1>
   <h2 nve-text="heading lg">The Design Language for AI/ML Factories Building at the Speed of Light</h2>
 </div>
 
@@ -57,13 +57,7 @@ import '@nvidia-elements/core/button/define.js';
     <a href="docs/mcp/"><svg width="18" height="18"><use href="#claude-svg"></use></svg> Add to Claude</a>
   </nve-button>
   <nve-button>
-    <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank"><svg width="18" height="18"><use href="#gitlab-svg"></use></svg> Gitlab Repo</a>
-  </nve-button>
-  <nve-button>
-    <a href="http://nv/elements-slack" target="_blank"><svg width="18" height="18"><use href="#slack-svg"></use></svg> Slack Support</a>
-  </nve-button>
-  <nve-button>
-    <a href="http://nv/elements-figma" target="_blank"><svg width="18" height="18"><use href="#figma-svg"></use></svg> Figma Library</a>
+    <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank"><nve-icon name="fork"></nve-icon> Repo</a>
   </nve-button>
   <nve-button>
     <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style="--color: var(--nve-sys-accent-primary-background)"></nve-icon> npm Package</a>

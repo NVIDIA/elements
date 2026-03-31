@@ -56,29 +56,11 @@ export class SystemSettings extends LitElement {
           }}></nve-preferences-input>
         <nve-divider></nve-divider>
         <nve-select container="flat" style="--border-bottom: 0; --min-width: 170px">
-          <label>Experimental Themes</label>
-          <select size="3" .value=${this.#globals.theme} @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ theme: e.target.value })}>
-            <option ?selected=${this.#globals.theme === 'ddb-dark'} value="ddb-dark">DDB Dark</option>
-            <option ?selected=${this.#globals.theme === 'brand'} value="brand">Brand</option>
-            <option ?selected=${this.#globals.theme === 'brand-dark'} value="brand-dark">Brand Dark</option>
-          </select>
-        </nve-select>
-        <nve-divider></nve-divider>
-        <nve-select container="flat" style="--border-bottom: 0; --min-width: 170px">
           <label>Layer Background</label>
           <nve-icon-button slot="label" popovertarget="demo-layer-tooltip" size="sm" container="flat" icon-name="information-circle-stroke" style="--height: 12px"></nve-icon-button>
           <select size="3" @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ layer: e.target.value })}>
             <option ?selected=${this.#globals.layer === ''} value="">Canvas</option>
             <option ?selected=${this.#globals.layer === 'container'} value="container">Container</option>
-          </select>
-        </nve-select>
-        <nve-divider></nve-divider>
-        <nve-select container="flat" style="--border-bottom: 0; --min-width: 170px">
-          <label>Font</label>
-          <select size="3" @change=${(e: { target: HTMLInputElement }) => this.#writeGlobals({ font: e.target.value })}>
-            <option ?selected=${this.#globals.font === ''} value="">Default</option>
-            <option ?selected=${this.#globals.font === 'inter'} value="inter">Inter</option>
-            <option ?selected=${this.#globals.font === 'nvidia-sans'} value="nvidia-sans">NVIDIA Sans</option>
           </select>
         </nve-select>
         <nve-divider></nve-divider>

@@ -322,7 +322,6 @@ export function elementStatus(tag) {
       <nve-badge status="${elementMetadata.status === 'pre-release' ? 'warning' : 'pending'}">pre-release <nve-icon name="exclamation-triangle"></nve-icon></nve-badge>
       
       <div nve-layout="column gap:xs">
-        <nve-alert status="finished">Published in <a href="http://nv/elements-figma">Figma</a></nve-alert>
         <nve-alert status="finished">Docs Preview</nve-alert>
         <nve-alert status="finished">API Documentation</nve-alert>
         <nve-alert status="${elementMetadata.themes ? 'finished' : 'pending'}">Fully Themeable</nve-alert>
@@ -336,7 +335,7 @@ export function elementStatus(tag) {
         <nve-alert status="${elementMetadata.unitTests ? 'finished' : 'pending'}">Robust unit test coverages</nve-alert>
         <nve-alert status="${elementMetadata.apiReview ? 'finished' : 'pending'}">Passed <a href="docs/api-design/">API Review</a></nve-alert>
         <nve-alert status="${elementMetadata.vqa ? 'finished' : 'pending'}">Passed Designer VQA Review</nve-alert>
-        <nve-alert status="${elementMetadata.package ? 'finished' : 'pending'}">Included in <a href="http://nv/elements">library package</a></nve-alert>
+        <nve-alert status="${elementMetadata.package ? 'finished' : 'pending'}">Included in library package</nve-alert>
       </div>
     </div>
 

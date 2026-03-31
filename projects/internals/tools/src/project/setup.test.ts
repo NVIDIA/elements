@@ -38,6 +38,28 @@ describe('setup-project', () => {
     expect(result.dependencies.message).toContain('already has');
   });
 
+  it('should return danger if package.json is invalid JSON', async () => {
+    const { existsSync, readFileSync } = await import('node:fs');
+    vi.mocked(existsSync).mockReturnValue(true);
+    vi.mocked(readFileSync).mockReturnValue('not valid json {{{');
+
+    const result = setupProject('/test-project');
+
+    expect(result.dependencies.status).toBe('danger');
+    expect(result.dependencies.message).toContain('Failed to parse');
+  });
+
+  it('should handle missing dependencies and devDependencies keys', async () => {
+    const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
+    vi.mocked(existsSync).mockReturnValue(true);
+    vi.mocked(readFileSync).mockReturnValue(JSON.stringify({ name: 'test' }));
+
+    const result = setupProject('/test-project');
+
+    expect(result.dependencies.status).toBe('success');
+    expect(writeFileSync).toHaveBeenCalled();
+  });
+
   it('should add Elements core dependencies to package.json', async () => {
     const { existsSync, readFileSync, writeFileSync } = await import('node:fs');
     vi.mocked(existsSync).mockReturnValue(true);

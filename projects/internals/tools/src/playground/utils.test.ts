@@ -12,6 +12,17 @@ import {
   playgroundTypes
 } from './utils.js';
 
+// when ELEMENTS_PLAYGROUND_BASE_URL is not configured, createPlaygroundURL returns ''
+const hasPlaygroundBaseURL = createPlaygroundURL('test', []).length > 0;
+
+function expectURL(result: string, expected: string) {
+  if (hasPlaygroundBaseURL) {
+    expect(result).toContain(expected);
+  } else {
+    expect(result).toBe('');
+  }
+}
+
 describe('createPlaygroundURL', () => {
   const elements: ProjectElement[] = [
     {
@@ -38,26 +49,24 @@ describe('createPlaygroundURL', () => {
 
   it('should create a playground URL', () => {
     const result = createPlaygroundURL('nve-button', elements);
-    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&file=index.html&files=');
   });
 
   it('should create a playground URL with a custom name', () => {
     const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button' });
-    expect(result.includes('?version=1&layout=vertical-split&name=nve-button&file=index.html&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&name=nve-button&file=index.html&files=');
   });
 
   it('should create a playground URL with a theme', () => {
     const result = createPlaygroundURL('nve-button', elements, { theme: 'light' });
-    expect(result.includes('?version=1&layout=vertical-split&theme=light&file=index.html&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&theme=light&file=index.html&files=');
   });
 
   it('should create a playground URL with a referer', () => {
     const result = createPlaygroundURL('nve-button', elements, {
       referer: 'https://www.nvidia.com'
     });
-    expect(result.includes('?version=1&layout=vertical-split&file=index.html&ref=https://www.nvidia.com&files=')).toBe(
-      true
-    );
+    expectURL(result, '?version=1&layout=vertical-split&file=index.html&ref=https://www.nvidia.com&files=');
   });
 });
 
@@ -77,14 +86,12 @@ describe('createReactPlaygroundURL', () => {
 
   it('should create a React playground URL', () => {
     const result = createPlaygroundURL('nve-button', elements, { type: 'react' });
-    expect(result.includes('?version=1&layout=vertical-split&name=react&file=index.tsx&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&name=react&file=index.tsx&files=');
   });
 
   it('should create a React playground URL with a custom name', () => {
     const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button', type: 'react' });
-    expect(result.includes('?version=1&layout=vertical-split&name=react%20nve-button&file=index.tsx&files=')).toBe(
-      true
-    );
+    expectURL(result, '?version=1&layout=vertical-split&name=react%20nve-button&file=index.tsx&files=');
   });
 
   it('should create a React playground URL with a referer', () => {
@@ -93,11 +100,10 @@ describe('createReactPlaygroundURL', () => {
       name: 'nve-button',
       referer: 'https://www.nvidia.com'
     });
-    expect(
-      result.includes(
-        '?version=1&layout=vertical-split&name=react%20nve-button&file=index.tsx&ref=https://www.nvidia.com&files='
-      )
-    ).toBe(true);
+    expectURL(
+      result,
+      '?version=1&layout=vertical-split&name=react%20nve-button&file=index.tsx&ref=https://www.nvidia.com&files='
+    );
   });
 
   it('should bootstrap React files needed for the playground', () => {
@@ -125,14 +131,12 @@ describe('createPreactPlaygroundURL', () => {
 
   it('should create a Preact playground URL', () => {
     const result = createPlaygroundURL('nve-button', elements, { type: 'preact' });
-    expect(result.includes('?version=1&layout=vertical-split&name=preact&file=index.tsx&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&name=preact&file=index.tsx&files=');
   });
 
   it('should create a Preact playground URL with a custom name', () => {
     const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button', type: 'preact' });
-    expect(result.includes('?version=1&layout=vertical-split&name=preact%20nve-button&file=index.tsx&files=')).toBe(
-      true
-    );
+    expectURL(result, '?version=1&layout=vertical-split&name=preact%20nve-button&file=index.tsx&files=');
   });
 
   it('should create a Preact playground URL with a referer', () => {
@@ -141,11 +145,10 @@ describe('createPreactPlaygroundURL', () => {
       type: 'preact',
       referer: 'https://www.nvidia.com'
     });
-    expect(
-      result.includes(
-        '?version=1&layout=vertical-split&name=preact%20nve-button&file=index.tsx&ref=https://www.nvidia.com&files='
-      )
-    ).toBe(true);
+    expectURL(
+      result,
+      '?version=1&layout=vertical-split&name=preact%20nve-button&file=index.tsx&ref=https://www.nvidia.com&files='
+    );
   });
 
   it('should bootstrap Preact files needed for the playground', () => {
@@ -173,14 +176,12 @@ describe('createAngularPlaygroundURL', () => {
 
   it('should create a Angular playground URL', () => {
     const result = createPlaygroundURL('nve-button', elements, { type: 'angular' });
-    expect(result.includes('?version=1&layout=vertical-split&name=angular&file=index.ts&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&name=angular&file=index.ts&files=');
   });
 
   it('should create a Angular playground URL with a custom name', () => {
     const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button', type: 'angular' });
-    expect(result.includes('?version=1&layout=vertical-split&name=angular%20nve-button&file=index.ts&files=')).toBe(
-      true
-    );
+    expectURL(result, '?version=1&layout=vertical-split&name=angular%20nve-button&file=index.ts&files=');
   });
 
   it('should create a Angular playground URL with a referer', () => {
@@ -189,11 +190,10 @@ describe('createAngularPlaygroundURL', () => {
       type: 'angular',
       referer: 'https://www.nvidia.com'
     });
-    expect(
-      result.includes(
-        '?version=1&layout=vertical-split&name=angular%20nve-button&file=index.ts&ref=https://www.nvidia.com&files='
-      )
-    ).toBe(true);
+    expectURL(
+      result,
+      '?version=1&layout=vertical-split&name=angular%20nve-button&file=index.ts&ref=https://www.nvidia.com&files='
+    );
   });
 
   it('should bootstrap createAngularPlaygroundURL files needed for the playground', () => {
@@ -220,12 +220,12 @@ describe('createLitPlaygroundURL', () => {
 
   it('should create a Lit playground URL', () => {
     const result = createPlaygroundURL('nve-button', elements, { type: 'lit' });
-    expect(result.includes('?version=1&layout=vertical-split&name=lit&file=index.ts&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&name=lit&file=index.ts&files=');
   });
 
   it('should create a Lit playground URL with a custom name', () => {
     const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button', type: 'lit' });
-    expect(result.includes('?version=1&layout=vertical-split&name=lit%20nve-button&file=index.ts&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&name=lit%20nve-button&file=index.ts&files=');
   });
 
   it('should create a Lit playground URL with a referer', () => {
@@ -234,11 +234,10 @@ describe('createLitPlaygroundURL', () => {
       type: 'lit',
       referer: 'https://www.nvidia.com'
     });
-    expect(
-      result.includes(
-        '?version=1&layout=vertical-split&name=lit%20nve-button&file=index.ts&ref=https://www.nvidia.com&files='
-      )
-    ).toBe(true);
+    expectURL(
+      result,
+      '?version=1&layout=vertical-split&name=lit%20nve-button&file=index.ts&ref=https://www.nvidia.com&files='
+    );
   });
 
   it('should bootstrap createLitPlaygroundURL files needed for the playground', () => {
@@ -265,12 +264,12 @@ describe('createVuePlaygroundURL', () => {
 
   it('should create a Vue playground URL', () => {
     const result = createPlaygroundURL('nve-button', elements, { type: 'vue' });
-    expect(result.includes('?version=1&layout=vertical-split&name=vue&file=index.ts&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&name=vue&file=index.ts&files=');
   });
 
   it('should create a Vue playground URL with a custom name', () => {
     const result = createPlaygroundURL('nve-button', elements, { name: 'nve-button', type: 'vue' });
-    expect(result.includes('?version=1&layout=vertical-split&name=vue%20nve-button&file=index.ts&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&name=vue%20nve-button&file=index.ts&files=');
   });
 
   it('should create a Vue playground URL with a referer', () => {
@@ -279,11 +278,10 @@ describe('createVuePlaygroundURL', () => {
       type: 'vue',
       referer: 'https://www.nvidia.com'
     });
-    expect(
-      result.includes(
-        '?version=1&layout=vertical-split&name=vue%20nve-button&file=index.ts&ref=https://www.nvidia.com&files='
-      )
-    ).toBe(true);
+    expectURL(
+      result,
+      '?version=1&layout=vertical-split&name=vue%20nve-button&file=index.ts&ref=https://www.nvidia.com&files='
+    );
   });
 
   it('should bootstrap Vue files needed for the playground', () => {
@@ -406,12 +404,12 @@ describe('createPlaygroundURL with additional options', () => {
 
   it('should handle trustedContent option', () => {
     const result = createPlaygroundURL('nve-button', elements, { trustedContent: true });
-    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&file=index.html&files=');
   });
 
   it('should handle custom openFile option for default type', () => {
     const result = createPlaygroundURL('nve-button', elements, { openFile: 'custom.html' });
-    expect(result.includes('&file=custom.html&')).toBe(true);
+    expectURL(result, '&file=custom.html&');
   });
 
   it('should handle custom openFile option for React type', () => {
@@ -420,7 +418,7 @@ describe('createPlaygroundURL with additional options', () => {
       openFile: 'custom.tsx'
     });
     // React type overrides openFile to 'index.tsx', so we test that behavior
-    expect(result.includes('&file=index.tsx&')).toBe(true);
+    expectURL(result, '&file=index.tsx&');
   });
 
   it('should handle empty name option', () => {
@@ -430,12 +428,12 @@ describe('createPlaygroundURL with additional options', () => {
 
   it('should handle whitespace in name option', () => {
     const result = createPlaygroundURL('nve-button', elements, { name: '  test name  ' });
-    expect(result.includes('&name=test%20name&')).toBe(true);
+    expectURL(result, '&name=test%20name&');
   });
 
   it('should handle special characters in name option', () => {
     const result = createPlaygroundURL('nve-button', elements, { name: 'test@name#123' });
-    expect(result.includes('&name=test@name#123&')).toBe(true);
+    expectURL(result, '&name=test@name#123&');
   });
 });
 
@@ -560,9 +558,13 @@ describe('serialize function behavior', () => {
     // The serialize function is called internally, so we test its effect
     const result = createPlaygroundURL('<nve-button></nve-button>', [], {});
 
-    // Should contain encoded files data
-    expect(result).toContain('&files=');
-    expect(result.length).toBeGreaterThan(100); // Should be reasonably long due to compression
+    if (hasPlaygroundBaseURL) {
+      // Should contain encoded files data
+      expect(result).toContain('&files=');
+      expect(result.length).toBeGreaterThan(100); // Should be reasonably long due to compression
+    } else {
+      expect(result).toBe('');
+    }
   });
 });
 
@@ -571,17 +573,17 @@ describe('Edge cases and error handling', () => {
 
   it('should handle empty content string', () => {
     const result = createPlaygroundURL('', elements);
-    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&file=index.html&files=');
   });
 
   it('should handle content with only whitespace', () => {
     const result = createPlaygroundURL('   ', elements);
-    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&file=index.html&files=');
   });
 
   it('should handle undefined options', () => {
     const result = createPlaygroundURL('<nve-button></nve-button>', elements);
-    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&file=index.html&files=');
   });
 
   it('should handle options with empty string values', () => {
@@ -590,7 +592,7 @@ describe('Edge cases and error handling', () => {
       theme: '',
       referer: ''
     });
-    expect(result.includes('?version=1&layout=vertical-split&file=index.html&files=')).toBe(true);
+    expectURL(result, '?version=1&layout=vertical-split&file=index.html&files=');
     // Empty strings should not add parameters
     expect(result.includes('&name=&')).toBe(false);
     expect(result.includes('&theme=&')).toBe(false);

@@ -22,12 +22,6 @@ function template(theme: '' | 'dark' = '') {
   </script>
 
   <div nve-layout="row gap:xs">
-    <nve-logo size="sm" aria-label="NVIDIA"></nve-logo>
-    <nve-logo aria-label="NVIDIA" ></nve-logo>
-    <nve-logo size="lg" aria-label="NVIDIA"></nve-logo>
-  </div>
-
-  <div nve-layout="row gap:xs">
     <nve-logo size="sm" color="green-mint" aria-label="green mint">•︎•︎</nve-logo>
     <nve-logo color="green-mint" aria-label="green mint">•︎•︎</nve-logo>
     <nve-logo size="lg" color="green-mint" aria-label="green mint">•︎•︎</nve-logo>
@@ -55,7 +49,6 @@ function template(theme: '' | 'dark' = '') {
   </div>
 
   <div nve-layout="row gap:xs align:wrap">
-    <nve-logo aria-label="NVIDIA"></nve-logo>
     <nve-logo color="red-cardinal" aria-label="red cardinal">•︎•︎</nve-logo>
     <nve-logo color="gray-slate" aria-label="gray slate">•︎•︎</nve-logo>
     <nve-logo color="gray-denim" aria-label="gray denim">•︎•︎</nve-logo>

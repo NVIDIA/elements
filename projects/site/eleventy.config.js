@@ -5,6 +5,15 @@ import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
 
 import { BASE_URL } from './src/_11ty/layouts/common.js';
+import {
+  ELEMENTS_PAGES_BASE_URL,
+  ELEMENTS_REPO_BASE_URL,
+  ELEMENTS_PLAYGROUND_BASE_URL,
+  ELEMENTS_REGISTRY_URL,
+  ELEMENTS_CDN_BASE_URL,
+  ELEMENTS_ESM_CDN_BASE_URL,
+  ELEMENTS_ASSETS_CDN_BASE_URL
+} from './src/_11ty/utils/env.js';
 import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
@@ -75,6 +84,12 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(IdAttributePlugin, { checkDuplicates: false });
 
+  // Expose env-backed globals for markdown/nunjucks templates.
+  eleventyConfig.addGlobalData('ELEMENTS_PAGES_BASE_URL', ELEMENTS_PAGES_BASE_URL);
+  eleventyConfig.addGlobalData('ELEMENTS_REPO_BASE_URL', ELEMENTS_REPO_BASE_URL);
+  eleventyConfig.addGlobalData('ELEMENTS_PLAYGROUND_BASE_URL', ELEMENTS_PLAYGROUND_BASE_URL);
+  eleventyConfig.addGlobalData('ELEMENTS_REGISTRY_URL', ELEMENTS_REGISTRY_URL);
+
   // Configure front matter parsing and file copying
   eleventyConfig.setFrontMatterParsingOptions({ language: 'js' });
   eleventyConfig.addPassthroughCopy('src/**/*.ts');
@@ -97,9 +112,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
       define: {
-        __ELEMENTS_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_CDN_BASE_URL || ''),
-        __ELEMENTS_ESM_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_ESM_CDN_BASE_URL || ''),
-        __ELEMENTS_ASSETS_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_ASSETS_CDN_BASE_URL || '')
+        __ELEMENTS_CDN_BASE_URL__: JSON.stringify(ELEMENTS_CDN_BASE_URL || ''),
+        __ELEMENTS_ESM_CDN_BASE_URL__: JSON.stringify(ELEMENTS_ESM_CDN_BASE_URL || ''),
+        __ELEMENTS_ASSETS_CDN_BASE_URL__: JSON.stringify(ELEMENTS_ASSETS_CDN_BASE_URL || '')
       },
       base: BASE_URL,
       build: {
