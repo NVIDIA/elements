@@ -58,4 +58,31 @@ describe(Password.metadata.tag, () => {
     expect(element.container).toBe('flat');
     expect(element.hasAttribute('container')).toBe(true);
   });
+
+  it('should preserve input value when toggling visibility', async () => {
+    const input = fixture.querySelector('input');
+    input.value = 'my-secret-password';
+
+    const iconButton = element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag);
+    iconButton.click();
+    await elementIsStable(element);
+    expect(input.value).toBe('my-secret-password');
+    expect(input.type).toBe('text');
+
+    iconButton.click();
+    await elementIsStable(element);
+    expect(input.value).toBe('my-secret-password');
+    expect(input.type).toBe('password');
+  });
+
+  it('should return to initial pressed state after even number of toggles', async () => {
+    const iconButton = element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag);
+    const initialPressed = iconButton.pressed;
+
+    iconButton.click();
+    await elementIsStable(element);
+    iconButton.click();
+    await elementIsStable(element);
+    expect(iconButton.pressed).toBe(initialPressed);
+  });
 });

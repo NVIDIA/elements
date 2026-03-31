@@ -66,12 +66,19 @@ describe(ButtonGroup.metadata.tag, () => {
     expect(buttons[2].interaction).toBe('emphasis');
   });
 
-  it('should sync interaction container styles', async () => {
-    element.interaction = 'emphasis';
+  it('should sync interaction styles to all buttons when interaction changes', async () => {
+    element.interaction = 'destructive';
     await elementIsStable(element);
-    expect(buttons[0].interaction).toBe('emphasis');
-    expect(buttons[1].interaction).toBe('emphasis');
-    expect(buttons[2].interaction).toBe('emphasis');
+    expect(buttons[0].interaction).toBe('destructive');
+    expect(buttons[1].interaction).toBe('destructive');
+    expect(buttons[2].interaction).toBe('destructive');
+  });
+
+  it('should reflect orientation attribute to DOM', async () => {
+    expect(element.getAttribute('orientation')).toBe('horizontal');
+    element.orientation = 'vertical';
+    await elementIsStable(element);
+    expect(element.getAttribute('orientation')).toBe('vertical');
   });
 
   it('should be stateless by default', async () => {

@@ -81,6 +81,35 @@ describe(Alert.metadata.tag, () => {
     expect(alert.shadowRoot.querySelector<HTMLElement>('slot[name=actions]').hidden).toBe(false);
   });
 
+  it('should reflect status attribute to DOM', async () => {
+    expect(alert.getAttribute('status')).toBe(null);
+    alert.status = 'danger';
+    await elementIsStable(alert);
+    expect(alert.getAttribute('status')).toBe('danger');
+  });
+
+  it('should dispatch close event with bubbles and composed', async () => {
+    alert.closable = true;
+    await elementIsStable(alert);
+
+    const event = untilEvent(alert, 'close');
+    emulateClick(alert.shadowRoot.querySelector(IconButton.metadata.tag));
+    const e = await event;
+    expect((e as Event).bubbles).toBe(true);
+    expect((e as Event).composed).toBe(true);
+  });
+
+  it('should set hidden to true when closed via command event', async () => {
+    alert.closable = true;
+    await elementIsStable(alert);
+    expect(alert.hidden).toBe(false);
+
+    const event = untilEvent(alert, 'close');
+    alert.dispatchEvent(new Event('command', { bubbles: true }));
+    await event;
+    expect(alert.hidden).toBe(true);
+  });
+
   it('should provide a prefix slot for banner api', async () => {
     await elementIsStable(alert);
     expect(alert.shadowRoot.querySelector<HTMLElement>('slot[name=prefix]').hidden).toBe(true);

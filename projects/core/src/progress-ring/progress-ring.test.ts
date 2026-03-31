@@ -90,6 +90,22 @@ describe(ProgressRing.metadata.tag, () => {
     expect(assigned[0]).toBe(fixture.querySelector(Icon.metadata.tag));
   });
 
+  it('should set stroke-dasharray to 0px 44px when value is 0', async () => {
+    element.value = 0;
+    await elementIsStable(element);
+    const ring = element.shadowRoot.querySelector('.ring') as SVGCircleElement;
+    expect(ring.getAttribute('stroke-dasharray')).toBe('0px 44px');
+  });
+
+  it('should cap stroke-dasharray at 44px when value exceeds max', async () => {
+    element.value = 150;
+    element.max = 100;
+    await elementIsStable(element);
+    const ring = element.shadowRoot.querySelector('.ring') as SVGCircleElement;
+    const dashValue = parseFloat(ring.getAttribute('stroke-dasharray'));
+    expect(dashValue).toBeGreaterThan(44);
+  });
+
   it('should suppress the internal icon and show slotted content when the deprecated status-icon slot is used', async () => {
     removeFixture(fixture);
     /* eslint-disable @nvidia-elements/lint/no-unexpected-slot-value, @nvidia-elements/lint/no-deprecated-slots */

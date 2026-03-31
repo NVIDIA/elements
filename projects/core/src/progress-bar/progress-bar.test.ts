@@ -44,4 +44,28 @@ describe(ProgressBar.metadata.tag, () => {
     expect(nativeProgress.classList.contains('full')).toBe(true);
     expect(nativeProgress.classList.contains('min-width')).toBe(true);
   });
+
+  it('should default max to 100', () => {
+    expect(element.max).toBe(100);
+  });
+
+  it('should reflect status attribute to DOM', async () => {
+    expect(element.getAttribute('status')).toBe(null);
+    element.status = 'success';
+    await elementIsStable(element);
+    expect(element.getAttribute('status')).toBe('success');
+  });
+
+  it('should apply indeterminate class when value is undefined', async () => {
+    await elementIsStable(element);
+    const nativeProgress = element.shadowRoot.querySelector('progress') as HTMLProgressElement;
+    expect(nativeProgress.classList.contains('indeterminate')).toBe(true);
+  });
+
+  it('should remove indeterminate class when value is set', async () => {
+    element.value = 50;
+    await elementIsStable(element);
+    const nativeProgress = element.shadowRoot.querySelector('progress') as HTMLProgressElement;
+    expect(nativeProgress.classList.contains('indeterminate')).toBe(false);
+  });
 });

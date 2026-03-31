@@ -69,6 +69,13 @@ describe(Tooltip.metadata.tag, () => {
     expect(getComputedStyle(element).getPropertyValue('interest-delay-start')).toBe('0.5s');
   });
 
+  it('should reflect status attribute to DOM', async () => {
+    expect(element.hasAttribute('status')).toBe(false);
+    element.status = 'muted';
+    await elementIsStable(element);
+    expect(element.getAttribute('status')).toBe('muted');
+  });
+
   it('if open-delay set, display tooltip after waiting for delayed time', async () => {
     element.hidePopover();
     element.openDelay = 500;

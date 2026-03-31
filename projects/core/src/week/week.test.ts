@@ -38,6 +38,16 @@ describe(Week.metadata.tag, () => {
     expect(element.input.matches(':focus')).toBe(false);
   });
 
+  it('should find the slotted input as its input', async () => {
+    await elementIsStable(element);
+    expect(element.input).toBe(fixture.querySelector('input'));
+  });
+
+  it('should apply aria-label to the calendar icon button', async () => {
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector(IconButton.metadata.tag).ariaLabel).toBe('expand');
+  });
+
   it('should have a flat container option', async () => {
     expect(element.container).toBe(undefined);
     element.container = 'flat';
