@@ -35,7 +35,8 @@ Read the [component creation guide](projects/site/src/docs/internal/guidelines/c
    - `component-name.test.lighthouse.ts`:lighthouse tests
    - `define.ts`:registration using `define()` helper with `HTMLElementTagNameMap`
    - `index.ts`:side-effect-free export
-4. **Verify**:confirm all files follow the templates in the component creation guide, run `pnpm run lint` and `pnpm run test` from the elements project.
+4. **Update bundle**:add `import '@nvidia-elements/core/<component-name>/define.js'` to `projects/core/src/bundle.ts` in alphabetical order so the component is registered in the bundle.
+5. **Verify**:confirm all files follow the templates in the component creation guide, run `pnpm run lint` and `pnpm run test` from the elements project.
 
 ## Additional References
 

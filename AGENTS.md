@@ -142,6 +142,8 @@ component-name/
 
 Components typically extend Lit's `LitElement` directly. Shared behavior is provided via base classes (e.g., `BaseButton`) and reactive controllers (keynav, state management, i18n) from `@nvidia-elements/core/internal`. Components use Lit decorators for properties, CSS custom properties for theming, and follow ARIA Authoring Practices Guide patterns.
 
+When adding a new component, also add its `define.js` import and `export *` to `projects/elements/src/bundle.ts` (alphabetical order). This file is the entry point for the CDN bundle. A `lint:bundle` script validates completeness in CI.
+
 ### Component Definition
 
 Components export both the class and auto-define:

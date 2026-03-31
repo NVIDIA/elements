@@ -15,6 +15,7 @@ import requireInternalHost from '../local/require-internal-host.js';
 import requireElementDefinitions from '../local/require-element-definitions.js';
 import requireTestCompleteness from '../local/require-test-completeness.js';
 import requireComposedEvents from '../local/require-composed-events.js';
+import noMissingBundleRegistration from '../local/no-missing-bundle-registration.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -62,7 +63,8 @@ export const litConfig = [
           'require-internal-host': requireInternalHost,
           'require-element-definitions': requireElementDefinitions,
           'require-test-completeness': requireTestCompleteness,
-          'require-composed-events': requireComposedEvents
+          'require-composed-events': requireComposedEvents,
+          'no-missing-bundle-registration': noMissingBundleRegistration
         }
       }
     },
@@ -131,6 +133,12 @@ export const litConfig = [
       'local/require-internal-host': ['error'],
       'local/require-element-definitions': ['error'],
       'local/require-composed-events': ['error'],
+      'local/no-missing-bundle-registration': [
+        'error',
+        {
+          exclude: ['json-viewer']
+        }
+      ],
       'local/require-test-completeness': [
         'error',
         {
