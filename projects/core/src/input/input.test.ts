@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, removeFixture, elementIsStable } from '@internals/testing';
+import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
 import { Input } from '@nvidia-elements/core/input';
 import '@nvidia-elements/core/input/define.js';
 
@@ -33,5 +33,28 @@ describe(Input.metadata.tag, () => {
     await elementIsStable(element);
     expect(element.container).toBe('flat');
     expect(element.hasAttribute('container')).toBe(true);
+  });
+
+  it('should reset input value to initial attribute value via reset()', async () => {
+    const input = fixture.querySelector('input');
+    input.setAttribute('value', 'initial');
+    input.value = 'changed';
+    expect(input.value).toBe('changed');
+
+    const event = untilEvent(element, 'reset');
+    element.reset();
+    const e = await event;
+    expect(e).toBeDefined();
+    expect(input.value).toBe('initial');
+  });
+
+  it('should reset input value to empty string when no initial value attribute', async () => {
+    const input = fixture.querySelector('input');
+    input.value = 'typed';
+    expect(input.value).toBe('typed');
+
+    element.reset();
+    await elementIsStable(element);
+    expect(input.value).toBe('');
   });
 });

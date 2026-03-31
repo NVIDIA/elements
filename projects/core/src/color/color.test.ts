@@ -77,6 +77,12 @@ describe(Color.metadata.tag, () => {
     (window as any).EyeDropper = original; // eslint-disable-line @typescript-eslint/no-explicit-any
   });
 
+  it('should apply aria-label to the eye dropper icon button', async () => {
+    await elementIsStable(element);
+    const btn = element.shadowRoot.querySelector(IconButton.metadata.tag);
+    expect(btn.ariaLabel).toBe('expand');
+  });
+
   it('should have a flat container option', async () => {
     expect(element.container).toBe(undefined);
     element.container = 'flat';

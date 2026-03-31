@@ -75,4 +75,24 @@ describe(IconButton.metadata.tag, () => {
       fixture.querySelector('span')
     );
   });
+
+  it('should reflect direction attribute to DOM and pass to child icon', async () => {
+    await elementIsStable(element);
+    expect(element.hasAttribute('direction')).toBe(false);
+
+    element.direction = 'up';
+    await elementIsStable(element);
+    expect(element.getAttribute('direction')).toBe('up');
+    expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).direction).toBe('up');
+  });
+
+  it('should reflect size attribute to DOM and pass to child icon', async () => {
+    await elementIsStable(element);
+    expect(element.hasAttribute('size')).toBe(false);
+
+    element.size = 'sm';
+    await elementIsStable(element);
+    expect(element.getAttribute('size')).toBe('sm');
+    expect(element.shadowRoot.querySelector<Icon>(Icon.metadata.tag).size).toBe('sm');
+  });
 });

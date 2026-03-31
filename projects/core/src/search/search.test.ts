@@ -39,4 +39,11 @@ describe(Search.metadata.tag, () => {
     expect(element.container).toBe('flat');
     expect(element.hasAttribute('container')).toBe(true);
   });
+
+  it('should reflect rounded attribute to DOM', async () => {
+    expect(element.rounded).toBe(false);
+    element.rounded = true;
+    await elementIsStable(element);
+    expect(element.hasAttribute('rounded')).toBe(true);
+  });
 });

@@ -23,4 +23,16 @@ describe(PageHeader.metadata.tag, () => {
   it('should define element', () => {
     expect(customElements.get(PageHeader.metadata.tag)).toBeDefined();
   });
+
+  it('should have navigation role', async () => {
+    await elementIsStable(element);
+    expect(element._internals.role).toBe('navigation');
+  });
+
+  it('should provide prefix, default, and suffix slots', async () => {
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('slot[name="prefix"]')).toBeTruthy();
+    expect(element.shadowRoot.querySelector('slot:not([name])')).toBeTruthy();
+    expect(element.shadowRoot.querySelector('slot[name="suffix"]')).toBeTruthy();
+  });
 });
