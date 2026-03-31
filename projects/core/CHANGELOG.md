@@ -1,3 +1,14 @@
+## <small>1.66.1 (2026-03-31)</small>
+
+* chore(ci): cleanup build env ([53b1403](https://github.com/NVIDIA/elements/commit/53b1403))
+* chore(ci): enable env vars for conditional builds ([7e3512f](https://github.com/NVIDIA/elements/commit/7e3512f))
+* chore(docs): update env url paths ([e6cd50f](https://github.com/NVIDIA/elements/commit/e6cd50f))
+* chore(elements): add tests ([8299260](https://github.com/NVIDIA/elements/commit/8299260))
+* chore(release): @nvidia-elements/cli-v0.12.2 [skip ci] ([75c6341](https://github.com/NVIDIA/elements/commit/75c6341))
+* chore(starters): remove external links ([f231b36](https://github.com/NVIDIA/elements/commit/f231b36))
+* fix(elements): update aria-orientation and event config ([71e0d9a](https://github.com/NVIDIA/elements/commit/71e0d9a))
+* fix(labs-cli): update check issue ([060bec1](https://github.com/NVIDIA/elements/commit/060bec1))
+
 ## 1.66.0 (2026-03-30)
 
 * feat(docs): use local bundle builds for iframe previews on localhost ([700883b](https://github.com/NVIDIA/elements/commit/700883b))
