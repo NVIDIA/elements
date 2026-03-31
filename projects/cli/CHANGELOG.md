@@ -1,3 +1,19 @@
+## <small>0.12.2 (2026-03-31)</small>
+
+* chore(ci): cleanup build env ([53b1403](https://github.com/NVIDIA/elements/commit/53b1403))
+* chore(ci): enable env vars for conditional builds ([7e3512f](https://github.com/NVIDIA/elements/commit/7e3512f))
+* chore(ci): migrate and remove internal metrics ([4935f2d](https://github.com/NVIDIA/elements/commit/4935f2d))
+* chore(docs): add agent harness guidelines doc and context file ([bdab193](https://github.com/NVIDIA/elements/commit/bdab193))
+* chore(docs): update env url paths ([e6cd50f](https://github.com/NVIDIA/elements/commit/e6cd50f))
+* chore(release): @nvidia-elements/core-v1.65.6 [skip ci] ([29996d4](https://github.com/NVIDIA/elements/commit/29996d4))
+* chore(release): @nvidia-elements/core-v1.66.0 [skip ci] ([87afafd](https://github.com/NVIDIA/elements/commit/87afafd))
+* chore(starters): remove external links ([f231b36](https://github.com/NVIDIA/elements/commit/f231b36))
+* fix(docs): update stale cdn fallback versions in canvas-editable ([c413797](https://github.com/NVIDIA/elements/commit/c413797))
+* fix(elements): bundle side effects import ([3081267](https://github.com/NVIDIA/elements/commit/3081267))
+* fix(labs-cli): update check issue ([060bec1](https://github.com/NVIDIA/elements/commit/060bec1))
+* feat(docs): use local bundle builds for iframe previews on localhost ([700883b](https://github.com/NVIDIA/elements/commit/700883b))
+* feat(elements): add --track-background for nve-range unfilled track ([0348b0a](https://github.com/NVIDIA/elements/commit/0348b0a))
+
 ## <small>0.12.1 (2026-03-25)</small>
 
 * fix(labs-cli): add code signing for macos binaries ([7bac056](https://github.com/NVIDIA/elements/commit/7bac056))
