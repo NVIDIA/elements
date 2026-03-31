@@ -92,7 +92,7 @@
         "dist/nve-linux-arm64",
         "dist/nve-macos-x64",
         "dist/nve-linux-x64",
-        "dist/nve-windows-x64"
+        "dist/nve-windows-x64.exe"
       ],
       "dependencies": [
         "build:vite"
