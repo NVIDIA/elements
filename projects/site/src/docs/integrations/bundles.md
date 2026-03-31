@@ -44,6 +44,6 @@ Using the single bundle approach can make simple HTML prototypes easy but preven
 </html>
 ```
 
-## Artifactory Usage Guidelines
+## Registry Usage Guidelines
 
 {% artifactory-usage %}

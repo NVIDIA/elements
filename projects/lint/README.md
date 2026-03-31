@@ -3,7 +3,6 @@
 The `@nvidia-elements/lint` package is a utility library that provides Elements-specific lint rules to enforce best practices and prevent common errors when using Elements.
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/lint/)
-- [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [GitLab Repo](https://github.com/NVIDIA/elements)
 - [Artifactory](https://registry.npmjs.org

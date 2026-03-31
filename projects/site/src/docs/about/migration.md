@@ -9,11 +9,9 @@
 
 ## Why nve?
 
-Elements has been gradually transitioning its libraries to use the `@nvidia-elements/*` package scope and namespace. This change began in early 2024 with Elements, which already employed the `nve` namespace internally. The shift to `@nvidia-elements/*` aims to establish a clear ownership boundary and signal of support for the Elements libraries. As the team expands into new projects through [@nve-labs](./docs/labs/), this namespace continues to signify which projects have the backing of the Elements team.
+Elements has been gradually transitioning its libraries to use the `@nvidia-elements/*` package scope and namespace. This change began in early 2024 with Elements, which already employed the `nve` namespace internally. The shift to `@nvidia-elements/*` aims to establish a clear ownership boundary and signal of support for the Elements libraries.
 
-The [1.0 release](./docs/changelog/#nve-elements-v1-0-0-2024-07-31) addresses a long standing issue where peer dependencies are inadvertently overlooked by package managers when the package itself has a '0.x' version number. [(npm)](https://docs.npmjs.com/cli/v10/configuring-npm/package-json#peerdependencies) [(semver)](https://semver.org/#spec-item-9)
-
-## Migration Steps (required)
+## Migration Steps Pre 0.x (elements)
 
 Update to the latest 0.x release before migration to a 1.x release. To migrate from a 0.x release to 1.x follow the following steps:
 

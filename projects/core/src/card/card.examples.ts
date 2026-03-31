@@ -62,13 +62,13 @@ export const MediaCard = {
   render: () => html`
   <div nve-layout="grid gap:md span-items:6 align:stretch" style="max-width: 900px">
     <nve-card style="height: 100%; width: 100%;">
-      <img src="static/images/test-image-3.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; object-fit: cover;" />
+      <img src="static/images/test-image-1.svg" alt="example visualization for media card demo" loading="lazy" style="width: 100%; object-fit: cover;" />
       <nve-card-content>
         <p nve-text="body" style="min-height: 24px">card content</p>
       </nve-card-content>
     </nve-card>
     <nve-card style="height: 100%; width: 100%;">
-      <img src="static/images/test-image-2.webp" alt="example visualization for media card demo" loading="lazy" style="width: 100%; object-fit: cover;" />
+      <img src="static/images/test-image-1.svg" alt="example visualization for media card demo" loading="lazy" style="width: 100%; object-fit: cover;" />
       <nve-card-content>
         <p nve-text="body" style="min-height: 24px">card content</p>
       </nve-card-content>

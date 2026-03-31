@@ -33,5 +33,4 @@ nve project.create # typescript, angular, react, lit, preact, solidjs, vue, next
 
 - [Documentation](https://NVIDIA.github.io/elements/)
 - [Gitlab Repo](https://github.com/NVIDIA/elements)
-- [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)

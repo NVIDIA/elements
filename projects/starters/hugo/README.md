@@ -16,7 +16,7 @@ hugo
 
 ## Advance Usage
 
-This demo demonstrates a minimal Hugo static site with Elements integration using static bundles downloaded from Artifactory. The tradeoff with this approach is it requires less build tooling but at the cost of performance due to loading the entire package rather than optimized/tree-shaken builds. For more advanced usage with TypeScript or to have better production performance, consider using tools like [Vite](https://vite.dev/) alongside Hugo. Explore the TypeScript starter for a example resource of how to get started.
+This demo demonstrates a minimal Hugo static site with Elements integration using static bundles. The tradeoff with this approach is it requires less build tooling but at the cost of performance due to loading the entire package rather than optimized/tree-shaken builds. For more advanced usage with TypeScript or to have better production performance, consider using tools like [Vite](https://vite.dev/) alongside Hugo. Explore the TypeScript starter for a example resource of how to get started.
 
 ## Documentation
 

@@ -36,7 +36,6 @@
     "@modelcontextprotocol/sdk": "1.27.1",
     "adm-zip": "0.5.16",
     "archiver": "7.0.1",
-    "glob": "catalog:",
     "marked": "17.0.4",
     "marked-terminal": "7.3.0",
     "ora": "9.3.0",

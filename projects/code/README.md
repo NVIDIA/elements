@@ -3,7 +3,6 @@
 Syntax-highlighted code block components supporting many programming languages.
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/code/)
-- [Slack Support](https://nvidia.slack.com/archives/C03BDL2UCGK)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [GitLab Repo](https://github.com/NVIDIA/elements)
 - [Artifactory](https://registry.npmjs.org

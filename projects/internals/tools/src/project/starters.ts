@@ -1,14 +1,13 @@
-import { dirname, join, parse, resolve } from 'node:path';
+import { basename, dirname, join, parse, resolve } from 'node:path';
 import { exec, execSync } from 'node:child_process';
 import { cwd } from 'node:process';
 
 import { writeFile } from 'fs/promises';
-import { mkdirSync, existsSync, unlinkSync, writeFileSync, cpSync, createWriteStream, rmSync } from 'fs';
+import { existsSync, unlinkSync, writeFileSync, cpSync, createWriteStream, rmSync } from 'fs';
 import { readWorkspaceManifest } from '@pnpm/workspace.read-manifest';
 import { getCatalogsFromWorkspaceManifest } from '@pnpm/catalogs.config';
 import { createExportableManifest } from '@pnpm/exportable-manifest';
 import { readProjectManifestOnly } from '@pnpm/read-project-manifest';
-import { glob } from 'glob';
 import archiver from 'archiver';
 import AdmZip from 'adm-zip';
 import { isCommandAvailable, getNPMClient } from '../internal/node.js';
@@ -132,16 +131,12 @@ async function zipProject(outDir: string) {
 }
 
 /* istanbul ignore next -- @preserve */
-async function copyProject(projectDir: string) {
-  if (!existsSync(`dist/${projectDir}`)) {
-    mkdirSync(`dist/${projectDir}`, { recursive: true });
-  }
-
-  const files = await glob(`./${projectDir}/**/*`, {
-    dot: true,
-    ignore: ['**/dist/**', '**/node_modules/**', '**/.wireit/**']
+function copyProject(projectDir: string) {
+  const ignoreDirs = new Set(['dist', 'node_modules', '.wireit']);
+  cpSync(projectDir, `dist/${projectDir}`, {
+    recursive: true,
+    filter: src => !ignoreDirs.has(basename(src))
   });
-  files.forEach(file => cpSync(file, `dist/${projectDir}${file.replace(projectDir, '')}`, { recursive: true }));
 }
 
 /* istanbul ignore next -- @preserve */

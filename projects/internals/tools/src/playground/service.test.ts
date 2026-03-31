@@ -4,6 +4,10 @@ import { tmpdir } from 'node:os';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import type { ToolMethod } from '../internal/tools.js';
 import { PlaygroundService } from './service.js';
+import { createPlaygroundURL } from './utils.js';
+
+// when ELEMENTS_PLAYGROUND_BASE_URL is not configured, createPlaygroundURL returns ''
+const hasPlaygroundBaseURL = createPlaygroundURL('test', []).length > 0;
 
 describe('PlaygroundService', () => {
   it('should provide validate', async () => {
@@ -62,11 +66,14 @@ describe('PlaygroundService', () => {
       type: 'default',
       start: false
     });
-    expect(result).has.string('?version=1');
-    expect(result).has.string('?version=1');
-    expect(result).has.string('&layout=vertical-split');
-    expect(result).has.string('&file=index.html');
-    expect(result).has.string('&files=');
+    if (hasPlaygroundBaseURL) {
+      expect(result).has.string('?version=1');
+      expect(result).has.string('&layout=vertical-split');
+      expect(result).has.string('&file=index.html');
+      expect(result).has.string('&files=');
+    } else {
+      expect(result).toBe('');
+    }
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.name).toBe('create');
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.command).toBe('create');
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.description).toBe(
@@ -116,7 +123,11 @@ describe('PlaygroundService', () => {
         start: false
       });
       expect(typeof result).toBe('string');
-      expect(result).has.string('?version=1');
+      if (hasPlaygroundBaseURL) {
+        expect(result).has.string('?version=1');
+      } else {
+        expect(result).toBe('');
+      }
     });
 
     it('should return URL when template passes lint in mcp environment', async () => {
@@ -128,7 +139,11 @@ describe('PlaygroundService', () => {
         start: false
       });
       expect(typeof result).toBe('string');
-      expect(result).has.string('?version=1');
+      if (hasPlaygroundBaseURL) {
+        expect(result).has.string('?version=1');
+      } else {
+        expect(result).toBe('');
+      }
       process.env.CI = CI;
     });
 
@@ -140,7 +155,11 @@ describe('PlaygroundService', () => {
         start: false
       });
       expect(typeof result).toBe('string');
-      expect(result).has.string('?version=1');
+      if (hasPlaygroundBaseURL) {
+        expect(result).has.string('?version=1');
+      } else {
+        expect(result).toBe('');
+      }
     });
 
     it('should handle undefined ELEMENTS_ENV', async () => {
@@ -150,7 +169,11 @@ describe('PlaygroundService', () => {
         start: false
       });
       expect(typeof result).toBe('string');
-      expect(result).has.string('?version=1');
+      if (hasPlaygroundBaseURL) {
+        expect(result).has.string('?version=1');
+      } else {
+        expect(result).toBe('');
+      }
     });
   });
 
@@ -237,7 +260,11 @@ describe('PlaygroundService', () => {
       writeFileSync(tempFile, '<nve-button>hello</nve-button>', 'utf8');
       const result = await PlaygroundService.create({ path: tempFile, start: false });
       expect(typeof result).toBe('string');
-      expect(result).has.string('?version=1');
+      if (hasPlaygroundBaseURL) {
+        expect(result).has.string('?version=1');
+      } else {
+        expect(result).toBe('');
+      }
     });
 
     it('create should return lint errors from file path in mcp environment', async () => {

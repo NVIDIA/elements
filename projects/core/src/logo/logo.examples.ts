@@ -22,11 +22,6 @@ export const Default = {
 export const Size = {
   render: () => html`
 <div nve-layout="row gap:xs">
-  <nve-logo size="sm" aria-label="NVIDIA"></nve-logo>
-  <nve-logo aria-label="NVIDIA" ></nve-logo>
-  <nve-logo size="lg" aria-label="NVIDIA"></nve-logo>
-</div>
-<div nve-layout="row gap:xs">
   <nve-logo size="sm" color="green-mint" aria-label="green mint">Gm</nve-logo>
   <nve-logo color="green-mint" aria-label="green mint">Gm</nve-logo>
   <nve-logo size="lg" color="green-mint" aria-label="green mint">Gm</nve-logo>

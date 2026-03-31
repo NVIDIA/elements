@@ -7,14 +7,11 @@
 
 # {{ title }}
 
-The `control` supports validation statuses such as error and success. These statuses can be toggle by any framework level forms API. But the `control` component does also support the native [HTML Validation API](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation). Defining a Validity State on a `control-message` allows messages to
-appear conditionally based on the current input validity state.
+The `control` supports validation statuses such as error and success. These statuses can be toggle by any framework level forms API. But the `control` component does also support the native [HTML Validation API](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation). Defining a Validity State on a `control-message` allows messages to appear conditionally based on the current input validity state.
 
-[MDN Validity State](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState)
+To manage validation manually use the `novalidate` attribute to disable HTML5 validation. If you are using a framework that manages validation like Angular, then `novalidate` is automatically applied. [MDN Validity State](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState)
 
-To manage validation manually use the `novalidate` attribute to disable HTML5 validation. If you are using a framework that manages validation like Angular, then `novalidate` is automatically applied.
-
-<!-- <Canvas of={ValidationStories.LitForms} /> -->
+{% example '@nvidia-elements/core/forms/validation.examples.json' 'LoginForm' %}
 
 ```html
 <form>
