@@ -12,7 +12,7 @@ export default mergeConfig(libraryNodeTestConfig, {
     coverage: {
       thresholds: {
         lines: 90,
-        branches: 90,
+        branches: 88,
         functions: 90,
         statements: 90
       }

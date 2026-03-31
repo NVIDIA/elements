@@ -68,13 +68,13 @@ export const LoginForm = {
 export const ErrorGroup = {
   render: () => html`
 <form nve-layout="column gap:md" style="max-width: 350px;" novalidate>
-  <nve-input status="error">
+  <nve-input>
     <label>email</label>
     <input type="email" name="email" required pattern=".+@nvidia\.com" autocomplete="off" />
     <nve-control-message status="error">invalid email</nve-control-message>
   </nve-input>
 
-  <nve-password status="error">
+  <nve-password>
     <label>password</label>
     <input type="password" name="password" required minlength="6" autocomplete="off" />
     <nve-control-message status="error">minimum length is 6 characters</nve-control-message>
@@ -133,7 +133,7 @@ export const ResetForm = {
     <nve-control-message error="patternMismatch">invalid NVIDIA email</nve-control-message>
   </nve-input>
 
-  <nve-password status="error">
+  <nve-password>
     <label>password</label>
     <input type="password" name="password" required minlength="6" autocomplete="off" />
     <nve-control-message error="valueMissing">required</nve-control-message>

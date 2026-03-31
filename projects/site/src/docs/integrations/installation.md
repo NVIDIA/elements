@@ -50,6 +50,6 @@ import '@nvidia-elements/core/dot/define.js';
 <nve-button>hello there</nve-button>
 ```
 
-## Artifactory Usage Guidelines
+## Registry Usage Guidelines
 
 {% artifactory-usage %}

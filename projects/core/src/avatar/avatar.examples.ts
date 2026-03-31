@@ -21,7 +21,7 @@ export const Default = {
 export const Image = {
   render: () => html`
     <nve-avatar>
-      <img src="static/images/stock-profile-photo.jpg" alt="User Avatar" className="full-width"/>
+      <img src="static/images/test-image-1.svg" alt="User Avatar" />
     </nve-avatar>
 `};
 

@@ -39,7 +39,6 @@ export const renderBaseHead = data => /* html */ `
     @import '@nvidia-elements/themes/high-contrast.css';
     @import '@nvidia-elements/themes/compact.css';
     @import '@nvidia-elements/themes/debug.css';
-    @import '@nvidia-elements/themes/ddb-dark.css';
     @import '@nvidia-elements/themes/fonts/nvidia-sans.css';
     @import '@nvidia-elements/brand/index.css';
     @import '@nvidia-elements/brand/dark.css';
@@ -303,11 +302,6 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/monaco/problems/') ? 'highlighted selected' : ''}><a href="docs/monaco/problems/">Problems</a></nve-tree-node>
   </nve-tree-node>
 
-  <!-- <nve-tree-node ${data.page.url.includes('/docs/markdown/') ? 'expanded' : ''}>
-    Markdown
-    <nve-tree-node ${data.page.url.includes('/docs/markdown/markdown/') ? 'highlighted selected' : ''}><a href="docs/markdown/markdown/">Markdown</a></nve-tree-node>
-  </nve-tree-node> -->
-
   <nve-tree-node ${data.page.url.includes('/docs/markdown/') ? 'expanded' : ''}>
     <a href="docs/markdown/">Markdown</a>
     <nve-tree-node ${data.page.url.endsWith('/docs/markdown/') ? 'highlighted selected' : ''}><a href="docs/markdown/">Markdown</a></nve-tree-node>
@@ -322,9 +316,9 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/container/') ? 'highlighted selected' : ''}><a href="docs/labs/layout/responsive/container/">Container</a></nve-tree-node>
       <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/patterns/') ? 'highlighted selected' : ''}><a href="docs/labs/layout/responsive/patterns/">Patterns</a></nve-tree-node>
     </nve-tree-node>
+    <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted selected' : ''}><a href="docs/labs/forms/" nve-layout="row align:vertical-center gap:xs">Forms <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/brand/' ? 'highlighted selected' : ''}><a href="docs/labs/brand/" nve-layout="row align:vertical-center gap:xs">Brand <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted selected' : ''}><a href="docs/labs/behaviors-alpine/" nve-layout="row align:vertical-center gap:xs">Behaviors Alpine <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted selected' : ''}><a href="docs/labs/forms/" nve-layout="row align:vertical-center gap:xs">Forms <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''} ${data.page.url === '/docs/api-design/' ? 'highlighted' : ''}>
@@ -398,12 +392,12 @@ export function renderGlobalsScript(data = { disableTheme: false }) {
 export function renderBasePageHeader(data) {
   return /* html */ `
 <nve-page-header slot="header">
-  <nve-logo slot="prefix" size="sm"></nve-logo>
+  <nve-logo slot="prefix" color="brand-green" size="sm">NV</nve-logo>
   <a slot="prefix" href=".">Elements</a>
   <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''}><a href="docs/about/getting-started/">Catalog</a></nve-button>
-  <nve-button container="flat"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>
+  ${ELEMENTS_PLAYGROUND_BASE_URL ? /* html */ `<nve-button container="flat"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>` : ''}
   <nve-button container="flat" ${data.page.url.includes('starters') ? 'selected' : ''}><a href="starters/">Starters</a></nve-button>
-  <nve-button container="flat"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Gitlab</a></nve-button>
+  <nve-button container="flat"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Repo</a></nve-button>
   ${data.page.url !== '/' ? /* html */ `<nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>` : ''}
 </nve-page-header>
   `;

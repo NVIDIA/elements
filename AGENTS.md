@@ -188,7 +188,7 @@ Releases are fully automated:
 1. Commits follow conventional commit format: `type(scope): message`
 2. Types: `fix` (patch), `feat` (minor), `chore` (no release)
 3. Scopes map to projects: `elements`, `themes`, `labs-forms`, etc.
-4. Semantic Release analyzes commits and publishes to Artifactory/npm
+4. Semantic Release analyzes commits and publishes packages
 5. Changelogs are auto-generated from commit messages
 6. Multiple packages can release in a single merge with dependency ordering
 
