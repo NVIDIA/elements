@@ -26,4 +26,37 @@ describe(Switch.metadata.tag, () => {
   it('should define element', () => {
     expect(customElements.get(Switch.metadata.tag)).toBeDefined();
   });
+
+  it('should set nve-control attribute to inline', () => {
+    expect(element.getAttribute('nve-control')).toBe('inline');
+  });
+
+  it('should add :state(checked) when input is checked', async () => {
+    const input = fixture.querySelector('input');
+    expect(element.matches(':state(checked)')).toBe(false);
+
+    input.click();
+    await elementIsStable(element);
+    expect(element.matches(':state(checked)')).toBe(true);
+  });
+
+  it('should remove :state(checked) when input is unchecked', async () => {
+    const input = fixture.querySelector('input');
+    input.click();
+    await elementIsStable(element);
+    expect(element.matches(':state(checked)')).toBe(true);
+
+    input.click();
+    await elementIsStable(element);
+    expect(element.matches(':state(checked)')).toBe(false);
+  });
+
+  it('should add :state(disabled) when input is disabled', async () => {
+    const input = fixture.querySelector('input');
+    expect(element.matches(':state(disabled)')).toBe(false);
+
+    input.disabled = true;
+    await elementIsStable(element);
+    expect(element.matches(':state(disabled)')).toBe(true);
+  });
 });

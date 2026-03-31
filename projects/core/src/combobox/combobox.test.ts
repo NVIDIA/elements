@@ -274,6 +274,11 @@ describe(Combobox.metadata.tag, () => {
     await elementIsStable(element);
     expect(items[0].disabled).toBe(true);
   });
+
+  // todo: this should be handled better at runtime
+  it('should throw when selectAll() is called on datalist combobox without a select element', async () => {
+    expect(() => element.selectAll()).toThrow();
+  });
 });
 
 describe(`${Combobox.metadata.tag}: single select`, () => {

@@ -26,4 +26,10 @@ describe(Textarea.metadata.tag, () => {
   it('should define element', () => {
     expect(customElements.get(Textarea.metadata.tag)).toBeDefined();
   });
+
+  it('should find the slotted textarea as its input', async () => {
+    await elementIsStable(element);
+    const textarea = fixture.querySelector('textarea');
+    expect(element.input).toBe(textarea);
+  });
 });

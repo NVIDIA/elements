@@ -41,6 +41,18 @@ describe(Panel.metadata.tag, () => {
     removeFixture(fixture);
   });
 
+  it('should have region role', async () => {
+    await elementIsStable(panel);
+    expect(panel._internals.role).toBe('region');
+  });
+
+  it('should reflect expanded attribute to DOM', async () => {
+    expect(panel.hasAttribute('expanded')).toBe(true);
+    panel.expanded = false;
+    await elementIsStable(panel);
+    expect(panel.hasAttribute('expanded')).toBe(false);
+  });
+
   it('should define elements', () => {
     expect(customElements.get(Panel.metadata.tag)).toBeDefined();
     expect(customElements.get(PanelHeader.metadata.tag)).toBeDefined();

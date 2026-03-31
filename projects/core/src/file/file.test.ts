@@ -30,4 +30,9 @@ describe(File.metadata.tag, () => {
   it('should append global styles needed for file pseudo selectors', () => {
     expect((element.getRootNode() as Document).adoptedStyleSheets).toBeTruthy();
   });
+
+  it('should find the slotted file input as its input', async () => {
+    await elementIsStable(element);
+    expect(element.input).toBe(fixture.querySelector('input'));
+  });
 });

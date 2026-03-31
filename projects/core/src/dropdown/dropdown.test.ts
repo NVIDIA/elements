@@ -88,6 +88,22 @@ describe(Dropdown.metadata.tag, () => {
     expect(await close).toBeDefined();
   });
 
+  it('should close on outside click (light dismiss)', async () => {
+    element.closable = true;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    await open;
+    expect(element.matches(':popover-open')).toBe(true);
+
+    const close = untilEvent(element, 'close');
+    element.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, clientX: -10, clientY: -10 }));
+    element.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, clientX: -10, clientY: -10 }));
+    await close;
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
   it('should emit close event when close button clicked', async () => {
     element.closable = true;
     await elementIsStable(element);

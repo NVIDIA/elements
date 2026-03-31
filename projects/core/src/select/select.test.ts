@@ -509,6 +509,77 @@ describe(Select.metadata.tag, () => {
     expect(disabledItem.disabled).toBe(true);
     expect(getComputedStyle(disabledItem).pointerEvents).toBe('none');
   });
+
+  it('should set aria-selected on menu items based on option selection', async () => {
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items[0].getAttribute('aria-selected')).toBe('true');
+    expect(items[1].getAttribute('aria-selected')).toBe('false');
+
+    emulateClick(select);
+    await elementIsStable(element);
+    emulateClick(items[1]);
+    await element.updateComplete;
+
+    const updatedItems = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(updatedItems[1].getAttribute('aria-selected')).toBe('true');
+  });
+});
+
+describe(`${Select.metadata.tag}: keyboard navigation`, () => {
+  let fixture: HTMLElement;
+  let element: Select;
+  let select: HTMLSelectElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-select>
+        <label>label</label>
+        <select>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+      </nve-select>
+    `);
+    element = fixture.querySelector(Select.metadata.tag);
+    select = fixture.querySelector('select');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should open dropdown on Space key', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(dropdown.matches(':popover-open')).toBe(false);
+
+    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'Space', bubbles: true }));
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+  });
+
+  it('should open dropdown on ArrowDown key', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(dropdown.matches(':popover-open')).toBe(false);
+
+    select.dispatchEvent(new KeyboardEvent('keyup', { code: 'ArrowDown', bubbles: true }));
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+  });
+
+  it('should select menu item and close dropdown on click', async () => {
+    emulateClick(select);
+    await elementIsStable(element);
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    emulateClick(items[1]);
+    await element.updateComplete;
+    expect(select.value).toBe('2');
+    expect(dropdown.matches(':popover-open')).toBe(false);
+  });
 });
 
 describe(`${Select.metadata.tag}: size`, () => {
