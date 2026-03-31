@@ -1,3 +1,4 @@
+import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { useStyles, attachInternals } from '@nvidia-elements/core/internal';
@@ -39,5 +40,12 @@ export class Divider extends LitElement {
     attachInternals(this);
     this._internals.role = 'separator';
     this._internals.ariaOrientation = this.orientation;
+  }
+
+  updated(props: PropertyValues<this>) {
+    super.updated(props);
+    if (props.has('orientation')) {
+      this._internals.ariaOrientation = this.orientation;
+    }
   }
 }
