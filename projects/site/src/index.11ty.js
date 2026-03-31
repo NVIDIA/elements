@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { renderBaseHead, renderBasePageHeader, IS_MR_PREVIEW, IS_DEV_MODE } from './_11ty/layouts/common.js';
 import { svgLogoShortcode, svgLogosShortcode } from './_11ty/shortcodes/svg-logo.js';
-import { ELEMENTS_CDN_BASE_URL, ELEMENTS_PAGES_BASE_URL, ELEMENTS_REPO_BASE_URL } from './_11ty/utils/env.js';
+import { ELEMENTS_ASSETS_CDN_BASE_URL, ELEMENTS_PAGES_BASE_URL, ELEMENTS_REPO_BASE_URL } from './_11ty/utils/env.js';
 
 const BASE_HEAD = renderBaseHead({ title: 'Elements', disableTheme: true });
 const styles = readFileSync(new URL('./index.css', import.meta.url), 'utf-8');
@@ -15,12 +15,12 @@ export function render(data) {
     <!-- IS_MR_PREVIEW: ${IS_MR_PREVIEW}, IS_DEV_MODE: ${IS_DEV_MODE} -->
     <link
       rel="preload"
-      href="${ELEMENTS_CDN_BASE_URL}/assets/elements/hero/nv-wave-avif.avif"
+      href="${ELEMENTS_ASSETS_CDN_BASE_URL}/assets/elements/hero/nv-wave-avif.avif"
       fetchpriority="high"
       as="image" />
     <link
       rel="preload"
-      href="${ELEMENTS_CDN_BASE_URL}/assets/elements/hero/voxels-avif.avif"
+      href="${ELEMENTS_ASSETS_CDN_BASE_URL}/assets/elements/hero/voxels-avif.avif"
       fetchpriority="high"
       as="image" />
     <style>${styles}</style>
@@ -35,7 +35,7 @@ export function render(data) {
         <section id="hero">
           <img
             class="background"
-            src="${ELEMENTS_CDN_BASE_URL}/assets/elements/hero/nv-wave-avif.avif"
+            src="${ELEMENTS_ASSETS_CDN_BASE_URL}/assets/elements/hero/nv-wave-avif.avif"
             role="presentation" />
           <div class="content full">
             <div class="layout">
@@ -116,7 +116,7 @@ export function render(data) {
               <div class="glimmer"></div>
               <video loop muted preload="none">
                 <source
-                  src="${ELEMENTS_CDN_BASE_URL}/assets/elements/screencast/browse-pattern-snippets-dark.webm"
+                  src="${ELEMENTS_ASSETS_CDN_BASE_URL}/assets/elements/screencast/browse-pattern-snippets-dark.webm"
                   type="video/webm"
                   loading="lazy"
                   decoding="async" />
@@ -340,7 +340,7 @@ export function render(data) {
                 <source
                   loading="lazy"
                   decoding="async"
-                  src="${ELEMENTS_CDN_BASE_URL}/assets/elements/screencast/layout-typography-snippets-dark.webm" />
+                  src="${ELEMENTS_ASSETS_CDN_BASE_URL}/assets/elements/screencast/layout-typography-snippets-dark.webm" />
                 Your browser does not support the video tag or WebM format.
               </video>
             </div>
