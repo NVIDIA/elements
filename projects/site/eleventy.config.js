@@ -97,9 +97,9 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyPluginVite, {
     viteOptions: {
       define: {
-        __ELEMENTS_CDN_COMPONENTS_BASE_URL__: JSON.stringify(process.env.ELEMENTS_CDN_COMPONENTS_BASE_URL || ''),
+        __ELEMENTS_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_CDN_BASE_URL || ''),
         __ELEMENTS_ESM_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_ESM_CDN_BASE_URL || ''),
-        __ELEMENTS_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_CDN_BASE_URL || '')
+        __ELEMENTS_ASSETS_CDN_BASE_URL__: JSON.stringify(process.env.ELEMENTS_ASSETS_CDN_BASE_URL || '')
       },
       base: BASE_URL,
       build: {
