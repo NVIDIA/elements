@@ -171,7 +171,7 @@ export class Notification extends LitElement {
 
   hidePopover(): void {
     if (this.popoverInline) {
-      this.dispatchEvent(new CustomEvent('close'));
+      this.dispatchEvent(new CustomEvent('close', { bubbles: true, composed: true }));
     } else {
       super.hidePopover();
     }
