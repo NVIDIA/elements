@@ -126,4 +126,26 @@ describe(Drawer.metadata.tag, () => {
     expect(await hide).toBeDefined();
     expect(document.body.querySelector('[nve-ghost]') as HTMLElement).toBe(null);
   });
+
+  it('should reflect position attribute to DOM when changed', async () => {
+    expect(element.getAttribute('position')).toBe('left');
+    element.position = 'right';
+    await elementIsStable(element);
+    expect(element.getAttribute('position')).toBe('right');
+  });
+
+  it('should reflect modal attribute to DOM', async () => {
+    expect(element.hasAttribute('modal')).toBe(false);
+    element.modal = true;
+    await elementIsStable(element);
+    expect(element.hasAttribute('modal')).toBe(true);
+  });
+
+  it('should not be dismissible when closable is false', async () => {
+    expect(element.closable).toBeFalsy();
+    expect(element.popoverDismissible).toBe(false);
+
+    element.closable = true;
+    expect(element.popoverDismissible).toBe(true);
+  });
 });

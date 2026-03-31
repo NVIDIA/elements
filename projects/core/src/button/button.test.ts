@@ -55,6 +55,15 @@ describe(Button.metadata.tag, () => {
     await elementIsStable(element);
     expect(element.getAttribute('container')).toBe('inline');
   });
+
+  it('should reflect a size value', async () => {
+    expect(element.size).toBe(undefined);
+    expect(element.hasAttribute('size')).toBe(false);
+
+    element.size = 'sm';
+    await elementIsStable(element);
+    expect(element.getAttribute('size')).toBe('sm');
+  });
 });
 
 describe(`${Button.metadata.tag} - submit`, () => {
@@ -81,5 +90,25 @@ describe(`${Button.metadata.tag} - submit`, () => {
     emulateClick(element);
 
     expect(called).toBe(true);
+  });
+
+  it('should not submit the form when disabled', async () => {
+    fixture = await createFixture(html`
+      <form method="post" action=".">
+        <nve-button type="submit" disabled>Submit</nve-button>
+      </form>
+    `);
+    const element = fixture.querySelector(Button.metadata.tag);
+    await elementIsStable(element);
+
+    let called = false;
+    fixture.querySelector('form').addEventListener('submit', e => {
+      e.preventDefault();
+      called = true;
+    });
+
+    emulateClick(element);
+
+    expect(called).toBe(false);
   });
 });

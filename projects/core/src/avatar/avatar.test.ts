@@ -24,15 +24,17 @@ describe(Avatar.metadata.tag, () => {
     expect(customElements.get(Avatar.metadata.tag)).toBeDefined();
   });
 
-  it('should set size attribute', async () => {
+  it('should reflect size attribute to DOM', async () => {
+    expect(element.hasAttribute('size')).toBe(false);
     element.size = 'xs';
     await elementIsStable(element);
-    expect(element.size).toBe('xs');
+    expect(element.getAttribute('size')).toBe('xs');
   });
 
-  it('should set color attribute', async () => {
+  it('should reflect color attribute to DOM', async () => {
+    expect(element.hasAttribute('color')).toBe(false);
     element.color = 'red-cardinal';
     await elementIsStable(element);
-    expect(element.color).toBe('red-cardinal');
+    expect(element.getAttribute('color')).toBe('red-cardinal');
   });
 });

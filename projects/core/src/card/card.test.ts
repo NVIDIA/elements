@@ -69,6 +69,13 @@ describe(Card.metadata.tag, () => {
     expect(footer).toBe(cardFooter);
   });
 
+  it('should reflect container attribute to DOM', async () => {
+    expect(card.hasAttribute('container')).toBe(false);
+    card.container = 'flat';
+    await elementIsStable(card);
+    expect(card.getAttribute('container')).toBe('flat');
+  });
+
   it('should have card header preserve the title/subtitle/default/action DOM order via slots', async () => {
     await elementIsStable(cardHeader);
 
