@@ -41,4 +41,16 @@ describe(Divider.metadata.tag, () => {
     await elementIsStable(element);
     expect(element.getAttribute('orientation')).toBe('vertical');
   });
+
+  it('should update ariaOrientation when orientation property changes', async () => {
+    expect(element._internals.ariaOrientation).toBe('horizontal');
+
+    element.orientation = 'vertical';
+    await elementIsStable(element);
+    expect(element._internals.ariaOrientation).toBe('vertical');
+
+    element.orientation = 'horizontal';
+    await elementIsStable(element);
+    expect(element._internals.ariaOrientation).toBe('horizontal');
+  });
 });

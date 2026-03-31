@@ -185,3 +185,35 @@ describe(`${Notification.metadata.tag} - inline group`, () => {
     expect(await close).toBeDefined();
   });
 });
+
+describe(`${Notification.metadata.tag} - inline close event`, () => {
+  let fixture: HTMLElement;
+  let element: Notification;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-notification container="flat" closable>hello</nve-notification>
+    `);
+    element = fixture.querySelector(Notification.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should dispatch close event with bubbles and composed from inline notification', async () => {
+    const event = untilEvent(element, 'close');
+    element.hidePopover();
+    const e = await event;
+    expect(e).toBeDefined();
+    expect((e as Event).bubbles).toBe(true);
+    expect((e as Event).composed).toBe(true);
+  });
+
+  it('should apply aria-label to close button', async () => {
+    const btn = element.shadowRoot.querySelector(IconButton.metadata.tag);
+    expect(btn).toBeTruthy();
+    expect(btn.ariaLabel).toBe('close');
+  });
+});
