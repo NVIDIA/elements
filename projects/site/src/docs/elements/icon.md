@@ -48,10 +48,6 @@ See the searchable [Interactive Icon Catalog](./docs/foundations/iconography/)
 
 {% example '@nvidia-elements/core/icon/icon.examples.json' 'Alias' %}
 
-## Brand
-
-{% example '@nvidia-elements/core/icon/icon.examples.json' 'Brand' %}
-
 ## Source
 
 {% example '@nvidia-elements/core/icon/icon.examples.json' 'Source' %}
