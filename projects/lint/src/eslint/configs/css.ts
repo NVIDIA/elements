@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { Linter } from 'eslint';
 import { CSSLanguage } from '@eslint/css';
 import noUnexpectedCssVariable from '../rules/no-unexpected-css-variable.js';

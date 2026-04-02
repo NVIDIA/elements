@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { describe, it, expect, beforeEach } from 'vitest';
 import { RuleTester } from 'eslint';
 import type { JSRuleDefinition } from 'eslint';
@@ -51,8 +54,8 @@ describe('noRestrictedAttributes', () => {
         '<p nve-text="body"></p>',
         '<span nve-text="caption"></span>',
         '<section nve-layout="column"></section>',
-        '<div nve-layout="row"></div>',
-        '<p nve-text="body"></p>'
+        '<div mlv-layout="row"></div>',
+        '<p mlv-text="body"></p>'
       ],
       invalid: []
     });
@@ -123,46 +126,46 @@ describe('noRestrictedAttributes', () => {
     });
   });
 
-  it('should report nve-layout on custom elements', () => {
-    tester.run('nve-layout on custom elements', rule, {
+  it('should report mlv-layout on custom elements', () => {
+    tester.run('mlv-layout on custom elements', rule, {
       valid: [],
       invalid: [
         {
-          code: '<nve-card nve-layout="row"></nve-card>',
+          code: '<nve-card mlv-layout="row"></nve-card>',
           errors: [
             {
               messageId: 'no-restricted-attributes-with-supported',
-              data: { attribute: 'nve-layout', element: 'nve-card', supportedAttributes: supportedAttrs('nve-card') }
+              data: { attribute: 'mlv-layout', element: 'nve-card', supportedAttributes: supportedAttrs('nve-card') }
             }
           ]
         },
         {
-          code: '<custom-element nve-layout="column"></custom-element>',
+          code: '<custom-element mlv-layout="column"></custom-element>',
           errors: [
-            { messageId: 'no-restricted-attributes', data: { attribute: 'nve-layout', element: 'custom-element' } }
+            { messageId: 'no-restricted-attributes', data: { attribute: 'mlv-layout', element: 'custom-element' } }
           ]
         }
       ]
     });
   });
 
-  it('should report nve-text on custom elements', () => {
-    tester.run('nve-text on custom elements', rule, {
+  it('should report mlv-text on custom elements', () => {
+    tester.run('mlv-text on custom elements', rule, {
       valid: [],
       invalid: [
         {
-          code: '<nve-badge nve-text="body"></nve-badge>',
+          code: '<nve-badge mlv-text="body"></nve-badge>',
           errors: [
             {
               messageId: 'no-restricted-attributes-with-supported',
-              data: { attribute: 'nve-text', element: 'nve-badge', supportedAttributes: supportedAttrs('nve-badge') }
+              data: { attribute: 'mlv-text', element: 'nve-badge', supportedAttributes: supportedAttrs('nve-badge') }
             }
           ]
         },
         {
-          code: '<custom-element nve-text="caption"></custom-element>',
+          code: '<custom-element mlv-text="caption"></custom-element>',
           errors: [
-            { messageId: 'no-restricted-attributes', data: { attribute: 'nve-text', element: 'custom-element' } }
+            { messageId: 'no-restricted-attributes', data: { attribute: 'mlv-text', element: 'custom-element' } }
           ]
         }
       ]

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { ReactiveElement, ReactiveController } from 'lit';
 import type { LegacyDecoratorTarget, OffsetPoint, Point } from '../types/index.js';
 import { getDifference } from '../utils/objects.js';

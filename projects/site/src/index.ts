@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import '@lit-labs/ssr-client/lit-element-hydrate-support.js';
 
 import '@nvidia-elements/code/codeblock/define.js';

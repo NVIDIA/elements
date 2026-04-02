@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { FormControl, FormControlMetadata, FormControlValue } from '../internal/types.js';
 import { FormControlError } from '../internal/errors.js';
 import { parseValueSchema } from '../internal/schema.js';

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { GlobalStateService } from '../services/global.service.js';
 import type { ElementDefinition, LegacyDecoratorTarget } from '../types/index.js';
 import { defineElement, supportsScopedRegistry } from '../utils/dom.js';

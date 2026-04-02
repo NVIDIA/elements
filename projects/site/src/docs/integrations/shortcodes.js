@@ -6,10 +6,6 @@ export function renderInstallArtifactoryShortcode() {
   return /* html */ `
 If not yet done, install [NodeJS](https://nodejs.org/en/download/). NodeJS is a JavaScript runtime that has a large ecosystem of tooling and packages for Web Development. Once installed the Node Package Manager (NPM) will be available for use.
 
-\`\`\`shell
-# login to artifactory (AVInfra monorepo users can skip this step)
-npm config set registry ${ELEMENTS_REGISTRY_URL} && npm login --auth-type=legacy
-\`\`\`
 `;
 }
 
@@ -47,9 +43,6 @@ curl -fsSL ${ELEMENTS_PAGES_BASE_URL}/install.cmd -o install.cmd && install.cmd 
 <div id="install-cli-nodejs" hidden style="height: 130px">
 
 \`\`\`shell
-# login to artifactory (AVInfra monorepo users can skip this step)
-npm config set registry ${ELEMENTS_REGISTRY_URL} && npm login --auth-type=legacy
-
 # install the CLI
 npm install -g @nvidia-elements/cli
 \`\`\`

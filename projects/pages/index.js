@@ -1,37 +1,14 @@
-import { readFile, writeFile, readdir } from 'node:fs/promises';
-import { cpSync, existsSync, mkdirSync } from 'node:fs';
-import { brotliCompress, constants } from 'node:zlib';
-import { join, extname } from 'node:path';
-import { promisify } from 'node:util';
+import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 
 if (!existsSync('./dist')) {
   mkdirSync('./dist/starters', { recursive: true });
   mkdirSync('./dist/api', { recursive: true });
 }
 
-cpSync('./_redirects', './dist/_redirects');
 cpSync('../site/dist/', './dist/', { recursive: true });
 cpSync('../internals/metadata/static/api.json', './dist/metadata/api.json');
 cpSync('../internals/metadata/static/examples.json', './dist/metadata/examples.json');
 cpSync('../internals/metadata/static/projects.json', './dist/metadata/projects.json');
-
-cpSync('../cli/install.sh', './dist/install.sh');
-cpSync('../cli/install.cmd', './dist/install.cmd');
-if (existsSync('../cli/dist')) {
-  mkdirSync('./dist/cli', { recursive: true });
-  for (const bin of ['nve-macos-arm64', 'nve-linux-x64', 'nve-linux-arm64', 'nve-windows-x64']) {
-    const src = `../cli/dist/${bin}`;
-    const srcExe = `../cli/dist/${bin}.exe`;
-    if (existsSync(src)) {
-      cpSync(src, `./dist/cli/${bin}`);
-    } else if (existsSync(srcExe)) {
-      cpSync(srcExe, `./dist/cli/${bin}`);
-    }
-  }
-  if (existsSync('../cli/dist/manifest.json')) {
-    cpSync('../cli/dist/manifest.json', './dist/cli/manifest.json');
-  }
-}
 
 cpSync('../starters/dist/', './dist/starters/download/', { recursive: true });
 cpSync('../starters/angular/dist/angular-starter/browser/', './dist/starters/angular/', { recursive: true });
@@ -47,76 +24,9 @@ cpSync('../starters/typescript/dist/', './dist/starters/typescript/', { recursiv
 cpSync('../starters/vue/dist/', './dist/starters/vue/', { recursive: true });
 cpSync('../starters/hugo/dist/', './dist/starters/hugo/', { recursive: true });
 
-// https://docs.gitlab.com/user/project/pages/introduction/#serving-compressed-assets
-
-const TEXT_EXTENSIONS = ['.html', '.css', '.js', '.json', '.xml', '.txt', '.md', '.svg', '.map', '.woff2'];
-
-function isUTF8Text(buffer) {
-  try {
-    // Try to decode the buffer as UTF-8
-    const text = buffer.toString('utf8');
-    // Check if the text contains any non-printable characters
-    return !/[\x00-\x08\x0B\x0C\x0E-\x1F]/.test(text);
-  } catch {
-    return false;
-  }
-}
-
-let count = 0;
-async function compressFile(filePath) {
-  const ext = extname(filePath);
-  if (TEXT_EXTENSIONS.includes(ext)) {
-    try {
-      const content = await readFile(filePath);
-      const brotliOptions = {
-        params: {
-          [constants.BROTLI_PARAM_QUALITY]: 11,
-          [constants.BROTLI_PARAM_SIZE_HINT]: content.length
-        }
-      };
-
-      if (ext === '.woff2') {
-        brotliOptions.params[constants.BROTLI_PARAM_MODE] = constants.BROTLI_MODE_FONT;
-      } else if (isUTF8Text(content)) {
-        brotliOptions.params[constants.BROTLI_PARAM_MODE] = constants.BROTLI_MODE_TEXT;
-      }
-
-      const brotlied = await promisify(brotliCompress)(content, brotliOptions);
-      await writeFile(`${filePath}.br`, brotlied);
-      count++;
-      process.stdout.write(`Compressed files: ${count}\r`);
-    } catch (error) {
-      console.error(`Error compressing ${filePath}:`, error);
-    }
-  }
-}
-
-async function getAllFilePaths(dir) {
-  const entries = await readdir(dir, { withFileTypes: true });
-  const paths = [];
-
-  for (const entry of entries) {
-    const fullPath = join(dir, entry.name);
-
-    if (entry.isDirectory()) {
-      // Recursively get paths from subdirectories
-      const subPaths = await getAllFilePaths(fullPath);
-      paths.push(...subPaths);
-    } else {
-      paths.push(fullPath);
-    }
-  }
-
-  return paths;
-}
-
-if (process.env.CI === 'true' || process.env.LOCAL_PREVIEW === 'true') {
-  console.log('Starting compression...');
-  const files = await getAllFilePaths('./dist');
-
-  Promise.all(files.map(path => compressFile(path)))
-    .then(() => console.log(`Compressed files: ${count}\nCompression complete!`))
-    .catch(error => console.error('Compression failed:', error));
-} else {
-  console.log('Local build, skipping deployment compression');
-}
+// HTML redirects (GitHub Pages does not support _redirects files)
+const redirect = (url) => `<!DOCTYPE html><meta http-equiv="refresh" content="0;url=${url}"><link rel="canonical" href="${url}"><a href="${url}">Redirect</a>`;
+mkdirSync('./dist/api', { recursive: true });
+mkdirSync('./dist/demos', { recursive: true });
+writeFileSync('./dist/api/index.html', redirect('/elements/'));
+writeFileSync('./dist/demos/index.html', redirect('/elements/starters/'));

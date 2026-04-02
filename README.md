@@ -7,8 +7,8 @@ The Design Language for AI/ML Factories Building at the Speed of Light
 ## Requests and Contributions
 
 - [Contribution Guidelines](https://NVIDIA.github.io/elements/docs/about/contributions/)
-- [Feature request](https://github.com/NVIDIA/elements/-/issues/new?issuable_template=feature)
-- [Bug report](https://github.com/NVIDIA/elements/-/issues/new?issuable_template=default)
+- [Feature request](https://github.com/NVIDIA/elements/issues/new?issuable_template=feature)
+- [Bug report](https://github.com/NVIDIA/elements/issues/new?issuable_template=default)
 
 ## Organization
 
@@ -28,13 +28,6 @@ Examples of projects include:
 ### Setup
 
 To setup repository dependencies and run the full build, run the following commands at the **root** of the repository:
-
-```shell
-# required only if https://git-lfs.com not already installed on system
-brew install git-lfs
-git lfs install
-git lfs pull
-```
 
 ```shell
 # install required dependencies
@@ -77,21 +70,21 @@ Both the top-level repository and each project has a set of standardized npm scr
 - `test:visual`: run playwright visual regression tests
 - `test:axe`: run axe tests for a11y
 
-To learn in detail how the repo is built and run see our [build README.md](https://github.com/NVIDIA/elements/-/blob/main/build/README.md).
+To learn in detail how the repo is built and run see our [build README.md](https://github.com/NVIDIA/elements/blob/main/build/README.md).
 
 ## Workflow
 
-Before creating a branch or merge request be sure to make a [new issue or feature request](https://github.com/NVIDIA/elements/-/issues/new) first for the team to evaluate. This will help ensure that your work aligns with the goals of the project and that you are not duplicating effort.
+Before creating a branch or pull request be sure to make a [new issue or feature request](https://github.com/NVIDIA/elements/issues/new) first for the team to evaluate. This will help ensure that your work aligns with the goals of the project and that you are not duplicating effort.
 
 ### Create a Branch
 
-The Gitlab repo enforces branches to use the `topic/` prefix for branches to be merged. Example `topic/bug-fix`. Once a MR is merged the topic branch will automatically be deleted from the remote repo on Gitlab.
+Use a descriptive branch name with a prefix. Example `feature/bug-fix`.
 
 ```shell
 git checkout -b topic/bug-fix
 ```
 
-Once your branch is created, make your source code changes. Once your changes are complete run `pnpm run ci` in the root of the repo to run all the builds and tests. If all tests pass, you are ready to create a MR.
+Once your branch is created, make your source code changes. Once your changes are complete run `pnpm run ci` in the root of the repo to run all the builds and tests. If all tests pass, you are ready to create a PR.
 
 ### Commit Messages
 
@@ -101,7 +94,7 @@ The repo uses [Semantic Release](https://semantic-release.gitbook.io/semantic-re
 git commit -a -m "fix(elements): disabled multi-select"
 ```
 
-[Example Commit](https://github.com/NVIDIA/elements/-/commit/990d8f43a4a055c2f1ca1a6aa0af39f099d04649)
+[Example Commit](https://github.com/NVIDIA/elements/commit/990d8f43a4a055c2f1ca1a6aa0af39f099d04649)
 
 | Types   | Description                                                     |
 | ------- | --------------------------------------------------------------- |
@@ -114,8 +107,6 @@ git commit -a -m "fix(elements): disabled multi-select"
 | `ci`                         | `/projects/internals`         |
 | `starters`                   | `/projects/starters`          |
 | `elements`                   | `/projects/core`          |
-| `pages`                      | `/projects/pages`             |
-| `playground`                 | `/projects/playground`        |
 | `themes`                     | `/projects/themes`            |
 | `monaco`                     | `/projects/monaco`            |
 | `labs-cli`                   | `/cli`                        |
@@ -124,15 +115,15 @@ git commit -a -m "fix(elements): disabled multi-select"
 
 Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
 
-### Opening a Merge Request
+### Opening a Pull Request
 
-Once you have committed your changes to your branch locally, push them to the remote Gitlab repository.
+Once you have committed your changes to your branch locally, push them to the remote GitHub repository.
 
 ```bash
 git push --set-upstream origin topic/bug-fix
 ```
 
-Open a new [Merge Request](https://github.com/NVIDIA/elements/-/merge_requests) in GitLab. Request review from the team members and apply the appropriate labels it the GitLab UI for example, `type:fix` and `scope:elements`. View Gitlab updates in the [#elements-ci](https://nvidia.enterprise.slack.com/archives/C06QATGH15M) Slack Channel.
+Open a new [Pull Request](https://github.com/NVIDIA/elements/pulls) in GitHub. Request review from the team members and apply the appropriate labels it the GitHub UI for example, `type:fix` and `scope:elements`.
 
 #### Amending Commit
 
@@ -150,7 +141,7 @@ git push --force origin topic/bug-fix
 
 #### Rebasing Commit
 
-Sometimes changes are merged to main before your MR is approved. To update your local branch to contain the latest changes from main you will need to rebase.
+Sometimes changes are merged to main before your PR is approved. To update your local branch to contain the latest changes from main you will need to rebase.
 
 ```shell
 git checkout main # Switch to main branch
@@ -167,4 +158,4 @@ When creating a new project, ex: `./projects/code`, make sure to add the project
 
 ### Release
 
-Once your Merge Request is approved, you can merge it into `main` via the Gitlab UI. This will trigger a [new release](https://github.com/NVIDIA/elements/-/releases) of the package automatically. The version number will be bumped based on the type of commit (see above). The [changelog](https://NVIDIA.github.io/elements/docs/changelog/) will also be updated with the changes from the commits in the MR.
+Once your Pull Request is approved, you can merge it into `main` via the GitHub UI. This will trigger a [new release](https://github.com/NVIDIA/elements/releases) of the package automatically. The version number will be bumped based on the type of commit (see above). The [changelog](https://NVIDIA.github.io/elements/docs/changelog/) will also be updated with the changes from the commits in the PR.

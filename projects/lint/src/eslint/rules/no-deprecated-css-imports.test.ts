@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { describe, it, expect, beforeEach } from 'vitest';
 import { RuleTester } from 'eslint';
 import type { JSRuleDefinition } from 'eslint';
@@ -56,7 +59,7 @@ describe('noDeprecatedCssImports', () => {
       valid: [],
       invalid: [
         {
-          code: `@import '@elements/elements/index.css';`,
+          code: `@import '@maglev/elements/index.css';`,
           output: `@import '@nvidia-elements/themes/fonts/inter.css';
 @import '@nvidia-elements/themes/index.css';
 @import '@nvidia-elements/themes/dark.css';
@@ -66,7 +69,7 @@ describe('noDeprecatedCssImports', () => {
             {
               messageId: 'deprecated-css-import',
               data: {
-                value: '@elements/elements/index.css',
+                value: '@maglev/elements/index.css',
                 alternative: `
 @import '@nvidia-elements/themes/fonts/inter.css';
 @import '@nvidia-elements/themes/index.css';
@@ -78,26 +81,26 @@ describe('noDeprecatedCssImports', () => {
           ]
         },
         {
-          code: `@import '@elements/elements/css/module.layout.css';`,
+          code: `@import '@maglev/elements/css/module.layout.css';`,
           output: `@import '@nvidia-elements/styles/layout.css';`,
           errors: [
             {
               messageId: 'deprecated-css-import',
               data: {
-                value: '@elements/elements/css/module.layout.css',
+                value: '@maglev/elements/css/module.layout.css',
                 alternative: `@import '@nvidia-elements/styles/layout.css';`.trim()
               }
             }
           ]
         },
         {
-          code: `@import '@elements/elements/css/module.typography.css';`,
+          code: `@import '@maglev/elements/css/module.typography.css';`,
           output: `@import '@nvidia-elements/styles/typography.css';`,
           errors: [
             {
               messageId: 'deprecated-css-import',
               data: {
-                value: '@elements/elements/css/module.typography.css',
+                value: '@maglev/elements/css/module.typography.css',
                 alternative: `@import '@nvidia-elements/styles/typography.css';`.trim()
               }
             }
@@ -113,7 +116,7 @@ describe('noDeprecatedCssImports', () => {
       invalid: [
         {
           code: `@import '@nvidia-elements/themes/fonts/inter.css';
-@import '@elements/elements/css/module.layout.css';
+@import '@maglev/elements/css/module.layout.css';
 @import '@nvidia-elements/themes/dark.css';`,
           output: `@import '@nvidia-elements/themes/fonts/inter.css';
 @import '@nvidia-elements/styles/layout.css';
@@ -122,7 +125,7 @@ describe('noDeprecatedCssImports', () => {
             {
               messageId: 'deprecated-css-import',
               data: {
-                value: '@elements/elements/css/module.layout.css',
+                value: '@maglev/elements/css/module.layout.css',
                 alternative: `@import '@nvidia-elements/styles/layout.css';`.trim()
               }
             }

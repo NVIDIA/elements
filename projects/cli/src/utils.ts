@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { select, input, confirm, editor } from '@inquirer/prompts';
 import { type ManagedToolMethod, type Report } from '@internals/tools';
 import ora, { type Ora } from 'ora';

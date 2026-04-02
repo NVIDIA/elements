@@ -28,18 +28,4 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
 # install vale
 RUN curl -sfL https://github.com/errata-ai/vale/releases/download/v3.13.0/vale_3.13.0_Linux_64-bit.tar.gz | tar xz -C /usr/local/bin vale
 
-# install/setup vault
-RUN curl https://registry.npmjs.org -L -o vault.zip && \
-  unzip vault.zip -d /root && \
-  cp /root/vault /usr/local/bin/vault && \
-  rm vault.zip && \
-  vault --version  && \
-  apt-get update && apt-get install -y jq
 
-# install aws cli (default install: /usr/local/bin/aws)
-RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip && \
-  unzip awscliv2.zip && \
-  ./aws/install && \
-  rm awscliv2.zip && \
-  rm -rf ./aws && \
-  aws --version

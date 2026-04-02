@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { publint as publintFn } from 'publint';
 import { ProjectsService } from '@internals/metadata';
 import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.js';
@@ -116,7 +119,7 @@ export function checkPeerDependencies(currentVersions: ElementVersions, packageJ
 
   if (hasDependencies) {
     return {
-      message: '@nve packages must be listed as peer dependencies',
+      message: '@nvidia-elements packages must be listed as peer dependencies',
       status: 'danger'
     };
   } else if (!hasPeerDependencies && !hasDevDependencies && !hasDependencies) {
@@ -126,7 +129,7 @@ export function checkPeerDependencies(currentVersions: ElementVersions, packageJ
     };
   } else {
     return {
-      message: '@nve packages are listed as peer dependencies',
+      message: '@nvidia-elements packages are listed as peer dependencies',
       status: 'success'
     };
   }
@@ -134,17 +137,17 @@ export function checkPeerDependencies(currentVersions: ElementVersions, packageJ
 
 export function checkSemanticDependencies(packageJson: PackageData): ReportCheck {
   const hasPinnedVersion = Object.entries(packageJson.peerDependencies ?? {}).find(
-    ([key, value]) => key.includes('@nve') && !value.startsWith('^')
+    ([key, value]) => key.includes('@nvidia-elements/') && !value.startsWith('^')
   );
 
   if (hasPinnedVersion) {
     return {
-      message: '@nve packages must contain caret (^) prefix',
+      message: '@nvidia-elements packages must contain caret (^) prefix',
       status: 'danger'
     };
   } else {
     return {
-      message: '@nve packages contain caret (^) prefix',
+      message: '@nvidia-elements packages contain caret (^) prefix',
       status: 'success'
     };
   }
@@ -158,7 +161,7 @@ export async function checkDependencies(packageJson: PackageData, currentVersion
   const elementPackages = Object.keys(currentVersions);
   const allDependencies = [...dependencies, ...devDependencies, ...peerDependencies];
   let status: 'success' | 'danger' | 'warning' = 'success';
-  let message = '@nve packages are up to date';
+  let message = '@nvidia-elements packages are up to date';
 
   if (!allDependencies.some(dependency => elementPackages.includes(dependency))) {
     status = 'warning';
@@ -170,7 +173,7 @@ export async function checkDependencies(packageJson: PackageData, currentVersion
     Object.values(versions).some(version => version.status === 'warning')
   ) {
     status = 'warning'; // warning for either to ensure this does not trigger a CI runtime failure as this checks the latest version remotely
-    message = '@nve packages are out of date';
+    message = '@nvidia-elements packages are out of date';
   }
 
   return { versions, status, message };

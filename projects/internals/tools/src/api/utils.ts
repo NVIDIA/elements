@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import {
   ApiService,
   type Attribute,
@@ -120,7 +123,7 @@ export async function getLatestPublishedVersions(projects: Project[]): Promise<E
 
 export function getPublishedPackageNames(projects: Project[]) {
   return projects
-    .filter(p => p.name.startsWith('@nve') && !p.name.startsWith('@internals') && p.version !== '0.0.0')
+    .filter(p => p.name.startsWith('@nvidia-elements/') && !p.name.startsWith('@internals') && p.version !== '0.0.0')
     .map(p => p.name);
 }
 

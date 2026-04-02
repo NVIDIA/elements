@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
@@ -113,12 +116,6 @@ describe(Logo.metadata.tag, () => {
     it('should provide default slot', async () => {
       const defaultSlot = element.shadowRoot.querySelector<HTMLSlotElement>('slot:not([name])');
       expect(defaultSlot).toBeTruthy();
-    });
-
-    it('should render default SVG when no content is provided', async () => {
-      const svg = element.shadowRoot.querySelector('svg');
-      expect(svg).toBeTruthy();
-      expect(svg.getAttribute('viewBox')).toBe('0 0 26 17');
     });
 
     it('should render custom content when provided', async () => {

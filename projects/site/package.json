@@ -229,7 +229,6 @@
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "@sentry/browser": "catalog:",
     "compare-versions": "6.1.1",
     "eslint": "catalog:",
     "stylelint": "catalog:",

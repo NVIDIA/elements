@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 nve-tabs,
 nve-tabs {
   --indicator-background: var(--nve-sys-accent-secondary-background);
