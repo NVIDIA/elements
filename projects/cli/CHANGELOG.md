@@ -1,3 +1,14 @@
+## <small>0.12.3 (2026-04-02)</small>
+
+* fix(elements): update aria-orientation and event config ([71e0d9a](https://github.com/NVIDIA/elements/commit/71e0d9a))
+* fix(labs-cli): simplify update check logic and improve notification handling ([ab1c5bc](https://github.com/NVIDIA/elements/commit/ab1c5bc))
+* chore(docs): cdn path updates ([7a13e51](https://github.com/NVIDIA/elements/commit/7a13e51))
+* chore(docs): cli deployment path for windows binary ([4dc45ef](https://github.com/NVIDIA/elements/commit/4dc45ef))
+* chore(docs): env var fixes ([096b5c6](https://github.com/NVIDIA/elements/commit/096b5c6))
+* chore(docs): icon docs cleanup ([e47c167](https://github.com/NVIDIA/elements/commit/e47c167))
+* chore(elements): add tests ([8299260](https://github.com/NVIDIA/elements/commit/8299260))
+* chore(release): @nvidia-elements/core-v1.66.1 [skip ci] ([c11fd0d](https://github.com/NVIDIA/elements/commit/c11fd0d))
+
 ## <small>0.12.2 (2026-03-31)</small>
 
 * chore(ci): cleanup build env ([53b1403](https://github.com/NVIDIA/elements/commit/53b1403))
