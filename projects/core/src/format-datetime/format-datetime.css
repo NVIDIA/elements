@@ -1,0 +1,11 @@
+:host {
+  display: inline;
+}
+
+[internal-host] {
+  color: var(--nve-sys-text-color, inherit);
+}
+
+slot {
+  display: none;
+}
