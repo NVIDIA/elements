@@ -382,6 +382,18 @@
       "types": "./dist/file/define.d.ts",
       "default": "./dist/file/define.js"
     },
+    "./format-datetime": {
+      "types": "./dist/format-datetime/index.d.ts",
+      "default": "./dist/format-datetime/index.js"
+    },
+    "./format-datetime/index.js": {
+      "types": "./dist/format-datetime/index.d.ts",
+      "default": "./dist/format-datetime/index.js"
+    },
+    "./format-datetime/define.js": {
+      "types": "./dist/format-datetime/define.d.ts",
+      "default": "./dist/format-datetime/define.js"
+    },
     "./forms": {
       "types": "./dist/forms/index.d.ts",
       "default": "./dist/forms/index.js"
