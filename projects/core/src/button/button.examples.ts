@@ -249,7 +249,7 @@ export const FormSubmit = {
 }
 
 /**
- * @summary The form control option styles a button like a form field. Use this pattern when a button opens custom controls such as dropdowns, filter menus, or pickers so the UI stays cohesive and users recognize the trigger as part of the form.
+ * @summary Use the form control option for buttons that open custom controls such as dropdowns, filter menus, or pickers within a form layout. This pattern keeps the UI cohesive and helps users recognize the button as part of the form.
  */
 export const FormControl = {
   render: () => html`
@@ -327,8 +327,8 @@ export const ProgressDisclosure = {
 };
 
 /**
- * @summary Use standard interaction styling to maintain maximum button contrast on varied backgrounds. This pattern applies the correct static light or dark theme colors so actions stay visible in toolbars, alerts, and cards.
- * @tags test-case
+ * @summary Use standard interaction styling to keep buttons readable on contrasting backgrounds in light and dark themes. This pattern verifies the static button colors that deliver the intended contrast for each theme.
+ * @tags pattern
  */
 export const ContrastColoredBackgrounds = {
   render: () => html`
