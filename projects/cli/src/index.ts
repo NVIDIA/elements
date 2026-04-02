@@ -6,16 +6,10 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { type ManagedToolMethod, tools, ToolSupport, type Schema } from '@internals/tools';
 import { banner, colors, getArgValue, renderResult, runAsyncTool } from './utils.js';
-import { checkForUpdates, notifyIfUpdateAvailable } from './update.js';
+import { notifyIfUpdateAvailable } from './update.js';
 
 export const VERSION = '0.0.0';
 export const BUILD_SHA = '__NVE_BUILD_CHECKSUM__';
-
-let updateCheck: Promise<boolean>;
-function getUpdateCheck() {
-  updateCheck ??= checkForUpdates(BUILD_SHA);
-  return updateCheck;
-}
 
 process.on('SIGINT', () => process.exit(0));
 
@@ -57,7 +51,7 @@ yargsInstance.command(
     } else {
       const greeting = colors.complete(`\x1b[?7l\n${JSON.parse(banner)}\n\n`);
       console.log(`${greeting}${colors.complete(`@nvidia-elements/cli (${BUILD_SHA})`)}\n\n${await yargsInstance.getHelp()}`);
-      await notifyIfUpdateAvailable(getUpdateCheck());
+      await notifyIfUpdateAvailable(BUILD_SHA);
     }
   }
 );
@@ -98,7 +92,7 @@ tools
 
         if (status === 'complete') {
           await renderResult(result);
-          await notifyIfUpdateAvailable(getUpdateCheck());
+          await notifyIfUpdateAvailable(BUILD_SHA);
           process.exit(0);
         } else {
           console.log(colors.error(message ?? 'unknown error'));

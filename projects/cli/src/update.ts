@@ -1,4 +1,4 @@
-import { readNveConfig, saveNveConfig, type UpdateConfig } from '@internals/tools';
+import { readNveConfig, saveNveConfig, type NveConfig } from '@internals/tools';
 import { colors } from './utils.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
@@ -24,42 +24,39 @@ export async function fetchLatestSha(): Promise<string> {
   }
 }
 
-export function isUpdateAvailable(currentSha: string, latestSha: string): boolean {
-  return latestSha !== '' && currentSha !== latestSha;
-}
-
-export function shouldCheckForUpdates(update: UpdateConfig): boolean {
-  return update.lastCheck === 0 || Date.now() - update.lastCheck >= 24 * 60 * 60 * 1000; // 24 hours
-}
-
-export async function checkForUpdates(currentSha: string): Promise<boolean> {
-  if (process.env.CI) {
+export async function isUpdateAvailable(currentSha: string): Promise<boolean> {
+  if (process.env.CI || !process.stdout.isTTY) {
     return false;
   }
 
-  const config = readNveConfig();
-  const { update } = config;
+  try {
+    const config: NveConfig = readNveConfig();
+    let latestSha = '';
 
-  if (shouldCheckForUpdates(update)) {
-    fetchLatestSha()
-      .then(latestSha => saveNveConfig({ ...config, update: { lastCheck: Date.now(), latestSha } }))
-      .catch(() => {});
+    const shouldCheckForUpdate =
+      config.update.lastCheck === 0 || Date.now() - config.update.lastCheck >= 24 * 60 * 60 * 1000; // 24 hours
+    if (shouldCheckForUpdate) {
+      latestSha = await fetchLatestSha();
+      saveNveConfig({ ...config, update: { lastCheck: Date.now(), latestSha } });
+    }
+
+    return latestSha !== '' && currentSha !== latestSha;
+  } catch {
+    return false;
   }
-
-  return isUpdateAvailable(currentSha, update.latestSha);
 }
 
 /**
  * Shows update notification if a newer build is available.
  * Call after command execution with the promise from checkForUpdates().
  */
-export async function notifyIfUpdateAvailable(checkPromise: Promise<boolean>): Promise<void> {
+export async function notifyIfUpdateAvailable(buildSha: string): Promise<void> {
   if (process.env.CI || !process.stdout.isTTY) {
     return;
   }
 
   try {
-    const updateAvailable = await checkPromise;
+    const updateAvailable = await isUpdateAvailable(buildSha);
     if (updateAvailable) {
       const border = '─'.repeat(50);
       console.log(
