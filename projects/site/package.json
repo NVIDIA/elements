@@ -235,7 +235,7 @@
     "eslint": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
-    "html-minifier": "4.0.0",
+    "html-minifier-next": "5.2.2",
     "lighthouse": "catalog:",
     "lightningcss": "1.30.2",
     "markdown-it": "catalog:",
