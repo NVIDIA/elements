@@ -1,7 +1,7 @@
 /* eslint-env node */
 /* global process */
 
-import htmlMinify from 'html-minifier';
+import htmlMinify from 'html-minifier-next';
 import { transform } from 'lightningcss';
 
 export async function htmlMinifyTransform(content) {
