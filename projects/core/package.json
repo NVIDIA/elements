@@ -6,6 +6,10 @@
   },
   "description": "The Design Language for AI/ML Factories Building at the Speed of Light. Provides a set of accessible and themeable UI elements.",
   "homepage": "https://NVIDIA.github.io/elements/",
+  "publishConfig": {
+    "provenance": true,
+    "public": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NVIDIA/elements.git"

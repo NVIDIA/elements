@@ -6,6 +6,14 @@
   },
   "description": "Command-line interface for Elements development and tooling, providing interactive prompts, project scaffolding, and integration with AI assistants via Model Context Protocol.",
   "type": "module",
+  "publishConfig": {
+    "provenance": true,
+    "public": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git"
+  },
   "sideEffects": false,
   "bin": {
     "nve": "./dist/index.js",

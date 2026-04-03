@@ -6,6 +6,10 @@
   },
   "description": "Provides integration with VS Code's Monaco editor for code editing, syntax highlighting, and diff visualization.",
   "homepage": "https://NVIDIA.github.io/elements/",
+  "publishConfig": {
+    "provenance": true,
+    "public": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NVIDIA/elements.git"
