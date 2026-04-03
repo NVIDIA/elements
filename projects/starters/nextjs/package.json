@@ -13,12 +13,13 @@
   },
   "dependencies": {
     "@lit-labs/nextjs": "0.2.4",
+    "@lit-labs/ssr-react": "catalog:",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "next": "15.5.3"
+    "next": "16.2.2"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
@@ -48,13 +49,13 @@
       ]
     },
     "dev": {
-      "command": "next dev",
+      "command": "next dev --webpack",
       "dependencies": [
         "build"
       ]
     },
     "build": {
-      "command": "next build",
+      "command": "next build --webpack",
       "files": [
         "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",

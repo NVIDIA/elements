@@ -5,3 +5,5 @@ declare module 'react' {
     interface IntrinsicElements extends CustomElements {}
   }
 }
+
+declare module '@lit-labs/ssr-react/enable-lit-ssr.js';
