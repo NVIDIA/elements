@@ -1,3 +1,18 @@
+## <small>0.12.4 (2026-04-03)</small>
+
+* chore(ci): align publish configs ([cac1e0d](https://github.com/NVIDIA/elements/commit/cac1e0d))
+* chore(ci): fix publish configs ([c53b5bc](https://github.com/NVIDIA/elements/commit/c53b5bc))
+* chore(ci): update lockfile ([720aacc](https://github.com/NVIDIA/elements/commit/720aacc))
+* chore(docs): nve-button guidelines only ([4c23630](https://github.com/NVIDIA/elements/commit/4c23630))
+* chore(docs): update html minify ([909984b](https://github.com/NVIDIA/elements/commit/909984b))
+* chore(elements): update svgo ([c091d12](https://github.com/NVIDIA/elements/commit/c091d12))
+* chore(release): @nvidia-elements/core-v1.66.2 [skip ci] ([b180829](https://github.com/NVIDIA/elements/commit/b180829))
+* chore(starters): update angular ([8c47601](https://github.com/NVIDIA/elements/commit/8c47601))
+* chore(starters): upgrade nextjs ([0bdba15](https://github.com/NVIDIA/elements/commit/0bdba15))
+* fix(elements): register dropdown-group in bundle ([cb6921f](https://github.com/NVIDIA/elements/commit/cb6921f))
+* fix(labs-cli): update sdk version ([2d916ae](https://github.com/NVIDIA/elements/commit/2d916ae))
+* feat(internals): add bundle registration rule ([007984e](https://github.com/NVIDIA/elements/commit/007984e))
+
 ## <small>0.12.3 (2026-04-02)</small>
 
 * fix(elements): update aria-orientation and event config ([71e0d9a](https://github.com/NVIDIA/elements/commit/71e0d9a))
