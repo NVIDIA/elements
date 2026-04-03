@@ -1,3 +1,16 @@
+## <small>1.66.2 (2026-04-03)</small>
+
+* feat(internals): add bundle registration rule ([007984e](https://github.com/NVIDIA/elements/commit/007984e))
+* fix(elements): register dropdown-group in bundle ([cb6921f](https://github.com/NVIDIA/elements/commit/cb6921f))
+* fix(labs-cli): simplify update check logic and improve notification handling ([ab1c5bc](https://github.com/NVIDIA/elements/commit/ab1c5bc))
+* chore(ci): align publish configs ([cac1e0d](https://github.com/NVIDIA/elements/commit/cac1e0d))
+* chore(docs): cdn path updates ([7a13e51](https://github.com/NVIDIA/elements/commit/7a13e51))
+* chore(docs): cli deployment path for windows binary ([4dc45ef](https://github.com/NVIDIA/elements/commit/4dc45ef))
+* chore(docs): env var fixes ([096b5c6](https://github.com/NVIDIA/elements/commit/096b5c6))
+* chore(docs): icon docs cleanup ([e47c167](https://github.com/NVIDIA/elements/commit/e47c167))
+* chore(docs): nve-button guidelines only ([4c23630](https://github.com/NVIDIA/elements/commit/4c23630))
+* chore(release): @nvidia-elements/cli-v0.12.3 [skip ci] ([ea601ed](https://github.com/NVIDIA/elements/commit/ea601ed))
+
 ## <small>1.66.1 (2026-03-31)</small>
 
 * chore(ci): cleanup build env ([53b1403](https://github.com/NVIDIA/elements/commit/53b1403))
