@@ -6,6 +6,10 @@
   },
   "description": "Code authoring related components. Providing syntax-highlighted code blocks with support for multiple programming languages.",
   "homepage": "https://NVIDIA.github.io/elements/",
+  "publishConfig": {
+    "provenance": true,
+    "public": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NVIDIA/elements.git"

@@ -249,7 +249,7 @@ export const FormSubmit = {
 }
 
 /**
- * @summary The form control option allows a button to be styled like a control field. This is helpful for using button to trigger custom form control components like dropdowns, filter menus, or pickers to enusre the UI feels cohesive and a button is perceived as part of the form.
+ * @summary The form control option styles a button like a form field. Use this pattern when a button opens custom controls such as dropdowns, filter menus, or pickers so the UI stays cohesive and users recognize the trigger as part of the form.
  */
 export const FormControl = {
   render: () => html`
@@ -316,7 +316,6 @@ export const InvalidLinkButton = {
 
 /**
  * @summary Use a progress ring within a button to communicate that an action is processing and prevent repeated submissions. Limit this pattern to short, indeterminate actions (about five seconds or less); for longer or determinate tasks, use a progress bar or ring outside the button.
- * @tags pattern
  */
 export const ProgressDisclosure = {
   render: () => html`
@@ -328,37 +327,37 @@ export const ProgressDisclosure = {
 };
 
 /**
- * @summary To ensure max contrast of a button with the background, leverage standard interaction styling. Many styles in development are computed dynamically, this asserts the use of the correct static button color for light or dark themes.
- * @tags pattern
+ * @summary Use standard interaction styling to maintain maximum button contrast on varied backgrounds. This pattern applies the correct static light or dark theme colors so actions stay visible in toolbars, alerts, and cards.
+ * @tags test-case
  */
 export const ContrastColoredBackgrounds = {
   render: () => html`
-    <div nve-layout="column gap:lg" style="width: 280px">
-            <nve-toolbar status="accent">
-              <div nve-text="label medium sm">10 Selected</div>
-              <nve-button slot="suffix">Edit</nve-button></nve-toolbar
-            >
+<div nve-layout="column gap:lg" style="width: 280px">
+  <nve-toolbar status="accent">
+    <div nve-text="label medium sm">10 Selected</div>
+    <nve-button slot="suffix">Edit</nve-button>
+  </nve-toolbar>
 
-            <nve-alert-group status="danger">
-              <nve-alert> Error Detected <nve-button slot="actions" container="flat">Review</nve-button> </nve-alert>
-            </nve-alert-group>
+  <nve-alert-group status="danger">
+    <nve-alert> Error Detected <nve-button slot="actions" container="flat">Review</nve-button> </nve-alert>
+  </nve-alert-group>
 
-            <nve-card style="width: 280px">
-              <nve-card-content 
-              style="width: 100%;
-              height: 100%;
-              aspect-ratio: 16/9;
-              object-fit: cover;
-              background: repeating-conic-gradient(var(--nve-sys-layer-overlay-background) 0% 25%, transparent 0% 50%) 50% / 40px 40px;
-              background-position: center;
-              border-style: hidden;"> </nve-card-content>
-              <nve-card-footer>
-                <div nve-layout="row gap:xs">
-                  <nve-button container="flat" style="margin-left: auto">Cancel</nve-button>
-                  <nve-button>action</nve-button>
-                </div>
-              </nve-card-footer>
-            </nve-card>
-          </div>
+  <nve-card style="width: 280px">
+    <nve-card-content 
+      style="width: 100%;
+      height: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      background: repeating-conic-gradient(var(--nve-sys-layer-overlay-background) 0% 25%, transparent 0% 50%) 50% / 40px 40px;
+      background-position: center;
+      border-style: hidden;"> </nve-card-content>
+    <nve-card-footer>
+      <div nve-layout="row gap:xs">
+        <nve-button container="flat" style="margin-left: auto">Cancel</nve-button>
+        <nve-button>action</nve-button>
+      </div>
+    </nve-card-footer>
+  </nve-card>
+</div>
   `
 };

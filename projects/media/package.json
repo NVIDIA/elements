@@ -3,6 +3,14 @@
   "version": "0.0.0",
   "description": "Media playback UI components for Elements",
   "type": "module",
+  "publishConfig": {
+    "provenance": true,
+    "public": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NVIDIA/elements.git"
+  },
   "customElements": "dist/custom-elements.json",
   "contributes": {
     "html": {
