@@ -6,10 +6,6 @@
   },
   "description": "Create new Elements projects with 'npm create @nve'. A thin wrapper that delegates to @nvidia-elements/cli for project scaffolding.",
   "type": "module",
-  "publishConfig": {
-    "provenance": true,
-    "public": true
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NVIDIA/elements.git"

@@ -7,10 +7,6 @@
   "description": "Themes for the Elements design system, providing comprehensive color palettes, typography, and spacing.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "customElements": "dist/custom-elements.json",
-  "publishConfig": {
-    "provenance": true,
-    "public": true
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NVIDIA/elements.git"
