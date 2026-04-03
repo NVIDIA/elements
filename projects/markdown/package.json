@@ -6,10 +6,6 @@
   },
   "description": "A suite of markdown components and utilities.",
   "homepage": "https://NVIDIA.github.io/elements/",
-  "publishConfig": {
-    "provenance": true,
-    "public": true
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NVIDIA/elements.git"
