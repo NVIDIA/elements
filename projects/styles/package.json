@@ -7,10 +7,6 @@
   "description": "Core CSS foundation for the Elements design system, providing layout utilities, typography styles, and view transitions.",
   "homepage": "https://NVIDIA.github.io/elements/",
   "customElements": "dist/custom-elements.json",
-  "publishConfig": {
-    "provenance": true,
-    "public": true
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NVIDIA/elements.git"
