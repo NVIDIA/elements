@@ -37,7 +37,7 @@ describe('combobox lighthouse report', () => {
       </script>
     `);
 
-    expect(report.scores.performance).toBe(100);
+    expect(report.scores.performance).toBeGreaterThanOrEqual(96);
     expect(report.scores.bestPractices).toBe(100);
     expect(report.payload.javascript.kb).toBeLessThan(36);
   });

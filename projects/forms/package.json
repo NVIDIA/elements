@@ -6,6 +6,10 @@
   },
   "description": "Form control utilities and validation providing mixins, validators, and schema-based validation. Includes form association, event handling, and support for complex data types.",
   "homepage": "https://NVIDIA.github.io/elements/",
+  "publishConfig": {
+    "provenance": true,
+    "public": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NVIDIA/elements.git"
