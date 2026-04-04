@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/create",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "release": {
     "extends": "../../release.config.js"
   },
