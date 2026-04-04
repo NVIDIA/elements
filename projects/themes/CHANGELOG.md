@@ -1,0 +1,15 @@
+## <small>0.0.1 (2026-04-04)</small>
+
+* fix(cli): reset versions ([ee3ce87](https://github.com/NVIDIA/elements/commit/ee3ce87))
+* fix(code): reset versions ([83e855d](https://github.com/NVIDIA/elements/commit/83e855d))
+* fix(core): reset versions ([1a730b2](https://github.com/NVIDIA/elements/commit/1a730b2))
+* fix(create): reset versions ([89f5cc5](https://github.com/NVIDIA/elements/commit/89f5cc5))
+* fix(forms): reset versions ([b0543bb](https://github.com/NVIDIA/elements/commit/b0543bb))
+* fix(lint): reset versions ([cb78058](https://github.com/NVIDIA/elements/commit/cb78058))
+* fix(markdown): reset versions ([0796512](https://github.com/NVIDIA/elements/commit/0796512))
+* fix(monaco): reset versions ([ce620b0](https://github.com/NVIDIA/elements/commit/ce620b0))
+* fix(styles): reset versions ([8bba4fd](https://github.com/NVIDIA/elements/commit/8bba4fd))
+* fix(themes): reset versions ([84e0bf2](https://github.com/NVIDIA/elements/commit/84e0bf2))
+* chore(ci): add dependency audit report ([610ce63](https://github.com/NVIDIA/elements/commit/610ce63))
+* chore(ci): add spdx license headers ([f1698e9](https://github.com/NVIDIA/elements/commit/f1698e9))
+* chore(ci): regenerate lockfile after migration ([8444403](https://github.com/NVIDIA/elements/commit/8444403))
