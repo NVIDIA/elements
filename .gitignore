@@ -28,3 +28,5 @@ vite.*.ts.timestamp*
 config/vale/bin
 config/vale/styles/Google
 config/vale/styles/write-good
+.husky/_/
+DEPENDENCIES.json
