@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { Element } from '@internals/metadata';
 
 export type ELEMENTS_ENV = 'mcp' | 'cli' | 'browser' | 'docs';

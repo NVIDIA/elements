@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 :host {
   --nve-sys-interaction-background: var(--nve-sys-interaction-background-200);
   --nve-sys-interaction-field-background: var(--nve-sys-interaction-background-200);

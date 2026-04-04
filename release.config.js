@@ -3,9 +3,7 @@ import fs from 'node:fs';
 const DRY_RUN = false;
 const packageFilePath = `${process.cwd()}/package.json`;
 const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
-// @nvidia-elements/core -> elements, @nvidia-elements/cli -> labs-cli
-const [org, pkg] = packageFile.name.split('/');
-const scope = org === '@nve-labs' ? `labs-${pkg}` : pkg;
+const [_org, scope] = packageFile.name.split('/');
 
 /**
  * https://github.com/semantic-release/semantic-release
@@ -73,7 +71,8 @@ export default {
           {
             files: [`${process.cwd()}/dist/**/*.js`],
             from: '"0.0.0"',
-            to: '"${nextRelease.version}"'
+            to: '"${nextRelease.version}"',
+            allowEmptyPaths: true
           }
         ]
       }
@@ -81,10 +80,7 @@ export default {
     [
       '@semantic-release/exec',
       {
-        publishCmd: [
-          `pnpm publish --no-git-checks --registry=$URM_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`,
-          `pnpm publish --no-git-checks --registry=$MAGLEV_ELEMENTS_NPM_CONFIG_REGISTRY ${DRY_RUN ? '--dry-run' : ''}`
-        ].join(' && ')
+        publishCmd: `pnpm publish --no-git-checks --registry=https://registry.npmjs.org ${DRY_RUN ? '--dry-run' : ''}`
       }
     ],
     [
@@ -95,7 +91,7 @@ export default {
       }
     ],
     [
-      '@semantic-release/gitlab',
+      '@semantic-release/github',
       {
         successComment:
           '🎉 This issue has been resolved in version ${nextRelease.version} 🎉\n\n[Changelog](https://NVIDIA.github.io/elements/docs/changelog/)',
@@ -103,7 +99,8 @@ export default {
           {
             label: packageFile.name,
             type: 'package',
-            url: `https://registry.npmjs.org'/', '%2F')}`
+            name: `${packageFile.name.replace('/', '-')}-\${nextRelease.version}.tgz`,
+            path: `${packageFile.name.replace('/', '-')}-\${nextRelease.version}.tgz`
           }
         ]
       }

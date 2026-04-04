@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { html, LitElement } from 'lit';
 import { hostAttr, useStyles } from '@nvidia-elements/core/internal';
 import styles from './page-panel-footer.css?inline';

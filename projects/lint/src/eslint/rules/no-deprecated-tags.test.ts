@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { describe, it, expect } from 'vitest';
 import { RuleTester } from 'eslint';
 import type { JSRuleDefinition } from 'eslint';
@@ -58,7 +61,7 @@ describe('noDeprecatedTags', () => {
     });
   });
 
-  it('should report unexpected use of deprecated v0 nve-* tags', () => {
+  it('should report unexpected use of deprecated v0 mlv-* tags', () => {
     const tester = new RuleTester({
       languageOptions: {
         parser: htmlParser,
@@ -72,38 +75,38 @@ describe('noDeprecatedTags', () => {
       valid: [],
       invalid: [
         {
-          code: '<nve-button></nve-button>',
-          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-button', replacement: 'nve-button' } }]
+          code: '<mlv-button></mlv-button>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-button', replacement: 'nve-button' } }]
         },
         {
-          code: '<nve-input></nve-input>',
-          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-input', replacement: 'nve-input' } }]
+          code: '<mlv-input></mlv-input>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-input', replacement: 'nve-input' } }]
         },
         {
-          code: '<nve-dialog></nve-dialog>',
-          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-dialog', replacement: 'nve-dialog' } }]
+          code: '<mlv-dialog></mlv-dialog>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-dialog', replacement: 'nve-dialog' } }]
         },
         {
-          code: '<nve-grid></nve-grid>',
-          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-grid', replacement: 'nve-grid' } }]
+          code: '<mlv-grid></mlv-grid>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-grid', replacement: 'nve-grid' } }]
         },
         {
-          code: '<nve-tabs></nve-tabs>',
-          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-tabs', replacement: 'nve-tabs' } }]
+          code: '<mlv-tabs></mlv-tabs>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-tabs', replacement: 'nve-tabs' } }]
         },
         {
-          code: '<nve-accordion></nve-accordion>',
+          code: '<mlv-accordion></mlv-accordion>',
           errors: [
-            { messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-accordion', replacement: 'nve-accordion' } }
+            { messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-accordion', replacement: 'nve-accordion' } }
           ]
         },
         {
-          code: '<nve-menu></nve-menu>',
-          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-menu', replacement: 'nve-menu' } }]
+          code: '<mlv-menu></mlv-menu>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-menu', replacement: 'nve-menu' } }]
         },
         {
-          code: '<nve-tooltip></nve-tooltip>',
-          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'nve-tooltip', replacement: 'nve-tooltip' } }]
+          code: '<mlv-tooltip></mlv-tooltip>',
+          errors: [{ messageId: 'unexpected-deprecated-tag', data: { tag: 'mlv-tooltip', replacement: 'nve-tooltip' } }]
         }
       ]
     });

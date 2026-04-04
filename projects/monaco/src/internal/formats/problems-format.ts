@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { Monaco } from '@nvidia-elements/monaco';
 import type * as monaco from '@nvidia-elements/monaco';
 

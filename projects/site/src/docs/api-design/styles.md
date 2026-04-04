@@ -89,7 +89,6 @@ The internal host element is a pattern that provides an API guard on the element
 <!-- element internal template -->
 <slot></slot>
 
-
 <!-- element internal styles -->
 <style>
   :host {

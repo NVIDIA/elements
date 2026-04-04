@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { generateId } from './dom.js';
 
 export function attachInternals(element: HTMLElement & { _internals?: ElementInternals }) {

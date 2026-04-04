@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { GlobalStateService } from '../services/global.service.js';

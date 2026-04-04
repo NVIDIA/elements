@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { describe, expect, it, vi } from 'vitest';
 import { searchChangelogs, findPublicAPIChangelog, limitChangelogVersions, getPackage, scopeOrder } from './utils.js';
 
@@ -175,9 +178,9 @@ describe('scopeOrder', () => {
     expect(scopeOrder('@nvidia-elements/themes')).toBe(-1);
   });
 
-  it('should return 1 for @nvidia-elements/ packages', () => {
-    expect(scopeOrder('@nvidia-elements/forms')).toBe(1);
-    expect(scopeOrder('@nvidia-elements/code')).toBe(1);
+  it('should return -1 for other @nvidia-elements/ packages', () => {
+    expect(scopeOrder('@nvidia-elements/forms')).toBe(-1);
+    expect(scopeOrder('@nvidia-elements/code')).toBe(-1);
   });
 
   it('should return 0 for unrecognized scopes', () => {

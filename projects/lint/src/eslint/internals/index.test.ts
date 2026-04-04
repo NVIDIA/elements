@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { describe, it, expect } from 'vitest';
 import { lintPlaygroundTemplate } from './index.js';
 
@@ -109,7 +112,7 @@ describe('lintPlaygroundTemplate', () => {
   });
 
   it('should handle suggestions', async () => {
-    const codeWithSuggestion = '<nve-button nve-layout="pad:md">Button</nve-button>';
+    const codeWithSuggestion = '<nve-button mlv-layout="pad:md">Button</nve-button>';
     const result = await lintPlaygroundTemplate(codeWithSuggestion);
     expect(result.length).toBeGreaterThan(0);
 

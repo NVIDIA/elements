@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { execSync, spawnSync } from 'node:child_process';
 import { describe, it, expect } from 'vitest';
 import { VERSION } from './index.js';

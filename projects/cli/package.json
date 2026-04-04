@@ -19,7 +19,9 @@
     "README.md",
     "CHANGELOG.md",
     "package.json",
-    "dist/**/*"
+    "dist/**/manifest.json",
+    "dist/**/*.d.ts",
+    "dist/**/*.js"
   ],
   "scripts": {
     "dev": "pnpm run nve:install && pnpm dlx @modelcontextprotocol/inspector@0.21.1 node ./dist/index.js mcp",
@@ -196,5 +198,8 @@
         "NODE_ENV": "production"
       }
     }
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }

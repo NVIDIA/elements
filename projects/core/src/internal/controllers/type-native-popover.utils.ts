@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { LogService } from '../services/log.service.js';
 import { getIdMatchNotFoundWarning } from '../utils/audit-logs.js';
 import { generateId, getFlattenedDOMTree, getAnchorNames, appendAnchorName } from '../utils/dom.js';

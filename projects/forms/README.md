@@ -4,8 +4,8 @@ Form control utilities providing mixins, validation, and schema support for cust
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/elements/forms/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-- [GitLab Repo](https://github.com/NVIDIA/elements)
-- [Artifactory](https://registry.npmjs.org
+- [GitHub Repo](https://github.com/NVIDIA/elements)
+- [NPM](https://registry.npmjs.org
 
 ## Getting Started
 

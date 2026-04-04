@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 nve-grid-row:has(nve-grid-cell:first-child [nve-control] > input:checked) nve-grid-cell,
 nve-grid-row:has(nve-grid-cell:first-child [nve-control] > input:checked) nve-grid-cell {
   --background: var(--nve-sys-interaction-highlighted-muted-background);

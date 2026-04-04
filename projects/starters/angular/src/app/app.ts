@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import '@nvidia-elements/core/page/define.js';
 import '@nvidia-elements/core/page-header/define.js';

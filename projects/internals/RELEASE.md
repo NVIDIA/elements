@@ -35,7 +35,7 @@ packages:
   - 'projects/my-library'
 ```
 
-2. Create an initial tag on GitLab https://github.com/NVIDIA/elements/-/tags/new
+2. Create an initial tag on GitHub 
 
 ```
 @nvidia-elements/my-library-v0.0.0
@@ -76,7 +76,7 @@ packages:
 export const VERSION = '0.0.0';
 ```
 
-6. Add the library artifacts to the GitLab CI upload in `.github/workflows/ci.yml`
+6. Add the library artifacts to the CI upload in `.github/workflows/ci.yml`
 
 ```yml
 artifacts:
@@ -87,7 +87,7 @@ artifacts:
       - projects/my-library/package.json
 ```
 
-7. Add library code coverage reports to GitLab CI upload in `.github/workflows/ci.yml`
+7. Add library code coverage reports to CI upload in `.github/workflows/ci.yml`
 
 ```yml
 reports:

@@ -187,5 +187,8 @@
         "../lint:build"
       ]
     }
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }

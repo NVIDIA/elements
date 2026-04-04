@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { define, TransitionService } from '@nvidia-elements/core/internal';
 import { Page, PagePanel, PagePanelContent, PagePanelFooter, PagePanelHeader } from '@nvidia-elements/core/page';
 
