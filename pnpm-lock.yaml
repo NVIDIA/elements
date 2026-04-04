@@ -97,8 +97,8 @@ catalogs:
       specifier: ^3.3.2
       version: 3.3.2
     markdown-it:
-      specifier: 14.1.0
-      version: 14.1.0
+      specifier: 14.1.1
+      version: 14.1.1
     markdown-it-link-attributes:
       specifier: 4.0.1
       version: 4.0.1
@@ -922,7 +922,7 @@ importers:
         version: 3.3.2
       markdown-it:
         specifier: 'catalog:'
-        version: 14.1.0
+        version: 14.1.1
     devDependencies:
       '@eslint/js':
         specifier: 'catalog:'
@@ -1205,7 +1205,7 @@ importers:
         version: 1.30.2
       markdown-it:
         specifier: 'catalog:'
-        version: 14.1.0
+        version: 14.1.1
       markdown-it-link-attributes:
         specifier: 'catalog:'
         version: 4.0.1
@@ -1352,7 +1352,7 @@ importers:
         version: 9.39.2(jiti@2.6.1)
       markdown-it:
         specifier: 'catalog:'
-        version: 14.1.0
+        version: 14.1.1
       typescript:
         specifier: 'catalog:'
         version: 6.0.2
@@ -9866,8 +9866,8 @@ packages:
   markdown-it-link-attributes@4.0.1:
     resolution: {integrity: sha512-pg5OK0jPLg62H4k7M9mRJLT61gUp9nvG0XveKYHMOOluASo9OEF13WlXrpAp2aj35LbedAy3QOCgQCw0tkLKAQ==}
 
-  markdown-it@14.1.0:
-    resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
+  markdown-it@14.1.1:
+    resolution: {integrity: sha512-BuU2qnTti9YKgK5N+IeMubp14ZUKUUw7yeJbkjtosvHiP0AZ5c8IAgEMk79D0eC8F23r4Ac/q8cAIFdm2FtyoA==}
     hasBin: true
 
   marked-terminal@7.3.0:
@@ -13362,7 +13362,7 @@ snapshots:
       kleur: 4.1.5
       liquidjs: 10.25.2
       luxon: 3.7.2
-      markdown-it: 14.1.0
+      markdown-it: 14.1.1
       minimist: 1.2.8
       moo: 0.5.3
       node-retrieve-globals: 6.0.1
@@ -22002,7 +22002,7 @@ snapshots:
 
   markdown-it-link-attributes@4.0.1: {}
 
-  markdown-it@14.1.0:
+  markdown-it@14.1.1:
     dependencies:
       argparse: 2.0.1
       entities: 4.5.0
