@@ -11,18 +11,28 @@ export default {
 };
 
 /**
- * @summary Basic tabs component for organizing content into selectable sections with disabled state support.
+ * @summary Tabs group component for organizing content into selectable sections with disabled state support.
  */
 export const Default = {
   render: () => html`
-<nve-tabs behavior-select>
-  <nve-tabs-item selected>Tab 1</nve-tabs-item>
-  <nve-tabs-item>Tab 2</nve-tabs-item>
-  <nve-tabs-item>Tab 3</nve-tabs-item>
-  <nve-tabs-item>Tab 4</nve-tabs-item>
-  <nve-tabs-item disabled>Disabled</nve-tabs-item>
-</nve-tabs>`
+<nve-tabs-group id="tab-group-default">
+  <nve-tabs>
+    <nve-tabs-item selected command="--toggle" commandfor="tab-group-default" value="overview">Overview</nve-tabs-item>
+    <nve-tabs-item command="--toggle" commandfor="tab-group-default" value="details">Details</nve-tabs-item>
+    <nve-tabs-item command="--toggle" commandfor="tab-group-default" value="settings">Settings</nve-tabs-item>
+  </nve-tabs>
+  <div slot="overview">
+    overview content
+  </div>
+  <div slot="details">
+    details content
+  </div>
+  <div slot="settings">
+    settings content
+  </div>
+</nve-tabs-group>`
 };
+
 
 /**
  * @summary Borderless tabs variant for minimal visual styling without border emphasis.
@@ -201,7 +211,7 @@ export const GroupPanels = {
     <nve-tabs-item command="--toggle" commandfor="tab-group" value="settings">Settings</nve-tabs-item>
   </nve-tabs>
   <div slot="overview">
-    <nve-card style="width: min(100%, 520px)">
+    <nve-card style="width: 100%; min-width: 320px;">
       <nve-card-header>
         <div nve-layout="column gap:xs">
           <h2 nve-text="heading sm bold">Overview</h2>
@@ -221,7 +231,7 @@ export const GroupPanels = {
     </nve-card>
   </div>
   <div slot="details">
-    <nve-card style="width: min(100%, 520px)">
+    <nve-card style="width: 100%; min-width: 320px;">
       <nve-card-header>
         <div nve-layout="column gap:xs">
           <h2 nve-text="heading sm bold">Details</h2>
@@ -241,7 +251,155 @@ export const GroupPanels = {
     </nve-card>
   </div>
   <div slot="settings">
-    <nve-card style="width: min(100%, 520px)">
+    <nve-card style="width: 100%; min-width: 320px;">
+      <nve-card-header>
+        <div nve-layout="column gap:xs">
+          <h2 nve-text="heading sm bold">Settings</h2>
+          <p nve-text="body sm muted">Configuration notes for authors and downstream consumers.</p>
+        </div>
+      </nve-card-header>
+      <nve-card-content>
+        <dl nve-layout="grid gap:sm">
+          <dt nve-layout="span:4" nve-text="body muted medium">Selection</dt>
+          <dd nve-layout="span:8" nve-text="body">Controlled by the active tab value</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Panels</dt>
+          <dd nve-layout="span:8" nve-text="body">Matched by slot name</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Actions</dt>
+          <dd nve-layout="span:8" nve-text="body">External buttons can drive the same group</dd>
+        </dl>
+      </nve-card-content>
+    </nve-card>
+  </div>
+</nve-tabs-group>`
+};
+
+/**
+ * @summary Tab group with vertical tab strip at inline-start beside slot-matched panels for sidebar-style settings and details layouts in LTR.
+ */
+export const GroupVerticalPanels = {
+  render: () => html`
+<nve-tabs-group id="tab-group-vertical-start" alignment="start">
+  <nve-tabs vertical style="width: 250px">
+    <nve-tabs-item selected command="--toggle" commandfor="tab-group-vertical-start" value="overview">Overview</nve-tabs-item>
+    <nve-tabs-item command="--toggle" commandfor="tab-group-vertical-start" value="details">Details</nve-tabs-item>
+    <nve-tabs-item command="--toggle" commandfor="tab-group-vertical-start" value="settings">Settings</nve-tabs-item>
+  </nve-tabs>
+  <div slot="overview" style="width: 100%; min-width: 320px;">
+    <nve-card style="width: 100%">
+      <nve-card-header>
+        <div nve-layout="column gap:xs">
+          <h2 nve-text="heading sm bold">Overview</h2>
+          <p nve-text="body sm muted">High-level release status and current priorities.</p>
+        </div>
+      </nve-card-header>
+      <nve-card-content>
+        <dl nve-layout="grid gap:sm">
+          <dt nve-layout="span:4" nve-text="body muted medium">Status</dt>
+          <dd nve-layout="span:8" nve-text="body">Ready for review</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Audience</dt>
+          <dd nve-layout="span:8" nve-text="body">Design and product owners</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Next step</dt>
+          <dd nve-layout="span:8" nve-text="body">Validate the tab labels and panel order</dd>
+        </dl>
+      </nve-card-content>
+    </nve-card>
+  </div>
+  <div slot="details" style="width: 100%; min-width: 320px;">
+    <nve-card style="width: 100%">
+      <nve-card-header>
+        <div nve-layout="column gap:xs">
+          <h2 nve-text="heading sm bold">Details</h2>
+          <p nve-text="body sm muted">Supporting context for teams that need implementation specifics.</p>
+        </div>
+      </nve-card-header>
+      <nve-card-content>
+        <dl nve-layout="grid gap:sm">
+          <dt nve-layout="span:4" nve-text="body muted medium">Owner</dt>
+          <dd nve-layout="span:8" nve-text="body">Elements design system</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Coverage</dt>
+          <dd nve-layout="span:8" nve-text="body">Unit, SSR, and accessibility checks</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Focus</dt>
+          <dd nve-layout="span:8" nve-text="body">Selection sync and panel wiring</dd>
+        </dl>
+      </nve-card-content>
+    </nve-card>
+  </div>
+  <div slot="settings" style="width: 100%; min-width: 320px;">
+    <nve-card style="width: 100%">
+      <nve-card-header>
+        <div nve-layout="column gap:xs">
+          <h2 nve-text="heading sm bold">Settings</h2>
+          <p nve-text="body sm muted">Configuration notes for authors and downstream consumers.</p>
+        </div>
+      </nve-card-header>
+      <nve-card-content>
+        <dl nve-layout="grid gap:sm">
+          <dt nve-layout="span:4" nve-text="body muted medium">Selection</dt>
+          <dd nve-layout="span:8" nve-text="body">Controlled by the active tab value</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Panels</dt>
+          <dd nve-layout="span:8" nve-text="body">Matched by slot name</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Actions</dt>
+          <dd nve-layout="span:8" nve-text="body">External buttons can drive the same group</dd>
+        </dl>
+      </nve-card-content>
+    </nve-card>
+  </div>
+</nve-tabs-group>`
+};
+
+/**
+ * @summary Tab group with vertical tab strip at inline-end beside slot-matched panels when the tab rail should sit on the opposite side from inline-start sidebars.
+ */
+export const GroupVerticalEnd = {
+  render: () => html`
+<nve-tabs-group id="tab-group-vertical-end" alignment="end">
+  <nve-tabs vertical style="width: 250px">
+    <nve-tabs-item selected command="--toggle" commandfor="tab-group-vertical-end" value="overview">Overview</nve-tabs-item>
+    <nve-tabs-item command="--toggle" commandfor="tab-group-vertical-end" value="details">Details</nve-tabs-item>
+    <nve-tabs-item command="--toggle" commandfor="tab-group-vertical-end" value="settings">Settings</nve-tabs-item>
+  </nve-tabs>
+  <div slot="overview" style="width: 100%; min-width: 320px;">
+    <nve-card style="width: 100%">
+      <nve-card-header>
+        <div nve-layout="column gap:xs">
+          <h2 nve-text="heading sm bold">Overview</h2>
+          <p nve-text="body sm muted">High-level release status and current priorities.</p>
+        </div>
+      </nve-card-header>
+      <nve-card-content>
+        <dl nve-layout="grid gap:sm">
+          <dt nve-layout="span:4" nve-text="body muted medium">Status</dt>
+          <dd nve-layout="span:8" nve-text="body">Ready for review</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Audience</dt>
+          <dd nve-layout="span:8" nve-text="body">Design and product owners</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Next step</dt>
+          <dd nve-layout="span:8" nve-text="body">Validate the tab labels and panel order</dd>
+        </dl>
+      </nve-card-content>
+    </nve-card>
+  </div>
+  <div slot="details" style="width: 100%; min-width: 320px;">
+    <nve-card style="width: 100%">
+      <nve-card-header>
+        <div nve-layout="column gap:xs">
+          <h2 nve-text="heading sm bold">Details</h2>
+          <p nve-text="body sm muted">Supporting context for teams that need implementation specifics.</p>
+        </div>
+      </nve-card-header>
+      <nve-card-content>
+        <dl nve-layout="grid gap:sm">
+          <dt nve-layout="span:4" nve-text="body muted medium">Owner</dt>
+          <dd nve-layout="span:8" nve-text="body">Elements design system</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Coverage</dt>
+          <dd nve-layout="span:8" nve-text="body">Unit, SSR, and accessibility checks</dd>
+          <dt nve-layout="span:4" nve-text="body muted medium">Focus</dt>
+          <dd nve-layout="span:8" nve-text="body">Selection sync and panel wiring</dd>
+        </dl>
+      </nve-card-content>
+    </nve-card>
+  </div>
+  <div slot="settings" style="width: 100%; min-width: 320px;">
+    <nve-card style="width: 100%">
       <nve-card-header>
         <div nve-layout="column gap:xs">
           <h2 nve-text="heading sm bold">Settings</h2>
@@ -276,7 +434,7 @@ export const ExternalControls = {
       <nve-tabs-item command="--toggle" commandfor="tab-group-controls" value="settings">Settings</nve-tabs-item>
     </nve-tabs>
     <div slot="overview">
-      <nve-card style="width: min(100%, 520px)">
+      <nve-card style="width: 100%; min-width: 320px;">
         <nve-card-header>
           <div nve-layout="column gap:xs">
             <h2 nve-text="heading sm bold">Overview</h2>
@@ -296,7 +454,7 @@ export const ExternalControls = {
       </nve-card>
     </div>
     <div slot="details">
-      <nve-card style="width: min(100%, 520px)">
+      <nve-card style="width: 100%; min-width: 320px;">
         <nve-card-header>
           <div nve-layout="column gap:xs">
             <h2 nve-text="heading sm bold">Details</h2>
@@ -316,7 +474,7 @@ export const ExternalControls = {
       </nve-card>
     </div>
     <div slot="settings">
-      <nve-card style="width: min(100%, 520px)">
+      <nve-card style="width: 100%; min-width: 320px;">
         <nve-card-header>
           <div nve-layout="column gap:xs">
             <h2 nve-text="heading sm bold">Settings</h2>

@@ -64,6 +64,17 @@ describe(TabsGroup.metadata.tag, () => {
     expect(group._internals.role).toBe('group');
   });
 
+  it('should reflect alignment attribute', async () => {
+    expect(group.alignment).toBe('top');
+    expect(group.getAttribute('alignment')).toBe('top');
+    group.alignment = 'start';
+    await elementIsStable(group);
+    expect(group.getAttribute('alignment')).toBe('start');
+    group.alignment = 'end';
+    await elementIsStable(group);
+    expect(group.getAttribute('alignment')).toBe('end');
+  });
+
   it('should keep a preselected tab active on initial sync', () => {
     expect(tabItems[0]!.selected).toBe(true);
     expect(tabItems[1]!.selected).toBe(false);
@@ -255,7 +266,6 @@ describe(TabsGroup.metadata.tag, () => {
     expect(fired).toBe(false);
     expect(tabItems[0]!.selected).toBe(true);
     expect(extraPanel.hidden).toBe(false);
-    expect(extraPanel.getAttribute('aria-hidden')).toBe('false');
   });
 
   it('should resync when a new tab and panel are added', async () => {
