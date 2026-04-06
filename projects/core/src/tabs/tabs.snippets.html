@@ -45,3 +45,23 @@
   </nve-tabs>
   $0
 </template>
+
+<template
+  name="Grouped Tabs"
+  prefix="tabs-group"
+  description="Tabs group with slot-matched panels controlled by tab item commands."
+  type="pattern">
+  <nve-tabs-group id="${1:tab-group}">
+    <nve-tabs>
+      <nve-tabs-item selected command="--toggle" commandfor="${1:tab-group}" value="${2:overview}"
+        >${3:Overview}</nve-tabs-item
+      >
+      <nve-tabs-item command="--toggle" commandfor="${1:tab-group}" value="${4:details}">${5:Details}</nve-tabs-item>
+      <nve-tabs-item command="--toggle" commandfor="${1:tab-group}" value="${6:settings}">${7:Settings}</nve-tabs-item>
+    </nve-tabs>
+    <div slot="${2:overview}">${8:Overview content}</div>
+    <div slot="${4:details}">${9:Details content}</div>
+    <div slot="${6:settings}">${10:Settings content}</div>
+  </nve-tabs-group>
+  $0
+</template>

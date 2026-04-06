@@ -3,7 +3,7 @@
   title: 'Tabs',
   layout: 'docs.11ty.js',
   tag: 'nve-tabs',
-  associatedElements: ['nve-tabs-item']
+  associatedElements: ['nve-tabs-item', 'nve-tabs-group']
 }
 ---
 
@@ -61,3 +61,19 @@ shows the default stateless behavior, where the host app has to set/remove the `
 ## Links
 
 {% example '@nvidia-elements/core/tabs/tabs.examples.json' 'Links' %}
+
+## Grouped Tabs
+
+Use `<nve-tabs-group>` when a selected tab should also reveal matching panel content. The group keeps selection and panel visibility in sync by matching each tab item `value` to a named panel slot on the group.
+
+Wrap a single `<nve-tabs>` in the default slot, add `command="--toggle"` and `commandfor="<group-id>"` to each `<nve-tabs-item>`, and provide panel elements with `slot="<value>"`. Most consumers only need `slot`, `value`, `command`, and `commandfor`. The group handles the tab panel role and ARIA linkage internally, so consumer markup can stay focused on content.
+
+Do not use `behavior-select` on `<nve-tabs>` when the group is present. Let the group coordinate selection.
+
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'GroupPanels' %}
+
+## External Controls
+
+`<nve-tabs-group>` also accepts external invokers such as `<nve-button>` as long as they target the group with `commandfor` and provide a matching `value`. This works well when secondary controls elsewhere on the page should reveal the same tab panel content.
+
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'ExternalControls' %}

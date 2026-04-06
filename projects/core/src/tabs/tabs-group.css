@@ -1,0 +1,18 @@
+:host {
+  --padding: var(--nve-ref-space-sm) 0 0 0;
+  display: block;
+}
+
+[internal-host] {
+  display: flex;
+  flex-direction: column;
+}
+
+::slotted([slot]) {
+  display: block;
+  padding: var(--padding);
+}
+
+::slotted([slot][hidden]) {
+  display: none !important;
+}
