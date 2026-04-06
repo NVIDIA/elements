@@ -3,9 +3,32 @@
   display: block;
 }
 
+:host(:is([alignment='start'], [alignment='end'])) {
+  --padding: 0;
+}
+
 [internal-host] {
   display: flex;
   flex-direction: column;
+}
+
+:host(:is([alignment='start'], [alignment='end'])) [internal-host] {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--nve-ref-space-lg);
+}
+
+:host([alignment='end']) [internal-host] {
+  flex-direction: row-reverse;
+}
+
+:host(:is([alignment='start'], [alignment='end'])) [internal-host] > slot:not([name]) {
+  flex-shrink: 0;
+}
+
+:host(:is([alignment='start'], [alignment='end'])) [internal-host] > slot[name] {
+  flex: 1;
+  min-width: 0;
 }
 
 ::slotted([slot]) {

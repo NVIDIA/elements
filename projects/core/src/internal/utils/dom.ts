@@ -385,11 +385,3 @@ export function uniqueNonEmptyStrings(values: Iterable<string | null | undefined
     new Set(Array.from(values).filter((value): value is string => typeof value === 'string' && value.length > 0))
   );
 }
-
-/**
- * Sets `hidden` and `aria-hidden` together for coordinated show/hide toggling.
- */
-export function setHiddenAndAriaHidden(element: HTMLElement, hidden: boolean): void {
-  element.hidden = hidden;
-  element.setAttribute('aria-hidden', String(hidden));
-}

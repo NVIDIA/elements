@@ -70,7 +70,17 @@ Wrap a single `<nve-tabs>` in the default slot, add `command="--toggle"` and `co
 
 Do not use `behavior-select` on `<nve-tabs>` when the group is present. Let the group coordinate selection.
 
+By default `alignment` is `top`, which places the tab strip above the panel region in a column layout.
+
 {% example '@nvidia-elements/core/tabs/tabs.examples.json' 'GroupPanels' %}
+
+### Stacked vs Horizontal
+
+Use `alignment="start"` or `alignment="end"` on `<nve-tabs-group>` when you want a vertical tab strip beside the panel region instead of stacked tabs (`alignment="top"` is the default). `start` places the tab strip at **inline-start**; `end` places it at **inline-end** (for example, left versus right in LTR). Set `vertical` on `<nve-tabs>` and size the tab strip with a width that fits your layout.
+
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'GroupVerticalPanels' %}
+
+{% example '@nvidia-elements/core/tabs/tabs.examples.json' 'GroupVerticalEnd' %}
 
 ## External Controls
 
