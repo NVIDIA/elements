@@ -1,4 +1,6 @@
+import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
+import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import { state } from 'lit/decorators/state.js';
 import {
@@ -6,30 +8,29 @@ import {
   audit,
   generateId,
   sameOrderedStringArray,
-  setHiddenAndAriaHidden,
   uniqueNonEmptyStrings,
   useStyles
 } from '@nvidia-elements/core/internal';
-import type { TabsItem } from './tabs.js';
+import { Tabs, type TabsItem } from './tabs.js';
 import styles from './tabs-group.css?inline';
 
+/** Invoker command source for `--toggle` (e.g. `nve-tabs-item` with `value`). */
 type TabsGroupCommandSource = HTMLElement & {
   disabled?: boolean;
   value?: string | null;
 };
 
+/** `command` event from Invoker Commands; `source` is the control that fired. */
 type TabsGroupCommandEvent = Event & {
   command?: string;
   source?: TabsGroupCommandSource | null;
 };
 
-/** Options for observing dynamic changes under the slotted `nve-tabs` subtree. */
-const TABS_SUBTREE_OBSERVER_INIT: MutationObserverInit = {
-  childList: true,
-  subtree: true,
-  attributes: true,
-  attributeFilter: ['disabled', 'id', 'selected', 'value']
-};
+/** Payload for the composed `select` event when the active tab value changes via command. */
+type TabsGroupSelectDetail = { value: string };
+
+/** Arranges the tab strip and slot-matched panels: stacked column (`top`), or sidebar row with tabs at inline-start (`start`) or inline-end (`end`). */
+export type TabsGroupAlignment = 'top' | 'start' | 'end';
 
 /**
  * @element nve-tabs-group
@@ -54,7 +55,21 @@ export class TabsGroup extends LitElement {
     children: ['nve-tabs']
   };
 
+  /** Options for observing the slotted `nve-tabs` subtree (tab list / item attribute changes). */
+  protected static readonly subtreeObserverInit = {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['disabled', 'id', 'selected', 'value']
+  } as const satisfies MutationObserverInit;
+
   @queryAssignedElements({ flatten: true }) private defaultSlotElements!: HTMLElement[];
+
+  /**
+   * Arranges the tab strip relative to slot-matched panels: stacked column (`top`), or sidebar row with tabs at
+   * inline-start (`start`) or inline-end (`end`) beside the panel region.
+   */
+  @property({ type: String, reflect: true }) alignment: TabsGroupAlignment = 'top';
 
   @state() private panelValues: string[] = [];
 
@@ -65,6 +80,10 @@ export class TabsGroup extends LitElement {
 
   #tabsObserver?: MutationObserver;
 
+  /**
+   * Renders the default slot (single `nve-tabs`) plus one named `<slot name={value}>` per distinct selectable
+   * `nve-tabs-item` value. `#syncPanelSlot` applies panel visibility and ARIA from `selectedValue`.
+   */
   render() {
     return html`
       <div internal-host>
@@ -99,26 +118,34 @@ export class TabsGroup extends LitElement {
     this.#tabsObserver?.disconnect();
   }
 
-  updated(changedProperties: Map<PropertyKey, unknown>) {
+  updated(changedProperties: PropertyValues<this>) {
+    super.updated(changedProperties);
+
     if (!this.#tabsObserver) {
       this.#observeTabs();
     }
 
-    if (changedProperties.has('panelValues') || changedProperties.has('selectedValue')) {
+    // `@state()` fields are not in `PropertyValues<this>` keys; cast for membership checks.
+    const props = changedProperties as ReadonlyMap<PropertyKey, unknown>;
+    if (props.has('panelValues') || props.has('selectedValue')) {
       this.#syncPanels();
     }
   }
 
-  #handleDefaultSlotChange = () => {
+  #handleDefaultSlotChange = (): void => {
     this.#observeTabs();
     this.#syncFromTabs();
   };
 
-  #handlePanelSlotChange = () => {
+  #handlePanelSlotChange = (): void => {
     this.#syncPanels();
   };
 
-  #handleCommand = (event: TabsGroupCommandEvent) => {
+  /**
+   * Handles Invoker `--toggle` on a tab item: selects the matching `nve-tabs-item` and syncs panels.
+   * Ignores non-toggle commands and invokers without a non-empty string `value`.
+   */
+  #handleCommand = (event: TabsGroupCommandEvent): void => {
     if (event.command !== '--toggle') {
       return;
     }
@@ -139,7 +166,8 @@ export class TabsGroup extends LitElement {
 
   // --- Tab strip sync (tabs → state) ---
 
-  #observeTabs() {
+  /** Attaches a single `MutationObserver` on the slotted `nve-tabs` element to mirror tab list changes into state. */
+  #observeTabs(): void {
     this.#tabsObserver?.disconnect();
 
     const tabs = this.#getTabsElement();
@@ -148,10 +176,14 @@ export class TabsGroup extends LitElement {
     }
 
     this.#tabsObserver = new MutationObserver(() => this.#syncFromTabs());
-    this.#tabsObserver.observe(tabs, TABS_SUBTREE_OBSERVER_INIT);
+    this.#tabsObserver.observe(tabs, TabsGroup.subtreeObserverInit);
   }
 
-  #syncFromTabs() {
+  /**
+   * Reads the current tab items: derives ordered `panelValues` for render, resolves which tab should be active,
+   * and commits selection. Called on slot change, subtree mutations, and after mount.
+   */
+  #syncFromTabs(): void {
     const tabItems = this.#getTabItems();
     const nextPanelValues = uniqueNonEmptyStrings(tabItems.map(item => item.value));
 
@@ -166,12 +198,17 @@ export class TabsGroup extends LitElement {
     this.#setActiveTab(tabItems, selectedTab, false, nextPanelValues);
   }
 
+  /**
+   * Sets exactly one selected tab, updates `panelValues` / `selectedValue`, and optionally dispatches `select`.
+   *
+   * @param emitEvent - When true (command path), dispatches `select` if selection actually changed.
+   */
   #setActiveTab(
     tabItems: TabsItem[],
     nextTab: TabsItem,
     emitEvent: boolean,
-    nextPanelValues = uniqueNonEmptyStrings(tabItems.map(item => item.value))
-  ) {
+    nextPanelValues: string[] = uniqueNonEmptyStrings(tabItems.map(item => item.value))
+  ): void {
     // True when the effective selection differs from the prior committed state (value, flags, or multi-select).
     // `select` is only dispatched when both `emitEvent` (invoker/command path) and `changed` are true.
     const changed =
@@ -187,7 +224,7 @@ export class TabsGroup extends LitElement {
 
     if (emitEvent && changed) {
       this.dispatchEvent(
-        new CustomEvent<{ value: string }>('select', {
+        new CustomEvent<TabsGroupSelectDetail>('select', {
           bubbles: true,
           composed: true,
           detail: { value: nextTab.value }
@@ -196,7 +233,8 @@ export class TabsGroup extends LitElement {
     }
   }
 
-  #commitState(nextPanelValues: string[], nextSelectedValue: string) {
+  /** Updates reactive state for panel slot names and the active tab value without touching the tab items. */
+  #commitState(nextPanelValues: string[], nextSelectedValue: string): void {
     if (!sameOrderedStringArray(this.panelValues, nextPanelValues)) {
       this.panelValues = nextPanelValues;
     }
@@ -208,7 +246,8 @@ export class TabsGroup extends LitElement {
 
   // --- Panel sync (state → panels & ARIA) ---
 
-  #syncPanels() {
+  /** For each named panel slot, wires `hidden` and tab↔panel ARIA ids to match `selectedValue`. */
+  #syncPanels(): void {
     const tabItems = this.#getTabItems();
     const tabMap = new Map(
       tabItems.filter(item => this.#isSelectableTab(item)).map(item => [item.value, item] satisfies [string, TabsItem])
@@ -219,13 +258,17 @@ export class TabsGroup extends LitElement {
     });
   }
 
-  #syncPanelSlot(slot: HTMLSlotElement, tabMap: Map<string, TabsItem>) {
+  /**
+   * If no selectable tab exists for `slot.name`, hides all assigned nodes. Otherwise shows only the panel(s)
+   * for the active value and assigns `role="tabpanel"` / `aria-labelledby` when missing.
+   */
+  #syncPanelSlot(slot: HTMLSlotElement, tabMap: ReadonlyMap<string, TabsItem>): void {
     const tabItem = tabMap.get(slot.name);
     const panels = slot.assignedElements({ flatten: true }) as HTMLElement[];
 
     if (!tabItem) {
       panels.forEach(panel => {
-        setHiddenAndAriaHidden(panel, true);
+        panel.hidden = true;
       });
       return;
     }
@@ -248,18 +291,18 @@ export class TabsGroup extends LitElement {
       }
 
       const isActive = slot.name === this.selectedValue;
-      setHiddenAndAriaHidden(panel, !isActive);
+      panel.hidden = !isActive;
     });
   }
 
   // --- DOM queries ---
 
-  #getTabsElement(): HTMLElement | undefined {
-    return (
-      this.defaultSlotElements.find(element => element.localName === 'nve-tabs') ??
-      this.querySelector('nve-tabs') ??
-      undefined
-    );
+  /** Resolves the single slotted `nve-tabs` (default slot), with a light-DOM fallback for edge timing. */
+  #getTabsElement(): Tabs | undefined {
+    const el =
+      this.defaultSlotElements.find(element => element.localName === Tabs.metadata.tag) ??
+      this.querySelector(Tabs.metadata.tag);
+    return el instanceof Tabs ? el : undefined;
   }
 
   #getTabItems(): TabsItem[] {
@@ -270,12 +313,13 @@ export class TabsGroup extends LitElement {
     return Array.from(this.renderRoot.querySelectorAll<HTMLSlotElement>('slot[name]'));
   }
 
-  #isSelectableTab(tabItem: TabsItem) {
+  /** Selectable tabs have a non-empty `value` and are not `disabled`. */
+  #isSelectableTab(tabItem: TabsItem): tabItem is TabsItem & { value: string } {
     return typeof tabItem.value === 'string' && tabItem.value.length > 0 && !tabItem.disabled;
   }
 
   /** Prefer the selectable tab that is already selected; otherwise the first selectable tab. */
-  #resolveSelectedTab(tabItems: TabsItem[]): TabsItem | undefined {
+  #resolveSelectedTab(tabItems: readonly TabsItem[]): TabsItem | undefined {
     return (
       tabItems.find(item => this.#isSelectableTab(item) && item.selected) ??
       tabItems.find(item => this.#isSelectableTab(item))

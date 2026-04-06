@@ -38,8 +38,7 @@ import {
   appendAnchorName,
   applySlotContentStates,
   sameOrderedStringArray,
-  uniqueNonEmptyStrings,
-  setHiddenAndAriaHidden
+  uniqueNonEmptyStrings
 } from '@nvidia-elements/core/internal';
 
 @customElement('dom-test-element')
@@ -1165,18 +1164,5 @@ describe('uniqueNonEmptyStrings', () => {
 
   it('should return empty array when no valid strings', () => {
     expect(uniqueNonEmptyStrings(['', null, undefined])).toEqual([]);
-  });
-});
-
-describe('setHiddenAndAriaHidden', () => {
-  it('should set hidden and aria-hidden to stringified boolean', () => {
-    const el = document.createElement('div');
-    setHiddenAndAriaHidden(el, true);
-    expect(el.hidden).toBe(true);
-    expect(el.getAttribute('aria-hidden')).toBe('true');
-
-    setHiddenAndAriaHidden(el, false);
-    expect(el.hidden).toBe(false);
-    expect(el.getAttribute('aria-hidden')).toBe('false');
   });
 });
