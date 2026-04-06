@@ -148,6 +148,7 @@ export interface CustomElementManifest {
   slots: {
     name: string;
     description: string;
+    dynamic?: boolean;
   }[];
   members: {
     deprecated: boolean;

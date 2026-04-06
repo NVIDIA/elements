@@ -6,7 +6,7 @@ export function hasSlot(tagName: string, slot: string) {
     return true;
   } else {
     const element = elements.find(element => element.name === tagName);
-    return !!element?.manifest?.slots?.find(s => s.name === slot);
+    return !!element?.manifest?.slots?.find(s => s.dynamic || s.name === slot);
   }
 }
 

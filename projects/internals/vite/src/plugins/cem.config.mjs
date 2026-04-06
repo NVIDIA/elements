@@ -332,6 +332,24 @@ function deprecatedPlugin() {
   };
 }
 
+function dynamicSlotsPlugin() {
+  return {
+    name: 'dynamic-slots',
+    packageLinkPhase({ customElementsManifest }) {
+      customElementsManifest.modules
+        .flatMap(module => module.declarations)
+        .forEach(declaration => {
+          declaration.slots?.forEach(slot => {
+            if (slot.name === '' && slot.type?.text) {
+              slot.name = slot.type.text;
+              slot.dynamic = true;
+            }
+          });
+        });
+    }
+  };
+}
+
 function jsxTypesPlugin() {
   return customElementJsxPlugin({
     outdir: resolve('dist'),
@@ -480,7 +498,11 @@ ${
     ? `### Slots\n
 | name | value | description |
 | ---- | ----- | ----------- |
-${slots.map(i => `| ${i.name || '(default)'} | \`string\` | ${formatDescription(i.description)} |`).join('\n')}\n`
+${slots
+  .map(
+    i => `| ${i.dynamic ? `{${i.name}}` : i.name || '(default)'} | \`string\` | ${formatDescription(i.description)} |`
+  )
+  .join('\n')}\n`
     : ''
 }
 
@@ -1052,6 +1074,7 @@ export default {
     rewriteExportedStringLiteralTypeAliasesPlugin(),
     publicPropertiesPlugin(),
     superClassMetadataPlugin(),
+    dynamicSlotsPlugin(),
     deprecatedPlugin(),
     jsxTypesPlugin(),
     vueTypesPlugin(),
