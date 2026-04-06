@@ -369,3 +369,27 @@ export function removeAnchorName(element: HTMLElement, name: string) {
 export function appendAnchorName(element: HTMLElement, name: string) {
   element.style.anchorName = Array.from(new Set([...getAnchorNames(element), name])).join(',');
 }
+
+/**
+ * Returns true when both arrays have the same length and each index is strictly equal (`===`).
+ */
+export function sameOrderedStringArray(a: readonly string[], b: readonly string[]): boolean {
+  return a.length === b.length && a.every((value, index) => value === b[index]);
+}
+
+/**
+ * Returns unique non-empty strings in first-seen order (insertion order of a `Set` over the filtered list).
+ */
+export function uniqueNonEmptyStrings(values: Iterable<string | null | undefined>): string[] {
+  return Array.from(
+    new Set(Array.from(values).filter((value): value is string => typeof value === 'string' && value.length > 0))
+  );
+}
+
+/**
+ * Sets `hidden` and `aria-hidden` together for coordinated show/hide toggling.
+ */
+export function setHiddenAndAriaHidden(element: HTMLElement, hidden: boolean): void {
+  element.hidden = hidden;
+  element.setAttribute('aria-hidden', String(hidden));
+}

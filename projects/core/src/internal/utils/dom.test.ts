@@ -36,7 +36,10 @@ import {
   getAnchorNames,
   removeAnchorName,
   appendAnchorName,
-  applySlotContentStates
+  applySlotContentStates,
+  sameOrderedStringArray,
+  uniqueNonEmptyStrings,
+  setHiddenAndAriaHidden
 } from '@nvidia-elements/core/internal';
 
 @customElement('dom-test-element')
@@ -1119,5 +1122,61 @@ describe('applySlotContentStates', () => {
     applySlotContentStates(slot, element);
     expect(deleteSpy).toHaveBeenCalledWith('has-header');
     expect(addSpy).not.toHaveBeenCalled();
+  });
+});
+
+describe('sameOrderedStringArray', () => {
+  it('should return true for two empty arrays', () => {
+    expect(sameOrderedStringArray([], [])).toBe(true);
+  });
+
+  it('should return true when lengths and entries match', () => {
+    expect(sameOrderedStringArray(['a', 'b'], ['a', 'b'])).toBe(true);
+  });
+
+  it('should return false when lengths differ', () => {
+    expect(sameOrderedStringArray(['a'], ['a', 'b'])).toBe(false);
+  });
+
+  it('should return false when same length but order differs', () => {
+    expect(sameOrderedStringArray(['a', 'b'], ['b', 'a'])).toBe(false);
+  });
+
+  it('should compare by value for primitives', () => {
+    const a = ['x'];
+    const b = ['x'];
+    expect(sameOrderedStringArray(a, b)).toBe(true);
+  });
+});
+
+describe('uniqueNonEmptyStrings', () => {
+  it('should drop empty, null, and undefined', () => {
+    expect(uniqueNonEmptyStrings(['a', '', 'b', null, undefined])).toEqual(['a', 'b']);
+  });
+
+  it('should dedupe preserving first-seen order', () => {
+    expect(uniqueNonEmptyStrings(['a', 'b', 'a', 'c', 'b'])).toEqual(['a', 'b', 'c']);
+  });
+
+  it('should accept readonly array input', () => {
+    const input: readonly string[] = ['x', 'y'];
+    expect(uniqueNonEmptyStrings(input)).toEqual(['x', 'y']);
+  });
+
+  it('should return empty array when no valid strings', () => {
+    expect(uniqueNonEmptyStrings(['', null, undefined])).toEqual([]);
+  });
+});
+
+describe('setHiddenAndAriaHidden', () => {
+  it('should set hidden and aria-hidden to stringified boolean', () => {
+    const el = document.createElement('div');
+    setHiddenAndAriaHidden(el, true);
+    expect(el.hidden).toBe(true);
+    expect(el.getAttribute('aria-hidden')).toBe('true');
+
+    setHiddenAndAriaHidden(el, false);
+    expect(el.hidden).toBe(false);
+    expect(el.getAttribute('aria-hidden')).toBe('false');
   });
 });
