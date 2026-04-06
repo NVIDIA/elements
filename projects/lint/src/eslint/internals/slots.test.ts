@@ -11,6 +11,8 @@ describe('noUnexpectedSlotValue', () => {
     expect(hasSlot('nve-badge', 'prefix-icon')).toBe(true);
     expect(hasSlot('nve-badge', 'suffix-icon')).toBe(true);
     expect(hasSlot('nve-badge', '')).toBe(true);
+    expect(hasSlot('nve-tabs-group', 'overview')).toBe(true);
+    expect(hasSlot('nve-tabs-group', 'details')).toBe(true);
   });
 });
 
