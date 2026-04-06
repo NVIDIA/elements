@@ -44,6 +44,7 @@ describe('noUnexpectedSlotValue', () => {
       valid: [
         '<nve-page><div slot="left"></div></nve-page>',
         '<nve-badge><div slot="prefix-icon"></div></nve-badge>',
+        '<nve-tabs-group><div slot="overview"></div></nve-tabs-group>',
         '<nvd-component><div slot="content"></div></nvd-component>'
       ],
       invalid: []
