@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Example } from '@internals/metadata';
-import { getPublicExamples, searchPublicExamples, renderExampleMarkdown, condenseTemplate } from './utils.js';
+import { getContextExamples, searchContextExamples, renderExampleMarkdown, condenseTemplate } from './utils.js';
 import { wrapText } from '../internal/utils.js';
 
 describe('utils', () => {
@@ -61,13 +61,13 @@ describe('utils', () => {
 
   describe('getAvailableExamples', () => {
     it('should return markdown format correctly', () => {
-      const result = getPublicExamples('markdown', mockExamples);
+      const result = getContextExamples('markdown', mockExamples);
       expect(result).toContain('`project_button-default`: Default button example');
       expect(result).toContain('`project_card-default`: Default card example');
     });
 
     it('should return JSON format correctly', () => {
-      const result = getPublicExamples('json', mockExamples);
+      const result = getContextExamples('json', mockExamples);
       expect(Array.isArray(result)).toBe(true);
       expect(result).toHaveLength(2);
       expect(result[0]).toEqual({
@@ -88,10 +88,10 @@ describe('utils', () => {
     });
 
     it('should handle empty examples array', () => {
-      const result = getPublicExamples('markdown', []);
+      const result = getContextExamples('markdown', []);
       expect(result).toBe('');
 
-      const jsonResult = getPublicExamples('json', []);
+      const jsonResult = getContextExamples('json', []);
       expect(jsonResult).toEqual([]);
     });
 
@@ -119,7 +119,7 @@ describe('utils', () => {
         }
       ];
 
-      const result = getPublicExamples('json', unsorted) as Array<{ id: string }>;
+      const result = getContextExamples('json', unsorted) as Array<{ id: string }>;
       expect(result.map(r => r.id)).toEqual([
         'pattern-auth',
         'pattern-form',
@@ -136,11 +136,11 @@ describe('utils', () => {
         { id: 'test-default-2', name: 'Test2', tags: [], element: 'nve-test', template: '' } // missing summary
       ];
 
-      const markdownResult = getPublicExamples('markdown', examplesWithMissingDesc);
+      const markdownResult = getContextExamples('markdown', examplesWithMissingDesc);
       expect(markdownResult).toContain('`test-default-1`: Has summary');
       expect(markdownResult).not.toContain('test-default-2');
 
-      const jsonResult = getPublicExamples('json', examplesWithMissingDesc) as Array<{
+      const jsonResult = getContextExamples('json', examplesWithMissingDesc) as Array<{
         id: string;
         name: string;
         summary?: string;
@@ -152,25 +152,25 @@ describe('utils', () => {
 
   describe('searchExamples', () => {
     it('should search and return markdown format', async () => {
-      const result = await searchPublicExamples('button', { format: 'markdown' });
+      const result = await searchContextExamples('button', { format: 'markdown' });
       expect(typeof result).toBe('string');
       expect(result).toContain('button');
     });
 
     it('should search and return JSON format', async () => {
-      const result = await searchPublicExamples('button', { format: 'json' });
+      const result = await searchContextExamples('button', { format: 'json' });
       expect(Array.isArray(result)).toBe(true);
       expect(result.length).toBeGreaterThan(0);
     });
 
     it('should handle empty query', async () => {
-      const result = await searchPublicExamples('', { format: 'json' });
+      const result = await searchContextExamples('', { format: 'json' });
       expect(Array.isArray(result)).toBe(true);
       expect(result).toHaveLength(0);
     });
 
     it('should handle query with only noise words', async () => {
-      const result = await searchPublicExamples('example examples story stories pattern patterns', { format: 'json' });
+      const result = await searchContextExamples('example examples story stories pattern patterns', { format: 'json' });
       expect(Array.isArray(result)).toBe(true);
     });
   });

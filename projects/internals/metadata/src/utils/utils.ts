@@ -1,5 +1,3 @@
-import type { Attribute } from '../types.js';
-
 export function getElementChangelog(name: string, changelog: string) {
   const changelogJSON = changelogMarkdownToJSON(changelog);
   const elementChangelog = changelogJSON
@@ -59,38 +57,4 @@ export function changelogMarkdownToJSON(changelog: string) {
         : [];
       return { title, bugFixes, features, breakingChanges };
     });
-}
-
-export function attributeMetadataToMarkdown(attribute: Attribute) {
-  return `
-## ${attribute.name}
-
-${attribute.description}
-
-### Example
-
-${attribute.example ? `\`\`\`html\n${attribute.example.trim()}\n\`\`\`` : 'No example available.'}
-
-### Values
-
-| name | type | value  |
-| ---- | ---- | ------ |
-| \`${attribute.name}\` | \`string\` |${attribute.values
-    .filter(v => !isComplexAttributeValue(v.name))
-    .map(value => '`' + value.name + '`')
-    .join(', ')} |`.trim();
-}
-
-export function isComplexAttributeValue(value: string) {
-  return (
-    value.includes('|') ||
-    value.includes('@') ||
-    value.includes('&') ||
-    value.includes('xx') ||
-    value.includes('-y:') ||
-    value.includes(':none') ||
-    value.includes('debug') ||
-    value.includes('mkd') ||
-    value.includes('md')
-  );
 }
