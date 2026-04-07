@@ -78,6 +78,12 @@ export class GridColumn extends LitElement {
     this.addEventListener('sort', ((e: CustomEvent) => (this.ariaSort = e.detail.next)) as EventListener);
   }
 
+  willUpdate(props: PropertyValues<this>) {
+    if (props.has('width') && this.width && Number.isFinite(Number(this.width))) {
+      this.width = `${this.width}px`; // eslint-disable-line local/stateless-property
+    }
+  }
+
   async updated(props: PropertyValues<this>) {
     super.updated(props);
 
