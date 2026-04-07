@@ -1,3 +1,19 @@
+## <small>0.12.5 (2026-04-07)</small>
+
+* chore(ci): allow empty paths in version replacement for release configuration ([298772a](https://github.com/NVIDIA/elements/commit/298772a))
+* chore(ci): enable generalized agent skills ([9aeaf18](https://github.com/NVIDIA/elements/commit/9aeaf18))
+* chore(ci): fix bundle configurations ([5a8c412](https://github.com/NVIDIA/elements/commit/5a8c412))
+* chore(ci): update lighthouse ([e33e649](https://github.com/NVIDIA/elements/commit/e33e649))
+* chore(internals): refactor context logic to tools ([88a081f](https://github.com/NVIDIA/elements/commit/88a081f))
+* chore(release): @nvidia-elements/core-v1.66.3 [skip ci] ([ae84372](https://github.com/NVIDIA/elements/commit/ae84372))
+* chore(release): @nvidia-elements/styles-v1.14.0 [skip ci] ([2518e15](https://github.com/NVIDIA/elements/commit/2518e15))
+* chore(starters): add monaco example to bundle starter ([23fb672](https://github.com/NVIDIA/elements/commit/23fb672))
+* fix(core): fallback css value for grid column widths ([c87784d](https://github.com/NVIDIA/elements/commit/c87784d))
+* fix(core): remove invalid bundle configuration options ([b793f51](https://github.com/NVIDIA/elements/commit/b793f51))
+* fix(cli): update package.json to include specific dist files in the build process ([99af79d](https://github.com/NVIDIA/elements/commit/99af79d))
+* feat(monaco): add bundle support ([8b47ed7](https://github.com/NVIDIA/elements/commit/8b47ed7))
+* feat(styles): add monospace support ([2bbecc4](https://github.com/NVIDIA/elements/commit/2bbecc4))
+
 ## <small>0.12.4 (2026-04-03)</small>
 
 * chore(ci): align publish configs ([cac1e0d](https://github.com/NVIDIA/elements/commit/cac1e0d))
