@@ -381,3 +381,7 @@ ul[nve-text~='nav'] ul li {
 [nve-text~='code'][nve-text~='flat'] {
   background: transparent !important;
 }
+
+[nve-text~='monospace'] {
+  font-family: monospace !important;
+}

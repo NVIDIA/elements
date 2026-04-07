@@ -47,6 +47,6 @@ describe('lighthouse bundle report', () => {
   });
 
   test('bundles/index.css should remain within compressed bundle limits', async () => {
-    expect(report.payload.css.requests['index.css']!.kb).toBeLessThan(3.1);
+    expect(report.payload.css.requests['index.css']!.kb).toBeLessThan(3.2);
   });
 });
