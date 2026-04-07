@@ -10,9 +10,11 @@
       @import './node_modules/@nvidia-elements/styles/dist/bundles/index.css';
       @import './node_modules/@nvidia-elements/themes/dist/bundles/index.css';
       @import './node_modules/@nvidia-elements/themes/dist/fonts/inter.css';
+      @import './node_modules/@nvidia-elements/monaco/dist/bundles/index.css';
     </style>
     <script type="module">
       import './node_modules/@nvidia-elements/core/dist/bundles/index.js';
+      import './node_modules/@nvidia-elements/monaco/dist/bundles/index.js';
     </script>
   </head>
   <body nve-text="body">
@@ -44,6 +46,12 @@
           <a nve-text="body sm" target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/bundles">Source</a>
           <a nve-text="body sm" download href="https://NVIDIA.github.io/elements/starters/download/bundles.zip">Download</a>
         </div>
+        <nve-monaco-input language="typescript" value="console.log('Hello, world!');"></nve-monaco-input>
+        <script type="module">
+          const input = document.querySelector("nve-monaco-input");
+          input.addEventListener("input", () => console.log("input: ", input.value));
+          input.addEventListener("change", () => console.log("change: ", input.value));
+        </script>
       </main>
     </nve-page>
   </body>
