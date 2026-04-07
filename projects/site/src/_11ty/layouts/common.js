@@ -221,6 +221,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/elements/dropzone/') ? 'highlighted selected' : ''}><a href="docs/elements/dropzone/">Dropzone</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/file/') ? 'highlighted selected' : ''}><a href="docs/elements/file/">File</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/format-datetime/') ? 'highlighted selected' : ''}><a href="docs/elements/format-datetime/">Format Datetime</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/elements/format-relative-time/') ? 'highlighted selected' : ''}><a href="docs/elements/format-relative-time/">Format Relative Time</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/elements/forms/') || data.page.url.includes('/docs/elements/control/') ? 'expanded' : ''} ${data.page.url === '/docs/elements/forms/' ? 'highlighted' : ''}>
       <a href="docs/elements/forms/">Forms</a>
       <nve-tree-node ${data.page.url.includes('/docs/elements/forms/validation/') ? 'highlighted selected' : ''}><a href="docs/elements/forms/validation/">Validation</a></nve-tree-node>
