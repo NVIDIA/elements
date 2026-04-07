@@ -28,5 +28,11 @@ export default [
     rules: {
       '@nvidia-elements/lint/no-missing-popover-trigger': ['error']
     }
+  },
+  {
+    files: ['src/format-datetime/format-datetime.ts', 'src/format-relative-time/format-relative-time.ts'],
+    rules: {
+      'local/require-test-completeness': ['error', { skipSuffixes: ['.test.visual.ts'] }]
+    }
   }
 ];
