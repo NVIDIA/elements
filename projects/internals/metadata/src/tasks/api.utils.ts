@@ -10,7 +10,7 @@ import type {
   Token,
   Attribute
 } from '../types.js';
-import { attributeMetadataToMarkdown, getElementChangelog } from '../utils/utils.ts';
+import { getElementChangelog } from '../utils/utils.ts';
 
 const BASE_ELEMENT_INTERFACE_PATH = resolve('../../core/src/internal/types/index.ts');
 
@@ -48,10 +48,6 @@ function getGlobalAttributes(basePath: string): Attribute[] {
   const globalAttributes: Attribute[] = existsSync(htmlDataPath)
     ? (JSON.parse(readFileSync(new URL(htmlDataPath, import.meta.url), 'utf8'))?.globalAttributes ?? [])
     : [];
-
-  globalAttributes.forEach(attribute => {
-    attribute.markdown = attributeMetadataToMarkdown(attribute);
-  });
 
   return globalAttributes;
 }

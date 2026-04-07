@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Example } from '@internals/metadata';
 import { ExamplesService } from './service.js';
-import { getPublicExamples } from './utils.js';
+import { getContextExamples } from './utils.js';
 import type { ToolMethod } from '../internal/tools.js';
 
 describe('ExampleService', () => {
@@ -27,7 +27,7 @@ describe('ExampleService', () => {
   });
 
   it('should provide get tool', async () => {
-    const examples = getPublicExamples('json', await ExamplesService.getAll()) as { id: string }[];
+    const examples = getContextExamples('json', await ExamplesService.getAll()) as { id: string }[];
     const result = await ExamplesService.get({ id: examples[0].id, format: 'markdown' });
     expect(result).toBeDefined();
     expect((ExamplesService.get as ToolMethod<unknown>).metadata.name).toBe('get');
@@ -55,7 +55,7 @@ describe('ExampleService', () => {
   });
 
   it('should return markdown for a known example id', async () => {
-    const examples = getPublicExamples('json', await ExamplesService.getAll()) as { id: string }[];
+    const examples = getContextExamples('json', await ExamplesService.getAll()) as { id: string }[];
     const result = await ExamplesService.get({ id: examples[0].id, format: 'markdown' });
     expect(typeof result).toBe('string');
     expect(result).toContain(examples[0].id);
