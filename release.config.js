@@ -73,7 +73,8 @@ export default {
           {
             files: [`${process.cwd()}/dist/**/*.js`],
             from: '"0.0.0"',
-            to: '"${nextRelease.version}"'
+            to: '"${nextRelease.version}"',
+            allowEmptyPaths: true
           }
         ]
       }
