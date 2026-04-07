@@ -162,7 +162,8 @@
   },
   "dependencies": {
     "@nvidia-elements/forms": "workspace:^",
-    "lit": "catalog:"
+    "lit": "catalog:",
+    "lit-html": "catalog:"
   },
   "peerDependencies": {
     "@nvidia-elements/core": "workspace:^",
@@ -242,7 +243,8 @@
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",
-        "vite.config.ts"
+        "vite.config.ts",
+        "vite.bundle.ts"
       ],
       "output": [
         "dist/**",
