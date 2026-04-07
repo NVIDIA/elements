@@ -1,6 +1,6 @@
 import { ApiService as MetadataApiService, type Attribute, type Element } from '@internals/metadata';
 import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
-import { type PartialAPIResult, getPublicAPIs, getSemanticTokens, searchPublicAPIs } from './utils.js';
+import { getContextAPIs, getContextTokens, searchContextAPIs, type PartialAPIResult } from './utils.js';
 import { service, tool } from '../internal/tools.js';
 import { getElementImports, markdownDescription } from '../internal/utils.js';
 import { eslintSchema } from '../internal/schema.js';
@@ -68,7 +68,7 @@ export class ApiService {
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ elements: PartialAPIResult[]; attributes: PartialAPIResult[] } | string> {
     const apis = await MetadataApiService.getData();
-    return getPublicAPIs(format, apis);
+    return getContextAPIs(format, apis);
   }
 
   @tool({
@@ -108,7 +108,7 @@ export class ApiService {
     const nameList = Array.isArray(names) ? names : [names];
     const results = await Promise.all(
       nameList.map(async name => {
-        const matches = await searchPublicAPIs(name, { limit: 1 });
+        const matches = await searchContextAPIs(name, { limit: 1 });
         return matches.find((r: Element | Attribute) => r.name === name) ?? name;
       })
     );
@@ -225,7 +225,7 @@ export class ApiService {
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ name: string; description: string }[] | string> {
     const apis = await MetadataApiService.getData();
-    return getSemanticTokens(format, apis.data.tokens) ?? '';
+    return getContextTokens(format, apis.data.tokens) ?? '';
   }
 
   @tool({
@@ -269,7 +269,7 @@ export class ApiService {
     query: string;
     format: 'markdown' | 'json';
   }): Promise<(Element | Attribute)[] | string> {
-    const results = await searchPublicAPIs(query, { limit: MAX_RESULT_LIMIT });
+    const results = await searchContextAPIs(query, { limit: MAX_RESULT_LIMIT });
 
     if (results.length === 0) {
       const message = `No components or APIs found matching "${query}".\n\n${listToolHelpfulTip}`;

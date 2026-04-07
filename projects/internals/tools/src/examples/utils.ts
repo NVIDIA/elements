@@ -53,7 +53,7 @@ function rankExample(example: Partial<Example>) {
   return 2;
 }
 
-export function getPublicExamples(format: 'markdown' | 'json', examples: Partial<Example>[]) {
+export function getContextExamples(format: 'markdown' | 'json', examples: Partial<Example>[]) {
   const result = examples
     .filter(isContextExample)
     .reverse()
@@ -74,7 +74,7 @@ export function getPublicExamples(format: 'markdown' | 'json', examples: Partial
     : result;
 }
 
-export async function searchPublicExamples(
+export async function searchContextExamples(
   query: string,
   config: { format: 'markdown' | 'json'; limit?: number } = { format: 'markdown', limit: 100 }
 ): Promise<string | Example[]> {

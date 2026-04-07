@@ -1,6 +1,6 @@
 import { ExamplesService as ExamplesServiceMetadata, type Example } from '@internals/metadata';
 import { service, tool, ToolSupport } from '../internal/tools.js';
-import { getPublicExamples, renderExampleMarkdown, searchPublicExamples } from './utils.js';
+import { getContextExamples, renderExampleMarkdown, searchContextExamples } from './utils.js';
 import { markdownDescription } from '../internal/utils.js';
 
 const MAX_RESULT_LIMIT = 5;
@@ -45,7 +45,7 @@ export class ExamplesService {
     { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
   ): Promise<{ id: string; summary: string }[] | string> {
     const examples = await ExamplesServiceMetadata.getData();
-    const results = getPublicExamples(format, examples);
+    const results = getContextExamples(format, examples);
 
     if (format === 'json') {
       return (results as Example[]).map(e => ({ id: e.id, summary: e.summary }));
@@ -78,7 +78,7 @@ export class ExamplesService {
     }
   })
   static async get({ id, format }: { id: string; format: 'markdown' | 'json' }): Promise<Example | string | undefined> {
-    const results = (await getPublicExamples('json', await ExamplesServiceMetadata.getData())) as Example[];
+    const results = (await getContextExamples('json', await ExamplesServiceMetadata.getData())) as Example[];
     const found = results.find(r => r.id.toLocaleLowerCase() === id.toLowerCase());
 
     if (format === 'json') {
@@ -138,7 +138,7 @@ export class ExamplesService {
     }
   })
   static async search({ query, format }: { query: string; format: 'markdown' | 'json' }): Promise<Example[] | string> {
-    return await searchPublicExamples(query, { format, limit: MAX_RESULT_LIMIT });
+    return await searchContextExamples(query, { format, limit: MAX_RESULT_LIMIT });
   }
 
   static async getAll(): Promise<Example[]> {
