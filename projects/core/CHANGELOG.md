@@ -1,3 +1,26 @@
+## <small>1.66.3 (2026-04-07)</small>
+
+* chore(ci): allow empty paths in version replacement for release configuration ([298772a](https://github.com/NVIDIA/elements/commit/298772a))
+* chore(ci): enable generalized agent skills ([9aeaf18](https://github.com/NVIDIA/elements/commit/9aeaf18))
+* chore(ci): fix bundle configurations ([5a8c412](https://github.com/NVIDIA/elements/commit/5a8c412))
+* chore(ci): fix publish configs ([c53b5bc](https://github.com/NVIDIA/elements/commit/c53b5bc))
+* chore(ci): update lighthouse ([e33e649](https://github.com/NVIDIA/elements/commit/e33e649))
+* chore(ci): update lockfile ([720aacc](https://github.com/NVIDIA/elements/commit/720aacc))
+* chore(docs): update html minify ([909984b](https://github.com/NVIDIA/elements/commit/909984b))
+* chore(core): update svgo ([c091d12](https://github.com/NVIDIA/elements/commit/c091d12))
+* chore(internals): refactor context logic to tools ([88a081f](https://github.com/NVIDIA/elements/commit/88a081f))
+* chore(release): @nvidia-elements/cli-v0.12.4 [skip ci] ([f861633](https://github.com/NVIDIA/elements/commit/f861633))
+* chore(release): @nvidia-elements/styles-v1.14.0 [skip ci] ([2518e15](https://github.com/NVIDIA/elements/commit/2518e15))
+* chore(starters): add monaco example to bundle starter ([23fb672](https://github.com/NVIDIA/elements/commit/23fb672))
+* chore(starters): update angular ([8c47601](https://github.com/NVIDIA/elements/commit/8c47601))
+* chore(starters): upgrade nextjs ([0bdba15](https://github.com/NVIDIA/elements/commit/0bdba15))
+* fix(core): fallback css value for grid column widths ([c87784d](https://github.com/NVIDIA/elements/commit/c87784d))
+* fix(core): remove invalid bundle configuration options ([b793f51](https://github.com/NVIDIA/elements/commit/b793f51))
+* fix(cli): update package.json to include specific dist files in the build process ([99af79d](https://github.com/NVIDIA/elements/commit/99af79d))
+* fix(cli): update sdk version ([2d916ae](https://github.com/NVIDIA/elements/commit/2d916ae))
+* feat(monaco): add bundle support ([8b47ed7](https://github.com/NVIDIA/elements/commit/8b47ed7))
+* feat(styles): add monospace support ([2bbecc4](https://github.com/NVIDIA/elements/commit/2bbecc4))
+
 ## <small>1.66.2 (2026-04-03)</small>
 
 * feat(internals): add bundle registration rule ([007984e](https://github.com/NVIDIA/elements/commit/007984e))
