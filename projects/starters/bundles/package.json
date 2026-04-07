@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
     "@nvidia-elements/styles": "workspace:*"
   },
@@ -35,6 +36,7 @@
       "command": "vite build",
       "files": [
         "../../core/dist/bundles/index.js",
+        "../../monaco/dist/bundles/index.js",
         "../../themes/dist/bundles/index.css",
         "../../themes/dist/fonts/inter.css",
         "../../styles/dist/bundles/index.css",
@@ -48,6 +50,10 @@
       "dependencies": [
         {
           "script": "../../core:build",
+          "cascade": false
+        },
+        {
+          "script": "../../monaco:build",
           "cascade": false
         },
         {
