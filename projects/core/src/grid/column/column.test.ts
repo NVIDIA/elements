@@ -57,6 +57,25 @@ describe(GridColumn.metadata.tag, () => {
     expect(((await event).target as GridColumn).width).toBe('100px');
   });
 
+  it('should append px when width is a bare number', async () => {
+    columns[0].width = '300';
+    await elementIsStable(columns[0]);
+    expect(columns[0].width).toBe('300px');
+    expect(columns[0].getAttribute('width')).toBe('300px');
+  });
+
+  it('should not modify width when a CSS unit is provided', async () => {
+    columns[0].width = '50%';
+    await elementIsStable(columns[0]);
+    expect(columns[0].width).toBe('50%');
+  });
+
+  it('should not modify width for fr values', async () => {
+    columns[0].width = '2fr';
+    await elementIsStable(columns[0]);
+    expect(columns[0].width).toBe('2fr');
+  });
+
   it('should update column alignments when changed', async () => {
     columns[0].columnAlign = 'center';
     await elementIsStable(columns[0]);
