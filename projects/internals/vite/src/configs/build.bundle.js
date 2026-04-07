@@ -27,6 +27,8 @@ export const libraryBundleConfig = {
     rolldownOptions: {
       treeshake: false,
       output: {
+        minify: true,
+        codeSplitting: false,
         format: 'esm',
         assetFileNames: `index.[ext]`,
         entryFileNames: `index.js`,
@@ -35,13 +37,15 @@ export const libraryBundleConfig = {
       plugins: [
         dtsBundle(),
         minifyHTML(),
-        visualizer({
-          filename: 'coverage/size/index.html',
-          gzipSize: true,
-          brotliSize: true,
-          sourcemap: false,
-          template: 'treemap'
-        })
+        // only run on CI where visualization is displayed, temporarily flip flag to test local
+        process.env.CI === 'true' &&
+          visualizer({
+            filename: 'coverage/size/index.html',
+            gzipSize: true,
+            brotliSize: true,
+            sourcemap: false,
+            template: 'treemap'
+          })
       ]
     }
   }
