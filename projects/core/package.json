@@ -395,6 +395,18 @@
       "types": "./dist/format-datetime/define.d.ts",
       "default": "./dist/format-datetime/define.js"
     },
+    "./format-relative-time": {
+      "types": "./dist/format-relative-time/index.d.ts",
+      "default": "./dist/format-relative-time/index.js"
+    },
+    "./format-relative-time/index.js": {
+      "types": "./dist/format-relative-time/index.d.ts",
+      "default": "./dist/format-relative-time/index.js"
+    },
+    "./format-relative-time/define.js": {
+      "types": "./dist/format-relative-time/define.d.ts",
+      "default": "./dist/format-relative-time/define.js"
+    },
     "./forms": {
       "types": "./dist/forms/index.d.ts",
       "default": "./dist/forms/index.js"
