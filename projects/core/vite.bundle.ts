@@ -6,15 +6,6 @@ export default defineConfig(() => {
   const config: UserConfig = {
     resolve: {
       alias: { '@nvidia-elements/core': resolve(import.meta.dirname, './src') }
-    },
-    build: {
-      rolldownOptions: {
-        output: {
-          codeSplitting: {
-            groups: [{ name: 'icons', test: /src\/icon\/icons/ }]
-          }
-        }
-      }
     }
   };
 
