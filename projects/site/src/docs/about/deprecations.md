@@ -9,7 +9,7 @@
 
 The following are the active deprecations. The next major release removes these deprecations. Read more about the <a nve-text="link mkd" href="docs/about/support/#versioning">versioning and deprecation cycle policy</a>.
 
-## MLV/NVE Scope <nve-badge status="warning">1.0 deprecation</nve-badge>
+## MLV/NVE Scope <nve-badge status="warning">deprecated</nve-badge>
 
 These steps are not required to initially migrate and use 1.0. If migrating from 0.x to 1.x please see the [migration guide](docs/about/migration/).
 
@@ -85,7 +85,7 @@ Update HTML elements
 <nve-button>...</nve-button>
 ```
 
-## Alert Banner <nve-badge status="warning">1.0 deprecation</nve-badge>
+## Alert Banner <nve-badge status="warning">deprecated</nve-badge>
 
 The alert banner component no longer exists. Use `nve-alert-group` with the `prominence="emphasis"` option.
 
@@ -109,7 +109,7 @@ The alert banner component no longer exists. Use `nve-alert-group` with the `pro
 </nve-alert-group>
 ```
 
-## Popover Behavior Triggers <nve-badge status="warning">1.0 deprecation</nve-badge>
+## Popover Behavior Triggers <nve-badge status="warning">deprecated</nve-badge>
 
 Before native HTML popovers, popovers required `behaviorTrigger` or `behavior-trigger` for stateful popovers. The native [HTML popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) replaces this approach.
 
@@ -127,11 +127,11 @@ Before native HTML popovers, popovers required `behaviorTrigger` or `behavior-tr
 <nve-button popovertarget="my-tooltip">tooltip</nve-button>
 ```
 
-## JSON Viewer <nve-badge status="warning">1.0 deprecation</nve-badge>
+## JSON Viewer <nve-badge status="warning">deprecated</nve-badge>
 
 The JSON viewer element is an internal API. You can access this API via the public exports but should avoid using it. Use `nve-codeblock` or `nve-monaco-input` for JSON content rendering.
 
-## Layout Full <nve-badge status="warning">1.0 deprecation</nve-badge>
+## Layout Full <nve-badge status="warning">deprecated</nve-badge>
 
 The `grow` property now uses `full` instead to avoid confusion with flexbox grow behavior.
 
@@ -147,7 +147,7 @@ The `grow` property now uses `full` instead to avoid confusion with flexbox grow
 <div nve-layout="full"></div>
 ```
 
-## Typography "eyebrow" <nve-badge status="warning">1.0 deprecation</nve-badge>
+## Typography "eyebrow" <nve-badge status="warning">deprecated</nve-badge>
 
 The typography `eyebrow` utility no longer exists, to align with the standardized semantic names and size options available.
 
@@ -163,7 +163,7 @@ The typography `eyebrow` utility no longer exists, to align with the standardize
 <div nve-text="label sm"></div>
 ```
 
-## Icon Names <nve-badge status="warning">1.0 deprecation</nve-badge>
+## Icon Names <nve-badge status="warning">deprecated</nve-badge>
 
 The following icons now use new names:
 
@@ -206,7 +206,7 @@ The following icons now use new names:
 
 <!-- vale write-good.TooWordy = YES -->
 
-## Icon Button Name Directions <nve-badge status="warning">1.0 deprecation</nve-badge>
+## Icon Button Name Directions <nve-badge status="warning">deprecated</nve-badge>
 
 With the deprecation of directional icons the icon button now requires a explicit direction.
 
@@ -243,7 +243,7 @@ With the deprecation of directional icons the icon button now requires a explici
 <nve-icon name="thumb" direction="down"></nve-icon>
 ```
 
-## Testing <nve-badge status="warning">1.0 deprecation</nve-badge>
+## Testing <nve-badge status="warning">deprecated</nve-badge>
 
 The exported test utilities from `@elements/elements/test` are now supported in a dedicated testing package `@nvidia-elements/testing`.
 
@@ -259,7 +259,7 @@ import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent
 import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@nvidia-elements/testing';
 ```
 
-## Scoped Tags <nve-badge status="warning">1.0 deprecation</nve-badge>
+## Scoped Tags <nve-badge status="warning">deprecated</nve-badge>
 
 The `defineScopedElement` helper no longer exists. Instead, consuming applications define their own tag name. This allows the consuming application to have more control of the `@lit-labs/scoped-registry-mixin` package version.
 

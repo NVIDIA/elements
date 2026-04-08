@@ -9,12 +9,12 @@
 
 ## Libraries and Community
 
-<section nve-layout="row gap:sm pad-bottom:lg">
+<section nve-layout="row gap:sm">
   <nve-button>
-    <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank">{% svg-logo 'gitlab' '18' %} Repo</a>
+    <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank">Repo</a>
   </nve-button>
   <nve-button>
-    <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style="--color: var(--nve-sys-accent-primary-background)"></nve-icon> npm Package</a>
+    <a href="https://registry.npmjs.org" target="_blank">npm Package</a>
   </nve-button>
 </section>
 
@@ -22,7 +22,7 @@
 
 Elements [supports a wide variety](https://custom-elements-everywhere.com) of JavaScript frameworks and libraries as well as vanilla JS. Read more at the [installation](./docs/about/installation/) page.
 
-<section nve-layout="row gap:sm pad-bottom:lg">
+<section nve-layout="row gap:sm">
   <nve-button>
     <a href="./docs/integrations/typescript/">{% svg-logo 'typescript' '18' %} TypeScript</a>
   </nve-button>
@@ -56,7 +56,7 @@ Elements [supports a wide variety](https://custom-elements-everywhere.com) of Ja
 
 To enable and support cutting edge features for all users the primary browser support is Chrome.
 
-<section nve-layout="row gap:sm pad-bottom:md">
+<section nve-layout="row gap:sm">
   <nve-button>
     <a href="https://www.google.com/chrome/">{% svg-logo 'chrome' '20' %} Chrome</a>
   </nve-button>
