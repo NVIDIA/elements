@@ -57,7 +57,6 @@ catalog:
   '@lit-labs/virtualizer': ^2.1.1
   '@lit/react': ^1.0.8
   '@lit/reactive-element': ^2.1.2
-  '@sentry/browser': 7.120.3
   '@types/node': 24.9.1
   '@types/react': 19.2.2
   '@types/react-dom': 19.2.2
