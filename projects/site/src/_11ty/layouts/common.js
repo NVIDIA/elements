@@ -60,31 +60,24 @@ export const renderBaseHead = data => /* html */ `
         visibility: hidden !important;
       }
     }
-  </style>
-  <script type="module" defer>
-    import { BrowserClient, getCurrentScope, defaultStackParser, makeFetchTransport, breadcrumbsIntegration, browserApiErrorsIntegration, dedupeIntegration, functionToStringIntegration, globalHandlersIntegration, httpContextIntegration, browserTracingIntegration } from '@sentry/browser';
-    const client = new BrowserClient({
-      dsn: 'https://44d4951c98e9732238fdd17c5a4d56ed@sentry.nvidia.com/142',
-      enabled: process.env.NODE_ENV !== 'development',
-      tracesSampleRate: 1.0,
-      tracePropagationTargets: ['https://localhost:4173', '${ELEMENTS_PAGES_BASE_URL}/'],
-      transport: makeFetchTransport,
-      stackParser: defaultStackParser,
-      integrations: [
-        breadcrumbsIntegration(),
-        browserApiErrorsIntegration(),
-        dedupeIntegration(),
-        functionToStringIntegration(),
-        globalHandlersIntegration(),
-        httpContextIntegration(),
-        browserTracingIntegration(),
-      ]
-    });
 
-    getCurrentScope().setClient(client);
-    client.init();
-    // setTimeout(() => NOTFOUND(), 2000) // test error
-  </script>
+    /* mobile */
+    .header-btn {
+      display: none;
+    }
+
+    @media only screen and (width >= 920px) {
+      nve-page-header {
+        .header-btn {
+          display: block !important;
+        }
+
+        .header-menu-btn {
+          display: none !important;
+        }
+      }
+    }
+  </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-723T2ZTKVT" defer></script>
   <script defer>
@@ -94,6 +87,12 @@ export const renderBaseHead = data => /* html */ `
 
     gtag('config', 'G-723T2ZTKVT');
     gtag('set', 'content_group', 'elements');
+  </script>
+  <script type="module">
+    const sidenavPanel = globalThis.document.querySelector('#sidenav-panel');
+    if (globalThis.window.innerWidth <= 720) {
+      sidenavPanel.hidden = true;
+    }
   </script>
   <script type="module">
     if (globalThis.document.documentElement.getAttribute('nve-theme')?.includes('brand')) {
@@ -113,7 +112,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/about/accessibility/') ? 'highlighted selected' : ''}><a href="docs/about/accessibility/">Accessibility</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/contributions/') ? 'highlighted selected' : ''}><a href="docs/about/contributions/">Contributions</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'highlighted selected' : ''}><a href="docs/about/requests/">Requests</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted selected' : ''}><a href="docs/about/migration/">Migration</a></nve-tree-node>
+    <!-- <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted selected' : ''}><a href="docs/about/migration/">Migration</a></nve-tree-node> -->
     <nve-tree-node ${data.page.url.includes('/docs/about/deprecations/') ? 'highlighted selected' : ''}><a href="docs/about/deprecations/">Deprecations</a></nve-tree-node>
   </nve-tree-node>
   
@@ -126,7 +125,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted selected' : ''}><a href="docs/integrations/angular/">Angular</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'highlighted selected' : ''}><a href="docs/integrations/bundles/">Bundles</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/extensions/') ? 'highlighted selected' : ''}><a href="docs/integrations/extensions/">Extensions</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'highlighted selected' : ''}><a href="docs/integrations/go/">Go</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'highlighted selected' : ''}><a href="docs/integrations/go/" aria-label="Go Language">Go</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/hugo/') ? 'highlighted selected' : ''}><a href="docs/integrations/hugo/">Hugo</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/importmaps/') ? 'highlighted selected' : ''}><a href="docs/integrations/importmaps/">Import Maps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/lit/') ? 'highlighted selected' : ''}><a href="docs/integrations/lit/">Lit</a></nve-tree-node>
@@ -394,11 +393,12 @@ export function renderBasePageHeader(data) {
 <nve-page-header slot="header">
   <nve-logo slot="prefix" color="brand-green" size="sm">NV</nve-logo>
   <a slot="prefix" href=".">Elements</a>
-  <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''}><a href="docs/about/getting-started/">Catalog</a></nve-button>
-  ${ELEMENTS_PLAYGROUND_BASE_URL ? /* html */ `<nve-button container="flat"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>` : ''}
-  <nve-button container="flat" ${data.page.url.includes('starters') ? 'selected' : ''}><a href="starters/">Starters</a></nve-button>
-  <nve-button container="flat"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Repo</a></nve-button>
+  <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''} class="header-btn"><a href="docs/about/getting-started/">Catalog</a></nve-button>
+  ${ELEMENTS_PLAYGROUND_BASE_URL ? /* html */ `<nve-button container="flat" class="header-btn"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>` : ''}
+  <nve-button container="flat" ${data.page.url.includes('starters') ? 'selected' : ''} class="header-btn"><a href="starters/">Starters</a></nve-button>
+  <nve-button container="flat" class="header-btn"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Repo</a></nve-button>
   ${data.page.url !== '/' ? /* html */ `<nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>` : ''}
+  <nve-icon-button class="header-menu-btn" command="--toggle" commandfor="sidenav-panel" container="flat" slot="suffix" icon-name="menu" aria-label="menu"></nve-icon-button>
 </nve-page-header>
   `;
 }

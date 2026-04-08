@@ -274,7 +274,7 @@ nve-page:not(:has(nve-resize-handle:state(active))) {
 
 /* Main Content Styles */
 #docs-main {
-  padding: var(--nve-ref-space-xl) var(--nve-ref-space-xxl);
+  padding: var(--nve-ref-space-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -287,6 +287,12 @@ nve-page:not(:has(nve-resize-handle:state(active))) {
   #doc-content {
     max-width: 1100px;
     width: 100%;
+  }
+}
+
+@media only screen and (width >= 720px) {
+  #docs-main {
+    padding: var(--nve-ref-space-xl) var(--nve-ref-space-xxl);
   }
 }
 
@@ -394,4 +400,14 @@ hr {
 :root:not([show-advanced-api='show-advanced-api']) [data-api-section='css-parts'],
 :root:not([show-advanced-api='show-advanced-api']) #anchor-generator li:has(a[href$='#css-parts']) {
   display: none;
+}
+
+.docs-badge-section {
+  display: none;
+}
+
+@media (width >= 980px) {
+  .docs-badge-section {
+    display: block;
+  }
 }

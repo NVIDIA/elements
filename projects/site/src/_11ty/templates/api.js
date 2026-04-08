@@ -82,7 +82,7 @@ export function elementSummary(tag) {
     .find(result => result.name?.includes(tag));
 
   return /* html */ `
-  <section nve-layout="row gap:xxs align:wrap">
+  <section nve-layout="row gap:xxs align:wrap" class="docs-badge-section">
     ${badgeStatus(element?.manifest?.metadata?.status ?? '', '', ESM_ELEMENTS_VERSION)}
     ${badgeCoverage(coverageTotal, '', 'Coverage:&nbsp;')}
     ${badgeBundle(lighthouseResults?.payload?.javascript?.kb ?? 0, '', 'Bundle:&nbsp;')}
