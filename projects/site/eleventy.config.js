@@ -102,6 +102,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ '../themes/dist/bundles': 'local-bundles/themes' });
   eleventyConfig.addPassthroughCopy({ '../styles/dist/bundles': 'local-bundles/styles' });
 
+  eleventyConfig.addPassthroughCopy('src/robots.txt');
+
   // Configure Lit SSR plugin for web components
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',
