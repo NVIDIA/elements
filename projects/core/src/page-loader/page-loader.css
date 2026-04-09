@@ -1,7 +1,7 @@
 :host {
+  inset: 0 !important;
   margin: auto;
   height: fit-content;
-  inset: 0;
   --gap: var(--nve-ref-space-sm);
 }
 
