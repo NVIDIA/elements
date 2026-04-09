@@ -7,6 +7,7 @@ import {
   getAttributeChanges,
   getAttributeListChanges,
   appendRootNodeStyle,
+  getPropertyChanges,
   getElementUpdate,
   clickOutsideElementBounds,
   parseTokenNumber,
@@ -224,6 +225,63 @@ describe('appendRootNodeStyle', () => {
     await elementIsStable(testTwo);
     await elementIsStable(testOne);
     expect(testOne.shadowRoot.adoptedStyleSheets.length).toBe(1);
+  });
+});
+
+describe('getPropertyChanges', () => {
+  it('should call callback when a property is set via assignment', () => {
+    const input = document.createElement('input');
+    const spy = vi.fn();
+
+    getPropertyChanges(input, 'value', spy);
+    input.value = 'hello';
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy).toHaveBeenCalledWith('hello');
+    expect(input.value).toBe('hello');
+  });
+
+  it('should call callback on every subsequent assignment', () => {
+    const input = document.createElement('input');
+    const spy = vi.fn();
+
+    getPropertyChanges(input, 'value', spy);
+    input.value = 'a';
+    input.value = 'b';
+    input.value = 'c';
+
+    expect(spy).toHaveBeenCalledTimes(3);
+    expect(spy.mock.calls.map(c => c[0])).toEqual(['a', 'b', 'c']);
+  });
+
+  it('should preserve the native getter', () => {
+    const option = document.createElement('option');
+    const spy = vi.fn();
+
+    getPropertyChanges(option, 'selected', spy);
+    option.selected = true;
+
+    expect(option.selected).toBe(true);
+
+    option.selected = false;
+    expect(option.selected).toBe(false);
+  });
+
+  it('should not throw when the property has no prototype descriptor', () => {
+    const div = document.createElement('div');
+
+    expect(() => getPropertyChanges(div, 'nonexistent', vi.fn())).not.toThrow();
+  });
+
+  it('should not override a non-configurable own property', () => {
+    const div = document.createElement('div') as HTMLDivElement & { locked: string };
+    Object.defineProperty(div, 'locked', { configurable: false, writable: true, value: 'x' });
+    const spy = vi.fn();
+
+    getPropertyChanges(div, 'locked', spy);
+    div.locked = 'y';
+
+    expect(spy).not.toHaveBeenCalled();
   });
 });
 

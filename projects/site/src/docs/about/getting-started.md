@@ -51,7 +51,7 @@ import '@nvidia-elements/core/button/define.js';
     <a href="./docs/integrations/installation/"><nve-icon name="gear"></nve-icon> Installation</a>
   </nve-button>
   <nve-button>
-    <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=elements&config=eyJkZXNjcmlwdGlvbiI6IkVsZW1lbnRzIEFQSSBhbmQgQ3VzdG9tIEVsZW1lbnQgU2NoZW1hIiwiZW52Ijp7Im5wbV9jb25maWdfcmVnaXN0cnkiOiJodHRwczovL3VybS5udmlkaWEuY29tL2FydGlmYWN0b3J5L2FwaS9ucG0vc3ctbmdjLXVuaWZpZWQtbnBtLXByb3h5LyJ9LCJjb21tYW5kIjoibnBtIGV4ZWMgLS1wYWNrYWdlPUBudmUtbGFicy9jbGlAbGF0ZXN0IC15IC0tcHJlZmVyLW9ubGluZSAtLSBudmUtbWNwIn0%3D"><svg width="18" height="18"><use href="#cursor-svg"></use></svg> Add to Cursor</a>
+    <a href="docs/mcp/"><svg width="18" height="18"><use href="#cursor-svg"></use></svg> Add to Cursor</a>
   </nve-button>
   <nve-button>
     <a href="docs/mcp/"><svg width="18" height="18"><use href="#claude-svg"></use></svg> Add to Claude</a>

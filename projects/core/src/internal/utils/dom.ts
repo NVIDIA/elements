@@ -73,6 +73,23 @@ export function styleSheetToString(stylesheet: CSSStyleSheet) {
     : '';
 }
 
+/** Intercepts a property setter on an element so `callback` fires on every assignment. Does not use a MutationObserver. */
+export function getPropertyChanges(element: HTMLElement, key: string, callback: (value: unknown) => void) {
+  const proto = Object.getPrototypeOf(element);
+  const descriptor = Object.getOwnPropertyDescriptor(proto, key);
+  if (!descriptor) return;
+  const own = Object.getOwnPropertyDescriptor(element, key);
+  if (own && own.configurable === false) return;
+  Object.defineProperty(element, key, {
+    configurable: true,
+    get: descriptor.get,
+    set: (val: unknown) => {
+      descriptor.set!.call(element, val);
+      callback(val);
+    }
+  });
+}
+
 /* used for cases of needing to know a property update outside of lit, example a native input value prop change */
 export function getElementUpdate(element: HTMLElement, key: string, callback: (value: unknown) => void) {
   if (element.hasAttribute(key)) {
@@ -81,21 +98,7 @@ export function getElementUpdate(element: HTMLElement, key: string, callback: (v
     callback((element as unknown as Record<string, unknown>)[key]);
   }
 
-  const updatedProp = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element), key);
-  if (updatedProp) {
-    const ownDescriptor = Object.getOwnPropertyDescriptor(element, key);
-    if (!ownDescriptor || ownDescriptor.configurable !== false) {
-      Object.defineProperty(element, key, {
-        configurable: true,
-        get: updatedProp.get,
-        set: val => {
-          updatedProp.set!.call(element, val);
-          callback(val);
-        }
-      });
-    }
-  }
-
+  getPropertyChanges(element, key, callback);
   return getAttributeChanges(element, key, val => callback(val));
 }
 

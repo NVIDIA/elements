@@ -30,6 +30,10 @@
 
 {% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Overflow' %}
 
+## Infinite Scroll
+
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'InfiniteScroll' %}
+
 ## Layout
 
 {% api 'nve-combobox', 'property', 'layout' %}

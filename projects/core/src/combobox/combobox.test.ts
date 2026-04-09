@@ -322,29 +322,6 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     expect(input.value).toBe('option 1');
   });
 
-  it('should not overwrite input value if already set when initializing with selected option', async () => {
-    removeFixture(fixture);
-    fixture = await createFixture(html`
-      <nve-combobox>
-        <label>combobox</label>
-        <input type="search" value="default value" />
-        <select>
-          <option selected value="option 1"></option>
-          <option value="option 2"></option>
-        </select>
-      </nve-combobox>
-    `);
-    element = fixture.querySelector(Combobox.metadata.tag);
-    input = fixture.querySelector('input');
-    select = fixture.querySelector('select');
-    options = Array.from(fixture.querySelectorAll('option'));
-    await elementIsStable(element);
-
-    expect(options[0].selected).toBe(true);
-    expect(select.value).toBe('option 1');
-    expect(input.value).toBe('default value');
-  });
-
   it('should show a check icon when the option is selected', async () => {
     expect(options[0].selected).toBe(true);
     const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
@@ -524,6 +501,36 @@ describe(`${Combobox.metadata.tag}: single select`, () => {
     expect(input.value).toBe('');
     expect(select.selectedIndex).toBe(-1);
     expect(dropdown.matches(':popover-open')).toBe(false);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: single select with pre-filled input`, () => {
+  let fixture: HTMLElement;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should not overwrite input value if already set when initializing with selected option', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" value="default value" />
+        <select>
+          <option selected value="option 1"></option>
+          <option value="option 2"></option>
+        </select>
+      </nve-combobox>
+    `);
+    const element: Combobox = fixture.querySelector(Combobox.metadata.tag);
+    const input = fixture.querySelector('input');
+    const select = fixture.querySelector('select');
+    const options = Array.from(fixture.querySelectorAll('option'));
+    await elementIsStable(element);
+
+    expect(options[0].selected).toBe(true);
+    expect(select.value).toBe('option 1');
+    expect(input.value).toBe('default value');
   });
 });
 
@@ -2087,5 +2094,476 @@ describe(`${Combobox.metadata.tag}: dropdown source`, () => {
     const event = await openEvent;
 
     expect(event.detail.trigger).toBe(inputContainer);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: slotted child mutation observation`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should render an externally added selected option as an inline tag in multi-select', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="A" selected>A</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags().length).toBe(1);
+
+    const select = fixture.querySelector('select');
+    const option = new Option('B', 'B', false, true);
+    select.appendChild(option);
+    await elementIsStable(element);
+
+    expect(tags().length).toBe(2);
+  });
+
+  it('should update dropdown after bulk innerHTML replacement on datalist', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Old 1"></option>
+          <option value="Old 2"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    const datalist = fixture.querySelector('datalist');
+    datalist.innerHTML =
+      '<option value="New 1"></option><option value="New 2"></option><option value="New 3"></option>';
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items.length).toBe(3);
+    expect(items[0].textContent.trim()).toBe('New 1');
+    expect(items[1].textContent.trim()).toBe('New 2');
+    expect(items[2].textContent.trim()).toBe('New 3');
+  });
+
+  it('should update dropdown after bulk innerHTML replacement on select', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="Old" selected>Old</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags().length).toBe(1);
+
+    const select = fixture.querySelector('select');
+    select.innerHTML = '<option value="X" selected>X</option><option value="Y" selected>Y</option>';
+    await elementIsStable(element);
+
+    expect(tags().length).toBe(2);
+  });
+
+  it('should remove option from dropdown when removed from DOM', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Keep"></option>
+          <option value="Remove"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag).length).toBe(2);
+
+    const datalist = fixture.querySelector('datalist');
+    datalist.removeChild(datalist.lastElementChild);
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    expect(items.length).toBe(1);
+    expect(items[0].textContent.trim()).toBe('Keep');
+  });
+
+  it('should remove inline tag when selected option is removed from multi-select', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="A" selected>A</option>
+          <option value="B" selected>B</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags().length).toBe(2);
+
+    const select = fixture.querySelector('select');
+    select.removeChild(select.lastElementChild);
+    await elementIsStable(element);
+
+    expect(tags().length).toBe(1);
+  });
+
+  it('should update inline tags when selected attribute is toggled via setAttribute', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="A">A</option>
+          <option value="B">B</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags().length).toBe(0);
+
+    const options = fixture.querySelectorAll('option');
+    options[0].setAttribute('selected', '');
+    options[1].setAttribute('selected', '');
+    await elementIsStable(element);
+
+    expect(tags().length).toBe(2);
+  });
+
+  it('should update inline tags when option.selected is set via property assignment on an existing option', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="A">A</option>
+          <option value="B">B</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags().length).toBe(0);
+
+    const options = fixture.querySelectorAll('option');
+    options[0].selected = true;
+    await elementIsStable(element);
+
+    expect(tags().length).toBe(1);
+
+    options[1].selected = true;
+    await elementIsStable(element);
+
+    expect(tags().length).toBe(2);
+  });
+
+  it('should update inline tags when option.selected is set via property on a dynamically added option', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="A" selected>A</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    const tags = () => element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags().length).toBe(1);
+
+    const select = fixture.querySelector('select');
+    const option = document.createElement('option');
+    option.value = 'B';
+    option.textContent = 'B';
+    select.appendChild(option);
+    await elementIsStable(element);
+
+    option.selected = true;
+    await elementIsStable(element);
+
+    expect(tags().length).toBe(2);
+  });
+
+  it('should not dispatch change event during observer-triggered re-sync', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="A" selected>A</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    const changeSpy = vi.fn();
+    const select = fixture.querySelector('select');
+    select.addEventListener('change', changeSpy);
+
+    const option = new Option('B', 'B', false, true);
+    select.appendChild(option);
+    await elementIsStable(element);
+
+    expect(changeSpy).not.toHaveBeenCalled();
+    select.removeEventListener('change', changeSpy);
+  });
+
+  it('should disconnect observers when element is removed from DOM', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="A" selected>A</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    await elementIsStable(element);
+
+    const select = fixture.querySelector('select');
+    removeFixture(fixture);
+
+    const option = new Option('B', 'B', false, true);
+    select.appendChild(option);
+
+    await new Promise(r => setTimeout(r, 50));
+    const tags = element.shadowRoot.querySelectorAll(Tag.metadata.tag);
+    expect(tags.length).toBe(1);
+
+    fixture = null;
+  });
+});
+
+describe(`${Combobox.metadata.tag}: scroll event`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+  let scrollContainer: HTMLElement;
+
+  function getScrollContainer(el: Combobox) {
+    const menu = el.shadowRoot.querySelector<Menu>(Menu.metadata.tag);
+    return menu?.shadowRoot?.querySelector<HTMLElement>('[internal-host]');
+  }
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should fire scroll event with correct detail when the dropdown list is scrolled', async () => {
+    const optionsHtml = Array(30)
+      .fill(0)
+      .map((_, i) => `<option value="Option ${i + 1}"></option>`)
+      .join('');
+    fixture = await createFixture(html`
+      <nve-combobox style="--scroll-height: 100px">
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          ${document.createRange().createContextualFragment(optionsHtml)}
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+    await new Promise(r => setTimeout(r, 50));
+    scrollContainer = getScrollContainer(element);
+
+    const spy = vi.fn();
+    element.addEventListener('scroll', spy);
+
+    scrollContainer.scrollTop = 50;
+    scrollContainer.dispatchEvent(new Event('scroll'));
+    await new Promise(r => requestAnimationFrame(r));
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    const detail = spy.mock.calls[0][0].detail;
+    expect(detail.scrollHeight).toBeGreaterThan(0);
+    expect(detail.clientHeight).toBeGreaterThan(0);
+  });
+
+  it('should have composed: true and bubbles: true so the event crosses shadow DOM', async () => {
+    const optionsHtml = Array(30)
+      .fill(0)
+      .map((_, i) => `<option value="Option ${i + 1}"></option>`)
+      .join('');
+    fixture = await createFixture(html`
+      <nve-combobox style="--scroll-height: 100px">
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          ${document.createRange().createContextualFragment(optionsHtml)}
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+    await new Promise(r => setTimeout(r, 50));
+    scrollContainer = getScrollContainer(element);
+
+    const spy = vi.fn();
+    element.addEventListener('scroll', spy);
+
+    scrollContainer.scrollTop = 50;
+    scrollContainer.dispatchEvent(new Event('scroll'));
+    await new Promise(r => requestAnimationFrame(r));
+
+    const event = spy.mock.calls[0][0] as CustomEvent;
+    expect(event.composed).toBe(true);
+    expect(event.bubbles).toBe(true);
+  });
+
+  it('should throttle to at most one event per animation frame', async () => {
+    const optionsHtml = Array(30)
+      .fill(0)
+      .map((_, i) => `<option value="Option ${i + 1}"></option>`)
+      .join('');
+    fixture = await createFixture(html`
+      <nve-combobox style="--scroll-height: 100px">
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          ${document.createRange().createContextualFragment(optionsHtml)}
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+    await new Promise(r => setTimeout(r, 50));
+    scrollContainer = getScrollContainer(element);
+
+    const spy = vi.fn();
+    element.addEventListener('scroll', spy);
+
+    scrollContainer.scrollTop = 10;
+    scrollContainer.dispatchEvent(new Event('scroll'));
+    scrollContainer.scrollTop = 20;
+    scrollContainer.dispatchEvent(new Event('scroll'));
+    scrollContainer.scrollTop = 30;
+    scrollContainer.dispatchEvent(new Event('scroll'));
+    await new Promise(r => requestAnimationFrame(r));
+
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not emit scroll events when the dropdown has no scrollbar', async () => {
+    fixture = await createFixture(html`
+      <nve-combobox style="--scroll-height: 500px">
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Option 1"></option>
+          <option value="Option 2"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+    await new Promise(r => setTimeout(r, 50));
+    scrollContainer = getScrollContainer(element);
+
+    const spy = vi.fn();
+    element.addEventListener('scroll', spy);
+
+    scrollContainer.scrollTop = 50;
+    await new Promise(r => requestAnimationFrame(r));
+
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
+  it('should report scroll geometry that allows computing distance from bottom', async () => {
+    const optionsHtml = Array(30)
+      .fill(0)
+      .map((_, i) => `<option value="Option ${i + 1}"></option>`)
+      .join('');
+    fixture = await createFixture(html`
+      <nve-combobox style="--scroll-height: 100px">
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          ${document.createRange().createContextualFragment(optionsHtml)}
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+    await new Promise(r => setTimeout(r, 50));
+    scrollContainer = getScrollContainer(element);
+
+    const spy = vi.fn();
+    element.addEventListener('scroll', spy);
+
+    scrollContainer.scrollTop = scrollContainer.scrollHeight;
+    scrollContainer.dispatchEvent(new Event('scroll'));
+    await new Promise(r => requestAnimationFrame(r));
+
+    const { scrollTop, scrollHeight, clientHeight } = spy.mock.calls[0][0].detail;
+    expect(typeof scrollTop).toBe('number');
+    expect(typeof scrollHeight).toBe('number');
+    expect(typeof clientHeight).toBe('number');
+    const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
+    expect(distanceFromBottom).toBeGreaterThanOrEqual(0);
   });
 });
