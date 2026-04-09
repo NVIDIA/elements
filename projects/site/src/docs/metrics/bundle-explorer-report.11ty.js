@@ -1,9 +1,10 @@
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import path from 'path';
 import * as url from 'url';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-const elements = readFileSync(path.resolve(__dirname, '../../../../core/coverage/size/index.html'), 'utf8');
+const sizePath = path.resolve(__dirname, '../../../../core/coverage/size/index.html');
+const elements = existsSync(sizePath) ? readFileSync(sizePath, 'utf8') : '';
 
 export const data = {
   title: 'Bundle Explorer Report',

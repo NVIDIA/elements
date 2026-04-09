@@ -14,13 +14,30 @@ export async function installShortcode(tag) {
   const element = elements.find(d => d.name === tag);
   return element?.manifest?.metadata?.entrypoint
     ? /* html */ `
-\`\`\`typescript
-import '${element?.manifest?.metadata?.entrypoint}/define.js';
-\`\`\`
+<section nve-layout="column gap:sm">
 
 \`\`\`html
+<script type="module">
+  import '${element?.manifest?.metadata?.entrypoint}/define.js';
+</script>
+
 ${examples.find(s => s.name === 'Default' && s.element === tag)?.template}
 \`\`\`
+
+<div nve-layout="column gap:xs" role="region" aria-label="AI Agent API access via CLI or MCP">
+
+  \`\`\`shell
+  nve api.get ${element.name}
+  \`\`\`
+
+  <div nve-layout="row gap:xxs">
+    <a href="docs/cli/" nve-text="body sm muted">CLI</a>
+    <span nve-text="body sm muted">/</span>
+    <a href="docs/mcp/" nve-text="body sm muted">MCP</a>
+  </div>
+</div>
+
+</section>
 `
     : '';
 }
