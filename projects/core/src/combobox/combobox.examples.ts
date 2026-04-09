@@ -595,6 +595,42 @@ export const DynamicTypeaheadSearch = () => {
 }
 
 /**
+ * @summary Infinite scroll combobox loading, using the scroll event to append options as the user nears the bottom. Use for server-backed datasets where loading all options up front is impractical.
+ * @tags pattern
+ */
+export const InfiniteScroll = () => {
+  return html`
+<nve-combobox id="infinite-scroll-combo" style="--scroll-height: 200px">
+  <label>GPU Models</label>
+  <input type="search" placeholder="Scroll to load more…" />
+  <datalist id="infinite-scroll-list"></datalist>
+</nve-combobox>
+
+<script type="module">
+  const combo = document.getElementById('infinite-scroll-combo');
+  const datalist = document.getElementById('infinite-scroll-list');
+  let loading = false;
+
+  async function loadBatch() {
+    if (loading) return;
+    loading = true;
+    const items = await new Promise(resolve => setTimeout(() => resolve(Array.from({ length: 100 }, (_, i) => 'GPU Model ' + (datalist.options.length + i + 1))), 300));
+    datalist.append(...items.map(v => new Option(v)));
+    loading = false;
+  }
+
+  loadBatch();
+
+  combo.addEventListener('scroll', (e) => {
+    if (e.detail.scrollHeight - e.detail.scrollTop - e.detail.clientHeight <= 128) {
+      loadBatch();
+    }
+  });
+</script>
+  `
+}
+
+/**
  * @summary Performance test with 1000 options to show filtering efficiency with large datasets.
  * @tags test-case performance
  */
