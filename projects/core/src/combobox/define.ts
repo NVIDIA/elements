@@ -1,8 +1,11 @@
 import { define } from '@nvidia-elements/core/internal';
 import { Combobox } from '@nvidia-elements/core/combobox';
-import '@nvidia-elements/core/forms/define.js';
+import { Control, ControlGroup, ControlMessage } from '@nvidia-elements/core/forms';
 
 define(Combobox);
+define(Control);
+define(ControlGroup);
+define(ControlMessage);
 
 declare global {
   interface HTMLElementTagNameMap {
