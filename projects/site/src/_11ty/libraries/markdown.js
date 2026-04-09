@@ -8,7 +8,7 @@ const markdown = markdownIt({
   highlight: function (str, lang) {
     lang = lang === 'javascript' ? 'typescript' : lang; // alias javascript to typescript
     return /* html */ `<nve-codeblock language="${lang}"><template>${markdown.utils.escapeHtml(str)}</template></nve-codeblock>
-    <nve-copy-button class="markdown-copy-button" aria-label="copy" behavior-copy container="flat"></nve-copy-button>
+    <nve-copy-button class="markdown-copy-button" role="button" aria-label="copy" behavior-copy container="flat"></nve-copy-button>
 
     <script type="module">
       document.querySelectorAll('.markdown-copy-button').forEach(button => {
