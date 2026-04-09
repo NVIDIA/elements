@@ -1,3 +1,15 @@
+## <small>1.66.4 (2026-04-09)</small>
+
+* chore(ci): add @nvidia-elements/monaco to cdn release ([61f26e4](https://github.com/NVIDIA/elements/commit/61f26e4))
+* chore(ci): update lighthouse scores ([3945fdc](https://github.com/NVIDIA/elements/commit/3945fdc))
+* chore(ci): update playwright ([6c1e506](https://github.com/NVIDIA/elements/commit/6c1e506))
+* chore(docs): conditional fallback for coverage report ([19dfa25](https://github.com/NVIDIA/elements/commit/19dfa25))
+* chore(docs): migration cleanup ([557fd8a](https://github.com/NVIDIA/elements/commit/557fd8a))
+* chore(release): @nvidia-elements/cli-v0.12.5 [skip ci] ([fdb7f03](https://github.com/NVIDIA/elements/commit/fdb7f03))
+* chore(release): @nvidia-elements/monaco-v1.5.0 [skip ci] ([68729ff](https://github.com/NVIDIA/elements/commit/68729ff))
+* fix(core): side effect imports ([8a967d3](https://github.com/NVIDIA/elements/commit/8a967d3))
+* fix(monaco): side effect imports ([f8054d2](https://github.com/NVIDIA/elements/commit/f8054d2))
+
 ## <small>1.66.3 (2026-04-07)</small>
 
 * chore(ci): allow empty paths in version replacement for release configuration ([298772a](https://github.com/NVIDIA/elements/commit/298772a))
