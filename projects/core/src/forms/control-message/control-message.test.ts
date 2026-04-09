@@ -71,7 +71,7 @@ describe(ControlMessage.metadata.tag, () => {
     element.appendChild(icon);
     await elementIsStable(element);
     expect(
-      (element.shadowRoot.querySelector('slot[name="icon"]') as HTMLSlotElement).assignedNodes()[0]
-    ).toBeInstanceOf(Icon);
+      (element.shadowRoot.querySelector('slot[name="icon"]') as HTMLSlotElement).assignedNodes()[0].localName
+    ).toBe(Icon.metadata.tag);
   });
 });

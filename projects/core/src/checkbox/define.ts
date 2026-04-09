@@ -1,9 +1,12 @@
 import { define } from '@nvidia-elements/core/internal';
 import { Checkbox, CheckboxGroup } from '@nvidia-elements/core/checkbox';
-import '@nvidia-elements/core/forms/define.js';
+import { Control, ControlGroup, ControlMessage } from '@nvidia-elements/core/forms';
 
 define(Checkbox);
 define(CheckboxGroup);
+define(Control);
+define(ControlGroup);
+define(ControlMessage);
 
 declare global {
   interface HTMLElementTagNameMap {

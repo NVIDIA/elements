@@ -17,6 +17,7 @@ function template(theme: '' | 'dark' = '') {
   return /* html */ `
   <script type="module">
     import '@nvidia-elements/core/badge/define.js';
+    import '@nvidia-elements/core/icon/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
   <div nve-layout="row gap:xs align:wrap">

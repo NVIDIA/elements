@@ -1,8 +1,11 @@
 import { define } from '@nvidia-elements/core/internal';
 import { Date } from '@nvidia-elements/core/date';
-import '@nvidia-elements/core/forms/define.js';
+import { Control, ControlGroup, ControlMessage } from '@nvidia-elements/core/forms';
 
 define(Date);
+define(Control);
+define(ControlGroup);
+define(ControlMessage);
 
 declare global {
   interface HTMLElementTagNameMap {

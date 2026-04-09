@@ -1,8 +1,11 @@
 import { define } from '@nvidia-elements/core/internal';
 import { Color } from '@nvidia-elements/core/color';
-import '@nvidia-elements/core/forms/define.js';
+import { Control, ControlGroup, ControlMessage } from '@nvidia-elements/core/forms';
 
 define(Color);
+define(Control);
+define(ControlGroup);
+define(ControlMessage);
 
 declare global {
   interface HTMLElementTagNameMap {
