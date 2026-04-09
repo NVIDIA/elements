@@ -1,3 +1,10 @@
+## <small>1.66.5 (2026-04-09)</small>
+
+* fix(core): readme ([2c4d62c](https://github.com/NVIDIA/elements/commit/2c4d62c))
+* fix(monaco): readme ([59295b6](https://github.com/NVIDIA/elements/commit/59295b6))
+* chore(ci): fix the dependency order of jobs ([c1a547f](https://github.com/NVIDIA/elements/commit/c1a547f))
+* chore(release): @nvidia-elements/monaco-v1.5.1 [skip ci] ([ed02c88](https://github.com/NVIDIA/elements/commit/ed02c88))
+
 ## <small>1.66.4 (2026-04-09)</small>
 
 * chore(ci): add @nvidia-elements/monaco to cdn release ([61f26e4](https://github.com/NVIDIA/elements/commit/61f26e4))
