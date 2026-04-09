@@ -8,7 +8,7 @@ import {
   focusElementTimeout,
   getDisplayValue,
   getElementUpdate,
-  onChildListMutation,
+  getPropertyChanges,
   scopedRegistry,
   useStyles
 } from '@nvidia-elements/core/internal';
@@ -49,6 +49,7 @@ import styles from './combobox.css?inline';
  * @csspart menu-item - The menu item elements
  * @csspart checkbox - The checkbox element
  * @csspart icon - The icon element
+ * @event scroll - Fires when the user scrolls the dropdown option list. Throttled to one dispatch per animation frame. `detail: { scrollTop, scrollHeight, clientHeight }`.
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/
  */
 @scopedRegistry()
@@ -139,6 +140,7 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #observers: (MutationObserver | ResizeObserver)[] = [];
+  #syncPending = false;
 
   protected _associateDatalist = false;
 
@@ -171,7 +173,7 @@ export class Combobox extends Control implements ContainerElement {
     const visibleOptions = options.filter(o => !o.hidden).filter(o => !(o.value === '' && o.disabled));
     const hasNoResults = visibleOptions.filter(o => !o.disabled).length === 0;
     return html`
-    <nve-dropdown part="dropdown" .popoverType=${'manual'} .modal=${false} @open=${(e: Event) => ((e.target as HTMLElement).hidden = false)} @close=${this.#closeListBox} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
+    <nve-dropdown part="dropdown" .popoverType=${'manual'} .modal=${false} @open=${this.#onDropdownOpen} @close=${this.#closeListBox} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
       <nve-menu part="menu" role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
         ${visibleOptions.map(
           o => html`
@@ -205,6 +207,7 @@ export class Combobox extends Control implements ContainerElement {
     this.shadowRoot!.addEventListener('slotchange', () => {
       this.#_datalist = null;
       this.#_select = null;
+      this.#onSlottedChildMutation();
     });
     await this.updateComplete;
     this.#setupSingleSelect();
@@ -221,16 +224,21 @@ export class Combobox extends Control implements ContainerElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.#observers.push(
-      onChildListMutation(
-        this,
-        () => {
-          this.#syncOptionSelectedStates();
-          this.requestUpdate();
-        },
-        { attributes: true, subtree: true }
-      )
-    );
+    const observer = new MutationObserver(mutations => {
+      if (mutations.some(m => m.type === 'childList' && m.target === this)) {
+        this.#_datalist = null;
+        this.#_select = null;
+      }
+      this.#onSlottedChildMutation();
+    });
+    observer.observe(this, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['selected', 'disabled', 'value'],
+      characterData: true
+    });
+    this.#observers.push(observer);
   }
 
   disconnectedCallback() {
@@ -297,14 +305,39 @@ export class Combobox extends Control implements ContainerElement {
     );
   }
 
-  #trackedOptions = new Set();
+  #trackedOptions = new Set<HTMLOptionElement>();
   #syncOptionSelectedStates() {
     this.#options.forEach(o => {
       if (!this.#trackedOptions.has(o)) {
         this.#trackedOptions.add(o);
-        this.#observers.push(getElementUpdate(o, 'selected', () => this.requestUpdate()));
+        getPropertyChanges(o, 'selected', () => this.requestUpdate());
       }
     });
+  }
+
+  #onSlottedChildMutation() {
+    if (!this.#syncPending) {
+      this.#syncPending = true;
+      queueMicrotask(() => {
+        this.#syncPending = false;
+        this.#cleanupStaleTrackedOptions();
+        this.#syncOptionSelectedStates();
+        this.requestUpdate();
+      });
+    }
+  }
+
+  #cleanupStaleTrackedOptions() {
+    const currentOptions = new Set(this.#options);
+    for (const tracked of this.#trackedOptions) {
+      if (!currentOptions.has(tracked)) {
+        this.#trackedOptions.delete(tracked);
+      }
+    }
+  }
+
+  #onDropdownOpen(e: Event) {
+    (e.target as HTMLElement).hidden = false;
   }
 
   #setupAutoCompleteKeyEvents() {
@@ -402,6 +435,7 @@ export class Combobox extends Control implements ContainerElement {
     if (!this.input.disabled && !this.#dropdown!.matches(':popover-open')) {
       if (this.#select) {
         this.#options.forEach(option => (option.hidden = false));
+        this.requestUpdate();
       } else {
         this.#filterOptions();
       }

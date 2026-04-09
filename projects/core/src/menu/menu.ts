@@ -18,6 +18,7 @@ import globalStyles from './menu.global.css?inline';
  * @cssprop --max-width
  * @cssprop --min-width
  * @cssprop --max-height
+ * @event scroll - Fires when the user scrolls the menu list. Throttled to one dispatch per animation frame. `detail: { scrollTop, scrollHeight, clientHeight }`.
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
 @audit()
@@ -46,12 +47,38 @@ export class Menu extends LitElement {
 
   @queryAssignedElements() items!: MenuItem[];
 
+  #scrollRAF: number | null = null;
+
+  #handleScroll = () => {
+    if (this.#scrollRAF !== null) return;
+    this.#scrollRAF = requestAnimationFrame(() => {
+      this.#scrollRAF = null;
+      const container = this.shadowRoot?.querySelector<HTMLElement>('[internal-host]');
+      if (!container) return;
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      this.dispatchEvent(
+        new CustomEvent('scroll', {
+          bubbles: true,
+          composed: true,
+          detail: { scrollTop, scrollHeight, clientHeight }
+        })
+      );
+    });
+  };
+
   render() {
     return html`
       <div internal-host>
         <slot></slot>
       </div>
     `;
+  }
+
+  async firstUpdated() {
+    await this.updateComplete;
+    this.shadowRoot
+      ?.querySelector('[internal-host]')
+      ?.addEventListener('scroll', this.#handleScroll, { passive: true });
   }
 
   connectedCallback() {

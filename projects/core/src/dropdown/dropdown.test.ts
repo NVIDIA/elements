@@ -14,6 +14,7 @@ describe(Dropdown.metadata.tag, () => {
       <nve-dropdown>hello</nve-dropdown>
     `);
     element = fixture.querySelector(Dropdown.metadata.tag);
+    await new Promise(r => requestAnimationFrame(r));
     element.hidePopover();
     await elementIsStable(element);
   });
