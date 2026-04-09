@@ -15,6 +15,7 @@ import '@nvidia-elements/core/divider/define.js';
 import '@nvidia-elements/core/select/define.js';
 import '@nvidia-elements/core/input/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
+import '@nvidia-elements/core/icon/define.js';
 
 describe(Toolbar.metadata.tag, () => {
   let fixture: HTMLElement;
