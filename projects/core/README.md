@@ -4,7 +4,7 @@ The design language for AI/ML factories. Provides a set of accessible, theme-rea
 
 - [Documentation](https://NVIDIA.github.io/elements/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-- [GitLab Repo](https://github.com/NVIDIA/elements)
+- [Repo](https://github.com/NVIDIA/elements)
 - [Artifactory](https://registry.npmjs.org
 
 ## Getting Started
@@ -57,12 +57,3 @@ import '@nvidia-elements/core/dot/define.js';
 <!-- use component in HTML template -->
 <nve-button>hello there</nve-button>
 ```
-
-## Framework Integrations
-
-- [Angular](https://NVIDIA.github.io/elements/docs/integrations/angular/)
-- [Lit](https://NVIDIA.github.io/elements/docs/integrations/lit/)
-- [Preact](https://NVIDIA.github.io/elements/docs/integrations/preact/)
-- [React](https://NVIDIA.github.io/elements/docs/integrations/react/)
-- [TypeScript](https://NVIDIA.github.io/elements/docs/integrations/typescript/)
-- [Vue](https://NVIDIA.github.io/elements/docs/integrations/vue/)
