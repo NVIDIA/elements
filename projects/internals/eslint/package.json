@@ -13,6 +13,8 @@
     "@html-eslint/parser": "catalog:",
     "@eslint/css": "catalog:",
     "@eslint/js": "catalog:",
+    "@typescript-eslint/parser": "8.58.1",
+    "eslint": "catalog:",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsdoc": "62.8.0",
     "eslint-plugin-lit": "2.2.1",

@@ -54,7 +54,7 @@ export default {
     }
   },
   create(context) {
-    const filename = context.filename || context.getFilename();
+    const filename = context.filename;
 
     const options = context.options[0] || {};
     const exclude = options.exclude || [];
