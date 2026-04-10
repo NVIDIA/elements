@@ -1,3 +1,24 @@
+## <small>0.12.6 (2026-04-10)</small>
+
+* chore(ci): add @nvidia-elements/monaco to cdn release ([61f26e4](https://github.com/NVIDIA/elements/commit/61f26e4))
+* chore(ci): fix the dependency order of jobs ([c1a547f](https://github.com/NVIDIA/elements/commit/c1a547f))
+* chore(ci): update lighthouse scores ([3945fdc](https://github.com/NVIDIA/elements/commit/3945fdc))
+* chore(ci): update playwright ([6c1e506](https://github.com/NVIDIA/elements/commit/6c1e506))
+* chore(docs): conditional fallback for coverage report ([19dfa25](https://github.com/NVIDIA/elements/commit/19dfa25))
+* chore(docs): migration cleanup ([557fd8a](https://github.com/NVIDIA/elements/commit/557fd8a))
+* chore(release): @nvidia-elements/core-v1.66.4 [skip ci] ([b0f1849](https://github.com/NVIDIA/elements/commit/b0f1849))
+* chore(release): @nvidia-elements/core-v1.66.5 [skip ci] ([d5df945](https://github.com/NVIDIA/elements/commit/d5df945))
+* chore(release): @nvidia-elements/core-v1.67.0 [skip ci] ([4ff7390](https://github.com/NVIDIA/elements/commit/4ff7390))
+* chore(release): @nvidia-elements/monaco-v1.5.0 [skip ci] ([68729ff](https://github.com/NVIDIA/elements/commit/68729ff))
+* chore(release): @nvidia-elements/monaco-v1.5.1 [skip ci] ([ed02c88](https://github.com/NVIDIA/elements/commit/ed02c88))
+* chore(release): @nvidia-elements/monaco-v1.5.2 [skip ci] ([8f45e5b](https://github.com/NVIDIA/elements/commit/8f45e5b))
+* fix(core): readme ([2c4d62c](https://github.com/NVIDIA/elements/commit/2c4d62c))
+* fix(core): side effect imports ([8a967d3](https://github.com/NVIDIA/elements/commit/8a967d3))
+* fix(cli): warn of setup without package file ([2140def](https://github.com/NVIDIA/elements/commit/2140def))
+* fix(monaco): readme ([59295b6](https://github.com/NVIDIA/elements/commit/59295b6))
+* fix(monaco): side effect imports ([f8054d2](https://github.com/NVIDIA/elements/commit/f8054d2))
+* feat(core): add infinite scroll support ([3c6f0e9](https://github.com/NVIDIA/elements/commit/3c6f0e9))
+
 ## <small>0.12.5 (2026-04-07)</small>
 
 * chore(ci): allow empty paths in version replacement for release configuration ([298772a](https://github.com/NVIDIA/elements/commit/298772a))
