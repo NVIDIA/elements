@@ -19,7 +19,7 @@
     "@nvidia-elements/themes": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "next": "16.2.2"
+    "next": "16.2.3"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
