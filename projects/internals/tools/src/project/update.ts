@@ -1,5 +1,5 @@
 import { execSync } from 'node:child_process';
-import { writeFileSync } from 'node:fs';
+import { existsSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { ProjectsService } from '@internals/metadata';
 import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.js';
@@ -42,6 +42,16 @@ export function updatePackageJson(
 
 /* istanbul ignore next -- @preserve */
 export async function updateProject(cwd: string): Promise<Report> {
+  const packageJsonPath = resolve(join(cwd, 'package.json'));
+  if (!existsSync(packageJsonPath)) {
+    return {
+      dependencies: {
+        message: `No package.json found in the project directory. Dependencies were not updated.\n\`${packageJsonPath}\``,
+        status: 'warning'
+      }
+    };
+  }
+
   const packageJson = getPackageJson(cwd);
   const projects = (await ProjectsService.getData()).data.filter((p: { changelog: string }) => p.changelog);
   const packageManager = await getNPMClient();

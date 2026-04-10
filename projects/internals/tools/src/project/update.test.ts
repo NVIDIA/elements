@@ -1,6 +1,29 @@
-import { describe, it, expect } from 'vitest';
-import { updatePackageJson } from './update.js';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { updatePackageJson, updateProject } from './update.js';
 import type { ElementVersions } from '../api/utils.js';
+import type fs from 'node:fs';
+
+vi.mock('node:fs', async importOriginal => {
+  const actual = await importOriginal<typeof fs>();
+  return { ...actual, existsSync: vi.fn(() => true), writeFileSync: vi.fn() };
+});
+
+vi.mock('node:child_process', () => ({
+  execSync: vi.fn()
+}));
+
+vi.mock('../internal/node.js', () => ({
+  getPackageJson: vi.fn(),
+  getNPMClient: vi.fn()
+}));
+
+vi.mock('@internals/metadata', () => ({
+  ProjectsService: { getData: vi.fn() }
+}));
+
+vi.mock('../api/utils.js', () => ({
+  getLatestPublishedVersions: vi.fn()
+}));
 
 function createMockElementVersions(versions: Partial<ElementVersions>): ElementVersions {
   return {
@@ -311,5 +334,39 @@ describe('updatePackageJson', () => {
     const result = updatePackageJson(packageJson, latestVersions);
     expect(result.packageJson.dependencies['@nvidia-elements/core']).toBe('2.0.0');
     expect(result.updated).toEqual([]);
+  });
+});
+
+describe('updateProject', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should return warning when no package.json exists', async () => {
+    const { existsSync } = await import('node:fs');
+    vi.mocked(existsSync).mockReturnValue(false);
+
+    const result = await updateProject('/some/cdn-only/project');
+    expect(result.dependencies.status).toBe('warning');
+    expect(result.dependencies.message).toContain('No package.json found in the project directory');
+    expect(result.dependencies.message).toContain('Dependencies were not updated');
+  });
+
+  it('should not call getPackageJson when no package.json exists', async () => {
+    const { existsSync } = await import('node:fs');
+    const { getPackageJson } = await import('../internal/node.js');
+    vi.mocked(existsSync).mockReturnValue(false);
+
+    await updateProject('/some/cdn-only/project');
+    expect(getPackageJson).not.toHaveBeenCalled();
+  });
+
+  it('should include resolved path in warning message', async () => {
+    const { existsSync } = await import('node:fs');
+    vi.mocked(existsSync).mockReturnValue(false);
+
+    const result = await updateProject('/some/cdn-only/project');
+    expect(result.dependencies.message).toContain('package.json');
+    expect(result.dependencies.message).toContain('/some/cdn-only/project');
   });
 });

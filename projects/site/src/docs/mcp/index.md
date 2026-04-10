@@ -67,7 +67,10 @@ After adding the configuration in your project's .cursor directory, enable the M
   "mcpServers": {
     "elements": {
       "description": "NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples",
-      "command": "nve mcp"
+      "command": "nve",
+      "args": [
+        "mcp"
+      ]
     }
   }
 }
