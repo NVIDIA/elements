@@ -1,3 +1,9 @@
+## 1.67.0 (2026-04-10)
+
+* fix(cli): warn of setup without package file ([2140def](https://github.com/NVIDIA/elements/commit/2140def))
+* feat(core): add infinite scroll support ([3c6f0e9](https://github.com/NVIDIA/elements/commit/3c6f0e9))
+* chore(release): @nvidia-elements/monaco-v1.5.2 [skip ci] ([8f45e5b](https://github.com/NVIDIA/elements/commit/8f45e5b))
+
 ## <small>1.66.5 (2026-04-09)</small>
 
 * fix(core): readme ([2c4d62c](https://github.com/NVIDIA/elements/commit/2c4d62c))
