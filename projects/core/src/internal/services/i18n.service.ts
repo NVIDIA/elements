@@ -37,6 +37,7 @@ export interface I18nStrings {
   dragAndDrop: string;
   browseFiles: string;
   maxFileSize: string;
+  create: string;
 }
 
 const i18nRegistry = {
@@ -75,7 +76,8 @@ const i18nRegistry = {
   files: 'files',
   dragAndDrop: 'drag & drop',
   browseFiles: 'browse files',
-  maxFileSize: 'max file size'
+  maxFileSize: 'max file size',
+  create: 'create'
 };
 
 export class I18nService_ {

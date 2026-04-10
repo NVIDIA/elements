@@ -44,7 +44,8 @@ describe('I18nService', () => {
       files: 'files',
       dragAndDrop: 'drag & drop',
       browseFiles: 'browse files',
-      maxFileSize: 'max file size'
+      maxFileSize: 'max file size',
+      create: 'create'
     });
   });
 
@@ -87,7 +88,8 @@ describe('I18nService', () => {
       files: 'files',
       dragAndDrop: 'drag & drop',
       browseFiles: 'browse files',
-      maxFileSize: 'max file size'
+      maxFileSize: 'max file size',
+      create: 'créer'
     });
 
     expect(I18nService.i18n).toStrictEqual({
@@ -126,7 +128,8 @@ describe('I18nService', () => {
       files: 'files',
       dragAndDrop: 'drag & drop',
       browseFiles: 'browse files',
-      maxFileSize: 'max file size'
+      maxFileSize: 'max file size',
+      create: 'créer'
     });
 
     I18nService.update(original);

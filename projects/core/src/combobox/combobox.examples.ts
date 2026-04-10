@@ -493,6 +493,44 @@ export const NoTags = () => {
 };
 
 /**
+ * @summary Combobox with create option behavior that allows users to add new options and tags on the fly. Use when the option list is not exhaustive and users need to enter values that don't yet exist.
+ * @tags pattern
+ */
+export const CreateOptions = () => {
+  return html`
+<nve-combobox id="creatable-combo" behavior-create style="--scroll-height: 220px">
+  <label>Tags</label>
+  <input type="search" placeholder="Select or create a tag…" />
+  <select multiple>
+    <option value="Go">Go</option>
+    <option value="Rust">Rust</option>
+    <option value="Python">Python</option>
+    <option value="JavaScript">JavaScript</option>
+    <option value="TypeScript">TypeScript</option>
+    <option value="Java">Java</option>
+    <option value="C#">C#</option>
+    <option value="C++">C++</option>
+    <option value="C">C</option>
+    <option value="PHP">PHP</option>
+  </select>
+  <nve-control-message>Press Enter to create a tag that doesn't exist yet</nve-control-message>
+</nve-combobox>
+<script type="module">
+  const combobox = document.getElementById('creatable-combo');
+  const select = combobox.querySelector('select');
+
+  combobox.addEventListener('create', (e) => {
+    const option = document.createElement('option');
+    option.value = e.detail.value;
+    option.textContent = e.detail.value;
+    option.selected = true;
+    select.appendChild(option);
+  });
+</script>
+  `
+};
+
+/**
  * @summary Complete form integration showing combobox with form submission, reset, and programmatic value setting.
  */
 export const Form = () => {
