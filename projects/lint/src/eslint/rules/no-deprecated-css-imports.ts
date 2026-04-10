@@ -38,7 +38,7 @@ const rule = {
           return;
         }
 
-        const sourceCode = context.sourceCode || context.getSourceCode();
+        const sourceCode = context.sourceCode;
         const preludeText = sourceCode.getText(prelude as unknown as Rule.Node).trim();
 
         const importPath = preludeText.replace(/^['"]|['"]$/g, '').trim();
