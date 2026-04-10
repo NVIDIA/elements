@@ -40,7 +40,7 @@ export default {
           return;
         }
 
-        const filename = context.filename || context.getFilename();
+        const filename = context.filename;
         if (filename.includes('/internal/') || filename.includes('/polyfills/')) {
           return;
         }

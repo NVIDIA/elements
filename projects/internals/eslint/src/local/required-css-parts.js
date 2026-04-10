@@ -51,7 +51,7 @@ export default {
                 tagName
               },
               fix: fixer => {
-                const sourceCode = context.getSourceCode();
+                const sourceCode = context.sourceCode;
                 const tagText = sourceCode.getText(node);
 
                 // Insert part attribute after the tag name
