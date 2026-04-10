@@ -1,3 +1,8 @@
+## 1.68.0 (2026-04-10)
+
+* feat(core): add create option functionality ([bd4e6b3](https://github.com/NVIDIA/elements/commit/bd4e6b3))
+* chore(release): @nvidia-elements/cli-v0.12.6 [skip ci] ([1303cd7](https://github.com/NVIDIA/elements/commit/1303cd7))
+
 ## 1.67.0 (2026-04-10)
 
 * fix(cli): warn of setup without package file ([2140def](https://github.com/NVIDIA/elements/commit/2140def))
