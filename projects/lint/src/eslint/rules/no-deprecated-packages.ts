@@ -19,7 +19,7 @@ const rule = {
     return {
       Document(node: HtmlTagNode) {
         if (context.filename.includes('package.json')) {
-          const packageJson = JSON.parse(context.getSourceCode().getText());
+          const packageJson = JSON.parse(context.sourceCode.getText());
           const dependencies = Object.keys(packageJson.dependencies ?? {});
           const devDependencies = Object.keys(packageJson.devDependencies ?? {});
           const peerDependencies = Object.keys(packageJson.peerDependencies ?? {});
