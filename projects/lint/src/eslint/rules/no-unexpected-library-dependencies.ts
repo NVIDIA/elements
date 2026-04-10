@@ -23,7 +23,7 @@ const rule = {
     return {
       Document(node: HtmlTagNode) {
         if (context.filename.includes('package.json')) {
-          const packageJson = JSON.parse(context.getSourceCode().getText());
+          const packageJson = JSON.parse(context.sourceCode.getText());
           const isLibrary = packageJson.exports !== undefined;
           const ownedPackage = packageJson.name && packageJson.name.startsWith('@nve');
 
