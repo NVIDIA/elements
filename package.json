@@ -25,7 +25,7 @@
     "agent:stop": "wireit"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.5.0",
+    "@commitlint/cli": "20.5.0",
     "@commitlint/config-conventional": "19.5.0",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
