@@ -64,7 +64,7 @@ export default {
     }
   },
   create(context) {
-    const filename = context.filename || context.getFilename();
+    const filename = context.filename;
     if (!filename.endsWith('bundle.ts')) {
       return {};
     }

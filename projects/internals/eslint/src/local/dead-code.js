@@ -19,7 +19,7 @@ export default {
   create(context) {
     return {
       Program() {
-        const comments = context.getSourceCode().getAllComments();
+        const comments = context.sourceCode.ast.comments;
         const checks = {
           import: /\s*import\s+.*from\s+['"].*['"];/,
           export: /\s*export\s+.*from\s+['"].*['"];/,
