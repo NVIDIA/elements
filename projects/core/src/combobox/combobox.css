@@ -144,3 +144,12 @@ slot[name*='option-'] {
 :host(:state(footer-content)) [name='footer'] {
   display: flex;
 }
+
+nve-menu-item[part='create-option'] {
+  --color: var(--nve-sys-text-muted-color);
+  font-style: italic;
+
+  span::first-letter {
+    text-transform: uppercase;
+  }
+}

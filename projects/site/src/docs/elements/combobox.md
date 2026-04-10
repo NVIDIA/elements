@@ -34,6 +34,10 @@
 
 {% example '@nvidia-elements/core/combobox/combobox.examples.json' 'InfiniteScroll' %}
 
+## Create Options
+
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'CreateOptions' %}
+
 ## Layout
 
 {% api 'nve-combobox', 'property', 'layout' %}

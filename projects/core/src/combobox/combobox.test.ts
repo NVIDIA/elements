@@ -2567,3 +2567,364 @@ describe(`${Combobox.metadata.tag}: scroll event`, () => {
     expect(distanceFromBottom).toBeGreaterThanOrEqual(0);
   });
 });
+
+describe(`${Combobox.metadata.tag}: behavior-create`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+  let select: HTMLSelectElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox behavior-create>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="Go">Go</option>
+          <option value="Rust">Rust</option>
+          <option value="Python">Python</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    select = fixture.querySelector('select');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should reflect the behavior-create attribute as a boolean property', async () => {
+    expect(element.behaviorCreate).toBe(true);
+    expect(element.hasAttribute('behavior-create')).toBe(true);
+  });
+
+  it('should show create item when input value does not match any option', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const createItem = element.shadowRoot.querySelector('nve-menu-item[part="create-option"]');
+    expect(createItem).toBeTruthy();
+    expect(createItem.textContent).toContain('Kotlin');
+  });
+
+  it('should hide create item when input is empty', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = '';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const createItem = element.shadowRoot.querySelector('nve-menu-item[part="create-option"]');
+    expect(createItem).toBeFalsy();
+  });
+
+  it('should hide create item when input matches an existing option case-insensitively', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'go';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const createItem = element.shadowRoot.querySelector('nve-menu-item[part="create-option"]');
+    expect(createItem).toBeFalsy();
+  });
+
+  it('should hide create item when input matches with different casing', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'GO';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    expect(element.shadowRoot.querySelector('nve-menu-item[part="create-option"]')).toBeFalsy();
+  });
+
+  it('should dispatch create event on Enter when no option matches', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const spy = vi.fn();
+    element.addEventListener('create', spy);
+
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter', bubbles: true }));
+    await elementIsStable(element);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy.mock.calls[0][0].detail.value).toBe('Kotlin');
+  });
+
+  it('should clear input after dispatching create event', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter', bubbles: true }));
+    await elementIsStable(element);
+
+    expect(input.value).toBe('');
+  });
+
+  it('should close dropdown after dispatching create event', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    emulateClick(input);
+    await elementIsStable(element);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter', bubbles: true }));
+    await elementIsStable(element);
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+  });
+
+  it('should not dispatch create event when behavior-create is not set', async () => {
+    element.behaviorCreate = false;
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const spy = vi.fn();
+    element.addEventListener('create', spy);
+
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter', bubbles: true }));
+    await elementIsStable(element);
+
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should not show create item when behavior-create is not set', async () => {
+    element.behaviorCreate = false;
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    expect(element.shadowRoot.querySelector('nve-menu-item[part="create-option"]')).toBeFalsy();
+  });
+
+  it('should select existing option on Enter when value matches case-insensitively', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'go';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const createSpy = vi.fn();
+    element.addEventListener('create', createSpy);
+
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter', bubbles: true }));
+    await elementIsStable(element);
+
+    expect(createSpy).not.toHaveBeenCalled();
+    const goOption = Array.from(select.options).find(o => o.value === 'Go');
+    expect(goOption.selected).toBe(true);
+  });
+
+  it('should not dispatch create event when input is disabled', async () => {
+    input.disabled = true;
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+
+    const spy = vi.fn();
+    element.addEventListener('create', spy);
+
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter', bubbles: true }));
+    await elementIsStable(element);
+
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('should not show create item when input is disabled', async () => {
+    input.disabled = true;
+    input.value = 'Kotlin';
+    await elementIsStable(element);
+
+    expect(element.shadowRoot.querySelector('nve-menu-item[part="create-option"]')).toBeFalsy();
+  });
+
+  it('should preserve existing selections when dispatching create', async () => {
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+    await elementIsStable(element);
+
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter', bubbles: true }));
+    await elementIsStable(element);
+
+    expect(select.options[0].selected).toBe(true);
+    expect(select.options[1].selected).toBe(true);
+  });
+
+  it('should dispatch create event when create item is clicked', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const spy = vi.fn();
+    element.addEventListener('create', spy);
+
+    const createItem = element.shadowRoot.querySelector('nve-menu-item[part="create-option"]');
+    emulateClick(createItem);
+    await elementIsStable(element);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy.mock.calls[0][0].detail.value).toBe('Kotlin');
+  });
+
+  it('should have role="button" on create item', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const createItem = element.shadowRoot.querySelector('nve-menu-item[part="create-option"]');
+    expect(createItem.getAttribute('role')).toBe('button');
+  });
+
+  it('should have accessible label on create item', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const createItem = element.shadowRoot.querySelector('nve-menu-item[part="create-option"]');
+    expect(createItem.getAttribute('aria-label')).toContain('Kotlin');
+  });
+
+  it('should update create item text as user types', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kot';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    let createItem = element.shadowRoot.querySelector('nve-menu-item[part="create-option"]');
+    expect(createItem.textContent).toContain('Kot');
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    createItem = element.shadowRoot.querySelector('nve-menu-item[part="create-option"]');
+    expect(createItem.textContent).toContain('Kotlin');
+  });
+});
+
+describe(`${Combobox.metadata.tag}: behavior-create with datalist`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox behavior-create>
+        <label>combobox</label>
+        <input type="search" />
+        <datalist>
+          <option value="Go"></option>
+          <option value="Rust"></option>
+          <option value="Python"></option>
+        </datalist>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    input = fixture.querySelector('input');
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should show create item with datalist when input does not match', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const createItem = element.shadowRoot.querySelector('nve-menu-item[part="create-option"]');
+    expect(createItem).toBeTruthy();
+    expect(createItem.textContent).toContain('Kotlin');
+  });
+
+  it('should dispatch create event with datalist on Enter', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'Kotlin';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const spy = vi.fn();
+    element.addEventListener('create', spy);
+
+    element.dispatchEvent(new KeyboardEvent('keydown', { code: 'Enter', bubbles: true }));
+    await elementIsStable(element);
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(spy.mock.calls[0][0].detail.value).toBe('Kotlin');
+  });
+
+  it('should hide "no results" message when create item is shown', async () => {
+    emulateClick(input);
+    await elementIsStable(element);
+
+    input.value = 'zzzzz';
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    await elementIsStable(element);
+
+    const items = element.shadowRoot.querySelectorAll<MenuItem>(MenuItem.metadata.tag);
+    const disabledNoResults = Array.from(items).find(
+      i => i.disabled && i.textContent.trim() === element.i18n.noResults
+    );
+    expect(disabledNoResults).toBeFalsy();
+    expect(element.shadowRoot.querySelector('nve-menu-item[part="create-option"]')).toBeTruthy();
+  });
+});
