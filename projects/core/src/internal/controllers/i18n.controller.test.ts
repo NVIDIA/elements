@@ -36,6 +36,7 @@ describe('i18n.controller', () => {
     expect(element.i18n).toStrictEqual({
       __set: false,
       close: 'close',
+      create: 'create',
       currentPage: 'current page',
       expand: 'expand',
       select: 'select',
@@ -92,6 +93,7 @@ describe('i18n.controller', () => {
     expect(element.i18n).toStrictEqual({
       __set: true,
       close: 'close override',
+      create: 'create',
       currentPage: 'current page',
       expand: 'expand',
       select: 'select',

@@ -50,6 +50,8 @@ import styles from './combobox.css?inline';
  * @csspart checkbox - The checkbox element
  * @csspart icon - The icon element
  * @event scroll - Fires when the user scrolls the dropdown option list. Throttled to one dispatch per animation frame. `detail: { scrollTop, scrollHeight, clientHeight }`.
+ * @event create - Fires when the user confirms a value that doesn't match any existing option and the `behavior-create` attribute exists. `detail: { value }`.
+ * @csspart create-option - The menu item element for creating new options
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-autocomplete-list/
  */
 @scopedRegistry()
@@ -62,6 +64,9 @@ export class Combobox extends Control implements ContainerElement {
 
   /** Disable rendering of inline tags for many-item select */
   @property({ type: Boolean, reflect: true }) notags: boolean;
+
+  /** Enable creation of new options when the input value doesn't match any existing option. Dispatches a `create` event with `{ value }` detail. */
+  @property({ type: Boolean, reflect: true, attribute: 'behavior-create' }) behaviorCreate: boolean;
 
   static styles = useStyles([...Control.styles, inputStyles, styles]);
 
@@ -139,6 +144,21 @@ export class Combobox extends Control implements ContainerElement {
     return !!this.querySelector('[slot="footer"]');
   }
 
+  get #showCreateItem(): boolean {
+    if (!this.behaviorCreate || this.input?.disabled) return false;
+    const value = this.input?.value.trim();
+    if (!value) return false;
+    return !this.#findOptionMatch(value);
+  }
+
+  #findOptionMatch(value: string): HTMLOptionElement | undefined {
+    const lower = value.toLowerCase();
+    return this.#options.find(o => {
+      const display = o.textContent!.trim() || o.value;
+      return display.toLowerCase() === lower || o.value.toLowerCase() === lower;
+    });
+  }
+
   #observers: (MutationObserver | ResizeObserver)[] = [];
   #syncPending = false;
 
@@ -172,6 +192,7 @@ export class Combobox extends Control implements ContainerElement {
     const isPristine = this.#isPristine;
     const visibleOptions = options.filter(o => !o.hidden).filter(o => !(o.value === '' && o.disabled));
     const hasNoResults = visibleOptions.filter(o => !o.disabled).length === 0;
+    const showCreateItem = this.#showCreateItem;
     return html`
     <nve-dropdown part="dropdown" .popoverType=${'manual'} .modal=${false} @open=${this.#onDropdownOpen} @close=${this.#closeListBox} hidden .anchor=${this.#input as HTMLElement} .trigger=${this.#input as HTMLElement} position="bottom">
       <nve-menu part="menu" role="listbox" style="--width: 100%; --min-width: fit-content" aria-label=${ifDefined(this.i18n.select)}>
@@ -182,7 +203,14 @@ export class Combobox extends Control implements ContainerElement {
             ${largeOptionsList || isPristine ? getDisplayValue(o) : html`<span role="presentation">${(o.label ? o.label : o.value)?.split('')?.map((c, ci) => html`<span ?matches=${this.#characterAtIndexMatches(c, ci)}>${c}</span>`)}</span>`}
           </nve-menu-item>`
         )}
-        ${hasNoResults ? html`<nve-menu-item part="menu-item" .value=${''} disabled>${this.i18n.noResults}</nve-menu-item>` : nothing}
+        ${hasNoResults && !showCreateItem ? html`<nve-menu-item part="menu-item" .value=${''} disabled>${this.i18n.noResults}</nve-menu-item>` : nothing}
+        ${
+          showCreateItem
+            ? html`<nve-menu-item part="create-option" role="button" aria-label=${`${this.i18n.create} "${this.input?.value.trim()}"`} @click=${this.#onCreateItemClick}>
+          <nve-icon part="icon" name="add" size="sm"></nve-icon> "${this.input?.value.trim()}"
+        </nve-menu-item>`
+            : nothing
+        }
       </nve-menu>
       <slot name="footer"></slot>
     </nve-dropdown>`;
@@ -342,8 +370,10 @@ export class Combobox extends Control implements ContainerElement {
 
   #setupAutoCompleteKeyEvents() {
     this.addEventListener('keydown', (e: KeyboardEvent) => {
+      const value = this.input.value.trim();
+
       if (e.code === 'Tab') {
-        if (this.#hasAvailableOptions && this.#dropdown!.matches(':popover-open') && this.input.value !== '') {
+        if (this.#hasAvailableOptions && this.#dropdown!.matches(':popover-open') && value !== '') {
           e.preventDefault();
           // the menu item option property caches/stores the option value instead of value to prevent unnecessary lit lifecycle updates for each menu item
           this.#setInputValue((this.#items[0] as MenuItem & { option: string }).option);
@@ -354,6 +384,17 @@ export class Combobox extends Control implements ContainerElement {
           );
         }
         this.#dropdown!.hidePopover();
+      }
+
+      if (e.code === 'Enter' && this.behaviorCreate && !this.input.disabled && value) {
+        const match = this.#findOptionMatch(value);
+        if (match) {
+          this.#selectValue(match);
+        } else {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          this.#dispatchCreate();
+        }
       }
     });
   }
@@ -408,6 +449,21 @@ export class Combobox extends Control implements ContainerElement {
     }
 
     this.requestUpdate();
+  }
+
+  #onCreateItemClick() {
+    this.#dispatchCreate();
+  }
+
+  #dispatchCreate() {
+    const value = this.input.value.trim();
+    if (value) {
+      this.dispatchEvent(new CustomEvent('create', { detail: { value }, bubbles: true, composed: true }));
+      this.input.value = '';
+      this.#dropdown!.hidePopover();
+      focusElementTimeout(this.input);
+      this.requestUpdate();
+    }
   }
 
   #characterAtIndexMatches(character: string, index: number) {
