@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 :host {
   --animation-duration: var(--nve-ref-animation-duration-200);
   margin: calc(var(--nve-sys-layer-popover-offset) + calc(var(--nve-sys-layer-popover-arrow-offset) * 2));

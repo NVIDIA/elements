@@ -198,5 +198,8 @@
         "NODE_ENV": "production"
       }
     }
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }

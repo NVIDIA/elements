@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { getDuplicatePackageGlobalVersionWarning } from '../utils/audit-logs.js';
 import { deepMerge } from '../utils/objects.js';
 import { getEnv, getHostDetails } from './global.utils.js';

@@ -127,8 +127,6 @@ export async function render(data) {
                       })
                     : ''
                 }
-
-                ${elementSupportButtons(data.tag)}
               `
                   : ''
               }

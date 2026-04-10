@@ -48,8 +48,4 @@ See the searchable [Interactive Icon Catalog](./docs/foundations/iconography/)
 
 {% example '@nvidia-elements/core/icon/icon.examples.json' 'Alias' %}
 
-## Source
-
-{% example '@nvidia-elements/core/icon/icon.examples.json' 'Source' %}
-
 <script type="module" src="/_internal/stories/icon/all-icons.js"></script>

@@ -5,7 +5,7 @@ Integration with VS Code's Monaco editor for code editing, syntax highlighting, 
 - [Documentation](https://NVIDIA.github.io/elements/docs/monaco/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [Repo](https://github.com/NVIDIA/elements)
-- [Artifactory](https://registry.npmjs.org
+- [NPM](https://registry.npmjs.org
 
 ## Getting Started
 

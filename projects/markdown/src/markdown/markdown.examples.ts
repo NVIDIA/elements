@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { html } from 'lit';
 import '@nvidia-elements/markdown/markdown/define.js';
 import '@nvidia-elements/markdown/styles/index.css';

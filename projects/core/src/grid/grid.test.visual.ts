@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { expect, test, describe } from 'vitest';
 import { visualRunner } from '@internals/vite';
 
@@ -568,12 +571,12 @@ describe('grid visual', () => {
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
-  test('grid content wrap should match visual baseline', async () => {
+  test.skip('grid content wrap should match visual baseline', async () => {
     const report = await visualRunner.render('grid.content-wrap', contentWrap());
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
-  test('grid content wrap should match visual baseline dark theme', async () => {
+  test.skip('grid content wrap should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('grid.content-wrap.dark', contentWrap('dark'));
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });

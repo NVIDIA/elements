@@ -17,13 +17,12 @@
       "mcp__elements__packages_list",
       "mcp__elements__packages_get",
       "mcp__elements__packages_changelogs_get",
-      "mcp__MaaS-GitLab__gitlab_list_pipelines_jobs",
-      "mcp__MaaS-GitLab__gitlab_list_issues",
-      "mcp__MaaS-GitLab__gitlab_get_issue",
       "WebFetch(domain:code.claude.com)"
     ]
   },
-  "enabledMcpjsonServers": ["elements"],
+  "enabledMcpjsonServers": [
+    "elements"
+  ],
   "hooks": {
     "SessionStart": [
       {

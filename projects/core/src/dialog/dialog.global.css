@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 /* workaround for missing support for https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Selectors/:has-slotted */
 nve-dialog:has(nve-dialog-header),
 nve-dialog:has(nve-dialog-footer) {

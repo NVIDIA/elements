@@ -39,9 +39,6 @@ export const renderBaseHead = data => /* html */ `
     @import '@nvidia-elements/themes/high-contrast.css';
     @import '@nvidia-elements/themes/compact.css';
     @import '@nvidia-elements/themes/debug.css';
-    @import '@nvidia-elements/themes/fonts/nvidia-sans.css';
-    @import '@nvidia-elements/brand/index.css';
-    @import '@nvidia-elements/brand/dark.css';
 
     nve-page:not(:defined) {
       visibility: visible !important;
@@ -78,25 +75,10 @@ export const renderBaseHead = data => /* html */ `
       }
     }
   </style>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-723T2ZTKVT" defer></script>
-  <script defer>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-723T2ZTKVT');
-    gtag('set', 'content_group', 'elements');
-  </script>
   <script type="module">
     const sidenavPanel = globalThis.document.querySelector('#sidenav-panel');
     if (globalThis.window.innerWidth <= 720) {
       sidenavPanel.hidden = true;
-    }
-  </script>
-  <script type="module">
-    if (globalThis.document.documentElement.getAttribute('nve-theme')?.includes('brand')) {
-      void import('@nvidia-elements/brand/icons/define.js');
     }
   </script>
 `;
@@ -316,8 +298,6 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/patterns/') ? 'highlighted selected' : ''}><a href="docs/labs/layout/responsive/patterns/">Patterns</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted selected' : ''}><a href="docs/labs/forms/" nve-layout="row align:vertical-center gap:xs">Forms <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/brand/' ? 'highlighted selected' : ''}><a href="docs/labs/brand/" nve-layout="row align:vertical-center gap:xs">Brand <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted selected' : ''}><a href="docs/labs/behaviors-alpine/" nve-layout="row align:vertical-center gap:xs">Behaviors Alpine <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''} ${data.page.url === '/docs/api-design/' ? 'highlighted' : ''}>

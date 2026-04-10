@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Attribute, Element, ProjectTypes, Token } from '@internals/metadata';
 import {
@@ -44,7 +47,7 @@ describe('getPublishedPackageNames', () => {
     expect(getPublishedPackageNames(projects)).toEqual(['@nvidia-elements/core', '@nvidia-elements/monaco', '@nvidia-elements/code']);
   });
 
-  it('should exclude @nve packages with version 0.0.0', () => {
+  it('should exclude @nvidia-elements packages with version 0.0.0', () => {
     const withUnpublished = [
       ...projects,
       { name: '@nvidia-elements/unpublished', version: '0.0.0', description: '', readme: '', changelog: '' }

@@ -5,7 +5,7 @@ The design language for AI/ML factories. Provides a set of accessible, theme-rea
 - [Documentation](https://NVIDIA.github.io/elements/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [Repo](https://github.com/NVIDIA/elements)
-- [Artifactory](https://registry.npmjs.org
+- [NPM](https://registry.npmjs.org
 
 ## Getting Started
 

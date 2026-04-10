@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import type { Project } from '@internals/metadata';
 import type { Result } from 'publint';
@@ -131,7 +134,7 @@ describe('getVersionHealth', () => {
     ).toEqual({ '@nvidia-elements/core': { version: '1.0.0', latest: '1.0.0', status: 'success' } });
   });
 
-  it('should filter only @nve packages from dependencies', async () => {
+  it('should filter only @nvidia-elements packages from dependencies', async () => {
     const packageData = {
       devDependencies: { '@nvidia-elements/core': '1.0.0', lodash: '4.17.21' },
       dependencies: { '@nvidia-elements/styles': '1.0.0', react: '18.0.0' },
@@ -200,7 +203,7 @@ describe('getVersionHealth', () => {
     expect(result).toEqual({});
   });
 
-  it('should handle mixed @nve and non-@nve packages', async () => {
+  it('should handle mixed @nvidia-elements and non-@nvidia-elements packages', async () => {
     const packageData = {
       devDependencies: { '@nvidia-elements/core': '1.0.0', typescript: '5.0.0' },
       dependencies: { react: '18.0.0' },
@@ -234,11 +237,11 @@ describe('checkDependencies', () => {
     ).toEqual({
       versions: { '@nvidia-elements/core': { version: '1.0.0', latest: '1.0.0', status: 'success' } },
       status: 'success',
-      message: '@nve packages are up to date'
+      message: '@nvidia-elements packages are up to date'
     });
   });
 
-  it('should return warning when no @nve packages are found', async () => {
+  it('should return warning when no @nvidia-elements packages are found', async () => {
     const result = await checkDependencies(
       {
         devDependencies: { typescript: '5.0.0' },
@@ -249,7 +252,7 @@ describe('checkDependencies', () => {
     );
 
     expect(result.status).toBe('warning');
-    expect(result.message).toBe('No @nve packages found in the project');
+    expect(result.message).toBe('No @nvidia-elements packages found in the project');
     expect(result.versions).toEqual({});
   });
 
@@ -264,7 +267,7 @@ describe('checkDependencies', () => {
     );
 
     expect(result.status).toBe('warning');
-    expect(result.message).toBe('@nve packages are out of date');
+    expect(result.message).toBe('@nvidia-elements packages are out of date');
     expect(result.versions['@nvidia-elements/core'].status).toBe('danger');
   });
 
@@ -279,7 +282,7 @@ describe('checkDependencies', () => {
     );
 
     expect(result.status).toBe('warning');
-    expect(result.message).toBe('@nve packages are out of date');
+    expect(result.message).toBe('@nvidia-elements packages are out of date');
     expect(result.versions['@nvidia-elements/core'].status).toBe('warning');
   });
 
@@ -294,7 +297,7 @@ describe('checkDependencies', () => {
     );
 
     expect(result.status).toBe('success');
-    expect(result.message).toBe('@nve packages are up to date');
+    expect(result.message).toBe('@nvidia-elements packages are up to date');
     expect(result.versions['@nvidia-elements/core'].status).toBe('success');
   });
 
@@ -309,7 +312,7 @@ describe('checkDependencies', () => {
     );
 
     expect(result.status).toBe('warning');
-    expect(result.message).toBe('No @nve packages found in the project');
+    expect(result.message).toBe('No @nvidia-elements packages found in the project');
     expect(result.versions).toEqual({});
   });
 
@@ -330,7 +333,7 @@ describe('checkDependencies', () => {
     );
 
     expect(result.status).toBe('warning');
-    expect(result.message).toBe('@nve packages are out of date');
+    expect(result.message).toBe('@nvidia-elements packages are out of date');
     expect(result.versions['@nvidia-elements/core'].status).toBe('danger');
     expect(result.versions['@nvidia-elements/styles'].status).toBe('success');
   });
@@ -378,7 +381,7 @@ describe('checkPeerDependencies', () => {
     '@nvidia-elements/themes': '1.0.0'
   } as ElementVersions;
 
-  it('should return success when @nve packages are listed as peer dependencies', () => {
+  it('should return success when @nvidia-elements packages are listed as peer dependencies', () => {
     const packageJson = {
       dependencies: {},
       devDependencies: {},
@@ -387,12 +390,12 @@ describe('checkPeerDependencies', () => {
 
     const result = checkPeerDependencies(mockCurrentVersions, packageJson);
     expect(result).toEqual({
-      message: '@nve packages are listed as peer dependencies',
+      message: '@nvidia-elements packages are listed as peer dependencies',
       status: 'success'
     });
   });
 
-  it('should return danger when @nve packages are listed as regular dependencies instead of peer dependencies', () => {
+  it('should return danger when @nvidia-elements packages are listed as regular dependencies instead of peer dependencies', () => {
     const packageJson = {
       dependencies: { '@nvidia-elements/core': '1.0.0' },
       devDependencies: {},
@@ -401,12 +404,12 @@ describe('checkPeerDependencies', () => {
 
     const result = checkPeerDependencies(mockCurrentVersions, packageJson);
     expect(result).toEqual({
-      message: '@nve packages must be listed as peer dependencies',
+      message: '@nvidia-elements packages must be listed as peer dependencies',
       status: 'danger'
     });
   });
 
-  it('should return danger when @nve packages are listed in multiple dependency types but not as peer dependencies', () => {
+  it('should return danger when @nvidia-elements packages are listed in multiple dependency types but not as peer dependencies', () => {
     const packageJson = {
       dependencies: { '@nvidia-elements/core': '1.0.0' },
       devDependencies: { '@nvidia-elements/styles': '1.0.0' },
@@ -415,12 +418,12 @@ describe('checkPeerDependencies', () => {
 
     const result = checkPeerDependencies(mockCurrentVersions, packageJson);
     expect(result).toEqual({
-      message: '@nve packages must be listed as peer dependencies',
+      message: '@nvidia-elements packages must be listed as peer dependencies',
       status: 'danger'
     });
   });
 
-  it('should return warning when no @nve packages are found in the project', () => {
+  it('should return warning when no @nvidia-elements packages are found in the project', () => {
     const packageJson = {
       dependencies: { 'other-package': '1.0.0' },
       devDependencies: { 'another-package': '2.0.0' },
@@ -429,7 +432,7 @@ describe('checkPeerDependencies', () => {
 
     const result = checkPeerDependencies(mockCurrentVersions, packageJson);
     expect(result).toEqual({
-      message: 'No @nve packages found in the project',
+      message: 'No @nvidia-elements packages found in the project',
       status: 'warning'
     });
   });
@@ -443,12 +446,12 @@ describe('checkPeerDependencies', () => {
 
     const result = checkPeerDependencies(mockCurrentVersions, packageJson);
     expect(result).toEqual({
-      message: 'No @nve packages found in the project',
+      message: 'No @nvidia-elements packages found in the project',
       status: 'warning'
     });
   });
 
-  it('should return success when @nve packages are listed as peer dependencies along with other dependency types', () => {
+  it('should return success when @nvidia-elements packages are listed as peer dependencies along with other dependency types', () => {
     const packageJson = {
       dependencies: { 'other-package': '1.0.0' },
       devDependencies: { 'another-package': '2.0.0' },
@@ -457,7 +460,7 @@ describe('checkPeerDependencies', () => {
 
     const result = checkPeerDependencies(mockCurrentVersions, packageJson);
     expect(result).toEqual({
-      message: '@nve packages are listed as peer dependencies',
+      message: '@nvidia-elements packages are listed as peer dependencies',
       status: 'success'
     });
   });
@@ -471,7 +474,7 @@ describe('checkPeerDependencies', () => {
 
     const result = checkPeerDependencies(mockCurrentVersions, packageJson);
     expect(result).toEqual({
-      message: 'No @nve packages found in the project',
+      message: 'No @nvidia-elements packages found in the project',
       status: 'warning'
     });
   });
@@ -485,7 +488,7 @@ describe('checkPeerDependencies', () => {
 
     const result = checkPeerDependencies(mockCurrentVersions, packageJson);
     expect(result).toEqual({
-      message: 'No @nve packages found in the project',
+      message: 'No @nvidia-elements packages found in the project',
       status: 'warning'
     });
   });
@@ -499,7 +502,7 @@ describe('checkPeerDependencies', () => {
 
     const result = checkPeerDependencies(mockCurrentVersions, packageJson);
     expect(result).toEqual({
-      message: '@nve packages must be listed as peer dependencies',
+      message: '@nvidia-elements packages must be listed as peer dependencies',
       status: 'danger'
     });
   });
@@ -513,7 +516,7 @@ describe('checkPeerDependencies', () => {
 
     const result = checkPeerDependencies(mockCurrentVersions, packageJson);
     expect(result).toEqual({
-      message: '@nve packages are listed as peer dependencies',
+      message: '@nvidia-elements packages are listed as peer dependencies',
       status: 'success'
     });
   });
@@ -553,7 +556,7 @@ describe('Edge cases and error handling', () => {
 });
 
 describe('checkSemanticDependencies', () => {
-  it('should return success when @nve packages are listed with caret (^) prefix', () => {
+  it('should return success when @nvidia-elements packages are listed with caret (^) prefix', () => {
     const packageJson = {
       dependencies: { '@nvidia-elements/core': '^1.0.0' },
       devDependencies: {},
@@ -561,12 +564,12 @@ describe('checkSemanticDependencies', () => {
     };
 
     expect(checkSemanticDependencies(packageJson)).toEqual({
-      message: '@nve packages contain caret (^) prefix',
+      message: '@nvidia-elements packages contain caret (^) prefix',
       status: 'success'
     });
   });
 
-  it('should return danger when @nve packages are listed without caret (^) prefix', () => {
+  it('should return danger when @nvidia-elements packages are listed without caret (^) prefix', () => {
     const packageJson = {
       dependencies: {},
       devDependencies: {},
@@ -574,12 +577,12 @@ describe('checkSemanticDependencies', () => {
     };
 
     expect(checkSemanticDependencies(packageJson)).toEqual({
-      message: '@nve packages must contain caret (^) prefix',
+      message: '@nvidia-elements packages must contain caret (^) prefix',
       status: 'danger'
     });
   });
 
-  it('should return success when @nve packages are listed with caret (^) prefix along with other dependency types', () => {
+  it('should return success when @nvidia-elements packages are listed with caret (^) prefix along with other dependency types', () => {
     const packageJson = {
       dependencies: { 'other-package': '1.0.0' },
       devDependencies: { 'another-package': '2.0.0' },
@@ -587,7 +590,7 @@ describe('checkSemanticDependencies', () => {
     };
 
     expect(checkSemanticDependencies(packageJson)).toEqual({
-      message: '@nve packages contain caret (^) prefix',
+      message: '@nvidia-elements packages contain caret (^) prefix',
       status: 'success'
     });
   });
@@ -786,7 +789,7 @@ describe('getHealthReport', () => {
 
     const result = await getHealthReport('/test/path', 'library');
     expect(result.peerDependencies).toEqual({
-      message: '@nve packages must be listed as peer dependencies',
+      message: '@nvidia-elements packages must be listed as peer dependencies',
       status: 'danger'
     });
   });
@@ -811,7 +814,7 @@ describe('getHealthReport', () => {
 
     const result = await getHealthReport('/test/path', 'library');
     expect(result.semanticDependencies).toEqual({
-      message: '@nve packages must contain caret (^) prefix',
+      message: '@nvidia-elements packages must contain caret (^) prefix',
       status: 'danger'
     });
   });
@@ -834,7 +837,7 @@ describe('getHealthReport', () => {
 
     const result = await getHealthReport('/test/path', 'application');
     expect(result.dependencies.status).toBe('warning');
-    expect(result.dependencies.message).toBe('@nve packages are out of date');
+    expect(result.dependencies.message).toBe('@nvidia-elements packages are out of date');
     const dependenciesResult = result.dependencies as {
       versions: Record<string, { status: string }>;
       status: string;

@@ -96,5 +96,8 @@
         "../internals/eslint:ci"
       ]
     }
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }
