@@ -18,13 +18,13 @@
     "solid-devtools": "0.34.5",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vite-plugin-solid": "2.11.11"
+    "vite-plugin-solid": "2.11.12"
   },
   "dependencies": {
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "solid-js": "1.9.11"
+    "solid-js": "1.9.12"
   },
   "wireit": {
     "ci": {
