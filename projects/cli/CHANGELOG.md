@@ -1,3 +1,14 @@
+## <small>0.12.7 (2026-04-13)</small>
+
+* chore(ci): update dependencies ([f384fc7](https://github.com/NVIDIA/elements/commit/f384fc7))
+* chore(docs): fix alignment examples ([4d32178](https://github.com/NVIDIA/elements/commit/4d32178))
+* chore(internals): update eslint ([467ef08](https://github.com/NVIDIA/elements/commit/467ef08))
+* chore(release): @nvidia-elements/lint-v0.14.2 [skip ci] ([f70f703](https://github.com/NVIDIA/elements/commit/f70f703))
+* chore(release): @nvidia-elements/core-v1.68.0 [skip ci] ([7a32566](https://github.com/NVIDIA/elements/commit/7a32566))
+* fix(cli): update dependencies ([6dc130e](https://github.com/NVIDIA/elements/commit/6dc130e))
+* fix(labs-lint): update eslint ([2e3418d](https://github.com/NVIDIA/elements/commit/2e3418d))
+* feat(core): add create option functionality ([bd4e6b3](https://github.com/NVIDIA/elements/commit/bd4e6b3))
+
 ## <small>0.12.6 (2026-04-10)</small>
 
 * chore(ci): add @nvidia-elements/monaco to cdn release ([61f26e4](https://github.com/NVIDIA/elements/commit/61f26e4))
