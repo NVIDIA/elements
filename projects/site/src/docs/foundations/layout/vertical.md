@@ -17,6 +17,7 @@
       --background: var(--nve-sys-layer-overlay-background);
       min-height: 60px;
       min-width: 60px;
+      max-width: 100px;
     }
   }
 </style>
