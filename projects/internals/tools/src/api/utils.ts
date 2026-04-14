@@ -1,19 +1,18 @@
 import { ApiService, type Attribute, type Element, type Token, type ProjectTypes } from '@internals/metadata';
 import { type Project } from '@internals/metadata';
 import { wrapText } from '../internal/utils.js';
+import {
+  distillElements,
+  distillAttributes,
+  distillTokens,
+  distillAttributeValues,
+  distillSearchResult,
+  type PartialAPIResult
+} from '../distill/apis.js';
+
+export type { PartialAPIResult } from '../distill/apis.js';
 
 declare const __ELEMENTS_ESM_CDN_BASE_URL__: string;
-
-/**
- * This file is for utilities that prune/curate the APIs for agents. Many APIs create context noise for agents
- * that cause significant output quality issues. Providing a subset of the APIs produces more reliable results.
- */
-
-export interface PartialAPIResult {
-  name: string;
-  description: string;
-  behavior: string;
-}
 
 export function getContextAPIs(
   format: 'markdown' | 'json',
@@ -27,17 +26,13 @@ export function getContextAPIs(
     };
   }
 ): { elements: PartialAPIResult[]; attributes: PartialAPIResult[] } | string {
-  const elementsResult = metadata.data.elements
-    .filter(e => !e.manifest?.deprecated && e.manifest?.description)
-    .map(e => ({ name: e.name, description: e.manifest!.description, behavior: e.manifest!.metadata?.behavior ?? '' }));
+  const elementsResult = distillElements(metadata.data.elements);
   const elementsMarkdown = elementsResult.map(e => {
     const behavior = e.behavior ? ` (${e.behavior})` : '';
     return `\`${e.name}\`${behavior}: ${getAPIDescriptionMarkdown(e)}`;
   });
 
-  const attributesResult = metadata.data.attributes
-    .filter(a => a.description && a.example)
-    .map(a => ({ name: a.name, description: a.description, behavior: 'attribute' }));
+  const attributesResult = distillAttributes(metadata.data.attributes);
   const attributesMarkdown = attributesResult.map(
     a => `\`${a.name}\` (${a.behavior}): ${getAPIDescriptionMarkdown(a)}`
   );
@@ -52,45 +47,19 @@ export function getContextAPIs(
 
 export async function searchContextAPIs(query: string, config: { limit?: number } = { limit: 100 }) {
   const data = (await ApiService.search(query)).map((r: Element | Attribute) => {
-    const el = r as Element;
-    if (el.manifest) {
-      el.changelog = undefined;
-      el.manifest.metadata.markdown = '';
-    }
+    const result = distillSearchResult(r);
 
-    const attr = r as Attribute;
+    const attr = result as Attribute;
     if (attr.values) {
-      attr.values = attr.values.filter(v => !isComplexAttributeValue(v.name));
       attr.markdown = attributeMetadataToMarkdown(attr);
     }
-    return r;
+    return result;
   });
   return config.limit !== undefined ? data.slice(0, config.limit) : data;
 }
 
-/**
- * Provides a subset of tokens to agents for theming. Narrowing choice produced more reliable results.
- * Tokens which are of low frequency of editing/usage or at the edges of scales create context noise.
- */
 export function getContextTokens(format: 'markdown' | 'json', tokens: Token[]): string | Token[] | undefined {
-  const complexTokenPatterns = [
-    'nve-config-',
-    'ref-color',
-    'ref-scale',
-    'ref-opacity',
-    'ref-outline',
-    'ref-font-family-',
-    'sys-color-scheme',
-    'sys-contrast',
-    'line-height',
-    'ratio',
-    '-xxx',
-    '-xx'
-  ];
-
-  const filteredTokens: Token[] = tokens
-    .filter(token => !complexTokenPatterns.some(pattern => token.name.includes(pattern)))
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const filteredTokens = distillTokens(tokens);
 
   if (format === 'markdown') {
     return `## CSS Variables\n\nAvailable semantic design tokens for theming.
@@ -106,7 +75,7 @@ ${filteredTokens.map(token => `| ${token.name} | ${token.value} | ${token.descri
 
 export function attributeMetadataToMarkdown(attribute: Attribute) {
   const exampleContext = getAttributeExampleContext(attribute);
-  const filteredValues = attribute.values.filter(v => !isComplexAttributeValue(v.name));
+  const filteredValues = distillAttributeValues(attribute.values);
   return `
 ## ${attribute.name}
 
@@ -126,39 +95,6 @@ ${exampleContext ? `\`\`\`html\n${exampleContext.trim()}\n\`\`\`` : 'No example 
 function getAPIDescriptionMarkdown(api: PartialAPIResult) {
   const description = (api.description ?? '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
   return wrapText(description).trim();
-}
-
-/**
- * Provides a subset of attribute values to agents. Narrowing choice produces drastically more reliable results.
- * Values which are of low frequency of editing/usage, unreliable naming, or at the edges of scales create significant context noise.
- * This filter removes noisy values to produce a more focused and reliable set.
- */
-function isComplexAttributeValue(value: string) {
-  return [
-    // system
-    'debug',
-    'mkd',
-    'md',
-    // layout
-    '|',
-    '@',
-    '&',
-    'xx', // excessive scale boundary
-    ':none', // ambiguous override
-    // typography (non-semantic)
-    'display',
-    'eyebrow',
-    'white',
-    'black',
-    // typography (visually ambiguous)
-    'line-height-',
-    'tight',
-    'snug',
-    'moderate',
-    'relaxed',
-    'loose',
-    'flat'
-  ].some(p => value.includes(p));
 }
 
 function getAttributeExampleContext(attribute: Attribute) {

@@ -432,25 +432,24 @@ describe('utils', () => {
       vi.mocked(marked.parse).mockImplementation(input => Promise.resolve(input));
     });
 
-    it('should log formatted report and not exit on success', async () => {
+    it('should return formatted report and not exit on success', async () => {
       const report = {
         testCase: { status: 'success' as const, message: 'Test passed' },
         anotherTest: { status: 'info' as const, message: 'Information' }
       };
 
-      await renderReport(report);
+      const result = await renderReport(report);
 
-      expect(console.log).toHaveBeenCalledWith('✅ (**test case**): Test passed\n💡 (**another test**): Information');
+      expect(result).toBe('✅ (**test case**): Test passed\n💡 (**another test**): Information');
       expect(process.exit).not.toHaveBeenCalled();
     });
 
-    it('should log formatted report and exit on failure', async () => {
+    it('should exit on failure', async () => {
       const report = {
         failedTest: { status: 'danger' as const, message: 'Test failed' }
       };
 
       await expect(() => renderReport(report)).rejects.toThrow('process.exit called');
-      expect(console.log).toHaveBeenCalledWith('❌ (**failed test**): Test failed');
     });
 
     it('should format camelCase keys to readable labels', async () => {
@@ -458,9 +457,9 @@ describe('utils', () => {
         camelCaseTestName: { status: 'success' as const, message: 'Formatted correctly' }
       };
 
-      await renderReport(report);
+      const result = await renderReport(report);
 
-      expect(console.log).toHaveBeenCalledWith('✅ (**camel case test name**): Formatted correctly');
+      expect(result).toBe('✅ (**camel case test name**): Formatted correctly');
     });
   });
 
@@ -474,27 +473,28 @@ describe('utils', () => {
         test: { status: 'success', message: 'Test passed' }
       };
 
-      await renderResult(report);
-      expect(console.log).toHaveBeenCalledWith('parsed markdown');
+      const result = await renderResult(report);
+      expect(typeof result).toBe('string');
+      expect(result).toBe('parsed markdown');
     });
 
     it('should render arrays as JSON', async () => {
       const array = ['item1', 'item2', 'item3'];
-      await renderResult(array);
-      expect(console.log).toHaveBeenCalledWith(JSON.stringify(array, null, 2));
+      const result = await renderResult(array);
+      expect(result).toBe(JSON.stringify(array, null, 2));
     });
 
     it('should render object literals as JSON', async () => {
       const obj = { key1: 'value1', key2: 'value2' };
-      await renderResult(obj);
-      expect(console.log).toHaveBeenCalledWith(JSON.stringify(obj, null, 2));
+      const result = await renderResult(obj);
+      expect(result).toBe(JSON.stringify(obj, null, 2));
     });
 
     it('should render HTTP URLs with line wrapping at path boundaries', async () => {
       const url =
         'https://example.com/very/long/url/that/should/be/wrapped/at/eighty/characters/for/better/readability';
-      await renderResult(url);
-      expect(console.log).toHaveBeenCalledWith(
+      const result = await renderResult(url);
+      expect(result).toBe(
         colors.complete(
           'https://example.com/very/long/url/that/should/be/wrapped/at/eighty/characters\n/for/better/readability'
         )
@@ -503,21 +503,21 @@ describe('utils', () => {
 
     it('should render multiline strings as markdown', async () => {
       const markdown = '# Title\n\nThis is **bold** text.';
-      await renderResult(markdown);
+      const result = await renderResult(markdown);
       expect(marked.parse).toHaveBeenCalledWith(markdown);
-      expect(console.log).toHaveBeenCalledWith('parsed markdown');
+      expect(result).toBe('parsed markdown');
     });
 
     it('should render other values directly', async () => {
-      await renderResult(42);
-      expect(console.log).toHaveBeenCalledWith(42);
+      const result = await renderResult(42);
+      expect(result).toBe(42);
     });
 
     it('should handle single-line non-URL strings as markdown', async () => {
       const text = 'Simple text without newlines';
-      await renderResult(text);
+      const result = await renderResult(text);
       expect(marked.parse).toHaveBeenCalledWith(text);
-      expect(console.log).toHaveBeenCalledWith('parsed markdown');
+      expect(result).toBe('parsed markdown');
     });
   });
 });

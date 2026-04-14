@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import type { Example } from '@internals/metadata';
+import { ExamplesService, type Example } from '@internals/metadata';
+import { MAX_CONTEXT_CHARS, wrapText } from '../internal/utils.js';
 import { getContextExamples, searchContextExamples, renderExampleMarkdown, condenseTemplate } from './utils.js';
-import { wrapText } from '../internal/utils.js';
 
 describe('utils', () => {
   const mockExamples: Example[] = [
@@ -62,8 +62,8 @@ describe('utils', () => {
   describe('getAvailableExamples', () => {
     it('should return markdown format correctly', () => {
       const result = getContextExamples('markdown', mockExamples);
-      expect(result).toContain('`project_button-default`: Default button example');
-      expect(result).toContain('`project_card-default`: Default card example');
+      expect(result).toContain('`project_button-default`: Button example');
+      expect(result).toContain('`project_card-default`: Card example');
     });
 
     it('should return JSON format correctly', () => {
@@ -74,14 +74,14 @@ describe('utils', () => {
         id: 'project_button-default',
         name: 'Default',
         element: 'nve-button',
-        summary: 'Default button example',
+        summary: 'Button example',
         template: '<nve-button>Click me</nve-button>'
       });
       expect(result[1]).toEqual({
         id: 'project_card-default',
         name: 'Default',
         element: 'nve-card',
-        summary: 'Default card example',
+        summary: 'Card example',
         template:
           '<nve-card><nve-card-header>Header</nve-card-header><nve-card-content>Content</nve-card-content></nve-card>'
       });
@@ -93,6 +93,16 @@ describe('utils', () => {
 
       const jsonResult = getContextExamples('json', []);
       expect(jsonResult).toEqual([]);
+    });
+
+    // MCP response size limit is 25_000 tokens ~ 100_000 characters
+    // Best practice is to half the maximum limit at 50_000 characters as a safe margin.
+    // Increasing this limit will cause unpredictable behavior by models with context
+    // limits and or cause the response to fail altogether.
+    it(`should not exceed ${MAX_CONTEXT_CHARS.toLocaleString()} characters in markdown format`, async () => {
+      const examples = await ExamplesService.getData();
+      const result = getContextExamples('markdown', examples);
+      expect(result.length).toBeLessThanOrEqual(MAX_CONTEXT_CHARS);
     });
 
     it('should sort pattern IDs first, then page IDs, then alphabetically', () => {

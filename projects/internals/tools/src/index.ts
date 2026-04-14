@@ -33,6 +33,8 @@ if (__ELEMENTS_PLAYGROUND_BASE_URL__) {
 
 export const tools = services.flatMap(service => loadTools(service));
 
+export { MAX_CONTEXT_CHARS, MAX_CONTEXT_TOKENS, isDebug } from './internal/utils.js';
+
 // temporary exports
 export { getElementImports } from './internal/utils.js';
 export { prompts } from './context/index.js';
