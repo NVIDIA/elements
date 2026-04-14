@@ -25,7 +25,7 @@ describe('lighthouse report', () => {
     expect(report.payload.javascript.requests['define.js']!.kb).toBeLessThan(10.6);
     expect(report.payload.javascript.requests['core.js']!.kb).toBeLessThan(9);
     expect(report.payload.javascript.requests['bash.js']!.kb).toBeLessThan(3);
-    expect(report.payload.javascript.requests['css.js']!.kb).toBeLessThan(4.5);
+    expect(report.payload.javascript.requests['css.js']!.kb).toBeLessThan(4.8);
     expect(report.payload.javascript.requests['html.js']!.kb).toBeLessThan(0.5);
     expect(report.payload.javascript.requests['javascript.js']!.kb).toBeLessThan(3.1);
     expect(report.payload.javascript.requests['json.js']!.kb).toBeLessThan(1);

@@ -1,8 +1,9 @@
-import { nodeTypescriptConfig } from '@internals/eslint';
+import { nodeTypescriptConfig, jsonConfig } from '@internals/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   ...nodeTypescriptConfig,
+  ...jsonConfig,
   {
     files: ['src/**/*.ts'],
     ignores: ['**/*.test.ts', '**/*.test.*.ts', '**/*.examples.ts'],

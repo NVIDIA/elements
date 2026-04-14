@@ -1,5 +1,5 @@
 import { elementsRecommended } from '@nvidia-elements/lint/eslint';
-import { browserTypescriptConfig, libraryConfig, litConfig } from '@internals/eslint';
+import { browserTypescriptConfig, libraryConfig, litConfig, jsonConfig } from '@internals/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -7,6 +7,7 @@ export default [
   ...browserTypescriptConfig,
   ...libraryConfig,
   ...litConfig,
+  ...jsonConfig,
   {
     files: ['src/**/*.ts'],
     ignores: ['**/*.test.ts', '**/*.test.*.ts', '**/*.examples.ts'],
