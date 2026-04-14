@@ -1,4 +1,4 @@
-import { libraryConfig, nodeTypescriptConfig } from '@internals/eslint';
+import { libraryConfig, nodeTypescriptConfig, jsonConfig } from '@internals/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
-export default [...nodeTypescriptConfig, ...libraryConfig];
+export default [...nodeTypescriptConfig, ...libraryConfig, ...jsonConfig];

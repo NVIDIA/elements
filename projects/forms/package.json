@@ -72,7 +72,7 @@
     "test:lighthouse": "wireit"
   },
   "dependencies": {
-    "lit": "catalog:"
+    "lit": "catalog:publish"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
@@ -85,6 +85,7 @@
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
     "eslint": "catalog:",
+    "lit": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",

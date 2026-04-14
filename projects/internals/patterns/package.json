@@ -2,6 +2,7 @@
   "name": "@internals/patterns",
   "version": "0.0.0",
   "description": "HTML Patterns",
+  "private": true,
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
     "type": "git",

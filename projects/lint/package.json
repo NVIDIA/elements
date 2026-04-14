@@ -62,7 +62,7 @@
   },
   "peerDependencies": {
     "@nvidia-elements/themes": "workspace:^",
-    "eslint": ">= 10"
+    "eslint": "catalog:publish"
   },
   "devDependencies": {
     "@internals/metadata": "workspace:*",
