@@ -12,6 +12,16 @@ export const ELEMENTS_ENV_ICON = {
   docs: '📖'
 } as const;
 
+// The max agent MCP response size limit is 25,000 tokens (~100,000 characters).
+// Use a buffer to avoid unpredictable model behavior or response failure.
+export const MAX_CONTEXT_CHARS = 60_000;
+
+export const MAX_CONTEXT_TOKENS = 15_000;
+
+export function isDebug() {
+  return process.env.ELEMENTS_DEBUG === 'true' && process.env.ELEMENTS_ENV !== 'mcp';
+}
+
 export function getAvailableElementTags(elements: Element[]) {
   return elements.filter(e => e.manifest?.deprecated !== 'true').map(e => e.name);
 }

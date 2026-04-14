@@ -1388,9 +1388,6 @@ importers:
       '@internals/metadata':
         specifier: workspace:*
         version: link:../../internals/metadata
-      '@internals/tools':
-        specifier: workspace:*
-        version: link:../../internals/tools
       '@lit-labs/eleventy-plugin-lit':
         specifier: 'catalog:'
         version: 1.0.6(@types/node@24.9.1)

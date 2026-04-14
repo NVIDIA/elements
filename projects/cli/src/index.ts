@@ -4,8 +4,9 @@ process.env.ELEMENTS_ENV = 'cli';
 /* istanbul ignore file -- @preserve */
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { type ManagedToolMethod, tools, ToolSupport, type Schema } from '@internals/tools';
-import { banner, colors, getArgValue, renderResult, runAsyncTool } from './utils.js';
+import { performance } from 'perf_hooks';
+import { type ManagedToolMethod, tools, ToolSupport, type Schema, isDebug, MAX_CONTEXT_TOKENS } from '@internals/tools';
+import { banner, colors, getArgValue, progressBar, renderResult, runAsyncTool } from './utils.js';
 import { notifyIfUpdateAvailable } from './update.js';
 
 export const VERSION = '0.0.0';
@@ -18,6 +19,7 @@ const yargsInstance = yargs(hideBin(process.argv))
   .usage('$0 <cmd> [args]')
   .version(VERSION)
   .option('upgrade', { type: 'boolean', describe: 'Upgrade Elements CLI (nve) to the latest version' })
+  .option('debug', { type: 'boolean', describe: 'Enable debug output for tools', default: false })
   .recommendCommands()
   .fail(message => {
     // allow missing positionals to fall through to interactive prompts
@@ -32,6 +34,12 @@ const yargsInstance = yargs(hideBin(process.argv))
   });
 
 yargsInstance.wrap(yargsInstance.terminalWidth());
+
+yargsInstance.middleware(argv => {
+  if (argv.debug) {
+    process.env.ELEMENTS_DEBUG = 'true';
+  }
+});
 
 yargsInstance.command(
   '$0',
@@ -88,10 +96,20 @@ tools
       },
       // main handler for the command
       async args => {
+        const start = performance.now();
         const { result, status, message } = await runAsyncTool(args, tool);
+        const end = performance.now();
 
         if (status === 'complete') {
-          await renderResult(result);
+          let formattedResult = await renderResult(result);
+          if (isDebug()) {
+            const tokens = formattedResult.length / 4;
+            const pct = (tokens / MAX_CONTEXT_TOKENS) * 100;
+            formattedResult += `[debug]\n[command]: ${tool.metadata.command}`;
+            formattedResult += `\n[execution time]: ${((end - start) / 1000).toFixed(2)} seconds`;
+            formattedResult += `\n[token usage]: ${progressBar(pct)} ${tokens.toLocaleString()} / ${MAX_CONTEXT_TOKENS.toLocaleString()} (${(100 - pct).toFixed(1)}% remaining)`;
+          }
+          console.log(formattedResult);
           await notifyIfUpdateAvailable(BUILD_SHA);
           process.exit(0);
         } else {

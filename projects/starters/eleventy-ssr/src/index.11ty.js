@@ -1,10 +1,9 @@
 // @ts-check
 
-import { ExamplesService } from '@internals/tools/examples';
-import { ApiService } from '@internals/metadata';
+import { ApiService, ExamplesService } from '@internals/metadata';
 
 const elements = (await ApiService.getData()).data.elements;
-const examples = (await ExamplesService.getAll())
+const examples = (await ExamplesService.getData())
   .filter(
     example =>
       example.name.includes('Default') &&
