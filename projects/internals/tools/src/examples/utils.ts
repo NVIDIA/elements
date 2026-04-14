@@ -1,70 +1,9 @@
-import { ExamplesService, type Example, type ExampleTag } from '@internals/metadata';
+import { ExamplesService, type Example } from '@internals/metadata';
 import { wrapText } from '../internal/utils.js';
-
-const excludedIdPatterns = ['theme', 'internal'];
-const excludedTags: ExampleTag[] = ['anti-pattern', 'performance', 'test-case'];
-const excludedElementPatterns = ['internal', 'responsive'];
-const includedIdPatterns = [
-  'default',
-  'forms',
-  'popover',
-  'page',
-  'grid',
-  'invoker',
-  'styles-typography',
-  'styles-layout'
-];
-
-function passesExclusionChecks(example: Partial<Example>) {
-  if (example.deprecated) {
-    return false;
-  }
-  const id = example.id?.toLowerCase() ?? '';
-  const tags = example.tags ?? [];
-  const element = example.element ?? '';
-  return (
-    !excludedIdPatterns.some(p => id.includes(p)) &&
-    !excludedTags.some(t => tags.includes(t)) &&
-    !excludedElementPatterns.some(p => element.includes(p))
-  );
-}
-
-function passesTypeChecks(example: Partial<Example>) {
-  if (example.composition) {
-    return true;
-  }
-  const id = example.id ?? '';
-  const tags = example.tags ?? [];
-  return includedIdPatterns.some(p => id.includes(p)) || tags.includes('pattern');
-}
-
-export function isContextExample(example: Partial<Example>) {
-  return passesExclusionChecks(example) && passesTypeChecks(example) && (example.summary?.length ?? 0) > 0;
-}
-
-function rankExample(example: Partial<Example>) {
-  const name = (example.id ?? '').replace('elements-', '');
-  if (name.startsWith('pattern')) {
-    return 0;
-  }
-  if (name.startsWith('page')) {
-    return 1;
-  }
-  return 2;
-}
+import { distillExamples, isContextExample } from '../distill/examples.js';
 
 export function getContextExamples(format: 'markdown' | 'json', examples: Partial<Example>[]) {
-  const result = examples
-    .filter(isContextExample)
-    .reverse()
-    .map((s: Partial<Example>) => ({
-      id: s.id ?? '',
-      name: s.name ?? '',
-      summary: s.summary ?? s.description ?? '',
-      element: s.element ?? '',
-      template: s.template ?? ''
-    }))
-    .sort((a, b) => rankExample(a) - rankExample(b) || (a.id ?? '').localeCompare(b.id ?? ''));
+  const result = distillExamples(examples);
   return format === 'markdown'
     ? result
         .map(example => {

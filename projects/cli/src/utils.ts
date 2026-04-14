@@ -151,13 +151,13 @@ export async function renderReport(result: Report) {
     return `${statusIcons[value.status]} (**${label}**): ${value.message}`;
   });
 
-  const results = await Promise.all(reports.map(report => marked.parse(report)));
-
-  console.log(results.map(r => r.trim()).join('\n'));
+  const results = (await Promise.all(reports.map(report => marked.parse(report)))).map(r => r.trim()).join('\n');
 
   if (reportHasFailures(result)) {
     process.exit(1);
   }
+
+  return results;
 }
 
 export function wrapUrl(url: string, maxWidth = 80): string {
@@ -210,17 +210,29 @@ function configureMarkedTerminal() {
 }
 
 export async function renderResult(result: unknown) {
+  let formattedResult = '';
   if (isReport(result)) {
     configureMarkedTerminal();
-    await renderReport(result as unknown as Report);
+    formattedResult = await renderReport(result as unknown as Report);
   } else if (Array.isArray(result) || isObjectLiteral(result)) {
-    console.log(JSON.stringify(result, null, 2));
+    formattedResult = JSON.stringify(result, null, 2);
   } else if (typeof result === 'string' && result.trim().startsWith('http') && !result.includes('\n')) {
-    console.log(colors.complete(wrapUrl(result)));
+    formattedResult = colors.complete(wrapUrl(result));
   } else if (typeof result === 'string') {
     configureMarkedTerminal();
-    console.log(await marked.parse(result));
+    formattedResult = await marked.parse(result);
   } else {
-    console.log(result);
+    formattedResult = result as string;
   }
+
+  return formattedResult as string;
+}
+
+/**
+ * Renders an ASCII progress bar for terminal output.
+ */
+export function progressBar(percentage: number, width = 20) {
+  const clamped = Math.max(0, Math.min(100, percentage));
+  const filled = Math.round((clamped / 100) * width);
+  return `${'█'.repeat(filled)}${'░'.repeat(width - filled)}`;
 }

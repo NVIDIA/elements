@@ -19,7 +19,6 @@
     "@11ty/eleventy-plugin-vite": "catalog:",
     "@lit-labs/eleventy-plugin-lit": "catalog:",
     "@lit-labs/ssr-client": "catalog:",
-    "@internals/tools": "workspace:*",
     "@internals/metadata": "workspace:*",
     "typescript": "catalog:",
     "vite": "catalog:"
@@ -41,7 +40,6 @@
       "command": "pnpm exec eleventy",
       "files": [
         "../../internals/metadata/dist/**/*.js",
-        "../../internals/tools/dist/**/*.js",
         "../../core/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
@@ -56,10 +54,6 @@
         "clean",
         {
           "script": "../../internals/metadata:build",
-          "cascade": false
-        },
-        {
-          "script": "../../internals/tools:build",
           "cascade": false
         },
         {
