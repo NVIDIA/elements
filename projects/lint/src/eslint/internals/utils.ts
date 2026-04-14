@@ -3,6 +3,7 @@ import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 export interface HtmlNode {
   type: string;
   name: string;
+  parent?: HtmlNode;
   children?: HtmlNode[];
   value?: string;
 }

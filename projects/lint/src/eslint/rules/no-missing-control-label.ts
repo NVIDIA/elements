@@ -73,6 +73,86 @@ function hasNativeInputWithAriaLabel(node: HtmlNode): boolean {
   return false;
 }
 
+/**
+ * Check whether any slotted native control ID matches an external <label for="...">.
+ * External means the label node is outside the current component subtree.
+ */
+function hasExternalLabelForAssociation(node: HtmlTagNode): boolean {
+  const nativeInputTags = new Set(['input', 'textarea', 'select']);
+  const controlIds = new Set<string>();
+
+  function collectControlIds(current: HtmlNode): void {
+    if (current.type === 'Tag' && nativeInputTags.has(current.name.toLowerCase())) {
+      const idAttr = findAttr(current, 'id');
+      const idValue = idAttr?.value?.value;
+      if (idValue) {
+        controlIds.add(idValue);
+      }
+    }
+
+    if (current.children && Array.isArray(current.children)) {
+      for (const child of current.children) {
+        collectControlIds(child);
+      }
+    }
+  }
+
+  collectControlIds(node);
+
+  if (controlIds.size === 0) {
+    return false;
+  }
+
+  function subtreeContainsNode(current: HtmlNode, target: HtmlNode): boolean {
+    if (current === target) {
+      return true;
+    }
+
+    if (!current.children || !Array.isArray(current.children)) {
+      return false;
+    }
+
+    return current.children.some((child: HtmlNode) => subtreeContainsNode(child, target));
+  }
+
+  function hasMatchingLabelInSubtree(current: HtmlNode): boolean {
+    if (current.type === 'Tag' && current.name.toLowerCase() === 'label') {
+      const forAttr = findAttr(current, 'for');
+      const forValue = forAttr?.value?.value;
+
+      if (forValue && controlIds.has(forValue)) {
+        return true;
+      }
+    }
+
+    if (current.children && Array.isArray(current.children)) {
+      return current.children.some((child: HtmlNode) => hasMatchingLabelInSubtree(child));
+    }
+
+    return false;
+  }
+
+  let ancestor = node.parent;
+
+  while (ancestor) {
+    if (ancestor.children && Array.isArray(ancestor.children)) {
+      for (const siblingSubtree of ancestor.children) {
+        if (subtreeContainsNode(siblingSubtree, node)) {
+          continue;
+        }
+
+        if (hasMatchingLabelInSubtree(siblingSubtree)) {
+          return true;
+        }
+      }
+    }
+
+    ancestor = ancestor.parent;
+  }
+
+  return false;
+}
+
 const rule = {
   meta: {
     type: 'problem' as const,
@@ -96,7 +176,9 @@ const rule = {
     ],
     messages: {
       ['missing-control-label']:
-        '<{{element}}> is missing an accessible label. Add a aria-label attribute on the native input.'
+        '<{{element}}> is missing an accessible label. Add a aria-label attribute on the native input.',
+      ['external-control-label']:
+        '<{{element}}> associates its slotted control with an external <label for>. Slot the <label> inside <{{element}}> instead.'
     }
   },
   create(context: Rule.RuleContext) {
@@ -121,6 +203,20 @@ const rule = {
 
         // Check for aria-label on native input
         const hasAriaLabel = hasNativeInputWithAriaLabel(node);
+
+        // Check for anti-pattern: external <label for="..."> tied to slotted control id
+        const hasExternalLabelFor = hasExternalLabelForAssociation(node);
+
+        if (hasExternalLabelFor) {
+          context.report({
+            node: node,
+            messageId: 'external-control-label',
+            data: {
+              element: tagName
+            }
+          });
+          return;
+        }
 
         if (!hasLabel && !hasAriaLabel) {
           context.report({
