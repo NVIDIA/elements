@@ -33,6 +33,9 @@ describe('noMissingControlLabel', () => {
     expect(noMissingControlLabel.meta.messages['missing-control-label']).toBe(
       '<{{element}}> is missing an accessible label. Add a aria-label attribute on the native input.'
     );
+    expect(noMissingControlLabel.meta.messages['external-control-label']).toBe(
+      '<{{element}}> associates its slotted control with an external <label for>. Slot the <label> inside <{{element}}> instead.'
+    );
   });
 
   it('should allow form controls with slotted label', () => {
@@ -199,6 +202,43 @@ describe('noMissingControlLabel', () => {
         {
           code: `<nve-switch><input type="checkbox" /></nve-switch>`,
           errors: [{ messageId: 'missing-control-label', data: { element: 'nve-switch' } }]
+        }
+      ]
+    });
+  });
+
+  it('should report external label-for associations as anti-patterns', () => {
+    tester.run('should report external label-for associations', rule, {
+      valid: [
+        `<nve-select>
+          <label for="inside-select">Choose option</label>
+          <select id="inside-select">
+            <option>Option 1</option>
+          </select>
+        </nve-select>`
+      ],
+      invalid: [
+        {
+          code: `<div>
+            <label for="inline-text-select">Label</label>
+            <nve-select>
+              <select id="inline-text-select">
+                <option>Option 1</option>
+              </select>
+            </nve-select>
+          </div>`,
+          errors: [{ messageId: 'external-control-label', data: { element: 'nve-select' } }]
+        },
+        {
+          code: `<div>
+            <label for="inline-text-select">Label</label>
+            <nve-select>
+              <select id="inline-text-select" aria-label="Inline option">
+                <option>Option 1</option>
+              </select>
+            </nve-select>
+          </div>`,
+          errors: [{ messageId: 'external-control-label', data: { element: 'nve-select' } }]
         }
       ]
     });
