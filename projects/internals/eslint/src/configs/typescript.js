@@ -5,6 +5,7 @@ import jsdoc from 'eslint-plugin-jsdoc';
 import deadCode from '../local/dead-code.js';
 import exampleMetadata from '../local/example-metadata.js';
 import exampleNaming from '../local/example-naming.js';
+import exampleTemplateSize from '../local/example-template-size.js';
 import requireFixtureCleanup from '../local/require-fixture-cleanup.js';
 import requireElementStable from '../local/require-element-stable.js';
 
@@ -43,6 +44,7 @@ const config = {
         'no-dead-code': deadCode,
         'example-metadata': exampleMetadata,
         'example-naming': exampleNaming,
+        'example-template-size': exampleTemplateSize,
         'require-fixture-cleanup': requireFixtureCleanup,
         'require-element-stable': requireElementStable
       }
@@ -157,7 +159,8 @@ export const browserTypescriptConfig = [
     files: ['**/*.examples.ts'],
     rules: {
       'local-typescript/example-metadata': ['error'],
-      'local-typescript/example-naming': ['error']
+      'local-typescript/example-naming': ['error'],
+      'local-typescript/example-template-size': ['error']
     }
   }
 ];
@@ -193,7 +196,8 @@ export const nodeTypescriptConfig = [
     files: ['**/*.examples.ts'],
     rules: {
       'local-typescript/example-metadata': ['error'],
-      'local-typescript/example-naming': ['error']
+      'local-typescript/example-naming': ['error'],
+      'local-typescript/example-template-size': ['error']
     }
   }
 ];
