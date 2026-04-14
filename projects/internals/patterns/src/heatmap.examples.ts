@@ -542,7 +542,6 @@ export const OccupancyDetectionHeatmap = {
   </style>
   <nve-grid-header>
     <nve-grid-column position="fixed" tabindex="0" left="" aria-colindex="1">Y (m)</nve-grid-column>
-    <nve-grid-column column-align="center" aria-colindex="2">-5</nve-grid-column>
     <nve-grid-column column-align="center" aria-colindex="3">-4</nve-grid-column>
     <nve-grid-column column-align="center" aria-colindex="4">-3</nve-grid-column>
     <nve-grid-column column-align="center" aria-colindex="5">-2</nve-grid-column>
@@ -553,27 +552,9 @@ export const OccupancyDetectionHeatmap = {
     <nve-grid-column column-align="center" aria-colindex="10">3</nve-grid-column>
     <nve-grid-column column-align="center" aria-colindex="11">4</nve-grid-column>
     <nve-grid-column column-align="center" aria-colindex="12">5</nve-grid-column>
-    <nve-grid-column column-align="center" aria-colindex="13">6</nve-grid-column>
   </nve-grid-header>
   <nve-grid-row>
-    <nve-grid-cell>-4</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">5</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">8</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">10</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">12</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">15</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">18</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">20</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">18</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">15</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">12</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">10</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">8</nve-grid-cell>
-  </nve-grid-row>
-  </nve-grid-row>
-  <nve-grid-row>
     <nve-grid-cell>-3</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">8</nve-grid-cell>
     <nve-grid-cell data-intensity="10">12</nve-grid-cell>
     <nve-grid-cell data-intensity="20">15</nve-grid-cell>
     <nve-grid-cell data-intensity="20">18</nve-grid-cell>
@@ -584,11 +565,9 @@ export const OccupancyDetectionHeatmap = {
     <nve-grid-cell data-intensity="20">22</nve-grid-cell>
     <nve-grid-cell data-intensity="20">18</nve-grid-cell>
     <nve-grid-cell data-intensity="20">15</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">12</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>-2</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">10</nve-grid-cell>
     <nve-grid-cell data-intensity="20">15</nve-grid-cell>
     <nve-grid-cell data-intensity="20">20</nve-grid-cell>
     <nve-grid-cell data-intensity="30">25</nve-grid-cell>
@@ -599,11 +578,9 @@ export const OccupancyDetectionHeatmap = {
     <nve-grid-cell data-intensity="30">30</nve-grid-cell>
     <nve-grid-cell data-intensity="30">25</nve-grid-cell>
     <nve-grid-cell data-intensity="20">20</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">15</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>-1</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">12</nve-grid-cell>
     <nve-grid-cell data-intensity="20">18</nve-grid-cell>
     <nve-grid-cell data-intensity="30">25</nve-grid-cell>
     <nve-grid-cell data-intensity="30">30</nve-grid-cell>
@@ -614,11 +591,9 @@ export const OccupancyDetectionHeatmap = {
     <nve-grid-cell data-intensity="40">35</nve-grid-cell>
     <nve-grid-cell data-intensity="30">30</nve-grid-cell>
     <nve-grid-cell data-intensity="30">25</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">18</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>0</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">15</nve-grid-cell>
     <nve-grid-cell data-intensity="20">22</nve-grid-cell>
     <nve-grid-cell data-intensity="30">30</nve-grid-cell>
     <nve-grid-cell data-intensity="40">35</nve-grid-cell>
@@ -629,11 +604,9 @@ export const OccupancyDetectionHeatmap = {
     <nve-grid-cell data-intensity="40">40</nve-grid-cell>
     <nve-grid-cell data-intensity="40">35</nve-grid-cell>
     <nve-grid-cell data-intensity="30">30</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">22</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>1</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">15</nve-grid-cell>
     <nve-grid-cell data-intensity="20">22</nve-grid-cell>
     <nve-grid-cell data-intensity="30">30</nve-grid-cell>
     <nve-grid-cell data-intensity="40">35</nve-grid-cell>
@@ -644,11 +617,9 @@ export const OccupancyDetectionHeatmap = {
     <nve-grid-cell data-intensity="40">40</nve-grid-cell>
     <nve-grid-cell data-intensity="40">35</nve-grid-cell>
     <nve-grid-cell data-intensity="30">30</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">22</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>2</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">12</nve-grid-cell>
     <nve-grid-cell data-intensity="20">18</nve-grid-cell>
     <nve-grid-cell data-intensity="30">25</nve-grid-cell>
     <nve-grid-cell data-intensity="30">30</nve-grid-cell>
@@ -659,11 +630,9 @@ export const OccupancyDetectionHeatmap = {
     <nve-grid-cell data-intensity="40">35</nve-grid-cell>
     <nve-grid-cell data-intensity="30">30</nve-grid-cell>
     <nve-grid-cell data-intensity="30">25</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">18</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>3</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">10</nve-grid-cell>
     <nve-grid-cell data-intensity="20">15</nve-grid-cell>
     <nve-grid-cell data-intensity="20">20</nve-grid-cell>
     <nve-grid-cell data-intensity="30">25</nve-grid-cell>
@@ -674,11 +643,9 @@ export const OccupancyDetectionHeatmap = {
     <nve-grid-cell data-intensity="30">30</nve-grid-cell>
     <nve-grid-cell data-intensity="30">25</nve-grid-cell>
     <nve-grid-cell data-intensity="20">20</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">15</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell>4</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">8</nve-grid-cell>
     <nve-grid-cell data-intensity="10">12</nve-grid-cell>
     <nve-grid-cell data-intensity="20">15</nve-grid-cell>
     <nve-grid-cell data-intensity="20">18</nve-grid-cell>
@@ -689,22 +656,6 @@ export const OccupancyDetectionHeatmap = {
     <nve-grid-cell data-intensity="20">22</nve-grid-cell>
     <nve-grid-cell data-intensity="20">18</nve-grid-cell>
     <nve-grid-cell data-intensity="20">15</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">12</nve-grid-cell>
-  </nve-grid-row>
-  <nve-grid-row>
-    <nve-grid-cell>5</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">5</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">8</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">10</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">12</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">15</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">18</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">20</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">18</nve-grid-cell>
-    <nve-grid-cell data-intensity="20">15</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">12</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">10</nve-grid-cell>
-    <nve-grid-cell data-intensity="10">8</nve-grid-cell>
   </nve-grid-row>
 </nve-grid>
   `

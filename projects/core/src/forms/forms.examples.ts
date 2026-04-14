@@ -25,7 +25,8 @@ export default {
 }
 
 /**
- * @summary Comprehensive showcase of all form controls in a grid layout, including input types, states, and advanced patterns for complete form design reference.
+ * @summary Comprehensive showcase of all form controls in a grid layout, including input types, states, and advanced patterns use for a complete form design reference.
+ * @tags pattern
  */
 export const KitchenSink = {
   render: () => html`
