@@ -162,8 +162,8 @@
   },
   "dependencies": {
     "@nvidia-elements/forms": "workspace:^",
-    "lit": "catalog:",
-    "lit-html": "catalog:"
+    "lit": "catalog:publish",
+    "lit-html": "catalog:publish"
   },
   "peerDependencies": {
     "@nvidia-elements/core": "workspace:^",
@@ -186,6 +186,8 @@
     "dts-bundle-generator": "9.5.1",
     "esbuild": "0.27.4",
     "eslint": "catalog:",
+    "lit": "catalog:",
+    "lit-html": "catalog:",
     "monaco-editor": "0.55.1",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",

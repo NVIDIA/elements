@@ -1,5 +1,5 @@
 import { elementsRecommended } from '@nvidia-elements/lint/eslint';
-import { browserTypescriptConfig, appConfig, htmlConfig } from '@internals/eslint';
+import { browserTypescriptConfig, appConfig, htmlConfig, jsonConfig } from '@internals/eslint';
 
 htmlConfig[1].rules['html/element-newline'] = 'off'; // todo
 htmlConfig[1].rules['html/require-img-alt'] = 'off'; // disabled due to not following role presentation
@@ -10,6 +10,7 @@ export default [
   ...htmlConfig,
   ...browserTypescriptConfig,
   ...appConfig,
+  ...jsonConfig,
   {
     files: ['src/_11ty/**/*.js'],
     rules: {

@@ -940,18 +940,18 @@
   },
   "dependencies": {
     "@nvidia-elements/forms": "workspace:^",
-    "lit": "catalog:",
-    "lit-html": "catalog:"
+    "lit": "catalog:publish",
+    "lit-html": "catalog:publish"
   },
   "peerDependencies": {
     "@nvidia-elements/themes": "workspace:^"
   },
   "optionalDependencies": {
-    "@lit-labs/scoped-registry-mixin": "catalog:",
-    "@webcomponents/scoped-custom-element-registry": "catalog:",
-    "construct-style-sheets-polyfill": "^3.1.0",
-    "element-internals-polyfill": "^3.0.2",
-    "formdata-polyfill": "^4.0.10"
+    "@lit-labs/scoped-registry-mixin": "catalog:publish",
+    "@webcomponents/scoped-custom-element-registry": "catalog:publish",
+    "construct-style-sheets-polyfill": "catalog:publish",
+    "element-internals-polyfill": "catalog:publish",
+    "formdata-polyfill": "catalog:publish"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
@@ -966,7 +966,9 @@
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
     "eslint": "catalog:",
+    "lit": "catalog:",
     "lit-analyzer": "2.0.3",
+    "lit-html": "catalog:",
     "publint": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",

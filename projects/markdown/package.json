@@ -72,8 +72,8 @@
     "test:lighthouse": "wireit"
   },
   "dependencies": {
-    "lit": "catalog:",
-    "markdown-it": "catalog:"
+    "lit": "catalog:publish",
+    "markdown-it": "catalog:publish"
   },
   "peerDependencies": {
     "@nvidia-elements/core": "workspace:^",
@@ -90,6 +90,8 @@
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
     "eslint": "catalog:",
+    "lit": "catalog:",
+    "markdown-it": "catalog:",
     "publint": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",

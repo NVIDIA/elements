@@ -1,5 +1,12 @@
 import { elementsRecommended } from '@nvidia-elements/lint/eslint';
-import { browserTypescriptConfig, libraryConfig, litConfig, htmlConfig, cssConfig } from '@internals/eslint';
+import {
+  browserTypescriptConfig,
+  libraryConfig,
+  litConfig,
+  htmlConfig,
+  cssConfig,
+  jsonConfig
+} from '@internals/eslint';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -9,6 +16,7 @@ export default [
   ...libraryConfig,
   ...litConfig,
   ...cssConfig,
+  ...jsonConfig,
   // Disable no-missing-popover-trigger globally, only enable for examples
   {
     rules: {

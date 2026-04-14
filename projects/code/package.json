@@ -177,9 +177,9 @@
     "test:lighthouse": "wireit"
   },
   "dependencies": {
-    "highlight.js": "11.10.0",
-    "lit": "catalog:",
-    "lit-html": "catalog:"
+    "highlight.js": "catalog:publish",
+    "lit": "catalog:publish",
+    "lit-html": "catalog:publish"
   },
   "peerDependencies": {
     "@nvidia-elements/core": "workspace:^",
@@ -197,6 +197,9 @@
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
     "eslint": "catalog:",
+    "highlight.js": "catalog:",
+    "lit": "catalog:",
+    "lit-html": "catalog:",
     "publint": "catalog:",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
