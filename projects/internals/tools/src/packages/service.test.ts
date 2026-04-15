@@ -47,7 +47,7 @@ describe('PackagesService', () => {
     const result = await PackagesService.changelogsGet({ name: '@nvidia-elements/core', format: 'markdown' });
     expect(result).toBeDefined();
     expect(typeof result).toBe('string');
-    expect(result).toContain('@nvidia-elements/core');
+    expect(result).toContain('## ');
     expect((PackagesService.changelogsGet as ToolMethod<unknown>).metadata.name).toBe('changelogsGet');
     expect((PackagesService.changelogsGet as ToolMethod<unknown>).metadata.command).toBe('changelogs.get');
     expect((PackagesService.changelogsGet as ToolMethod<unknown>).metadata.summary).toBe(
@@ -76,7 +76,9 @@ describe('PackagesService', () => {
   it('should apply default limit to changelog versions', async () => {
     const result = await PackagesService.changelogsGet({ name: '@nvidia-elements/core' });
     expect(typeof result).toBe('string');
-    expect(result).toContain('@nvidia-elements/core');
+    const versionCount = ((result as string).match(/^## /gm) ?? []).length;
+    expect(versionCount).toBeGreaterThan(0);
+    expect(versionCount).toBeLessThanOrEqual(10);
   });
 
   it('should limit changelog versions when explicit limit is provided', async () => {

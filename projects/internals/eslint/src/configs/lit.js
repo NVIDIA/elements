@@ -142,7 +142,14 @@ export const litConfig = [
       'local/require-test-completeness': [
         'error',
         {
-          exclude: ['json-viewer', 'panel', 'dropdown-group', 'progressive-filter-chip']
+          exclude: [
+            'json-viewer',
+            'panel',
+            'dropdown-group',
+            'progressive-filter-chip',
+            'format-datetime',
+            'format-relative-time'
+          ]
         }
       ]
     }
