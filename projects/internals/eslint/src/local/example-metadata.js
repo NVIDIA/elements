@@ -1,4 +1,6 @@
-const allowedTags = ['priority', 'performance', 'pattern', 'anti-pattern', 'test-case'];
+import { hasTag, parseTag } from './example-helpers.js';
+
+const allowedTags = ['performance', 'pattern', 'anti-pattern', 'test-case', 'theme'];
 const contextMaxLength = 400;
 const guidanceIndicators = [
   /\buse\s+(to|for|when|if|in|as)\b/i,
@@ -28,6 +30,20 @@ const placeholderPatterns = [
   /eiusmod tempor incididunt/i
 ];
 
+const visualDescriptors = [
+  'padding',
+  'margin',
+  'gap',
+  'left',
+  'right',
+  'top',
+  'bottom',
+  'border-radius',
+  'space-between'
+];
+const escapedVisualDescriptors = visualDescriptors.map(descriptor => descriptor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+const visualDescriptorPattern = new RegExp(`(?<![\\w-])(${escapedVisualDescriptors.join('|')})(?![\\w-])`, 'i');
+
 export default {
   meta: {
     type: 'problem',
@@ -45,6 +61,8 @@ export default {
         '@summary must not contain links. Inline the relevant text instead so context is preserved for agents.',
       'no-placeholder-text':
         'Example contains placeholder text ("{{match}}"). Replace with realistic, meaningful content.',
+      'no-visual-language':
+        '@{{field}} uses visual descriptors. Describe semantic intent and behavior for coding agents instead of visual appearance.',
       'pattern-missing-guidance':
         '@summary for @tags pattern must include UX guidance (e.g., "Use … to/for/when", "Ideal for", "Limit this to", "Avoid"). If this is a visual demonstration or test case rather than a reusable UX pattern, remove the pattern tag or use @tags test-case instead.'
     }
@@ -53,6 +71,10 @@ export default {
     return {
       ExportNamedDeclaration(node) {
         if (!node.declaration || node.declaration.type !== 'VariableDeclaration') {
+          return;
+        }
+
+        if (hasTag(context, node, 'test-case')) {
           return;
         }
 
@@ -67,6 +89,7 @@ export default {
 
         const raw = jsdoc.value;
         const summary = parseTag(raw, 'summary');
+        const description = parseTag(raw, 'description');
         const tags = parseTag(raw, 'tags')
           .split(' ')
           .map(t => t.trim())
@@ -96,6 +119,26 @@ export default {
             messageId: 'summary-too-long',
             data: { length: String(plainText.length), max: String(contextMaxLength) }
           });
+        }
+
+        const metadataFields = [
+          ['summary', summary],
+          ['description', description]
+        ];
+        for (const [field, value] of metadataFields) {
+          const normalizedValue = value.trim();
+          if (!normalizedValue) {
+            continue;
+          }
+
+          const visualMatch = normalizedValue.match(visualDescriptorPattern);
+          if (visualMatch) {
+            context.report({
+              node,
+              messageId: 'no-visual-language',
+              data: { field, match: visualMatch[0] }
+            });
+          }
         }
 
         // Tags must be from the allowed list
@@ -132,16 +175,3 @@ export default {
     };
   }
 };
-
-/**
- * Extract the value of a JSDoc tag from raw comment text.
- * Returns the text after `@tagName` up to the next `@tag` or end of comment.
- */
-function parseTag(raw, tagName) {
-  const regex = new RegExp(`@${tagName}\\s+([\\s\\S]*?)(?=\\s*(?:@\\w|$))`);
-  const match = raw.match(regex);
-  if (!match) {
-    return '';
-  }
-  return match[1].replace(/\s*\*\s*/g, ' ').trim();
-}

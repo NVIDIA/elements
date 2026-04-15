@@ -1,3 +1,4 @@
+/* eslint-disable local-typescript/example-metadata */
 import { html } from 'lit';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/logo/define.js';

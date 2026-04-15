@@ -7,7 +7,6 @@ export default {
 
 /**
  * @summary Foundational layout types (row, column, grid) available via the nve-layout attribute.
- * @tags priority
  */
 export const Default = {
   render: () => html`
@@ -32,7 +31,6 @@ export const Default = {
 
 /**
  * @summary Gap spacing options (xs through xl) available via the nve-layout attribute.
- * @tags priority
  */
 export const LayoutGap = {
   render: () => html`
