@@ -1,3 +1,17 @@
+## 1.70.0 (2026-04-15)
+
+* feat(core): add nve-tabs-group ([13d37e3](https://github.com/NVIDIA/elements/commit/13d37e3))
+* feat(core): support horizontal layouts on tabs group ([0a62ec5](https://github.com/NVIDIA/elements/commit/0a62ec5))
+* feat(labs-lint): support dynamic slots in lint metadata ([d66fb41](https://github.com/NVIDIA/elements/commit/d66fb41))
+* chore(ci): add example template context check ([33f5be2](https://github.com/NVIDIA/elements/commit/33f5be2))
+* chore(docs): fix vale summaries for button examples ([d3d5fd0](https://github.com/NVIDIA/elements/commit/d3d5fd0))
+* chore(core): make format tests deterministic ([0fe5c7c](https://github.com/NVIDIA/elements/commit/0fe5c7c))
+* chore(internals): eslint checks for example summaries, css usage and domain links ([db396ca](https://github.com/NVIDIA/elements/commit/db396ca))
+* chore(release): @nvidia-elements/cli-v0.12.8 [skip ci] ([b3d6927](https://github.com/NVIDIA/elements/commit/b3d6927))
+* chore(release): @nvidia-elements/lint-v0.14.3 [skip ci] ([e69f5dc](https://github.com/NVIDIA/elements/commit/e69f5dc))
+* fix(cli): context debug support ([3e8c102](https://github.com/NVIDIA/elements/commit/3e8c102))
+* fix(labs-lint): add form control external label check ([7816a7d](https://github.com/NVIDIA/elements/commit/7816a7d))
+
 ## 1.69.0 (2026-04-15)
 
 * feat(core): add nve-format-datetime component ([95dcf12](https://github.com/NVIDIA/elements/commit/95dcf12))
