@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/lint",
-  "version": "0.14.2",
+  "version": "0.14.3",
   "release": {
     "extends": "../../release.config.js"
   },
