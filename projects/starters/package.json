@@ -1,6 +1,7 @@
 {
   "name": "starters",
   "type": "module",
+  "private": true,
   "scripts": {
     "ci": "wireit",
     "build": "wireit"
