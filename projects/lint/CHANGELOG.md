@@ -1,3 +1,12 @@
+## 0.15.0 (2026-04-15)
+
+* chore(docs): fix vale summaries for button examples ([d3d5fd0](https://github.com/NVIDIA/elements/commit/d3d5fd0))
+* chore(release): @nvidia-elements/cli-v0.12.8 [skip ci] ([b3d6927](https://github.com/NVIDIA/elements/commit/b3d6927))
+* chore(release): @nvidia-elements/core-v1.70.0 [skip ci] ([de97289](https://github.com/NVIDIA/elements/commit/de97289))
+* feat(core): add nve-tabs-group ([13d37e3](https://github.com/NVIDIA/elements/commit/13d37e3))
+* feat(core): support horizontal layouts on tabs group ([0a62ec5](https://github.com/NVIDIA/elements/commit/0a62ec5))
+* feat(labs-lint): support dynamic slots in lint metadata ([d66fb41](https://github.com/NVIDIA/elements/commit/d66fb41))
+
 ## <small>0.14.3 (2026-04-15)</small>
 
 * chore(ci): add example template context check ([33f5be2](https://github.com/NVIDIA/elements/commit/33f5be2))
