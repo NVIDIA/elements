@@ -320,6 +320,7 @@ export const IntervalLength = {
 
 /**
  * @summary CSS custom properties are available to adjust dimensions and visual styling.
+ * @tags theme
  */
 export const CustomStyling = {
   render: () => html`

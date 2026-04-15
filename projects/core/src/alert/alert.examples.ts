@@ -227,7 +227,7 @@ export const Content = {
         Session Paused:
         <div slot="content" nve-layout="column gap:sm align:stretch">
           <p nve-text="body sm emphasis">Failed to verify drives.</p>
-          <pre nve-text="sm emphasis" style="background: transparent !important; margin: 0;">
+          <pre nve-text="sm emphasis">
 10:06:01 AM [verify] update /virtual:/verify/
 10:06:11 AM [build] update /virtual:/build/
 10:06:22 AM [error] update /virtual:/error/ - failed to connect to remote</pre>

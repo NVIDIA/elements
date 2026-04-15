@@ -1148,9 +1148,9 @@ export const FocusTypes = {
 };
 
 /**
- * @summary Use a right aligned nve-page-panel when
- * displaying advanced filtering or display settings for the grid. Item detail
- * panels should be open using a action button placed at the end of the grid row.
+ * @summary Use a nve-page-panel when displaying advanced filtering or display
+ * settings for the grid. Item detail panels should be open using a action
+ * button placed at the end of the grid row.
  */
 export const PanelDetail = {
   render: () => html`

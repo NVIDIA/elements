@@ -8,7 +8,6 @@ export default {
 
 /**
  * @summary Foundational text types (display, heading, body, label) for establishing visual hierarchy in the design system.
- * @tags priority
  */
 export const Default = {
   render: () => html`
@@ -23,7 +22,6 @@ export const Default = {
 
 /**
  * @summary Text types applied to semantic HTML heading elements for accessible content structure.
- * @tags priority
  */
 export const Headings = {
   render: () => html`

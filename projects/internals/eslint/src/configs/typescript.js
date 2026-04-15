@@ -6,6 +6,8 @@ import deadCode from '../local/dead-code.js';
 import exampleMetadata from '../local/example-metadata.js';
 import exampleNaming from '../local/example-naming.js';
 import exampleTemplateSize from '../local/example-template-size.js';
+import exampleCssQuality from '../local/example-css-quality.js';
+import exampleApprovedDomains from '../local/example-approved-domains.js';
 import requireFixtureCleanup from '../local/require-fixture-cleanup.js';
 import requireElementStable from '../local/require-element-stable.js';
 
@@ -45,6 +47,8 @@ const config = {
         'example-metadata': exampleMetadata,
         'example-naming': exampleNaming,
         'example-template-size': exampleTemplateSize,
+        'example-css-quality': exampleCssQuality,
+        'example-approved-domains': exampleApprovedDomains,
         'require-fixture-cleanup': requireFixtureCleanup,
         'require-element-stable': requireElementStable
       }
@@ -160,7 +164,9 @@ export const browserTypescriptConfig = [
     rules: {
       'local-typescript/example-metadata': ['error'],
       'local-typescript/example-naming': ['error'],
-      'local-typescript/example-template-size': ['error']
+      'local-typescript/example-template-size': ['error'],
+      'local-typescript/example-css-quality': ['error'],
+      'local-typescript/example-approved-domains': ['error']
     }
   }
 ];
@@ -197,7 +203,9 @@ export const nodeTypescriptConfig = [
     rules: {
       'local-typescript/example-metadata': ['error'],
       'local-typescript/example-naming': ['error'],
-      'local-typescript/example-template-size': ['error']
+      'local-typescript/example-template-size': ['error'],
+      'local-typescript/example-css-quality': ['error'],
+      'local-typescript/example-approved-domains': ['error']
     }
   }
 ];

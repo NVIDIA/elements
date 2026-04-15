@@ -32,6 +32,7 @@ export const Effect = {
 
 /**
  * @summary Skeleton shape variants including default rectangle, pill, and round. Use pill for button or tag placeholders and round for avatar or icon placeholders to match the final content shape.
+ * @tags theme
  */
 export const Shape = {
   render: () => html`
