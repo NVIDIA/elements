@@ -17,7 +17,7 @@ esac
 
 # Skip test files and excluded paths (matches vale --glob exclusions)
 case "$FILE_PATH" in
-  *.test.*|*/starters/*|*/404/*|*/vendor/*|*/changelog/*|*/icons/*|*/generated/*|*/dist/*|*/LICENSE*|*/CHANGELOG*) exit 0 ;;
+  *.test.*|*/starters/*|*/404/*|*/vendor/*|*/changelog/*|*/icons/*|*/generated/*|*/dist/*|*/LICENSE*|*/CHANGELOG*|*/NOTICE*) exit 0 ;;
 esac
 
 # Skip Claude plan and memory files

@@ -1,6 +1,7 @@
 {
   "name": "@internals/patterns",
   "version": "0.0.0",
+  "private": true,
   "description": "HTML Patterns",
   "private": true,
   "homepage": "https://NVIDIA.github.io/elements/",

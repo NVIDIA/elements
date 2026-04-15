@@ -1,6 +1,7 @@
 {
   "name": "@internals/ci-coverage",
   "type": "module",
+  "private": true,
   "scripts": {
     "ci": "wireit"
   },

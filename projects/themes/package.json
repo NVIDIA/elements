@@ -30,6 +30,7 @@
   "files": [
     "README.md",
     "CHANGELOG.md",
+    "NOTICE.md",
     "package.json",
     "dist/**/*"
   ],
