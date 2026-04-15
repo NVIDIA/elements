@@ -61,7 +61,7 @@ export const DropdownMenu = {
 };
 
 /**
- * @summary Use a Icon Button to represent collapsible top level navigation, optimal for mobile or constrained viewport sizes.
+ * @summary Use a Icon Button to represent collapsible top-level navigation, optimal for mobile or constrained viewport sizes.
  */
 export const MenuButton = {
   render: () => {
@@ -142,7 +142,7 @@ export const CenterNavigation = {
 };
 
 /**
- * @summary Page header with all navigation positioned at the end for right-aligned layout patterns.
+ * @summary Page header with all navigation positioned at the end for common and persistent user actions between page navigation.
  */
 export const SuffixNavigation = {
   render: () => {

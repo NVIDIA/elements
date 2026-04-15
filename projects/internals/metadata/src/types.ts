@@ -58,7 +58,7 @@ export interface Token {
 /**
  * @summary Category that describes the example. Used for filtering and sorting as well as MCP search capabilities.
  */
-export type ExampleTag = 'priority' | 'performance' | 'pattern' | 'anti-pattern' | 'test-case';
+export type ExampleTag = 'performance' | 'pattern' | 'anti-pattern' | 'test-case' | 'theme';
 
 /**
  * @summary An example is a template that can show an API, specific use case, or pattern.

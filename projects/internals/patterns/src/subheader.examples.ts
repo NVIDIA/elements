@@ -854,7 +854,7 @@ export const StandardHeaderViewerPage = {
 
 /**
  * @summary Editor-style toolbar subheader with left tool groups, centered title, and right action buttons. Use for canvas editors and creative tools.
- * @tags pattern
+ * @tags test-case
  */
 export const StandardHeaderToolbarPage = {
   render: () => html`

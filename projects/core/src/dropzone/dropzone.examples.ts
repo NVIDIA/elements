@@ -17,6 +17,7 @@ export const Default = {
 
 /**
  * @summary Dropzone with custom icon slot showing visual feedback on hover and highlight states.
+ * @tags theme
  */
 export const Icon = {
   render: () => html`

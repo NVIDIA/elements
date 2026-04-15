@@ -633,7 +633,7 @@ export const DynamicTypeaheadSearch = () => {
 }
 
 /**
- * @summary Infinite scroll combobox loading, using the scroll event to append options as the user nears the bottom. Use for server-backed datasets where loading all options up front is impractical.
+ * @summary Infinite scroll combobox loading, using the scroll event to append options as the user nears the end of the list. Use for server-backed datasets where loading all options up front is impractical.
  * @tags pattern
  */
 export const InfiniteScroll = () => {

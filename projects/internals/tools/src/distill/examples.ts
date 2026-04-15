@@ -1,7 +1,7 @@
 import type { Example, ExampleTag } from '@internals/metadata';
 
 const excludedIdPatterns = ['theme', 'internal'];
-const excludedTags: ExampleTag[] = ['anti-pattern', 'performance', 'test-case'];
+const excludedTags: ExampleTag[] = ['anti-pattern', 'performance', 'test-case', 'theme']; // these are examples with high noise to signal ratio for agents
 const excludedElementPatterns = ['internal', 'responsive'];
 const includedIdPatterns = [
   'default',

@@ -1,3 +1,5 @@
+/* eslint-disable local-typescript/example-css-quality */
+/* eslint-disable local-typescript/example-metadata */
 import { html } from 'lit';
 import '@nvidia-elements/core/forms/define.js';
 import '@nvidia-elements/core/resize-handle/define.js';
@@ -128,6 +130,7 @@ export const PreventDefault = {
 
 /**
  * @summary Custom line width styling for resize handle visibility using CSS custom property.
+ * @tags theme
  */
 export const LineWidth = {
   render: () => html`
