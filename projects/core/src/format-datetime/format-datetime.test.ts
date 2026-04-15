@@ -12,7 +12,7 @@ describe(FormatDatetime.metadata.tag, () => {
   beforeEach(async () => {
     originalDocumentLang = document.documentElement.lang;
     fixture = await createFixture(
-      html`<nve-format-datetime locale="en-US" date-style="long">2023-07-28T04:20:17.434Z</nve-format-datetime>`
+      html`<nve-format-datetime locale="en-US" date-style="long" time-zone="UTC">2023-07-28T04:20:17.434Z</nve-format-datetime>`
     );
     element = fixture.querySelector(FormatDatetime.metadata.tag);
     await elementIsStable(element);
@@ -98,7 +98,7 @@ describe(FormatDatetime.metadata.tag, () => {
       removeFixture(fixture);
 
       fixture = await createFixture(
-        html`<nve-format-datetime locale="en-US" weekday="long" month="short" day="numeric" year="numeric">2023-07-28T04:20:17.434Z</nve-format-datetime>`
+        html`<nve-format-datetime locale="en-US" weekday="long" month="short" day="numeric" year="numeric" time-zone="UTC">2023-07-28T04:20:17.434Z</nve-format-datetime>`
       );
       element = fixture.querySelector(FormatDatetime.metadata.tag);
       await elementIsStable(element);
@@ -116,7 +116,7 @@ describe(FormatDatetime.metadata.tag, () => {
       removeFixture(fixture);
 
       fixture = await createFixture(
-        html`<nve-format-datetime locale="en-US" month="long" year="numeric">2023-07-28T04:20:17.434Z</nve-format-datetime>`
+        html`<nve-format-datetime locale="en-US" month="long" year="numeric" time-zone="UTC">2023-07-28T04:20:17.434Z</nve-format-datetime>`
       );
       element = fixture.querySelector(FormatDatetime.metadata.tag);
       await elementIsStable(element);
@@ -130,7 +130,7 @@ describe(FormatDatetime.metadata.tag, () => {
       removeFixture(fixture);
 
       fixture = await createFixture(
-        html`<nve-format-datetime locale="en-US" hour="numeric" minute="2-digit">2023-07-28T04:20:17.434Z</nve-format-datetime>`
+        html`<nve-format-datetime locale="en-US" hour="numeric" minute="2-digit" time-zone="UTC">2023-07-28T04:20:17.434Z</nve-format-datetime>`
       );
       element = fixture.querySelector(FormatDatetime.metadata.tag);
       await elementIsStable(element);
@@ -147,7 +147,7 @@ describe(FormatDatetime.metadata.tag, () => {
       removeFixture(fixture);
 
       fixture = await createFixture(
-        html`<nve-format-datetime date-style="long">2023-07-28T04:20:17.434Z</nve-format-datetime>`
+        html`<nve-format-datetime date-style="long" time-zone="UTC">2023-07-28T04:20:17.434Z</nve-format-datetime>`
       );
       element = fixture.querySelector(FormatDatetime.metadata.tag);
       await elementIsStable(element);
@@ -161,7 +161,7 @@ describe(FormatDatetime.metadata.tag, () => {
       removeFixture(fixture);
 
       fixture = await createFixture(
-        html`<nve-format-datetime locale="de-DE" date-style="long">2023-07-28T04:20:17.434Z</nve-format-datetime>`
+        html`<nve-format-datetime locale="de-DE" date-style="long" time-zone="UTC">2023-07-28T04:20:17.434Z</nve-format-datetime>`
       );
       element = fixture.querySelector(FormatDatetime.metadata.tag);
       await elementIsStable(element);
@@ -175,7 +175,7 @@ describe(FormatDatetime.metadata.tag, () => {
       removeFixture(fixture);
 
       fixture = await createFixture(
-        html`<nve-format-datetime locale="ja" date-style="long">2023-07-28T04:20:17.434Z</nve-format-datetime>`
+        html`<nve-format-datetime locale="ja" date-style="long" time-zone="UTC">2023-07-28T04:20:17.434Z</nve-format-datetime>`
       );
       element = fixture.querySelector(FormatDatetime.metadata.tag);
       await elementIsStable(element);
@@ -263,7 +263,7 @@ describe(FormatDatetime.metadata.tag, () => {
       removeFixture(fixture);
 
       fixture = await createFixture(
-        html`<nve-format-datetime locale="en-US" date-style="short" weekday="long" month="long" day="numeric" year="numeric">2023-07-28T04:20:17.434Z</nve-format-datetime>`
+        html`<nve-format-datetime locale="en-US" date-style="short" weekday="long" month="long" day="numeric" year="numeric" time-zone="UTC">2023-07-28T04:20:17.434Z</nve-format-datetime>`
       );
       element = fixture.querySelector(FormatDatetime.metadata.tag);
       await elementIsStable(element);
