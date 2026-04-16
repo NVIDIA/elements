@@ -108,3 +108,26 @@ export function hasMatchingChild(node: HtmlNode, selector: string): boolean {
 export function isNVElement(tagName: string): boolean {
   return tagName?.startsWith('nve-');
 }
+
+/**
+ * Check if a node has child content that projects into the default slot.
+ * Returns true when the element has any non-whitespace text child or any
+ * element child without a `slot` attribute.
+ */
+export function hasUnslottedContent(node: HtmlNode): boolean {
+  if (!node.children || !Array.isArray(node.children)) {
+    return false;
+  }
+
+  return node.children.some(child => {
+    if (child.type === 'Text' && child.value?.trim()) {
+      return true;
+    }
+
+    if (child.type === 'Tag' && !findAttr(child, 'slot')) {
+      return true;
+    }
+
+    return false;
+  });
+}

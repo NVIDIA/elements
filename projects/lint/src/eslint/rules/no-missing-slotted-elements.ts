@@ -1,10 +1,16 @@
 import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
-import { hasMatchingChild, hasTemplateSyntax } from '../internals/utils.js';
+import { hasMatchingChild, hasTemplateSyntax, hasUnslottedContent } from '../internals/utils.js';
 import type { HtmlTagNode } from '../rule-types.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
-const REQUIRED_SLOTTED_ELEMENTS = {
+
+interface RequiredSlotConfig {
+  required?: string[];
+  requiresDefaultSlotContent?: boolean;
+}
+
+const REQUIRED_SLOTTED_ELEMENTS: Record<string, RequiredSlotConfig> = {
   'nve-input': {
     required: ['input']
   },
@@ -64,6 +70,9 @@ const REQUIRED_SLOTTED_ELEMENTS = {
   },
   'nve-switch-group': {
     required: ['nve-switch']
+  },
+  'nve-tree-node': {
+    requiresDefaultSlotContent: true
   }
 };
 
@@ -78,44 +87,62 @@ const rule = {
     },
     schema: [{ type: 'object' }],
     messages: {
-      ['unexpected-missing-slotted-element']: 'Unexpected use of missing slotted element {{selector}}'
+      ['unexpected-missing-slotted-element']: 'Unexpected use of missing slotted element {{selector}}',
+      ['missing-default-slot-content']: 'Element <{{tagName}}> requires default slot content.'
     }
   },
   create(context: Rule.RuleContext) {
+    function getRequirements(node: HtmlTagNode): {
+      required: string[];
+      requiresDefaultSlotContent: boolean;
+      tagName: string;
+    } {
+      const options = context.options[0] ?? {};
+      const tagName = node.name.toLowerCase();
+      const config = REQUIRED_SLOTTED_ELEMENTS[tagName];
+      const required = [...(config?.required ?? []), ...(options[tagName]?.required ?? [])];
+      const requiresDefaultSlotContent = config?.requiresDefaultSlotContent ?? false;
+      return { required, requiresDefaultSlotContent, tagName };
+    }
+
+    function checkRequiredSelectors(node: HtmlTagNode, required: string[]) {
+      for (const requiredSelector of required) {
+        const selectors = requiredSelector.split(',').map((s: string) => s.trim());
+        const hasRequiredElement = selectors.some((sel: string) => hasMatchingChild(node, sel));
+
+        if (!hasRequiredElement) {
+          context.report({
+            node: node,
+            messageId: 'unexpected-missing-slotted-element',
+            data: { selector: requiredSelector }
+          });
+        }
+      }
+    }
+
+    function checkDefaultSlotContent(node: HtmlTagNode, tagName: string) {
+      if (!hasUnslottedContent(node)) {
+        context.report({
+          node: node,
+          messageId: 'missing-default-slot-content',
+          data: { tagName }
+        });
+      }
+    }
+
     return createVisitors(context, {
       Tag(node: HtmlTagNode) {
-        const options = context.options[0] ?? {};
-        const tagName = node.name.toLowerCase();
+        const { required, requiresDefaultSlotContent, tagName } = getRequirements(node);
 
-        const additionalRequirements = options[tagName]?.required ?? [];
-        const required = [
-          ...(REQUIRED_SLOTTED_ELEMENTS[tagName as keyof typeof REQUIRED_SLOTTED_ELEMENTS]?.required ?? []),
-          ...additionalRequirements
-        ];
-
-        if (!required.length) {
+        if ((!required.length && !requiresDefaultSlotContent) || hasTemplateSyntax(node)) {
           return;
         }
 
-        if (hasTemplateSyntax(node)) {
-          return;
+        if (requiresDefaultSlotContent) {
+          checkDefaultSlotContent(node, tagName);
         }
 
-        // Check each required selector
-        for (const requiredSelector of required) {
-          const selectors = requiredSelector.split(',').map((s: string) => s.trim());
-          const hasRequiredElement = selectors.some((sel: string) => hasMatchingChild(node, sel));
-
-          if (!hasRequiredElement) {
-            context.report({
-              node: node,
-              messageId: 'unexpected-missing-slotted-element',
-              data: {
-                selector: requiredSelector
-              }
-            });
-          }
-        }
+        checkRequiredSelectors(node, required);
       }
     });
   }

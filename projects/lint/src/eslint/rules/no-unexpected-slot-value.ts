@@ -2,31 +2,10 @@ import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
 import { getRecommendedSlotName, hasDefaultSlot, isKnownElement, hasSlot } from '../internals/slots.js';
-import { hasTemplateSyntax, isNVElement } from '../internals/utils.js';
+import { hasTemplateSyntax, hasUnslottedContent, isNVElement } from '../internals/utils.js';
 import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
-/**
- * Check if a node has child content that projects into the default slot.
- * This includes non-whitespace text nodes and element nodes without a slot attribute.
- */
-function hasUnslottedContent(node: HtmlTagNode): boolean {
-  if (!node.children || !Array.isArray(node.children)) {
-    return false;
-  }
-
-  return node.children.some(child => {
-    if (child.type === 'Text' && child.value?.trim()) {
-      return true;
-    }
-
-    if (child.type === 'Tag' && !findAttr(child, 'slot')) {
-      return true;
-    }
-
-    return false;
-  });
-}
 
 const rule = {
   meta: {
