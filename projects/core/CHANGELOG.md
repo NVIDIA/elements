@@ -1,3 +1,11 @@
+## 1.71.0 (2026-04-16)
+
+* feat(core): add nve-format-relative-time component ([1a8e681](https://github.com/NVIDIA/elements/commit/1a8e681))
+* chore(ci): update notice files ([76c476d](https://github.com/NVIDIA/elements/commit/76c476d))
+* chore(ci): update package dependencies and eslint configurations ([929ff78](https://github.com/NVIDIA/elements/commit/929ff78))
+* chore(docs): fixup layout ([3f3c0d5](https://github.com/NVIDIA/elements/commit/3f3c0d5))
+* chore(release): @nvidia-elements/lint-v0.15.0 [skip ci] ([26bc37a](https://github.com/NVIDIA/elements/commit/26bc37a))
+
 ## 1.70.0 (2026-04-15)
 
 * feat(core): add nve-tabs-group ([13d37e3](https://github.com/NVIDIA/elements/commit/13d37e3))
