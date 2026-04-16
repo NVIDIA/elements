@@ -1,3 +1,10 @@
+## <small>1.71.1 (2026-04-16)</small>
+
+* fix(docs): re-enable migration link ([e215d35](https://github.com/NVIDIA/elements/commit/e215d35))
+* fix(core): tree node default style slot ([482a81a](https://github.com/NVIDIA/elements/commit/482a81a))
+* fix(labs-lint): add missing default slot check for required slots ([80b7f01](https://github.com/NVIDIA/elements/commit/80b7f01))
+* chore(ci): enhance stop.sh for test verification and prevent agent timeouts ([c72a104](https://github.com/NVIDIA/elements/commit/c72a104))
+
 ## 1.71.0 (2026-04-16)
 
 * feat(core): add nve-format-relative-time component ([1a8e681](https://github.com/NVIDIA/elements/commit/1a8e681))
