@@ -333,7 +333,14 @@ export const NodeContent = {
       <nve-tree-node expanded>
         text content
         <nve-tree-node>
-          <a href="#" nve-text="link">node link</a>
+          <a href="." nve-text="link">node link</a>
+        </nve-tree-node>
+        <nve-tree-node>
+          inline content <nve-dot status="success" size="sm"></nve-dot>
+        </nve-tree-node>
+        <nve-tree-node>
+          <div nve-text="body sm muted" nve-layout="pad-bottom:xs">block</div>
+          <p nve-text="body sm">content</p>
         </nve-tree-node>
         <nve-tree-node>
           long form content
@@ -414,45 +421,6 @@ export const NodeContent = {
  */
 export const DynamicTree = {
   render: () => html`<test-dynamic-tree></test-dynamic-tree>`
-};
-
-/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
-
-/**
- * @summary Tree integrated in vertical navigation drawer, providing structured sidebar navigation for application layouts and content organization.
- */
-export const VerticalNav = {
-  render: () => html`
-  <nve-drawer inline size="sm" position="left">
-    <nve-drawer-header>
-      <h3 nve-text="heading">Navigation</h3>
-    </nve-drawer-header>
-    <nve-drawer-content>
-      <nve-tree behavior-expand>
-        <nve-tree-node><a href="#">Documentation</a></nve-tree-node>
-        <nve-tree-node><a href="#">Support</a></nve-tree-node>
-        <nve-tree-node expanded>
-          Elements
-          <nve-tree-node><a href="#">Alert</a></nve-tree-node>
-          <nve-tree-node><a href="#">Badge</a></nve-tree-node>
-          <nve-tree-node><a href="#">Dialog</a></nve-tree-node>
-        </nve-tree-node>
-        <nve-tree-node>
-          Frameworks
-          <nve-tree-node><a href="#">Angular</a></nve-tree-node>
-          <nve-tree-node><a href="#">React</a></nve-tree-node>
-          <nve-tree-node><a href="#">Vue</a></nve-tree-node>
-        </nve-tree-node>
-        <nve-tree-node>
-          Languages
-          <nve-tree-node><a href="#">JavaScript</a></nve-tree-node>
-          <nve-tree-node><a href="#">HTML</a></nve-tree-node>
-          <nve-tree-node><a href="#">CSS</a></nve-tree-node>
-        </nve-tree-node>
-      </nve-tree>
-    </nve-drawer-content>
-  </nve-drawer>
-  `
 };
 
 /**
