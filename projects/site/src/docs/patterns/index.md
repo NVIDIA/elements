@@ -137,6 +137,19 @@ Patterns are an essential component of creating a cohesive and consistent user e
       </div>
     </nve-card>
   </a>
+  <a href="docs/patterns/navigation/">
+    <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="gray-denim" size="lg" style="--border-radius: 0">
+          <nve-icon name="map"></nve-icon>
+        </nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">Navigation</h2>
+          <p nve-text="body sm muted">Common navigation patterns and structure</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
   <a href="docs/patterns/onboarding/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">

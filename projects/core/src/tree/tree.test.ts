@@ -5,6 +5,8 @@ import { Tree } from '@nvidia-elements/core/tree';
 import { TreeNode } from '@nvidia-elements/core/tree';
 import '@nvidia-elements/core/tree/define.js';
 
+/* eslint-disable @nvidia-elements/lint/no-missing-slotted-elements */
+
 describe(Tree.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: Tree;

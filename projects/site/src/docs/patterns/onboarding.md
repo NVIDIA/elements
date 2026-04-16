@@ -7,6 +7,10 @@
 
 # {{ title }}
 
-## Steps Onboarding
+## User Onboarding Wizard
 
-{% example '@nvidia-elements/core/page/page.examples.json' 'LayoutSteps' '{ "inline": false, "height": "640px" }' %}
+{% example '@internals/patterns/onboarding.examples.json' 'UserOnboardingWizard' '{ "inline": false, "height": "640px" }' %}
+
+## Multi Step Form Wizard
+
+{% example '@internals/patterns/onboarding.examples.json' 'MultiStepFormWizard' '{ "inline": false, "height": "640px" }' %}

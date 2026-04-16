@@ -4,6 +4,8 @@ import { createFixture, elementIsStable, emulateClick, removeFixture } from '@in
 import { Tree, TreeNode } from '@nvidia-elements/core/tree';
 import '@nvidia-elements/core/tree/define.js';
 
+/* eslint-disable @nvidia-elements/lint/no-missing-slotted-elements */
+
 describe(TreeNode.metadata.tag, () => {
   let fixture: HTMLElement;
   let element: TreeNode;

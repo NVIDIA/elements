@@ -40,7 +40,7 @@ import { updateNodeSelection } from './utils.js';
  * @command --close - use to close the node
  * @command --toggle - use to toggle open / closed state of the node
  * @slot - Use default slot for basic text content or nested <nve-tree-node> elements.
- * @slot content - Use for extended long form content containing interactive elements or form inputs.
+ * @slot content - Use only for extended long form content containing interactive elements or form inputs.
  * @cssprop --color
  * @cssprop --border-radius
  * @cssprop --font-size
