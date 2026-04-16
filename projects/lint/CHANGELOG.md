@@ -1,3 +1,16 @@
+## <small>0.15.1 (2026-04-16)</small>
+
+* chore(ci): enhance stop.sh for test verification and prevent agent timeouts ([c72a104](https://github.com/NVIDIA/elements/commit/c72a104))
+* chore(ci): update notice files ([76c476d](https://github.com/NVIDIA/elements/commit/76c476d))
+* chore(ci): update package dependencies and eslint configurations ([929ff78](https://github.com/NVIDIA/elements/commit/929ff78))
+* chore(docs): fixup layout ([3f3c0d5](https://github.com/NVIDIA/elements/commit/3f3c0d5))
+* chore(release): @nvidia-elements/core-v1.71.0 [skip ci] ([e704362](https://github.com/NVIDIA/elements/commit/e704362))
+* chore(release): @nvidia-elements/core-v1.71.1 [skip ci] ([8d9c26d](https://github.com/NVIDIA/elements/commit/8d9c26d))
+* fix(docs): re-enable migration link ([e215d35](https://github.com/NVIDIA/elements/commit/e215d35))
+* fix(core): tree node default style slot ([482a81a](https://github.com/NVIDIA/elements/commit/482a81a))
+* fix(labs-lint): add missing default slot check for required slots ([80b7f01](https://github.com/NVIDIA/elements/commit/80b7f01))
+* feat(core): add nve-format-relative-time component ([1a8e681](https://github.com/NVIDIA/elements/commit/1a8e681))
+
 ## 0.15.0 (2026-04-15)
 
 * chore(docs): fix vale summaries for button examples ([d3d5fd0](https://github.com/NVIDIA/elements/commit/d3d5fd0))
