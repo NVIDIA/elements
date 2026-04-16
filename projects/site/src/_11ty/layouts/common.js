@@ -281,6 +281,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/patterns/keyboard-shortcut/') ? 'highlighted selected' : ''}><a href="docs/patterns/keyboard-shortcut/">Keyboard Shortcut</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/logging/') ? 'highlighted selected' : ''}><a href="docs/patterns/logging/">Logging</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/media/') ? 'highlighted selected' : ''}><a href="docs/patterns/media/">Media</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/navigation/') ? 'highlighted selected' : ''}><a href="docs/patterns/navigation/">Navigation</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/onboarding/') ? 'highlighted selected' : ''}><a href="docs/patterns/onboarding/">Onboarding</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/panel/') ? 'highlighted selected' : ''}><a href="docs/patterns/panel/">Panel</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/responsive/') ? 'highlighted selected' : ''}><a href="docs/patterns/responsive/">Responsive</a></nve-tree-node>

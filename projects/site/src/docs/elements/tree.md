@@ -47,9 +47,13 @@
 
 {% example '@nvidia-elements/core/tree/tree.examples.json' 'Async' %}
 
-## Vertical Nav
+## Complex Tree Navigation
 
-{% example '@nvidia-elements/core/tree/tree.examples.json' 'VerticalNav' '{ "inline": false, "height": "500px" }' %}
+{% example '@internals/patterns/navigation.examples.json' 'ComplexTreeNavigation' %}
+
+## Drawer Navigation
+
+{% example '@internals/patterns/navigation.examples.json' 'DrawerNavigation' '{ "inline": false, "height": "500px" }' %}
 
 ## Node Content
 

@@ -145,11 +145,23 @@ function template(theme: '' | 'dark' = '') {
 
     <!-- node content -->
     <nve-tree selectable="multi" border behavior-expand behavior-select>
+      <nve-tree-node>
+        <a href="#" nve-text="link">•︎•︎•︎•︎•︎•︎</a>
+      </nve-tree-node>
+      <!-- inline content in the default slot should remain inline -->
+      <nve-tree-node>
+        <span>•︎•︎•︎•︎•︎•︎</span><span>•︎•︎•︎•︎•︎•︎</span>
+      </nve-tree-node>
+      <!-- block content in the default slot should remain block and stack -->
+      <nve-tree-node>
+        <p nve-text="body sm">•︎•︎•︎•︎•︎•︎</p><p nve-text="body sm">•︎•︎•︎•︎•︎•︎</p>
+      </nve-tree-node>
+      <nve-tree-node expanded>
+        <div nve-text="body sm muted" nve-layout="pad-bottom:xs">•︎•︎•︎•︎•︎•︎</div>
+        <p nve-text="body sm">•︎•︎•︎•︎•︎•︎</p>
+      </nve-tree-node>
       <nve-tree-node expanded>
         •︎•︎•︎•︎•︎•︎
-        <nve-tree-node>
-          <a href="#" nve-text="link">•︎•︎•︎•︎•︎•︎</a>
-        </nve-tree-node>
         <nve-tree-node>
           •︎•︎•︎•︎•︎•︎
           <div slot="content" nve-layout="column gap:sm">
@@ -164,8 +176,8 @@ function template(theme: '' | 'dark' = '') {
           <nve-tree-node>•︎•︎•︎•︎•︎•︎</nve-tree-node>
           <nve-tree-node>•︎•︎•︎•︎•︎•︎</nve-tree-node>
         </nve-tree-node>
-      </nve-tree>
-    </section>
+      </nve-tree-node>
+    </nve-tree>
 
     <!-- selectable expanded -->
     <nve-tree selectable="single">
@@ -175,5 +187,6 @@ function template(theme: '' | 'dark' = '') {
         <nve-tree-node>•︎•︎•︎•︎•︎•︎</nve-tree-node>
       </nve-tree-node>
     </nve-tree>
+  </section>
   `;
 }
