@@ -33,6 +33,9 @@ describe('noMissingSlottedElements', () => {
     expect(noMissingSlottedElements.meta.messages['unexpected-missing-slotted-element']).toBe(
       'Unexpected use of missing slotted element {{selector}}'
     );
+    expect(noMissingSlottedElements.meta.messages['missing-default-slot-content']).toBe(
+      'Element <{{tagName}}> requires default slot content.'
+    );
   });
 
   it('should allow valid use slotted elements', () => {
@@ -96,6 +99,38 @@ describe('noMissingSlottedElements', () => {
         {
           code: `<nve-combobox><datalist></datalist></nve-combobox>`,
           errors: [{ messageId: 'unexpected-missing-slotted-element', data: { selector: 'input[type="search"]' } }]
+        }
+      ]
+    });
+  });
+
+  it('should allow tree nodes with default slot content', () => {
+    tester.run('tree nodes with default slot content', rule, {
+      valid: [
+        `<nve-tree-node>node text</nve-tree-node>`,
+        `<nve-tree-node><nve-tree-node>child</nve-tree-node></nve-tree-node>`,
+        `<nve-tree-node>label<div slot="content">details</div></nve-tree-node>`,
+        `<nve-tree-node>\${label}</nve-tree-node>`
+      ],
+      invalid: []
+    });
+  });
+
+  it('should report tree nodes missing default slot content', () => {
+    tester.run('tree nodes missing default slot content', rule, {
+      valid: [],
+      invalid: [
+        {
+          code: `<nve-tree-node></nve-tree-node>`,
+          errors: [{ messageId: 'missing-default-slot-content', data: { tagName: 'nve-tree-node' } }]
+        },
+        {
+          code: `<nve-tree-node><div slot="content">x</div></nve-tree-node>`,
+          errors: [{ messageId: 'missing-default-slot-content', data: { tagName: 'nve-tree-node' } }]
+        },
+        {
+          code: `<nve-tree-node>   </nve-tree-node>`,
+          errors: [{ messageId: 'missing-default-slot-content', data: { tagName: 'nve-tree-node' } }]
         }
       ]
     });
