@@ -112,7 +112,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/about/accessibility/') ? 'highlighted selected' : ''}><a href="docs/about/accessibility/">Accessibility</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/contributions/') ? 'highlighted selected' : ''}><a href="docs/about/contributions/">Contributions</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'highlighted selected' : ''}><a href="docs/about/requests/">Requests</a></nve-tree-node>
-    <!-- <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted selected' : ''}><a href="docs/about/migration/">Migration</a></nve-tree-node> -->
+    <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted selected' : ''}><a href="docs/about/migration/">Migration</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/deprecations/') ? 'highlighted selected' : ''}><a href="docs/about/deprecations/">Deprecations</a></nve-tree-node>
   </nve-tree-node>
   
