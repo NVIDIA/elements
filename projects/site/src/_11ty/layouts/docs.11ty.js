@@ -54,7 +54,7 @@ export async function render(data) {
 
   return /* html */ `
     <!DOCTYPE html>
-    <html lang="en" nve-theme="dark" nve-transition="auto">
+    <html lang="en" nve-theme="dark" nve-transition="auto" no-js>
       <head>
         ${renderBaseHead(data)}
         <style>${process.env.ELEVENTY_RUN_MODE === 'build' ? styles : ''}</style>
