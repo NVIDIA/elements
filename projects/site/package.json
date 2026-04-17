@@ -221,7 +221,6 @@
     "@internals/tools": "workspace:*",
     "@internals/patterns": "workspace:*",
     "@internals/vite": "workspace:*",
-    "@nvidia-elements/brand": "latest",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/forms": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
