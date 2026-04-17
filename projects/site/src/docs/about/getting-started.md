@@ -5,9 +5,7 @@
 }
 ---
 
-<p id="getting-started-img"></p>
-
-<div nve-layout="column gap:lg">
+<div nve-layout="column gap:lg pad-top:lg">
   <h1 nve-text="display sm">Elements</h1>
   <h2 nve-text="heading lg">The Design Language for AI/ML Factories Building at the Speed of Light</h2>
 </div>
@@ -22,11 +20,21 @@ curl -fsSL {{ELEMENTS_PAGES_BASE_URL}}/install.sh | bash
 nve project.create
 ```
 
-<div nve-layout="grid gap:lg span-items:4 align:stretch">
+<div nve-layout="grid gap:md span-items:12 @md|span-items:4">
+<style>
+  @scope {
+    pre {
+      display: block !important;
+      height: 98px;
+    }
+    code > nve-codeblock {
+      --padding: var(--nve-ref-space-lg) var(--nve-ref-space-xxl) var(--nve-ref-space-lg) var(--nve-ref-space-lg) !important;
+    }
+  }
+</style>
 
 ```css
 /* CSS */
-@import '@nvidia-elements/themes/fonts/inter.css';
 @import '@nvidia-elements/themes/index.css';
 ```
 
@@ -69,7 +77,7 @@ import '@nvidia-elements/core/button/define.js';
     <a href="./docs/integrations/installation/"><svg width="18" height="18"><use href="#javascript-svg"></use></svg> JavaScript</a>
   </nve-button>
   <nve-button>
-    <a href="./docs/integrations/go/"><svg width="18" height="18"><use href="#go-svg"></use></svg> Go</a>
+    <a href="./docs/integrations/go/"><svg width="18" height="18"><use href="#go-svg"></use></svg> Golang</a>
   </nve-button>
   <nve-button>
     <a href="./docs/integrations/hugo/"><svg width="18" height="18"><use href="#hugo-svg"></use></svg> Hugo</a>

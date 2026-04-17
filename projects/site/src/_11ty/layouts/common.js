@@ -66,7 +66,13 @@ export const renderBaseHead = data => /* html */ `
       display: none;
     }
 
-    @media only screen and (width >= 920px) {
+    @media (width < 920px) {
+      [no-js] #sidenav-panel {
+        display: none !important;
+      }
+    }
+
+    @media (width >= 920px) {
       nve-page-header {
         .header-btn {
           display: block !important;
@@ -90,14 +96,10 @@ export const renderBaseHead = data => /* html */ `
   </script>
   <script type="module">
     const sidenavPanel = globalThis.document.querySelector('#sidenav-panel');
-    if (globalThis.window.innerWidth <= 720) {
+    if (sidenavPanel && globalThis.window.innerWidth < 920) {
       sidenavPanel.hidden = true;
     }
-  </script>
-  <script type="module">
-    if (globalThis.document.documentElement.getAttribute('nve-theme')?.includes('brand')) {
-      void import('@nvidia-elements/brand/icons/define.js');
-    }
+    globalThis.document.documentElement.removeAttribute('no-js');
   </script>
 `;
 
@@ -125,7 +127,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted selected' : ''}><a href="docs/integrations/angular/">Angular</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'highlighted selected' : ''}><a href="docs/integrations/bundles/">Bundles</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/extensions/') ? 'highlighted selected' : ''}><a href="docs/integrations/extensions/">Extensions</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'highlighted selected' : ''}><a href="docs/integrations/go/" aria-label="Go Language">Go</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'highlighted selected' : ''}><a href="docs/integrations/go/">Golang</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/hugo/') ? 'highlighted selected' : ''}><a href="docs/integrations/hugo/">Hugo</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/importmaps/') ? 'highlighted selected' : ''}><a href="docs/integrations/importmaps/">Import Maps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/lit/') ? 'highlighted selected' : ''}><a href="docs/integrations/lit/">Lit</a></nve-tree-node>
@@ -401,7 +403,7 @@ export function renderBasePageHeader(data) {
   <nve-button container="flat" ${data.page.url.includes('starters') ? 'selected' : ''} class="header-btn"><a href="starters/">Starters</a></nve-button>
   <nve-button container="flat" class="header-btn"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Repo</a></nve-button>
   ${data.page.url !== '/' ? /* html */ `<nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>` : ''}
-  <nve-icon-button class="header-menu-btn" command="--toggle" commandfor="sidenav-panel" container="flat" slot="suffix" icon-name="menu" aria-label="menu"></nve-icon-button>
+  <nve-icon-button class="header-menu-btn" role="button" command="--toggle" commandfor="sidenav-panel" container="flat" slot="suffix" icon-name="menu" aria-label="menu"></nve-icon-button>
 </nve-page-header>
   `;
 }
