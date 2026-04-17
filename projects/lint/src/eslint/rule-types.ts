@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 /**
  * Cast a parser-specific node (HTML or CSS) to a type compatible with ESLint APIs
  * (context.report, fixer.replaceText, sourceCode.getText, etc.).

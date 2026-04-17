@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { ResizeHandle } from '@nvidia-elements/core/resize-handle';
 import type { Tree } from '@nvidia-elements/core/tree';
 import { FILTER_VALUES, type DocsSearch } from '../../_internal/search/search.js';

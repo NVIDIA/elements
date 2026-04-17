@@ -4,8 +4,8 @@ The `@nvidia-elements/lint` package is a utility library that provides Elements-
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/lint/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-- [GitLab Repo](https://github.com/NVIDIA/elements)
-- [Artifactory](https://registry.npmjs.org
+- [GitHub Repo](https://github.com/NVIDIA/elements)
+- [NPM](https://registry.npmjs.org
 
 ## Getting Started
 
@@ -98,7 +98,7 @@ export default [
 | `@nvidia-elements/lint/no-unexpected-css-variable` | Disallow use of invalid CSS theme variables. | CSS | `error` |
 | `@nvidia-elements/lint/no-unexpected-global-attribute-value` | Disallow use of invalid attribute values in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-unexpected-input-type` | Disallow slotted input elements with a type that does not match the parent Elements component. | HTML | `error` |
-| `@nvidia-elements/lint/no-unexpected-library-dependencies` | Disallow incorrect dependency usage of @nve packages in consuming libraries. | JSON | `error` |
+| `@nvidia-elements/lint/no-unexpected-library-dependencies` | Disallow incorrect dependency usage of @nvidia-elements packages in consuming libraries. | JSON | `error` |
 | `@nvidia-elements/lint/no-unexpected-slot-value` | Disallow use of invalid slot values in HTML. | HTML | `error` |
 | `@nvidia-elements/lint/no-unexpected-style-customization` | Disallow use of style customization in Elements playground template. | HTML | `off` |
 | `@nvidia-elements/lint/no-unknown-css-variable` | Disallow use of unknown --nve-* CSS theme variables. | CSS | `error` |

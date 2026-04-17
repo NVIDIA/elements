@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { readFileSync, readdirSync, statSync } from 'fs';
 import { join, relative, resolve, dirname } from 'path';
 

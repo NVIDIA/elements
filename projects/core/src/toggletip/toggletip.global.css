@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 nve-toggletip:not(:has([slot='footer'])):has([slot='header'])::part(_content) {
   margin-block-end: calc(var(--padding) * 0.5);
 }

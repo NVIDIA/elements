@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 /* eslint-disable local-typescript/example-css-quality */
 /* eslint-disable local-typescript/example-metadata */
 import { html } from 'lit';

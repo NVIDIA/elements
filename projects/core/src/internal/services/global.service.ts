@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { getDuplicatePackageGlobalVersionWarning } from '../utils/audit-logs.js';
 import { deepMerge } from '../utils/objects.js';
 import { getEnv, getHostDetails } from './global.utils.js';
@@ -27,9 +30,6 @@ export class GlobalState {
         audit: {}
       }
     };
-
-    /** @deprecated MLV_ELEMENTS */
-    globalThis.MLV_ELEMENTS = globalThis.NVE_ELEMENTS;
     globalThis.NVE_ELEMENTS.state.versions = Array.from(new Set([...globalThis.NVE_ELEMENTS.state.versions, '0.0.0']));
     globalThis.NVE_ELEMENTS.state.scopedRegistry ??= {}; // if older versions used, they may not have a scopedRegistry
     globalThis.NVE_ELEMENTS.state.scopedRegistry['0.0.0'] = createScopedRegistry();

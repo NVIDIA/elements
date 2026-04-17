@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { Rule } from 'eslint';
 import { theme } from '@nvidia-elements/themes';
 import type { CssDeclarationNode } from '../rule-types.js';
@@ -7,7 +10,7 @@ const rule = {
   meta: {
     type: 'problem' as const,
     docs: {
-      description: 'Disallow use of deprecated --nve-* CSS theme variables.',
+      description: 'Disallow use of deprecated --mlv-* CSS theme variables.',
       category: 'Best Practice',
       recommended: true,
       url: `${__ELEMENTS_PAGES_BASE_URL__}/docs/lint/`
@@ -27,13 +30,13 @@ const rule = {
           ?.flatMap(child => child.children)
           ?.find(child => child?.name?.includes('--mlv'));
 
-        if (child?.name && theme[child.name.replace('--nve-', 'nve-')]) {
+        if (child?.name && theme[child.name.replace('--mlv-', 'nve-')]) {
           context.report({
             messageId: 'deprecated-css-var',
             node: child as unknown as Rule.Node,
             data: {
               value: child.name,
-              alternative: child.name.replace('--nve-', '--nve-')
+              alternative: child.name.replace('--mlv-', '--nve-')
             }
           });
         }

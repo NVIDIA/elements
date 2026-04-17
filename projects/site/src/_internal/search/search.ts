@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { css, html, LitElement, unsafeCSS } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { property } from 'lit/decorators/property.js';
@@ -213,14 +216,6 @@ export class DocsSearch extends LitElement {
 
     if (isValidInitialFilter) {
       this.activeFilter = this.filter;
-    }
-
-    // Preload PageFind search index on idle to improve first search performance
-    // Use requestIdleCallback if available (with 3s timeout), otherwise fallback to setTimeout
-    if ('requestIdleCallback' in globalThis) {
-      requestIdleCallback(() => this.#loadPagefind(), { timeout: 3000 });
-    } else {
-      setTimeout(() => this.#loadPagefind(), 2000);
     }
   }
 

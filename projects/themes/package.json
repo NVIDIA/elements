@@ -98,13 +98,12 @@
     },
     "build:styledictionary": {
       "clean": false,
-      "command": "NODE_ENV=production vite build && node ./build/style-dictionary.config.js && node ./build/style-dictionary.alias.js && node ./build/style-dictionary.minify.js && node ./build/fonts.js",
+      "command": "NODE_ENV=production vite build && node ./build/style-dictionary.config.js && node ./build/style-dictionary.minify.js && node ./build/fonts.js",
       "files": [
         "src/**",
         "!src/**/*.test.lighthouse.ts",
         "!src/**/*.test.visual.ts",
         "build/style-dictionary.config.js",
-        "build/style-dictionary.alias.js",
         "build/style-dictionary.minify.js",
         "package.json",
         "vite.config.ts"
@@ -182,5 +181,9 @@
         }
       ]
     }
-  }
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "license": "Apache-2.0"
 }

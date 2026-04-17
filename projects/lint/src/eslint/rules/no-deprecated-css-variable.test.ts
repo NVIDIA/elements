@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { describe, it, expect, beforeEach } from 'vitest';
 import { RuleTester } from 'eslint';
 import type { JSRuleDefinition } from 'eslint';
@@ -26,7 +29,7 @@ describe('noDeprecatedCssVariable', () => {
     expect(noDeprecatedCssVariable.meta.type).toBe('problem');
     expect(noDeprecatedCssVariable.meta.docs).toBeDefined();
     expect(noDeprecatedCssVariable.meta.docs.description).toBe(
-      'Disallow use of deprecated --nve-* CSS theme variables.'
+      'Disallow use of deprecated --mlv-* CSS theme variables.'
     );
     expect(noDeprecatedCssVariable.meta.docs.category).toBe('Best Practice');
     expect(noDeprecatedCssVariable.meta.docs.recommended).toBe(true);
@@ -41,7 +44,7 @@ describe('noDeprecatedCssVariable', () => {
         ':root { margin: var(--nve-ref-space-md); }',
         ':root { gap: var(--nve-ref-space-md); }',
         ':root { color: var(--ui-color-primary); }',
-        ':root { color: var(--nve-custom-color-primary); }',
+        ':root { color: var(--mlv-custom-color-primary); }',
         ':root { margin: 1000px; }',
         ':root { color: blue; }'
       ],
@@ -54,11 +57,11 @@ describe('noDeprecatedCssVariable', () => {
       valid: [],
       invalid: [
         {
-          code: ':root { margin: var(--nve-ref-space-md); }',
+          code: ':root { margin: var(--mlv-ref-space-md); }',
           errors: [
             {
               messageId: 'deprecated-css-var',
-              data: { value: '--nve-ref-space-md', alternative: '--nve-ref-space-md' }
+              data: { value: '--mlv-ref-space-md', alternative: '--nve-ref-space-md' }
             }
           ]
         }

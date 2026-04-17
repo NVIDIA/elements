@@ -278,5 +278,9 @@
         "../lint:build"
       ]
     }
-  }
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "license": "Apache-2.0"
 }

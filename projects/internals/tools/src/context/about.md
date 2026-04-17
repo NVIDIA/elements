@@ -19,10 +19,6 @@ Give a high level overview of the Elements Design System.
 
 ### Getting Started with Elements
 
-```bash
-# login to artifactory
-npm config set registry https://registry.npmjs.org && npm login --auth-type=legacy
-```
 
 ```bash
 # create a new project

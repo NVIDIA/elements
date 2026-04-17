@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { expect, test, describe } from 'vitest';
 import { lighthouseRunner } from '@internals/vite';
 
@@ -23,8 +26,7 @@ describe('lighthouse report', () => {
       <script type="module">
         import '@nvidia-elements/core/accordion/define.js';
         import '@nvidia-elements/core/alert/define.js';
-        import '@nvidia-elements/core/app-header/define.js';
-        import '@nvidia-elements/core/avatar/define.js';
+                import '@nvidia-elements/core/avatar/define.js';
         import '@nvidia-elements/core/badge/define.js';
         import '@nvidia-elements/core/breadcrumb/define.js';
         import '@nvidia-elements/core/button/define.js';

@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 /**
  * Majority of this CSS will be able to be removed once :has-slotted is widely supported
  * https://developer.mozilla.org/en-US/docs/Web/CSS/:has-slotted
