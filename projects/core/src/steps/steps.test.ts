@@ -1,5 +1,5 @@
 import { html } from 'lit';
-import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, elementIsStable, emulateClick, removeFixture, untilEvent } from '@internals/testing';
 import { StepsItem, Steps } from '@nvidia-elements/core/steps';
 import { ProgressRing } from '@nvidia-elements/core/progress-ring';
@@ -44,6 +44,42 @@ describe(Steps.metadata.tag, () => {
     expect(childElement._internals.role).toBe('tab');
   });
 
+  it('should expose aria-selected="false" by default', async () => {
+    expect(childElement.selected).toBe(false);
+    expect(childElement._internals.ariaSelected).toBe('false');
+  });
+
+  it('should expose aria-selected="true" when selected is set directly', async () => {
+    childElement.selected = true;
+    await elementIsStable(childElement);
+    expect(childElement._internals.ariaSelected).toBe('true');
+  });
+
+  it('should update aria-selected when selection changes via behaviorSelect click', async () => {
+    expect(childElement._internals.ariaSelected).toBe('false');
+    parentElement.behaviorSelect = true;
+
+    emulateClick(childElement);
+    await elementIsStable(childElement);
+
+    expect(childElement._internals.ariaSelected).toBe('true');
+  });
+
+  it('should flip aria-selected on siblings when a new step is selected', async () => {
+    childElements[0].selected = true;
+    await elementIsStable(childElements[0]);
+    expect(childElements[0]._internals.ariaSelected).toBe('true');
+    expect(childElements[1]._internals.ariaSelected).toBe('false');
+
+    parentElement.behaviorSelect = true;
+    emulateClick(childElements[1]);
+    await elementIsStable(childElements[0]);
+    await elementIsStable(childElements[1]);
+
+    expect(childElements[0]._internals.ariaSelected).toBe('false');
+    expect(childElements[1]._internals.ariaSelected).toBe('true');
+  });
+
   it('should have a type default of button', async () => {
     await elementIsStable(childElement);
     expect(childElement.type).toBe('button');
@@ -73,6 +109,33 @@ describe(Steps.metadata.tag, () => {
     expect(await event).toBeDefined();
 
     expect(childElement.selected).toBe(false);
+  });
+
+  it('should bind the click listener once per instance, not per connect', async () => {
+    const addSpy = vi.spyOn(parentElement, 'addEventListener');
+    addSpy.mockClear();
+
+    parentElement.remove();
+    fixture.appendChild(parentElement);
+    await elementIsStable(parentElement);
+    parentElement.remove();
+    fixture.appendChild(parentElement);
+    await elementIsStable(parentElement);
+
+    const clickCalls = addSpy.mock.calls.filter(([type]) => type === 'click');
+    expect(clickCalls.length).toBe(0);
+  });
+
+  it('should still respond to clicks after disconnect and reconnect', async () => {
+    parentElement.behaviorSelect = true;
+
+    parentElement.remove();
+    fixture.appendChild(parentElement);
+    await elementIsStable(parentElement);
+
+    emulateClick(childElement);
+    await elementIsStable(childElement);
+    expect(childElement.selected).toBe(true);
   });
 
   it('should set the correct aria-orientation based on the steps orientation', async () => {
@@ -135,5 +198,51 @@ describe(Steps.metadata.tag, () => {
     expect(childElements.length).toBe(2);
     expect(childElements[0].index).toBe(1);
     expect(childElements[1].index).toBe(2);
+  });
+
+  it('should be stateless and render prefix content correctly when reverting a status change', async () => {
+    await elementIsStable(childElement);
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).textContent).toBe('1');
+
+    childElement.status = 'success';
+    await elementIsStable(childElement);
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).interaction).toBe('emphasis');
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).iconName).toBe('check');
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).textContent).toBe('');
+
+    childElement.removeAttribute('status');
+    await elementIsStable(childElement);
+    expect(childElement.index).toBe(1);
+    expect(childElement.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).textContent).toBe('1');
+  });
+
+  it('should assign index to dynamically added steps', async () => {
+    const newStep = document.createElement(StepsItem.metadata.tag) as StepsItem;
+    parentElement.appendChild(newStep);
+    await elementIsStable(parentElement);
+    await elementIsStable(newStep);
+
+    expect(newStep.index).toBe(3);
+    expect(newStep.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).textContent).toBe('3');
+  });
+
+  it('should re-index remaining steps when a step is removed', async () => {
+    childElements[0].remove();
+    await elementIsStable(parentElement);
+
+    const remaining = Array.from(parentElement.querySelectorAll<StepsItem>(StepsItem.metadata.tag));
+    expect(remaining.length).toBe(1);
+    await elementIsStable(remaining[0]);
+    expect(remaining[0].index).toBe(1);
+    expect(remaining[0].shadowRoot.querySelector<IconButton>(IconButton.metadata.tag).textContent).toBe('1');
+  });
+
+  it('should propagate container to child steps', async () => {
+    childElements.forEach(step => expect(step.container).toBeUndefined());
+
+    parentElement.container = 'condensed';
+    await elementIsStable(parentElement);
+
+    childElements.forEach(step => expect(step.container).toBe('condensed'));
   });
 });

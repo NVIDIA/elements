@@ -29,7 +29,6 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
  * @cssprop --font-size
  * @cssprop --border-top
  * @cssprop --width
- * @cssprop --font-size
  * @cssprop --font-weight
  * @cssprop --border-radius
  * @cssprop --color
@@ -58,7 +57,7 @@ export class StepsItem extends BaseButton {
   @property({ type: String, reflect: true }) container?: Extract<Container, 'condensed'>;
 
   /** @private */
-  @state() index: number;
+  @state() index: number = 0;
 
   static styles = useStyles([stepsItemStyleSheet]);
 
@@ -75,9 +74,9 @@ export class StepsItem extends BaseButton {
 
   render() {
     return html`
-      <div internal-host focus-within>  
+      <div internal-host focus-within>
         <slot name="status-icon">
-          ${this.status === undefined ? html`<nve-icon-button part="icon-button" readonly id="number-icon" .disabled=${this.disabled}>${this.index}</nve-icon-button>` : ''}
+          ${!this.status ? html`<nve-icon-button part="icon-button" readonly id="number-icon" .disabled=${this.disabled}>${this.index}</nve-icon-button>` : ''}
           ${this.status === 'success' ? html`<nve-icon-button part="icon-button" readonly size="sm" interaction="emphasis" icon-name="check"></nve-icon-button>` : ''}
           ${this.status === 'danger' ? html`<nve-icon-button part="icon-button" readonly size="sm" interaction="destructive" icon-name="exclamation-circle"></nve-icon-button>` : ''}
           ${this.status === 'pending' ? html`<nve-progress-ring part="progress-ring" status="accent" size="sm"></nve-progress-ring>` : ''}
@@ -151,14 +150,21 @@ export class Steps extends LitElement {
       return;
     }
 
-    this.keynavListConfig.items.forEach((i: HTMLElement) => ((i as StepsItem).selected = false));
+    this.steps.forEach(i => (i.selected = false));
     stepsItem.selected = true;
+  }
+
+  constructor() {
+    super();
+    this.addEventListener('click', (e: Event) =>
+      this.#selectTab(e.target as HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean })
+    );
   }
 
   render() {
     return html`
       <div internal-host>
-        <slot></slot>
+        <slot @slotchange=${this.#syncChildSteps}></slot>
       </div>
     `;
   }
@@ -167,26 +173,20 @@ export class Steps extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'tablist';
-    this.addEventListener('click', (e: Event) =>
-      this.#selectTab(e.target as HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean })
-    );
-  }
-
-  firstUpdated(props: PropertyValues<this>) {
-    super.firstUpdated(props);
-
-    this.steps.forEach((item, i) => {
-      item.index = i + 1;
-    });
   }
 
   updated(props: PropertyValues<this>) {
     super.updated(props);
-    this.#updateChildAttributes();
-    this._internals.ariaOrientation = this.vertical ? 'vertical' : 'horizontal';
+    if (props.has('container') || props.has('vertical')) {
+      this.#syncChildSteps();
+    }
   }
 
-  #updateChildAttributes() {
-    this.steps.forEach(stepItem => (stepItem.container = this.container));
+  #syncChildSteps() {
+    this._internals.ariaOrientation = this.vertical ? 'vertical' : 'horizontal';
+    this.steps.forEach((item, i) => {
+      item.index = i + 1;
+      item.container = this.container;
+    });
   }
 }
