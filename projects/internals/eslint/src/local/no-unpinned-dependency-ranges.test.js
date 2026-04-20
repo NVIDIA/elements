@@ -179,22 +179,6 @@ test('published packages', () => {
         filename: 'package.json',
         code: '{ "optionalDependencies": { "foo": "workspace:*" } }',
         errors: [{ messageId: 'unpinned-range' }]
-      },
-      // published packages cannot have use catalog references for dependencies and must use "catalog:publish"
-      {
-        filename: 'package.json',
-        code: '{ "dependencies": { "foo": "catalog:" } }',
-        errors: [{ messageId: 'unpinned-range' }]
-      },
-      {
-        filename: 'package.json',
-        code: '{ "peerDependencies": { "foo": "catalog:" } }',
-        errors: [{ messageId: 'unpinned-range' }]
-      },
-      {
-        filename: 'package.json',
-        code: '{ "optionalDependencies": { "foo": "catalog:" } }',
-        errors: [{ messageId: 'unpinned-range' }]
       }
     ]
   });

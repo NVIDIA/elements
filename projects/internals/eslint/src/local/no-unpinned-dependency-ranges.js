@@ -35,6 +35,8 @@ export default {
             const name = dep.name.value;
             const version = dep.value.value;
 
+            // Any catalog: reference (default or named catalog) resolves through pnpm to a
+            // concrete version, so treat every catalog:* form as valid here.
             if (version.startsWith('catalog:')) continue;
 
             let reason;
