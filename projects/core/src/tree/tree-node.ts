@@ -176,8 +176,13 @@ export class TreeNode extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'treeitem';
-    this.#setupKeyNavInteractions();
+    this.addEventListener('keyup', this.#onKeyup);
     this.#nodeUpdate();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('keyup', this.#onKeyup);
   }
 
   /** opens and sets the expanded state automatically if behaviorExpand is true */
@@ -199,22 +204,20 @@ export class TreeNode extends LitElement {
     this.#isExpandable ? this._internals.states.add('is-expandable') : this._internals.states.delete('is-expandable');
   }
 
-  #setupKeyNavInteractions() {
-    this.addEventListener('keyup', e => {
-      if (this.#isExpandable && e.code === 'ArrowLeft' && e.target === this) {
-        this.close();
-      }
+  #onKeyup = (e: KeyboardEvent) => {
+    if (this.#isExpandable && e.code === 'ArrowLeft' && e.target === this) {
+      this.close();
+    }
 
-      if (this.#isExpandable && e.code === 'ArrowRight' && e.target === this) {
-        this.open();
-      }
+    if (this.#isExpandable && e.code === 'ArrowRight' && e.target === this) {
+      this.open();
+    }
 
-      if (e.code === 'Space' && e.target === this && this.selectable) {
-        e.preventDefault();
-        this.#toggleSelection();
-      }
-    });
-  }
+    if (e.code === 'Space' && e.target === this && this.selectable) {
+      e.preventDefault();
+      this.#toggleSelection();
+    }
+  };
 
   #nodeHeaderClick(e: Event) {
     const hasFocusableElements = getFlattenedFocusableItems(e.currentTarget as HTMLElement).length;

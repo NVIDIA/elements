@@ -133,19 +133,28 @@ export class Drawer extends LitElement {
     `;
   }
 
-  #inlineElement: HTMLElement;
+  #inlineElement?: HTMLElement;
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.addEventListener('toggle', (e: ToggleEvent) => {
-      if (this.inline) {
-        if (this.#inlineElement && e.newState === 'closed') {
-          this.#inlineElement.remove();
-        } else {
-          this.#inlineElement = createGhostElement(this);
-          this.after(this.#inlineElement);
-        }
-      }
-    });
+    this.addEventListener('toggle', this.#onToggle);
   }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.removeEventListener('toggle', this.#onToggle);
+    this.#inlineElement?.remove();
+    this.#inlineElement = undefined;
+  }
+
+  #onToggle = (toggleEvent: ToggleEvent) => {
+    if (this.inline) {
+      if (this.#inlineElement && toggleEvent.newState === 'closed') {
+        this.#inlineElement.remove();
+      } else {
+        this.#inlineElement = createGhostElement(this);
+        this.after(this.#inlineElement);
+      }
+    }
+  };
 }

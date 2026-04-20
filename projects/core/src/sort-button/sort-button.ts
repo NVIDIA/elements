@@ -64,16 +64,22 @@ export class SortButton extends BaseButton {
   connectedCallback() {
     super.connectedCallback();
     this._internals.role = 'spinbutton';
-
-    this.addEventListener('click', () => {
-      this._internals.ariaLabel = `${this.#i18nController.i18n.sort} ${nextSort[this.sort]}`;
-      this.dispatchEvent(
-        new CustomEvent('sort', {
-          detail: { value: this.sort, next: nextSort[this.sort] },
-          bubbles: true,
-          composed: true
-        })
-      );
-    });
+    this.addEventListener('click', this.#onClick);
   }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.#onClick);
+  }
+
+  #onClick = () => {
+    this._internals.ariaLabel = `${this.#i18nController.i18n.sort} ${nextSort[this.sort]}`;
+    this.dispatchEvent(
+      new CustomEvent('sort', {
+        detail: { value: this.sort, next: nextSort[this.sort] },
+        bubbles: true,
+        composed: true
+      })
+    );
+  };
 }

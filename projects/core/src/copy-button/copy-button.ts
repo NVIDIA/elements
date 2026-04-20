@@ -84,14 +84,21 @@ export class CopyButton extends Button {
    `;
   }
 
-  constructor() {
-    super();
+  connectedCallback() {
+    super.connectedCallback();
     this.addEventListener('click', this.#copy);
     this.addEventListener('mouseenter', this.#openTooltip);
     this.addEventListener('mouseleave', this.#closeTooltip);
   }
 
-  #copy() {
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.#copy);
+    this.removeEventListener('mouseenter', this.#openTooltip);
+    this.removeEventListener('mouseleave', this.#closeTooltip);
+  }
+
+  #copy = () => {
     if (this.behaviorCopy) {
       navigator.clipboard
         .writeText(this.value)
@@ -104,7 +111,7 @@ export class CopyButton extends Button {
           console.error(err);
         });
     }
-  }
+  };
 
   #close() {
     this.showToast = false;
@@ -112,11 +119,11 @@ export class CopyButton extends Button {
     this.showTooltip = false;
   }
 
-  #openTooltip() {
+  #openTooltip = () => {
     this.showTooltip = true;
-  }
+  };
 
-  #closeTooltip() {
+  #closeTooltip = () => {
     this.showTooltip = false;
-  }
+  };
 }

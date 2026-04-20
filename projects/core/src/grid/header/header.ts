@@ -63,14 +63,26 @@ export class GridHeader extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'row';
-    this.addEventListener('nve-grid-column-resize', () => this.#computeColumnWidths());
+    this.addEventListener('nve-grid-column-resize', this.#onColumnResize);
+    this.#resizeObserver ??= new ResizeObserver(debounce(() => this.#computeColumnWidths(), 100));
+    this.#resizeObserver.observe(this);
   }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('nve-grid-column-resize', this.#onColumnResize);
+    this.#resizeObserver?.disconnect();
+  }
+
+  #onColumnResize = () => {
+    void this.#computeColumnWidths();
+  };
+
+  #resizeObserver?: ResizeObserver;
 
   async firstUpdated(props: PropertyValues<this>) {
     super.firstUpdated(props);
     await this.updateComplete;
-    const debounceFn = debounce(() => this.#computeColumnWidths(), 100);
-    new ResizeObserver(debounceFn).observe(this);
     this.#validateColumns();
   }
 

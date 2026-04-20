@@ -46,7 +46,7 @@ import styles from './control.css?inline';
  */
 @typeSSR()
 export class Control extends LitElement {
-  /** Set current visaul state for control. This overrides any validation states active. */
+  /** Set current visual state for control. This overrides any validation states active. */
   @property({ type: String }) status: 'warning' | 'error' | 'success' | 'disabled';
 
   /** Set current control + label + control message layout. Layouts will collapse based on available container space. */
@@ -152,21 +152,29 @@ export class Control extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
-
-    this.shadowRoot!.addEventListener('slotchange', () => {
-      this.#updateStyleStates();
-
-      if (this.input && this.#observers.length === 0) {
-        this.#setupInput();
-        this.#setupFitText();
-      }
-    });
+    this.shadowRoot!.addEventListener('slotchange', this.#onRootSlotchange);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+    this.shadowRoot!.removeEventListener('slotchange', this.#onRootSlotchange);
+    this.shadowRoot!.removeEventListener('slotchange', this.#onInputSlotchange);
+    if (this.fitText && this.input) {
+      this.input.removeEventListener('input', this.#onFitTextUpdate);
+      this.input.removeEventListener('change', this.#onFitTextUpdate);
+    }
     this.#observers.forEach(observer => observer.disconnect());
+    this.#observers.length = 0;
   }
+
+  #onRootSlotchange = () => {
+    this.#updateStyleStates();
+
+    if (this.input && this.#observers.length === 0) {
+      this.#setupInput();
+      this.#setupFitText();
+    }
+  };
 
   /** Resets control value to initial attribute value and clears any active validation rules. */
   reset() {
@@ -187,19 +195,25 @@ export class Control extends LitElement {
 
     this.#polyfillShowPicker();
     this.#updateAssociations();
-    this.shadowRoot!.addEventListener('slotchange', () => {
-      this.#updateStyleStates();
-      this.#updateAssociations();
-    });
+    this.shadowRoot!.addEventListener('slotchange', this.#onInputSlotchange);
   }
+
+  #onInputSlotchange = () => {
+    this.#updateStyleStates();
+    this.#updateAssociations();
+  };
 
   #setupFitText() {
     if (this.fitText) {
       this.#getCharacterWidth();
-      this.input.addEventListener('input', () => this.#getCharacterWidth());
-      this.input.addEventListener('change', () => this.#getCharacterWidth());
+      this.input.addEventListener('input', this.#onFitTextUpdate);
+      this.input.addEventListener('change', this.#onFitTextUpdate);
     }
   }
+
+  #onFitTextUpdate = () => {
+    this.#getCharacterWidth();
+  };
 
   #getCharacterWidth() {
     if (this.input.tagName === 'INPUT') {

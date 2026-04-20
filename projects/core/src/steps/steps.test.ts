@@ -111,9 +111,11 @@ describe(Steps.metadata.tag, () => {
     expect(childElement.selected).toBe(false);
   });
 
-  it('should bind the click listener once per instance, not per connect', async () => {
+  it('should pair click listener adds and removes across reconnects with the same reference', async () => {
     const addSpy = vi.spyOn(parentElement, 'addEventListener');
+    const removeSpy = vi.spyOn(parentElement, 'removeEventListener');
     addSpy.mockClear();
+    removeSpy.mockClear();
 
     parentElement.remove();
     fixture.appendChild(parentElement);
@@ -122,8 +124,11 @@ describe(Steps.metadata.tag, () => {
     fixture.appendChild(parentElement);
     await elementIsStable(parentElement);
 
-    const clickCalls = addSpy.mock.calls.filter(([type]) => type === 'click');
-    expect(clickCalls.length).toBe(0);
+    const clickAdds = addSpy.mock.calls.filter(([type]) => type === 'click');
+    const clickRemoves = removeSpy.mock.calls.filter(([type]) => type === 'click');
+    expect(clickAdds.length).toBe(clickRemoves.length);
+    expect(clickAdds.every(([, handler]) => handler === clickAdds[0]![1])).toBe(true);
+    expect(clickRemoves.every(([, handler]) => handler === clickAdds[0]![1])).toBe(true);
   });
 
   it('should still respond to clicks after disconnect and reconnect', async () => {
