@@ -1,3 +1,9 @@
+## <small>1.71.2 (2026-04-20)</small>
+
+* fix(core): status index update ([51467e0](https://github.com/NVIDIA/elements/commit/51467e0))
+* chore(docs): fixup layout links ([48bb525](https://github.com/NVIDIA/elements/commit/48bb525))
+* chore(release): @nvidia-elements/lint-v0.15.1 [skip ci] ([e7c146c](https://github.com/NVIDIA/elements/commit/e7c146c))
+
 ## <small>1.71.1 (2026-04-16)</small>
 
 * fix(docs): re-enable migration link ([e215d35](https://github.com/NVIDIA/elements/commit/e215d35))
