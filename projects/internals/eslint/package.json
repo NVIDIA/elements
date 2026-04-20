@@ -7,7 +7,8 @@
     ".": "./src/index.js"
   },
   "scripts": {
-    "ci": "wireit"
+    "ci": "wireit",
+    "test": "wireit"
   },
   "dependencies": {
     "@html-eslint/eslint-plugin": "catalog:",
@@ -31,8 +32,16 @@
   "wireit": {
     "ci": {
       "files": [
-        "src"
+        "src",
+        "test"
       ]
+    },
+    "test": {
+      "command": "node --test 'src/**/*.test.js'",
+      "files": [
+        "src/**/*.js"
+      ],
+      "output": []
     }
   }
 }

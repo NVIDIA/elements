@@ -10,6 +10,9 @@ import exampleCssQuality from '../local/example-css-quality.js';
 import exampleApprovedDomains from '../local/example-approved-domains.js';
 import requireFixtureCleanup from '../local/require-fixture-cleanup.js';
 import requireElementStable from '../local/require-element-stable.js';
+import requireListenerCleanup from '../local/require-listener-cleanup.js';
+import requireObserverCleanup from '../local/require-observer-cleanup.js';
+import requireTimerCleanup from '../local/require-timer-cleanup.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -50,7 +53,10 @@ const config = {
         'example-css-quality': exampleCssQuality,
         'example-approved-domains': exampleApprovedDomains,
         'require-fixture-cleanup': requireFixtureCleanup,
-        'require-element-stable': requireElementStable
+        'require-element-stable': requireElementStable,
+        'require-listener-cleanup': requireListenerCleanup,
+        'require-observer-cleanup': requireObserverCleanup,
+        'require-timer-cleanup': requireTimerCleanup
       }
     }
   },
@@ -79,6 +85,9 @@ const config = {
     'jsdoc/valid-types': ['error'],
     'jsdoc/check-tag-names': ['error'],
     'local-typescript/no-dead-code': ['warn'], // todo, this should be migrated to the internal playground template config
+    'local-typescript/require-listener-cleanup': ['error'],
+    'local-typescript/require-observer-cleanup': ['error'],
+    'local-typescript/require-timer-cleanup': ['error'],
 
     // todo: enable these rules incrementally as the codebase is cleaned up
     '@typescript-eslint/no-unnecessary-type-assertion': 'off',
@@ -156,7 +165,10 @@ export const browserTypescriptConfig = [
     rules: {
       '@typescript-eslint/no-unused-expressions': 'off', // (chai's expect().to.exist uses this)
       'local-typescript/require-fixture-cleanup': ['error'],
-      'local-typescript/require-element-stable': ['off'] // temporarily disabled, will enable in followup
+      'local-typescript/require-element-stable': ['off'], // temporarily disabled, will enable in followup
+      'local-typescript/require-listener-cleanup': ['off'], // test fixtures routinely attach listeners without cleanup
+      'local-typescript/require-observer-cleanup': ['off'], // test fixtures routinely create observers without cleanup
+      'local-typescript/require-timer-cleanup': ['off'] // test fixtures routinely use timers without cleanup
     }
   },
   {
@@ -195,7 +207,10 @@ export const nodeTypescriptConfig = [
     rules: {
       '@typescript-eslint/no-unused-expressions': 'off', // (chai's expect().to.exist uses this)
       'local-typescript/require-fixture-cleanup': ['error'],
-      'local-typescript/require-element-stable': ['off'] // temporarily disabled, will enable in followup
+      'local-typescript/require-element-stable': ['off'], // temporarily disabled, will enable in followup
+      'local-typescript/require-listener-cleanup': ['off'], // test fixtures routinely attach listeners without cleanup
+      'local-typescript/require-observer-cleanup': ['off'], // test fixtures routinely create observers without cleanup
+      'local-typescript/require-timer-cleanup': ['off'] // test fixtures routinely use timers without cleanup
     }
   },
   {
