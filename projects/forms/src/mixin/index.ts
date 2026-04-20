@@ -180,10 +180,31 @@ export function FormControlMixin<TBase extends Constructor, T extends FormContro
 
       this.tabIndex = 0;
       this._updateFormState();
-      // 'input' event composes but 'change' does not https://github.com/whatwg/html/issues/5453
-      this.shadowRoot?.addEventListener('input', e => e.stopPropagation());
-      this.shadowRoot?.addEventListener('change', e => e.stopPropagation());
+      this.shadowRoot?.addEventListener('input', this._stopInternalPropagation);
+      this.shadowRoot?.addEventListener('change', this._stopInternalPropagation);
     }
+
+    disconnectedCallback() {
+      if (super.disconnectedCallback) {
+        super.disconnectedCallback();
+      }
+
+      this.shadowRoot?.removeEventListener('input', this._stopInternalPropagation);
+      this.shadowRoot?.removeEventListener('change', this._stopInternalPropagation);
+    }
+
+    /**
+     * @internal
+     * Stop events that originated inside this component's own shadow tree so the
+     * mixin can re-dispatch them semantically. Slotted light-DOM events traverse the
+     * host's shadow root via slots and must continue bubbling.
+     */
+    _stopInternalPropagation = (event: Event) => {
+      const origin = event.composedPath()[0];
+      if (origin instanceof Node && this.shadowRoot?.contains(origin)) {
+        event.stopPropagation();
+      }
+    };
 
     static get observedAttributes() {
       const attrs = super.observedAttributes ?? [];

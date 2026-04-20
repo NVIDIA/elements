@@ -1,4 +1,4 @@
-import { html } from 'lit';
+import { LitElement, html } from 'lit';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, removeFixture, untilEvent } from '@internals/testing';
 import { FormControlMixin } from './index.js';
@@ -470,6 +470,66 @@ class MultipleFileValueTestElement extends FormControlMixin<typeof HTMLElement, 
 }
 
 customElements.define('ui-multiple-file-value', MultipleFileValueTestElement);
+
+class ShadowContainerElement extends FormControlMixin<typeof LitElement, Record<string, unknown>>(LitElement) {
+  static readonly metadata = {
+    version: '0.0.0',
+    tag: 'ui-shadow-container',
+    valueSchema: {
+      type: 'object' as const,
+      properties: {},
+      required: []
+    }
+  };
+
+  render() {
+    return html`<slot></slot>`;
+  }
+}
+
+customElements.define('ui-shadow-container', ShadowContainerElement);
+
+describe('mixin - slotted event propagation', () => {
+  let fixture: HTMLElement;
+  let container: ShadowContainerElement;
+  let input: HTMLInputElement;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <ui-shadow-container>
+        <input type="checkbox" name="slotted" />
+      </ui-shadow-container>
+    `);
+    container = fixture.querySelector('ui-shadow-container')!;
+    input = fixture.querySelector('input')!;
+    await container.updateComplete;
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should allow slotted light-DOM change events to reach the document', () => {
+    const documentListener = vi.fn();
+    document.addEventListener('change', documentListener);
+
+    input.dispatchEvent(new Event('change', { bubbles: true }));
+
+    document.removeEventListener('change', documentListener);
+    expect(documentListener).toHaveBeenCalledOnce();
+    expect((documentListener.mock.calls[0]![0] as Event).target).toBe(input);
+  });
+
+  it('should allow slotted light-DOM input events to reach the document', () => {
+    const documentListener = vi.fn();
+    document.addEventListener('input', documentListener);
+
+    input.dispatchEvent(new Event('input', { bubbles: true, composed: true }));
+
+    document.removeEventListener('input', documentListener);
+    expect(documentListener).toHaveBeenCalledOnce();
+  });
+});
 
 describe('mixin - multiple files', () => {
   let element: MultipleFileValueTestElement;
