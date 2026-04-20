@@ -85,8 +85,15 @@ export class ButtonGroup extends LitElement {
     attachInternals(this);
     appendRootNodeStyle(this, globalStyles);
     this._internals.role = 'group';
-    this.addEventListener('click', e => this.#selectButton(e.target as HTMLElement & { pressed?: boolean }));
+    this.addEventListener('click', this.#onClick);
   }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.#onClick);
+  }
+
+  #onClick = (e: Event) => this.#selectButton(e.target as HTMLElement & { pressed?: boolean });
 
   updated(props: PropertyValues<this>) {
     super.updated(props);

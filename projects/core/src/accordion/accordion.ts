@@ -275,13 +275,19 @@ export class AccordionGroup extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'group';
-
-    this.addEventListener('open', e => {
-      if (this.behaviorExpandSingle && this.accordions.find(accordion => accordion === e.target)) {
-        this.accordions.filter(accordion => accordion !== e.target).forEach(accordion => (accordion.expanded = false));
-      }
-    });
+    this.addEventListener('open', this.#onOpen);
   }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('open', this.#onOpen);
+  }
+
+  #onOpen = (e: Event) => {
+    if (this.behaviorExpandSingle && this.accordions.find(accordion => accordion === e.target)) {
+      this.accordions.filter(accordion => accordion !== e.target).forEach(accordion => (accordion.expanded = false));
+    }
+  };
 
   updated(props: PropertyValues<this>) {
     super.updated(props);

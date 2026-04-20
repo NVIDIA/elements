@@ -161,10 +161,17 @@ export class Tabs extends LitElement {
     appendRootNodeStyle(this, globalStyles);
     attachInternals(this);
     this._internals.role = 'tablist';
-    this.addEventListener('click', (e: Event) =>
-      this.#selectTab(e.target as HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean })
-    );
+    this.addEventListener('click', this.#onClick);
   }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.#onClick);
+  }
+
+  #onClick = (e: Event) => {
+    this.#selectTab(e.target as HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean });
+  };
 
   updated(props: PropertyValues<this>) {
     super.updated(props);

@@ -75,8 +75,17 @@ export class GridColumn extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'columnheader';
-    this.addEventListener('sort', ((e: CustomEvent) => (this.ariaSort = e.detail.next)) as EventListener);
+    this.addEventListener('sort', this.#onSort);
   }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('sort', this.#onSort);
+  }
+
+  #onSort = (e: Event) => {
+    this.ariaSort = (e as CustomEvent<{ next: string }>).detail.next;
+  };
 
   willUpdate(props: PropertyValues<this>) {
     if (props.has('width') && this.width && Number.isFinite(Number(this.width))) {

@@ -59,6 +59,9 @@ export class DropdownGroup extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     globalThis.document?.removeEventListener('pointerup', this.#_pointerup);
+    this.removeEventListener('keydown', this.#keydown);
+    this.removeEventListener('open', this.#onOpen as EventListener);
+    this.removeEventListener('close', this.#onClose as EventListener);
   }
 
   #syncDropdowns() {

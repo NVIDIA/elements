@@ -78,6 +78,19 @@ describe(GridHeader.metadata.tag, () => {
     expect(grid.style.getPropertyValue('--c3').includes('minmax(auto, ')).toBe(true);
   });
 
+  it('should re-observe resizes after disconnect + reconnect', async () => {
+    const observeSpy = vi.spyOn(ResizeObserver.prototype, 'observe');
+    observeSpy.mockClear();
+
+    element.remove();
+    grid.appendChild(element);
+    await elementIsStable(element);
+
+    const observed = observeSpy.mock.calls.filter(([el]) => el === element);
+    expect(observed.length).toBeGreaterThanOrEqual(1);
+    observeSpy.mockRestore();
+  });
+
   it('should update grid if column width changes', async () => {
     expect(grid.style.getPropertyValue('--c0').includes('minmax(auto, ')).toBe(true);
     expect(grid.style.getPropertyValue('--c1').includes('minmax(auto, ')).toBe(true);

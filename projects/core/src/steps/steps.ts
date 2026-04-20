@@ -154,13 +154,6 @@ export class Steps extends LitElement {
     stepsItem.selected = true;
   }
 
-  constructor() {
-    super();
-    this.addEventListener('click', (e: Event) =>
-      this.#selectTab(e.target as HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean })
-    );
-  }
-
   render() {
     return html`
       <div internal-host>
@@ -173,7 +166,17 @@ export class Steps extends LitElement {
     super.connectedCallback();
     attachInternals(this);
     this._internals.role = 'tablist';
+    this.addEventListener('click', this.#onClick);
   }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.#onClick);
+  }
+
+  #onClick = (e: Event) => {
+    this.#selectTab(e.target as HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean });
+  };
 
   updated(props: PropertyValues<this>) {
     super.updated(props);
