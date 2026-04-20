@@ -37,6 +37,8 @@
 
 nve-progress-ring,
 nve-icon-button {
+  --height: var(--nve-ref-size-700);
+  --width: var(--nve-ref-size-700);
   cursor: pointer;
 }
 
