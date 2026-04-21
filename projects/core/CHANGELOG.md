@@ -1,3 +1,12 @@
+## <small>1.71.3 (2026-04-21)</small>
+
+* chore(internals): add event listener lifecycle eslint rule ([576c048](https://github.com/NVIDIA/elements/commit/576c048))
+* chore(release): @nvidia-elements/forms-v1.0.3 [skip ci] ([ea95726](https://github.com/NVIDIA/elements/commit/ea95726))
+* fix(core): ensure form control events bubble ([77b6c2f](https://github.com/NVIDIA/elements/commit/77b6c2f))
+* fix(core): event listener cleanup ([5b51129](https://github.com/NVIDIA/elements/commit/5b51129))
+* fix(core): step item consistent height ([d99bed4](https://github.com/NVIDIA/elements/commit/d99bed4))
+* fix(forms): correct event bubbling ([fdb6e46](https://github.com/NVIDIA/elements/commit/fdb6e46))
+
 ## <small>1.71.2 (2026-04-20)</small>
 
 * fix(core): status index update ([51467e0](https://github.com/NVIDIA/elements/commit/51467e0))
