@@ -83,6 +83,16 @@ export const renderBaseHead = data => /* html */ `
         }
       }
     }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
   </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-723T2ZTKVT" defer></script>
@@ -105,9 +115,9 @@ export const renderBaseHead = data => /* html */ `
 
 export const renderDocsNav = data => /* html */ `
 <nve-tree id="docs-nav" data-pagefind-ignore="all" behavior-expand selectable="single">
-  <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') ? 'expanded' : ''}>
+  <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') || data.page.url === '/' ? 'expanded' : ''}>
     <a href="docs/about/getting-started/">About</a>
-    <nve-tree-node ${data.page.url.includes('/docs/about/getting-started/') ? 'highlighted selected' : ''}><a href="docs/about/getting-started/">Getting Started</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/getting-started/') || data.page.url === '/' ? 'highlighted selected' : ''}><a href="docs/about/getting-started/">Getting Started</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted selected' : ''}><a href="docs/changelog/">Changelog</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted selected' : ''}><a href="docs/metrics/">Metrics</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/support/') ? 'highlighted selected' : ''}><a href="docs/about/support/">Support</a></nve-tree-node>

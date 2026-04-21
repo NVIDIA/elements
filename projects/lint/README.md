@@ -2,11 +2,6 @@
 
 The `@nvidia-elements/lint` package is a utility library that provides Elements-specific lint rules to enforce best practices and prevent common errors when using Elements.
 
-- [Documentation](https://NVIDIA.github.io/elements/docs/lint/)
-- [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-- [GitLab Repo](https://github.com/NVIDIA/elements)
-- [Artifactory](https://registry.npmjs.org
-
 ## Getting Started
 
 ```shell
@@ -104,3 +99,10 @@ export default [
 | `@nvidia-elements/lint/no-unknown-css-variable` | Disallow use of unknown --nve-* CSS theme variables. | CSS | `error` |
 | `@nvidia-elements/lint/no-unknown-tags` | Disallow use of unknown nve-* tags. | HTML | `error` |
 | `@nvidia-elements/lint/no-unstyled-typography` | Require typography elements to have nve-text styling applied. | HTML | `error` |
+
+## Links
+
+- [Documentation](https://NVIDIA.github.io/elements/docs/lint/)
+- [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
+- [GitLab Repo](https://github.com/NVIDIA/elements)
+- [Artifactory](https://registry.npmjs.org

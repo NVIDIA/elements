@@ -1,7 +1,8 @@
 ---
 {
   title: 'Getting Started',
-  layout: 'docs.11ty.js'
+  layout: 'docs.11ty.js',
+  permalink: 'docs/about/getting-started/'
 }
 ---
 

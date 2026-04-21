@@ -6,6 +6,7 @@ import { readFileSync } from 'node:fs';
 import { renderBaseHead, renderDocsNav, renderBasePageHeader } from './common.js';
 import { elementSummary, elementStatus, elementDescription, elementSupportButtons } from '../templates/api.js';
 import { exampleShortcode } from '../shortcodes/example.js';
+import { ELEMENTS_PAGES_BASE_URL } from '../utils/env.js';
 
 // Base URL for the documentation site
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
@@ -65,6 +66,7 @@ export async function render(data) {
       </head>
 
       <body nve-text="body trim:none" data-pagefind-meta="section:${section}">
+        <div class="visually-hidden" aria-hidden="true">${ELEMENTS_PAGES_BASE_URL}/llms.txt is available optimized for AI and LLM tools.</div>
         <!-- nve-page component, anchors for internal navigation links -->
         <nve-page style="anchor-name: --page-anchor;">
           <!-- renders nve-page-header (logo, top nav buttons, system themes btn...) -->
