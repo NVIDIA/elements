@@ -53,6 +53,11 @@ slot:not([name]) {
   display: none !important;
 }
 
+::slotted(a),
+::slotted(span) {
+  text-wrap: nowrap !important;
+}
+
 /* gap spacing, not API exposed yet as this is still stabilizing */
 [internal-host] {
   --gap: var(--nve-ref-space-xxs);

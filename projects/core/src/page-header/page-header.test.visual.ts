@@ -26,6 +26,7 @@ function template(theme: '' | 'dark' = '') {
   <nve-page-header style="min-width: 768px">
     <nve-logo slot="prefix" size="sm" color="green-grass">•︎•︎</nve-logo>
     <h2 nve-text="heading" slot="prefix">•︎•︎•︎•︎•︎•︎</h2>
+    <span nve-text="body sm muted" slot="prefix">•︎•︎•︎ •︎•︎•︎</span>
     <nve-button selected container="flat">•︎•︎•︎</nve-button>
     <nve-button container="flat">•︎•︎•︎</nve-button>
     <nve-icon-button container="flat" icon-name="chat-bubble" slot="suffix"></nve-icon-button>

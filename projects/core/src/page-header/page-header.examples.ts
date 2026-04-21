@@ -21,8 +21,8 @@ export const Default = {
   render: () => {
     return html`
 <nve-page-header>
-  <nve-logo slot="prefix" size="sm"></nve-logo>
-  <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
+  <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+  <h2 slot="prefix" nve-text="heading sm">Infrastructure</h2>
   <nve-button selected container="flat"><a href="#">Link 1</a></nve-button>
   <nve-button container="flat"><a href="#">Link 2</a></nve-button>
   <nve-icon-button slot="suffix" container="flat" icon-name="chat-bubble"></nve-icon-button>
@@ -41,8 +41,8 @@ export const DropdownMenu = {
   render: () => {
     return html`
 <nve-page-header>
-  <nve-logo slot="prefix" size="sm"></nve-logo>
-  <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
+  <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+  <h2 slot="prefix" nve-text="heading sm">Infrastructure</h2>
   <nve-button selected container="flat"><a href="#">Link 1</a></nve-button>
   <nve-button container="flat"><a href="#">Link 2</a></nve-button>
   <nve-icon-button slot="suffix" interaction="emphasis" size="sm" popovertarget="page-header-dropdown">EL</nve-icon-button>
@@ -68,8 +68,8 @@ export const MenuButton = {
     return html`
 <nve-page-header>
   <nve-icon-button slot="prefix" container="flat" icon-name="menu" aria-label="menu"></nve-icon-button>
-  <nve-logo slot="prefix" size="sm"></nve-logo>
-  <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
+  <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+  <h2 slot="prefix" nve-text="heading sm">Infrastructure</h2>
   <nve-button selected container="flat"><a href="#">Link 1</a></nve-button>
   <nve-button container="flat"><a href="#">Link 2</a></nve-button>
   <nve-icon-button slot="suffix" container="flat" icon-name="chat-bubble"></nve-icon-button>
@@ -106,8 +106,8 @@ export const PrefixNavigation = {
   render: () => {
     return html`
 <nve-page-header>
-  <nve-logo slot="prefix" size="sm"></nve-logo>
-  <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
+  <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+  <h2 slot="prefix" nve-text="heading sm">Infrastructure</h2>
   <nve-button container="flat"><a href="#">Features</a></nve-button>
   <nve-button container="flat"><a href="#">Guide</a></nve-button>
   <nve-button container="flat"><a href="#">Docs</a></nve-button>
@@ -126,8 +126,8 @@ export const CenterNavigation = {
   render: () => {
     return html`
 <nve-page-header>
-  <nve-logo slot="prefix" size="sm"></nve-logo>
-  <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
+  <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+  <h2 slot="prefix" nve-text="heading sm">Infrastructure</h2>
   <div nve-layout="row align:center gap:xxs full">
     <nve-button container="flat"><a href="#">Features</a></nve-button>
     <nve-button container="flat"><a href="#">Guide</a></nve-button>
@@ -148,8 +148,8 @@ export const SuffixNavigation = {
   render: () => {
     return html`
 <nve-page-header>
-  <nve-logo slot="prefix" size="sm"></nve-logo>
-  <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
+  <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+  <h2 slot="prefix" nve-text="heading sm">Infrastructure</h2>
   <nve-button slot="suffix" container="flat"><a href="#">Features</a></nve-button>
   <nve-button slot="suffix" container="flat"><a href="#">Guide</a></nve-button>
   <nve-button slot="suffix" container="flat"><a href="#">Docs</a></nve-button>
@@ -168,8 +168,8 @@ export const Search = {
   render: () => {
     return html`
 <nve-page-header>
-  <nve-logo slot="prefix" size="sm"></nve-logo>
-  <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
+  <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+  <h2 slot="prefix" nve-text="heading sm">Infrastructure</h2>
   <nve-button container="flat"><a href="#">Link 1</a></nve-button>
   <nve-button container="flat"><a href="#">Link 2</a></nve-button>
   <nve-search slot="suffix" rounded style="width: 220px">
@@ -188,8 +188,8 @@ export const UserDetail = {
   render: () => {
     return html`
 <nve-page-header>
-  <nve-logo slot="prefix" size="sm"></nve-logo>
-  <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
+  <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+  <h2 slot="prefix" nve-text="heading sm">Infrastructure</h2>
   <nve-button container="flat"><a href="#">Link 1</a></nve-button>
   <nve-button container="flat"><a href="#">Link 2</a></nve-button>
   <nve-icon-button slot="suffix" interaction="emphasis" size="sm">GH</nve-icon-button>
