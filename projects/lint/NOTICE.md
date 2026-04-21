@@ -79,7 +79,7 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
     "Contribution" shall mean any work of authorship, including
     the original version of the Work and any modifications or additions
     to that Work or Derivative Works thereof, that is intentionally
-    submitted to the Licensor for inclusion in the Work by the copyright owner
+    submitted to Licensor for inclusion in the Work by the copyright owner
     or by an individual or Legal Entity authorized to submit on behalf of
     the copyright owner. For the purposes of this definition, "submitted"
     means any form of electronic, verbal, or written communication sent
@@ -91,7 +91,7 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
     designated in writing by the copyright owner as "Not a Contribution."
 
     "Contributor" shall mean Licensor and any individual or Legal Entity
-    on behalf of whom a Contribution has been received by the Licensor and
+    on behalf of whom a Contribution has been received by Licensor and
     subsequently incorporated within the Work.
 
 2.  Grant of Copyright License. Subject to the terms and conditions of
@@ -137,7 +137,7 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
     (d) If the Work includes a "NOTICE" text file as part of its
     distribution, then any Derivative Works that You distribute must
     include a readable copy of the attribution notices contained
-    within such NOTICE file, excluding any notices that do not
+    within such NOTICE file, excluding those notices that do not
     pertain to any part of the Derivative Works, in at least one
     of the following places: within a NOTICE text file distributed
     as part of the Derivative Works; within the Source form or
@@ -234,4 +234,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-For license details, see: MIT: https://opensource.org/licenses/MIT, Apache-2.0: https://opensource.org/licenses/Apache-2.0
+For license details, see: Apache-2.0: https://opensource.org/licenses/Apache-2.0, MIT: https://opensource.org/licenses/MIT

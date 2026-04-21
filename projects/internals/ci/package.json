@@ -1,13 +1,13 @@
 {
-  "name": "@internals/ci-coverage",
+  "name": "@internals/ci",
   "type": "module",
   "private": true,
   "scripts": {
-    "ci": "wireit"
+    "coverage": "wireit"
   },
   "wireit": {
-    "ci": {
-      "command": "node ./index.js",
+    "coverage": {
+      "command": "node ./coverage.js",
       "packageLocks": []
     }
   }

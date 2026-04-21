@@ -74,4 +74,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-For license details, see: MIT: https://opensource.org/licenses/MIT, BSD-3-Clause: https://opensource.org/licenses/BSD-3-Clause
+For license details, see: BSD-3-Clause: https://opensource.org/licenses/BSD-3-Clause, MIT: https://opensource.org/licenses/MIT
