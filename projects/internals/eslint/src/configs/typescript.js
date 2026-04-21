@@ -63,15 +63,7 @@ const config = {
   rules: {
     ...Object.assign({}, ...tseslint.configs.strictTypeChecked.map(c => c.rules)),
     complexity: ['error', { max: 10 }], // https://en.wikipedia.org/wiki/Cyclomatic_complexity
-    '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
-    '@typescript-eslint/no-confusing-void-expression': 'off',
-    'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
-    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T', argsIgnorePattern: '^_' }],
-    '@typescript-eslint/consistent-type-imports': ['error'],
-    '@typescript-eslint/no-floating-promises': ['error'],
-    '@typescript-eslint/no-explicit-any': ['error'],
-    '@typescript-eslint/explicit-member-accessibility': ['error', { accessibility: 'no-public' }],
-    '@typescript-eslint/switch-exhaustiveness-check': ['error', { requireDefaultForNonUnion: false }],
+    eqeqeq: 'error',
     'no-restricted-syntax': [
       'error',
       {
@@ -80,6 +72,24 @@ const config = {
         message: 'Use #private instead'
       }
     ],
+    'prefer-const': 'error',
+    'no-useless-catch': 'error',
+    'no-unreachable': 'error',
+    'no-useless-return': 'error',
+    'no-restricted-imports': ['error', { patterns: ['**/dist/**', '**/node_modules/**'] }],
+    'max-statements-per-line': ['error', { max: 1 }],
+    'max-lines': ['error', 1000],
+    'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
+    '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
+    '@typescript-eslint/no-confusing-void-expression': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T', argsIgnorePattern: '^_' }],
+    '@typescript-eslint/consistent-type-imports': ['error'],
+    '@typescript-eslint/no-floating-promises': ['error'],
+    '@typescript-eslint/no-explicit-any': ['error'],
+    '@typescript-eslint/explicit-member-accessibility': ['error', { accessibility: 'no-public' }],
+    '@typescript-eslint/switch-exhaustiveness-check': ['error', { requireDefaultForNonUnion: false }],
+    '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
+    '@typescript-eslint/only-throw-error': 'error',
     // prevent usage of overlapping/conflicting type annotations between jsdoc and TypeScript metadata
     'jsdoc/no-types': ['error'],
     'jsdoc/valid-types': ['error'],
@@ -114,7 +124,20 @@ const config = {
     '@typescript-eslint/use-unknown-in-catch-callback-variable': 'off',
     '@typescript-eslint/no-unnecessary-type-conversion': 'off',
     '@typescript-eslint/prefer-reduce-type-parameter': 'off',
-    '@typescript-eslint/no-unnecessary-type-parameters': 'off'
+    '@typescript-eslint/no-unnecessary-type-parameters': 'off',
+    '@typescript-eslint/prefer-readonly': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    'jsdoc/informative-docs': 'off',
+    'id-length': ['off', { min: 2, exceptions: ['_'] }],
+    'no-warning-comments': 'off',
+    'no-implicit-coercion': 'off',
+    'max-lines-per-function': ['off', 50],
+    'max-statements': ['off', 15],
+    'max-depth': ['off', 3],
+    'max-params': ['off', 4],
+    'max-nested-callbacks': ['off', 3],
+    'no-shadow': 'off',
+    'no-param-reassign': 'off'
   },
   settings: {
     jsdoc: {
@@ -163,17 +186,24 @@ export const browserTypescriptConfig = [
   {
     files: [...tests],
     rules: {
-      '@typescript-eslint/no-unused-expressions': 'off', // (chai's expect().to.exist uses this)
+      '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-deprecated': 'off',
+      'max-lines': 'off',
+      'max-lines-per-function': 'off',
+      'max-statements': 'off',
       'local-typescript/require-fixture-cleanup': ['error'],
       'local-typescript/require-element-stable': ['off'], // temporarily disabled, will enable in followup
-      'local-typescript/require-listener-cleanup': ['off'], // test fixtures routinely attach listeners without cleanup
-      'local-typescript/require-observer-cleanup': ['off'], // test fixtures routinely create observers without cleanup
-      'local-typescript/require-timer-cleanup': ['off'] // test fixtures routinely use timers without cleanup
+      'local-typescript/require-listener-cleanup': ['off'],
+      'local-typescript/require-observer-cleanup': ['off'],
+      'local-typescript/require-timer-cleanup': ['off']
     }
   },
   {
     files: ['**/*.examples.ts'],
     rules: {
+      'max-lines': 'off',
+      'max-lines-per-function': 'off',
+      'jsdoc/informative-docs': 'off',
       'local-typescript/example-metadata': ['error'],
       'local-typescript/example-naming': ['error'],
       'local-typescript/example-template-size': ['error'],
@@ -205,17 +235,22 @@ export const nodeTypescriptConfig = [
   {
     files: [...tests],
     rules: {
-      '@typescript-eslint/no-unused-expressions': 'off', // (chai's expect().to.exist uses this)
+      '@typescript-eslint/no-unused-expressions': 'off',
+      'max-lines': 'off',
+      'max-statements': 'off',
+      'max-lines-per-function': 'off',
       'local-typescript/require-fixture-cleanup': ['error'],
       'local-typescript/require-element-stable': ['off'], // temporarily disabled, will enable in followup
-      'local-typescript/require-listener-cleanup': ['off'], // test fixtures routinely attach listeners without cleanup
-      'local-typescript/require-observer-cleanup': ['off'], // test fixtures routinely create observers without cleanup
-      'local-typescript/require-timer-cleanup': ['off'] // test fixtures routinely use timers without cleanup
+      'local-typescript/require-listener-cleanup': ['off'],
+      'local-typescript/require-observer-cleanup': ['off'],
+      'local-typescript/require-timer-cleanup': ['off']
     }
   },
   {
     files: ['**/*.examples.ts'],
     rules: {
+      'max-lines': 'off',
+      'jsdoc/informative-docs': 'off',
       'local-typescript/example-metadata': ['error'],
       'local-typescript/example-naming': ['error'],
       'local-typescript/example-template-size': ['error'],

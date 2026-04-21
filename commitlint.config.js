@@ -1,6 +1,7 @@
 export default {
   extends: ['@commitlint/config-conventional'],
   rules: {
+    'signed-off-by': [2, 'always', 'Signed-off-by:'],
     'body-empty': [0, 'never'],
     'body-leading-blank': [2, 'always'],
     'body-max-line-length': [0, 'always'],
