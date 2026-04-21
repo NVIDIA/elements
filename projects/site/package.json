@@ -49,6 +49,7 @@
         "src",
         "!src/**/*.test.lighthouse.ts",
         "public",
+        "!public/llms.txt",
         "./eleventy.config.js"
       ],
       "dependencies": [

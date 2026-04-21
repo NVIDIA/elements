@@ -37,4 +37,4 @@ export { MAX_CONTEXT_CHARS, MAX_CONTEXT_TOKENS, isDebug } from './internal/utils
 
 // temporary exports
 export { getElementImports } from './internal/utils.js';
-export { prompts } from './context/index.js';
+export { prompts, skills } from './context/index.js';

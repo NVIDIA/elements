@@ -15,6 +15,7 @@ import {
   ELEMENTS_ASSETS_CDN_BASE_URL
 } from './src/_11ty/utils/env.js';
 import { searchPlugin } from './src/_11ty/plugins/search.js';
+import { llmsTxtPlugin } from './src/_11ty/plugins/llms-txt.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
@@ -165,6 +166,11 @@ export default function (eleventyConfig) {
     eleventyConfig.addPlugin(searchPlugin, {
       outputPath: './.11ty-vite/public/.pagefind'
     });
+  }
+
+  // https://llmstxt.org
+  if (process.env.ELEVENTY_RUN_MODE === 'build') {
+    eleventyConfig.addPlugin(llmsTxtPlugin);
   }
 
   // Set custom markdown library

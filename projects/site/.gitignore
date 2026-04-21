@@ -2,3 +2,6 @@ _site
 
 .screencast/.auth
 .screencast/dist
+
+# Generated at build time by the llms-txt plugin
+public/llms.txt
