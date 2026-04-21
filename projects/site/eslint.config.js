@@ -16,5 +16,13 @@ export default [
     rules: {
       '@nvidia-elements/lint/no-unstyled-typography': 'off'
     }
+  },
+  {
+    files: ['src/_internal/**/*.ts', 'src/_11ty/**/*.ts'],
+    rules: {
+      // internal demo/doc components and 11ty layout scripts are naturally long
+      'max-lines-per-function': 'off',
+      'max-statements': 'off'
+    }
   }
 ];
