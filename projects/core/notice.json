@@ -1,0 +1,31 @@
+{
+  "assets": {
+    "header": "This product includes SVG icons derived from the following third-party icon libraries:",
+    "entries": [
+      {
+        "name": "Fluent UI System Icons",
+        "url": "https://github.com/microsoft/fluentui-system-icons",
+        "license": "MIT",
+        "copyright": "Microsoft Corporation"
+      },
+      {
+        "name": "Heroicons",
+        "url": "https://github.com/tailwindlabs/heroicons",
+        "license": "MIT",
+        "copyright": "Tailwind Labs, Inc."
+      },
+      {
+        "name": "Lucide",
+        "url": "https://github.com/lucide-icons/lucide",
+        "license": "ISC",
+        "copyright": "Lucide Contributors"
+      },
+      {
+        "name": "Material Symbols",
+        "url": "https://github.com/google/material-design-icons",
+        "license": "Apache-2.0",
+        "copyright": "Google LLC"
+      }
+    ]
+  }
+}

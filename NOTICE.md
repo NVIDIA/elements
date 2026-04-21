@@ -32,7 +32,7 @@ This product includes the following bundled third-party software:
 - archiver v7.0.1 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Chris Talkington (http://christalkington.com/)
 
-- highlight.js v11.10.0 [BSD-3-Clause] (used by: @nvidia-elements/code)
+- highlight.js v11.11.1 [BSD-3-Clause] (used by: @nvidia-elements/code)
   Copyright: Josh Goebel <hello@joshgoebel.com>
 
 - lit v3.3.2 [BSD-3-Clause] (used by: @nvidia-elements/code, @nvidia-elements/core, @nvidia-elements/forms, @nvidia-elements/markdown, @nvidia-elements/media, @nvidia-elements/monaco)
@@ -127,7 +127,7 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
     "Contribution" shall mean any work of authorship, including
     the original version of the Work and any modifications or additions
     to that Work or Derivative Works thereof, that is intentionally
-    submitted to the Licensor for inclusion in the Work by the copyright owner
+    submitted to Licensor for inclusion in the Work by the copyright owner
     or by an individual or Legal Entity authorized to submit on behalf of
     the copyright owner. For the purposes of this definition, "submitted"
     means any form of electronic, verbal, or written communication sent
@@ -139,7 +139,7 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
     designated in writing by the copyright owner as "Not a Contribution."
 
     "Contributor" shall mean Licensor and any individual or Legal Entity
-    on behalf of whom a Contribution has been received by the Licensor and
+    on behalf of whom a Contribution has been received by Licensor and
     subsequently incorporated within the Work.
 
 2.  Grant of Copyright License. Subject to the terms and conditions of
@@ -185,7 +185,7 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
     (d) If the Work includes a "NOTICE" text file as part of its
     distribution, then any Derivative Works that You distribute must
     include a readable copy of the attribution notices contained
-    within such NOTICE file, excluding any notices that do not
+    within such NOTICE file, excluding those notices that do not
     pertain to any part of the Derivative Works, in at least one
     of the following places: within a NOTICE text file distributed
     as part of the Derivative Works; within the Source form or
@@ -255,6 +255,41 @@ TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 END OF TERMS AND CONDITIONS
 
 ==============================================================================
+BSD-3-Clause
+==============================================================================
+
+The following bundled components are provided under the BSD-3-Clause license:
+
+highlight.js v11.11.1 - Copyright Josh Goebel <hello@joshgoebel.com>
+lit v3.3.2 - Copyright Google LLC
+lit-html v3.3.2 - Copyright Google LLC
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+==============================================================================
 MIT
 ==============================================================================
 
@@ -295,39 +330,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-==============================================================================
-BSD-3-Clause
-==============================================================================
-
-The following bundled components are provided under the BSD-3-Clause license:
-
-highlight.js v11.10.0 - Copyright Josh Goebel <hello@joshgoebel.com>
-lit v3.3.2 - Copyright Google LLC
-lit-html v3.3.2 - Copyright Google LLC
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
-
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
-
-3. Neither the name of the copyright holder nor the names of its
-   contributors may be used to endorse or promote products derived from
-   this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-For license details, see: MIT: https://opensource.org/licenses/MIT, BSD-3-Clause: https://opensource.org/licenses/BSD-3-Clause, Apache-2.0: https://opensource.org/licenses/Apache-2.0
+For license details, see: Apache-2.0: https://opensource.org/licenses/Apache-2.0, BSD-3-Clause: https://opensource.org/licenses/BSD-3-Clause, MIT: https://opensource.org/licenses/MIT

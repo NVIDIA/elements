@@ -59,6 +59,7 @@
     "ci": {
       "script": "pnpm run format && pnpm run lint:vale",
       "dependencies": [
+        "notice",
         "./projects/code:ci",
         "./projects/cli:ci",
         "./projects/create:ci",
@@ -252,6 +253,21 @@
     },
     "lint:vale": {
       "command": "config/vale/bin/vale --config .vale.ini projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'"
+    },
+    "notice": {
+      "command": "node ./projects/internals/ci/notice/index.js",
+      "files": [
+        "./projects/internals/ci/notice/**/*.js",
+        "./pnpm-lock.yaml",
+        "./pnpm-workspace.yaml",
+        "./projects/*/package.json",
+        "./projects/*/notice.json"
+      ],
+      "output": [
+        "./NOTICE.md",
+        "./projects/*/NOTICE.md"
+      ],
+      "packageLocks": []
     },
     "playwright": {
       "command": "pnpm exec playwright install chromium --with-deps chromium"
