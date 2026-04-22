@@ -1,3 +1,13 @@
+## <small>1.71.4 (2026-04-22)</small>
+
+* fix(core): inline text wrap for page header ([c697298](https://github.com/NVIDIA/elements/commit/c697298))
+* fix(cli): correct attribute distill logic ([829b5fc](https://github.com/NVIDIA/elements/commit/829b5fc))
+* chore(ci): require dco sign-off hook ([c5fd822](https://github.com/NVIDIA/elements/commit/c5fd822))
+* chore(docs): add support for llms.txt ([5b9c98e](https://github.com/NVIDIA/elements/commit/5b9c98e))
+* chore(internals): add automated notice file script ([5d9db87](https://github.com/NVIDIA/elements/commit/5d9db87))
+* chore(internals): duplicate eslint rule ([5bf9e68](https://github.com/NVIDIA/elements/commit/5bf9e68))
+* chore(starters): fix 11ty vale issues ([34b33cd](https://github.com/NVIDIA/elements/commit/34b33cd))
+
 ## <small>1.71.3 (2026-04-21)</small>
 
 * chore(internals): add event listener lifecycle eslint rule ([576c048](https://github.com/NVIDIA/elements/commit/576c048))
