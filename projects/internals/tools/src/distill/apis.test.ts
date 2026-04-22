@@ -6,7 +6,8 @@ import {
   distillTokens,
   distillAttributeValues,
   distillSearchResult,
-  isComplexAttributeValue
+  isComplexAttributeValue,
+  type PartialAPIResult
 } from './apis.js';
 
 describe('distillElements', () => {
@@ -54,27 +55,32 @@ describe('distillElements', () => {
 
 describe('distillAttributes', () => {
   it('should keep attributes with description and example', () => {
-    const attributes = [
-      { name: 'nve-layout', description: 'Layout utility', example: '<div nve-layout>' }
-    ] as Attribute[];
+    const attributes = [{ name: 'nve-layout', description: 'Layout utility' }] as PartialAPIResult[];
 
     const result = distillAttributes(attributes);
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({ name: 'nve-layout', description: 'Layout utility', behavior: 'attribute' });
   });
 
-  it('should filter out attributes without example', () => {
-    const attributes = [{ name: 'nve-layout', description: 'Layout utility' }] as Attribute[];
-    expect(distillAttributes(attributes)).toEqual([]);
-  });
-
   it('should filter out attributes without description', () => {
-    const attributes = [{ name: 'nve-layout', example: '<div nve-layout>' }] as Attribute[];
+    const attributes = [{ name: 'nve-layout' }] as PartialAPIResult[];
     expect(distillAttributes(attributes)).toEqual([]);
   });
 
   it('should return empty array for empty input', () => {
     expect(distillAttributes([])).toEqual([]);
+  });
+
+  it('should only allow nve-text and nve-layout attributes due to context limitations', () => {
+    const attributes = [
+      { name: 'nve-text', description: 'Text utility' },
+      { name: 'nve-layout', description: 'Layout utility' },
+      { name: 'nve-color', description: 'Color utility' }
+    ] as PartialAPIResult[];
+    expect(distillAttributes(attributes)).toEqual([
+      { name: 'nve-text', description: 'Text utility', behavior: 'attribute' },
+      { name: 'nve-layout', description: 'Layout utility', behavior: 'attribute' }
+    ]);
   });
 });
 

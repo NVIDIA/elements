@@ -168,12 +168,12 @@ describe('getContextAPIs edge cases', () => {
     expect(result).toContain('`nve-layout` (attribute): Layout utility');
   });
 
-  it('should filter out attributes without example', () => {
+  it('should filter out attributes without description', () => {
     const metadata = {
       created: '2025-01-01',
       data: {
         elements: [],
-        attributes: [{ name: 'nve-layout', description: 'Layout utility' }],
+        attributes: [{ name: 'nve-layout' }],
         tokens: [],
         types: []
       }
