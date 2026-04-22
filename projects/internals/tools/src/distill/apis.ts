@@ -12,10 +12,12 @@ export function distillElements(elements: Element[]): PartialAPIResult[] {
     .map(e => ({ name: e.name, description: e.manifest!.description, behavior: e.manifest!.metadata?.behavior ?? '' }));
 }
 
-export function distillAttributes(attributes: Attribute[]): PartialAPIResult[] {
+export function distillAttributes(attributes: Pick<Attribute, 'name' | 'description'>[]): PartialAPIResult[] {
   return attributes
-    .filter(a => a.description && a.example)
-    .map(a => ({ name: a.name, description: a.description, behavior: 'attribute' }));
+    .filter(a => a.description && (a.name === 'nve-text' || a.name === 'nve-layout'))
+    .map(a => {
+      return { name: a.name, description: a.description, behavior: 'attribute' };
+    });
 }
 
 const complexTokenPatterns = [

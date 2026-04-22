@@ -20,11 +20,6 @@ This package serves two primary modes:
    - Enables AI-assisted development with Elements components
    - Integrates Elements knowledge directly into AI workflows
 
-- [Documentation](https://NVIDIA.github.io/elements/docs/cli/)
-- [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-- [GitLab Repo](https://github.com/NVIDIA/elements)
-- [Artifactory](https://registry.npmjs.org
-
 ## Getting Started
 
 To use the Elements CLI you must have [NodeJS](https://nodejs.org/) installed.
@@ -146,3 +141,10 @@ Skills provide persistent context to AI agents for building UI with Elements.
 | `project_create` | Create a new starter project. |
 | `project_validate` | Check project for configuration issues and dependencies. |
 | `project_setup` | Setup or update a project to use Elements. |
+
+## Links
+
+- [Documentation](https://NVIDIA.github.io/elements/docs/cli/)
+- [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
+- [GitLab Repo](https://github.com/NVIDIA/elements)
+- [Artifactory](https://registry.npmjs.org
