@@ -89,7 +89,7 @@ catalog:
   markdown-it: 14.1.1
   markdown-it-link-attributes: 4.0.1
   playwright: 1.59.1
-  postcss: 8.5.9
+  postcss: 8.5.10
   publint: 0.3.18
   react: 19.2.5
   react-dom: 19.2.5
