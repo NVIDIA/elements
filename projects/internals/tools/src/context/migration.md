@@ -21,10 +21,10 @@ Update to the latest versions of all Elements packages.
 
 ### Package Scope Migration
 
-If the project uses the legacy `@elements/elements` package, replace it with the new scoped packages:
+If the project uses the legacy `@maglev/elements` package, replace it with the new scoped packages:
 
 ```
-@elements/elements → @nvidia-elements/core + @nvidia-elements/themes + @nvidia-elements/styles
+@maglev/elements → @nvidia-elements/core + @nvidia-elements/themes + @nvidia-elements/styles
 ```
 
 ## Step 3: Install & Run Lint for Deprecation Detection
@@ -62,7 +62,7 @@ Apply fixes based on the following before→after mappings for each deprecation 
 
 ```css
 /* before */
-@import '@elements/elements/index.css';
+@import '@maglev/elements/index.css';
 /* or */ @import '@nvidia-elements/core/index.css';
 
 /* after */
@@ -75,19 +75,19 @@ Apply fixes based on the following before→after mappings for each deprecation 
 
 | Before                                       | After                                                      |
 | -------------------------------------------- | ---------------------------------------------------------- |
-| `@elements/elements/index.css`                 | Split into `@nvidia-elements/themes/*` + `@nvidia-elements/styles/*` imports above |
-| `@elements/elements/css/module.layout.css`     | `@nvidia-elements/styles/layout.css`                                   |
-| `@elements/elements/css/module.typography.css` | `@nvidia-elements/styles/typography.css`                               |
+| `@maglev/elements/index.css`                 | Split into `@nvidia-elements/themes/*` + `@nvidia-elements/styles/*` imports above |
+| `@maglev/elements/css/module.layout.css`     | `@nvidia-elements/styles/layout.css`                                   |
+| `@maglev/elements/css/module.typography.css` | `@nvidia-elements/styles/typography.css`                               |
 | `@nvidia-elements/core/index.css`                    | Split into `@nvidia-elements/themes/*` + `@nvidia-elements/styles/*` imports above |
 | `@nvidia-elements/core/css/module.layout.css`        | `@nvidia-elements/styles/layout.css`                                   |
 | `@nvidia-elements/core/css/module.typography.css`    | `@nvidia-elements/styles/typography.css`                               |
 
 ### CSS Variables
 
-Replace all `--nve-*` CSS custom properties with `--nve-*`:
+Replace all `--mlv-*` CSS custom properties with `--nve-*`:
 
 ```css
-/* before */ color: var(--nve-ref-color-brand-green-200);
+/* before */ color: var(--mlv-ref-color-brand-green-200);
 /* after  */ color: var(--nve-ref-color-brand-green-200);
 ```
 
@@ -95,16 +95,16 @@ Replace all `--nve-*` CSS custom properties with `--nve-*`:
 
 | Before       | After        |
 | ------------ | ------------ |
-| `nve-theme`  | `nve-theme`  |
-| `nve-layout` | `nve-layout` |
-| `nve-text`   | `nve-text`   |
+| `mlv-theme`  | `nve-theme`  |
+| `mlv-layout` | `nve-layout` |
+| `mlv-text`   | `nve-text`   |
 
 ### HTML Tags
 
-Replace all `nve-*` tag prefixes with `nve-*`, verify the tag is valid by using the `api_list` and `api_get` tools:
+Replace all `mlv-*` tag prefixes with `nve-*`, verify the tag is valid by using the `api_list` and `api_get` tools:
 
 ```html
-<!-- before --> <nve-button>...</nve-button>
+<!-- before --> <mlv-button>...</mlv-button>
 <!-- after  --> <nve-button>...</nve-button>
 ```
 
@@ -192,7 +192,7 @@ Use the `api_get` tool to look up the current slot API for these components.
 
 ```typescript
 // before
-import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@elements/elements/test';
+import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@maglev/elements/test';
 
 // after
 import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@nvidia-elements/testing';

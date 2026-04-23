@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { describe, expect, it } from 'vitest';
 import type { ProjectElement } from '@internals/metadata';
 import { getElementImports, getAvailableElementTags, wrapText } from './utils.js';
@@ -79,14 +82,14 @@ describe('getAvailableElementTags', () => {
       { name: 'nve-badge', manifest: { deprecated: 'true' } },
       { name: 'nve-input', manifest: {} }
     ] as ProjectElement[];
-    const tags = getAvailableElementTags(core);
+    const tags = getAvailableElementTags(elements);
     expect(tags).toEqual(['nve-button', 'nve-input']);
     expect(tags).not.toContain('nve-badge');
   });
 
   it('should handle elements without manifest', () => {
     const elements = [{ name: 'nve-button' }, { name: 'nve-input', manifest: {} }] as ProjectElement[];
-    const tags = getAvailableElementTags(core);
+    const tags = getAvailableElementTags(elements);
     expect(tags).toEqual(['nve-button', 'nve-input']);
   });
 });

@@ -1,9 +1,11 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 /* eslint-disable local-typescript/example-metadata */
 import { html } from 'lit';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/logo/define.js';
 import '@nvidia-elements/core/card/define.js';
-import '@nvidia-elements/core/app-header/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
 import '@nvidia-elements/core/icon/define.js';
 import '@nvidia-elements/core/button/define.js';

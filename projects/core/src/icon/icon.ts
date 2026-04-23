@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { PropertyValues } from 'lit';
 import { html, isServer, LitElement } from 'lit';
 import { unsafeSVG } from 'lit/directives/unsafe-svg.js';
@@ -9,7 +12,7 @@ import type { IconName, IconSVG } from './icons.js';
 import { ICON_IMPORTS } from './icons.js';
 import styles from './icon.css?inline';
 
-export type { IconName, IconNames, IconSVG } from './icons.js';
+export type { IconName, IconSVG } from './icons.js';
 
 declare global {
   var _NVE_SSR_ICON_REGISTRY: Record<string, string> | undefined;

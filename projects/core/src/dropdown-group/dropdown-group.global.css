@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 nve-dropdown-group > nve-dropdown + nve-dropdown {
   --nve-sys-layer-popover-offset: calc(var(--nve-ref-size-400) + 2px);
   margin-block-start: calc(var(--nve-ref-size-400) * -1);

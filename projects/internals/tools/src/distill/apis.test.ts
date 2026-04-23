@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { describe, expect, it } from 'vitest';
 import type { Attribute, Element, Token } from '@internals/metadata';
 import {
@@ -17,7 +20,7 @@ describe('distillElements', () => {
       { name: 'nve-deprecated', manifest: { description: 'deprecated', deprecated: 'true' } }
     ] as Element[];
 
-    const result = distillElements(core);
+    const result = distillElements(elements);
     expect(result).toHaveLength(1);
     expect(result[0].name).toBe('nve-button');
   });
@@ -28,7 +31,7 @@ describe('distillElements', () => {
       { name: 'nve-no-description', manifest: {} }
     ] as Element[];
 
-    const result = distillElements(core);
+    const result = distillElements(elements);
     expect(result).toHaveLength(1);
   });
 
@@ -37,14 +40,14 @@ describe('distillElements', () => {
       { name: 'nve-button', manifest: { description: 'button description', metadata: { behavior: 'button' } } }
     ] as Element[];
 
-    const result = distillElements(core);
+    const result = distillElements(elements);
     expect(result[0]).toEqual({ name: 'nve-button', description: 'button description', behavior: 'button' });
   });
 
   it('should default behavior to empty string', () => {
     const elements = [{ name: 'nve-badge', manifest: { description: 'badge description' } }] as Element[];
 
-    const result = distillElements(core);
+    const result = distillElements(elements);
     expect(result[0].behavior).toBe('');
   });
 

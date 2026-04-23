@@ -146,5 +146,5 @@ Skills provide persistent context to AI agents for building UI with Elements.
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/cli/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-- [GitLab Repo](https://github.com/NVIDIA/elements)
-- [Artifactory](https://registry.npmjs.org
+- [GitHub Repo](https://github.com/NVIDIA/elements)
+- [NPM](https://registry.npmjs.org

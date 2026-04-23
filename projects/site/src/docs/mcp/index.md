@@ -5,10 +5,6 @@
 }
 ---
 
-<nve-alert>
-  <nve-icon name="beaker" slot="icon" status="accent"></nve-icon> Labs projects are experimental packages available for early feedback.
-</nve-alert>
-
 # {{title}}
 
 <h2 nve-text="heading sm muted">The Elements MCP server connects AI coding assistants to the Elements design system. It gives tools like Claude Code, Cursor, and Codex direct access to component APIs, design tokens, template validation, and project scaffolding so your AI assistant can build with Elements effectively</h2>

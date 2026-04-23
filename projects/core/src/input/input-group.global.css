@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 nve-input-group[type='filter'] > nve-select::part(_caret),
 nve-input-group[type='filter'] > nve-select::part(_caret) {
   display: none !important;

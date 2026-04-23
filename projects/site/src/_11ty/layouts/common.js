@@ -39,9 +39,6 @@ export const renderBaseHead = data => /* html */ `
     @import '@nvidia-elements/themes/high-contrast.css';
     @import '@nvidia-elements/themes/compact.css';
     @import '@nvidia-elements/themes/debug.css';
-    @import '@nvidia-elements/themes/fonts/nvidia-sans.css';
-    @import '@nvidia-elements/brand/index.css';
-    @import '@nvidia-elements/brand/dark.css';
 
     nve-page:not(:defined) {
       visibility: visible !important;
@@ -94,16 +91,6 @@ export const renderBaseHead = data => /* html */ `
       white-space: nowrap;
     }
   </style>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-723T2ZTKVT" defer></script>
-  <script defer>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-723T2ZTKVT');
-    gtag('set', 'content_group', 'elements');
-  </script>
   <script type="module">
     const sidenavPanel = globalThis.document.querySelector('#sidenav-panel');
     if (sidenavPanel && globalThis.window.innerWidth < 920) {
@@ -116,8 +103,8 @@ export const renderBaseHead = data => /* html */ `
 export const renderDocsNav = data => /* html */ `
 <nve-tree id="docs-nav" data-pagefind-ignore="all" behavior-expand selectable="single">
   <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') || data.page.url === '/' ? 'expanded' : ''}>
-    <a href="docs/about/getting-started/">About</a>
-    <nve-tree-node ${data.page.url.includes('/docs/about/getting-started/') || data.page.url === '/' ? 'highlighted selected' : ''}><a href="docs/about/getting-started/">Getting Started</a></nve-tree-node>
+    <a href="./">About</a>
+    <nve-tree-node ${data.page.url.includes('/./') || data.page.url === '/' ? 'highlighted selected' : ''}><a href="./">Getting Started</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted selected' : ''}><a href="docs/changelog/">Changelog</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted selected' : ''}><a href="docs/metrics/">Metrics</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/support/') ? 'highlighted selected' : ''}><a href="docs/about/support/">Support</a></nve-tree-node>
@@ -125,7 +112,6 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/about/contributions/') ? 'highlighted selected' : ''}><a href="docs/about/contributions/">Contributions</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'highlighted selected' : ''}><a href="docs/about/requests/">Requests</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted selected' : ''}><a href="docs/about/migration/">Migration</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/deprecations/') ? 'highlighted selected' : ''}><a href="docs/about/deprecations/">Deprecations</a></nve-tree-node>
   </nve-tree-node>
   
   <nve-tree-node ${data.page.url.includes('/docs/integrations/') || data.page.url.includes('/starters/') || data.page.url.includes('/docs/cli/') || data.page.url.includes('/docs/mcp/') || data.page.url.includes('/docs/lint/') || data.page.url.includes('/docs/testing/') ? 'expanded' : ''}>
@@ -331,8 +317,6 @@ export const renderDocsNav = data => /* html */ `
       <nve-tree-node ${data.page.url.includes('/docs/labs/layout/responsive/patterns/') ? 'highlighted selected' : ''}><a href="docs/labs/layout/responsive/patterns/">Patterns</a></nve-tree-node>
     </nve-tree-node>
     <nve-tree-node ${data.page.url === '/docs/labs/forms/' ? 'highlighted selected' : ''}><a href="docs/labs/forms/" nve-layout="row align:vertical-center gap:xs">Forms <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/brand/' ? 'highlighted selected' : ''}><a href="docs/labs/brand/" nve-layout="row align:vertical-center gap:xs">Brand <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
-    <nve-tree-node ${data.page.url === '/docs/labs/behaviors-alpine/' ? 'highlighted selected' : ''}><a href="docs/labs/behaviors-alpine/" nve-layout="row align:vertical-center gap:xs">Behaviors Alpine <nve-icon name="beaker" size="sm"></nve-icon></a></nve-tree-node>
   </nve-tree-node>
 
   <nve-tree-node ${data.page.url.includes('/docs/api-design/') ? 'expanded' : ''} ${data.page.url === '/docs/api-design/' ? 'highlighted' : ''}>
@@ -408,11 +392,11 @@ export function renderBasePageHeader(data) {
 <nve-page-header slot="header">
   <nve-logo slot="prefix" color="brand-green" size="sm">NV</nve-logo>
   <a slot="prefix" href=".">Elements</a>
-  <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''} class="header-btn"><a href="docs/about/getting-started/">Catalog</a></nve-button>
+  <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''} class="header-btn"><a href="./">Catalog</a></nve-button>
   ${ELEMENTS_PLAYGROUND_BASE_URL ? /* html */ `<nve-button container="flat" class="header-btn"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>` : ''}
   <nve-button container="flat" ${data.page.url.includes('starters') ? 'selected' : ''} class="header-btn"><a href="starters/">Starters</a></nve-button>
   <nve-button container="flat" class="header-btn"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Repo</a></nve-button>
-  ${data.page.url !== '/' ? /* html */ `<nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>` : ''}
+  <nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>
   <nve-icon-button class="header-menu-btn" role="button" command="--toggle" commandfor="sidenav-panel" container="flat" slot="suffix" icon-name="menu" aria-label="menu"></nve-icon-button>
 </nve-page-header>
   `;

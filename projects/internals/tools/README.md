@@ -56,11 +56,11 @@ projects/internals/tools/src/
 
 #### **ProjectService** (`/project/service.ts`)
 - `create()` - Generate new starter projects (React, Angular, Vue, Lit, etc.)
-- `update()` - Update project dependencies to latest @nve versions
+- `update()` - Update project dependencies to latest @nvidia-elements versions
 - `health()` - Audit project for best practices and configuration issues
 
 #### **ChangelogsService** (`/changelogs/service.ts`)
-- `list()` - Get changelogs for all @nve packages
+- `list()` - Get changelogs for all @nvidia-elements packages
 - `search()` - Find changelogs for specific packages using fuzzy matching
 
 #### **TokensService** (`/tokens/service.ts`)

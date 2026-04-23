@@ -14,7 +14,6 @@
         "../starters/dist/**",
         "../internals/metadata/static/**",
         "index.js",
-        "_redirects",
         "robots.txt"
       ],
       "output": [
