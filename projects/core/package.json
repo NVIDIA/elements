@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/core",
-  "version": "1.71.4",
+  "version": "0.0.7",
   "release": {
     "extends": "../../release.config.js"
   },
