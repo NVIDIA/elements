@@ -2,7 +2,6 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
 @supports (position-anchor: --selected) {
-  mlv-button-group,
   nve-button-group {
     /* prettier-ignore */
     &:has(> :state(pressed)):not(:has(> :state(pressed) ~ :state(pressed)), :has(> [container]), :has(> [interaction])) {
@@ -36,9 +35,7 @@
         --indicator-border-radius: var(--nve-ref-border-radius-full);
       }
 
-      > mlv-button,
       > nve-button,
-      > mlv-icon-button,
       > nve-icon-button {
         &:state(pressed) {
           --background: transparent;

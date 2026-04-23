@@ -28,8 +28,7 @@
   --_icon-color: var(--icon-color);
 }
 
-::slotted(nve-alert),
-::slotted(mlv-alert) {
+::slotted(nve-alert) {
   --color: var(--_alert-color);
   --icon-color: var(--_icon-color);
   --icon-size: var(--nve-ref-size-400);
@@ -65,7 +64,6 @@
   --background: var(--nve-sys-support-danger-color);
 }
 
-:host([prominence='emphasis']) ::slotted(mlv-alert),
 :host([prominence='emphasis']) ::slotted(nve-alert) {
   --font-weight: var(--nve-ref-font-weight-regular);
 }

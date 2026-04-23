@@ -25,14 +25,12 @@
 }
 
 [nve-control],
-::slotted(nve-button),
-::slotted(mlv-button) {
+::slotted(nve-button) {
   --font-weight: var(--nve-ref-font-weight-medium);
   --border-radius: 0;
   --width: fit-content;
 }
 
-::slotted([mlv-control]),
 ::slotted([nve-control]) {
   --font-weight: var(--nve-ref-font-weight-medium);
   --border-radius: 0;

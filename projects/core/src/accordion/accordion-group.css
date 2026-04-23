@@ -24,7 +24,6 @@
   border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
 }
 
-:host([container='full']) ::slotted(mlv-accordion:not(:last-child)),
 :host([container='full']) ::slotted(nve-accordion:not(:last-child)) {
   border-bottom: var(--nve-ref-border-width-sm) solid var(--nve-ref-border-color-muted);
 }

@@ -24,8 +24,6 @@
   text-transform: var(--label-text-transform) !important;
 }
 
-:host([layout*='horizontal-inline']) ::slotted([mlv-control]),
-:host([layout*='vertical-inline']) ::slotted([mlv-control]),
 :host([layout*='horizontal-inline']) ::slotted([nve-control]),
 :host([layout*='vertical-inline']) ::slotted([nve-control]) {
   --control-height: var(--nve-sys-interaction-field-height);

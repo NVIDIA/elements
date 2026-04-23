@@ -5,14 +5,13 @@ import {
   getAttributeChanges,
   getAttributeListChanges,
   getElementUpdate,
-  matchesElementName,
-  tagSelector
+  matchesElementName
 } from '@nvidia-elements/core/internal';
 import type { ControlGroup } from '../control-group/control-group.js';
 import { ControlMessage } from '../control-message/control-message.js';
 import type { Control } from '../control/control.js';
 
-export const inputQuery = 'input, select, selectmenu, textarea, [mlv-control], [nve-control]';
+export const inputQuery = 'input, select, selectmenu, textarea, [nve-control]';
 
 /**
  * Adds validation states to custom element
@@ -72,7 +71,7 @@ export function setupControlValidationStates(control: Control, messages: Control
   }
 
   control.shadowRoot!.addEventListener('slotchange', () => {
-    const messages = Array.from(control.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)));
+    const messages = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
     control._internals.states.delete('valid');
     control._internals.states.delete('invalid');
     if (messages.find(m => !m.hidden && (m.status === 'error' || m.error))) {
@@ -169,7 +168,7 @@ export function setupControlStatusStates(control: Control | ControlGroup, messag
   );
 
   control.shadowRoot!.addEventListener('slotchange', () => {
-    const messages = Array.from(control.querySelectorAll<ControlMessage>(tagSelector(ControlMessage.metadata.tag)));
+    const messages = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
     const message = messages.find(m => m.status && !m.hidden);
     control._internals.states.delete('error');
     control._internals.states.delete('success');

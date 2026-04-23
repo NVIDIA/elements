@@ -6,7 +6,13 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { Size, SupportStatus } from '@nvidia-elements/core/internal';
-import { attachInternals, I18nController, scopedRegistry, statusIcons, useStyles } from '@nvidia-elements/core/internal';
+import {
+  attachInternals,
+  I18nController,
+  scopedRegistry,
+  statusIcons,
+  useStyles
+} from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './progress-ring.css?inline';
 

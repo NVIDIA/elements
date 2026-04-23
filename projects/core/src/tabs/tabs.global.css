@@ -1,7 +1,6 @@
 /* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
 /* SPDX-License-Identifier: Apache-2.0 */
 
-mlv-tabs,
 nve-tabs {
   --indicator-background: var(--nve-sys-accent-secondary-background);
   --indicator-height: var(--nve-ref-border-width-xl);
@@ -27,7 +26,6 @@ nve-tabs {
   }
 }
 
-mlv-tabs[vertical],
 nve-tabs[vertical] {
   &::after {
     width: var(--indicator-height);
@@ -37,7 +35,6 @@ nve-tabs[vertical] {
   }
 }
 
-mlv-tabs-item,
 nve-tabs-item {
   &[selected] {
     anchor-name: --selected;

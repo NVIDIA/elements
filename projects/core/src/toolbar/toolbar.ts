@@ -152,10 +152,10 @@ export class Toolbar extends LitElement implements ContainerElement {
   #updateOrientation() {
     const slottedElements = this.#slottedElements as (HTMLElement & { orientation: string })[];
     slottedElements
-      .filter(e => e.matches('nve-divider, mlv-divider'))
+      .filter(e => e.matches('nve-divider'))
       .forEach(divider => (divider.orientation = this.orientation === 'horizontal' ? 'vertical' : 'horizontal'));
     slottedElements
-      .filter(e => e.matches('nve-button-group, mlv-button-group'))
+      .filter(e => e.matches('nve-button-group'))
       .forEach(group => (group.orientation = this.orientation!));
   }
 }

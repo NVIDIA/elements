@@ -24,8 +24,6 @@
   align-items: center;
 }
 
-::slotted(mlv-button),
-::slotted(mlv-icon-button),
 ::slotted(nve-button),
 ::slotted(nve-icon-button) {
   --height: var(--nve-sys-interaction-field-height);
@@ -36,7 +34,6 @@
   --width: var(--nve-sys-interaction-field-height);
 }
 
-::slotted(mlv-divider),
 ::slotted(nve-divider) {
   margin-block-start: calc(-1 * var(--padding));
   height: calc(100% + var(--padding));
@@ -51,8 +48,6 @@
   --border-radius: var(--nve-ref-border-radius-full);
 }
 
-:host([container='rounded']:not(:state(split))) ::slotted(mlv-button),
-:host([container='rounded']:not(:state(split))) ::slotted(mlv-icon-button),
 :host([container='rounded']:not(:state(split))) ::slotted(nve-button),
 :host([container='rounded']:not(:state(split))) ::slotted(nve-icon-button) {
   --border-radius: var(--nve-ref-border-radius-full);
@@ -66,8 +61,6 @@
   flex-direction: column;
 }
 
-:host([interaction='emphasize']) ::slotted(mlv-divider), /* deprecated */
-:host([interaction='emphasis']) ::slotted(mlv-divider),
 :host([interaction='emphasis']) ::slotted(nve-divider) {
   --color: color-mix(
     in oklab,
@@ -76,7 +69,6 @@
   );
 }
 
-:host([interaction='destructive']) ::slotted(mlv-divider),
 :host([interaction='destructive']) ::slotted(nve-divider) {
   --color: color-mix(
     in oklab,
@@ -90,12 +82,10 @@
   --gap: 0;
 }
 
-:host(:state(split)) ::slotted(mlv-button),
 :host(:state(split)) ::slotted(nve-button) {
   --border-radius: var(--nve-ref-border-radius-none);
 }
 
-:host(:state(split)) ::slotted(mlv-icon-button),
 :host(:state(split)) ::slotted(nve-icon-button) {
   --border-radius: var(--nve-ref-border-radius-none);
 }

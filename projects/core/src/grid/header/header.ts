@@ -9,7 +9,6 @@ import {
   attachInternals,
   debounce,
   LogService,
-  tagSelector,
   audit,
   GlobalStateService
 } from '@nvidia-elements/core/internal';
@@ -45,7 +44,7 @@ export class GridHeader extends LitElement {
 
   /** @private */
   @queryAssignedElements({
-    selector: `${GridColumn.metadata.tag}, ${GridColumn.metadata.tag.replace('nve-', 'mlv-')}`,
+    selector: GridColumn.metadata.tag,
     flatten: true
   })
   columns!: GridColumn[];
@@ -107,9 +106,7 @@ export class GridHeader extends LitElement {
 
   #validateColumns() {
     if (GlobalStateService.state.env !== 'production') {
-      const cells = this.#grid
-        .querySelector(tagSelector(GridRow.metadata.tag))
-        ?.querySelectorAll(tagSelector(GridCell.metadata.tag));
+      const cells = this.#grid.querySelector(GridRow.metadata.tag)?.querySelectorAll(GridCell.metadata.tag);
       if (this.columns && cells && this.columns.length !== cells.length) {
         LogService.error(`grid-column (${this.columns.length}) and grid-cell (${cells.length}) count mismatch`);
       }

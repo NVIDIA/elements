@@ -52,7 +52,6 @@ slot[name='actions'] {
   font-weight: var(--nve-ref-font-weight-semibold);
 }
 
-::slotted(mlv-button[interaction='flat']),
 ::slotted(nve-button[interaction='flat']) {
   --color: inherit;
 }
@@ -83,8 +82,7 @@ nve-icon-button {
   margin-inline-start: auto;
 }
 
-::slotted([nve-text]),
-::slotted([mlv-text]) {
+::slotted([nve-text]) {
   color: inherit !important;
 }
 

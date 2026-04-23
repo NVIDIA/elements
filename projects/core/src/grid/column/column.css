@@ -37,25 +37,18 @@
   --padding: var(--nve-ref-size-300);
 }
 
-::slotted(mlv-sort-button),
-::slotted(mlv-icon-button),
 ::slotted(nve-sort-button),
 ::slotted(nve-icon-button) {
   margin-inline-start: auto;
 }
 
 @media (hover: hover) {
-  ::slotted(mlv-sort-button),
   ::slotted(nve-sort-button) {
     opacity: 0;
   }
 
-  ::slotted(mlv-sort-button[sort='ascending']),
-  ::slotted(mlv-sort-button[sort='descending']),
   ::slotted(nve-sort-button[sort='ascending']),
   ::slotted(nve-sort-button[sort='descending']),
-  :host(:focus-within) ::slotted(mlv-sort-button),
-  :host(:hover) ::slotted(mlv-sort-button),
   :host(:focus-within) ::slotted(nve-sort-button),
   :host(:hover) ::slotted(nve-sort-button) {
     opacity: 1;

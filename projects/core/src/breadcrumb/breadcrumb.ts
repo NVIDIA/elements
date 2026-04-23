@@ -101,11 +101,9 @@ export class Breadcrumb extends LitElement {
     if (e.target && (e.target as HTMLSlotElement).assignedElements().length) {
       this.#resetItems();
       const items = this.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])')!.assignedElements();
+      items.filter(i => i.matches('nve-button, nve-icon-button, span, a')).forEach(i => (i.slot = generateId()));
       items
-        .filter(i => i.matches('nve-button, nve-icon-button, mlv-button, mlv-icon-button, span, a'))
-        .forEach(i => (i.slot = generateId()));
-      items
-        .filter(i => i.matches('nve-button, nve-icon-button, mlv-button, mlv-icon-button'))
+        .filter(i => i.matches('nve-button, nve-icon-button'))
         .forEach((i: Element) => ((i as Button).container = 'inline'));
       this.breadcrumbItems = items.length ? items : this.breadcrumbItems;
     }

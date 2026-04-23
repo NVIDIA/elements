@@ -1,20 +1,15 @@
 /* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
 /* SPDX-License-Identifier: Apache-2.0 */
 
-mlv-input-group[type='filter'] > mlv-select::part(_caret),
 nve-input-group[type='filter'] > nve-select::part(_caret) {
   display: none !important;
 }
 
-mlv-input-group > [mlv-control],
-mlv-input-group > mlv-button,
 nve-input-group > [nve-control],
 nve-input-group > nve-button {
   --border-radius: 0;
 }
 
-mlv-input-group[type='filter'] [mlv-control]:nth-child(odd),
-mlv-input-group[type='filter'] mlv-button:nth-child(odd),
 nve-input-group[type='filter'] [nve-control]:nth-child(odd),
 nve-input-group[type='filter'] nve-button:nth-child(odd) {
   --font-weight: var(--nve-ref-font-weight-medium);

@@ -43,8 +43,7 @@
   text-align: left;
 }
 
-::slotted(nve-icon),
-::slotted(mlv-icon) {
+::slotted(nve-icon) {
   --color: var(--_icon-color);
 }
 
@@ -115,12 +114,10 @@
   position: absolute;
 }
 
-::slotted(*:not(a, mlv-icon)),
 ::slotted(*:not(a, nve-icon)) {
   pointer-events: none;
 }
 
-::slotted(mlv-divider),
 ::slotted(nve-divider) {
   margin: 0 calc(-1 * var(--padding));
 }

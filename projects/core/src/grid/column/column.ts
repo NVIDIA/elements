@@ -4,7 +4,7 @@
 import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, attachInternals, appendRootNodeStyle, tagSelector } from '@nvidia-elements/core/internal';
+import { useStyles, attachInternals, appendRootNodeStyle } from '@nvidia-elements/core/internal';
 import type { Grid } from '@nvidia-elements/core/grid';
 import styles from './column.css?inline';
 
@@ -140,7 +140,7 @@ export class GridColumn extends LitElement {
   }
 
   #buildFixedStyles() {
-    const columns = Array.from(this.parentElement!.querySelectorAll<GridColumn>(tagSelector(GridColumn.metadata.tag)));
+    const columns = Array.from(this.parentElement!.querySelectorAll<GridColumn>(GridColumn.metadata.tag));
     const rightColumns = columns.slice(columns.indexOf(this) + 1, columns.length);
     const position = this.getBoundingClientRect();
     const gridPosition = this.#grid.getBoundingClientRect();

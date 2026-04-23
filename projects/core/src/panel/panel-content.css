@@ -10,7 +10,6 @@
   contain: none;
 }
 
-::slotted(mlv-menu),
 ::slotted(nve-menu) {
   --width: 100%;
 }

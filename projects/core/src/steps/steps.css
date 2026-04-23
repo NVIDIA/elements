@@ -16,7 +16,6 @@
   flex-direction: column;
 }
 
-:host(:not([vertical])) ::slotted(mlv-steps-item:not(:last-child))::after,
 :host(:not([vertical])) ::slotted(nve-steps-item:not(:last-child))::after {
   content: '';
   position: absolute;
@@ -25,7 +24,6 @@
   border: var(--nve-ref-border-width-sm) dashed var(--nve-ref-border-color);
 }
 
-:host([vertical]) ::slotted(mlv-steps-item:not(:last-child))::after,
 :host([vertical]) ::slotted(nve-steps-item:not(:last-child))::after {
   content: '';
   position: absolute;
@@ -35,7 +33,6 @@
   border: var(--nve-ref-border-width-sm) dashed var(--nve-ref-border-color);
 }
 
-:host([vertical]:not([container='condensed'])) ::slotted(mlv-steps-item),
 :host([vertical]:not([container='condensed'])) ::slotted(nve-steps-item) {
   --width: 100%;
 }

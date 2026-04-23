@@ -1,78 +1,58 @@
 /* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
 /* SPDX-License-Identifier: Apache-2.0 */
 
-mlv-grid-row:has(mlv-grid-cell:first-child [nve-control] > input:checked) mlv-grid-cell,
 nve-grid-row:has(nve-grid-cell:first-child [nve-control] > input:checked) nve-grid-cell {
   --background: var(--nve-sys-interaction-highlighted-muted-background);
   --interaction-state-ratio: var(--nve-sys-interaction-state-ratio-selected);
 }
 
-mlv-grid:has(mlv-grid-cell:first-child mlv-radio),
-mlv-grid:has(mlv-grid-cell:first-child mlv-checkbox),
 nve-grid:has(nve-grid-cell:first-child nve-radio),
 nve-grid:has(nve-grid-cell:first-child nve-checkbox) {
   --grid-auto-columns: 36px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
 }
 
-mlv-grid[container='flat'] mlv-grid-header,
 nve-grid[container='flat'] nve-grid-header {
   --background: var(--nve-sys-layer-canvas-background);
 }
 
-mlv-card,
-mlv-panel,
-mlv-dialog,
-mlv-drawer,
-mlv-accordion,
 nve-card,
 nve-panel,
 nve-dialog,
 nve-drawer,
 nve-accordion {
-  mlv-grid[container='flat'],
   nve-grid[container='flat'] {
-    mlv-grid-header,
     nve-grid-header {
       --background: var(--nve-sys-layer-container-background);
     }
   }
 }
 
-mlv-grid-cell:has(> mlv-icon-button),
 nve-grid-cell:has(> nve-icon-button) {
   --padding: 0 var(--nve-ref-size-100);
 }
 
-mlv-grid-cell:has(> mlv-checkbox),
-mlv-grid-cell:has(> mlv-radio),
 nve-grid-cell:has(> nve-checkbox),
 nve-grid-cell:has(> nve-radio) {
   --padding: var(--nve-ref-size-200) var(--nve-ref-size-300);
 }
 
-mlv-grid:has(mlv-toolbar:not([hidden]))::part(_scrollbox),
 nve-grid:has(nve-toolbar:not([hidden]))::part(_scrollbox) {
   padding-block-end: var(--nve-ref-size-1000);
 }
 
-mlv-grid:has(mlv-toolbar:not([hidden])),
 nve-grid:has(nve-toolbar:not([hidden])) {
   contain: content;
 }
 
-mlv-grid-column > mlv-sort-button + mlv-icon-button,
 nve-grid-column > nve-sort-button + nve-icon-button {
   margin-inline-start: initial;
 }
 
-mlv-grid-cell:focus-within > a,
 nve-grid-cell:focus-within > a {
   box-shadow: 0 0 0 2px Highlight; /* programmatic focus does not trigger standard outline style */
 }
 
-mlv-grid,
 nve-grid {
-  &:has([scroller]) mlv-grid-header,
   &:has([scroller]) nve-grid-header {
     --padding: 0 16px 0 0;
   }

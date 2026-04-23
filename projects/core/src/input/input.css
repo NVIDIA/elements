@@ -55,13 +55,11 @@
 }
 
 nve-icon-button,
-::slotted(mlv-icon-button),
 ::slotted(nve-icon-button) {
   --height: var(--_icon-height);
   align-self: center;
 }
 
-::slotted(mlv-button:not([slot])),
 ::slotted(nve-button:not([slot])) {
   --font-size: var(--_font-size);
   --padding: 0 var(--nve-ref-size-200);
