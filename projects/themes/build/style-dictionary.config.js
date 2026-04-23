@@ -8,7 +8,7 @@ const baseReset = `
 html { box-sizing: border-box; }
 *, *:before, *:after { box-sizing: inherit; }
 
-html[nve-theme], html[mlv-theme], body[nve-theme], body[mlv-theme], [nve-theme~='root'], [mlv-theme~='root'] {
+html[nve-theme], body[nve-theme], [nve-theme~='root'] {
   color-scheme: var(--nve-sys-color-scheme) !important;
   background: var(--nve-sys-layer-canvas-background) !important;
   color: var(--nve-sys-layer-canvas-color) !important;
@@ -16,7 +16,7 @@ html[nve-theme], html[mlv-theme], body[nve-theme], body[mlv-theme], [nve-theme~=
   text-rendering: optimizeSpeed;
 }
 
-[nve-theme] body, [mlv-theme] body {
+[nve-theme] body {
   margin: 0;
 }
 
@@ -24,8 +24,7 @@ body:has([nve-popover]:popover-open) {
   overflow-x: hidden;
 }
 
-*:has([nve-popover]),
-*:has([mlv-popover]) {
+*:has([nve-popover]) {
   contain: initial;
 }`;
 
@@ -108,10 +107,7 @@ StyleDictionary.registerFormat({
     const experimental = dictionary.allTokens.find(t => t.name.includes('experimental'))
       ? '/*!\n * @experimental\n */'
       : '';
-    const selector =
-      options.theme !== 'index'
-        ? `[nve-theme*='${options.theme}'], [mlv-theme*='${options.theme}']`
-        : `:root, [nve-theme~='light'], [mlv-theme~='light']`; // todo
+    const selector = options.theme !== 'index' ? `[nve-theme*='${options.theme}']` : `:root, [nve-theme~='light']`;
     const config = dictionary.allTokens.filter(t => t.name.includes('config') && !t.name.includes('experimental'));
     const configString = `:root{${config.map(t => `--${t.name}: ${t.value}`).join(';\n')}}`;
     const formatted = formattedVariables({ format: 'css', dictionary, outputReferences: options.outputReferences })
@@ -129,7 +125,9 @@ StyleDictionary.registerFormat({
       })
       .join('\n');
 
-    const deprecated = options.theme.includes('brand') ? '/*!\n * @deprecated - use @nvidia-elements/brand instead\n */' : '';
+    const deprecated = options.theme.includes('brand')
+      ? '/*!\n * @deprecated - use @nvidia-elements/brand instead\n */'
+      : '';
     return `${deprecated}\n${experimental}\n${options.theme === 'index' ? `${baseReset}\n` : ''}${configString}${selector} {\n${formatted}\n}`;
   }
 });
