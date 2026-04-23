@@ -20,11 +20,14 @@ export const libraryVisualTestConfig = {
       'default',
       'junit',
       'json',
-      ['github-actions', {
-        jobSummary: {
-          enabled: false,
-        },
-      }]
+      [
+        'github-actions',
+        {
+          jobSummary: {
+            enabled: false
+          }
+        }
+      ]
     ],
     setupFiles: ['@internals/vite/setup/visual.js'],
     outputFile: {

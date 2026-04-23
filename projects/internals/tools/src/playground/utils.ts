@@ -201,7 +201,9 @@ function createIndexHTML(content: string, options: PlaygroundOptions) {
   // Check if this is from the layout or responsive examples file
   const isLayoutExample = options.name?.includes('@nvidia-elements/styles/layout.examples.json');
   const isResponsiveExample = options.name?.includes('@nvidia-elements/styles/responsive.examples.json');
-  const isResponsivePatternsExample = options.name?.includes('@nvidia-elements/styles/responsive-patterns.examples.json');
+  const isResponsivePatternsExample = options.name?.includes(
+    '@nvidia-elements/styles/responsive-patterns.examples.json'
+  );
 
   // Add link to styles CSS if needed
   const layoutExamplesStyles =

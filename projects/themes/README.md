@@ -5,17 +5,11 @@ Themes for the Elements design system, providing comprehensive color palettes, t
 - [Documentation](https://NVIDIA.github.io/elements/docs/foundations/themes/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [GitHub Repo](https://github.com/NVIDIA/elements)
-- [NPM](https://registry.npmjs.org
+- [npm](https://www.npmjs.com/package/@nvidia-elements/themes)
 
 ## Getting Started
 
 ```bash
-# local .npmrc file
-registry=https://registry.npmjs.org
-
-# https://registry.npmjs.org
-npm login
-
 npm install @nvidia-elements/themes
 ```
 

@@ -25,12 +25,6 @@ This package serves two primary modes:
 To use the Elements CLI you must have [NodeJS](https://nodejs.org/) installed.
 
 ```shell
-# local .npmrc file
-registry=https://registry.npmjs.org
-
-# https://registry.npmjs.org
-npm login
-
 npm install -g @nvidia-elements/cli
 
 nve
@@ -147,4 +141,4 @@ Skills provide persistent context to AI agents for building UI with Elements.
 - [Documentation](https://NVIDIA.github.io/elements/docs/cli/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [GitHub Repo](https://github.com/NVIDIA/elements)
-- [NPM](https://registry.npmjs.org
+- [npm](https://www.npmjs.com/package/@nvidia-elements/cli)

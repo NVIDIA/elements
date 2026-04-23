@@ -21,11 +21,14 @@ export default defineConfig({
     include: [resolve('./src/**/*.test.ts')],
     reporters: [
       'default',
-      ['github-actions', {
-        jobSummary: {
-          enabled: false,
-        },
-      }]
+      [
+        'github-actions',
+        {
+          jobSummary: {
+            enabled: false
+          }
+        }
+      ]
     ],
     server: {
       deps: {

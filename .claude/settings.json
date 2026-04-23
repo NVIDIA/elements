@@ -20,9 +20,7 @@
       "WebFetch(domain:code.claude.com)"
     ]
   },
-  "enabledMcpjsonServers": [
-    "elements"
-  ],
+  "enabledMcpjsonServers": ["elements"],
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": false
   },

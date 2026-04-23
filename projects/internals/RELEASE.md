@@ -35,7 +35,7 @@ packages:
   - 'projects/my-library'
 ```
 
-2. Create an initial tag on GitHub 
+2. Create an initial tag on GitHub
 
 ```
 @nvidia-elements/my-library-v0.0.0

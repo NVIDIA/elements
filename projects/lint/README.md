@@ -5,12 +5,6 @@ The `@nvidia-elements/lint` package is a utility library that provides Elements-
 ## Getting Started
 
 ```shell
-# local .npmrc file
-registry=https://registry.npmjs.org
-
-# https://registry.npmjs.org
-npm login
-
 npm install @nvidia-elements/lint
 ```
 
@@ -105,4 +99,4 @@ export default [
 - [Documentation](https://NVIDIA.github.io/elements/docs/lint/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [GitHub Repo](https://github.com/NVIDIA/elements)
-- [NPM](https://registry.npmjs.org
+- [npm](https://www.npmjs.com/package/@nvidia-elements/lint)

@@ -9,8 +9,18 @@ vi.mock('@internals/metadata', () => ({
   ProjectsService: {
     getData: vi.fn().mockResolvedValue({
       data: [
-        { name: '@nvidia-elements/core', version: '2.0.0', description: 'Core elements', readme: '# Elements\nReadme content' },
-        { name: '@nvidia-elements/themes', version: '1.5.0', description: 'Theme tokens', readme: '# Themes\nTheme readme' }
+        {
+          name: '@nvidia-elements/core',
+          version: '2.0.0',
+          description: 'Core elements',
+          readme: '# Elements\nReadme content'
+        },
+        {
+          name: '@nvidia-elements/themes',
+          version: '1.5.0',
+          description: 'Theme tokens',
+          readme: '# Themes\nTheme readme'
+        }
       ]
     })
   }

@@ -11,7 +11,7 @@ This guide covers migrating from the internal `@nve/*` packages to the new open 
 
 ## Overview
 
-The Elements Design System is now hosted and developed in a public GitHub repository. Packages are now published to the public npm registry under the `@nvidia-elements` scope. The component APIs, tag names, and theming system remain the same — the primary changes are package names, import paths, and registry configuration.
+The Elements Design System is now hosted and developed in a public GitHub repository. Packages are now published to the public npm registry under the `@nvidia-elements` scope. The component APIs, tag names, and theming system remain the same. The primary changes are package names, import paths, and registry configuration.
 
 ## Package Name Changes
 
@@ -35,7 +35,7 @@ Note: `@nve/elements` is now `@nvidia-elements/core`, not `@nvidia-elements/elem
 
 ### 1. Update Registry Configuration
 
-The `@nvidia-elements` packages are on the public npm registry and require no special registry configuration. Internal teams should continue to use Artifactory regardless of which package scope — Artifactory proxies the public npm registry automatically.
+The `@nvidia-elements` packages are on the public npm registry and require no special registry configuration. Internal teams should continue to use Artifactory regardless of which package scope. Artifactory proxies the public npm registry automatically.
 
 ### 2. Update Dependencies
 
@@ -52,7 +52,7 @@ In your `package.json`, replace the old scope names with the new ones:
   }
 ```
 
-The `0.x` versions of the new packages contain the same non-deprecated components as the latest internal releases. Version numbers were reset as part of the migration to public npm. A re-release of a stable 1.0 will occur at future release.
+The `0.x` versions of the new packages contain the same non-deprecated components as the latest internal releases. Version numbers reset as part of the migration to public npm. A stable 1.0 release follows later.
 
 ### 3. Update Source Imports
 
@@ -91,21 +91,21 @@ pnpm run test
 
 ## API Changes
 
-The following internal-only or deprecated pre-1.0 Maglev APIs have been removed from `@nvidia-elements/core` and are not available in the public packages:
+`@nvidia-elements/core` no longer includes the following internal-only or deprecated pre-1.0 Maglev APIs, and the public packages omit them:
 
-| API                      | Change                                         |
-| ----------------------------------- | ---------------------------------------------- |
-| `@nvidia-elements/core/app-header`  | (pre-maglev) replaced by `@nvidia-elements/core/page-header` |
-| `@nvidia-elements/core/css/*`       | (pre-maglev) replaced by `@nvidia-elements/styles`          |
-| `@nvidia-elements/core/index.css`   | (pre-maglev) replaced by `@nvidia-elements/styles`          |
-| `@nvidia-elements/core/logo` | The NVIDIA svg logo is no longer provided by the logo component and a svg must be slotted/provided |
+| API                                | Change                                                                                                                               |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `@nvidia-elements/core/app-header` | (pre-maglev) replaced by `@nvidia-elements/core/page-header`                                                                         |
+| `@nvidia-elements/core/css/*`      | (pre-maglev) replaced by `@nvidia-elements/styles`                                                                                   |
+| `@nvidia-elements/core/index.css`  | (pre-maglev) replaced by `@nvidia-elements/styles`                                                                                   |
+| `@nvidia-elements/core/logo`       | The logo component no longer includes the NVIDIA SVG logo; consumers must provide their own SVG as child content in the default slot |
 
 All prior Maglev based conventions and prefixes are now removed.
 
 ## What Stays the Same
 
 - **Component tag prefix**: All components continue to use the `nve-` prefix (`<nve-button>`, `<nve-dialog>`, etc.)
-- **CSS custom properties**: Theme tokens and component CSS custom properties are unchanged (`--nve-*`)
+- **CSS custom properties**: Theme tokens and component CSS custom properties keep the same names (`--nve-*`)
 - **Component APIs**: Properties, attributes, events, slots, and CSS parts remain the same
 - **Theme files**: Same theme names and token structure
 
@@ -125,7 +125,7 @@ The custom test utilities are now deprecated.
 
 #### Scoped Tags <nve-badge status="warning">deprecated</nve-badge>
 
-The `@nve/elements/scoped` is deprecated. Instead, consuming applications define their own tag name and leverage the `@lit-labs/scoped-registry-mixin` package directly.
+Avoid `@nve/elements/scoped`. Instead, consuming applications define their own tag name and leverage the `@lit-labs/scoped-registry-mixin` package directly.
 
 #### Popover Behavior Triggers <nve-badge status="warning">deprecated</nve-badge>
 

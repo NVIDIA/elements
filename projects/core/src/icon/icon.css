@@ -90,4 +90,3 @@ svg {
 :host([status='accent']) {
   --color: var(--nve-sys-support-accent-color);
 }
-

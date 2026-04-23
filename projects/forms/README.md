@@ -5,17 +5,11 @@ Form control utilities providing mixins, validation, and schema support for cust
 - [Documentation](https://NVIDIA.github.io/elements/docs/elements/forms/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [GitHub Repo](https://github.com/NVIDIA/elements)
-- [NPM](https://registry.npmjs.org
+- [npm](https://www.npmjs.com/package/@nvidia-elements/forms)
 
 ## Getting Started
 
 ```bash
-# local .npmrc file
-registry=https://registry.npmjs.org
-
-# https://registry.npmjs.org
-npm login
-
 npm install @nvidia-elements/forms
 ```
 

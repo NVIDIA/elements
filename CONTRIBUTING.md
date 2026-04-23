@@ -7,12 +7,14 @@ All contributions to this project must adhere to the requirements of the [Develo
 We require that all contributors sign-off on their commits. This certifies that the contribution is your original work, or you have rights to submit it under the same license, or a compatible license. Any contribution which contains commits that do not have the Signed-off-by trailer will not be accepted.
 
 To sign off on a commit you must use the `--signoff` (or `-s`) option when committing your change:
-``` shell
+
+```shell
 git commit -s -m "feat: Add some feature."
 ```
 
 This will append the following trailer to your commit message:
-``` text
+
+```text
 Signed-off-by: Your Name <yourname@example.com>
 ```
 

@@ -9,7 +9,6 @@ if (customElements.get(Icon.metadata.tag)) {
   mergeIcons(customElements.get(Icon.metadata.tag) as typeof Icon);
 }
 
-
 declare global {
   interface HTMLElementTagNameMap {
     'nve-icon': Icon;
