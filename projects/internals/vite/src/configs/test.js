@@ -57,7 +57,16 @@ export const libraryTestConfig = {
         external: ['**/node_modules/**']
       }
     },
-    reporters: ['default', 'junit', 'json'],
+    reporters: [
+      'default',
+      'junit',
+      'json',
+      ['github-actions', {
+        jobSummary: {
+          enabled: false,
+        },
+      }]
+    ],
     outputFile: {
       junit: './coverage/unit/junit.xml',
       json: './coverage/unit/summary.json'

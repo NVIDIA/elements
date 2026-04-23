@@ -4,8 +4,8 @@ Themes for the Elements design system, providing comprehensive color palettes, t
 
 - [Documentation](https://NVIDIA.github.io/elements/docs/foundations/themes/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
-- [GitLab Repo](https://github.com/NVIDIA/elements)
-- [Artifactory](https://registry.npmjs.org
+- [GitHub Repo](https://github.com/NVIDIA/elements)
+- [NPM](https://registry.npmjs.org
 
 ## Getting Started
 

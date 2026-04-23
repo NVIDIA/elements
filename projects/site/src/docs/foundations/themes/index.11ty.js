@@ -30,7 +30,6 @@ Themes can be independently loaded as needed to reduce the size of the initial b
   If your application cannot access root nodes like html or body then apply nve-theme="root" to set the root background colors and fonts.
 </nve-alert>
 
-
 ## Autodetect Preferences
 
 Themes can be applied dynamically based on user preferences.
@@ -89,8 +88,6 @@ The \`brand\` theme is a set of themes that are designed to be used with the \`@
 [Learn more](docs/labs/brand/).
 
 \`\`\`css
-@import '@nvidia-elements/brand/index.css';
-@import '@nvidia-elements/brand/dark.css';
 \`\`\`
 
 ${getThemeDemo('brand-dark')}

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import type { CSSResult } from 'lit';
 import { typeSSR, useStyles, audit } from '@nvidia-elements/core/internal';
 import { ControlGroup } from '@nvidia-elements/core/forms';

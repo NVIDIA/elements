@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { beforeEach, describe, expect, it } from 'vitest';
 import { RuleTester } from 'eslint';
 import json from '@eslint/json';
@@ -23,7 +26,7 @@ describe('noUnexpectedLibraryDependencies', () => {
     expect(noUnexpectedLibraryDependencies.meta.type).toBe('problem');
     expect(noUnexpectedLibraryDependencies.meta.docs).toBeDefined();
     expect(noUnexpectedLibraryDependencies.meta.docs.description).toBe(
-      'Disallow incorrect dependency usage of @nve packages in consuming libraries.'
+      'Disallow incorrect dependency usage of @nvidia-elements packages in consuming libraries.'
     );
     expect(noUnexpectedLibraryDependencies.meta.docs.recommended).toBe(true);
     expect(noUnexpectedLibraryDependencies.meta.docs.url).toContain('/docs/lint/');

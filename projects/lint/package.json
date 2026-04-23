@@ -183,5 +183,9 @@
         "../internals/eslint:ci"
       ]
     }
-  }
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "license": "Apache-2.0"
 }

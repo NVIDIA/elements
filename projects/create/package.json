@@ -4,7 +4,7 @@
   "release": {
     "extends": "../../release.config.js"
   },
-  "description": "Create new Elements projects with 'npm create @nve'. A thin wrapper that delegates to @nvidia-elements/cli for project scaffolding.",
+  "description": "Create new Elements projects with 'npm create @nvidia-elements'. A thin wrapper that delegates to @nvidia-elements/cli for project scaffolding.",
   "type": "module",
   "repository": {
     "type": "git",
@@ -97,5 +97,9 @@
         "../internals/eslint:ci"
       ]
     }
-  }
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "license": "Apache-2.0"
 }

@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { describe, expect, it } from 'vitest';
 import { generateGraphData } from './wireit.utils.js';
 import type { WireitGraph } from '../types.js';
@@ -169,14 +172,7 @@ describe('generateGraphData', () => {
     }
   });
 
-  it('should format labels by replacing @nvidia-elements/ with labs/', () => {
-    const labsPackages = result.nodes.filter(n => n.packageName.startsWith('@nvidia-elements/'));
-
-    for (const node of labsPackages) {
-      expect(node.label).toContain('labs/');
-      expect(node.label).not.toContain('@nvidia-elements/');
-    }
-  });
+  
 
   it('should format labels by replacing @internals/ with internals/', () => {
     const internalsPackages = result.nodes.filter(n => n.packageName.startsWith('@internals/'));

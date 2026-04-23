@@ -9,15 +9,15 @@ const dist = join(__dirname, 'dist');
 const nodeModules = join(__dirname, 'node_modules');
 
 async function build() {
-  await mkdir(join(dist, 'node_modules', '@nve'), { recursive: true });
+  await mkdir(join(dist, 'node_modules', '@nvidia-elements'), { recursive: true });
   await cp(join(__dirname, 'src', 'index.html'), join(dist, 'index.html'));
 
   for (const pkg of ['lit', 'lit-html', 'lit-element', '@lit/reactive-element']) {
     await cp(join(nodeModules, pkg), join(dist, 'node_modules', pkg), { recursive: true, dereference: true });
   }
 
-  for (const pkg of ['elements', 'styles', 'themes']) {
-    await cp(join(nodeModules, '@nve', pkg, 'dist'), join(dist, 'node_modules', '@nve', pkg, 'dist'), {
+  for (const pkg of ['core', 'styles', 'themes']) {
+    await cp(join(nodeModules, '@nvidia-elements', pkg, 'dist'), join(dist, 'node_modules', '@nvidia-elements', pkg, 'dist'), {
       recursive: true,
       dereference: true
     });

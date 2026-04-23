@@ -64,7 +64,6 @@
     "./data.html.json": "./dist/data.html.json",
     "./data.snippets.json": "./dist/data.snippets.json",
     "./*.examples.json": "./dist/*.examples.json",
-    "./css/*": "./dist/css/*",
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
@@ -73,7 +72,6 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./index.css": "./dist/index.css",
     "./polyfills": {
       "types": "./dist/polyfills/index.d.ts",
       "default": "./dist/polyfills/index.js"
@@ -118,18 +116,6 @@
     "./alert/define.js": {
       "types": "./dist/alert/define.d.ts",
       "default": "./dist/alert/define.js"
-    },
-    "./app-header": {
-      "types": "./dist/app-header/index.d.ts",
-      "default": "./dist/app-header/index.js"
-    },
-    "./app-header/index.js": {
-      "types": "./dist/app-header/index.d.ts",
-      "default": "./dist/app-header/index.js"
-    },
-    "./app-header/define.js": {
-      "types": "./dist/app-header/define.d.ts",
-      "default": "./dist/app-header/define.js"
     },
     "./avatar": {
       "types": "./dist/avatar/index.d.ts",
@@ -471,18 +457,6 @@
       "types": "./dist/input/define.d.ts",
       "default": "./dist/input/define.js"
     },
-    "./json-viewer": {
-      "types": "./dist/json-viewer/index.d.ts",
-      "default": "./dist/json-viewer/index.js"
-    },
-    "./json-viewer/index.js": {
-      "types": "./dist/json-viewer/index.d.ts",
-      "default": "./dist/json-viewer/index.js"
-    },
-    "./json-viewer/define.js": {
-      "types": "./dist/json-viewer/define.d.ts",
-      "default": "./dist/json-viewer/define.js"
-    },
     "./logo": {
       "types": "./dist/logo/index.d.ts",
       "default": "./dist/logo/index.js"
@@ -686,14 +660,6 @@
     "./resize-handle/define.js": {
       "types": "./dist/resize-handle/define.d.ts",
       "default": "./dist/resize-handle/define.js"
-    },
-    "./scoped": {
-      "types": "./dist/scoped/index.d.ts",
-      "default": "./dist/scoped/index.js"
-    },
-    "./scoped/index.js": {
-      "types": "./dist/scoped/index.d.ts",
-      "default": "./dist/scoped/index.js"
     },
     "./search": {
       "types": "./dist/search/index.d.ts",
@@ -1269,5 +1235,9 @@
       ],
       "output": []
     }
-  }
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "license": "Apache-2.0"
 }

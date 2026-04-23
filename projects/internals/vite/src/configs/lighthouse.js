@@ -14,7 +14,16 @@ export const libraryLighthouseTestConfig = {
         return false;
       }
     },
-    reporters: ['default', 'junit', 'json'],
+    reporters: [
+      'default',
+      'junit',
+      'json',
+      ['github-actions', {
+        jobSummary: {
+          enabled: false,
+        },
+      }]
+    ],
     globalSetup: ['@internals/vite/setup/lighthouse.js'],
     outputFile: {
       json: './coverage/lighthouse/summary.json',

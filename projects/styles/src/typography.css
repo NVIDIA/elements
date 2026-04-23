@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. */
+/* SPDX-License-Identifier: Apache-2.0 */
+
 [nve-text~='display'],
 [nve-text~='heading'],
 [nve-text~='body'],
@@ -128,19 +131,6 @@ body[nve-text],
   }
 }
 
-/* @deprecated */
-[nve-text~='eyebrow'] {
-  font-size: var(--nve-ref-font-size-100) !important;
-  font-weight: var(--nve-ref-font-weight-semibold) !important;
-
-  &[nve-text~='xl'] {
-    font-size: var(--nve-ref-font-size-300) !important;
-  }
-
-  &[nve-text~='lg'] {
-    font-size: var(--nve-ref-font-size-200) !important;
-  }
-}
 
 [nve-text~='list'] {
   margin: 0 !important;

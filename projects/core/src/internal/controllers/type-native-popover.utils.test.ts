@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { beforeEach, afterEach, vi, describe, expect, it } from 'vitest';
 import { associateAnchor, getHostAnchor, getHostTrigger, hasOpenPopover } from './type-native-popover.utils.js';
 import { LogService } from '../services/log.service.js';

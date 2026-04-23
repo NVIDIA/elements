@@ -14,7 +14,16 @@ export const libraryLitSSRTestConfig = {
     bail: 2,
     isolate: false,
     fileParallelism: false,
-    reporters: ['default', 'junit', 'json'],
+    reporters: [
+      'default',
+      'junit',
+      'json',
+      ['github-actions', {
+        jobSummary: {
+          enabled: false,
+        },
+      }]
+    ],
     outputFile: {
       json: './coverage/ssr/summary.json',
       junit: './coverage/ssr/junit.xml'

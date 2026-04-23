@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { EventEmitter } from 'node:events';
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest';
 

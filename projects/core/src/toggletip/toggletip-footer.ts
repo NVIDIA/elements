@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 import { html, LitElement } from 'lit';
 import { audit, useStyles } from '@nvidia-elements/core/internal';
 import styles from './toggletip-footer.css?inline';

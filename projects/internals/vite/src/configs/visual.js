@@ -16,7 +16,16 @@ export const libraryVisualTestConfig = {
     fileParallelism: false,
     maxWorkers: process.env.CI ? 1 : undefined,
     maxConcurrency: process.env.CI ? 1 : undefined,
-    reporters: ['default', 'junit', 'json'],
+    reporters: [
+      'default',
+      'junit',
+      'json',
+      ['github-actions', {
+        jobSummary: {
+          enabled: false,
+        },
+      }]
+    ],
     setupFiles: ['@internals/vite/setup/visual.js'],
     outputFile: {
       json: './coverage/visual/summary.json',

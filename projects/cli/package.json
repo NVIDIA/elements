@@ -16,9 +16,10 @@
     "nve-mcp": "./dist/mcp/index.js"
   },
   "files": [
+    "LICENSE",
+    "NOTICE.md",
     "README.md",
     "CHANGELOG.md",
-    "NOTICE.md",
     "package.json",
     "dist/**/manifest.json",
     "dist/**/*.d.ts",
@@ -199,5 +200,9 @@
         "NODE_ENV": "production"
       }
     }
-  }
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "license": "Apache-2.0"
 }

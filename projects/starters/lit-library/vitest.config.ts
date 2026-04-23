@@ -19,6 +19,14 @@ export default defineConfig({
   test: {
     root: resolve('.'),
     include: [resolve('./src/**/*.test.ts')],
+    reporters: [
+      'default',
+      ['github-actions', {
+        jobSummary: {
+          enabled: false,
+        },
+      }]
+    ],
     server: {
       deps: {
         external: ['**/node_modules/**']
