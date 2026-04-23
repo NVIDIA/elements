@@ -60,8 +60,7 @@ nve-icon-button::part(icon) {
   --color: var(--status-color);
 }
 
-::slotted([nve-text]),
-::slotted([mlv-text]) {
+::slotted([nve-text]) {
   color: inherit !important;
 }
 

@@ -143,13 +143,13 @@ export class Steps extends LitElement {
     };
   }
 
-  @queryAssignedElements({ selector: 'nve-steps-item, mlv-steps-item' }) private steps!: StepsItem[];
+  @queryAssignedElements({ selector: 'nve-steps-item' }) private steps!: StepsItem[];
 
   /** @private */
   declare _internals: ElementInternals;
 
   #selectTab(stepsItem: HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean }) {
-    if (!this.behaviorSelect || !stepsItem.matches('nve-steps-item, mlv-steps-item') || stepsItem.disabled) {
+    if (!this.behaviorSelect || !stepsItem.matches('nve-steps-item') || stepsItem.disabled) {
       return;
     }
 

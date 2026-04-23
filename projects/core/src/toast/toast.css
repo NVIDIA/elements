@@ -74,16 +74,12 @@ nve-icon-button {
   inset-inline-end: var(--nve-ref-size-50);
 }
 
-::slotted(mlv-button[interaction='flat']), /* deprecated */
-::slotted(mlv-button[container='flat']), /* deprecated */
-::slotted(mlv-button[container='inline']), /* deprecated */
 ::slotted(nve-button[container='flat']),
 ::slotted(nve-button[container='inline']) {
   --color: inherit;
   margin-inline: calc(var(--_gap) * 2) calc(var(--_gap) / -2);
 }
 
-::slotted([nve-text]),
-::slotted([mlv-text]) {
+::slotted([nve-text]) {
   color: inherit !important;
 }

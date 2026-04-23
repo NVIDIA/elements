@@ -35,7 +35,6 @@ li {
   height: var(--_height);
 }
 
-::slotted(mlv-button),
 ::slotted(nve-button) {
   --border-radius: calc(var(--nve-ref-border-radius-xs) / 2);
   --font-size: var(--_font-size);
@@ -48,7 +47,6 @@ li {
   --_border-bottom-width: 85%;
 }
 
-::slotted(mlv-icon-button),
 ::slotted(nve-icon-button) {
   --border-radius: calc(var(--nve-ref-border-radius-xs) / 2);
   --icon-width: var(--nve-ref-size-300);

@@ -72,7 +72,6 @@
   position: absolute;
 }
 
-:host([mlv-control]),
 :host([nve-control]) {
   --text-align: start;
   --border-radius: var(--nve-ref-border-radius-sm);
@@ -80,18 +79,15 @@
   --padding: 0 var(--nve-ref-size-200);
 }
 
-:host([mlv-control]) [internal-host],
 :host([nve-control]) [internal-host] {
   justify-content: start;
 }
 
-:host([mlv-control]) ::slotted([name='chevron-down']),
 :host([nve-control]) ::slotted([name='chevron-down']) {
   --color: var(--nve-sys-text-muted-color);
   margin-inline: auto 0;
 }
 
-:host([mlv-control]:hover) [interaction-state],
 :host([nve-control]:hover) [interaction-state] {
   --nve-sys-interaction-state-ratio: 0;
 }

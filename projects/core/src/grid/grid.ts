@@ -10,7 +10,6 @@ import {
   attachInternals,
   appendRootNodeStyle,
   generateId,
-  tagSelector,
   audit
 } from '@nvidia-elements/core/internal';
 import { GridPlaceholder } from './placeholder/placeholder.js';
@@ -71,19 +70,19 @@ export class Grid extends LitElement implements ContainerElement {
   }
 
   get #rows() {
-    return Array.from(this.querySelectorAll<GridRow>(tagSelector(GridRow.metadata.tag)));
+    return Array.from(this.querySelectorAll<GridRow>(GridRow.metadata.tag));
   }
 
   get #header() {
-    return this.querySelector<GridHeader>(tagSelector(GridHeader.metadata.tag));
+    return this.querySelector<GridHeader>(GridHeader.metadata.tag);
   }
 
   get #columns() {
-    return Array.from(this.querySelectorAll<GridColumn>(tagSelector(GridColumn.metadata.tag)));
+    return Array.from(this.querySelectorAll<GridColumn>(GridColumn.metadata.tag));
   }
 
   get #cells() {
-    return Array.from(this.querySelectorAll<GridCell>(tagSelector(GridCell.metadata.tag)));
+    return Array.from(this.querySelectorAll<GridCell>(GridCell.metadata.tag));
   }
 
   /** @private */

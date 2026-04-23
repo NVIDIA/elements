@@ -23,7 +23,6 @@
   flex: 1;
 }
 
-::slotted(mlv-menu),
 ::slotted(nve-menu) {
   --width: 100%;
 }

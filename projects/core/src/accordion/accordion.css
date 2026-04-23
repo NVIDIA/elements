@@ -68,7 +68,6 @@
   --cursor: not-allowed;
 }
 
-:host([disabled]) ::slotted(mlv-accordion-header),
 :host([disabled]) ::slotted(nve-accordion-header) {
   --cursor: not-allowed;
 }

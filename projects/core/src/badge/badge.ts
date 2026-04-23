@@ -125,7 +125,7 @@ export class Badge extends LitElement {
   #assignDefaultIcon() {
     const unassignedIcon = this.shadowRoot!.querySelector<HTMLSlotElement>('slot:not([name])')!
       .assignedElements()
-      .find(i => i.matches('nve-icon, mlv-icon') && !i.slot);
+      .find(i => i.matches('nve-icon') && !i.slot);
     if (unassignedIcon) {
       unassignedIcon.slot = 'prefix-icon';
     }

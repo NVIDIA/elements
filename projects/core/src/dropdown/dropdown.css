@@ -80,12 +80,10 @@ nve-icon-button {
   --arrow-transform: translate(-2px, 0) rotate(45deg);
 }
 
-::slotted(mlv-menu),
 ::slotted(nve-menu) {
   --width: 100%;
 }
 
-::slotted(mlv-divider),
 ::slotted(nve-divider) {
   margin: 0 calc(-1 * var(--_divider-padding));
 }

@@ -47,8 +47,7 @@ slot {
   display: block;
 }
 
-::slotted([nve-text]),
-::slotted([mlv-text]) {
+::slotted([nve-text]) {
   color: inherit !important;
 }
 

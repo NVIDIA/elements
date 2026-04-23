@@ -120,7 +120,6 @@ circle.ring {
   animation: var(--animation-duration) linear 0s infinite normal none running spin-infinite;
 }
 
-::slotted(mlv-icon),
 ::slotted(nve-icon),
 nve-icon {
   --width: 50cqw;

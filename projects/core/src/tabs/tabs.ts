@@ -143,7 +143,7 @@ export class Tabs extends LitElement {
   declare _internals: ElementInternals;
 
   #selectTab(tabItem: HTMLElement & { matches: Element['matches']; disabled?: boolean; selected?: boolean }) {
-    if (!this.behaviorSelect || !tabItem.matches('nve-tabs-item, mlv-tabs-item') || tabItem.disabled) {
+    if (!this.behaviorSelect || !tabItem.matches('nve-tabs-item') || tabItem.disabled) {
       return;
     }
 

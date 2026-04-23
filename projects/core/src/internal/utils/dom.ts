@@ -322,17 +322,9 @@ export function getDisplayValue(option?: { label?: string; value?: string }): st
   return option?.label || option?.value || '';
 }
 
-/** returns a combination of nve and mlv for a prefixed tag selector */
-export function tagSelector(selector: string) {
-  return `${selector.replaceAll('mlv-', 'nve-')}, ${selector.replaceAll('nve-', 'mlv-')}`;
-}
-
 /** determines if HTML element matches the given component tag */
 export function matchesElementName(element: Partial<HTMLElement>, component: { metadata: { tag: string } }) {
-  return (
-    element.localName === component.metadata.tag.replace('nve-', 'mlv-') ||
-    element.localName === component.metadata.tag.replace('mlv-', 'nve-')
-  );
+  return element.localName === component.metadata.tag;
 }
 
 export function createGhostElement(sourceElement: HTMLElement) {

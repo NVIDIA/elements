@@ -58,8 +58,7 @@ nve-icon-button {
   inset-inline-end: var(--nve-ref-size-50);
 }
 
-::slotted([nve-text]),
-::slotted([mlv-text]) {
+::slotted([nve-text]) {
   color: inherit !important;
 }
 

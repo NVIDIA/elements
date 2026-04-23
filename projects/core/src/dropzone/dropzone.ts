@@ -4,7 +4,13 @@
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { query } from 'lit/decorators/query.js';
-import { formatFileSize, useStyles, removeEmptyTextNode, I18nController, scopedRegistry } from '@nvidia-elements/core/internal';
+import {
+  formatFileSize,
+  useStyles,
+  removeEmptyTextNode,
+  I18nController,
+  scopedRegistry
+} from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './dropzone.css?inline';
 import { FormControlMixin } from '@nvidia-elements/forms/mixin';

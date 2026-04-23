@@ -46,8 +46,7 @@ slot:not([name]) {
   display: contents;
 }
 
-::slotted([nve-text]),
-::slotted([mlv-text]) {
+::slotted([nve-text]) {
   color: inherit !important;
 }
 
@@ -59,7 +58,6 @@ slot:not([name]) {
 }
 
 nve-icon,
-::slotted(mlv-icon),
 ::slotted(nve-icon) {
   --color: var(--icon-color);
   --width: var(--nve-ref-size-300);

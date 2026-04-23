@@ -35,7 +35,6 @@ import {
   styleSheetToString,
   hasInvalidDOMGrid,
   slotContainsOnlyWhitespace,
-  tagSelector,
   getAnchorNames,
   removeAnchorName,
   appendAnchorName,
@@ -697,13 +696,7 @@ describe('getDisplayValue', () => {
 
 describe('matchesElementName', () => {
   it('should determine if provided element name matches provided component', () => {
-    expect(matchesElementName({ localName: 'mlv-test' }, { metadata: { tag: 'mlv-test' } })).toBe(true);
-    expect(matchesElementName({ localName: 'mlv-test' }, { metadata: { tag: 'nve-test' } })).toBe(true);
-
     expect(matchesElementName({ localName: 'nve-test' }, { metadata: { tag: 'nve-test' } })).toBe(true);
-    expect(matchesElementName({ localName: 'nve-test' }, { metadata: { tag: 'mlv-test' } })).toBe(true);
-
-    expect(matchesElementName({ localName: 'x-test' }, { metadata: { tag: 'mlv-test' } })).toBe(false);
     expect(matchesElementName({ localName: 'x-test' }, { metadata: { tag: 'nve-test' } })).toBe(false);
   });
 });
@@ -888,28 +881,6 @@ describe('slotContainsOnlyWhitespace', () => {
     });
 
     expect(slotContainsOnlyWhitespace(slot)).toBe(false);
-  });
-});
-
-describe('tagSelector', () => {
-  it('should convert mlv- prefix to nve- prefix', () => {
-    const result = tagSelector('mlv-button');
-    expect(result).toBe('nve-button, mlv-button');
-  });
-
-  it('should convert nve- prefix to mlv- prefix', () => {
-    const result = tagSelector('nve-button');
-    expect(result).toBe('nve-button, mlv-button');
-  });
-
-  it('should handle multiple replacements', () => {
-    const result = tagSelector('mlv-button mlv-input');
-    expect(result).toBe('nve-button nve-input, mlv-button mlv-input');
-  });
-
-  it('should handle no prefix', () => {
-    const result = tagSelector('button');
-    expect(result).toBe('button, button');
   });
 });
 

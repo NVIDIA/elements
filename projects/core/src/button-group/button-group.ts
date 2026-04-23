@@ -6,7 +6,13 @@ import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
 import type { KeynavListConfig, Interaction, Size } from '@nvidia-elements/core/internal';
-import { attachInternals, keyNavigationList, useStyles, audit, appendRootNodeStyle } from '@nvidia-elements/core/internal';
+import {
+  attachInternals,
+  keyNavigationList,
+  useStyles,
+  audit,
+  appendRootNodeStyle
+} from '@nvidia-elements/core/internal';
 import type { IconButton } from '@nvidia-elements/core/icon-button';
 import type { Button } from '@nvidia-elements/core/button';
 import type { Divider } from '@nvidia-elements/core/divider';
@@ -65,11 +71,11 @@ export class ButtonGroup extends LitElement {
   /** @private */
   declare _internals: ElementInternals;
 
-  @queryAssignedElements({ selector: 'nve-divider, mlv-divider' }) private dividers!: Divider[];
+  @queryAssignedElements({ selector: 'nve-divider' }) private dividers!: Divider[];
 
-  @queryAssignedElements({ selector: 'nve-icon-button, mlv-icon-button' }) private iconButtons!: IconButton[];
+  @queryAssignedElements({ selector: 'nve-icon-button' }) private iconButtons!: IconButton[];
 
-  @queryAssignedElements({ selector: 'nve-button, mlv-button' }) private buttons!: Button[];
+  @queryAssignedElements({ selector: 'nve-button' }) private buttons!: Button[];
 
   get #buttons() {
     return [...this.iconButtons, ...this.buttons];
@@ -116,7 +122,7 @@ export class ButtonGroup extends LitElement {
   }
 
   #selectButton(button: HTMLElement & { pressed?: boolean }) {
-    if (!button.matches?.('nve-button, mlv-button, nve-icon-button, mlv-icon-button')) {
+    if (!button.matches?.('nve-button, nve-icon-button')) {
       return;
     }
 
