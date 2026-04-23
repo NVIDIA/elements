@@ -17,10 +17,14 @@ async function build() {
   }
 
   for (const pkg of ['core', 'styles', 'themes']) {
-    await cp(join(nodeModules, '@nvidia-elements', pkg, 'dist'), join(dist, 'node_modules', '@nvidia-elements', pkg, 'dist'), {
-      recursive: true,
-      dereference: true
-    });
+    await cp(
+      join(nodeModules, '@nvidia-elements', pkg, 'dist'),
+      join(dist, 'node_modules', '@nvidia-elements', pkg, 'dist'),
+      {
+        recursive: true,
+        dereference: true
+      }
+    );
   }
 }
 

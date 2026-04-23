@@ -61,11 +61,14 @@ export const libraryTestConfig = {
       'default',
       'junit',
       'json',
-      ['github-actions', {
-        jobSummary: {
-          enabled: false,
-        },
-      }]
+      [
+        'github-actions',
+        {
+          jobSummary: {
+            enabled: false
+          }
+        }
+      ]
     ],
     outputFile: {
       junit: './coverage/unit/junit.xml',

@@ -62,7 +62,9 @@ yargsInstance.command(
       }
     } else {
       const greeting = colors.complete(`\x1b[?7l\n${JSON.parse(banner)}\n\n`);
-      console.log(`${greeting}${colors.complete(`@nvidia-elements/cli (${BUILD_SHA})`)}\n\n${await yargsInstance.getHelp()}`);
+      console.log(
+        `${greeting}${colors.complete(`@nvidia-elements/cli (${BUILD_SHA})`)}\n\n${await yargsInstance.getHelp()}`
+      );
       await notifyIfUpdateAvailable(BUILD_SHA);
     }
   }

@@ -18,11 +18,14 @@ export const libraryLitSSRTestConfig = {
       'default',
       'junit',
       'json',
-      ['github-actions', {
-        jobSummary: {
-          enabled: false,
-        },
-      }]
+      [
+        'github-actions',
+        {
+          jobSummary: {
+            enabled: false
+          }
+        }
+      ]
     ],
     outputFile: {
       json: './coverage/ssr/summary.json',

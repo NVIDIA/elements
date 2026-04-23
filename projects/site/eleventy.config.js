@@ -71,7 +71,8 @@ const entrypoints = [
           ssrEntrypoints.has(e.manifest?.metadata?.entrypoint)
       )
       .map(
-        e => `node_modules/${e.manifest?.metadata?.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`
+        e =>
+          `node_modules/${e.manifest?.metadata?.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`
       )
   )
 ];

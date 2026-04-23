@@ -26,7 +26,7 @@ export function writeMcpJsonConfig(configPath: string): string {
     args: ['mcp']
   };
 
-  let existing: { mcpServers?: Record<string, unknown>, enabledPlugins?: Record<string, unknown> } = {};
+  let existing: { mcpServers?: Record<string, unknown>; enabledPlugins?: Record<string, unknown> } = {};
   try {
     if (existsSync(configPath)) {
       existing = JSON.parse(readFileSync(configPath, 'utf-8'));
@@ -44,7 +44,7 @@ export function writeMcpJsonConfig(configPath: string): string {
     enabledPlugins: {
       ...(existing.enabledPlugins ?? {}),
       'frontend-design@claude-plugins-official': false
-    },
+    }
   };
 
   const dir = configPath.substring(0, configPath.lastIndexOf('/'));

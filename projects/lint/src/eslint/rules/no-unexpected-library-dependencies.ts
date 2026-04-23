@@ -18,8 +18,10 @@ const rule = {
     schema: [],
     messages: {
       ['unexpected-dependency-missing']: 'No @nvidia-elements packages found in the project.',
-      ['unexpected-dependency-pinned']: 'Libraries dependent on @nvidia-elements packages must contain caret (^) prefix.',
-      ['unexpected-dependency-type']: 'Libraries dependent on @nvidia-elements packages must list them as peer dependencies.'
+      ['unexpected-dependency-pinned']:
+        'Libraries dependent on @nvidia-elements packages must contain caret (^) prefix.',
+      ['unexpected-dependency-type']:
+        'Libraries dependent on @nvidia-elements packages must list them as peer dependencies.'
     }
   },
   create(context: Rule.RuleContext) {

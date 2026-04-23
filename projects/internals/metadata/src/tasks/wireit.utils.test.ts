@@ -172,8 +172,6 @@ describe('generateGraphData', () => {
     }
   });
 
-  
-
   it('should format labels by replacing @internals/ with internals/', () => {
     const internalsPackages = result.nodes.filter(n => n.packageName.startsWith('@internals/'));
 

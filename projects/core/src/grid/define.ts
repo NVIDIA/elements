@@ -2,7 +2,15 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { define } from '@nvidia-elements/core/internal';
-import { Grid, GridColumn, GridRow, GridCell, GridFooter, GridHeader, GridPlaceholder } from '@nvidia-elements/core/grid';
+import {
+  Grid,
+  GridColumn,
+  GridRow,
+  GridCell,
+  GridFooter,
+  GridHeader,
+  GridPlaceholder
+} from '@nvidia-elements/core/grid';
 
 define(Grid);
 define(GridColumn);

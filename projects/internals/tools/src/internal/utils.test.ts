@@ -10,7 +10,10 @@ describe('getElementImports', () => {
     { name: 'nve-button', manifest: { metadata: { entrypoint: '@nvidia-elements/core/button' } } },
     { name: 'nve-badge', manifest: { metadata: { entrypoint: '@nvidia-elements/core/badge' } } },
     { name: 'nve-monaco-input', manifest: { metadata: { entrypoint: '@nvidia-elements/monaco/input' } } },
-    { name: 'nve-deprecated', manifest: { deprecated: 'true', metadata: { entrypoint: '@nvidia-elements/core/deprecated' } } },
+    {
+      name: 'nve-deprecated',
+      manifest: { deprecated: 'true', metadata: { entrypoint: '@nvidia-elements/core/deprecated' } }
+    },
     { name: 'nve-no-entrypoint', manifest: { metadata: {} } }
   ] as ProjectElement[];
 

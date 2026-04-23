@@ -5,17 +5,11 @@ Core CSS foundation for the Elements design system, providing layout utilities, 
 - [Documentation](https://NVIDIA.github.io/elements/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [GitHub Repo](https://github.com/NVIDIA/elements)
-- [NPM](https://registry.npmjs.org
+- [npm](https://www.npmjs.com/package/@nvidia-elements/styles)
 
 ## Getting Started
 
 ```bash
-# local .npmrc file
-registry=https://registry.npmjs.org
-
-# https://registry.npmjs.org
-npm login
-
 npm install @nvidia-elements/styles
 ```
 

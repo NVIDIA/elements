@@ -55,7 +55,8 @@ export function setupProject(cwd: string): Report {
 
   return {
     dependencies: {
-      message: 'Added Elements core dependencies (@nvidia-elements/core, @nvidia-elements/themes, @nvidia-elements/styles) to package.json.',
+      message:
+        'Added Elements core dependencies (@nvidia-elements/core, @nvidia-elements/themes, @nvidia-elements/styles) to package.json.',
       status: 'success'
     }
   };

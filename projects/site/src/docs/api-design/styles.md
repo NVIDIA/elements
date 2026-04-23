@@ -79,7 +79,7 @@ Prefer exposing shorthand values. `border: var(--border)` rather than `border-co
 
 {% enddodont %}
 
-#***REMOVED*** Host
+# **_REMOVED_** Host
 
 The internal host element is a pattern that provides an API guard on the element. When styling a custom element, avoid applying styles other than basic display properties and custom properties to the host element. The more styles applied to the host, the easier a consumer can override and change the styles in unexpected ways.
 

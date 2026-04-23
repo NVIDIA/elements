@@ -5,17 +5,11 @@ Integration with VS Code's Monaco editor for code editing, syntax highlighting, 
 - [Documentation](https://NVIDIA.github.io/elements/docs/monaco/)
 - [Changelog](https://NVIDIA.github.io/elements/docs/changelog/)
 - [Repo](https://github.com/NVIDIA/elements)
-- [NPM](https://registry.npmjs.org
+- [npm](https://www.npmjs.com/package/@nvidia-elements/monaco)
 
 ## Getting Started
 
 ```bash
-# local .npmrc file
-registry=https://registry.npmjs.org
-
-# https://registry.npmjs.org
-npm login
-
 npm install @nvidia-elements/monaco
 ```
 

@@ -131,7 +131,6 @@ body[nve-text],
   }
 }
 
-
 [nve-text~='list'] {
   margin: 0 !important;
   padding: 0 0 0 var(--nve-ref-size-400) !important;

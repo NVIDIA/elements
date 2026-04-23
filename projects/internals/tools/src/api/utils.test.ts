@@ -44,7 +44,11 @@ describe('getPublishedPackageNames', () => {
   ];
 
   it('should get published package names', () => {
-    expect(getPublishedPackageNames(projects)).toEqual(['@nvidia-elements/core', '@nvidia-elements/monaco', '@nvidia-elements/code']);
+    expect(getPublishedPackageNames(projects)).toEqual([
+      '@nvidia-elements/core',
+      '@nvidia-elements/monaco',
+      '@nvidia-elements/code'
+    ]);
   });
 
   it('should exclude @nvidia-elements packages with version 0.0.0', () => {
@@ -52,7 +56,11 @@ describe('getPublishedPackageNames', () => {
       ...projects,
       { name: '@nvidia-elements/unpublished', version: '0.0.0', description: '', readme: '', changelog: '' }
     ];
-    expect(getPublishedPackageNames(withUnpublished)).toEqual(['@nvidia-elements/core', '@nvidia-elements/monaco', '@nvidia-elements/code']);
+    expect(getPublishedPackageNames(withUnpublished)).toEqual([
+      '@nvidia-elements/core',
+      '@nvidia-elements/monaco',
+      '@nvidia-elements/code'
+    ]);
   });
 
   it('should handle empty metadata for getPublishedPackageNames', () => {

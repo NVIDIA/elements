@@ -73,14 +73,14 @@ Apply fixes based on the following before→after mappings for each deprecation 
 @import '@nvidia-elements/styles/layout.css';
 ```
 
-| Before                                       | After                                                      |
-| -------------------------------------------- | ---------------------------------------------------------- |
-| `@maglev/elements/index.css`                 | Split into `@nvidia-elements/themes/*` + `@nvidia-elements/styles/*` imports above |
-| `@maglev/elements/css/module.layout.css`     | `@nvidia-elements/styles/layout.css`                                   |
-| `@maglev/elements/css/module.typography.css` | `@nvidia-elements/styles/typography.css`                               |
-| `@nvidia-elements/core/index.css`                    | Split into `@nvidia-elements/themes/*` + `@nvidia-elements/styles/*` imports above |
-| `@nvidia-elements/core/css/module.layout.css`        | `@nvidia-elements/styles/layout.css`                                   |
-| `@nvidia-elements/core/css/module.typography.css`    | `@nvidia-elements/styles/typography.css`                               |
+| Before                                            | After                                                                              |
+| ------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `@maglev/elements/index.css`                      | Split into `@nvidia-elements/themes/*` + `@nvidia-elements/styles/*` imports above |
+| `@maglev/elements/css/module.layout.css`          | `@nvidia-elements/styles/layout.css`                                               |
+| `@maglev/elements/css/module.typography.css`      | `@nvidia-elements/styles/typography.css`                                           |
+| `@nvidia-elements/core/index.css`                 | Split into `@nvidia-elements/themes/*` + `@nvidia-elements/styles/*` imports above |
+| `@nvidia-elements/core/css/module.layout.css`     | `@nvidia-elements/styles/layout.css`                                               |
+| `@nvidia-elements/core/css/module.typography.css` | `@nvidia-elements/styles/typography.css`                                           |
 
 ### CSS Variables
 

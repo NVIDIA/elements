@@ -11,7 +11,10 @@ const entrypoints = apis.data.elements
       e.manifest.metadata.entrypoint.includes('@nvidia-elements/core') &&
       e.manifest?.deprecated !== 'true'
   )
-  .map(e => `node_modules/${e.manifest.metadata.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`);
+  .map(
+    e =>
+      `node_modules/${e.manifest.metadata.entrypoint.replace('@nvidia-elements/core', '@nvidia-elements/core/dist')}/define.js`
+  );
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyRenderPlugin);

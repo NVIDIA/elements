@@ -19,7 +19,6 @@ Give a high level overview of the Elements Design System.
 
 ### Getting Started with Elements
 
-
 ```bash
 # create a new project
 nve project.create # typescript, angular, react, lit, preact, solidjs, vue, nextjs, go

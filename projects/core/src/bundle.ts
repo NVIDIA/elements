@@ -4,7 +4,6 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="./declarations.d.ts" />
 
-
 import '@nvidia-elements/core/accordion/define.js';
 import '@nvidia-elements/core/alert/define.js';
 import '@nvidia-elements/core/avatar/define.js';

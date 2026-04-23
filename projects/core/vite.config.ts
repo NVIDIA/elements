@@ -10,7 +10,7 @@ export default defineConfig(() => {
     build: {
       lib: {
         entry: {
-          'polyfills/custom-state-set': resolve(import.meta.dirname, './src/polyfills/custom-state-set.ts'), // optional polyfills for non-chromium envs
+          'polyfills/custom-state-set': resolve(import.meta.dirname, './src/polyfills/custom-state-set.ts') // optional polyfills for non-chromium envs
         }
       }
     }
