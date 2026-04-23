@@ -730,8 +730,8 @@ importers:
         specifier: workspace:^
         version: link:../../lint
       '@pnpm/catalogs.config':
-        specifier: 0.1.0
-        version: 0.1.0
+        specifier: 1100.0.0
+        version: 1100.0.0
       '@pnpm/exportable-manifest':
         specifier: 7.0.3
         version: 7.0.3
@@ -5110,9 +5110,9 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@pnpm/catalogs.config@0.1.0':
-    resolution: {integrity: sha512-OIqo9qF5qUl9Zlu7zV2aaX9PbtozRiFM6VPrn3PmIrNfYnCh3HyB/ojAp36oglz4+xVJ+mUqx4+aZmstN4ALpg==}
-    engines: {node: '>=18.12'}
+  '@pnpm/catalogs.config@1100.0.0':
+    resolution: {integrity: sha512-m6w7+/q9BAyEvlJEuuu4DX6cnFQnCbcsED6AB4AJlz+Nw0UQ/Tas1QOmH1EQ1skM+s+Un1nEQO7D61HG8w3LYw==}
+    engines: {node: '>=22.13'}
 
   '@pnpm/catalogs.protocol-parser@0.1.0':
     resolution: {integrity: sha512-T3WvT+IBHsoDwv8RBQo3b+SBnXTQMpHZ1Yo7tJWcImBzrkuc4eP7KYB/yGP240PNgyrvCTrnuImRX9MNZD5flg==}
@@ -5126,9 +5126,17 @@ packages:
     resolution: {integrity: sha512-htyl8TWnKL7K/ESFa1oW2UB5lVDxuF5DpM7tBi6Hu2LNL3mWkIzNLG6N4zoCUP1lCKNxWy/3iu8mS8MvToGd6w==}
     engines: {node: '>=12.22.0'}
 
+  '@pnpm/constants@1100.0.0':
+    resolution: {integrity: sha512-CSJ5fKSUgqXrON5J2zQd1LwttU4gdqffJ3zYyHGAEhZ8u22fhQEVfCnc4+3aczDHbBNU0pNRX2ajiioPj46YtA==}
+    engines: {node: '>=22.13'}
+
   '@pnpm/constants@8.0.0':
     resolution: {integrity: sha512-yQosGUvYPpAjb1jOFcdbwekRjZRVxN6C0hHzfRCZrMKbxGjt/E0g0RcFlEDNVZ95tm4oMMcr7nEPa7H7LX3emw==}
     engines: {node: '>=18.12'}
+
+  '@pnpm/error@1100.0.0':
+    resolution: {integrity: sha512-Pe+UcOhBwBBM38GPavnPJllik4/DZ8Fawt9+D2JLoWSo6FNZBJWQbaDMuwba3W0Ej0v43etKmyCT+MOvwt95Gg==}
+    engines: {node: '>=22.13'}
 
   '@pnpm/error@6.0.1':
     resolution: {integrity: sha512-7yjO0RgmWYb4OKgcWC33yD4Z2CxE7Tm7vXX1SmS7GDifDT/bgZZhHeS2xq/+W6y9yhwIrRSA+7AlQL1NM2wIvw==}
@@ -16559,9 +16567,9 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@pnpm/catalogs.config@0.1.0':
+  '@pnpm/catalogs.config@1100.0.0':
     dependencies:
-      '@pnpm/error': 6.0.1
+      '@pnpm/error': 1100.0.0
 
   '@pnpm/catalogs.protocol-parser@0.1.0': {}
 
@@ -16572,7 +16580,13 @@ snapshots:
 
   '@pnpm/config.env-replace@1.1.0': {}
 
+  '@pnpm/constants@1100.0.0': {}
+
   '@pnpm/constants@8.0.0': {}
+
+  '@pnpm/error@1100.0.0':
+    dependencies:
+      '@pnpm/constants': 1100.0.0
 
   '@pnpm/error@6.0.1':
     dependencies:
