@@ -97,12 +97,12 @@ describe('nve-monaco-diff-editor', () => {
   it('should not incorrectly report duplicate symbol diagnostics originating from diff:// model references', async () => {
     const { editor, monaco } = element;
 
-    const { original, modified } = editor.getModel();
+    const { original: originalModel, modified: modifiedModel } = editor.getModel();
 
     const worker = await monaco.typescript.getTypeScriptWorker();
-    const workerInstance = await worker(original.uri, modified.uri);
+    const workerInstance = await worker(originalModel.uri, modifiedModel.uri);
 
-    const diagnostics = await workerInstance.getSemanticDiagnostics(modified.uri.toString());
+    const diagnostics = await workerInstance.getSemanticDiagnostics(modifiedModel.uri.toString());
 
     expect(diagnostics.length).toBe(0);
   });

@@ -152,62 +152,55 @@ const formAttrs = [
   'data-*'
 ];
 
-export function validateTemplate(
-  source: string,
-  elements: Element[],
-  config: { allowStyles?: boolean; allowGlobalElements?: boolean; allowVulnerableTags?: boolean } = {}
-): string {
-  const defaultConfig = { allowStyles: true, allowGlobalElements: false, allowVulnerableTags: true };
-  const mergedConfig = { ...defaultConfig, ...config };
+interface TemplateConfig {
+  allowStyles: boolean;
+  allowGlobalElements: boolean;
+  allowVulnerableTags: boolean;
+}
 
-  const allowedTags = [
+function buildAllowedTags(elements: Element[], config: TemplateConfig): string[] {
+  return [
     ...nativeElements,
     ...svgElements,
     ...formElements,
     ...sanitizeHtml.defaults.allowedTags,
     ...getAvailableElementTags(elements),
-    ...(mergedConfig.allowVulnerableTags ? ['script'] : []),
-    ...(mergedConfig.allowStyles ? ['style'] : []),
-    ...(mergedConfig.allowGlobalElements ? globalElements : [])
+    ...(config.allowVulnerableTags ? ['script'] : []),
+    ...(config.allowStyles ? ['style'] : []),
+    ...(config.allowGlobalElements ? globalElements : [])
   ];
+}
 
-  const customElementsAllowedAttributes: AllowedAttributes = elements.reduce((acc: AllowedAttributes, element) => {
+function buildCustomElementsAllowedAttributes(elements: Element[]): AllowedAttributes {
+  return elements.reduce((acc: AllowedAttributes, element) => {
     const customAttrs =
       element.manifest?.attributes?.map(attribute => {
         const typeText = attribute.type?.text ?? '';
-
-        // allow arbitrary values for boolean, string, number, and icon name attributes
         if (typeText === 'boolean' || typeText === 'string' || typeText === 'number' || typeText.includes('IconName')) {
           return attribute.name;
         }
-
-        // allow declared literal values for enum attributes, any value for complex types such as DataElement data
         const values = [...typeText.matchAll(/['"]([^'"]+)['"]/g)].map(([, v]) => v!.trim());
-        if (values.length === 0) {
-          return attribute.name;
-        }
-
-        return {
-          name: attribute.name,
-          values
-        };
+        if (values.length === 0) return attribute.name;
+        return { name: attribute.name, values };
       }) ?? [];
 
     acc[element.name] = [...(acc[element.name] ?? []), ...formAttrs, ...customAttrs];
     return acc;
   }, {});
+}
 
+function buildAllowedAttributes(elements: Element[], config: TemplateConfig): AllowedAttributes {
   const allowedSvgAttributes: AllowedAttributes = svgElements.reduce<AllowedAttributes>((acc, element) => {
     acc[element] = svgAttrs;
     return acc;
   }, {});
 
-  const allowedAttributes: AllowedAttributes = {
+  return {
     ...sanitizeHtml.defaults.allowedAttributes,
-    script: mergedConfig.allowVulnerableTags ? ['type'] : [],
+    script: config.allowVulnerableTags ? ['type'] : [],
     html: ['nve-theme'],
     body: ['nve-text', 'nve-layout', 'nve-theme'],
-    ...customElementsAllowedAttributes,
+    ...buildCustomElementsAllowedAttributes(elements),
     ...allowedSvgAttributes,
     ...formElements.reduce<AllowedAttributes>((acc, element) => {
       acc[element] = [...nativeElementAttrs, ...formAttrs];
@@ -226,44 +219,50 @@ export function validateTemplate(
       'href',
       'data-*',
       'nve-display',
-      ...(mergedConfig.allowStyles ? ['style'] : [])
+      ...(config.allowStyles ? ['style'] : [])
     ]
   };
+}
 
+export function validateTemplate(
+  source: string,
+  elements: Element[],
+  config: { allowStyles?: boolean; allowGlobalElements?: boolean; allowVulnerableTags?: boolean } = {}
+): string {
+  const mergedConfig: TemplateConfig = {
+    allowStyles: true,
+    allowGlobalElements: false,
+    allowVulnerableTags: true,
+    ...config
+  };
+
+  const allowedAttributes = buildAllowedAttributes(elements, mergedConfig);
   const customElementsNonBooleanAttributes = Object.values(allowedAttributes)
     .filter(i => typeof i !== 'string')
     .flatMap(i => (Array.isArray(i?.values) ? i.values : []));
-
   const nonBooleanAttributes = sanitizeHtml.defaults.nonBooleanAttributes.filter((attr: string) => attr !== 'hidden');
 
-  source = removeBodyStyleSelectors(source);
-
-  const result = sanitizeHtml(source, {
-    allowedTags,
+  return sanitizeHtml(removeBodyStyleSelectors(source), {
+    allowedTags: buildAllowedTags(elements, mergedConfig),
     allowedAttributes,
-    allowVulnerableTags: mergedConfig.allowVulnerableTags || mergedConfig.allowStyles, // allows script and style tags
+    allowVulnerableTags: mergedConfig.allowVulnerableTags || mergedConfig.allowStyles,
     nonBooleanAttributes: [...nonBooleanAttributes, ...customElementsNonBooleanAttributes],
-    parser: {
-      lowerCaseTags: false,
-      lowerCaseAttributeNames: false
-    }
+    parser: { lowerCaseTags: false, lowerCaseAttributeNames: false }
   });
-
-  return result;
 }
 
 function removeBodyStyleSelectors(html: string) {
   // Process <style> tags: remove body selectors from their contents
-  html = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (match, attributes, content) => {
+  let result = html.replace(/<style([^>]*)>([\s\S]*?)<\/style>/gi, (match, attributes, content) => {
     const cleanedContent = content.replace(/body[^\s{]*\s*\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/gi, '');
     return `<style${attributes}>${cleanedContent}</style>`;
   });
 
   // Process style="" attributes: remove body selectors from their values
-  html = html.replace(/style=["']([^"']*)["']/gi, (match, content) => {
+  result = result.replace(/style=["']([^"']*)["']/gi, (match, content) => {
     const cleanedContent = content.replace(/body[^\s{]*\s*\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/gi, '');
     return `style="${cleanedContent}"`;
   });
 
-  return html;
+  return result;
 }

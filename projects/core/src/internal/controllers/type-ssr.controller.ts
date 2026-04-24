@@ -37,7 +37,7 @@ export class TypeSSRController<T extends ReactiveElement> implements ReactiveCon
 
     // https://github.com/lit/lit/issues/1434#issuecomment-1598332000
     if (this.didSSR) {
-      const options = this.options;
+      const controllerOptions = this.options;
       const updateOriginal = host.update;
       Object.defineProperty(host, 'update', {
         value: function () {
@@ -49,7 +49,7 @@ export class TypeSSRController<T extends ReactiveElement> implements ReactiveCon
             renderRoot.innerHTML = renderRoot.innerHTML.split('<!--lit-part ')[0]!;
             render(host.render(), renderRoot, host.renderOptions);
 
-            if (getEnv() !== 'production' && options.log) {
+            if (getEnv() !== 'production' && controllerOptions.log) {
               LogService.warn(getSSRMismatchWarning(host.localName));
             }
           }

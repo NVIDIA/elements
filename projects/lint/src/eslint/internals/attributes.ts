@@ -105,7 +105,7 @@ function getAttributeValueSegments(value: string) {
   return value
     .toLowerCase()
     .split(' ')
-    .filter(value => value !== '');
+    .filter(segment => segment !== '');
 }
 
 function repairAttributeValueSegments(values: string[], repairs: [RegExp, string][]) {

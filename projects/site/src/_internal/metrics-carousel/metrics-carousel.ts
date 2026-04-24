@@ -172,7 +172,6 @@ export class MetricsCarousel extends LitElement {
   }
 
   async #getMetrics(): Promise<MetricsCarouselItem[]> {
-    // todo: 11ty should compute this at build time, not at runtime, as this is a node library atm
     const { TestsService } = await import('@internals/metadata/services/tests.service.js');
     const { ApiService } = await import('@internals/metadata/services/api.service.js');
     const tests = await TestsService.getData();

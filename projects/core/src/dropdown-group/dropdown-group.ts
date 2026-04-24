@@ -88,7 +88,7 @@ export class DropdownGroup extends LitElement {
     }
     if (event.code === 'ArrowRight') {
       const targetId = target.getAttribute('popovertarget');
-      const dropdown = this.dropdowns.find(dropdown => dropdown.id === targetId);
+      const dropdown = this.dropdowns.find(d => d.id === targetId);
       dropdown?.showPopover();
     }
     if (event.code === 'ArrowLeft' && isSimpleFocusable(event.target as HTMLElement)) {

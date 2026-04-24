@@ -24,19 +24,17 @@ import './custom-state-set.js';
  */
 if (!Element.prototype.toggleAttribute) {
   Element.prototype.toggleAttribute = function (name, force) {
-    if (force !== void 0) {
-      force = !!force;
-    }
+    const forceBool = force !== void 0 ? !!force : undefined;
 
     if (this.hasAttribute(name)) {
-      if (force) {
+      if (forceBool) {
         return true;
       }
 
       this.removeAttribute(name);
       return false;
     }
-    if (force === false) {
+    if (forceBool === false) {
       return false;
     }
 

@@ -88,8 +88,8 @@ export class Markdown extends LitElement {
       if (this.source) {
         // Process markdown content from source property
         void this.#parseMarkdown(this.source)
-          .then(html => {
-            this.renderedHtml = html;
+          .then(parsed => {
+            this.renderedHtml = parsed;
           })
           .catch(_error => {
             // Don't update renderedHtml on parsing error - keep previous content
@@ -121,8 +121,8 @@ export class Markdown extends LitElement {
     const content = templateElement.innerHTML.trim();
 
     void this.#parseMarkdown(content)
-      .then(html => {
-        this.renderedHtml = html;
+      .then(parsed => {
+        this.renderedHtml = parsed;
       })
       .catch(_error => {
         // Don't update renderedHtml on parsing error - keep previous content

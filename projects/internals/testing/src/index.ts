@@ -68,7 +68,7 @@ export async function elementIsStable(element: HTMLElement & { updateComplete?: 
 }
 
 function retry<T>(fn: () => Promise<T>, maxTries = 10): Promise<T> {
-  return fn().catch(() => (maxTries > 0 ? retry(fn, maxTries--) : Promise.reject('Max attempts reached')));
+  return fn().catch(() => (maxTries > 0 ? retry(fn, maxTries - 1) : Promise.reject('Max attempts reached')));
 }
 
 /**

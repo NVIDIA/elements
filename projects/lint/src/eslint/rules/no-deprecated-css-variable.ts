@@ -26,9 +26,9 @@ const rule = {
       Declaration(node: CssDeclarationNode) {
         // unknown-css-var
         const child = node.value.children
-          ?.filter(child => child.name === 'var')
-          ?.flatMap(child => child.children)
-          ?.find(child => child?.name?.includes('--mlv'));
+          ?.filter(c => c.name === 'var')
+          ?.flatMap(c => c.children)
+          ?.find(c => c?.name?.includes('--mlv'));
 
         if (child?.name && theme[child.name.replace('--mlv-', 'nve-')]) {
           context.report({

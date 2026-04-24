@@ -255,11 +255,11 @@ export class DocsSearch extends LitElement {
       this.results = [];
       this.noResults = false;
 
-      const query = await this.#pagefind.debouncedSearch(term);
+      const searchResult = await this.#pagefind.debouncedSearch(term);
 
-      if (query !== null) {
+      if (searchResult !== null) {
         // Limit results to MAX_RESULTS and fetch data in parallel for better performance
-        const limitedResults = query.results.slice(0, DocsSearch.MAX_RESULTS);
+        const limitedResults = searchResult.results.slice(0, DocsSearch.MAX_RESULTS);
         const queryResults = await Promise.all(limitedResults.map(result => result.data()));
 
         this.isSearching = false;

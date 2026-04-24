@@ -6,10 +6,10 @@ export interface IconSVG {
   svg: () => Promise<string> | string;
 }
 
-function iconImport(iconImport: () => Promise<{default: string}>): IconSVG {
+function iconImport(importer: () => Promise<{default: string}>): IconSVG {
   return {
     async svg() {
-      return (await iconImport()).default;
+      return (await importer()).default;
     }
   }
 }

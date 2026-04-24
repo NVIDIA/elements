@@ -5,10 +5,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 const { mockRegisterTool, mockRegisterPrompt, mockConnect, mcpTool, cliTool, allTool, mockPrompt, mockZodSchema } =
   vi.hoisted(() => {
-    const mockRegisterTool = vi.fn();
-    const mockRegisterPrompt = vi.fn();
-    const mockConnect = vi.fn().mockResolvedValue(undefined);
-    const mockZodSchema = { shape: {}, optional: () => mockZodSchema };
+    const zodSchema = { shape: {}, optional: () => zodSchema };
 
     const createMockTool = (overrides: Record<string, unknown>) => {
       const fn = vi.fn().mockResolvedValue({ status: 'complete', result: 'test' });
@@ -27,41 +24,42 @@ const { mockRegisterTool, mockRegisterPrompt, mockConnect, mcpTool, cliTool, all
       return fn;
     };
 
-    const mcpTool = createMockTool({
-      support: 1,
-      toolName: 'mcp_tool',
-      command: 'mcp.tool',
-      title: 'MCP Tool',
-      summary: 'MCP only',
-      inputSchema: undefined
-    });
-
-    const cliTool = createMockTool({
-      support: 2,
-      toolName: 'cli_tool',
-      command: 'cli_tool',
-      title: 'CLI Tool',
-      summary: 'CLI only'
-    });
-
-    const allTool = createMockTool({
-      support: 3,
-      toolName: 'all_tool',
-      command: 'all.tool',
-      title: 'All Tool',
-      summary: 'All support',
-      outputSchema: { type: 'string' }
-    });
-
-    const mockPrompt = {
-      name: 'test-prompt',
-      title: 'Test Prompt',
-      description: 'A test prompt',
-      argsSchema: { type: 'object', properties: {} },
-      handler: vi.fn().mockResolvedValue({ messages: [] })
+    return {
+      mockRegisterTool: vi.fn(),
+      mockRegisterPrompt: vi.fn(),
+      mockConnect: vi.fn().mockResolvedValue(undefined),
+      mockZodSchema: zodSchema,
+      mcpTool: createMockTool({
+        support: 1,
+        toolName: 'mcp_tool',
+        command: 'mcp.tool',
+        title: 'MCP Tool',
+        summary: 'MCP only',
+        inputSchema: undefined
+      }),
+      cliTool: createMockTool({
+        support: 2,
+        toolName: 'cli_tool',
+        command: 'cli_tool',
+        title: 'CLI Tool',
+        summary: 'CLI only'
+      }),
+      allTool: createMockTool({
+        support: 3,
+        toolName: 'all_tool',
+        command: 'all.tool',
+        title: 'All Tool',
+        summary: 'All support',
+        outputSchema: { type: 'string' }
+      }),
+      mockPrompt: {
+        name: 'test-prompt',
+        title: 'Test Prompt',
+        description: 'A test prompt',
+        argsSchema: { type: 'object', properties: {} },
+        handler: vi.fn().mockResolvedValue({ messages: [] })
+      }
     };
-
-    return { mockRegisterTool, mockRegisterPrompt, mockConnect, mcpTool, cliTool, allTool, mockPrompt, mockZodSchema };
   });
 
 vi.mock('@modelcontextprotocol/sdk/server/mcp.js', () => ({

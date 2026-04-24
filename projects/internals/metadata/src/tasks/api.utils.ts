@@ -31,9 +31,9 @@ function getChangelog(basePath: string): string {
 function getManifestDeclarations(customElementsManifest: CustomElementsManifest): CustomElementManifest[] {
   return Array.from(
     new Set(
-      customElementsManifest.modules.flatMap(module => {
-        module.declarations.forEach(d => (d.path = module.path));
-        return module.declarations;
+      customElementsManifest.modules.flatMap(mod => {
+        mod.declarations.forEach(d => (d.path = mod.path));
+        return mod.declarations;
       })
     )
   ).filter(d => d.tagName);

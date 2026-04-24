@@ -25,10 +25,10 @@ export class Skeleton extends LitElement {
     version: '0.0.0'
   };
 
-  /** The effect of the skeleton */
+  /** Visual animation style shown while content loads. */
   @property({ type: String, reflect: true }) effect: 'shimmer' | 'pulse';
 
-  /** The shape of the skeleton */
+  /** Geometry of the placeholder — rounded corners or a full pill outline. */
   @property({ type: String, reflect: true }) shape: 'round' | 'pill';
 
   /** Whether the skeleton hides its content */

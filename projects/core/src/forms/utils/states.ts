@@ -18,6 +18,7 @@ export const inputQuery = 'input, select, selectmenu, textarea, [nve-control]';
  * :state(valid) form control is in a valid state
  * :state(invalid) form control is in a invalid state
  */
+// eslint-disable-next-line max-lines-per-function
 export function setupControlValidationStates(control: Control, messages: ControlMessage[]) {
   if (
     !control.input.form?.noValidate &&
@@ -71,10 +72,10 @@ export function setupControlValidationStates(control: Control, messages: Control
   }
 
   control.shadowRoot!.addEventListener('slotchange', () => {
-    const messages = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
+    const current = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
     control._internals.states.delete('valid');
     control._internals.states.delete('invalid');
-    if (messages.find(m => !m.hidden && (m.status === 'error' || m.error))) {
+    if (current.find(m => !m.hidden && (m.status === 'error' || m.error))) {
       control._internals.states.add('invalid');
     } else {
       control._internals.states.add('valid');
@@ -168,8 +169,8 @@ export function setupControlStatusStates(control: Control | ControlGroup, messag
   );
 
   control.shadowRoot!.addEventListener('slotchange', () => {
-    const messages = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
-    const message = messages.find(m => m.status && !m.hidden);
+    const current = Array.from(control.querySelectorAll<ControlMessage>(ControlMessage.metadata.tag));
+    const message = current.find(m => m.status && !m.hidden);
     control._internals.states.delete('error');
     control._internals.states.delete('success');
     if (message) {

@@ -104,6 +104,7 @@ export class PreferencesInput extends FormControlMixin<typeof LitElement, Prefer
     'reduced-motion': false
   };
 
+  // eslint-disable-next-line max-lines-per-function
   render() {
     return html`
       <div internal-host>

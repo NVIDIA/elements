@@ -8,22 +8,22 @@ export function hasSlot(tagName: string, slot: string) {
   if (exceptions.includes(tagName)) {
     return true;
   } else {
-    const element = elements.find(element => element.name === tagName);
+    const element = elements.find(el => el.name === tagName);
     return !!element?.manifest?.slots?.find(s => s.dynamic || s.name === slot);
   }
 }
 
 export function hasDefaultSlot(tagName: string) {
-  const element = elements.find(element => element.name === tagName);
+  const element = elements.find(el => el.name === tagName);
   return !!element?.manifest?.slots?.find(s => s.name === '');
 }
 
 export function isKnownElement(tagName: string) {
-  return !!elements.find(element => element.name === tagName);
+  return !!elements.find(el => el.name === tagName);
 }
 
 export function getRecommendedSlotName(slot: string, tagName: string) {
-  const element = elements.find(element => element.name === tagName);
+  const element = elements.find(el => el.name === tagName);
   const slots = element?.manifest?.slots?.map(s => s.name)?.filter(s => s !== undefined) ?? [];
   const hasUnnamedSlot = slots.find(s => s === '');
   let recommendedSlot = slots[0];

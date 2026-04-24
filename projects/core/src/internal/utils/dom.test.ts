@@ -615,8 +615,8 @@ describe('getThemeTokens', () => {
   });
 
   it('should accept custom element parameter', async () => {
-    const customElement = document.createElement('div');
-    const tokens = getThemeTokens(customElement);
+    const el = document.createElement('div');
+    const tokens = getThemeTokens(el);
     expect(typeof tokens).toBe('object');
   });
 });

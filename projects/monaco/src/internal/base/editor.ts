@@ -88,8 +88,8 @@ export abstract class BaseMonacoEditor<T extends monaco.editor.IEditor> extends 
     if (this.#loadedEditorStyles) {
       return;
     }
-    const styles = await loadEditorStyles();
-    this.shadowRoot!.adoptedStyleSheets = [styles, ...this.shadowRoot!.adoptedStyleSheets];
+    const editorStyles = await loadEditorStyles();
+    this.shadowRoot!.adoptedStyleSheets = [editorStyles, ...this.shadowRoot!.adoptedStyleSheets];
     this.#loadedEditorStyles = true;
   }
 

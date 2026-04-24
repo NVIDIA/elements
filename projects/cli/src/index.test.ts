@@ -65,21 +65,21 @@ describe('index', () => {
 
   describe('interactive fallback for missing required args', () => {
     it('should not exit with validation error for project.create without <type>', () => {
-      const output = runWithoutRequiredArgs('project.create');
-      expect(output).not.toContain('Not enough non-option arguments');
-      expect(output).not.toContain('Missing required argument');
+      const result = runWithoutRequiredArgs('project.create');
+      expect(result).not.toContain('Not enough non-option arguments');
+      expect(result).not.toContain('Missing required argument');
     });
 
     it('should not exit with validation error for api.get without <names>', () => {
-      const output = runWithoutRequiredArgs('api.get');
-      expect(output).not.toContain('Not enough non-option arguments');
-      expect(output).not.toContain('Missing required argument');
+      const result = runWithoutRequiredArgs('api.get');
+      expect(result).not.toContain('Not enough non-option arguments');
+      expect(result).not.toContain('Missing required argument');
     });
 
     it('should not exit with validation error for project.validate without <type>', () => {
-      const output = runWithoutRequiredArgs('project.validate');
-      expect(output).not.toContain('Not enough non-option arguments');
-      expect(output).not.toContain('Missing required argument');
+      const result = runWithoutRequiredArgs('project.validate');
+      expect(result).not.toContain('Not enough non-option arguments');
+      expect(result).not.toContain('Missing required argument');
     });
   });
 
@@ -102,10 +102,10 @@ describe('index', () => {
         encoding: 'utf-8',
         input: ''
       });
-      const output = `${result.stdout}${result.stderr}`;
-      expect(output).not.toContain('"nve-foo,nve-bar"');
-      expect(output).toContain('nve-foo');
-      expect(output).toContain('nve-bar');
+      const combined = `${result.stdout}${result.stderr}`;
+      expect(combined).not.toContain('"nve-foo,nve-bar"');
+      expect(combined).toContain('nve-foo');
+      expect(combined).toContain('nve-bar');
     });
   });
 });

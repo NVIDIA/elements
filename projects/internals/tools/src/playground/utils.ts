@@ -235,56 +235,43 @@ ${content.trim()}
 </html>`;
 }
 
+const frameworkImportMap: Record<string, (cdn: string) => Record<string, string>> = {
+  react: cdn => ({
+    'react-dom': `${cdn}/react-dom@19`,
+    'react-dom/': `${cdn}/react-dom@19/`,
+    react: `${cdn}/react@19`,
+    'react/': `${cdn}/react@19/`
+  }),
+  preact: cdn => ({ preact: `${cdn}/preact@10`, 'preact/': `${cdn}/preact@10/` }),
+  angular: cdn => ({
+    '@angular/compiler': `${cdn}/@angular/compiler@20.0.0`,
+    '@angular/core': `${cdn}/@angular/core@20.0.0`,
+    '@angular/platform-browser': `${cdn}/@angular/platform-browser@20.0.0`,
+    'zone.js': `${cdn}/zone.js`
+  }),
+  lit: cdn => ({ lit: `${cdn}/lit@latest`, 'lit/': `${cdn}/lit@latest/` }),
+  vue: cdn => ({ vue: `${cdn}/vue@3`, 'vue/': `${cdn}/vue@3/` })
+};
+
 function createImportMap(framework: 'react' | 'preact' | 'angular' | 'lit' | 'vue' | 'vanilla' = 'vanilla') {
   const CDN_MODULES_URL = __ELEMENTS_ESM_CDN_BASE_URL__;
-
-  const importmap: { imports: Record<string, string> } = {
-    imports: {
-      '@nvidia-elements/core': `${CDN_MODULES_URL}/@nvidia-elements/core@latest`,
-      '@nvidia-elements/core/': `${CDN_MODULES_URL}/@nvidia-elements/core@latest/`,
-      '@nvidia-elements/styles': `${CDN_MODULES_URL}/@nvidia-elements/styles@latest`,
-      '@nvidia-elements/styles/': `${CDN_MODULES_URL}/@nvidia-elements/styles@latest/`,
-      '@nvidia-elements/themes': `${CDN_MODULES_URL}/@nvidia-elements/themes@latest`,
-      '@nvidia-elements/themes/': `${CDN_MODULES_URL}/@nvidia-elements/themes@latest/`,
-      '@nvidia-elements/monaco': `${CDN_MODULES_URL}/@nvidia-elements/monaco@latest`,
-      '@nvidia-elements/monaco/': `${CDN_MODULES_URL}/@nvidia-elements/monaco@latest/`,
-      '@nvidia-elements/code': `${CDN_MODULES_URL}/@nvidia-elements/code@latest`,
-      '@nvidia-elements/code/': `${CDN_MODULES_URL}/@nvidia-elements/code@latest/`,
-      '@nvidia-elements/forms': `${CDN_MODULES_URL}/@nvidia-elements/forms@latest`,
-      '@nvidia-elements/forms/': `${CDN_MODULES_URL}/@nvidia-elements/forms@latest/`
-    }
+  const imports: Record<string, string> = {
+    '@nvidia-elements/core': `${CDN_MODULES_URL}/@nvidia-elements/core@latest`,
+    '@nvidia-elements/core/': `${CDN_MODULES_URL}/@nvidia-elements/core@latest/`,
+    '@nvidia-elements/styles': `${CDN_MODULES_URL}/@nvidia-elements/styles@latest`,
+    '@nvidia-elements/styles/': `${CDN_MODULES_URL}/@nvidia-elements/styles@latest/`,
+    '@nvidia-elements/themes': `${CDN_MODULES_URL}/@nvidia-elements/themes@latest`,
+    '@nvidia-elements/themes/': `${CDN_MODULES_URL}/@nvidia-elements/themes@latest/`,
+    '@nvidia-elements/monaco': `${CDN_MODULES_URL}/@nvidia-elements/monaco@latest`,
+    '@nvidia-elements/monaco/': `${CDN_MODULES_URL}/@nvidia-elements/monaco@latest/`,
+    '@nvidia-elements/code': `${CDN_MODULES_URL}/@nvidia-elements/code@latest`,
+    '@nvidia-elements/code/': `${CDN_MODULES_URL}/@nvidia-elements/code@latest/`,
+    '@nvidia-elements/forms': `${CDN_MODULES_URL}/@nvidia-elements/forms@latest`,
+    '@nvidia-elements/forms/': `${CDN_MODULES_URL}/@nvidia-elements/forms@latest/`,
+    ...(frameworkImportMap[framework]?.(CDN_MODULES_URL) ?? {})
   };
 
-  if (framework === 'react') {
-    importmap.imports['react-dom'] = `${CDN_MODULES_URL}/react-dom@19`;
-    importmap.imports['react-dom/'] = `${CDN_MODULES_URL}/react-dom@19/`;
-    importmap.imports['react'] = `${CDN_MODULES_URL}/react@19`;
-    importmap.imports['react/'] = `${CDN_MODULES_URL}/react@19/`;
-  }
-
-  if (framework === 'preact') {
-    importmap.imports['preact'] = `${CDN_MODULES_URL}/preact@10`;
-    importmap.imports['preact/'] = `${CDN_MODULES_URL}/preact@10/`;
-  }
-
-  if (framework === 'angular') {
-    importmap.imports['@angular/compiler'] = `${CDN_MODULES_URL}/@angular/compiler@20.0.0`;
-    importmap.imports['@angular/core'] = `${CDN_MODULES_URL}/@angular/core@20.0.0`;
-    importmap.imports['@angular/platform-browser'] = `${CDN_MODULES_URL}/@angular/platform-browser@20.0.0`;
-    importmap.imports['zone.js'] = `${CDN_MODULES_URL}/zone.js`;
-  }
-
-  if (framework === 'lit') {
-    importmap.imports['lit'] = `${CDN_MODULES_URL}/lit@latest`;
-    importmap.imports['lit/'] = `${CDN_MODULES_URL}/lit@latest/`;
-  }
-
-  if (framework === 'vue') {
-    importmap.imports['vue'] = `${CDN_MODULES_URL}/vue@3`;
-    importmap.imports['vue/'] = `${CDN_MODULES_URL}/vue@3/`;
-  }
-
-  return JSON.stringify(importmap, null, 2);
+  return JSON.stringify({ imports }, null, 2);
 }
 
 function createReactIndexTSX(content: string, elements: Element[]) {
