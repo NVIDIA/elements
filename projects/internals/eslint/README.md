@@ -74,6 +74,7 @@ Applied to `src/**/*.ts`, `src/**/*.tsx`, test files, and `*.examples.ts`.
 **Source hygiene**
 
 - **`no-dead-code`**. Flags commented-out imports, exports, declarations, control-flow, and test blocks. The project currently sets this to `warn` during cleanup.
+- **`require-spdx-header`**. Every source file must start with the two-line SPDX header (`SPDX-FileCopyrightText` copyright + `SPDX-License-Identifier: Apache-2.0`). The rule accepts any 4-digit year; auto-fix preserves an existing year and falls back to the current year only when inserting a header from scratch.
 
 ### Example rules (plugin `local-typescript`, files `**/*.examples.ts`)
 

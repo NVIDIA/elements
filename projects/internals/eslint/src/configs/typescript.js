@@ -13,6 +13,7 @@ import requireElementStable from '../local/require-element-stable.js';
 import requireListenerCleanup from '../local/require-listener-cleanup.js';
 import requireObserverCleanup from '../local/require-observer-cleanup.js';
 import requireTimerCleanup from '../local/require-timer-cleanup.js';
+import requireSpdxHeader from '../local/require-spdx-header.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -56,7 +57,8 @@ const config = {
         'require-element-stable': requireElementStable,
         'require-listener-cleanup': requireListenerCleanup,
         'require-observer-cleanup': requireObserverCleanup,
-        'require-timer-cleanup': requireTimerCleanup
+        'require-timer-cleanup': requireTimerCleanup,
+        'require-spdx-header': requireSpdxHeader
       }
     }
   },
@@ -98,6 +100,7 @@ const config = {
     'local-typescript/require-listener-cleanup': ['error'],
     'local-typescript/require-observer-cleanup': ['error'],
     'local-typescript/require-timer-cleanup': ['error'],
+    'local-typescript/require-spdx-header': ['error'],
 
     // todo: enable these rules incrementally as the codebase is cleaned up
     '@typescript-eslint/no-unnecessary-type-assertion': 'off',
