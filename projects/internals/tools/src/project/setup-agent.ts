@@ -171,67 +171,57 @@ export function writeAllAgentConfigs(dir: string): void {
   writeVSCodeSettings(dir);
 }
 
+type AgentTarget = 'cursor' | 'claude-code' | 'codex';
+
+const targetLabels: Record<AgentTarget, string> = { cursor: 'Cursor', 'claude-code': 'Claude Code', codex: 'Codex' };
+
+function configureAgentTarget(target: AgentTarget, dir: string): string {
+  if (target === 'claude-code') {
+    writeClaudeSettings(dir);
+    writeElementsSkill(resolve(join(dir, '.claude', 'skills', 'elements')));
+    writeMcpJsonConfig(resolve(join(dir, '.mcp.json')));
+    return `${targetLabels[target]} configured. Restart ${targetLabels[target]} to activate`;
+  }
+  if (target === 'codex') {
+    writeElementsSkill(resolve(join(dir, '.agents', 'skills', 'elements')));
+    writeMcpTomlConfig(resolve(join(dir, '.codex', 'config.toml')));
+    return `${targetLabels[target]} configured. Restart ${targetLabels[target]} to activate`;
+  }
+  writeElementsSkill(resolve(join(dir, '.agents', 'skills', 'elements')));
+  writeMcpJsonConfig(resolve(join(dir, '.cursor', 'mcp.json')));
+  return `${targetLabels[target]} configured. Enable the MCP in the ${targetLabels[target]} settings to activate`;
+}
+
+function reportVSCodeSetup(dir: string, report: Report): void {
+  try {
+    writeVSCodeSettings(dir);
+    report['vscode-settings'] = { message: 'VSCode settings configured', status: 'success' };
+  } catch (e) {
+    report['vscode-settings'] = { message: `Failed to configure VSCode settings. ${e}`, status: 'danger' };
+  }
+}
+
 export async function setupAgent(cwd: string, ide: IDE): Promise<Report> {
   const dir = resolve(cwd);
   const client = await getNPMClient();
 
   if (!client) {
     return {
-      setup: {
-        message: 'No package manager found. Install npm or pnpm and try again.',
-        status: 'danger'
-      }
+      setup: { message: 'No package manager found. Install npm or pnpm and try again.', status: 'danger' }
     };
   }
 
-  const ides: Array<'cursor' | 'claude-code' | 'codex'> = ide === 'all' ? ['cursor', 'claude-code', 'codex'] : [ide];
+  const ides: AgentTarget[] = ide === 'all' ? ['cursor', 'claude-code', 'codex'] : [ide];
   const report: Report = {};
-  const labels: Record<string, string> = { cursor: 'Cursor', 'claude-code': 'Claude Code', codex: 'Codex' };
 
   for (const target of ides) {
     try {
-      let message = `${labels[target]} configured. Restart ${labels[target]} to activate`;
-      if (target === 'claude-code') {
-        writeClaudeSettings(dir);
-        writeElementsSkill(resolve(join(dir, '.claude', 'skills', 'elements')));
-        writeMcpJsonConfig(resolve(join(dir, '.mcp.json')));
-      }
-
-      if (target === 'codex') {
-        writeElementsSkill(resolve(join(dir, '.agents', 'skills', 'elements')));
-        writeMcpTomlConfig(resolve(join(dir, '.codex', 'config.toml')));
-      }
-
-      if (target === 'cursor') {
-        writeElementsSkill(resolve(join(dir, '.agents', 'skills', 'elements')));
-        writeMcpJsonConfig(resolve(join(dir, '.cursor', 'mcp.json')));
-        message = `${labels[target]} configured. Enable the MCP in the ${labels[target]} settings to activate`;
-      }
-
-      report[target] = {
-        message,
-        status: 'success'
-      };
+      report[target] = { message: configureAgentTarget(target, dir), status: 'success' };
     } catch (e) {
-      report[target] = {
-        message: `**Failed to configure ${labels[target]}**: ${e}`,
-        status: 'danger'
-      };
+      report[target] = { message: `**Failed to configure ${targetLabels[target]}**: ${e}`, status: 'danger' };
     }
   }
 
-  try {
-    writeVSCodeSettings(dir);
-    report['vscode-settings'] = {
-      message: 'VSCode settings configured',
-      status: 'success'
-    };
-  } catch (e) {
-    report['vscode-settings'] = {
-      message: `Failed to configure VSCode settings. ${e}`,
-      status: 'danger'
-    };
-  }
-
+  reportVSCodeSetup(dir, report);
   return report;
 }

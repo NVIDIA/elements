@@ -46,15 +46,15 @@ describe(Color.metadata.tag, () => {
   });
 
   it('should not apply default if custom default is provided', async () => {
-    const element = document.createElement(Color.metadata.tag) as Color;
+    const customElement = document.createElement(Color.metadata.tag) as Color;
     const input = document.createElement('input');
     input.value = '#fff';
 
-    element.appendChild(input);
-    document.body.appendChild(element);
-    await element.updateComplete;
+    customElement.appendChild(input);
+    document.body.appendChild(customElement);
+    await customElement.updateComplete;
     expect(input.value).toBe('#fff');
-    element.remove();
+    customElement.remove();
   });
 
   it('should update the color value if EyeDropper is used', async () => {

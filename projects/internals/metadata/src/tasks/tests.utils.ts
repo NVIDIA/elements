@@ -189,9 +189,9 @@ async function getTestReport(name: string, basePath: string): Promise<ProjectTes
   if (existsSync(coveragePath)) {
     const coverage = JSON.parse(readFileSync(coveragePath, 'utf8')) as Record<string, CoverageResult>;
     report.coverage.total = coverage.total!;
-    report.coverage.testResults = Object.entries(coverage).map(([file, coverage]: [string, CoverageResult]) => ({
+    report.coverage.testResults = Object.entries(coverage).map(([file, fileCoverage]: [string, CoverageResult]) => ({
       file: file.includes('/src/') ? file.split('/src/')[1]! : file,
-      ...coverage
+      ...fileCoverage
     }));
   }
 

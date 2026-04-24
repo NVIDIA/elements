@@ -11,6 +11,7 @@ import { type ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 export const VERSION = '0.0.0';
 export const BUILD_SHA = '__NVE_BUILD_CHECKSUM__';
 
+// eslint-disable-next-line max-lines-per-function
 export async function startMcpServer() {
   process.env.ELEMENTS_ENV = 'mcp';
 

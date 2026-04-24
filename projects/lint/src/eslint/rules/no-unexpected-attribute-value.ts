@@ -78,7 +78,7 @@ const rule = {
                   attribute: attributeName,
                   value,
                   alternative,
-                  validValues: validValues.map(value => `"${value}"`).join(', ')
+                  validValues: validValues.map(v => `"${v}"`).join(', ')
                 },
                 messageId: alternative ? 'unexpected-attribute-value-alternative' : 'no-unexpected-attribute-value',
                 suggest

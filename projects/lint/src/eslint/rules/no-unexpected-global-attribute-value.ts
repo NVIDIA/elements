@@ -124,7 +124,7 @@ const rule = {
       const displayAttr = findAttr(node, 'nve-display');
       if (!displayAttr) return;
       const values = displayAttr.value?.value?.split(' ') ?? [];
-      const value = values.find((value: string) => !VALID_NVE_DISPLAY_VALUES.has(value));
+      const value = values.find((v: string) => !VALID_NVE_DISPLAY_VALUES.has(v));
       const isValueBinding = VALUE_BINDINGS.some(binding => value?.includes(binding));
       if (!value || isValueBinding) return;
       context.report({

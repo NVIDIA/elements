@@ -254,10 +254,10 @@ describe(Dropzone.metadata.tag, () => {
   });
 
   it('should render custom icon slot content', async () => {
-    const fixture = await createFixture(html`
+    const iconFixture = await createFixture(html`
       <nve-dropzone><div slot="icon" id="test">Test</div></nve-dropzone>
     `);
-    element = fixture.querySelector(Dropzone.metadata.tag);
+    element = iconFixture.querySelector(Dropzone.metadata.tag);
     await elementIsStable(element);
 
     const slot = element.shadowRoot.querySelector('slot[name="icon"]');
@@ -267,16 +267,16 @@ describe(Dropzone.metadata.tag, () => {
     expect(slottedContent).to.exist;
     expect(slottedContent.textContent).to.equal('Test');
 
-    removeFixture(fixture);
+    removeFixture(iconFixture);
   });
 
   it('should render custom content slot', async () => {
-    const fixture = await createFixture(html`
+    const contentFixture = await createFixture(html`
       <nve-dropzone>
         <div>Custom Content</div>
       </nve-dropzone>
     `);
-    element = fixture.querySelector(Dropzone.metadata.tag);
+    element = contentFixture.querySelector(Dropzone.metadata.tag);
     await elementIsStable(element);
 
     const slot = element.shadowRoot.querySelector('slot:not([name])');
@@ -286,7 +286,7 @@ describe(Dropzone.metadata.tag, () => {
     expect(slottedContent).to.exist;
     expect(slottedContent.textContent).to.equal('Custom Content');
 
-    removeFixture(fixture);
+    removeFixture(contentFixture);
   });
 
   it('should open file picker on Enter key press', async () => {
@@ -304,17 +304,17 @@ describe(Dropzone.metadata.tag, () => {
   });
 
   it('should not render blank slot content', async () => {
-    const fixture = await createFixture(html`
+    const blankFixture = await createFixture(html`
       <nve-dropzone>
         <div slot="icon" id="test">Test</div>
       </nve-dropzone>
     `);
-    element = fixture.querySelector(Dropzone.metadata.tag);
+    element = blankFixture.querySelector(Dropzone.metadata.tag);
     await elementIsStable(element);
 
     const slot = element.shadowRoot.querySelector('slot[name="icon"]');
     expect(slot).to.exist;
 
-    removeFixture(fixture);
+    removeFixture(blankFixture);
   });
 });

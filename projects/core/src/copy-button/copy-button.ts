@@ -70,7 +70,6 @@ export class CopyButton extends Button {
     [Tooltip.metadata.tag]: Tooltip
   };
 
-  // todo
   /* eslint-disable @nvidia-elements/lint/no-deprecated-popover-attributes */
   render() {
     return html`

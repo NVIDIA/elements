@@ -109,9 +109,9 @@ export function getSelect(value: string, prop: { enum?: string[] }) {
   return select({
     message: `Select a ${value}:`,
     choices:
-      prop.enum?.map(value => ({
-        name: value,
-        value
+      prop.enum?.map(option => ({
+        name: option,
+        value: option
       })) ?? []
   });
 }

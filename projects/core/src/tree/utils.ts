@@ -11,12 +11,12 @@ export function updateNodeSelection(node: SelectableNode) {
   const nodes = node.nodes;
 
   if (nodes.length) {
-    if (nodes.every(node => node.selected)) {
+    if (nodes.every(n => n.selected)) {
       node.selected = true;
       node.indeterminate = false;
-    } else if (nodes.some(node => node.selected)) {
+    } else if (nodes.some(n => n.selected)) {
       node.indeterminate = true;
-    } else if (nodes.every(node => !node.selected)) {
+    } else if (nodes.every(n => !n.selected)) {
       node.selected = false;
       node.indeterminate = false;
     }

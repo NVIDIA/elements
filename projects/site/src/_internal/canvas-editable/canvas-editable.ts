@@ -164,7 +164,7 @@ export class CanvasEditable extends LitElement {
 
   #renderSandboxedPreview() {
     const srcdoc = this.editableSource ?? '';
-    const { elements, themes, styles } = this.#bundleUrls;
+    const { elements, themes, styles: stylesUrl } = this.#bundleUrls;
     return html`
       <iframe
         sandbox=${'allow-scripts allow-modals allow-forms allow-popups allow-same-origin' as unknown as 'allow-scripts'}
@@ -187,7 +187,7 @@ export class CanvasEditable extends LitElement {
 
               <script async type="module" src="${elements}"></script>
               <link rel="stylesheet" type="text/css" href="${themes}" />
-              <link rel="stylesheet" type="text/css" href="${styles}" />
+              <link rel="stylesheet" type="text/css" href="${stylesUrl}" />
             </head>
             <body>
               ${srcdoc}

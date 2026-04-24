@@ -199,9 +199,9 @@ describe('getHostAnchor', () => {
   });
 
   it('returns the body as a fallback when anchor is not an element and is equal to the body', () => {
-    const anchor = document.createElement('div');
-    document.body.appendChild(anchor);
-    anchor.id = 'body';
+    const bodyAnchor = document.createElement('div');
+    document.body.appendChild(bodyAnchor);
+    bodyAnchor.id = 'body';
     expect(getHostAnchor(host)).toBe(document.body);
   });
 

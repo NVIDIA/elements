@@ -142,6 +142,7 @@ function findTokenAlternate(tokens: TokenEntry[], value: number): string | undef
   return tokens.find(token => token.value === value)?.name;
 }
 
+// eslint-disable-next-line max-params
 function checkDimensionProperty(
   context: Rule.RuleContext,
   node: CssDeclarationNode,
@@ -189,7 +190,7 @@ function checkFontSizeValue(context: Rule.RuleContext, node: CssDeclarationNode,
 
 function checkFontWeightValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
   if (propertyName !== 'font-weight') return;
-  const child = node.value.children?.find(child => child.name !== 'var');
+  const child = node.value.children?.find(c => c.name !== 'var');
   if (!child) return;
   const alternate =
     fontWeightTokens.find(token => token.value === child.value || token.value === child.name)?.name ??
@@ -211,9 +212,7 @@ function checkLineHeightValue(context: Rule.RuleContext, node: CssDeclarationNod
 
 function checkOpacityValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
   if (propertyName !== 'opacity') return;
-  const child = node.value.children?.find(
-    child => child.type === 'Number' && child.value !== '0' && child.value !== '1'
-  );
+  const child = node.value.children?.find(c => c.type === 'Number' && c.value !== '0' && c.value !== '1');
   if (!child) return;
   const alternate = opacityTokens.find(token => token.value === child.value)?.name ?? 'var(--nve-ref-opacity-*)';
   reportTokenViolation(context, node, { value: child.value ?? '', unit: child.unit ?? '', alternate });
@@ -224,10 +223,10 @@ function checkBorderRadiusValue(context: Rule.RuleContext, node: CssDeclarationN
   let value = '';
   let unit = '';
 
-  const child = node.value.children?.find(child => {
-    const v = parseInt(child.value ?? '');
+  const child = node.value.children?.find(c => {
+    const v = parseInt(c.value ?? '');
     const isDimensionOrNumber =
-      (child.type === 'Dimension' && child.unit === 'px') || (child.type === 'Number' && child.unit === undefined);
+      (c.type === 'Dimension' && c.unit === 'px') || (c.type === 'Number' && c.unit === undefined);
     return isDimensionOrNumber && v <= maxBorderRadiusToken.value && v >= minBorderRadiusToken.value;
   });
 
@@ -259,7 +258,7 @@ function checkBorderWidthValue(context: Rule.RuleContext, node: CssDeclarationNo
 
 function checkBoxShadowValue(context: Rule.RuleContext, node: CssDeclarationNode, propertyName: string) {
   if (propertyName !== 'box-shadow') return;
-  const child = node.value.children?.find(child => child.type === 'Dimension');
+  const child = node.value.children?.find(c => c.type === 'Dimension');
   if (!child || JSON.stringify(node.value).includes('Highlight')) return;
   context.report({
     messageId: 'unexpected-css-value',

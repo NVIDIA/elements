@@ -78,29 +78,33 @@ const config = {
     'no-useless-catch': 'error',
     'no-unreachable': 'error',
     'no-useless-return': 'error',
+    'no-param-reassign': 'error',
+    'no-warning-comments': 'error',
+    'no-shadow': ['error', { allow: ['_', 'args', 'resolve', 'cwd'] }], // globals and a few large refactors
     'no-restricted-imports': ['error', { patterns: ['**/dist/**', '**/node_modules/**'] }],
-    'max-statements-per-line': ['error', { max: 1 }],
     'max-lines': ['error', 1000],
+    'max-lines-per-function': ['error', 50],
+    'max-statements-per-line': ['error', { max: 1 }],
     'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
-    '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/only-throw-error': 'error',
+    '@typescript-eslint/no-floating-promises': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
     '@typescript-eslint/no-confusing-void-expression': 'off',
+    '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
     '@typescript-eslint/no-unused-vars': ['error', { varsIgnorePattern: '^_|Demo|Test|T', argsIgnorePattern: '^_' }],
-    '@typescript-eslint/consistent-type-imports': ['error'],
-    '@typescript-eslint/no-floating-promises': ['error'],
-    '@typescript-eslint/no-explicit-any': ['error'],
     '@typescript-eslint/explicit-member-accessibility': ['error', { accessibility: 'no-public' }],
     '@typescript-eslint/switch-exhaustiveness-check': ['error', { requireDefaultForNonUnion: false }],
     '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'error',
-    '@typescript-eslint/only-throw-error': 'error',
     // prevent usage of overlapping/conflicting type annotations between jsdoc and TypeScript metadata
-    'jsdoc/no-types': ['error'],
-    'jsdoc/valid-types': ['error'],
-    'jsdoc/check-tag-names': ['error'],
+    'jsdoc/no-types': 'error',
+    'jsdoc/valid-types': 'error',
+    'jsdoc/check-tag-names': 'error',
+    'jsdoc/informative-docs': 'error',
     'local-typescript/no-dead-code': ['warn'], // todo, this should be migrated to the internal playground template config
-    'local-typescript/require-listener-cleanup': ['error'],
-    'local-typescript/require-observer-cleanup': ['error'],
-    'local-typescript/require-timer-cleanup': ['error'],
-    'local-typescript/require-spdx-header': ['error'],
+    'local-typescript/require-listener-cleanup': 'error',
+    'local-typescript/require-observer-cleanup': 'error',
+    'local-typescript/require-timer-cleanup': 'error',
 
     // todo: enable these rules incrementally as the codebase is cleaned up
     '@typescript-eslint/no-unnecessary-type-assertion': 'off',
@@ -129,17 +133,11 @@ const config = {
     '@typescript-eslint/no-unnecessary-type-parameters': 'off',
     '@typescript-eslint/prefer-readonly': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    'jsdoc/informative-docs': 'off',
     'id-length': ['off', { min: 2, exceptions: ['_'] }],
-    'no-warning-comments': 'off',
-    'no-implicit-coercion': 'off',
-    'max-lines-per-function': ['off', 50],
-    'max-statements': ['off', 15],
+    'max-params': ['error', 6], // goal 3
+    'max-statements': ['error', 20], // goal 15
     'max-depth': ['off', 3],
-    'max-params': ['off', 4],
-    'max-nested-callbacks': ['off', 3],
-    'no-shadow': 'off',
-    'no-param-reassign': 'off'
+    'max-nested-callbacks': ['off', 3]
   },
   settings: {
     jsdoc: {

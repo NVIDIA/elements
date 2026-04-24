@@ -72,6 +72,7 @@ yargsInstance.command(
 
 tools
   .filter(tool => tool.metadata.support & ToolSupport.CLI)
+  // eslint-disable-next-line max-lines-per-function
   .forEach(tool => {
     const { inputSchema, summary } = tool.metadata;
     const { properties, required } = inputSchema ?? {};
@@ -101,6 +102,7 @@ tools
         optionalArgs.forEach(key => builder.option(key, argOptions(properties[key]!)));
       },
       // main handler for the command
+      // eslint-disable-next-line max-statements
       async args => {
         const start = performance.now();
         const { result, status, message } = await runAsyncTool(args, tool);

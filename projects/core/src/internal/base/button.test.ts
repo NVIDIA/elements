@@ -205,7 +205,7 @@ describe('base button', () => {
     submitButtonInForm.type = 'submit';
     await elementIsStable(submitButtonInForm);
     const event = untilEvent(form, 'submit');
-    form.dispatchEvent(new Event('submit')); // todo: happy-dom mock does not properly emulate form submit behavior, this should not be needed
+    form.dispatchEvent(new Event('submit')); // happy-dom does not emulate form submit behavior, so a manual dispatch is required
     emulateClick(submitButtonInForm);
     expect((await event).type).toBe('submit');
   });

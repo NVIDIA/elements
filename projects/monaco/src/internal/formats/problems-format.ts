@@ -129,9 +129,9 @@ function toFileLine(monaco: Monaco, lineNumber: number, uri: string, problems: P
   return { text, decorations };
 }
 
+// eslint-disable-next-line max-statements
 function toProblemLine(monaco: Monaco, lineNumber: number, problem: Problem): DecoratedLine {
   const severity = toSeverityLabel(problem.severity);
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const message = problem.message.split('\n')[0]!;
   const source = problem.source ?? '';
   const code = (typeof problem.code === 'object' ? problem.code?.value : problem.code) ?? '';
@@ -175,6 +175,7 @@ function toProblemLine(monaco: Monaco, lineNumber: number, problem: Problem): De
   return { text, decorations };
 }
 
+/* eslint-disable max-params, no-param-reassign */
 function appendSourceCode(
   monaco: Monaco,
   lineNumber: number,
@@ -204,6 +205,7 @@ function appendSourceCode(
 
   return text;
 }
+/* eslint-enable max-params, no-param-reassign */
 
 export function toSelectedLineDecorations(
   monaco: Monaco,
@@ -275,6 +277,7 @@ export function toProblemsFormat(monaco: Monaco, problems: Problem[]): ProblemsF
   return {
     text: lines.join('\n'),
     decorations,
+    // eslint-disable-next-line no-shadow
     getProblemByLine: lineNumber => problemsByLine.get(lineNumber)
   };
 }

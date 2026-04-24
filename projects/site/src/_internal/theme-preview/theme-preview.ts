@@ -147,7 +147,6 @@ export class ThemePreview extends LitElement {
     this.#resizeObserver?.unobserve(this);
   }
 
-  // todo:
   /* eslint-disable @nvidia-elements/lint/no-restricted-attributes */
   render() {
     return html`

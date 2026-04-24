@@ -401,6 +401,7 @@ export abstract class BaseMonacoInput<
     setJSONSchemaForModel(this.#monaco, this.#model, undefined);
   }
 
+  // eslint-disable-next-line max-lines-per-function, max-statements
   #editorReady = (event: Event) => {
     const editorEl = event.target as MonacoEditor;
 

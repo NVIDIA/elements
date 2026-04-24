@@ -8,7 +8,10 @@ export default [
     files: ['src/**/*.ts'],
     ignores: ['**/*.test.ts', '**/*.test.*.ts', '**/*.examples.ts'],
     rules: {
-      complexity: 'off' // todo
+      // enable these rules incrementally as the codebase is cleaned up
+      complexity: 'off',
+      'max-statements': 'off',
+      'max-lines-per-function': 'off'
     }
   }
 ];

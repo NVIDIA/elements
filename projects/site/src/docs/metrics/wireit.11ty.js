@@ -90,11 +90,7 @@ export function render() {
           </div>
           <div nve-layout="row gap:xs">
             <nve-dot style="--background: #46a458;"></nve-dot>
-            <span>Elements</span>
-          </div>
-          <div nve-layout="row gap:xs">
-            <nve-dot style="--background: #8e4ec6;"></nve-dot>
-            <span>Labs</span>
+            <span>Core</span>
           </div>
           <div nve-layout="row gap:xs">
             <nve-dot style="--background: #e5484d;"></nve-dot>
@@ -107,6 +103,26 @@ export function render() {
           <div nve-layout="row gap:xs">
             <nve-dot style="--background: #ffc801;"></nve-dot>
             <span>Themes/Styles</span>
+          </div>
+          <div nve-layout="row gap:xs">
+            <nve-dot style="--background: #3caf77;"></nve-dot>
+            <span>Monaco</span>
+          </div>
+          <div nve-layout="row gap:xs">
+            <nve-dot style="--background: #f94dba;"></nve-dot>
+            <span>Forms</span>
+          </div>
+          <div nve-layout="row gap:xs">
+            <nve-dot style="--background: #01d6bd;"></nve-dot>
+            <span>Markdown</span>
+          </div>
+          <div nve-layout="row gap:xs">
+            <nve-dot style="--background: #ff9f18;"></nve-dot>
+            <span>Code</span>
+          </div>
+          <div nve-layout="row gap:xs">
+            <nve-dot style="--background: #924cc8;"></nve-dot>
+            <span>Lint</span>
           </div>
           <div nve-layout="row gap:xs">
             <nve-dot style="--background: #8b949e;"></nve-dot>

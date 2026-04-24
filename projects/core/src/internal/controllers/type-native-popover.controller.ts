@@ -70,6 +70,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
     };
   }
 
+  // eslint-disable-next-line max-lines-per-function
   async hostConnected() {
     attachInternals(this.host);
     this.host.popover = this.host.popoverType ?? null;

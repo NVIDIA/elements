@@ -15,14 +15,17 @@ const rawData = (globalThis as unknown as { wireitData: WireitGraph }).wireitDat
 
 const colorScale = {
   root: '#5dafee',
-  elements: '#46a458',
-  labs: '#8e4ec6',
+  core: '#46a458',
   internals: '#e5484d',
   starters: '#f66807',
   themes: '#ffc801',
   styles: '#ffc801',
-  testing: '#79c0ff',
   site: '#82ccd9',
+  lint: '#924cc8',
+  markdown: '#01d6bd',
+  monaco: '#3caf77',
+  forms: '#f94dba',
+  code: '#ff9f18',
   other: '#8b949e'
 };
 

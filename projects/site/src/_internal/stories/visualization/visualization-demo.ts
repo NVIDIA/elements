@@ -158,8 +158,8 @@ export class VisualizationDemo extends LitElement {
         const color = getComputedStyle(globalThis.document.body).getPropertyValue(
           '--nve-sys-visualization-categorical-' + label
         );
-        function applyOpacityToColor(color: string, opacity: number) {
-          return `color-mix(in oklch, ${color}, transparent ${100 - opacity * 100}%)`;
+        function applyOpacityToColor(baseColor: string, alpha: number) {
+          return `color-mix(in oklch, ${baseColor}, transparent ${100 - alpha * 100}%)`;
         }
 
         const opacity = type === 'line' || type === 'bar' || type === 'bubble' ? 1 : 0.5;

@@ -7,50 +7,40 @@ import type { Report } from '../internal/types.js';
 
 const CORE_DEPENDENCIES = ['@nvidia-elements/core', '@nvidia-elements/themes', '@nvidia-elements/styles'];
 
-export function setupProject(cwd: string): Report {
-  const packageJsonPath = resolve(join(cwd, 'package.json'));
-
-  if (!existsSync(packageJsonPath)) {
-    return {
-      dependencies: {
-        message: 'No package.json found. Skipping project setup.',
-        status: 'warning'
-      }
-    };
-  }
-
-  let packageJson: Record<string, unknown>;
+function readPackageJson(path: string): Record<string, unknown> | 'missing' | 'invalid' {
+  if (!existsSync(path)) return 'missing';
   try {
-    packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
+    return JSON.parse(readFileSync(path, 'utf-8'));
   } catch {
-    return {
-      dependencies: {
-        message: 'Failed to parse package.json. Skipping project setup.',
-        status: 'danger'
-      }
-    };
+    return 'invalid';
   }
+}
 
+function hasExistingElementsDeps(packageJson: Record<string, unknown>): boolean {
   const dependencies = (packageJson.dependencies ?? {}) as Record<string, string>;
   const devDependencies = (packageJson.devDependencies ?? {}) as Record<string, string>;
-  const allDeps = { ...dependencies, ...devDependencies };
+  return CORE_DEPENDENCIES.some(dep => dependencies[dep] || devDependencies[dep]);
+}
 
-  const hasElementsDeps = CORE_DEPENDENCIES.some(dep => allDeps[dep]);
-  if (hasElementsDeps) {
-    return {
-      dependencies: {
-        message: 'Project already has Elements dependencies.',
-        status: 'info'
-      }
-    };
+export function setupProject(cwd: string): Report {
+  const packageJsonPath = resolve(join(cwd, 'package.json'));
+  const packageJson = readPackageJson(packageJsonPath);
+
+  if (packageJson === 'missing') {
+    return { dependencies: { message: 'No package.json found. Skipping project setup.', status: 'warning' } };
+  }
+  if (packageJson === 'invalid') {
+    return { dependencies: { message: 'Failed to parse package.json. Skipping project setup.', status: 'danger' } };
+  }
+  if (hasExistingElementsDeps(packageJson)) {
+    return { dependencies: { message: 'Project already has Elements dependencies.', status: 'info' } };
   }
 
-  const updatedDependencies = { ...dependencies };
+  const dependencies = { ...((packageJson.dependencies ?? {}) as Record<string, string>) };
   for (const dep of CORE_DEPENDENCIES) {
-    updatedDependencies[dep] = 'latest';
+    dependencies[dep] = 'latest';
   }
-
-  packageJson.dependencies = updatedDependencies;
+  packageJson.dependencies = dependencies;
   writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
   return {

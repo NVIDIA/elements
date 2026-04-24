@@ -7,20 +7,20 @@ import type { ValidatorResult } from '@nvidia-elements/forms';
 
 export function getFileTypeSpecifiers(acceptTypes: string) {
   const types = acceptTypes.split(',').map((value: string) => {
-    value = value.trim();
-    if (value.startsWith('.')) {
-      value = value.slice(1);
+    let type = value.trim();
+    if (type.startsWith('.')) {
+      type = type.slice(1);
     }
-    if (value.endsWith('/*')) {
-      value = value.split('/')[0]!;
+    if (type.endsWith('/*')) {
+      type = type.split('/')[0]!;
     }
-    if (value.includes('/')) {
-      value = value.split('/')[1]!;
+    if (type.includes('/')) {
+      type = type.split('/')[1]!;
     }
-    if (value.includes('+')) {
-      value = value.split('+')[0]!;
+    if (type.includes('+')) {
+      type = type.split('+')[0]!;
     }
-    return value;
+    return type;
   });
   return types;
 }
