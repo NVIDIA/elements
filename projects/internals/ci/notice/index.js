@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync, writeFileSync } from 'fs';
 import path from 'path';
 import * as url from 'url';
+import prettier from 'prettier';
 import { renderProjectNotice, renderRootNotice } from './template.js';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
@@ -185,18 +186,30 @@ function aggregateForRoot(resolved) {
   return [...byKey.values()];
 }
 
-function writeFile(filePath, content) {
+async function formatMarkdown(filePath, content) {
+  const config = await prettier.resolveConfig(filePath);
+  return prettier.format(content, { ...config, filepath: filePath });
+}
+
+function writeFileIfChanged(filePath, content) {
+  const relative = path.relative(REPO_ROOT, filePath);
+  if (existsSync(filePath) && readFileSync(filePath, 'utf-8') === content) {
+    console.log(`unchanged ${relative}`);
+    return;
+  }
   writeFileSync(filePath, content, 'utf-8');
-  console.log(`wrote ${path.relative(REPO_ROOT, filePath)}`);
+  console.log(`wrote ${relative}`);
 }
 
 const projects = discoverProjects();
 const resolved = projects.map(resolveProject);
 
 for (const { projectDir, deps, assets } of resolved) {
-  const content = renderProjectNotice({ deps, assets });
-  writeFile(path.join(projectDir, 'NOTICE.md'), content);
+  const filePath = path.join(projectDir, 'NOTICE.md');
+  const content = await formatMarkdown(filePath, renderProjectNotice({ deps, assets }));
+  writeFileIfChanged(filePath, content);
 }
 
 const rootEntries = aggregateForRoot(resolved);
-writeFile(path.join(REPO_ROOT, 'NOTICE.md'), renderRootNotice(rootEntries));
+const rootPath = path.join(REPO_ROOT, 'NOTICE.md');
+writeFileIfChanged(rootPath, await formatMarkdown(rootPath, renderRootNotice(rootEntries)));

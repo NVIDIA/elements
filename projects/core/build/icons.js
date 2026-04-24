@@ -66,7 +66,9 @@ function writeIconRegistry(icons) {
   return new Promise(r => {
     fs.writeFile(
       `${outputPath}/icons.ts`,
-      `
+      `// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 // This is an auto-generated file. DO NOT EDIT
 export interface IconSVG {
   svg: () => Promise<string> | string;
@@ -101,7 +103,9 @@ function writeSSRIconRegistry(icons) {
   return new Promise(r => {
     fs.writeFile(
       `${outputPath}/server.ts`,
-      `
+      `// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
 // This is an auto-generated file. DO NOT EDIT
 // eslint-disable
 // 

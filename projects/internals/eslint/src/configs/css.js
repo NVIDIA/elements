@@ -1,4 +1,5 @@
 import noHostMargin from '../local/no-host-margin.js';
+import requireSpdxHeader from '../local/require-spdx-header.js';
 
 const source = ['src/**/*.css'];
 const ignores = [
@@ -25,12 +26,14 @@ export const cssConfig = [
     plugins: {
       'local-css': {
         rules: {
-          'no-host-margin': noHostMargin
+          'no-host-margin': noHostMargin,
+          'require-spdx-header': requireSpdxHeader
         }
       }
     },
     rules: {
-      'local-css/no-host-margin': ['warn']
+      'local-css/no-host-margin': ['warn'],
+      'local-css/require-spdx-header': ['error']
     }
   }
 ];
