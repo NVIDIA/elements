@@ -1,3 +1,23 @@
+## <small>0.0.8 (2026-04-24)</small>
+
+* chore(ci): add code rabbit config ([cf98be6](https://github.com/NVIDIA/elements/commit/cf98be6))
+* chore(ci): add spdx license headers ([58fddc0](https://github.com/NVIDIA/elements/commit/58fddc0))
+* chore(ci): correct formatting post migration ([027beb7](https://github.com/NVIDIA/elements/commit/027beb7))
+* chore(ci): regenerate lockfile after migration ([b574863](https://github.com/NVIDIA/elements/commit/b574863))
+* chore(cli): reset versions ([0857cd8](https://github.com/NVIDIA/elements/commit/0857cd8))
+* chore(code): reset versions ([70ad3e3](https://github.com/NVIDIA/elements/commit/70ad3e3))
+* chore(core): reset versions ([d68ad03](https://github.com/NVIDIA/elements/commit/d68ad03))
+* chore(create): reset versions ([7f6677a](https://github.com/NVIDIA/elements/commit/7f6677a))
+* chore(forms): reset versions ([b09ac77](https://github.com/NVIDIA/elements/commit/b09ac77))
+* chore(lint): reset versions ([06ada18](https://github.com/NVIDIA/elements/commit/06ada18))
+* chore(markdown): reset versions ([536b760](https://github.com/NVIDIA/elements/commit/536b760))
+* chore(monaco): reset versions ([f2ec095](https://github.com/NVIDIA/elements/commit/f2ec095))
+* chore(release): @nvidia-elements/themes-v0.0.9 [skip ci] ([535727f](https://github.com/NVIDIA/elements/commit/535727f))
+* chore(styles): reset versions ([37a6158](https://github.com/NVIDIA/elements/commit/37a6158))
+* chore(themes): reset versions ([e5e4363](https://github.com/NVIDIA/elements/commit/e5e4363))
+* fix(core): remove legacy mlv prefixing ([755902b](https://github.com/NVIDIA/elements/commit/755902b))
+* fix(themes): remove legacy mlv prefixing ([ac337d1](https://github.com/NVIDIA/elements/commit/ac337d1))
+
 ## 0.0.0
 
 Initial release.
