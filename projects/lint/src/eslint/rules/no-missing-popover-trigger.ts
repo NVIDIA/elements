@@ -51,6 +51,12 @@ function findAttrWithBinding(
     return { attr: litAttr, hasBinding: true };
   }
 
+  // Check for Lit boolean-attribute binding: ?attrName
+  const litBoolAttr = findAttr(node, `?${attrName}`);
+  if (litBoolAttr) {
+    return { attr: litBoolAttr, hasBinding: true };
+  }
+
   return { attr: undefined, hasBinding: false };
 }
 
@@ -125,7 +131,7 @@ const rule = {
       if (!POPOVER_ELEMENTS.includes(tagName as (typeof POPOVER_ELEMENTS)[number])) return;
       const { attr: idAttr, hasBinding: hasBindingId } = findAttrWithBinding(node, 'id');
       const anchorAttr = findAttr(node, 'anchor');
-      const hiddenAttr = findAttr(node, 'hidden');
+      const { attr: hiddenAttr } = findAttrWithBinding(node, 'hidden');
       popovers.push({
         node,
         id: idAttr?.value?.value,

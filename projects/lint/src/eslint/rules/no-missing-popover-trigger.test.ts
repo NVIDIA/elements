@@ -73,6 +73,20 @@ describe('noMissingPopoverTrigger', () => {
     });
   });
 
+  it('should allow popover elements with data binding on hidden attribute', () => {
+    tester.run('data binding on hidden attribute', rule, {
+      valid: [
+        // Lit boolean-attribute binding
+        '<nve-dropdown id="dropdown" ?hidden="${isHidden}"></nve-dropdown>',
+        // Lit property binding
+        '<nve-tooltip id="tooltip" .hidden="${isHidden}">Content</nve-tooltip>',
+        // Angular property binding
+        '<nve-toggletip id="toggletip" [hidden]="isHidden">Content</nve-toggletip>'
+      ],
+      invalid: []
+    });
+  });
+
   it('should allow popover elements with commandfor trigger', () => {
     tester.run('valid commandfor triggers', rule, {
       valid: [
