@@ -117,10 +117,6 @@
   --border-bottom: 0;
 }
 
-::slotted(nve-button) {
-  --color: var(--nve-sys-text-muted-color);
-}
-
 slot:not([name]) {
   gap: var(--gap);
   width: 100%;
@@ -144,4 +140,10 @@ slot:not([name]) {
 :host(:state(scrollbar)) slot:not([name]) {
   /* stylelint-disable-next-line declaration-property-value-disallowed-list */
   margin-block-end: -14px;
+}
+
+::slotted([nve-text]),
+::slotted(a),
+::slotted(span) {
+  text-wrap: nowrap !important;
 }

@@ -11,7 +11,7 @@
   --border: 0;
   --border-radius: var(--nve-ref-border-radius-sm);
   --font-weight: var(--nve-ref-font-weight-semibold);
-  --text-transform: capitalize;
+  --text-transform: initial;
   --width: initial;
   --height: var(--nve-ref-size-600);
   display: inline-flex;

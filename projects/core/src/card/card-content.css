@@ -2,7 +2,7 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 
 :host {
-  --padding: var(--nve-ref-size-300) var(--nve-ref-size-400);
+  --padding: var(--nve-ref-size-400);
   padding: var(--padding);
   color: var(--color);
   flex-grow: 1;

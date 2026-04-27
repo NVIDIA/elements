@@ -125,6 +125,7 @@ input {
   text-decoration: none !important;
   color: var(--color) !important;
   outline: 0;
+  vertical-align: middle;
 }
 
 ::slotted(a)::after {
