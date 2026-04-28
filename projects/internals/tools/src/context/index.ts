@@ -10,6 +10,8 @@ import playgroundContext from './playground.md?inline';
 import integrationContext from './integration.md?inline';
 import migrationContext from './migration.md?inline';
 
+declare const __ELEMENTS_PLAYGROUND_BASE_URL__: string;
+
 export interface Skill {
   name: string;
   title: string;
@@ -124,7 +126,7 @@ const playgroundPrompt: Prompt = {
         role: 'user',
         content: {
           type: 'text',
-          text: `${toolsContext}\n${playgroundContext}\n${authoringContext}\n---`
+          text: `${toolsContext}\n${playgroundContext}${authoringContext}\n---`
         }
       }
     ]
@@ -177,17 +179,14 @@ const elementsSkill: Skill = {
 Elements is NVIDIA's design system for AI and Robotics applications, built for speed and scale. It provides a comprehensive library of web components (nve-*) that work across any framework. Elements covers the full spectrum of UI needs: layout primitives, typography, form controls, data grids, navigation, dialogs, theming, and accessibility.
 ${toolsContext}
 ${authoringContext}
-${playgroundContext}
+${__ELEMENTS_PLAYGROUND_BASE_URL__ ? playgroundContext : ''}
 ${integrationContext}`
 };
 
-export const prompts: Prompt[] = [
-  aboutPrompt,
-  doctorPrompt,
-  searchPrompt,
-  playgroundPrompt,
-  createProjectPrompt,
-  migrateProjectPrompt
-];
+export const prompts: Prompt[] = [aboutPrompt, doctorPrompt, searchPrompt, createProjectPrompt, migrateProjectPrompt];
+
+if (__ELEMENTS_PLAYGROUND_BASE_URL__) {
+  prompts.push(playgroundPrompt);
+}
 
 export const skills: Skill[] = [elementsSkill];

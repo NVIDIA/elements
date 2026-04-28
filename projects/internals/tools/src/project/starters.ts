@@ -17,8 +17,7 @@ import { isCommandAvailable, getNPMClient } from '../internal/node.js';
 import type { Report } from '../internal/types.js';
 import { writeAllAgentConfigs } from './setup-agent.js';
 
-declare const __ELEMENTS_PAGES_BASE_URL__: string;
-declare const __ELEMENTS_REGISTRY_URL__: string;
+const ELEMENTS_PAGES_BASE_URL = 'https://nvidia.github.io/elements';
 
 export type Starter =
   | 'angular'
@@ -40,35 +39,35 @@ export type Starter =
 
 export const startersData = {
   angular: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/angular.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/angular.zip`,
     cli: true
   },
   bundles: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/bundles.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/bundles.zip`,
     cli: true
   },
   eleventy: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/eleventy.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/eleventy.zip`,
     cli: true
   },
   extensions: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/scoped-registry.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/scoped-registry.zip`,
     cli: false
   },
   go: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/go.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/go.zip`,
     cli: true
   },
   hugo: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/hugo.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/hugo.zip`,
     cli: true
   },
   importmaps: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/importmaps.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/importmaps.zip`,
     cli: false
   },
   'lit-library': {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/lit-library.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/lit-library.zip`,
     cli: false
   },
   lit: {
@@ -76,11 +75,11 @@ export const startersData = {
     cli: false
   },
   nextjs: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/nextjs.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/nextjs.zip`,
     cli: true
   },
   nuxt: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/nuxt.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/nuxt.zip`,
     cli: true
   },
   preact: {
@@ -88,23 +87,23 @@ export const startersData = {
     cli: false
   },
   react: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/react.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/react.zip`,
     cli: true
   },
   solidjs: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/solidjs.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/solidjs.zip`,
     cli: true
   },
   svelte: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/svelte.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/svelte.zip`,
     cli: true
   },
   typescript: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/typescript.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/typescript.zip`,
     cli: true
   },
   vue: {
-    zip: `${__ELEMENTS_PAGES_BASE_URL__}/starters/download/vue.zip`,
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/vue.zip`,
     cli: true
   }
 };
@@ -115,7 +114,6 @@ export async function archiveStarter(projectDir: string, outDir: string) {
   await copyProject(projectDir);
   writeAllAgentConfigs(dist);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
-  await writeFile(`${dist}/.npmrc`, `registry=${__ELEMENTS_REGISTRY_URL__}/`);
   await writeFile(`${dist}/package.json`, JSON.stringify(packageJSON, undefined, 2));
   await zipProject(dist);
 }
@@ -329,8 +327,6 @@ export const claudeProjectSettings = {
       'mcp__elements__api_tokens_list',
       'mcp__elements__examples_list',
       'mcp__elements__examples_get',
-      'mcp__elements__playground_validate',
-      'mcp__elements__playground_create',
       'mcp__elements__project_create',
       'mcp__elements__project_setup',
       'mcp__elements__project_validate',
