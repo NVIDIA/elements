@@ -1,3 +1,11 @@
+## <small>0.0.10 (2026-04-28)</small>
+
+* fix(cli): migration url paths ([823c8c4](https://github.com/NVIDIA/elements/commit/823c8c4))
+* fix(core): missing stop icon svg ([40f6eaa](https://github.com/NVIDIA/elements/commit/40f6eaa))
+* fix(lint): interestfor support on popover triggers ([73e2000](https://github.com/NVIDIA/elements/commit/73e2000))
+* chore(docs): lint and migration cleanup ([0b24b79](https://github.com/NVIDIA/elements/commit/0b24b79))
+* feat(lint): no deprecated global attribute value ([644d32b](https://github.com/NVIDIA/elements/commit/644d32b))
+
 ## <small>0.0.9 (2026-04-28)</small>
 
 * chore(ci): update eslint ([1c1e64f](https://github.com/NVIDIA/elements/commit/1c1e64f))
