@@ -1,3 +1,10 @@
+## <small>0.0.9 (2026-04-28)</small>
+
+* chore(ci): update eslint ([1c1e64f](https://github.com/NVIDIA/elements/commit/1c1e64f))
+* chore(docs): fix broken nav link ([a7f0123](https://github.com/NVIDIA/elements/commit/a7f0123))
+* chore(internals): add spdx eslint rule ([2276640](https://github.com/NVIDIA/elements/commit/2276640))
+* fix(core): line height and wrap fix ([afdcb21](https://github.com/NVIDIA/elements/commit/afdcb21))
+
 ## <small>0.0.8 (2026-04-24)</small>
 
 * chore(ci): add code rabbit config ([cf98be6](https://github.com/NVIDIA/elements/commit/cf98be6))
