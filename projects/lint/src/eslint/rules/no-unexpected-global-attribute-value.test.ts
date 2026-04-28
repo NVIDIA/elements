@@ -5,17 +5,18 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { RuleTester } from 'eslint';
 import type { JSRuleDefinition } from 'eslint';
 import html from '@html-eslint/eslint-plugin';
-import noUnexpectedGlobalAttributeValue, {
-  SIMPLE_NVE_TEXT_VALUES,
-  SIMPLE_NVE_LAYOUT_VALUES,
-  SIMPLE_NVE_DISPLAY_VALUES
-} from './no-unexpected-global-attribute-value.js';
+import noUnexpectedGlobalAttributeValue from './no-unexpected-global-attribute-value.js';
+import {
+  DISTILLED_NVE_DISPLAY_VALUES,
+  DISTILLED_NVE_LAYOUT_VALUES,
+  DISTILLED_NVE_TEXT_VALUES
+} from '../internals/attributes.js';
 
 const rule = noUnexpectedGlobalAttributeValue as unknown as JSRuleDefinition;
 
-const textValidValues = SIMPLE_NVE_TEXT_VALUES.map(v => `"${v}"`).join(', ');
-const layoutValidValues = SIMPLE_NVE_LAYOUT_VALUES.map(v => `"${v}"`).join(', ');
-const displayValidValues = SIMPLE_NVE_DISPLAY_VALUES.map(v => `"${v}"`).join(', ');
+const textValidValues = [...DISTILLED_NVE_TEXT_VALUES].map(v => `"${v}"`).join(', ');
+const layoutValidValues = [...DISTILLED_NVE_LAYOUT_VALUES].map(v => `"${v}"`).join(', ');
+const displayValidValues = [...DISTILLED_NVE_DISPLAY_VALUES].map(v => `"${v}"`).join(', ');
 
 describe('noUnexpectedAttributeValue', () => {
   let tester: RuleTester;
@@ -328,46 +329,6 @@ describe('noUnexpectedAttributeValue', () => {
     });
   });
 
-  it('should not allow additional invalid symbols in nve-layout attribute values', () => {
-    const validValues = SIMPLE_NVE_LAYOUT_VALUES.map(v => `"${v}"`).join(', ');
-
-    tester.run('should not allow additional invalid symbols in nve-layout attribute values', rule, {
-      valid: [],
-      invalid: [
-        {
-          options: [{ 'nve-layout': ['&'] }],
-          code: '<div nve-layout="row &lg|row"></div>',
-          errors: [
-            {
-              messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'row &lg|row', validValues }
-            }
-          ]
-        },
-        {
-          options: [{ 'nve-layout': ['|'] }],
-          code: '<div nve-layout="row &lg|row"></div>',
-          errors: [
-            {
-              messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'row &lg|row', validValues }
-            }
-          ]
-        },
-        {
-          options: [{ 'nve-layout': ['|'] }],
-          code: '<div nve-layout="row @lg|row"></div>',
-          errors: [
-            {
-              messageId: 'unexpected-attribute-value',
-              data: { attribute: 'nve-layout', value: 'row @lg|row', validValues }
-            }
-          ]
-        }
-      ]
-    });
-  });
-
   it('should not allow invalid use of nve-display attribute values', () => {
     tester.run('should not allow invalid use of nve-display attribute values', rule, {
       valid: [],
@@ -378,6 +339,71 @@ describe('noUnexpectedAttributeValue', () => {
             {
               messageId: 'unexpected-attribute-value',
               data: { attribute: 'nve-display', value: 'row', validValues: displayValidValues }
+            }
+          ]
+        }
+      ]
+    });
+  });
+
+  it('should advertise the distilled subset only regardless if the check enforces it', () => {
+    // Enables advanced api options to pass validation but masks the full set from agents
+    tester.run('distilled option', rule, {
+      valid: [],
+      invalid: [
+        {
+          options: [{ distilled: true }],
+          code: '<p nve-text="nope"></p>',
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value',
+              data: {
+                attribute: 'nve-text',
+                value: 'nope',
+                validValues: [...DISTILLED_NVE_TEXT_VALUES].map(v => `"${v}"`).join(', ')
+              }
+            }
+          ]
+        },
+        {
+          options: [{ distilled: false }],
+          code: '<p nve-text="nope"></p>',
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value',
+              data: {
+                attribute: 'nve-text',
+                value: 'nope',
+                validValues: [...DISTILLED_NVE_TEXT_VALUES].map(v => `"${v}"`).join(', ')
+              }
+            }
+          ]
+        },
+        {
+          options: [{ distilled: false }],
+          code: '<div nve-layout="nope"></div>',
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value',
+              data: {
+                attribute: 'nve-layout',
+                value: 'nope',
+                validValues: [...DISTILLED_NVE_LAYOUT_VALUES].map(v => `"${v}"`).join(', ')
+              }
+            }
+          ]
+        },
+        {
+          options: [{ distilled: false }],
+          code: '<div nve-display="row"></div>',
+          errors: [
+            {
+              messageId: 'unexpected-attribute-value',
+              data: {
+                attribute: 'nve-display',
+                value: 'row',
+                validValues: [...DISTILLED_NVE_DISPLAY_VALUES].map(v => `"${v}"`).join(', ')
+              }
             }
           ]
         }

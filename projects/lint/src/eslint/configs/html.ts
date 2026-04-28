@@ -10,6 +10,7 @@ import noDeprecatedIconNames from '../rules/no-deprecated-icon-names.js';
 import noDeprecatedPopoverAttributes from '../rules/no-deprecated-popover-attributes.js';
 import noUnexpectedGlobalAttributeValue from '../rules/no-unexpected-global-attribute-value.js';
 import noUnexpectedStyleCustomization from '../rules/no-unexpected-style-customization.js';
+import noDeprecatedGlobalAttributeValue from '../rules/no-deprecated-global-attribute-value.js';
 import noDeprecatedGlobalAttributes from '../rules/no-deprecated-global-attributes.js';
 import noRestrictedAttributes from '../rules/no-restricted-attributes.js';
 import noDeprecatedSlots from '../rules/no-deprecated-slots.js';
@@ -61,6 +62,7 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-deprecated-attributes': noDeprecatedAttributes,
         'no-deprecated-icon-names': noDeprecatedIconNames,
         'no-deprecated-popover-attributes': noDeprecatedPopoverAttributes,
+        'no-deprecated-global-attribute-value': noDeprecatedGlobalAttributeValue,
         'no-deprecated-global-attributes': noDeprecatedGlobalAttributes,
         'no-deprecated-slots': noDeprecatedSlots,
         'no-missing-slotted-elements': noMissingSlottedElements,
@@ -91,6 +93,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-deprecated-attributes': ['error'],
     '@nvidia-elements/lint/no-deprecated-icon-names': ['error'],
     '@nvidia-elements/lint/no-deprecated-popover-attributes': ['error'],
+    '@nvidia-elements/lint/no-deprecated-global-attribute-value': ['error'],
     '@nvidia-elements/lint/no-deprecated-global-attributes': ['error'],
     '@nvidia-elements/lint/no-deprecated-slots': ['error'],
     '@nvidia-elements/lint/no-missing-slotted-elements': ['error'],

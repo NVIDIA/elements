@@ -3,24 +3,53 @@
 
 import { globalAttributes } from './metadata.js';
 
-export const ATTRIBUTE_EXCEPTIONS = ['debug', 'mkd', 'md']; // internal scopes
-
 export const VALUE_BINDINGS = ['${', '{', '{{', '{%'];
+
+const ATTRIBUTE_EXCEPTIONS = ['debug', 'mkd', 'md']; // internal scopes
+const DEPRECATED_NVE_TEXT_VALUES = new Set(['eyebrow']);
+const DEPRECATED_NVE_LAYOUT_VALUES = new Set(['grow']);
 
 export const VALID_NVE_TEXT_VALUES = new Set([
   ...(globalAttributes.find(attribute => attribute.name === 'nve-text')?.values?.map(value => value.name) ?? []),
   ...ATTRIBUTE_EXCEPTIONS
 ]);
 
-export const VALID_NVE_LAYOUT_VALUES = [
+export const VALID_NVE_LAYOUT_VALUES = new Set([
   ...(globalAttributes.find(attribute => attribute.name === 'nve-layout')?.values?.map(value => value.name) ?? []),
   ...ATTRIBUTE_EXCEPTIONS
-];
+]);
 
 export const VALID_NVE_DISPLAY_VALUES = new Set([
   ...(globalAttributes.find(attribute => attribute.name === 'nve-display')?.values?.map(value => value.name) ?? []),
   ...ATTRIBUTE_EXCEPTIONS
 ]);
+
+export const DISTILLED_NVE_TEXT_VALUES = new Set(
+  [...VALID_NVE_TEXT_VALUES].filter(v => !isComplexAttributeValue(v) && !DEPRECATED_NVE_TEXT_VALUES.has(v))
+);
+
+export const DISTILLED_NVE_LAYOUT_VALUES = new Set(
+  [...VALID_NVE_LAYOUT_VALUES].filter(v => !isComplexAttributeValue(v) && !DEPRECATED_NVE_LAYOUT_VALUES.has(v))
+);
+
+export const DISTILLED_NVE_DISPLAY_VALUES = new Set(
+  [...VALID_NVE_DISPLAY_VALUES].filter(v => !isComplexAttributeValue(v))
+);
+
+// also used in @internals/metadata, these are values that often confuse agents due to complexity in playground template generation within the same context window
+export function isComplexAttributeValue(value: string) {
+  return (
+    value.includes('|') ||
+    value.includes('@') ||
+    value.includes('&') ||
+    value.includes('xx') ||
+    value.includes('-y:') ||
+    value.includes(':none') ||
+    value.includes('debug') ||
+    value.includes('mkd') ||
+    value.includes('md')
+  );
+}
 
 export function recommendedNveTextValue(attributeValue: string): string | null {
   if (VALUE_BINDINGS.some(binding => attributeValue.includes(binding))) {
@@ -57,7 +86,9 @@ export function recommendedNveLayoutValue(attributeValue: string, invalidSymbols
   }
 
   const values = getAttributeValueSegments(attributeValue);
-  const validValues = new Set(VALID_NVE_LAYOUT_VALUES.filter(v => !invalidSymbols.some(symbol => v.includes(symbol))));
+  const validValues = new Set(
+    [...VALID_NVE_LAYOUT_VALUES].filter(v => !invalidSymbols.some(symbol => v.includes(symbol)))
+  );
 
   const repairs: [RegExp, string][] = [
     [/^default$/, 'column'],
@@ -94,6 +125,27 @@ export function recommendedNveLayoutValue(attributeValue: string, invalidSymbols
 
   const result: string[] = repairAttributeValueSegments(values, repairs);
 
+  if (result.some(value => !validValues.has(value))) {
+    return null;
+  } else {
+    return result.join(' ');
+  }
+}
+
+export function recommendedNveDisplayValue(attributeValue: string): string | null {
+  if (VALUE_BINDINGS.some(binding => attributeValue.includes(binding))) {
+    return attributeValue;
+  }
+
+  const values = getAttributeValueSegments(attributeValue);
+  const validValues = new Set(VALID_NVE_DISPLAY_VALUES);
+
+  const repairs: [RegExp, string][] = [
+    [/^hidden$/, 'hide'],
+    [/^visisble$/, 'show']
+  ];
+
+  const result: string[] = repairAttributeValueSegments(values, repairs);
   if (result.some(value => !validValues.has(value))) {
     return null;
   } else {
