@@ -2,16 +2,16 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { ProjectsService } from '@internals/metadata';
-import type { ElementVersions } from '../api/utils.js';
+import { getPublishedProjects, type ElementVersions } from '../api/utils.js';
 import { service, tool } from '../internal/tools.js';
 import { markdownDescription } from '../internal/utils.js';
-import { getAvailablePackages, getPackage, getVersions, limitChangelogVersions, searchChangelogs } from './utils.js';
+import { getAvailablePackages, getPackage, getVersions, limitChangelogVersions } from './utils.js';
 
 const MAX_LINE_COUNT = 512;
-const projects = (await ProjectsService.getData()).data.filter((p: { changelog: string }) => p.changelog);
-const packageNames = projects.map((p: { name: string }) => p.name);
+const projects = getPublishedProjects((await ProjectsService.getData()).data);
+const packageNames = projects.map(p => p.name);
 const changelogs: Record<string, string> = projects.reduce(
-  (acc: Record<string, string>, p: { name: string; changelog: string }) => ({ ...acc, [p.name]: p.changelog ?? '' }),
+  (acc: Record<string, string>, p) => ({ ...acc, [p.name]: p.changelog ?? '' }),
   {}
 );
 
@@ -54,6 +54,7 @@ export class PackagesService {
       properties: {
         name: {
           type: 'string',
+          enum: packageNames,
           description: `Available package changelogs.`
         },
         format: {
@@ -93,12 +94,11 @@ export class PackagesService {
     format?: 'markdown' | 'json';
     limit?: number;
   }): Promise<{ [key: string]: string } | string> {
-    const changelog = searchChangelogs(name, changelogs);
+    const changelog = changelogs[name];
 
-    if (!changelog) {
-      const availablePackages = packageNames.map((p: string) => `"${p}"`).join(', ');
-      const message = `No changelog found for "${name}".\n\nAvailable packages: ${availablePackages}`;
-      return format && format !== 'markdown' ? { [name]: message } : message;
+    if (changelog === undefined) {
+      const availablePackages = packageNames.map(p => `"${p}"`).join(', ');
+      throw new Error(`Unknown package "${name}".\n\nAvailable packages: ${availablePackages}`);
     }
 
     const limited = limitChangelogVersions(changelog, limit);

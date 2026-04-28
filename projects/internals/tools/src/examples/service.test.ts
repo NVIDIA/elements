@@ -14,7 +14,7 @@ describe('ExampleService', () => {
     expect((ExamplesService.list as ToolMethod<unknown>).metadata.name).toBe('list');
     expect((ExamplesService.list as ToolMethod<unknown>).metadata.command).toBe('list');
     expect((ExamplesService.list as ToolMethod<unknown>).metadata.description).toBe(
-      'Get a summary list of available Elements (nve-*) component/pattern usage examples and code snippets. Use this to browse all available examples.'
+      'Get a summary list of available Elements (nve-*) starter templates, patterns and example code snippets. Use this to browse all available examples.'
     );
   });
 

@@ -29,7 +29,8 @@ function getProjectMetadata(basePath: string): Project {
     version: packageFile.version,
     description: packageFile.description,
     readme,
-    changelog
+    changelog,
+    private: packageFile.private === true
   };
 }
 
@@ -44,7 +45,6 @@ export function getProjects(): { created: string; data: Project[] } {
     '../../../../lint',
     '../../../../forms',
     '../../../../markdown',
-    '../../../../lint',
     '../../../../media',
     '../../../../monaco',
     '../../../../internals/metadata',

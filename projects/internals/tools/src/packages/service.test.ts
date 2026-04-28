@@ -69,11 +69,16 @@ describe('PackagesService', () => {
     expect(typeof result).toBe('string');
   });
 
-  it('should return helpful message when no changelog found (markdown)', async () => {
-    const result = await PackagesService.changelogsGet({ name: 'no-match', format: 'markdown' });
-    expect(result).toContain('No changelog found for');
-    expect(result).toContain('no-match');
-    expect(result).toContain('Available packages:');
+  it('should reject unknown package names with the canonical list in the error', async () => {
+    await expect(PackagesService.changelogsGet({ name: 'no-match', format: 'markdown' })).rejects.toThrow(
+      /Unknown package "no-match"[\s\S]*Available packages:/
+    );
+  });
+
+  it('should reject names that only fuzzily resemble a real package', async () => {
+    await expect(PackagesService.changelogsGet({ name: '@nve/elements' })).rejects.toThrow(
+      'Unknown package "@nve/elements"'
+    );
   });
 
   it('should apply default limit to changelog versions', async () => {
@@ -90,10 +95,18 @@ describe('PackagesService', () => {
     expect((limited as string).length).toBeLessThanOrEqual((full as string).length);
   });
 
-  it('should return helpful message when no changelog found (json)', async () => {
-    const result = await PackagesService.changelogsGet({ name: 'no-match', format: 'json' });
-    expect((result as { [key: string]: string })['no-match']).toBeDefined();
-    expect((result as { [key: string]: string })['no-match']).toContain('No changelog found');
+  it('should expose the same package set in list and changelogs-unknown-package error', async () => {
+    const list = (await PackagesService.list()) as string;
+    const listSet = new Set(Array.from(list.matchAll(/^## (\S+) v/gm), m => m[1]));
+
+    const error = await PackagesService.changelogsGet({ name: 'does-not-exist', format: 'markdown' }).catch(
+      e => e as Error
+    );
+    const available = error.message.split('Available packages:')[1] ?? '';
+    const errSet = new Set(Array.from(available.matchAll(/"([^"]+)"/g), m => m[1]));
+
+    expect(listSet.size).toBeGreaterThan(0);
+    expect(errSet).toEqual(listSet);
   });
 
   it('should provide versions method', async () => {

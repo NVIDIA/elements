@@ -11,9 +11,9 @@ const MAX_RESULT_LIMIT = 5;
 @service()
 export class ExamplesService {
   @tool({
-    summary: 'Get list of available Elements (nve-*) patterns and examples.',
+    summary: 'Get list of available Elements (nve-*) starter templates, patterns and examples.',
     description:
-      'Get a summary list of available Elements (nve-*) component/pattern usage examples and code snippets. Use this to browse all available examples.',
+      'Get a summary list of available Elements (nve-*) starter templates, patterns and example code snippets. Use this to browse all available examples.',
     inputSchema: {
       type: 'object',
       properties: {

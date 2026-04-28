@@ -2,18 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { ApiService, ProjectsService as PackageService, type Attribute, type Element } from '@internals/metadata';
-import { fuzzyMatch } from '../internal/search.js';
-import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.js';
+import { type ElementVersions, getLatestPublishedVersions, getPublishedProjects } from '../api/utils.js';
 
-export function searchChangelogs(query: string, changelogs: { [key: string]: string }) {
-  if (!query) return undefined;
+const PLACEHOLDER_CHANGELOG_PATTERN = /^##\s+0\.0\.0\s*\n+\s*Initial release\.?\s*$/;
 
-  const keys = Object.keys(changelogs);
-  const match = keys.find(k => k === query) ?? keys.find(k => k.includes(query));
-  if (match) return changelogs[match];
-
-  const fuzzy = fuzzyMatch(query, keys);
-  return fuzzy[0] !== undefined ? changelogs[fuzzy[0]] : undefined;
+export function hasChangelogEntries(changelog: string | undefined): boolean {
+  const trimmed = changelog?.trim() ?? '';
+  if (!trimmed) return false;
+  return !PLACEHOLDER_CHANGELOG_PATTERN.test(trimmed);
 }
 
 export async function findPublicAPIChangelog(name: string): Promise<string | undefined> {
@@ -35,16 +31,9 @@ export async function getVersions(): Promise<ElementVersions> {
 }
 
 export async function getAvailablePackages(): Promise<string> {
-  const packages = (await PackageService.getData())?.data ?? [];
-  const publicPackages = await getLatestPublishedVersions((await PackageService.getData())?.data ?? []);
-
-  return packages
-    .filter((p: { name: string }) => publicPackages[p.name as keyof ElementVersions] !== undefined)
-    .sort(
-      (a: { name: string }, b: { name: string }) =>
-        scopeOrder(a.name) - scopeOrder(b.name) || a.name.localeCompare(b.name)
-    )
-    .map((p: { name: string; version: string; description: string }) => `## ${p.name} v${p.version}\n${p.description}`)
+  return getPublishedProjects((await PackageService.getData())?.data ?? [])
+    .sort((a, b) => scopeOrder(a.name) - scopeOrder(b.name) || a.name.localeCompare(b.name))
+    .map(p => `## ${p.name} v${p.version}\n${p.description}`)
     .join('\n\n');
 }
 
@@ -56,20 +45,14 @@ export function limitChangelogVersions(changelog: string, limit: number): string
 }
 
 export async function getPackage(name: string) {
-  const packages = (await PackageService.getData())?.data ?? [];
-  const publicPackages = await getLatestPublishedVersions((await PackageService.getData())?.data ?? []);
+  const available = getPublishedProjects((await PackageService.getData())?.data ?? []).sort(
+    (a, b) => scopeOrder(a.name) - scopeOrder(b.name) || a.name.localeCompare(b.name)
+  );
 
-  const available = packages
-    .filter((p: { name: string }) => publicPackages[p.name as keyof ElementVersions] !== undefined)
-    .sort(
-      (a: { name: string }, b: { name: string }) =>
-        scopeOrder(a.name) - scopeOrder(b.name) || a.name.localeCompare(b.name)
-    );
-
-  const pkg = available.find((p: { name: string }) => p.name === name);
+  const pkg = available.find(p => p.name === name);
 
   if (!pkg) {
-    const names = available.map((p: { name: string }) => `"${p.name}"`).join(', ');
+    const names = available.map(p => `"${p.name}"`).join(', ');
     throw new Error(`No package found for "${name}".\n\nAvailable packages: ${names}`);
   }
 

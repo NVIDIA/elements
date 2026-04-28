@@ -216,6 +216,23 @@ describe('loadTools', () => {
 
     expect(TestService['tool_foo'].metadata.command).toBe('test.foo');
     expect(TestService['tool_foo'].metadata.toolName).toBe('test_foo');
+    expect(TestService['tool_foo'].metadata.title).toBe('Test Foo');
+  });
+
+  it('should namespace title across multi-segment commands', () => {
+    @service()
+    class ApiService {
+      @tool({ summary: 'test' })
+      static templateValidate() {
+        return new Promise(resolve => resolve('ok'));
+      }
+    }
+
+    loadTools(ApiService);
+
+    expect(ApiService['tool_templateValidate'].metadata.command).toBe('api.template.validate');
+    expect(ApiService['tool_templateValidate'].metadata.toolName).toBe('api_template_validate');
+    expect(ApiService['tool_templateValidate'].metadata.title).toBe('API Template Validate');
   });
 
   it('should filter out non-tool methods', () => {

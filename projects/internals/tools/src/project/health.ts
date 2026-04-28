@@ -3,13 +3,13 @@
 
 import { publint as publintFn } from 'publint';
 import { ProjectsService } from '@internals/metadata';
-import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.js';
+import { type ElementVersions, getLatestPublishedVersions, getPublishedProjects } from '../api/utils.js';
 import type { ReportCheck, Report, PackageData } from '../internal/types.js';
 import { getPackageJson } from '../internal/node.js';
 
 export async function getHealthReport(cwd: string, type: 'application' | 'library') {
   const packageJson = getPackageJson(cwd);
-  const projects = (await ProjectsService.getData()).data.filter((p: { changelog: string }) => p.changelog);
+  const projects = getPublishedProjects((await ProjectsService.getData()).data);
   const currentVersions = await getLatestPublishedVersions(projects);
 
   let report: Report = {

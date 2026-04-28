@@ -15,8 +15,6 @@ import {
 
 export type { PartialAPIResult } from '../distill/apis.js';
 
-declare const __ELEMENTS_ESM_CDN_BASE_URL__: string;
-
 export function getContextAPIs(
   format: 'markdown' | 'json',
   metadata: {
@@ -154,6 +152,8 @@ export interface ElementVersions {
   '@nvidia-elements/monaco': string;
 }
 
+const NPM_REGISTRY_URL = 'https://registry.npmjs.org';
+
 /* istanbul ignore next -- @preserve */
 let versions: ElementVersions | null = null;
 /* istanbul ignore next -- @preserve */
@@ -162,26 +162,25 @@ export async function getLatestPublishedVersions(projects: Project[]): Promise<E
     const names = getPublishedPackageNames(projects);
     const packageFiles = await Promise.all(
       names.map(async name => {
-        if (!__ELEMENTS_ESM_CDN_BASE_URL__?.length) {
-          return Promise.resolve({ name, version: '0.0.0' });
-        }
-
         const controller = new AbortController();
         const timeout = setTimeout(() => controller.abort(), 3000);
-        return fetch(`${__ELEMENTS_ESM_CDN_BASE_URL__}/${name}@latest/package.json`, { signal: controller.signal })
+        return fetch(`${NPM_REGISTRY_URL}/${name}/latest`, { signal: controller.signal })
           .then(res => {
-            clearTimeout(timeout);
+            if (!res.ok) {
+              throw new Error(`Failed to fetch ${name} from ${NPM_REGISTRY_URL}: ${res.status} ${res.statusText}`);
+            }
             return res.json();
           })
           .catch(() => {
-            const message = `Could not fetch latest versions from ${__ELEMENTS_ESM_CDN_BASE_URL__}`;
+            const message = `Could not fetch latest versions from ${NPM_REGISTRY_URL}`;
             if (process.env.ELEMENTS_ENV === 'mcp') {
               throw new Error(message);
             } else {
               console.warn(message);
               return { name, version: '0.0.0' };
             }
-          });
+          })
+          .finally(() => clearTimeout(timeout));
       })
     );
     versions = packageFiles.reduce(
@@ -192,8 +191,13 @@ export async function getLatestPublishedVersions(projects: Project[]): Promise<E
   return versions!;
 }
 
+export function getPublishedProjects(projects: Project[]): Project[] {
+  return projects.filter(
+    p =>
+      p.name.startsWith('@nvidia-elements') && !p.name.startsWith('@internals') && p.version !== '0.0.0' && !p.private
+  );
+}
+
 export function getPublishedPackageNames(projects: Project[]) {
-  return projects
-    .filter(p => p.name.startsWith('@nvidia-elements') && !p.name.startsWith('@internals') && p.version !== '0.0.0')
-    .map(p => p.name);
+  return getPublishedProjects(projects).map(p => p.name);
 }

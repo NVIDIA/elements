@@ -35,7 +35,8 @@ vi.mock('@internals/metadata', () => ({
 
 // Mock the API utils
 vi.mock('../api/utils.js', () => ({
-  getLatestPublishedVersions: vi.fn()
+  getLatestPublishedVersions: vi.fn(),
+  getPublishedProjects: vi.fn((projects: { name: string }[]) => projects)
 }));
 
 describe('getVersionNum', () => {

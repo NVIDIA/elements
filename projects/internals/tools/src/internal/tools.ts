@@ -151,6 +151,13 @@ export function loadTools(obj: any): ManagedToolMethod<unknown>[] {
       obj[toolName].metadata = obj[name].metadata;
       obj[toolName].metadata.command = `${obj.metadata.name}.${obj[name].metadata.command}`;
       obj[toolName].metadata.toolName = `${obj[toolName].metadata.command}`.replaceAll('.', '_').replaceAll('-', '_');
+      obj[toolName].metadata.title = obj[toolName].metadata.command
+        .split('.')
+        .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
+        .map((part: string) =>
+          part.toLowerCase() === 'cli' || part.toLowerCase() === 'api' ? part.toUpperCase() : part
+        )
+        .join(' ');
     });
   return Array.from(methods).map(m => obj[`tool_${m as string}`]);
 }

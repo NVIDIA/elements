@@ -167,7 +167,21 @@ function generateExampleId(entrypoint, name) {
   const fileName = idParts[idParts.length - 1].replace('.examples.json', '');
   const formattedFileName = idParts[idParts.length - 2] === fileName ? '' : `-${fileName}`;
   const entrypointName = idParts.slice(1, idParts.length - 1).join('-');
-  return `${entrypointName}${formattedFileName}_${exampleName}`.toLowerCase();
+  let id = `${entrypointName}${formattedFileName.replace('-index', '')}-${exampleName}`.toLowerCase();
+
+  if (id.startsWith('patterns-templates')) {
+    id = id.replace('patterns-templates', 'template');
+  }
+
+  if (id.startsWith('patterns')) {
+    id = id.replace('patterns', 'pattern');
+  }
+
+  if (id.startsWith('core')) {
+    id = id.replace('core-', '');
+  }
+
+  return id.replace(/-default$/, '');
 }
 
 async function renderTemplate(template) {

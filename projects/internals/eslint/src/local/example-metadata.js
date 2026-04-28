@@ -1,6 +1,6 @@
 import { hasTag, parseTag } from './example-helpers.js';
 
-const allowedTags = ['performance', 'pattern', 'anti-pattern', 'test-case', 'theme'];
+const allowedTags = ['performance', 'pattern', 'anti-pattern', 'test-case', 'theme', 'template'];
 const contextMaxLength = 400;
 const guidanceIndicators = [
   /\buse\s+(to|for|when|if|in|as)\b/i,

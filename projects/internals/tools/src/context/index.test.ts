@@ -83,6 +83,17 @@ describe('prompts', () => {
       expect(result?.messages[0].content.text).toContain('api_');
     });
 
+    it.skipIf(!prompts.some(p => p.name === 'playground'))(
+      'should have "playground" prompt with authoring guidelines',
+      () => {
+        const playgroundPrompt = prompts.find(p => p.name === 'playground');
+        expect(playgroundPrompt).toBeDefined();
+
+        const result = playgroundPrompt?.handler({});
+        expect(result?.messages[0].content.text).toContain('playground');
+      }
+    );
+
     it('should have "create-project" prompt for starter projects', () => {
       const createProjectPrompt = prompts.find(p => p.name === 'create-project');
       expect(createProjectPrompt).toBeDefined();
