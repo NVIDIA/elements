@@ -149,7 +149,8 @@ function resolveSpecialKey(code: KeynavCode): 'home' | 'end' | 'pageup' | 'paged
   return null;
 }
 
-function navigateWithLoop(current: number, limit: number, step: number, loop: boolean | undefined) {
+function navigateWithLoop(current: number, step: number, options: { limit: number; loop: boolean | undefined }) {
+  const { limit, loop } = options;
   const next = current + step;
   if (next >= 0 && next <= limit) return next;
   return loop ? (step < 0 ? limit : 0) : current;
@@ -163,10 +164,10 @@ export function getNextKeyListItem(item: HTMLElement, items: HTMLElement[], conf
 
   switch (direction ?? resolveSpecialKey(config.code)) {
     case 'backward':
-      next = navigateWithLoop(next, itemCount, -1, config.loop);
+      next = navigateWithLoop(next, -1, { limit: itemCount, loop: config.loop });
       break;
     case 'forward':
-      next = navigateWithLoop(next, itemCount, 1, config.loop);
+      next = navigateWithLoop(next, 1, { limit: itemCount, loop: config.loop });
       break;
     case 'end':
       next = itemCount;

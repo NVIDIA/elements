@@ -111,13 +111,12 @@ type TokenEntry = { id?: string; value: number | string; name: string };
 
 function findPixelDimensionChild(
   node: CssDeclarationNode,
-  min: number,
-  max: number,
+  range: { min: number; max: number },
   extraCheck?: (v: number) => boolean
 ) {
   return node.value.children?.find(child => {
     const value = parseInt(child.value ?? '');
-    const isMatch = child.type === 'Dimension' && child.unit === 'px' && value <= max && value >= min;
+    const isMatch = child.type === 'Dimension' && child.unit === 'px' && value <= range.max && value >= range.min;
     return isMatch && (!extraCheck || extraCheck(value));
   });
 }
@@ -152,7 +151,7 @@ function checkDimensionProperty(
   fallback: string,
   extraCheck?: (v: number) => boolean
 ) {
-  const child = findPixelDimensionChild(node, min, max, extraCheck);
+  const child = findPixelDimensionChild(node, { min, max }, extraCheck);
   if (!child) return;
   const alternate = findTokenAlternate(tokens, parseInt(child.value ?? '')) ?? fallback;
   reportTokenViolation(context, node, { value: child.value ?? '', unit: child.unit ?? '', alternate });

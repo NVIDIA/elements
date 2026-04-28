@@ -51,7 +51,7 @@ const rule = {
               }
             }
 
-            reportRestricted(context, attr, attribute, node.name);
+            reportRestricted(context, attr, { attribute, elementName: node.name });
           }
         });
 
@@ -59,7 +59,7 @@ const rule = {
           const attr = findAttr(node, attribute);
           const isElementAPI = node.name.startsWith('nve-') && attr;
           if (isElementAPI) {
-            reportRestricted(context, attr, attribute, node.name);
+            reportRestricted(context, attr, { attribute, elementName: node.name });
           }
         });
       }
@@ -67,7 +67,12 @@ const rule = {
   }
 } as const;
 
-function reportRestricted(context: Rule.RuleContext, attr: Rule.Node, attribute: string, elementName: string) {
+function reportRestricted(
+  context: Rule.RuleContext,
+  attr: Rule.Node,
+  info: { attribute: string; elementName: string }
+) {
+  const { attribute, elementName } = info;
   const supported = getElementAttributeNames(elementName);
   if (supported.length > 0) {
     context.report({

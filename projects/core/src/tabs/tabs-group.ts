@@ -164,7 +164,7 @@ export class TabsGroup extends LitElement {
       return;
     }
 
-    this.#setActiveTab(tabItems, tabItem, true);
+    this.#setActiveTab(tabItems, tabItem, { emitEvent: true });
   };
 
   // --- Tab strip sync (tabs → state) ---
@@ -198,7 +198,7 @@ export class TabsGroup extends LitElement {
       return;
     }
 
-    this.#setActiveTab(tabItems, selectedTab, false, nextPanelValues);
+    this.#setActiveTab(tabItems, selectedTab, { emitEvent: false, nextPanelValues });
   }
 
   /**
@@ -209,9 +209,10 @@ export class TabsGroup extends LitElement {
   #setActiveTab(
     tabItems: TabsItem[],
     nextTab: TabsItem,
-    emitEvent: boolean,
-    nextPanelValues: string[] = uniqueNonEmptyStrings(tabItems.map(item => item.value))
+    options: { emitEvent: boolean; nextPanelValues?: string[] }
   ): void {
+    const { emitEvent } = options;
+    const nextPanelValues = options.nextPanelValues ?? uniqueNonEmptyStrings(tabItems.map(item => item.value));
     // True when the effective selection differs from the prior committed state (value, flags, or multi-select).
     // `select` is only dispatched when both `emitEvent` (invoker/command path) and `changed` are true.
     const changed =

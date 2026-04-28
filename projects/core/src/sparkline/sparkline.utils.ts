@@ -36,11 +36,10 @@ export function calculateViewBox(
 
 export function calculateDomain(
   values: number[],
-  explicitMin?: number,
-  explicitMax?: number,
-  includeZero = false
+  options: { explicitMin?: number; explicitMax?: number; includeZero?: boolean } = {}
 ): Scale | undefined {
   if (values.length === 0) return undefined;
+  const { explicitMin, explicitMax, includeZero = false } = options;
 
   const dataMinimum = Math.min(...values);
   const dataMaximum = Math.max(...values);
@@ -51,48 +50,44 @@ export function calculateDomain(
   };
 }
 
-export function valueToY(value: number, min: number, max: number, viewHeight = VIEW_HEIGHT): number {
-  const range = max - min;
-  if (range === 0) return viewHeight / 2;
-  return viewHeight - ((value - min) / range) * viewHeight;
+export function valueToY(value: number, range: { min: number; max: number }, viewHeight = VIEW_HEIGHT): number {
+  const span = range.max - range.min;
+  if (span === 0) return viewHeight / 2;
+  return viewHeight - ((value - range.min) / span) * viewHeight;
 }
 
 export function toPlotPoints(
   values: number[],
-  min: number,
-  max: number,
-  viewWidth: number,
-  viewHeight = VIEW_HEIGHT
+  range: { min: number; max: number },
+  view: { width: number; height?: number }
 ): Point[] {
-  const stepX = values.length > 1 ? viewWidth / (values.length - 1) : 0;
+  const viewHeight = view.height ?? VIEW_HEIGHT;
+  const stepX = values.length > 1 ? view.width / (values.length - 1) : 0;
   return values.map((value, index) => ({
     x: index * stepX,
-    y: valueToY(value, min, max, viewHeight)
+    y: valueToY(value, range, viewHeight)
   }));
 }
 
 export function calculateSymbolIndices(
   values: number[],
-  denoteFirst: boolean,
-  denoteLast: boolean,
-  denoteMin: boolean,
-  denoteMax: boolean
+  denote: { first: boolean; last: boolean; min: boolean; max: boolean }
 ): Set<number> {
   const indices = new Set<number>();
   if (values.length === 0) return indices;
 
-  if (denoteFirst) indices.add(0);
-  if (denoteLast) indices.add(values.length - 1);
+  if (denote.first) indices.add(0);
+  if (denote.last) indices.add(values.length - 1);
 
-  const needsExtrema = denoteMin || denoteMax;
+  const needsExtrema = denote.min || denote.max;
   if (!needsExtrema) return indices;
 
   const min = Math.min(...values);
   const max = Math.max(...values);
 
   values.forEach((value, index) => {
-    if (denoteMin && value === min) indices.add(index);
-    if (denoteMax && value === max) indices.add(index);
+    if (denote.min && value === min) indices.add(index);
+    if (denote.max && value === max) indices.add(index);
   });
 
   return indices;
@@ -174,11 +169,14 @@ export function toColumnRects(points: Point[], baselineY: number, width: number)
 export function toWinLossRects(
   values: number[],
   baselineY: number,
-  width: number,
-  height: number
+  dimensions: { width: number; height: number }
 ): (Rect & { className: 'win' | 'loss' | 'draw' })[] {
-  const { bandSize: bandWidth, stepSize: stepX } = calculateBandSizing(values.length, width, WINLOSS_GAP_RATIO);
-  const barHeight = height / 2;
+  const { bandSize: bandWidth, stepSize: stepX } = calculateBandSizing(
+    values.length,
+    dimensions.width,
+    WINLOSS_GAP_RATIO
+  );
+  const barHeight = dimensions.height / 2;
 
   return values.map((value, index) => {
     const x = index * stepX + (stepX - bandWidth) / 2;
