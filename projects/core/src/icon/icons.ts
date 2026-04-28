@@ -255,6 +255,7 @@ export const ICON_IMPORTS = {
   'start': iconImport(() => import('./icons/start.svg?raw')),
   'status-offline': iconImport(() => import('./icons/status-offline.svg?raw')),
   'status-online': iconImport(() => import('./icons/status-online.svg?raw')),
+  'stop': iconImport(() => import('./icons/stop.svg?raw')),
   'stop-sign': iconImport(() => import('./icons/stop-sign.svg?raw')),
   'stopwatch': iconImport(() => import('./icons/stopwatch.svg?raw')),
   'strikethrough': iconImport(() => import('./icons/strikethrough.svg?raw')),
