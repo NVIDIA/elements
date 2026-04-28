@@ -188,16 +188,6 @@ Use the `api_get` tool to look up the current slot API for these components.
 <!-- after  --> <div nve-layout="full"></div>
 ```
 
-### Testing Utilities
-
-```typescript
-// before
-import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@maglev/elements/test';
-
-// after
-import { createFixture, removeFixture, elementIsStable, emulateClick, untilEvent } from '@nvidia-elements/testing';
-```
-
 ## Step 5: Verification
 
 After applying all fixes:
