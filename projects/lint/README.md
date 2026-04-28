@@ -64,6 +64,7 @@ export default [
 | ---- | ----------- | -------- | -------- |
 | `@nvidia-elements/lint/no-complex-popovers` | Disallow excessive DOM complexity inside popover elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-attributes` | Disallow use of deprecated attributes in HTML. | HTML | `error` |
+| `@nvidia-elements/lint/no-deprecated-global-attribute-value` | Disallow use of deprecated attribute values for nve-* utility attributes. | HTML | `error` |
 | `@nvidia-elements/lint/no-deprecated-css-imports` | Disallow use of deprecated CSS import paths. | CSS | `error` |
 | `@nvidia-elements/lint/no-deprecated-css-variable` | Disallow use of deprecated --mlv-* CSS theme variables. | CSS | `error` |
 | `@nvidia-elements/lint/no-deprecated-global-attributes` | Disallow use of deprecated global utility attributes in HTML. | HTML | `error` |

@@ -92,6 +92,12 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-global-attribute-value</code></nve-grid-cell>
+    <nve-grid-cell>Disallow use of deprecated attribute values for nve-* utility attributes.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-deprecated-css-imports</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of deprecated CSS import paths.</nve-grid-cell>
     <nve-grid-cell>CSS</nve-grid-cell>
