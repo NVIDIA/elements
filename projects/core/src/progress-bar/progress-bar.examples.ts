@@ -52,7 +52,7 @@ export const Max = {
  */
 export const Labeled = {
   render: () => html`
-<div nve-layout="column gap:xxxs pad:lg align:horizontal-stretch grow">
+<div nve-layout="column gap:xs pad:lg align:horizontal-stretch full">
   <div nve-layout="row align:space-between">
     <p nve-text="label sm">Upload Status</p>
     <p nve-text="label emphasis sm">80%</p>

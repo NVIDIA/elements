@@ -87,7 +87,7 @@ export async function render(data) {
             data.tag
               ? `
             <section slot="subheader" nve-layout="column gap:xl align:left pad-x:xxl pad-top:xxl">
-              <div nve-layout="column &lg|row align:space-between gap:lg grow">
+              <div nve-layout="column &lg|row align:space-between gap:lg full">
                 <h1 nve-text="display emphasis semibold mkd" data-pagefind-meta="tag:${data.tag}">${data.title}</h1>
                 
                 ${elementSummary(data.tag)}

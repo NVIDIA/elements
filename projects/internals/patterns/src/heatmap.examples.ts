@@ -667,7 +667,7 @@ export const OccupancyDetectionHeatmap = {
 
 /**
  * @summary Grid heatmap displaying thermal distribution across robotic arm joints and actuators over time. Essential for monitoring overheating risks during extended operation cycles and validating cooling system performance using viridis scale.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const ThermalHeatmap = {
   render: () => html`
