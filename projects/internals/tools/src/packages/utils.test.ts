@@ -2,7 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it, vi } from 'vitest';
-import { searchChangelogs, findPublicAPIChangelog, limitChangelogVersions, getPackage, scopeOrder } from './utils.js';
+import {
+  findPublicAPIChangelog,
+  getPackage,
+  hasChangelogEntries,
+  limitChangelogVersions,
+  scopeOrder
+} from './utils.js';
 
 vi.mock('@internals/metadata', () => ({
   ApiService: { search: vi.fn() },
@@ -37,63 +43,22 @@ vi.mock('../api/utils.js', async importOriginal => {
   };
 });
 
-describe('searchChangelogs', () => {
-  const changelogs = {
-    '@nvidia-elements/core': '1.0.0',
-    '@nvidia-elements/monaco': '2.0.0',
-    '@nvidia-elements/code': '3.0.0'
-  };
-
-  it('should search changelogs', () => {
-    expect(searchChangelogs('elements', changelogs)).toEqual('1.0.0');
-    expect(searchChangelogs('monaco', changelogs)).toEqual('2.0.0');
-    expect(searchChangelogs('code', changelogs)).toEqual('3.0.0');
-    expect(searchChangelogs('elements monaco', changelogs)).toEqual('1.0.0');
-    expect(searchChangelogs('no-match', changelogs)).toEqual(undefined);
+describe('hasChangelogEntries', () => {
+  it('should return false for empty / whitespace / undefined input', () => {
+    expect(hasChangelogEntries(undefined)).toBe(false);
+    expect(hasChangelogEntries('')).toBe(false);
+    expect(hasChangelogEntries('   \n  ')).toBe(false);
   });
 
-  it('should handle projects with no changelogs', () => {
-    const changelogsWithNoChangelogs = {
-      projects: {
-        '@nvidia-elements/core': undefined,
-        '@nvidia-elements/monaco': null,
-        '@nvidia-elements/code': undefined
-      }
-    } as unknown as { [key: string]: string };
-
-    expect(searchChangelogs('elements', changelogsWithNoChangelogs)).toEqual(undefined);
-    expect(searchChangelogs('monaco', changelogsWithNoChangelogs)).toEqual(undefined);
-    expect(searchChangelogs('code', changelogsWithNoChangelogs)).toEqual(undefined);
+  it('should return false for the placeholder initial-release stub', () => {
+    expect(hasChangelogEntries('## 0.0.0\n\nInitial release.\n')).toBe(false);
+    expect(hasChangelogEntries('## 0.0.0\n\nInitial release')).toBe(false);
   });
 
-  it('should prefer exact match over fuzzy match', () => {
-    const scoped = {
-      '@nvidia-elements/behaviors-alpine': 'behaviors-alpine-changelog',
-      '@nvidia-elements/lint': 'lint-changelog',
-      '@nvidia-elements/forms': 'forms-changelog'
-    };
-    expect(searchChangelogs('@nvidia-elements/lint', scoped)).toBe('lint-changelog');
-    expect(searchChangelogs('@nvidia-elements/forms', scoped)).toBe('forms-changelog');
-    expect(searchChangelogs('@nvidia-elements/behaviors-alpine', scoped)).toBe('behaviors-alpine-changelog');
-  });
-
-  it('should match by substring when no exact match', () => {
-    const scoped = {
-      '@nvidia-elements/behaviors-alpine': 'behaviors-alpine-changelog',
-      '@nvidia-elements/lint': 'lint-changelog'
-    };
-    expect(searchChangelogs('lint', scoped)).toBe('lint-changelog');
-    expect(searchChangelogs('behaviors-alpine', scoped)).toBe('behaviors-alpine-changelog');
-  });
-
-  it('should handle empty query', () => {
-    expect(searchChangelogs('', changelogs)).toEqual(undefined);
-  });
-
-  it('should match short substrings', () => {
-    // substring match finds these even though fuzzyMatch would filter them out
-    expect(searchChangelogs('el', changelogs)).toEqual('1.0.0');
-    expect(searchChangelogs('mo', changelogs)).toEqual('2.0.0');
+  it('should return true when the changelog has any real version entry', () => {
+    expect(hasChangelogEntries('## <small>0.0.8 (2026-04-24)</small>\n\n* fix: thing')).toBe(true);
+    expect(hasChangelogEntries('## 1.0.0\n\nFirst stable release.')).toBe(true);
+    expect(hasChangelogEntries('## 0.0.0\n\nInitial release.\n\n## 0.1.0\n\n* feat: thing')).toBe(true);
   });
 });
 

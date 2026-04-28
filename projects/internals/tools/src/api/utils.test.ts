@@ -67,6 +67,25 @@ describe('getPublishedPackageNames', () => {
     const emptyProjects = [];
     expect(getPublishedPackageNames(emptyProjects)).toEqual([]);
   });
+
+  it('should exclude @nvidia-elements packages marked private', () => {
+    const withPrivate = [
+      ...projects,
+      {
+        name: '@nvidia-elements/internal-only',
+        version: '1.0.0',
+        description: '',
+        readme: '',
+        changelog: '',
+        private: true
+      }
+    ];
+    expect(getPublishedPackageNames(withPrivate)).toEqual([
+      '@nvidia-elements/core',
+      '@nvidia-elements/monaco',
+      '@nvidia-elements/code'
+    ]);
+  });
 });
 
 describe('getContextAPIs', () => {
@@ -124,13 +143,7 @@ describe('getLatestPublishedVersions', () => {
     vi.mocked(fetch).mockRejectedValue(new Error('Network error'));
     const { getLatestPublishedVersions } = await import('./utils.js');
 
-    // when ELEMENTS_ESM_CDN_BASE_URL is not configured, fetch is skipped and fallback version is returned
-    try {
-      const result = await getLatestPublishedVersions(projects);
-      expect(result).toEqual({ '@nvidia-elements/core': '0.0.0' });
-    } catch (e) {
-      expect((e as Error).message).toContain('Could not fetch latest versions from');
-    }
+    await expect(getLatestPublishedVersions(projects)).rejects.toThrow(/Could not fetch latest versions from/);
   });
 
   it('should return fallback version and warn when fetch fails and ELEMENTS_ENV is not mcp', async () => {
@@ -141,11 +154,25 @@ describe('getLatestPublishedVersions', () => {
 
     const result = await getLatestPublishedVersions(projects);
 
-    // when ELEMENTS_ESM_CDN_BASE_URL is configured, fetch fails and triggers a warning
-    if (warnSpy.mock.calls.length > 0) {
-      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Could not fetch latest versions from'));
-    }
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Could not fetch latest versions from'));
     expect(result).toEqual({ '@nvidia-elements/core': '0.0.0' });
+  });
+
+  it('should fetch versions from the npm registry', async () => {
+    vi.stubEnv('ELEMENTS_ENV', 'dev');
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => ({ name: '@nvidia-elements/core', version: '1.2.3' })
+    } as Response);
+    const { getLatestPublishedVersions } = await import('./utils.js');
+
+    const result = await getLatestPublishedVersions(projects);
+
+    expect(fetch).toHaveBeenCalledWith(
+      'https://registry.npmjs.org/@nvidia-elements/core/latest',
+      expect.objectContaining({ signal: expect.any(AbortSignal) })
+    );
+    expect(result).toEqual({ '@nvidia-elements/core': '1.2.3' });
   });
 });
 

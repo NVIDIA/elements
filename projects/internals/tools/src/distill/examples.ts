@@ -6,16 +6,7 @@ import type { Example, ExampleTag } from '@internals/metadata';
 const excludedIdPatterns = ['theme', 'internal'];
 const excludedTags: ExampleTag[] = ['anti-pattern', 'performance', 'test-case', 'theme']; // these are examples with high noise to signal ratio for agents
 const excludedElementPatterns = ['internal', 'responsive'];
-const includedIdPatterns = [
-  'default',
-  'forms',
-  'popover',
-  'page',
-  'grid',
-  'invoker',
-  'styles-typography',
-  'styles-layout'
-];
+const includedIdPatterns = ['default', 'forms', 'popover', 'page', 'grid', 'invoker'];
 
 /**
  * Examples failing exclusion checks are not included in the context.
@@ -42,7 +33,8 @@ function passesInclusionChecks(example: Partial<Example>) {
   const id = example.id ?? '';
   const tags = example.tags ?? [];
   return (
-    (includedIdPatterns.some(p => id.includes(p)) || tags.includes('pattern')) && (example.summary?.length ?? 0) > 0
+    (includedIdPatterns.some(p => id.includes(p)) || tags.includes('pattern') || tags.includes('template')) &&
+    (example.summary?.length ?? 0) > 0
   );
 }
 
@@ -52,13 +44,16 @@ export function isContextExample(example: Partial<Example>) {
 
 export function rankExample(example: Partial<Example>) {
   const name = (example.id ?? '').replace('elements-', '');
-  if (name.startsWith('pattern')) {
+  if (name.startsWith('template')) {
     return 0;
   }
-  if (name.startsWith('page')) {
+  if (name.startsWith('pattern')) {
     return 1;
   }
-  return 2;
+  if (name.startsWith('page')) {
+    return 2;
+  }
+  return 3;
 }
 
 /**

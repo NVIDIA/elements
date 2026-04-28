@@ -131,21 +131,26 @@ describe('isContextExample', () => {
 });
 
 describe('rankExample', () => {
-  it('should rank pattern examples first', () => {
-    expect(rankExample({ id: 'pattern-form' })).toBe(0);
+  it('should rank template examples first', () => {
+    expect(rankExample({ id: 'template-dashboard' })).toBe(0);
   });
 
-  it('should rank page examples second', () => {
-    expect(rankExample({ id: 'page-header' })).toBe(1);
+  it('should rank pattern examples second', () => {
+    expect(rankExample({ id: 'pattern-form' })).toBe(1);
+  });
+
+  it('should rank page examples third', () => {
+    expect(rankExample({ id: 'page-header' })).toBe(2);
   });
 
   it('should rank other examples last', () => {
-    expect(rankExample({ id: 'button-default' })).toBe(2);
+    expect(rankExample({ id: 'button-default' })).toBe(3);
   });
 
   it('should strip elements- prefix before ranking', () => {
-    expect(rankExample({ id: 'elements-pattern-form' })).toBe(0);
-    expect(rankExample({ id: 'elements-page-header' })).toBe(1);
+    expect(rankExample({ id: 'elements-template-foo' })).toBe(0);
+    expect(rankExample({ id: 'elements-pattern-form' })).toBe(1);
+    expect(rankExample({ id: 'elements-page-header' })).toBe(2);
   });
 });
 

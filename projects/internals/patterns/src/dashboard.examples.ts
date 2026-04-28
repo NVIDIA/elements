@@ -18,18 +18,28 @@ export const TrainingMonitor = {
   <nve-page-header slot="header">
     <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 slot="prefix" nve-text="heading">Infrastructure</h2>
+    <nve-button selected container="flat"><a href="#">Documentation</a></nve-button>
+    <nve-button container="flat"><a href="#">Support</a></nve-button>
+    <nve-icon-button interaction="emphasis" slot="suffix" size="sm">EL</nve-icon-button>
   </nve-page-header>
-  <main nve-layout="column gap:lg pad:lg">
-    <section nve-layout="column gap:sm">
-      <h2 nve-text="heading">Model 70B Fine-tune</h2>
-      <div nve-layout="row gap:sm align:vertical-center">
-        <nve-badge status="running">Training</nve-badge>
-        <span nve-text="label sm muted">Epoch 14 / 20</span>
-        <nve-divider orientation="vertical"></nve-divider>
-        <span nve-text="label sm muted">ETA: 4h 23m</span>
-      </div>
-    </section>
-    <section nve-layout="grid gap:lg span-items:6">
+  <nve-toolbar slot="subheader" container="full">\
+    <div slot="prefix" nve-layout="row gap:sm align:vertical-center">
+      <nve-badge status="running">Training</nve-badge>
+      <span nve-text="label sm muted nowrap">Epoch 14 / 20</span>
+      <nve-divider orientation="vertical"></nve-divider>
+      <span nve-text="label sm muted nowrap">ETA: 4h 23m</span>
+    </div>
+    <nve-button-group slot="suffix">
+      <nve-button>24h</nve-button>
+      <nve-button pressed>7d</nve-button>
+      <nve-button>30d</nve-button>
+    </nve-button-group>
+    <nve-divider slot="suffix" orientation="vertical"></nve-divider>
+    <nve-button slot="suffix">Export</nve-button>
+  </nve-toolbar>
+  <main nve-layout="column gap:lg pad:lg" style="max-width: 1300px;">
+    <h1 slot="prefix" nve-text="heading lg">Model 120B Fine-tune</h1>
+    <section nve-layout="grid gap:lg span-items:6 align:vertical-stretch">
       <nve-card>
         <nve-card-header>
           <h2 nve-text="label muted">Training Loss</h2>
@@ -66,7 +76,7 @@ export const TrainingMonitor = {
         </nve-card-content>
       </nve-card>
     </section>
-    <section nve-layout="grid gap:lg span-items:4">
+    <section nve-layout="grid gap:lg span-items:4 align:vertical-stretch">
       <nve-card>
         <nve-card-header>
           <h2 nve-text="label muted">Learning Rate</h2>
@@ -115,7 +125,6 @@ export const TrainingMonitor = {
           <nve-grid-column>Epoch</nve-grid-column>
           <nve-grid-column>Train Loss</nve-grid-column>
           <nve-grid-column>Val Loss Trend</nve-grid-column>
-          <nve-grid-column>BLEU Score Trend</nve-grid-column>
           <nve-grid-column>Status</nve-grid-column>
         </nve-grid-header>
         <nve-grid-row>
@@ -126,12 +135,6 @@ export const TrainingMonitor = {
             <div nve-layout="row gap:sm align:vertical-center">
               <span nve-text="label sm">0.031</span>
               <nve-sparkline data="[0.13, 0.082, 0.055, 0.042, 0.033, 0.029, 0.031]" mark="line" interpolation="smooth" status="warning" size="md"></nve-sparkline>
-            </div>
-          </nve-grid-cell>
-          <nve-grid-cell>
-            <div nve-layout="row gap:sm align:vertical-center">
-              <span nve-text="label sm">42.8</span>
-              <nve-sparkline data="[28, 32, 36, 38, 40, 41, 42.8]" mark="line" interpolation="smooth" status="success" size="md"></nve-sparkline>
             </div>
           </nve-grid-cell>
           <nve-grid-cell><nve-badge status="running" container="flat">Current</nve-badge></nve-grid-cell>
@@ -146,12 +149,6 @@ export const TrainingMonitor = {
               <nve-sparkline data="[0.13, 0.082, 0.055, 0.042, 0.033, 0.029]" mark="line" interpolation="smooth" status="success" size="md"></nve-sparkline>
             </div>
           </nve-grid-cell>
-          <nve-grid-cell>
-            <div nve-layout="row gap:sm align:vertical-center">
-              <span nve-text="label sm">41.2</span>
-              <nve-sparkline data="[28, 32, 36, 38, 40, 41.2]" mark="line" interpolation="smooth" status="success" size="md"></nve-sparkline>
-            </div>
-          </nve-grid-cell>
           <nve-grid-cell><nve-badge status="finished" container="flat">Best</nve-badge></nve-grid-cell>
         </nve-grid-row>
         <nve-grid-row>
@@ -162,12 +159,6 @@ export const TrainingMonitor = {
             <div nve-layout="row gap:sm align:vertical-center">
               <span nve-text="label sm">0.048</span>
               <nve-sparkline data="[0.13, 0.082, 0.055, 0.048]" mark="line" interpolation="smooth" size="md"></nve-sparkline>
-            </div>
-          </nve-grid-cell>
-          <nve-grid-cell>
-            <div nve-layout="row gap:sm align:vertical-center">
-              <span nve-text="label sm">35.6</span>
-              <nve-sparkline data="[28, 32, 35.6]" mark="line" interpolation="smooth" size="md"></nve-sparkline>
             </div>
           </nve-grid-cell>
           <nve-grid-cell><nve-badge status="finished" container="flat">Saved</nve-badge></nve-grid-cell>
@@ -209,7 +200,7 @@ export const ProjectBoard = {
           </div>
           <nve-sort-button></nve-sort-button>
         </div>
-        <div nve-layout="grid span-items:4 gap:lg">
+        <div nve-layout="grid span-items:4 gap:lg align:vertical-stretch">
           <section nve-layout="column gap:sm">
             <div nve-layout="row gap:sm align:vertical-center align:space-between">
               <h3 nve-text="heading sm">Backlog</h3>

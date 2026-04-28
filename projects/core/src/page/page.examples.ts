@@ -918,8 +918,8 @@ export const KitchenSink = {
 };
 
 /**
- * @summary Card grid page layout for browsable collections like infrastructure dashboards, asset catalogs, or media galleries. Use with view-mode toggles for switching between grid and table presentations.
- * @tags pattern
+ * @summary Card grid page layout for browseable collections like infrastructure dashboards, asset catalogs, or media galleries. Use with view-mode toggles for switching between grid and table presentations.
+ * @tags pattern test-case
  */
 export const LayoutCardGrid = {
   render: () => html`
@@ -966,7 +966,7 @@ export const LayoutCardGrid = {
 
 /**
  * @summary Multi-video grid layout with synchronized playback controls for monitoring and review workflows. Ideal for surveillance dashboards, AV sensor feeds, or simulation playback where concurrent streams need simultaneous viewing.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const LayoutMultiVideo = {
   render: () => html`

@@ -10,6 +10,7 @@ export interface Project {
   description: string;
   readme: string;
   changelog: string;
+  private?: boolean;
 }
 
 /**
@@ -61,7 +62,7 @@ export interface Token {
 /**
  * @summary Category that describes the example. Used for filtering and sorting as well as MCP search capabilities.
  */
-export type ExampleTag = 'performance' | 'pattern' | 'anti-pattern' | 'test-case' | 'theme';
+export type ExampleTag = 'performance' | 'pattern' | 'anti-pattern' | 'test-case' | 'theme' | 'template';
 
 /**
  * @summary An example is a template that can show an API, specific use case, or pattern.
@@ -88,6 +89,7 @@ export interface Package {
   version: string;
   description: string;
   homepage: string;
+  private?: boolean;
   repository: {
     type: string;
     url: string;
