@@ -1,3 +1,8 @@
+## <small>0.1.1 (2026-04-28)</small>
+
+* fix(lint): recognize lit boolean binding on popover hidden attribute ([38281fb](https://github.com/NVIDIA/elements/commit/38281fb))
+* chore(release): @nvidia-elements/cli-v0.0.8 [skip ci] ([70f2287](https://github.com/NVIDIA/elements/commit/70f2287))
+
 ## 0.1.0 (2026-04-28)
 
 * chore(ci): add code rabbit config ([cf98be6](https://github.com/NVIDIA/elements/commit/cf98be6))
