@@ -17,8 +17,9 @@ import '@nvidia-elements/code/codeblock/languages/typescript.js';
 import styles from './canvas.css?inline';
 
 function convertToJsxElement(source: string): string {
-  return source.replace(/<(\/?)([a-z]+(?:-[a-z]+)+)([^>]*)>/g, (_match, closingSlash, tagName, attributes) => {
-    const jsxTagName = tagName
+  return source.replace(/<(\/?)([a-z]+(?:-[a-z]+)+)([^>]*)>/g, (...args: string[]) => {
+    const [, closingSlash, tagName, attributes] = args;
+    const jsxTagName = tagName!
       .split('-')
       .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
       .join('');

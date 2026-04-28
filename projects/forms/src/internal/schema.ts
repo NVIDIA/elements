@@ -4,7 +4,6 @@
 import type { Schema } from './types.js';
 import { FormControlError } from './errors.js';
 
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- caller specifies T for typed return
 export function parseValueSchema<T>(formControlName: string, value: string, schema: Schema): T {
   const parsedValue = parseControlValue(value, schema);
   if (parsedValue === undefined) {
@@ -89,15 +88,15 @@ function validateArray(schema: Schema & { type: 'array' }, value: unknown): Vali
 }
 
 function validateObjectProperty(
-  prop: string,
-  propSchema: Schema,
+  property: { name: string; schema: Schema },
   value: Record<string, unknown>,
   required?: string[]
 ): ValidationResult {
-  const propValue = value[prop];
+  const { name, schema: propSchema } = property;
+  const propValue = value[name];
   if (propValue === undefined) {
-    if (required?.includes(prop)) {
-      return invalid({ valueMissing: true }, `missing required property: ${prop}`);
+    if (required?.includes(name)) {
+      return invalid({ valueMissing: true }, `missing required property: ${name}`);
     }
     return VALID;
   }
@@ -118,7 +117,11 @@ function validateObject(schema: Schema & { type: 'object' }, value: unknown): Va
   }
 
   for (const [prop, propSchema] of Object.entries(schema.properties)) {
-    const result = validateObjectProperty(prop, propSchema, value as Record<string, unknown>, schema.required);
+    const result = validateObjectProperty(
+      { name: prop, schema: propSchema },
+      value as Record<string, unknown>,
+      schema.required
+    );
     if (!result.validity.valid) {
       return result;
     }
@@ -160,7 +163,6 @@ export function validateSchema(schema: Schema, value: unknown): ValidationResult
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters -- caller specifies T for typed return
 export function parseControlValue<T>(value: string, schema: Schema): T | undefined {
   const schemaType = schema.type;
   let parsedValue: unknown;

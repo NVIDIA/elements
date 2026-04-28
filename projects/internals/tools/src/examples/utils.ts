@@ -74,7 +74,7 @@ export function condenseTemplate(template: string, maxRepeat = 3): string {
   return condenseLines(template.split('\n'), maxRepeat).join('\n');
 }
 
-function collectSiblings(lines: string[], start: number, indent: string, tag: string) {
+function collectSiblings(lines: string[], start: number, target: { indent: string; tag: string }) {
   const siblings: Array<{ start: number; end: number }> = [];
   let cursor = start;
 
@@ -85,8 +85,8 @@ function collectSiblings(lines: string[], start: number, indent: string, tag: st
     }
 
     const sibMatch = lines[cursor]!.match(/^(\s*)<([\w][\w-]*)([\s>/])/);
-    if (sibMatch && sibMatch[1] === indent && sibMatch[2] === tag) {
-      const sibEnd = findBlockEnd(lines, cursor, tag);
+    if (sibMatch && sibMatch[1] === target.indent && sibMatch[2] === target.tag) {
+      const sibEnd = findBlockEnd(lines, cursor, target.tag);
       siblings.push({ start: cursor, end: sibEnd });
       cursor = sibEnd + 1;
     } else {
@@ -133,7 +133,7 @@ function condenseLines(lines: string[], maxRepeat: number): string[] {
 
     const indent = openMatch[1]!;
     const tag = openMatch[2]!;
-    const { siblings, cursor } = collectSiblings(lines, i, indent, tag);
+    const { siblings, cursor } = collectSiblings(lines, i, { indent, tag });
 
     result.push(...emitKeptSiblings(lines, siblings, maxRepeat));
 

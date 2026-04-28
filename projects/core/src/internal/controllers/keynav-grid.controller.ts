@@ -165,12 +165,11 @@ function getGridDelta(code: KeynavCode | string, dir: string): { dx: number; dy:
 
 function applyGridHomeEnd(
   code: KeynavCode | string,
-  x: number,
-  y: number,
-  columnCount: number,
-  rowCount: number,
-  ctrlKey: boolean
+  position: { x: number; y: number },
+  bounds: { columnCount: number; rowCount: number; ctrlKey: boolean }
 ) {
+  const { x, y } = position;
+  const { columnCount, rowCount, ctrlKey } = bounds;
   if (code === KeynavCode.End) {
     return { x: columnCount, y: ctrlKey ? rowCount : y };
   }
@@ -201,7 +200,7 @@ export function getNextKeyGridItem(
     x = Math.max(0, Math.min(columnCount, x + delta.dx));
     y = Math.max(0, Math.min(rowCount, y + delta.dy));
   } else {
-    ({ x, y } = applyGridHomeEnd(config.code, x, y, columnCount, rowCount, config.ctrlKey));
+    ({ x, y } = applyGridHomeEnd(config.code, { x, y }, { columnCount, rowCount, ctrlKey: config.ctrlKey }));
   }
 
   return { x, y };

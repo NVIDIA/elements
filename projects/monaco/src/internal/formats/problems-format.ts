@@ -6,8 +6,13 @@ import type * as monaco from '@nvidia-elements/monaco';
 
 import type { Problem } from '../types/index.js';
 
-function toRange(monaco: Monaco, lineNumber: number, startColumn: number, endColumn: number): monaco.Range {
-  return new monaco.Range(lineNumber, startColumn, lineNumber, endColumn);
+interface ColumnRange {
+  startColumn: number;
+  endColumn: number;
+}
+
+function toRange(monaco: Monaco, lineNumber: number, columns: ColumnRange): monaco.Range {
+  return new monaco.Range(lineNumber, columns.startColumn, lineNumber, columns.endColumn);
 }
 
 function toLineDecoration(monaco: Monaco, lineNumber: number, className: string): monaco.editor.IModelDeltaDecoration {
@@ -23,14 +28,12 @@ function toLineDecoration(monaco: Monaco, lineNumber: number, className: string)
 function toRangeDecoration(
   monaco: Monaco,
   lineNumber: number,
-  startColumn: number,
-  endColumn: number,
-  className: string
+  decoration: ColumnRange & { className: string }
 ): monaco.editor.IModelDeltaDecoration {
   return {
-    range: toRange(monaco, lineNumber, startColumn, endColumn),
+    range: toRange(monaco, lineNumber, decoration),
     options: {
-      inlineClassName: `problems-decoration ${className}`
+      inlineClassName: `problems-decoration ${decoration.className}`
     }
   };
 }
@@ -71,16 +74,13 @@ export function toSeverityIcon(severityLabel: SeverityLabel): string {
 function toIconDecoration(
   monaco: Monaco,
   lineNumber: number,
-  startColumn: number,
-  endColumn: number,
-  className: string,
-  severityLabel: SeverityLabel
+  decoration: ColumnRange & { className: string; severityLabel: SeverityLabel }
 ): monaco.editor.IModelDeltaDecoration {
   return {
-    range: toRange(monaco, lineNumber, startColumn, endColumn),
+    range: toRange(monaco, lineNumber, decoration),
     options: {
-      beforeContentClassName: `problems-decoration codicon ${toSeverityIcon(severityLabel)}`,
-      inlineClassName: `problems-decoration ${className}`
+      beforeContentClassName: `problems-decoration codicon ${toSeverityIcon(decoration.severityLabel)}`,
+      inlineClassName: `problems-decoration ${decoration.className}`
     }
   };
 }
@@ -90,46 +90,53 @@ interface DecoratedLine {
   decorations: monaco.editor.IModelDeltaDecoration[];
 }
 
+interface LineBuilder {
+  monaco: Monaco;
+  lineNumber: number;
+  decorations: monaco.editor.IModelDeltaDecoration[];
+  text: string;
+}
+
+function appendSpan(builder: LineBuilder, segment: string, className: string): void {
+  const startColumn = builder.text.length + 1;
+  builder.text += segment;
+  const endColumn = builder.text.length + 1;
+  builder.decorations.push(
+    toRangeDecoration(builder.monaco, builder.lineNumber, { startColumn, endColumn, className })
+  );
+}
+
+function appendIconSpan(
+  builder: LineBuilder,
+  segment: string,
+  options: { className: string; severityLabel: SeverityLabel }
+): void {
+  const startColumn = builder.text.length + 1;
+  builder.text += segment;
+  const endColumn = builder.text.length + 1;
+  builder.decorations.push(
+    toIconDecoration(builder.monaco, builder.lineNumber, { startColumn, endColumn, ...options })
+  );
+}
+
 function basename(path: string): string {
   return path.split('/').filter(Boolean).pop() ?? '';
 }
 
-function toFileLine(monaco: Monaco, lineNumber: number, uri: string, problems: Problem[]): DecoratedLine {
-  const pathname = decodeURIComponent(new URL(uri).pathname);
-  const file = basename(pathname);
-  const path = pathname;
-  const count = String(problems.length);
+function toFileLine(monaco: Monaco, lineNumber: number, file: { uri: string; problems: Problem[] }): DecoratedLine {
+  const pathname = decodeURIComponent(new URL(file.uri).pathname);
+  const decorations: monaco.editor.IModelDeltaDecoration[] = [toLineDecoration(monaco, lineNumber, 'problems-line')];
+  const builder: LineBuilder = { monaco, lineNumber, decorations, text: '' };
 
-  const decorations: monaco.editor.IModelDeltaDecoration[] = [];
-  decorations.push(toLineDecoration(monaco, lineNumber, 'problems-line'));
+  appendSpan(builder, basename(pathname), 'problem-file');
+  builder.text += ' ';
+  appendSpan(builder, pathname, 'problem-path');
+  builder.text += ' ';
+  appendSpan(builder, String(file.problems.length), 'problem-count');
 
-  let text = '';
-
-  // file
-  const fileStart = text.length + 1;
-  text += file;
-  decorations.push(toRangeDecoration(monaco, lineNumber, fileStart, text.length + 1, 'problem-file'));
-
-  // separator
-  text += ' ';
-
-  // path
-  const pathStart = text.length + 1;
-  text += path;
-  decorations.push(toRangeDecoration(monaco, lineNumber, pathStart, text.length + 1, 'problem-path'));
-
-  // separator
-  text += ' ';
-
-  // count
-  const countStart = text.length + 1;
-  text += count;
-  decorations.push(toRangeDecoration(monaco, lineNumber, countStart, text.length + 1, 'problem-count'));
-
-  return { text, decorations };
+  return { text: builder.text, decorations };
 }
 
-// eslint-disable-next-line max-statements
 function toProblemLine(monaco: Monaco, lineNumber: number, problem: Problem): DecoratedLine {
   const severity = toSeverityLabel(problem.severity);
   const message = problem.message.split('\n')[0]!;
@@ -137,75 +144,52 @@ function toProblemLine(monaco: Monaco, lineNumber: number, problem: Problem): De
   const code = (typeof problem.code === 'object' ? problem.code?.value : problem.code) ?? '';
   const target = typeof problem.code === 'object' ? problem.code?.target : undefined;
   const position = `[Ln ${problem.startLineNumber}, Col ${problem.startColumn}]`;
+  const decorations: monaco.editor.IModelDeltaDecoration[] = [toLineDecoration(monaco, lineNumber, 'problems-line')];
+  const builder: LineBuilder = { monaco, lineNumber, decorations, text: '  ' };
 
-  const decorations: monaco.editor.IModelDeltaDecoration[] = [];
-  decorations.push(toLineDecoration(monaco, lineNumber, 'problems-line'));
+  appendIconSpan(builder, severity, { className: 'severity-label', severityLabel: severity });
+  builder.text += ' ';
+  appendSpan(builder, message, 'problem-message');
+  builder.text += ' ';
+  appendSourceCode(builder, { source, code, target });
+  appendSpan(builder, position, 'problem-position');
 
-  let text = '';
-
-  // indent
-  text += '  ';
-
-  // severity
-  const severityStart = text.length + 1;
-  text += severity;
-  decorations.push(
-    toIconDecoration(monaco, lineNumber, severityStart, text.length + 1, 'severity-label', severity as SeverityLabel)
-  );
-
-  // separator
-  text += ' ';
-
-  // message
-  const messageStart = text.length + 1;
-  text += message;
-  decorations.push(toRangeDecoration(monaco, lineNumber, messageStart, text.length + 1, 'problem-message'));
-
-  // separator
-  text += ' ';
-
-  // source + code
-  text = appendSourceCode(monaco, lineNumber, decorations, text, source, code, target);
-
-  // position
-  const positionStart = text.length + 1;
-  text += position;
-  decorations.push(toRangeDecoration(monaco, lineNumber, positionStart, text.length + 1, 'problem-position'));
-
-  return { text, decorations };
+  return { text: builder.text, decorations };
 }
 
-/* eslint-disable max-params, no-param-reassign */
 function appendSourceCode(
-  monaco: Monaco,
-  lineNumber: number,
-  decorations: monaco.editor.IModelDeltaDecoration[],
-  text: string,
-  source: string,
-  code: string,
-  target: string | { toString(): string } | undefined
-): string {
+  builder: LineBuilder,
+  ctx: { source: string; code: string; target: string | { toString(): string } | undefined }
+): void {
+  const { source, code, target } = ctx;
   if (source.length === 0 && code.length === 0) {
-    return text;
+    return;
   }
 
-  const sourceStart = text.length + 1;
-  text += source;
+  const sourceStart = builder.text.length + 1;
+  builder.text += source;
   if (code.length > 0) {
-    const codeStart = text.length + 1;
-    text += `(${code})`;
+    const codeStart = builder.text.length + 1;
+    builder.text += `(${code})`;
     if (target) {
-      decorations.push(
-        toRangeDecoration(monaco, lineNumber, codeStart + 1, codeStart + code.length + 1, 'problem-source-target')
+      builder.decorations.push(
+        toRangeDecoration(builder.monaco, builder.lineNumber, {
+          startColumn: codeStart + 1,
+          endColumn: codeStart + code.length + 1,
+          className: 'problem-source-target'
+        })
       );
     }
   }
-  decorations.push(toRangeDecoration(monaco, lineNumber, sourceStart, text.length + 1, 'problem-source-code'));
-  text += ' ';
-
-  return text;
+  builder.decorations.push(
+    toRangeDecoration(builder.monaco, builder.lineNumber, {
+      startColumn: sourceStart,
+      endColumn: builder.text.length + 1,
+      className: 'problem-source-code'
+    })
+  );
+  builder.text += ' ';
 }
-/* eslint-enable max-params, no-param-reassign */
 
 export function toSelectedLineDecorations(
   monaco: Monaco,
@@ -261,7 +245,7 @@ export function toProblemsFormat(monaco: Monaco, problems: Problem[]): ProblemsF
     const sortedProblems = problemsByFile.get(uri)!.sort(compareProblems);
 
     lineNumber++;
-    const fileLine = toFileLine(monaco, lineNumber, uri, sortedProblems);
+    const fileLine = toFileLine(monaco, lineNumber, { uri, problems: sortedProblems });
     lines.push(fileLine.text);
     decorations.push(...fileLine.decorations);
 

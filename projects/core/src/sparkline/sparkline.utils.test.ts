@@ -47,7 +47,7 @@ describe('sparkline.utils', () => {
     });
 
     it('includes zero in the domain when includeZero is true', () => {
-      expect(calculateDomain([10, 20, 15], undefined, undefined, true)).toEqual({ min: 0, max: 20 });
+      expect(calculateDomain([10, 20, 15], { includeZero: true })).toEqual({ min: 0, max: 20 });
     });
 
     it('returns the observed range when data includes negatives', () => {
@@ -55,20 +55,20 @@ describe('sparkline.utils', () => {
     });
 
     it('uses explicit min/max overrides even when data exceeds those bounds', () => {
-      expect(calculateDomain([-100, 50, 200], -10, 10)).toEqual({ min: -10, max: 10 });
-      expect(calculateDomain([5, -3, 2], -10, undefined)).toEqual({ min: -10, max: 5 });
-      expect(calculateDomain([5, -3, 2], undefined, 10)).toEqual({ min: -3, max: 10 });
+      expect(calculateDomain([-100, 50, 200], { explicitMin: -10, explicitMax: 10 })).toEqual({ min: -10, max: 10 });
+      expect(calculateDomain([5, -3, 2], { explicitMin: -10 })).toEqual({ min: -10, max: 5 });
+      expect(calculateDomain([5, -3, 2], { explicitMax: 10 })).toEqual({ min: -3, max: 10 });
     });
   });
 
   describe('plot and symbol helpers', () => {
     it('maps values to plot points and handles zero-range values', () => {
-      const points = toPlotPoints([5, 5], 5, 5, 120);
+      const points = toPlotPoints([5, 5], { min: 5, max: 5 }, { width: 120 });
       expect(points).toEqual([
         { x: 0, y: 50 },
         { x: 120, y: 50 }
       ]);
-      expect(valueToY(5, 5, 5)).toBe(50);
+      expect(valueToY(5, { min: 5, max: 5 })).toBe(50);
     });
 
     it('resolves symbol indices for all boolean flag permutations', () => {
@@ -93,14 +93,14 @@ describe('sparkline.utils', () => {
       ] as const;
 
       for (const { flags, expected } of cases) {
-        const [denoteFirst, denoteLast, denoteMin, denoteMax] = flags;
-        const actual = Array.from(calculateSymbolIndices(values, denoteFirst, denoteLast, denoteMin, denoteMax));
+        const [first, last, min, max] = flags;
+        const actual = Array.from(calculateSymbolIndices(values, { first, last, min, max }));
         expect(actual).toEqual(expected);
       }
     });
 
     it('returns no symbol indices for empty values', () => {
-      expect(Array.from(calculateSymbolIndices([], true, true, true, true))).toEqual([]);
+      expect(Array.from(calculateSymbolIndices([], { first: true, last: true, min: true, max: true }))).toEqual([]);
     });
   });
 
@@ -183,7 +183,7 @@ describe('sparkline.utils', () => {
 
   describe('winloss rect builders', () => {
     it('builds winloss rects with expected class and geometry', () => {
-      const winlossRects = toWinLossRects([1, 0, -1], 50, 180, 100);
+      const winlossRects = toWinLossRects([1, 0, -1], 50, { width: 180, height: 100 });
       expect(winlossRects).toEqual([
         { className: 'win', x: 4.5, y: 0, width: 51, height: 50 },
         { className: 'draw', x: 64.5, y: 37.5, width: 51, height: 25 },
@@ -192,12 +192,12 @@ describe('sparkline.utils', () => {
     });
 
     it('centers a single winloss bar with the expected width', () => {
-      const [winlossRect] = toWinLossRects([1], 50, 60, 100);
+      const [winlossRect] = toWinLossRects([1], 50, { width: 60, height: 100 });
       expect(winlossRect).toEqual({ className: 'win', x: 4.5, y: 0, width: 51, height: 50 });
     });
 
     it('returns no rects for empty winloss inputs', () => {
-      expect(toWinLossRects([], 50, 120, 100)).toEqual([]);
+      expect(toWinLossRects([], 50, { width: 120, height: 100 })).toEqual([]);
     });
   });
 });

@@ -82,6 +82,7 @@ const config = {
     'no-warning-comments': 'error',
     'no-shadow': ['error', { allow: ['_', 'args', 'resolve', 'cwd'] }], // globals and a few large refactors
     'no-restricted-imports': ['error', { patterns: ['**/dist/**', '**/node_modules/**'] }],
+    'max-params': ['error', 3],
     'max-lines': ['error', 1000],
     'max-lines-per-function': ['error', 50],
     'max-statements-per-line': ['error', { max: 1 }],
@@ -134,7 +135,6 @@ const config = {
     '@typescript-eslint/prefer-readonly': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'id-length': ['off', { min: 2, exceptions: ['_'] }],
-    'max-params': ['error', 6], // goal 3
     'max-statements': ['error', 20], // goal 15
     'max-depth': ['off', 3],
     'max-nested-callbacks': ['off', 3]

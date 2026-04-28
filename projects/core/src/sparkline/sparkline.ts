@@ -154,20 +154,19 @@ export class Sparkline extends LitElement implements DataElement<number[]> {
   }
 
   #renderLineVariant(width: number, height: number) {
-    const domain = calculateDomain(this.validData, this.min, this.max);
+    const domain = calculateDomain(this.validData, { explicitMin: this.min, explicitMax: this.max });
     if (!domain) return nothing;
 
-    const baselineY = valueToY(0, domain.min, domain.max);
+    const baselineY = valueToY(0, domain);
     const drawZeroLine = domain.min < 0 && domain.max > 0;
 
-    const plotPoints = toPlotPoints(this.validData, domain.min, domain.max, width);
-    const symbolIndices = calculateSymbolIndices(
-      this.validData,
-      this.denoteFirst,
-      this.denoteLast,
-      this.denoteMin,
-      this.denoteMax
-    );
+    const plotPoints = toPlotPoints(this.validData, domain, { width });
+    const symbolIndices = calculateSymbolIndices(this.validData, {
+      first: this.denoteFirst,
+      last: this.denoteLast,
+      min: this.denoteMin,
+      max: this.denoteMax
+    });
     const interpolation = toInterpolation(this.interpolation);
 
     const linePath = toLinePath(plotPoints, interpolation, width);
@@ -235,12 +234,16 @@ export class Sparkline extends LitElement implements DataElement<number[]> {
   }
 
   #renderColumn(width: number, height: number) {
-    const domain = calculateDomain(this.validData, this.min, this.max, true);
+    const domain = calculateDomain(this.validData, {
+      explicitMin: this.min,
+      explicitMax: this.max,
+      includeZero: true
+    });
     if (!domain) return nothing;
 
-    const baselineY = valueToY(0, domain.min, domain.max);
+    const baselineY = valueToY(0, domain);
     const showZeroLine = domain.min < 0 && domain.max > 0;
-    const plotPoints = toPlotPoints(this.validData, domain.min, domain.max, width);
+    const plotPoints = toPlotPoints(this.validData, domain, { width });
     const rects = toColumnRects(plotPoints, baselineY, width);
 
     return svg`
@@ -257,7 +260,7 @@ export class Sparkline extends LitElement implements DataElement<number[]> {
   #renderWinLoss(baselineY: number, width: number, height: number) {
     if (this.validData.length === 0) return nothing;
 
-    const rects = toWinLossRects(this.validData, baselineY, width, height);
+    const rects = toWinLossRects(this.validData, baselineY, { width, height });
 
     return svg`
       <svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
