@@ -174,7 +174,7 @@ Follow the [unit testing guideline](testing-unit.md):
 ```typescript
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import { ComponentName } from '@nvidia-elements/core/component-name';
 import '@nvidia-elements/core/component-name/define.js';
 
@@ -213,7 +213,7 @@ Follow the [accessibility testing guideline](testing-accessibility.md):
 ```typescript
 import { html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture, runAxe } from '@nvidia-elements/testing';
+import { createFixture, elementIsStable, removeFixture, runAxe } from '@internals/testing';
 import { ComponentName } from '@nvidia-elements/core/component-name';
 import '@nvidia-elements/core/component-name/define.js';
 

@@ -1159,7 +1159,7 @@ export const PanelDetail = {
   render: () => html`
 <nve-page id="grid-panel-demo">
   <nve-page-header slot="header">
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
     <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
   </nve-page-header>
   <section nve-layout="column gap:md pad:md full">
@@ -1186,7 +1186,7 @@ export const PanelDetail = {
       <div nve-layout="column gap:md">
         <div nve-layout="column gap:xs">
           <label nve-text="body sm muted">Task</label>
-          <p nve-text="eyebrow sm">Workflow</p>
+          <p nve-text="label sm">Workflow</p>
         </div>
         <div nve-layout="column gap:xs">
           <label nve-text="body sm muted">Status</label>
@@ -1234,7 +1234,7 @@ export const PanelGrid = {
     return html`
     <nve-page>
       <nve-page-header slot="header">
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
         <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
       </nve-page-header>
       <section nve-layout="column gap:md pad:md full">

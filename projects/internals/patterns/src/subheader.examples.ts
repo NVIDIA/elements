@@ -112,7 +112,7 @@ export const TabsHeaderMainPage = {
 
 /**
  * @summary Main page subheader with key-value metadata row stacked below the title. Ideal for displaying session details, status badges, and entity relationships.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const StackedMetadataHeaderMainPage = {
   render: () => html`
@@ -404,7 +404,7 @@ export const StackedKitchenSinkHeaderMainPage = {
 
 /**
  * @summary Detail page subheader with back arrow navigation, multi-level breadcrumb, and minimal action buttons. Use for drilling into specific records.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const StandardHeaderDetailPage = {
   render: () => html`
@@ -450,7 +450,7 @@ export const StandardHeaderDetailPage = {
 
 /**
  * @summary Detail page subheader with back navigation and tabbed content sections. Ideal for entity detail views with many data categories.
- * @tags pattern
+ * @tags pattern test-case
  */
 export const TabsHeaderDetailPage = {
   render: () => html`
