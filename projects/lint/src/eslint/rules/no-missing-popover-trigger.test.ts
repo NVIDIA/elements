@@ -36,7 +36,7 @@ describe('noMissingPopoverTrigger', () => {
     expect(noMissingPopoverTrigger.meta.schema).toBeDefined();
     expect(noMissingPopoverTrigger.meta.messages).toBeDefined();
     expect(noMissingPopoverTrigger.meta.messages['missing-popover-trigger']).toBe(
-      'Popover element <{{tag}}> is missing a trigger element. Add a button with popovertarget="{{id}}" or commandfor="{{id}}". If programmatically controlling the popover with JavaScript, add a hidden attribute to the popover element.'
+      'Popover element <{{tag}}> is missing a trigger element. Add a button with popovertarget="{{id}}", commandfor="{{id}} or interestfor="{{id}}". If programmatically controlling the popover with JavaScript, add a hidden attribute to the popover element.'
     );
     expect(noMissingPopoverTrigger.meta.messages['missing-popover-id']).toBe(
       'Popover element <{{tag}}> is missing an id attribute. Add an id to enable trigger association.'
@@ -81,6 +81,20 @@ describe('noMissingPopoverTrigger', () => {
         `<button commandfor="tooltip">Hover</button>
          <nve-tooltip id="tooltip">Tooltip content</nve-tooltip>`,
         `<button commandfor="toggletip">Click</button>
+         <nve-toggletip id="toggletip">Toggletip content</nve-toggletip>`
+      ],
+      invalid: []
+    });
+  });
+
+  it('should allow popover elements with interestfor trigger', () => {
+    tester.run('valid interestfor triggers', rule, {
+      valid: [
+        `<button interestfor="dropdown">Open</button>
+         <nve-dropdown id="dropdown"></nve-dropdown>`,
+        `<button interestfor="tooltip">Hover</button>
+         <nve-tooltip id="tooltip">Tooltip content</nve-tooltip>`,
+        `<button interestfor="toggletip">Click</button>
          <nve-toggletip id="toggletip">Toggletip content</nve-toggletip>`
       ],
       invalid: []

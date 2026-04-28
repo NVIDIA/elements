@@ -71,7 +71,7 @@ const POPOVER_ELEMENTS = [
 /**
  * Attributes that reference a popover target.
  */
-const TRIGGER_ATTRIBUTES = ['popovertarget', 'commandfor'] as const;
+const TRIGGER_ATTRIBUTES = ['popovertarget', 'commandfor', 'interestfor'] as const;
 
 interface PopoverNode {
   node: HtmlNode;
@@ -93,7 +93,7 @@ const rule = {
     schema: [],
     messages: {
       ['missing-popover-trigger']:
-        'Popover element <{{tag}}> is missing a trigger element. Add a button with popovertarget="{{id}}" or commandfor="{{id}}". If programmatically controlling the popover with JavaScript, add a hidden attribute to the popover element.',
+        'Popover element <{{tag}}> is missing a trigger element. Add a button with popovertarget="{{id}}", commandfor="{{id}} or interestfor="{{id}}". If programmatically controlling the popover with JavaScript, add a hidden attribute to the popover element.',
       ['missing-popover-id']:
         'Popover element <{{tag}}> is missing an id attribute. Add an id to enable trigger association.',
       ['empty-anchor-with-trigger']:
