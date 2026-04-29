@@ -11,5 +11,7 @@ swap:
   use-case: use case
   use-cases: use cases
   tree shaking: tree-shaking
+  heat maps: heatmaps
+  heat map: heatmap
   CSS variables: CSS custom properties
   CSS variable: CSS custom property

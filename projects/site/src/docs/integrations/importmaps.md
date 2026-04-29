@@ -1,7 +1,7 @@
 ---
 {
   title: 'Import Maps',
-  description: 'Load NVIDIA Elements via browser-native import maps: no build tool required, just point to ESM URLs.',
+  description: 'Load NVIDIA Elements via browser-native import maps: no build tool required, by pointing to ESM URLs.',
   layout: 'docs.11ty.js'
 }
 ---

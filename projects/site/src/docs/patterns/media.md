@@ -1,7 +1,7 @@
 ---
 {
   title: 'Media Patterns',
-  description: 'Media patterns built with NVIDIA Elements: image galleries, thumbnails, and video poster frames.',
+  description: 'Media patterns: playback controls, player interaction patterns, and accessibility best practices for video and audio players using NVIDIA Elements.',
   layout: 'docs.11ty.js'
 }
 ---

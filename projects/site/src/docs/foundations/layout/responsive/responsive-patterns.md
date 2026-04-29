@@ -1,7 +1,7 @@
 ---
 {
   title: 'Responsive Patterns',
-  description: 'Common responsive UI patterns built with NVIDIA Elements layout primitives: sidebars, stacks, and adaptive grids.',
+  description: 'Responsive Tabs and Responsive Toolbar built with NVIDIA Elements layout primitives.',
   layout: 'docs.11ty.js',
   permalink: 'docs/labs/layout/responsive/patterns/index.html'
 }

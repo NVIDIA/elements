@@ -1,7 +1,7 @@
 ---
 {
   title: 'Heatmap Patterns',
-  description: 'Heat-map visualization patterns built with NVIDIA Elements: color scales, cell sizing, and tooltips for dense numeric data.',
+  description: 'Heatmap visualization patterns built with NVIDIA Elements: color scales, cell sizing, and tooltips for dense numeric data.',
   layout: 'docs.11ty.js'
 }
 ---
