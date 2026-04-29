@@ -8,3 +8,4 @@ export const ELEMENTS_REGISTRY_URL = process.env.ELEMENTS_REGISTRY_URL ?? '';
 export const ELEMENTS_ASSETS_CDN_BASE_URL = process.env.ELEMENTS_ASSETS_CDN_BASE_URL ?? '';
 export const ELEMENTS_ESM_CDN_BASE_URL = process.env.ELEMENTS_ESM_CDN_BASE_URL ?? '';
 export const ELEMENTS_CDN_BASE_URL = process.env.ELEMENTS_CDN_BASE_URL ?? '';
+export const ELEMENTS_SITE_URL = process.env.ELEMENTS_SITE_URL ?? 'https://nvidia.github.io';
