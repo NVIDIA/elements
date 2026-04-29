@@ -1,6 +1,7 @@
 ---
 {
   title: 'Subheader Patterns',
+  description: 'Subheader patterns built with NVIDIA Elements: page-level toolbars, contextual actions, and section navigation.',
   layout: 'docs.11ty.js'
 }
 ---

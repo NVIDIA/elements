@@ -1,6 +1,7 @@
 ---
 {
   title: 'Component Creation',
+  description: 'Internal guidelines: scaffold a new NVIDIA Elements component with the required files, base classes, metadata, and tests.',
   layout: 'docs.11ty.js'
 }
 ---

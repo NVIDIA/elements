@@ -1,6 +1,7 @@
 ---
 {
   title: 'Registration',
+  description: 'Custom-element tag naming and registration patterns used by NVIDIA Elements: the nve- prefix, scoped registries, and define order.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'SolidJS',
+  description: 'Use NVIDIA Elements with SolidJS: register the components, pass reactive props, and listen to custom events from Solid templates.',
   layout: 'docs.11ty.js'
 }
 ---

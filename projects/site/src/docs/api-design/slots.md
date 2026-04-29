@@ -1,6 +1,7 @@
 ---
 {
   title: 'Slots',
+  description: 'Slot design patterns for NVIDIA Elements: default versus named slots, fallback content, and accessibility for projected DOM.',
   layout: 'docs.11ty.js'
 }
 ---

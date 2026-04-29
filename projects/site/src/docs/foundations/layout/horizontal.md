@@ -1,6 +1,7 @@
 ---
 {
   title: 'Horizontal Layout',
+  description: 'Lay out content along a horizontal axis with NVIDIA Elements: alignment, gap, wrap, and overflow handling.',
   layout: 'docs.11ty.js'
 }
 ---

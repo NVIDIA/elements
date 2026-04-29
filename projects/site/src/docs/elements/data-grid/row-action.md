@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Row Action',
+  description: 'Per-row actions in NVIDIA Elements Data Grid: contextual buttons, menus, and keyboard shortcuts on each row.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   associatedElements: ['nve-grid', 'nve-grid-header', 'nve-grid-column', 'nve-grid-row', 'nve-grid-cell'],

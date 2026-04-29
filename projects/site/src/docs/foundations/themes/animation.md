@@ -1,6 +1,7 @@
 ---
 {
   title: 'Animation',
+  description: 'Animation tokens and motion primitives in NVIDIA Elements: durations, easing curves, reduced-motion support, and how to compose transitions.',
   layout: 'docs.11ty.js'
 }
 ---

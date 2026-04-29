@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Stripe',
+  description: 'Stripe row styling in NVIDIA Elements Data Grid: alternating row colors for readability of dense tables.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   hideStatus: true

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Popovers',
+  description: 'Pop-up surfaces in NVIDIA Elements: tooltips, toggletips, menus, dialogs, and the underlying popover API for floating UI.',
   layout: 'docs.11ty.js'
 }
 ---

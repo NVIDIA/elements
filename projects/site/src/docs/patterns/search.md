@@ -1,6 +1,7 @@
 ---
 {
   title: 'Search Patterns',
+  description: 'Search patterns built with NVIDIA Elements: input cues, type-ahead suggestions, results presentation, and filtering.',
   layout: 'docs.11ty.js'
 }
 ---

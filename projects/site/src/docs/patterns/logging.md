@@ -1,6 +1,7 @@
 ---
 {
   title: 'Logging Patterns',
+  description: 'Logging UI patterns built with NVIDIA Elements: streaming consoles, severity filtering, and durable history buffers.',
   layout: 'docs.11ty.js'
 }
 ---

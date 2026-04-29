@@ -1,6 +1,7 @@
 ---
 {
   title: 'Svelte',
+  description: 'Use NVIDIA Elements with Svelte and SvelteKit: register the components, bind to props, and listen to custom events.',
   layout: 'docs.11ty.js'
 }
 ---

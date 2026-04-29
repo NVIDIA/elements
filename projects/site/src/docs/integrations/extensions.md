@@ -1,6 +1,7 @@
 ---
 {
   title: 'Extensions',
+  description: 'Extend NVIDIA Elements with scoped custom-element registries to ship your own components alongside the core library.',
   layout: 'docs.11ty.js'
 }
 ---

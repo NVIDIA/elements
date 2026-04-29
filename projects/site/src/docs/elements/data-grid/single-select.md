@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Single Select',
+  description: 'Single-row selection in NVIDIA Elements Data Grid: highlight, selection events, and keyboard activation.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   associatedElements: ['nve-grid-header', 'nve-grid-column', 'nve-grid-row', 'nve-grid-cell'],

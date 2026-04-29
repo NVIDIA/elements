@@ -1,6 +1,7 @@
 ---
 {
   title: 'Typography',
+  description: 'Typography in NVIDIA Elements: type scale, semantic styles, font weights, and the heading and body utilities.',
   layout: 'docs.11ty.js'
 }
 ---

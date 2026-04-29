@@ -1,6 +1,7 @@
 ---
 {
   title: 'Markdown CSS Utility',
+  description: 'CSS utility for styling NVIDIA Elements markdown content: typography, code blocks, tables, and admonitions tuned to the design tokens.',
   layout: 'docs.11ty.js'
 }
 ---

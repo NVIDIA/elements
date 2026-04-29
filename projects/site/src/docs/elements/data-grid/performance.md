@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Performance',
+  description: 'Performance characteristics of NVIDIA Elements Data Grid: virtual scrolling, render budgets, and large-dataset patterns.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   associatedElements: ['nve-grid-header', 'nve-grid-column', 'nve-grid-row', 'nve-grid-cell'],

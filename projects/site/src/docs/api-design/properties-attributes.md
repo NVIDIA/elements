@@ -1,6 +1,7 @@
 ---
 {
   title: 'Properties & Attributes',
+  description: 'When to expose configuration as properties versus attributes in NVIDIA Elements components, and how reflection, defaults, and validation work.',
   layout: 'docs.11ty.js'
 }
 ---

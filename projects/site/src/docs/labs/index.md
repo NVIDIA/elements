@@ -1,6 +1,7 @@
 ---
 {
   title: 'Labs',
+  description: 'Experimental features in NVIDIA Elements Labs: previews of upcoming components, layout tools, and APIs.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Size & Space',
+  description: 'Size and space tokens in NVIDIA Elements: a consistent scale for padding, margin, and component dimensions.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Row Groups',
+  description: 'Group rows in NVIDIA Elements Data Grid: collapsible group headers with totals and counts.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   associatedElements: ['nve-grid', 'nve-grid-header', 'nve-grid-column', 'nve-grid-row', 'nve-grid-cell'],

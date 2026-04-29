@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Column Alignment',
+  description: 'Add a footer to NVIDIA Elements Data Grid: summary rows, totals, and pagination controls.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   hideStatus: true

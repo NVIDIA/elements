@@ -1,6 +1,7 @@
 ---
 {
   title: 'Preact',
+  description: 'Use NVIDIA Elements with Preact: register the components, pass properties from JSX, and listen to native custom events.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Fonts',
+  description: 'Font choices and typography stack in NVIDIA Elements: bundled families, fallback chains, and how to swap to a custom font.',
   layout: 'docs.11ty.js'
 }
 ---

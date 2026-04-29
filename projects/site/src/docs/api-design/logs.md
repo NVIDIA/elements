@@ -1,6 +1,7 @@
 ---
 {
   title: 'Logs & Warnings',
+  description: 'Logging and diagnostics conventions for NVIDIA Elements components: when to warn, when to error, and how runtime messages surface.',
   layout: 'docs.11ty.js'
 }
 ---

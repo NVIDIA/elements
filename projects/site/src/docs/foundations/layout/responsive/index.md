@@ -1,6 +1,7 @@
 ---
 {
   title: 'Responsive Layout',
+  description: 'Responsive layout strategies in NVIDIA Elements: container queries, viewport breakpoints, and patterns for adaptive UI.',
   layout: 'docs.11ty.js',
   permalink: 'docs/labs/layout/responsive/index.html'
 }

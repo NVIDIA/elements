@@ -1,6 +1,7 @@
 ---
 {
   title: 'TypeScript',
+  description: 'Use NVIDIA Elements in TypeScript: typed component interfaces, custom-event types, and a working tsconfig setup.',
   layout: 'docs.11ty.js'
 }
 ---

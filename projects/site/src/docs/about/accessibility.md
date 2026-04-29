@@ -1,6 +1,7 @@
 ---
 {
   title: 'Accessibility',
+  description: 'How NVIDIA Elements meets WCAG accessibility standards, tested assistive-technology coverage, and accommodations available across components.',
   layout: 'docs.11ty.js'
 }
 ---

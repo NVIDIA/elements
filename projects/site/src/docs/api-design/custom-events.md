@@ -1,6 +1,7 @@
 ---
 {
   title: 'Custom Events',
+  description: 'Conventions for custom-event names, payload shapes, and bubbling rules for NVIDIA Elements components.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'TypeScript',
+  description: 'Internal guidelines: TypeScript best practices for NVIDIA Elements including type guards, discriminated unions, and exhaustive checking.',
   layout: 'docs.11ty.js'
 }
 ---

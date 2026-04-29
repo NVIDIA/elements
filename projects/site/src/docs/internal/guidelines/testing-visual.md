@@ -1,6 +1,7 @@
 ---
 {
   title: 'Visual Testing',
+  description: 'Internal guidelines: write Playwright visual regression tests for NVIDIA Elements components, including theme and state variants.',
   layout: 'docs.11ty.js'
 }
 ---

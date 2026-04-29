@@ -1,6 +1,7 @@
 ---
 {
   title: 'Grid Layout',
+  description: 'Build grid layouts with NVIDIA Elements layout utilities: column tracks, gaps, and alignment for two-dimensional arrangements.',
   layout: 'docs.11ty.js'
 }
 ---

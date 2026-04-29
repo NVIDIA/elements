@@ -1,6 +1,7 @@
 ---
 {
   title: 'Layout',
+  description: 'Layout primitives in NVIDIA Elements: utilities for horizontal, vertical, and grid arrangements that scale across viewports.',
   layout: 'docs.11ty.js'
 }
 ---

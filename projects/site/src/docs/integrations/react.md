@@ -1,6 +1,7 @@
 ---
 {
   title: 'React',
+  description: 'Use NVIDIA Elements in React: register the components, pass properties through JSX, and listen to custom events.',
   layout: 'docs.11ty.js'
 }
 ---

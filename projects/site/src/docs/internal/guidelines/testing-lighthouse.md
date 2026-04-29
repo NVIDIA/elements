@@ -1,6 +1,7 @@
 ---
 {
   title: 'Lighthouse Testing',
+  description: 'Internal guidelines: write Lighthouse performance and best practices tests for NVIDIA Elements components.',
   layout: 'docs.11ty.js'
 }
 ---

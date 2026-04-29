@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Column Alignment',
+  description: 'Align column content in NVIDIA Elements Data Grid: left, right, and center alignment for headers and cells.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   hideStatus: true

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Iconography',
+  description: 'Use the NVIDIA Elements icon set: built-in icons, sizing, color tokens, and how to register or load custom icons.',
   layout: 'docs.11ty.js'
 }
 ---

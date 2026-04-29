@@ -1,6 +1,7 @@
 ---
 {
   title: 'Migration Guide',
+  description: 'Migrate between NVIDIA Elements major versions: breaking changes, deprecation notices, and step-by-step upgrade notes for components, themes, and styles.',
   layout: 'docs.11ty.js'
 }
 ---

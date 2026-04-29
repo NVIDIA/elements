@@ -1,6 +1,7 @@
 ---
 {
   title: 'Documentation Guidelines',
+  description: 'Internal guideline: writing 11ty docs, JSDoc annotations, shortcodes, and prose that passes Vale for NVIDIA Elements.',
   layout: 'docs.11ty.js'
 }
 ---
