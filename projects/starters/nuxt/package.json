@@ -22,7 +22,7 @@
     "@nvidia-elements/lint": "workspace:*",
     "eslint": "catalog:",
     "typescript": "catalog:",
-    "vue-tsc": "3.2.6"
+    "vue-tsc": "3.2.7"
   },
   "wireit": {
     "ci": {
