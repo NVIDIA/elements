@@ -63,6 +63,10 @@
         "PAGES_BASE_URL": {
           "external": true,
           "default": "/elements/"
+        },
+        "ELEMENTS_SITE_URL": {
+          "external": true,
+          "default": "https://nvidia.github.io"
         }
       }
     },

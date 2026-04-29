@@ -1,6 +1,7 @@
 ---
 {
   title: 'Getting Started',
+  description: 'Get started with NVIDIA Elements: install Web Components, themes, and starter templates for building framework-agnostic UI for AI/ML factories.',
   layout: 'docs.11ty.js'
 }
 ---

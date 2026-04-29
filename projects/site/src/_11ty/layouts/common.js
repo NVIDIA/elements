@@ -1,29 +1,32 @@
 /* eslint-env node */
 /* global process */
 
-import { join } from 'node:path';
-import { ELEMENTS_PAGES_BASE_URL, ELEMENTS_PLAYGROUND_BASE_URL, ELEMENTS_REPO_BASE_URL } from '../utils/env.js';
-
-export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
+import { ELEMENTS_PLAYGROUND_BASE_URL, ELEMENTS_REPO_BASE_URL } from '../utils/env.js';
+import { escapeAttr, resolvePageMeta, renderJsonLd, BASE_URL } from './metadata.js';
 
 /**
  * This renders the base head element with all the common styles and scripts needed for ALL PAGES.
  * Page specific resources should not be placed here.
  */
-export const renderBaseHead = data => /* html */ `
+export const renderBaseHead = data => {
+  const meta = resolvePageMeta(data);
+  const ogType = meta.url === '/' ? 'website' : 'article';
+  return /* html */ `
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="all">
   <base href="${BASE_URL}" />
-  <title data-pagefind-meta="title">${data.title}</title>
-  <meta name="description" content="Elements - ${data.title}">
-  <meta property="og:title" content="Elements - ${data.title}" >
-  <meta property="og:url" content="${data.page?.url ?? ''}">
-  <meta property="og:description" content="NVIDIA Elements is a flexible, framework-agnostic design system and toolkit that empowers teams to build exceptional user experiences.">
-  <meta property="og:image" content="/favicon.svg">
-  <meta property="og:site_name" content="${ELEMENTS_PAGES_BASE_URL}/">
-  <meta property="og:type" content="website">
+  <title data-pagefind-meta="title">${escapeAttr(meta.title)}</title>
+  <meta name="description" content="${escapeAttr(meta.description)}">
+  <link rel="canonical" href="${meta.canonicalUrl}">
+  <meta property="og:title" content="${escapeAttr(meta.title)}">
+  <meta property="og:url" content="${meta.canonicalUrl}">
+  <meta property="og:description" content="${escapeAttr(meta.description)}">
+  <meta property="og:image" content="${meta.ogImage}">
+  <meta property="og:site_name" content="NVIDIA Elements">
+  <meta property="og:type" content="${ogType}">
   <link rel="icon" href="/favicon.svg">
+  ${renderJsonLd(data, meta)}
   ${renderGlobalsScript(data)}
   <style>
     @import '@nvidia-elements/themes/fonts/inter.css';
@@ -99,6 +102,7 @@ export const renderBaseHead = data => /* html */ `
     globalThis.document.documentElement.removeAttribute('no-js');
   </script>
 `;
+};
 
 export const renderDocsNav = data => /* html */ `
 <nve-tree id="docs-nav" data-pagefind-ignore="all" behavior-expand selectable="single">

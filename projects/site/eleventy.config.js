@@ -4,7 +4,7 @@ import { EleventyRenderPlugin, IdAttributePlugin } from '@11ty/eleventy';
 import EleventyPluginVite from '@11ty/eleventy-plugin-vite';
 import litPlugin from '@lit-labs/eleventy-plugin-lit';
 
-import { BASE_URL } from './src/_11ty/layouts/common.js';
+import { BASE_URL } from './src/_11ty/layouts/metadata.js';
 import {
   ELEMENTS_PAGES_BASE_URL,
   ELEMENTS_REPO_BASE_URL,
@@ -16,6 +16,7 @@ import {
 } from './src/_11ty/utils/env.js';
 import { searchPlugin } from './src/_11ty/plugins/search.js';
 import { llmsTxtPlugin } from './src/_11ty/plugins/llms-txt.js';
+import { sitemapPlugin } from './src/_11ty/plugins/sitemap-xml.js';
 import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js';
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
@@ -104,8 +105,6 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ '../themes/dist/bundles': 'local-bundles/themes' });
   eleventyConfig.addPassthroughCopy({ '../styles/dist/bundles': 'local-bundles/styles' });
 
-  eleventyConfig.addPassthroughCopy('src/robots.txt');
-
   // Configure Lit SSR plugin for web components
   eleventyConfig.addPlugin(litPlugin, {
     mode: 'worker',
@@ -172,6 +171,11 @@ export default function (eleventyConfig) {
   // https://llmstxt.org
   if (process.env.ELEVENTY_RUN_MODE === 'build') {
     eleventyConfig.addPlugin(llmsTxtPlugin);
+  }
+
+  // https://www.sitemaps.org
+  if (process.env.ELEVENTY_RUN_MODE === 'build') {
+    eleventyConfig.addPlugin(sitemapPlugin);
   }
 
   // Set custom markdown library

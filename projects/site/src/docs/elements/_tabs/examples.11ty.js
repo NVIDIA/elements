@@ -51,6 +51,7 @@ export async function render(data) {
   data.tag = componentData.tag;
   data.title = componentData.title;
   data.page.fileSlug = componentData.page.fileSlug;
+  data.isExamplesTab = true;
 
   return /* html */ `
     <style scoped>
