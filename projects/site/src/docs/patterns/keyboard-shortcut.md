@@ -1,7 +1,7 @@
 ---
 {
   title: 'Keyboard Shortcut Patterns',
-  description: 'Keyboard-shortcut patterns built with NVIDIA Elements: visible cues, conflict-free combinations, and accessibility considerations.',
+  description: 'Keyboard shortcut patterns built with NVIDIA Elements: visible cues, conflict-free combinations, and accessibility considerations.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -71,7 +71,12 @@ popover
 popovers
 shortcode
 shortcodes
+server-driven
+single-column
+multi-column
+Heatmap
 heatmap
+heatmaps
 datalist
 debounce
 debounced
@@ -276,6 +281,7 @@ nve-week
 nvm
 rebase
 rebasing
+Keynav
 keynav
 createFixture
 blockquote
@@ -346,3 +352,6 @@ worktrees
 Worktree
 Worktrees
 unmerged
+on-theme
+spark line
+spark lines

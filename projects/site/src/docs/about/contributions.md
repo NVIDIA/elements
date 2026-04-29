@@ -1,7 +1,7 @@
 ---
 {
   title: 'Contributions',
-  description: 'How to contribute to NVIDIA Elements: filing issues, opening merge requests, and the review process for changes to components, themes, and docs.',
+  description: 'How to contribute to NVIDIA Elements: filing issues, opening pull requests, and the review process for changes to components, themes, and docs.',
   layout: 'docs.11ty.js'
 }
 ---
