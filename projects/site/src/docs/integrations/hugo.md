@@ -1,6 +1,7 @@
 ---
 {
   title: 'Hugo',
+  description: 'Use NVIDIA Elements in a Hugo site: register the components and embed them in Hugo templates and shortcodes.',
   layout: 'docs.11ty.js'
 }
 ---

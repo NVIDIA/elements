@@ -1,6 +1,7 @@
 ---
 {
   title: 'Troubleshooting',
+  description: 'Internal guidelines: diagnose and resolve common build, test, lint, and dev-server issues in the NVIDIA Elements monorepo.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Unit Testing',
+  description: 'Internal guidelines: write unit tests for NVIDIA Elements components using createFixture, elementIsStable, and untilEvent helpers.',
   layout: 'docs.11ty.js'
 }
 ---

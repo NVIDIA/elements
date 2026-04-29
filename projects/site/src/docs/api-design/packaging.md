@@ -1,6 +1,7 @@
 ---
 {
   title: 'Packaging',
+  description: 'How NVIDIA Elements packages export entry points, side effects, and bundles, plus guidance for consumers on tree-shaking and registration.',
   layout: 'docs.11ty.js'
 }
 ---

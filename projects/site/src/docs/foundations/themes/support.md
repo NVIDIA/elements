@@ -1,6 +1,7 @@
 ---
 {
   title: 'Support',
+  description: 'Support tokens in NVIDIA Elements: accent, decorative, and supporting color palettes that round out the core theme.',
   layout: 'docs.11ty.js'
 }
 ---

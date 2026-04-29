@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Column Width',
+  description: 'Control column widths in NVIDIA Elements Data Grid: fixed pixels, fractional units, and resize handles.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   hideStatus: true

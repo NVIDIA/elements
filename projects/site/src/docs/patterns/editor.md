@@ -1,6 +1,7 @@
 ---
 {
   title: 'Editor Patterns',
+  description: 'Editor patterns built with NVIDIA Elements: text input, diff views, and inline editing controls.',
   layout: 'docs.11ty.js'
 }
 ---

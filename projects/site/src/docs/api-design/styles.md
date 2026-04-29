@@ -1,6 +1,7 @@
 ---
 {
   title: 'Styles',
+  description: 'Theming and styling guidelines for NVIDIA Elements: CSS custom properties, parts, themes, and composing a design language on top of components.',
   layout: 'docs.11ty.js'
 }
 ---

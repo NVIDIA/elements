@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Row Sort',
+  description: 'Sort rows in NVIDIA Elements Data Grid: single-column, multi-column, and server-driven sort modes.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   hideStatus: true

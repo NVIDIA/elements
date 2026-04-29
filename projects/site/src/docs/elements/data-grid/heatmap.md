@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Heatmap',
+  description: 'Heat-map cell rendering in NVIDIA Elements Data Grid: color scales, thresholds, and tooltips for dense numeric data.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   hideStatus: true

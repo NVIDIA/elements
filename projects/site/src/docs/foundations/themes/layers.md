@@ -1,6 +1,7 @@
 ---
 {
   title: 'Layers',
+  description: 'Stacking layers in NVIDIA Elements: predictable elevation order for popovers, dialogs, and overlays.',
   layout: 'docs.11ty.js'
 }
 ---

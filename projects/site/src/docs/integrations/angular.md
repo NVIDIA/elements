@@ -1,6 +1,7 @@
 ---
 {
   title: 'Angular',
+  description: 'Use NVIDIA Elements with Angular: install the components, register custom elements, and bind to events from Angular templates.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Media Patterns',
+  description: 'Media patterns built with NVIDIA Elements: image galleries, thumbnails, and video poster frames.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Panel Patterns',
+  description: 'Panel patterns built with NVIDIA Elements: detail drawers, side sheets, and inspector panels for editing in place.',
   layout: 'docs.11ty.js'
 }
 ---

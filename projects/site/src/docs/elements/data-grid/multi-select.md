@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Multi Select',
+  description: 'Enable multi-row selection in NVIDIA Elements Data Grid: checkbox column, range selection, and selection events.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   associatedElements: ['nve-grid', 'nve-grid-header', 'nve-grid-column', 'nve-grid-row', 'nve-grid-cell'],

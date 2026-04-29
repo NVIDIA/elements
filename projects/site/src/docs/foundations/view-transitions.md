@@ -1,6 +1,7 @@
 ---
 {
   title: 'View Transitions',
+  description: 'Page and view transitions in NVIDIA Elements: enabling the View Transitions API and cross-fading content updates.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Bundles',
+  description: 'Pre-built browser bundles for NVIDIA Elements: drop-in script tags for sites without a build step.',
   layout: 'docs.11ty.js'
 }
 ---

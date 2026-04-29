@@ -1,6 +1,7 @@
 ---
 {
   title: 'Composition',
+  description: 'Patterns for composing NVIDIA Elements components: slot relationships, parent/child contracts, and when to wrap versus assemble.',
   layout: 'docs.11ty.js'
 }
 ---

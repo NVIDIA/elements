@@ -1,6 +1,7 @@
 ---
 {
   title: 'NextJS',
+  description: 'Use NVIDIA Elements in a Next.js app: client and server component patterns, SSR-safe registration, and React event handling.',
   layout: 'docs.11ty.js'
 }
 ---

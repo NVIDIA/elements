@@ -1,6 +1,7 @@
 ---
 {
   title: 'Design Tokens',
+  description: 'Design tokens in NVIDIA Elements: the semantic CSS custom properties that power theming and dark mode.',
   layout: 'docs.11ty.js'
 }
 ---

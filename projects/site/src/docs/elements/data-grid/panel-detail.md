@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Panel Detail',
+  description: 'Show row detail panels in NVIDIA Elements Data Grid: inline expansion or side-panel drawers for extra data.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   associatedElements: ['nve-grid', 'nve-grid-header', 'nve-grid-column', 'nve-grid-row', 'nve-grid-cell'],

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Nuxt',
+  description: 'Use NVIDIA Elements in a Nuxt app: register the components, configure SSR, and bind to events in Vue single-file components.',
   layout: 'docs.11ty.js'
 }
 ---

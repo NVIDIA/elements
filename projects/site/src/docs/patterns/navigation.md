@@ -1,6 +1,7 @@
 ---
 {
   title: 'Navigation Patterns',
+  description: 'Navigation patterns built with NVIDIA Elements: top nav, side nav, command palette, and contextual breadcrumb trails.',
   layout: 'docs.11ty.js'
 }
 ---

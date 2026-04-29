@@ -1,6 +1,7 @@
 ---
 {
   title: 'Dashboard Patterns',
+  description: 'Dashboard patterns built with NVIDIA Elements: KPI cards, monitoring grids, and drill-down detail views.',
   layout: 'docs.11ty.js'
 }
 ---

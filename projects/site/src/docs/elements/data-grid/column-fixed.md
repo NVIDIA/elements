@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Column Fixed',
+  description: 'Pin columns in NVIDIA Elements Data Grid: keep key columns visible while horizontal content scrolls.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   associatedElements: ['nve-grid-header', 'nve-grid-column', 'nve-grid-row', 'nve-grid-cell'],

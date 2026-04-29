@@ -1,6 +1,7 @@
 ---
 {
   title: 'Forms',
+  description: 'Forms primitives in NVIDIA Elements: declarative validation, server actions, and submission handling.',
   layout: 'docs.11ty.js'
 }
 ---

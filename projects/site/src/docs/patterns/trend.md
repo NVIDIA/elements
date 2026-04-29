@@ -1,6 +1,7 @@
 ---
 {
   title: 'Trend Patterns',
+  description: 'Trend visualization patterns built with NVIDIA Elements: spark lines, deltas, and at-a-glance numeric change indicators.',
   layout: 'docs.11ty.js'
 }
 ---

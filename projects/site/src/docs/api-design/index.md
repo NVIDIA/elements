@@ -1,6 +1,7 @@
 ---
 {
   title: 'API Design Guidelines',
+  description: 'API design guidelines for NVIDIA Elements: properties, slots, events, styling, and packaging conventions used across the component library.',
   layout: 'docs.11ty.js'
 }
 ---

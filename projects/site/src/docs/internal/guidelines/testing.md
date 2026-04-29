@@ -1,6 +1,7 @@
 ---
 {
   title: 'Testing Guidelines',
+  description: 'Internal guideline: an overview of the test types used by NVIDIA Elements (unit, accessibility, visual, SSR, lighthouse) and when to apply each.',
   layout: 'docs.11ty.js'
 }
 ---

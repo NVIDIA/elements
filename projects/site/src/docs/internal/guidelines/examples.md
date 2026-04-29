@@ -1,6 +1,7 @@
 ---
 {
   title: 'Examples',
+  description: 'Internal guidelines: writing example template files for NVIDIA Elements components, including naming conventions and stateless HTML patterns.',
   layout: 'docs.11ty.js'
 }
 ---

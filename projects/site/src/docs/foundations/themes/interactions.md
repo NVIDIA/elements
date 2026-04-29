@@ -1,6 +1,7 @@
 ---
 {
   title: 'Interactions',
+  description: 'Interaction tokens for hover, focus, active, and disabled states across NVIDIA Elements components.',
   layout: 'docs.11ty.js'
 }
 ---

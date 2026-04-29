@@ -1,6 +1,7 @@
 ---
 {
   title: 'Accessibility Testing',
+  description: 'Internal guidelines: write axe-core accessibility tests for NVIDIA Elements components and verify WCAG compliance.',
   layout: 'docs.11ty.js'
 }
 ---

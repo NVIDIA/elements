@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Integrations',
+  description: 'Connect NVIDIA Elements Data Grid to popular frameworks: React, Angular, Vue, and Svelte adapters.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   hideStatus: true

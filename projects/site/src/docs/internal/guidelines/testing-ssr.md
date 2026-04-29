@@ -1,6 +1,7 @@
 ---
 {
   title: 'SSR Testing',
+  description: 'Internal guidelines: write server-side rendering tests for NVIDIA Elements components and catch hydration regressions.',
   layout: 'docs.11ty.js'
 }
 ---

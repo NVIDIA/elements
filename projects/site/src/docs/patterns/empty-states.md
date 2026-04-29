@@ -1,6 +1,7 @@
 ---
 {
   title: 'Empty State Patterns',
+  description: 'Empty State Patterns built with NVIDIA Elements: helpful messaging for no data, no results, or error states to display.',
   layout: 'docs.11ty.js'
 }
 ---

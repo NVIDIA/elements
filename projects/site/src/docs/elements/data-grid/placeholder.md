@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Placeholder',
+  description: 'Placeholder rows in NVIDIA Elements Data Grid: skeleton loaders to show while data is fetching.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   hideStatus: true

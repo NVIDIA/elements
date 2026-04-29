@@ -1,6 +1,7 @@
 ---
 {
   title: 'Stateless',
+  description: 'Why NVIDIA Elements components default to stateless APIs, when to introduce internal state, and patterns for keeping components controllable.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Objects',
+  description: 'Object-shape tokens in NVIDIA Elements: surface, container, and element-level visual primitives that compose into themes.',
   layout: 'docs.11ty.js'
 }
 ---

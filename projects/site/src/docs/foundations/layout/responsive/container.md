@@ -1,6 +1,7 @@
 ---
 {
   title: 'Responsive Layout - Container',
+  description: 'Use container queries with NVIDIA Elements layout to adapt content to its parent container instead of the viewport.',
   layout: 'docs.11ty.js',
   permalink: 'docs/labs/layout/responsive/container/index.html'
 }

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Authentication Patterns',
+  description: 'Authentication patterns built with NVIDIA Elements: sign-in flows, session expiry handling, and identity provider integration.',
   layout: 'docs.11ty.js'
 }
 ---

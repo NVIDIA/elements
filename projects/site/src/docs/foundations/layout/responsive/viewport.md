@@ -1,6 +1,7 @@
 ---
 {
   title: 'Responsive Layout - Viewport',
+  description: 'Apply viewport-based responsive design with NVIDIA Elements: media-query breakpoints and best practices for full-page layouts.',
   layout: 'docs.11ty.js',
   permalink: 'docs/labs/layout/responsive/viewport/index.html'
 }

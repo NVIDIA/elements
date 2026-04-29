@@ -1,6 +1,7 @@
 ---
 {
   title: 'Support',
+  description: 'How to get help with NVIDIA Elements: support channels, response expectations, and where to escalate production issues.',
   layout: 'docs.11ty.js'
 }
 ---

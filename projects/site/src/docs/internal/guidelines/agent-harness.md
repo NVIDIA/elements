@@ -1,6 +1,7 @@
 ---
 {
   title: 'Agent Harness',
+  description: 'Internal guidelines: how AI agents should configure tools, hooks, and skills when working in the NVIDIA Elements monorepo.',
   layout: 'docs.11ty.js'
 }
 ---

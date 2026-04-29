@@ -1,6 +1,7 @@
 ---
 {
   title: 'Installation',
+  description: 'Install NVIDIA Elements: package manager setup, theme imports, custom-element registration, and your first component on a page.',
   layout: 'docs.11ty.js'
 }
 ---

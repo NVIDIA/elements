@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Scroll Height',
+  description: 'Control scroll height in NVIDIA Elements Data Grid: fixed-height containers, dynamic sizing, and infinite-scroll patterns.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   hideStatus: true

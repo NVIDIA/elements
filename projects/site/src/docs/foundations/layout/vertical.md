@@ -1,6 +1,7 @@
 ---
 {
   title: 'Vertical Layout',
+  description: 'Stack content along a vertical axis with NVIDIA Elements: alignment, gap, and overflow controls for column layouts.',
   layout: 'docs.11ty.js'
 }
 ---

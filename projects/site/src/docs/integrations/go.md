@@ -1,6 +1,7 @@
 ---
 {
   title: 'Go',
+  description: 'Use NVIDIA Elements with Go web frameworks: serve the components from Go templates and integrate with html/template rendering.',
   layout: 'docs.11ty.js'
 }
 ---

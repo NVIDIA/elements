@@ -1,6 +1,7 @@
 ---
 {
   title: 'Vue',
+  description: 'Use NVIDIA Elements with Vue: register the components, bind props with v-bind, and handle custom events with v-on.',
   layout: 'docs.11ty.js'
 }
 ---

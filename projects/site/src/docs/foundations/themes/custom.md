@@ -1,6 +1,7 @@
 ---
 {
   title: 'Custom Themes',
+  description: 'Build a custom theme on top of NVIDIA Elements: override design tokens, layer your own values, and produce a complete theme bundle.',
   layout: 'docs.11ty.js'
 }
 ---

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Status',
+  description: 'Status color tokens in NVIDIA Elements: success, info, warning, and error palettes used across components.',
   layout: 'docs.11ty.js'
 }
 ---

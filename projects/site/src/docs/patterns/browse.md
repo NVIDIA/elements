@@ -1,6 +1,7 @@
 ---
 {
   title: 'Browse Patterns',
+  description: 'Browse and discovery patterns built with NVIDIA Elements: catalogs, list-detail layouts, and faceted filtering.',
   layout: 'docs.11ty.js'
 }
 ---

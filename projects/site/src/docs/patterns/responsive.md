@@ -1,6 +1,7 @@
 ---
 {
   title: 'Responsive Patterns',
+  description: 'Responsive UI patterns built with NVIDIA Elements: layouts that gracefully adapt to small screens and dense data tables.',
   layout: 'docs.11ty.js'
 }
 ---

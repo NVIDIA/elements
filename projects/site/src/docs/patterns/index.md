@@ -1,6 +1,7 @@
 ---
 {
   title: 'Patterns',
+  description: 'Common UI patterns assembled from NVIDIA Elements components: dashboards, navigation, search, panels, and other building blocks.',
   layout: 'docs.11ty.js'
 }
 ---

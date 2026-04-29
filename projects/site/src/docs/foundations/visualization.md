@@ -1,6 +1,7 @@
 ---
 {
   title: 'Visualization',
+  description: 'Data visualization primitives in NVIDIA Elements: heat maps, spark lines, and the styling tokens that keep charts on-theme.',
   layout: 'docs.11ty.js'
 }
 ---

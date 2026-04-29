@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid Card',
+  description: 'Render rows as cards in NVIDIA Elements Data Grid: switch to a card-style layout for dense or visual data.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   hideStatus: true
