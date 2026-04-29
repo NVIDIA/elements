@@ -1,3 +1,10 @@
+## <small>0.0.9 (2026-04-29)</small>
+
+* fix(cli): reduce context memory usage ([85e1ba3](https://github.com/NVIDIA/elements/commit/85e1ba3))
+* fix(lint): recognize lit boolean binding on popover hidden attribute ([38281fb](https://github.com/NVIDIA/elements/commit/38281fb))
+* chore(ci): enable max params lint rule ([453b378](https://github.com/NVIDIA/elements/commit/453b378))
+* chore(release): @nvidia-elements/lint-v0.1.1 [skip ci] ([f62bb11](https://github.com/NVIDIA/elements/commit/f62bb11))
+
 ## <small>0.0.8 (2026-04-28)</small>
 
 * chore(ci): add code rabbit config ([cf98be6](https://github.com/NVIDIA/elements/commit/cf98be6))
