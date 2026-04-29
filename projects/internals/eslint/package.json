@@ -16,7 +16,7 @@
     "@eslint/css": "catalog:",
     "@eslint/json": "catalog:",
     "@eslint/js": "catalog:",
-    "@typescript-eslint/parser": "8.58.1",
+    "@typescript-eslint/parser": "8.59.1",
     "eslint": "catalog:",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsdoc": "62.8.0",
