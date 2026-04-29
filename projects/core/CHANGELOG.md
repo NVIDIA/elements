@@ -1,3 +1,15 @@
+## <small>0.0.11 (2026-04-29)</small>
+
+* fix(cli): reduce context memory usage ([85e1ba3](https://github.com/NVIDIA/elements/commit/85e1ba3))
+* fix(core): improve grid dynamic column re-render ([f81d846](https://github.com/NVIDIA/elements/commit/f81d846))
+* fix(lint): recognize lit boolean binding on popover hidden attribute ([38281fb](https://github.com/NVIDIA/elements/commit/38281fb))
+* chore(ci): enable max params lint rule ([453b378](https://github.com/NVIDIA/elements/commit/453b378))
+* chore(docs): sitemap ([c43ad8f](https://github.com/NVIDIA/elements/commit/c43ad8f))
+* chore(release): @nvidia-elements/cli-v0.0.8 [skip ci] ([70f2287](https://github.com/NVIDIA/elements/commit/70f2287))
+* chore(release): @nvidia-elements/cli-v0.0.9 [skip ci] ([99737bf](https://github.com/NVIDIA/elements/commit/99737bf))
+* chore(release): @nvidia-elements/lint-v0.1.0 [skip ci] ([1df4634](https://github.com/NVIDIA/elements/commit/1df4634))
+* chore(release): @nvidia-elements/lint-v0.1.1 [skip ci] ([f62bb11](https://github.com/NVIDIA/elements/commit/f62bb11))
+
 ## <small>0.0.10 (2026-04-28)</small>
 
 * fix(cli): migration url paths ([823c8c4](https://github.com/NVIDIA/elements/commit/823c8c4))
