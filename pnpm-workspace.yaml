@@ -58,7 +58,7 @@ catalog:
   esbuild: 0.27.4
   '@11ty/eleventy': 3.1.5
   '@11ty/eleventy-plugin-syntaxhighlight': 5.0.2
-  '@11ty/eleventy-plugin-vite': 7.0.0
+  '@11ty/eleventy-plugin-vite': 7.1.1
   '@custom-elements-manifest/analyzer': 0.11.0
   '@eslint/css': 1.1.0
   '@eslint/js': 10.0.1

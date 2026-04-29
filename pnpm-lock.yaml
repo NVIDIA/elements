@@ -13,8 +13,8 @@ catalogs:
       specifier: 5.0.2
       version: 5.0.2
     '@11ty/eleventy-plugin-vite':
-      specifier: 7.0.0
-      version: 7.0.0
+      specifier: 7.1.1
+      version: 7.1.1
     '@custom-elements-manifest/analyzer':
       specifier: 0.11.0
       version: 0.11.0
@@ -1170,7 +1170,7 @@ importers:
         version: 3.1.5
       '@11ty/eleventy-plugin-vite':
         specifier: 'catalog:'
-        version: 7.0.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
+        version: 7.1.1(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       '@eslint/js':
         specifier: 'catalog:'
         version: 10.0.1(eslint@10.2.0(jiti@2.6.1))
@@ -1371,7 +1371,7 @@ importers:
         version: 5.0.2
       '@11ty/eleventy-plugin-vite':
         specifier: 'catalog:'
-        version: 7.0.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
+        version: 7.1.1(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       '@lit-labs/eleventy-plugin-lit':
         specifier: 'catalog:'
         version: 1.0.6(@types/node@24.9.1)
@@ -1411,7 +1411,7 @@ importers:
         version: 3.1.5
       '@11ty/eleventy-plugin-vite':
         specifier: 'catalog:'
-        version: 7.0.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
+        version: 7.1.1(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       '@internals/metadata':
         specifier: workspace:*
         version: link:../../internals/metadata
@@ -1930,8 +1930,8 @@ packages:
   '@11ty/eleventy-plugin-syntaxhighlight@5.0.2':
     resolution: {integrity: sha512-T6xVVRDJuHlrFMHbUiZkHjj5o1IlLzZW+1IL9eUsyXFU7rY2ztcYhZew/64vmceFFpQwzuSfxQOXxTJYmKkQ+A==}
 
-  '@11ty/eleventy-plugin-vite@7.0.0':
-    resolution: {integrity: sha512-NVhdsRjGJBkm/sMmzu2J8dP5pRNRlyQYeTCDnnQo4N7DAdxsHDPk3t2pweSVTlmCKIu3EPLG2FsDfDB68MQsBA==}
+  '@11ty/eleventy-plugin-vite@7.1.1':
+    resolution: {integrity: sha512-ZpQPy4a6hwGNKYcWdQ8T7OCdxYDqgXPe6nn6QEjlaISpOYSC7M/7HZ6KVxqDBOswzKy6Z0Gs00KDNZ4qk6YaVQ==}
     engines: {node: '>=18'}
 
   '@11ty/eleventy-utils@2.0.7':
@@ -13405,7 +13405,7 @@ snapshots:
     dependencies:
       prismjs: 1.30.0
 
-  '@11ty/eleventy-plugin-vite@7.0.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)':
+  '@11ty/eleventy-plugin-vite@7.1.1(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)':
     dependencies:
       '@11ty/eleventy-utils': 2.0.7
       vite: 7.3.2(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
@@ -13422,7 +13422,7 @@ snapshots:
       - tsx
       - yaml
 
-  '@11ty/eleventy-plugin-vite@7.0.0(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)':
+  '@11ty/eleventy-plugin-vite@7.1.1(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)':
     dependencies:
       '@11ty/eleventy-utils': 2.0.7
       vite: 7.3.2(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
