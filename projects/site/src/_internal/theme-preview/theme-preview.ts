@@ -37,17 +37,20 @@ function isCSSStyleRule(rule: CSSRule): rule is CSSStyleRule {
   return rule.constructor.name === 'CSSStyleRule';
 }
 
+function collectCustomPropertiesFromRule(rule: CSSStyleRule, target: Map<string, string>) {
+  for (const propName of rule.style) {
+    if (propName.startsWith('--')) {
+      target.set(propName, rule.style.getPropertyValue(propName).trim());
+    }
+  }
+}
+
 function getAllRootCSSCustomProperties() {
   const customProperties = new Map<string, string>();
   for (const sheet of globalThis.document.styleSheets) {
     for (const rule of sheet.cssRules) {
       if (isCSSStyleRule(rule)) {
-        for (const propName of rule.style) {
-          if (propName.startsWith('--')) {
-            const value = rule.style.getPropertyValue(propName).trim();
-            customProperties.set(propName, value);
-          }
-        }
+        collectCustomPropertiesFromRule(rule, customProperties);
       }
     }
   }

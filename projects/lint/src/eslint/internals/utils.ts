@@ -81,17 +81,20 @@ export function parseSelector(selector: string): { tag: string; attrs?: Record<s
 export function hasMatchingChild(node: HtmlNode, selector: string): boolean {
   const { tag, attrs } = parseSelector(selector);
 
+  function attrsMatch(n: HtmlNode): boolean {
+    if (!attrs) return true;
+    for (const [attrName, attrValue] of Object.entries(attrs)) {
+      const attr = findAttr(n, attrName);
+      if (!attr || attr.value?.value !== attrValue) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   function checkNode(n: HtmlNode): boolean {
     if (n.type === 'Tag' && n.name.toLowerCase() === tag.toLowerCase()) {
-      if (attrs) {
-        for (const [attrName, attrValue] of Object.entries(attrs)) {
-          const attr = findAttr(n, attrName);
-          if (!attr || attr.value?.value !== attrValue) {
-            return false;
-          }
-        }
-      }
-      return true;
+      return attrsMatch(n);
     }
 
     if (n.children && Array.isArray(n.children)) {

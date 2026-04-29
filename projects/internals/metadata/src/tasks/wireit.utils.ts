@@ -95,20 +95,23 @@ function extractWireitScripts(packageJsonPath: string) {
   }
 }
 
+function addDependency(dep: unknown, script: { packagePath: string; dependencies: string[] }, key: string) {
+  try {
+    const { packagePath, scriptName } = parseDependency(dep as string, script.packagePath);
+    if (packagePath) {
+      script.dependencies.push(`${packagePath}:${scriptName}`);
+    }
+  } catch (err) {
+    console.error(`error parsing dependency in ${key}:`, (err as Error).message);
+  }
+}
+
 function buildDependencyGraph() {
   for (const [key, script] of wireitScripts.entries()) {
     const deps = script.config.dependencies || [];
 
     for (const dep of deps) {
-      try {
-        const { packagePath, scriptName } = parseDependency(dep, script.packagePath);
-        if (packagePath) {
-          const depKey = `${packagePath}:${scriptName}`;
-          script.dependencies.push(depKey);
-        }
-      } catch (err) {
-        console.error(`error parsing dependency in ${key}:`, (err as Error).message);
-      }
+      addDependency(dep, script, key);
     }
   }
 }

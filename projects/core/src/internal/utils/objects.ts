@@ -25,19 +25,24 @@ export function deepMerge(
 
   if (isObjectLiteral(target) && isObjectLiteral(source)) {
     for (const key in source) {
-      if (isObjectLiteral(source[key])) {
-        if (isObjectLiteral(target[key])) {
-          deepMerge(target[key], source[key]);
-        } else {
-          target[key] = source[key];
-        }
-      } else {
-        Object.assign(target, { [key]: source[key] });
-      }
+      mergeProperty(target, source, key);
     }
   }
 
   return deepMerge(target, ...sources);
+}
+
+function mergeProperty(target: Record<string, unknown>, source: Record<string, unknown>, key: string) {
+  const sourceValue = source[key];
+  if (!isObjectLiteral(sourceValue)) {
+    target[key] = sourceValue;
+    return;
+  }
+  if (isObjectLiteral(target[key])) {
+    deepMerge(target[key], sourceValue);
+  } else {
+    target[key] = sourceValue;
+  }
 }
 
 export function parseVersion(version: string) {

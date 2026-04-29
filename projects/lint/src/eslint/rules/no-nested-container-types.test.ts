@@ -58,6 +58,7 @@ describe('noNestedContainerTypes', () => {
         `<nve-card-content><nve-grid container="flat"></nve-grid></nve-card-content>`,
         `<nve-grid-cell><nve-badge container="flat"></nve-badge></nve-grid-cell>`,
         `<nve-page-panel><nve-grid container="flat"></nve-grid></nve-page-panel>`,
+        `<nve-page-panel><nve-card container="flat"></nve-card></nve-page-panel>`,
         `<nve-dialog><nve-grid container="flat"></nve-grid></nve-dialog>`,
         `<nve-drawer><nve-grid container="flat"></nve-grid></nve-drawer>`,
         `<nve-card><nve-grid container="flat"></nve-grid></nve-card>`,
@@ -129,6 +130,16 @@ describe('noNestedContainerTypes', () => {
               'nve-grid',
               'nve-page-panel',
               `<nve-page-panel><nve-grid container="flat"></nve-grid></nve-page-panel>`
+            )
+          ]
+        },
+        {
+          code: `<nve-page-panel><nve-card></nve-card></nve-page-panel>`,
+          errors: [
+            nestedError(
+              'nve-card',
+              'nve-page-panel',
+              `<nve-page-panel><nve-card container="flat"></nve-card></nve-page-panel>`
             )
           ]
         },

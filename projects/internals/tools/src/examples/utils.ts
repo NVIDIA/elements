@@ -62,6 +62,12 @@ const VOID_ELEMENTS = new Set([
   'wbr'
 ]);
 
+type TagDeltaRegexes = {
+  open: RegExp;
+  selfClose: RegExp;
+  close: RegExp;
+};
+
 /**
  * Reduces repeated sibling elements in an HTML template to save tokens.
  * Groups of consecutive same-tag siblings exceeding `maxRepeat` are
@@ -122,55 +128,65 @@ function condenseLines(lines: string[], maxRepeat: number): string[] {
   let i = 0;
 
   while (i < lines.length) {
-    const currentLine = lines[i]!;
-    const openMatch = currentLine.match(/^(\s*)<([\w][\w-]*)([\s>/])/);
-
-    if (!openMatch || currentLine.trim() === '') {
-      result.push(currentLine);
-      i++;
-      continue;
-    }
-
-    const indent = openMatch[1]!;
-    const tag = openMatch[2]!;
-    const { siblings, cursor } = collectSiblings(lines, i, { indent, tag });
-
-    result.push(...emitKeptSiblings(lines, siblings, maxRepeat));
-
-    if (siblings.length > maxRepeat) {
-      const remaining = siblings.length - maxRepeat;
-      result.push(`${indent}<!-- ... ${remaining} more <${tag}> elements ... -->`);
-    }
-
-    i = cursor;
+    const step = condenseStep(lines, i, maxRepeat);
+    result.push(...step.lines);
+    i = step.next;
   }
 
   return result;
 }
 
+function condenseStep(lines: string[], i: number, maxRepeat: number): { lines: string[]; next: number } {
+  const currentLine = lines[i]!;
+  const openMatch = currentLine.match(/^(\s*)<([\w][\w-]*)([\s>/])/);
+
+  if (!openMatch || currentLine.trim() === '') {
+    return { lines: [currentLine], next: i + 1 };
+  }
+
+  const indent = openMatch[1]!;
+  const tag = openMatch[2]!;
+  const { siblings, cursor } = collectSiblings(lines, i, { indent, tag });
+  const out = emitKeptSiblings(lines, siblings, maxRepeat);
+
+  if (siblings.length > maxRepeat) {
+    const remaining = siblings.length - maxRepeat;
+    out.push(`${indent}<!-- ... ${remaining} more <${tag}> elements ... -->`);
+  }
+
+  return { lines: out, next: cursor };
+}
+
+function isSelfContainedBlock(line: string, tag: string): boolean {
+  return line.trimEnd().endsWith('/>') || line.includes(`</${tag}>`) || VOID_ELEMENTS.has(tag.toLowerCase());
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function countTagDelta(line: string, regexes: TagDeltaRegexes): number {
+  const opens = (line.match(regexes.open) || []).length;
+  const selfCloses = (line.match(regexes.selfClose) || []).length;
+  const closes = (line.match(regexes.close) || []).length;
+  return opens - selfCloses - closes;
+}
+
 function findBlockEnd(lines: string[], start: number, tag: string): number {
-  const line = lines[start]!;
-
-  if (line.trimEnd().endsWith('/>')) {
+  if (isSelfContainedBlock(lines[start]!, tag)) {
     return start;
   }
 
-  if (line.includes(`</${tag}>`)) {
-    return start;
-  }
-
-  if (VOID_ELEMENTS.has(tag.toLowerCase())) {
-    return start;
-  }
+  const escapedTag = escapeRegExp(tag);
+  const regexes: TagDeltaRegexes = {
+    open: new RegExp(`<${escapedTag}[\\s>]`, 'g'),
+    selfClose: new RegExp(`<${escapedTag}[^>]*/>`, 'g'),
+    close: new RegExp(`</${escapedTag}>`, 'g')
+  };
 
   let depth = 1;
   for (let i = start + 1; i < lines.length; i++) {
-    const l = lines[i]!;
-    const opens = (l.match(new RegExp(`<${tag}[\\s>]`, 'g')) || []).length;
-    const selfCloses = (l.match(new RegExp(`<${tag}[^>]*/>`, 'g')) || []).length;
-    const closes = (l.match(new RegExp(`</${tag}>`, 'g')) || []).length;
-    depth += opens - selfCloses - closes;
-
+    depth += countTagDelta(lines[i]!, regexes);
     if (depth <= 0) {
       return i;
     }

@@ -158,8 +158,6 @@ export const ResetForm = {
   }
 }
 
-/* eslint-disable @nvidia-elements/lint/no-missing-popover-trigger */
-
 @customElement('app-login')
 export class AppLogin extends LitElement {
   static styles = [unsafeCSS(layout)];
