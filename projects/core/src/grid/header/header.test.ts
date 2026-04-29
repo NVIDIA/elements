@@ -109,6 +109,44 @@ describe(GridHeader.metadata.tag, () => {
     expect(grid.style.getPropertyValue('--c2').includes('minmax(auto, ')).toBe(true);
     expect(grid.style.getPropertyValue('--c3').includes('minmax(auto, ')).toBe(true);
   });
+
+  it('should batch column width reads before applying minmax style writes', async () => {
+    // Layout-thrashing guard: getBoundingClientRect (read) calls must all happen
+    // before any --cN minmax (write) calls, so a single reflow covers all columns.
+    const callOrder: string[] = [];
+
+    columns.forEach((c, i) => {
+      const original = c.getBoundingClientRect.bind(c);
+      vi.spyOn(c, 'getBoundingClientRect').mockImplementation(() => {
+        callOrder.push(`read-${i}`);
+        return original();
+      });
+    });
+
+    const originalSetProperty = grid.style.setProperty.bind(grid.style);
+    const setPropertySpy = vi
+      .spyOn(grid.style, 'setProperty')
+      .mockImplementation((prop: string, value: string | null) => {
+        if (/^--c\d+$/.test(prop) && typeof value === 'string' && value.includes('minmax')) {
+          callOrder.push(`write-${prop}`);
+        }
+        originalSetProperty(prop, value);
+      });
+
+    columns[0].dispatchEvent(new CustomEvent('nve-grid-column-resize', { bubbles: true, composed: true }));
+    await elementIsStable(element);
+
+    const reads = callOrder.filter(c => c.startsWith('read-'));
+    const writes = callOrder.filter(c => c.startsWith('write-'));
+    expect(reads.length).toBe(columns.length);
+    expect(writes.length).toBe(columns.length);
+
+    const lastReadIndex = callOrder.findLastIndex(c => c.startsWith('read-'));
+    const firstWriteIndex = callOrder.findIndex(c => c.startsWith('write-'));
+    expect(lastReadIndex).toBeLessThan(firstWriteIndex);
+
+    setPropertySpy.mockRestore();
+  });
 });
 
 describe(`${GridHeader.metadata.tag}: validation check`, () => {

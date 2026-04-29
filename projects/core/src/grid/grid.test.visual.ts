@@ -571,12 +571,12 @@ describe('grid visual', () => {
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
-  test.skip('grid content wrap should match visual baseline', async () => {
+  test('grid content wrap should match visual baseline', async () => {
     const report = await visualRunner.render('grid.content-wrap', contentWrap());
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });
 
-  test.skip('grid content wrap should match visual baseline dark theme', async () => {
+  test('grid content wrap should match visual baseline dark theme', async () => {
     const report = await visualRunner.render('grid.content-wrap.dark', contentWrap('dark'));
     expect(report.maxDiffPercentage).toBeLessThan(1);
   });

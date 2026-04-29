@@ -99,9 +99,8 @@ export class GridHeader extends LitElement {
 
     // compute column width based on content
     await this.updateComplete;
-    this.columns.forEach((c, i) =>
-      this.#grid.style.setProperty(`--c${i}`, c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`)
-    );
+    const widths = this.columns.map(c => (c.width ? c.width : `minmax(auto, ${c.getBoundingClientRect().width}px)`));
+    widths.forEach((w, i) => this.#grid.style.setProperty(`--c${i}`, w));
   }
 
   #validateColumns() {
