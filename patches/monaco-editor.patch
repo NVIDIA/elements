@@ -579,6 +579,37 @@ index 5ea5530740156d0602887b5a72155f654a92e214..3e04aa520519ef8f82c992bfa47aed01
      _assertNotDisposed() {
          if (this._isDisposed) {
              throw new BugIndicatingError('Model is disposed!');
+diff --git a/esm/vs/editor/contrib/clipboard/browser/clipboard.js b/esm/vs/editor/contrib/clipboard/browser/clipboard.js
+index 1a8db88ee15a4c23c648f22bb6ae45af3a1f096d..7a814a1755cebb428f8b6df2b17258f9d1f7a3da 100644
+--- a/esm/vs/editor/contrib/clipboard/browser/clipboard.js
++++ b/esm/vs/editor/contrib/clipboard/browser/clipboard.js
+@@ -235,7 +235,11 @@ if (PasteAction) {
+         const codeEditorService = accessor.get(ICodeEditorService);
+         const clipboardService = accessor.get(IClipboardService);
+         const telemetryService = accessor.get(ITelemetryService);
++        // PATCH: Workaround for broken PasteAction due to missing ProductService
++        // See https://github.com/microsoft/monaco-editor/issues/5079#issuecomment-3625281388
++        /*
+         const productService = accessor.get(IProductService);
++        */
+         // Only if editor text focus (i.e. not if editor has widget focus).
+         const focusedEditor = codeEditorService.getFocusedCodeEditor();
+         if (focusedEditor && focusedEditor.hasModel() && focusedEditor.hasTextFocus()) {
+@@ -254,10 +258,14 @@ if (PasteAction) {
+                 logService.trace('registerExecCommandImpl (triggerPaste defined)');
+                 return triggerPaste.then(async () => {
+                     logService.trace('registerExecCommandImpl (after triggerPaste)');
++                    // PATCH: Workaround for broken PasteAction due to missing ProductService
++                    // See https://github.com/microsoft/monaco-editor/issues/5079#issuecomment-3625281388
++                    /*
+                     if (productService.quality !== 'stable') {
+                         const duration = sw.elapsed();
+                         telemetryService.publicLog2('editorAsyncPaste', { duration });
+                     }
++                    */
+                     return CopyPasteController.get(focusedEditor)?.finishedPaste() ?? Promise.resolve();
+                 });
+             }
 diff --git a/esm/vs/editor/contrib/codelens/browser/codelensWidget.css b/esm/vs/editor/contrib/codelens/browser/codelensWidget.css
 index a7ec91c06d96824d0a54f95fa5c3d886e01a874a..5cb31704d917e126557ec6c06f1df0d1d7b9c724 100644
 --- a/esm/vs/editor/contrib/codelens/browser/codelensWidget.css

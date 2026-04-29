@@ -179,7 +179,7 @@ overrides:
 
 patchedDependencies:
   monaco-editor:
-    hash: f59469d279a32982eee52771fe02497c25d5db418fbf48378bbc1cf96a4479e5
+    hash: 816acc114a79d140634c004e170171c7736fd63c38f11f24a2c9ccfa2cc21eaf
     path: patches/monaco-editor.patch
 
 importers:
@@ -1130,7 +1130,7 @@ importers:
         version: 10.2.0(jiti@2.6.1)
       monaco-editor:
         specifier: 0.55.1
-        version: 0.55.1(patch_hash=f59469d279a32982eee52771fe02497c25d5db418fbf48378bbc1cf96a4479e5)
+        version: 0.55.1(patch_hash=816acc114a79d140634c004e170171c7736fd63c38f11f24a2c9ccfa2cc21eaf)
       postcss:
         specifier: 'catalog:'
         version: 8.5.9
@@ -19842,7 +19842,7 @@ snapshots:
 
   dts-bundle-generator@9.5.1:
     dependencies:
-      typescript: 6.0.2
+      typescript: 5.9.3
       yargs: 17.7.2
 
   dunder-proto@1.0.1:
@@ -21678,7 +21678,7 @@ snapshots:
     dependencies:
       '@paulirish/trace_engine': 0.0.61
       '@sentry/node': 9.47.1
-      axe-core: 4.11.0
+      axe-core: 4.11.3
       chrome-launcher: 1.2.1
       configstore: 7.1.0
       csp_evaluator: 1.1.5
@@ -22276,7 +22276,7 @@ snapshots:
 
   module-details-from-path@1.0.4: {}
 
-  monaco-editor@0.55.1(patch_hash=f59469d279a32982eee52771fe02497c25d5db418fbf48378bbc1cf96a4479e5):
+  monaco-editor@0.55.1(patch_hash=816acc114a79d140634c004e170171c7736fd63c38f11f24a2c9ccfa2cc21eaf):
     dependencies:
       dompurify: 3.2.7
       marked: 14.0.0
