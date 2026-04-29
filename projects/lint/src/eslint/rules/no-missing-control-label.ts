@@ -135,21 +135,21 @@ function hasExternalLabelForAssociation(node: HtmlTagNode): boolean {
     return false;
   }
 
+  function ancestorHasExternalLabel(ancestor: HtmlNode): boolean {
+    if (!ancestor.children || !Array.isArray(ancestor.children)) {
+      return false;
+    }
+    return ancestor.children.some(
+      siblingSubtree => !subtreeContainsNode(siblingSubtree, node) && hasMatchingLabelInSubtree(siblingSubtree)
+    );
+  }
+
   let ancestor = node.parent;
 
   while (ancestor) {
-    if (ancestor.children && Array.isArray(ancestor.children)) {
-      for (const siblingSubtree of ancestor.children) {
-        if (subtreeContainsNode(siblingSubtree, node)) {
-          continue;
-        }
-
-        if (hasMatchingLabelInSubtree(siblingSubtree)) {
-          return true;
-        }
-      }
+    if (ancestorHasExternalLabel(ancestor)) {
+      return true;
     }
-
     ancestor = ancestor.parent;
   }
 
@@ -190,8 +190,7 @@ const rule = {
         const options = context.options[0] ?? {};
         const tagName = node.name.toLowerCase();
 
-        const additionalControls = options.additionalControls ?? [];
-        const allControls = [...FORM_CONTROLS_REQUIRING_LABEL, ...additionalControls];
+        const allControls = [...FORM_CONTROLS_REQUIRING_LABEL, ...(options.additionalControls ?? [])];
 
         if (!allControls.includes(tagName)) {
           return;

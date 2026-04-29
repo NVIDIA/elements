@@ -401,21 +401,7 @@ export abstract class BaseMonacoInput<
     setJSONSchemaForModel(this.#monaco, this.#model, undefined);
   }
 
-  // eslint-disable-next-line max-lines-per-function
-  #editorReady = (event: Event) => {
-    const editorEl = event.target as MonacoEditor;
-
-    const monaco = editorEl.monaco!;
-    const editor = this._createEditor(monaco);
-    const model = editor.getModel()!;
-
-    // Tweak the default options to be more visually and behaviorally consistent with an input control
-    editor.updateOptions({
-      renderLineHighlight: 'none',
-      scrollBeyondLastLine: false,
-      scrollbar: { alwaysConsumeMouseWheel: false }
-    });
-
+  #registerEditorListeners(editor: monaco.editor.IStandaloneCodeEditor, model: monaco.editor.ITextModel) {
     const didChangeContentListener = model.onDidChangeContent(() => {
       this.#updateValidationState();
 
@@ -444,34 +430,10 @@ export abstract class BaseMonacoInput<
       }
     });
 
-    // Listen for validation state changes
-    const didValidateModelVersionListener = model.onDidValidateVersion(versionId => {
-      if (!this.#shouldValidateSyntax()) {
-        return;
-      }
-      const currentVersionId = model.getVersionId();
-      if (versionId !== currentVersionId) {
-        return;
-      }
+    const didValidateModelVersionListener = model.onDidValidateVersion(versionId =>
+      this.#handleValidationVersion(model, versionId)
+    );
 
-      if (this.#isRequiredAndEmpty()) {
-        this.#setRequiredValidationError();
-        return;
-      }
-
-      const markers = this.#monaco!.editor.getModelMarkers({ resource: model.uri });
-      const errors = markers.filter(m => m.severity === this.#monaco!.MarkerSeverity.Error);
-
-      if (errors.length > 0) {
-        this.#setSyntaxValidationError(errors.map(e => e.message));
-      } else {
-        this.#clearValidation();
-      }
-
-      this.dispatchEvent(new CustomEvent('syntax-validation-changed', { bubbles: true, composed: true }));
-    });
-
-    // Update the dispose listener to include the new listener
     const didDisposeListener = editor.onDidDispose(() => {
       didDisposeListener.dispose();
       didChangeContentListener.dispose();
@@ -479,10 +441,51 @@ export abstract class BaseMonacoInput<
       didBlurListener.dispose();
       didValidateModelVersionListener.dispose();
     });
+  }
+
+  #handleValidationVersion(model: monaco.editor.ITextModel, versionId: number) {
+    if (!this.#shouldValidateSyntax()) {
+      return;
+    }
+    if (versionId !== model.getVersionId()) {
+      return;
+    }
+
+    if (this.#isRequiredAndEmpty()) {
+      this.#setRequiredValidationError();
+      return;
+    }
+
+    const markers = this.#monaco!.editor.getModelMarkers({ resource: model.uri });
+    const errors = markers.filter(m => m.severity === this.#monaco!.MarkerSeverity.Error);
+
+    if (errors.length > 0) {
+      this.#setSyntaxValidationError(errors.map(e => e.message));
+    } else {
+      this.#clearValidation();
+    }
+
+    this.dispatchEvent(new CustomEvent('syntax-validation-changed', { bubbles: true, composed: true }));
+  }
+
+  #editorReady = (event: Event) => {
+    const editorEl = event.target as MonacoEditor;
+
+    const monaco = editorEl.monaco!;
+    const editor = this._createEditor(monaco);
+    const model = editor.getModel()!;
+
+    // Tweak the default options to be more visually and behaviorally consistent with an input control
+    editor.updateOptions({
+      renderLineHighlight: 'none',
+      scrollBeyondLastLine: false,
+      scrollbar: { alwaysConsumeMouseWheel: false }
+    });
+
+    this.#registerEditorListeners(editor, model);
 
     this.#monaco = monaco;
     this.#editor = editor;
-
     this.#model = model;
 
     // Apply initial state from properties

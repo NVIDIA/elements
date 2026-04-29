@@ -165,37 +165,22 @@ export function validateSchema(schema: Schema, value: unknown): ValidationResult
 
 export function parseControlValue<T>(value: string, schema: Schema): T | undefined {
   const schemaType = schema.type;
-  let parsedValue: unknown;
 
   switch (schemaType) {
-    case 'string': {
-      parsedValue = value;
-      break;
-    }
-    case 'number': {
-      parsedValue = parseFloat(value);
-      break;
-    }
-    case 'boolean': {
-      parsedValue = !!value || value === 'true';
-      break;
-    }
-    case 'array': {
-      parsedValue = JSON.parse(value);
-      break;
-    }
-    case 'object': {
-      parsedValue = JSON.parse(value);
-      break;
-    }
-    case 'enum': {
-      parsedValue = schema.enum.includes(value) ? value : undefined;
-      break;
-    }
+    case 'string':
+      return value as T;
+    case 'number':
+      return parseFloat(value) as T;
+    case 'boolean':
+      return (!!value || value === 'true') as T;
+    case 'array':
+    case 'object':
+      return JSON.parse(value) as T;
+    case 'enum':
+      return (schema.enum.includes(value) ? value : undefined) as T;
     default: {
       const _exhaustiveCheck: never = schemaType;
       return undefined;
     }
   }
-  return parsedValue as T;
 }

@@ -8,6 +8,26 @@ import styles from './format-relative-time.css?inline';
 
 type TimeUnitOption = 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year';
 
+const UNIT_DIVISORS: Record<TimeUnitOption, number> = {
+  second: 1000,
+  minute: 60000,
+  hour: 3600000,
+  day: 86400000,
+  week: 604800000,
+  month: 2592000000,
+  year: 31536000000
+};
+
+const THRESHOLDS: { unit: TimeUnitOption; max: number }[] = [
+  { unit: 'second', max: 60 },
+  { unit: 'minute', max: 60 },
+  { unit: 'hour', max: 24 },
+  { unit: 'day', max: 7 },
+  { unit: 'week', max: 4 },
+  { unit: 'month', max: 12 },
+  { unit: 'year', max: Number.POSITIVE_INFINITY }
+];
+
 /**
  * @element nve-format-relative-time
  * @description Formats a date/time value as localized relative text using the Intl.RelativeTimeFormat API. Renders inside a semantic time element.
@@ -71,34 +91,22 @@ export class FormatRelativeTime extends LitElement {
     const absDiff = Math.abs(diffMs);
     const sign = diffMs < 0 ? -1 : 1;
 
-    const seconds = Math.round(absDiff / 1000);
-    const minutes = Math.round(absDiff / 60000);
-    const hours = Math.round(absDiff / 3600000);
-    const days = Math.round(absDiff / 86400000);
-    const weeks = Math.round(absDiff / 604800000);
-    const months = Math.round(absDiff / 2592000000);
-    const years = Math.round(absDiff / 31536000000);
-
-    if (seconds < 60) return { value: sign * seconds, unit: 'second' };
-    if (minutes < 60) return { value: sign * minutes, unit: 'minute' };
-    if (hours < 24) return { value: sign * hours, unit: 'hour' };
-    if (days < 7) return { value: sign * days, unit: 'day' };
-    if (weeks < 4) return { value: sign * weeks, unit: 'week' };
-    if (months < 12) return { value: sign * months, unit: 'month' };
-    return { value: sign * years, unit: 'year' };
+    for (const { unit, max } of THRESHOLDS) {
+      const value = Math.round(absDiff / UNIT_DIVISORS[unit]);
+      if (value < max) return { value: sign * value, unit };
+    }
+    throw new Error('format-relative-time: no relative time threshold matched');
   }
 
   #computeExplicitUnit(diffMs: number, unit: TimeUnitOption): number {
-    const divisors: Record<string, number> = {
-      second: 1000,
-      minute: 60000,
-      hour: 3600000,
-      day: 86400000,
-      week: 604800000,
-      month: 2592000000,
-      year: 31536000000
-    };
-    return Math.round(diffMs / (divisors[unit] ?? 1));
+    return Math.round(diffMs / UNIT_DIVISORS[unit]);
+  }
+
+  #resolveValueAndUnit(diffMs: number): { value: number; unit: Intl.RelativeTimeFormatUnit } {
+    if (this.unit === 'auto') {
+      return this.#computeUnit(diffMs);
+    }
+    return { unit: this.unit, value: this.#computeExplicitUnit(diffMs, this.unit) };
   }
 
   get #formattedRelativeTime(): string {
@@ -111,16 +119,7 @@ export class FormatRelativeTime extends LitElement {
       return iso;
     }
 
-    const diffMs = target.getTime() - Date.now();
-    let value: number;
-    let resolvedUnit: Intl.RelativeTimeFormatUnit;
-
-    if (this.unit === 'auto') {
-      ({ value, unit: resolvedUnit } = this.#computeUnit(diffMs));
-    } else {
-      resolvedUnit = this.unit;
-      value = this.#computeExplicitUnit(diffMs, resolvedUnit);
-    }
+    const { value, unit: resolvedUnit } = this.#resolveValueAndUnit(target.getTime() - Date.now());
 
     try {
       return new Intl.RelativeTimeFormat(this.#resolvedLocale, {

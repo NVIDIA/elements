@@ -647,6 +647,57 @@ describe.each<InputTestConfig>([
       expect(element.validity.customError).toBe(false);
       expect(element.validationMessage).toBe('');
     });
+
+    it('should ignore stale JSON diagnostics for previous model versions', async () => {
+      const validationSpy = vi.fn();
+      element.addEventListener('syntax-validation-changed', validationSpy);
+
+      try {
+        model.setValue('{ invalid: json }');
+        const invalidVersion = model.getVersionId();
+
+        expect(element.validity.customError).toBe(true);
+        expect(element.validationMessage).toBe('Validating syntax...');
+
+        const currentValidationEvent = untilEvent(element, 'syntax-validation-changed');
+        model.setValue('{"current": "valid"}');
+        const currentVersion = model.getVersionId();
+
+        expect(currentVersion).toBeGreaterThan(invalidVersion);
+
+        monaco.editor.setModelMarkers(model, 'mock', [
+          {
+            message: 'Expected property name or "}" in JSON',
+            severity: monaco.MarkerSeverity.Error,
+            startLineNumber: 1,
+            startColumn: 3,
+            endLineNumber: 1,
+            endColumn: 10
+          }
+        ]);
+        model.setVersionValidated(invalidVersion);
+
+        expect(validationSpy).not.toHaveBeenCalled();
+        expect(element.validity.customError).toBe(true);
+        expect(element.validationMessage).toBe('Validating syntax...');
+
+        monaco.editor.setModelMarkers(model, 'mock', []);
+        model.setVersionValidated(currentVersion);
+
+        const errors = monaco.editor
+          .getModelMarkers({ resource: model.uri })
+          .filter(marker => marker.severity === monaco.MarkerSeverity.Error);
+
+        await currentValidationEvent;
+
+        expect(validationSpy).toHaveBeenCalledTimes(1);
+        expect(errors.length).toBe(0);
+        expect(element.validity.customError).toBe(false);
+        expect(element.validationMessage).toBe('');
+      } finally {
+        element.removeEventListener('syntax-validation-changed', validationSpy);
+      }
+    });
   });
 
   describe('TypeScript validation', () => {

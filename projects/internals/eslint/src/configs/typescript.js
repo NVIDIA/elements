@@ -80,10 +80,13 @@ const config = {
     'no-useless-return': 'error',
     'no-param-reassign': 'error',
     'no-warning-comments': 'error',
+    'max-nested-callbacks': ['error', 3],
     'no-shadow': ['error', { allow: ['_', 'args', 'resolve', 'cwd'] }], // globals and a few large refactors
     'no-restricted-imports': ['error', { patterns: ['**/dist/**', '**/node_modules/**'] }],
+    'max-depth': ['error', 3],
     'max-params': ['error', 3],
     'max-lines': ['error', 1000],
+    'max-statements': ['error', 15],
     'max-lines-per-function': ['error', 50],
     'max-statements-per-line': ['error', { max: 1 }],
     'import/extensions': ['error', 'ignorePackages', { js: 'always', 'css?inline': 'never' }],
@@ -134,10 +137,7 @@ const config = {
     '@typescript-eslint/no-unnecessary-type-parameters': 'off',
     '@typescript-eslint/prefer-readonly': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    'id-length': ['off', { min: 2, exceptions: ['_'] }],
-    'max-statements': ['error', 20], // goal 15
-    'max-depth': ['off', 3],
-    'max-nested-callbacks': ['off', 3]
+    'id-length': ['off', { min: 2, exceptions: ['_'] }]
   },
   settings: {
     jsdoc: {
@@ -190,6 +190,7 @@ export const browserTypescriptConfig = [
       'max-lines': 'off',
       'max-lines-per-function': 'off',
       'max-statements': 'off',
+      'max-nested-callbacks': 'off',
       'local-typescript/require-fixture-cleanup': ['error'],
       'local-typescript/require-element-stable': ['off'], // temporarily disabled, will enable in followup
       'local-typescript/require-listener-cleanup': ['off'],
@@ -238,6 +239,7 @@ export const nodeTypescriptConfig = [
       'max-lines': 'off',
       'max-statements': 'off',
       'max-lines-per-function': 'off',
+      'max-nested-callbacks': 'off',
       'local-typescript/require-fixture-cleanup': ['error'],
       'local-typescript/require-element-stable': ['off'], // temporarily disabled, will enable in followup
       'local-typescript/require-listener-cleanup': ['off'],

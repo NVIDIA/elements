@@ -21,7 +21,7 @@ import globalStyles from './button-group.global.css?inline';
 
 /**
  * @element nve-button-group
- * @description A button group is a control that enables users to choose between two or more distinct mutually exclusive options.
+ * @description A button group organizes related buttons and can support either mutually exclusive single or multi selection. Prefer usage within toolbars.
  * @since 0.16.0
  * @entrypoint \@nvidia-elements/core/button-group
  * @slot - default slot for `nve-button` or `nve-icon-button`

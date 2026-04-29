@@ -11,7 +11,7 @@ declare const __ELEMENTS_PAGES_BASE_URL__: string;
 const CONTAINER_RELATIONSHIPS: Record<string, string[]> = {
   'nve-card-content': ['nve-grid', 'nve-accordion', 'nve-accordion-group'],
   'nve-grid-cell': ['nve-badge', 'nve-icon-button'],
-  'nve-page-panel': ['nve-grid'],
+  'nve-page-panel': ['nve-grid', 'nve-card'],
   'nve-dialog': ['nve-grid'],
   'nve-drawer': ['nve-grid'],
   'nve-card': ['nve-grid', 'nve-accordion', 'nve-accordion-group']

@@ -232,36 +232,49 @@ export interface ProblemsFormat {
   getProblemByLine: (lineNumber: number) => Problem | undefined;
 }
 
+interface ProblemsFormatAccumulator {
+  lines: string[];
+  decorations: monaco.editor.IModelDeltaDecoration[];
+  problemsByLine: Map<number, Problem>;
+  lineNumber: number;
+}
+
+function appendFileSection(
+  acc: ProblemsFormatAccumulator,
+  monaco: Monaco,
+  fileEntry: { uri: string; problems: Problem[] }
+) {
+  const { uri, problems: sortedProblems } = fileEntry;
+  acc.lineNumber++;
+  const fileLine = toFileLine(monaco, acc.lineNumber, { uri, problems: sortedProblems });
+  acc.lines.push(fileLine.text);
+  acc.decorations.push(...fileLine.decorations);
+
+  for (const problem of sortedProblems) {
+    acc.lineNumber++;
+    const problemLine = toProblemLine(monaco, acc.lineNumber, problem);
+    acc.lines.push(problemLine.text);
+    acc.decorations.push(...problemLine.decorations);
+    acc.problemsByLine.set(acc.lineNumber, problem);
+  }
+}
+
 export function toProblemsFormat(monaco: Monaco, problems: Problem[]): ProblemsFormat {
   const problemsByFile = groupProblemsByFile(problems);
+  const acc: ProblemsFormatAccumulator = {
+    lines: [],
+    decorations: [],
+    problemsByLine: new Map(),
+    lineNumber: 0
+  };
 
-  const lines: string[] = [];
-  const decorations: monaco.editor.IModelDeltaDecoration[] = [];
-  const problemsByLine: Map<number, Problem> = new Map();
-
-  let lineNumber = 0;
-  const sortedUris = Array.from(problemsByFile.keys()).sort();
-  for (const uri of sortedUris) {
-    const sortedProblems = problemsByFile.get(uri)!.sort(compareProblems);
-
-    lineNumber++;
-    const fileLine = toFileLine(monaco, lineNumber, { uri, problems: sortedProblems });
-    lines.push(fileLine.text);
-    decorations.push(...fileLine.decorations);
-
-    for (const problem of sortedProblems) {
-      lineNumber++;
-      const problemLine = toProblemLine(monaco, lineNumber, problem);
-      lines.push(problemLine.text);
-      decorations.push(...problemLine.decorations);
-      problemsByLine.set(lineNumber, problem);
-    }
+  for (const uri of Array.from(problemsByFile.keys()).sort()) {
+    appendFileSection(acc, monaco, { uri, problems: problemsByFile.get(uri)!.sort(compareProblems) });
   }
 
   return {
-    text: lines.join('\n'),
-    decorations,
-    // eslint-disable-next-line no-shadow
-    getProblemByLine: lineNumber => problemsByLine.get(lineNumber)
+    text: acc.lines.join('\n'),
+    decorations: acc.decorations,
+    getProblemByLine: lineNumber => acc.problemsByLine.get(lineNumber)
   };
 }

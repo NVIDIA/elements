@@ -136,15 +136,9 @@ export class MonacoProblems extends LitElement {
     this.#injectedStyles = true;
   };
 
-  #editorReady = async (event: Event) => {
-    const editorEl = event.target as MonacoEditor;
-
-    await this.#injectStyles(editorEl);
-
+  #initEditorState(editorEl: MonacoEditor) {
     const editor = editorEl.editor!;
-    const monaco = editorEl.monaco!;
-
-    this.#monaco = monaco;
+    this.#monaco = editorEl.monaco!;
     this.#editor = editor;
     this.#model = editor.getModel()!;
 
@@ -154,6 +148,16 @@ export class MonacoProblems extends LitElement {
 
     this.#selectedLineNumber = undefined;
     this.#downLineNumber = undefined;
+
+    return editor;
+  }
+
+  #editorReady = async (event: Event) => {
+    const editorEl = event.target as MonacoEditor;
+
+    await this.#injectStyles(editorEl);
+
+    const editor = this.#initEditorState(editorEl);
 
     this.#setupEditor(editor);
 
@@ -194,24 +198,26 @@ export class MonacoProblems extends LitElement {
       onMouseUpListener.dispose();
       onMouseMoveListener.dispose();
       onMouseLeaveListener.dispose();
-
       hoverProvider.dispose();
 
       editorEl.removeEventListener('contextmenu', this.#onContextMenu);
-
-      this.#monaco = undefined;
-      this.#editor = undefined;
-      this.#model = undefined;
-
-      this.#lineDecorations = undefined;
-      this.#selectedLineDecorations = undefined;
-      this.#hoveredLineDecorations = undefined;
-
-      this.#selectedLineNumber = undefined;
-      this.#downLineNumber = undefined;
-
-      this.#getProblemByLine = undefined;
+      this.#resetEditorState();
     });
+  }
+
+  #resetEditorState() {
+    this.#monaco = undefined;
+    this.#editor = undefined;
+    this.#model = undefined;
+
+    this.#lineDecorations = undefined;
+    this.#selectedLineDecorations = undefined;
+    this.#hoveredLineDecorations = undefined;
+
+    this.#selectedLineNumber = undefined;
+    this.#downLineNumber = undefined;
+
+    this.#getProblemByLine = undefined;
   }
 
   #getProblemByLine?: (lineNumber: number) => Problem | undefined;

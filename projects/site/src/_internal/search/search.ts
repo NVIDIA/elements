@@ -219,6 +219,16 @@ export class DocsSearch extends LitElement {
     }
   }
 
+  #evictOldestCacheEntryIfFull() {
+    if (this.#searchCache.size < DocsSearch.CACHE_MAX_SIZE) {
+      return;
+    }
+    const firstCacheKey = this.#searchCache.keys().next().value;
+    if (firstCacheKey) {
+      this.#searchCache.delete(firstCacheKey);
+    }
+  }
+
   async #loadPagefind() {
     if (!this.#pagefind) {
       const url = `${this.baseUrl}/.pagefind/pagefind.js`;
@@ -268,12 +278,7 @@ export class DocsSearch extends LitElement {
         this.results = [...queryResults];
 
         // Update cache with FIFO eviction when cache is full
-        if (this.#searchCache.size >= DocsSearch.CACHE_MAX_SIZE) {
-          const firstCacheKey = this.#searchCache.keys().next().value;
-          if (firstCacheKey) {
-            this.#searchCache.delete(firstCacheKey);
-          }
-        }
+        this.#evictOldestCacheEntryIfFull();
         this.#searchCache.set(term, this.results);
 
         // Notify parent components of search outcome
