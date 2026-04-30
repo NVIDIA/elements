@@ -96,7 +96,7 @@ catalog:
   react: 19.2.5
   react-dom: 19.2.5
   rollup-plugin-html-literals: 2.0.1
-  stylelint: 17.6.0
+  stylelint: 17.9.1
   stylelint-config-standard: 40.0.0
   ts-morph: 26.0.0
   typescript: 6.0.2
