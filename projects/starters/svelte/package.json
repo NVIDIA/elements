@@ -21,7 +21,7 @@
     "@sveltejs/vite-plugin-svelte": "7.0.0",
     "@tsconfig/svelte": "5.0.8",
     "eslint": "catalog:",
-    "svelte": "5.55.2",
+    "svelte": "5.55.5",
     "svelte-check": "4.4.6",
     "typescript": "catalog:",
     "vite": "catalog:"
