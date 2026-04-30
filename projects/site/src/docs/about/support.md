@@ -23,7 +23,7 @@
 
 Elements [supports a wide variety](https://custom-elements-everywhere.com) of JavaScript frameworks and libraries as well as vanilla JS. Read more at the [installation](./docs/about/installation/) page.
 
-<section nve-layout="row gap:sm">
+<section nve-layout="row gap:sm align:wrap">
   <nve-button>
     <a href="./docs/integrations/typescript/">{% svg-logo 'typescript' '18' %} TypeScript</a>
   </nve-button>

@@ -21,7 +21,12 @@ import { elementLoaderTransform } from './src/_11ty/transforms/element-loader.js
 import { anchorGeneratorTransform } from './src/_11ty/transforms/anchor-generator.js';
 import { htmlMinifyTransform } from './src/_11ty/transforms/html-minify.js';
 import { envReplaceTransform } from './src/_11ty/transforms/env-replace.js';
-import { installShortcode, doDontShortcode, splitShortcode } from './src/_11ty/shortcodes/index.js';
+import {
+  installShortcode,
+  doDontShortcode,
+  beforeAfterShortcode,
+  splitShortcode
+} from './src/_11ty/shortcodes/index.js';
 import { exampleShortcode, exampleTagsShortcode } from './src/_11ty/shortcodes/example.js';
 import { exampleDocShortcode } from './src/_11ty/shortcodes/example-doc.js';
 import { exampleGroupShortcode } from './src/_11ty/shortcodes/example-group.js';
@@ -198,6 +203,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addShortcode('artifactory-usage', renderArtifactoryUsageShortcode);
   eleventyConfig.addPairedShortcode('dodont', doDontShortcode);
   eleventyConfig.addPairedShortcode('split', splitShortcode);
+  eleventyConfig.addPairedShortcode('before-after', beforeAfterShortcode);
 
   // Register custom transforms for content processing
   eleventyConfig.addTransform('env-replace', envReplaceTransform);
