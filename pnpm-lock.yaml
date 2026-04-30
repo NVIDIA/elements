@@ -67,8 +67,8 @@ catalogs:
       specifier: 4.1.4
       version: 4.1.4
     '@vitest/coverage-istanbul':
-      specifier: 4.1.4
-      version: 4.1.4
+      specifier: 4.1.5
+      version: 4.1.5
     axe-core:
       specifier: 4.11.0
       version: 4.11.0
@@ -321,7 +321,7 @@ importers:
         version: 17.0.35
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       bun:
         specifier: 1.3.11
         version: 1.3.11
@@ -336,7 +336,7 @@ importers:
         version: 8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
 
   projects/code:
     dependencies:
@@ -379,7 +379,7 @@ importers:
         version: 4.1.4(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
         version: 4.11.0
@@ -403,7 +403,7 @@ importers:
         version: 8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
 
   projects/core:
     dependencies:
@@ -449,7 +449,7 @@ importers:
         version: 4.1.4(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
         version: 4.11.0
@@ -482,7 +482,7 @@ importers:
         version: 8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
     optionalDependencies:
       '@lit-labs/scoped-registry-mixin':
         specifier: catalog:publish
@@ -553,7 +553,7 @@ importers:
         version: 4.1.4(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
         version: 4.11.0
@@ -571,7 +571,7 @@ importers:
         version: 8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
 
   projects/internals/eslint:
     dependencies:
@@ -635,7 +635,7 @@ importers:
         version: 24.9.1
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       eslint:
         specifier: 10.2.0
         version: 10.2.0(jiti@2.6.1)
@@ -656,7 +656,7 @@ importers:
         version: 8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
 
   projects/internals/patterns:
     dependencies:
@@ -792,7 +792,7 @@ importers:
         version: 24.9.1
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       eslint:
         specifier: 10.2.0
         version: 10.2.0(jiti@2.6.1)
@@ -804,7 +804,7 @@ importers:
         version: 8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
 
   projects/internals/vite:
     dependencies:
@@ -822,7 +822,7 @@ importers:
         version: 4.1.4(playwright@1.59.1)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
         version: 4.11.0
@@ -882,7 +882,7 @@ importers:
         version: 1.2.7(@emnapi/core@1.9.1)(@emnapi/runtime@1.10.0)(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
     devDependencies:
       esbuild:
         specifier: 'catalog:'
@@ -926,7 +926,7 @@ importers:
         version: 24.9.1
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       eslint:
         specifier: 10.2.0
         version: 10.2.0(jiti@2.6.1)
@@ -941,7 +941,7 @@ importers:
         version: 8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
 
   projects/markdown:
     dependencies:
@@ -981,7 +981,7 @@ importers:
         version: 4.1.4(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
         version: 4.11.0
@@ -1005,7 +1005,7 @@ importers:
         version: 8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
 
   projects/media:
     dependencies:
@@ -1042,7 +1042,7 @@ importers:
         version: 4.1.4(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
         version: 4.11.0
@@ -1066,7 +1066,7 @@ importers:
         version: 8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
 
   projects/monaco:
     dependencies:
@@ -1112,7 +1112,7 @@ importers:
         version: 4.1.4(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
       '@vitest/coverage-istanbul':
         specifier: 'catalog:'
-        version: 4.1.4(vitest@4.1.4)
+        version: 4.1.5(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
         version: 4.11.0
@@ -1151,7 +1151,7 @@ importers:
         version: 8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3)
       vitest:
         specifier: 'catalog:'
-        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))
+        version: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))
 
   projects/pages:
     dependencies:
@@ -6378,6 +6378,11 @@ packages:
     resolution: {integrity: sha512-Pyi4F8RnqU6hBGiIDhS/e8gVD4FRcUvZJ2AbFiIlmIxHlEIsKyCxGOqufCECobty/dXELcN8oIH4Gms3hVOCYA==}
     peerDependencies:
       vitest: 4.1.4
+
+  '@vitest/coverage-istanbul@4.1.5':
+    resolution: {integrity: sha512-X4kQMDEWh9mA0IiLuigtdYv4kXe+W8KLTbucoz15lbyZRPAxT5l+hu0JizI7Am050+G9vQnB7QJNgYi2LnwV4w==}
+    peerDependencies:
+      vitest: 4.1.5
 
   '@vitest/expect@4.1.4':
     resolution: {integrity: sha512-iPBpra+VDuXmBFI3FMKHSFXp3Gx5HfmSCE8X67Dn+bwephCnQCaB7qWK2ldHa+8ncN8hJU8VTMcxjPpyMkUjww==}
@@ -17816,7 +17821,7 @@ snapshots:
       '@vitest/mocker': 4.1.4(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
       playwright: 1.59.1
       tinyrainbow: 3.1.0
-      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
     transitivePeerDependencies:
       - bufferutil
       - msw
@@ -17829,7 +17834,7 @@ snapshots:
       '@vitest/mocker': 4.1.4(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))
       playwright: 1.59.1
       tinyrainbow: 3.1.0
-      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))
     transitivePeerDependencies:
       - bufferutil
       - msw
@@ -17843,7 +17848,7 @@ snapshots:
       '@vitest/mocker': 4.1.4(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
       playwright: 1.59.1
       tinyrainbow: 3.1.0
-      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
     transitivePeerDependencies:
       - bufferutil
       - msw
@@ -17857,7 +17862,7 @@ snapshots:
       '@vitest/mocker': 4.1.4(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
       playwright: 1.59.1
       tinyrainbow: 3.1.0
-      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
     transitivePeerDependencies:
       - bufferutil
       - msw
@@ -17887,7 +17892,7 @@ snapshots:
       pngjs: 7.0.0
       sirv: 3.0.2
       tinyrainbow: 3.1.0
-      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
       ws: 8.20.0
     transitivePeerDependencies:
       - bufferutil
@@ -17904,7 +17909,7 @@ snapshots:
       pngjs: 7.0.0
       sirv: 3.0.2
       tinyrainbow: 3.1.0
-      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))
       ws: 8.20.0
     transitivePeerDependencies:
       - bufferutil
@@ -17921,7 +17926,7 @@ snapshots:
       pngjs: 7.0.0
       sirv: 3.0.2
       tinyrainbow: 3.1.0
-      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
       ws: 8.20.0
     transitivePeerDependencies:
       - bufferutil
@@ -17939,7 +17944,7 @@ snapshots:
       pngjs: 7.0.0
       sirv: 3.0.2
       tinyrainbow: 3.1.0
-      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
       ws: 8.20.0
     transitivePeerDependencies:
       - bufferutil
@@ -17977,6 +17982,23 @@ snapshots:
       obug: 2.1.1
       tinyrainbow: 3.1.0
       vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+    transitivePeerDependencies:
+      - supports-color
+    optional: true
+
+  '@vitest/coverage-istanbul@4.1.5(vitest@4.1.4)':
+    dependencies:
+      '@babel/core': 7.29.0
+      '@istanbuljs/schema': 0.1.6
+      '@jridgewell/gen-mapping': 0.3.13
+      '@jridgewell/trace-mapping': 0.3.31
+      istanbul-lib-coverage: 3.2.2
+      istanbul-lib-report: 3.0.1
+      istanbul-reports: 3.2.0
+      magicast: 0.5.2
+      obug: 2.1.1
+      tinyrainbow: 3.1.0
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
     transitivePeerDependencies:
       - supports-color
 
@@ -25854,68 +25876,6 @@ snapshots:
     optionalDependencies:
       vite: 8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
 
-  vitest@4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)):
-    dependencies:
-      '@vitest/expect': 4.1.4
-      '@vitest/mocker': 4.1.4(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
-      '@vitest/pretty-format': 4.1.4
-      '@vitest/runner': 4.1.4
-      '@vitest/snapshot': 4.1.4
-      '@vitest/spy': 4.1.4
-      '@vitest/utils': 4.1.4
-      es-module-lexer: 2.0.0
-      expect-type: 1.3.0
-      magic-string: 0.30.21
-      obug: 2.1.1
-      pathe: 2.0.3
-      picomatch: 4.0.4
-      std-env: 4.1.0
-      tinybench: 2.9.0
-      tinyexec: 1.1.1
-      tinyglobby: 0.2.16
-      tinyrainbow: 3.1.0
-      vite: 8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
-      why-is-node-running: 2.3.0
-    optionalDependencies:
-      '@opentelemetry/api': 1.9.1
-      '@types/node': 24.9.1
-      '@vitest/browser-playwright': 4.1.4(playwright@1.59.1)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
-      '@vitest/coverage-istanbul': 4.1.4(vitest@4.1.4)
-      jsdom: 27.1.0
-    transitivePeerDependencies:
-      - msw
-
-  vitest@4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3)):
-    dependencies:
-      '@vitest/expect': 4.1.4
-      '@vitest/mocker': 4.1.4(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))
-      '@vitest/pretty-format': 4.1.4
-      '@vitest/runner': 4.1.4
-      '@vitest/snapshot': 4.1.4
-      '@vitest/spy': 4.1.4
-      '@vitest/utils': 4.1.4
-      es-module-lexer: 2.0.0
-      expect-type: 1.3.0
-      magic-string: 0.30.21
-      obug: 2.1.1
-      pathe: 2.0.3
-      picomatch: 4.0.4
-      std-env: 4.1.0
-      tinybench: 2.9.0
-      tinyexec: 1.1.1
-      tinyglobby: 0.2.16
-      tinyrainbow: 3.1.0
-      vite: 8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3)
-      why-is-node-running: 2.3.0
-    optionalDependencies:
-      '@opentelemetry/api': 1.9.1
-      '@types/node': 24.9.1
-      '@vitest/browser-playwright': 4.1.4(playwright@1.59.1)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
-      '@vitest/coverage-istanbul': 4.1.4(vitest@4.1.4)
-      jsdom: 27.1.0
-    transitivePeerDependencies:
-      - msw
-
   vitest@4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)):
     dependencies:
       '@vitest/expect': 4.1.4
@@ -25943,6 +25903,99 @@ snapshots:
       '@types/node': 24.9.1
       '@vitest/browser-playwright': 4.1.4(playwright@1.59.1)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
       '@vitest/coverage-istanbul': 4.1.4(vitest@4.1.4)
+      jsdom: 27.1.0
+    transitivePeerDependencies:
+      - msw
+
+  vitest@4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)):
+    dependencies:
+      '@vitest/expect': 4.1.4
+      '@vitest/mocker': 4.1.4(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+      '@vitest/pretty-format': 4.1.4
+      '@vitest/runner': 4.1.4
+      '@vitest/snapshot': 4.1.4
+      '@vitest/spy': 4.1.4
+      '@vitest/utils': 4.1.4
+      es-module-lexer: 2.0.0
+      expect-type: 1.3.0
+      magic-string: 0.30.21
+      obug: 2.1.1
+      pathe: 2.0.3
+      picomatch: 4.0.4
+      std-env: 4.1.0
+      tinybench: 2.9.0
+      tinyexec: 1.1.1
+      tinyglobby: 0.2.16
+      tinyrainbow: 3.1.0
+      vite: 8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@opentelemetry/api': 1.9.1
+      '@types/node': 24.9.1
+      '@vitest/browser-playwright': 4.1.4(playwright@1.59.1)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
+      '@vitest/coverage-istanbul': 4.1.5(vitest@4.1.4)
+      jsdom: 27.1.0
+    transitivePeerDependencies:
+      - msw
+
+  vitest@4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3)):
+    dependencies:
+      '@vitest/expect': 4.1.4
+      '@vitest/mocker': 4.1.4(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))
+      '@vitest/pretty-format': 4.1.4
+      '@vitest/runner': 4.1.4
+      '@vitest/snapshot': 4.1.4
+      '@vitest/spy': 4.1.4
+      '@vitest/utils': 4.1.4
+      es-module-lexer: 2.0.0
+      expect-type: 1.3.0
+      magic-string: 0.30.21
+      obug: 2.1.1
+      pathe: 2.0.3
+      picomatch: 4.0.4
+      std-env: 4.1.0
+      tinybench: 2.9.0
+      tinyexec: 1.1.1
+      tinyglobby: 0.2.16
+      tinyrainbow: 3.1.0
+      vite: 8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@opentelemetry/api': 1.9.1
+      '@types/node': 24.9.1
+      '@vitest/browser-playwright': 4.1.4(playwright@1.59.1)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.4)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
+      '@vitest/coverage-istanbul': 4.1.5(vitest@4.1.4)
+      jsdom: 27.1.0
+    transitivePeerDependencies:
+      - msw
+
+  vitest@4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)):
+    dependencies:
+      '@vitest/expect': 4.1.4
+      '@vitest/mocker': 4.1.4(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+      '@vitest/pretty-format': 4.1.4
+      '@vitest/runner': 4.1.4
+      '@vitest/snapshot': 4.1.4
+      '@vitest/spy': 4.1.4
+      '@vitest/utils': 4.1.4
+      es-module-lexer: 2.0.0
+      expect-type: 1.3.0
+      magic-string: 0.30.21
+      obug: 2.1.1
+      pathe: 2.0.3
+      picomatch: 4.0.4
+      std-env: 4.1.0
+      tinybench: 2.9.0
+      tinyexec: 1.1.1
+      tinyglobby: 0.2.16
+      tinyrainbow: 3.1.0
+      vite: 8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@opentelemetry/api': 1.9.1
+      '@types/node': 24.9.1
+      '@vitest/browser-playwright': 4.1.4(playwright@1.59.1)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
+      '@vitest/coverage-istanbul': 4.1.5(vitest@4.1.4)
       jsdom: 27.1.0
     transitivePeerDependencies:
       - msw
@@ -26005,6 +26058,37 @@ snapshots:
       '@types/node': 25.6.0
       '@vitest/browser-playwright': 4.1.4(playwright@1.59.1)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.9))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
       '@vitest/coverage-istanbul': 4.1.4(vitest@4.1.4)
+      jsdom: 27.1.0
+    transitivePeerDependencies:
+      - msw
+
+  vitest@4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.5)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)):
+    dependencies:
+      '@vitest/expect': 4.1.4
+      '@vitest/mocker': 4.1.4(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+      '@vitest/pretty-format': 4.1.4
+      '@vitest/runner': 4.1.4
+      '@vitest/snapshot': 4.1.4
+      '@vitest/spy': 4.1.4
+      '@vitest/utils': 4.1.4
+      es-module-lexer: 2.0.0
+      expect-type: 1.3.0
+      magic-string: 0.30.21
+      obug: 2.1.1
+      pathe: 2.0.3
+      picomatch: 4.0.4
+      std-env: 4.1.0
+      tinybench: 2.9.0
+      tinyexec: 1.1.1
+      tinyglobby: 0.2.16
+      tinyrainbow: 3.1.0
+      vite: 8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@opentelemetry/api': 1.9.1
+      '@types/node': 25.6.0
+      '@vitest/browser-playwright': 4.1.4(playwright@1.59.1)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))(vitest@4.1.4)
+      '@vitest/coverage-istanbul': 4.1.5(vitest@4.1.4)
       jsdom: 27.1.0
     transitivePeerDependencies:
       - msw
