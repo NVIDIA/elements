@@ -620,7 +620,7 @@ export const InteractionDrawer = {
     <p nve-text="body">page content</p>
   </main>
 
-  <nve-drawer id="drawer" slot="left-aside" position="left" size="sm" closable style="--top: 48px">
+  <nve-drawer id="drawer" position="left" size="sm" closable style="--top: 48px">
     <nve-drawer-header>
       <h3 nve-text="heading medium sm">Drawer Header</h3>
     </nve-drawer-header>

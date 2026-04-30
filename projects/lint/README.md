@@ -83,6 +83,8 @@ export default [
 | `@nvidia-elements/lint/no-nested-container-types` | Require nested container components to use flat container mode. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-attributes` | Disallow use of invalid API attributes or utility attributes on custom HTML element tags. | HTML | `error` |
 | `@nvidia-elements/lint/no-restricted-page-sizing` | Disallow custom height or width styles on nve-page. | HTML | `error` |
+| `@nvidia-elements/lint/no-slotted-popovers` | Disallow the slot attribute on popover elements (nve-tooltip, nve-dialog, nve-drawer, ...). | HTML | `error` |
+| `@nvidia-elements/lint/no-tailwind-classes` | Disallow Tailwind CSS utility classes with Elements alternatives, and all Tailwind utilities on nve custom elements. | HTML | `warn` |
 | `@nvidia-elements/lint/no-unexpected-attribute-value` | Disallow use of invalid attribute values for nve-* elements. | HTML | `error` |
 | `@nvidia-elements/lint/no-unexpected-css-value` | Disallow use of invalid CSS values. | CSS | `error` |
 | `@nvidia-elements/lint/no-unexpected-css-variable` | Disallow use of invalid CSS theme variables. | CSS | `error` |

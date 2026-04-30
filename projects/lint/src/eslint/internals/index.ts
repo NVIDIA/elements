@@ -26,17 +26,23 @@ export interface TemplateLintMessage {
 
 export async function lintPlaygroundTemplate(code: string): Promise<TemplateLintMessage[]> {
   // extra restrictions/rules as agents rarely use these advanced APIs correctly for playground generation out of context of an established project
-  // '@nvidia-elements/lint/no-unexpected-style-customization': ['error']
   const rules: Partial<Linter.RulesRecord> = {
-    '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error', { distilled: true }],
+    '@nvidia-elements/lint/no-unexpected-style-customization': ['error'],
+    '@nvidia-elements/lint/no-missing-gap-space': ['error'],
     '@nvidia-elements/lint/no-missing-slotted-elements': ['error', { 'nve-card': { required: ['nve-card-content'] } }],
-    '@nvidia-elements/lint/no-missing-gap-space': ['error']
+    '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error', { distilled: true }],
+    '@nvidia-elements/lint/no-tailwind-classes': ['error', { strict: true }]
   };
   return lintString(code, rules);
 }
 
 export async function lintTemplate(code: string): Promise<TemplateLintMessage[]> {
-  return lintString(code);
+  const rules: Partial<Linter.RulesRecord> = {
+    '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error', { distilled: true }],
+    '@nvidia-elements/lint/no-tailwind-classes': ['warn', { strict: true }],
+    '@nvidia-elements/lint/no-missing-gap-space': ['warn']
+  };
+  return lintString(code, rules);
 }
 
 async function lintString(code: string, rules: Partial<Linter.RulesRecord> = {}): Promise<TemplateLintMessage[]> {
