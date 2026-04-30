@@ -26,6 +26,7 @@ export const renderBaseHead = data => {
   <meta property="og:site_name" content="NVIDIA Elements">
   <meta property="og:type" content="${ogType}">
   <link rel="icon" href="/favicon.svg">
+  <meta name="google-site-verification" content="pqQ1zOnKkqdZ2Lm0H8qIQx3q1x6Q7ghbumSrwzF_KSY" />
   ${renderJsonLd(data, meta)}
   ${renderGlobalsScript(data)}
   <style>
