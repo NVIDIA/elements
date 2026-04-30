@@ -44,7 +44,7 @@
     "@modelcontextprotocol/sdk": "1.29.0",
     "adm-zip": "0.5.17",
     "archiver": "7.0.1",
-    "marked": "18.0.0",
+    "marked": "18.0.2",
     "marked-terminal": "7.3.0",
     "ora": "9.3.0",
     "publint": "catalog:",
