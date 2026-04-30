@@ -1,3 +1,11 @@
+## 0.2.0 (2026-04-30)
+
+* feat(lint): add rules to disallow slotted popovers and tailwind classes ([ad101dd](https://github.com/NVIDIA/elements/commit/ad101dd))
+* chore(ci): coder rabbit and sitemap verification ([97f3aca](https://github.com/NVIDIA/elements/commit/97f3aca))
+* chore(ci): lint cleanup ([9b5509f](https://github.com/NVIDIA/elements/commit/9b5509f))
+* chore(docs): accept data grid vocabulary terms ([3de7ab9](https://github.com/NVIDIA/elements/commit/3de7ab9))
+* chore(docs): page content description metadata ([db85e92](https://github.com/NVIDIA/elements/commit/db85e92))
+
 ## <small>0.1.2 (2026-04-30)</small>
 
 * fix(cli): reduce context memory usage ([85e1ba3](https://github.com/NVIDIA/elements/commit/85e1ba3))
