@@ -53,6 +53,7 @@ catalogs:
     lit-element: ^4.2.2
     lit-html: ^3.3.2
     markdown-it: ^14.1.1
+    minisearch: 7.2.0
 
 catalog:
   esbuild: 0.27.4
@@ -88,6 +89,7 @@ catalog:
   lit-html: 3.3.2
   markdown-it: 14.1.1
   markdown-it-link-attributes: 4.0.1
+  minisearch: 7.2.0
   playwright: 1.59.1
   postcss: 8.5.9
   publint: 0.3.18

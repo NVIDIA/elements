@@ -60,7 +60,8 @@
     "@html-eslint/parser": "catalog:",
     "@eslint/css": "catalog:",
     "@eslint/js": "catalog:",
-    "@eslint/json": "catalog:"
+    "@eslint/json": "catalog:",
+    "minisearch": "catalog:publish"
   },
   "peerDependencies": {
     "@nvidia-elements/themes": "workspace:^",
@@ -73,6 +74,7 @@
     "@types/node": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "eslint": "catalog:",
+    "minisearch": "catalog:",
     "publint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
