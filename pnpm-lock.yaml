@@ -169,6 +169,9 @@ catalogs:
     markdown-it:
       specifier: ^14.1.1
       version: 14.1.1
+    minisearch:
+      specifier: 7.2.0
+      version: 7.2.0
 
 overrides:
   archiver>glob: 13.0.6
@@ -905,6 +908,9 @@ importers:
       '@nvidia-elements/themes':
         specifier: workspace:^
         version: link:../themes
+      minisearch:
+        specifier: catalog:publish
+        version: 7.2.0
     devDependencies:
       '@internals/eslint':
         specifier: workspace:*
