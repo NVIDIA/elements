@@ -207,6 +207,18 @@ export default [
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-slotted-popovers</code></nve-grid-cell>
+    <nve-grid-cell>Disallow the slot attribute on popover elements (nve-tooltip, nve-dialog, nve-drawer, ...).</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-tailwind-classes</code></nve-grid-cell>
+    <nve-grid-cell>Disallow Tailwind CSS utility classes with Elements alternatives, and all Tailwind utilities on nve custom elements.</nve-grid-cell>
+    <nve-grid-cell>HTML</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">warn</code></nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-unexpected-attribute-value</code></nve-grid-cell>
     <nve-grid-cell>Disallow use of invalid attribute values for nve-* elements.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>

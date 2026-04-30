@@ -13,6 +13,7 @@ import noUnexpectedStyleCustomization from '../rules/no-unexpected-style-customi
 import noDeprecatedGlobalAttributeValue from '../rules/no-deprecated-global-attribute-value.js';
 import noDeprecatedGlobalAttributes from '../rules/no-deprecated-global-attributes.js';
 import noRestrictedAttributes from '../rules/no-restricted-attributes.js';
+import noSlottedPopovers from '../rules/no-slotted-popovers.js';
 import noDeprecatedSlots from '../rules/no-deprecated-slots.js';
 import noMissingSlottedElements from '../rules/no-missing-slotted-elements.js';
 import noMissingControlLabel from '../rules/no-missing-control-label.js';
@@ -29,6 +30,7 @@ import noUnknownCssVariable from '../rules/no-unknown-css-variable.js';
 import noRestrictedPageSizing from '../rules/no-restricted-page-sizing.js';
 import noNestedContainerTypes from '../rules/no-nested-container-types.js';
 import noUnstyledTypography from '../rules/no-unstyled-typography.js';
+import noTailwindClasses from '../rules/no-tailwind-classes.js';
 
 const source = ['src/**/*.html', 'src/**/*.js', 'src/**/*.ts', 'src/**/*.tsx'];
 
@@ -71,6 +73,7 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-missing-popover-trigger': noMissingPopoverTrigger,
         'no-restricted-attributes': noRestrictedAttributes,
         'no-restricted-page-sizing': noRestrictedPageSizing,
+        'no-slotted-popovers': noSlottedPopovers,
         'no-unexpected-global-attribute-value': noUnexpectedGlobalAttributeValue,
         'no-unexpected-style-customization': noUnexpectedStyleCustomization,
         'no-unexpected-slot-value': noUnexpectedSlotValue,
@@ -82,13 +85,13 @@ export const elementsHtmlConfig: Linter.Config = {
         'no-missing-gap-space': noMissingGapSpace,
         'no-unknown-css-variable': noUnknownCssVariable,
         'no-nested-container-types': noNestedContainerTypes,
-        'no-unstyled-typography': noUnstyledTypography
+        'no-unstyled-typography': noUnstyledTypography,
+        'no-tailwind-classes': noTailwindClasses
       }
     }
   },
   rules: {
     '@nvidia-elements/lint/no-complex-popovers': ['error'],
-    '@nvidia-elements/lint/no-unexpected-style-customization': ['off'],
     '@nvidia-elements/lint/no-deprecated-tags': ['error'],
     '@nvidia-elements/lint/no-deprecated-attributes': ['error'],
     '@nvidia-elements/lint/no-deprecated-icon-names': ['error'],
@@ -102,6 +105,7 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-missing-popover-trigger': ['error'],
     '@nvidia-elements/lint/no-restricted-attributes': ['error'],
     '@nvidia-elements/lint/no-restricted-page-sizing': ['error'],
+    '@nvidia-elements/lint/no-slotted-popovers': ['error'],
     '@nvidia-elements/lint/no-unexpected-global-attribute-value': ['error'],
     '@nvidia-elements/lint/no-unexpected-slot-value': ['error'],
     '@nvidia-elements/lint/no-unknown-tags': ['error'],
@@ -109,9 +113,11 @@ export const elementsHtmlConfig: Linter.Config = {
     '@nvidia-elements/lint/no-unexpected-input-type': ['error'],
     '@nvidia-elements/lint/no-invalid-event-listeners': ['error'],
     '@nvidia-elements/lint/no-invalid-invoker-triggers': ['error'],
-    '@nvidia-elements/lint/no-missing-gap-space': ['off'],
     '@nvidia-elements/lint/no-unknown-css-variable': ['error'],
     '@nvidia-elements/lint/no-nested-container-types': ['error'],
-    '@nvidia-elements/lint/no-unstyled-typography': ['error']
+    '@nvidia-elements/lint/no-unstyled-typography': ['error'],
+    '@nvidia-elements/lint/no-tailwind-classes': ['error'],
+    '@nvidia-elements/lint/no-unexpected-style-customization': ['off'],
+    '@nvidia-elements/lint/no-missing-gap-space': ['off']
   }
 };
