@@ -75,10 +75,10 @@ catalog:
   '@types/node': 24.9.1
   '@types/react': 19.2.14
   '@types/react-dom': 19.2.3
-  '@vitest/browser': 4.1.4
-  '@vitest/browser-playwright': 4.1.4
-  '@vitest/coverage-istanbul': 4.1.4
-  '@vitest/mocker': 4.1.4
+  '@vitest/browser': 4.1.5
+  '@vitest/browser-playwright': 4.1.5
+  '@vitest/coverage-istanbul': 4.1.5
+  '@vitest/mocker': 4.1.5
   axe-core: 4.11.0
   eslint: 10.2.0
   glob: 13.0.6
@@ -101,9 +101,9 @@ catalog:
   ts-morph: 26.0.0
   typescript: 6.0.2
   typescript-eslint: 8.58.1
-  vite: 8.0.6
-  vite-plugin-dts: 4.5.4
-  vitest: 4.1.4
+  vite: 8.0.10
+  vite-plugin-dts: 5.0.0
+  vitest: 4.1.5
   zod: 4.3.6
 
 ignorePatchFailures: false
