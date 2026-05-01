@@ -341,7 +341,7 @@ importers:
   projects/code:
     dependencies:
       '@nvidia-elements/themes':
-        specifier: workspace:^
+        specifier: workspace:>=0.0.0 <1.0.0
         version: link:../themes
       highlight.js:
         specifier: catalog:publish
@@ -411,7 +411,7 @@ importers:
         specifier: workspace:^
         version: link:../forms
       '@nvidia-elements/themes':
-        specifier: workspace:^
+        specifier: workspace:>=0.0.0 <1.0.0
         version: link:../themes
       lit:
         specifier: catalog:publish
@@ -906,7 +906,7 @@ importers:
         specifier: 'catalog:'
         version: 0.59.0
       '@nvidia-elements/themes':
-        specifier: workspace:^
+        specifier: workspace:>=0.0.0 <1.0.0
         version: link:../themes
       minisearch:
         specifier: catalog:publish
@@ -946,10 +946,10 @@ importers:
   projects/markdown:
     dependencies:
       '@nvidia-elements/core':
-        specifier: workspace:^
+        specifier: workspace:>=0.0.0 <1.0.0
         version: link:../core
       '@nvidia-elements/themes':
-        specifier: workspace:^
+        specifier: workspace:>=0.0.0 <1.0.0
         version: link:../themes
       lit:
         specifier: catalog:publish
@@ -1010,10 +1010,10 @@ importers:
   projects/media:
     dependencies:
       '@nvidia-elements/core':
-        specifier: workspace:^
+        specifier: workspace:>=0.0.0 <1.0.0
         version: link:../core
       '@nvidia-elements/themes':
-        specifier: workspace:^
+        specifier: workspace:>=0.0.0 <1.0.0
         version: link:../themes
       lit:
         specifier: catalog:publish
