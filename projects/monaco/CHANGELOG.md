@@ -1,3 +1,7 @@
+## <small>0.0.9 (2026-05-01)</small>
+
+* fix(monaco): address timing issue in validation patch ([1ac01cb](https://github.com/NVIDIA/elements/commit/1ac01cb))
+
 ## <small>0.0.8 (2026-05-01)</small>
 
 * chore(ci): add code rabbit config ([cf98be6](https://github.com/NVIDIA/elements/commit/cf98be6))
