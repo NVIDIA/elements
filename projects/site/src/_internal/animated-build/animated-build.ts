@@ -228,7 +228,7 @@ export class AnimatedBuild extends LitElement {
           <div id="page-wrapper" class="layer">
             <nve-page class="layer">
               <nve-page-header slot="header" class="layer" style="--delay: 0.7s">
-                <nve-logo slot="prefix" size="sm"></nve-logo>
+                <nve-logo slot="prefix" size="sm">NV</nve-logo>
                 <h2 nve-text="heading" slot="prefix">Scenario Management</h2>
                 <nve-button container="flat">Scenario Catalog</nve-button>
                 <nve-button selected container="flat">Browse Clips</nve-button>

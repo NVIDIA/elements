@@ -216,7 +216,7 @@ export const ResponsiveCombined = {
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide" color="brand-green">NV</nve-logo>
               <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
@@ -226,7 +226,7 @@ export const ResponsiveCombined = {
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide">NV</nve-logo>
               <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
@@ -236,7 +236,7 @@ export const ResponsiveCombined = {
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide">NV</nve-logo>
               <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
@@ -246,7 +246,7 @@ export const ResponsiveCombined = {
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide">NV</nve-logo>
               <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
@@ -256,7 +256,7 @@ export const ResponsiveCombined = {
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide">NV</nve-logo>
               <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
@@ -266,7 +266,7 @@ export const ResponsiveCombined = {
               <h3 nve-text="heading lg">Responsive Card Example</h3>
             </nve-card-header>
             <nve-card-content>
-              <nve-logo size="lg" nve-display="&sm|hide"></nve-logo>
+              <nve-logo size="lg" nve-display="&sm|hide">NV</nve-logo>
               <p nve-text="body">This card demonstrates combining container and viewport queries.</p>
             </nve-card-content>
           </nve-card>
