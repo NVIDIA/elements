@@ -1,3 +1,24 @@
+## <small>0.0.12 (2026-05-01)</small>
+
+* chore(ci): coder rabbit and sitemap verification ([97f3aca](https://github.com/NVIDIA/elements/commit/97f3aca))
+* chore(ci): lint cleanup ([9b5509f](https://github.com/NVIDIA/elements/commit/9b5509f))
+* chore(ci): update lock ([0db8ccf](https://github.com/NVIDIA/elements/commit/0db8ccf))
+* chore(deps): update dependabot configuration ([c16abb8](https://github.com/NVIDIA/elements/commit/c16abb8))
+* chore(docs): accept data grid vocabulary terms ([3de7ab9](https://github.com/NVIDIA/elements/commit/3de7ab9))
+* chore(docs): page content description metadata ([db85e92](https://github.com/NVIDIA/elements/commit/db85e92))
+* chore(media): dependency declaration ([ca01a81](https://github.com/NVIDIA/elements/commit/ca01a81))
+* chore(release): @nvidia-elements/lint-v0.1.2 [skip ci] ([e41977d](https://github.com/NVIDIA/elements/commit/e41977d))
+* chore(release): @nvidia-elements/lint-v0.2.0 [skip ci] ([87dd69e](https://github.com/NVIDIA/elements/commit/87dd69e))
+* chore(release): @nvidia-elements/styles-v0.0.8 [skip ci] ([4b7e50f](https://github.com/NVIDIA/elements/commit/4b7e50f))
+* fix(code): dependency declaration ([9840b7e](https://github.com/NVIDIA/elements/commit/9840b7e))
+* fix(core): dependency declaration ([db76b90](https://github.com/NVIDIA/elements/commit/db76b90))
+* fix(lint): dependency declaration ([8fb986e](https://github.com/NVIDIA/elements/commit/8fb986e))
+* fix(lint): unpinned and missing dependencies ([80616e7](https://github.com/NVIDIA/elements/commit/80616e7))
+* fix(markdown): dependency declaration ([4ef9807](https://github.com/NVIDIA/elements/commit/4ef9807))
+* fix(monaco): dependency declaration ([c0fa0ac](https://github.com/NVIDIA/elements/commit/c0fa0ac))
+* fix(styles): dependency declaration ([bdea9a8](https://github.com/NVIDIA/elements/commit/bdea9a8))
+* feat(lint): add rules to disallow slotted popovers and tailwind classes ([ad101dd](https://github.com/NVIDIA/elements/commit/ad101dd))
+
 ## <small>0.0.11 (2026-04-29)</small>
 
 * fix(cli): reduce context memory usage ([85e1ba3](https://github.com/NVIDIA/elements/commit/85e1ba3))
