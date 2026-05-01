@@ -65,7 +65,7 @@ export class ThemeGeneratorDemo extends LitElement {
     return html`
       <nve-page>
         <nve-page-header slot="header">
-          <nve-logo slot="prefix" size="sm"></nve-logo>
+          <nve-logo slot="prefix" size="sm">NV</nve-logo>
           <h2 nve-text="heading" slot="prefix">Infrastructure</h2>
           <nve-button selected container="flat">Link 1</nve-button>
           <nve-button container="flat">Link 2</nve-button>

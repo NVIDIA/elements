@@ -188,7 +188,7 @@ export const Complex = {
       </nve-menu-item>
       <nve-divider></nve-divider>
       <nve-menu-item>
-        <nve-logo size="sm"></nve-logo> All Apps
+        <nve-logo size="sm">NV</nve-logo> All Apps
       </nve-menu-item>
     </nve-menu>
   </nve-dropdown>
@@ -203,7 +203,7 @@ export const VerticalNavigationDrawer = {
   render: () => html`
   <nve-page>
     <nve-page-header>
-      <nve-logo slot="prefix" size="sm"></nve-logo>
+      <nve-logo slot="prefix" size="sm">NV</nve-logo>
       <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
     </nve-page-header>
     <main nve-layout="column gap:md pad:md">
@@ -234,7 +234,7 @@ export const VerticalNavigationPanel = {
   render: () => html`
 <nve-page>
   <nve-page-header>
-    <nve-logo slot="prefix" size="sm"></nve-logo>
+    <nve-logo slot="prefix" size="sm">NV</nve-logo>
     <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
   </nve-page-header>
   <nve-page-panel slot="left" expanded style="max-width:280px">

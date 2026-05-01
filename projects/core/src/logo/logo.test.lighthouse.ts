@@ -7,7 +7,7 @@ import { lighthouseRunner } from '@internals/vite';
 describe('logo lighthouse report', () => {
   test('logo should meet lighthouse benchmarks', async () => {
     const report = await lighthouseRunner.getReport('nve-logo', /* html */`
-      <nve-logo aria-label="logo"></nve-logo>
+      <nve-logo aria-label="logo">NV</nve-logo>
       <script type="module">
         import '@nvidia-elements/core/logo/define.js';
       </script>

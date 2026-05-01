@@ -14,7 +14,7 @@ describe(Logo.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-logo aria-label="logo"></nve-logo>
+      <nve-logo aria-label="logo" color="brand-green">NV</nve-logo>
     `);
     element = fixture.querySelector(Logo.metadata.tag);
     await elementIsStable(element);

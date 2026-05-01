@@ -14,7 +14,7 @@ export default {
  */
 export const Default = {
   render: () => html`
-  <nve-logo aria-label="NVIDIA"></nve-logo>
+  <nve-logo aria-label="NVIDIA">NV</nve-logo>
   `
 };
 
@@ -67,7 +67,7 @@ export const SlottedIcons = {
 export const Color = {
   render: () => html`
 <div nve-layout="row gap:xs align:wrap">
-  <nve-logo aria-label="NVIDIA"></nve-logo>
+  <nve-logo aria-label="NVIDIA">NV</nve-logo>
   <nve-logo color="red-cardinal" aria-label="red cardinal">Rc</nve-logo>
   <nve-logo color="gray-slate" aria-label="gray slate">Gs</nve-logo>
   <nve-logo color="gray-denim" aria-label="gray denim">Gd</nve-logo>
@@ -101,7 +101,7 @@ export const Color = {
 export const LightTheme = {
   render: () => html`
 <div nve-theme="root light" nve-layout="row gap:xs align:wrap pad:sm" style="background: var(--nve-sys-layer-container-background) !important;">
-  <nve-logo aria-label="NVIDIA"></nve-logo>
+  <nve-logo aria-label="NVIDIA">NV</nve-logo>
   <nve-logo color="red-cardinal" aria-label="red cardinal">Rc</nve-logo>
   <nve-logo color="gray-slate" aria-label="gray slate">Gs</nve-logo>
   <nve-logo color="gray-denim" aria-label="gray denim">Gd</nve-logo>
@@ -135,7 +135,7 @@ export const LightTheme = {
 export const DarkTheme = {
   render: () => html`
 <div nve-theme="root dark" nve-layout="row gap:xs align:wrap pad:sm">
-  <nve-logo aria-label="NVIDIA"></nve-logo>
+  <nve-logo aria-label="NVIDIA">NV</nve-logo>
   <nve-logo color="red-cardinal" aria-label="red cardinal">Rc</nve-logo>
   <nve-logo color="gray-slate" aria-label="gray slate">Gs</nve-logo>
   <nve-logo color="gray-denim" aria-label="gray denim">Gd</nve-logo>

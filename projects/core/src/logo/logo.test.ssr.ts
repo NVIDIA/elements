@@ -9,7 +9,7 @@ import '@nvidia-elements/core/logo/define.js';
 
 describe(Logo.metadata.tag, () => {
   it('should pass baseline ssr check', async () => {
-    const result = await ssrRunner.render(html`<nve-logo></nve-logo>`);
+    const result = await ssrRunner.render(html`<nve-logo>NV</nve-logo>`);
     expect(result.includes('shadowroot="open"')).toBe(true);
     expect(result.includes('nve-logo')).toBe(true);
   });
