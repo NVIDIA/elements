@@ -184,8 +184,8 @@
     "lit-html": "catalog:publish"
   },
   "peerDependencies": {
-    "@nvidia-elements/core": "workspace:^",
-    "@nvidia-elements/themes": "workspace:^"
+    "@nvidia-elements/core": "workspace:>=0.0.0 <1.0.0",
+    "@nvidia-elements/themes": "workspace:>=0.0.0 <1.0.0"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
