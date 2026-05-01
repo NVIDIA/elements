@@ -3,4 +3,42 @@ updates:
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
-      interval: 'daily'
+      interval: 'weekly'
+      day: 'monday'
+      time: '13:00'
+    open-pull-requests-limit: 5
+    versioning-strategy: 'increase-if-necessary'
+    commit-message:
+      prefix: 'chore(deps)'
+    groups:
+      lint:
+        patterns:
+          - 'eslint'
+          - '@eslint/*'
+          - 'typescript-eslint'
+          - '@html-eslint/*'
+      vite:
+        patterns:
+          - 'vite'
+          - '@vitejs/*'
+          - 'vite-plugin-*'
+          - 'vitest'
+          - '@vitest/*'
+      build:
+        patterns:
+          - 'esbuild'
+          - 'typescript'
+          - 'wireit'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '13:00'
+    commit-message:
+      prefix: 'chore(ci)'
+    groups:
+      github-actions:
+        patterns:
+          - '*'

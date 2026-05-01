@@ -18,6 +18,7 @@ export default {
       'always',
       [
         'ci',
+        'deps',
         'docs',
         'internals',
         'create',
