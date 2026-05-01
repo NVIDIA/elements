@@ -55,7 +55,7 @@
     "test:visual": "wireit"
   },
   "peerDependencies": {
-    "@nvidia-elements/themes": "workspace:^"
+    "@nvidia-elements/themes": "workspace:>=0.0.0 <1.0.0"
   },
   "devDependencies": {
     "@eslint/js": "catalog:",
