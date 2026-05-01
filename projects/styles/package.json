@@ -1,6 +1,6 @@
 {
   "name": "@nvidia-elements/styles",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "release": {
     "extends": "../../release.config.js"
   },
