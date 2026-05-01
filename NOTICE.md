@@ -50,6 +50,9 @@ This product includes the following bundled third-party software:
 - marked-terminal v7.3.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Mikael Brevik
 
+- minisearch v7.2.0 [MIT] (used by: @nvidia-elements/lint)
+  Copyright: Luca Ongaro
+
 - monaco-editor v0.55.1 [MIT] (used by: @nvidia-elements/monaco)
   Copyright: Microsoft Corporation
 
@@ -305,6 +308,7 @@ archiver v7.0.1 - Copyright Chris Talkington (http://christalkington.com/)
 markdown-it v14.1.1 - Copyright Unknown
 marked v18.0.0 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
+minisearch v7.2.0 - Copyright Luca Ongaro
 monaco-editor v0.55.1 - Copyright Microsoft Corporation
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 ora v9.3.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
