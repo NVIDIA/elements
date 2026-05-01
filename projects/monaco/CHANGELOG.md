@@ -1,3 +1,7 @@
+## <small>0.0.10 (2026-05-01)</small>
+
+* fix(monaco): patch monaco-editor broken paste action ([35f27ce](https://github.com/NVIDIA/elements/commit/35f27ce))
+
 ## <small>0.0.9 (2026-05-01)</small>
 
 * fix(monaco): address timing issue in validation patch ([1ac01cb](https://github.com/NVIDIA/elements/commit/1ac01cb))
