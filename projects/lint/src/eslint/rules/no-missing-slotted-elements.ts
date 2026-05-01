@@ -47,6 +47,9 @@ const REQUIRED_SLOTTED_ELEMENTS: Record<string, RequiredSlotConfig> = {
   'nve-file': {
     required: ['input[type="file"]']
   },
+  'nve-logo': {
+    requiresDefaultSlotContent: true
+  },
   'nve-password': {
     required: ['input[type="password"]']
   },
