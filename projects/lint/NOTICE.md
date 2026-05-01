@@ -20,6 +20,9 @@ This project includes the following bundled third-party software:
 - @html-eslint/parser v0.59.0 [MIT]
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
+- minisearch v7.2.0 [MIT]
+  Copyright: Luca Ongaro
+
 ==============================================================================
 Apache-2.0
 ==============================================================================
@@ -215,6 +218,7 @@ The following bundled components are provided under the MIT license:
 @eslint/js v10.0.1 - Copyright Unknown
 @html-eslint/eslint-plugin v0.59.0 - Copyright yeonjuan (https://github.com/yeonjuan)
 @html-eslint/parser v0.59.0 - Copyright yeonjuan (https://github.com/yeonjuan)
+minisearch v7.2.0 - Copyright Luca Ongaro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
