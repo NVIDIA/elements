@@ -15,7 +15,7 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "vue": "3.5.32"
+    "vue": "3.5.33"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
