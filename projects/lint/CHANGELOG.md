@@ -1,3 +1,17 @@
+## <small>0.2.1 (2026-05-01)</small>
+
+* chore(ci): update lock ([0db8ccf](https://github.com/NVIDIA/elements/commit/0db8ccf))
+* chore(deps): update dependabot configuration ([c16abb8](https://github.com/NVIDIA/elements/commit/c16abb8))
+* chore(media): dependency declaration ([ca01a81](https://github.com/NVIDIA/elements/commit/ca01a81))
+* chore(release): @nvidia-elements/core-v0.0.12 [skip ci] ([4f0685c](https://github.com/NVIDIA/elements/commit/4f0685c))
+* chore(release): @nvidia-elements/styles-v0.0.8 [skip ci] ([4b7e50f](https://github.com/NVIDIA/elements/commit/4b7e50f))
+* fix(code): dependency declaration ([9840b7e](https://github.com/NVIDIA/elements/commit/9840b7e))
+* fix(core): dependency declaration ([db76b90](https://github.com/NVIDIA/elements/commit/db76b90))
+* fix(lint): dependency declaration ([8fb986e](https://github.com/NVIDIA/elements/commit/8fb986e))
+* fix(markdown): dependency declaration ([4ef9807](https://github.com/NVIDIA/elements/commit/4ef9807))
+* fix(monaco): dependency declaration ([c0fa0ac](https://github.com/NVIDIA/elements/commit/c0fa0ac))
+* fix(styles): dependency declaration ([bdea9a8](https://github.com/NVIDIA/elements/commit/bdea9a8))
+
 ## 0.2.0 (2026-04-30)
 
 * feat(lint): add rules to disallow slotted popovers and tailwind classes ([ad101dd](https://github.com/NVIDIA/elements/commit/ad101dd))
