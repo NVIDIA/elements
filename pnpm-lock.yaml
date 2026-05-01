@@ -179,7 +179,7 @@ overrides:
 
 patchedDependencies:
   monaco-editor:
-    hash: a349c13b5a476582889e3c97e001bd21082ce0d9e3b2ac055f829459de60871b
+    hash: f59469d279a32982eee52771fe02497c25d5db418fbf48378bbc1cf96a4479e5
     path: patches/monaco-editor.patch
 
 importers:
@@ -1130,7 +1130,7 @@ importers:
         version: 10.2.0(jiti@2.6.1)
       monaco-editor:
         specifier: 0.55.1
-        version: 0.55.1(patch_hash=a349c13b5a476582889e3c97e001bd21082ce0d9e3b2ac055f829459de60871b)
+        version: 0.55.1(patch_hash=f59469d279a32982eee52771fe02497c25d5db418fbf48378bbc1cf96a4479e5)
       postcss:
         specifier: 'catalog:'
         version: 8.5.9
@@ -17976,7 +17976,7 @@ snapshots:
       magicast: 0.5.2
       obug: 2.1.1
       tinyrainbow: 3.1.0
-      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@25.6.0)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
+      vitest: 4.1.4(@opentelemetry/api@1.9.1)(@types/node@24.9.1)(@vitest/browser-playwright@4.1.4)(@vitest/coverage-istanbul@4.1.4)(jsdom@27.1.0)(vite@8.0.6(@types/node@24.9.1)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.10))(terser@5.46.1)(yaml@2.8.3))
     transitivePeerDependencies:
       - supports-color
 
@@ -22276,7 +22276,7 @@ snapshots:
 
   module-details-from-path@1.0.4: {}
 
-  monaco-editor@0.55.1(patch_hash=a349c13b5a476582889e3c97e001bd21082ce0d9e3b2ac055f829459de60871b):
+  monaco-editor@0.55.1(patch_hash=f59469d279a32982eee52771fe02497c25d5db418fbf48378bbc1cf96a4479e5):
     dependencies:
       dompurify: 3.2.7
       marked: 14.0.0

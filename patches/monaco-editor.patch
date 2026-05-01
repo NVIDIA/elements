@@ -845,23 +845,36 @@ index 9490e25363fb401bfc0dae094012675c1e8a5ba9..adfa224edb41f454732cb16ee66b2998
          setTheme: setTheme,
          remeasureFonts: remeasureFonts,
 diff --git a/esm/vs/language/common/lspLanguageFeatures.js b/esm/vs/language/common/lspLanguageFeatures.js
-index 12a49bd4ac441dcbf3db21a25fb15614294f17d8..85016213666ec595890f20192353a922df09a2cf 100644
+index 12a49bd4ac441dcbf3db21a25fb15614294f17d8..b5087cf444492a8bcabed2a748efcb9561175cde 100644
 --- a/esm/vs/language/common/lspLanguageFeatures.js
 +++ b/esm/vs/language/common/lspLanguageFeatures.js
-@@ -138,8 +138,11 @@ class DiagnosticsAdapter {
+@@ -133,13 +133,23 @@ class DiagnosticsAdapter {
+     this._disposables.length = 0;
+   }
+   _doValidate(resource, languageId) {
++    // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++    const model = editor.getModel(resource);
++    if (!model) {
++      return;
++    }
++    const modelVersionId = model.getVersionId();
+     this._worker(resource).then((worker) => {
+       return worker.doValidation(resource.toString());
      }).then((diagnostics) => {
++      // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
++      // let model = editor.getModel(resource);
        const markers = diagnostics.map((d) => toDiagnostics(resource, d));
-       let model = editor.getModel(resource);
+-      let model = editor.getModel(resource);
 -      if (model && model.getLanguageId() === languageId) {
-+      // PATCH: Gracefully handle the case where the model was disposed during async validation.
-+      if (model && !model.isDisposed() && model.getLanguageId() === languageId) {
++      // PATCH: Gracefully handle the case where the model changed or was disposed during async validation.
++      if (model && !model.isDisposed() && model.getLanguageId() === languageId && model.getVersionId() === modelVersionId) {
          editor.setModelMarkers(model, languageId, markers);
 +        // PATCH: Enable workers to communicate that syntax validation is complete for a specific model version
-+        editor.setModelVersionValidated(model, model.getVersionId());
++        editor.setModelVersionValidated(model, modelVersionId);
        }
      }).then(void 0, (err) => {
        console.error(err);
-@@ -482,26 +485,11 @@ class DocumentSymbolAdapter {
+@@ -482,26 +492,11 @@ class DocumentSymbolAdapter {
        if (!items) {
          return;
        }
