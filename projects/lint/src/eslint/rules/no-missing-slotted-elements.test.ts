@@ -55,6 +55,10 @@ describe('noMissingSlottedElements', () => {
         `<nve-button>
           button
         </nve-button>`,
+        `<nve-logo>
+          <img src="./logo.svg" alt="NVIDIA" />
+        </nve-logo>`,
+        `<nve-logo>NV</nve-logo>`,
         `<nve-input>\${}</nve-input>`,
         `<nve-input>{{ }}</nve-input>`,
         `<nve-input>{% %}</nve-input>`,
@@ -134,6 +138,22 @@ describe('noMissingSlottedElements', () => {
         {
           code: `<nve-tree-node>   </nve-tree-node>`,
           errors: [{ messageId: 'missing-default-slot-content', data: { tagName: 'nve-tree-node' } }]
+        }
+      ]
+    });
+  });
+
+  it('should report logos missing default slot content', () => {
+    tester.run('logos missing default slot content', rule, {
+      valid: [],
+      invalid: [
+        {
+          code: `<nve-logo></nve-logo>`,
+          errors: [{ messageId: 'missing-default-slot-content', data: { tagName: 'nve-logo' } }]
+        },
+        {
+          code: `<nve-logo><span slot="prefix">NV</span></nve-logo>`,
+          errors: [{ messageId: 'missing-default-slot-content', data: { tagName: 'nve-logo' } }]
         }
       ]
     });

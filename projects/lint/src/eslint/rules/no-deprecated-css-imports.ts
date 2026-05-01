@@ -5,11 +5,23 @@ import type { Rule } from 'eslint';
 import type { CssAtRuleNode } from '../rule-types.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
-const deprecatedImports: Record<string, string> = {
-  '@nvidia-elements/core/index.css': `@import '@nvidia-elements/themes/fonts/inter.css';\n@import '@nvidia-elements/themes/index.css';\n@import '@nvidia-elements/themes/dark.css';\n@import '@nvidia-elements/styles/typography.css';\n@import '@nvidia-elements/styles/layout.css';`,
+const themeAndStyleImports = `@import '@nvidia-elements/themes/fonts/inter.css';
+@import '@nvidia-elements/themes/index.css';
+@import '@nvidia-elements/themes/high-contrast.css';
+@import '@nvidia-elements/themes/reduced-motion.css';
+@import '@nvidia-elements/themes/compact.css';
+@import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/themes/debug.css';
+@import '@nvidia-elements/styles/typography.css';
+@import '@nvidia-elements/styles/layout.css';
+@import '@nvidia-elements/styles/view-transitions.css';`;
+
+export const deprecatedImports: Record<string, string> = {
+  '@nvidia-elements/core/index.css': themeAndStyleImports,
   '@nvidia-elements/core/css/module.layout.css': `@import '@nvidia-elements/styles/layout.css';`,
   '@nvidia-elements/core/css/module.typography.css': `@import '@nvidia-elements/styles/typography.css';`,
-  '@maglev/elements/index.css': `@import '@nvidia-elements/themes/fonts/inter.css';\n@import '@nvidia-elements/themes/index.css';\n@import '@nvidia-elements/themes/dark.css';\n@import '@nvidia-elements/styles/typography.css';\n@import '@nvidia-elements/styles/layout.css';`,
+  '@maglev/elements/index.css': themeAndStyleImports,
+  '@maglev/elements/inter.css': `@import '@nvidia-elements/themes/fonts/inter.css';`,
   '@maglev/elements/css/module.layout.css': `@import '@nvidia-elements/styles/layout.css';`,
   '@maglev/elements/css/module.typography.css': `@import '@nvidia-elements/styles/typography.css';`
 };
