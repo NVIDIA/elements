@@ -148,6 +148,7 @@ export const litConfig = [
             'dropdown-group',
             'progressive-filter-chip',
             'format-datetime',
+            'format-number',
             'format-relative-time'
           ]
         }

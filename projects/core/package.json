@@ -381,6 +381,18 @@
       "types": "./dist/format-datetime/define.d.ts",
       "default": "./dist/format-datetime/define.js"
     },
+    "./format-number": {
+      "types": "./dist/format-number/index.d.ts",
+      "default": "./dist/format-number/index.js"
+    },
+    "./format-number/index.js": {
+      "types": "./dist/format-number/index.d.ts",
+      "default": "./dist/format-number/index.js"
+    },
+    "./format-number/define.js": {
+      "types": "./dist/format-number/define.d.ts",
+      "default": "./dist/format-number/define.js"
+    },
     "./format-relative-time": {
       "types": "./dist/format-relative-time/index.d.ts",
       "default": "./dist/format-relative-time/index.js"

@@ -30,7 +30,11 @@ export default [
     }
   },
   {
-    files: ['src/format-datetime/format-datetime.ts', 'src/format-relative-time/format-relative-time.ts'],
+    files: [
+      'src/format-datetime/format-datetime.ts',
+      'src/format-number/format-number.ts',
+      'src/format-relative-time/format-relative-time.ts'
+    ],
     rules: {
       'local/require-test-completeness': ['error', { skipSuffixes: ['.test.visual.ts'] }]
     }
