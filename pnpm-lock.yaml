@@ -70,8 +70,8 @@ catalogs:
       specifier: 4.1.4
       version: 4.1.4
     axe-core:
-      specifier: 4.11.0
-      version: 4.11.0
+      specifier: 4.11.4
+      version: 4.11.4
     esbuild:
       specifier: 0.27.4
       version: 0.27.4
@@ -382,7 +382,7 @@ importers:
         version: 4.1.4(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
-        version: 4.11.0
+        version: 4.11.4
       eslint:
         specifier: 10.2.0
         version: 10.2.0(jiti@2.6.1)
@@ -452,7 +452,7 @@ importers:
         version: 4.1.4(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
-        version: 4.11.0
+        version: 4.11.4
       eslint:
         specifier: 10.2.0
         version: 10.2.0(jiti@2.6.1)
@@ -556,7 +556,7 @@ importers:
         version: 4.1.4(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
-        version: 4.11.0
+        version: 4.11.4
       eslint:
         specifier: 10.2.0
         version: 10.2.0(jiti@2.6.1)
@@ -725,7 +725,7 @@ importers:
     optionalDependencies:
       axe-core:
         specifier: 'catalog:'
-        version: 4.11.0
+        version: 4.11.4
 
   projects/internals/tools:
     dependencies:
@@ -825,7 +825,7 @@ importers:
         version: 4.1.4(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
-        version: 4.11.0
+        version: 4.11.4
       custom-element-jsx-integration:
         specifier: 1.6.0
         version: 1.6.0(prettier@3.4.2)
@@ -984,7 +984,7 @@ importers:
         version: 4.1.4(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
-        version: 4.11.0
+        version: 4.11.4
       eslint:
         specifier: 10.2.0
         version: 10.2.0(jiti@2.6.1)
@@ -1045,7 +1045,7 @@ importers:
         version: 4.1.4(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
-        version: 4.11.0
+        version: 4.11.4
       eslint:
         specifier: 10.2.0
         version: 10.2.0(jiti@2.6.1)
@@ -1115,7 +1115,7 @@ importers:
         version: 4.1.4(vitest@4.1.4)
       axe-core:
         specifier: 'catalog:'
-        version: 4.11.0
+        version: 4.11.4
       colorjs.io:
         specifier: 0.5.2
         version: 0.5.2
@@ -6980,12 +6980,12 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  axe-core@4.11.0:
-    resolution: {integrity: sha512-ilYanEU8vxxBexpJd8cWM4ElSQq4QctCLKih0TSfjIfCQTeyH/6zVrmIJfLPrKTKJRbiG+cfnZbQIjAlJmF1jQ==}
-    engines: {node: '>=4'}
-
   axe-core@4.11.3:
     resolution: {integrity: sha512-zBQouZixDTbo3jMGqHKyePxYxr1e5W8UdTmBQ7sNtaA9M2bE32daxxPLS/jojhKOHxQ7LWwPjfiwf/fhaJWzlg==}
+    engines: {node: '>=4'}
+
+  axe-core@4.11.4:
+    resolution: {integrity: sha512-KunSNx+TVpkAw/6ULfhnx+HWRecjqZGTOyquAoWHYLRSdK1tB5Ihce1ZW+UY3fj33bYAFWPu7W/GRSmmrCGuxA==}
     engines: {node: '>=4'}
 
   axobject-query@4.1.0:
@@ -18760,9 +18760,9 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.1.0
 
-  axe-core@4.11.0: {}
-
   axe-core@4.11.3: {}
+
+  axe-core@4.11.4: {}
 
   axobject-query@4.1.0: {}
 
@@ -21678,7 +21678,7 @@ snapshots:
     dependencies:
       '@paulirish/trace_engine': 0.0.61
       '@sentry/node': 9.47.1
-      axe-core: 4.11.3
+      axe-core: 4.11.4
       chrome-launcher: 1.2.1
       configstore: 7.1.0
       csp_evaluator: 1.1.5
