@@ -61,11 +61,11 @@ catalog:
   '@11ty/eleventy-plugin-syntaxhighlight': 5.0.2
   '@11ty/eleventy-plugin-vite': 7.0.0
   '@custom-elements-manifest/analyzer': 0.11.0
-  '@eslint/css': 1.1.0
+  '@eslint/css': 1.2.0
   '@eslint/js': 10.0.1
   '@eslint/json': 1.2.0
-  '@html-eslint/eslint-plugin': 0.59.0
-  '@html-eslint/parser': 0.59.0
+  '@html-eslint/eslint-plugin': 0.60.0
+  '@html-eslint/parser': 0.60.0
   '@lit-labs/eleventy-plugin-lit': 1.0.6
   '@lit-labs/ssr': 4.0.0
   '@lit-labs/ssr-client': 1.1.8
@@ -80,7 +80,7 @@ catalog:
   '@vitest/coverage-istanbul': 4.1.4
   '@vitest/mocker': 4.1.4
   axe-core: 4.11.0
-  eslint: 10.2.0
+  eslint: 10.3.0
   glob: 13.0.6
   highlight.js: 11.11.1
   lighthouse: 13.0.3
@@ -100,7 +100,7 @@ catalog:
   stylelint-config-standard: 40.0.0
   ts-morph: 26.0.0
   typescript: 6.0.2
-  typescript-eslint: 8.58.1
+  typescript-eslint: 8.59.1
   vite: 8.0.6
   vite-plugin-dts: 4.5.4
   vitest: 4.1.4
