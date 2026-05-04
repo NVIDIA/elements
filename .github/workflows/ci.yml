@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           run_install: false
       - uses: actions/setup-node@v6
@@ -78,7 +78,7 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           run_install: false
       - uses: actions/setup-node@v6
@@ -115,7 +115,7 @@ jobs:
           # semantic-release pushes with — otherwise the default GITHUB_TOKEN's
           # http.extraheader overrides @semantic-release/git's push auth.
           token: ${{secrets.RELEASE_TOKEN}}
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           run_install: false
       - uses: actions/setup-node@v6
