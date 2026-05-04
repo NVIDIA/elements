@@ -8,7 +8,7 @@
 
 <div nve-layout="column gap:lg pad-top:lg">
   <h1 nve-text="display sm">Elements</h1>
-  <h2 nve-text="heading lg">The Design Language for AI/ML Factories Building at the Speed of Light</h2>
+  <h2 nve-text="heading">The Design Language for AI/ML Factories, Robotics, and Autonomous Vehicles</h2>
 </div>
 
 <nve-divider></nve-divider>
@@ -55,7 +55,7 @@ import '@nvidia-elements/core/button/define.js';
 
 {% svg-logos %}
 
-<section nve-layout="row gap:sm align:center align:wrap pad-x:lg">
+<section nve-layout="row gap:sm align:center align:wrap pad-x:md">
   <nve-button>
     <a href="./docs/integrations/installation/"><nve-icon name="gear"></nve-icon> Installation</a>
   </nve-button>
@@ -63,10 +63,13 @@ import '@nvidia-elements/core/button/define.js';
     <a href="docs/mcp/"><svg width="18" height="18"><use href="#cursor-svg"></use></svg> Add to Cursor</a>
   </nve-button>
   <nve-button>
+    <a href="docs/mcp/"><svg width="18" height="18"><use href="#codex-svg"></use></svg> Add to Codex</a>
+  </nve-button>
+  <nve-button>
     <a href="docs/mcp/"><svg width="18" height="18"><use href="#claude-svg"></use></svg> Add to Claude</a>
   </nve-button>
   <nve-button>
-    <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank"><nve-icon name="fork"></nve-icon> Repo</a>
+    <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank"><nve-icon name="fork"></nve-icon> GitHub</a>
   </nve-button>
   <nve-button>
     <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style="--color: var(--nve-sys-accent-primary-background)"></nve-icon> npm Package</a>
