@@ -186,7 +186,7 @@
     "axe-core": "catalog:",
     "colorjs.io": "0.5.2",
     "dts-bundle-generator": "9.5.1",
-    "esbuild": "0.27.4",
+    "esbuild": "0.28.0",
     "eslint": "catalog:",
     "lit": "catalog:",
     "lit-html": "catalog:",
