@@ -6,6 +6,12 @@
 }
 ---
 
+<style scoped>
+  h3[nve-text*='mkd'] {
+    padding-block-start: var(--nve-ref-space-xl);
+  }
+</style>
+
 # {{ title }}
 
 This guide covers migrating from the internal `@nve/*` packages to the new open source `@nvidia-elements/*` packages.
@@ -13,8 +19,6 @@ This guide covers migrating from the internal `@nve/*` packages to the new open 
 ## Overview
 
 The Elements Design System is now hosted and developed in a public GitHub repository. Packages are now published to the public npm registry under the `@nvidia-elements` scope. The component APIs, tag names, and theming system remain the same. The primary changes are package names, import paths, and registry configuration.
-
-## Package Name Changes
 
 | Internal Package     | New Package                 |
 | -------------------- | --------------------------- |
@@ -29,8 +33,6 @@ The Elements Design System is now hosted and developed in a public GitHub reposi
 | `@nve-labs/markdown` | `@nvidia-elements/markdown` |
 | `@nve-labs/media`    | `@nvidia-elements/media`    |
 | `@nve-labs/lint`     | `@nvidia-elements/lint`     |
-
-Note: `@nve/elements` is now `@nvidia-elements/core`, not `@nvidia-elements/elements`.
 
 ## Migration Steps
 
@@ -71,92 +73,95 @@ Replace import paths throughout your source code:
 + import '@nvidia-elements/themes/dist/index.css';
 ```
 
-### 4. Install Updated Packages
-
-```shell
-# pnpm
-pnpm install
-
-# npm
-npm install
-```
-
-### 5. Verify
-
-Run your project's build and tests to confirm everything resolves correctly:
-
-```shell
-pnpm run build
-pnpm run test
-```
-
-## API Changes
-
-`@nvidia-elements/core` no longer includes the following internal-only or deprecated pre-1.0 Maglev APIs, and the public packages omit them:
-
-| API                                | Change                                                                                                                               |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `@nvidia-elements/core/app-header` | (pre-maglev) replaced by `@nvidia-elements/core/page-header`                                                                         |
-| `@nvidia-elements/core/css/*`      | (pre-maglev) replaced by `@nvidia-elements/styles`                                                                                   |
-| `@nvidia-elements/core/index.css`  | (pre-maglev) replaced by `@nvidia-elements/styles`                                                                                   |
-| `@nvidia-elements/core/logo`       | The logo component no longer includes the NVIDIA SVG logo; consumers must provide their own SVG as child content in the default slot |
-
-All prior Maglev based conventions and prefixes are now removed.
-
-## What Stays the Same
-
-- **Component tag prefix**: All components continue to use the `nve-` prefix (`<nve-button>`, `<nve-dialog>`, etc.)
-- **CSS custom properties**: Theme tokens and component CSS custom properties keep the same names (`--nve-*`)
-- **Component APIs**: Properties, attributes, events, slots, and CSS parts remain the same
-- **Theme files**: Same theme names and token structure
-
-## Deprecations
+## Deprecations & Removals
 
 The following are the active deprecations. Each next major release removes the prior deprecations. Read more about the <a nve-text="link mkd" href="docs/about/support/#versioning">versioning and deprecation cycle policy</a>.
 
-### @nvidia-elements 0.x
+### Logo <nve-badge status="danger">removed</nve-badge>
 
-TBD
+The `nve-logo` component no longer includes the NVIDIA SVG logo; consumers must provide their own SVG as child content in the default slot.
 
-### @nve/testing <nve-badge status="warning">deprecated</nve-badge>
+{% before-after %}
 
-The custom test utilities are now deprecated.
+```html
+<nve-logo aria-label="NVIDIA"></nve-logo>
+```
 
-### @nve/elements
+```html
+<nve-logo>
+  <img src="./logo.svg" alt="NVIDIA" />
+</nve-logo>
+```
 
-#### Scoped Tags <nve-badge status="warning">deprecated</nve-badge>
+{% endbefore-after %}
 
-Avoid `@nve/elements/scoped`. Instead, consuming applications define their own tag name and leverage the `@lit-labs/scoped-registry-mixin` package directly.
-
-#### Popover Behavior Triggers <nve-badge status="warning">deprecated</nve-badge>
+### Popover Behavior Triggers <nve-badge status="warning">deprecated</nve-badge>
 
 Before native HTML popovers, popovers required `behaviorTrigger` or `behavior-trigger` for stateful popovers. The native [HTML popover API](https://developer.mozilla.org/en-US/docs/Web/API/Popover_API) replaces this approach.
 
-<nve-alert status="danger">Before:</nve-alert>
+{% before-after %}
 
 ```html
 <nve-tooltip trigger="tooltip-btn" behavior-trigger position="top" hidden>hello there</nve-tooltip>
 <nve-button id="tooltip-btn">tooltip</nve-button>
 ```
 
-<nve-alert status="success">After:</nve-alert>
-
 ```html
 <nve-tooltip id="my-tooltip" position="top">hello there</nve-tooltip>
 <nve-button popovertarget="my-tooltip">tooltip</nve-button>
 ```
 
-### @maglev/elements
+{% endbefore-after %}
 
-#### Scope <nve-badge status="warning">deprecated</nve-badge>
+### Layout Full <nve-badge status="warning">deprecated</nve-badge>
+
+The `grow` property now uses `full` instead to avoid confusion with flexbox grow behavior.
+
+{% before-after %}
+
+```html
+<div nve-layout="grow"></div>
+```
+
+```html
+<div nve-layout="full"></div>
+```
+
+{% endbefore-after %}
+
+### Typography "eyebrow" <nve-badge status="warning">deprecated</nve-badge>
+
+The typography `eyebrow` utility no longer exists, to align with the standardized semantic names and size options available.
+
+{% before-after %}
+
+```html
+<div nve-text="eyebrow"></div>
+```
+
+```html
+<div nve-text="label sm"></div>
+```
+
+{% endbefore-after %}
+
+### @nve/testing <nve-badge status="danger">removed</nve-badge>
+
+The custom test utilities are no longer supported in the public scope.
+
+### Scoped Tags <nve-badge status="danger">removed</nve-badge>
+
+Avoid `@nve/elements/scoped`. Instead, consuming applications define their own tag name and leverage the `@lit-labs/scoped-registry-mixin` package directly.
+
+### Maglev - CSS Entrypoints <nve-badge status="danger">removed</nve-badge>
+
+{% before-after %}
 
 ```css
 /* before */
 @import '@maglev/elements/index.css';
 @import '@maglev/elements/inter.css';
 ```
-
-<nve-alert status="success">After:</nve-alert>
 
 ```css
 @import '@nvidia-elements/themes/fonts/inter.css';
@@ -171,9 +176,13 @@ Before native HTML popovers, popovers required `behaviorTrigger` or `behavior-tr
 @import '@nvidia-elements/styles/view-transitions.css';
 ```
 
+{% endbefore-after %}
+
+### Maglev - CSS Prefix <nve-badge status="danger">removed</nve-badge>
+
 Update any CSS Custom property usage
 
-<nve-alert status="danger">Before:</nve-alert>
+{% before-after %}
 
 ```css
 .selector {
@@ -181,51 +190,79 @@ Update any CSS Custom property usage
 }
 ```
 
-<nve-alert status="success">After:</nve-alert>
-
 ```css
 .selector {
   color: var(--nve-ref-color-brand-green-200);
 }
 ```
 
+{% endbefore-after %}
+
+### Maglev - Attribute Prefix <nve-badge status="danger">removed</nve-badge>
+
 Update style utility attributes
 
-<nve-alert status="danger">Before:</nve-alert>
+{% before-after %}
 
-````html
+```html
 <html mlv-theme="...">
 <div mlv-layout="...">
 <p mlv-text="...">
 ```
 
-<nve-alert status="success">After:</nve-alert>
-
 ```html
 <html nve-theme="...">
 <div nve-layout="...">
 <p nve-text="...">
-````
+```
+
+{% endbefore-after %}
+
+### Maglev - HTML Prefix <nve-badge status="danger">removed</nve-badge>
 
 Update HTML elements
 
-<nve-alert status="danger">Before:</nve-alert>
+{% before-after %}
 
 ```html
 <mlv-button>...</mlv-button>
 ```
 
-<nve-alert status="success">After:</nve-alert>
-
 ```html
 <nve-button>...</nve-button>
 ```
 
-#### Alert Banner <nve-badge status="warning">deprecated</nve-badge>
+{% endbefore-after %}
+
+### Maglev - App Header <nve-badge status="danger">removed</nve-badge>
+
+`nve-page-header` replaces the early Maglev scoped package `mlv-app-header`.
+
+{% before-after %}
+
+```html
+<mlv-app-header>
+  ...
+</mlv-app-header>
+```
+
+```html
+<nve-page-header>
+  <nve-logo slot="prefix" size="sm">NV</nve-logo>
+  <h2 slot="prefix" nve-text="heading sm">Infrastructure</h2>
+  <nve-button selected container="flat"><a href="#">Link 1</a></nve-button>
+  <nve-button container="flat"><a href="#">Link 2</a></nve-button>
+  <nve-icon-button slot="suffix" interaction="emphasis" size="sm">EL</nve-icon-button>
+</nve-page-header>
+```
+
+{% endbefore-after %}
+
+### Maglev - Alert Banner <nve-badge status="danger">removed</nve-badge>
 
 The alert banner component no longer exists. Use `nve-alert-group` with the `prominence="emphasis"` option.
 
-<nve-alert status="danger">Before:</nve-alert>
+{% before-after %}
 
 ```html
 <nve-alert-banner>
@@ -235,8 +272,6 @@ The alert banner component no longer exists. Use `nve-alert-group` with the `pro
 </nve-alert-banner>
 ```
 
-<nve-alert status="success">After:</nve-alert>
-
 ```html
 <nve-alert-group prominence="emphasis" container="full">
   <nve-alert closable>
@@ -245,48 +280,17 @@ The alert banner component no longer exists. Use `nve-alert-group` with the `pro
 </nve-alert-group>
 ```
 
-#### JSON Viewer <nve-badge status="warning">deprecated</nve-badge>
+{% endbefore-after %}
+
+### Maglev - JSON Viewer <nve-badge status="danger">removed</nve-badge>
 
 The JSON viewer element is an internal API. You can access this API via the public exports but should avoid using it. Use `nve-codeblock` or `nve-monaco-input` for JSON content rendering.
 
-#### Layout Full <nve-badge status="warning">deprecated</nve-badge>
-
-The `grow` property now uses `full` instead to avoid confusion with flexbox grow behavior.
-
-<nve-alert status="danger">Before:</nve-alert>
-
-```html
-<div nve-layout="grow"></div>
-```
-
-<nve-alert status="success">After:</nve-alert>
-
-```html
-<div nve-layout="full"></div>
-```
-
-#### Typography "eyebrow" <nve-badge status="warning">deprecated</nve-badge>
-
-The typography `eyebrow` utility no longer exists, to align with the standardized semantic names and size options available.
-
-<nve-alert status="danger">Before:</nve-alert>
-
-```html
-<div nve-text="eyebrow"></div>
-```
-
-<nve-alert status="success">After:</nve-alert>
-
-```html
-<div nve-text="label sm"></div>
-```
-
-#### Icon Names <nve-badge status="warning">deprecated</nve-badge>
+### Maglev - Icon Names <nve-badge status="danger">removed</nve-badge>
 
 The following icons now use new names:
 
 <!-- vale write-good.TooWordy = NO -->
-<style>table { max-width: 400px }</style>
 
 | before             | after                     |
 | ------------------ | ------------------------- |
@@ -324,11 +328,11 @@ The following icons now use new names:
 
 <!-- vale write-good.TooWordy = YES -->
 
-### Icon Button Name Directions <nve-badge status="warning">deprecated</nve-badge>
+### Maglev - Icon Button Name Directions <nve-badge status="danger">removed</nve-badge>
 
 With the deprecation of directional icons the icon button now requires a explicit direction.
 
-<nve-alert status="danger">Before:</nve-alert>
+{% before-after %}
 
 ```html
 <nve-icon name="chevron-left"></nve-icon>
@@ -345,8 +349,6 @@ With the deprecation of directional icons the icon button now requires a explici
 <nve-icon name="thumbs-down"></nve-icon>
 ```
 
-<nve-alert status="success">After:</nve-alert>
-
 ```html
 <nve-icon name="chevron" direction="left"></nve-icon>
 <nve-icon name="beginning" direction="left"></nve-icon>
@@ -360,3 +362,5 @@ With the deprecation of directional icons the icon button now requires a explici
 <nve-icon name="chevron" direction="down"></nve-icon>
 <nve-icon name="thumb" direction="down"></nve-icon>
 ```
+
+{% endbefore-after %}

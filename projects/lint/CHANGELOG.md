@@ -1,3 +1,16 @@
+## 0.3.0 (2026-05-04)
+
+* chore(ci): lint corrections for missing nve-logo content ([6fc306f](https://github.com/NVIDIA/elements/commit/6fc306f))
+* chore(docs): add codex link ([36473c1](https://github.com/NVIDIA/elements/commit/36473c1))
+* chore(release): @nvidia-elements/code-v0.0.8 [skip ci] ([1f779f9](https://github.com/NVIDIA/elements/commit/1f779f9))
+* chore(release): @nvidia-elements/markdown-v0.0.8 [skip ci] ([8f687c7](https://github.com/NVIDIA/elements/commit/8f687c7))
+* chore(release): @nvidia-elements/monaco-v0.0.10 [skip ci] ([60ec7eb](https://github.com/NVIDIA/elements/commit/60ec7eb))
+* chore(release): @nvidia-elements/monaco-v0.0.8 [skip ci] ([76e5b06](https://github.com/NVIDIA/elements/commit/76e5b06))
+* chore(release): @nvidia-elements/monaco-v0.0.9 [skip ci] ([4a07ec6](https://github.com/NVIDIA/elements/commit/4a07ec6))
+* feat(lint): improve deprecated api migration rules ([d61ec17](https://github.com/NVIDIA/elements/commit/d61ec17))
+* fix(monaco): address timing issue in validation patch ([1ac01cb](https://github.com/NVIDIA/elements/commit/1ac01cb))
+* fix(monaco): patch monaco-editor broken paste action ([35f27ce](https://github.com/NVIDIA/elements/commit/35f27ce))
+
 ## <small>0.2.1 (2026-05-01)</small>
 
 * chore(ci): update lock ([0db8ccf](https://github.com/NVIDIA/elements/commit/0db8ccf))

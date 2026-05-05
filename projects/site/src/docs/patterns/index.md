@@ -20,7 +20,7 @@
 
 Patterns are an essential component of creating a cohesive and consistent user experience. Patterns are pre-defined combinations of existing components that teams reuse across different parts of the platform to streamline development and ensure consistency in the UI. By grouping components into patterns, teams can create a more organized and maintainable UI, as well as provide a unified look and feel for all users.
 
-<section class="pattern-links" nve-layout="grid gap:md span-items:4 pad-top:lg">
+<section class="pattern-links" nve-layout="grid gap:md span-items:12 &md|span-items:6 &xl|span-items:4 pad-top:lg">
   <a href="docs/patterns/authentication/">
     <nve-card style="--border-radius: var(--nve-ref-border-radius-md)">
       <div nve-layout="row gap:sm align:vertical-center">

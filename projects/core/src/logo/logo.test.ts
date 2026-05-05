@@ -13,7 +13,7 @@ describe(Logo.metadata.tag, () => {
 
   beforeEach(async () => {
     fixture = await createFixture(html`
-      <nve-logo></nve-logo>
+      <nve-logo>NV</nve-logo>
     `);
     element = fixture.querySelector(Logo.metadata.tag);
     await elementIsStable(element);

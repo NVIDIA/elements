@@ -66,7 +66,7 @@ export const Dropdown = {
   render: () => {
     return html`
       <nve-page-header>
-        <nve-logo slot="prefix" size="sm"></nve-logo>
+        <nve-logo slot="prefix" size="sm">NV</nve-logo>
         <h2 slot="prefix" nve-text="heading sm">NVIDIA</h2>
         <nve-icon-button slot="suffix" icon-name="gear" size="sm" popovertarget="preferences-input"></nve-icon-button>
       </nve-page-header>

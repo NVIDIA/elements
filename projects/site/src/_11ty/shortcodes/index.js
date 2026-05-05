@@ -66,6 +66,30 @@ export async function doDontShortcode(content) {
 </div>`;
 }
 
+export async function beforeAfterShortcode(content) {
+  return /* html */ `
+<div nve-layout="column gap:sm">
+  <style scoped>
+    .content > div, {
+      justify-content: space-between;
+      height: 100%;
+    }
+    .content > pre {
+      width: 100%;
+      display: flex;
+      margin: 0;
+    }
+  </style>
+  <div nve-layout="grid gap:sm span-items:6">
+    <nve-badge status="danger" container="flat">Before</nve-badge>
+    <nve-badge status="success" container="flat">After</nve-badge>
+  </div>
+  <div class="content" nve-layout="grid gap:sm span-items:6 align:vertical-stretch">
+    ${content}
+  </div>
+</div>`;
+}
+
 export async function splitShortcode(content) {
   return /* html */ `
 <div class="split-shortcode" nve-layout="grid gap:lg span-items:12 &xl|span-items:6">

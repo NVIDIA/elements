@@ -34,6 +34,7 @@
     "@semantic-release/commit-analyzer": "13.0.1",
     "@semantic-release/exec": "7.1.0",
     "@semantic-release/git": "10.0.1",
+    "@semantic-release/github": "12.0.6",
     "@semantic-release/npm": "13.1.5",
     "@semantic-release/release-notes-generator": "14.1.0",
     "@weiran.zsd/multi-eslint-rule-config": "0.0.6",
@@ -48,8 +49,7 @@
     "semantic-release-replace-plugin": "1.2.7",
     "tar": "7.5.11",
     "unzipper": "0.12.3",
-    "wireit": "0.14.12",
-    "@semantic-release/github": "12.0.6"
+    "wireit": "0.14.12"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",

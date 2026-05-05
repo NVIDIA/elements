@@ -19,7 +19,7 @@ export function render() {
 
 # Changelog
 
-<section nve-layout="grid span-items:12 &sm|span-items:6 &lg|span-items:4 gap:sm align:vertical-stretch">
+<section nve-layout="grid span-items:12 &md|span-items:6 &xl|span-items:4 gap:sm align:vertical-stretch">
 ${changelogs
   .map(
     changelog => /* html */ `

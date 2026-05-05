@@ -5,7 +5,7 @@ import { describe, it, expect, beforeEach } from 'vitest';
 import { RuleTester } from 'eslint';
 import type { JSRuleDefinition } from 'eslint';
 import css from '@eslint/css';
-import noDeprecatedCssImports from './no-deprecated-css-imports.js';
+import noDeprecatedCssImports, { deprecatedImports } from './no-deprecated-css-imports.js';
 
 const rule = noDeprecatedCssImports as unknown as JSRuleDefinition;
 
@@ -54,6 +54,13 @@ describe('noDeprecatedCssImports', () => {
     });
   });
 
+  it('should cover CSS entrypoints documented in the migration guide', () => {
+    expect(deprecatedImports['@maglev/elements/index.css']).toContain(
+      `@import '@nvidia-elements/styles/view-transitions.css';`
+    );
+    expect(deprecatedImports['@maglev/elements/inter.css']).toBe(`@import '@nvidia-elements/themes/fonts/inter.css';`);
+  });
+
   it('should not allow use of deprecated CSS import paths', () => {
     tester.run('should not allow use of deprecated CSS import paths', rule, {
       valid: [],
@@ -62,9 +69,14 @@ describe('noDeprecatedCssImports', () => {
           code: `@import '@maglev/elements/index.css';`,
           output: `@import '@nvidia-elements/themes/fonts/inter.css';
 @import '@nvidia-elements/themes/index.css';
+@import '@nvidia-elements/themes/high-contrast.css';
+@import '@nvidia-elements/themes/reduced-motion.css';
+@import '@nvidia-elements/themes/compact.css';
 @import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/themes/debug.css';
 @import '@nvidia-elements/styles/typography.css';
-@import '@nvidia-elements/styles/layout.css';`,
+@import '@nvidia-elements/styles/layout.css';
+@import '@nvidia-elements/styles/view-transitions.css';`,
           errors: [
             {
               messageId: 'deprecated-css-import',
@@ -73,9 +85,27 @@ describe('noDeprecatedCssImports', () => {
                 alternative: `
 @import '@nvidia-elements/themes/fonts/inter.css';
 @import '@nvidia-elements/themes/index.css';
+@import '@nvidia-elements/themes/high-contrast.css';
+@import '@nvidia-elements/themes/reduced-motion.css';
+@import '@nvidia-elements/themes/compact.css';
 @import '@nvidia-elements/themes/dark.css';
+@import '@nvidia-elements/themes/debug.css';
 @import '@nvidia-elements/styles/typography.css';
-@import '@nvidia-elements/styles/layout.css';`.trim()
+@import '@nvidia-elements/styles/layout.css';
+@import '@nvidia-elements/styles/view-transitions.css';`.trim()
+              }
+            }
+          ]
+        },
+        {
+          code: `@import '@maglev/elements/inter.css';`,
+          output: `@import '@nvidia-elements/themes/fonts/inter.css';`,
+          errors: [
+            {
+              messageId: 'deprecated-css-import',
+              data: {
+                value: '@maglev/elements/inter.css',
+                alternative: `@import '@nvidia-elements/themes/fonts/inter.css';`
               }
             }
           ]
