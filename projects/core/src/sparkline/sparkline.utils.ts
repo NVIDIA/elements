@@ -5,7 +5,7 @@ import type { Dimensions, Interpolation, Point, Rect, Scale, SparklineMark } fro
 
 export const PRECISION = 2;
 export const VIEW_HEIGHT = 100;
-export const DEFAULT_INTERVAL_LENGTH_EM = 0.6;
+const DEFAULT_INTERVAL_LENGTH_EM = 0.6;
 
 const HORIZONTAL_UNIT_WIDTH = VIEW_HEIGHT * DEFAULT_INTERVAL_LENGTH_EM;
 const COLUMN_GAP_RATIO = 0.7;

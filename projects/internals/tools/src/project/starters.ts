@@ -203,7 +203,7 @@ export async function createStarter(starter: Starter, outDir: string = resolve(c
 }
 
 /* istanbul ignore next -- @preserve */
-export async function downloadStarter(starterPath: string, outPath: string) {
+async function downloadStarter(starterPath: string, outPath: string) {
   console.log('⏳ Downloading starter...');
   const response = await fetch(starterPath);
   const blob = await response.blob();
@@ -213,7 +213,7 @@ export async function downloadStarter(starterPath: string, outPath: string) {
 }
 
 /* istanbul ignore next -- @preserve */
-export async function extractStarter(archivePath: string, outDir: string) {
+async function extractStarter(archivePath: string, outDir: string) {
   const zip = new AdmZip(archivePath);
   zip.extractAllTo(outDir, true);
   unlinkSync(archivePath);
@@ -235,7 +235,7 @@ async function setupStarterGit(extractedDir: string) {
 }
 
 /* istanbul ignore next -- @preserve */
-export function isGitRepository(directoryPath: string) {
+function isGitRepository(directoryPath: string) {
   // Check if .git directory exists directly in the given path
   const gitDirPath = join(directoryPath, '.git');
   if (existsSync(gitDirPath)) {

@@ -3,8 +3,6 @@
 
 import type { Element } from '@internals/metadata';
 
-export type ELEMENTS_ENV = 'mcp' | 'cli' | 'browser' | 'docs';
-
 export const markdownDescription = `Format of output. Use 'json' ONLY when you need to programmatically process the data. For reading/understanding, use   
   the default 'markdown' format which is more readable and uses fewer tokens.`;
 

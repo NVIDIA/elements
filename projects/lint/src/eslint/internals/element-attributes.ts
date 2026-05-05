@@ -3,7 +3,7 @@
 
 import { elements } from './metadata.js';
 
-export interface AttributeInfo {
+interface AttributeInfo {
   name: string;
   deprecated: boolean;
   isEnum: boolean;

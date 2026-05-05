@@ -8,8 +8,7 @@ import { tools, prompts, jsonSchemaToZod, ToolSupport } from '@internals/tools';
 import z, { type ZodObject } from 'zod';
 import { type ToolAnnotations } from '@modelcontextprotocol/sdk/types.js';
 
-export const VERSION = '0.0.0';
-export const BUILD_SHA = '__NVE_BUILD_CHECKSUM__';
+const VERSION = '0.0.0';
 
 // eslint-disable-next-line max-lines-per-function
 export async function startMcpServer() {

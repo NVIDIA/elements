@@ -77,7 +77,7 @@ export function distillExamples(examples: Partial<Example>[]) {
 /**
  * Deduplicate boilerplate openers like "Basic" then capitalize the first letter.
  */
-export function distillExampleSummary(summary: string) {
+function distillExampleSummary(summary: string) {
   const stripped = summary
     .replace(/^Basic\s+/, '')
     .replace(/^Default\s+/, '')

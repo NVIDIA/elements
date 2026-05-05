@@ -1,25 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-/**
- * Cast a parser-specific node (HTML or CSS) to a type compatible with ESLint APIs
- * (context.report, fixer.replaceText, sourceCode.getText, etc.).
- *
- * Required because @html-eslint and CSS parsers produce nodes that are
- * structurally like ESTree nodes but do not extend them in the type system.
- * The return type must be `any` to match all ESLint API signatures.
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function asNode(node: unknown): any {
-  return node;
-}
-
-/**
- * Cast a parser-specific node to a type compatible with RuleFixer methods
- * (replaceText, insertTextBefore, etc.). Alias for asNode.
- */
-export const asFixTarget = asNode;
-
 /** HTML tag node from @html-eslint parser */
 export interface HtmlTagNode {
   type: string;

@@ -9,17 +9,17 @@ const ATTRIBUTE_EXCEPTIONS = ['debug', 'mkd', 'md']; // internal scopes
 const DEPRECATED_NVE_TEXT_VALUES = new Set(['eyebrow']);
 const DEPRECATED_NVE_LAYOUT_VALUES = new Set(['grow']);
 
-export const VALID_NVE_TEXT_VALUES = new Set([
+const VALID_NVE_TEXT_VALUES = new Set([
   ...(globalAttributes.find(attribute => attribute.name === 'nve-text')?.values?.map(value => value.name) ?? []),
   ...ATTRIBUTE_EXCEPTIONS
 ]);
 
-export const VALID_NVE_LAYOUT_VALUES = new Set([
+const VALID_NVE_LAYOUT_VALUES = new Set([
   ...(globalAttributes.find(attribute => attribute.name === 'nve-layout')?.values?.map(value => value.name) ?? []),
   ...ATTRIBUTE_EXCEPTIONS
 ]);
 
-export const VALID_NVE_DISPLAY_VALUES = new Set([
+const VALID_NVE_DISPLAY_VALUES = new Set([
   ...(globalAttributes.find(attribute => attribute.name === 'nve-display')?.values?.map(value => value.name) ?? []),
   ...ATTRIBUTE_EXCEPTIONS
 ]);
@@ -37,7 +37,7 @@ export const DISTILLED_NVE_DISPLAY_VALUES = new Set(
 );
 
 // also used in @internals/metadata, these are values that often confuse agents due to complexity in playground template generation within the same context window
-export function isComplexAttributeValue(value: string) {
+function isComplexAttributeValue(value: string) {
   return (
     value.includes('|') ||
     value.includes('@') ||

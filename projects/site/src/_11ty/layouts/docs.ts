@@ -4,9 +4,9 @@
 import type { ResizeHandle } from '@nvidia-elements/core/resize-handle';
 import type { Tree } from '@nvidia-elements/core/tree';
 import { FILTER_VALUES, type DocsSearch } from '../../_internal/search/search.js';
-import '/_internal/canvas/canvas.js';
+import '../../_internal/canvas/canvas.js';
 
-void import('/_internal/search/search.js');
+void import('../../_internal/search/search.js');
 
 // panel toggles
 let loadedSystemsPanel = false;
@@ -15,7 +15,7 @@ const systemOptionsPanelBtn = globalThis.document.querySelector<HTMLElement>('#s
 systemOptionsPanel.addEventListener('close', () => (systemOptionsPanel.hidden = true));
 systemOptionsPanelBtn.addEventListener('click', async () => {
   if (!loadedSystemsPanel) {
-    await import('/_internal/system-settings/system-settings.js');
+    await import('../../_internal/system-settings/system-settings.js');
     loadedSystemsPanel = true;
   }
   systemOptionsPanel.hidden = !systemOptionsPanel.hidden;

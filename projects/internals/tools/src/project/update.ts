@@ -9,7 +9,7 @@ import { type ElementVersions, getLatestPublishedVersions } from '../api/utils.j
 import { getNPMClient, getPackageJson } from '../internal/node.js';
 import type { Report, PackageData } from '../internal/types.js';
 
-export interface PackageUpdate {
+interface PackageUpdate {
   name: string;
   from: string;
   to: string;

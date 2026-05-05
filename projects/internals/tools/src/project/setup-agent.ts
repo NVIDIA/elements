@@ -8,11 +8,11 @@ import type { Report } from '../internal/types.js';
 import { claudeProjectSettings } from './starters.js';
 import { skills } from '../context/index.js';
 
-export type IDE = 'cursor' | 'claude-code' | 'codex' | 'all';
+type IDE = 'cursor' | 'claude-code' | 'codex' | 'all';
 
 const DESCRIPTION = 'NVIDIA Elements UI Design System (nve-*), custom element schemas, APIs and examples';
 
-export interface McpServerConfig {
+interface McpServerConfig {
   description: string;
   command: string;
   args?: string[];

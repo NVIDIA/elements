@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "Hugo + Elements Starter",
   "private": true,
-  "main": "index.js",
   "scripts": {
     "ci": "wireit",
     "dev": "wireit",

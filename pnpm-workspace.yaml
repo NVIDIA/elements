@@ -50,7 +50,6 @@ catalogs:
     formdata-polyfill: ^4.0.10
     highlight.js: ^11.11.1
     lit: ^3.3.2
-    lit-element: ^4.2.2
     lit-html: ^3.3.2
     markdown-it: ^14.1.1
     minisearch: 7.2.0
@@ -78,7 +77,6 @@ catalog:
   '@vitest/browser': 4.1.4
   '@vitest/browser-playwright': 4.1.4
   '@vitest/coverage-istanbul': 4.1.4
-  '@vitest/mocker': 4.1.4
   axe-core: 4.11.0
   eslint: 10.2.0
   glob: 13.0.6

@@ -36,12 +36,12 @@ export function renderExampleMarkdown(example: Partial<Example>) {
   return `${renderExampleHeaderMarkdown(example)}${template ? `\n\n` : ''}${template ? `\`\`\`html\n${template}\n\`\`\`` : ''}`;
 }
 
-export function renderExampleHeaderMarkdown(example: Partial<Example>) {
+function renderExampleHeaderMarkdown(example: Partial<Example>) {
   const formattedContent = getExampleSummaryMarkdown(example);
   return `## ${(example.name ?? '').replace(/([A-Z])/g, ' $1').trim()} (${example.id})${formattedContent ? '\n\n' : ''}${formattedContent}`;
 }
 
-export function getExampleSummaryMarkdown(example: Partial<Example>) {
+function getExampleSummaryMarkdown(example: Partial<Example>) {
   const summary = (example.summary ?? example.description ?? '').replace(/\[(.*?)\]\(.*?\)/g, '$1');
   return wrapText(summary).trim();
 }

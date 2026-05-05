@@ -6,7 +6,7 @@
  * unambiguous in the Elements context. `container` is deliberately excluded —
  * too common as a custom semantic class.
  */
-export const STANDALONE_TAILWIND_CLASSES: ReadonlySet<string> = new Set([
+const STANDALONE_TAILWIND_CLASSES: ReadonlySet<string> = new Set([
   'flex',
   'inline-flex',
   'grid',

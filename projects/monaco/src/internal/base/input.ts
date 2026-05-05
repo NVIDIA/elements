@@ -34,14 +34,14 @@ export type SuggestedLanguages =
 
 const SYNTAX_VALIDATABLE_LANGUAGES: SuggestedLanguages[] = ['css', 'json', 'javascript', 'typescript'];
 
-export type JSONSchema = monaco.json.JSONSchema;
+type JSONSchema = monaco.json.JSONSchema;
 
 // Derived from: monaco.editor.LineNumbersType
-export type LineNumberFormatter = (lineNumber: number) => string;
-export type LineNumbersType = 'on' | 'off' | 'relative' | 'interval' | LineNumberFormatter;
+type LineNumberFormatter = (lineNumber: number) => string;
+type LineNumbersType = 'on' | 'off' | 'relative' | 'interval' | LineNumberFormatter;
 
 // Derived from: monaco.editor.IEditorOptions['wordWrap']
-export type WordWrapOptions = 'off' | 'on' | 'wordWrapColumn' | 'bounded';
+type WordWrapOptions = 'off' | 'on' | 'wordWrapColumn' | 'bounded';
 
 function isSyntaxValidationAvailable(language: string): boolean {
   return SYNTAX_VALIDATABLE_LANGUAGES.includes(language as (typeof SYNTAX_VALIDATABLE_LANGUAGES)[number]);

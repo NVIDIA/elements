@@ -2,7 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { z } from 'zod';
-export interface ToolAnnotations {
+
+interface ToolAnnotations {
   readOnlyHint?: boolean; //  If true, the tool does not change its environment
   destructiveHint?: boolean; // If true, the tool may perform destructive/irreversible updates
   idempotentHint?: boolean; // If true, repeated calls with same args have no extra effect
@@ -18,7 +19,7 @@ export const ToolSupport = {
 
 export type ToolSupportFlags = number;
 
-export interface ToolMetadata {
+interface ToolMetadata {
   inputSchema?: Schema;
   outputSchema?: Schema;
   summary: string;

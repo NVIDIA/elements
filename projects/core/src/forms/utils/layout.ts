@@ -22,7 +22,7 @@ export function setupControlLayoutStates(control: Control | ControlGroup) {
   return resizeObserver;
 }
 
-export type ControlLayouts = 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
+type ControlLayouts = 'vertical' | 'vertical-inline' | 'horizontal' | 'horizontal-inline';
 
 export function getControlLayout(width: number, initalLayout: ControlLayouts) {
   let layout: ControlLayouts = initalLayout;

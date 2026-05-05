@@ -19,7 +19,7 @@ export interface LighthouseScores {
   '@nvidia-elements/monaco': { [key: string]: LighthouseElementReport };
 }
 
-export interface LighthouseElementReport {
+interface LighthouseElementReport {
   name: string;
   payload: {
     javascript: {

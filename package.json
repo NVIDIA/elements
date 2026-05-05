@@ -20,6 +20,7 @@
     "prepare": "wireit",
     "release": "wireit",
     "commitlint": "commitlint --edit",
+    "lint:knip": "wireit",
     "lint:vale": "wireit",
     "lint:vale:sync": "config/vale/bin/vale sync"
   },
@@ -41,6 +42,7 @@
     "commitlint": "19.5.0",
     "glob": "catalog:",
     "husky": "9.1.7",
+    "knip": "6.11.0",
     "lint-staged": "15.3.0",
     "playwright": "catalog:",
     "prettier": "3.4.2",
@@ -59,6 +61,7 @@
     "ci": {
       "script": "pnpm run format && pnpm run lint:vale",
       "dependencies": [
+        "lint:knip",
         "notice",
         "./projects/code:ci",
         "./projects/cli:ci",
@@ -253,6 +256,47 @@
     },
     "lint:vale": {
       "command": "config/vale/bin/vale --config .vale.ini projects/*/src projects/*/README.md projects/*/*/src projects/*/*/README.md --glob='!{**/starters/**,**/404/**,**/vendor/**,**/changelog/**,**/icons/**,**/generated/**,**/dist/**,**/LICENSE*,**/CHANGELOG*,**/*.test.*}'"
+    },
+    "lint:knip": {
+      "command": "knip --cache --config knip.config.js",
+      "dependencies": [
+        {
+          "script": "./projects/internals/metadata:build",
+          "cascade": false
+        },
+        {
+          "script": "./projects/internals/tools:build",
+          "cascade": false
+        }
+      ],
+      "files": [
+        "./knip.config.js",
+        "./package.json",
+        "./pnpm-lock.yaml",
+        "./pnpm-workspace.yaml",
+        "./.github/**/*.{yml,yaml}",
+        "./.husky/**/*",
+        "./config/**/*",
+        "./projects/**/*.{js,ts,tsx,json,mjs,cjs,vue,svelte}",
+        "!**/node_modules/**",
+        "!**/dist/**",
+        "!**/.11ty-vite/**",
+        "!**/.eslintcache/**",
+        "!**/.wireit/**",
+        "!**/.next/**",
+        "!**/.output/**",
+        "!**/__screenshots__/**",
+        "!**/coverage/**",
+        "!projects/starters/**",
+        "!projects/core/src/icon/icons.ts",
+        "!projects/internals/metadata/static/**",
+        "!projects/monaco/src/themes/generated/**",
+        "!projects/**/src/vendor/**/*",
+        "!projects/**/.screencast/.auth/*"
+      ],
+      "output": [
+        "node_modules/.cache/knip/**"
+      ]
     },
     "notice": {
       "command": "node ./projects/internals/ci/notice/index.js",

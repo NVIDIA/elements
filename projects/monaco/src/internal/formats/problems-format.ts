@@ -226,7 +226,7 @@ function compareProblems(a: Problem, b: Problem): number {
   return b.severity - a.severity || a.startLineNumber - b.startLineNumber || a.startColumn - b.startColumn;
 }
 
-export interface ProblemsFormat {
+interface ProblemsFormat {
   text: string;
   decorations: monaco.editor.IModelDeltaDecoration[];
   getProblemByLine: (lineNumber: number) => Problem | undefined;

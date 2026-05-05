@@ -143,7 +143,7 @@ export function setupControlGroupStates(controlGroup: ControlGroup) {
   return getAttributeChanges(controlGroup, 'disabled', () => toggleControlGroupDisabledState(controlGroup));
 }
 
-export function toggleControlGroupDisabledState(controlGroup: ControlGroup) {
+function toggleControlGroupDisabledState(controlGroup: ControlGroup) {
   if (Array.from(controlGroup.inputs).find(i => i.disabled)) {
     controlGroup._internals.states.add('disabled');
   } else {
