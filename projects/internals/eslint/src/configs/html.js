@@ -49,6 +49,7 @@ export const htmlConfig = [
       'html/indent': 'off', // prettier
       'html/require-closing-tags': 'off', // prettier
       'html/element-newline': 'off', // prettier
+      'html/no-extra-spacing-tags': 'off', // prettier
       'html/use-baseline': 'off', // disabled we use chrome specific APIs with fallbacks
       'html/attrs-newline': [
         'error',

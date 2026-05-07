@@ -280,7 +280,7 @@
       ]
     },
     "build:prebundle": {
-      "command": "node --experimental-transform-types ./build/prebundle.ts",
+      "command": "node ./build/prebundle.ts",
       "files": [
         "build/prebundle.ts",
         "build/tsconfig.json",
@@ -291,7 +291,7 @@
       ]
     },
     "build:themes": {
-      "command": "node --experimental-transform-types ./build/themes.ts",
+      "command": "node ./build/themes.ts",
       "files": [
         "../themes/dist/**/*.json",
         "build/themes.ts",

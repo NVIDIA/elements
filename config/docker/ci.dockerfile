@@ -13,10 +13,11 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
   # install common dependencies
   apt-get install -y git-lfs yq && \
   # https://github.com/nodejs/corepack/issues/612
-  npm install -g corepack@0.34.5 && \
-  # install pnpm from our package.json `packageManager` definition
+  npm install -g corepack@0.34.7 && \
+  # install pnpm from our package.json `devEngines.packageManager` definition
   corepack enable && \
-  corepack prepare --activate && \
+  PNPM_VERSION="$(node -p "require('./package.json').devEngines.packageManager.version")" && \
+  corepack prepare "pnpm@${PNPM_VERSION}" --activate && \
   # ensure our pnpm dlx commands story the cache in a known location so we can cleanup
   pnpm config set store-dir /var/cache/pnpm-store && \
   PLAYWRIGHT_VERSION="$(cat pnpm-lock.yaml| yq -r '.importers["."].devDependencies.playwright.version')" && \
@@ -27,5 +28,4 @@ RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.d
 
 # install vale
 RUN curl -sfL https://github.com/errata-ai/vale/releases/download/v3.13.0/vale_3.13.0_Linux_64-bit.tar.gz | tar xz -C /usr/local/bin vale
-
 

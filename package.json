@@ -4,9 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "description": "",
-  "packageManager": "pnpm@10.27.0",
   "engines": {
-    "node": "24.12.0"
+    "node": "26.1.0"
+  },
+  "packageManager": "pnpm@11.0.8",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.0.8",
+      "onFail": "download"
+    }
   },
   "scripts": {
     "ci": "wireit",
@@ -280,6 +287,7 @@
         "./projects/**/*.{js,ts,tsx,json,mjs,cjs,vue,svelte}",
         "!**/node_modules/**",
         "!**/dist/**",
+        "!**/.visual/**",
         "!**/.11ty-vite/**",
         "!**/.eslintcache/**",
         "!**/.wireit/**",
@@ -314,28 +322,10 @@
       "packageLocks": []
     },
     "playwright": {
-      "command": "pnpm exec playwright install chromium --with-deps chromium"
+      "command": "pnpm exec playwright install --with-deps --only-shell chromium"
     },
     "prepare": {
-      "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs) ; node config/vale/install.mjs"
+      "command": "test -n \"$CI\" || (pnpm run playwright & node .husky/install.mjs ; node config/vale/install.mjs)"
     }
-  },
-  "pnpm": {
-    "overrides": {
-      "archiver>glob": "catalog:",
-      "eslint": "catalog:"
-    },
-    "onlyBuiltDependencies": [
-      "@bundled-es-modules/glob",
-      "@parcel/watcher",
-      "bun",
-      "esbuild",
-      "hugo-bin",
-      "lmdb",
-      "msgpackr-extract",
-      "rs-module-lexer",
-      "sharp",
-      "style-dictionary"
-    ]
   }
 }

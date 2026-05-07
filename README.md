@@ -34,7 +34,7 @@ To setup repository dependencies and run the full build, run the following comma
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 . ~/.nvm/nvm.sh
 nvm install
-npm install -g corepack@0.34.5
+npm install -g corepack@0.34.7
 corepack enable
 corepack prepare --activate
 pnpm i --frozen-lockfile --prefer-offline

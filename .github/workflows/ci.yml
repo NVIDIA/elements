@@ -15,17 +15,8 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      - uses: pnpm/action-setup@v4
-        with:
-          run_install: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: './.nvmrc'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
+      - uses: ./.github/actions/setup-ci
       # - uses: google/wireit@setup-github-actions-caching/v2
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
       - name: Run CI checks
         env:
           ELEMENTS_PAGES_BASE_URL: ${{vars.ELEMENTS_PAGES_BASE_URL}}
@@ -78,17 +69,8 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
-      - uses: pnpm/action-setup@v4
-        with:
-          run_install: false
-      - uses: actions/setup-node@v6
-        with:
-          node-version-file: './.nvmrc'
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'pnpm'
+      - uses: ./.github/actions/setup-ci
       # - uses: google/wireit@setup-github-actions-caching/v2
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec playwright install --with-deps chromium
       - name: Run Lighthouse tests
         run: WIREIT_FAILURES=kill pnpm run lighthouse && node ./projects/internals/ci/cache-validate.js lighthouse && node ./projects/internals/ci/metrics.lighthouse.js
       - name: Write lighthouse job summary
@@ -115,8 +97,9 @@ jobs:
           # semantic-release pushes with — otherwise the default GITHUB_TOKEN's
           # http.extraheader overrides @semantic-release/git's push auth.
           token: ${{secrets.RELEASE_TOKEN}}
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@8912a9102ac27614460f54aedde9e1e7f9aec20d
         with:
+          version: 11.0.8
           run_install: false
       - uses: actions/setup-node@v6
         with:

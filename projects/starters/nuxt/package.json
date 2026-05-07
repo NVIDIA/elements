@@ -14,15 +14,15 @@
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "nuxt": "4.4.2",
-    "vue": "3.5.32",
-    "vue-router": "5.0.4"
+    "nuxt": "4.4.4",
+    "vue": "3.5.34",
+    "vue-router": "5.0.6"
   },
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
     "eslint": "catalog:",
     "typescript": "catalog:",
-    "vue-tsc": "3.2.6"
+    "vue-tsc": "3.2.8"
   },
   "wireit": {
     "ci": {
