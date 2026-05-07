@@ -244,7 +244,7 @@ nvm install
 nvm use
 
 # Verify version
-node --version  # Should show 24.12.0
+node --version  # Should show 26.1.0
 ```
 
 ### pnpm Version Issues
@@ -255,7 +255,7 @@ node --version  # Should show 24.12.0
 
 ```shell
 # Install Corepack globally
-npm install -g corepack@0.34.5
+npm install -g corepack@0.34.7
 
 # Enable Corepack
 corepack enable

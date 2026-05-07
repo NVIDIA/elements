@@ -25,8 +25,8 @@ Elements is a design language for AI/ML factories built as a monorepo containing
 ## Environment Requirements
 
 - **nvm**: Node Version Manager for managing Node.js versions
-- **Node.js**: 24.12.0 (enforced via `.nvmrc` and `package.json` engines)
-- **pnpm**: 10.27.0 (managed via Corepack 0.34.5)
+- **Node.js**: 26.1.0 (enforced via `.nvmrc` and `package.json` engines)
+- **pnpm**: 11.0.8 (managed via Corepack 0.34.7)
 - **Git LFS**: Required for visual test screenshots and videos (`.gitattributes` defines tracked files)
 - **Playwright**: Browser-based testing uses Chromium (installed via prepare script)
 - **Vale**: Prose linter for documentation and JSDoc (installed via prepare script)
@@ -47,7 +47,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
 # Install dependencies
 nvm install
-npm install -g corepack@0.34.5
+npm install -g corepack@0.34.7
 corepack enable
 corepack prepare --activate
 pnpm i --frozen-lockfile --prefer-offline

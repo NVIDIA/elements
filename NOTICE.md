@@ -5,7 +5,7 @@ Copyright 2024-2026 NVIDIA Corporation
 
 This product includes the following bundled third-party software:
 
-- @eslint/css v1.1.0 [Apache-2.0] (used by: @nvidia-elements/lint)
+- @eslint/css v1.2.0 [Apache-2.0] (used by: @nvidia-elements/lint)
   Copyright: Nicholas C. Zakas
 
 - @eslint/js v10.0.1 [MIT] (used by: @nvidia-elements/lint)
@@ -14,13 +14,13 @@ This product includes the following bundled third-party software:
 - @eslint/json v1.2.0 [Apache-2.0] (used by: @nvidia-elements/lint)
   Copyright: Nicholas C. Zakas
 
-- @html-eslint/eslint-plugin v0.59.0 [MIT] (used by: @nvidia-elements/lint)
+- @html-eslint/eslint-plugin v0.60.0 [MIT] (used by: @nvidia-elements/lint)
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
-- @html-eslint/parser v0.59.0 [MIT] (used by: @nvidia-elements/lint)
+- @html-eslint/parser v0.60.0 [MIT] (used by: @nvidia-elements/lint)
   Copyright: yeonjuan (https://github.com/yeonjuan)
 
-- @inquirer/prompts v8.4.1 [MIT] (used by: @nvidia-elements/cli)
+- @inquirer/prompts v8.4.2 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Simon Boudrias <admin@simonboudrias.com>
 
 - @modelcontextprotocol/sdk v1.29.0 [MIT] (used by: @nvidia-elements/cli)
@@ -44,7 +44,7 @@ This product includes the following bundled third-party software:
 - markdown-it v14.1.1 [MIT] (used by: @nvidia-elements/markdown)
   Copyright: Unknown
 
-- marked v18.0.0 [MIT] (used by: @nvidia-elements/cli)
+- marked v18.0.3 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Christopher Jeffrey
 
 - marked-terminal v7.3.0 [MIT] (used by: @nvidia-elements/cli)
@@ -59,16 +59,16 @@ This product includes the following bundled third-party software:
 - open v11.0.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
-- ora v9.3.0 [MIT] (used by: @nvidia-elements/cli)
+- ora v9.4.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
-- publint v0.3.18 [MIT] (used by: @nvidia-elements/cli)
+- publint v0.3.20 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Bjorn Lu
 
 - yargs v18.0.0 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Unknown
 
-- zod v4.3.6 [MIT] (used by: @nvidia-elements/cli)
+- zod v4.4.3 [MIT] (used by: @nvidia-elements/cli)
   Copyright: Colin McDonnell <zod@colinhacks.com>
 
 ==============================================================================
@@ -77,7 +77,7 @@ Apache-2.0
 
 The following bundled components are provided under the Apache-2.0 license:
 
-@eslint/css v1.1.0 - Copyright Nicholas C. Zakas
+@eslint/css v1.2.0 - Copyright Nicholas C. Zakas
 @eslint/json v1.2.0 - Copyright Nicholas C. Zakas
 
                                  Apache License
@@ -299,22 +299,22 @@ MIT
 The following bundled components are provided under the MIT license:
 
 @eslint/js v10.0.1 - Copyright Unknown
-@html-eslint/eslint-plugin v0.59.0 - Copyright yeonjuan (https://github.com/yeonjuan)
-@html-eslint/parser v0.59.0 - Copyright yeonjuan (https://github.com/yeonjuan)
-@inquirer/prompts v8.4.1 - Copyright Simon Boudrias <admin@simonboudrias.com>
+@html-eslint/eslint-plugin v0.60.0 - Copyright yeonjuan (https://github.com/yeonjuan)
+@html-eslint/parser v0.60.0 - Copyright yeonjuan (https://github.com/yeonjuan)
+@inquirer/prompts v8.4.2 - Copyright Simon Boudrias <admin@simonboudrias.com>
 @modelcontextprotocol/sdk v1.29.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.5.17 - Copyright Nasca Iacob <sy@another-d-mention.ro> (https://github.com/cthackers)
 archiver v7.0.1 - Copyright Chris Talkington (http://christalkington.com/)
 markdown-it v14.1.1 - Copyright Unknown
-marked v18.0.0 - Copyright Christopher Jeffrey
+marked v18.0.3 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 minisearch v7.2.0 - Copyright Luca Ongaro
 monaco-editor v0.55.1 - Copyright Microsoft Corporation
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-ora v9.3.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-publint v0.3.18 - Copyright Bjorn Lu
+ora v9.4.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+publint v0.3.20 - Copyright Bjorn Lu
 yargs v18.0.0 - Copyright Unknown
-zod v4.3.6 - Copyright Colin McDonnell <zod@colinhacks.com>
+zod v4.4.3 - Copyright Colin McDonnell <zod@colinhacks.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

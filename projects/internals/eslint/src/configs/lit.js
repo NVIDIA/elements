@@ -115,7 +115,8 @@ export const litConfig = [
       'html/attrs-newline': ['off'], // disabled interferes with example templates
       'html/element-newline': ['off'], // disabled interferes with example templates
       'html/require-closing-tags': ['off'], // disabled interferes with example templates
-      'html/no-extra-spacing-attrs': ['off'] // disabled interferes with example templates
+      'html/no-extra-spacing-attrs': ['off'], // disabled interferes with example templates
+      'html/no-extra-spacing-tags': ['off'] // prettier
     }
   },
   // library implementation files

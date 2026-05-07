@@ -5,7 +5,7 @@ Copyright 2024-2026 NVIDIA Corporation
 
 This project includes the following bundled third-party software:
 
-- @inquirer/prompts v8.4.1 [MIT]
+- @inquirer/prompts v8.4.2 [MIT]
   Copyright: Simon Boudrias <admin@simonboudrias.com>
 
 - @modelcontextprotocol/sdk v1.29.0 [MIT]
@@ -17,7 +17,7 @@ This project includes the following bundled third-party software:
 - archiver v7.0.1 [MIT]
   Copyright: Chris Talkington (http://christalkington.com/)
 
-- marked v18.0.0 [MIT]
+- marked v18.0.3 [MIT]
   Copyright: Christopher Jeffrey
 
 - marked-terminal v7.3.0 [MIT]
@@ -26,16 +26,16 @@ This project includes the following bundled third-party software:
 - open v11.0.0 [MIT]
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
-- ora v9.3.0 [MIT]
+- ora v9.4.0 [MIT]
   Copyright: Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
 
-- publint v0.3.18 [MIT]
+- publint v0.3.20 [MIT]
   Copyright: Bjorn Lu
 
 - yargs v18.0.0 [MIT]
   Copyright: Unknown
 
-- zod v4.3.6 [MIT]
+- zod v4.4.3 [MIT]
   Copyright: Colin McDonnell <zod@colinhacks.com>
 
 ==============================================================================
@@ -44,17 +44,17 @@ MIT
 
 The following bundled components are provided under the MIT license:
 
-@inquirer/prompts v8.4.1 - Copyright Simon Boudrias <admin@simonboudrias.com>
+@inquirer/prompts v8.4.2 - Copyright Simon Boudrias <admin@simonboudrias.com>
 @modelcontextprotocol/sdk v1.29.0 - Copyright Anthropic, PBC (https://anthropic.com)
 adm-zip v0.5.17 - Copyright Nasca Iacob <sy@another-d-mention.ro> (https://github.com/cthackers)
 archiver v7.0.1 - Copyright Chris Talkington (http://christalkington.com/)
-marked v18.0.0 - Copyright Christopher Jeffrey
+marked v18.0.3 - Copyright Christopher Jeffrey
 marked-terminal v7.3.0 - Copyright Mikael Brevik
 open v11.0.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-ora v9.3.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
-publint v0.3.18 - Copyright Bjorn Lu
+ora v9.4.0 - Copyright Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)
+publint v0.3.20 - Copyright Bjorn Lu
 yargs v18.0.0 - Copyright Unknown
-zod v4.3.6 - Copyright Colin McDonnell <zod@colinhacks.com>
+zod v4.4.3 - Copyright Colin McDonnell <zod@colinhacks.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

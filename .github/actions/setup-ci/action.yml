@@ -1,0 +1,53 @@
+name: Setup CI dependencies
+description: Install workspace dependencies and Playwright browsers for CI jobs.
+
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/action-setup@8912a9102ac27614460f54aedde9e1e7f9aec20d
+      with:
+        version: 11.0.8
+        run_install: false
+    - uses: actions/setup-node@v6
+      with:
+        node-version-file: './.nvmrc'
+        registry-url: 'https://registry.npmjs.org'
+        cache: 'pnpm'
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install --frozen-lockfile
+    - name: Cache Vale
+      uses: actions/cache@v5
+      with:
+        path: |
+          config/vale/bin
+          config/vale/styles/Google
+          config/vale/styles/write-good
+        key: ${{ runner.os }}-${{ runner.arch }}-vale-${{ hashFiles('.vale.ini', 'config/vale/install.mjs') }}-v1
+    - name: Install Vale
+      shell: bash
+      run: node config/vale/install.mjs
+    - name: Resolve Playwright version
+      id: playwright-version
+      shell: bash
+      run: echo "version=$(node -p 'require("./node_modules/playwright/package.json").version')" >> "$GITHUB_OUTPUT"
+    - name: Cache Playwright browsers
+      id: cache-playwright
+      uses: actions/cache@v5
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-${{ runner.arch }}-playwright-chromium-shell-${{ steps.playwright-version.outputs.version }}-v1
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 24
+    - name: Install Playwright system dependencies
+      shell: bash
+      run: node ./node_modules/playwright/cli.js install-deps chromium
+    - name: Install Playwright Chromium
+      if: steps.cache-playwright.outputs.cache-hit != 'true'
+      shell: bash
+      run: node ./node_modules/playwright/cli.js install --only-shell chromium
+    - uses: actions/setup-node@v6
+      with:
+        node-version-file: './.nvmrc'
+        registry-url: 'https://registry.npmjs.org'
