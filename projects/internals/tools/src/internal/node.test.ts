@@ -9,7 +9,11 @@ vi.mock('node:child_process', () => ({
 }));
 
 vi.mock('node:fs', () => ({
+  accessSync: vi.fn(),
+  constants: { X_OK: 1 },
   existsSync: vi.fn(),
+  realpathSync: vi.fn(),
+  statSync: vi.fn(),
   readFileSync: vi.fn()
 }));
 
@@ -37,7 +41,7 @@ describe('internal/node', () => {
   describe('isCommandAvailable', () => {
     it('should return true when command exits with code 0', async () => {
       const { spawn } = await import('node:child_process');
-      vi.mocked(spawn).mockReturnValue(createMockChild(0) as ReturnType<typeof spawn>);
+      vi.mocked(spawn).mockImplementation(() => createMockChild(0) as ReturnType<typeof spawn>);
 
       const { isCommandAvailable } = await import('./node.js');
       const result = await isCommandAvailable('pnpm');
@@ -46,7 +50,7 @@ describe('internal/node', () => {
 
     it('should return false when command exits with non-zero code', async () => {
       const { spawn } = await import('node:child_process');
-      vi.mocked(spawn).mockReturnValue(createMockChild(1) as ReturnType<typeof spawn>);
+      vi.mocked(spawn).mockImplementation(() => createMockChild(1) as ReturnType<typeof spawn>);
 
       const { isCommandAvailable } = await import('./node.js');
       const result = await isCommandAvailable('missing-tool');
@@ -55,7 +59,7 @@ describe('internal/node', () => {
 
     it('should return false when spawn errors', async () => {
       const { spawn } = await import('node:child_process');
-      vi.mocked(spawn).mockReturnValue(createMockChild(0, true) as ReturnType<typeof spawn>);
+      vi.mocked(spawn).mockImplementation(() => createMockChild(0, true) as ReturnType<typeof spawn>);
 
       const { isCommandAvailable } = await import('./node.js');
       const result = await isCommandAvailable('not-found');
@@ -116,6 +120,47 @@ describe('internal/node', () => {
       const result = getPackageJson('/test');
       expect(result.name).toBe('test-pkg');
       expect(result.version).toBe('1.0.0');
+    });
+  });
+
+  describe('findExecutablesOnPath', () => {
+    it('should find and dedupe executables on PATH by real path', async () => {
+      const { existsSync, realpathSync, statSync } = await import('node:fs');
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(statSync).mockReturnValue({ isFile: () => true } as ReturnType<typeof statSync>);
+      vi.mocked(realpathSync).mockImplementation(path => {
+        return path.toString().startsWith('/b/') ? '/a/nve' : path.toString();
+      });
+
+      const { findExecutablesOnPath } = await import('./node.js');
+      const result = findExecutablesOnPath('nve', { envPath: '/a:/b' });
+
+      expect(result).toEqual(['/a/nve']);
+    });
+
+    it('should ignore PATH entries that do not contain the command', async () => {
+      const { existsSync, statSync } = await import('node:fs');
+      vi.mocked(existsSync).mockReturnValue(false);
+      vi.mocked(statSync).mockReturnValue({ isFile: () => true } as ReturnType<typeof statSync>);
+
+      const { findExecutablesOnPath } = await import('./node.js');
+      const result = findExecutablesOnPath('nve', { envPath: '/a:/b' });
+
+      expect(result).toEqual([]);
+    });
+
+    it('should ignore files that are not executable on POSIX platforms', async () => {
+      const { accessSync, existsSync, statSync } = await import('node:fs');
+      vi.mocked(existsSync).mockReturnValue(true);
+      vi.mocked(statSync).mockReturnValue({ isFile: () => true } as ReturnType<typeof statSync>);
+      vi.mocked(accessSync).mockImplementation(() => {
+        throw new Error('not executable');
+      });
+
+      const { findExecutablesOnPath } = await import('./node.js');
+      const result = findExecutablesOnPath('nve', { envPath: '/a' });
+
+      expect(result).toEqual([]);
     });
   });
 });

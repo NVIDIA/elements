@@ -5,6 +5,7 @@ import { describe, expect, it, vi, beforeEach } from 'vitest';
 import type { Project } from '@internals/metadata';
 import type { Result } from 'publint';
 import {
+  checkCliInstallations,
   checkDependencies,
   checkPeerDependencies,
   checkSemanticDependencies,
@@ -15,6 +16,7 @@ import {
 } from './health.js';
 import type { ElementVersions } from '../api/utils.js';
 import type { PackageData } from '../internal/types.js';
+import { findExecutablesOnPath } from '../internal/node.js';
 
 // Mock the publint module
 vi.mock('publint', () => ({
@@ -23,6 +25,7 @@ vi.mock('publint', () => ({
 
 // Mock the internal node module
 vi.mock('../internal/node.js', () => ({
+  findExecutablesOnPath: vi.fn(() => []),
   getPackageJson: vi.fn()
 }));
 
@@ -38,6 +41,11 @@ vi.mock('../api/utils.js', () => ({
   getLatestPublishedVersions: vi.fn(),
   getPublishedProjects: vi.fn((projects: { name: string }[]) => projects)
 }));
+
+beforeEach(() => {
+  vi.clearAllMocks();
+  vi.mocked(findExecutablesOnPath).mockReturnValue([]);
+});
 
 describe('getVersionNum', () => {
   it('should return the correct version number', () => {
@@ -118,6 +126,41 @@ describe('getVersionStatus', () => {
   it('should handle same major, minor version differences', () => {
     expect(getVersionStatus('1.0.0', '1.0.0')).toEqual('success');
     expect(getVersionStatus('1.0.0', '1.0.1')).toEqual('success');
+  });
+});
+
+describe('checkCliInstallations', () => {
+  it('should return success when a single nve CLI is found on PATH', () => {
+    vi.mocked(findExecutablesOnPath).mockReturnValue(['/usr/local/bin/nve']);
+
+    const result = checkCliInstallations();
+
+    expect(result).toEqual({
+      message: 'One nve CLI executable found on PATH: /usr/local/bin/nve',
+      status: 'success'
+    });
+  });
+
+  it('should return danger when multiple nve CLIs are found on PATH', () => {
+    vi.mocked(findExecutablesOnPath).mockReturnValue(['/usr/local/bin/nve', '/Users/test/Library/pnpm/nve']);
+
+    const result = checkCliInstallations();
+
+    expect(result.status).toBe('danger');
+    expect(result.message).toBe(
+      'Multiple nve CLI executables found on PATH: /usr/local/bin/nve, /Users/test/Library/pnpm/nve'
+    );
+  });
+
+  it('should return warning when no nve CLI executable is found on PATH', () => {
+    vi.mocked(findExecutablesOnPath).mockReturnValue([]);
+
+    const result = checkCliInstallations();
+
+    expect(result).toEqual({
+      message: 'No nve CLI executable found on PATH',
+      status: 'warning'
+    });
   });
 });
 
@@ -599,10 +642,10 @@ describe('checkSemanticDependencies', () => {
 
 describe('getHealthReport', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    vi.mocked(findExecutablesOnPath).mockReturnValue(['/usr/local/bin/nve']);
   });
 
-  it('should return health report for application type with only dependencies check', async () => {
+  it('should return health report for application type with dependencies and CLI checks', async () => {
     const { getPackageJson } = await import('../internal/node.js');
     const { ProjectsService } = await import('@internals/metadata');
     const { getLatestPublishedVersions } = await import('../api/utils.js');
@@ -611,7 +654,10 @@ describe('getHealthReport', () => {
       created: string;
       data: Project[];
     });
-    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '1.0.0' } as ElementVersions);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({
+      '@nvidia-elements/core': '1.0.0',
+      '@nvidia-elements/cli': '1.0.0'
+    } as ElementVersions);
     vi.mocked(getPackageJson).mockReturnValue({
       dependencies: { '@nvidia-elements/core': '^1.0.0' },
       devDependencies: {},
@@ -620,11 +666,16 @@ describe('getHealthReport', () => {
 
     const result = await getHealthReport('/test/path', 'application');
     expect(result).toHaveProperty('dependencies');
+    expect(result).toHaveProperty('cliInstallations');
     expect(result).not.toHaveProperty('peerDependencies');
     expect(result).not.toHaveProperty('semanticDependencies');
     expect(result.dependencies).toHaveProperty('versions');
     expect(result.dependencies).toHaveProperty('status');
     expect(result.dependencies).toHaveProperty('message');
+    expect(result.cliInstallations).toEqual({
+      message: 'One nve CLI executable found on PATH: /usr/local/bin/nve',
+      status: 'success'
+    });
   });
 
   it('should return health report for library type with all checks', async () => {
@@ -637,7 +688,10 @@ describe('getHealthReport', () => {
       created: string;
       data: Project[];
     });
-    vi.mocked(getLatestPublishedVersions).mockResolvedValue({ '@nvidia-elements/core': '1.0.0' } as ElementVersions);
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue({
+      '@nvidia-elements/core': '1.0.0',
+      '@nvidia-elements/cli': '1.0.0'
+    } as ElementVersions);
     vi.mocked(publint).mockResolvedValue({ messages: [] } as Result);
     vi.mocked(getPackageJson).mockReturnValue({
       dependencies: {},
@@ -647,6 +701,7 @@ describe('getHealthReport', () => {
 
     const result = await getHealthReport('/test/path', 'library');
     expect(result).toHaveProperty('dependencies');
+    expect(result).toHaveProperty('cliInstallations');
     expect(result).toHaveProperty('peerDependencies');
     expect(result).toHaveProperty('semanticDependencies');
     expect(result.peerDependencies).toHaveProperty('status');

@@ -5,7 +5,7 @@ import { publint as publintFn } from 'publint';
 import { ProjectsService } from '@internals/metadata';
 import { type ElementVersions, getLatestPublishedVersions, getPublishedProjects } from '../api/utils.js';
 import type { ReportCheck, Report, PackageData } from '../internal/types.js';
-import { getPackageJson } from '../internal/node.js';
+import { findExecutablesOnPath, getPackageJson } from '../internal/node.js';
 
 export async function getHealthReport(cwd: string, type: 'application' | 'library') {
   const packageJson = getPackageJson(cwd);
@@ -13,7 +13,8 @@ export async function getHealthReport(cwd: string, type: 'application' | 'librar
   const currentVersions = await getLatestPublishedVersions(projects);
 
   let report: Report = {
-    dependencies: await checkDependencies(packageJson, currentVersions)
+    dependencies: await checkDependencies(packageJson, currentVersions),
+    cliInstallations: checkCliInstallations()
   };
 
   if (type === 'library') {
@@ -75,6 +76,35 @@ export function getVersionNum(value: string): { major: number; minor: number; pa
     minor: version[1]!,
     patch: version[2]!
   };
+}
+
+export function checkCliInstallations(): ReportCheck {
+  const paths = findExecutablesOnPath('nve');
+
+  if (!paths.length) {
+    return {
+      message: 'No nve CLI executable found on PATH',
+      status: 'warning'
+    };
+  }
+
+  const summary = formatCliInstallations(paths);
+
+  if (paths.length > 1) {
+    return {
+      message: `Multiple nve CLI executables found on PATH: ${summary}`,
+      status: 'danger'
+    };
+  }
+
+  return {
+    message: `One nve CLI executable found on PATH: ${summary}`,
+    status: 'success'
+  };
+}
+
+function formatCliInstallations(paths: string[]) {
+  return paths.join(', ');
 }
 
 async function checkPublint(cwd: string): Promise<Report> {
