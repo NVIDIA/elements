@@ -7,6 +7,7 @@ import { ApiService } from './api/service.js';
 import { PackagesService } from './packages/service.js';
 import { ProjectService } from './project/service.js';
 import { CliService } from './cli/service.js';
+import { SkillsService } from './skills/service.js';
 import { loadTools } from './internal/tools.js';
 
 declare const __ELEMENTS_PLAYGROUND_BASE_URL__: string;
@@ -28,7 +29,7 @@ export { readNveConfig, saveNveConfig, type NveConfig, type UpdateConfig } from 
 export { type Report, type ReportCheck } from './internal/types.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const services: any[] = [ApiService, CliService, ExamplesService, ProjectService, PackagesService];
+const services: any[] = [ApiService, CliService, ExamplesService, ProjectService, PackagesService, SkillsService];
 
 if (__ELEMENTS_PLAYGROUND_BASE_URL__) {
   services.push(PlaygroundService);
@@ -40,4 +41,4 @@ export { MAX_CONTEXT_CHARS, MAX_CONTEXT_TOKENS, isDebug } from './internal/utils
 
 // temporary exports
 export { getElementImports } from './internal/utils.js';
-export { prompts, skills } from './context/index.js';
+export { prompts, skills, type Prompt, type Skill } from './skills/index.js';

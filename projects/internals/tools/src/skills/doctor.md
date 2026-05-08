@@ -2,9 +2,9 @@
 
 Instructions for ensuring the Elements Design System is setup correctly
 
-## Tools to use
+## Commands to use
 
-- `project_validate`: check project setup and find configuration issues
+- `nve project.validate`: check project setup and find configuration issues
 
 ## MCP Checks
 

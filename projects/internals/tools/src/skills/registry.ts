@@ -189,4 +189,52 @@ if (__ELEMENTS_PLAYGROUND_BASE_URL__) {
   prompts.push(playgroundPrompt);
 }
 
-export const skills: Skill[] = [elementsSkill];
+export const skills: Skill[] = [
+  {
+    name: 'about',
+    title: aboutPrompt.title,
+    description: aboutPrompt.description,
+    context: `${aboutContext}\n${toolsContext}`
+  },
+  {
+    name: 'authoring',
+    title: 'Elements Authoring Guidelines',
+    description: 'Best practices and workflow guidance for authoring UI with NVIDIA Elements.',
+    context: authoringContext
+  },
+  {
+    name: 'doctor',
+    title: doctorPrompt.title,
+    description: doctorPrompt.description,
+    context: doctorContext
+  },
+  {
+    name: 'integration',
+    title: 'Elements Project Integration',
+    description: 'Best practices and workflow guidance for creating or setting up Elements projects.',
+    context: integrationContext
+  },
+  {
+    name: 'migration',
+    title: migrateProjectPrompt.title,
+    description: migrateProjectPrompt.description,
+    context: migrationContext
+  },
+  {
+    name: 'search',
+    title: searchPrompt.title,
+    description: searchPrompt.description,
+    context: searchContext
+  },
+  ...(__ELEMENTS_PLAYGROUND_BASE_URL__
+    ? [
+        {
+          name: 'playground',
+          title: playgroundPrompt.title,
+          description: playgroundPrompt.description,
+          context: playgroundContext
+        }
+      ]
+    : []),
+  elementsSkill
+];

@@ -2,7 +2,7 @@ import { promises as fsp } from 'node:fs';
 import markdownIt from 'markdown-it';
 import { ApiService } from '@internals/tools/api';
 import { ExamplesService } from '@internals/tools/examples';
-import { prompts, skills } from '@internals/tools';
+import { skills } from '@internals/tools/skills';
 import { ELEMENTS_PAGES_BASE_URL } from '../utils/env.js';
 
 const BASE = ELEMENTS_PAGES_BASE_URL || 'http://localhost:8082/elements';
@@ -28,13 +28,14 @@ export function llmsTxtPlugin(eleventyConfig) {
     await fsp.mkdir('./.11ty-vite/public/context/api/tokens/', { recursive: true });
     await fsp.mkdir('./.11ty-vite/public/context/examples/', { recursive: true });
 
-    const skillsContent = `# Skills\n\nList of all available skills.\n\n${[...prompts, ...skills].map(s => `- [${s.name}](${BASE}/context/skills/${s.name}.md): ${s.description}`).join('\n')}`;
+    const skillsContent = `# Skills\n\nList of all available skills and context fragments.\n\n${skills.map(s => `- [${s.name}](${BASE}/context/skills/${s.name}.md): ${s.description}`).join('\n')}`;
     await writeDoc('./.11ty-vite/public/context/skills/index', skillsContent);
 
-    [...prompts, ...skills].forEach(async ({ name, context, handler }) => {
-      const skill = handler ? handler().messages[0].content.text : context;
-      await writeDoc(`./.11ty-vite/public/context/skills/${name}`, skill);
-    });
+    const skillMarkdown = [];
+    for (const { name, context } of skills) {
+      skillMarkdown.push(context);
+      await writeDoc(`./.11ty-vite/public/context/skills/${name}`, context);
+    }
 
     const cliReadme = await fsp.readFile('../cli/README.md', 'utf-8');
     const lintReadme = await fsp.readFile('../lint/README.md', 'utf-8');
@@ -87,7 +88,7 @@ Elements ships Web Components/HTML custom elements (\`nve-*\`), design tokens, C
 - [ESLint](${BASE}/context/lint.md): ESLint rules for Elements projects. Validate HTML and CSS for API best practices.
 - [APIs List](${BASE}/context/api/index.md): List of all available Elements (nve-*) APIs and components.
 - [Examples List](${BASE}/context/examples/index.md): List of all available UI patterns and example templates.
-- [Skills List](${BASE}/context/skills/index.md): List of all available agent skills.
+- [Skills List](${BASE}/context/skills/index.md): List of all available agent skills and context fragments.
 - [Icons List](${BASE}/context/api/icons/index.md): List of all available icon names for nve-icon and nve-icon-button.
 - [Tokens List](${BASE}/context/api/tokens/index.md): List of all available semantic CSS custom properties / design tokens for theming.
 
@@ -101,6 +102,8 @@ For the complete documentation archive in a large single file, use [llms-full.tx
       content,
       cliReadme,
       lintReadme,
+      skillsContent,
+      ...skillMarkdown,
       apiContent,
       ...apiMarkdown,
       iconsContent,

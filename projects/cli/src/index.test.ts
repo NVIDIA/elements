@@ -37,6 +37,14 @@ describe('index', () => {
     expect(output).toContain('nve examples.get <id> [format]');
   });
 
+  it('should provide skills.list', () => {
+    expect(output).toContain('nve skills.list [format]');
+  });
+
+  it('should provide skills.get', () => {
+    expect(output).toContain('nve skills.get <name> [format]');
+  });
+
   it('should conditionally provide playground.validate when url is available', () => {
     const hasPlayground = output.includes('nve playground.validate');
     expect(typeof hasPlayground).toBe('boolean');

@@ -6,10 +6,10 @@
 
 Best practices and guidelines for creating UI with NVIDIA Elements.
 
-1. **Search** patterns and compositions (tools: `examples_list`, `examples_get`)
-2. **Search** components and API documentation (tools: `api_list`, `api_get`)
-3. **Write** the HTML using `nve-*` components (tools: `api_imports_get`)
-4. **Check** the template (tools: `api_template_validate`)
+1. **Search** patterns and compositions (commands: `nve examples.list`, `nve examples.get`)
+2. **Search** components and API documentation (commands: `nve api.list`, `nve api.get`)
+3. **Write** the HTML using `nve-*` components (command: `nve api.imports.get`)
+4. **Check** the template (command: `nve api.template.validate`)
 
 ### Best practices
 
@@ -18,8 +18,8 @@ Best practices and guidelines for creating UI with NVIDIA Elements.
 - Do NOT use event handler content attributes such as `onclick` or `onchange` attributes. Use JavaScript event listeners instead.
 - Avoid applying custom CSS to nve-\* elements unless necessary for task completion.
 - Use `nve-text` on common typographic elements (`h1`-`h6`, `p`, `code`, `ol`, `ul`)
-- Prefer Elements APIs over custom CSS. If you need CSS, use design tokens via the `tokens_list` tool.
-- Verify that each Elements API usage is correct by checking the API documentation via the `api_get` tool.
+- Prefer Elements APIs over custom CSS. If you need CSS, use design tokens via the `nve api.tokens.list` command.
+- Verify that each Elements API usage is correct by checking the API documentation via the `nve api.get` command.
 
 ### API Gotchas
 

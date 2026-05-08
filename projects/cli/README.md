@@ -115,6 +115,8 @@ Skills provide persistent context to AI agents for building UI with Elements.
 | Skill | Description |
 | ----- | ----------- |
 | `elements` | Build UI with NVIDIA Elements (NVE). Provides authoring guidelines, workflow steps, and API best practices for creating, editing, or reviewing HTML templates that use nve-* components. |
+| `authoring` | Authoring workflow guidance for creating, editing, or reviewing HTML templates that use nve-* components. |
+| `migration` | Migration guidance for moving projects from deprecated Elements APIs to current packages and tools. |
 
 ### Tools
 
@@ -130,6 +132,8 @@ Skills provide persistent context to AI agents for building UI with Elements.
 | `packages_changelogs_get` | Retrieve changelog details by package name. |
 | `examples_list` | Get list of available Elements (nve-*) patterns and examples. |
 | `examples_get` | Get the full template of a known example or pattern by id. |
+| `skills_list` | Get a list of available Elements agent skills and context fragments. |
+| `skills_get` | Get a bundled Elements agent skill or context fragment by name. |
 | `playground_validate` | Validates HTML templates specifically for playground examples. |
 | `playground_create` | Create a shareable playground URL from an HTML template. |
 | `project_create` | Create a new starter project. |

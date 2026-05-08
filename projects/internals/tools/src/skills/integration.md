@@ -2,21 +2,21 @@
 
 Best practices and guidelines for creating an Elements Starter Project.
 
-### Tools to use
+### Commands to use
 
-- `project_create`: create a new starter project
-- `project_setup`: setup or update a project to use Elements
-- `project_validate`: check project setup and find configuration issues
+- `nve project.create`: create a new starter project
+- `nve project.setup`: setup or update a project to use Elements
+- `nve project.validate`: check project setup and find configuration issues
 
 ### Gotchas
 
-- Do NOT use the `start` parameter for `project_create` tool as this prevents the tool from exiting.
+- Do NOT use the `start` parameter for the `nve project.create` command as this prevents the command from exiting.
 
 ### Steps
 
-1. Use `project_create` tool to create a new starter project
-2. Use `project_setup` tool to update the project to the latest versions of Elements packages
-3. Use `project_validate` tool to check project setup and find configuration issues
+1. Use `nve project.create` to create a new starter project
+2. Use `nve project.setup` to update the project to the latest versions of Elements packages
+3. Use `nve project.validate` to check project setup and find configuration issues
 4. Run `pnpm run dev` or `npm run dev` to start the project. This starts the project in development mode as a long-running process.
 
 ## Setup an Existing Project
@@ -27,7 +27,7 @@ Setup an existing project to use Elements you can use the setup command to add t
 # use the CLI
 nve project.setup
 
-# or use the MCP tool
+# or use the MCP Tool
 project_setup
 ```
 

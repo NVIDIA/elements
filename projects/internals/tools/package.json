@@ -48,6 +48,14 @@
       "types": "./dist/examples/index.d.ts",
       "default": "./dist/examples/index.js"
     },
+    "./skills": {
+      "types": "./dist/skills/index.d.ts",
+      "default": "./dist/skills/index.js"
+    },
+    "./skills/index.js": {
+      "types": "./dist/skills/index.d.ts",
+      "default": "./dist/skills/index.js"
+    },
     "./playground": {
       "types": "./dist/playground/index.d.ts",
       "default": "./dist/playground/index.js"

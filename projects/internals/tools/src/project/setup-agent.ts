@@ -6,7 +6,7 @@ import { join, resolve } from 'node:path';
 import { getNPMClient } from '../internal/node.js';
 import type { Report } from '../internal/types.js';
 import { claudeProjectSettings } from './starters.js';
-import { skills } from '../context/index.js';
+import { skills } from '../skills/index.js';
 
 type IDE = 'cursor' | 'claude-code' | 'codex' | 'all';
 

@@ -10,6 +10,7 @@ This package provides:
 - **Playground creation** and validation utilities
 - **Project management** tools for scaffolding and health checks
 - **Example template** management and search
+- **Agent skill** and context-fragment access
 - **Changelog and version** information services
 - **Design token** access and formatting
 
@@ -21,12 +22,13 @@ The project uses a **decorator-based service architecture** that enables dynamic
 
 ### Service Modules
 
-Seven main service modules organized by functionality:
+Main service modules organized by functionality:
 
 ```
 projects/internals/tools/src/
 ├── api/              # Component API documentation service
 ├── examples/         # Example templates and patterns service
+├── skills/           # Agent skills and context fragments service
 ├── playground/       # Playground creation and validation service
 ├── project/          # Project creation, update, and health checks
 ├── changelogs/       # Release notes and changelog service
@@ -47,6 +49,11 @@ projects/internals/tools/src/
 - `list()` - Get list of available example templates/patterns
 - `search()` - Search example templates by name or description
 - Pulls from `@internals/metadata`
+
+#### **SkillsService** (`/skills/service.ts`)
+- `list()` - Get available bundled agent skills and context fragments
+- `get()` - Get a skill or context fragment by name
+- Uses bundled markdown so CLI/MCP users can access guidance even when skills are not installed on disk
 
 #### **PlaygroundService** (`/playground/service.ts`)
 - `validate()` - Lint and check HTML templates for playground compliance
@@ -125,6 +132,7 @@ The package provides modular entry points for tree-shaking:
   ".": "./dist/index.js",                    // All tools
   "./api": "./dist/api/index.js",           // API service only
   "./examples": "./dist/examples/index.js", // Examples service only
+  "./skills": "./dist/skills/index.js",
   "./playground": "./dist/playground/index.js",
   "./project": "./dist/project/index.js",
   "./changelogs": "./dist/changelogs/index.js",

@@ -327,6 +327,8 @@ export const claudeProjectSettings = {
       'mcp__elements__api_tokens_list',
       'mcp__elements__examples_list',
       'mcp__elements__examples_get',
+      'mcp__elements__skills_list',
+      'mcp__elements__skills_get',
       'mcp__elements__project_create',
       'mcp__elements__project_setup',
       'mcp__elements__project_validate',

@@ -160,6 +160,14 @@ Skills provide persistent context to AI agents for building UI with Elements. Un
     <nve-grid-cell><code nve-text="code">elements</code></nve-grid-cell>
     <nve-grid-cell>Build UI with NVIDIA Elements (NVE). Provides authoring guidelines, workflow steps, and API best practices for creating, editing, or reviewing HTML templates that use nve-* components.</nve-grid-cell>
   </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">authoring</code></nve-grid-cell>
+    <nve-grid-cell>Authoring workflow guidance for creating, editing, or reviewing HTML templates that use nve-* components.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">migration</code></nve-grid-cell>
+    <nve-grid-cell>Migration guidance for moving projects from deprecated Elements APIs to current packages and tools.</nve-grid-cell>
+  </nve-grid-row>
 </nve-grid>
 
 ### Tools
@@ -208,6 +216,14 @@ Skills provide persistent context to AI agents for building UI with Elements. Un
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">examples_get</code></nve-grid-cell>
     <nve-grid-cell>Get the full template of a known example or pattern by id.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">skills_list</code></nve-grid-cell>
+    <nve-grid-cell>Get a list of available Elements agent skills and context fragments.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">skills_get</code></nve-grid-cell>
+    <nve-grid-cell>Get a bundled Elements agent skill or context fragment by name.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">playground_validate</code></nve-grid-cell>

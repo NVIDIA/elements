@@ -27,18 +27,24 @@ vi.mock('./starters.js', () => ({
   claudeProjectSettings: {
     $schema: 'https://json.schemastore.org/claude-code-settings.json',
     permissions: {
-      allow: ['mcp__elements__api_list', 'mcp__elements__api_get']
+      allow: [
+        'mcp__elements__api_list',
+        'mcp__elements__api_get',
+        'mcp__elements__skills_list',
+        'mcp__elements__skills_get'
+      ]
     },
     enabledMcpjsonServers: ['elements']
   }
 }));
 
-vi.mock('../context/index.js', () => ({
+vi.mock('../skills/index.js', () => ({
   skills: [
     {
       name: 'elements',
       title: 'Elements Design System (nve)',
       description: 'Build UI with NVIDIA Elements',
+      kind: 'skill',
       context: '## Elements Context'
     }
   ]
@@ -346,6 +352,8 @@ describe('setup-mcp', () => {
 
       const written = JSON.parse(vi.mocked(writeFileSync).mock.calls[0][1] as string);
       expect(written.permissions.allow).toContain('mcp__elements__api_list');
+      expect(written.permissions.allow).toContain('mcp__elements__skills_list');
+      expect(written.permissions.allow).toContain('mcp__elements__skills_get');
     });
 
     it('should return the settings file path', async () => {

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { prompts, type Prompt } from './index.js';
+import { prompts, skills, type Prompt, type Skill } from './index.js';
 
 describe('prompts', () => {
   it('should export an array of prompts', () => {
@@ -80,7 +80,7 @@ describe('prompts', () => {
       expect(searchPrompt?.description).toContain('API');
 
       const result = searchPrompt?.handler({});
-      expect(result?.messages[0].content.text).toContain('api_');
+      expect(result?.messages[0].content.text).toContain('nve api.');
     });
 
     it.skipIf(!prompts.some(p => p.name === 'playground'))(
@@ -100,7 +100,45 @@ describe('prompts', () => {
       expect(createProjectPrompt?.description).toContain('Starter');
 
       const result = createProjectPrompt?.handler({});
-      expect(result?.messages[0].content.text).toContain('project_create');
+      expect(result?.messages[0].content.text).toContain('nve project.create');
     });
+  });
+});
+
+describe('skillEntries', () => {
+  it('should export an array of skill entries', () => {
+    expect(Array.isArray(skills)).toBe(true);
+    expect(skills.length).toBeGreaterThan(0);
+  });
+
+  it('should have required properties for each skill entry', () => {
+    skills.forEach((skill: Skill) => {
+      expect(skill.name).toBeDefined();
+      expect(typeof skill.name).toBe('string');
+      expect(skill.name.length).toBeGreaterThan(0);
+
+      expect(skill.title).toBeDefined();
+      expect(typeof skill.title).toBe('string');
+      expect(skill.title.length).toBeGreaterThan(0);
+
+      expect(skill.description).toBeDefined();
+      expect(typeof skill.description).toBe('string');
+      expect(skill.description.length).toBeGreaterThan(0);
+
+      expect(skill.context).toBeDefined();
+      expect(typeof skill.context).toBe('string');
+      expect(skill.context.length).toBeGreaterThan(0);
+    });
+  });
+
+  it('should have unique skill entry names', () => {
+    const names = skills.map(skill => skill.name);
+    const uniqueNames = new Set(names);
+    expect(uniqueNames.size).toBe(names.length);
+  });
+
+  it('should include authoring and elements entries', () => {
+    expect(skills.some(skill => skill.name === 'authoring')).toBe(true);
+    expect(skills.some(skill => skill.name === 'elements')).toBe(true);
   });
 });

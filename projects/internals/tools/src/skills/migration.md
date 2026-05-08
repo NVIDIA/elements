@@ -1,6 +1,6 @@
 # Elements Migration Guide
 
-Instructions for migrating a project from deprecated Elements APIs to the latest versions. This workflow uses the `@nvidia-elements/lint` ESLint package for static analysis and MCP tools for project health.
+Instructions for migrating a project from deprecated Elements APIs to the latest versions. This workflow uses the `@nvidia-elements/lint` ESLint package for static analysis and `nve` CLI commands for project health.
 
 ## Core Rules
 
@@ -14,10 +14,10 @@ Instructions for migrating a project from deprecated Elements APIs to the latest
 ## Recommended Agent Workflow
 
 1. Check project health.
-   - Use `project_validate` for setup, configuration, and dependency issues.
-   - Use `packages_list` to compare installed Elements packages with latest published versions.
+   - Use `nve project.validate` for setup, configuration, and dependency issues.
+   - Use `nve packages.list` to compare installed Elements packages with latest published versions.
 2. Update packages.
-   - Use `project_setup` when available to set up or update Elements packages.
+   - Use `nve project.setup` when available to set up or update Elements packages.
    - Otherwise update `package.json` manually using the package map below.
 3. Configure migration linting.
    - Install `@nvidia-elements/lint` as a dev dependency.
@@ -27,21 +27,21 @@ Instructions for migrating a project from deprecated Elements APIs to the latest
    - Start with package names and import paths.
    - Then fix removed APIs.
    - Then fix deprecated APIs.
-   - Use `api_list` and `api_get` before inventing replacements for component APIs.
+   - Use `nve api.list` and `nve api.get` before inventing replacements for component APIs.
 5. Verify.
    - Re-run ESLint until it reports no deprecation violations.
-   - Use `api_template_validate` on migrated HTML templates.
-   - Run `project_validate` again after package and source changes.
+   - Use `nve api.template.validate` on migrated HTML templates.
+   - Run `nve project.validate` again after package and source changes.
 
-## Tool Reference
+## CLI Command Reference
 
-- `project_validate`: Check setup, configuration, dependencies, and project health.
-- `project_setup`: Set up or update a project to use latest Elements packages.
-- `packages_list`: List current and latest package versions.
-- `packages_changelogs_get`: Read migration-relevant package changelogs.
-- `api_template_validate`: Check HTML templates against current Elements APIs.
-- `api_list`: List available Elements APIs.
-- `api_get`: Get documentation for a specific component API.
+- `nve project.validate`: Check setup, configuration, dependencies, and project health.
+- `nve project.setup`: Set up or update a project to use latest Elements packages.
+- `nve packages.list`: List current and latest package versions.
+- `nve packages.changelogs.get`: Read migration-relevant package changelogs.
+- `nve api.template.validate`: Check HTML templates against current Elements APIs.
+- `nve api.list`: List available Elements APIs.
+- `nve api.get`: Get documentation for a specific component API.
 
 ## ESLint Setup
 
@@ -277,7 +277,7 @@ Replace Maglev utility attributes with `nve-*` attributes.
 | `mlv-layout` | `nve-layout` |
 | `mlv-text`   | `nve-text`   |
 
-Replace `mlv-*` element tag prefixes with `nve-*` where the corresponding `nve-*` element exists. Check uncertain tags with `api_list` and `api_get`.
+Replace `mlv-*` element tag prefixes with `nve-*` where the corresponding `nve-*` element exists. Check uncertain tags with `nve api.list` and `nve api.get`.
 
 Before:
 
@@ -409,5 +409,5 @@ For directional icons, add an explicit `direction` attribute.
 - Removed components and APIs have replacements or no longer appear.
 - Migrate deprecated `nve-layout`, `nve-text`, popover trigger, logo, and icon patterns.
 - ESLint reports no Elements deprecation violations.
-- `api_template_validate` passes for migrated templates.
-- `project_validate` reports a healthy project state.
+- `nve api.template.validate` passes for migrated templates.
+- `nve project.validate` reports a healthy project state.
