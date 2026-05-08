@@ -60,7 +60,7 @@ The fastest way to configure MCP is with the `setup` command:
 nve project.setup
 ```
 
-This detects your package manager, configures the MCP server for both Cursor and Claude Code, and adds Elements core dependencies to the project.
+This detects your package manager, configures the MCP server for both Cursor, Codex and Claude Code, and adds Elements core dependencies to the project.
 
 ### Claude Code
 
