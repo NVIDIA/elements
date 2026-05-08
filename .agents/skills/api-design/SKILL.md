@@ -1,5 +1,5 @@
 ---
-name: repo-api-design
+name: api-design
 description: Component API design patterns following Elements conventions for properties, attributes, CSS custom properties, slots, and events. Use this skill whenever the user is designing or deciding on a component API, choosing between properties vs attributes vs slots, naming CSS custom properties, designing events, avoiding impossible states, deciding whether to reflect to an attribute, using CSS Parts, implementing the DataElement interface, or applying the internal-host pattern. Also trigger when the user asks about shorthand vs granular CSS properties or event naming conventions.
 ---
 

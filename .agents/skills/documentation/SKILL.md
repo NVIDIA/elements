@@ -1,5 +1,5 @@
 ---
-name: repo-documentation
+name: documentation
 description: Guidelines for writing documentation files including 11ty templates, Eleventy shortcodes, JSDoc annotations, and markdown content. Use this skill whenever the user works with documentation markdown files, Vale prose linting errors, Eleventy shortcodes (dodont, example), frontmatter, JSDoc annotations that must pass Vale, or the documentation site. Also trigger when the user mentions Vale errors, adding terms to the vocabulary, suppressing Vale rules, or writing and fixing prose in .md or .ts files.
 ---
 

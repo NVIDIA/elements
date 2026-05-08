@@ -1,5 +1,5 @@
 ---
-name: repo-troubleshooting
+name: troubleshooting
 description: Diagnose and resolve common issues including test failures, build errors, performance regressions, and development environment problems. Use this skill whenever the user reports something broken, failing, timing out, hanging, or producing unexpected results. Trigger on test failures (elementIsStable timeouts, flaky tests, screenshot diffs), build errors (Cannot find module, wireit cache issues, stale output), CI/CD failures, Git LFS problems, port conflicts, lighthouse score regressions, SSR errors, or environment setup issues.
 ---
 

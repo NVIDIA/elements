@@ -1,5 +1,5 @@
 ---
-name: repo-pattern-creation
+name: pattern-creation
 description: Convert validated playground templates or HTML compositions into reusable pattern files (*.examples.ts) in the pattern library. Use this skill whenever the user wants to save, persist, store, or catalog a template, prototype, composition, or playground result as a reusable pattern. Trigger on phrases like "save as pattern," "create pattern," "add to pattern library," "persist this template," "convert to examples.ts," or when the user has validated HTML and wants it stored in projects/internals/patterns/src/.
 ---
 

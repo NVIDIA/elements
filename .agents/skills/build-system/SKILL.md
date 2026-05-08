@@ -1,5 +1,5 @@
 ---
-name: repo-build-system
+name: build-system
 description: Wireit orchestration, build optimization, caching strategies, and build troubleshooting for the Elements monorepo. Use this skill whenever the user asks about Wireit configuration, build tasks, build dependencies, cache invalidation, build performance, adding new build tasks to package.json, cross-package dependency patterns, sideEffects declarations, CI pipeline configuration, or diagnosing slow or failing builds. Also trigger when the user mentions wireit, vite build issues, pnpm run ci, or build output problems.
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: repo-examples
+name: examples
 description: Guidelines for writing example template files (*.examples.ts) including naming conventions, @summary JSDoc comments, and stateless HTML patterns. Use this skill whenever the user creates, modifies, or reviews *.examples.ts files, asks about example naming rules (PascalCase, 3-word max, no component prefix), needs to write or improve @summary JSDoc comments, encounters example-naming ESLint errors, or wants to add stateless or interactive examples to a component's example file.
 ---
 

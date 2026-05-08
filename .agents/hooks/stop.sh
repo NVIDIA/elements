@@ -1,10 +1,25 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd "$CLAUDE_PROJECT_DIR" 2>/dev/null || cd "$(git rev-parse --show-toplevel)" 2>/dev/null || exit 0
+INPUT=$(cat)
+HOOK_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+source "$HOOK_DIR/lib/project-root.sh"
+PROJECT_ROOT=$(resolve_project_root "$INPUT" "$HOOK_DIR") || {
+  echo "Could not resolve project root." >&2
+  exit 1
+}
+IS_CODEX_STOP=$(jq -r 'if (.hook_event_name == "Stop" and (has("turn_id") or has("stop_hook_active") or has("last_assistant_message"))) then "1" else "0" end' <<<"$INPUT" 2>/dev/null || echo "0")
+
+emit_success() {
+  if [[ "$IS_CODEX_STOP" != "1" ]]; then
+    echo "$1"
+  fi
+}
+
+cd "$PROJECT_ROOT"
 
 CHANGED=$(git diff --name-only HEAD 2>/dev/null || true)
 if [[ -z "$CHANGED" ]]; then
-  echo "No changed files. Skipping tests."
+  emit_success "No changed files. Skipping tests."
   exit 0
 fi
 
@@ -33,5 +48,5 @@ if [[ ${#FAILED[@]} -gt 0 ]]; then
   echo "Tests failed in: ${FAILED[*]}" >&2
   exit 2
 else
-  echo "All checks passed."
+  emit_success "All checks passed."
 fi
