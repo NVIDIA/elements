@@ -1,0 +1,9 @@
+notify = [ # codex does not yet support notification hooks
+  "bash",
+  "-lc",
+  'root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"; "$root/.agents/hooks/notification.sh" "$@"',
+  "codex-notify",
+]
+
+[features]
+codex_hooks = true # partial/experimental support

@@ -1,5 +1,5 @@
 ---
-name: repo-code-review
+name: code-review
 description: Comprehensive code review process for Elements monorepo changes. Provides structured feedback on type safety, testing, documentation, and adherence to project guidelines. Use this skill whenever the user asks you to review code, check staged changes, look at a diff, give feedback before committing, review a PR or merge request, or evaluate code quality. Trigger on phrases like "review my changes," "check my code," "give me feedback," "look at my staged files," "review this PR," or "before I commit."
 ---
 

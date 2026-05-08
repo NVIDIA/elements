@@ -2,7 +2,9 @@
 set -euo pipefail
 
 INPUT=$(cat)
-COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
+HOOK_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+source "$HOOK_DIR/lib/project-root.sh"
+COMMAND=$(hook_command_from_input "$INPUT" || true)
 
 # Exit early if not a git command
 if [[ -z "$COMMAND" ]] || ! echo "$COMMAND" | grep -qE '^\s*git\s'; then

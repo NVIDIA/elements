@@ -1,5 +1,5 @@
 ---
-name: repo-accessibility
+name: accessibility
 description: Unified accessibility auditing workflow across static analysis, runtime testing, ARIA patterns, keyboard navigation, and color contrast. Use this skill whenever the user mentions accessibility, a11y, WCAG, ARIA roles, axe tests, screen readers, focus management, keyboard navigation, color contrast, or wants to audit, verify, or fix accessibility on any component. Also use when writing or debugging .test.axe.ts files, checking tabindex management, or reviewing focus trapping behavior.
 user_invocable: true
 ---
