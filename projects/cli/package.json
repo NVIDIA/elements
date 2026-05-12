@@ -5,10 +5,18 @@
     "extends": "../../release.config.js"
   },
   "description": "Command-line interface for Elements development and tooling, providing interactive prompts, project scaffolding, and integration with AI assistants via Model Context Protocol.",
+  "keywords": [
+    "cli",
+    "mcp",
+    "elements",
+    "web-components"
+  ],
+  "homepage": "https://NVIDIA.github.io/elements/",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NVIDIA/elements.git"
+    "url": "git+https://github.com/NVIDIA/elements.git",
+    "directory": "projects/cli"
   },
   "sideEffects": false,
   "bin": {
