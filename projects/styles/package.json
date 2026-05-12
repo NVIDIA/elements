@@ -5,12 +5,21 @@
     "extends": "../../release.config.js"
   },
   "description": "Core CSS foundation for the Elements design system, providing layout utilities, typography styles, and view transitions.",
+  "keywords": [
+    "css",
+    "layout",
+    "typography"
+  ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "customElements": "dist/custom-elements.json",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NVIDIA/elements.git"
+    "url": "git+https://github.com/NVIDIA/elements.git",
+    "directory": "projects/styles"
   },
+  "sideEffects": [
+    "./dist/**/*.css"
+  ],
   "type": "module",
   "contributes": {
     "html": {
