@@ -5,12 +5,21 @@
     "extends": "../../release.config.js"
   },
   "description": "Themes for the Elements design system, providing comprehensive color palettes, typography, and spacing.",
+  "keywords": [
+    "themes",
+    "design-tokens",
+    "css-variables"
+  ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "customElements": "dist/custom-elements.json",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NVIDIA/elements.git"
+    "url": "git+https://github.com/NVIDIA/elements.git",
+    "directory": "projects/themes"
   },
+  "sideEffects": [
+    "./dist/**/*.css"
+  ],
   "type": "module",
   "contributes": {
     "cssVars": {
