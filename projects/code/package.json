@@ -5,10 +5,16 @@
     "extends": "../../release.config.js"
   },
   "description": "Code authoring related components. Providing syntax-highlighted code blocks with support for multiple programming languages.",
+  "keywords": [
+    "web-components",
+    "syntax-highlight",
+    "code-blocks"
+  ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NVIDIA/elements.git"
+    "url": "git+https://github.com/NVIDIA/elements.git",
+    "directory": "projects/code"
   },
   "type": "module",
   "customElements": "dist/custom-elements.json",
