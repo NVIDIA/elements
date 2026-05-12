@@ -5,10 +5,16 @@
     "extends": "../../release.config.js"
   },
   "description": "Provides integration with VS Code's Monaco editor for code editing, syntax highlighting, and diff visualization.",
+  "keywords": [
+    "monaco",
+    "code-editor",
+    "web-components"
+  ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NVIDIA/elements.git"
+    "url": "git+https://github.com/NVIDIA/elements.git",
+    "directory": "projects/monaco"
   },
   "type": "module",
   "customElements": "dist/custom-elements.json",
