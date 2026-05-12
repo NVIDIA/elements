@@ -5,11 +5,19 @@
     "extends": "../../release.config.js"
   },
   "description": "Create new Elements projects with 'npm create @nvidia-elements'. A thin wrapper that delegates to @nvidia-elements/cli for project scaffolding.",
+  "keywords": [
+    "project-scaffolding",
+    "elements",
+    "create"
+  ],
+  "homepage": "https://NVIDIA.github.io/elements/",
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NVIDIA/elements.git"
+    "url": "git+https://github.com/NVIDIA/elements.git",
+    "directory": "projects/create"
   },
+  "sideEffects": false,
   "bin": {
     "create-nve": "./dist/index.js"
   },
