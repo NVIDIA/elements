@@ -5,10 +5,16 @@
     "extends": "../../release.config.js"
   },
   "description": "Form control utilities and validation providing mixins, validators, and schema-based validation. Includes form association, event handling, and support for complex data types.",
+  "keywords": [
+    "forms",
+    "validation",
+    "web-components"
+  ],
   "homepage": "https://NVIDIA.github.io/elements/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NVIDIA/elements.git"
+    "url": "git+https://github.com/NVIDIA/elements.git",
+    "directory": "projects/forms"
   },
   "type": "module",
   "customElements": "dist/custom-elements.json",
