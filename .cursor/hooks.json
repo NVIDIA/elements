@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": "root=\"$(git rev-parse --show-toplevel)\" && AGENTS_PROJECT_DIR=\"$root\" \"$root/.agents/hooks/session-start.sh\" >&2",
+        "timeout": 600
+      }
+    ],
+    "preToolUse": [
+      {
+        "command": "root=\"$(git rev-parse --show-toplevel)\" && AGENTS_PROJECT_DIR=\"$root\" \"$root/.agents/hooks/pre-tool-use-bash.sh\" >&2",
+        "matcher": "Shell",
+        "timeout": 30
+      },
+      {
+        "command": "root=\"$(git rev-parse --show-toplevel)\" && AGENTS_PROJECT_DIR=\"$root\" \"$root/.agents/hooks/pre-tool-use-edit-write.sh\" >&2",
+        "matcher": "Write|Edit",
+        "timeout": 30
+      }
+    ],
+    "postToolUse": [
+      {
+        "command": "root=\"$(git rev-parse --show-toplevel)\" && AGENTS_PROJECT_DIR=\"$root\" \"$root/.agents/hooks/post-tool-use-edit-write.sh\" >&2",
+        "matcher": "Write|Edit",
+        "timeout": 120
+      }
+    ],
+    "stop": [
+      {
+        "command": "root=\"$(git rev-parse --show-toplevel)\" && AGENTS_PROJECT_DIR=\"$root\" \"$root/.agents/hooks/stop.sh\" >&2",
+        "timeout": 600
+      }
+    ]
+  }
+}

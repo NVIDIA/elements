@@ -208,7 +208,7 @@ export default [
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">@nvidia-elements/lint/no-slotted-popovers</code></nve-grid-cell>
-    <nve-grid-cell>Disallow the slot attribute on popover elements (nve-tooltip, nve-dialog, nve-drawer, ...).</nve-grid-cell>
+    <nve-grid-cell>Disallow the slot attribute on popover elements.</nve-grid-cell>
     <nve-grid-cell>HTML</nve-grid-cell>
     <nve-grid-cell><code nve-text="code">error</code></nve-grid-cell>
   </nve-grid-row>
