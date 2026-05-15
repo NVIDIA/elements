@@ -2,9 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { ExamplesService as ExamplesServiceMetadata, type Example } from '@internals/metadata';
-import { service, tool, ToolSupport } from '../internal/tools.js';
+import type { TemplateLintMessage } from '@nvidia-elements/lint/eslint/internals';
+import { service, tool, ToolError, ToolSupport } from '../internal/tools.js';
 import { getContextExamples, renderExampleMarkdown, searchContextExamples } from './utils.js';
 import { markdownDescription } from '../internal/utils.js';
+import { eslintSchema } from '../internal/schema.js';
 
 const MAX_RESULT_LIMIT = 5;
 
@@ -58,6 +60,7 @@ export class ExamplesService {
   }
 
   @tool({
+    app: { resourceUri: 'ui://elements/example-preview' },
     summary: 'Get the full template of a known example or pattern by id.',
     inputSchema: {
       type: 'object',
@@ -80,18 +83,19 @@ export class ExamplesService {
       oneOf: [{ type: 'string' }, { type: 'object', additionalProperties: true }]
     }
   })
-  static async get({ id, format }: { id: string; format: 'markdown' | 'json' }): Promise<Example | string | undefined> {
+  static async get({ id, format }: { id: string; format: 'markdown' | 'json' }): Promise<Example | string> {
     const results = (await getContextExamples('json', await ExamplesServiceMetadata.getData())) as Example[];
     const found = results.find(r => r.id.toLocaleLowerCase() === id.toLowerCase());
+
+    if (!found) {
+      throw new Error(`Unknown example "${id}". Use the examples_list tool to get a list of all available examples.`);
+    }
 
     if (format === 'json') {
       return found;
     }
 
-    const markdown = found?.template
-      ? renderExampleMarkdown(found)
-      : 'Example not found. Use the list tool to get a list of all available examples and patterns.';
-    return markdown;
+    return renderExampleMarkdown(found);
   }
 
   @tool({
@@ -142,6 +146,56 @@ export class ExamplesService {
   })
   static async search({ query, format }: { query: string; format: 'markdown' | 'json' }): Promise<Example[] | string> {
     return await searchContextExamples(query, { format, limit: MAX_RESULT_LIMIT });
+  }
+
+  @tool({
+    app: { resourceUri: 'ui://elements/example-preview' },
+    support: ToolSupport.MCP,
+    summary: 'Render a custom Elements (nve-*) HTML template inline in the chat UI.',
+    description: `Render an ad-hoc Elements (nve-*) HTML template in the MCP App preview iframe. The template is linted against Elements APIs before rendering. Lint failures return a tool error instead of rendering the template. Use this to preview compositions you author. Templates should be self-contained HTML — the iframe loads the Elements bundle and themes automatically.`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        template: {
+          type: 'string',
+          description: 'HTML template to render. Should use Elements (nve-*) components.'
+        },
+        name: {
+          type: 'string',
+          description: 'Optional human-readable label for the preview.'
+        }
+      },
+      required: ['template'],
+      additionalProperties: false
+    },
+    outputSchema: {
+      type: 'object',
+      properties: {
+        template: { type: 'string' },
+        name: { type: 'string' },
+        lintMessages: {
+          type: 'array',
+          items: eslintSchema,
+          description: 'Lint messages. Empty on success; non-empty when returned with status error.'
+        }
+      },
+      additionalProperties: false,
+      required: ['template', 'lintMessages']
+    }
+  })
+  static async render({
+    template,
+    name
+  }: {
+    template: string;
+    name?: string;
+  }): Promise<{ template: string; name?: string; lintMessages: TemplateLintMessage[] }> {
+    const { lintTemplate } = await import('@nvidia-elements/lint/eslint/internals');
+    const lintMessages = await lintTemplate(template, { strict: true });
+    if (lintMessages.length) {
+      throw new ToolError('Template validation failed.', { template, name, lintMessages });
+    }
+    return { template, name, lintMessages };
   }
 
   static async getAll(): Promise<Example[]> {

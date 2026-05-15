@@ -2,26 +2,26 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, it, expect } from 'vitest';
-import { lintPlaygroundTemplate } from './index.js';
+import { lintTemplate } from './index.js';
 
 describe('lintPlaygroundTemplate', () => {
   it('should return empty array for valid HTML code', async () => {
     const validCode = '<div>Hello World</div>';
-    const result = await lintPlaygroundTemplate(validCode);
+    const result = await lintTemplate(validCode, { strict: true });
 
     expect(result).toEqual([]);
   });
 
   it('should return empty array for valid custom elements', async () => {
     const validCode = '<nve-button>Click me</nve-button>';
-    const result = await lintPlaygroundTemplate(validCode);
+    const result = await lintTemplate(validCode, { strict: true });
 
     expect(result).toEqual([]);
   });
 
   it('should detect restricted attributes on custom elements', async () => {
     const codeWithRestrictedAttribute = '<nve-button nve-layout="pad:md">Button</nve-button>';
-    const result = await lintPlaygroundTemplate(codeWithRestrictedAttribute);
+    const result = await lintTemplate(codeWithRestrictedAttribute, { strict: true });
 
     expect(result.length).toBeGreaterThan(0);
     expect(
@@ -32,7 +32,7 @@ describe('lintPlaygroundTemplate', () => {
 
   it('should map ESLint severity correctly', async () => {
     const codeWithViolation = '<nve-button nve-layout="pad:md">Button</nve-button>';
-    const result = await lintPlaygroundTemplate(codeWithViolation);
+    const result = await lintTemplate(codeWithViolation, { strict: true });
 
     expect(result.length).toBeGreaterThan(0);
     const message = result[0];
@@ -41,7 +41,7 @@ describe('lintPlaygroundTemplate', () => {
 
   it('should include correct line and column information', async () => {
     const codeWithViolation = '<nve-button nve-layout="pad:md">Button</nve-button>';
-    const result = await lintPlaygroundTemplate(codeWithViolation);
+    const result = await lintTemplate(codeWithViolation, { strict: true });
 
     expect(result.length).toBeGreaterThan(0);
     const message = result[0];
@@ -55,7 +55,7 @@ describe('lintPlaygroundTemplate', () => {
 
   it('should return proper TemplateLintMessage structure', async () => {
     const codeWithViolation = '<nve-button nve-layout="pad:md">Button</nve-button>';
-    const result = await lintPlaygroundTemplate(codeWithViolation);
+    const result = await lintTemplate(codeWithViolation, { strict: true });
 
     expect(result.length).toBeGreaterThan(0);
     const message = result[0];
@@ -80,7 +80,7 @@ describe('lintPlaygroundTemplate', () => {
   });
 
   it('should return warning for empty string input', async () => {
-    const result = await lintPlaygroundTemplate('');
+    const result = await lintTemplate('', { strict: true });
     expect(result).toHaveLength(1);
     expect(result[0].id).toBe('empty-template');
     expect(result[0].severity).toBe('warn');
@@ -88,14 +88,14 @@ describe('lintPlaygroundTemplate', () => {
   });
 
   it('should return warning for whitespace-only input', async () => {
-    const result = await lintPlaygroundTemplate('   \n\t  ');
+    const result = await lintTemplate('   \n\t  ', { strict: true });
     expect(result).toHaveLength(1);
     expect(result[0].id).toBe('empty-template');
   });
 
   it('should handle malformed HTML gracefully', async () => {
     const malformedCode = '<div><span>Unclosed tags';
-    const result = await lintPlaygroundTemplate(malformedCode);
+    const result = await lintTemplate(malformedCode, { strict: true });
     expect(Array.isArray(result)).toBe(true);
   });
 
@@ -104,7 +104,7 @@ describe('lintPlaygroundTemplate', () => {
       <nve-button nve-layout="pad:md">Button 1</nve-button>
       <nve-button nve-text="body">Button 2</nve-button>
     `;
-    const result = await lintPlaygroundTemplate(codeWithMultipleViolations);
+    const result = await lintTemplate(codeWithMultipleViolations, { strict: true });
 
     expect(result.length).toBeGreaterThan(1);
     expect(result[0].id).toBe('no-restricted-attributes-with-supported');
@@ -113,12 +113,26 @@ describe('lintPlaygroundTemplate', () => {
 
   it('should handle suggestions', async () => {
     const codeWithSuggestion = '<nve-button mlv-layout="pad:md">Button</nve-button>';
-    const result = await lintPlaygroundTemplate(codeWithSuggestion);
+    const result = await lintTemplate(codeWithSuggestion, { strict: true });
     expect(result.length).toBeGreaterThan(0);
 
     const messageWithSuggestion = result.find(msg => msg.id === 'unexpected-deprecated-global-attribute');
     expect(messageWithSuggestion).toBeDefined();
     expect(messageWithSuggestion.suggestions).toBeDefined();
     expect(messageWithSuggestion.suggestions.length).toBeGreaterThan(0);
+  });
+
+  it('should apply non-strict template rules as warnings', async () => {
+    const result = await lintTemplate('<div class="flex"></div>', { strict: false });
+    const tailwindMessage = result.find(message => message.id === 'no-tailwind-class-with-suggestion');
+
+    expect(tailwindMessage?.severity).toBe('warn');
+  });
+
+  it('should apply strict template rules as errors', async () => {
+    const result = await lintTemplate('<div class="flex"></div>', { strict: true });
+    const tailwindMessage = result.find(message => message.id === 'no-tailwind-class-with-suggestion');
+
+    expect(tailwindMessage?.severity).toBe('error');
   });
 });

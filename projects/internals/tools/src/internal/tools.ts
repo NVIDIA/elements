@@ -19,7 +19,7 @@ export const ToolSupport = {
 
 export type ToolSupportFlags = number;
 
-interface ToolMetadata {
+export interface ToolMetadata {
   inputSchema?: Schema;
   outputSchema?: Schema;
   summary: string;
@@ -30,6 +30,11 @@ interface ToolMetadata {
   command: string;
   toolName: string;
   support: ToolSupportFlags;
+  app?: ToolApp;
+}
+
+export interface ToolApp {
+  resourceUri: string;
 }
 
 export interface Schema {
@@ -67,7 +72,17 @@ export type ToolMethod<T> = {
 export interface ToolOutput<T = unknown> {
   status: 'complete' | 'error';
   message?: string;
-  result: T;
+  result?: T;
+}
+
+export class ToolError<T = unknown> extends Error {
+  constructor(
+    message: string,
+    readonly result?: T
+  ) {
+    super(message);
+    this.name = 'ToolError';
+  }
 }
 
 /**
@@ -94,7 +109,8 @@ export function tool({
   annotations,
   inputSchema,
   outputSchema,
-  support
+  support,
+  app
 }: {
   summary: string;
   description?: string;
@@ -102,6 +118,7 @@ export function tool({
   inputSchema?: Schema;
   outputSchema?: Schema;
   support?: ToolSupportFlags;
+  app?: ToolApp;
 }) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return function (originalMethod: ToolMethod<any>, _context: ClassMethodDecoratorContext) {
@@ -119,7 +136,8 @@ export function tool({
       outputSchema,
       name: originalMethod.name,
       title: originalMethod.name.replace(/([A-Z])/g, ' $1').trim(),
-      command
+      command,
+      app
     };
     Object.assign(originalMethod, { metadata });
     return originalMethod;
@@ -146,7 +164,11 @@ export function loadTools(obj: any): ManagedToolMethod<unknown>[] {
         try {
           return { status: 'complete', message: '', result: await obj[name](...args) };
         } catch (e) {
-          return { status: 'error', message: (e as Error).message };
+          return {
+            status: 'error',
+            message: e instanceof Error ? e.message : String(e),
+            result: e instanceof ToolError ? e.result : undefined
+          };
         }
       };
       obj[toolName].metadata = obj[name].metadata;

@@ -1,0 +1,311 @@
+// SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+const iconsListStyle = /* css */ `
+:host {
+  display: block;
+}
+
+.icons-shell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nve-ref-space-sm);
+}
+
+.icons-count {
+  color: var(--nve-sys-text-muted-color);
+  font-size: var(--nve-ref-font-size-100);
+  font-weight: var(--nve-ref-font-weight-bold);
+  line-height: var(--nve-ref-line-height-sm);
+}
+
+.icons-grid,
+.icons-empty,
+.icons-error {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--nve-ref-space-xs);
+  max-height: 480px;
+  overflow-y: auto;
+  scrollbar-color: var(--nve-sys-scrollbar-thumb-color) var(--nve-sys-scrollbar-track-color);
+  scrollbar-width: var(--nve-sys-scrollbar-width);
+}
+
+.icons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--nve-ref-space-xs);
+
+  nve-button {
+    --height: 80px;
+    --border-radius: var(--nve-ref-border-radius-sm);
+    --font-size: var(--nve-ref-font-size-50);
+  }
+
+  .icon-button-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--nve-ref-space-xs);
+  }
+}
+`;
+
+const iconsListStyleSheet = new CSSStyleSheet();
+iconsListStyleSheet.replaceSync(iconsListStyle);
+
+class ElementsIconsList extends HTMLElement {
+  constructor() {
+    super();
+    this.renderRoot = this.attachShadow({ mode: 'open' });
+    this.renderRoot.adoptedStyleSheets = [iconsListStyleSheet];
+    this.state = { icons: [], errorMessage: '', loaded: false, loading: false, query: '' };
+    this.grid = null;
+    this.count = null;
+    this.copiedToast = null;
+  }
+
+  get icons() {
+    return this.state.icons;
+  }
+
+  set icons(value) {
+    const icons = Array.isArray(value) ? value.filter(name => typeof name === 'string' && name.length > 0) : [];
+    this.#setIcons(icons);
+  }
+
+  get errorMessage() {
+    return this.state.errorMessage;
+  }
+
+  set errorMessage(value) {
+    this.state.errorMessage = typeof value === 'string' ? value : '';
+    this.state.loaded = false;
+    this.state.loading = false;
+    this.#renderCurrentState();
+  }
+
+  connectedCallback() {
+    this.#renderShell();
+    this.#requestIcons();
+  }
+
+  #iconSource(name) {
+    return '<nve-icon name="' + name + '"></nve-icon>';
+  }
+
+  #renderShell() {
+    const root = document.createElement('main');
+    root.className = 'icons-shell';
+    this.count = document.createElement('span');
+    this.count.className = 'icons-count';
+
+    const searchControl = document.createElement('nve-search');
+    searchControl.setAttribute('rounded', '');
+    const search = document.createElement('input');
+    search.type = 'search';
+    search.placeholder = 'Search icons';
+    search.setAttribute('aria-label', 'Search icons');
+    search.autocomplete = 'off';
+    search.addEventListener('input', () => {
+      this.state.query = search.value.trim().toLowerCase();
+      if (this.state.loaded) {
+        this.#renderIcons();
+      }
+    });
+    searchControl.append(search);
+
+    this.grid = document.createElement('section');
+
+    this.copiedToast = document.createElement('nve-toast');
+    this.copiedToast.setAttribute('hidden', '');
+    this.copiedToast.setAttribute('status', 'success');
+    this.copiedToast.setAttribute('position', 'top');
+    this.copiedToast.setAttribute('close-timeout', '1500');
+    this.copiedToast.textContent = 'Copied';
+
+    root.append(this.count, searchControl, this.grid, this.copiedToast);
+    this.renderRoot.replaceChildren(root);
+    this.#renderCurrentState();
+  }
+
+  #renderCurrentState() {
+    if (!this.count || !this.grid) return;
+    if (this.state.errorMessage) {
+      this.#renderError(this.state.errorMessage);
+      return;
+    }
+    if (this.state.loaded) {
+      this.#renderIcons();
+      return;
+    }
+    this.#renderLoading();
+  }
+
+  #renderLoading() {
+    this.count.textContent = 'Loading';
+    this.grid.className = 'icons-empty';
+    this.grid.textContent = 'Loading icons';
+  }
+
+  #renderError(message) {
+    this.count.textContent = 'Unavailable';
+    this.grid.className = 'icons-error';
+    this.grid.textContent = message;
+  }
+
+  #renderIcons() {
+    const filtered = this.state.query
+      ? this.state.icons.filter(name => name.includes(this.state.query))
+      : this.state.icons;
+    this.count.textContent = filtered.length + ' of ' + this.state.icons.length;
+    this.grid.className = filtered.length ? 'icons-grid' : 'icons-empty';
+    this.grid.replaceChildren();
+    if (!filtered.length) {
+      this.grid.textContent = 'No icons found';
+      return;
+    }
+    filtered.forEach(name => this.grid.append(this.#createIconCard(name)));
+  }
+
+  #createIconCard(name) {
+    const copyButton = document.createElement('nve-button');
+    copyButton.setAttribute('aria-label', 'Copy ' + name + ' source');
+    copyButton.title = 'Copy source';
+
+    const copyButtonContent = document.createElement('div');
+    copyButtonContent.className = 'icon-button-content';
+
+    const icon = document.createElement('nve-icon');
+    icon.setAttribute('name', name);
+    icon.setAttribute('aria-hidden', 'true');
+    icon.size = 'lg';
+
+    const iconName = document.createElement('span');
+    iconName.className = 'icon-name';
+    iconName.textContent = name;
+
+    copyButtonContent.append(icon, iconName);
+    copyButton.append(copyButtonContent);
+    copyButton.addEventListener('click', () => {
+      void this.#copySource(this.#iconSource(name), copyButton);
+    });
+
+    return copyButton;
+  }
+
+  async #copySource(source, button) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(source);
+      } else {
+        this.#copyWithTextArea(source);
+      }
+    } catch (_err) {
+      this.#copyWithTextArea(source);
+    }
+    button.dataset.copied = 'true';
+    this.#showCopiedToast(button);
+    window.setTimeout(() => {
+      button.dataset.copied = 'false';
+    }, 1200);
+  }
+
+  #showCopiedToast(button) {
+    if (!this.copiedToast) return;
+    if (this.copiedToast.matches(':popover-open')) {
+      this.copiedToast.hidePopover();
+    }
+    this.copiedToast.showPopover({ source: button });
+  }
+
+  #copyWithTextArea(source) {
+    const textarea = document.createElement('textarea');
+    textarea.value = source;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.append(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+  }
+
+  #setIcons(icons) {
+    this.state.icons = icons;
+    this.state.errorMessage = '';
+    this.state.loaded = true;
+    this.state.loading = false;
+    this.#renderCurrentState();
+  }
+
+  #requestIcons() {
+    if (this.state.loaded || this.state.loading) return;
+    this.state.loading = true;
+    this.dispatchEvent(new CustomEvent('icons-request', { bubbles: true, composed: true }));
+  }
+}
+
+customElements.define('nve-mcp-api-icons-list', ElementsIconsList);
+
+const client = new Client({ name: 'Elements Icons List', version: '1.0.0' });
+
+const iconList = document.createElement('nve-mcp-api-icons-list');
+
+function getStructuredResult(payload) {
+  if (!payload) return undefined;
+  if (payload.structuredContent && payload.structuredContent.result !== undefined)
+    return payload.structuredContent.result;
+  if (payload.result && payload.result.structuredContent) return payload.result.structuredContent.result;
+  if (payload.result !== undefined) return payload.result;
+  return undefined;
+}
+
+function getIconNames(payload) {
+  const result = getStructuredResult(payload);
+  return Array.isArray(result) ? result.filter(name => typeof name === 'string' && name.length > 0) : [];
+}
+
+let iconsLoaded = false;
+let iconsLoading = false;
+
+function setIconsFromPayload(payload) {
+  const icons = getIconNames(payload);
+  if (!icons.length) return false;
+  iconsLoaded = true;
+  iconsLoading = false;
+  iconList.icons = icons;
+  return true;
+}
+
+async function loadIcons() {
+  if (iconsLoaded || iconsLoading) return;
+  iconsLoading = true;
+  try {
+    const res = await client.callServerTool({
+      name: 'api_icons_list',
+      arguments: { format: 'json' }
+    });
+    if (!setIconsFromPayload(res)) {
+      iconsLoading = false;
+      iconList.errorMessage = 'Failed to load icons: no icons returned';
+    }
+  } catch (err) {
+    iconsLoading = false;
+    iconList.errorMessage = 'Failed to load icons: ' + (err && err.message ? err.message : 'unknown error');
+  }
+}
+
+iconList.addEventListener('icons-request', () => {
+  void loadIcons();
+});
+
+client.ontoolresult = params => {
+  if (!setIconsFromPayload(params)) {
+    void loadIcons();
+  }
+};
+
+client.connect();
+document.body.replaceChildren(iconList);

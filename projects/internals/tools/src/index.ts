@@ -10,8 +10,6 @@ import { CliService } from './cli/service.js';
 import { SkillsService } from './skills/service.js';
 import { loadTools } from './internal/tools.js';
 
-declare const __ELEMENTS_PLAYGROUND_BASE_URL__: string;
-
 export const VERSION = '0.0.0';
 
 export {
@@ -20,7 +18,10 @@ export {
   type ManagedToolMethod,
   type Schema,
   type ToolSupportFlags,
+  type ToolApp,
+  type ToolMetadata,
   ToolSupport,
+  ToolError,
   jsonSchemaToZod
 } from './internal/tools.js';
 
@@ -31,7 +32,7 @@ export { type Report, type ReportCheck } from './internal/types.js';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const services: any[] = [ApiService, CliService, ExamplesService, ProjectService, PackagesService, SkillsService];
 
-if (__ELEMENTS_PLAYGROUND_BASE_URL__) {
+if (process.env.ELEMENTS_PLAYGROUND_BASE_URL) {
   services.push(PlaygroundService);
 }
 

@@ -59,8 +59,22 @@ export async function searchContextAPIs(query: string, config: { limit?: number 
   return config.limit !== undefined ? data.slice(0, config.limit) : data;
 }
 
-export function getContextTokens(format: 'markdown' | 'json', tokens: Token[]): string | Token[] | undefined {
-  const filteredTokens = distillTokens(tokens);
+interface TokenFilterOptions {
+  query?: string;
+}
+
+function tokenMatchesQuery(token: Token, query: string): boolean {
+  const normalizedQuery = query.trim().toLowerCase();
+  if (!normalizedQuery) return true;
+  return [token.name, token.value, token.description].some(value => value.toLowerCase().includes(normalizedQuery));
+}
+
+export function getContextTokens(
+  format: 'markdown' | 'json',
+  tokens: Token[],
+  { query = '' }: TokenFilterOptions = {}
+): string | Token[] | undefined {
+  const filteredTokens = distillTokens(tokens).filter(token => tokenMatchesQuery(token, query));
 
   if (format === 'markdown') {
     return `## CSS Variables\n\nAvailable semantic design tokens for theming.

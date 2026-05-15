@@ -99,7 +99,8 @@ describe('index', () => {
         input: ''
       });
       expect(result.status).toBe(1);
-      expect(result.stderr + result.stdout).toContain('Invalid values');
+      expect(result.stdout).toBe('');
+      expect(result.stderr).toContain('Invalid values');
     });
   });
 
@@ -114,6 +115,40 @@ describe('index', () => {
       expect(combined).not.toContain('"nve-foo,nve-bar"');
       expect(combined).toContain('nve-foo');
       expect(combined).toContain('nve-bar');
+    });
+  });
+
+  describe('tool errors', () => {
+    it('should exit with error when exact api lookup has no matches', () => {
+      const result = spawnSync('node', ['dist/index.js', 'api.get', 'nve-badges'], {
+        timeout: 10000,
+        encoding: 'utf-8',
+        input: ''
+      });
+
+      expect(result.status).toBe(1);
+      expect(result.stdout).toBe('');
+      expect(result.stderr).toContain('No components or APIs found matching');
+      expect(result.stderr).toContain('nve-badges');
+    });
+
+    it('should print structured error results when they are available', () => {
+      const result = spawnSync(
+        'node',
+        ['dist/index.js', 'playground.create', '<nve-button nve-layout="column">hello</nve-button>'],
+        {
+          timeout: 10000,
+          encoding: 'utf-8',
+          input: '',
+          env: { ...process.env, CI: 'true', ELEMENTS_PLAYGROUND_BASE_URL: 'https://playground.example' }
+        }
+      );
+      const lintMessages = JSON.parse(result.stderr) as { message: string }[];
+
+      expect(result.status).toBe(1);
+      expect(result.stdout).toBe('');
+      expect(Array.isArray(lintMessages)).toBe(true);
+      expect(lintMessages[0]?.message).toContain('Unexpected use of restricted attribute "nve-layout"');
     });
   });
 });

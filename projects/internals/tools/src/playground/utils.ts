@@ -7,8 +7,8 @@ import type { Element } from '@internals/metadata';
 import { getElementImports } from '../internal/utils.js';
 import { validateTemplate } from '../internal/validate.js';
 
-declare const __ELEMENTS_PLAYGROUND_BASE_URL__: string;
-declare const __ELEMENTS_ESM_CDN_BASE_URL__: string;
+const ELEMENTS_PLAYGROUND_BASE_URL = process.env.ELEMENTS_PLAYGROUND_BASE_URL ?? '';
+const ELEMENTS_ESM_CDN_BASE_URL = process.env.ELEMENTS_ESM_CDN_BASE_URL ?? '';
 
 interface PlaygroundOptions {
   type?: PlaygroundType;
@@ -146,9 +146,9 @@ export function createVueFiles(content: string, elements: Element[], options: Pl
 
 function createURL(files: string, options: PlaygroundOptions) {
   const defaultOptions = { openFile: 'index.html', ...options };
-  return __ELEMENTS_PLAYGROUND_BASE_URL__?.length > 0
+  return ELEMENTS_PLAYGROUND_BASE_URL.length > 0
     ? encodeURI(
-        `${__ELEMENTS_PLAYGROUND_BASE_URL__}/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim()}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`
+        `${ELEMENTS_PLAYGROUND_BASE_URL}/?version=1&layout=vertical-split${defaultOptions.name ? `&name=${defaultOptions.name.trim()}` : ''}${defaultOptions.theme ? `&theme=${defaultOptions.theme}` : ''}&file=${defaultOptions.openFile}${defaultOptions.referer ? `&ref=${defaultOptions.referer}` : ''}&files=${files}`
       )
     : '';
 }
@@ -254,7 +254,7 @@ const frameworkImportMap: Record<string, (cdn: string) => Record<string, string>
 };
 
 function createImportMap(framework: 'react' | 'preact' | 'angular' | 'lit' | 'vue' | 'vanilla' = 'vanilla') {
-  const CDN_MODULES_URL = __ELEMENTS_ESM_CDN_BASE_URL__;
+  const CDN_MODULES_URL = ELEMENTS_ESM_CDN_BASE_URL;
   const imports: Record<string, string> = {
     '@nvidia-elements/core': `${CDN_MODULES_URL}/@nvidia-elements/core@latest`,
     '@nvidia-elements/core/': `${CDN_MODULES_URL}/@nvidia-elements/core@latest/`,

@@ -20,7 +20,8 @@ import {
   isObjectLiteral,
   renderResult,
   statusIcons,
-  wrapUrl
+  wrapUrl,
+  progressBar
 } from './utils.js';
 
 vi.mock('ora');
@@ -161,6 +162,22 @@ describe('utils', () => {
 
       await expect(runAsyncTool(args, mockFn)).rejects.toThrow('Test error');
       expect(mockFn).toHaveBeenCalledWith(args);
+    });
+
+    it('should append console and progress output to the spinner text', async () => {
+      vi.spyOn(Date, 'now').mockReturnValueOnce(0).mockReturnValueOnce(1000);
+      const args = {};
+      mockFn.mockImplementationOnce(async value => {
+        console.log('console update');
+        (value.onProgress as (message: string) => void)('progress update');
+        return 'test result';
+      });
+
+      const result = await runAsyncTool(args, mockFn);
+
+      expect(result).toBe('test result');
+      expect(mockSpinner.text).toContain('console update');
+      expect(mockSpinner.text).toContain('progress update');
     });
   });
 
@@ -363,6 +380,18 @@ describe('utils', () => {
     it('should handle URLs at exactly maxWidth', () => {
       const url = 'https://example.com'; // 19 chars
       expect(wrapUrl(url, 19)).toBe(url);
+    });
+  });
+
+  describe('progressBar', () => {
+    it('should render a clamped progress bar with default width', () => {
+      expect(progressBar(50)).toBe('██████████░░░░░░░░░░');
+      expect(progressBar(-10)).toBe('░░░░░░░░░░░░░░░░░░░░');
+      expect(progressBar(110)).toBe('████████████████████');
+    });
+
+    it('should respect custom width', () => {
+      expect(progressBar(25, 8)).toBe('██░░░░░░');
     });
   });
 

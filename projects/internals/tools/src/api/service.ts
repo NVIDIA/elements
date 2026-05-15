@@ -122,7 +122,7 @@ export class ApiService {
     const notFound = results.filter((r: Element | Attribute | string): r is string => typeof r === 'string');
 
     if (found.length === 0) {
-      return `No components or APIs found matching "${notFound.join('", "')}".\n\n${listToolHelpfulTip}`;
+      throw new Error(`No components or APIs found matching "${notFound.join('", "')}".\n\n${listToolHelpfulTip}`);
     }
 
     if (format === 'json') {
@@ -162,12 +162,8 @@ export class ApiService {
     }
   })
   static async templateValidate({ template }: { template: string }): Promise<TemplateLintMessage[]> {
-    if (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli') {
-      const { lintTemplate } = await import('@nvidia-elements/lint/eslint/internals');
-      return await lintTemplate(template);
-    } else {
-      return [];
-    }
+    const { lintTemplate } = await import('@nvidia-elements/lint/eslint/internals');
+    return await lintTemplate(template, { strict: false });
   }
 
   @tool({
@@ -192,6 +188,7 @@ export class ApiService {
   }
 
   @tool({
+    app: { resourceUri: 'ui://elements/tokens-list' },
     summary: 'Get available semantic CSS custom properties / design tokens for theming.',
     inputSchema: {
       type: 'object',
@@ -201,6 +198,10 @@ export class ApiService {
           description: markdownDescription,
           enum: ['markdown', 'json'],
           default: 'markdown'
+        },
+        query: {
+          type: 'string',
+          description: 'Optional search query used to filter tokens by name, value, or description before rendering.'
         }
       },
       additionalProperties: false
@@ -225,13 +226,14 @@ export class ApiService {
     }
   })
   static async tokensList(
-    { format }: { format: 'markdown' | 'json' } = { format: 'markdown' }
-  ): Promise<{ name: string; description: string }[] | string> {
+    { format, query }: { format: 'markdown' | 'json'; query?: string } = { format: 'markdown' }
+  ): Promise<{ name: string; value: string; description: string }[] | string> {
     const apis = await MetadataApiService.getData();
-    return getContextTokens(format, apis.data.tokens) ?? '';
+    return getContextTokens(format, apis.data.tokens, { query }) ?? '';
   }
 
   @tool({
+    app: { resourceUri: 'ui://elements/icons-list' },
     summary: 'Get list of all available icon names for nve-icon and nve-icon-button.',
     inputSchema: {
       type: 'object',

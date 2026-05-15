@@ -94,18 +94,7 @@ export default {
       '@semantic-release/github',
       {
         successComment:
-          '🎉 This issue has been resolved in version ${nextRelease.version} 🎉\n\n[Changelog](https://NVIDIA.github.io/elements/docs/changelog/)',
-        ...(scope === 'cli'
-          ? {
-              assets: [
-                { path: 'dist/nve-macos-arm64', name: 'nve-macos-arm64', label: 'CLI (macOS ARM64)' },
-                { path: 'dist/nve-macos-x64', name: 'nve-macos-x64', label: 'CLI (macOS x64)' },
-                { path: 'dist/nve-linux-x64', name: 'nve-linux-x64', label: 'CLI (Linux x64)' },
-                { path: 'dist/nve-linux-arm64', name: 'nve-linux-arm64', label: 'CLI (Linux ARM64)' },
-                { path: 'dist/nve-windows-x64.exe', name: 'nve-windows-x64.exe', label: 'CLI (Windows x64)' }
-              ]
-            }
-          : {})
+          '🎉 This issue has been resolved in version ${nextRelease.version} 🎉\n\n[Changelog](https://NVIDIA.github.io/elements/docs/changelog/)'
       }
     ]
   ]

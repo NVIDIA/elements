@@ -5,7 +5,7 @@ import { writeFileSync, unlinkSync, mkdtempSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import type { ToolMethod } from '../internal/tools.js';
+import { loadTools, type ToolMethod, type ToolOutput } from '../internal/tools.js';
 import { PlaygroundService } from './service.js';
 import { createPlaygroundURL } from './utils.js';
 
@@ -80,7 +80,7 @@ describe('PlaygroundService', () => {
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.name).toBe('create');
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.command).toBe('create');
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.description).toBe(
-      'Create a shareable playground URL from an HTML template. Returns URL if valid, or validation errors if invalid. Tip: Use playground_validate first to check for issues.'
+      'Create a shareable playground URL from an HTML template. Returns URL if valid. Lint failures return a tool error. Tip: Use playground_validate first to check for issues.'
     );
     expect((PlaygroundService.create as ToolMethod<unknown>).metadata.inputSchema?.properties?.template).toBeDefined();
   });
@@ -96,27 +96,56 @@ describe('PlaygroundService', () => {
       process.env.ELEMENTS_ENV = originalEnv;
     });
 
-    it('should return lint errors when template has validation errors in mcp environment', async () => {
+    it('should reject templates with validation errors in mcp environment', async () => {
       process.env.ELEMENTS_ENV = 'mcp';
-      const result = await PlaygroundService.create({
-        template: '<nve-button nve-layout="column">hello</nve-button>',
-        start: false
+      await expect(
+        PlaygroundService.create({
+          template: '<nve-button nve-layout="column">hello</nve-button>',
+          start: false
+        })
+      ).rejects.toMatchObject({
+        message: 'Template validation failed',
+        result: expect.arrayContaining([
+          expect.objectContaining({
+            message: expect.stringContaining('Unexpected use of restricted attribute "nve-layout"')
+          })
+        ])
       });
-      expect(Array.isArray(result)).toBe(true);
-      expect((result as unknown[]).length).toBeGreaterThan(0);
-      expect((result as { message: string }[])[0].message).toContain(
-        'Unexpected use of restricted attribute "nve-layout" on <nve-button>. Remove the attribute.'
-      );
     });
 
-    it('should return lint errors when template has validation errors in cli environment', async () => {
+    it('should reject templates with validation errors in cli environment', async () => {
       process.env.ELEMENTS_ENV = 'cli';
-      const result = await PlaygroundService.create({
+      await expect(
+        PlaygroundService.create({
+          template: '<nve-button nve-layout="column">hello</nve-button>',
+          start: false
+        })
+      ).rejects.toMatchObject({
+        message: 'Template validation failed',
+        result: expect.arrayContaining([
+          expect.objectContaining({
+            message: expect.stringContaining('Unexpected use of restricted attribute "nve-layout"')
+          })
+        ])
+      });
+    });
+
+    it('should return a managed tool error when create validation fails', async () => {
+      process.env.ELEMENTS_ENV = 'mcp';
+      const tools = loadTools(PlaygroundService);
+      const createTool = tools.find(tool => tool.metadata.name === 'create');
+
+      const result = (await createTool?.({
         template: '<nve-button nve-layout="column">hello</nve-button>',
         start: false
-      });
-      expect(Array.isArray(result)).toBe(true);
-      expect((result as unknown[]).length).toBeGreaterThan(0);
+      })) as ToolOutput<{ message: string }[]>;
+
+      expect(result.status).toBe('error');
+      expect(result.message).toBe('Template validation failed');
+      expect(result.result).toHaveLength(2);
+      expect(result.result?.[0]?.message).toContain(
+        'Unexpected use of restricted attribute "nve-layout" on <nve-button>. Remove the attribute.'
+      );
     });
 
     it('should skip validation and return URL when not in mcp or cli environment', async () => {
@@ -270,13 +299,11 @@ describe('PlaygroundService', () => {
       }
     });
 
-    it('create should return lint errors from file path in mcp environment', async () => {
+    it('create should reject lint errors from file path in mcp environment', async () => {
       process.env.ELEMENTS_ENV = 'mcp';
       writeFileSync(tempFile, '<nve-button nve-layout="column">hello</nve-button>', 'utf8');
-      const result = await PlaygroundService.create({ path: tempFile, start: false });
-      expect(Array.isArray(result)).toBe(true);
-      expect((result as { message: string }[])[0].message).toContain(
-        'Unexpected use of restricted attribute "nve-layout"'
+      await expect(PlaygroundService.create({ path: tempFile, start: false })).rejects.toThrow(
+        'Template validation failed'
       );
     });
 

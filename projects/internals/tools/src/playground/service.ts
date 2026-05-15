@@ -10,7 +10,7 @@ import {
   playgroundTypes,
   resolveTemplate
 } from './utils.js';
-import { service, tool } from '../internal/tools.js';
+import { service, tool, ToolError } from '../internal/tools.js';
 import { ELEMENTS_ENV_ICON } from '../internal/utils.js';
 import { eslintSchema } from '../internal/schema.js';
 
@@ -58,8 +58,8 @@ export class PlaygroundService {
     const templateContent = await resolveTemplate({ template, path });
 
     if (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli') {
-      const { lintPlaygroundTemplate } = await import('@nvidia-elements/lint/eslint/internals');
-      return await lintPlaygroundTemplate(templateContent);
+      const { lintTemplate } = await import('@nvidia-elements/lint/eslint/internals');
+      return await lintTemplate(templateContent, { strict: true });
     } else {
       return [];
     }
@@ -68,7 +68,7 @@ export class PlaygroundService {
   @tool({
     summary: 'Create a shareable playground URL from an HTML template.',
     description:
-      'Create a shareable playground URL from an HTML template. Returns URL if valid, or validation errors if invalid. Tip: Use playground_validate first to check for issues.',
+      'Create a shareable playground URL from an HTML template. Returns URL if valid. Lint failures return a tool error. Tip: Use playground_validate first to check for issues.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -107,7 +107,7 @@ export class PlaygroundService {
         {
           type: 'array',
           items: eslintSchema,
-          description: 'Template errors requiring correction.',
+          description: 'Template errors requiring correction when returned with status error.',
           additionalProperties: false
         }
       ]
@@ -119,15 +119,15 @@ export class PlaygroundService {
     name,
     type,
     author
-  }: PlaygroundOptions & { author?: string }): Promise<string | TemplateLintMessage[]> {
+  }: PlaygroundOptions & { author?: string }): Promise<string> {
     const templateContent = await resolveTemplate({ template, path });
 
     if (process.env.ELEMENTS_ENV === 'mcp' || process.env.ELEMENTS_ENV === 'cli') {
-      const { lintPlaygroundTemplate } = await import('@nvidia-elements/lint/eslint/internals');
-      const lintResult = await lintPlaygroundTemplate(templateContent);
+      const { lintTemplate } = await import('@nvidia-elements/lint/eslint/internals');
+      const lintResult = await lintTemplate(templateContent, { strict: true });
 
       if (lintResult.length > 0) {
-        return lintResult;
+        throw new ToolError('Template validation failed', lintResult);
       }
     }
 

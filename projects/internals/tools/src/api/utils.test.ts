@@ -350,6 +350,21 @@ describe('getContextTokens', () => {
       const result = getContextTokens('json', tokens) as Token[];
       expect(result).toHaveLength(3);
     });
+
+    it('should filter tokens by query across name, value, and description', () => {
+      const tokens = [
+        createToken('sys-color-primary', '#007bff', 'Primary action background'),
+        createToken('sys-spacing-md', '16px', 'Comfortable layout gap'),
+        createToken('sys-font-size-lg', '24px', 'Large heading text')
+      ];
+      const nameResult = getContextTokens('json', tokens, { query: 'spacing' }) as Token[];
+      const valueResult = getContextTokens('json', tokens, { query: '24px' }) as Token[];
+      const descriptionResult = getContextTokens('json', tokens, { query: 'ACTION' }) as Token[];
+
+      expect(nameResult.map(token => token.name)).toEqual(['sys-spacing-md']);
+      expect(valueResult.map(token => token.name)).toEqual(['sys-font-size-lg']);
+      expect(descriptionResult.map(token => token.name)).toEqual(['sys-color-primary']);
+    });
   });
 
   describe('sorting', () => {

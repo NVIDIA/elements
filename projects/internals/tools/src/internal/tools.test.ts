@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { describe, expect, it } from 'vitest';
-import { loadTools, service, tool, jsonSchemaToZod, ToolSupport } from './tools.js';
+import { loadTools, service, tool, jsonSchemaToZod, ToolError, ToolSupport } from './tools.js';
 import type { ToolMethod, ToolOutput, Schema } from './tools.js';
 
 describe('metadata', () => {
@@ -177,6 +177,27 @@ describe('loadTools', () => {
     expect(status).toBe('error');
     expect(message).toBe('error message');
     expect(result).toBe(undefined);
+  });
+
+  it('should include structured result from a tool error', async () => {
+    @service()
+    class TestService {
+      @tool({ summary: 'test' })
+      static foo() {
+        return new Promise(() => {
+          throw new ToolError('error message', [{ message: 'lint error' }]);
+        });
+      }
+    }
+
+    loadTools(TestService);
+
+    const { result, status, message } = (await TestService['tool_foo']()) as unknown as ToolOutput<
+      { message: string }[]
+    >;
+    expect(status).toBe('error');
+    expect(message).toBe('error message');
+    expect(result).toEqual([{ message: 'lint error' }]);
   });
 
   it('should load multiple tools from a class', () => {

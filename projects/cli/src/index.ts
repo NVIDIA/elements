@@ -32,7 +32,7 @@ const yargsInstance = yargs(hideBin(process.argv))
     }
 
     if (message !== null) {
-      console.log(colors.error(message));
+      console.error(colors.error(message));
     }
     process.exit(1);
   });
@@ -44,6 +44,11 @@ yargsInstance.middleware(argv => {
     process.env.ELEMENTS_DEBUG = 'true';
   }
 });
+
+async function exitWithToolError(result: unknown, message: string | undefined): Promise<never> {
+  console.error(result === undefined ? colors.error(message ?? 'unknown error') : await renderResult(result));
+  process.exit(1);
+}
 
 yargsInstance.command(
   '$0',
@@ -57,8 +62,7 @@ yargsInstance.command(
         await renderResult(result);
         process.exit(0);
       } else {
-        console.log(colors.error(message ?? 'unknown error'));
-        process.exit(1);
+        await exitWithToolError(result, message);
       }
     } else {
       const greeting = colors.complete(`\x1b[?7l\n${JSON.parse(banner)}\n\n`);
@@ -102,7 +106,6 @@ tools
         optionalArgs.forEach(key => builder.option(key, argOptions(properties[key]!)));
       },
       // main handler for the command
-      // eslint-disable-next-line max-statements
       async args => {
         const start = performance.now();
         const { result, status, message } = await runAsyncTool(args, tool);
@@ -121,8 +124,7 @@ tools
           await notifyIfUpdateAvailable(BUILD_SHA);
           process.exit(0);
         } else {
-          console.log(colors.error(message ?? 'unknown error'));
-          process.exit(1);
+          await exitWithToolError(result, message);
         }
       },
       // middleware to get interactive arguments when missing

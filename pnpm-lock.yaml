@@ -277,6 +277,9 @@ importers:
       '@modelcontextprotocol/sdk':
         specifier: 1.29.0
         version: 1.29.0(zod@4.4.3)
+      '@nvidia-elements/code':
+        specifier: workspace:*
+        version: link:../code
       '@nvidia-elements/lint':
         specifier: workspace:^
         version: link:../lint
@@ -22564,7 +22567,7 @@ snapshots:
 
   magicast@0.5.2:
     dependencies:
-      '@babel/parser': 7.29.2
+      '@babel/parser': 7.29.3
       '@babel/types': 7.29.0
       source-map-js: 1.2.1
 

@@ -27,14 +27,18 @@ function passesExclusionChecks(example: Partial<Example>) {
 }
 
 function passesInclusionChecks(example: Partial<Example>) {
-  if (example.composition) {
-    return true;
-  }
+  const { summary, composition } = example;
   const id = example.id ?? '';
   const tags = example.tags ?? [];
+  const isDefault = !id.includes('-'); // default is only the element/api name, no suffix
+
+  if (composition || isDefault) {
+    return true;
+  }
+
   return (
     (includedIdPatterns.some(p => id.includes(p)) || tags.includes('pattern') || tags.includes('template')) &&
-    (example.summary?.length ?? 0) > 0
+    (summary?.length ?? 0) > 0
   );
 }
 

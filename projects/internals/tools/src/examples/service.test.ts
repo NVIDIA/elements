@@ -1,13 +1,18 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { Example } from '@internals/metadata';
 import { ExamplesService } from './service.js';
 import { getContextExamples } from './utils.js';
-import type { ToolMethod } from '../internal/tools.js';
+import { loadTools, type ToolMethod, type ToolOutput } from '../internal/tools.js';
+import { ApiService } from '../api/service.js';
 
 describe('ExampleService', () => {
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   it('should provide list tool', async () => {
     const result = await ExamplesService.list();
     expect(result).toBeDefined();
@@ -80,14 +85,31 @@ describe('ExampleService', () => {
     expect(result.id.toLowerCase()).toBe(examples[0].id.toLowerCase());
   });
 
-  it('should return not-found message for unknown example id (markdown)', async () => {
-    const result = await ExamplesService.get({ id: 'nonexistent-example-xyz', format: 'markdown' });
-    expect(result).toBe('Example not found. Use the list tool to get a list of all available examples and patterns.');
+  it('should reject unknown example id (markdown)', async () => {
+    await expect(ExamplesService.get({ id: 'nonexistent-example-xyz', format: 'markdown' })).rejects.toThrow(
+      'Unknown example "nonexistent-example-xyz". Use the examples_list tool to get a list of all available examples.'
+    );
   });
 
-  it('should return undefined for unknown example id (json)', async () => {
-    const result = await ExamplesService.get({ id: 'nonexistent-example-xyz', format: 'json' });
-    expect(result).toBeUndefined();
+  it('should reject unknown example id (json)', async () => {
+    await expect(ExamplesService.get({ id: 'nonexistent-example-xyz', format: 'json' })).rejects.toThrow(
+      'Unknown example "nonexistent-example-xyz". Use the examples_list tool to get a list of all available examples.'
+    );
+  });
+
+  it('should return a managed tool error for unknown example id', async () => {
+    const tools = loadTools(ExamplesService);
+    const getTool = tools.find(tool => tool.metadata.name === 'get');
+
+    const result = (await getTool?.({ id: 'nonexistent-example-xyz', format: 'json' })) as ToolOutput<
+      Example | undefined
+    >;
+
+    expect(result.status).toBe('error');
+    expect(result.message).toBe(
+      'Unknown example "nonexistent-example-xyz". Use the examples_list tool to get a list of all available examples.'
+    );
+    expect(result.result).toBeUndefined();
   });
 
   it('should provide getAll tool for internal usage', async () => {
@@ -100,5 +122,71 @@ describe('ExampleService', () => {
     expect(result).toContain('No examples found matching');
     expect(result).toContain('nonexistent-example-xyz');
     expect(result).toContain('Tip:');
+  });
+
+  it('should provide render tool that echoes a validated template', async () => {
+    const template = '<nve-button>hello</nve-button>';
+    const result = await ExamplesService.render({ template, name: 'Hello button' });
+    expect(result.template).toBe(template);
+    expect(result.name).toBe('Hello button');
+    expect(Array.isArray(result.lintMessages)).toBe(true);
+    expect((ExamplesService.render as ToolMethod<unknown>).metadata.name).toBe('render');
+    expect((ExamplesService.render as ToolMethod<unknown>).metadata.app?.resourceUri).toBe(
+      'ui://elements/example-preview'
+    );
+    expect((ExamplesService.render as ToolMethod<unknown>).metadata.inputSchema?.required).toContain('template');
+  });
+
+  it('should accept render tool without an explicit name', async () => {
+    const result = await ExamplesService.render({ template: '<nve-button>x</nve-button>' });
+    expect(result.template).toBe('<nve-button>x</nve-button>');
+    expect(result.name).toBeUndefined();
+  });
+
+  it('should reject render tool templates with lint messages', async () => {
+    vi.spyOn(ApiService, 'templateValidate').mockResolvedValue([
+      {
+        id: 'invalid-template',
+        severity: 'error',
+        message: 'Invalid template.',
+        suggestions: [],
+        line: 1,
+        column: 2,
+        endLine: 1,
+        endColumn: 3
+      }
+    ]);
+
+    await expect(ExamplesService.render({ template: '<nve-invalid></nve-invalid>' })).rejects.toThrow(
+      'Template validation failed.'
+    );
+  });
+
+  it('should return a managed tool error when render validation fails', async () => {
+    vi.spyOn(ApiService, 'templateValidate').mockResolvedValue([
+      {
+        id: 'invalid-template',
+        severity: 'error',
+        message: 'Invalid template.',
+        suggestions: [],
+        line: 1,
+        column: 2,
+        endLine: 1,
+        endColumn: 3
+      }
+    ]);
+    const tools = loadTools(ExamplesService);
+    const renderTool = tools.find(tool => tool.metadata.name === 'render');
+
+    const result = (await renderTool?.({ template: '<nve-invalid></nve-invalid>' })) as ToolOutput<{
+      template: string;
+      lintMessages: { message: string }[];
+    }>;
+
+    expect(result.status).toBe('error');
+    expect(result.message).toBe('Template validation failed.');
+    expect(result.result?.template).toBe('<nve-invalid></nve-invalid>');
+    expect(result.result?.lintMessages).toHaveLength(1);
+    expect(result.result?.lintMessages[0]?.message).toBe('Unexpected use of unknown tag <nve-invalid>');
   });
 });

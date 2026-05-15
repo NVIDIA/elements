@@ -121,25 +121,22 @@ describe('ApiService', () => {
       expect(result[0].name).toBe('nve-button');
     });
 
-    it('should return helpful message when all names are not found', async () => {
-      const result = await ApiService.get({
-        names: ['nve-nonexistent-abc', 'nve-nonexistent-xyz'],
-        format: 'markdown'
-      });
-      expect(typeof result).toBe('string');
-      expect(result as string).toContain('No components or APIs found matching');
-      expect(result as string).toContain('nve-nonexistent-abc');
-      expect(result as string).toContain('nve-nonexistent-xyz');
-      expect(result as string).toContain('Tip:');
+    it('should reject when all names are not found', async () => {
+      await expect(
+        ApiService.get({
+          names: ['nve-nonexistent-abc', 'nve-nonexistent-xyz'],
+          format: 'markdown'
+        })
+      ).rejects.toThrow('No components or APIs found matching "nve-nonexistent-abc", "nve-nonexistent-xyz".');
     });
 
-    it('should return helpful message when all names are not found (json)', async () => {
-      const result = await ApiService.get({
-        names: ['nve-nonexistent-abc'],
-        format: 'json'
-      });
-      expect(typeof result).toBe('string');
-      expect(result as string).toContain('No components or APIs found matching');
+    it('should reject when all names are not found (json)', async () => {
+      await expect(
+        ApiService.get({
+          names: ['nve-nonexistent-abc'],
+          format: 'json'
+        })
+      ).rejects.toThrow('No components or APIs found matching "nve-nonexistent-abc".');
     });
   });
 
@@ -212,6 +209,7 @@ describe('ApiService', () => {
       const result = await MockedApiService.templateValidate({ template: '<nve-button>Test</nve-button>' });
 
       expect(Array.isArray(result)).toBe(true);
+      expect(mockLintTemplate).toHaveBeenCalledWith('<nve-button>Test</nve-button>', { strict: false });
       vi.doUnmock('@nvidia-elements/lint/eslint/internals');
     });
 
@@ -227,6 +225,7 @@ describe('ApiService', () => {
       const result = await MockedApiService.templateValidate({ template: '<nve-button>Test</nve-button>' });
 
       expect(Array.isArray(result)).toBe(true);
+      expect(mockLintTemplate).toHaveBeenCalledWith('<nve-button>Test</nve-button>', { strict: false });
       vi.doUnmock('@nvidia-elements/lint/eslint/internals');
     });
   });
@@ -263,12 +262,28 @@ describe('ApiService', () => {
       expect((ApiService.tokensList as ToolMethod<unknown>).metadata.summary).toBe(
         'Get available semantic CSS custom properties / design tokens for theming.'
       );
+      expect((ApiService.tokensList as ToolMethod<unknown>).metadata.inputSchema?.properties?.query).toBeDefined();
+      expect((ApiService.tokensList as ToolMethod<unknown>).metadata.app?.resourceUri).toBe(
+        'ui://elements/tokens-list'
+      );
     });
 
     it('should provide list tool', async () => {
       const result = await ApiService.tokensList();
       expect(result).toBeDefined();
       expect(result).toContain('## CSS Variables');
+    });
+
+    it('should filter tokens by query', async () => {
+      const result = (await ApiService.tokensList({ format: 'json', query: 'shadow' })) as {
+        name: string;
+        value: string;
+        description: string;
+      }[];
+      expect(result.length).toBeGreaterThan(0);
+      expect(
+        result.every(token => [token.name, token.value, token.description].join(' ').toLowerCase().includes('shadow'))
+      ).toBe(true);
     });
   });
 
@@ -279,6 +294,7 @@ describe('ApiService', () => {
       expect((ApiService.iconsList as ToolMethod<unknown>).metadata.summary).toBe(
         'Get list of all available icon names for nve-icon and nve-icon-button.'
       );
+      expect((ApiService.iconsList as ToolMethod<unknown>).metadata.app?.resourceUri).toBe('ui://elements/icons-list');
     });
 
     it('should return markdown with all icon names', async () => {

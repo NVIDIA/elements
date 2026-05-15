@@ -10,6 +10,7 @@ export default mergeConfig(libraryNodeTestConfig, {
   test: {
     include: ['./src/**/*.test.ts'],
     coverage: {
+      exclude: ['src/mcp/ui/*.js'],
       thresholds: {
         lines: 90,
         branches: 90,
