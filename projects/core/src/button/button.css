@@ -144,7 +144,7 @@
   --color: var(--nve-sys-text-white-color);
 }
 
-:host(:hover:not([interaction], [disabled], [readonly])) {
+:host(:hover:not([interaction], [disabled], [readonly], [pressed])) {
   --color: var(--nve-sys-interaction-hover-color);
 }
 

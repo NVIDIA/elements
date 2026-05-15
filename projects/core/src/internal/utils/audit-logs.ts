@@ -36,7 +36,3 @@ export function getDuplicatePackageVersionWarning(localName: string, version: st
 export function getDuplicatePackageGlobalVersionWarning() {
   return `@nve: Multiple versions of Elements loaded, please check for duplicate package versions. ${DOCS_LOG_URL}#duplicate-package-version`;
 }
-
-export function getEsmHostedWarning() {
-  return '@nve: Using esm.sh is not supported for production use.';
-}
