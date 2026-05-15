@@ -47,7 +47,7 @@
     "@internals/vite": "workspace:*",
     "stylelint": "catalog:",
     "stylelint-config-standard": "catalog:",
-    "cssnano": "7.1.1",
+    "cssnano": "7.1.7",
     "glob": "catalog:",
     "lit": "catalog:",
     "postcss": "catalog:",

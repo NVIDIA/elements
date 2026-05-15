@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noUncheckedSideEffectImports": true,
     "skipLibCheck": true,
     "module": "esnext",
     "target": "es2022",

@@ -21,12 +21,12 @@
     "@nvidia-elements/lint": "workspace:*",
     "@tsconfig/node20": "20.1.9",
     "@types/node": "catalog:",
-    "@vitejs/plugin-vue": "6.0.5",
+    "@vitejs/plugin-vue": "6.0.6",
     "@vue/tsconfig": "0.9.1",
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",
-    "vue-tsc": "3.2.6"
+    "vue-tsc": "3.2.7"
   },
   "wireit": {
     "ci": {

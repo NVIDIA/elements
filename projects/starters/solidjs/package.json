@@ -12,7 +12,6 @@
     "lint": "wireit",
     "lint:fix": "wireit"
   },
-  "license": "Apache-2.0",
   "devDependencies": {
     "@nvidia-elements/lint": "workspace:*",
     "eslint": "catalog:",
