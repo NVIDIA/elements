@@ -78,9 +78,9 @@ catalog:
   '@types/node': 25.6.2
   '@types/react': 19.2.14
   '@types/react-dom': 19.2.3
-  '@vitest/browser': 4.1.5
-  '@vitest/browser-playwright': 4.1.5
-  '@vitest/coverage-istanbul': 4.1.5
+  '@vitest/browser': 4.1.6
+  '@vitest/browser-playwright': 4.1.6
+  '@vitest/coverage-istanbul': 4.1.6
   axe-core: 4.11.0
   eslint: 10.3.0
   glob: 13.0.6
@@ -101,17 +101,25 @@ catalog:
   stylelint: 17.11.0
   stylelint-config-standard: 40.0.0
   ts-morph: 26.0.0
+  '@typescript/native-preview': 7.0.0-dev.20260518.1
   typescript: 6.0.3
   typescript-eslint: 8.58.1
-  vite: 8.0.11
-  vite-plugin-dts: 4.5.4
-  vitest: 4.1.5
+  vite: 8.0.13
+  vite-plugin-dts: 5.0.0
+  vitest: 4.1.6
   zod: 4.4.3
 
 minimumReleaseAge: 1140
 
 minimumReleaseAgeExclude:
-  - '@types/node'
+  - '@typescript/native-preview'
+  - '@typescript/native-preview-linux-x64'
+  - '@typescript/native-preview-win32-x64'
+  - '@typescript/native-preview-win32-arm64'
+  - '@typescript/native-preview-darwin-arm64'
+  - '@typescript/native-preview-linux-arm64'
+  - '@typescript/native-preview-linux-arm'
+  - '@typescript/native-preview-darwin-x64'
   - playwright
   - playwright-core
   - publint

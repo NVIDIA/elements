@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noUncheckedSideEffectImports": true,
     "target": "esnext",
     "experimentalDecorators": true,
     "useDefineForClassFields": false,

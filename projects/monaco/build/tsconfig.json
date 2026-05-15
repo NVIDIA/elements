@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noUncheckedSideEffectImports": true,
     "skipLibCheck": true,
     "target": "es2022",
     "lib": ["es2022"],

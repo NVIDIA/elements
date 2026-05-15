@@ -72,6 +72,12 @@ export class Markdown extends LitElement {
   @state() private renderedHtml = '';
 
   /**
+   * Tracks the currently pending markdown parse so tests and consumers can await
+   * `updateComplete` before reading rendered output.
+   */
+  #pendingMarkdownParsing: Promise<void> = Promise.resolve();
+
+  /**
    * Query assigned elements in the default slot
    */
   @queryAssignedElements({ slot: '' }) private slotElements!: HTMLElement[];
@@ -83,21 +89,23 @@ export class Markdown extends LitElement {
     `;
   }
 
+  protected override async getUpdateComplete(): Promise<boolean> {
+    const result = await super.getUpdateComplete();
+    const pendingMarkdownParsing = this.#pendingMarkdownParsing;
+
+    await pendingMarkdownParsing;
+    await super.getUpdateComplete();
+
+    return result;
+  }
+
   protected updated(changedProperties: Map<string | number | symbol, unknown>) {
     if (changedProperties.has('source')) {
       if (this.source) {
-        // Process markdown content from source property
-        void this.#parseMarkdown(this.source)
-          .then(parsed => {
-            this.renderedHtml = parsed;
-          })
-          .catch(_error => {
-            // Don't update renderedHtml on parsing error - keep previous content
-            console.debug('Markdown parsing failed, keeping previous content');
-          });
+        this.#renderMarkdown(this.source);
       } else {
         // Source cleared, check for slotted content or clear rendered output
-        this.renderedHtml = '';
+        this.#clearRenderedHtml();
         this.#processSlottedContent();
       }
     }
@@ -114,13 +122,17 @@ export class Markdown extends LitElement {
     const templateElement = this.slotElements.find(e => e.localName === 'template') as HTMLTemplateElement | undefined;
 
     if (!templateElement) {
-      this.renderedHtml = '';
+      this.#clearRenderedHtml();
       return;
     }
 
     const content = templateElement.innerHTML.trim();
 
-    void this.#parseMarkdown(content)
+    this.#renderMarkdown(content);
+  }
+
+  #renderMarkdown(markdown: string): void {
+    this.#pendingMarkdownParsing = this.#parseMarkdown(markdown)
       .then(parsed => {
         this.renderedHtml = parsed;
       })
@@ -128,6 +140,11 @@ export class Markdown extends LitElement {
         // Don't update renderedHtml on parsing error - keep previous content
         console.debug('Markdown parsing failed, keeping previous content');
       });
+  }
+
+  #clearRenderedHtml(): void {
+    this.#pendingMarkdownParsing = Promise.resolve();
+    this.renderedHtml = '';
   }
 
   /**

@@ -14,9 +14,6 @@ import cssVars from '@nvidia-elements/themes/data.css-vars.json';
 // Helper function to wait for async markdown parsing to complete
 async function waitForMarkdownParsing(element: Markdown) {
   await elementIsStable(element);
-  // Wait for async markdown parsing to complete
-  await new Promise(resolve => setTimeout(resolve, 100));
-  await elementIsStable(element);
 }
 
 describe(Markdown.metadata.tag, () => {

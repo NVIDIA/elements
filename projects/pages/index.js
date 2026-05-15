@@ -1,4 +1,4 @@
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync } from 'node:fs';
 
 if (!existsSync('./dist')) {
   mkdirSync('./dist/starters', { recursive: true });
