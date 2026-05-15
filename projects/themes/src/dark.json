@@ -143,951 +143,951 @@
       },
       "yellow-nova": {
         "100": {
-          "value": "oklch(19% 0.039 92.2)",
+          "value": "oklch(19% 0.04 95)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(20.9% 0.043 91.9)",
+          "value": "oklch(21% 0.04 95)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(24.4% 0.05 91.4)",
+          "value": "oklch(24% 0.05 95)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(27.6% 0.056 89.1)",
+          "value": "oklch(28% 0.06 95)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31.2% 0.064 90.8)",
+          "value": "oklch(31% 0.06 95)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(35.2% 0.072 94.8)",
+          "value": "oklch(35% 0.07 95)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(40.5% 0.081 94.8)",
+          "value": "oklch(41% 0.08 95)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(88.3% 0.181 94.5)",
+          "value": "oklch(88% 0.18 95)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(88.2% 0.182 99.8)",
+          "value": "oklch(88% 0.18 95)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(93.9% 0.164 103.1)",
+          "value": "oklch(94% 0.16 95)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(82.7% 0.169 90.5)",
+          "value": "oklch(83% 0.17 95)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(97.9% 0.053 101.6)",
+          "value": "oklch(98% 0.05 95)",
           "type": "color"
         }
       },
       "brand-green": {
         "100": {
-          "value": "oklch(19.7% 0.033 125.1)",
+          "value": "oklch(20% 0.03 128)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.2% 0.038 127.3)",
+          "value": "oklch(21% 0.04 128)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.3% 0.044 125.8)",
+          "value": "oklch(25% 0.04 128)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(28.2% 0.053 125.9)",
+          "value": "oklch(28% 0.05 128)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31.2% 0.061 126)",
+          "value": "oklch(31% 0.06 128)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.3% 0.071 126.5)",
+          "value": "oklch(34% 0.07 128)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(40.3% 0.089 127.4)",
+          "value": "oklch(40% 0.09 128)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(54.5% 0.148 130.5)",
+          "value": "oklch(55% 0.15 128)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(64.6% 0.18 132.1)",
+          "value": "oklch(65% 0.18 128)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(70.9% 0.194 131.1)",
+          "value": "oklch(71% 0.19 128)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(73.5% 0.183 128.8)",
+          "value": "oklch(74% 0.18 128)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(97.1% 0.044 124)",
+          "value": "oklch(97% 0.04 128)",
           "type": "color"
         }
       },
       "lime-pear": {
         "100": {
-          "value": "oklch(19.9% 0.032 120.1)",
+          "value": "oklch(20% 0.03 125)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.5% 0.036 121)",
+          "value": "oklch(22% 0.04 125)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.4% 0.044 124.2)",
+          "value": "oklch(25% 0.04 125)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(28.4% 0.052 123.2)",
+          "value": "oklch(28% 0.05 125)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31.3% 0.059 123.7)",
+          "value": "oklch(31% 0.06 125)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.5% 0.069 123.7)",
+          "value": "oklch(35% 0.07 125)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(40.7% 0.086 123.9)",
+          "value": "oklch(41% 0.09 125)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(68.2% 0.177 133.6)",
+          "value": "oklch(68% 0.18 125)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(80.3% 0.197 128.1)",
+          "value": "oklch(80% 0.2 125)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(86.9% 0.19 122.6)",
+          "value": "oklch(87% 0.19 125)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(72.2% 0.178 128.1)",
+          "value": "oklch(72% 0.18 125)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(97% 0.044 125.3)",
+          "value": "oklch(97% 0.04 125)",
           "type": "color"
         }
       },
       "green-jade": {
         "100": {
-          "value": "oklch(19.2% 0.02 159.9)",
+          "value": "oklch(19% 0.02 160)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.3% 0.028 166.6)",
+          "value": "oklch(21% 0.03 160)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.6% 0.039 163.8)",
+          "value": "oklch(26% 0.04 160)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(27.1% 0.042 164)",
+          "value": "oklch(27% 0.04 160)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(30.2% 0.05 163.3)",
+          "value": "oklch(30% 0.05 160)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(33.9% 0.059 162)",
+          "value": "oklch(34% 0.06 160)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(39.1% 0.072 160.4)",
+          "value": "oklch(39% 0.07 160)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(54.5% 0.126 156.1)",
+          "value": "oklch(55% 0.13 160)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(65.5% 0.143 157.4)",
+          "value": "oklch(66% 0.14 160)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(67.5% 0.133 158.2)",
+          "value": "oklch(68% 0.13 160)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(73.2% 0.136 159.1)",
+          "value": "oklch(73% 0.14 160)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(96.7% 0.032 152.5)",
+          "value": "oklch(97% 0.03 160)",
           "type": "color"
         }
       },
       "pink-rose": {
         "100": {
-          "value": "oklch(19.7% 0.025 339.6)",
+          "value": "oklch(20% 0.03 344)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.7% 0.036 340.4)",
+          "value": "oklch(22% 0.04 344)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(26.8% 0.063 341.2)",
+          "value": "oklch(27% 0.06 344)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(28.8% 0.076 342.2)",
+          "value": "oklch(29% 0.08 344)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31.7% 0.092 342.2)",
+          "value": "oklch(32% 0.09 344)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.8% 0.107 344.4)",
+          "value": "oklch(35% 0.11 344)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(39.8% 0.138 345.7)",
+          "value": "oklch(40% 0.14 344)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(53.6% 0.204 347.9)",
+          "value": "oklch(54% 0.2 344)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(62.9% 0.229 347)",
+          "value": "oklch(63% 0.23 344)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(69.3% 0.232 345.9)",
+          "value": "oklch(69% 0.23 344)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(69.9% 0.209 347.7)",
+          "value": "oklch(70% 0.21 344)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(95% 0.031 340.5)",
+          "value": "oklch(95% 0.03 344)",
           "type": "color"
         }
       },
       "purple-violet": {
         "100": {
-          "value": "oklch(20.2% 0.018 294.9)",
+          "value": "oklch(20% 0.02 289)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.2% 0.037 295.1)",
+          "value": "oklch(21% 0.04 289)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.7% 0.061 291.3)",
+          "value": "oklch(26% 0.06 289)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(28.8% 0.079 289.7)",
+          "value": "oklch(29% 0.08 289)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31.6% 0.093 289.4)",
+          "value": "oklch(32% 0.09 289)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.9% 0.116 287.4)",
+          "value": "oklch(35% 0.12 289)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(40.4% 0.144 285.5)",
+          "value": "oklch(40% 0.14 289)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(44.3% 0.203 282.8)",
+          "value": "oklch(44% 0.2 289)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(49.3% 0.2 284.8)",
+          "value": "oklch(49% 0.2 289)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(61.4% 0.21 286.9)",
+          "value": "oklch(61% 0.21 289)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(69.4% 0.165 289)",
+          "value": "oklch(69% 0.17 289)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(95.1% 0.024 293.6)",
+          "value": "oklch(95% 0.02 289)",
           "type": "color"
         }
       },
       "purple-lavender": {
         "100": {
-          "value": "oklch(19.8% 0.018 317.6)",
+          "value": "oklch(20% 0.02 312)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.5% 0.035 317.5)",
+          "value": "oklch(22% 0.04 312)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.7% 0.062 314)",
+          "value": "oklch(26% 0.06 312)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(29.4% 0.08 313.3)",
+          "value": "oklch(29% 0.08 312)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31.8% 0.094 312.1)",
+          "value": "oklch(32% 0.09 312)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.9% 0.112 309.9)",
+          "value": "oklch(35% 0.11 312)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(40.1% 0.14 307.2)",
+          "value": "oklch(40% 0.14 312)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(51.4% 0.216 307.6)",
+          "value": "oklch(51% 0.22 312)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(55.9% 0.189 307.3)",
+          "value": "oklch(56% 0.19 312)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(67.9% 0.224 308.4)",
+          "value": "oklch(68% 0.22 312)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(70% 0.176 309.6)",
+          "value": "oklch(70% 0.18 312)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(94.9% 0.028 316.7)",
+          "value": "oklch(95% 0.03 312)",
           "type": "color"
         }
       },
       "purple-plum": {
         "100": {
-          "value": "oklch(20% 0.025 326.5)",
+          "value": "oklch(20% 0.03 325)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(22% 0.038 326.8)",
+          "value": "oklch(22% 0.04 325)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(26.3% 0.057 327)",
+          "value": "oklch(26% 0.06 325)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(29% 0.073 325.1)",
+          "value": "oklch(29% 0.07 325)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31.8% 0.084 324.5)",
+          "value": "oklch(32% 0.08 325)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.6% 0.096 324.2)",
+          "value": "oklch(35% 0.1 325)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(40.2% 0.123 323.9)",
+          "value": "oklch(40% 0.12 325)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(53.4% 0.219 321.7)",
+          "value": "oklch(53% 0.22 325)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(62.4% 0.244 322.8)",
+          "value": "oklch(62% 0.24 325)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(69.3% 0.239 321.9)",
+          "value": "oklch(69% 0.24 325)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(68.4% 0.197 327.5)",
+          "value": "oklch(68% 0.2 325)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(95.3% 0.03 324.1)",
+          "value": "oklch(95% 0.03 325)",
           "type": "color"
         }
       },
       "pink-magenta": {
         "100": {
-          "value": "oklch(19.9% 0.015 347)",
+          "value": "oklch(20% 0.02 358)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.5% 0.033 352)",
+          "value": "oklch(22% 0.03 358)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(26.4% 0.057 355.7)",
+          "value": "oklch(26% 0.06 358)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(29.3% 0.073 356.1)",
+          "value": "oklch(29% 0.07 358)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31.2% 0.086 357.4)",
+          "value": "oklch(31% 0.09 358)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(35.1% 0.105 358.5)",
+          "value": "oklch(35% 0.11 358)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(40% 0.135 1.3)",
+          "value": "oklch(40% 0.14 358)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(53.4% 0.203 5)",
+          "value": "oklch(53% 0.2 358)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(61.7% 0.224 3.5)",
+          "value": "oklch(62% 0.22 358)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(67.7% 0.229 1.4)",
+          "value": "oklch(68% 0.23 358)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(69.4% 0.19 3.9)",
+          "value": "oklch(69% 0.19 358)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(96% 0.022 348.7)",
+          "value": "oklch(96% 0.02 358)",
           "type": "color"
         }
       },
       "red-tomato": {
         "100": {
-          "value": "oklch(20.1% 0.014 34.4)",
+          "value": "oklch(20% 0.01 31)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.6% 0.036 29)",
+          "value": "oklch(22% 0.04 31)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.8% 0.055 29.9)",
+          "value": "oklch(26% 0.06 31)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(28.7% 0.072 29.7)",
+          "value": "oklch(29% 0.07 31)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(30.8% 0.083 30.8)",
+          "value": "oklch(31% 0.08 31)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.8% 0.1 31)",
+          "value": "oklch(35% 0.1 31)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(39.9% 0.128 31.6)",
+          "value": "oklch(40% 0.13 31)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(51.3% 0.195 32)",
+          "value": "oklch(51% 0.2 31)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(59% 0.212 32.5)",
+          "value": "oklch(59% 0.21 31)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(65% 0.222 33)",
+          "value": "oklch(65% 0.22 31)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(67.9% 0.175 32.9)",
+          "value": "oklch(68% 0.18 31)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(96.3% 0.017 31.1)",
+          "value": "oklch(96% 0.02 31)",
           "type": "color"
         }
       },
       "orange-pumpkin": {
         "100": {
-          "value": "oklch(19.2% 0.03 61.3)",
+          "value": "oklch(19% 0.03 52)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.4% 0.049 61.8)",
+          "value": "oklch(21% 0.05 52)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(24.9% 0.056 55.9)",
+          "value": "oklch(25% 0.06 52)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(28.3% 0.068 51.5)",
+          "value": "oklch(28% 0.07 52)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(30.8% 0.076 49.8)",
+          "value": "oklch(31% 0.08 52)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.3% 0.086 48.7)",
+          "value": "oklch(34% 0.09 52)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(40.3% 0.107 47.1)",
+          "value": "oklch(40% 0.11 52)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(57.4% 0.163 44.7)",
+          "value": "oklch(57% 0.16 52)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(69.6% 0.204 43.5)",
+          "value": "oklch(70% 0.2 52)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(73% 0.181 48.7)",
+          "value": "oklch(73% 0.18 52)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(75.2% 0.166 51)",
+          "value": "oklch(75% 0.17 52)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(94.9% 0.029 57.4)",
+          "value": "oklch(95% 0.03 52)",
           "type": "color"
         }
       },
       "yellow-amber": {
         "100": {
-          "value": "oklch(19.8% 0.041 80.2)",
+          "value": "oklch(20% 0.04 75)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.1% 0.044 75.5)",
+          "value": "oklch(21% 0.04 75)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(24.9% 0.056 65.9)",
+          "value": "oklch(25% 0.06 75)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(27.9% 0.062 65.4)",
+          "value": "oklch(28% 0.06 75)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(30.8% 0.069 64.9)",
+          "value": "oklch(31% 0.07 75)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(35.7% 0.079 67.7)",
+          "value": "oklch(36% 0.08 75)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(40.2% 0.085 67.9)",
+          "value": "oklch(40% 0.09 75)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(81.7% 0.164 75.8)",
+          "value": "oklch(82% 0.16 75)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(85.7% 0.175 88.5)",
+          "value": "oklch(86% 0.18 75)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(86.4% 0.156 86.4)",
+          "value": "oklch(86% 0.16 75)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(75.8% 0.159 73.3)",
+          "value": "oklch(76% 0.16 75)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(96.7% 0.032 85.5)",
+          "value": "oklch(97% 0.03 75)",
           "type": "color"
         }
       },
       "green-grass": {
         "100": {
-          "value": "oklch(19.2% 0.02 159.9)",
+          "value": "oklch(19% 0.02 150)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(20.6% 0.027 150.8)",
+          "value": "oklch(21% 0.03 150)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(24.7% 0.037 152.5)",
+          "value": "oklch(25% 0.04 150)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(27.2% 0.045 150.5)",
+          "value": "oklch(27% 0.05 150)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31.3% 0.057 150.1)",
+          "value": "oklch(31% 0.06 150)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.9% 0.067 150)",
+          "value": "oklch(35% 0.07 150)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(39.5% 0.078 149.8)",
+          "value": "oklch(40% 0.08 150)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(52.8% 0.15 147.5)",
+          "value": "oklch(53% 0.15 150)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(64.7% 0.187 147.2)",
+          "value": "oklch(65% 0.19 150)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(73.9% 0.204 144.6)",
+          "value": "oklch(74% 0.2 150)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(73.1% 0.142 148)",
+          "value": "oklch(73% 0.14 150)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(96.7% 0.032 152.5)",
+          "value": "oklch(97% 0.03 150)",
           "type": "color"
         }
       },
       "teal-seafoam": {
         "100": {
-          "value": "oklch(18.6% 0.021 178.7)",
+          "value": "oklch(19% 0.02 181)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(22% 0.035 179.1)",
+          "value": "oklch(22% 0.04 181)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.1% 0.04 178.8)",
+          "value": "oklch(25% 0.04 181)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(28.3% 0.046 181.2)",
+          "value": "oklch(28% 0.05 181)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(30.1% 0.049 180.2)",
+          "value": "oklch(30% 0.05 181)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.6% 0.057 182.7)",
+          "value": "oklch(35% 0.06 181)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(39.2% 0.067 180.3)",
+          "value": "oklch(39% 0.07 181)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(55.3% 0.099 182.1)",
+          "value": "oklch(55% 0.1 181)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(69.4% 0.118 184.1)",
+          "value": "oklch(69% 0.12 181)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(78.5% 0.142 180.3)",
+          "value": "oklch(79% 0.14 181)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(73.1% 0.129 182.6)",
+          "value": "oklch(73% 0.13 181)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(96.5% 0.028 180.3)",
+          "value": "oklch(97% 0.03 181)",
           "type": "color"
         }
       },
       "green-mint": {
         "100": {
-          "value": "oklch(19% 0.023 185.2)",
+          "value": "oklch(19% 0.02 181)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.9% 0.032 188.1)",
+          "value": "oklch(22% 0.03 181)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.5% 0.04 186.9)",
+          "value": "oklch(26% 0.04 181)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(27.6% 0.046 183.3)",
+          "value": "oklch(28% 0.05 181)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31.4% 0.054 183.4)",
+          "value": "oklch(31% 0.05 181)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(33.7% 0.06 182.9)",
+          "value": "oklch(34% 0.06 181)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(39.3% 0.071 179.7)",
+          "value": "oklch(39% 0.07 181)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(55.4% 0.085 176.2)",
+          "value": "oklch(55% 0.09 181)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(75.5% 0.142 174.9)",
+          "value": "oklch(76% 0.14 181)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(83.6% 0.11 177.1)",
+          "value": "oklch(84% 0.11 181)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(83.6% 0.11 177.1)",
+          "value": "oklch(84% 0.11 181)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(97% 0.025 181.3)",
+          "value": "oklch(97% 0.03 181)",
           "type": "color"
         }
       },
       "teal-cyan": {
         "100": {
-          "value": "oklch(20% 0.025 213.9)",
+          "value": "oklch(20% 0.03 218)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.6% 0.031 217.6)",
+          "value": "oklch(22% 0.03 218)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(24.6% 0.037 216.2)",
+          "value": "oklch(25% 0.04 218)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(27.3% 0.044 220)",
+          "value": "oklch(27% 0.04 218)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(30.6% 0.051 220)",
+          "value": "oklch(31% 0.05 218)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(33.8% 0.058 220)",
+          "value": "oklch(34% 0.06 218)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(39.7% 0.071 221.6)",
+          "value": "oklch(40% 0.07 218)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(55.1% 0.103 223.7)",
+          "value": "oklch(55% 0.1 218)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(64.9% 0.118 222.1)",
+          "value": "oklch(65% 0.12 218)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(76.2% 0.143 224.2)",
+          "value": "oklch(76% 0.14 218)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(74.2% 0.128 208.6)",
+          "value": "oklch(74% 0.13 218)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(96.2% 0.025 202.8)",
+          "value": "oklch(96% 0.03 218)",
           "type": "color"
         }
       },
       "blue-sky": {
         "100": {
-          "value": "oklch(19.4% 0.023 241)",
+          "value": "oklch(19% 0.02 231)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.2% 0.035 237.6)",
+          "value": "oklch(21% 0.04 231)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.2% 0.045 236.8)",
+          "value": "oklch(25% 0.05 231)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(27.9% 0.054 238)",
+          "value": "oklch(28% 0.05 231)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(30.8% 0.06 236.1)",
+          "value": "oklch(31% 0.06 231)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.5% 0.07 237)",
+          "value": "oklch(35% 0.07 231)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(38.8% 0.081 236.7)",
+          "value": "oklch(39% 0.08 231)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(55% 0.087 220.7)",
+          "value": "oklch(55% 0.09 231)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(66% 0.098 219.4)",
+          "value": "oklch(66% 0.1 231)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(83.3% 0.113 218)",
+          "value": "oklch(83% 0.11 231)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(77% 0.132 220)",
+          "value": "oklch(77% 0.13 231)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(96.6% 0.021 227.5)",
+          "value": "oklch(97% 0.02 231)",
           "type": "color"
         }
       },
       "blue-cobalt": {
         "100": {
-          "value": "oklch(19.8% 0.021 254.9)",
+          "value": "oklch(20% 0.02 254)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.3% 0.037 258.8)",
+          "value": "oklch(21% 0.04 254)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.5% 0.055 256.7)",
+          "value": "oklch(26% 0.06 254)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(28.5% 0.07 256.2)",
+          "value": "oklch(29% 0.07 254)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(30.6% 0.081 255.7)",
+          "value": "oklch(31% 0.08 254)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(32.9% 0.092 254.8)",
+          "value": "oklch(33% 0.09 254)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(38.5% 0.115 254.4)",
+          "value": "oklch(39% 0.12 254)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(57.4% 0.209 258.2)",
+          "value": "oklch(57% 0.21 254)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(65.1% 0.192 251.5)",
+          "value": "oklch(65% 0.19 254)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(66.5% 0.165 250.8)",
+          "value": "oklch(67% 0.17 254)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(71.7% 0.152 251)",
+          "value": "oklch(72% 0.15 254)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(96% 0.021 241.3)",
+          "value": "oklch(96% 0.02 254)",
           "type": "color"
         }
       },
       "blue-indigo": {
         "100": {
-          "value": "oklch(20.2% 0.021 271.5)",
+          "value": "oklch(20% 0.02 270)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.2% 0.038 275.9)",
+          "value": "oklch(21% 0.04 270)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.4% 0.057 271.9)",
+          "value": "oklch(25% 0.06 270)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(28.6% 0.075 269.7)",
+          "value": "oklch(29% 0.08 270)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(31% 0.086 269.3)",
+          "value": "oklch(31% 0.09 270)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(34.4% 0.102 267.6)",
+          "value": "oklch(34% 0.1 270)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(38.7% 0.125 267.6)",
+          "value": "oklch(39% 0.13 270)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(48.2% 0.171 266.7)",
+          "value": "oklch(48% 0.17 270)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(57.5% 0.182 267.5)",
+          "value": "oklch(58% 0.18 270)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(65% 0.172 268.7)",
+          "value": "oklch(65% 0.17 270)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(70.9% 0.152 271.7)",
+          "value": "oklch(71% 0.15 270)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(95.7% 0.018 275.6)",
+          "value": "oklch(96% 0.02 270)",
           "type": "color"
         }
       },
@@ -1143,151 +1143,151 @@
       },
       "gray-denim": {
         "100": {
-          "value": "oklch(15.5% 0.007 271)",
+          "value": "oklch(15.5% 0.007 270)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(21.8% 0.012 270.8)",
+          "value": "oklch(22% 0.01 270)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(24.8% 0.016 269)",
+          "value": "oklch(25% 0.013 270)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(26.9% 0.017 270.7)",
+          "value": "oklch(27% 0.013 270)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(28.9% 0.019 268)",
+          "value": "oklch(29% 0.013 270)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(31.7% 0.023 267.3)",
+          "value": "oklch(32% 0.018 270)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(34.3% 0.025 272.5)",
+          "value": "oklch(34% 0.02 270)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(41.3% 0.034 273.9)",
+          "value": "oklch(40% 0.02 270)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(51.9% 0.039 270.6)",
+          "value": "oklch(50% 0.02 270)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(70% 0.02 270)",
+          "value": "oklch(70% 0.03 270)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(85% 0.02 270)",
+          "value": "oklch(85% 0.03 270)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(95% 0.015 270)",
+          "value": "oklch(95% 0.03 270)",
           "type": "color"
         }
       },
       "gray-slate": {
         "100": {
-          "value": "oklch(19.4% 0.004 229)",
+          "value": "oklch(20% 0.01 248)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(22.8% 0.005 219.7)",
+          "value": "oklch(22% 0.01 248)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(25.2% 0.006 196.8)",
+          "value": "oklch(25% 0.01 248)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(27% 0.006 236.7)",
+          "value": "oklch(27% 0.01 248)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(29.9% 0.007 248.1)",
+          "value": "oklch(30% 0.01 248)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(31.9% 0.007 248)",
+          "value": "oklch(32% 0.01 248)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(35.9% 0.008 255.5)",
+          "value": "oklch(36% 0.01 248)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(42.5% 0.008 248)",
+          "value": "oklch(42% 0.01 248)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(53.4% 0.013 243.8)",
+          "value": "oklch(54% 0.01 248)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(68.8% 0.017 248.1)",
+          "value": "oklch(68% 0.01 248)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(85.5% 0.015 254.6)",
+          "value": "oklch(85% 0.01 248)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(94% 0.002 247.8)",
+          "value": "oklch(94% 0.01 248)",
           "type": "color"
         }
       },
       "red-cardinal": {
         "100": {
-          "value": "oklch(19.3% 0.019 6.9)",
+          "value": "oklch(19% 0.02 19)",
           "type": "color"
         },
         "200": {
-          "value": "oklch(22.1% 0.035 17.2)",
+          "value": "oklch(22% 0.04 19)",
           "type": "color"
         },
         "300": {
-          "value": "oklch(26% 0.054 19.7)",
+          "value": "oklch(26% 0.05 19)",
           "type": "color"
         },
         "400": {
-          "value": "oklch(28.7% 0.069 18.5)",
+          "value": "oklch(29% 0.07 19)",
           "type": "color"
         },
         "500": {
-          "value": "oklch(30.6% 0.082 19.2)",
+          "value": "oklch(31% 0.08 19)",
           "type": "color"
         },
         "600": {
-          "value": "oklch(35.1% 0.103 21.1)",
+          "value": "oklch(35% 0.1 19)",
           "type": "color"
         },
         "700": {
-          "value": "oklch(39.8% 0.128 23)",
+          "value": "oklch(40% 0.13 19)",
           "type": "color"
         },
         "800": {
-          "value": "oklch(52.3% 0.193 25.1)",
+          "value": "oklch(52% 0.19 19)",
           "type": "color"
         },
         "900": {
-          "value": "oklch(61% 0.212 24.7)",
+          "value": "oklch(61% 0.21 19)",
           "type": "color"
         },
         "1000": {
-          "value": "oklch(66.7% 0.22 25.5)",
+          "value": "oklch(67% 0.22 19)",
           "type": "color"
         },
         "1100": {
-          "value": "oklch(69.8% 0.193 21.8)",
+          "value": "oklch(70% 0.19 19)",
           "type": "color"
         },
         "1200": {
-          "value": "oklch(95.8% 0.02 9.8)",
+          "value": "oklch(96% 0.02 19)",
           "type": "color"
         }
       }
