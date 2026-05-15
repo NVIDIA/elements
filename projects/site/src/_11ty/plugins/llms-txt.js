@@ -3,18 +3,47 @@ import markdownIt from 'markdown-it';
 import { ApiService } from '@internals/tools/api';
 import { ExamplesService } from '@internals/tools/examples';
 import { skills } from '@internals/tools/skills';
-import { ELEMENTS_PAGES_BASE_URL } from '../utils/env.js';
+import { BASE_URL } from '../layouts/metadata.js';
+import { ELEMENTS_PAGES_BASE_URL, ELEMENTS_SITE_URL } from '../utils/env.js';
 
-const BASE = ELEMENTS_PAGES_BASE_URL || 'http://localhost:8082/elements';
+const SITE_ORIGIN = ELEMENTS_SITE_URL.replace(/\/$/, '');
+const PATH_PREFIX = BASE_URL.replace(/\/$/, '');
+const BASE = (ELEMENTS_PAGES_BASE_URL || `${SITE_ORIGIN}${PATH_PREFIX}`).replace(/\/$/, '');
 
 const md = markdownIt({ html: true, linkify: true, breaks: false });
+const relativeMarkdownUrlPattern = /\b(href|src)="((?!(?:[a-z][a-z\d+.-]*:|\/\/))[^"]+?)\.md(?=")/gi;
 const CSS = `:root{color-scheme:light dark}body{font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:48rem;margin:0 auto;padding:2rem 1rem 4rem;color:#1a1a1a;background:#fff}@media (prefers-color-scheme:dark){body{color:#e6e6e6;background:#111}a{color:#6ea8ff}code,pre{background:#222}hr,td,th{border-color:#333}}code,pre{background:#f3f3f3}nav.crumbs{margin-bottom:2rem;font-size:.875rem}nav.crumbs a{color:inherit;opacity:.7;text-decoration:none}nav.crumbs a:hover{opacity:1;text-decoration:underline}h1,h2,h3,h4,h5,h6{line-height:1.25;margin:2em 0 .5em}h1{font-size:2rem;margin-top:0}h2{font-size:1.5rem;border-bottom:1px solid currentColor;padding-bottom:.3em;opacity:.95}h3{font-size:1.2rem}ol,p,ul{margin:.75em 0}a{color:#0969da}code{font:0.9em/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;padding:.1em .3em;border-radius:3px}pre{padding:1rem;border-radius:6px;overflow-x:auto}pre code{background:0 0;padding:0}table{border-collapse:collapse;width:100%;margin:1em 0;font-size:.9em}td,th{border:1px solid #ddd;padding:.5em .75em;text-align:left;vertical-align:top}th{background:#f7f7f7}@media (prefers-color-scheme:dark){th{background:#1a1a1a}}blockquote{border-left:4px solid #ccc;margin:1em 0;padding:.25em 1em;opacity:.85}hr{border:0;border-top:1px solid #eee;margin:2em 0}`;
 
+function escapeAttr(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function getMarkdownMeta(markdown) {
+  const tokens = md.parse(markdown, {});
+  const titleIndex = tokens.findIndex(token => token.type === 'heading_open');
+  const descriptionIndex = tokens.findIndex(token => token.type === 'paragraph_open');
+  const title = titleIndex >= 0 ? tokens[titleIndex + 1]?.content : undefined;
+  const description = descriptionIndex >= 0 ? tokens[descriptionIndex + 1]?.content : undefined;
+
+  return {
+    title: title || 'Elements context',
+    description: description || 'NVIDIA Elements context fragment for AI and LLM tools.'
+  };
+}
+
 async function writeDoc(path, markdown) {
+  const meta = getMarkdownMeta(markdown);
+  const htmlUrl = `${path.replace('./.11ty-vite/public', BASE)}.html`;
   const nav = path.endsWith('context/index')
     ? ''
     : `<nav class="crumbs"><a href="${BASE}/context/index.html">← All context</a></nav>`;
-  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><link rel="alternate" type="text/markdown" title="Markdown version" href="${path.replace('./.11ty-vite/public', BASE)}.md" /><meta name="viewport" content="width=device-width, initial-scale=1"><title>Elements</title><style>${CSS}</style></head><body>${nav}<main>${md.render(markdown).replaceAll('.md"', '.html"')}</main></body></html>`;
+  const renderedMarkdown = md.render(markdown).replace(relativeMarkdownUrlPattern, '$1="$2.html');
+  const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex,follow"><meta name="description" content="${escapeAttr(meta.description)}"><link rel="canonical" href="${htmlUrl}"><link rel="alternate" type="text/markdown" title="Markdown version" href="${path.replace('./.11ty-vite/public', BASE)}.md" /><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escapeAttr(meta.title)} | NVIDIA Elements context</title><style>${CSS}</style></head><body>${nav}<main>${renderedMarkdown}</main></body></html>`;
   await fsp.writeFile(`${path}.md`, markdown, 'utf-8');
   await fsp.writeFile(`${path}.html`, html, 'utf-8');
 }

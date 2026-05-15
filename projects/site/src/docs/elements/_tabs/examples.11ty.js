@@ -23,6 +23,9 @@ export const data = {
     alias: 'component',
     addAllPagesToCollections: true
   },
+  eleventyComputed: {
+    noindex: data => data.component.data.hideExamplesTab || !data.component.data.tag
+  },
   // Generate URLs in the format /docs/elements/{component-name}/examples/ or /docs/code/{component-name}/examples/ or /docs/monaco/{component-name}/examples/
   permalink: data => {
     const filePath = data.component.filePathStem;
@@ -46,12 +49,15 @@ export async function render(data) {
   const element = elements.find(e => e.name === componentData.tag);
   const exampleTemplates = examples.filter(example => example.element === componentData.tag);
 
-  if (data.component.data.hideExamplesTab || !element) return '';
-
   data.tag = componentData.tag;
   data.title = componentData.title;
   data.page.fileSlug = componentData.page.fileSlug;
   data.isExamplesTab = true;
+
+  if (data.component.data.hideExamplesTab || !element) {
+    data.noindex = true;
+    return '';
+  }
 
   return /* html */ `
     <style scoped>

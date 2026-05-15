@@ -11,10 +11,11 @@ import { escapeAttr, resolvePageMeta, renderJsonLd, BASE_URL } from './metadata.
 export const renderBaseHead = data => {
   const meta = resolvePageMeta(data);
   const ogType = meta.url === '/' ? 'website' : 'article';
+  const robots = data.noindex ? 'noindex,follow' : 'all';
   return /* html */ `
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="all">
+  <meta name="robots" content="${robots}">
   <base href="${BASE_URL}" />
   <title data-pagefind-meta="title">${escapeAttr(meta.title)}</title>
   <meta name="description" content="${escapeAttr(meta.description)}">

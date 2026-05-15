@@ -1,16 +1,34 @@
 ---
 {
   title: 'Getting Started',
-  description: 'Get started with NVIDIA Elements: install Web Components, themes, and starter templates for building framework-agnostic UI for AI/ML factories.',
+  description: 'Get started with NVIDIA Elements Design System: framework-agnostic Web Components, design tokens, CLI, MCP, skills, and lint tooling for AV, robotics, and AI infrastructure.',
   layout: 'docs.11ty.js'
 }
 ---
 
 <div nve-layout="column gap:lg pad-top:lg">
   <h1 nve-text="display sm">Elements</h1>
-  <h2 nve-text="heading">The Design Language for AI/ML Factories, Robotics, and Autonomous Vehicles</h2>
+  <h2 nve-text="heading">The Design Language and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles</h2>
 </div>
-
+<nve-divider></nve-divider>
+<section nve-layout="grid gap:xl span-items:12 @md|span-items:6 @xl|span-items:3">
+  <div nve-layout="column gap:sm">
+    <p nve-text="label semibold">Built for AI Infrastructure</p>
+    <p nve-text="body sm muted">Operational UI for AI/ML workloads, autonomous vehicle tools, and robotics consoles.</p>
+  </div>
+  <div nve-layout="column gap:sm">
+    <p nve-text="label semibold">Framework Agnostic</p>
+    <p nve-text="body sm muted">Web Components run in React, Angular, Vue, Svelte, Lit, plain HTML, server-rendered templates, and mixed stacks.</p>
+  </div>
+  <div nve-layout="column gap:sm">
+    <p nve-text="label semibold">Agent-Ready Tooling</p>
+    <p nve-text="body sm muted"><a href="docs/cli/" nve-text="link no-visit">CLI</a> and <a href="docs/mcp/" nve-text="link no-visit">MCP</a> expose component APIs, tokens, examples, imports, validation, and setup to terminals and AI assistants.</p>
+  </div>
+  <div nve-layout="column gap:sm">
+    <p nve-text="label semibold">Stable API Contracts</p>
+    <p nve-text="body sm muted"><a href="docs/mcp/#skills" nve-text="link no-visit">Skills</a> and <a href="docs/lint/" nve-text="link no-visit">lint</a> guide authoring best practices, common UI patterns and automated static analysis.</p>
+  </div>
+</section>
 <nve-divider></nve-divider>
 
 ```shell
@@ -19,6 +37,9 @@ curl -fsSL {{ELEMENTS_PAGES_BASE_URL}}/install.sh | bash
 
 # create a new project
 nve project.create
+
+# configure dependencies and MCP tools
+nve project.setup
 ```
 
 <div nve-layout="grid gap:md span-items:12 @md|span-items:4">
@@ -57,22 +78,28 @@ import '@nvidia-elements/core/button/define.js';
 
 <section nve-layout="row gap:sm align:center align:wrap pad-x:md">
   <nve-button>
-    <a href="./docs/integrations/installation/"><nve-icon name="gear"></nve-icon> Installation</a>
+    <a href="./docs/integrations/installation/"><nve-icon name="gear"></nve-icon> Install</a>
   </nve-button>
   <nve-button>
-    <a href="docs/mcp/"><svg width="18" height="18"><use href="#cursor-svg"></use></svg> Add to Cursor</a>
+    <a href="docs/cli/"><nve-icon name="terminal"></nve-icon> CLI</a>
   </nve-button>
   <nve-button>
-    <a href="docs/mcp/"><svg width="18" height="18"><use href="#codex-svg"></use></svg> Add to Codex</a>
+    <a href="docs/mcp/"><nve-icon name="sparkles"></nve-icon> MCP</a>
   </nve-button>
   <nve-button>
-    <a href="docs/mcp/"><svg width="18" height="18"><use href="#claude-svg"></use></svg> Add to Claude</a>
+    <a href="docs/mcp/"><svg width="18" height="18"><use href="#cursor-svg"></use></svg> Cursor</a>
+  </nve-button>
+  <nve-button>
+    <a href="docs/mcp/"><svg width="18" height="18"><use href="#codex-svg"></use></svg> Codex</a>
+  </nve-button>
+  <nve-button>
+    <a href="docs/mcp/"><svg width="18" height="18"><use href="#claude-svg"></use></svg> Claude</a>
   </nve-button>
   <nve-button>
     <a href="{{ELEMENTS_REPO_BASE_URL}}" target="_blank"><nve-icon name="fork"></nve-icon> GitHub</a>
   </nve-button>
   <nve-button>
-    <a href="https://registry.npmjs.org" target="_blank"><nve-icon name="archive" style="--color: var(--nve-sys-accent-primary-background)"></nve-icon> npm Package</a>
+    <a href="https://www.npmjs.com/package/@nvidia-elements/core" target="_blank"><nve-icon name="archive"></nve-icon> npm</a>
   </nve-button>
   <nve-button>
     <a href="./docs/integrations/typescript/"><svg width="18" height="18"><use href="#typescript-svg"></use></svg> TypeScript</a>

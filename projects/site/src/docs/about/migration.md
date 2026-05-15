@@ -16,6 +16,14 @@
 
 This guide covers migrating from the internal `@nve/*` packages to the new open source `@nvidia-elements/*` packages.
 
+## Agent Skill
+
+Agents can leverage the migration skill by calling the skill from the Elements CLI or MCP.
+
+```shell
+nve skills.get migration
+```
+
 ## Overview
 
 The Elements Design System is now hosted and developed in a public GitHub repository. Packages are now published to the public npm registry under the `@nvidia-elements` scope. The component APIs, tag names, and theming system remain the same. The primary changes are package names, import paths, and registry configuration.

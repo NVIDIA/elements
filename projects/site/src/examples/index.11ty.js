@@ -5,8 +5,25 @@
 import { PlaygroundService } from '@internals/tools/playground';
 import { renderGlobalsScript } from '../_11ty/layouts/common.js';
 import { siteData } from '../index.11tydata.js';
+import { ELEMENTS_SITE_URL } from '../_11ty/utils/env.js';
 
 const { BASE_URL, examples } = siteData;
+const SITE_ORIGIN = ELEMENTS_SITE_URL.replace(/\/$/, '');
+const PATH_PREFIX = BASE_URL.replace(/\/$/, '');
+
+function escapeAttr(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function getCanonicalUrl(example) {
+  const path = example.elementName ? `/docs/elements/${example.elementName}/examples/` : '/examples/';
+  return `${SITE_ORIGIN}${PATH_PREFIX}${path}`;
+}
 
 export const data = {
   title: 'Examples',
@@ -27,8 +44,11 @@ export async function render(data) {
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,follow">
+    <meta name="description" content="${escapeAttr(data.example.summary || data.example.description || `${data.example.name} example for NVIDIA Elements.`)}">
+    <link rel="canonical" href="${getCanonicalUrl(data.example)}">
     <base href="${BASE_URL}" />
-    <title data-pagefind-meta="title">Example - ${data.example.permalink}</title>
+    <title data-pagefind-meta="title">${escapeAttr(data.example.name)} example | NVIDIA Elements</title>
     <style>
       @import '/examples/index.css';
     </style>

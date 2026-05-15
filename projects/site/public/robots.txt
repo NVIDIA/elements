@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /assets/
 Disallow: /.pagefind/
 
 Sitemap: https://nvidia.github.io/elements/sitemap.xml
