@@ -343,6 +343,7 @@ export const renderDocsNav = data => /* html */ `
   <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines') ? 'expanded' : ''} ${data.page.url === '/docs/internal/guidelines/' ? 'highlighted' : ''}>
     <a href="docs/internal/guidelines/agent-harness/">Internal Guidelines</a>
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-harness/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/agent-harness/">Agent Harness</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-tooling/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/agent-tooling/">Agent Tooling</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/documentation/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/documentation/">Documentation</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/examples/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/examples/">Examples</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/typescript/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/typescript/">TypeScript</a></nve-tree-node>
