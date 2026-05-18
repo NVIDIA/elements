@@ -16,6 +16,8 @@ import requireElementDefinitions from '../local/require-element-definitions.js';
 import requireTestCompleteness from '../local/require-test-completeness.js';
 import requireComposedEvents from '../local/require-composed-events.js';
 import noMissingBundleRegistration from '../local/no-missing-bundle-registration.js';
+import noHostManagedAriaAttributes from '../local/no-host-managed-aria-attributes.js';
+import noSingleConsumerInternalBase from '../local/no-single-consumer-internal-base.js';
 
 const source = ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.d.ts'];
 const tests = [
@@ -64,7 +66,9 @@ export const litConfig = [
           'require-element-definitions': requireElementDefinitions,
           'require-test-completeness': requireTestCompleteness,
           'require-composed-events': requireComposedEvents,
-          'no-missing-bundle-registration': noMissingBundleRegistration
+          'no-missing-bundle-registration': noMissingBundleRegistration,
+          'no-host-managed-aria-attributes': noHostManagedAriaAttributes,
+          'no-single-consumer-internal-base': noSingleConsumerInternalBase
         }
       }
     },
@@ -134,6 +138,8 @@ export const litConfig = [
       'local/require-internal-host': ['error'],
       'local/require-element-definitions': ['error'],
       'local/require-composed-events': ['error'],
+      'local/no-host-managed-aria-attributes': ['error'],
+      'local/no-single-consumer-internal-base': ['error'],
       'local/no-missing-bundle-registration': [
         'error',
         {

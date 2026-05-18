@@ -3,6 +3,7 @@ import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
 import jsdoc from 'eslint-plugin-jsdoc';
 import deadCode from '../local/dead-code.js';
+import noDeepClassInheritance from '../local/no-deep-class-inheritance.js';
 import exampleMetadata from '../local/example-metadata.js';
 import exampleNaming from '../local/example-naming.js';
 import exampleTemplateSize from '../local/example-template-size.js';
@@ -48,6 +49,7 @@ const config = {
     'local-typescript': {
       rules: {
         'no-dead-code': deadCode,
+        'no-deep-class-inheritance': noDeepClassInheritance,
         'example-metadata': exampleMetadata,
         'example-naming': exampleNaming,
         'example-template-size': exampleTemplateSize,
@@ -106,6 +108,10 @@ const config = {
     'jsdoc/check-tag-names': 'error',
     'jsdoc/informative-docs': 'error',
     'local-typescript/no-dead-code': ['warn'], // todo, this should be migrated to the internal playground template config
+    'local-typescript/no-deep-class-inheritance': [
+      'error',
+      { maxDepth: 2, allowedRoots: ['HTMLElement', 'LitElement', 'FormControlMixin', 'BaseButton'] }
+    ],
     'local-typescript/require-listener-cleanup': 'error',
     'local-typescript/require-observer-cleanup': 'error',
     'local-typescript/require-timer-cleanup': 'error',
