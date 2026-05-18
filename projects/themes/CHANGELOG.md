@@ -1,3 +1,27 @@
+## <small>0.0.11 (2026-05-18)</small>
+
+* chore(ci): update agent configurations ([cbd664c](https://github.com/NVIDIA/elements/commit/cbd664c))
+* chore(ci): upgrade to typescript 7 ([d9c9705](https://github.com/NVIDIA/elements/commit/d9c9705))
+* chore(core): update snapshots ([5c9bd5f](https://github.com/NVIDIA/elements/commit/5c9bd5f))
+* chore(docs): add media docs support ([f3906cb](https://github.com/NVIDIA/elements/commit/f3906cb))
+* chore(docs): add test command and configuration for vitest ([1e56150](https://github.com/NVIDIA/elements/commit/1e56150))
+* chore(docs): fixup metadata issues ([b931ff5](https://github.com/NVIDIA/elements/commit/b931ff5))
+* chore(docs): remove runtime comments ([6fa19e5](https://github.com/NVIDIA/elements/commit/6fa19e5))
+* chore(internals): add new rules for class inheritance and aria attribute management ([c25838a](https://github.com/NVIDIA/elements/commit/c25838a))
+* chore(release): @nvidia-elements/cli-v0.0.12 [skip ci] ([ce02646](https://github.com/NVIDIA/elements/commit/ce02646))
+* chore(release): @nvidia-elements/cli-v0.1.0 [skip ci] ([e8e3187](https://github.com/NVIDIA/elements/commit/e8e3187))
+* chore(release): @nvidia-elements/code-v0.0.9 [skip ci] ([098029d](https://github.com/NVIDIA/elements/commit/098029d))
+* chore(release): @nvidia-elements/core-v0.1.1 [skip ci] ([b519690](https://github.com/NVIDIA/elements/commit/b519690))
+* chore(release): @nvidia-elements/create-v0.0.8 [skip ci] ([bfcb1fc](https://github.com/NVIDIA/elements/commit/bfcb1fc))
+* chore(release): @nvidia-elements/forms-v0.0.8 [skip ci] ([2d04bfd](https://github.com/NVIDIA/elements/commit/2d04bfd))
+* chore(release): @nvidia-elements/lint-v0.3.1 [skip ci] ([b3c65cc](https://github.com/NVIDIA/elements/commit/b3c65cc))
+* chore(release): @nvidia-elements/markdown-v0.0.9 [skip ci] ([a321984](https://github.com/NVIDIA/elements/commit/a321984))
+* chore(release): @nvidia-elements/monaco-v0.0.11 [skip ci] ([a076aee](https://github.com/NVIDIA/elements/commit/a076aee))
+* chore(release): @nvidia-elements/styles-v0.0.9 [skip ci] ([bd4ec9f](https://github.com/NVIDIA/elements/commit/bd4ec9f))
+* fix(themes): refactor conversions and fix out of bound colors ([4e98a7a](https://github.com/NVIDIA/elements/commit/4e98a7a))
+* feat(cli): add multiple version detection ([c98786a](https://github.com/NVIDIA/elements/commit/c98786a))
+* feat(cli): support cli skills ([41eb7c9](https://github.com/NVIDIA/elements/commit/41eb7c9))
+
 ## <small>0.0.10 (2026-05-13)</small>
 
 * chore(ci): add knip configuration for unused dep linting ([1d039cd](https://github.com/NVIDIA/elements/commit/1d039cd))
