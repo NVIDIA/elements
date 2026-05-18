@@ -1,3 +1,19 @@
+## 0.2.0 (2026-05-18)
+
+* chore(ci): lighthouse ([beee0dd](https://github.com/NVIDIA/elements/commit/beee0dd))
+* chore(ci): upgrade to typescript 7 ([d9c9705](https://github.com/NVIDIA/elements/commit/d9c9705))
+* chore(core): update snapshots ([5c9bd5f](https://github.com/NVIDIA/elements/commit/5c9bd5f))
+* chore(docs): add media docs support ([f3906cb](https://github.com/NVIDIA/elements/commit/f3906cb))
+* chore(docs): add test command and configuration for vitest ([1e56150](https://github.com/NVIDIA/elements/commit/1e56150))
+* chore(docs): fixup metadata issues ([b931ff5](https://github.com/NVIDIA/elements/commit/b931ff5))
+* chore(docs): remove runtime comments ([6fa19e5](https://github.com/NVIDIA/elements/commit/6fa19e5))
+* chore(internals): add new rules for class inheritance and aria attribute management ([c25838a](https://github.com/NVIDIA/elements/commit/c25838a))
+* chore(release): @nvidia-elements/core-v0.1.2 [skip ci] ([9b03b91](https://github.com/NVIDIA/elements/commit/9b03b91))
+* chore(release): @nvidia-elements/themes-v0.0.11 [skip ci] ([8618c39](https://github.com/NVIDIA/elements/commit/8618c39))
+* feat(cli): support mcp apps and improved error handling ([17c3141](https://github.com/NVIDIA/elements/commit/17c3141))
+* fix(core): button contrast state ([4bafa47](https://github.com/NVIDIA/elements/commit/4bafa47))
+* fix(themes): refactor conversions and fix out of bound colors ([4e98a7a](https://github.com/NVIDIA/elements/commit/4e98a7a))
+
 ## 0.1.0 (2026-05-13)
 
 * feat(cli): add multiple version detection ([c98786a](https://github.com/NVIDIA/elements/commit/c98786a))
