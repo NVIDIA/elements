@@ -1229,6 +1229,9 @@ importers:
       '@nvidia-elements/themes':
         specifier: workspace:*
         version: link:../themes
+      '@vitest/coverage-istanbul':
+        specifier: 'catalog:'
+        version: 4.1.5(vitest@4.1.5)
       compare-versions:
         specifier: 6.1.1
         version: 6.1.1
@@ -12592,8 +12595,8 @@ packages:
   third-party-web@0.27.0:
     resolution: {integrity: sha512-h0JYX+dO2Zr3abCQpS6/uFjujaOjA1DyDzGQ41+oFn9VW/ARiq9g5ln7qEP9+BTzDpOMyIfsfj4OvfgXAsMUSA==}
 
-  third-party-web@0.29.0:
-    resolution: {integrity: sha512-nBDSJw5B7Sl1YfsATG2XkW5qgUPODbJhXw++BKygi9w6O/NKS98/uY/nR/DxDq2axEjL6halHW1v+jhm/j1DBQ==}
+  third-party-web@0.29.2:
+    resolution: {integrity: sha512-fegtha91tq2DHphyoiBXVHjVi2YG9zFaRnboT9C28tO1en9Y3wJsfspuy40F+u5wl3hHVbw7cnd1b67kEGHb8g==}
 
   three-forcegraph@1.43.4:
     resolution: {integrity: sha512-FtmiZP/T16ZQaHza3JDaDn0YTXFtg9e7pGnTeU8nzu0NNkx7MpWbF/GvmpbQsWHx3rukHtkRv1fTorLPB3FDEA==}
@@ -16834,7 +16837,7 @@ snapshots:
   '@paulirish/trace_engine@0.0.61':
     dependencies:
       legacy-javascript: 0.0.1
-      third-party-web: 0.29.0
+      third-party-web: 0.29.2
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -21709,7 +21712,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 25.6.0
+      '@types/node': 25.6.2
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -25363,7 +25366,7 @@ snapshots:
 
   third-party-web@0.27.0: {}
 
-  third-party-web@0.29.0: {}
+  third-party-web@0.29.2: {}
 
   three-forcegraph@1.43.4(three@0.184.0):
     dependencies:

@@ -149,11 +149,13 @@ export function renderJsonLd(data, meta) {
   segments.forEach((seg, i) => {
     cumulative += `/${seg}`;
     const item = i === segments.length - 1 && !meta.url.endsWith('/') ? meta.url : `${cumulative}/`;
+    if (!hasGeneratedPage(data, generatedUrls, item)) return;
+
     itemListElement.push({
       '@type': 'ListItem',
-      position: i + 2,
+      position: itemListElement.length + 1,
       name: titleCaseSegment(seg),
-      ...(hasGeneratedPage(data, generatedUrls, item) ? { item: `${SITE_ORIGIN}${PATH_PREFIX}${item}` } : {})
+      item: `${SITE_ORIGIN}${PATH_PREFIX}${item}`
     });
   });
 

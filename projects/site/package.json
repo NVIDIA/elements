@@ -10,6 +10,7 @@
     "build": "wireit",
     "lint": "wireit",
     "lint:fix": "wireit",
+    "test": "wireit",
     "test:lighthouse": "wireit",
     "preview": "wireit"
   },
@@ -17,7 +18,8 @@
     "ci": {
       "dependencies": [
         "lint",
-        "build"
+        "build",
+        "test"
       ]
     },
     "dev": {
@@ -187,6 +189,18 @@
         "../lint:build"
       ]
     },
+    "test": {
+      "command": "vitest run --config=vitest.config.ts",
+      "files": [
+        "src/**/*.test.ts",
+        "src/_11ty/layouts/metadata.js",
+        "vitest.config.ts"
+      ],
+      "output": [],
+      "dependencies": [
+        "../internals/vite:ci"
+      ]
+    },
     "test:lighthouse": {
       "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",
       "files": [
@@ -234,6 +248,7 @@
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
+    "@vitest/coverage-istanbul": "catalog:",
     "compare-versions": "6.1.1",
     "eslint": "catalog:",
     "stylelint": "catalog:",
