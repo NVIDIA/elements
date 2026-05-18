@@ -22,6 +22,12 @@ function template(theme: '' | 'dark' = '') {
     import '@nvidia-elements/core/textarea/define.js';
     document.documentElement.setAttribute('nve-theme', '${theme}');
   </script>
+  <style>
+    /* platform specific styles */
+    nve-textarea textarea {
+      resize: none;
+    }
+  </style>
 
   <nve-textarea>
     <label>•︎•︎•︎•︎•︎•︎</label>
@@ -50,12 +56,6 @@ function template(theme: '' | 'dark' = '') {
   <nve-textarea layout="horizontal">
     <label>•︎•︎•︎•︎•︎•︎</label>
     <textarea></textarea>
-    <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
-  </nve-textarea>
-
-  <nve-textarea>
-    <label>•︎•︎•︎•︎•︎•︎</label>
-    <textarea rows="15" cols="40"></textarea>
     <nve-control-message>•︎•︎•︎•︎•︎•︎</nve-control-message>
   </nve-textarea>
   `;

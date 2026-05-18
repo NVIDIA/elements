@@ -126,6 +126,7 @@ export async function render(data) {
               ${data.tag && !data.hideStatus && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
             </div>
           </main>
+          <!-- ANCHOR-GENERATOR -->
           <nve-page-panel closable hidden slot="right-aside" size="sm" id="system-options-panel">
             <nve-page-panel-content>
               <nvd-system-settings></nvd-system-settings>

@@ -46,7 +46,7 @@ function template(theme: '' | 'dark' = '') {
         •︎•︎•︎
       </nve-card-content>
       <nve-card-footer>
-        <nve-button container="flat" style="margin-left: auto">•︎•︎•︎</nve-button>
+        <nve-button style="margin-left: auto">•︎•︎•︎</nve-button>
       </nve-card-footer>
     </nve-card>
   </div>
