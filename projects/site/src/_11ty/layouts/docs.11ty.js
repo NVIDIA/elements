@@ -36,6 +36,7 @@ function getSection(url) {
     if (section === 'integrations') return 'integrations';
     if (section === 'foundations') return 'foundations';
     if (section === 'patterns') return 'patterns';
+    if (section === 'media') return 'elements';
     if (section === 'code' || section === 'monaco' || section === 'markdown') return 'code';
     if (section === 'labs') return 'labs';
     if (section === 'internal' || section === 'api-design') return 'internal';

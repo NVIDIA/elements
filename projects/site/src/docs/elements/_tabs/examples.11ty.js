@@ -26,12 +26,13 @@ export const data = {
   eleventyComputed: {
     noindex: data => data.component.data.hideExamplesTab || !data.component.data.tag
   },
-  // Generate URLs in the format /docs/elements/{component-name}/examples/ or /docs/code/{component-name}/examples/ or /docs/monaco/{component-name}/examples/
+  // Generate URLs in the format /docs/elements/{component-name}/examples/ or package-specific component docs paths.
   permalink: data => {
     const filePath = data.component.filePathStem;
     let dir = 'elements';
     if (filePath.includes('/code/')) dir = 'code';
     else if (filePath.includes('/monaco/')) dir = 'monaco';
+    else if (filePath.includes('/media/')) dir = 'media';
     else if (filePath.includes('/markdown/')) dir = '';
     return `/docs/${dir}/${data.component.fileSlug}/examples/`;
   }

@@ -222,7 +222,7 @@ export default function (eleventyConfig) {
    * - Access the collection data in templates and layouts
    * - Sort and filter content based on frontmatter or other criteria
    *
-   * This collection includes all markdown files in src/docs/elements/, making component docs easily accessible throughout the site build process.
+   * This collection includes public component docs, making component metadata accessible throughout the site build process.
    *
    * Used by `../src/docs/elements/_tabs/api.11ty.js` to generate the API documentation page for each component.
    */
@@ -233,6 +233,7 @@ export default function (eleventyConfig) {
       'src/docs/elements/data-grid/index.md',
       'src/docs/code/*.md',
       'src/docs/monaco/*.md',
+      'src/docs/media/*.md',
       'src/docs/markdown/index.md'
     ]);
   });

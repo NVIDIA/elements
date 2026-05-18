@@ -24,6 +24,7 @@ export default {
     '@nvidia-elements/forms',
     '@nvidia-elements/lint',
     '@nvidia-elements/markdown',
+    '@nvidia-elements/media',
     '@nvidia-elements/styles',
     '@semantic-release/commit-analyzer',
     '@semantic-release/github',
