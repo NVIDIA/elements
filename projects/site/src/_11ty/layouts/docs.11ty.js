@@ -65,25 +65,17 @@ export async function render(data) {
           import '/_11ty/layouts/docs.ts';
         </script>
       </head>
-
       <body nve-text="body trim:none" data-pagefind-meta="section:${section}">
         <div class="visually-hidden" aria-hidden="true">${ELEMENTS_PAGES_BASE_URL}/llms.txt is available optimized for AI and LLM tools.</div>
-        <!-- nve-page component, anchors for internal navigation links -->
         <nve-page style="anchor-name: --page-anchor;">
-          <!-- renders nve-page-header (logo, top nav buttons, system themes btn...) -->
           ${renderBasePageHeader(data)}
-
-          <!-- Left (aside) sidebar, search functionality, and tree navigation -->
           <nve-page-panel slot="left-aside" id="sidenav-panel" style="width: 250px;">
             <nve-page-panel-content>
               <nvd-search id="docs-search" base-url="${BASE_URL}"></nvd-search>
               ${renderDocsNav(data)}
             </nve-page-panel-content>
           </nve-page-panel>
-          
           <nve-resize-handle slot="left-aside" min="5" max="460" value="250" step="5" orientation="vertical"></nve-resize-handle>
-
-          <!-- Subheader: component title, summary, and tab navigation (Overview/API/Examples) -->
           ${
             data.tag
               ? `
@@ -112,11 +104,8 @@ export async function render(data) {
           `
               : ''
           }
-
-          <!-- Main content area -->
           <main id="docs-main">
             <div id="doc-content" nve-layout="column gap:xl align:horizontal-stretch pad-bottom:xl" style="anchor-name: --doc-content-anchor;">
-              <!-- Component description, default example, and support links (Overview tab only) -->
               ${
                 data.tag && !(data.page.url.includes('api') || data.page.url.includes('examples'))
                   ? `
@@ -133,19 +122,10 @@ export async function render(data) {
               `
                   : ''
               }
-
-              <!-- Markdown page content -->
               ${data.content}
-
-              <!-- Component status (Overview tab only) -->
               ${data.tag && !data.hideStatus && !(data.page.url.includes('api') || data.page.url.includes('examples')) ? `${elementStatus(data.tag)}` : ''}
             </div>
           </main>
-            
-          <!-- An 11ty transform that generates anchor links for the page content -->
-          <!-- ANCHOR-GENERATOR -->
-          
-          <!-- Right sidebar: system settings panel -->
           <nve-page-panel closable hidden slot="right-aside" size="sm" id="system-options-panel">
             <nve-page-panel-content>
               <nvd-system-settings></nvd-system-settings>

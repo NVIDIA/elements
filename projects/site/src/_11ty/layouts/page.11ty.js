@@ -17,7 +17,6 @@ export function render(data) {
       </head>
       <body>
         <nve-page>
-          <!-- Main navigation header -->
           <nve-page-header slot="header">
             <nve-logo slot="prefix" color="brand-green" size="sm">NV</nve-logo>
             <a slot="prefix" href=".">Elements</a>
@@ -27,19 +26,13 @@ export function render(data) {
             <nve-button container="flat"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Repo</a></nve-button>
             <nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>
           </nve-page-header>
-
-          <!-- Main content area -->
           ${data.content}
-
-          <!-- System theme settings panel -->
           <nve-page-panel closable hidden slot="right" size="sm" id="system-options-panel">
             <nve-page-panel-content>
               <nvd-system-settings></nvd-system-settings>
             </nve-page-panel-content>
           </nve-page-panel>
         </nve-page>
-
-        <!-- System settings initialization script -->
         <script type="module">
           import '/_internal/system-settings/system-settings.js';
           const systemOptionsPanel = globalThis.document.querySelector('#system-options-panel');
