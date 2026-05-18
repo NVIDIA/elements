@@ -20,7 +20,7 @@ export type Submit = ReactiveElement &
     value: string;
     disabled: boolean;
     type: 'button' | 'submit' | 'reset';
-    readonly: boolean;
+    readOnly: boolean;
     form?: HTMLFormElement | null;
     _internals: ElementInternals;
   };
@@ -48,7 +48,7 @@ export class TypeSubmitController<T extends Submit> implements ReactiveControlle
 
   #setupNativeButtonBehavior() {
     this.#removeNativeButtonBehavior();
-    if (!this.host.readonly && !this.host.disabled) {
+    if (!this.host.readOnly && !this.host.disabled) {
       this.host.addEventListener('click', this.#triggerNativeButtonBehavior);
       this.host.addEventListener('keyup', this.#emulateKeyBoardEventBehavior);
     }

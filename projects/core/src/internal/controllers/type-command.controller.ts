@@ -19,7 +19,7 @@ export type Command = ReactiveElement &
     command: string;
     commandfor: string | null;
     commandForElement: HTMLElement | null;
-    readonly: boolean;
+    readOnly: boolean;
     disabled: boolean;
   };
 
@@ -38,7 +38,7 @@ export class TypeCommandController<T extends Command> implements ReactiveControl
   }
 
   #updateListener() {
-    if (!this.host.readonly && !this.host.disabled) {
+    if (!this.host.readOnly && !this.host.disabled) {
       this.host.addEventListener('click', this.#triggerCommand);
     } else {
       this.host.removeEventListener('click', this.#triggerCommand);

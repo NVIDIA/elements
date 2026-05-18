@@ -12,7 +12,7 @@ import { statePressed } from '@nvidia-elements/core/internal';
 @customElement('state-pressed-controller-test-element')
 class StatePressedControllerTestElement extends LitElement {
   @property({ type: Boolean }) pressed: boolean;
-  @property({ type: Boolean }) readonly: boolean;
+  @property({ type: Boolean, attribute: 'readonly' }) readOnly = false;
   declare _internals: ElementInternals;
 }
 
@@ -60,7 +60,7 @@ describe('state-pressed.controller', () => {
     expect(element._internals.ariaPressed).toBe('true');
     expect(element.matches(':state(pressed)')).toBe(true);
 
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe(null);
     expect(element.matches(':state(pressed)')).toBe(false);

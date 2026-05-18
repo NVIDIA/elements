@@ -15,7 +15,7 @@ export function stateSelected<T extends Selected>(): ClassDecorator {
     target.addInitializer!((instance: T) => new StateSelectedController(instance));
 }
 
-export type Selected = ReactiveElement & { selected: boolean; readonly?: boolean; _internals?: ElementInternals };
+export type Selected = ReactiveElement & { selected: boolean; readOnly?: boolean; _internals?: ElementInternals };
 
 export class StateSelectedController<T extends Selected> implements ReactiveController {
   constructor(private host: T) {
@@ -27,7 +27,7 @@ export class StateSelectedController<T extends Selected> implements ReactiveCont
   }
 
   hostUpdated() {
-    if (this.host.readonly) {
+    if (this.host.readOnly) {
       this.host._internals!.ariaSelected = null;
       this.host._internals!.states.delete('selected');
       return;

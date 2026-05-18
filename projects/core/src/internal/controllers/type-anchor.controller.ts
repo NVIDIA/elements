@@ -15,7 +15,7 @@ export function typeAnchor<T extends Anchor>(): ClassDecorator {
 
 export interface Anchor extends ReactiveElement {
   disabled: boolean;
-  readonly: boolean;
+  readOnly: boolean;
   _internals: ElementInternals;
 }
 
@@ -55,7 +55,7 @@ export class TypeAnchorController<T extends Anchor> implements ReactiveControlle
     this.#updateAnchorSlotAssignment();
 
     if (this.#anchor) {
-      this.host.readonly = true;
+      this.host.readOnly = true;
       this.host._internals?.states.add('anchor');
     } else {
       this.host._internals?.states.delete('anchor');

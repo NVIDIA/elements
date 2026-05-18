@@ -22,7 +22,7 @@ export type Interest = ReactiveElement &
   HTMLElement & {
     interestfor: string | null;
     interestForElement: HTMLElement | null;
-    readonly: boolean;
+    readOnly: boolean;
     disabled: boolean;
   };
 

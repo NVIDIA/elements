@@ -15,7 +15,7 @@ export function stateExpanded<T extends Expanded>(): ClassDecorator {
     target.addInitializer!((instance: T) => new StateExpandedController(instance));
 }
 
-export type Expanded = ReactiveElement & { expanded: boolean; readonly?: boolean; _internals?: ElementInternals };
+export type Expanded = ReactiveElement & { expanded: boolean; readOnly?: boolean; _internals?: ElementInternals };
 
 export class StateExpandedController<T extends Expanded> implements ReactiveController {
   constructor(private host: T) {
@@ -37,7 +37,7 @@ export class StateExpandedController<T extends Expanded> implements ReactiveCont
       this.host._internals!.states.delete('expanded');
     }
 
-    if (this.host.readonly) {
+    if (this.host.readOnly) {
       this.host._internals!.ariaExpanded = null;
       this.host._internals!.states.delete('expanded');
     }

@@ -12,7 +12,7 @@ import { stateDisabled } from '@nvidia-elements/core/internal';
 @customElement('state-disabled-controller-test-element')
 class StateDisabledControllerTestElement extends LitElement {
   @property({ type: Boolean }) disabled = false;
-  @property({ type: Boolean }) readonly = false;
+  @property({ type: Boolean, attribute: 'readonly' }) readOnly = false;
   declare _internals: ElementInternals;
 }
 
@@ -54,7 +54,7 @@ describe('state-disabled.controller', () => {
   });
 
   it('should remove aria-disabled if readonly', async () => {
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element._internals.ariaDisabled).toBe(null);
     expect(element.matches(':state(disabled)')).toBe(false);

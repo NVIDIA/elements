@@ -199,6 +199,11 @@ export interface NveElement {
    * - `true` - The element has a readonly state: the user cannot change its value, but can still focus and copy it.
    * - `false` - The element allows editing and the user can change its value through interaction.
    */
+  readOnly?: boolean;
+
+  /**
+   * @deprecated Use `readOnly`. The `readonly` attribute remains supported.
+   */
   readonly?: boolean;
 
   /** Defines the value associated with the element's name when submitting the form data. The server receives this value in params when the form submits through this button. [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#value) */

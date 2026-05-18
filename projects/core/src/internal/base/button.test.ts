@@ -79,7 +79,7 @@ describe('base button', () => {
   });
 
   it('should remove aria-disabled if readonly', async () => {
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element._internals.ariaDisabled).toBe(null);
     expect(element.matches(':state(disabled)')).toBe(false);
@@ -117,7 +117,7 @@ describe('base button', () => {
     expect(element._internals.ariaExpanded).toBe('true');
     expect(element.matches(':state(expanded)')).toBe(true);
 
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element._internals.ariaExpanded).toBe(null);
     expect(element.matches(':state(expanded)')).toBe(false);
@@ -149,7 +149,7 @@ describe('base button', () => {
     expect(element._internals.ariaPressed).toBe('true');
     expect(element.matches(':state(pressed)')).toBe(true);
 
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element._internals.ariaPressed).toBe(null);
     expect(element.matches(':state(pressed)')).toBe(false);
@@ -172,11 +172,34 @@ describe('base button', () => {
   });
 
   it('should remove tabindex and role if readonly', async () => {
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element.tabIndex).toBe(-1);
     expect(element._internals.role).toBe('none');
     expect(element.getAttribute('role')).toBe(null);
+  });
+
+  it('should map readonly attribute to readOnly property', async () => {
+    element.setAttribute('readonly', '');
+    await elementIsStable(element);
+    expect(element.readOnly).toBe(true);
+  });
+
+  it('should reflect readOnly property to readonly attribute', async () => {
+    element.readOnly = true;
+    await elementIsStable(element);
+    expect(element.hasAttribute('readonly')).toBe(true);
+
+    element.readOnly = false;
+    await elementIsStable(element);
+    expect(element.hasAttribute('readonly')).toBe(false);
+  });
+
+  it('should support deprecated readonly property alias', async () => {
+    element.readonly = true;
+    await elementIsStable(element);
+    expect(element.readOnly).toBe(true);
+    expect(element.hasAttribute('readonly')).toBe(true);
   });
 
   it('should set the button type to submit if not defined within a form element', async () => {
@@ -186,17 +209,17 @@ describe('base button', () => {
     expect(submitButtonInForm.type).toBe('submit');
   });
 
-  it('should add or remove button event listeners when readonly updates', async () => {
+  it('should add or remove button event listeners when readOnly updates', async () => {
     await elementIsStable(submitButtonInForm);
-    expect(submitButtonInForm.readonly).toBe(undefined);
+    expect(submitButtonInForm.readOnly).toBe(false);
 
     vi.spyOn(submitButtonInForm, 'removeEventListener');
-    submitButtonInForm.readonly = true;
+    submitButtonInForm.readOnly = true;
     await elementIsStable(submitButtonInForm);
     expect(submitButtonInForm.removeEventListener).toBeCalledTimes(3); // 2x button controller, 1x command controller
 
     vi.spyOn(submitButtonInForm, 'addEventListener');
-    submitButtonInForm.readonly = false;
+    submitButtonInForm.readOnly = false;
     await elementIsStable(submitButtonInForm);
     expect(submitButtonInForm.addEventListener).toBeCalledTimes(3); // 2x button controller, 1x command controller
   });

@@ -11,7 +11,7 @@ import { createFixture, removeFixture, elementIsStable } from '@internals/testin
 @typeButton<TypeButtonControllerTestElement>()
 @customElement('type-button-controller-test-element')
 class TypeButtonControllerTestElement extends LitElement {
-  @property({ type: Boolean }) readonly = false;
+  @property({ type: Boolean, attribute: 'readonly' }) readOnly = false;
   @property({ type: Boolean }) disabled = false;
   @property({ type: String }) href: string;
   _internals: ElementInternals;
@@ -47,7 +47,7 @@ describe('TypeButtonController', () => {
   });
 
   it('should remove tabindex and role if readonly', async () => {
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element.tabIndex).toBe(-1);
     expect(element._internals.role).toBe('none');

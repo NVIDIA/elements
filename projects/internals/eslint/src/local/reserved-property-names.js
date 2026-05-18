@@ -18,6 +18,13 @@ export default {
 
         if (decoratorName === 'property' || decoratorName === 'state' || decoratorName === 'event') {
           const propName = node.parent.key.name;
+          if (propName === 'readonly') {
+            context.report({
+              node: node.parent.key,
+              message: `"@${decoratorName} readonly" must use the native DOM property name \`readOnly\` with \`attribute: 'readonly'\`.`
+            });
+          }
+
           if (isReservedProperty(propName)) {
             context.report({
               node: node.parent.key,

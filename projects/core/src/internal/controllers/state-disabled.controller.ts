@@ -15,7 +15,7 @@ export function stateDisabled<T extends Disabled>(): ClassDecorator {
     target.addInitializer!((instance: T) => new StateDisabledController(instance));
 }
 
-export type Disabled = ReactiveElement & { disabled: boolean; readonly?: boolean; _internals?: ElementInternals };
+export type Disabled = ReactiveElement & { disabled: boolean; readOnly?: boolean; _internals?: ElementInternals };
 
 export class StateDisabledController<T extends Disabled> implements ReactiveController {
   constructor(private host: T) {
@@ -39,7 +39,7 @@ export class StateDisabledController<T extends Disabled> implements ReactiveCont
       this.host._internals!.states.delete('disabled');
     }
 
-    if (this.host.readonly) {
+    if (this.host.readOnly) {
       this.host._internals!.ariaDisabled = null;
     }
   }

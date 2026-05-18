@@ -15,7 +15,7 @@ export function statePressed<T extends Pressed>(): ClassDecorator {
     target.addInitializer!((instance: T) => new StatePressedController(instance));
 }
 
-export type Pressed = ReactiveElement & { pressed: boolean; readonly?: boolean; _internals?: ElementInternals };
+export type Pressed = ReactiveElement & { pressed: boolean; readOnly?: boolean; _internals?: ElementInternals };
 
 export class StatePressedController<T extends Pressed> implements ReactiveController {
   constructor(private host: T) {
@@ -37,7 +37,7 @@ export class StatePressedController<T extends Pressed> implements ReactiveContro
       this.host._internals!.states.delete('pressed');
     }
 
-    if (this.host.readonly) {
+    if (this.host.readOnly) {
       this.host._internals!.ariaPressed = null;
       this.host._internals!.states.delete('pressed');
     }

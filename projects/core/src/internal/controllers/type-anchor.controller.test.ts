@@ -12,7 +12,7 @@ import { createFixture, removeFixture, emulateClick, elementIsStable } from '@in
 @customElement('type-anchor-test-element')
 class TypeAnchorTestElement extends LitElement {
   @property({ type: Boolean }) disabled = false;
-  @property({ type: Boolean }) readonly = false;
+  @property({ type: Boolean, attribute: 'readonly' }) readOnly = false;
 
   declare _internals: ElementInternals;
 
@@ -51,7 +51,7 @@ describe('type-anchor.controller', () => {
     element.disabled = true;
     emulateClick(anchor);
 
-    expect(element.readonly).toBe(true);
+    expect(element.readOnly).toBe(true);
     expect(clicks).toBe(1);
 
     element.disabled = false;
@@ -66,7 +66,7 @@ describe('type-anchor.controller', () => {
     emulateClick(anchor);
     expect(clicks).toBe(1);
 
-    expect(element.readonly).toBe(true);
+    expect(element.readOnly).toBe(true);
     expect(anchor.style.textDecoration).toBe('');
     expect(element.style.cursor).toBe('');
     expect(element.matches(':state(anchor)')).toBe(true);
@@ -102,7 +102,7 @@ describe('type-anchor.controller wrapped element', () => {
     element.disabled = true;
     emulateClick(anchor);
 
-    expect(element.readonly).toBe(true);
+    expect(element.readOnly).toBe(true);
     expect(clicks).toBe(1);
 
     element.disabled = false;
@@ -117,7 +117,7 @@ describe('type-anchor.controller wrapped element', () => {
     emulateClick(anchor);
     expect(clicks).toBe(1);
 
-    expect(element.readonly).toBe(true);
+    expect(element.readOnly).toBe(true);
     expect(anchor.style.textDecoration).toBe('none');
     expect(element.style.cursor).toBe('pointer');
     expect(element.matches(':state(anchor)')).toBe(true);

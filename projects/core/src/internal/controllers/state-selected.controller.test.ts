@@ -12,7 +12,7 @@ import { stateSelected } from '@nvidia-elements/core/internal';
 @customElement('state-selected-controller-test-element')
 class StateSelectedControllerTestElement extends LitElement {
   @property({ type: Boolean }) selected: boolean;
-  @property({ type: Boolean }) readonly: boolean;
+  @property({ type: Boolean, attribute: 'readonly' }) readOnly = false;
   declare _internals: ElementInternals;
 
   render() {
@@ -70,7 +70,7 @@ describe('state-selected.controller', () => {
     expect(element._internals.ariaSelected).toBe('true');
     expect(element.matches(':state(selected)')).toBe(true);
 
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe(null);
     expect(element.matches(':state(selected)')).toBe(false);
@@ -107,7 +107,7 @@ describe('state-selected.controller', () => {
     a.href = '#';
     element.appendChild(a);
     element.selected = true;
-    element.readonly = true;
+    element.readOnly = true;
     element._internals.states.add('anchor');
     element.requestUpdate();
     await elementIsStable(element);
@@ -119,12 +119,12 @@ describe('state-selected.controller', () => {
 
   it('should restore selected state when readonly is removed', async () => {
     element.selected = true;
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe(null);
     expect(element.matches(':state(selected)')).toBe(false);
 
-    element.readonly = false;
+    element.readOnly = false;
     await elementIsStable(element);
     expect(element._internals.ariaSelected).toBe('true');
     expect(element.matches(':state(selected)')).toBe(true);

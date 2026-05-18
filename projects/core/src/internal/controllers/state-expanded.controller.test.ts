@@ -12,7 +12,7 @@ import { stateExpanded } from '@nvidia-elements/core/internal';
 @customElement('state-expanded-controller-test-element')
 class StateExpandedControllerTestElement extends LitElement {
   @property({ type: Boolean }) expanded: boolean;
-  @property({ type: Boolean }) readonly: boolean;
+  @property({ type: Boolean, attribute: 'readonly' }) readOnly = false;
   declare _internals: ElementInternals;
 }
 
@@ -66,7 +66,7 @@ describe('state-expanded.controller', () => {
     expect(element._internals.ariaExpanded).toBe('true');
     expect(element.matches(':state(expanded)')).toBe(true);
 
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element._internals.ariaExpanded).toBe(null);
     expect(element.matches(':state(expanded)')).toBe(false);

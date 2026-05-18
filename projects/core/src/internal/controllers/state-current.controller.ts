@@ -14,7 +14,7 @@ export function stateCurrent<T extends Current>(): ClassDecorator {
     target.addInitializer!((instance: T) => new StateCurrentController(instance));
 }
 
-type Current = ReactiveElement & { current: 'page' | 'step'; readonly?: boolean; _internals?: ElementInternals };
+type Current = ReactiveElement & { current: 'page' | 'step'; readOnly?: boolean; _internals?: ElementInternals };
 
 export class StateCurrentController<T extends Current> implements ReactiveController {
   constructor(private host: T) {
@@ -26,7 +26,7 @@ export class StateCurrentController<T extends Current> implements ReactiveContro
   }
 
   hostUpdated() {
-    if (this.host.readonly) {
+    if (this.host.readOnly) {
       this.host._internals!.ariaCurrent = null;
       this.host._internals!.states.delete('current');
       return;

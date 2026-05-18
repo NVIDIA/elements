@@ -14,7 +14,7 @@ export function typeButton<T extends Button>(): ClassDecorator {
 }
 
 export interface Button extends ReactiveElement {
-  readonly: boolean;
+  readOnly: boolean;
   disabled: boolean;
   _internals?: ElementInternals;
 }
@@ -43,7 +43,7 @@ export class TypeButtonController<T extends Button> implements ReactiveControlle
 
     this.host.tabIndex = this.host.disabled ? -1 : this.#initialTabIndex;
 
-    if (this.host.readonly) {
+    if (this.host.readOnly) {
       this.host._internals!.role = 'none';
       this.host.tabIndex = -1;
       this.host.removeAttribute('tabindex');

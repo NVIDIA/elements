@@ -12,7 +12,7 @@ import { stateCurrent } from '@nvidia-elements/core/internal';
 @customElement('state-current-controller-test-element')
 class StateCurrentControllerTestElement extends LitElement {
   @property({ type: String }) current: 'page' | 'step';
-  @property({ type: Boolean }) readonly: boolean;
+  @property({ type: Boolean, attribute: 'readonly' }) readOnly = false;
   declare _internals: ElementInternals;
 
   render() {
@@ -70,7 +70,7 @@ describe('state-current.controller', () => {
     expect(element._internals.ariaCurrent).toBe('page');
     expect(element.matches(':state(current)')).toBe(true);
 
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element._internals.ariaCurrent).toBe(null);
     expect(element.matches(':state(current)')).toBe(false);
@@ -107,7 +107,7 @@ describe('state-current.controller', () => {
     a.href = '#';
     element.appendChild(a);
     element.current = 'page';
-    element.readonly = true;
+    element.readOnly = true;
     element._internals.states.add('anchor');
     element.requestUpdate();
     await elementIsStable(element);
@@ -119,12 +119,12 @@ describe('state-current.controller', () => {
 
   it('should restore current state when readonly is removed', async () => {
     element.current = 'page';
-    element.readonly = true;
+    element.readOnly = true;
     await elementIsStable(element);
     expect(element._internals.ariaCurrent).toBe(null);
     expect(element.matches(':state(current)')).toBe(false);
 
-    element.readonly = false;
+    element.readOnly = false;
     await elementIsStable(element);
     expect(element._internals.ariaCurrent).toBe('page');
     expect(element.matches(':state(current)')).toBe(true);

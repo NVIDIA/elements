@@ -30,7 +30,7 @@
 
 ## Readonly
 
-{% api 'nve-tag', 'property', 'readonly' %}
+{% api 'nve-tag', 'property', 'readOnly' %}
 
 {% example '@nvidia-elements/core/tag/tag.examples.json' 'Readonly' %}
 

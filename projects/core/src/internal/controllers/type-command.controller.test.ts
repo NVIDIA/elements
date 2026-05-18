@@ -13,7 +13,7 @@ class TypeCommandControllerTestElement extends LitElement {
   @property({ type: String }) command: string;
   @property({ type: String, attribute: 'commandfor' }) commandfor: string;
   @property({ type: Object }) commandForElement: HTMLElement;
-  @property({ type: Boolean }) readonly: boolean;
+  @property({ type: Boolean, attribute: 'readonly' }) readOnly = false;
   @property({ type: Boolean }) disabled: boolean;
   _typeCommandController = new TypeCommandController<TypeCommandControllerTestElement>(this);
 }

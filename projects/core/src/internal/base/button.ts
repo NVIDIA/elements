@@ -53,7 +53,18 @@ export class BaseButton extends LitElement {
    * Like input readonly, sets a button semantically as visual treatment only
    * https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/readonly
    */
-  @property({ type: Boolean, reflect: true }) readonly: boolean;
+  @property({ type: Boolean, attribute: 'readonly', reflect: true }) readOnly = false;
+
+  /**
+   * @deprecated Use `readOnly`. The `readonly` attribute remains supported.
+   */
+  get readonly(): boolean {
+    return this.readOnly;
+  }
+
+  set readonly(value: boolean) {
+    this.readOnly = value; // eslint-disable-line local/stateless-property
+  }
 
   #form: string | HTMLFormElement | null = null;
 

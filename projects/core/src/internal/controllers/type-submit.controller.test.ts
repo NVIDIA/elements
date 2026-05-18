@@ -15,7 +15,7 @@ class TypeSubmitControllerTestElement extends LitElement {
   @property({ type: String }) value: string;
   @property({ type: Boolean }) disabled: boolean;
   @property({ type: String }) type: 'button' | 'submit' | 'reset';
-  @property({ type: Boolean }) readonly: boolean;
+  @property({ type: Boolean, attribute: 'readonly' }) readOnly = false;
 
   #form: HTMLFormElement;
 
@@ -93,17 +93,17 @@ describe('type-submit.controller', () => {
     expect((await event).target).toBe(button);
   });
 
-  it('should add or remove button event listeners when readonly updates', async () => {
+  it('should add or remove button event listeners when readOnly updates', async () => {
     await elementIsStable(submitButtonInForm);
-    expect(submitButtonInForm.readonly).toBe(undefined);
+    expect(submitButtonInForm.readOnly).toBe(false);
 
     vi.spyOn(submitButtonInForm, 'removeEventListener');
-    submitButtonInForm.readonly = true;
+    submitButtonInForm.readOnly = true;
     await elementIsStable(submitButtonInForm);
     expect(submitButtonInForm.removeEventListener).toBeCalledTimes(2);
 
     vi.spyOn(submitButtonInForm, 'addEventListener');
-    submitButtonInForm.readonly = false;
+    submitButtonInForm.readOnly = false;
     await elementIsStable(submitButtonInForm);
     expect(submitButtonInForm.addEventListener).toBeCalledTimes(2);
   });
