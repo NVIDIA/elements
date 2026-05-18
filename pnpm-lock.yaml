@@ -1220,6 +1220,9 @@ importers:
       '@nvidia-elements/markdown':
         specifier: workspace:*
         version: link:../markdown
+      '@nvidia-elements/media':
+        specifier: workspace:*
+        version: link:../media
       '@nvidia-elements/monaco':
         specifier: workspace:*
         version: link:../monaco

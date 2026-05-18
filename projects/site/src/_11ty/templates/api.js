@@ -58,8 +58,7 @@ export function elementSummary(tag) {
   const element = elements.find(d => d.name === tag);
   const testReports = Object.values(tests.projects);
   const unitTestResults = testReports.flatMap(report => report.coverage.testResults);
-  const coverageTotal =
-    unitTestResults.find(result => result.file?.includes(tag.replace('nve-', '')))?.branches.pct ?? 0;
+  const coverageTotal = getElementCoverageTotal(tag, unitTestResults);
   const lighthouseResults = testReports
     .flatMap(report => report.lighthouse)
     .flatMap(result => result.testResults)
@@ -91,6 +90,18 @@ export function elementSummary(tag) {
 
     <nve-badge size="sm" status="success"><nve-icon name="merge" size="sm"></nve-icon><a href="${PACKAGE_URL}" target="_blank">Released: ${element?.manifest?.metadata?.since ?? ''}</a></nve-badge>
   </section>`;
+}
+
+function getElementCoverageTotal(tag, unitTestResults) {
+  const elementName = tag.replace('nve-', '');
+  const implementationPath = `${elementName}/${elementName}.ts`;
+  const exactResult = unitTestResults.find(result => result.file === implementationPath);
+  const fileNameResult = unitTestResults.find(result => result.file?.endsWith(`/${elementName}.ts`));
+  const broadResult = unitTestResults.find(
+    result => result.file?.includes(elementName) && !result.file.endsWith('/define.ts')
+  );
+
+  return (exactResult ?? fileNameResult ?? broadResult)?.branches.pct;
 }
 
 /**
@@ -192,15 +203,16 @@ export function badgeStatus(status, container = '', content = '') {
  */
 export function badgeCoverage(value, container = '', content = '') {
   let status = 'unknown';
-  let formattedValue = value
+  const hasCoverage = Number.isFinite(value);
+  const formattedValue = hasCoverage
     ? new Intl.NumberFormat('default', {
         style: 'percent',
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       }).format(value / 100)
-    : null;
+    : 'unknown';
 
-  if (value !== undefined) {
+  if (hasCoverage) {
     if (value >= 90) {
       status = 'success';
     } else if (value >= 70) {

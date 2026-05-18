@@ -88,6 +88,8 @@
         "../forms/dist/**/*.examples.json",
         "../markdown/dist/**/*.js",
         "../markdown/dist/**/*.examples.json",
+        "../media/dist/**/*.js",
+        "../media/dist/**/*.examples.json",
         "../monaco/dist/**/*.js",
         "../monaco/dist/**/*.examples.json",
         "../internals/metadata/static/**",
@@ -119,6 +121,10 @@
         },
         {
           "script": "../markdown:build",
+          "cascade": false
+        },
+        {
+          "script": "../media:build",
           "cascade": false
         },
         {
@@ -244,6 +250,7 @@
     "@nvidia-elements/forms": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
     "@nvidia-elements/markdown": "workspace:*",
+    "@nvidia-elements/media": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/monaco": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",

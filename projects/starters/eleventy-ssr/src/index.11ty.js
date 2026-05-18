@@ -2,6 +2,9 @@
 
 import { ApiService, ExamplesService } from '@internals/metadata';
 
+const ssrPackageNames = ['@nvidia-elements/code', '@nvidia-elements/core', '@nvidia-elements/media'];
+const hasSsrEntrypoint = entrypoint => ssrPackageNames.some(packageName => entrypoint?.startsWith(`${packageName}/`));
+
 const elements = (await ApiService.getData()).data.elements;
 const examples = (await ExamplesService.getData())
   .filter(
@@ -14,10 +17,11 @@ const examples = (await ExamplesService.getData())
   )
   .map(example => {
     const element = elements.find(e => e.name === example.element && !e.manifest?.deprecated);
-    return element
+    const entrypoint = element?.manifest?.metadata?.entrypoint;
+    return element && hasSsrEntrypoint(entrypoint)
       ? {
           name: example.element,
-          entrypoint: element?.manifest?.metadata?.entrypoint,
+          entrypoint,
           template: example.template
             .replaceAll('<label>', '<label slot="label">')
             .replaceAll('<nve-control-message>', '<nve-control-message slot="messages">')
