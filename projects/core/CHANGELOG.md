@@ -1,3 +1,8 @@
+## <small>0.1.3 (2026-05-19)</small>
+
+* fix(core): correct read only property ([b9e7588](https://github.com/NVIDIA/elements/commit/b9e7588))
+* chore(release): @nvidia-elements/cli-v0.2.0 [skip ci] ([3c83f7d](https://github.com/NVIDIA/elements/commit/3c83f7d))
+
 ## <small>0.1.2 (2026-05-18)</small>
 
 * feat(cli): add multiple version detection ([c98786a](https://github.com/NVIDIA/elements/commit/c98786a))
