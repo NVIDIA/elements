@@ -49,6 +49,7 @@
       "command": "rm -rf dist .11ty-vite && pnpm exec eleventy",
       "files": [
         "src",
+        "!src/**/*.test.js",
         "!src/**/*.test.lighthouse.ts",
         "public",
         "!public/llms.txt",
@@ -196,16 +197,13 @@
       ]
     },
     "test": {
-      "command": "vitest run --config=vitest.config.ts",
+      "command": "vitest run src/_11ty/layouts/metadata.test.ts",
       "files": [
-        "src/**/*.test.ts",
         "src/_11ty/layouts/metadata.js",
+        "src/_11ty/layouts/metadata.test.ts",
         "vitest.config.ts"
       ],
-      "output": [],
-      "dependencies": [
-        "../internals/vite:ci"
-      ]
+      "output": []
     },
     "test:lighthouse": {
       "command": "playwright-lock 'vitest run --config=vitest.lighthouse.ts'",

@@ -1,11 +1,35 @@
 import { join } from 'node:path';
-import { ELEMENTS_SITE_URL } from '../utils/env.js';
 import { siteData } from '../../index.11tydata.js';
 
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
 
-const SITE_ORIGIN = ELEMENTS_SITE_URL.replace(/\/$/, '');
-const PATH_PREFIX = BASE_URL.replace(/\/$/, '');
+const SITE_URL = 'https://nvidia.github.io/elements';
+export const SOFTWARE_ID = `${SITE_URL}/#software`;
+const SOFTWARE_URL = `${SITE_URL}/`;
+const CODE_SAMPLE_ROUTES = ['/docs/cli/', '/docs/code/', '/docs/integrations/', '/docs/lint/', '/docs/mcp/'];
+
+const LANGUAGE_NAMES = {
+  bash: 'Shell',
+  css: 'CSS',
+  go: 'Go',
+  html: 'HTML',
+  javascript: 'JavaScript',
+  js: 'JavaScript',
+  json: 'JSON',
+  markdown: 'Markdown',
+  md: 'Markdown',
+  python: 'Python',
+  shell: 'Shell',
+  sh: 'Shell',
+  toml: 'TOML',
+  ts: 'TypeScript',
+  tsx: 'TypeScript',
+  typescript: 'TypeScript',
+  xml: 'XML',
+  yaml: 'YAML',
+  yml: 'YAML',
+  zsh: 'Shell'
+};
 
 const BREADCRUMB_TERMS = {
   api: 'API',
@@ -108,8 +132,8 @@ export function resolvePageMeta(data) {
     description = `Documentation for ${rawTitle} in NVIDIA Elements, the framework-agnostic design system for AI/ML factories.`;
   }
 
-  const canonicalUrl = `${SITE_ORIGIN}${PATH_PREFIX}${url}`;
-  const ogImage = `${SITE_ORIGIN}${PATH_PREFIX}/favicon.svg`;
+  const canonicalUrl = `${SITE_URL}${url}`;
+  const ogImage = `${SITE_URL}/favicon.svg`;
   return { title, description, canonicalUrl, ogImage, url };
 }
 
@@ -117,34 +141,78 @@ function jsonLdEncode(value) {
   return JSON.stringify(value).replace(/<\//g, '<\\/');
 }
 
-export function renderJsonLd(data, meta) {
-  const isDocs = meta.url.startsWith('/docs/');
-  const articleType = isDocs ? 'TechArticle' : 'WebPage';
-  const date = data.page?.date instanceof Date ? data.page.date.toISOString() : new Date().toISOString();
-  const generatedUrls = new Set(data.collections?.all?.map(entry => entry.url).filter(Boolean));
+function isApiReferencePage(data, meta) {
+  return Boolean(
+    data.tag ||
+      data.isApiTab ||
+      meta.url.startsWith('/docs/api-design/') ||
+      meta.url.startsWith('/docs/cli/') ||
+      meta.url.startsWith('/docs/integrations/') ||
+      meta.url.startsWith('/docs/lint/') ||
+      meta.url.startsWith('/docs/mcp/')
+  );
+}
 
+function normalizeDate(value) {
+  if (value instanceof Date) return value.toISOString();
+  if (typeof value !== 'string') return null;
+
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+}
+
+function getContentDates(data) {
+  return {
+    datePublished: normalizeDate(data.datePublished ?? data.published ?? data.git?.created ?? data.git?.createdTime),
+    dateModified: normalizeDate(data.dateModified ?? data.modified ?? data.git?.modified ?? data.git?.modifiedTime)
+  };
+}
+
+function getArticle(data, meta) {
+  const isDocs = meta.url.startsWith('/docs/');
+  const isApiReference = isApiReferencePage(data, meta);
+  const element = findElementByTag(data.tag ?? data.component?.data?.tag);
+  const dates = getContentDates(data);
   const article = {
-    '@context': 'https://schema.org',
-    '@type': articleType,
+    '@id': meta.canonicalUrl,
+    '@type': isApiReference ? 'APIReference' : isDocs ? 'TechArticle' : 'WebPage',
     headline: meta.title,
     description: meta.description,
     url: meta.canonicalUrl,
     mainEntityOfPage: meta.canonicalUrl,
     inLanguage: 'en',
     image: meta.ogImage,
-    datePublished: date,
-    dateModified: date,
-    publisher: { '@type': 'Organization', name: 'NVIDIA', url: SITE_ORIGIN },
+    publisher: { '@type': 'Organization', name: 'NVIDIA', url: SITE_URL },
     author: { '@type': 'Organization', name: 'NVIDIA' }
   };
 
-  const segments = meta.url.split('/').filter(Boolean);
-  const articleScript = `<script type="application/ld+json">${jsonLdEncode(article)}</script>`;
-  if (segments.length === 0) {
-    return articleScript;
+  if (isDocs || meta.url === '/') {
+    article.about = { '@id': SOFTWARE_ID };
   }
 
-  const itemListElement = [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_ORIGIN}${PATH_PREFIX}/` }];
+  if (isApiReference && element?.manifest?.tagName) {
+    article.programmingModel = 'Web Components';
+    article.targetPlatform = 'Web';
+
+    if (element?.version) {
+      article.assemblyVersion = element.version;
+    }
+  }
+
+  if (dates.datePublished) article.datePublished = dates.datePublished;
+  if (dates.dateModified) article.dateModified = dates.dateModified;
+
+  return article;
+}
+
+function getBreadcrumb(data, meta) {
+  const generatedUrls = new Set(data.collections?.all?.map(entry => entry.url).filter(Boolean));
+  const segments = meta.url.split('/').filter(Boolean);
+  if (segments.length === 0) {
+    return null;
+  }
+
+  const itemListElement = [{ '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` }];
   let cumulative = '';
   segments.forEach((seg, i) => {
     cumulative += `/${seg}`;
@@ -155,14 +223,129 @@ export function renderJsonLd(data, meta) {
       '@type': 'ListItem',
       position: itemListElement.length + 1,
       name: titleCaseSegment(seg),
-      item: `${SITE_ORIGIN}${PATH_PREFIX}${item}`
+      item: `${SITE_URL}${item}`
     });
   });
 
-  const breadcrumb = {
-    '@context': 'https://schema.org',
+  return {
+    '@id': `${meta.canonicalUrl}#breadcrumb`,
     '@type': 'BreadcrumbList',
     itemListElement
   };
-  return `${articleScript}\n  <script type="application/ld+json">${jsonLdEncode(breadcrumb)}</script>`;
+}
+
+function getSoftwareApplication(description) {
+  return {
+    '@id': SOFTWARE_ID,
+    '@type': 'SoftwareApplication',
+    name: 'NVIDIA Elements',
+    description,
+    url: SOFTWARE_URL,
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Any',
+    runtimePlatform: 'Web',
+    softwareHelp: SOFTWARE_URL
+  };
+}
+
+function getPageText(data) {
+  return [data.content, data.rawInput, data.templateContent].filter(value => typeof value === 'string').join('\n');
+}
+
+function normalizeLanguage(language) {
+  if (typeof language !== 'string') return null;
+  return LANGUAGE_NAMES[language.toLowerCase()] ?? null;
+}
+
+function getProgrammingLanguages(data) {
+  const languages = new Set();
+  const declared = data.programmingLanguage ?? data.programmingLanguages;
+  const declaredLanguages = Array.isArray(declared) ? declared : [declared].filter(Boolean);
+  declaredLanguages
+    .map(String)
+    .map(normalizeLanguage)
+    .filter(Boolean)
+    .forEach(language => languages.add(language));
+
+  if (data.isExamplesTab) {
+    languages.add('HTML');
+  }
+
+  const pageText = getPageText(data);
+  [...pageText.matchAll(/(?:language|lang)=["']([^"']+)["']/g)].forEach(match => {
+    const language = normalizeLanguage(match[1]);
+    if (language) languages.add(language);
+  });
+
+  [...pageText.matchAll(/class=["'][^"']*language-([a-z0-9+-]+)[^"']*["']/gi)].forEach(match => {
+    const language = normalizeLanguage(match[1]);
+    if (language) languages.add(language);
+  });
+
+  [...pageText.matchAll(/```([a-z0-9+-]+)/gi)].forEach(match => {
+    const language = normalizeLanguage(match[1]);
+    if (language) languages.add(language);
+  });
+
+  return [...languages];
+}
+
+function hasVisibleCode(data) {
+  return getProgrammingLanguages(data).length > 0;
+}
+
+function shouldEmitSoftwareSourceCode(data, meta) {
+  if (data.structuredData?.sourceCode === false) return false;
+  if (data.structuredData?.sourceCode === true) return true;
+  if (data.isExamplesTab) return true;
+  if (!hasVisibleCode(data)) return false;
+  return CODE_SAMPLE_ROUTES.some(route => meta.url.startsWith(route));
+}
+
+function getCodeSampleType(data, meta) {
+  if (data.structuredData?.codeSampleType) return data.structuredData.codeSampleType;
+  if (meta.url.startsWith('/starters/')) return 'template';
+  if (data.isExamplesTab || meta.url.includes('/examples/')) return 'full solution';
+  return 'code snippet';
+}
+
+function getRuntimePlatform(meta) {
+  return meta.url.startsWith('/docs/cli/') || meta.url.startsWith('/docs/mcp/') ? 'Native binary' : 'Web';
+}
+
+function getSoftwareSourceCode(data, meta) {
+  if (!shouldEmitSoftwareSourceCode(data, meta)) return null;
+
+  const programmingLanguage = getProgrammingLanguages(data);
+  if (!programmingLanguage.length) return null;
+
+  return {
+    '@id': `${meta.canonicalUrl}#source-code`,
+    '@type': 'SoftwareSourceCode',
+    name: meta.title,
+    description: meta.description,
+    url: meta.canonicalUrl,
+    codeSampleType: getCodeSampleType(data, meta),
+    programmingLanguage: programmingLanguage.length === 1 ? programmingLanguage[0] : programmingLanguage,
+    runtimePlatform: getRuntimePlatform(meta),
+    targetProduct: { '@id': SOFTWARE_ID, '@type': 'SoftwareApplication' }
+  };
+}
+
+export function renderJsonLd(data, meta) {
+  const article = getArticle(data, meta);
+  const breadcrumb = getBreadcrumb(data, meta);
+  const sourceCode = getSoftwareSourceCode(data, meta);
+  const graph = [
+    article,
+    ...(breadcrumb ? [breadcrumb] : []),
+    ...(meta.url === '/' ? [getSoftwareApplication(meta.description)] : []),
+    ...(sourceCode ? [sourceCode] : [])
+  ];
+
+  if (sourceCode) {
+    article.hasPart = { '@id': sourceCode['@id'] };
+  }
+
+  return `<script type="application/ld+json">${jsonLdEncode({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
 }

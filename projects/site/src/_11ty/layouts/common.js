@@ -28,6 +28,7 @@ export const renderBaseHead = data => {
   <meta property="og:type" content="${ogType}">
   <link rel="icon" href="/favicon.svg">
   <meta name="google-site-verification" content="pqQ1zOnKkqdZ2Lm0H8qIQx3q1x6Q7ghbumSrwzF_KSY" />
+  <meta name="msvalidate.01" content="590EBF38676B077801C72048F4D8B5CB" />
   ${renderJsonLd(data, meta)}
   ${renderGlobalsScript(data)}
   <style>
@@ -102,6 +103,13 @@ export const renderBaseHead = data => {
       sidenavPanel.hidden = true;
     }
     globalThis.document.documentElement.removeAttribute('no-js');
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K5TKPS8VHN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K5TKPS8VHN');
   </script>
 `;
 };
@@ -344,6 +352,7 @@ export const renderDocsNav = data => /* html */ `
     <a href="docs/internal/guidelines/agent-harness/">Internal Guidelines</a>
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-harness/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/agent-harness/">Agent Harness</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-tooling/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/agent-tooling/">Agent Tooling</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/agent-ownership/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/agent-ownership/">Agent Ownership</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/documentation/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/documentation/">Documentation</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/examples/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/examples/">Examples</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/internal/guidelines/typescript/') ? 'highlighted selected' : ''}><a href="docs/internal/guidelines/typescript/">TypeScript</a></nve-tree-node>

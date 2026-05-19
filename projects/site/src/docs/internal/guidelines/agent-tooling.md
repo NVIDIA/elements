@@ -237,7 +237,7 @@ if (toolingRoot) {
 - **Fail statically.** Prefer lint, types, and tests for any rule a parser can verify.
 - **Prove with CLI.** Make the command usable by humans before agents call it.
 - **Guide with skills.** Put workflow order, repository policy, and validation habits in skills.
-- **Expose through MCP last.** Mirror existing services with focused schemas and annotations.
+- **Expose through MCP last.** Use MCP as a focused access point over existing services and standardized functionality.
 
 </div>
 <div>
