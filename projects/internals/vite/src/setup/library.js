@@ -1,3 +1,4 @@
+import './lit.js';
 import fontInter from '@nvidia-elements/themes/fonts/inter.css?inline';
 import theme from '@nvidia-elements/themes/index.css?inline';
 

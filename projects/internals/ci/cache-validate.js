@@ -19,7 +19,7 @@ async function validateCache(task) {
   const parallel = process.env.WIREIT_PARALLEL ? ` WIREIT_PARALLEL=${process.env.WIREIT_PARALLEL}` : '';
   // Only pass PAGES_BASE_URL when set so Wireit sees same env as first run (default "/elements/" for site:build)
   const pagesBaseUrl = process.env.PAGES_BASE_URL !== undefined ? ` PAGES_BASE_URL=${process.env.PAGES_BASE_URL}` : '';
-  const { stdout } = await new Promise(resolve =>
+  await new Promise(resolve =>
     exec(
       `WIREIT_DEBUG_LOG_FILE=.wireit-cache WIREIT_LOGGER=simple${pagesBaseUrl}${parallel} pnpm run ${task}`,
       (stderr, stdout) => resolve({ stdout, stderr })

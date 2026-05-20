@@ -1,4 +1,5 @@
 import process from 'process';
+import { hideExpectedTestConsoleMessage } from './console.js';
 
 /** @type {import('vite').UserConfig} */
 export const libraryLitSSRTestConfig = {
@@ -35,6 +36,7 @@ export const libraryLitSSRTestConfig = {
       deps: {
         external: ['**/node_modules/**']
       }
-    }
+    },
+    onConsoleLog: hideExpectedTestConsoleMessage
   }
 };

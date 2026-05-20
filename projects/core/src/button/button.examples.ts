@@ -13,8 +13,6 @@ export default {
   component: 'nve-button'
 };
 
-declare const __ELEMENTS_REPO_BASE_URL__: string;
-
 /**
  * @summary Basic button component with standard appearance and behavior for primary user actions.
  */
@@ -120,20 +118,25 @@ export const Disabled = {
  */
 export const InvokerCommand = {
   render: () => html`
-    <img id="logo" src="${__ELEMENTS_REPO_BASE_URL__}/favicon.svg" alt="logo" style="width: 100px; height: 100px;" />
+    <nve-icon
+      id="rotation-target"
+      name="sparkles"
+      aria-label="sparkles icon"
+      style="inline-size: 100px; block-size: 100px;"
+    ></nve-icon>
     <section>
-      <nve-button commandfor="logo" command="--rotate-left">Rotate left</nve-button>
-      <nve-button commandfor="logo" command="--rotate-right">Rotate right</nve-button>
+      <nve-button commandfor="rotation-target" command="--rotate-left">Rotate left</nve-button>
+      <nve-button commandfor="rotation-target" command="--rotate-right">Rotate right</nve-button>
       <nve-button commandfor="popover" command="toggle-popover">toggle-popover</nve-button>
     </section>
     <nve-toggletip id="popover">popover</nve-toggletip>
     <script type="module">
-      const logo = document.getElementById('logo');
-      logo.addEventListener('command', (event) => {
-        if (event.command == '--rotate-left') {
-          logo.style.rotate = '-90deg';
-        } else if (event.command == '--rotate-right') {
-          logo.style.rotate = '90deg';
+      const target = document.getElementById('rotation-target');
+      target.addEventListener('command', (event) => {
+        if (event.command === '--rotate-left') {
+          target.style.rotate = '-90deg';
+        } else if (event.command === '--rotate-right') {
+          target.style.rotate = '90deg';
         }
       });
     </script>

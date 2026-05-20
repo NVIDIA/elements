@@ -76,7 +76,7 @@ describe('state-selected.controller', () => {
     expect(element.matches(':state(selected)')).toBe(false);
   });
 
-  it('should appply aria-current="page" if a selected anchor', async () => {
+  it('should apply aria-current="page" if a selected anchor', async () => {
     const a = document.createElement('a');
     a.href = '#';
     element.appendChild(a);

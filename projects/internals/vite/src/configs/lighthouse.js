@@ -1,4 +1,4 @@
-import process from 'process';
+import { hideExpectedTestConsoleMessage } from './console.js';
 
 /** @type {import('vite').UserConfig} */
 export const libraryLighthouseTestConfig = {
@@ -9,11 +9,7 @@ export const libraryLighthouseTestConfig = {
     isolate: false,
     maxWorkers: 1,
     fileParallelism: false,
-    onConsoleLog(log) {
-      if (log.includes('plugin vite-plugin-virtual-html')) {
-        return false;
-      }
-    },
+    onConsoleLog: hideExpectedTestConsoleMessage,
     reporters: [
       'default',
       'junit',

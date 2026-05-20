@@ -179,9 +179,7 @@ StyleDictionary.registerFormat({
       .replaceAll(';', '')
       .split('\n')
       .map(i => {
-        const kebabToCamel = i => i.replace(/-([a-z,0-9])/g, (_, letter) => letter.toUpperCase());
         let [key, value] = i.split(' = ');
-        // const formattedValue = value.includes('calc') ? value.replace('calc(', '').replace(')', '') : value;
 
         if (value.includes(' * ')) {
           const [nveRef, base] = value.split(' * ');

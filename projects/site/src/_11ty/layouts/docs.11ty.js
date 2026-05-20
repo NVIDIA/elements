@@ -4,7 +4,7 @@
 import { join } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { renderBaseHead, renderDocsNav, renderBasePageHeader } from './common.js';
-import { elementSummary, elementStatus, elementDescription, elementSupportButtons } from '../templates/api.js';
+import { elementSummary, elementStatus, elementDescription } from '../templates/api.js';
 import { exampleShortcode } from '../shortcodes/example.js';
 import { ELEMENTS_PAGES_BASE_URL } from '../utils/env.js';
 

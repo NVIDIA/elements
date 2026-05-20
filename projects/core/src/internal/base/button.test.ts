@@ -233,7 +233,7 @@ describe('base button', () => {
     expect((await event).type).toBe('submit');
   });
 
-  it('should not ineract with form elements if type button', async () => {
+  it('should not interact with form elements if type button', async () => {
     submitButtonInForm.type = 'button';
     await elementIsStable(submitButtonInForm);
     const o = { f: () => null };
@@ -273,7 +273,7 @@ describe('base button', () => {
     expect(o.f).not.toHaveBeenCalled();
   });
 
-  it('should not interact with form elements if disabeld', async () => {
+  it('should not interact with form elements if disabled', async () => {
     submitButtonInForm.disabled = true;
     await elementIsStable(submitButtonInForm);
 

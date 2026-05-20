@@ -1,5 +1,4 @@
 import changelogs from './index.11tydata.js';
-import { ELEMENTS_REPO_BASE_URL } from '../../_11ty/utils/env.js';
 
 export const data = {
   title: 'Changelog',

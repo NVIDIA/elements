@@ -3,6 +3,7 @@ import process from 'process';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { playwright } from '@vitest/browser-playwright';
+import { hideExpectedTestConsoleMessage } from './console.js';
 
 const watch = process.argv.findIndex(i => i === '--watch') !== -1;
 const coverage = process.argv.findIndex(i => i === '--coverage') !== -1;
@@ -69,13 +70,7 @@ export const libraryAxeTestConfig = {
       junit: './coverage/axe/junit.xml',
       json: './coverage/axe/summary.json'
     },
-    onConsoleLog(log) {
-      if (log.includes('scheduled an update')) return false;
-      if (log.includes('Lit is in dev mode')) return false;
-      if (log.includes('@nve: ')) return false;
-      if (log.startsWith('[Error: Expected error]')) return false;
-      if (log.startsWith('Ignored')) return false;
-    },
+    onConsoleLog: hideExpectedTestConsoleMessage,
     setupFiles: ['@internals/vite/setup/axe.js'], // todo: this should be project specific
     browser: {
       isolate: false,

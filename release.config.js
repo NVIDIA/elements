@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 
-const DRY_RUN = false;
+const DRY_RUN = process.env.DRY_RUN === 'true';
+const PLACEHOLDER_VERSION = '"0.0.0"';
 const packageFilePath = `${process.cwd()}/package.json`;
 const packageFile = JSON.parse(fs.readFileSync(packageFilePath));
 const [_org, scope] = packageFile.name.split('/');
@@ -70,7 +71,7 @@ export default {
           },
           {
             files: [`${process.cwd()}/dist/**/*.js`],
-            from: '"0.0.0"',
+            from: PLACEHOLDER_VERSION,
             to: '"${nextRelease.version}"',
             allowEmptyPaths: true
           }

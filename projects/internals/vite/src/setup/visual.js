@@ -1,3 +1,4 @@
+import './lit.js';
 import { beforeAll } from 'vitest';
 import { visualRunner } from '../runners/visual.js';
 
