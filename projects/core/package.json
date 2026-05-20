@@ -32,7 +32,6 @@
     ]
   },
   "scripts": {
-    "postinstall": "node postinstall.mjs || exit 0",
     "ci": "wireit",
     "dev": "wireit",
     "build": "wireit",
@@ -52,7 +51,6 @@
     "CHANGELOG.md",
     "NOTICE.md",
     "package.json",
-    "postinstall.mjs",
     "dist/**/*"
   ],
   "sideEffects": [
