@@ -76,7 +76,7 @@ describe('state-current.controller', () => {
     expect(element.matches(':state(current)')).toBe(false);
   });
 
-  it('should appply aria-current="page" if a current anchor', async () => {
+  it('should apply aria-current="page" if a current anchor', async () => {
     const a = document.createElement('a');
     a.href = '#';
     element.appendChild(a);

@@ -166,7 +166,7 @@ describe('type-submit.controller', () => {
     expect((await event).type).toBe('reset');
   });
 
-  it('should not ineract with form elements if type button', async () => {
+  it('should not interact with form elements if type button', async () => {
     submitButtonInForm.type = 'button';
     await elementIsStable(submitButtonInForm);
     const o = { f: () => null };

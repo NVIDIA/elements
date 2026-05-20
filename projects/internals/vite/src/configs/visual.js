@@ -1,4 +1,5 @@
 import process from 'process';
+import { hideExpectedTestConsoleMessage } from './console.js';
 
 /** @type {import('vite').UserConfig} */
 export const libraryVisualTestConfig = {
@@ -41,10 +42,6 @@ export const libraryVisualTestConfig = {
         external: ['**/node_modules/**']
       }
     },
-    onConsoleLog(log) {
-      if (log.includes('plugin vite-plugin-virtual-html')) {
-        return false;
-      }
-    }
+    onConsoleLog: hideExpectedTestConsoleMessage
   }
 };

@@ -1,6 +1,6 @@
 import { svgLogoShortcode } from '../../_11ty/shortcodes/svg-logo.js';
 import { siteData } from '../../index.11tydata.js';
-import { ELEMENTS_PAGES_BASE_URL, ELEMENTS_REGISTRY_URL } from '../../_11ty/utils/env.js';
+import { ELEMENTS_PAGES_BASE_URL } from '../../_11ty/utils/env.js';
 
 export function renderInstallArtifactoryShortcode() {
   return /* html */ `
