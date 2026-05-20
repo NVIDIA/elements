@@ -1,0 +1,111 @@
+'dependencies':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/package.json'
+          - 'pnpm-lock.yaml'
+          - 'pnpm-workspace.yaml'
+
+'github_actions':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/actions/**'
+          - '.github/dependabot.yml'
+          - '.github/workflows/**'
+
+'scope(ci)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - '.github/**'
+          - 'commitlint.config.js'
+          - 'config/**'
+          - 'package.json'
+          - 'pnpm-lock.yaml'
+          - 'release.config.js'
+          - 'projects/internals/ci/**'
+
+'scope(cli)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/cli/**'
+
+'scope(code)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/code/**'
+
+'scope(core)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/core/**'
+
+'scope(create)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/create/**'
+
+'scope(docs)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/site/**'
+
+'scope(forms)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/forms/**'
+
+'scope(internals)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/internals/**'
+
+'scope(lint)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/lint/**'
+
+'scope(markdown)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/markdown/**'
+
+'scope(media)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/media/**'
+
+'scope(monaco)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/monaco/**'
+
+'scope(pages)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/pages/**'
+
+'scope(starters)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/starters/**'
+
+'scope(styles)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/styles/**'
+
+'scope(themes)':
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'projects/themes/**'
+
+'type(chore)':
+  - head-branch:
+      - '^chore[/-]'
+
+'type(feat)':
+  - head-branch:
+      - '^feat[/-]'
+
+'type(fix)':
+  - head-branch:
+      - '^fix[/-]'

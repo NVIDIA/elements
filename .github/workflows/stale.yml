@@ -1,0 +1,33 @@
+name: Stale
+
+on:
+  schedule:
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: stale-workflow
+  cancel-in-progress: true
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@b5d41d4e1d5dceea10e7104786b73624c18a190f
+        with:
+          stale-issue-label: stale
+          stale-pr-label: stale
+          stale-issue-message: This issue has had no activity for 90 days. Comment or remove the stale label if it is still actionable; otherwise it will close in 14 days.
+          stale-pr-message: This pull request has had no activity for 30 days. Comment or remove the stale label when it is ready for review.
+          close-issue-message: Closing because this issue stayed stale for 14 days with no activity.
+          days-before-issue-stale: 90
+          days-before-pr-stale: 30
+          days-before-issue-close: 14
+          days-before-pr-close: -1
+          close-issue-reason: not_planned
+          exempt-all-assignees: true
+          exempt-draft-pr: true
+          operations-per-run: 100
