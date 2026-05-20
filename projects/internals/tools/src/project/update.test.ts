@@ -12,7 +12,7 @@ vi.mock('node:fs', async importOriginal => {
 });
 
 vi.mock('node:child_process', () => ({
-  execSync: vi.fn()
+  execFileSync: vi.fn()
 }));
 
 vi.mock('../internal/node.js', () => ({
@@ -341,8 +341,10 @@ describe('updatePackageJson', () => {
 });
 
 describe('updateProject', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     vi.clearAllMocks();
+    const { existsSync } = await import('node:fs');
+    vi.mocked(existsSync).mockReturnValue(true);
   });
 
   it('should return warning when no package.json exists', async () => {
@@ -371,5 +373,57 @@ describe('updateProject', () => {
     const result = await updateProject('/some/cdn-only/project');
     expect(result.dependencies.message).toContain('package.json');
     expect(result.dependencies.message).toContain('/some/cdn-only/project');
+  });
+
+  it('should update dependencies without shell interpretation', async () => {
+    const { writeFileSync } = await import('node:fs');
+    const { execFileSync } = await import('node:child_process');
+    const { ProjectsService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { getNPMClient, getPackageJson } = await import('../internal/node.js');
+    const cwd = '/tmp/project with spaces; echo bad';
+    const packageJson = {
+      dependencies: { '@nvidia-elements/core': '1.0.0' },
+      devDependencies: {},
+      peerDependencies: {}
+    };
+
+    vi.mocked(getPackageJson).mockReturnValue(packageJson);
+    vi.mocked(ProjectsService.getData).mockResolvedValue({ data: [{ changelog: 'core' }] });
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue(
+      createMockElementVersions({ '@nvidia-elements/core': '2.0.0' })
+    );
+    vi.mocked(getNPMClient).mockResolvedValue('pnpm');
+
+    const result = await updateProject(cwd);
+
+    expect(result.dependencies.status).toBe('success');
+    expect(writeFileSync).toHaveBeenCalledWith(`${cwd}/package.json`, expect.stringContaining('"2.0.0"'));
+    expect(execFileSync).toHaveBeenCalledWith('pnpm', ['update', '@nvidia-elements/*', '@nvidia-elements/*'], { cwd });
+  });
+
+  it('should not write package.json when no package manager exists', async () => {
+    const { writeFileSync } = await import('node:fs');
+    const { execFileSync } = await import('node:child_process');
+    const { ProjectsService } = await import('@internals/metadata');
+    const { getLatestPublishedVersions } = await import('../api/utils.js');
+    const { getNPMClient, getPackageJson } = await import('../internal/node.js');
+
+    vi.mocked(getPackageJson).mockReturnValue({
+      dependencies: { '@nvidia-elements/core': '1.0.0' },
+      devDependencies: {},
+      peerDependencies: {}
+    });
+    vi.mocked(ProjectsService.getData).mockResolvedValue({ data: [{ changelog: 'core' }] });
+    vi.mocked(getLatestPublishedVersions).mockResolvedValue(
+      createMockElementVersions({ '@nvidia-elements/core': '2.0.0' })
+    );
+    vi.mocked(getNPMClient).mockResolvedValue(null);
+
+    const result = await updateProject('/tmp/project');
+
+    expect(result.dependencies.status).toBe('danger');
+    expect(writeFileSync).not.toHaveBeenCalled();
+    expect(execFileSync).not.toHaveBeenCalled();
   });
 });

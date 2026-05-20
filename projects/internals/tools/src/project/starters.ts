@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { basename, dirname, join, parse, resolve } from 'node:path';
-import { exec, execSync } from 'node:child_process';
+import { execFile, execFileSync } from 'node:child_process';
 import { cwd } from 'node:process';
 
 import { writeFile } from 'fs/promises';
@@ -36,6 +36,8 @@ export type Starter =
   | 'svelte'
   | 'typescript'
   | 'vue';
+
+type NPMClient = 'npm' | 'pnpm';
 
 export const startersData = {
   angular: {
@@ -110,11 +112,11 @@ export const startersData = {
 
 /* istanbul ignore next -- @preserve */
 export async function archiveStarter(projectDir: string, outDir: string) {
-  const dist = `${outDir}/${projectDir}`;
+  const dist = join(outDir, projectDir);
   await copyProject(projectDir);
   writeAllAgentConfigs(dist);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
-  await writeFile(`${dist}/package.json`, JSON.stringify(packageJSON, undefined, 2));
+  await writeFile(join(dist, 'package.json'), JSON.stringify(packageJSON, undefined, 2));
   await zipProject(dist);
 }
 
@@ -134,7 +136,7 @@ async function zipProject(outDir: string) {
 /* istanbul ignore next -- @preserve */
 function copyProject(projectDir: string) {
   const ignoreDirs = new Set(['dist', 'node_modules', '.wireit']);
-  cpSync(projectDir, `dist/${projectDir}`, {
+  cpSync(projectDir, join('dist', projectDir), {
     recursive: true,
     filter: src => !ignoreDirs.has(basename(src))
   });
@@ -179,8 +181,7 @@ export async function createStarter(starter: Starter, outDir: string = resolve(c
     if (!downloadPath) {
       throw new Error(`No download URL for starter "${starter}"`);
     }
-    const archivePath = `${outDir}/${starter}.zip`;
-    const extractedPath = `${outDir}/${starter}`;
+    const { archivePath, extractedPath } = createStarterPaths(starter, outDir);
     await downloadStarter(downloadPath, archivePath);
     await extractStarter(archivePath, extractedPath);
     await setupStarterGit(extractedPath);
@@ -200,6 +201,13 @@ export async function createStarter(starter: Starter, outDir: string = resolve(c
       }
     };
   }
+}
+
+export function createStarterPaths(starter: Starter, outDir: string) {
+  return {
+    archivePath: join(outDir, `${starter}.zip`),
+    extractedPath: join(outDir, starter)
+  };
 }
 
 /* istanbul ignore next -- @preserve */
@@ -225,13 +233,17 @@ async function setupStarterGit(extractedDir: string) {
   if (hasGit && !isGitRepository(extractedDir)) {
     console.log('🔄 Initializing git...');
     await new Promise<void>((resolve, reject) => {
-      const child = exec(`cd ${extractedDir} && git init`);
+      const child = createGitInitProcess(extractedDir);
       child.on('close', code => (code === 0 ? resolve() : reject(new Error(`git init exited with code ${code}`))));
       child.on('error', reject);
     });
   } else {
     console.log('🔄 Skipping git initialization...');
   }
+}
+
+export function createGitInitProcess(extractedDir: string) {
+  return execFile('git', ['init', extractedDir]);
 }
 
 /* istanbul ignore next -- @preserve */
@@ -276,19 +288,17 @@ async function setupStarterNPM(extractedDir: string) {
 
 /* istanbul ignore next -- @preserve */
 async function loginRegistry(extractedDir: string) {
-  const npmClient = await getNPMClient();
+  const npmClient = await getRequiredNPMClient();
   console.log('🔒 Logging in to registry...');
-  execSync(`cd ${extractedDir} && ${npmClient} login`, {
-    stdio: 'inherit'
-  });
+  execPackageManagerSync(npmClient, ['login'], extractedDir);
 }
 
 /* istanbul ignore next -- @preserve */
 async function installFromRegistry(extractedDir: string) {
-  const npmClient = await getNPMClient();
+  const npmClient = await getRequiredNPMClient();
   console.log('📦 Installing dependencies...');
   await new Promise<void>((resolve, reject) => {
-    const child = exec(`cd ${extractedDir} && ${npmClient} install`);
+    const child = execPackageManager(npmClient, ['install'], extractedDir);
     child.on('close', code =>
       code === 0 ? resolve() : reject(new Error(`${npmClient} install exited with code ${code}`))
     );
@@ -303,9 +313,7 @@ export async function startStarter(extractedPath: string) {
     console.log('🚀 Starting project...');
 
     try {
-      execSync(`cd ${extractedPath} && ${npmClient} run dev`, {
-        stdio: 'inherit'
-      });
+      execPackageManagerSync(npmClient, ['run', 'dev'], extractedPath);
     } catch (e) {
       if (e instanceof Error && 'signal' in e && e.signal === 'SIGINT') {
         console.log('\n👋 Stopped.');
@@ -314,6 +322,21 @@ export async function startStarter(extractedPath: string) {
       console.error(e);
     }
   }
+}
+
+async function getRequiredNPMClient() {
+  const npmClient = await getNPMClient();
+  if (npmClient === 'npm' || npmClient === 'pnpm') return npmClient;
+  throw new Error('No supported package manager found.');
+}
+
+function execPackageManager(npmClient: NPMClient, args: string[], cwd: string) {
+  return npmClient === 'pnpm' ? execFile('pnpm', args, { cwd }) : execFile('npm', args, { cwd });
+}
+
+function execPackageManagerSync(npmClient: NPMClient, args: string[], cwd: string) {
+  const options = { cwd, stdio: 'inherit' as const };
+  npmClient === 'pnpm' ? execFileSync('pnpm', args, options) : execFileSync('npm', args, options);
 }
 
 export const claudeProjectSettings = {
