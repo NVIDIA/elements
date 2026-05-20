@@ -15,6 +15,7 @@ import '@nvidia-elements/code/codeblock/define.js';
 import '@nvidia-elements/code/codeblock/languages/html.js';
 import '@nvidia-elements/code/codeblock/languages/typescript.js';
 import styles from './canvas.css?inline';
+import { decodeHtmlEntities } from './html.js';
 
 function convertToJsxElement(source: string): string {
   return source.replace(/<(\/?)([a-z]+(?:-[a-z]+)+)([^>]*)>/g, (...args: string[]) => {
@@ -113,7 +114,7 @@ export class Canvas extends LitElement {
 
   #updateSource() {
     const template = this.#template;
-    this.source = template ? unescapeHtml(template.innerHTML) : this.source;
+    this.source = template ? decodeHtmlEntities(template.innerHTML) : this.source;
   }
 
   #handleSourceClick() {
@@ -141,13 +142,4 @@ export class Canvas extends LitElement {
       globalThis.gtag('event', eventName, { tag: this.id });
     }
   }
-}
-
-function unescapeHtml(str: string) {
-  return str
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'");
 }

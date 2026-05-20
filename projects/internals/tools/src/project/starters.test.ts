@@ -1,9 +1,21 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { describe, expect, it } from 'vitest';
-import { startersData, removeWireitScripts } from './starters.js';
+import type * as childProcess from 'node:child_process';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  startersData,
+  createGitInitProcess,
+  createStarterPaths,
+  removeWireitScripts,
+  startStarter
+} from './starters.js';
 import { getNPMClient, isCommandAvailable, getPackageJson } from '../internal/node.js';
+
+vi.mock('node:child_process', async importOriginal => {
+  const actual = await importOriginal<typeof childProcess>();
+  return { ...actual, execFile: vi.fn(), execFileSync: vi.fn() };
+});
 
 describe('startersData', () => {
   it('should provide a list of starter metadata', () => {
@@ -157,6 +169,17 @@ describe('removeWireitScripts', () => {
   });
 });
 
+describe('createStarterPaths', () => {
+  it('should create starter paths without shell command concatenation', () => {
+    const outDir = '/tmp/starter output; echo bad';
+
+    expect(createStarterPaths('typescript', outDir)).toEqual({
+      archivePath: '/tmp/starter output; echo bad/typescript.zip',
+      extractedPath: '/tmp/starter output; echo bad/typescript'
+    });
+  });
+});
+
 describe('getNPMClient', () => {
   it('should return the npm client', async () => {
     expect(await getNPMClient()).toBe('pnpm');
@@ -182,5 +205,35 @@ describe('getPackageJson', () => {
     const result = getPackageJson(process.cwd());
     expect(result).toBeDefined();
     expect(result.name).toBe('@internals/tools');
+  });
+});
+
+describe('startStarter', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should start the dev server without shell interpretation', async () => {
+    const { execFileSync } = await import('node:child_process');
+    const extractedPath = '/tmp/starter with spaces; echo bad';
+
+    await startStarter(extractedPath);
+
+    expect(execFileSync).toHaveBeenCalledWith('pnpm', ['run', 'dev'], { cwd: extractedPath, stdio: 'inherit' });
+  });
+});
+
+describe('createGitInitProcess', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('should initialize git without shell interpretation', async () => {
+    const { execFile } = await import('node:child_process');
+    const extractedPath = '/tmp/starter with spaces; echo bad';
+
+    createGitInitProcess(extractedPath);
+
+    expect(execFile).toHaveBeenCalledWith('git', ['init', extractedPath]);
   });
 });

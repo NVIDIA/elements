@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { existsSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { ProjectsService } from '@internals/metadata';
@@ -13,6 +13,13 @@ interface PackageUpdate {
   name: string;
   from: string;
   to: string;
+}
+
+interface ProjectDependencyUpdateOptions {
+  cwd: string;
+  packageJson: PackageData;
+  packageJsonPath: string;
+  packageManager: string;
 }
 
 export function updatePackageJson(
@@ -47,34 +54,42 @@ export function updatePackageJson(
 export async function updateProject(cwd: string): Promise<Report> {
   const packageJsonPath = resolve(join(cwd, 'package.json'));
   if (!existsSync(packageJsonPath)) {
-    return {
-      dependencies: {
-        message: `No package.json found in the project directory. Dependencies were not updated.\n\`${packageJsonPath}\``,
-        status: 'warning'
-      }
-    };
+    return createMissingPackageJsonReport(packageJsonPath);
   }
 
   const packageJson = getPackageJson(cwd);
   const projects = (await ProjectsService.getData()).data.filter((p: { changelog: string }) => p.changelog);
-  const packageManager = await getNPMClient();
   const { packageJson: updatedPackageJson, updated } = updatePackageJson(
     packageJson,
     await getLatestPublishedVersions(projects)
   );
 
   if (updated.length === 0) {
-    return {
-      dependencies: {
-        message: `All packages are already up to date.\n\`${resolve(join(cwd, 'package.json'))}\``,
-        status: 'success'
-      }
-    };
+    return createCurrentPackageReport(packageJsonPath);
   }
 
+  const packageManager = await getNPMClient();
+  if (!packageManager) {
+    return createMissingPackageManagerReport();
+  }
+
+  const updateError = updateProjectDependencies({
+    cwd,
+    packageJson: updatedPackageJson,
+    packageJsonPath,
+    packageManager
+  });
+  if (updateError) return updateError;
+
+  return createUpdatedPackageReport(updated);
+}
+
+function updateProjectDependencies(options: ProjectDependencyUpdateOptions): Report | null {
+  const { cwd, packageJson, packageJsonPath, packageManager } = options;
+
   try {
-    writeFileSync(resolve(join(cwd, 'package.json')), JSON.stringify(updatedPackageJson, null, 2));
-    execSync(`cd ${cwd} && ${packageManager} update '@nvidia-elements/*' '@nvidia-elements/*'}`);
+    writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
+    execFileSync(packageManager, ['update', '@nvidia-elements/*', '@nvidia-elements/*'], { cwd });
   } catch (e) {
     return {
       dependencies: {
@@ -84,6 +99,37 @@ export async function updateProject(cwd: string): Promise<Report> {
     };
   }
 
+  return null;
+}
+
+function createMissingPackageJsonReport(packageJsonPath: string): Report {
+  return {
+    dependencies: {
+      message: `No package.json found in the project directory. Dependencies were not updated.\n\`${packageJsonPath}\``,
+      status: 'warning'
+    }
+  };
+}
+
+function createCurrentPackageReport(packageJsonPath: string): Report {
+  return {
+    dependencies: {
+      message: `All packages are already up to date.\n\`${packageJsonPath}\``,
+      status: 'success'
+    }
+  };
+}
+
+function createMissingPackageManagerReport(): Report {
+  return {
+    dependencies: {
+      message: 'No supported package manager found. Dependencies were not updated.',
+      status: 'danger'
+    }
+  };
+}
+
+function createUpdatedPackageReport(updated: PackageUpdate[]): Report {
   const changes = updated.map(u => `${u.name}: ${u.from} → ${u.to}`).join('\n');
   return {
     dependencies: {
