@@ -4,18 +4,58 @@
 import type { Rule } from 'eslint';
 import { createVisitors } from '@html-eslint/eslint-plugin/lib/rules/utils/visitors.js';
 import { findAttr } from '@html-eslint/eslint-plugin/lib/rules/utils/node.js';
-import type { HtmlTagNode } from '../rule-types.js';
+import type { HtmlAttribute, HtmlTagNode } from '../rule-types.js';
 
 declare const __ELEMENTS_PAGES_BASE_URL__: string;
-const DEPRECATED_ATTRIBUTES = {
+
+interface DeprecatedAttributeConfig {
+  replacement?: string;
+  values?: string[];
+}
+
+interface DeprecatedAttributeReport {
+  attr: HtmlAttribute;
+  attribute: string;
+  config: DeprecatedAttributeConfig;
+}
+
+const DEPRECATED_ATTRIBUTES: Record<string, Record<string, DeprecatedAttributeConfig>> = {
   'nve-badge': {
-    status: ['trend-up', 'trend-down', 'trend-neutral']
+    status: { values: ['trend-up', 'trend-down', 'trend-neutral'] }
+  },
+  'nve-combobox': {
+    notags: { replacement: 'tag-layout="hidden"' }
   }
 };
+
+function attributeValueIsDeprecated(config: DeprecatedAttributeConfig, value?: string) {
+  return !config.values || (!!value && config.values.includes(value));
+}
+
+function reportDeprecatedAttribute(context: Rule.RuleContext, { attr, attribute, config }: DeprecatedAttributeReport) {
+  const replacement = config.replacement;
+  const messageId = config.replacement
+    ? 'unexpected-deprecated-attribute-replacement'
+    : 'unexpected-deprecated-attribute';
+  const report: Rule.ReportDescriptor = {
+    node: attr,
+    data: {
+      attribute,
+      replacement: config.replacement ?? '',
+      value: attr.value?.value ?? ''
+    },
+    messageId
+  };
+  if (replacement) {
+    report.fix = fixer => fixer.replaceText(attr, replacement);
+  }
+  context.report(report);
+}
 
 const rule = {
   meta: {
     type: 'problem' as const,
+    fixable: 'code' as const,
     docs: {
       description: 'Disallow use of deprecated attributes in HTML.',
       category: 'Best Practice',
@@ -24,27 +64,22 @@ const rule = {
     },
     schema: [],
     messages: {
-      ['unexpected-deprecated-attribute']: 'Unexpected use of deprecated value "{{value}}" in attribute "{{attribute}}"'
+      ['unexpected-deprecated-attribute']:
+        'Unexpected use of deprecated value "{{value}}" in attribute "{{attribute}}"',
+      ['unexpected-deprecated-attribute-replacement']:
+        'Unexpected use of deprecated attribute "{{attribute}}". Use {{replacement}} instead.'
     }
   },
   create(context: Rule.RuleContext) {
     return createVisitors(context, {
       Tag(node: HtmlTagNode) {
-        const deprecatedAttributes: Record<string, string[]> | undefined =
+        const deprecatedAttributes: Record<string, DeprecatedAttributeConfig> | undefined =
           DEPRECATED_ATTRIBUTES[node.name as keyof typeof DEPRECATED_ATTRIBUTES];
         if (deprecatedAttributes) {
-          Object.entries(deprecatedAttributes).forEach(([attribute, values]) => {
+          Object.entries(deprecatedAttributes).forEach(([attribute, config]) => {
             const attr = findAttr(node, attribute);
-            const value = attr?.value?.value;
-            if (attr && values.includes(value)) {
-              context.report({
-                node: attr,
-                data: {
-                  attribute,
-                  value
-                },
-                messageId: 'unexpected-deprecated-attribute'
-              });
+            if (attr && attributeValueIsDeprecated(config, attr.value?.value)) {
+              reportDeprecatedAttribute(context, { attr, attribute, config });
             }
           });
         }

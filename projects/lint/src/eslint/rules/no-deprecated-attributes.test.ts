@@ -36,6 +36,9 @@ describe('noDeprecatedAttributes', () => {
     expect(noDeprecatedAttributes.meta.messages['unexpected-deprecated-attribute']).toBe(
       'Unexpected use of deprecated value "{{value}}" in attribute "{{attribute}}"'
     );
+    expect(noDeprecatedAttributes.meta.messages['unexpected-deprecated-attribute-replacement']).toBe(
+      'Unexpected use of deprecated attribute "{{attribute}}". Use {{replacement}} instead.'
+    );
   });
 
   it('should allow valid use of attributes', () => {
@@ -43,7 +46,9 @@ describe('noDeprecatedAttributes', () => {
       valid: [
         '<nve-badge></nve-badge>',
         '<nve-badge status="success"></nve-badge>',
-        `<nve-badge status=${'success'}></nve-badge>`
+        `<nve-badge status=${'success'}></nve-badge>`,
+        '<nve-combobox tag-layout="hidden"></nve-combobox>',
+        '<nve-combobox tag-layout="wrap"></nve-combobox>'
       ],
       invalid: []
     });
@@ -65,6 +70,26 @@ describe('noDeprecatedAttributes', () => {
           code: '<nve-badge status="trend-neutral"></nve-badge>',
           errors: [
             { messageId: 'unexpected-deprecated-attribute', data: { attribute: 'status', value: 'trend-neutral' } }
+          ]
+        },
+        {
+          code: '<nve-combobox notags></nve-combobox>',
+          output: '<nve-combobox tag-layout="hidden"></nve-combobox>',
+          errors: [
+            {
+              messageId: 'unexpected-deprecated-attribute-replacement',
+              data: { attribute: 'notags', replacement: 'tag-layout="hidden"' }
+            }
+          ]
+        },
+        {
+          code: '<nve-combobox notags="true"></nve-combobox>',
+          output: '<nve-combobox tag-layout="hidden"></nve-combobox>',
+          errors: [
+            {
+              messageId: 'unexpected-deprecated-attribute-replacement',
+              data: { attribute: 'notags', replacement: 'tag-layout="hidden"' }
+            }
           ]
         }
       ]
