@@ -1,3 +1,15 @@
+## <small>0.1.4 (2026-05-21)</small>
+
+* fix(cli): binary version support ([39106f1](https://github.com/NVIDIA/elements/commit/39106f1))
+* fix(cli): handle command args ([0f526e0](https://github.com/NVIDIA/elements/commit/0f526e0))
+* fix(core): remove postinstall ([4818481](https://github.com/NVIDIA/elements/commit/4818481))
+* chore(ci): add labeler and stale workflows ([31730e8](https://github.com/NVIDIA/elements/commit/31730e8))
+* chore(ci): cleanup unused references and improve ci logging ([9280f22](https://github.com/NVIDIA/elements/commit/9280f22))
+* chore(docs): add agent tooling guidelines ([5eb909d](https://github.com/NVIDIA/elements/commit/5eb909d))
+* chore(docs): metadata structure fixes ([efb89f7](https://github.com/NVIDIA/elements/commit/efb89f7))
+* chore(release): @nvidia-elements/cli-v0.2.1 [skip ci] ([a4e3dad](https://github.com/NVIDIA/elements/commit/a4e3dad))
+* chore(starters): add agents files ([64eac99](https://github.com/NVIDIA/elements/commit/64eac99))
+
 ## <small>0.1.3 (2026-05-19)</small>
 
 * fix(core): correct read only property ([b9e7588](https://github.com/NVIDIA/elements/commit/b9e7588))
