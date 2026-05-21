@@ -188,6 +188,7 @@ export class PreferencesInput extends FormControlMixin<typeof LitElement, Prefer
   }
 
   #updatePreferences() {
+    /* istanbul ignore else -- Lit SSR mode is not reachable in browser unit tests. */
     if (!isServer) {
       const preferences = getActivePreferences();
       if (JSON.stringify(this.activePreferences) !== JSON.stringify(preferences)) {

@@ -274,6 +274,14 @@ describe(`${Accordion.metadata.tag} - Actions`, () => {
   it('should align caret icon button to left side if an action is provided by consumer', () => {
     expect(element.shadowRoot.querySelector('.has-action')).toBeTruthy();
   });
+
+  it('should keep the action caret pointing down when expanded', async () => {
+    element.expanded = true;
+    await elementIsStable(element);
+
+    const iconButton = element.shadowRoot.querySelector<IconButton>(IconButton.metadata.tag);
+    expect(iconButton.direction).toBe('down');
+  });
 });
 
 describe(`${Accordion.metadata.tag} - inline interactive`, () => {

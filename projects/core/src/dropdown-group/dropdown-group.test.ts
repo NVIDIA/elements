@@ -64,11 +64,9 @@ describe(DropdownGroup.metadata.tag, () => {
     const dropdown1 = element.dropdowns[0];
     const dropdown2 = element.dropdowns[1];
 
-    // Open both dropdowns
     dropdown1.showPopover();
     dropdown2.showPopover();
 
-    // Simulate click outside
     const event = new PointerEvent('pointerup', {
       clientX: 1000,
       clientY: 1000
@@ -79,6 +77,26 @@ describe(DropdownGroup.metadata.tag, () => {
 
     expect(dropdown1.matches(':popover-open')).toBe(false);
     expect(dropdown2.matches(':popover-open')).toBe(false);
+  });
+
+  it('should keep dropdowns open when clicking inside the group', async () => {
+    const dropdown1 = element.dropdowns[0];
+    const dropdown2 = element.dropdowns[1];
+    dropdown1.showPopover();
+    dropdown2.showPopover();
+
+    dropdown1.dispatchEvent(
+      new PointerEvent('pointerup', {
+        bubbles: true,
+        clientX: dropdown1.getBoundingClientRect().left,
+        clientY: dropdown1.getBoundingClientRect().top
+      })
+    );
+
+    await elementIsStable(element);
+
+    expect(dropdown1.matches(':popover-open')).toBe(true);
+    expect(dropdown2.matches(':popover-open')).toBe(true);
   });
 
   it('should handle keyboard navigation', async () => {
@@ -155,26 +173,31 @@ describe(DropdownGroup.metadata.tag, () => {
     const dropdown1 = element.dropdowns[0];
     const button = fixture.querySelector('nve-button');
 
-    // Open dropdown
     dropdown1.showPopover();
     await elementIsStable(element);
 
-    // Hide popover first
     dropdown1.hidePopover();
     await elementIsStable(element);
 
-    // Trigger close event
     const closeEvent = new CustomEvent('close', { bubbles: true });
     dropdown1.dispatchEvent(closeEvent);
 
-    // Wait for focus to be set
     await new Promise(resolve => setTimeout(resolve, 50));
     await elementIsStable(element);
 
-    // Ensure button is focusable
     button.setAttribute('tabindex', '0');
     button.focus();
 
     expect(document.activeElement).toBe(button);
+  });
+
+  it('should ignore open and close events from non-local dropdowns', async () => {
+    const activeElement = document.activeElement;
+    element.dispatchEvent(new CustomEvent('open', { bubbles: true }));
+    element.dispatchEvent(new CustomEvent('close', { bubbles: true }));
+
+    await elementIsStable(element);
+
+    expect(document.activeElement).toBe(activeElement);
   });
 });

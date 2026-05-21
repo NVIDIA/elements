@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators/custom-element.js';
 import { createFixture, elementIsStable, removeFixture, untilEvent } from '@internals/testing';
@@ -52,6 +52,20 @@ describe('touch.controller', () => {
     const event = untilEvent(element, 'nve-touch-start');
     element.dispatchEvent(new PointerEvent('pointerdown', { pointerId: 1 }));
     expect(await event).toBeTruthy();
+  });
+
+  it('should ignore pointerdown events outside the composed path', async () => {
+    await elementIsStable(element);
+    const event = new PointerEvent('pointerdown', { pointerId: 1 });
+    const listener = vi.fn();
+    const setPointerCapture = vi.spyOn(element, 'setPointerCapture');
+
+    vi.spyOn(event, 'composedPath').mockReturnValue([]);
+    element.addEventListener('nve-touch-start', listener);
+    element.dispatchEvent(event);
+
+    expect(listener).not.toHaveBeenCalled();
+    expect(setPointerCapture).not.toHaveBeenCalled();
   });
 
   it('should trigger nve-touch-end on pointerup', async () => {

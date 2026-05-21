@@ -30,4 +30,18 @@ describe(`${Icon.metadata.tag}: static`, () => {
     mergeIcons(Registered as unknown as typeof Icon);
     expect(Registered._icons['merge-svg-2']).toBeDefined();
   });
+
+  it('should not merge icons for newer registered versions', () => {
+    class Registered {
+      static metadata = {
+        version: '1.0.0'
+      };
+
+      static _icons: Record<string, { svg: () => string }> = {};
+    }
+
+    mergeIcons(Registered as unknown as typeof Icon);
+
+    expect(Registered._icons.book).toBeUndefined();
+  });
 });

@@ -40,6 +40,20 @@ describe(Color.metadata.tag, () => {
     expect(fixture.querySelector('input').value).toBe('#dde1e4');
   });
 
+  it('should ignore non-hex background defaults', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <nve-color style="--background: rgb(221, 225, 228)">
+        <label>label</label>
+        <input type="color" />
+      </nve-color>
+    `);
+    element = fixture.querySelector(Color.metadata.tag);
+    await elementIsStable(element);
+
+    expect(fixture.querySelector('input').value).toBe('#000000');
+  });
+
   it('should apply default if custom default is provided', async () => {
     await elementIsStable(element);
     expect(fixture.querySelector('input').value).toBe('#dde1e4');

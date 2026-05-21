@@ -313,6 +313,14 @@ describe('base button', () => {
     expect(submitButtonInForm.form).toBe(form);
   });
 
+  it('should accept a direct form element reference', async () => {
+    submitButtonInForm.form = otherForm;
+    await elementIsStable(submitButtonInForm);
+
+    expect(submitButtonInForm.form).toBe(otherForm);
+    expect(submitButtonInForm.hasAttribute('form')).toBe(false);
+  });
+
   it('should be able to access form property from submit event even if form is not in the same document', async () => {
     element.form = 'main';
     element.type = 'submit';

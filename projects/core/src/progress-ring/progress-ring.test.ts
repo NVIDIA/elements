@@ -68,6 +68,14 @@ describe(ProgressRing.metadata.tag, () => {
     expect(nveIcon.name).toBe(statusIcons[element.status]);
   });
 
+  it('should render the internal icon without a name when status is omitted', async () => {
+    element.status = undefined;
+    await elementIsStable(element);
+
+    const nveIcon = element.shadowRoot.querySelector(Icon.metadata.tag) as Icon;
+    expect(nveIcon.name).toBeUndefined();
+  });
+
   it('should set indeterminate state when value is undefined', async () => {
     const internalHost = element.shadowRoot.querySelector('[internal-host]') as HTMLElement;
     expect(internalHost.hasAttribute('indeterminate')).toBe(true);
@@ -108,6 +116,15 @@ describe(ProgressRing.metadata.tag, () => {
     const ring = element.shadowRoot.querySelector('.ring') as SVGCircleElement;
     const dashValue = parseFloat(ring.getAttribute('stroke-dasharray'));
     expect(dashValue).toBeGreaterThan(44);
+  });
+
+  it('should default stroke-dasharray scaling when max is omitted', async () => {
+    element.value = 50;
+    element.max = undefined;
+    await elementIsStable(element);
+
+    const ring = element.shadowRoot.querySelector('.ring') as SVGCircleElement;
+    expect(ring.getAttribute('stroke-dasharray')).toBe('22px 44px');
   });
 
   it('should suppress the internal icon and show slotted content when the deprecated status-icon slot is used', async () => {

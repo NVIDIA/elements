@@ -208,6 +208,31 @@ describe(TabsGroup.metadata.tag, () => {
     expect(panels[0]!.hidden).toBe(false);
   });
 
+  it('should ignore non-toggle commands and empty source values', async () => {
+    let fired = false;
+    const emptySource = document.createElement('button');
+    emptySource.value = '';
+
+    group.addEventListener('select', () => (fired = true));
+    group.dispatchEvent(
+      new CommandEvent('command', {
+        command: '--close',
+        source: tabItems[1]!
+      })
+    );
+    group.dispatchEvent(
+      new CommandEvent('command', {
+        command: '--toggle',
+        source: emptySource
+      })
+    );
+    await elementIsStable(group);
+
+    expect(fired).toBe(false);
+    expect(tabItems[0]!.selected).toBe(true);
+    expect(tabItems[1]!.selected).toBe(false);
+  });
+
   it('should ignore invokers that target disabled tabs', async () => {
     const externalButton = fixture.querySelector<HTMLElement>('#settings-button')!;
     let fired = false;

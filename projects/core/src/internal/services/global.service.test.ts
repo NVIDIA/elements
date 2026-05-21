@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { untilEvent } from '@internals/testing';
 import { GlobalState, GlobalStateService } from './global.service.js';
 
@@ -9,6 +9,11 @@ describe('GlobalStateService', () => {
   beforeEach(() => {
     window.NVE_ELEMENTS.state.versions = ['0.0.0'];
     window.NVE_ELEMENTS.state.elementRegistry = {};
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.restoreAllMocks();
   });
 
   it('should provide an initial state object', () => {
@@ -82,6 +87,42 @@ describe('GlobalStateService', () => {
     const instance = new GlobalState();
     expect(instance.state.scopedRegistry).toBeDefined();
     expect(instance.state.scopedRegistry['0.0.0']).toBeDefined();
+  });
+
+  it('should create scoped registries when the platform supports them', () => {
+    class ScopedCustomElementRegistry {
+      initialize() {
+        return undefined;
+      }
+    }
+
+    vi.stubGlobal('CustomElementRegistry', ScopedCustomElementRegistry);
+    window.NVE_ELEMENTS.state.scopedRegistry = {};
+
+    const instance = new GlobalState();
+
+    expect(instance.state.scopedRegistry['0.0.0']).toBeInstanceOf(ScopedCustomElementRegistry);
+  });
+
+  it('should fall back to customElements when scoped registries are unsupported', () => {
+    class UnsupportedCustomElementRegistry {}
+
+    vi.stubGlobal('CustomElementRegistry', UnsupportedCustomElementRegistry);
+    window.NVE_ELEMENTS.state.scopedRegistry = {};
+
+    const instance = new GlobalState();
+
+    expect(instance.state.scopedRegistry['0.0.0']).toBe(customElements);
+  });
+
+  it('should warn when multiple development versions are loaded', () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    window.NVE_ELEMENTS.state.versions = ['0.0.0', '1.0.0'];
+    window.NVE_ELEMENTS.state.env = 'development';
+
+    new GlobalState();
+
+    expect(console.warn).toHaveBeenCalledTimes(1);
   });
 
   it('should log out state when debug() is called on NVE_ELEMENTS', async () => {

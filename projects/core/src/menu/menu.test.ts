@@ -138,4 +138,16 @@ describe(`${Menu.metadata.tag}: scroll event`, () => {
 
     expect(spy).toHaveBeenCalledTimes(1);
   });
+
+  it('should not fire scroll event when the internal host is removed before animation frame', async () => {
+    const spy = vi.fn();
+    element.addEventListener('scroll', spy);
+
+    scrollContainer.scrollTop = 50;
+    scrollContainer.dispatchEvent(new Event('scroll'));
+    scrollContainer.remove();
+    await new Promise(r => requestAnimationFrame(r));
+
+    expect(spy).not.toHaveBeenCalled();
+  });
 });

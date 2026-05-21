@@ -245,4 +245,25 @@ describe(Icon.metadata.tag, () => {
     await new Promise(resolve => setTimeout(resolve, 50));
     expect(spy).toHaveBeenCalled();
   });
+
+  it('should ignore matching icon events after disconnect', async () => {
+    const iconName = 'test-svg-disconnected' as IconName;
+    removeFixture(fixture);
+    fixture = await createFixture(html`<nve-icon name=${iconName}></nve-icon>`);
+    const el = fixture.querySelector<Icon>(Icon.metadata.tag);
+    await elementIsStable(el);
+
+    const spy = vi.spyOn(el, 'requestUpdate');
+    removeFixture(fixture);
+    fixture = undefined as unknown as HTMLElement;
+
+    document.dispatchEvent(
+      new CustomEvent(`${Icon.metadata.tag}-${iconName}`, {
+        detail: { svg: () => '<svg id="test-svg-disconnected"><path d=""/></svg>' }
+      })
+    );
+    await new Promise(resolve => setTimeout(resolve, 50));
+
+    expect(spy).not.toHaveBeenCalled();
+  });
 });

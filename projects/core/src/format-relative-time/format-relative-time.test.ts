@@ -215,6 +215,20 @@ describe(FormatRelativeTime.metadata.tag, () => {
       expect(time!.textContent!.trim()).toContain('Tag');
     });
 
+    it('should use the browser locale when locale and document lang are omitted', async () => {
+      document.documentElement.lang = '';
+      removeFixture(fixture);
+
+      fixture = await createFixture(
+        html`<nve-format-relative-time date="2023-07-27T12:00:00.000Z"></nve-format-relative-time>`
+      );
+      element = fixture.querySelector(FormatRelativeTime.metadata.tag);
+      await elementIsStable(element);
+
+      const time = element.shadowRoot!.querySelector('time');
+      expect(time!.textContent!.trim()).toBe('1 day ago');
+    });
+
     it('should format with de-DE locale', async () => {
       removeFixture(fixture);
 
@@ -303,6 +317,49 @@ describe(FormatRelativeTime.metadata.tag, () => {
       await elementIsStable(element);
 
       expect(element.shadowRoot!.querySelector('time')!.textContent!.trim()).toBe('2 minutes ago');
+    });
+
+    it('should start sync when connected with the sync attribute', async () => {
+      removeFixture(fixture);
+
+      fixture = await createFixture(
+        html`<nve-format-relative-time locale="en-US" sync date="2023-07-28T11:59:30.000Z"></nve-format-relative-time>`
+      );
+      element = fixture.querySelector(FormatRelativeTime.metadata.tag);
+      await elementIsStable(element);
+
+      vi.setSystemTime(new Date('2023-07-28T12:01:00.000Z'));
+      vi.advanceTimersByTime(10000);
+      await elementIsStable(element);
+
+      expect(element.shadowRoot!.querySelector('time')!.textContent!.trim()).toBe('2 minutes ago');
+    });
+
+    it('should use the hourly sync interval for day-or-greater distances', async () => {
+      element.date = '2023-07-26T12:00:00.000Z';
+      element.sync = true;
+      await elementIsStable(element);
+
+      vi.advanceTimersByTime(300000);
+      await elementIsStable(element);
+      expect(element.shadowRoot!.querySelector('time')!.textContent!.trim()).toBe('2 days ago');
+
+      vi.advanceTimersByTime(3600000);
+      await elementIsStable(element);
+      expect(element.shadowRoot!.querySelector('time')!.textContent!.trim()).toBe('2 days ago');
+    });
+
+    it('should use the default sync interval when the date is empty', async () => {
+      removeFixture(fixture);
+
+      fixture = await createFixture(html`<nve-format-relative-time locale="en-US" sync></nve-format-relative-time>`);
+      element = fixture.querySelector(FormatRelativeTime.metadata.tag);
+      await elementIsStable(element);
+
+      vi.advanceTimersByTime(60000);
+      await elementIsStable(element);
+
+      expect(element.shadowRoot!.querySelector('time')!.textContent!.trim()).toBe('');
     });
 
     it('should adapt interval as time distance grows', async () => {

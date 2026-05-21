@@ -53,11 +53,25 @@ describe(Alert.metadata.tag, () => {
     expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('checkmark-circle');
   });
 
+  it('should use default status icon for unsupported status values', async () => {
+    alert.status = 'unsupported' as Alert['status'];
+    await elementIsStable(alert);
+
+    expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag).name).toBe('information-circle-stroke');
+  });
+
   it('should set an aria-label for the icon status', async () => {
     expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag).ariaLabel).toBe('information');
     alert.status = 'success';
     await elementIsStable(alert);
     expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag).ariaLabel).toBe('success');
+  });
+
+  it('should use hardcoded icon aria-label fallback when i18n is missing', async () => {
+    alert.i18n = {} as Alert['i18n'];
+    await elementIsStable(alert);
+
+    expect(alert.shadowRoot.querySelector<Icon>(Icon.metadata.tag).ariaLabel).toBe('information');
   });
 
   it('should provide a aria role of alert to describe content', async () => {

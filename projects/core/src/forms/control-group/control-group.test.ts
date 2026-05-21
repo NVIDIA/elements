@@ -61,4 +61,14 @@ describe(ControlGroup.metadata.tag, () => {
     await elementIsStable(element);
     expect(element.shadowRoot.querySelector('.no-label')).toBeTruthy();
   });
+
+  it('should fall back to empty control collections when querySelectorAll is unavailable', async () => {
+    Object.defineProperty(element, 'querySelectorAll', { value: undefined, configurable: true });
+
+    expect(element.inputs).toEqual([]);
+
+    element.requestUpdate();
+    await elementIsStable(element);
+    expect(element.shadowRoot.querySelector('.no-messages')).toBeTruthy();
+  });
 });

@@ -93,6 +93,17 @@ describe(FormatDatetime.metadata.tag, () => {
       expect(text).toContain('7/28/23');
       expect(text).toMatch(/\d{1,2}:\d{2}\s*(AM|PM)/);
     });
+
+    it('should format with time-style only', async () => {
+      element.removeAttribute('date-style');
+      element.dateStyle = undefined;
+      element.timeStyle = 'short';
+      element.timeZone = undefined;
+      await elementIsStable(element);
+
+      const time = element.shadowRoot!.querySelector('time');
+      expect(time!.textContent!.trim()).toMatch(/\d{1,2}:\d{2}\s*(AM|PM)/);
+    });
   });
 
   describe('granular options', () => {
@@ -141,6 +152,20 @@ describe(FormatDatetime.metadata.tag, () => {
       const time = element.shadowRoot!.querySelector('time');
       expect(time!.textContent!.trim()).toMatch(/\d{1,2}:\d{2}\s*(AM|PM)/);
     });
+
+    it('should format seconds without a time zone', async () => {
+      fixture.innerHTML = '';
+      removeFixture(fixture);
+
+      fixture = await createFixture(
+        html`<nve-format-datetime locale="en-US" second="2-digit">2023-07-28T04:20:17.434Z</nve-format-datetime>`
+      );
+      element = fixture.querySelector(FormatDatetime.metadata.tag);
+      await elementIsStable(element);
+
+      const time = element.shadowRoot!.querySelector('time');
+      expect(time!.textContent!.trim()).toBe('17');
+    });
   });
 
   describe('locale', () => {
@@ -157,6 +182,21 @@ describe(FormatDatetime.metadata.tag, () => {
 
       const time = element.shadowRoot!.querySelector('time');
       expect(time!.textContent!.trim()).toContain('Juli');
+    });
+
+    it('should use the browser locale when locale and document lang are omitted', async () => {
+      document.documentElement.lang = '';
+      fixture.innerHTML = '';
+      removeFixture(fixture);
+
+      fixture = await createFixture(
+        html`<nve-format-datetime date-style="long" time-zone="UTC">2023-07-28T04:20:17.434Z</nve-format-datetime>`
+      );
+      element = fixture.querySelector(FormatDatetime.metadata.tag);
+      await elementIsStable(element);
+
+      const time = element.shadowRoot!.querySelector('time');
+      expect(time!.textContent!.trim()).toBe('July 28, 2023');
     });
 
     it('should format with de-DE locale', async () => {

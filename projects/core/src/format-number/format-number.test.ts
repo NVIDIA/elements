@@ -202,6 +202,24 @@ describe(FormatNumber.metadata.tag, () => {
       const data = element.shadowRoot!.querySelector('data');
       expect(data!.textContent!.trim()).toBe('1234567');
     });
+
+    it('should force grouping with true', async () => {
+      element.number = '1234567';
+      element.useGrouping = 'true';
+      await elementIsStable(element);
+
+      const data = element.shadowRoot!.querySelector('data');
+      expect(data!.textContent!.trim()).toBe('1,234,567');
+    });
+
+    it('should pass through Intl grouping options', async () => {
+      element.number = '1234567';
+      element.useGrouping = 'always';
+      await elementIsStable(element);
+
+      const data = element.shadowRoot!.querySelector('data');
+      expect(data!.textContent!.trim()).toBe('1,234,567');
+    });
   });
 
   describe('fraction digits', () => {
@@ -235,6 +253,18 @@ describe(FormatNumber.metadata.tag, () => {
 
       const data = element.shadowRoot!.querySelector('data');
       expect(data!.textContent!.trim()).toBe('1.234,56');
+    });
+
+    it('should fall back to browser locale when document lang is empty', async () => {
+      document.documentElement.lang = '';
+      removeFixture(fixture);
+
+      fixture = await createFixture(html`<nve-format-number>1234.56</nve-format-number>`);
+      element = fixture.querySelector(FormatNumber.metadata.tag);
+      await elementIsStable(element);
+
+      const data = element.shadowRoot!.querySelector('data');
+      expect(data!.textContent!.trim()).toBe(new Intl.NumberFormat(undefined).format(1234.56));
     });
 
     it('should format with explicit de-DE locale', async () => {
@@ -309,6 +339,20 @@ describe(FormatNumber.metadata.tag, () => {
       await elementIsStable(element);
 
       const data = element.shadowRoot!.querySelector('data');
+      expect(data!.textContent!.trim()).toBe('');
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it('should render empty when text content is unavailable', async () => {
+      Object.defineProperty(element, 'textContent', {
+        configurable: true,
+        get: () => undefined
+      });
+      element.requestUpdate();
+      await elementIsStable(element);
+
+      const data = element.shadowRoot!.querySelector('data');
+      expect(data!.getAttribute('value')).toBe('');
       expect(data!.textContent!.trim()).toBe('');
       expect(warnSpy).not.toHaveBeenCalled();
     });

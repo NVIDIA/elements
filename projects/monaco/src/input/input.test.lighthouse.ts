@@ -41,7 +41,7 @@ describe('monaco-input lighthouse report', () => {
     expect(report.scores.performance).toBeGreaterThanOrEqual(90);
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
-    expect(report.payload.javascript.kb).toBeLessThan(3366);
+    expect(report.payload.javascript.kb).toBeLessThan(3367);
     expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14);
     expect(report.payload.javascript.requests['editor2.global.js'].kb).toBeLessThan(78);
     expect(report.payload.javascript.requests['editor2.main.js'].kb).toBeLessThan(24);

@@ -71,7 +71,6 @@ describe(Range.metadata.tag, () => {
   });
 
   it('should properly render datalist ticks', async () => {
-    // Create a new fixture with datalist
     removeFixture(fixture);
     fixture = await createFixture(html`
       <nve-range>
@@ -91,6 +90,31 @@ describe(Range.metadata.tag, () => {
     expect(ticks.length).toBe(3);
     expect(ticks[1].textContent).toBe('50');
     expect(ticks[1].style.left).toBe('50%');
+  });
+
+  it('should render datalist ticks with input bounds and value fallback labels', async () => {
+    removeFixture(fixture);
+    fixture = await createFixture(html`
+      <nve-range>
+        <label>label</label>
+        <input type="range" value="20" min="10" max="30" />
+        <datalist>
+          <option value="10"></option>
+          <option value="20">middle</option>
+          <option value="30"></option>
+        </datalist>
+      </nve-range>
+    `);
+    element = fixture.querySelector(Range.metadata.tag);
+    await elementIsStable(element);
+
+    const ticks = element.shadowRoot.querySelectorAll('.datalist-tick');
+    expect(ticks[0].textContent).toBe('10');
+    expect(ticks[0].style.left).toBe('0%');
+    expect(ticks[1].textContent).toBe('middle');
+    expect(ticks[1].style.left).toBe('50%');
+    expect(ticks[2].textContent).toBe('30');
+    expect(ticks[2].style.left).toBe('100%');
   });
 
   it('should default orientation to horizontal', async () => {

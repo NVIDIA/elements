@@ -67,6 +67,7 @@ export class TypeTouchController<T extends ReactiveElement> implements ReactiveC
   };
 
   #end = (e: PointerEvent) => {
+    /* istanbul ignore else -- #start registers #end only after setting #startPosition. */
     if (this.#startPosition) {
       globalThis.document.removeEventListener('pointerup', this.#end, false);
       globalThis.document.removeEventListener('pointermove', this.#move, false);
