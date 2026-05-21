@@ -65,8 +65,15 @@ export class Combobox extends Control implements ContainerElement {
    */
   @property({ type: String, reflect: true }) container: 'flat';
 
-  /** Disable rendering of inline tags for many-item select */
+  /**
+   * @deprecated Use `tagLayout = 'hidden'` or `tag-layout="hidden"` instead.
+   *
+   * Disable rendering of inline tags for many-item select
+   */
   @property({ type: Boolean, reflect: true }) notags: boolean;
+
+  /** Manage inline tag rendering for many-item select */
+  @property({ type: String, reflect: true, attribute: 'tag-layout' }) tagLayout: 'hidden' | 'wrap';
 
   /** Enable creation of new options when the input value doesn't match any existing option. Dispatches a `create` event with `{ value }` detail. */
   @property({ type: Boolean, reflect: true, attribute: 'behavior-create' }) behaviorCreate: boolean;
@@ -168,7 +175,7 @@ export class Combobox extends Control implements ContainerElement {
   protected _associateDatalist = false;
 
   protected get prefixContent() {
-    return this.#select?.multiple && !this.notags
+    return this.#select?.multiple && !this.#tagLayoutIsHidden
       ? html`
     <div class="tags-label" aria-hidden="true">${this.#select.selectedOptions.length} ${this.i18n.selected}</div>
     <div class="tags">
@@ -178,6 +185,10 @@ export class Combobox extends Control implements ContainerElement {
       )}
     </div>`
       : html`<slot name="prefix-icon"></slot>`;
+  }
+
+  get #tagLayoutIsHidden() {
+    return this.notags || this.tagLayout === 'hidden';
   }
 
   get #largeOptionsList() {
@@ -422,6 +433,12 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setupOpenKeyEvents() {
+    this.#tags?.addEventListener('pointerup', () => {
+      if (this.tagLayout !== 'wrap') return;
+      this.input.focus();
+      setTimeout(() => this.#openListBox(), 0);
+    });
+
     this.input.addEventListener('pointerdown', () => {
       this.#openListBox();
     });
@@ -544,7 +561,7 @@ export class Combobox extends Control implements ContainerElement {
   }
 
   #setupOverflowListener() {
-    if (this.#select?.multiple && !this.notags) {
+    if (this.#select?.multiple && !this.#tagLayoutIsHidden) {
       if (this.#select.selectedOptions.length > 1) {
         // only calculate initial overflow if many tags exist
         this.#updateMultipleOverflow(this.#tags!.getBoundingClientRect().width);

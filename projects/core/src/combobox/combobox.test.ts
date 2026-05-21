@@ -725,6 +725,36 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
     expect(select.selectedOptions.length).toBe(1);
   });
 
+  it('should not open dropdown when tags are pressed without wrap layout', async () => {
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    const tags = element.shadowRoot.querySelector<HTMLElement>('.tags');
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+    tags.dispatchEvent(new Event('pointerup', { bubbles: true }));
+
+    await new Promise(resolve => setTimeout(resolve, 0));
+    await elementIsStable(element);
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+  });
+
+  it('should focus input and open dropdown when wrap layout tags are pressed', async () => {
+    element.tagLayout = 'wrap';
+    await elementIsStable(element);
+
+    const dropdown = element.shadowRoot.querySelector<Dropdown>(Dropdown.metadata.tag);
+    const tags = element.shadowRoot.querySelector<HTMLElement>('.tags');
+
+    expect(dropdown.matches(':popover-open')).toBe(false);
+    tags.dispatchEvent(new Event('pointerup', { bubbles: true }));
+
+    await new Promise(resolve => setTimeout(resolve, 0));
+    await elementIsStable(element);
+
+    expect(document.activeElement).toBe(input);
+    expect(dropdown.matches(':popover-open')).toBe(true);
+  });
+
   it('should hide tags and display label when multiple is used and tags overflow container', async () => {
     expect(element.matches(':state(multiple-overflow)')).toBe(false);
     element.style.setProperty('--width', '100px');
@@ -740,13 +770,40 @@ describe(`${Combobox.metadata.tag}: multi select`, () => {
     expect(element.matches(':state(multiple-overflow)')).toBe(true);
   });
 
-  it('should not render inline tags when notags is used', async () => {
-    element.notags = true;
+  it('should keep tags visible when wrap layout is used with overflow state', async () => {
+    element.tagLayout = 'wrap';
+    element._internals.states.add('multiple-overflow');
+    await elementIsStable(element);
+
+    const tags = element.shadowRoot.querySelector<HTMLElement>('.tags');
+    const tagsLabel = element.shadowRoot.querySelector<HTMLElement>('.tags-label');
+
+    expect(element.matches(':state(multiple-overflow)')).toBe(true);
+    expect(getComputedStyle(tags).opacity).toBe('1');
+    expect(getComputedStyle(tags).position).toBe('static');
+    expect(getComputedStyle(tags).flexWrap).toBe('wrap');
+    expect(getComputedStyle(tagsLabel).display).toBe('none');
+  });
+
+  it('should not render inline tags when hidden tag layout is used', async () => {
+    element.tagLayout = 'hidden';
     select.multiple = true;
     select.options[0].selected = true;
     select.options[1].selected = true;
     select.options[2].selected = true;
     await elementIsStable(element);
+    expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
+  });
+
+  it('should support deprecated notags alias', async () => {
+    element.notags = true;
+    select.multiple = true;
+    select.options[0].selected = true;
+    select.options[1].selected = true;
+    select.options[2].selected = true;
+
+    await elementIsStable(element);
+
     expect(element.shadowRoot.querySelectorAll(Tag.metadata.tag).length).toBe(0);
   });
 
@@ -1376,6 +1433,66 @@ describe(`${Combobox.metadata.tag}: notags property reflection`, () => {
 
     expect(element.notags).toBe(true);
     expect(element.hasAttribute('notags')).toBe(true);
+  });
+});
+
+describe(`${Combobox.metadata.tag}: tag-layout property reflection`, () => {
+  let fixture: HTMLElement;
+  let element: Combobox;
+
+  beforeEach(async () => {
+    fixture = await createFixture(html`
+      <nve-combobox>
+        <label>combobox</label>
+        <input type="search" />
+        <select multiple>
+          <option value="1">Option 1</option>
+        </select>
+      </nve-combobox>
+    `);
+    element = fixture.querySelector(Combobox.metadata.tag);
+    await elementIsStable(element);
+  });
+
+  afterEach(() => {
+    removeFixture(fixture);
+  });
+
+  it('should have undefined tagLayout by default', async () => {
+    expect(element.tagLayout).toBe(undefined);
+    expect(element.hasAttribute('tag-layout')).toBe(false);
+  });
+
+  it('should reflect tag-layout attribute when set via attribute', async () => {
+    element.setAttribute('tag-layout', 'wrap');
+    await elementIsStable(element);
+
+    expect(element.tagLayout).toBe('wrap');
+    expect(element.getAttribute('tag-layout')).toBe('wrap');
+  });
+
+  it('should reflect hidden tag-layout attribute when set via attribute', async () => {
+    element.setAttribute('tag-layout', 'hidden');
+    await elementIsStable(element);
+
+    expect(element.tagLayout).toBe('hidden');
+    expect(element.getAttribute('tag-layout')).toBe('hidden');
+  });
+
+  it('should reflect tag-layout attribute when set via property', async () => {
+    element.tagLayout = 'wrap';
+    await elementIsStable(element);
+
+    expect(element.tagLayout).toBe('wrap');
+    expect(element.getAttribute('tag-layout')).toBe('wrap');
+  });
+
+  it('should reflect hidden tag-layout attribute when set via property', async () => {
+    element.tagLayout = 'hidden';
+    await elementIsStable(element);
+
+    expect(element.tagLayout).toBe('hidden');
+    expect(element.getAttribute('tag-layout')).toBe('hidden');
   });
 });
 

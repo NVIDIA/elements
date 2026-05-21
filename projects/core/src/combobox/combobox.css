@@ -48,13 +48,13 @@
   pointer-events: none;
 }
 
-:host(:state(multiple-overflow)) .tags {
+:host(:state(multiple-overflow):not([tag-layout='wrap'])) .tags {
   opacity: 0;
   pointer-events: none;
   position: absolute;
 }
 
-:host(:state(multiple-overflow)) .tags-label {
+:host(:state(multiple-overflow):not([tag-layout='wrap'])) .tags-label {
   display: flex;
 }
 
@@ -154,5 +154,19 @@ nve-menu-item[part='create-option'] {
 
   span::first-letter {
     text-transform: uppercase;
+  }
+}
+
+:host([tag-layout='wrap']:state(multiple-overflow)) {
+  [input] {
+    min-height: var(--height);
+    height: fit-content;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .tags {
+    padding-block-start: var(--nve-ref-size-50);
+    flex-wrap: wrap;
   }
 }

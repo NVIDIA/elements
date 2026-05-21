@@ -18,6 +18,10 @@
 
 {% example '@nvidia-elements/core/combobox/combobox.examples.json' 'MultiSelect' %}
 
+## Selected First
+
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'SelectedFirst' %}
+
 ## Empty Default
 
 {% example '@nvidia-elements/core/combobox/combobox.examples.json' 'EmptyDefault' %}
@@ -29,6 +33,10 @@
 ## Overflow
 
 {% example '@nvidia-elements/core/combobox/combobox.examples.json' 'Overflow' %}
+
+## Overflow Wrap
+
+{% example '@nvidia-elements/core/combobox/combobox.examples.json' 'OverflowWrap' %}
 
 ## Infinite Scroll
 
@@ -80,7 +88,7 @@
 
 ## No Tags
 
-{% api 'nve-combobox', 'property', 'notags' %}
+{% api 'nve-combobox', 'property', 'tagLayout' %}
 
 {% example '@nvidia-elements/core/combobox/combobox.examples.json' 'NoTags' %}
 

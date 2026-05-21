@@ -74,9 +74,9 @@ describe(Combobox.metadata.tag, () => {
     removeFixture(multiFixture);
   });
 
-  it('should pass axe check with notags multi select', async () => {
-    const notagsFixture = await createFixture(html`
-      <nve-combobox notags>
+  it('should pass axe check with hidden tag layout multi select', async () => {
+    const hiddenTagsFixture = await createFixture(html`
+      <nve-combobox tag-layout="hidden">
         <label>combobox</label>
         <input type="search" />
         <select multiple>
@@ -86,9 +86,9 @@ describe(Combobox.metadata.tag, () => {
         </select>
       </nve-combobox>
     `);
-    await elementIsStable(notagsFixture.querySelector(Combobox.metadata.tag));
+    await elementIsStable(hiddenTagsFixture.querySelector(Combobox.metadata.tag));
     const results = await runAxe([Combobox.metadata.tag]);
     expect(results.violations.length).toBe(0);
-    removeFixture(notagsFixture);
+    removeFixture(hiddenTagsFixture);
   });
 });

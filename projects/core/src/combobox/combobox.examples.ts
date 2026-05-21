@@ -239,6 +239,42 @@ export const MultiSelect = () => {
 };
 
 /**
+ * @summary Multi-select that reorders selected options before unselected options after the combobox closes. Use when long filter lists need selected values to stay easy to review.
+ */
+export const SelectedFirst = () => {
+  return html`
+  <nve-combobox id="combobox-selected-first" style="width: 500px; --scroll-height: 220px">
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option value="status"></option>
+      <option value="priority"></option>
+      <option value="date"></option>
+      <option value="session"></option>
+      <option value="configuration"></option>
+      <option value="contains"></option>
+      <option value="includes"></option>
+      <option value="user"></option>
+      <option value="progress"></option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+  <script type="module">
+    const combobox = document.querySelector('#combobox-selected-first');
+    const select = combobox.querySelector('select');
+    const optionOrder = new Map([...select.options].map((option, index) => [option, index]));
+    combobox.addEventListener('open', () => {
+      const selectedOrder = new Map([...select.selectedOptions].map((option, index) => [option, index]));
+      Array.from(select.options).sort((a, b) =>
+        Number(b.selected) - Number(a.selected) ||
+        a.selected && b.selected ? selectedOrder.get(a) - selectedOrder.get(b) : optionOrder.get(a) - optionOrder.get(b)
+      ).forEach(option => select.append(option));
+    });
+  </script>
+  `
+};
+
+/**
  * @summary Combobox with an empty initial value using a disabled placeholder option. Use when no default selection exists and the user must make an explicit choice.
  */
 export const EmptyDefault = () => {
@@ -318,6 +354,28 @@ export const Overflow = () => {
       <option selected value="session"></option>
       <option value="configuration"></option>
       <option value="contains"></option>
+    </select>
+    <nve-control-message>message</nve-control-message>
+  </nve-combobox>
+  `
+};
+
+/**
+ * @summary Combobox with option to wrap tags when the parent container is too narrow. Input will span below the tags.
+ * @tags test-case
+ */
+export const OverflowWrap = () => {
+  return html`
+  <nve-combobox tag-layout="wrap" style="width: 400px">
+    <label>label</label>
+    <input type="search">
+    <select multiple>
+      <option selected value="status"></option>
+      <option selected value="priority"></option>
+      <option selected value="date"></option>
+      <option selected value="session"></option>
+      <option selected value="configuration"></option>
+      <option selected value="contains"></option>
     </select>
     <nve-control-message>message</nve-control-message>
   </nve-combobox>
@@ -461,8 +519,8 @@ export const DisabledOptions = () => {
  */
 export const NoTags = () => {
   return html`
-  <form id="notags" nve-layout="column gap:lg align:stretch">
-    <nve-combobox notags>
+  <form id="hidden-tags" nve-layout="column gap:lg align:stretch">
+    <nve-combobox tag-layout="hidden">
       <label>label</label>
       <input type="search">
       <select multiple>
@@ -478,7 +536,7 @@ export const NoTags = () => {
     </div>
   </form>
   <script type="module">
-    const form = document.querySelector('#notags');
+    const form = document.querySelector('#hidden-tags');
     const select = form.querySelector('select');
     const tags = form.querySelector('#tags');
     updateTags();

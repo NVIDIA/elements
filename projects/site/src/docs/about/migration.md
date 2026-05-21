@@ -121,6 +121,22 @@ Before native HTML popovers, popovers required `behaviorTrigger` or `behavior-tr
 
 {% endbefore-after %}
 
+### Combobox No Tags <nve-badge status="warning">deprecated</nve-badge>
+
+Elements deprecates the `notags` attribute. Use `tag-layout="hidden"` instead so all tag layout modes use the same attribute.
+
+{% before-after %}
+
+```html
+<nve-combobox notags></nve-combobox>
+```
+
+```html
+<nve-combobox tag-layout="hidden"></nve-combobox>
+```
+
+{% endbefore-after %}
+
 ### Layout Full <nve-badge status="warning">deprecated</nve-badge>
 
 The `grow` property now uses `full` instead to avoid confusion with flexbox grow behavior.
