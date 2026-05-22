@@ -8,7 +8,7 @@
 
 # {{title}}
 
-<h2 nve-text="heading sm muted">The Elements MCP server connects AI coding assistants to the Elements design system. It gives tools like Claude Code, Cursor, and Codex direct access to component APIs, design tokens, template validation, and project scaffolding so your AI assistant can build with Elements effectively</h2>
+<h2 nve-text="heading sm muted">The Elements MCP server connects AI coding assistants to the Elements design system. It gives tools like Claude Code, Cursor, and Codex direct access to component APIs, design tokens, template validation, project scaffolding, and interactive MCP Apps views so your AI assistant can build with Elements effectively</h2>
 
 {% install-cli %}
 
@@ -198,6 +198,10 @@ Skills provide persistent context to AI agents for building UI with Elements. Un
     <nve-grid-cell>Get available semantic CSS custom properties / design tokens for theming.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">api_icons_list</code></nve-grid-cell>
+    <nve-grid-cell>Get list of all available icon names for <code nve-text="code">nve-icon</code> and <code nve-text="code">nve-icon-button</code>.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
     <nve-grid-cell><code nve-text="code">packages_list</code></nve-grid-cell>
     <nve-grid-cell>Get latest published versions of all Elements packages.</nve-grid-cell>
   </nve-grid-row>
@@ -216,6 +220,10 @@ Skills provide persistent context to AI agents for building UI with Elements. Un
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">examples_get</code></nve-grid-cell>
     <nve-grid-cell>Get the full template of a known example or pattern by id.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell><code nve-text="code">examples_render</code></nve-grid-cell>
+    <nve-grid-cell>Render a custom Elements HTML template inline in the MCP Apps preview view.</nve-grid-cell>
   </nve-grid-row>
   <nve-grid-row>
     <nve-grid-cell><code nve-text="code">skills_list</code></nve-grid-cell>
@@ -246,6 +254,43 @@ Skills provide persistent context to AI agents for building UI with Elements. Un
     <nve-grid-cell>Setup or update a project to use Elements.</nve-grid-cell>
   </nve-grid-row>
 </nve-grid>
+
+## MCP Apps UI
+
+The Elements MCP server supports [MCP Apps](https://modelcontextprotocol.io/extensions/apps/overview) for hosts that implement the `io.modelcontextprotocol/ui` extension. The same `nve mcp` command advertises the `text/html;profile=mcp-app` MIME type, registers `ui://elements/*` resources, and attaches `_meta.ui.resourceUri` metadata to tools that have an app view. You do not need separate setup.
+
+Hosts with MCP Apps support can render these views inline in the conversation. Hosts without Apps support still receive the normal text and structured tool output.
+
+<nve-grid>
+  <nve-grid-header>
+    <nve-grid-column width="190px">App View</nve-grid-column>
+    <nve-grid-column width="260px">Resource</nve-grid-column>
+    <nve-grid-column width="260px">Tools</nve-grid-column>
+    <nve-grid-column>Description</nve-grid-column>
+  </nve-grid-header>
+  <nve-grid-row>
+    <nve-grid-cell>Example Preview</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">ui://elements/example-preview</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">examples_get</code>, <code nve-text="code">examples_render</code></nve-grid-cell>
+    <nve-grid-cell>Render stored examples or validated custom Elements HTML templates with the Elements bundle and themes already loaded.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>Icon List</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">ui://elements/icons-list</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">api_icons_list</code></nve-grid-cell>
+    <nve-grid-cell>Search available nve-icon names and copy the matching source markup.</nve-grid-cell>
+  </nve-grid-row>
+  <nve-grid-row>
+    <nve-grid-cell>Token Explorer</nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">ui://elements/tokens-list</code></nve-grid-cell>
+    <nve-grid-cell><code nve-text="code">api_tokens_list</code></nve-grid-cell>
+    <nve-grid-cell>Search design tokens, preview token values, switch themes, and copy CSS custom property references.</nve-grid-cell>
+  </nve-grid-row>
+</nve-grid>
+
+Each app resource is a self-contained HTML document that includes Elements components, theme CSS, typography CSS, layout CSS, and a small MCP Apps client. The client initializes the app, reports size changes, receives tool input and result notifications, and calls server tools through the MCP Apps message channel when it needs more data. Message handling validates the parent origin before reading inbound JSON-RPC payloads.
+
+Client support for MCP Apps is host-specific. Check the [MCP extension support matrix](https://modelcontextprotocol.io/extensions/client-matrix) before relying on inline Apps behavior in a specific assistant.
 
 ## Troubleshooting
 
