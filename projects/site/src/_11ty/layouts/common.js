@@ -136,6 +136,7 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'highlighted selected' : ''}><a href="docs/lint/">Lint</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted selected' : ''}><a href="docs/integrations/angular/">Angular</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'highlighted selected' : ''}><a href="docs/integrations/bundles/">Bundles</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/custom-elements/') ? 'highlighted selected' : ''}><a href="docs/integrations/custom-elements/">Custom Elements</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/extensions/') ? 'highlighted selected' : ''}><a href="docs/integrations/extensions/">Extensions</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'highlighted selected' : ''}><a href="docs/integrations/go/">Golang</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/hugo/') ? 'highlighted selected' : ''}><a href="docs/integrations/hugo/">Hugo</a></nve-tree-node>
@@ -287,6 +288,7 @@ export const renderDocsNav = data => /* html */ `
     <a href="docs/patterns/">Patterns</a>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/authentication/') ? 'highlighted selected' : ''}><a href="docs/patterns/authentication/">Authentication</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/browse/') ? 'highlighted selected' : ''}><a href="docs/patterns/browse/">Browse</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/patterns/chat/') ? 'highlighted selected' : ''}><a href="docs/patterns/chat/">Chat</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/dashboard/') ? 'highlighted selected' : ''}><a href="docs/patterns/dashboard/">Dashboard</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/editor/') ? 'highlighted selected' : ''}><a href="docs/patterns/editor/">Editor</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/patterns/empty-states/') ? 'highlighted selected' : ''}><a href="docs/patterns/empty-states/">Empty States</a></nve-tree-node>
