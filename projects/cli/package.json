@@ -19,9 +19,9 @@
     "directory": "projects/cli"
   },
   "sideEffects": false,
+  "mcpName": "io.github.nvidia/elements",
   "bin": {
-    "nve": "./dist/index.js",
-    "nve-mcp": "./dist/mcp/index.js"
+    "nve": "./dist/index.js"
   },
   "files": [
     "LICENSE",
