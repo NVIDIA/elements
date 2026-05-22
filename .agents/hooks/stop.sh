@@ -3,6 +3,7 @@ set -euo pipefail
 INPUT=$(cat)
 HOOK_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 source "$HOOK_DIR/lib/project-root.sh"
+source "$HOOK_DIR/lib/node-env.sh"
 PROJECT_ROOT=$(resolve_project_root "$INPUT" "$HOOK_DIR") || {
   echo "Could not resolve project root." >&2
   exit 1
@@ -21,6 +22,13 @@ CHANGED=$(git diff --name-only HEAD 2>/dev/null || true)
 if [[ -z "$CHANGED" ]]; then
   emit_success "No changed files. Skipping tests."
   exit 0
+fi
+
+setup_hook_node_env "$PROJECT_ROOT"
+
+if ! command -v pnpm >/dev/null 2>&1; then
+  echo "pnpm not found after loading the project Node environment." >&2
+  exit 2
 fi
 
 PROJECTS=(code cli core forms lint markdown media monaco)

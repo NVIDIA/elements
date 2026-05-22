@@ -4,6 +4,7 @@ set -euo pipefail
 INPUT=$(cat)
 HOOK_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 source "$HOOK_DIR/lib/project-root.sh"
+source "$HOOK_DIR/lib/node-env.sh"
 PROJECT_ROOT=$(resolve_project_root "$INPUT" "$HOOK_DIR") || exit 0
 FILE_PATHS=$(hook_file_paths_from_input "$INPUT")
 
@@ -12,6 +13,13 @@ if [[ -z "$FILE_PATHS" ]]; then
 fi
 
 FAILED=0
+
+setup_hook_node_env "$PROJECT_ROOT"
+
+if ! command -v pnpm >/dev/null 2>&1; then
+  echo "pnpm not found after loading the project Node environment." >&2
+  exit 2
+fi
 
 mark_failed() {
   FAILED=1
