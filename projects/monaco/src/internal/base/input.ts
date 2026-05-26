@@ -7,7 +7,7 @@ import { property } from 'lit/decorators.js';
 
 import { useStyles } from '@nvidia-elements/core/internal';
 
-import { FormControlMixin } from '@nvidia-elements/forms/mixin';
+import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 
 import type * as monaco from '@nvidia-elements/monaco';
 import type { Monaco } from '@nvidia-elements/monaco';
@@ -403,11 +403,11 @@ export abstract class BaseMonacoInput<
 
   #registerEditorListeners(editor: monaco.editor.IStandaloneCodeEditor, model: monaco.editor.ITextModel) {
     const didChangeContentListener = model.onDidChangeContent(() => {
+      const newValue = model.getValue();
+      super.value = newValue;
       this.#updateValidationState();
 
       // Emulate "input" events
-      const newValue = model.getValue();
-      super.value = newValue;
       if (!this.#isProgrammaticChange) {
         this.dispatchInputEvent();
       }

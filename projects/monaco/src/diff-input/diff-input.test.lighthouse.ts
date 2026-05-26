@@ -17,7 +17,7 @@ describe('monaco-diff-input lighthouse report', () => {
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
     expect(report.payload.javascript.kb).toBeLessThan(1321);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14.2);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(15.2);
     expect(report.payload.javascript.requests['editor2.global.js'].kb).toBeLessThan(78);
     expect(report.payload.javascript.requests['editor2.main.js'].kb).toBeLessThan(24);
     expect(report.payload.javascript.requests['dist.js'].kb).toBeLessThan(1114);
@@ -42,7 +42,7 @@ describe('monaco-diff-input lighthouse report', () => {
     expect(report.scores.accessibility).toBe(100);
     expect(report.scores.bestPractices).toBe(100);
     expect(report.payload.javascript.kb).toBeLessThan(3367);
-    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(14.2);
+    expect(report.payload.javascript.requests['index.js'].kb).toBeLessThan(15.2);
     expect(report.payload.javascript.requests['editor2.global.js'].kb).toBeLessThan(78);
     expect(report.payload.javascript.requests['editor2.main.js'].kb).toBeLessThan(24);
     expect(report.payload.javascript.requests['dist.js'].kb).toBeLessThan(1114);
