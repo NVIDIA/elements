@@ -124,7 +124,7 @@ export const libraryTestConfig = {
         branches: [80, 90],
         lines: [80, 90]
       },
-      include: ['src'],
+      include: ['src/**/*.ts'],
       exclude: [
         '**/*.html',
         '**/test/**',
@@ -136,6 +136,7 @@ export const libraryTestConfig = {
         '**/*.test.ts',
         '**/*.css.js',
         '**/*.css',
+        '**/*.d.ts',
         '**/*.cjs',
         '**/*.mjs',
         '**/*.test.axe.ts',

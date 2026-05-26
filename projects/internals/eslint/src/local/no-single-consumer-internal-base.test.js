@@ -103,23 +103,23 @@ test('valid: counts default import subclasses for default-exported bases', () =>
 });
 
 test('valid: internal base consumed through package internal barrel', () => {
-  const filename = createFile('src/internal/base/button.ts', 'export class BaseButton {}');
+  const filename = createFile('src/internal/base/widget.ts', 'export class WidgetBase {}');
   createFile('package.json', JSON.stringify({ name: '@nvidia-elements/core' }));
-  createFile('src/internal/index.ts', "export * from './base/button.js';");
+  createFile('src/internal/index.ts', "export * from './base/widget.js';");
   createFile(
     'src/button/button.ts',
-    "import { BaseButton } from '@nvidia-elements/core/internal';\nexport class Button extends BaseButton {}"
+    "import { WidgetBase } from '@nvidia-elements/core/internal';\nexport class Button extends WidgetBase {}"
   );
   createFile(
     'src/icon-button/icon-button.ts',
-    "import { BaseButton } from '@nvidia-elements/core/internal';\nexport class IconButton extends BaseButton {}"
+    "import { WidgetBase } from '@nvidia-elements/core/internal';\nexport class IconButton extends WidgetBase {}"
   );
 
   tester.run('no-single-consumer-internal-base', noSingleConsumerInternalBase, {
     valid: [
       {
         filename,
-        code: 'export class BaseButton {}',
+        code: 'export class WidgetBase {}',
         options: [{ rootDir }]
       }
     ],
@@ -128,23 +128,23 @@ test('valid: internal base consumed through package internal barrel', () => {
 });
 
 test('valid: infers package root from filename', () => {
-  const filename = createFile('src/internal/base/button.ts', 'export class BaseButton {}');
+  const filename = createFile('src/internal/base/widget.ts', 'export class WidgetBase {}');
   createFile('package.json', JSON.stringify({ name: '@nvidia-elements/core' }));
-  createFile('src/internal/index.ts', "export * from './base/button.js';");
+  createFile('src/internal/index.ts', "export * from './base/widget.js';");
   createFile(
     'src/button/button.ts',
-    "import { BaseButton } from '@nvidia-elements/core/internal';\nexport class Button extends BaseButton {}"
+    "import { WidgetBase } from '@nvidia-elements/core/internal';\nexport class Button extends WidgetBase {}"
   );
   createFile(
     'src/tag/tag.ts',
-    "import { BaseButton } from '@nvidia-elements/core/internal';\nexport class Tag extends BaseButton {}"
+    "import { WidgetBase } from '@nvidia-elements/core/internal';\nexport class Tag extends WidgetBase {}"
   );
 
   tester.run('no-single-consumer-internal-base', noSingleConsumerInternalBase, {
     valid: [
       {
         filename,
-        code: 'export class BaseButton {}'
+        code: 'export class WidgetBase {}'
       }
     ],
     invalid: []

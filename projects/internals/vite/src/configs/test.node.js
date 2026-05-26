@@ -65,12 +65,13 @@ export const libraryNodeTestConfig = {
         branches: [80, 90],
         lines: [80, 90]
       },
-      include: ['src'],
+      include: ['src/**/*.ts'],
       exclude: [
         '**/dist/**',
         '**/.wireit/**',
         '**/.pnpm/**',
         '**/*.test.ts',
+        '**/*.d.ts',
         '**/*.cjs',
         '**/*.mjs',
         'vite.*.ts',

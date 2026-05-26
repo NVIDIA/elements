@@ -110,7 +110,7 @@ const config = {
     'local-typescript/no-dead-code': ['warn'], // todo, this should be migrated to the internal playground template config
     'local-typescript/no-deep-class-inheritance': [
       'error',
-      { maxDepth: 2, allowedRoots: ['HTMLElement', 'LitElement', 'FormControlMixin', 'BaseButton'] }
+      { maxDepth: 2, allowedRoots: ['HTMLElement', 'LitElement', 'FormControlMixin', 'ButtonFormControlMixin'] }
     ],
     'local-typescript/require-listener-cleanup': 'error',
     'local-typescript/require-observer-cleanup': 'error',
@@ -154,6 +154,9 @@ const config = {
         slot: { name: true },
         cssprop: { name: true },
         csspart: { name: true },
+        attr: { name: true },
+        attribute: { name: true },
+        reflect: { name: false },
         command: { name: true },
         entrypoint: { name: true },
         tags: { name: true },

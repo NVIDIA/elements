@@ -56,7 +56,7 @@ Applied to `src/**/*.ts`, `src/**/*.tsx`, test files, and `*.examples.ts`.
 - **`require-composed-events`**. Any `CustomEvent` dispatched with `bubbles: true` must also set `composed: true`. Shadow DOM boundary crossing stays opt-in.
 - **`reserved-property-names`**. Disallows `@property` / `@state` / `@event` names that collide with `HTMLElement` prototype keys, ARIA attributes, or native event handlers (case-insensitive).
 - **`reserved-event-names`**. Disallows custom event names that collide with native HTMLElement events (`click`, `change`, `load`, …).
-- **`primitive-property`**. Public `@property` members must use primitive types. The rule rejects `Array` and `Object` except for the `data`, `i18n`, and `stepSizes` conventions.
+- **`primitive-property`**. Public `@property` members must use primitive types. The rule rejects `Array` and `Object` except for the `commandForElement`, `data`, `i18n`, and `stepSizes` conventions.
 - **`stateless-property`**. The rule disallows `this.<publicProperty> = ...` assignments so public API stays read-only inside the component. `hidden` and `value` can still mutate for standard-element parity.
 
 **Lifecycle resource cleanup**

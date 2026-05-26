@@ -34,7 +34,7 @@ component-name/
 
 Choose the appropriate base class:
 
-- **BaseButton** - For button-like interactive components
+- **ButtonFormControlMixin** - For button-like interactive components
 - **LitElement** - For stateless or simple components
 
 ```typescript
@@ -339,7 +339,7 @@ When creating a new component, ensure:
 
 Study these complete examples:
 
-- `/projects/core/src/button/` - BaseButton pattern, interactive component
+- `/projects/core/src/button/` - ButtonFormControlMixin pattern, interactive component
 - `/projects/core/src/badge/` - LitElement pattern, simple component
 - `/projects/core/src/card/` - Composition pattern with slots
 

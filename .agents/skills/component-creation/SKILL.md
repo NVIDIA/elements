@@ -1,6 +1,6 @@
 ---
 name: component-creation
-description: Guide for creating new Elements components with all required files, base classes, metadata patterns, and test boilerplate. Use this skill whenever the user wants to create, scaffold, or set up a new component from scratch, needs to understand the required 10-file structure, asks about base classes (LitElement vs BaseButton), define.ts vs index.ts patterns, static metadata, component registration, or sub-component parent relationships. Also trigger when the user mentions creating test boilerplate for all 5 test types.
+description: Guide for creating new Elements components with all required files, base classes, metadata patterns, and test boilerplate. Use this skill whenever the user wants to create, scaffold, or set up a new component from scratch, needs to understand the required 10-file structure, asks about base classes and mixins (LitElement vs ButtonFormControlMixin), define.ts vs index.ts patterns, static metadata, component registration, or sub-component parent relationships. Also trigger when the user mentions creating test boilerplate for all 5 test types.
 ---
 
 # Component Creation
@@ -12,7 +12,7 @@ You MUST review the component creation guideline before creating or modifying co
 - Creating a new component from scratch
 - Understanding the required file structure for components
 - Setting up test boilerplate for all 5 test types
-- Choosing the appropriate base class (BaseButton vs LitElement)
+- Choosing the appropriate base class or mixin (ButtonFormControlMixin vs LitElement)
 - Understanding component metadata and registration patterns
 - Setting up JSDoc comments for components
 
@@ -22,8 +22,8 @@ Read the [component creation guide](projects/site/src/docs/internal/guidelines/c
 
 ## Workflow
 
-1. **Gather requirements**:confirm the component name (kebab-case), purpose, and which base class to use (`LitElement` for most components, `BaseButton` for button-like interactive components).
-2. **Study a reference**:read the closest reference component listed below to understand the pattern in practice.
+1. **Gather requirements**: confirm the component name (kebab-case), purpose, and whether to use `LitElement` directly or apply `ButtonFormControlMixin` for button-like interactive components.
+2. **Study a reference**: read the closest reference component listed below to understand the pattern in practice.
 3. **Create the 10 required files** in `projects/core/src/<component-name>/`:
    - `component-name.ts`:component class with metadata, JSDoc, and render method
    - `component-name.css`:styles using CSS custom properties
@@ -35,10 +35,10 @@ Read the [component creation guide](projects/site/src/docs/internal/guidelines/c
    - `component-name.test.lighthouse.ts`:lighthouse tests
    - `define.ts`:registration using `define()` helper with `HTMLElementTagNameMap`
    - `index.ts`:side-effect-free export
-4. **Update bundle**:add `import '@nvidia-elements/core/<component-name>/define.js'` to `projects/core/src/bundle.ts` in alphabetical order so the component is registered in the bundle.
-5. **Verify**:confirm all files follow the templates in the component creation guide, run `pnpm run lint` and `pnpm run test` from the elements project.
+4. **Update bundle**: add `import '@nvidia-elements/core/<component-name>/define.js'` to `projects/core/src/bundle.ts` in alphabetical order so the bundle registers the component.
+5. **Verify**: confirm all files follow the templates in the component creation guide, run `pnpm run lint` and `pnpm run test` from the elements project.
 
-## Additional References
+## References
 
 - [Component Creation Guide](/projects/site/src/docs/internal/guidelines/component-creation.md) - Complete component creation workflow
 - [TypeScript Guidelines](/projects/site/src/docs/internal/guidelines/typescript.md) - Type safety patterns
@@ -49,6 +49,6 @@ Read the [component creation guide](projects/site/src/docs/internal/guidelines/c
 
 ### Reference Components
 
-- `/projects/core/src/button/` - BaseButton pattern example
+- `/projects/core/src/button/` - ButtonFormControlMixin pattern example
 - `/projects/core/src/badge/` - LitElement pattern example
 - `/projects/core/src/card/` - Composition with slots example

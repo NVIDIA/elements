@@ -1,4 +1,5 @@
 const properties = new Map();
+const propertyExceptions = new Set(['commandForElement', 'data', 'i18n', 'stepSizes']);
 
 export default {
   meta: {
@@ -20,7 +21,7 @@ export default {
         properties.forEach(node => {
           const props = node.expression.arguments.flatMap(args => args.properties);
           const propName = node.parent.key.name;
-          const noExceptions = !['data', 'i18n', 'stepSizes'].find(i => i === propName);
+          const noExceptions = !propertyExceptions.has(propName);
 
           props.forEach(prop => {
             const propType = prop.value.name;

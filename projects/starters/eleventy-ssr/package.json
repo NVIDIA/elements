@@ -10,7 +10,9 @@
     "preview": "wireit"
   },
   "dependencies": {
+    "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/media": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*"
   },
@@ -40,7 +42,9 @@
       "command": "pnpm exec eleventy",
       "files": [
         "../../internals/metadata/dist/**/*.js",
+        "../../code/dist/**/*.js",
         "../../core/dist/**/*.js",
+        "../../media/dist/**/*.js",
         "../../styles/dist/**/*.css",
         "../../themes/dist/**/*.css",
         "src",
@@ -57,7 +61,15 @@
           "cascade": false
         },
         {
+          "script": "../../code:build",
+          "cascade": false
+        },
+        {
           "script": "../../core:build",
+          "cascade": false
+        },
+        {
+          "script": "../../media:build",
           "cascade": false
         },
         {

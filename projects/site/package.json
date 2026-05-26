@@ -197,12 +197,14 @@
       ]
     },
     "test": {
-      "command": "vitest run src/_11ty/layouts/metadata.test.ts",
+      "command": "vitest run src/_11ty/layouts/metadata.test.ts src/_11ty/shortcodes/api.test.ts",
       "files": [
         "src/docs/**/*.md",
         "src/_11ty/layouts/common.js",
         "src/_11ty/layouts/metadata.js",
         "src/_11ty/layouts/metadata.test.ts",
+        "src/_11ty/shortcodes/api.js",
+        "src/_11ty/shortcodes/api.test.ts",
         "vitest.config.ts"
       ],
       "output": []

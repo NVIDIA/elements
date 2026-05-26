@@ -42,8 +42,8 @@ test('valid: allows direct and depth-2 class inheritance', () => {
         code: `
           declare class LitElement {}
 
-          class BaseButton extends LitElement {}
-          class SortButton extends BaseButton {}
+          class ButtonBase extends LitElement {}
+          class SortButton extends ButtonBase {}
         `
       },
       {
@@ -67,8 +67,8 @@ test('valid: supports custom maxDepth and allowedRoots options', () => {
         code: `
           declare class LitElement {}
 
-          class BaseButton extends LitElement {}
-          class SortButton extends BaseButton {}
+          class ButtonBase extends LitElement {}
+          class SortButton extends ButtonBase {}
           class ToolbarSortButton extends SortButton {}
         `
       },
@@ -95,8 +95,8 @@ test('invalid: reports classes deeper than maxDepth', () => {
         code: `
           declare class LitElement {}
 
-          class BaseButton extends LitElement {}
-          class SortButton extends BaseButton {}
+          class ButtonBase extends LitElement {}
+          class SortButton extends ButtonBase {}
           class ToolbarSortButton extends SortButton {}
         `,
         errors: [
@@ -106,7 +106,7 @@ test('invalid: reports classes deeper than maxDepth', () => {
               className: 'ToolbarSortButton',
               depth: '3',
               maxDepth: '2',
-              chain: 'ToolbarSortButton -> SortButton -> BaseButton -> LitElement'
+              chain: 'ToolbarSortButton -> SortButton -> ButtonBase -> LitElement'
             }
           }
         ]

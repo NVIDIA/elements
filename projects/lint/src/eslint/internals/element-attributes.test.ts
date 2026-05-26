@@ -24,9 +24,27 @@ describe('getElementAttribute', () => {
   });
 
   it('should return isEnum false for attributes with boolean type', () => {
+    const closable = getElementAttribute('nve-alert', 'closable');
+    expect(closable).not.toBeNull();
+    expect(closable?.isEnum).toBe(false);
+  });
+
+  it('should include attributes inherited from button form control mixin metadata', () => {
     const pressed = getElementAttribute('nve-button', 'pressed');
+    const commandfor = getElementAttribute('nve-button', 'commandfor');
+
     expect(pressed).not.toBeNull();
     expect(pressed?.isEnum).toBe(false);
+    expect(commandfor).not.toBeNull();
+    expect(commandfor?.isEnum).toBe(false);
+  });
+
+  it('should return isEnum false for generic form control attributes', () => {
+    const value = getElementAttribute('nve-pagination', 'value');
+
+    expect(value).not.toBeNull();
+    expect(value?.isEnum).toBe(false);
+    expect(value?.values).toEqual([]);
   });
 
   it('should return isEnum false for attributes with number type', () => {

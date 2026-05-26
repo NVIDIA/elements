@@ -532,10 +532,6 @@ importers:
         version: 8.0.13(@types/node@25.6.2)(esbuild@0.28.0)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.14))(terser@5.47.1)(yaml@2.8.3)
 
   projects/forms:
-    dependencies:
-      lit:
-        specifier: catalog:publish
-        version: 3.3.2
     devDependencies:
       '@eslint/js':
         specifier: 'catalog:'
@@ -555,6 +551,9 @@ importers:
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../styles
+      '@typescript/lib-dom':
+        specifier: npm:@types/web@0.0.312
+        version: '@types/web@0.0.312'
       '@vitest/browser':
         specifier: 'catalog:'
         version: 4.1.6(vite@8.0.13(@types/node@25.7.0)(esbuild@0.28.0)(jiti@2.6.1)(sass@1.97.3)(sugarss@5.0.1(postcss@8.5.14))(terser@5.47.1)(yaml@2.8.3))(vitest@4.1.6)
@@ -567,6 +566,9 @@ importers:
       eslint:
         specifier: 10.3.0
         version: 10.3.0(jiti@2.6.1)
+      lit:
+        specifier: 'catalog:'
+        version: 3.3.2
       publint:
         specifier: 'catalog:'
         version: 0.3.20
@@ -1421,9 +1423,15 @@ importers:
 
   projects/starters/eleventy-ssr:
     dependencies:
+      '@nvidia-elements/code':
+        specifier: workspace:*
+        version: link:../../code
       '@nvidia-elements/core':
         specifier: workspace:*
         version: link:../../core
+      '@nvidia-elements/media':
+        specifier: workspace:*
+        version: link:../../media
       '@nvidia-elements/styles':
         specifier: workspace:*
         version: link:../../styles

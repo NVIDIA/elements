@@ -1,9 +1,11 @@
 import path from 'path';
 import fs from 'fs';
+import { createRequire } from 'module';
 import { Project, SyntaxKind } from 'ts-morph';
 import { customElementJsxPlugin } from 'custom-element-jsx-integration';
 import { customElementVuejsPlugin } from 'custom-element-vuejs-integration';
 
+const require = createRequire(import.meta.url);
 const resolve = rel => path.resolve(process.cwd(), rel);
 const pkg = JSON.parse(fs.readFileSync(resolve('./package.json'), 'utf-8'));
 const runtimeEnvironment = {};
@@ -93,45 +95,6 @@ function metadataPlugin() {
             classDeclaration.metadata.aria = getSpecUrl(classDeclaration);
             classDeclaration.metadata.example = getExample(classDeclaration, moduleDoc.path);
           }
-
-          if (classDeclaration.tagName) {
-            const disallowed = [
-              {
-                name: 'nve-layout',
-                deprecated: true,
-                description: 'not supported on custom element tags',
-                type: {
-                  text: 'string',
-                  values: [
-                    {
-                      value: 'string',
-                      description: ''
-                    }
-                  ]
-                }
-              },
-              {
-                name: 'nve-text',
-                deprecated: true,
-                description: 'not supported on custom element tags',
-                type: {
-                  text: 'string',
-                  values: [
-                    {
-                      value: 'string',
-                      description: ''
-                    }
-                  ]
-                }
-              }
-            ];
-
-            classDeclaration.attributes = [...(classDeclaration.attributes ?? []), ...disallowed];
-            classDeclaration.members = [
-              ...(classDeclaration.members ?? []),
-              ...disallowed.map(i => ({ ...i, attribute: i.name, kind: 'field' }))
-            ];
-          }
           break;
       }
     }
@@ -193,7 +156,10 @@ function getBehaviorCategory(classDeclaration) {
     ]
   };
 
-  if (classDeclaration.superclass?.name === 'BaseButton' || classDeclaration.superclass?.name === 'Button') {
+  if (
+    classDeclaration.superclass?.name === 'Button' ||
+    classDeclaration.mixins?.some(mixin => mixin.name === 'ButtonFormControlMixin')
+  ) {
     return 'button';
   }
 
@@ -280,6 +246,286 @@ function commandPlugin() {
           }
           break;
       }
+    }
+  };
+}
+
+function getPackageName(value) {
+  if (!value?.startsWith('@')) {
+    return value?.split('/')[0];
+  }
+
+  return value.split('/').slice(0, 2).join('/');
+}
+
+function getPackageRoot(packageName) {
+  if (!packageName) {
+    return null;
+  }
+
+  if (packageName === pkg.name) {
+    return process.cwd();
+  }
+
+  try {
+    return path.dirname(require.resolve(`${packageName}/package.json`, { paths: [process.cwd()] }));
+  } catch {
+    return null;
+  }
+}
+
+function getDependencyPackageNames() {
+  return Array.from(
+    new Set(
+      [
+        ...Object.keys(pkg.dependencies ?? {}),
+        ...Object.keys(pkg.peerDependencies ?? {}),
+        ...Object.keys(pkg.optionalDependencies ?? {}),
+        ...Object.keys(pkg.devDependencies ?? {})
+      ]
+        .map(getPackageName)
+        .filter(Boolean)
+    )
+  );
+}
+
+function getMixinSourceRoots() {
+  return [pkg.name, ...getDependencyPackageNames()]
+    .map(getPackageRoot)
+    .filter(Boolean)
+    .map(packageRoot => path.join(packageRoot, 'src', 'mixins'))
+    .filter(sourceRoot => fs.existsSync(sourceRoot));
+}
+
+function getDependencyManifests() {
+  return getDependencyPackageNames()
+    .map(packageName => {
+      const packageRoot = getPackageRoot(packageName);
+      if (!packageRoot) {
+        return null;
+      }
+
+      const packageJson = JSON.parse(fs.readFileSync(path.join(packageRoot, 'package.json'), 'utf-8'));
+      const manifestPath = packageJson.customElements
+        ? path.join(packageRoot, packageJson.customElements)
+        : path.join(packageRoot, 'dist', 'custom-elements.json');
+
+      if (!fs.existsSync(manifestPath)) {
+        return null;
+      }
+
+      return {
+        packageName,
+        manifest: JSON.parse(fs.readFileSync(manifestPath, 'utf-8'))
+      };
+    })
+    .filter(Boolean);
+}
+
+function getJsDocDescription(node) {
+  return node
+    .getJsDocs()
+    .map(jsDoc => jsDoc.getCommentText())
+    .filter(Boolean)
+    .join('\n')
+    .trim();
+}
+
+function getJsDocTag(node, name) {
+  return node
+    .getJsDocs()
+    .flatMap(jsDoc => jsDoc.getTags())
+    .find(tag => tag.getTagName() === name);
+}
+
+function getTypeText(type, location) {
+  if (type.isUnion() && type.getUnionTypes().every(unionType => unionType.isStringLiteral())) {
+    return type
+      .getUnionTypes()
+      .map(unionType => `'${unionType.getLiteralValue()}'`)
+      .join(' | ');
+  }
+
+  return type.getText(location);
+}
+
+function createMixinApiEntry(property, location, mixinName) {
+  const declarations = property.getDeclarations();
+  const declaration = declarations.find(item => typeof item.getJsDocs === 'function');
+  if (!declaration) {
+    return null;
+  }
+
+  const description = getJsDocDescription(declaration);
+  const attributeTag = getJsDocTag(declaration, 'attr') ?? getJsDocTag(declaration, 'attribute');
+  const deprecatedTag = getJsDocTag(declaration, 'deprecated');
+  const internalTag = getJsDocTag(declaration, 'internal');
+  const protectedTag = getJsDocTag(declaration, 'protected');
+
+  if ((!description && !attributeTag) || internalTag || protectedTag || property.getName().startsWith('_')) {
+    return null;
+  }
+
+  const attribute = attributeTag?.getCommentText()?.trim();
+  const member = {
+    kind: declarations.some(item => item.getKindName?.() === 'MethodSignature') ? 'method' : 'field',
+    name: property.getName(),
+    type: {
+      text: getTypeText(property.getTypeAtLocation(location), location)
+    },
+    description,
+    inheritedFrom: {
+      name: mixinName
+    }
+  };
+
+  if (deprecatedTag) {
+    member.deprecated = deprecatedTag.getCommentText()?.trim() ?? true;
+  }
+
+  if (attribute) {
+    member.attribute = attribute;
+    member.reflects = Boolean(getJsDocTag(declaration, 'reflect'));
+  }
+
+  return {
+    member,
+    attribute: attribute
+      ? {
+          name: attribute,
+          fieldName: member.name,
+          type: { ...member.type },
+          description,
+          inheritedFrom: member.inheritedFrom
+        }
+      : null
+  };
+}
+
+function getMixinApiRegistry() {
+  const sourceRoots = getMixinSourceRoots();
+  if (!sourceRoots.length) {
+    return new Map();
+  }
+
+  const project = new Project({
+    compilerOptions: {
+      strictNullChecks: true
+    },
+    skipAddingFilesFromTsConfig: true
+  });
+
+  project.addSourceFilesAtPaths(sourceRoots.map(sourceRoot => path.join(sourceRoot, '**', '*.ts')));
+
+  const registry = new Map();
+  project
+    .getSourceFiles()
+    .flatMap(sourceFile => sourceFile.getInterfaces())
+    .filter(declaration => declaration.isExported() && declaration.getName().endsWith('MixinInstance'))
+    .forEach(declaration => {
+      const mixinName = declaration.getName().replace(/Instance$/, '');
+      const entries = declaration
+        .getType()
+        .getProperties()
+        .map(property => createMixinApiEntry(property, declaration, mixinName))
+        .filter(Boolean);
+
+      if (entries.length) {
+        registry.set(mixinName, entries);
+      }
+    });
+
+  return registry;
+}
+
+function getManifestDeclarationKey(declaration) {
+  return `${declaration.package ?? ''}:${declaration.name}`;
+}
+
+function getDeclarationRegistry(customElementsManifest) {
+  const registry = new Map();
+  const manifests = [{ manifest: customElementsManifest }, ...getDependencyManifests()];
+
+  manifests.forEach(({ packageName, manifest }) => {
+    manifest.modules
+      ?.flatMap(module =>
+        (module.declarations ?? []).map(declaration => ({
+          ...declaration,
+          package: packageName,
+          module: module.path
+        }))
+      )
+      .filter(declaration => declaration.name)
+      .forEach(declaration => {
+        registry.set(getManifestDeclarationKey(declaration), declaration);
+        if (!declaration.package) {
+          registry.set(declaration.name, declaration);
+        }
+      });
+  });
+
+  return registry;
+}
+
+function getSuperclassDeclaration(declaration, declarationRegistry) {
+  const superclass = declaration.superclass;
+  if (!superclass?.name) {
+    return null;
+  }
+
+  const packageName = getPackageName(superclass.package);
+  return declarationRegistry.get(`${packageName ?? ''}:${superclass.name}`) ?? declarationRegistry.get(superclass.name);
+}
+
+function getDeclarationMixins(declaration, declarationRegistry, seen = new Set()) {
+  if (!declaration || seen.has(getManifestDeclarationKey(declaration))) {
+    return [];
+  }
+
+  seen.add(getManifestDeclarationKey(declaration));
+
+  return [
+    ...getDeclarationMixins(getSuperclassDeclaration(declaration, declarationRegistry), declarationRegistry, seen),
+    ...(declaration.mixins ?? [])
+  ];
+}
+
+function addUniqueMember(declaration, member) {
+  declaration.members ??= [];
+  if (!declaration.members.some(item => item.name === member.name)) {
+    declaration.members.push(structuredClone(member));
+  }
+}
+
+function addUniqueAttribute(declaration, attribute) {
+  if (!attribute) {
+    return;
+  }
+
+  declaration.attributes ??= [];
+  if (!declaration.attributes.some(item => item.name === attribute.name || item.fieldName === attribute.fieldName)) {
+    declaration.attributes.push(structuredClone(attribute));
+  }
+}
+
+function mixinApiProjectionPlugin() {
+  return {
+    name: 'mixin-api-projection',
+    packageLinkPhase({ customElementsManifest }) {
+      const mixinApiRegistry = getMixinApiRegistry();
+      const declarationRegistry = getDeclarationRegistry(customElementsManifest);
+
+      customElementsManifest.modules
+        .flatMap(module => module.declarations ?? [])
+        .filter(declaration => declaration.kind === 'class')
+        .forEach(declaration => {
+          getDeclarationMixins(declaration, declarationRegistry).forEach(mixin => {
+            mixinApiRegistry.get(mixin.name)?.forEach(({ member, attribute }) => {
+              addUniqueMember(declaration, member);
+              addUniqueAttribute(declaration, attribute);
+            });
+          });
+        });
     }
   };
 }
@@ -480,6 +726,38 @@ function deduplicateByName(members) {
   return [...seen.values()];
 }
 
+function getMemberAttributeName(manifest, member) {
+  if (member.attribute) {
+    return member.attribute;
+  }
+
+  const normalizedMemberName = member.name.toLowerCase();
+  const attribute = manifest.attributes?.find(
+    attr =>
+      attr.fieldName === member.name || attr.name === member.name || attr.name.toLowerCase() === normalizedMemberName
+  );
+  return attribute?.name;
+}
+
+function memberAttributesPlugin() {
+  return {
+    name: 'member-attributes',
+    packageLinkPhase({ customElementsManifest }) {
+      customElementsManifest.modules
+        .flatMap(module => module.declarations)
+        .filter(declaration => declaration.tagName)
+        .forEach(declaration => {
+          declaration.members?.forEach(member => {
+            const attribute = getMemberAttributeName(declaration, member);
+            if (attribute) {
+              member.attribute = attribute;
+            }
+          });
+        });
+    }
+  };
+}
+
 function elementMetadataToMarkdown(manifest) {
   if (manifest.tagName) {
     const slots = manifest.slots?.filter(i => !i.description?.includes('deprecated')) ?? [];
@@ -523,7 +801,8 @@ ${members
       type = `${values} ... (use \`icons_list\` tool for full list)`;
     }
 
-    return `| ${i.name}${i.attribute && i.attribute !== i.name ? ` (${i.attribute})` : ''} | ${type} | ${formatDescription(i.description)} |`;
+    const attribute = getMemberAttributeName(manifest, i);
+    return `| ${i.name}${attribute && attribute !== i.name ? ` (${attribute})` : ''} | ${type} | ${formatDescription(i.description)} |`;
   })
   .join('\n')}\n`
     : ''
@@ -648,10 +927,23 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
 
     entry.type._sourceAliases = sourceAliases;
 
+    const hasArbitraryType = entry.type.text
+      .split(' | ')
+      .map(value => value.trim())
+      .some(isArbitraryType);
+
     entry.type.text = entry.type.text
       .split(' | ')
-      .map(value => (value === 'undefined' || value === '' ? '"default"' : value))
+      .map(value => (!hasArbitraryType && (value === 'undefined' || value === '') ? '"default"' : value))
       .join(' | ');
+  }
+
+  function isArbitraryType(type) {
+    const cleanType = type.trim();
+    if (/^(['"]).*\1$/.test(cleanType)) {
+      return false;
+    }
+    return /^[A-Z][A-Za-z0-9]*$/.test(cleanType);
   }
 
   /**
@@ -685,15 +977,26 @@ function rewriteExportedStringLiteralTypeAliasesPlugin() {
       return;
     }
 
-    const types = entry.type.text.split('|').map(t => t.trim().replace(/^['"]|['"]$/g, ''));
+    const rawTypes = entry.type.text.split('|').map(t => t.trim());
+    const types = rawTypes.map(t => t.replace(/^['"]|['"]$/g, ''));
     let hasAnyDescriptions = false;
 
     // Check if this is a string literal union (contains quoted strings)
-    const isStringLiteralUnion = /['"]/.test(entry.type.text);
+    const isStringLiteralUnion =
+      rawTypes.some(type => /^['"].*['"]$/.test(type)) &&
+      rawTypes.every(type => {
+        const cleanType = type.replace(/^['"]|['"]$/g, '');
+        return /^['"].*['"]$/.test(type) || cleanType === 'undefined' || cleanType === 'default' || cleanType === '';
+      });
 
     // Initialize values array if it doesn't exist
     if (!entry.type.values) {
       entry.type.values = [];
+    }
+
+    if (rawTypes.some(isArbitraryType)) {
+      entry.type.values = [];
+      return;
     }
 
     // Special handling for boolean types - extract true/false descriptions from the entry's own description
@@ -1071,11 +1374,13 @@ export default {
     orderPlugin(),
     metadataPlugin(),
     commandPlugin(),
+    mixinApiProjectionPlugin(),
     rewriteExportedStringLiteralTypeAliasesPlugin(),
     publicPropertiesPlugin(),
     superClassMetadataPlugin(),
     dynamicSlotsPlugin(),
     deprecatedPlugin(),
+    memberAttributesPlugin(),
     jsxTypesPlugin(),
     vueTypesPlugin(),
     cssPropsPlugin(),

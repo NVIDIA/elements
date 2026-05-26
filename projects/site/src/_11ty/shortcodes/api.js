@@ -65,7 +65,7 @@ export function renderAPINameTable(apiValue) {
         .filter(i => !i.deprecated)
         .map(
           i => /* html */ `<nve-grid-row>
-        <nve-grid-cell><span nve-text="code nowrap">${i.value}</span></nve-grid-cell>
+        <nve-grid-cell><span nve-text="code nowrap">${escapeHtml(i.value)}</span></nve-grid-cell>
         <nve-grid-cell>${i.description ?? ''}</nve-grid-cell>
       </nve-grid-row>`
         )
@@ -113,8 +113,8 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
                 .replaceAll('<code', '<code nve-text="code nowrap"')
             : '';
           return /* html */ `<nve-grid-row>
-        <nve-grid-cell><span nve-text="code nowrap">${i.name === '' ? 'default' : i.name}</span></nve-grid-cell>
-        ${type === 'property' ? /* html */ `<nve-grid-cell><span nve-text="code nowrap">${i.attribute ?? 'none'}</span></nve-grid-cell>` : ''}
+        <nve-grid-cell><span nve-text="code nowrap">${escapeHtml(i.name === '' ? 'default' : i.name)}</span></nve-grid-cell>
+        ${type === 'property' ? /* html */ `<nve-grid-cell><span nve-text="code nowrap">${escapeHtml(getMemberAttributeName(element.manifest, i) ?? 'none')}</span></nve-grid-cell>` : ''}
         <nve-grid-cell>
           <div nve-layout="column gap:xs">${i.deprecated ? '<nve-badge status="warning" container="flat">deprecated</nve-badge>' : ''}${description}</div>
         </nve-grid-cell>
@@ -125,7 +125,7 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
           ${(i.type?.values ?? [])
             .map(
               v =>
-                /* html */ `<div><span nve-text="code nowrap">${v.value}</span> ${v.description ? v.description : ''}</div>`
+                /* html */ `<div><span nve-text="code nowrap">${escapeHtml(v.value)}</span> ${v.description ? v.description : ''}</div>`
             )
             .join('')}
           </div>
@@ -144,4 +144,21 @@ export function renderAPITable(element, type, options = { container: 'flat' }) {
       }
     </nve-grid>
   </div>`;
+}
+
+function getMemberAttributeName(manifest, member) {
+  if (member.attribute) {
+    return member.attribute;
+  }
+
+  const normalizedMemberName = member.name.toLowerCase();
+  const attribute = manifest.attributes?.find(
+    attr =>
+      attr.fieldName === member.name || attr.name === member.name || attr.name.toLowerCase() === normalizedMemberName
+  );
+  return attribute?.name;
+}
+
+function escapeHtml(value) {
+  return markdown.utils.escapeHtml(`${value ?? ''}`);
 }

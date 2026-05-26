@@ -116,6 +116,7 @@
       "files": [
         "src/**",
         "!src/**/*.test.ts",
+        "../internals/metadata/dist/**",
         "package.json",
         "tsconfig.json",
         "tsconfig.lib.json",

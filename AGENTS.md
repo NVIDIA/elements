@@ -111,14 +111,21 @@ pnpm run lint:fix
 
 ### Monorepo Structure
 
-The repository is organized as a top-level workspace with individual project directories:
+The repository contains a top-level workspace with individual project directories:
 
 - `/projects/core` - Core Elements Web Components library (Lit-based)
+- `/projects/forms` - Form control utilities, mixins, and schema validation
 - `/projects/themes` - Theme tokens and CSS custom properties
 - `/projects/styles` - CSS utilities for layout and typography
-- `/projects/starters` - Starter templates for various frameworks (React, Angular, Vue, Svelte, etc.)
-- `/projects/labs` - Experimental packages (forms, CLI, markdown, code, brand, etc.)
+- `/projects/starters` - Starter templates for supported frameworks, including React, Angular, Vue, and Svelte
+- `/projects/cli` - Command-line tooling for Elements development and project scaffolding
+- `/projects/create` - `npm create @nvidia-elements` wrapper around CLI project creation
+- `/projects/code` - Code authoring components, including syntax-highlighted code blocks
+- `/projects/markdown` - Markdown components and utilities
+- `/projects/media` - Media playback UI components
+- `/projects/lint` - Elements lint configurations and custom rules
 - `/projects/monaco` - Monaco editor integration
+- `/projects/pages` - GitHub Pages deployment project
 - `/projects/site` - Documentation site (11ty)
 - `/projects/internals` - Internal tooling (vite configs, eslint, patterns, metadata)
 
@@ -128,7 +135,7 @@ Each component in `/projects/core/src/` follows this structure:
 
 ```
 component-name/
-├── component-name.ts                 # Main component class (extends BaseButton, BaseElement, etc.)
+├── component-name.ts                 # Main component class (extends LitElement or applies a forms mixin)
 ├── component-name.css                # Component styles
 ├── component-name.examples.ts        # Example templates for documentation
 ├── component-name.test.ts            # Unit tests
@@ -140,9 +147,9 @@ component-name/
 └── define.ts                         # Registers component to customElementsRegistry
 ```
 
-Components typically extend Lit's `LitElement` directly. Shared behavior is provided via base classes (e.g., `BaseButton`) and reactive controllers (keynav, state management, i18n) from `@nvidia-elements/core/internal`. Components use Lit decorators for properties, CSS custom properties for theming, and follow ARIA Authoring Practices Guide patterns.
+Components typically extend Lit's `LitElement` directly. Import forms mixins from `@nvidia-elements/forms/mixins`; reactive controllers and utilities remain under `@nvidia-elements/core/internal` for shared behavior such as keynav, state management, and i18n. Components use Lit decorators for properties, CSS custom properties for theming, and follow ARIA Authoring Practices Guide patterns.
 
-When adding a new component, also add its `define.js` import and `export *` to `projects/elements/src/bundle.ts` (alphabetical order). This file is the entry point for the CDN bundle. A `lint:bundle` script validates completeness in CI.
+When adding a new core component, also add its `define.js` import and `export *` to `projects/core/src/bundle.ts` (alphabetical order). This file is the entry point for the core CDN bundle. The `no-missing-bundle-registration` lint rule validates completeness in CI.
 
 ### Component Definition
 
@@ -181,7 +188,7 @@ declare global {
 - **Vite** - Build tool for compiling TypeScript and bundling
 - **Semantic Release** - Automated versioning and publishing based on conventional commits
 
-Dependencies between projects are defined in Wireit configurations in each `package.json`. The build system intelligently rebuilds only what changed.
+Wireit configurations in each `package.json` define dependencies between projects. The build system intelligently rebuilds only what changed.
 
 ### Release Process
 
@@ -189,10 +196,10 @@ Releases are fully automated:
 
 1. Commits follow conventional commit format: `type(scope): message`
 2. Types: `fix` (patch), `feat` (minor), `chore` (no release)
-3. Scopes map to projects: `elements`, `themes`, `labs-forms`, etc.
+3. Scopes map to project names: `core`, `themes`, `forms`, `cli`, `code`, etc.
 4. Semantic Release analyzes commits and publishes packages
 5. Changelogs are auto-generated from commit messages
-6. Multiple packages can release in a single merge with dependency ordering
+6. More than one package can release in a single merge with dependency ordering
 
 Releases happen automatically after CI passes on merge to `main`. No manual version bumping.
 
@@ -216,7 +223,7 @@ git commit -m "feat(themes): add dark mode color tokens"
 git commit -m "chore(docs): update component examples"
 ```
 
-**Important:** The subject line (first line after `type(scope):`) must be entirely lowercase. Avoid starting with proper nouns or using uppercase letters (e.g., use "add feature" not "Add feature", "update api" not "Update API").
+**Important:** the subject line (first line after `type(scope):`) must be entirely lowercase. Avoid starting with proper nouns or using uppercase letters. For example, use "add feature," not "Add feature," and "update api," not "Update API."
 
 **Commit types:**
 
@@ -227,11 +234,19 @@ git commit -m "chore(docs): update component examples"
 **Common scopes:**
 
 - `docs` - 11ty docs site and landing page (`/projects/site`)
-- `elements` - Core Elements library (`/projects/core`)
+- `core` - Core Elements library (`/projects/core`)
 - `themes` - Theme tokens (`/projects/themes`)
 - `styles` - CSS utilities (`/projects/styles`)
 - `starters` - Starter templates (`/projects/starters`)
-- `labs-*` - Lab projects (e.g., `labs-cli`, `labs-forms`, `labs-code`)
+- `cli` - Command-line tooling (`/projects/cli`)
+- `code` - Code authoring components (`/projects/code`)
+- `create` - `npm create @nvidia-elements` wrapper (`/projects/create`)
+- `forms` - Form control utilities (`/projects/forms`)
+- `lint` - Lint configurations and custom rules (`/projects/lint`)
+- `markdown` - Markdown components and utilities (`/projects/markdown`)
+- `media` - Media playback UI components (`/projects/media`)
+- `monaco` - Monaco editor integration (`/projects/monaco`)
+- `pages` - GitHub Pages deployment project (`/projects/pages`)
 - `ci` - Build/CI tooling (`/projects/internals`)
 
 ### Prose Linting (Vale)
