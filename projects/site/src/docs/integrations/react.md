@@ -58,7 +58,7 @@ import '@lit-labs/ssr-react/enable-lit-ssr.js';
 
 ## React 18
 
-To use Elements in [React v18](https://legacy.reactjs.org/versions/) follow the [installation getting started](./docs/about/getting-started/) steps. Once complete
+To use Elements in [React v18](https://legacy.reactjs.org/versions/) follow the [installation](/docs/integrations/installation/) steps. Once complete
 import and use Elements within React jsx and tsx files via the `@nvidia-elements/core-react` package. Use this package to enable React 18 compatibility with Custom Elements.
 This package wraps the custom elements into a React component, mapping the standard events and properties in a way that React can understand.
 

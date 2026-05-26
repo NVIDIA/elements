@@ -4,6 +4,7 @@ import { ELEMENTS_PAGES_BASE_URL } from '../../_11ty/utils/env.js';
 
 export const data = {
   title: 'Metadata',
+  description: 'NVIDIA Elements raw metadata viewer for generated API data.',
   layout: 'docs.11ty.js'
 };
 

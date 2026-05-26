@@ -1,7 +1,7 @@
 ---
 {
-  title: 'Getting Started',
-  description: 'Get started with NVIDIA Elements Design System: framework-agnostic Web Components, design tokens, CLI, MCP, skills, and lint tooling for AV, robotics, and AI infrastructure.',
+  title: 'NVIDIA Elements Design System for AI UI',
+  description: 'NVIDIA Elements Design System: framework-agnostic Web Components, design tokens, CLI, MCP, skills, and lint tooling for AI infrastructure, robotics, and autonomous vehicle UI.',
   layout: 'docs.11ty.js'
 }
 ---

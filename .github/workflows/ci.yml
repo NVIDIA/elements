@@ -18,6 +18,9 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+          # The CLI build runs semantic-release dry-run to bake the next binary version.
+          # On main, checkout credentials must match the release token used by that dry-run.
+          token: ${{ github.ref == 'refs/heads/main' && secrets.RELEASE_TOKEN || github.token }}
       - uses: ./.github/actions/setup-ci
       # - uses: google/wireit@setup-github-actions-caching/v2
       - name: Run CI checks
@@ -25,6 +28,7 @@ jobs:
           ELEMENTS_PAGES_BASE_URL: ${{vars.ELEMENTS_PAGES_BASE_URL}}
           ELEMENTS_REGISTRY_URL: ${{vars.ELEMENTS_REGISTRY_URL}}
           ELEMENTS_REPO_BASE_URL: ${{vars.ELEMENTS_REPO_BASE_URL}}
+          GITHUB_TOKEN: ${{ github.ref == 'refs/heads/main' && secrets.RELEASE_TOKEN || github.token }}
         run: PAGES_BASE_URL="/elements/" pnpm run ci && PAGES_BASE_URL="/elements/" node ./projects/internals/ci/cache-validate.js ci
       - name: Write CI job summary
         if: always()

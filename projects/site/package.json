@@ -199,6 +199,8 @@
     "test": {
       "command": "vitest run src/_11ty/layouts/metadata.test.ts",
       "files": [
+        "src/docs/**/*.md",
+        "src/_11ty/layouts/common.js",
         "src/_11ty/layouts/metadata.js",
         "src/_11ty/layouts/metadata.test.ts",
         "vitest.config.ts"

@@ -1,6 +1,7 @@
 ---
 {
   title: 'Data Grid',
+  description: 'The NVIDIA Elements data grid: structured rows, columns, cells, sorting, row actions, and virtual scrolling performance patterns.',
   layout: 'docs.11ty.js',
   tag: 'nve-grid',
   associatedElements: ['nve-grid-header', 'nve-grid-column', 'nve-grid-row', 'nve-grid-cell']

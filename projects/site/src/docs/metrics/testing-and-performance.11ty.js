@@ -5,6 +5,7 @@ import { badgeCoverage, badgeBundle, badgeLighthouse } from '../../_11ty/templat
 
 export const data = {
   title: 'Testing & Performance',
+  description: 'NVIDIA Elements testing and performance report for component quality signals.',
   layout: 'docs.11ty.js'
 };
 

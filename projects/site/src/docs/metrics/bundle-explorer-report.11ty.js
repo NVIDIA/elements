@@ -8,6 +8,8 @@ const elements = existsSync(sizePath) ? readFileSync(sizePath, 'utf8') : '';
 
 export const data = {
   title: 'Bundle Explorer Report',
+  description:
+    'Interactive NVIDIA Elements bundle explorer report visualizing package size, module composition, and bundle structure for the core package.',
   layout: 'page.11ty.js'
 };
 

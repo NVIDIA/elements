@@ -4,6 +4,7 @@ import { siteData } from '../../index.11tydata.js';
 
 export const data = {
   title: 'Wireit Explorer',
+  description: 'NVIDIA Elements Wireit dependency explorer for build orchestration analysis.',
   layout: 'docs.11ty.js'
 };
 
