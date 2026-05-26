@@ -1,6 +1,7 @@
 ---
 {
   title: 'Forms',
+  description: 'Form controls in NVIDIA Elements: native input wrappers, validation messages, actions, and framework integration patterns.',
   layout: 'docs.11ty.js'
 }
 ---

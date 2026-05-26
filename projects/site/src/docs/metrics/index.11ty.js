@@ -4,6 +4,7 @@ import { ReleasesService, TestsService, ApiService } from '@internals/metadata';
 
 export const data = {
   title: 'Metrics',
+  description: 'NVIDIA Elements quality metrics for tests, coverage, bundle size, and API status.',
   layout: 'docs.11ty.js'
 };
 

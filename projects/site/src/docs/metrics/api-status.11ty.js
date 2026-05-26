@@ -8,6 +8,7 @@ const { tests } = siteData;
 
 export const data = {
   title: 'API Status',
+  description: 'NVIDIA Elements API status metrics for stability, coverage, bundle size, and accessibility.',
   layout: 'docs.11ty.js'
 };
 

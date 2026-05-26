@@ -107,8 +107,8 @@ describe.sequential('lighthouse', () => {
     expect(scores.payload.css).toBe(0); // css should be 0 as we inline all css
   });
 
-  test('getting started page', async () => {
-    const scores = await getLighthouseScores(`${base}/elements/docs/about/getting-started/`);
+  test('installation page', async () => {
+    const scores = await getLighthouseScores(`${base}/elements/docs/integrations/installation/`);
     expect(scores.performance).toBeGreaterThanOrEqual(85);
     expect(scores.accessibility).toBeGreaterThanOrEqual(100);
     expect(scores.bestPractices).toBeGreaterThanOrEqual(90);

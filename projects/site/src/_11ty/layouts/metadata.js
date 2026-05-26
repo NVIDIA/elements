@@ -4,9 +4,48 @@ import { siteData } from '../../index.11tydata.js';
 export const BASE_URL = join('/', process.env.PAGES_BASE_URL ?? '', '/');
 
 const SITE_URL = 'https://nvidia.github.io/elements';
-export const SOFTWARE_ID = `${SITE_URL}/#software`;
+const ORGANIZATION_URL = 'https://www.nvidia.com/';
+const REPOSITORY_URL = 'https://github.com/NVIDIA/elements';
 const SOFTWARE_URL = `${SITE_URL}/`;
+export const SOCIAL_IMAGE_URL = `${SITE_URL}/static/images/social-card.png`;
+export const SOCIAL_IMAGE_ALT = 'NVIDIA Elements design system preview.';
+export const AUTHOR_ID = `${SITE_URL}/#author`;
+export const AUTHOR_NAME = 'NVIDIA Elements Team';
+export const AUTHOR_URL = SOFTWARE_URL;
+export const AUTHOR_CREDENTIALS = 'NVIDIA design system engineers for Web Components and AI/ML interface tooling.';
+export const WEBSITE_ID = `${SITE_URL}/#website`;
+export const SOFTWARE_ID = `${SITE_URL}/#software`;
+const SOFTWARE_DESCRIPTION =
+  'NVIDIA Elements is a framework-agnostic Design System and UI Agent Harness for AI/ML Infrastructure, Robotics, and Autonomous Vehicles';
+const SITE_TITLE_SUFFIX = ' | NVIDIA Elements';
+const MIN_TITLE_LENGTH = 50;
+const MIN_DESCRIPTION_LENGTH = 150;
+const DEFAULT_TITLE_QUALIFIER = 'Documentation and API Reference';
 const CODE_SAMPLE_ROUTES = ['/docs/cli/', '/docs/code/', '/docs/integrations/', '/docs/lint/', '/docs/mcp/'];
+
+const TITLE_QUALIFIERS = [
+  { route: '/docs/about/', qualifiers: ['Project Guide and Resources'] },
+  { route: '/docs/api-design/', qualifiers: ['API Guide for Web Components'] },
+  { route: '/docs/changelog/', qualifiers: ['Release Notes', 'Release Notes and Package Changelog'] },
+  { route: '/docs/cli/', qualifiers: ['Command Line Interface Guide for Web Components'] },
+  { route: '/docs/code/', qualifiers: ['Package Guide', 'Package Documentation and Examples'] },
+  {
+    route: '/docs/elements/',
+    qualifiers: ['Component Guide', 'Component API Reference', 'Web Component API Reference Guide']
+  },
+  { route: '/docs/foundations/layout/', qualifiers: ['System Guide for Web Components'] },
+  { route: '/docs/foundations/', qualifiers: ['Design Foundation Guide', 'Design Foundation Guide for UI'] },
+  { route: '/docs/integrations/', qualifiers: ['Web Component Guide', 'Web Component Integration Guide'] },
+  { route: '/docs/labs/', qualifiers: ['Guide for Web Components', 'Experimental UI Guide'] },
+  { route: '/docs/lint/', qualifiers: ['Static Analysis Guide for Web Components'] },
+  { route: '/docs/markdown/', qualifiers: ['Package Guide', 'Package Documentation and Examples'] },
+  { route: '/docs/mcp/', qualifiers: ['Model Context Protocol Guide'] },
+  { route: '/docs/metrics/', qualifiers: ['Quality Metrics and Reports'] },
+  { route: '/docs/monaco/', qualifiers: ['Package Guide', 'Package Documentation and Examples'] },
+  { route: '/docs/patterns/', qualifiers: ['Pattern Guide', 'UI Pattern Library Guide'] },
+  { route: '/examples/', qualifiers: ['Component Example Gallery'] },
+  { route: '/starters/', qualifiers: ['Starter Templates', 'Starter Templates for Web Apps'] }
+];
 
 const LANGUAGE_NAMES = {
   bash: 'Shell',
@@ -82,26 +121,210 @@ function findElementByTag(tag) {
 }
 
 function appendSiteName(title) {
-  if (title === 'NVIDIA Elements' || title.endsWith(' | NVIDIA Elements')) return title;
-  return `${title} | NVIDIA Elements`;
+  if (title === 'NVIDIA Elements' || title.endsWith(SITE_TITLE_SUFFIX)) return title;
+  return `${title}${SITE_TITLE_SUFFIX}`;
+}
+
+function resolveThemeTitle(url, title) {
+  if (url === '/docs/foundations/themes/') return 'Theme System';
+  if (title === 'Design Tokens' || title.endsWith('Themes')) return title;
+  return `${title} Theme Tokens`;
 }
 
 function resolveSectionTitle(data, title) {
   const url = data.page?.url ?? '';
+  if (url === '/starters/') return 'Starter Templates';
+  if (url === '/docs/changelog/') return 'Package Changelog';
+  if (url === '/docs/metrics/') return 'Site Quality Metrics';
   if (url === '/examples/') return 'Example Gallery';
   if (url.startsWith('/docs/internal/guidelines/')) return `${title} Guidelines`;
   if (url.startsWith('/docs/integrations/')) return `${title} Integration`;
-  if (url.startsWith('/docs/foundations/themes/')) return `Theme ${title}`;
+  if (url.startsWith('/docs/foundations/themes/')) return resolveThemeTitle(url, title);
   if (url.startsWith('/docs/labs/layout/responsive/patterns/')) return 'Responsive Layout Patterns';
   if (url.startsWith('/docs/labs/') && !url.startsWith('/docs/labs/layout/')) return `${title} Lab`;
   return title;
 }
 
+function appendTitleQualifier(title, qualifier) {
+  return `${title} ${qualifier}`;
+}
+
+function getRouteTitleQualifiers(url, title) {
+  if (url.startsWith('/docs/api-design/') && title.endsWith('Guidelines')) return ['for Web Components'];
+  return TITLE_QUALIFIERS.find(({ route }) => url.startsWith(route))?.qualifiers ?? [DEFAULT_TITLE_QUALIFIER];
+}
+
+function getTitleQualifiers(data, url, title) {
+  if (url === '/') return [];
+  if (url === '/examples/' || url === '/starters/') return ['for Web Components'];
+  if (url === '/docs/changelog/') return ['and Release Notes'];
+  if (url === '/docs/metrics/') return ['and Reports'];
+  if (url === '/docs/foundations/themes/') return ['Guide for Web Components'];
+  if (url.startsWith('/docs/foundations/themes/')) return ['for Web Components'];
+  if (url.includes('/examples/')) return ['and Code Samples', 'and Code Samples for Web Components'];
+  if (data.isApiTab) return ['Reference', 'Reference for Web Components'];
+  return getRouteTitleQualifiers(url, title);
+}
+
+function expandShortTitle(data, title) {
+  if (appendSiteName(title).length >= MIN_TITLE_LENGTH) return title;
+
+  const url = data.page?.url ?? '';
+  const qualifiers = getTitleQualifiers(data, url, title);
+  if (!qualifiers.length) return title;
+
+  const qualifier =
+    qualifiers.find(qualifier => appendSiteName(appendTitleQualifier(title, qualifier)).length >= MIN_TITLE_LENGTH) ??
+    qualifiers.at(-1) ??
+    DEFAULT_TITLE_QUALIFIER;
+
+  return appendTitleQualifier(title, qualifier);
+}
+
 function resolvePageTitle(data, title) {
-  if (data.changelog?.title) return appendSiteName(`${data.changelog.title} Changelog`);
-  if (data.isApiTab) return appendSiteName(`${title} API`);
-  if (data.isExamplesTab) return appendSiteName(`${title} Examples`);
-  return appendSiteName(resolveSectionTitle(data, title));
+  if (data.changelog?.title) return appendSiteName(expandShortTitle(data, `${data.changelog.title} Changelog`));
+  if (data.isApiTab) return appendSiteName(expandShortTitle(data, `${title} API`));
+  if (data.isExamplesTab) return appendSiteName(expandShortTitle(data, `${title} Examples`));
+  return appendSiteName(expandShortTitle(data, resolveSectionTitle(data, title)));
+}
+
+function getDescriptionContexts(data) {
+  const url = data.page?.url ?? '';
+
+  if (data.isApiTab) {
+    return [
+      'Includes API and usage guidance.',
+      'Includes properties, events, slots, CSS hooks, examples, and integration guidance for production interfaces.'
+    ];
+  }
+
+  if (data.isExamplesTab || url.includes('/examples/')) {
+    return [
+      'Includes usage examples.',
+      'Includes runnable UI examples.',
+      'Includes working examples, markup patterns, and implementation guidance for production NVIDIA Elements interfaces.'
+    ];
+  }
+
+  if (data.tag || data.component?.data?.tag) {
+    return [
+      'Includes API and usage guidance.',
+      'Includes examples, API details, accessibility guidance, and production UI workflow patterns.',
+      'Use it with examples, API details, accessibility guidance, and production UI patterns in app views.',
+      'Use it with NVIDIA Elements Web Components, examples, accessibility guidance, API details, and production UI workflows.'
+    ];
+  }
+
+  if (url.startsWith('/starters/')) {
+    return [
+      'Includes practical setup guidance.',
+      'Includes setup, examples, and production guidance for app teams.',
+      'Compare starter templates for modern application stacks, local development, bundling, and deployment with NVIDIA Elements.'
+    ];
+  }
+
+  if (url.startsWith('/docs/patterns/')) {
+    return [
+      'Includes UI workflow guidance.',
+      'Includes practical usage guidance.',
+      'Includes responsive production UI workflow guidance.',
+      'Use these patterns to assemble accessible, responsive NVIDIA Elements interfaces for dashboards, tools, and AI/ML products.'
+    ];
+  }
+
+  if (url.startsWith('/docs/foundations/themes/')) {
+    return [
+      'Includes token usage guidance.',
+      'Includes token and theme guidance.',
+      'Includes token and theme usage guidance for apps.',
+      'Understand tokens, themes, CSS custom properties, and visual primitives that keep NVIDIA Elements interfaces consistent.'
+    ];
+  }
+
+  if (url.startsWith('/docs/foundations/layout/')) {
+    return [
+      'Includes practical layout guidance.',
+      'Apply layout utilities, responsive rules, spacing, alignment, and grid patterns for production NVIDIA Elements interfaces.'
+    ];
+  }
+
+  if (url.startsWith('/docs/foundations/')) {
+    return [
+      'Includes practical design guidance.',
+      'Use design foundations for typography, iconography, visualization, layout, and theming across NVIDIA Elements interfaces.'
+    ];
+  }
+
+  if (url.startsWith('/docs/integrations/')) {
+    return [
+      'Includes setup and usage guidance.',
+      'Includes setup and framework guidance for apps.',
+      'Follow setup guidance, framework examples, package entry points, and integration notes for using NVIDIA Elements in applications.'
+    ];
+  }
+
+  if (url.startsWith('/docs/api-design/')) {
+    return [
+      'Includes API design guidance.',
+      'Apply API design rules for Web Components, accessibility, composition, styling, events, packaging, and long-term maintainability.'
+    ];
+  }
+
+  if (url.startsWith('/docs/changelog/')) {
+    return [
+      'Includes release guidance.',
+      'Track package releases, compatibility notes, fixes, and documentation updates across NVIDIA Elements projects.'
+    ];
+  }
+
+  if (url.startsWith('/docs/metrics/')) {
+    return [
+      'Includes quality signals.',
+      'Review testing, performance, package size, API status, and generated metadata signals for NVIDIA Elements.'
+    ];
+  }
+
+  if (url.startsWith('/docs/monaco/')) {
+    return [
+      'Includes editor integration guidance.',
+      'Use Monaco-based editor components with NVIDIA Elements patterns for code editing, validation, diagnostics, and AI/ML workflows.'
+    ];
+  }
+
+  if (url.startsWith('/docs/labs/')) {
+    return [
+      'Includes experimental usage guidance.',
+      'Includes experimental adoption guidance for apps.',
+      'Review experimental NVIDIA Elements APIs, usage constraints, examples, and migration context before adopting them in applications.'
+    ];
+  }
+
+  if (url.startsWith('/docs/about/')) {
+    return [
+      'Includes project guidance.',
+      'Learn project workflows, support paths, contribution guidance, accessibility commitments, and migration practices for NVIDIA Elements.'
+    ];
+  }
+
+  return [
+    'Includes practical NVIDIA Elements guidance.',
+    'Includes practical NVIDIA Elements guidance for app teams.',
+    'Learn how this documentation supports Web Component implementation, design-system usage, and AI/ML interface work.'
+  ];
+}
+
+function expandShortDescription(data, description) {
+  if (description.length >= MIN_DESCRIPTION_LENGTH) return description;
+
+  const contexts = getDescriptionContexts(data);
+  const context = contexts
+    .filter(candidate => `${description} ${candidate}`.length >= MIN_DESCRIPTION_LENGTH)
+    .sort((a, b) => a.length - b.length)[0];
+  const expandedDescription = `${description} ${context ?? contexts.at(-1)}`;
+
+  return expandedDescription.length >= MIN_DESCRIPTION_LENGTH
+    ? expandedDescription
+    : `${expandedDescription} This guidance supports production NVIDIA Elements teams.`;
 }
 
 function hasGeneratedPage(data, generatedUrls, url) {
@@ -128,13 +351,19 @@ export function resolvePageMeta(data) {
     description = `Changelog for ${data.changelog.title}: ${data.changelog.description}`;
   } else if (componentDescription) {
     description = componentDescription;
+  } else if (url === '/starters/') {
+    description =
+      'NVIDIA Elements starter templates for application projects: compare framework setup, local development, bundling, deployment, and production UI workflows.';
   } else {
     description = `Documentation for ${rawTitle} in NVIDIA Elements, the framework-agnostic design system for AI/ML factories.`;
   }
 
+  description = expandShortDescription(data, description);
+
   const canonicalUrl = `${SITE_URL}${url}`;
-  const ogImage = `${SITE_URL}/favicon.svg`;
-  return { title, description, canonicalUrl, ogImage, url };
+  const ogImage = SOCIAL_IMAGE_URL;
+  const ogImageAlt = SOCIAL_IMAGE_ALT;
+  return { title, description, canonicalUrl, ogImage, ogImageAlt, url };
 }
 
 function jsonLdEncode(value) {
@@ -168,6 +397,19 @@ function getContentDates(data) {
   };
 }
 
+function getAuthor() {
+  return {
+    '@id': AUTHOR_ID,
+    '@type': 'Organization',
+    name: AUTHOR_NAME,
+    url: AUTHOR_URL,
+    description: AUTHOR_CREDENTIALS,
+    sameAs: [REPOSITORY_URL],
+    parentOrganization: { '@type': 'Organization', name: 'NVIDIA', url: ORGANIZATION_URL },
+    knowsAbout: ['Web Components', 'Design Systems', 'UI Component Libraries', 'AI/ML Interface Tooling']
+  };
+}
+
 function getArticle(data, meta) {
   const isDocs = meta.url.startsWith('/docs/');
   const isApiReference = isApiReferencePage(data, meta);
@@ -182,8 +424,8 @@ function getArticle(data, meta) {
     mainEntityOfPage: meta.canonicalUrl,
     inLanguage: 'en',
     image: meta.ogImage,
-    publisher: { '@type': 'Organization', name: 'NVIDIA', url: SITE_URL },
-    author: { '@type': 'Organization', name: 'NVIDIA' }
+    publisher: { '@type': 'Organization', name: 'NVIDIA', url: ORGANIZATION_URL },
+    author: getAuthor()
   };
 
   if (isDocs || meta.url === '/') {
@@ -203,6 +445,18 @@ function getArticle(data, meta) {
   if (dates.dateModified) article.dateModified = dates.dateModified;
 
   return article;
+}
+
+function getWebSite(description) {
+  return {
+    '@id': WEBSITE_ID,
+    '@type': 'WebSite',
+    url: SOFTWARE_URL,
+    name: 'NVIDIA Elements',
+    description,
+    publisher: { '@type': 'Organization', name: 'NVIDIA', url: ORGANIZATION_URL },
+    inLanguage: 'en'
+  };
 }
 
 function getBreadcrumb(data, meta) {
@@ -234,12 +488,12 @@ function getBreadcrumb(data, meta) {
   };
 }
 
-function getSoftwareApplication(description) {
+function getSoftwareApplication() {
   return {
     '@id': SOFTWARE_ID,
     '@type': 'SoftwareApplication',
     name: 'NVIDIA Elements',
-    description,
+    description: SOFTWARE_DESCRIPTION,
     url: SOFTWARE_URL,
     applicationCategory: 'DeveloperApplication',
     operatingSystem: 'Any',
@@ -328,7 +582,7 @@ function getSoftwareSourceCode(data, meta) {
     codeSampleType: getCodeSampleType(data, meta),
     programmingLanguage: programmingLanguage.length === 1 ? programmingLanguage[0] : programmingLanguage,
     runtimePlatform: getRuntimePlatform(meta),
-    targetProduct: { '@id': SOFTWARE_ID, '@type': 'SoftwareApplication' }
+    targetProduct: getSoftwareApplication()
   };
 }
 
@@ -339,7 +593,7 @@ export function renderJsonLd(data, meta) {
   const graph = [
     article,
     ...(breadcrumb ? [breadcrumb] : []),
-    ...(meta.url === '/' ? [getSoftwareApplication(meta.description)] : []),
+    ...(meta.url === '/' ? [getWebSite(meta.description), getSoftwareApplication()] : []),
     ...(sourceCode ? [sourceCode] : [])
   ];
 

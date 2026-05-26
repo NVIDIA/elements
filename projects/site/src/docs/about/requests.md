@@ -8,4 +8,4 @@
 
 # {{ title }}
 
-<img src="static/images/requests.drawio.svg" class="full-width" />
+<img src="static/images/requests.drawio.svg" alt="Flowchart for reviewing Elements requests across feature, support, and bug paths, including backlog, implementation, workaround, fix, and release decisions." class="full-width" />

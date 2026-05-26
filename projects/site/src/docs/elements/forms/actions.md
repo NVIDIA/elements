@@ -1,6 +1,7 @@
 ---
 {
   title: 'Control Actions',
+  description: 'Control actions in NVIDIA Elements forms: prefix content, suffix actions, clear buttons, and label actions for text inputs.',
   layout: 'docs.11ty.js'
 }
 ---

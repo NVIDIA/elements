@@ -2,6 +2,7 @@ import changelogs from './index.11tydata.js';
 
 export const data = {
   title: 'Changelog',
+  description: 'Package changelog details for NVIDIA Elements maintainers and release tracking.',
   layout: 'docs.11ty.js',
   pagination: {
     data: 'changelogs',

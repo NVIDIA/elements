@@ -1,5 +1,6 @@
 export const data = {
   title: 'Bundle Explorer',
+  description: 'NVIDIA Elements bundle explorer for package size and module composition analysis.',
   layout: 'docs.11ty.js'
 };
 

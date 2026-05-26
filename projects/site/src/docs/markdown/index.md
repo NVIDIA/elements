@@ -1,6 +1,7 @@
 ---
 {
   title: 'Markdown',
+  description: 'The NVIDIA Elements markdown component: render markdown from source strings or template slots with Elements typography.',
   layout: 'docs.11ty.js',
   tag: 'nve-markdown'
 }

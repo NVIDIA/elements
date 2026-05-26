@@ -2,7 +2,15 @@
 /* global process */
 
 import { ELEMENTS_PLAYGROUND_BASE_URL, ELEMENTS_REPO_BASE_URL } from '../utils/env.js';
-import { escapeAttr, resolvePageMeta, renderJsonLd, BASE_URL } from './metadata.js';
+import {
+  AUTHOR_CREDENTIALS,
+  AUTHOR_NAME,
+  AUTHOR_URL,
+  escapeAttr,
+  resolvePageMeta,
+  renderJsonLd,
+  BASE_URL
+} from './metadata.js';
 
 /**
  * This renders the base head element with all the common styles and scripts needed for ALL PAGES.
@@ -19,13 +27,20 @@ export const renderBaseHead = data => {
   <base href="${BASE_URL}" />
   <title data-pagefind-meta="title">${escapeAttr(meta.title)}</title>
   <meta name="description" content="${escapeAttr(meta.description)}">
+  <meta name="author" content="${escapeAttr(AUTHOR_NAME)}">
   <link rel="canonical" href="${meta.canonicalUrl}">
   <meta property="og:title" content="${escapeAttr(meta.title)}">
   <meta property="og:url" content="${meta.canonicalUrl}">
   <meta property="og:description" content="${escapeAttr(meta.description)}">
   <meta property="og:image" content="${meta.ogImage}">
+  <meta property="og:image:alt" content="${escapeAttr(meta.ogImageAlt)}">
   <meta property="og:site_name" content="NVIDIA Elements">
   <meta property="og:type" content="${ogType}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeAttr(meta.title)}">
+  <meta name="twitter:description" content="${escapeAttr(meta.description)}">
+  <meta name="twitter:image" content="${meta.ogImage}">
+  <meta name="twitter:image:alt" content="${escapeAttr(meta.ogImageAlt)}">
   <link rel="icon" href="/favicon.svg">
   <meta name="google-site-verification" content="pqQ1zOnKkqdZ2Lm0H8qIQx3q1x6Q7ghbumSrwzF_KSY" />
   <meta name="msvalidate.01" content="590EBF38676B077801C72048F4D8B5CB" />

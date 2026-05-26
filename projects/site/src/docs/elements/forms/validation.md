@@ -1,6 +1,7 @@
 ---
 {
   title: 'Form Validation',
+  description: 'Form validation in NVIDIA Elements: HTML validity states, control messages, reset behavior, and framework-managed validation.',
   layout: 'docs.11ty.js'
 }
 ---
