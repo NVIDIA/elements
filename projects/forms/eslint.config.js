@@ -9,7 +9,7 @@ export default [
   ...litConfig,
   ...jsonConfig,
   {
-    files: ['src/mixin/**/*.ts'],
+    files: ['src/mixins/**/*.ts'],
     rules: {
       // mixin factory functions
       'max-lines-per-function': 'off'
