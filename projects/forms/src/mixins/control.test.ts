@@ -4,7 +4,7 @@
 import { LitElement, html } from 'lit';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { createFixture, removeFixture, untilEvent } from '@internals/testing';
-import { FormControlMixin } from './index.js';
+import { FormControlMixin } from './control.js';
 import { requiredValidator } from '../validators/index.js';
 
 export class TestElement extends FormControlMixin<typeof HTMLElement, string>(HTMLElement) {
@@ -53,6 +53,7 @@ describe('FormControlMixin', () => {
     element.readOnly = true;
     expect(element.readOnly).toBe(true);
     expect(element.hasAttribute('readonly')).toBe(true);
+    expect(element._internals.states.has('readonly')).toBe(true);
   });
 
   it('should implement disabled', () => {
@@ -62,6 +63,8 @@ describe('FormControlMixin', () => {
     element.disabled = true;
     expect(element.disabled).toBe(true);
     expect(element.hasAttribute('disabled')).toBe(true);
+    expect(element._internals.ariaDisabled).toBe('true');
+    expect(element._internals.states.has('disabled')).toBe(true);
   });
 
   it('should implement required', () => {
@@ -71,6 +74,7 @@ describe('FormControlMixin', () => {
     element.required = true;
     expect(element.required).toBe(true);
     expect(element.hasAttribute('required')).toBe(true);
+    expect(element._internals.states.has('required')).toBe(true);
   });
 
   it('should implement name', () => {
@@ -115,6 +119,75 @@ describe('FormControlMixin', () => {
     expect(element.value).toBe('test');
   });
 
+  it('should implement defaultValue', () => {
+    expect(element.defaultValue).toBe('');
+
+    element.defaultValue = 'test';
+    expect(element.getAttribute('value')).toBe('test');
+    expect(element.defaultValue).toBe('test');
+  });
+
+  it('should clear optional reflected attributes', () => {
+    element.disabled = false;
+    expect(element._internals.ariaDisabled).toBe('false');
+
+    element.pattern = '\\d+';
+    element.pattern = '';
+    expect(element.hasAttribute('pattern')).toBe(false);
+
+    element.min = 0;
+    element.min = null;
+    expect(element.hasAttribute('min')).toBe(false);
+    expect(element._internals.ariaValueMin).toBe(null);
+
+    element.max = 10;
+    element.max = null;
+    expect(element.hasAttribute('max')).toBe(false);
+    expect(element._internals.ariaValueMax).toBe(null);
+
+    element.minLength = 2;
+    element.minLength = -1;
+    expect(element.hasAttribute('minlength')).toBe(false);
+
+    element.maxLength = 3;
+    element.maxLength = -1;
+    expect(element.hasAttribute('maxlength')).toBe(false);
+
+    element.name = 'test';
+    element.name = '';
+    expect(element.hasAttribute('name')).toBe(false);
+
+    element.defaultValue = 'test';
+    element.removeAttribute('value');
+    expect(element.value).toBe(undefined);
+  });
+
+  it('should normalize negative length constraints as unset', () => {
+    element.setAttribute('minlength', '-2');
+    expect(element.minLength).toBe(-1);
+    expect(element.hasAttribute('minlength')).toBe(false);
+    expect(element._internals.states.has('minlength')).toBe(false);
+
+    element.setAttribute('maxlength', '-2');
+    expect(element.maxLength).toBe(-1);
+    expect(element.hasAttribute('maxlength')).toBe(false);
+    expect(element._internals.states.has('maxlength')).toBe(false);
+
+    element.minLength = -2;
+    expect(element.hasAttribute('minlength')).toBe(false);
+    expect(element._internals.states.has('minlength')).toBe(false);
+
+    element.maxLength = -2;
+    expect(element.hasAttribute('maxlength')).toBe(false);
+    expect(element._internals.states.has('maxlength')).toBe(false);
+  });
+
+  it('should stringify primitive values without JSON quoting', () => {
+    element.value = '10';
+    expect(element.valueAsString).toBe('10');
+    expect(element.valueAsNumber).toBe(10);
+  });
+
   it('should call requestUpdate when value changes', () => {
     vi.spyOn(element, 'requestUpdate');
     element.value = 'test';
@@ -148,6 +221,18 @@ describe('FormControlMixin', () => {
     vi.spyOn(element._internals, 'setValidity');
     element.setValidity({}, 'test');
     expect(element._internals.setValidity).toHaveBeenCalledWith({}, 'test');
+  });
+
+  it('should implement custom validity', () => {
+    element.setCustomValidity('invalid value');
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.customError).toBe(true);
+    expect(element.validationMessage).toBe('invalid value');
+    expect(element._internals.states.has('invalid')).toBe(true);
+
+    element.setCustomValidity('');
+    expect(element.checkValidity()).toBe(true);
+    expect(element._internals.states.has('valid')).toBe(true);
   });
 
   it('should implement protected checkValidity', () => {
@@ -209,6 +294,75 @@ describe('FormControlMixin', () => {
     element.formResetCallback();
     expect(element.value).toBe(undefined);
   });
+
+  it('should implement reset with defaultValue', async () => {
+    element.defaultValue = 'default';
+    element.value = 'changed';
+
+    const event = untilEvent(element, 'reset');
+    element.reset();
+
+    expect(element.value).toBe('default');
+    expect((await event).target).toBe(element);
+  });
+
+  it('should implement reset with empty defaultValue', async () => {
+    element.defaultValue = '';
+    element.value = 'changed';
+
+    const event = untilEvent(element, 'reset');
+    element.reset();
+
+    expect(element.value).toBe('');
+    expect((await event).target).toBe(element);
+  });
+
+  it('should implement formDisabledCallback', () => {
+    element.formDisabledCallback(true);
+    expect(element.disabled).toBe(true);
+    expect(element.hasAttribute('disabled')).toBe(true);
+    expect(element._internals.states.has('disabled')).toBe(true);
+  });
+
+  it('should implement labels and composedLabel', () => {
+    element.id = 'labelled-control';
+    const label = document.createElement('label');
+    label.htmlFor = 'labelled-control';
+    label.textContent = 'Labelled Control';
+    element.before(label);
+
+    expect(element.labels[0]).toBe(label);
+    expect(element.composedLabel).toBe('Labelled Control');
+
+    label.remove();
+  });
+
+  it('should validate string constraints', () => {
+    element.pattern = '\\d+';
+    element.value = 'abc';
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.patternMismatch).toBe(true);
+
+    element.value = '123';
+    expect(element.checkValidity()).toBe(true);
+
+    element.minLength = 4;
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.tooShort).toBe(true);
+
+    element.value = '1234';
+    expect(element.checkValidity()).toBe(true);
+
+    element.maxLength = 3;
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.tooLong).toBe(true);
+  });
+
+  it('should ignore invalid pattern expressions', () => {
+    element.pattern = '[';
+    element.value = 'abc';
+    expect(element.checkValidity()).toBe(true);
+  });
 });
 
 export class ValidatorTestElement extends FormControlMixin<typeof HTMLElement, string>(HTMLElement) {
@@ -256,6 +410,23 @@ describe('mixin - validators', () => {
     expect(element.checkValidity()).toBe(false);
     expect(element.validity.valid).toBe(false);
     expect(element.validity.valueMissing).toBe(true);
+  });
+
+  it('should return custom validator errors', () => {
+    const previousValidators = ValidatorTestElement.metadata.validators;
+    ValidatorTestElement.metadata.validators = [
+      () => ({ validity: { customError: true, valid: false }, message: 'validator error' })
+    ];
+
+    try {
+      element.required = false;
+      element.value = 'valid';
+      expect(element.checkValidity()).toBe(false);
+      expect(element.validity.customError).toBe(true);
+      expect(element.validationMessage).toBe('validator error');
+    } finally {
+      ValidatorTestElement.metadata.validators = previousValidators;
+    }
   });
 });
 
@@ -385,6 +556,46 @@ describe('mixin - number value', () => {
     element.value = 1;
     expect(new FormData(form).get('test')).toBe('1');
   });
+
+  it('should handle invalid number attributes', () => {
+    element.setAttribute('min', 'bad');
+    expect(element.min).toBe(null);
+    expect(element.hasAttribute('min')).toBe(false);
+  });
+
+  it('should validate number bad input', () => {
+    element.value = NaN;
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.badInput).toBe(true);
+  });
+
+  it('should validate step against the default base', () => {
+    element.step = 2;
+    element.value = 3;
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.stepMismatch).toBe(true);
+  });
+
+  it('should validate number constraints', () => {
+    element.min = 0;
+    element.max = 10;
+    element.step = 2;
+
+    element.value = 3;
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.stepMismatch).toBe(true);
+
+    element.value = -1;
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.rangeUnderflow).toBe(true);
+
+    element.value = 12;
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.rangeOverflow).toBe(true);
+
+    element.value = 4;
+    expect(element.checkValidity()).toBe(true);
+  });
 });
 
 class FileValueTestElement extends FormControlMixin<typeof HTMLElement, File>(HTMLElement) {
@@ -442,6 +653,10 @@ describe('mixin - file value', () => {
     element.value = new File([''], 'update.txt', { type: 'text/plain' });
     expect(element.value).toEqual(new File([''], 'update.txt', { type: 'text/plain' }));
     expect((new FormData(form).get('test') as File).name).toBe('update.txt');
+  });
+
+  it('should return file name as string value', () => {
+    expect(element.valueAsString).toBe('test.txt');
   });
 });
 
@@ -571,5 +786,12 @@ describe('mixin - multiple files', () => {
     element.value = [new File([''], 'update.txt', { type: 'text/plain' })];
     expect(element.value).toEqual([new File([''], 'update.txt', { type: 'text/plain' })]);
     expect((new FormData(form).get('file-input') as File).name).toBe('update.txt');
+  });
+
+  it('should treat an empty array as a missing required value', () => {
+    element.required = true;
+    element.value = [];
+    expect(element.checkValidity()).toBe(false);
+    expect(element.validity.valueMissing).toBe(true);
   });
 });

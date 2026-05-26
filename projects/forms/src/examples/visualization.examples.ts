@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import { css, html, LitElement, nothing } from 'lit';
-import { FormControlMixin } from '@nvidia-elements/forms/mixin';
+import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import '@nvidia-elements/core/color/define.js';
 import '@nvidia-elements/core/radio/define.js';
 import '@nvidia-elements/core/range/define.js';

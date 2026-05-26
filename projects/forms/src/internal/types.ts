@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-export type FormControlValue = string | number | File | File[] | null | object;
+export type FormControlValue = string | number | boolean | File | File[] | FormData | null | object;
 
 interface SchemaBase {
   type: string;
@@ -57,17 +57,31 @@ export interface FormControlMetadata {
 }
 
 interface FormControlInstance extends HTMLElement {
-  value: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  value: FormControlValue | undefined;
+  defaultValue: string;
   form: HTMLFormElement | null;
-  readonly: boolean;
+  readOnly: boolean;
+  disabled: boolean;
   name: string;
   noValidate: boolean;
   willValidate: boolean;
   validity: ValidityState;
   validationMessage: string;
-  required?: boolean;
+  required: boolean;
+  pattern: string;
+  min: number | null;
+  max: number | null;
+  step: number | null;
+  minLength: number;
+  maxLength: number;
+  labels: NodeList;
+  composedLabel: string;
+  valueAsString: string;
+  valueAsNumber: number;
   checkValidity(): boolean;
   reportValidity(): boolean;
+  reset(): void;
+  setCustomValidity(message: string): void;
 }
 
 /**

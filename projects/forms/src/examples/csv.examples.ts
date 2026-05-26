@@ -3,7 +3,7 @@
 
 import { css, html, LitElement, nothing } from 'lit';
 import type { ValidatorResult } from '@nvidia-elements/forms';
-import { FormControlMixin } from '@nvidia-elements/forms/mixin';
+import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import '@nvidia-elements/core/textarea/define.js';
 import '@nvidia-elements/core/dropdown/define.js';
 import '@nvidia-elements/core/checkbox/define.js';

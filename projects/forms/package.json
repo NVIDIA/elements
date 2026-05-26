@@ -51,12 +51,20 @@
       "default": "./dist/index.js"
     },
     "./mixin": {
-      "types": "./dist/mixin/index.d.ts",
-      "default": "./dist/mixin/index.js"
+      "types": "./dist/mixins/index.d.ts",
+      "default": "./dist/mixins/index.js"
     },
     "./mixin/index.js": {
-      "types": "./dist/mixin/index.d.ts",
-      "default": "./dist/mixin/index.js"
+      "types": "./dist/mixins/index.d.ts",
+      "default": "./dist/mixins/index.js"
+    },
+    "./mixins": {
+      "types": "./dist/mixins/index.d.ts",
+      "default": "./dist/mixins/index.js"
+    },
+    "./mixins/index.js": {
+      "types": "./dist/mixins/index.d.ts",
+      "default": "./dist/mixins/index.js"
     },
     "./validators": {
       "types": "./dist/validators/index.d.ts",
@@ -79,9 +87,6 @@
     "test:watch": "wireit",
     "test:lighthouse": "wireit"
   },
-  "dependencies": {
-    "lit": "catalog:publish"
-  },
   "devDependencies": {
     "@eslint/js": "catalog:",
     "@nvidia-elements/styles": "workspace:*",
@@ -89,6 +94,7 @@
     "@internals/eslint": "workspace:*",
     "@internals/vite": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
+    "@typescript/lib-dom": "npm:@types/web@0.0.312",
     "@vitest/browser": "catalog:",
     "@vitest/coverage-istanbul": "catalog:",
     "axe-core": "catalog:",
