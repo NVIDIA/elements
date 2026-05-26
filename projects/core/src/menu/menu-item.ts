@@ -1,9 +1,10 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { useStyles, BaseButton, audit } from '@nvidia-elements/core/internal';
+import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
+import { useStyles, audit } from '@nvidia-elements/core/internal';
 import styles from './menu-item.css?inline';
 
 /**
@@ -31,7 +32,7 @@ import styles from './menu-item.css?inline';
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
  */
 @audit()
-export class MenuItem extends BaseButton {
+export class MenuItem extends ButtonFormControlMixin(LitElement) {
   static styles = useStyles([styles]);
 
   @property({ type: String, reflect: true }) status: 'danger';

@@ -1,10 +1,11 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import { Icon } from '@nvidia-elements/core/icon';
-import { useStyles, BaseButton, I18nController, scopedRegistry } from '@nvidia-elements/core/internal';
+import { useStyles, I18nController, scopedRegistry } from '@nvidia-elements/core/internal';
 import styles from './sort-button.css?inline';
 
 const nextSort = {
@@ -27,7 +28,7 @@ const nextSort = {
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/spinbutton/
  */
 @scopedRegistry()
-export class SortButton extends BaseButton {
+export class SortButton extends ButtonFormControlMixin(LitElement) {
   static styles = useStyles([styles]);
 
   static readonly metadata = {

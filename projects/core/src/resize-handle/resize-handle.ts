@@ -4,7 +4,7 @@
 import { html, LitElement, type PropertyValues } from 'lit';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { property } from 'lit/decorators/property.js';
-import { FormControlMixin } from '@nvidia-elements/forms/mixin';
+import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import { useStyles, typeTouch } from '@nvidia-elements/core/internal';
 import { I18nController, type NveTouchEvent } from '@nvidia-elements/core/internal';
 import styles from './resize-handle.css?inline';

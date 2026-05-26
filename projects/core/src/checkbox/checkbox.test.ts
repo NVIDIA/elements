@@ -4,7 +4,7 @@
 import { LitElement, html } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
 import { createFixture, removeFixture, elementIsStable, untilEvent } from '@internals/testing';
-import { FormControlMixin } from '@nvidia-elements/forms/mixin';
+import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import { Checkbox } from '@nvidia-elements/core/checkbox';
 import '@nvidia-elements/core/checkbox/define.js';
 

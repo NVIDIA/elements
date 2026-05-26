@@ -5,9 +5,9 @@ import type { PropertyValues } from 'lit';
 import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
+import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
-  BaseButton,
   stateSelected,
   useStyles,
   keyNavigationList,
@@ -46,7 +46,7 @@ import tabsStyleSheet from './tabs.css?inline';
  */
 @audit()
 @stateSelected<TabsItem>()
-export class TabsItem extends BaseButton {
+export class TabsItem extends ButtonFormControlMixin(LitElement) {
   /**
    * Determines which tab item the user selects, defaults to false.
    */
@@ -79,6 +79,8 @@ export class TabsItem extends BaseButton {
   }
 
   updated(props: PropertyValues<this>) {
+    super.updated(props);
+
     if (props.has('selected')) {
       if (this.selected) {
         appendAnchorName(this, '--selected');

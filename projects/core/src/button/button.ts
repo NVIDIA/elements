@@ -1,10 +1,11 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { html } from 'lit';
+import { html, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
+import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import type { Interaction, Inverse, FlatInteraction, Size } from '@nvidia-elements/core/internal';
-import { BaseButton, useStyles } from '@nvidia-elements/core/internal';
+import { useStyles } from '@nvidia-elements/core/internal';
 import styles from './button.css?inline';
 
 /**
@@ -31,7 +32,7 @@ import styles from './button.css?inline';
  * @cssprop --min-width
  * @aria https://www.w3.org/WAI/ARIA/apg/patterns/button/
  */
-export class Button extends BaseButton {
+export class Button extends ButtonFormControlMixin(LitElement) {
   static styles = useStyles([styles]);
 
   static readonly metadata = {

@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { css, html } from 'lit';
-import { BaseButton } from '@nvidia-elements/core/internal';
+import { css, html, LitElement } from 'lit';
+import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import '@nvidia-elements/core/card/define.js';
 import '@nvidia-elements/core/button/define.js';
 import '@nvidia-elements/core/icon-button/define.js';
@@ -11,7 +11,7 @@ export default {
   title: 'Internal/Controllers'
 }
 
-class UIButton extends BaseButton {
+class UIButton extends ButtonFormControlMixin(LitElement) {
   static styles = [css`
     :host {
       --background: hsl(0, 0%, 90%);
@@ -82,10 +82,9 @@ class UIButton extends BaseButton {
 customElements.get('ui-button') || customElements.define('ui-button', UIButton);
 
 /**
- * Example of custom element button using the base button and controllers.
- * When a custom element extends the base button it will inherit all the
- * necessary button behaviors and states.
- * @summary Custom button element using BaseButton with pressed, expanded, disabled, and link states.
+ * Example of custom element button using the button form control mixin.
+ * When a custom element applies the mixin it inherits button behaviors and states.
+ * @summary Custom button element using ButtonFormControlMixin with pressed, expanded, disabled, and link states.
  * @tags test-case
  */
 export const TypeButtonDemo = {

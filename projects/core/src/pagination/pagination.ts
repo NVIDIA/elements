@@ -3,7 +3,7 @@
 
 import { html, LitElement, nothing } from 'lit';
 import { property } from 'lit/decorators/property.js';
-import { FormControlMixin } from '@nvidia-elements/forms/mixin';
+import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import type { KeynavListConfig } from '@nvidia-elements/core/internal';
 import {
   attachInternals,

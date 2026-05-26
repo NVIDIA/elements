@@ -5,7 +5,7 @@ import { html, isServer, LitElement } from 'lit';
 import { property } from 'lit/decorators/property.js';
 import { I18nController, scopedRegistry, useStyles } from '@nvidia-elements/core/internal';
 import { state } from 'lit/decorators/state.js';
-import { FormControlMixin } from '@nvidia-elements/forms/mixin';
+import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import { type IconName, Icon } from '@nvidia-elements/core/icon';
 import { Control } from '@nvidia-elements/core/forms';
 import { Divider } from '@nvidia-elements/core/divider';

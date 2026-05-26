@@ -13,7 +13,7 @@ import {
 } from '@nvidia-elements/core/internal';
 import { Icon } from '@nvidia-elements/core/icon';
 import styles from './dropzone.css?inline';
-import { FormControlMixin } from '@nvidia-elements/forms/mixin';
+import { FormControlMixin } from '@nvidia-elements/forms/mixins';
 import { fileTypeValidator, fileSizeValidator, getFileTypeSpecifiers } from './dropzone.util';
 
 /**

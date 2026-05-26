@@ -20,12 +20,36 @@ export type Command = ReactiveElement &
     commandfor: string | null;
     commandForElement: HTMLElement | null;
     readOnly: boolean;
+    /**
+     * @deprecated Use `readOnly`. The `readonly` attribute remains supported.
+     */
+    readonly?: boolean;
     disabled: boolean;
   };
 
 export class TypeCommandController<T extends Command> implements ReactiveController {
-  constructor(private host: T) {
+  #trigger: 'click' | 'manual';
+
+  constructor(
+    private host: T,
+    options: TypeCommandControllerOptions = {}
+  ) {
+    this.#trigger = options.trigger ?? 'click';
     this.host.addController(this);
+  }
+
+  get target(): HTMLElement | null {
+    if (this.host.commandForElement) {
+      return this.host.commandForElement;
+    }
+
+    if (!this.host.commandfor) {
+      return null;
+    }
+
+    return (
+      getFlattenedDOMTree(this.host.getRootNode() as HTMLElement).find(el => el.id === this.host.commandfor) ?? null
+    );
   }
 
   async hostUpdated() {
@@ -37,24 +61,44 @@ export class TypeCommandController<T extends Command> implements ReactiveControl
     this.host.removeEventListener('click', this.#triggerCommand);
   }
 
+  get #isReadOnly() {
+    return this.host.readOnly || this.host.readonly === true;
+  }
+
   #updateListener() {
-    if (!this.host.readOnly && !this.host.disabled) {
-      this.host.addEventListener('click', this.#triggerCommand);
-    } else {
+    if (this.#trigger === 'manual' || this.#isReadOnly || this.host.disabled) {
       this.host.removeEventListener('click', this.#triggerCommand);
+    } else {
+      this.host.addEventListener('click', this.#triggerCommand);
     }
   }
 
-  #triggerCommand = () => {
-    if ((this.host.commandfor || this.host.commandForElement) && globalThis.CommandEvent) {
-      const match = getFlattenedDOMTree(this.host.getRootNode() as HTMLElement).find(
-        el => el.id === this.host.commandfor || el === this.host.commandForElement
-      );
-      if (!match) {
-        console.warn('commandForElement', this.host.commandfor || this.host.commandForElement, 'not found');
-      } else {
-        match.dispatchEvent(new globalThis.CommandEvent('command', { command: this.host.command, source: this.host }));
-      }
+  #triggerCommand = (event: Event) => {
+    if (event.defaultPrevented) {
+      return;
     }
+
+    this.dispatchCommand();
   };
+
+  dispatchCommand() {
+    if (this.#isReadOnly || this.host.disabled || !this.host.command) {
+      return false;
+    }
+
+    const target = this.target;
+    if (!target) {
+      if (this.host.commandfor || this.host.commandForElement) {
+        console.warn('commandForElement', this.host.commandfor || this.host.commandForElement, 'not found');
+      }
+      return false;
+    }
+
+    target.dispatchEvent(new globalThis.CommandEvent('command', { command: this.host.command, source: this.host }));
+    return true;
+  }
+}
+
+export interface TypeCommandControllerOptions {
+  trigger?: 'click' | 'manual';
 }

@@ -7,9 +7,9 @@ import { property } from 'lit/decorators/property.js';
 import { state } from 'lit/decorators/state.js';
 import { when } from 'lit/directives/when.js';
 import { queryAssignedElements } from 'lit/decorators/query-assigned-elements.js';
+import { ButtonFormControlMixin } from '@nvidia-elements/forms/mixins';
 import type { KeynavListConfig, Container } from '@nvidia-elements/core/internal';
 import {
-  BaseButton,
   stateSelected,
   useStyles,
   keyNavigationList,
@@ -43,7 +43,7 @@ import { ProgressRing } from '@nvidia-elements/core/progress-ring';
 @audit()
 @scopedRegistry()
 @stateSelected<StepsItem>()
-export class StepsItem extends BaseButton {
+export class StepsItem extends ButtonFormControlMixin(LitElement) {
   /**
    * Determines which item the user selects, defaults to false.
    */
