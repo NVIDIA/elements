@@ -1,3 +1,13 @@
+## 0.2.0 (2026-05-28)
+
+* chore(lint): add combobox api check ([71a34ef](https://github.com/NVIDIA/elements/commit/71a34ef))
+* chore(release): @nvidia-elements/cli-v0.2.2 [skip ci] ([c037db6](https://github.com/NVIDIA/elements/commit/c037db6))
+* chore(release): @nvidia-elements/cli-v0.2.3 [skip ci] ([0c1812f](https://github.com/NVIDIA/elements/commit/0c1812f))
+* feat(core): introduce tag layout options and patterns ([c961584](https://github.com/NVIDIA/elements/commit/c961584))
+* fix(ci): ensure node is available in agent sandbox ([27f7bd1](https://github.com/NVIDIA/elements/commit/27f7bd1))
+* fix(cli): broken default binary path ([368e6fe](https://github.com/NVIDIA/elements/commit/368e6fe))
+* fix(docs): add missing mcp apps and custom elements manifest docs ([56d8415](https://github.com/NVIDIA/elements/commit/56d8415))
+
 ## <small>0.1.4 (2026-05-21)</small>
 
 * fix(cli): binary version support ([39106f1](https://github.com/NVIDIA/elements/commit/39106f1))
