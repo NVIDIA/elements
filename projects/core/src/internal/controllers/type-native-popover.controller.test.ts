@@ -811,6 +811,48 @@ describe('type-popover.controller - interest invoker support', () => {
     await new Promise(r => setTimeout(r, 60));
     expect(element.matches(':popover-open')).toBe(false);
   });
+
+  it('should cancel delayed show when the popover closes before delay completes', async () => {
+    element.openDelay = 50;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await open).toBeDefined();
+
+    const interestEvent = new Event('interest', { cancelable: true }) as Event & { source: HTMLElement };
+    interestEvent.source = button;
+    element.dispatchEvent(interestEvent);
+    await elementIsStable(element);
+
+    const close = untilEvent(element, 'close');
+    element.hidePopover();
+    expect(await close).toBeDefined();
+
+    await new Promise(r => setTimeout(r, 60));
+    expect(element.matches(':popover-open')).toBe(false);
+  });
+
+  it('should cancel delayed show when the popover receives hide-popover before delay completes', async () => {
+    element.openDelay = 50;
+    await elementIsStable(element);
+
+    const open = untilEvent(element, 'open');
+    element.showPopover();
+    expect(await open).toBeDefined();
+
+    const interestEvent = new Event('interest', { cancelable: true }) as Event & { source: HTMLElement };
+    interestEvent.source = button;
+    element.dispatchEvent(interestEvent);
+    await elementIsStable(element);
+
+    const close = untilEvent(element, 'close');
+    element.dispatchEvent(new CommandEvent('command', { command: 'hide-popover', source: button }));
+    expect(await close).toBeDefined();
+
+    await new Promise(r => setTimeout(r, 60));
+    expect(element.matches(':popover-open')).toBe(false);
+  });
 });
 
 describe('type-popover.controller - showPopover source fallback', () => {

@@ -96,6 +96,10 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
         setTimeout(() => this.host.hidePopover(), this.host.closeTimeout);
       }
 
+      if (e.newState === 'closed') {
+        this.#clearInterestTimeout();
+      }
+
       this.host.inert = this.host.matches(':not(:popover-open)');
 
       if (this.host.modal) {
@@ -119,6 +123,7 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
       if (e.command === 'hide-popover') {
         this.host.hidePopover();
+        this.#clearInterestTimeout();
       }
 
       if (e.command === 'show-popover') {
@@ -167,7 +172,10 @@ export class TypeNativePopoverController<T extends NativePopover> implements Rea
 
   hostDisconnected() {
     this.#observers.forEach(observer => observer.disconnect());
+    this.#clearInterestTimeout();
+  }
 
+  #clearInterestTimeout() {
     if (this.#interestTimeout) {
       clearTimeout(this.#interestTimeout);
       this.#interestTimeout = null;
