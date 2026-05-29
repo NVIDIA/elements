@@ -5,10 +5,10 @@ Copyright 2024-2026 NVIDIA Corporation
 
 This project includes the following bundled third-party software:
 
-- lit v3.3.2 [BSD-3-Clause]
+- lit v3.3.3 [BSD-3-Clause]
   Copyright: Google LLC
 
-- markdown-it v14.1.1 [MIT]
+- markdown-it v14.2.0 [MIT]
   Copyright: Unknown
 
 ==============================================================================
@@ -17,7 +17,7 @@ BSD-3-Clause
 
 The following bundled components are provided under the BSD-3-Clause license:
 
-lit v3.3.2 - Copyright Google LLC
+lit v3.3.3 - Copyright Google LLC
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -50,7 +50,7 @@ MIT
 
 The following bundled components are provided under the MIT license:
 
-markdown-it v14.1.1 - Copyright Unknown
+markdown-it v14.2.0 - Copyright Unknown
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

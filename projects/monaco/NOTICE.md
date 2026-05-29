@@ -5,10 +5,10 @@ Copyright 2024-2026 NVIDIA Corporation
 
 This project includes the following bundled third-party software:
 
-- lit v3.3.2 [BSD-3-Clause]
+- lit v3.3.3 [BSD-3-Clause]
   Copyright: Google LLC
 
-- lit-html v3.3.2 [BSD-3-Clause]
+- lit-html v3.3.3 [BSD-3-Clause]
   Copyright: Google LLC
 
 - monaco-editor v0.55.1 [MIT]
@@ -20,8 +20,8 @@ BSD-3-Clause
 
 The following bundled components are provided under the BSD-3-Clause license:
 
-lit v3.3.2 - Copyright Google LLC
-lit-html v3.3.2 - Copyright Google LLC
+lit v3.3.3 - Copyright Google LLC
+lit-html v3.3.3 - Copyright Google LLC
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

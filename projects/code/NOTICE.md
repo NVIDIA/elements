@@ -8,10 +8,10 @@ This project includes the following bundled third-party software:
 - highlight.js v11.11.1 [BSD-3-Clause]
   Copyright: Josh Goebel <hello@joshgoebel.com>
 
-- lit v3.3.2 [BSD-3-Clause]
+- lit v3.3.3 [BSD-3-Clause]
   Copyright: Google LLC
 
-- lit-html v3.3.2 [BSD-3-Clause]
+- lit-html v3.3.3 [BSD-3-Clause]
   Copyright: Google LLC
 
 ==============================================================================
@@ -21,8 +21,8 @@ BSD-3-Clause
 The following bundled components are provided under the BSD-3-Clause license:
 
 highlight.js v11.11.1 - Copyright Josh Goebel <hello@joshgoebel.com>
-lit v3.3.2 - Copyright Google LLC
-lit-html v3.3.2 - Copyright Google LLC
+lit v3.3.3 - Copyright Google LLC
+lit-html v3.3.3 - Copyright Google LLC
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:

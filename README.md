@@ -1,11 +1,15 @@
-# Elements
+# NVIDIA Elements
 
-The Design Language for AI/ML Factories Building at the Speed of Light
+The Design System and UI Agent Harness for AI/ML Factories, Robotics, and Autonomous Vehicles.
 
-- [Elements Documentation](https://NVIDIA.github.io/elements/)
+- **Agent-ready tooling:** CLI and MCP expose component APIs, tokens, examples, imports, validation, and setup to terminals and AI assistants.
+- **Framework agnostic:** Web Components run in React, Angular, Vue, Svelte, Lit, plain HTML, server-rendered templates, and mixed stacks.
+- **Built for AI infrastructure:** Operational UI for AI/ML workloads, autonomous vehicle tools, and robotics consoles.
+- **Stable API contracts:** Skills and lint guide authoring best practices, common UI patterns, and automated static analysis.
 
 ## Requests and Contributions
 
+- [NVIDIA Elements Documentation](https://NVIDIA.github.io/elements/)
 - [Contribution Guidelines](https://NVIDIA.github.io/elements/docs/about/contributions/)
 - [Feature request](https://github.com/NVIDIA/elements/issues/new?issuable_template=feature)
 - [Bug report](https://github.com/NVIDIA/elements/issues/new?issuable_template=default)
@@ -27,10 +31,13 @@ Examples of projects include:
 
 ### Setup
 
-To setup repository dependencies and run the full build, run the following commands at the **root** of the repository:
+To set up repository dependencies and run the full build, run the following commands at the **root** of the repository:
 
 ```shell
 # install required dependencies
+brew install git-lfs
+git lfs install
+git lfs pull
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 . ~/.nvm/nvm.sh
 nvm install
@@ -49,11 +56,11 @@ pnpm run ci
 
 If you are coming from development from a different repository, you may need to install a new version of node in `nvm`. If you see an error message to this effect, [refer to the nvm docs](https://github.com/nvm-sh/nvm?tab=readme-ov-file#usage) for installing the missing node version and for directions on switching between versions of `node` using `nvm`. Once `nvm` is installed you can switch to the repository defined node and pnpm versions by re-running the [setup/install step](#setup) above.
 
-If you actively work/switch between different repositories run `nvm use && corepack prepare --activate` in the root of the project to ensure use of the correct node/pnpm version.
+If you actively switch between different repositories, run `nvm use && corepack prepare --activate` in the root of the project to ensure use of the correct node/pnpm version.
 
 ### Building
 
-Both the top-level repository and each project has a set of standardized npm scripts. To build and test all projects run `pnpm run ci` at the root of repository.
+Both the top-level repository and each project have a set of standardized npm scripts. To build and test all projects, run `pnpm run ci` at the root of the repository.
 
 #### Top-Level Repository
 
@@ -63,6 +70,8 @@ Both the top-level repository and each project has a set of standardized npm scr
 
 #### Individual Projects
 
+Common project scripts include:
+
 - `dev`: run in watch mode
 - `build`: run project/library build
 - `test`: run unit tests
@@ -70,7 +79,9 @@ Both the top-level repository and each project has a set of standardized npm scr
 - `test:visual`: run playwright visual regression tests
 - `test:axe`: run axe tests for a11y
 
-To learn in detail how the repo is built and run see our [build README.md](https://github.com/NVIDIA/elements/blob/main/build/README.md).
+The available scripts vary by project. Check the project's `package.json` before running project-specific commands.
+
+To learn in detail how the repo is built and run see our [build system documentation](https://github.com/NVIDIA/elements/blob/main/projects/internals/BUILD.md).
 
 ## Workflow
 
@@ -78,7 +89,7 @@ Before creating a branch or pull request be sure to make a [new issue or feature
 
 ### Create a Branch
 
-Use a descriptive branch name with a prefix. Example `feature/bug-fix`.
+Use a descriptive branch name with the `topic/` prefix. Example `topic/bug-fix`.
 
 ```shell
 git checkout -b topic/bug-fix
@@ -91,7 +102,7 @@ Once your branch is created, make your source code changes. Once your changes ar
 The repo uses [Semantic Release](https://semantic-release.gitbook.io/semantic-release/) to manage package changes. Commit messages determine the type of release on merge. [Commit Lint](https://commitlint.js.org/) will enforce and catch any formatting issues in commits.
 
 ```shell
-git commit -a -m "fix(core): disabled multi-select"
+git commit -a -m "fix(core): disable multi-select" -m "Signed-off-by: Your Name <you@example.com>"
 ```
 
 [Example Commit](https://github.com/NVIDIA/elements/commit/990d8f43a4a055c2f1ca1a6aa0af39f099d04649)
@@ -102,16 +113,25 @@ git commit -a -m "fix(core): disabled multi-select"
 | `feat`  | new features, components, APIs                                  |
 | `chore` | non production code modifications, build tooling, documentation |
 
-| Scopes                       | Description                   |
-| ---------------------------- | ----------------------------- |
-| `ci`                         | `/projects/internals`         |
-| `starters`                   | `/projects/starters`          |
-| `elements`                   | `/projects/core`          |
-| `themes`                     | `/projects/themes`            |
-| `monaco`                     | `/projects/monaco`            |
-| `labs-cli`                   | `/cli`                        |
-| `labs-code`                  | `/code`                       |
-| `forms`                      | `/projects/forms`             |
+| Scopes      | Description                    |
+| ----------- | ------------------------------ |
+| `ci`        | CI and release automation      |
+| `cli`       | `/projects/cli`                |
+| `code`      | `/projects/code`               |
+| `core`      | `/projects/core`               |
+| `create`    | `/projects/create`             |
+| `deps`      | dependency updates             |
+| `docs`      | documentation and site content |
+| `forms`     | `/projects/forms`              |
+| `internals` | `/projects/internals`          |
+| `lint`      | `/projects/lint`               |
+| `markdown`  | `/projects/markdown`           |
+| `media`     | `/projects/media`              |
+| `monaco`    | `/projects/monaco`             |
+| `pages`     | `/projects/pages`              |
+| `starters`  | `/projects/starters`           |
+| `styles`    | `/projects/styles`             |
+| `themes`    | `/projects/themes`             |
 
 Keep commit names focused on the changes you are making as the commit message is what is used to determine the next release and generated changelog notes.
 
@@ -123,7 +143,7 @@ Once you have committed your changes to your branch locally, push them to the re
 git push --set-upstream origin topic/bug-fix
 ```
 
-Open a new [Pull Request](https://github.com/NVIDIA/elements/pulls) in GitHub. Request review from the team members and apply the appropriate labels it the GitHub UI for example, `type:fix` and `scope:elements`.
+Open a new [Pull Request](https://github.com/NVIDIA/elements/pulls) in GitHub. Request review from the team members and apply the appropriate labels in the GitHub UI, for example, `type:fix` and `scope(core)`.
 
 #### Amending Commit
 

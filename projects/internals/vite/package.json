@@ -29,7 +29,7 @@
     "parse5": "7.1.2",
     "pixelmatch": "6.0.0",
     "pngjs": "7.0.0",
-    "rollup": "4.59.0",
+    "rollup": "4.60.4",
     "rollup-plugin-html-literals": "catalog:",
     "rollup-plugin-visualizer": "7.0.1",
     "ts-morph": "catalog:",
