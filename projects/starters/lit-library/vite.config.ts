@@ -1,55 +1,53 @@
-import fs from 'fs';
-import path from 'path';
-import process from 'process';
+import fs from 'node:fs';
+import { resolve as resolvePath } from 'node:path';
+import process from 'node:process';
 import { defineConfig } from 'vite';
 import minifyHTML from 'rollup-plugin-html-literals';
 import dts from 'vite-plugin-dts';
 import { globSync } from 'glob';
 
-const packageFile = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url)) as any);
-const resolve = rel => path.resolve(process.cwd(), rel);
+const getAbsolutePath = (file: string) => resolvePath(process.cwd(), file);
+const packageFile = JSON.parse(fs.readFileSync(getAbsolutePath('./package.json'), 'utf-8'));
 const index = process.argv.findIndex(i => i === '--outDir') + 1;
 const dist = (p = '') => `${index ? process.argv[index] : './dist'}/${p}`;
+const prod = process.env.NODE_ENV === 'production';
 
-export default defineConfig(env => {
-  const mode = env.mode as 'production' | 'watch' | 'test' | 'development';
-
+export default defineConfig(({ mode }) => {
   return {
     resolve: {
       alias: {
-        'lit-library-starter': resolve('./src')
+        'lit-library-starter': getAbsolutePath('./src')
       }
     },
     plugins: [
       {
         ...dts({
-          root: resolve('.'),
-          entryRoot: resolve('./src'),
-          outDir: dist(),
-          exclude: ['**/*.test.ts', '**/*.examples.ts']
+          root: getAbsolutePath('.'),
+          entryRoot: getAbsolutePath('./src'),
+          exclude: ['**/*.test.ts', '**/*.test.*.ts', '**/*.examples.ts']
         }),
         enforce: 'pre'
       }
     ],
     build: {
+      reportCompressedSize: false,
       cssCodeSplit: true,
       minify: true,
       watch: mode === 'watch' ? {} : undefined,
       outDir: dist(),
-      emptyOutDir: false,
-      sourcemap: true,
+      emptyOutDir: true,
+      sourcemap: prod,
       target: 'esnext',
       lib: {
-        entry: {
-          index: resolve('./src/index.ts'),
-          ...globSync('./src/**/define.ts').reduce((p, i) => {
-            // all component entrypoints
-            return { ...p, [i.replace('src/', '').replace('.ts', '')]: resolve(i) };
-          }, {})
-        }
+        entry: Object.fromEntries(
+          [
+            './src/index.ts',
+            ...globSync('./src/**/index.ts', { ignore: ['./src/index.ts'] }),
+            ...globSync('./src/**/define.ts')
+          ].map(file => [file.replace(/^\.?\/?src\//, '').replace(/\.ts$/, ''), getAbsolutePath(file)])
+        )
       },
       rolldownOptions: {
-        treeshake: false,
         preserveEntrySignatures: 'strict',
         external: [
           ...Object.keys(packageFile.dependencies || {}),
@@ -64,7 +62,7 @@ export default defineConfig(env => {
             entryFileNames: '[name].js'
           }
         ],
-        plugins: [mode === 'production' ? minifyHTML() : false]
+        plugins: [prod ? minifyHTML() : false]
       }
     }
   };

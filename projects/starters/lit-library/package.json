@@ -64,14 +64,12 @@
     "lit": "catalog:"
   },
   "peerDependencies": {
-    "@nvidia-elements/core": "workspace:*"
+    "@nvidia-elements/core": "workspace:^"
   },
   "devDependencies": {
-    "@internals/vite": "workspace:*",
     "@nvidia-elements/core": "workspace:*",
     "@nvidia-elements/styles": "workspace:*",
     "@nvidia-elements/themes": "workspace:*",
-    "@internals/testing": "workspace:*",
     "@nvidia-elements/lint": "workspace:*",
     "@vitest/browser": "catalog:",
     "@vitest/browser-playwright": "catalog:",
@@ -101,6 +99,7 @@
         "src/**",
         "!src/**/*.examples.ts",
         "!src/**/*.test.ts",
+        "!src/**/*.test.*.ts",
         "package.json",
         "tsconfig.lib.json",
         "vite.config.ts"
@@ -132,8 +131,7 @@
       ],
       "output": [],
       "dependencies": [
-        "build",
-        "../../internals/testing:build"
+        "build"
       ]
     },
     "test:watch": {

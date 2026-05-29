@@ -1,6 +1,5 @@
-import { html } from 'lit';
+import { html, render, type TemplateResult } from 'lit';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
-import { createFixture, elementIsStable, removeFixture } from '@internals/testing';
 import type { DomainLogin } from 'lit-library-starter/login';
 import 'lit-library-starter/login/define.js';
 
@@ -62,3 +61,22 @@ describe('domain-login', () => {
     expect(element.validity.patternMismatch).toBe(true);
   });
 });
+
+async function createFixture(template: TemplateResult) {
+  const fixture = document.createElement('div');
+  document.body.append(fixture);
+  render(template, fixture);
+  await customElements.whenDefined('domain-login');
+  return fixture;
+}
+
+function removeFixture(fixture: HTMLElement) {
+  fixture.remove();
+}
+
+async function elementIsStable(element: DomainLogin, attemptsRemaining = 10): Promise<void> {
+  if (await element.updateComplete) return;
+  if (attemptsRemaining > 0) return elementIsStable(element, attemptsRemaining - 1);
+
+  throw new Error('Element did not stabilize');
+}
