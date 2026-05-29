@@ -105,6 +105,22 @@ const integrations = {
       type: 'lit'
     })
   },
+  'lit-library': {
+    logo: 'lit',
+    starterDemo: null,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/lit-library.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/lit-library`,
+    documentation: 'https://lit.dev',
+    playgroundURL: null
+  },
+  'mcp-app': {
+    logo: 'javascript',
+    starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/mcp-app/`,
+    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/mcp-app.zip`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/mcp-app`,
+    documentation: 'https://apps.extensions.modelcontextprotocol.io/api/',
+    playgroundURL: null
+  },
   nextjs: {
     logo: 'nextjs',
     starterDemo: null,

@@ -47,12 +47,12 @@
     "nve:uninstall:node": "pnpm uninstall --global @nvidia-elements/cli"
   },
   "dependencies": {
-    "@inquirer/prompts": "8.4.2",
+    "@inquirer/prompts": "8.5.0",
     "@modelcontextprotocol/sdk": "1.29.0",
     "@nvidia-elements/code": "workspace:*",
     "@nvidia-elements/lint": "workspace:^",
     "adm-zip": "0.5.17",
-    "archiver": "7.0.1",
+    "archiver": "8.0.0",
     "marked": "18.0.3",
     "marked-terminal": "7.3.0",
     "open": "11.0.0",
@@ -68,7 +68,7 @@
     "@vitest/coverage-istanbul": "catalog:",
     "@types/node": "catalog:",
     "@types/yargs": "17.0.35",
-    "bun": "1.3.13",
+    "bun": "1.3.14",
     "eslint": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",

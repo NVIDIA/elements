@@ -167,7 +167,7 @@ export function renderIntegrationShortcode(integration) {
       ? /* html */ `
   <nve-button>
     ${svgLogoShortcode(integrationData.logo, '18')}
-    <a target="_blank" href="${integrationData.starterSource}">Documentation</a>
+    <a target="_blank" href="${integrationData.documentation}">Documentation</a>
   </nve-button>`
       : ''
   }

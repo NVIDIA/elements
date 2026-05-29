@@ -70,7 +70,7 @@ export const startersData = {
   },
   'lit-library': {
     zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/lit-library.zip`,
-    cli: false
+    cli: true
   },
   lit: {
     zip: null,
@@ -117,6 +117,7 @@ export async function archiveStarter(projectDir: string, outDir: string) {
   writeAllAgentConfigs(dist);
   const packageJSON = await exportPackageFromWorkspace(projectDir);
   await writeFile(join(dist, 'package.json'), JSON.stringify(packageJSON, undefined, 2));
+  await writeFile(join(dist, '.npmrc'), 'registry=https://registry.npmjs.org/');
   await zipProject(dist);
 }
 
