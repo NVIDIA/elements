@@ -7,6 +7,7 @@ This directory contains a suite of standardized starter apps for kickstarting an
 - `/bundles` - Minimal tooling example leveraging pre-built JS/CSS bundles.
 - `/extensions` - Build setup for highly reusable and resilient Web Components.
 - `/go` - Minimal Go web server leveraging Elements pre-built bundles.
+- `/mcp-app` - Minimal MCP App using Elements, TypeScript, and Vite.
 - `/mpa` - Multi Page App setup for when you just need something simple.
 - `/nextjs` - Experimental NextJS demo.
 - `/react` - React app built with [Create React App](https://create-react-app.dev/)

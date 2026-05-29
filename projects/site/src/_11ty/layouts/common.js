@@ -146,8 +146,9 @@ export const renderDocsNav = data => /* html */ `
   <nve-tree-node ${data.page.url.includes('/docs/integrations/') || data.page.url.includes('/starters/') || data.page.url.includes('/docs/cli/') || data.page.url.includes('/docs/mcp/') || data.page.url.includes('/docs/lint/') || data.page.url.includes('/docs/testing/') ? 'expanded' : ''}>
     <a href="docs/integrations/installation/">Integrations</a>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/installation/') ? 'highlighted selected' : ''}><a href="docs/integrations/installation/">Installation</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'highlighted selected' : ''}><a href="docs/mcp/">MCP</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'highlighted selected' : ''}><a href="docs/cli/">CLI</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'highlighted selected' : ''}><a href="docs/mcp/">MCP</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/mcp-apps/') ? 'highlighted selected' : ''}><a href="docs/integrations/mcp-apps/">MCP Apps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'highlighted selected' : ''}><a href="docs/lint/">Lint</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted selected' : ''}><a href="docs/integrations/angular/">Angular</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'highlighted selected' : ''}><a href="docs/integrations/bundles/">Bundles</a></nve-tree-node>

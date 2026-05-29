@@ -9,6 +9,7 @@ packages:
   - projects/starters/hugo
   - projects/starters/importmaps
   - projects/starters/lit-library
+  - projects/starters/mcp-app
   - projects/starters/mpa
   - projects/starters/nextjs
   - projects/starters/nuxt
@@ -127,6 +128,7 @@ minimumReleaseAgeExclude:
   - vite
 
 allowBuilds:
+  '@modelcontextprotocol/ext-apps': true
   '@bundled-es-modules/glob': true
   '@parcel/watcher': true
   bun: true

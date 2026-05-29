@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" nve-theme="dark" nve-transition="auto">
+  <head>
+    <title>NVIDIA Elements MCP App</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A minimal MCP App using NVIDIA Elements." />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+  </head>
+  <body>
+    <nve-page document-scroll>
+      <nve-page-header slot="header">
+        <nve-logo slot="prefix" size="sm" color="brand-green">NV</nve-logo>
+        <h2 slot="prefix" nve-text="heading sm">MCP App</h2>
+      </nve-page-header>
+      <main nve-layout="column gap:lg pad:lg align:left">
+        <h1 nve-text="heading xl">Hello from Elements</h1>
+        <p nve-text="body">This view is rendered from an MCP tool resource.</p>
+        <nve-alert status="success"><span id="greeting">Waiting for the first tool result.</span></nve-alert>
+        <nve-button id="refresh-greeting" type="button">Refresh greeting</nve-button>
+      </main>
+    </nve-page>
+    <script type="module" src="/src/mcp-app.ts"></script>
+  </body>
+</html>

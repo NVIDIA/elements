@@ -42,6 +42,17 @@ export function render(data) {
       </div>
     </nve-card>
   </a>
+  <a href="starters/mcp-app/">
+    <nve-card>
+      <div nve-layout="row gap:sm align:vertical-center">
+        <nve-logo color="brand-green" size="lg">MCP</nve-logo>
+        <div nve-layout="column pad:xs gap:xs">
+          <h2 nve-text="label medium">MCP App</h2>
+          <p nve-text="body sm muted">Starter for a minimal MCP App using Elements.</p>
+        </div>
+      </div>
+    </nve-card>
+  </a>
   <a href="starters/mpa/">
     <nve-card>
       <div nve-layout="row gap:sm align:vertical-center">

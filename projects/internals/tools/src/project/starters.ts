@@ -28,6 +28,7 @@ export type Starter =
   | 'importmaps'
   | 'lit-library'
   | 'lit'
+  | 'mcp-app'
   | 'nextjs'
   | 'nuxt'
   | 'preact'
@@ -75,6 +76,10 @@ export const startersData = {
   lit: {
     zip: null,
     cli: false
+  },
+  'mcp-app': {
+    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/mcp-app.zip`,
+    cli: true
   },
   nextjs: {
     zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/nextjs.zip`,
@@ -135,7 +140,7 @@ async function zipProject(outDir: string) {
 
 /* istanbul ignore next -- @preserve */
 function copyProject(projectDir: string) {
-  const ignoreDirs = new Set(['dist', 'node_modules', '.wireit']);
+  const ignoreDirs = new Set(['dist', 'node_modules', '.wireit', '.eslintcache']);
   cpSync(projectDir, join('dist', projectDir), {
     recursive: true,
     filter: src => !ignoreDirs.has(basename(src))
