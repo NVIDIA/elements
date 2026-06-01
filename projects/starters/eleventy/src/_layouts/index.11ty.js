@@ -26,7 +26,7 @@ export function render(data) {
               <nve-page-panel-content>
                 <nve-menu>
                   <nve-menu-item><a target="_blank" href="https://NVIDIA.github.io/elements/docs/integrations/eleventy/">Documentation</a></nve-menu-item>
-                  <nve-menu-item><a target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/eleventy">Source</a></nve-menu-item>
+                  <nve-menu-item><a target="_blank" href="https://github.com/NVIDIA/elements/tree/main/projects/starters/eleventy">Source</a></nve-menu-item>
                   <nve-menu-item><a download href="https://NVIDIA.github.io/elements/starters/download/eleventy.zip">Download</a></nve-menu-item>
                 </nve-menu>
               </nve-page-panel-content>

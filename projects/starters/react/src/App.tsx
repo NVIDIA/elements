@@ -20,7 +20,7 @@ function App() {
         <nve-page-panel-content>
           <nve-menu>
             <nve-menu-item><a target="_blank" href="https://NVIDIA.github.io/elements/docs/integrations/react/">Documentation</a></nve-menu-item>
-            <nve-menu-item><a target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/react">Source</a></nve-menu-item>
+            <nve-menu-item><a target="_blank" href="https://github.com/NVIDIA/elements/tree/main/projects/starters/react">Source</a></nve-menu-item>
             <nve-menu-item><a download href="https://NVIDIA.github.io/elements/starters/download/react.zip">Download</a></nve-menu-item>
           </nve-menu>
         </nve-page-panel-content>
@@ -33,7 +33,7 @@ function App() {
         <p nve-text="body">A simple starter using Elements and React.</p>
         <div nve-layout="row gap:xs">
           <a nve-text="body sm" target="_blank" href="https://NVIDIA.github.io/elements/docs/integrations/react/">Documentation</a>
-          <a nve-text="body sm" target="_blank" href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/react">Source</a>
+          <a nve-text="body sm" target="_blank" href="https://github.com/NVIDIA/elements/tree/main/projects/starters/react">Source</a>
           <a nve-text="body sm" download href="https://NVIDIA.github.io/elements/starters/download/react.zip">Download</a>
         </div>
       </main>

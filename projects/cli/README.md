@@ -1,6 +1,6 @@
 # @nvidia-elements/cli
 
-The **@nvidia-elements/cli** is a dual-mode command-line tool for the Elements Design System that provides both interactive CLI commands and a Model Context Protocol (MCP) server for AI assistant integration.
+The **@nvidia-elements/cli** is a dual-mode command-line tool for the Elements Design System. It provides interactive CLI commands and a Model Context Protocol (MCP) server for AI assistant integration.
 
 ## Purpose
 
@@ -9,10 +9,12 @@ This package serves two primary modes:
 1. **Interactive CLI (`nve` command)** - Command-line interface with interactive prompts for:
    - Component API discovery and search
    - Example template browsing and searching
-   - Playground creation and validation
+   - Template linting and validation
    - Project scaffolding and health checks
    - Changelog and version information
    - Design token access
+   - Icon name lookup
+   - Bundled agent skill access
 
 2. **MCP Server (`nve mcp` command)** - Model Context Protocol server that:
    - Exposes all CLI tools to AI assistants (Claude, Cursor, etc.)
@@ -22,49 +24,65 @@ This package serves two primary modes:
 
 ## Getting Started
 
-To use the Elements CLI you must have [NodeJS](https://nodejs.org/) installed.
+The best way to get started is to run the install script.
+
+```shell
+curl -fsSL https://nvidia.github.io/elements/install.sh | bash
+```
+
+Alternatively you can install with [Node.js](https://nodejs.org/) and npm.
 
 ```shell
 npm install -g @nvidia-elements/cli
-
-nve
 ```
 
 ## Usage
 
-| Command                                                           | Description                                                                                        |
-| ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `nve api.list [format]`                                           | Get list of all available Elements (nve-*) APIs and components.                                    |
-| `nve api.search [query] [format]`                                 | Search and retrieve a list of Elements (nve-*) components and APIs using keywords.                 |
-| `nve api.get [names] [format]`                                    | Get documentation known components or attributes by name (nve-*).                                  |
-| `nve api.template.validate [template]`                            | Validates HTML templates using Elements APIs and components (nve-*).                               |
-| `nve api.imports.get [template]`                                  | Get esm imports for a given HTML template using Elements APIs (nve-*).                             |
-| `nve api.tokens.list [format]`                                    | Get available semantic CSS custom properties / design tokens for theming.                                   |
-| `nve packages.list`                                               | Get latest published versions of all Elements packages.                                            |
-| `nve packages.get [name]`                                         | Get details for a specific Elements package.                                                       |
-| `nve packages.changelogs.get [name] [format]`                     | Retrieve changelog details by package name.                                                        |
-| `nve examples.list [format]`                                      | Get list of available Elements (nve-*) patterns and examples.                                      |
-| `nve playground.validate [template]`                              | Validates HTML templates specifically for playground examples.                                      |
-| `nve playground.create [template] [type] [name] [author]` | Create a shareable playground URL from an HTML template.                                           |
-| `nve project.create [type] [cwd] [start]`                         | Create a new starter project.                                                                      |
-| `nve project.validate [type] [cwd]`                               | Check project for configuration issues and dependencies.                                 |
-| `nve project.setup [cwd]`                                         | Setup or update a project to use Elements.                                                         |
+| Command                                                          | Description                                                                            |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `nve`                                                            | Show About and help output.                                                            |
+| `nve api.list [format]`                                          | Get a list of all available Elements (`nve-*`) APIs and components.                    |
+| `nve api.get <names> [format]`                                   | Get documentation for known components or attributes by name (`nve-*`).                |
+| `nve api.template.validate <template>`                           | Check HTML templates using Elements APIs and components (`nve-*`).                     |
+| `nve api.imports.get <template>`                                 | Get ESM imports for an HTML template using Elements APIs (`nve-*`).                    |
+| `nve api.tokens.list [format] [query]`                           | Get available semantic CSS custom properties and design tokens for theming.            |
+| `nve api.icons.list [format]`                                    | Get available icon names for `nve-icon` and `nve-icon-button`.                         |
+| `nve examples.list [format]`                                     | Get available Elements (`nve-*`) starter templates, patterns, and examples.            |
+| `nve examples.get <id> [format]`                                 | Get the full template of a known example or pattern by ID.                             |
+| `nve project.create <type> [cwd] [start]`                        | Create a new starter project.                                                          |
+| `nve project.setup [cwd]`                                        | Set up or update a project to use Elements.                                            |
+| `nve project.validate <type> [cwd]`                              | Check project configuration and dependencies.                                          |
+| `nve packages.list`                                              | Get latest published versions of all Elements packages.                                |
+| `nve packages.get <name>`                                        | Get details for a specific Elements package.                                           |
+| `nve packages.changelogs.get <name> [format] [limit]`            | Retrieve changelog details by package name.                                            |
+| `nve skills.list [format]`                                       | Get available Elements agent skills and context.                                       |
+| `nve skills.get <name> [format]`                                 | Get a bundled Elements agent skill by name.                                            |
+| `nve mcp`                                                        | Start the MCP server.                                                                  |
+
+### Global Options
+
+| Option      | Description                                      |
+| ----------- | ------------------------------------------------ |
+| `--help`    | Show help.                                       |
+| `--version` | Show version number.                             |
+| `--upgrade` | Upgrade Elements CLI (`nve`) to the latest version. |
+| `--debug`   | Enable debug output for tools.                   |
 
 ## MCP
 
 ### Quick Setup
 
-The fastest way to configure MCP is with the `setup` command:
+The fastest way to configure MCP is with the `project.setup` command:
 
 ```shell
 nve project.setup
 ```
 
-This detects your package manager, configures the MCP server for both Cursor, Codex, and Claude Code, and adds Elements core dependencies to the project.
+This detects your package manager, configures the MCP server for Cursor, Codex, and Claude Code, and adds Elements core dependencies to the project.
 
 ### Claude Code
 
-Install to Claude Code by adding the configuration to your `.mcp.json` file. Add the following configuration to your `.mcp.json` file (typically located at `~/.config/claude-code/.mcp.json` or `%APPDATA%\claude-code\.mcp.json` on Windows):
+Install to Claude Code by adding the configuration to your `.mcp.json` file. The file is typically located at `~/.config/claude-code/.mcp.json` or `%APPDATA%\claude-code\.mcp.json` on Windows.
 
 ```json
 {
@@ -103,9 +121,8 @@ Install to Cursor with the MCP configuration below.
 | ------ | ----------- | -------------- |
 | `/about` | A brief introduction to Elements | `/about` |
 | `/doctor` | Verify Elements setup and MCP configuration | `/doctor` |
-| `/playground` | Context for creating playground prototypes | `/playground` Create an example login form |
 | `/search` | Context for searching Elements APIs | `/search` What works for notifying a user of a long running process? |
-| `/new-project` | Context for creating a new Elements project. | `/new-project` Create an Angular todo app |
+| `/new-project` | Context for creating a new Elements project | `/new-project` Create a todo app |
 | `/migrate` | Context for migrating from deprecated Elements APIs | `/migrate` Migrate this project from deprecated Elements APIs |
 
 ### Skills
@@ -134,8 +151,6 @@ Skills provide persistent context to AI agents for building UI with Elements.
 | `examples_get` | Get the full template of a known example or pattern by id. |
 | `skills_list` | Get a list of available Elements agent skills and context fragments. |
 | `skills_get` | Get a bundled Elements agent skill or context fragment by name. |
-| `playground_validate` | Validates HTML templates specifically for playground examples. |
-| `playground_create` | Create a shareable playground URL from an HTML template. |
 | `project_create` | Create a new starter project. |
 | `project_validate` | Check project for configuration issues and dependencies. |
 | `project_setup` | Setup or update a project to use Elements. |

@@ -11,7 +11,7 @@ import { readWorkspaceManifest } from '@pnpm/workspace.read-manifest';
 import { getCatalogsFromWorkspaceManifest } from '@pnpm/catalogs.config';
 import { createExportableManifest } from '@pnpm/exportable-manifest';
 import { readProjectManifestOnly } from '@pnpm/read-project-manifest';
-import archiver from 'archiver';
+import { ZipArchive } from 'archiver';
 import AdmZip from 'adm-zip';
 import { isCommandAvailable, getNPMClient } from '../internal/node.js';
 import type { Report } from '../internal/types.js';
@@ -23,7 +23,6 @@ export type Starter =
   | 'angular'
   | 'bundles'
   | 'eleventy'
-  | 'extensions'
   | 'go'
   | 'importmaps'
   | 'lit-library'
@@ -52,10 +51,6 @@ export const startersData = {
   eleventy: {
     zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/eleventy.zip`,
     cli: true
-  },
-  extensions: {
-    zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/scoped-registry.zip`,
-    cli: false
   },
   go: {
     zip: `${ELEMENTS_PAGES_BASE_URL}/starters/download/go.zip`,
@@ -131,7 +126,7 @@ async function zipProject(outDir: string) {
   const output = createWriteStream(`${outDir}.zip`);
   output.on('error', err => console.error('Error writing to zip file:', err));
 
-  const archive = archiver('zip', { zlib: { level: 9 } });
+  const archive = new ZipArchive({ zlib: { level: 9 } });
   archive.pipe(output);
   archive.directory(outDir, false);
   await archive.finalize();

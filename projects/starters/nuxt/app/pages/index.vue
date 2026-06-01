@@ -10,7 +10,7 @@
     <a
       nve-text="body sm"
       target="_blank"
-      href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nuxt"
+      href="https://github.com/NVIDIA/elements/tree/main/projects/starters/nuxt"
       >Source</a
     >
     <a

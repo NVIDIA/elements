@@ -47,7 +47,7 @@ const integrations = {
     logo: 'angular',
     starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/angular/`,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/angular.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/angular`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/angular`,
     documentation: 'https://angular.dev',
     playgroundURL: await PlaygroundService.create({
       template: '<nve-alert status="success">Elements + Angular</nve-alert>',
@@ -58,23 +58,15 @@ const integrations = {
     logo: 'javascript',
     starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/bundles/`,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/bundles.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/bundles`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/bundles`,
     documentation: 'https://vite.dev',
-    playgroundURL: null
-  },
-  extensions: {
-    logo: 'javascript',
-    starterDemo: null,
-    starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/scoped-registry.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/scoped-registry`,
-    documentation: 'https://github.com/WICG/webcomponents/blob/gh-pages/proposals/Scoped-Custom-Element-Registries.md',
     playgroundURL: null
   },
   go: {
     logo: 'go',
     starterDemo: null,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/go.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/go`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/go`,
     documentation: 'https://go.dev',
     playgroundURL: null
   },
@@ -82,7 +74,7 @@ const integrations = {
     logo: 'hugo',
     starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/hugo/`,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/hugo.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/hugo`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/hugo`,
     documentation: 'https://gohugo.io',
     playgroundURL: null
   },
@@ -90,7 +82,7 @@ const integrations = {
     logo: 'javascript',
     starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/importmaps/`,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/importmaps.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/importmaps`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/importmaps`,
     documentation: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap',
     playgroundURL: null
   },
@@ -125,7 +117,7 @@ const integrations = {
     logo: 'nextjs',
     starterDemo: null,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/nextjs.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/nextjs`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/nextjs`,
     documentation: 'https://nextjs.org',
     playgroundURL: null
   },
@@ -133,7 +125,7 @@ const integrations = {
     logo: 'nuxt',
     starterDemo: null,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/nuxt.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/nuxt`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/nuxt`,
     documentation: 'https://nuxt.com/',
     playgroundURL: null
   },
@@ -152,7 +144,7 @@ const integrations = {
     logo: 'react',
     starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/react/`,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/react.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/react`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/react`,
     documentation: 'https://react.dev',
     playgroundURL: await PlaygroundService.create({
       template: '<nve-alert status="success">Elements + React</nve-alert>',
@@ -163,7 +155,7 @@ const integrations = {
     logo: 'solidjs',
     starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/solidjs/`,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/solidjs.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/solidjs`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/solidjs`,
     documentation: 'https://www.solidjs.com',
     playgroundURL: null
   },
@@ -171,7 +163,7 @@ const integrations = {
     logo: 'svelte',
     starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/svelte/`,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/svelte.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/svelte`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/svelte`,
     documentation: 'https://svelte.dev',
     playgroundURL: null
   },
@@ -179,7 +171,7 @@ const integrations = {
     logo: 'typescript',
     starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/typescript/`,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/typescript.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/typescript`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/typescript`,
     documentation: 'https://www.typescriptlang.org',
     playgroundURL: await PlaygroundService.create({
       template: '<nve-alert status="success">Elements</nve-alert>'
@@ -189,7 +181,7 @@ const integrations = {
     logo: 'vue',
     starterDemo: `${ELEMENTS_PAGES_BASE_URL}/starters/vue/`,
     starterDownload: `${ELEMENTS_PAGES_BASE_URL}/starters/download/vue.zip`,
-    starterSource: `${ELEMENTS_REPO_BASE_URL}/-/tree/main/projects/starters/vue`,
+    starterSource: `${ELEMENTS_REPO_BASE_URL}/tree/main/projects/starters/vue`,
     documentation: 'https://vuejs.org',
     playgroundURL: await PlaygroundService.create({
       template: '<nve-alert status="success">Elements + Vue</nve-alert>',

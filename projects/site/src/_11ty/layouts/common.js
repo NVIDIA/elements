@@ -131,32 +131,28 @@ export const renderBaseHead = data => {
 
 export const renderDocsNav = data => /* html */ `
 <nve-tree id="docs-nav" data-pagefind-ignore="all" behavior-expand selectable="single">
-  <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') || data.page.url === '/' ? 'expanded' : ''}>
-    <a href="./">About</a>
+  <nve-tree-node ${data.page.url === '/' || data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/integrations/installation/') || data.page.url.includes('/docs/cli/') || data.page.url.includes('/docs/mcp/') || data.page.url.includes('/docs/skills/') || data.page.url.includes('/docs/lint/') ? 'expanded' : ''}>
+    <a href="./">Getting Started</a>
     <nve-tree-node ${data.page.url.includes('/./') || data.page.url === '/' ? 'highlighted selected' : ''}><a href="./">Getting Started</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted selected' : ''}><a href="docs/changelog/">Changelog</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted selected' : ''}><a href="docs/metrics/">Metrics</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/support/') ? 'highlighted selected' : ''}><a href="docs/about/support/">Support</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/accessibility/') ? 'highlighted selected' : ''}><a href="docs/about/accessibility/">Accessibility</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/contributions/') ? 'highlighted selected' : ''}><a href="docs/about/contributions/">Contributions</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'highlighted selected' : ''}><a href="docs/about/requests/">Requests</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted selected' : ''}><a href="docs/about/migration/">Migration</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/installation/') ? 'highlighted selected' : ''}><a href="docs/integrations/installation/">Installation</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'highlighted selected' : ''}><a href="docs/cli/">CLI</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'highlighted selected' : ''}><a href="docs/mcp/">MCP</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/skills/') ? 'highlighted selected' : ''}><a href="docs/skills/">Skills</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'highlighted selected' : ''}><a href="docs/lint/">Lint</a></nve-tree-node>
   </nve-tree-node>
   
-  <nve-tree-node ${data.page.url.includes('/docs/integrations/') || data.page.url.includes('/starters/') || data.page.url.includes('/docs/cli/') || data.page.url.includes('/docs/mcp/') || data.page.url.includes('/docs/lint/') || data.page.url.includes('/docs/testing/') ? 'expanded' : ''}>
-    <a href="docs/integrations/installation/">Integrations</a>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/installation/') ? 'highlighted selected' : ''}><a href="docs/integrations/installation/">Installation</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/mcp/') ? 'highlighted selected' : ''}><a href="docs/mcp/">MCP</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/cli/') ? 'highlighted selected' : ''}><a href="docs/cli/">CLI</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/lint/') ? 'highlighted selected' : ''}><a href="docs/lint/">Lint</a></nve-tree-node>
+  <nve-tree-node ${data.page.url.includes('/docs/integrations/') ? 'expanded' : ''}>
+    <a href="docs/integrations/">Integrations</a>
+    <nve-tree-node ${data.page.url.endsWith('/docs/integrations/') ? 'highlighted selected' : ''}><a href="docs/integrations/">Getting Started</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/angular/') ? 'highlighted selected' : ''}><a href="docs/integrations/angular/">Angular</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/bundles/') ? 'highlighted selected' : ''}><a href="docs/integrations/bundles/">Bundles</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/custom-elements/') ? 'highlighted selected' : ''}><a href="docs/integrations/custom-elements/">Custom Elements</a></nve-tree-node>
-    <nve-tree-node ${data.page.url.includes('/docs/integrations/extensions/') ? 'highlighted selected' : ''}><a href="docs/integrations/extensions/">Extensions</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/go/') ? 'highlighted selected' : ''}><a href="docs/integrations/go/">Golang</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/hugo/') ? 'highlighted selected' : ''}><a href="docs/integrations/hugo/">Hugo</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/importmaps/') ? 'highlighted selected' : ''}><a href="docs/integrations/importmaps/">Import Maps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/lit/') ? 'highlighted selected' : ''}><a href="docs/integrations/lit/">Lit</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/lit-library/') ? 'highlighted selected' : ''}><a href="docs/integrations/lit-library/">Lit Library</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/integrations/mcp-apps/') ? 'highlighted selected' : ''}><a href="docs/integrations/mcp-apps/">MCP Apps</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/nextjs/') ? 'highlighted selected' : ''}><a href="docs/integrations/nextjs/">NextJS</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/nuxt/') ? 'highlighted selected' : ''}><a href="docs/integrations/nuxt/">Nuxt</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/preact/') ? 'highlighted selected' : ''}><a href="docs/integrations/preact/">Preact</a></nve-tree-node>
@@ -165,6 +161,17 @@ export const renderDocsNav = data => /* html */ `
     <nve-tree-node ${data.page.url.includes('/docs/integrations/svelte/') ? 'highlighted selected' : ''}><a href="docs/integrations/svelte/">Svelte</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/typescript/') ? 'highlighted selected' : ''}><a href="docs/integrations/typescript/">TypeScript</a></nve-tree-node>
     <nve-tree-node ${data.page.url.includes('/docs/integrations/vue/') ? 'highlighted selected' : ''}><a href="docs/integrations/vue/">Vue</a></nve-tree-node>
+  </nve-tree-node>
+
+  <nve-tree-node ${data.page.url.includes('/docs/metrics/') || data.page.url.includes('/docs/changelog/') || data.page.url.includes('/docs/about/') ? 'expanded' : ''}>
+    <a href="docs/changelog/">About</a>
+    <nve-tree-node ${data.page.url.includes('/docs/changelog/') ? 'highlighted selected' : ''}><a href="docs/changelog/">Changelog</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/metrics/') ? 'highlighted selected' : ''}><a href="docs/metrics/">Metrics</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/support/') ? 'highlighted selected' : ''}><a href="docs/about/support/">Support</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/accessibility/') ? 'highlighted selected' : ''}><a href="docs/about/accessibility/">Accessibility</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/contributions/') ? 'highlighted selected' : ''}><a href="docs/about/contributions/">Contributions</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/requests/') ? 'highlighted selected' : ''}><a href="docs/about/requests/">Requests</a></nve-tree-node>
+    <nve-tree-node ${data.page.url.includes('/docs/about/migration/') ? 'highlighted selected' : ''}><a href="docs/about/migration/">Migration</a></nve-tree-node>
   </nve-tree-node>
   
   <nve-tree-node ${data.page.url.includes('/docs/foundations/') ? 'expanded' : ''}>
@@ -428,7 +435,7 @@ export function renderBasePageHeader(data) {
   <a slot="prefix" href=".">Elements</a>
   <nve-button container="flat" ${data.page.url.includes('docs') ? 'selected' : ''} class="header-btn"><a href="./">Catalog</a></nve-button>
   ${ELEMENTS_PLAYGROUND_BASE_URL ? /* html */ `<nve-button container="flat" class="header-btn"><a href="${ELEMENTS_PLAYGROUND_BASE_URL}/ui/elements-playground/browse.html" target="_blank">Playground</a></nve-button>` : ''}
-  <nve-button container="flat" ${data.page.url.includes('starters') ? 'selected' : ''} class="header-btn"><a href="starters/">Starters</a></nve-button>
+  <nve-button container="flat" class="header-btn"><a href="docs/integrations/">Starters</a></nve-button>
   <nve-button container="flat" class="header-btn"><a href="${ELEMENTS_REPO_BASE_URL}" target="_blank">Repo</a></nve-button>
   <nve-button slot="suffix" id="system-options-panel-btn" container="flat">System Themes</nve-button>
   <nve-icon-button class="header-menu-btn" role="button" command="--toggle" commandfor="sidenav-panel" container="flat" slot="suffix" icon-name="menu" aria-label="menu"></nve-icon-button>

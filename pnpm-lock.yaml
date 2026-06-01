@@ -765,8 +765,8 @@ importers:
         specifier: 0.5.16
         version: 0.5.16
       archiver:
-        specifier: 7.0.1
-        version: 7.0.1
+        specifier: 8.0.0
+        version: 8.0.0
       fflate:
         specifier: 0.8.2
         version: 0.8.2

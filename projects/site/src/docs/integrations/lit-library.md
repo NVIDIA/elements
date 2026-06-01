@@ -1,6 +1,6 @@
 ---
 {
-  title: 'Extensions',
+  title: 'Lit Library',
   description: 'Extend NVIDIA Elements with scoped custom-element registries to ship your own components alongside the core library.',
   layout: 'docs.11ty.js'
 }
@@ -8,12 +8,12 @@
 
 # {{ title }}
 
-{% integration 'extensions' %}
+{% integration 'lit-library' %}
 
-{% installation 'extensions' %}
+{% installation 'lit-library' %}
 
-To create reusable UI components that build on top of Elements, consider using [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components). This path enables your extensions to work in a large variety of frameworks and environments. Read the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the lit team.
-The rest of this guide focuses on how to integrate specifically for Element integration and best practices.
+To create reusable UI components that build on top of Elements, consider using [lit.dev](https://lit.dev) for authoring highly reusable custom elements (Web Components). This path enables your components to work in a large variety of frameworks and environments. Read the [publishing and best practices](https://lit.dev/docs/tools/publishing/) provided by the Lit team.
+The rest of this guide focuses on Elements integration and best practices.
 
 ## Scoped Registry
 

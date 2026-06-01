@@ -26,7 +26,7 @@
           <nve-menu-item
             ><a
               target="_blank"
-              href="https://github.com/NVIDIA/elements/-/tree/main/projects/starters/nuxt"
+              href="https://github.com/NVIDIA/elements/tree/main/projects/starters/nuxt"
               >Source</a
             ></nve-menu-item
           >

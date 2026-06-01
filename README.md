@@ -102,7 +102,7 @@ Once your branch is created, make your source code changes. Once your changes ar
 The repo uses [Semantic Release](https://semantic-release.gitbook.io/semantic-release/) to manage package changes. Commit messages determine the type of release on merge. [Commit Lint](https://commitlint.js.org/) will enforce and catch any formatting issues in commits.
 
 ```shell
-git commit -a -m "fix(core): disable multi-select" -m "Signed-off-by: Your Name <you@example.com>"
+git commit -a -s -m "fix(core): disable multi-select"
 ```
 
 [Example Commit](https://github.com/NVIDIA/elements/commit/990d8f43a4a055c2f1ca1a6aa0af39f099d04649)

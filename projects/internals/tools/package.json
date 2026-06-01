@@ -190,7 +190,7 @@
     "@pnpm/workspace.read-manifest": "2.2.0",
     "@pnpm/catalogs.config": "0.1.0",
     "adm-zip": "0.5.16",
-    "archiver": "7.0.1",
+    "archiver": "8.0.0",
     "fflate": "0.8.2",
     "html-format": "1.1.7",
     "glob": "catalog:",

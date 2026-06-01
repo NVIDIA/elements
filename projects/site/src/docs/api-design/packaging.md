@@ -83,7 +83,7 @@ Isolated registration allows the consumer to control when to load an element. Th
 
 The `package.json` should have the `sideEffects` entry set to `false` and list any element registrations to the explicit sideEffects entry. This enables tools like Webpack and Rollup to properly define dependency graphs and tree-shake.
 
-<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: <a href="./?path=/docs/about-extensions--docs&anchor=scoped-registry">elements documentation</a></nve-alert>
+<nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn about <a href="docs/integrations/lit-library/">Lit Library integration</a></nve-alert>
 
 <nve-alert><nve-icon slot="icon">🎓</nve-icon> Learn: <a href="https://github.com/webcomponents/polyfills/tree/master/packages/scoped-custom-element-registry">scoped element registry</a></nve-alert>
 

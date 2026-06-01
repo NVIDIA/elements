@@ -14,7 +14,7 @@ A simple starter using Elements and Hugo static site generator.
 - Markdown-based content
 - Fast build times
 
-[Documentation](https://NVIDIA.github.io/elements/docs/integrations/hugo/) | [Source](https://github.com/NVIDIA/elements/-/tree/main/projects/starters/hugo) | [Download](https://NVIDIA.github.io/elements/starters/download/hugo.zip)
+[Documentation](https://NVIDIA.github.io/elements/docs/integrations/hugo/) | [Source](https://github.com/NVIDIA/elements/tree/main/projects/starters/hugo) | [Download](https://NVIDIA.github.io/elements/starters/download/hugo.zip)
 
 ## Markdown Codeblock
 

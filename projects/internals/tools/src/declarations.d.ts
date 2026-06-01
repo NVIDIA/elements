@@ -7,5 +7,15 @@ declare module '*.md?inline' {
 }
 
 declare module 'sanitize-html';
-declare module 'archiver';
+declare module 'archiver' {
+  import type { Writable } from 'node:stream';
+
+  export class ZipArchive {
+    constructor(options?: { zlib?: { level?: number } });
+
+    pipe<T extends Writable>(destination: T): T;
+    directory(dirpath: string, destpath: string | false): this;
+    finalize(): Promise<void>;
+  }
+}
 declare module 'adm-zip';
