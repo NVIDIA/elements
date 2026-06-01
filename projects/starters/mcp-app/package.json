@@ -1,0 +1,90 @@
+{
+  "name": "mcp-app-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "ci": "wireit",
+    "dev": "npm run build && npx @modelcontextprotocol/inspector@0.21.2 node ./dist/main.js",
+    "build": "wireit",
+    "lint": "wireit",
+    "lint:fix": "wireit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/ext-apps": "1.1.2",
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "@nvidia-elements/core": "workspace:*",
+    "@nvidia-elements/styles": "workspace:*",
+    "@nvidia-elements/themes": "workspace:*",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@nvidia-elements/lint": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plugin-singlefile": "2.3.0"
+  },
+  "wireit": {
+    "ci": {
+      "dependencies": [
+        "build",
+        "lint"
+      ]
+    },
+    "build": {
+      "command": "tsc --noEmit && vite build && tsc -p tsconfig.server.json",
+      "files": [
+        "../../core/dist/**/*.js",
+        "../../styles/dist/**/*.css",
+        "../../themes/dist/**/*.css",
+        "src/**",
+        "mcp-app.html",
+        "main.ts",
+        "server.ts",
+        "package.json",
+        "tsconfig.json",
+        "tsconfig.server.json",
+        "vite.config.ts"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "dependencies": [
+        {
+          "script": "../../core:build",
+          "cascade": false
+        },
+        {
+          "script": "../../styles:build",
+          "cascade": false
+        },
+        {
+          "script": "../../themes:build",
+          "cascade": false
+        }
+      ]
+    },
+    "lint": {
+      "command": "eslint -c ./eslint.config.js --color --cache --cache-location .eslintcache/",
+      "files": [
+        "src/**",
+        "main.ts",
+        "server.ts",
+        "vite.config.ts",
+        "eslint.config.js"
+      ],
+      "output": [],
+      "dependencies": [
+        "../../lint:build"
+      ]
+    },
+    "lint:fix": {
+      "command": "eslint -c ./eslint.config.js --fix",
+      "dependencies": [
+        "../../lint:build"
+      ]
+    }
+  }
+}

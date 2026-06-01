@@ -50,6 +50,7 @@ describe('startersData', () => {
     expect(startersData.bundles.cli).toBe(true);
     expect(startersData.importmaps.cli).toBe(false);
     expect(startersData.lit.cli).toBe(false);
+    expect(startersData['mcp-app'].cli).toBe(true);
     expect(startersData.extensions.cli).toBe(false);
     expect(startersData.preact.cli).toBe(false);
   });
@@ -65,6 +66,7 @@ describe('startersData', () => {
     expect(startersData.eleventy.zip).toContain('eleventy.zip');
     expect(startersData.importmaps.zip).toContain('importmaps.zip');
     expect(startersData.bundles.zip).toContain('bundles.zip');
+    expect(startersData['mcp-app'].zip).toContain('mcp-app.zip');
     expect(startersData.extensions.zip).toContain('scoped-registry.zip');
     expect(startersData.hugo.zip).toContain('hugo.zip');
   });

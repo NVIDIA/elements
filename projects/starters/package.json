@@ -26,6 +26,7 @@
         "./eleventy/dist/**/*.js",
         "./eleventy-ssr/dist/**/*.js",
         "./lit-library/dist/**/*.js",
+        "./mcp-app/dist/**",
         "./mpa/dist/**/*.js",
         "./nextjs/dist/**/*.js",
         "./nuxt/dist/**/*.js",
@@ -70,6 +71,10 @@
         },
         {
           "script": "./lit-library:build",
+          "cascade": false
+        },
+        {
+          "script": "./mcp-app:build",
           "cascade": false
         },
         {

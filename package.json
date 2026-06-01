@@ -89,6 +89,7 @@
         "./projects/starters/hugo:ci",
         "./projects/starters/importmaps:ci",
         "./projects/starters/lit-library:ci",
+        "./projects/starters/mcp-app:ci",
         "./projects/starters/mpa:ci",
         "./projects/starters/nextjs:ci",
         "./projects/starters/nuxt:ci",
