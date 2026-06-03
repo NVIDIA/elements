@@ -1,3 +1,12 @@
+## <small>0.2.3 (2026-06-03)</small>
+
+* chore(ci): update lighthouse ([f1fb184](https://github.com/NVIDIA/elements/commit/f1fb184))
+* chore(docs): update agent documentation and component creation guidelines ([69e3ed5](https://github.com/NVIDIA/elements/commit/69e3ed5))
+* chore(release): @nvidia-elements/forms-v0.1.0 [skip ci] ([37b0575](https://github.com/NVIDIA/elements/commit/37b0575))
+* fix(core): refactor to use form control mixins ([5e1721d](https://github.com/NVIDIA/elements/commit/5e1721d))
+* fix(monaco): refactor to use form control mixin entrypoint ([05c73b9](https://github.com/NVIDIA/elements/commit/05c73b9))
+* feat(forms): add form control mixins ([fc88b3a](https://github.com/NVIDIA/elements/commit/fc88b3a))
+
 ## <small>0.2.2 (2026-06-03)</small>
 
 * fix(core): chrome scoped registry and popover behavior ([e8bb66c](https://github.com/NVIDIA/elements/commit/e8bb66c))
