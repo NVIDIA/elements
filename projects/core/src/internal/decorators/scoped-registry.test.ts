@@ -2,7 +2,10 @@
 // SPDX-License-Identifier: Apache-2.0
 
 /* eslint-disable @typescript-eslint/no-unsafe-function-type */
+import { LitElement } from 'lit';
+import { html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { createFixture, removeFixture } from '@internals/testing';
 import { GlobalStateService } from '../services/global.service.js';
 import type { ElementDefinition } from '../types/index.js';
 import { supportsScopedRegistry } from '../utils/dom.js';
@@ -86,5 +89,36 @@ describe('scopedRegistry', () => {
     scopedRegistry()(element as unknown as Function);
 
     expect((element.shadowRootOptions as ShadowRootInit).mode).toBe('closed');
+  });
+
+  it.skipIf(!supportsScopedRegistry)('should use the scoped shadow root as the Lit creation scope', async () => {
+    const child = createMockElement();
+    const childTag = unsafeStatic(child.metadata.tag);
+    const hostTag = `nve-test-scoped-host-${uid}-${counter++}`;
+    const host = unsafeStatic(hostTag);
+
+    class HostElement extends LitElement {
+      static metadata = { version: '0.0.0', tag: hostTag };
+      static elementDefinitions = { [child.metadata.tag]: child };
+
+      render() {
+        return staticHtml`<${childTag}></${childTag}>`;
+      }
+    }
+
+    scopedRegistry()(HostElement as unknown as Function);
+    customElements.define(hostTag, HostElement);
+
+    const fixture = await createFixture(staticHtml`<${host}></${host}>`);
+    const element = fixture.querySelector<LitElement>(hostTag)!;
+
+    try {
+      await element.updateComplete;
+
+      expect(typeof element.renderOptions.creationScope?.importNode).toBe('function');
+      expect(element.shadowRoot!.querySelector(child.metadata.tag)).toBeInstanceOf(child);
+    } finally {
+      removeFixture(fixture);
+    }
   });
 });
