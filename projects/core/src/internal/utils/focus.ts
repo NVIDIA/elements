@@ -84,7 +84,10 @@ export function onListboxActivate(
     e.preventDefault();
   });
 
-  element.addEventListener('pointerup', (e: PointerEvent) => {
+  // Chrome's LightDismissFromClick runs auto-popover light dismiss from click;
+  // opening on pointerup can close immediately in the same gesture.
+  // https://issues.chromium.org/issues/408010435
+  element.addEventListener('click', (e: PointerEvent) => {
     e.preventDefault();
 
     if (!element.disabled) {
